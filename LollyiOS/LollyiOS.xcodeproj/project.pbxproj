@@ -1,0 +1,451 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		953473DB1A0D16CF00FF2D56 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953473DA1A0D16CF00FF2D56 /* AppDelegate.swift */; };
+		953473DD1A0D16CF00FF2D56 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953473DC1A0D16CF00FF2D56 /* ViewController.swift */; };
+		953473E01A0D16CF00FF2D56 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 953473DE1A0D16CF00FF2D56 /* Main.storyboard */; };
+		953473E21A0D16CF00FF2D56 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 953473E11A0D16CF00FF2D56 /* Images.xcassets */; };
+		953473E51A0D16CF00FF2D56 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 953473E31A0D16CF00FF2D56 /* LaunchScreen.xib */; };
+		953473F11A0D16CF00FF2D56 /* LollyiOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953473F01A0D16CF00FF2D56 /* LollyiOSTests.swift */; };
+		95C115221A0D1807004E1702 /* LollyDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C1151D1A0D1807004E1702 /* LollyDB.swift */; };
+		95C115231A0D1807004E1702 /* LollyObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C1151E1A0D1807004E1702 /* LollyObject.swift */; };
+		95C115241A0D1807004E1702 /* MDictAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C115201A0D1807004E1702 /* MDictAll.swift */; };
+		95C115251A0D1807004E1702 /* MLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C115211A0D1807004E1702 /* MLanguage.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		953473EB1A0D16CF00FF2D56 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 953473CD1A0D16CF00FF2D56 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 953473D41A0D16CF00FF2D56;
+			remoteInfo = LollyiOS;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		953473D51A0D16CF00FF2D56 /* LollyiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LollyiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		953473D91A0D16CF00FF2D56 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		953473DA1A0D16CF00FF2D56 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		953473DC1A0D16CF00FF2D56 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		953473DF1A0D16CF00FF2D56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		953473E11A0D16CF00FF2D56 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		953473E41A0D16CF00FF2D56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		953473EA1A0D16CF00FF2D56 /* LollyiOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LollyiOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		953473EF1A0D16CF00FF2D56 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		953473F01A0D16CF00FF2D56 /* LollyiOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LollyiOSTests.swift; sourceTree = "<group>"; };
+		95C1151D1A0D1807004E1702 /* LollyDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LollyDB.swift; sourceTree = "<group>"; };
+		95C1151E1A0D1807004E1702 /* LollyObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LollyObject.swift; sourceTree = "<group>"; };
+		95C1151F1A0D1807004E1702 /* LollySharedSwift-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LollySharedSwift-Bridging-Header.h"; sourceTree = "<group>"; };
+		95C115201A0D1807004E1702 /* MDictAll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDictAll.swift; sourceTree = "<group>"; };
+		95C115211A0D1807004E1702 /* MLanguage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLanguage.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		953473D21A0D16CF00FF2D56 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		953473E71A0D16CF00FF2D56 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		953473CC1A0D16CF00FF2D56 = {
+			isa = PBXGroup;
+			children = (
+				95C1151C1A0D1807004E1702 /* src */,
+				953473D71A0D16CF00FF2D56 /* LollyiOS */,
+				953473ED1A0D16CF00FF2D56 /* LollyiOSTests */,
+				953473D61A0D16CF00FF2D56 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		953473D61A0D16CF00FF2D56 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				953473D51A0D16CF00FF2D56 /* LollyiOS.app */,
+				953473EA1A0D16CF00FF2D56 /* LollyiOSTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		953473D71A0D16CF00FF2D56 /* LollyiOS */ = {
+			isa = PBXGroup;
+			children = (
+				953473DA1A0D16CF00FF2D56 /* AppDelegate.swift */,
+				953473DC1A0D16CF00FF2D56 /* ViewController.swift */,
+				953473DE1A0D16CF00FF2D56 /* Main.storyboard */,
+				953473E11A0D16CF00FF2D56 /* Images.xcassets */,
+				953473E31A0D16CF00FF2D56 /* LaunchScreen.xib */,
+				953473D81A0D16CF00FF2D56 /* Supporting Files */,
+			);
+			path = LollyiOS;
+			sourceTree = "<group>";
+		};
+		953473D81A0D16CF00FF2D56 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				953473D91A0D16CF00FF2D56 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		953473ED1A0D16CF00FF2D56 /* LollyiOSTests */ = {
+			isa = PBXGroup;
+			children = (
+				953473F01A0D16CF00FF2D56 /* LollyiOSTests.swift */,
+				953473EE1A0D16CF00FF2D56 /* Supporting Files */,
+			);
+			path = LollyiOSTests;
+			sourceTree = "<group>";
+		};
+		953473EE1A0D16CF00FF2D56 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				953473EF1A0D16CF00FF2D56 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		95C1151C1A0D1807004E1702 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				95C1151D1A0D1807004E1702 /* LollyDB.swift */,
+				95C1151E1A0D1807004E1702 /* LollyObject.swift */,
+				95C1151F1A0D1807004E1702 /* LollySharedSwift-Bridging-Header.h */,
+				95C115201A0D1807004E1702 /* MDictAll.swift */,
+				95C115211A0D1807004E1702 /* MLanguage.swift */,
+			);
+			name = src;
+			path = ../LollyShared/src;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		953473D41A0D16CF00FF2D56 /* LollyiOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 953473F41A0D16CF00FF2D56 /* Build configuration list for PBXNativeTarget "LollyiOS" */;
+			buildPhases = (
+				953473D11A0D16CF00FF2D56 /* Sources */,
+				953473D21A0D16CF00FF2D56 /* Frameworks */,
+				953473D31A0D16CF00FF2D56 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LollyiOS;
+			productName = LollyiOS;
+			productReference = 953473D51A0D16CF00FF2D56 /* LollyiOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		953473E91A0D16CF00FF2D56 /* LollyiOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 953473F71A0D16CF00FF2D56 /* Build configuration list for PBXNativeTarget "LollyiOSTests" */;
+			buildPhases = (
+				953473E61A0D16CF00FF2D56 /* Sources */,
+				953473E71A0D16CF00FF2D56 /* Frameworks */,
+				953473E81A0D16CF00FF2D56 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				953473EC1A0D16CF00FF2D56 /* PBXTargetDependency */,
+			);
+			name = LollyiOSTests;
+			productName = LollyiOSTests;
+			productReference = 953473EA1A0D16CF00FF2D56 /* LollyiOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		953473CD1A0D16CF00FF2D56 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "趙 偉";
+				TargetAttributes = {
+					953473D41A0D16CF00FF2D56 = {
+						CreatedOnToolsVersion = 6.1;
+					};
+					953473E91A0D16CF00FF2D56 = {
+						CreatedOnToolsVersion = 6.1;
+						TestTargetID = 953473D41A0D16CF00FF2D56;
+					};
+				};
+			};
+			buildConfigurationList = 953473D01A0D16CF00FF2D56 /* Build configuration list for PBXProject "LollyiOS" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 953473CC1A0D16CF00FF2D56;
+			productRefGroup = 953473D61A0D16CF00FF2D56 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				953473D41A0D16CF00FF2D56 /* LollyiOS */,
+				953473E91A0D16CF00FF2D56 /* LollyiOSTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		953473D31A0D16CF00FF2D56 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				953473E01A0D16CF00FF2D56 /* Main.storyboard in Resources */,
+				953473E51A0D16CF00FF2D56 /* LaunchScreen.xib in Resources */,
+				953473E21A0D16CF00FF2D56 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		953473E81A0D16CF00FF2D56 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		953473D11A0D16CF00FF2D56 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				953473DD1A0D16CF00FF2D56 /* ViewController.swift in Sources */,
+				95C115251A0D1807004E1702 /* MLanguage.swift in Sources */,
+				95C115241A0D1807004E1702 /* MDictAll.swift in Sources */,
+				95C115221A0D1807004E1702 /* LollyDB.swift in Sources */,
+				953473DB1A0D16CF00FF2D56 /* AppDelegate.swift in Sources */,
+				95C115231A0D1807004E1702 /* LollyObject.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		953473E61A0D16CF00FF2D56 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				953473F11A0D16CF00FF2D56 /* LollyiOSTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		953473EC1A0D16CF00FF2D56 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 953473D41A0D16CF00FF2D56 /* LollyiOS */;
+			targetProxy = 953473EB1A0D16CF00FF2D56 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		953473DE1A0D16CF00FF2D56 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				953473DF1A0D16CF00FF2D56 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		953473E31A0D16CF00FF2D56 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				953473E41A0D16CF00FF2D56 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		953473F21A0D16CF00FF2D56 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		953473F31A0D16CF00FF2D56 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		953473F51A0D16CF00FF2D56 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = LollyiOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		953473F61A0D16CF00FF2D56 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = LollyiOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		953473F81A0D16CF00FF2D56 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = LollyiOSTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LollyiOS.app/LollyiOS";
+			};
+			name = Debug;
+		};
+		953473F91A0D16CF00FF2D56 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = LollyiOSTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LollyiOS.app/LollyiOS";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		953473D01A0D16CF00FF2D56 /* Build configuration list for PBXProject "LollyiOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				953473F21A0D16CF00FF2D56 /* Debug */,
+				953473F31A0D16CF00FF2D56 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		953473F41A0D16CF00FF2D56 /* Build configuration list for PBXNativeTarget "LollyiOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				953473F51A0D16CF00FF2D56 /* Debug */,
+				953473F61A0D16CF00FF2D56 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		953473F71A0D16CF00FF2D56 /* Build configuration list for PBXNativeTarget "LollyiOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				953473F81A0D16CF00FF2D56 /* Debug */,
+				953473F91A0D16CF00FF2D56 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 953473CD1A0D16CF00FF2D56 /* Project object */;
+}

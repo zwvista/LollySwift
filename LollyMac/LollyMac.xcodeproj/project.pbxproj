@@ -1,0 +1,408 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		953474091A0D170500FF2D56 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953474081A0D170500FF2D56 /* AppDelegate.swift */; };
+		9534740B1A0D170500FF2D56 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9534740A1A0D170500FF2D56 /* Images.xcassets */; };
+		9534740E1A0D170500FF2D56 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9534740C1A0D170500FF2D56 /* MainMenu.xib */; };
+		9534741A1A0D170500FF2D56 /* LollyMacTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953474191A0D170500FF2D56 /* LollyMacTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		953474141A0D170500FF2D56 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 953473FB1A0D170500FF2D56 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 953474021A0D170500FF2D56;
+			remoteInfo = LollyMac;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		953474031A0D170500FF2D56 /* LollyMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LollyMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		953474071A0D170500FF2D56 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		953474081A0D170500FF2D56 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		9534740A1A0D170500FF2D56 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		9534740D1A0D170500FF2D56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		953474131A0D170500FF2D56 /* LollyMacTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LollyMacTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		953474181A0D170500FF2D56 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		953474191A0D170500FF2D56 /* LollyMacTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LollyMacTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		953474001A0D170500FF2D56 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		953474101A0D170500FF2D56 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		953473FA1A0D170500FF2D56 = {
+			isa = PBXGroup;
+			children = (
+				953474051A0D170500FF2D56 /* LollyMac */,
+				953474161A0D170500FF2D56 /* LollyMacTests */,
+				953474041A0D170500FF2D56 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		953474041A0D170500FF2D56 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				953474031A0D170500FF2D56 /* LollyMac.app */,
+				953474131A0D170500FF2D56 /* LollyMacTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		953474051A0D170500FF2D56 /* LollyMac */ = {
+			isa = PBXGroup;
+			children = (
+				953474081A0D170500FF2D56 /* AppDelegate.swift */,
+				9534740A1A0D170500FF2D56 /* Images.xcassets */,
+				9534740C1A0D170500FF2D56 /* MainMenu.xib */,
+				953474061A0D170500FF2D56 /* Supporting Files */,
+			);
+			path = LollyMac;
+			sourceTree = "<group>";
+		};
+		953474061A0D170500FF2D56 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				953474071A0D170500FF2D56 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		953474161A0D170500FF2D56 /* LollyMacTests */ = {
+			isa = PBXGroup;
+			children = (
+				953474191A0D170500FF2D56 /* LollyMacTests.swift */,
+				953474171A0D170500FF2D56 /* Supporting Files */,
+			);
+			path = LollyMacTests;
+			sourceTree = "<group>";
+		};
+		953474171A0D170500FF2D56 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				953474181A0D170500FF2D56 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		953474021A0D170500FF2D56 /* LollyMac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9534741D1A0D170500FF2D56 /* Build configuration list for PBXNativeTarget "LollyMac" */;
+			buildPhases = (
+				953473FF1A0D170500FF2D56 /* Sources */,
+				953474001A0D170500FF2D56 /* Frameworks */,
+				953474011A0D170500FF2D56 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LollyMac;
+			productName = LollyMac;
+			productReference = 953474031A0D170500FF2D56 /* LollyMac.app */;
+			productType = "com.apple.product-type.application";
+		};
+		953474121A0D170500FF2D56 /* LollyMacTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 953474201A0D170500FF2D56 /* Build configuration list for PBXNativeTarget "LollyMacTests" */;
+			buildPhases = (
+				9534740F1A0D170500FF2D56 /* Sources */,
+				953474101A0D170500FF2D56 /* Frameworks */,
+				953474111A0D170500FF2D56 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				953474151A0D170500FF2D56 /* PBXTargetDependency */,
+			);
+			name = LollyMacTests;
+			productName = LollyMacTests;
+			productReference = 953474131A0D170500FF2D56 /* LollyMacTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		953473FB1A0D170500FF2D56 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "趙 偉";
+				TargetAttributes = {
+					953474021A0D170500FF2D56 = {
+						CreatedOnToolsVersion = 6.1;
+					};
+					953474121A0D170500FF2D56 = {
+						CreatedOnToolsVersion = 6.1;
+						TestTargetID = 953474021A0D170500FF2D56;
+					};
+				};
+			};
+			buildConfigurationList = 953473FE1A0D170500FF2D56 /* Build configuration list for PBXProject "LollyMac" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 953473FA1A0D170500FF2D56;
+			productRefGroup = 953474041A0D170500FF2D56 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				953474021A0D170500FF2D56 /* LollyMac */,
+				953474121A0D170500FF2D56 /* LollyMacTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		953474011A0D170500FF2D56 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9534740B1A0D170500FF2D56 /* Images.xcassets in Resources */,
+				9534740E1A0D170500FF2D56 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		953474111A0D170500FF2D56 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		953473FF1A0D170500FF2D56 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				953474091A0D170500FF2D56 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9534740F1A0D170500FF2D56 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9534741A1A0D170500FF2D56 /* LollyMacTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		953474151A0D170500FF2D56 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 953474021A0D170500FF2D56 /* LollyMac */;
+			targetProxy = 953474141A0D170500FF2D56 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		9534740C1A0D170500FF2D56 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9534740D1A0D170500FF2D56 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		9534741B1A0D170500FF2D56 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		9534741C1A0D170500FF2D56 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		9534741E1A0D170500FF2D56 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = LollyMac/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		9534741F1A0D170500FF2D56 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = LollyMac/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		953474211A0D170500FF2D56 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = LollyMacTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LollyMac.app/Contents/MacOS/LollyMac";
+			};
+			name = Debug;
+		};
+		953474221A0D170500FF2D56 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = LollyMacTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LollyMac.app/Contents/MacOS/LollyMac";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		953473FE1A0D170500FF2D56 /* Build configuration list for PBXProject "LollyMac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9534741B1A0D170500FF2D56 /* Debug */,
+				9534741C1A0D170500FF2D56 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9534741D1A0D170500FF2D56 /* Build configuration list for PBXNativeTarget "LollyMac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9534741E1A0D170500FF2D56 /* Debug */,
+				9534741F1A0D170500FF2D56 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		953474201A0D170500FF2D56 /* Build configuration list for PBXNativeTarget "LollyMacTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				953474211A0D170500FF2D56 /* Debug */,
+				953474221A0D170500FF2D56 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 953473FB1A0D170500FF2D56 /* Project object */;
+}
