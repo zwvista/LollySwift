@@ -11,6 +11,11 @@
 		9534740B1A0D170500FF2D56 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9534740A1A0D170500FF2D56 /* Images.xcassets */; };
 		9534740E1A0D170500FF2D56 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9534740C1A0D170500FF2D56 /* MainMenu.xib */; };
 		9534741A1A0D170500FF2D56 /* LollyMacTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953474191A0D170500FF2D56 /* LollyMacTests.swift */; };
+		95D376551A12077000970723 /* SearchDictWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D376541A12077000970723 /* SearchDictWindowController.swift */; };
+		95D376571A12079D00970723 /* SearchDictWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95D376561A12079D00970723 /* SearchDictWindowController.xib */; };
+		95D376591A121D2B00970723 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95D376581A121D2B00970723 /* Cocoa.framework */; };
+		95D3765B1A121D3100970723 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95D3765A1A121D3100970723 /* WebKit.framework */; };
+		95D3765D1A121D3800970723 /* libLollyShared.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 95D3765C1A121D3800970723 /* libLollyShared.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,6 +37,22 @@
 		953474131A0D170500FF2D56 /* LollyMacTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LollyMacTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		953474181A0D170500FF2D56 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		953474191A0D170500FF2D56 /* LollyMacTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LollyMacTests.swift; sourceTree = "<group>"; };
+		9551C06B1A1224C4002545AA /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
+		9551C06C1A1224C4002545AA /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
+		9551C06D1A1224C4002545AA /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		9551C06E1A1224C4002545AA /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		9551C06F1A1224C4002545AA /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
+		9551C0701A1224C4002545AA /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
+		9551C0711A1224C4002545AA /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
+		9551C0721A1224C4002545AA /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
+		9551C0731A1224C4002545AA /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
+		9551C0741A1224C4002545AA /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
+		9551C0751A1224C4002545AA /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		95D376541A12077000970723 /* SearchDictWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchDictWindowController.swift; sourceTree = "<group>"; };
+		95D376561A12079D00970723 /* SearchDictWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchDictWindowController.xib; sourceTree = "<group>"; };
+		95D376581A121D2B00970723 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		95D3765A1A121D3100970723 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		95D3765C1A121D3800970723 /* libLollyShared.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libLollyShared.dylib; path = "../../../../../Library/Developer/Xcode/DerivedData/LollySwift-fswwksqlfurzvnbdwajqsggerzwn/Build/Products/Debug/libLollyShared.dylib"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +60,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95D3765D1A121D3800970723 /* libLollyShared.dylib in Frameworks */,
+				95D3765B1A121D3100970723 /* WebKit.framework in Frameworks */,
+				95D376591A121D2B00970723 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -55,8 +79,10 @@
 		953473FA1A0D170500FF2D56 = {
 			isa = PBXGroup;
 			children = (
+				9551C06A1A1224C4002545AA /* fmdb */,
 				953474051A0D170500FF2D56 /* LollyMac */,
 				953474161A0D170500FF2D56 /* LollyMacTests */,
+				95D09E311A122BAE00C35E94 /* Frameworks */,
 				953474041A0D170500FF2D56 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -77,6 +103,8 @@
 				9534740A1A0D170500FF2D56 /* Images.xcassets */,
 				9534740C1A0D170500FF2D56 /* MainMenu.xib */,
 				953474061A0D170500FF2D56 /* Supporting Files */,
+				95D376561A12079D00970723 /* SearchDictWindowController.xib */,
+				95D376541A12077000970723 /* SearchDictWindowController.swift */,
 			);
 			path = LollyMac;
 			sourceTree = "<group>";
@@ -104,6 +132,35 @@
 				953474181A0D170500FF2D56 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9551C06A1A1224C4002545AA /* fmdb */ = {
+			isa = PBXGroup;
+			children = (
+				9551C06B1A1224C4002545AA /* FMDatabase.h */,
+				9551C06C1A1224C4002545AA /* FMDatabase.m */,
+				9551C06D1A1224C4002545AA /* FMDatabaseAdditions.h */,
+				9551C06E1A1224C4002545AA /* FMDatabaseAdditions.m */,
+				9551C06F1A1224C4002545AA /* FMDatabasePool.h */,
+				9551C0701A1224C4002545AA /* FMDatabasePool.m */,
+				9551C0711A1224C4002545AA /* FMDatabaseQueue.h */,
+				9551C0721A1224C4002545AA /* FMDatabaseQueue.m */,
+				9551C0731A1224C4002545AA /* FMDB.h */,
+				9551C0741A1224C4002545AA /* FMResultSet.h */,
+				9551C0751A1224C4002545AA /* FMResultSet.m */,
+			);
+			name = fmdb;
+			path = ../../../OSS/fmdb/src/fmdb;
+			sourceTree = "<group>";
+		};
+		95D09E311A122BAE00C35E94 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				95D3765C1A121D3800970723 /* libLollyShared.dylib */,
+				95D3765A1A121D3100970723 /* WebKit.framework */,
+				95D376581A121D2B00970723 /* Cocoa.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -186,6 +243,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95D376571A12079D00970723 /* SearchDictWindowController.xib in Resources */,
 				9534740B1A0D170500FF2D56 /* Images.xcassets in Resources */,
 				9534740E1A0D170500FF2D56 /* MainMenu.xib in Resources */,
 			);
@@ -205,6 +263,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95D376551A12077000970723 /* SearchDictWindowController.swift in Sources */,
 				953474091A0D170500FF2D56 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -321,9 +380,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
 				INFOPLIST_FILE = LollyMac/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/LollySwift-fswwksqlfurzvnbdwajqsggerzwn/Build/Products/Debug",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_INCLUDE_PATHS = ../LollyShared/src;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Debug;
 		};
@@ -332,9 +401,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
 				INFOPLIST_FILE = LollyMac/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/LollySwift-fswwksqlfurzvnbdwajqsggerzwn/Build/Products/Debug",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_INCLUDE_PATHS = ../LollyShared/src;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Release;
 		};
@@ -393,6 +472,7 @@
 				9534741F1A0D170500FF2D56 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		953474201A0D170500FF2D56 /* Build configuration list for PBXNativeTarget "LollyMacTests" */ = {
 			isa = XCConfigurationList;
@@ -401,6 +481,7 @@
 				953474221A0D170500FF2D56 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -6,9 +6,9 @@
 //  Copyright (c) 2014年 趙 偉. All rights reserved.
 //
 
-import Cocoa
+import Foundation
 
-class MLanguage: NSObject {
-    var LANGID: Int32?
-    var ENGNAME: String?
+public class MLanguage: NSObject {
+    public var LANGID = 0
+    public var ENGNAME: String?
 }

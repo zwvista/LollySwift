@@ -18,13 +18,13 @@ class LollyDB: NSObject {
         super.init()
     }
     
-    func dictAllByLang(langID:Int) -> [MDictAll] {
+    func dictAllByLang(langID: Int) -> [MDictAll] {
         let sql = "SELECT * FROM DICTALL WHERE LANGID = \(langID)"
         let results = self.db.executeQuery(sql)!
         var array = [MDictAll]()
         while results.next() {
             var m = MDictAll()
-            m.LANGID = results.intForColumn("LANGID")
+            m.LANGID = Int(results.intForColumn("LANGID"))
             m.DICTTYPENAME = results.stringForColumn("DICTTYPENAME")
             m.DICTNAME = results.stringForColumn("DICTNAME")
             m.URL = results.stringForColumn("URL")
@@ -42,7 +42,7 @@ class LollyDB: NSObject {
         var array = [MLanguage]()
         while results.next() {
             var m = MLanguage()
-            m.LANGID = results.intForColumn("LANGID")
+            m.LANGID = Int(results.intForColumn("LANGID"))
             m.ENGNAME = results.stringForColumn("ENGNAME")
             array.append(m)
         }

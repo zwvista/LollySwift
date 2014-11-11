@@ -7,29 +7,30 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		953473B61A0D16B000FF2D56 /* LollyShared.h in Headers */ = {isa = PBXBuildFile; fileRef = 953473B51A0D16B000FF2D56 /* LollyShared.h */; };
-		953473B81A0D16B000FF2D56 /* LollyShared.m in Sources */ = {isa = PBXBuildFile; fileRef = 953473B71A0D16B000FF2D56 /* LollyShared.m */; };
 		953473BE1A0D16B000FF2D56 /* libLollyShared.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 953473B21A0D16B000FF2D56 /* libLollyShared.dylib */; };
-		95507B711A0D216F00DE1242 /* FMDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = 95507B661A0D216F00DE1242 /* FMDatabase.h */; };
-		95507B721A0D216F00DE1242 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 95507B671A0D216F00DE1242 /* FMDatabase.m */; };
-		95507B731A0D216F00DE1242 /* FMDatabaseAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 95507B681A0D216F00DE1242 /* FMDatabaseAdditions.h */; };
-		95507B741A0D216F00DE1242 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 95507B691A0D216F00DE1242 /* FMDatabaseAdditions.m */; };
-		95507B751A0D216F00DE1242 /* FMDatabasePool.h in Headers */ = {isa = PBXBuildFile; fileRef = 95507B6A1A0D216F00DE1242 /* FMDatabasePool.h */; };
-		95507B761A0D216F00DE1242 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 95507B6B1A0D216F00DE1242 /* FMDatabasePool.m */; };
-		95507B771A0D216F00DE1242 /* FMDatabaseQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 95507B6C1A0D216F00DE1242 /* FMDatabaseQueue.h */; };
-		95507B781A0D216F00DE1242 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 95507B6D1A0D216F00DE1242 /* FMDatabaseQueue.m */; };
-		95507B791A0D216F00DE1242 /* FMDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 95507B6E1A0D216F00DE1242 /* FMDB.h */; };
-		95507B7A1A0D216F00DE1242 /* FMResultSet.h in Headers */ = {isa = PBXBuildFile; fileRef = 95507B6F1A0D216F00DE1242 /* FMResultSet.h */; };
-		95507B7B1A0D216F00DE1242 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 95507B701A0D216F00DE1242 /* FMResultSet.m */; };
-		95507B7F1A0D21F600DE1242 /* FMDatabaseVariadic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95507B7E1A0D21F600DE1242 /* FMDatabaseVariadic.swift */; };
-		95507B811A0D221300DE1242 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 95507B801A0D221300DE1242 /* libsqlite3.dylib */; };
-		95633B131A0D1A7600885756 /* LollyShared_iOS.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 95633B121A0D1A7600885756 /* LollyShared_iOS.h */; };
-		95633B151A0D1A7600885756 /* LollyShared_iOS.m in Sources */ = {isa = PBXBuildFile; fileRef = 95633B141A0D1A7600885756 /* LollyShared_iOS.m */; };
-		95633B1B1A0D1A7600885756 /* libLollyShared-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 95633B101A0D1A7600885756 /* libLollyShared-iOS.a */; };
+		95560D841A0E66EC00BB7322 /* libLollyShared-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 95560D791A0E66EB00BB7322 /* libLollyShared-iOS.a */; };
+		95560D901A0E671700BB7322 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 95507B671A0D216F00DE1242 /* FMDatabase.m */; };
+		95560D911A0E671700BB7322 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 95507B691A0D216F00DE1242 /* FMDatabaseAdditions.m */; };
+		95560D921A0E671700BB7322 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 95507B6B1A0D216F00DE1242 /* FMDatabasePool.m */; };
+		95560D931A0E671700BB7322 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 95507B6D1A0D216F00DE1242 /* FMDatabaseQueue.m */; };
+		95560D941A0E671700BB7322 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 95507B701A0D216F00DE1242 /* FMResultSet.m */; };
+		95560D951A0E671700BB7322 /* FMDatabaseVariadic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95507B7E1A0D21F600DE1242 /* FMDatabaseVariadic.swift */; };
+		95560D961A0E671700BB7322 /* LollyDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95633B031A0D1A1300885756 /* LollyDB.swift */; };
+		95560D971A0E671700BB7322 /* LollyObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95633B041A0D1A1300885756 /* LollyObject.swift */; };
+		95560D981A0E671700BB7322 /* MDictAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95633B061A0D1A1300885756 /* MDictAll.swift */; };
+		95560D991A0E671700BB7322 /* MLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95633B071A0D1A1300885756 /* MLanguage.swift */; };
+		95560D9A1A0E675B00BB7322 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95560D4A1A0E619B00BB7322 /* Foundation.framework */; };
 		95633B271A0D1A8900885756 /* LollyDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95633B031A0D1A1300885756 /* LollyDB.swift */; };
 		95633B281A0D1A8900885756 /* LollyObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95633B041A0D1A1300885756 /* LollyObject.swift */; };
 		95633B291A0D1A8900885756 /* MDictAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95633B061A0D1A1300885756 /* MDictAll.swift */; };
 		95633B2A1A0D1A8900885756 /* MLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95633B071A0D1A1300885756 /* MLanguage.swift */; };
+		958B64341A0E4F1F00645049 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 95507B671A0D216F00DE1242 /* FMDatabase.m */; };
+		958B64351A0E4F1F00645049 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 95507B691A0D216F00DE1242 /* FMDatabaseAdditions.m */; };
+		958B64361A0E4F1F00645049 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 95507B6B1A0D216F00DE1242 /* FMDatabasePool.m */; };
+		958B64371A0E4F1F00645049 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 95507B6D1A0D216F00DE1242 /* FMDatabaseQueue.m */; };
+		958B64381A0E4F1F00645049 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 95507B701A0D216F00DE1242 /* FMResultSet.m */; };
+		958B64391A0E4F1F00645049 /* FMDatabaseVariadic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95507B7E1A0D21F600DE1242 /* FMDatabaseVariadic.swift */; };
+		958B643F1A0E503100645049 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 958B643E1A0E503100645049 /* libsqlite3.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,23 +41,22 @@
 			remoteGlobalIDString = 953473B11A0D16B000FF2D56;
 			remoteInfo = LollyShared;
 		};
-		95633B1C1A0D1A7600885756 /* PBXContainerItemProxy */ = {
+		95560D851A0E66EC00BB7322 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 953473AA1A0D16B000FF2D56 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 95633B0F1A0D1A7600885756;
+			remoteGlobalIDString = 95560D781A0E66EB00BB7322;
 			remoteInfo = "LollyShared-iOS";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		95633B0E1A0D1A7600885756 /* CopyFiles */ = {
+		95560D771A0E66EB00BB7322 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
-				95633B131A0D1A7600885756 /* LollyShared_iOS.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,8 +64,6 @@
 
 /* Begin PBXFileReference section */
 		953473B21A0D16B000FF2D56 /* libLollyShared.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libLollyShared.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
-		953473B51A0D16B000FF2D56 /* LollyShared.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LollyShared.h; sourceTree = "<group>"; };
-		953473B71A0D16B000FF2D56 /* LollyShared.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LollyShared.m; sourceTree = "<group>"; };
 		953473BD1A0D16B000FF2D56 /* LollySharedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LollySharedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		953473C31A0D16B000FF2D56 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		95507B661A0D216F00DE1242 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
@@ -80,17 +78,16 @@
 		95507B6F1A0D216F00DE1242 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
 		95507B701A0D216F00DE1242 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
 		95507B7E1A0D21F600DE1242 /* FMDatabaseVariadic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FMDatabaseVariadic.swift; path = "../extra/Swift extensions/FMDatabaseVariadic.swift"; sourceTree = "<group>"; };
-		95507B801A0D221300DE1242 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		95560D4A1A0E619B00BB7322 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.1.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		95560D791A0E66EB00BB7322 /* libLollyShared-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libLollyShared-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		95560D831A0E66EC00BB7322 /* LollyShared-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "LollyShared-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		95560D891A0E66EC00BB7322 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		95633B031A0D1A1300885756 /* LollyDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LollyDB.swift; sourceTree = "<group>"; };
 		95633B041A0D1A1300885756 /* LollyObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LollyObject.swift; sourceTree = "<group>"; };
 		95633B051A0D1A1300885756 /* LollyShared-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LollyShared-Bridging-Header.h"; sourceTree = "<group>"; };
 		95633B061A0D1A1300885756 /* MDictAll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDictAll.swift; sourceTree = "<group>"; };
 		95633B071A0D1A1300885756 /* MLanguage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLanguage.swift; sourceTree = "<group>"; };
-		95633B101A0D1A7600885756 /* libLollyShared-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libLollyShared-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		95633B121A0D1A7600885756 /* LollyShared_iOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LollyShared_iOS.h; sourceTree = "<group>"; };
-		95633B141A0D1A7600885756 /* LollyShared_iOS.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LollyShared_iOS.m; sourceTree = "<group>"; };
-		95633B1A1A0D1A7600885756 /* LollyShared-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "LollyShared-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		95633B201A0D1A7600885756 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		958B643E1A0E503100645049 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,7 +95,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				95507B811A0D221300DE1242 /* libsqlite3.dylib in Frameworks */,
+				958B643F1A0E503100645049 /* libsqlite3.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,18 +107,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		95633B0D1A0D1A7600885756 /* Frameworks */ = {
+		95560D761A0E66EB00BB7322 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95560D9A1A0E675B00BB7322 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		95633B171A0D1A7600885756 /* Frameworks */ = {
+		95560D801A0E66EC00BB7322 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				95633B1B1A0D1A7600885756 /* libLollyShared-iOS.a in Frameworks */,
+				95560D841A0E66EC00BB7322 /* libLollyShared-iOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,8 +133,8 @@
 				95633B021A0D1A1300885756 /* src */,
 				953473B41A0D16B000FF2D56 /* LollyShared */,
 				953473C11A0D16B000FF2D56 /* LollySharedTests */,
-				95633B111A0D1A7600885756 /* LollyShared-iOS */,
-				95633B1E1A0D1A7600885756 /* LollyShared-iOSTests */,
+				95560D7A1A0E66EB00BB7322 /* LollyShared-iOS */,
+				95560D871A0E66EC00BB7322 /* LollyShared-iOSTests */,
 				95507B821A0D222300DE1242 /* Frameworks */,
 				953473B31A0D16B000FF2D56 /* Products */,
 			);
@@ -147,8 +145,8 @@
 			children = (
 				953473B21A0D16B000FF2D56 /* libLollyShared.dylib */,
 				953473BD1A0D16B000FF2D56 /* LollySharedTests.xctest */,
-				95633B101A0D1A7600885756 /* libLollyShared-iOS.a */,
-				95633B1A1A0D1A7600885756 /* LollyShared-iOSTests.xctest */,
+				95560D791A0E66EB00BB7322 /* libLollyShared-iOS.a */,
+				95560D831A0E66EC00BB7322 /* LollyShared-iOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -156,8 +154,6 @@
 		953473B41A0D16B000FF2D56 /* LollyShared */ = {
 			isa = PBXGroup;
 			children = (
-				953473B51A0D16B000FF2D56 /* LollyShared.h */,
-				953473B71A0D16B000FF2D56 /* LollyShared.m */,
 			);
 			path = LollyShared;
 			sourceTree = "<group>";
@@ -201,9 +197,33 @@
 		95507B821A0D222300DE1242 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				95507B801A0D221300DE1242 /* libsqlite3.dylib */,
+				95560D4A1A0E619B00BB7322 /* Foundation.framework */,
+				958B643E1A0E503100645049 /* libsqlite3.dylib */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		95560D7A1A0E66EB00BB7322 /* LollyShared-iOS */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "LollyShared-iOS";
+			sourceTree = "<group>";
+		};
+		95560D871A0E66EC00BB7322 /* LollyShared-iOSTests */ = {
+			isa = PBXGroup;
+			children = (
+				95560D881A0E66EC00BB7322 /* Supporting Files */,
+			);
+			path = "LollyShared-iOSTests";
+			sourceTree = "<group>";
+		};
+		95560D881A0E66EC00BB7322 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				95560D891A0E66EC00BB7322 /* Info.plist */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		95633B021A0D1A1300885756 /* src */ = {
@@ -218,31 +238,6 @@
 			path = src;
 			sourceTree = "<group>";
 		};
-		95633B111A0D1A7600885756 /* LollyShared-iOS */ = {
-			isa = PBXGroup;
-			children = (
-				95633B121A0D1A7600885756 /* LollyShared_iOS.h */,
-				95633B141A0D1A7600885756 /* LollyShared_iOS.m */,
-			);
-			path = "LollyShared-iOS";
-			sourceTree = "<group>";
-		};
-		95633B1E1A0D1A7600885756 /* LollyShared-iOSTests */ = {
-			isa = PBXGroup;
-			children = (
-				95633B1F1A0D1A7600885756 /* Supporting Files */,
-			);
-			path = "LollyShared-iOSTests";
-			sourceTree = "<group>";
-		};
-		95633B1F1A0D1A7600885756 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				95633B201A0D1A7600885756 /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -250,13 +245,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				95507B771A0D216F00DE1242 /* FMDatabaseQueue.h in Headers */,
-				95507B7A1A0D216F00DE1242 /* FMResultSet.h in Headers */,
-				95507B751A0D216F00DE1242 /* FMDatabasePool.h in Headers */,
-				95507B711A0D216F00DE1242 /* FMDatabase.h in Headers */,
-				95507B791A0D216F00DE1242 /* FMDB.h in Headers */,
-				953473B61A0D16B000FF2D56 /* LollyShared.h in Headers */,
-				95507B731A0D216F00DE1242 /* FMDatabaseAdditions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,13 +286,13 @@
 			productReference = 953473BD1A0D16B000FF2D56 /* LollySharedTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		95633B0F1A0D1A7600885756 /* LollyShared-iOS */ = {
+		95560D781A0E66EB00BB7322 /* LollyShared-iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 95633B211A0D1A7600885756 /* Build configuration list for PBXNativeTarget "LollyShared-iOS" */;
+			buildConfigurationList = 95560D8A1A0E66EC00BB7322 /* Build configuration list for PBXNativeTarget "LollyShared-iOS" */;
 			buildPhases = (
-				95633B0C1A0D1A7600885756 /* Sources */,
-				95633B0D1A0D1A7600885756 /* Frameworks */,
-				95633B0E1A0D1A7600885756 /* CopyFiles */,
+				95560D751A0E66EB00BB7322 /* Sources */,
+				95560D761A0E66EB00BB7322 /* Frameworks */,
+				95560D771A0E66EB00BB7322 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -312,25 +300,25 @@
 			);
 			name = "LollyShared-iOS";
 			productName = "LollyShared-iOS";
-			productReference = 95633B101A0D1A7600885756 /* libLollyShared-iOS.a */;
+			productReference = 95560D791A0E66EB00BB7322 /* libLollyShared-iOS.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		95633B191A0D1A7600885756 /* LollyShared-iOSTests */ = {
+		95560D821A0E66EC00BB7322 /* LollyShared-iOSTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 95633B241A0D1A7600885756 /* Build configuration list for PBXNativeTarget "LollyShared-iOSTests" */;
+			buildConfigurationList = 95560D8D1A0E66EC00BB7322 /* Build configuration list for PBXNativeTarget "LollyShared-iOSTests" */;
 			buildPhases = (
-				95633B161A0D1A7600885756 /* Sources */,
-				95633B171A0D1A7600885756 /* Frameworks */,
-				95633B181A0D1A7600885756 /* Resources */,
+				95560D7F1A0E66EC00BB7322 /* Sources */,
+				95560D801A0E66EC00BB7322 /* Frameworks */,
+				95560D811A0E66EC00BB7322 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				95633B1D1A0D1A7600885756 /* PBXTargetDependency */,
+				95560D861A0E66EC00BB7322 /* PBXTargetDependency */,
 			);
 			name = "LollyShared-iOSTests";
 			productName = "LollyShared-iOSTests";
-			productReference = 95633B1A1A0D1A7600885756 /* LollyShared-iOSTests.xctest */;
+			productReference = 95560D831A0E66EC00BB7322 /* LollyShared-iOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -348,10 +336,10 @@
 					953473BC1A0D16B000FF2D56 = {
 						CreatedOnToolsVersion = 6.1;
 					};
-					95633B0F1A0D1A7600885756 = {
+					95560D781A0E66EB00BB7322 = {
 						CreatedOnToolsVersion = 6.1;
 					};
-					95633B191A0D1A7600885756 = {
+					95560D821A0E66EC00BB7322 = {
 						CreatedOnToolsVersion = 6.1;
 					};
 				};
@@ -370,8 +358,8 @@
 			targets = (
 				953473B11A0D16B000FF2D56 /* LollyShared */,
 				953473BC1A0D16B000FF2D56 /* LollySharedTests */,
-				95633B0F1A0D1A7600885756 /* LollyShared-iOS */,
-				95633B191A0D1A7600885756 /* LollyShared-iOSTests */,
+				95560D781A0E66EB00BB7322 /* LollyShared-iOS */,
+				95560D821A0E66EC00BB7322 /* LollyShared-iOSTests */,
 			);
 		};
 /* End PBXProject section */
@@ -384,7 +372,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		95633B181A0D1A7600885756 /* Resources */ = {
+		95560D811A0E66EC00BB7322 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -399,16 +387,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				95633B2A1A0D1A8900885756 /* MLanguage.swift in Sources */,
-				95507B7F1A0D21F600DE1242 /* FMDatabaseVariadic.swift in Sources */,
+				958B64391A0E4F1F00645049 /* FMDatabaseVariadic.swift in Sources */,
 				95633B271A0D1A8900885756 /* LollyDB.swift in Sources */,
 				95633B281A0D1A8900885756 /* LollyObject.swift in Sources */,
-				95507B721A0D216F00DE1242 /* FMDatabase.m in Sources */,
-				95507B7B1A0D216F00DE1242 /* FMResultSet.m in Sources */,
-				953473B81A0D16B000FF2D56 /* LollyShared.m in Sources */,
-				95507B761A0D216F00DE1242 /* FMDatabasePool.m in Sources */,
-				95507B741A0D216F00DE1242 /* FMDatabaseAdditions.m in Sources */,
+				958B64341A0E4F1F00645049 /* FMDatabase.m in Sources */,
+				958B64381A0E4F1F00645049 /* FMResultSet.m in Sources */,
+				958B64361A0E4F1F00645049 /* FMDatabasePool.m in Sources */,
+				958B64351A0E4F1F00645049 /* FMDatabaseAdditions.m in Sources */,
 				95633B291A0D1A8900885756 /* MDictAll.swift in Sources */,
-				95507B781A0D216F00DE1242 /* FMDatabaseQueue.m in Sources */,
+				958B64371A0E4F1F00645049 /* FMDatabaseQueue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -419,15 +406,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		95633B0C1A0D1A7600885756 /* Sources */ = {
+		95560D751A0E66EB00BB7322 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				95633B151A0D1A7600885756 /* LollyShared_iOS.m in Sources */,
+				95560D901A0E671700BB7322 /* FMDatabase.m in Sources */,
+				95560D931A0E671700BB7322 /* FMDatabaseQueue.m in Sources */,
+				95560D981A0E671700BB7322 /* MDictAll.swift in Sources */,
+				95560D951A0E671700BB7322 /* FMDatabaseVariadic.swift in Sources */,
+				95560D921A0E671700BB7322 /* FMDatabasePool.m in Sources */,
+				95560D991A0E671700BB7322 /* MLanguage.swift in Sources */,
+				95560D911A0E671700BB7322 /* FMDatabaseAdditions.m in Sources */,
+				95560D941A0E671700BB7322 /* FMResultSet.m in Sources */,
+				95560D961A0E671700BB7322 /* LollyDB.swift in Sources */,
+				95560D971A0E671700BB7322 /* LollyObject.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		95633B161A0D1A7600885756 /* Sources */ = {
+		95560D7F1A0E66EC00BB7322 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -442,10 +438,10 @@
 			target = 953473B11A0D16B000FF2D56 /* LollyShared */;
 			targetProxy = 953473BF1A0D16B000FF2D56 /* PBXContainerItemProxy */;
 		};
-		95633B1D1A0D1A7600885756 /* PBXTargetDependency */ = {
+		95560D861A0E66EC00BB7322 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 95633B0F1A0D1A7600885756 /* LollyShared-iOS */;
-			targetProxy = 95633B1C1A0D1A7600885756 /* PBXContainerItemProxy */;
+			target = 95560D781A0E66EB00BB7322 /* LollyShared-iOS */;
+			targetProxy = 95560D851A0E66EC00BB7322 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -585,7 +581,7 @@
 			};
 			name = Release;
 		};
-		95633B221A0D1A7600885756 /* Debug */ = {
+		95560D8B1A0E66EC00BB7322 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -597,10 +593,11 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "src/LollyShared-Bridging-Header.h";
 			};
 			name = Debug;
 		};
-		95633B231A0D1A7600885756 /* Release */ = {
+		95560D8C1A0E66EC00BB7322 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
@@ -608,11 +605,12 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "src/LollyShared-Bridging-Header.h";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
-		95633B251A0D1A7600885756 /* Debug */ = {
+		95560D8E1A0E66EC00BB7322 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
@@ -631,7 +629,7 @@
 			};
 			name = Debug;
 		};
-		95633B261A0D1A7600885756 /* Release */ = {
+		95560D8F1A0E66EC00BB7322 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
@@ -677,23 +675,21 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		95633B211A0D1A7600885756 /* Build configuration list for PBXNativeTarget "LollyShared-iOS" */ = {
+		95560D8A1A0E66EC00BB7322 /* Build configuration list for PBXNativeTarget "LollyShared-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				95633B221A0D1A7600885756 /* Debug */,
-				95633B231A0D1A7600885756 /* Release */,
+				95560D8B1A0E66EC00BB7322 /* Debug */,
+				95560D8C1A0E66EC00BB7322 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
-		95633B241A0D1A7600885756 /* Build configuration list for PBXNativeTarget "LollyShared-iOSTests" */ = {
+		95560D8D1A0E66EC00BB7322 /* Build configuration list for PBXNativeTarget "LollyShared-iOSTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				95633B251A0D1A7600885756 /* Debug */,
-				95633B261A0D1A7600885756 /* Release */,
+				95560D8E1A0E66EC00BB7322 /* Debug */,
+				95560D8F1A0E66EC00BB7322 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

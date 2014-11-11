@@ -13,10 +13,6 @@
 		953473E21A0D16CF00FF2D56 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 953473E11A0D16CF00FF2D56 /* Images.xcassets */; };
 		953473E51A0D16CF00FF2D56 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 953473E31A0D16CF00FF2D56 /* LaunchScreen.xib */; };
 		953473F11A0D16CF00FF2D56 /* LollyiOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953473F01A0D16CF00FF2D56 /* LollyiOSTests.swift */; };
-		95C115221A0D1807004E1702 /* LollyDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C1151D1A0D1807004E1702 /* LollyDB.swift */; };
-		95C115231A0D1807004E1702 /* LollyObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C1151E1A0D1807004E1702 /* LollyObject.swift */; };
-		95C115241A0D1807004E1702 /* MDictAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C115201A0D1807004E1702 /* MDictAll.swift */; };
-		95C115251A0D1807004E1702 /* MLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C115211A0D1807004E1702 /* MLanguage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,11 +36,6 @@
 		953473EA1A0D16CF00FF2D56 /* LollyiOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LollyiOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		953473EF1A0D16CF00FF2D56 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		953473F01A0D16CF00FF2D56 /* LollyiOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LollyiOSTests.swift; sourceTree = "<group>"; };
-		95C1151D1A0D1807004E1702 /* LollyDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LollyDB.swift; sourceTree = "<group>"; };
-		95C1151E1A0D1807004E1702 /* LollyObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LollyObject.swift; sourceTree = "<group>"; };
-		95C1151F1A0D1807004E1702 /* LollySharedSwift-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LollySharedSwift-Bridging-Header.h"; sourceTree = "<group>"; };
-		95C115201A0D1807004E1702 /* MDictAll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDictAll.swift; sourceTree = "<group>"; };
-		95C115211A0D1807004E1702 /* MLanguage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLanguage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,7 +59,6 @@
 		953473CC1A0D16CF00FF2D56 = {
 			isa = PBXGroup;
 			children = (
-				95C1151C1A0D1807004E1702 /* src */,
 				953473D71A0D16CF00FF2D56 /* LollyiOS */,
 				953473ED1A0D16CF00FF2D56 /* LollyiOSTests */,
 				953473D61A0D16CF00FF2D56 /* Products */,
@@ -120,19 +110,6 @@
 				953473EF1A0D16CF00FF2D56 /* Info.plist */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		95C1151C1A0D1807004E1702 /* src */ = {
-			isa = PBXGroup;
-			children = (
-				95C1151D1A0D1807004E1702 /* LollyDB.swift */,
-				95C1151E1A0D1807004E1702 /* LollyObject.swift */,
-				95C1151F1A0D1807004E1702 /* LollySharedSwift-Bridging-Header.h */,
-				95C115201A0D1807004E1702 /* MDictAll.swift */,
-				95C115211A0D1807004E1702 /* MLanguage.swift */,
-			);
-			name = src;
-			path = ../LollyShared/src;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -236,11 +213,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				953473DD1A0D16CF00FF2D56 /* ViewController.swift in Sources */,
-				95C115251A0D1807004E1702 /* MLanguage.swift in Sources */,
-				95C115241A0D1807004E1702 /* MDictAll.swift in Sources */,
-				95C115221A0D1807004E1702 /* LollyDB.swift in Sources */,
 				953473DB1A0D16CF00FF2D56 /* AppDelegate.swift in Sources */,
-				95C115231A0D1807004E1702 /* LollyObject.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,6 +339,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = LollyiOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -376,6 +350,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = LollyiOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
