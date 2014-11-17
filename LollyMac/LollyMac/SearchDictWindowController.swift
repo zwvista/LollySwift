@@ -15,22 +15,26 @@ class SearchDictWindowController: NSWindowController, NSTextFieldDelegate {
     @IBOutlet var wvDictOnline: WebView!
     @IBOutlet var sfWord: NSSearchField!
     @IBOutlet var wvDictOffline: WebView!
+    @IBOutlet var dictAllController: NSArrayController!
     
     var word = ""
-    var theLollyObject: LollyObject
+    var theLollyObject = LollyObject()
+    
+    override init() {
+        super.init()
+    }
     
     override init(window: NSWindow?) {
-        theLollyObject = LollyObject()
         super.init(window: window)
     }
 
     required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: coder)
     }
 
     override func windowDidLoad() {
         super.windowDidLoad()
-    
+        
         wvDictOffline.hidden = true
         langSelected(self)
     }
@@ -38,31 +42,47 @@ class SearchDictWindowController: NSWindowController, NSTextFieldDelegate {
     @IBAction func searchDict(sender: AnyObject) {
         wvDictOnline.hidden = false
         wvDictOffline.hidden = true
+
+        let m = theLollyObject.currentDict
+        let url = m.urlString(word)
+        wvDictOnline.mainFrameURL = url;
     }
 
     @IBAction func langSelected(sender: AnyObject) {
-        
+        dictAllController.content = theLollyObject.arrDictAll
+        dictSelected(sender)
     }
     
     @IBAction func dictSelected(sender: AnyObject) {
-        
+        if sender !== self {
+            searchDict(sender)
+        }
     }
     
     override func controlTextDidEndEditing(obj: NSNotification) {
+        let searchfield = obj.object as NSControl
+        if searchfield !== sfWord {return}
         
+        let dict = obj.userInfo!
+        let reason = dict["NSTextMovement"] as NSNumber
+        let code = Int(reason.intValue)
+        if code == NSReturnTextMovement {
+            searchDict(self)
+        }
     }
     
     override func webView(sender: WebView!, didFinishLoadForFrame frame: WebFrame!) {
-        if frame != sender.mainFrame {
-            return
-        }
+        if frame !== sender.mainFrame {return}
         let m = theLollyObject.currentDict
-        if m.DICTTYPENAME != "OFFLINE-ONLINE" {
-            return
-        }
+        if m.DICTTYPENAME != "OFFLINE-ONLINE" {return}
         
         let data = frame.dataSource?.data
-        let html = NSString(data: data!, encoding: NSUTF8StringEncoding)
+        let html = NSString(data: data!, encoding: NSUTF8StringEncoding)!
+        let str = m.htmlString(html, word: word)
+        
+        wvDictOffline.mainFrame.loadHTMLString(str, baseURL: NSURL(string: "/Users/bestskip/Documents/zw/"))
+        wvDictOnline.hidden = true
+        wvDictOffline.hidden = false
     }
     
 }

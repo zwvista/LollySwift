@@ -9,14 +9,12 @@
 import Foundation
 
 public class LollyObject: NSObject {
-    var db: LollyDB
+    var db = LollyDB()
     public var arrLanguages: [MLanguage]
-    public var arrDictAll: [MDictAll]!
+    public var arrDictAll = [MDictAll]()
     public var currentLangIndex: Int {
         didSet {
-            let m = arrLanguages[currentLangIndex]
-            arrDictAll = db.dictAllByLang(m.LANGID)
-            currentDictIndex = 0
+            setCurrentLangIndex()
         }
     }
     public var currentDictIndex = 0
@@ -25,9 +23,15 @@ public class LollyObject: NSObject {
     }
     
     public override init() {
-        db = LollyDB()
         arrLanguages = db.languages()
         currentLangIndex = 2
+        super.init()
+        setCurrentLangIndex()
     }
     
+    private func setCurrentLangIndex() {
+        let m = arrLanguages[currentLangIndex]
+        arrDictAll = db.dictAllByLang(m.LANGID)
+        currentDictIndex = 0
+    }
 }

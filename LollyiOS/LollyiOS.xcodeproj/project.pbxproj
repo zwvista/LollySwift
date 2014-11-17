@@ -13,6 +13,22 @@
 		953473E21A0D16CF00FF2D56 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 953473E11A0D16CF00FF2D56 /* Images.xcassets */; };
 		953473E51A0D16CF00FF2D56 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 953473E31A0D16CF00FF2D56 /* LaunchScreen.xib */; };
 		953473F11A0D16CF00FF2D56 /* LollyiOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953473F01A0D16CF00FF2D56 /* LollyiOSTests.swift */; };
+		95FFAEF81A19F03C00E00C47 /* AMSlideMenuContentSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 95FFAEEA1A19F03C00E00C47 /* AMSlideMenuContentSegue.m */; };
+		95FFAEF91A19F03C00E00C47 /* AMSlideMenuLeftMenuSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 95FFAEEC1A19F03C00E00C47 /* AMSlideMenuLeftMenuSegue.m */; };
+		95FFAEFA1A19F03C00E00C47 /* AMSlideMenuLeftTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95FFAEEE1A19F03C00E00C47 /* AMSlideMenuLeftTableViewController.m */; };
+		95FFAEFB1A19F03C00E00C47 /* AMSlideMenuMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95FFAEF01A19F03C00E00C47 /* AMSlideMenuMainViewController.m */; };
+		95FFAEFC1A19F03C00E00C47 /* AMSlideMenuRightMenuSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 95FFAEF31A19F03C00E00C47 /* AMSlideMenuRightMenuSegue.m */; };
+		95FFAEFD1A19F03C00E00C47 /* AMSlideMenuRightTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95FFAEF51A19F03C00E00C47 /* AMSlideMenuRightTableViewController.m */; };
+		95FFAEFE1A19F03C00E00C47 /* UIViewController+AMSlideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 95FFAEF71A19F03C00E00C47 /* UIViewController+AMSlideMenu.m */; };
+		95FFAF0B1A19F07000E00C47 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 95FFAF011A19F07000E00C47 /* FMDatabase.m */; };
+		95FFAF0C1A19F07000E00C47 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 95FFAF031A19F07000E00C47 /* FMDatabaseAdditions.m */; };
+		95FFAF0D1A19F07000E00C47 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 95FFAF051A19F07000E00C47 /* FMDatabasePool.m */; };
+		95FFAF0E1A19F07000E00C47 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 95FFAF071A19F07000E00C47 /* FMDatabaseQueue.m */; };
+		95FFAF0F1A19F07000E00C47 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 95FFAF0A1A19F07000E00C47 /* FMResultSet.m */; };
+		95FFAF161A19F0AA00E00C47 /* LollyDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FFAF111A19F0AA00E00C47 /* LollyDB.swift */; };
+		95FFAF171A19F0AA00E00C47 /* LollyObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FFAF121A19F0AA00E00C47 /* LollyObject.swift */; };
+		95FFAF181A19F0AA00E00C47 /* MDictAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FFAF141A19F0AA00E00C47 /* MDictAll.swift */; };
+		95FFAF191A19F0AA00E00C47 /* MLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FFAF151A19F0AA00E00C47 /* MLanguage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +52,37 @@
 		953473EA1A0D16CF00FF2D56 /* LollyiOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LollyiOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		953473EF1A0D16CF00FF2D56 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		953473F01A0D16CF00FF2D56 /* LollyiOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LollyiOSTests.swift; sourceTree = "<group>"; };
+		95FFAEE91A19F03C00E00C47 /* AMSlideMenuContentSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSlideMenuContentSegue.h; sourceTree = "<group>"; };
+		95FFAEEA1A19F03C00E00C47 /* AMSlideMenuContentSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSlideMenuContentSegue.m; sourceTree = "<group>"; };
+		95FFAEEB1A19F03C00E00C47 /* AMSlideMenuLeftMenuSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSlideMenuLeftMenuSegue.h; sourceTree = "<group>"; };
+		95FFAEEC1A19F03C00E00C47 /* AMSlideMenuLeftMenuSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSlideMenuLeftMenuSegue.m; sourceTree = "<group>"; };
+		95FFAEED1A19F03C00E00C47 /* AMSlideMenuLeftTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSlideMenuLeftTableViewController.h; sourceTree = "<group>"; };
+		95FFAEEE1A19F03C00E00C47 /* AMSlideMenuLeftTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSlideMenuLeftTableViewController.m; sourceTree = "<group>"; };
+		95FFAEEF1A19F03C00E00C47 /* AMSlideMenuMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSlideMenuMainViewController.h; sourceTree = "<group>"; };
+		95FFAEF01A19F03C00E00C47 /* AMSlideMenuMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSlideMenuMainViewController.m; sourceTree = "<group>"; };
+		95FFAEF11A19F03C00E00C47 /* AMSlideMenuProtocols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSlideMenuProtocols.h; sourceTree = "<group>"; };
+		95FFAEF21A19F03C00E00C47 /* AMSlideMenuRightMenuSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSlideMenuRightMenuSegue.h; sourceTree = "<group>"; };
+		95FFAEF31A19F03C00E00C47 /* AMSlideMenuRightMenuSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSlideMenuRightMenuSegue.m; sourceTree = "<group>"; };
+		95FFAEF41A19F03C00E00C47 /* AMSlideMenuRightTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSlideMenuRightTableViewController.h; sourceTree = "<group>"; };
+		95FFAEF51A19F03C00E00C47 /* AMSlideMenuRightTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSlideMenuRightTableViewController.m; sourceTree = "<group>"; };
+		95FFAEF61A19F03C00E00C47 /* UIViewController+AMSlideMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+AMSlideMenu.h"; sourceTree = "<group>"; };
+		95FFAEF71A19F03C00E00C47 /* UIViewController+AMSlideMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+AMSlideMenu.m"; sourceTree = "<group>"; };
+		95FFAF001A19F07000E00C47 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
+		95FFAF011A19F07000E00C47 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
+		95FFAF021A19F07000E00C47 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		95FFAF031A19F07000E00C47 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		95FFAF041A19F07000E00C47 /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
+		95FFAF051A19F07000E00C47 /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
+		95FFAF061A19F07000E00C47 /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
+		95FFAF071A19F07000E00C47 /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
+		95FFAF081A19F07000E00C47 /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
+		95FFAF091A19F07000E00C47 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
+		95FFAF0A1A19F07000E00C47 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		95FFAF111A19F0AA00E00C47 /* LollyDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LollyDB.swift; sourceTree = "<group>"; };
+		95FFAF121A19F0AA00E00C47 /* LollyObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LollyObject.swift; sourceTree = "<group>"; };
+		95FFAF131A19F0AA00E00C47 /* LollyShared-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LollyShared-Bridging-Header.h"; sourceTree = "<group>"; };
+		95FFAF141A19F0AA00E00C47 /* MDictAll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDictAll.swift; sourceTree = "<group>"; };
+		95FFAF151A19F0AA00E00C47 /* MLanguage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLanguage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +106,9 @@
 		953473CC1A0D16CF00FF2D56 = {
 			isa = PBXGroup;
 			children = (
+				95FFAEE81A19F03C00E00C47 /* AMSlideMenu */,
+				95FFAEFF1A19F07000E00C47 /* fmdb */,
+				95FFAF101A19F0AA00E00C47 /* src */,
 				953473D71A0D16CF00FF2D56 /* LollyiOS */,
 				953473ED1A0D16CF00FF2D56 /* LollyiOSTests */,
 				953473D61A0D16CF00FF2D56 /* Products */,
@@ -77,9 +127,9 @@
 		953473D71A0D16CF00FF2D56 /* LollyiOS */ = {
 			isa = PBXGroup;
 			children = (
+				953473DE1A0D16CF00FF2D56 /* Main.storyboard */,
 				953473DA1A0D16CF00FF2D56 /* AppDelegate.swift */,
 				953473DC1A0D16CF00FF2D56 /* ViewController.swift */,
-				953473DE1A0D16CF00FF2D56 /* Main.storyboard */,
 				953473E11A0D16CF00FF2D56 /* Images.xcassets */,
 				953473E31A0D16CF00FF2D56 /* LaunchScreen.xib */,
 				953473D81A0D16CF00FF2D56 /* Supporting Files */,
@@ -110,6 +160,61 @@
 				953473EF1A0D16CF00FF2D56 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		95FFAEE81A19F03C00E00C47 /* AMSlideMenu */ = {
+			isa = PBXGroup;
+			children = (
+				95FFAEE91A19F03C00E00C47 /* AMSlideMenuContentSegue.h */,
+				95FFAEEA1A19F03C00E00C47 /* AMSlideMenuContentSegue.m */,
+				95FFAEEB1A19F03C00E00C47 /* AMSlideMenuLeftMenuSegue.h */,
+				95FFAEEC1A19F03C00E00C47 /* AMSlideMenuLeftMenuSegue.m */,
+				95FFAEED1A19F03C00E00C47 /* AMSlideMenuLeftTableViewController.h */,
+				95FFAEEE1A19F03C00E00C47 /* AMSlideMenuLeftTableViewController.m */,
+				95FFAEEF1A19F03C00E00C47 /* AMSlideMenuMainViewController.h */,
+				95FFAEF01A19F03C00E00C47 /* AMSlideMenuMainViewController.m */,
+				95FFAEF11A19F03C00E00C47 /* AMSlideMenuProtocols.h */,
+				95FFAEF21A19F03C00E00C47 /* AMSlideMenuRightMenuSegue.h */,
+				95FFAEF31A19F03C00E00C47 /* AMSlideMenuRightMenuSegue.m */,
+				95FFAEF41A19F03C00E00C47 /* AMSlideMenuRightTableViewController.h */,
+				95FFAEF51A19F03C00E00C47 /* AMSlideMenuRightTableViewController.m */,
+				95FFAEF61A19F03C00E00C47 /* UIViewController+AMSlideMenu.h */,
+				95FFAEF71A19F03C00E00C47 /* UIViewController+AMSlideMenu.m */,
+			);
+			name = AMSlideMenu;
+			path = ../../../OSS/AMSlideMenu/AMSlideMenu;
+			sourceTree = "<group>";
+		};
+		95FFAEFF1A19F07000E00C47 /* fmdb */ = {
+			isa = PBXGroup;
+			children = (
+				95FFAF001A19F07000E00C47 /* FMDatabase.h */,
+				95FFAF011A19F07000E00C47 /* FMDatabase.m */,
+				95FFAF021A19F07000E00C47 /* FMDatabaseAdditions.h */,
+				95FFAF031A19F07000E00C47 /* FMDatabaseAdditions.m */,
+				95FFAF041A19F07000E00C47 /* FMDatabasePool.h */,
+				95FFAF051A19F07000E00C47 /* FMDatabasePool.m */,
+				95FFAF061A19F07000E00C47 /* FMDatabaseQueue.h */,
+				95FFAF071A19F07000E00C47 /* FMDatabaseQueue.m */,
+				95FFAF081A19F07000E00C47 /* FMDB.h */,
+				95FFAF091A19F07000E00C47 /* FMResultSet.h */,
+				95FFAF0A1A19F07000E00C47 /* FMResultSet.m */,
+			);
+			name = fmdb;
+			path = ../../../OSS/fmdb/src/fmdb;
+			sourceTree = "<group>";
+		};
+		95FFAF101A19F0AA00E00C47 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				95FFAF111A19F0AA00E00C47 /* LollyDB.swift */,
+				95FFAF121A19F0AA00E00C47 /* LollyObject.swift */,
+				95FFAF131A19F0AA00E00C47 /* LollyShared-Bridging-Header.h */,
+				95FFAF141A19F0AA00E00C47 /* MDictAll.swift */,
+				95FFAF151A19F0AA00E00C47 /* MLanguage.swift */,
+			);
+			name = src;
+			path = ../LollyShared/src;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -212,8 +317,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95FFAEFA1A19F03C00E00C47 /* AMSlideMenuLeftTableViewController.m in Sources */,
+				95FFAF191A19F0AA00E00C47 /* MLanguage.swift in Sources */,
+				95FFAF0D1A19F07000E00C47 /* FMDatabasePool.m in Sources */,
+				95FFAF0F1A19F07000E00C47 /* FMResultSet.m in Sources */,
+				95FFAEFD1A19F03C00E00C47 /* AMSlideMenuRightTableViewController.m in Sources */,
+				95FFAEFC1A19F03C00E00C47 /* AMSlideMenuRightMenuSegue.m in Sources */,
+				95FFAF0E1A19F07000E00C47 /* FMDatabaseQueue.m in Sources */,
+				95FFAF0B1A19F07000E00C47 /* FMDatabase.m in Sources */,
+				95FFAEF81A19F03C00E00C47 /* AMSlideMenuContentSegue.m in Sources */,
 				953473DD1A0D16CF00FF2D56 /* ViewController.swift in Sources */,
+				95FFAEF91A19F03C00E00C47 /* AMSlideMenuLeftMenuSegue.m in Sources */,
+				95FFAF181A19F0AA00E00C47 /* MDictAll.swift in Sources */,
+				95FFAF161A19F0AA00E00C47 /* LollyDB.swift in Sources */,
+				95FFAF0C1A19F07000E00C47 /* FMDatabaseAdditions.m in Sources */,
+				95FFAEFE1A19F03C00E00C47 /* UIViewController+AMSlideMenu.m in Sources */,
+				95FFAEFB1A19F03C00E00C47 /* AMSlideMenuMainViewController.m in Sources */,
 				953473DB1A0D16CF00FF2D56 /* AppDelegate.swift in Sources */,
+				95FFAF171A19F0AA00E00C47 /* LollyObject.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,6 +7,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="SearchDictWindowController">
             <connections>
+                <outlet property="dictAllController" destination="JBh-aJ-rbd" id="2TO-ud-xHK"/>
                 <outlet property="sfWord" destination="hhB-Zo-qJW" id="js8-Qh-TCS"/>
                 <outlet property="wvDictOffline" destination="jvl-rP-Jv1" id="A3t-UZ-OYC"/>
                 <outlet property="wvDictOnline" destination="x0f-Yc-KPV" id="HA6-Oj-3u9"/>
@@ -68,29 +69,6 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BQ6-2N-bOq">
-                        <rect key="frame" x="92" y="16" width="105" height="26"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="100" id="ZdN-7j-GVK"/>
-                        </constraints>
-                        <popUpButtonCell key="cell" type="push" title="Language" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="s1e-di-WHy" id="VJw-ei-YJn">
-                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="menu"/>
-                            <menu key="menu" title="OtherViews" id="dXo-UL-6wQ">
-                                <items>
-                                    <menuItem title="Language" state="on" id="s1e-di-WHy"/>
-                                    <menuItem title="Item 2" id="S8C-CJ-Fxa"/>
-                                    <menuItem title="Item 3" id="ftz-nC-MZ7"/>
-                                </items>
-                            </menu>
-                        </popUpButtonCell>
-                        <connections>
-                            <action selector="langSelected:" target="-2" id="jFN-aD-clG"/>
-                            <binding destination="ptQ-R2-djF" name="content" keyPath="arrangedObjects.ENGNAME" id="POg-Ki-HlG"/>
-                            <binding destination="ptQ-R2-djF" name="contentValues" keyPath="arrangedObjects.LANGID" previousBinding="POg-Ki-HlG" id="tPb-bM-irU"/>
-                            <binding destination="-2" name="selectedIndex" keyPath="theLollyObject.currentLangIndex" previousBinding="tPb-bM-irU" id="ngV-Xm-Q7Z"/>
-                        </connections>
-                    </popUpButton>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7cz-qX-8I1">
                         <rect key="frame" x="216" y="23" width="69" height="17"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Dictionary" id="ALv-rn-XaI">
@@ -118,7 +96,30 @@
                         <connections>
                             <action selector="dictSelected:" target="-2" id="QPP-9J-KKE"/>
                             <binding destination="JBh-aJ-rbd" name="content" keyPath="arrangedObjects.DICTNAME" id="Hox-Np-0vp"/>
-                            <binding destination="-2" name="selectedIndex" keyPath="theLollyObject.currentDictIndex" previousBinding="Hox-Np-0vp" id="rrb-gM-Ckm"/>
+                            <binding destination="-2" name="selectedIndex" keyPath="theLollyObject.currentDictIndex" previousBinding="Hox-Np-0vp" id="uyp-v5-UAs"/>
+                        </connections>
+                    </popUpButton>
+                    <popUpButton verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BQ6-2N-bOq">
+                        <rect key="frame" x="93" y="16" width="105" height="26"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="ZdN-7j-GVK"/>
+                        </constraints>
+                        <popUpButtonCell key="cell" type="push" title="Language" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="s1e-di-WHy" id="VJw-ei-YJn">
+                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="menu"/>
+                            <menu key="menu" title="OtherViews" id="dXo-UL-6wQ">
+                                <items>
+                                    <menuItem title="Language" state="on" id="s1e-di-WHy"/>
+                                    <menuItem title="Item 2" id="S8C-CJ-Fxa"/>
+                                    <menuItem title="Item 3" id="ftz-nC-MZ7"/>
+                                </items>
+                            </menu>
+                        </popUpButtonCell>
+                        <connections>
+                            <action selector="langSelected:" target="-2" id="jFN-aD-clG"/>
+                            <binding destination="ptQ-R2-djF" name="contentValues" keyPath="arrangedObjects.LANGID" previousBinding="POg-Ki-HlG" id="kff-sh-aR5"/>
+                            <binding destination="ptQ-R2-djF" name="content" keyPath="arrangedObjects.LANGNAME" id="POg-Ki-HlG"/>
+                            <binding destination="-2" name="selectedIndex" keyPath="theLollyObject.currentLangIndex" id="ISP-Zk-e8b"/>
                         </connections>
                     </popUpButton>
                 </subviews>
@@ -153,11 +154,7 @@
                 <binding destination="-2" name="contentArray" keyPath="theLollyObject.arrLanguages" id="Vik-xG-NH7"/>
             </connections>
         </arrayController>
-        <arrayController id="JBh-aJ-rbd" userLabel="DictAll Controller">
-            <connections>
-                <binding destination="-2" name="contentArray" keyPath="theLollyObject.arrDictAll" id="dNP-E9-JNz"/>
-            </connections>
-        </arrayController>
+        <arrayController id="JBh-aJ-rbd" userLabel="DictAll Controller"/>
         <sliderCell controlSize="small" state="on" alignment="left" maxValue="100" doubleValue="50" tickMarkPosition="right" sliderType="linear" id="NU0-dn-YhX"/>
     </objects>
 </document>

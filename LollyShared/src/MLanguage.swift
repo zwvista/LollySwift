@@ -10,5 +10,5 @@ import Foundation
 
 public class MLanguage: NSObject {
     public var LANGID = 0
-    public var ENGNAME: String?
+    public var LANGNAME: String?
 }

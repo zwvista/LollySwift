@@ -12,15 +12,15 @@ class LollyDB: NSObject {
     var db: FMDatabase
     
     override init() {
-        let path = NSBundle.mainBundle().resourcePath! + "Lolly.db"
-        db = FMDatabase(path:path)
+        let path = NSBundle.mainBundle().resourcePath! + "/Lolly.db"
+        db = FMDatabase(path: path)
         db.open()
         super.init()
     }
     
     func dictAllByLang(langID: Int) -> [MDictAll] {
         let sql = "SELECT * FROM DICTALL WHERE LANGID = \(langID)"
-        let results = self.db.executeQuery(sql)!
+        let results = db.executeQuery(sql)!
         var array = [MDictAll]()
         while results.next() {
             var m = MDictAll()
@@ -38,12 +38,12 @@ class LollyDB: NSObject {
     
     func languages() -> [MLanguage] {
         let sql = "SELECT * FROM LANGUAGES WHERE LANGID <> 0"
-        let results = self.db.executeQuery(sql)!
+        let results = db.executeQuery(sql)!
         var array = [MLanguage]()
         while results.next() {
             var m = MLanguage()
             m.LANGID = Int(results.intForColumn("LANGID"))
-            m.ENGNAME = results.stringForColumn("ENGNAME")
+            m.LANGNAME = results.stringForColumn("LANGNAME")
             array.append(m)
         }
         return array
