@@ -7,9 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		951BB9901A1B780B0087DB94 /* FMDatabaseVariadic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951BB98F1A1B780B0087DB94 /* FMDatabaseVariadic.swift */; };
+		951BB9921A1B78650087DB94 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 951BB9911A1B78650087DB94 /* libsqlite3.dylib */; };
+		951BB9941A1B803B0087DB94 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 951BB9931A1B803B0087DB94 /* Main.storyboard */; };
+		951BB9981A1B90260087DB94 /* LeftMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951BB9971A1B90260087DB94 /* LeftMenuViewController.swift */; };
+		951BB99A1A1B904B0087DB94 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951BB9991A1B904B0087DB94 /* MainViewController.swift */; };
+		951BB99C1A1B90DC0087DB94 /* LollyUINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951BB99B1A1B90DC0087DB94 /* LollyUINavigationController.swift */; };
+		95267BD31A1E268A00CC2A4B /* DictionaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95267BD21A1E268A00CC2A4B /* DictionaryViewController.swift */; };
+		95267BD51A1E26B100CC2A4B /* LanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95267BD41A1E26B100CC2A4B /* LanguageViewController.swift */; };
+		95267BD71A1E26D000CC2A4B /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95267BD61A1E26D000CC2A4B /* SearchViewController.swift */; };
+		95267BDA1A1E303B00CC2A4B /* simpleMenuButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 95267BD81A1E303B00CC2A4B /* simpleMenuButton.png */; };
+		95267BDB1A1E303B00CC2A4B /* simpleMenuButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 95267BD91A1E303B00CC2A4B /* simpleMenuButton@2x.png */; };
+		95267BDD1A1E3B2200CC2A4B /* Lolly.db in Resources */ = {isa = PBXBuildFile; fileRef = 95267BDC1A1E304C00CC2A4B /* Lolly.db */; };
 		953473DB1A0D16CF00FF2D56 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953473DA1A0D16CF00FF2D56 /* AppDelegate.swift */; };
-		953473DD1A0D16CF00FF2D56 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953473DC1A0D16CF00FF2D56 /* ViewController.swift */; };
-		953473E01A0D16CF00FF2D56 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 953473DE1A0D16CF00FF2D56 /* Main.storyboard */; };
 		953473E21A0D16CF00FF2D56 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 953473E11A0D16CF00FF2D56 /* Images.xcassets */; };
 		953473E51A0D16CF00FF2D56 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 953473E31A0D16CF00FF2D56 /* LaunchScreen.xib */; };
 		953473F11A0D16CF00FF2D56 /* LollyiOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953473F01A0D16CF00FF2D56 /* LollyiOSTests.swift */; };
@@ -42,11 +52,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		951BB98F1A1B780B0087DB94 /* FMDatabaseVariadic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FMDatabaseVariadic.swift; path = "../extra/Swift extensions/FMDatabaseVariadic.swift"; sourceTree = "<group>"; };
+		951BB9911A1B78650087DB94 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		951BB9931A1B803B0087DB94 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		951BB9951A1B8D6C0087DB94 /* LollyiOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LollyiOS-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
+		951BB9971A1B90260087DB94 /* LeftMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftMenuViewController.swift; sourceTree = "<group>"; };
+		951BB9991A1B904B0087DB94 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		951BB99B1A1B90DC0087DB94 /* LollyUINavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LollyUINavigationController.swift; sourceTree = "<group>"; };
+		95267BD21A1E268A00CC2A4B /* DictionaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryViewController.swift; sourceTree = "<group>"; };
+		95267BD41A1E26B100CC2A4B /* LanguageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageViewController.swift; sourceTree = "<group>"; };
+		95267BD61A1E26D000CC2A4B /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		95267BD81A1E303B00CC2A4B /* simpleMenuButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = simpleMenuButton.png; path = "../../../../OSS/AMSlideMenu/AMSlideMenuDemo-with Storyboard/AMSlideMenu/simpleMenuButton.png"; sourceTree = "<group>"; };
+		95267BD91A1E303B00CC2A4B /* simpleMenuButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "simpleMenuButton@2x.png"; path = "../../../../OSS/AMSlideMenu/AMSlideMenuDemo-with Storyboard/AMSlideMenu/simpleMenuButton@2x.png"; sourceTree = "<group>"; };
+		95267BDC1A1E304C00CC2A4B /* Lolly.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = Lolly.db; path = ../../../Lolly.db; sourceTree = "<group>"; };
 		953473D51A0D16CF00FF2D56 /* LollyiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LollyiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		953473D91A0D16CF00FF2D56 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		953473DA1A0D16CF00FF2D56 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		953473DC1A0D16CF00FF2D56 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		953473DF1A0D16CF00FF2D56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		953473E11A0D16CF00FF2D56 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		953473E41A0D16CF00FF2D56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		953473EA1A0D16CF00FF2D56 /* LollyiOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LollyiOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -80,7 +101,6 @@
 		95FFAF0A1A19F07000E00C47 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
 		95FFAF111A19F0AA00E00C47 /* LollyDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LollyDB.swift; sourceTree = "<group>"; };
 		95FFAF121A19F0AA00E00C47 /* LollyObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LollyObject.swift; sourceTree = "<group>"; };
-		95FFAF131A19F0AA00E00C47 /* LollyShared-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LollyShared-Bridging-Header.h"; sourceTree = "<group>"; };
 		95FFAF141A19F0AA00E00C47 /* MDictAll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDictAll.swift; sourceTree = "<group>"; };
 		95FFAF151A19F0AA00E00C47 /* MLanguage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLanguage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -90,6 +110,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				951BB9921A1B78650087DB94 /* libsqlite3.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,9 +124,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		951BB9961A1B8FD50087DB94 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				951BB9971A1B90260087DB94 /* LeftMenuViewController.swift */,
+				951BB9991A1B904B0087DB94 /* MainViewController.swift */,
+				951BB99B1A1B90DC0087DB94 /* LollyUINavigationController.swift */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
 		953473CC1A0D16CF00FF2D56 = {
 			isa = PBXGroup;
 			children = (
+				951BB9911A1B78650087DB94 /* libsqlite3.dylib */,
 				95FFAEE81A19F03C00E00C47 /* AMSlideMenu */,
 				95FFAEFF1A19F07000E00C47 /* fmdb */,
 				95FFAF101A19F0AA00E00C47 /* src */,
@@ -127,12 +159,16 @@
 		953473D71A0D16CF00FF2D56 /* LollyiOS */ = {
 			isa = PBXGroup;
 			children = (
-				953473DE1A0D16CF00FF2D56 /* Main.storyboard */,
+				951BB9961A1B8FD50087DB94 /* Menu */,
+				951BB9951A1B8D6C0087DB94 /* LollyiOS-Bridging-Header.h */,
 				953473DA1A0D16CF00FF2D56 /* AppDelegate.swift */,
-				953473DC1A0D16CF00FF2D56 /* ViewController.swift */,
 				953473E11A0D16CF00FF2D56 /* Images.xcassets */,
+				951BB9931A1B803B0087DB94 /* Main.storyboard */,
 				953473E31A0D16CF00FF2D56 /* LaunchScreen.xib */,
 				953473D81A0D16CF00FF2D56 /* Supporting Files */,
+				95267BD21A1E268A00CC2A4B /* DictionaryViewController.swift */,
+				95267BD41A1E26B100CC2A4B /* LanguageViewController.swift */,
+				95267BD61A1E26D000CC2A4B /* SearchViewController.swift */,
 			);
 			path = LollyiOS;
 			sourceTree = "<group>";
@@ -140,6 +176,9 @@
 		953473D81A0D16CF00FF2D56 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				95267BDC1A1E304C00CC2A4B /* Lolly.db */,
+				95267BD81A1E303B00CC2A4B /* simpleMenuButton.png */,
+				95267BD91A1E303B00CC2A4B /* simpleMenuButton@2x.png */,
 				953473D91A0D16CF00FF2D56 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -199,6 +238,7 @@
 				95FFAF081A19F07000E00C47 /* FMDB.h */,
 				95FFAF091A19F07000E00C47 /* FMResultSet.h */,
 				95FFAF0A1A19F07000E00C47 /* FMResultSet.m */,
+				951BB98F1A1B780B0087DB94 /* FMDatabaseVariadic.swift */,
 			);
 			name = fmdb;
 			path = ../../../OSS/fmdb/src/fmdb;
@@ -209,7 +249,6 @@
 			children = (
 				95FFAF111A19F0AA00E00C47 /* LollyDB.swift */,
 				95FFAF121A19F0AA00E00C47 /* LollyObject.swift */,
-				95FFAF131A19F0AA00E00C47 /* LollyShared-Bridging-Header.h */,
 				95FFAF141A19F0AA00E00C47 /* MDictAll.swift */,
 				95FFAF151A19F0AA00E00C47 /* MLanguage.swift */,
 			);
@@ -297,8 +336,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				953473E01A0D16CF00FF2D56 /* Main.storyboard in Resources */,
+				951BB9941A1B803B0087DB94 /* Main.storyboard in Resources */,
 				953473E51A0D16CF00FF2D56 /* LaunchScreen.xib in Resources */,
+				95267BDB1A1E303B00CC2A4B /* simpleMenuButton@2x.png in Resources */,
+				95267BDA1A1E303B00CC2A4B /* simpleMenuButton.png in Resources */,
+				95267BDD1A1E3B2200CC2A4B /* Lolly.db in Resources */,
 				953473E21A0D16CF00FF2D56 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -317,19 +359,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				951BB99C1A1B90DC0087DB94 /* LollyUINavigationController.swift in Sources */,
+				951BB99A1A1B904B0087DB94 /* MainViewController.swift in Sources */,
+				95267BD51A1E26B100CC2A4B /* LanguageViewController.swift in Sources */,
 				95FFAEFA1A19F03C00E00C47 /* AMSlideMenuLeftTableViewController.m in Sources */,
 				95FFAF191A19F0AA00E00C47 /* MLanguage.swift in Sources */,
 				95FFAF0D1A19F07000E00C47 /* FMDatabasePool.m in Sources */,
 				95FFAF0F1A19F07000E00C47 /* FMResultSet.m in Sources */,
+				951BB9901A1B780B0087DB94 /* FMDatabaseVariadic.swift in Sources */,
 				95FFAEFD1A19F03C00E00C47 /* AMSlideMenuRightTableViewController.m in Sources */,
 				95FFAEFC1A19F03C00E00C47 /* AMSlideMenuRightMenuSegue.m in Sources */,
 				95FFAF0E1A19F07000E00C47 /* FMDatabaseQueue.m in Sources */,
 				95FFAF0B1A19F07000E00C47 /* FMDatabase.m in Sources */,
 				95FFAEF81A19F03C00E00C47 /* AMSlideMenuContentSegue.m in Sources */,
-				953473DD1A0D16CF00FF2D56 /* ViewController.swift in Sources */,
 				95FFAEF91A19F03C00E00C47 /* AMSlideMenuLeftMenuSegue.m in Sources */,
+				95267BD71A1E26D000CC2A4B /* SearchViewController.swift in Sources */,
 				95FFAF181A19F0AA00E00C47 /* MDictAll.swift in Sources */,
 				95FFAF161A19F0AA00E00C47 /* LollyDB.swift in Sources */,
+				951BB9981A1B90260087DB94 /* LeftMenuViewController.swift in Sources */,
+				95267BD31A1E268A00CC2A4B /* DictionaryViewController.swift in Sources */,
 				95FFAF0C1A19F07000E00C47 /* FMDatabaseAdditions.m in Sources */,
 				95FFAEFE1A19F03C00E00C47 /* UIViewController+AMSlideMenu.m in Sources */,
 				95FFAEFB1A19F03C00E00C47 /* AMSlideMenuMainViewController.m in Sources */,
@@ -357,14 +405,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		953473DE1A0D16CF00FF2D56 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				953473DF1A0D16CF00FF2D56 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		953473E31A0D16CF00FF2D56 /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -463,6 +503,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "LollyiOS-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -474,6 +515,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "LollyiOS-Bridging-Header.h";
 			};
 			name = Release;
 		};

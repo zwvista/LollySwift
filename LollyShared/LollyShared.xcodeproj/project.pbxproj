@@ -154,6 +154,7 @@
 		953473B41A0D16B000FF2D56 /* LollyShared */ = {
 			isa = PBXGroup;
 			children = (
+				95633B051A0D1A1300885756 /* LollyShared-Bridging-Header.h */,
 			);
 			path = LollyShared;
 			sourceTree = "<group>";
@@ -231,7 +232,6 @@
 			children = (
 				95633B031A0D1A1300885756 /* LollyDB.swift */,
 				95633B041A0D1A1300885756 /* LollyObject.swift */,
-				95633B051A0D1A1300885756 /* LollyShared-Bridging-Header.h */,
 				95633B061A0D1A1300885756 /* MDictAll.swift */,
 				95633B071A0D1A1300885756 /* MLanguage.swift */,
 			);
@@ -530,7 +530,7 @@
 				EXECUTABLE_PREFIX = lib;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "src/LollyShared-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "LollyShared-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -545,7 +545,7 @@
 				EXECUTABLE_PREFIX = lib;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "src/LollyShared-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "LollyShared-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -682,6 +682,7 @@
 				95560D8C1A0E66EC00BB7322 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		95560D8D1A0E66EC00BB7322 /* Build configuration list for PBXNativeTarget "LollyShared-iOSTests" */ = {
 			isa = XCConfigurationList;
@@ -690,6 +691,7 @@
 				95560D8F1A0E66EC00BB7322 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

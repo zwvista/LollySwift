@@ -73,10 +73,15 @@ public class MDictAll: NSObject {
             
             if template.isEmpty {break}
             
-            var newTemplate = NSMutableString(string: template)
-            regex = NSRegularExpression(pattern: "\\{\\d\\}", options: NSRegularExpressionOptions.allZeros, error: nil)!
-            regex.replaceMatchesInString(newTemplate, options: NSMatchingOptions.allZeros, range: NSMakeRange(0, newTemplate.length), withTemplate: "%s")
-            text = NSMutableString(format: newTemplate, word, "", text)
+//            var newTemplate = NSMutableString(string: template)
+//            regex = NSRegularExpression(pattern: "\\{\\d\\}", options: NSRegularExpressionOptions.allZeros, error: nil)!
+//            regex.replaceMatchesInString(newTemplate, options: NSMatchingOptions.allZeros, range: NSMakeRange(0, newTemplate.length), withTemplate: "%@")
+//            text = NSMutableString(format: newTemplate, word, "", text)
+
+            template = template.stringByReplacingOccurrencesOfString("{0}", withString: "\(word)")
+                .stringByReplacingOccurrencesOfString("{1}", withString: "")
+                .stringByReplacingOccurrencesOfString("{2}", withString: "\(text)")
+            text = NSMutableString(string: template)
         
         } while false
         
