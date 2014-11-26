@@ -76,7 +76,7 @@ class SearchDictWindowController: NSWindowController, NSTextFieldDelegate {
         let m = theLollyObject.currentDict
         if m.DICTTYPENAME != "OFFLINE-ONLINE" {return}
         
-        let data = frame.dataSource?.data
+        let data = frame.dataSource!.data
         let html = NSString(data: data!, encoding: NSUTF8StringEncoding)!
         let str = m.htmlString(html, word: word)
         

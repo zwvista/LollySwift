@@ -9,7 +9,7 @@
 import UIKit
 
 class DictionaryViewController: UIViewController {
-    var theLollyObject = (UIApplication.sharedApplication().delegate as AppDelegate).theLollyObject
+    let theLollyObject = (UIApplication.sharedApplication().delegate as AppDelegate).theLollyObject
     
     @IBOutlet var tableView: UITableView!
     
@@ -24,16 +24,16 @@ class DictionaryViewController: UIViewController {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellIdentifier = "DictCell"
-        var cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as?UITableViewCell
+        var cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as? UITableViewCell
         
         if cell == nil {
-            cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: cellIdentifier)
+            cell = UITableViewCell(style: .Default, reuseIdentifier: cellIdentifier)
         }
         
         let m = theLollyObject.arrDictAll[indexPath.row]
         cell!.textLabel.text = m.DICTNAME
         cell!.detailTextLabel!.text = m.URL
-        cell!.accessoryType = indexPath.row == theLollyObject.currentDictIndex ? UITableViewCellAccessoryType.Checkmark : UITableViewCellAccessoryType.None;
+        cell!.accessoryType = indexPath.row == theLollyObject.currentDictIndex ? .Checkmark : .None;
         return cell!;
     }
     
@@ -43,7 +43,7 @@ class DictionaryViewController: UIViewController {
         let oldIndexPath = NSIndexPath(forRow: oldRow, inSection: 0)
         tableView.deselectRowAtIndexPath(oldIndexPath, animated: false)
         theLollyObject.currentDictIndex = indexPath.row
-        tableView.reloadRowsAtIndexPaths([oldIndexPath, indexPath], withRowAnimation:UITableViewRowAnimation.None)
+        tableView.reloadRowsAtIndexPaths([oldIndexPath, indexPath], withRowAnimation: .None)
     }
 
 }

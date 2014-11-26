@@ -9,8 +9,7 @@
 import UIKit
 
 class LanguageViewController: UIViewController {
-    var theLollyObject = (UIApplication.sharedApplication().delegate as AppDelegate).theLollyObject
-    
+    let theLollyObject = (UIApplication.sharedApplication().delegate as AppDelegate).theLollyObject
     
     @IBOutlet var tableView: UITableView!
     
@@ -25,15 +24,15 @@ class LanguageViewController: UIViewController {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellIdentifier = "LangCell"
-        var cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as?UITableViewCell
+        var cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as? UITableViewCell
         
         if cell == nil {
-            cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: cellIdentifier)
+            cell = UITableViewCell(style: .Default, reuseIdentifier: cellIdentifier)
         }
         
         let m = theLollyObject.arrLanguages[indexPath.row]
         cell!.textLabel.text = m.LANGNAME
-        cell!.accessoryType = indexPath.row == theLollyObject.currentLangIndex ? UITableViewCellAccessoryType.Checkmark : UITableViewCellAccessoryType.None;
+        cell!.accessoryType = indexPath.row == theLollyObject.currentLangIndex ? .Checkmark : .None;
         return cell!;
     }
     
@@ -43,7 +42,7 @@ class LanguageViewController: UIViewController {
         let oldIndexPath = NSIndexPath(forRow: oldRow, inSection: 0)
         tableView.deselectRowAtIndexPath(oldIndexPath, animated: false)
         theLollyObject.currentLangIndex = indexPath.row
-        tableView.reloadRowsAtIndexPaths([oldIndexPath, indexPath], withRowAnimation:UITableViewRowAnimation.None)
+        tableView.reloadRowsAtIndexPaths([oldIndexPath, indexPath], withRowAnimation: .None)
     }
 
 }

@@ -9,7 +9,7 @@
 import UIKit
 
 class SearchViewController: UIViewController {
-    var theLollyObject = (UIApplication.sharedApplication().delegate as AppDelegate).theLollyObject
+    let theLollyObject = (UIApplication.sharedApplication().delegate as AppDelegate).theLollyObject
     
     @IBOutlet var tfWord: UITextField!
     @IBOutlet var wvDictOnline: UIWebView!
@@ -21,14 +21,16 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var btnMagnifyingGlass = UIButton.buttonWithType(UIButtonType.Custom) as UIButton
-        btnMagnifyingGlass.setTitle("\u{F09F}\u{948D}", forState: UIControlState.Normal)
+        var btnMagnifyingGlass = UIButton.buttonWithType(.Custom) as UIButton
+        let utf8 : [UInt8] = [0xF0, 0x9F, 0x94, 0x8D]
+        let str = NSString(bytes: utf8, length: utf8.count, encoding: NSUTF8StringEncoding)
+        btnMagnifyingGlass.setTitle(str, forState: .Normal)
         btnMagnifyingGlass.sizeToFit()
-        btnMagnifyingGlass.addTarget(self, action: "searchDict", forControlEvents: UIControlEvents.TouchUpInside);
+        btnMagnifyingGlass.addTarget(self, action: "searchDict", forControlEvents: .TouchUpInside);
         
         tfWord.leftView = btnMagnifyingGlass;
-        tfWord.leftViewMode = UITextFieldViewMode.Always;
-        tfWord.autoresizingMask = UIViewAutoresizing.FlexibleWidth;
+        tfWord.leftViewMode = .Always;
+        tfWord.autoresizingMask = .FlexibleWidth;
         
         wvDictOnline.hidden = true
         wvDictOffline.hidden = true
@@ -56,10 +58,6 @@ class SearchViewController: UIViewController {
     }
     
     func webViewDidFinishLoad(webView: UIWebView) {
-        if webView.scrollView.contentInset.bottom == 0 {
-            webView.scrollView.contentInset = UIEdgeInsetsMake(0, 0, CGRectGetHeight(tabBarController!.tabBar.frame), 0);
-        }
-        
         if webView !== wvDictOnline || webView.stringByEvaluatingJavaScriptFromString("document.readyState") != "complete" || webViewFinished {return}
         
         webViewFinished = true
