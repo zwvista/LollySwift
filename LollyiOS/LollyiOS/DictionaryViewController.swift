@@ -9,7 +9,7 @@
 import UIKit
 
 class DictionaryViewController: UIViewController {
-    let theLollyObject = (UIApplication.sharedApplication().delegate as AppDelegate).theLollyObject
+    let theLollyObject = (UIApplication.sharedApplication().delegate as! AppDelegate).theLollyObject
     
     @IBOutlet var tableView: UITableView!
     
@@ -31,7 +31,7 @@ class DictionaryViewController: UIViewController {
         }
         
         let m = theLollyObject.arrDictAll[indexPath.row]
-        cell!.textLabel.text = m.DICTNAME
+        cell!.textLabel!.text = m.DICTNAME
         cell!.detailTextLabel!.text = m.URL
         cell!.accessoryType = indexPath.row == theLollyObject.currentDictIndex ? .Checkmark : .None;
         return cell!;

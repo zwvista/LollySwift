@@ -27,7 +27,7 @@ class LollyUINavigationController: UINavigationController {
         
         if stack?.count > 0 {
             //restoring navigation state if exists
-            viewControllers = stack!.mutableCopy() as [AnyObject];
+            viewControllers = stack!.mutableCopy() as! [AnyObject];
             stack = nil
         }
     }

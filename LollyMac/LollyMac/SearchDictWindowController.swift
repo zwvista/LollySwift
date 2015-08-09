@@ -20,10 +20,6 @@ class SearchDictWindowController: NSWindowController, NSTextFieldDelegate {
     var word = ""
     var theLollyObject = LollyObject()
     
-    override init() {
-        super.init()
-    }
-    
     override init(window: NSWindow?) {
         super.init(window: window)
     }
@@ -60,11 +56,11 @@ class SearchDictWindowController: NSWindowController, NSTextFieldDelegate {
     }
     
     override func controlTextDidEndEditing(obj: NSNotification) {
-        let searchfield = obj.object as NSControl
+        let searchfield = obj.object as! NSControl
         if searchfield !== sfWord {return}
         
         let dict = obj.userInfo!
-        let reason = dict["NSTextMovement"] as NSNumber
+        let reason = dict["NSTextMovement"] as! NSNumber
         let code = Int(reason.intValue)
         if code == NSReturnTextMovement {
             searchDict(self)
@@ -78,7 +74,7 @@ class SearchDictWindowController: NSWindowController, NSTextFieldDelegate {
         
         let data = frame.dataSource!.data
         let html = NSString(data: data!, encoding: NSUTF8StringEncoding)!
-        let str = m.htmlString(html, word: word)
+        let str = m.htmlString(html as String, word: word)
         
         wvDictOffline.mainFrame.loadHTMLString(str, baseURL: NSURL(string: "/Users/bestskip/Documents/zw/"))
         wvDictOnline.hidden = true

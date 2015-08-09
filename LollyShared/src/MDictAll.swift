@@ -31,8 +31,8 @@ public class MDictAll: NSObject {
         var transform = TRANSFORM_MAC!, template = TEMPLATE!
         let logPath = "/Users/bestskip/Documents/zw/Log/"
         if debugExtract {
-            transform = NSString(contentsOfFile: logPath + "1_transform.txt", encoding: NSUTF8StringEncoding, error: nil)!
-            template = NSString(contentsOfFile: logPath + "5_template.txt", encoding: NSUTF8StringEncoding, error: nil)!
+            transform = NSString(contentsOfFile: logPath + "1_transform.txt", encoding: NSUTF8StringEncoding, error: nil)! as String
+            template = NSString(contentsOfFile: logPath + "5_template.txt", encoding: NSUTF8StringEncoding, error: nil)! as String
             let rawStr = html.stringByReplacingOccurrencesOfString("\r", withString: "\\r")
             rawStr.writeToFile(logPath + "0_raw.html", atomically: true, encoding: NSUTF8StringEncoding, error: nil)
         } else {
@@ -45,7 +45,7 @@ public class MDictAll: NSObject {
             if transform.isEmpty {break}
             let arr = transform.componentsSeparatedByString("\n")
             var regex = NSRegularExpression(pattern: arr[0], options: NSRegularExpressionOptions.allZeros, error: nil)!
-            let m = regex.firstMatchInString(html, options: NSMatchingOptions.allZeros, range: NSMakeRange(0, countElements(html)))
+            let m = regex.firstMatchInString(html, options: NSMatchingOptions.allZeros, range: NSMakeRange(0, count(html)))
             if m == nil {break}
             text = NSMutableString(string: (html as NSString).substringWithRange(m!.range))
             
@@ -91,6 +91,6 @@ public class MDictAll: NSObject {
             println(text)
         }
         
-        return text
+        return text as String
     }
 }

@@ -9,7 +9,7 @@
 import UIKit
 
 class SearchViewController: UIViewController {
-    let theLollyObject = (UIApplication.sharedApplication().delegate as AppDelegate).theLollyObject
+    let theLollyObject = (UIApplication.sharedApplication().delegate as! AppDelegate).theLollyObject
     
     @IBOutlet var tfWord: UITextField!
     @IBOutlet var wvDictOnline: UIWebView!
@@ -21,10 +21,10 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var btnMagnifyingGlass = UIButton.buttonWithType(.Custom) as UIButton
+        var btnMagnifyingGlass = UIButton.buttonWithType(.Custom) as! UIButton
         let utf8 : [UInt8] = [0xF0, 0x9F, 0x94, 0x8D]
-        let str = NSString(bytes: utf8, length: utf8.count, encoding: NSUTF8StringEncoding)
-        btnMagnifyingGlass.setTitle(str, forState: .Normal)
+        let str = NSString(bytes: utf8, length: utf8.count, encoding: NSUTF8StringEncoding) as! String
+        btnMagnifyingGlass.setTitle(str, forState: UIControlState.Normal)
         btnMagnifyingGlass.sizeToFit()
         btnMagnifyingGlass.addTarget(self, action: "searchDict", forControlEvents: .TouchUpInside);
         
@@ -66,7 +66,7 @@ class SearchViewController: UIViewController {
         
         let data = NSURLCache.sharedURLCache().cachedResponseForRequest(webView.request!)!.data;
         let html = NSString(data: data, encoding: NSUTF8StringEncoding)!
-        let str = m.htmlString(html, word: word)
+        let str = m.htmlString(html as String, word: word)
         
         wvDictOffline.loadHTMLString(str, baseURL: NSURL(string: "/Users/bestskip/Documents/zw/"));
         wvDictOnline.hidden = true

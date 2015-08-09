@@ -9,7 +9,7 @@
 import UIKit
 
 class LanguageViewController: UIViewController {
-    let theLollyObject = (UIApplication.sharedApplication().delegate as AppDelegate).theLollyObject
+    let theLollyObject = (UIApplication.sharedApplication().delegate as! AppDelegate).theLollyObject
     
     @IBOutlet var tableView: UITableView!
     
@@ -31,7 +31,7 @@ class LanguageViewController: UIViewController {
         }
         
         let m = theLollyObject.arrLanguages[indexPath.row]
-        cell!.textLabel.text = m.LANGNAME
+        cell!.textLabel!.text = m.LANGNAME
         cell!.accessoryType = indexPath.row == theLollyObject.currentLangIndex ? .Checkmark : .None;
         return cell!;
     }
