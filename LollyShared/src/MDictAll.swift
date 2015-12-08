@@ -19,8 +19,9 @@ public class MDictAll: NSObject {
     
     public func urlString(word: String) -> String {
         var url = URL!.stringByReplacingOccurrencesOfString("{0}", withString: "\(word)");
-        url = url.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
-        println(url)
+        //url = url.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
+        url = url.stringByAddingPercentEncodingWithAllowedCharacters(.URLQueryAllowedCharacterSet())!
+        print(url)
         return url
     }
     
@@ -31,21 +32,24 @@ public class MDictAll: NSObject {
         var transform = TRANSFORM_MAC!, template = TEMPLATE!
         let logPath = "/Users/bestskip/Documents/zw/Log/"
         if debugExtract {
-            transform = NSString(contentsOfFile: logPath + "1_transform.txt", encoding: NSUTF8StringEncoding, error: nil)! as String
-            template = NSString(contentsOfFile: logPath + "5_template.txt", encoding: NSUTF8StringEncoding, error: nil)! as String
+            transform = (try! NSString(contentsOfFile: logPath + "1_transform.txt", encoding: NSUTF8StringEncoding)) as String
+            template = (try! NSString(contentsOfFile: logPath + "5_template.txt", encoding: NSUTF8StringEncoding)) as String
             let rawStr = html.stringByReplacingOccurrencesOfString("\r", withString: "\\r")
-            rawStr.writeToFile(logPath + "0_raw.html", atomically: true, encoding: NSUTF8StringEncoding, error: nil)
+            do {
+                try rawStr.writeToFile(logPath + "0_raw.html", atomically: true, encoding: NSUTF8StringEncoding)
+            } catch _ {
+            }
         } else {
-            println(transform)
+            print(transform)
         }
         
         var text = NSMutableString()
         
-        do {
+        repeat {
             if transform.isEmpty {break}
             let arr = transform.componentsSeparatedByString("\n")
-            var regex = NSRegularExpression(pattern: arr[0], options: NSRegularExpressionOptions.allZeros, error: nil)!
-            let m = regex.firstMatchInString(html, options: NSMatchingOptions.allZeros, range: NSMakeRange(0, count(html)))
+            var regex = try! NSRegularExpression(pattern: arr[0], options: NSRegularExpressionOptions())
+            let m = regex.firstMatchInString(html, options: NSMatchingOptions(), range: NSMakeRange(0, html.characters.count))
             if m == nil {break}
             text = NSMutableString(string: (html as NSString).substringWithRange(m!.range))
             
@@ -53,22 +57,28 @@ public class MDictAll: NSObject {
                 for (key, value) in dic {
                     replacer = replacer.stringByReplacingOccurrencesOfString(key, withString: value)
                 }
-                regex.replaceMatchesInString(text, options: NSMatchingOptions.allZeros, range: NSMakeRange(0, text.length), withTemplate: replacer)
+                regex.replaceMatchesInString(text, options: NSMatchingOptions(), range: NSMakeRange(0, text.length), withTemplate: replacer)
             }
             
             f(arr[1])
             if debugExtract {
-                text.writeToFile(logPath + "2_extracted.txt", atomically: true, encoding: NSUTF8StringEncoding, error: nil)
+                do {
+                    try text.writeToFile(logPath + "2_extracted.txt", atomically: true, encoding: NSUTF8StringEncoding)
+                } catch _ {
+                }
             }
             
             if arr.count > 2 {
                 for var i = 2; i < arr.count; {
-                    regex = NSRegularExpression(pattern: arr[i++], options: NSRegularExpressionOptions.allZeros, error: nil)!
+                    regex = try! NSRegularExpression(pattern: arr[i++], options: NSRegularExpressionOptions())
                     f(arr[i++])
                 }
             }
             if debugExtract {
-                text.writeToFile(logPath + "4_cooked.txt", atomically: true, encoding: NSUTF8StringEncoding, error: nil)
+                do {
+                    try text.writeToFile(logPath + "4_cooked.txt", atomically: true, encoding: NSUTF8StringEncoding)
+                } catch _ {
+                }
             }
             
             if template.isEmpty {break}
@@ -86,9 +96,12 @@ public class MDictAll: NSObject {
         } while false
         
         if debugExtract {
-            text.writeToFile(logPath + "6_result.html", atomically: true, encoding: NSUTF8StringEncoding, error: nil)
+            do {
+                try text.writeToFile(logPath + "6_result.html", atomically: true, encoding: NSUTF8StringEncoding)
+            } catch _ {
+            }
         } else {
-            println(text)
+            print(text)
         }
         
         return text as String

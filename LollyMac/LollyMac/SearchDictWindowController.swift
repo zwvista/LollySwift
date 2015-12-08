@@ -67,7 +67,7 @@ class SearchDictWindowController: NSWindowController, NSTextFieldDelegate {
         }
     }
     
-    override func webView(sender: WebView!, didFinishLoadForFrame frame: WebFrame!) {
+    func webView(sender: WebView!, didFinishLoadForFrame frame: WebFrame!) {
         if frame !== sender.mainFrame {return}
         let m = theLollyObject.currentDict
         if m.DICTTYPENAME != "OFFLINE-ONLINE" {return}

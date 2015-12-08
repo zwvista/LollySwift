@@ -23,7 +23,7 @@ class LollyDB: NSObject {
         let results = db.executeQuery(sql)!
         var array = [MDictAll]()
         while results.next() {
-            var m = MDictAll()
+            let m = MDictAll()
             m.LANGID = Int(results.intForColumn("LANGID"))
             m.DICTTYPENAME = results.stringForColumn("DICTTYPENAME")
             m.DICTNAME = results.stringForColumn("DICTNAME")
@@ -41,7 +41,7 @@ class LollyDB: NSObject {
         let results = db.executeQuery(sql)!
         var array = [MLanguage]()
         while results.next() {
-            var m = MLanguage()
+            let m = MLanguage()
             m.LANGID = Int(results.intForColumn("LANGID"))
             m.LANGNAME = results.stringForColumn("LANGNAME")
             array.append(m)
