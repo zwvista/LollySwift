@@ -21,7 +21,7 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var btnMagnifyingGlass = UIButton.buttonWithType(.Custom) as! UIButton
+        let btnMagnifyingGlass = UIButton(type: .Custom)
         let utf8 : [UInt8] = [0xF0, 0x9F, 0x94, 0x8D]
         let str = NSString(bytes: utf8, length: utf8.count, encoding: NSUTF8StringEncoding) as! String
         btnMagnifyingGlass.setTitle(str, forState: UIControlState.Normal)
@@ -45,7 +45,7 @@ class SearchViewController: UIViewController {
         wvDictOnline.hidden = false
         wvDictOffline.hidden = true
         
-        word = tfWord.text;
+        word = tfWord.text!;
         let m = theLollyObject.currentDict
         let url = m.urlString(word)
         webViewFinished = false

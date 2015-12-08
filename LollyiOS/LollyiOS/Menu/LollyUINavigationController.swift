@@ -12,8 +12,8 @@ public extension UINavigationController {
     override func shouldAutorotate() -> Bool {
         return true
     }
-    override func supportedInterfaceOrientations() -> Int {
-        return Int(UIInterfaceOrientationMask.All.rawValue)
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return .All
     }
 }
 
@@ -27,7 +27,7 @@ class LollyUINavigationController: UINavigationController {
         
         if stack?.count > 0 {
             //restoring navigation state if exists
-            viewControllers = stack!.mutableCopy() as! [AnyObject];
+            viewControllers = stack!.mutableCopy() as! [UIViewController];
             stack = nil
         }
     }
