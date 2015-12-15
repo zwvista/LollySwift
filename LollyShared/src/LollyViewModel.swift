@@ -1,5 +1,5 @@
 //
-//  LollyObject.swift
+//  LollyViewModel.swift
 //  LollySharedSwift
 //
 //  Created by zhaowei on 2014/11/07.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class LollyObject: NSObject {
+public class LollyViewModel: NSObject {
     var db = LollyDB()
     public var arrLanguages: [MLanguage]
     public var arrDictAll = [MDictAll]()

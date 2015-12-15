@@ -9,7 +9,7 @@
 import UIKit
 
 class LanguageViewController: UIViewController {
-    let theLollyObject = (UIApplication.sharedApplication().delegate as! AppDelegate).theLollyObject
+    let theLollyViewModel = (UIApplication.sharedApplication().delegate as! AppDelegate).theLollyViewModel
     
     @IBOutlet var tableView: UITableView!
     
@@ -19,7 +19,7 @@ class LanguageViewController: UIViewController {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return theLollyObject.arrLanguages.count;
+        return theLollyViewModel.arrLanguages.count;
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -30,18 +30,18 @@ class LanguageViewController: UIViewController {
             cell = UITableViewCell(style: .Default, reuseIdentifier: cellIdentifier)
         }
         
-        let m = theLollyObject.arrLanguages[indexPath.row]
+        let m = theLollyViewModel.arrLanguages[indexPath.row]
         cell!.textLabel!.text = m.LANGNAME
-        cell!.accessoryType = indexPath.row == theLollyObject.currentLangIndex ? .Checkmark : .None;
+        cell!.accessoryType = indexPath.row == theLollyViewModel.currentLangIndex ? .Checkmark : .None;
         return cell!;
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let oldRow = theLollyObject.currentLangIndex;
+        let oldRow = theLollyViewModel.currentLangIndex;
         if indexPath.row == oldRow {return}
         let oldIndexPath = NSIndexPath(forRow: oldRow, inSection: 0)
         tableView.deselectRowAtIndexPath(oldIndexPath, animated: false)
-        theLollyObject.currentLangIndex = indexPath.row
+        theLollyViewModel.currentLangIndex = indexPath.row
         tableView.reloadRowsAtIndexPaths([oldIndexPath, indexPath], withRowAnimation: .None)
     }
 

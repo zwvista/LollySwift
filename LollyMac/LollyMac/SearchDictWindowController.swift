@@ -18,7 +18,7 @@ class SearchDictWindowController: NSWindowController, NSTextFieldDelegate {
     @IBOutlet var dictAllController: NSArrayController!
     
     var word = ""
-    var theLollyObject = LollyObject()
+    var theLollyViewModel = LollyViewModel()
     
     override init(window: NSWindow?) {
         super.init(window: window)
@@ -39,13 +39,13 @@ class SearchDictWindowController: NSWindowController, NSTextFieldDelegate {
         wvDictOnline.hidden = false
         wvDictOffline.hidden = true
 
-        let m = theLollyObject.currentDict
+        let m = theLollyViewModel.currentDict
         let url = m.urlString(word)
-        wvDictOnline.mainFrameURL = url;
+        wvDictOnline.mainFrameURL = url
     }
 
     @IBAction func langSelected(sender: AnyObject) {
-        dictAllController.content = theLollyObject.arrDictAll
+        dictAllController.content = theLollyViewModel.arrDictAll
         dictSelected(sender)
     }
     
@@ -69,7 +69,7 @@ class SearchDictWindowController: NSWindowController, NSTextFieldDelegate {
     
     func webView(sender: WebView!, didFinishLoadForFrame frame: WebFrame!) {
         if frame !== sender.mainFrame {return}
-        let m = theLollyObject.currentDict
+        let m = theLollyViewModel.currentDict
         if m.DICTTYPENAME != "OFFLINE-ONLINE" {return}
         
         let data = frame.dataSource!.data

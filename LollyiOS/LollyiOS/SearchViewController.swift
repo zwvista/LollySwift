@@ -9,7 +9,7 @@
 import UIKit
 
 class SearchViewController: UIViewController {
-    let theLollyObject = (UIApplication.sharedApplication().delegate as! AppDelegate).theLollyObject
+    let theLollyViewModel = (UIApplication.sharedApplication().delegate as! AppDelegate).theLollyViewModel
     
     @IBOutlet var tfWord: UITextField!
     @IBOutlet var wvDictOnline: UIWebView!
@@ -46,7 +46,7 @@ class SearchViewController: UIViewController {
         wvDictOffline.hidden = true
         
         word = tfWord.text!;
-        let m = theLollyObject.currentDict
+        let m = theLollyViewModel.currentDict
         let url = m.urlString(word)
         webViewFinished = false
         wvDictOnline.loadRequest(NSURLRequest(URL: NSURL(string: url)!))
@@ -61,7 +61,7 @@ class SearchViewController: UIViewController {
         if webView !== wvDictOnline || webView.stringByEvaluatingJavaScriptFromString("document.readyState") != "complete" || webViewFinished {return}
         
         webViewFinished = true
-        let m = theLollyObject.currentDict
+        let m = theLollyViewModel.currentDict
         if m.DICTTYPENAME != "OFFLINE-ONLINE" {return}
         
         let data = NSURLCache.sharedURLCache().cachedResponseForRequest(webView.request!)!.data;
