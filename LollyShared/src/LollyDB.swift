@@ -20,17 +20,10 @@ class LollyDB: NSObject {
     
     func dictAllByLang(langID: Int) -> [MDictAll] {
         let sql = "SELECT * FROM DICTALL WHERE LANGID = \(langID)"
-        let results = db.executeQuery(sql)!
+        let results = try! db.executeQuery(sql)
         var array = [MDictAll]()
         while results.next() {
-            let m = MDictAll()
-            m.LANGID = Int(results.intForColumn("LANGID"))
-            m.DICTTYPENAME = results.stringForColumn("DICTTYPENAME")
-            m.DICTNAME = results.stringForColumn("DICTNAME")
-            m.URL = results.stringForColumn("URL")
-            m.CHCONV = results.stringForColumn("CHCONV")
-            m.TRANSFORM_MAC = results.stringForColumn("TRANSFORM_MAC")
-            m.TEMPLATE = results.stringForColumn("TEMPLATE")
+            let m = MDictAll(databaseResultSet: results)
             array.append(m)
         }
         return array
@@ -38,12 +31,10 @@ class LollyDB: NSObject {
     
     func languages() -> [MLanguage] {
         let sql = "SELECT * FROM LANGUAGES WHERE LANGID <> 0"
-        let results = db.executeQuery(sql)!
+        let results = try! db.executeQuery(sql)
         var array = [MLanguage]()
         while results.next() {
-            let m = MLanguage()
-            m.LANGID = Int(results.intForColumn("LANGID"))
-            m.LANGNAME = results.stringForColumn("LANGNAME")
+            let m = MLanguage(databaseResultSet: results)
             array.append(m)
         }
         return array

@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class MDictAll: NSObject {
+public class MDictAll: DBObject {
     public var LANGID = 0
     public var DICTTYPENAME: String?
     public var DICTNAME: String?
@@ -18,7 +18,7 @@ public class MDictAll: NSObject {
     public var TEMPLATE: String?
     
     public func urlString(word: String) -> String {
-        var url = URL!.stringByReplacingOccurrencesOfString("{0}", withString: "\(word)");
+        var url = URL!.stringByReplacingOccurrencesOfString("{0}", withString: word);
         //url = url.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
         url = url.stringByAddingPercentEncodingWithAllowedCharacters(.URLQueryAllowedCharacterSet())!
         print(url)
