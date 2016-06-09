@@ -13,10 +13,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBOutlet weak var window: NSWindow!
     
-    var wc: SearchDictWindowController!
+    var wc: WordsOnlineWC!
 
     func applicationDidFinishLaunching(aNotification: NSNotification) {
-        wc = SearchDictWindowController(windowNibName: "SearchDictWindowController")
+        wc = WordsOnlineWC(windowNibName: "WordsOnlineWC")
         wc.showWindow(self)
     }
 

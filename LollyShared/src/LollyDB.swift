@@ -18,9 +18,12 @@ class LollyDB: NSObject {
         super.init()
     }
     
+    // https://github.com/hpique/SwiftSingleton
+    static let sharedInstance = LollyDB()
+    
     func dictAllByLang(langID: Int) -> [MDictAll] {
-        let sql = "SELECT * FROM DICTALL WHERE LANGID = \(langID)"
-        let results = try! db.executeQuery(sql)
+        let sql = "SELECT * FROM DICTALL WHERE LANGID = ?"
+        let results = try! db.executeQuery(sql, langID)
         var array = [MDictAll]()
         while results.next() {
             let m = MDictAll(databaseResultSet: results)

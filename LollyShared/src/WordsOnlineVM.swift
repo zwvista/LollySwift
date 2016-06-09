@@ -1,5 +1,5 @@
 //
-//  LollyViewModel.swift
+//  WordsOnlineVM.swift
 //  LollySharedSwift
 //
 //  Created by zhaowei on 2014/11/07.
@@ -8,8 +8,7 @@
 
 import Foundation
 
-public class LollyViewModel: NSObject {
-    var db = LollyDB()
+public class WordsOnlineVM: NSObject {
     public var arrLanguages: [MLanguage]
     public var arrDictAll = [MDictAll]()
     public var currentLangIndex: Int {
@@ -23,7 +22,7 @@ public class LollyViewModel: NSObject {
     }
     
     public override init() {
-        arrLanguages = db.languages()
+        arrLanguages = LollyDB.sharedInstance.languages()
         currentLangIndex = 2
         super.init()
         setCurrentLangIndex()
@@ -31,7 +30,7 @@ public class LollyViewModel: NSObject {
     
     private func setCurrentLangIndex() {
         let m = arrLanguages[currentLangIndex]
-        arrDictAll = db.dictAllByLang(m.LANGID)
+        arrDictAll = LollyDB.sharedInstance.dictAllByLang(m.LANGID)
         currentDictIndex = 0
     }
 }
