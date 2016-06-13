@@ -9,7 +9,17 @@
 /* Begin PBXBuildFile section */
 		8C0B7D581C9E662500791A99 /* DBObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0B7D571C9E662500791A99 /* DBObject.swift */; };
 		8C4670951D099CAE004F3C21 /* MBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4670931D099CAE004F3C21 /* MBook.swift */; };
-		8C4670961D099CAE004F3C21 /* SelectUnitsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4670941D099CAE004F3C21 /* SelectUnitsVM.swift */; };
+		8C4670F01D0DC4C7004F3C21 /* AbstractActionSheetPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4670DD1D0DC4C7004F3C21 /* AbstractActionSheetPicker.m */; };
+		8C4670F11D0DC4C7004F3C21 /* ActionSheetCustomPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4670DF1D0DC4C7004F3C21 /* ActionSheetCustomPicker.m */; };
+		8C4670F21D0DC4C7004F3C21 /* ActionSheetDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4670E21D0DC4C7004F3C21 /* ActionSheetDatePicker.m */; };
+		8C4670F31D0DC4C7004F3C21 /* ActionSheetDistancePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4670E41D0DC4C7004F3C21 /* ActionSheetDistancePicker.m */; };
+		8C4670F41D0DC4C7004F3C21 /* ActionSheetLocalePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4670E61D0DC4C7004F3C21 /* ActionSheetLocalePicker.m */; };
+		8C4670F51D0DC4C7004F3C21 /* ActionSheetMultipleStringPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4670E81D0DC4C7004F3C21 /* ActionSheetMultipleStringPicker.m */; };
+		8C4670F61D0DC4C7004F3C21 /* ActionSheetStringPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4670EB1D0DC4C7004F3C21 /* ActionSheetStringPicker.m */; };
+		8C4670F71D0DC4C7004F3C21 /* DistancePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4670ED1D0DC4C7004F3C21 /* DistancePickerView.m */; };
+		8C4670F81D0DC4C7004F3C21 /* SWActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4670EF1D0DC4C7004F3C21 /* SWActionSheet.m */; };
+		8C4670FB1D0DC599004F3C21 /* SelectUnitsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4670F91D0DC599004F3C21 /* SelectUnitsViewModel.swift */; };
+		8C4670FC1D0DC599004F3C21 /* WordsOnlineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4670FA1D0DC599004F3C21 /* WordsOnlineViewModel.swift */; };
 		951BB9901A1B780B0087DB94 /* FMDatabaseVariadic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951BB98F1A1B780B0087DB94 /* FMDatabaseVariadic.swift */; };
 		951BB9921A1B78650087DB94 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 951BB9911A1B78650087DB94 /* libsqlite3.dylib */; };
 		951BB9941A1B803B0087DB94 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 951BB9931A1B803B0087DB94 /* Main.storyboard */; };
@@ -39,7 +49,6 @@
 		95FFAF0E1A19F07000E00C47 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 95FFAF071A19F07000E00C47 /* FMDatabaseQueue.m */; };
 		95FFAF0F1A19F07000E00C47 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 95FFAF0A1A19F07000E00C47 /* FMResultSet.m */; };
 		95FFAF161A19F0AA00E00C47 /* LollyDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FFAF111A19F0AA00E00C47 /* LollyDB.swift */; };
-		95FFAF171A19F0AA00E00C47 /* WordsOnlineVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FFAF121A19F0AA00E00C47 /* WordsOnlineVM.swift */; };
 		95FFAF181A19F0AA00E00C47 /* MDictAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FFAF141A19F0AA00E00C47 /* MDictAll.swift */; };
 		95FFAF191A19F0AA00E00C47 /* MLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FFAF151A19F0AA00E00C47 /* MLanguage.swift */; };
 /* End PBXBuildFile section */
@@ -57,7 +66,28 @@
 /* Begin PBXFileReference section */
 		8C0B7D571C9E662500791A99 /* DBObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBObject.swift; sourceTree = "<group>"; };
 		8C4670931D099CAE004F3C21 /* MBook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MBook.swift; sourceTree = "<group>"; };
-		8C4670941D099CAE004F3C21 /* SelectUnitsVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectUnitsVM.swift; sourceTree = "<group>"; };
+		8C4670DC1D0DC4C7004F3C21 /* AbstractActionSheetPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractActionSheetPicker.h; sourceTree = "<group>"; };
+		8C4670DD1D0DC4C7004F3C21 /* AbstractActionSheetPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbstractActionSheetPicker.m; sourceTree = "<group>"; };
+		8C4670DE1D0DC4C7004F3C21 /* ActionSheetCustomPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetCustomPicker.h; sourceTree = "<group>"; };
+		8C4670DF1D0DC4C7004F3C21 /* ActionSheetCustomPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetCustomPicker.m; sourceTree = "<group>"; };
+		8C4670E01D0DC4C7004F3C21 /* ActionSheetCustomPickerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetCustomPickerDelegate.h; sourceTree = "<group>"; };
+		8C4670E11D0DC4C7004F3C21 /* ActionSheetDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetDatePicker.h; sourceTree = "<group>"; };
+		8C4670E21D0DC4C7004F3C21 /* ActionSheetDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetDatePicker.m; sourceTree = "<group>"; };
+		8C4670E31D0DC4C7004F3C21 /* ActionSheetDistancePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetDistancePicker.h; sourceTree = "<group>"; };
+		8C4670E41D0DC4C7004F3C21 /* ActionSheetDistancePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetDistancePicker.m; sourceTree = "<group>"; };
+		8C4670E51D0DC4C7004F3C21 /* ActionSheetLocalePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetLocalePicker.h; sourceTree = "<group>"; };
+		8C4670E61D0DC4C7004F3C21 /* ActionSheetLocalePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetLocalePicker.m; sourceTree = "<group>"; };
+		8C4670E71D0DC4C7004F3C21 /* ActionSheetMultipleStringPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetMultipleStringPicker.h; sourceTree = "<group>"; };
+		8C4670E81D0DC4C7004F3C21 /* ActionSheetMultipleStringPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetMultipleStringPicker.m; sourceTree = "<group>"; };
+		8C4670E91D0DC4C7004F3C21 /* ActionSheetPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetPicker.h; sourceTree = "<group>"; };
+		8C4670EA1D0DC4C7004F3C21 /* ActionSheetStringPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetStringPicker.h; sourceTree = "<group>"; };
+		8C4670EB1D0DC4C7004F3C21 /* ActionSheetStringPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetStringPicker.m; sourceTree = "<group>"; };
+		8C4670EC1D0DC4C7004F3C21 /* DistancePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DistancePickerView.h; sourceTree = "<group>"; };
+		8C4670ED1D0DC4C7004F3C21 /* DistancePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DistancePickerView.m; sourceTree = "<group>"; };
+		8C4670EE1D0DC4C7004F3C21 /* SWActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWActionSheet.h; sourceTree = "<group>"; };
+		8C4670EF1D0DC4C7004F3C21 /* SWActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWActionSheet.m; sourceTree = "<group>"; };
+		8C4670F91D0DC599004F3C21 /* SelectUnitsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectUnitsViewModel.swift; sourceTree = "<group>"; };
+		8C4670FA1D0DC599004F3C21 /* WordsOnlineViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsOnlineViewModel.swift; sourceTree = "<group>"; };
 		951BB98F1A1B780B0087DB94 /* FMDatabaseVariadic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FMDatabaseVariadic.swift; path = "../extra/Swift extensions/FMDatabaseVariadic.swift"; sourceTree = "<group>"; };
 		951BB9911A1B78650087DB94 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		951BB9931A1B803B0087DB94 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -106,7 +136,6 @@
 		95FFAF091A19F07000E00C47 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
 		95FFAF0A1A19F07000E00C47 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
 		95FFAF111A19F0AA00E00C47 /* LollyDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LollyDB.swift; sourceTree = "<group>"; };
-		95FFAF121A19F0AA00E00C47 /* WordsOnlineVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsOnlineVM.swift; sourceTree = "<group>"; };
 		95FFAF141A19F0AA00E00C47 /* MDictAll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDictAll.swift; sourceTree = "<group>"; };
 		95FFAF151A19F0AA00E00C47 /* MLanguage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLanguage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -130,6 +159,34 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8C4670DB1D0DC4C7004F3C21 /* Pickers */ = {
+			isa = PBXGroup;
+			children = (
+				8C4670DC1D0DC4C7004F3C21 /* AbstractActionSheetPicker.h */,
+				8C4670DD1D0DC4C7004F3C21 /* AbstractActionSheetPicker.m */,
+				8C4670DE1D0DC4C7004F3C21 /* ActionSheetCustomPicker.h */,
+				8C4670DF1D0DC4C7004F3C21 /* ActionSheetCustomPicker.m */,
+				8C4670E01D0DC4C7004F3C21 /* ActionSheetCustomPickerDelegate.h */,
+				8C4670E11D0DC4C7004F3C21 /* ActionSheetDatePicker.h */,
+				8C4670E21D0DC4C7004F3C21 /* ActionSheetDatePicker.m */,
+				8C4670E31D0DC4C7004F3C21 /* ActionSheetDistancePicker.h */,
+				8C4670E41D0DC4C7004F3C21 /* ActionSheetDistancePicker.m */,
+				8C4670E51D0DC4C7004F3C21 /* ActionSheetLocalePicker.h */,
+				8C4670E61D0DC4C7004F3C21 /* ActionSheetLocalePicker.m */,
+				8C4670E71D0DC4C7004F3C21 /* ActionSheetMultipleStringPicker.h */,
+				8C4670E81D0DC4C7004F3C21 /* ActionSheetMultipleStringPicker.m */,
+				8C4670E91D0DC4C7004F3C21 /* ActionSheetPicker.h */,
+				8C4670EA1D0DC4C7004F3C21 /* ActionSheetStringPicker.h */,
+				8C4670EB1D0DC4C7004F3C21 /* ActionSheetStringPicker.m */,
+				8C4670EC1D0DC4C7004F3C21 /* DistancePickerView.h */,
+				8C4670ED1D0DC4C7004F3C21 /* DistancePickerView.m */,
+				8C4670EE1D0DC4C7004F3C21 /* SWActionSheet.h */,
+				8C4670EF1D0DC4C7004F3C21 /* SWActionSheet.m */,
+			);
+			name = Pickers;
+			path = "../../../OSS/ActionSheetPicker-3.0/Pickers";
+			sourceTree = "<group>";
+		};
 		951BB9961A1B8FD50087DB94 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
@@ -151,6 +208,7 @@
 		953473CC1A0D16CF00FF2D56 = {
 			isa = PBXGroup;
 			children = (
+				8C4670DB1D0DC4C7004F3C21 /* Pickers */,
 				95FFAEE81A19F03C00E00C47 /* AMSlideMenu */,
 				95FFAEFF1A19F07000E00C47 /* fmdb */,
 				95FFAF101A19F0AA00E00C47 /* src */,
@@ -266,8 +324,8 @@
 				8C4670931D099CAE004F3C21 /* MBook.swift */,
 				95FFAF141A19F0AA00E00C47 /* MDictAll.swift */,
 				95FFAF151A19F0AA00E00C47 /* MLanguage.swift */,
-				8C4670941D099CAE004F3C21 /* SelectUnitsVM.swift */,
-				95FFAF121A19F0AA00E00C47 /* WordsOnlineVM.swift */,
+				8C4670F91D0DC599004F3C21 /* SelectUnitsViewModel.swift */,
+				8C4670FA1D0DC599004F3C21 /* WordsOnlineViewModel.swift */,
 			);
 			name = src;
 			path = ../LollyShared/src;
@@ -378,32 +436,41 @@
 			buildActionMask = 2147483647;
 			files = (
 				951BB99C1A1B90DC0087DB94 /* LollyUINavigationController.swift in Sources */,
+				8C4670F11D0DC4C7004F3C21 /* ActionSheetCustomPicker.m in Sources */,
 				951BB99A1A1B904B0087DB94 /* MainViewController.swift in Sources */,
 				95267BD51A1E26B100CC2A4B /* LanguageViewController.swift in Sources */,
 				95FFAEFA1A19F03C00E00C47 /* AMSlideMenuLeftTableViewController.m in Sources */,
+				8C4670FC1D0DC599004F3C21 /* WordsOnlineViewModel.swift in Sources */,
 				95FFAF191A19F0AA00E00C47 /* MLanguage.swift in Sources */,
+				8C4670F71D0DC4C7004F3C21 /* DistancePickerView.m in Sources */,
 				95FFAF0D1A19F07000E00C47 /* FMDatabasePool.m in Sources */,
 				95FFAF0F1A19F07000E00C47 /* FMResultSet.m in Sources */,
 				951BB9901A1B780B0087DB94 /* FMDatabaseVariadic.swift in Sources */,
 				95FFAEFD1A19F03C00E00C47 /* AMSlideMenuRightTableViewController.m in Sources */,
 				95FFAEFC1A19F03C00E00C47 /* AMSlideMenuRightMenuSegue.m in Sources */,
+				8C4670FB1D0DC599004F3C21 /* SelectUnitsViewModel.swift in Sources */,
 				95FFAF0E1A19F07000E00C47 /* FMDatabaseQueue.m in Sources */,
+				8C4670F31D0DC4C7004F3C21 /* ActionSheetDistancePicker.m in Sources */,
 				95FFAF0B1A19F07000E00C47 /* FMDatabase.m in Sources */,
 				8C4670951D099CAE004F3C21 /* MBook.swift in Sources */,
 				95FFAEF81A19F03C00E00C47 /* AMSlideMenuContentSegue.m in Sources */,
+				8C4670F51D0DC4C7004F3C21 /* ActionSheetMultipleStringPicker.m in Sources */,
 				95FFAEF91A19F03C00E00C47 /* AMSlideMenuLeftMenuSegue.m in Sources */,
+				8C4670F01D0DC4C7004F3C21 /* AbstractActionSheetPicker.m in Sources */,
 				95267BD71A1E26D000CC2A4B /* SearchViewController.swift in Sources */,
 				95FFAF181A19F0AA00E00C47 /* MDictAll.swift in Sources */,
 				95FFAF161A19F0AA00E00C47 /* LollyDB.swift in Sources */,
+				8C4670F81D0DC4C7004F3C21 /* SWActionSheet.m in Sources */,
+				8C4670F61D0DC4C7004F3C21 /* ActionSheetStringPicker.m in Sources */,
 				951BB9981A1B90260087DB94 /* LeftMenuViewController.swift in Sources */,
+				8C4670F21D0DC4C7004F3C21 /* ActionSheetDatePicker.m in Sources */,
 				8C0B7D581C9E662500791A99 /* DBObject.swift in Sources */,
 				95267BD31A1E268A00CC2A4B /* DictionaryViewController.swift in Sources */,
+				8C4670F41D0DC4C7004F3C21 /* ActionSheetLocalePicker.m in Sources */,
 				95FFAF0C1A19F07000E00C47 /* FMDatabaseAdditions.m in Sources */,
 				95FFAEFE1A19F03C00E00C47 /* UIViewController+AMSlideMenu.m in Sources */,
 				95FFAEFB1A19F03C00E00C47 /* AMSlideMenuMainViewController.m in Sources */,
 				953473DB1A0D16CF00FF2D56 /* AppDelegate.swift in Sources */,
-				8C4670961D099CAE004F3C21 /* SelectUnitsVM.swift in Sources */,
-				95FFAF171A19F0AA00E00C47 /* WordsOnlineVM.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

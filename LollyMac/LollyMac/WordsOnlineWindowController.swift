@@ -1,5 +1,5 @@
 //
-//  WordsOnlineWC.swift
+//  WordsOnlineWindowController.swift
 //  LollyMac
 //
 //  Created by zhaowei on 2014/11/11.
@@ -10,7 +10,7 @@ import Cocoa
 import WebKit
 import LollyShared
 
-class WordsOnlineWC: NSWindowController, NSTextFieldDelegate {
+class WordsOnlineWindowController: NSWindowController, NSTextFieldDelegate {
     
     @IBOutlet var wvDictOnline: WebView!
     @IBOutlet var sfWord: NSSearchField!
@@ -18,7 +18,7 @@ class WordsOnlineWC: NSWindowController, NSTextFieldDelegate {
     @IBOutlet var dictAllController: NSArrayController!
     
     var word = ""
-    var theWordsOnlineVM = WordsOnlineVM()
+    var theWordsOnlineViewModel = WordsOnlineViewModel()
     
     override init(window: NSWindow?) {
         super.init(window: window)
@@ -39,13 +39,13 @@ class WordsOnlineWC: NSWindowController, NSTextFieldDelegate {
         wvDictOnline.hidden = false
         wvDictOffline.hidden = true
 
-        let m = theWordsOnlineVM.currentDict
+        let m = theWordsOnlineViewModel.currentDict
         let url = m.urlString(word)
         wvDictOnline.mainFrameURL = url
     }
 
     @IBAction func langSelected(sender: AnyObject) {
-        dictAllController.content = theWordsOnlineVM.arrDictAll
+        dictAllController.content = theWordsOnlineViewModel.arrDictAll
         dictSelected(sender)
     }
     
@@ -69,7 +69,7 @@ class WordsOnlineWC: NSWindowController, NSTextFieldDelegate {
     
     func webView(sender: WebView!, didFinishLoadForFrame frame: WebFrame!) {
         if frame !== sender.mainFrame {return}
-        let m = theWordsOnlineVM.currentDict
+        let m = theWordsOnlineViewModel.currentDict
         if m.DICTTYPENAME != "OFFLINE-ONLINE" {return}
         
         let data = frame.dataSource!.data

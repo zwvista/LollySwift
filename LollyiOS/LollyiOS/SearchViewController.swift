@@ -9,7 +9,7 @@
 import UIKit
 
 class SearchViewController: UIViewController {
-    let theWordsOnlineVM = (UIApplication.sharedApplication().delegate as! AppDelegate).theWordsOnlineVM
+    let theWordsOnlineViewModel = (UIApplication.sharedApplication().delegate as! AppDelegate).theWordsOnlineViewModel
     
     @IBOutlet var tfWord: UITextField!
     @IBOutlet var wvDictOnline: UIWebView!
@@ -26,7 +26,7 @@ class SearchViewController: UIViewController {
         let str = NSString(bytes: utf8, length: utf8.count, encoding: NSUTF8StringEncoding) as! String
         btnMagnifyingGlass.setTitle(str, forState: UIControlState.Normal)
         btnMagnifyingGlass.sizeToFit()
-        btnMagnifyingGlass.addTarget(self, action: "searchDict", forControlEvents: .TouchUpInside);
+        btnMagnifyingGlass.addTarget(self, action: #selector(SearchViewController.searchDict), forControlEvents: .TouchUpInside);
         
         tfWord.leftView = btnMagnifyingGlass;
         tfWord.leftViewMode = .Always;
@@ -46,7 +46,7 @@ class SearchViewController: UIViewController {
         wvDictOffline.hidden = true
         
         word = tfWord.text!;
-        let m = theWordsOnlineVM.currentDict
+        let m = theWordsOnlineViewModel.currentDict
         let url = m.urlString(word)
         webViewFinished = false
         wvDictOnline.loadRequest(NSURLRequest(URL: NSURL(string: url)!))
@@ -61,7 +61,7 @@ class SearchViewController: UIViewController {
         if webView !== wvDictOnline || webView.stringByEvaluatingJavaScriptFromString("document.readyState") != "complete" || webViewFinished {return}
         
         webViewFinished = true
-        let m = theWordsOnlineVM.currentDict
+        let m = theWordsOnlineViewModel.currentDict
         if m.DICTTYPENAME != "OFFLINE-ONLINE" {return}
         
         let data = NSURLCache.sharedURLCache().cachedResponseForRequest(webView.request!)!.data;

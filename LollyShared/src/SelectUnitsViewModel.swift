@@ -1,5 +1,5 @@
 //
-//  SelectUnitsVM.swift
+//  SelectUnitsViewModel.swift
 //  LollyShared
 //
 //  Created by 趙偉 on 2016/06/09.
@@ -8,6 +8,6 @@
 
 import Foundation
 
-class SelectUnitsVM: NSObject {
+class SelectUnitsViewModel: NSObject {
 
 }

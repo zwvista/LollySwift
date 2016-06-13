@@ -13,8 +13,8 @@
 		9534740B1A0D170500FF2D56 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9534740A1A0D170500FF2D56 /* Images.xcassets */; };
 		9534740E1A0D170500FF2D56 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9534740C1A0D170500FF2D56 /* MainMenu.xib */; };
 		9534741A1A0D170500FF2D56 /* LollyMacTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953474191A0D170500FF2D56 /* LollyMacTests.swift */; };
-		95D376551A12077000970723 /* WordsOnlineWC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D376541A12077000970723 /* WordsOnlineWC.swift */; };
-		95D376571A12079D00970723 /* WordsOnlineWC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95D376561A12079D00970723 /* WordsOnlineWC.xib */; };
+		95D376551A12077000970723 /* WordsOnlineWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D376541A12077000970723 /* WordsOnlineWindowController.swift */; };
+		95D376571A12079D00970723 /* WordsOnlineWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95D376561A12079D00970723 /* WordsOnlineWindowController.xib */; };
 		95D376591A121D2B00970723 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95D376581A121D2B00970723 /* Cocoa.framework */; };
 		95D3765B1A121D3100970723 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95D3765A1A121D3100970723 /* WebKit.framework */; };
 		95D3765D1A121D3800970723 /* libLollyShared.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 95D3765C1A121D3800970723 /* libLollyShared.dylib */; };
@@ -53,8 +53,8 @@
 		9551C0731A1224C4002545AA /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
 		9551C0741A1224C4002545AA /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
 		9551C0751A1224C4002545AA /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
-		95D376541A12077000970723 /* WordsOnlineWC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsOnlineWC.swift; sourceTree = "<group>"; };
-		95D376561A12079D00970723 /* WordsOnlineWC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WordsOnlineWC.xib; sourceTree = "<group>"; };
+		95D376541A12077000970723 /* WordsOnlineWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsOnlineWindowController.swift; sourceTree = "<group>"; };
+		95D376561A12079D00970723 /* WordsOnlineWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WordsOnlineWindowController.xib; sourceTree = "<group>"; };
 		95D376581A121D2B00970723 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		95D3765A1A121D3100970723 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		95D3765C1A121D3800970723 /* libLollyShared.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libLollyShared.dylib; path = "../../../../../Library/Developer/Xcode/DerivedData/LollySwift-fswwksqlfurzvnbdwajqsggerzwn/Build/Products/Debug/libLollyShared.dylib"; sourceTree = "<group>"; };
@@ -111,8 +111,8 @@
 				9534740A1A0D170500FF2D56 /* Images.xcassets */,
 				9534740C1A0D170500FF2D56 /* MainMenu.xib */,
 				953474061A0D170500FF2D56 /* Supporting Files */,
-				95D376561A12079D00970723 /* WordsOnlineWC.xib */,
-				95D376541A12077000970723 /* WordsOnlineWC.swift */,
+				95D376561A12079D00970723 /* WordsOnlineWindowController.xib */,
+				95D376541A12077000970723 /* WordsOnlineWindowController.swift */,
 			);
 			path = LollyMac;
 			sourceTree = "<group>";
@@ -255,7 +255,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				95FFAEA91A18E5FC00E00C47 /* Lolly.db in Resources */,
-				95D376571A12079D00970723 /* WordsOnlineWC.xib in Resources */,
+				95D376571A12079D00970723 /* WordsOnlineWindowController.xib in Resources */,
 				9534740B1A0D170500FF2D56 /* Images.xcassets in Resources */,
 				9534740E1A0D170500FF2D56 /* MainMenu.xib in Resources */,
 				8C4703E71CFA7F4B00D95CD4 /* SelectUnitsDlg.xib in Resources */,
@@ -277,7 +277,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C4703E61CFA7F4B00D95CD4 /* SelectUnitsDlg.swift in Sources */,
-				95D376551A12077000970723 /* WordsOnlineWC.swift in Sources */,
+				95D376551A12077000970723 /* WordsOnlineWindowController.swift in Sources */,
 				953474091A0D170500FF2D56 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

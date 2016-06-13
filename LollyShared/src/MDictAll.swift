@@ -53,11 +53,12 @@ public class MDictAll: DBObject {
             if m == nil {break}
             text = NSMutableString(string: (html as NSString).substringWithRange(m!.range))
             
-            func f(var replacer: String) {
+            func f(replacer: String) {
+                var replacer2 = replacer
                 for (key, value) in dic {
-                    replacer = replacer.stringByReplacingOccurrencesOfString(key, withString: value)
+                    replacer2 = replacer2.stringByReplacingOccurrencesOfString(key, withString: value)
                 }
-                regex.replaceMatchesInString(text, options: NSMatchingOptions(), range: NSMakeRange(0, text.length), withTemplate: replacer)
+                regex.replaceMatchesInString(text, options: NSMatchingOptions(), range: NSMakeRange(0, text.length), withTemplate: replacer2)
             }
             
             f(arr[1])
@@ -68,10 +69,11 @@ public class MDictAll: DBObject {
                 }
             }
             
-            if arr.count > 2 {
-                for var i = 2; i < arr.count; {
-                    regex = try! NSRegularExpression(pattern: arr[i++], options: NSRegularExpressionOptions())
-                    f(arr[i++])
+            for i in 2 ..< arr.count {
+                if i % 2 == 0 {
+                    regex = try! NSRegularExpression(pattern: arr[i], options: NSRegularExpressionOptions())
+                } else {
+                    f(arr[i])
                 }
             }
             if debugExtract {

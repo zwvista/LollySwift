@@ -1,5 +1,5 @@
 //
-//  WordsOnlineVM.swift
+//  WordsOnlineViewModel.swift
 //  LollySharedSwift
 //
 //  Created by zhaowei on 2014/11/07.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class WordsOnlineVM: NSObject {
+public class WordsOnlineViewModel: NSObject {
     public var arrLanguages: [MLanguage]
     public var arrDictAll = [MDictAll]()
     public var currentLangIndex: Int {

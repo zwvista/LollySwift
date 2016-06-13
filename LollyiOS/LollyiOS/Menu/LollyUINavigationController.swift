@@ -45,7 +45,7 @@ class LollyUINavigationController: UINavigationController {
         * to deallocate recreatable resources
         */
         NSNotificationCenter.defaultCenter().addObserver(self,
-            selector: "handleDidReceiveMemoryWarning",
+            selector: #selector(LollyUINavigationController.handleDidReceiveMemoryWarning),
             name: UIApplicationDidReceiveMemoryWarningNotification,
             object: UIApplication.sharedApplication());
     }

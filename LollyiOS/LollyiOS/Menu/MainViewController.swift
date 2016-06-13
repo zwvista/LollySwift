@@ -14,7 +14,9 @@ class MainViewController: AMSlideMenuMainViewController {
         return
             indexPath.row == 0 ? "searchSegue" :
             indexPath.row == 1 ? "langSegue" :
-            "dictSegue"
+            indexPath.row == 2 ? "dictSegue" :
+            indexPath.row == 3 ? "settingsSegue" :
+            "searchSegue"
     }
     
     override func leftMenuWidth() -> CGFloat {

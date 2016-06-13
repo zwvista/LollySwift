@@ -9,7 +9,7 @@
 import UIKit
 
 class DictionaryViewController: UIViewController {
-    let theWordsOnlineVM = (UIApplication.sharedApplication().delegate as! AppDelegate).theWordsOnlineVM
+    let theWordsOnlineViewModel = (UIApplication.sharedApplication().delegate as! AppDelegate).theWordsOnlineViewModel
     
     @IBOutlet var tableView: UITableView!
     
@@ -19,7 +19,7 @@ class DictionaryViewController: UIViewController {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return theWordsOnlineVM.arrDictAll.count;
+        return theWordsOnlineViewModel.arrDictAll.count;
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -30,19 +30,19 @@ class DictionaryViewController: UIViewController {
             cell = UITableViewCell(style: .Default, reuseIdentifier: cellIdentifier)
         }
         
-        let m = theWordsOnlineVM.arrDictAll[indexPath.row]
+        let m = theWordsOnlineViewModel.arrDictAll[indexPath.row]
         cell!.textLabel!.text = m.DICTNAME
         cell!.detailTextLabel!.text = m.URL
-        cell!.accessoryType = indexPath.row == theWordsOnlineVM.currentDictIndex ? .Checkmark : .None;
+        cell!.accessoryType = indexPath.row == theWordsOnlineViewModel.currentDictIndex ? .Checkmark : .None;
         return cell!;
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let oldRow = theWordsOnlineVM.currentDictIndex;
+        let oldRow = theWordsOnlineViewModel.currentDictIndex;
         if indexPath.row == oldRow {return}
         let oldIndexPath = NSIndexPath(forRow: oldRow, inSection: 0)
         tableView.deselectRowAtIndexPath(oldIndexPath, animated: false)
-        theWordsOnlineVM.currentDictIndex = indexPath.row
+        theWordsOnlineViewModel.currentDictIndex = indexPath.row
         tableView.reloadRowsAtIndexPaths([oldIndexPath, indexPath], withRowAnimation: .None)
     }
 

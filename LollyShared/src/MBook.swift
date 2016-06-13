@@ -8,7 +8,7 @@
 
 import Foundation
 
-class MBook: DBObject {
+public class MBook: DBObject {
     public var BOOKID = 0
     public var LANGID = 0
     public var BOOKNAME: String?

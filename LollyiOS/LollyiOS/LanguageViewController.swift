@@ -9,7 +9,7 @@
 import UIKit
 
 class LanguageViewController: UIViewController {
-    let theWordsOnlineVM = (UIApplication.sharedApplication().delegate as! AppDelegate).theWordsOnlineVM
+    let theWordsOnlineViewModel = (UIApplication.sharedApplication().delegate as! AppDelegate).theWordsOnlineViewModel
     
     @IBOutlet var tableView: UITableView!
     
@@ -19,7 +19,7 @@ class LanguageViewController: UIViewController {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return theWordsOnlineVM.arrLanguages.count;
+        return theWordsOnlineViewModel.arrLanguages.count;
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -30,18 +30,18 @@ class LanguageViewController: UIViewController {
             cell = UITableViewCell(style: .Default, reuseIdentifier: cellIdentifier)
         }
         
-        let m = theWordsOnlineVM.arrLanguages[indexPath.row]
+        let m = theWordsOnlineViewModel.arrLanguages[indexPath.row]
         cell!.textLabel!.text = m.LANGNAME
-        cell!.accessoryType = indexPath.row == theWordsOnlineVM.currentLangIndex ? .Checkmark : .None;
+        cell!.accessoryType = indexPath.row == theWordsOnlineViewModel.currentLangIndex ? .Checkmark : .None;
         return cell!;
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let oldRow = theWordsOnlineVM.currentLangIndex;
+        let oldRow = theWordsOnlineViewModel.currentLangIndex;
         if indexPath.row == oldRow {return}
         let oldIndexPath = NSIndexPath(forRow: oldRow, inSection: 0)
         tableView.deselectRowAtIndexPath(oldIndexPath, animated: false)
-        theWordsOnlineVM.currentLangIndex = indexPath.row
+        theWordsOnlineViewModel.currentLangIndex = indexPath.row
         tableView.reloadRowsAtIndexPaths([oldIndexPath, indexPath], withRowAnimation: .None)
     }
 
