@@ -13,9 +13,8 @@ class MainViewController: AMSlideMenuMainViewController {
     override func segueIdentifierForIndexPathInLeftMenu(indexPath: NSIndexPath) -> String {
         return
             indexPath.row == 0 ? "searchSegue" :
-            indexPath.row == 1 ? "langSegue" :
-            indexPath.row == 2 ? "dictSegue" :
-            indexPath.row == 3 ? "settingsSegue" :
+            indexPath.row == 1 ? "settingsSegue" :
+            indexPath.row == 2 ? "selectUnitsSegue" :
             "searchSegue"
     }
     

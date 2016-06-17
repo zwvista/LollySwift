@@ -11,4 +11,5 @@ import Foundation
 public class MLanguage: DBObject {
     public var LANGID = 0
     public var LANGNAME: String?
+    public var CURBOOKID = 0
 }
