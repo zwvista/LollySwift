@@ -16,8 +16,10 @@ class SelectUnitsViewController: UITableViewController, ActionSheetCustomPickerD
     @IBOutlet weak var tfUnitFrom: UITextField!
     @IBOutlet weak var tfUnitTo: UITextField!
     @IBOutlet weak var swUnitTo: UISwitch!
+    @IBOutlet weak var lblPartFrom: UILabel!
+    @IBOutlet weak var lblPartTo: UILabel!
     
-    var selectedSection = 0
+    var selectedIndexPath = NSIndexPath()
     var selectedRow = 0
     
     override func viewDidLoad() {
@@ -32,12 +34,18 @@ class SelectUnitsViewController: UITableViewController, ActionSheetCustomPickerD
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        selectedSection = indexPath.section
-        switch selectedSection {
+        selectedIndexPath = indexPath
+        switch selectedIndexPath.section {
         case 0:
-            ActionSheetCustomPicker.showPickerWithTitle("Select A Language", delegate: self, showCancelButton: true, origin: langCell, initialSelections: [theSelectUnitsViewModel.currentLangIndex])
+            ActionSheetCustomPicker.showPickerWithTitle("Select Language", delegate: self, showCancelButton: true, origin: langCell, initialSelections: [theSelectUnitsViewModel.currentLangIndex])
         case 1:
-            ActionSheetCustomPicker.showPickerWithTitle("Select A Book", delegate: self, showCancelButton: true, origin: bookCell, initialSelections: [theSelectUnitsViewModel.currentBookIndex])
+            ActionSheetCustomPicker.showPickerWithTitle("Select Book", delegate: self, showCancelButton: true, origin: bookCell, initialSelections: [theSelectUnitsViewModel.currentBookIndex])
+        case 2:
+            if selectedIndexPath.row == 0 {
+                ActionSheetCustomPicker.showPickerWithTitle("Select Part", delegate: self, showCancelButton: true, origin: lblPartFrom, initialSelections: [theSelectUnitsViewModel.currentBook.PARTFROM - 1])
+            } else if selectedIndexPath.row == 2 {
+                ActionSheetCustomPicker.showPickerWithTitle("Select Part", delegate: self, showCancelButton: true, origin: lblPartTo, initialSelections: [theSelectUnitsViewModel.currentBook.PARTTO - 1])
+            }
         default:
             break
         }
@@ -48,24 +56,26 @@ class SelectUnitsViewController: UITableViewController, ActionSheetCustomPickerD
     }
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        switch selectedSection {
+        switch selectedIndexPath.section {
         case 0:
             return theSelectUnitsViewModel.arrLanguages.count
         case 1:
             return theSelectUnitsViewModel.arrBooks.count
+        case 2:
+            return theSelectUnitsViewModel.currentBook.partsAsArray.count
         default:
             return 0
         }
     }
     
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        switch selectedSection {
+        switch selectedIndexPath.section {
         case 0:
-            let m = theSelectUnitsViewModel.arrLanguages[row]
-            return m.LANGNAME
+            return theSelectUnitsViewModel.arrLanguages[row].LANGNAME
         case 1:
-            let m = theSelectUnitsViewModel.arrBooks[row]
-            return m.BOOKNAME
+            return theSelectUnitsViewModel.arrBooks[row].BOOKNAME
+        case 2:
+            return theSelectUnitsViewModel.currentBook.partsAsArray[row]
         default:
             return nil
         }
@@ -76,18 +86,27 @@ class SelectUnitsViewController: UITableViewController, ActionSheetCustomPickerD
     }
     
     func actionSheetPickerDidSucceed(actionSheetPicker: AbstractActionSheetPicker!, origin: AnyObject!) {
-        switch selectedSection {
+        switch selectedIndexPath.section {
         case 0:
-            let oldRow = theSelectUnitsViewModel.currentLangIndex
-            if selectedRow == oldRow {return}
+            if selectedRow == theSelectUnitsViewModel.currentLangIndex {return}
             theSelectUnitsViewModel.currentLangIndex = selectedRow
             updateLang()
             updateBook()
         case 1:
-            let oldRow = theSelectUnitsViewModel.currentBookIndex
-            if selectedRow == oldRow {return}
+            if selectedRow == theSelectUnitsViewModel.currentBookIndex {return}
             theSelectUnitsViewModel.currentBookIndex = selectedRow
             updateBook()
+        case 2:
+            let m = theSelectUnitsViewModel.currentBook
+            if selectedIndexPath.row == 0 {
+                if selectedRow == m.PARTFROM - 1 {return}
+                m.PARTFROM = selectedRow + 1
+                lblPartFrom.text = m.partsAsArray[selectedRow]
+            } else if selectedIndexPath.row == 2 {
+                if selectedRow == m.PARTTO - 1 {return}
+                m.PARTTO = selectedRow + 1
+                lblPartTo.text = m.partsAsArray[selectedRow]
+            }
         default:
             break
         }
@@ -106,6 +125,8 @@ class SelectUnitsViewController: UITableViewController, ActionSheetCustomPickerD
         tfUnitTo.text = "\(m.UNITTO)"
         swUnitTo.on = m.UNITFROM != m.UNITTO
         swUnitToValueChanged(self)
+        lblPartFrom.text = m.partsAsArray[m.PARTFROM - 1]
+        lblPartTo.text = m.partsAsArray[m.PARTTO - 1]
     }
 
     @IBAction func swUnitToValueChanged(sender: AnyObject) {

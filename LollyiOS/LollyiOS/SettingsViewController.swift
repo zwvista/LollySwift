@@ -32,9 +32,9 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
         selectedSection = indexPath.section
         switch selectedSection {
         case 0:
-            ActionSheetCustomPicker.showPickerWithTitle("Select A Language", delegate: self, showCancelButton: true, origin: langCell, initialSelections: [theWordsOnlineViewModel.currentLangIndex])
+            ActionSheetCustomPicker.showPickerWithTitle("Select Language", delegate: self, showCancelButton: true, origin: langCell, initialSelections: [theWordsOnlineViewModel.currentLangIndex])
         case 1:
-            ActionSheetCustomPicker.showPickerWithTitle("Select A Dictionary", delegate: self, showCancelButton: true, origin: dictCell, initialSelections: [theWordsOnlineViewModel.currentDictIndex])
+            ActionSheetCustomPicker.showPickerWithTitle("Select Dictionary", delegate: self, showCancelButton: true, origin: dictCell, initialSelections: [theWordsOnlineViewModel.currentDictIndex])
         default:
             break
         }

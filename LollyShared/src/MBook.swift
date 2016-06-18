@@ -18,4 +18,8 @@ public class MBook: DBObject {
     public var PARTFROM = 0
     public var UNITTO = 0
     public var PARTTO = 0
+    
+    public var partsAsArray: [String] {
+        return (PARTS?.componentsSeparatedByString(" "))!
+    }
 }
