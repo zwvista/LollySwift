@@ -24,34 +24,19 @@ class LollyDB: NSObject {
     func booksByLang(langID: Int) -> [MBook] {
         let sql = "SELECT * FROM BOOKS WHERE LANGID = ?"
         let results = try! db.executeQuery(sql, langID)
-        var array = [MBook]()
-        while results.next() {
-            let m = MBook(databaseResultSet: results)
-            array.append(m)
-        }
-        return array
+        return DBObject.dataFromResultSet(databaseResultSet: results)
     }
     
     func dictAllByLang(langID: Int) -> [MDictAll] {
         let sql = "SELECT * FROM DICTALL WHERE LANGID = ?"
         let results = try! db.executeQuery(sql, langID)
-        var array = [MDictAll]()
-        while results.next() {
-            let m = MDictAll(databaseResultSet: results)
-            array.append(m)
-        }
-        return array
+        return DBObject.dataFromResultSet(databaseResultSet: results)
     }
     
     func languages() -> [MLanguage] {
         let sql = "SELECT * FROM LANGUAGES WHERE LANGID <> 0"
         let results = try! db.executeQuery(sql)
-        var array = [MLanguage]()
-        while results.next() {
-            let m = MLanguage(databaseResultSet: results)
-            array.append(m)
-        }
-        return array
+        return DBObject.dataFromResultSet(databaseResultSet: results)
     }
     
     deinit {
