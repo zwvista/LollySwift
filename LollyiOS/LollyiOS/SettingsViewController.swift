@@ -91,12 +91,12 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
     }
     
     func updateLang() {
-        let m = theWordsOnlineViewModel.arrLanguages[theWordsOnlineViewModel.currentLangIndex]
+        let m = theWordsOnlineViewModel.currentLang
         langCell.textLabel!.text = m.LANGNAME
     }
     
     func updateDict() {
-        let m = theWordsOnlineViewModel.arrDictAll[theWordsOnlineViewModel.currentDictIndex]
+        let m = theWordsOnlineViewModel.currentDict
         dictCell.textLabel!.text = m.DICTNAME
         dictCell.detailTextLabel!.text = m.URL
     }

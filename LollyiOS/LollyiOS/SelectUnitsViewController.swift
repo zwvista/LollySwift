@@ -13,7 +13,10 @@ class SelectUnitsViewController: UITableViewController, ActionSheetCustomPickerD
     
     @IBOutlet weak var langCell: UITableViewCell!
     @IBOutlet weak var bookCell: UITableViewCell!
-
+    @IBOutlet weak var tfUnitFrom: UITextField!
+    @IBOutlet weak var tfUnitTo: UITextField!
+    @IBOutlet weak var swUnitTo: UISwitch!
+    
     var selectedSection = 0
     var selectedRow = 0
     
@@ -91,14 +94,21 @@ class SelectUnitsViewController: UITableViewController, ActionSheetCustomPickerD
     }
     
     func updateLang() {
-        let m = theSelectUnitsViewModel.arrLanguages[theSelectUnitsViewModel.currentLangIndex]
+        let m = theSelectUnitsViewModel.currentLang
         langCell.textLabel!.text = m.LANGNAME
     }
     
     func updateBook() {
-        let m = theSelectUnitsViewModel.arrBooks[theSelectUnitsViewModel.currentBookIndex]
+        let m = theSelectUnitsViewModel.currentBook
         bookCell.textLabel!.text = m.BOOKNAME
         bookCell.detailTextLabel!.text = "\(m.UNITSINBOOK) Units"
+        tfUnitFrom.text = "\(m.UNITFROM)"
+        tfUnitTo.text = "\(m.UNITTO)"
+        swUnitTo.on = m.UNITFROM != m.UNITTO
+        swUnitToValueChanged(self)
     }
 
+    @IBAction func swUnitToValueChanged(sender: AnyObject) {
+        tfUnitTo.enabled = swUnitTo.on
+    }
 }

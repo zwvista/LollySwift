@@ -10,12 +10,16 @@ import Foundation
 
 public class SelectUnitsViewModel: NSObject {
     public var arrLanguages: [MLanguage]
-    public var arrBooks = [MBook]()
     public var currentLangIndex: Int {
         didSet {
             setCurrentLangIndex()
         }
     }
+    public var currentLang: MLanguage {
+        return arrLanguages[currentLangIndex]
+    }
+    
+    public var arrBooks = [MBook]()
     public var currentBookIndex = 0
     public var currentBook: MBook {
         return arrBooks[currentBookIndex]
