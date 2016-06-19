@@ -25,6 +25,12 @@ public class WordsOnlineViewModel: NSObject {
         return arrDictAll[currentDictIndex]
     }
     
+    public var arrBooks = [MBook]()
+    public var currentBookIndex = 0
+    public var currentBook: MBook {
+        return arrBooks[currentBookIndex]
+    }
+    
     public override init() {
         arrLanguages = LollyDB.sharedInstance.languages()
         currentLangIndex = 2
@@ -36,5 +42,7 @@ public class WordsOnlineViewModel: NSObject {
         let m = arrLanguages[currentLangIndex]
         arrDictAll = LollyDB.sharedInstance.dictAllByLang(m.LANGID)
         currentDictIndex = 0
+        arrBooks = LollyDB.sharedInstance.booksByLang(m.LANGID)
+        currentBookIndex = arrBooks.indexOf{ $0.BOOKID == m.CURBOOKID }!
     }
 }
