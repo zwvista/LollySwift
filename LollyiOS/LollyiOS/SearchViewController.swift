@@ -8,29 +8,20 @@
 
 import UIKit
 
-class SearchViewController: UIViewController {
+class SearchViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate {
     let theWordsOnlineViewModel = (UIApplication.sharedApplication().delegate as! AppDelegate).theWordsOnlineViewModel
     
-    @IBOutlet var tfWord: UITextField!
     @IBOutlet var wvDictOnline: UIWebView!
     @IBOutlet var wvDictOffline: UIWebView!
 
+    @IBOutlet weak var sbword: UISearchBar!
+    
     var word = ""
     var webViewFinished = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let btnMagnifyingGlass = UIButton(type: .Custom)
-        let utf8 : [UInt8] = [0xF0, 0x9F, 0x94, 0x8D]
-        let str = NSString(bytes: utf8, length: utf8.count, encoding: NSUTF8StringEncoding) as! String
-        btnMagnifyingGlass.setTitle(str, forState: UIControlState.Normal)
-        btnMagnifyingGlass.sizeToFit()
-        btnMagnifyingGlass.addTarget(self, action: #selector(SearchViewController.searchDict), forControlEvents: .TouchUpInside);
-        
-        tfWord.leftView = btnMagnifyingGlass;
-        tfWord.leftViewMode = .Always;
-        tfWord.autoresizingMask = .FlexibleWidth;
         
         wvDictOnline.hidden = true
         wvDictOffline.hidden = true
@@ -41,20 +32,16 @@ class SearchViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func searchDict(sender: AnyObject) {
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         wvDictOnline.hidden = false
         wvDictOffline.hidden = true
         
-        word = tfWord.text!;
+        word = sbword.text!;
         let m = theWordsOnlineViewModel.currentDict
         let url = m.urlString(word)
         webViewFinished = false
         wvDictOnline.loadRequest(NSURLRequest(URL: NSURL(string: url)!))
-        tfWord.resignFirstResponder()
-    }
-        
-    @IBAction func tfWordDismiss(sender: AnyObject) {
-        searchDict(sender)
+        sbword.resignFirstResponder()
     }
     
     func webViewDidFinishLoad(webView: UIWebView) {

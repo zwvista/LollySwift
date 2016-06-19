@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--LollyUI Navigation Controller-->
@@ -32,28 +33,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="top" translatesAutoresizingMaskIntoConstraints="NO" id="j3Z-zR-mAl" userLabel="Top Toolbar">
-                                <rect key="frame" x="-8" y="64" width="608" height="44"/>
-                                <rect key="contentStretch" x="1" y="0.0" width="1" height="1"/>
-                                <items>
-                                    <barButtonItem title="Item" style="plain" id="mPI-RH-unZ">
-                                        <textField key="customView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="fill" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter a word here" minimumFontSize="17" clearButtonMode="whileEditing" id="Qd3-g2-IOn">
-                                            <rect key="frame" x="20" y="7" width="550" height="30"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits" returnKeyType="search"/>
-                                            <connections>
-                                                <action selector="tfWordDismiss:" destination="vXZ-lx-hvc" eventType="editingDidEndOnExit" id="p8e-U0-gCF"/>
-                                            </connections>
-                                        </textField>
-                                    </barButtonItem>
-                                    <barButtonItem title="Go" id="Hq0-vP-hn2">
-                                        <connections>
-                                            <action selector="searchDict:" destination="vXZ-lx-hvc" id="pb1-fd-aHy"/>
-                                        </connections>
-                                    </barButtonItem>
-                                </items>
-                            </toolbar>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="WeM-cp-4ab">
+                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="49t-V6-g9T"/>
+                                </connections>
+                            </searchBar>
                             <webView multipleTouchEnabled="YES" contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="r8x-qA-DhI" userLabel="Online WebView">
                                 <rect key="frame" x="0.0" y="108" width="600" height="435"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -71,25 +57,25 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="r8x-qA-DhI" firstAttribute="top" secondItem="j3Z-zR-mAl" secondAttribute="bottom" id="0aY-c1-rq7"/>
-                            <constraint firstAttribute="trailing" secondItem="j3Z-zR-mAl" secondAttribute="trailing" id="7V5-wn-Uvw"/>
                             <constraint firstAttribute="trailing" secondItem="r8x-qA-DhI" secondAttribute="trailing" id="9GJ-jX-OBp"/>
-                            <constraint firstItem="YPZ-Tn-9xD" firstAttribute="top" secondItem="j3Z-zR-mAl" secondAttribute="bottom" id="9Mh-n9-TmW"/>
                             <constraint firstItem="r8x-qA-DhI" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="EQw-8D-ver"/>
                             <constraint firstItem="CGW-Ox-CKK" firstAttribute="top" secondItem="r8x-qA-DhI" secondAttribute="bottom" constant="8" symbolic="YES" id="Kkr-hy-MfJ"/>
                             <constraint firstItem="CGW-Ox-CKK" firstAttribute="top" secondItem="YPZ-Tn-9xD" secondAttribute="bottom" constant="8" symbolic="YES" id="Kp8-w9-4wA"/>
-                            <constraint firstItem="j3Z-zR-mAl" firstAttribute="top" secondItem="MrK-Wa-SsT" secondAttribute="bottom" id="MhE-7E-JZV"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="WeM-cp-4ab" secondAttribute="trailing" constant="-20" id="Sxb-pM-Lm5"/>
+                            <constraint firstItem="YPZ-Tn-9xD" firstAttribute="top" secondItem="MrK-Wa-SsT" secondAttribute="bottom" constant="44" id="ZK2-Cz-Eq6"/>
                             <constraint firstAttribute="trailing" secondItem="YPZ-Tn-9xD" secondAttribute="trailing" id="b8j-TY-ZEW"/>
-                            <constraint firstItem="j3Z-zR-mAl" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="-8" id="m1O-VR-F5z"/>
                             <constraint firstItem="YPZ-Tn-9xD" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="rGl-lx-aP9"/>
+                            <constraint firstItem="r8x-qA-DhI" firstAttribute="top" secondItem="MrK-Wa-SsT" secondAttribute="bottom" constant="44" id="rQD-2P-Bph"/>
+                            <constraint firstItem="WeM-cp-4ab" firstAttribute="top" secondItem="MrK-Wa-SsT" secondAttribute="bottom" symbolic="YES" id="uY5-qf-k1x"/>
+                            <constraint firstItem="WeM-cp-4ab" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-20" id="yMv-9e-2wk"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Search" id="8jK-VO-dxx"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="tfWord" destination="Qd3-g2-IOn" id="TC9-fg-wK3"/>
-                        <outlet property="wvDictOffline" destination="YPZ-Tn-9xD" id="2xZ-XG-qT5"/>
-                        <outlet property="wvDictOnline" destination="r8x-qA-DhI" id="0m0-vH-v8A"/>
+                        <outlet property="sbword" destination="WeM-cp-4ab" id="dTE-XR-0MA"/>
+                        <outlet property="wvDictOffline" destination="YPZ-Tn-9xD" id="qgc-LD-JMZ"/>
+                        <outlet property="wvDictOnline" destination="r8x-qA-DhI" id="T72-OY-laX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>

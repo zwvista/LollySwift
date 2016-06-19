@@ -12,12 +12,8 @@ public class DBObject: NSObject {
     
     // http://stackoverflow.com/questions/25575030/how-to-convert-nsnull-to-nil-in-swift
     // http://stackoverflow.com/questions/32360733/null-string-crashes-swift-conditional
-    func nullToNil(value : AnyObject?) -> AnyObject? {
-        if value is NSNull {
-            return nil
-        } else {
-            return value
-        }
+    func nullToNil(value: AnyObject?) -> AnyObject? {
+        return value is NSNull ? nil : value;
     }
 
     required public init(databaseResultSet resultSet: FMResultSet) {
