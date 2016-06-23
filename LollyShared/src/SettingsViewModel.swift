@@ -32,7 +32,7 @@ public class SettingsViewModel: NSObject {
     }
     
     public override init() {
-        arrLanguages = LollyDB.sharedInstance.languages()
+        arrLanguages = MLanguage.data()
         currentLangIndex = 2
         super.init()
         setCurrentLangIndex()
@@ -40,9 +40,9 @@ public class SettingsViewModel: NSObject {
     
     private func setCurrentLangIndex() {
         let m = arrLanguages[currentLangIndex]
-        arrDictAll = LollyDB.sharedInstance.dictAllByLang(m.LANGID)
+        arrDictAll = MDictAll.dataByLang(m.LANGID)
         currentDictIndex = 0
-        arrBooks = LollyDB.sharedInstance.booksByLang(m.LANGID)
+        arrBooks = MBook.dataByLang(m.LANGID)
         currentBookIndex = arrBooks.indexOf{ $0.BOOKID == m.CURBOOKID }!
     }
 }

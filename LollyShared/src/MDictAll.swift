@@ -25,6 +25,12 @@ public class MDictAll: DBObject {
         return url
     }
     
+    static func dataByLang(langID: Int) -> [MDictAll] {
+        let sql = "SELECT * FROM DICTALL WHERE LANGID = ?"
+        let results = try! DBObject.db.executeQuery(sql, langID)
+        return DBObject.dataFromResultSet(databaseResultSet: results)
+    }
+    
     private let debugExtract = false
     
     public func htmlString(html: String, word: String) -> String {

@@ -30,4 +30,10 @@ public class MBook: DBObject {
     public var partsAsArray: [String] {
         return (PARTS?.componentsSeparatedByString(" "))!
     }
+    
+    static func dataByLang(langID: Int) -> [MBook] {
+        let sql = "SELECT * FROM BOOKS WHERE LANGID = ?"
+        let results = try! DBObject.db.executeQuery(sql, langID)
+        return DBObject.dataFromResultSet(databaseResultSet: results)
+    }
 }

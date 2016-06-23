@@ -18,7 +18,7 @@ public class DBObject: NSObject {
 
     required public init(databaseResultSet resultSet: FMResultSet) {
         super.init()
-        var propertyCount : CUnsignedInt = 0
+        var propertyCount: CUnsignedInt = 0
         let properties = class_copyPropertyList(self.dynamicType, &propertyCount)
         let dic = resultSet.columnNameToIndexMap;
         
@@ -32,7 +32,7 @@ public class DBObject: NSObject {
         free(properties)
     }
     
-    class func dataFromResultSet<T: DBObject>(databaseResultSet resultSet: FMResultSet) -> [T] {
+    static func dataFromResultSet<T: DBObject>(databaseResultSet resultSet: FMResultSet) -> [T] {
         var array = [T]()
         while resultSet.next() {
             let m = T(databaseResultSet: resultSet)
@@ -40,5 +40,6 @@ public class DBObject: NSObject {
         }
         return array
     }
-
+    
+    static let db = LollyDB.sharedInstance.db
 }

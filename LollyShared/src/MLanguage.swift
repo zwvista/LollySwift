@@ -12,4 +12,10 @@ public class MLanguage: DBObject {
     public var LANGID = 0
     public var LANGNAME: String?
     public var CURBOOKID = 0
+    
+    static func data() -> [MLanguage] {
+        let sql = "SELECT * FROM LANGUAGES WHERE LANGID <> 0"
+        let results = try! DBObject.db.executeQuery(sql)
+        return DBObject.dataFromResultSet(databaseResultSet: results)
+    }
 }
