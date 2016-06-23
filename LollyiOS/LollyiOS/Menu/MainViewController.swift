@@ -14,7 +14,7 @@ class MainViewController: AMSlideMenuMainViewController {
         return
             indexPath.row == 0 ? "searchSegue" :
             indexPath.row == 1 ? "settingsSegue" :
-            indexPath.row == 2 ? "selectUnitsSegue" :
+            indexPath.row == 2 ? "wordsSegue" :
             "searchSegue"
     }
     

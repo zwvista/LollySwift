@@ -9,7 +9,7 @@
 import UIKit
 
 class SearchViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate {
-    let theWordsOnlineViewModel = (UIApplication.sharedApplication().delegate as! AppDelegate).theWordsOnlineViewModel
+    let theSettingsViewModel = (UIApplication.sharedApplication().delegate as! AppDelegate).theSettingsViewModel
     
     @IBOutlet var wvDictOnline: UIWebView!
     @IBOutlet var wvDictOffline: UIWebView!
@@ -37,7 +37,7 @@ class SearchViewController: UIViewController, UIWebViewDelegate, UISearchBarDele
         wvDictOffline.hidden = true
         
         word = sbword.text!;
-        let m = theWordsOnlineViewModel.currentDict
+        let m = theSettingsViewModel.currentDict
         let url = m.urlString(word)
         webViewFinished = false
         wvDictOnline.loadRequest(NSURLRequest(URL: NSURL(string: url)!))
@@ -48,7 +48,7 @@ class SearchViewController: UIViewController, UIWebViewDelegate, UISearchBarDele
         if webView !== wvDictOnline || webView.stringByEvaluatingJavaScriptFromString("document.readyState") != "complete" || webViewFinished {return}
         
         webViewFinished = true
-        let m = theWordsOnlineViewModel.currentDict
+        let m = theSettingsViewModel.currentDict
         if m.DICTTYPENAME != "OFFLINE-ONLINE" {return}
         
         let data = NSURLCache.sharedURLCache().cachedResponseForRequest(webView.request!)!.data;

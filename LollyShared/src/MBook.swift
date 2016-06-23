@@ -19,6 +19,14 @@ public class MBook: DBObject {
     public var UNITTO = 0
     public var PARTTO = 0
     
+    public var unitsAsArray: [String] {
+        var arr = [String]();
+        for i in 1 ... UNITSINBOOK {
+            arr.append("\(i)")
+        }
+        return arr
+    }
+    
     public var partsAsArray: [String] {
         return (PARTS?.componentsSeparatedByString(" "))!
     }

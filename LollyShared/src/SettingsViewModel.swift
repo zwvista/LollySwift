@@ -1,5 +1,5 @@
 //
-//  WordsOnlineViewModel.swift
+//  SettingsViewModel.swift
 //  LollyShared
 //
 //  Created by zhaowei on 2014/11/07.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class WordsOnlineViewModel: NSObject {
+public class SettingsViewModel: NSObject {
     public var arrLanguages: [MLanguage]
     public var currentLangIndex: Int {
         didSet {

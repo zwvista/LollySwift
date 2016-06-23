@@ -19,12 +19,12 @@
 		95560D941A0E671700BB7322 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 95507B701A0D216F00DE1242 /* FMResultSet.m */; };
 		95560D951A0E671700BB7322 /* FMDatabaseVariadic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95507B7E1A0D21F600DE1242 /* FMDatabaseVariadic.swift */; };
 		95560D961A0E671700BB7322 /* LollyDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95633B031A0D1A1300885756 /* LollyDB.swift */; };
-		95560D971A0E671700BB7322 /* WordsOnlineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95633B041A0D1A1300885756 /* WordsOnlineViewModel.swift */; };
+		95560D971A0E671700BB7322 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95633B041A0D1A1300885756 /* SettingsViewModel.swift */; };
 		95560D981A0E671700BB7322 /* MDictAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95633B061A0D1A1300885756 /* MDictAll.swift */; };
 		95560D991A0E671700BB7322 /* MLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95633B071A0D1A1300885756 /* MLanguage.swift */; };
 		95560D9A1A0E675B00BB7322 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95560D4A1A0E619B00BB7322 /* Foundation.framework */; };
 		95633B271A0D1A8900885756 /* LollyDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95633B031A0D1A1300885756 /* LollyDB.swift */; };
-		95633B281A0D1A8900885756 /* WordsOnlineViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95633B041A0D1A1300885756 /* WordsOnlineViewModel.swift */; };
+		95633B281A0D1A8900885756 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95633B041A0D1A1300885756 /* SettingsViewModel.swift */; };
 		95633B291A0D1A8900885756 /* MDictAll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95633B061A0D1A1300885756 /* MDictAll.swift */; };
 		95633B2A1A0D1A8900885756 /* MLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95633B071A0D1A1300885756 /* MLanguage.swift */; };
 		958B64341A0E4F1F00645049 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 95507B671A0D216F00DE1242 /* FMDatabase.m */; };
@@ -88,7 +88,7 @@
 		95560D831A0E66EC00BB7322 /* LollyShared-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "LollyShared-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		95560D891A0E66EC00BB7322 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		95633B031A0D1A1300885756 /* LollyDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LollyDB.swift; sourceTree = "<group>"; };
-		95633B041A0D1A1300885756 /* WordsOnlineViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsOnlineViewModel.swift; sourceTree = "<group>"; };
+		95633B041A0D1A1300885756 /* SettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		95633B051A0D1A1300885756 /* LollyShared-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LollyShared-Bridging-Header.h"; sourceTree = "<group>"; };
 		95633B061A0D1A1300885756 /* MDictAll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDictAll.swift; sourceTree = "<group>"; };
 		95633B071A0D1A1300885756 /* MLanguage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLanguage.swift; sourceTree = "<group>"; };
@@ -240,7 +240,7 @@
 				8C4670911D099BBB004F3C21 /* MBook.swift */,
 				95633B061A0D1A1300885756 /* MDictAll.swift */,
 				95633B071A0D1A1300885756 /* MLanguage.swift */,
-				95633B041A0D1A1300885756 /* WordsOnlineViewModel.swift */,
+				95633B041A0D1A1300885756 /* SettingsViewModel.swift */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -398,7 +398,7 @@
 				95633B2A1A0D1A8900885756 /* MLanguage.swift in Sources */,
 				958B64391A0E4F1F00645049 /* FMDatabaseVariadic.swift in Sources */,
 				95633B271A0D1A8900885756 /* LollyDB.swift in Sources */,
-				95633B281A0D1A8900885756 /* WordsOnlineViewModel.swift in Sources */,
+				95633B281A0D1A8900885756 /* SettingsViewModel.swift in Sources */,
 				958B64341A0E4F1F00645049 /* FMDatabase.m in Sources */,
 				8C0B7D551C9E532F00791A99 /* DBObject.swift in Sources */,
 				958B64381A0E4F1F00645049 /* FMResultSet.m in Sources */,
@@ -431,7 +431,7 @@
 				95560D911A0E671700BB7322 /* FMDatabaseAdditions.m in Sources */,
 				95560D941A0E671700BB7322 /* FMResultSet.m in Sources */,
 				95560D961A0E671700BB7322 /* LollyDB.swift in Sources */,
-				95560D971A0E671700BB7322 /* WordsOnlineViewModel.swift in Sources */,
+				95560D971A0E671700BB7322 /* SettingsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

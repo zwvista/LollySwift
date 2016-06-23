@@ -18,7 +18,7 @@ class WordsOnlineWindowController: NSWindowController, NSTextFieldDelegate {
     @IBOutlet var dictAllController: NSArrayController!
     
     var word = ""
-    var theWordsOnlineViewModel = WordsOnlineViewModel()
+    var theSettingsViewModel = SettingsViewModel()
     
     override init(window: NSWindow?) {
         super.init(window: window)
@@ -39,13 +39,13 @@ class WordsOnlineWindowController: NSWindowController, NSTextFieldDelegate {
         wvDictOnline.hidden = false
         wvDictOffline.hidden = true
 
-        let m = theWordsOnlineViewModel.currentDict
+        let m = theSettingsViewModel.currentDict
         let url = m.urlString(word)
         wvDictOnline.mainFrameURL = url
     }
 
     @IBAction func langSelected(sender: AnyObject) {
-        dictAllController.content = theWordsOnlineViewModel.arrDictAll
+        dictAllController.content = theSettingsViewModel.arrDictAll
         dictSelected(sender)
     }
     
@@ -69,7 +69,7 @@ class WordsOnlineWindowController: NSWindowController, NSTextFieldDelegate {
     
     func webView(sender: WebView!, didFinishLoadForFrame frame: WebFrame!) {
         if frame !== sender.mainFrame {return}
-        let m = theWordsOnlineViewModel.currentDict
+        let m = theSettingsViewModel.currentDict
         if m.DICTTYPENAME != "OFFLINE-ONLINE" {return}
         
         let data = frame.dataSource!.data

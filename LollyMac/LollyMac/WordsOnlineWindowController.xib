@@ -96,7 +96,7 @@
                         <connections>
                             <action selector="dictSelected:" target="-2" id="QPP-9J-KKE"/>
                             <binding destination="JBh-aJ-rbd" name="content" keyPath="arrangedObjects.DICTNAME" id="Hox-Np-0vp"/>
-                            <binding destination="-2" name="selectedIndex" keyPath="theWordsOnlineViewModel.currentDictIndex" previousBinding="Hox-Np-0vp" id="uyp-v5-UAs"/>
+                            <binding destination="-2" name="selectedIndex" keyPath="theSettingsViewModel.currentDictIndex" previousBinding="Hox-Np-0vp" id="uyp-v5-UAs"/>
                         </connections>
                     </popUpButton>
                     <popUpButton verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BQ6-2N-bOq">
@@ -119,7 +119,7 @@
                             <action selector="langSelected:" target="-2" id="jFN-aD-clG"/>
                             <binding destination="ptQ-R2-djF" name="contentValues" keyPath="arrangedObjects.LANGID" previousBinding="POg-Ki-HlG" id="kff-sh-aR5"/>
                             <binding destination="ptQ-R2-djF" name="content" keyPath="arrangedObjects.LANGNAME" id="POg-Ki-HlG"/>
-                            <binding destination="-2" name="selectedIndex" keyPath="theWordsOnlineViewModel.currentLangIndex" id="ISP-Zk-e8b"/>
+                            <binding destination="-2" name="selectedIndex" keyPath="theSettingsViewModel.currentLangIndex" id="ISP-Zk-e8b"/>
                         </connections>
                     </popUpButton>
                 </subviews>
@@ -151,7 +151,7 @@
         </window>
         <arrayController id="ptQ-R2-djF" userLabel="Languages Controller">
             <connections>
-                <binding destination="-2" name="contentArray" keyPath="theWordsOnlineViewModel.arrLanguages" id="Vik-xG-NH7"/>
+                <binding destination="-2" name="contentArray" keyPath="theSettingsViewModel.arrLanguages" id="Vik-xG-NH7"/>
             </connections>
         </arrayController>
         <arrayController id="JBh-aJ-rbd" userLabel="DictAll Controller"/>
