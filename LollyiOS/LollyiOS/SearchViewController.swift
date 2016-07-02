@@ -22,14 +22,8 @@ class SearchViewController: UIViewController, UIWebViewDelegate, UISearchBarDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         wvDictOnline.hidden = true
         wvDictOffline.hidden = true
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {

@@ -17,9 +17,9 @@ public class MWordUnit: DBObject {
     public var WORD: String?
     public var NOTE: String?
 
-    static func getDataByBookUnitParts(bookid: Int, unitpartfrom: Int, unitpartto: Int) -> [MWordUnit] {
+    static func getDataByBook(bookid: Int, unitPartFrom: Int, unitPartTo: Int) -> [MWordUnit] {
         let sql = "SELECT * FROM WORDSBOOK WHERE BOOKID=? AND UNIT*10+PART>=? AND UNIT*10+PART<=?"
-        let results = try! DBObject.db.executeQuery(sql, bookid, unitpartfrom, unitpartto)
+        let results = try! DBObject.db.executeQuery(sql, bookid, unitPartFrom, unitPartTo)
         return DBObject.dataFromResultSet(databaseResultSet: results)
     }
 }

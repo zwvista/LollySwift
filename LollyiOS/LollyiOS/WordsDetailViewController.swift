@@ -9,21 +9,18 @@
 import UIKit
 
 class WordsDetailViewController: UIViewController {
+    let theSettingsViewModel = (UIApplication.sharedApplication().delegate as! AppDelegate).theSettingsViewModel
+    
+    @IBOutlet weak var wvWord: UIWebView!
+    var word = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        navigationItem.title = word
+        let m = theSettingsViewModel.currentDict
+        let url = m.urlString(word)
+        wvWord.loadRequest(NSURLRequest(URL: NSURL(string: url)!))
     }
 
 }

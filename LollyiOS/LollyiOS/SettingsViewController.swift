@@ -38,11 +38,6 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
         updateLang()
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         selectedIndexPath = indexPath
         switch selectedIndexPath.section {

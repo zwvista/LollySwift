@@ -15,7 +15,7 @@ public class WordsViewModel: NSObject {
     public init(settings: SettingsViewModel) {
         self.settings = settings
         let m = settings.arrBooks[settings.currentBookIndex]
-        arrWords = MWordUnit.getDataByBookUnitParts(m.BOOKID, unitpartfrom: m.UNITFROM * 10 + m.PARTFROM, unitpartto: m.UNITTO * 10 + m.PARTTO)
+        arrWords = MWordUnit.getDataByBook(m.BOOKID, unitPartFrom: m.UNITFROM * 10 + m.PARTFROM, unitPartTo: m.UNITTO * 10 + m.PARTTO)
     }
 
 }
