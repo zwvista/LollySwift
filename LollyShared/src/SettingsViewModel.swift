@@ -32,7 +32,7 @@ public class SettingsViewModel: NSObject {
     }
     
     public override init() {
-        arrLanguages = MLanguage.data()
+        arrLanguages = MLanguage.getData()
         currentLangIndex = 2
         super.init()
         setCurrentLangIndex()
@@ -40,9 +40,9 @@ public class SettingsViewModel: NSObject {
     
     private func setCurrentLangIndex() {
         let m = arrLanguages[currentLangIndex]
-        arrDictAll = MDictAll.dataByLang(m.LANGID)
+        arrDictAll = MDictAll.getDataByLang(m.LANGID)
         currentDictIndex = 0
-        arrBooks = MBook.dataByLang(m.LANGID)
+        arrBooks = MBook.getDataByLang(m.LANGID)
         currentBookIndex = arrBooks.indexOf{ $0.BOOKID == m.CURBOOKID }!
     }
 }

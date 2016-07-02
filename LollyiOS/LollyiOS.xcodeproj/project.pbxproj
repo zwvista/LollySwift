@@ -11,6 +11,8 @@
 		8C0A42701D1B5C4F00442EDB /* WordsMasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0A426F1D1B5C4F00442EDB /* WordsMasterViewController.swift */; };
 		8C0B7D581C9E662500791A99 /* DBObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0B7D571C9E662500791A99 /* DBObject.swift */; };
 		8C2EB0F51D1C020600FB8AE9 /* WordsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2EB0F41D1C020600FB8AE9 /* WordsDetailViewController.swift */; };
+		8C2EB0FC1D1FC9B100FB8AE9 /* MWordUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2EB0FB1D1FC9B100FB8AE9 /* MWordUnit.swift */; };
+		8C2EB0FE1D22241C00FB8AE9 /* WordsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2EB0FD1D22241C00FB8AE9 /* WordsViewModel.swift */; };
 		8C4670951D099CAE004F3C21 /* MBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4670931D099CAE004F3C21 /* MBook.swift */; };
 		8C4670F01D0DC4C7004F3C21 /* AbstractActionSheetPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4670DD1D0DC4C7004F3C21 /* AbstractActionSheetPicker.m */; };
 		8C4670F11D0DC4C7004F3C21 /* ActionSheetCustomPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4670DF1D0DC4C7004F3C21 /* ActionSheetCustomPicker.m */; };
@@ -68,6 +70,8 @@
 		8C0A426F1D1B5C4F00442EDB /* WordsMasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsMasterViewController.swift; sourceTree = "<group>"; };
 		8C0B7D571C9E662500791A99 /* DBObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBObject.swift; sourceTree = "<group>"; };
 		8C2EB0F41D1C020600FB8AE9 /* WordsDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsDetailViewController.swift; sourceTree = "<group>"; };
+		8C2EB0FB1D1FC9B100FB8AE9 /* MWordUnit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MWordUnit.swift; sourceTree = "<group>"; };
+		8C2EB0FD1D22241C00FB8AE9 /* WordsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsViewModel.swift; sourceTree = "<group>"; };
 		8C4670931D099CAE004F3C21 /* MBook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MBook.swift; sourceTree = "<group>"; };
 		8C4670DC1D0DC4C7004F3C21 /* AbstractActionSheetPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractActionSheetPicker.h; sourceTree = "<group>"; };
 		8C4670DD1D0DC4C7004F3C21 /* AbstractActionSheetPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbstractActionSheetPicker.m; sourceTree = "<group>"; };
@@ -322,10 +326,12 @@
 			children = (
 				8C0B7D571C9E662500791A99 /* DBObject.swift */,
 				95FFAF111A19F0AA00E00C47 /* LollyDB.swift */,
-				8C4670931D099CAE004F3C21 /* MBook.swift */,
 				95FFAF141A19F0AA00E00C47 /* MDictAll.swift */,
 				95FFAF151A19F0AA00E00C47 /* MLanguage.swift */,
+				8C4670931D099CAE004F3C21 /* MBook.swift */,
+				8C2EB0FB1D1FC9B100FB8AE9 /* MWordUnit.swift */,
 				8C4670FA1D0DC599004F3C21 /* SettingsViewModel.swift */,
+				8C2EB0FD1D22241C00FB8AE9 /* WordsViewModel.swift */,
 			);
 			name = src;
 			path = ../LollyShared/src;
@@ -445,6 +451,7 @@
 				8C2EB0F51D1C020600FB8AE9 /* WordsDetailViewController.swift in Sources */,
 				95FFAF0D1A19F07000E00C47 /* FMDatabasePool.m in Sources */,
 				95FFAF0F1A19F07000E00C47 /* FMResultSet.m in Sources */,
+				8C2EB0FC1D1FC9B100FB8AE9 /* MWordUnit.swift in Sources */,
 				951BB9901A1B780B0087DB94 /* FMDatabaseVariadic.swift in Sources */,
 				95FFAEFD1A19F03C00E00C47 /* AMSlideMenuRightTableViewController.m in Sources */,
 				95FFAEFC1A19F03C00E00C47 /* AMSlideMenuRightMenuSegue.m in Sources */,
@@ -466,6 +473,7 @@
 				8C4670F21D0DC4C7004F3C21 /* ActionSheetDatePicker.m in Sources */,
 				8C0B7D581C9E662500791A99 /* DBObject.swift in Sources */,
 				8C4670F41D0DC4C7004F3C21 /* ActionSheetLocalePicker.m in Sources */,
+				8C2EB0FE1D22241C00FB8AE9 /* WordsViewModel.swift in Sources */,
 				95FFAF0C1A19F07000E00C47 /* FMDatabaseAdditions.m in Sources */,
 				95FFAEFE1A19F03C00E00C47 /* UIViewController+AMSlideMenu.m in Sources */,
 				8C0A42701D1B5C4F00442EDB /* WordsMasterViewController.swift in Sources */,

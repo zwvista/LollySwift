@@ -147,7 +147,7 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
                     self.lblUnitTo.text = self.lblUnitFrom.text
                 }
             }, cancelBlock: nil, origin: lblUnitFrom)
-        } else if lbl === lblUnitTo {
+        } else if lbl === lblUnitTo && swUnitTo.on {
             ActionSheetStringPicker.showPickerWithTitle("Select Unit(To)", rows: m.unitsAsArray, initialSelection: m.UNITTO - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
                 m.UNITTO = selectedIndex + 1
                 self.lblUnitTo.text = m.unitsAsArray[selectedIndex]
@@ -161,7 +161,7 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
                     self.lblPartTo.text = self.lblPartFrom.text
                 }
             }, cancelBlock: nil, origin: lblPartFrom)
-        } else if lbl === lblPartTo {
+        } else if lbl === lblPartTo && swUnitTo.on {
             ActionSheetStringPicker.showPickerWithTitle("Select Part", rows: m.partsAsArray, initialSelection: m.PARTTO - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
                 m.PARTTO = selectedIndex + 1
                 self.lblPartTo.text = m.partsAsArray[selectedIndex]

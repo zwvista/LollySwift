@@ -25,7 +25,7 @@ public class MDictAll: DBObject {
         return url
     }
     
-    static func dataByLang(langID: Int) -> [MDictAll] {
+    static func getDataByLang(langID: Int) -> [MDictAll] {
         let sql = "SELECT * FROM DICTALL WHERE LANGID = ?"
         let results = try! DBObject.db.executeQuery(sql, langID)
         return DBObject.dataFromResultSet(databaseResultSet: results)
@@ -96,9 +96,9 @@ public class MDictAll: DBObject {
 //            regex.replaceMatchesInString(newTemplate, options: NSMatchingOptions.allZeros, range: NSMakeRange(0, newTemplate.length), withTemplate: "%@")
 //            text = NSMutableString(format: newTemplate, word, "", text)
 
-            template = template.stringByReplacingOccurrencesOfString("{0}", withString: "\(word)")
+            template = template.stringByReplacingOccurrencesOfString("{0}", withString: word)
                 .stringByReplacingOccurrencesOfString("{1}", withString: "")
-                .stringByReplacingOccurrencesOfString("{2}", withString: "\(text)")
+                .stringByReplacingOccurrencesOfString("{2}", withString: text as String)
             text = NSMutableString(string: template)
         
         } while false
