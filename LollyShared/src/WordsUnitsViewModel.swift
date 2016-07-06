@@ -11,11 +11,18 @@ import Foundation
 public class WordsUnitsViewModel: NSObject {
     public var settings: SettingsViewModel
     public var arrWords: [MWordUnit]
+    public var arrWordsFiltered: [MWordUnit]?
     
     public init(settings: SettingsViewModel) {
         self.settings = settings
         let m = settings.arrBooks[settings.currentBookIndex]
         arrWords = MWordUnit.getDataByBook(m.BOOKID, unitPartFrom: m.UNITFROM * 10 + m.PARTFROM, unitPartTo: m.UNITTO * 10 + m.PARTTO)
+    }
+    
+    public func filterWordsForSearchText(searchText: String, scope: String) {
+        arrWordsFiltered = arrWords.filter({ (m) -> Bool in
+            return m.WORD!.containsString(searchText)
+        })
     }
 
 }

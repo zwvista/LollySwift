@@ -12,6 +12,7 @@ class WordsBaseViewController: UIViewController {
 
     // https://www.raywenderlich.com/113772/uisearchcontroller-tutorial
     let searchController = UISearchController(searchResultsController: nil)
+    var searchBar: UISearchBar { return searchController.searchBar }
     var word = ""
     
     @IBOutlet weak var tableView: UITableView!
@@ -24,9 +25,9 @@ class WordsBaseViewController: UIViewController {
         // Setup the Search Controller
         definesPresentationContext = true
         searchController.dimsBackgroundDuringPresentation = false
-        searchController.searchBar.scopeButtonTitles = ["Word", "Translation"]
-        searchController.searchBar.sizeToFit()
-        searchBarContainerView.addSubview(searchController.searchBar)
+        searchBar.scopeButtonTitles = ["Word", "Translation"]
+        searchBar.sizeToFit()
+        searchBarContainerView.addSubview(searchBar)
     }
     
     override func viewWillAppear(animated: Bool) {

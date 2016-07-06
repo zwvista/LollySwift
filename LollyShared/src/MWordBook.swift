@@ -16,10 +16,14 @@ public class MWordBook: DBObject {
     public var SEQNUM = 0
     public var WORD: String?
     public var NOTE: String?
+    public var BOOKNAME: String?
     
-    static func getDataByBook(bookid: Int, unitPartFrom: Int, unitPartTo: Int) -> [MWordBook] {
-        let sql = "SELECT * FROM WORDSBOOK WHERE BOOKID=? AND UNIT*10+PART>=? AND UNIT*10+PART<=?"
-        let results = try! DBObject.db.executeQuery(sql, bookid, unitPartFrom, unitPartTo)
+    static func getDataByLang(langid: Int) -> [MWordBook] {
+        let sql = ["SELECT WORDSBOOK.ID, WORDSBOOK.BOOKID, WORDSBOOK.UNIT, WORDSBOOK.PART, ",
+            "WORDSBOOK.SEQNUM, WORDSBOOK.WORD, BOOKS.BOOKNAME, WORDSBOOK.[NOTE]  ",
+            "FROM (WORDSBOOK INNER JOIN BOOKS ON WORDSBOOK.BOOKID = BOOKS.BOOKID) ",
+            "WHERE (BOOKS.LANGID = ?)"].joinWithSeparator("\n")
+        let results = try! DBObject.db.executeQuery(sql, langid)
         return DBObject.dataFromResultSet(databaseResultSet: results)
     }
 }

@@ -11,27 +11,30 @@ import UIKit
 class WordsBookViewController: WordsBaseViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating {
 
     var wordsBookViewModel: WordsBookViewModel!
+    var arrWords: [MWordBook] {
+        return searchController.active && searchBar.text != "" ? wordsBookViewModel.arrWordsFiltered! : wordsBookViewModel.arrWords
+    }
 
     override func viewDidLoad() {
         wordsBookViewModel = WordsBookViewModel(settings: AppDelegate.theSettingsViewModel)
         super.viewDidLoad()
         searchController.searchResultsUpdater = self
-        searchController.searchBar.delegate = self
+        searchBar.delegate = self
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return wordsBookViewModel.arrWords.count
+        return arrWords.count
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("WordCell", forIndexPath: indexPath)
-        let m = wordsBookViewModel.arrWords[indexPath.row]
+        let m = arrWords[indexPath.row]
         cell.textLabel!.text = m.WORD
         return cell;
     }
     
     func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
-        let m = wordsBookViewModel.arrWords[indexPath.row]
+        let m = arrWords[indexPath.row]
         word = m.WORD!
         return indexPath
     }
@@ -40,5 +43,7 @@ class WordsBookViewController: WordsBaseViewController, UITableViewDelegate, UIT
     }
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
+        wordsBookViewModel.filterWordsForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex])
+        tableView.reloadData()
     }
 }

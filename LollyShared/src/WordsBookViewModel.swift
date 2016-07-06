@@ -10,12 +10,19 @@ import Foundation
 
 public class WordsBookViewModel: NSObject {
     public var settings: SettingsViewModel
-    public var arrWords: [MWordUnit]
+    public var arrWords: [MWordBook]
+    public var arrWordsFiltered: [MWordBook]?
     
     public init(settings: SettingsViewModel) {
         self.settings = settings
         let m = settings.arrBooks[settings.currentBookIndex]
-        arrWords = MWordUnit.getDataByBook(m.BOOKID, unitPartFrom: m.UNITFROM * 10 + m.PARTFROM, unitPartTo: m.UNITTO * 10 + m.PARTTO)
+        arrWords = MWordBook.getDataByLang(m.LANGID)
+    }
+    
+    public func filterWordsForSearchText(searchText: String, scope: String) {
+        arrWordsFiltered = arrWords.filter({ (m) -> Bool in
+            return m.WORD!.containsString(searchText)
+        })
     }
 
 }
