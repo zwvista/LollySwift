@@ -14,7 +14,9 @@ class MainViewController: AMSlideMenuMainViewController {
         return
             indexPath.row == 0 ? "searchSegue" :
             indexPath.row == 1 ? "settingsSegue" :
-            indexPath.row == 2 ? "wordsSegue" :
+            indexPath.row == 2 ? "wordsUnitsSegue" :
+            indexPath.row == 3 ? "wordsBookSegue" :
+            indexPath.row == 4 ? "wordsLangSegue" :
             "searchSegue"
     }
     
@@ -56,5 +58,4 @@ class MainViewController: AMSlideMenuMainViewController {
     override func maxDarknessWhileLeftMenu() -> CGFloat {
         return 0.5
     }
-
 }

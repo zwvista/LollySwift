@@ -9,8 +9,7 @@
 import UIKit
 
 class WordsDetailViewController: UIViewController {
-    let theSettingsViewModel = (UIApplication.sharedApplication().delegate as! AppDelegate).theSettingsViewModel
-    
+
     @IBOutlet weak var wvWord: UIWebView!
     var word = ""
 
@@ -18,7 +17,7 @@ class WordsDetailViewController: UIViewController {
         super.viewDidLoad()
 
         navigationItem.title = word
-        let m = theSettingsViewModel.currentDict
+        let m = AppDelegate.theSettingsViewModel.currentDict
         let url = m.urlString(word)
         wvWord.loadRequest(NSURLRequest(URL: NSURL(string: url)!))
     }

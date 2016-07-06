@@ -1,5 +1,5 @@
 //
-//  WordsViewModel.swift
+//  WordsUnitsViewModel.swift
 //  LollyiOS
 //
 //  Created by 趙偉 on 2016/06/28.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class WordsViewModel: NSObject {
+public class WordsUnitsViewModel: NSObject {
     public var settings: SettingsViewModel
     public var arrWords: [MWordUnit]
     

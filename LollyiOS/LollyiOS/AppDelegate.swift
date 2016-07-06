@@ -12,7 +12,10 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var theSettingsViewModel = SettingsViewModel()
+    private let _theSettingsViewModel = SettingsViewModel()
+    static var theSettingsViewModel: SettingsViewModel {
+        return (UIApplication.sharedApplication().delegate as! AppDelegate)._theSettingsViewModel
+    }
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
