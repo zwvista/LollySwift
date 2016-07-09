@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		8C0945691D122ACE003503ED /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0945681D122ACE003503ED /* SettingsViewController.swift */; };
+		8C0A9C491D2F290F003BC528 /* PhrasesBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0A9C481D2F290F003BC528 /* PhrasesBaseViewController.swift */; };
+		8C0A9C4B1D2F29AD003BC528 /* PhrasesUnitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0A9C4A1D2F29AD003BC528 /* PhrasesUnitsViewController.swift */; };
+		8C0A9C4D1D2F29DC003BC528 /* PhrasesLangViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0A9C4C1D2F29DC003BC528 /* PhrasesLangViewController.swift */; };
+		8C0A9C521D2F2ACB003BC528 /* MPhraseLang.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0A9C4E1D2F2ACB003BC528 /* MPhraseLang.swift */; };
+		8C0A9C531D2F2ACB003BC528 /* MPhraseUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0A9C4F1D2F2ACB003BC528 /* MPhraseUnit.swift */; };
+		8C0A9C541D2F2ACB003BC528 /* PhrasesLangViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0A9C501D2F2ACB003BC528 /* PhrasesLangViewModel.swift */; };
+		8C0A9C551D2F2ACB003BC528 /* PhrasesUnitsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0A9C511D2F2ACB003BC528 /* PhrasesUnitsViewModel.swift */; };
 		8C0B7D581C9E662500791A99 /* DBObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0B7D571C9E662500791A99 /* DBObject.swift */; };
 		8C298A721D2AABDA00A4F057 /* WordsBookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C298A6F1D2AABDA00A4F057 /* WordsBookViewModel.swift */; };
 		8C298A731D2AABDA00A4F057 /* WordsLangViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C298A701D2AABDA00A4F057 /* WordsLangViewModel.swift */; };
@@ -74,6 +81,13 @@
 
 /* Begin PBXFileReference section */
 		8C0945681D122ACE003503ED /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		8C0A9C481D2F290F003BC528 /* PhrasesBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesBaseViewController.swift; sourceTree = "<group>"; };
+		8C0A9C4A1D2F29AD003BC528 /* PhrasesUnitsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesUnitsViewController.swift; sourceTree = "<group>"; };
+		8C0A9C4C1D2F29DC003BC528 /* PhrasesLangViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesLangViewController.swift; sourceTree = "<group>"; };
+		8C0A9C4E1D2F2ACB003BC528 /* MPhraseLang.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPhraseLang.swift; sourceTree = "<group>"; };
+		8C0A9C4F1D2F2ACB003BC528 /* MPhraseUnit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPhraseUnit.swift; sourceTree = "<group>"; };
+		8C0A9C501D2F2ACB003BC528 /* PhrasesLangViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesLangViewModel.swift; sourceTree = "<group>"; };
+		8C0A9C511D2F2ACB003BC528 /* PhrasesUnitsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesUnitsViewModel.swift; sourceTree = "<group>"; };
 		8C0B7D571C9E662500791A99 /* DBObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBObject.swift; sourceTree = "<group>"; };
 		8C298A6F1D2AABDA00A4F057 /* WordsBookViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsBookViewModel.swift; sourceTree = "<group>"; };
 		8C298A701D2AABDA00A4F057 /* WordsLangViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsLangViewModel.swift; sourceTree = "<group>"; };
@@ -249,20 +263,23 @@
 		953473D71A0D16CF00FF2D56 /* LollyiOS */ = {
 			isa = PBXGroup;
 			children = (
-				951BB9931A1B803B0087DB94 /* Main.storyboard */,
 				953473DA1A0D16CF00FF2D56 /* AppDelegate.swift */,
-				95267BD61A1E26D000CC2A4B /* SearchViewController.swift */,
-				951BB9951A1B8D6C0087DB94 /* LollyiOS-Bridging-Header.h */,
-				8C0945681D122ACE003503ED /* SettingsViewController.swift */,
-				8C2EB0F41D1C020600FB8AE9 /* WordsDetailViewController.swift */,
-				8C298A921D2AC12E00A4F057 /* WordsBaseViewController.swift */,
-				8C298A821D2AAD5800A4F057 /* WordsBookViewController.swift */,
-				8C298A831D2AAD5800A4F057 /* WordsLangViewController.swift */,
-				8C298A841D2AAD5800A4F057 /* WordsUnitsViewController.swift */,
 				953473E11A0D16CF00FF2D56 /* Images.xcassets */,
 				953473E31A0D16CF00FF2D56 /* LaunchScreen.xib */,
+				951BB9951A1B8D6C0087DB94 /* LollyiOS-Bridging-Header.h */,
+				951BB9931A1B803B0087DB94 /* Main.storyboard */,
 				951BB9961A1B8FD50087DB94 /* Menu */,
+				95267BD61A1E26D000CC2A4B /* SearchViewController.swift */,
+				8C0945681D122ACE003503ED /* SettingsViewController.swift */,
 				953473D81A0D16CF00FF2D56 /* Supporting Files */,
+				8C298A921D2AC12E00A4F057 /* WordsBaseViewController.swift */,
+				8C298A821D2AAD5800A4F057 /* WordsBookViewController.swift */,
+				8C2EB0F41D1C020600FB8AE9 /* WordsDetailViewController.swift */,
+				8C298A831D2AAD5800A4F057 /* WordsLangViewController.swift */,
+				8C298A841D2AAD5800A4F057 /* WordsUnitsViewController.swift */,
+				8C0A9C481D2F290F003BC528 /* PhrasesBaseViewController.swift */,
+				8C0A9C4A1D2F29AD003BC528 /* PhrasesUnitsViewController.swift */,
+				8C0A9C4C1D2F29DC003BC528 /* PhrasesLangViewController.swift */,
 			);
 			path = LollyiOS;
 			sourceTree = "<group>";
@@ -346,9 +363,13 @@
 				8C4670931D099CAE004F3C21 /* MBook.swift */,
 				95FFAF141A19F0AA00E00C47 /* MDictAll.swift */,
 				95FFAF151A19F0AA00E00C47 /* MLanguage.swift */,
+				8C0A9C4E1D2F2ACB003BC528 /* MPhraseLang.swift */,
+				8C0A9C4F1D2F2ACB003BC528 /* MPhraseUnit.swift */,
 				8C298A8E1D2AB41400A4F057 /* MWordBook.swift */,
 				8C298A8F1D2AB41400A4F057 /* MWordLang.swift */,
 				8C2EB0FB1D1FC9B100FB8AE9 /* MWordUnit.swift */,
+				8C0A9C501D2F2ACB003BC528 /* PhrasesLangViewModel.swift */,
+				8C0A9C511D2F2ACB003BC528 /* PhrasesUnitsViewModel.swift */,
 				8C4670FA1D0DC599004F3C21 /* SettingsViewModel.swift */,
 				8C298A6F1D2AABDA00A4F057 /* WordsBookViewModel.swift */,
 				8C298A701D2AABDA00A4F057 /* WordsLangViewModel.swift */,
@@ -463,6 +484,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				951BB99C1A1B90DC0087DB94 /* LollyUINavigationController.swift in Sources */,
+				8C0A9C4D1D2F29DC003BC528 /* PhrasesLangViewController.swift in Sources */,
 				8C298A851D2AAD5800A4F057 /* WordsBookViewController.swift in Sources */,
 				8C4670F11D0DC4C7004F3C21 /* ActionSheetCustomPicker.m in Sources */,
 				951BB99A1A1B904B0087DB94 /* MainViewController.swift in Sources */,
@@ -472,6 +494,7 @@
 				95FFAF191A19F0AA00E00C47 /* MLanguage.swift in Sources */,
 				8C4670F71D0DC4C7004F3C21 /* DistancePickerView.m in Sources */,
 				8C2EB0F51D1C020600FB8AE9 /* WordsDetailViewController.swift in Sources */,
+				8C0A9C551D2F2ACB003BC528 /* PhrasesUnitsViewModel.swift in Sources */,
 				95FFAF0D1A19F07000E00C47 /* FMDatabasePool.m in Sources */,
 				95FFAF0F1A19F07000E00C47 /* FMResultSet.m in Sources */,
 				8C2EB0FC1D1FC9B100FB8AE9 /* MWordUnit.swift in Sources */,
@@ -479,6 +502,7 @@
 				95FFAEFD1A19F03C00E00C47 /* AMSlideMenuRightTableViewController.m in Sources */,
 				95FFAEFC1A19F03C00E00C47 /* AMSlideMenuRightMenuSegue.m in Sources */,
 				8C298A901D2AB41400A4F057 /* MWordBook.swift in Sources */,
+				8C0A9C531D2F2ACB003BC528 /* MPhraseUnit.swift in Sources */,
 				8C298A871D2AAD5800A4F057 /* WordsUnitsViewController.swift in Sources */,
 				95FFAF0E1A19F07000E00C47 /* FMDatabaseQueue.m in Sources */,
 				8C298A731D2AABDA00A4F057 /* WordsLangViewModel.swift in Sources */,
@@ -490,8 +514,10 @@
 				8C4670951D099CAE004F3C21 /* MBook.swift in Sources */,
 				8C298A911D2AB41400A4F057 /* MWordLang.swift in Sources */,
 				95FFAEF81A19F03C00E00C47 /* AMSlideMenuContentSegue.m in Sources */,
+				8C0A9C521D2F2ACB003BC528 /* MPhraseLang.swift in Sources */,
 				8C4670F51D0DC4C7004F3C21 /* ActionSheetMultipleStringPicker.m in Sources */,
 				95FFAEF91A19F03C00E00C47 /* AMSlideMenuLeftMenuSegue.m in Sources */,
+				8C0A9C491D2F290F003BC528 /* PhrasesBaseViewController.swift in Sources */,
 				8C4670F01D0DC4C7004F3C21 /* AbstractActionSheetPicker.m in Sources */,
 				95267BD71A1E26D000CC2A4B /* SearchViewController.swift in Sources */,
 				95FFAF181A19F0AA00E00C47 /* MDictAll.swift in Sources */,
@@ -502,9 +528,11 @@
 				951BB9981A1B90260087DB94 /* LeftMenuViewController.swift in Sources */,
 				8C4670F21D0DC4C7004F3C21 /* ActionSheetDatePicker.m in Sources */,
 				8C0B7D581C9E662500791A99 /* DBObject.swift in Sources */,
+				8C0A9C541D2F2ACB003BC528 /* PhrasesLangViewModel.swift in Sources */,
 				8C4670F41D0DC4C7004F3C21 /* ActionSheetLocalePicker.m in Sources */,
 				95FFAF0C1A19F07000E00C47 /* FMDatabaseAdditions.m in Sources */,
 				95FFAEFE1A19F03C00E00C47 /* UIViewController+AMSlideMenu.m in Sources */,
+				8C0A9C4B1D2F29AD003BC528 /* PhrasesUnitsViewController.swift in Sources */,
 				95FFAEFB1A19F03C00E00C47 /* AMSlideMenuMainViewController.m in Sources */,
 				953473DB1A0D16CF00FF2D56 /* AppDelegate.swift in Sources */,
 			);
