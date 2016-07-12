@@ -11,15 +11,16 @@ import UIKit
 class MainViewController: AMSlideMenuMainViewController {
     
     override func segueIdentifierForIndexPathInLeftMenu(indexPath: NSIndexPath) -> String {
-        return
-            indexPath.row == 0 ? "searchSegue" :
-            indexPath.row == 1 ? "settingsSegue" :
-            indexPath.row == 2 ? "wordsUnitsSegue" :
-            indexPath.row == 3 ? "wordsBookSegue" :
-            indexPath.row == 4 ? "wordsLangSegue" :
-            indexPath.row == 5 ? "phrasesUnitsSegue" :
-            indexPath.row == 6 ? "phrasesLangSegue" :
-            "searchSegue"
+        let arrSegues = [
+            "searchSegue",
+            "settingsSegue",
+            "wordsUnitsSegue",
+            "wordsBookSegue",
+            "wordsLangSegue",
+            "phrasesUnitsSegue",
+            "phrasesLangSegue",
+        ]
+        return arrSegues[indexPath.row]
     }
     
     override func leftMenuWidth() -> CGFloat {

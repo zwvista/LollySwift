@@ -2,12 +2,12 @@
 //  LollyMacTests.swift
 //  LollyMacTests
 //
-//  Created by zhaowei on 2014/11/08.
-//  Copyright (c) 2014年 趙 偉. All rights reserved.
+//  Created by 趙偉 on 2016/07/10.
+//  Copyright © 2016年 趙偉. All rights reserved.
 //
 
-import Cocoa
 import XCTest
+@testable import LollyMac
 
 class LollyMacTests: XCTestCase {
     
@@ -23,12 +23,12 @@ class LollyMacTests: XCTestCase {
     
     func testExample() {
         // This is an example of a functional test case.
-        XCTAssert(true, "Pass")
+        // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
     
     func testPerformanceExample() {
         // This is an example of a performance test case.
-        self.measureBlock() {
+        self.measureBlock {
             // Put the code you want to measure the time of here.
         }
     }

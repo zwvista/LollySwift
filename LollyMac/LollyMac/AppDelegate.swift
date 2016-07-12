@@ -2,8 +2,8 @@
 //  AppDelegate.swift
 //  LollyMac
 //
-//  Created by zhaowei on 2014/11/08.
-//  Copyright (c) 2014年 趙 偉. All rights reserved.
+//  Created by 趙偉 on 2016/07/10.
+//  Copyright © 2016年 趙偉. All rights reserved.
 //
 
 import Cocoa
@@ -11,18 +11,17 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
-    @IBOutlet weak var window: NSWindow!
-    
-    var wc: WordsOnlineWindowController!
+
 
     func applicationDidFinishLaunching(aNotification: NSNotification) {
-        wc = WordsOnlineWindowController(windowNibName: "WordsOnlineWindowController")
-        wc.showWindow(self)
+        // Insert code here to initialize your application
     }
 
     func applicationWillTerminate(aNotification: NSNotification) {
         // Insert code here to tear down your application
     }
 
+    func applicationShouldTerminateAfterLastWindowClosed() -> Bool {
+        return true
+    }
 }
-

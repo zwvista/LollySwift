@@ -1,16 +1,16 @@
 //
-//  WordsOnlineWindowController.swift
+//  ViewController.swift
 //  LollyMac
 //
-//  Created by zhaowei on 2014/11/11.
-//  Copyright (c) 2014年 趙 偉. All rights reserved.
+//  Created by 趙偉 on 2016/07/10.
+//  Copyright © 2016年 趙偉. All rights reserved.
 //
 
 import Cocoa
 import WebKit
 import LollyShared
 
-class WordsOnlineWindowController: NSWindowController, NSTextFieldDelegate {
+class ViewController: NSViewController, NSTextFieldDelegate {
     
     @IBOutlet var wvDictOnline: WebView!
     @IBOutlet var sfWord: NSSearchField!
@@ -19,31 +19,29 @@ class WordsOnlineWindowController: NSWindowController, NSTextFieldDelegate {
     
     var word = ""
     var theSettingsViewModel = SettingsViewModel()
-    
-    override init(window: NSWindow?) {
-        super.init(window: window)
-    }
 
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-
-    override func windowDidLoad() {
-        super.windowDidLoad()
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
         wvDictOffline.hidden = true
         langSelected(self)
+    }
+
+    override var representedObject: AnyObject? {
+        didSet {
+        // Update the view, if already loaded.
+        }
     }
     
     @IBAction func searchDict(sender: AnyObject) {
         wvDictOnline.hidden = false
         wvDictOffline.hidden = true
-
+        
         let m = theSettingsViewModel.currentDict
         let url = m.urlString(word)
         wvDictOnline.mainFrameURL = url
     }
-
+    
     @IBAction func langSelected(sender: AnyObject) {
         dictAllController.content = theSettingsViewModel.arrDictAll
         dictSelected(sender)
@@ -80,5 +78,7 @@ class WordsOnlineWindowController: NSWindowController, NSTextFieldDelegate {
         wvDictOnline.hidden = true
         wvDictOffline.hidden = false
     }
-    
+
+
 }
+
