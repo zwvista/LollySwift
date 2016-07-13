@@ -10,7 +10,7 @@ import Cocoa
 import WebKit
 import LollyShared
 
-class ViewController: NSViewController, NSTextFieldDelegate {
+class ViewController: NSViewController, NSSearchFieldDelegate {
     
     @IBOutlet var wvDictOnline: WebView!
     @IBOutlet var sfWord: NSSearchField!

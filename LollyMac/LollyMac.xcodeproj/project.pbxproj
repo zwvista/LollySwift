@@ -13,6 +13,7 @@
 		8C1C4F2F1D31F88800CF5D88 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C1C4F2D1D31F88800CF5D88 /* Main.storyboard */; };
 		8C1C4F3A1D31F88800CF5D88 /* LollyMacTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1C4F391D31F88800CF5D88 /* LollyMacTests.swift */; };
 		8C1C4F451D31F88800CF5D88 /* LollyMacUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1C4F441D31F88800CF5D88 /* LollyMacUITests.swift */; };
+		8C4F7D941D35C429006FD83D /* Lolly.db in Resources */ = {isa = PBXBuildFile; fileRef = 8C4F7D931D35C429006FD83D /* Lolly.db */; };
 		8C6F26DF1D333598008F706A /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C6F26DB1D333598008F706A /* WebKit.framework */; };
 		8C6F26E01D333598008F706A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C6F26DC1D333598008F706A /* Cocoa.framework */; };
 		8C6F26E21D3335EB008F706A /* libLollyShared.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C6F26E11D3335EB008F706A /* libLollyShared.dylib */; };
@@ -59,6 +60,7 @@
 		8C4F7D071D349269006FD83D /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
 		8C4F7D081D349269006FD83D /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
 		8C4F7D091D349269006FD83D /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		8C4F7D931D35C429006FD83D /* Lolly.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = Lolly.db; path = ../../../Lolly.db; sourceTree = "<group>"; };
 		8C6F26DB1D333598008F706A /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/System/Library/Frameworks/WebKit.framework; sourceTree = "<absolute>"; };
 		8C6F26DC1D333598008F706A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		8C6F26E11D3335EB008F706A /* libLollyShared.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libLollyShared.dylib; path = "../../../../../Library/Developer/Xcode/DerivedData/LollySwift-dxbtmkspchmqgzaoyqcrsmhaxkhg/Build/Products/Debug/libLollyShared.dylib"; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 		8C1C4F261D31F88800CF5D88 /* LollyMac */ = {
 			isa = PBXGroup;
 			children = (
+				8C4F7D931D35C429006FD83D /* Lolly.db */,
 				8C1C4F271D31F88800CF5D88 /* AppDelegate.swift */,
 				8C1C4F291D31F88800CF5D88 /* ViewController.swift */,
 				8C1C4F2B1D31F88800CF5D88 /* Assets.xcassets */,
@@ -279,6 +282,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C1C4F2C1D31F88800CF5D88 /* Assets.xcassets in Resources */,
+				8C4F7D941D35C429006FD83D /* Lolly.db in Resources */,
 				8C1C4F2F1D31F88800CF5D88 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -684,6 +684,9 @@
                                         <binding destination="XfG-lQ-9wD" name="value" keyPath="word" id="N7c-IW-90v"/>
                                     </connections>
                                 </searchFieldCell>
+                                <connections>
+                                    <outlet property="delegate" destination="XfG-lQ-9wD" id="cNe-O3-sZ8"/>
+                                </connections>
                             </searchField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LyA-Au-ofZ">
                                 <rect key="frame" x="750" y="585" width="58" height="32"/>
