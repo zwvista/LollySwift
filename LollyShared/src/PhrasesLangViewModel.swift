@@ -10,13 +10,13 @@ import Foundation
 
 public class PhrasesLangViewModel: NSObject {
     public var settings: SettingsViewModel
-    public var arrPhrases: [MPhraseLang]
-    public var arrPhrasesFiltered: [MPhraseLang]?
+    public var arrPhrases: [MLangPhrase]
+    public var arrPhrasesFiltered: [MLangPhrase]?
     
     public init(settings: SettingsViewModel) {
         self.settings = settings
         let m = settings.arrBooks[settings.currentBookIndex]
-        arrPhrases = MPhraseLang.getDataByLang(m.LANGID)
+        arrPhrases = MLangPhrase.getDataByLang(m.LANGID)
     }
     
     public func filterPhrasesForSearchText(searchText: String, scope: String) {

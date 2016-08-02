@@ -1,5 +1,5 @@
 //
-//  MDictAll.swift
+//  MDictionary.swift
 //  LollyShared
 //
 //  Created by zhaowei on 2014/11/07.
@@ -8,8 +8,8 @@
 
 import Foundation
 
-public class MDictAll: DBObject {
-    public var LANGID = 0
+public class MDictionary: DBObject {
+    public var LANGIDFROM = 0
     public var DICTTYPENAME: String?
     public var DICTNAME: String?
     public var URL: String?
@@ -25,9 +25,9 @@ public class MDictAll: DBObject {
         return url
     }
     
-    static func getDataByLang(langID: Int) -> [MDictAll] {
-        let sql = "SELECT * FROM DICTALL WHERE LANGID = ?"
-        let results = try! DBObject.db.executeQuery(sql, langID)
+    static func getDataByLang(langID: Int) -> [MDictionary] {
+        let sql = "SELECT * FROM VDICTIONARIES WHERE LANGIDFROM = ?"
+        let results = try! DBObject.dbCore.executeQuery(sql, langID)
         return DBObject.dataFromResultSet(databaseResultSet: results)
     }
     

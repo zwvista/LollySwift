@@ -11,7 +11,7 @@ import UIKit
 class WordsLangViewController: WordsBaseViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating {
 
     var wordsLangViewModel: WordsLangViewModel!
-    var arrWords: [MWordLang] {
+    var arrWords: [MLangWord] {
         return searchController.active && searchBar.text != "" ? wordsLangViewModel.arrWordsFiltered! : wordsLangViewModel.arrWords
     }
 

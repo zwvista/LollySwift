@@ -10,13 +10,13 @@ import Foundation
 
 public class WordsUnitsViewModel: NSObject {
     public var settings: SettingsViewModel
-    public var arrWords: [MWordUnit]
-    public var arrWordsFiltered: [MWordUnit]?
+    public var arrWords: [MUnitWord]
+    public var arrWordsFiltered: [MUnitWord]?
     
     public init(settings: SettingsViewModel) {
         self.settings = settings
         let m = settings.arrBooks[settings.currentBookIndex]
-        arrWords = MWordUnit.getDataByBook(m.BOOKID, unitPartFrom: m.UNITFROM * 10 + m.PARTFROM, unitPartTo: m.UNITTO * 10 + m.PARTTO)
+        arrWords = MUnitWord.getDataByTextBook(m.TEXTBOOKID, unitPartFrom: m.USUNITFROM * 10 + m.USPARTFROM, unitPartTo: m.USUNITTO * 10 + m.USPARTTO)
     }
     
     public func filterWordsForSearchText(searchText: String, scope: String) {

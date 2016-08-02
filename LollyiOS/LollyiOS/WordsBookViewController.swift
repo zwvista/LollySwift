@@ -11,7 +11,7 @@ import UIKit
 class WordsBookViewController: WordsBaseViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating {
 
     var wordsBookViewModel: WordsBookViewModel!
-    var arrWords: [MWordBook] {
+    var arrWords: [MTBWord] {
         return searchController.active && searchBar.text != "" ? wordsBookViewModel.arrWordsFiltered! : wordsBookViewModel.arrWords
     }
 

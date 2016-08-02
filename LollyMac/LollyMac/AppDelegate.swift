@@ -12,7 +12,6 @@ import Cocoa
 class AppDelegate: NSObject, NSApplicationDelegate {
 
 
-
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         // Insert code here to initialize your application
     }
@@ -24,4 +23,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationShouldTerminateAfterLastWindowClosed() -> Bool {
         return true
     }
+    
+    @IBAction func selectUnits(sender: AnyObject) {
+        let storyboard = NSStoryboard(name: "Main", bundle: nil)
+        let wc = storyboard.instantiateControllerWithIdentifier("Select Units Window Controller") as! NSWindowController
+        if let w = wc.window {
+            //let vc = w.contentView as! SelectUnitsViewController
+            let application = NSApplication.sharedApplication()
+            application.runModalForWindow(w)
+
+        }
+    }
+    
+    
 }

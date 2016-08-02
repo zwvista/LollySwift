@@ -12,10 +12,10 @@ import LollyShared
 
 class ViewController: NSViewController, NSSearchFieldDelegate {
     
-    @IBOutlet var wvDictOnline: WebView!
-    @IBOutlet var sfWord: NSSearchField!
-    @IBOutlet var wvDictOffline: WebView!
-    @IBOutlet var dictAllController: NSArrayController!
+    @IBOutlet weak var wvDictOnline: WebView!
+    @IBOutlet weak var sfWord: NSSearchField!
+    @IBOutlet weak var wvDictOffline: WebView!
+    @IBOutlet weak var dictAllController: NSArrayController!
     
     var word = ""
     var theSettingsViewModel = SettingsViewModel()

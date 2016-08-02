@@ -9,12 +9,17 @@
 import Foundation
 
 class LollyDB: NSObject {
-    var db: FMDatabase
+    var dbCore, dbDic: FMDatabase
     
     override init() {
-        let path = NSBundle.mainBundle().resourcePath! + "/Lolly.db"
-        db = FMDatabase(path: path)
-        db.open()
+        let path = NSBundle.mainBundle().resourcePath!
+        
+        dbCore = FMDatabase(path: path + "/LollyCore.db")
+        dbCore.open()
+        
+        dbDic = FMDatabase(path: path + "/LollyDic.db")
+        dbDic.open()
+        
         super.init()
     }
     
@@ -22,6 +27,7 @@ class LollyDB: NSObject {
     static let sharedInstance = LollyDB()
     
     deinit {
-        db.close()
+        dbCore.close()
+        dbDic.close()
     }
 }

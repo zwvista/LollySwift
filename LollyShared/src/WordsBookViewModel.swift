@@ -10,13 +10,13 @@ import Foundation
 
 public class WordsBookViewModel: NSObject {
     public var settings: SettingsViewModel
-    public var arrWords: [MWordBook]
-    public var arrWordsFiltered: [MWordBook]?
+    public var arrWords: [MTBWord]
+    public var arrWordsFiltered: [MTBWord]?
     
     public init(settings: SettingsViewModel) {
         self.settings = settings
         let m = settings.arrBooks[settings.currentBookIndex]
-        arrWords = MWordBook.getDataByLang(m.LANGID)
+        arrWords = MTBWord.getDataByLang(m.LANGID)
     }
     
     public func filterWordsForSearchText(searchText: String, scope: String) {

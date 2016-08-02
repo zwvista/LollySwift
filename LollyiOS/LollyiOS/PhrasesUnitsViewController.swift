@@ -11,7 +11,7 @@ import UIKit
 class PhrasesUnitsViewController: PhrasesBaseViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating {
     
     var phrasesUnitsViewModel: PhrasesUnitsViewModel!
-    var arrPhrases: [MPhraseUnit] {
+    var arrPhrases: [MUnitPhrase] {
         return searchController.active && searchBar.text != "" ? phrasesUnitsViewModel.arrPhrasesFiltered! : phrasesUnitsViewModel.arrPhrases
     }
     

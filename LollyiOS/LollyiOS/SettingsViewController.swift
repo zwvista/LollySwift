@@ -74,7 +74,7 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
         case 1:
             return AppDelegate.theSettingsViewModel.arrDictAll[row].DICTNAME
         case 2:
-            return AppDelegate.theSettingsViewModel.arrBooks[row].BOOKNAME
+            return AppDelegate.theSettingsViewModel.arrBooks[row].TEXTBOOKNAME
         default:
             return nil
         }
@@ -118,45 +118,45 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
     
     func updateBook() {
         let m = AppDelegate.theSettingsViewModel.currentBook
-        bookCell.textLabel!.text = m.BOOKNAME
-        bookCell.detailTextLabel!.text = "\(m.UNITSINBOOK) Units"
-        lblUnitFrom.text = "\(m.UNITFROM)"
-        lblUnitTo.text = "\(m.UNITTO)"
-        swUnitTo.on = m.UNITFROM != m.UNITTO
+        bookCell.textLabel!.text = m.TEXTBOOKNAME
+        bookCell.detailTextLabel!.text = "\(m.UNITS) Units"
+        lblUnitFrom.text = "\(m.USUNITFROM)"
+        lblUnitTo.text = "\(m.USUNITTO)"
+        swUnitTo.on = m.USUNITFROM != m.USUNITTO
         swUnitToValueChanged(self)
-        lblPartFrom.text = m.partsAsArray[m.PARTFROM - 1]
-        lblPartTo.text = m.partsAsArray[m.PARTTO - 1]
+        lblPartFrom.text = m.partsAsArray[m.USPARTFROM - 1]
+        lblPartTo.text = m.partsAsArray[m.USPARTTO - 1]
     }
     
     @IBAction func labelTap(sender: AnyObject) {
         let lbl = (sender as! UITapGestureRecognizer).view as! UILabel
         let m = AppDelegate.theSettingsViewModel.currentBook
         if lbl === lblUnitFrom {
-            ActionSheetStringPicker.showPickerWithTitle("Select Unit(From)", rows: m.unitsAsArray, initialSelection: m.UNITFROM - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
-                m.UNITFROM = selectedIndex + 1
+            ActionSheetStringPicker.showPickerWithTitle("Select Unit(From)", rows: m.unitsAsArray, initialSelection: m.USUNITFROM - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
+                m.USUNITFROM = selectedIndex + 1
                 self.lblUnitFrom.text = m.unitsAsArray[selectedIndex]
                 if !self.swUnitTo.on {
-                    m.UNITTO = m.UNITFROM
+                    m.USUNITTO = m.USUNITFROM
                     self.lblUnitTo.text = self.lblUnitFrom.text
                 }
             }, cancelBlock: nil, origin: lblUnitFrom)
         } else if lbl === lblUnitTo && swUnitTo.on {
-            ActionSheetStringPicker.showPickerWithTitle("Select Unit(To)", rows: m.unitsAsArray, initialSelection: m.UNITTO - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
-                m.UNITTO = selectedIndex + 1
+            ActionSheetStringPicker.showPickerWithTitle("Select Unit(To)", rows: m.unitsAsArray, initialSelection: m.USUNITTO - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
+                m.USUNITTO = selectedIndex + 1
                 self.lblUnitTo.text = m.unitsAsArray[selectedIndex]
             }, cancelBlock: nil, origin: lblUnitTo)
         } else if lbl === lblPartFrom {
-            ActionSheetStringPicker.showPickerWithTitle("Select Part", rows: m.partsAsArray, initialSelection: m.PARTFROM - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
-                m.PARTFROM = selectedIndex + 1
+            ActionSheetStringPicker.showPickerWithTitle("Select Part", rows: m.partsAsArray, initialSelection: m.USPARTFROM - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
+                m.USPARTFROM = selectedIndex + 1
                 self.lblPartFrom.text = m.partsAsArray[selectedIndex]
                 if !self.swUnitTo.on {
-                    m.PARTTO = m.PARTFROM
+                    m.USPARTTO = m.USPARTFROM
                     self.lblPartTo.text = self.lblPartFrom.text
                 }
             }, cancelBlock: nil, origin: lblPartFrom)
         } else if lbl === lblPartTo && swUnitTo.on {
-            ActionSheetStringPicker.showPickerWithTitle("Select Part", rows: m.partsAsArray, initialSelection: m.PARTTO - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
-                m.PARTTO = selectedIndex + 1
+            ActionSheetStringPicker.showPickerWithTitle("Select Part", rows: m.partsAsArray, initialSelection: m.USPARTTO - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
+                m.USPARTTO = selectedIndex + 1
                 self.lblPartTo.text = m.partsAsArray[selectedIndex]
             }, cancelBlock: nil, origin: lblPartTo)
         }
@@ -167,9 +167,9 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
         lblPartTo.enabled = swUnitTo.on
         if !swUnitTo.on {
             let m = AppDelegate.theSettingsViewModel.currentBook
-            m.UNITTO = m.UNITFROM
+            m.USUNITTO = m.USUNITFROM
             lblUnitTo.text = lblUnitFrom.text
-            m.PARTTO = m.PARTFROM
+            m.USPARTTO = m.USPARTFROM
             lblPartTo.text = lblPartFrom.text
         }
     }

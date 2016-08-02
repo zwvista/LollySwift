@@ -637,6 +637,22 @@
                                     </items>
                                 </menu>
                             </menuItem>
+                            <menuItem title="Learn" id="8u8-8h-gcX">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Learn" systemMenu="help" id="yzv-td-Zlb">
+                                    <items>
+                                        <menuItem title="Words Online" id="kdE-P0-huU">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        </menuItem>
+                                        <menuItem title="Select Units" id="ivp-hr-tVn">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="selectUnits:" target="Voe-Tx-rLC" id="hrn-YB-Nmd"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
                         </items>
                     </menu>
                     <connections>
@@ -646,7 +662,7 @@
                 <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="LollyMac" customModuleProvider="target"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="0.0"/>
+            <point key="canvasLocation" x="114" y="-6"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
@@ -665,6 +681,176 @@
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="75" y="250"/>
+        </scene>
+        <!--Window Controller-->
+        <scene sceneID="Nfa-zT-uvr">
+            <objects>
+                <windowController storyboardIdentifier="Select Units Window Controller" id="opr-34-kgl" sceneMemberID="viewController">
+                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="gPA-8o-xiX">
+                        <windowStyleMask key="styleMask" titled="YES"/>
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+                        <rect key="contentRect" x="196" y="240" width="480" height="270"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
+                    </window>
+                    <connections>
+                        <segue destination="HfO-r7-QMx" kind="relationship" relationship="window.shadowedContentViewController" id="eKi-3D-A9a"/>
+                    </connections>
+                </windowController>
+                <customObject id="gmc-6W-gTB" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="631" y="166"/>
+        </scene>
+        <!--Select Units View Controller-->
+        <scene sceneID="nZc-fZ-RBG">
+            <objects>
+                <viewController id="HfO-r7-QMx" customClass="SelectUnitsViewController" customModule="LollyMac" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="UlA-4i-lOC">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kfo-kM-SO0">
+                                <rect key="frame" x="18" y="233" width="74" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Language" id="IbE-V6-Pbg">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RQX-rZ-9Ej">
+                                <rect key="frame" x="18" y="196" width="37" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Book" id="3qi-kw-X77">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yra-vx-iUa">
+                                <rect key="frame" x="110" y="226" width="160" height="26"/>
+                                <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="Ypq-Pd-wNr" id="DBh-Q1-1ZP">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="menu"/>
+                                    <menu key="menu" id="5Sl-1y-ifV">
+                                        <items>
+                                            <menuItem title="Item 1" state="on" id="Ypq-Pd-wNr"/>
+                                            <menuItem title="Item 2" id="IYM-1c-wz0"/>
+                                            <menuItem title="Item 3" id="RQK-Sh-1Wy"/>
+                                        </items>
+                                    </menu>
+                                </popUpButtonCell>
+                            </popUpButton>
+                            <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GLz-Xu-o0X">
+                                <rect key="frame" x="284" y="142" width="160" height="26"/>
+                                <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="AsX-ru-UC0" id="uIY-8L-hXg">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="menu"/>
+                                    <menu key="menu" id="W4z-Wm-k4c">
+                                        <items>
+                                            <menuItem title="Item 1" state="on" id="AsX-ru-UC0"/>
+                                            <menuItem title="Item 2" id="DdB-OU-20d"/>
+                                            <menuItem title="Item 3" id="jxx-cM-QJt"/>
+                                        </items>
+                                    </menu>
+                                </popUpButtonCell>
+                            </popUpButton>
+                            <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GTc-kH-1Ux">
+                                <rect key="frame" x="110" y="189" width="160" height="26"/>
+                                <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="T9E-mH-SvE" id="3SF-dR-BRE">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="menu"/>
+                                    <menu key="menu" id="r9J-oc-fYy">
+                                        <items>
+                                            <menuItem title="Item 1" state="on" id="T9E-mH-SvE"/>
+                                            <menuItem title="Item 2" id="j2w-Fx-HdU"/>
+                                            <menuItem title="Item 3" id="Bnh-Kz-ege"/>
+                                        </items>
+                                    </menu>
+                                </popUpButtonCell>
+                            </popUpButton>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Igb-w9-WhP">
+                                <rect key="frame" x="18" y="151" width="37" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Units" id="4D5-xH-Cgs">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hwZ-pf-crm">
+                                <rect key="frame" x="22" y="101" width="53" height="25"/>
+                                <buttonCell key="cell" type="check" title="To" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="M0b-ZC-nEW">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Jg-pF-QzG">
+                                <rect key="frame" x="112" y="146" width="52" height="22"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="w0X-Km-Ti4">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0h9-iG-mfZ">
+                                <rect key="frame" x="158" y="143" width="19" height="27"/>
+                                <stepperCell key="cell" continuous="YES" alignment="left" maxValue="100" id="aQL-aG-iJ1"/>
+                            </stepper>
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S7q-tf-7ld">
+                                <rect key="frame" x="112" y="106" width="52" height="22"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="1oh-3p-qSn">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C0S-0m-TsS">
+                                <rect key="frame" x="158" y="103" width="19" height="27"/>
+                                <stepperCell key="cell" continuous="YES" alignment="left" maxValue="100" id="hyL-ZJ-tNL"/>
+                            </stepper>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="48d-X5-saz">
+                                <rect key="frame" x="196" y="149" width="84" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="(100 in all)" id="ws5-iP-4uB">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3rv-9I-v1e">
+                                <rect key="frame" x="196" y="106" width="84" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="(100 in all)" id="Pb5-3r-KY8">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RQl-wg-eWz">
+                                <rect key="frame" x="282" y="24" width="81" height="32"/>
+                                <buttonCell key="cell" type="push" title="Close" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="TUp-8T-zXw">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="close:" target="HfO-r7-QMx" id="IVL-MY-X3O"/>
+                                </connections>
+                            </button>
+                            <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="37y-dS-riZ">
+                                <rect key="frame" x="284" y="101" width="160" height="26"/>
+                                <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="qUH-52-JJ8" id="aEJ-8z-GTg">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="menu"/>
+                                    <menu key="menu" id="tk6-XY-w2N">
+                                        <items>
+                                            <menuItem title="Item 1" state="on" id="qUH-52-JJ8"/>
+                                            <menuItem title="Item 2" id="Sp9-HR-9wZ"/>
+                                            <menuItem title="Item 3" id="j2C-z3-0xP"/>
+                                        </items>
+                                    </menu>
+                                </popUpButtonCell>
+                            </popUpButton>
+                        </subviews>
+                    </view>
+                </viewController>
+                <customObject id="OC9-Mn-GX9" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="809" y="592"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="hIz-AP-VOD">
@@ -718,6 +904,30 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="msq-oh-fxQ">
+                                <rect key="frame" x="88" y="16" width="105" height="26"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="U2p-Jr-QZj"/>
+                                </constraints>
+                                <popUpButtonCell key="cell" type="push" title="Language" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="3MF-KH-i19" id="xgg-Xf-tQh">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="menu"/>
+                                    <menu key="menu" title="OtherViews" id="1hE-Yf-ohS">
+                                        <items>
+                                            <menuItem title="Language" state="on" id="3MF-KH-i19"/>
+                                            <menuItem title="Item 2" id="wfc-mY-RhZ"/>
+                                            <menuItem title="Item 3" id="fYt-tH-oCa"/>
+                                        </items>
+                                    </menu>
+                                </popUpButtonCell>
+                                <connections>
+                                    <action selector="langSelected:" target="XfG-lQ-9wD" id="RID-Q7-QYl"/>
+                                    <binding destination="Aod-K5-1iu" name="content" keyPath="arrangedObjects" id="wJb-kJ-9XY"/>
+                                    <binding destination="Aod-K5-1iu" name="contentObjects" keyPath="arrangedObjects.LANGID" previousBinding="wJb-kJ-9XY" id="vKR-uZ-UOs"/>
+                                    <binding destination="Aod-K5-1iu" name="contentValues" keyPath="arrangedObjects.LANGNAME" previousBinding="vKR-uZ-UOs" id="Qr0-nU-avH"/>
+                                    <binding destination="XfG-lQ-9wD" name="selectedIndex" keyPath="theSettingsViewModel.currentLangIndex" previousBinding="Qr0-nU-avH" id="RkM-zj-Zgh"/>
+                                </connections>
+                            </popUpButton>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ngg-ln-qKO">
                                 <rect key="frame" x="198" y="23" width="69" height="17"/>
                                 <constraints>
@@ -751,30 +961,6 @@
                                 <connections>
                                     <action selector="dictSelected:" target="XfG-lQ-9wD" id="ytg-Ov-VHY"/>
                                     <binding destination="wJs-XG-ZlX" name="content" keyPath="arrangedObjects.DICTNAME" id="4hT-0b-a8O"/>
-                                </connections>
-                            </popUpButton>
-                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="msq-oh-fxQ">
-                                <rect key="frame" x="88" y="16" width="105" height="26"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="U2p-Jr-QZj"/>
-                                </constraints>
-                                <popUpButtonCell key="cell" type="push" title="Language" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="3MF-KH-i19" id="xgg-Xf-tQh">
-                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="menu"/>
-                                    <menu key="menu" title="OtherViews" id="1hE-Yf-ohS">
-                                        <items>
-                                            <menuItem title="Language" state="on" id="3MF-KH-i19"/>
-                                            <menuItem title="Item 2" id="wfc-mY-RhZ"/>
-                                            <menuItem title="Item 3" id="fYt-tH-oCa"/>
-                                        </items>
-                                    </menu>
-                                </popUpButtonCell>
-                                <connections>
-                                    <action selector="langSelected:" target="XfG-lQ-9wD" id="RID-Q7-QYl"/>
-                                    <binding destination="Aod-K5-1iu" name="content" keyPath="arrangedObjects" id="wJb-kJ-9XY"/>
-                                    <binding destination="Aod-K5-1iu" name="contentObjects" keyPath="arrangedObjects.LANGID" previousBinding="wJb-kJ-9XY" id="vKR-uZ-UOs"/>
-                                    <binding destination="Aod-K5-1iu" name="contentValues" keyPath="arrangedObjects.LANGNAME" previousBinding="vKR-uZ-UOs" id="Qr0-nU-avH"/>
-                                    <binding destination="XfG-lQ-9wD" name="selectedIndex" keyPath="theSettingsViewModel.currentLangIndex" previousBinding="Qr0-nU-avH" id="RkM-zj-Zgh"/>
                                 </connections>
                             </popUpButton>
                         </subviews>

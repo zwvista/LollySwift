@@ -10,13 +10,13 @@ import Foundation
 
 public class PhrasesUnitsViewModel: NSObject {
     public var settings: SettingsViewModel
-    public var arrPhrases: [MPhraseUnit]
-    public var arrPhrasesFiltered: [MPhraseUnit]?
+    public var arrPhrases: [MUnitPhrase]
+    public var arrPhrasesFiltered: [MUnitPhrase]?
     
     public init(settings: SettingsViewModel) {
         self.settings = settings
         let m = settings.arrBooks[settings.currentBookIndex]
-        arrPhrases = MPhraseUnit.getDataByBook(m.BOOKID, unitPartFrom: m.UNITFROM * 10 + m.PARTFROM, unitPartTo: m.UNITTO * 10 + m.PARTTO)
+        arrPhrases = MUnitPhrase.getDataByBook(m.TEXTBOOKID, unitPartFrom: m.USUNITFROM * 10 + m.USPARTFROM, unitPartTo: m.USUNITTO * 10 + m.USPARTTO)
     }
     
     public func filterPhrasesForSearchText(searchText: String, scope: String) {

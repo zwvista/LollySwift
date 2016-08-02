@@ -11,7 +11,7 @@ import UIKit
 class PhrasesLangViewController: PhrasesBaseViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating {
     
     var phrasesLangViewModel: PhrasesLangViewModel!
-    var arrPhrases: [MPhraseLang] {
+    var arrPhrases: [MLangPhrase] {
         return searchController.active && searchBar.text != "" ? phrasesLangViewModel.arrPhrasesFiltered! : phrasesLangViewModel.arrPhrases
     }
     

@@ -1,5 +1,5 @@
 //
-//  MWordLang.swift
+//  MLangWord.swift
 //  LollyShared
 //
 //  Created by 趙偉 on 2016/07/05.
@@ -8,13 +8,13 @@
 
 import Foundation
 
-public class MWordLang: DBObject {
+public class MLangWord: DBObject {
     public var LANGID = 0
     public var WORD: String?
     
-    static func getDataByLang(langid: Int) -> [MWordLang] {
-        let sql = "SELECT LANGID, WORD FROM WORDSLANG WHERE LANGID = ?"
-        let results = try! DBObject.db.executeQuery(sql, langid)
+    static func getDataByLang(langid: Int) -> [MLangWord] {
+        let sql = "SELECT LANGID, WORD FROM LANGWORDS WHERE LANGID = ?"
+        let results = try! DBObject.dbCore.executeQuery(sql, langid)
         return DBObject.dataFromResultSet(databaseResultSet: results)
     }
 }

@@ -41,5 +41,6 @@ public class DBObject: NSObject {
         return array
     }
     
-    static let db = LollyDB.sharedInstance.db
+    static let dbCore = LollyDB.sharedInstance.dbCore
+    static let dbDic = LollyDB.sharedInstance.dbDic
 }
