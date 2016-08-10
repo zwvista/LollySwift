@@ -9,7 +9,7 @@
 import Foundation
 
 public class MTBWord: DBObject {
-    public var TEXTBOOKID = 0
+    public var ID = 0
     public var LANGID = 0
     public var TEXTBOOKNAME: String?
     public var UNIT = 0

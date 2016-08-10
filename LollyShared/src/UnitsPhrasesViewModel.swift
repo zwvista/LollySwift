@@ -1,5 +1,5 @@
 //
-//  PhrasesUnitsViewModel.swift
+//  UnitsPhrasesViewModel.swift
 //  LollyShared
 //
 //  Created by 趙偉 on 2016/07/08.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class PhrasesUnitsViewModel: NSObject {
+public class UnitsPhrasesViewModel: NSObject {
     public var settings: SettingsViewModel
     public var arrPhrases: [MUnitPhrase]
     public var arrPhrasesFiltered: [MUnitPhrase]?
@@ -16,7 +16,7 @@ public class PhrasesUnitsViewModel: NSObject {
     public init(settings: SettingsViewModel) {
         self.settings = settings
         let m = settings.arrBooks[settings.currentBookIndex]
-        arrPhrases = MUnitPhrase.getDataByBook(m.TEXTBOOKID, unitPartFrom: m.USUNITFROM * 10 + m.USPARTFROM, unitPartTo: m.USUNITTO * 10 + m.USPARTTO)
+        arrPhrases = MUnitPhrase.getDataByBook(m.ID, unitPartFrom: m.USUNITFROM * 10 + m.USPARTFROM, unitPartTo: m.USUNITTO * 10 + m.USPARTTO)
     }
     
     public func filterPhrasesForSearchText(searchText: String, scope: String) {

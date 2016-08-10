@@ -9,12 +9,12 @@
 import Foundation
 
 public class MLanguage: DBObject {
-    public var LANGID = 0
+    public var ID = 0
     public var LANGNAME: String?
     public var USTEXTBOOKID = 0
     
     static func getData() -> [MLanguage] {
-        let sql = "SELECT * FROM VLANGUAGES WHERE LANGID <> 0"
+        let sql = "SELECT * FROM VLANGUAGES WHERE ID <> 0"
         let results = try! DBObject.dbCore.executeQuery(sql)
         return DBObject.dataFromResultSet(databaseResultSet: results)
     }

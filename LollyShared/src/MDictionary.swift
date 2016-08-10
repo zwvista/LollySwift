@@ -9,6 +9,7 @@
 import Foundation
 
 public class MDictionary: DBObject {
+    public var ID = 0
     public var LANGIDFROM = 0
     public var DICTTYPENAME: String?
     public var DICTNAME: String?

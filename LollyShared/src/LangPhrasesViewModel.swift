@@ -1,5 +1,5 @@
 //
-//  PhrasesLangViewModel.swift
+//  LangPhrasesViewModel.swift
 //  LollyShared
 //
 //  Created by 趙偉 on 2016/07/08.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class PhrasesLangViewModel: NSObject {
+public class LangPhrasesViewModel: NSObject {
     public var settings: SettingsViewModel
     public var arrPhrases: [MLangPhrase]
     public var arrPhrasesFiltered: [MLangPhrase]?

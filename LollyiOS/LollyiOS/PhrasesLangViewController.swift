@@ -10,13 +10,13 @@ import UIKit
 
 class PhrasesLangViewController: PhrasesBaseViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating {
     
-    var phrasesLangViewModel: PhrasesLangViewModel!
+    var phrasesLangViewModel: LangPhrasesViewModel!
     var arrPhrases: [MLangPhrase] {
         return searchController.active && searchBar.text != "" ? phrasesLangViewModel.arrPhrasesFiltered! : phrasesLangViewModel.arrPhrases
     }
     
     override func viewDidLoad() {
-        phrasesLangViewModel = PhrasesLangViewModel(settings: AppDelegate.theSettingsViewModel)
+        phrasesLangViewModel = LangPhrasesViewModel(settings: AppDelegate.theSettingsViewModel)
         super.viewDidLoad()
         searchController.searchResultsUpdater = self
         searchBar.delegate = self

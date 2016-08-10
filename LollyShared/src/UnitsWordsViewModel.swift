@@ -1,5 +1,5 @@
 //
-//  WordsBookViewModel.swift
+//  UnitsWordsViewModel.swift
 //  LollyiOS
 //
 //  Created by 趙偉 on 2016/06/28.
@@ -8,15 +8,15 @@
 
 import Foundation
 
-public class WordsBookViewModel: NSObject {
+public class UnitsWordsViewModel: NSObject {
     public var settings: SettingsViewModel
-    public var arrWords: [MTBWord]
-    public var arrWordsFiltered: [MTBWord]?
+    public var arrWords: [MUnitWord]
+    public var arrWordsFiltered: [MUnitWord]?
     
     public init(settings: SettingsViewModel) {
         self.settings = settings
         let m = settings.arrBooks[settings.currentBookIndex]
-        arrWords = MTBWord.getDataByLang(m.LANGID)
+        arrWords = MUnitWord.getDataByTextBook(m.ID, unitPartFrom: m.USUNITFROM * 10 + m.USPARTFROM, unitPartTo: m.USUNITTO * 10 + m.USPARTTO)
     }
     
     public func filterWordsForSearchText(searchText: String, scope: String) {

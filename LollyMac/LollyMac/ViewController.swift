@@ -15,7 +15,7 @@ class ViewController: NSViewController, NSSearchFieldDelegate {
     @IBOutlet weak var wvDictOnline: WebView!
     @IBOutlet weak var sfWord: NSSearchField!
     @IBOutlet weak var wvDictOffline: WebView!
-    @IBOutlet weak var dictAllController: NSArrayController!
+    @IBOutlet weak var dictionaryController: NSArrayController!
     
     var word = ""
     var theSettingsViewModel = SettingsViewModel()
@@ -43,7 +43,7 @@ class ViewController: NSViewController, NSSearchFieldDelegate {
     }
     
     @IBAction func langSelected(sender: AnyObject) {
-        dictAllController.content = theSettingsViewModel.arrDictAll
+        dictionaryController.content = theSettingsViewModel.arrDictionary
         dictSelected(sender)
     }
     

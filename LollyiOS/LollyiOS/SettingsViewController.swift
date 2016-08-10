@@ -59,7 +59,7 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
         case 0:
             return AppDelegate.theSettingsViewModel.arrLanguages.count
         case 1:
-            return AppDelegate.theSettingsViewModel.arrDictAll.count
+            return AppDelegate.theSettingsViewModel.arrDictionary.count
         case 2:
             return AppDelegate.theSettingsViewModel.arrBooks.count
         default:
@@ -72,7 +72,7 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
         case 0:
             return AppDelegate.theSettingsViewModel.arrLanguages[row].LANGNAME
         case 1:
-            return AppDelegate.theSettingsViewModel.arrDictAll[row].DICTNAME
+            return AppDelegate.theSettingsViewModel.arrDictionary[row].DICTNAME
         case 2:
             return AppDelegate.theSettingsViewModel.arrBooks[row].TEXTBOOKNAME
         default:

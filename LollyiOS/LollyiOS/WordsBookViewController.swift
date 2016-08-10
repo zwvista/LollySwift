@@ -10,13 +10,13 @@ import UIKit
 
 class WordsBookViewController: WordsBaseViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating {
 
-    var wordsBookViewModel: WordsBookViewModel!
+    var wordsBookViewModel: TBWordsViewModel!
     var arrWords: [MTBWord] {
         return searchController.active && searchBar.text != "" ? wordsBookViewModel.arrWordsFiltered! : wordsBookViewModel.arrWords
     }
 
     override func viewDidLoad() {
-        wordsBookViewModel = WordsBookViewModel(settings: AppDelegate.theSettingsViewModel)
+        wordsBookViewModel = TBWordsViewModel(settings: AppDelegate.theSettingsViewModel)
         super.viewDidLoad()
         searchController.searchResultsUpdater = self
         searchBar.delegate = self

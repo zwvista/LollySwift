@@ -10,13 +10,13 @@ import UIKit
 
 class PhrasesUnitsViewController: PhrasesBaseViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating {
     
-    var phrasesUnitsViewModel: PhrasesUnitsViewModel!
+    var phrasesUnitsViewModel: UnitsPhrasesViewModel!
     var arrPhrases: [MUnitPhrase] {
         return searchController.active && searchBar.text != "" ? phrasesUnitsViewModel.arrPhrasesFiltered! : phrasesUnitsViewModel.arrPhrases
     }
     
     override func viewDidLoad() {
-        phrasesUnitsViewModel = PhrasesUnitsViewModel(settings: AppDelegate.theSettingsViewModel)
+        phrasesUnitsViewModel = UnitsPhrasesViewModel(settings: AppDelegate.theSettingsViewModel)
         super.viewDidLoad()
         searchController.searchResultsUpdater = self
         searchBar.delegate = self
