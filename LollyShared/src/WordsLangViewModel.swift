@@ -1,5 +1,5 @@
 //
-//  LangWordsViewModel.swift
+//  WordsLangViewModel.swift
 //  LollyiOS
 //
 //  Created by 趙偉 on 2016/06/28.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class LangWordsViewModel: NSObject {
+public class WordsLangViewModel: NSObject {
     public var settings: SettingsViewModel
     public var arrWords: [MLangWord]
     public var arrWordsFiltered: [MLangWord]?

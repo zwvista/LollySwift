@@ -1,5 +1,5 @@
 //
-//  LangPhrasesViewModel.swift
+//  PhrasesUnitsViewModel.swift
 //  LollyShared
 //
 //  Created by 趙偉 on 2016/07/08.
@@ -8,15 +8,15 @@
 
 import Foundation
 
-public class LangPhrasesViewModel: NSObject {
+public class PhrasesUnitsViewModel: NSObject {
     public var settings: SettingsViewModel
-    public var arrPhrases: [MLangPhrase]
-    public var arrPhrasesFiltered: [MLangPhrase]?
+    public var arrPhrases: [MUnitPhrase]
+    public var arrPhrasesFiltered: [MUnitPhrase]?
     
     public init(settings: SettingsViewModel) {
         self.settings = settings
         let m = settings.arrBooks[settings.currentBookIndex]
-        arrPhrases = MLangPhrase.getDataByLang(m.LANGID)
+        arrPhrases = MUnitPhrase.getDataByBook(m.ID, unitPartFrom: m.USUNITFROM * 10 + m.USPARTFROM, unitPartTo: m.USUNITTO * 10 + m.USPARTTO)
     }
     
     public func filterPhrasesForSearchText(searchText: String, scope: String) {
@@ -24,5 +24,5 @@ public class LangPhrasesViewModel: NSObject {
             return (scope == "Phrase" ? m.PHRASE! : m.TRANSLATION!).containsString(searchText)
         })
     }
-
+    
 }

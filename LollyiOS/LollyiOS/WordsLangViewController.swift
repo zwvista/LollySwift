@@ -10,13 +10,13 @@ import UIKit
 
 class WordsLangViewController: WordsBaseViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating {
 
-    var wordsLangViewModel: LangWordsViewModel!
+    var wordsLangViewModel: WordsLangViewModel!
     var arrWords: [MLangWord] {
         return searchController.active && searchBar.text != "" ? wordsLangViewModel.arrWordsFiltered! : wordsLangViewModel.arrWords
     }
 
     override func viewDidLoad() {
-        wordsLangViewModel = LangWordsViewModel(settings: AppDelegate.theSettingsViewModel)
+        wordsLangViewModel = WordsLangViewModel(settings: AppDelegate.theSettingsViewModel)
         super.viewDidLoad()
         searchController.searchResultsUpdater = self
         searchBar.delegate = self

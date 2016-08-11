@@ -1,5 +1,5 @@
 //
-//  WordsBookViewController.swift
+//  WordsTBViewController.swift
 //  LollyiOS
 //
 //  Created by 趙偉 on 2016/06/23.
@@ -8,15 +8,15 @@
 
 import UIKit
 
-class WordsBookViewController: WordsBaseViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating {
+class WordsTBViewController: WordsBaseViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating {
 
-    var wordsBookViewModel: TBWordsViewModel!
+    var wordsBookViewModel: WordsTBViewModel!
     var arrWords: [MTBWord] {
         return searchController.active && searchBar.text != "" ? wordsBookViewModel.arrWordsFiltered! : wordsBookViewModel.arrWords
     }
 
     override func viewDidLoad() {
-        wordsBookViewModel = TBWordsViewModel(settings: AppDelegate.theSettingsViewModel)
+        wordsBookViewModel = WordsTBViewModel(settings: AppDelegate.theSettingsViewModel)
         super.viewDidLoad()
         searchController.searchResultsUpdater = self
         searchBar.delegate = self
