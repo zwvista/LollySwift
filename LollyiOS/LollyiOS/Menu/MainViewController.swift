@@ -15,7 +15,7 @@ class MainViewController: AMSlideMenuMainViewController {
             "searchSegue",
             "settingsSegue",
             "wordsUnitsSegue",
-            "wordsBookSegue",
+            "wordsTBSegue",
             "wordsLangSegue",
             "phrasesUnitsSegue",
             "phrasesLangSegue",

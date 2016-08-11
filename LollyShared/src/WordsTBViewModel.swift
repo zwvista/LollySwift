@@ -15,7 +15,7 @@ public class WordsTBViewModel: NSObject {
     
     public init(settings: SettingsViewModel) {
         self.settings = settings
-        let m = settings.arrBooks[settings.currentBookIndex]
+        let m = settings.arrTextBooks[settings.currentTextBookIndex]
         arrWords = MTBWord.getDataByLang(m.LANGID)
     }
     

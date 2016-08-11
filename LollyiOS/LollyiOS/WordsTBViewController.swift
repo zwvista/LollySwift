@@ -10,13 +10,13 @@ import UIKit
 
 class WordsTBViewController: WordsBaseViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating {
 
-    var wordsBookViewModel: WordsTBViewModel!
+    var wordsTBViewModel: WordsTBViewModel!
     var arrWords: [MTBWord] {
-        return searchController.active && searchBar.text != "" ? wordsBookViewModel.arrWordsFiltered! : wordsBookViewModel.arrWords
+        return searchController.active && searchBar.text != "" ? wordsTBViewModel.arrWordsFiltered! : wordsTBViewModel.arrWords
     }
 
     override func viewDidLoad() {
-        wordsBookViewModel = WordsTBViewModel(settings: AppDelegate.theSettingsViewModel)
+        wordsTBViewModel = WordsTBViewModel(settings: AppDelegate.theSettingsViewModel)
         super.viewDidLoad()
         searchController.searchResultsUpdater = self
         searchBar.delegate = self
@@ -43,7 +43,7 @@ class WordsTBViewController: WordsBaseViewController, UITableViewDelegate, UITab
     }
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
-        wordsBookViewModel.filterWordsForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex])
+        wordsTBViewModel.filterWordsForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex])
         tableView.reloadData()
     }
 }

@@ -11,7 +11,7 @@ import UIKit
 class SettingsViewController: UITableViewController, ActionSheetCustomPickerDelegate {    
     @IBOutlet weak var langCell: UITableViewCell!
     @IBOutlet weak var dictCell: UITableViewCell!
-    @IBOutlet weak var bookCell: UITableViewCell!
+    @IBOutlet weak var textbookCell: UITableViewCell!
     @IBOutlet weak var lblUnitFrom: UILabel!
     @IBOutlet weak var lblUnitTo: UILabel!
     @IBOutlet weak var swUnitTo: UISwitch!
@@ -24,14 +24,11 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var tapGesture = UITapGestureRecognizer.init(target: self, action: #selector(SettingsViewController.labelTap))
-        lblUnitFrom.addGestureRecognizer(tapGesture)
-        tapGesture = UITapGestureRecognizer.init(target: self, action: #selector(SettingsViewController.labelTap))
-        lblUnitTo.addGestureRecognizer(tapGesture)
-        tapGesture = UITapGestureRecognizer.init(target: self, action: #selector(SettingsViewController.labelTap))
-        lblPartFrom.addGestureRecognizer(tapGesture)
-        tapGesture = UITapGestureRecognizer.init(target: self, action: #selector(SettingsViewController.labelTap))
-        lblPartTo.addGestureRecognizer(tapGesture)
+        let f = {UITapGestureRecognizer.init(target: self, action: #selector(SettingsViewController.labelTap))}
+        lblUnitFrom.addGestureRecognizer(f())
+        lblUnitTo.addGestureRecognizer(f())
+        lblPartFrom.addGestureRecognizer(f())
+        lblPartTo.addGestureRecognizer(f())
         
         updateLang()
     }
@@ -44,7 +41,7 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
         case 1:
             ActionSheetCustomPicker.showPickerWithTitle("Select Dictionary", delegate: self, showCancelButton: true, origin: dictCell, initialSelections: [AppDelegate.theSettingsViewModel.currentDictIndex])
         case 2:
-            ActionSheetCustomPicker.showPickerWithTitle("Select Book", delegate: self, showCancelButton: true, origin: bookCell, initialSelections: [AppDelegate.theSettingsViewModel.currentBookIndex])
+            ActionSheetCustomPicker.showPickerWithTitle("Select TextBook", delegate: self, showCancelButton: true, origin: textbookCell, initialSelections: [AppDelegate.theSettingsViewModel.currentTextBookIndex])
         default:
             break
         }
@@ -61,7 +58,7 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
         case 1:
             return AppDelegate.theSettingsViewModel.arrDictionary.count
         case 2:
-            return AppDelegate.theSettingsViewModel.arrBooks.count
+            return AppDelegate.theSettingsViewModel.arrTextBooks.count
         default:
             return 0
         }
@@ -74,7 +71,7 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
         case 1:
             return AppDelegate.theSettingsViewModel.arrDictionary[row].DICTNAME
         case 2:
-            return AppDelegate.theSettingsViewModel.arrBooks[row].TEXTBOOKNAME
+            return AppDelegate.theSettingsViewModel.arrTextBooks[row].TEXTBOOKNAME
         default:
             return nil
         }
@@ -95,9 +92,9 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
             AppDelegate.theSettingsViewModel.currentDictIndex = selectedRow
             updateDict()
         case 2:
-            if selectedRow == AppDelegate.theSettingsViewModel.currentBookIndex {return}
-            AppDelegate.theSettingsViewModel.currentBookIndex = selectedRow
-            updateBook()
+            if selectedRow == AppDelegate.theSettingsViewModel.currentTextBookIndex {return}
+            AppDelegate.theSettingsViewModel.currentTextBookIndex = selectedRow
+            updateTextBook()
         default:
             break
         }
@@ -107,7 +104,7 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
         let m = AppDelegate.theSettingsViewModel.currentLang
         langCell.textLabel!.text = m.LANGNAME
         updateDict()
-        updateBook()
+        updateTextBook()
     }
     
     func updateDict() {
@@ -116,10 +113,10 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
         dictCell.detailTextLabel!.text = m.URL
     }
     
-    func updateBook() {
-        let m = AppDelegate.theSettingsViewModel.currentBook
-        bookCell.textLabel!.text = m.TEXTBOOKNAME
-        bookCell.detailTextLabel!.text = "\(m.UNITS) Units"
+    func updateTextBook() {
+        let m = AppDelegate.theSettingsViewModel.currentTextBook
+        textbookCell.textLabel!.text = m.TEXTBOOKNAME
+        textbookCell.detailTextLabel!.text = "\(m.UNITS) Units"
         lblUnitFrom.text = "\(m.USUNITFROM)"
         lblUnitTo.text = "\(m.USUNITTO)"
         swUnitTo.on = m.USUNITFROM != m.USUNITTO
@@ -130,7 +127,7 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
     
     @IBAction func labelTap(sender: AnyObject) {
         let lbl = (sender as! UITapGestureRecognizer).view as! UILabel
-        let m = AppDelegate.theSettingsViewModel.currentBook
+        let m = AppDelegate.theSettingsViewModel.currentTextBook
         if lbl === lblUnitFrom {
             ActionSheetStringPicker.showPickerWithTitle("Select Unit(From)", rows: m.unitsAsArray, initialSelection: m.USUNITFROM - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
                 m.USUNITFROM = selectedIndex + 1
@@ -166,7 +163,7 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
         lblUnitTo.enabled = swUnitTo.on
         lblPartTo.enabled = swUnitTo.on
         if !swUnitTo.on {
-            let m = AppDelegate.theSettingsViewModel.currentBook
+            let m = AppDelegate.theSettingsViewModel.currentTextBook
             m.USUNITTO = m.USUNITFROM
             lblUnitTo.text = lblUnitFrom.text
             m.USPARTTO = m.USPARTFROM

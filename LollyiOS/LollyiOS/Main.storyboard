@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Rze-Ej-diO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Rze-Ej-diO">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -142,7 +142,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Book:" id="AdO-JH-QNO">
+                            <tableViewSection headerTitle="TextBook:" id="AdO-JH-QNO">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="Eue-X6-xpf" detailTextLabel="Lab-Mu-P69" style="IBUITableViewCellStyleSubtitle" id="oOh-wh-QMf">
                                         <rect key="frame" x="0.0" y="236" width="600" height="44"/>
@@ -277,7 +277,6 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Settings" id="tcA-SM-bWb"/>
                     <connections>
-                        <outlet property="bookCell" destination="oOh-wh-QMf" id="Vwe-1Z-AhJ"/>
                         <outlet property="dictCell" destination="Fwx-mp-CFd" id="fka-5S-txs"/>
                         <outlet property="langCell" destination="O2T-aL-iGS" id="tdb-qa-jR3"/>
                         <outlet property="lblPartFrom" destination="zwP-Nn-GRN" id="Y5q-WP-DCa"/>
@@ -285,6 +284,7 @@
                         <outlet property="lblUnitFrom" destination="hGY-4C-6gS" id="jga-uf-6U6"/>
                         <outlet property="lblUnitTo" destination="CS7-LN-mIa" id="q0e-Ll-DiX"/>
                         <outlet property="swUnitTo" destination="Kne-1O-BIw" id="jBT-Fc-PKh"/>
+                        <outlet property="textbookCell" destination="oOh-wh-QMf" id="Vwe-1Z-AhJ"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2es-5j-k9X" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -360,7 +360,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Words in Book" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eCW-Yl-RyB">
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Words in TextBook" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eCW-Yl-RyB">
                                                     <rect key="frame" x="15" y="0.0" width="570" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -433,7 +433,7 @@
                         <segue destination="3Fx-WI-bB6" kind="custom" identifier="searchSegue" customClass="AMSlideMenuContentSegue" id="af4-jZ-g84"/>
                         <segue destination="9Dm-JB-0Rc" kind="custom" identifier="settingsSegue" customClass="AMSlideMenuContentSegue" id="4ZO-nW-70X"/>
                         <segue destination="6Ci-2R-fdD" kind="custom" identifier="wordsUnitsSegue" customClass="AMSlideMenuContentSegue" id="1eS-5J-gFq"/>
-                        <segue destination="itJ-iy-Qit" kind="custom" identifier="wordsBookSegue" customClass="AMSlideMenuContentSegue" id="oKH-Bx-lTJ"/>
+                        <segue destination="itJ-iy-Qit" kind="custom" identifier="wordsTextBookSegue" customClass="AMSlideMenuContentSegue" id="oKH-Bx-lTJ"/>
                         <segue destination="DV4-Mt-vI2" kind="custom" identifier="wordsLangSegue" customClass="AMSlideMenuContentSegue" id="Ttu-of-Ksi"/>
                         <segue destination="k9J-QP-1tL" kind="custom" identifier="phrasesUnitsSegue" customClass="AMSlideMenuContentSegue" id="Vjn-9O-9ng"/>
                         <segue destination="3zN-ZK-X7a" kind="custom" identifier="phrasesLangSegue" customClass="AMSlideMenuContentSegue" id="Isk-2D-6fY"/>
@@ -716,7 +716,7 @@
             </objects>
             <point key="canvasLocation" x="3743" y="2405"/>
         </scene>
-        <!--Words in Book-->
+        <!--Words in TextBook-->
         <scene sceneID="hed-cG-DrI">
             <objects>
                 <viewController id="edA-9d-NQY" customClass="WordsTBViewController" customModule="LollyiOS" customModuleProvider="target" sceneMemberID="viewController">
@@ -777,7 +777,7 @@
                             <constraint firstItem="lMt-Ab-ggT" firstAttribute="top" secondItem="htr-vG-DO3" secondAttribute="bottom" id="vQB-1g-pql"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Words in Book" id="fML-yu-XgM"/>
+                    <navigationItem key="navigationItem" title="Words in TextBook" id="fML-yu-XgM"/>
                     <connections>
                         <outlet property="searchBarContainerView" destination="rNx-OC-q9m" id="vMu-JV-W5F"/>
                         <outlet property="tableView" destination="htr-vG-DO3" id="HH5-pS-f9x"/>

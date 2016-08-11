@@ -15,7 +15,7 @@ public class WordsUnitsViewModel: NSObject {
     
     public init(settings: SettingsViewModel) {
         self.settings = settings
-        let m = settings.arrBooks[settings.currentBookIndex]
+        let m = settings.arrTextBooks[settings.currentTextBookIndex]
         arrWords = MUnitWord.getDataByTextBook(m.ID, unitPartFrom: m.USUNITFROM * 10 + m.USPARTFROM, unitPartTo: m.USUNITTO * 10 + m.USPARTTO)
     }
     
