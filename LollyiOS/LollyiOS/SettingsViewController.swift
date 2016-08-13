@@ -24,11 +24,15 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let f = {UITapGestureRecognizer.init(target: self, action: #selector(SettingsViewController.labelTap))}
-        lblUnitFrom.addGestureRecognizer(f())
-        lblUnitTo.addGestureRecognizer(f())
-        lblPartFrom.addGestureRecognizer(f())
-        lblPartTo.addGestureRecognizer(f())
+        func f(lbl: UILabel) {
+            lbl.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(SettingsViewController.labelTap)))
+        }
+        // let f = { (lbl: UILabel) in lbl. ... }
+        // let f: UILabel -> Void = { $0. ... }
+        f(lblUnitFrom)
+        f(lblUnitTo)
+        f(lblPartFrom)
+        f(lblPartTo)
         
         updateLang()
     }
@@ -83,16 +87,13 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
     
     func actionSheetPickerDidSucceed(actionSheetPicker: AbstractActionSheetPicker!, origin: AnyObject!) {
         switch selectedIndexPath.section {
-        case 0:
-            if selectedRow == AppDelegate.theSettingsViewModel.currentLangIndex {return}
+        case 0 where selectedRow != AppDelegate.theSettingsViewModel.currentLangIndex:
             AppDelegate.theSettingsViewModel.currentLangIndex = selectedRow
             updateLang()
-        case 1:
-            if selectedRow == AppDelegate.theSettingsViewModel.currentDictIndex {return}
+        case 1 where selectedRow != AppDelegate.theSettingsViewModel.currentDictIndex:
             AppDelegate.theSettingsViewModel.currentDictIndex = selectedRow
             updateDict()
-        case 2:
-            if selectedRow == AppDelegate.theSettingsViewModel.currentTextBookIndex {return}
+        case 2 where selectedRow != AppDelegate.theSettingsViewModel.currentTextBookIndex:
             AppDelegate.theSettingsViewModel.currentTextBookIndex = selectedRow
             updateTextBook()
         default:
@@ -125,49 +126,58 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
         lblPartTo.text = m.partsAsArray[m.USPARTTO - 1]
     }
     
+    func updateUnitPartFrom() {
+        let m = AppDelegate.theSettingsViewModel.currentTextBook
+        m.USUNITFROM = m.USUNITTO
+        lblUnitFrom.text = lblUnitTo.text
+        m.USPARTFROM = m.USPARTTO
+        lblPartFrom.text = lblPartTo.text
+    }
+    
+    func updateUnitPartTo() {
+        let m = AppDelegate.theSettingsViewModel.currentTextBook
+        m.USUNITTO = m.USUNITFROM
+        lblUnitTo.text = lblUnitFrom.text
+        m.USPARTTO = m.USPARTFROM
+        lblPartTo.text = lblPartFrom.text
+    }
+    
     @IBAction func labelTap(sender: AnyObject) {
         let lbl = (sender as! UITapGestureRecognizer).view as! UILabel
         let m = AppDelegate.theSettingsViewModel.currentTextBook
-        if lbl === lblUnitFrom {
+        let isInvalidUnitPart = {m.USUNITFROM * 10 + m.USPARTFROM > m.USUNITTO * 10 + m.USPARTTO}
+        switch lbl {
+        case lblUnitFrom:
             ActionSheetStringPicker.showPickerWithTitle("Select Unit(From)", rows: m.unitsAsArray, initialSelection: m.USUNITFROM - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
                 m.USUNITFROM = selectedIndex + 1
                 self.lblUnitFrom.text = m.unitsAsArray[selectedIndex]
-                if !self.swUnitTo.on {
-                    m.USUNITTO = m.USUNITFROM
-                    self.lblUnitTo.text = self.lblUnitFrom.text
-                }
+                if !self.swUnitTo.on || isInvalidUnitPart() {self.updateUnitPartTo()}
             }, cancelBlock: nil, origin: lblUnitFrom)
-        } else if lbl === lblUnitTo && swUnitTo.on {
+        case lblUnitTo where swUnitTo.on:
             ActionSheetStringPicker.showPickerWithTitle("Select Unit(To)", rows: m.unitsAsArray, initialSelection: m.USUNITTO - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
                 m.USUNITTO = selectedIndex + 1
                 self.lblUnitTo.text = m.unitsAsArray[selectedIndex]
+                if isInvalidUnitPart() {self.updateUnitPartFrom()}
             }, cancelBlock: nil, origin: lblUnitTo)
-        } else if lbl === lblPartFrom {
+        case lblPartFrom:
             ActionSheetStringPicker.showPickerWithTitle("Select Part", rows: m.partsAsArray, initialSelection: m.USPARTFROM - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
                 m.USPARTFROM = selectedIndex + 1
                 self.lblPartFrom.text = m.partsAsArray[selectedIndex]
-                if !self.swUnitTo.on {
-                    m.USPARTTO = m.USPARTFROM
-                    self.lblPartTo.text = self.lblPartFrom.text
-                }
+                if !self.swUnitTo.on || isInvalidUnitPart() {self.updateUnitPartTo()}
             }, cancelBlock: nil, origin: lblPartFrom)
-        } else if lbl === lblPartTo && swUnitTo.on {
+        case lblPartTo where swUnitTo.on:
             ActionSheetStringPicker.showPickerWithTitle("Select Part", rows: m.partsAsArray, initialSelection: m.USPARTTO - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
                 m.USPARTTO = selectedIndex + 1
                 self.lblPartTo.text = m.partsAsArray[selectedIndex]
+                if isInvalidUnitPart() {self.updateUnitPartFrom()}
             }, cancelBlock: nil, origin: lblPartTo)
+        default: break
         }
     }
     
     @IBAction func swUnitToValueChanged(sender: AnyObject) {
         lblUnitTo.enabled = swUnitTo.on
         lblPartTo.enabled = swUnitTo.on
-        if !swUnitTo.on {
-            let m = AppDelegate.theSettingsViewModel.currentTextBook
-            m.USUNITTO = m.USUNITFROM
-            lblUnitTo.text = lblUnitFrom.text
-            m.USPARTTO = m.USPARTFROM
-            lblPartTo.text = lblPartFrom.text
-        }
+        if !swUnitTo.on {self.updateUnitPartTo()}
     }
 }

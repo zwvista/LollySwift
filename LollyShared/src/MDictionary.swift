@@ -61,11 +61,11 @@ public class MDictionary: DBObject {
             text = NSMutableString(string: (html as NSString).substringWithRange(m!.range))
             
             func f(replacer: String) {
-                var replacer2 = replacer
+                var replacer = replacer
                 for (key, value) in dic {
-                    replacer2 = replacer2.stringByReplacingOccurrencesOfString(key, withString: value)
+                    replacer = replacer.stringByReplacingOccurrencesOfString(key, withString: value)
                 }
-                regex.replaceMatchesInString(text, options: NSMatchingOptions(), range: NSMakeRange(0, text.length), withTemplate: replacer2)
+                regex.replaceMatchesInString(text, options: NSMatchingOptions(), range: NSMakeRange(0, text.length), withTemplate: replacer)
             }
             
             f(arr[1])
