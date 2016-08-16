@@ -30,6 +30,7 @@ class WordsUnitsViewController: WordsBaseViewController, UITableViewDelegate, UI
         let cell = tableView.dequeueReusableCellWithIdentifier("WordCell", forIndexPath: indexPath)
         let m = arrWords[indexPath.row]
         cell.textLabel!.text = m.WORD
+        cell.detailTextLabel!.text = "\(m.UNIT)-\(m.PART)-\(m.SEQNUM)"
         return cell;
     }
     
@@ -37,6 +38,22 @@ class WordsUnitsViewController: WordsBaseViewController, UITableViewDelegate, UI
         let m = arrWords[indexPath.row]
         word = m.WORD!
         return indexPath
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        switch editingStyle {
+        case .Delete:
+            wordsUnitsViewModel.arrWords.removeAtIndex(indexPath.row)
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+        default:
+            break
+        }
+    }
+    
+    func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
+        let obj = wordsUnitsViewModel.arrWords[sourceIndexPath.row]
+        wordsUnitsViewModel.arrWords.removeAtIndex(sourceIndexPath.row)
+        wordsUnitsViewModel.arrWords.insert(obj, atIndex: destinationIndexPath.row)
     }
 
     func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {

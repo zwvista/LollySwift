@@ -30,6 +30,7 @@ class WordsTBViewController: WordsBaseViewController, UITableViewDelegate, UITab
         let cell = tableView.dequeueReusableCellWithIdentifier("WordCell", forIndexPath: indexPath)
         let m = arrWords[indexPath.row]
         cell.textLabel!.text = m.WORD
+        cell.detailTextLabel!.text = "\(m.TEXTBOOKNAME!) \(m.UNIT)-\(m.PART)-\(m.SEQNUM)"
         return cell;
     }
     

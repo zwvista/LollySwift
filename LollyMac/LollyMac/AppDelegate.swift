@@ -7,10 +7,15 @@
 //
 
 import Cocoa
+import LollyShared
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
+    private let _theSettingsViewModel = SettingsViewModel()
+    static var theSettingsViewModel: SettingsViewModel {
+        return (NSApplication.sharedApplication().delegate as! AppDelegate)._theSettingsViewModel
+    }
 
     func applicationDidFinishLaunching(aNotification: NSNotification) {
         // Insert code here to initialize your application
@@ -28,7 +33,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let storyboard = NSStoryboard(name: "Main", bundle: nil)
         let wc = storyboard.instantiateControllerWithIdentifier("Select Units Window Controller") as! NSWindowController
         if let w = wc.window {
-            //let vc = w.contentView as! SelectUnitsViewController
+            //let vc = w.contentView as! SettingsViewController
             let application = NSApplication.sharedApplication()
             application.runModalForWindow(w)
 

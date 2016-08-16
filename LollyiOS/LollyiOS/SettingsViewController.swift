@@ -21,6 +21,10 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
     var selectedIndexPath = NSIndexPath()
     var selectedRow = 0
     
+    var vm: SettingsViewModel {
+        return AppDelegate.theSettingsViewModel
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -41,11 +45,11 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
         selectedIndexPath = indexPath
         switch selectedIndexPath.section {
         case 0:
-            ActionSheetCustomPicker.showPickerWithTitle("Select Language", delegate: self, showCancelButton: true, origin: langCell, initialSelections: [AppDelegate.theSettingsViewModel.currentLangIndex])
+            ActionSheetCustomPicker.showPickerWithTitle("Select Language", delegate: self, showCancelButton: true, origin: langCell, initialSelections: [vm.currentLangIndex])
         case 1:
-            ActionSheetCustomPicker.showPickerWithTitle("Select Dictionary", delegate: self, showCancelButton: true, origin: dictCell, initialSelections: [AppDelegate.theSettingsViewModel.currentDictIndex])
+            ActionSheetCustomPicker.showPickerWithTitle("Select Dictionary", delegate: self, showCancelButton: true, origin: dictCell, initialSelections: [vm.currentDictIndex])
         case 2:
-            ActionSheetCustomPicker.showPickerWithTitle("Select TextBook", delegate: self, showCancelButton: true, origin: textbookCell, initialSelections: [AppDelegate.theSettingsViewModel.currentTextBookIndex])
+            ActionSheetCustomPicker.showPickerWithTitle("Select TextBook", delegate: self, showCancelButton: true, origin: textbookCell, initialSelections: [vm.currentTextBookIndex])
         default:
             break
         }
@@ -58,11 +62,11 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         switch selectedIndexPath.section {
         case 0:
-            return AppDelegate.theSettingsViewModel.arrLanguages.count
+            return vm.arrLanguages.count
         case 1:
-            return AppDelegate.theSettingsViewModel.arrDictionary.count
+            return vm.arrDictionary.count
         case 2:
-            return AppDelegate.theSettingsViewModel.arrTextBooks.count
+            return vm.arrTextBooks.count
         default:
             return 0
         }
@@ -71,11 +75,11 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         switch selectedIndexPath.section {
         case 0:
-            return AppDelegate.theSettingsViewModel.arrLanguages[row].LANGNAME
+            return vm.arrLanguages[row].LANGNAME
         case 1:
-            return AppDelegate.theSettingsViewModel.arrDictionary[row].DICTNAME
+            return vm.arrDictionary[row].DICTNAME
         case 2:
-            return AppDelegate.theSettingsViewModel.arrTextBooks[row].TEXTBOOKNAME
+            return vm.arrTextBooks[row].TEXTBOOKNAME
         default:
             return nil
         }
@@ -87,14 +91,14 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
     
     func actionSheetPickerDidSucceed(actionSheetPicker: AbstractActionSheetPicker!, origin: AnyObject!) {
         switch selectedIndexPath.section {
-        case 0 where selectedRow != AppDelegate.theSettingsViewModel.currentLangIndex:
-            AppDelegate.theSettingsViewModel.currentLangIndex = selectedRow
+        case 0 where selectedRow != vm.currentLangIndex:
+            vm.currentLangIndex = selectedRow
             updateLang()
-        case 1 where selectedRow != AppDelegate.theSettingsViewModel.currentDictIndex:
-            AppDelegate.theSettingsViewModel.currentDictIndex = selectedRow
+        case 1 where selectedRow != vm.currentDictIndex:
+            vm.currentDictIndex = selectedRow
             updateDict()
-        case 2 where selectedRow != AppDelegate.theSettingsViewModel.currentTextBookIndex:
-            AppDelegate.theSettingsViewModel.currentTextBookIndex = selectedRow
+        case 2 where selectedRow != vm.currentTextBookIndex:
+            vm.currentTextBookIndex = selectedRow
             updateTextBook()
         default:
             break
@@ -102,20 +106,20 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
     }
     
     func updateLang() {
-        let m = AppDelegate.theSettingsViewModel.currentLang
+        let m = vm.currentLang
         langCell.textLabel!.text = m.LANGNAME
         updateDict()
         updateTextBook()
     }
     
     func updateDict() {
-        let m = AppDelegate.theSettingsViewModel.currentDict
+        let m = vm.currentDict
         dictCell.textLabel!.text = m.DICTNAME
         dictCell.detailTextLabel!.text = m.URL
     }
     
     func updateTextBook() {
-        let m = AppDelegate.theSettingsViewModel.currentTextBook
+        let m = vm.currentTextBook
         textbookCell.textLabel!.text = m.TEXTBOOKNAME
         textbookCell.detailTextLabel!.text = "\(m.UNITS) Units"
         lblUnitFrom.text = "\(m.USUNITFROM)"
@@ -127,7 +131,7 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
     }
     
     func updateUnitPartFrom() {
-        let m = AppDelegate.theSettingsViewModel.currentTextBook
+        let m = vm.currentTextBook
         m.USUNITFROM = m.USUNITTO
         lblUnitFrom.text = lblUnitTo.text
         m.USPARTFROM = m.USPARTTO
@@ -135,7 +139,7 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
     }
     
     func updateUnitPartTo() {
-        let m = AppDelegate.theSettingsViewModel.currentTextBook
+        let m = vm.currentTextBook
         m.USUNITTO = m.USUNITFROM
         lblUnitTo.text = lblUnitFrom.text
         m.USPARTTO = m.USPARTFROM
@@ -144,7 +148,7 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
     
     @IBAction func labelTap(sender: AnyObject) {
         let lbl = (sender as! UITapGestureRecognizer).view as! UILabel
-        let m = AppDelegate.theSettingsViewModel.currentTextBook
+        let m = vm.currentTextBook
         let isInvalidUnitPart = {m.USUNITFROM * 10 + m.USPARTFROM > m.USUNITTO * 10 + m.USPARTTO}
         switch lbl {
         case lblUnitFrom:

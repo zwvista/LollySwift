@@ -15,16 +15,17 @@ class ViewController: NSViewController, NSSearchFieldDelegate {
     @IBOutlet weak var wvDictOnline: WebView!
     @IBOutlet weak var sfWord: NSSearchField!
     @IBOutlet weak var wvDictOffline: WebView!
-    @IBOutlet weak var dictionaryController: NSArrayController!
     
     var word = ""
-    var theSettingsViewModel = SettingsViewModel()
+    
+    var vm: SettingsViewModel {
+        return AppDelegate.theSettingsViewModel
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         wvDictOffline.hidden = true
-        langSelected(self)
     }
 
     override var representedObject: AnyObject? {
@@ -37,20 +38,9 @@ class ViewController: NSViewController, NSSearchFieldDelegate {
         wvDictOnline.hidden = false
         wvDictOffline.hidden = true
         
-        let m = theSettingsViewModel.currentDict
+        let m = vm.currentDict
         let url = m.urlString(word)
         wvDictOnline.mainFrameURL = url
-    }
-    
-    @IBAction func langSelected(sender: AnyObject) {
-        dictionaryController.content = theSettingsViewModel.arrDictionary
-        dictSelected(sender)
-    }
-    
-    @IBAction func dictSelected(sender: AnyObject) {
-        if sender !== self {
-            searchDict(sender)
-        }
     }
     
     override func controlTextDidEndEditing(obj: NSNotification) {
@@ -67,7 +57,7 @@ class ViewController: NSViewController, NSSearchFieldDelegate {
     
     func webView(sender: WebView!, didFinishLoadForFrame frame: WebFrame!) {
         if frame !== sender.mainFrame {return}
-        let m = theSettingsViewModel.currentDict
+        let m = vm.currentDict
         if m.DICTTYPENAME != "OFFLINE-ONLINE" {return}
         
         let data = frame.dataSource!.data
