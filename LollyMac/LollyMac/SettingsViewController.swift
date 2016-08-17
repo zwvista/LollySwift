@@ -14,7 +14,8 @@ class SettingsViewController: NSViewController {
     var vm: SettingsViewModel {
         return AppDelegate.theSettingsViewModel
     }
-    @IBOutlet weak var dictionaryController: NSArrayController!
+    @IBOutlet weak var dictionariesController: NSArrayController!
+    @IBOutlet weak var textbooksController: NSArrayController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,11 +30,19 @@ class SettingsViewController: NSViewController {
     }
     
     @IBAction func langSelected(sender: AnyObject) {
-        //dictionaryController.content = vm.arrDictionary
+        dictionariesController.content = vm.arrDictionaries
+        textbooksController.content = vm.arrTextBooks
         dictSelected(sender)
     }
     
     @IBAction func dictSelected(sender: AnyObject) {
     }
+    
+    
+    @IBAction func textbookSelected(sender: AnyObject) {
+    }
+    
+    
+    
     
 }

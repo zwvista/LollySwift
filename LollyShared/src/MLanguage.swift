@@ -12,6 +12,7 @@ public class MLanguage: DBObject {
     public var ID = 0
     public var LANGNAME: String?
     public var USTEXTBOOKID = 0
+    public var USDICTID = 0
     
     static func getData() -> [MLanguage] {
         let sql = "SELECT * FROM VLANGUAGES WHERE ID <> 0"

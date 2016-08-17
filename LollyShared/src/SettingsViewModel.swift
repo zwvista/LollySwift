@@ -19,10 +19,10 @@ public class SettingsViewModel: NSObject {
         return arrLanguages[currentLangIndex]
     }
     
-    public var arrDictionary = [MDictionary]()
+    public var arrDictionaries = [MDictionary]()
     public var currentDictIndex = 0
     public var currentDict: MDictionary {
-        return arrDictionary[currentDictIndex]
+        return arrDictionaries[currentDictIndex]
     }
     
     public var arrTextBooks = [MTextBook]()
@@ -33,15 +33,16 @@ public class SettingsViewModel: NSObject {
     
     public override init() {
         arrLanguages = MLanguage.getData()
-        currentLangIndex = 2
+        let langid = MUserSetting.getData()[0].USLANGID
+        currentLangIndex = arrLanguages.indexOf{ $0.ID == langid }!
         super.init()
         setCurrentLangIndex()
     }
     
     private func setCurrentLangIndex() {
         let m = arrLanguages[currentLangIndex]
-        arrDictionary = MDictionary.getDataByLang(m.ID)
-        currentDictIndex = 0
+        arrDictionaries = MDictionary.getDataByLang(m.ID)
+        currentDictIndex = arrDictionaries.indexOf{ $0.ID == m.USDICTID }!
         arrTextBooks = MTextBook.getDataByLang(m.ID)
         currentTextBookIndex = arrTextBooks.indexOf{ $0.ID == m.USTEXTBOOKID }!
     }

@@ -716,16 +716,8 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RQX-rZ-9Ej">
-                                <rect key="frame" x="18" y="181" width="74" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="TextBook" id="3qi-kw-X77">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                             <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yra-vx-iUa">
-                                <rect key="frame" x="110" y="226" width="160" height="26"/>
+                                <rect key="frame" x="110" y="226" width="223" height="26"/>
                                 <popUpButtonCell key="cell" type="push" title="Language Popup" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="Ypq-Pd-wNr" id="DBh-Q1-1ZP">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="menu"/>
@@ -738,123 +730,14 @@
                                     </menu>
                                 </popUpButtonCell>
                                 <connections>
+                                    <action selector="langSelected:" target="HfO-r7-QMx" id="5YY-rw-VJG"/>
                                     <binding destination="Jlp-Py-Ji5" name="content" keyPath="arrangedObjects" id="TlQ-Bg-Woj"/>
                                     <binding destination="Jlp-Py-Ji5" name="contentValues" keyPath="arrangedObjects.LANGNAME" previousBinding="TlQ-Bg-Woj" id="H1C-k8-O8E"/>
+                                    <binding destination="HfO-r7-QMx" name="selectedIndex" keyPath="vm.currentLangIndex" previousBinding="H1C-k8-O8E" id="JVn-p4-slO"/>
                                 </connections>
-                            </popUpButton>
-                            <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GLz-Xu-o0X">
-                                <rect key="frame" x="284" y="142" width="160" height="26"/>
-                                <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="AsX-ru-UC0" id="uIY-8L-hXg">
-                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="menu"/>
-                                    <menu key="menu" id="W4z-Wm-k4c">
-                                        <items>
-                                            <menuItem title="Item 1" state="on" id="AsX-ru-UC0"/>
-                                            <menuItem title="Item 2" id="DdB-OU-20d"/>
-                                            <menuItem title="Item 3" id="jxx-cM-QJt"/>
-                                        </items>
-                                    </menu>
-                                </popUpButtonCell>
-                            </popUpButton>
-                            <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GTc-kH-1Ux">
-                                <rect key="frame" x="110" y="174" width="160" height="26"/>
-                                <popUpButtonCell key="cell" type="push" title="TextBook Popup" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="T9E-mH-SvE" id="3SF-dR-BRE">
-                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="menu"/>
-                                    <menu key="menu" id="r9J-oc-fYy">
-                                        <items>
-                                            <menuItem title="TextBook Popup" state="on" id="T9E-mH-SvE"/>
-                                            <menuItem title="Item 2" id="j2w-Fx-HdU"/>
-                                            <menuItem title="Item 3" id="Bnh-Kz-ege"/>
-                                        </items>
-                                    </menu>
-                                </popUpButtonCell>
-                                <connections>
-                                    <binding destination="PzR-zm-jg5" name="content" keyPath="arrangedObjects" id="2fP-5g-Xgh"/>
-                                    <binding destination="PzR-zm-jg5" name="contentValues" keyPath="arrangedObjects.TEXTBOOKNAME" previousBinding="2fP-5g-Xgh" id="MO0-kq-K8B"/>
-                                </connections>
-                            </popUpButton>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Igb-w9-WhP">
-                                <rect key="frame" x="18" y="151" width="37" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Units" id="4D5-xH-Cgs">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hwZ-pf-crm">
-                                <rect key="frame" x="22" y="101" width="53" height="25"/>
-                                <buttonCell key="cell" type="check" title="To" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="M0b-ZC-nEW">
-                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                            </button>
-                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Jg-pF-QzG">
-                                <rect key="frame" x="112" y="146" width="52" height="22"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="w0X-Km-Ti4">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0h9-iG-mfZ">
-                                <rect key="frame" x="158" y="143" width="19" height="27"/>
-                                <stepperCell key="cell" continuous="YES" alignment="left" maxValue="100" id="aQL-aG-iJ1"/>
-                            </stepper>
-                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S7q-tf-7ld">
-                                <rect key="frame" x="112" y="106" width="52" height="22"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="1oh-3p-qSn">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C0S-0m-TsS">
-                                <rect key="frame" x="158" y="103" width="19" height="27"/>
-                                <stepperCell key="cell" continuous="YES" alignment="left" maxValue="100" id="hyL-ZJ-tNL"/>
-                            </stepper>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="48d-X5-saz">
-                                <rect key="frame" x="196" y="149" width="84" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="(100 in all)" id="ws5-iP-4uB">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3rv-9I-v1e">
-                                <rect key="frame" x="196" y="106" width="84" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="(100 in all)" id="Pb5-3r-KY8">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RQl-wg-eWz">
-                                <rect key="frame" x="282" y="24" width="81" height="32"/>
-                                <buttonCell key="cell" type="push" title="Close" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="TUp-8T-zXw">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="close:" target="HfO-r7-QMx" id="IVL-MY-X3O"/>
-                                </connections>
-                            </button>
-                            <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="37y-dS-riZ">
-                                <rect key="frame" x="284" y="101" width="160" height="26"/>
-                                <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="qUH-52-JJ8" id="aEJ-8z-GTg">
-                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="menu"/>
-                                    <menu key="menu" id="tk6-XY-w2N">
-                                        <items>
-                                            <menuItem title="Item 1" state="on" id="qUH-52-JJ8"/>
-                                            <menuItem title="Item 2" id="Sp9-HR-9wZ"/>
-                                            <menuItem title="Item 3" id="j2C-z3-0xP"/>
-                                        </items>
-                                    </menu>
-                                </popUpButtonCell>
                             </popUpButton>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6If-OE-53N">
-                                <rect key="frame" x="18" y="206" width="69" height="21"/>
+                                <rect key="frame" x="18" y="203" width="69" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="65" id="txg-O0-gHn"/>
                                 </constraints>
@@ -865,7 +748,7 @@
                                 </textFieldCell>
                             </textField>
                             <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bo4-yz-Ptk">
-                                <rect key="frame" x="110" y="203" width="160" height="26"/>
+                                <rect key="frame" x="110" y="200" width="223" height="26"/>
                                 <popUpButtonCell key="cell" type="push" title="Dictionary Popup" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="pp6-jV-8Y6" id="B3v-ro-gsw">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="menu"/>
@@ -881,13 +764,163 @@
                                     </connections>
                                 </popUpButtonCell>
                                 <connections>
-                                    <action selector="dictSelected:" target="XfG-lQ-9wD" id="hDU-XO-qY7"/>
+                                    <action selector="dictSelected:" target="HfO-r7-QMx" id="zXy-H5-Dgo"/>
                                     <binding destination="EkI-9N-SJp" name="content" keyPath="arrangedObjects" id="cMt-dW-ffF"/>
                                     <binding destination="EkI-9N-SJp" name="contentValues" keyPath="arrangedObjects.DICTNAME" previousBinding="cMt-dW-ffF" id="PXM-QD-ObO"/>
+                                    <binding destination="HfO-r7-QMx" name="selectedIndex" keyPath="vm.currentDictIndex" previousBinding="PXM-QD-ObO" id="78b-ia-5yx"/>
                                 </connections>
                             </popUpButton>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RQX-rZ-9Ej">
+                                <rect key="frame" x="18" y="181" width="74" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="TextBook" id="3qi-kw-X77">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GTc-kH-1Ux">
+                                <rect key="frame" x="110" y="174" width="223" height="26"/>
+                                <popUpButtonCell key="cell" type="push" title="TextBook Popup" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="T9E-mH-SvE" id="3SF-dR-BRE">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="menu"/>
+                                    <menu key="menu" id="r9J-oc-fYy">
+                                        <items>
+                                            <menuItem title="TextBook Popup" state="on" id="T9E-mH-SvE"/>
+                                            <menuItem title="Item 2" id="j2w-Fx-HdU"/>
+                                            <menuItem title="Item 3" id="Bnh-Kz-ege"/>
+                                        </items>
+                                    </menu>
+                                </popUpButtonCell>
+                                <connections>
+                                    <action selector="textbookSelected:" target="HfO-r7-QMx" id="IFh-yp-XUC"/>
+                                    <binding destination="PzR-zm-jg5" name="content" keyPath="arrangedObjects" id="JIQ-qi-6L5"/>
+                                    <binding destination="PzR-zm-jg5" name="contentValues" keyPath="arrangedObjects.TEXTBOOKNAME" previousBinding="JIQ-qi-6L5" id="Qbq-2Q-bhv"/>
+                                    <binding destination="HfO-r7-QMx" name="selectedIndex" keyPath="vm.currentTextBookIndex" previousBinding="Qbq-2Q-bhv" id="mRt-gA-PoL"/>
+                                </connections>
+                            </popUpButton>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8FM-8h-XQF">
+                                <rect key="frame" x="18" y="147" width="37" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Units" id="tL7-0J-rf7">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b7U-Wa-ylD">
+                                <rect key="frame" x="110" y="140" width="103" height="26"/>
+                                <popUpButtonCell key="cell" type="push" title="Unit From" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="gYO-Nf-gSJ" id="cZT-7J-rXb">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="menu"/>
+                                    <menu key="menu" id="vat-9U-4lE">
+                                        <items>
+                                            <menuItem title="Unit From" state="on" id="gYO-Nf-gSJ"/>
+                                            <menuItem title="Item 2" id="BY6-gi-8P7"/>
+                                            <menuItem title="Item 3" id="yKR-k2-bFu"/>
+                                        </items>
+                                    </menu>
+                                </popUpButtonCell>
+                                <connections>
+                                    <action selector="textbookSelected:" target="HfO-r7-QMx" id="Y5l-fg-RzL"/>
+                                    <binding destination="7EM-l7-CJV" name="content" keyPath="arrangedObjects" id="OJ1-Jn-zmx"/>
+                                </connections>
+                            </popUpButton>
+                            <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PW2-rx-UfY">
+                                <rect key="frame" x="321" y="138" width="123" height="26"/>
+                                <popUpButtonCell key="cell" type="push" title="Part From" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="YmY-5b-nIY" id="Ykt-Ge-Y1D">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="menu"/>
+                                    <menu key="menu" id="8Pj-2s-ZK8">
+                                        <items>
+                                            <menuItem title="Part From" state="on" id="YmY-5b-nIY"/>
+                                            <menuItem title="Item 2" id="09f-sS-asp"/>
+                                            <menuItem title="Item 3" id="8MO-Mw-7n3"/>
+                                        </items>
+                                    </menu>
+                                </popUpButtonCell>
+                                <connections>
+                                    <binding destination="IiA-XH-70P" name="content" keyPath="arrangedObjects" id="Lwd-rS-GaD"/>
+                                </connections>
+                            </popUpButton>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zEX-94-Fpv">
+                                <rect key="frame" x="22" y="105" width="53" height="25"/>
+                                <buttonCell key="cell" type="check" title="To" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="dwO-WV-Zvh">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NHc-fW-dBl">
+                                <rect key="frame" x="225" y="110" width="84" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="(100 in all)" id="x78-To-nqZ">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <connections>
+                                    <binding destination="PzR-zm-jg5" name="value" keyPath="selection.UNITS" id="du9-6p-M2S"/>
+                                </connections>
+                            </textField>
+                            <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fnN-We-eae">
+                                <rect key="frame" x="110" y="105" width="103" height="26"/>
+                                <popUpButtonCell key="cell" type="push" title="Unit To" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="OPy-O3-1Jl" id="Rk2-8c-t2m">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="menu"/>
+                                    <menu key="menu" id="GiK-CL-6tI">
+                                        <items>
+                                            <menuItem title="Unit To" state="on" id="OPy-O3-1Jl"/>
+                                            <menuItem title="Item 2" id="kab-yn-a18"/>
+                                            <menuItem title="Item 3" id="g57-db-rrC"/>
+                                        </items>
+                                    </menu>
+                                </popUpButtonCell>
+                                <connections>
+                                    <action selector="textbookSelected:" target="HfO-r7-QMx" id="H7c-V2-Vcy"/>
+                                    <binding destination="7EM-l7-CJV" name="content" keyPath="arrangedObjects" id="nPp-dG-P8d"/>
+                                </connections>
+                            </popUpButton>
+                            <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xjt-G8-0bL">
+                                <rect key="frame" x="321" y="105" width="123" height="26"/>
+                                <popUpButtonCell key="cell" type="push" title="Part To" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="7i2-Vb-6eo" id="ErO-h1-1fx">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="menu"/>
+                                    <menu key="menu" id="Kzt-tk-VO2">
+                                        <items>
+                                            <menuItem title="Part To" state="on" id="7i2-Vb-6eo"/>
+                                            <menuItem title="Item 2" id="Sjh-kY-fUj"/>
+                                            <menuItem title="Item 3" id="Gte-jR-HuE"/>
+                                        </items>
+                                    </menu>
+                                </popUpButtonCell>
+                                <connections>
+                                    <binding destination="IiA-XH-70P" name="content" keyPath="arrangedObjects" id="UCh-Ma-RIH"/>
+                                </connections>
+                            </popUpButton>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QMz-gd-sUW">
+                                <rect key="frame" x="282" y="28" width="81" height="32"/>
+                                <buttonCell key="cell" type="push" title="Close" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="KI0-0w-mkA">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="close:" target="HfO-r7-QMx" id="Ov5-nf-qzl"/>
+                                </connections>
+                            </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NLa-HM-eg1">
+                                <rect key="frame" x="225" y="145" width="84" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="(100 in all)" id="c82-k5-KLU">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <connections>
+                                    <binding destination="PzR-zm-jg5" name="value" keyPath="selection.UNITS" id="1Ux-a1-2jW"/>
+                                </connections>
+                            </textField>
                         </subviews>
                     </view>
+                    <connections>
+                        <outlet property="dictionariesController" destination="EkI-9N-SJp" id="UUM-3W-W3z"/>
+                        <outlet property="textbooksController" destination="PzR-zm-jg5" id="ud1-Ws-3QT"/>
+                    </connections>
                 </viewController>
                 <customObject id="OC9-Mn-GX9" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <arrayController id="Jlp-Py-Ji5" userLabel="Languages Controller">
@@ -897,6 +930,16 @@
                 </arrayController>
                 <arrayController id="EkI-9N-SJp" userLabel="Dictionaries Controller"/>
                 <arrayController id="PzR-zm-jg5" userLabel="TextBooks Controller"/>
+                <arrayController id="7EM-l7-CJV" userLabel="Units Controller">
+                    <connections>
+                        <binding destination="HfO-r7-QMx" name="contentArray" keyPath="vm.currentTextBook.unitsAsArray" id="vyG-mZ-Jei"/>
+                    </connections>
+                </arrayController>
+                <arrayController id="IiA-XH-70P" userLabel="Parts Controller">
+                    <connections>
+                        <binding destination="HfO-r7-QMx" name="contentArray" keyPath="vm.currentTextBook.partsAsArray" id="Sbx-LE-N19"/>
+                    </connections>
+                </arrayController>
             </objects>
             <point key="canvasLocation" x="809" y="592"/>
         </scene>

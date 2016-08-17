@@ -64,7 +64,7 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
         case 0:
             return vm.arrLanguages.count
         case 1:
-            return vm.arrDictionary.count
+            return vm.arrDictionaries.count
         case 2:
             return vm.arrTextBooks.count
         default:
@@ -77,7 +77,7 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
         case 0:
             return vm.arrLanguages[row].LANGNAME
         case 1:
-            return vm.arrDictionary[row].DICTNAME
+            return vm.arrDictionaries[row].DICTNAME
         case 2:
             return vm.arrTextBooks[row].TEXTBOOKNAME
         default:
@@ -153,26 +153,26 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
         switch lbl {
         case lblUnitFrom:
             ActionSheetStringPicker.showPickerWithTitle("Select Unit(From)", rows: m.unitsAsArray, initialSelection: m.USUNITFROM - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
-                m.USUNITFROM = selectedIndex + 1
-                self.lblUnitFrom.text = m.unitsAsArray[selectedIndex]
+                m.USUNITFROM = Int(selectedValue as! String)!
+                self.lblUnitFrom.text = (selectedValue as! String)
                 if !self.swUnitTo.on || isInvalidUnitPart() {self.updateUnitPartTo()}
             }, cancelBlock: nil, origin: lblUnitFrom)
         case lblUnitTo where swUnitTo.on:
             ActionSheetStringPicker.showPickerWithTitle("Select Unit(To)", rows: m.unitsAsArray, initialSelection: m.USUNITTO - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
-                m.USUNITTO = selectedIndex + 1
-                self.lblUnitTo.text = m.unitsAsArray[selectedIndex]
+                m.USUNITTO = Int(selectedValue as! String)!
+                self.lblUnitTo.text = (selectedValue as! String)
                 if isInvalidUnitPart() {self.updateUnitPartFrom()}
             }, cancelBlock: nil, origin: lblUnitTo)
         case lblPartFrom:
             ActionSheetStringPicker.showPickerWithTitle("Select Part", rows: m.partsAsArray, initialSelection: m.USPARTFROM - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
-                m.USPARTFROM = selectedIndex + 1
-                self.lblPartFrom.text = m.partsAsArray[selectedIndex]
+                m.USPARTFROM = Int(selectedValue as! String)!
+                self.lblPartFrom.text = (selectedValue as! String)
                 if !self.swUnitTo.on || isInvalidUnitPart() {self.updateUnitPartTo()}
             }, cancelBlock: nil, origin: lblPartFrom)
         case lblPartTo where swUnitTo.on:
             ActionSheetStringPicker.showPickerWithTitle("Select Part", rows: m.partsAsArray, initialSelection: m.USPARTTO - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
-                m.USPARTTO = selectedIndex + 1
-                self.lblPartTo.text = m.partsAsArray[selectedIndex]
+                m.USPARTTO = Int(selectedValue as! String)!
+                self.lblPartTo.text = (selectedValue as! String)
                 if isInvalidUnitPart() {self.updateUnitPartFrom()}
             }, cancelBlock: nil, origin: lblPartTo)
         default: break
