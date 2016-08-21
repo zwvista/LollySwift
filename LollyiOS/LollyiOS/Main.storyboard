@@ -865,7 +865,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="u2P-mb-ghZ" kind="presentation" id="ShM-XZ-dCv"/>
+                                    <segue destination="u2P-mb-ghZ" kind="presentation" identifier="edit" id="ShM-XZ-dCv"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -877,7 +877,7 @@
                     <navigationItem key="navigationItem" title="Words in Unit (Edit)" id="xZ5-om-3CN">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="iAg-Rh-7JO">
                             <connections>
-                                <segue destination="u2P-mb-ghZ" kind="presentation" id="O5l-wV-jBh"/>
+                                <segue destination="u2P-mb-ghZ" kind="presentation" identifier="add" id="O5l-wV-jBh"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -964,18 +964,18 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uAX-rX-JSe">
-                                                    <rect key="frame" x="108" y="7" width="484" height="30"/>
-                                                    <color key="textColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                </textField>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Seq Num:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tsc-XY-BEh">
                                                     <rect key="frame" x="8" y="11" width="75" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uAX-rX-JSe">
+                                                    <rect key="frame" x="108" y="7" width="484" height="30"/>
+                                                    <color key="textColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="uAX-rX-JSe" firstAttribute="trailing" secondItem="I5H-fY-fr4" secondAttribute="trailingMargin" id="Nbk-zN-v5p"/>
@@ -1035,6 +1035,12 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="tfPart" destination="Zxu-Z1-5BJ" id="x2v-dD-m6A"/>
+                        <outlet property="tfSeqNum" destination="uAX-rX-JSe" id="xse-Hk-fUT"/>
+                        <outlet property="tfUnit" destination="Wgk-3h-Eh0" id="UsD-Sp-mdg"/>
+                        <outlet property="tfWord" destination="fbt-Ws-0XR" id="pVd-Fi-H2x"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O2C-27-NT0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1192,7 +1198,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="EGL-4M-vDl"/>
         <segue reference="O5l-wV-jBh"/>
+        <segue reference="EGL-4M-vDl"/>
     </inferredMetricsTieBreakers>
 </document>

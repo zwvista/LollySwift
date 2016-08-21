@@ -11,6 +11,7 @@ import UIKit
 class WordsUnitEditViewController: UITableViewController {
 
     var arrWords: [MUnitWord]!
+    var mWord: MUnitWord?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +37,11 @@ class WordsUnitEditViewController: UITableViewController {
         return true
     }
     
+    override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+        mWord = arrWords[indexPath.row]
+        return indexPath
+    }
+    
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         switch editingStyle {
         case .Delete:
@@ -47,8 +53,16 @@ class WordsUnitEditViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, moveRowAtIndexPath sourceIndexPath: NSIndexPath, toIndexPath destinationIndexPath: NSIndexPath) {
-        let obj = arrWords[sourceIndexPath.row]
+        let m = arrWords[sourceIndexPath.row]
         arrWords.removeAtIndex(sourceIndexPath.row)
-        arrWords.insert(obj, atIndex: destinationIndexPath.row)
+        arrWords.insert(m, atIndex: destinationIndexPath.row)
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let controller = segue.destinationViewController as? UINavigationController,
+            controller2 = controller.viewControllers[0] as? WordsUnitDetailViewController {
+            controller2.mWord = segue.identifier == "add" ? MUnitWord() : mWord!
+        }
+    }
+    
 }

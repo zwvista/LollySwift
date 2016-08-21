@@ -15,6 +15,10 @@ public class DBObject: NSObject {
     func nullToNil(value: AnyObject?) -> AnyObject? {
         return value is NSNull ? nil : value;
     }
+    
+    public override init() {
+        super.init()
+    }
 
     required public init(databaseResultSet resultSet: FMResultSet) {
         super.init()
