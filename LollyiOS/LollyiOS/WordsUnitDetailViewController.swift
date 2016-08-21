@@ -1,5 +1,5 @@
 //
-//  WordsDetailViewController.swift
+//  WordsUnitDetailViewController.swift
 //  LollyiOS
 //
 //  Created by 趙偉 on 2016/06/23.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WordsDetailViewController: UITableViewController {
+class WordsUnitDetailViewController: UITableViewController {
 
     @IBAction func onCancel(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
