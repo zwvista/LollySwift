@@ -1,5 +1,5 @@
 //
-//  WordsTBViewModel.swift
+//  WordsTextbookViewModel.swift
 //  LollyiOS
 //
 //  Created by 趙偉 on 2016/06/28.
@@ -8,15 +8,15 @@
 
 import Foundation
 
-public class WordsTBViewModel: NSObject {
+public class WordsTextbookViewModel: NSObject {
     public var settings: SettingsViewModel
-    public var arrWords: [MTBWord]
-    public var arrWordsFiltered: [MTBWord]?
+    public var arrWords: [MTextbookWord]
+    public var arrWordsFiltered: [MTextbookWord]?
     
     public init(settings: SettingsViewModel) {
         self.settings = settings
-        let m = settings.arrTextBooks[settings.currentTextBookIndex]
-        arrWords = MTBWord.getDataByLang(m.LANGID)
+        let m = settings.arrTextbooks[settings.currentTextbookIndex]
+        arrWords = MTextbookWord.getDataByLang(m.LANGID)
     }
     
     public func filterWordsForSearchText(searchText: String, scope: String) {

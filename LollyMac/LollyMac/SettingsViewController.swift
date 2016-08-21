@@ -31,7 +31,7 @@ class SettingsViewController: NSViewController {
     
     @IBAction func langSelected(sender: AnyObject) {
         dictionariesController.content = vm.arrDictionaries
-        textbooksController.content = vm.arrTextBooks
+        textbooksController.content = vm.arrTextbooks
         dictSelected(sender)
     }
     

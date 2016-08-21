@@ -10,13 +10,13 @@ import UIKit
 
 class PhrasesLangViewController: PhrasesBaseViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating {
     
-    var phrasesLangViewModel: PhrasesLangViewModel!
+    var vm: PhrasesLangViewModel!
     var arrPhrases: [MLangPhrase] {
-        return searchController.active && searchBar.text != "" ? phrasesLangViewModel.arrPhrasesFiltered! : phrasesLangViewModel.arrPhrases
+        return searchController.active && searchBar.text != "" ? vm.arrPhrasesFiltered! : vm.arrPhrases
     }
     
     override func viewDidLoad() {
-        phrasesLangViewModel = PhrasesLangViewModel(settings: AppDelegate.theSettingsViewModel)
+        vm = PhrasesLangViewModel(settings: AppDelegate.theSettingsViewModel)
         super.viewDidLoad()
         searchController.searchResultsUpdater = self
         searchBar.delegate = self
@@ -44,7 +44,7 @@ class PhrasesLangViewController: PhrasesBaseViewController, UITableViewDelegate,
     }
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
-        phrasesLangViewModel.filterPhrasesForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex])
+        vm.filterPhrasesForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex])
         tableView.reloadData()
     }
 }

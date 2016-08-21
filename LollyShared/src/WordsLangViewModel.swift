@@ -15,7 +15,7 @@ public class WordsLangViewModel: NSObject {
     
     public init(settings: SettingsViewModel) {
         self.settings = settings
-        let m = settings.arrTextBooks[settings.currentTextBookIndex]
+        let m = settings.arrTextbooks[settings.currentTextbookIndex]
         arrWords = MLangWord.getDataByLang(m.LANGID)
     }
     

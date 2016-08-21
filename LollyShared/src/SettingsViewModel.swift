@@ -25,16 +25,24 @@ public class SettingsViewModel: NSObject {
         return arrDictionaries[currentDictIndex]
     }
     
-    public var arrTextBooks = [MTextBook]()
-    public var currentTextBookIndex = 0
-    public var currentTextBook: MTextBook {
-        return arrTextBooks[currentTextBookIndex]
+    public var arrTextbooks = [MTextbook]()
+    public var currentTextbookIndex: Int {
+        didSet {
+            setCurrentTextbookIndex()
+        }
     }
+    public var currentTextbook: MTextbook {
+        return arrTextbooks[currentTextbookIndex]
+    }
+    
+    public var arrUnits = [String]()
+    public var arrParts = [String]()
     
     public override init() {
         arrLanguages = MLanguage.getData()
-        let langid = MUserSetting.getData()[0].USLANGID
-        currentLangIndex = arrLanguages.indexOf{ $0.ID == langid }!
+        let m = MUserSetting.getData()[0]
+        currentLangIndex = arrLanguages.indexOf{ $0.ID == m.USLANGID }!
+        currentTextbookIndex = 0
         super.init()
         setCurrentLangIndex()
     }
@@ -43,7 +51,12 @@ public class SettingsViewModel: NSObject {
         let m = arrLanguages[currentLangIndex]
         arrDictionaries = MDictionary.getDataByLang(m.ID)
         currentDictIndex = arrDictionaries.indexOf{ $0.ID == m.USDICTID }!
-        arrTextBooks = MTextBook.getDataByLang(m.ID)
-        currentTextBookIndex = arrTextBooks.indexOf{ $0.ID == m.USTEXTBOOKID }!
+        arrTextbooks = MTextbook.getDataByLang(m.ID)
+        currentTextbookIndex = arrTextbooks.indexOf{ $0.ID == m.USTEXTBOOKID }!
+    }
+    
+    private func setCurrentTextbookIndex() {
+        arrUnits = (1 ... currentTextbook.UNITS).map{ String($0) }
+        arrParts = (currentTextbook.PARTS?.componentsSeparatedByString(" "))!
     }
 }

@@ -28,8 +28,6 @@ class WordsBaseViewController: UIViewController {
         searchBar.scopeButtonTitles = ["Word", "Translation"]
         searchBar.sizeToFit()
         searchBarContainerView.addSubview(searchBar)
-        
-        navigationItem.rightBarButtonItem = editButtonItem()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -38,21 +36,8 @@ class WordsBaseViewController: UIViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let controller = segue.destinationViewController as! WordsDetailViewController
-        controller.word = word
-    }
-    
-    override func setEditing(editing: Bool, animated: Bool) {
-        super.setEditing(editing, animated: animated)
-        tableView.editing = editing
-        searchBar.userInteractionEnabled = !editing
-    }
-    
-    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
-    }
-    
-    func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
+        if let controller = segue.destinationViewController as? WordsDictViewController {
+            controller.word = word
+        }
     }
 }

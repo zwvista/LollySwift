@@ -8,18 +8,10 @@
 
 import UIKit
 
-class WordsDetailViewController: UIViewController {
+class WordsDetailViewController: UITableViewController {
 
-    @IBOutlet weak var wvWord: UIWebView!
-    var word = ""
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        navigationItem.title = word
-        let m = AppDelegate.theSettingsViewModel.currentDict
-        let url = m.urlString(word)
-        wvWord.loadRequest(NSURLRequest(URL: NSURL(string: url)!))
+    @IBAction func onCancel(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
-
+    
 }

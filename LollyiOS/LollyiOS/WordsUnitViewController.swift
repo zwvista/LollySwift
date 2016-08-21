@@ -1,5 +1,5 @@
 //
-//  WordsLangViewController.swift
+//  WordsUnitViewController.swift
 //  LollyiOS
 //
 //  Created by 趙偉 on 2016/06/23.
@@ -8,15 +8,15 @@
 
 import UIKit
 
-class WordsLangViewController: WordsBaseViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating {
+class WordsUnitViewController: WordsBaseViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating {
 
-    var vm: WordsLangViewModel!
-    var arrWords: [MLangWord] {
+    var vm: WordsUnitViewModel!
+    var arrWords: [MUnitWord] {
         return searchController.active && searchBar.text != "" ? vm.arrWordsFiltered! : vm.arrWords
     }
-
+    
     override func viewDidLoad() {
-        vm = WordsLangViewModel(settings: AppDelegate.theSettingsViewModel)
+        vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel)
         super.viewDidLoad()
         searchController.searchResultsUpdater = self
         searchBar.delegate = self
@@ -38,12 +38,19 @@ class WordsLangViewController: WordsBaseViewController, UITableViewDelegate, UIT
         word = m.WORD!
         return indexPath
     }
-    
+
     func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
     }
-    
+
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         vm.filterWordsForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex])
         tableView.reloadData()
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        super.prepareForSegue(segue, sender: sender)
+        if let controller = segue.destinationViewController as? WordsUnitEditViewController {
+            controller.arrWords = vm.arrWords
+        }
     }
 }

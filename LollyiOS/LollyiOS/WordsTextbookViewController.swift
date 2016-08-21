@@ -1,5 +1,5 @@
 //
-//  WordsTBViewController.swift
+//  WordsTextbookViewController.swift
 //  LollyiOS
 //
 //  Created by 趙偉 on 2016/06/23.
@@ -8,15 +8,15 @@
 
 import UIKit
 
-class WordsTBViewController: WordsBaseViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating {
+class WordsTextbookViewController: WordsBaseViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating {
 
-    var wordsTBViewModel: WordsTBViewModel!
-    var arrWords: [MTBWord] {
-        return searchController.active && searchBar.text != "" ? wordsTBViewModel.arrWordsFiltered! : wordsTBViewModel.arrWords
+    var vm: WordsTextbookViewModel!
+    var arrWords: [MTextbookWord] {
+        return searchController.active && searchBar.text != "" ? vm.arrWordsFiltered! : vm.arrWords
     }
 
     override func viewDidLoad() {
-        wordsTBViewModel = WordsTBViewModel(settings: AppDelegate.theSettingsViewModel)
+        vm = WordsTextbookViewModel(settings: AppDelegate.theSettingsViewModel)
         super.viewDidLoad()
         searchController.searchResultsUpdater = self
         searchBar.delegate = self
@@ -30,7 +30,6 @@ class WordsTBViewController: WordsBaseViewController, UITableViewDelegate, UITab
         let cell = tableView.dequeueReusableCellWithIdentifier("WordCell", forIndexPath: indexPath)
         let m = arrWords[indexPath.row]
         cell.textLabel!.text = m.WORD
-        cell.detailTextLabel!.text = "\(m.TEXTBOOKNAME!) \(m.UNIT)-\(m.PART)-\(m.SEQNUM)"
         return cell;
     }
     
@@ -44,7 +43,7 @@ class WordsTBViewController: WordsBaseViewController, UITableViewDelegate, UITab
     }
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
-        wordsTBViewModel.filterWordsForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex])
+        vm.filterWordsForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex])
         tableView.reloadData()
     }
 }

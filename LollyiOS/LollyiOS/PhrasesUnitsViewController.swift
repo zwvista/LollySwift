@@ -10,13 +10,13 @@ import UIKit
 
 class PhrasesUnitsViewController: PhrasesBaseViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating {
     
-    var phrasesUnitsViewModel: PhrasesUnitsViewModel!
+    var vm: PhrasesUnitViewModel!
     var arrPhrases: [MUnitPhrase] {
-        return searchController.active && searchBar.text != "" ? phrasesUnitsViewModel.arrPhrasesFiltered! : phrasesUnitsViewModel.arrPhrases
+        return searchController.active && searchBar.text != "" ? vm.arrPhrasesFiltered! : vm.arrPhrases
     }
     
     override func viewDidLoad() {
-        phrasesUnitsViewModel = PhrasesUnitsViewModel(settings: AppDelegate.theSettingsViewModel)
+        vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel)
         super.viewDidLoad()
         searchController.searchResultsUpdater = self
         searchBar.delegate = self
@@ -44,7 +44,7 @@ class PhrasesUnitsViewController: PhrasesBaseViewController, UITableViewDelegate
     }
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
-        phrasesUnitsViewModel.filterPhrasesForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex])
+        vm.filterPhrasesForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex])
         tableView.reloadData()
     }
 }

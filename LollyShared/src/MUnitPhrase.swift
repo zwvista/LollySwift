@@ -17,7 +17,7 @@ public class MUnitPhrase: DBObject {
     public var PHRASE: String?
     public var TRANSLATION: String?
     
-    static func getDataByTextBook(textbookid: Int, unitPartFrom: Int, unitPartTo: Int) -> [MUnitPhrase] {
+    static func getDataByTextbook(textbookid: Int, unitPartFrom: Int, unitPartTo: Int) -> [MUnitPhrase] {
         let sql = "SELECT * FROM VUNITPHRASES WHERE TEXTBOOKID=? AND UNIT*10+PART>=? AND UNIT*10+PART<=?"
         let results = try! DBObject.dbCore.executeQuery(sql, textbookid, unitPartFrom, unitPartTo)
         return DBObject.dataFromResultSet(databaseResultSet: results)

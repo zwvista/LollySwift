@@ -1,5 +1,5 @@
 //
-//  MTBWord.swift
+//  MTextbookWord.swift
 //  LollyShared
 //
 //  Created by 趙偉 on 2016/07/05.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class MTBWord: DBObject {
+public class MTextbookWord: DBObject {
     public var ID = 0
     public var LANGID = 0
     public var TEXTBOOKNAME: String?
@@ -18,8 +18,8 @@ public class MTBWord: DBObject {
     public var WORD: String?
     public var NOTE: String?
     
-    static func getDataByLang(langid: Int) -> [MTBWord] {
-        let sql = "SELECT * FROM VTBWORDS WHERE LANGID = ?"
+    static func getDataByLang(langid: Int) -> [MTextbookWord] {
+        let sql = "SELECT * FROM VTEXTBOOKWORDS WHERE LANGID = ?"
         let results = try! DBObject.dbCore.executeQuery(sql, langid)
         return DBObject.dataFromResultSet(databaseResultSet: results)
     }

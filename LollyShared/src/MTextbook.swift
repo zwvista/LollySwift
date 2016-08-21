@@ -1,5 +1,5 @@
 //
-//  MTextBook.swift
+//  MTextbook.swift
 //  LollyShared
 //
 //  Created by 趙偉 on 2016/06/09.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class MTextBook: DBObject {
+public class MTextbook: DBObject {
     public var ID = 0
     public var LANGID = 0
     public var TEXTBOOKNAME: String?
@@ -19,19 +19,7 @@ public class MTextBook: DBObject {
     public var USUNITTO = 0
     public var USPARTTO = 0
     
-    public var unitsAsArray: [String] {
-        var arr = [String]();
-        for i in 1 ... UNITS {
-            arr.append("\(i)")
-        }
-        return arr
-    }
-    
-    public var partsAsArray: [String] {
-        return (PARTS?.componentsSeparatedByString(" "))!
-    }
-    
-    static func getDataByLang(langID: Int) -> [MTextBook] {
+    static func getDataByLang(langID: Int) -> [MTextbook] {
         let sql = "SELECT * FROM VTEXTBOOKS WHERE LANGID = ?"
         let results = try! DBObject.dbCore.executeQuery(sql, langID)
         return DBObject.dataFromResultSet(databaseResultSet: results)
