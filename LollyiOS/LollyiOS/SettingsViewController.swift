@@ -18,7 +18,7 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
     @IBOutlet weak var lblPartFrom: UILabel!
     @IBOutlet weak var lblPartTo: UILabel!
     
-    var selectedIndexPath = NSIndexPath()
+    var selectedSection = 0
     var selectedRow = 0
     
     var vm: SettingsViewModel {
@@ -42,8 +42,8 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        selectedIndexPath = indexPath
-        switch selectedIndexPath.section {
+        selectedSection = indexPath.section
+        switch selectedSection {
         case 0:
             ActionSheetCustomPicker.showPickerWithTitle("Select Language", delegate: self, showCancelButton: true, origin: langCell, initialSelections: [vm.currentLangIndex])
         case 1:
@@ -60,7 +60,7 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
     }
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        switch selectedIndexPath.section {
+        switch selectedSection {
         case 0:
             return vm.arrLanguages.count
         case 1:
@@ -73,7 +73,7 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
     }
     
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        switch selectedIndexPath.section {
+        switch selectedSection {
         case 0:
             return vm.arrLanguages[row].LANGNAME
         case 1:
@@ -90,7 +90,7 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
     }
     
     func actionSheetPickerDidSucceed(actionSheetPicker: AbstractActionSheetPicker!, origin: AnyObject!) {
-        switch selectedIndexPath.section {
+        switch selectedSection {
         case 0 where selectedRow != vm.currentLangIndex:
             vm.currentLangIndex = selectedRow
             updateLang()

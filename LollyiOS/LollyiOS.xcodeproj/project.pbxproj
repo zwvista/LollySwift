@@ -43,6 +43,12 @@
 		8C4670F71D0DC4C7004F3C21 /* DistancePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4670ED1D0DC4C7004F3C21 /* DistancePickerView.m */; };
 		8C4670F81D0DC4C7004F3C21 /* SWActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4670EF1D0DC4C7004F3C21 /* SWActionSheet.m */; };
 		8C4670FC1D0DC599004F3C21 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4670FA1D0DC599004F3C21 /* SettingsViewModel.swift */; };
+		8CD16D121D69FD8A00F5F625 /* WordsLangDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD16D111D69FD8A00F5F625 /* WordsLangDetailViewController.swift */; };
+		8CD16D141D69FD9500F5F625 /* WordsLangEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD16D131D69FD9500F5F625 /* WordsLangEditViewController.swift */; };
+		8CD16D161D69FDDC00F5F625 /* PhrasesUnitDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD16D151D69FDDC00F5F625 /* PhrasesUnitDetailViewController.swift */; };
+		8CD16D1C1D69FE4B00F5F625 /* PhrasesUnitEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD16D1B1D69FE4B00F5F625 /* PhrasesUnitEditViewController.swift */; };
+		8CD16D1E1D69FE8500F5F625 /* PhrasesLangEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD16D1D1D69FE8500F5F625 /* PhrasesLangEditViewController.swift */; };
+		8CD16D201D69FE8F00F5F625 /* PhrasesLangDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD16D1F1D69FE8F00F5F625 /* PhrasesLangDetailViewController.swift */; };
 		951BB9901A1B780B0087DB94 /* FMDatabaseVariadic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951BB98F1A1B780B0087DB94 /* FMDatabaseVariadic.swift */; };
 		951BB9921A1B78650087DB94 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 951BB9911A1B78650087DB94 /* libsqlite3.dylib */; };
 		951BB9941A1B803B0087DB94 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 951BB9931A1B803B0087DB94 /* Main.storyboard */; };
@@ -131,6 +137,12 @@
 		8C4670EE1D0DC4C7004F3C21 /* SWActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWActionSheet.h; sourceTree = "<group>"; };
 		8C4670EF1D0DC4C7004F3C21 /* SWActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWActionSheet.m; sourceTree = "<group>"; };
 		8C4670FA1D0DC599004F3C21 /* SettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		8CD16D111D69FD8A00F5F625 /* WordsLangDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsLangDetailViewController.swift; sourceTree = "<group>"; };
+		8CD16D131D69FD9500F5F625 /* WordsLangEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsLangEditViewController.swift; sourceTree = "<group>"; };
+		8CD16D151D69FDDC00F5F625 /* PhrasesUnitDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesUnitDetailViewController.swift; sourceTree = "<group>"; };
+		8CD16D1B1D69FE4B00F5F625 /* PhrasesUnitEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesUnitEditViewController.swift; sourceTree = "<group>"; };
+		8CD16D1D1D69FE8500F5F625 /* PhrasesLangEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesLangEditViewController.swift; sourceTree = "<group>"; };
+		8CD16D1F1D69FE8F00F5F625 /* PhrasesLangDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesLangDetailViewController.swift; sourceTree = "<group>"; };
 		951BB98F1A1B780B0087DB94 /* FMDatabaseVariadic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FMDatabaseVariadic.swift; path = "../extra/Swift extensions/FMDatabaseVariadic.swift"; sourceTree = "<group>"; };
 		951BB9911A1B78650087DB94 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		951BB9931A1B803B0087DB94 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -204,6 +216,8 @@
 			children = (
 				8C42B5A81D69A1D900DCB528 /* WordsBaseViewController.swift */,
 				8C42B5A91D69A1D900DCB528 /* WordsDictViewController.swift */,
+				8CD16D111D69FD8A00F5F625 /* WordsLangDetailViewController.swift */,
+				8CD16D131D69FD9500F5F625 /* WordsLangEditViewController.swift */,
 				8C42B5AA1D69A1D900DCB528 /* WordsLangViewController.swift */,
 				8C42B5AB1D69A1D900DCB528 /* WordsTextbookViewController.swift */,
 				8C42B5AC1D69A1D900DCB528 /* WordsUnitDetailViewController.swift */,
@@ -217,7 +231,11 @@
 			isa = PBXGroup;
 			children = (
 				8C42B5B71D69A21E00DCB528 /* PhrasesBaseViewController.swift */,
+				8CD16D1F1D69FE8F00F5F625 /* PhrasesLangDetailViewController.swift */,
+				8CD16D1D1D69FE8500F5F625 /* PhrasesLangEditViewController.swift */,
 				8C42B5B81D69A21E00DCB528 /* PhrasesLangViewController.swift */,
+				8CD16D151D69FDDC00F5F625 /* PhrasesUnitDetailViewController.swift */,
+				8CD16D1B1D69FE4B00F5F625 /* PhrasesUnitEditViewController.swift */,
 				8C42B5B91D69A21E00DCB528 /* PhrasesUnitsViewController.swift */,
 			);
 			path = Phrases;
@@ -514,7 +532,10 @@
 			files = (
 				8C42B5B11D69A1D900DCB528 /* WordsLangViewController.swift in Sources */,
 				951BB99C1A1B90DC0087DB94 /* LollyUINavigationController.swift in Sources */,
+				8CD16D201D69FE8F00F5F625 /* PhrasesLangDetailViewController.swift in Sources */,
 				8C4670F11D0DC4C7004F3C21 /* ActionSheetCustomPicker.m in Sources */,
+				8CD16D1E1D69FE8500F5F625 /* PhrasesLangEditViewController.swift in Sources */,
+				8CD16D141D69FD9500F5F625 /* WordsLangEditViewController.swift in Sources */,
 				951BB99A1A1B904B0087DB94 /* MainViewController.swift in Sources */,
 				95FFAEFA1A19F03C00E00C47 /* AMSlideMenuLeftTableViewController.m in Sources */,
 				8C4670FC1D0DC599004F3C21 /* SettingsViewModel.swift in Sources */,
@@ -553,6 +574,7 @@
 				95FFAF161A19F0AA00E00C47 /* LollyDB.swift in Sources */,
 				8C42B5B01D69A1D900DCB528 /* WordsDictViewController.swift in Sources */,
 				8C0945691D122ACE003503ED /* SettingsViewController.swift in Sources */,
+				8CD16D121D69FD8A00F5F625 /* WordsLangDetailViewController.swift in Sources */,
 				8C42B5B21D69A1D900DCB528 /* WordsTextbookViewController.swift in Sources */,
 				8C4670F81D0DC4C7004F3C21 /* SWActionSheet.m in Sources */,
 				8C4670F61D0DC4C7004F3C21 /* ActionSheetStringPicker.m in Sources */,
@@ -564,9 +586,11 @@
 				8C4670F41D0DC4C7004F3C21 /* ActionSheetLocalePicker.m in Sources */,
 				8C42B5BA1D69A21E00DCB528 /* PhrasesBaseViewController.swift in Sources */,
 				95FFAF0C1A19F07000E00C47 /* FMDatabaseAdditions.m in Sources */,
+				8CD16D161D69FDDC00F5F625 /* PhrasesUnitDetailViewController.swift in Sources */,
 				95FFAEFE1A19F03C00E00C47 /* UIViewController+AMSlideMenu.m in Sources */,
 				95FFAEFB1A19F03C00E00C47 /* AMSlideMenuMainViewController.m in Sources */,
 				953473DB1A0D16CF00FF2D56 /* AppDelegate.swift in Sources */,
+				8CD16D1C1D69FE4B00F5F625 /* PhrasesUnitEditViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

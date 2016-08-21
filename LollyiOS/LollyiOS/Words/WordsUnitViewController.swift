@@ -50,7 +50,7 @@ class WordsUnitViewController: WordsBaseViewController, UITableViewDelegate, UIT
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         super.prepareForSegue(segue, sender: sender)
         if let controller = segue.destinationViewController as? WordsUnitEditViewController {
-            controller.arrWords = vm.arrWords
+            controller.vm = vm
         }
     }
 }

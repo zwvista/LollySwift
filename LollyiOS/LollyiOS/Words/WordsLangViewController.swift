@@ -46,4 +46,11 @@ class WordsLangViewController: WordsBaseViewController, UITableViewDelegate, UIT
         vm.filterWordsForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex])
         tableView.reloadData()
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        super.prepareForSegue(segue, sender: sender)
+        if let controller = segue.destinationViewController as? WordsLangEditViewController {
+            controller.vm = vm
+        }
+    }
 }

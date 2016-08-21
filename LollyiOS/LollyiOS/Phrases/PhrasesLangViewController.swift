@@ -47,4 +47,11 @@ class PhrasesLangViewController: PhrasesBaseViewController, UITableViewDelegate,
         vm.filterPhrasesForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex])
         tableView.reloadData()
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        super.prepareForSegue(segue, sender: sender)
+        if let controller = segue.destinationViewController as? PhrasesLangEditViewController {
+            controller.vm = vm
+        }
+    }
 }

@@ -30,7 +30,7 @@ class PhrasesUnitsViewController: PhrasesBaseViewController, UITableViewDelegate
         let cell = tableView.dequeueReusableCellWithIdentifier("PhraseCell", forIndexPath: indexPath)
         let m = arrPhrases[indexPath.row]
         cell.textLabel!.text = m.PHRASE
-        cell.detailTextLabel?.text = m.TRANSLATION
+        cell.detailTextLabel!.text = m.TRANSLATION
         return cell;
     }
     
@@ -46,5 +46,12 @@ class PhrasesUnitsViewController: PhrasesBaseViewController, UITableViewDelegate
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         vm.filterPhrasesForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex])
         tableView.reloadData()
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        super.prepareForSegue(segue, sender: sender)
+        if let controller = segue.destinationViewController as? PhrasesUnitEditViewController {
+            controller.vm = vm
+        }
     }
 }

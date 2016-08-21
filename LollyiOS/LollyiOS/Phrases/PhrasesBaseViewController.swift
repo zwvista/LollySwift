@@ -28,25 +28,10 @@ class PhrasesBaseViewController: UIViewController {
         searchBar.scopeButtonTitles = ["Phrase", "Translation"]
         searchBar.sizeToFit()
         searchBarContainerView.addSubview(searchBar)
-        
-        navigationItem.rightBarButtonItem = editButtonItem()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
-    }
-    
-    override func setEditing(editing: Bool, animated: Bool) {
-        super.setEditing(editing, animated: animated)
-        tableView.editing = editing
-    }
-    
-    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
-    }
-    
-    func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
     }
 }
