@@ -1,0 +1,807 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		8C0566341D50AFD600E1B2A4 /* LollyCore.db in Resources */ = {isa = PBXBuildFile; fileRef = 8C0566301D50451800E1B2A4 /* LollyCore.db */; };
+		8C0566351D50B19C00E1B2A4 /* LollyDic.db in Resources */ = {isa = PBXBuildFile; fileRef = 8C0566311D50451800E1B2A4 /* LollyDic.db */; };
+		8C0945691D122ACE003503ED /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0945681D122ACE003503ED /* SettingsViewController.swift */; };
+		8C0A9C521D2F2ACB003BC528 /* MLangPhrase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0A9C4E1D2F2ACB003BC528 /* MLangPhrase.swift */; };
+		8C0A9C531D2F2ACB003BC528 /* MUnitPhrase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0A9C4F1D2F2ACB003BC528 /* MUnitPhrase.swift */; };
+		8C0A9C541D2F2ACB003BC528 /* PhrasesLangViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0A9C501D2F2ACB003BC528 /* PhrasesLangViewModel.swift */; };
+		8C0A9C551D2F2ACB003BC528 /* PhrasesUnitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0A9C511D2F2ACB003BC528 /* PhrasesUnitViewModel.swift */; };
+		8C0B7D581C9E662500791A99 /* DBObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0B7D571C9E662500791A99 /* DBObject.swift */; };
+		8C1FECCB1D6520180091D64E /* MUserSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1FECCA1D6520180091D64E /* MUserSetting.swift */; };
+		8C298A721D2AABDA00A4F057 /* WordsTextbookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C298A6F1D2AABDA00A4F057 /* WordsTextbookViewModel.swift */; };
+		8C298A731D2AABDA00A4F057 /* WordsLangViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C298A701D2AABDA00A4F057 /* WordsLangViewModel.swift */; };
+		8C298A741D2AABDA00A4F057 /* WordsUnitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C298A711D2AABDA00A4F057 /* WordsUnitViewModel.swift */; };
+		8C298A901D2AB41400A4F057 /* MTextbookWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C298A8E1D2AB41400A4F057 /* MTextbookWord.swift */; };
+		8C298A911D2AB41400A4F057 /* MLangWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C298A8F1D2AB41400A4F057 /* MLangWord.swift */; };
+		8C2EB0FC1D1FC9B100FB8AE9 /* MUnitWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2EB0FB1D1FC9B100FB8AE9 /* MUnitWord.swift */; };
+		8C42B5AF1D69A1D900DCB528 /* WordsBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C42B5A81D69A1D900DCB528 /* WordsBaseViewController.swift */; };
+		8C42B5B01D69A1D900DCB528 /* WordsDictViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C42B5A91D69A1D900DCB528 /* WordsDictViewController.swift */; };
+		8C42B5B11D69A1D900DCB528 /* WordsLangViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C42B5AA1D69A1D900DCB528 /* WordsLangViewController.swift */; };
+		8C42B5B21D69A1D900DCB528 /* WordsTextbookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C42B5AB1D69A1D900DCB528 /* WordsTextbookViewController.swift */; };
+		8C42B5B31D69A1D900DCB528 /* WordsUnitDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C42B5AC1D69A1D900DCB528 /* WordsUnitDetailViewController.swift */; };
+		8C42B5B41D69A1D900DCB528 /* WordsUnitEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C42B5AD1D69A1D900DCB528 /* WordsUnitEditViewController.swift */; };
+		8C42B5B51D69A1D900DCB528 /* WordsUnitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C42B5AE1D69A1D900DCB528 /* WordsUnitViewController.swift */; };
+		8C42B5BA1D69A21E00DCB528 /* PhrasesBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C42B5B71D69A21E00DCB528 /* PhrasesBaseViewController.swift */; };
+		8C42B5BB1D69A21E00DCB528 /* PhrasesLangViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C42B5B81D69A21E00DCB528 /* PhrasesLangViewController.swift */; };
+		8C42B5BC1D69A21E00DCB528 /* PhrasesUnitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C42B5B91D69A21E00DCB528 /* PhrasesUnitsViewController.swift */; };
+		8C4670951D099CAE004F3C21 /* MTextbook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4670931D099CAE004F3C21 /* MTextbook.swift */; };
+		8C4670F01D0DC4C7004F3C21 /* AbstractActionSheetPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4670DD1D0DC4C7004F3C21 /* AbstractActionSheetPicker.m */; };
+		8C4670F11D0DC4C7004F3C21 /* ActionSheetCustomPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4670DF1D0DC4C7004F3C21 /* ActionSheetCustomPicker.m */; };
+		8C4670F21D0DC4C7004F3C21 /* ActionSheetDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4670E21D0DC4C7004F3C21 /* ActionSheetDatePicker.m */; };
+		8C4670F31D0DC4C7004F3C21 /* ActionSheetDistancePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4670E41D0DC4C7004F3C21 /* ActionSheetDistancePicker.m */; };
+		8C4670F41D0DC4C7004F3C21 /* ActionSheetLocalePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4670E61D0DC4C7004F3C21 /* ActionSheetLocalePicker.m */; };
+		8C4670F51D0DC4C7004F3C21 /* ActionSheetMultipleStringPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4670E81D0DC4C7004F3C21 /* ActionSheetMultipleStringPicker.m */; };
+		8C4670F61D0DC4C7004F3C21 /* ActionSheetStringPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4670EB1D0DC4C7004F3C21 /* ActionSheetStringPicker.m */; };
+		8C4670F71D0DC4C7004F3C21 /* DistancePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4670ED1D0DC4C7004F3C21 /* DistancePickerView.m */; };
+		8C4670F81D0DC4C7004F3C21 /* SWActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4670EF1D0DC4C7004F3C21 /* SWActionSheet.m */; };
+		8C4670FC1D0DC599004F3C21 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4670FA1D0DC599004F3C21 /* SettingsViewModel.swift */; };
+		8CD16D121D69FD8A00F5F625 /* WordsLangDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD16D111D69FD8A00F5F625 /* WordsLangDetailViewController.swift */; };
+		8CD16D141D69FD9500F5F625 /* WordsLangEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD16D131D69FD9500F5F625 /* WordsLangEditViewController.swift */; };
+		8CD16D161D69FDDC00F5F625 /* PhrasesUnitDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD16D151D69FDDC00F5F625 /* PhrasesUnitDetailViewController.swift */; };
+		8CD16D1C1D69FE4B00F5F625 /* PhrasesUnitEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD16D1B1D69FE4B00F5F625 /* PhrasesUnitEditViewController.swift */; };
+		8CD16D1E1D69FE8500F5F625 /* PhrasesLangEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD16D1D1D69FE8500F5F625 /* PhrasesLangEditViewController.swift */; };
+		8CD16D201D69FE8F00F5F625 /* PhrasesLangDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD16D1F1D69FE8F00F5F625 /* PhrasesLangDetailViewController.swift */; };
+		8CD16D221D6B101200F5F625 /* LollyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD16D211D6B101200F5F625 /* LollyProtocol.swift */; };
+		951BB9901A1B780B0087DB94 /* FMDatabaseVariadic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951BB98F1A1B780B0087DB94 /* FMDatabaseVariadic.swift */; };
+		951BB9921A1B78650087DB94 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 951BB9911A1B78650087DB94 /* libsqlite3.dylib */; };
+		951BB9941A1B803B0087DB94 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 951BB9931A1B803B0087DB94 /* Main.storyboard */; };
+		951BB9981A1B90260087DB94 /* LeftMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951BB9971A1B90260087DB94 /* LeftMenuViewController.swift */; };
+		951BB99A1A1B904B0087DB94 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951BB9991A1B904B0087DB94 /* MainViewController.swift */; };
+		951BB99C1A1B90DC0087DB94 /* LollyUINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951BB99B1A1B90DC0087DB94 /* LollyUINavigationController.swift */; };
+		95267BD71A1E26D000CC2A4B /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95267BD61A1E26D000CC2A4B /* SearchViewController.swift */; };
+		95267BDA1A1E303B00CC2A4B /* simpleMenuButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 95267BD81A1E303B00CC2A4B /* simpleMenuButton.png */; };
+		95267BDB1A1E303B00CC2A4B /* simpleMenuButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 95267BD91A1E303B00CC2A4B /* simpleMenuButton@2x.png */; };
+		953473DB1A0D16CF00FF2D56 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953473DA1A0D16CF00FF2D56 /* AppDelegate.swift */; };
+		953473E21A0D16CF00FF2D56 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 953473E11A0D16CF00FF2D56 /* Images.xcassets */; };
+		953473E51A0D16CF00FF2D56 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 953473E31A0D16CF00FF2D56 /* LaunchScreen.xib */; };
+		953473F11A0D16CF00FF2D56 /* LollySwiftiOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953473F01A0D16CF00FF2D56 /* LollySwiftiOSTests.swift */; };
+		95FFAEF81A19F03C00E00C47 /* AMSlideMenuContentSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 95FFAEEA1A19F03C00E00C47 /* AMSlideMenuContentSegue.m */; };
+		95FFAEF91A19F03C00E00C47 /* AMSlideMenuLeftMenuSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 95FFAEEC1A19F03C00E00C47 /* AMSlideMenuLeftMenuSegue.m */; };
+		95FFAEFA1A19F03C00E00C47 /* AMSlideMenuLeftTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95FFAEEE1A19F03C00E00C47 /* AMSlideMenuLeftTableViewController.m */; };
+		95FFAEFB1A19F03C00E00C47 /* AMSlideMenuMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95FFAEF01A19F03C00E00C47 /* AMSlideMenuMainViewController.m */; };
+		95FFAEFC1A19F03C00E00C47 /* AMSlideMenuRightMenuSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 95FFAEF31A19F03C00E00C47 /* AMSlideMenuRightMenuSegue.m */; };
+		95FFAEFD1A19F03C00E00C47 /* AMSlideMenuRightTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95FFAEF51A19F03C00E00C47 /* AMSlideMenuRightTableViewController.m */; };
+		95FFAEFE1A19F03C00E00C47 /* UIViewController+AMSlideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 95FFAEF71A19F03C00E00C47 /* UIViewController+AMSlideMenu.m */; };
+		95FFAF0B1A19F07000E00C47 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 95FFAF011A19F07000E00C47 /* FMDatabase.m */; };
+		95FFAF0C1A19F07000E00C47 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 95FFAF031A19F07000E00C47 /* FMDatabaseAdditions.m */; };
+		95FFAF0D1A19F07000E00C47 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 95FFAF051A19F07000E00C47 /* FMDatabasePool.m */; };
+		95FFAF0E1A19F07000E00C47 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 95FFAF071A19F07000E00C47 /* FMDatabaseQueue.m */; };
+		95FFAF0F1A19F07000E00C47 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 95FFAF0A1A19F07000E00C47 /* FMResultSet.m */; };
+		95FFAF161A19F0AA00E00C47 /* LollyDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FFAF111A19F0AA00E00C47 /* LollyDB.swift */; };
+		95FFAF181A19F0AA00E00C47 /* MDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FFAF141A19F0AA00E00C47 /* MDictionary.swift */; };
+		95FFAF191A19F0AA00E00C47 /* MLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FFAF151A19F0AA00E00C47 /* MLanguage.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		953473EB1A0D16CF00FF2D56 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 953473CD1A0D16CF00FF2D56 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 953473D41A0D16CF00FF2D56;
+			remoteInfo = LollySwiftiOS;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		8C0566301D50451800E1B2A4 /* LollyCore.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = LollyCore.db; path = ../../../LollyDB/LollyCore.db; sourceTree = "<group>"; };
+		8C0566311D50451800E1B2A4 /* LollyDic.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = LollyDic.db; path = ../../../LollyDB/LollyDic.db; sourceTree = "<group>"; };
+		8C0945681D122ACE003503ED /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		8C0A9C4E1D2F2ACB003BC528 /* MLangPhrase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLangPhrase.swift; sourceTree = "<group>"; };
+		8C0A9C4F1D2F2ACB003BC528 /* MUnitPhrase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MUnitPhrase.swift; sourceTree = "<group>"; };
+		8C0A9C501D2F2ACB003BC528 /* PhrasesLangViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesLangViewModel.swift; sourceTree = "<group>"; };
+		8C0A9C511D2F2ACB003BC528 /* PhrasesUnitViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesUnitViewModel.swift; sourceTree = "<group>"; };
+		8C0B7D571C9E662500791A99 /* DBObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBObject.swift; sourceTree = "<group>"; };
+		8C1FECCA1D6520180091D64E /* MUserSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MUserSetting.swift; sourceTree = "<group>"; };
+		8C298A6F1D2AABDA00A4F057 /* WordsTextbookViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsTextbookViewModel.swift; sourceTree = "<group>"; };
+		8C298A701D2AABDA00A4F057 /* WordsLangViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsLangViewModel.swift; sourceTree = "<group>"; };
+		8C298A711D2AABDA00A4F057 /* WordsUnitViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsUnitViewModel.swift; sourceTree = "<group>"; };
+		8C298A8E1D2AB41400A4F057 /* MTextbookWord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTextbookWord.swift; sourceTree = "<group>"; };
+		8C298A8F1D2AB41400A4F057 /* MLangWord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLangWord.swift; sourceTree = "<group>"; };
+		8C2EB0FB1D1FC9B100FB8AE9 /* MUnitWord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MUnitWord.swift; sourceTree = "<group>"; };
+		8C42B5A81D69A1D900DCB528 /* WordsBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsBaseViewController.swift; sourceTree = "<group>"; };
+		8C42B5A91D69A1D900DCB528 /* WordsDictViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsDictViewController.swift; sourceTree = "<group>"; };
+		8C42B5AA1D69A1D900DCB528 /* WordsLangViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsLangViewController.swift; sourceTree = "<group>"; };
+		8C42B5AB1D69A1D900DCB528 /* WordsTextbookViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsTextbookViewController.swift; sourceTree = "<group>"; };
+		8C42B5AC1D69A1D900DCB528 /* WordsUnitDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsUnitDetailViewController.swift; sourceTree = "<group>"; };
+		8C42B5AD1D69A1D900DCB528 /* WordsUnitEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsUnitEditViewController.swift; sourceTree = "<group>"; };
+		8C42B5AE1D69A1D900DCB528 /* WordsUnitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsUnitViewController.swift; sourceTree = "<group>"; };
+		8C42B5B71D69A21E00DCB528 /* PhrasesBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesBaseViewController.swift; sourceTree = "<group>"; };
+		8C42B5B81D69A21E00DCB528 /* PhrasesLangViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesLangViewController.swift; sourceTree = "<group>"; };
+		8C42B5B91D69A21E00DCB528 /* PhrasesUnitsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesUnitsViewController.swift; sourceTree = "<group>"; };
+		8C4670931D099CAE004F3C21 /* MTextbook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTextbook.swift; sourceTree = "<group>"; };
+		8C4670DC1D0DC4C7004F3C21 /* AbstractActionSheetPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractActionSheetPicker.h; sourceTree = "<group>"; };
+		8C4670DD1D0DC4C7004F3C21 /* AbstractActionSheetPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbstractActionSheetPicker.m; sourceTree = "<group>"; };
+		8C4670DE1D0DC4C7004F3C21 /* ActionSheetCustomPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetCustomPicker.h; sourceTree = "<group>"; };
+		8C4670DF1D0DC4C7004F3C21 /* ActionSheetCustomPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetCustomPicker.m; sourceTree = "<group>"; };
+		8C4670E01D0DC4C7004F3C21 /* ActionSheetCustomPickerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetCustomPickerDelegate.h; sourceTree = "<group>"; };
+		8C4670E11D0DC4C7004F3C21 /* ActionSheetDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetDatePicker.h; sourceTree = "<group>"; };
+		8C4670E21D0DC4C7004F3C21 /* ActionSheetDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetDatePicker.m; sourceTree = "<group>"; };
+		8C4670E31D0DC4C7004F3C21 /* ActionSheetDistancePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetDistancePicker.h; sourceTree = "<group>"; };
+		8C4670E41D0DC4C7004F3C21 /* ActionSheetDistancePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetDistancePicker.m; sourceTree = "<group>"; };
+		8C4670E51D0DC4C7004F3C21 /* ActionSheetLocalePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetLocalePicker.h; sourceTree = "<group>"; };
+		8C4670E61D0DC4C7004F3C21 /* ActionSheetLocalePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetLocalePicker.m; sourceTree = "<group>"; };
+		8C4670E71D0DC4C7004F3C21 /* ActionSheetMultipleStringPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetMultipleStringPicker.h; sourceTree = "<group>"; };
+		8C4670E81D0DC4C7004F3C21 /* ActionSheetMultipleStringPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetMultipleStringPicker.m; sourceTree = "<group>"; };
+		8C4670E91D0DC4C7004F3C21 /* ActionSheetPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetPicker.h; sourceTree = "<group>"; };
+		8C4670EA1D0DC4C7004F3C21 /* ActionSheetStringPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetStringPicker.h; sourceTree = "<group>"; };
+		8C4670EB1D0DC4C7004F3C21 /* ActionSheetStringPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetStringPicker.m; sourceTree = "<group>"; };
+		8C4670EC1D0DC4C7004F3C21 /* DistancePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DistancePickerView.h; sourceTree = "<group>"; };
+		8C4670ED1D0DC4C7004F3C21 /* DistancePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DistancePickerView.m; sourceTree = "<group>"; };
+		8C4670EE1D0DC4C7004F3C21 /* SWActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWActionSheet.h; sourceTree = "<group>"; };
+		8C4670EF1D0DC4C7004F3C21 /* SWActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWActionSheet.m; sourceTree = "<group>"; };
+		8C4670FA1D0DC599004F3C21 /* SettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		8CD16D111D69FD8A00F5F625 /* WordsLangDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsLangDetailViewController.swift; sourceTree = "<group>"; };
+		8CD16D131D69FD9500F5F625 /* WordsLangEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsLangEditViewController.swift; sourceTree = "<group>"; };
+		8CD16D151D69FDDC00F5F625 /* PhrasesUnitDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesUnitDetailViewController.swift; sourceTree = "<group>"; };
+		8CD16D1B1D69FE4B00F5F625 /* PhrasesUnitEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesUnitEditViewController.swift; sourceTree = "<group>"; };
+		8CD16D1D1D69FE8500F5F625 /* PhrasesLangEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesLangEditViewController.swift; sourceTree = "<group>"; };
+		8CD16D1F1D69FE8F00F5F625 /* PhrasesLangDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesLangDetailViewController.swift; sourceTree = "<group>"; };
+		8CD16D211D6B101200F5F625 /* LollyProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LollyProtocol.swift; sourceTree = "<group>"; };
+		951BB98F1A1B780B0087DB94 /* FMDatabaseVariadic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FMDatabaseVariadic.swift; path = "../extra/Swift extensions/FMDatabaseVariadic.swift"; sourceTree = "<group>"; };
+		951BB9911A1B78650087DB94 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		951BB9931A1B803B0087DB94 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		951BB9951A1B8D6C0087DB94 /* LollySwiftiOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LollySwiftiOS-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
+		951BB9971A1B90260087DB94 /* LeftMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftMenuViewController.swift; sourceTree = "<group>"; };
+		951BB9991A1B904B0087DB94 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		951BB99B1A1B90DC0087DB94 /* LollyUINavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LollyUINavigationController.swift; sourceTree = "<group>"; };
+		95267BD61A1E26D000CC2A4B /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		95267BD81A1E303B00CC2A4B /* simpleMenuButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = simpleMenuButton.png; path = "../../../../OSS/AMSlideMenu/AMSlideMenuDemo-with Storyboard/AMSlideMenu/simpleMenuButton.png"; sourceTree = "<group>"; };
+		95267BD91A1E303B00CC2A4B /* simpleMenuButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "simpleMenuButton@2x.png"; path = "../../../../OSS/AMSlideMenu/AMSlideMenuDemo-with Storyboard/AMSlideMenu/simpleMenuButton@2x.png"; sourceTree = "<group>"; };
+		953473D51A0D16CF00FF2D56 /* LollySwiftiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LollySwiftiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		953473D91A0D16CF00FF2D56 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		953473DA1A0D16CF00FF2D56 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		953473E11A0D16CF00FF2D56 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		953473E41A0D16CF00FF2D56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		953473EA1A0D16CF00FF2D56 /* LollySwiftiOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LollySwiftiOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		953473EF1A0D16CF00FF2D56 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		953473F01A0D16CF00FF2D56 /* LollySwiftiOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LollySwiftiOSTests.swift; sourceTree = "<group>"; };
+		95FFAEE91A19F03C00E00C47 /* AMSlideMenuContentSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSlideMenuContentSegue.h; sourceTree = "<group>"; };
+		95FFAEEA1A19F03C00E00C47 /* AMSlideMenuContentSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSlideMenuContentSegue.m; sourceTree = "<group>"; };
+		95FFAEEB1A19F03C00E00C47 /* AMSlideMenuLeftMenuSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSlideMenuLeftMenuSegue.h; sourceTree = "<group>"; };
+		95FFAEEC1A19F03C00E00C47 /* AMSlideMenuLeftMenuSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSlideMenuLeftMenuSegue.m; sourceTree = "<group>"; };
+		95FFAEED1A19F03C00E00C47 /* AMSlideMenuLeftTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSlideMenuLeftTableViewController.h; sourceTree = "<group>"; };
+		95FFAEEE1A19F03C00E00C47 /* AMSlideMenuLeftTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSlideMenuLeftTableViewController.m; sourceTree = "<group>"; };
+		95FFAEEF1A19F03C00E00C47 /* AMSlideMenuMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSlideMenuMainViewController.h; sourceTree = "<group>"; };
+		95FFAEF01A19F03C00E00C47 /* AMSlideMenuMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSlideMenuMainViewController.m; sourceTree = "<group>"; };
+		95FFAEF11A19F03C00E00C47 /* AMSlideMenuProtocols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSlideMenuProtocols.h; sourceTree = "<group>"; };
+		95FFAEF21A19F03C00E00C47 /* AMSlideMenuRightMenuSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSlideMenuRightMenuSegue.h; sourceTree = "<group>"; };
+		95FFAEF31A19F03C00E00C47 /* AMSlideMenuRightMenuSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSlideMenuRightMenuSegue.m; sourceTree = "<group>"; };
+		95FFAEF41A19F03C00E00C47 /* AMSlideMenuRightTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSlideMenuRightTableViewController.h; sourceTree = "<group>"; };
+		95FFAEF51A19F03C00E00C47 /* AMSlideMenuRightTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSlideMenuRightTableViewController.m; sourceTree = "<group>"; };
+		95FFAEF61A19F03C00E00C47 /* UIViewController+AMSlideMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+AMSlideMenu.h"; sourceTree = "<group>"; };
+		95FFAEF71A19F03C00E00C47 /* UIViewController+AMSlideMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+AMSlideMenu.m"; sourceTree = "<group>"; };
+		95FFAF001A19F07000E00C47 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
+		95FFAF011A19F07000E00C47 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
+		95FFAF021A19F07000E00C47 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		95FFAF031A19F07000E00C47 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		95FFAF041A19F07000E00C47 /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
+		95FFAF051A19F07000E00C47 /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
+		95FFAF061A19F07000E00C47 /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
+		95FFAF071A19F07000E00C47 /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
+		95FFAF081A19F07000E00C47 /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
+		95FFAF091A19F07000E00C47 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
+		95FFAF0A1A19F07000E00C47 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		95FFAF111A19F0AA00E00C47 /* LollyDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LollyDB.swift; sourceTree = "<group>"; };
+		95FFAF141A19F0AA00E00C47 /* MDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDictionary.swift; sourceTree = "<group>"; };
+		95FFAF151A19F0AA00E00C47 /* MLanguage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLanguage.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		953473D21A0D16CF00FF2D56 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				951BB9921A1B78650087DB94 /* libsqlite3.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		953473E71A0D16CF00FF2D56 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8C42B5A71D69A1D900DCB528 /* Words */ = {
+			isa = PBXGroup;
+			children = (
+				8C42B5A81D69A1D900DCB528 /* WordsBaseViewController.swift */,
+				8C42B5A91D69A1D900DCB528 /* WordsDictViewController.swift */,
+				8CD16D111D69FD8A00F5F625 /* WordsLangDetailViewController.swift */,
+				8CD16D131D69FD9500F5F625 /* WordsLangEditViewController.swift */,
+				8C42B5AA1D69A1D900DCB528 /* WordsLangViewController.swift */,
+				8C42B5AB1D69A1D900DCB528 /* WordsTextbookViewController.swift */,
+				8C42B5AC1D69A1D900DCB528 /* WordsUnitDetailViewController.swift */,
+				8C42B5AD1D69A1D900DCB528 /* WordsUnitEditViewController.swift */,
+				8C42B5AE1D69A1D900DCB528 /* WordsUnitViewController.swift */,
+			);
+			path = Words;
+			sourceTree = "<group>";
+		};
+		8C42B5B61D69A21E00DCB528 /* Phrases */ = {
+			isa = PBXGroup;
+			children = (
+				8C42B5B71D69A21E00DCB528 /* PhrasesBaseViewController.swift */,
+				8CD16D1F1D69FE8F00F5F625 /* PhrasesLangDetailViewController.swift */,
+				8CD16D1D1D69FE8500F5F625 /* PhrasesLangEditViewController.swift */,
+				8C42B5B81D69A21E00DCB528 /* PhrasesLangViewController.swift */,
+				8CD16D151D69FDDC00F5F625 /* PhrasesUnitDetailViewController.swift */,
+				8CD16D1B1D69FE4B00F5F625 /* PhrasesUnitEditViewController.swift */,
+				8C42B5B91D69A21E00DCB528 /* PhrasesUnitsViewController.swift */,
+			);
+			path = Phrases;
+			sourceTree = "<group>";
+		};
+		8C4670DB1D0DC4C7004F3C21 /* Pickers */ = {
+			isa = PBXGroup;
+			children = (
+				8C4670DC1D0DC4C7004F3C21 /* AbstractActionSheetPicker.h */,
+				8C4670DD1D0DC4C7004F3C21 /* AbstractActionSheetPicker.m */,
+				8C4670DE1D0DC4C7004F3C21 /* ActionSheetCustomPicker.h */,
+				8C4670DF1D0DC4C7004F3C21 /* ActionSheetCustomPicker.m */,
+				8C4670E01D0DC4C7004F3C21 /* ActionSheetCustomPickerDelegate.h */,
+				8C4670E11D0DC4C7004F3C21 /* ActionSheetDatePicker.h */,
+				8C4670E21D0DC4C7004F3C21 /* ActionSheetDatePicker.m */,
+				8C4670E31D0DC4C7004F3C21 /* ActionSheetDistancePicker.h */,
+				8C4670E41D0DC4C7004F3C21 /* ActionSheetDistancePicker.m */,
+				8C4670E51D0DC4C7004F3C21 /* ActionSheetLocalePicker.h */,
+				8C4670E61D0DC4C7004F3C21 /* ActionSheetLocalePicker.m */,
+				8C4670E71D0DC4C7004F3C21 /* ActionSheetMultipleStringPicker.h */,
+				8C4670E81D0DC4C7004F3C21 /* ActionSheetMultipleStringPicker.m */,
+				8C4670E91D0DC4C7004F3C21 /* ActionSheetPicker.h */,
+				8C4670EA1D0DC4C7004F3C21 /* ActionSheetStringPicker.h */,
+				8C4670EB1D0DC4C7004F3C21 /* ActionSheetStringPicker.m */,
+				8C4670EC1D0DC4C7004F3C21 /* DistancePickerView.h */,
+				8C4670ED1D0DC4C7004F3C21 /* DistancePickerView.m */,
+				8C4670EE1D0DC4C7004F3C21 /* SWActionSheet.h */,
+				8C4670EF1D0DC4C7004F3C21 /* SWActionSheet.m */,
+			);
+			name = Pickers;
+			path = "../../../OSS/ActionSheetPicker-3.0/Pickers";
+			sourceTree = "<group>";
+		};
+		951BB9961A1B8FD50087DB94 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				951BB9971A1B90260087DB94 /* LeftMenuViewController.swift */,
+				951BB9991A1B904B0087DB94 /* MainViewController.swift */,
+				951BB99B1A1B90DC0087DB94 /* LollyUINavigationController.swift */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
+		95267BDE1A1EC4DF00CC2A4B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				951BB9911A1B78650087DB94 /* libsqlite3.dylib */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		953473CC1A0D16CF00FF2D56 = {
+			isa = PBXGroup;
+			children = (
+				8C4670DB1D0DC4C7004F3C21 /* Pickers */,
+				95FFAEE81A19F03C00E00C47 /* AMSlideMenu */,
+				95FFAEFF1A19F07000E00C47 /* fmdb */,
+				95FFAF101A19F0AA00E00C47 /* src */,
+				953473D71A0D16CF00FF2D56 /* LollySwiftiOS */,
+				953473ED1A0D16CF00FF2D56 /* LollySwiftiOSTests */,
+				95267BDE1A1EC4DF00CC2A4B /* Frameworks */,
+				953473D61A0D16CF00FF2D56 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		953473D61A0D16CF00FF2D56 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				953473D51A0D16CF00FF2D56 /* LollySwiftiOS.app */,
+				953473EA1A0D16CF00FF2D56 /* LollySwiftiOSTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		953473D71A0D16CF00FF2D56 /* LollySwiftiOS */ = {
+			isa = PBXGroup;
+			children = (
+				953473DA1A0D16CF00FF2D56 /* AppDelegate.swift */,
+				953473E11A0D16CF00FF2D56 /* Images.xcassets */,
+				953473E31A0D16CF00FF2D56 /* LaunchScreen.xib */,
+				951BB9951A1B8D6C0087DB94 /* LollySwiftiOS-Bridging-Header.h */,
+				8CD16D211D6B101200F5F625 /* LollyProtocol.swift */,
+				951BB9931A1B803B0087DB94 /* Main.storyboard */,
+				951BB9961A1B8FD50087DB94 /* Menu */,
+				8C42B5B61D69A21E00DCB528 /* Phrases */,
+				95267BD61A1E26D000CC2A4B /* SearchViewController.swift */,
+				8C0945681D122ACE003503ED /* SettingsViewController.swift */,
+				953473D81A0D16CF00FF2D56 /* Supporting Files */,
+				8C42B5A71D69A1D900DCB528 /* Words */,
+			);
+			path = LollySwiftiOS;
+			sourceTree = "<group>";
+		};
+		953473D81A0D16CF00FF2D56 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8C0566301D50451800E1B2A4 /* LollyCore.db */,
+				8C0566311D50451800E1B2A4 /* LollyDic.db */,
+				95267BD81A1E303B00CC2A4B /* simpleMenuButton.png */,
+				95267BD91A1E303B00CC2A4B /* simpleMenuButton@2x.png */,
+				953473D91A0D16CF00FF2D56 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		953473ED1A0D16CF00FF2D56 /* LollySwiftiOSTests */ = {
+			isa = PBXGroup;
+			children = (
+				953473F01A0D16CF00FF2D56 /* LollySwiftiOSTests.swift */,
+				953473EE1A0D16CF00FF2D56 /* Supporting Files */,
+			);
+			path = LollySwiftiOSTests;
+			sourceTree = "<group>";
+		};
+		953473EE1A0D16CF00FF2D56 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				953473EF1A0D16CF00FF2D56 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		95FFAEE81A19F03C00E00C47 /* AMSlideMenu */ = {
+			isa = PBXGroup;
+			children = (
+				95FFAEE91A19F03C00E00C47 /* AMSlideMenuContentSegue.h */,
+				95FFAEEA1A19F03C00E00C47 /* AMSlideMenuContentSegue.m */,
+				95FFAEEB1A19F03C00E00C47 /* AMSlideMenuLeftMenuSegue.h */,
+				95FFAEEC1A19F03C00E00C47 /* AMSlideMenuLeftMenuSegue.m */,
+				95FFAEED1A19F03C00E00C47 /* AMSlideMenuLeftTableViewController.h */,
+				95FFAEEE1A19F03C00E00C47 /* AMSlideMenuLeftTableViewController.m */,
+				95FFAEEF1A19F03C00E00C47 /* AMSlideMenuMainViewController.h */,
+				95FFAEF01A19F03C00E00C47 /* AMSlideMenuMainViewController.m */,
+				95FFAEF11A19F03C00E00C47 /* AMSlideMenuProtocols.h */,
+				95FFAEF21A19F03C00E00C47 /* AMSlideMenuRightMenuSegue.h */,
+				95FFAEF31A19F03C00E00C47 /* AMSlideMenuRightMenuSegue.m */,
+				95FFAEF41A19F03C00E00C47 /* AMSlideMenuRightTableViewController.h */,
+				95FFAEF51A19F03C00E00C47 /* AMSlideMenuRightTableViewController.m */,
+				95FFAEF61A19F03C00E00C47 /* UIViewController+AMSlideMenu.h */,
+				95FFAEF71A19F03C00E00C47 /* UIViewController+AMSlideMenu.m */,
+			);
+			name = AMSlideMenu;
+			path = ../../../OSS/AMSlideMenu/AMSlideMenu;
+			sourceTree = "<group>";
+		};
+		95FFAEFF1A19F07000E00C47 /* fmdb */ = {
+			isa = PBXGroup;
+			children = (
+				95FFAF001A19F07000E00C47 /* FMDatabase.h */,
+				95FFAF011A19F07000E00C47 /* FMDatabase.m */,
+				95FFAF021A19F07000E00C47 /* FMDatabaseAdditions.h */,
+				95FFAF031A19F07000E00C47 /* FMDatabaseAdditions.m */,
+				95FFAF041A19F07000E00C47 /* FMDatabasePool.h */,
+				95FFAF051A19F07000E00C47 /* FMDatabasePool.m */,
+				95FFAF061A19F07000E00C47 /* FMDatabaseQueue.h */,
+				95FFAF071A19F07000E00C47 /* FMDatabaseQueue.m */,
+				95FFAF081A19F07000E00C47 /* FMDB.h */,
+				95FFAF091A19F07000E00C47 /* FMResultSet.h */,
+				95FFAF0A1A19F07000E00C47 /* FMResultSet.m */,
+				951BB98F1A1B780B0087DB94 /* FMDatabaseVariadic.swift */,
+			);
+			name = fmdb;
+			path = ../../../OSS/fmdb/src/fmdb;
+			sourceTree = "<group>";
+		};
+		95FFAF101A19F0AA00E00C47 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				8C0B7D571C9E662500791A99 /* DBObject.swift */,
+				95FFAF111A19F0AA00E00C47 /* LollyDB.swift */,
+				95FFAF141A19F0AA00E00C47 /* MDictionary.swift */,
+				8C0A9C4E1D2F2ACB003BC528 /* MLangPhrase.swift */,
+				95FFAF151A19F0AA00E00C47 /* MLanguage.swift */,
+				8C298A8F1D2AB41400A4F057 /* MLangWord.swift */,
+				8C298A8E1D2AB41400A4F057 /* MTextbookWord.swift */,
+				8C4670931D099CAE004F3C21 /* MTextbook.swift */,
+				8C0A9C4F1D2F2ACB003BC528 /* MUnitPhrase.swift */,
+				8C2EB0FB1D1FC9B100FB8AE9 /* MUnitWord.swift */,
+				8C1FECCA1D6520180091D64E /* MUserSetting.swift */,
+				8C0A9C501D2F2ACB003BC528 /* PhrasesLangViewModel.swift */,
+				8C0A9C511D2F2ACB003BC528 /* PhrasesUnitViewModel.swift */,
+				8C4670FA1D0DC599004F3C21 /* SettingsViewModel.swift */,
+				8C298A701D2AABDA00A4F057 /* WordsLangViewModel.swift */,
+				8C298A6F1D2AABDA00A4F057 /* WordsTextbookViewModel.swift */,
+				8C298A711D2AABDA00A4F057 /* WordsUnitViewModel.swift */,
+			);
+			name = src;
+			path = ../LollySwiftShared/src;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		953473D41A0D16CF00FF2D56 /* LollySwiftiOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 953473F41A0D16CF00FF2D56 /* Build configuration list for PBXNativeTarget "LollySwiftiOS" */;
+			buildPhases = (
+				953473D11A0D16CF00FF2D56 /* Sources */,
+				953473D21A0D16CF00FF2D56 /* Frameworks */,
+				953473D31A0D16CF00FF2D56 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LollySwiftiOS;
+			productName = LollySwiftiOS;
+			productReference = 953473D51A0D16CF00FF2D56 /* LollySwiftiOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		953473E91A0D16CF00FF2D56 /* LollySwiftiOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 953473F71A0D16CF00FF2D56 /* Build configuration list for PBXNativeTarget "LollySwiftiOSTests" */;
+			buildPhases = (
+				953473E61A0D16CF00FF2D56 /* Sources */,
+				953473E71A0D16CF00FF2D56 /* Frameworks */,
+				953473E81A0D16CF00FF2D56 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				953473EC1A0D16CF00FF2D56 /* PBXTargetDependency */,
+			);
+			name = LollySwiftiOSTests;
+			productName = LollySwiftiOSTests;
+			productReference = 953473EA1A0D16CF00FF2D56 /* LollySwiftiOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		953473CD1A0D16CF00FF2D56 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0710;
+				ORGANIZATIONNAME = "趙 偉";
+				TargetAttributes = {
+					953473D41A0D16CF00FF2D56 = {
+						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = U259NHMY78;
+					};
+					953473E91A0D16CF00FF2D56 = {
+						CreatedOnToolsVersion = 6.1;
+						TestTargetID = 953473D41A0D16CF00FF2D56;
+					};
+				};
+			};
+			buildConfigurationList = 953473D01A0D16CF00FF2D56 /* Build configuration list for PBXProject "LollySwiftiOS" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 953473CC1A0D16CF00FF2D56;
+			productRefGroup = 953473D61A0D16CF00FF2D56 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				953473D41A0D16CF00FF2D56 /* LollySwiftiOS */,
+				953473E91A0D16CF00FF2D56 /* LollySwiftiOSTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		953473D31A0D16CF00FF2D56 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				951BB9941A1B803B0087DB94 /* Main.storyboard in Resources */,
+				8C0566341D50AFD600E1B2A4 /* LollyCore.db in Resources */,
+				953473E51A0D16CF00FF2D56 /* LaunchScreen.xib in Resources */,
+				95267BDB1A1E303B00CC2A4B /* simpleMenuButton@2x.png in Resources */,
+				8C0566351D50B19C00E1B2A4 /* LollyDic.db in Resources */,
+				95267BDA1A1E303B00CC2A4B /* simpleMenuButton.png in Resources */,
+				953473E21A0D16CF00FF2D56 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		953473E81A0D16CF00FF2D56 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		953473D11A0D16CF00FF2D56 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8C42B5B11D69A1D900DCB528 /* WordsLangViewController.swift in Sources */,
+				951BB99C1A1B90DC0087DB94 /* LollyUINavigationController.swift in Sources */,
+				8CD16D201D69FE8F00F5F625 /* PhrasesLangDetailViewController.swift in Sources */,
+				8C4670F11D0DC4C7004F3C21 /* ActionSheetCustomPicker.m in Sources */,
+				8CD16D1E1D69FE8500F5F625 /* PhrasesLangEditViewController.swift in Sources */,
+				8CD16D141D69FD9500F5F625 /* WordsLangEditViewController.swift in Sources */,
+				951BB99A1A1B904B0087DB94 /* MainViewController.swift in Sources */,
+				95FFAEFA1A19F03C00E00C47 /* AMSlideMenuLeftTableViewController.m in Sources */,
+				8C4670FC1D0DC599004F3C21 /* SettingsViewModel.swift in Sources */,
+				95FFAF191A19F0AA00E00C47 /* MLanguage.swift in Sources */,
+				8C4670F71D0DC4C7004F3C21 /* DistancePickerView.m in Sources */,
+				8C0A9C551D2F2ACB003BC528 /* PhrasesUnitViewModel.swift in Sources */,
+				8C42B5B51D69A1D900DCB528 /* WordsUnitViewController.swift in Sources */,
+				95FFAF0D1A19F07000E00C47 /* FMDatabasePool.m in Sources */,
+				8C42B5BC1D69A21E00DCB528 /* PhrasesUnitsViewController.swift in Sources */,
+				95FFAF0F1A19F07000E00C47 /* FMResultSet.m in Sources */,
+				8C2EB0FC1D1FC9B100FB8AE9 /* MUnitWord.swift in Sources */,
+				951BB9901A1B780B0087DB94 /* FMDatabaseVariadic.swift in Sources */,
+				95FFAEFD1A19F03C00E00C47 /* AMSlideMenuRightTableViewController.m in Sources */,
+				95FFAEFC1A19F03C00E00C47 /* AMSlideMenuRightMenuSegue.m in Sources */,
+				8C298A901D2AB41400A4F057 /* MTextbookWord.swift in Sources */,
+				8C42B5B41D69A1D900DCB528 /* WordsUnitEditViewController.swift in Sources */,
+				8C0A9C531D2F2ACB003BC528 /* MUnitPhrase.swift in Sources */,
+				95FFAF0E1A19F07000E00C47 /* FMDatabaseQueue.m in Sources */,
+				8C298A731D2AABDA00A4F057 /* WordsLangViewModel.swift in Sources */,
+				8C298A721D2AABDA00A4F057 /* WordsTextbookViewModel.swift in Sources */,
+				8CD16D221D6B101200F5F625 /* LollyProtocol.swift in Sources */,
+				8C42B5AF1D69A1D900DCB528 /* WordsBaseViewController.swift in Sources */,
+				8C4670F31D0DC4C7004F3C21 /* ActionSheetDistancePicker.m in Sources */,
+				8C42B5BB1D69A21E00DCB528 /* PhrasesLangViewController.swift in Sources */,
+				8C298A741D2AABDA00A4F057 /* WordsUnitViewModel.swift in Sources */,
+				95FFAF0B1A19F07000E00C47 /* FMDatabase.m in Sources */,
+				8C1FECCB1D6520180091D64E /* MUserSetting.swift in Sources */,
+				8C4670951D099CAE004F3C21 /* MTextbook.swift in Sources */,
+				8C298A911D2AB41400A4F057 /* MLangWord.swift in Sources */,
+				95FFAEF81A19F03C00E00C47 /* AMSlideMenuContentSegue.m in Sources */,
+				8C0A9C521D2F2ACB003BC528 /* MLangPhrase.swift in Sources */,
+				8C4670F51D0DC4C7004F3C21 /* ActionSheetMultipleStringPicker.m in Sources */,
+				95FFAEF91A19F03C00E00C47 /* AMSlideMenuLeftMenuSegue.m in Sources */,
+				8C4670F01D0DC4C7004F3C21 /* AbstractActionSheetPicker.m in Sources */,
+				95267BD71A1E26D000CC2A4B /* SearchViewController.swift in Sources */,
+				95FFAF181A19F0AA00E00C47 /* MDictionary.swift in Sources */,
+				95FFAF161A19F0AA00E00C47 /* LollyDB.swift in Sources */,
+				8C42B5B01D69A1D900DCB528 /* WordsDictViewController.swift in Sources */,
+				8C0945691D122ACE003503ED /* SettingsViewController.swift in Sources */,
+				8CD16D121D69FD8A00F5F625 /* WordsLangDetailViewController.swift in Sources */,
+				8C42B5B21D69A1D900DCB528 /* WordsTextbookViewController.swift in Sources */,
+				8C4670F81D0DC4C7004F3C21 /* SWActionSheet.m in Sources */,
+				8C4670F61D0DC4C7004F3C21 /* ActionSheetStringPicker.m in Sources */,
+				951BB9981A1B90260087DB94 /* LeftMenuViewController.swift in Sources */,
+				8C4670F21D0DC4C7004F3C21 /* ActionSheetDatePicker.m in Sources */,
+				8C42B5B31D69A1D900DCB528 /* WordsUnitDetailViewController.swift in Sources */,
+				8C0B7D581C9E662500791A99 /* DBObject.swift in Sources */,
+				8C0A9C541D2F2ACB003BC528 /* PhrasesLangViewModel.swift in Sources */,
+				8C4670F41D0DC4C7004F3C21 /* ActionSheetLocalePicker.m in Sources */,
+				8C42B5BA1D69A21E00DCB528 /* PhrasesBaseViewController.swift in Sources */,
+				95FFAF0C1A19F07000E00C47 /* FMDatabaseAdditions.m in Sources */,
+				8CD16D161D69FDDC00F5F625 /* PhrasesUnitDetailViewController.swift in Sources */,
+				95FFAEFE1A19F03C00E00C47 /* UIViewController+AMSlideMenu.m in Sources */,
+				95FFAEFB1A19F03C00E00C47 /* AMSlideMenuMainViewController.m in Sources */,
+				953473DB1A0D16CF00FF2D56 /* AppDelegate.swift in Sources */,
+				8CD16D1C1D69FE4B00F5F625 /* PhrasesUnitEditViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		953473E61A0D16CF00FF2D56 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				953473F11A0D16CF00FF2D56 /* LollySwiftiOSTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		953473EC1A0D16CF00FF2D56 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 953473D41A0D16CF00FF2D56 /* LollySwiftiOS */;
+			targetProxy = 953473EB1A0D16CF00FF2D56 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		953473E31A0D16CF00FF2D56 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				953473E41A0D16CF00FF2D56 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		953473F21A0D16CF00FF2D56 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		953473F31A0D16CF00FF2D56 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		953473F51A0D16CF00FF2D56 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = LollySwiftiOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.zwstudio.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "LollySwiftiOS-Bridging-Header.h";
+			};
+			name = Debug;
+		};
+		953473F61A0D16CF00FF2D56 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = LollySwiftiOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.zwstudio.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "LollySwiftiOS-Bridging-Header.h";
+			};
+			name = Release;
+		};
+		953473F81A0D16CF00FF2D56 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = LollySwiftiOSTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.zwstudio.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LollySwiftiOS.app/LollySwiftiOS";
+			};
+			name = Debug;
+		};
+		953473F91A0D16CF00FF2D56 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = LollySwiftiOSTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.zwstudio.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LollySwiftiOS.app/LollySwiftiOS";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		953473D01A0D16CF00FF2D56 /* Build configuration list for PBXProject "LollySwiftiOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				953473F21A0D16CF00FF2D56 /* Debug */,
+				953473F31A0D16CF00FF2D56 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		953473F41A0D16CF00FF2D56 /* Build configuration list for PBXNativeTarget "LollySwiftiOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				953473F51A0D16CF00FF2D56 /* Debug */,
+				953473F61A0D16CF00FF2D56 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		953473F71A0D16CF00FF2D56 /* Build configuration list for PBXNativeTarget "LollySwiftiOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				953473F81A0D16CF00FF2D56 /* Debug */,
+				953473F91A0D16CF00FF2D56 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 953473CD1A0D16CF00FF2D56 /* Project object */;
+}
