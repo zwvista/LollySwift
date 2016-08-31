@@ -27,7 +27,7 @@ class PhrasesLangEditViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("WordCell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("PhraseCell", forIndexPath: indexPath)
         let m = vm.arrPhrases[indexPath.row]
         cell.textLabel!.text = m.PHRASE
         cell.detailTextLabel!.text = m.TRANSLATION

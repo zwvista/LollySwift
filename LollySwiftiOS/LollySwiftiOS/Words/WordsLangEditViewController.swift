@@ -45,10 +45,8 @@ class WordsLangEditViewController: UITableViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let controller = segue.destinationViewController as? UINavigationController,
-            controller2 = controller.viewControllers[0] as? WordsLangDetailViewController {
-            controller2.mWord = sender is UITableViewCell ? vm.arrWords[tableView.indexPathForSelectedRow!.row] : MLangWord()
-        }
+        let controller = (segue.destinationViewController as! UINavigationController).topViewController as! WordsLangDetailViewController
+        controller.mWord = sender is UITableViewCell ? vm.arrWords[tableView.indexPathForSelectedRow!.row] : MLangWord()
     }
     
 }

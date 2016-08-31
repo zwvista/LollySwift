@@ -17,6 +17,8 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
     @IBOutlet weak var swUnitTo: UISwitch!
     @IBOutlet weak var lblPartFrom: UILabel!
     @IBOutlet weak var lblPartTo: UILabel!
+    @IBOutlet weak var lblUnitToTitle: UILabel!
+    @IBOutlet weak var lblPartToTitle: UILabel!
     
     var selectedIndexPath: NSIndexPath!
     var selectedRow = 0
@@ -167,6 +169,8 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
     @IBAction func swUnitToValueChanged(sender: AnyObject) {
         lblUnitTo.enabled = swUnitTo.on
         lblPartTo.enabled = swUnitTo.on
+        lblUnitToTitle.enabled = swUnitTo.on
+        lblPartToTitle.enabled = swUnitTo.on
         if sender !== self && !swUnitTo.on {self.updateUnitPartTo()}
     }
 }
