@@ -38,7 +38,7 @@ class ViewController: NSViewController, NSSearchFieldDelegate {
         wvDictOnline.hidden = false
         wvDictOffline.hidden = true
         
-        let m = vm.currentDict
+        let m = vm.selectedDict
         let url = m.urlString(word)
         wvDictOnline.mainFrameURL = url
     }
@@ -57,7 +57,7 @@ class ViewController: NSViewController, NSSearchFieldDelegate {
     
     func webView(sender: WebView!, didFinishLoadForFrame frame: WebFrame!) {
         if frame !== sender.mainFrame {return}
-        let m = vm.currentDict
+        let m = vm.selectedDict
         if m.DICTTYPENAME != "OFFLINE-ONLINE" {return}
         
         let data = frame.dataSource!.data

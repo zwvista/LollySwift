@@ -10,29 +10,29 @@ import Foundation
 
 public class SettingsViewModel: NSObject {
     public var arrLanguages: [MLanguage]
-    public var currentLangIndex: Int {
+    public var selectedLangIndex: Int {
         didSet {
-            setCurrentLangIndex()
+            setSelectedLangIndex()
         }
     }
-    public var currentLang: MLanguage {
-        return arrLanguages[currentLangIndex]
+    public var selectedLang: MLanguage {
+        return arrLanguages[selectedLangIndex]
     }
     
     public var arrDictionaries = [MDictionary]()
-    public var currentDictIndex = 0
-    public var currentDict: MDictionary {
-        return arrDictionaries[currentDictIndex]
+    public var selectedDictIndex = 0
+    public var selectedDict: MDictionary {
+        return arrDictionaries[selectedDictIndex]
     }
     
     public var arrTextbooks = [MTextbook]()
-    public var currentTextbookIndex: Int {
+    public var selectedTextbookIndex: Int {
         didSet {
-            setCurrentTextbookIndex()
+            setSelectedTextbookIndex()
         }
     }
-    public var currentTextbook: MTextbook {
-        return arrTextbooks[currentTextbookIndex]
+    public var selectedTextbook: MTextbook {
+        return arrTextbooks[selectedTextbookIndex]
     }
     
     public var arrUnits = [String]()
@@ -41,22 +41,22 @@ public class SettingsViewModel: NSObject {
     public override init() {
         arrLanguages = MLanguage.getData()
         let m = MUserSetting.getData()[0]
-        currentLangIndex = arrLanguages.indexOf{ $0.ID == m.USLANGID }!
-        currentTextbookIndex = 0
+        selectedLangIndex = arrLanguages.indexOf{ $0.ID == m.USLANGID }!
+        selectedTextbookIndex = 0
         super.init()
-        setCurrentLangIndex()
+        setSelectedLangIndex()
     }
     
-    private func setCurrentLangIndex() {
-        let m = arrLanguages[currentLangIndex]
+    private func setSelectedLangIndex() {
+        let m = arrLanguages[selectedLangIndex]
         arrDictionaries = MDictionary.getDataByLang(m.ID)
-        currentDictIndex = arrDictionaries.indexOf{ $0.ID == m.USDICTID }!
+        selectedDictIndex = arrDictionaries.indexOf{ $0.ID == m.USDICTID }!
         arrTextbooks = MTextbook.getDataByLang(m.ID)
-        currentTextbookIndex = arrTextbooks.indexOf{ $0.ID == m.USTEXTBOOKID }!
+        selectedTextbookIndex = arrTextbooks.indexOf{ $0.ID == m.USTEXTBOOKID }!
     }
     
-    private func setCurrentTextbookIndex() {
-        arrUnits = (1 ... currentTextbook.UNITS).map{ String($0) }
-        arrParts = (currentTextbook.PARTS?.componentsSeparatedByString(" "))!
+    private func setSelectedTextbookIndex() {
+        arrUnits = (1 ... selectedTextbook.UNITS).map{ String($0) }
+        arrParts = (selectedTextbook.PARTS?.componentsSeparatedByString(" "))!
     }
 }

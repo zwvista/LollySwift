@@ -12,7 +12,7 @@ class WordsUnitDetailViewController: UITableViewController {
     
     var mWord: MUnitWord!
     var mTextbook: MTextbook {
-        return AppDelegate.theSettingsViewModel.currentTextbook
+        return AppDelegate.theSettingsViewModel.selectedTextbook
     }
     
     @IBOutlet weak var tfUnit: UITextField!

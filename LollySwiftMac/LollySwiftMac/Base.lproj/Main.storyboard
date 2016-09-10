@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10117"/>
@@ -733,7 +733,7 @@
                                     <action selector="langSelected:" target="HfO-r7-QMx" id="5YY-rw-VJG"/>
                                     <binding destination="Jlp-Py-Ji5" name="content" keyPath="arrangedObjects" id="TlQ-Bg-Woj"/>
                                     <binding destination="Jlp-Py-Ji5" name="contentValues" keyPath="arrangedObjects.LANGNAME" previousBinding="TlQ-Bg-Woj" id="H1C-k8-O8E"/>
-                                    <binding destination="HfO-r7-QMx" name="selectedIndex" keyPath="vm.currentLangIndex" previousBinding="H1C-k8-O8E" id="JVn-p4-slO"/>
+                                    <binding destination="HfO-r7-QMx" name="selectedIndex" keyPath="vm.selectedLangIndex" previousBinding="H1C-k8-O8E" id="JVn-p4-slO"/>
                                 </connections>
                             </popUpButton>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6If-OE-53N">
@@ -760,14 +760,14 @@
                                         </items>
                                     </menu>
                                     <connections>
-                                        <binding destination="XfG-lQ-9wD" name="selectedIndex" keyPath="theSettingsViewModel.currentDictIndex" id="8By-I3-TA0"/>
+                                        <binding destination="XfG-lQ-9wD" name="selectedIndex" keyPath="theSettingsViewModel.selectedDictIndex" id="8By-I3-TA0"/>
                                     </connections>
                                 </popUpButtonCell>
                                 <connections>
                                     <action selector="dictSelected:" target="HfO-r7-QMx" id="zXy-H5-Dgo"/>
                                     <binding destination="EkI-9N-SJp" name="content" keyPath="arrangedObjects" id="cMt-dW-ffF"/>
                                     <binding destination="EkI-9N-SJp" name="contentValues" keyPath="arrangedObjects.DICTNAME" previousBinding="cMt-dW-ffF" id="PXM-QD-ObO"/>
-                                    <binding destination="HfO-r7-QMx" name="selectedIndex" keyPath="vm.currentDictIndex" previousBinding="PXM-QD-ObO" id="78b-ia-5yx"/>
+                                    <binding destination="HfO-r7-QMx" name="selectedIndex" keyPath="vm.selectedDictIndex" previousBinding="PXM-QD-ObO" id="78b-ia-5yx"/>
                                 </connections>
                             </popUpButton>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RQX-rZ-9Ej">
@@ -795,7 +795,7 @@
                                     <action selector="textbookSelected:" target="HfO-r7-QMx" id="IFh-yp-XUC"/>
                                     <binding destination="PzR-zm-jg5" name="content" keyPath="arrangedObjects" id="JIQ-qi-6L5"/>
                                     <binding destination="PzR-zm-jg5" name="contentValues" keyPath="arrangedObjects.TEXTBOOKNAME" previousBinding="JIQ-qi-6L5" id="Qbq-2Q-bhv"/>
-                                    <binding destination="HfO-r7-QMx" name="selectedIndex" keyPath="vm.currentTextBookIndex" previousBinding="Qbq-2Q-bhv" id="mRt-gA-PoL"/>
+                                    <binding destination="HfO-r7-QMx" name="selectedIndex" keyPath="vm.selectedTextBookIndex" previousBinding="Qbq-2Q-bhv" id="mRt-gA-PoL"/>
                                 </connections>
                             </popUpButton>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8FM-8h-XQF">
@@ -932,12 +932,12 @@
                 <arrayController id="PzR-zm-jg5" userLabel="TextBooks Controller"/>
                 <arrayController id="7EM-l7-CJV" userLabel="Units Controller">
                     <connections>
-                        <binding destination="HfO-r7-QMx" name="contentArray" keyPath="vm.currentTextBook.unitsAsArray" id="vyG-mZ-Jei"/>
+                        <binding destination="HfO-r7-QMx" name="contentArray" keyPath="vm.selectedTextBook.unitsAsArray" id="vyG-mZ-Jei"/>
                     </connections>
                 </arrayController>
                 <arrayController id="IiA-XH-70P" userLabel="Parts Controller">
                     <connections>
-                        <binding destination="HfO-r7-QMx" name="contentArray" keyPath="vm.currentTextBook.partsAsArray" id="Sbx-LE-N19"/>
+                        <binding destination="HfO-r7-QMx" name="contentArray" keyPath="vm.selectedTextBook.partsAsArray" id="Sbx-LE-N19"/>
                     </connections>
                 </arrayController>
             </objects>

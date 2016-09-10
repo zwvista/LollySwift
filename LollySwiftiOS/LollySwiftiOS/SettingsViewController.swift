@@ -36,13 +36,13 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
         selectedIndexPath = indexPath
         switch selectedIndexPath.section {
         case 0:
-            ActionSheetCustomPicker.showPickerWithTitle("Select Language", delegate: self, showCancelButton: true, origin: langCell, initialSelections: [vm.currentLangIndex])
+            ActionSheetCustomPicker.showPickerWithTitle("Select Language", delegate: self, showCancelButton: true, origin: langCell, initialSelections: [vm.selectedLangIndex])
         case 1:
-            ActionSheetCustomPicker.showPickerWithTitle("Select Dictionary", delegate: self, showCancelButton: true, origin: dictCell, initialSelections: [vm.currentDictIndex])
+            ActionSheetCustomPicker.showPickerWithTitle("Select Dictionary", delegate: self, showCancelButton: true, origin: dictCell, initialSelections: [vm.selectedDictIndex])
         case 2:
-            ActionSheetCustomPicker.showPickerWithTitle("Select Textbook", delegate: self, showCancelButton: true, origin: textbookCell, initialSelections: [vm.currentTextbookIndex])
+            ActionSheetCustomPicker.showPickerWithTitle("Select Textbook", delegate: self, showCancelButton: true, origin: textbookCell, initialSelections: [vm.selectedTextbookIndex])
         default:
-            let m = vm.currentTextbook
+            let m = vm.selectedTextbook
             let isInvalidUnitPart = {m.USUNITFROM * 10 + m.USPARTFROM > m.USUNITTO * 10 + m.USPARTTO}
             switch selectedIndexPath.row {
             case 0:
@@ -111,14 +111,14 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
     
     func actionSheetPickerDidSucceed(actionSheetPicker: AbstractActionSheetPicker!, origin: AnyObject!) {
         switch selectedIndexPath.section {
-        case 0 where selectedRow != vm.currentLangIndex:
-            vm.currentLangIndex = selectedRow
+        case 0 where selectedRow != vm.selectedLangIndex:
+            vm.selectedLangIndex = selectedRow
             updateLang()
-        case 1 where selectedRow != vm.currentDictIndex:
-            vm.currentDictIndex = selectedRow
+        case 1 where selectedRow != vm.selectedDictIndex:
+            vm.selectedDictIndex = selectedRow
             updateDict()
-        case 2 where selectedRow != vm.currentTextbookIndex:
-            vm.currentTextbookIndex = selectedRow
+        case 2 where selectedRow != vm.selectedTextbookIndex:
+            vm.selectedTextbookIndex = selectedRow
             updateTextbook()
         default:
             break
@@ -126,20 +126,20 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
     }
     
     func updateLang() {
-        let m = vm.currentLang
+        let m = vm.selectedLang
         langCell.textLabel!.text = m.LANGNAME
         updateDict()
         updateTextbook()
     }
     
     func updateDict() {
-        let m = vm.currentDict
+        let m = vm.selectedDict
         dictCell.textLabel!.text = m.DICTNAME
         dictCell.detailTextLabel!.text = m.URL
     }
     
     func updateTextbook() {
-        let m = vm.currentTextbook
+        let m = vm.selectedTextbook
         textbookCell.textLabel!.text = m.TEXTBOOKNAME
         textbookCell.detailTextLabel!.text = "\(m.UNITS) Units"
         lblUnitFrom.text = "\(m.USUNITFROM)"
@@ -151,7 +151,7 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
     }
     
     func updateUnitPartFrom() {
-        let m = vm.currentTextbook
+        let m = vm.selectedTextbook
         m.USUNITFROM = m.USUNITTO
         lblUnitFrom.text = lblUnitTo.text
         m.USPARTFROM = m.USPARTTO
@@ -159,7 +159,7 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
     }
     
     func updateUnitPartTo() {
-        let m = vm.currentTextbook
+        let m = vm.selectedTextbook
         m.USUNITTO = m.USUNITFROM
         lblUnitTo.text = lblUnitFrom.text
         m.USPARTTO = m.USPARTFROM
