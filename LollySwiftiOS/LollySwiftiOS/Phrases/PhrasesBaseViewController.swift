@@ -30,7 +30,7 @@ class PhrasesBaseViewController: UIViewController {
         searchBarContainerView.addSubview(searchBar)
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
     }

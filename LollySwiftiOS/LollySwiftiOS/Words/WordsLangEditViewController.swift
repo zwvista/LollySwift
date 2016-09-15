@@ -14,39 +14,39 @@ class WordsLangEditViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.editing = true
+        tableView.isEditing = true
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return vm.arrWords.count
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("WordCell", forIndexPath: indexPath)
-        let m = vm.arrWords[indexPath.row]
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "WordCell", for: indexPath)
+        let m = vm.arrWords[(indexPath as NSIndexPath).row]
         cell.textLabel!.text = m.WORD
         return cell;
     }
     
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
     
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            vm.arrWords.removeAtIndex(indexPath.row)
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            vm.arrWords.remove(at: (indexPath as NSIndexPath).row)
+            tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let controller = (segue.destinationViewController as! UINavigationController).topViewController as! WordsLangDetailViewController
-        controller.mWord = sender is UITableViewCell ? vm.arrWords[tableView.indexPathForSelectedRow!.row] : MLangWord()
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let controller = (segue.destination as! UINavigationController).topViewController as! WordsLangDetailViewController
+        controller.mWord = sender is UITableViewCell ? vm.arrWords[(tableView.indexPathForSelectedRow! as NSIndexPath).row] : MLangWord()
     }
     
 }

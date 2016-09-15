@@ -12,7 +12,7 @@ class LollyDB: NSObject {
     var dbCore, dbDic: FMDatabase
     
     override init() {
-        let path = NSBundle.mainBundle().resourcePath!
+        let path = Bundle.main.resourcePath!
         
         dbCore = FMDatabase(path: path + "/LollyCore.db")
         dbCore.open()

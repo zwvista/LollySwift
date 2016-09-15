@@ -12,7 +12,7 @@ class WordsUnitViewController: WordsBaseViewController, UITableViewDelegate, UIT
 
     var vm: WordsUnitViewModel!
     var arrWords: [MUnitWord] {
-        return searchController.active && searchBar.text != "" ? vm.arrWordsFiltered! : vm.arrWords
+        return searchController.isActive && searchBar.text != "" ? vm.arrWordsFiltered! : vm.arrWords
     }
     
     override func viewDidLoad() {
@@ -22,34 +22,34 @@ class WordsUnitViewController: WordsBaseViewController, UITableViewDelegate, UIT
         searchBar.delegate = self
     }
 
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return arrWords.count
     }
 
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("WordCell", forIndexPath: indexPath)
-        let m = arrWords[indexPath.row]
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "WordCell", for: indexPath)
+        let m = arrWords[(indexPath as NSIndexPath).row]
         cell.textLabel!.text = m.WORD
         return cell;
     }
     
-    func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
-        let m = arrWords[indexPath.row]
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        let m = arrWords[(indexPath as NSIndexPath).row]
         word = m.WORD!
         return indexPath
     }
 
-    func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
     }
 
-    func updateSearchResultsForSearchController(searchController: UISearchController) {
+    func updateSearchResults(for searchController: UISearchController) {
         vm.filterWordsForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex])
         tableView.reloadData()
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        super.prepareForSegue(segue, sender: sender)
-        if let controller = segue.destinationViewController as? WordsUnitEditViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        if let controller = segue.destination as? WordsUnitEditViewController {
             controller.vm = vm
         }
     }

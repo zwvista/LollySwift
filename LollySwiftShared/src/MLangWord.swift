@@ -8,13 +8,13 @@
 
 import Foundation
 
-public class MLangWord: DBObject {
-    public var LANGID = 0
-    public var WORD: String?
+open class MLangWord: DBObject {
+    open var LANGID = 0
+    open var WORD: String?
     
-    static func getDataByLang(langid: Int) -> [MLangWord] {
+    static func getDataByLang(_ langid: Int) -> [MLangWord] {
         let sql = "SELECT LANGID, WORD FROM LANGWORDS WHERE LANGID = ?"
-        let results = try! DBObject.dbCore.executeQuery(sql, langid)
+        let results = try! DBObject.dbCore.executeQuery(sql, langid as AnyObject)
         return DBObject.dataFromResultSet(databaseResultSet: results)
     }
 }

@@ -8,24 +8,24 @@
 
 import Foundation
 
-public class MTextbook: DBObject {
-    public var ID = 0
-    public var LANGID = 0
-    public var TEXTBOOKNAME: String?
-    public var UNITS = 0
-    public var PARTS: String?
-    public var USUNITFROM = 0
-    public var USPARTFROM = 0
-    public var USUNITTO = 0
-    public var USPARTTO = 0
+open class MTextbook: DBObject {
+    open var ID = 0
+    open var LANGID = 0
+    open var TEXTBOOKNAME: String?
+    open var UNITS = 0
+    open var PARTS: String?
+    open var USUNITFROM = 0
+    open var USPARTFROM = 0
+    open var USUNITTO = 0
+    open var USPARTTO = 0
     
-    public var isSingleUnitPart: Bool {
+    open var isSingleUnitPart: Bool {
         return USUNITFROM == USUNITTO && USPARTFROM == USPARTTO
     }
     
-    static func getDataByLang(langID: Int) -> [MTextbook] {
+    static func getDataByLang(_ langID: Int) -> [MTextbook] {
         let sql = "SELECT * FROM VTEXTBOOKS WHERE LANGID = ?"
-        let results = try! DBObject.dbCore.executeQuery(sql, langID)
+        let results = try! DBObject.dbCore.executeQuery(sql, langID as AnyObject)
         return DBObject.dataFromResultSet(databaseResultSet: results)
     }
 }

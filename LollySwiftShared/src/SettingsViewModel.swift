@@ -8,55 +8,55 @@
 
 import Foundation
 
-public class SettingsViewModel: NSObject {
-    public var arrLanguages: [MLanguage]
-    public var selectedLangIndex: Int {
+open class SettingsViewModel: NSObject {
+    open var arrLanguages: [MLanguage]
+    open var selectedLangIndex: Int {
         didSet {
             setSelectedLangIndex()
         }
     }
-    public var selectedLang: MLanguage {
+    open var selectedLang: MLanguage {
         return arrLanguages[selectedLangIndex]
     }
     
-    public var arrDictionaries = [MDictionary]()
-    public var selectedDictIndex = 0
-    public var selectedDict: MDictionary {
+    open var arrDictionaries = [MDictionary]()
+    open var selectedDictIndex = 0
+    open var selectedDict: MDictionary {
         return arrDictionaries[selectedDictIndex]
     }
     
-    public var arrTextbooks = [MTextbook]()
-    public var selectedTextbookIndex: Int {
+    open var arrTextbooks = [MTextbook]()
+    open var selectedTextbookIndex: Int {
         didSet {
             setSelectedTextbookIndex()
         }
     }
-    public var selectedTextbook: MTextbook {
+    open var selectedTextbook: MTextbook {
         return arrTextbooks[selectedTextbookIndex]
     }
     
-    public var arrUnits = [String]()
-    public var arrParts = [String]()
+    open var arrUnits = [String]()
+    open var arrParts = [String]()
     
     public override init() {
         arrLanguages = MLanguage.getData()
         let m = MUserSetting.getData()[0]
-        selectedLangIndex = arrLanguages.indexOf{ $0.ID == m.USLANGID }!
+        selectedLangIndex = arrLanguages.index{ $0.ID == m.USLANGID }!
         selectedTextbookIndex = 0
         super.init()
         setSelectedLangIndex()
     }
     
-    private func setSelectedLangIndex() {
+    fileprivate func setSelectedLangIndex() {
         let m = arrLanguages[selectedLangIndex]
         arrDictionaries = MDictionary.getDataByLang(m.ID)
-        selectedDictIndex = arrDictionaries.indexOf{ $0.ID == m.USDICTID }!
+        selectedDictIndex = arrDictionaries.index{ $0.ID == m.USDICTID }!
         arrTextbooks = MTextbook.getDataByLang(m.ID)
-        selectedTextbookIndex = arrTextbooks.indexOf{ $0.ID == m.USTEXTBOOKID }!
+        selectedTextbookIndex = arrTextbooks.index{ $0.ID == m.USTEXTBOOKID }!
     }
     
-    private func setSelectedTextbookIndex() {
+    fileprivate func setSelectedTextbookIndex() {
         arrUnits = (1 ... selectedTextbook.UNITS).map{ String($0) }
-        arrParts = (selectedTextbook.PARTS?.componentsSeparatedByString(" "))!
+        arrParts = (selectedTextbook.PARTS?.components(separatedBy: " "))!
     }
 }

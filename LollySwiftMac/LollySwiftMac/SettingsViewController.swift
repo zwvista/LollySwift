@@ -22,24 +22,24 @@ class SettingsViewController: NSViewController {
 
         langSelected(self)
     }
-    @IBAction func close(sender: AnyObject) {
-        let application = NSApplication.sharedApplication()
+    @IBAction func close(_ sender: AnyObject) {
+        let application = NSApplication.shared()
         application.stopModal()
         // http://stackoverflow.com/questions/5711367/os-x-how-can-a-nsviewcontroller-find-its-window
         self.view.window?.close()
     }
     
-    @IBAction func langSelected(sender: AnyObject) {
+    @IBAction func langSelected(_ sender: AnyObject) {
         dictionariesController.content = vm.arrDictionaries
         textbooksController.content = vm.arrTextbooks
         dictSelected(sender)
     }
     
-    @IBAction func dictSelected(sender: AnyObject) {
+    @IBAction func dictSelected(_ sender: AnyObject) {
     }
     
     
-    @IBAction func textbookSelected(sender: AnyObject) {
+    @IBAction func textbookSelected(_ sender: AnyObject) {
     }
     
     

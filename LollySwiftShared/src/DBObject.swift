@@ -8,11 +8,11 @@
 // http://mbehan.com/post/105556974748/super-basic-orm-on-top-of-fmdb-and-sqlite-for-ios
 
 import Foundation
-public class DBObject: NSObject {
+open class DBObject: NSObject {
     
     // http://stackoverflow.com/questions/25575030/how-to-convert-nsnull-to-nil-in-swift
     // http://stackoverflow.com/questions/32360733/null-string-crashes-swift-conditional
-    func nullToNil(value: AnyObject?) -> AnyObject? {
+    func nullToNil(_ value: AnyObject?) -> AnyObject? {
         return value is NSNull ? nil : value;
     }
     
@@ -23,14 +23,14 @@ public class DBObject: NSObject {
     required public init(databaseResultSet resultSet: FMResultSet) {
         super.init()
         var propertyCount: CUnsignedInt = 0
-        let properties = class_copyPropertyList(self.dynamicType, &propertyCount)
+        let properties = class_copyPropertyList(type(of: self), &propertyCount)
         let dic = resultSet.columnNameToIndexMap;
         
         for i in 0 ..< Int(propertyCount) {
-            let property = properties[i]
-            if let propertyName = NSString(CString: property_getName(property), encoding: NSUTF8StringEncoding) as? String {
-                if (dic.objectForKey(propertyName.lowercaseString) == nil) {continue}
-                self.setValue(nullToNil(resultSet.objectForColumnName(propertyName)), forKey: propertyName)
+            let property = properties?[i]
+            if let propertyName = NSString(cString: property_getName(property), encoding: String.Encoding.utf8.rawValue) as? String {
+                if (dic?.object(forKey: propertyName.lowercased()) == nil) {continue}
+                self.setValue(nullToNil(resultSet.object(forColumnName: propertyName) as AnyObject?), forKey: propertyName)
             }
         }
         free(properties)

@@ -19,7 +19,7 @@ class WordsDictViewController: UIViewController {
         navigationItem.title = word
         let m = AppDelegate.theSettingsViewModel.selectedDict
         let url = m.urlString(word)
-        wvWord.loadRequest(NSURLRequest(URL: NSURL(string: url)!))
+        wvWord.loadRequest(URLRequest(url: URL(string: url)!))
     }
 
 }

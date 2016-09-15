@@ -10,7 +10,7 @@ import UIKit
 
 class MainViewController: AMSlideMenuMainViewController {
     
-    override func segueIdentifierForIndexPathInLeftMenu(indexPath: NSIndexPath) -> String {
+    override func segueIdentifierForIndexPath(inLeftMenu indexPath: IndexPath) -> String {
         let arrSegues = [
             "searchSegue",
             "settingsSegue",
@@ -20,7 +20,7 @@ class MainViewController: AMSlideMenuMainViewController {
             "phrasesUnitsSegue",
             "phrasesLangSegue",
         ]
-        return arrSegues[indexPath.row]
+        return arrSegues[(indexPath as NSIndexPath).row]
     }
     
     override func leftMenuWidth() -> CGFloat {
@@ -31,19 +31,19 @@ class MainViewController: AMSlideMenuMainViewController {
         return 180
     }
     
-    override func configureLeftMenuButton(button: UIButton) {
-        button.frame = CGRectMake(0, 0, 25, 13)
-        button.backgroundColor = UIColor.clearColor()
-        button.setImage(UIImage(named: "simpleMenuButton"), forState: UIControlState.Normal)
+    override func configureLeftMenuButton(_ button: UIButton) {
+        button.frame = CGRect(x: 0, y: 0, width: 25, height: 13)
+        button.backgroundColor = UIColor.clear
+        button.setImage(UIImage(named: "simpleMenuButton"), for: UIControlState())
     }
     
-    override func configureSlideLayer(layer: CALayer) {
-        layer.shadowColor = UIColor.blackColor().CGColor
+    override func configureSlideLayer(_ layer: CALayer) {
+        layer.shadowColor = UIColor.black.cgColor
         layer.shadowOpacity = 1
-        layer.shadowOffset = CGSizeMake(0, 0)
+        layer.shadowOffset = CGSize(width: 0, height: 0)
         layer.shadowRadius = 5
         layer.masksToBounds = false
-        layer.shadowPath = UIBezierPath(rect: view.layer.bounds).CGPath
+        layer.shadowPath = UIBezierPath(rect: view.layer.bounds).cgPath
     }
 
     

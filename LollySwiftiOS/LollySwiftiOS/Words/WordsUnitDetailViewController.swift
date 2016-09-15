@@ -29,17 +29,17 @@ class WordsUnitDetailViewController: UITableViewController {
         tfWord.text = mWord.WORD
     }
     
-    @IBAction func onCancel(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func onCancel(_ sender: AnyObject) {
+        self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func onDone(sender: AnyObject) {
+    @IBAction func onDone(_ sender: AnyObject) {
         mWord.UNIT = Int(tfUnit.text!)!
         mWord.PART = Int(tfPart.text!)!
         mWord.SEQNUM = Int(tfSeqNum.text!)!
         mWord.WORD = tfWord.text
         
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
 }

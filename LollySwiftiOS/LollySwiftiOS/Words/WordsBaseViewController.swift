@@ -30,13 +30,13 @@ class WordsBaseViewController: UIViewController {
         searchBarContainerView.addSubview(searchBar)
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let controller = segue.destinationViewController as? WordsDictViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let controller = segue.destination as? WordsDictViewController {
             controller.word = word
         }
     }

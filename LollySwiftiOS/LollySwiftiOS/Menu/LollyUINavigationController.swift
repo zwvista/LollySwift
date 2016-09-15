@@ -7,13 +7,33 @@
 //
 
 import UIKit
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 public extension UINavigationController {
-    override func shouldAutorotate() -> Bool {
+    override open var shouldAutorotate : Bool {
         return true
     }
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return .All
+    override open var supportedInterfaceOrientations : UIInterfaceOrientationMask {
+        return .all
     }
 }
 
@@ -32,7 +52,7 @@ class LollyUINavigationController: UINavigationController {
         }
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         // Saving navigation state
         stack = NSMutableArray(array: viewControllers)
     }
@@ -44,16 +64,16 @@ class LollyUINavigationController: UINavigationController {
         * We need to set a memory warning listener,
         * to deallocate recreatable resources
         */
-        NSNotificationCenter.defaultCenter().addObserver(self,
+        NotificationCenter.default.addObserver(self,
             selector: #selector(LollyUINavigationController.handleDidReceiveMemoryWarning),
-            name: UIApplicationDidReceiveMemoryWarningNotification,
-            object: UIApplication.sharedApplication());
+            name: NSNotification.Name.UIApplicationDidReceiveMemoryWarning,
+            object: UIApplication.shared);
     }
     
     /*
     * Cleaning up some memory
     */
-    class func handleDidReceiveMemoryWarning(note: NSNotification) {
+    class func handleDidReceiveMemoryWarning(_ note: Notification) {
         stack = nil;
     }
 }

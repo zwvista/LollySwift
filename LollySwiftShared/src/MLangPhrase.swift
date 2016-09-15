@@ -8,13 +8,13 @@
 
 import Foundation
 
-public class MLangPhrase: DBObject {
-    public var PHRASE: String?
-    public var TRANSLATION: String?
+open class MLangPhrase: DBObject {
+    open var PHRASE: String?
+    open var TRANSLATION: String?
     
-    static func getDataByLang(langid: Int) -> [MLangPhrase] {
+    static func getDataByLang(_ langid: Int) -> [MLangPhrase] {
         let sql = "SELECT PHRASE, TRANSLATION FROM LANGPHRASES WHERE LANGID = ?"
-        let results = try! DBObject.dbCore.executeQuery(sql, langid)
+        let results = try! DBObject.dbCore.executeQuery(sql, langid as AnyObject)
         return DBObject.dataFromResultSet(databaseResultSet: results)
     }
 }

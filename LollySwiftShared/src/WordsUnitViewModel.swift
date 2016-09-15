@@ -8,10 +8,10 @@
 
 import Foundation
 
-public class WordsUnitViewModel: NSObject {
-    public var settings: SettingsViewModel
-    public var arrWords: [MUnitWord]
-    public var arrWordsFiltered: [MUnitWord]?
+open class WordsUnitViewModel: NSObject {
+    open var settings: SettingsViewModel
+    open var arrWords: [MUnitWord]
+    open var arrWordsFiltered: [MUnitWord]?
     
     public init(settings: SettingsViewModel) {
         self.settings = settings
@@ -19,9 +19,9 @@ public class WordsUnitViewModel: NSObject {
         arrWords = MUnitWord.getDataByTextbook(m.ID, unitPartFrom: m.USUNITFROM * 10 + m.USPARTFROM, unitPartTo: m.USUNITTO * 10 + m.USPARTTO)
     }
     
-    public func filterWordsForSearchText(searchText: String, scope: String) {
+    open func filterWordsForSearchText(_ searchText: String, scope: String) {
         arrWordsFiltered = arrWords.filter({ (m) -> Bool in
-            return m.WORD!.containsString(searchText)
+            return m.WORD!.contains(searchText)
         })
     }
 

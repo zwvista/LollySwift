@@ -20,7 +20,7 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
     @IBOutlet weak var lblUnitToTitle: UILabel!
     @IBOutlet weak var lblPartToTitle: UILabel!
     
-    var selectedIndexPath: NSIndexPath!
+    var selectedIndexPath: IndexPath!
     var selectedRow = 0
     
     var vm: SettingsViewModel {
@@ -32,54 +32,54 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
         updateLang()
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedIndexPath = indexPath
         switch selectedIndexPath.section {
         case 0:
-            ActionSheetCustomPicker.showPickerWithTitle("Select Language", delegate: self, showCancelButton: true, origin: langCell, initialSelections: [vm.selectedLangIndex])
+            ActionSheetCustomPicker.show(withTitle: "Select Language", delegate: self, showCancelButton: true, origin: langCell, initialSelections: [vm.selectedLangIndex])
         case 1:
-            ActionSheetCustomPicker.showPickerWithTitle("Select Dictionary", delegate: self, showCancelButton: true, origin: dictCell, initialSelections: [vm.selectedDictIndex])
+            ActionSheetCustomPicker.show(withTitle: "Select Dictionary", delegate: self, showCancelButton: true, origin: dictCell, initialSelections: [vm.selectedDictIndex])
         case 2:
-            ActionSheetCustomPicker.showPickerWithTitle("Select Textbook", delegate: self, showCancelButton: true, origin: textbookCell, initialSelections: [vm.selectedTextbookIndex])
+            ActionSheetCustomPicker.show(withTitle: "Select Textbook", delegate: self, showCancelButton: true, origin: textbookCell, initialSelections: [vm.selectedTextbookIndex])
         default:
             let m = vm.selectedTextbook
             let isInvalidUnitPart = {m.USUNITFROM * 10 + m.USPARTFROM > m.USUNITTO * 10 + m.USPARTTO}
             switch selectedIndexPath.row {
             case 0:
-                ActionSheetStringPicker.showPickerWithTitle("Select Unit(From)", rows: vm.arrUnits, initialSelection: m.USUNITFROM - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
+                ActionSheetStringPicker.show(withTitle: "Select Unit(From)", rows: vm.arrUnits, initialSelection: m.USUNITFROM - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
                     m.USUNITFROM = Int(selectedValue as! String)!
                     self.lblUnitFrom.text = (selectedValue as! String)
-                    if !self.swUnitTo.on || isInvalidUnitPart() {self.updateUnitPartTo()}
-                }, cancelBlock: nil, origin: lblUnitFrom)
+                    if !self.swUnitTo.isOn || isInvalidUnitPart() {self.updateUnitPartTo()}
+                }, cancel: nil, origin: lblUnitFrom)
             case 1:
-                ActionSheetStringPicker.showPickerWithTitle("Select Part(From)", rows: vm.arrParts, initialSelection: m.USPARTFROM - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
+                ActionSheetStringPicker.show(withTitle: "Select Part(From)", rows: vm.arrParts, initialSelection: m.USPARTFROM - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
                     m.USPARTFROM = Int(selectedValue as! String)!
                     self.lblPartFrom.text = (selectedValue as! String)
-                    if !self.swUnitTo.on || isInvalidUnitPart() {self.updateUnitPartTo()}
-                }, cancelBlock: nil, origin: lblPartFrom)
-            case 3 where swUnitTo.on:
-                ActionSheetStringPicker.showPickerWithTitle("Select Unit(To)", rows: vm.arrUnits, initialSelection: m.USUNITTO - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
+                    if !self.swUnitTo.isOn || isInvalidUnitPart() {self.updateUnitPartTo()}
+                }, cancel: nil, origin: lblPartFrom)
+            case 3 where swUnitTo.isOn:
+                ActionSheetStringPicker.show(withTitle: "Select Unit(To)", rows: vm.arrUnits, initialSelection: m.USUNITTO - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
                     m.USUNITTO = Int(selectedValue as! String)!
                     self.lblUnitTo.text = (selectedValue as! String)
                     if isInvalidUnitPart() {self.updateUnitPartFrom()}
-                }, cancelBlock: nil, origin: lblUnitTo)
-            case 4 where swUnitTo.on:
-                ActionSheetStringPicker.showPickerWithTitle("Select Part(To)", rows: vm.arrParts, initialSelection: m.USPARTTO - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
+                }, cancel: nil, origin: lblUnitTo)
+            case 4 where swUnitTo.isOn:
+                ActionSheetStringPicker.show(withTitle: "Select Part(To)", rows: vm.arrParts, initialSelection: m.USPARTTO - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
                     m.USPARTTO = Int(selectedValue as! String)!
                     self.lblPartTo.text = (selectedValue as! String)
                     if isInvalidUnitPart() {self.updateUnitPartFrom()}
-                }, cancelBlock: nil, origin: lblPartTo)
+                }, cancel: nil, origin: lblPartTo)
             default:
                 break
             }
         }
     }
     
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         switch selectedIndexPath.section {
         case 0:
             return vm.arrLanguages.count
@@ -92,7 +92,7 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
         }
     }
     
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         switch selectedIndexPath.section {
         case 0:
             return vm.arrLanguages[row].LANGNAME
@@ -105,11 +105,11 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
         }
     }
     
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         selectedRow = row
     }
     
-    func actionSheetPickerDidSucceed(actionSheetPicker: AbstractActionSheetPicker!, origin: AnyObject!) {
+    func actionSheetPickerDidSucceed(_ actionSheetPicker: AbstractActionSheetPicker!, origin: AnyObject!) {
         switch selectedIndexPath.section {
         case 0 where selectedRow != vm.selectedLangIndex:
             vm.selectedLangIndex = selectedRow
@@ -146,7 +146,7 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
         lblUnitTo.text = "\(m.USUNITTO)"
         lblPartFrom.text = vm.arrParts[m.USPARTFROM - 1]
         lblPartTo.text = vm.arrParts[m.USPARTTO - 1]
-        swUnitTo.on = !m.isSingleUnitPart
+        swUnitTo.isOn = !m.isSingleUnitPart
         swUnitToValueChanged(self)
     }
     
@@ -166,11 +166,11 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
         lblPartTo.text = lblPartFrom.text
     }
     
-    @IBAction func swUnitToValueChanged(sender: AnyObject) {
-        lblUnitTo.enabled = swUnitTo.on
-        lblPartTo.enabled = swUnitTo.on
-        lblUnitToTitle.enabled = swUnitTo.on
-        lblPartToTitle.enabled = swUnitTo.on
-        if sender !== self && !swUnitTo.on {self.updateUnitPartTo()}
+    @IBAction func swUnitToValueChanged(_ sender: AnyObject) {
+        lblUnitTo.isEnabled = swUnitTo.isOn
+        lblPartTo.isEnabled = swUnitTo.isOn
+        lblUnitToTitle.isEnabled = swUnitTo.isOn
+        lblPartToTitle.isEnabled = swUnitTo.isOn
+        if sender !== self && !swUnitTo.isOn {self.updateUnitPartTo()}
     }
 }

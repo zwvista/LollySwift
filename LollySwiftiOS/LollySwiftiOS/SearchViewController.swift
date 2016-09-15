@@ -20,36 +20,36 @@ class SearchViewController: UIViewController, UIWebViewDelegate, UISearchBarDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        wvDictOnline.hidden = true
-        wvDictOffline.hidden = true
+        wvDictOnline.isHidden = true
+        wvDictOffline.isHidden = true
     }
     
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        wvDictOnline.hidden = false
-        wvDictOffline.hidden = true
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        wvDictOnline.isHidden = false
+        wvDictOffline.isHidden = true
         
         word = sbword.text!;
         let m = vmSettings.selectedDict
         let url = m.urlString(word)
         webViewFinished = false
-        wvDictOnline.loadRequest(NSURLRequest(URL: NSURL(string: url)!))
+        wvDictOnline.loadRequest(URLRequest(url: URL(string: url)!))
         sbword.resignFirstResponder()
     }
     
-    func webViewDidFinishLoad(webView: UIWebView) {
-        guard webView === wvDictOnline && webView.stringByEvaluatingJavaScriptFromString("document.readyState") == "complete" && !webViewFinished else {return}
+    func webViewDidFinishLoad(_ webView: UIWebView) {
+        guard webView === wvDictOnline && webView.stringByEvaluatingJavaScript(from: "document.readyState") == "complete" && !webViewFinished else {return}
         
         webViewFinished = true
         let m = vmSettings.selectedDict
         guard m.DICTTYPENAME == "OFFLINE-ONLINE" else {return}
         
-        let data = NSURLCache.sharedURLCache().cachedResponseForRequest(webView.request!)!.data;
-        let html = NSString(data: data, encoding: NSUTF8StringEncoding)!
+        let data = URLCache.shared.cachedResponse(for: webView.request!)!.data;
+        let html = NSString(data: data, encoding: String.Encoding.utf8.rawValue)!
         let str = m.htmlString(html as String, word: word)
         
-        wvDictOffline.loadHTMLString(str, baseURL: NSURL(string: "/Users/bestskip/Documents/zw/"));
-        wvDictOnline.hidden = true
-        wvDictOffline.hidden = false
+        wvDictOffline.loadHTMLString(str, baseURL: URL(string: "/Users/bestskip/Documents/zw/"));
+        wvDictOnline.isHidden = true
+        wvDictOffline.isHidden = false
     }
 
 }

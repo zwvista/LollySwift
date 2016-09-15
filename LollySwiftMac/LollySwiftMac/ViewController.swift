@@ -25,7 +25,7 @@ class ViewController: NSViewController, NSSearchFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        wvDictOffline.hidden = true
+        wvDictOffline.isHidden = true
     }
 
     override var representedObject: AnyObject? {
@@ -34,39 +34,39 @@ class ViewController: NSViewController, NSSearchFieldDelegate {
         }
     }
     
-    @IBAction func searchDict(sender: AnyObject) {
-        wvDictOnline.hidden = false
-        wvDictOffline.hidden = true
+    @IBAction func searchDict(_ sender: AnyObject) {
+        wvDictOnline.isHidden = false
+        wvDictOffline.isHidden = true
         
         let m = vm.selectedDict
         let url = m.urlString(word)
         wvDictOnline.mainFrameURL = url
     }
     
-    override func controlTextDidEndEditing(obj: NSNotification) {
+    override func controlTextDidEndEditing(_ obj: Notification) {
         let searchfield = obj.object as! NSControl
         if searchfield !== sfWord {return}
         
-        let dict = obj.userInfo!
+        let dict = (obj as NSNotification).userInfo!
         let reason = dict["NSTextMovement"] as! NSNumber
-        let code = Int(reason.intValue)
+        let code = Int(reason.int32Value)
         if code == NSReturnTextMovement {
             searchDict(self)
         }
     }
     
-    func webView(sender: WebView!, didFinishLoadForFrame frame: WebFrame!) {
+    func webView(_ sender: WebView!, didFinishLoadForFrame frame: WebFrame!) {
         if frame !== sender.mainFrame {return}
         let m = vm.selectedDict
         if m.DICTTYPENAME != "OFFLINE-ONLINE" {return}
         
         let data = frame.dataSource!.data
-        let html = NSString(data: data!, encoding: NSUTF8StringEncoding)!
+        let html = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)!
         let str = m.htmlString(html as String, word: word)
         
-        wvDictOffline.mainFrame.loadHTMLString(str, baseURL: NSURL(string: "/Users/bestskip/Documents/zw/"))
-        wvDictOnline.hidden = true
-        wvDictOffline.hidden = false
+        wvDictOffline.mainFrame.loadHTMLString(str, baseURL: URL(string: "/Users/bestskip/Documents/zw/"))
+        wvDictOnline.isHidden = true
+        wvDictOffline.isHidden = false
     }
 
 

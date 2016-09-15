@@ -12,7 +12,7 @@ class PhrasesLangViewController: PhrasesBaseViewController, UITableViewDelegate,
     
     var vm: PhrasesLangViewModel!
     var arrPhrases: [MLangPhrase] {
-        return searchController.active && searchBar.text != "" ? vm.arrPhrasesFiltered! : vm.arrPhrases
+        return searchController.isActive && searchBar.text != "" ? vm.arrPhrasesFiltered! : vm.arrPhrases
     }
     
     override func viewDidLoad() {
@@ -22,35 +22,35 @@ class PhrasesLangViewController: PhrasesBaseViewController, UITableViewDelegate,
         searchBar.delegate = self
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return arrPhrases.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("PhraseCell", forIndexPath: indexPath)
-        let m = arrPhrases[indexPath.row]
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PhraseCell", for: indexPath)
+        let m = arrPhrases[(indexPath as NSIndexPath).row]
         cell.textLabel!.text = m.PHRASE
         cell.detailTextLabel?.text = m.TRANSLATION
         return cell;
     }
     
-    func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
-        let m = arrPhrases[indexPath.row]
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        let m = arrPhrases[(indexPath as NSIndexPath).row]
         phrase = m.PHRASE!
         return indexPath
     }
     
-    func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
     }
     
-    func updateSearchResultsForSearchController(searchController: UISearchController) {
+    func updateSearchResults(for searchController: UISearchController) {
         vm.filterPhrasesForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex])
         tableView.reloadData()
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        super.prepareForSegue(segue, sender: sender)
-        if let controller = segue.destinationViewController as? PhrasesLangEditViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        if let controller = segue.destination as? PhrasesLangEditViewController {
             controller.vm = vm
         }
     }

@@ -8,18 +8,18 @@
 
 import Foundation
 
-public class MUnitWord: DBObject {
-    public var ID = 0
-    public var TEXTBOOKID = 0
-    public var UNIT = 0
-    public var PART = 0
-    public var SEQNUM = 0
-    public var WORD: String?
-    public var NOTE: String?
+open class MUnitWord: DBObject {
+    open var ID = 0
+    open var TEXTBOOKID = 0
+    open var UNIT = 0
+    open var PART = 0
+    open var SEQNUM = 0
+    open var WORD: String?
+    open var NOTE: String?
 
-    static func getDataByTextbook(textbookid: Int, unitPartFrom: Int, unitPartTo: Int) -> [MUnitWord] {
+    static func getDataByTextbook(_ textbookid: Int, unitPartFrom: Int, unitPartTo: Int) -> [MUnitWord] {
         let sql = "SELECT * FROM UNITWORDS WHERE TEXTBOOKID=? AND UNIT*10+PART>=? AND UNIT*10+PART<=?"
-        let results = try! DBObject.dbCore.executeQuery(sql, textbookid, unitPartFrom, unitPartTo)
+        let results = try! DBObject.dbCore.executeQuery(sql, textbookid as AnyObject, unitPartFrom as AnyObject, unitPartTo as AnyObject)
         return DBObject.dataFromResultSet(databaseResultSet: results)
     }
 }

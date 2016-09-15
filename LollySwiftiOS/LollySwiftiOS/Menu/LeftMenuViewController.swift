@@ -14,11 +14,11 @@ class LeftMenuViewController: AMSlideMenuLeftTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        if (UIDevice.currentDevice().systemVersion as NSString).floatValue >= 7.0 && !UIApplication.sharedApplication().statusBarHidden {
+        if (UIDevice.current.systemVersion as NSString).floatValue >= 7.0 && !UIApplication.shared.isStatusBarHidden {
             tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0)
         }
         
-        if UIDevice.currentDevice().userInterfaceIdiom != .Pad {
+        if UIDevice.current.userInterfaceIdiom != .pad {
             // The device is an iPhone or iPod touch.
             setFixedStatusBar();
         }
@@ -31,8 +31,8 @@ class LeftMenuViewController: AMSlideMenuLeftTableViewController {
         view.backgroundColor = myTableView.backgroundColor
         view.addSubview(myTableView)
         
-        let statusBarView = UIView(frame: CGRectMake(0, 0, max(view.frame.size.width, view.frame.size.height), 20));
-        statusBarView.backgroundColor = UIColor.clearColor();
+        let statusBarView = UIView(frame: CGRect(x: 0, y: 0, width: max(view.frame.size.width, view.frame.size.height), height: 20));
+        statusBarView.backgroundColor = UIColor.clear;
         view.addSubview(statusBarView);
     }
 

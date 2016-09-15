@@ -12,16 +12,16 @@ import LollySwiftShared
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
-    private let _theSettingsViewModel = SettingsViewModel()
+    fileprivate let _theSettingsViewModel = SettingsViewModel()
     static var theSettingsViewModel: SettingsViewModel {
         return (NSApplication.sharedApplication().delegate as! AppDelegate)._theSettingsViewModel
     }
 
-    func applicationDidFinishLaunching(aNotification: NSNotification) {
+    func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
     }
 
-    func applicationWillTerminate(aNotification: NSNotification) {
+    func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
     }
 
@@ -29,13 +29,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return true
     }
     
-    @IBAction func selectUnits(sender: AnyObject) {
+    @IBAction func selectUnits(_ sender: AnyObject) {
         let storyboard = NSStoryboard(name: "Main", bundle: nil)
-        let wc = storyboard.instantiateControllerWithIdentifier("Select Units Window Controller") as! NSWindowController
+        let wc = storyboard.instantiateController(withIdentifier: "Select Units Window Controller") as! NSWindowController
         if let w = wc.window {
             //let vc = w.contentView as! SettingsViewController
-            let application = NSApplication.sharedApplication()
-            application.runModalForWindow(w)
+            let application = NSApplication.shared()
+            application.runModal(for: w)
 
         }
     }

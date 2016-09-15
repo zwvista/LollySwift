@@ -8,9 +8,9 @@
 
 import Foundation
 
-public class MUserSetting: DBObject {
-    public var ID = 0
-    public var USLANGID = 0
+open class MUserSetting: DBObject {
+    open var ID = 0
+    open var USLANGID = 0
     
     static func getData() -> [MUserSetting] {
         let sql = "SELECT * FROM VUSERSETTINGS"

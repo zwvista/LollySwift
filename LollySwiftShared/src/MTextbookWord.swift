@@ -8,19 +8,19 @@
 
 import Foundation
 
-public class MTextbookWord: DBObject {
-    public var ID = 0
-    public var LANGID = 0
-    public var TEXTBOOKNAME: String?
-    public var UNIT = 0
-    public var PART = 0
-    public var SEQNUM = 0
-    public var WORD: String?
-    public var NOTE: String?
+open class MTextbookWord: DBObject {
+    open var ID = 0
+    open var LANGID = 0
+    open var TEXTBOOKNAME: String?
+    open var UNIT = 0
+    open var PART = 0
+    open var SEQNUM = 0
+    open var WORD: String?
+    open var NOTE: String?
     
-    static func getDataByLang(langid: Int) -> [MTextbookWord] {
+    static func getDataByLang(_ langid: Int) -> [MTextbookWord] {
         let sql = "SELECT * FROM VTEXTBOOKWORDS WHERE LANGID = ?"
-        let results = try! DBObject.dbCore.executeQuery(sql, langid)
+        let results = try! DBObject.dbCore.executeQuery(sql, langid as AnyObject)
         return DBObject.dataFromResultSet(databaseResultSet: results)
     }
 }

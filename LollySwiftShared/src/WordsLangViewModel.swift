@@ -8,10 +8,10 @@
 
 import Foundation
 
-public class WordsLangViewModel: NSObject {
-    public var settings: SettingsViewModel
-    public var arrWords: [MLangWord]
-    public var arrWordsFiltered: [MLangWord]?
+open class WordsLangViewModel: NSObject {
+    open var settings: SettingsViewModel
+    open var arrWords: [MLangWord]
+    open var arrWordsFiltered: [MLangWord]?
     
     public init(settings: SettingsViewModel) {
         self.settings = settings
@@ -19,9 +19,9 @@ public class WordsLangViewModel: NSObject {
         arrWords = MLangWord.getDataByLang(m.LANGID)
     }
     
-    public func filterWordsForSearchText(searchText: String, scope: String) {
+    open func filterWordsForSearchText(_ searchText: String, scope: String) {
         arrWordsFiltered = arrWords.filter({ (m) -> Bool in
-            return m.WORD!.containsString(searchText)
+            return m.WORD!.contains(searchText)
         })
     }
 
