@@ -109,7 +109,7 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
         selectedRow = row
     }
     
-    func actionSheetPickerDidSucceed(_ actionSheetPicker: AbstractActionSheetPicker!, origin: AnyObject!) {
+    @nonobjc func actionSheetPickerDidSucceed(_ actionSheetPicker: AbstractActionSheetPicker!, origin: AnyObject!) {
         switch selectedIndexPath.section {
         case 0 where selectedRow != vm.selectedLangIndex:
             vm.selectedLangIndex = selectedRow
