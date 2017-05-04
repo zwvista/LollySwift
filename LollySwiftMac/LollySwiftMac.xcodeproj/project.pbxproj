@@ -16,9 +16,33 @@
 		8C1C4F2F1D31F88800CF5D88 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C1C4F2D1D31F88800CF5D88 /* Main.storyboard */; };
 		8C1C4F3A1D31F88800CF5D88 /* LollySwiftMacTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1C4F391D31F88800CF5D88 /* LollySwiftMacTests.swift */; };
 		8C1C4F451D31F88800CF5D88 /* LollySwiftMacUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1C4F441D31F88800CF5D88 /* LollySwiftMacUITests.swift */; };
-		8C6F26DF1D333598008F706A /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C6F26DB1D333598008F706A /* WebKit.framework */; };
-		8C6F26E01D333598008F706A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C6F26DC1D333598008F706A /* Cocoa.framework */; };
-		8C6F26E21D3335EB008F706A /* libLollySwiftShared.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C6F26E11D3335EB008F706A /* libLollySwiftShared.dylib */; };
+		8C486DF41EBB88240023FBFC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C486DF31EBB88240023FBFC /* Cocoa.framework */; };
+		8C486DF61EBB882B0023FBFC /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C486DF51EBB882B0023FBFC /* WebKit.framework */; };
+		8C486E031EBB94730023FBFC /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C486DFD1EBB8EB70023FBFC /* libsqlite3.0.tbd */; };
+		8C486E161EBB94C30023FBFC /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C486E0B1EBB94C30023FBFC /* FMDatabase.m */; };
+		8C486E171EBB94C30023FBFC /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C486E0D1EBB94C30023FBFC /* FMDatabaseAdditions.m */; };
+		8C486E181EBB94C30023FBFC /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C486E0F1EBB94C30023FBFC /* FMDatabasePool.m */; };
+		8C486E191EBB94C30023FBFC /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C486E111EBB94C30023FBFC /* FMDatabaseQueue.m */; };
+		8C486E1A1EBB94C30023FBFC /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C486E141EBB94C30023FBFC /* FMResultSet.m */; };
+		8C486E1B1EBB94C30023FBFC /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C486E151EBB94C30023FBFC /* Info.plist */; };
+		8C486E2E1EBB94E70023FBFC /* DBObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C486E1D1EBB94E70023FBFC /* DBObject.swift */; };
+		8C486E2F1EBB94E70023FBFC /* LollyDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C486E1E1EBB94E70023FBFC /* LollyDB.swift */; };
+		8C486E301EBB94E70023FBFC /* MDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C486E1F1EBB94E70023FBFC /* MDictionary.swift */; };
+		8C486E311EBB94E70023FBFC /* MLangPhrase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C486E201EBB94E70023FBFC /* MLangPhrase.swift */; };
+		8C486E321EBB94E70023FBFC /* MLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C486E211EBB94E70023FBFC /* MLanguage.swift */; };
+		8C486E331EBB94E70023FBFC /* MLangWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C486E221EBB94E70023FBFC /* MLangWord.swift */; };
+		8C486E341EBB94E70023FBFC /* MTextbook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C486E231EBB94E70023FBFC /* MTextbook.swift */; };
+		8C486E351EBB94E70023FBFC /* MTextbookWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C486E241EBB94E70023FBFC /* MTextbookWord.swift */; };
+		8C486E361EBB94E70023FBFC /* MUnitPhrase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C486E251EBB94E70023FBFC /* MUnitPhrase.swift */; };
+		8C486E371EBB94E70023FBFC /* MUnitWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C486E261EBB94E70023FBFC /* MUnitWord.swift */; };
+		8C486E381EBB94E70023FBFC /* MUserSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C486E271EBB94E70023FBFC /* MUserSetting.swift */; };
+		8C486E391EBB94E70023FBFC /* PhrasesLangViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C486E281EBB94E70023FBFC /* PhrasesLangViewModel.swift */; };
+		8C486E3A1EBB94E70023FBFC /* PhrasesUnitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C486E291EBB94E70023FBFC /* PhrasesUnitViewModel.swift */; };
+		8C486E3B1EBB94E70023FBFC /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C486E2A1EBB94E70023FBFC /* SettingsViewModel.swift */; };
+		8C486E3C1EBB94E70023FBFC /* WordsLangViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C486E2B1EBB94E70023FBFC /* WordsLangViewModel.swift */; };
+		8C486E3D1EBB94E70023FBFC /* WordsTextbookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C486E2C1EBB94E70023FBFC /* WordsTextbookViewModel.swift */; };
+		8C486E3E1EBB94E70023FBFC /* WordsUnitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C486E2D1EBB94E70023FBFC /* WordsUnitViewModel.swift */; };
+		8C6E2EE01EBB99CF00AC114F /* FMDatabaseVariadic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6E2EDF1EBB99CF00AC114F /* FMDatabaseVariadic.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,20 +78,40 @@
 		8C1C4F401D31F88800CF5D88 /* LollySwiftMacUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LollySwiftMacUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C1C4F441D31F88800CF5D88 /* LollySwiftMacUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LollySwiftMacUITests.swift; sourceTree = "<group>"; };
 		8C1C4F461D31F88800CF5D88 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8C4F7CFF1D349269006FD83D /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
-		8C4F7D001D349269006FD83D /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
-		8C4F7D011D349269006FD83D /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
-		8C4F7D021D349269006FD83D /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
-		8C4F7D031D349269006FD83D /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
-		8C4F7D041D349269006FD83D /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
-		8C4F7D051D349269006FD83D /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
-		8C4F7D061D349269006FD83D /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
-		8C4F7D071D349269006FD83D /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
-		8C4F7D081D349269006FD83D /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
-		8C4F7D091D349269006FD83D /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
-		8C6F26DB1D333598008F706A /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/System/Library/Frameworks/WebKit.framework; sourceTree = "<absolute>"; };
-		8C6F26DC1D333598008F706A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
-		8C6F26E11D3335EB008F706A /* libLollySwiftShared.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libLollySwiftShared.dylib; path = "../../../../../Library/Developer/Xcode/DerivedData/LollySwift-dxbtmkspchmqgzaoyqcrsmhaxkhg/Build/Products/Debug/libLollySwiftShared.dylib"; sourceTree = "<group>"; };
+		8C486DF31EBB88240023FBFC /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		8C486DF51EBB882B0023FBFC /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		8C486DFD1EBB8EB70023FBFC /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		8C486E0A1EBB94C30023FBFC /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
+		8C486E0B1EBB94C30023FBFC /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
+		8C486E0C1EBB94C30023FBFC /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		8C486E0D1EBB94C30023FBFC /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		8C486E0E1EBB94C30023FBFC /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
+		8C486E0F1EBB94C30023FBFC /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
+		8C486E101EBB94C30023FBFC /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
+		8C486E111EBB94C30023FBFC /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
+		8C486E121EBB94C30023FBFC /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
+		8C486E131EBB94C30023FBFC /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
+		8C486E141EBB94C30023FBFC /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		8C486E151EBB94C30023FBFC /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8C486E1D1EBB94E70023FBFC /* DBObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBObject.swift; sourceTree = "<group>"; };
+		8C486E1E1EBB94E70023FBFC /* LollyDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LollyDB.swift; sourceTree = "<group>"; };
+		8C486E1F1EBB94E70023FBFC /* MDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDictionary.swift; sourceTree = "<group>"; };
+		8C486E201EBB94E70023FBFC /* MLangPhrase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLangPhrase.swift; sourceTree = "<group>"; };
+		8C486E211EBB94E70023FBFC /* MLanguage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLanguage.swift; sourceTree = "<group>"; };
+		8C486E221EBB94E70023FBFC /* MLangWord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLangWord.swift; sourceTree = "<group>"; };
+		8C486E231EBB94E70023FBFC /* MTextbook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTextbook.swift; sourceTree = "<group>"; };
+		8C486E241EBB94E70023FBFC /* MTextbookWord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTextbookWord.swift; sourceTree = "<group>"; };
+		8C486E251EBB94E70023FBFC /* MUnitPhrase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MUnitPhrase.swift; sourceTree = "<group>"; };
+		8C486E261EBB94E70023FBFC /* MUnitWord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MUnitWord.swift; sourceTree = "<group>"; };
+		8C486E271EBB94E70023FBFC /* MUserSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MUserSetting.swift; sourceTree = "<group>"; };
+		8C486E281EBB94E70023FBFC /* PhrasesLangViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesLangViewModel.swift; sourceTree = "<group>"; };
+		8C486E291EBB94E70023FBFC /* PhrasesUnitViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesUnitViewModel.swift; sourceTree = "<group>"; };
+		8C486E2A1EBB94E70023FBFC /* SettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		8C486E2B1EBB94E70023FBFC /* WordsLangViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsLangViewModel.swift; sourceTree = "<group>"; };
+		8C486E2C1EBB94E70023FBFC /* WordsTextbookViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsTextbookViewModel.swift; sourceTree = "<group>"; };
+		8C486E2D1EBB94E70023FBFC /* WordsUnitViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsUnitViewModel.swift; sourceTree = "<group>"; };
+		8C6E2EDC1EBB97CF00AC114F /* LollySwiftMac-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LollySwiftMac-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
+		8C6E2EDF1EBB99CF00AC114F /* FMDatabaseVariadic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FMDatabaseVariadic.swift; path = "../extra/Swift extensions/FMDatabaseVariadic.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,9 +119,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8C6F26E21D3335EB008F706A /* libLollySwiftShared.dylib in Frameworks */,
-				8C6F26E01D333598008F706A /* Cocoa.framework in Frameworks */,
-				8C6F26DF1D333598008F706A /* WebKit.framework in Frameworks */,
+				8C486E031EBB94730023FBFC /* libsqlite3.0.tbd in Frameworks */,
+				8C486DF61EBB882B0023FBFC /* WebKit.framework in Frameworks */,
+				8C486DF41EBB88240023FBFC /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,7 +145,8 @@
 		8C1C4F1B1D31F88800CF5D88 = {
 			isa = PBXGroup;
 			children = (
-				8C4F7D0A1D349269006FD83D /* fmdb */,
+				8C486E091EBB94C30023FBFC /* fmdb */,
+				8C486E1C1EBB94E70023FBFC /* src */,
 				8C1C4F261D31F88800CF5D88 /* LollySwiftMac */,
 				8C1C4F381D31F88800CF5D88 /* LollySwiftMacTests */,
 				8C1C4F431D31F88800CF5D88 /* LollySwiftMacUITests */,
@@ -125,6 +170,7 @@
 			children = (
 				8C0566321D50452E00E1B2A4 /* LollyCore.db */,
 				8C0566331D50452E00E1B2A4 /* LollyDic.db */,
+				8C6E2EDC1EBB97CF00AC114F /* LollySwiftMac-Bridging-Header.h */,
 				8C1C4F271D31F88800CF5D88 /* AppDelegate.swift */,
 				8C1C4F291D31F88800CF5D88 /* ViewController.swift */,
 				8C1C4F2B1D31F88800CF5D88 /* Assets.xcassets */,
@@ -153,31 +199,58 @@
 			path = LollySwiftMacUITests;
 			sourceTree = "<group>";
 		};
-		8C4F7D0A1D349269006FD83D /* fmdb */ = {
+		8C486E091EBB94C30023FBFC /* fmdb */ = {
 			isa = PBXGroup;
 			children = (
-				8C4F7CFF1D349269006FD83D /* FMDatabase.h */,
-				8C4F7D001D349269006FD83D /* FMDatabase.m */,
-				8C4F7D011D349269006FD83D /* FMDatabaseAdditions.h */,
-				8C4F7D021D349269006FD83D /* FMDatabaseAdditions.m */,
-				8C4F7D031D349269006FD83D /* FMDatabasePool.h */,
-				8C4F7D041D349269006FD83D /* FMDatabasePool.m */,
-				8C4F7D051D349269006FD83D /* FMDatabaseQueue.h */,
-				8C4F7D061D349269006FD83D /* FMDatabaseQueue.m */,
-				8C4F7D071D349269006FD83D /* FMDB.h */,
-				8C4F7D081D349269006FD83D /* FMResultSet.h */,
-				8C4F7D091D349269006FD83D /* FMResultSet.m */,
+				8C486E0A1EBB94C30023FBFC /* FMDatabase.h */,
+				8C486E0B1EBB94C30023FBFC /* FMDatabase.m */,
+				8C486E0C1EBB94C30023FBFC /* FMDatabaseAdditions.h */,
+				8C486E0D1EBB94C30023FBFC /* FMDatabaseAdditions.m */,
+				8C486E0E1EBB94C30023FBFC /* FMDatabasePool.h */,
+				8C486E0F1EBB94C30023FBFC /* FMDatabasePool.m */,
+				8C486E101EBB94C30023FBFC /* FMDatabaseQueue.h */,
+				8C486E111EBB94C30023FBFC /* FMDatabaseQueue.m */,
+				8C486E121EBB94C30023FBFC /* FMDB.h */,
+				8C486E131EBB94C30023FBFC /* FMResultSet.h */,
+				8C486E141EBB94C30023FBFC /* FMResultSet.m */,
+				8C486E151EBB94C30023FBFC /* Info.plist */,
+				8C6E2EDF1EBB99CF00AC114F /* FMDatabaseVariadic.swift */,
 			);
 			name = fmdb;
-			path = /Users/zwvista/Documents/Programs/Lolly/LollySwift/LollySwiftMac2/../../../OSS/fmdb/src/fmdb;
-			sourceTree = "<absolute>";
+			path = ../../../OSS/fmdb/src/fmdb;
+			sourceTree = "<group>";
+		};
+		8C486E1C1EBB94E70023FBFC /* src */ = {
+			isa = PBXGroup;
+			children = (
+				8C486E1D1EBB94E70023FBFC /* DBObject.swift */,
+				8C486E1E1EBB94E70023FBFC /* LollyDB.swift */,
+				8C486E1F1EBB94E70023FBFC /* MDictionary.swift */,
+				8C486E201EBB94E70023FBFC /* MLangPhrase.swift */,
+				8C486E211EBB94E70023FBFC /* MLanguage.swift */,
+				8C486E221EBB94E70023FBFC /* MLangWord.swift */,
+				8C486E231EBB94E70023FBFC /* MTextbook.swift */,
+				8C486E241EBB94E70023FBFC /* MTextbookWord.swift */,
+				8C486E251EBB94E70023FBFC /* MUnitPhrase.swift */,
+				8C486E261EBB94E70023FBFC /* MUnitWord.swift */,
+				8C486E271EBB94E70023FBFC /* MUserSetting.swift */,
+				8C486E281EBB94E70023FBFC /* PhrasesLangViewModel.swift */,
+				8C486E291EBB94E70023FBFC /* PhrasesUnitViewModel.swift */,
+				8C486E2A1EBB94E70023FBFC /* SettingsViewModel.swift */,
+				8C486E2B1EBB94E70023FBFC /* WordsLangViewModel.swift */,
+				8C486E2C1EBB94E70023FBFC /* WordsTextbookViewModel.swift */,
+				8C486E2D1EBB94E70023FBFC /* WordsUnitViewModel.swift */,
+			);
+			name = src;
+			path = ../LollySwiftShared/src;
+			sourceTree = "<group>";
 		};
 		8C6F26DD1D333598008F706A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				8C6F26E11D3335EB008F706A /* libLollySwiftShared.dylib */,
-				8C6F26DB1D333598008F706A /* WebKit.framework */,
-				8C6F26DC1D333598008F706A /* Cocoa.framework */,
+				8C486DFD1EBB8EB70023FBFC /* libsqlite3.0.tbd */,
+				8C486DF51EBB882B0023FBFC /* WebKit.framework */,
+				8C486DF31EBB88240023FBFC /* Cocoa.framework */,
 			);
 			name = Frameworks;
 			path = ../LollySwiftMac2;
@@ -293,6 +366,7 @@
 				8C1C4F2C1D31F88800CF5D88 /* Assets.xcassets in Resources */,
 				8C0566361D50B1B500E1B2A4 /* LollyCore.db in Resources */,
 				8C1C4F2F1D31F88800CF5D88 /* Main.storyboard in Resources */,
+				8C486E1B1EBB94C30023FBFC /* Info.plist in Resources */,
 				8C0566371D50B1B500E1B2A4 /* LollyDic.db in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -318,9 +392,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C486E361EBB94E70023FBFC /* MUnitPhrase.swift in Sources */,
+				8C486E2F1EBB94E70023FBFC /* LollyDB.swift in Sources */,
+				8C486E321EBB94E70023FBFC /* MLanguage.swift in Sources */,
 				8C0ACB581D4391FB00EC6740 /* SettingsViewController.swift in Sources */,
+				8C486E311EBB94E70023FBFC /* MLangPhrase.swift in Sources */,
+				8C486E181EBB94C30023FBFC /* FMDatabasePool.m in Sources */,
 				8C1C4F2A1D31F88800CF5D88 /* ViewController.swift in Sources */,
+				8C486E2E1EBB94E70023FBFC /* DBObject.swift in Sources */,
+				8C486E351EBB94E70023FBFC /* MTextbookWord.swift in Sources */,
+				8C486E3E1EBB94E70023FBFC /* WordsUnitViewModel.swift in Sources */,
+				8C486E191EBB94C30023FBFC /* FMDatabaseQueue.m in Sources */,
+				8C486E3D1EBB94E70023FBFC /* WordsTextbookViewModel.swift in Sources */,
 				8C1C4F281D31F88800CF5D88 /* AppDelegate.swift in Sources */,
+				8C486E331EBB94E70023FBFC /* MLangWord.swift in Sources */,
+				8C6E2EE01EBB99CF00AC114F /* FMDatabaseVariadic.swift in Sources */,
+				8C486E161EBB94C30023FBFC /* FMDatabase.m in Sources */,
+				8C486E1A1EBB94C30023FBFC /* FMResultSet.m in Sources */,
+				8C486E301EBB94E70023FBFC /* MDictionary.swift in Sources */,
+				8C486E371EBB94E70023FBFC /* MUnitWord.swift in Sources */,
+				8C486E381EBB94E70023FBFC /* MUserSetting.swift in Sources */,
+				8C486E3C1EBB94E70023FBFC /* WordsLangViewModel.swift in Sources */,
+				8C486E3A1EBB94E70023FBFC /* PhrasesUnitViewModel.swift in Sources */,
+				8C486E391EBB94E70023FBFC /* PhrasesLangViewModel.swift in Sources */,
+				8C486E3B1EBB94E70023FBFC /* SettingsViewModel.swift in Sources */,
+				8C486E341EBB94E70023FBFC /* MTextbook.swift in Sources */,
+				8C486E171EBB94C30023FBFC /* FMDatabaseAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,6 +467,7 @@
 		8C1C4F471D31F88800CF5D88 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -404,7 +502,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -415,6 +513,7 @@
 		8C1C4F481D31F88800CF5D88 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -443,7 +542,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 			};
@@ -452,12 +551,15 @@
 		8C1C4F4A1D31F88800CF5D88 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = LollySwiftMac/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = com.zwstudio.LollySwiftMac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "LollySwiftMac-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -465,12 +567,15 @@
 		8C1C4F4B1D31F88800CF5D88 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = LollySwiftMac/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = com.zwstudio.LollySwiftMac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "LollySwiftMac-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

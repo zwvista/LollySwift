@@ -14,7 +14,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     fileprivate let _theSettingsViewModel = SettingsViewModel()
     static var theSettingsViewModel: SettingsViewModel {
-        return (NSApplication.sharedApplication().delegate as! AppDelegate)._theSettingsViewModel
+        return (NSApplication.shared().delegate as! AppDelegate)._theSettingsViewModel
     }
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
