@@ -50,7 +50,7 @@
 		8CD16D1E1D69FE8500F5F625 /* PhrasesLangEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD16D1D1D69FE8500F5F625 /* PhrasesLangEditViewController.swift */; };
 		8CD16D201D69FE8F00F5F625 /* PhrasesLangDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD16D1F1D69FE8F00F5F625 /* PhrasesLangDetailViewController.swift */; };
 		8CD16D221D6B101200F5F625 /* LollyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD16D211D6B101200F5F625 /* LollyProtocol.swift */; };
-		951BB9901A1B780B0087DB94 /* FMDatabaseVariadic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951BB98F1A1B780B0087DB94 /* FMDatabaseVariadic.swift */; };
+		8CF173151EED801700F45CBB /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8CF173131EED801700F45CBB /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		951BB9921A1B78650087DB94 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 951BB9911A1B78650087DB94 /* libsqlite3.dylib */; };
 		951BB9941A1B803B0087DB94 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 951BB9931A1B803B0087DB94 /* Main.storyboard */; };
 		951BB9981A1B90260087DB94 /* LeftMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951BB9971A1B90260087DB94 /* LeftMenuViewController.swift */; };
@@ -89,6 +89,20 @@
 			remoteInfo = LollySwiftiOS;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8CF173161EED801700F45CBB /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				8CF173151EED801700F45CBB /* Alamofire.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		8C0566301D50451800E1B2A4 /* LollyCore.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = LollyCore.db; path = ../../../LollyDB/LollyCore.db; sourceTree = "<group>"; };
@@ -145,7 +159,7 @@
 		8CD16D1D1D69FE8500F5F625 /* PhrasesLangEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesLangEditViewController.swift; sourceTree = "<group>"; };
 		8CD16D1F1D69FE8F00F5F625 /* PhrasesLangDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesLangDetailViewController.swift; sourceTree = "<group>"; };
 		8CD16D211D6B101200F5F625 /* LollyProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LollyProtocol.swift; sourceTree = "<group>"; };
-		951BB98F1A1B780B0087DB94 /* FMDatabaseVariadic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FMDatabaseVariadic.swift; path = "../extra/Swift extensions/FMDatabaseVariadic.swift"; sourceTree = "<group>"; };
+		8CF173131EED801700F45CBB /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		951BB9911A1B78650087DB94 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		951BB9931A1B803B0087DB94 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		951BB9951A1B8D6C0087DB94 /* LollySwiftiOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LollySwiftiOS-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
@@ -292,6 +306,7 @@
 		953473CC1A0D16CF00FF2D56 = {
 			isa = PBXGroup;
 			children = (
+				8CF173131EED801700F45CBB /* Alamofire.framework */,
 				8C4670DB1D0DC4C7004F3C21 /* Pickers */,
 				95FFAEE81A19F03C00E00C47 /* AMSlideMenu */,
 				95FFAEFF1A19F07000E00C47 /* fmdb */,
@@ -397,7 +412,6 @@
 				95FFAF081A19F07000E00C47 /* FMDB.h */,
 				95FFAF091A19F07000E00C47 /* FMResultSet.h */,
 				95FFAF0A1A19F07000E00C47 /* FMResultSet.m */,
-				951BB98F1A1B780B0087DB94 /* FMDatabaseVariadic.swift */,
 			);
 			name = fmdb;
 			path = ../../../OSS/fmdb/src/fmdb;
@@ -438,6 +452,7 @@
 				953473D11A0D16CF00FF2D56 /* Sources */,
 				953473D21A0D16CF00FF2D56 /* Frameworks */,
 				953473D31A0D16CF00FF2D56 /* Resources */,
+				8CF173161EED801700F45CBB /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -553,7 +568,6 @@
 				8C42B5BC1D69A21E00DCB528 /* PhrasesUnitsViewController.swift in Sources */,
 				95FFAF0F1A19F07000E00C47 /* FMResultSet.m in Sources */,
 				8C2EB0FC1D1FC9B100FB8AE9 /* MUnitWord.swift in Sources */,
-				951BB9901A1B780B0087DB94 /* FMDatabaseVariadic.swift in Sources */,
 				95FFAEFD1A19F03C00E00C47 /* AMSlideMenuRightTableViewController.m in Sources */,
 				95FFAEFC1A19F03C00E00C47 /* AMSlideMenuRightMenuSegue.m in Sources */,
 				8C298A901D2AB41400A4F057 /* MTextbookWord.swift in Sources */,

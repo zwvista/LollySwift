@@ -16,7 +16,7 @@ open class MLanguage: DBObject {
     
     static func getData() -> [MLanguage] {
         let sql = "SELECT * FROM VLANGUAGES WHERE ID <> 0"
-        let results = try! DBObject.dbCore.executeQuery(sql)
+        let results = try! DBObject.dbCore.executeQuery(sql, values: [])
         return DBObject.dataFromResultSet(databaseResultSet: results)
     }
 }

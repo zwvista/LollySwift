@@ -28,9 +28,9 @@ open class DBObject: NSObject {
         
         for i in 0 ..< Int(propertyCount) {
             let property = properties?[i]
-            if let propertyName = NSString(cString: property_getName(property), encoding: String.Encoding.utf8.rawValue) as? String {
-                if (dic?.object(forKey: propertyName.lowercased()) == nil) {continue}
-                self.setValue(nullToNil(resultSet.object(forColumnName: propertyName) as AnyObject?), forKey: propertyName)
+            if let propertyName = NSString(cString: property_getName(property), encoding: String.Encoding.utf8.rawValue) as String? {
+                if (dic.object(forKey: propertyName.lowercased()) == nil) {continue}
+                self.setValue(nullToNil(resultSet.object(forColumn: propertyName) as AnyObject?), forKey: propertyName)
             }
         }
         free(properties)

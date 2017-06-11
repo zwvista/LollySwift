@@ -20,7 +20,7 @@ open class MTextbookWord: DBObject {
     
     static func getDataByLang(_ langid: Int) -> [MTextbookWord] {
         let sql = "SELECT * FROM VTEXTBOOKWORDS WHERE LANGID = ?"
-        let results = try! DBObject.dbCore.executeQuery(sql, langid as AnyObject)
+        let results = try! DBObject.dbCore.executeQuery(sql, values: [langid])
         return DBObject.dataFromResultSet(databaseResultSet: results)
     }
 }

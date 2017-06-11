@@ -28,7 +28,7 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 }
 
 
-public extension UINavigationController {
+extension UINavigationController {
     override open var shouldAutorotate : Bool {
         return true
     }

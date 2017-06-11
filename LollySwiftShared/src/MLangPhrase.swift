@@ -14,7 +14,7 @@ open class MLangPhrase: DBObject {
     
     static func getDataByLang(_ langid: Int) -> [MLangPhrase] {
         let sql = "SELECT PHRASE, TRANSLATION FROM LANGPHRASES WHERE LANGID = ?"
-        let results = try! DBObject.dbCore.executeQuery(sql, langid as AnyObject)
+        let results = try! DBObject.dbCore.executeQuery(sql, values: [langid])
         return DBObject.dataFromResultSet(databaseResultSet: results)
     }
 }

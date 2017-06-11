@@ -14,7 +14,7 @@ open class MUserSetting: DBObject {
     
     static func getData() -> [MUserSetting] {
         let sql = "SELECT * FROM VUSERSETTINGS"
-        let results = try! DBObject.dbCore.executeQuery(sql)
+        let results = try! DBObject.dbCore.executeQuery(sql, values: [])
         return DBObject.dataFromResultSet(databaseResultSet: results)
     }
 

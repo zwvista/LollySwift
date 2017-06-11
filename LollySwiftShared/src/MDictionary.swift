@@ -28,7 +28,7 @@ open class MDictionary: DBObject {
     
     static func getDataByLang(_ langID: Int) -> [MDictionary] {
         let sql = "SELECT * FROM VDICTIONARIES WHERE LANGIDFROM = ?"
-        let results = try! DBObject.dbCore.executeQuery(sql, langID as AnyObject)
+        let results = try! DBObject.dbCore.executeQuery(sql, values: [langID])
         return DBObject.dataFromResultSet(databaseResultSet: results)
     }
     

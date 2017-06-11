@@ -14,7 +14,7 @@ open class MLangWord: DBObject {
     
     static func getDataByLang(_ langid: Int) -> [MLangWord] {
         let sql = "SELECT LANGID, WORD FROM LANGWORDS WHERE LANGID = ?"
-        let results = try! DBObject.dbCore.executeQuery(sql, langid as AnyObject)
+        let results = try! DBObject.dbCore.executeQuery(sql, values: [langid])
         return DBObject.dataFromResultSet(databaseResultSet: results)
     }
 }

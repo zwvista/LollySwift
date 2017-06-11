@@ -16,6 +16,8 @@
 		8C1C4F2F1D31F88800CF5D88 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C1C4F2D1D31F88800CF5D88 /* Main.storyboard */; };
 		8C1C4F3A1D31F88800CF5D88 /* LollySwiftMacTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1C4F391D31F88800CF5D88 /* LollySwiftMacTests.swift */; };
 		8C1C4F451D31F88800CF5D88 /* LollySwiftMacUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1C4F441D31F88800CF5D88 /* LollySwiftMacUITests.swift */; };
+		8C32BE3B1EED98CF00E4465F /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C32BE3A1EED98CF00E4465F /* Alamofire.framework */; };
+		8C32BE3C1EED98CF00E4465F /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8C32BE3A1EED98CF00E4465F /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8C486DF41EBB88240023FBFC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C486DF31EBB88240023FBFC /* Cocoa.framework */; };
 		8C486DF61EBB882B0023FBFC /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C486DF51EBB882B0023FBFC /* WebKit.framework */; };
 		8C486E031EBB94730023FBFC /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C486DFD1EBB8EB70023FBFC /* libsqlite3.0.tbd */; };
@@ -42,7 +44,6 @@
 		8C486E3C1EBB94E70023FBFC /* WordsLangViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C486E2B1EBB94E70023FBFC /* WordsLangViewModel.swift */; };
 		8C486E3D1EBB94E70023FBFC /* WordsTextbookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C486E2C1EBB94E70023FBFC /* WordsTextbookViewModel.swift */; };
 		8C486E3E1EBB94E70023FBFC /* WordsUnitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C486E2D1EBB94E70023FBFC /* WordsUnitViewModel.swift */; };
-		8C6E2EE01EBB99CF00AC114F /* FMDatabaseVariadic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6E2EDF1EBB99CF00AC114F /* FMDatabaseVariadic.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		8C32BE3D1EED98CF00E4465F /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				8C32BE3C1EED98CF00E4465F /* Alamofire.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		8C0566321D50452E00E1B2A4 /* LollyCore.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = LollyCore.db; path = ../../../LollyDB/LollyCore.db; sourceTree = "<group>"; };
 		8C0566331D50452E00E1B2A4 /* LollyDic.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = LollyDic.db; path = ../../../LollyDB/LollyDic.db; sourceTree = "<group>"; };
@@ -78,6 +93,7 @@
 		8C1C4F401D31F88800CF5D88 /* LollySwiftMacUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LollySwiftMacUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C1C4F441D31F88800CF5D88 /* LollySwiftMacUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LollySwiftMacUITests.swift; sourceTree = "<group>"; };
 		8C1C4F461D31F88800CF5D88 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8C32BE3A1EED98CF00E4465F /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C486DF31EBB88240023FBFC /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		8C486DF51EBB882B0023FBFC /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		8C486DFD1EBB8EB70023FBFC /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
@@ -111,7 +127,6 @@
 		8C486E2C1EBB94E70023FBFC /* WordsTextbookViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsTextbookViewModel.swift; sourceTree = "<group>"; };
 		8C486E2D1EBB94E70023FBFC /* WordsUnitViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsUnitViewModel.swift; sourceTree = "<group>"; };
 		8C6E2EDC1EBB97CF00AC114F /* LollySwiftMac-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LollySwiftMac-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
-		8C6E2EDF1EBB99CF00AC114F /* FMDatabaseVariadic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FMDatabaseVariadic.swift; path = "../extra/Swift extensions/FMDatabaseVariadic.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +137,7 @@
 				8C486E031EBB94730023FBFC /* libsqlite3.0.tbd in Frameworks */,
 				8C486DF61EBB882B0023FBFC /* WebKit.framework in Frameworks */,
 				8C486DF41EBB88240023FBFC /* Cocoa.framework in Frameworks */,
+				8C32BE3B1EED98CF00E4465F /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -214,7 +230,6 @@
 				8C486E131EBB94C30023FBFC /* FMResultSet.h */,
 				8C486E141EBB94C30023FBFC /* FMResultSet.m */,
 				8C486E151EBB94C30023FBFC /* Info.plist */,
-				8C6E2EDF1EBB99CF00AC114F /* FMDatabaseVariadic.swift */,
 			);
 			name = fmdb;
 			path = ../../../OSS/fmdb/src/fmdb;
@@ -248,6 +263,7 @@
 		8C6F26DD1D333598008F706A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8C32BE3A1EED98CF00E4465F /* Alamofire.framework */,
 				8C486DFD1EBB8EB70023FBFC /* libsqlite3.0.tbd */,
 				8C486DF51EBB882B0023FBFC /* WebKit.framework */,
 				8C486DF31EBB88240023FBFC /* Cocoa.framework */,
@@ -266,6 +282,7 @@
 				8C1C4F201D31F88800CF5D88 /* Sources */,
 				8C1C4F211D31F88800CF5D88 /* Frameworks */,
 				8C1C4F221D31F88800CF5D88 /* Resources */,
+				8C32BE3D1EED98CF00E4465F /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -406,7 +423,6 @@
 				8C486E3D1EBB94E70023FBFC /* WordsTextbookViewModel.swift in Sources */,
 				8C1C4F281D31F88800CF5D88 /* AppDelegate.swift in Sources */,
 				8C486E331EBB94E70023FBFC /* MLangWord.swift in Sources */,
-				8C6E2EE01EBB99CF00AC114F /* FMDatabaseVariadic.swift in Sources */,
 				8C486E161EBB94C30023FBFC /* FMDatabase.m in Sources */,
 				8C486E1A1EBB94C30023FBFC /* FMResultSet.m in Sources */,
 				8C486E301EBB94E70023FBFC /* MDictionary.swift in Sources */,
