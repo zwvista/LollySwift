@@ -47,25 +47,25 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
             switch selectedIndexPath.row {
             case 0:
                 ActionSheetStringPicker.show(withTitle: "Select Unit(From)", rows: vm.arrUnits, initialSelection: m.USUNITFROM - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
-                    m.USUNITFROM = Int(selectedValue as! String)!
+                    m.USUNITFROM_String = selectedValue as? String
                     self.lblUnitFrom.text = (selectedValue as! String)
                     if !self.swUnitTo.isOn || isInvalidUnitPart() {self.updateUnitPartTo()}
                 }, cancel: nil, origin: lblUnitFrom)
             case 1:
                 ActionSheetStringPicker.show(withTitle: "Select Part(From)", rows: vm.arrParts, initialSelection: m.USPARTFROM - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
-                    m.USPARTFROM = Int(selectedValue as! String)!
+                    m.USPARTFROM_String = selectedValue as? String
                     self.lblPartFrom.text = (selectedValue as! String)
                     if !self.swUnitTo.isOn || isInvalidUnitPart() {self.updateUnitPartTo()}
                 }, cancel: nil, origin: lblPartFrom)
             case 3 where swUnitTo.isOn:
                 ActionSheetStringPicker.show(withTitle: "Select Unit(To)", rows: vm.arrUnits, initialSelection: m.USUNITTO - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
-                    m.USUNITTO = Int(selectedValue as! String)!
+                    m.USUNITTO_String = selectedValue as? String
                     self.lblUnitTo.text = (selectedValue as! String)
                     if isInvalidUnitPart() {self.updateUnitPartFrom()}
                 }, cancel: nil, origin: lblUnitTo)
             case 4 where swUnitTo.isOn:
                 ActionSheetStringPicker.show(withTitle: "Select Part(To)", rows: vm.arrParts, initialSelection: m.USPARTTO - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
-                    m.USPARTTO = Int(selectedValue as! String)!
+                    m.USPARTTO_String = selectedValue as? String
                     self.lblPartTo.text = (selectedValue as! String)
                     if isInvalidUnitPart() {self.updateUnitPartFrom()}
                 }, cancel: nil, origin: lblPartTo)
@@ -109,7 +109,7 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
         selectedRow = row
     }
     
-    @nonobjc func actionSheetPickerDidSucceed(_ actionSheetPicker: AbstractActionSheetPicker!, origin: AnyObject!) {
+    func actionSheetPickerDidSucceed(_ actionSheetPicker: AbstractActionSheetPicker!, origin: Any!) {
         switch selectedIndexPath.section {
         case 0 where selectedRow != vm.selectedLangIndex:
             vm.selectedLangIndex = selectedRow
@@ -141,7 +141,7 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
     func updateTextbook() {
         let m = vm.selectedTextbook
         textbookCell.textLabel!.text = m.TEXTBOOKNAME
-        textbookCell.detailTextLabel!.text = "\(m.UNITS) Units"
+        textbookCell.detailTextLabel!.text = "\(m.UNITS!) Units"
         lblUnitFrom.text = "\(m.USUNITFROM)"
         lblUnitTo.text = "\(m.USUNITTO)"
         lblPartFrom.text = vm.arrParts[m.USPARTFROM - 1]
@@ -152,17 +152,17 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
     
     func updateUnitPartFrom() {
         let m = vm.selectedTextbook
-        m.USUNITFROM = m.USUNITTO
+        m.USUNITFROM_String = m.USUNITTO_String
         lblUnitFrom.text = lblUnitTo.text
-        m.USPARTFROM = m.USPARTTO
+        m.USPARTFROM_String = m.USPARTTO_String
         lblPartFrom.text = lblPartTo.text
     }
     
     func updateUnitPartTo() {
         let m = vm.selectedTextbook
-        m.USUNITTO = m.USUNITFROM
+        m.USUNITTO_String = m.USUNITFROM_String
         lblUnitTo.text = lblUnitFrom.text
-        m.USPARTTO = m.USPARTFROM
+        m.USPARTTO_String = m.USPARTFROM_String
         lblPartTo.text = lblPartFrom.text
     }
     

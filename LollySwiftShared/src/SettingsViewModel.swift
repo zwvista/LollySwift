@@ -41,7 +41,7 @@ open class SettingsViewModel: NSObject {
     public override init() {
         arrLanguages = MLanguage.getData()
         let m = MUserSetting.getData()[0]
-        selectedLangIndex = arrLanguages.index{ $0.ID == m.USLANGID }!
+        selectedLangIndex = arrLanguages.index{ String($0.ID!) == m.USLANGID }!
         selectedTextbookIndex = 0
         super.init()
         setSelectedLangIndex()
@@ -49,14 +49,14 @@ open class SettingsViewModel: NSObject {
     
     fileprivate func setSelectedLangIndex() {
         let m = arrLanguages[selectedLangIndex]
-        arrDictionaries = MDictionary.getDataByLang(m.ID)
-        selectedDictIndex = arrDictionaries.index{ $0.ID == m.USDICTID }!
-        arrTextbooks = MTextbook.getDataByLang(m.ID)
-        selectedTextbookIndex = arrTextbooks.index{ $0.ID == m.USTEXTBOOKID }!
+        arrDictionaries = MDictionary.getDataByLang(m.ID!)
+        selectedDictIndex = arrDictionaries.index{ String($0.ID!) == m.USDICTID }!
+        arrTextbooks = MTextbook.getDataByLang(m.ID!)
+        selectedTextbookIndex = arrTextbooks.index{ String($0.ID!) == m.USTEXTBOOKID }!
     }
     
     fileprivate func setSelectedTextbookIndex() {
-        arrUnits = (1 ... selectedTextbook.UNITS).map{ String($0) }
+        arrUnits = (1...selectedTextbook.UNITS!).map{ String($0) }
         arrParts = (selectedTextbook.PARTS?.components(separatedBy: " "))!
     }
 }

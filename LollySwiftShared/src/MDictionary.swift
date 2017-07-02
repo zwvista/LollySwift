@@ -8,9 +8,11 @@
 
 import Foundation
 
-open class MDictionary: DBObject {
-    open var ID = 0
-    open var LANGIDFROM = 0
+import ObjectMapper
+
+open class MDictionary: Mappable {
+    open var ID: Int?
+    open var LANGIDFROM: Int?
     open var DICTTYPENAME: String?
     open var DICTNAME: String?
     open var URL: String?
@@ -18,6 +20,20 @@ open class MDictionary: DBObject {
     open var TRANSFORM_MAC: String?
     open var TEMPLATE: String?
     
+    required public init?(map: Map){
+    }
+    
+    public func mapping(map: Map) {
+        ID <- map["ID"]
+        LANGIDFROM <- map["LANGIDFROM"]
+        DICTTYPENAME <- map["DICTTYPENAME"]
+        DICTNAME <- map["DICTNAME"]
+        URL <- map["URL"]
+        CHCONV <- map["CHCONV"]
+        TRANSFORM_MAC <- map["TRANSFORM_MAC"]
+        TEMPLATE <- map["TEMPLATE"]
+    }
+
     open func urlString(_ word: String) -> String {
         var url = URL!.replacingOccurrences(of: "{0}", with: word);
         //url = url.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
@@ -27,9 +43,9 @@ open class MDictionary: DBObject {
     }
     
     static func getDataByLang(_ langID: Int) -> [MDictionary] {
-        let sql = "SELECT * FROM VDICTIONARIES WHERE LANGIDFROM = ?"
-        let results = try! DBObject.dbCore.executeQuery(sql, values: [langID])
-        return DBObject.dataFromResultSet(databaseResultSet: results)
+        // let sql = "SELECT * FROM VDICTIONARIES WHERE LANGIDFROM = ?"
+        let URL = "https://zwvista.000webhostapp.com/lolly/apisqlite.php/VDICTIONARIES?transform=1&&filter=LANGIDFROM,eq,\(langID)"
+        return RestApi.getArray(URL: URL, keyPath: "VDICTIONARIES")
     }
     
     fileprivate let debugExtract = false

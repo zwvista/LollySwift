@@ -16,7 +16,7 @@ open class WordsLangViewModel: NSObject {
     public init(settings: SettingsViewModel) {
         self.settings = settings
         let m = settings.arrTextbooks[settings.selectedTextbookIndex]
-        arrWords = MLangWord.getDataByLang(m.LANGID)
+        arrWords = MLangWord.getDataByLang(m.LANGID!)
     }
     
     open func filterWordsForSearchText(_ searchText: String, scope: String) {

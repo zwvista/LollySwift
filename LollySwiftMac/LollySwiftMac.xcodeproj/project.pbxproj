@@ -16,8 +16,8 @@
 		8C1C4F2F1D31F88800CF5D88 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C1C4F2D1D31F88800CF5D88 /* Main.storyboard */; };
 		8C1C4F3A1D31F88800CF5D88 /* LollySwiftMacTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1C4F391D31F88800CF5D88 /* LollySwiftMacTests.swift */; };
 		8C1C4F451D31F88800CF5D88 /* LollySwiftMacUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1C4F441D31F88800CF5D88 /* LollySwiftMacUITests.swift */; };
-		8C32BE3B1EED98CF00E4465F /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C32BE3A1EED98CF00E4465F /* Alamofire.framework */; };
-		8C32BE3C1EED98CF00E4465F /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8C32BE3A1EED98CF00E4465F /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8C32BE411EEDAC9200E4465F /* AlamofireObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C32BE401EEDAC9200E4465F /* AlamofireObjectMapper.framework */; };
+		8C32BE421EEDAC9200E4465F /* AlamofireObjectMapper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8C32BE401EEDAC9200E4465F /* AlamofireObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8C486DF41EBB88240023FBFC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C486DF31EBB88240023FBFC /* Cocoa.framework */; };
 		8C486DF61EBB882B0023FBFC /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C486DF51EBB882B0023FBFC /* WebKit.framework */; };
 		8C486E031EBB94730023FBFC /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C486DFD1EBB8EB70023FBFC /* libsqlite3.0.tbd */; };
@@ -70,7 +70,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				8C32BE3C1EED98CF00E4465F /* Alamofire.framework in Embed Frameworks */,
+				8C32BE421EEDAC9200E4465F /* AlamofireObjectMapper.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -93,7 +93,7 @@
 		8C1C4F401D31F88800CF5D88 /* LollySwiftMacUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LollySwiftMacUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C1C4F441D31F88800CF5D88 /* LollySwiftMacUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LollySwiftMacUITests.swift; sourceTree = "<group>"; };
 		8C1C4F461D31F88800CF5D88 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8C32BE3A1EED98CF00E4465F /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C32BE401EEDAC9200E4465F /* AlamofireObjectMapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AlamofireObjectMapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C486DF31EBB88240023FBFC /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		8C486DF51EBB882B0023FBFC /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		8C486DFD1EBB8EB70023FBFC /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
@@ -137,7 +137,7 @@
 				8C486E031EBB94730023FBFC /* libsqlite3.0.tbd in Frameworks */,
 				8C486DF61EBB882B0023FBFC /* WebKit.framework in Frameworks */,
 				8C486DF41EBB88240023FBFC /* Cocoa.framework in Frameworks */,
-				8C32BE3B1EED98CF00E4465F /* Alamofire.framework in Frameworks */,
+				8C32BE411EEDAC9200E4465F /* AlamofireObjectMapper.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,7 +263,7 @@
 		8C6F26DD1D333598008F706A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				8C32BE3A1EED98CF00E4465F /* Alamofire.framework */,
+				8C32BE401EEDAC9200E4465F /* AlamofireObjectMapper.framework */,
 				8C486DFD1EBB8EB70023FBFC /* libsqlite3.0.tbd */,
 				8C486DF51EBB882B0023FBFC /* WebKit.framework */,
 				8C486DF31EBB88240023FBFC /* Cocoa.framework */,
@@ -341,7 +341,9 @@
 				TargetAttributes = {
 					8C1C4F231D31F88800CF5D88 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = U259NHMY78;
 						LastSwiftMigration = 0800;
+						ProvisioningStyle = Automatic;
 					};
 					8C1C4F341D31F88800CF5D88 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -569,12 +571,15 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = U259NHMY78;
 				INFOPLIST_FILE = LollySwiftMac/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = com.zwstudio.LollySwiftMac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "LollySwiftMac-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
@@ -585,12 +590,15 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = U259NHMY78;
 				INFOPLIST_FILE = LollySwiftMac/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = com.zwstudio.LollySwiftMac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "LollySwiftMac-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};

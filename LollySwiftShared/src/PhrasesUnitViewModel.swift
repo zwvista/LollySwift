@@ -16,7 +16,7 @@ open class PhrasesUnitViewModel: NSObject {
     public init(settings: SettingsViewModel) {
         self.settings = settings
         let m = settings.arrTextbooks[settings.selectedTextbookIndex]
-        arrPhrases = MUnitPhrase.getDataByTextbook(m.ID, unitPartFrom: m.USUNITFROM * 10 + m.USPARTFROM, unitPartTo: m.USUNITTO * 10 + m.USPARTTO)
+        arrPhrases = MUnitPhrase.getDataByTextbook(m.ID!, unitPartFrom: m.USUNITFROM * 10 + m.USPARTFROM, unitPartTo: m.USUNITTO * 10 + m.USPARTTO)
     }
     
     open func filterPhrasesForSearchText(_ searchText: String, scope: String) {

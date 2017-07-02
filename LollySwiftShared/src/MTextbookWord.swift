@@ -8,19 +8,35 @@
 
 import Foundation
 
-open class MTextbookWord: DBObject {
-    open var ID = 0
-    open var LANGID = 0
+import ObjectMapper
+
+open class MTextbookWord: Mappable {
+    open var ID: Int?
+    open var LANGID: Int?
     open var TEXTBOOKNAME: String?
-    open var UNIT = 0
-    open var PART = 0
-    open var SEQNUM = 0
+    open var UNIT: Int?
+    open var PART: Int?
+    open var SEQNUM: Int?
     open var WORD: String?
     open var NOTE: String?
     
+    required public init?(map: Map){
+    }
+    
+    public func mapping(map: Map) {
+        ID <- map["ID"]
+        LANGID <- map["LANGID"]
+        TEXTBOOKNAME <- map["TEXTBOOKNAME"]
+        UNIT <- map["UNIT"]
+        PART <- map["PART"]
+        SEQNUM <- map["SEQNUM"]
+        WORD <- map["WORD"]
+        NOTE <- map["NOTE"]
+    }
+
     static func getDataByLang(_ langid: Int) -> [MTextbookWord] {
-        let sql = "SELECT * FROM VTEXTBOOKWORDS WHERE LANGID = ?"
-        let results = try! DBObject.dbCore.executeQuery(sql, values: [langid])
-        return DBObject.dataFromResultSet(databaseResultSet: results)
+        // let sql = "SELECT * FROM VTEXTBOOKWORDS WHERE LANGID = ?"
+        let URL = "https://zwvista.000webhostapp.com/lolly/apisqlite.php/VTEXTBOOKWORDS?transform=1&&filter=LANGID,eq,\(langid)"
+        return RestApi.getArray(URL: URL, keyPath: "VTEXTBOOKWORDS")
     }
 }

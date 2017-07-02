@@ -8,15 +8,27 @@
 
 import Foundation
 
-open class MLanguage: DBObject {
-    open var ID = 0
+import ObjectMapper
+
+open class MLanguage: Mappable {
+    open var ID: Int?
     open var LANGNAME: String?
-    open var USTEXTBOOKID = 0
-    open var USDICTID = 0
+    open var USTEXTBOOKID: String?
+    open var USDICTID: String?
+    
+    required public init?(map: Map){
+    }
+    
+    public func mapping(map: Map) {
+        ID <- map["ID"]
+        LANGNAME <- map["LANGNAME"]
+        USTEXTBOOKID <- map["USTEXTBOOKID"]
+        USDICTID <- map["USDICTID"]
+    }
     
     static func getData() -> [MLanguage] {
-        let sql = "SELECT * FROM VLANGUAGES WHERE ID <> 0"
-        let results = try! DBObject.dbCore.executeQuery(sql, values: [])
-        return DBObject.dataFromResultSet(databaseResultSet: results)
+        // let sql = "SELECT * FROM VLANGUAGES WHERE ID <> 0"
+        let URL = "https://zwvista.000webhostapp.com/lolly/apisqlite.php/VLANGUAGES?transform=1&&filter=ID,neq,0"
+        return RestApi.getArray(URL: URL, keyPath: "VLANGUAGES")
     }
 }

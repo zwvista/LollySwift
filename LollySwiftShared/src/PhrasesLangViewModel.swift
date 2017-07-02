@@ -16,7 +16,7 @@ open class PhrasesLangViewModel: NSObject {
     public init(settings: SettingsViewModel) {
         self.settings = settings
         let m = settings.arrTextbooks[settings.selectedTextbookIndex]
-        arrPhrases = MLangPhrase.getDataByLang(m.LANGID)
+        arrPhrases = MLangPhrase.getDataByLang(m.LANGID!)
     }
     
     open func filterPhrasesForSearchText(_ searchText: String, scope: String) {

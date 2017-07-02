@@ -20,9 +20,9 @@ class PhrasesUnitDetailViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tfUnit.text = String(mPhrase.UNIT)
-        tfPart.text = String(mPhrase.PART)
-        tfSeqNum.text = String(mPhrase.SEQNUM)
+        tfUnit.text = String(mPhrase.UNIT!)
+        tfPart.text = String(mPhrase.PART!)
+        tfSeqNum.text = String(mPhrase.SEQNUM!)
         tfPhrase.text = mPhrase.PHRASE
         tfTranslation.text = mPhrase.TRANSLATION
     }

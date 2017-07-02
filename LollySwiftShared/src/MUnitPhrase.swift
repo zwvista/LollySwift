@@ -8,19 +8,42 @@
 
 import Foundation
 
-open class MUnitPhrase: DBObject {
-    open var ID = 0
-    open var TEXTBOOKID = 0
-    open var UNIT = 0
-    open var PART = 0
-    open var SEQNUM = 0
+import ObjectMapper
+
+open class MUnitPhrase: Mappable {
+    open var ID: Int? = 0
+    open var TEXTBOOKID: Int?
+    open var UNIT: Int?
+    open var PART: Int?
+    open var SEQNUM: Int?
     open var PHRASE: String?
     open var TRANSLATION: String?
+    open var UNITPART: Int?
     
+    public init() {
+        
+    }
+    
+    required public init?(map: Map){
+    }
+    
+    public func mapping(map: Map) {
+        ID <- map["ID"]
+        TEXTBOOKID <- map["TEXTBOOKID"]
+        UNIT <- map["UNIT"]
+        PART <- map["PART"]
+        SEQNUM <- map["SEQNUM"]
+        PHRASE <- map["PHRASE"]
+        TRANSLATION <- map["TRANSLATION"]
+        UNITPART <- map["UNITPART"]
+    }
+
     static func getDataByTextbook(_ textbookid: Int, unitPartFrom: Int, unitPartTo: Int) -> [MUnitPhrase] {
-        let sql = "SELECT * FROM VUNITPHRASES WHERE TEXTBOOKID=? AND UNIT*10+PART>=? AND UNIT*10+PART<=?"
-        let results = try! DBObject.dbCore.executeQuery(sql, values: [textbookid, unitPartFrom, unitPartTo])
-        return DBObject.dataFromResultSet(databaseResultSet: results)
+        // let sql = "SELECT * FROM VUNITPHRASES WHERE TEXTBOOKID=? AND UNITPART BETWEEN ? AND ?"
+//        let URL = "https://zwvista.000webhostapp.com/lolly/apisqlite.php/VUNITPHRASES?transform=1&filter[]=TEXTBOOKID,eq,\(textbookid)&filter[]=UNITPART,bt,\(unitPartFrom),\(unitPartTo)"
+//        return RestApi.getArray(URL: URL, keyPath: "VUNITPHRASES")
+        let URL = "https://zwvista.000webhostapp.com/lolly/apisqlite.php/VUNITPHRASES?transform=1&filter[]=TEXTBOOKID,eq,\(textbookid)"
+        return RestApi.getArray(URL: URL, keyPath: "VUNITPHRASES").filter{unitPartFrom...unitPartTo ~= $0.UNITPART!}
     }
 
 }

@@ -8,13 +8,27 @@
 
 import Foundation
 
-open class MLangWord: DBObject {
-    open var LANGID = 0
+import ObjectMapper
+
+open class MLangWord: Mappable {
+    open var LANGID: Int? = 0
     open var WORD: String?
     
+    public init() {
+        
+    }
+    
+    required public init?(map: Map){
+    }
+    
+    public func mapping(map: Map) {
+        LANGID <- map["LANGID"]
+        WORD <- map["WORD"]
+    }
+    
     static func getDataByLang(_ langid: Int) -> [MLangWord] {
-        let sql = "SELECT LANGID, WORD FROM LANGWORDS WHERE LANGID = ?"
-        let results = try! DBObject.dbCore.executeQuery(sql, values: [langid])
-        return DBObject.dataFromResultSet(databaseResultSet: results)
+        // let sql = "SELECT LANGID, WORD FROM LANGWORDS WHERE LANGID = ?"
+        let URL = "https://zwvista.000webhostapp.com/lolly/apisqlite.php/LANGWORDS?transform=1&&filter=LANGID,eq,\(langid)"
+        return RestApi.getArray(URL: URL, keyPath: "LANGWORDS")
     }
 }

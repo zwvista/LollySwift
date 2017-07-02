@@ -12,7 +12,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    fileprivate let _theSettingsViewModel = SettingsViewModel()
+    fileprivate lazy var _theSettingsViewModel = SettingsViewModel()
     static var theSettingsViewModel: SettingsViewModel {
         return (UIApplication.shared.delegate as! AppDelegate)._theSettingsViewModel
     }

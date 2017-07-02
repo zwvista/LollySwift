@@ -23,9 +23,9 @@ class WordsUnitDetailViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
                 
-        tfUnit.text = String(mWord.UNIT)
-        tfPart.text = String(mWord.PART)
-        tfSeqNum.text = String(mWord.SEQNUM)
+        tfUnit.text = String(mWord.UNIT!)
+        tfPart.text = String(mWord.PART!)
+        tfSeqNum.text = String(mWord.SEQNUM!)
         tfWord.text = mWord.WORD
     }
     

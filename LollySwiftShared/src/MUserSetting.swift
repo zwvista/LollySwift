@@ -8,14 +8,24 @@
 
 import Foundation
 
-open class MUserSetting: DBObject {
-    open var ID = 0
-    open var USLANGID = 0
+import ObjectMapper
+
+open class MUserSetting: Mappable {
+    open var ID: Int?
+    open var USLANGID: String?
     
+    required public init?(map: Map){
+    }
+    
+    public func mapping(map: Map) {
+        ID <- map["ID"]
+        USLANGID <- map["USLANGID"]
+    }
+
     static func getData() -> [MUserSetting] {
-        let sql = "SELECT * FROM VUSERSETTINGS"
-        let results = try! DBObject.dbCore.executeQuery(sql, values: [])
-        return DBObject.dataFromResultSet(databaseResultSet: results)
+        // let sql = "SELECT * FROM VUSERSETTINGS"
+        let URL = "https://zwvista.000webhostapp.com/lolly/apisqlite.php/VUSERSETTINGS?transform=1"
+        return RestApi.getArray(URL: URL, keyPath: "VUSERSETTINGS")
     }
 
 }

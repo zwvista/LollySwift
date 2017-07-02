@@ -8,24 +8,46 @@
 
 import Foundation
 
-open class MTextbook: DBObject {
-    open var ID = 0
-    open var LANGID = 0
+import ObjectMapper
+
+open class MTextbook: Mappable {
+    open var ID: Int?
+    open var LANGID: Int?
     open var TEXTBOOKNAME: String?
-    open var UNITS = 0
+    open var UNITS: Int?
     open var PARTS: String?
-    open var USUNITFROM = 0
-    open var USPARTFROM = 0
-    open var USUNITTO = 0
-    open var USPARTTO = 0
+    open var USUNITFROM_String: String?
+    open var USPARTFROM_String: String?
+    open var USUNITTO_String: String?
+    open var USPARTTO_String: String?
     
+    open var USUNITFROM: Int {return USUNITFROM_String!.toInt()!}
+    open var USPARTFROM: Int {return USPARTFROM_String!.toInt()!}
+    open var USUNITTO: Int {return USUNITTO_String!.toInt()!}
+    open var USPARTTO: Int {return USPARTTO_String!.toInt()!}
+
+    required public init?(map: Map){
+    }
+    
+    public func mapping(map: Map) {
+        ID <- map["ID"]
+        LANGID <- map["LANGID"]
+        TEXTBOOKNAME <- map["TEXTBOOKNAME"]
+        UNITS <- map["UNITS"]
+        PARTS <- map["PARTS"]
+        USUNITFROM_String <- map["USUNITFROM"]
+        USPARTFROM_String <- map["USPARTFROM"]
+        USUNITTO_String <- map["USUNITTO"]
+        USPARTTO_String <- map["USPARTTO"]
+    }
+
     open var isSingleUnitPart: Bool {
-        return USUNITFROM == USUNITTO && USPARTFROM == USPARTTO
+        return USUNITFROM_String == USUNITTO_String && USPARTFROM_String == USPARTTO_String
     }
     
     static func getDataByLang(_ langID: Int) -> [MTextbook] {
-        let sql = "SELECT * FROM VTEXTBOOKS WHERE LANGID = ?"
-        let results = try! DBObject.dbCore.executeQuery(sql, values: [langID])
-        return DBObject.dataFromResultSet(databaseResultSet: results)
+        // let sql = "SELECT * FROM VTEXTBOOKS WHERE LANGID = ?"
+        let URL = "https://zwvista.000webhostapp.com/lolly/apisqlite.php/VTEXTBOOKS?transform=1&&filter=LANGID,eq,\(langID)"
+        return RestApi.getArray(URL: URL, keyPath: "VTEXTBOOKS")
     }
 }
