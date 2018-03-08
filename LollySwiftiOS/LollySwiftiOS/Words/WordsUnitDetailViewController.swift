@@ -10,10 +10,8 @@ import UIKit
 
 class WordsUnitDetailViewController: UITableViewController {
     
+    var vm: WordsUnitViewModel!    
     var mWord: MUnitWord!
-    var mTextbook: MTextbook {
-        return AppDelegate.theSettingsViewModel.selectedTextbook
-    }
     
     @IBOutlet weak var tfUnit: UITextField!
     @IBOutlet weak var tfPart: UITextField!
@@ -29,17 +27,15 @@ class WordsUnitDetailViewController: UITableViewController {
         tfWord.text = mWord.WORD
     }
     
-    @IBAction func onCancel(_ sender: AnyObject) {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    @IBAction func onDone(_ sender: AnyObject) {
+    func onDone() {
         mWord.UNIT = Int(tfUnit.text!)!
         mWord.PART = Int(tfPart.text!)!
         mWord.SEQNUM = Int(tfSeqNum.text!)!
         mWord.WORD = tfWord.text
         
-        self.dismiss(animated: true, completion: nil)
+        if mWord.ID == 0 {
+            vm.arrWords.append(mWord)
+        }
     }
     
 }

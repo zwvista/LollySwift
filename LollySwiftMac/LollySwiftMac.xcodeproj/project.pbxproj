@@ -21,14 +21,6 @@
 		8C486DF41EBB88240023FBFC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C486DF31EBB88240023FBFC /* Cocoa.framework */; };
 		8C486DF61EBB882B0023FBFC /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C486DF51EBB882B0023FBFC /* WebKit.framework */; };
 		8C486E031EBB94730023FBFC /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C486DFD1EBB8EB70023FBFC /* libsqlite3.0.tbd */; };
-		8C486E161EBB94C30023FBFC /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C486E0B1EBB94C30023FBFC /* FMDatabase.m */; };
-		8C486E171EBB94C30023FBFC /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C486E0D1EBB94C30023FBFC /* FMDatabaseAdditions.m */; };
-		8C486E181EBB94C30023FBFC /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C486E0F1EBB94C30023FBFC /* FMDatabasePool.m */; };
-		8C486E191EBB94C30023FBFC /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C486E111EBB94C30023FBFC /* FMDatabaseQueue.m */; };
-		8C486E1A1EBB94C30023FBFC /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C486E141EBB94C30023FBFC /* FMResultSet.m */; };
-		8C486E1B1EBB94C30023FBFC /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C486E151EBB94C30023FBFC /* Info.plist */; };
-		8C486E2E1EBB94E70023FBFC /* DBObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C486E1D1EBB94E70023FBFC /* DBObject.swift */; };
-		8C486E2F1EBB94E70023FBFC /* LollyDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C486E1E1EBB94E70023FBFC /* LollyDB.swift */; };
 		8C486E301EBB94E70023FBFC /* MDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C486E1F1EBB94E70023FBFC /* MDictionary.swift */; };
 		8C486E311EBB94E70023FBFC /* MLangPhrase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C486E201EBB94E70023FBFC /* MLangPhrase.swift */; };
 		8C486E321EBB94E70023FBFC /* MLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C486E211EBB94E70023FBFC /* MLanguage.swift */; };
@@ -97,20 +89,6 @@
 		8C486DF31EBB88240023FBFC /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		8C486DF51EBB882B0023FBFC /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		8C486DFD1EBB8EB70023FBFC /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
-		8C486E0A1EBB94C30023FBFC /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
-		8C486E0B1EBB94C30023FBFC /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
-		8C486E0C1EBB94C30023FBFC /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
-		8C486E0D1EBB94C30023FBFC /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
-		8C486E0E1EBB94C30023FBFC /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
-		8C486E0F1EBB94C30023FBFC /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
-		8C486E101EBB94C30023FBFC /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
-		8C486E111EBB94C30023FBFC /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
-		8C486E121EBB94C30023FBFC /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
-		8C486E131EBB94C30023FBFC /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
-		8C486E141EBB94C30023FBFC /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
-		8C486E151EBB94C30023FBFC /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8C486E1D1EBB94E70023FBFC /* DBObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBObject.swift; sourceTree = "<group>"; };
-		8C486E1E1EBB94E70023FBFC /* LollyDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LollyDB.swift; sourceTree = "<group>"; };
 		8C486E1F1EBB94E70023FBFC /* MDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDictionary.swift; sourceTree = "<group>"; };
 		8C486E201EBB94E70023FBFC /* MLangPhrase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLangPhrase.swift; sourceTree = "<group>"; };
 		8C486E211EBB94E70023FBFC /* MLanguage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLanguage.swift; sourceTree = "<group>"; };
@@ -161,7 +139,6 @@
 		8C1C4F1B1D31F88800CF5D88 = {
 			isa = PBXGroup;
 			children = (
-				8C486E091EBB94C30023FBFC /* fmdb */,
 				8C486E1C1EBB94E70023FBFC /* src */,
 				8C1C4F261D31F88800CF5D88 /* LollySwiftMac */,
 				8C1C4F381D31F88800CF5D88 /* LollySwiftMacTests */,
@@ -215,31 +192,9 @@
 			path = LollySwiftMacUITests;
 			sourceTree = "<group>";
 		};
-		8C486E091EBB94C30023FBFC /* fmdb */ = {
-			isa = PBXGroup;
-			children = (
-				8C486E0A1EBB94C30023FBFC /* FMDatabase.h */,
-				8C486E0B1EBB94C30023FBFC /* FMDatabase.m */,
-				8C486E0C1EBB94C30023FBFC /* FMDatabaseAdditions.h */,
-				8C486E0D1EBB94C30023FBFC /* FMDatabaseAdditions.m */,
-				8C486E0E1EBB94C30023FBFC /* FMDatabasePool.h */,
-				8C486E0F1EBB94C30023FBFC /* FMDatabasePool.m */,
-				8C486E101EBB94C30023FBFC /* FMDatabaseQueue.h */,
-				8C486E111EBB94C30023FBFC /* FMDatabaseQueue.m */,
-				8C486E121EBB94C30023FBFC /* FMDB.h */,
-				8C486E131EBB94C30023FBFC /* FMResultSet.h */,
-				8C486E141EBB94C30023FBFC /* FMResultSet.m */,
-				8C486E151EBB94C30023FBFC /* Info.plist */,
-			);
-			name = fmdb;
-			path = ../../../OSS/fmdb/src/fmdb;
-			sourceTree = "<group>";
-		};
 		8C486E1C1EBB94E70023FBFC /* src */ = {
 			isa = PBXGroup;
 			children = (
-				8C486E1D1EBB94E70023FBFC /* DBObject.swift */,
-				8C486E1E1EBB94E70023FBFC /* LollyDB.swift */,
 				8C486E1F1EBB94E70023FBFC /* MDictionary.swift */,
 				8C486E201EBB94E70023FBFC /* MLangPhrase.swift */,
 				8C486E211EBB94E70023FBFC /* MLanguage.swift */,
@@ -269,7 +224,7 @@
 				8C486DF31EBB88240023FBFC /* Cocoa.framework */,
 			);
 			name = Frameworks;
-			path = ../LollySwiftMac2;
+			path = LollySwiftMac;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -336,7 +291,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = "趙偉";
 				TargetAttributes = {
 					8C1C4F231D31F88800CF5D88 = {
@@ -385,7 +340,6 @@
 				8C1C4F2C1D31F88800CF5D88 /* Assets.xcassets in Resources */,
 				8C0566361D50B1B500E1B2A4 /* LollyCore.db in Resources */,
 				8C1C4F2F1D31F88800CF5D88 /* Main.storyboard in Resources */,
-				8C486E1B1EBB94C30023FBFC /* Info.plist in Resources */,
 				8C0566371D50B1B500E1B2A4 /* LollyDic.db in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -412,21 +366,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C486E361EBB94E70023FBFC /* MUnitPhrase.swift in Sources */,
-				8C486E2F1EBB94E70023FBFC /* LollyDB.swift in Sources */,
 				8C486E321EBB94E70023FBFC /* MLanguage.swift in Sources */,
 				8C0ACB581D4391FB00EC6740 /* SettingsViewController.swift in Sources */,
 				8C486E311EBB94E70023FBFC /* MLangPhrase.swift in Sources */,
-				8C486E181EBB94C30023FBFC /* FMDatabasePool.m in Sources */,
 				8C1C4F2A1D31F88800CF5D88 /* ViewController.swift in Sources */,
-				8C486E2E1EBB94E70023FBFC /* DBObject.swift in Sources */,
 				8C486E351EBB94E70023FBFC /* MTextbookWord.swift in Sources */,
 				8C486E3E1EBB94E70023FBFC /* WordsUnitViewModel.swift in Sources */,
-				8C486E191EBB94C30023FBFC /* FMDatabaseQueue.m in Sources */,
 				8C486E3D1EBB94E70023FBFC /* WordsTextbookViewModel.swift in Sources */,
 				8C1C4F281D31F88800CF5D88 /* AppDelegate.swift in Sources */,
 				8C486E331EBB94E70023FBFC /* MLangWord.swift in Sources */,
-				8C486E161EBB94C30023FBFC /* FMDatabase.m in Sources */,
-				8C486E1A1EBB94C30023FBFC /* FMResultSet.m in Sources */,
 				8C486E301EBB94E70023FBFC /* MDictionary.swift in Sources */,
 				8C486E371EBB94E70023FBFC /* MUnitWord.swift in Sources */,
 				8C486E381EBB94E70023FBFC /* MUserSetting.swift in Sources */,
@@ -435,7 +383,6 @@
 				8C486E391EBB94E70023FBFC /* PhrasesLangViewModel.swift in Sources */,
 				8C486E3B1EBB94E70023FBFC /* SettingsViewModel.swift in Sources */,
 				8C486E341EBB94E70023FBFC /* MTextbook.swift in Sources */,
-				8C486E171EBB94C30023FBFC /* FMDatabaseAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -492,13 +439,21 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
@@ -538,13 +493,21 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
@@ -563,6 +526,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};

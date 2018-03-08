@@ -53,7 +53,7 @@ class PhrasesUnitEditViewController: UITableViewController, LollyProtocol {
         let m = vm.arrPhrases[(sourceIndexPath as NSIndexPath).row]
         vm.arrPhrases.remove(at: (sourceIndexPath as NSIndexPath).row)
         vm.arrPhrases.insert(m, at: (destinationIndexPath as NSIndexPath).row)
-        for i in 1 ... vm.arrPhrases.count {
+        for i in 1...vm.arrPhrases.count {
             vm.arrPhrases[i - 1].SEQNUM = i
         }
     }

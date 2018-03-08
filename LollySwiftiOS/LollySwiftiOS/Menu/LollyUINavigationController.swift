@@ -57,23 +57,23 @@ class LollyUINavigationController: UINavigationController {
         stack = NSMutableArray(array: viewControllers)
     }
     
-    override class func initialize() {
-        super.initialize()
-        
-        /*
-        * We need to set a memory warning listener,
-        * to deallocate recreatable resources
-        */
-        NotificationCenter.default.addObserver(self,
-            selector: #selector(LollyUINavigationController.handleDidReceiveMemoryWarning),
-            name: NSNotification.Name.UIApplicationDidReceiveMemoryWarning,
-            object: UIApplication.shared);
-    }
+//    func initialize() {
+//        super.initialize()
+//
+//        /*
+//        * We need to set a memory warning listener,
+//        * to deallocate recreatable resources
+//        */
+//        NotificationCenter.default.addObserver(self,
+//            selector: #selector(LollyUINavigationController.handleDidReceiveMemoryWarning),
+//            name: NSNotification.Name.UIApplicationDidReceiveMemoryWarning,
+//            object: UIApplication.shared);
+//    }
     
     /*
     * Cleaning up some memory
     */
-    class func handleDidReceiveMemoryWarning(_ note: Notification) {
+    @objc class func handleDidReceiveMemoryWarning(_ note: Notification) {
         stack = nil;
     }
 }

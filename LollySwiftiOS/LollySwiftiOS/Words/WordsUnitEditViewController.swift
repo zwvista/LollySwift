@@ -52,13 +52,14 @@ class WordsUnitEditViewController: UITableViewController, LollyProtocol {
         let m = vm.arrWords[(sourceIndexPath as NSIndexPath).row]
         vm.arrWords.remove(at: (sourceIndexPath as NSIndexPath).row)
         vm.arrWords.insert(m, at: (destinationIndexPath as NSIndexPath).row)
-        for i in 1 ... vm.arrWords.count {
+        for i in 1...vm.arrWords.count {
             vm.arrWords[i - 1].SEQNUM = i
         }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let controller = (segue.destination as! UINavigationController).topViewController as! WordsUnitDetailViewController
+        controller.vm = vm
         if sender is UITableViewCell {
             controller.mWord = vm.arrWords[(tableView.indexPathForSelectedRow! as NSIndexPath).row]
         } else {
@@ -69,6 +70,12 @@ class WordsUnitEditViewController: UITableViewController, LollyProtocol {
             o.SEQNUM = (maxElem?.SEQNUM ?? 0) + 1
             controller.mWord = o
         }
+    }
+    
+    @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
+        guard segue.identifier == "Done" else {return}
+        let controller = segue.source as! WordsUnitDetailViewController
+        controller.onDone()
     }
     
 }
