@@ -34,9 +34,9 @@ open class MTextbookWord: Mappable {
         NOTE <- map["NOTE"]
     }
 
-    static func getDataByLang(_ langid: Int) -> [MTextbookWord] {
+    static func getDataByLang(_ langid: Int, completionHandler: @escaping ([MTextbookWord]) -> Void) {
         // let sql = "SELECT * FROM VTEXTBOOKWORDS WHERE LANGID = ?"
-        let URL = "https://zwvista.000webhostapp.com/lolly/apisqlite.php/VTEXTBOOKWORDS?transform=1&&filter=LANGID,eq,\(langid)"
-        return RestApi.getArray(URL: URL, keyPath: "VTEXTBOOKWORDS")
+        let URL = "http://13.231.236.234/lolly/apimysql.php/VTEXTBOOKWORDS?transform=1&&filter=LANGID,eq,\(langid)"
+        RestApi.requestArray(URL: URL, keyPath: "VTEXTBOOKWORDS", completionHandler: completionHandler)
     }
 }

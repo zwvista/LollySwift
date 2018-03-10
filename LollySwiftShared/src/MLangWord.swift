@@ -26,9 +26,9 @@ open class MLangWord: Mappable {
         WORD <- map["WORD"]
     }
     
-    static func getDataByLang(_ langid: Int) -> [MLangWord] {
+    static func getDataByLang(_ langid: Int, completionHandler: @escaping ([MLangWord]) -> Void) {
         // let sql = "SELECT LANGID, WORD FROM LANGWORDS WHERE LANGID = ?"
-        let URL = "https://zwvista.000webhostapp.com/lolly/apisqlite.php/LANGWORDS?transform=1&&filter=LANGID,eq,\(langid)"
-        return RestApi.getArray(URL: URL, keyPath: "LANGWORDS")
+        let URL = "http://13.231.236.234/lolly/apimysql.php/LANGWORDS?transform=1&&filter=LANGID,eq,\(langid)"
+        RestApi.requestArray(URL: URL, keyPath: "LANGWORDS", completionHandler: completionHandler)
     }
 }

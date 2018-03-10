@@ -22,10 +22,10 @@ open class MUserSetting: Mappable {
         USLANGID <- map["USLANGID"]
     }
 
-    static func getData() -> [MUserSetting] {
+    static func getData(completionHandler: @escaping ([MUserSetting]) -> Void) {
         // let sql = "SELECT * FROM VUSERSETTINGS"
-        let URL = "https://zwvista.000webhostapp.com/lolly/apisqlite.php/VUSERSETTINGS?transform=1"
-        return RestApi.getArray(URL: URL, keyPath: "VUSERSETTINGS")
+        let URL = "http://13.231.236.234/lolly/apimysql.php/VUSERSETTINGS?transform=1"
+        RestApi.requestArray(URL: URL, keyPath: "VUSERSETTINGS", completionHandler: completionHandler)
     }
 
 }

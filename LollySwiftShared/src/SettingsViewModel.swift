@@ -9,8 +9,8 @@
 import Foundation
 
 open class SettingsViewModel: NSObject {
-    open var arrLanguages: [MLanguage]
-    open var selectedLangIndex: Int {
+    open var arrLanguages = [MLanguage]()
+    open var selectedLangIndex = 0 {
         didSet {
             setSelectedLangIndex()
         }
@@ -26,7 +26,7 @@ open class SettingsViewModel: NSObject {
     }
     
     open var arrTextbooks = [MTextbook]()
-    open var selectedTextbookIndex: Int {
+    open var selectedTextbookIndex = 0 {
         didSet {
             setSelectedTextbookIndex()
         }
@@ -39,20 +39,27 @@ open class SettingsViewModel: NSObject {
     open var arrParts = [String]()
     
     public override init() {
-        arrLanguages = MLanguage.getData()
-        let m = MUserSetting.getData()[0]
-        selectedLangIndex = arrLanguages.index{ String($0.ID!) == m.USLANGID }!
-        selectedTextbookIndex = 0
         super.init()
-        setSelectedLangIndex()
+        MLanguage.getData() { [unowned self] in
+            self.arrLanguages = $0
+            MUserSetting.getData() { [unowned self] in
+                let m = $0[0]
+                self.selectedLangIndex = self.arrLanguages.index{ String($0.ID!) == m.USLANGID }!
+                self.setSelectedLangIndex()
+            }
+        }
     }
     
     fileprivate func setSelectedLangIndex() {
         let m = arrLanguages[selectedLangIndex]
-        arrDictionaries = MDictionary.getDataByLang(m.ID!)
-        selectedDictIndex = arrDictionaries.index{ String($0.ID!) == m.USDICTID }!
-        arrTextbooks = MTextbook.getDataByLang(m.ID!)
-        selectedTextbookIndex = arrTextbooks.index{ String($0.ID!) == m.USTEXTBOOKID }!
+        MDictionary.getDataByLang(m.ID!) { [unowned self] in
+            self.arrDictionaries = $0
+            self.selectedDictIndex = self.arrDictionaries.index{ String($0.ID!) == m.USDICTID }!
+            MTextbook.getDataByLang(m.ID!) { [unowned self] in
+                self.arrTextbooks = $0
+                self.selectedTextbookIndex = self.arrTextbooks.index{ String($0.ID!) == m.USTEXTBOOKID }!
+            }
+        }
     }
     
     fileprivate func setSelectedTextbookIndex() {

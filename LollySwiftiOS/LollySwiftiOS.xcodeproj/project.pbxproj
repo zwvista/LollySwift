@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8C0566341D50AFD600E1B2A4 /* LollyCore.db in Resources */ = {isa = PBXBuildFile; fileRef = 8C0566301D50451800E1B2A4 /* LollyCore.db */; };
-		8C0566351D50B19C00E1B2A4 /* LollyDic.db in Resources */ = {isa = PBXBuildFile; fileRef = 8C0566311D50451800E1B2A4 /* LollyDic.db */; };
 		8C0945691D122ACE003503ED /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0945681D122ACE003503ED /* SettingsViewController.swift */; };
 		8C328FD31EFD87AA008682E3 /* RestApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C328FD21EFD87AA008682E3 /* RestApi.swift */; };
 		8C3290071EFE808D008682E3 /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C328FD51EFE808D008682E3 /* ArrayExtensions.swift */; };
@@ -80,6 +78,11 @@
 		8C4670F61D0DC4C7004F3C21 /* ActionSheetStringPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4670EB1D0DC4C7004F3C21 /* ActionSheetStringPicker.m */; };
 		8C4670F71D0DC4C7004F3C21 /* DistancePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4670ED1D0DC4C7004F3C21 /* DistancePickerView.m */; };
 		8C4670F81D0DC4C7004F3C21 /* SWActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4670EF1D0DC4C7004F3C21 /* SWActionSheet.m */; };
+		8C9C6A3E2052C51400F299C8 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C9C6A3D2052C51400F299C8 /* Alamofire.framework */; };
+		8C9C6A3F2052C51400F299C8 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8C9C6A3D2052C51400F299C8 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8C9C6A412052C51400F299C8 /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C9C6A402052C51400F299C8 /* ObjectMapper.framework */; };
+		8C9C6A422052C51400F299C8 /* ObjectMapper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8C9C6A402052C51400F299C8 /* ObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8C9C6A442053F9F700F299C8 /* UIView+ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9C6A432053F9F700F299C8 /* UIView+ActivityIndicator.swift */; };
 		8CA6CDAE1EF1BF8700418799 /* MDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA6CD9C1EF1BF8700418799 /* MDictionary.swift */; };
 		8CA6CDAF1EF1BF8700418799 /* MLangPhrase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA6CD9D1EF1BF8700418799 /* MLangPhrase.swift */; };
 		8CA6CDB11EF1BF8700418799 /* MLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA6CD9F1EF1BF8700418799 /* MLanguage.swift */; };
@@ -142,7 +145,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				8C9C6A422052C51400F299C8 /* ObjectMapper.framework in Embed Frameworks */,
 				8CBF834B20518D0D009F10B1 /* AlamofireObjectMapper.framework in Embed Frameworks */,
+				8C9C6A3F2052C51400F299C8 /* Alamofire.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -150,8 +155,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		8C0566301D50451800E1B2A4 /* LollyCore.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = LollyCore.db; path = ../../../LollyDB/LollyCore.db; sourceTree = "<group>"; };
-		8C0566311D50451800E1B2A4 /* LollyDic.db */ = {isa = PBXFileReference; lastKnownFileType = file; name = LollyDic.db; path = ../../../LollyDB/LollyDic.db; sourceTree = "<group>"; };
 		8C0945681D122ACE003503ED /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		8C328FD21EFD87AA008682E3 /* RestApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestApi.swift; sourceTree = "<group>"; };
 		8C328FD51EFE808D008682E3 /* ArrayExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
@@ -235,6 +238,9 @@
 		8C4670ED1D0DC4C7004F3C21 /* DistancePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DistancePickerView.m; sourceTree = "<group>"; };
 		8C4670EE1D0DC4C7004F3C21 /* SWActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWActionSheet.h; sourceTree = "<group>"; };
 		8C4670EF1D0DC4C7004F3C21 /* SWActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWActionSheet.m; sourceTree = "<group>"; };
+		8C9C6A3D2052C51400F299C8 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C9C6A402052C51400F299C8 /* ObjectMapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ObjectMapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C9C6A432053F9F700F299C8 /* UIView+ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+ActivityIndicator.swift"; sourceTree = "<group>"; };
 		8CA6CD9C1EF1BF8700418799 /* MDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDictionary.swift; sourceTree = "<group>"; };
 		8CA6CD9D1EF1BF8700418799 /* MLangPhrase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLangPhrase.swift; sourceTree = "<group>"; };
 		8CA6CD9F1EF1BF8700418799 /* MLanguage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLanguage.swift; sourceTree = "<group>"; };
@@ -297,6 +303,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				951BB9921A1B78650087DB94 /* libsqlite3.dylib in Frameworks */,
+				8C9C6A3E2052C51400F299C8 /* Alamofire.framework in Frameworks */,
+				8C9C6A412052C51400F299C8 /* ObjectMapper.framework in Frameworks */,
 				8CBF834A20518D0D009F10B1 /* AlamofireObjectMapper.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -449,6 +457,8 @@
 		953473CC1A0D16CF00FF2D56 = {
 			isa = PBXGroup;
 			children = (
+				8C9C6A402052C51400F299C8 /* ObjectMapper.framework */,
+				8C9C6A3D2052C51400F299C8 /* Alamofire.framework */,
 				8C4670DB1D0DC4C7004F3C21 /* Pickers */,
 				95FFAEE81A19F03C00E00C47 /* AMSlideMenu */,
 				8C328FD41EFE808D008682E3 /* EZSwiftExtensions */,
@@ -484,6 +494,7 @@
 				8C0945681D122ACE003503ED /* SettingsViewController.swift */,
 				953473D81A0D16CF00FF2D56 /* Supporting Files */,
 				8C42B5A71D69A1D900DCB528 /* Words */,
+				8C9C6A432053F9F700F299C8 /* UIView+ActivityIndicator.swift */,
 			);
 			path = LollySwiftiOS;
 			sourceTree = "<group>";
@@ -491,8 +502,6 @@
 		953473D81A0D16CF00FF2D56 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				8C0566301D50451800E1B2A4 /* LollyCore.db */,
-				8C0566311D50451800E1B2A4 /* LollyDic.db */,
 				95267BD81A1E303B00CC2A4B /* simpleMenuButton.png */,
 				95267BD91A1E303B00CC2A4B /* simpleMenuButton@2x.png */,
 				953473D91A0D16CF00FF2D56 /* Info.plist */,
@@ -650,10 +659,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				951BB9941A1B803B0087DB94 /* Main.storyboard in Resources */,
-				8C0566341D50AFD600E1B2A4 /* LollyCore.db in Resources */,
 				953473E51A0D16CF00FF2D56 /* LaunchScreen.xib in Resources */,
 				95267BDB1A1E303B00CC2A4B /* simpleMenuButton@2x.png in Resources */,
-				8C0566351D50B19C00E1B2A4 /* LollyDic.db in Resources */,
 				95267BDA1A1E303B00CC2A4B /* simpleMenuButton.png in Resources */,
 				953473E21A0D16CF00FF2D56 /* Images.xcassets in Resources */,
 			);
@@ -698,6 +705,7 @@
 				8C42B5B51D69A1D900DCB528 /* WordsUnitViewController.swift in Sources */,
 				8C3290071EFE808D008682E3 /* ArrayExtensions.swift in Sources */,
 				8C3290221EFE808D008682E3 /* UIAlertControllerExtensions.swift in Sources */,
+				8C9C6A442053F9F700F299C8 /* UIView+ActivityIndicator.swift in Sources */,
 				8C3290381EFE808D008682E3 /* UserDefaultsExtension.swift in Sources */,
 				8C32901C1EFE808D008682E3 /* IntExtensions.swift in Sources */,
 				8C42B5BC1D69A21E00DCB528 /* PhrasesUnitsViewController.swift in Sources */,

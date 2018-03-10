@@ -38,12 +38,12 @@ open class MUnitPhrase: Mappable {
         UNITPART <- map["UNITPART"]
     }
 
-    static func getDataByTextbook(_ textbookid: Int, unitPartFrom: Int, unitPartTo: Int) -> [MUnitPhrase] {
+    static func getDataByTextbook(_ textbookid: Int, unitPartFrom: Int, unitPartTo: Int, completionHandler: @escaping ([MUnitPhrase]) -> Void) {
         // let sql = "SELECT * FROM VUNITPHRASES WHERE TEXTBOOKID=? AND UNITPART BETWEEN ? AND ?"
-//        let URL = "https://zwvista.000webhostapp.com/lolly/apisqlite.php/VUNITPHRASES?transform=1&filter[]=TEXTBOOKID,eq,\(textbookid)&filter[]=UNITPART,bt,\(unitPartFrom),\(unitPartTo)"
-//        return RestApi.getArray(URL: URL, keyPath: "VUNITPHRASES")
-        let URL = "https://zwvista.000webhostapp.com/lolly/apisqlite.php/VUNITPHRASES?transform=1&filter[]=TEXTBOOKID,eq,\(textbookid)"
-        return RestApi.getArray(URL: URL, keyPath: "VUNITPHRASES").filter{unitPartFrom...unitPartTo ~= $0.UNITPART!}
+//        let URL = "http://13.231.236.234/lolly/apimysql.php/VUNITPHRASES?transform=1&filter[]=TEXTBOOKID,eq,\(textbookid)&filter[]=UNITPART,bt,\(unitPartFrom),\(unitPartTo)"
+//        return RestApi.requestArray(URL: URL, keyPath: "VUNITPHRASES")
+        let URL = "http://13.231.236.234/lolly/apimysql.php/VUNITPHRASES?transform=1&filter[]=TEXTBOOKID,eq,\(textbookid)"
+        RestApi.requestArray(URL: URL, keyPath: "VUNITPHRASES") { completionHandler($0.filter{unitPartFrom...unitPartTo ~= $0.UNITPART!}) }
     }
 
 }

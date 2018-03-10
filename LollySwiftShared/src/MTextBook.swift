@@ -45,9 +45,9 @@ open class MTextbook: Mappable {
         return USUNITFROM_String == USUNITTO_String && USPARTFROM_String == USPARTTO_String
     }
     
-    static func getDataByLang(_ langID: Int) -> [MTextbook] {
+    static func getDataByLang(_ langID: Int, completionHandler: @escaping ([MTextbook]) -> Void) {
         // let sql = "SELECT * FROM VTEXTBOOKS WHERE LANGID = ?"
-        let URL = "https://zwvista.000webhostapp.com/lolly/apisqlite.php/VTEXTBOOKS?transform=1&&filter=LANGID,eq,\(langID)"
-        return RestApi.getArray(URL: URL, keyPath: "VTEXTBOOKS")
+        let URL = "http://13.231.236.234/lolly/apimysql.php/VTEXTBOOKS?transform=1&&filter=LANGID,eq,\(langID)"
+        RestApi.requestArray(URL: URL, keyPath: "VTEXTBOOKS", completionHandler: completionHandler)
     }
 }

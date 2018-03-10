@@ -16,10 +16,13 @@ class WordsUnitViewController: WordsBaseViewController, UITableViewDelegate, UIT
     }
     
     override func viewDidLoad() {
-        vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel)
         super.viewDidLoad()
-        searchController.searchResultsUpdater = self
-        searchBar.delegate = self
+        self.view.showBlurLoader()
+        vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel) { [unowned self] in
+            self.setupSearchController(delegate: self)
+            self.tableView.reloadData()
+            self.view.removeBlurLoader()
+        }
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

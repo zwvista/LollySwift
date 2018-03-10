@@ -10,13 +10,14 @@ import Foundation
 
 open class WordsTextbookViewModel: NSObject {
     open var settings: SettingsViewModel
-    open var arrWords: [MTextbookWord]
+    open var arrWords = [MTextbookWord]()
     open var arrWordsFiltered: [MTextbookWord]?
     
-    public init(settings: SettingsViewModel) {
+    public init(settings: SettingsViewModel, completionHandler: (() -> Void)? = nil) {
         self.settings = settings
         let m = settings.arrTextbooks[settings.selectedTextbookIndex]
-        arrWords = MTextbookWord.getDataByLang(m.LANGID!)
+        super.init()
+        MTextbookWord.getDataByLang(m.LANGID!) { [unowned self] in self.arrWords = $0; completionHandler?() }
     }
     
     open func filterWordsForSearchText(_ searchText: String, scope: String) {

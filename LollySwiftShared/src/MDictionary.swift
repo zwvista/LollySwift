@@ -42,10 +42,10 @@ open class MDictionary: Mappable {
         return url
     }
     
-    static func getDataByLang(_ langID: Int) -> [MDictionary] {
+    static func getDataByLang(_ langID: Int, completionHandler: @escaping ([MDictionary]) -> Void) {
         // let sql = "SELECT * FROM VDICTIONARIES WHERE LANGIDFROM = ?"
-        let URL = "https://zwvista.000webhostapp.com/lolly/apisqlite.php/VDICTIONARIES?transform=1&&filter=LANGIDFROM,eq,\(langID)"
-        return RestApi.getArray(URL: URL, keyPath: "VDICTIONARIES")
+        let URL = "http://13.231.236.234/lolly/apimysql.php/VDICTIONARIES?transform=1&&filter=LANGIDFROM,eq,\(langID)"
+        RestApi.requestArray(URL: URL, keyPath: "VDICTIONARIES", completionHandler: completionHandler)
     }
     
     fileprivate let debugExtract = false

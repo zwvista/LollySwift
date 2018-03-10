@@ -19,15 +19,14 @@ class PhrasesBaseViewController: UIViewController {
     // http://stackoverflow.com/questions/26417591/uisearchcontroller-in-a-uiviewcontroller
     @IBOutlet weak var searchBarContainerView: UIView!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // Setup the Search Controller
+    func setupSearchController(delegate: UISearchBarDelegate & UISearchResultsUpdating) {
         definesPresentationContext = true
         searchController.dimsBackgroundDuringPresentation = false
         searchBar.scopeButtonTitles = ["Phrase", "Translation"]
         searchBar.sizeToFit()
         searchBarContainerView.addSubview(searchBar)
+        searchController.searchResultsUpdater = delegate
+        searchBar.delegate = delegate
     }
     
     override func viewWillAppear(_ animated: Bool) {

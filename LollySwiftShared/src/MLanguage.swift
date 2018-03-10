@@ -26,9 +26,9 @@ open class MLanguage: Mappable {
         USDICTID <- map["USDICTID"]
     }
     
-    static func getData() -> [MLanguage] {
+    static func getData(completionHandler: @escaping ([MLanguage]) -> Void) {
         // let sql = "SELECT * FROM VLANGUAGES WHERE ID <> 0"
-        let URL = "https://zwvista.000webhostapp.com/lolly/apisqlite.php/VLANGUAGES?transform=1&&filter=ID,neq,0"
-        return RestApi.getArray(URL: URL, keyPath: "VLANGUAGES")
+        let URL = "http://13.231.236.234/lolly/apimysql.php/VLANGUAGES?transform=1&&filter=ID,neq,0"
+        RestApi.requestArray(URL: URL, keyPath: "VLANGUAGES", completionHandler: completionHandler)
     }
 }

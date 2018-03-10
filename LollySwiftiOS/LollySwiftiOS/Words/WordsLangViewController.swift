@@ -16,12 +16,15 @@ class WordsLangViewController: WordsBaseViewController, UITableViewDelegate, UIT
     }
 
     override func viewDidLoad() {
-        vm = WordsLangViewModel(settings: AppDelegate.theSettingsViewModel)
         super.viewDidLoad()
-        searchController.searchResultsUpdater = self
-        searchBar.delegate = self
+        self.view.showBlurLoader()
+        vm = WordsLangViewModel(settings: AppDelegate.theSettingsViewModel) { [unowned self] in
+            self.setupSearchController(delegate: self)
+            self.tableView.reloadData()
+            self.view.removeBlurLoader()
+        }
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return arrWords.count
     }
