@@ -41,9 +41,9 @@ open class MUnitPhrase: Mappable {
     static func getDataByTextbook(_ textbookid: Int, unitPartFrom: Int, unitPartTo: Int, completionHandler: @escaping ([MUnitPhrase]) -> Void) {
         // let sql = "SELECT * FROM VUNITPHRASES WHERE TEXTBOOKID=? AND UNITPART BETWEEN ? AND ?"
 //        let URL = "http://13.231.236.234/lolly/apimysql.php/VUNITPHRASES?transform=1&filter[]=TEXTBOOKID,eq,\(textbookid)&filter[]=UNITPART,bt,\(unitPartFrom),\(unitPartTo)"
-//        return RestApi.requestArray(URL: URL, keyPath: "VUNITPHRASES")
+//        RestApi.getArray(URL: URL, keyPath: "VUNITPHRASES")
         let URL = "http://13.231.236.234/lolly/apimysql.php/VUNITPHRASES?transform=1&filter[]=TEXTBOOKID,eq,\(textbookid)"
-        RestApi.requestArray(URL: URL, keyPath: "VUNITPHRASES") { completionHandler($0.filter{unitPartFrom...unitPartTo ~= $0.UNITPART!}) }
+        RestApi.getArray(URL: URL, keyPath: "VUNITPHRASES") { completionHandler($0.filter{unitPartFrom...unitPartTo ~= $0.UNITPART!}) }
     }
 
 }

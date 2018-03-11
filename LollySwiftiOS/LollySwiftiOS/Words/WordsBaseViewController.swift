@@ -29,11 +29,6 @@ class WordsBaseViewController: UIViewController {
         searchBar.delegate = delegate
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        tableView.reloadData()
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let controller = segue.destination as? WordsDictViewController {
             controller.word = word

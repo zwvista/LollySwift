@@ -37,6 +37,6 @@ open class MTextbookWord: Mappable {
     static func getDataByLang(_ langid: Int, completionHandler: @escaping ([MTextbookWord]) -> Void) {
         // let sql = "SELECT * FROM VTEXTBOOKWORDS WHERE LANGID = ?"
         let URL = "http://13.231.236.234/lolly/apimysql.php/VTEXTBOOKWORDS?transform=1&&filter=LANGID,eq,\(langid)"
-        RestApi.requestArray(URL: URL, keyPath: "VTEXTBOOKWORDS", completionHandler: completionHandler)
+        RestApi.getArray(URL: URL, keyPath: "VTEXTBOOKWORDS", completionHandler: completionHandler)
     }
 }

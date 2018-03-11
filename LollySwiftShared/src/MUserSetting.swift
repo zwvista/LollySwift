@@ -25,7 +25,7 @@ open class MUserSetting: Mappable {
     static func getData(completionHandler: @escaping ([MUserSetting]) -> Void) {
         // let sql = "SELECT * FROM VUSERSETTINGS"
         let URL = "http://13.231.236.234/lolly/apimysql.php/VUSERSETTINGS?transform=1"
-        RestApi.requestArray(URL: URL, keyPath: "VUSERSETTINGS", completionHandler: completionHandler)
+        RestApi.getArray(URL: URL, keyPath: "VUSERSETTINGS", completionHandler: completionHandler)
     }
 
 }

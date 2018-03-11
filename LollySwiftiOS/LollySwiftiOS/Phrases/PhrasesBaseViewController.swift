@@ -28,9 +28,4 @@ class PhrasesBaseViewController: UIViewController {
         searchController.searchResultsUpdater = delegate
         searchBar.delegate = delegate
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        tableView.reloadData()
-    }
 }

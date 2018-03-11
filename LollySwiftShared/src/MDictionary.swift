@@ -45,7 +45,7 @@ open class MDictionary: Mappable {
     static func getDataByLang(_ langID: Int, completionHandler: @escaping ([MDictionary]) -> Void) {
         // let sql = "SELECT * FROM VDICTIONARIES WHERE LANGIDFROM = ?"
         let URL = "http://13.231.236.234/lolly/apimysql.php/VDICTIONARIES?transform=1&&filter=LANGIDFROM,eq,\(langID)"
-        RestApi.requestArray(URL: URL, keyPath: "VDICTIONARIES", completionHandler: completionHandler)
+        RestApi.getArray(URL: URL, keyPath: "VDICTIONARIES", completionHandler: completionHandler)
     }
     
     fileprivate let debugExtract = false
@@ -72,7 +72,7 @@ open class MDictionary: Mappable {
             if transform.isEmpty {break}
             let arr = transform.components(separatedBy: "\n")
             var regex = try! NSRegularExpression(pattern: arr[0], options: NSRegularExpression.Options())
-            let m = regex.firstMatch(in: html, options: NSRegularExpression.MatchingOptions(), range: NSMakeRange(0, html.characters.count))
+            let m = regex.firstMatch(in: html, options: NSRegularExpression.MatchingOptions(), range: NSMakeRange(0, html.count))
             if m == nil {break}
             text = NSMutableString(string: (html as NSString).substring(with: m!.range))
             
