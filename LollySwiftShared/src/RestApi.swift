@@ -49,4 +49,12 @@ class RestApi {
             completionHandler(result)
         }
     }
+    
+    static func delete(url: String, completionHandler: @escaping (String) -> Void) {
+        print("[RestApi]DELETE:\(url)")
+        Alamofire.request(url, method: .delete).responseString() { (response: DataResponse<String>) in
+            let result = response.result.value!
+            completionHandler(result)
+        }
+    }
 }

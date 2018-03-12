@@ -44,19 +44,28 @@ open class MUnitWord: Mappable {
     }
     
     static func update(_ id: Int, seqnum: Int, completionHandler: @escaping (String) -> Void) {
+        // let sql = "UPDATE UNITWORDS SET SEQNUM=? WHERE ID=?"
         let url = "\(RestApi.url)UNITWORDS/\(id)"
         let body = "SEQNUM=\(seqnum)"
         RestApi.update(url: url, body: body, completionHandler: completionHandler)
     }
     
     static func update(_ id: Int, m: MUnitWordEdit, completionHandler: @escaping (String) -> Void) {
+        // let sql = "UPDATE UNITWORDS SET UNIT=?, PART=?, SEQNUM=?, WORD=?, NOTE=? WHERE ID=?"
         let url = "\(RestApi.url)UNITWORDS/\(id)"
         RestApi.update(url: url, body: m.toJSONString(prettyPrint: false)!, completionHandler: completionHandler)
     }
     
     static func create(m: MUnitWordEdit, completionHandler: @escaping (String) -> Void) {
+        // let sql = "INSERT INTO UNITWORDS (ID, UNIT, PART, SEQNUM, WORD, NOTE) VALUES (?,?,?,?,?,?)"
         let url = "\(RestApi.url)UNITWORDS"
         RestApi.create(url: url, body: m.toJSONString(prettyPrint: false)!, completionHandler: completionHandler)
+    }
+    
+    static func delete(_ id: Int, completionHandler: @escaping (String) -> Void) {
+        // let sql = "DELETE UNITWORDS WHERE ID=?"
+        let url = "\(RestApi.url)UNITWORDS/\(id)"
+        RestApi.delete(url: url, completionHandler: completionHandler)
     }
 }
 

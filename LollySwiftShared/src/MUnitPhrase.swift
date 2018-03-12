@@ -51,13 +51,21 @@ open class MUnitPhrase: Mappable {
     }
     
     static func update(_ id: Int, m: MUnitPhraseEdit, completionHandler: @escaping (String) -> Void) {
+        // let sql = "UPDATE UNITPHRASES SET UNIT=?, PART=?, SEQNUM=?, PHRASE=?, TRANSLATION=? WHERE ID=?"
         let url = "\(RestApi.url)UNITPHRASES/\(id)"
         RestApi.update(url: url, body: m.toJSONString(prettyPrint: false)!, completionHandler: completionHandler)
     }
     
     static func create(m: MUnitPhraseEdit, completionHandler: @escaping (String) -> Void) {
+        // let sql = "INSERT INTO UNITPHRASES (ID, UNIT, PART, SEQNUM, PHRASE, TRANSLATION) VALUES (?,?,?,?,?,?)"
         let url = "\(RestApi.url)UNITPHRASES"
         RestApi.create(url: url, body: m.toJSONString(prettyPrint: false)!, completionHandler: completionHandler)
+    }
+    
+    static func delete(_ id: Int, completionHandler: @escaping (String) -> Void) {
+        // let sql = "DELETE UNITPHRASES WHERE ID=?"
+        let url = "\(RestApi.url)UNITPHRASES/\(id)"
+        RestApi.delete(url: url, completionHandler: completionHandler)
     }
 }
 
