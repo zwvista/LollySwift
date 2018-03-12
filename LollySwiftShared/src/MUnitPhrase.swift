@@ -21,7 +21,6 @@ open class MUnitPhrase: Mappable {
     open var UNITPART: Int?
     
     public init() {
-        
     }
     
     required public init?(map: Map){
@@ -39,11 +38,42 @@ open class MUnitPhrase: Mappable {
     }
 
     static func getDataByTextbook(_ textbookid: Int, unitPartFrom: Int, unitPartTo: Int, completionHandler: @escaping ([MUnitPhrase]) -> Void) {
-        // let sql = "SELECT * FROM VUNITPHRASES WHERE TEXTBOOKID=? AND UNITPART BETWEEN ? AND ?"
-//        let URL = "http://13.231.236.234/lolly/apimysql.php/VUNITPHRASES?transform=1&filter[]=TEXTBOOKID,eq,\(textbookid)&filter[]=UNITPART,bt,\(unitPartFrom),\(unitPartTo)"
-//        RestApi.getArray(URL: URL, keyPath: "VUNITPHRASES")
-        let URL = "http://13.231.236.234/lolly/apimysql.php/VUNITPHRASES?transform=1&filter[]=TEXTBOOKID,eq,\(textbookid)"
-        RestApi.getArray(URL: URL, keyPath: "VUNITPHRASES") { completionHandler($0.filter{unitPartFrom...unitPartTo ~= $0.UNITPART!}) }
+        // let sql = "SELECT * FROM VUNITPHRASES WHERE TEXTBOOKID=? AND UNITPART BETWEEN ? AND ? ORDER BY UNITPART,SEQNUM"
+        let url = "\(RestApi.url)VUNITPHRASES?transform=1&filter[]=TEXTBOOKID,eq,\(textbookid)&filter[]=UNITPART,bt,\(unitPartFrom),\(unitPartTo)&order[]=UNITPART&order[]=SEQNUM"
+        RestApi.getArray(url: url, keyPath: "VUNITPHRASES", completionHandler: completionHandler)
     }
+    
+    static func update(_ id: Int, seqnum: Int) {
+        // let sql = "UPDATE UNITPHRASES SET SEQNUM=? WHERE ID=?"
+        let url = "\(RestApi.url)UNITPHRASES/\(id)"
+        let body = "SEQNUM=\(seqnum)"
+        RestApi.update(url: url, body: body)
+    }
+    
+    static func update(_ id: Int, unit: Int, part: Int, phrase: String, translation: String) {
+        let url = "\(RestApi.url)UNITPHRASES/\(id)"
+        let m = MUnitPhraseEdit()
+        m.UNIT = unit; m.PART = part; m.PHRASE = phrase; m.TRANSLATION = translation
+        RestApi.update(url: url, body: m.toJSONString(prettyPrint: false)!)
+    }
+}
 
+open class MUnitPhraseEdit: Mappable {
+    open var UNIT: Int?
+    open var PART: Int?
+    open var PHRASE: String?
+    open var TRANSLATION: String?
+    
+    public init() {
+    }
+    
+    required public init?(map: Map){
+    }
+    
+    public func mapping(map: Map) {
+        UNIT <- map["UNIT"]
+        PART <- map["PART"]
+        PHRASE <- map["PHRASE"]
+        TRANSLATION <- map["TRANSLATION"]
+    }
 }

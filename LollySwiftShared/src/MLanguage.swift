@@ -28,7 +28,7 @@ open class MLanguage: Mappable {
     
     static func getData(completionHandler: @escaping ([MLanguage]) -> Void) {
         // let sql = "SELECT * FROM VLANGUAGES WHERE ID <> 0"
-        let URL = "http://13.231.236.234/lolly/apimysql.php/VLANGUAGES?transform=1&&filter=ID,neq,0"
-        RestApi.getArray(URL: URL, keyPath: "VLANGUAGES", completionHandler: completionHandler)
+        let url = "\(RestApi.url)VLANGUAGES?transform=1&&filter=ID,neq,0"
+        RestApi.getArray(url: url, keyPath: "VLANGUAGES", completionHandler: completionHandler)
     }
 }

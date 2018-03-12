@@ -53,7 +53,10 @@ class WordsUnitEditViewController: UITableViewController, LollyProtocol {
         vm.arrWords.remove(at: (sourceIndexPath as NSIndexPath).row)
         vm.arrWords.insert(m, at: (destinationIndexPath as NSIndexPath).row)
         for i in 1...vm.arrWords.count {
-            vm.arrWords[i - 1].SEQNUM = i
+            let m = vm.arrWords[i - 1]
+            guard m.SEQNUM != i else {continue}
+            m.SEQNUM = i
+            MUnitWord.update(m.ID!, seqnum: m.SEQNUM!)
         }
     }
     

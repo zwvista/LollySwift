@@ -14,8 +14,7 @@ open class MLangPhrase: Mappable {
     open var PHRASE: String?
     open var TRANSLATION: String?
     
-    public init() {
-        
+    public init() {        
     }
     
     required public init?(map: Map){
@@ -28,7 +27,7 @@ open class MLangPhrase: Mappable {
     
     static func getDataByLang(_ langid: Int, completionHandler: @escaping ([MLangPhrase]) -> Void) {
         // let sql = "SELECT PHRASE, TRANSLATION FROM LANGPHRASES WHERE LANGID = ?"
-        let URL = "http://13.231.236.234/lolly/apimysql.php/LANGPHRASES?transform=1&&filter=LANGID,eq,\(langid)"
-        RestApi.getArray(URL: URL, keyPath: "LANGPHRASES", completionHandler: completionHandler)
+        let url = "\(RestApi.url)LANGPHRASES?transform=1&&filter=LANGID,eq,\(langid)"
+        RestApi.getArray(url: url, keyPath: "LANGPHRASES", completionHandler: completionHandler)
     }
 }

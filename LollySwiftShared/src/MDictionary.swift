@@ -44,8 +44,8 @@ open class MDictionary: Mappable {
     
     static func getDataByLang(_ langID: Int, completionHandler: @escaping ([MDictionary]) -> Void) {
         // let sql = "SELECT * FROM VDICTIONARIES WHERE LANGIDFROM = ?"
-        let URL = "http://13.231.236.234/lolly/apimysql.php/VDICTIONARIES?transform=1&&filter=LANGIDFROM,eq,\(langID)"
-        RestApi.getArray(URL: URL, keyPath: "VDICTIONARIES", completionHandler: completionHandler)
+        let url = "\(RestApi.url)VDICTIONARIES?transform=1&&filter=LANGIDFROM,eq,\(langID)"
+        RestApi.getArray(url: url, keyPath: "VDICTIONARIES", completionHandler: completionHandler)
     }
     
     fileprivate let debugExtract = false

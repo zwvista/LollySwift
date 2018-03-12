@@ -15,7 +15,6 @@ open class MLangWord: Mappable {
     open var WORD: String?
     
     public init() {
-        
     }
     
     required public init?(map: Map){
@@ -28,7 +27,7 @@ open class MLangWord: Mappable {
     
     static func getDataByLang(_ langid: Int, completionHandler: @escaping ([MLangWord]) -> Void) {
         // let sql = "SELECT LANGID, WORD FROM LANGWORDS WHERE LANGID = ?"
-        let URL = "http://13.231.236.234/lolly/apimysql.php/LANGWORDS?transform=1&&filter=LANGID,eq,\(langid)"
-        RestApi.getArray(URL: URL, keyPath: "LANGWORDS", completionHandler: completionHandler)
+        let url = "\(RestApi.url)LANGWORDS?transform=1&&filter=LANGID,eq,\(langid)"
+        RestApi.getArray(url: url, keyPath: "LANGWORDS", completionHandler: completionHandler)
     }
 }
