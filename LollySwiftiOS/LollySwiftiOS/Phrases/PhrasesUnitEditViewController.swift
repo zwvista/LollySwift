@@ -54,7 +54,10 @@ class PhrasesUnitEditViewController: UITableViewController, LollyProtocol {
         vm.arrPhrases.remove(at: (sourceIndexPath as NSIndexPath).row)
         vm.arrPhrases.insert(m, at: (destinationIndexPath as NSIndexPath).row)
         for i in 1...vm.arrPhrases.count {
-            vm.arrPhrases[i - 1].SEQNUM = i
+            let m = vm.arrPhrases[i - 1]
+            guard m.SEQNUM != i else {continue}
+            m.SEQNUM = i
+            MUnitPhrase.update(m.ID!, seqnum: m.SEQNUM!) { print($0) }
         }
     }
     
@@ -72,4 +75,10 @@ class PhrasesUnitEditViewController: UITableViewController, LollyProtocol {
         }
     }
     
+    @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
+        guard segue.identifier == "Done" else {return}
+        let controller = segue.source as! PhrasesUnitDetailViewController
+        controller.onDone()
+    }
+
 }

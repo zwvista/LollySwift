@@ -27,13 +27,26 @@ class RestApi {
     static let url = "http://13.231.236.234/lolly/apimysql.php/"
     
     static func getArray<T: Mappable>(url: String, keyPath: String, completionHandler: @escaping ([T]) -> Void) {
+        print("[RestApi]GET:\(url)")
         Alamofire.request(url).responseArray(keyPath: keyPath) { (response: DataResponse<[T]>) in
             let result = response.result.value!
             completionHandler(result)
         }
     }
     
-    static func update(url: String, body: String) {
-        Alamofire.request(url, method: .put, encoding: body)
+    static func update(url: String, body: String, completionHandler: @escaping (String) -> Void) {
+        print("[RestApi]PUT:\(url) BODY:\(body)")
+        Alamofire.request(url, method: .put, encoding: body).responseString() { (response: DataResponse<String>) in
+            let result = response.result.value!
+            completionHandler(result)
+        }
+    }
+    
+    static func create(url: String, body: String, completionHandler: @escaping (String) -> Void) {
+        print("[RestApi]POST:\(url) BODY:\(body)")
+        Alamofire.request(url, method: .post, encoding: body).responseString() { (response: DataResponse<String>) in
+            let result = response.result.value!
+            completionHandler(result)
+        }
     }
 }

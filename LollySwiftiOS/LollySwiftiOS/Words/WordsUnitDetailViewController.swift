@@ -17,6 +17,7 @@ class WordsUnitDetailViewController: UITableViewController {
     @IBOutlet weak var tfPart: UITextField!
     @IBOutlet weak var tfSeqNum: UITextField!
     @IBOutlet weak var tfWord: UITextField!
+    @IBOutlet weak var tfNote: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +26,7 @@ class WordsUnitDetailViewController: UITableViewController {
         tfPart.text = String(mWord.PART!)
         tfSeqNum.text = String(mWord.SEQNUM!)
         tfWord.text = mWord.WORD
+        tfNote.text = mWord.NOTE
     }
     
     func onDone() {
@@ -32,9 +34,13 @@ class WordsUnitDetailViewController: UITableViewController {
         mWord.PART = Int(tfPart.text!)!
         mWord.SEQNUM = Int(tfSeqNum.text!)!
         mWord.WORD = tfWord.text
+        mWord.NOTE = tfNote.text
         
         if mWord.ID == 0 {
             vm.arrWords.append(mWord)
+            MUnitWord.create(m: MUnitWordEdit(m: mWord)) { [unowned self] in print($0); self.mWord.ID = Int($0)! }
+        } else {
+            MUnitWord.update(mWord.ID!, m: MUnitWordEdit(m: mWord)) { print($0) }
         }
     }
     

@@ -1073,6 +1073,36 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="FxW-Gb-Grd">
+                                        <rect key="frame" x="0.0" y="176" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FxW-Gb-Grd" id="6ZE-tY-Gno">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dxx-Ue-cHp">
+                                                    <rect key="frame" x="116" y="10" width="243" height="24"/>
+                                                    <color key="textColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Note:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FNB-D4-c2T" userLabel="Note:">
+                                                    <rect key="frame" x="16" y="14" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="dxx-Ue-cHp" firstAttribute="leading" secondItem="6ZE-tY-Gno" secondAttribute="leadingMargin" constant="100" id="5eW-3o-gEU"/>
+                                                <constraint firstItem="FNB-D4-c2T" firstAttribute="top" secondItem="6ZE-tY-Gno" secondAttribute="topMargin" constant="3" id="Jae-9H-9c6"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="dxx-Ue-cHp" secondAttribute="bottom" constant="-1" id="UoW-QG-y7n"/>
+                                                <constraint firstItem="FNB-D4-c2T" firstAttribute="leading" secondItem="6ZE-tY-Gno" secondAttribute="leadingMargin" id="VuM-vy-pix"/>
+                                                <constraint firstItem="dxx-Ue-cHp" firstAttribute="trailing" secondItem="6ZE-tY-Gno" secondAttribute="trailingMargin" id="c4b-F6-6KG"/>
+                                                <constraint firstItem="dxx-Ue-cHp" firstAttribute="top" secondItem="6ZE-tY-Gno" secondAttribute="topMargin" constant="-1" id="gVh-fP-8Sq"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -1096,6 +1126,7 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="tfNote" destination="dxx-Ue-cHp" id="SBV-k0-N7a"/>
                         <outlet property="tfPart" destination="Zxu-Z1-5BJ" id="x2v-dD-m6A"/>
                         <outlet property="tfSeqNum" destination="uAX-rX-JSe" id="xse-Hk-fUT"/>
                         <outlet property="tfUnit" destination="Wgk-3h-Eh0" id="UsD-Sp-mdg"/>
@@ -1650,12 +1681,12 @@
                     <navigationItem key="navigationItem" title="Phrases in Unit (Detail)" id="x4r-AQ-UvE">
                         <barButtonItem key="leftBarButtonItem" systemItem="done" id="7PG-S6-TPa">
                             <connections>
-                                <action selector="onDone:" destination="RVk-mb-Z64" id="0Gh-5J-Wr7"/>
+                                <segue destination="1Ke-Vd-PzC" kind="unwind" unwindAction="prepareForUnwind:" id="Z37-RD-DNJ"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="cOy-Xb-XFb">
                             <connections>
-                                <action selector="onCancel:" destination="RVk-mb-Z64" id="3x8-BS-WCQ"/>
+                                <segue destination="1Ke-Vd-PzC" kind="unwind" unwindAction="prepareForUnwind:" id="vqa-ll-jW3"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1669,6 +1700,7 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6LV-Uo-RuO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="1Ke-Vd-PzC" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="5972" y="3156"/>
         </scene>
@@ -1761,13 +1793,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phrase:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="td9-q1-TsB">
-                                                    <rect key="frame" x="20" y="14" width="58" height="21"/>
+                                                    <rect key="frame" x="16" y="14" width="58" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XWR-P3-ETa">
-                                                    <rect key="frame" x="120" y="10" width="460" height="24"/>
+                                                    <rect key="frame" x="116" y="10" width="243" height="24"/>
                                                     <color key="textColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -1791,13 +1823,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fKz-eK-ACD">
-                                                    <rect key="frame" x="120" y="10" width="460" height="24"/>
+                                                    <rect key="frame" x="116" y="10" width="243" height="24"/>
                                                     <color key="textColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Translation:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yOR-aH-Io8">
-                                                    <rect key="frame" x="20" y="14" width="89" height="21"/>
+                                                    <rect key="frame" x="16" y="14" width="89" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -1850,6 +1882,6 @@
         <segue reference="Ezc-3N-9RT"/>
         <segue reference="Ol9-Ej-9ED"/>
         <segue reference="afU-WM-9eD"/>
-        <segue reference="ShM-XZ-dCv"/>
+        <segue reference="O5l-wV-jBh"/>
     </inferredMetricsTieBreakers>
 </document>

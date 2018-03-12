@@ -43,27 +43,36 @@ open class MUnitWord: Mappable {
         RestApi.getArray(url: url, keyPath: "VUNITWORDS", completionHandler: completionHandler)
     }
     
-    static func update(_ id: Int, seqnum: Int) {
+    static func update(_ id: Int, seqnum: Int, completionHandler: @escaping (String) -> Void) {
         let url = "\(RestApi.url)UNITWORDS/\(id)"
         let body = "SEQNUM=\(seqnum)"
-        RestApi.update(url: url, body: body)
+        RestApi.update(url: url, body: body, completionHandler: completionHandler)
     }
     
-    static func update(_ id: Int, unit: Int, part: Int, word: String, note: String) {
+    static func update(_ id: Int, m: MUnitWordEdit, completionHandler: @escaping (String) -> Void) {
         let url = "\(RestApi.url)UNITWORDS/\(id)"
-        let m = MUnitWordEdit()
-        m.UNIT = unit; m.PART = part; m.WORD = word; m.NOTE = note
-        RestApi.update(url: url, body: m.toJSONString(prettyPrint: false)!)
+        RestApi.update(url: url, body: m.toJSONString(prettyPrint: false)!, completionHandler: completionHandler)
+    }
+    
+    static func create(m: MUnitWordEdit, completionHandler: @escaping (String) -> Void) {
+        let url = "\(RestApi.url)UNITWORDS"
+        RestApi.create(url: url, body: m.toJSONString(prettyPrint: false)!, completionHandler: completionHandler)
     }
 }
 
 open class MUnitWordEdit: Mappable {
     open var UNIT: Int?
     open var PART: Int?
+    open var SEQNUM: Int?
     open var WORD: String?
     open var NOTE: String?
     
-    public init() {
+    public init(m: MUnitWord) {
+        UNIT = m.UNIT
+        PART = m.PART
+        SEQNUM = m.SEQNUM
+        WORD = m.WORD
+        NOTE = m.NOTE
     }
     
     required public init?(map: Map){
@@ -72,6 +81,7 @@ open class MUnitWordEdit: Mappable {
     public func mapping(map: Map) {
         UNIT <- map["UNIT"]
         PART <- map["PART"]
+        SEQNUM <- map["SEQNUM"]
         WORD <- map["WORD"]
         NOTE <- map["NOTE"]
     }

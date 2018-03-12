@@ -56,7 +56,7 @@ class WordsUnitEditViewController: UITableViewController, LollyProtocol {
             let m = vm.arrWords[i - 1]
             guard m.SEQNUM != i else {continue}
             m.SEQNUM = i
-            MUnitWord.update(m.ID!, seqnum: m.SEQNUM!)
+            MUnitWord.update(m.ID!, seqnum: m.SEQNUM!) { print($0) }
         }
     }
     

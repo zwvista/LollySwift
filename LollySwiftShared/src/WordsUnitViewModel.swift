@@ -23,9 +23,5 @@ open class WordsUnitViewModel: NSObject {
     open func filterWordsForSearchText(_ searchText: String, scope: String) {
         arrWordsFiltered = arrWords.filter { $0.WORD!.contains(searchText) }
     }
-    
-    open func updateSEQNUM() {
-        
-    }
 
 }

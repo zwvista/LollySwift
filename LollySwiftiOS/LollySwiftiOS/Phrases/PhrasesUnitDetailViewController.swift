@@ -10,6 +10,7 @@ import UIKit
 
 class PhrasesUnitDetailViewController: UITableViewController {
     
+    var vm: PhrasesUnitViewModel!
     var mPhrase: MUnitPhrase!
     
     @IBOutlet weak var tfUnit: UITextField!
@@ -27,18 +28,19 @@ class PhrasesUnitDetailViewController: UITableViewController {
         tfTranslation.text = mPhrase.TRANSLATION
     }
     
-    @IBAction func onCancel(_ sender: AnyObject) {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    @IBAction func onDone(_ sender: AnyObject) {
+    func onDone() {
         mPhrase.UNIT = Int(tfUnit.text!)!
         mPhrase.PART = Int(tfPart.text!)!
         mPhrase.SEQNUM = Int(tfSeqNum.text!)!
         mPhrase.PHRASE = tfPhrase.text
         mPhrase.TRANSLATION = tfTranslation.text
         
-        self.dismiss(animated: true, completion: nil)
+        if mPhrase.ID == 0 {
+            vm.arrPhrases.append(mPhrase)
+            MUnitPhrase.create(m: MUnitPhraseEdit(m: mPhrase)) { [unowned self] in print($0); self.mPhrase.ID = Int($0)! }
+        } else {
+            MUnitPhrase.update(mPhrase.ID!, m: MUnitPhraseEdit(m: mPhrase)) { print($0) }
+        }
     }
     
 }
