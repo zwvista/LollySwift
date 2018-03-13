@@ -37,35 +37,35 @@ open class MUnitWord: Mappable {
         UNITPART <- map["UNITPART"]
     }
 
-    static func getDataByTextbook(_ textbookid: Int, unitPartFrom: Int, unitPartTo: Int, completionHandler: @escaping ([MUnitWord]) -> Void) {
+    static func getDataByTextbook(_ textbookid: Int, unitPartFrom: Int, unitPartTo: Int, complete: @escaping ([MUnitWord]) -> Void) {
         // let sql = "SELECT * FROM VUNITWORDS WHERE TEXTBOOKID=? AND UNITPART BETWEEN ? AND ? ORDER BY UNITPART,SEQNUM"
         let url = "\(RestApi.url)VUNITWORDS?transform=1&filter[]=TEXTBOOKID,eq,\(textbookid)&filter[]=UNITPART,bt,\(unitPartFrom),\(unitPartTo)&order[]=UNITPART&order[]=SEQNUM"
-        RestApi.getArray(url: url, keyPath: "VUNITWORDS", completionHandler: completionHandler)
+        RestApi.getArray(url: url, keyPath: "VUNITWORDS", complete: complete)
     }
     
-    static func update(_ id: Int, seqnum: Int, completionHandler: @escaping (String) -> Void) {
+    static func update(_ id: Int, seqnum: Int, complete: @escaping (String) -> Void) {
         // let sql = "UPDATE UNITWORDS SET SEQNUM=? WHERE ID=?"
         let url = "\(RestApi.url)UNITWORDS/\(id)"
         let body = "SEQNUM=\(seqnum)"
-        RestApi.update(url: url, body: body, completionHandler: completionHandler)
+        RestApi.update(url: url, body: body, complete: complete)
     }
     
-    static func update(_ id: Int, m: MUnitWordEdit, completionHandler: @escaping (String) -> Void) {
+    static func update(_ id: Int, m: MUnitWordEdit, complete: @escaping (String) -> Void) {
         // let sql = "UPDATE UNITWORDS SET UNIT=?, PART=?, SEQNUM=?, WORD=?, NOTE=? WHERE ID=?"
         let url = "\(RestApi.url)UNITWORDS/\(id)"
-        RestApi.update(url: url, body: m.toJSONString(prettyPrint: false)!, completionHandler: completionHandler)
+        RestApi.update(url: url, body: m.toJSONString(prettyPrint: false)!, complete: complete)
     }
     
-    static func create(m: MUnitWordEdit, completionHandler: @escaping (String) -> Void) {
+    static func create(m: MUnitWordEdit, complete: @escaping (String) -> Void) {
         // let sql = "INSERT INTO UNITWORDS (ID, UNIT, PART, SEQNUM, WORD, NOTE) VALUES (?,?,?,?,?,?)"
         let url = "\(RestApi.url)UNITWORDS"
-        RestApi.create(url: url, body: m.toJSONString(prettyPrint: false)!, completionHandler: completionHandler)
+        RestApi.create(url: url, body: m.toJSONString(prettyPrint: false)!, complete: complete)
     }
     
-    static func delete(_ id: Int, completionHandler: @escaping (String) -> Void) {
+    static func delete(_ id: Int, complete: @escaping (String) -> Void) {
         // let sql = "DELETE UNITWORDS WHERE ID=?"
         let url = "\(RestApi.url)UNITWORDS/\(id)"
-        RestApi.delete(url: url, completionHandler: completionHandler)
+        RestApi.delete(url: url, complete: complete)
     }
 }
 

@@ -22,10 +22,10 @@ open class MUserSetting: Mappable {
         USLANGID <- map["USLANGID"]
     }
 
-    static func getData(completionHandler: @escaping ([MUserSetting]) -> Void) {
+    static func getData(complete: @escaping ([MUserSetting]) -> Void) {
         // let sql = "SELECT * FROM VUSERSETTINGS"
         let url = "\(RestApi.url)VUSERSETTINGS?transform=1"
-        RestApi.getArray(url: url, keyPath: "VUSERSETTINGS", completionHandler: completionHandler)
+        RestApi.getArray(url: url, keyPath: "VUSERSETTINGS", complete: complete)
     }
 
 }

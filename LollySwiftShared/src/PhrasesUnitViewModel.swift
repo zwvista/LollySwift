@@ -13,11 +13,11 @@ open class PhrasesUnitViewModel: NSObject {
     open var arrPhrases = [MUnitPhrase]()
     open var arrPhrasesFiltered: [MUnitPhrase]?
     
-    public init(settings: SettingsViewModel, completionHandler: (() -> Void)? = nil) {
+    public init(settings: SettingsViewModel, complete: (() -> Void)? = nil) {
         self.settings = settings
         let m = settings.arrTextbooks[settings.selectedTextbookIndex]
         super.init()
-        MUnitPhrase.getDataByTextbook(m.ID!, unitPartFrom: m.USUNITFROM * 10 + m.USPARTFROM, unitPartTo: m.USUNITTO * 10 + m.USPARTTO) { [unowned self] in self.arrPhrases = $0; completionHandler?() }
+        MUnitPhrase.getDataByTextbook(m.ID!, unitPartFrom: m.USUNITFROM * 10 + m.USPARTFROM, unitPartTo: m.USUNITTO * 10 + m.USPARTTO) { [unowned self] in self.arrPhrases = $0; complete?() }
     }
     
     open func filterPhrasesForSearchText(_ searchText: String, scope: String) {

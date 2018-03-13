@@ -26,35 +26,35 @@ extension String: ParameterEncoding {
 class RestApi {
     static let url = "http://13.231.236.234/lolly/apimysql.php/"
     
-    static func getArray<T: Mappable>(url: String, keyPath: String, completionHandler: @escaping ([T]) -> Void) {
+    static func getArray<T: Mappable>(url: String, keyPath: String, complete: @escaping ([T]) -> Void) {
         print("[RestApi]GET:\(url)")
         Alamofire.request(url).responseArray(keyPath: keyPath) { (response: DataResponse<[T]>) in
             let result = response.result.value!
-            completionHandler(result)
+            complete(result)
         }
     }
     
-    static func update(url: String, body: String, completionHandler: @escaping (String) -> Void) {
+    static func update(url: String, body: String, complete: @escaping (String) -> Void) {
         print("[RestApi]PUT:\(url) BODY:\(body)")
         Alamofire.request(url, method: .put, encoding: body).responseString() { (response: DataResponse<String>) in
             let result = response.result.value!
-            completionHandler(result)
+            complete(result)
         }
     }
     
-    static func create(url: String, body: String, completionHandler: @escaping (String) -> Void) {
+    static func create(url: String, body: String, complete: @escaping (String) -> Void) {
         print("[RestApi]POST:\(url) BODY:\(body)")
         Alamofire.request(url, method: .post, encoding: body).responseString() { (response: DataResponse<String>) in
             let result = response.result.value!
-            completionHandler(result)
+            complete(result)
         }
     }
     
-    static func delete(url: String, completionHandler: @escaping (String) -> Void) {
+    static func delete(url: String, complete: @escaping (String) -> Void) {
         print("[RestApi]DELETE:\(url)")
         Alamofire.request(url, method: .delete).responseString() { (response: DataResponse<String>) in
             let result = response.result.value!
-            completionHandler(result)
+            complete(result)
         }
     }
 }

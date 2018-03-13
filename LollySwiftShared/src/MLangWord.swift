@@ -25,9 +25,9 @@ open class MLangWord: Mappable {
         WORD <- map["WORD"]
     }
     
-    static func getDataByLang(_ langid: Int, completionHandler: @escaping ([MLangWord]) -> Void) {
+    static func getDataByLang(_ langid: Int, complete: @escaping ([MLangWord]) -> Void) {
         // let sql = "SELECT LANGID, WORD FROM LANGWORDS WHERE LANGID = ?"
         let url = "\(RestApi.url)LANGWORDS?transform=1&&filter=LANGID,eq,\(langid)"
-        RestApi.getArray(url: url, keyPath: "LANGWORDS", completionHandler: completionHandler)
+        RestApi.getArray(url: url, keyPath: "LANGWORDS", complete: complete)
     }
 }

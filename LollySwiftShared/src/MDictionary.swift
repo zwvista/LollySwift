@@ -42,10 +42,10 @@ open class MDictionary: Mappable {
         return url
     }
     
-    static func getDataByLang(_ langID: Int, completionHandler: @escaping ([MDictionary]) -> Void) {
+    static func getDataByLang(_ langID: Int, complete: @escaping ([MDictionary]) -> Void) {
         // let sql = "SELECT * FROM VDICTIONARIES WHERE LANGIDFROM = ?"
         let url = "\(RestApi.url)VDICTIONARIES?transform=1&&filter=LANGIDFROM,eq,\(langID)"
-        RestApi.getArray(url: url, keyPath: "VDICTIONARIES", completionHandler: completionHandler)
+        RestApi.getArray(url: url, keyPath: "VDICTIONARIES", complete: complete)
     }
     
     fileprivate let debugExtract = false

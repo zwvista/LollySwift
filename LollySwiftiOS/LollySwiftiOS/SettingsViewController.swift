@@ -112,8 +112,9 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
     func actionSheetPickerDidSucceed(_ actionSheetPicker: AbstractActionSheetPicker!, origin: Any!) {
         switch selectedIndexPath.section {
         case 0 where selectedRow != vm.selectedLangIndex:
-            vm.selectedLangIndex = selectedRow
-            updateLang()
+            vm.setSelectedLangIndex(selectedRow) { [unowned self] in
+                self.updateLang()
+            }
         case 1 where selectedRow != vm.selectedDictIndex:
             vm.selectedDictIndex = selectedRow
             updateDict()

@@ -26,9 +26,9 @@ open class MLanguage: Mappable {
         USDICTID <- map["USDICTID"]
     }
     
-    static func getData(completionHandler: @escaping ([MLanguage]) -> Void) {
+    static func getData(complete: @escaping ([MLanguage]) -> Void) {
         // let sql = "SELECT * FROM VLANGUAGES WHERE ID <> 0"
         let url = "\(RestApi.url)VLANGUAGES?transform=1&&filter=ID,neq,0"
-        RestApi.getArray(url: url, keyPath: "VLANGUAGES", completionHandler: completionHandler)
+        RestApi.getArray(url: url, keyPath: "VLANGUAGES", complete: complete)
     }
 }

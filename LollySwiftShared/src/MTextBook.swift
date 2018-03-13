@@ -45,9 +45,9 @@ open class MTextbook: Mappable {
         return USUNITFROM_String == USUNITTO_String && USPARTFROM_String == USPARTTO_String
     }
     
-    static func getDataByLang(_ langID: Int, completionHandler: @escaping ([MTextbook]) -> Void) {
+    static func getDataByLang(_ langID: Int, complete: @escaping ([MTextbook]) -> Void) {
         // let sql = "SELECT * FROM VTEXTBOOKS WHERE LANGID = ?"
         let url = "\(RestApi.url)VTEXTBOOKS?transform=1&&filter=LANGID,eq,\(langID)"
-        RestApi.getArray(url: url, keyPath: "VTEXTBOOKS", completionHandler: completionHandler)
+        RestApi.getArray(url: url, keyPath: "VTEXTBOOKS", complete: complete)
     }
 }

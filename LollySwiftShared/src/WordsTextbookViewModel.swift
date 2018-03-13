@@ -13,11 +13,11 @@ open class WordsTextbookViewModel: NSObject {
     open var arrWords = [MTextbookWord]()
     open var arrWordsFiltered: [MTextbookWord]?
     
-    public init(settings: SettingsViewModel, completionHandler: (() -> Void)? = nil) {
+    public init(settings: SettingsViewModel, complete: (() -> Void)? = nil) {
         self.settings = settings
         let m = settings.arrTextbooks[settings.selectedTextbookIndex]
         super.init()
-        MTextbookWord.getDataByLang(m.LANGID!) { [unowned self] in self.arrWords = $0; completionHandler?() }
+        MTextbookWord.getDataByLang(m.LANGID!) { [unowned self] in self.arrWords = $0; complete?() }
     }
     
     open func filterWordsForSearchText(_ searchText: String, scope: String) {

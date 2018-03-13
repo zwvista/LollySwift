@@ -10,11 +10,7 @@ import Foundation
 
 open class SettingsViewModel: NSObject {
     open var arrLanguages = [MLanguage]()
-    open var selectedLangIndex = 0 {
-        didSet {
-            setSelectedLangIndex()
-        }
-    }
+    open private(set) var selectedLangIndex = 0
     open var selectedLang: MLanguage {
         return arrLanguages[selectedLangIndex]
     }
@@ -38,31 +34,32 @@ open class SettingsViewModel: NSObject {
     open var arrUnits = [String]()
     open var arrParts = [String]()
     
-    public override init() {
+    public init(complete: (() -> Void)? = nil) {
         super.init()
-        MLanguage.getData() { [unowned self] in
+        MLanguage.getData { [unowned self] in
             self.arrLanguages = $0
-            MUserSetting.getData() { [unowned self] in
+            MUserSetting.getData { [unowned self] in
                 let m = $0[0]
-                self.selectedLangIndex = self.arrLanguages.index{ String($0.ID!) == m.USLANGID }!
-                self.setSelectedLangIndex()
+                self.setSelectedLangIndex(self.arrLanguages.index { String($0.ID!) == m.USLANGID }!, complete: complete)
             }
         }
     }
     
-    fileprivate func setSelectedLangIndex() {
-        let m = arrLanguages[selectedLangIndex]
+    open func setSelectedLangIndex(_ langid: Int, complete: (() -> Void)? = nil) {
+        selectedLangIndex = langid
+        let m = arrLanguages[langid]
         MDictionary.getDataByLang(m.ID!) { [unowned self] in
             self.arrDictionaries = $0
             self.selectedDictIndex = self.arrDictionaries.index{ String($0.ID!) == m.USDICTID }!
             MTextbook.getDataByLang(m.ID!) { [unowned self] in
                 self.arrTextbooks = $0
-                self.selectedTextbookIndex = self.arrTextbooks.index{ String($0.ID!) == m.USTEXTBOOKID }!
+                self.selectedTextbookIndex = self.arrTextbooks.index { String($0.ID!) == m.USTEXTBOOKID }!
+                complete?()
             }
         }
     }
     
-    fileprivate func setSelectedTextbookIndex() {
+    private func setSelectedTextbookIndex() {
         arrUnits = (1...selectedTextbook.UNITS!).map{ String($0) }
         arrParts = (selectedTextbook.PARTS?.components(separatedBy: " "))!
     }
