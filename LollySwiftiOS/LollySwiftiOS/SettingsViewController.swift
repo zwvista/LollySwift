@@ -46,37 +46,41 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
             switch selectedIndexPath.row {
             case 0:
                 ActionSheetStringPicker.show(withTitle: "Select Unit(From)", rows: vm.arrUnits, initialSelection: vm.USUNITFROM - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
-                    self.vm.USUNITFROM = selectedValue as! Int
+                    let v = selectedValue as! String
+                    self.vm.USUNITFROM = v.toInt()!
                     MUserSetting.update(self.vm.selectedUSTextbook.ID!, usunitfrom: self.vm.USUNITFROM) {
                         print($0)
-                        self.lblUnitFrom.text = (selectedValue as! String)
+                        self.lblUnitFrom.text = v
                         if !self.swUnitTo.isOn || isInvalidUnitPart() {self.updateUnitPartTo()}
                     }
                 }, cancel: nil, origin: lblUnitFrom)
             case 1:
                 ActionSheetStringPicker.show(withTitle: "Select Part(From)", rows: vm.arrParts, initialSelection: vm.USPARTFROM - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
-                    self.vm.USPARTFROM = selectedValue as! Int
+                    let v = selectedValue as! String
+                    self.vm.USPARTFROM = v.toInt()!
                     MUserSetting.update(self.vm.selectedUSTextbook.ID!, uspartfrom: self.vm.USPARTFROM) {
                         print($0)
-                        self.lblPartFrom.text = (selectedValue as! String)
+                        self.lblPartFrom.text = v
                         if !self.swUnitTo.isOn || isInvalidUnitPart() {self.updateUnitPartTo()}
                     }
                 }, cancel: nil, origin: lblPartFrom)
             case 3 where swUnitTo.isOn:
                 ActionSheetStringPicker.show(withTitle: "Select Unit(To)", rows: vm.arrUnits, initialSelection: vm.USUNITTO - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
-                    self.vm.USUNITTO = selectedValue as! Int
+                    let v = selectedValue as! String
+                    self.vm.USUNITTO = v.toInt()!
                     MUserSetting.update(self.vm.selectedUSTextbook.ID!, usunitto: self.vm.USUNITTO) {
                         print($0)
-                        self.lblUnitTo.text = (selectedValue as! String)
+                        self.lblUnitTo.text = v
                         if isInvalidUnitPart() {self.updateUnitPartFrom()}
                     }
                 }, cancel: nil, origin: lblUnitTo)
             case 4 where swUnitTo.isOn:
                 ActionSheetStringPicker.show(withTitle: "Select Part(To)", rows: vm.arrParts, initialSelection: vm.USPARTTO - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
-                    self.vm.USPARTTO = selectedValue as! Int
+                    let v = selectedValue as! String
+                    self.vm.USPARTTO = v.toInt()!
                     MUserSetting.update(self.vm.selectedUSTextbook.ID!, uspartto: self.vm.USPARTTO) {
                         print($0)
-                        self.lblPartTo.text = (selectedValue as! String)
+                        self.lblPartTo.text = v
                         if isInvalidUnitPart() {self.updateUnitPartFrom()}
                     }
                 }, cancel: nil, origin: lblPartTo)

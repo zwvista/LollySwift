@@ -71,13 +71,13 @@ open class MUserSetting: Mappable {
         update(id, body: body, complete: complete)
     }
     
-    static func update(_ id: Int, usunitto: Int, complete: @escaping (String) -> Void) {
-        let body = "VALUE2=\(usunitto)"
+    static func update(_ id: Int, uspartfrom: Int, complete: @escaping (String) -> Void) {
+        let body = "VALUE2=\(uspartfrom)"
         update(id, body: body, complete: complete)
     }
-    
-    static func update(_ id: Int, uspartfrom: Int, complete: @escaping (String) -> Void) {
-        let body = "VALUE3=\(uspartfrom)"
+
+    static func update(_ id: Int, usunitto: Int, complete: @escaping (String) -> Void) {
+        let body = "VALUE3=\(usunitto)"
         update(id, body: body, complete: complete)
     }
     
