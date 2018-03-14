@@ -42,32 +42,43 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
         case 2:
             ActionSheetCustomPicker.show(withTitle: "Select Textbook", delegate: self, showCancelButton: true, origin: textbookCell, initialSelections: [vm.selectedTextbookIndex])
         default:
-            let m = vm.selectedTextbook
-            let isInvalidUnitPart = {m.USUNITFROM * 10 + m.USPARTFROM > m.USUNITTO * 10 + m.USPARTTO}
+            let isInvalidUnitPart = { self.vm.USUNITPARTFROM > self.vm.USUNITPARTTO }
             switch selectedIndexPath.row {
             case 0:
-                ActionSheetStringPicker.show(withTitle: "Select Unit(From)", rows: vm.arrUnits, initialSelection: m.USUNITFROM - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
-                    m.USUNITFROM_String = selectedValue as? String
-                    self.lblUnitFrom.text = (selectedValue as! String)
-                    if !self.swUnitTo.isOn || isInvalidUnitPart() {self.updateUnitPartTo()}
+                ActionSheetStringPicker.show(withTitle: "Select Unit(From)", rows: vm.arrUnits, initialSelection: vm.USUNITFROM - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
+                    self.vm.USUNITFROM = selectedValue as! Int
+                    MUserSetting.update(textbookid: self.vm.USTEXTBOOKID, usunitfrom: self.vm.USUNITFROM) { [unowned self] result in
+                        print(result)
+                        self.lblUnitFrom.text = (selectedValue as! String)
+                        if !self.swUnitTo.isOn || isInvalidUnitPart() {self.updateUnitPartTo()}
+                    }
                 }, cancel: nil, origin: lblUnitFrom)
             case 1:
-                ActionSheetStringPicker.show(withTitle: "Select Part(From)", rows: vm.arrParts, initialSelection: m.USPARTFROM - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
-                    m.USPARTFROM_String = selectedValue as? String
-                    self.lblPartFrom.text = (selectedValue as! String)
-                    if !self.swUnitTo.isOn || isInvalidUnitPart() {self.updateUnitPartTo()}
+                ActionSheetStringPicker.show(withTitle: "Select Part(From)", rows: vm.arrParts, initialSelection: vm.USPARTFROM - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
+                    self.vm.USPARTFROM = selectedValue as! Int
+                    MUserSetting.update(textbookid: self.vm.USTEXTBOOKID, uspartfrom: self.vm.USPARTFROM) { [unowned self] result in
+                        print(result)
+                        self.lblPartFrom.text = (selectedValue as! String)
+                        if !self.swUnitTo.isOn || isInvalidUnitPart() {self.updateUnitPartTo()}
+                    }
                 }, cancel: nil, origin: lblPartFrom)
             case 3 where swUnitTo.isOn:
-                ActionSheetStringPicker.show(withTitle: "Select Unit(To)", rows: vm.arrUnits, initialSelection: m.USUNITTO - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
-                    m.USUNITTO_String = selectedValue as? String
-                    self.lblUnitTo.text = (selectedValue as! String)
-                    if isInvalidUnitPart() {self.updateUnitPartFrom()}
+                ActionSheetStringPicker.show(withTitle: "Select Unit(To)", rows: vm.arrUnits, initialSelection: vm.USUNITTO - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
+                    self.vm.USUNITTO = selectedValue as! Int
+                    MUserSetting.update(textbookid: self.vm.USTEXTBOOKID, usunitto: self.vm.USUNITTO) { [unowned self] result in
+                        print(result)
+                        self.lblUnitTo.text = (selectedValue as! String)
+                        if isInvalidUnitPart() {self.updateUnitPartFrom()}
+                    }
                 }, cancel: nil, origin: lblUnitTo)
             case 4 where swUnitTo.isOn:
-                ActionSheetStringPicker.show(withTitle: "Select Part(To)", rows: vm.arrParts, initialSelection: m.USPARTTO - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
-                    m.USPARTTO_String = selectedValue as? String
-                    self.lblPartTo.text = (selectedValue as! String)
-                    if isInvalidUnitPart() {self.updateUnitPartFrom()}
+                ActionSheetStringPicker.show(withTitle: "Select Part(To)", rows: vm.arrParts, initialSelection: vm.USPARTTO - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
+                    self.vm.USPARTTO = selectedValue as! Int
+                    MUserSetting.update(textbookid: self.vm.USTEXTBOOKID, uspartto: self.vm.USPARTTO) { [unowned self] result in
+                        print(result)
+                        self.lblPartTo.text = (selectedValue as! String)
+                        if isInvalidUnitPart() {self.updateUnitPartFrom()}
+                    }
                 }, cancel: nil, origin: lblPartTo)
             default:
                 break
@@ -95,11 +106,11 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         switch selectedIndexPath.section {
         case 0:
-            return vm.arrLanguages[row].LANGNAME
+            return vm.arrLanguages[row].NAME
         case 1:
             return vm.arrDictionaries[row].DICTNAME
         case 2:
-            return vm.arrTextbooks[row].TEXTBOOKNAME
+            return vm.arrTextbooks[row].NAME
         default:
             return nil
         }
@@ -128,7 +139,7 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
     
     func updateLang() {
         let m = vm.selectedLang
-        langCell.textLabel!.text = m.LANGNAME
+        langCell.textLabel!.text = m.NAME
         updateDict()
         updateTextbook()
     }
@@ -141,29 +152,27 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
     
     func updateTextbook() {
         let m = vm.selectedTextbook
-        textbookCell.textLabel!.text = m.TEXTBOOKNAME
+        textbookCell.textLabel!.text = m.NAME
         textbookCell.detailTextLabel!.text = "\(m.UNITS!) Units"
-        lblUnitFrom.text = "\(m.USUNITFROM)"
-        lblUnitTo.text = "\(m.USUNITTO)"
-        lblPartFrom.text = vm.arrParts[m.USPARTFROM - 1]
-        lblPartTo.text = vm.arrParts[m.USPARTTO - 1]
-        swUnitTo.isOn = !m.isSingleUnitPart
+        lblUnitFrom.text = "\(vm.USUNITFROM)"
+        lblUnitTo.text = "\(vm.USUNITTO)"
+        lblPartFrom.text = vm.arrParts[vm.USPARTFROM - 1]
+        lblPartTo.text = vm.arrParts[vm.USPARTTO - 1]
+        swUnitTo.isOn = !vm.isSingleUnitPart
         swUnitToValueChanged(self)
     }
     
     func updateUnitPartFrom() {
-        let m = vm.selectedTextbook
-        m.USUNITFROM_String = m.USUNITTO_String
+        vm.USUNITFROM = vm.USUNITTO
         lblUnitFrom.text = lblUnitTo.text
-        m.USPARTFROM_String = m.USPARTTO_String
+        vm.USPARTFROM = vm.USPARTTO
         lblPartFrom.text = lblPartTo.text
     }
     
     func updateUnitPartTo() {
-        let m = vm.selectedTextbook
-        m.USUNITTO_String = m.USUNITFROM_String
+        vm.USUNITTO = vm.USUNITFROM
         lblUnitTo.text = lblUnitFrom.text
-        m.USPARTTO_String = m.USPARTFROM_String
+        vm.USPARTTO = vm.USPARTFROM
         lblPartTo.text = lblPartFrom.text
     }
     

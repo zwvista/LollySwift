@@ -38,32 +38,32 @@ open class MUnitPhrase: Mappable {
     }
 
     static func getDataByTextbook(_ textbookid: Int, unitPartFrom: Int, unitPartTo: Int, complete: @escaping ([MUnitPhrase]) -> Void) {
-        // let sql = "SELECT * FROM VUNITPHRASES WHERE TEXTBOOKID=? AND UNITPART BETWEEN ? AND ? ORDER BY UNITPART,SEQNUM"
+        // SQL: SELECT * FROM VUNITPHRASES WHERE TEXTBOOKID=? AND UNITPART BETWEEN ? AND ? ORDER BY UNITPART,SEQNUM
         let url = "\(RestApi.url)VUNITPHRASES?transform=1&filter[]=TEXTBOOKID,eq,\(textbookid)&filter[]=UNITPART,bt,\(unitPartFrom),\(unitPartTo)&order[]=UNITPART&order[]=SEQNUM"
         RestApi.getArray(url: url, keyPath: "VUNITPHRASES", complete: complete)
     }
     
     static func update(_ id: Int, seqnum: Int, complete: @escaping (String) -> Void) {
-        // let sql = "UPDATE UNITPHRASES SET SEQNUM=? WHERE ID=?"
+        // SQL: UPDATE UNITPHRASES SET SEQNUM=? WHERE ID=?
         let url = "\(RestApi.url)UNITPHRASES/\(id)"
         let body = "SEQNUM=\(seqnum)"
         RestApi.update(url: url, body: body, complete: complete)
     }
     
     static func update(_ id: Int, m: MUnitPhraseEdit, complete: @escaping (String) -> Void) {
-        // let sql = "UPDATE UNITPHRASES SET UNIT=?, PART=?, SEQNUM=?, PHRASE=?, TRANSLATION=? WHERE ID=?"
+        // SQL: UPDATE UNITPHRASES SET UNIT=?, PART=?, SEQNUM=?, PHRASE=?, TRANSLATION=? WHERE ID=?
         let url = "\(RestApi.url)UNITPHRASES/\(id)"
         RestApi.update(url: url, body: m.toJSONString(prettyPrint: false)!, complete: complete)
     }
     
     static func create(m: MUnitPhraseEdit, complete: @escaping (String) -> Void) {
-        // let sql = "INSERT INTO UNITPHRASES (ID, UNIT, PART, SEQNUM, PHRASE, TRANSLATION) VALUES (?,?,?,?,?,?)"
+        // SQL: INSERT INTO UNITPHRASES (ID, UNIT, PART, SEQNUM, PHRASE, TRANSLATION) VALUES (?,?,?,?,?,?)
         let url = "\(RestApi.url)UNITPHRASES"
         RestApi.create(url: url, body: m.toJSONString(prettyPrint: false)!, complete: complete)
     }
     
     static func delete(_ id: Int, complete: @escaping (String) -> Void) {
-        // let sql = "DELETE UNITPHRASES WHERE ID=?"
+        // SQL: DELETE UNITPHRASES WHERE ID=?
         let url = "\(RestApi.url)UNITPHRASES/\(id)"
         RestApi.delete(url: url, complete: complete)
     }

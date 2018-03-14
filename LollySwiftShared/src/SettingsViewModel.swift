@@ -9,6 +9,24 @@
 import Foundation
 
 open class SettingsViewModel: NSObject {
+    open var arrUserSettings = [MUserSetting]()
+    open private(set) var USLANDID = 0
+    open private(set) var USTEXTBOOKID = 0
+    open private(set) var USDICTID = 0
+    open var USUNITFROM = 0
+    open var USUNITTO = 0
+    open var USPARTFROM = 0
+    open var USPARTTO = 0
+    open var USUNITPARTFROM: Int {
+        return USUNITFROM * 10 + USPARTFROM
+    }
+    open var USUNITPARTTO: Int {
+        return USUNITTO * 10 + USPARTTO
+    }
+    open var isSingleUnitPart: Bool {
+        return USUNITPARTFROM == USUNITPARTTO
+    }
+
     open var arrLanguages = [MLanguage]()
     open private(set) var selectedLangIndex = 0
     open var selectedLang: MLanguage {
@@ -36,24 +54,32 @@ open class SettingsViewModel: NSObject {
     
     public init(complete: (() -> Void)? = nil) {
         super.init()
-        MLanguage.getData { [unowned self] in
+        MLanguage.getData {
             self.arrLanguages = $0
-            MUserSetting.getData { [unowned self] in
-                let m = $0[0]
-                self.setSelectedLangIndex(self.arrLanguages.index { String($0.ID!) == m.USLANGID }!, complete: complete)
+            MUserSetting.getData {
+                self.arrUserSettings = $0
+                self.USLANDID = self.arrUserSettings.filter { $0.KIND == 1 }.first!.VALUE1!.toInt()!
+                self.setSelectedLangIndex(self.arrLanguages.index { $0.ID! == self.USLANDID }!, complete: complete)
             }
         }
     }
     
-    open func setSelectedLangIndex(_ langid: Int, complete: (() -> Void)? = nil) {
-        selectedLangIndex = langid
-        let m = arrLanguages[langid]
-        MDictionary.getDataByLang(m.ID!) { [unowned self] in
+    open func setSelectedLangIndex(_ langindex: Int, complete: (() -> Void)? = nil) {
+        selectedLangIndex = langindex
+        MDictionary.getDataByLang(self.USLANDID) {
             self.arrDictionaries = $0
-            self.selectedDictIndex = self.arrDictionaries.index{ String($0.ID!) == m.USDICTID }!
-            MTextbook.getDataByLang(m.ID!) { [unowned self] in
+            let m = self.arrUserSettings.filter { $0.KIND == 2 && $0.ENTITYID == self.USLANDID }.first!
+            self.USTEXTBOOKID = m.VALUE1!.toInt()!
+            self.USDICTID = m.VALUE2!.toInt()!
+            self.selectedDictIndex = self.arrDictionaries.index { $0.ID! == self.USDICTID }!
+            MTextbook.getDataByLang(self.USLANDID) {
                 self.arrTextbooks = $0
-                self.selectedTextbookIndex = self.arrTextbooks.index { String($0.ID!) == m.USTEXTBOOKID }!
+                let m2 = self.arrUserSettings.filter { $0.KIND == 3 && $0.ENTITYID == self.USTEXTBOOKID }.first!
+                self.USUNITFROM = m2.VALUE1!.toInt()!
+                self.USPARTFROM = m2.VALUE2!.toInt()!
+                self.USUNITTO = m2.VALUE3!.toInt()!
+                self.USPARTTO = m2.VALUE4!.toInt()!
+                self.selectedTextbookIndex = self.arrTextbooks.index { $0.ID! == self.USTEXTBOOKID }!
                 complete?()
             }
         }

@@ -15,9 +15,8 @@ open class WordsUnitViewModel: NSObject {
     
     public init(settings: SettingsViewModel, complete: (() -> Void)? = nil) {
         self.settings = settings
-        let m = settings.arrTextbooks[settings.selectedTextbookIndex]
         super.init()
-        MUnitWord.getDataByTextbook(m.ID!, unitPartFrom: m.USUNITFROM * 10 + m.USPARTFROM, unitPartTo: m.USUNITTO * 10 + m.USPARTTO) { [unowned self] in self.arrWords = $0; complete?() }
+        MUnitWord.getDataByTextbook(settings.USTEXTBOOKID, unitPartFrom: settings.USUNITPARTFROM, unitPartTo: settings.USUNITPARTTO) { [unowned self] in self.arrWords = $0; complete?() }
     }
     
     open func filterWordsForSearchText(_ searchText: String, scope: String) {

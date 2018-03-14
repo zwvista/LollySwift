@@ -26,7 +26,7 @@ open class MLangPhrase: Mappable {
     }
     
     static func getDataByLang(_ langid: Int, complete: @escaping ([MLangPhrase]) -> Void) {
-        // let sql = "SELECT PHRASE, TRANSLATION FROM LANGPHRASES WHERE LANGID = ?"
+        // SQL: SELECT PHRASE, TRANSLATION FROM LANGPHRASES WHERE LANGID = ?
         let url = "\(RestApi.url)LANGPHRASES?transform=1&&filter=LANGID,eq,\(langid)"
         RestApi.getArray(url: url, keyPath: "LANGPHRASES", complete: complete)
     }

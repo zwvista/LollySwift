@@ -38,7 +38,7 @@ class WordsUnitEditViewController: UITableViewController, LollyProtocol {
     }
     
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        return vmSettings.selectedTextbook.isSingleUnitPart
+        return vmSettings.isSingleUnitPart
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
@@ -70,8 +70,8 @@ class WordsUnitEditViewController: UITableViewController, LollyProtocol {
         } else {
             let o = MUnitWord()
             let maxElem = vm.arrWords.max{ (o1, o2) in (o1.UNIT!, o1.PART!, o1.SEQNUM!) < (o2.UNIT!, o2.PART!, o2.SEQNUM!) }
-            o.UNIT = maxElem?.UNIT ?? vmSettings.selectedTextbook.USUNITTO
-            o.PART = maxElem?.PART ?? vmSettings.selectedTextbook.USPARTTO
+            o.UNIT = maxElem?.UNIT ?? vmSettings.USUNITTO
+            o.PART = maxElem?.PART ?? vmSettings.USPARTTO
             o.SEQNUM = (maxElem?.SEQNUM ?? 0) + 1
             controller.mWord = o
         }
