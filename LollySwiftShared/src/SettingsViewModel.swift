@@ -10,13 +10,46 @@ import Foundation
 
 open class SettingsViewModel: NSObject {
     open var arrUserSettings = [MUserSetting]()
-    open private(set) var USLANDID = 0
-    open private(set) var USTEXTBOOKID = 0
-    open private(set) var USDICTID = 0
-    open var USUNITFROM = 0
-    open var USUNITTO = 0
-    open var USPARTFROM = 0
-    open var USPARTTO = 0
+    private var selectedUSUserIndex = 0
+    open var selectedUSUser: MUserSetting {
+        return arrUserSettings[selectedUSUserIndex]
+    }
+    open var USLANDID: Int {
+        get { return selectedUSUser.VALUE1!.toInt()! }
+        set { selectedUSUser.VALUE1 = String(newValue) }
+    }
+    private var selectedUSLangIndex = 0
+    open var selectedUSLang: MUserSetting {
+        return arrUserSettings[selectedUSLangIndex]
+    }
+    open var USTEXTBOOKID: Int {
+        get { return selectedUSLang.VALUE1!.toInt()! }
+        set { selectedUSLang.VALUE1 = String(newValue) }
+    }
+    open var USDICTID: Int {
+        get { return selectedUSLang.VALUE2!.toInt()! }
+        set { selectedUSLang.VALUE2 = String(newValue) }
+    }
+    private var selectedUSTextbookIndex = 0
+    open var selectedUSTextbook: MUserSetting {
+        return arrUserSettings[selectedUSTextbookIndex]
+    }
+    open var USUNITFROM: Int {
+        get { return selectedUSTextbook.VALUE1!.toInt()! }
+        set { selectedUSTextbook.VALUE1 = String(newValue) }
+    }
+    open var USPARTFROM: Int {
+        get { return selectedUSTextbook.VALUE2!.toInt()! }
+        set { selectedUSTextbook.VALUE2 = String(newValue) }
+    }
+    open var USUNITTO: Int {
+        get { return selectedUSTextbook.VALUE3!.toInt()! }
+        set { selectedUSTextbook.VALUE3 = String(newValue) }
+    }
+    open var USPARTTO: Int {
+        get { return selectedUSTextbook.VALUE4!.toInt()! }
+        set { selectedUSTextbook.VALUE4 = String(newValue) }
+    }
     open var USUNITPARTFROM: Int {
         return USUNITFROM * 10 + USPARTFROM
     }
@@ -34,7 +67,11 @@ open class SettingsViewModel: NSObject {
     }
     
     open var arrDictionaries = [MDictionary]()
-    open var selectedDictIndex = 0
+    open var selectedDictIndex = 0 {
+        didSet {
+            setSelectedDictIndex()
+        }
+    }
     open var selectedDict: MDictionary {
         return arrDictionaries[selectedDictIndex]
     }
@@ -58,7 +95,7 @@ open class SettingsViewModel: NSObject {
             self.arrLanguages = $0
             MUserSetting.getData {
                 self.arrUserSettings = $0
-                self.USLANDID = self.arrUserSettings.filter { $0.KIND == 1 }.first!.VALUE1!.toInt()!
+                self.selectedUSUserIndex = self.arrUserSettings.index { $0.KIND == 1 }!
                 self.setSelectedLangIndex(self.arrLanguages.index { $0.ID! == self.USLANDID }!, complete: complete)
             }
         }
@@ -66,19 +103,14 @@ open class SettingsViewModel: NSObject {
     
     open func setSelectedLangIndex(_ langindex: Int, complete: (() -> Void)? = nil) {
         selectedLangIndex = langindex
+        USLANDID = selectedLang.ID!
+        selectedUSLangIndex = arrUserSettings.index { $0.KIND == 2 && $0.ENTITYID == self.USLANDID }!
+        selectedUSTextbookIndex = arrUserSettings.index { $0.KIND == 3 && $0.ENTITYID == self.USTEXTBOOKID }!
         MDictionary.getDataByLang(self.USLANDID) {
             self.arrDictionaries = $0
-            let m = self.arrUserSettings.filter { $0.KIND == 2 && $0.ENTITYID == self.USLANDID }.first!
-            self.USTEXTBOOKID = m.VALUE1!.toInt()!
-            self.USDICTID = m.VALUE2!.toInt()!
             self.selectedDictIndex = self.arrDictionaries.index { $0.ID! == self.USDICTID }!
             MTextbook.getDataByLang(self.USLANDID) {
                 self.arrTextbooks = $0
-                let m2 = self.arrUserSettings.filter { $0.KIND == 3 && $0.ENTITYID == self.USTEXTBOOKID }.first!
-                self.USUNITFROM = m2.VALUE1!.toInt()!
-                self.USPARTFROM = m2.VALUE2!.toInt()!
-                self.USUNITTO = m2.VALUE3!.toInt()!
-                self.USPARTTO = m2.VALUE4!.toInt()!
                 self.selectedTextbookIndex = self.arrTextbooks.index { $0.ID! == self.USTEXTBOOKID }!
                 complete?()
             }
@@ -86,7 +118,12 @@ open class SettingsViewModel: NSObject {
     }
     
     private func setSelectedTextbookIndex() {
+        USTEXTBOOKID = selectedTextbook.ID!
         arrUnits = (1...selectedTextbook.UNITS!).map{ String($0) }
         arrParts = (selectedTextbook.PARTS?.components(separatedBy: " "))!
+    }
+    
+    private func setSelectedDictIndex() {
+        USDICTID = selectedDict.ID!
     }
 }

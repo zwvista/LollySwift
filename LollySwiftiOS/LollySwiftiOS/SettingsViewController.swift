@@ -47,8 +47,8 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
             case 0:
                 ActionSheetStringPicker.show(withTitle: "Select Unit(From)", rows: vm.arrUnits, initialSelection: vm.USUNITFROM - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
                     self.vm.USUNITFROM = selectedValue as! Int
-                    MUserSetting.update(textbookid: self.vm.USTEXTBOOKID, usunitfrom: self.vm.USUNITFROM) { [unowned self] result in
-                        print(result)
+                    MUserSetting.update(self.vm.selectedUSTextbook.ID!, usunitfrom: self.vm.USUNITFROM) {
+                        print($0)
                         self.lblUnitFrom.text = (selectedValue as! String)
                         if !self.swUnitTo.isOn || isInvalidUnitPart() {self.updateUnitPartTo()}
                     }
@@ -56,8 +56,8 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
             case 1:
                 ActionSheetStringPicker.show(withTitle: "Select Part(From)", rows: vm.arrParts, initialSelection: vm.USPARTFROM - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
                     self.vm.USPARTFROM = selectedValue as! Int
-                    MUserSetting.update(textbookid: self.vm.USTEXTBOOKID, uspartfrom: self.vm.USPARTFROM) { [unowned self] result in
-                        print(result)
+                    MUserSetting.update(self.vm.selectedUSTextbook.ID!, uspartfrom: self.vm.USPARTFROM) {
+                        print($0)
                         self.lblPartFrom.text = (selectedValue as! String)
                         if !self.swUnitTo.isOn || isInvalidUnitPart() {self.updateUnitPartTo()}
                     }
@@ -65,8 +65,8 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
             case 3 where swUnitTo.isOn:
                 ActionSheetStringPicker.show(withTitle: "Select Unit(To)", rows: vm.arrUnits, initialSelection: vm.USUNITTO - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
                     self.vm.USUNITTO = selectedValue as! Int
-                    MUserSetting.update(textbookid: self.vm.USTEXTBOOKID, usunitto: self.vm.USUNITTO) { [unowned self] result in
-                        print(result)
+                    MUserSetting.update(self.vm.selectedUSTextbook.ID!, usunitto: self.vm.USUNITTO) {
+                        print($0)
                         self.lblUnitTo.text = (selectedValue as! String)
                         if isInvalidUnitPart() {self.updateUnitPartFrom()}
                     }
@@ -74,8 +74,8 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
             case 4 where swUnitTo.isOn:
                 ActionSheetStringPicker.show(withTitle: "Select Part(To)", rows: vm.arrParts, initialSelection: vm.USPARTTO - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
                     self.vm.USPARTTO = selectedValue as! Int
-                    MUserSetting.update(textbookid: self.vm.USTEXTBOOKID, uspartto: self.vm.USPARTTO) { [unowned self] result in
-                        print(result)
+                    MUserSetting.update(self.vm.selectedUSTextbook.ID!, uspartto: self.vm.USPARTTO) {
+                        print($0)
                         self.lblPartTo.text = (selectedValue as! String)
                         if isInvalidUnitPart() {self.updateUnitPartFrom()}
                     }
@@ -123,15 +123,24 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
     func actionSheetPickerDidSucceed(_ actionSheetPicker: AbstractActionSheetPicker!, origin: Any!) {
         switch selectedIndexPath.section {
         case 0 where selectedRow != vm.selectedLangIndex:
-            vm.setSelectedLangIndex(selectedRow) { [unowned self] in
-                self.updateLang()
+            vm.setSelectedLangIndex(selectedRow) {
+                MUserSetting.update(self.vm.selectedUSUser.ID!, langid: self.vm.USLANDID) {
+                    print($0)
+                    self.updateLang()
+                }
             }
         case 1 where selectedRow != vm.selectedDictIndex:
             vm.selectedDictIndex = selectedRow
-            updateDict()
+            MUserSetting.update(vm.selectedUSLang.ID!, dictid: vm.USDICTID) {
+                print($0)
+                self.updateDict()
+            }
         case 2 where selectedRow != vm.selectedTextbookIndex:
             vm.selectedTextbookIndex = selectedRow
-            updateTextbook()
+            MUserSetting.update(vm.selectedUSLang.ID!, textbookid: vm.USTEXTBOOKID) {
+                print($0)
+                self.updateTextbook()
+            }
         default:
             break
         }
@@ -163,17 +172,29 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
     }
     
     func updateUnitPartFrom() {
-        vm.USUNITFROM = vm.USUNITTO
-        lblUnitFrom.text = lblUnitTo.text
-        vm.USPARTFROM = vm.USPARTTO
-        lblPartFrom.text = lblPartTo.text
+        MUserSetting.update(vm.selectedUSTextbook.ID!, usunitfrom: vm.USUNITTO) {
+            print($0)
+            self.vm.USUNITFROM = self.vm.USUNITTO
+            self.lblUnitFrom.text = self.lblUnitTo.text
+        }
+        MUserSetting.update(vm.selectedUSTextbook.ID!, uspartfrom: vm.USPARTTO) {
+            print($0)
+            self.vm.USPARTFROM = self.vm.USPARTTO
+            self.lblPartFrom.text = self.lblPartTo.text
+        }
     }
     
     func updateUnitPartTo() {
-        vm.USUNITTO = vm.USUNITFROM
-        lblUnitTo.text = lblUnitFrom.text
-        vm.USPARTTO = vm.USPARTFROM
-        lblPartTo.text = lblPartFrom.text
+        MUserSetting.update(vm.selectedUSTextbook.ID!, usunitto: vm.USUNITFROM) {
+            print($0)
+            self.vm.USUNITTO = self.vm.USUNITFROM
+            self.lblUnitTo.text = self.lblUnitFrom.text
+        }
+        MUserSetting.update(vm.selectedUSTextbook.ID!, uspartto: vm.USPARTFROM) {
+            print($0)
+            self.vm.USPARTTO = self.vm.USPARTFROM
+            self.lblPartTo.text = self.lblPartFrom.text
+        }
     }
     
     @IBAction func swUnitToValueChanged(_ sender: AnyObject) {
