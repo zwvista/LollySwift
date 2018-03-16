@@ -11,9 +11,10 @@ import Foundation
 import ObjectMapper
 
 open class MTextbookWord: Mappable {
-    open var ID: Int?
+    open var TEXTBOOKID: Int?
     open var LANGID: Int?
     open var TEXTBOOKNAME: String?
+    open var UNITWORDID: Int?
     open var UNIT: Int?
     open var PART: Int?
     open var SEQNUM: Int?
@@ -24,9 +25,10 @@ open class MTextbookWord: Mappable {
     }
     
     public func mapping(map: Map) {
-        ID <- map["ID"]
+        TEXTBOOKID <- map["TEXTBOOKID"]
         LANGID <- map["LANGID"]
         TEXTBOOKNAME <- map["TEXTBOOKNAME"]
+        UNITWORDID <- map["UNITWORDID"]
         UNIT <- map["UNIT"]
         PART <- map["PART"]
         SEQNUM <- map["SEQNUM"]
