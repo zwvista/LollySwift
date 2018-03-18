@@ -47,7 +47,7 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
             switch selectedIndexPath.row {
             case 0:
                 ActionSheetStringPicker.show(withTitle: "Select Unit(From)", rows: vm.arrUnits, initialSelection: vm.USUNITFROM - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
-                    let v = (selectedValue as! String).toInt()!
+                    let v = selectedIndex + 1
                     guard self.vm.USUNITFROM != v else {return}
                     self.vm.USUNITFROM = v
                     self.vm.updateUnitFrom {
@@ -57,7 +57,7 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
                 }, cancel: nil, origin: lblUnitFrom)
             case 1:
                 ActionSheetStringPicker.show(withTitle: "Select Part(From)", rows: vm.arrParts, initialSelection: vm.USPARTFROM - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
-                    let v = (selectedValue as! String).toInt()!
+                    let v = selectedIndex + 1
                     guard self.vm.USPARTFROM != v else {return}
                     self.vm.USPARTFROM = v
                     self.vm.updatePartFrom {
@@ -67,7 +67,7 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
                 }, cancel: nil, origin: lblPartFrom)
             case 3 where swUnitTo.isOn:
                 ActionSheetStringPicker.show(withTitle: "Select Unit(To)", rows: vm.arrUnits, initialSelection: vm.USUNITTO - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
-                    let v = (selectedValue as! String).toInt()!
+                    let v = selectedIndex + 1
                     guard self.vm.USUNITTO != v else {return}
                     self.vm.USUNITTO = v
                     self.vm.updateUnitTo {
@@ -77,7 +77,7 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
                 }, cancel: nil, origin: lblUnitTo)
             case 4 where swUnitTo.isOn:
                 ActionSheetStringPicker.show(withTitle: "Select Part(To)", rows: vm.arrParts, initialSelection: vm.USPARTTO - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
-                    let v = (selectedValue as! String).toInt()!
+                    let v = selectedIndex + 1
                     guard self.vm.USPARTTO != v else {return}
                     self.vm.USPARTTO = v
                     self.vm.updatePartTo {
@@ -128,20 +128,17 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
     func actionSheetPickerDidSucceed(_ actionSheetPicker: AbstractActionSheetPicker!, origin: Any!) {
         switch selectedIndexPath.section {
         case 0 where selectedRow != vm.selectedLangIndex:
-            guard vm.selectedLangIndex != selectedRow else {break}
             vm.setSelectedLangIndex(selectedRow) {
                 self.vm.updateLang {
                     self.updateLang()
                 }
             }
         case 1 where selectedRow != vm.selectedDictIndex:
-            guard vm.selectedDictIndex != selectedRow else {break}
             vm.selectedDictIndex = selectedRow
             self.vm.updateDict {
                 self.updateDict()
             }
         case 2 where selectedRow != vm.selectedTextbookIndex:
-            guard vm.selectedTextbookIndex != selectedRow else {break}
             vm.selectedTextbookIndex = selectedRow
             self.vm.updateTextbook {
                 self.updateTextbook()
