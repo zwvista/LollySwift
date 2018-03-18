@@ -38,7 +38,7 @@ open class MTextbookWord: Mappable {
 
     static func getDataByLang(_ langid: Int, complete: @escaping ([MTextbookWord]) -> Void) {
         // SQL: SELECT * FROM VTEXTBOOKWORDS WHERE LANGID = ?
-        let url = "\(RestApi.url)VTEXTBOOKWORDS?transform=1&&filter=LANGID,eq,\(langid)"
+        let url = "\(RestApi.url)VTEXTBOOKWORDS?transform=1&filter=LANGID,eq,\(langid)"
         RestApi.getArray(url: url, keyPath: "VTEXTBOOKWORDS", complete: complete)
     }
 }

@@ -13,7 +13,7 @@ import ObjectMapper
 open class MTextbook: Mappable {
     open var ID: Int?
     open var LANGID: Int?
-    open var NAME: String?
+    open var TEXTBOOKNAME: String?
     open var UNITS: Int?
     open var PARTS: String?
 
@@ -23,14 +23,14 @@ open class MTextbook: Mappable {
     public func mapping(map: Map) {
         ID <- map["ID"]
         LANGID <- map["LANGID"]
-        NAME <- map["NAME"]
+        TEXTBOOKNAME <- map["NAME"]
         UNITS <- map["UNITS"]
         PARTS <- map["PARTS"]
     }
     
     static func getDataByLang(_ langID: Int, complete: @escaping ([MTextbook]) -> Void) {
         // SQL: SELECT * FROM TEXTBOOKS WHERE LANGID = ?
-        let url = "\(RestApi.url)TEXTBOOKS?transform=1&&filter=LANGID,eq,\(langID)"
+        let url = "\(RestApi.url)TEXTBOOKS?transform=1&filter=LANGID,eq,\(langID)"
         RestApi.getArray(url: url, keyPath: "TEXTBOOKS", complete: complete)
     }
 }

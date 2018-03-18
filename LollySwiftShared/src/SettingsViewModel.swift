@@ -9,6 +9,9 @@
 import Foundation
 
 open class SettingsViewModel: NSObject {
+    
+    let userid = 1
+
     open var arrUserSettings = [MUserSetting]()
     private var selectedUSUserIndex = 0
     open var selectedUSUser: MUserSetting {
@@ -93,7 +96,7 @@ open class SettingsViewModel: NSObject {
         super.init()
         MLanguage.getData {
             self.arrLanguages = $0
-            MUserSetting.getData {
+            MUserSetting.getData(userid: self.userid) {
                 self.arrUserSettings = $0
                 self.selectedUSUserIndex = self.arrUserSettings.index { $0.KIND == 1 }!
                 self.setSelectedLangIndex(self.arrLanguages.index { $0.ID! == self.USLANDID }!, complete: complete)
@@ -125,5 +128,54 @@ open class SettingsViewModel: NSObject {
     
     private func setSelectedDictIndex() {
         USDICTID = selectedDict.ID!
+    }
+    
+    func updateLang(complete: (() -> Void)? = nil) {
+        MUserSetting.update(selectedUSUser.ID!, langid: USLANDID) {
+            print($0)
+            complete?()
+        }
+    }
+    
+    func updateDict(complete: (() -> Void)? = nil) {
+        MUserSetting.update(selectedUSLang.ID!, dictid: USDICTID) {
+            print($0)
+            complete?()
+        }
+    }
+    
+    func updateTextbook(complete: (() -> Void)? = nil) {
+        MUserSetting.update(selectedUSLang.ID!, textbookid: USTEXTBOOKID) {
+            print($0)
+            complete?()
+        }
+    }
+    
+    func updateUnitFrom(complete: (() -> Void)? = nil) {
+        MUserSetting.update(selectedUSTextbook.ID!, usunitfrom: USUNITFROM) {
+            print($0)
+            complete?()
+        }
+    }
+    
+    func updatePartFrom(complete: (() -> Void)? = nil) {
+        MUserSetting.update(selectedUSTextbook.ID!, uspartfrom: USPARTFROM) {
+            print($0)
+            complete?()
+        }
+    }
+    
+    func updateUnitTo(complete: (() -> Void)? = nil) {
+        MUserSetting.update(selectedUSTextbook.ID!, usunitto: USUNITTO) {
+            print($0)
+            complete?()
+        }
+    }
+    
+    func updatePartTo(complete: (() -> Void)? = nil) {
+        MUserSetting.update(selectedUSTextbook.ID!, uspartto: USPARTTO) {
+            print($0)
+            complete?()
+        }
     }
 }

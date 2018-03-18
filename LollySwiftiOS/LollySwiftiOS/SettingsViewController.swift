@@ -110,11 +110,11 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         switch selectedIndexPath.section {
         case 0:
-            return vm.arrLanguages[row].NAME
+            return vm.arrLanguages[row].LANGNAME
         case 1:
             return vm.arrDictionaries[row].DICTNAME
         case 2:
-            return vm.arrTextbooks[row].NAME
+            return vm.arrTextbooks[row].TEXTBOOKNAME
         default:
             return nil
         }
@@ -128,21 +128,18 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
         switch selectedIndexPath.section {
         case 0 where selectedRow != vm.selectedLangIndex:
             vm.setSelectedLangIndex(selectedRow) {
-                MUserSetting.update(self.vm.selectedUSUser.ID!, langid: self.vm.USLANDID) {
-                    print($0)
+                self.vm.updateLang {
                     self.updateLang()
                 }
             }
         case 1 where selectedRow != vm.selectedDictIndex:
             vm.selectedDictIndex = selectedRow
-            MUserSetting.update(vm.selectedUSLang.ID!, dictid: vm.USDICTID) {
-                print($0)
+            self.vm.updateDict {
                 self.updateDict()
             }
         case 2 where selectedRow != vm.selectedTextbookIndex:
             vm.selectedTextbookIndex = selectedRow
-            MUserSetting.update(vm.selectedUSLang.ID!, textbookid: vm.USTEXTBOOKID) {
-                print($0)
+            self.vm.updateTextbook {
                 self.updateTextbook()
             }
         default:
@@ -152,7 +149,7 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
     
     func updateLang() {
         let m = vm.selectedLang
-        langCell.textLabel!.text = m.NAME
+        langCell.textLabel!.text = m.LANGNAME
         updateDict()
         updateTextbook()
     }
@@ -165,7 +162,7 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
     
     func updateTextbook() {
         let m = vm.selectedTextbook
-        textbookCell.textLabel!.text = m.NAME
+        textbookCell.textLabel!.text = m.TEXTBOOKNAME
         textbookCell.detailTextLabel!.text = "\(m.UNITS!) Units"
         lblUnitFrom.text = "\(vm.USUNITFROM)"
         lblUnitTo.text = "\(vm.USUNITTO)"
@@ -176,27 +173,23 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
     }
     
     func updateUnitPartFrom() {
-        MUserSetting.update(vm.selectedUSTextbook.ID!, usunitfrom: vm.USUNITTO) {
-            print($0)
-            self.vm.USUNITFROM = self.vm.USUNITTO
+        vm.USUNITFROM = vm.USUNITTO
+        vm.updateUnitFrom {
             self.lblUnitFrom.text = self.lblUnitTo.text
         }
-        MUserSetting.update(vm.selectedUSTextbook.ID!, uspartfrom: vm.USPARTTO) {
-            print($0)
-            self.vm.USPARTFROM = self.vm.USPARTTO
+        vm.USPARTFROM = vm.USPARTTO
+        vm.updatePartFrom {
             self.lblPartFrom.text = self.lblPartTo.text
         }
     }
     
     func updateUnitPartTo() {
-        MUserSetting.update(vm.selectedUSTextbook.ID!, usunitto: vm.USUNITFROM) {
-            print($0)
-            self.vm.USUNITTO = self.vm.USUNITFROM
+        vm.USUNITTO = vm.USUNITFROM
+        vm.updateUnitTo {
             self.lblUnitTo.text = self.lblUnitFrom.text
         }
-        MUserSetting.update(vm.selectedUSTextbook.ID!, uspartto: vm.USPARTFROM) {
-            print($0)
-            self.vm.USPARTTO = self.vm.USPARTFROM
+        vm.USPARTTO = vm.USPARTFROM
+        vm.updatePartTo {
             self.lblPartTo.text = self.lblPartFrom.text
         }
     }

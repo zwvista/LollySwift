@@ -57,7 +57,7 @@ open class MUnitWord: Mappable {
     }
     
     static func create(m: MUnitWordEdit, complete: @escaping (String) -> Void) {
-        // SQL: INSERT INTO UNITWORDS (ID, UNIT, PART, SEQNUM, WORD, NOTE) VALUES (?,?,?,?,?,?)
+        // SQL: INSERT INTO UNITWORDS (UNIT, PART, SEQNUM, WORD, NOTE) VALUES (?,?,?,?,?)
         let url = "\(RestApi.url)UNITWORDS"
         RestApi.create(url: url, body: m.toJSONString(prettyPrint: false)!, complete: complete)
     }

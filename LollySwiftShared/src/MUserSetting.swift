@@ -19,8 +19,6 @@ open class MUserSetting: Mappable {
     open var VALUE2: String?
     open var VALUE3: String?
     open var VALUE4: String?
-    
-    static let userid = 1
 
     required public init?(map: Map){
     }
@@ -36,7 +34,7 @@ open class MUserSetting: Mappable {
         VALUE4 <- map["VALUE4"]
     }
 
-    static func getData(complete: @escaping ([MUserSetting]) -> Void) {
+    static func getData(userid: Int, complete: @escaping ([MUserSetting]) -> Void) {
         // SQL: SELECT * FROM USERSETTINGS WHERE USERID=?
         let url = "\(RestApi.url)USERSETTINGS?transform=1&filter=USERID,eq,\(userid)"
         RestApi.getArray(url: url, keyPath: "USERSETTINGS", complete: complete)
