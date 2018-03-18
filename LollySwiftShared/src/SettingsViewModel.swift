@@ -14,7 +14,7 @@ open class SettingsViewModel: NSObject {
 
     open var arrUserSettings = [MUserSetting]()
     private var selectedUSUserIndex = 0
-    open var selectedUSUser: MUserSetting {
+    private var selectedUSUser: MUserSetting {
         return arrUserSettings[selectedUSUserIndex]
     }
     open var USLANDID: Int {
@@ -22,7 +22,7 @@ open class SettingsViewModel: NSObject {
         set { selectedUSUser.VALUE1 = String(newValue) }
     }
     private var selectedUSLangIndex = 0
-    open var selectedUSLang: MUserSetting {
+    private var selectedUSLang: MUserSetting {
         return arrUserSettings[selectedUSLangIndex]
     }
     open var USTEXTBOOKID: Int {
@@ -34,7 +34,7 @@ open class SettingsViewModel: NSObject {
         set { selectedUSLang.VALUE2 = String(newValue) }
     }
     private var selectedUSTextbookIndex = 0
-    open var selectedUSTextbook: MUserSetting {
+    private var selectedUSTextbook: MUserSetting {
         return arrUserSettings[selectedUSTextbookIndex]
     }
     open var USUNITFROM: Int {
@@ -61,6 +61,9 @@ open class SettingsViewModel: NSObject {
     }
     open var isSingleUnitPart: Bool {
         return USUNITPARTFROM == USUNITPARTTO
+    }
+    open var isInvalidUnitPart: Bool {
+        return USUNITPARTFROM > USUNITPARTTO
     }
 
     open var arrLanguages = [MLanguage]()
@@ -92,8 +95,7 @@ open class SettingsViewModel: NSObject {
     open var arrUnits = [String]()
     open var arrParts = [String]()
     
-    public init(complete: (() -> Void)? = nil) {
-        super.init()
+    open func getData(complete: (() -> Void)? = nil) {
         MLanguage.getData {
             self.arrLanguages = $0
             MUserSetting.getData(userid: self.userid) {
