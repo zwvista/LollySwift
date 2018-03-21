@@ -780,10 +780,9 @@
                                     </menu>
                                 </popUpButtonCell>
                                 <connections>
-                                    <action selector="TextbookSelected:" target="HfO-r7-QMx" id="IFh-yp-XUC"/>
-                                    <binding destination="PzR-zm-jg5" name="content" keyPath="arrangedObjects" id="JIQ-qi-6L5"/>
-                                    <binding destination="PzR-zm-jg5" name="contentValues" keyPath="arrangedObjects.TEXTBOOKNAME" previousBinding="JIQ-qi-6L5" id="Qbq-2Q-bhv"/>
-                                    <binding destination="HfO-r7-QMx" name="selectedIndex" keyPath="vm.selectedTextbookIndex" previousBinding="Qbq-2Q-bhv" id="mRt-gA-PoL"/>
+                                    <action selector="textbookSelected:" target="HfO-r7-QMx" id="Efv-sg-exe"/>
+                                    <binding destination="PzR-zm-jg5" name="contentValues" keyPath="arrangedObjects.TEXTBOOKNAME" id="lwX-tq-xFc"/>
+                                    <binding destination="HfO-r7-QMx" name="selectedIndex" keyPath="vm.selectedTextbookIndex" id="IbH-Rj-4BY"/>
                                 </connections>
                             </popUpButton>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8FM-8h-XQF">
@@ -813,6 +812,7 @@
                                 <connections>
                                     <action selector="TextbookSelected:" target="HfO-r7-QMx" id="Y5l-fg-RzL"/>
                                     <binding destination="7EM-l7-CJV" name="content" keyPath="arrangedObjects" id="OJ1-Jn-zmx"/>
+                                    <binding destination="7EM-l7-CJV" name="contentValues" keyPath="arrangedObjects" previousBinding="OJ1-Jn-zmx" id="y9H-CI-3Yg"/>
                                 </connections>
                             </popUpButton>
                             <popUpButton horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PW2-rx-UfY">
@@ -873,6 +873,7 @@
                                 <connections>
                                     <action selector="TextbookSelected:" target="HfO-r7-QMx" id="H7c-V2-Vcy"/>
                                     <binding destination="7EM-l7-CJV" name="content" keyPath="arrangedObjects" id="nPp-dG-P8d"/>
+                                    <binding destination="7EM-l7-CJV" name="contentValues" keyPath="arrangedObjects" previousBinding="nPp-dG-P8d" id="Qt4-rf-e32"/>
                                 </connections>
                             </popUpButton>
                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Xjt-G8-0bL">
@@ -963,7 +964,7 @@
                             <constraint firstAttribute="trailing" secondItem="Xjt-G8-0bL" secondAttribute="trailing" constant="39" id="NsW-vp-532"/>
                             <constraint firstItem="Xjt-G8-0bL" firstAttribute="trailing" secondItem="PW2-rx-UfY" secondAttribute="trailing" id="QA4-Iz-cl2"/>
                             <constraint firstItem="6If-OE-53N" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="RQX-rZ-9Ej" secondAttribute="leading" id="UWF-cH-aBv"/>
-                            <constraint firstItem="NLa-HM-eg1" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="b7U-Wa-ylD" secondAttribute="trailing" symbolic="YES" id="VtL-Zk-K6Z"/>
+                            <constraint firstItem="NLa-HM-eg1" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="b7U-Wa-ylD" secondAttribute="trailing" constant="8" symbolic="YES" id="VtL-Zk-K6Z"/>
                             <constraint firstAttribute="trailing" secondItem="RQX-rZ-9Ej" secondAttribute="trailing" constant="404" id="WoR-2m-RhR"/>
                             <constraint firstItem="6If-OE-53N" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Kfo-kM-SO0" secondAttribute="leading" id="YoF-LC-apQ"/>
                             <constraint firstItem="fnN-We-eae" firstAttribute="baseline" secondItem="Xjt-G8-0bL" secondAttribute="baseline" id="Z8C-6d-1SS"/>
@@ -986,25 +987,21 @@
                             <constraint firstAttribute="trailing" secondItem="NLa-HM-eg1" secondAttribute="trailing" constant="190" id="xdB-oA-YN1"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="TextbooksController" destination="PzR-zm-jg5" id="ud1-Ws-3QT"/>
-                        <outlet property="dictionariesController" destination="EkI-9N-SJp" id="UUM-3W-W3z"/>
-                    </connections>
                 </viewController>
                 <customObject id="OC9-Mn-GX9" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <arrayController id="Jlp-Py-Ji5" userLabel="Languages Controller">
                     <connections>
-                        <binding destination="HfO-r7-QMx" name="contentArray" keyPath="vm.arrLanguages" id="Nel-jD-XyP"/>
+                        <binding destination="HfO-r7-QMx" name="contentArray" keyPath="vm.arrLanguages" id="y9R-AI-LGa"/>
                     </connections>
                 </arrayController>
                 <arrayController id="EkI-9N-SJp" userLabel="Dictionaries Controller">
                     <connections>
-                        <binding destination="HfO-r7-QMx" name="contentArray" keyPath="vm.arrDictionaries" id="dMF-eH-YUp"/>
+                        <binding destination="HfO-r7-QMx" name="contentArray" keyPath="vm.arrDictionaries" id="svW-9c-Nhg"/>
                     </connections>
                 </arrayController>
                 <arrayController id="PzR-zm-jg5" userLabel="Textbooks Controller">
                     <connections>
-                        <binding destination="HfO-r7-QMx" name="contentArray" keyPath="vm.arrTextbooks" id="gW1-uM-x6B"/>
+                        <binding destination="HfO-r7-QMx" name="contentArray" keyPath="vm.arrTextbooks" id="ICc-hg-j7p"/>
                     </connections>
                 </arrayController>
                 <arrayController id="7EM-l7-CJV" userLabel="Units Controller">

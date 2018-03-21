@@ -10,7 +10,7 @@ import Foundation
 
 import ObjectMapper
 
-open class MUnitPhrase: Mappable {
+open class MUnitPhrase: NSObject, Mappable {
     open var ID: Int? = 0
     open var TEXTBOOKID: Int?
     open var UNIT: Int?
@@ -20,7 +20,7 @@ open class MUnitPhrase: Mappable {
     open var TRANSLATION: String?
     open var UNITPART: Int?
     
-    public init() {
+    override public init() {
     }
     
     required public init?(map: Map){

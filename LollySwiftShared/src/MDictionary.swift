@@ -10,7 +10,7 @@ import Foundation
 
 import ObjectMapper
 
-open class MDictionary: Mappable {
+open class MDictionary: NSObject, Mappable {
     open var ID: Int?
     open var LANGIDFROM: Int?
     open var DICTTYPENAME: String?

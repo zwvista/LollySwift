@@ -10,7 +10,7 @@ import Foundation
 
 import ObjectMapper
 
-open class MTextbook: Mappable {
+open class MTextbook: NSObject, Mappable {
     open var ID: Int?
     open var LANGID: Int?
     open var TEXTBOOKNAME: String?

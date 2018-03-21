@@ -13,10 +13,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     fileprivate let _theSettingsViewModel = SettingsViewModel()
     static var theSettingsViewModel: SettingsViewModel {
-        return (NSApplication.shared().delegate as! AppDelegate)._theSettingsViewModel
+        return (NSApplication.shared.delegate as! AppDelegate)._theSettingsViewModel
     }
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        _theSettingsViewModel.getData {}
         // Insert code here to initialize your application
     }
 
@@ -29,11 +30,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @IBAction func selectUnits(_ sender: AnyObject) {
-        let storyboard = NSStoryboard(name: "Main", bundle: nil)
-        let wc = storyboard.instantiateController(withIdentifier: "Select Units Window Controller") as! NSWindowController
+        let storyboard = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil)
+        let wc = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "Select Units Window Controller")) as! NSWindowController
         if let w = wc.window {
             //let vc = w.contentView as! SettingsViewController
-            let application = NSApplication.shared()
+            let application = NSApplication.shared
             application.runModal(for: w)
 
         }

@@ -10,7 +10,7 @@ import Foundation
 
 import ObjectMapper
 
-open class MUserSetting: Mappable {
+open class MUserSetting: NSObject, Mappable {
     open var ID: Int?
     open var USERID: Int?
     open var KIND: Int?

@@ -8,6 +8,7 @@
 
 import Foundation
 
+@objcMembers
 open class SettingsViewModel: NSObject {
     
     let userid = 1

@@ -10,7 +10,7 @@ import Foundation
 
 import ObjectMapper
 
-open class MLanguage: Mappable {
+open class MLanguage: NSObject, Mappable {
     open var ID: Int?
     open var LANGNAME: String?
     
