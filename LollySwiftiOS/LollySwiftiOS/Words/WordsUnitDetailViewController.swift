@@ -40,7 +40,7 @@ class WordsUnitDetailViewController: UITableViewController {
             vm.arrWords.append(mWord)
             MUnitWord.create(m: MUnitWordEdit(m: mWord)) { [unowned self] in print($0); self.mWord.ID = Int($0)! }
         } else {
-            MUnitWord.update(mWord.ID!, m: MUnitWordEdit(m: mWord)) { print($0) }
+            MUnitWord.update(mWord.ID, m: MUnitWordEdit(m: mWord)) { print($0) }
         }
     }
     

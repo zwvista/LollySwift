@@ -15,6 +15,9 @@ class MLangWord: NSObject, Mappable {
     var LANGID: Int? = 0
     var WORD: String?
     
+    public override init() {
+    }
+
     required public init?(map: Map){
     }
     

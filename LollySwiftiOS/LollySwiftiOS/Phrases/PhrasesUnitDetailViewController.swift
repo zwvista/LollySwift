@@ -39,7 +39,7 @@ class PhrasesUnitDetailViewController: UITableViewController {
             vm.arrPhrases.append(mPhrase)
             MUnitPhrase.create(m: MUnitPhraseEdit(m: mPhrase)) { [unowned self] in print($0); self.mPhrase.ID = Int($0)! }
         } else {
-            MUnitPhrase.update(mPhrase.ID!, m: MUnitPhraseEdit(m: mPhrase)) { print($0) }
+            MUnitPhrase.update(mPhrase.ID, m: MUnitPhraseEdit(m: mPhrase)) { print($0) }
         }
     }
     

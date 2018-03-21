@@ -15,6 +15,9 @@ class MLangPhrase: NSObject, Mappable {
     var PHRASE: String?
     var TRANSLATION: String?
     
+    public override init() {
+    }
+    
     required public init?(map: Map){
     }
     

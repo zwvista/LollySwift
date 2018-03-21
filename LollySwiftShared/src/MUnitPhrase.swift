@@ -21,6 +21,9 @@ class MUnitPhrase: NSObject, Mappable {
     var TRANSLATION: String?
     var UNITPART: Int?
     
+    public override init() {
+    }
+
     required public init?(map: Map){
     }
     

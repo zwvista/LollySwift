@@ -160,7 +160,7 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
     func updateTextbook() {
         let m = vm.selectedTextbook
         textbookCell.textLabel!.text = m.TEXTBOOKNAME
-        textbookCell.detailTextLabel!.text = "\(m.UNITS!) Units"
+        textbookCell.detailTextLabel!.text = "\(m.UNITS) Units"
         lblUnitFrom.text = "\(vm.USUNITFROM)"
         lblUnitTo.text = "\(vm.USUNITTO)"
         lblPartFrom.text = vm.arrParts[vm.USPARTFROM - 1]
@@ -200,10 +200,11 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
     }
     
     @IBAction func swUnitToValueChanged(_ sender: AnyObject) {
-        lblUnitTo.isEnabled = swUnitTo.isOn
-        lblPartTo.isEnabled = swUnitTo.isOn
-        lblUnitToTitle.isEnabled = swUnitTo.isOn
-        lblPartToTitle.isEnabled = swUnitTo.isOn
-        if sender !== self && !swUnitTo.isOn {updateUnitPartTo()}
+        let b = swUnitTo.isOn
+        lblUnitTo.isEnabled = b
+        lblPartTo.isEnabled = b
+        lblUnitToTitle.isEnabled = b
+        lblPartToTitle.isEnabled = b
+        if sender !== self && !b {updateUnitPartTo()}
     }
 }
