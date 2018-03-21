@@ -29,6 +29,10 @@ class WordsBaseViewController: UIViewController {
         searchBar.delegate = delegate
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        searchBar.sizeToFit()
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let controller = segue.destination as? WordsDictViewController {
             controller.word = word

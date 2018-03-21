@@ -920,7 +920,7 @@
                                 </connections>
                             </textField>
                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Bo4-yz-Ptk">
-                                <rect key="frame" x="119" y="200" width="142" height="26"/>
+                                <rect key="frame" x="119" y="200" width="223" height="26"/>
                                 <popUpButtonCell key="cell" type="push" title="Dictionary Popup" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="pp6-jV-8Y6" id="B3v-ro-gsw">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="menu"/>
@@ -944,10 +944,10 @@
                             </popUpButton>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="Bo4-yz-Ptk" firstAttribute="leading" secondItem="Yra-vx-iUa" secondAttribute="leading" id="0gL-dK-atY"/>
                             <constraint firstItem="fnN-We-eae" firstAttribute="leading" secondItem="Yra-vx-iUa" secondAttribute="leading" id="26i-Dl-qnJ"/>
                             <constraint firstItem="6If-OE-53N" firstAttribute="top" secondItem="Kfo-kM-SO0" secondAttribute="bottom" constant="9" id="58k-1B-5Ko"/>
                             <constraint firstItem="zEX-94-Fpv" firstAttribute="leading" secondItem="UlA-4i-lOC" secondAttribute="leading" constant="24" id="5DO-VT-wgS"/>
-                            <constraint firstItem="6If-OE-53N" firstAttribute="top" secondItem="Bo4-yz-Ptk" secondAttribute="top" id="6cg-5X-mYy"/>
                             <constraint firstItem="6If-OE-53N" firstAttribute="leading" secondItem="UlA-4i-lOC" secondAttribute="leading" constant="20" symbolic="YES" id="7HV-eR-sq8"/>
                             <constraint firstItem="b7U-Wa-ylD" firstAttribute="leading" secondItem="GTc-kH-1Ux" secondAttribute="leading" id="7uw-xY-N0s"/>
                             <constraint firstItem="zEX-94-Fpv" firstAttribute="top" secondItem="8FM-8h-XQF" secondAttribute="bottom" constant="19" id="8mj-nb-3d6"/>
@@ -958,10 +958,10 @@
                             <constraint firstAttribute="trailing" secondItem="8FM-8h-XQF" secondAttribute="trailing" constant="427" id="DqL-ws-BBd"/>
                             <constraint firstItem="b7U-Wa-ylD" firstAttribute="trailing" secondItem="fnN-We-eae" secondAttribute="trailing" id="GNK-dX-HfB"/>
                             <constraint firstItem="b7U-Wa-ylD" firstAttribute="centerY" secondItem="NLa-HM-eg1" secondAttribute="centerY" id="IZv-2o-LxS"/>
+                            <constraint firstItem="Bo4-yz-Ptk" firstAttribute="trailing" secondItem="Yra-vx-iUa" secondAttribute="trailing" id="JIb-6z-o9n"/>
                             <constraint firstItem="6If-OE-53N" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8FM-8h-XQF" secondAttribute="leading" id="KHY-RL-MWN"/>
                             <constraint firstAttribute="trailing" secondItem="Xjt-G8-0bL" secondAttribute="trailing" constant="39" id="NsW-vp-532"/>
                             <constraint firstItem="Xjt-G8-0bL" firstAttribute="trailing" secondItem="PW2-rx-UfY" secondAttribute="trailing" id="QA4-Iz-cl2"/>
-                            <constraint firstAttribute="trailing" secondItem="Bo4-yz-Ptk" secondAttribute="trailing" constant="222" id="TdG-8R-4mE"/>
                             <constraint firstItem="6If-OE-53N" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="RQX-rZ-9Ej" secondAttribute="leading" id="UWF-cH-aBv"/>
                             <constraint firstItem="NLa-HM-eg1" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="b7U-Wa-ylD" secondAttribute="trailing" symbolic="YES" id="VtL-Zk-K6Z"/>
                             <constraint firstAttribute="trailing" secondItem="RQX-rZ-9Ej" secondAttribute="trailing" constant="404" id="WoR-2m-RhR"/>
@@ -980,7 +980,7 @@
                             <constraint firstItem="fnN-We-eae" firstAttribute="leading" secondItem="zEX-94-Fpv" secondAttribute="trailing" constant="39" id="qLc-5F-7Sx"/>
                             <constraint firstItem="fnN-We-eae" firstAttribute="leading" secondItem="GTc-kH-1Ux" secondAttribute="leading" id="s8b-D7-F6r"/>
                             <constraint firstAttribute="trailing" secondItem="Kfo-kM-SO0" secondAttribute="trailing" constant="400" id="td3-Fs-lEv"/>
-                            <constraint firstItem="Bo4-yz-Ptk" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6If-OE-53N" secondAttribute="trailing" constant="8" symbolic="YES" id="uJe-2n-LGw"/>
+                            <constraint firstItem="Bo4-yz-Ptk" firstAttribute="top" secondItem="6If-OE-53N" secondAttribute="top" id="uys-nJ-bvV"/>
                             <constraint firstAttribute="trailing" secondItem="QMz-gd-sUW" secondAttribute="trailing" constant="96" id="vJC-un-cHW"/>
                             <constraint firstItem="Yra-vx-iUa" firstAttribute="top" secondItem="Kfo-kM-SO0" secondAttribute="top" id="vsX-22-q5W"/>
                             <constraint firstAttribute="trailing" secondItem="NLa-HM-eg1" secondAttribute="trailing" constant="190" id="xdB-oA-YN1"/>
@@ -997,8 +997,16 @@
                         <binding destination="HfO-r7-QMx" name="contentArray" keyPath="vm.arrLanguages" id="Nel-jD-XyP"/>
                     </connections>
                 </arrayController>
-                <arrayController id="EkI-9N-SJp" userLabel="Dictionaries Controller"/>
-                <arrayController id="PzR-zm-jg5" userLabel="Textbooks Controller"/>
+                <arrayController id="EkI-9N-SJp" userLabel="Dictionaries Controller">
+                    <connections>
+                        <binding destination="HfO-r7-QMx" name="contentArray" keyPath="vm.arrDictionaries" id="dMF-eH-YUp"/>
+                    </connections>
+                </arrayController>
+                <arrayController id="PzR-zm-jg5" userLabel="Textbooks Controller">
+                    <connections>
+                        <binding destination="HfO-r7-QMx" name="contentArray" keyPath="vm.arrTextbooks" id="gW1-uM-x6B"/>
+                    </connections>
+                </arrayController>
                 <arrayController id="7EM-l7-CJV" userLabel="Units Controller">
                     <connections>
                         <binding destination="HfO-r7-QMx" name="contentArray" keyPath="vm.arrUnits" id="vyG-mZ-Jei"/>

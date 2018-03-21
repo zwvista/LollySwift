@@ -7,15 +7,12 @@
 //
 
 import Cocoa
-import LollySwiftShared
 
 class SettingsViewController: NSViewController {
     
     var vm: SettingsViewModel {
         return AppDelegate.theSettingsViewModel
     }
-    @IBOutlet weak var dictionariesController: NSArrayController!
-    @IBOutlet weak var textbooksController: NSArrayController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,8 +27,6 @@ class SettingsViewController: NSViewController {
     }
     
     @IBAction func langSelected(_ sender: AnyObject) {
-        dictionariesController.content = vm.arrDictionaries
-        textbooksController.content = vm.arrTextbooks
         dictSelected(sender)
     }
     

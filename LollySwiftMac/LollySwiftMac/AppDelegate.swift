@@ -7,7 +7,6 @@
 //
 
 import Cocoa
-import LollySwiftShared
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {

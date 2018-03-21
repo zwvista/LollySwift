@@ -47,41 +47,37 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
             switch selectedIndexPath.row {
             case 0:
                 ActionSheetStringPicker.show(withTitle: "Select Unit(From)", rows: vm.arrUnits, initialSelection: vm.USUNITFROM - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
-                    let v = selectedIndex + 1
-                    guard self.vm.USUNITFROM != v else {return}
-                    self.vm.USUNITFROM = v
+                    guard self.vm.USUNITFROM != selectedIndex + 1 else {return}
+                    self.vm.USUNITFROM = selectedIndex + 1
                     self.vm.updateUnitFrom {
-                        self.lblUnitFrom.text = v.toString
+                        self.lblUnitFrom.text = selectedValue as? String
                         if !self.swUnitTo.isOn || self.vm.isInvalidUnitPart {self.updateUnitPartTo()}
                     }
                 }, cancel: nil, origin: lblUnitFrom)
             case 1:
                 ActionSheetStringPicker.show(withTitle: "Select Part(From)", rows: vm.arrParts, initialSelection: vm.USPARTFROM - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
-                    let v = selectedIndex + 1
-                    guard self.vm.USPARTFROM != v else {return}
-                    self.vm.USPARTFROM = v
+                    guard self.vm.USPARTFROM != selectedIndex + 1 else {return}
+                    self.vm.USPARTFROM = selectedIndex + 1
                     self.vm.updatePartFrom {
-                        self.lblPartFrom.text = v.toString
+                        self.lblPartFrom.text = selectedValue as? String
                         if !self.swUnitTo.isOn || self.vm.isInvalidUnitPart {self.updateUnitPartTo()}
                     }
                 }, cancel: nil, origin: lblPartFrom)
             case 3 where swUnitTo.isOn:
                 ActionSheetStringPicker.show(withTitle: "Select Unit(To)", rows: vm.arrUnits, initialSelection: vm.USUNITTO - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
-                    let v = selectedIndex + 1
-                    guard self.vm.USUNITTO != v else {return}
-                    self.vm.USUNITTO = v
+                    guard self.vm.USUNITTO != selectedIndex + 1 else {return}
+                    self.vm.USUNITTO = selectedIndex + 1
                     self.vm.updateUnitTo {
-                        self.lblUnitTo.text = v.toString
+                        self.lblUnitTo.text = selectedValue as? String
                         if self.vm.isInvalidUnitPart {self.updateUnitPartFrom()}
                     }
                 }, cancel: nil, origin: lblUnitTo)
             case 4 where swUnitTo.isOn:
                 ActionSheetStringPicker.show(withTitle: "Select Part(To)", rows: vm.arrParts, initialSelection: vm.USPARTTO - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
-                    let v = selectedIndex + 1
-                    guard self.vm.USPARTTO != v else {return}
-                    self.vm.USPARTTO = v
+                    guard self.vm.USPARTTO != selectedIndex + 1 else {return}
+                    self.vm.USPARTTO = selectedIndex + 1
                     self.vm.updatePartTo {
-                        self.lblPartTo.text = v.toString
+                        self.lblPartTo.text = selectedValue as? String
                         if self.vm.isInvalidUnitPart {self.updateUnitPartFrom()}
                     }
                 }, cancel: nil, origin: lblPartTo)
@@ -135,12 +131,12 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
             }
         case 1 where selectedRow != vm.selectedDictIndex:
             vm.selectedDictIndex = selectedRow
-            self.vm.updateDict {
+            vm.updateDict {
                 self.updateDict()
             }
         case 2 where selectedRow != vm.selectedTextbookIndex:
             vm.selectedTextbookIndex = selectedRow
-            self.vm.updateTextbook {
+            vm.updateTextbook {
                 self.updateTextbook()
             }
         default:
@@ -208,6 +204,6 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
         lblPartTo.isEnabled = swUnitTo.isOn
         lblUnitToTitle.isEnabled = swUnitTo.isOn
         lblPartToTitle.isEnabled = swUnitTo.isOn
-        if sender !== self && !swUnitTo.isOn {self.updateUnitPartTo()}
+        if sender !== self && !swUnitTo.isOn {updateUnitPartTo()}
     }
 }

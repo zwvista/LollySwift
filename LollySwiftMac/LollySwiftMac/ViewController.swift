@@ -8,7 +8,6 @@
 
 import Cocoa
 import WebKit
-import LollySwiftShared
 
 class ViewController: NSViewController, NSSearchFieldDelegate {
     
