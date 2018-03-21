@@ -8,6 +8,7 @@
 
 import Cocoa
 
+@objcMembers
 class SettingsViewController: NSViewController {
     
     var vm: SettingsViewModel {

@@ -8,19 +8,19 @@
 
 import Foundation
 
-open class WordsTextbookViewModel: NSObject {
-    open var settings: SettingsViewModel
-    open var arrWords = [MTextbookWord]()
-    open var arrWordsFiltered: [MTextbookWord]?
+class WordsTextbookViewModel: NSObject {
+    var settings: SettingsViewModel
+    var arrWords = [MTextbookWord]()
+    var arrWordsFiltered: [MTextbookWord]?
     
     public init(settings: SettingsViewModel, complete: (() -> Void)? = nil) {
         self.settings = settings
         let m = settings.arrTextbooks[settings.selectedTextbookIndex]
         super.init()
-        MTextbookWord.getDataByLang(m.LANGID!) { [unowned self] in self.arrWords = $0; complete?() }
+        MTextbookWord.getDataByLang(m.LANGID) { [unowned self] in self.arrWords = $0; complete?() }
     }
     
-    open func filterWordsForSearchText(_ searchText: String, scope: String) {
+    func filterWordsForSearchText(_ searchText: String, scope: String) {
         arrWordsFiltered = arrWords.filter({ (m) -> Bool in
             return m.WORD!.contains(searchText)
         })

@@ -8,19 +8,19 @@
 
 import Foundation
 
-open class PhrasesLangViewModel: NSObject {
-    open var settings: SettingsViewModel
-    open var arrPhrases = [MLangPhrase]()
-    open var arrPhrasesFiltered: [MLangPhrase]?
+class PhrasesLangViewModel: NSObject {
+    var settings: SettingsViewModel
+    var arrPhrases = [MLangPhrase]()
+    var arrPhrasesFiltered: [MLangPhrase]?
     
     public init(settings: SettingsViewModel, complete: (() -> Void)? = nil) {
         self.settings = settings
         let m = settings.arrTextbooks[settings.selectedTextbookIndex]
         super.init()
-        MLangPhrase.getDataByLang(m.LANGID!) { [unowned self] in self.arrPhrases = $0; complete?() }
+        MLangPhrase.getDataByLang(m.LANGID) { [unowned self] in self.arrPhrases = $0; complete?() }
     }
     
-    open func filterPhrasesForSearchText(_ searchText: String, scope: String) {
+    func filterPhrasesForSearchText(_ searchText: String, scope: String) {
         arrPhrasesFiltered = arrPhrases.filter({ (m) -> Bool in
             return (scope == "Phrase" ? m.PHRASE! : m.TRANSLATION!).contains(searchText)
         })

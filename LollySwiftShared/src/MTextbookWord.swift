@@ -10,16 +10,17 @@ import Foundation
 
 import ObjectMapper
 
-open class MTextbookWord: NSObject, Mappable {
-    open var TEXTBOOKID: Int?
-    open var LANGID: Int?
-    open var TEXTBOOKNAME: String?
-    open var UNITWORDID: Int?
-    open var UNIT: Int?
-    open var PART: Int?
-    open var SEQNUM: Int?
-    open var WORD: String?
-    open var NOTE: String?
+@objcMembers
+class MTextbookWord: NSObject, Mappable {
+    var TEXTBOOKID: Int?
+    var LANGID: Int?
+    var TEXTBOOKNAME: String?
+    var UNITWORDID: Int?
+    var UNIT: Int?
+    var PART: Int?
+    var SEQNUM: Int?
+    var WORD: String?
+    var NOTE: String?
     
     required public init?(map: Map){
     }

@@ -86,6 +86,7 @@
 		8CD1D916206211E40071687B /* UIUserInterfaceSizeClassExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD1D8E3206211E30071687B /* UIUserInterfaceSizeClassExtensions.swift */; };
 		8CD1D917206211E40071687B /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD1D8E4206211E30071687B /* UIViewControllerExtensions.swift */; };
 		8CD1D918206211E40071687B /* CollectionsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD1D8E5206211E30071687B /* CollectionsExtension.swift */; };
+		8CD1D929206227800071687B /* LollyWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD1D928206227800071687B /* LollyWindow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -205,6 +206,7 @@
 		8CD1D8E3206211E30071687B /* UIUserInterfaceSizeClassExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIUserInterfaceSizeClassExtensions.swift; sourceTree = "<group>"; };
 		8CD1D8E4206211E30071687B /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
 		8CD1D8E5206211E30071687B /* CollectionsExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionsExtension.swift; sourceTree = "<group>"; };
+		8CD1D928206227800071687B /* LollyWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LollyWindow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -269,6 +271,7 @@
 				8C1C4F2D1D31F88800CF5D88 /* Main.storyboard */,
 				8C1C4F301D31F88800CF5D88 /* Info.plist */,
 				8C0ACB571D4391FB00EC6740 /* SettingsViewController.swift */,
+				8CD1D928206227800071687B /* LollyWindow.swift */,
 			);
 			path = LollySwiftMac;
 			sourceTree = "<group>";
@@ -582,6 +585,7 @@
 				8CD1D8F1206211E40071687B /* ArrayExtensions.swift in Sources */,
 				8C486E371EBB94E70023FBFC /* MUnitWord.swift in Sources */,
 				8CD1D8EB206211E40071687B /* UIStoryboardExtensions.swift in Sources */,
+				8CD1D929206227800071687B /* LollyWindow.swift in Sources */,
 				8CD1D8F9206211E40071687B /* BlockPan.swift in Sources */,
 				8C486E381EBB94E70023FBFC /* MUserSetting.swift in Sources */,
 				8C486E3C1EBB94E70023FBFC /* WordsLangViewModel.swift in Sources */,
@@ -754,7 +758,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "LollySwiftMac-Bridging-Header.h";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
@@ -774,7 +778,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "LollySwiftMac-Bridging-Header.h";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 			};
 			name = Release;

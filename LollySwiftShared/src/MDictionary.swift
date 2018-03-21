@@ -10,15 +10,16 @@ import Foundation
 
 import ObjectMapper
 
-open class MDictionary: NSObject, Mappable {
-    open var ID: Int?
-    open var LANGIDFROM: Int?
-    open var DICTTYPENAME: String?
-    open var DICTNAME: String?
-    open var URL: String?
-    open var CHCONV: String?
-    open var TRANSFORM_MAC: String?
-    open var TEMPLATE: String?
+@objcMembers
+class MDictionary: NSObject, Mappable {
+    var ID = 0
+    var LANGIDFROM: Int?
+    var DICTTYPENAME: String?
+    var DICTNAME: String?
+    var URL: String?
+    var CHCONV: String?
+    var TRANSFORM_MAC: String?
+    var TEMPLATE: String?
     
     required public init?(map: Map){
     }
@@ -34,7 +35,7 @@ open class MDictionary: NSObject, Mappable {
         TEMPLATE <- map["TEMPLATE"]
     }
 
-    open func urlString(_ word: String) -> String {
+    func urlString(_ word: String) -> String {
         var url = URL!.replacingOccurrences(of: "{0}", with: word);
         //url = url.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
         url = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
@@ -50,7 +51,7 @@ open class MDictionary: NSObject, Mappable {
     
     fileprivate let debugExtract = false
     
-    open func htmlString(_ html: String, word: String) -> String {
+    func htmlString(_ html: String, word: String) -> String {
         let dic = ["<delete>": "", "\\t": "\t", "\\r": "\r", "\\n": "\n"]
         var transform = TRANSFORM_MAC!, template = TEMPLATE!
         let logPath = "/Users/bestskip/Documents/zw/Log/"

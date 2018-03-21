@@ -10,12 +10,10 @@ import Foundation
 
 import ObjectMapper
 
-open class MLangWord: NSObject, Mappable {
-    open var LANGID: Int? = 0
-    open var WORD: String?
-    
-    override public init() {
-    }
+@objcMembers
+class MLangWord: NSObject, Mappable {
+    var LANGID: Int? = 0
+    var WORD: String?
     
     required public init?(map: Map){
     }

@@ -669,7 +669,7 @@
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
-                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
+                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA" customClass="LollyWindow" customModule="LollySwiftMac" customModuleProvider="target">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
@@ -690,7 +690,7 @@
         <scene sceneID="Nfa-zT-uvr">
             <objects>
                 <windowController storyboardIdentifier="Select Units Window Controller" id="opr-34-kgl" sceneMemberID="viewController">
-                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="gPA-8o-xiX">
+                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="gPA-8o-xiX" customClass="LollyWindow" customModule="LollySwiftMac" customModuleProvider="target">
                         <windowStyleMask key="styleMask" titled="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
@@ -810,9 +810,7 @@
                                     </menu>
                                 </popUpButtonCell>
                                 <connections>
-                                    <action selector="TextbookSelected:" target="HfO-r7-QMx" id="Y5l-fg-RzL"/>
-                                    <binding destination="7EM-l7-CJV" name="content" keyPath="arrangedObjects" id="OJ1-Jn-zmx"/>
-                                    <binding destination="7EM-l7-CJV" name="contentValues" keyPath="arrangedObjects" previousBinding="OJ1-Jn-zmx" id="y9H-CI-3Yg"/>
+                                    <binding destination="7EM-l7-CJV" name="contentValues" keyPath="arrangedObjects" id="fId-fO-mZl"/>
                                 </connections>
                             </popUpButton>
                             <popUpButton horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PW2-rx-UfY">
@@ -830,6 +828,7 @@
                                 </popUpButtonCell>
                                 <connections>
                                     <binding destination="IiA-XH-70P" name="content" keyPath="arrangedObjects" id="Lwd-rS-GaD"/>
+                                    <binding destination="IiA-XH-70P" name="contentValues" keyPath="arrangedObjects" previousBinding="Lwd-rS-GaD" id="sON-l9-P6h"/>
                                 </connections>
                             </popUpButton>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="zEX-94-Fpv">
@@ -871,9 +870,7 @@
                                     </menu>
                                 </popUpButtonCell>
                                 <connections>
-                                    <action selector="TextbookSelected:" target="HfO-r7-QMx" id="H7c-V2-Vcy"/>
-                                    <binding destination="7EM-l7-CJV" name="content" keyPath="arrangedObjects" id="nPp-dG-P8d"/>
-                                    <binding destination="7EM-l7-CJV" name="contentValues" keyPath="arrangedObjects" previousBinding="nPp-dG-P8d" id="Qt4-rf-e32"/>
+                                    <binding destination="7EM-l7-CJV" name="contentValues" keyPath="arrangedObjects" id="IyE-WX-zso"/>
                                 </connections>
                             </popUpButton>
                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Xjt-G8-0bL">
@@ -894,6 +891,7 @@
                                 </popUpButtonCell>
                                 <connections>
                                     <binding destination="IiA-XH-70P" name="content" keyPath="arrangedObjects" id="UCh-Ma-RIH"/>
+                                    <binding destination="IiA-XH-70P" name="contentValues" keyPath="arrangedObjects" previousBinding="UCh-Ma-RIH" id="M01-XZ-Vqc"/>
                                 </connections>
                             </popUpButton>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="QMz-gd-sUW">
@@ -1025,7 +1023,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="822" height="640"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <searchField wantsLayer="YES" verticalHuggingPriority="750" ambiguous="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8ww-HD-ydB">
+                            <searchField wantsLayer="YES" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8ww-HD-ydB">
                                 <rect key="frame" x="20" y="592" width="721" height="22"/>
                                 <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" placeholderString="Enter a word here" usesSingleLineMode="YES" bezelStyle="round" id="Ono-bG-qZe">
                                     <font key="font" metaFont="system"/>
@@ -1065,6 +1063,7 @@
                             </wkWebView>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="LyA-Au-ofZ" firstAttribute="leading" secondItem="8ww-HD-ydB" secondAttribute="trailing" constant="15" id="0xo-vU-4Lw"/>
                             <constraint firstAttribute="trailing" secondItem="LyA-Au-ofZ" secondAttribute="trailing" constant="20" id="Dcr-og-SaF"/>
                             <constraint firstItem="8ww-HD-ydB" firstAttribute="top" secondItem="vRl-K7-APF" secondAttribute="top" constant="26" id="H3b-AD-4pf"/>
                             <constraint firstItem="xWq-d5-5CB" firstAttribute="top" secondItem="vRl-K7-APF" secondAttribute="top" constant="68" id="HRw-xp-5sV"/>
@@ -1073,11 +1072,10 @@
                             <constraint firstAttribute="bottom" secondItem="xWq-d5-5CB" secondAttribute="bottom" constant="62" id="YQg-7T-Qqh"/>
                             <constraint firstItem="xWq-d5-5CB" firstAttribute="leading" secondItem="vRl-K7-APF" secondAttribute="leading" constant="20" id="YnI-5j-ZcR"/>
                             <constraint firstItem="LyA-Au-ofZ" firstAttribute="top" secondItem="vRl-K7-APF" secondAttribute="top" constant="27" id="bRe-Um-zNJ"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="8ww-HD-ydB" secondAttribute="trailing" id="ksQ-Xz-Jaa"/>
                             <constraint firstAttribute="bottom" secondItem="O2b-uh-1IJ" secondAttribute="bottom" constant="62" id="pPR-Ku-Q6m"/>
                             <constraint firstItem="O2b-uh-1IJ" firstAttribute="leading" secondItem="vRl-K7-APF" secondAttribute="leading" constant="20" id="pfh-zJ-tf5"/>
+                            <constraint firstItem="8ww-HD-ydB" firstAttribute="leading" secondItem="vRl-K7-APF" secondAttribute="leading" constant="20" id="pop-y1-IUJ"/>
                             <constraint firstAttribute="trailing" secondItem="xWq-d5-5CB" secondAttribute="trailing" constant="20" id="rb2-lA-OcW"/>
-                            <constraint firstItem="8ww-HD-ydB" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vRl-K7-APF" secondAttribute="leading" id="rll-Jh-6Wg"/>
                             <constraint firstItem="LyA-Au-ofZ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vRl-K7-APF" secondAttribute="leading" constant="20" symbolic="YES" id="xYu-cO-rVf"/>
                         </constraints>
                     </view>

@@ -9,6 +9,7 @@
 import Cocoa
 import WebKit
 
+@objcMembers
 class ViewController: NSViewController, NSSearchFieldDelegate {
     
     @IBOutlet weak var wvDictOnline: WebView!

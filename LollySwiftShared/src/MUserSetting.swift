@@ -10,15 +10,16 @@ import Foundation
 
 import ObjectMapper
 
-open class MUserSetting: NSObject, Mappable {
-    open var ID: Int?
-    open var USERID: Int?
-    open var KIND: Int?
-    open var ENTITYID: Int?
-    open var VALUE1: String?
-    open var VALUE2: String?
-    open var VALUE3: String?
-    open var VALUE4: String?
+@objcMembers
+class MUserSetting: NSObject, Mappable {
+    var ID = 0
+    var USERID: Int?
+    var KIND: Int?
+    var ENTITYID: Int?
+    var VALUE1: String?
+    var VALUE2: String?
+    var VALUE3: String?
+    var VALUE4: String?
 
     required public init?(map: Map){
     }

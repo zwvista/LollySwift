@@ -10,18 +10,16 @@ import Foundation
 
 import ObjectMapper
 
-open class MUnitPhrase: NSObject, Mappable {
-    open var ID: Int? = 0
-    open var TEXTBOOKID: Int?
-    open var UNIT: Int?
-    open var PART: Int?
-    open var SEQNUM: Int?
-    open var PHRASE: String?
-    open var TRANSLATION: String?
-    open var UNITPART: Int?
-    
-    override public init() {
-    }
+@objcMembers
+class MUnitPhrase: NSObject, Mappable {
+    var ID = 0
+    var TEXTBOOKID: Int?
+    var UNIT: Int?
+    var PART: Int?
+    var SEQNUM: Int?
+    var PHRASE: String?
+    var TRANSLATION: String?
+    var UNITPART: Int?
     
     required public init?(map: Map){
     }
@@ -69,12 +67,12 @@ open class MUnitPhrase: NSObject, Mappable {
     }
 }
 
-open class MUnitPhraseEdit: Mappable {
-    open var UNIT: Int?
-    open var PART: Int?
-    open var SEQNUM: Int?
-    open var PHRASE: String?
-    open var TRANSLATION: String?
+class MUnitPhraseEdit: Mappable {
+    var UNIT: Int?
+    var PART: Int?
+    var SEQNUM: Int?
+    var PHRASE: String?
+    var TRANSLATION: String?
     
     public init(m: MUnitPhrase) {
         UNIT = m.UNIT

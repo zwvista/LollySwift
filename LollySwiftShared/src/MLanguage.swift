@@ -10,9 +10,10 @@ import Foundation
 
 import ObjectMapper
 
-open class MLanguage: NSObject, Mappable {
-    open var ID: Int?
-    open var LANGNAME: String?
+@objcMembers
+class MLanguage: NSObject, Mappable {
+    var ID = 0
+    var LANGNAME = ""
     
     required public init?(map: Map){
     }
