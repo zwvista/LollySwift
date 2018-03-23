@@ -103,7 +103,7 @@ class SettingsViewModel: NSObject {
     @objc
     var arrParts = [String]()
     
-    func getData(complete: (() -> Void)? = nil) {
+    func getData(complete: @escaping () -> Void) {
         MLanguage.getData {
             self.arrLanguages = $0
             MUserSetting.getData(userid: self.userid) {
@@ -114,7 +114,7 @@ class SettingsViewModel: NSObject {
         }
     }
     
-    func setSelectedLangIndex(_ langindex: Int, complete: (() -> Void)? = nil) {
+    func setSelectedLangIndex(_ langindex: Int, complete: @escaping () -> Void) {
         selectedLangIndex = langindex
         USLANDID = selectedLang.ID
         selectedUSLangIndex = arrUserSettings.index { $0.KIND == 2 && $0.ENTITYID == self.USLANDID }!
@@ -124,7 +124,7 @@ class SettingsViewModel: NSObject {
             MTextbook.getDataByLang(self.USLANDID) {
                 self.arrTextbooks = $0
                 self.selectedTextbookIndex = self.arrTextbooks.index { $0.ID == self.USTEXTBOOKID }!
-                complete?()
+                complete()
             }
         }
     }
@@ -140,52 +140,52 @@ class SettingsViewModel: NSObject {
         USDICTID = selectedDict.ID
     }
     
-    func updateLang(complete: (() -> Void)? = nil) {
+    func updateLang(complete: @escaping () -> Void) {
         MUserSetting.update(selectedUSUser.ID, langid: USLANDID) {
             print($0)
-            complete?()
+            complete()
         }
     }
     
-    func updateDict(complete: (() -> Void)? = nil) {
+    func updateDict(complete: @escaping () -> Void) {
         MUserSetting.update(selectedUSLang.ID, dictid: USDICTID) {
             print($0)
-            complete?()
+            complete()
         }
     }
     
-    func updateTextbook(complete: (() -> Void)? = nil) {
+    func updateTextbook(complete: @escaping () -> Void) {
         MUserSetting.update(selectedUSLang.ID, textbookid: USTEXTBOOKID) {
             print($0)
-            complete?()
+            complete()
         }
     }
     
-    func updateUnitFrom(complete: (() -> Void)? = nil) {
+    func updateUnitFrom(complete: @escaping () -> Void) {
         MUserSetting.update(selectedUSTextbook.ID, usunitfrom: USUNITFROM) {
             print($0)
-            complete?()
+            complete()
         }
     }
     
-    func updatePartFrom(complete: (() -> Void)? = nil) {
+    func updatePartFrom(complete: @escaping () -> Void) {
         MUserSetting.update(selectedUSTextbook.ID, uspartfrom: USPARTFROM) {
             print($0)
-            complete?()
+            complete()
         }
     }
     
-    func updateUnitTo(complete: (() -> Void)? = nil) {
+    func updateUnitTo(complete: @escaping () -> Void) {
         MUserSetting.update(selectedUSTextbook.ID, usunitto: USUNITTO) {
             print($0)
-            complete?()
+            complete()
         }
     }
     
-    func updatePartTo(complete: (() -> Void)? = nil) {
+    func updatePartTo(complete: @escaping () -> Void) {
         MUserSetting.update(selectedUSTextbook.ID, uspartto: USPARTTO) {
             print($0)
-            complete?()
+            complete()
         }
     }
 }

@@ -15,8 +15,8 @@ class WordsUnitViewController: WordsBaseViewController, UITableViewDelegate, UIT
         return searchController.isActive && searchBar.text != "" ? vm.arrWordsFiltered! : vm.arrWords
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         self.view.showBlurLoader()
         vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel) { [unowned self] in
             self.setupSearchController(delegate: self)

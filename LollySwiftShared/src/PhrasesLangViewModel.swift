@@ -13,11 +13,11 @@ class PhrasesLangViewModel: NSObject {
     var arrPhrases = [MLangPhrase]()
     var arrPhrasesFiltered: [MLangPhrase]?
     
-    public init(settings: SettingsViewModel, complete: (() -> Void)? = nil) {
+    public init(settings: SettingsViewModel, complete: @escaping () -> Void) {
         self.settings = settings
         let m = settings.arrTextbooks[settings.selectedTextbookIndex]
         super.init()
-        MLangPhrase.getDataByLang(m.LANGID) { [unowned self] in self.arrPhrases = $0; complete?() }
+        MLangPhrase.getDataByLang(m.LANGID) { [unowned self] in self.arrPhrases = $0; complete() }
     }
     
     func filterPhrasesForSearchText(_ searchText: String, scope: String) {

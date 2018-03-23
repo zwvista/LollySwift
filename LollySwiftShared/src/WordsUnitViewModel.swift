@@ -13,14 +13,42 @@ class WordsUnitViewModel: NSObject {
     var arrWords = [MUnitWord]()
     var arrWordsFiltered: [MUnitWord]?
     
-    public init(settings: SettingsViewModel, complete: (() -> Void)? = nil) {
+    public init(settings: SettingsViewModel, complete: @escaping () -> Void) {
         self.settings = settings
         super.init()
-        MUnitWord.getDataByTextbook(settings.USTEXTBOOKID, unitPartFrom: settings.USUNITPARTFROM, unitPartTo: settings.USUNITPARTTO) { [unowned self] in self.arrWords = $0; complete?() }
+        MUnitWord.getDataByTextbook(settings.USTEXTBOOKID, unitPartFrom: settings.USUNITPARTFROM, unitPartTo: settings.USUNITPARTTO) { [unowned self] in self.arrWords = $0; complete() }
     }
     
     func filterWordsForSearchText(_ searchText: String, scope: String) {
         arrWordsFiltered = arrWords.filter { $0.WORD!.contains(searchText) }
+    }
+    
+    static func update(id: Int, seqnum: Int, complete: @escaping () -> Void) {
+        MUnitWord.update(id, seqnum: seqnum) {
+            print($0)
+            complete()
+        }
+    }
+    
+    static func update(id: Int, m: MUnitWordEdit, complete: @escaping () -> Void) {
+        MUnitWord.update(id, m: m) {
+            print($0)
+            complete()
+        }
+    }
+    
+    static func create(m: MUnitWordEdit, complete: @escaping (Int) -> Void) {
+        MUnitWord.create(m: m) {
+            print($0)
+            complete($0.toInt()!)
+        }
+    }
+    
+    static func delete(id: Int, complete: @escaping () -> Void) {
+        MUnitWord.delete(id) {
+            print($0)
+            complete()
+        }
     }
 
 }

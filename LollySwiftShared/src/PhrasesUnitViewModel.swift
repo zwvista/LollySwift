@@ -13,10 +13,10 @@ class PhrasesUnitViewModel: NSObject {
     var arrPhrases = [MUnitPhrase]()
     var arrPhrasesFiltered: [MUnitPhrase]?
     
-    public init(settings: SettingsViewModel, complete: (() -> Void)? = nil) {
+    public init(settings: SettingsViewModel, complete: @escaping () -> Void) {
         self.settings = settings
         super.init()
-        MUnitPhrase.getDataByTextbook(settings.USTEXTBOOKID, unitPartFrom: settings.USUNITPARTFROM, unitPartTo: settings.USUNITPARTTO) { [unowned self] in self.arrPhrases = $0; complete?() }
+        MUnitPhrase.getDataByTextbook(settings.USTEXTBOOKID, unitPartFrom: settings.USUNITPARTFROM, unitPartTo: settings.USUNITPARTTO) { [unowned self] in self.arrPhrases = $0; complete() }
     }
     
     func filterPhrasesForSearchText(_ searchText: String, scope: String) {
