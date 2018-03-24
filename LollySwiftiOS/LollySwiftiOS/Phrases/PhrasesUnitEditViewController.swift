@@ -69,6 +69,7 @@ class PhrasesUnitEditViewController: UITableViewController, LollyProtocol {
             controller.mPhrase = vm.arrPhrases[(tableView.indexPathForSelectedRow! as NSIndexPath).row]
         } else {
             let o = MUnitPhrase()
+            o.TEXTBOOKID = vmSettings.USTEXTBOOKID
             let maxElem = vm.arrPhrases.max{ (o1, o2) in (o1.UNIT!, o1.PART!, o1.SEQNUM!) < (o2.UNIT!, o2.PART!, o2.SEQNUM!) }
             o.UNIT = maxElem?.UNIT ?? vmSettings.USUNITTO
             o.PART = maxElem?.PART ?? vmSettings.USPARTTO

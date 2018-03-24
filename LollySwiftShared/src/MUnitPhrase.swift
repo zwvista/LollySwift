@@ -52,13 +52,13 @@ class MUnitPhrase: NSObject, Mappable {
     }
     
     static func update(_ id: Int, m: MUnitPhraseEdit, complete: @escaping (String) -> Void) {
-        // SQL: UPDATE UNITPHRASES SET UNIT=?, PART=?, SEQNUM=?, PHRASE=?, TRANSLATION=? WHERE ID=?
+        // SQL: UPDATE UNITPHRASES SET TEXTBOOKID=?, UNIT=?, PART=?, SEQNUM=?, PHRASE=?, TRANSLATION=? WHERE ID=?
         let url = "\(RestApi.url)UNITPHRASES/\(id)"
         RestApi.update(url: url, body: m.toJSONString(prettyPrint: false)!, complete: complete)
     }
     
     static func create(m: MUnitPhraseEdit, complete: @escaping (String) -> Void) {
-        // SQL: INSERT INTO UNITPHRASES (UNIT, PART, SEQNUM, PHRASE, TRANSLATION) VALUES (?,?,?,?,?)
+        // SQL: INSERT INTO UNITPHRASES (TEXTBOOKID, UNIT, PART, SEQNUM, PHRASE, TRANSLATION) VALUES (?,?,?,?,?,?)
         let url = "\(RestApi.url)UNITPHRASES"
         RestApi.create(url: url, body: m.toJSONString(prettyPrint: false)!, complete: complete)
     }
@@ -71,6 +71,7 @@ class MUnitPhrase: NSObject, Mappable {
 }
 
 class MUnitPhraseEdit: Mappable {
+    var TEXTBOOKID: Int?
     var UNIT: Int?
     var PART: Int?
     var SEQNUM: Int?
@@ -78,6 +79,7 @@ class MUnitPhraseEdit: Mappable {
     var TRANSLATION: String?
     
     public init(m: MUnitPhrase) {
+        TEXTBOOKID = m.TEXTBOOKID
         UNIT = m.UNIT
         PART = m.PART
         SEQNUM = m.SEQNUM
@@ -89,6 +91,7 @@ class MUnitPhraseEdit: Mappable {
     }
     
     public func mapping(map: Map) {
+        TEXTBOOKID <- map["TEXTBOOKID"]
         UNIT <- map["UNIT"]
         PART <- map["PART"]
         SEQNUM <- map["SEQNUM"]
