@@ -23,14 +23,14 @@ class WordsUnitViewModel: NSObject {
         arrWordsFiltered = arrWords.filter { $0.WORD!.contains(searchText) }
     }
     
-    static func update(id: Int, seqnum: Int, complete: @escaping () -> Void) {
+    static func update(_ id: Int, seqnum: Int, complete: @escaping () -> Void) {
         MUnitWord.update(id, seqnum: seqnum) {
             print($0)
             complete()
         }
     }
     
-    static func update(id: Int, m: MUnitWordEdit, complete: @escaping () -> Void) {
+    static func update(_ id: Int, m: MUnitWordEdit, complete: @escaping () -> Void) {
         MUnitWord.update(id, m: m) {
             print($0)
             complete()
@@ -44,7 +44,7 @@ class WordsUnitViewModel: NSObject {
         }
     }
     
-    static func delete(id: Int, complete: @escaping () -> Void) {
+    static func delete(_ id: Int, complete: @escaping () -> Void) {
         MUnitWord.delete(id) {
             print($0)
             complete()

@@ -25,4 +25,32 @@ class PhrasesUnitViewModel: NSObject {
         }
     }
     
+    static func update(_ id: Int, seqnum: Int, complete: @escaping () -> Void) {
+        MUnitPhrase.update(id, seqnum: seqnum) {
+            print($0)
+            complete()
+        }
+    }
+    
+    static func update(_ id: Int, m: MUnitPhraseEdit, complete: @escaping () -> Void) {
+        MUnitPhrase.update(id, m: m) {
+            print($0)
+            complete()
+        }
+    }
+    
+    static func create(m: MUnitPhraseEdit, complete: @escaping (Int) -> Void) {
+        MUnitPhrase.create(m: m) {
+            print($0)
+            complete($0.toInt()!)
+        }
+    }
+    
+    static func delete(_ id: Int, complete: @escaping () -> Void) {
+        MUnitPhrase.delete(id) {
+            print($0)
+            complete()
+        }
+    }
+
 }

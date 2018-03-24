@@ -45,7 +45,7 @@ class PhrasesUnitEditViewController: UITableViewController, LollyProtocol {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let i = (indexPath as NSIndexPath).row
-            MUnitPhrase.delete(vm.arrPhrases[i].ID) { print($0) }
+            PhrasesUnitViewModel.delete(vm.arrPhrases[i].ID) {}
             vm.arrPhrases.remove(at: i)
             tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
         }
@@ -59,7 +59,7 @@ class PhrasesUnitEditViewController: UITableViewController, LollyProtocol {
             let m = vm.arrPhrases[i - 1]
             guard m.SEQNUM != i else {continue}
             m.SEQNUM = i
-            MUnitPhrase.update(m.ID, seqnum: m.SEQNUM!) { print($0) }
+            PhrasesUnitViewModel.update(m.ID, seqnum: m.SEQNUM!) {}
         }
     }
     

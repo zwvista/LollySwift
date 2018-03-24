@@ -38,9 +38,9 @@ class WordsUnitDetailViewController: UITableViewController {
         
         if mWord.ID == 0 {
             vm.arrWords.append(mWord)
-            MUnitWord.create(m: MUnitWordEdit(m: mWord)) { [unowned self] in print($0); self.mWord.ID = Int($0)! }
+            WordsUnitViewModel.create(m: MUnitWordEdit(m: mWord)) { self.mWord.ID = $0 }
         } else {
-            MUnitWord.update(mWord.ID, m: MUnitWordEdit(m: mWord)) { print($0) }
+            WordsUnitViewModel.update(mWord.ID, m: MUnitWordEdit(m: mWord)) {}
         }
     }
     

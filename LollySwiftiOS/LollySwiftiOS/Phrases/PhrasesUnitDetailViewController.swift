@@ -37,9 +37,9 @@ class PhrasesUnitDetailViewController: UITableViewController {
         
         if mPhrase.ID == 0 {
             vm.arrPhrases.append(mPhrase)
-            MUnitPhrase.create(m: MUnitPhraseEdit(m: mPhrase)) { [unowned self] in print($0); self.mPhrase.ID = Int($0)! }
+            PhrasesUnitViewModel.create(m: MUnitPhraseEdit(m: mPhrase)) { self.mPhrase.ID = $0 }
         } else {
-            MUnitPhrase.update(mPhrase.ID, m: MUnitPhraseEdit(m: mPhrase)) { print($0) }
+            PhrasesUnitViewModel.update(mPhrase.ID, m: MUnitPhraseEdit(m: mPhrase)) {}
         }
     }
     
