@@ -29,7 +29,7 @@ class WordsUnitEditViewController: UITableViewController, LollyProtocol {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "WordCell", for: indexPath)
         let m = vm.arrWords[(indexPath as NSIndexPath).row]
-        cell.textLabel!.text = m.WORD
+        cell.textLabel!.text = m.description
         return cell;
     }
     
@@ -58,7 +58,7 @@ class WordsUnitEditViewController: UITableViewController, LollyProtocol {
             let m = vm.arrWords[i - 1]
             guard m.SEQNUM != i else {continue}
             m.SEQNUM = i
-            WordsUnitViewModel.update(m.ID, seqnum: m.SEQNUM!) {}
+            WordsUnitViewModel.update(m.ID, seqnum: m.SEQNUM) {}
         }
     }
     
@@ -70,7 +70,7 @@ class WordsUnitEditViewController: UITableViewController, LollyProtocol {
         } else {
             let o = MUnitWord()
             o.TEXTBOOKID = vmSettings.USTEXTBOOKID
-            let maxElem = vm.arrWords.max{ (o1, o2) in (o1.UNIT!, o1.PART!, o1.SEQNUM!) < (o2.UNIT!, o2.PART!, o2.SEQNUM!) }
+            let maxElem = vm.arrWords.max{ (o1, o2) in (o1.UNITPART, o1.SEQNUM) < (o2.UNITPART, o2.SEQNUM) }
             o.UNIT = maxElem?.UNIT ?? vmSettings.USUNITTO
             o.PART = maxElem?.PART ?? vmSettings.USPARTTO
             o.SEQNUM = (maxElem?.SEQNUM ?? 0) + 1

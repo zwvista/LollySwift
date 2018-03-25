@@ -22,9 +22,9 @@ class WordsUnitDetailViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
                 
-        tfUnit.text = String(mWord.UNIT!)
-        tfPart.text = String(mWord.PART!)
-        tfSeqNum.text = String(mWord.SEQNUM!)
+        tfUnit.text = String(mWord.UNIT)
+        tfPart.text = String(mWord.PART)
+        tfSeqNum.text = String(mWord.SEQNUM)
         tfWord.text = mWord.WORD
         tfNote.text = mWord.NOTE
     }
@@ -33,8 +33,8 @@ class WordsUnitDetailViewController: UITableViewController {
         mWord.UNIT = Int(tfUnit.text!)!
         mWord.PART = Int(tfPart.text!)!
         mWord.SEQNUM = Int(tfSeqNum.text!)!
-        mWord.WORD = tfWord.text
-        mWord.NOTE = tfNote.text
+        mWord.WORD = tfWord.text ?? ""
+        mWord.NOTE = tfNote.text ?? ""
         
         if mWord.ID == 0 {
             vm.arrWords.append(mWord)

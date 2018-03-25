@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		41624B18047DBD62E1485CDE /* Pods_LollySwiftMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F369FEA5447EADCC97C83AE1 /* Pods_LollySwiftMac.framework */; };
 		8C0ACB581D4391FB00EC6740 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0ACB571D4391FB00EC6740 /* SettingsViewController.swift */; };
 		8C1C4F281D31F88800CF5D88 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1C4F271D31F88800CF5D88 /* AppDelegate.swift */; };
 		8C1C4F2A1D31F88800CF5D88 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1C4F291D31F88800CF5D88 /* ViewController.swift */; };
@@ -14,11 +15,8 @@
 		8C1C4F2F1D31F88800CF5D88 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C1C4F2D1D31F88800CF5D88 /* Main.storyboard */; };
 		8C1C4F3A1D31F88800CF5D88 /* LollySwiftMacTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1C4F391D31F88800CF5D88 /* LollySwiftMacTests.swift */; };
 		8C1C4F451D31F88800CF5D88 /* LollySwiftMacUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1C4F441D31F88800CF5D88 /* LollySwiftMacUITests.swift */; };
-		8C32BE411EEDAC9200E4465F /* AlamofireObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C32BE401EEDAC9200E4465F /* AlamofireObjectMapper.framework */; };
-		8C32BE421EEDAC9200E4465F /* AlamofireObjectMapper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8C32BE401EEDAC9200E4465F /* AlamofireObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8C486DF41EBB88240023FBFC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C486DF31EBB88240023FBFC /* Cocoa.framework */; };
 		8C486DF61EBB882B0023FBFC /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C486DF51EBB882B0023FBFC /* WebKit.framework */; };
-		8C486E031EBB94730023FBFC /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C486DFD1EBB8EB70023FBFC /* libsqlite3.0.tbd */; };
 		8C486E301EBB94E70023FBFC /* MDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C486E1F1EBB94E70023FBFC /* MDictionary.swift */; };
 		8C486E311EBB94E70023FBFC /* MLangPhrase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C486E201EBB94E70023FBFC /* MLangPhrase.swift */; };
 		8C486E321EBB94E70023FBFC /* MLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C486E211EBB94E70023FBFC /* MLanguage.swift */; };
@@ -113,7 +111,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				8C32BE421EEDAC9200E4465F /* AlamofireObjectMapper.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -134,10 +131,8 @@
 		8C1C4F401D31F88800CF5D88 /* LollySwiftMacUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LollySwiftMacUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C1C4F441D31F88800CF5D88 /* LollySwiftMacUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LollySwiftMacUITests.swift; sourceTree = "<group>"; };
 		8C1C4F461D31F88800CF5D88 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8C32BE401EEDAC9200E4465F /* AlamofireObjectMapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AlamofireObjectMapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C486DF31EBB88240023FBFC /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		8C486DF51EBB882B0023FBFC /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
-		8C486DFD1EBB8EB70023FBFC /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		8C486E1F1EBB94E70023FBFC /* MDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDictionary.swift; sourceTree = "<group>"; };
 		8C486E201EBB94E70023FBFC /* MLangPhrase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLangPhrase.swift; sourceTree = "<group>"; };
 		8C486E211EBB94E70023FBFC /* MLanguage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLanguage.swift; sourceTree = "<group>"; };
@@ -207,6 +202,9 @@
 		8CD1D8E4206211E30071687B /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
 		8CD1D8E5206211E30071687B /* CollectionsExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionsExtension.swift; sourceTree = "<group>"; };
 		8CD1D928206227800071687B /* LollyWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LollyWindow.swift; sourceTree = "<group>"; };
+		C0A07AB238AF8E83FC5E5DD3 /* Pods-LollySwiftMac.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LollySwiftMac.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-LollySwiftMac/Pods-LollySwiftMac.debug.xcconfig"; sourceTree = "<group>"; };
+		E3F71BC79C6087E4623A422F /* Pods-LollySwiftMac.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LollySwiftMac.release.xcconfig"; path = "../Pods/Target Support Files/Pods-LollySwiftMac/Pods-LollySwiftMac.release.xcconfig"; sourceTree = "<group>"; };
+		F369FEA5447EADCC97C83AE1 /* Pods_LollySwiftMac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LollySwiftMac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -214,10 +212,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8C486E031EBB94730023FBFC /* libsqlite3.0.tbd in Frameworks */,
 				8C486DF61EBB882B0023FBFC /* WebKit.framework in Frameworks */,
 				8C486DF41EBB88240023FBFC /* Cocoa.framework in Frameworks */,
-				8C32BE411EEDAC9200E4465F /* AlamofireObjectMapper.framework in Frameworks */,
+				41624B18047DBD62E1485CDE /* Pods_LollySwiftMac.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,6 +245,7 @@
 				8C1C4F431D31F88800CF5D88 /* LollySwiftMacUITests */,
 				8C6F26DD1D333598008F706A /* Frameworks */,
 				8C1C4F251D31F88800CF5D88 /* Products */,
+				C97659C9C63745E490850F6D /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -321,10 +319,9 @@
 		8C6F26DD1D333598008F706A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				8C32BE401EEDAC9200E4465F /* AlamofireObjectMapper.framework */,
-				8C486DFD1EBB8EB70023FBFC /* libsqlite3.0.tbd */,
 				8C486DF51EBB882B0023FBFC /* WebKit.framework */,
 				8C486DF31EBB88240023FBFC /* Cocoa.framework */,
+				F369FEA5447EADCC97C83AE1 /* Pods_LollySwiftMac.framework */,
 			);
 			name = Frameworks;
 			path = LollySwiftMac;
@@ -389,6 +386,15 @@
 			path = ../../../OSS/EZSwiftExtensions/Sources;
 			sourceTree = "<group>";
 		};
+		C97659C9C63745E490850F6D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C0A07AB238AF8E83FC5E5DD3 /* Pods-LollySwiftMac.debug.xcconfig */,
+				E3F71BC79C6087E4623A422F /* Pods-LollySwiftMac.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -396,10 +402,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8C1C4F491D31F88800CF5D88 /* Build configuration list for PBXNativeTarget "LollySwiftMac" */;
 			buildPhases = (
+				A03F56BE37E6E04FA0FB6743 /* [CP] Check Pods Manifest.lock */,
 				8C1C4F201D31F88800CF5D88 /* Sources */,
 				8C1C4F211D31F88800CF5D88 /* Frameworks */,
 				8C1C4F221D31F88800CF5D88 /* Resources */,
 				8C32BE3D1EED98CF00E4465F /* Embed Frameworks */,
+				ABD824158A1C1A8D0BA35501 /* [CP] Embed Pods Frameworks */,
+				169C12BB263854500E883041 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -519,6 +528,64 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		169C12BB263854500E883041 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-LollySwiftMac/Pods-LollySwiftMac-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A03F56BE37E6E04FA0FB6743 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LollySwiftMac-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		ABD824158A1C1A8D0BA35501 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/../Pods/Target Support Files/Pods-LollySwiftMac/Pods-LollySwiftMac-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire-macOS/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper-macOS/AlamofireObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjectMapper-macOS/ObjectMapper.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-LollySwiftMac/Pods-LollySwiftMac-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8C1C4F201D31F88800CF5D88 /* Sources */ = {
@@ -745,6 +812,7 @@
 		};
 		8C1C4F4A1D31F88800CF5D88 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C0A07AB238AF8E83FC5E5DD3 /* Pods-LollySwiftMac.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -765,6 +833,7 @@
 		};
 		8C1C4F4B1D31F88800CF5D88 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E3F71BC79C6087E4623A422F /* Pods-LollySwiftMac.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;

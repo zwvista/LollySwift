@@ -13,13 +13,13 @@ import ObjectMapper
 @objcMembers
 class MUnitWord: NSObject, Mappable {
     var ID = 0
-    var TEXTBOOKID: Int?
-    var UNIT: Int?
-    var PART: Int?
-    var SEQNUM: Int?
-    var WORD: String?
+    var TEXTBOOKID = 0
+    var UNIT = 0
+    var PART = 0
+    var SEQNUM = 0
+    var WORD = ""
     var NOTE: String?
-    var UNITPART: Int?
+    var UNITPART = 0
     
     public override init() {
     }
@@ -36,6 +36,10 @@ class MUnitWord: NSObject, Mappable {
         WORD <- map["WORD"]
         NOTE <- map["NOTE"]
         UNITPART <- map["UNITPART"]
+    }
+    
+    public override var description: String {
+        return "\(SEQNUM) \(WORD)" + (NOTE?.isEmpty != false ? "" : "(\(NOTE!))")
     }
 
     static func getDataByTextbook(_ textbookid: Int, unitPartFrom: Int, unitPartTo: Int, complete: @escaping ([MUnitWord]) -> Void) {

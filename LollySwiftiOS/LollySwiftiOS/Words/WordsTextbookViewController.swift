@@ -33,6 +33,7 @@ class WordsTextbookViewController: WordsBaseViewController, UITableViewDelegate,
         let cell = tableView.dequeueReusableCell(withIdentifier: "WordCell", for: indexPath)
         let m = arrWords[(indexPath as NSIndexPath).row]
         cell.textLabel!.text = m.WORD
+        cell.detailTextLabel!.text = m.NOTE
         return cell;
     }
     

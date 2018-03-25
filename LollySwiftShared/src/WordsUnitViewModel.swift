@@ -20,7 +20,7 @@ class WordsUnitViewModel: NSObject {
     }
     
     func filterWordsForSearchText(_ searchText: String, scope: String) {
-        arrWordsFiltered = arrWords.filter { $0.WORD!.contains(searchText) }
+        arrWordsFiltered = arrWords.filter { $0.WORD.contains(searchText) }
     }
     
     static func update(_ id: Int, seqnum: Int, complete: @escaping () -> Void) {

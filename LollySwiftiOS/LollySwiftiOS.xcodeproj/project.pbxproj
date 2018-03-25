@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		29CFF3AA2D93455C46DA80F0 /* Pods_LollySwiftiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA5376BDE309080131C3F3FD /* Pods_LollySwiftiOS.framework */; };
 		8C0945691D122ACE003503ED /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0945681D122ACE003503ED /* SettingsViewController.swift */; };
 		8C328FD31EFD87AA008682E3 /* RestApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C328FD21EFD87AA008682E3 /* RestApi.swift */; };
 		8C3290201EFE808D008682E3 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C328FEE1EFE808D008682E3 /* StringExtensions.swift */; };
@@ -20,19 +21,6 @@
 		8C42B5BA1D69A21E00DCB528 /* PhrasesBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C42B5B71D69A21E00DCB528 /* PhrasesBaseViewController.swift */; };
 		8C42B5BB1D69A21E00DCB528 /* PhrasesLangViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C42B5B81D69A21E00DCB528 /* PhrasesLangViewController.swift */; };
 		8C42B5BC1D69A21E00DCB528 /* PhrasesUnitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C42B5B91D69A21E00DCB528 /* PhrasesUnitsViewController.swift */; };
-		8C4670F01D0DC4C7004F3C21 /* AbstractActionSheetPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4670DD1D0DC4C7004F3C21 /* AbstractActionSheetPicker.m */; };
-		8C4670F11D0DC4C7004F3C21 /* ActionSheetCustomPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4670DF1D0DC4C7004F3C21 /* ActionSheetCustomPicker.m */; };
-		8C4670F21D0DC4C7004F3C21 /* ActionSheetDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4670E21D0DC4C7004F3C21 /* ActionSheetDatePicker.m */; };
-		8C4670F31D0DC4C7004F3C21 /* ActionSheetDistancePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4670E41D0DC4C7004F3C21 /* ActionSheetDistancePicker.m */; };
-		8C4670F41D0DC4C7004F3C21 /* ActionSheetLocalePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4670E61D0DC4C7004F3C21 /* ActionSheetLocalePicker.m */; };
-		8C4670F51D0DC4C7004F3C21 /* ActionSheetMultipleStringPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4670E81D0DC4C7004F3C21 /* ActionSheetMultipleStringPicker.m */; };
-		8C4670F61D0DC4C7004F3C21 /* ActionSheetStringPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4670EB1D0DC4C7004F3C21 /* ActionSheetStringPicker.m */; };
-		8C4670F71D0DC4C7004F3C21 /* DistancePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4670ED1D0DC4C7004F3C21 /* DistancePickerView.m */; };
-		8C4670F81D0DC4C7004F3C21 /* SWActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4670EF1D0DC4C7004F3C21 /* SWActionSheet.m */; };
-		8C9C6A3E2052C51400F299C8 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C9C6A3D2052C51400F299C8 /* Alamofire.framework */; };
-		8C9C6A3F2052C51400F299C8 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8C9C6A3D2052C51400F299C8 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		8C9C6A412052C51400F299C8 /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C9C6A402052C51400F299C8 /* ObjectMapper.framework */; };
-		8C9C6A422052C51400F299C8 /* ObjectMapper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8C9C6A402052C51400F299C8 /* ObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8C9C6A442053F9F700F299C8 /* UIView+ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9C6A432053F9F700F299C8 /* UIView+ActivityIndicator.swift */; };
 		8CA6CDAE1EF1BF8700418799 /* MDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA6CD9C1EF1BF8700418799 /* MDictionary.swift */; };
 		8CA6CDAF1EF1BF8700418799 /* MLangPhrase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA6CD9D1EF1BF8700418799 /* MLangPhrase.swift */; };
@@ -49,8 +37,6 @@
 		8CA6CDBB1EF1BF8700418799 /* WordsLangViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA6CDA91EF1BF8700418799 /* WordsLangViewModel.swift */; };
 		8CA6CDBC1EF1BF8700418799 /* WordsTextbookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA6CDAA1EF1BF8700418799 /* WordsTextbookViewModel.swift */; };
 		8CA6CDBD1EF1BF8700418799 /* WordsUnitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA6CDAB1EF1BF8700418799 /* WordsUnitViewModel.swift */; };
-		8CBF834A20518D0D009F10B1 /* AlamofireObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C32BE431EEDACB500E4465F /* AlamofireObjectMapper.framework */; };
-		8CBF834B20518D0D009F10B1 /* AlamofireObjectMapper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8C32BE431EEDACB500E4465F /* AlamofireObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8CC8B03F205747B70092E744 /* BlockTap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8B00D205747B10092E744 /* BlockTap.swift */; };
 		8CC8B040205747B70092E744 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8B00E205747B10092E744 /* UIViewExtensions.swift */; };
 		8CC8B041205747B70092E744 /* BundleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC8B00F205747B10092E744 /* BundleExtensions.swift */; };
@@ -108,7 +94,6 @@
 		8CD16D1E1D69FE8500F5F625 /* PhrasesLangEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD16D1D1D69FE8500F5F625 /* PhrasesLangEditViewController.swift */; };
 		8CD16D201D69FE8F00F5F625 /* PhrasesLangDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD16D1F1D69FE8F00F5F625 /* PhrasesLangDetailViewController.swift */; };
 		8CD16D221D6B101200F5F625 /* LollyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD16D211D6B101200F5F625 /* LollyProtocol.swift */; };
-		951BB9921A1B78650087DB94 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 951BB9911A1B78650087DB94 /* libsqlite3.dylib */; };
 		951BB9941A1B803B0087DB94 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 951BB9931A1B803B0087DB94 /* Main.storyboard */; };
 		951BB9981A1B90260087DB94 /* LeftMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951BB9971A1B90260087DB94 /* LeftMenuViewController.swift */; };
 		951BB99A1A1B904B0087DB94 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 951BB9991A1B904B0087DB94 /* MainViewController.swift */; };
@@ -146,9 +131,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				8C9C6A422052C51400F299C8 /* ObjectMapper.framework in Embed Frameworks */,
-				8CBF834B20518D0D009F10B1 /* AlamofireObjectMapper.framework in Embed Frameworks */,
-				8C9C6A3F2052C51400F299C8 /* Alamofire.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -156,10 +138,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6C62147745E16D3870DB8D5F /* Pods-LollySwiftiOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LollySwiftiOS.release.xcconfig"; path = "../Pods/Target Support Files/Pods-LollySwiftiOS/Pods-LollySwiftiOS.release.xcconfig"; sourceTree = "<group>"; };
 		8C0945681D122ACE003503ED /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		8C328FD21EFD87AA008682E3 /* RestApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestApi.swift; sourceTree = "<group>"; };
 		8C328FEE1EFE808D008682E3 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
-		8C32BE431EEDACB500E4465F /* AlamofireObjectMapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AlamofireObjectMapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C42B5A81D69A1D900DCB528 /* WordsBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsBaseViewController.swift; sourceTree = "<group>"; };
 		8C42B5A91D69A1D900DCB528 /* WordsDictViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsDictViewController.swift; sourceTree = "<group>"; };
 		8C42B5AA1D69A1D900DCB528 /* WordsLangViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsLangViewController.swift; sourceTree = "<group>"; };
@@ -170,28 +152,6 @@
 		8C42B5B71D69A21E00DCB528 /* PhrasesBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesBaseViewController.swift; sourceTree = "<group>"; };
 		8C42B5B81D69A21E00DCB528 /* PhrasesLangViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesLangViewController.swift; sourceTree = "<group>"; };
 		8C42B5B91D69A21E00DCB528 /* PhrasesUnitsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesUnitsViewController.swift; sourceTree = "<group>"; };
-		8C4670DC1D0DC4C7004F3C21 /* AbstractActionSheetPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AbstractActionSheetPicker.h; sourceTree = "<group>"; };
-		8C4670DD1D0DC4C7004F3C21 /* AbstractActionSheetPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbstractActionSheetPicker.m; sourceTree = "<group>"; };
-		8C4670DE1D0DC4C7004F3C21 /* ActionSheetCustomPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetCustomPicker.h; sourceTree = "<group>"; };
-		8C4670DF1D0DC4C7004F3C21 /* ActionSheetCustomPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetCustomPicker.m; sourceTree = "<group>"; };
-		8C4670E01D0DC4C7004F3C21 /* ActionSheetCustomPickerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetCustomPickerDelegate.h; sourceTree = "<group>"; };
-		8C4670E11D0DC4C7004F3C21 /* ActionSheetDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetDatePicker.h; sourceTree = "<group>"; };
-		8C4670E21D0DC4C7004F3C21 /* ActionSheetDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetDatePicker.m; sourceTree = "<group>"; };
-		8C4670E31D0DC4C7004F3C21 /* ActionSheetDistancePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetDistancePicker.h; sourceTree = "<group>"; };
-		8C4670E41D0DC4C7004F3C21 /* ActionSheetDistancePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetDistancePicker.m; sourceTree = "<group>"; };
-		8C4670E51D0DC4C7004F3C21 /* ActionSheetLocalePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetLocalePicker.h; sourceTree = "<group>"; };
-		8C4670E61D0DC4C7004F3C21 /* ActionSheetLocalePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetLocalePicker.m; sourceTree = "<group>"; };
-		8C4670E71D0DC4C7004F3C21 /* ActionSheetMultipleStringPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetMultipleStringPicker.h; sourceTree = "<group>"; };
-		8C4670E81D0DC4C7004F3C21 /* ActionSheetMultipleStringPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetMultipleStringPicker.m; sourceTree = "<group>"; };
-		8C4670E91D0DC4C7004F3C21 /* ActionSheetPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetPicker.h; sourceTree = "<group>"; };
-		8C4670EA1D0DC4C7004F3C21 /* ActionSheetStringPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetStringPicker.h; sourceTree = "<group>"; };
-		8C4670EB1D0DC4C7004F3C21 /* ActionSheetStringPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetStringPicker.m; sourceTree = "<group>"; };
-		8C4670EC1D0DC4C7004F3C21 /* DistancePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DistancePickerView.h; sourceTree = "<group>"; };
-		8C4670ED1D0DC4C7004F3C21 /* DistancePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DistancePickerView.m; sourceTree = "<group>"; };
-		8C4670EE1D0DC4C7004F3C21 /* SWActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWActionSheet.h; sourceTree = "<group>"; };
-		8C4670EF1D0DC4C7004F3C21 /* SWActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWActionSheet.m; sourceTree = "<group>"; };
-		8C9C6A3D2052C51400F299C8 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8C9C6A402052C51400F299C8 /* ObjectMapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ObjectMapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C9C6A432053F9F700F299C8 /* UIView+ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+ActivityIndicator.swift"; sourceTree = "<group>"; };
 		8CA6CD9C1EF1BF8700418799 /* MDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDictionary.swift; sourceTree = "<group>"; };
 		8CA6CD9D1EF1BF8700418799 /* MLangPhrase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLangPhrase.swift; sourceTree = "<group>"; };
@@ -265,7 +225,6 @@
 		8CD16D1D1D69FE8500F5F625 /* PhrasesLangEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesLangEditViewController.swift; sourceTree = "<group>"; };
 		8CD16D1F1D69FE8F00F5F625 /* PhrasesLangDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesLangDetailViewController.swift; sourceTree = "<group>"; };
 		8CD16D211D6B101200F5F625 /* LollyProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LollyProtocol.swift; sourceTree = "<group>"; };
-		951BB9911A1B78650087DB94 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		951BB9931A1B803B0087DB94 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		951BB9951A1B8D6C0087DB94 /* LollySwiftiOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LollySwiftiOS-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		951BB9971A1B90260087DB94 /* LeftMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftMenuViewController.swift; sourceTree = "<group>"; };
@@ -297,6 +256,8 @@
 		95FFAEF51A19F03C00E00C47 /* AMSlideMenuRightTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSlideMenuRightTableViewController.m; sourceTree = "<group>"; };
 		95FFAEF61A19F03C00E00C47 /* UIViewController+AMSlideMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+AMSlideMenu.h"; sourceTree = "<group>"; };
 		95FFAEF71A19F03C00E00C47 /* UIViewController+AMSlideMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+AMSlideMenu.m"; sourceTree = "<group>"; };
+		AA5376BDE309080131C3F3FD /* Pods_LollySwiftiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LollySwiftiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FDFF1BAAC359000B9ED6654F /* Pods-LollySwiftiOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LollySwiftiOS.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-LollySwiftiOS/Pods-LollySwiftiOS.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -304,10 +265,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				951BB9921A1B78650087DB94 /* libsqlite3.dylib in Frameworks */,
-				8C9C6A3E2052C51400F299C8 /* Alamofire.framework in Frameworks */,
-				8C9C6A412052C51400F299C8 /* ObjectMapper.framework in Frameworks */,
-				8CBF834A20518D0D009F10B1 /* AlamofireObjectMapper.framework in Frameworks */,
+				29CFF3AA2D93455C46DA80F0 /* Pods_LollySwiftiOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -321,6 +279,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		14A967501BAFD53503C187A0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				FDFF1BAAC359000B9ED6654F /* Pods-LollySwiftiOS.debug.xcconfig */,
+				6C62147745E16D3870DB8D5F /* Pods-LollySwiftiOS.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		8C328FD41EFE808D008682E3 /* EZSwiftExtensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -410,34 +377,6 @@
 			path = Phrases;
 			sourceTree = "<group>";
 		};
-		8C4670DB1D0DC4C7004F3C21 /* Pickers */ = {
-			isa = PBXGroup;
-			children = (
-				8C4670DC1D0DC4C7004F3C21 /* AbstractActionSheetPicker.h */,
-				8C4670DD1D0DC4C7004F3C21 /* AbstractActionSheetPicker.m */,
-				8C4670DE1D0DC4C7004F3C21 /* ActionSheetCustomPicker.h */,
-				8C4670DF1D0DC4C7004F3C21 /* ActionSheetCustomPicker.m */,
-				8C4670E01D0DC4C7004F3C21 /* ActionSheetCustomPickerDelegate.h */,
-				8C4670E11D0DC4C7004F3C21 /* ActionSheetDatePicker.h */,
-				8C4670E21D0DC4C7004F3C21 /* ActionSheetDatePicker.m */,
-				8C4670E31D0DC4C7004F3C21 /* ActionSheetDistancePicker.h */,
-				8C4670E41D0DC4C7004F3C21 /* ActionSheetDistancePicker.m */,
-				8C4670E51D0DC4C7004F3C21 /* ActionSheetLocalePicker.h */,
-				8C4670E61D0DC4C7004F3C21 /* ActionSheetLocalePicker.m */,
-				8C4670E71D0DC4C7004F3C21 /* ActionSheetMultipleStringPicker.h */,
-				8C4670E81D0DC4C7004F3C21 /* ActionSheetMultipleStringPicker.m */,
-				8C4670E91D0DC4C7004F3C21 /* ActionSheetPicker.h */,
-				8C4670EA1D0DC4C7004F3C21 /* ActionSheetStringPicker.h */,
-				8C4670EB1D0DC4C7004F3C21 /* ActionSheetStringPicker.m */,
-				8C4670EC1D0DC4C7004F3C21 /* DistancePickerView.h */,
-				8C4670ED1D0DC4C7004F3C21 /* DistancePickerView.m */,
-				8C4670EE1D0DC4C7004F3C21 /* SWActionSheet.h */,
-				8C4670EF1D0DC4C7004F3C21 /* SWActionSheet.m */,
-			);
-			name = Pickers;
-			path = "../../../OSS/ActionSheetPicker-3.0/Pickers";
-			sourceTree = "<group>";
-		};
 		951BB9961A1B8FD50087DB94 /* Menu */ = {
 			isa = PBXGroup;
 			children = (
@@ -451,8 +390,7 @@
 		95267BDE1A1EC4DF00CC2A4B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				8C32BE431EEDACB500E4465F /* AlamofireObjectMapper.framework */,
-				951BB9911A1B78650087DB94 /* libsqlite3.dylib */,
+				AA5376BDE309080131C3F3FD /* Pods_LollySwiftiOS.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -460,9 +398,6 @@
 		953473CC1A0D16CF00FF2D56 = {
 			isa = PBXGroup;
 			children = (
-				8C9C6A402052C51400F299C8 /* ObjectMapper.framework */,
-				8C9C6A3D2052C51400F299C8 /* Alamofire.framework */,
-				8C4670DB1D0DC4C7004F3C21 /* Pickers */,
 				95FFAEE81A19F03C00E00C47 /* AMSlideMenu */,
 				8C328FD41EFE808D008682E3 /* EZSwiftExtensions */,
 				95FFAF101A19F0AA00E00C47 /* src */,
@@ -470,6 +405,7 @@
 				953473ED1A0D16CF00FF2D56 /* LollySwiftiOSTests */,
 				95267BDE1A1EC4DF00CC2A4B /* Frameworks */,
 				953473D61A0D16CF00FF2D56 /* Products */,
+				14A967501BAFD53503C187A0 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -583,10 +519,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 953473F41A0D16CF00FF2D56 /* Build configuration list for PBXNativeTarget "LollySwiftiOS" */;
 			buildPhases = (
+				FFF9CDF2DDB43EF477DFD071 /* [CP] Check Pods Manifest.lock */,
 				953473D11A0D16CF00FF2D56 /* Sources */,
 				953473D21A0D16CF00FF2D56 /* Frameworks */,
 				953473D31A0D16CF00FF2D56 /* Resources */,
 				8CBF834C20518D0D009F10B1 /* Embed Frameworks */,
+				5CDA5F8771A08BD10796CCCC /* [CP] Embed Pods Frameworks */,
+				8C3AAF0076FEFA0412487AD7 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -678,6 +617,66 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		5CDA5F8771A08BD10796CCCC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/../Pods/Target Support Files/Pods-LollySwiftiOS/Pods-LollySwiftiOS-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper-iOS/AlamofireObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjectMapper-iOS/ObjectMapper.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ActionSheetPicker_3_0.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-LollySwiftiOS/Pods-LollySwiftiOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8C3AAF0076FEFA0412487AD7 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-LollySwiftiOS/Pods-LollySwiftiOS-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FFF9CDF2DDB43EF477DFD071 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LollySwiftiOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		953473D11A0D16CF00FF2D56 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -697,7 +696,6 @@
 				951BB99C1A1B90DC0087DB94 /* LollyUINavigationController.swift in Sources */,
 				8CC8B046205747B70092E744 /* UIApplicationExtensions.swift in Sources */,
 				8CD16D201D69FE8F00F5F625 /* PhrasesLangDetailViewController.swift in Sources */,
-				8C4670F11D0DC4C7004F3C21 /* ActionSheetCustomPicker.m in Sources */,
 				8CD16D1E1D69FE8500F5F625 /* PhrasesLangEditViewController.swift in Sources */,
 				8CD16D141D69FD9500F5F625 /* WordsLangEditViewController.swift in Sources */,
 				8CA6CDBD1EF1BF8700418799 /* WordsUnitViewModel.swift in Sources */,
@@ -705,7 +703,6 @@
 				951BB99A1A1B904B0087DB94 /* MainViewController.swift in Sources */,
 				95FFAEFA1A19F03C00E00C47 /* AMSlideMenuLeftTableViewController.m in Sources */,
 				8CC8B06C205747B70092E744 /* UIImageViewExtensions.swift in Sources */,
-				8C4670F71D0DC4C7004F3C21 /* DistancePickerView.m in Sources */,
 				8C42B5B51D69A1D900DCB528 /* WordsUnitViewController.swift in Sources */,
 				8C9C6A442053F9F700F299C8 /* UIView+ActivityIndicator.swift in Sources */,
 				8CC8B049205747B70092E744 /* UIColoredView.swift in Sources */,
@@ -727,15 +724,12 @@
 				8CC8B05C205747B70092E744 /* CGRectExtensions.swift in Sources */,
 				8CC8B058205747B70092E744 /* NSObjectExtensions.swift in Sources */,
 				8CC8B064205747B70092E744 /* UIDeviceExtensions.swift in Sources */,
-				8C4670F31D0DC4C7004F3C21 /* ActionSheetDistancePicker.m in Sources */,
 				8CC8B04B205747B70092E744 /* UILabelExtensions.swift in Sources */,
 				8CA6CDB41EF1BF8700418799 /* MTextbookWord.swift in Sources */,
 				8C42B5BB1D69A21E00DCB528 /* PhrasesLangViewController.swift in Sources */,
 				95FFAEF81A19F03C00E00C47 /* AMSlideMenuContentSegue.m in Sources */,
-				8C4670F51D0DC4C7004F3C21 /* ActionSheetMultipleStringPicker.m in Sources */,
 				8CC8B06A205747B70092E744 /* UIImageExtensions.swift in Sources */,
 				95FFAEF91A19F03C00E00C47 /* AMSlideMenuLeftMenuSegue.m in Sources */,
-				8C4670F01D0DC4C7004F3C21 /* AbstractActionSheetPicker.m in Sources */,
 				8CA6CDB31EF1BF8700418799 /* MTextbook.swift in Sources */,
 				8CA6CDBB1EF1BF8700418799 /* WordsLangViewModel.swift in Sources */,
 				95267BD71A1E26D000CC2A4B /* SearchViewController.swift in Sources */,
@@ -750,9 +744,7 @@
 				8CC8B057205747B70092E744 /* TimerExtensions.swift in Sources */,
 				8C42B5B21D69A1D900DCB528 /* WordsTextbookViewController.swift in Sources */,
 				8CC8B03F205747B70092E744 /* BlockTap.swift in Sources */,
-				8C4670F81D0DC4C7004F3C21 /* SWActionSheet.m in Sources */,
 				8CC8B06B205747B70092E744 /* BlockButton.swift in Sources */,
-				8C4670F61D0DC4C7004F3C21 /* ActionSheetStringPicker.m in Sources */,
 				8CC8B04C205747B70092E744 /* FloatingPointExtensions.swift in Sources */,
 				8CC8B040205747B70092E744 /* UIViewExtensions.swift in Sources */,
 				8CC8B070205747B70092E744 /* CollectionsExtension.swift in Sources */,
@@ -760,7 +752,6 @@
 				8CA6CDAE1EF1BF8700418799 /* MDictionary.swift in Sources */,
 				8CA6CDB51EF1BF8700418799 /* MUnitPhrase.swift in Sources */,
 				951BB9981A1B90260087DB94 /* LeftMenuViewController.swift in Sources */,
-				8C4670F21D0DC4C7004F3C21 /* ActionSheetDatePicker.m in Sources */,
 				8C328FD31EFD87AA008682E3 /* RestApi.swift in Sources */,
 				8C42B5B31D69A1D900DCB528 /* WordsUnitDetailViewController.swift in Sources */,
 				8CA6CDB71EF1BF8700418799 /* MUserSetting.swift in Sources */,
@@ -772,7 +763,6 @@
 				8CC8B059205747B70092E744 /* UIButtonExtensions.swift in Sources */,
 				8CC8B054205747B70092E744 /* UIBarButtonItemExtensions.swift in Sources */,
 				8CC8B069205747B70092E744 /* UIFontExtensions.swift in Sources */,
-				8C4670F41D0DC4C7004F3C21 /* ActionSheetLocalePicker.m in Sources */,
 				8C42B5BA1D69A21E00DCB528 /* PhrasesBaseViewController.swift in Sources */,
 				8CA6CDB81EF1BF8700418799 /* PhrasesLangViewModel.swift in Sources */,
 				8CC8B04D205747B70092E744 /* BlockPinch.swift in Sources */,
@@ -924,10 +914,19 @@
 		};
 		953473F51A0D16CF00FF2D56 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FDFF1BAAC359000B9ED6654F /* Pods-LollySwiftiOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/ActionSheetPicker-3.0\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire-iOS\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/AlamofireObjectMapper-iOS\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/ObjectMapper-iOS\"",
+				);
+				HEADER_SEARCH_PATHS = ../Pods;
 				INFOPLIST_FILE = LollySwiftiOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -942,10 +941,19 @@
 		};
 		953473F61A0D16CF00FF2D56 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6C62147745E16D3870DB8D5F /* Pods-LollySwiftiOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/ActionSheetPicker-3.0\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire-iOS\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/AlamofireObjectMapper-iOS\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/ObjectMapper-iOS\"",
+				);
+				HEADER_SEARCH_PATHS = ../Pods;
 				INFOPLIST_FILE = LollySwiftiOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

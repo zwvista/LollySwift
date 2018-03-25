@@ -32,13 +32,33 @@ class WordsUnitViewController: WordsBaseViewController, UITableViewDelegate, UIT
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "WordCell", for: indexPath)
         let m = arrWords[(indexPath as NSIndexPath).row]
-        cell.textLabel!.text = m.WORD
+        cell.textLabel!.text = m.description
         return cell;
     }
     
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {  let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
+            print("delete")
+        }
+        let editAction = UITableViewRowAction(style: .normal, title: "Edit") { (action, indexPath) in
+            print("edit")
+        }
+        editAction.backgroundColor = .blue
+        
+        return [editAction, deleteAction]
+    }
+
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+//        if editingStyle == .delete {
+//            let i = (indexPath as NSIndexPath).row
+//            WordsUnitViewModel.delete(vm.arrWords[i].ID) {}
+//            vm.arrWords.remove(at: i)
+//            tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
+//        }
+//    }
+
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         let m = arrWords[(indexPath as NSIndexPath).row]
-        word = m.WORD!
+        word = m.WORD
         return indexPath
     }
 
