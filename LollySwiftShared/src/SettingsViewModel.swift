@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import EZSwiftExtensions
 
 class SettingsViewModel: NSObject {
     
