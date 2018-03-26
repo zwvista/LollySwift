@@ -27,5 +27,12 @@ class PhrasesBaseViewController: UIViewController {
         searchBarContainerView.addSubview(searchBar)
         searchController.searchResultsUpdater = delegate
         searchBar.delegate = delegate
+        // https://stackoverflow.com/questions/6466893/uisearchbar-width-wrong-in-landscape
+        searchBar.autoresizingMask = [.flexibleWidth, .flexibleBottomMargin]
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        searchController.isActive = false
     }
 }

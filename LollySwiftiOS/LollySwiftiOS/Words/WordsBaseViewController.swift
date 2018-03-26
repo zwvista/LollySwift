@@ -8,29 +8,26 @@
 
 import UIKit
 
-class WordsBaseViewController: UIViewController {
+class WordsBaseViewController: UITableViewController, LollyProtocol {
 
     // https://www.raywenderlich.com/113772/uisearchcontroller-tutorial
     let searchController = UISearchController(searchResultsController: nil)
     var searchBar: UISearchBar { return searchController.searchBar }
     var word = ""
     
-    @IBOutlet weak var tableView: UITableView!
-    // http://stackoverflow.com/questions/26417591/uisearchcontroller-in-a-uiviewcontroller
-    @IBOutlet weak var searchBarContainerView: UIView!
-
     func setupSearchController(delegate: UISearchBarDelegate & UISearchResultsUpdating) {
-        definesPresentationContext = true
-        searchController.dimsBackgroundDuringPresentation = false
-        searchBar.scopeButtonTitles = ["Word", "Translation"]
-        searchBar.sizeToFit()
-        searchBarContainerView.addSubview(searchBar)
+        // https://stackoverflow.com/questions/28326269/uisearchbar-presented-by-uisearchcontroller-in-table-header-view-animates-too-fa
+        searchController.dimsBackgroundDuringPresentation = true
+        searchBar.scopeButtonTitles = ["Word", "Note"]
         searchController.searchResultsUpdater = delegate
         searchBar.delegate = delegate
+        tableView.tableHeaderView = searchBar
+        definesPresentationContext = true
     }
-    
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        searchBar.sizeToFit()
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        searchController.isActive = false
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WordsTextbookViewController: WordsBaseViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating {
+class WordsTextbookViewController: WordsBaseViewController, UISearchBarDelegate, UISearchResultsUpdating {
 
     var vm: WordsTextbookViewModel!
     var arrWords: [MTextbookWord] {
@@ -18,28 +18,27 @@ class WordsTextbookViewController: WordsBaseViewController, UITableViewDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.showBlurLoader()
-        vm = WordsTextbookViewModel(settings: AppDelegate.theSettingsViewModel) { [unowned self] in
+        vm = WordsTextbookViewModel(settings: AppDelegate.theSettingsViewModel) {
             self.setupSearchController(delegate: self)
             self.tableView.reloadData()
             self.view.removeBlurLoader()
         }
     }
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return arrWords.count
     }
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "WordCell", for: indexPath)
         let m = arrWords[(indexPath as NSIndexPath).row]
-        cell.textLabel!.text = m.WORD
-        cell.detailTextLabel!.text = m.NOTE
+        cell.textLabel!.text = m.description
         return cell;
     }
     
-    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         let m = arrWords[(indexPath as NSIndexPath).row]
-        word = m.WORD!
+        word = m.WORD
         return indexPath
     }
     

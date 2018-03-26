@@ -36,6 +36,10 @@ class SearchViewController: UIViewController, UIWebViewDelegate, UISearchBarDele
         sbword.resignFirstResponder()
     }
     
+    func position(for bar: UIBarPositioning) -> UIBarPosition {
+        return .top
+    }
+
     func webViewDidFinishLoad(_ webView: UIWebView) {
         guard webView === wvDictOnline && webView.stringByEvaluatingJavaScript(from: "document.readyState") == "complete" && !webViewFinished else {return}
         

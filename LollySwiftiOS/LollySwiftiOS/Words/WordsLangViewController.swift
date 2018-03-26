@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WordsLangViewController: WordsBaseViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating {
+class WordsLangViewController: WordsBaseViewController, UISearchBarDelegate, UISearchResultsUpdating {
 
     var vm: WordsLangViewModel!
     var arrWords: [MLangWord] {
@@ -25,23 +25,38 @@ class WordsLangViewController: WordsBaseViewController, UITableViewDelegate, UIT
         }
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return arrWords.count
     }
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "WordCell", for: indexPath)
         let m = arrWords[(indexPath as NSIndexPath).row]
         cell.textLabel!.text = m.WORD
         return cell;
     }
     
-    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         let m = arrWords[(indexPath as NSIndexPath).row]
         word = m.WORD!
         return indexPath
     }
     
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
+            let i = (indexPath as NSIndexPath).row
+//            WordsLangViewModel.delete(self.vm.arrWords[i].ID) {}
+            self.vm.arrWords.remove(at: i)
+            tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
+        }
+        let editAction = UITableViewRowAction(style: .normal, title: "Edit") { (action, indexPath) in
+            self.performSegue(withIdentifier: "edit", sender: self)
+        }
+        editAction.backgroundColor = .blue
+        
+        return [editAction, deleteAction]
+    }
+
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
     }
     
@@ -52,8 +67,8 @@ class WordsLangViewController: WordsBaseViewController, UITableViewDelegate, UIT
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
-        if let controller = segue.destination as? WordsLangEditViewController {
-            controller.vm = vm
+        if let controller = (segue.destination as? UINavigationController)?.topViewController as? WordsLangDetailViewController {
+            controller.mWord = sender is UITableViewCell ? vm.arrWords[(tableView.indexPathForSelectedRow! as NSIndexPath).row] : MLangWord()
         }
     }
 }

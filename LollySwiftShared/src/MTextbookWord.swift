@@ -12,14 +12,14 @@ import ObjectMapper
 
 @objcMembers
 class MTextbookWord: NSObject, Mappable {
-    var TEXTBOOKID: Int?
-    var LANGID: Int?
-    var TEXTBOOKNAME: String?
-    var UNITWORDID: Int?
-    var UNIT: Int?
-    var PART: Int?
-    var SEQNUM: Int?
-    var WORD: String?
+    var TEXTBOOKID = 0
+    var LANGID = 0
+    var TEXTBOOKNAME = ""
+    var UNITWORDID = 0
+    var UNIT = 0
+    var PART = 0
+    var SEQNUM = 0
+    var WORD = ""
     var NOTE: String?
     
     required public init?(map: Map){
@@ -35,6 +35,10 @@ class MTextbookWord: NSObject, Mappable {
         SEQNUM <- map["SEQNUM"]
         WORD <- map["WORD"]
         NOTE <- map["NOTE"]
+    }
+    
+    public override var description: String {
+        return "\(SEQNUM) \(WORD)" + (NOTE?.isEmpty != false ? "" : "(\(NOTE!))")
     }
 
     static func getDataByLang(_ langid: Int, complete: @escaping ([MTextbookWord]) -> Void) {

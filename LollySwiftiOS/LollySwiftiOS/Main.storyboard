@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -547,7 +548,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="6p7-56-Kqv" kind="relationship" relationship="rootViewController" id="BKp-5T-cjk"/>
+                        <segue destination="vUM-44-gHw" kind="relationship" relationship="rootViewController" id="qTw-eI-7sj"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DnJ-eU-Lmb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -563,7 +564,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="edA-9d-NQY" kind="relationship" relationship="rootViewController" id="WQn-fE-8UK"/>
+                        <segue destination="w6P-dj-Clf" kind="relationship" relationship="rootViewController" id="NR7-Qw-xVF"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Daq-4c-VeX" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -579,7 +580,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="bXG-MI-XzS" kind="relationship" relationship="rootViewController" id="dd1-Jq-1br"/>
+                        <segue destination="T0D-kT-TW1" kind="relationship" relationship="rootViewController" id="Vg6-hF-AoZ"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n8B-Qm-ofV" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -621,7 +622,7 @@
         <!--Navigation Controller-->
         <scene sceneID="xun-IE-myV">
             <objects>
-                <navigationController id="u2P-mb-ghZ" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="wordsInUnitDetailController" id="u2P-mb-ghZ" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="YUN-Pp-VD6">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -632,84 +633,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CGq-HM-5oi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5149" y="983"/>
-        </scene>
-        <!--Words in Unit-->
-        <scene sceneID="ghu-EX-OUC">
-            <objects>
-                <viewController id="6p7-56-Kqv" customClass="WordsUnitViewController" customModule="LollySwiftiOS" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="DcD-nA-WIU"/>
-                        <viewControllerLayoutGuide type="bottom" id="00e-Y7-ae8"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Upo-dc-khL">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9wd-3H-i5k">
-                                <rect key="frame" x="-4" y="108" width="383" height="559"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" showsReorderControl="YES" indentationWidth="10" reuseIdentifier="WordCell" textLabel="EYZ-EW-ZIc" style="IBUITableViewCellStyleDefault" id="xMD-61-Y1p">
-                                        <rect key="frame" x="0.0" y="28" width="383" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xMD-61-Y1p" id="NT5-Db-JWg">
-                                            <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EYZ-EW-ZIc">
-                                                    <rect key="frame" x="15" y="0.0" width="353" height="43.5"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="sKF-T7-DSr" kind="show" id="teN-ky-vV2"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="6p7-56-Kqv" id="2L1-SI-mn0"/>
-                                    <outlet property="delegate" destination="6p7-56-Kqv" id="80i-ar-fyt"/>
-                                </connections>
-                            </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1gx-aI-jOe">
-                                <rect key="frame" x="-4" y="64" width="383" height="44"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="HM9-25-abw"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="1gx-aI-jOe" secondAttribute="trailing" constant="-20" id="VcM-tr-7Zk"/>
-                            <constraint firstItem="1gx-aI-jOe" firstAttribute="top" secondItem="DcD-nA-WIU" secondAttribute="bottom" id="XoS-GH-QYY"/>
-                            <constraint firstItem="00e-Y7-ae8" firstAttribute="top" secondItem="9wd-3H-i5k" secondAttribute="bottom" id="fqL-8K-BX6"/>
-                            <constraint firstItem="1gx-aI-jOe" firstAttribute="leading" secondItem="Upo-dc-khL" secondAttribute="leadingMargin" constant="-20" id="jdn-1k-S2f"/>
-                            <constraint firstItem="9wd-3H-i5k" firstAttribute="top" secondItem="Upo-dc-khL" secondAttribute="topMargin" constant="44" id="m47-GI-GF5"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="9wd-3H-i5k" secondAttribute="trailing" constant="-20" id="vus-9p-amz"/>
-                            <constraint firstItem="9wd-3H-i5k" firstAttribute="leading" secondItem="Upo-dc-khL" secondAttribute="leadingMargin" constant="-20" id="ypT-uP-JGB"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="Words in Unit" id="Sfc-86-MdD">
-                        <barButtonItem key="rightBarButtonItem" title="Edit" id="8ao-TD-JBE">
-                            <connections>
-                                <segue destination="vUM-44-gHw" kind="show" id="u42-UU-Bpz"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="searchBarContainerView" destination="1gx-aI-jOe" id="QQu-As-nXL"/>
-                        <outlet property="tableView" destination="9wd-3H-i5k" id="MUJ-BI-pIO"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hYJ-no-BAF" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3743" y="983"/>
+            <point key="canvasLocation" x="4511" y="945"/>
         </scene>
         <!--Words Dict-->
         <scene sceneID="MnU-JF-zWY">
@@ -745,167 +669,10 @@
             </objects>
             <point key="canvasLocation" x="4535" y="1723"/>
         </scene>
-        <!--Words in Textbook-->
-        <scene sceneID="hed-cG-DrI">
-            <objects>
-                <viewController id="edA-9d-NQY" customClass="WordsTextbookViewController" customModule="LollySwiftiOS" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="w3C-JC-smA"/>
-                        <viewControllerLayoutGuide type="bottom" id="lMt-Ab-ggT"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Aj7-SR-7ch">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="htr-vG-DO3">
-                                <rect key="frame" x="-4" y="108" width="383" height="559"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="WordCell" textLabel="5vI-7G-2Sx" detailTextLabel="i8x-ng-LPH" style="IBUITableViewCellStyleSubtitle" id="w1d-eg-0VF">
-                                        <rect key="frame" x="0.0" y="28" width="383" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="w1d-eg-0VF" id="t4w-2k-at3">
-                                            <rect key="frame" x="0.0" y="0.0" width="350" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5vI-7G-2Sx">
-                                                    <rect key="frame" x="15" y="5" width="33.5" height="20.5"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="i8x-ng-LPH">
-                                                    <rect key="frame" x="15" y="25.5" width="44" height="14.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <color key="textColor" red="1" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="sKF-T7-DSr" kind="show" id="EGL-4M-vDl"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="edA-9d-NQY" id="5hj-3P-fVs"/>
-                                    <outlet property="delegate" destination="edA-9d-NQY" id="mpj-6E-jTV"/>
-                                </connections>
-                            </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rNx-OC-q9m">
-                                <rect key="frame" x="-4" y="64" width="383" height="44"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="9ce-hm-Szv"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="rNx-OC-q9m" secondAttribute="trailing" constant="-20" id="6tc-Be-uBz"/>
-                            <constraint firstItem="rNx-OC-q9m" firstAttribute="leading" secondItem="Aj7-SR-7ch" secondAttribute="leadingMargin" constant="-20" id="D8e-tR-wXS"/>
-                            <constraint firstItem="rNx-OC-q9m" firstAttribute="top" secondItem="w3C-JC-smA" secondAttribute="bottom" id="Ife-8W-Md6"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="htr-vG-DO3" secondAttribute="trailing" constant="-20" id="Iya-8z-Leg"/>
-                            <constraint firstItem="htr-vG-DO3" firstAttribute="leading" secondItem="Aj7-SR-7ch" secondAttribute="leadingMargin" constant="-20" id="Mzd-TQ-f2I"/>
-                            <constraint firstItem="htr-vG-DO3" firstAttribute="top" secondItem="Aj7-SR-7ch" secondAttribute="topMargin" constant="44" id="o8J-EG-cbO"/>
-                            <constraint firstItem="lMt-Ab-ggT" firstAttribute="top" secondItem="htr-vG-DO3" secondAttribute="bottom" id="vQB-1g-pql"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="Words in Textbook" id="fML-yu-XgM"/>
-                    <connections>
-                        <outlet property="searchBarContainerView" destination="rNx-OC-q9m" id="vMu-JV-W5F"/>
-                        <outlet property="tableView" destination="htr-vG-DO3" id="HH5-pS-f9x"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="WfV-Ua-664" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3743" y="1714"/>
-        </scene>
-        <!--Words in Language-->
-        <scene sceneID="VjC-cF-tJ8">
-            <objects>
-                <viewController id="bXG-MI-XzS" customClass="WordsLangViewController" customModule="LollySwiftiOS" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="iqB-tL-Xea"/>
-                        <viewControllerLayoutGuide type="bottom" id="Dxg-nE-06e"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="wHY-2C-mP5">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="VDs-K4-PLr">
-                                <rect key="frame" x="-4" y="108" width="383" height="515"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="WordCell" textLabel="WSk-oN-3bQ" style="IBUITableViewCellStyleDefault" id="ArI-oM-R5n">
-                                        <rect key="frame" x="0.0" y="28" width="383" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ArI-oM-R5n" id="B5G-UR-Qd3">
-                                            <rect key="frame" x="0.0" y="0.0" width="350" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="WSk-oN-3bQ">
-                                                    <rect key="frame" x="15" y="0.0" width="333" height="43.5"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="1" green="0.0" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="sKF-T7-DSr" kind="show" id="afU-WM-9eD"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="bXG-MI-XzS" id="8mH-MM-2vW"/>
-                                    <outlet property="delegate" destination="bXG-MI-XzS" id="ffT-cw-WDn"/>
-                                </connections>
-                            </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dnJ-ef-ied">
-                                <rect key="frame" x="-4" y="64" width="383" height="44"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="yzb-Oj-eEw"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="Dxg-nE-06e" firstAttribute="top" secondItem="VDs-K4-PLr" secondAttribute="bottom" id="5ST-30-bG0"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="VDs-K4-PLr" secondAttribute="trailing" constant="-20" id="K6H-GW-M9W"/>
-                            <constraint firstItem="dnJ-ef-ied" firstAttribute="top" secondItem="iqB-tL-Xea" secondAttribute="bottom" id="XfH-ht-fu9"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="dnJ-ef-ied" secondAttribute="trailing" constant="-20" id="a1Q-3L-v9N"/>
-                            <constraint firstItem="VDs-K4-PLr" firstAttribute="leading" secondItem="wHY-2C-mP5" secondAttribute="leadingMargin" constant="-20" id="cvt-4G-2pJ"/>
-                            <constraint firstItem="VDs-K4-PLr" firstAttribute="top" secondItem="wHY-2C-mP5" secondAttribute="topMargin" constant="44" id="fEj-fN-rZc"/>
-                            <constraint firstItem="dnJ-ef-ied" firstAttribute="leading" secondItem="wHY-2C-mP5" secondAttribute="leadingMargin" constant="-20" id="hSd-Qr-iZw"/>
-                        </constraints>
-                    </view>
-                    <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Words in Language" id="w3Q-ne-ykI">
-                        <barButtonItem key="rightBarButtonItem" title="Edit" id="9Xi-7j-ZbD">
-                            <connections>
-                                <segue destination="T0D-kT-TW1" kind="show" id="Bsy-d2-Bik"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
-                    <connections>
-                        <outlet property="searchBarContainerView" destination="dnJ-ef-ied" id="E7I-Jl-phV"/>
-                        <outlet property="tableView" destination="VDs-K4-PLr" id="G2b-Fg-UeI"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="QLh-QD-7ej" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3743" y="2405"/>
-        </scene>
-        <!--Words in Unit (Edit)-->
+        <!--Words in Unit-->
         <scene sceneID="obu-qQ-qZ9">
             <objects>
-                <tableViewController id="vUM-44-gHw" customClass="WordsUnitEditViewController" customModule="LollySwiftiOS" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="vUM-44-gHw" customClass="WordsUnitViewController" customModule="LollySwiftiOS" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="u5J-Qs-UeK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -927,9 +694,6 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="u2P-mb-ghZ" kind="presentation" identifier="" id="ShM-XZ-dCv"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -937,17 +701,29 @@
                             <outlet property="delegate" destination="vUM-44-gHw" id="nGE-cB-xO0"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Words in Unit (Edit)" id="xZ5-om-3CN">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="iAg-Rh-7JO">
-                            <connections>
-                                <segue destination="u2P-mb-ghZ" kind="presentation" identifier="" id="O5l-wV-jBh"/>
-                            </connections>
-                        </barButtonItem>
+                    <navigationItem key="navigationItem" title="Words in Unit" id="xZ5-om-3CN">
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="iAg-Rh-7JO">
+                                <connections>
+                                    <segue destination="u2P-mb-ghZ" kind="presentation" identifier="add" id="O5l-wV-jBh"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="edit" id="3qe-RI-Ddv">
+                                <connections>
+                                    <action selector="btnEditClicked:" destination="vUM-44-gHw" id="awb-0F-mh9"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
+                    <connections>
+                        <outlet property="btnEdit" destination="3qe-RI-Ddv" id="6Um-H9-2QH"/>
+                        <segue destination="u2P-mb-ghZ" kind="presentation" identifier="edit" id="uuq-e1-2eL"/>
+                        <segue destination="sKF-T7-DSr" kind="show" identifier="dict" id="Wcb-Wk-Ta2"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pJF-2o-6ag" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4504" y="983"/>
+            <point key="canvasLocation" x="3742" y="945"/>
         </scene>
         <!--Words in Unit (Detail)-->
         <scene sceneID="yGF-4W-vrW">
@@ -1143,7 +919,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O2C-27-NT0" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="t3J-qd-atj" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="5932" y="998"/>
+            <point key="canvasLocation" x="5321" y="945"/>
         </scene>
         <!--Phrases in Unit-->
         <scene sceneID="GoZ-zP-IL2">
@@ -1325,12 +1101,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T9H-ub-DFL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5205" y="2405"/>
+            <point key="canvasLocation" x="4534" y="2419"/>
         </scene>
-        <!--Words in Language (Edit)-->
+        <!--Words in Language-->
         <scene sceneID="6ev-7d-Zbi">
             <objects>
-                <tableViewController id="T0D-kT-TW1" customClass="WordsLangEditViewController" customModule="LollySwiftiOS" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="T0D-kT-TW1" customClass="WordsLangViewController" customModule="LollySwiftiOS" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Fnt-s9-pEp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1353,7 +1129,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="3V8-CG-zzI" kind="presentation" identifier="" id="Gri-7Y-1xY"/>
+                                    <segue destination="sKF-T7-DSr" kind="show" identifier="dict" id="4Mp-sf-Evb"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -1362,17 +1138,20 @@
                             <outlet property="delegate" destination="T0D-kT-TW1" id="pyM-PD-4zQ"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Words in Language (Edit)" id="dzM-nk-Pbs">
+                    <navigationItem key="navigationItem" title="Words in Language" id="dzM-nk-Pbs">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="lFe-be-fqE">
                             <connections>
-                                <segue destination="3V8-CG-zzI" kind="presentation" identifier="" id="Ol9-Ej-9ED"/>
+                                <segue destination="3V8-CG-zzI" kind="presentation" identifier="add" id="Ol9-Ej-9ED"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="3V8-CG-zzI" kind="presentation" identifier="edit" id="Q8T-Ex-R1C"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aie-NG-mri" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4560" y="2405"/>
+            <point key="canvasLocation" x="3742" y="2405"/>
         </scene>
         <!--Words in Language (Detail)-->
         <scene sceneID="amg-39-okH">
@@ -1443,7 +1222,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S2t-Zm-vjz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5988" y="2420"/>
+            <point key="canvasLocation" x="5369" y="2418"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="6ou-kO-QMg">
@@ -1883,12 +1662,53 @@
             </objects>
             <point key="canvasLocation" x="5940" y="3884"/>
         </scene>
+        <!--Words in Textbook-->
+        <scene sceneID="dTE-tM-KUY">
+            <objects>
+                <tableViewController id="w6P-dj-Clf" customClass="WordsTextbookViewController" customModule="LollySwiftiOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="KHM-sm-Ycm">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="WordCell" textLabel="mzn-Pq-Vjg" style="IBUITableViewCellStyleDefault" id="ept-7L-Su9">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ept-7L-Su9" id="PHz-br-NyO">
+                                    <rect key="frame" x="0.0" y="0.0" width="341" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mzn-Pq-Vjg">
+                                            <rect key="frame" x="16" y="0.0" width="324" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="sKF-T7-DSr" kind="show" id="819-3q-fW8"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="w6P-dj-Clf" id="L9c-8d-QQC"/>
+                            <outlet property="delegate" destination="w6P-dj-Clf" id="D2E-yI-1bG"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Words in Textbook" id="AUf-3R-cQq"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="e37-kc-jTQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3742" y="1675"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="U9p-Rz-vsR"/>
         <segue reference="Ezc-3N-9RT"/>
-        <segue reference="Ol9-Ej-9ED"/>
-        <segue reference="teN-ky-vV2"/>
+        <segue reference="Q8T-Ex-R1C"/>
+        <segue reference="4Mp-sf-Evb"/>
         <segue reference="O5l-wV-jBh"/>
     </inferredMetricsTieBreakers>
 </document>

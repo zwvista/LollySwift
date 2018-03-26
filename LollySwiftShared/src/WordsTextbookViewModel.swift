@@ -22,7 +22,7 @@ class WordsTextbookViewModel: NSObject {
     
     func filterWordsForSearchText(_ searchText: String, scope: String) {
         arrWordsFiltered = arrWords.filter({ (m) -> Bool in
-            return m.WORD!.contains(searchText)
+            return m.WORD.contains(searchText)
         })
     }
 
