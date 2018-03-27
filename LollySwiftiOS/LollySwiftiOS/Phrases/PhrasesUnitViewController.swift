@@ -61,9 +61,15 @@ class PhrasesUnitViewController: PhrasesBaseViewController, UISearchBarDelegate,
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
             let i = indexPath.row
-            PhrasesUnitViewModel.delete(self.vm.arrPhrases[i].ID) {}
-            self.vm.arrPhrases.remove(at: i)
-            tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
+            let m = self.vm.arrPhrases[i]
+            self.yesNoAction(title: "delete", message: "Do you really want to delete the phrase \"\(m.PHRASE)\"?", yesHandler: { (action) in
+                PhrasesUnitViewModel.delete(m.ID) {}
+                self.vm.arrPhrases.remove(at: i)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            }, noHandler: { (action) in
+                tableView.reloadRows(at: [indexPath], with: .fade)
+            })
+            self.tableView.reloadRows(at: [indexPath], with: .fade)
         }
         let editAction = UITableViewRowAction(style: .normal, title: "Edit") { (action, indexPath) in
             let m = self.arrPhrases[indexPath.row]

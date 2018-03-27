@@ -60,9 +60,14 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
             let i = indexPath.row
-            WordsUnitViewModel.delete(self.vm.arrWords[i].ID) {}
-            self.vm.arrWords.remove(at: i)
-            tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
+            let m = self.vm.arrWords[i]
+            self.yesNoAction(title: "delete", message: "Do you really want to delete the word \"\(m.WORD)\"?", yesHandler: { (action) in
+                WordsUnitViewModel.delete(m.ID) {}
+                self.vm.arrWords.remove(at: i)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            }, noHandler: { (action) in
+                tableView.reloadRows(at: [indexPath], with: .fade)
+            })
         }
         let editAction = UITableViewRowAction(style: .normal, title: "Edit") { (action, indexPath) in
             let m = self.arrWords[indexPath.row]

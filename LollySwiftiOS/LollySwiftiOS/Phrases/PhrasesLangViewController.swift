@@ -40,9 +40,14 @@ class PhrasesLangViewController: PhrasesBaseViewController, UISearchBarDelegate,
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
             let i = indexPath.row
-            PhrasesLangViewModel.delete(self.vm.arrPhrases[i].ID) {}
-            self.vm.arrPhrases.remove(at: i)
-            tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
+            let m = self.vm.arrPhrases[i]
+            self.yesNoAction(title: "delete", message: "Do you really want to delete the phrase \"\(m.PHRASE)\"?", yesHandler: { (action) in
+                PhrasesLangViewModel.delete(m.ID) {}
+                self.vm.arrPhrases.remove(at: i)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            }, noHandler: { (action) in
+                tableView.reloadRows(at: [indexPath], with: .fade)
+            })
         }
         let editAction = UITableViewRowAction(style: .normal, title: "Edit") { (action, indexPath) in
             let m = self.arrPhrases[indexPath.row]
@@ -69,7 +74,7 @@ class PhrasesLangViewController: PhrasesBaseViewController, UISearchBarDelegate,
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         if let controller = (segue.destination as? UINavigationController)?.topViewController as? PhrasesLangDetailViewController {
-            controller.mPhrase = sender is MLangPhrase ? sender as! MLangPhrase : MLangPhrase()
+            controller.mPhrase = sender as? MLangPhrase ?? MLangPhrase()
         }
     }
     
