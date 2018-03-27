@@ -656,7 +656,6 @@
                     </view>
                     <navigationItem key="navigationItem" title="Words Dict" id="jCe-eT-I9D"/>
                     <connections>
-                        <outlet property="wvWord" destination="3sk-qJ-veV" id="Gh5-Vw-tet"/>
                         <outlet property="wvWordHolder" destination="3sk-qJ-veV" id="vwI-bd-Vaf"/>
                     </connections>
                 </viewController>
@@ -673,7 +672,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="WordCell" textLabel="dPL-0X-3D9" style="IBUITableViewCellStyleDefault" id="Fmp-3Q-sQC">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="WordCell" textLabel="dPL-0X-3D9" detailTextLabel="jWY-86-Gp5" style="IBUITableViewCellStyleSubtitle" id="Fmp-3Q-sQC">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Fmp-3Q-sQC" id="hbz-bv-SMG">
@@ -681,10 +680,17 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dPL-0X-3D9">
-                                            <rect key="frame" x="16" y="0.0" width="324" height="43.5"/>
+                                            <rect key="frame" x="16" y="5" width="33.5" height="20.5"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jWY-86-Gp5">
+                                            <rect key="frame" x="16" y="25.5" width="44" height="14.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -1545,7 +1551,7 @@
         <segue reference="p1U-Lg-pC8"/>
         <segue reference="CIw-HR-KYx"/>
         <segue reference="Q8T-Ex-R1C"/>
-        <segue reference="pAu-9n-D91"/>
+        <segue reference="Wcb-Wk-Ta2"/>
         <segue reference="uuq-e1-2eL"/>
     </inferredMetricsTieBreakers>
 </document>

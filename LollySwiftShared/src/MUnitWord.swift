@@ -21,6 +21,13 @@ class MUnitWord: NSObject, Mappable {
     var NOTE: String?
     var UNITPART = 0
     
+    var UNITPARTSEQNUM: String {
+        return "\(UNIT) \(PART) \(SEQNUM)"
+    }
+    var WORDNOTE: String {
+        return WORD + (NOTE == nil || NOTE!.isEmpty ? "" : "(\(NOTE!))")
+    }
+    
     public override init() {
     }
 
