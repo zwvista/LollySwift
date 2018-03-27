@@ -13,7 +13,6 @@ class WordsBaseViewController: UITableViewController, LollyProtocol {
     // https://www.raywenderlich.com/113772/uisearchcontroller-tutorial
     let searchController = UISearchController(searchResultsController: nil)
     var searchBar: UISearchBar { return searchController.searchBar }
-    var word = ""
     
     func setupSearchController(delegate: UISearchBarDelegate & UISearchResultsUpdating) {
         // https://stackoverflow.com/questions/28326269/uisearchbar-presented-by-uisearchcontroller-in-table-header-view-animates-too-fa
@@ -32,7 +31,7 @@ class WordsBaseViewController: UITableViewController, LollyProtocol {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let controller = segue.destination as? WordsDictViewController {
-            controller.word = word
+            controller.word = sender as! String
         }
     }
 }

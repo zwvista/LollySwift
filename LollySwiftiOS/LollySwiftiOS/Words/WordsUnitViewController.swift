@@ -18,7 +18,6 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
         self.view.showBlurLoader()
         vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel) {
             self.setupSearchController(delegate: self)
@@ -33,7 +32,7 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "WordCell", for: indexPath)
-        let m = arrWords[(indexPath as NSIndexPath).row]
+        let m = arrWords[indexPath.row]
         cell.textLabel!.text = m.description
         return cell;
     }
@@ -60,13 +59,14 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
 
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
-            let i = (indexPath as NSIndexPath).row
+            let i = indexPath.row
             WordsUnitViewModel.delete(self.vm.arrWords[i].ID) {}
             self.vm.arrWords.remove(at: i)
             tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
         }
         let editAction = UITableViewRowAction(style: .normal, title: "Edit") { (action, indexPath) in
-            self.performSegue(withIdentifier: "edit", sender: self)
+            let m = self.arrWords[indexPath.row]
+            self.performSegue(withIdentifier: "edit", sender: m)
         }
         editAction.backgroundColor = .blue
         
@@ -74,8 +74,12 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
     }
         
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        word = arrWords[(indexPath as NSIndexPath).row].WORD
-        performSegue(withIdentifier: isEditing ? "edit" : "dict", sender: self)
+        let m = arrWords[indexPath.row]
+        if tableView.isEditing {
+            performSegue(withIdentifier: "edit", sender: m)
+        } else {
+            performSegue(withIdentifier: "dict", sender: m.WORD)
+        }
     }
 
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
@@ -90,8 +94,8 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
         super.prepare(for: segue, sender: sender)
         guard let controller = (segue.destination as? UINavigationController)?.topViewController as? WordsUnitDetailViewController else {return}
         controller.vm = vm
-        if !(sender is UIBarButtonItem) {
-            controller.mWord = vm.arrWords[(tableView.indexPathForSelectedRow! as NSIndexPath).row]
+        if sender is MUnitWord {
+            controller.mWord = sender as! MUnitWord
         } else {
             let o = MUnitWord()
             o.TEXTBOOKID = vmSettings.USTEXTBOOKID

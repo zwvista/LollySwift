@@ -31,32 +31,32 @@ class WordsLangViewController: WordsBaseViewController, UISearchBarDelegate, UIS
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "WordCell", for: indexPath)
-        let m = arrWords[(indexPath as NSIndexPath).row]
+        let m = arrWords[indexPath.row]
         cell.textLabel!.text = m.WORD
         return cell;
     }
     
-    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        let m = arrWords[(indexPath as NSIndexPath).row]
-        word = m.WORD!
-        return indexPath
-    }
-    
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
-            let i = (indexPath as NSIndexPath).row
-//            WordsLangViewModel.delete(self.vm.arrWords[i].ID) {}
+            let i = indexPath.row
+            WordsLangViewModel.delete(self.vm.arrWords[i].ID) {}
             self.vm.arrWords.remove(at: i)
             tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
         }
         let editAction = UITableViewRowAction(style: .normal, title: "Edit") { (action, indexPath) in
-            self.performSegue(withIdentifier: "edit", sender: self)
+            let m = self.arrWords[indexPath.row]
+            self.performSegue(withIdentifier: "edit", sender: m)
         }
         editAction.backgroundColor = .blue
         
         return [editAction, deleteAction]
     }
 
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let m = arrWords[indexPath.row]
+        performSegue(withIdentifier: "dict", sender: m.WORD)
+    }
+    
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
     }
     
@@ -68,7 +68,7 @@ class WordsLangViewController: WordsBaseViewController, UISearchBarDelegate, UIS
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         if let controller = (segue.destination as? UINavigationController)?.topViewController as? WordsLangDetailViewController {
-            controller.mWord = sender is UITableViewCell ? vm.arrWords[(tableView.indexPathForSelectedRow! as NSIndexPath).row] : MLangWord()
+            controller.mWord = sender is MLangWord ? sender as! MLangWord : MLangWord()
         }
     }
 }

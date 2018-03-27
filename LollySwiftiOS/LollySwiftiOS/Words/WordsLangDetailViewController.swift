@@ -24,7 +24,7 @@ class WordsLangDetailViewController: UITableViewController {
     }
     
     @IBAction func onDone(_ sender: AnyObject) {
-        mWord.WORD = tfWord.text
+        mWord.WORD = tfWord.text ?? ""
         
         self.dismiss(animated: true, completion: nil)
     }

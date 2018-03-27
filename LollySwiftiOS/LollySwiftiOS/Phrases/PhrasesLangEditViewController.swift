@@ -28,7 +28,7 @@ class PhrasesLangEditViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PhraseCell", for: indexPath)
-        let m = vm.arrPhrases[(indexPath as NSIndexPath).row]
+        let m = vm.arrPhrases[indexPath.row]
         cell.textLabel!.text = m.PHRASE
         cell.detailTextLabel!.text = m.TRANSLATION
         return cell;
@@ -40,7 +40,7 @@ class PhrasesLangEditViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            vm.arrPhrases.remove(at: (indexPath as NSIndexPath).row)
+            vm.arrPhrases.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
         }
     }

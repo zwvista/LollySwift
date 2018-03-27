@@ -12,8 +12,10 @@ import ObjectMapper
 
 @objcMembers
 class MLangWord: NSObject, Mappable {
-    var LANGID: Int? = 0
-    var WORD: String?
+    var ID = 0
+    var LANGID = 0
+    var WORD = ""
+    var LEVEL = 0
     
     public override init() {
     }
@@ -22,13 +24,55 @@ class MLangWord: NSObject, Mappable {
     }
     
     public func mapping(map: Map) {
+        ID <- map["ID"]
         LANGID <- map["LANGID"]
         WORD <- map["WORD"]
+        LEVEL <- map["LEVEL"]
     }
     
     static func getDataByLang(_ langid: Int, complete: @escaping ([MLangWord]) -> Void) {
         // SQL: SELECT LANGID, WORD FROM LANGWORDS WHERE LANGID = ?
         let url = "\(RestApi.url)LANGWORDS?transform=1&filter=LANGID,eq,\(langid)"
         RestApi.getArray(url: url, keyPath: "LANGWORDS", complete: complete)
+    }
+    
+    static func update(_ id: Int, word: String, complete: @escaping (String) -> Void) {
+        // SQL: UPDATE LANGWORDS SET WORD=? WHERE ID=?
+        let url = "\(RestApi.url)LANGWORDS/\(id)"
+        let body = "WORD=\(word)"
+        RestApi.update(url: url, body: body, complete: complete)
+    }
+    
+    static func create(m: MLangWordEdit, complete: @escaping (String) -> Void) {
+        // SQL: INSERT INTO LANGWORDS (LANGID, WORD) VALUES (?,?)
+        let url = "\(RestApi.url)LANGWORDS"
+        RestApi.create(url: url, body: m.toJSONString(prettyPrint: false)!, complete: complete)
+    }
+    
+    static func delete(_ id: Int, complete: @escaping (String) -> Void) {
+        // SQL: DELETE LANGWORDS WHERE ID=?
+        let url = "\(RestApi.url)LANGWORDS/\(id)"
+        RestApi.delete(url: url, complete: complete)
+    }
+}
+
+class MLangWordEdit: Mappable {
+    var LANGID = 0
+    var WORD = ""
+    var LEVEL = 0
+
+    public init(m: MLangWord) {
+        LANGID = m.LANGID
+        WORD = m.WORD
+        LEVEL = m.LEVEL
+    }
+    
+    required public init?(map: Map){
+    }
+    
+    public func mapping(map: Map) {
+        LANGID <- map["LANGID"]
+        WORD <- map["WORD"]
+        LEVEL <- map["LEVEL"]
     }
 }

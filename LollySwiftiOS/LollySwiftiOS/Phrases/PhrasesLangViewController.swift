@@ -31,14 +31,14 @@ class PhrasesLangViewController: PhrasesBaseViewController, UITableViewDelegate,
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PhraseCell", for: indexPath)
-        let m = arrPhrases[(indexPath as NSIndexPath).row]
+        let m = arrPhrases[indexPath.row]
         cell.textLabel!.text = m.PHRASE
         cell.detailTextLabel?.text = m.TRANSLATION
         return cell;
     }
     
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        let m = arrPhrases[(indexPath as NSIndexPath).row]
+        let m = arrPhrases[indexPath.row]
         phrase = m.PHRASE!
         return indexPath
     }

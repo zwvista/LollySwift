@@ -20,7 +20,7 @@ class MainViewController: AMSlideMenuMainViewController {
             "phrasesUnitsSegue",
             "phrasesLangSegue",
         ]
-        return arrSegues[(indexPath as NSIndexPath).row]
+        return arrSegues[indexPath.row]
     }
     
     override func leftMenuWidth() -> CGFloat {

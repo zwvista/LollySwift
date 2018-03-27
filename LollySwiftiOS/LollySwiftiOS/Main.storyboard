@@ -1128,9 +1128,6 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="sKF-T7-DSr" kind="show" identifier="dict" id="4Mp-sf-Evb"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -1147,6 +1144,7 @@
                     </navigationItem>
                     <connections>
                         <segue destination="3V8-CG-zzI" kind="presentation" identifier="edit" id="Q8T-Ex-R1C"/>
+                        <segue destination="sKF-T7-DSr" kind="show" identifier="dict" id="pAu-9n-D91"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aie-NG-mri" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1687,9 +1685,6 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="sKF-T7-DSr" kind="show" id="819-3q-fW8"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -1698,6 +1693,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Words in Textbook" id="AUf-3R-cQq"/>
+                    <connections>
+                        <segue destination="sKF-T7-DSr" kind="show" identifier="dict" id="aiy-wK-I9x"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e37-kc-jTQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1708,7 +1706,7 @@
         <segue reference="U9p-Rz-vsR"/>
         <segue reference="Ezc-3N-9RT"/>
         <segue reference="Q8T-Ex-R1C"/>
-        <segue reference="4Mp-sf-Evb"/>
-        <segue reference="O5l-wV-jBh"/>
+        <segue reference="Wcb-Wk-Ta2"/>
+        <segue reference="uuq-e1-2eL"/>
     </inferredMetricsTieBreakers>
 </document>

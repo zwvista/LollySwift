@@ -21,9 +21,28 @@ class WordsLangViewModel: NSObject {
     }
     
     func filterWordsForSearchText(_ searchText: String, scope: String) {
-        arrWordsFiltered = arrWords.filter({ (m) -> Bool in
-            return m.WORD!.contains(searchText)
-        })
+        arrWordsFiltered = arrWords.filter { $0.WORD.contains(searchText) }
+    }
+    
+    static func update(_ id: Int, word: String, complete: @escaping () -> Void) {
+        MLangWord.update(id, word: word) {
+            print($0)
+            complete()
+        }
+    }
+    
+    static func create(m: MLangWordEdit, complete: @escaping (Int) -> Void) {
+        MLangWord.create(m: m) {
+            print($0)
+            complete($0.toInt()!)
+        }
+    }
+    
+    static func delete(_ id: Int, complete: @escaping () -> Void) {
+        MLangWord.delete(id) {
+            print($0)
+            complete()
+        }
     }
 
 }
