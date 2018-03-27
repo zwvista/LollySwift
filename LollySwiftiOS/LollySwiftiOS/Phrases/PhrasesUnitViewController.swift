@@ -15,7 +15,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, UISearchBarDelegate,
         return searchController.isActive && searchBar.text != "" ? vm.arrPhrasesFiltered! : vm.arrPhrases
     }
     @IBOutlet weak var btnEdit: UIBarButtonItem!
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.view.showBlurLoader()
@@ -76,11 +76,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, UISearchBarDelegate,
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let m = arrPhrases[indexPath.row]
-        if tableView.isEditing {
-            performSegue(withIdentifier: "edit", sender: m)
-        } else {
-            performSegue(withIdentifier: "dict", sender: m.PHRASE)
-        }
+        performSegue(withIdentifier: "edit", sender: m)
     }
 
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {

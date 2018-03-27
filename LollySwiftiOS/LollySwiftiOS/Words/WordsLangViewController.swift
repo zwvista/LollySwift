@@ -71,4 +71,10 @@ class WordsLangViewController: WordsBaseViewController, UISearchBarDelegate, UIS
             controller.mWord = sender is MLangWord ? sender as! MLangWord : MLangWord()
         }
     }
+    
+    @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
+        guard segue.identifier == "Done" else {return}
+        let controller = segue.source as! WordsLangDetailViewController
+        controller.onDone()
+    }
 }

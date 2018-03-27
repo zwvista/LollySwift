@@ -21,15 +21,9 @@ class PhrasesLangDetailViewController: UITableViewController {
         tfTranslation.text = mPhrase.TRANSLATION
     }
     
-    @IBAction func onCancel(_ sender: AnyObject) {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    @IBAction func onDone(_ sender: AnyObject) {
+    func onDone() {
         mPhrase.PHRASE = tfPhrase.text ?? ""
         mPhrase.TRANSLATION = tfTranslation.text
-        
-        self.dismiss(animated: true, completion: nil)
     }
     
 }

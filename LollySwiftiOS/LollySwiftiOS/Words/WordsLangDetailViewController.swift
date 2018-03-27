@@ -19,14 +19,8 @@ class WordsLangDetailViewController: UITableViewController {
         tfWord.text = mWord.WORD
     }
     
-    @IBAction func onCancel(_ sender: AnyObject) {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    @IBAction func onDone(_ sender: AnyObject) {
+    func onDone() {
         mWord.WORD = tfWord.text ?? ""
-        
-        self.dismiss(animated: true, completion: nil)
     }
     
 }

@@ -1038,12 +1038,12 @@
                     <navigationItem key="navigationItem" title="Words in Language (Detail)" id="Hof-v9-F8H">
                         <barButtonItem key="leftBarButtonItem" systemItem="done" id="q30-bW-sp5">
                             <connections>
-                                <action selector="onDone:" destination="Upn-ig-Dmd" id="mxO-r9-Xxk"/>
+                                <segue destination="FrM-0z-36j" kind="unwind" unwindAction="prepareForUnwind:" id="nZb-la-vnN"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="LLn-t3-d4s">
                             <connections>
-                                <action selector="onCancel:" destination="Upn-ig-Dmd" id="BVu-v6-Afa"/>
+                                <segue destination="FrM-0z-36j" kind="unwind" unwindAction="prepareForUnwind:" id="gpi-QC-oDW"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1053,6 +1053,7 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S2t-Zm-vjz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="FrM-0z-36j" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="5369" y="2418"/>
         </scene>
@@ -1075,7 +1076,7 @@
         <!--Phrases in Unit-->
         <scene sceneID="GQf-Ee-JMR">
             <objects>
-                <tableViewController id="3pu-ME-qLQ" customClass="PhrasesUnitViewController" sceneMemberID="viewController">
+                <tableViewController id="3pu-ME-qLQ" customClass="PhrasesUnitViewController" customModule="LollySwiftiOS" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="ciL-oC-GcK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1120,13 +1121,13 @@
                             </barButtonItem>
                             <barButtonItem systemItem="edit" id="6VZ-Bb-6gI">
                                 <connections>
-                                    <action selector="btnEditClicked:" destination="3pu-ME-qLQ" id="GVl-7g-EJW"/>
+                                    <action selector="btnEditClicked:" destination="3pu-ME-qLQ" id="0ye-AQ-c9V"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
-                        <outlet property="btnEdit" destination="6VZ-Bb-6gI" id="h46-js-qxQ"/>
+                        <outlet property="btnEdit" destination="6VZ-Bb-6gI" id="syf-Na-PvO"/>
                         <segue destination="Ufi-Fh-MeZ" kind="presentation" identifier="edit" id="CIw-HR-KYx"/>
                     </connections>
                 </tableViewController>
@@ -1483,12 +1484,12 @@
                     <navigationItem key="navigationItem" title="Phrases in Language (Detail)" id="5TO-JG-xhF">
                         <barButtonItem key="leftBarButtonItem" systemItem="done" id="0Bd-VS-QnO">
                             <connections>
-                                <action selector="onDone:" destination="7HD-T4-9EJ" id="oeD-OB-UPj"/>
+                                <segue destination="Apr-Je-QAQ" kind="unwind" unwindAction="prepareForUnwind:" id="rbx-vf-eQh"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="cIb-0p-1Ot">
                             <connections>
-                                <action selector="onCancel:" destination="7HD-T4-9EJ" id="Xj0-oS-2QX"/>
+                                <segue destination="Apr-Je-QAQ" kind="unwind" unwindAction="prepareForUnwind:" id="qxQ-Bp-jVy"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1499,6 +1500,7 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jcl-9G-ril" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Apr-Je-QAQ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="5369" y="3869"/>
         </scene>

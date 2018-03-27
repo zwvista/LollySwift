@@ -72,4 +72,10 @@ class PhrasesLangViewController: PhrasesBaseViewController, UISearchBarDelegate,
             controller.mPhrase = sender is MLangPhrase ? sender as! MLangPhrase : MLangPhrase()
         }
     }
+    
+    @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
+        guard segue.identifier == "Done" else {return}
+        let controller = segue.source as! PhrasesLangDetailViewController
+        controller.onDone()
+    }
 }
