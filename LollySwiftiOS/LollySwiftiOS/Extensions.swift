@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import WebKit
 
 extension UIViewController {
     func yesNoAction(title: String?, message: String?, yesHandler: @escaping (UIAlertAction) -> (), noHandler: @escaping (UIAlertAction) -> ()) {
@@ -16,5 +17,23 @@ extension UIViewController {
         let yesAction = UIAlertAction(title: "Yes", style: .default, handler: yesHandler)
         alertController.addAction(yesAction)
         self.present(alertController, animated: true, completion: nil)
+    }
+    
+    // https://stackoverflow.com/questions/46793618/ios-wkwebview-vs-uiwebview?rq=1
+    func addWKWebView(webViewHolder: UIView) -> WKWebView {
+        let wkWebView: WKWebView = {
+            let v = WKWebView()
+            v.translatesAutoresizingMaskIntoConstraints = false
+            return v
+        }()
+        // add the WKWebView to the "holder" UIView
+        webViewHolder.addSubview(wkWebView)
+        
+        // pin to all 4 edges
+        wkWebView.topAnchor.constraint(equalTo: webViewHolder.topAnchor, constant: 0.0).isActive = true
+        wkWebView.bottomAnchor.constraint(equalTo: webViewHolder.bottomAnchor, constant: 0.0).isActive = true
+        wkWebView.leadingAnchor.constraint(equalTo: webViewHolder.leadingAnchor, constant: 0.0).isActive = true
+        wkWebView.trailingAnchor.constraint(equalTo: webViewHolder.trailingAnchor, constant: 0.0).isActive = true
+        return wkWebView
     }
 }

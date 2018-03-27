@@ -7,10 +7,13 @@
 //
 
 import UIKit
+import WebKit
 
 class SearchViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate, LollyProtocol {
-    @IBOutlet var wvDictOnline: UIWebView!
-    @IBOutlet var wvDictOffline: UIWebView!
+    @IBOutlet weak var wvDictOnlineHolder: UIView!
+    @IBOutlet weak var wvDictOfflineHolder: UIView!
+    weak var wvDictOnline: WKWebView!
+    weak var wvDictOffline: WKWebView!
 
     @IBOutlet weak var sbword: UISearchBar!
     
@@ -19,20 +22,21 @@ class SearchViewController: UIViewController, UIWebViewDelegate, UISearchBarDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        wvDictOnline.isHidden = true
-        wvDictOffline.isHidden = true
+        wvDictOnline = addWKWebView(webViewHolder: wvDictOnlineHolder)
+        wvDictOffline = addWKWebView(webViewHolder: wvDictOfflineHolder)
+        wvDictOnlineHolder.isHidden = true
+        wvDictOfflineHolder.isHidden = true
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        wvDictOnline.isHidden = false
-        wvDictOffline.isHidden = true
+        wvDictOnlineHolder.isHidden = false
+        wvDictOfflineHolder.isHidden = true
         
         word = sbword.text!;
         let m = vmSettings.selectedDict
         let url = m.urlString(word)
         webViewFinished = false
-        wvDictOnline.loadRequest(URLRequest(url: URL(string: url)!))
+        wvDictOnline.load(URLRequest(url: URL(string: url)!))
         sbword.resignFirstResponder()
     }
     
@@ -52,8 +56,8 @@ class SearchViewController: UIViewController, UIWebViewDelegate, UISearchBarDele
         let str = m.htmlString(html as String, word: word)
         
         wvDictOffline.loadHTMLString(str, baseURL: URL(string: "/Users/bestskip/Documents/zw/"));
-        wvDictOnline.isHidden = true
-        wvDictOffline.isHidden = false
+        wvDictOnlineHolder.isHidden = true
+        wvDictOfflineHolder.isHidden = false
     }
 
 }

@@ -7,19 +7,21 @@
 //
 
 import UIKit
+import WebKit
 
 class WordsDictViewController: UIViewController {
 
-    @IBOutlet weak var wvWord: UIWebView!
+    @IBOutlet weak var wvWordHolder: UIView!
+    weak var wvWord: WKWebView!
     var word = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        wvWord = addWKWebView(webViewHolder: wvWordHolder)
         navigationItem.title = word
         let m = AppDelegate.theSettingsViewModel.selectedDict
         let url = m.urlString(word)
-        wvWord.loadRequest(URLRequest(url: URL(string: url)!))
+        wvWord.load(URLRequest(url: URL(string: url)!))
     }
 
 }

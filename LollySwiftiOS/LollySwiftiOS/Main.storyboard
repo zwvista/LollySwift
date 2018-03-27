@@ -46,20 +46,14 @@
                                     <outlet property="delegate" destination="vXZ-lx-hvc" id="49t-V6-g9T"/>
                                 </connections>
                             </searchBar>
-                            <webView multipleTouchEnabled="YES" contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="r8x-qA-DhI" userLabel="Online WebView">
-                                <rect key="frame" x="0.0" y="108" width="375" height="502"/>
+                            <view multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r8x-qA-DhI" userLabel="Online WebView Holder">
+                                <rect key="frame" x="0.0" y="120" width="375" height="490"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <connections>
-                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="epD-nI-axn"/>
-                                </connections>
-                            </webView>
-                            <webView multipleTouchEnabled="YES" contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YPZ-Tn-9xD" userLabel="Offline WebView">
-                                <rect key="frame" x="0.0" y="108" width="375" height="502"/>
+                            </view>
+                            <view multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YPZ-Tn-9xD" userLabel="Offline WebView Holder">
+                                <rect key="frame" x="0.0" y="120" width="375" height="490"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <connections>
-                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="zxQ-UF-nEe"/>
-                                </connections>
-                            </webView>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -68,10 +62,10 @@
                             <constraint firstItem="CGW-Ox-CKK" firstAttribute="top" secondItem="r8x-qA-DhI" secondAttribute="bottom" constant="8" symbolic="YES" id="Kkr-hy-MfJ"/>
                             <constraint firstItem="CGW-Ox-CKK" firstAttribute="top" secondItem="YPZ-Tn-9xD" secondAttribute="bottom" constant="8" symbolic="YES" id="Kp8-w9-4wA"/>
                             <constraint firstAttribute="trailingMargin" secondItem="WeM-cp-4ab" secondAttribute="trailing" constant="-20" id="Sxb-pM-Lm5"/>
-                            <constraint firstItem="YPZ-Tn-9xD" firstAttribute="top" secondItem="MrK-Wa-SsT" secondAttribute="bottom" constant="44" id="ZK2-Cz-Eq6"/>
+                            <constraint firstItem="YPZ-Tn-9xD" firstAttribute="top" secondItem="WeM-cp-4ab" secondAttribute="bottom" id="ZK2-Cz-Eq6"/>
                             <constraint firstAttribute="trailing" secondItem="YPZ-Tn-9xD" secondAttribute="trailing" id="b8j-TY-ZEW"/>
                             <constraint firstItem="YPZ-Tn-9xD" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="rGl-lx-aP9"/>
-                            <constraint firstItem="r8x-qA-DhI" firstAttribute="top" secondItem="MrK-Wa-SsT" secondAttribute="bottom" constant="44" id="rQD-2P-Bph"/>
+                            <constraint firstItem="r8x-qA-DhI" firstAttribute="top" secondItem="WeM-cp-4ab" secondAttribute="bottom" id="rQD-2P-Bph"/>
                             <constraint firstItem="WeM-cp-4ab" firstAttribute="top" secondItem="MrK-Wa-SsT" secondAttribute="bottom" symbolic="YES" id="uY5-qf-k1x"/>
                             <constraint firstItem="WeM-cp-4ab" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-20" id="yMv-9e-2wk"/>
                         </constraints>
@@ -80,8 +74,8 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="sbword" destination="WeM-cp-4ab" id="dTE-XR-0MA"/>
-                        <outlet property="wvDictOffline" destination="YPZ-Tn-9xD" id="qgc-LD-JMZ"/>
-                        <outlet property="wvDictOnline" destination="r8x-qA-DhI" id="T72-OY-laX"/>
+                        <outlet property="wvDictOfflineHolder" destination="YPZ-Tn-9xD" id="gGy-VB-dNA"/>
+                        <outlet property="wvDictOnlineHolder" destination="r8x-qA-DhI" id="jZ5-nm-h0r"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -647,10 +641,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3sk-qJ-veV">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3sk-qJ-veV" userLabel="Wv Word Holder">
                                 <rect key="frame" x="-4" y="64" width="383" height="623"/>
                                 <color key="backgroundColor" red="0.28958413004875183" green="0.31462949514389038" blue="0.32950475811958313" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </webView>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -663,6 +657,7 @@
                     <navigationItem key="navigationItem" title="Words Dict" id="jCe-eT-I9D"/>
                     <connections>
                         <outlet property="wvWord" destination="3sk-qJ-veV" id="Gh5-Vw-tet"/>
+                        <outlet property="wvWordHolder" destination="3sk-qJ-veV" id="vwI-bd-Vaf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Khp-bX-qwn" userLabel="First Responder" sceneMemberID="firstResponder"/>

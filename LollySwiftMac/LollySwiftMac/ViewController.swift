@@ -12,9 +12,9 @@ import WebKit
 @objcMembers
 class ViewController: NSViewController, NSSearchFieldDelegate {
     
-    @IBOutlet weak var wvDictOnline: WebView!
+    @IBOutlet weak var wvDictOnline: WKWebView!
     @IBOutlet weak var sfWord: NSSearchField!
-    @IBOutlet weak var wvDictOffline: WebView!
+    @IBOutlet weak var wvDictOffline: WKWebView!
     
     var word = ""
     
@@ -40,7 +40,7 @@ class ViewController: NSViewController, NSSearchFieldDelegate {
         
         let m = vm.selectedDict
         let url = m.urlString(word)
-        wvDictOnline.mainFrameURL = url
+        wvDictOnline.load(URLRequest(url: URL(string: url)!))
     }
     
     override func controlTextDidEndEditing(_ obj: Notification) {
@@ -64,7 +64,7 @@ class ViewController: NSViewController, NSSearchFieldDelegate {
         let html = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)!
         let str = m.htmlString(html as String, word: word)
         
-        wvDictOffline.mainFrame.loadHTMLString(str, baseURL: URL(string: "/Users/bestskip/Documents/zw/"))
+        wvDictOffline.loadHTMLString(str, baseURL: URL(string: "/Users/bestskip/Documents/zw/"))
         wvDictOnline.isHidden = true
         wvDictOffline.isHidden = false
     }
