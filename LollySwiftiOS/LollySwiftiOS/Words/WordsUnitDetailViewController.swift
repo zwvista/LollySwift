@@ -12,7 +12,8 @@ class WordsUnitDetailViewController: UITableViewController {
     
     var vm: WordsUnitViewModel!    
     var mWord: MUnitWord!
-    
+
+    @IBOutlet weak var tfID: UITextField!
     @IBOutlet weak var tfUnit: UITextField!
     @IBOutlet weak var tfPart: UITextField!
     @IBOutlet weak var tfSeqNum: UITextField!
@@ -21,7 +22,8 @@ class WordsUnitDetailViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+        
+        tfID.text = String(mWord.ID)
         tfUnit.text = String(mWord.UNIT)
         tfPart.text = String(mWord.PART)
         tfSeqNum.text = String(mWord.SEQNUM)

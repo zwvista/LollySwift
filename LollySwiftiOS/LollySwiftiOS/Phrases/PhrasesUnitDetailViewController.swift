@@ -13,6 +13,7 @@ class PhrasesUnitDetailViewController: UITableViewController {
     var vm: PhrasesUnitViewModel!
     var mPhrase: MUnitPhrase!
     
+    @IBOutlet weak var tfID: UITextField!
     @IBOutlet weak var tfUnit: UITextField!
     @IBOutlet weak var tfPart: UITextField!
     @IBOutlet weak var tfSeqNum: UITextField!
@@ -21,6 +22,7 @@ class PhrasesUnitDetailViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        tfID.text = String(mPhrase.ID)
         tfUnit.text = String(mPhrase.UNIT)
         tfPart.text = String(mPhrase.PART)
         tfSeqNum.text = String(mPhrase.SEQNUM)

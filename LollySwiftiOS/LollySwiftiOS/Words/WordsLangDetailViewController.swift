@@ -12,10 +12,12 @@ class WordsLangDetailViewController: UITableViewController {
     
     var mWord: MLangWord!
     
+    @IBOutlet weak var tfID: UITextField!
     @IBOutlet weak var tfWord: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        tfID.text = String(mWord.ID)
         tfWord.text = mWord.WORD
     }
     
