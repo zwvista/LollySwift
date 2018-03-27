@@ -22,8 +22,29 @@ class PhrasesLangViewModel: NSObject {
     
     func filterPhrasesForSearchText(_ searchText: String, scope: String) {
         arrPhrasesFiltered = arrPhrases.filter({ (m) -> Bool in
-            return (scope == "Phrase" ? m.PHRASE! : m.TRANSLATION!).contains(searchText)
+            return (scope == "Phrase" ? m.PHRASE : m.TRANSLATION!).contains(searchText)
         })
+    }
+    
+    static func update(_ id: Int, m: MLangPhraseEdit, complete: @escaping () -> Void) {
+        MLangPhrase.update(id, m: m) {
+            print($0)
+            complete()
+        }
+    }
+    
+    static func create(m: MLangPhraseEdit, complete: @escaping (Int) -> Void) {
+        MLangPhrase.create(m: m) {
+            print($0)
+            complete($0.toInt()!)
+        }
+    }
+    
+    static func delete(_ id: Int, complete: @escaping () -> Void) {
+        MLangPhrase.delete(id) {
+            print($0)
+            complete()
+        }
     }
 
 }

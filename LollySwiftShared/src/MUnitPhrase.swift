@@ -13,13 +13,13 @@ import ObjectMapper
 @objcMembers
 class MUnitPhrase: NSObject, Mappable {
     var ID = 0
-    var TEXTBOOKID: Int?
-    var UNIT: Int?
-    var PART: Int?
-    var SEQNUM: Int?
-    var PHRASE: String?
+    var TEXTBOOKID = 0
+    var UNIT = 0
+    var PART = 0
+    var SEQNUM = 0
+    var PHRASE = ""
     var TRANSLATION: String?
-    var UNITPART: Int?
+    var UNITPART = 0
     
     public override init() {
     }
@@ -71,11 +71,11 @@ class MUnitPhrase: NSObject, Mappable {
 }
 
 class MUnitPhraseEdit: Mappable {
-    var TEXTBOOKID: Int?
-    var UNIT: Int?
-    var PART: Int?
-    var SEQNUM: Int?
-    var PHRASE: String?
+    var TEXTBOOKID = 0
+    var UNIT = 0
+    var PART = 0
+    var SEQNUM = 0
+    var PHRASE = ""
     var TRANSLATION: String?
     
     public init(m: MUnitPhrase) {

@@ -21,7 +21,7 @@ class PhrasesUnitViewModel: NSObject {
     
     func filterPhrasesForSearchText(_ searchText: String, scope: String) {
         arrPhrasesFiltered = arrPhrases.filter { m in
-            (scope == "Phrase" ? m.PHRASE! : m.TRANSLATION!).contains(searchText)
+            (scope == "Phrase" ? m.PHRASE : m.TRANSLATION!).contains(searchText)
         }
     }
     

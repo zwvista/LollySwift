@@ -15,8 +15,8 @@ class WordsLangViewController: WordsBaseViewController, UISearchBarDelegate, UIS
         return searchController.isActive && searchBar.text != "" ? vm.arrWordsFiltered! : vm.arrWords
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         self.view.showBlurLoader()
         vm = WordsLangViewModel(settings: AppDelegate.theSettingsViewModel) { [unowned self] in
             self.setupSearchController(delegate: self)

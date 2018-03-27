@@ -26,7 +26,7 @@ class PhrasesLangDetailViewController: UITableViewController {
     }
     
     @IBAction func onDone(_ sender: AnyObject) {
-        mPhrase.PHRASE = tfPhrase.text
+        mPhrase.PHRASE = tfPhrase.text ?? ""
         mPhrase.TRANSLATION = tfTranslation.text
         
         self.dismiss(animated: true, completion: nil)
