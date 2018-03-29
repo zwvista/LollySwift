@@ -31,10 +31,10 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "WordCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "WordCell", for: indexPath) as! WordsUnitCell
         let m = arrWords[indexPath.row]
-        cell.textLabel!.text = m.WORDNOTE
-        cell.detailTextLabel!.text = m.UNITPARTSEQNUM
+        cell.lblWordNote!.text = m.WORDNOTE
+        cell.lblUnitPartSeqNum!.text = m.UNITPARTSEQNUM
         return cell;
     }
     
@@ -123,4 +123,9 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
         let controller = segue.source as! WordsUnitDetailViewController
         controller.onDone()
     }
+}
+
+class WordsUnitCell: UITableViewCell {
+    @IBOutlet weak var lblWordNote: UILabel!
+    @IBOutlet weak var lblUnitPartSeqNum: UILabel!
 }
