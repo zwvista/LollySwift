@@ -21,6 +21,10 @@ class MUnitPhrase: NSObject, Mappable {
     var TRANSLATION: String?
     var UNITPART = 0
     
+    var UNITPARTSEQNUM: String {
+        return "\(UNIT) \(PART) \(SEQNUM)"
+    }
+
     public override init() {
     }
 

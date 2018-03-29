@@ -31,10 +31,11 @@ class PhrasesUnitViewController: PhrasesBaseViewController, UISearchBarDelegate,
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PhraseCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PhraseCell", for: indexPath) as! PhrasesUnitCell
         let m = arrPhrases[indexPath.row]
-        cell.textLabel!.text = m.PHRASE
-        cell.detailTextLabel!.text = m.TRANSLATION
+        cell.lblUnitPartSeqNum!.text = m.UNITPARTSEQNUM
+        cell.lblPhrase!.text = m.PHRASE
+        cell.lblTranslation!.text = m.TRANSLATION
         return cell;
     }
     
@@ -120,4 +121,10 @@ class PhrasesUnitViewController: PhrasesBaseViewController, UISearchBarDelegate,
         let controller = segue.source as! PhrasesUnitDetailViewController
         controller.onDone()
     }
+}
+
+class PhrasesUnitCell: UITableViewCell {
+    @IBOutlet weak var lblPhrase: UILabel!
+    @IBOutlet weak var lblTranslation: UILabel!
+    @IBOutlet weak var lblUnitPartSeqNum: UILabel!
 }
