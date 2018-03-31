@@ -10,7 +10,7 @@
 		41624B18047DBD62E1485CDE /* Pods_LollySwiftMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F369FEA5447EADCC97C83AE1 /* Pods_LollySwiftMac.framework */; };
 		8C0ACB581D4391FB00EC6740 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0ACB571D4391FB00EC6740 /* SettingsViewController.swift */; };
 		8C1C4F281D31F88800CF5D88 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1C4F271D31F88800CF5D88 /* AppDelegate.swift */; };
-		8C1C4F2A1D31F88800CF5D88 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1C4F291D31F88800CF5D88 /* ViewController.swift */; };
+		8C1C4F2A1D31F88800CF5D88 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1C4F291D31F88800CF5D88 /* SearchViewController.swift */; };
 		8C1C4F2C1D31F88800CF5D88 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C1C4F2B1D31F88800CF5D88 /* Assets.xcassets */; };
 		8C1C4F2F1D31F88800CF5D88 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C1C4F2D1D31F88800CF5D88 /* Main.storyboard */; };
 		8C1C4F3A1D31F88800CF5D88 /* LollySwiftMacTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1C4F391D31F88800CF5D88 /* LollySwiftMacTests.swift */; };
@@ -33,7 +33,9 @@
 		8C486E3D1EBB94E70023FBFC /* WordsTextbookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C486E2C1EBB94E70023FBFC /* WordsTextbookViewModel.swift */; };
 		8C486E3E1EBB94E70023FBFC /* WordsUnitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C486E2D1EBB94E70023FBFC /* WordsUnitViewModel.swift */; };
 		8C4A92D7206166D80004D31F /* RestApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4A92D6206166D80004D31F /* RestApi.swift */; };
+		8C5C7C7F206F2B3B003A888D /* WordsUnitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5C7C7E206F2B3A003A888D /* WordsUnitViewController.swift */; };
 		8CD1D929206227800071687B /* LollyWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD1D928206227800071687B /* LollyWindow.swift */; };
+		8CE0F27A206E94CF00EEE4AC /* LollyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE0F279206E94CE00EEE4AC /* LollyProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,7 +72,7 @@
 		8C0ACB571D4391FB00EC6740 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		8C1C4F241D31F88800CF5D88 /* LollySwiftMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LollySwiftMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C1C4F271D31F88800CF5D88 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8C1C4F291D31F88800CF5D88 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		8C1C4F291D31F88800CF5D88 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		8C1C4F2B1D31F88800CF5D88 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8C1C4F2E1D31F88800CF5D88 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8C1C4F301D31F88800CF5D88 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -98,8 +100,10 @@
 		8C486E2C1EBB94E70023FBFC /* WordsTextbookViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsTextbookViewModel.swift; sourceTree = "<group>"; };
 		8C486E2D1EBB94E70023FBFC /* WordsUnitViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsUnitViewModel.swift; sourceTree = "<group>"; };
 		8C4A92D6206166D80004D31F /* RestApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestApi.swift; sourceTree = "<group>"; };
+		8C5C7C7E206F2B3A003A888D /* WordsUnitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsUnitViewController.swift; sourceTree = "<group>"; };
 		8C6E2EDC1EBB97CF00AC114F /* LollySwiftMac-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LollySwiftMac-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		8CD1D928206227800071687B /* LollyWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LollyWindow.swift; sourceTree = "<group>"; };
+		8CE0F279206E94CE00EEE4AC /* LollyProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LollyProtocol.swift; sourceTree = "<group>"; };
 		C0A07AB238AF8E83FC5E5DD3 /* Pods-LollySwiftMac.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LollySwiftMac.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-LollySwiftMac/Pods-LollySwiftMac.debug.xcconfig"; sourceTree = "<group>"; };
 		E3F71BC79C6087E4623A422F /* Pods-LollySwiftMac.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LollySwiftMac.release.xcconfig"; path = "../Pods/Target Support Files/Pods-LollySwiftMac/Pods-LollySwiftMac.release.xcconfig"; sourceTree = "<group>"; };
 		F369FEA5447EADCC97C83AE1 /* Pods_LollySwiftMac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LollySwiftMac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -159,9 +163,11 @@
 		8C1C4F261D31F88800CF5D88 /* LollySwiftMac */ = {
 			isa = PBXGroup;
 			children = (
+				8CE0F279206E94CE00EEE4AC /* LollyProtocol.swift */,
 				8C6E2EDC1EBB97CF00AC114F /* LollySwiftMac-Bridging-Header.h */,
 				8C1C4F271D31F88800CF5D88 /* AppDelegate.swift */,
-				8C1C4F291D31F88800CF5D88 /* ViewController.swift */,
+				8C1C4F291D31F88800CF5D88 /* SearchViewController.swift */,
+				8C5C7C7E206F2B3A003A888D /* WordsUnitViewController.swift */,
 				8C1C4F2B1D31F88800CF5D88 /* Assets.xcassets */,
 				8C1C4F2D1D31F88800CF5D88 /* Main.storyboard */,
 				8C1C4F301D31F88800CF5D88 /* Info.plist */,
@@ -436,7 +442,7 @@
 				8C486E321EBB94E70023FBFC /* MLanguage.swift in Sources */,
 				8C0ACB581D4391FB00EC6740 /* SettingsViewController.swift in Sources */,
 				8C486E311EBB94E70023FBFC /* MLangPhrase.swift in Sources */,
-				8C1C4F2A1D31F88800CF5D88 /* ViewController.swift in Sources */,
+				8C1C4F2A1D31F88800CF5D88 /* SearchViewController.swift in Sources */,
 				8C486E351EBB94E70023FBFC /* MTextbookWord.swift in Sources */,
 				8C486E3E1EBB94E70023FBFC /* WordsUnitViewModel.swift in Sources */,
 				8C4A92D7206166D80004D31F /* RestApi.swift in Sources */,
@@ -445,8 +451,10 @@
 				8C486E331EBB94E70023FBFC /* MLangWord.swift in Sources */,
 				8C486E301EBB94E70023FBFC /* MDictionary.swift in Sources */,
 				8C486E371EBB94E70023FBFC /* MUnitWord.swift in Sources */,
+				8CE0F27A206E94CF00EEE4AC /* LollyProtocol.swift in Sources */,
 				8CD1D929206227800071687B /* LollyWindow.swift in Sources */,
 				8C486E381EBB94E70023FBFC /* MUserSetting.swift in Sources */,
+				8C5C7C7F206F2B3B003A888D /* WordsUnitViewController.swift in Sources */,
 				8C486E3C1EBB94E70023FBFC /* WordsLangViewModel.swift in Sources */,
 				8C486E3A1EBB94E70023FBFC /* PhrasesUnitViewModel.swift in Sources */,
 				8C486E391EBB94E70023FBFC /* PhrasesLangViewModel.swift in Sources */,

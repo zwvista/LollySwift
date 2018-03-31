@@ -10,22 +10,27 @@ import Cocoa
 import WebKit
 
 @objcMembers
-class ViewController: NSViewController, NSSearchFieldDelegate {
+class WordsUnitViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSSearchFieldDelegate {
     
     @IBOutlet weak var wvDictOnline: WKWebView!
     @IBOutlet weak var sfWord: NSSearchField!
     @IBOutlet weak var wvDictOffline: WKWebView!
-    
+    @IBOutlet weak var tableView: NSTableView!
+
     var word = ""
     
-    var vm: SettingsViewModel {
-        return AppDelegate.theSettingsViewModel
+    var vm: WordsUnitViewModel!
+    var arrWords: [MUnitWord] {
+        return vm.arrWords
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         wvDictOffline.isHidden = true
+        vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel) {
+            self.tableView.reloadData()
+        }
     }
 
     override var representedObject: Any? {
@@ -34,11 +39,26 @@ class ViewController: NSViewController, NSSearchFieldDelegate {
         }
     }
     
+    func numberOfRows(in tableView: NSTableView) -> Int {
+        return arrWords.count
+    }
+    
+    func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
+        let m = arrWords[row]
+        switch tableColumn!.title {
+        case "UNIT": return m.UNIT
+        case "PART": return m.PART
+        case "SEQNUM": return m.SEQNUM
+        case "WORD": return m.WORD
+        default: return nil
+        }
+    }
+    
     @IBAction func searchDict(_ sender: AnyObject) {
         wvDictOnline.isHidden = false
         wvDictOffline.isHidden = true
         
-        let m = vm.selectedDict
+        let m = vm.settings.selectedDict
         let url = m.urlString(word)
         wvDictOnline.load(URLRequest(url: URL(string: url)!))
     }
@@ -57,7 +77,7 @@ class ViewController: NSViewController, NSSearchFieldDelegate {
     
     func webView(_ sender: WebView!, didFinishLoadForFrame frame: WebFrame!) {
         if frame !== sender.mainFrame {return}
-        let m = vm.selectedDict
+        let m = vm.settings.selectedDict
         if m.DICTTYPENAME != "OFFLINE-ONLINE" {return}
         
         let data = frame.dataSource!.data

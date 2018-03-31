@@ -29,16 +29,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return true
     }
     
-    @IBAction func selectUnits(_ sender: AnyObject) {
+    @IBAction func settings(_ sender: AnyObject) {
         let storyboard = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil)
-        let wc = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "Select Units Window Controller")) as! NSWindowController
-        if let w = wc.window {
-            //let vc = w.contentView as! SettingsViewController
-            let application = NSApplication.shared
-            application.runModal(for: w)
-
-        }
+        let wc = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "SettingsWindowController")) as! NSWindowController
+        NSApplication.shared.runModal(for: wc.window!)
     }
     
-    
+    @IBAction func wordsInUnit(_ sender: AnyObject) {
+        let storyboard = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil)
+        let wc = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "WordsUnitWindowController")) as! NSWindowController
+        wc.showWindow(self)
+    }
 }

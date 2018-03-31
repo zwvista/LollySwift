@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -66,7 +67,7 @@
                             <constraint firstAttribute="trailing" secondItem="YPZ-Tn-9xD" secondAttribute="trailing" id="b8j-TY-ZEW"/>
                             <constraint firstItem="YPZ-Tn-9xD" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="rGl-lx-aP9"/>
                             <constraint firstItem="r8x-qA-DhI" firstAttribute="top" secondItem="WeM-cp-4ab" secondAttribute="bottom" id="rQD-2P-Bph"/>
-                            <constraint firstItem="WeM-cp-4ab" firstAttribute="top" secondItem="MrK-Wa-SsT" secondAttribute="bottom" symbolic="YES" id="uY5-qf-k1x"/>
+                            <constraint firstItem="WeM-cp-4ab" firstAttribute="topMargin" secondItem="MrK-Wa-SsT" secondAttribute="bottom" constant="8" id="uY5-qf-k1x"/>
                             <constraint firstItem="WeM-cp-4ab" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-20" id="yMv-9e-2wk"/>
                         </constraints>
                     </view>

@@ -104,6 +104,11 @@ class SettingsViewModel: NSObject {
     @objc
     var arrParts = [String]()
     
+    override init() {
+        super.init()
+        getData {}
+    }
+    
     func getData(complete: @escaping () -> Void) {
         MLanguage.getData {
             self.arrLanguages = $0
