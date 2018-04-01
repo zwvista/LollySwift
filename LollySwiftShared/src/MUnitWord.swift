@@ -47,10 +47,6 @@ class MUnitWord: NSObject, Mappable {
         NOTE <- map["NOTE"]
         UNITPART <- map["UNITPART"]
     }
-    
-    public override var description: String {
-        return "\(SEQNUM) \(WORD)" + (NOTE?.isEmpty != false ? "" : "(\(NOTE!))")
-    }
 
     static func getDataByTextbook(_ textbookid: Int, unitPartFrom: Int, unitPartTo: Int, complete: @escaping ([MUnitWord]) -> Void) {
         // SQL: SELECT * FROM VUNITWORDS WHERE TEXTBOOKID=? AND UNITPART BETWEEN ? AND ? ORDER BY UNITPART,SEQNUM

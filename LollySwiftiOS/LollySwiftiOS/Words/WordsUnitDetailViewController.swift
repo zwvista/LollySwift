@@ -33,12 +33,14 @@ class WordsUnitDetailViewController: UITableViewController, UITextFieldDelegate 
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if textField === tfUnit {
+            self.view.endEditing(true)
             ActionSheetStringPicker.show(withTitle: "Select Unit", rows: vmSettings.arrUnits, initialSelection: mWord.UNIT - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
                 self.mWord.UNIT = selectedIndex + 1
                 self.tfUnit.text = String(self.mWord.UNIT)
             }, cancel: nil, origin: tfUnit)
             return false
         } else if textField === tfPart {
+            self.view.endEditing(true)
             ActionSheetStringPicker.show(withTitle: "Select Part", rows: vmSettings.arrParts, initialSelection: mWord.PART - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
                 self.mWord.PART = selectedIndex + 1
                 self.tfPart.text = self.mWord.PARTSTR(arrParts: vmSettings.arrParts)
