@@ -10,13 +10,14 @@ import Cocoa
 import WebKit
 
 @objcMembers
-class WordsUnitViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSSearchFieldDelegate {
+class WordsUnitViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate, NSSearchFieldDelegate {
     
     @IBOutlet weak var wvDictOnline: WKWebView!
     @IBOutlet weak var sfWord: NSSearchField!
     @IBOutlet weak var wvDictOffline: WKWebView!
     @IBOutlet weak var tableView: NSTableView!
 
+    @IBOutlet weak var tfWord: NSTextField!
     var word = ""
     
     var vm: WordsUnitViewModel!
@@ -28,6 +29,7 @@ class WordsUnitViewController: NSViewController, NSTableViewDataSource, NSTableV
         super.viewDidLoad()
         
         wvDictOffline.isHidden = true
+        
         vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel) {
             self.tableView.reloadData()
         }
@@ -43,15 +45,30 @@ class WordsUnitViewController: NSViewController, NSTableViewDataSource, NSTableV
         return arrWords.count
     }
     
-    func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! NSTableCellView
+        cell.textField?.stringValue = String(describing: arrWords[row].value(forKey: tableColumn!.title)!)
+        return cell;
+    }
+    
+    @IBAction func endEditing(_ sender: NSTextField) {
+        let row = tableView.row(for: sender)
+        let column = tableView.column(for: sender)
+        let key = tableView.tableColumns[column].title
         let m = arrWords[row]
-        switch tableColumn!.title {
-        case "UNIT": return m.UNIT
-        case "PART": return m.PART
-        case "SEQNUM": return m.SEQNUM
-        case "WORD": return m.WORD
-        default: return nil
-        }
+        let oldValue = String(describing: m.value(forKey: key)!)
+        let newValue = sender.stringValue
+        guard oldValue != newValue else {return}
+        m.setValue(newValue, forKey: key)
+        WordsUnitViewModel.update(m.ID, m: MUnitWordEdit(m: m)) {}
+    }
+    
+    // https://developer.apple.com/videos/play/wwdc2011/120/
+    
+    func tableViewSelectionDidChange(_ notification: Notification) {
+        let m = arrWords[tableView.selectedRow]
+        word = m.WORD
+        searchDict(self)
     }
     
     @IBAction func searchDict(_ sender: AnyObject) {
