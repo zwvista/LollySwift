@@ -19,7 +19,7 @@ class WordsDictViewController: UIViewController {
         super.viewDidLoad()
         wvWord = addWKWebView(webViewHolder: wvWordHolder)
         navigationItem.title = word
-        let m = AppDelegate.theSettingsViewModel.selectedDict
+        let m = vmSettings.selectedDict
         let url = m.urlString(word)
         wvWord.load(URLRequest(url: URL(string: url)!))
     }

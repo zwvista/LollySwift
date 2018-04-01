@@ -18,7 +18,7 @@ class PhrasesLangViewController: PhrasesBaseViewController, UISearchBarDelegate,
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.view.showBlurLoader()
-        vm = PhrasesLangViewModel(settings: AppDelegate.theSettingsViewModel) { [unowned self] in
+        vm = PhrasesLangViewModel(settings: vmSettings) { [unowned self] in
             self.setupSearchController(delegate: self)
             self.tableView.reloadData()
             self.view.removeBlurLoader()

@@ -12,13 +12,9 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    fileprivate var _theSettingsViewModel = SettingsViewModel()
-    static var theSettingsViewModel: SettingsViewModel {
-        return (UIApplication.shared.delegate as! AppDelegate)._theSettingsViewModel
-    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        _theSettingsViewModel.getData {}
+        vmSettings.getData {}
         // Override point for customization after application launch.
         return true
     }
@@ -45,6 +41,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-
 }
 
+var vmSettings = SettingsViewModel()

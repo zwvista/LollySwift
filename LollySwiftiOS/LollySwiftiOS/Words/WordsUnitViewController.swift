@@ -19,7 +19,7 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.view.showBlurLoader()
-        vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel) {
+        vm = WordsUnitViewModel(settings: vmSettings) {
             self.setupSearchController(delegate: self)
             self.tableView.reloadData()
             self.view.removeBlurLoader()
@@ -34,7 +34,7 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
         let cell = tableView.dequeueReusableCell(withIdentifier: "WordCell", for: indexPath) as! WordsUnitCell
         let m = arrWords[indexPath.row]
         cell.lblWordNote!.text = m.WORDNOTE
-        cell.lblUnitPartSeqNum!.text = m.UNITPARTSEQNUM
+        cell.lblUnitPartSeqNum!.text = m.UNITPARTSEQNUM(arrParts: vmSettings.arrParts)
         return cell;
     }
     

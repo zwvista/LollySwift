@@ -29,15 +29,25 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return true
     }
     
+    func showWindow(storyBoardName: String, windowControllerName: String, modal: Bool) {
+        let storyboard = NSStoryboard(name: NSStoryboard.Name(rawValue: storyBoardName), bundle: nil)
+        let wc = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: windowControllerName)) as! NSWindowController
+        if modal {
+            NSApplication.shared.runModal(for: wc.window!)
+        } else {
+            wc.showWindow(self)
+        }
+    }
+    
+    @IBAction func search(_ sender: AnyObject) {
+        showWindow(storyBoardName: "Main", windowControllerName: "SearchWindowController", modal: false)
+    }
+
     @IBAction func settings(_ sender: AnyObject) {
-        let storyboard = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil)
-        let wc = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "SettingsWindowController")) as! NSWindowController
-        NSApplication.shared.runModal(for: wc.window!)
+        showWindow(storyBoardName: "Main", windowControllerName: "SettingsWindowController", modal: true)
     }
     
     @IBAction func wordsInUnit(_ sender: AnyObject) {
-        let storyboard = NSStoryboard(name: NSStoryboard.Name(rawValue: "Words"), bundle: nil)
-        let wc = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "WordsUnitWindowController")) as! NSWindowController
-        wc.showWindow(self)
+        showWindow(storyBoardName: "Words", windowControllerName: "WordsUnitWindowController", modal: false)
     }
 }

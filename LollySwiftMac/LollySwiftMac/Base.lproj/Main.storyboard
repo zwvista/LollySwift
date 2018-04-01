@@ -642,8 +642,11 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Learn" systemMenu="help" id="yzv-td-Zlb">
                                     <items>
-                                        <menuItem title="Words Online" id="kdE-P0-huU">
+                                        <menuItem title="Search" id="kdE-P0-huU">
                                             <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="search:" target="Voe-Tx-rLC" id="TCk-mA-4cD"/>
+                                            </connections>
                                         </menuItem>
                                         <menuItem title="Settings" id="ivp-hr-tVn">
                                             <modifierMask key="keyEquivalentModifierMask"/>
@@ -682,15 +685,10 @@
                         <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
                         <toolbar key="toolbar" implicitIdentifier="FF31B996-4B8F-4B5C-A970-9F0347F78E89" autosavesConfiguration="NO" displayMode="labelOnly" sizeMode="regular" id="eLC-CK-R4c">
                             <allowedToolbarItems>
-                                <toolbarItem implicitItemIdentifier="NSToolbarShowColorsItem" id="O5s-95-GEF"/>
-                                <toolbarItem implicitItemIdentifier="NSToolbarShowFontsItem" id="UbM-5G-M5F"/>
-                                <toolbarItem implicitItemIdentifier="NSToolbarPrintItem" id="tab-IV-maI"/>
-                                <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="PcJ-pF-pbh"/>
-                                <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="sf0-MJ-sT5"/>
-                                <toolbarItem implicitItemIdentifier="612EC45D-8794-4422-A0F4-EA1F80B8720E" label="Toolbar Item" paletteLabel="Toolbar Item" tag="-1" id="CBI-a3-Upc"/>
+                                <toolbarItem implicitItemIdentifier="612EC45D-8794-4422-A0F4-EA1F80B8720E" label="Add" paletteLabel="Add" tag="-1" id="CBI-a3-Upc"/>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
-                                <toolbarItem reference="sf0-MJ-sT5"/>
+                                <toolbarItem reference="CBI-a3-Upc"/>
                             </defaultToolbarItems>
                         </toolbar>
                         <connections>

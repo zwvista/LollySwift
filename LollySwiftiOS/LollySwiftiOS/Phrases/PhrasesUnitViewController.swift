@@ -19,7 +19,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, UISearchBarDelegate,
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.view.showBlurLoader()
-        vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel) { [unowned self] in
+        vm = PhrasesUnitViewModel(settings: vmSettings) { [unowned self] in
             self.setupSearchController(delegate: self)
             self.tableView.reloadData()
             self.view.removeBlurLoader()

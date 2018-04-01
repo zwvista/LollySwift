@@ -18,7 +18,7 @@ class WordsLangViewController: WordsBaseViewController, UISearchBarDelegate, UIS
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.view.showBlurLoader()
-        vm = WordsLangViewModel(settings: AppDelegate.theSettingsViewModel) { [unowned self] in
+        vm = WordsLangViewModel(settings: vmSettings) { [unowned self] in
             self.setupSearchController(delegate: self)
             self.tableView.reloadData()
             self.view.removeBlurLoader()

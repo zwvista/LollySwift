@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WordsUnitDetailViewController: UITableViewController {
+class WordsUnitDetailViewController: UITableViewController, UITextFieldDelegate {
     
     var vm: WordsUnitViewModel!    
     var mWord: MUnitWord!
@@ -25,15 +25,31 @@ class WordsUnitDetailViewController: UITableViewController {
         
         tfID.text = String(mWord.ID)
         tfUnit.text = String(mWord.UNIT)
-        tfPart.text = String(mWord.PART)
+        tfPart.text = mWord.PARTSTR(arrParts: vmSettings.arrParts)
         tfSeqNum.text = String(mWord.SEQNUM)
         tfWord.text = mWord.WORD
         tfNote.text = mWord.NOTE
     }
     
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        if textField === tfUnit {
+            ActionSheetStringPicker.show(withTitle: "Select Unit", rows: vmSettings.arrUnits, initialSelection: mWord.UNIT - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
+                self.mWord.UNIT = selectedIndex + 1
+                self.tfUnit.text = String(self.mWord.UNIT)
+            }, cancel: nil, origin: tfUnit)
+            return false
+        } else if textField === tfPart {
+            ActionSheetStringPicker.show(withTitle: "Select Part", rows: vmSettings.arrParts, initialSelection: mWord.PART - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
+                self.mWord.PART = selectedIndex + 1
+                self.tfPart.text = self.mWord.PARTSTR(arrParts: vmSettings.arrParts)
+            }, cancel: nil, origin: tfPart)
+            return false
+        } else {
+            return true
+        }
+    }
+    
     func onDone() {
-        mWord.UNIT = Int(tfUnit.text!)!
-        mWord.PART = Int(tfPart.text!)!
         mWord.SEQNUM = Int(tfSeqNum.text!)!
         mWord.WORD = tfWord.text ?? ""
         mWord.NOTE = tfNote.text ?? ""

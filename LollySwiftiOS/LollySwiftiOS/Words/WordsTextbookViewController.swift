@@ -18,7 +18,7 @@ class WordsTextbookViewController: WordsBaseViewController, UISearchBarDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.showBlurLoader()
-        vm = WordsTextbookViewModel(settings: AppDelegate.theSettingsViewModel) {
+        vm = WordsTextbookViewModel(settings: vmSettings) {
             self.setupSearchController(delegate: self)
             self.tableView.reloadData()
             self.view.removeBlurLoader()

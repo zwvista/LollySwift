@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WordsBaseViewController: UITableViewController, LollyProtocol {
+class WordsBaseViewController: UITableViewController {
 
     // https://www.raywenderlich.com/113772/uisearchcontroller-tutorial
     let searchController = UISearchController(searchResultsController: nil)

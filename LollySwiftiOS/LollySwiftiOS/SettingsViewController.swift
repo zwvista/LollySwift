@@ -24,7 +24,7 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
     var selectedRow = 0
     
     var vm: SettingsViewModel {
-        return AppDelegate.theSettingsViewModel
+        return vmSettings
     }
     
     override func viewDidLoad() {

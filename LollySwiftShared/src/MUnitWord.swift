@@ -21,8 +21,11 @@ class MUnitWord: NSObject, Mappable {
     var NOTE: String?
     var UNITPART = 0
     
-    var UNITPARTSEQNUM: String {
-        return "\(UNIT) \(PART) \(SEQNUM)"
+    func PARTSTR(arrParts: [String]) -> String {
+        return arrParts[PART - 1]
+    }
+    func UNITPARTSEQNUM(arrParts: [String]) -> String {
+        return "\(UNIT) \(PARTSTR(arrParts: arrParts)) \(SEQNUM)"
     }
     var WORDNOTE: String {
         return WORD + (NOTE == nil || NOTE!.isEmpty ? "" : "(\(NOTE!))")

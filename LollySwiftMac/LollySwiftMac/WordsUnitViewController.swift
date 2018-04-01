@@ -34,10 +34,7 @@ class WordsUnitViewController: NSViewController, NSTableViewDataSource, NSTableV
         
         wvDictOffline.isHidden = true
         tableView.registerForDraggedTypes([tableRowDragType])
-        
-        vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel) {
-            self.tableView.reloadData()
-        }
+        refreshTableView(self)
     }
 
     override var representedObject: Any? {
@@ -157,7 +154,19 @@ class WordsUnitViewController: NSViewController, NSTableViewDataSource, NSTableV
         wvDictOnline.isHidden = true
         wvDictOffline.isHidden = false
     }
-
-
+    
+    // https://stackoverflow.com/questions/24219441/how-to-use-nstoolbar-in-xcode-6-and-storyboard
+    @IBAction func addWord(_ sender: Any) {
+    }
+    
+    @IBAction func deleteWord(_ sender: Any) {
+    }
+    
+    @IBAction func refreshTableView(_ sender: Any) {
+        vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel) {
+            self.tableView.reloadData()
+        }
+    }
 }
+
 

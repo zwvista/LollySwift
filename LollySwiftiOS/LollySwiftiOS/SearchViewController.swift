@@ -9,7 +9,7 @@
 import UIKit
 import WebKit
 
-class SearchViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate, LollyProtocol {
+class SearchViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate {
     @IBOutlet weak var wvDictOnlineHolder: UIView!
     @IBOutlet weak var wvDictOfflineHolder: UIView!
     weak var wvDictOnline: WKWebView!
