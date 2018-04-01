@@ -111,6 +111,11 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
         guard segue.identifier == "Done" else {return}
         let controller = segue.source as! WordsUnitDetailViewController
         controller.onDone()
+        if controller.isAdd {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self.performSegue(withIdentifier: "add", sender: self)
+            }
+        }
     }
 }
 

@@ -12,6 +12,7 @@ class WordsUnitDetailViewController: UITableViewController, UITextFieldDelegate 
     
     var vm: WordsUnitViewModel!    
     var mWord: MUnitWord!
+    var isAdd: Bool!
 
     @IBOutlet weak var tfID: UITextField!
     @IBOutlet weak var tfUnit: UITextField!
@@ -29,6 +30,7 @@ class WordsUnitDetailViewController: UITableViewController, UITextFieldDelegate 
         tfSeqNum.text = String(mWord.SEQNUM)
         tfWord.text = mWord.WORD
         tfNote.text = mWord.NOTE
+        isAdd = mWord.ID == 0
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
@@ -56,7 +58,7 @@ class WordsUnitDetailViewController: UITableViewController, UITextFieldDelegate 
         mWord.WORD = tfWord.text ?? ""
         mWord.NOTE = tfNote.text ?? ""
         
-        if mWord.ID == 0 {
+        if isAdd {
             vm.arrWords.append(mWord)
             WordsUnitViewModel.create(m: MUnitWordEdit(m: mWord)) { self.mWord.ID = $0 }
         } else {

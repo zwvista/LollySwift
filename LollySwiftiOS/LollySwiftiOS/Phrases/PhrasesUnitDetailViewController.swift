@@ -12,7 +12,8 @@ class PhrasesUnitDetailViewController: UITableViewController, UITextFieldDelegat
     
     var vm: PhrasesUnitViewModel!
     var mPhrase: MUnitPhrase!
-    
+    var isAdd: Bool!
+
     @IBOutlet weak var tfID: UITextField!
     @IBOutlet weak var tfUnit: UITextField!
     @IBOutlet weak var tfPart: UITextField!
@@ -28,6 +29,7 @@ class PhrasesUnitDetailViewController: UITableViewController, UITextFieldDelegat
         tfSeqNum.text = String(mPhrase.SEQNUM)
         tfPhrase.text = mPhrase.PHRASE
         tfTranslation.text = mPhrase.TRANSLATION
+        isAdd = mPhrase.ID == 0
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
@@ -55,7 +57,7 @@ class PhrasesUnitDetailViewController: UITableViewController, UITextFieldDelegat
         mPhrase.PHRASE = tfPhrase.text!
         mPhrase.TRANSLATION = tfTranslation.text
         
-        if mPhrase.ID == 0 {
+        if isAdd {
             vm.arrPhrases.append(mPhrase)
             PhrasesUnitViewModel.create(m: MUnitPhraseEdit(m: mPhrase)) { self.mPhrase.ID = $0 }
         } else {
