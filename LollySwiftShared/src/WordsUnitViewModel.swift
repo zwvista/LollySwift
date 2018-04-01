@@ -9,12 +9,12 @@
 import Foundation
 
 class WordsUnitViewModel: NSObject {
-    var settings: SettingsViewModel
+    var vmSettings: SettingsViewModel
     var arrWords = [MUnitWord]()
     var arrWordsFiltered: [MUnitWord]?
     
     public init(settings: SettingsViewModel, complete: @escaping () -> Void) {
-        self.settings = settings
+        self.vmSettings = settings
         super.init()
         MUnitWord.getDataByTextbook(settings.USTEXTBOOKID, unitPartFrom: settings.USUNITPARTFROM, unitPartTo: settings.USUNITPARTTO) { [unowned self] in self.arrWords = $0; complete() }
     }
@@ -51,4 +51,24 @@ class WordsUnitViewModel: NSObject {
         }
     }
 
+    func reindex(complete: @escaping (Int) -> Void) {
+        for i in 1...arrWords.count {
+            let m = arrWords[i - 1]
+            guard m.SEQNUM != i else {continue}
+            m.SEQNUM = i
+            WordsUnitViewModel.update(m.ID, seqnum: m.SEQNUM) {
+                complete(i - 1)
+            }
+        }
+    }
+    
+    func newUnitWord() -> MUnitWord {
+        let o = MUnitWord()
+        o.TEXTBOOKID = vmSettings.USTEXTBOOKID
+        let maxElem = arrWords.max{ (o1, o2) in (o1.UNITPART, o1.SEQNUM) < (o2.UNITPART, o2.SEQNUM) }
+        o.UNIT = maxElem?.UNIT ?? vmSettings.USUNITTO
+        o.PART = maxElem?.PART ?? vmSettings.USPARTTO
+        o.SEQNUM = (maxElem?.SEQNUM ?? 0) + 1
+        return o
+    }
 }

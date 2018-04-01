@@ -46,7 +46,7 @@ class SearchViewController: NSViewController, NSTableViewDataSource, NSTableView
         wvDictOnline.isHidden = false
         wvDictOffline.isHidden = true
         
-        let m = vm.settings.selectedDict
+        let m = vm.vmSettings.selectedDict
         let url = m.urlString(word)
         wvDictOnline.load(URLRequest(url: URL(string: url)!))
     }
@@ -65,7 +65,7 @@ class SearchViewController: NSViewController, NSTableViewDataSource, NSTableView
     
     func webView(_ sender: WebView!, didFinishLoadForFrame frame: WebFrame!) {
         if frame !== sender.mainFrame {return}
-        let m = vm.settings.selectedDict
+        let m = vm.vmSettings.selectedDict
         if m.DICTTYPENAME != "OFFLINE-ONLINE" {return}
         
         let data = frame.dataSource!.data

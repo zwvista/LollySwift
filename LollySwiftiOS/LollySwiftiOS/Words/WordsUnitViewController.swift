@@ -50,12 +50,11 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
         let m = vm.arrWords[(sourceIndexPath as NSIndexPath).row]
         vm.arrWords.remove(at: (sourceIndexPath as NSIndexPath).row)
         vm.arrWords.insert(m, at: (destinationIndexPath as NSIndexPath).row)
-        for i in 1...vm.arrWords.count {
-            let m = vm.arrWords[i - 1]
-            guard m.SEQNUM != i else {continue}
-            m.SEQNUM = i
-            WordsUnitViewModel.update(m.ID, seqnum: m.SEQNUM) {}
+        tableView.beginUpdates()
+        vm.reindex {
+            tableView.reloadRows(at: [IndexPath(row: $0, section: 0)], with: .fade)
         }
+        tableView.endUpdates()
     }
 
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
@@ -100,17 +99,7 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
         super.prepare(for: segue, sender: sender)
         guard let controller = (segue.destination as? UINavigationController)?.topViewController as? WordsUnitDetailViewController else {return}
         controller.vm = vm
-        if sender is MUnitWord {
-            controller.mWord = sender as! MUnitWord
-        } else {
-            let o = MUnitWord()
-            o.TEXTBOOKID = vmSettings.USTEXTBOOKID
-            let maxElem = vm.arrWords.max{ (o1, o2) in (o1.UNITPART, o1.SEQNUM) < (o2.UNITPART, o2.SEQNUM) }
-            o.UNIT = maxElem?.UNIT ?? vmSettings.USUNITTO
-            o.PART = maxElem?.PART ?? vmSettings.USPARTTO
-            o.SEQNUM = (maxElem?.SEQNUM ?? 0) + 1
-            controller.mWord = o
-        }
+        controller.mWord = sender as? MUnitWord ?? vm.newUnitWord()
     }
     
     @IBAction func btnEditClicked(_ sender: Any) {

@@ -51,12 +51,11 @@ class PhrasesUnitViewController: PhrasesBaseViewController, UISearchBarDelegate,
         let m = vm.arrPhrases[(sourceIndexPath as NSIndexPath).row]
         vm.arrPhrases.remove(at: (sourceIndexPath as NSIndexPath).row)
         vm.arrPhrases.insert(m, at: (destinationIndexPath as NSIndexPath).row)
-        for i in 1...vm.arrPhrases.count {
-            let m = vm.arrPhrases[i - 1]
-            guard m.SEQNUM != i else {continue}
-            m.SEQNUM = i
-            PhrasesUnitViewModel.update(m.ID, seqnum: m.SEQNUM) {}
+        tableView.beginUpdates()
+        vm.reindex {
+            tableView.reloadRows(at: [IndexPath(row: $0, section: 0)], with: .fade)
         }
+        tableView.endUpdates()
     }
 
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
@@ -98,17 +97,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, UISearchBarDelegate,
         super.prepare(for: segue, sender: sender)
         guard let controller = (segue.destination as? UINavigationController)?.topViewController as? PhrasesUnitDetailViewController else {return}
         controller.vm = vm
-        if sender is MUnitPhrase {
-            controller.mPhrase = sender as! MUnitPhrase
-        } else {
-            let o = MUnitPhrase()
-            o.TEXTBOOKID = vmSettings.USTEXTBOOKID
-            let maxElem = vm.arrPhrases.max{ (o1, o2) in (o1.UNITPART, o1.SEQNUM) < (o2.UNITPART, o2.SEQNUM) }
-            o.UNIT = maxElem?.UNIT ?? vmSettings.USUNITTO
-            o.PART = maxElem?.PART ?? vmSettings.USPARTTO
-            o.SEQNUM = (maxElem?.SEQNUM ?? 0) + 1
-            controller.mPhrase = o
-        }
+        controller.mPhrase = sender as? MUnitPhrase ?? vm.newUnitPhrase()
     }
     
     @IBAction func btnEditClicked(_ sender: Any) {

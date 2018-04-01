@@ -36,7 +36,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @IBAction func wordsInUnit(_ sender: AnyObject) {
-        let storyboard = NSStoryboard(name: NSStoryboard.Name(rawValue: "Main"), bundle: nil)
+        let storyboard = NSStoryboard(name: NSStoryboard.Name(rawValue: "Words"), bundle: nil)
         let wc = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "WordsUnitWindowController")) as! NSWindowController
         wc.showWindow(self)
     }

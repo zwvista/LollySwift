@@ -9,14 +9,14 @@
 import Foundation
 
 class PhrasesUnitViewModel: NSObject {
-    var settings: SettingsViewModel
+    var vmSettings: SettingsViewModel
     var arrPhrases = [MUnitPhrase]()
     var arrPhrasesFiltered: [MUnitPhrase]?
     
     public init(settings: SettingsViewModel, complete: @escaping () -> Void) {
-        self.settings = settings
+        self.vmSettings = settings
         super.init()
-        MUnitPhrase.getDataByTextbook(settings.USTEXTBOOKID, unitPartFrom: settings.USUNITPARTFROM, unitPartTo: settings.USUNITPARTTO) { [unowned self] in self.arrPhrases = $0; complete() }
+        MUnitPhrase.getDataByTextbook(vmSettings.USTEXTBOOKID, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO) { [unowned self] in self.arrPhrases = $0; complete() }
     }
     
     func filterPhrasesForSearchText(_ searchText: String, scope: String) {
@@ -51,6 +51,27 @@ class PhrasesUnitViewModel: NSObject {
             print($0)
             complete()
         }
+    }
+    
+    func reindex(complete: @escaping (Int) -> Void) {
+        for i in 1...arrPhrases.count {
+            let m = arrPhrases[i - 1]
+            guard m.SEQNUM != i else {continue}
+            m.SEQNUM = i
+            PhrasesUnitViewModel.update(m.ID, seqnum: m.SEQNUM) {
+                complete(i - 1)
+            }
+        }
+    }
+
+    func newUnitPhrase() -> MUnitPhrase {
+        let o = MUnitPhrase()
+        o.TEXTBOOKID = vmSettings.USTEXTBOOKID
+        let maxElem = arrPhrases.max{ (o1, o2) in (o1.UNITPART, o1.SEQNUM) < (o2.UNITPART, o2.SEQNUM) }
+        o.UNIT = maxElem?.UNIT ?? vmSettings.USUNITTO
+        o.PART = maxElem?.PART ?? vmSettings.USPARTTO
+        o.SEQNUM = (maxElem?.SEQNUM ?? 0) + 1
+        return o
     }
 
 }

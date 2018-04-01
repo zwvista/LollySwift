@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		41624B18047DBD62E1485CDE /* Pods_LollySwiftMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F369FEA5447EADCC97C83AE1 /* Pods_LollySwiftMac.framework */; };
 		8C0ACB581D4391FB00EC6740 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0ACB571D4391FB00EC6740 /* SettingsViewController.swift */; };
+		8C10742A207086E900CE91A0 /* Words.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C1074292070866900CE91A0 /* Words.storyboard */; };
 		8C1C4F281D31F88800CF5D88 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1C4F271D31F88800CF5D88 /* AppDelegate.swift */; };
 		8C1C4F2A1D31F88800CF5D88 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1C4F291D31F88800CF5D88 /* SearchViewController.swift */; };
 		8C1C4F2C1D31F88800CF5D88 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C1C4F2B1D31F88800CF5D88 /* Assets.xcassets */; };
@@ -70,6 +71,7 @@
 
 /* Begin PBXFileReference section */
 		8C0ACB571D4391FB00EC6740 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		8C1074292070866900CE91A0 /* Words.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Words.storyboard; path = /Users/zwvista/Documents/Programs/Lolly/LollySwift/LollySwiftMac/LollySwiftMac/Words.storyboard; sourceTree = "<absolute>"; };
 		8C1C4F241D31F88800CF5D88 /* LollySwiftMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LollySwiftMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C1C4F271D31F88800CF5D88 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8C1C4F291D31F88800CF5D88 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -163,16 +165,17 @@
 		8C1C4F261D31F88800CF5D88 /* LollySwiftMac */ = {
 			isa = PBXGroup;
 			children = (
+				8C1C4F271D31F88800CF5D88 /* AppDelegate.swift */,
+				8C1C4F2B1D31F88800CF5D88 /* Assets.xcassets */,
+				8C1C4F301D31F88800CF5D88 /* Info.plist */,
 				8CE0F279206E94CE00EEE4AC /* LollyProtocol.swift */,
 				8C6E2EDC1EBB97CF00AC114F /* LollySwiftMac-Bridging-Header.h */,
-				8C1C4F271D31F88800CF5D88 /* AppDelegate.swift */,
-				8C1C4F291D31F88800CF5D88 /* SearchViewController.swift */,
-				8C5C7C7E206F2B3A003A888D /* WordsUnitViewController.swift */,
-				8C1C4F2B1D31F88800CF5D88 /* Assets.xcassets */,
-				8C1C4F2D1D31F88800CF5D88 /* Main.storyboard */,
-				8C1C4F301D31F88800CF5D88 /* Info.plist */,
-				8C0ACB571D4391FB00EC6740 /* SettingsViewController.swift */,
 				8CD1D928206227800071687B /* LollyWindow.swift */,
+				8C1C4F2D1D31F88800CF5D88 /* Main.storyboard */,
+				8C1C4F291D31F88800CF5D88 /* SearchViewController.swift */,
+				8C0ACB571D4391FB00EC6740 /* SettingsViewController.swift */,
+				8C1074292070866900CE91A0 /* Words.storyboard */,
+				8C5C7C7E206F2B3A003A888D /* WordsUnitViewController.swift */,
 			);
 			path = LollySwiftMac;
 			sourceTree = "<group>";
@@ -354,6 +357,7 @@
 			files = (
 				8C1C4F2C1D31F88800CF5D88 /* Assets.xcassets in Resources */,
 				8C1C4F2F1D31F88800CF5D88 /* Main.storyboard in Resources */,
+				8C10742A207086E900CE91A0 /* Words.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
