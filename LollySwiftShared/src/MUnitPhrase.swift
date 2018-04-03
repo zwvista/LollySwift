@@ -25,7 +25,7 @@ class MUnitPhrase: NSObject, Mappable {
         return arrParts[PART - 1]
     }
     func UNITPARTSEQNUM(arrParts: [String]) -> String {
-        return "\(UNIT) \(PARTSTR(arrParts: arrParts)) \(SEQNUM)"
+        return "\(UNIT) \(SEQNUM)\n\(PARTSTR(arrParts: arrParts))"
     }
 
     public override init() {
