@@ -30,6 +30,7 @@ class PhrasesUnitDetailViewController: UITableViewController, UITextFieldDelegat
         tfPhrase.text = mPhrase.PHRASE
         tfTranslation.text = mPhrase.TRANSLATION
         isAdd = mPhrase.ID == 0
+        (mPhrase.PHRASE.isEmpty ? tfPhrase : tfTranslation)?.becomeFirstResponder()
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {

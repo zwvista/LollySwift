@@ -71,7 +71,7 @@ class MDictionary: NSObject, Mappable {
         
         repeat {
             if transform.isEmpty {break}
-            let arr = transform.components(separatedBy: "\n")
+            let arr = transform.components(separatedBy: "\r\n")
             var regex = try! NSRegularExpression(pattern: arr[0], options: NSRegularExpression.Options())
             let m = regex.firstMatch(in: html, options: NSRegularExpression.MatchingOptions(), range: NSMakeRange(0, html.count))
             if m == nil {break}

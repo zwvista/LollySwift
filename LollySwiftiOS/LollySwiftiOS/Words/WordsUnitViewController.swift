@@ -16,8 +16,8 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
     }
     @IBOutlet weak var btnEdit: UIBarButtonItem!
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidLoad() {
+        super.viewDidLoad()
         self.view.showBlurLoader()
         vm = WordsUnitViewModel(settings: vmSettings) {
             self.setupSearchController(delegate: self)
@@ -111,6 +111,7 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
         guard segue.identifier == "Done" else {return}
         let controller = segue.source as! WordsUnitDetailViewController
         controller.onDone()
+        tableView.reloadData()
         if controller.isAdd {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self.performSegue(withIdentifier: "add", sender: self)

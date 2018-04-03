@@ -31,6 +31,8 @@ class WordsUnitDetailViewController: UITableViewController, UITextFieldDelegate 
         tfWord.text = mWord.WORD
         tfNote.text = mWord.NOTE
         isAdd = mWord.ID == 0
+        // https://stackoverflow.com/questions/7525437/how-to-set-focus-to-a-textfield-in-iphone
+        (mWord.WORD.isEmpty ? tfWord : tfNote)?.becomeFirstResponder()
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
