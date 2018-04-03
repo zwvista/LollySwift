@@ -1190,6 +1190,9 @@
                                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
                                                     <wkPreferences key="preferences"/>
                                                 </wkWebViewConfiguration>
+                                                <connections>
+                                                    <outlet property="navigationDelegate" destination="XfG-lQ-9wD" id="epB-zd-gGi"/>
+                                                </connections>
                                             </wkWebView>
                                             <wkWebView translatesAutoresizingMaskIntoConstraints="NO" id="O2b-uh-1IJ" userLabel="Offline WebView">
                                                 <rect key="frame" x="0.0" y="0.0" width="583" height="640"/>

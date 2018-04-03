@@ -10,7 +10,7 @@ import Cocoa
 import WebKit
 
 @objcMembers
-class SearchViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSSearchFieldDelegate {
+class SearchViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate, NSSearchFieldDelegate, WKNavigationDelegate {
     
     @IBOutlet weak var wvDictOnline: WKWebView!
     @IBOutlet weak var sfWord: NSSearchField!
@@ -19,7 +19,6 @@ class SearchViewController: NSViewController, NSTableViewDataSource, NSTableView
 
     var word = ""
     
-    var vm: WordsUnitViewModel!
     var arrWords = [MUnitWord]()
 
     override func viewDidLoad() {
@@ -46,7 +45,7 @@ class SearchViewController: NSViewController, NSTableViewDataSource, NSTableView
         wvDictOnline.isHidden = false
         wvDictOffline.isHidden = true
         
-        let m = vm.vmSettings.selectedDict
+        let m = vmSettings.selectedDict
         let url = m.urlString(word)
         wvDictOnline.load(URLRequest(url: URL(string: url)!))
     }
@@ -63,20 +62,19 @@ class SearchViewController: NSViewController, NSTableViewDataSource, NSTableView
         }
     }
     
-    func webView(_ sender: WebView!, didFinishLoadForFrame frame: WebFrame!) {
-        if frame !== sender.mainFrame {return}
-        let m = vm.vmSettings.selectedDict
-        if m.DICTTYPENAME != "OFFLINE-ONLINE" {return}
-        
-        let data = frame.dataSource!.data
-        let html = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)!
-        let str = m.htmlString(html as String, word: word)
-        
-        wvDictOffline.loadHTMLString(str, baseURL: URL(string: "/Users/bestskip/Documents/zw/"))
-        wvDictOnline.isHidden = true
-        wvDictOffline.isHidden = false
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        guard webView === wvDictOnline else {return}
+        let m = vmSettings.selectedDict
+        guard m.DICTTYPENAME == "OFFLINE-ONLINE" else {return}
+        // https://stackoverflow.com/questions/34751860/get-html-from-wkwebview-in-swift
+        webView.evaluateJavaScript("document.documentElement.outerHTML.toString()") { (html: Any?, error: Error?) in
+            let html = html as! String
+            print(html)
+            let str = m.htmlString(html, word: self.word)
+            self.wvDictOffline.loadHTMLString(str, baseURL: nil)
+            self.wvDictOnline.isHidden = true
+            self.wvDictOffline.isHidden = false
+        }
     }
-
-
 }
 
