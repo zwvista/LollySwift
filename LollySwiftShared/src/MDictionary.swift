@@ -72,8 +72,8 @@ class MDictionary: NSObject, Mappable {
         repeat {
             if transform.isEmpty {break}
             let arr = transform.components(separatedBy: "\r\n")
-            var regex = try! NSRegularExpression(pattern: arr[0], options: NSRegularExpression.Options())
-            let m = regex.firstMatch(in: html, options: NSRegularExpression.MatchingOptions(), range: NSMakeRange(0, html.count))
+            var regex = try! NSRegularExpression(pattern: arr[0])
+            let m = regex.firstMatch(in: html, range: NSMakeRange(0, html.count))
             if m == nil {break}
             text = NSMutableString(string: (html as NSString).substring(with: m!.range))
             
@@ -82,7 +82,7 @@ class MDictionary: NSObject, Mappable {
                 for (key, value) in dic {
                     replacer = replacer.replacingOccurrences(of: key, with: value)
                 }
-                regex.replaceMatches(in: text, options: NSRegularExpression.MatchingOptions(), range: NSMakeRange(0, text.length), withTemplate: replacer)
+                regex.replaceMatches(in: text, range: NSMakeRange(0, text.length), withTemplate: replacer)
             }
             
             f(arr[1])
@@ -95,7 +95,7 @@ class MDictionary: NSObject, Mappable {
             
             for i in 2 ..< arr.count {
                 if i % 2 == 0 {
-                    regex = try! NSRegularExpression(pattern: arr[i], options: NSRegularExpression.Options())
+                    regex = try! NSRegularExpression(pattern: arr[i])
                 } else {
                     f(arr[i])
                 }
@@ -117,6 +117,7 @@ class MDictionary: NSObject, Mappable {
             template = template.replacingOccurrences(of: "{0}", with: word)
                 .replacingOccurrences(of: "{1}", with: "")
                 .replacingOccurrences(of: "{2}", with: text as String)
+                .replacingOccurrences(of: "{3}", with: RestApi.cssFolder)
             text = NSMutableString(string: template)
         
         } while false

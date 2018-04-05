@@ -24,8 +24,9 @@ extension String: ParameterEncoding {
 }
 
 class RestApi {
-    static let url = "http://13.231.236.234/lolly/apimysql.php/"
-    
+    static let url = "http://13.231.236.234/lolly/api.php/"
+    static let cssFolder = "http://13.231.236.234/lolly/css/"
+
     static func getArray<T: Mappable>(url: String, keyPath: String, complete: @escaping ([T]) -> Void) {
         print("[RestApi]GET:\(url)")
         Alamofire.request(url).responseArray(keyPath: keyPath) { (response: DataResponse<[T]>) in

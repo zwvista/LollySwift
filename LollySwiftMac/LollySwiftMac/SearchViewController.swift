@@ -69,7 +69,7 @@ class SearchViewController: NSViewController, LollyProtocol, NSTableViewDataSour
         // https://stackoverflow.com/questions/34751860/get-html-from-wkwebview-in-swift
         webView.evaluateJavaScript("document.documentElement.outerHTML.toString()") { (html: Any?, error: Error?) in
             let html = html as! String
-            print(html)
+//            print(html)
             let str = m.htmlString(html, word: self.word)
             self.wvDictOffline.loadHTMLString(str, baseURL: nil)
             self.wvDictOnline.isHidden = true

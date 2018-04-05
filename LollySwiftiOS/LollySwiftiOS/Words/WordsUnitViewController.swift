@@ -47,8 +47,7 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
     }
     
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        let m = vm.arrWords[(sourceIndexPath as NSIndexPath).row]
-        vm.arrWords.remove(at: (sourceIndexPath as NSIndexPath).row)
+        let m = vm.arrWords.remove(at: (sourceIndexPath as NSIndexPath).row)
         vm.arrWords.insert(m, at: (destinationIndexPath as NSIndexPath).row)
         tableView.beginUpdates()
         vm.reindex {
@@ -58,9 +57,9 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
     }
 
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
-            let i = indexPath.row
-            let m = self.vm.arrWords[i]
+        let i = indexPath.row
+        let m = self.vm.arrWords[i]
+        func delete() {
             self.yesNoAction(title: "delete", message: "Do you really want to delete the word \"\(m.WORD)\"?", yesHandler: { (action) in
                 WordsUnitViewModel.delete(m.ID) {}
                 self.vm.arrWords.remove(at: i)
@@ -69,15 +68,29 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
                 tableView.reloadRows(at: [indexPath], with: .fade)
             })
         }
-        let editAction = UITableViewRowAction(style: .normal, title: "Edit") { (action, indexPath) in
-            let m = self.arrWords[indexPath.row]
+        func edit() {
             self.performSegue(withIdentifier: "edit", sender: m)
         }
+        let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { _,_ in delete() }
+        let editAction = UITableViewRowAction(style: .normal, title: "Edit") { _,_ in edit() }
         editAction.backgroundColor = .blue
-        
-        return [editAction, deleteAction]
+        let moreAction = UITableViewRowAction(style: .normal, title: "More") { _,_ in
+            let alertController = UIAlertController(title: "Word", message: m.WORD, preferredStyle: .alert)
+            let deleteAction2 = UIAlertAction(title: "Delete", style: .destructive) { _ in delete() }
+            let editAction2 = UIAlertAction(title: "Edit", style: .default) { _ in edit() }
+            let noteAction = UIAlertAction(title: "Retrieve Note", style: .default) { _ in }
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
+            
+            alertController.addAction(deleteAction2)
+            alertController.addAction(editAction2)
+            alertController.addAction(noteAction)
+            alertController.addAction(cancelAction)
+            self.present(alertController, animated: true) {}
+        }
+
+        return [moreAction, deleteAction]
     }
-        
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let m = arrWords[indexPath.row]
         if tableView.isEditing {
