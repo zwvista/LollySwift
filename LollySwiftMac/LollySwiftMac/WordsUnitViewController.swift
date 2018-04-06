@@ -78,8 +78,7 @@ class WordsUnitViewController: NSViewController, NSTableViewDataSource, NSTableV
         var newIndexOffset = 0
         
         func moveRow(at oldIndex: Int, to newIndex: Int) {
-            let m = vm.arrWords.remove(at: oldIndex)
-            vm.arrWords.insert(m, at: newIndex)
+            vm.moveWord(at: oldIndex, to: newIndex)
             tableView.moveRow(at: oldIndex, to: newIndex)
         }
         

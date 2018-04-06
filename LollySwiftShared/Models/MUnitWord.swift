@@ -61,6 +61,13 @@ class MUnitWord: NSObject, Mappable {
         RestApi.update(url: url, body: body, complete: complete)
     }
     
+    static func update(_ id: Int, note: String, complete: @escaping (String) -> Void) {
+        // SQL: UPDATE UNITWORDS SET NOTE=? WHERE ID=?
+        let url = "\(RestApi.url)UNITWORDS/\(id)"
+        let body = "NOTE=\(note)"
+        RestApi.update(url: url, body: body, complete: complete)
+    }
+
     static func update(_ id: Int, m: MUnitWordEdit, complete: @escaping (String) -> Void) {
         // SQL: UPDATE UNITWORDS SET TEXTBOOKID=?, UNIT=?, PART=?, SEQNUM=?, WORD=?, NOTE=? WHERE ID=?
         let url = "\(RestApi.url)UNITWORDS/\(id)"

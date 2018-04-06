@@ -12,7 +12,24 @@
 		8C1074322070A8C700CE91A0 /* Phrases.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C1074312070A8C700CE91A0 /* Phrases.storyboard */; };
 		8C1074342070A8CF00CE91A0 /* Words.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C1074332070A8CF00CE91A0 /* Words.storyboard */; };
 		8C1CF684206A2A4800714C33 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1CF683206A2A4800714C33 /* Extensions.swift */; };
-		8C328FD31EFD87AA008682E3 /* RestApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C328FD21EFD87AA008682E3 /* RestApi.swift */; };
+		8C316586207676CF0015C247 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C316572207676CF0015C247 /* SettingsViewModel.swift */; };
+		8C316587207676CF0015C247 /* WordsLangViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C316573207676CF0015C247 /* WordsLangViewModel.swift */; };
+		8C316588207676CF0015C247 /* WordsTextbookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C316574207676CF0015C247 /* WordsTextbookViewModel.swift */; };
+		8C316589207676CF0015C247 /* PhrasesLangViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C316575207676CF0015C247 /* PhrasesLangViewModel.swift */; };
+		8C31658A207676CF0015C247 /* PhrasesUnitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C316576207676CF0015C247 /* PhrasesUnitViewModel.swift */; };
+		8C31658B207676CF0015C247 /* WordsUnitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C316577207676CF0015C247 /* WordsUnitViewModel.swift */; };
+		8C31658C207676CF0015C247 /* RestApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C316579207676CF0015C247 /* RestApi.swift */; };
+		8C31658D207676CF0015C247 /* HtmlApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C31657A207676CF0015C247 /* HtmlApi.swift */; };
+		8C31658E207676CF0015C247 /* MDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C31657C207676CF0015C247 /* MDictionary.swift */; };
+		8C31658F207676CF0015C247 /* MUnitWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C31657D207676CF0015C247 /* MUnitWord.swift */; };
+		8C316590207676CF0015C247 /* MLangWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C31657E207676CF0015C247 /* MLangWord.swift */; };
+		8C316591207676CF0015C247 /* MNoteSite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C31657F207676CF0015C247 /* MNoteSite.swift */; };
+		8C316592207676CF0015C247 /* MUserSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C316580207676CF0015C247 /* MUserSetting.swift */; };
+		8C316593207676CF0015C247 /* MLangPhrase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C316581207676CF0015C247 /* MLangPhrase.swift */; };
+		8C316594207676CF0015C247 /* MTextbookWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C316582207676CF0015C247 /* MTextbookWord.swift */; };
+		8C316595207676CF0015C247 /* MUnitPhrase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C316583207676CF0015C247 /* MUnitPhrase.swift */; };
+		8C316596207676CF0015C247 /* MLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C316584207676CF0015C247 /* MLanguage.swift */; };
+		8C316597207676CF0015C247 /* MTextBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C316585207676CF0015C247 /* MTextBook.swift */; };
 		8C42B5AF1D69A1D900DCB528 /* WordsBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C42B5A81D69A1D900DCB528 /* WordsBaseViewController.swift */; };
 		8C42B5B01D69A1D900DCB528 /* WordsDictViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C42B5A91D69A1D900DCB528 /* WordsDictViewController.swift */; };
 		8C42B5B11D69A1D900DCB528 /* WordsLangViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C42B5AA1D69A1D900DCB528 /* WordsLangViewController.swift */; };
@@ -23,21 +40,6 @@
 		8C42B5BB1D69A21E00DCB528 /* PhrasesLangViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C42B5B81D69A21E00DCB528 /* PhrasesLangViewController.swift */; };
 		8C42B5BC1D69A21E00DCB528 /* PhrasesUnitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C42B5B91D69A21E00DCB528 /* PhrasesUnitViewController.swift */; };
 		8C9C6A442053F9F700F299C8 /* UIView+ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9C6A432053F9F700F299C8 /* UIView+ActivityIndicator.swift */; };
-		8CA6CDAE1EF1BF8700418799 /* MDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA6CD9C1EF1BF8700418799 /* MDictionary.swift */; };
-		8CA6CDAF1EF1BF8700418799 /* MLangPhrase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA6CD9D1EF1BF8700418799 /* MLangPhrase.swift */; };
-		8CA6CDB11EF1BF8700418799 /* MLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA6CD9F1EF1BF8700418799 /* MLanguage.swift */; };
-		8CA6CDB21EF1BF8700418799 /* MLangWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA6CDA01EF1BF8700418799 /* MLangWord.swift */; };
-		8CA6CDB31EF1BF8700418799 /* MTextbook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA6CDA11EF1BF8700418799 /* MTextbook.swift */; };
-		8CA6CDB41EF1BF8700418799 /* MTextbookWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA6CDA21EF1BF8700418799 /* MTextbookWord.swift */; };
-		8CA6CDB51EF1BF8700418799 /* MUnitPhrase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA6CDA31EF1BF8700418799 /* MUnitPhrase.swift */; };
-		8CA6CDB61EF1BF8700418799 /* MUnitWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA6CDA41EF1BF8700418799 /* MUnitWord.swift */; };
-		8CA6CDB71EF1BF8700418799 /* MUserSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA6CDA51EF1BF8700418799 /* MUserSetting.swift */; };
-		8CA6CDB81EF1BF8700418799 /* PhrasesLangViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA6CDA61EF1BF8700418799 /* PhrasesLangViewModel.swift */; };
-		8CA6CDB91EF1BF8700418799 /* PhrasesUnitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA6CDA71EF1BF8700418799 /* PhrasesUnitViewModel.swift */; };
-		8CA6CDBA1EF1BF8700418799 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA6CDA81EF1BF8700418799 /* SettingsViewModel.swift */; };
-		8CA6CDBB1EF1BF8700418799 /* WordsLangViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA6CDA91EF1BF8700418799 /* WordsLangViewModel.swift */; };
-		8CA6CDBC1EF1BF8700418799 /* WordsTextbookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA6CDAA1EF1BF8700418799 /* WordsTextbookViewModel.swift */; };
-		8CA6CDBD1EF1BF8700418799 /* WordsUnitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA6CDAB1EF1BF8700418799 /* WordsUnitViewModel.swift */; };
 		8CD16D121D69FD8A00F5F625 /* WordsLangDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD16D111D69FD8A00F5F625 /* WordsLangDetailViewController.swift */; };
 		8CD16D161D69FDDC00F5F625 /* PhrasesUnitDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD16D151D69FDDC00F5F625 /* PhrasesUnitDetailViewController.swift */; };
 		8CD16D201D69FE8F00F5F625 /* PhrasesLangDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD16D1F1D69FE8F00F5F625 /* PhrasesLangDetailViewController.swift */; };
@@ -90,7 +92,24 @@
 		8C1074312070A8C700CE91A0 /* Phrases.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Phrases.storyboard; sourceTree = "<group>"; };
 		8C1074332070A8CF00CE91A0 /* Words.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Words.storyboard; sourceTree = "<group>"; };
 		8C1CF683206A2A4800714C33 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		8C328FD21EFD87AA008682E3 /* RestApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestApi.swift; sourceTree = "<group>"; };
+		8C316572207676CF0015C247 /* SettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		8C316573207676CF0015C247 /* WordsLangViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsLangViewModel.swift; sourceTree = "<group>"; };
+		8C316574207676CF0015C247 /* WordsTextbookViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsTextbookViewModel.swift; sourceTree = "<group>"; };
+		8C316575207676CF0015C247 /* PhrasesLangViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesLangViewModel.swift; sourceTree = "<group>"; };
+		8C316576207676CF0015C247 /* PhrasesUnitViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesUnitViewModel.swift; sourceTree = "<group>"; };
+		8C316577207676CF0015C247 /* WordsUnitViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsUnitViewModel.swift; sourceTree = "<group>"; };
+		8C316579207676CF0015C247 /* RestApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestApi.swift; sourceTree = "<group>"; };
+		8C31657A207676CF0015C247 /* HtmlApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HtmlApi.swift; sourceTree = "<group>"; };
+		8C31657C207676CF0015C247 /* MDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDictionary.swift; sourceTree = "<group>"; };
+		8C31657D207676CF0015C247 /* MUnitWord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MUnitWord.swift; sourceTree = "<group>"; };
+		8C31657E207676CF0015C247 /* MLangWord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLangWord.swift; sourceTree = "<group>"; };
+		8C31657F207676CF0015C247 /* MNoteSite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MNoteSite.swift; sourceTree = "<group>"; };
+		8C316580207676CF0015C247 /* MUserSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MUserSetting.swift; sourceTree = "<group>"; };
+		8C316581207676CF0015C247 /* MLangPhrase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLangPhrase.swift; sourceTree = "<group>"; };
+		8C316582207676CF0015C247 /* MTextbookWord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTextbookWord.swift; sourceTree = "<group>"; };
+		8C316583207676CF0015C247 /* MUnitPhrase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MUnitPhrase.swift; sourceTree = "<group>"; };
+		8C316584207676CF0015C247 /* MLanguage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLanguage.swift; sourceTree = "<group>"; };
+		8C316585207676CF0015C247 /* MTextBook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTextBook.swift; sourceTree = "<group>"; };
 		8C42B5A81D69A1D900DCB528 /* WordsBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsBaseViewController.swift; sourceTree = "<group>"; };
 		8C42B5A91D69A1D900DCB528 /* WordsDictViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsDictViewController.swift; sourceTree = "<group>"; };
 		8C42B5AA1D69A1D900DCB528 /* WordsLangViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsLangViewController.swift; sourceTree = "<group>"; };
@@ -101,21 +120,6 @@
 		8C42B5B81D69A21E00DCB528 /* PhrasesLangViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesLangViewController.swift; sourceTree = "<group>"; };
 		8C42B5B91D69A21E00DCB528 /* PhrasesUnitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesUnitViewController.swift; sourceTree = "<group>"; };
 		8C9C6A432053F9F700F299C8 /* UIView+ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+ActivityIndicator.swift"; sourceTree = "<group>"; };
-		8CA6CD9C1EF1BF8700418799 /* MDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDictionary.swift; sourceTree = "<group>"; };
-		8CA6CD9D1EF1BF8700418799 /* MLangPhrase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLangPhrase.swift; sourceTree = "<group>"; };
-		8CA6CD9F1EF1BF8700418799 /* MLanguage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLanguage.swift; sourceTree = "<group>"; };
-		8CA6CDA01EF1BF8700418799 /* MLangWord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLangWord.swift; sourceTree = "<group>"; };
-		8CA6CDA11EF1BF8700418799 /* MTextbook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTextbook.swift; sourceTree = "<group>"; };
-		8CA6CDA21EF1BF8700418799 /* MTextbookWord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTextbookWord.swift; sourceTree = "<group>"; };
-		8CA6CDA31EF1BF8700418799 /* MUnitPhrase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MUnitPhrase.swift; sourceTree = "<group>"; };
-		8CA6CDA41EF1BF8700418799 /* MUnitWord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MUnitWord.swift; sourceTree = "<group>"; };
-		8CA6CDA51EF1BF8700418799 /* MUserSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MUserSetting.swift; sourceTree = "<group>"; };
-		8CA6CDA61EF1BF8700418799 /* PhrasesLangViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesLangViewModel.swift; sourceTree = "<group>"; };
-		8CA6CDA71EF1BF8700418799 /* PhrasesUnitViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesUnitViewModel.swift; sourceTree = "<group>"; };
-		8CA6CDA81EF1BF8700418799 /* SettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
-		8CA6CDA91EF1BF8700418799 /* WordsLangViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsLangViewModel.swift; sourceTree = "<group>"; };
-		8CA6CDAA1EF1BF8700418799 /* WordsTextbookViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsTextbookViewModel.swift; sourceTree = "<group>"; };
-		8CA6CDAB1EF1BF8700418799 /* WordsUnitViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsUnitViewModel.swift; sourceTree = "<group>"; };
 		8CD16D111D69FD8A00F5F625 /* WordsLangDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsLangDetailViewController.swift; sourceTree = "<group>"; };
 		8CD16D151D69FDDC00F5F625 /* PhrasesUnitDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesUnitDetailViewController.swift; sourceTree = "<group>"; };
 		8CD16D1F1D69FE8F00F5F625 /* PhrasesLangDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesLangDetailViewController.swift; sourceTree = "<group>"; };
@@ -182,6 +186,56 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		8C316570207676CF0015C247 /* LollySwiftShared */ = {
+			isa = PBXGroup;
+			children = (
+				8C316571207676CF0015C247 /* ViewModels */,
+				8C316578207676CF0015C247 /* Shared */,
+				8C31657B207676CF0015C247 /* Models */,
+			);
+			name = LollySwiftShared;
+			path = ../LollySwiftShared;
+			sourceTree = "<group>";
+		};
+		8C316571207676CF0015C247 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				8C316572207676CF0015C247 /* SettingsViewModel.swift */,
+				8C316573207676CF0015C247 /* WordsLangViewModel.swift */,
+				8C316574207676CF0015C247 /* WordsTextbookViewModel.swift */,
+				8C316575207676CF0015C247 /* PhrasesLangViewModel.swift */,
+				8C316576207676CF0015C247 /* PhrasesUnitViewModel.swift */,
+				8C316577207676CF0015C247 /* WordsUnitViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		8C316578207676CF0015C247 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				8C316579207676CF0015C247 /* RestApi.swift */,
+				8C31657A207676CF0015C247 /* HtmlApi.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		8C31657B207676CF0015C247 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8C31657C207676CF0015C247 /* MDictionary.swift */,
+				8C31657D207676CF0015C247 /* MUnitWord.swift */,
+				8C31657E207676CF0015C247 /* MLangWord.swift */,
+				8C31657F207676CF0015C247 /* MNoteSite.swift */,
+				8C316580207676CF0015C247 /* MUserSetting.swift */,
+				8C316581207676CF0015C247 /* MLangPhrase.swift */,
+				8C316582207676CF0015C247 /* MTextbookWord.swift */,
+				8C316583207676CF0015C247 /* MUnitPhrase.swift */,
+				8C316584207676CF0015C247 /* MLanguage.swift */,
+				8C316585207676CF0015C247 /* MTextBook.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		8C42B5A71D69A1D900DCB528 /* Words */ = {
 			isa = PBXGroup;
 			children = (
@@ -231,13 +285,13 @@
 		953473CC1A0D16CF00FF2D56 = {
 			isa = PBXGroup;
 			children = (
+				8C316570207676CF0015C247 /* LollySwiftShared */,
 				95FFAEE81A19F03C00E00C47 /* AMSlideMenu */,
-				95FFAF101A19F0AA00E00C47 /* src */,
+				95267BDE1A1EC4DF00CC2A4B /* Frameworks */,
 				953473D71A0D16CF00FF2D56 /* LollySwiftiOS */,
 				953473ED1A0D16CF00FF2D56 /* LollySwiftiOSTests */,
-				95267BDE1A1EC4DF00CC2A4B /* Frameworks */,
-				953473D61A0D16CF00FF2D56 /* Products */,
 				14A967501BAFD53503C187A0 /* Pods */,
+				953473D61A0D16CF00FF2D56 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -318,30 +372,6 @@
 			);
 			name = AMSlideMenu;
 			path = ../../../OSS/AMSlideMenu/AMSlideMenu;
-			sourceTree = "<group>";
-		};
-		95FFAF101A19F0AA00E00C47 /* src */ = {
-			isa = PBXGroup;
-			children = (
-				8CA6CD9C1EF1BF8700418799 /* MDictionary.swift */,
-				8CA6CD9D1EF1BF8700418799 /* MLangPhrase.swift */,
-				8CA6CD9F1EF1BF8700418799 /* MLanguage.swift */,
-				8CA6CDA01EF1BF8700418799 /* MLangWord.swift */,
-				8CA6CDA11EF1BF8700418799 /* MTextbook.swift */,
-				8CA6CDA21EF1BF8700418799 /* MTextbookWord.swift */,
-				8CA6CDA31EF1BF8700418799 /* MUnitPhrase.swift */,
-				8CA6CDA41EF1BF8700418799 /* MUnitWord.swift */,
-				8CA6CDA51EF1BF8700418799 /* MUserSetting.swift */,
-				8CA6CDA61EF1BF8700418799 /* PhrasesLangViewModel.swift */,
-				8CA6CDA71EF1BF8700418799 /* PhrasesUnitViewModel.swift */,
-				8C328FD21EFD87AA008682E3 /* RestApi.swift */,
-				8CA6CDA81EF1BF8700418799 /* SettingsViewModel.swift */,
-				8CA6CDA91EF1BF8700418799 /* WordsLangViewModel.swift */,
-				8CA6CDAA1EF1BF8700418799 /* WordsTextbookViewModel.swift */,
-				8CA6CDAB1EF1BF8700418799 /* WordsUnitViewModel.swift */,
-			);
-			name = src;
-			path = ../LollySwiftShared/src;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -518,47 +548,49 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8CA6CDB21EF1BF8700418799 /* MLangWord.swift in Sources */,
+				8C316596207676CF0015C247 /* MLanguage.swift in Sources */,
+				8C316589207676CF0015C247 /* PhrasesLangViewModel.swift in Sources */,
 				8C42B5B11D69A1D900DCB528 /* WordsLangViewController.swift in Sources */,
-				8CA6CDB61EF1BF8700418799 /* MUnitWord.swift in Sources */,
-				8CA6CDBA1EF1BF8700418799 /* SettingsViewModel.swift in Sources */,
 				951BB99C1A1B90DC0087DB94 /* LollyUINavigationController.swift in Sources */,
+				8C31658D207676CF0015C247 /* HtmlApi.swift in Sources */,
+				8C316586207676CF0015C247 /* SettingsViewModel.swift in Sources */,
 				8CD16D201D69FE8F00F5F625 /* PhrasesLangDetailViewController.swift in Sources */,
-				8CA6CDBD1EF1BF8700418799 /* WordsUnitViewModel.swift in Sources */,
-				8CA6CDB91EF1BF8700418799 /* PhrasesUnitViewModel.swift in Sources */,
 				951BB99A1A1B904B0087DB94 /* MainViewController.swift in Sources */,
+				8C316593207676CF0015C247 /* MLangPhrase.swift in Sources */,
+				8C31658E207676CF0015C247 /* MDictionary.swift in Sources */,
 				95FFAEFA1A19F03C00E00C47 /* AMSlideMenuLeftTableViewController.m in Sources */,
 				8C42B5B51D69A1D900DCB528 /* WordsUnitViewController.swift in Sources */,
 				8C9C6A442053F9F700F299C8 /* UIView+ActivityIndicator.swift in Sources */,
 				8C42B5BC1D69A21E00DCB528 /* PhrasesUnitViewController.swift in Sources */,
-				8CA6CDB11EF1BF8700418799 /* MLanguage.swift in Sources */,
-				8CA6CDAF1EF1BF8700418799 /* MLangPhrase.swift in Sources */,
+				8C31658F207676CF0015C247 /* MUnitWord.swift in Sources */,
 				95FFAEFD1A19F03C00E00C47 /* AMSlideMenuRightTableViewController.m in Sources */,
+				8C316587207676CF0015C247 /* WordsLangViewModel.swift in Sources */,
+				8C31658A207676CF0015C247 /* PhrasesUnitViewModel.swift in Sources */,
+				8C316590207676CF0015C247 /* MLangWord.swift in Sources */,
 				95FFAEFC1A19F03C00E00C47 /* AMSlideMenuRightMenuSegue.m in Sources */,
-				8CA6CDBC1EF1BF8700418799 /* WordsTextbookViewModel.swift in Sources */,
 				8C42B5AF1D69A1D900DCB528 /* WordsBaseViewController.swift in Sources */,
-				8CA6CDB41EF1BF8700418799 /* MTextbookWord.swift in Sources */,
+				8C31658B207676CF0015C247 /* WordsUnitViewModel.swift in Sources */,
 				8C42B5BB1D69A21E00DCB528 /* PhrasesLangViewController.swift in Sources */,
 				95FFAEF81A19F03C00E00C47 /* AMSlideMenuContentSegue.m in Sources */,
 				95FFAEF91A19F03C00E00C47 /* AMSlideMenuLeftMenuSegue.m in Sources */,
-				8CA6CDB31EF1BF8700418799 /* MTextbook.swift in Sources */,
-				8CA6CDBB1EF1BF8700418799 /* WordsLangViewModel.swift in Sources */,
 				95267BD71A1E26D000CC2A4B /* SearchViewController.swift in Sources */,
+				8C316592207676CF0015C247 /* MUserSetting.swift in Sources */,
 				8C42B5B01D69A1D900DCB528 /* WordsDictViewController.swift in Sources */,
 				8C0945691D122ACE003503ED /* SettingsViewController.swift in Sources */,
 				8CD16D121D69FD8A00F5F625 /* WordsLangDetailViewController.swift in Sources */,
 				8C42B5B21D69A1D900DCB528 /* WordsTextbookViewController.swift in Sources */,
+				8C31658C207676CF0015C247 /* RestApi.swift in Sources */,
+				8C316594207676CF0015C247 /* MTextbookWord.swift in Sources */,
+				8C316597207676CF0015C247 /* MTextBook.swift in Sources */,
 				8C1CF684206A2A4800714C33 /* Extensions.swift in Sources */,
-				8CA6CDAE1EF1BF8700418799 /* MDictionary.swift in Sources */,
-				8CA6CDB51EF1BF8700418799 /* MUnitPhrase.swift in Sources */,
 				951BB9981A1B90260087DB94 /* LeftMenuViewController.swift in Sources */,
-				8C328FD31EFD87AA008682E3 /* RestApi.swift in Sources */,
 				8C42B5B31D69A1D900DCB528 /* WordsUnitDetailViewController.swift in Sources */,
-				8CA6CDB71EF1BF8700418799 /* MUserSetting.swift in Sources */,
 				8C42B5BA1D69A21E00DCB528 /* PhrasesBaseViewController.swift in Sources */,
-				8CA6CDB81EF1BF8700418799 /* PhrasesLangViewModel.swift in Sources */,
 				8CD16D161D69FDDC00F5F625 /* PhrasesUnitDetailViewController.swift in Sources */,
+				8C316588207676CF0015C247 /* WordsTextbookViewModel.swift in Sources */,
+				8C316591207676CF0015C247 /* MNoteSite.swift in Sources */,
 				95FFAEFE1A19F03C00E00C47 /* UIViewController+AMSlideMenu.m in Sources */,
+				8C316595207676CF0015C247 /* MUnitPhrase.swift in Sources */,
 				95FFAEFB1A19F03C00E00C47 /* AMSlideMenuMainViewController.m in Sources */,
 				953473DB1A0D16CF00FF2D56 /* AppDelegate.swift in Sources */,
 			);

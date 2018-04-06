@@ -37,7 +37,7 @@ class RestApi {
     
     static func update(url: String, body: String, complete: @escaping (String) -> Void) {
         print("[RestApi]PUT:\(url) BODY:\(body)")
-        Alamofire.request(url, method: .put, encoding: body).responseString() { (response: DataResponse<String>) in
+        Alamofire.request(url, method: .put, encoding: body).responseString { (response: DataResponse<String>) in
             let result = response.result.value!
             complete(result)
         }
@@ -45,7 +45,7 @@ class RestApi {
     
     static func create(url: String, body: String, complete: @escaping (String) -> Void) {
         print("[RestApi]POST:\(url) BODY:\(body)")
-        Alamofire.request(url, method: .post, encoding: body).responseString() { (response: DataResponse<String>) in
+        Alamofire.request(url, method: .post, encoding: body).responseString { (response: DataResponse<String>) in
             let result = response.result.value!
             complete(result)
         }
@@ -53,7 +53,14 @@ class RestApi {
     
     static func delete(url: String, complete: @escaping (String) -> Void) {
         print("[RestApi]DELETE:\(url)")
-        Alamofire.request(url, method: .delete).responseString() { (response: DataResponse<String>) in
+        Alamofire.request(url, method: .delete).responseString { (response: DataResponse<String>) in
+            let result = response.result.value!
+            complete(result)
+        }
+    }
+    
+    static func getHtml(url: String, complete: @escaping (String) -> Void) {
+        Alamofire.request(url).responseString { (response: DataResponse<String>) in
             let result = response.result.value!
             complete(result)
         }

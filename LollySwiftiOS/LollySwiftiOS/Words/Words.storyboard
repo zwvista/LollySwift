@@ -114,9 +114,9 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Words in Unit" id="xZ5-om-3CN">
                         <rightBarButtonItems>
-                            <barButtonItem systemItem="add" id="iAg-Rh-7JO">
+                            <barButtonItem title="More" id="iAg-Rh-7JO">
                                 <connections>
-                                    <segue destination="u2P-mb-ghZ" kind="presentation" identifier="add" id="O5l-wV-jBh"/>
+                                    <action selector="btnMoreClicked:" destination="vUM-44-gHw" id="XOa-yk-nT7"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem title="Edit" id="3qe-RI-Ddv">
@@ -130,6 +130,7 @@
                         <outlet property="btnEdit" destination="3qe-RI-Ddv" id="6Um-H9-2QH"/>
                         <segue destination="u2P-mb-ghZ" kind="presentation" identifier="edit" id="uuq-e1-2eL"/>
                         <segue destination="sKF-T7-DSr" kind="show" identifier="dict" id="Wcb-Wk-Ta2"/>
+                        <segue destination="u2P-mb-ghZ" kind="presentation" identifier="add" id="K8L-Dr-qQn"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pJF-2o-6ag" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -581,6 +582,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="Q8T-Ex-R1C"/>
         <segue reference="Wcb-Wk-Ta2"/>
-        <segue reference="O5l-wV-jBh"/>
+        <segue reference="K8L-Dr-qQn"/>
     </inferredMetricsTieBreakers>
 </document>

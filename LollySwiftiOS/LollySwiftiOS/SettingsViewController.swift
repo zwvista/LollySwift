@@ -11,6 +11,7 @@ import UIKit
 class SettingsViewController: UITableViewController, ActionSheetCustomPickerDelegate {    
     @IBOutlet weak var langCell: UITableViewCell!
     @IBOutlet weak var dictCell: UITableViewCell!
+    @IBOutlet weak var noteSiteCell: UITableViewCell!
     @IBOutlet weak var textbookCell: UITableViewCell!
     @IBOutlet weak var lblUnitFrom: UILabel!
     @IBOutlet weak var lblUnitTo: UILabel!
@@ -38,11 +39,18 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
         selectedIndexPath = indexPath
         switch selectedIndexPath.section {
         case 0:
-            ActionSheetCustomPicker.show(withTitle: "Select Language", delegate: self, showCancelButton: true, origin: langCell, initialSelections: [vm.selectedLangIndex])
+            selectedRow = vm.selectedLangIndex
+            ActionSheetCustomPicker.show(withTitle: "Select Language", delegate: self, showCancelButton: true, origin: langCell, initialSelections: [selectedRow])
         case 1:
-            ActionSheetCustomPicker.show(withTitle: "Select Dictionary", delegate: self, showCancelButton: true, origin: dictCell, initialSelections: [vm.selectedDictIndex])
+            selectedRow = vm.selectedDictIndex
+            ActionSheetCustomPicker.show(withTitle: "Select Dictionary", delegate: self, showCancelButton: true, origin: dictCell, initialSelections: [selectedRow])
         case 2:
-            ActionSheetCustomPicker.show(withTitle: "Select Textbook", delegate: self, showCancelButton: true, origin: textbookCell, initialSelections: [vm.selectedTextbookIndex])
+            guard !vm.arrNoteSites.isEmpty else {break}
+            selectedRow = vm.selectedNoteSiteIndex
+            ActionSheetCustomPicker.show(withTitle: "Select Note Site", delegate: self, showCancelButton: true, origin: noteSiteCell, initialSelections: [selectedRow])
+        case 3:
+            selectedRow = vm.selectedTextbookIndex
+            ActionSheetCustomPicker.show(withTitle: "Select Textbook", delegate: self, showCancelButton: true, origin: textbookCell, initialSelections: [selectedRow])
         default:
             switch selectedIndexPath.row {
             case 0:
@@ -63,7 +71,7 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
                         if !self.swUnitTo.isOn || self.vm.isInvalidUnitPart {self.updateUnitPartTo()}
                     }
                 }, cancel: nil, origin: lblPartFrom)
-            case 3 where swUnitTo.isOn:
+            case 4 where swUnitTo.isOn:
                 ActionSheetStringPicker.show(withTitle: "Select Unit(To)", rows: vm.arrUnits, initialSelection: vm.USUNITTO - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
                     guard self.vm.USUNITTO != selectedIndex + 1 else {return}
                     self.vm.USUNITTO = selectedIndex + 1
@@ -72,7 +80,7 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
                         if self.vm.isInvalidUnitPart {self.updateUnitPartFrom()}
                     }
                 }, cancel: nil, origin: lblUnitTo)
-            case 4 where swUnitTo.isOn:
+            case 5 where swUnitTo.isOn:
                 ActionSheetStringPicker.show(withTitle: "Select Part(To)", rows: vm.arrParts, initialSelection: vm.USPARTTO - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
                     guard self.vm.USPARTTO != selectedIndex + 1 else {return}
                     self.vm.USPARTTO = selectedIndex + 1
@@ -98,6 +106,8 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
         case 1:
             return vm.arrDictionaries.count
         case 2:
+            return vm.arrNoteSites.count
+        case 3:
             return vm.arrTextbooks.count
         default:
             return 0
@@ -111,6 +121,8 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
         case 1:
             return vm.arrDictionaries[row].DICTNAME
         case 2:
+            return vm.arrNoteSites[row].DICTNAME
+        case 3:
             return vm.arrTextbooks[row].TEXTBOOKNAME
         default:
             return nil
@@ -134,7 +146,12 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
             vm.updateDict {
                 self.updateDict()
             }
-        case 2 where selectedRow != vm.selectedTextbookIndex:
+        case 2 where selectedRow != vm.selectedNoteSiteIndex:
+            vm.selectedNoteSiteIndex = selectedRow
+            vm.updateNoteSite {
+                self.updateNoteSite()
+            }
+        case 3 where selectedRow != vm.selectedTextbookIndex:
             vm.selectedTextbookIndex = selectedRow
             vm.updateTextbook {
                 self.updateTextbook()
@@ -148,6 +165,7 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
         let m = vm.selectedLang
         langCell.textLabel!.text = m.LANGNAME
         updateDict()
+        updateNoteSite()
         updateTextbook()
     }
     
@@ -157,6 +175,20 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
         dictCell.detailTextLabel!.text = m.URL
     }
     
+    func updateNoteSite() {
+        if vm.arrNoteSites.isEmpty {
+            // if the label text is set to an empty string,
+            // it will remain to be empty and can no longer be changed. (why ?)
+            noteSiteCell.textLabel!.text = " "
+            noteSiteCell.detailTextLabel!.text = " "
+        } else {
+            let m = vm.selectedNoteSite
+            noteSiteCell.textLabel!.text = m.DICTNAME!
+            noteSiteCell.detailTextLabel!.text = m.URL!
+            noteSiteCell.setNeedsDisplay()
+        }
+    }
+
     func updateTextbook() {
         let m = vm.selectedTextbook
         textbookCell.textLabel!.text = m.TEXTBOOKNAME

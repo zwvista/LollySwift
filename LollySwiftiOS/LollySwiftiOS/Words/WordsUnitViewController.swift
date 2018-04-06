@@ -14,6 +14,7 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
     var arrWords: [MUnitWord] {
         return searchController.isActive && searchBar.text != "" ? vm.arrWordsFiltered! : vm.arrWords
     }
+    var mNoteSite = vmSettings.selectedNoteSite
     @IBOutlet weak var btnEdit: UIBarButtonItem!
     
     override func viewDidLoad() {
@@ -46,14 +47,29 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
         return vmSettings.isSingleUnitPart
     }
     
-    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        let m = vm.arrWords.remove(at: (sourceIndexPath as NSIndexPath).row)
-        vm.arrWords.insert(m, at: (destinationIndexPath as NSIndexPath).row)
+    private func reindex() {
         tableView.beginUpdates()
         vm.reindex {
-            tableView.reloadRows(at: [IndexPath(row: $0, section: 0)], with: .fade)
+            self.tableView.reloadRows(at: [IndexPath(row: $0, section: 0)], with: .fade)
         }
         tableView.endUpdates()
+    }
+    
+    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        vm.moveWord(at: sourceIndexPath.row, to: destinationIndexPath.row)
+        reindex()
+    }
+    
+    func getNote(indexPath: IndexPath) {
+        let m = self.vm.arrWords[indexPath.row]
+        let url = mNoteSite.urlString(m.WORD)
+        RestApi.getHtml(url: url) { html in
+//            print(html)
+            m.NOTE = self.mNoteSite.htmlNote(html)
+            WordsUnitViewModel.update(m.ID, note: m.NOTE!) {
+                self.tableView.reloadRows(at: [indexPath], with: .fade)
+            }
+        }
     }
 
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
@@ -64,6 +80,7 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
                 WordsUnitViewModel.delete(m.ID) {}
                 self.vm.arrWords.remove(at: i)
                 tableView.deleteRows(at: [indexPath], with: .fade)
+                self.reindex()
             }, noHandler: { (action) in
                 tableView.reloadRows(at: [indexPath], with: .fade)
             })
@@ -78,7 +95,7 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
             let alertController = UIAlertController(title: "Word", message: m.WORD, preferredStyle: .alert)
             let deleteAction2 = UIAlertAction(title: "Delete", style: .destructive) { _ in delete() }
             let editAction2 = UIAlertAction(title: "Edit", style: .default) { _ in edit() }
-            let noteAction = UIAlertAction(title: "Retrieve Note", style: .default) { _ in }
+            let noteAction = UIAlertAction(title: "Retrieve Note", style: .default) { _ in self.getNote(indexPath: indexPath) }
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
             
             alertController.addAction(deleteAction2)
@@ -120,6 +137,24 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
         btnEdit.title = tableView.isEditing ? "Done" : "Edit"
     }
     
+    @IBAction func btnMoreClicked(_ sender: Any) {
+        let alertController = UIAlertController(title: "Words", message: "More", preferredStyle: .alert)
+        let addAction = UIAlertAction(title: "Add", style: .default) { _ in self.performSegue(withIdentifier: "add", sender: self) }
+        let noteAction = UIAlertAction(title: "Retrieve Note", style: .default) { _ in
+//            for i in 0..<self.vm.arrWords.count {
+//                DispatchQueue.main.asyncAfter(deadline: .now() + mNoteSite.WAIT / 1000.0) {
+//                    self.getNote(indexPath: IndexPath(row: i, section: 0))
+//                }
+//            }
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
+        
+        alertController.addAction(addAction)
+        alertController.addAction(noteAction)
+        alertController.addAction(cancelAction)
+        self.present(alertController, animated: true) {}
+    }
+
     @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
         guard segue.identifier == "Done" else {return}
         let controller = segue.source as! WordsUnitDetailViewController

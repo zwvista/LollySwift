@@ -30,6 +30,13 @@ class WordsUnitViewModel: NSObject {
         }
     }
     
+    static func update(_ id: Int, note: String, complete: @escaping () -> Void) {
+        MUnitWord.update(id, note: note) {
+            print($0)
+            complete()
+        }
+    }
+
     static func update(_ id: Int, m: MUnitWordEdit, complete: @escaping () -> Void) {
         MUnitWord.update(id, m: m) {
             print($0)
@@ -70,5 +77,10 @@ class WordsUnitViewModel: NSObject {
         o.PART = maxElem?.PART ?? vmSettings.USPARTTO
         o.SEQNUM = (maxElem?.SEQNUM ?? 0) + 1
         return o
+    }
+    
+    func moveWord(at oldIndex: Int, to newIndex: Int) {
+        let m = arrWords.remove(at: oldIndex)
+        arrWords.insert(m, at: newIndex)
     }
 }

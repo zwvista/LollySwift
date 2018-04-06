@@ -34,6 +34,10 @@ class SettingsViewModel: NSObject {
         get { return selectedUSLang.VALUE2!.toInt()! }
         set { selectedUSLang.VALUE2 = String(newValue) }
     }
+    var USNOTESITEID: Int {
+        get { return selectedUSLang.VALUE3!.toInt()! }
+        set { selectedUSLang.VALUE3 = String(newValue) }
+    }
     private var selectedUSTextbookIndex = 0
     private var selectedUSTextbook: MUserSetting {
         return arrUserSettings[selectedUSTextbookIndex]
@@ -80,13 +84,25 @@ class SettingsViewModel: NSObject {
     @objc
     var selectedDictIndex = 0 {
         didSet {
-            setSelectedDictIndex()
+            USDICTID = selectedDict.ID
         }
     }
     var selectedDict: MDictionary {
         return arrDictionaries[selectedDictIndex]
     }
     
+    @objc
+    var arrNoteSites = [MNoteSite]()
+    @objc
+    var selectedNoteSiteIndex = 0 {
+        didSet {
+            USNOTESITEID = selectedNoteSite.ID
+        }
+    }
+    var selectedNoteSite: MNoteSite {
+        return arrNoteSites[selectedNoteSiteIndex]
+    }
+
     @objc
     var arrTextbooks = [MTextbook]()
     @objc
@@ -122,10 +138,16 @@ class SettingsViewModel: NSObject {
         MDictionary.getDataByLang(self.USLANDID) {
             self.arrDictionaries = $0
             self.selectedDictIndex = self.arrDictionaries.index { $0.ID == self.USDICTID }!
-            MTextbook.getDataByLang(self.USLANDID) {
-                self.arrTextbooks = $0
-                self.selectedTextbookIndex = self.arrTextbooks.index { $0.ID == self.USTEXTBOOKID }!
-                complete()
+            MNoteSite.getDataByLang(self.USLANDID) {
+                self.arrNoteSites = $0
+                if !self.arrNoteSites.isEmpty {
+                    self.selectedNoteSiteIndex = self.arrNoteSites.index { $0.ID == self.USNOTESITEID }!
+                }
+                MTextbook.getDataByLang(self.USLANDID) {
+                    self.arrTextbooks = $0
+                    self.selectedTextbookIndex = self.arrTextbooks.index { $0.ID == self.USTEXTBOOKID }!
+                    complete()
+                }
             }
         }
     }
@@ -135,10 +157,6 @@ class SettingsViewModel: NSObject {
         selectedUSTextbookIndex = arrUserSettings.index { $0.KIND == 3 && $0.ENTITYID == self.USTEXTBOOKID }!
         arrUnits = (1...selectedTextbook.UNITS).map{ String($0) }
         arrParts = (selectedTextbook.PARTS.components(separatedBy: " "))
-    }
-    
-    private func setSelectedDictIndex() {
-        USDICTID = selectedDict.ID
     }
     
     func updateLang(complete: @escaping () -> Void) {
@@ -155,6 +173,13 @@ class SettingsViewModel: NSObject {
         }
     }
     
+    func updateNoteSite(complete: @escaping () -> Void) {
+        MUserSetting.update(selectedUSLang.ID, notesiteid: USNOTESITEID) {
+            print($0)
+            complete()
+        }
+    }
+
     func updateTextbook(complete: @escaping () -> Void) {
         MUserSetting.update(selectedUSLang.ID, textbookid: USTEXTBOOKID) {
             print($0)
