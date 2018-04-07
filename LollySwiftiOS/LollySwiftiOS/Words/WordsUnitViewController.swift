@@ -14,9 +14,7 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
     var arrWords: [MUnitWord] {
         return searchController.isActive && searchBar.text != "" ? vm.arrWordsFiltered! : vm.arrWords
     }
-    var mNoteSite = vmSettings.selectedNoteSite
     var timer = Timer()
-    var noteFromIndex = 0, noteToIndex = 0, noteIfEmpty = true
     @IBOutlet weak var btnEdit: UIBarButtonItem!
     
     override func viewDidLoad() {
@@ -164,15 +162,8 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
     }
     
     func getNote(indexPath: IndexPath) {
-        guard let mNoteSite = mNoteSite else {return}
-        let m = self.vm.arrWords[indexPath.row]
-        let url = mNoteSite.urlString(m.WORD)
-        RestApi.getHtml(url: url) { html in
-//            print(html)
-            m.NOTE = mNoteSite.htmlNote(html)
-            WordsUnitViewModel.update(m.ID, note: m.NOTE!) {
-                self.tableView.reloadRows(at: [indexPath], with: .fade)
-            }
+        vm.getNote(index: indexPath.row) {
+            self.tableView.reloadRows(at: [indexPath], with: .fade)
         }
     }
 
@@ -183,18 +174,11 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
         self.view.showBlurLoader()
     }
     
-    @objc func timerAction() {
-        if noteIfEmpty {
-            while noteFromIndex < noteToIndex && !(vm.arrWords[noteFromIndex].NOTE ?? "").isEmpty {
-                noteFromIndex += 1
-            }
-        }
-        if noteFromIndex >= noteToIndex {
+    @objc
+    func timerAction() {
+        vm.getNextNote {
             timer.invalidate()
             self.view.removeBlurLoader()
-        } else {
-            getNote(indexPath: IndexPath(row: noteFromIndex, section: 0))
-            noteFromIndex += 1
         }
     }
 }

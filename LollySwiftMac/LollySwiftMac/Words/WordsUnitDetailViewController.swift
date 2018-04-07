@@ -8,12 +8,11 @@
 
 import Cocoa
 
+@objcMembers
 class WordsUnitDetailViewController: NSViewController {
 
-    @objc
     var vm: WordsUnitViewModel!
     var complete: (() -> Void)?
-    @objc
     var mWord: MUnitWord!
     var isAdd: Bool!
 
@@ -31,13 +30,15 @@ class WordsUnitDetailViewController: NSViewController {
     }
     
     @IBAction func okClicked(_ sender: Any) {
+        // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
+        self.commitEditing()
         mWord.UNIT = pubUnit.indexOfSelectedItem + 1
         mWord.PART = pubPart.indexOfSelectedItem + 1
         if isAdd {
             vm.arrWords.append(mWord)
-            WordsUnitViewModel.create(m: MUnitWordEdit(m: mWord)) { self.mWord.ID = $0 }
+            WordsUnitViewModel.create(m: MUnitWordEdit(m: mWord)) { self.mWord.ID = $0; self.complete?() }
         } else {
-            WordsUnitViewModel.update(mWord.ID, m: MUnitWordEdit(m: mWord)) {}
+            WordsUnitViewModel.update(mWord.ID, m: MUnitWordEdit(m: mWord)) { self.complete?() }
         }
         dismissViewController(self)
     }

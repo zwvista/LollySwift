@@ -156,12 +156,12 @@ class WordsUnitViewController: NSViewController, NSTableViewDataSource, NSTableV
         wvDictOffline.isHidden = false
     }
 
-    lazy var detailVC = self.storyboard!.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "WordsUnitDetailViewController")) as! WordsUnitDetailViewController
-
     // https://stackoverflow.com/questions/24219441/how-to-use-nstoolbar-in-xcode-6-and-storyboard
     @IBAction func addWord(_ sender: Any) {
+        let detailVC = self.storyboard!.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "WordsUnitDetailViewController")) as! WordsUnitDetailViewController
         detailVC.vm = vm
         detailVC.mWord = vm.newUnitWord()
+        detailVC.complete = { self.tableView.reloadData() }
         self.presentViewControllerAsSheet(detailVC)
     }
     
@@ -175,8 +175,11 @@ class WordsUnitViewController: NSViewController, NSTableViewDataSource, NSTableV
     }
 
     @IBAction func tableViewDoubleAction(_ sender: Any) {
+        let detailVC = self.storyboard!.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "WordsUnitDetailViewController")) as! WordsUnitDetailViewController
         detailVC.vm = vm
-        detailVC.mWord = vm.arrWords[tableView.selectedRow]
+        let i = tableView.selectedRow
+        detailVC.mWord = vm.arrWords[i]
+        detailVC.complete = { self.tableView.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count)) }
         self.presentViewControllerAsModalWindow(detailVC)
     }
 }

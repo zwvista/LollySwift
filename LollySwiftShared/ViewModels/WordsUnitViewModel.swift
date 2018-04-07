@@ -11,9 +11,13 @@ import Foundation
 class WordsUnitViewModel: NSObject {
     @objc
     var vmSettings: SettingsViewModel
+    var mNoteSite: MNoteSite? {
+        return vmSettings.selectedNoteSite
+    }
     var arrWords = [MUnitWord]()
     var arrWordsFiltered: [MUnitWord]?
-    
+    var noteFromIndex = 0, noteToIndex = 0, noteIfEmpty = true
+
     public init(settings: SettingsViewModel, complete: @escaping () -> Void) {
         self.vmSettings = settings
         super.init()
@@ -83,5 +87,32 @@ class WordsUnitViewModel: NSObject {
     func moveWord(at oldIndex: Int, to newIndex: Int) {
         let m = arrWords.remove(at: oldIndex)
         arrWords.insert(m, at: newIndex)
+    }
+
+    func getNote(index: Int, complete: @escaping () -> Void) {
+        guard let mNoteSite = mNoteSite else {return}
+        let m = arrWords[index]
+        let url = mNoteSite.urlString(m.WORD)
+        RestApi.getHtml(url: url) { html in
+//            print(html)
+            m.NOTE = mNoteSite.htmlNote(html)
+            WordsUnitViewModel.update(m.ID, note: m.NOTE!) {
+                complete()
+            }
+        }
+    }
+    
+    func getNextNote(complete: () -> Void) {
+        if noteIfEmpty {
+            while noteFromIndex < noteToIndex && !(arrWords[noteFromIndex].NOTE ?? "").isEmpty {
+                noteFromIndex += 1
+            }
+        }
+        if noteFromIndex >= noteToIndex {
+            complete()
+        } else {
+            getNote(index: noteFromIndex) {}
+            noteFromIndex += 1
+        }
     }
 }
