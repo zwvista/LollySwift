@@ -9,6 +9,7 @@
 import Foundation
 
 class WordsUnitViewModel: NSObject {
+    @objc
     var vmSettings: SettingsViewModel
     var arrWords = [MUnitWord]()
     var arrWordsFiltered: [MUnitWord]?

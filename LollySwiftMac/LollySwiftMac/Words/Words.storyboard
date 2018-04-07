@@ -382,6 +382,9 @@
                                         </items>
                                     </menu>
                                 </popUpButtonCell>
+                                <connections>
+                                    <binding destination="9DB-NE-4YZ" name="content" keyPath="vm.vmSettings.arrUnits" id="d17-N3-ngd"/>
+                                </connections>
                             </popUpButton>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yeT-vY-SNC">
                                 <rect key="frame" x="18" y="196" width="41" height="17"/>
@@ -404,6 +407,9 @@
                                         </items>
                                     </menu>
                                 </popUpButtonCell>
+                                <connections>
+                                    <binding destination="9DB-NE-4YZ" name="content" keyPath="vm.vmSettings.arrParts" id="zpN-EB-WPT"/>
+                                </connections>
                             </popUpButton>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XqI-c6-Jm4">
                                 <rect key="frame" x="18" y="166" width="65" height="17"/>
@@ -446,7 +452,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="9DB-NE-4YZ" name="value" keyPath="mWord.WORD" id="Q1J-tA-Z3i"/>
+                                    <binding destination="9DB-NE-4YZ" name="value" keyPath="mWord.WORD" id="oH6-QI-68r"/>
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="S4i-xC-clP">
@@ -481,6 +487,9 @@
 DQ
 </string>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="okClicked:" target="9DB-NE-4YZ" id="YjC-1M-hdw"/>
+                                </connections>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gbz-1L-WBi">
                                 <rect key="frame" x="231" y="43" width="82" height="32"/>
@@ -526,6 +535,11 @@ Gw
                             <constraint firstItem="ALS-J5-3jM" firstAttribute="leading" secondItem="XqI-c6-Jm4" secondAttribute="trailing" constant="19" id="yBs-iw-I48"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="pubPart" destination="NV2-Bx-hDX" id="BgC-N7-5bT"/>
+                        <outlet property="pubUnit" destination="Lys-TP-MFf" id="ocX-vg-b3L"/>
+                        <outlet property="tfWord" destination="SKw-mP-6gh" id="zeJ-jD-yVF"/>
+                    </connections>
                 </viewController>
                 <customObject id="GSG-sy-G0i" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController representsSharedInstance="YES" id="sLH-dn-g7j"/>
