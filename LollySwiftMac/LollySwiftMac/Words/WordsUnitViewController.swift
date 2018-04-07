@@ -168,6 +168,13 @@ class WordsUnitViewController: NSViewController, NSTableViewDataSource, NSTableV
             self.tableView.reloadData()
         }
     }
+
+    @IBAction func tableViewDoubleAction(_ sender: Any) {
+        let vc = self.storyboard!.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "WordsUnitDetailViewController")) as! WordsUnitDetailViewController
+        vc.vm = vm
+        vc.mWord = vm.arrWords[tableView.selectedRow]
+        self.presentViewControllerAsSheet(vc)
+    }
 }
 
 
