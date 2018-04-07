@@ -28,7 +28,7 @@ class MUnitWord: NSObject, Mappable {
         return "\(UNIT) \(SEQNUM)\n\(PARTSTR(arrParts: arrParts))"
     }
     var WORDNOTE: String {
-        return WORD + (NOTE == nil || NOTE!.isEmpty ? "" : "(\(NOTE!))")
+        return WORD + ((NOTE ?? "").isEmpty ? "" : "(\(NOTE!))")
     }
     
     public override init() {

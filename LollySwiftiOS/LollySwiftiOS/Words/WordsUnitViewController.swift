@@ -84,13 +84,14 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
         let moreAction = UITableViewRowAction(style: .normal, title: "More") { _,_ in
             let alertController = UIAlertController(title: "Word", message: m.WORD, preferredStyle: .alert)
             let deleteAction2 = UIAlertAction(title: "Delete", style: .destructive) { _ in delete() }
-            let editAction2 = UIAlertAction(title: "Edit", style: .default) { _ in edit() }
-            let noteAction = UIAlertAction(title: "Retrieve Note", style: .default) { _ in self.getNote(indexPath: indexPath) }
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
-            
             alertController.addAction(deleteAction2)
+            let editAction2 = UIAlertAction(title: "Edit", style: .default) { _ in edit() }
             alertController.addAction(editAction2)
-            alertController.addAction(noteAction)
+            if self.mNoteSite != nil {
+                let noteAction = UIAlertAction(title: "Retrieve Note", style: .default) { _ in self.getNote(indexPath: indexPath) }
+                alertController.addAction(noteAction)
+            }
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
             alertController.addAction(cancelAction)
             self.present(alertController, animated: true) {}
         }
@@ -130,17 +131,18 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
     @IBAction func btnMoreClicked(_ sender: Any) {
         let alertController = UIAlertController(title: "Words", message: "More", preferredStyle: .alert)
         let addAction = UIAlertAction(title: "Add", style: .default) { _ in self.performSegue(withIdentifier: "add", sender: self) }
-        let notesAllAction = UIAlertAction(title: "Retrieve All Notes", style: .default) { _ in
-            self.startTimer(from: 0, to: self.vm.arrWords.count, nonEmpty: false)
-        }
-        let notesEmptyAction = UIAlertAction(title: "Retrieve Notes If Empty", style: .default) { _ in
-            self.startTimer(from: 0, to: self.vm.arrWords.count, nonEmpty: true)
+        alertController.addAction(addAction)
+        if mNoteSite != nil {
+            let notesAllAction = UIAlertAction(title: "Retrieve All Notes", style: .default) { _ in
+                self.startTimer(from: 0, to: self.vm.arrWords.count, nonEmpty: false)
+            }
+            alertController.addAction(notesAllAction)
+            let notesEmptyAction = UIAlertAction(title: "Retrieve Notes If Empty", style: .default) { _ in
+                self.startTimer(from: 0, to: self.vm.arrWords.count, nonEmpty: true)
+            }
+            alertController.addAction(notesEmptyAction)
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
-        
-        alertController.addAction(addAction)
-        alertController.addAction(notesAllAction)
-        alertController.addAction(notesEmptyAction)
         alertController.addAction(cancelAction)
         self.present(alertController, animated: true) {}
     }
@@ -158,11 +160,12 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
     }
     
     func getNote(indexPath: IndexPath) {
+        guard let mNoteSite = mNoteSite else {return}
         let m = self.vm.arrWords[indexPath.row]
         let url = mNoteSite.urlString(m.WORD)
         RestApi.getHtml(url: url) { html in
 //            print(html)
-            m.NOTE = self.mNoteSite.htmlNote(html)
+            m.NOTE = mNoteSite.htmlNote(html)
             WordsUnitViewModel.update(m.ID, note: m.NOTE!) {
                 self.tableView.reloadRows(at: [indexPath], with: .fade)
             }
@@ -170,6 +173,7 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
     }
 
     func startTimer(from: Int, to: Int, nonEmpty: Bool) {
+        guard let mNoteSite = mNoteSite else {return}
         noteFromIndex = from; noteToIndex = to; noteIfEmpty = nonEmpty
         timer = Timer.scheduledTimer(timeInterval: TimeInterval(Double(mNoteSite.WAIT!) / 1000.0), target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
         self.view.showBlurLoader()
@@ -177,7 +181,7 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
     
     @objc func timerAction() {
         if noteIfEmpty {
-            while noteFromIndex < noteToIndex && !vm.arrWords[noteFromIndex].NOTE!.isEmpty {
+            while noteFromIndex < noteToIndex && !(vm.arrWords[noteFromIndex].NOTE ?? "").isEmpty {
                 noteFromIndex += 1
             }
         }

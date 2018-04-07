@@ -182,7 +182,7 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
             noteSiteCell.textLabel!.text = " "
             noteSiteCell.detailTextLabel!.text = " "
         } else {
-            let m = vm.selectedNoteSite
+            let m = vm.selectedNoteSite!
             noteSiteCell.textLabel!.text = m.DICTNAME!
             noteSiteCell.detailTextLabel!.text = m.URL!
             noteSiteCell.setNeedsDisplay()

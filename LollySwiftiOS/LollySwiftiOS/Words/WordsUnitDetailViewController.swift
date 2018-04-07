@@ -58,7 +58,7 @@ class WordsUnitDetailViewController: UITableViewController, UITextFieldDelegate 
     func onDone() {
         mWord.SEQNUM = Int(tfSeqNum.text!)!
         mWord.WORD = tfWord.text ?? ""
-        mWord.NOTE = tfNote.text ?? ""
+        mWord.NOTE = tfNote.text
         
         if isAdd {
             vm.arrWords.append(mWord)

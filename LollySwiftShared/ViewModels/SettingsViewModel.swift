@@ -96,11 +96,11 @@ class SettingsViewModel: NSObject {
     @objc
     var selectedNoteSiteIndex = 0 {
         didSet {
-            USNOTESITEID = selectedNoteSite.ID
+            USNOTESITEID = selectedNoteSite?.ID ?? 0
         }
     }
-    var selectedNoteSite: MNoteSite {
-        return arrNoteSites[selectedNoteSiteIndex]
+    var selectedNoteSite: MNoteSite? {
+        return arrNoteSites.isEmpty ? nil : arrNoteSites[selectedNoteSiteIndex]
     }
 
     @objc
