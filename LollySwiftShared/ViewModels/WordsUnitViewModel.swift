@@ -102,16 +102,22 @@ class WordsUnitViewModel: NSObject {
         }
     }
     
-    func getNextNote(complete: () -> Void) {
+    func getNotes(ifEmpty: Bool, complete: (Int) -> Void) {
+        guard let mNoteSite = mNoteSite else {return}
+        noteFromIndex = 0; noteToIndex = arrWords.count; noteIfEmpty = ifEmpty
+        complete(mNoteSite.WAIT!)
+    }
+    
+    func getNextNote(rowComplete: @escaping (Int) -> Void, allComplete: @escaping () -> Void) {
         if noteIfEmpty {
             while noteFromIndex < noteToIndex && !(arrWords[noteFromIndex].NOTE ?? "").isEmpty {
                 noteFromIndex += 1
             }
         }
         if noteFromIndex >= noteToIndex {
-            complete()
+            allComplete()
         } else {
-            getNote(index: noteFromIndex) {}
+            getNote(index: noteFromIndex) { rowComplete(self.noteFromIndex) }
             noteFromIndex += 1
         }
     }

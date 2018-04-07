@@ -234,12 +234,15 @@
                                                                 </tableColumn>
                                                             </tableColumns>
                                                             <connections>
-                                                                <action trigger="doubleAction" selector="tableViewDoubleAction:" target="F8i-pe-Ate" id="EFv-bU-qx8"/>
+                                                                <action trigger="doubleAction" selector="editWord:" target="F8i-pe-Ate" id="y4k-Tj-vgq"/>
                                                                 <outlet property="dataSource" destination="F8i-pe-Ate" id="WTk-VO-k4I"/>
                                                                 <outlet property="delegate" destination="F8i-pe-Ate" id="EHv-ob-M8C"/>
                                                             </connections>
                                                         </tableView>
                                                     </subviews>
+                                                    <connections>
+                                                        <outlet property="menu" destination="UPB-Wi-4rN" id="fuj-Ms-Z0a"/>
+                                                    </connections>
                                                 </clipView>
                                                 <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="MWh-UR-fIZ">
                                                     <rect key="frame" x="1" y="561" width="293" height="16"/>
@@ -328,6 +331,40 @@
                         <outlet property="wvDictOnline" destination="tEP-Us-q1l" id="69j-oh-os0"/>
                     </connections>
                 </viewController>
+                <menu id="UPB-Wi-4rN">
+                    <items>
+                        <menuItem title="Delete" id="Pck-ev-rQc">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="deleteWord:" target="F8i-pe-Ate" id="BzB-Nh-cKZ"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem title="Edit" id="Hn0-Zh-OQJ">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="editWord:" target="F8i-pe-Ate" id="xzH-Hm-3gz"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem title="Retrieve Note" id="f3L-ih-FsA">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="getNote:" target="F8i-pe-Ate" id="4cQ-BD-asf"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem title="Copy Word" id="cu5-BV-j0w">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="copyWord:" target="F8i-pe-Ate" id="pm4-iz-7SQ"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem title="Copy Note" id="zGD-ti-zfv">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="copyNote:" target="F8i-pe-Ate" id="CLv-F3-4lB"/>
+                            </connections>
+                        </menuItem>
+                    </items>
+                </menu>
             </objects>
             <point key="canvasLocation" x="-816" y="905"/>
         </scene>

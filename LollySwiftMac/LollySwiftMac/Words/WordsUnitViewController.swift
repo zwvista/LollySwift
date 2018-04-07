@@ -51,7 +51,7 @@ class WordsUnitViewController: NSViewController, NSTableViewDataSource, NSTableV
         let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! NSTableCellView
         let m = arrWords[row]
         let columnName = tableColumn!.title
-        cell.textField?.stringValue = columnName == "PART" ? m.PARTSTR(arrParts: vm.vmSettings.arrParts) : String(describing: m.value(forKey: columnName)!)
+        cell.textField?.stringValue = columnName == "PART" ? m.PARTSTR(arrParts: vm.vmSettings.arrParts) : String(describing: m.value(forKey: columnName) ?? "")
         return cell;
     }
     
@@ -116,6 +116,7 @@ class WordsUnitViewController: NSViewController, NSTableViewDataSource, NSTableV
     }
     
     func tableViewSelectionDidChange(_ notification: Notification) {
+        guard tableView.selectedRow != -1 else {return}
         let m = arrWords[tableView.selectedRow]
         word = m.WORD
         searchDict(self)
@@ -174,13 +175,34 @@ class WordsUnitViewController: NSViewController, NSTableViewDataSource, NSTableV
         }
     }
 
-    @IBAction func tableViewDoubleAction(_ sender: Any) {
+    @IBAction func editWord(_ sender: Any) {
         let detailVC = self.storyboard!.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "WordsUnitDetailViewController")) as! WordsUnitDetailViewController
         detailVC.vm = vm
         let i = tableView.selectedRow
         detailVC.mWord = vm.arrWords[i]
         detailVC.complete = { self.tableView.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count)) }
         self.presentViewControllerAsModalWindow(detailVC)
+    }
+    
+    @IBAction func getNote(_ sender: Any) {
+        let col = tableView.tableColumns.index(where: {$0.title == "NOTE"})!
+        vm.getNote(index: tableView.selectedRow) {
+            self.tableView.reloadData(forRowIndexes: [self.tableView.selectedRow], columnIndexes: [col])
+        }
+    }
+    
+    @IBAction func copyWord(_ sender: Any) {
+        let m = vm.arrWords[tableView.selectedRow]
+        let pasteboard = NSPasteboard.general
+        pasteboard.declareTypes([.string], owner: nil)
+        pasteboard.setString(m.WORD, forType: .string)
+    }
+    
+    @IBAction func copyNote(_ sender: Any) {
+        let m = vm.arrWords[tableView.selectedRow]
+        let pasteboard = NSPasteboard.general
+        pasteboard.declareTypes([.string], owner: nil)
+        pasteboard.setString(m.NOTE ?? "", forType: .string)
     }
 }
 

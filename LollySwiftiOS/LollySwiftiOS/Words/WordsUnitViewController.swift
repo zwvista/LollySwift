@@ -85,8 +85,12 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
             alertController.addAction(deleteAction2)
             let editAction2 = UIAlertAction(title: "Edit", style: .default) { _ in edit() }
             alertController.addAction(editAction2)
-            if self.mNoteSite != nil {
-                let noteAction = UIAlertAction(title: "Retrieve Note", style: .default) { _ in self.getNote(indexPath: indexPath) }
+            if self.vm.mNoteSite != nil {
+                let noteAction = UIAlertAction(title: "Retrieve Note", style: .default) { _ in
+                    self.vm.getNote(index: indexPath.row) {
+                        self.tableView.reloadRows(at: [indexPath], with: .fade)
+                    }
+                }
                 alertController.addAction(noteAction)
             }
             let copyWordAction = UIAlertAction(title: "Copy Word", style: .default) { _ in UIPasteboard.general.string = m.WORD }
@@ -134,13 +138,13 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
         let alertController = UIAlertController(title: "Words", message: "More", preferredStyle: .alert)
         let addAction = UIAlertAction(title: "Add", style: .default) { _ in self.performSegue(withIdentifier: "add", sender: self) }
         alertController.addAction(addAction)
-        if mNoteSite != nil {
+        if vm.mNoteSite != nil {
             let notesAllAction = UIAlertAction(title: "Retrieve All Notes", style: .default) { _ in
-                self.startTimer(from: 0, to: self.vm.arrWords.count, nonEmpty: false)
+                self.startTimer(ifEmpty: false)
             }
             alertController.addAction(notesAllAction)
             let notesEmptyAction = UIAlertAction(title: "Retrieve Notes If Empty", style: .default) { _ in
-                self.startTimer(from: 0, to: self.vm.arrWords.count, nonEmpty: true)
+                self.startTimer(ifEmpty: true)
             }
             alertController.addAction(notesEmptyAction)
         }
@@ -160,26 +164,21 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
             }
         }
     }
-    
-    func getNote(indexPath: IndexPath) {
-        vm.getNote(index: indexPath.row) {
-            self.tableView.reloadRows(at: [indexPath], with: .fade)
-        }
-    }
 
-    func startTimer(from: Int, to: Int, nonEmpty: Bool) {
-        guard let mNoteSite = mNoteSite else {return}
-        noteFromIndex = from; noteToIndex = to; noteIfEmpty = nonEmpty
-        timer = Timer.scheduledTimer(timeInterval: TimeInterval(Double(mNoteSite.WAIT!) / 1000.0), target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
-        self.view.showBlurLoader()
+    func startTimer(ifEmpty: Bool) {
+        vm.getNotes(ifEmpty: ifEmpty) {
+            timer = Timer.scheduledTimer(timeInterval: TimeInterval(Double($0) / 1000.0), target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
+            self.view.showBlurLoader()
+        }
     }
     
     @objc
     func timerAction() {
-        vm.getNextNote {
-            timer.invalidate()
+        vm.getNextNote(rowComplete: { _ in }, allComplete: {
+            self.timer.invalidate()
             self.view.removeBlurLoader()
-        }
+            self.tableView.reloadData()
+        })
     }
 }
 
