@@ -15,6 +15,8 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
         return searchController.isActive && searchBar.text != "" ? vm.arrWordsFiltered! : vm.arrWords
     }
     var mNoteSite = vmSettings.selectedNoteSite
+    var timer = Timer()
+    var noteFromIndex = 0, noteToIndex = 0, noteIfEmpty = true
     @IBOutlet weak var btnEdit: UIBarButtonItem!
     
     override func viewDidLoad() {
@@ -58,18 +60,6 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         vm.moveWord(at: sourceIndexPath.row, to: destinationIndexPath.row)
         reindex()
-    }
-    
-    func getNote(indexPath: IndexPath) {
-        let m = self.vm.arrWords[indexPath.row]
-        let url = mNoteSite.urlString(m.WORD)
-        RestApi.getHtml(url: url) { html in
-//            print(html)
-            m.NOTE = self.mNoteSite.htmlNote(html)
-            WordsUnitViewModel.update(m.ID, note: m.NOTE!) {
-                self.tableView.reloadRows(at: [indexPath], with: .fade)
-            }
-        }
     }
 
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
@@ -140,17 +130,17 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
     @IBAction func btnMoreClicked(_ sender: Any) {
         let alertController = UIAlertController(title: "Words", message: "More", preferredStyle: .alert)
         let addAction = UIAlertAction(title: "Add", style: .default) { _ in self.performSegue(withIdentifier: "add", sender: self) }
-        let noteAction = UIAlertAction(title: "Retrieve Note", style: .default) { _ in
-//            for i in 0..<self.vm.arrWords.count {
-//                DispatchQueue.main.asyncAfter(deadline: .now() + mNoteSite.WAIT / 1000.0) {
-//                    self.getNote(indexPath: IndexPath(row: i, section: 0))
-//                }
-//            }
+        let notesAllAction = UIAlertAction(title: "Retrieve All Notes", style: .default) { _ in
+            self.startTimer(from: 0, to: self.vm.arrWords.count, nonEmpty: false)
+        }
+        let notesEmptyAction = UIAlertAction(title: "Retrieve Notes If Empty", style: .default) { _ in
+            self.startTimer(from: 0, to: self.vm.arrWords.count, nonEmpty: true)
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
         
         alertController.addAction(addAction)
-        alertController.addAction(noteAction)
+        alertController.addAction(notesAllAction)
+        alertController.addAction(notesEmptyAction)
         alertController.addAction(cancelAction)
         self.present(alertController, animated: true) {}
     }
@@ -164,6 +154,39 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self.performSegue(withIdentifier: "add", sender: self)
             }
+        }
+    }
+    
+    func getNote(indexPath: IndexPath) {
+        let m = self.vm.arrWords[indexPath.row]
+        let url = mNoteSite.urlString(m.WORD)
+        RestApi.getHtml(url: url) { html in
+//            print(html)
+            m.NOTE = self.mNoteSite.htmlNote(html)
+            WordsUnitViewModel.update(m.ID, note: m.NOTE!) {
+                self.tableView.reloadRows(at: [indexPath], with: .fade)
+            }
+        }
+    }
+
+    func startTimer(from: Int, to: Int, nonEmpty: Bool) {
+        noteFromIndex = from; noteToIndex = to; noteIfEmpty = nonEmpty
+        timer = Timer.scheduledTimer(timeInterval: TimeInterval(Double(mNoteSite.WAIT!) / 1000.0), target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
+        self.view.showBlurLoader()
+    }
+    
+    @objc func timerAction() {
+        if noteIfEmpty {
+            while noteFromIndex < noteToIndex && !vm.arrWords[noteFromIndex].NOTE!.isEmpty {
+                noteFromIndex += 1
+            }
+        }
+        if noteFromIndex >= noteToIndex {
+            timer.invalidate()
+            self.view.removeBlurLoader()
+        } else {
+            getNote(indexPath: IndexPath(row: noteFromIndex, section: 0))
+            noteFromIndex += 1
         }
     }
 }

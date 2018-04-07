@@ -19,6 +19,7 @@ class MDictionary: NSObject, Mappable {
     var URL: String?
     var CHCONV: String?
     var TRANSFORM_MAC: String?
+    var WAIT: Int?
     var TEMPLATE: String?
     
     required public init?(map: Map){
@@ -32,6 +33,7 @@ class MDictionary: NSObject, Mappable {
         URL <- map["URL"]
         CHCONV <- map["CHCONV"]
         TRANSFORM_MAC <- map["TRANSFORM_MAC"]
+        WAIT <- map["WAIT"]
         TEMPLATE <- map["TEMPLATE"]
     }
 
