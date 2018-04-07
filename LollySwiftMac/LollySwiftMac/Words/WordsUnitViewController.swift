@@ -49,7 +49,9 @@ class WordsUnitViewController: NSViewController, NSTableViewDataSource, NSTableV
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! NSTableCellView
-        cell.textField?.stringValue = String(describing: arrWords[row].value(forKey: tableColumn!.title)!)
+        let m = arrWords[row]
+        let columnName = tableColumn!.title
+        cell.textField?.stringValue = columnName == "PART" ? m.PARTSTR(arrParts: vm.vmSettings.arrParts) : String(describing: m.value(forKey: columnName)!)
         return cell;
     }
     

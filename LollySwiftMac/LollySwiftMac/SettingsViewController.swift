@@ -16,6 +16,7 @@ class SettingsViewController: NSViewController {
     }
     @IBOutlet weak var acLanguanges: NSArrayController!
     @IBOutlet weak var acDictionaries: NSArrayController!
+    @IBOutlet weak var acNoteSites: NSArrayController!
     @IBOutlet weak var acTextbooks: NSArrayController!
     @IBOutlet weak var acUnits: NSArrayController!
     @IBOutlet weak var acParts: NSArrayController!
@@ -23,6 +24,7 @@ class SettingsViewController: NSViewController {
     @IBOutlet weak var tfUnitsInAllTo: NSTextField!
     @IBOutlet weak var pubLanguages: NSPopUpButton!
     @IBOutlet weak var pubDictionaries: NSPopUpButton!
+    @IBOutlet weak var pubNoteSites: NSPopUpButton!
     @IBOutlet weak var pubTextbooks: NSPopUpButton!
     @IBOutlet weak var pubUnitFrom: NSPopUpButton!
     @IBOutlet weak var pubUnitTo: NSPopUpButton!
@@ -58,6 +60,13 @@ class SettingsViewController: NSViewController {
         }
     }
     
+    @IBAction func noteSiteSelected(_ sender: AnyObject) {
+        vm.selectedNoteSiteIndex = pubNoteSites.indexOfSelectedItem
+        vm.updateNoteSite {
+            self.updateDict()
+        }
+    }
+
     @IBAction func textbookSelected(_ sender: AnyObject) {
         vm.selectedTextbookIndex = pubTextbooks.indexOfSelectedItem
         vm.updateTextbook {
@@ -107,6 +116,7 @@ class SettingsViewController: NSViewController {
     func updateLang() {
         acLanguanges.content = vm.arrLanguages
         updateDict()
+        updateNoteSite()
         updateTextbook()
     }
     
@@ -114,6 +124,10 @@ class SettingsViewController: NSViewController {
         acDictionaries.content = vm.arrDictionaries
     }
     
+    func updateNoteSite() {
+        acNoteSites.content = vm.arrNoteSites
+    }
+
     func updateTextbook() {
         acTextbooks.content = vm.arrTextbooks
         let m = vm.selectedTextbook

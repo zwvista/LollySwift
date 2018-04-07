@@ -9,16 +9,34 @@
 /* Begin PBXBuildFile section */
 		41624B18047DBD62E1485CDE /* Pods_LollySwiftMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F369FEA5447EADCC97C83AE1 /* Pods_LollySwiftMac.framework */; };
 		8C0ACB581D4391FB00EC6740 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0ACB571D4391FB00EC6740 /* SettingsViewController.swift */; };
-		8C10742A207086E900CE91A0 /* Words.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C1074292070866900CE91A0 /* Words.storyboard */; };
 		8C1C4F281D31F88800CF5D88 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1C4F271D31F88800CF5D88 /* AppDelegate.swift */; };
 		8C1C4F2A1D31F88800CF5D88 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1C4F291D31F88800CF5D88 /* SearchViewController.swift */; };
 		8C1C4F2C1D31F88800CF5D88 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C1C4F2B1D31F88800CF5D88 /* Assets.xcassets */; };
 		8C1C4F2F1D31F88800CF5D88 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C1C4F2D1D31F88800CF5D88 /* Main.storyboard */; };
 		8C1C4F3A1D31F88800CF5D88 /* LollySwiftMacTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1C4F391D31F88800CF5D88 /* LollySwiftMacTests.swift */; };
 		8C1C4F451D31F88800CF5D88 /* LollySwiftMacUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1C4F441D31F88800CF5D88 /* LollySwiftMacUITests.swift */; };
+		8C2CB5AE207885140083DDE2 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CB59A207885140083DDE2 /* SettingsViewModel.swift */; };
+		8C2CB5AF207885140083DDE2 /* WordsLangViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CB59B207885140083DDE2 /* WordsLangViewModel.swift */; };
+		8C2CB5B0207885140083DDE2 /* WordsTextbookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CB59C207885140083DDE2 /* WordsTextbookViewModel.swift */; };
+		8C2CB5B1207885140083DDE2 /* PhrasesLangViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CB59D207885140083DDE2 /* PhrasesLangViewModel.swift */; };
+		8C2CB5B2207885140083DDE2 /* PhrasesUnitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CB59E207885140083DDE2 /* PhrasesUnitViewModel.swift */; };
+		8C2CB5B3207885140083DDE2 /* WordsUnitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CB59F207885140083DDE2 /* WordsUnitViewModel.swift */; };
+		8C2CB5B4207885140083DDE2 /* RestApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CB5A1207885140083DDE2 /* RestApi.swift */; };
+		8C2CB5B5207885140083DDE2 /* HtmlApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CB5A2207885140083DDE2 /* HtmlApi.swift */; };
+		8C2CB5B6207885140083DDE2 /* MDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CB5A4207885140083DDE2 /* MDictionary.swift */; };
+		8C2CB5B7207885140083DDE2 /* MUnitWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CB5A5207885140083DDE2 /* MUnitWord.swift */; };
+		8C2CB5B8207885140083DDE2 /* MLangWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CB5A6207885140083DDE2 /* MLangWord.swift */; };
+		8C2CB5B9207885140083DDE2 /* MNoteSite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CB5A7207885140083DDE2 /* MNoteSite.swift */; };
+		8C2CB5BA207885140083DDE2 /* MUserSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CB5A8207885140083DDE2 /* MUserSetting.swift */; };
+		8C2CB5BB207885140083DDE2 /* MLangPhrase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CB5A9207885140083DDE2 /* MLangPhrase.swift */; };
+		8C2CB5BC207885140083DDE2 /* MTextbookWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CB5AA207885140083DDE2 /* MTextbookWord.swift */; };
+		8C2CB5BD207885140083DDE2 /* MUnitPhrase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CB5AB207885140083DDE2 /* MUnitPhrase.swift */; };
+		8C2CB5BE207885140083DDE2 /* MLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CB5AC207885140083DDE2 /* MLanguage.swift */; };
+		8C2CB5BF207885140083DDE2 /* MTextBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CB5AD207885140083DDE2 /* MTextBook.swift */; };
+		8C2CB5C3207888260083DDE2 /* WordsUnitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CB5C1207888260083DDE2 /* WordsUnitViewController.swift */; };
+		8C2CB5C4207888260083DDE2 /* Words.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C2CB5C2207888260083DDE2 /* Words.storyboard */; };
 		8C486DF41EBB88240023FBFC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C486DF31EBB88240023FBFC /* Cocoa.framework */; };
 		8C486DF61EBB882B0023FBFC /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C486DF51EBB882B0023FBFC /* WebKit.framework */; };
-		8C5C7C7F206F2B3B003A888D /* WordsUnitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5C7C7E206F2B3A003A888D /* WordsUnitViewController.swift */; };
 		8CD1D929206227800071687B /* LollyWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD1D928206227800071687B /* LollyWindow.swift */; };
 		8CE0F27A206E94CF00EEE4AC /* LollyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE0F279206E94CE00EEE4AC /* LollyProtocol.swift */; };
 /* End PBXBuildFile section */
@@ -55,7 +73,6 @@
 
 /* Begin PBXFileReference section */
 		8C0ACB571D4391FB00EC6740 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		8C1074292070866900CE91A0 /* Words.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Words.storyboard; path = /Users/zwvista/Documents/Programs/Lolly/LollySwift/LollySwiftMac/LollySwiftMac/Words.storyboard; sourceTree = "<absolute>"; };
 		8C1C4F241D31F88800CF5D88 /* LollySwiftMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LollySwiftMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C1C4F271D31F88800CF5D88 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8C1C4F291D31F88800CF5D88 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -68,9 +85,28 @@
 		8C1C4F401D31F88800CF5D88 /* LollySwiftMacUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LollySwiftMacUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C1C4F441D31F88800CF5D88 /* LollySwiftMacUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LollySwiftMacUITests.swift; sourceTree = "<group>"; };
 		8C1C4F461D31F88800CF5D88 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8C2CB59A207885140083DDE2 /* SettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		8C2CB59B207885140083DDE2 /* WordsLangViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsLangViewModel.swift; sourceTree = "<group>"; };
+		8C2CB59C207885140083DDE2 /* WordsTextbookViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsTextbookViewModel.swift; sourceTree = "<group>"; };
+		8C2CB59D207885140083DDE2 /* PhrasesLangViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesLangViewModel.swift; sourceTree = "<group>"; };
+		8C2CB59E207885140083DDE2 /* PhrasesUnitViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesUnitViewModel.swift; sourceTree = "<group>"; };
+		8C2CB59F207885140083DDE2 /* WordsUnitViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsUnitViewModel.swift; sourceTree = "<group>"; };
+		8C2CB5A1207885140083DDE2 /* RestApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestApi.swift; sourceTree = "<group>"; };
+		8C2CB5A2207885140083DDE2 /* HtmlApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HtmlApi.swift; sourceTree = "<group>"; };
+		8C2CB5A4207885140083DDE2 /* MDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDictionary.swift; sourceTree = "<group>"; };
+		8C2CB5A5207885140083DDE2 /* MUnitWord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MUnitWord.swift; sourceTree = "<group>"; };
+		8C2CB5A6207885140083DDE2 /* MLangWord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLangWord.swift; sourceTree = "<group>"; };
+		8C2CB5A7207885140083DDE2 /* MNoteSite.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MNoteSite.swift; sourceTree = "<group>"; };
+		8C2CB5A8207885140083DDE2 /* MUserSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MUserSetting.swift; sourceTree = "<group>"; };
+		8C2CB5A9207885140083DDE2 /* MLangPhrase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLangPhrase.swift; sourceTree = "<group>"; };
+		8C2CB5AA207885140083DDE2 /* MTextbookWord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTextbookWord.swift; sourceTree = "<group>"; };
+		8C2CB5AB207885140083DDE2 /* MUnitPhrase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MUnitPhrase.swift; sourceTree = "<group>"; };
+		8C2CB5AC207885140083DDE2 /* MLanguage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLanguage.swift; sourceTree = "<group>"; };
+		8C2CB5AD207885140083DDE2 /* MTextBook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTextBook.swift; sourceTree = "<group>"; };
+		8C2CB5C1207888260083DDE2 /* WordsUnitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsUnitViewController.swift; sourceTree = "<group>"; };
+		8C2CB5C2207888260083DDE2 /* Words.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Words.storyboard; sourceTree = "<group>"; };
 		8C486DF31EBB88240023FBFC /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		8C486DF51EBB882B0023FBFC /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
-		8C5C7C7E206F2B3A003A888D /* WordsUnitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsUnitViewController.swift; sourceTree = "<group>"; };
 		8C6E2EDC1EBB97CF00AC114F /* LollySwiftMac-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LollySwiftMac-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		8CD1D928206227800071687B /* LollyWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LollyWindow.swift; sourceTree = "<group>"; };
 		8CE0F279206E94CE00EEE4AC /* LollyProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LollyProtocol.swift; sourceTree = "<group>"; };
@@ -110,6 +146,7 @@
 		8C1C4F1B1D31F88800CF5D88 = {
 			isa = PBXGroup;
 			children = (
+				8C2CB598207885140083DDE2 /* LollySwiftShared */,
 				8C6F26DD1D333598008F706A /* Frameworks */,
 				8C1C4F261D31F88800CF5D88 /* LollySwiftMac */,
 				8C1C4F381D31F88800CF5D88 /* LollySwiftMacTests */,
@@ -141,8 +178,7 @@
 				8C1C4F2D1D31F88800CF5D88 /* Main.storyboard */,
 				8C1C4F291D31F88800CF5D88 /* SearchViewController.swift */,
 				8C0ACB571D4391FB00EC6740 /* SettingsViewController.swift */,
-				8C1074292070866900CE91A0 /* Words.storyboard */,
-				8C5C7C7E206F2B3A003A888D /* WordsUnitViewController.swift */,
+				8C2CB5C0207888260083DDE2 /* Words */,
 			);
 			path = LollySwiftMac;
 			sourceTree = "<group>";
@@ -163,6 +199,65 @@
 				8C1C4F461D31F88800CF5D88 /* Info.plist */,
 			);
 			path = LollySwiftMacUITests;
+			sourceTree = "<group>";
+		};
+		8C2CB598207885140083DDE2 /* LollySwiftShared */ = {
+			isa = PBXGroup;
+			children = (
+				8C2CB599207885140083DDE2 /* ViewModels */,
+				8C2CB5A0207885140083DDE2 /* Shared */,
+				8C2CB5A3207885140083DDE2 /* Models */,
+			);
+			name = LollySwiftShared;
+			path = ../LollySwiftShared;
+			sourceTree = "<group>";
+		};
+		8C2CB599207885140083DDE2 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				8C2CB59A207885140083DDE2 /* SettingsViewModel.swift */,
+				8C2CB59B207885140083DDE2 /* WordsLangViewModel.swift */,
+				8C2CB59C207885140083DDE2 /* WordsTextbookViewModel.swift */,
+				8C2CB59D207885140083DDE2 /* PhrasesLangViewModel.swift */,
+				8C2CB59E207885140083DDE2 /* PhrasesUnitViewModel.swift */,
+				8C2CB59F207885140083DDE2 /* WordsUnitViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		8C2CB5A0207885140083DDE2 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				8C2CB5A1207885140083DDE2 /* RestApi.swift */,
+				8C2CB5A2207885140083DDE2 /* HtmlApi.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		8C2CB5A3207885140083DDE2 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8C2CB5A4207885140083DDE2 /* MDictionary.swift */,
+				8C2CB5A5207885140083DDE2 /* MUnitWord.swift */,
+				8C2CB5A6207885140083DDE2 /* MLangWord.swift */,
+				8C2CB5A7207885140083DDE2 /* MNoteSite.swift */,
+				8C2CB5A8207885140083DDE2 /* MUserSetting.swift */,
+				8C2CB5A9207885140083DDE2 /* MLangPhrase.swift */,
+				8C2CB5AA207885140083DDE2 /* MTextbookWord.swift */,
+				8C2CB5AB207885140083DDE2 /* MUnitPhrase.swift */,
+				8C2CB5AC207885140083DDE2 /* MLanguage.swift */,
+				8C2CB5AD207885140083DDE2 /* MTextBook.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		8C2CB5C0207888260083DDE2 /* Words */ = {
+			isa = PBXGroup;
+			children = (
+				8C2CB5C2207888260083DDE2 /* Words.storyboard */,
+				8C2CB5C1207888260083DDE2 /* WordsUnitViewController.swift */,
+			);
+			path = Words;
 			sourceTree = "<group>";
 		};
 		8C6F26DD1D333598008F706A /* Frameworks */ = {
@@ -300,7 +395,7 @@
 			files = (
 				8C1C4F2C1D31F88800CF5D88 /* Assets.xcassets in Resources */,
 				8C1C4F2F1D31F88800CF5D88 /* Main.storyboard in Resources */,
-				8C10742A207086E900CE91A0 /* Words.storyboard in Resources */,
+				8C2CB5C4207888260083DDE2 /* Words.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -385,12 +480,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C2CB5B8207885140083DDE2 /* MLangWord.swift in Sources */,
+				8C2CB5B2207885140083DDE2 /* PhrasesUnitViewModel.swift in Sources */,
+				8C2CB5AF207885140083DDE2 /* WordsLangViewModel.swift in Sources */,
+				8C2CB5B3207885140083DDE2 /* WordsUnitViewModel.swift in Sources */,
+				8C2CB5B7207885140083DDE2 /* MUnitWord.swift in Sources */,
+				8C2CB5B0207885140083DDE2 /* WordsTextbookViewModel.swift in Sources */,
+				8C2CB5BE207885140083DDE2 /* MLanguage.swift in Sources */,
+				8C2CB5BF207885140083DDE2 /* MTextBook.swift in Sources */,
 				8C0ACB581D4391FB00EC6740 /* SettingsViewController.swift in Sources */,
 				8C1C4F2A1D31F88800CF5D88 /* SearchViewController.swift in Sources */,
+				8C2CB5B9207885140083DDE2 /* MNoteSite.swift in Sources */,
 				8C1C4F281D31F88800CF5D88 /* AppDelegate.swift in Sources */,
+				8C2CB5BB207885140083DDE2 /* MLangPhrase.swift in Sources */,
+				8C2CB5B5207885140083DDE2 /* HtmlApi.swift in Sources */,
 				8CE0F27A206E94CF00EEE4AC /* LollyProtocol.swift in Sources */,
+				8C2CB5B4207885140083DDE2 /* RestApi.swift in Sources */,
+				8C2CB5BD207885140083DDE2 /* MUnitPhrase.swift in Sources */,
 				8CD1D929206227800071687B /* LollyWindow.swift in Sources */,
-				8C5C7C7F206F2B3B003A888D /* WordsUnitViewController.swift in Sources */,
+				8C2CB5B1207885140083DDE2 /* PhrasesLangViewModel.swift in Sources */,
+				8C2CB5BC207885140083DDE2 /* MTextbookWord.swift in Sources */,
+				8C2CB5BA207885140083DDE2 /* MUserSetting.swift in Sources */,
+				8C2CB5AE207885140083DDE2 /* SettingsViewModel.swift in Sources */,
+				8C2CB5C3207888260083DDE2 /* WordsUnitViewController.swift in Sources */,
+				8C2CB5B6207885140083DDE2 /* MDictionary.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -82,7 +82,7 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
         let editAction = UITableViewRowAction(style: .normal, title: "Edit") { _,_ in edit() }
         editAction.backgroundColor = .blue
         let moreAction = UITableViewRowAction(style: .normal, title: "More") { _,_ in
-            let alertController = UIAlertController(title: "Word", message: m.WORD, preferredStyle: .alert)
+            let alertController = UIAlertController(title: "Word", message: m.WORDNOTE, preferredStyle: .alert)
             let deleteAction2 = UIAlertAction(title: "Delete", style: .destructive) { _ in delete() }
             alertController.addAction(deleteAction2)
             let editAction2 = UIAlertAction(title: "Edit", style: .default) { _ in edit() }
@@ -91,6 +91,10 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
                 let noteAction = UIAlertAction(title: "Retrieve Note", style: .default) { _ in self.getNote(indexPath: indexPath) }
                 alertController.addAction(noteAction)
             }
+            let copyWordAction = UIAlertAction(title: "Copy Word", style: .default) { _ in UIPasteboard.general.string = m.WORD }
+            alertController.addAction(copyWordAction)
+            let copyNoteAction = UIAlertAction(title: "Copy Note", style: .default) { _ in UIPasteboard.general.string = m.NOTE }
+            alertController.addAction(copyNoteAction)
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
             alertController.addAction(cancelAction)
             self.present(alertController, animated: true) {}
