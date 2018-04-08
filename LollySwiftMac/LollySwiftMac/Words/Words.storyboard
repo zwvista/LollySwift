@@ -290,24 +290,16 @@
                                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
                                                     <wkPreferences key="preferences"/>
                                                 </wkWebViewConfiguration>
-                                            </wkWebView>
-                                            <wkWebView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3nQ-Xw-Mlk" userLabel="Offline WebView">
-                                                <rect key="frame" x="0.0" y="0.0" width="517" height="640"/>
-                                                <wkWebViewConfiguration key="configuration">
-                                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
-                                                    <wkPreferences key="preferences"/>
-                                                </wkWebViewConfiguration>
+                                                <connections>
+                                                    <outlet property="navigationDelegate" destination="F8i-pe-Ate" id="G8k-pd-bQG"/>
+                                                </connections>
                                             </wkWebView>
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="tEP-Us-q1l" secondAttribute="bottom" id="1Z7-Ot-M7H"/>
-                                            <constraint firstItem="3nQ-Xw-Mlk" firstAttribute="leading" secondItem="bA1-VX-afL" secondAttribute="leading" id="8EH-Zk-pvL"/>
                                             <constraint firstItem="tEP-Us-q1l" firstAttribute="leading" secondItem="bA1-VX-afL" secondAttribute="leading" id="M9s-4g-222"/>
-                                            <constraint firstItem="3nQ-Xw-Mlk" firstAttribute="top" secondItem="bA1-VX-afL" secondAttribute="top" id="Pqs-uS-A7B"/>
                                             <constraint firstItem="tEP-Us-q1l" firstAttribute="top" secondItem="bA1-VX-afL" secondAttribute="top" id="Uz1-Yy-Jnh"/>
-                                            <constraint firstAttribute="bottom" secondItem="3nQ-Xw-Mlk" secondAttribute="bottom" id="dSI-hU-ajG"/>
                                             <constraint firstAttribute="trailing" secondItem="tEP-Us-q1l" secondAttribute="trailing" id="oKB-dg-YWF"/>
-                                            <constraint firstAttribute="trailing" secondItem="3nQ-Xw-Mlk" secondAttribute="trailing" id="qmn-y5-d9O"/>
                                         </constraints>
                                     </customView>
                                 </subviews>
@@ -327,8 +319,7 @@
                     <connections>
                         <outlet property="sfWord" destination="dyX-qY-Sem" id="5W1-uS-CjF"/>
                         <outlet property="tableView" destination="8Zf-06-OzS" id="Vn7-va-cpG"/>
-                        <outlet property="wvDictOffline" destination="3nQ-Xw-Mlk" id="bQp-RB-jOr"/>
-                        <outlet property="wvDictOnline" destination="tEP-Us-q1l" id="69j-oh-os0"/>
+                        <outlet property="wvDictOnline" destination="tEP-Us-q1l" id="0DF-0d-cGv"/>
                     </connections>
                 </viewController>
                 <menu id="UPB-Wi-4rN">
@@ -611,11 +602,17 @@ Gw
                                         <action selector="refreshTableView:" target="qEo-JS-MYZ" id="DKd-Bn-vNa"/>
                                     </connections>
                                 </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="D15C6E72-5923-4A28-B478-0FBD603820ED" label="Notes" paletteLabel="Notes" tag="-1" id="NyL-Gk-l4k">
+                                    <connections>
+                                        <action selector="getNotes:" target="qEo-JS-MYZ" id="Kcn-oV-bEh"/>
+                                    </connections>
+                                </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="QRZ-Pa-ivc"/>
                                 <toolbarItem reference="qFb-ob-E6N"/>
                                 <toolbarItem reference="89E-Xj-D8k"/>
+                                <toolbarItem reference="NyL-Gk-l4k"/>
                             </defaultToolbarItems>
                         </toolbar>
                         <connections>

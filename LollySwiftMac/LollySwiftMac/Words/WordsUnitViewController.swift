@@ -10,14 +10,14 @@ import Cocoa
 import WebKit
 
 @objcMembers
-class WordsUnitViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate, NSSearchFieldDelegate {
+class WordsUnitViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate, NSSearchFieldDelegate, WKNavigationDelegate {
     
     @IBOutlet weak var wvDictOnline: WKWebView!
     @IBOutlet weak var sfWord: NSSearchField!
-    @IBOutlet weak var wvDictOffline: WKWebView!
     @IBOutlet weak var tableView: NSTableView!
 
     @IBOutlet weak var tfWord: NSTextField!
+    var timer = Timer()
     var word = ""
     
     var vm: WordsUnitViewModel!
@@ -32,7 +32,6 @@ class WordsUnitViewController: NSViewController, NSTableViewDataSource, NSTableV
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        wvDictOffline.isHidden = true
         tableView.registerForDraggedTypes([tableRowDragType])
         refreshTableView(self)
     }
@@ -123,9 +122,6 @@ class WordsUnitViewController: NSViewController, NSTableViewDataSource, NSTableV
     }
     
     @IBAction func searchDict(_ sender: AnyObject) {
-        wvDictOnline.isHidden = false
-        wvDictOffline.isHidden = true
-        
         let m = vm.vmSettings.selectedDict
         let url = m.urlString(word)
         wvDictOnline.load(URLRequest(url: URL(string: url)!))
@@ -143,18 +139,9 @@ class WordsUnitViewController: NSViewController, NSTableViewDataSource, NSTableV
         }
     }
     
-    func webView(_ sender: WebView!, didFinishLoadForFrame frame: WebFrame!) {
-        if frame !== sender.mainFrame {return}
-        let m = vm.vmSettings.selectedDict
-        if m.DICTTYPENAME != "OFFLINE-ONLINE" {return}
-        
-        let data = frame.dataSource!.data
-        let html = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)!
-        let str = m.htmlString(html as String, word: word)
-        
-        wvDictOffline.loadHTMLString(str, baseURL: URL(string: "/Users/bestskip/Documents/zw/"))
-        wvDictOnline.isHidden = true
-        wvDictOffline.isHidden = false
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        self.view.window?.makeKeyAndOrderFront(self)
+        tableView.becomeFirstResponder()
     }
 
     // https://stackoverflow.com/questions/24219441/how-to-use-nstoolbar-in-xcode-6-and-storyboard
@@ -162,7 +149,7 @@ class WordsUnitViewController: NSViewController, NSTableViewDataSource, NSTableV
         let detailVC = self.storyboard!.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "WordsUnitDetailViewController")) as! WordsUnitDetailViewController
         detailVC.vm = vm
         detailVC.mWord = vm.newUnitWord()
-        detailVC.complete = { self.tableView.reloadData() }
+        detailVC.complete = { self.tableView.reloadData(); self.addWord(self) }
         self.presentViewControllerAsSheet(detailVC)
     }
     
@@ -203,6 +190,28 @@ class WordsUnitViewController: NSViewController, NSTableViewDataSource, NSTableV
         let pasteboard = NSPasteboard.general
         pasteboard.declareTypes([.string], owner: nil)
         pasteboard.setString(m.NOTE ?? "", forType: .string)
+    }
+    
+    @IBAction func getNotes(_ sender: Any) {
+        let alert = NSAlert()
+        alert.messageText = "Retrieve Notes"
+        alert.informativeText = "question"
+        alert.alertStyle = .informational
+        alert.addButton(withTitle: "Empty Notes Only")
+        alert.addButton(withTitle: "All Notes")
+        let res = alert.runModal()
+        vm.getNotes(ifEmpty: res == .alertFirstButtonReturn) {
+            timer = Timer.scheduledTimer(timeInterval: TimeInterval(Double($0) / 1000.0), target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
+        }
+    }
+    
+    @objc
+    func timerAction() {
+        vm.getNextNote(rowComplete: {
+            self.tableView.reloadData(forRowIndexes: [$0], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count))
+        }, allComplete: {
+//            self.tableView.reloadData()
+        })
     }
 }
 

@@ -117,7 +117,8 @@ class WordsUnitViewModel: NSObject {
         if noteFromIndex >= noteToIndex {
             allComplete()
         } else {
-            getNote(index: noteFromIndex) { rowComplete(self.noteFromIndex) }
+            let i = noteFromIndex
+            getNote(index: i) { rowComplete(i) }
             noteFromIndex += 1
         }
     }
