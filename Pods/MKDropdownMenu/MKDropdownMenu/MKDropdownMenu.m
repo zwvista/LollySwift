@@ -1535,8 +1535,8 @@ static const CGFloat kScrollViewBottomSpace = 5;
     void (^presentation)() = ^{
         self.selectedComponent = component;
         [self presentDropdownForSelectedComponentAnimated:animated completion:nil];
-        if (component != NSNotFound && [self.delegate respondsToSelector:@selector(dropdownMenu:didOpenComponent:)]) {
-            [self.delegate dropdownMenu:self didOpenComponent:component];
+        if (component != NSNotFound && [self.delegate respondsToSelector:@selector(dropdownMenu:didOpenComponent:tableView:)]) {
+            [self.delegate dropdownMenu:self didOpenComponent:component tableView:self.contentViewController.tableView];
         }
     };
     

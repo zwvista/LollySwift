@@ -129,7 +129,7 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
             controller.mWord = sender as? MUnitWord ?? vm.newUnitWord()
         } else if let controller = segue.destination as? WordsDictViewController {
             controller.vm.arrWords = arrWords
-            controller.vm.selectWord = arrWords[tableView.indexPathForSelectedRow!.row].WORD
+            controller.vm.selectWordIndex = tableView.indexPathForSelectedRow!.row
         }
     }
     

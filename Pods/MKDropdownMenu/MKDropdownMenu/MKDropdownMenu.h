@@ -222,7 +222,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)dropdownMenu:(MKDropdownMenu *)dropdownMenu didSelectRow:(NSInteger)row inComponent:(NSInteger)component;
 
 /// Called when the component was expanded.
-- (void)dropdownMenu:(MKDropdownMenu *)dropdownMenu didOpenComponent:(NSInteger)component;
+- (void)dropdownMenu:(MKDropdownMenu *)dropdownMenu didOpenComponent:(NSInteger)component tableView:(UITableView *)tableView;
 
 /// Called when the component did dismiss.
 - (void)dropdownMenu:(MKDropdownMenu *)dropdownMenu didCloseComponent:(NSInteger)component;

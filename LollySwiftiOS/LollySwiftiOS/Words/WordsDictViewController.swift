@@ -24,14 +24,14 @@ class WordsDictViewController: UIViewController, MKDropdownMenuDataSource, MKDro
     }
     
     private func selectWordChanged(reload: Bool) {
-        navigationItem.title = vm.selectWord
+        navigationItem.title = vm.selectWord.WORD
         selectDictChanged()
         if reload { mkDropDownMenu.reloadComponent(0) }
     }
     
     private func selectDictChanged() {
         let m = vmSettings.selectedDict
-        let url = m.urlString(vm.selectWord)
+        let url = m.urlString(vm.selectWord.WORD)
         wvWord.load(URLRequest(url: URL(string: url)!))
     }
     
@@ -62,7 +62,7 @@ class WordsDictViewController: UIViewController, MKDropdownMenuDataSource, MKDro
     func dropdownMenu(_ dropdownMenu: MKDropdownMenu, titleForComponent component: Int) -> String? {
         switch component {
         case 0:
-            return vm.selectWord
+            return vm.selectWord.WORDNOTE
         case 1:
             return vm.vmSettings.selectedDict.DICTNAME
         default:
@@ -72,7 +72,7 @@ class WordsDictViewController: UIViewController, MKDropdownMenuDataSource, MKDro
     func dropdownMenu(_ dropdownMenu: MKDropdownMenu, titleForRow row: Int, forComponent component: Int) -> String? {
         switch component {
         case 0:
-            return vm.arrWords[row].WORD
+            return vm.arrWords[row].WORDNOTE
         case 1:
             return vm.vmSettings.arrDictionaries[row].DICTNAME
         default:
@@ -82,7 +82,7 @@ class WordsDictViewController: UIViewController, MKDropdownMenuDataSource, MKDro
     func dropdownMenu(_ dropdownMenu: MKDropdownMenu, didSelectRow row: Int, inComponent component: Int) {
         switch component {
         case 0:
-            vm.selectWord = vm.arrWords[row].WORD
+            vm.selectWordIndex = row
             selectWordChanged(reload: true)
         case 1:
             vm.vmSettings.selectedDictIndex = row
@@ -94,5 +94,23 @@ class WordsDictViewController: UIViewController, MKDropdownMenuDataSource, MKDro
             break
         }
         dropdownMenu.closeAllComponents(animated: true)
+    }
+    func dropdownMenu(_ dropdownMenu: MKDropdownMenu, didOpenComponent component: Int, tableView: UITableView) {
+        switch component {
+        case 0:
+            tableView.scrollToRow(at: IndexPath(row: vm.selectWordIndex, section: 0), at: .middle, animated: true)
+        default:
+            break
+        }
+    }    
+    func dropdownMenu(_ dropdownMenu: MKDropdownMenu, backgroundColorForRow row: Int, forComponent component: Int) -> UIColor? {
+        switch component {
+        case 0:
+            return row == vm.selectWordIndex ? UIColor.yellow : UIColor.clear
+        case 1:
+            return row == vm.vmSettings.selectedDictIndex ? UIColor.yellow : UIColor.clear
+        default:
+            return nil
+        }
     }
 }

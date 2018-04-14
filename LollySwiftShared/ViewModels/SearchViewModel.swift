@@ -11,7 +11,10 @@ import Foundation
 class SearchViewModel: NSObject {
     var vmSettings: SettingsViewModel
     var arrWords = [MUnitWord]()
-    var selectWord = ""
+    var selectWordIndex = 0
+    var selectWord: MUnitWord {
+        return arrWords[selectWordIndex]
+    }
 
     public init(settings: SettingsViewModel, complete: @escaping () -> Void) {
         self.vmSettings = settings
