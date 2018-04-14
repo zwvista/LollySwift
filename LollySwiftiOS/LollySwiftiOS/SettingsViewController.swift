@@ -14,6 +14,10 @@ class SettingsViewController: UITableViewController {
     @IBOutlet weak var dictCell: UITableViewCell!
     @IBOutlet weak var noteSiteCell: UITableViewCell!
     @IBOutlet weak var textbookCell: UITableViewCell!
+    @IBOutlet weak var unitFromCell: UITableViewCell!
+    @IBOutlet weak var partFromCell: UITableViewCell!
+    @IBOutlet weak var unitToCell: UITableViewCell!
+    @IBOutlet weak var partToCell: UITableViewCell!
     @IBOutlet weak var lblUnitFrom: UILabel!
     @IBOutlet weak var lblUnitTo: UILabel!
     @IBOutlet weak var swUnitTo: UISwitch!
@@ -86,7 +90,7 @@ class SettingsViewController: UITableViewController {
             }
         }
         
-        ddUnitFrom.anchorView = lblUnitFrom
+        ddUnitFrom.anchorView = unitFromCell
         ddUnitFrom.dataSource = vm.arrUnits
         ddUnitFrom.selectRow(vm.USUNITFROM - 1)
         ddUnitFrom.selectionAction = { [unowned self] (index: Int, item: String) in
@@ -98,7 +102,7 @@ class SettingsViewController: UITableViewController {
             }
         }
         
-        ddPartFrom.anchorView = lblPartFrom
+        ddPartFrom.anchorView = partFromCell
         ddPartFrom.dataSource = vm.arrParts
         ddPartFrom.selectRow(vm.USPARTFROM - 1)
         ddPartFrom.selectionAction = { [unowned self] (index: Int, item: String) in
@@ -110,7 +114,7 @@ class SettingsViewController: UITableViewController {
             }
         }
         
-        ddUnitTo.anchorView = lblUnitTo
+        ddUnitTo.anchorView = unitToCell
         ddUnitTo.dataSource = vm.arrUnits
         ddUnitTo.selectRow(vm.USUNITTO - 1)
         ddUnitTo.selectionAction = { [unowned self] (index: Int, item: String) in
@@ -122,7 +126,7 @@ class SettingsViewController: UITableViewController {
             }
         }
         
-        ddPartTo.anchorView = lblPartTo
+        ddPartTo.anchorView = partToCell
         ddPartTo.dataSource = vm.arrParts
         ddPartTo.selectRow(vm.USPARTTO - 1)
         ddPartTo.selectionAction = { [unowned self] (index: Int, item: String) in
