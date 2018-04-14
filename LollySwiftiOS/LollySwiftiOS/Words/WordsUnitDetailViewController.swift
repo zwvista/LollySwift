@@ -7,12 +7,9 @@
 //
 
 import UIKit
+import DropDown
 
 class WordsUnitDetailViewController: UITableViewController, UITextFieldDelegate {
-    
-    var vm: WordsUnitViewModel!    
-    var mWord: MUnitWord!
-    var isAdd: Bool!
 
     @IBOutlet weak var tfID: UITextField!
     @IBOutlet weak var tfUnit: UITextField!
@@ -20,10 +17,32 @@ class WordsUnitDetailViewController: UITableViewController, UITextFieldDelegate 
     @IBOutlet weak var tfSeqNum: UITextField!
     @IBOutlet weak var tfWord: UITextField!
     @IBOutlet weak var tfNote: UITextField!
+    
+    var vm: WordsUnitViewModel!
+    var mWord: MUnitWord!
+    var isAdd: Bool!
+    let ddUnit = DropDown()
+    let ddPart = DropDown()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        ddUnit.anchorView = tfUnit
+        ddUnit.dataSource = vm.vmSettings.arrUnits
+        ddUnit.selectRow(mWord.UNIT - 1)
+        ddUnit.selectionAction = { [unowned self] (index: Int, item: String) in
+            self.mWord.UNIT = index + 1
+            self.tfUnit.text = String(self.mWord.UNIT)
+        }
+        
+        ddPart.anchorView = tfPart
+        ddPart.dataSource = vm.vmSettings.arrParts
+        ddPart.selectRow(mWord.PART - 1)
+        ddPart.selectionAction = { [unowned self] (index: Int, item: String) in
+            self.mWord.PART = index + 1
+            self.tfPart.text = self.mWord.PARTSTR(arrParts: vmSettings.arrParts)
+        }
+
         tfID.text = String(mWord.ID)
         tfUnit.text = String(mWord.UNIT)
         tfPart.text = mWord.PARTSTR(arrParts: vmSettings.arrParts)
@@ -38,17 +57,11 @@ class WordsUnitDetailViewController: UITableViewController, UITextFieldDelegate 
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if textField === tfUnit {
             self.view.endEditing(true)
-            ActionSheetStringPicker.show(withTitle: "Select Unit", rows: vmSettings.arrUnits, initialSelection: mWord.UNIT - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
-                self.mWord.UNIT = selectedIndex + 1
-                self.tfUnit.text = String(self.mWord.UNIT)
-            }, cancel: nil, origin: tfUnit)
+            ddUnit.show()
             return false
         } else if textField === tfPart {
             self.view.endEditing(true)
-            ActionSheetStringPicker.show(withTitle: "Select Part", rows: vmSettings.arrParts, initialSelection: mWord.PART - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
-                self.mWord.PART = selectedIndex + 1
-                self.tfPart.text = self.mWord.PARTSTR(arrParts: vmSettings.arrParts)
-            }, cancel: nil, origin: tfPart)
+            ddPart.show()
             return false
         } else {
             return true

@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import DropDown
 
-class SettingsViewController: UITableViewController, ActionSheetCustomPickerDelegate {    
+class SettingsViewController: UITableViewController {
     @IBOutlet weak var langCell: UITableViewCell!
     @IBOutlet weak var dictCell: UITableViewCell!
     @IBOutlet weak var noteSiteCell: UITableViewCell!
@@ -21,8 +22,14 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
     @IBOutlet weak var lblUnitToTitle: UILabel!
     @IBOutlet weak var lblPartToTitle: UILabel!
     
-    var selectedIndexPath: IndexPath!
-    var selectedRow = 0
+    let ddLang = DropDown()
+    let ddDict = DropDown()
+    let ddNoteSite = DropDown()
+    let ddTextbook = DropDown()
+    let ddUnitFrom = DropDown()
+    let ddPartFrom = DropDown()
+    let ddUnitTo = DropDown()
+    let ddPartTo = DropDown()
     
     var vm: SettingsViewModel {
         return vmSettings
@@ -33,131 +40,124 @@ class SettingsViewController: UITableViewController, ActionSheetCustomPickerDele
         vm.getData {
             self.updateLang()
         }
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedIndexPath = indexPath
-        switch selectedIndexPath.section {
-        case 0:
-            selectedRow = vm.selectedLangIndex
-            ActionSheetCustomPicker.show(withTitle: "Select Language", delegate: self, showCancelButton: true, origin: langCell, initialSelections: [selectedRow])
-        case 1:
-            selectedRow = vm.selectedDictIndex
-            ActionSheetCustomPicker.show(withTitle: "Select Dictionary", delegate: self, showCancelButton: true, origin: dictCell, initialSelections: [selectedRow])
-        case 2:
-            guard !vm.arrNoteSites.isEmpty else {break}
-            selectedRow = vm.selectedNoteSiteIndex
-            ActionSheetCustomPicker.show(withTitle: "Select Note Site", delegate: self, showCancelButton: true, origin: noteSiteCell, initialSelections: [selectedRow])
-        case 3:
-            selectedRow = vm.selectedTextbookIndex
-            ActionSheetCustomPicker.show(withTitle: "Select Textbook", delegate: self, showCancelButton: true, origin: textbookCell, initialSelections: [selectedRow])
-        default:
-            switch selectedIndexPath.row {
-            case 0:
-                ActionSheetStringPicker.show(withTitle: "Select Unit(From)", rows: vm.arrUnits, initialSelection: vm.USUNITFROM - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
-                    guard self.vm.USUNITFROM != selectedIndex + 1 else {return}
-                    self.vm.USUNITFROM = selectedIndex + 1
-                    self.vm.updateUnitFrom {
-                        self.lblUnitFrom.text = selectedValue as? String
-                        if !self.swUnitTo.isOn || self.vm.isInvalidUnitPart {self.updateUnitPartTo()}
-                    }
-                }, cancel: nil, origin: lblUnitFrom)
-            case 1:
-                ActionSheetStringPicker.show(withTitle: "Select Part(From)", rows: vm.arrParts, initialSelection: vm.USPARTFROM - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
-                    guard self.vm.USPARTFROM != selectedIndex + 1 else {return}
-                    self.vm.USPARTFROM = selectedIndex + 1
-                    self.vm.updatePartFrom {
-                        self.lblPartFrom.text = selectedValue as? String
-                        if !self.swUnitTo.isOn || self.vm.isInvalidUnitPart {self.updateUnitPartTo()}
-                    }
-                }, cancel: nil, origin: lblPartFrom)
-            case 4 where swUnitTo.isOn:
-                ActionSheetStringPicker.show(withTitle: "Select Unit(To)", rows: vm.arrUnits, initialSelection: vm.USUNITTO - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
-                    guard self.vm.USUNITTO != selectedIndex + 1 else {return}
-                    self.vm.USUNITTO = selectedIndex + 1
-                    self.vm.updateUnitTo {
-                        self.lblUnitTo.text = selectedValue as? String
-                        if self.vm.isInvalidUnitPart {self.updateUnitPartFrom()}
-                    }
-                }, cancel: nil, origin: lblUnitTo)
-            case 5 where swUnitTo.isOn:
-                ActionSheetStringPicker.show(withTitle: "Select Part(To)", rows: vm.arrParts, initialSelection: vm.USPARTTO - 1, doneBlock: { (picker, selectedIndex, selectedValue) in
-                    guard self.vm.USPARTTO != selectedIndex + 1 else {return}
-                    self.vm.USPARTTO = selectedIndex + 1
-                    self.vm.updatePartTo {
-                        self.lblPartTo.text = selectedValue as? String
-                        if self.vm.isInvalidUnitPart {self.updateUnitPartFrom()}
-                    }
-                }, cancel: nil, origin: lblPartTo)
-            default:
-                break
-            }
-        }
-    }
-    
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        switch selectedIndexPath.section {
-        case 0:
-            return vm.arrLanguages.count
-        case 1:
-            return vm.arrDictionaries.count
-        case 2:
-            return vm.arrNoteSites.count
-        case 3:
-            return vm.arrTextbooks.count
-        default:
-            return 0
-        }
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        switch selectedIndexPath.section {
-        case 0:
-            return vm.arrLanguages[row].LANGNAME
-        case 1:
-            return vm.arrDictionaries[row].DICTNAME
-        case 2:
-            return vm.arrNoteSites[row].DICTNAME
-        case 3:
-            return vm.arrTextbooks[row].TEXTBOOKNAME
-        default:
-            return nil
-        }
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        selectedRow = row
-    }
-    
-    func actionSheetPickerDidSucceed(_ actionSheetPicker: AbstractActionSheetPicker!, origin: Any!) {
-        switch selectedIndexPath.section {
-        case 0 where selectedRow != vm.selectedLangIndex:
-            vm.setSelectedLangIndex(selectedRow) {
+        
+        ddLang.anchorView = langCell
+        ddLang.dataSource = vm.arrLanguages.map { $0.LANGNAME }
+        ddLang.selectRow(vm.selectedLangIndex)
+        ddLang.selectionAction = { [unowned self] (index: Int, item: String) in
+            guard index != self.vm.selectedLangIndex else {return}
+            self.vm.setSelectedLangIndex(index) {
                 self.vm.updateLang {
                     self.updateLang()
                 }
             }
-        case 1 where selectedRow != vm.selectedDictIndex:
-            vm.selectedDictIndex = selectedRow
-            vm.updateDict {
+        }
+        
+        ddDict.anchorView = dictCell
+        ddDict.dataSource = vm.arrDictionaries.map { $0.DICTNAME! }
+        ddDict.selectRow(vm.selectedDictIndex)
+        ddDict.selectionAction = { [unowned self] (index: Int, item: String) in
+            guard index != self.vm.selectedDictIndex else {return}
+            self.vm.selectedDictIndex = index
+            self.vm.updateDict {
                 self.updateDict()
             }
-        case 2 where selectedRow != vm.selectedNoteSiteIndex:
-            vm.selectedNoteSiteIndex = selectedRow
-            vm.updateNoteSite {
+        }
+        
+        ddNoteSite.anchorView = noteSiteCell
+        ddNoteSite.dataSource = vm.arrNoteSites.map { $0.DICTNAME! }
+        ddNoteSite.selectRow(vm.selectedNoteSiteIndex)
+        ddNoteSite.selectionAction = { [unowned self] (index: Int, item: String) in
+            guard index != self.vm.selectedNoteSiteIndex else {return}
+            self.vm.selectedNoteSiteIndex = index
+            self.vm.updateNoteSite {
                 self.updateNoteSite()
             }
-        case 3 where selectedRow != vm.selectedTextbookIndex:
-            vm.selectedTextbookIndex = selectedRow
-            vm.updateTextbook {
+        }
+        
+        ddTextbook.anchorView = textbookCell
+        ddTextbook.dataSource = vm.arrTextbooks.map { $0.TEXTBOOKNAME }
+        ddTextbook.selectRow(vm.selectedTextbookIndex)
+        ddTextbook.selectionAction = { [unowned self] (index: Int, item: String) in
+            guard index != self.vm.selectedTextbookIndex else {return}
+            self.vm.selectedTextbookIndex = index
+            self.vm.updateTextbook {
                 self.updateTextbook()
             }
+        }
+        
+        ddUnitFrom.anchorView = lblUnitFrom
+        ddUnitFrom.dataSource = vm.arrUnits
+        ddUnitFrom.selectRow(vm.USUNITFROM - 1)
+        ddUnitFrom.selectionAction = { [unowned self] (index: Int, item: String) in
+            guard self.vm.USUNITFROM != index + 1 else {return}
+            self.vm.USUNITFROM = index + 1
+            self.vm.updateUnitFrom {
+                self.lblUnitFrom.text = item
+                if !self.swUnitTo.isOn || self.vm.isInvalidUnitPart {self.updateUnitPartTo()}
+            }
+        }
+        
+        ddPartFrom.anchorView = lblPartFrom
+        ddPartFrom.dataSource = vm.arrParts
+        ddPartFrom.selectRow(vm.USPARTFROM - 1)
+        ddPartFrom.selectionAction = { [unowned self] (index: Int, item: String) in
+            guard self.vm.USPARTFROM != index + 1 else {return}
+            self.vm.USPARTFROM = index + 1
+            self.vm.updatePartFrom {
+                self.lblPartFrom.text = item
+                if !self.swUnitTo.isOn || self.vm.isInvalidUnitPart {self.updateUnitPartTo()}
+            }
+        }
+        
+        ddUnitTo.anchorView = lblUnitTo
+        ddUnitTo.dataSource = vm.arrUnits
+        ddUnitTo.selectRow(vm.USUNITTO - 1)
+        ddUnitTo.selectionAction = { [unowned self] (index: Int, item: String) in
+            guard self.vm.USUNITTO != index + 1 else {return}
+            self.vm.USUNITTO = index + 1
+            self.vm.updateUnitTo {
+                self.lblUnitTo.text = item
+                if self.vm.isInvalidUnitPart {self.updateUnitPartFrom()}
+            }
+        }
+        
+        ddPartTo.anchorView = lblPartTo
+        ddPartTo.dataSource = vm.arrParts
+        ddPartTo.selectRow(vm.USPARTTO - 1)
+        ddPartTo.selectionAction = { [unowned self] (index: Int, item: String) in
+            guard self.vm.USPARTTO != index + 1 else {return}
+            self.vm.USPARTTO = index + 1
+            self.vm.updatePartTo {
+                self.lblPartTo.text = item
+                if self.vm.isInvalidUnitPart {self.updateUnitPartFrom()}
+            }
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.section {
+        case 0:
+            ddLang.show()
+        case 1:
+            ddDict.show()
+        case 2:
+            ddNoteSite.show()
+        case 3:
+            ddTextbook.show()
         default:
-            break
+            switch indexPath.row {
+            case 0:
+                ddUnitFrom.show()
+            case 1:
+                ddPartFrom.show()
+            case 3 where swUnitTo.isOn:
+                ddUnitTo.show()
+            case 4 where swUnitTo.isOn:
+                ddPartTo.show()
+            default:
+                break
+            }
         }
     }
     
