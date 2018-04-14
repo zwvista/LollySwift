@@ -319,14 +319,14 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Phrases in Unit (Detail)" id="x4r-AQ-UvE">
-                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="7PG-S6-TPa">
-                            <connections>
-                                <segue destination="1Ke-Vd-PzC" kind="unwind" unwindAction="prepareForUnwind:" id="Z37-RD-DNJ"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="cOy-Xb-XFb">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="cOy-Xb-XFb">
                             <connections>
                                 <segue destination="1Ke-Vd-PzC" kind="unwind" unwindAction="prepareForUnwind:" id="vqa-ll-jW3"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="7PG-S6-TPa">
+                            <connections>
+                                <segue destination="1Ke-Vd-PzC" kind="unwind" unwindAction="prepareForUnwind:" id="Z37-RD-DNJ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

@@ -124,9 +124,13 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
-        guard let controller = (segue.destination as? UINavigationController)?.topViewController as? WordsUnitDetailViewController else {return}
-        controller.vm = vm
-        controller.mWord = sender as? MUnitWord ?? vm.newUnitWord()
+        if let controller = (segue.destination as? UINavigationController)?.topViewController as? WordsUnitDetailViewController {
+            controller.vm = vm
+            controller.mWord = sender as? MUnitWord ?? vm.newUnitWord()
+        } else if let controller = segue.destination as? WordsDictViewController {
+            controller.vm.arrWords = arrWords
+            controller.vm.selectWord = arrWords[tableView.indexPathForSelectedRow!.row].WORD
+        }
     }
     
     @IBAction func btnEditClicked(_ sender: Any) {

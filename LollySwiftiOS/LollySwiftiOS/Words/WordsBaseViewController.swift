@@ -31,7 +31,7 @@ class WordsBaseViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let controller = segue.destination as? WordsDictViewController {
-            controller.word = sender as! String
+            controller.vm.selectWord = sender as! String
         }
     }
 }
