@@ -10,8 +10,7 @@
 #endif
 #endif
 
-#import "MKDropdownMenu.h"
 
-FOUNDATION_EXPORT double MKDropdownMenuVersionNumber;
-FOUNDATION_EXPORT const unsigned char MKDropdownMenuVersionString[];
+FOUNDATION_EXPORT double DropDownVersionNumber;
+FOUNDATION_EXPORT const unsigned char DropDownVersionString[];
 

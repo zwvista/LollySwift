@@ -8,6 +8,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -37,16 +38,42 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GwN-Lg-lMs" customClass="MKDropdownMenu">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GwN-Lg-lMs">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EK5-5T-Oci">
+                                        <rect key="frame" x="0.0" y="0.0" width="187.5" height="44"/>
+                                        <color key="backgroundColor" red="1" green="0.2527923882" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Button">
+                                            <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="showWordDropDown:" destination="sKF-T7-DSr" eventType="touchUpInside" id="lgV-Ck-efc"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pz0-C5-3rL">
+                                        <rect key="frame" x="187.5" y="0.0" width="187.5" height="44"/>
+                                        <color key="backgroundColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Button">
+                                            <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="showDictDropDown:" destination="sKF-T7-DSr" eventType="touchUpInside" id="0Jr-MA-W3N"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="EK5-5T-Oci" firstAttribute="leading" secondItem="GwN-Lg-lMs" secondAttribute="leading" id="Hlb-7w-S6C"/>
+                                    <constraint firstItem="EK5-5T-Oci" firstAttribute="centerY" secondItem="GwN-Lg-lMs" secondAttribute="centerY" id="RXH-7t-ftP"/>
+                                    <constraint firstItem="Pz0-C5-3rL" firstAttribute="height" secondItem="GwN-Lg-lMs" secondAttribute="height" id="VQH-eL-1xU"/>
+                                    <constraint firstAttribute="trailing" secondItem="Pz0-C5-3rL" secondAttribute="trailing" id="WkF-P8-K7a"/>
+                                    <constraint firstItem="EK5-5T-Oci" firstAttribute="height" secondItem="GwN-Lg-lMs" secondAttribute="height" id="czv-ny-xBV"/>
+                                    <constraint firstItem="EK5-5T-Oci" firstAttribute="width" secondItem="GwN-Lg-lMs" secondAttribute="width" multiplier="1:2" id="kVB-HV-EWy"/>
+                                    <constraint firstItem="Pz0-C5-3rL" firstAttribute="width" secondItem="GwN-Lg-lMs" secondAttribute="width" multiplier="1:2" id="vDF-xQ-Jbp"/>
                                     <constraint firstAttribute="height" constant="44" id="vlx-hH-YP2"/>
+                                    <constraint firstItem="Pz0-C5-3rL" firstAttribute="centerY" secondItem="GwN-Lg-lMs" secondAttribute="centerY" id="waq-QV-lFz"/>
                                 </constraints>
-                                <connections>
-                                    <outlet property="dataSource" destination="sKF-T7-DSr" id="75P-NP-RY1"/>
-                                    <outlet property="delegate" destination="sKF-T7-DSr" id="zr4-0T-EeZ"/>
-                                </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3sk-qJ-veV" userLabel="Wv Word Holder">
                                 <rect key="frame" x="-4" y="44" width="383" height="579"/>
@@ -57,6 +84,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="3sk-qJ-veV" secondAttribute="trailing" constant="-20" id="9i4-nP-1Qi"/>
                             <constraint firstItem="GwN-Lg-lMs" firstAttribute="top" secondItem="rTA-6o-2B7" secondAttribute="top" id="CJb-xk-10F"/>
                             <constraint firstItem="3sk-qJ-veV" firstAttribute="top" secondItem="GwN-Lg-lMs" secondAttribute="bottom" id="EjP-0U-QfC"/>
+                            <constraint firstItem="EK5-5T-Oci" firstAttribute="leading" secondItem="rTA-6o-2B7" secondAttribute="leading" id="SzD-Pv-ckN"/>
                             <constraint firstItem="GwN-Lg-lMs" firstAttribute="trailing" secondItem="rTA-6o-2B7" secondAttribute="trailing" id="Yzl-7z-in1"/>
                             <constraint firstItem="GwN-Lg-lMs" firstAttribute="leading" secondItem="rTA-6o-2B7" secondAttribute="leading" id="bJ1-c4-rer"/>
                             <constraint firstItem="rTA-6o-2B7" firstAttribute="bottom" secondItem="3sk-qJ-veV" secondAttribute="bottom" constant="-20" id="cTu-ny-3a2"/>
@@ -67,7 +95,8 @@
                     <navigationItem key="navigationItem" title="Words Dict" id="jCe-eT-I9D"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
-                        <outlet property="mkDropDownMenu" destination="GwN-Lg-lMs" id="Q7s-2L-1Zr"/>
+                        <outlet property="btnDict" destination="Pz0-C5-3rL" id="ajB-9D-nTJ"/>
+                        <outlet property="btnWord" destination="EK5-5T-Oci" id="ivc-aT-7Nf"/>
                         <outlet property="wvWordHolder" destination="3sk-qJ-veV" id="vwI-bd-Vaf"/>
                     </connections>
                 </viewController>

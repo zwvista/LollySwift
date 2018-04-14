@@ -8,7 +8,7 @@ project 'LollySwiftiOS/LollySwiftiOS'
 pod 'ActionSheetPicker-3.0'
 pod 'AlamofireObjectMapper', '~> 5.0'
 pod 'EZSwiftExtensions'
-pod 'MKDropdownMenu'
+pod 'DropDown'
 end
 
 target 'LollySwiftMac' do

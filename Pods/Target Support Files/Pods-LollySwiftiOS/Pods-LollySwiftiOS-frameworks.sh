@@ -137,16 +137,16 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper-iOS/AlamofireObjectMapper.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/DropDown/DropDown.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/EZSwiftExtensions-iOS/EZSwiftExtensions.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/MKDropdownMenu/MKDropdownMenu.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/ObjectMapper-iOS/ObjectMapper.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/ActionSheetPicker-3.0/ActionSheetPicker_3_0.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper-iOS/AlamofireObjectMapper.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/DropDown/DropDown.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/EZSwiftExtensions-iOS/EZSwiftExtensions.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/MKDropdownMenu/MKDropdownMenu.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/ObjectMapper-iOS/ObjectMapper.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
