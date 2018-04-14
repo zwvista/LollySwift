@@ -54,7 +54,7 @@ class WordsDictViewController: UIViewController, MKDropdownMenuDataSource, MKDro
         }
     }
     func dropdownMenu(_ dropdownMenu: MKDropdownMenu, rowHeightForComponent component: Int) -> CGFloat {
-        return 0
+        return 44
     }
     func dropdownMenu(_ dropdownMenu: MKDropdownMenu, widthForComponent component: Int) -> CGFloat {
         return dropdownMenu.bounds.width / 2

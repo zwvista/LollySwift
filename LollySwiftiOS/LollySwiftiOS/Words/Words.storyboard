@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -9,6 +9,7 @@
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -32,16 +33,12 @@
         <scene sceneID="MnU-JF-zWY">
             <objects>
                 <viewController automaticallyAdjustsScrollViewInsets="NO" id="sKF-T7-DSr" userLabel="Words Dict" customClass="WordsDictViewController" customModule="LollySwiftiOS" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Hg8-bN-PVe"/>
-                        <viewControllerLayoutGuide type="bottom" id="SbI-wD-w1a"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="jdm-PY-3yF">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GwN-Lg-lMs" customClass="MKDropdownMenu">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="vlx-hH-YP2"/>
@@ -52,23 +49,23 @@
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3sk-qJ-veV" userLabel="Wv Word Holder">
-                                <rect key="frame" x="-4" y="84" width="383" height="603"/>
+                                <rect key="frame" x="-4" y="44" width="383" height="579"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="3sk-qJ-veV" secondAttribute="trailing" constant="-20" id="9i4-nP-1Qi"/>
-                            <constraint firstItem="GwN-Lg-lMs" firstAttribute="top" secondItem="jdm-PY-3yF" secondAttribute="topMargin" id="CJb-xk-10F"/>
-                            <constraint firstItem="3sk-qJ-veV" firstAttribute="top" secondItem="GwN-Lg-lMs" secondAttribute="bottom" constant="20" id="EjP-0U-QfC"/>
-                            <constraint firstItem="GwN-Lg-lMs" firstAttribute="trailing" secondItem="jdm-PY-3yF" secondAttribute="trailing" id="Yzl-7z-in1"/>
-                            <constraint firstItem="GwN-Lg-lMs" firstAttribute="leading" secondItem="jdm-PY-3yF" secondAttribute="leading" id="bJ1-c4-rer"/>
-                            <constraint firstItem="SbI-wD-w1a" firstAttribute="top" secondItem="3sk-qJ-veV" secondAttribute="bottom" constant="-20" id="cTu-ny-3a2"/>
+                            <constraint firstItem="GwN-Lg-lMs" firstAttribute="top" secondItem="rTA-6o-2B7" secondAttribute="top" id="CJb-xk-10F"/>
+                            <constraint firstItem="3sk-qJ-veV" firstAttribute="top" secondItem="GwN-Lg-lMs" secondAttribute="bottom" id="EjP-0U-QfC"/>
+                            <constraint firstItem="GwN-Lg-lMs" firstAttribute="trailing" secondItem="rTA-6o-2B7" secondAttribute="trailing" id="Yzl-7z-in1"/>
+                            <constraint firstItem="GwN-Lg-lMs" firstAttribute="leading" secondItem="rTA-6o-2B7" secondAttribute="leading" id="bJ1-c4-rer"/>
+                            <constraint firstItem="rTA-6o-2B7" firstAttribute="bottom" secondItem="3sk-qJ-veV" secondAttribute="bottom" constant="-20" id="cTu-ny-3a2"/>
                             <constraint firstItem="3sk-qJ-veV" firstAttribute="leading" secondItem="jdm-PY-3yF" secondAttribute="leadingMargin" constant="-20" id="e0a-Tv-M0e"/>
-                            <constraint firstAttribute="trailing" secondItem="3sk-qJ-veV" secondAttribute="trailing" constant="-4" id="hw6-SD-gji"/>
-                            <constraint firstItem="3sk-qJ-veV" firstAttribute="leading" secondItem="jdm-PY-3yF" secondAttribute="leading" constant="-4" id="nje-VN-gfh"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="rTA-6o-2B7"/>
                     </view>
                     <navigationItem key="navigationItem" title="Words Dict" id="jCe-eT-I9D"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
                         <outlet property="mkDropDownMenu" destination="GwN-Lg-lMs" id="Q7s-2L-1Zr"/>
                         <outlet property="wvWordHolder" destination="3sk-qJ-veV" id="vwI-bd-Vaf"/>
@@ -594,6 +591,54 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e37-kc-jTQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3742" y="1675"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="N4T-ap-hqu">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="zX5-0H-aCe" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="lYq-FI-OQM">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="vUM-44-gHw" kind="relationship" relationship="rootViewController" id="DgY-jP-QFd"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mir-mx-guY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2753" y="945"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="s1f-V3-nHz">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="G4H-PJ-unE" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="tFw-lW-EYe">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="w6P-dj-Clf" kind="relationship" relationship="rootViewController" id="gnc-th-rOj"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ANw-KP-KEv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2753" y="1675"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="GKA-Fc-5g6">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="VAj-9D-IPI" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="UA9-5b-rlZ">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="T0D-kT-TW1" kind="relationship" relationship="rootViewController" id="gGK-X2-Du7"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="h5p-If-hmK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2753" y="2405"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

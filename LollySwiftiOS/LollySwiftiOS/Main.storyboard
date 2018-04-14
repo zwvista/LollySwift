@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Rze-Ej-diO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Rze-Ej-diO">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -8,6 +8,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -31,10 +32,6 @@
         <scene sceneID="ufC-wZ-h7g">
             <objects>
                 <viewController id="vXZ-lx-hvc" customClass="SearchViewController" customModule="LollySwiftiOS" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="MrK-Wa-SsT"/>
-                        <viewControllerLayoutGuide type="bottom" id="CGW-Ox-CKK"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -47,28 +44,29 @@
                                 </connections>
                             </searchBar>
                             <view multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r8x-qA-DhI" userLabel="Online WebView Holder">
-                                <rect key="frame" x="0.0" y="120" width="375" height="490"/>
+                                <rect key="frame" x="0.0" y="120" width="375" height="498"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <view multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YPZ-Tn-9xD" userLabel="Offline WebView Holder">
-                                <rect key="frame" x="0.0" y="120" width="375" height="490"/>
+                                <rect key="frame" x="0.0" y="120" width="375" height="498"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="r8x-qA-DhI" secondAttribute="trailing" id="9GJ-jX-OBp"/>
-                            <constraint firstItem="r8x-qA-DhI" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="EQw-8D-ver"/>
-                            <constraint firstItem="CGW-Ox-CKK" firstAttribute="top" secondItem="r8x-qA-DhI" secondAttribute="bottom" constant="8" symbolic="YES" id="Kkr-hy-MfJ"/>
-                            <constraint firstItem="CGW-Ox-CKK" firstAttribute="top" secondItem="YPZ-Tn-9xD" secondAttribute="bottom" constant="8" symbolic="YES" id="Kp8-w9-4wA"/>
+                            <constraint firstItem="Zyp-Pf-Fxa" firstAttribute="trailing" secondItem="r8x-qA-DhI" secondAttribute="trailing" id="9GJ-jX-OBp"/>
+                            <constraint firstItem="r8x-qA-DhI" firstAttribute="leading" secondItem="Zyp-Pf-Fxa" secondAttribute="leading" id="EQw-8D-ver"/>
+                            <constraint firstItem="Zyp-Pf-Fxa" firstAttribute="bottom" secondItem="r8x-qA-DhI" secondAttribute="bottom" constant="8" symbolic="YES" id="Kkr-hy-MfJ"/>
+                            <constraint firstItem="Zyp-Pf-Fxa" firstAttribute="bottom" secondItem="YPZ-Tn-9xD" secondAttribute="bottom" constant="8" symbolic="YES" id="Kp8-w9-4wA"/>
                             <constraint firstAttribute="trailingMargin" secondItem="WeM-cp-4ab" secondAttribute="trailing" constant="-20" id="Sxb-pM-Lm5"/>
                             <constraint firstItem="YPZ-Tn-9xD" firstAttribute="top" secondItem="WeM-cp-4ab" secondAttribute="bottom" id="ZK2-Cz-Eq6"/>
-                            <constraint firstAttribute="trailing" secondItem="YPZ-Tn-9xD" secondAttribute="trailing" id="b8j-TY-ZEW"/>
-                            <constraint firstItem="YPZ-Tn-9xD" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="rGl-lx-aP9"/>
+                            <constraint firstItem="Zyp-Pf-Fxa" firstAttribute="trailing" secondItem="YPZ-Tn-9xD" secondAttribute="trailing" id="b8j-TY-ZEW"/>
+                            <constraint firstItem="YPZ-Tn-9xD" firstAttribute="leading" secondItem="Zyp-Pf-Fxa" secondAttribute="leading" id="rGl-lx-aP9"/>
                             <constraint firstItem="r8x-qA-DhI" firstAttribute="top" secondItem="WeM-cp-4ab" secondAttribute="bottom" id="rQD-2P-Bph"/>
-                            <constraint firstItem="WeM-cp-4ab" firstAttribute="topMargin" secondItem="MrK-Wa-SsT" secondAttribute="bottom" constant="8" id="uY5-qf-k1x"/>
+                            <constraint firstItem="WeM-cp-4ab" firstAttribute="topMargin" secondItem="Zyp-Pf-Fxa" secondAttribute="top" constant="8" id="uY5-qf-k1x"/>
                             <constraint firstItem="WeM-cp-4ab" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-20" id="yMv-9e-2wk"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="Zyp-Pf-Fxa"/>
                     </view>
                     <navigationItem key="navigationItem" title="Search" id="8jK-VO-dxx"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
@@ -529,14 +527,11 @@
         <scene sceneID="eIp-97-gTm">
             <objects>
                 <viewController id="n0e-Yw-VCQ" customClass="MainViewController" customModule="LollySwiftiOS" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Kdh-3l-zuF"/>
-                        <viewControllerLayoutGuide type="bottom" id="qY1-zS-oeU"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="iAM-pc-OPJ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="GsO-eT-PUz"/>
                     </view>
                     <navigationItem key="navigationItem" id="U4D-Yw-yiw"/>
                     <connections>
