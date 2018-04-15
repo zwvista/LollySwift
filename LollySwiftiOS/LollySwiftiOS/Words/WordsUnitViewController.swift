@@ -95,8 +95,8 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
             }
             let copyWordAction = UIAlertAction(title: "Copy Word", style: .default) { _ in UIPasteboard.general.string = m.WORD }
             alertController.addAction(copyWordAction)
-            let copyNoteAction = UIAlertAction(title: "Copy Note", style: .default) { _ in UIPasteboard.general.string = m.NOTE }
-            alertController.addAction(copyNoteAction)
+            let googleWordAction = UIAlertAction(title: "Google Word", style: .default) { _ in UIApplication.shared.openURL(URL(string: "http://www.google.com/search?q=\(m.WORD)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!) }
+            alertController.addAction(googleWordAction)
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
             alertController.addAction(cancelAction)
             self.present(alertController, animated: true) {}

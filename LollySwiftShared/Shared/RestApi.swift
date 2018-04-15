@@ -60,6 +60,7 @@ class RestApi {
     }
     
     static func getHtml(url: String, complete: @escaping (String) -> Void) {
+        print("[RestApi]GET:\(url)")
         Alamofire.request(url).responseString { (response: DataResponse<String>) in
             let result = response.result.value!
             complete(result)
