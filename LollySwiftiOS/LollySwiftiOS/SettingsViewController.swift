@@ -58,8 +58,6 @@ class SettingsViewController: UITableViewController {
         }
         
         ddDict.anchorView = dictCell
-        ddDict.dataSource = vm.arrDictionaries.map { $0.DICTNAME! }
-        ddDict.selectRow(vm.selectedDictIndex)
         ddDict.selectionAction = { [unowned self] (index: Int, item: String) in
             guard index != self.vm.selectedDictIndex else {return}
             self.vm.selectedDictIndex = index
@@ -69,8 +67,6 @@ class SettingsViewController: UITableViewController {
         }
         
         ddNoteSite.anchorView = noteSiteCell
-        ddNoteSite.dataSource = vm.arrNoteSites.map { $0.DICTNAME! }
-        ddNoteSite.selectRow(vm.selectedNoteSiteIndex)
         ddNoteSite.selectionAction = { [unowned self] (index: Int, item: String) in
             guard index != self.vm.selectedNoteSiteIndex else {return}
             self.vm.selectedNoteSiteIndex = index
@@ -80,8 +76,6 @@ class SettingsViewController: UITableViewController {
         }
         
         ddTextbook.anchorView = textbookCell
-        ddTextbook.dataSource = vm.arrTextbooks.map { $0.TEXTBOOKNAME }
-        ddTextbook.selectRow(vm.selectedTextbookIndex)
         ddTextbook.selectionAction = { [unowned self] (index: Int, item: String) in
             guard index != self.vm.selectedTextbookIndex else {return}
             self.vm.selectedTextbookIndex = index
@@ -91,8 +85,6 @@ class SettingsViewController: UITableViewController {
         }
         
         ddUnitFrom.anchorView = unitFromCell
-        ddUnitFrom.dataSource = vm.arrUnits
-        ddUnitFrom.selectRow(vm.USUNITFROM - 1)
         ddUnitFrom.selectionAction = { [unowned self] (index: Int, item: String) in
             guard self.vm.USUNITFROM != index + 1 else {return}
             self.vm.USUNITFROM = index + 1
@@ -103,8 +95,6 @@ class SettingsViewController: UITableViewController {
         }
         
         ddPartFrom.anchorView = partFromCell
-        ddPartFrom.dataSource = vm.arrParts
-        ddPartFrom.selectRow(vm.USPARTFROM - 1)
         ddPartFrom.selectionAction = { [unowned self] (index: Int, item: String) in
             guard self.vm.USPARTFROM != index + 1 else {return}
             self.vm.USPARTFROM = index + 1
@@ -115,8 +105,6 @@ class SettingsViewController: UITableViewController {
         }
         
         ddUnitTo.anchorView = unitToCell
-        ddUnitTo.dataSource = vm.arrUnits
-        ddUnitTo.selectRow(vm.USUNITTO - 1)
         ddUnitTo.selectionAction = { [unowned self] (index: Int, item: String) in
             guard self.vm.USUNITTO != index + 1 else {return}
             self.vm.USUNITTO = index + 1
@@ -127,8 +115,6 @@ class SettingsViewController: UITableViewController {
         }
         
         ddPartTo.anchorView = partToCell
-        ddPartTo.dataSource = vm.arrParts
-        ddPartTo.selectRow(vm.USPARTTO - 1)
         ddPartTo.selectionAction = { [unowned self] (index: Int, item: String) in
             guard self.vm.USPARTTO != index + 1 else {return}
             self.vm.USPARTTO = index + 1
@@ -177,6 +163,8 @@ class SettingsViewController: UITableViewController {
         let m = vm.selectedDict
         dictCell.textLabel!.text = m.DICTNAME
         dictCell.detailTextLabel!.text = m.URL
+        ddDict.dataSource = vm.arrDictionaries.map { $0.DICTNAME! }
+        ddDict.selectRow(vm.selectedDictIndex)
     }
     
     func updateNoteSite() {
@@ -185,11 +173,14 @@ class SettingsViewController: UITableViewController {
             // it will remain to be empty and can no longer be changed. (why ?)
             noteSiteCell.textLabel!.text = " "
             noteSiteCell.detailTextLabel!.text = " "
+            ddNoteSite.dataSource = []
         } else {
             let m = vm.selectedNoteSite!
             noteSiteCell.textLabel!.text = m.DICTNAME!
             noteSiteCell.detailTextLabel!.text = m.URL!
             noteSiteCell.setNeedsDisplay()
+            ddNoteSite.dataSource = vm.arrNoteSites.map { $0.DICTNAME! }
+            ddNoteSite.selectRow(vm.selectedNoteSiteIndex)
         }
     }
 
@@ -203,6 +194,16 @@ class SettingsViewController: UITableViewController {
         lblPartTo.text = vm.arrParts[vm.USPARTTO - 1]
         swUnitTo.isOn = !vm.isSingleUnitPart
         swUnitToValueChanged(self)
+        ddTextbook.dataSource = vm.arrTextbooks.map { $0.TEXTBOOKNAME }
+        ddTextbook.selectRow(vm.selectedTextbookIndex)
+        ddUnitFrom.dataSource = vm.arrUnits
+        ddUnitFrom.selectRow(vm.USUNITFROM - 1)
+        ddPartFrom.dataSource = vm.arrParts
+        ddPartFrom.selectRow(vm.USPARTFROM - 1)
+        ddUnitTo.dataSource = vm.arrUnits
+        ddUnitTo.selectRow(vm.USUNITTO - 1)
+        ddPartTo.dataSource = vm.arrParts
+        ddPartTo.selectRow(vm.USPARTTO - 1)
     }
     
     func updateUnitPartFrom() {
