@@ -95,7 +95,7 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
             }
             let copyWordAction = UIAlertAction(title: "Copy Word", style: .default) { _ in UIPasteboard.general.string = m.WORD }
             alertController.addAction(copyWordAction)
-            let googleWordAction = UIAlertAction(title: "Google Word", style: .default) { _ in UIApplication.shared.openURL(URL(string: "http://www.google.com/search?q=\(m.WORD)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!) }
+            let googleWordAction = UIAlertAction(title: "Google Word", style: .default) { _ in UIApplication.shared.openURL(URL(string: "https://www.google.com/search?q=\(m.WORD)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!) }
             alertController.addAction(googleWordAction)
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
             alertController.addAction(cancelAction)
@@ -128,7 +128,7 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
             controller.vm = vm
             controller.mWord = sender as? MUnitWord ?? vm.newUnitWord()
         } else if let controller = segue.destination as? WordsDictViewController {
-            controller.vm.arrWords = arrWords
+            controller.vm.arrWords = arrWords.map { $0.WORD }
             controller.vm.selectWordIndex = tableView.indexPathForSelectedRow!.row
         }
     }

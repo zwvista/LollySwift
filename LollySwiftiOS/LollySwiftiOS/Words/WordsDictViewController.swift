@@ -25,7 +25,7 @@ class WordsDictViewController: UIViewController {
         wvWord = addWKWebView(webViewHolder: wvWordHolder)
         
         ddWord.anchorView = btnWord
-        ddWord.dataSource = vm.arrWords.map { $0.WORDNOTE }
+        ddWord.dataSource = vm.arrWords
         ddWord.selectRow(vm.selectWordIndex)
         ddWord.selectionAction = { [unowned self] (index: Int, item: String) in
             self.vm.selectWordIndex = index
@@ -46,15 +46,15 @@ class WordsDictViewController: UIViewController {
     }
     
     private func selectWordChanged() {
-        btnWord.setTitle(vm.selectWord.WORDNOTE, for: .normal)
-        navigationItem.title = vm.selectWord.WORD
+        btnWord.setTitle(vm.selectWord, for: .normal)
+        navigationItem.title = vm.selectWord
         selectDictChanged()
     }
     
     private func selectDictChanged() {
         let m = vmSettings.selectedDict
         btnDict.setTitle(m.DICTNAME, for: .normal)
-        let url = m.urlString(vm.selectWord.WORD)
+        let url = m.urlString(vm.selectWord)
         wvWord.load(URLRequest(url: URL(string: url)!))
     }
     

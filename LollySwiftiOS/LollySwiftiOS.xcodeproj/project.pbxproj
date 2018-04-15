@@ -202,13 +202,13 @@
 		8C316571207676CF0015C247 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				8C316575207676CF0015C247 /* PhrasesLangViewModel.swift */,
+				8C316576207676CF0015C247 /* PhrasesUnitViewModel.swift */,
+				8C9471A42081B02F00D040E0 /* SearchViewModel.swift */,
 				8C316572207676CF0015C247 /* SettingsViewModel.swift */,
 				8C316573207676CF0015C247 /* WordsLangViewModel.swift */,
 				8C316574207676CF0015C247 /* WordsTextbookViewModel.swift */,
-				8C316575207676CF0015C247 /* PhrasesLangViewModel.swift */,
-				8C316576207676CF0015C247 /* PhrasesUnitViewModel.swift */,
 				8C316577207676CF0015C247 /* WordsUnitViewModel.swift */,
-				8C9471A42081B02F00D040E0 /* SearchViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -216,8 +216,8 @@
 		8C316578207676CF0015C247 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				8C316579207676CF0015C247 /* RestApi.swift */,
 				8C31657A207676CF0015C247 /* HtmlApi.swift */,
+				8C316579207676CF0015C247 /* RestApi.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -226,15 +226,15 @@
 			isa = PBXGroup;
 			children = (
 				8C31657C207676CF0015C247 /* MDictionary.swift */,
-				8C31657D207676CF0015C247 /* MUnitWord.swift */,
+				8C316581207676CF0015C247 /* MLangPhrase.swift */,
+				8C316584207676CF0015C247 /* MLanguage.swift */,
 				8C31657E207676CF0015C247 /* MLangWord.swift */,
 				8C31657F207676CF0015C247 /* MNoteSite.swift */,
-				8C316580207676CF0015C247 /* MUserSetting.swift */,
-				8C316581207676CF0015C247 /* MLangPhrase.swift */,
+				8C316585207676CF0015C247 /* MTextBook.swift */,
 				8C316582207676CF0015C247 /* MTextbookWord.swift */,
 				8C316583207676CF0015C247 /* MUnitPhrase.swift */,
-				8C316584207676CF0015C247 /* MLanguage.swift */,
-				8C316585207676CF0015C247 /* MTextBook.swift */,
+				8C31657D207676CF0015C247 /* MUnitWord.swift */,
+				8C316580207676CF0015C247 /* MUserSetting.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -740,7 +740,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "$(inherited) \"${PODS_CONFIGURATION_BUILD_DIR}/ActionSheetPicker-3.0\" \"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire-iOS\" \"${PODS_CONFIGURATION_BUILD_DIR}/AlamofireObjectMapper-iOS\" \"${PODS_CONFIGURATION_BUILD_DIR}/ObjectMapper-iOS\"";
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/ActionSheetPicker-3.0\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire-iOS\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/AlamofireObjectMapper-iOS\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/ObjectMapper-iOS\"",
+				);
 				HEADER_SEARCH_PATHS = ../Pods;
 				INFOPLIST_FILE = LollySwiftiOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -761,7 +767,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "$(inherited) \"${PODS_CONFIGURATION_BUILD_DIR}/ActionSheetPicker-3.0\" \"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire-iOS\" \"${PODS_CONFIGURATION_BUILD_DIR}/AlamofireObjectMapper-iOS\" \"${PODS_CONFIGURATION_BUILD_DIR}/ObjectMapper-iOS\"";
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/ActionSheetPicker-3.0\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire-iOS\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/AlamofireObjectMapper-iOS\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/ObjectMapper-iOS\"",
+				);
 				HEADER_SEARCH_PATHS = ../Pods;
 				INFOPLIST_FILE = LollySwiftiOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;

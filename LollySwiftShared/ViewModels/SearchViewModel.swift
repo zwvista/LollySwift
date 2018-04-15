@@ -10,9 +10,9 @@ import Foundation
 
 class SearchViewModel: NSObject {
     var vmSettings: SettingsViewModel
-    var arrWords = [MUnitWord]()
+    var arrWords = [String]()
     var selectWordIndex = 0
-    var selectWord: MUnitWord {
+    var selectWord: String {
         return arrWords[selectWordIndex]
     }
 
