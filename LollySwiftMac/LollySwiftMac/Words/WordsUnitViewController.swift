@@ -13,7 +13,7 @@ import WebKit
 class WordsUnitViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate, NSSearchFieldDelegate, WKNavigationDelegate {
     
     @IBOutlet weak var wvDictOnline: WKWebView!
-    @IBOutlet weak var sfWord: NSSearchField!
+    @IBOutlet weak var tfNewWord: NSTextField!
     @IBOutlet weak var tableView: NSTableView!
 
     @IBOutlet weak var tfWord: NSTextField!
@@ -129,7 +129,7 @@ class WordsUnitViewController: NSViewController, NSTableViewDataSource, NSTableV
     
     override func controlTextDidEndEditing(_ obj: Notification) {
         let searchfield = obj.object as! NSControl
-        if searchfield !== sfWord {return}
+        if searchfield !== tfNewWord {return}
         
         let dict = (obj as NSNotification).userInfo!
         let reason = dict["NSTextMovement"] as! NSNumber

@@ -23,28 +23,22 @@
                                         <rect key="frame" x="0.0" y="0.0" width="295" height="640"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
-                                            <searchField wantsLayer="YES" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dyX-qY-Sem">
-                                                <rect key="frame" x="0.0" y="618" width="249" height="22"/>
-                                                <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" placeholderString="Enter a word here" usesSingleLineMode="YES" bezelStyle="round" id="0Z9-qa-HZb">
+                                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AOA-N2-K53">
+                                                <rect key="frame" x="0.0" y="618" width="242" height="22"/>
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="5RA-n6-Fw7">
                                                     <font key="font" metaFont="system"/>
-                                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                    <connections>
-                                                        <binding destination="F8i-pe-Ate" name="value" keyPath="word" id="Tsl-UI-IIz"/>
-                                                    </connections>
-                                                </searchFieldCell>
-                                                <connections>
-                                                    <outlet property="delegate" destination="F8i-pe-Ate" id="iBf-n9-pMk"/>
-                                                </connections>
-                                            </searchField>
+                                                </textFieldCell>
+                                            </textField>
                                             <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JGz-Z7-9aY">
-                                                <rect key="frame" x="0.0" y="0.0" width="295" height="613"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="295" height="618"/>
                                                 <clipView key="contentView" id="Zcq-Vh-TJP">
-                                                    <rect key="frame" x="1" y="0.0" width="293" height="612"/>
+                                                    <rect key="frame" x="1" y="0.0" width="293" height="617"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="ieV-Ib-SiL" viewBased="YES" id="8Zf-06-OzS">
-                                                            <rect key="frame" x="0.0" y="0.0" width="293" height="589"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="293" height="594"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <size key="intercellSpacing" width="3" height="2"/>
                                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -258,8 +252,8 @@
                                                 </tableHeaderView>
                                             </scrollView>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ltV-BH-u5n">
-                                                <rect key="frame" x="243" y="612" width="58" height="32"/>
-                                                <buttonCell key="cell" type="push" title="Go" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="1KG-my-7C8">
+                                                <rect key="frame" x="236" y="612" width="65" height="32"/>
+                                                <buttonCell key="cell" type="push" title="Add" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="1KG-my-7C8">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
@@ -269,15 +263,15 @@
                                             </button>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="dyX-qY-Sem" firstAttribute="leading" secondItem="6Rr-wA-xjF" secondAttribute="leading" id="1ih-jm-x4e"/>
-                                            <constraint firstItem="JGz-Z7-9aY" firstAttribute="top" secondItem="dyX-qY-Sem" secondAttribute="bottom" constant="5" id="Bqh-xm-JWb"/>
+                                            <constraint firstItem="AOA-N2-K53" firstAttribute="leading" secondItem="6Rr-wA-xjF" secondAttribute="leading" id="0BW-Qn-vcS"/>
                                             <constraint firstAttribute="trailing" secondItem="ltV-BH-u5n" secondAttribute="trailing" id="GmV-LQ-olv"/>
+                                            <constraint firstItem="JGz-Z7-9aY" firstAttribute="top" secondItem="AOA-N2-K53" secondAttribute="bottom" id="L2O-Iw-1gn"/>
                                             <constraint firstAttribute="bottom" secondItem="JGz-Z7-9aY" secondAttribute="bottom" id="OtL-3q-OBi"/>
                                             <constraint firstItem="ltV-BH-u5n" firstAttribute="top" secondItem="6Rr-wA-xjF" secondAttribute="top" id="XL4-O0-rra"/>
+                                            <constraint firstItem="AOA-N2-K53" firstAttribute="top" secondItem="6Rr-wA-xjF" secondAttribute="top" id="gkv-2X-90T"/>
                                             <constraint firstItem="JGz-Z7-9aY" firstAttribute="leading" secondItem="6Rr-wA-xjF" secondAttribute="leading" id="j2R-cb-V2O"/>
-                                            <constraint firstItem="dyX-qY-Sem" firstAttribute="top" secondItem="6Rr-wA-xjF" secondAttribute="top" id="kBk-AW-eHg"/>
-                                            <constraint firstItem="ltV-BH-u5n" firstAttribute="leading" secondItem="dyX-qY-Sem" secondAttribute="trailing" id="kvp-Gh-viR"/>
                                             <constraint firstAttribute="trailing" secondItem="JGz-Z7-9aY" secondAttribute="trailing" id="m5E-f0-G5h"/>
+                                            <constraint firstItem="AOA-N2-K53" firstAttribute="trailing" secondItem="ltV-BH-u5n" secondAttribute="leading" id="zWQ-Db-1Zv"/>
                                         </constraints>
                                     </customView>
                                     <customView id="bA1-VX-afL">
@@ -317,8 +311,8 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="sfWord" destination="dyX-qY-Sem" id="5W1-uS-CjF"/>
                         <outlet property="tableView" destination="8Zf-06-OzS" id="Vn7-va-cpG"/>
+                        <outlet property="tfNewWord" destination="AOA-N2-K53" id="JJm-gX-0NZ"/>
                         <outlet property="wvDictOnline" destination="tEP-Us-q1l" id="0DF-0d-cGv"/>
                     </connections>
                 </viewController>
