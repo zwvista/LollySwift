@@ -185,11 +185,13 @@ class WordsUnitViewController: NSViewController, NSTableViewDataSource, NSTableV
         pasteboard.setString(m.WORD, forType: .string)
     }
     
-    @IBAction func copyNote(_ sender: Any) {
+    @IBAction func googleWord(_ sender: Any) {
         let m = vm.arrWords[tableView.selectedRow]
-        let pasteboard = NSPasteboard.general
-        pasteboard.declareTypes([.string], owner: nil)
-        pasteboard.setString(m.NOTE ?? "", forType: .string)
+        NSWorkspace.shared.open([URL(string: "https://www.google.com/search?q=\(m.WORD)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!],
+                                withAppBundleIdentifier:"com.apple.Safari",
+                                options: [],
+                                additionalEventParamDescriptor: nil,
+                                launchIdentifiers: nil)
     }
     
     @IBAction func getNotes(_ sender: Any) {
@@ -199,9 +201,15 @@ class WordsUnitViewController: NSViewController, NSTableViewDataSource, NSTableV
         alert.alertStyle = .informational
         alert.addButton(withTitle: "Empty Notes Only")
         alert.addButton(withTitle: "All Notes")
+        alert.addButton(withTitle: "Cancel")
         let res = alert.runModal()
-        vm.getNotes(ifEmpty: res == .alertFirstButtonReturn) {
-            timer = Timer.scheduledTimer(timeInterval: TimeInterval(Double($0) / 1000.0), target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
+        switch res {
+        case .alertThirdButtonReturn:
+            break
+        default:
+            vm.getNotes(ifEmpty: res == .alertSecondButtonReturn) {
+                timer = Timer.scheduledTimer(timeInterval: TimeInterval(Double($0) / 1000.0), target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
+            }
         }
     }
     
