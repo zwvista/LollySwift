@@ -10,15 +10,15 @@ import Cocoa
 import WebKit
 
 @objcMembers
-class WordsUnitViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate, NSSearchFieldDelegate, WKNavigationDelegate {
+class WordsUnitViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate, WKNavigationDelegate {
     
     @IBOutlet weak var wvDictOnline: WKWebView!
     @IBOutlet weak var tfNewWord: NSTextField!
     @IBOutlet weak var tableView: NSTableView!
 
-    @IBOutlet weak var tfWord: NSTextField!
     var timer = Timer()
-    var word = ""
+    @objc
+    var newWord = ""
     
     var vm: WordsUnitViewModel!
     var arrWords: [MUnitWord] {
@@ -116,27 +116,31 @@ class WordsUnitViewController: NSViewController, NSTableViewDataSource, NSTableV
     
     func tableViewSelectionDidChange(_ notification: Notification) {
         guard tableView.selectedRow != -1 else {return}
-        let m = arrWords[tableView.selectedRow]
-        word = m.WORD
-        searchDict(self)
-    }
-    
-    @IBAction func searchDict(_ sender: AnyObject) {
-        let m = vm.vmSettings.selectedDict
-        let url = m.urlString(word)
+        let word = arrWords[tableView.selectedRow].WORD
+        let url = vm.vmSettings.selectedDict.urlString(word)
         wvDictOnline.load(URLRequest(url: URL(string: url)!))
     }
     
+    @IBAction func addNewWord(_ sender: AnyObject) {
+        guard !newWord.isEmpty else {return}
+        let mWord = vm.newUnitWord()
+        mWord.WORD = newWord
+        WordsUnitViewModel.create(m: MUnitWordEdit(m: mWord)) {
+            mWord.ID = $0
+            self.vm.arrWords.append(mWord)
+            self.tableView.reloadData()
+            self.tfNewWord.stringValue = ""
+        }
+    }
+
     override func controlTextDidEndEditing(_ obj: Notification) {
         let searchfield = obj.object as! NSControl
-        if searchfield !== tfNewWord {return}
-        
+        guard searchfield === tfNewWord else {return}
         let dict = (obj as NSNotification).userInfo!
         let reason = dict["NSTextMovement"] as! NSNumber
         let code = Int(reason.int32Value)
-        if code == NSReturnTextMovement {
-            searchDict(self)
-        }
+        guard code == NSReturnTextMovement else {return}
+        addNewWord(self)
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {

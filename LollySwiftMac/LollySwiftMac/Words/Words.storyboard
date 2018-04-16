@@ -29,7 +29,13 @@
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    <connections>
+                                                        <binding destination="F8i-pe-Ate" name="value" keyPath="newWord" id="N5u-BD-ESH"/>
+                                                    </connections>
                                                 </textFieldCell>
+                                                <connections>
+                                                    <outlet property="delegate" destination="F8i-pe-Ate" id="4KC-gt-VAW"/>
+                                                </connections>
                                             </textField>
                                             <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JGz-Z7-9aY">
                                                 <rect key="frame" x="0.0" y="0.0" width="295" height="618"/>
@@ -258,7 +264,7 @@
                                                     <font key="font" metaFont="system"/>
                                                 </buttonCell>
                                                 <connections>
-                                                    <action selector="searchDict:" target="F8i-pe-Ate" id="7Px-wp-Z96"/>
+                                                    <action selector="addNewWord:" target="F8i-pe-Ate" id="7eS-Ec-OWa"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -350,6 +356,7 @@
                         </menuItem>
                     </items>
                 </menu>
+                <userDefaultsController id="kQx-Qe-nCG"/>
             </objects>
             <point key="canvasLocation" x="-816" y="905"/>
         </scene>
