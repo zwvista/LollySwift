@@ -9,8 +9,7 @@
 import Cocoa
 import WebKit
 
-@objcMembers
-class WordsUnitViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate, WKNavigationDelegate {
+class WordsUnitViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate, WKNavigationDelegate {
     
     @IBOutlet weak var wvDictOnline: WKWebView!
     @IBOutlet weak var tfNewWord: NSTextField!
@@ -114,11 +113,14 @@ class WordsUnitViewController: NSViewController, NSTableViewDataSource, NSTableV
         WordsUnitViewModel.update(m.ID, m: MUnitWordEdit(m: m)) {}
     }
     
-    func tableViewSelectionDidChange(_ notification: Notification) {
-        guard tableView.selectedRow != -1 else {return}
-        let word = arrWords[tableView.selectedRow].WORD
+    func searchNewWord(word: String) {
         let url = vm.vmSettings.selectedDict.urlString(word)
         wvDictOnline.load(URLRequest(url: URL(string: url)!))
+    }
+    
+    func tableViewSelectionDidChange(_ notification: Notification) {
+        guard tableView.selectedRow != -1 else {return}
+        searchNewWord(word: arrWords[tableView.selectedRow].WORD)
     }
     
     @IBAction func addNewWord(_ sender: AnyObject) {
@@ -132,6 +134,12 @@ class WordsUnitViewController: NSViewController, NSTableViewDataSource, NSTableV
             self.tfNewWord.stringValue = ""
             self.newWord = ""
         }
+    }
+    
+    @IBAction func searchNewWord(_ sender: AnyObject) {
+        commitEditing()
+        guard !newWord.isEmpty else {return}
+        searchNewWord(word: newWord)
     }
 
     override func controlTextDidEndEditing(_ obj: Notification) {
@@ -225,6 +233,10 @@ class WordsUnitViewController: NSViewController, NSTableViewDataSource, NSTableV
         }, allComplete: {
 //            self.tableView.reloadData()
         })
+    }
+    
+    func settingsChanged() {
+        refreshTableView(self)
     }
 }
 

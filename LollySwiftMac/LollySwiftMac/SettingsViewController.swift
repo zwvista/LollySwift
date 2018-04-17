@@ -43,6 +43,10 @@ class SettingsViewController: NSViewController {
         application.stopModal()
         // http://stackoverflow.com/questions/5711367/os-x-how-can-a-nsviewcontroller-find-its-window
         self.view.window?.close()
+        for w in NSApplication.shared.windows {
+            guard let v = w.contentViewController as? LollyProtocol else {continue}
+            v.settingsChanged()
+        }
     }
     
     @IBAction func langSelected(_ sender: AnyObject) {

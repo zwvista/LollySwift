@@ -10,11 +10,11 @@ import Foundation
 
 protocol LollyProtocol {
     var vmSettings: SettingsViewModel { get }
+    func settingsChanged()
 }
 
 extension LollyProtocol {
     var vmSettings: SettingsViewModel {
         return AppDelegate.theSettingsViewModel
     }
-
 }

@@ -9,7 +9,6 @@
 import Cocoa
 import WebKit
 
-@objcMembers
 class SearchViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate, NSSearchFieldDelegate, WKNavigationDelegate {
     
     @IBOutlet weak var wvDictOnline: WKWebView!
@@ -17,6 +16,7 @@ class SearchViewController: NSViewController, LollyProtocol, NSTableViewDataSour
     @IBOutlet weak var wvDictOffline: WKWebView!
     @IBOutlet weak var tableView: NSTableView!
 
+    @objc
     var word = ""
     
     var arrWords = [MUnitWord]()
@@ -75,6 +75,9 @@ class SearchViewController: NSViewController, LollyProtocol, NSTableViewDataSour
             self.wvDictOnline.isHidden = true
             self.wvDictOffline.isHidden = false
         }
+    }
+    
+    func settingsChanged() {
     }
 }
 
