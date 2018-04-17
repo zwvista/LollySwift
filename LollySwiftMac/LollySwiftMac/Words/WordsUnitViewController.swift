@@ -130,6 +130,7 @@ class WordsUnitViewController: NSViewController, NSTableViewDataSource, NSTableV
             self.vm.arrWords.append(mWord)
             self.tableView.reloadData()
             self.tfNewWord.stringValue = ""
+            self.newWord = ""
         }
     }
 
@@ -211,7 +212,7 @@ class WordsUnitViewController: NSViewController, NSTableViewDataSource, NSTableV
         case .alertThirdButtonReturn:
             break
         default:
-            vm.getNotes(ifEmpty: res == .alertSecondButtonReturn) {
+            vm.getNotes(ifEmpty: res == .alertFirstButtonReturn) {
                 timer = Timer.scheduledTimer(timeInterval: TimeInterval(Double($0) / 1000.0), target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
             }
         }

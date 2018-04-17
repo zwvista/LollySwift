@@ -67,7 +67,7 @@ class PhrasesUnitViewModel: NSObject {
     func newUnitPhrase() -> MUnitPhrase {
         let o = MUnitPhrase()
         o.TEXTBOOKID = vmSettings.USTEXTBOOKID
-        let maxElem = arrPhrases.max{ ($0.UNITPART, $0.SEQNUM) < ($1.UNITPART, $1.SEQNUM) }
+        let maxElem = arrPhrases.max{ ($0.UNIT, $0.PART, $0.SEQNUM) < ($1.UNIT, $1.PART, $1.SEQNUM) }
         o.UNIT = maxElem?.UNIT ?? vmSettings.USUNITTO
         o.PART = maxElem?.PART ?? vmSettings.USPARTTO
         o.SEQNUM = (maxElem?.SEQNUM ?? 0) + 1
