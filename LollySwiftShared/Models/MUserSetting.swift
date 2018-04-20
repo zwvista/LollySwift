@@ -65,8 +65,8 @@ class MUserSetting: NSObject, Mappable {
         update(id, body: body, complete: complete)
     }
     
-    static func update(_ id: Int, notesiteid: Int, complete: @escaping (String) -> Void) {
-        let body = "VALUE3=\(notesiteid)"
+    static func update(_ id: Int, dictnoteid: Int, complete: @escaping (String) -> Void) {
+        let body = "VALUE3=\(dictnoteid)"
         update(id, body: body, complete: complete)
     }
 

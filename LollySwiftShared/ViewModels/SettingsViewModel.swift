@@ -174,7 +174,7 @@ class SettingsViewModel: NSObject {
     }
     
     func updateDictNote(complete: @escaping () -> Void) {
-        MUserSetting.update(selectedUSLang.ID, notesiteid: USDICTNOTEID) {
+        MUserSetting.update(selectedUSLang.ID, dictnoteid: USDICTNOTEID) {
             print($0)
             complete()
         }

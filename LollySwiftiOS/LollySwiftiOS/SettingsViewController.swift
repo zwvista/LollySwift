@@ -11,8 +11,8 @@ import DropDown
 
 class SettingsViewController: UITableViewController {
     @IBOutlet weak var langCell: UITableViewCell!
-    @IBOutlet weak var dictCell: UITableViewCell!
-    @IBOutlet weak var noteSiteCell: UITableViewCell!
+    @IBOutlet weak var dictOnlineCell: UITableViewCell!
+    @IBOutlet weak var dictNoteCell: UITableViewCell!
     @IBOutlet weak var textbookCell: UITableViewCell!
     @IBOutlet weak var unitFromCell: UITableViewCell!
     @IBOutlet weak var partFromCell: UITableViewCell!
@@ -27,7 +27,7 @@ class SettingsViewController: UITableViewController {
     @IBOutlet weak var lblPartToTitle: UILabel!
     
     let ddLang = DropDown()
-    let ddDict = DropDown()
+    let ddDictOnline = DropDown()
     let ddDictNote = DropDown()
     let ddTextbook = DropDown()
     let ddUnitFrom = DropDown()
@@ -57,8 +57,8 @@ class SettingsViewController: UITableViewController {
             }
         }
         
-        ddDict.anchorView = dictCell
-        ddDict.selectionAction = { [unowned self] (index: Int, item: String) in
+        ddDictOnline.anchorView = dictOnlineCell
+        ddDictOnline.selectionAction = { [unowned self] (index: Int, item: String) in
             guard index != self.vm.selectedDictOnlineIndex else {return}
             self.vm.selectedDictOnlineIndex = index
             self.vm.updateDictOnline {
@@ -66,7 +66,7 @@ class SettingsViewController: UITableViewController {
             }
         }
         
-        ddDictNote.anchorView = noteSiteCell
+        ddDictNote.anchorView = dictNoteCell
         ddDictNote.selectionAction = { [unowned self] (index: Int, item: String) in
             guard index != self.vm.selectedDictNoteIndex else {return}
             self.vm.selectedDictNoteIndex = index
@@ -130,7 +130,7 @@ class SettingsViewController: UITableViewController {
         case 0:
             ddLang.show()
         case 1:
-            ddDict.show()
+            ddDictOnline.show()
         case 2:
             ddDictNote.show()
         case 3:
@@ -161,24 +161,24 @@ class SettingsViewController: UITableViewController {
     
     func updateDictOnline() {
         let m = vm.selectedDictOnline
-        dictCell.textLabel!.text = m.DICTNAME
-        dictCell.detailTextLabel!.text = m.URL
-        ddDict.dataSource = vm.arrDictsOnline.map { $0.DICTNAME! }
-        ddDict.selectRow(vm.selectedDictOnlineIndex)
+        dictOnlineCell.textLabel!.text = m.DICTNAME
+        dictOnlineCell.detailTextLabel!.text = m.URL
+        ddDictOnline.dataSource = vm.arrDictsOnline.map { $0.DICTNAME! }
+        ddDictOnline.selectRow(vm.selectedDictOnlineIndex)
     }
     
     func updateDictNote() {
         if vm.arrDictsNote.isEmpty {
             // if the label text is set to an empty string,
             // it will remain to be empty and can no longer be changed. (why ?)
-            noteSiteCell.textLabel!.text = " "
-            noteSiteCell.detailTextLabel!.text = " "
+            dictNoteCell.textLabel!.text = " "
+            dictNoteCell.detailTextLabel!.text = " "
             ddDictNote.dataSource = []
         } else {
             let m = vm.selectedDictNote!
-            noteSiteCell.textLabel!.text = m.DICTNAME!
-            noteSiteCell.detailTextLabel!.text = m.URL!
-            noteSiteCell.setNeedsDisplay()
+            dictNoteCell.textLabel!.text = m.DICTNAME!
+            dictNoteCell.detailTextLabel!.text = m.URL!
+            dictNoteCell.setNeedsDisplay()
             ddDictNote.dataSource = vm.arrDictsNote.map { $0.DICTNAME! }
             ddDictNote.selectRow(vm.selectedDictNoteIndex)
         }

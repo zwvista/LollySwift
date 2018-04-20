@@ -18,7 +18,7 @@ class WordsDictViewController: UIViewController {
     weak var wvWord: WKWebView!
     
     let vm = SearchViewModel(settings: vmSettings) {}
-    let ddWord = DropDown(), ddDict = DropDown()
+    let ddWord = DropDown(), ddDictOnline = DropDown()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,10 +32,10 @@ class WordsDictViewController: UIViewController {
             self.selectWordChanged()
         }
         
-        ddDict.anchorView = btnDict
-        ddDict.dataSource = vm.vmSettings.arrDictsOnline.map { $0.DICTNAME! }
-        ddDict.selectRow(vm.vmSettings.selectedDictOnlineIndex)
-        ddDict.selectionAction = { [unowned self] (index: Int, item: String) in
+        ddDictOnline.anchorView = btnDict
+        ddDictOnline.dataSource = vm.vmSettings.arrDictsOnline.map { $0.DICTNAME! }
+        ddDictOnline.selectRow(vm.vmSettings.selectedDictOnlineIndex)
+        ddDictOnline.selectionAction = { [unowned self] (index: Int, item: String) in
             self.vm.vmSettings.selectedDictOnlineIndex = index
             self.vm.vmSettings.updateDictOnline {
                 self.selectDictChanged()
@@ -64,7 +64,7 @@ class WordsDictViewController: UIViewController {
     }
     
     @IBAction func showDictDropDown(_ sender: AnyObject) {
-        ddDict.show()
+        ddDictOnline.show()
     }
 
 }

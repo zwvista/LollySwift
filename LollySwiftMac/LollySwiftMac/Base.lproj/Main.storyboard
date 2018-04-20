@@ -774,12 +774,12 @@
                             </textField>
                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Bo4-yz-Ptk">
                                 <rect key="frame" x="133" y="172" width="223" height="26"/>
-                                <popUpButtonCell key="cell" type="push" title="Dictionary Popup" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="pp6-jV-8Y6" id="B3v-ro-gsw">
+                                <popUpButtonCell key="cell" type="push" title="Dict Online Popup" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="pp6-jV-8Y6" id="B3v-ro-gsw" userLabel="Dict Online Popup">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="menu"/>
                                     <menu key="menu" title="OtherViews" id="BCz-wO-xnR">
                                         <items>
-                                            <menuItem title="Dictionary Popup" state="on" id="pp6-jV-8Y6"/>
+                                            <menuItem title="Dict Online Popup" state="on" id="pp6-jV-8Y6" userLabel="Dict Online Popup"/>
                                             <menuItem title="Item 2" id="YJC-0b-MLZ"/>
                                             <menuItem title="Item 3" id="f84-K6-8SR"/>
                                         </items>
@@ -795,8 +795,8 @@
                                     <binding destination="HfO-r7-QMx" name="selectedIndex" keyPath="vm.selectedDictOnlineIndex" previousBinding="PXM-QD-ObO" id="78b-ia-5yx"/>
                                 </connections>
                             </popUpButton>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sxf-h3-GJC">
-                                <rect key="frame" x="18" y="148" width="114" height="21"/>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sxf-h3-GJC">
+                                <rect key="frame" x="18" y="148" width="108" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="9Nm-y9-skH"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="65" id="jac-5U-Pda"/>
@@ -809,12 +809,12 @@
                             </textField>
                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1oq-rW-MUb">
                                 <rect key="frame" x="133" y="145" width="223" height="26"/>
-                                <popUpButtonCell key="cell" type="push" title="Note Site Popup" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="qO2-FZ-ncP" id="v7O-4Y-eWL">
+                                <popUpButtonCell key="cell" type="push" title="Dict Note Popup" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="qO2-FZ-ncP" id="v7O-4Y-eWL" userLabel="Dict Note Popup">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="menu"/>
                                     <menu key="menu" title="OtherViews" id="1Wb-wM-nDP">
                                         <items>
-                                            <menuItem title="Note Site Popup" state="on" id="qO2-FZ-ncP"/>
+                                            <menuItem title="Dict Note Popup" state="on" id="qO2-FZ-ncP"/>
                                             <menuItem title="Item 2" id="S6O-1l-mxW"/>
                                             <menuItem title="Item 3" id="2kr-3u-zZ1"/>
                                         </items>
@@ -1041,15 +1041,15 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="acDictNotes" destination="Jpc-QG-itq" id="9lW-jk-Ujj"/>
-                        <outlet property="acDictionaries" destination="EkI-9N-SJp" id="Rc1-Of-Jhr"/>
+                        <outlet property="acDictsNote" destination="Jpc-QG-itq" id="9lW-jk-Ujj"/>
+                        <outlet property="acDictsOnlne" destination="EkI-9N-SJp" id="Rc1-Of-Jhr"/>
                         <outlet property="acLanguanges" destination="Jlp-Py-Ji5" id="CFI-rY-PjP"/>
                         <outlet property="acParts" destination="IiA-XH-70P" id="MqS-Qx-qrd"/>
                         <outlet property="acTextbooks" destination="PzR-zm-jg5" id="9cA-Qf-gOJ"/>
                         <outlet property="acUnits" destination="7EM-l7-CJV" id="fz0-dS-1CJ"/>
                         <outlet property="btnUnitTo" destination="zEX-94-Fpv" id="yKi-qc-X1n"/>
-                        <outlet property="pubDictNotes" destination="1oq-rW-MUb" id="X7g-Ef-zSj"/>
-                        <outlet property="pubDictionaries" destination="Bo4-yz-Ptk" id="N50-BQ-j4Q"/>
+                        <outlet property="pubDictsNote" destination="1oq-rW-MUb" id="X7g-Ef-zSj"/>
+                        <outlet property="pubDictsOnline" destination="Bo4-yz-Ptk" id="N50-BQ-j4Q"/>
                         <outlet property="pubLanguages" destination="Bo4-yz-Ptk" id="S7c-Bu-ZPJ"/>
                         <outlet property="pubPartFrom" destination="PW2-rx-UfY" id="I3r-sr-VCj"/>
                         <outlet property="pubPartTo" destination="Xjt-G8-0bL" id="ZfJ-gt-8PI"/>
@@ -1062,7 +1062,7 @@
                 </viewController>
                 <customObject id="OC9-Mn-GX9" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <arrayController id="Jlp-Py-Ji5" userLabel="Languages Controller"/>
-                <arrayController id="EkI-9N-SJp" userLabel="Dictionaries Controller"/>
+                <arrayController id="EkI-9N-SJp" userLabel="DictsOnline Controller"/>
                 <arrayController id="Jpc-QG-itq" userLabel="DictNotes Controller"/>
                 <arrayController id="PzR-zm-jg5" userLabel="Textbooks Controller"/>
                 <arrayController id="7EM-l7-CJV" userLabel="Units Controller"/>

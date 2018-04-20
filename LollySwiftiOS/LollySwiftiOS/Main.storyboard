@@ -110,7 +110,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Dictionary:" id="eJT-JA-tAS">
+                            <tableViewSection headerTitle="Dictionary(Online):" id="eJT-JA-tAS">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="iwf-56-ICv" detailTextLabel="IO0-9s-jaX" style="IBUITableViewCellStyleSubtitle" id="Fwx-mp-CFd">
                                         <rect key="frame" x="0.0" y="100" width="375" height="44"/>
@@ -139,7 +139,7 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Note Site:" id="Cf6-lL-FPm">
+                            <tableViewSection headerTitle="Dictionary(Note):" id="Cf6-lL-FPm">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="lK7-y7-tcJ" detailTextLabel="80Y-an-3eT" style="IBUITableViewCellStyleSubtitle" id="NQn-Gn-Eyq">
                                         <rect key="frame" x="0.0" y="172" width="375" height="44"/>
@@ -337,7 +337,8 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Settings" id="tcA-SM-bWb"/>
                     <connections>
-                        <outlet property="dictCell" destination="Fwx-mp-CFd" id="fka-5S-txs"/>
+                        <outlet property="dictNoteCell" destination="NQn-Gn-Eyq" id="6j7-M9-6XU"/>
+                        <outlet property="dictOnlineCell" destination="Fwx-mp-CFd" id="fka-5S-txs"/>
                         <outlet property="langCell" destination="O2T-aL-iGS" id="tdb-qa-jR3"/>
                         <outlet property="lblPartFrom" destination="FeT-5f-mQ9" id="ir3-fT-FH2"/>
                         <outlet property="lblPartTo" destination="JRs-ig-blb" id="DRY-ZG-Yd8"/>
@@ -345,7 +346,6 @@
                         <outlet property="lblUnitFrom" destination="Sts-VQ-Hk5" id="skx-ce-ir2"/>
                         <outlet property="lblUnitTo" destination="4P0-RL-QT8" id="yby-bn-hnv"/>
                         <outlet property="lblUnitToTitle" destination="dfE-Hq-cET" id="vhM-Ca-ktC"/>
-                        <outlet property="noteSiteCell" destination="NQn-Gn-Eyq" id="6j7-M9-6XU"/>
                         <outlet property="partFromCell" destination="68E-A7-6aW" id="foK-ec-qnA"/>
                         <outlet property="partToCell" destination="lhA-xM-R6Y" id="HQH-7J-hs3"/>
                         <outlet property="swUnitTo" destination="Kne-1O-BIw" id="jBT-Fc-PKh"/>
