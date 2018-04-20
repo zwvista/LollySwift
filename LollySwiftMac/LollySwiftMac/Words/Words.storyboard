@@ -610,7 +610,7 @@ Gw
         <!--Window Controller-->
         <scene sceneID="NSb-uY-gqB">
             <objects>
-                <windowController storyboardIdentifier="WordsUnitWindowController" id="P6D-Dv-O3U" sceneMemberID="viewController">
+                <windowController storyboardIdentifier="WordsUnitWindowController" id="P6D-Dv-O3U" customClass="WordsUnitWindowController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
                     <window key="window" title="Words In Unit" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="X99-WO-AfR" customClass="LollyWindow" customModule="LollySwiftMac" customModuleProvider="target">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
@@ -640,12 +640,38 @@ Gw
                                         <action selector="getNotes:" target="qEo-JS-MYZ" id="Kcn-oV-bEh"/>
                                     </connections>
                                 </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="A7C727D1-4657-4EBF-A1A9-C872D98C8BCC" label="Online" paletteLabel="Online" id="qjd-oo-wQX">
+                                    <nil key="toolTip"/>
+                                    <size key="minSize" width="100" height="28"/>
+                                    <size key="maxSize" width="100" height="28"/>
+                                    <popUpButton key="view" verticalHuggingPriority="750" id="Rfk-Um-0SC">
+                                        <rect key="frame" x="0.0" y="14" width="100" height="28"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <popUpButtonCell key="cell" type="roundTextured" title="Item 1" bezelStyle="texturedRounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" selectedItem="ced-UN-OM1" id="r7o-XQ-XqD">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="menu"/>
+                                            <menu key="menu" id="2SU-y8-fOP">
+                                                <items>
+                                                    <menuItem title="Item 1" state="on" id="ced-UN-OM1"/>
+                                                    <menuItem title="Item 2" id="PYz-H0-iyv"/>
+                                                    <menuItem title="Item 3" id="TaT-jD-omE"/>
+                                                </items>
+                                            </menu>
+                                        </popUpButtonCell>
+                                        <connections>
+                                            <binding destination="5c0-KO-oOd" name="content" keyPath="arrangedObjects" id="vjU-tc-Ief"/>
+                                            <binding destination="5c0-KO-oOd" name="contentValues" keyPath="arrangedObjects.DICTNAME" previousBinding="vjU-tc-Ief" id="6Dg-8M-Juc"/>
+                                            <binding destination="P6D-Dv-O3U" name="selectedIndex" keyPath="vm.selectedDictOnlineIndex" previousBinding="6Dg-8M-Juc" id="Nk2-hy-Wxs"/>
+                                        </connections>
+                                    </popUpButton>
+                                </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="QRZ-Pa-ivc"/>
                                 <toolbarItem reference="qFb-ob-E6N"/>
                                 <toolbarItem reference="89E-Xj-D8k"/>
                                 <toolbarItem reference="NyL-Gk-l4k"/>
+                                <toolbarItem reference="qjd-oo-wQX"/>
                             </defaultToolbarItems>
                         </toolbar>
                         <connections>
@@ -653,9 +679,12 @@ Gw
                         </connections>
                     </window>
                     <connections>
+                        <outlet property="acDictsOnline" destination="5c0-KO-oOd" id="S7g-w4-bwH"/>
+                        <outlet property="pubDictsOnline" destination="Rfk-Um-0SC" id="369-Ze-qdc"/>
                         <segue destination="F8i-pe-Ate" kind="relationship" relationship="window.shadowedContentViewController" id="oJj-lN-fK3"/>
                     </connections>
                 </windowController>
+                <arrayController id="5c0-KO-oOd" userLabel="DictsOnline Controller"/>
                 <customObject id="qEo-JS-MYZ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-524" y="327"/>

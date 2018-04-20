@@ -14,7 +14,7 @@ class SettingsViewController: NSViewController {
     var vm: SettingsViewModel {
         return AppDelegate.theSettingsViewModel
     }
-    @IBOutlet weak var acLanguanges: NSArrayController!
+    @IBOutlet weak var acLanguages: NSArrayController!
     @IBOutlet weak var acDictsOnlne: NSArrayController!
     @IBOutlet weak var acDictsNote: NSArrayController!
     @IBOutlet weak var acTextbooks: NSArrayController!
@@ -57,14 +57,14 @@ class SettingsViewController: NSViewController {
         }
     }
     
-    @IBAction func dictSelected(_ sender: AnyObject) {
+    @IBAction func dictOnlineSelected(_ sender: AnyObject) {
         vm.selectedDictOnlineIndex = pubDictsOnline.indexOfSelectedItem
         vm.updateDictOnline {
             self.updateDictOnline()
         }
     }
     
-    @IBAction func noteSiteSelected(_ sender: AnyObject) {
+    @IBAction func dictNoteSelected(_ sender: AnyObject) {
         vm.selectedDictNoteIndex = pubDictsNote.indexOfSelectedItem
         vm.updateDictNote {
             self.updateDictOnline()
@@ -118,7 +118,7 @@ class SettingsViewController: NSViewController {
     }
 
     func updateLang() {
-        acLanguanges.content = vm.arrLanguages
+        acLanguages.content = vm.arrLanguages
         updateDictOnline()
         updateDictNote()
         updateTextbook()

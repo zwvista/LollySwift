@@ -789,7 +789,7 @@
                                     </connections>
                                 </popUpButtonCell>
                                 <connections>
-                                    <action selector="dictSelected:" target="HfO-r7-QMx" id="zXy-H5-Dgo"/>
+                                    <action selector="dictOnlineSelected:" target="HfO-r7-QMx" id="zXy-H5-Dgo"/>
                                     <binding destination="EkI-9N-SJp" name="content" keyPath="arrangedObjects" id="cMt-dW-ffF"/>
                                     <binding destination="EkI-9N-SJp" name="contentValues" keyPath="arrangedObjects.DICTNAME" previousBinding="cMt-dW-ffF" id="PXM-QD-ObO"/>
                                     <binding destination="HfO-r7-QMx" name="selectedIndex" keyPath="vm.selectedDictOnlineIndex" previousBinding="PXM-QD-ObO" id="78b-ia-5yx"/>
@@ -824,7 +824,7 @@
                                     </connections>
                                 </popUpButtonCell>
                                 <connections>
-                                    <action selector="dictSelected:" target="HfO-r7-QMx" id="eXI-f7-Ulc"/>
+                                    <action selector="dictOnlineSelected:" target="HfO-r7-QMx" id="eXI-f7-Ulc"/>
                                     <binding destination="Jpc-QG-itq" name="content" keyPath="arrangedObjects" id="ZsM-lD-aWr"/>
                                     <binding destination="Jpc-QG-itq" name="contentValues" keyPath="arrangedObjects.DICTNAME" previousBinding="ZsM-lD-aWr" id="By1-zi-iAT"/>
                                     <binding destination="HfO-r7-QMx" name="selectedIndex" keyPath="vm.selectedDictNoteIndex" previousBinding="By1-zi-iAT" id="bDo-aF-pze"/>
@@ -1043,7 +1043,7 @@
                     <connections>
                         <outlet property="acDictsNote" destination="Jpc-QG-itq" id="9lW-jk-Ujj"/>
                         <outlet property="acDictsOnlne" destination="EkI-9N-SJp" id="Rc1-Of-Jhr"/>
-                        <outlet property="acLanguanges" destination="Jlp-Py-Ji5" id="CFI-rY-PjP"/>
+                        <outlet property="acLanguages" destination="Jlp-Py-Ji5" id="CFI-rY-PjP"/>
                         <outlet property="acParts" destination="IiA-XH-70P" id="MqS-Qx-qrd"/>
                         <outlet property="acTextbooks" destination="PzR-zm-jg5" id="9cA-Qf-gOJ"/>
                         <outlet property="acUnits" destination="7EM-l7-CJV" id="fz0-dS-1CJ"/>

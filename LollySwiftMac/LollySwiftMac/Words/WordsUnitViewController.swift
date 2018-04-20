@@ -14,7 +14,7 @@ class WordsUnitViewController: NSViewController, LollyProtocol, NSTableViewDataS
     @IBOutlet weak var wvDictOnline: WKWebView!
     @IBOutlet weak var tfNewWord: NSTextField!
     @IBOutlet weak var tableView: NSTableView!
-
+    
     var timer = Timer()
     @objc
     var newWord = ""
@@ -240,4 +240,19 @@ class WordsUnitViewController: NSViewController, LollyProtocol, NSTableViewDataS
     }
 }
 
+class WordsUnitWindowController: NSWindowController, LollyProtocol {
+
+    @IBOutlet weak var acDictsOnline: NSArrayController!
+    @IBOutlet weak var pubDictsOnline: NSPopUpButton!
+    
+    @objc var vm: SettingsViewModel {return vmSettings}
+    
+    override func windowDidLoad() {
+        super.windowDidLoad()
+        acDictsOnline.content = vmSettings.arrDictsOnline
+    }
+    func settingsChanged() {
+        
+    }
+}
 
