@@ -33,11 +33,11 @@ class WordsDictViewController: UIViewController {
         }
         
         ddDict.anchorView = btnDict
-        ddDict.dataSource = vm.vmSettings.arrDictionaries.map { $0.DICTNAME! }
-        ddDict.selectRow(vm.vmSettings.selectedDictIndex)
+        ddDict.dataSource = vm.vmSettings.arrDictsOnline.map { $0.DICTNAME! }
+        ddDict.selectRow(vm.vmSettings.selectedDictOnlineIndex)
         ddDict.selectionAction = { [unowned self] (index: Int, item: String) in
-            self.vm.vmSettings.selectedDictIndex = index
-            self.vm.vmSettings.updateDict {
+            self.vm.vmSettings.selectedDictOnlineIndex = index
+            self.vm.vmSettings.updateDictOnline {
                 self.selectDictChanged()
             }
         }
@@ -52,7 +52,7 @@ class WordsDictViewController: UIViewController {
     }
     
     private func selectDictChanged() {
-        let m = vmSettings.selectedDict
+        let m = vmSettings.selectedDictOnline
         btnDict.setTitle(m.DICTNAME, for: .normal)
         let url = m.urlString(vm.selectWord)
         wvWord.load(URLRequest(url: URL(string: url)!))

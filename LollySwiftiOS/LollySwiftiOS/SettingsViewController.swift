@@ -28,7 +28,7 @@ class SettingsViewController: UITableViewController {
     
     let ddLang = DropDown()
     let ddDict = DropDown()
-    let ddNoteSite = DropDown()
+    let ddDictNote = DropDown()
     let ddTextbook = DropDown()
     let ddUnitFrom = DropDown()
     let ddPartFrom = DropDown()
@@ -59,19 +59,19 @@ class SettingsViewController: UITableViewController {
         
         ddDict.anchorView = dictCell
         ddDict.selectionAction = { [unowned self] (index: Int, item: String) in
-            guard index != self.vm.selectedDictIndex else {return}
-            self.vm.selectedDictIndex = index
-            self.vm.updateDict {
-                self.updateDict()
+            guard index != self.vm.selectedDictOnlineIndex else {return}
+            self.vm.selectedDictOnlineIndex = index
+            self.vm.updateDictOnline {
+                self.updateDictOnline()
             }
         }
         
-        ddNoteSite.anchorView = noteSiteCell
-        ddNoteSite.selectionAction = { [unowned self] (index: Int, item: String) in
-            guard index != self.vm.selectedNoteSiteIndex else {return}
-            self.vm.selectedNoteSiteIndex = index
-            self.vm.updateNoteSite {
-                self.updateNoteSite()
+        ddDictNote.anchorView = noteSiteCell
+        ddDictNote.selectionAction = { [unowned self] (index: Int, item: String) in
+            guard index != self.vm.selectedDictNoteIndex else {return}
+            self.vm.selectedDictNoteIndex = index
+            self.vm.updateDictNote {
+                self.updateDictNote()
             }
         }
         
@@ -132,7 +132,7 @@ class SettingsViewController: UITableViewController {
         case 1:
             ddDict.show()
         case 2:
-            ddNoteSite.show()
+            ddDictNote.show()
         case 3:
             ddTextbook.show()
         default:
@@ -154,33 +154,33 @@ class SettingsViewController: UITableViewController {
     func updateLang() {
         let m = vm.selectedLang
         langCell.textLabel!.text = m.LANGNAME
-        updateDict()
-        updateNoteSite()
+        updateDictOnline()
+        updateDictNote()
         updateTextbook()
     }
     
-    func updateDict() {
-        let m = vm.selectedDict
+    func updateDictOnline() {
+        let m = vm.selectedDictOnline
         dictCell.textLabel!.text = m.DICTNAME
         dictCell.detailTextLabel!.text = m.URL
-        ddDict.dataSource = vm.arrDictionaries.map { $0.DICTNAME! }
-        ddDict.selectRow(vm.selectedDictIndex)
+        ddDict.dataSource = vm.arrDictsOnline.map { $0.DICTNAME! }
+        ddDict.selectRow(vm.selectedDictOnlineIndex)
     }
     
-    func updateNoteSite() {
-        if vm.arrNoteSites.isEmpty {
+    func updateDictNote() {
+        if vm.arrDictsNote.isEmpty {
             // if the label text is set to an empty string,
             // it will remain to be empty and can no longer be changed. (why ?)
             noteSiteCell.textLabel!.text = " "
             noteSiteCell.detailTextLabel!.text = " "
-            ddNoteSite.dataSource = []
+            ddDictNote.dataSource = []
         } else {
-            let m = vm.selectedNoteSite!
+            let m = vm.selectedDictNote!
             noteSiteCell.textLabel!.text = m.DICTNAME!
             noteSiteCell.detailTextLabel!.text = m.URL!
             noteSiteCell.setNeedsDisplay()
-            ddNoteSite.dataSource = vm.arrNoteSites.map { $0.DICTNAME! }
-            ddNoteSite.selectRow(vm.selectedNoteSiteIndex)
+            ddDictNote.dataSource = vm.arrDictsNote.map { $0.DICTNAME! }
+            ddDictNote.selectRow(vm.selectedDictNoteIndex)
         }
     }
 

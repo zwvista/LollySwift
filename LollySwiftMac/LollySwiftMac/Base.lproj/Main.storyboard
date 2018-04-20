@@ -1040,16 +1040,16 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="acDictNotes" destination="Jpc-QG-itq" id="9lW-jk-Ujj"/>
                         <outlet property="acDictionaries" destination="EkI-9N-SJp" id="Rc1-Of-Jhr"/>
                         <outlet property="acLanguanges" destination="Jlp-Py-Ji5" id="CFI-rY-PjP"/>
-                        <outlet property="acNoteSites" destination="Jpc-QG-itq" id="9lW-jk-Ujj"/>
                         <outlet property="acParts" destination="IiA-XH-70P" id="MqS-Qx-qrd"/>
                         <outlet property="acTextbooks" destination="PzR-zm-jg5" id="9cA-Qf-gOJ"/>
                         <outlet property="acUnits" destination="7EM-l7-CJV" id="fz0-dS-1CJ"/>
                         <outlet property="btnUnitTo" destination="zEX-94-Fpv" id="yKi-qc-X1n"/>
+                        <outlet property="pubDictNotes" destination="1oq-rW-MUb" id="X7g-Ef-zSj"/>
                         <outlet property="pubDictionaries" destination="Bo4-yz-Ptk" id="N50-BQ-j4Q"/>
                         <outlet property="pubLanguages" destination="Bo4-yz-Ptk" id="S7c-Bu-ZPJ"/>
-                        <outlet property="pubNoteSites" destination="1oq-rW-MUb" id="X7g-Ef-zSj"/>
                         <outlet property="pubPartFrom" destination="PW2-rx-UfY" id="I3r-sr-VCj"/>
                         <outlet property="pubPartTo" destination="Xjt-G8-0bL" id="ZfJ-gt-8PI"/>
                         <outlet property="pubTextbooks" destination="GTc-kH-1Ux" id="51I-aI-Ilk"/>
@@ -1062,7 +1062,7 @@
                 <customObject id="OC9-Mn-GX9" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <arrayController id="Jlp-Py-Ji5" userLabel="Languages Controller"/>
                 <arrayController id="EkI-9N-SJp" userLabel="Dictionaries Controller"/>
-                <arrayController id="Jpc-QG-itq" userLabel="NoteSites Controller"/>
+                <arrayController id="Jpc-QG-itq" userLabel="DictNotes Controller"/>
                 <arrayController id="PzR-zm-jg5" userLabel="Textbooks Controller"/>
                 <arrayController id="7EM-l7-CJV" userLabel="Units Controller"/>
                 <arrayController id="IiA-XH-70P" userLabel="Parts Controller"/>

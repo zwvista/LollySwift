@@ -33,7 +33,7 @@ class SearchViewController: UIViewController, UIWebViewDelegate, UISearchBarDele
         wvDictOfflineHolder.isHidden = true
         
         word = sbword.text!;
-        let m = vmSettings.selectedDict
+        let m = vmSettings.selectedDictOnline
         let url = m.urlString(word)
         webViewFinished = false
         wvDictOnline.load(URLRequest(url: URL(string: url)!))
@@ -48,7 +48,7 @@ class SearchViewController: UIViewController, UIWebViewDelegate, UISearchBarDele
         guard webView === wvDictOnline && webView.stringByEvaluatingJavaScript(from: "document.readyState") == "complete" && !webViewFinished else {return}
         
         webViewFinished = true
-        let m = vmSettings.selectedDict
+        let m = vmSettings.selectedDictOnline
         guard m.DICTTYPENAME == "OFFLINE-ONLINE" else {return}
         
         let data = URLCache.shared.cachedResponse(for: webView.request!)!.data;

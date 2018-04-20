@@ -44,11 +44,13 @@ class MDictionary: NSObject, Mappable {
         print(url)
         return url
     }
-    
-    static func getDataByLang(_ langid: Int, complete: @escaping ([MDictionary]) -> Void) {
-        // SQL: SELECT * FROM VDICTIONARIES WHERE LANGIDFROM = ?
-        let url = "\(RestApi.url)VDICTIONARIES?transform=1&filter=LANGIDFROM,eq,\(langid)"
-        RestApi.getArray(url: url, keyPath: "VDICTIONARIES", complete: complete)
+}
+
+class MDictOnline : MDictionary {
+    static func getDataByLang(_ langid: Int, complete: @escaping ([MDictOnline]) -> Void) {
+        // SQL: SELECT * FROM VDICTSONLINE WHERE LANGIDFROM = ?
+        let url = "\(RestApi.url)VDICTSONLINE?transform=1&filter=LANGIDFROM,eq,\(langid)"
+        RestApi.getArray(url: url, keyPath: "VDICTSONLINE", complete: complete)
     }
     
     fileprivate let debugExtract = false
@@ -56,16 +58,31 @@ class MDictionary: NSObject, Mappable {
     func htmlString(_ html: String, word: String) -> String {
         return HtmlApi.extractText(from: html, transform: TRANSFORM_MAC!, template: TEMPLATE!) { (text, template) in
             
-//            var newTemplate = NSMutableString(string: template)
-//            regex = try! NSRegularExpression(pattern: "\\{\\d\\}")
-//            regex.replaceMatches(in: newTemplate, range: NSMakeRange(0, newTemplate.length), withTemplate: "%@")
-//            text = NSMutableString(format: newTemplate, word, "", text, RestApi.cssFolder)
-
-            var template = template.replacingOccurrences(of: "{0}", with: word)
+            //            var newTemplate = NSMutableString(string: template)
+            //            regex = try! NSRegularExpression(pattern: "\\{\\d\\}")
+            //            regex.replaceMatches(in: newTemplate, range: NSMakeRange(0, newTemplate.length), withTemplate: "%@")
+            //            text = NSMutableString(format: newTemplate, word, "", text, RestApi.cssFolder)
+            
+            let template = template.replacingOccurrences(of: "{0}", with: word)
                 .replacingOccurrences(of: "{1}", with: "")
                 .replacingOccurrences(of: "{2}", with: text as String)
                 .replacingOccurrences(of: "{3}", with: RestApi.cssFolder)
             return NSMutableString(string: template)
         }
+    }
+}
+
+class MDictOffline : MDictionary {
+}
+
+class MDictNote : MDictionary {
+    static func getDataByLang(_ langid: Int, complete: @escaping ([MDictNote]) -> Void) {
+        // SQL: SELECT * FROM VDICTSNOTE WHERE LANGIDFROM = ?
+        let url = "\(RestApi.url)VDICTSNOTE?transform=1&filter=LANGIDFROM,eq,\(langid)"
+        RestApi.getArray(url: url, keyPath: "VDICTSNOTE", complete: complete)
+    }
+    
+    func htmlNote(_ html: String) -> String {
+        return HtmlApi.extractText(from: html, transform: TRANSFORM_MAC!, template: "") { text,_ in return text }
     }
 }

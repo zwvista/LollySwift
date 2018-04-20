@@ -85,7 +85,7 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
             alertController.addAction(deleteAction2)
             let editAction2 = UIAlertAction(title: "Edit", style: .default) { _ in edit() }
             alertController.addAction(editAction2)
-            if self.vm.mNoteSite != nil {
+            if self.vm.mDictNote != nil {
                 let noteAction = UIAlertAction(title: "Retrieve Note", style: .default) { _ in
                     self.vm.getNote(index: indexPath.row) {
                         self.tableView.reloadRows(at: [indexPath], with: .fade)
@@ -142,7 +142,7 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
         let alertController = UIAlertController(title: "Words", message: "More", preferredStyle: .alert)
         let addAction = UIAlertAction(title: "Add", style: .default) { _ in self.performSegue(withIdentifier: "add", sender: self) }
         alertController.addAction(addAction)
-        if vm.mNoteSite != nil {
+        if vm.mDictNote != nil {
             let notesAllAction = UIAlertAction(title: "Retrieve All Notes", style: .default) { _ in
                 self.startTimer(ifEmpty: false)
             }

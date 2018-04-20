@@ -114,7 +114,7 @@ class WordsUnitViewController: NSViewController, LollyProtocol, NSTableViewDataS
     }
     
     func searchNewWord(word: String) {
-        let url = vm.vmSettings.selectedDict.urlString(word)
+        let url = vm.vmSettings.selectedDictOnline.urlString(word)
         wvDictOnline.load(URLRequest(url: URL(string: url)!))
     }
     

@@ -11,8 +11,8 @@ import Foundation
 class WordsUnitViewModel: NSObject {
     @objc
     var vmSettings: SettingsViewModel
-    var mNoteSite: MNoteSite? {
-        return vmSettings.selectedNoteSite
+    var mDictNote: MDictNote? {
+        return vmSettings.selectedDictNote
     }
     var arrWords = [MUnitWord]()
     var arrWordsFiltered: [MUnitWord]?
@@ -90,12 +90,12 @@ class WordsUnitViewModel: NSObject {
     }
 
     func getNote(index: Int, complete: @escaping () -> Void) {
-        guard let mNoteSite = mNoteSite else {return}
+        guard let mDictNote = mDictNote else {return}
         let m = arrWords[index]
-        let url = mNoteSite.urlString(m.WORD)
+        let url = mDictNote.urlString(m.WORD)
         RestApi.getHtml(url: url) { html in
 //            print(html)
-            m.NOTE = mNoteSite.htmlNote(html)
+            m.NOTE = mDictNote.htmlNote(html)
             WordsUnitViewModel.update(m.ID, note: m.NOTE!) {
                 complete()
             }
@@ -103,9 +103,9 @@ class WordsUnitViewModel: NSObject {
     }
     
     func getNotes(ifEmpty: Bool, complete: (Int) -> Void) {
-        guard let mNoteSite = mNoteSite else {return}
+        guard let mDictNote = mDictNote else {return}
         noteFromIndex = 0; noteToIndex = arrWords.count; noteIfEmpty = ifEmpty
-        complete(mNoteSite.WAIT!)
+        complete(mDictNote.WAIT!)
     }
     
     func getNextNote(rowComplete: @escaping (Int) -> Void, allComplete: @escaping () -> Void) {

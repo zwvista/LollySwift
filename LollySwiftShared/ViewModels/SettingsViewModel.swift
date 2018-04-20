@@ -30,11 +30,11 @@ class SettingsViewModel: NSObject {
         get { return selectedUSLang.VALUE1!.toInt()! }
         set { selectedUSLang.VALUE1 = String(newValue) }
     }
-    var USDICTID: Int {
+    var USDICTONLINEID: Int {
         get { return selectedUSLang.VALUE2!.toInt()! }
         set { selectedUSLang.VALUE2 = String(newValue) }
     }
-    var USNOTESITEID: Int {
+    var USDICTNOTEID: Int {
         get { return selectedUSLang.VALUE3!.toInt()! }
         set { selectedUSLang.VALUE3 = String(newValue) }
     }
@@ -80,27 +80,27 @@ class SettingsViewModel: NSObject {
     }
     
     @objc
-    var arrDictionaries = [MDictionary]()
+    var arrDictsOnline = [MDictOnline]()
     @objc
-    var selectedDictIndex = 0 {
+    var selectedDictOnlineIndex = 0 {
         didSet {
-            USDICTID = selectedDict.ID
+            USDICTONLINEID = selectedDictOnline.ID
         }
     }
-    var selectedDict: MDictionary {
-        return arrDictionaries[selectedDictIndex]
+    var selectedDictOnline: MDictOnline {
+        return arrDictsOnline[selectedDictOnlineIndex]
     }
     
     @objc
-    var arrNoteSites = [MNoteSite]()
+    var arrDictsNote = [MDictNote]()
     @objc
-    var selectedNoteSiteIndex = 0 {
+    var selectedDictNoteIndex = 0 {
         didSet {
-            USNOTESITEID = selectedNoteSite?.ID ?? 0
+            USDICTNOTEID = selectedDictNote?.ID ?? 0
         }
     }
-    var selectedNoteSite: MNoteSite? {
-        return arrNoteSites.isEmpty ? nil : arrNoteSites[selectedNoteSiteIndex]
+    var selectedDictNote: MDictNote? {
+        return arrDictsNote.isEmpty ? nil : arrDictsNote[selectedDictNoteIndex]
     }
 
     @objc
@@ -135,13 +135,13 @@ class SettingsViewModel: NSObject {
         selectedLangIndex = langindex
         USLANDID = selectedLang.ID
         selectedUSLangIndex = arrUserSettings.index { $0.KIND == 2 && $0.ENTITYID == self.USLANDID }!
-        MDictionary.getDataByLang(self.USLANDID) {
-            self.arrDictionaries = $0
-            self.selectedDictIndex = self.arrDictionaries.index { $0.ID == self.USDICTID }!
-            MNoteSite.getDataByLang(self.USLANDID) {
-                self.arrNoteSites = $0
-                if !self.arrNoteSites.isEmpty {
-                    self.selectedNoteSiteIndex = self.arrNoteSites.index { $0.ID == self.USNOTESITEID }!
+        MDictOnline.getDataByLang(self.USLANDID) {
+            self.arrDictsOnline = $0
+            self.selectedDictOnlineIndex = self.arrDictsOnline.index { $0.ID == self.USDICTONLINEID }!
+            MDictNote.getDataByLang(self.USLANDID) {
+                self.arrDictsNote = $0
+                if !self.arrDictsNote.isEmpty {
+                    self.selectedDictNoteIndex = self.arrDictsNote.index { $0.ID == self.USDICTNOTEID }!
                 }
                 MTextbook.getDataByLang(self.USLANDID) {
                     self.arrTextbooks = $0
@@ -166,15 +166,15 @@ class SettingsViewModel: NSObject {
         }
     }
     
-    func updateDict(complete: @escaping () -> Void) {
-        MUserSetting.update(selectedUSLang.ID, dictid: USDICTID) {
+    func updateDictOnline(complete: @escaping () -> Void) {
+        MUserSetting.update(selectedUSLang.ID, dictid: USDICTONLINEID) {
             print($0)
             complete()
         }
     }
     
-    func updateNoteSite(complete: @escaping () -> Void) {
-        MUserSetting.update(selectedUSLang.ID, notesiteid: USNOTESITEID) {
+    func updateDictNote(complete: @escaping () -> Void) {
+        MUserSetting.update(selectedUSLang.ID, notesiteid: USDICTNOTEID) {
             print($0)
             complete()
         }

@@ -16,7 +16,7 @@ class SettingsViewController: NSViewController {
     }
     @IBOutlet weak var acLanguanges: NSArrayController!
     @IBOutlet weak var acDictionaries: NSArrayController!
-    @IBOutlet weak var acNoteSites: NSArrayController!
+    @IBOutlet weak var acDictNotes: NSArrayController!
     @IBOutlet weak var acTextbooks: NSArrayController!
     @IBOutlet weak var acUnits: NSArrayController!
     @IBOutlet weak var acParts: NSArrayController!
@@ -24,7 +24,7 @@ class SettingsViewController: NSViewController {
     @IBOutlet weak var tfUnitsInAllTo: NSTextField!
     @IBOutlet weak var pubLanguages: NSPopUpButton!
     @IBOutlet weak var pubDictionaries: NSPopUpButton!
-    @IBOutlet weak var pubNoteSites: NSPopUpButton!
+    @IBOutlet weak var pubDictNotes: NSPopUpButton!
     @IBOutlet weak var pubTextbooks: NSPopUpButton!
     @IBOutlet weak var pubUnitFrom: NSPopUpButton!
     @IBOutlet weak var pubUnitTo: NSPopUpButton!
@@ -58,16 +58,16 @@ class SettingsViewController: NSViewController {
     }
     
     @IBAction func dictSelected(_ sender: AnyObject) {
-        vm.selectedDictIndex = pubDictionaries.indexOfSelectedItem
-        vm.updateDict {
-            self.updateDict()
+        vm.selectedDictOnlineIndex = pubDictionaries.indexOfSelectedItem
+        vm.updateDictOnline {
+            self.updateDictOnline()
         }
     }
     
     @IBAction func noteSiteSelected(_ sender: AnyObject) {
-        vm.selectedNoteSiteIndex = pubNoteSites.indexOfSelectedItem
-        vm.updateNoteSite {
-            self.updateDict()
+        vm.selectedDictNoteIndex = pubDictNotes.indexOfSelectedItem
+        vm.updateDictNote {
+            self.updateDictOnline()
         }
     }
 
@@ -119,17 +119,17 @@ class SettingsViewController: NSViewController {
 
     func updateLang() {
         acLanguanges.content = vm.arrLanguages
-        updateDict()
-        updateNoteSite()
+        updateDictOnline()
+        updateDictNote()
         updateTextbook()
     }
     
-    func updateDict() {
-        acDictionaries.content = vm.arrDictionaries
+    func updateDictOnline() {
+        acDictionaries.content = vm.arrDictsOnline
     }
     
-    func updateNoteSite() {
-        acNoteSites.content = vm.arrNoteSites
+    func updateDictNote() {
+        acDictNotes.content = vm.arrDictsNote
     }
 
     func updateTextbook() {
