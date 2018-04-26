@@ -167,7 +167,7 @@ class SettingsViewModel: NSObject {
     }
     
     func updateDictOnline(complete: @escaping () -> Void) {
-        MUserSetting.update(selectedUSLang.ID, dictid: USDICTONLINEID) {
+        MUserSetting.update(selectedUSLang.ID, dictonlineid: USDICTONLINEID) {
             print($0)
             complete()
         }

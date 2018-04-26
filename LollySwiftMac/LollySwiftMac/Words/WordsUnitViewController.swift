@@ -113,14 +113,18 @@ class WordsUnitViewController: NSViewController, LollyProtocol, NSTableViewDataS
         WordsUnitViewModel.update(m.ID, m: MUnitWordEdit(m: m)) {}
     }
     
-    func searchNewWord(word: String) {
+    func searchWord(word: String) {
         let url = vm.vmSettings.selectedDictOnline.urlString(word)
         wvDictOnline.load(URLRequest(url: URL(string: url)!))
     }
     
-    func tableViewSelectionDidChange(_ notification: Notification) {
+    func searchWordInTableView() {
         guard tableView.selectedRow != -1 else {return}
-        searchNewWord(word: arrWords[tableView.selectedRow].WORD)
+        searchWord(word: arrWords[tableView.selectedRow].WORD)
+    }
+    
+    func tableViewSelectionDidChange(_ notification: Notification) {
+        searchWordInTableView()
     }
     
     @IBAction func addNewWord(_ sender: AnyObject) {
@@ -139,7 +143,7 @@ class WordsUnitViewController: NSViewController, LollyProtocol, NSTableViewDataS
     @IBAction func searchNewWord(_ sender: AnyObject) {
         commitEditing()
         guard !newWord.isEmpty else {return}
-        searchNewWord(word: newWord)
+        searchWord(word: newWord)
     }
 
     override func controlTextDidEndEditing(_ obj: Notification) {
@@ -245,14 +249,20 @@ class WordsUnitWindowController: NSWindowController, LollyProtocol {
     @IBOutlet weak var acDictsOnline: NSArrayController!
     @IBOutlet weak var pubDictsOnline: NSPopUpButton!
     
+    var vc: WordsUnitViewController {return contentViewController as! WordsUnitViewController}
     @objc var vm: SettingsViewModel {return vmSettings}
     
     override func windowDidLoad() {
         super.windowDidLoad()
         acDictsOnline.content = vmSettings.arrDictsOnline
     }
+    
     func settingsChanged() {
         
+    }
+    
+    @IBAction func dictsOnlineChanged(_ sender: Any) {
+        vc.searchWordInTableView()
     }
 }
 
