@@ -75,9 +75,9 @@ class WordsUnitDetailViewController: UITableViewController, UITextFieldDelegate 
         
         if isAdd {
             vm.arrWords.append(mWord)
-            WordsUnitViewModel.create(m: MUnitWordEdit(m: mWord)) { self.mWord.ID = $0 }
+            WordsUnitViewModel.create(m: mWord) { self.mWord.ID = $0 }
         } else {
-            WordsUnitViewModel.update(mWord.ID, m: MUnitWordEdit(m: mWord)) {}
+            WordsUnitViewModel.update(m: mWord) {}
         }
     }
     

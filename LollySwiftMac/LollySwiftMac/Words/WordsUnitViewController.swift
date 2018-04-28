@@ -110,7 +110,7 @@ class WordsUnitViewController: NSViewController, LollyProtocol, NSTableViewDataS
         let newValue = sender.stringValue
         guard oldValue != newValue else {return}
         m.setValue(newValue, forKey: key)
-        WordsUnitViewModel.update(m.ID, m: MUnitWordEdit(m: m)) {}
+        WordsUnitViewModel.update(m: m) {}
     }
     
     func searchWord(word: String) {
@@ -131,7 +131,7 @@ class WordsUnitViewController: NSViewController, LollyProtocol, NSTableViewDataS
         guard !newWord.isEmpty else {return}
         let mWord = vm.newUnitWord()
         mWord.WORD = newWord
-        WordsUnitViewModel.create(m: MUnitWordEdit(m: mWord)) {
+        WordsUnitViewModel.create(m: mWord) {
             mWord.ID = $0
             self.vm.arrWords.append(mWord)
             self.tableView.reloadData()

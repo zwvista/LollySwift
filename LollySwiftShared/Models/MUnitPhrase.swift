@@ -58,13 +58,13 @@ class MUnitPhrase: NSObject, Mappable {
         RestApi.update(url: url, body: body, complete: complete)
     }
     
-    static func update(_ id: Int, m: MUnitPhraseEdit, complete: @escaping (String) -> Void) {
+    static func update(m: MUnitPhrase, complete: @escaping (String) -> Void) {
         // SQL: UPDATE UNITPHRASES SET TEXTBOOKID=?, UNIT=?, PART=?, SEQNUM=?, PHRASE=?, TRANSLATION=? WHERE ID=?
-        let url = "\(RestApi.url)UNITPHRASES/\(id)"
+        let url = "\(RestApi.url)UNITPHRASES/\(m.ID)"
         RestApi.update(url: url, body: m.toJSONString(prettyPrint: false)!, complete: complete)
     }
     
-    static func create(m: MUnitPhraseEdit, complete: @escaping (String) -> Void) {
+    static func create(m: MUnitPhrase, complete: @escaping (String) -> Void) {
         // SQL: INSERT INTO UNITPHRASES (TEXTBOOKID, UNIT, PART, SEQNUM, PHRASE, TRANSLATION) VALUES (?,?,?,?,?,?)
         let url = "\(RestApi.url)UNITPHRASES"
         RestApi.create(url: url, body: m.toJSONString(prettyPrint: false)!, complete: complete)
@@ -74,35 +74,5 @@ class MUnitPhrase: NSObject, Mappable {
         // SQL: DELETE UNITPHRASES WHERE ID=?
         let url = "\(RestApi.url)UNITPHRASES/\(id)"
         RestApi.delete(url: url, complete: complete)
-    }
-}
-
-class MUnitPhraseEdit: Mappable {
-    var TEXTBOOKID = 0
-    var UNIT = 0
-    var PART = 0
-    var SEQNUM = 0
-    var PHRASE = ""
-    var TRANSLATION: String?
-    
-    public init(m: MUnitPhrase) {
-        TEXTBOOKID = m.TEXTBOOKID
-        UNIT = m.UNIT
-        PART = m.PART
-        SEQNUM = m.SEQNUM
-        PHRASE = m.PHRASE
-        TRANSLATION = m.TRANSLATION
-    }
-    
-    required public init?(map: Map){
-    }
-    
-    public func mapping(map: Map) {
-        TEXTBOOKID <- map["TEXTBOOKID"]
-        UNIT <- map["UNIT"]
-        PART <- map["PART"]
-        SEQNUM <- map["SEQNUM"]
-        PHRASE <- map["PHRASE"]
-        TRANSLATION <- map["TRANSLATION"]
     }
 }

@@ -74,9 +74,9 @@ class PhrasesUnitDetailViewController: UITableViewController, UITextFieldDelegat
         
         if isAdd {
             vm.arrPhrases.append(mPhrase)
-            PhrasesUnitViewModel.create(m: MUnitPhraseEdit(m: mPhrase)) { self.mPhrase.ID = $0 }
+            PhrasesUnitViewModel.create(m: mPhrase) { self.mPhrase.ID = $0 }
         } else {
-            PhrasesUnitViewModel.update(mPhrase.ID, m: MUnitPhraseEdit(m: mPhrase)) {}
+            PhrasesUnitViewModel.update(m: mPhrase) {}
         }
     }
     

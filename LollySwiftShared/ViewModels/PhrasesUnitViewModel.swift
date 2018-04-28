@@ -32,14 +32,14 @@ class PhrasesUnitViewModel: NSObject {
         }
     }
     
-    static func update(_ id: Int, m: MUnitPhraseEdit, complete: @escaping () -> Void) {
-        MUnitPhrase.update(id, m: m) {
+    static func update(m: MUnitPhrase, complete: @escaping () -> Void) {
+        MUnitPhrase.update(m: m) {
             print($0)
             complete()
         }
     }
     
-    static func create(m: MUnitPhraseEdit, complete: @escaping (Int) -> Void) {
+    static func create(m: MUnitPhrase, complete: @escaping (Int) -> Void) {
         MUnitPhrase.create(m: m) {
             print($0)
             complete($0.toInt()!)

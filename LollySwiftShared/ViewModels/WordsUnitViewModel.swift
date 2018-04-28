@@ -42,14 +42,14 @@ class WordsUnitViewModel: NSObject {
         }
     }
 
-    static func update(_ id: Int, m: MUnitWordEdit, complete: @escaping () -> Void) {
-        MUnitWord.update(id, m: m) {
+    static func update(m: MUnitWord, complete: @escaping () -> Void) {
+        MUnitWord.update(m: m) {
             print($0)
             complete()
         }
     }
     
-    static func create(m: MUnitWordEdit, complete: @escaping (Int) -> Void) {
+    static func create(m: MUnitWord, complete: @escaping (Int) -> Void) {
         MUnitWord.create(m: m) {
             print($0)
             complete($0.toInt()!)
