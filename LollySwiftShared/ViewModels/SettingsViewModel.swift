@@ -18,7 +18,7 @@ class SettingsViewModel: NSObject {
     private var selectedUSUser: MUserSetting {
         return arrUserSettings[selectedUSUserIndex]
     }
-    var USLANDID: Int {
+    private var USLANGID: Int {
         get { return selectedUSUser.VALUE1!.toInt()! }
         set { selectedUSUser.VALUE1 = String(newValue) }
     }
@@ -126,24 +126,24 @@ class SettingsViewModel: NSObject {
             MUserSetting.getData(userid: self.userid) {
                 self.arrUserSettings = $0
                 self.selectedUSUserIndex = self.arrUserSettings.index { $0.KIND == 1 }!
-                self.setSelectedLangIndex(self.arrLanguages.index { $0.ID == self.USLANDID }!, complete: complete)
+                self.setSelectedLangIndex(self.arrLanguages.index { $0.ID == self.USLANGID }!, complete: complete)
             }
         }
     }
     
     func setSelectedLangIndex(_ langindex: Int, complete: @escaping () -> Void) {
         selectedLangIndex = langindex
-        USLANDID = selectedLang.ID
-        selectedUSLangIndex = arrUserSettings.index { $0.KIND == 2 && $0.ENTITYID == self.USLANDID }!
-        MDictOnline.getDataByLang(self.USLANDID) {
+        USLANGID = selectedLang.ID
+        selectedUSLangIndex = arrUserSettings.index { $0.KIND == 2 && $0.ENTITYID == self.USLANGID }!
+        MDictOnline.getDataByLang(self.USLANGID) {
             self.arrDictsOnline = $0
             self.selectedDictOnlineIndex = self.arrDictsOnline.index { $0.ID == self.USDICTONLINEID }!
-            MDictNote.getDataByLang(self.USLANDID) {
+            MDictNote.getDataByLang(self.USLANGID) {
                 self.arrDictsNote = $0
                 if !self.arrDictsNote.isEmpty {
                     self.selectedDictNoteIndex = self.arrDictsNote.index { $0.ID == self.USDICTNOTEID }!
                 }
-                MTextbook.getDataByLang(self.USLANDID) {
+                MTextbook.getDataByLang(self.USLANGID) {
                     self.arrTextbooks = $0
                     self.selectedTextbookIndex = self.arrTextbooks.index { $0.ID == self.USTEXTBOOKID }!
                     complete()
@@ -160,7 +160,7 @@ class SettingsViewModel: NSObject {
     }
     
     func updateLang(complete: @escaping () -> Void) {
-        MUserSetting.update(selectedUSUser.ID, langid: USLANDID) {
+        MUserSetting.update(selectedUSUser.ID, langid: USLANGID) {
             print($0)
             complete()
         }

@@ -138,12 +138,16 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper-macOS/AlamofireObjectMapper.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/EZSwiftExtensions-macOS/EZSwiftExtensions.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/ObjectMapper-macOS/ObjectMapper.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/RxCocoa-macOS/RxCocoa.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/RxSwift-macOS/RxSwift.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/Alamofire-macOS/Alamofire.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper-macOS/AlamofireObjectMapper.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/EZSwiftExtensions-macOS/EZSwiftExtensions.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/ObjectMapper-macOS/ObjectMapper.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/RxCocoa-macOS/RxCocoa.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/RxSwift-macOS/RxSwift.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait

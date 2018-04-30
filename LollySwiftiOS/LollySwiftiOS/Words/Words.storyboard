@@ -76,7 +76,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3sk-qJ-veV" userLabel="Wv Word Holder">
-                                <rect key="frame" x="-4" y="44" width="383" height="579"/>
+                                <rect key="frame" x="-4" y="44" width="383" height="535"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -107,7 +107,7 @@
         <!--Words in Unit-->
         <scene sceneID="obu-qQ-qZ9">
             <objects>
-                <tableViewController storyboardIdentifier="WordsUnit" id="vUM-44-gHw" customClass="WordsUnitViewController" customModule="LollySwiftiOS" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="WordsUnitViewController" id="vUM-44-gHw" customClass="WordsUnitViewController" customModule="LollySwiftiOS" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="u5J-Qs-UeK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -155,7 +155,13 @@
                             <outlet property="delegate" destination="vUM-44-gHw" id="nGE-cB-xO0"/>
                         </connections>
                     </tableView>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" title="Words in Unit" id="xZ5-om-3CN">
+                        <barButtonItem key="leftBarButtonItem" title="Left" image="simpleMenuButton.png" id="J7y-xA-Poe">
+                            <connections>
+                                <action selector="presentLeftMenuViewController:" destination="pJF-2o-6ag" id="tNa-rg-jTI"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem title="More" id="iAg-Rh-7JO">
                                 <connections>
@@ -169,6 +175,7 @@
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="btnEdit" destination="3qe-RI-Ddv" id="6Um-H9-2QH"/>
                         <segue destination="u2P-mb-ghZ" kind="presentation" identifier="edit" id="uuq-e1-2eL"/>
@@ -432,7 +439,7 @@
         <!--Words in Language-->
         <scene sceneID="6ev-7d-Zbi">
             <objects>
-                <tableViewController storyboardIdentifier="WordsLang" id="T0D-kT-TW1" customClass="WordsLangViewController" customModule="LollySwiftiOS" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="WordsLangViewController" id="T0D-kT-TW1" customClass="WordsLangViewController" customModule="LollySwiftiOS" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Fnt-s9-pEp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -461,13 +468,20 @@
                             <outlet property="delegate" destination="T0D-kT-TW1" id="pyM-PD-4zQ"/>
                         </connections>
                     </tableView>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" title="Words in Language" id="dzM-nk-Pbs">
+                        <barButtonItem key="leftBarButtonItem" title="Left" image="simpleMenuButton.png" id="WrQ-Bw-Rlu">
+                            <connections>
+                                <action selector="presentLeftMenuViewController:" destination="aie-NG-mri" id="yCb-rv-Xon"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="lFe-be-fqE">
                             <connections>
                                 <segue destination="3V8-CG-zzI" kind="presentation" identifier="add" id="Ol9-Ej-9ED"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <segue destination="3V8-CG-zzI" kind="presentation" identifier="edit" id="Q8T-Ex-R1C"/>
                         <segue destination="sKF-T7-DSr" kind="show" identifier="dict" id="pAu-9n-D91"/>
@@ -583,7 +597,7 @@
         <!--Words in Textbook-->
         <scene sceneID="dTE-tM-KUY">
             <objects>
-                <tableViewController storyboardIdentifier="WordsTextbook" id="w6P-dj-Clf" customClass="WordsTextbookViewController" customModule="LollySwiftiOS" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="WordsTextbookViewController" id="w6P-dj-Clf" customClass="WordsTextbookViewController" customModule="LollySwiftiOS" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="KHM-sm-Ycm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -612,7 +626,15 @@
                             <outlet property="delegate" destination="w6P-dj-Clf" id="D2E-yI-1bG"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Words in Textbook" id="AUf-3R-cQq"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Words in Textbook" id="AUf-3R-cQq">
+                        <barButtonItem key="leftBarButtonItem" title="Left" image="simpleMenuButton.png" id="0zQ-8H-vwE">
+                            <connections>
+                                <action selector="presentLeftMenuViewController:" destination="e37-kc-jTQ" id="crO-eY-9Pw"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <segue destination="sKF-T7-DSr" kind="show" identifier="dict" id="aiy-wK-I9x"/>
                     </connections>
@@ -670,9 +692,12 @@
             <point key="canvasLocation" x="2753" y="2405"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="simpleMenuButton.png" width="25" height="13"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Ol9-Ej-9ED"/>
-        <segue reference="Wcb-Wk-Ta2"/>
+        <segue reference="pAu-9n-D91"/>
         <segue reference="uuq-e1-2eL"/>
     </inferredMetricsTieBreakers>
 </document>

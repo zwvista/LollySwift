@@ -31,7 +31,7 @@
         <!--Phrases in Unit-->
         <scene sceneID="GQf-Ee-JMR">
             <objects>
-                <tableViewController storyboardIdentifier="PhrasesUnit" id="3pu-ME-qLQ" customClass="PhrasesUnitViewController" customModule="LollySwiftiOS" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="PhrasesUnitViewController" id="3pu-ME-qLQ" customClass="PhrasesUnitViewController" customModule="LollySwiftiOS" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="ciL-oC-GcK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -89,7 +89,13 @@
                             <outlet property="delegate" destination="3pu-ME-qLQ" id="Xd1-9k-ABM"/>
                         </connections>
                     </tableView>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" title="Phrases in Unit" id="Gkb-nc-tb1">
+                        <barButtonItem key="leftBarButtonItem" title="Left" image="simpleMenuButton.png" id="86C-VP-rtc">
+                            <connections>
+                                <action selector="presentLeftMenuViewController:" destination="9x2-2G-zga" id="BOG-Jr-zPr"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem systemItem="add" id="SdB-cz-0c1">
                                 <connections>
@@ -103,6 +109,7 @@
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="btnEdit" destination="6VZ-Bb-6gI" id="syf-Na-PvO"/>
                         <segue destination="Ufi-Fh-MeZ" kind="presentation" identifier="edit" id="CIw-HR-KYx"/>
@@ -364,7 +371,7 @@
         <!--Phrases in Language-->
         <scene sceneID="mEa-qG-Jij">
             <objects>
-                <tableViewController storyboardIdentifier="PhrasesLang" id="r0A-Yq-CxP" customClass="PhrasesLangViewController" customModule="LollySwiftiOS" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="PhrasesLangViewController" id="r0A-Yq-CxP" customClass="PhrasesLangViewController" customModule="LollySwiftiOS" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="wo9-YN-AyC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -400,13 +407,20 @@
                             <outlet property="delegate" destination="r0A-Yq-CxP" id="2CQ-8H-aYO"/>
                         </connections>
                     </tableView>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" title="Phrases in Language" id="2bo-BW-43Y">
+                        <barButtonItem key="leftBarButtonItem" title="Left" image="simpleMenuButton.png" id="0up-Wa-gcg">
+                            <connections>
+                                <action selector="presentLeftMenuViewController:" destination="sOs-02-0D7" id="nuR-Fa-HZY"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="O0N-BB-GFG">
                             <connections>
                                 <segue destination="6lO-S6-79a" kind="presentation" identifier="add" id="U9p-Rz-vsR"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <segue destination="6lO-S6-79a" kind="presentation" identifier="edit" id="p1U-Lg-pC8"/>
                     </connections>
@@ -549,7 +563,42 @@
             </objects>
             <point key="canvasLocation" x="5369" y="3869"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="tZk-Bo-sMR">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="O6p-y4-wUv" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="x9i-Gh-0Vt">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="3pu-ME-qLQ" kind="relationship" relationship="rootViewController" id="ewK-hG-CHj"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gl1-Jk-y2H" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2770" y="3141"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="4xY-Ft-JDY">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="4tZ-aP-eTN" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="n6T-ne-CR6">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="r0A-Yq-CxP" kind="relationship" relationship="rootViewController" id="SrR-7O-78t"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lDE-YI-1cW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2769" y="3869"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="simpleMenuButton.png" width="25" height="13"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="p1U-Lg-pC8"/>
         <segue reference="CIw-HR-KYx"/>

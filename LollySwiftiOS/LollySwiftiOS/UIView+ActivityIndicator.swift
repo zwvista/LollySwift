@@ -6,7 +6,7 @@
 //  Copyright © 2018年 趙 偉. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 // https://stackoverflow.com/questions/27960556/loading-an-overlay-when-running-long-tasks-in-ios/43570567
 // https://codereview.stackexchange.com/questions/150300/showing-activity-indicator-loading-image-while-processing-in-background

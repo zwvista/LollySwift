@@ -1,39 +1,115 @@
 //
 //  LeftMenuViewController.swift
-//  LollySwiftiOS
+//  AKSideMenuSimple
 //
-//  Created by zhaowei on 2014/11/18.
-//  Copyright (c) 2014年 趙 偉. All rights reserved.
+//  Created by Diogo Autilio on 6/7/16.
+//  Copyright © 2016 AnyKey Entertainment. All rights reserved.
 //
 
 import UIKit
 
-class LeftMenuViewController: AMSlideMenuLeftTableViewController {
-    var myTableView: UITableView!
+public class LeftMenuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    override func viewDidLoad() {
+    var tableView: UITableView?
+    var storyboardMain, storyboardWords, storyboardPhrases: UIStoryboard!
+
+    required public init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+
+    override public func viewDidLoad() {
         super.viewDidLoad()
-    
-        if (UIDevice.current.systemVersion as NSString).floatValue >= 7.0 && !UIApplication.shared.isStatusBarHidden {
-            tableView.contentInset = UIEdgeInsetsMake(20, 0, 0, 0)
-        }
+
+        let tableView = UITableView(frame: CGRect(x: 0, y: (self.view.frame.size.height - 54 * 7) / 2.0, width: self.view.frame.size.width, height: 54 * 7), style: .plain)
+        tableView.autoresizingMask = [.flexibleTopMargin, .flexibleBottomMargin, .flexibleWidth]
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.isOpaque = false
+        tableView.backgroundColor = .clear
+        tableView.backgroundView = nil
+        tableView.separatorStyle = .none
+        tableView.bounces = false
+
+        self.tableView = tableView
+        self.view.addSubview(self.tableView!)
         
-        if UIDevice.current.userInterfaceIdiom != .pad {
-            // The device is an iPhone or iPod touch.
-            setFixedStatusBar();
-        }
-    }
-    
-    func setFixedStatusBar() {
-        myTableView = tableView;
-        
-        view = UIView(frame: view.bounds)
-        view.backgroundColor = myTableView.backgroundColor
-        view.addSubview(myTableView)
-        
-        let statusBarView = UIView(frame: CGRect(x: 0, y: 0, width: max(view.frame.size.width, view.frame.size.height), height: 20));
-        statusBarView.backgroundColor = UIColor.clear;
-        view.addSubview(statusBarView);
+        storyboardMain = UIStoryboard(name: "Main", bundle: nil)
+        storyboardWords = UIStoryboard(name: "Words", bundle: nil)
+        storyboardPhrases = UIStoryboard(name: "Phrases", bundle: nil)
     }
 
+    // MARK: - <UITableViewDelegate>
+
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        switch indexPath.row {
+        case 0:
+            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboardMain.instantiateViewController(withIdentifier: "SearchViewController")), animated: true)
+            self.sideMenuViewController!.hideMenuViewController()
+
+        case 1:
+            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboardMain.instantiateViewController(withIdentifier: "SettingsViewController")), animated: true)
+            self.sideMenuViewController!.hideMenuViewController()
+
+        case 2:
+            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboardWords.instantiateViewController(withIdentifier: "WordsUnitViewController")), animated: true)
+            self.sideMenuViewController!.hideMenuViewController()
+            
+        case 3:
+            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboardWords.instantiateViewController(withIdentifier: "WordsTextbookViewController")), animated: true)
+            self.sideMenuViewController!.hideMenuViewController()
+            
+        case 4:
+            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboardWords.instantiateViewController(withIdentifier: "WordsLangViewController")), animated: true)
+            self.sideMenuViewController!.hideMenuViewController()
+            
+        case 5:
+            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboardPhrases.instantiateViewController(withIdentifier: "PhrasesUnitViewController")), animated: true)
+            self.sideMenuViewController!.hideMenuViewController()
+            
+            
+        case 6:
+            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboardPhrases.instantiateViewController(withIdentifier: "PhrasesLangViewController")), animated: true)
+            self.sideMenuViewController!.hideMenuViewController()
+            
+        default:
+            break
+        }
+    }
+
+    // MARK: - <UITableViewDataSource>
+
+    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 54
+    }
+
+    public func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection sectionIndex: Int) -> Int {
+        return 7
+    }
+
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cellIdentifier: String = "Cell"
+
+        var cell: UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: cellIdentifier)
+
+        if cell == nil {
+            cell = UITableViewCell(style: .default, reuseIdentifier: cellIdentifier)
+            cell!.backgroundColor = .clear
+            cell!.textLabel?.font = UIFont(name: "HelveticaNeue", size: 21)
+            cell!.textLabel?.textColor = .white
+            cell!.textLabel?.highlightedTextColor = .lightGray
+            cell!.selectedBackgroundView = UIView()
+        }
+
+        var titles = ["Search", "Settings", "Words in Unit", "Words in Textbook", "Words in Language", "Phrases in Unit", "Phrases in Language"]
+        var images = ["IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty"]
+        cell!.textLabel?.text = titles[indexPath.row]
+        cell!.imageView?.image = UIImage(named: images[indexPath.row])
+
+        return cell!
+    }
 }
