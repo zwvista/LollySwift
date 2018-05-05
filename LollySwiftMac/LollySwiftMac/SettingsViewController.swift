@@ -30,7 +30,7 @@ class SettingsViewController: NSViewController {
     @IBOutlet weak var pubUnitTo: NSPopUpButton!
     @IBOutlet weak var pubPartFrom: NSPopUpButton!
     @IBOutlet weak var pubPartTo: NSPopUpButton!
-    @IBOutlet weak var btnUnitTo: NSButton!
+    @IBOutlet weak var btnUnitPartTo: NSButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,8 +78,8 @@ class SettingsViewController: NSViewController {
         }
     }
     
-    @IBAction func unitToClicked(_ sender: AnyObject) {
-        let b = btnUnitTo.state == .on
+    @IBAction func btnUnitPartToClicked(_ sender: AnyObject) {
+        let b = btnUnitPartTo.state == .on
         pubUnitTo.isEnabled = b
         pubPartTo.isEnabled = b
         if sender !== self && !b {updateUnitPartTo()}
@@ -89,7 +89,7 @@ class SettingsViewController: NSViewController {
         guard vm.USUNITFROM != pubUnitFrom.indexOfSelectedItem + 1 else {return}
         vm.USUNITFROM = pubUnitFrom.indexOfSelectedItem + 1
         vm.updateUnitFrom {
-            if self.btnUnitTo.state == .off || self.vm.isInvalidUnitPart {self.updateUnitPartTo()}
+            if self.btnUnitPartTo.state == .off || self.vm.isInvalidUnitPart {self.updateUnitPartTo()}
         }
     }
     
@@ -105,7 +105,7 @@ class SettingsViewController: NSViewController {
         guard vm.USPARTFROM != pubPartFrom.indexOfSelectedItem + 1 else {return}
         vm.USPARTFROM = pubPartFrom.indexOfSelectedItem + 1
         vm.updatePartFrom {
-            if self.btnUnitTo.state == .off || self.vm.isInvalidUnitPart {self.updateUnitPartTo()}
+            if self.btnUnitPartTo.state == .off || self.vm.isInvalidUnitPart {self.updateUnitPartTo()}
         }
     }
     
@@ -144,8 +144,8 @@ class SettingsViewController: NSViewController {
         pubUnitTo.selectItem(at: vm.USUNITTO - 1)
         pubPartFrom.selectItem(at: vm.USPARTFROM - 1)
         pubPartTo.selectItem(at: vm.USPARTTO - 1)
-        btnUnitTo.state = vm.isSingleUnitPart ? .off : .on
-        unitToClicked(self)
+        btnUnitPartTo.state = vm.isSingleUnitPart ? .off : .on
+        btnUnitPartToClicked(self)
     }
     
     func updateUnitPartFrom() {

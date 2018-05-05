@@ -20,7 +20,7 @@ class SettingsViewController: UITableViewController {
     @IBOutlet weak var partToCell: UITableViewCell!
     @IBOutlet weak var lblUnitFrom: UILabel!
     @IBOutlet weak var lblUnitTo: UILabel!
-    @IBOutlet weak var swUnitTo: UISwitch!
+    @IBOutlet weak var swUnitPartTo: UISwitch!
     @IBOutlet weak var lblPartFrom: UILabel!
     @IBOutlet weak var lblPartTo: UILabel!
     @IBOutlet weak var lblUnitToTitle: UILabel!
@@ -90,7 +90,7 @@ class SettingsViewController: UITableViewController {
             self.vm.USUNITFROM = index + 1
             self.vm.updateUnitFrom {
                 self.lblUnitFrom.text = item
-                if !self.swUnitTo.isOn || self.vm.isInvalidUnitPart {self.updateUnitPartTo()}
+                if !self.swUnitPartTo.isOn || self.vm.isInvalidUnitPart {self.updateUnitPartTo()}
             }
         }
         
@@ -100,7 +100,7 @@ class SettingsViewController: UITableViewController {
             self.vm.USPARTFROM = index + 1
             self.vm.updatePartFrom {
                 self.lblPartFrom.text = item
-                if !self.swUnitTo.isOn || self.vm.isInvalidUnitPart {self.updateUnitPartTo()}
+                if !self.swUnitPartTo.isOn || self.vm.isInvalidUnitPart {self.updateUnitPartTo()}
             }
         }
         
@@ -141,9 +141,9 @@ class SettingsViewController: UITableViewController {
                 ddUnitFrom.show()
             case 1:
                 ddPartFrom.show()
-            case 3 where swUnitTo.isOn:
+            case 3 where swUnitPartTo.isOn:
                 ddUnitTo.show()
-            case 4 where swUnitTo.isOn:
+            case 4 where swUnitPartTo.isOn:
                 ddPartTo.show()
             default:
                 break
@@ -192,8 +192,8 @@ class SettingsViewController: UITableViewController {
         lblUnitTo.text = "\(vm.USUNITTO)"
         lblPartFrom.text = vm.arrParts[vm.USPARTFROM - 1]
         lblPartTo.text = vm.arrParts[vm.USPARTTO - 1]
-        swUnitTo.isOn = !vm.isSingleUnitPart
-        swUnitToValueChanged(self)
+        swUnitPartTo.isOn = !vm.isSingleUnitPart
+        swUnitPartToValueChanged(self)
         ddTextbook.dataSource = vm.arrTextbooks.map { $0.TEXTBOOKNAME }
         ddTextbook.selectRow(vm.selectedTextbookIndex)
         ddUnitFrom.dataSource = vm.arrUnits
@@ -236,8 +236,8 @@ class SettingsViewController: UITableViewController {
         }
     }
     
-    @IBAction func swUnitToValueChanged(_ sender: AnyObject) {
-        let b = swUnitTo.isOn
+    @IBAction func swUnitPartToValueChanged(_ sender: AnyObject) {
+        let b = swUnitPartTo.isOn
         lblUnitTo.isEnabled = b
         lblPartTo.isEnabled = b
         lblUnitToTitle.isEnabled = b
