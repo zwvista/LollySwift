@@ -14,31 +14,32 @@ import ObjectMapper
 import RxAlamofire
 import AlamofireObjectMapper
 
-public func requestObject<T: BaseMappable>(_ method: Alamofire.HTTPMethod, _ url: URLConvertible, parameters: [String: Any]? = nil, encoding: ParameterEncoding = URLEncoding.default, headers: [String: String]? = nil, queue: DispatchQueue? = nil, keyPath: String? = nil, mapToObject object: T? = nil, context: MapContext? = nil) -> Observable<(HTTPURLResponse, T)> {
-    return SessionManager.default.rx.requestObject(method, url, parameters: parameters, encoding: encoding, headers: headers, queue: queue, keyPath: keyPath, mapToObject: object, context: context)
+class RxAlamofireObjectMapper {
+    public static func requestObject<T: BaseMappable>(_ method: Alamofire.HTTPMethod, _ url: URLConvertible, parameters: [String: Any]? = nil, encoding: ParameterEncoding = URLEncoding.default, headers: [String: String]? = nil, queue: DispatchQueue? = nil, keyPath: String? = nil, mapToObject object: T? = nil, context: MapContext? = nil) -> Observable<(HTTPURLResponse, T)> {
+        return SessionManager.default.rx.requestObject(method, url, parameters: parameters, encoding: encoding, headers: headers, queue: queue, keyPath: keyPath, mapToObject: object, context: context)
+    }
+    public static func requestObject<T: ImmutableMappable>(_ method: Alamofire.HTTPMethod, _ url: URLConvertible, parameters: [String: Any]? = nil, encoding: ParameterEncoding = URLEncoding.default, headers: [String: String]? = nil, queue: DispatchQueue? = nil, keyPath: String? = nil, mapToObject object: T? = nil, context: MapContext? = nil) -> Observable<(HTTPURLResponse, T)> {
+        return SessionManager.default.rx.requestObject(method, url, parameters: parameters, encoding: encoding, headers: headers, queue: queue, keyPath: keyPath, mapToObject: object, context: context)
+    }
+    public static func requestArray<T: BaseMappable>(_ method: Alamofire.HTTPMethod, _ url: URLConvertible, parameters: [String: Any]? = nil, encoding: ParameterEncoding = URLEncoding.default, headers: [String: String]? = nil, queue: DispatchQueue? = nil, keyPath: String? = nil, context: MapContext? = nil) -> Observable<(HTTPURLResponse, [T])> {
+        return SessionManager.default.rx.requestArray(method, url, parameters: parameters, encoding: encoding, headers: headers, queue: queue, keyPath: keyPath, context: context)
+    }
+    public static func requestArray<T: ImmutableMappable>(_ method: Alamofire.HTTPMethod, _ url: URLConvertible, parameters: [String: Any]? = nil, encoding: ParameterEncoding = URLEncoding.default, headers: [String: String]? = nil, queue: DispatchQueue? = nil, keyPath: String? = nil, mapToObject object: T? = nil, context: MapContext? = nil) -> Observable<(HTTPURLResponse, [T])> {
+        return SessionManager.default.rx.requestArray(method, url, parameters: parameters, encoding: encoding, headers: headers, queue: queue, keyPath: keyPath, context: context)
+    }
+    public static func object<T: BaseMappable>(_ method: Alamofire.HTTPMethod, _ url: URLConvertible, parameters: [String: Any]? = nil, encoding: ParameterEncoding = URLEncoding.default, headers: [String: String]? = nil, queue: DispatchQueue? = nil, keyPath: String? = nil, mapToObject object: T? = nil, context: MapContext? = nil) -> Observable<T> {
+        return SessionManager.default.rx.object(method, url, parameters: parameters, encoding: encoding, headers: headers, queue: queue, keyPath: keyPath, mapToObject: object, context: context)
+    }
+    public static func object<T: ImmutableMappable>(_ method: Alamofire.HTTPMethod, _ url: URLConvertible, parameters: [String: Any]? = nil, encoding: ParameterEncoding = URLEncoding.default, headers: [String: String]? = nil, queue: DispatchQueue? = nil, keyPath: String? = nil, mapToObject object: T? = nil, context: MapContext? = nil) -> Observable<T> {
+        return SessionManager.default.rx.object(method, url, parameters: parameters, encoding: encoding, headers: headers, queue: queue, keyPath: keyPath, mapToObject: object, context: context)
+    }
+    public static func array<T: BaseMappable>(_ method: Alamofire.HTTPMethod, _ url: URLConvertible, parameters: [String: Any]? = nil, encoding: ParameterEncoding = URLEncoding.default, headers: [String: String]? = nil, queue: DispatchQueue? = nil, keyPath: String? = nil, context: MapContext? = nil) -> Observable<[T]> {
+        return SessionManager.default.rx.array(method, url, parameters: parameters, encoding: encoding, headers: headers, queue: queue, keyPath: keyPath, context: context)
+    }
+    public static func array<T: ImmutableMappable>(_ method: Alamofire.HTTPMethod, _ url: URLConvertible, parameters: [String: Any]? = nil, encoding: ParameterEncoding = URLEncoding.default, headers: [String: String]? = nil, queue: DispatchQueue? = nil, keyPath: String? = nil, mapToObject object: T? = nil, context: MapContext? = nil) -> Observable<[T]> {
+        return SessionManager.default.rx.array(method, url, parameters: parameters, encoding: encoding, headers: headers, queue: queue, keyPath: keyPath, context: context)
+    }
 }
-public func requestObject<T: ImmutableMappable>(_ method: Alamofire.HTTPMethod, _ url: URLConvertible, parameters: [String: Any]? = nil, encoding: ParameterEncoding = URLEncoding.default, headers: [String: String]? = nil, queue: DispatchQueue? = nil, keyPath: String? = nil, mapToObject object: T? = nil, context: MapContext? = nil) -> Observable<(HTTPURLResponse, T)> {
-    return SessionManager.default.rx.requestObject(method, url, parameters: parameters, encoding: encoding, headers: headers, queue: queue, keyPath: keyPath, mapToObject: object, context: context)
-}
-public func requestArray<T: BaseMappable>(_ method: Alamofire.HTTPMethod, _ url: URLConvertible, parameters: [String: Any]? = nil, encoding: ParameterEncoding = URLEncoding.default, headers: [String: String]? = nil, queue: DispatchQueue? = nil, keyPath: String? = nil, context: MapContext? = nil) -> Observable<(HTTPURLResponse, [T])> {
-    return SessionManager.default.rx.requestArray(method, url, parameters: parameters, encoding: encoding, headers: headers, queue: queue, keyPath: keyPath, context: context)
-}
-public func requestArray<T: ImmutableMappable>(_ method: Alamofire.HTTPMethod, _ url: URLConvertible, parameters: [String: Any]? = nil, encoding: ParameterEncoding = URLEncoding.default, headers: [String: String]? = nil, queue: DispatchQueue? = nil, keyPath: String? = nil, mapToObject object: T? = nil, context: MapContext? = nil) -> Observable<(HTTPURLResponse, [T])> {
-    return SessionManager.default.rx.requestArray(method, url, parameters: parameters, encoding: encoding, headers: headers, queue: queue, keyPath: keyPath, context: context)
-}
-public func object<T: BaseMappable>(_ method: Alamofire.HTTPMethod, _ url: URLConvertible, parameters: [String: Any]? = nil, encoding: ParameterEncoding = URLEncoding.default, headers: [String: String]? = nil, queue: DispatchQueue? = nil, keyPath: String? = nil, mapToObject object: T? = nil, context: MapContext? = nil) -> Observable<T> {
-    return SessionManager.default.rx.object(method, url, parameters: parameters, encoding: encoding, headers: headers, queue: queue, keyPath: keyPath, mapToObject: object, context: context)
-}
-public func object<T: ImmutableMappable>(_ method: Alamofire.HTTPMethod, _ url: URLConvertible, parameters: [String: Any]? = nil, encoding: ParameterEncoding = URLEncoding.default, headers: [String: String]? = nil, queue: DispatchQueue? = nil, keyPath: String? = nil, mapToObject object: T? = nil, context: MapContext? = nil) -> Observable<T> {
-    return SessionManager.default.rx.object(method, url, parameters: parameters, encoding: encoding, headers: headers, queue: queue, keyPath: keyPath, mapToObject: object, context: context)
-}
-public func array<T: BaseMappable>(_ method: Alamofire.HTTPMethod, _ url: URLConvertible, parameters: [String: Any]? = nil, encoding: ParameterEncoding = URLEncoding.default, headers: [String: String]? = nil, queue: DispatchQueue? = nil, keyPath: String? = nil, context: MapContext? = nil) -> Observable<[T]> {
-    return SessionManager.default.rx.array(method, url, parameters: parameters, encoding: encoding, headers: headers, queue: queue, keyPath: keyPath, context: context)
-}
-public func array<T: ImmutableMappable>(_ method: Alamofire.HTTPMethod, _ url: URLConvertible, parameters: [String: Any]? = nil, encoding: ParameterEncoding = URLEncoding.default, headers: [String: String]? = nil, queue: DispatchQueue? = nil, keyPath: String? = nil, mapToObject object: T? = nil, context: MapContext? = nil) -> Observable<[T]> {
-    return SessionManager.default.rx.array(method, url, parameters: parameters, encoding: encoding, headers: headers, queue: queue, keyPath: keyPath, context: context)
-}
-
 
 extension Reactive where Base: SessionManager {
     public func requestObject<T: BaseMappable>(_ method: Alamofire.HTTPMethod, _ url: URLConvertible, parameters: [String: Any]? = nil, encoding: ParameterEncoding = URLEncoding.default, headers: [String: String]? = nil, queue: DispatchQueue? = nil, keyPath: String? = nil, mapToObject object: T? = nil, context: MapContext? = nil) -> Observable<(HTTPURLResponse, T)> {

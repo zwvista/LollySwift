@@ -11,6 +11,7 @@ import Foundation
 import Alamofire
 import ObjectMapper
 import AlamofireObjectMapper
+import RxSwift
 
 // https://stackoverflow.com/questions/27855319/post-request-with-a-simple-string-in-body-with-alamofire
 extension String: ParameterEncoding {
@@ -33,6 +34,10 @@ class RestApi {
             let result = response.result.value!
             complete(result)
         }
+    }
+    static func getArray<T: Mappable>(url: String, keyPath: String, type: T.Type) -> Observable<[T]> {
+        print("[RestApi]GET:\(url)")
+        return RxAlamofireObjectMapper.array(.get, url, keyPath: keyPath)
     }
     
     static func update(url: String, body: String, complete: @escaping (String) -> Void) {

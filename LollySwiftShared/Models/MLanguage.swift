@@ -26,6 +26,7 @@ class MLanguage: NSObject, Mappable {
     static func getData(complete: @escaping ([MLanguage]) -> Void) {
         // SQL: SELECT * FROM LANGUAGES WHERE ID <> 0
         let url = "\(RestApi.url)LANGUAGES?transform=1&filter=ID,neq,0"
-        RestApi.getArray(url: url, keyPath: "LANGUAGES", complete: complete)
+        // RestApi.getArray(url: url, keyPath: "LANGUAGES", complete: complete)
+        RestApi.getArray(url: url, keyPath: "LANGUAGES", type: MLanguage.self).subscribe(onNext: complete)
     }
 }
