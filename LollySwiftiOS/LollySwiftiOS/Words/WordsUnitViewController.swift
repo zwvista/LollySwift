@@ -33,9 +33,9 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "WordCell", for: indexPath) as! WordsUnitCell
-        let m = arrWords[indexPath.row]
-        cell.lblWordNote!.text = m.WORDNOTE
-        cell.lblUnitPartSeqNum!.text = m.UNITPARTSEQNUM(arrParts: vmSettings.arrParts)
+        let item = arrWords[indexPath.row]
+        cell.lblWordNote!.text = item.WORDNOTE
+        cell.lblUnitPartSeqNum!.text = item.UNITPARTSEQNUM(arrParts: vmSettings.arrParts)
         return cell;
     }
     
@@ -62,10 +62,10 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
 
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let i = indexPath.row
-        let m = self.vm.arrWords[i]
+        let item = self.vm.arrWords[i]
         func delete() {
-            self.yesNoAction(title: "delete", message: "Do you really want to delete the word \"\(m.WORD)\"?", yesHandler: { (action) in
-                WordsUnitViewModel.delete(m.ID) {}
+            self.yesNoAction(title: "delete", message: "Do you really want to delete the word \"\(item.WORD)\"?", yesHandler: { (action) in
+                WordsUnitViewModel.delete(item.ID) {}
                 self.vm.arrWords.remove(at: i)
                 tableView.deleteRows(at: [indexPath], with: .fade)
                 self.reindex()
@@ -74,13 +74,13 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
             })
         }
         func edit() {
-            self.performSegue(withIdentifier: "edit", sender: m)
+            self.performSegue(withIdentifier: "edit", sender: item)
         }
         let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { _,_ in delete() }
         let editAction = UITableViewRowAction(style: .normal, title: "Edit") { _,_ in edit() }
         editAction.backgroundColor = .blue
         let moreAction = UITableViewRowAction(style: .normal, title: "More") { _,_ in
-            let alertController = UIAlertController(title: "Word", message: m.WORDNOTE, preferredStyle: .alert)
+            let alertController = UIAlertController(title: "Word", message: item.WORDNOTE, preferredStyle: .alert)
             let deleteAction2 = UIAlertAction(title: "Delete", style: .destructive) { _ in delete() }
             alertController.addAction(deleteAction2)
             let editAction2 = UIAlertAction(title: "Edit", style: .default) { _ in edit() }
@@ -93,9 +93,9 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
                 }
                 alertController.addAction(noteAction)
             }
-            let copyWordAction = UIAlertAction(title: "Copy Word", style: .default) { _ in UIPasteboard.general.string = m.WORD }
+            let copyWordAction = UIAlertAction(title: "Copy Word", style: .default) { _ in UIPasteboard.general.string = item.WORD }
             alertController.addAction(copyWordAction)
-            let googleWordAction = UIAlertAction(title: "Google Word", style: .default) { _ in UIApplication.shared.openURL(URL(string: "https://www.google.com/search?q=\(m.WORD)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!) }
+            let googleWordAction = UIAlertAction(title: "Google Word", style: .default) { _ in UIApplication.shared.openURL(URL(string: "https://www.google.com/search?q=\(item.WORD)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!) }
             alertController.addAction(googleWordAction)
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
             alertController.addAction(cancelAction)
@@ -106,11 +106,11 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let m = arrWords[indexPath.row]
+        let item = arrWords[indexPath.row]
         if tableView.isEditing {
-            performSegue(withIdentifier: "edit", sender: m)
+            performSegue(withIdentifier: "edit", sender: item)
         } else {
-            performSegue(withIdentifier: "dict", sender: m.WORD)
+            performSegue(withIdentifier: "dict", sender: item.WORD)
         }
     }
 

@@ -43,10 +43,10 @@ class MLangWord: NSObject, Mappable {
         RestApi.update(url: url, body: body, complete: complete)
     }
     
-    static func create(m: MLangWordEdit, complete: @escaping (String) -> Void) {
+    static func create(item: MLangWordEdit, complete: @escaping (String) -> Void) {
         // SQL: INSERT INTO LANGWORDS (LANGID, WORD) VALUES (?,?)
         let url = "\(RestApi.url)LANGWORDS"
-        RestApi.create(url: url, body: m.toJSONString(prettyPrint: false)!, complete: complete)
+        RestApi.create(url: url, body: item.toJSONString(prettyPrint: false)!, complete: complete)
     }
     
     static func delete(_ id: Int, complete: @escaping (String) -> Void) {
@@ -61,10 +61,10 @@ class MLangWordEdit: Mappable {
     var WORD = ""
     var LEVEL = 0
 
-    public init(m: MLangWord) {
-        LANGID = m.LANGID
-        WORD = m.WORD
-        LEVEL = m.LEVEL
+    public init(item: MLangWord) {
+        LANGID = item.LANGID
+        WORD = item.WORD
+        LEVEL = item.LEVEL
     }
     
     required public init?(map: Map){

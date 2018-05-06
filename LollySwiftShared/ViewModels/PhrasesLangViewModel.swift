@@ -15,26 +15,26 @@ class PhrasesLangViewModel: NSObject {
     
     public init(settings: SettingsViewModel, complete: @escaping () -> Void) {
         self.settings = settings
-        let m = settings.arrTextbooks[settings.selectedTextbookIndex]
+        let item = settings.arrTextbooks[settings.selectedTextbookIndex]
         super.init()
-        MLangPhrase.getDataByLang(m.LANGID) { [unowned self] in self.arrPhrases = $0; complete() }
+        MLangPhrase.getDataByLang(item.LANGID) { [unowned self] in self.arrPhrases = $0; complete() }
     }
     
     func filterPhrasesForSearchText(_ searchText: String, scope: String) {
-        arrPhrasesFiltered = arrPhrases.filter({ (m) -> Bool in
-            return (scope == "Phrase" ? m.PHRASE : m.TRANSLATION!).contains(searchText)
+        arrPhrasesFiltered = arrPhrases.filter({ (item) -> Bool in
+            return (scope == "Phrase" ? item.PHRASE : item.TRANSLATION!).contains(searchText)
         })
     }
     
-    static func update(_ id: Int, m: MLangPhraseEdit, complete: @escaping () -> Void) {
-        MLangPhrase.update(id, m: m) {
+    static func update(_ id: Int, item: MLangPhraseEdit, complete: @escaping () -> Void) {
+        MLangPhrase.update(id, item: item) {
             print($0)
             complete()
         }
     }
     
-    static func create(m: MLangPhraseEdit, complete: @escaping (Int) -> Void) {
-        MLangPhrase.create(m: m) {
+    static func create(item: MLangPhraseEdit, complete: @escaping (Int) -> Void) {
+        MLangPhrase.create(item: item) {
             print($0)
             complete($0.toInt()!)
         }

@@ -47,9 +47,9 @@ class WordsUnitViewController: NSViewController, LollyProtocol, NSTableViewDataS
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! NSTableCellView
-        let m = arrWords[row]
+        let item = arrWords[row]
         let columnName = tableColumn!.title
-        cell.textField?.stringValue = columnName == "PART" ? m.PARTSTR(arrParts: vm.vmSettings.arrParts) : String(describing: m.value(forKey: columnName) ?? "")
+        cell.textField?.stringValue = columnName == "PART" ? item.PARTSTR(arrParts: vm.vmSettings.arrParts) : String(describing: item.value(forKey: columnName) ?? "")
         return cell;
     }
     
@@ -105,12 +105,12 @@ class WordsUnitViewController: NSViewController, LollyProtocol, NSTableViewDataS
         let row = tableView.row(for: sender)
         let col = tableView.column(for: sender)
         let key = tableView.tableColumns[col].title
-        let m = arrWords[row]
-        let oldValue = String(describing: m.value(forKey: key)!)
+        let item = arrWords[row]
+        let oldValue = String(describing: item.value(forKey: key)!)
         let newValue = sender.stringValue
         guard oldValue != newValue else {return}
-        m.setValue(newValue, forKey: key)
-        WordsUnitViewModel.update(m: m) {}
+        item.setValue(newValue, forKey: key)
+        WordsUnitViewModel.update(item: item) {}
     }
     
     func searchWord(word: String) {
@@ -131,7 +131,7 @@ class WordsUnitViewController: NSViewController, LollyProtocol, NSTableViewDataS
         guard !newWord.isEmpty else {return}
         let mWord = vm.newUnitWord()
         mWord.WORD = newWord
-        WordsUnitViewModel.create(m: mWord) {
+        WordsUnitViewModel.create(item: mWord) {
             mWord.ID = $0
             self.vm.arrWords.append(mWord)
             self.tableView.reloadData()
@@ -196,15 +196,15 @@ class WordsUnitViewController: NSViewController, LollyProtocol, NSTableViewDataS
     }
     
     @IBAction func copyWord(_ sender: Any) {
-        let m = vm.arrWords[tableView.selectedRow]
+        let item = vm.arrWords[tableView.selectedRow]
         let pasteboard = NSPasteboard.general
         pasteboard.declareTypes([.string], owner: nil)
-        pasteboard.setString(m.WORD, forType: .string)
+        pasteboard.setString(item.WORD, forType: .string)
     }
     
     @IBAction func googleWord(_ sender: Any) {
-        let m = vm.arrWords[tableView.selectedRow]
-        NSWorkspace.shared.open([URL(string: "https://www.google.com/search?q=\(m.WORD)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!],
+        let item = vm.arrWords[tableView.selectedRow]
+        NSWorkspace.shared.open([URL(string: "https://www.google.com/search?q=\(item.WORD)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!],
                                 withAppBundleIdentifier:"com.apple.Safari",
                                 options: [],
                                 additionalEventParamDescriptor: nil,

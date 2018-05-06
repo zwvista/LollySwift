@@ -36,16 +36,16 @@ class MLangPhrase: NSObject, Mappable {
         RestApi.getArray(url: url, keyPath: "LANGPHRASES", complete: complete)
     }
     
-    static func update(_ id: Int, m: MLangPhraseEdit, complete: @escaping (String) -> Void) {
+    static func update(_ id: Int, item: MLangPhraseEdit, complete: @escaping (String) -> Void) {
         // SQL: UPDATE LANGPHRASES SET PHRASE=?, TRANSLATION=? WHERE ID=?
         let url = "\(RestApi.url)LANGPHRASES/\(id)"
-        RestApi.update(url: url, body: m.toJSONString(prettyPrint: false)!, complete: complete)
+        RestApi.update(url: url, body: item.toJSONString(prettyPrint: false)!, complete: complete)
     }
     
-    static func create(m: MLangPhraseEdit, complete: @escaping (String) -> Void) {
+    static func create(item: MLangPhraseEdit, complete: @escaping (String) -> Void) {
         // SQL: INSERT INTO LANGPHRASES (LANGID, PHRASE, TRANSLATION) VALUES (?,?,?)
         let url = "\(RestApi.url)LANGPHRASES"
-        RestApi.create(url: url, body: m.toJSONString(prettyPrint: false)!, complete: complete)
+        RestApi.create(url: url, body: item.toJSONString(prettyPrint: false)!, complete: complete)
     }
     
     static func delete(_ id: Int, complete: @escaping (String) -> Void) {
@@ -60,10 +60,10 @@ class MLangPhraseEdit: Mappable {
     var PHRASE = ""
     var TRANSLATION: String?
 
-    public init(m: MLangPhrase) {
-        LANGID = m.LANGID
-        PHRASE = m.PHRASE
-        TRANSLATION = m.TRANSLATION
+    public init(item: MLangPhrase) {
+        LANGID = item.LANGID
+        PHRASE = item.PHRASE
+        TRANSLATION = item.TRANSLATION
     }
     
     required public init?(map: Map){

@@ -152,17 +152,17 @@ class SettingsViewController: UITableViewController {
     }
     
     func updateLang() {
-        let m = vm.selectedLang
-        langCell.textLabel!.text = m.LANGNAME
+        let item = vm.selectedLang
+        langCell.textLabel!.text = item.LANGNAME
         updateDictOnline()
         updateDictNote()
         updateTextbook()
     }
     
     func updateDictOnline() {
-        let m = vm.selectedDictOnline
-        dictOnlineCell.textLabel!.text = m.DICTNAME
-        dictOnlineCell.detailTextLabel!.text = m.URL
+        let item = vm.selectedDictOnline
+        dictOnlineCell.textLabel!.text = item.DICTNAME
+        dictOnlineCell.detailTextLabel!.text = item.URL
         ddDictOnline.dataSource = vm.arrDictsOnline.map { $0.DICTNAME! }
         ddDictOnline.selectRow(vm.selectedDictOnlineIndex)
     }
@@ -175,9 +175,9 @@ class SettingsViewController: UITableViewController {
             dictNoteCell.detailTextLabel!.text = " "
             ddDictNote.dataSource = []
         } else {
-            let m = vm.selectedDictNote!
-            dictNoteCell.textLabel!.text = m.DICTNAME!
-            dictNoteCell.detailTextLabel!.text = m.URL!
+            let item = vm.selectedDictNote!
+            dictNoteCell.textLabel!.text = item.DICTNAME!
+            dictNoteCell.detailTextLabel!.text = item.URL!
             dictNoteCell.setNeedsDisplay()
             ddDictNote.dataSource = vm.arrDictsNote.map { $0.DICTNAME! }
             ddDictNote.selectRow(vm.selectedDictNoteIndex)
@@ -185,9 +185,9 @@ class SettingsViewController: UITableViewController {
     }
 
     func updateTextbook() {
-        let m = vm.selectedTextbook
-        textbookCell.textLabel!.text = m.TEXTBOOKNAME
-        textbookCell.detailTextLabel!.text = "\(m.UNITS) Units"
+        let item = vm.selectedTextbook
+        textbookCell.textLabel!.text = item.TEXTBOOKNAME
+        textbookCell.detailTextLabel!.text = "\(item.UNITS) Units"
         lblUnitFrom.text = "\(vm.USUNITFROM)"
         lblUnitTo.text = "\(vm.USUNITTO)"
         lblPartFrom.text = vm.arrParts[vm.USPARTFROM - 1]

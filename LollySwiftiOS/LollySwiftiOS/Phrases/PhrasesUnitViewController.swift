@@ -32,10 +32,10 @@ class PhrasesUnitViewController: PhrasesBaseViewController, UISearchBarDelegate,
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PhraseCell", for: indexPath) as! PhrasesUnitCell
-        let m = arrPhrases[indexPath.row]
-        cell.lblUnitPartSeqNum!.text = m.UNITPARTSEQNUM(arrParts: vmSettings.arrParts)
-        cell.lblPhrase!.text = m.PHRASE
-        cell.lblTranslation!.text = m.TRANSLATION
+        let item = arrPhrases[indexPath.row]
+        cell.lblUnitPartSeqNum!.text = item.UNITPARTSEQNUM(arrParts: vmSettings.arrParts)
+        cell.lblPhrase!.text = item.PHRASE
+        cell.lblTranslation!.text = item.TRANSLATION
         return cell;
     }
     
@@ -48,9 +48,9 @@ class PhrasesUnitViewController: PhrasesBaseViewController, UISearchBarDelegate,
     }
     
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        let m = vm.arrPhrases[(sourceIndexPath as NSIndexPath).row]
+        let item = vm.arrPhrases[(sourceIndexPath as NSIndexPath).row]
         vm.arrPhrases.remove(at: (sourceIndexPath as NSIndexPath).row)
-        vm.arrPhrases.insert(m, at: (destinationIndexPath as NSIndexPath).row)
+        vm.arrPhrases.insert(item, at: (destinationIndexPath as NSIndexPath).row)
         tableView.beginUpdates()
         vm.reindex {
             tableView.reloadRows(at: [IndexPath(row: $0, section: 0)], with: .fade)
@@ -61,9 +61,9 @@ class PhrasesUnitViewController: PhrasesBaseViewController, UISearchBarDelegate,
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
             let i = indexPath.row
-            let m = self.vm.arrPhrases[i]
-            self.yesNoAction(title: "delete", message: "Do you really want to delete the phrase \"\(m.PHRASE)\"?", yesHandler: { (action) in
-                PhrasesUnitViewModel.delete(m.ID) {}
+            let item = self.vm.arrPhrases[i]
+            self.yesNoAction(title: "delete", message: "Do you really want to delete the phrase \"\(item.PHRASE)\"?", yesHandler: { (action) in
+                PhrasesUnitViewModel.delete(item.ID) {}
                 self.vm.arrPhrases.remove(at: i)
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }, noHandler: { (action) in
@@ -72,8 +72,8 @@ class PhrasesUnitViewController: PhrasesBaseViewController, UISearchBarDelegate,
             self.tableView.reloadRows(at: [indexPath], with: .fade)
         }
         let editAction = UITableViewRowAction(style: .normal, title: "Edit") { (action, indexPath) in
-            let m = self.arrPhrases[indexPath.row]
-            self.performSegue(withIdentifier: "edit", sender: m)
+            let item = self.arrPhrases[indexPath.row]
+            self.performSegue(withIdentifier: "edit", sender: item)
         }
         editAction.backgroundColor = .blue
         
@@ -81,8 +81,8 @@ class PhrasesUnitViewController: PhrasesBaseViewController, UISearchBarDelegate,
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let m = arrPhrases[indexPath.row]
-        performSegue(withIdentifier: "edit", sender: m)
+        let item = arrPhrases[indexPath.row]
+        performSegue(withIdentifier: "edit", sender: item)
     }
 
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {

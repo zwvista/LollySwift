@@ -42,15 +42,15 @@ class WordsUnitViewModel: NSObject {
         }
     }
 
-    static func update(m: MUnitWord, complete: @escaping () -> Void) {
-        MUnitWord.update(m: m) {
+    static func update(item: MUnitWord, complete: @escaping () -> Void) {
+        MUnitWord.update(item: item) {
             print($0)
             complete()
         }
     }
     
-    static func create(m: MUnitWord, complete: @escaping (Int) -> Void) {
-        MUnitWord.create(m: m) {
+    static func create(item: MUnitWord, complete: @escaping (Int) -> Void) {
+        MUnitWord.create(item: item) {
             print($0)
             complete($0.toInt()!)
         }
@@ -65,38 +65,38 @@ class WordsUnitViewModel: NSObject {
 
     func reindex(complete: @escaping (Int) -> Void) {
         for i in 1...arrWords.count {
-            let m = arrWords[i - 1]
-            guard m.SEQNUM != i else {continue}
-            m.SEQNUM = i
-            WordsUnitViewModel.update(m.ID, seqnum: m.SEQNUM) {
+            let item = arrWords[i - 1]
+            guard item.SEQNUM != i else {continue}
+            item.SEQNUM = i
+            WordsUnitViewModel.update(item.ID, seqnum: item.SEQNUM) {
                 complete(i - 1)
             }
         }
     }
     
     func newUnitWord() -> MUnitWord {
-        let o = MUnitWord()
-        o.TEXTBOOKID = vmSettings.USTEXTBOOKID
+        let item = MUnitWord()
+        item.TEXTBOOKID = vmSettings.USTEXTBOOKID
         let maxElem = arrWords.max{ ($0.UNIT, $0.PART, $0.SEQNUM) < ($1.UNIT, $1.PART, $1.SEQNUM) }
-        o.UNIT = maxElem?.UNIT ?? vmSettings.USUNITTO
-        o.PART = maxElem?.PART ?? vmSettings.USPARTTO
-        o.SEQNUM = (maxElem?.SEQNUM ?? 0) + 1
-        return o
+        item.UNIT = maxElem?.UNIT ?? vmSettings.USUNITTO
+        item.PART = maxElem?.PART ?? vmSettings.USPARTTO
+        item.SEQNUM = (maxElem?.SEQNUM ?? 0) + 1
+        return item
     }
     
     func moveWord(at oldIndex: Int, to newIndex: Int) {
-        let m = arrWords.remove(at: oldIndex)
-        arrWords.insert(m, at: newIndex)
+        let item = arrWords.remove(at: oldIndex)
+        arrWords.insert(item, at: newIndex)
     }
 
     func getNote(index: Int, complete: @escaping () -> Void) {
         guard let mDictNote = mDictNote else {return}
-        let m = arrWords[index]
-        let url = mDictNote.urlString(m.WORD)
+        let item = arrWords[index]
+        let url = mDictNote.urlString(item.WORD)
         RestApi.getHtml(url: url) { html in
 //            print(html)
-            m.NOTE = mDictNote.htmlNote(html)
-            WordsUnitViewModel.update(m.ID, note: m.NOTE!) {
+            item.NOTE = mDictNote.htmlNote(html)
+            WordsUnitViewModel.update(item.ID, note: item.NOTE!) {
                 complete()
             }
         }

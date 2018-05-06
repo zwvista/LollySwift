@@ -31,17 +31,17 @@ class WordsLangViewController: WordsBaseViewController, UISearchBarDelegate, UIS
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "WordCell", for: indexPath)
-        let m = arrWords[indexPath.row]
-        cell.textLabel!.text = m.WORD
+        let item = arrWords[indexPath.row]
+        cell.textLabel!.text = item.WORD
         return cell;
     }
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
             let i = indexPath.row
-            let m = self.vm.arrWords[i]
-            self.yesNoAction(title: "delete", message: "Do you really want to delete the word \"\(m.WORD)\"?", yesHandler: { (action) in
-                WordsLangViewModel.delete(m.ID) {}
+            let item = self.vm.arrWords[i]
+            self.yesNoAction(title: "delete", message: "Do you really want to delete the word \"\(item.WORD)\"?", yesHandler: { (action) in
+                WordsLangViewModel.delete(item.ID) {}
                 self.vm.arrWords.remove(at: i)
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }, noHandler: { (action) in
@@ -49,8 +49,8 @@ class WordsLangViewController: WordsBaseViewController, UISearchBarDelegate, UIS
             })
         }
         let editAction = UITableViewRowAction(style: .normal, title: "Edit") { (action, indexPath) in
-            let m = self.arrWords[indexPath.row]
-            self.performSegue(withIdentifier: "edit", sender: m)
+            let item = self.arrWords[indexPath.row]
+            self.performSegue(withIdentifier: "edit", sender: item)
         }
         editAction.backgroundColor = .blue
         
@@ -58,8 +58,8 @@ class WordsLangViewController: WordsBaseViewController, UISearchBarDelegate, UIS
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let m = arrWords[indexPath.row]
-        performSegue(withIdentifier: "dict", sender: m.WORD)
+        let item = arrWords[indexPath.row]
+        performSegue(withIdentifier: "dict", sender: item.WORD)
     }
     
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {

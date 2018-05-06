@@ -31,14 +31,14 @@ class WordsTextbookViewController: WordsBaseViewController, UISearchBarDelegate,
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "WordCell", for: indexPath)
-        let m = arrWords[indexPath.row]
-        cell.textLabel!.text = m.description
+        let item = arrWords[indexPath.row]
+        cell.textLabel!.text = item.description
         return cell;
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let m = arrWords[indexPath.row]
-        performSegue(withIdentifier: "dict", sender: m.WORD)
+        let item = arrWords[indexPath.row]
+        performSegue(withIdentifier: "dict", sender: item.WORD)
     }
     
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {

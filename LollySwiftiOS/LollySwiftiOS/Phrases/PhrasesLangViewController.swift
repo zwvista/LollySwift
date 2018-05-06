@@ -31,18 +31,18 @@ class PhrasesLangViewController: PhrasesBaseViewController, UISearchBarDelegate,
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PhraseCell", for: indexPath)
-        let m = arrPhrases[indexPath.row]
-        cell.textLabel!.text = m.PHRASE
-        cell.detailTextLabel?.text = m.TRANSLATION
+        let item = arrPhrases[indexPath.row]
+        cell.textLabel!.text = item.PHRASE
+        cell.detailTextLabel?.text = item.TRANSLATION
         return cell;
     }
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
             let i = indexPath.row
-            let m = self.vm.arrPhrases[i]
-            self.yesNoAction(title: "delete", message: "Do you really want to delete the phrase \"\(m.PHRASE)\"?", yesHandler: { (action) in
-                PhrasesLangViewModel.delete(m.ID) {}
+            let item = self.vm.arrPhrases[i]
+            self.yesNoAction(title: "delete", message: "Do you really want to delete the phrase \"\(item.PHRASE)\"?", yesHandler: { (action) in
+                PhrasesLangViewModel.delete(item.ID) {}
                 self.vm.arrPhrases.remove(at: i)
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }, noHandler: { (action) in
@@ -50,8 +50,8 @@ class PhrasesLangViewController: PhrasesBaseViewController, UISearchBarDelegate,
             })
         }
         let editAction = UITableViewRowAction(style: .normal, title: "Edit") { (action, indexPath) in
-            let m = self.arrPhrases[indexPath.row]
-            self.performSegue(withIdentifier: "edit", sender: m)
+            let item = self.arrPhrases[indexPath.row]
+            self.performSegue(withIdentifier: "edit", sender: item)
         }
         editAction.backgroundColor = .blue
         
@@ -59,8 +59,8 @@ class PhrasesLangViewController: PhrasesBaseViewController, UISearchBarDelegate,
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let m = arrPhrases[indexPath.row]
-        performSegue(withIdentifier: "dict", sender: m)
+        let item = arrPhrases[indexPath.row]
+        performSegue(withIdentifier: "dict", sender: item)
     }
 
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {

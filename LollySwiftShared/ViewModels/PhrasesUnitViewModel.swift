@@ -20,8 +20,8 @@ class PhrasesUnitViewModel: NSObject {
     }
     
     func filterPhrasesForSearchText(_ searchText: String, scope: String) {
-        arrPhrasesFiltered = arrPhrases.filter { m in
-            (scope == "Phrase" ? m.PHRASE : m.TRANSLATION!).contains(searchText)
+        arrPhrasesFiltered = arrPhrases.filter { item in
+            (scope == "Phrase" ? item.PHRASE : item.TRANSLATION!).contains(searchText)
         }
     }
     
@@ -32,15 +32,15 @@ class PhrasesUnitViewModel: NSObject {
         }
     }
     
-    static func update(m: MUnitPhrase, complete: @escaping () -> Void) {
-        MUnitPhrase.update(m: m) {
+    static func update(item: MUnitPhrase, complete: @escaping () -> Void) {
+        MUnitPhrase.update(item: item) {
             print($0)
             complete()
         }
     }
     
-    static func create(m: MUnitPhrase, complete: @escaping (Int) -> Void) {
-        MUnitPhrase.create(m: m) {
+    static func create(item: MUnitPhrase, complete: @escaping (Int) -> Void) {
+        MUnitPhrase.create(item: item) {
             print($0)
             complete($0.toInt()!)
         }
@@ -55,23 +55,23 @@ class PhrasesUnitViewModel: NSObject {
     
     func reindex(complete: @escaping (Int) -> Void) {
         for i in 1...arrPhrases.count {
-            let m = arrPhrases[i - 1]
-            guard m.SEQNUM != i else {continue}
-            m.SEQNUM = i
-            PhrasesUnitViewModel.update(m.ID, seqnum: m.SEQNUM) {
+            let item = arrPhrases[i - 1]
+            guard item.SEQNUM != i else {continue}
+            item.SEQNUM = i
+            PhrasesUnitViewModel.update(item.ID, seqnum: item.SEQNUM) {
                 complete(i - 1)
             }
         }
     }
 
     func newUnitPhrase() -> MUnitPhrase {
-        let o = MUnitPhrase()
-        o.TEXTBOOKID = vmSettings.USTEXTBOOKID
+        let item = MUnitPhrase()
+        item.TEXTBOOKID = vmSettings.USTEXTBOOKID
         let maxElem = arrPhrases.max{ ($0.UNIT, $0.PART, $0.SEQNUM) < ($1.UNIT, $1.PART, $1.SEQNUM) }
-        o.UNIT = maxElem?.UNIT ?? vmSettings.USUNITTO
-        o.PART = maxElem?.PART ?? vmSettings.USPARTTO
-        o.SEQNUM = (maxElem?.SEQNUM ?? 0) + 1
-        return o
+        item.UNIT = maxElem?.UNIT ?? vmSettings.USUNITTO
+        item.PART = maxElem?.PART ?? vmSettings.USPARTTO
+        item.SEQNUM = (maxElem?.SEQNUM ?? 0) + 1
+        return item
     }
 
 }

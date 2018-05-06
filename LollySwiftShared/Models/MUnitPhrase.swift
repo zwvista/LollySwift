@@ -58,16 +58,16 @@ class MUnitPhrase: NSObject, Mappable {
         RestApi.update(url: url, body: body, complete: complete)
     }
     
-    static func update(m: MUnitPhrase, complete: @escaping (String) -> Void) {
+    static func update(item: MUnitPhrase, complete: @escaping (String) -> Void) {
         // SQL: UPDATE UNITPHRASES SET TEXTBOOKID=?, UNIT=?, PART=?, SEQNUM=?, PHRASE=?, TRANSLATION=? WHERE ID=?
-        let url = "\(RestApi.url)UNITPHRASES/\(m.ID)"
-        RestApi.update(url: url, body: m.toJSONString(prettyPrint: false)!, complete: complete)
+        let url = "\(RestApi.url)UNITPHRASES/\(item.ID)"
+        RestApi.update(url: url, body: item.toJSONString(prettyPrint: false)!, complete: complete)
     }
     
-    static func create(m: MUnitPhrase, complete: @escaping (String) -> Void) {
+    static func create(item: MUnitPhrase, complete: @escaping (String) -> Void) {
         // SQL: INSERT INTO UNITPHRASES (TEXTBOOKID, UNIT, PART, SEQNUM, PHRASE, TRANSLATION) VALUES (?,?,?,?,?,?)
         let url = "\(RestApi.url)UNITPHRASES"
-        RestApi.create(url: url, body: m.toJSONString(prettyPrint: false)!, complete: complete)
+        RestApi.create(url: url, body: item.toJSONString(prettyPrint: false)!, complete: complete)
     }
     
     static func delete(_ id: Int, complete: @escaping (String) -> Void) {

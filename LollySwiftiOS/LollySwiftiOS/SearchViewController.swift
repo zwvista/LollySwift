@@ -33,8 +33,8 @@ class SearchViewController: UIViewController, UIWebViewDelegate, UISearchBarDele
         wvDictOfflineHolder.isHidden = true
         
         word = sbword.text!;
-        let m = vmSettings.selectedDictOnline
-        let url = m.urlString(word)
+        let item = vmSettings.selectedDictOnline
+        let url = item.urlString(word)
         webViewFinished = false
         wvDictOnline.load(URLRequest(url: URL(string: url)!))
         sbword.resignFirstResponder()
@@ -48,12 +48,12 @@ class SearchViewController: UIViewController, UIWebViewDelegate, UISearchBarDele
         guard webView === wvDictOnline && webView.stringByEvaluatingJavaScript(from: "document.readyState") == "complete" && !webViewFinished else {return}
         
         webViewFinished = true
-        let m = vmSettings.selectedDictOnline
-        guard m.DICTTYPENAME == "OFFLINE-ONLINE" else {return}
+        let item = vmSettings.selectedDictOnline
+        guard item.DICTTYPENAME == "OFFLINE-ONLINE" else {return}
         
         let data = URLCache.shared.cachedResponse(for: webView.request!)!.data;
         let html = NSString(data: data, encoding: String.Encoding.utf8.rawValue)!
-        let str = m.htmlString(html as String, word: word)
+        let str = item.htmlString(html as String, word: word)
         
         wvDictOffline.loadHTMLString(str, baseURL: URL(string: "/Users/bestskip/Documents/zw/"));
         wvDictOnlineHolder.isHidden = true

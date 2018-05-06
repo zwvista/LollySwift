@@ -45,8 +45,8 @@ class SearchViewController: NSViewController, LollyProtocol, NSTableViewDataSour
         wvDictOnline.isHidden = false
         wvDictOffline.isHidden = true
         
-        let m = vmSettings.selectedDictOnline
-        let url = m.urlString(word)
+        let item = vmSettings.selectedDictOnline
+        let url = item.urlString(word)
         wvDictOnline.load(URLRequest(url: URL(string: url)!))
     }
     
@@ -64,13 +64,13 @@ class SearchViewController: NSViewController, LollyProtocol, NSTableViewDataSour
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         guard webView === wvDictOnline else {return}
-        let m = vmSettings.selectedDictOnline
-        guard m.DICTTYPENAME == "OFFLINE-ONLINE" else {return}
+        let item = vmSettings.selectedDictOnline
+        guard item.DICTTYPENAME == "OFFLINE-ONLINE" else {return}
         // https://stackoverflow.com/questions/34751860/get-html-from-wkwebview-in-swift
         webView.evaluateJavaScript("document.documentElement.outerHTML.toString()") { (html: Any?, error: Error?) in
             let html = html as! String
 //            print(html)
-            let str = m.htmlString(html, word: self.word)
+            let str = item.htmlString(html, word: self.word)
             self.wvDictOffline.loadHTMLString(str, baseURL: nil)
             self.wvDictOnline.isHidden = true
             self.wvDictOffline.isHidden = false

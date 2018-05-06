@@ -15,9 +15,9 @@ class WordsLangViewModel: NSObject {
     
     public init(settings: SettingsViewModel, complete: @escaping () -> Void) {
         self.settings = settings
-        let m = settings.arrTextbooks[settings.selectedTextbookIndex]
+        let item = settings.arrTextbooks[settings.selectedTextbookIndex]
         super.init()
-        MLangWord.getDataByLang(m.LANGID) {[unowned self] in self.arrWords = $0; complete() }
+        MLangWord.getDataByLang(item.LANGID) {[unowned self] in self.arrWords = $0; complete() }
     }
     
     func filterWordsForSearchText(_ searchText: String, scope: String) {
@@ -31,8 +31,8 @@ class WordsLangViewModel: NSObject {
         }
     }
     
-    static func create(m: MLangWordEdit, complete: @escaping (Int) -> Void) {
-        MLangWord.create(m: m) {
+    static func create(item: MLangWordEdit, complete: @escaping (Int) -> Void) {
+        MLangWord.create(item: item) {
             print($0)
             complete($0.toInt()!)
         }
