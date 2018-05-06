@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		41624B18047DBD62E1485CDE /* Pods_LollySwiftMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F369FEA5447EADCC97C83AE1 /* Pods_LollySwiftMac.framework */; };
+		8C0748E9209EE15D0006BD1B /* RxAlamofireObjectMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0748E8209EE15C0006BD1B /* RxAlamofireObjectMapper.swift */; };
 		8C0ACB581D4391FB00EC6740 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0ACB571D4391FB00EC6740 /* SettingsViewController.swift */; };
 		8C1C4F281D31F88800CF5D88 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1C4F271D31F88800CF5D88 /* AppDelegate.swift */; };
 		8C1C4F2A1D31F88800CF5D88 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1C4F291D31F88800CF5D88 /* SearchViewController.swift */; };
@@ -73,6 +74,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8C0748E8209EE15C0006BD1B /* RxAlamofireObjectMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxAlamofireObjectMapper.swift; sourceTree = "<group>"; };
 		8C0ACB571D4391FB00EC6740 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		8C1C4F241D31F88800CF5D88 /* LollySwiftMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LollySwiftMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C1C4F271D31F88800CF5D88 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 		8C2CB5A0207885140083DDE2 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				8C0748E8209EE15C0006BD1B /* RxAlamofireObjectMapper.swift */,
 				8C2CB5A2207885140083DDE2 /* HtmlApi.swift */,
 				8C2CB5A1207885140083DDE2 /* RestApi.swift */,
 			);
@@ -463,6 +466,7 @@
 				"${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper-macOS/AlamofireObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/EZSwiftExtensions-macOS/EZSwiftExtensions.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper-macOS/ObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/RxAlamofire-macOS/RxAlamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa-macOS/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift-macOS/RxSwift.framework",
 			);
@@ -472,6 +476,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EZSwiftExtensions.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAlamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 			);
@@ -505,6 +510,7 @@
 				8C2CB5C9207896EC0083DDE2 /* WordsUnitDetailViewController.swift in Sources */,
 				8C2CB5BD207885140083DDE2 /* MUnitPhrase.swift in Sources */,
 				8CAF910A20833C4F00933837 /* SearchViewModel.swift in Sources */,
+				8C0748E9209EE15D0006BD1B /* RxAlamofireObjectMapper.swift in Sources */,
 				8CD1D929206227800071687B /* LollyWindow.swift in Sources */,
 				8C2CB5B1207885140083DDE2 /* PhrasesLangViewModel.swift in Sources */,
 				8C2CB5BC207885140083DDE2 /* MTextbookWord.swift in Sources */,
