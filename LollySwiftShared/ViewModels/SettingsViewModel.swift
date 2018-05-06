@@ -8,6 +8,7 @@
 
 import Foundation
 import EZSwiftExtensions
+import RxSwift
 
 class SettingsViewModel: NSObject {
     
@@ -120,36 +121,33 @@ class SettingsViewModel: NSObject {
     @objc
     var arrParts = [String]()
     
-    func getData(complete: @escaping () -> Void) {
-        MLanguage.getData {
-            self.arrLanguages = $0
-            MUserSetting.getData(userid: self.userid) {
-                self.arrUserSettings = $0
+    func getData() -> Observable<()> {
+        return Observable.zip(MLanguage.getData(), MUserSetting.getData(userid: self.userid))
+            .concatMap { result -> Observable<()> in
+                self.arrLanguages = result.0
+                self.arrUserSettings = result.1
                 self.selectedUSUserIndex = self.arrUserSettings.index { $0.KIND == 1 }!
-                self.setSelectedLangIndex(self.arrLanguages.index { $0.ID == self.USLANGID }!, complete: complete)
+                return self.setSelectedLangIndex(self.arrLanguages.index { $0.ID == self.USLANGID }!)
             }
-        }
     }
     
-    func setSelectedLangIndex(_ langindex: Int, complete: @escaping () -> Void) {
+    func setSelectedLangIndex(_ langindex: Int) -> Observable<()> {
         selectedLangIndex = langindex
         USLANGID = selectedLang.ID
         selectedUSLangIndex = arrUserSettings.index { $0.KIND == 2 && $0.ENTITYID == self.USLANGID }!
-        MDictOnline.getDataByLang(self.USLANGID) {
-            self.arrDictsOnline = $0
-            self.selectedDictOnlineIndex = self.arrDictsOnline.index { $0.ID == self.USDICTONLINEID }!
-            MDictNote.getDataByLang(self.USLANGID) {
-                self.arrDictsNote = $0
+        return Observable.zip(MDictOnline.getDataByLang(self.USLANGID),
+                              MDictNote.getDataByLang(self.USLANGID),
+                              MTextbook.getDataByLang(self.USLANGID))
+            .map {
+                self.arrDictsOnline = $0.0
+                self.selectedDictOnlineIndex = self.arrDictsOnline.index { $0.ID == self.USDICTONLINEID }!
+                self.arrDictsNote = $0.1
                 if !self.arrDictsNote.isEmpty {
                     self.selectedDictNoteIndex = self.arrDictsNote.index { $0.ID == self.USDICTNOTEID }!
                 }
-                MTextbook.getDataByLang(self.USLANGID) {
-                    self.arrTextbooks = $0
-                    self.selectedTextbookIndex = self.arrTextbooks.index { $0.ID == self.USTEXTBOOKID }!
-                    complete()
-                }
+                self.arrTextbooks = $0.2
+                self.selectedTextbookIndex = self.arrTextbooks.index { $0.ID == self.USTEXTBOOKID }!
             }
-        }
     }
     
     private func setSelectedTextbookIndex() {
@@ -159,59 +157,35 @@ class SettingsViewModel: NSObject {
         arrParts = (selectedTextbook.PARTS.components(separatedBy: " "))
     }
     
-    func updateLang(complete: @escaping () -> Void) {
-        MUserSetting.update(selectedUSUser.ID, langid: USLANGID) {
-            print($0)
-            complete()
-        }
+    func updateLang() -> Observable<()> {
+        return MUserSetting.update(selectedUSUser.ID, langid: USLANGID).map { print($0) }
     }
     
-    func updateDictOnline(complete: @escaping () -> Void) {
-        MUserSetting.update(selectedUSLang.ID, dictonlineid: USDICTONLINEID) {
-            print($0)
-            complete()
-        }
+    func updateDictOnline() -> Observable<()> {
+        return MUserSetting.update(selectedUSLang.ID, dictonlineid: USDICTONLINEID).map { print($0) }
     }
     
-    func updateDictNote(complete: @escaping () -> Void) {
-        MUserSetting.update(selectedUSLang.ID, dictnoteid: USDICTNOTEID) {
-            print($0)
-            complete()
-        }
+    func updateDictNote() -> Observable<()> {
+        return MUserSetting.update(selectedUSLang.ID, dictnoteid: USDICTNOTEID).map { print($0) }
     }
 
-    func updateTextbook(complete: @escaping () -> Void) {
-        MUserSetting.update(selectedUSLang.ID, textbookid: USTEXTBOOKID) {
-            print($0)
-            complete()
-        }
+    func updateTextbook() -> Observable<()> {
+        return MUserSetting.update(selectedUSLang.ID, textbookid: USTEXTBOOKID).map { print($0) }
     }
     
-    func updateUnitFrom(complete: @escaping () -> Void) {
-        MUserSetting.update(selectedUSTextbook.ID, usunitfrom: USUNITFROM) {
-            print($0)
-            complete()
-        }
+    func updateUnitFrom() -> Observable<()> {
+        return MUserSetting.update(selectedUSTextbook.ID, usunitfrom: USUNITFROM).map { print($0) }
     }
     
-    func updatePartFrom(complete: @escaping () -> Void) {
-        MUserSetting.update(selectedUSTextbook.ID, uspartfrom: USPARTFROM) {
-            print($0)
-            complete()
-        }
+    func updatePartFrom() -> Observable<()> {
+        return MUserSetting.update(selectedUSTextbook.ID, uspartfrom: USPARTFROM).map { print($0) }
     }
     
-    func updateUnitTo(complete: @escaping () -> Void) {
-        MUserSetting.update(selectedUSTextbook.ID, usunitto: USUNITTO) {
-            print($0)
-            complete()
-        }
+    func updateUnitTo() -> Observable<()> {
+        return MUserSetting.update(selectedUSTextbook.ID, usunitto: USUNITTO).map { print($0) }
     }
     
-    func updatePartTo(complete: @escaping () -> Void) {
-        MUserSetting.update(selectedUSTextbook.ID, uspartto: USPARTTO) {
-            print($0)
-            complete()
-        }
+    func updatePartTo() -> Observable<()> {
+        return MUserSetting.update(selectedUSTextbook.ID, uspartto: USPARTTO).map { print($0) }
     }
 }

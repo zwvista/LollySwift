@@ -7,8 +7,8 @@
 //
 
 import Foundation
-
 import ObjectMapper
+import RxSwift
 
 @objcMembers
 class MUserSetting: NSObject, Mappable {
@@ -35,58 +35,58 @@ class MUserSetting: NSObject, Mappable {
         VALUE4 <- map["VALUE4"]
     }
 
-    static func getData(userid: Int, complete: @escaping ([MUserSetting]) -> Void) {
+    static func getData(userid: Int) -> Observable<[MUserSetting]> {
         // SQL: SELECT * FROM USERSETTINGS WHERE USERID=?
         let url = "\(RestApi.url)USERSETTINGS?transform=1&filter=USERID,eq,\(userid)"
-        RestApi.getArray(url: url, keyPath: "USERSETTINGS", complete: complete)
+        return RestApi.getArray(url: url, keyPath: "USERSETTINGS", type: MUserSetting.self)
     }
     
-    static func update(_ id: Int, body: String, complete: @escaping (String) -> Void) {
+    static func update(_ id: Int, body: String) -> Observable<String> {
         let url = "\(RestApi.url)USERSETTINGS/\(id)"
         // SQL: UPDATE USERSETTINGS SET VALUE1=? WHERE ID=?
         // SQL: UPDATE USERSETTINGS SET VALUE2=? WHERE ID=?
         // SQL: UPDATE USERSETTINGS SET VALUE3=? WHERE ID=?
         // SQL: UPDATE USERSETTINGS SET VALUE4=? WHERE ID=?
-        RestApi.update(url: url, body: body, complete: complete)
+        return RestApi.update(url: url, body: body)
     }
 
-    static func update(_ id: Int, langid: Int, complete: @escaping (String) -> Void) {
+    static func update(_ id: Int, langid: Int) -> Observable<String> {
         let body = "VALUE1=\(langid)"
-        update(id, body: body, complete: complete)
+        return update(id, body: body)
     }
     
-    static func update(_ id: Int, textbookid: Int, complete: @escaping (String) -> Void) {
+    static func update(_ id: Int, textbookid: Int) -> Observable<String> {
         let body = "VALUE1=\(textbookid)"
-        update(id, body: body, complete: complete)
+        return update(id, body: body)
     }
     
-    static func update(_ id: Int, dictonlineid: Int, complete: @escaping (String) -> Void) {
+    static func update(_ id: Int, dictonlineid: Int) -> Observable<String> {
         let body = "VALUE2=\(dictonlineid)"
-        update(id, body: body, complete: complete)
+        return update(id, body: body)
     }
     
-    static func update(_ id: Int, dictnoteid: Int, complete: @escaping (String) -> Void) {
+    static func update(_ id: Int, dictnoteid: Int) -> Observable<String> {
         let body = "VALUE3=\(dictnoteid)"
-        update(id, body: body, complete: complete)
+        return update(id, body: body)
     }
 
-    static func update(_ id: Int, usunitfrom: Int, complete: @escaping (String) -> Void) {
+    static func update(_ id: Int, usunitfrom: Int) -> Observable<String> {
         let body = "VALUE1=\(usunitfrom)"
-        update(id, body: body, complete: complete)
+        return update(id, body: body)
     }
     
-    static func update(_ id: Int, uspartfrom: Int, complete: @escaping (String) -> Void) {
+    static func update(_ id: Int, uspartfrom: Int) -> Observable<String> {
         let body = "VALUE2=\(uspartfrom)"
-        update(id, body: body, complete: complete)
+        return update(id, body: body)
     }
 
-    static func update(_ id: Int, usunitto: Int, complete: @escaping (String) -> Void) {
+    static func update(_ id: Int, usunitto: Int) -> Observable<String> {
         let body = "VALUE3=\(usunitto)"
-        update(id, body: body, complete: complete)
+        return update(id, body: body)
     }
     
-    static func update(_ id: Int, uspartto: Int, complete: @escaping (String) -> Void) {
+    static func update(_ id: Int, uspartto: Int) -> Observable<String> {
         let body = "VALUE4=\(uspartto)"
-        update(id, body: body, complete: complete)
+        return update(id, body: body)
     }
 }

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RxSwift
 
 class WordsUnitViewModel: NSObject {
     @objc
@@ -18,59 +19,42 @@ class WordsUnitViewModel: NSObject {
     var arrWordsFiltered: [MUnitWord]?
     var noteFromIndex = 0, noteToIndex = 0, noteIfEmpty = true
 
-    public init(settings: SettingsViewModel, complete: @escaping () -> Void) {
+    public init(settings: SettingsViewModel, complete: @escaping () -> ()) {
         self.vmSettings = settings
         super.init()
-        MUnitWord.getDataByTextbook(settings.USTEXTBOOKID, unitPartFrom: settings.USUNITPARTFROM, unitPartTo: settings.USUNITPARTTO) { [unowned self] in self.arrWords = $0; complete() }
+        MUnitWord.getDataByTextbook(settings.USTEXTBOOKID, unitPartFrom: settings.USUNITPARTFROM, unitPartTo: settings.USUNITPARTTO).subscribe(onNext:  { [unowned self] in self.arrWords = $0; complete() })
     }
     
     func filterWordsForSearchText(_ searchText: String, scope: String) {
         arrWordsFiltered = arrWords.filter { $0.WORD.contains(searchText) }
     }
     
-    static func update(_ id: Int, seqnum: Int, complete: @escaping () -> Void) {
-        MUnitWord.update(id, seqnum: seqnum) {
-            print($0)
-            complete()
-        }
+    static func update(_ id: Int, seqnum: Int) -> Observable<()> {
+        return MUnitWord.update(id, seqnum: seqnum).map { print($0) }
     }
     
-    static func update(_ id: Int, note: String, complete: @escaping () -> Void) {
-        MUnitWord.update(id, note: note) {
-            print($0)
-            complete()
-        }
+    static func update(_ id: Int, note: String) -> Observable<()> {
+        return MUnitWord.update(id, note: note).map { print($0) }
     }
 
-    static func update(item: MUnitWord, complete: @escaping () -> Void) {
-        MUnitWord.update(item: item) {
-            print($0)
-            complete()
-        }
+    static func update(item: MUnitWord) -> Observable<()> {
+        return MUnitWord.update(item: item).map { print($0) }
     }
     
-    static func create(item: MUnitWord, complete: @escaping (Int) -> Void) {
-        MUnitWord.create(item: item) {
-            print($0)
-            complete($0.toInt()!)
-        }
+    static func create(item: MUnitWord) -> Observable<Int> {
+        return MUnitWord.create(item: item).map { print($0); return $0.toInt()! }
     }
     
-    static func delete(_ id: Int, complete: @escaping () -> Void) {
-        MUnitWord.delete(id) {
-            print($0)
-            complete()
-        }
+    static func delete(_ id: Int) -> Observable<()> {
+        return MUnitWord.delete(id).map { print($0) }
     }
 
-    func reindex(complete: @escaping (Int) -> Void) {
+    func reindex(complete: @escaping (Int) -> ()) {
         for i in 1...arrWords.count {
             let item = arrWords[i - 1]
             guard item.SEQNUM != i else {continue}
             item.SEQNUM = i
-            WordsUnitViewModel.update(item.ID, seqnum: item.SEQNUM) {
-                complete(i - 1)
-            }
+            WordsUnitViewModel.update(item.ID, seqnum: item.SEQNUM).subscribe(onNext: { complete(i - 1) })
         }
     }
     
@@ -93,13 +77,13 @@ class WordsUnitViewModel: NSObject {
         guard let mDictNote = mDictNote else {return}
         let item = arrWords[index]
         let url = mDictNote.urlString(item.WORD)
-        RestApi.getHtml(url: url) { html in
+        RestApi.getHtml(url: url).subscribe(onNext: { html in
 //            print(html)
             item.NOTE = mDictNote.htmlNote(html)
-            WordsUnitViewModel.update(item.ID, note: item.NOTE!) {
+            WordsUnitViewModel.update(item.ID, note: item.NOTE!).subscribe(onNext: {
                 complete()
-            }
-        }
+            })
+        })
     }
     
     func getNotes(ifEmpty: Bool, complete: (Int) -> Void) {

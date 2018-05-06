@@ -7,42 +7,34 @@
 //
 
 import Foundation
+import RxSwift
 
 class WordsLangViewModel: NSObject {
     var settings: SettingsViewModel
     var arrWords = [MLangWord]()
     var arrWordsFiltered: [MLangWord]?
     
-    public init(settings: SettingsViewModel, complete: @escaping () -> Void) {
+    public init(settings: SettingsViewModel, complete: @escaping () -> ()) {
         self.settings = settings
         let item = settings.arrTextbooks[settings.selectedTextbookIndex]
         super.init()
-        MLangWord.getDataByLang(item.LANGID) {[unowned self] in self.arrWords = $0; complete() }
+        MLangWord.getDataByLang(item.LANGID).subscribe(onNext:  {[unowned self] in self.arrWords = $0; complete() })
     }
     
     func filterWordsForSearchText(_ searchText: String, scope: String) {
         arrWordsFiltered = arrWords.filter { $0.WORD.contains(searchText) }
     }
     
-    static func update(_ id: Int, word: String, complete: @escaping () -> Void) {
-        MLangWord.update(id, word: word) {
-            print($0)
-            complete()
-        }
+    static func update(_ id: Int, word: String) -> Observable<()> {
+        return MLangWord.update(id, word: word).map { print($0) }
     }
     
-    static func create(item: MLangWordEdit, complete: @escaping (Int) -> Void) {
-        MLangWord.create(item: item) {
-            print($0)
-            complete($0.toInt()!)
-        }
+    static func create(item: MLangWord) -> Observable<Int> {
+        return MLangWord.create(item: item).map { print($0); return $0.toInt()! }
     }
     
-    static func delete(_ id: Int, complete: @escaping () -> Void) {
-        MLangWord.delete(id) {
-            print($0)
-            complete()
-        }
+    static func delete(_ id: Int) -> Observable<()> {
+        return MLangWord.delete(id).map { print($0) }
     }
 
 }

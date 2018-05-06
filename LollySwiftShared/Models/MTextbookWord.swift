@@ -7,8 +7,8 @@
 //
 
 import Foundation
-
 import ObjectMapper
+import RxSwift
 
 @objcMembers
 class MTextbookWord: NSObject, Mappable {
@@ -41,9 +41,9 @@ class MTextbookWord: NSObject, Mappable {
         return "\(SEQNUM) \(WORD)" + (NOTE?.isEmpty != false ? "" : "(\(NOTE!))")
     }
 
-    static func getDataByLang(_ langid: Int, complete: @escaping ([MTextbookWord]) -> Void) {
+    static func getDataByLang(_ langid: Int) -> Observable<[MTextbookWord]> {
         // SQL: SELECT * FROM VTEXTBOOKWORDS WHERE LANGID = ?
         let url = "\(RestApi.url)VTEXTBOOKWORDS?transform=1&filter=LANGID,eq,\(langid)"
-        RestApi.getArray(url: url, keyPath: "VTEXTBOOKWORDS", complete: complete)
+        return RestApi.getArray(url: url, keyPath: "VTEXTBOOKWORDS", type: MTextbookWord.self)
     }
 }

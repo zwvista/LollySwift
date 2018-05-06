@@ -41,87 +41,87 @@ class SettingsViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        vm.getData {
+        vm.getData().subscribe(onNext: {
             self.updateLang()
-        }
+        })
         
         ddLang.anchorView = langCell
         ddLang.dataSource = vm.arrLanguages.map { $0.LANGNAME }
         ddLang.selectRow(vm.selectedLangIndex)
         ddLang.selectionAction = { [unowned self] (index: Int, item: String) in
             guard index != self.vm.selectedLangIndex else {return}
-            self.vm.setSelectedLangIndex(index) {
-                self.vm.updateLang {
+            self.vm.setSelectedLangIndex(index).subscribe(onNext: {
+                self.vm.updateLang().subscribe(onNext: {
                     self.updateLang()
-                }
-            }
+                })
+            })
         }
         
         ddDictOnline.anchorView = dictOnlineCell
         ddDictOnline.selectionAction = { [unowned self] (index: Int, item: String) in
             guard index != self.vm.selectedDictOnlineIndex else {return}
             self.vm.selectedDictOnlineIndex = index
-            self.vm.updateDictOnline {
+            self.vm.updateDictOnline().subscribe(onNext: {
                 self.updateDictOnline()
-            }
+            })
         }
         
         ddDictNote.anchorView = dictNoteCell
         ddDictNote.selectionAction = { [unowned self] (index: Int, item: String) in
             guard index != self.vm.selectedDictNoteIndex else {return}
             self.vm.selectedDictNoteIndex = index
-            self.vm.updateDictNote {
+            self.vm.updateDictNote().subscribe(onNext: {
                 self.updateDictNote()
-            }
+            })
         }
         
         ddTextbook.anchorView = textbookCell
         ddTextbook.selectionAction = { [unowned self] (index: Int, item: String) in
             guard index != self.vm.selectedTextbookIndex else {return}
             self.vm.selectedTextbookIndex = index
-            self.vm.updateTextbook {
+            self.vm.updateTextbook().subscribe(onNext: {
                 self.updateTextbook()
-            }
+            })
         }
         
         ddUnitFrom.anchorView = unitFromCell
         ddUnitFrom.selectionAction = { [unowned self] (index: Int, item: String) in
             guard self.vm.USUNITFROM != index + 1 else {return}
             self.vm.USUNITFROM = index + 1
-            self.vm.updateUnitFrom {
+            self.vm.updateUnitFrom().subscribe(onNext: {
                 self.lblUnitFrom.text = item
                 if !self.swUnitPartTo.isOn || self.vm.isInvalidUnitPart {self.updateUnitPartTo()}
-            }
+            })
         }
         
         ddPartFrom.anchorView = partFromCell
         ddPartFrom.selectionAction = { [unowned self] (index: Int, item: String) in
             guard self.vm.USPARTFROM != index + 1 else {return}
             self.vm.USPARTFROM = index + 1
-            self.vm.updatePartFrom {
+            self.vm.updatePartFrom().subscribe(onNext: {
                 self.lblPartFrom.text = item
                 if !self.swUnitPartTo.isOn || self.vm.isInvalidUnitPart {self.updateUnitPartTo()}
-            }
+            })
         }
         
         ddUnitTo.anchorView = unitToCell
         ddUnitTo.selectionAction = { [unowned self] (index: Int, item: String) in
             guard self.vm.USUNITTO != index + 1 else {return}
             self.vm.USUNITTO = index + 1
-            self.vm.updateUnitTo {
+            self.vm.updateUnitTo().subscribe(onNext: {
                 self.lblUnitTo.text = item
                 if self.vm.isInvalidUnitPart {self.updateUnitPartFrom()}
-            }
+            })
         }
         
         ddPartTo.anchorView = partToCell
         ddPartTo.selectionAction = { [unowned self] (index: Int, item: String) in
             guard self.vm.USPARTTO != index + 1 else {return}
             self.vm.USPARTTO = index + 1
-            self.vm.updatePartTo {
+            self.vm.updatePartTo().subscribe(onNext: {
                 self.lblPartTo.text = item
                 if self.vm.isInvalidUnitPart {self.updateUnitPartFrom()}
-            }
+            })
         }
     }
     
@@ -209,30 +209,30 @@ class SettingsViewController: UITableViewController {
     func updateUnitPartFrom() {
         if vm.USUNITFROM != vm.USUNITTO {
             vm.USUNITFROM = vm.USUNITTO
-            vm.updateUnitFrom {
+            vm.updateUnitFrom().subscribe(onNext: {
                 self.lblUnitFrom.text = self.lblUnitTo.text
-            }
+            })
         }
         if vm.USPARTFROM != vm.USPARTTO {
             vm.USPARTFROM = vm.USPARTTO
-            vm.updatePartFrom {
+            vm.updatePartFrom().subscribe(onNext: {
                 self.lblPartFrom.text = self.lblPartTo.text
-            }
+            })
         }
     }
     
     func updateUnitPartTo() {
         if vm.USUNITTO != vm.USUNITFROM {
             vm.USUNITTO = vm.USUNITFROM
-            vm.updateUnitTo {
+            vm.updateUnitTo().subscribe(onNext: {
                 self.lblUnitTo.text = self.lblUnitFrom.text
-            }
+            })
         }
         if vm.USPARTTO != vm.USPARTFROM {
             vm.USPARTTO = vm.USPARTFROM
-            vm.updatePartTo {
+            vm.updatePartTo().subscribe(onNext: {
                 self.lblPartTo.text = self.lblPartFrom.text
-            }
+            })
         }
     }
     

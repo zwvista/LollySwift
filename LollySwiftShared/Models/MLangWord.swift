@@ -7,8 +7,8 @@
 //
 
 import Foundation
-
 import ObjectMapper
+import RxSwift
 
 @objcMembers
 class MLangWord: NSObject, Mappable {
@@ -30,49 +30,28 @@ class MLangWord: NSObject, Mappable {
         LEVEL <- map["LEVEL"]
     }
     
-    static func getDataByLang(_ langid: Int, complete: @escaping ([MLangWord]) -> Void) {
+    static func getDataByLang(_ langid: Int) -> Observable<[MLangWord]> {
         // SQL: SELECT LANGID, WORD FROM LANGWORDS WHERE LANGID = ?
         let url = "\(RestApi.url)LANGWORDS?transform=1&filter=LANGID,eq,\(langid)"
-        RestApi.getArray(url: url, keyPath: "LANGWORDS", complete: complete)
+        return RestApi.getArray(url: url, keyPath: "LANGWORDS", type: MLangWord.self)
     }
     
-    static func update(_ id: Int, word: String, complete: @escaping (String) -> Void) {
+    static func update(_ id: Int, word: String) -> Observable<String> {
         // SQL: UPDATE LANGWORDS SET WORD=? WHERE ID=?
         let url = "\(RestApi.url)LANGWORDS/\(id)"
         let body = "WORD=\(word)"
-        RestApi.update(url: url, body: body, complete: complete)
+        return RestApi.update(url: url, body: body)
     }
     
-    static func create(item: MLangWordEdit, complete: @escaping (String) -> Void) {
+    static func create(item: MLangWord) -> Observable<String> {
         // SQL: INSERT INTO LANGWORDS (LANGID, WORD) VALUES (?,?)
         let url = "\(RestApi.url)LANGWORDS"
-        RestApi.create(url: url, body: item.toJSONString(prettyPrint: false)!, complete: complete)
+        return RestApi.create(url: url, body: item.toJSONString(prettyPrint: false)!)
     }
     
-    static func delete(_ id: Int, complete: @escaping (String) -> Void) {
+    static func delete(_ id: Int) -> Observable<String> {
         // SQL: DELETE LANGWORDS WHERE ID=?
         let url = "\(RestApi.url)LANGWORDS/\(id)"
-        RestApi.delete(url: url, complete: complete)
-    }
-}
-
-class MLangWordEdit: Mappable {
-    var LANGID = 0
-    var WORD = ""
-    var LEVEL = 0
-
-    public init(item: MLangWord) {
-        LANGID = item.LANGID
-        WORD = item.WORD
-        LEVEL = item.LEVEL
-    }
-    
-    required public init?(map: Map){
-    }
-    
-    public func mapping(map: Map) {
-        LANGID <- map["LANGID"]
-        WORD <- map["WORD"]
-        LEVEL <- map["LEVEL"]
+        return RestApi.delete(url: url)
     }
 }

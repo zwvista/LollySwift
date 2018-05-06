@@ -7,16 +7,17 @@
 //
 
 import Foundation
+import RxSwift
 
 class PhrasesUnitViewModel: NSObject {
     var vmSettings: SettingsViewModel
     var arrPhrases = [MUnitPhrase]()
     var arrPhrasesFiltered: [MUnitPhrase]?
     
-    public init(settings: SettingsViewModel, complete: @escaping () -> Void) {
+    public init(settings: SettingsViewModel, complete: @escaping () -> ()) {
         self.vmSettings = settings
         super.init()
-        MUnitPhrase.getDataByTextbook(vmSettings.USTEXTBOOKID, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO) { [unowned self] in self.arrPhrases = $0; complete() }
+        MUnitPhrase.getDataByTextbook(vmSettings.USTEXTBOOKID, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO).subscribe(onNext: { [unowned self] in self.arrPhrases = $0; complete() })
     }
     
     func filterPhrasesForSearchText(_ searchText: String, scope: String) {
@@ -25,32 +26,20 @@ class PhrasesUnitViewModel: NSObject {
         }
     }
     
-    static func update(_ id: Int, seqnum: Int, complete: @escaping () -> Void) {
-        MUnitPhrase.update(id, seqnum: seqnum) {
-            print($0)
-            complete()
-        }
+    static func update(_ id: Int, seqnum: Int) -> Observable<()> {
+        return MUnitPhrase.update(id, seqnum: seqnum).map { print($0) }
     }
     
-    static func update(item: MUnitPhrase, complete: @escaping () -> Void) {
-        MUnitPhrase.update(item: item) {
-            print($0)
-            complete()
-        }
+    static func update(item: MUnitPhrase) -> Observable<()> {
+        return MUnitPhrase.update(item: item).map { print($0) }
     }
     
-    static func create(item: MUnitPhrase, complete: @escaping (Int) -> Void) {
-        MUnitPhrase.create(item: item) {
-            print($0)
-            complete($0.toInt()!)
-        }
+    static func create(item: MUnitPhrase) -> Observable<Int> {
+        return MUnitPhrase.create(item: item).map { print($0); return $0.toInt()! }
     }
     
-    static func delete(_ id: Int, complete: @escaping () -> Void) {
-        MUnitPhrase.delete(id) {
-            print($0)
-            complete()
-        }
+    static func delete(_ id: Int) -> Observable<()> {
+        return MUnitPhrase.delete(id).map { print($0) }
     }
     
     func reindex(complete: @escaping (Int) -> Void) {
@@ -58,9 +47,7 @@ class PhrasesUnitViewModel: NSObject {
             let item = arrPhrases[i - 1]
             guard item.SEQNUM != i else {continue}
             item.SEQNUM = i
-            PhrasesUnitViewModel.update(item.ID, seqnum: item.SEQNUM) {
-                complete(i - 1)
-            }
+            PhrasesUnitViewModel.update(item.ID, seqnum: item.SEQNUM).subscribe(onNext: { complete(i - 1) })
         }
     }
 

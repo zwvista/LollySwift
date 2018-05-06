@@ -7,8 +7,8 @@
 //
 
 import Foundation
-
 import ObjectMapper
+import RxSwift
 
 @objcMembers
 class MUnitPhrase: NSObject, Mappable {
@@ -45,34 +45,34 @@ class MUnitPhrase: NSObject, Mappable {
         UNITPART <- map["UNITPART"]
     }
 
-    static func getDataByTextbook(_ textbookid: Int, unitPartFrom: Int, unitPartTo: Int, complete: @escaping ([MUnitPhrase]) -> Void) {
+    static func getDataByTextbook(_ textbookid: Int, unitPartFrom: Int, unitPartTo: Int) -> Observable<[MUnitPhrase]> {
         // SQL: SELECT * FROM VUNITPHRASES WHERE TEXTBOOKID=? AND UNITPART BETWEEN ? AND ? ORDER BY UNITPART,SEQNUM
         let url = "\(RestApi.url)VUNITPHRASES?transform=1&filter[]=TEXTBOOKID,eq,\(textbookid)&filter[]=UNITPART,bt,\(unitPartFrom),\(unitPartTo)&order[]=UNITPART&order[]=SEQNUM"
-        RestApi.getArray(url: url, keyPath: "VUNITPHRASES", complete: complete)
+        return RestApi.getArray(url: url, keyPath: "VUNITPHRASES", type: MUnitPhrase.self)
     }
     
-    static func update(_ id: Int, seqnum: Int, complete: @escaping (String) -> Void) {
+    static func update(_ id: Int, seqnum: Int) -> Observable<String> {
         // SQL: UPDATE UNITPHRASES SET SEQNUM=? WHERE ID=?
         let url = "\(RestApi.url)UNITPHRASES/\(id)"
         let body = "SEQNUM=\(seqnum)"
-        RestApi.update(url: url, body: body, complete: complete)
+        return RestApi.update(url: url, body: body)
     }
     
-    static func update(item: MUnitPhrase, complete: @escaping (String) -> Void) {
+    static func update(item: MUnitPhrase) -> Observable<String> {
         // SQL: UPDATE UNITPHRASES SET TEXTBOOKID=?, UNIT=?, PART=?, SEQNUM=?, PHRASE=?, TRANSLATION=? WHERE ID=?
         let url = "\(RestApi.url)UNITPHRASES/\(item.ID)"
-        RestApi.update(url: url, body: item.toJSONString(prettyPrint: false)!, complete: complete)
+        return RestApi.update(url: url, body: item.toJSONString(prettyPrint: false)!)
     }
     
-    static func create(item: MUnitPhrase, complete: @escaping (String) -> Void) {
+    static func create(item: MUnitPhrase) -> Observable<String> {
         // SQL: INSERT INTO UNITPHRASES (TEXTBOOKID, UNIT, PART, SEQNUM, PHRASE, TRANSLATION) VALUES (?,?,?,?,?,?)
         let url = "\(RestApi.url)UNITPHRASES"
-        RestApi.create(url: url, body: item.toJSONString(prettyPrint: false)!, complete: complete)
+        return RestApi.create(url: url, body: item.toJSONString(prettyPrint: false)!)
     }
     
-    static func delete(_ id: Int, complete: @escaping (String) -> Void) {
+    static func delete(_ id: Int) -> Observable<String> {
         // SQL: DELETE UNITPHRASES WHERE ID=?
         let url = "\(RestApi.url)UNITPHRASES/\(id)"
-        RestApi.delete(url: url, complete: complete)
+        return RestApi.delete(url: url)
     }
 }

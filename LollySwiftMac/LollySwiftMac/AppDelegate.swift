@@ -17,9 +17,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        _theSettingsViewModel.getData {
+        _theSettingsViewModel.getData().subscribe(onNext: {
             self.wordsInUnit(self)
-        }
+        })
         // Insert code here to initialize your application
     }
 

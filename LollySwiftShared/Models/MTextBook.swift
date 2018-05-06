@@ -7,8 +7,8 @@
 //
 
 import Foundation
-
 import ObjectMapper
+import RxSwift
 
 @objcMembers
 class MTextbook: NSObject, Mappable {
@@ -29,9 +29,9 @@ class MTextbook: NSObject, Mappable {
         PARTS <- map["PARTS"]
     }
     
-    static func getDataByLang(_ langid: Int, complete: @escaping ([MTextbook]) -> Void) {
+    static func getDataByLang(_ langid: Int) -> Observable<[MTextbook]> {
         // SQL: SELECT * FROM TEXTBOOKS WHERE LANGID = ?
         let url = "\(RestApi.url)TEXTBOOKS?transform=1&filter=LANGID,eq,\(langid)"
-        RestApi.getArray(url: url, keyPath: "TEXTBOOKS", complete: complete)
+        return RestApi.getArray(url: url, keyPath: "TEXTBOOKS", type: MTextbook.self)
     }
 }

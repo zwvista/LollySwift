@@ -7,8 +7,8 @@
 //
 
 import Foundation
-
 import ObjectMapper
+import RxSwift
 
 @objcMembers
 class MLangPhrase: NSObject, Mappable {
@@ -30,48 +30,27 @@ class MLangPhrase: NSObject, Mappable {
         TRANSLATION <- map["TRANSLATION"]
     }
     
-    static func getDataByLang(_ langid: Int, complete: @escaping ([MLangPhrase]) -> Void) {
+    static func getDataByLang(_ langid: Int) -> Observable<[MLangPhrase]> {
         // SQL: SELECT PHRASE, TRANSLATION FROM LANGPHRASES WHERE LANGID = ?
         let url = "\(RestApi.url)LANGPHRASES?transform=1&filter=LANGID,eq,\(langid)"
-        RestApi.getArray(url: url, keyPath: "LANGPHRASES", complete: complete)
+        return RestApi.getArray(url: url, keyPath: "LANGPHRASES", type: MLangPhrase.self)
     }
     
-    static func update(_ id: Int, item: MLangPhraseEdit, complete: @escaping (String) -> Void) {
+    static func update(_ id: Int, item: MLangPhrase) -> Observable<String> {
         // SQL: UPDATE LANGPHRASES SET PHRASE=?, TRANSLATION=? WHERE ID=?
         let url = "\(RestApi.url)LANGPHRASES/\(id)"
-        RestApi.update(url: url, body: item.toJSONString(prettyPrint: false)!, complete: complete)
+        return RestApi.update(url: url, body: item.toJSONString(prettyPrint: false)!)
     }
     
-    static func create(item: MLangPhraseEdit, complete: @escaping (String) -> Void) {
+    static func create(item: MLangPhrase) -> Observable<String> {
         // SQL: INSERT INTO LANGPHRASES (LANGID, PHRASE, TRANSLATION) VALUES (?,?,?)
         let url = "\(RestApi.url)LANGPHRASES"
-        RestApi.create(url: url, body: item.toJSONString(prettyPrint: false)!, complete: complete)
+        return RestApi.create(url: url, body: item.toJSONString(prettyPrint: false)!)
     }
     
-    static func delete(_ id: Int, complete: @escaping (String) -> Void) {
+    static func delete(_ id: Int) -> Observable<String> {
         // SQL: DELETE LANGPHRASES WHERE ID=?
         let url = "\(RestApi.url)LANGPHRASES/\(id)"
-        RestApi.delete(url: url, complete: complete)
-    }
-}
-
-class MLangPhraseEdit: Mappable {
-    var LANGID = 0
-    var PHRASE = ""
-    var TRANSLATION: String?
-
-    public init(item: MLangPhrase) {
-        LANGID = item.LANGID
-        PHRASE = item.PHRASE
-        TRANSLATION = item.TRANSLATION
-    }
-    
-    required public init?(map: Map){
-    }
-    
-    public func mapping(map: Map) {
-        LANGID <- map["LANGID"]
-        PHRASE <- map["PHRASE"]
-        TRANSLATION <- map["TRANSLATION"]
+        return RestApi.delete(url: url)
     }
 }

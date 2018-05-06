@@ -36,9 +36,9 @@ class WordsUnitDetailViewController: NSViewController {
         mWord.PART = pubPart.indexOfSelectedItem + 1
         if isAdd {
             vm.arrWords.append(mWord)
-            WordsUnitViewModel.create(item: mWord) { self.mWord.ID = $0; self.complete?() }
+            WordsUnitViewModel.create(item: mWord).subscribe(onNext: { self.mWord.ID = $0; self.complete?() })
         } else {
-            WordsUnitViewModel.update(item: mWord) { self.complete?() }
+            WordsUnitViewModel.update(item: mWord).subscribe(onNext: { self.complete?() })
         }
         dismissViewController(self)
     }

@@ -12,6 +12,7 @@ import Alamofire
 import ObjectMapper
 import AlamofireObjectMapper
 import RxSwift
+import RxAlamofire
 
 // https://stackoverflow.com/questions/27855319/post-request-with-a-simple-string-in-body-with-alamofire
 extension String: ParameterEncoding {
@@ -28,47 +29,24 @@ class RestApi {
     static let url = "http://13.231.236.234/lolly/api.php/"
     static let cssFolder = "http://13.231.236.234/lolly/css/"
 
-    static func getArray<T: Mappable>(url: String, keyPath: String, complete: @escaping ([T]) -> Void) {
-        print("[RestApi]GET:\(url)")
-        Alamofire.request(url).responseArray(keyPath: keyPath) { (response: DataResponse<[T]>) in
-            let result = response.result.value!
-            complete(result)
-        }
-    }
     static func getArray<T: Mappable>(url: String, keyPath: String, type: T.Type) -> Observable<[T]> {
         print("[RestApi]GET:\(url)")
         return RxAlamofireObjectMapper.array(.get, url, keyPath: keyPath)
     }
-    
-    static func update(url: String, body: String, complete: @escaping (String) -> Void) {
+    static func update(url: String, body: String) -> Observable<String> {
         print("[RestApi]PUT:\(url) BODY:\(body)")
-        Alamofire.request(url, method: .put, encoding: body).responseString { (response: DataResponse<String>) in
-            let result = response.result.value!
-            complete(result)
-        }
+        return RxAlamofire.string(.put, url, encoding: body)
     }
-    
-    static func create(url: String, body: String, complete: @escaping (String) -> Void) {
+    static func create(url: String, body: String) -> Observable<String> {
         print("[RestApi]POST:\(url) BODY:\(body)")
-        Alamofire.request(url, method: .post, encoding: body).responseString { (response: DataResponse<String>) in
-            let result = response.result.value!
-            complete(result)
-        }
+        return RxAlamofire.string(.post, url, encoding: body)
     }
-    
-    static func delete(url: String, complete: @escaping (String) -> Void) {
+    static func delete(url: String) -> Observable<String> {
         print("[RestApi]DELETE:\(url)")
-        Alamofire.request(url, method: .delete).responseString { (response: DataResponse<String>) in
-            let result = response.result.value!
-            complete(result)
-        }
+        return RxAlamofire.string(.delete, url)
     }
-    
-    static func getHtml(url: String, complete: @escaping (String) -> Void) {
+    static func getHtml(url: String) -> Observable<String> {
         print("[RestApi]GET:\(url)")
-        Alamofire.request(url).responseString { (response: DataResponse<String>) in
-            let result = response.result.value!
-            complete(result)
-        }
+        return RxAlamofire.string(.get, url)
     }
 }

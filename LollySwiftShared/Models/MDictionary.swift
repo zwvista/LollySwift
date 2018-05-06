@@ -7,8 +7,8 @@
 //
 
 import Foundation
-
 import ObjectMapper
+import RxSwift
 
 @objcMembers
 class MDictionary: NSObject, Mappable {
@@ -47,10 +47,10 @@ class MDictionary: NSObject, Mappable {
 }
 
 class MDictOnline : MDictionary {
-    static func getDataByLang(_ langid: Int, complete: @escaping ([MDictOnline]) -> Void) {
+    static func getDataByLang(_ langid: Int) -> Observable<[MDictOnline]> {
         // SQL: SELECT * FROM VDICTSONLINE WHERE LANGIDFROM = ?
         let url = "\(RestApi.url)VDICTSONLINE?transform=1&filter=LANGIDFROM,eq,\(langid)"
-        RestApi.getArray(url: url, keyPath: "VDICTSONLINE", complete: complete)
+        return RestApi.getArray(url: url, keyPath: "VDICTSONLINE", type: MDictOnline.self)
     }
     
     fileprivate let debugExtract = false
@@ -76,10 +76,10 @@ class MDictOffline : MDictionary {
 }
 
 class MDictNote : MDictionary {
-    static func getDataByLang(_ langid: Int, complete: @escaping ([MDictNote]) -> Void) {
+    static func getDataByLang(_ langid: Int) -> Observable<[MDictNote]> {
         // SQL: SELECT * FROM VDICTSNOTE WHERE LANGIDFROM = ?
         let url = "\(RestApi.url)VDICTSNOTE?transform=1&filter=LANGIDFROM,eq,\(langid)"
-        RestApi.getArray(url: url, keyPath: "VDICTSNOTE", complete: complete)
+        return RestApi.getArray(url: url, keyPath: "VDICTSNOTE", type: MDictNote.self)
     }
     
     func htmlNote(_ html: String) -> String {

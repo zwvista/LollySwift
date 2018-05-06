@@ -42,7 +42,7 @@ class PhrasesLangViewController: PhrasesBaseViewController, UISearchBarDelegate,
             let i = indexPath.row
             let item = self.vm.arrPhrases[i]
             self.yesNoAction(title: "delete", message: "Do you really want to delete the phrase \"\(item.PHRASE)\"?", yesHandler: { (action) in
-                PhrasesLangViewModel.delete(item.ID) {}
+                PhrasesLangViewModel.delete(item.ID).subscribe()
                 self.vm.arrPhrases.remove(at: i)
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }, noHandler: { (action) in

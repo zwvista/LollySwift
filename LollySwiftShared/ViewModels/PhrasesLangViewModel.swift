@@ -7,17 +7,18 @@
 //
 
 import Foundation
+import RxSwift
 
 class PhrasesLangViewModel: NSObject {
     var settings: SettingsViewModel
     var arrPhrases = [MLangPhrase]()
     var arrPhrasesFiltered: [MLangPhrase]?
     
-    public init(settings: SettingsViewModel, complete: @escaping () -> Void) {
+    public init(settings: SettingsViewModel, complete: @escaping () -> ()) {
         self.settings = settings
         let item = settings.arrTextbooks[settings.selectedTextbookIndex]
         super.init()
-        MLangPhrase.getDataByLang(item.LANGID) { [unowned self] in self.arrPhrases = $0; complete() }
+        MLangPhrase.getDataByLang(item.LANGID).subscribe(onNext: { [unowned self] in self.arrPhrases = $0; complete() })
     }
     
     func filterPhrasesForSearchText(_ searchText: String, scope: String) {
@@ -26,25 +27,16 @@ class PhrasesLangViewModel: NSObject {
         })
     }
     
-    static func update(_ id: Int, item: MLangPhraseEdit, complete: @escaping () -> Void) {
-        MLangPhrase.update(id, item: item) {
-            print($0)
-            complete()
-        }
+    static func update(_ id: Int, item: MLangPhrase) -> Observable<()> {
+        return MLangPhrase.update(id, item: item).map { print($0) }
     }
     
-    static func create(item: MLangPhraseEdit, complete: @escaping (Int) -> Void) {
-        MLangPhrase.create(item: item) {
-            print($0)
-            complete($0.toInt()!)
-        }
+    static func create(item: MLangPhrase) -> Observable<Int> {
+        return MLangPhrase.create(item: item).map { print($0); return $0.toInt()! }
     }
     
-    static func delete(_ id: Int, complete: @escaping () -> Void) {
-        MLangPhrase.delete(id) {
-            print($0)
-            complete()
-        }
+    static func delete(_ id: Int) -> Observable<()> {
+        return MLangPhrase.delete(id).map { print($0) }
     }
 
 }

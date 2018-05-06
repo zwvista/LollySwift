@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RxSwift
 
 class SearchViewModel: NSObject {
     var vmSettings: SettingsViewModel
@@ -16,7 +17,7 @@ class SearchViewModel: NSObject {
         return arrWords[selectWordIndex]
     }
 
-    public init(settings: SettingsViewModel, complete: @escaping () -> Void) {
+    public init(settings: SettingsViewModel, complete: @escaping () -> ()) {
         self.vmSettings = settings
         super.init()
     }

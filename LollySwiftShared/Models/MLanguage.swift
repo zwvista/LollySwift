@@ -7,8 +7,8 @@
 //
 
 import Foundation
-
 import ObjectMapper
+import RxSwift
 
 @objcMembers
 class MLanguage: NSObject, Mappable {
@@ -23,10 +23,9 @@ class MLanguage: NSObject, Mappable {
         LANGNAME <- map["NAME"]
     }
     
-    static func getData(complete: @escaping ([MLanguage]) -> Void) {
+    static func getData() -> Observable<[MLanguage]> {
         // SQL: SELECT * FROM LANGUAGES WHERE ID <> 0
         let url = "\(RestApi.url)LANGUAGES?transform=1&filter=ID,neq,0"
-        // RestApi.getArray(url: url, keyPath: "LANGUAGES", complete: complete)
-        RestApi.getArray(url: url, keyPath: "LANGUAGES", type: MLanguage.self).subscribe(onNext: complete)
+        return RestApi.getArray(url: url, keyPath: "LANGUAGES", type: MLanguage.self)
     }
 }

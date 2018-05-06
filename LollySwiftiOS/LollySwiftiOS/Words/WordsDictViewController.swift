@@ -37,9 +37,9 @@ class WordsDictViewController: UIViewController {
         ddDictOnline.selectRow(vm.vmSettings.selectedDictOnlineIndex)
         ddDictOnline.selectionAction = { [unowned self] (index: Int, item: String) in
             self.vm.vmSettings.selectedDictOnlineIndex = index
-            self.vm.vmSettings.updateDictOnline {
+            self.vm.vmSettings.updateDictOnline().subscribe(onNext: {
                 self.selectDictChanged()
-            }
+            })
         }
         
         selectWordChanged()

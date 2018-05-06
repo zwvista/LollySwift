@@ -7,8 +7,8 @@
 //
 
 import Foundation
-
 import ObjectMapper
+import RxSwift
 
 @objcMembers
 class MUnitWord: NSObject, Mappable {
@@ -48,41 +48,41 @@ class MUnitWord: NSObject, Mappable {
         UNITPART <- map["UNITPART"]
     }
 
-    static func getDataByTextbook(_ textbookid: Int, unitPartFrom: Int, unitPartTo: Int, complete: @escaping ([MUnitWord]) -> Void) {
+    static func getDataByTextbook(_ textbookid: Int, unitPartFrom: Int, unitPartTo: Int) -> Observable<[MUnitWord]> {
         // SQL: SELECT * FROM VUNITWORDS WHERE TEXTBOOKID=? AND UNITPART BETWEEN ? AND ? ORDER BY UNITPART,SEQNUM
         let url = "\(RestApi.url)VUNITWORDS?transform=1&filter[]=TEXTBOOKID,eq,\(textbookid)&filter[]=UNITPART,bt,\(unitPartFrom),\(unitPartTo)&order[]=UNITPART&order[]=SEQNUM"
-        RestApi.getArray(url: url, keyPath: "VUNITWORDS", complete: complete)
+        return RestApi.getArray(url: url, keyPath: "VUNITWORDS", type: MUnitWord.self)
     }
     
-    static func update(_ id: Int, seqnum: Int, complete: @escaping (String) -> Void) {
+    static func update(_ id: Int, seqnum: Int) -> Observable<String> {
         // SQL: UPDATE UNITWORDS SET SEQNUM=? WHERE ID=?
         let url = "\(RestApi.url)UNITWORDS/\(id)"
         let body = "SEQNUM=\(seqnum)"
-        RestApi.update(url: url, body: body, complete: complete)
+        return RestApi.update(url: url, body: body)
     }
     
-    static func update(_ id: Int, note: String, complete: @escaping (String) -> Void) {
+    static func update(_ id: Int, note: String) -> Observable<String> {
         // SQL: UPDATE UNITWORDS SET NOTE=? WHERE ID=?
         let url = "\(RestApi.url)UNITWORDS/\(id)"
         let body = "NOTE=\(note)"
-        RestApi.update(url: url, body: body, complete: complete)
+        return RestApi.update(url: url, body: body)
     }
 
-    static func update(item: MUnitWord, complete: @escaping (String) -> Void) {
+    static func update(item: MUnitWord) -> Observable<String> {
         // SQL: UPDATE UNITWORDS SET TEXTBOOKID=?, UNIT=?, PART=?, SEQNUM=?, WORD=?, NOTE=? WHERE ID=?
         let url = "\(RestApi.url)UNITWORDS/\(item.ID)"
-        RestApi.update(url: url, body: item.toJSONString(prettyPrint: false)!, complete: complete)
+        return RestApi.update(url: url, body: item.toJSONString(prettyPrint: false)!)
     }
     
-    static func create(item: MUnitWord, complete: @escaping (String) -> Void) {
+    static func create(item: MUnitWord) -> Observable<String> {
         // SQL: INSERT INTO UNITWORDS (TEXTBOOKID, UNIT, PART, SEQNUM, WORD, NOTE) VALUES (?,?,?,?,?,?)
         let url = "\(RestApi.url)UNITWORDS"
-        RestApi.create(url: url, body: item.toJSONString(prettyPrint: false)!, complete: complete)
+        return RestApi.create(url: url, body: item.toJSONString(prettyPrint: false)!)
     }
     
-    static func delete(_ id: Int, complete: @escaping (String) -> Void) {
+    static func delete(_ id: Int) -> Observable<String> {
         // SQL: DELETE UNITWORDS WHERE ID=?
         let url = "\(RestApi.url)UNITWORDS/\(id)"
-        RestApi.delete(url: url, complete: complete)
+        return RestApi.delete(url: url)
     }
 }
