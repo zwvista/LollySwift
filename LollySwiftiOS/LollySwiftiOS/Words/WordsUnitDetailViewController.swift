@@ -30,7 +30,7 @@ class WordsUnitDetailViewController: UITableViewController, UITextFieldDelegate 
         ddUnit.anchorView = tfUnit
         ddUnit.dataSource = vm.vmSettings.arrUnits
         ddUnit.selectRow(mWord.UNIT - 1)
-        ddUnit.selectionAction = { [unowned self] (index: Int, item: String) in
+        ddUnit.selectionAction = { (index: Int, item: String) in
             self.mWord.UNIT = index + 1
             self.tfUnit.text = String(self.mWord.UNIT)
         }
@@ -38,7 +38,7 @@ class WordsUnitDetailViewController: UITableViewController, UITextFieldDelegate 
         ddPart.anchorView = tfPart
         ddPart.dataSource = vm.vmSettings.arrParts
         ddPart.selectRow(mWord.PART - 1)
-        ddPart.selectionAction = { [unowned self] (index: Int, item: String) in
+        ddPart.selectionAction = { (index: Int, item: String) in
             self.mWord.PART = index + 1
             self.tfPart.text = self.mWord.PARTSTR(arrParts: vmSettings.arrParts)
         }

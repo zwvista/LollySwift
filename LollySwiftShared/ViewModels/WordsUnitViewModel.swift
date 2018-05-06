@@ -22,7 +22,7 @@ class WordsUnitViewModel: NSObject {
     public init(settings: SettingsViewModel, complete: @escaping () -> ()) {
         self.vmSettings = settings
         super.init()
-        MUnitWord.getDataByTextbook(settings.USTEXTBOOKID, unitPartFrom: settings.USUNITPARTFROM, unitPartTo: settings.USUNITPARTTO).subscribe(onNext:  { [unowned self] in self.arrWords = $0; complete() })
+        MUnitWord.getDataByTextbook(settings.USTEXTBOOKID, unitPartFrom: settings.USUNITPARTFROM, unitPartTo: settings.USUNITPARTTO).subscribe(onNext:  { self.arrWords = $0; complete() })
     }
     
     func filterWordsForSearchText(_ searchText: String, scope: String) {

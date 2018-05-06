@@ -18,7 +18,7 @@ class PhrasesLangViewModel: NSObject {
         self.settings = settings
         let item = settings.arrTextbooks[settings.selectedTextbookIndex]
         super.init()
-        MLangPhrase.getDataByLang(item.LANGID).subscribe(onNext: { [unowned self] in self.arrPhrases = $0; complete() })
+        MLangPhrase.getDataByLang(item.LANGID).subscribe(onNext: { self.arrPhrases = $0; complete() })
     }
     
     func filterPhrasesForSearchText(_ searchText: String, scope: String) {

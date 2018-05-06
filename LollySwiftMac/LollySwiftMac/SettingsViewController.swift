@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import RxSwift
 
 @objcMembers
 class SettingsViewController: NSViewController {
@@ -32,12 +33,15 @@ class SettingsViewController: NSViewController {
     @IBOutlet weak var pubPartTo: NSPopUpButton!
     @IBOutlet weak var btnUnitPartTo: NSButton!
     
+    let disposeBag = DisposeBag()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        vm.getData().subscribe(onNext: {
+        vm.getData().subscribe {
             self.updateLang()
-        })
+        }.disposed(by: disposeBag)
     }
+    
     @IBAction func close(_ sender: AnyObject) {
         let application = NSApplication.shared
         application.stopModal()
@@ -50,32 +54,32 @@ class SettingsViewController: NSViewController {
     }
     
     @IBAction func langSelected(_ sender: AnyObject) {
-        vm.setSelectedLangIndex(pubLanguages.indexOfSelectedItem).subscribe(onNext: {
-            self.vm.updateLang().subscribe(onNext: {
-                self.updateLang()
-            })
-        })
+        vm.setSelectedLangIndex(pubLanguages.indexOfSelectedItem).concatMap {
+            self.vm.updateLang()
+        }.subscribe {
+            self.updateLang()
+        }.disposed(by: disposeBag)
     }
     
     @IBAction func dictOnlineSelected(_ sender: AnyObject) {
         vm.selectedDictOnlineIndex = pubDictsOnline.indexOfSelectedItem
-        vm.updateDictOnline().subscribe(onNext: {
+        vm.updateDictOnline().subscribe {
             self.updateDictOnline()
-        })
+        }.disposed(by: disposeBag)
     }
     
     @IBAction func dictNoteSelected(_ sender: AnyObject) {
         vm.selectedDictNoteIndex = pubDictsNote.indexOfSelectedItem
-        vm.updateDictNote().subscribe(onNext: {
+        vm.updateDictNote().subscribe {
             self.updateDictOnline()
-        })
+        }.disposed(by: disposeBag)
     }
 
     @IBAction func textbookSelected(_ sender: AnyObject) {
         vm.selectedTextbookIndex = pubTextbooks.indexOfSelectedItem
-        vm.updateTextbook().subscribe(onNext: {
+        vm.updateTextbook().subscribe {
             self.updateTextbook()
-        })
+        }.disposed(by: disposeBag)
     }
     
     @IBAction func btnUnitPartToClicked(_ sender: AnyObject) {
@@ -88,33 +92,33 @@ class SettingsViewController: NSViewController {
     @IBAction func unitFromSelected(_ sender: AnyObject) {
         guard vm.USUNITFROM != pubUnitFrom.indexOfSelectedItem + 1 else {return}
         vm.USUNITFROM = pubUnitFrom.indexOfSelectedItem + 1
-        vm.updateUnitFrom().subscribe(onNext: {
+        vm.updateUnitFrom().subscribe {
             if self.btnUnitPartTo.state == .off || self.vm.isInvalidUnitPart {self.updateUnitPartTo()}
-        })
+        }.disposed(by: disposeBag)
     }
     
     @IBAction func unitToSelected(_ sender: AnyObject) {
         guard vm.USUNITTO != pubUnitTo.indexOfSelectedItem + 1 else {return}
         vm.USUNITTO = pubUnitTo.indexOfSelectedItem + 1
-        vm.updateUnitTo().subscribe(onNext: {
+        vm.updateUnitTo().subscribe {
             if self.vm.isInvalidUnitPart {self.updateUnitPartFrom()}
-        })
+        }.disposed(by: disposeBag)
     }
     
     @IBAction func partFromSelected(_ sender: AnyObject) {
         guard vm.USPARTFROM != pubPartFrom.indexOfSelectedItem + 1 else {return}
         vm.USPARTFROM = pubPartFrom.indexOfSelectedItem + 1
-        vm.updatePartFrom().subscribe(onNext: {
+        vm.updatePartFrom().subscribe {
             if self.btnUnitPartTo.state == .off || self.vm.isInvalidUnitPart {self.updateUnitPartTo()}
-        })
+        }.disposed(by: disposeBag)
     }
     
     @IBAction func partToSelected(_ sender: AnyObject) {
         guard vm.USPARTTO != pubPartTo.indexOfSelectedItem + 1 else {return}
         vm.USPARTTO = pubPartTo.indexOfSelectedItem + 1
-        vm.updatePartTo().subscribe(onNext: {
+        vm.updatePartTo().subscribe {
             if self.vm.isInvalidUnitPart {self.updateUnitPartFrom()}
-        })
+        }.disposed(by: disposeBag)
     }
 
     func updateLang() {
@@ -151,30 +155,30 @@ class SettingsViewController: NSViewController {
     func updateUnitPartFrom() {
         if vm.USUNITFROM != vm.USUNITTO {
             vm.USUNITFROM = vm.USUNITTO
-            vm.updateUnitFrom().subscribe(onNext: {
+            vm.updateUnitFrom().subscribe {
                 self.pubUnitFrom.selectItem(at: self.pubUnitTo.indexOfSelectedItem)
-            })
+            }.disposed(by: disposeBag)
         }
         if vm.USPARTFROM != vm.USPARTTO {
             vm.USPARTFROM = vm.USPARTTO
-            vm.updatePartFrom().subscribe(onNext: {
+            vm.updatePartFrom().subscribe {
                 self.pubPartFrom.selectItem(at: self.pubPartTo.indexOfSelectedItem)
-            })
+            }.disposed(by: disposeBag)
         }
     }
     
     func updateUnitPartTo() {
         if vm.USUNITTO != vm.USUNITFROM {
             vm.USUNITTO = vm.USUNITFROM
-            vm.updateUnitTo().subscribe(onNext: {
+            vm.updateUnitTo().subscribe {
                 self.pubUnitTo.selectItem(at: self.pubUnitFrom.indexOfSelectedItem)
-            })
+            }.disposed(by: disposeBag)
         }
         if vm.USPARTTO != vm.USPARTFROM {
             vm.USPARTTO = vm.USPARTFROM
-            vm.updatePartTo().subscribe(onNext: {
+            vm.updatePartTo().subscribe {
                 self.pubPartTo.selectItem(at: self.pubPartFrom.indexOfSelectedItem)
-            })
+            }.disposed(by: disposeBag)
         }
     }
 

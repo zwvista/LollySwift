@@ -8,6 +8,7 @@
 
 import UIKit
 import DropDown
+import RxSwift
 
 class SettingsViewController: UITableViewController {
     @IBOutlet weak var langCell: UITableViewCell!
@@ -39,89 +40,91 @@ class SettingsViewController: UITableViewController {
         return vmSettings
     }
     
+    let disposeBag = DisposeBag()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        vm.getData().subscribe(onNext: {
+        vm.getData().subscribe {
             self.updateLang()
-        })
+        }.disposed(by: disposeBag)
         
         ddLang.anchorView = langCell
         ddLang.dataSource = vm.arrLanguages.map { $0.LANGNAME }
         ddLang.selectRow(vm.selectedLangIndex)
-        ddLang.selectionAction = { [unowned self] (index: Int, item: String) in
+        ddLang.selectionAction = { (index: Int, item: String) in
             guard index != self.vm.selectedLangIndex else {return}
-            self.vm.setSelectedLangIndex(index).subscribe(onNext: {
-                self.vm.updateLang().subscribe(onNext: {
-                    self.updateLang()
-                })
-            })
+            self.vm.setSelectedLangIndex(index).concatMap {
+                self.vm.updateLang()
+            }.subscribe {
+                self.updateLang()
+            }.disposed(by: self.disposeBag)
         }
         
         ddDictOnline.anchorView = dictOnlineCell
-        ddDictOnline.selectionAction = { [unowned self] (index: Int, item: String) in
+        ddDictOnline.selectionAction = { (index: Int, item: String) in
             guard index != self.vm.selectedDictOnlineIndex else {return}
             self.vm.selectedDictOnlineIndex = index
-            self.vm.updateDictOnline().subscribe(onNext: {
+            self.vm.updateDictOnline().subscribe {
                 self.updateDictOnline()
-            })
+            }.disposed(by: self.disposeBag)
         }
         
         ddDictNote.anchorView = dictNoteCell
-        ddDictNote.selectionAction = { [unowned self] (index: Int, item: String) in
+        ddDictNote.selectionAction = { (index: Int, item: String) in
             guard index != self.vm.selectedDictNoteIndex else {return}
             self.vm.selectedDictNoteIndex = index
-            self.vm.updateDictNote().subscribe(onNext: {
+            self.vm.updateDictNote().subscribe {
                 self.updateDictNote()
-            })
+            }.disposed(by: self.disposeBag)
         }
         
         ddTextbook.anchorView = textbookCell
-        ddTextbook.selectionAction = { [unowned self] (index: Int, item: String) in
+        ddTextbook.selectionAction = { (index: Int, item: String) in
             guard index != self.vm.selectedTextbookIndex else {return}
             self.vm.selectedTextbookIndex = index
-            self.vm.updateTextbook().subscribe(onNext: {
+            self.vm.updateTextbook().subscribe {
                 self.updateTextbook()
-            })
+            }.disposed(by: self.disposeBag)
         }
         
         ddUnitFrom.anchorView = unitFromCell
-        ddUnitFrom.selectionAction = { [unowned self] (index: Int, item: String) in
+        ddUnitFrom.selectionAction = { (index: Int, item: String) in
             guard self.vm.USUNITFROM != index + 1 else {return}
             self.vm.USUNITFROM = index + 1
-            self.vm.updateUnitFrom().subscribe(onNext: {
+            self.vm.updateUnitFrom().subscribe {
                 self.lblUnitFrom.text = item
                 if !self.swUnitPartTo.isOn || self.vm.isInvalidUnitPart {self.updateUnitPartTo()}
-            })
+            }.disposed(by: self.disposeBag)
         }
         
         ddPartFrom.anchorView = partFromCell
-        ddPartFrom.selectionAction = { [unowned self] (index: Int, item: String) in
+        ddPartFrom.selectionAction = { (index: Int, item: String) in
             guard self.vm.USPARTFROM != index + 1 else {return}
             self.vm.USPARTFROM = index + 1
-            self.vm.updatePartFrom().subscribe(onNext: {
+            self.vm.updatePartFrom().subscribe {
                 self.lblPartFrom.text = item
                 if !self.swUnitPartTo.isOn || self.vm.isInvalidUnitPart {self.updateUnitPartTo()}
-            })
+            }.disposed(by: self.disposeBag)
         }
         
         ddUnitTo.anchorView = unitToCell
-        ddUnitTo.selectionAction = { [unowned self] (index: Int, item: String) in
+        ddUnitTo.selectionAction = { (index: Int, item: String) in
             guard self.vm.USUNITTO != index + 1 else {return}
             self.vm.USUNITTO = index + 1
-            self.vm.updateUnitTo().subscribe(onNext: {
+            self.vm.updateUnitTo().subscribe {
                 self.lblUnitTo.text = item
                 if self.vm.isInvalidUnitPart {self.updateUnitPartFrom()}
-            })
+            }.disposed(by: self.disposeBag)
         }
         
         ddPartTo.anchorView = partToCell
-        ddPartTo.selectionAction = { [unowned self] (index: Int, item: String) in
+        ddPartTo.selectionAction = { (index: Int, item: String) in
             guard self.vm.USPARTTO != index + 1 else {return}
             self.vm.USPARTTO = index + 1
-            self.vm.updatePartTo().subscribe(onNext: {
+            self.vm.updatePartTo().subscribe {
                 self.lblPartTo.text = item
                 if self.vm.isInvalidUnitPart {self.updateUnitPartFrom()}
-            })
+            }.disposed(by: self.disposeBag)
         }
     }
     
@@ -209,30 +212,30 @@ class SettingsViewController: UITableViewController {
     func updateUnitPartFrom() {
         if vm.USUNITFROM != vm.USUNITTO {
             vm.USUNITFROM = vm.USUNITTO
-            vm.updateUnitFrom().subscribe(onNext: {
+            vm.updateUnitFrom().subscribe {
                 self.lblUnitFrom.text = self.lblUnitTo.text
-            })
+            }.disposed(by: disposeBag)
         }
         if vm.USPARTFROM != vm.USPARTTO {
             vm.USPARTFROM = vm.USPARTTO
-            vm.updatePartFrom().subscribe(onNext: {
+            vm.updatePartFrom().subscribe {
                 self.lblPartFrom.text = self.lblPartTo.text
-            })
+            }.disposed(by: disposeBag)
         }
     }
     
     func updateUnitPartTo() {
         if vm.USUNITTO != vm.USUNITFROM {
             vm.USUNITTO = vm.USUNITFROM
-            vm.updateUnitTo().subscribe(onNext: {
+            vm.updateUnitTo().subscribe {
                 self.lblUnitTo.text = self.lblUnitFrom.text
-            })
+            }.disposed(by: disposeBag)
         }
         if vm.USPARTTO != vm.USPARTFROM {
             vm.USPARTTO = vm.USPARTFROM
-            vm.updatePartTo().subscribe(onNext: {
+            vm.updatePartTo().subscribe {
                 self.lblPartTo.text = self.lblPartFrom.text
-            })
+            }.disposed(by: disposeBag)
         }
     }
     

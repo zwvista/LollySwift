@@ -27,7 +27,7 @@ class WordsDictViewController: UIViewController {
         ddWord.anchorView = btnWord
         ddWord.dataSource = vm.arrWords
         ddWord.selectRow(vm.selectWordIndex)
-        ddWord.selectionAction = { [unowned self] (index: Int, item: String) in
+        ddWord.selectionAction = { (index: Int, item: String) in
             self.vm.selectWordIndex = index
             self.selectWordChanged()
         }
@@ -35,7 +35,7 @@ class WordsDictViewController: UIViewController {
         ddDictOnline.anchorView = btnDict
         ddDictOnline.dataSource = vm.vmSettings.arrDictsOnline.map { $0.DICTNAME! }
         ddDictOnline.selectRow(vm.vmSettings.selectedDictOnlineIndex)
-        ddDictOnline.selectionAction = { [unowned self] (index: Int, item: String) in
+        ddDictOnline.selectionAction = { (index: Int, item: String) in
             self.vm.vmSettings.selectedDictOnlineIndex = index
             self.vm.vmSettings.updateDictOnline().subscribe(onNext: {
                 self.selectDictChanged()

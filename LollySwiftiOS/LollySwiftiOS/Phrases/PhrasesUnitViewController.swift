@@ -19,7 +19,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, UISearchBarDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.showBlurLoader()
-        vm = PhrasesUnitViewModel(settings: vmSettings) { [unowned self] in
+        vm = PhrasesUnitViewModel(settings: vmSettings) {
             self.setupSearchController(delegate: self)
             self.tableView.reloadData()
             self.view.removeBlurLoader()

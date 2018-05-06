@@ -30,7 +30,7 @@ class PhrasesUnitDetailViewController: UITableViewController, UITextFieldDelegat
         ddUnit.anchorView = tfUnit
         ddUnit.dataSource = vm.vmSettings.arrUnits
         ddUnit.selectRow(mPhrase.UNIT - 1)
-        ddUnit.selectionAction = { [unowned self] (index: Int, item: String) in
+        ddUnit.selectionAction = { (index: Int, item: String) in
             self.mPhrase.UNIT = index + 1
             self.tfUnit.text = String(self.mPhrase.UNIT)
         }
@@ -38,7 +38,7 @@ class PhrasesUnitDetailViewController: UITableViewController, UITextFieldDelegat
         ddPart.anchorView = tfPart
         ddPart.dataSource = vm.vmSettings.arrParts
         ddPart.selectRow(mPhrase.PART - 1)
-        ddPart.selectionAction = { [unowned self] (index: Int, item: String) in
+        ddPart.selectionAction = { (index: Int, item: String) in
             self.mPhrase.PART = index + 1
             self.tfPart.text = self.mPhrase.PARTSTR(arrParts: vmSettings.arrParts)
         }

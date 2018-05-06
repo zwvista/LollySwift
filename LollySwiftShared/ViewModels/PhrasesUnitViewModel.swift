@@ -17,7 +17,7 @@ class PhrasesUnitViewModel: NSObject {
     public init(settings: SettingsViewModel, complete: @escaping () -> ()) {
         self.vmSettings = settings
         super.init()
-        MUnitPhrase.getDataByTextbook(vmSettings.USTEXTBOOKID, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO).subscribe(onNext: { [unowned self] in self.arrPhrases = $0; complete() })
+        MUnitPhrase.getDataByTextbook(vmSettings.USTEXTBOOKID, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO).subscribe(onNext: { self.arrPhrases = $0; complete() })
     }
     
     func filterPhrasesForSearchText(_ searchText: String, scope: String) {
