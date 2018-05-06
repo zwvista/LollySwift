@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class PhrasesUnitViewController: PhrasesBaseViewController, UISearchBarDelegate, UISearchResultsUpdating {
     
@@ -16,6 +17,8 @@ class PhrasesUnitViewController: PhrasesBaseViewController, UISearchBarDelegate,
     }
     @IBOutlet weak var btnEdit: UIBarButtonItem!
     
+    let disposeBag = DisposeBag()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.showBlurLoader()
@@ -63,7 +66,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, UISearchBarDelegate,
             let i = indexPath.row
             let item = self.vm.arrPhrases[i]
             self.yesNoAction(title: "delete", message: "Do you really want to delete the phrase \"\(item.PHRASE)\"?", yesHandler: { (action) in
-                PhrasesUnitViewModel.delete(item.ID).subscribe()
+                PhrasesUnitViewModel.delete(item.ID).subscribe().disposed(by: self.disposeBag)
                 self.vm.arrPhrases.remove(at: i)
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }, noHandler: { (action) in

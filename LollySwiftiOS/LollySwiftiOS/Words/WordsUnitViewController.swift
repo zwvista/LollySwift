@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UISearchResultsUpdating {
 
@@ -17,6 +18,8 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
     var timer = Timer()
     @IBOutlet weak var btnEdit: UIBarButtonItem!
     
+    let disposeBag = DisposeBag()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.showBlurLoader()
@@ -65,7 +68,7 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
         let item = self.vm.arrWords[i]
         func delete() {
             self.yesNoAction(title: "delete", message: "Do you really want to delete the word \"\(item.WORD)\"?", yesHandler: { (action) in
-                WordsUnitViewModel.delete(item.ID).subscribe()
+                WordsUnitViewModel.delete(item.ID).subscribe().disposed(by: self.disposeBag)
                 self.vm.arrWords.remove(at: i)
                 tableView.deleteRows(at: [indexPath], with: .fade)
                 self.reindex()

@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import RxSwift
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -15,11 +16,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     static var theSettingsViewModel: SettingsViewModel {
         return (NSApplication.shared.delegate as! AppDelegate)._theSettingsViewModel
     }
+    
+    let disposeBag = DisposeBag()
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         _theSettingsViewModel.getData().subscribe(onNext: {
             self.wordsInUnit(self)
-        })
+        }).disposed(by: disposeBag)
         // Insert code here to initialize your application
     }
 

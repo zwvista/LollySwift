@@ -14,11 +14,16 @@ class PhrasesLangViewModel: NSObject {
     var arrPhrases = [MLangPhrase]()
     var arrPhrasesFiltered: [MLangPhrase]?
     
+    let disposeBag = DisposeBag()
+    
     public init(settings: SettingsViewModel, complete: @escaping () -> ()) {
         self.settings = settings
         let item = settings.arrTextbooks[settings.selectedTextbookIndex]
         super.init()
-        MLangPhrase.getDataByLang(item.LANGID).subscribe(onNext: { self.arrPhrases = $0; complete() })
+        MLangPhrase.getDataByLang(item.LANGID).subscribe(onNext: {
+            self.arrPhrases = $0
+            complete()
+        }).disposed(by: disposeBag)
     }
     
     func filterPhrasesForSearchText(_ searchText: String, scope: String) {

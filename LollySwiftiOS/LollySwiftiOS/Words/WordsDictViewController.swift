@@ -9,6 +9,7 @@
 import UIKit
 import WebKit
 import DropDown
+import RxSwift
 
 class WordsDictViewController: UIViewController {
 
@@ -19,6 +20,8 @@ class WordsDictViewController: UIViewController {
     
     let vm = SearchViewModel(settings: vmSettings) {}
     let ddWord = DropDown(), ddDictOnline = DropDown()
+    
+    let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,9 +40,9 @@ class WordsDictViewController: UIViewController {
         ddDictOnline.selectRow(vm.vmSettings.selectedDictOnlineIndex)
         ddDictOnline.selectionAction = { (index: Int, item: String) in
             self.vm.vmSettings.selectedDictOnlineIndex = index
-            self.vm.vmSettings.updateDictOnline().subscribe(onNext: {
+            self.vm.vmSettings.updateDictOnline().subscribe {
                 self.selectDictChanged()
-            })
+            }.disposed(by: self.disposeBag)
         }
         
         selectWordChanged()

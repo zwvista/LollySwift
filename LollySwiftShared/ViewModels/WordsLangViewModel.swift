@@ -14,11 +14,16 @@ class WordsLangViewModel: NSObject {
     var arrWords = [MLangWord]()
     var arrWordsFiltered: [MLangWord]?
     
+    let disposeBag = DisposeBag()
+
     public init(settings: SettingsViewModel, complete: @escaping () -> ()) {
         self.settings = settings
         let item = settings.arrTextbooks[settings.selectedTextbookIndex]
         super.init()
-        MLangWord.getDataByLang(item.LANGID).subscribe(onNext:  {self.arrWords = $0; complete() })
+        MLangWord.getDataByLang(item.LANGID).subscribe(onNext: {
+            self.arrWords = $0
+            complete()
+        }).disposed(by: disposeBag)
     }
     
     func filterWordsForSearchText(_ searchText: String, scope: String) {

@@ -14,10 +14,15 @@ class PhrasesUnitViewModel: NSObject {
     var arrPhrases = [MUnitPhrase]()
     var arrPhrasesFiltered: [MUnitPhrase]?
     
+    let disposeBag = DisposeBag()
+
     public init(settings: SettingsViewModel, complete: @escaping () -> ()) {
         self.vmSettings = settings
         super.init()
-        MUnitPhrase.getDataByTextbook(vmSettings.USTEXTBOOKID, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO).subscribe(onNext: { self.arrPhrases = $0; complete() })
+        MUnitPhrase.getDataByTextbook(vmSettings.USTEXTBOOKID, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO).subscribe(onNext: {
+            self.arrPhrases = $0
+            complete()
+        }).disposed(by: disposeBag)
     }
     
     func filterPhrasesForSearchText(_ searchText: String, scope: String) {
@@ -47,7 +52,9 @@ class PhrasesUnitViewModel: NSObject {
             let item = arrPhrases[i - 1]
             guard item.SEQNUM != i else {continue}
             item.SEQNUM = i
-            PhrasesUnitViewModel.update(item.ID, seqnum: item.SEQNUM).subscribe(onNext: { complete(i - 1) })
+            PhrasesUnitViewModel.update(item.ID, seqnum: item.SEQNUM).subscribe(onNext: {
+                complete(i - 1)
+            }).disposed(by: disposeBag)
         }
     }
 

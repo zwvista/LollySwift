@@ -18,11 +18,16 @@ class WordsUnitViewModel: NSObject {
     var arrWords = [MUnitWord]()
     var arrWordsFiltered: [MUnitWord]?
     var noteFromIndex = 0, noteToIndex = 0, noteIfEmpty = true
+    
+    let disposeBag = DisposeBag()
 
     public init(settings: SettingsViewModel, complete: @escaping () -> ()) {
         self.vmSettings = settings
         super.init()
-        MUnitWord.getDataByTextbook(settings.USTEXTBOOKID, unitPartFrom: settings.USUNITPARTFROM, unitPartTo: settings.USUNITPARTTO).subscribe(onNext:  { self.arrWords = $0; complete() })
+        MUnitWord.getDataByTextbook(settings.USTEXTBOOKID, unitPartFrom: settings.USUNITPARTFROM, unitPartTo: settings.USUNITPARTTO).subscribe(onNext: {
+            self.arrWords = $0
+            complete()
+        }).disposed(by: disposeBag)
     }
     
     func filterWordsForSearchText(_ searchText: String, scope: String) {
@@ -54,7 +59,9 @@ class WordsUnitViewModel: NSObject {
             let item = arrWords[i - 1]
             guard item.SEQNUM != i else {continue}
             item.SEQNUM = i
-            WordsUnitViewModel.update(item.ID, seqnum: item.SEQNUM).subscribe(onNext: { complete(i - 1) })
+            WordsUnitViewModel.update(item.ID, seqnum: item.SEQNUM).subscribe(onNext: {
+                complete(i - 1)
+            }).disposed(by: disposeBag)
         }
     }
     
@@ -82,8 +89,8 @@ class WordsUnitViewModel: NSObject {
             item.NOTE = mDictNote.htmlNote(html)
             WordsUnitViewModel.update(item.ID, note: item.NOTE!).subscribe(onNext: {
                 complete()
-            })
-        })
+            }).disposed(by: self.disposeBag)
+        }).disposed(by: disposeBag)
     }
     
     func getNotes(ifEmpty: Bool, complete: (Int) -> Void) {

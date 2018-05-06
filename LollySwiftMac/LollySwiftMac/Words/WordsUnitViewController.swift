@@ -8,6 +8,7 @@
 
 import Cocoa
 import WebKit
+import RxSwift
 
 class WordsUnitViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate, WKNavigationDelegate {
     
@@ -27,6 +28,8 @@ class WordsUnitViewController: NSViewController, LollyProtocol, NSTableViewDataS
     // https://developer.apple.com/videos/play/wwdc2011/120/
     // https://stackoverflow.com/questions/2121907/drag-drop-reorder-rows-on-nstableview
     let tableRowDragType = NSPasteboard.PasteboardType(rawValue: "private.table-row")
+    
+    let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -110,7 +113,7 @@ class WordsUnitViewController: NSViewController, LollyProtocol, NSTableViewDataS
         let newValue = sender.stringValue
         guard oldValue != newValue else {return}
         item.setValue(newValue, forKey: key)
-        WordsUnitViewModel.update(item: item).subscribe(onNext: {})
+        WordsUnitViewModel.update(item: item).subscribe().disposed(by: disposeBag)
     }
     
     func searchWord(word: String) {
@@ -137,7 +140,7 @@ class WordsUnitViewController: NSViewController, LollyProtocol, NSTableViewDataS
             self.tableView.reloadData()
             self.tfNewWord.stringValue = ""
             self.newWord = ""
-        })
+        }).disposed(by: disposeBag)
     }
     
     @IBAction func searchNewWord(_ sender: AnyObject) {

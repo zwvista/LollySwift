@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import RxSwift
 
 @objcMembers
 class WordsUnitDetailViewController: NSViewController {
@@ -19,6 +20,8 @@ class WordsUnitDetailViewController: NSViewController {
     @IBOutlet weak var pubUnit: NSPopUpButton!
     @IBOutlet weak var pubPart: NSPopUpButton!
     @IBOutlet weak var tfWord: NSTextField!
+    
+    let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,9 +39,14 @@ class WordsUnitDetailViewController: NSViewController {
         mWord.PART = pubPart.indexOfSelectedItem + 1
         if isAdd {
             vm.arrWords.append(mWord)
-            WordsUnitViewModel.create(item: mWord).subscribe(onNext: { self.mWord.ID = $0; self.complete?() })
+            WordsUnitViewModel.create(item: mWord).subscribe(onNext: {
+                self.mWord.ID = $0
+                self.complete?()
+            }).disposed(by: disposeBag)
         } else {
-            WordsUnitViewModel.update(item: mWord).subscribe(onNext: { self.complete?() })
+            WordsUnitViewModel.update(item: mWord).subscribe {
+                self.complete?()
+            }.disposed(by: disposeBag)
         }
         dismissViewController(self)
     }

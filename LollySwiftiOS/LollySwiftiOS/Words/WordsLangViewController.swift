@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class WordsLangViewController: WordsBaseViewController, UISearchBarDelegate, UISearchResultsUpdating {
 
@@ -14,6 +15,8 @@ class WordsLangViewController: WordsBaseViewController, UISearchBarDelegate, UIS
     var arrWords: [MLangWord] {
         return searchController.isActive && searchBar.text != "" ? vm.arrWordsFiltered! : vm.arrWords
     }
+    
+    let disposeBag = DisposeBag()
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -41,7 +44,7 @@ class WordsLangViewController: WordsBaseViewController, UISearchBarDelegate, UIS
             let i = indexPath.row
             let item = self.vm.arrWords[i]
             self.yesNoAction(title: "delete", message: "Do you really want to delete the word \"\(item.WORD)\"?", yesHandler: { (action) in
-                WordsLangViewModel.delete(item.ID).subscribe()
+                WordsLangViewModel.delete(item.ID).subscribe().disposed(by: self.disposeBag)
                 self.vm.arrWords.remove(at: i)
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }, noHandler: { (action) in
