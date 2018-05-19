@@ -67,5 +67,9 @@ class PhrasesUnitViewModel: NSObject {
         item.SEQNUM = (maxElem?.SEQNUM ?? 0) + 1
         return item
     }
-
+    
+    func movePhrase(at oldIndex: Int, to newIndex: Int) {
+        let item = arrPhrases.remove(at: oldIndex)
+        arrPhrases.insert(item, at: newIndex)
+    }
 }

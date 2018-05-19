@@ -55,4 +55,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBAction func wordsInUnit(_ sender: AnyObject) {
         showWindow(storyBoardName: "Words", windowControllerName: "WordsUnitWindowController", modal: false)
     }
+    
+    @IBAction func phrasesInUnit(_ sender: AnyObject) {
+        showWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesUnitWindowController", modal: false)
+    }
 }

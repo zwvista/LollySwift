@@ -10,19 +10,17 @@ import Cocoa
 import WebKit
 import RxSwift
 
-class WordsUnitViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate, WKNavigationDelegate {
+class PhrasesUnitViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate, WKNavigationDelegate {
     
-    @IBOutlet weak var wvDictOnline: WKWebView!
-    @IBOutlet weak var tfNewWord: NSTextField!
     @IBOutlet weak var tableView: NSTableView!
     
     var timer = Timer()
     @objc
-    var newWord = ""
+    var newPhrase = ""
     
-    var vm: WordsUnitViewModel!
-    var arrWords: [MUnitWord] {
-        return vm.arrWords
+    var vm: PhrasesUnitViewModel!
+    var arrPhrases: [MUnitPhrase] {
+        return vm.arrPhrases
     }
     
     // https://developer.apple.com/videos/play/wwdc2011/120/
@@ -45,12 +43,12 @@ class WordsUnitViewController: NSViewController, LollyProtocol, NSTableViewDataS
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return arrWords.count
+        return arrPhrases.count
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! NSTableCellView
-        let item = arrWords[row]
+        let item = arrPhrases[row]
         let columnName = tableColumn!.title
         cell.textField?.stringValue = columnName == "PART" ? item.PARTSTR(arrParts: vm.vmSettings.arrParts) : String(describing: item.value(forKey: columnName) ?? "")
         return cell;
@@ -81,7 +79,7 @@ class WordsUnitViewController: NSViewController, LollyProtocol, NSTableViewDataS
         var newIndexOffset = 0
         
         func moveRow(at oldIndex: Int, to newIndex: Int) {
-            vm.moveWord(at: oldIndex, to: newIndex)
+            vm.movePhrase(at: oldIndex, to: newIndex)
             tableView.moveRow(at: oldIndex, to: newIndex)
         }
         
@@ -108,55 +106,12 @@ class WordsUnitViewController: NSViewController, LollyProtocol, NSTableViewDataS
         let row = tableView.row(for: sender)
         let col = tableView.column(for: sender)
         let key = tableView.tableColumns[col].title
-        let item = arrWords[row]
+        let item = arrPhrases[row]
         let oldValue = String(describing: item.value(forKey: key)!)
         let newValue = sender.stringValue
         guard oldValue != newValue else {return}
         item.setValue(newValue, forKey: key)
-        WordsUnitViewModel.update(item: item).subscribe().disposed(by: disposeBag)
-    }
-    
-    func searchWord(word: String) {
-        let url = vm.vmSettings.selectedDictOnline.urlString(word)
-        wvDictOnline.load(URLRequest(url: URL(string: url)!))
-    }
-    
-    func searchWordInTableView() {
-        guard tableView.selectedRow != -1 else {return}
-        searchWord(word: arrWords[tableView.selectedRow].WORD)
-    }
-    
-    func tableViewSelectionDidChange(_ notification: Notification) {
-        searchWordInTableView()
-    }
-    
-    @IBAction func addNewWord(_ sender: AnyObject) {
-        guard !newWord.isEmpty else {return}
-        let mWord = vm.newUnitWord()
-        mWord.WORD = newWord
-        WordsUnitViewModel.create(item: mWord).subscribe(onNext: {
-            mWord.ID = $0
-            self.vm.arrWords.append(mWord)
-            self.tableView.reloadData()
-            self.tfNewWord.stringValue = ""
-            self.newWord = ""
-        }).disposed(by: disposeBag)
-    }
-    
-    @IBAction func searchNewWord(_ sender: AnyObject) {
-        commitEditing()
-        guard !newWord.isEmpty else {return}
-        searchWord(word: newWord)
-    }
-
-    override func controlTextDidEndEditing(_ obj: Notification) {
-        let searchfield = obj.object as! NSControl
-        guard searchfield === tfNewWord else {return}
-        let dict = (obj as NSNotification).userInfo!
-        let reason = dict["NSTextMovement"] as! NSNumber
-        let code = Int(reason.int32Value)
-        guard code == NSReturnTextMovement else {return}
-        addNewWord(self)
+        PhrasesUnitViewModel.update(item: item).subscribe().disposed(by: disposeBag)
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
@@ -165,81 +120,46 @@ class WordsUnitViewController: NSViewController, LollyProtocol, NSTableViewDataS
     }
 
     // https://stackoverflow.com/questions/24219441/how-to-use-nstoolbar-in-xcode-6-and-storyboard
-    @IBAction func addWord(_ sender: Any) {
-        let detailVC = self.storyboard!.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "WordsUnitDetailViewController")) as! WordsUnitDetailViewController
+    @IBAction func addPhrase(_ sender: Any) {
+        let detailVC = self.storyboard!.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "PhrasesUnitDetailViewController")) as! PhrasesUnitDetailViewController
         detailVC.vm = vm
-        detailVC.mWord = vm.newUnitWord()
-        detailVC.complete = { self.tableView.reloadData(); self.addWord(self) }
+        detailVC.mPhrase = vm.newUnitPhrase()
+        detailVC.complete = { self.tableView.reloadData(); self.addPhrase(self) }
         self.presentViewControllerAsSheet(detailVC)
     }
     
-    @IBAction func deleteWord(_ sender: Any) {
+    @IBAction func deletePhrase(_ sender: Any) {
     }
     
     @IBAction func refreshTableView(_ sender: Any) {
-        vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel) {
+        vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel) {
             self.tableView.reloadData()
         }
     }
 
-    @IBAction func editWord(_ sender: Any) {
-        let detailVC = self.storyboard!.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "WordsUnitDetailViewController")) as! WordsUnitDetailViewController
+    @IBAction func editPhrase(_ sender: Any) {
+        let detailVC = self.storyboard!.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "PhrasesUnitDetailViewController")) as! PhrasesUnitDetailViewController
         detailVC.vm = vm
         let i = tableView.selectedRow
-        detailVC.mWord = vm.arrWords[i]
+        detailVC.mPhrase = vm.arrPhrases[i]
         detailVC.complete = { self.tableView.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count)) }
         self.presentViewControllerAsModalWindow(detailVC)
     }
     
-    @IBAction func getNote(_ sender: Any) {
-        let col = tableView.tableColumns.index(where: {$0.title == "NOTE"})!
-        vm.getNote(index: tableView.selectedRow).subscribe {
-            self.tableView.reloadData(forRowIndexes: [self.tableView.selectedRow], columnIndexes: [col])
-        }.disposed(by: disposeBag)
-    }
-    
-    @IBAction func copyWord(_ sender: Any) {
-        let item = vm.arrWords[tableView.selectedRow]
+    @IBAction func copyPhrase(_ sender: Any) {
+        let item = vm.arrPhrases[tableView.selectedRow]
         let pasteboard = NSPasteboard.general
         pasteboard.declareTypes([.string], owner: nil)
-        pasteboard.setString(item.WORD, forType: .string)
+        pasteboard.setString(item.PHRASE, forType: .string)
     }
     
-    @IBAction func googleWord(_ sender: Any) {
-        let item = vm.arrWords[tableView.selectedRow]
-        NSWorkspace.shared.open([URL(string: "https://www.google.com/search?q=\(item.WORD)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!],
+    @IBAction func googlePhrase(_ sender: Any) {
+        let item = vm.arrPhrases[tableView.selectedRow]
+        NSWorkspace.shared.open([URL(string: "https://www.google.com/search?q=\(item.PHRASE)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!],
                                 withAppBundleIdentifier:"com.apple.Safari",
                                 options: [],
                                 additionalEventParamDescriptor: nil,
                                 launchIdentifiers: nil)
-    }
-    
-    @IBAction func getNotes(_ sender: Any) {
-        let alert = NSAlert()
-        alert.messageText = "Retrieve Notes"
-        alert.informativeText = "question"
-        alert.alertStyle = .informational
-        alert.addButton(withTitle: "Empty Notes Only")
-        alert.addButton(withTitle: "All Notes")
-        alert.addButton(withTitle: "Cancel")
-        let res = alert.runModal()
-        switch res {
-        case .alertThirdButtonReturn:
-            break
-        default:
-            vm.getNotes(ifEmpty: res == .alertFirstButtonReturn) {
-                timer = Timer.scheduledTimer(timeInterval: TimeInterval(Double($0) / 1000.0), target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
-            }
-        }
-    }
-    
-    @objc
-    func timerAction() {
-        vm.getNextNote(rowComplete: {
-            self.tableView.reloadData(forRowIndexes: [$0], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count))
-        }, allComplete: {
-//            self.tableView.reloadData()
-        })
     }
     
     func settingsChanged() {
@@ -247,12 +167,12 @@ class WordsUnitViewController: NSViewController, LollyProtocol, NSTableViewDataS
     }
 }
 
-class WordsUnitWindowController: NSWindowController, LollyProtocol {
+class PhrasesUnitWindowController: NSWindowController, LollyProtocol {
 
     @IBOutlet weak var acDictsOnline: NSArrayController!
     @IBOutlet weak var pubDictsOnline: NSPopUpButton!
     
-    var vc: WordsUnitViewController {return contentViewController as! WordsUnitViewController}
+    var vc: PhrasesUnitViewController {return contentViewController as! PhrasesUnitViewController}
     @objc var vm: SettingsViewModel {return vmSettings}
     
     override func windowDidLoad() {
@@ -262,10 +182,6 @@ class WordsUnitWindowController: NSWindowController, LollyProtocol {
     
     func settingsChanged() {
         
-    }
-    
-    @IBAction func dictsOnlineChanged(_ sender: Any) {
-        vc.searchWordInTableView()
     }
 }
 
