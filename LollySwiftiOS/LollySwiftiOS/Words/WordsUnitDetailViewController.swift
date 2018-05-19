@@ -77,10 +77,12 @@ class WordsUnitDetailViewController: UITableViewController, UITextFieldDelegate 
         mWord.NOTE = tfNote.text
         
         if isAdd {
-            vm.arrWords.append(mWord)
-            WordsUnitViewModel.create(item: mWord).subscribe(onNext: {
-                self.mWord.ID = $0
-            }).disposed(by: disposeBag)
+            if !mWord.WORD.isEmpty {
+                vm.arrWords.append(mWord)
+                WordsUnitViewModel.create(item: mWord).subscribe(onNext: {
+                    self.mWord.ID = $0
+                }).disposed(by: disposeBag)
+            }
         } else {
             WordsUnitViewModel.update(item: mWord).subscribe().disposed(by: disposeBag)
         }

@@ -80,17 +80,15 @@ class WordsUnitViewModel: NSObject {
         arrWords.insert(item, at: newIndex)
     }
 
-    func getNote(index: Int, complete: @escaping () -> Void) {
-        guard let mDictNote = mDictNote else {return}
+    func getNote(index: Int) -> Observable<()> {
+        guard let mDictNote = mDictNote else {return Observable.empty() }
         let item = arrWords[index]
         let url = mDictNote.urlString(item.WORD)
-        RestApi.getHtml(url: url).subscribe(onNext: { html in
-//            print(html)
+        return RestApi.getHtml(url: url).concatMap { (html) -> Observable<()> in
+            print(html)
             item.NOTE = mDictNote.htmlNote(html)
-            WordsUnitViewModel.update(item.ID, note: item.NOTE!).subscribe(onNext: {
-                complete()
-            }).disposed(by: self.disposeBag)
-        }).disposed(by: disposeBag)
+            return WordsUnitViewModel.update(item.ID, note: item.NOTE!)
+        }
     }
     
     func getNotes(ifEmpty: Bool, complete: (Int) -> Void) {
@@ -109,7 +107,9 @@ class WordsUnitViewModel: NSObject {
             allComplete()
         } else {
             let i = noteFromIndex
-            getNote(index: i) { rowComplete(i) }
+            getNote(index: i).subscribe {
+                rowComplete(i)
+            }.disposed(by: disposeBag)
             noteFromIndex += 1
         }
     }

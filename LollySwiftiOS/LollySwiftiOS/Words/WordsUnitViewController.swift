@@ -90,9 +90,9 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
             alertController.addAction(editAction2)
             if self.vm.mDictNote != nil {
                 let noteAction = UIAlertAction(title: "Retrieve Note", style: .default) { _ in
-                    self.vm.getNote(index: indexPath.row) {
+                    self.vm.getNote(index: indexPath.row).subscribe {
                         self.tableView.reloadRows(at: [indexPath], with: .fade)
-                    }
+                    }.disposed(by: self.disposeBag)
                 }
                 alertController.addAction(noteAction)
             }
@@ -165,7 +165,7 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
         let controller = segue.source as! WordsUnitDetailViewController
         controller.onDone()
         tableView.reloadData()
-        if controller.isAdd {
+        if controller.isAdd && !controller.mWord.WORD.isEmpty {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self.performSegue(withIdentifier: "add", sender: self)
             }
