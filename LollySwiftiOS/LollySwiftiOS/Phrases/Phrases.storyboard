@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -91,7 +91,7 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Phrases in Unit" id="Gkb-nc-tb1">
-                        <barButtonItem key="leftBarButtonItem" title="Left" image="simpleMenuButton.png" id="86C-VP-rtc">
+                        <barButtonItem key="leftBarButtonItem" title="Left" image="MenuButton" id="86C-VP-rtc">
                             <connections>
                                 <action selector="presentLeftMenuViewController:" destination="9x2-2G-zga" id="BOG-Jr-zPr"/>
                             </connections>
@@ -409,7 +409,7 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Phrases in Language" id="2bo-BW-43Y">
-                        <barButtonItem key="leftBarButtonItem" title="Left" image="simpleMenuButton.png" id="0up-Wa-gcg">
+                        <barButtonItem key="leftBarButtonItem" title="Left" image="MenuButton" id="0up-Wa-gcg">
                             <connections>
                                 <action selector="presentLeftMenuViewController:" destination="sOs-02-0D7" id="nuR-Fa-HZY"/>
                             </connections>
@@ -597,7 +597,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="simpleMenuButton.png" width="25" height="13"/>
+        <image name="MenuButton" width="25" height="13"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="p1U-Lg-pC8"/>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -157,7 +157,7 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Words in Unit" id="xZ5-om-3CN">
-                        <barButtonItem key="leftBarButtonItem" title="Left" image="simpleMenuButton.png" id="J7y-xA-Poe">
+                        <barButtonItem key="leftBarButtonItem" title="Left" image="MenuButton" id="J7y-xA-Poe">
                             <connections>
                                 <action selector="presentLeftMenuViewController:" destination="pJF-2o-6ag" id="tNa-rg-jTI"/>
                             </connections>
@@ -470,7 +470,7 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Words in Language" id="dzM-nk-Pbs">
-                        <barButtonItem key="leftBarButtonItem" title="Left" image="simpleMenuButton.png" id="WrQ-Bw-Rlu">
+                        <barButtonItem key="leftBarButtonItem" title="Left" image="MenuButton" id="WrQ-Bw-Rlu">
                             <connections>
                                 <action selector="presentLeftMenuViewController:" destination="aie-NG-mri" id="yCb-rv-Xon"/>
                             </connections>
@@ -628,7 +628,7 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Words in Textbook" id="AUf-3R-cQq">
-                        <barButtonItem key="leftBarButtonItem" title="Left" image="simpleMenuButton.png" id="0zQ-8H-vwE">
+                        <barButtonItem key="leftBarButtonItem" title="Left" image="MenuButton" id="0zQ-8H-vwE">
                             <connections>
                                 <action selector="presentLeftMenuViewController:" destination="e37-kc-jTQ" id="crO-eY-9Pw"/>
                             </connections>
@@ -693,7 +693,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="simpleMenuButton.png" width="25" height="13"/>
+        <image name="MenuButton" width="25" height="13"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Ol9-Ej-9ED"/>
