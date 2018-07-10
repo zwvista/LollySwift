@@ -26,8 +26,8 @@ extension String: ParameterEncoding {
 }
 
 class RestApi {
-    static let url = "http://13.115.166.91/lolly/api.php/"
-    static let cssFolder = "http://13.115.166.91/lolly/css/"
+    static let url = "https://zwvista.tk/lolly/api.php/"
+    static let cssFolder = "https://zwvista.tk/lolly/css/"
 
     static func getArray<T: Mappable>(url: String, keyPath: String, type: T.Type) -> Observable<[T]> {
         print("[RestApi]GET:\(url)")
