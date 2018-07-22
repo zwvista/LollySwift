@@ -223,23 +223,23 @@ class WordsUnitViewController: NSViewController, LollyProtocol, NSTableViewDataS
         alert.addButton(withTitle: "All Notes")
         alert.addButton(withTitle: "Cancel")
         let res = alert.runModal()
-        switch res {
-        case .alertThirdButtonReturn:
-            break
-        default:
+        if res != .alertThirdButtonReturn {
+            var subscription: Disposable?
             vm.getNotes(ifEmpty: res == .alertFirstButtonReturn) {
-                timer = Timer.scheduledTimer(timeInterval: TimeInterval(Double($0) / 1000.0), target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
+                let scheduler = SerialDispatchQueueScheduler(qos: .default)
+                subscription = Observable<Int>.interval(Double($0) / 1000.0, scheduler: scheduler)
+                    .subscribe { _ in
+                        self.vm.getNextNote(rowComplete: {
+                            self.tableView.reloadData(forRowIndexes: [$0], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count))
+                        }, allComplete: {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                subscription?.dispose()
+                                // self.tableView.reloadData()
+                            }
+                        })
+                    }
             }
         }
-    }
-    
-    @objc
-    func timerAction() {
-        vm.getNextNote(rowComplete: {
-            self.tableView.reloadData(forRowIndexes: [$0], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count))
-        }, allComplete: {
-//            self.tableView.reloadData()
-        })
     }
     
     func settingsChanged() {
