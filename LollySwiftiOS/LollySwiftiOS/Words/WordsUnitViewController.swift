@@ -15,7 +15,6 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
     var arrWords: [MUnitWord] {
         return searchController.isActive && searchBar.text != "" ? vm.arrWordsFiltered! : vm.arrWords
     }
-    var timer = Timer()
     @IBOutlet weak var btnEdit: UIBarButtonItem!
     
     let disposeBag = DisposeBag()
@@ -145,13 +144,33 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
         let alertController = UIAlertController(title: "Words", message: "More", preferredStyle: .alert)
         let addAction = UIAlertAction(title: "Add", style: .default) { _ in self.performSegue(withIdentifier: "add", sender: self) }
         alertController.addAction(addAction)
+        
+        func startTimer(ifEmpty: Bool) {
+            var subscription: Disposable?
+            vm.getNotes(ifEmpty: ifEmpty) {
+                let scheduler = SerialDispatchQueueScheduler(qos: .default)
+                subscription = Observable<Int>.interval(Double($0) / 1000.0, scheduler: scheduler)
+                    .subscribe { _ in
+                        self.vm.getNextNote(rowComplete: { _ in }, allComplete: {
+                            subscription?.dispose()
+                            // https://stackoverflow.com/questions/28302019/getting-a-this-application-is-modifying-the-autolayout-engine-from-a-background
+                            DispatchQueue.main.async {
+                                self.view.removeBlurLoader()
+                                self.tableView.reloadData()
+                            }
+                        })
+                    }
+                self.view.showBlurLoader()
+            }
+        }
+
         if vm.mDictNote != nil {
             let notesAllAction = UIAlertAction(title: "Retrieve All Notes", style: .default) { _ in
-                self.startTimer(ifEmpty: false)
+                startTimer(ifEmpty: false)
             }
             alertController.addAction(notesAllAction)
             let notesEmptyAction = UIAlertAction(title: "Retrieve Notes If Empty", style: .default) { _ in
-                self.startTimer(ifEmpty: true)
+                startTimer(ifEmpty: true)
             }
             alertController.addAction(notesEmptyAction)
         }
@@ -170,22 +189,6 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
                 self.performSegue(withIdentifier: "add", sender: self)
             }
         }
-    }
-
-    func startTimer(ifEmpty: Bool) {
-        vm.getNotes(ifEmpty: ifEmpty) {
-            timer = Timer.scheduledTimer(timeInterval: TimeInterval(Double($0) / 1000.0), target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
-            self.view.showBlurLoader()
-        }
-    }
-    
-    @objc
-    func timerAction() {
-        vm.getNextNote(rowComplete: { _ in }, allComplete: {
-            self.timer.invalidate()
-            self.view.removeBlurLoader()
-            self.tableView.reloadData()
-        })
     }
 }
 
