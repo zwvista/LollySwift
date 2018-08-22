@@ -7,22 +7,18 @@
 //
 
 import Foundation
-import ObjectMapper
 import RxSwift
 
 @objcMembers
-class MLanguage: NSObject, Mappable {
+class MLanguage: NSObject, Codable {
     var ID = 0
     var LANGNAME = ""
     
-    required public init?(map: Map){
+    enum CodingKeys : String, CodingKey {
+        case ID
+        case LANGNAME = "NAME"
     }
-    
-    public func mapping(map: Map) {
-        ID <- map["ID"]
-        LANGNAME <- map["NAME"]
-    }
-    
+
     static func getData() -> Observable<[MLanguage]> {
         // SQL: SELECT * FROM LANGUAGES WHERE ID <> 0
         let url = "\(RestApi.url)LANGUAGES?transform=1&filter=ID,neq,0"

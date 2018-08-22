@@ -7,28 +7,24 @@
 //
 
 import Foundation
-import ObjectMapper
 import RxSwift
 
 @objcMembers
-class MTextbook: NSObject, Mappable {
+class MTextbook: NSObject, Codable {
     var ID = 0
     var LANGID = 0
     var TEXTBOOKNAME = ""
     var UNITS = 0
     var PARTS = ""
+    
+    enum CodingKeys : String, CodingKey {
+        case ID
+        case LANGID
+        case TEXTBOOKNAME = "NAME"
+        case UNITS
+        case PARTS
+    }
 
-    required public init?(map: Map){
-    }
-    
-    public func mapping(map: Map) {
-        ID <- map["ID"]
-        LANGID <- map["LANGID"]
-        TEXTBOOKNAME <- map["NAME"]
-        UNITS <- map["UNITS"]
-        PARTS <- map["PARTS"]
-    }
-    
     static func getDataByLang(_ langid: Int) -> Observable<[MTextbook]> {
         // SQL: SELECT * FROM TEXTBOOKS WHERE LANGID = ?
         let url = "\(RestApi.url)TEXTBOOKS?transform=1&filter=LANGID,eq,\(langid)"

@@ -1,41 +1,43 @@
 PODS:
   - AKSideMenu (1.4.1)
   - Alamofire (4.7.0)
-  - AlamofireObjectMapper (5.0.0):
-    - Alamofire (~> 4.1)
-    - ObjectMapper (~> 3.0)
+  - CodableAlamofire (1.1.0):
+    - Alamofire (~> 4.0)
   - DropDown (2.3.1)
   - EZSwiftExtensions (1.11)
-  - ObjectMapper (3.1.0)
   - RxAlamofire (4.1.0):
     - RxAlamofire/Core (= 4.1.0)
   - RxAlamofire/Core (4.1.0):
     - Alamofire (~> 4.5)
     - RxSwift (~> 4.0)
-  - RxCocoa (4.1.2):
-    - RxSwift (~> 4.0)
-  - RxSwift (4.1.2)
+  - RxSwift (4.2.0)
 
 DEPENDENCIES:
   - AKSideMenu
-  - AlamofireObjectMapper (~> 5.0)
+  - CodableAlamofire
   - DropDown
   - EZSwiftExtensions
   - RxAlamofire
-  - RxCocoa (~> 4.0)
-  - RxSwift (~> 4.0)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - AKSideMenu
+    - Alamofire
+    - CodableAlamofire
+    - DropDown
+    - EZSwiftExtensions
+    - RxAlamofire
+    - RxSwift
 
 SPEC CHECKSUMS:
   AKSideMenu: 5f253516c339960e474f81c3da53540368520be5
   Alamofire: 907e0a98eb68cdb7f9d1f541a563d6ac5dc77b25
-  AlamofireObjectMapper: 5fafc816351cbbc0d486611aaeba7461c0cbad49
+  CodableAlamofire: e2d2edcec7cf413f7862c30c8fa98eded27a83f9
   DropDown: 20499c7b2731b0d21609af924e47c7677a2be50d
   EZSwiftExtensions: 84000042202d9fd574f626cda3064143f27fa767
-  ObjectMapper: 20505058f54e5c3ca69e1d6de9897d152a5369a6
   RxAlamofire: 96a2bff4694a1609bb59c57b53d99ea7a0ddc64a
-  RxCocoa: d88ba0f1f6abf040011a9eb4b539324fc426843a
-  RxSwift: e49536837d9901277638493ea537394d4b55f570
+  RxSwift: 99e10317ddfcc7fbe01356aafd118fde4a0be104
 
-PODFILE CHECKSUM: cc42bd9cd7e97d2023f0c7ca3a8b9f7310edb8ae
+PODFILE CHECKSUM: f0694b8b652d00f34ccc99aae2559b62a74fcd4b
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.3

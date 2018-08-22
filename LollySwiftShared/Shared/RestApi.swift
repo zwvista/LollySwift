@@ -9,8 +9,6 @@
 import Foundation
 
 import Alamofire
-import ObjectMapper
-import AlamofireObjectMapper
 import RxSwift
 import RxAlamofire
 
@@ -24,14 +22,24 @@ extension String: ParameterEncoding {
     }
     
 }
+extension Encodable {
+    
+    public func toJSONString() throws -> String? {
+        let encoder = JSONEncoder()
+        let data = try! encoder.encode(self)
+        let jsonString = String(data: data, encoding: .utf8)
+        return jsonString
+    }
+    
+}
 
 class RestApi {
     static let url = "https://zwvista.tk/lolly/api.php/"
     static let cssFolder = "https://zwvista.tk/lolly/css/"
 
-    static func getArray<T: Mappable>(url: String, keyPath: String, type: T.Type) -> Observable<[T]> {
+    static func getArray<T: Codable>(url: String, keyPath: String, type: T.Type) -> Observable<[T]> {
         print("[RestApi]GET:\(url)")
-        return RxAlamofireObjectMapper.array(.get, url, keyPath: keyPath)
+        return RxCodableAlamofire.object(.get, url, keyPath: keyPath)
     }
     static func update(url: String, body: String) -> Observable<String> {
         print("[RestApi]PUT:\(url) BODY:\(body)")

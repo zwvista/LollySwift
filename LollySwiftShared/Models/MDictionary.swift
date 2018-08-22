@@ -7,11 +7,10 @@
 //
 
 import Foundation
-import ObjectMapper
 import RxSwift
 
 @objcMembers
-class MDictionary: NSObject, Mappable {
+class MDictionary: NSObject, Codable {
     var ID = 0
     var LANGIDFROM: Int?
     var DICTTYPENAME: String?
@@ -22,21 +21,6 @@ class MDictionary: NSObject, Mappable {
     var WAIT: Int?
     var TEMPLATE: String?
     
-    required public init?(map: Map){
-    }
-    
-    public func mapping(map: Map) {
-        ID <- map["ID"]
-        LANGIDFROM <- map["LANGIDFROM"]
-        DICTTYPENAME <- map["DICTTYPENAME"]
-        DICTNAME <- map["DICTNAME"]
-        URL <- map["URL"]
-        CHCONV <- map["CHCONV"]
-        TRANSFORM_MAC <- map["TRANSFORM_MAC"]
-        WAIT <- map["WAIT"]
-        TEMPLATE <- map["TEMPLATE"]
-    }
-
     func urlString(_ word: String) -> String {
         var url = URL!.replacingOccurrences(of: "{0}", with: word);
         //url = url.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!

@@ -7,11 +7,10 @@
 //
 
 import Foundation
-import ObjectMapper
 import RxSwift
 
 @objcMembers
-class MTextbookWord: NSObject, Mappable {
+class MTextbookWord: NSObject, Codable {
     var TEXTBOOKID = 0
     var LANGID = 0
     var TEXTBOOKNAME = ""
@@ -21,21 +20,6 @@ class MTextbookWord: NSObject, Mappable {
     var SEQNUM = 0
     var WORD = ""
     var NOTE: String?
-    
-    required public init?(map: Map){
-    }
-    
-    public func mapping(map: Map) {
-        TEXTBOOKID <- map["TEXTBOOKID"]
-        LANGID <- map["LANGID"]
-        TEXTBOOKNAME <- map["TEXTBOOKNAME"]
-        UNITWORDID <- map["UNITWORDID"]
-        UNIT <- map["UNIT"]
-        PART <- map["PART"]
-        SEQNUM <- map["SEQNUM"]
-        WORD <- map["WORD"]
-        NOTE <- map["NOTE"]
-    }
     
     public override var description: String {
         return "\(SEQNUM) \(WORD)" + (NOTE?.isEmpty != false ? "" : "(\(NOTE!))")

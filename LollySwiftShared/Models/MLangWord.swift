@@ -7,28 +7,14 @@
 //
 
 import Foundation
-import ObjectMapper
 import RxSwift
 
 @objcMembers
-class MLangWord: NSObject, Mappable {
+class MLangWord: NSObject, Codable {
     var ID = 0
     var LANGID = 0
     var WORD = ""
     var LEVEL = 0
-    
-    public override init() {
-    }
-
-    required public init?(map: Map){
-    }
-    
-    public func mapping(map: Map) {
-        ID <- map["ID"]
-        LANGID <- map["LANGID"]
-        WORD <- map["WORD"]
-        LEVEL <- map["LEVEL"]
-    }
     
     static func getDataByLang(_ langid: Int) -> Observable<[MLangWord]> {
         // SQL: SELECT LANGID, WORD FROM LANGWORDS WHERE LANGID = ?
@@ -46,7 +32,7 @@ class MLangWord: NSObject, Mappable {
     static func create(item: MLangWord) -> Observable<String> {
         // SQL: INSERT INTO LANGWORDS (LANGID, WORD) VALUES (?,?)
         let url = "\(RestApi.url)LANGWORDS"
-        return RestApi.create(url: url, body: item.toJSONString(prettyPrint: false)!)
+        return RestApi.create(url: url, body: try! item.toJSONString()!)
     }
     
     static func delete(_ id: Int) -> Observable<String> {

@@ -7,11 +7,10 @@
 //
 
 import Foundation
-import ObjectMapper
 import RxSwift
 
 @objcMembers
-class MUnitPhrase: NSObject, Mappable {
+class MUnitPhrase: NSObject, Codable {
     var ID = 0
     var TEXTBOOKID = 0
     var UNIT = 0
@@ -26,23 +25,6 @@ class MUnitPhrase: NSObject, Mappable {
     }
     func UNITPARTSEQNUM(arrParts: [String]) -> String {
         return "\(UNIT) \(SEQNUM)\n\(PARTSTR(arrParts: arrParts))"
-    }
-
-    public override init() {
-    }
-
-    required public init?(map: Map){
-    }
-    
-    public func mapping(map: Map) {
-        ID <- map["ID"]
-        TEXTBOOKID <- map["TEXTBOOKID"]
-        UNIT <- map["UNIT"]
-        PART <- map["PART"]
-        SEQNUM <- map["SEQNUM"]
-        PHRASE <- map["PHRASE"]
-        TRANSLATION <- map["TRANSLATION"]
-        UNITPART <- map["UNITPART"]
     }
 
     static func getDataByTextbook(_ textbookid: Int, unitPartFrom: Int, unitPartTo: Int) -> Observable<[MUnitPhrase]> {
@@ -61,13 +43,13 @@ class MUnitPhrase: NSObject, Mappable {
     static func update(item: MUnitPhrase) -> Observable<String> {
         // SQL: UPDATE UNITPHRASES SET TEXTBOOKID=?, UNIT=?, PART=?, SEQNUM=?, PHRASE=?, TRANSLATION=? WHERE ID=?
         let url = "\(RestApi.url)UNITPHRASES/\(item.ID)"
-        return RestApi.update(url: url, body: item.toJSONString(prettyPrint: false)!)
+        return RestApi.update(url: url, body: try! item.toJSONString()!)
     }
     
     static func create(item: MUnitPhrase) -> Observable<String> {
         // SQL: INSERT INTO UNITPHRASES (TEXTBOOKID, UNIT, PART, SEQNUM, PHRASE, TRANSLATION) VALUES (?,?,?,?,?,?)
         let url = "\(RestApi.url)UNITPHRASES"
-        return RestApi.create(url: url, body: item.toJSONString(prettyPrint: false)!)
+        return RestApi.create(url: url, body: try! item.toJSONString()!)
     }
     
     static func delete(_ id: Int) -> Observable<String> {

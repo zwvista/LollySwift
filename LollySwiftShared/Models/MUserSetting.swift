@@ -7,11 +7,10 @@
 //
 
 import Foundation
-import ObjectMapper
 import RxSwift
 
 @objcMembers
-class MUserSetting: NSObject, Mappable {
+class MUserSetting: NSObject, Codable {
     var ID = 0
     var USERID: Int?
     var KIND: Int?
@@ -20,20 +19,6 @@ class MUserSetting: NSObject, Mappable {
     var VALUE2: String?
     var VALUE3: String?
     var VALUE4: String?
-
-    required public init?(map: Map){
-    }
-    
-    public func mapping(map: Map) {
-        ID <- map["ID"]
-        USERID <- map["USERID"]
-        KIND <- map["KIND"]
-        ENTITYID <- map["ENTITYID"]
-        VALUE1 <- map["VALUE1"]
-        VALUE2 <- map["VALUE2"]
-        VALUE3 <- map["VALUE3"]
-        VALUE4 <- map["VALUE4"]
-    }
 
     static func getData(userid: Int) -> Observable<[MUserSetting]> {
         // SQL: SELECT * FROM USERSETTINGS WHERE USERID=?

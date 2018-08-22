@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		41624B18047DBD62E1485CDE /* Pods_LollySwiftMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F369FEA5447EADCC97C83AE1 /* Pods_LollySwiftMac.framework */; };
-		8C0748E9209EE15D0006BD1B /* RxAlamofireObjectMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0748E8209EE15C0006BD1B /* RxAlamofireObjectMapper.swift */; };
+		8C0748E9209EE15D0006BD1B /* RxCodableAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0748E8209EE15C0006BD1B /* RxCodableAlamofire.swift */; };
 		8C0ACB581D4391FB00EC6740 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0ACB571D4391FB00EC6740 /* SettingsViewController.swift */; };
 		8C1C4F281D31F88800CF5D88 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1C4F271D31F88800CF5D88 /* AppDelegate.swift */; };
 		8C1C4F2A1D31F88800CF5D88 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1C4F291D31F88800CF5D88 /* SearchViewController.swift */; };
@@ -77,7 +77,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		8C0748E8209EE15C0006BD1B /* RxAlamofireObjectMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxAlamofireObjectMapper.swift; sourceTree = "<group>"; };
+		8C0748E8209EE15C0006BD1B /* RxCodableAlamofire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxCodableAlamofire.swift; sourceTree = "<group>"; };
 		8C0ACB571D4391FB00EC6740 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		8C1C4F241D31F88800CF5D88 /* LollySwiftMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LollySwiftMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C1C4F271D31F88800CF5D88 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -242,7 +242,7 @@
 			children = (
 				8C2CB5A2207885140083DDE2 /* HtmlApi.swift */,
 				8C2CB5A1207885140083DDE2 /* RestApi.swift */,
-				8C0748E8209EE15C0006BD1B /* RxAlamofireObjectMapper.swift */,
+				8C0748E8209EE15C0006BD1B /* RxCodableAlamofire.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -316,7 +316,6 @@
 				8C1C4F221D31F88800CF5D88 /* Resources */,
 				8C32BE3D1EED98CF00E4465F /* Embed Frameworks */,
 				ABD824158A1C1A8D0BA35501 /* [CP] Embed Pods Frameworks */,
-				169C12BB263854500E883041 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -440,21 +439,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		169C12BB263854500E883041 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-LollySwiftMac/Pods-LollySwiftMac-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		A03F56BE37E6E04FA0FB6743 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -481,21 +465,17 @@
 			inputPaths = (
 				"${SRCROOT}/../Pods/Target Support Files/Pods-LollySwiftMac/Pods-LollySwiftMac-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire-macOS/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper-macOS/AlamofireObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/CodableAlamofire-macOS/CodableAlamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/EZSwiftExtensions-macOS/EZSwiftExtensions.framework",
-				"${BUILT_PRODUCTS_DIR}/ObjectMapper-macOS/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/RxAlamofire-macOS/RxAlamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/RxCocoa-macOS/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift-macOS/RxSwift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CodableAlamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EZSwiftExtensions.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAlamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -529,7 +509,7 @@
 				8C2CB5C9207896EC0083DDE2 /* WordsUnitDetailViewController.swift in Sources */,
 				8C2CB5BD207885140083DDE2 /* MUnitPhrase.swift in Sources */,
 				8CAF910A20833C4F00933837 /* SearchViewModel.swift in Sources */,
-				8C0748E9209EE15D0006BD1B /* RxAlamofireObjectMapper.swift in Sources */,
+				8C0748E9209EE15D0006BD1B /* RxCodableAlamofire.swift in Sources */,
 				8CD1D929206227800071687B /* LollyWindow.swift in Sources */,
 				8C2CB5B1207885140083DDE2 /* PhrasesLangViewModel.swift in Sources */,
 				8CD8409D20AFD4DA00442133 /* PhrasesUnitDetailViewController.swift in Sources */,

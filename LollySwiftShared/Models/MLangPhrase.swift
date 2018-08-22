@@ -7,28 +7,14 @@
 //
 
 import Foundation
-import ObjectMapper
 import RxSwift
 
 @objcMembers
-class MLangPhrase: NSObject, Mappable {
+class MLangPhrase: NSObject, Codable {
     var ID = 0
     var LANGID = 0
     var PHRASE = ""
     var TRANSLATION: String?
-    
-    public override init() {
-    }
-    
-    required public init?(map: Map){
-    }
-    
-    public func mapping(map: Map) {
-        ID <- map["ID"]
-        LANGID <- map["LANGID"]
-        PHRASE <- map["PHRASE"]
-        TRANSLATION <- map["TRANSLATION"]
-    }
     
     static func getDataByLang(_ langid: Int) -> Observable<[MLangPhrase]> {
         // SQL: SELECT PHRASE, TRANSLATION FROM LANGPHRASES WHERE LANGID = ?
@@ -39,13 +25,13 @@ class MLangPhrase: NSObject, Mappable {
     static func update(_ id: Int, item: MLangPhrase) -> Observable<String> {
         // SQL: UPDATE LANGPHRASES SET PHRASE=?, TRANSLATION=? WHERE ID=?
         let url = "\(RestApi.url)LANGPHRASES/\(id)"
-        return RestApi.update(url: url, body: item.toJSONString(prettyPrint: false)!)
+        return RestApi.update(url: url, body: try! item.toJSONString()!)
     }
     
     static func create(item: MLangPhrase) -> Observable<String> {
         // SQL: INSERT INTO LANGPHRASES (LANGID, PHRASE, TRANSLATION) VALUES (?,?,?)
         let url = "\(RestApi.url)LANGPHRASES"
-        return RestApi.create(url: url, body: item.toJSONString(prettyPrint: false)!)
+        return RestApi.create(url: url, body: try! item.toJSONString()!)
     }
     
     static func delete(_ id: Int) -> Observable<String> {
