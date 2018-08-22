@@ -32,7 +32,7 @@ class MLangWord: NSObject, Codable {
     static func create(item: MLangWord) -> Observable<String> {
         // SQL: INSERT INTO LANGWORDS (LANGID, WORD) VALUES (?,?)
         let url = "\(RestApi.url)LANGWORDS"
-        return RestApi.create(url: url, body: try! item.toJSONString()!)
+        return RestApi.create(url: url, body: try! item.toJSONString(prettyPrint: false)!)
     }
     
     static func delete(_ id: Int) -> Observable<String> {

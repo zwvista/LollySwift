@@ -24,8 +24,9 @@ extension String: ParameterEncoding {
 }
 extension Encodable {
     
-    public func toJSONString() throws -> String? {
+    public func toJSONString(prettyPrint: Bool) throws -> String? {
         let encoder = JSONEncoder()
+        if prettyPrint { encoder.outputFormatting = .prettyPrinted }
         let data = try! encoder.encode(self)
         let jsonString = String(data: data, encoding: .utf8)
         return jsonString

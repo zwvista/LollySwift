@@ -53,13 +53,13 @@ class MUnitWord: NSObject, Codable {
     static func update(item: MUnitWord) -> Observable<String> {
         // SQL: UPDATE UNITWORDS SET TEXTBOOKID=?, UNIT=?, PART=?, SEQNUM=?, WORD=?, NOTE=? WHERE ID=?
         let url = "\(RestApi.url)UNITWORDS/\(item.ID)"
-        return RestApi.update(url: url, body: try! item.toJSONString()!)
+        return RestApi.update(url: url, body: try! item.toJSONString(prettyPrint: false)!)
     }
     
     static func create(item: MUnitWord) -> Observable<String> {
         // SQL: INSERT INTO UNITWORDS (TEXTBOOKID, UNIT, PART, SEQNUM, WORD, NOTE) VALUES (?,?,?,?,?,?)
         let url = "\(RestApi.url)UNITWORDS"
-        return RestApi.create(url: url, body: try! item.toJSONString()!)
+        return RestApi.create(url: url, body: try! item.toJSONString(prettyPrint: false)!)
     }
     
     static func delete(_ id: Int) -> Observable<String> {

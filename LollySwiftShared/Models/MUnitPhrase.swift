@@ -43,13 +43,13 @@ class MUnitPhrase: NSObject, Codable {
     static func update(item: MUnitPhrase) -> Observable<String> {
         // SQL: UPDATE UNITPHRASES SET TEXTBOOKID=?, UNIT=?, PART=?, SEQNUM=?, PHRASE=?, TRANSLATION=? WHERE ID=?
         let url = "\(RestApi.url)UNITPHRASES/\(item.ID)"
-        return RestApi.update(url: url, body: try! item.toJSONString()!)
+        return RestApi.update(url: url, body: try! item.toJSONString(prettyPrint: false)!)
     }
     
     static func create(item: MUnitPhrase) -> Observable<String> {
         // SQL: INSERT INTO UNITPHRASES (TEXTBOOKID, UNIT, PART, SEQNUM, PHRASE, TRANSLATION) VALUES (?,?,?,?,?,?)
         let url = "\(RestApi.url)UNITPHRASES"
-        return RestApi.create(url: url, body: try! item.toJSONString()!)
+        return RestApi.create(url: url, body: try! item.toJSONString(prettyPrint: false)!)
     }
     
     static func delete(_ id: Int) -> Observable<String> {

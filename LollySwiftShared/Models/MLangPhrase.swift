@@ -25,13 +25,13 @@ class MLangPhrase: NSObject, Codable {
     static func update(_ id: Int, item: MLangPhrase) -> Observable<String> {
         // SQL: UPDATE LANGPHRASES SET PHRASE=?, TRANSLATION=? WHERE ID=?
         let url = "\(RestApi.url)LANGPHRASES/\(id)"
-        return RestApi.update(url: url, body: try! item.toJSONString()!)
+        return RestApi.update(url: url, body: try! item.toJSONString(prettyPrint: false)!)
     }
     
     static func create(item: MLangPhrase) -> Observable<String> {
         // SQL: INSERT INTO LANGPHRASES (LANGID, PHRASE, TRANSLATION) VALUES (?,?,?)
         let url = "\(RestApi.url)LANGPHRASES"
-        return RestApi.create(url: url, body: try! item.toJSONString()!)
+        return RestApi.create(url: url, body: try! item.toJSONString(prettyPrint: false)!)
     }
     
     static func delete(_ id: Int) -> Observable<String> {
