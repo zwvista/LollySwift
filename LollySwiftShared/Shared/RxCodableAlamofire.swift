@@ -1,5 +1,5 @@
 //
-//  RxAlamofireObjectMapper.swift
+//  RxCodableAlamofire.swift
 //  LollySwiftiOS
 //
 //  Created by 趙偉 on 2018/05/06.
