@@ -34,7 +34,7 @@ class MDictOnline : MDictionary {
     static func getDataByLang(_ langid: Int) -> Observable<[MDictOnline]> {
         // SQL: SELECT * FROM VDICTSONLINE WHERE LANGIDFROM = ?
         let url = "\(RestApi.url)VDICTSONLINE?transform=1&filter=LANGIDFROM,eq,\(langid)"
-        return RestApi.getArray(url: url, keyPath: "VDICTSONLINE", type: MDictOnline.self)
+        return RestApi.getArray(url: url, keyPath: "VDICTSONLINE")
     }
     
     fileprivate let debugExtract = false
@@ -63,7 +63,7 @@ class MDictNote : MDictionary {
     static func getDataByLang(_ langid: Int) -> Observable<[MDictNote]> {
         // SQL: SELECT * FROM VDICTSNOTE WHERE LANGIDFROM = ?
         let url = "\(RestApi.url)VDICTSNOTE?transform=1&filter=LANGIDFROM,eq,\(langid)"
-        return RestApi.getArray(url: url, keyPath: "VDICTSNOTE", type: MDictNote.self)
+        return RestApi.getArray(url: url, keyPath: "VDICTSNOTE")
     }
     
     func htmlNote(_ html: String) -> String {

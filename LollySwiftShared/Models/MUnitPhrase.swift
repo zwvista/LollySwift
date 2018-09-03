@@ -30,7 +30,7 @@ class MUnitPhrase: NSObject, Codable {
     static func getDataByTextbook(_ textbookid: Int, unitPartFrom: Int, unitPartTo: Int) -> Observable<[MUnitPhrase]> {
         // SQL: SELECT * FROM VUNITPHRASES WHERE TEXTBOOKID=? AND UNITPART BETWEEN ? AND ? ORDER BY UNITPART,SEQNUM
         let url = "\(RestApi.url)VUNITPHRASES?transform=1&filter[]=TEXTBOOKID,eq,\(textbookid)&filter[]=UNITPART,bt,\(unitPartFrom),\(unitPartTo)&order[]=UNITPART&order[]=SEQNUM"
-        return RestApi.getArray(url: url, keyPath: "VUNITPHRASES", type: MUnitPhrase.self)
+        return RestApi.getArray(url: url, keyPath: "VUNITPHRASES")
     }
     
     static func update(_ id: Int, seqnum: Int) -> Observable<String> {

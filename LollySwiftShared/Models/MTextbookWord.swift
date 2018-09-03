@@ -28,6 +28,6 @@ class MTextbookWord: NSObject, Codable {
     static func getDataByLang(_ langid: Int) -> Observable<[MTextbookWord]> {
         // SQL: SELECT * FROM VTEXTBOOKWORDS WHERE LANGID = ?
         let url = "\(RestApi.url)VTEXTBOOKWORDS?transform=1&filter=LANGID,eq,\(langid)"
-        return RestApi.getArray(url: url, keyPath: "VTEXTBOOKWORDS", type: MTextbookWord.self)
+        return RestApi.getArray(url: url, keyPath: "VTEXTBOOKWORDS")
     }
 }

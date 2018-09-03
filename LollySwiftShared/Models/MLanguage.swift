@@ -22,6 +22,6 @@ class MLanguage: NSObject, Codable {
     static func getData() -> Observable<[MLanguage]> {
         // SQL: SELECT * FROM LANGUAGES WHERE ID <> 0
         let url = "\(RestApi.url)LANGUAGES?transform=1&filter=ID,neq,0"
-        return RestApi.getArray(url: url, keyPath: "LANGUAGES", type: MLanguage.self)
+        return RestApi.getArray(url: url, keyPath: "LANGUAGES")
     }
 }
