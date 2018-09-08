@@ -81,7 +81,7 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
         let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { _,_ in delete() }
         let editAction = UITableViewRowAction(style: .normal, title: "Edit") { _,_ in edit() }
         editAction.backgroundColor = .blue
-        let moreAction = UITableViewRowAction(style: .normal, title: "More") { _,_ in
+        let moreAction = UITableViewRowAction(style: .normal, title: "More") { [unowned self] _,_ in
             let alertController = UIAlertController(title: "Word", message: item.WORDNOTE, preferredStyle: .alert)
             let deleteAction2 = UIAlertAction(title: "Delete", style: .destructive) { _ in delete() }
             alertController.addAction(deleteAction2)
@@ -150,7 +150,7 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
             vm.getNotes(ifEmpty: ifEmpty) {
                 let scheduler = SerialDispatchQueueScheduler(qos: .default)
                 subscription = Observable<Int>.interval(Double($0) / 1000.0, scheduler: scheduler)
-                    .subscribe { _ in
+                    .subscribe { [unowned self] in
                         self.vm.getNextNote(rowComplete: { _ in }, allComplete: {
                             subscription?.dispose()
                             // https://stackoverflow.com/questions/28302019/getting-a-this-application-is-modifying-the-autolayout-engine-from-a-background
@@ -189,6 +189,10 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
                 self.performSegue(withIdentifier: "add", sender: self)
             }
         }
+    }
+    
+    deinit {
+        print("DEBUG: \(self.className) deinit")
     }
 }
 

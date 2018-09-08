@@ -245,6 +245,9 @@ class WordsUnitViewController: NSViewController, LollyProtocol, NSTableViewDataS
     func settingsChanged() {
         refreshTableView(self)
     }
+
+    deinit {
+    }
 }
 
 class WordsUnitWindowController: NSWindowController, LollyProtocol {

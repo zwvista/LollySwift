@@ -59,5 +59,9 @@ class SearchViewController: UIViewController, UIWebViewDelegate, UISearchBarDele
         wvDictOnlineHolder.isHidden = true
         wvDictOfflineHolder.isHidden = false
     }
+    
+    deinit {
+        print("DEBUG: \(self.className) deinit")
+    }
 
 }

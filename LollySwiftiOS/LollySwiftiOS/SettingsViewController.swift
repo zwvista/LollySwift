@@ -47,11 +47,11 @@ class SettingsViewController: UITableViewController {
         vm.getData().subscribe {
             self.updateLang()
         }.disposed(by: disposeBag)
-        
+
         ddLang.anchorView = langCell
         ddLang.dataSource = vm.arrLanguages.map { $0.LANGNAME }
         ddLang.selectRow(vm.selectedLangIndex)
-        ddLang.selectionAction = { (index: Int, item: String) in
+        ddLang.selectionAction = { [unowned self] (index: Int, item: String) in
             guard index != self.vm.selectedLangIndex else {return}
             self.vm.setSelectedLangIndex(index).concatMap {
                 self.vm.updateLang()
@@ -59,69 +59,69 @@ class SettingsViewController: UITableViewController {
                 self.updateLang()
             }.disposed(by: self.disposeBag)
         }
-        
+
         ddDictOnline.anchorView = dictOnlineCell
-        ddDictOnline.selectionAction = { (index: Int, item: String) in
+        ddDictOnline.selectionAction = { [unowned self] (index: Int, item: String) in
             guard index != self.vm.selectedDictOnlineIndex else {return}
             self.vm.selectedDictOnlineIndex = index
             self.vm.updateDictOnline().subscribe {
                 self.updateDictOnline()
             }.disposed(by: self.disposeBag)
         }
-        
+
         ddDictNote.anchorView = dictNoteCell
-        ddDictNote.selectionAction = { (index: Int, item: String) in
+        ddDictNote.selectionAction = { [unowned self] (index: Int, item: String) in
             guard index != self.vm.selectedDictNoteIndex else {return}
             self.vm.selectedDictNoteIndex = index
             self.vm.updateDictNote().subscribe {
                 self.updateDictNote()
             }.disposed(by: self.disposeBag)
         }
-        
+
         ddTextbook.anchorView = textbookCell
-        ddTextbook.selectionAction = { (index: Int, item: String) in
+        ddTextbook.selectionAction = { [unowned self] (index: Int, item: String) in
             guard index != self.vm.selectedTextbookIndex else {return}
             self.vm.selectedTextbookIndex = index
             self.vm.updateTextbook().subscribe {
                 self.updateTextbook()
             }.disposed(by: self.disposeBag)
         }
-        
+
         ddUnitFrom.anchorView = unitFromCell
-        ddUnitFrom.selectionAction = { (index: Int, item: String) in
+        ddUnitFrom.selectionAction = { [unowned self] (index: Int, item: String) in
             guard self.vm.USUNITFROM != index + 1 else {return}
             self.vm.USUNITFROM = index + 1
-            self.vm.updateUnitFrom().subscribe {
+            self.vm.updateUnitFrom().subscribe { [unowned self] in
                 self.lblUnitFrom.text = item
                 if !self.swUnitPartTo.isOn || self.vm.isInvalidUnitPart {self.updateUnitPartTo()}
             }.disposed(by: self.disposeBag)
         }
-        
+
         ddPartFrom.anchorView = partFromCell
-        ddPartFrom.selectionAction = { (index: Int, item: String) in
+        ddPartFrom.selectionAction = { [unowned self] (index: Int, item: String) in
             guard self.vm.USPARTFROM != index + 1 else {return}
             self.vm.USPARTFROM = index + 1
-            self.vm.updatePartFrom().subscribe {
+            self.vm.updatePartFrom().subscribe { [unowned self] in
                 self.lblPartFrom.text = item
                 if !self.swUnitPartTo.isOn || self.vm.isInvalidUnitPart {self.updateUnitPartTo()}
             }.disposed(by: self.disposeBag)
         }
-        
+
         ddUnitTo.anchorView = unitToCell
-        ddUnitTo.selectionAction = { (index: Int, item: String) in
+        ddUnitTo.selectionAction = { [unowned self] (index: Int, item: String) in
             guard self.vm.USUNITTO != index + 1 else {return}
             self.vm.USUNITTO = index + 1
-            self.vm.updateUnitTo().subscribe {
+            self.vm.updateUnitTo().subscribe { [unowned self] in
                 self.lblUnitTo.text = item
                 if self.vm.isInvalidUnitPart {self.updateUnitPartFrom()}
             }.disposed(by: self.disposeBag)
         }
-        
+
         ddPartTo.anchorView = partToCell
-        ddPartTo.selectionAction = { (index: Int, item: String) in
+        ddPartTo.selectionAction = { [unowned self] (index: Int, item: String) in
             guard self.vm.USPARTTO != index + 1 else {return}
             self.vm.USPARTTO = index + 1
-            self.vm.updatePartTo().subscribe {
+            self.vm.updatePartTo().subscribe { [unowned self] in
                 self.lblPartTo.text = item
                 if self.vm.isInvalidUnitPart {self.updateUnitPartFrom()}
             }.disposed(by: self.disposeBag)
@@ -247,4 +247,9 @@ class SettingsViewController: UITableViewController {
         lblPartToTitle.isEnabled = b
         if sender !== self && !b {updateUnitPartTo()}
     }
+    
+    deinit {
+        print("DEBUG: \(self.className) deinit")
+    }
+
 }
