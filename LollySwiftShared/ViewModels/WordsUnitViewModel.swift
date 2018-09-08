@@ -86,7 +86,7 @@ class WordsUnitViewModel: NSObject {
         let url = mDictNote.urlString(item.WORD)
         return RestApi.getHtml(url: url).concatMap { (html) -> Observable<()> in
             print(html)
-            item.NOTE = mDictNote.htmlNote(html)
+            item.NOTE = HtmlApi.extractText(from: html, transform: mDictNote.TRANSFORM_MAC!, template: "") { text,_ in return text }
             return WordsUnitViewModel.update(item.ID, note: item.NOTE!)
         }
     }

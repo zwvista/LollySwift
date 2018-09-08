@@ -109,7 +109,7 @@ class WordsUnitViewController: NSViewController, LollyProtocol, NSTableViewDataS
         let col = tableView.column(for: sender)
         let key = tableView.tableColumns[col].title
         let item = arrWords[row]
-        let oldValue = String(describing: item.value(forKey: key)!)
+        let oldValue = String(describing: item.value(forKey: key))
         let newValue = sender.stringValue
         guard oldValue != newValue else {return}
         item.setValue(newValue, forKey: key)

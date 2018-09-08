@@ -65,8 +65,4 @@ class MDictNote : MDictionary {
         let url = "\(RestApi.url)VDICTSNOTE?transform=1&filter=LANGIDFROM,eq,\(langid)"
         return RestApi.getArray(url: url, keyPath: "VDICTSNOTE")
     }
-    
-    func htmlNote(_ html: String) -> String {
-        return HtmlApi.extractText(from: html, transform: TRANSFORM_MAC!, template: "") { text,_ in return text }
-    }
 }
