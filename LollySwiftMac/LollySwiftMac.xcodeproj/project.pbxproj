@@ -44,6 +44,26 @@
 		8CD8409E20AFD4DA00442133 /* PhrasesUnitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8409B20AFD4D900442133 /* PhrasesUnitViewController.swift */; };
 		8CD8409F20AFD4DA00442133 /* Phrases.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8CD8409C20AFD4D900442133 /* Phrases.storyboard */; };
 		8CE0F27A206E94CF00EEE4AC /* LollyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE0F279206E94CE00EEE4AC /* LollyProtocol.swift */; };
+		954D8B982143907C00651A80 /* PhrasesLangViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CB59D207885140083DDE2 /* PhrasesLangViewModel.swift */; };
+		954D8B992143907C00651A80 /* PhrasesUnitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CB59E207885140083DDE2 /* PhrasesUnitViewModel.swift */; };
+		954D8B9A2143907C00651A80 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAF910920833C4F00933837 /* SearchViewModel.swift */; };
+		954D8B9B2143907C00651A80 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CB59A207885140083DDE2 /* SettingsViewModel.swift */; };
+		954D8B9C2143907C00651A80 /* WordsLangViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CB59B207885140083DDE2 /* WordsLangViewModel.swift */; };
+		954D8B9D2143907C00651A80 /* WordsTextbookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CB59C207885140083DDE2 /* WordsTextbookViewModel.swift */; };
+		954D8B9E2143907C00651A80 /* WordsUnitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CB59F207885140083DDE2 /* WordsUnitViewModel.swift */; };
+		954D8B9F2143907C00651A80 /* HtmlApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CB5A2207885140083DDE2 /* HtmlApi.swift */; };
+		954D8BA02143907C00651A80 /* RestApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CB5A1207885140083DDE2 /* RestApi.swift */; };
+		954D8BA12143907C00651A80 /* RxCodableAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0748E8209EE15C0006BD1B /* RxCodableAlamofire.swift */; };
+		954D8BA22143907C00651A80 /* MDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CB5A4207885140083DDE2 /* MDictionary.swift */; };
+		954D8BA32143907C00651A80 /* MLangPhrase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CB5A9207885140083DDE2 /* MLangPhrase.swift */; };
+		954D8BA42143907C00651A80 /* MLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CB5AC207885140083DDE2 /* MLanguage.swift */; };
+		954D8BA52143907C00651A80 /* MLangWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CB5A6207885140083DDE2 /* MLangWord.swift */; };
+		954D8BA62143907C00651A80 /* MTextBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CB5AD207885140083DDE2 /* MTextBook.swift */; };
+		954D8BA72143907C00651A80 /* MTextbookWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CB5AA207885140083DDE2 /* MTextbookWord.swift */; };
+		954D8BA82143907C00651A80 /* MUnitPhrase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CB5AB207885140083DDE2 /* MUnitPhrase.swift */; };
+		954D8BA92143907C00651A80 /* MUnitWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CB5A5207885140083DDE2 /* MUnitWord.swift */; };
+		954D8BAA2143907C00651A80 /* MUserSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CB5A8207885140083DDE2 /* MUserSetting.swift */; };
+		DA220CE0442B147BB8A850BD /* Pods_LollySwiftMacTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1822EDB9E8ADA45D7C800AF4 /* Pods_LollySwiftMacTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +84,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1822EDB9E8ADA45D7C800AF4 /* Pods_LollySwiftMacTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LollySwiftMacTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2E1BF0DCEA87BC09BC596957 /* Pods-LollySwiftMacTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LollySwiftMacTests.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-LollySwiftMacTests/Pods-LollySwiftMacTests.debug.xcconfig"; sourceTree = "<group>"; };
+		3996B18C180865D53970989E /* Pods-LollySwiftMacTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LollySwiftMacTests.release.xcconfig"; path = "../Pods/Target Support Files/Pods-LollySwiftMacTests/Pods-LollySwiftMacTests.release.xcconfig"; sourceTree = "<group>"; };
 		8C0748E8209EE15C0006BD1B /* RxCodableAlamofire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxCodableAlamofire.swift; sourceTree = "<group>"; };
 		8C0ACB571D4391FB00EC6740 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		8C1C4F241D31F88800CF5D88 /* LollySwiftMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LollySwiftMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -127,6 +150,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA220CE0442B147BB8A850BD /* Pods_LollySwiftMacTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,6 +290,7 @@
 				8C486DF51EBB882B0023FBFC /* WebKit.framework */,
 				8C486DF31EBB88240023FBFC /* Cocoa.framework */,
 				F369FEA5447EADCC97C83AE1 /* Pods_LollySwiftMac.framework */,
+				1822EDB9E8ADA45D7C800AF4 /* Pods_LollySwiftMacTests.framework */,
 			);
 			name = Frameworks;
 			path = LollySwiftMac;
@@ -286,6 +311,8 @@
 			children = (
 				C0A07AB238AF8E83FC5E5DD3 /* Pods-LollySwiftMac.debug.xcconfig */,
 				E3F71BC79C6087E4623A422F /* Pods-LollySwiftMac.release.xcconfig */,
+				2E1BF0DCEA87BC09BC596957 /* Pods-LollySwiftMacTests.debug.xcconfig */,
+				3996B18C180865D53970989E /* Pods-LollySwiftMacTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -316,9 +343,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8C1C4F4C1D31F88800CF5D88 /* Build configuration list for PBXNativeTarget "LollySwiftMacTests" */;
 			buildPhases = (
+				699EDF57D7A12DBE448F683B /* [CP] Check Pods Manifest.lock */,
 				8C1C4F311D31F88800CF5D88 /* Sources */,
 				8C1C4F321D31F88800CF5D88 /* Frameworks */,
 				8C1C4F331D31F88800CF5D88 /* Resources */,
+				42F504A68A491B840360D257 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -366,12 +395,16 @@
 					};
 					8C1C4F341D31F88800CF5D88 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = U259NHMY78;
 						LastSwiftMigration = 0920;
+						ProvisioningStyle = Manual;
 						TestTargetID = 8C1C4F231D31F88800CF5D88;
 					};
 					8C1C4F3F1D31F88800CF5D88 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = U259NHMY78;
 						LastSwiftMigration = 0920;
+						ProvisioningStyle = Manual;
 						TestTargetID = 8C1C4F231D31F88800CF5D88;
 					};
 				};
@@ -425,6 +458,50 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		42F504A68A491B840360D257 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/../Pods/Target Support Files/Pods-LollySwiftMacTests/Pods-LollySwiftMacTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire-macOS/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/CodableAlamofire-macOS/CodableAlamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/EZSwiftExtensions-macOS/EZSwiftExtensions.framework",
+				"${BUILT_PRODUCTS_DIR}/RxAlamofire-macOS/RxAlamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift-macOS/RxSwift.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CodableAlamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EZSwiftExtensions.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAlamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-LollySwiftMacTests/Pods-LollySwiftMacTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		699EDF57D7A12DBE448F683B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LollySwiftMacTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		A03F56BE37E6E04FA0FB6743 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -511,7 +588,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				954D8BA02143907C00651A80 /* RestApi.swift in Sources */,
+				954D8B9C2143907C00651A80 /* WordsLangViewModel.swift in Sources */,
+				954D8B9B2143907C00651A80 /* SettingsViewModel.swift in Sources */,
+				954D8BA52143907C00651A80 /* MLangWord.swift in Sources */,
+				954D8BA72143907C00651A80 /* MTextbookWord.swift in Sources */,
+				954D8BA42143907C00651A80 /* MLanguage.swift in Sources */,
+				954D8BA82143907C00651A80 /* MUnitPhrase.swift in Sources */,
+				954D8B9D2143907C00651A80 /* WordsTextbookViewModel.swift in Sources */,
 				8C1C4F3A1D31F88800CF5D88 /* LollySwiftMacTests.swift in Sources */,
+				954D8BA62143907C00651A80 /* MTextBook.swift in Sources */,
+				954D8BA32143907C00651A80 /* MLangPhrase.swift in Sources */,
+				954D8BAA2143907C00651A80 /* MUserSetting.swift in Sources */,
+				954D8BA92143907C00651A80 /* MUnitWord.swift in Sources */,
+				954D8B982143907C00651A80 /* PhrasesLangViewModel.swift in Sources */,
+				954D8B9A2143907C00651A80 /* SearchViewModel.swift in Sources */,
+				954D8BA12143907C00651A80 /* RxCodableAlamofire.swift in Sources */,
+				954D8B9F2143907C00651A80 /* HtmlApi.swift in Sources */,
+				954D8B9E2143907C00651A80 /* WordsUnitViewModel.swift in Sources */,
+				954D8B992143907C00651A80 /* PhrasesUnitViewModel.swift in Sources */,
+				954D8BA22143907C00651A80 /* MDictionary.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -697,14 +793,19 @@
 		};
 		8C1C4F4D1D31F88800CF5D88 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2E1BF0DCEA87BC09BC596957 /* Pods-LollySwiftMacTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = U259NHMY78;
 				INFOPLIST_FILE = LollySwiftMacTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zwstudio.LollySwiftMacTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LollySwiftMac.app/Contents/MacOS/LollySwiftMac";
 			};
@@ -712,14 +813,19 @@
 		};
 		8C1C4F4E1D31F88800CF5D88 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3996B18C180865D53970989E /* Pods-LollySwiftMacTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = U259NHMY78;
 				INFOPLIST_FILE = LollySwiftMacTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zwstudio.LollySwiftMacTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LollySwiftMac.app/Contents/MacOS/LollySwiftMac";
 			};
@@ -728,12 +834,16 @@
 		8C1C4F501D31F88800CF5D88 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = U259NHMY78;
 				INFOPLIST_FILE = LollySwiftMacUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zwstudio.LollySwiftMacUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 				TEST_TARGET_NAME = LollySwiftMac;
 			};
@@ -742,12 +852,16 @@
 		8C1C4F511D31F88800CF5D88 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = U259NHMY78;
 				INFOPLIST_FILE = LollySwiftMacUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zwstudio.LollySwiftMacUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 				TEST_TARGET_NAME = LollySwiftMac;
 			};

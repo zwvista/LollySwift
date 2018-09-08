@@ -22,8 +22,10 @@ class LollySwiftMacTests: XCTestCase {
     }
     
     func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        let vm = SettingsViewModel()
+        vm.getData().subscribe {
+            XCTAssertEqual(vm.arrLanguages.count, 10)
+        }
     }
     
     func testPerformanceExample() {
