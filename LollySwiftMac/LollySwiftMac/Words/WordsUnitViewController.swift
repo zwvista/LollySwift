@@ -149,7 +149,7 @@ class WordsUnitViewController: NSViewController, LollyProtocol, NSTableViewDataS
         searchWord(word: newWord)
     }
 
-    override func controlTextDidEndEditing(_ obj: Notification) {
+    func controlTextDidEndEditing(_ obj: Notification) {
         let searchfield = obj.object as! NSControl
         guard searchfield === tfNewWord else {return}
         let dict = (obj as NSNotification).userInfo!
@@ -166,11 +166,11 @@ class WordsUnitViewController: NSViewController, LollyProtocol, NSTableViewDataS
 
     // https://stackoverflow.com/questions/24219441/how-to-use-nstoolbar-in-xcode-6-and-storyboard
     @IBAction func addWord(_ sender: Any) {
-        let detailVC = self.storyboard!.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "WordsUnitDetailViewController")) as! WordsUnitDetailViewController
+        let detailVC = self.storyboard!.instantiateController(withIdentifier: "WordsUnitDetailViewController") as! WordsUnitDetailViewController
         detailVC.vm = vm
         detailVC.mWord = vm.newUnitWord()
         detailVC.complete = { self.tableView.reloadData(); self.addWord(self) }
-        self.presentViewControllerAsSheet(detailVC)
+        self.presentAsSheet(detailVC)
     }
     
     @IBAction func deleteWord(_ sender: Any) {
@@ -183,12 +183,12 @@ class WordsUnitViewController: NSViewController, LollyProtocol, NSTableViewDataS
     }
 
     @IBAction func editWord(_ sender: Any) {
-        let detailVC = self.storyboard!.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "WordsUnitDetailViewController")) as! WordsUnitDetailViewController
+        let detailVC = self.storyboard!.instantiateController(withIdentifier: "WordsUnitDetailViewController") as! WordsUnitDetailViewController
         detailVC.vm = vm
         let i = tableView.selectedRow
         detailVC.mWord = vm.arrWords[i]
         detailVC.complete = { self.tableView.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count)) }
-        self.presentViewControllerAsModalWindow(detailVC)
+        self.presentAsModalWindow(detailVC)
     }
     
     @IBAction func getNote(_ sender: Any) {

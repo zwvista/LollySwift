@@ -35,8 +35,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func showWindow(storyBoardName: String, windowControllerName: String, modal: Bool) {
-        let storyboard = NSStoryboard(name: NSStoryboard.Name(rawValue: storyBoardName), bundle: nil)
-        let wc = storyboard.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: windowControllerName)) as! NSWindowController
+        let storyboard = NSStoryboard(name: storyBoardName, bundle: nil)
+        let wc = storyboard.instantiateController(withIdentifier: windowControllerName) as! NSWindowController
         if modal {
             NSApplication.shared.runModal(for: wc.window!)
         } else {

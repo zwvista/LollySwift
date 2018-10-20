@@ -121,11 +121,11 @@ class PhrasesUnitViewController: NSViewController, LollyProtocol, NSTableViewDat
 
     // https://stackoverflow.com/questions/24219441/how-to-use-nstoolbar-in-xcode-6-and-storyboard
     @IBAction func addPhrase(_ sender: Any) {
-        let detailVC = self.storyboard!.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "PhrasesUnitDetailViewController")) as! PhrasesUnitDetailViewController
+        let detailVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesUnitDetailViewController") as! PhrasesUnitDetailViewController
         detailVC.vm = vm
         detailVC.mPhrase = vm.newUnitPhrase()
         detailVC.complete = { self.tableView.reloadData(); self.addPhrase(self) }
-        self.presentViewControllerAsSheet(detailVC)
+        self.presentAsSheet(detailVC)
     }
     
     @IBAction func deletePhrase(_ sender: Any) {
@@ -138,12 +138,12 @@ class PhrasesUnitViewController: NSViewController, LollyProtocol, NSTableViewDat
     }
 
     @IBAction func editPhrase(_ sender: Any) {
-        let detailVC = self.storyboard!.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier(rawValue: "PhrasesUnitDetailViewController")) as! PhrasesUnitDetailViewController
+        let detailVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesUnitDetailViewController") as! PhrasesUnitDetailViewController
         detailVC.vm = vm
         let i = tableView.selectedRow
         detailVC.mPhrase = vm.arrPhrases[i]
         detailVC.complete = { self.tableView.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count)) }
-        self.presentViewControllerAsModalWindow(detailVC)
+        self.presentAsModalWindow(detailVC)
     }
     
     @IBAction func copyPhrase(_ sender: Any) {

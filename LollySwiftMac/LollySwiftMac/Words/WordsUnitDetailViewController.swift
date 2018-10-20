@@ -48,6 +48,6 @@ class WordsUnitDetailViewController: NSViewController {
                 self.complete?()
             }.disposed(by: disposeBag)
         }
-        dismissViewController(self)
+        dismiss(self)
     }
 }

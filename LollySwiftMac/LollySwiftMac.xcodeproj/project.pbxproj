@@ -390,20 +390,20 @@
 					8C1C4F231D31F88800CF5D88 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = U259NHMY78;
-						LastSwiftMigration = 0920;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
 					};
 					8C1C4F341D31F88800CF5D88 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = U259NHMY78;
-						LastSwiftMigration = 0920;
-						ProvisioningStyle = Automatic;
+						LastSwiftMigration = 1000;
+						ProvisioningStyle = Manual;
 						TestTargetID = 8C1C4F231D31F88800CF5D88;
 					};
 					8C1C4F3F1D31F88800CF5D88 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = U259NHMY78;
-						LastSwiftMigration = 0920;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 8C1C4F231D31F88800CF5D88;
 					};
@@ -766,8 +766,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "LollySwiftMac-Bridging-Header.h";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -786,8 +785,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "LollySwiftMac-Bridging-Header.h";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -797,7 +795,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "Mac Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = U259NHMY78;
 				INFOPLIST_FILE = LollySwiftMacTests/Info.plist;
@@ -805,8 +803,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.zwstudio.LollySwiftMacTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LollySwiftMac.app/Contents/MacOS/LollySwiftMac";
 			};
 			name = Debug;
@@ -817,7 +814,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "Mac Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = U259NHMY78;
 				INFOPLIST_FILE = LollySwiftMacTests/Info.plist;
@@ -825,8 +822,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.zwstudio.LollySwiftMacTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LollySwiftMac.app/Contents/MacOS/LollySwiftMac";
 			};
 			name = Release;
@@ -843,8 +839,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.zwstudio.LollySwiftMacUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_TARGET_NAME = LollySwiftMac;
 			};
 			name = Debug;
@@ -861,8 +856,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.zwstudio.LollySwiftMacUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_TARGET_NAME = LollySwiftMac;
 			};
 			name = Release;

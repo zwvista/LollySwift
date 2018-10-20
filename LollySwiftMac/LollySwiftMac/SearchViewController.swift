@@ -50,7 +50,7 @@ class SearchViewController: NSViewController, LollyProtocol, NSTableViewDataSour
         wvDictOnline.load(URLRequest(url: URL(string: url)!))
     }
     
-    override func controlTextDidEndEditing(_ obj: Notification) {
+    func controlTextDidEndEditing(_ obj: Notification) {
         let searchfield = obj.object as! NSControl
         if searchfield !== sfWord {return}
         

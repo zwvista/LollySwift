@@ -114,7 +114,7 @@ extension Array where Element: Equatable {
 
     /// EZSE: Returns the indexes of the object
     public func indexes(of element: Element) -> [Int] {
-        return enumerated().flatMap { ($0.element == element) ? $0.offset : nil }
+        return enumerated().compactMap { ($0.element == element) ? $0.offset : nil }
     }
 
     /// EZSE: Returns the last index of the object
@@ -298,7 +298,7 @@ extension Array {
     /// through the mapFunction and discarding nil return values.
     @available(*, deprecated: 1.6, renamed: "flatMap(_:)")
     public func mapFilter<V>(mapFunction map: (Element) -> (V)?) -> [V] {
-        return flatMap { map($0) }
+        return compactMap { map($0) }
     }
 
     /// EZSE: Iterates on each element of the array with its index.  (Index, Element)
