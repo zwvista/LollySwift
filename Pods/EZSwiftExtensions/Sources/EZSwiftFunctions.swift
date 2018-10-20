@@ -141,7 +141,7 @@ public struct ez {
 
         #if os(iOS)
 
-        if UIInterfaceOrientationIsPortrait(screenOrientation) {
+        if screenOrientation.isPortrait {
             return UIScreen.main.bounds.size.width
         } else {
             return UIScreen.main.bounds.size.height
@@ -159,7 +159,7 @@ public struct ez {
 
         #if os(iOS)
 
-        if UIInterfaceOrientationIsPortrait(screenOrientation) {
+        if screenOrientation.isPortrait {
             return UIScreen.main.bounds.size.height
         } else {
             return UIScreen.main.bounds.size.width
@@ -183,7 +183,7 @@ public struct ez {
 
     /// EZSE: Return screen's height without StatusBar
     public static var screenHeightWithoutStatusBar: CGFloat {
-        if UIInterfaceOrientationIsPortrait(screenOrientation) {
+        if screenOrientation.isPortrait {
             return UIScreen.main.bounds.size.height - screenStatusBarHeight
         } else {
             return UIScreen.main.bounds.size.width - screenStatusBarHeight
@@ -202,7 +202,7 @@ public struct ez {
     /// EZSE: Calls action when a screen shot is taken
     public static func detectScreenShot(_ action: @escaping () -> Void) {
         let mainQueue = OperationQueue.main
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationUserDidTakeScreenshot, object: nil, queue: mainQueue) { notification in
+        NotificationCenter.default.addObserver(forName: UIApplication.userDidTakeScreenshotNotification, object: nil, queue: mainQueue) { notification in
             // executes after screenshot
             action()
         }

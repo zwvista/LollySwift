@@ -412,7 +412,7 @@ extension UIView {
             delay: 0,
             usingSpringWithDamping: UIViewAnimationSpringDamping,
             initialSpringVelocity: UIViewAnimationSpringVelocity,
-            options: UIViewAnimationOptions.allowAnimatedContent,
+            options: UIView.AnimationOptions.allowAnimatedContent,
             animations: animations,
             completion: completion
         )
@@ -447,7 +447,7 @@ extension UIView {
     //EZSE: Reverse pop, good for button animations
     public func reversePop() {
         setScale(x: 0.9, y: 0.9)
-        UIView.animate(withDuration: 0.05, delay: 0, options: UIViewAnimationOptions.allowUserInteraction, animations: { [weak self] () in
+        UIView.animate(withDuration: 0.05, delay: 0, options: UIView.AnimationOptions.allowUserInteraction, animations: { [weak self] () in
             self?.setScale(x: 1, y: 1)
         }) { (bool) in }
     }
@@ -485,7 +485,7 @@ extension UIView {
     }
 
     /// EZSwiftExtensions
-    public func addSwipeGesture(direction: UISwipeGestureRecognizerDirection, numberOfTouches: Int = 1, target: AnyObject, action: Selector) {
+    public func addSwipeGesture(direction: UISwipeGestureRecognizer.Direction, numberOfTouches: Int = 1, target: AnyObject, action: Selector) {
         let swipe = UISwipeGestureRecognizer(target: target, action: action)
         swipe.direction = direction
 
@@ -500,7 +500,7 @@ extension UIView {
     }
 
     /// EZSwiftExtensions - Make sure you use  "[weak self] (gesture) in" if you are using the keyword self inside the closure or there might be a memory leak
-    public func addSwipeGesture(direction: UISwipeGestureRecognizerDirection, numberOfTouches: Int = 1, action: ((UISwipeGestureRecognizer) -> Void)?) {
+    public func addSwipeGesture(direction: UISwipeGestureRecognizer.Direction, numberOfTouches: Int = 1, action: ((UISwipeGestureRecognizer) -> Void)?) {
         let swipe = BlockSwipe(direction: direction, fingerCount: numberOfTouches, action: action)
         addGestureRecognizer(swipe)
         isUserInteractionEnabled = true

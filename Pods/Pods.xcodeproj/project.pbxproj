@@ -2267,19 +2267,25 @@
 				LastSwiftUpdateCheck = 0930;
 				LastUpgradeCheck = 0930;
 				TargetAttributes = {
-					1D645E879ED94F80B409D7C1710AC8F6 = {
+					4D8199C20C1BE5F5BCDBC8F8CB4BF089 = {
 						LastSwiftMigration = 1000;
 					};
-					820C7EA412D46D5ECBCB8345D0B08ACB = {
+					5168099F2EBFC99A707C03C9EADE01A5 = {
 						LastSwiftMigration = 1000;
 					};
-					9C711AA0E0FC9B2F227E8D3153064ED8 = {
+					5C4D7058AFE7B2612770CB657A5C0218 = {
 						LastSwiftMigration = 1000;
 					};
-					A3D641550979D89581D889055F781C2B = {
+					68B0DC253AC2B719F6B861EE54751CCA = {
 						LastSwiftMigration = 1000;
 					};
-					C6B9515954A998F5A38BF2A063088045 = {
+					6EFD57F24FAD5400AE7B292D25E7D8FB = {
+						LastSwiftMigration = 1000;
+					};
+					A72912750B3A8EDB95EC07C700A87ED6 = {
+						LastSwiftMigration = 1000;
+					};
+					DA1B01AFC2F8E7094AEC1DD4D0012B91 = {
 						LastSwiftMigration = 1000;
 					};
 				};
@@ -3103,7 +3109,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -3136,7 +3142,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -3144,41 +3150,7 @@
 			};
 			name = Release;
 		};
-		2162A02DCF2AE67DC523FF85C7DD10C6 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = F7A1EF1872F699E9FEC88724DBC64E87 /* RxAlamofire-macOS.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_VERSION = A;
-				GCC_PREFIX_HEADER = "Target Support Files/RxAlamofire-macOS/RxAlamofire-macOS-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/RxAlamofire-macOS/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				MODULEMAP_FILE = "Target Support Files/RxAlamofire-macOS/RxAlamofire-macOS.modulemap";
-				PRODUCT_MODULE_NAME = RxAlamofire;
-				PRODUCT_NAME = RxAlamofire;
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		247E2B4D7F81DE73771E9EFD91B7209F /* Release */ = {
+		2058289D00785CC3EE3A38BE961F0EBB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 38D332A4692F102228DD0A0CE3CCFBFF /* Alamofire-macOS.xcconfig */;
 			buildSettings = {
@@ -3205,12 +3177,12 @@
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Release;
+			name = Debug;
 		};
 		28622DABE30735E1FCFC54D40164DD1D /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -3274,7 +3246,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -3417,40 +3389,6 @@
 			};
 			name = Release;
 		};
-		4C5FB13B4A74D54E64B4958ECCB5E892 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = F420F2AD741DF99AF2A6FCE7F11E59C9 /* EZSwiftExtensions-macOS.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_VERSION = A;
-				GCC_PREFIX_HEADER = "Target Support Files/EZSwiftExtensions-macOS/EZSwiftExtensions-macOS-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/EZSwiftExtensions-macOS/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				MODULEMAP_FILE = "Target Support Files/EZSwiftExtensions-macOS/EZSwiftExtensions-macOS.modulemap";
-				PRODUCT_MODULE_NAME = EZSwiftExtensions;
-				PRODUCT_NAME = EZSwiftExtensions;
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.2;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
 		4C9336D8CCD9D0E59E9A094CE232E690 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A7FAFBE60D539EE42A39B904DDDA29EE /* AKSideMenu.xcconfig */;
@@ -3476,7 +3414,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -3508,7 +3446,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -3551,9 +3489,9 @@
 			};
 			name = Release;
 		};
-		562CEE78C22D6CF5C789F2F0F7BC6E77 /* Debug */ = {
+		56571F1CBBAD6CFA957FFC4E3FF8024B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 35F5107BC41662FA2B9FF0EF72221C9D /* CodableAlamofire-macOS.xcconfig */;
+			baseConfigurationReference = F420F2AD741DF99AF2A6FCE7F11E59C9 /* EZSwiftExtensions-macOS.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -3567,14 +3505,48 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				GCC_PREFIX_HEADER = "Target Support Files/CodableAlamofire-macOS/CodableAlamofire-macOS-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/CodableAlamofire-macOS/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/EZSwiftExtensions-macOS/EZSwiftExtensions-macOS-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/EZSwiftExtensions-macOS/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				MODULEMAP_FILE = "Target Support Files/CodableAlamofire-macOS/CodableAlamofire-macOS.modulemap";
-				PRODUCT_MODULE_NAME = CodableAlamofire;
-				PRODUCT_NAME = CodableAlamofire;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MODULEMAP_FILE = "Target Support Files/EZSwiftExtensions-macOS/EZSwiftExtensions-macOS.modulemap";
+				PRODUCT_MODULE_NAME = EZSwiftExtensions;
+				PRODUCT_NAME = EZSwiftExtensions;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.2;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		57AE5F09F2E26A7DA1EA661EDA1E2691 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F420F2AD741DF99AF2A6FCE7F11E59C9 /* EZSwiftExtensions-macOS.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				GCC_PREFIX_HEADER = "Target Support Files/EZSwiftExtensions-macOS/EZSwiftExtensions-macOS-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/EZSwiftExtensions-macOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MODULEMAP_FILE = "Target Support Files/EZSwiftExtensions-macOS/EZSwiftExtensions-macOS.modulemap";
+				PRODUCT_MODULE_NAME = EZSwiftExtensions;
+				PRODUCT_NAME = EZSwiftExtensions;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
@@ -3610,7 +3582,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -3618,7 +3590,41 @@
 			};
 			name = Release;
 		};
-		6643BC806ED194AECECA61928726A370 /* Debug */ = {
+		695C81F58C840B36E64FDD8BEC77F6F2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F7A1EF1872F699E9FEC88724DBC64E87 /* RxAlamofire-macOS.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				GCC_PREFIX_HEADER = "Target Support Files/RxAlamofire-macOS/RxAlamofire-macOS-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/RxAlamofire-macOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MODULEMAP_FILE = "Target Support Files/RxAlamofire-macOS/RxAlamofire-macOS.modulemap";
+				PRODUCT_MODULE_NAME = RxAlamofire;
+				PRODUCT_NAME = RxAlamofire;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		70A38501A52A63A4B619C077177A4CF0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 19F67293AB161C7F564DFAACEA96EC67 /* RxSwift-macOS.xcconfig */;
 			buildSettings = {
@@ -3644,12 +3650,12 @@
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.2;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Debug;
+			name = Release;
 		};
 		72C9AD94BDC3BDDBC4D316590BA1A43F /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -3676,7 +3682,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -3720,40 +3726,6 @@
 			};
 			name = Debug;
 		};
-		771DB8A92130FF436215DC067E40814C /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 35F5107BC41662FA2B9FF0EF72221C9D /* CodableAlamofire-macOS.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_VERSION = A;
-				GCC_PREFIX_HEADER = "Target Support Files/CodableAlamofire-macOS/CodableAlamofire-macOS-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/CodableAlamofire-macOS/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				MODULEMAP_FILE = "Target Support Files/CodableAlamofire-macOS/CodableAlamofire-macOS.modulemap";
-				PRODUCT_MODULE_NAME = CodableAlamofire;
-				PRODUCT_NAME = CodableAlamofire;
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.2;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
 		7AA467D155F8F77E8194A5FA221EECA6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BDEFAB7E15F7C26013CE683CCE5AEA4E /* Alamofire-iOS.xcconfig */;
@@ -3779,16 +3751,16 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
-		88C5592F49837BCF07CBFB5D7044A87B /* Debug */ = {
+		8444C4C7C6FB74F66D5E3509E4DAC857 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F420F2AD741DF99AF2A6FCE7F11E59C9 /* EZSwiftExtensions-macOS.xcconfig */;
+			baseConfigurationReference = 38D332A4692F102228DD0A0CE3CCFBFF /* Alamofire-macOS.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -3802,23 +3774,57 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				GCC_PREFIX_HEADER = "Target Support Files/EZSwiftExtensions-macOS/EZSwiftExtensions-macOS-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/EZSwiftExtensions-macOS/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/Alamofire-macOS/Alamofire-macOS-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Alamofire-macOS/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				MODULEMAP_FILE = "Target Support Files/EZSwiftExtensions-macOS/EZSwiftExtensions-macOS.modulemap";
-				PRODUCT_MODULE_NAME = EZSwiftExtensions;
-				PRODUCT_NAME = EZSwiftExtensions;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MODULEMAP_FILE = "Target Support Files/Alamofire-macOS/Alamofire-macOS.modulemap";
+				PRODUCT_MODULE_NAME = Alamofire;
+				PRODUCT_NAME = Alamofire;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.2;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Debug;
+			name = Release;
+		};
+		894E335E545AB299D11FDFB658525A45 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F7A1EF1872F699E9FEC88724DBC64E87 /* RxAlamofire-macOS.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				GCC_PREFIX_HEADER = "Target Support Files/RxAlamofire-macOS/RxAlamofire-macOS-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/RxAlamofire-macOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MODULEMAP_FILE = "Target Support Files/RxAlamofire-macOS/RxAlamofire-macOS.modulemap";
+				PRODUCT_MODULE_NAME = RxAlamofire;
+				PRODUCT_NAME = RxAlamofire;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.2;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
 		};
 		8A1A793254763290DA347BA462B5A2DA /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -3845,7 +3851,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -3883,6 +3889,40 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		8F5719F91C0FB8B1825B4CE1080A9E8A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 35F5107BC41662FA2B9FF0EF72221C9D /* CodableAlamofire-macOS.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				GCC_PREFIX_HEADER = "Target Support Files/CodableAlamofire-macOS/CodableAlamofire-macOS-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/CodableAlamofire-macOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MODULEMAP_FILE = "Target Support Files/CodableAlamofire-macOS/CodableAlamofire-macOS.modulemap";
+				PRODUCT_MODULE_NAME = CodableAlamofire;
+				PRODUCT_NAME = CodableAlamofire;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -3948,7 +3988,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -3981,7 +4021,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -4013,7 +4053,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -4080,40 +4120,6 @@
 			};
 			name = Release;
 		};
-		AC44E33F83FB8259ACF2CD1147D388D6 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 38D332A4692F102228DD0A0CE3CCFBFF /* Alamofire-macOS.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_VERSION = A;
-				GCC_PREFIX_HEADER = "Target Support Files/Alamofire-macOS/Alamofire-macOS-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Alamofire-macOS/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				MODULEMAP_FILE = "Target Support Files/Alamofire-macOS/Alamofire-macOS.modulemap";
-				PRODUCT_MODULE_NAME = Alamofire;
-				PRODUCT_NAME = Alamofire;
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 		B32E2125C3D0A955712EC6F530C8B82E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 067993C59B35F9DE15B8A75114BBB9F4 /* Pods-LollySwiftiOSTests.debug.xcconfig */;
@@ -4174,7 +4180,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -4206,48 +4212,14 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
-		E8DDB05F7AC856B2A5E8B94B79FE5600 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = F7A1EF1872F699E9FEC88724DBC64E87 /* RxAlamofire-macOS.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_VERSION = A;
-				GCC_PREFIX_HEADER = "Target Support Files/RxAlamofire-macOS/RxAlamofire-macOS-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/RxAlamofire-macOS/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				MODULEMAP_FILE = "Target Support Files/RxAlamofire-macOS/RxAlamofire-macOS.modulemap";
-				PRODUCT_MODULE_NAME = RxAlamofire;
-				PRODUCT_NAME = RxAlamofire;
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.2;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		F229BEB79CE2C4ADE73243718744439C /* Release */ = {
+		C907EC749EE30A54F6C58B12A61DAF0D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 19F67293AB161C7F564DFAACEA96EC67 /* RxSwift-macOS.xcconfig */;
 			buildSettings = {
@@ -4273,6 +4245,40 @@
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		F83F804D092B99F7FA95B5E6EAE1A18B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 35F5107BC41662FA2B9FF0EF72221C9D /* CodableAlamofire-macOS.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				GCC_PREFIX_HEADER = "Target Support Files/CodableAlamofire-macOS/CodableAlamofire-macOS-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/CodableAlamofire-macOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MODULEMAP_FILE = "Target Support Files/CodableAlamofire-macOS/CodableAlamofire-macOS.modulemap";
+				PRODUCT_MODULE_NAME = CodableAlamofire;
+				PRODUCT_NAME = CodableAlamofire;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.2;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -4286,8 +4292,8 @@
 		0ADD11B985C86ACE9313B37823B86924 /* Build configuration list for PBXNativeTarget "CodableAlamofire-macOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				562CEE78C22D6CF5C789F2F0F7BC6E77 /* Debug */,
-				771DB8A92130FF436215DC067E40814C /* Release */,
+				8F5719F91C0FB8B1825B4CE1080A9E8A /* Debug */,
+				F83F804D092B99F7FA95B5E6EAE1A18B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -4331,8 +4337,8 @@
 		4DE912E3C2F29C8D188AC7BC755B64A2 /* Build configuration list for PBXNativeTarget "Alamofire-macOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				AC44E33F83FB8259ACF2CD1147D388D6 /* Debug */,
-				247E2B4D7F81DE73771E9EFD91B7209F /* Release */,
+				2058289D00785CC3EE3A38BE961F0EBB /* Debug */,
+				8444C4C7C6FB74F66D5E3509E4DAC857 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -4367,8 +4373,8 @@
 		8042FE46EF573C0AB2BAF5880D77DF12 /* Build configuration list for PBXNativeTarget "EZSwiftExtensions-macOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				88C5592F49837BCF07CBFB5D7044A87B /* Debug */,
-				4C5FB13B4A74D54E64B4958ECCB5E892 /* Release */,
+				57AE5F09F2E26A7DA1EA661EDA1E2691 /* Debug */,
+				56571F1CBBAD6CFA957FFC4E3FF8024B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -4403,8 +4409,8 @@
 		C45AA3B0C829B5F7A1D31DE0E89F9DE1 /* Build configuration list for PBXNativeTarget "RxSwift-macOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				6643BC806ED194AECECA61928726A370 /* Debug */,
-				F229BEB79CE2C4ADE73243718744439C /* Release */,
+				C907EC749EE30A54F6C58B12A61DAF0D /* Debug */,
+				70A38501A52A63A4B619C077177A4CF0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -4421,8 +4427,8 @@
 		E968375BB72BD1A1B9F06EEC7C155A8C /* Build configuration list for PBXNativeTarget "RxAlamofire-macOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				2162A02DCF2AE67DC523FF85C7DD10C6 /* Debug */,
-				E8DDB05F7AC856B2A5E8B94B79FE5600 /* Release */,
+				695C81F58C840B36E64FDD8BEC77F6F2 /* Debug */,
+				894E335E545AB299D11FDFB658525A45 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
