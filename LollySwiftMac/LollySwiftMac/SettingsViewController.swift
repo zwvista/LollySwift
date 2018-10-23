@@ -48,8 +48,8 @@ class SettingsViewController: NSViewController {
         // http://stackoverflow.com/questions/5711367/os-x-how-can-a-nsviewcontroller-find-its-window
         self.view.window?.close()
         for w in NSApplication.shared.windows {
-            guard let v = w.contentViewController as? LollyProtocol else {continue}
-            v.settingsChanged()
+            if let l = w.windowController as? LollyProtocol { l.settingsChanged() }
+            if let l = w.contentViewController as? LollyProtocol { l.settingsChanged() }
         }
     }
     

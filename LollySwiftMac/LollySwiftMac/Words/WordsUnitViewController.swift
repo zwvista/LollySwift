@@ -260,11 +260,11 @@ class WordsUnitWindowController: NSWindowController, LollyProtocol {
     
     override func windowDidLoad() {
         super.windowDidLoad()
-        acDictsOnline.content = vmSettings.arrDictsOnline
+        settingsChanged()
     }
     
     func settingsChanged() {
-        
+        acDictsOnline.content = vmSettings.arrDictsOnline
     }
     
     @IBAction func dictsOnlineChanged(_ sender: Any) {
