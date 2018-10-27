@@ -24,10 +24,8 @@ class MAutoCorrect: Codable {
     }
     
     static func autoCorrect(text: String, arrAutoCorrect: [MAutoCorrect], colFunc1: (MAutoCorrect) -> String, colFunc2: (MAutoCorrect) -> String) -> String {
-        var str = text
-        for row in arrAutoCorrect {
-            str = str.replacingOccurrences(of: colFunc1(row), with: colFunc2(row))
+        return arrAutoCorrect.reduce(text) { (str, row) in
+            str.replacingOccurrences(of: colFunc1(row), with: colFunc2(row))
         }
-        return str
     }
 }
