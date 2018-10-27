@@ -46,7 +46,7 @@ class SearchViewController: NSViewController, LollyProtocol, NSTableViewDataSour
         wvDictOffline.isHidden = true
         
         let item = vmSettings.selectedDictOnline
-        let url = item.urlString(word)
+        let url = item.urlString(word: word, arrAutoCorrect: vmSettings.arrAutoCorrect)
         wvDictOnline.load(URLRequest(url: URL(string: url)!))
     }
     

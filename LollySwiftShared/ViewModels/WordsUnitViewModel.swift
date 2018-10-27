@@ -83,7 +83,7 @@ class WordsUnitViewModel: NSObject {
     func getNote(index: Int) -> Observable<()> {
         guard let mDictNote = mDictNote else {return Observable.empty() }
         let item = arrWords[index]
-        let url = mDictNote.urlString(item.WORD)
+        let url = mDictNote.urlString(word: item.WORD, arrAutoCorrect: vmSettings.arrAutoCorrect)
         return RestApi.getHtml(url: url).concatMap { (html) -> Observable<()> in
             print(html)
             item.NOTE = HtmlApi.extractText(from: html, transform: mDictNote.TRANSFORM_MAC!, template: "") { text,_ in return text }

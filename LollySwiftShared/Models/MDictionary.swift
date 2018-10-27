@@ -21,10 +21,10 @@ class MDictionary: NSObject, Codable {
     var WAIT: Int?
     var TEMPLATE: String?
     
-    func urlString(_ word: String) -> String {
-        var url = URL!.replacingOccurrences(of: "{0}", with: word);
-        //url = url.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
-        url = url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+    func urlString(word: String, arrAutoCorrect: [MAutoCorrect]) -> String {
+        let word2 = CHCONV == "BASIC" ? MAutoCorrect.autoCorrect(text: word, arrAutoCorrect: arrAutoCorrect, colFunc1: { $0.EXTENDED }, colFunc2: { $0.BASIC }) :
+            word.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+        let url = URL!.replacingOccurrences(of: "{0}", with: word2)
         print(url)
         return url
     }

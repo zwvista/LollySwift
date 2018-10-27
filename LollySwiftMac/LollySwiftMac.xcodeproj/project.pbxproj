@@ -63,6 +63,8 @@
 		954D8BA92143907C00651A80 /* MUnitWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CB5A5207885140083DDE2 /* MUnitWord.swift */; };
 		954D8BAA2143907C00651A80 /* MUserSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CB5A8207885140083DDE2 /* MUserSetting.swift */; };
 		954D8BAC214395C700651A80 /* RestApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CB5A1207885140083DDE2 /* RestApi.swift */; };
+		95EFF47E21840FB60094EE3C /* MAutoCorrect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EFF47D21840FB60094EE3C /* MAutoCorrect.swift */; };
+		95EFF47F218412DD0094EE3C /* MAutoCorrect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EFF47D21840FB60094EE3C /* MAutoCorrect.swift */; };
 		DA220CE0442B147BB8A850BD /* Pods_LollySwiftMacTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1822EDB9E8ADA45D7C800AF4 /* Pods_LollySwiftMacTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -130,6 +132,7 @@
 		8CD8409B20AFD4D900442133 /* PhrasesUnitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesUnitViewController.swift; sourceTree = "<group>"; };
 		8CD8409C20AFD4D900442133 /* Phrases.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Phrases.storyboard; sourceTree = "<group>"; };
 		8CE0F279206E94CE00EEE4AC /* LollyProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LollyProtocol.swift; sourceTree = "<group>"; };
+		95EFF47D21840FB60094EE3C /* MAutoCorrect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MAutoCorrect.swift; sourceTree = "<group>"; };
 		C0A07AB238AF8E83FC5E5DD3 /* Pods-LollySwiftMac.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LollySwiftMac.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-LollySwiftMac/Pods-LollySwiftMac.debug.xcconfig"; sourceTree = "<group>"; };
 		E3F71BC79C6087E4623A422F /* Pods-LollySwiftMac.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LollySwiftMac.release.xcconfig"; path = "../Pods/Target Support Files/Pods-LollySwiftMac/Pods-LollySwiftMac.release.xcconfig"; sourceTree = "<group>"; };
 		F369FEA5447EADCC97C83AE1 /* Pods_LollySwiftMac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LollySwiftMac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -261,6 +264,7 @@
 		8C2CB5A3207885140083DDE2 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				95EFF47D21840FB60094EE3C /* MAutoCorrect.swift */,
 				8C2CB5A4207885140083DDE2 /* MDictionary.swift */,
 				8C2CB5A9207885140083DDE2 /* MLangPhrase.swift */,
 				8C2CB5AC207885140083DDE2 /* MLanguage.swift */,
@@ -572,6 +576,7 @@
 				8C2CB5C9207896EC0083DDE2 /* WordsUnitDetailViewController.swift in Sources */,
 				8C2CB5BD207885140083DDE2 /* MUnitPhrase.swift in Sources */,
 				8CAF910A20833C4F00933837 /* SearchViewModel.swift in Sources */,
+				95EFF47E21840FB60094EE3C /* MAutoCorrect.swift in Sources */,
 				8C0748E9209EE15D0006BD1B /* RxCodableAlamofire.swift in Sources */,
 				8CD1D929206227800071687B /* LollyWindow.swift in Sources */,
 				8C2CB5B1207885140083DDE2 /* PhrasesLangViewModel.swift in Sources */,
@@ -607,6 +612,7 @@
 				954D8B9F2143907C00651A80 /* HtmlApi.swift in Sources */,
 				954D8B9E2143907C00651A80 /* WordsUnitViewModel.swift in Sources */,
 				954D8B992143907C00651A80 /* PhrasesUnitViewModel.swift in Sources */,
+				95EFF47F218412DD0094EE3C /* MAutoCorrect.swift in Sources */,
 				954D8BA22143907C00651A80 /* MDictionary.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

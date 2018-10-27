@@ -34,7 +34,7 @@ class SearchViewController: UIViewController, UIWebViewDelegate, UISearchBarDele
         
         word = sbword.text!;
         let item = vmSettings.selectedDictOnline
-        let url = item.urlString(word)
+        let url = item.urlString(word: word, arrAutoCorrect: vmSettings.arrAutoCorrect)
         webViewFinished = false
         wvDictOnline.load(URLRequest(url: URL(string: url)!))
         sbword.resignFirstResponder()

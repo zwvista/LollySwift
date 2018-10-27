@@ -72,6 +72,8 @@
 		954D8B95214389DE00651A80 /* MUnitPhrase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C316583207676CF0015C247 /* MUnitPhrase.swift */; };
 		954D8B96214389DE00651A80 /* MUnitWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C31657D207676CF0015C247 /* MUnitWord.swift */; };
 		954D8B97214389DE00651A80 /* MUserSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C316580207676CF0015C247 /* MUserSetting.swift */; };
+		95EFF481218419E10094EE3C /* MAutoCorrect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EFF480218419E00094EE3C /* MAutoCorrect.swift */; };
+		95EFF48221841BA40094EE3C /* MAutoCorrect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EFF480218419E00094EE3C /* MAutoCorrect.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -149,6 +151,7 @@
 		953473EA1A0D16CF00FF2D56 /* LollySwiftiOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LollySwiftiOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		953473EF1A0D16CF00FF2D56 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		953473F01A0D16CF00FF2D56 /* LollySwiftiOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LollySwiftiOSTests.swift; sourceTree = "<group>"; };
+		95EFF480218419E00094EE3C /* MAutoCorrect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MAutoCorrect.swift; sourceTree = "<group>"; };
 		A2462FE0278FE5DE7FF9A4E2 /* Pods_LollySwiftiOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LollySwiftiOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA5376BDE309080131C3F3FD /* Pods_LollySwiftiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LollySwiftiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB60F127B8C0928CBC031C6C /* Pods-LollySwiftiOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LollySwiftiOSTests.release.xcconfig"; path = "../Pods/Target Support Files/Pods-LollySwiftiOSTests/Pods-LollySwiftiOSTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -224,6 +227,7 @@
 		8C31657B207676CF0015C247 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				95EFF480218419E00094EE3C /* MAutoCorrect.swift */,
 				8C31657C207676CF0015C247 /* MDictionary.swift */,
 				8C316581207676CF0015C247 /* MLangPhrase.swift */,
 				8C316584207676CF0015C247 /* MLanguage.swift */,
@@ -559,6 +563,7 @@
 				8C316589207676CF0015C247 /* PhrasesLangViewModel.swift in Sources */,
 				8C42B5B11D69A1D900DCB528 /* WordsLangViewController.swift in Sources */,
 				8C31658D207676CF0015C247 /* HtmlApi.swift in Sources */,
+				95EFF481218419E10094EE3C /* MAutoCorrect.swift in Sources */,
 				8C316586207676CF0015C247 /* SettingsViewModel.swift in Sources */,
 				8CD16D201D69FE8F00F5F625 /* PhrasesLangDetailViewController.swift in Sources */,
 				8C316593207676CF0015C247 /* MLangPhrase.swift in Sources */,
@@ -619,6 +624,7 @@
 				954D8B8C214389DB00651A80 /* HtmlApi.swift in Sources */,
 				954D8B8B214389D700651A80 /* WordsUnitViewModel.swift in Sources */,
 				954D8B86214389D700651A80 /* PhrasesUnitViewModel.swift in Sources */,
+				95EFF48221841BA40094EE3C /* MAutoCorrect.swift in Sources */,
 				954D8B8F214389DE00651A80 /* MDictionary.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

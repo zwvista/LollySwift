@@ -121,6 +121,8 @@ class SettingsViewModel: NSObject {
     @objc
     var arrParts = [String]()
     
+    var arrAutoCorrect = [MAutoCorrect]()
+    
     func getData() -> Observable<()> {
         return Observable.zip(MLanguage.getData(), MUserSetting.getData(userid: self.userid))
             .concatMap { result -> Observable<()> in
@@ -137,7 +139,8 @@ class SettingsViewModel: NSObject {
         selectedUSLangIndex = arrUserSettings.index { $0.KIND == 2 && $0.ENTITYID == self.USLANGID }!
         return Observable.zip(MDictOnline.getDataByLang(self.USLANGID),
                               MDictNote.getDataByLang(self.USLANGID),
-                              MTextbook.getDataByLang(self.USLANGID))
+                              MTextbook.getDataByLang(self.USLANGID),
+                              MAutoCorrect.getDataByLang(self.USLANGID))
             .map {
                 self.arrDictsOnline = $0.0
                 self.selectedDictOnlineIndex = self.arrDictsOnline.index { $0.ID == self.USDICTONLINEID }!
@@ -147,6 +150,7 @@ class SettingsViewModel: NSObject {
                 }
                 self.arrTextbooks = $0.2
                 self.selectedTextbookIndex = self.arrTextbooks.index { $0.ID == self.USTEXTBOOKID }!
+                self.arrAutoCorrect = $0.3
             }
     }
     

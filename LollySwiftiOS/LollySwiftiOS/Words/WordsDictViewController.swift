@@ -57,7 +57,7 @@ class WordsDictViewController: UIViewController {
     private func selectDictChanged() {
         let item = vmSettings.selectedDictOnline
         btnDict.setTitle(item.DICTNAME, for: .normal)
-        let url = item.urlString(vm.selectWord)
+        let url = item.urlString(word: vm.selectWord, arrAutoCorrect: vmSettings.arrAutoCorrect)
         wvWord.load(URLRequest(url: URL(string: url)!))
     }
     
