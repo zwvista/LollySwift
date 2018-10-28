@@ -14,6 +14,7 @@ class WordsUnitViewController: NSViewController, LollyProtocol, NSTableViewDataS
     
     @IBOutlet weak var wvDictOnline: WKWebView!
     @IBOutlet weak var tfNewWord: NSTextField!
+    @IBOutlet weak var wvDictOffline: WKWebView!
     @IBOutlet weak var tableView: NSTableView!
     
     var timer = Timer()
@@ -36,6 +37,7 @@ class WordsUnitViewController: NSViewController, LollyProtocol, NSTableViewDataS
         
         tableView.registerForDraggedTypes([tableRowDragType])
         refreshTableView(self)
+        wvDictOffline.isHidden = true
     }
 
     override var representedObject: Any? {
@@ -117,6 +119,9 @@ class WordsUnitViewController: NSViewController, LollyProtocol, NSTableViewDataS
     }
     
     func searchWord(word: String) {
+        wvDictOnline.isHidden = false
+        wvDictOffline.isHidden = true
+
         let url = vm.vmSettings.selectedDictOnline.urlString(word: word, arrAutoCorrect: vmSettings.arrAutoCorrect)
         wvDictOnline.load(URLRequest(url: URL(string: url)!))
     }
@@ -162,6 +167,18 @@ class WordsUnitViewController: NSViewController, LollyProtocol, NSTableViewDataS
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         self.view.window?.makeKeyAndOrderFront(self)
         tableView.becomeFirstResponder()
+        guard webView === wvDictOnline else {return}
+        let item = vmSettings.selectedDictOnline
+        guard item.DICTTYPENAME == "OFFLINE-ONLINE" else {return}
+        // https://stackoverflow.com/questions/34751860/get-html-from-wkwebview-in-swift
+        webView.evaluateJavaScript("document.documentElement.outerHTML.toString()") { (html: Any?, error: Error?) in
+            let html = html as! String
+            //            print(html)
+            let str = item.htmlString(html, word: self.newWord)
+            self.wvDictOffline.loadHTMLString(str, baseURL: nil)
+            self.wvDictOnline.isHidden = true
+            self.wvDictOffline.isHidden = false
+        }
     }
 
     // https://stackoverflow.com/questions/24219441/how-to-use-nstoolbar-in-xcode-6-and-storyboard

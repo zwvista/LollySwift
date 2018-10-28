@@ -17,7 +17,7 @@ class SearchViewController: NSViewController, LollyProtocol, NSTableViewDataSour
     @IBOutlet weak var tableView: NSTableView!
 
     @objc
-    var word = ""
+    var newWord = ""
     
     var arrWords = [MUnitWord]()
 
@@ -46,7 +46,7 @@ class SearchViewController: NSViewController, LollyProtocol, NSTableViewDataSour
         wvDictOffline.isHidden = true
         
         let item = vmSettings.selectedDictOnline
-        let url = item.urlString(word: word, arrAutoCorrect: vmSettings.arrAutoCorrect)
+        let url = item.urlString(word: newWord, arrAutoCorrect: vmSettings.arrAutoCorrect)
         wvDictOnline.load(URLRequest(url: URL(string: url)!))
     }
     
@@ -70,7 +70,7 @@ class SearchViewController: NSViewController, LollyProtocol, NSTableViewDataSour
         webView.evaluateJavaScript("document.documentElement.outerHTML.toString()") { (html: Any?, error: Error?) in
             let html = html as! String
 //            print(html)
-            let str = item.htmlString(html, word: self.word)
+            let str = item.htmlString(html, word: self.newWord)
             self.wvDictOffline.loadHTMLString(str, baseURL: nil)
             self.wvDictOnline.isHidden = true
             self.wvDictOffline.isHidden = false

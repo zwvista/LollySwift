@@ -366,12 +366,26 @@
                                                     <outlet property="navigationDelegate" destination="F8i-pe-Ate" id="G8k-pd-bQG"/>
                                                 </connections>
                                             </wkWebView>
+                                            <wkWebView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xEg-I7-s2E" userLabel="Offline WebView">
+                                                <rect key="frame" x="0.0" y="0.0" width="517" height="640"/>
+                                                <wkWebViewConfiguration key="configuration">
+                                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                                    <wkPreferences key="preferences"/>
+                                                </wkWebViewConfiguration>
+                                                <connections>
+                                                    <binding destination="kQx-Qe-nCG" name="hidden" keyPath="values.wvDictOffline" id="ilE-Vy-5to"/>
+                                                </connections>
+                                            </wkWebView>
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="tEP-Us-q1l" secondAttribute="bottom" id="1Z7-Ot-M7H"/>
+                                            <constraint firstItem="xEg-I7-s2E" firstAttribute="leading" secondItem="bA1-VX-afL" secondAttribute="leading" id="D8r-Gn-7Zp"/>
                                             <constraint firstItem="tEP-Us-q1l" firstAttribute="leading" secondItem="bA1-VX-afL" secondAttribute="leading" id="M9s-4g-222"/>
+                                            <constraint firstAttribute="bottom" secondItem="xEg-I7-s2E" secondAttribute="bottom" id="Rzb-EP-4tZ"/>
                                             <constraint firstItem="tEP-Us-q1l" firstAttribute="top" secondItem="bA1-VX-afL" secondAttribute="top" id="Uz1-Yy-Jnh"/>
+                                            <constraint firstAttribute="trailing" secondItem="xEg-I7-s2E" secondAttribute="trailing" id="cjM-A4-1wn"/>
                                             <constraint firstAttribute="trailing" secondItem="tEP-Us-q1l" secondAttribute="trailing" id="oKB-dg-YWF"/>
+                                            <constraint firstItem="xEg-I7-s2E" firstAttribute="top" secondItem="bA1-VX-afL" secondAttribute="top" id="we4-zl-Sc1"/>
                                         </constraints>
                                     </customView>
                                 </subviews>
@@ -391,6 +405,7 @@
                     <connections>
                         <outlet property="tableView" destination="8Zf-06-OzS" id="Vn7-va-cpG"/>
                         <outlet property="tfNewWord" destination="AOA-N2-K53" id="JJm-gX-0NZ"/>
+                        <outlet property="wvDictOffline" destination="xEg-I7-s2E" id="IVw-TN-fox"/>
                         <outlet property="wvDictOnline" destination="tEP-Us-q1l" id="0DF-0d-cGv"/>
                     </connections>
                 </viewController>
