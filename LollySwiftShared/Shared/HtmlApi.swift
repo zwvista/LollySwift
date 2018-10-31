@@ -31,7 +31,8 @@ class HtmlApi {
         
         repeat {
             if transform.isEmpty {break}
-            let arr = transform.components(separatedBy: "\r\n")
+            var arr = transform.components(separatedBy: "\r\n")
+            if arr.count % 2 == 1 { arr.removeLast() }
             var regex = try! NSRegularExpression(pattern: arr[0])
             let m = regex.firstMatch(in: html, range: NSMakeRange(0, html.count))
             if m == nil {break}

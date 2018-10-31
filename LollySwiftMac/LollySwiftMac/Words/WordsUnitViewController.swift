@@ -20,6 +20,7 @@ class WordsUnitViewController: NSViewController, LollyProtocol, NSTableViewDataS
     var timer = Timer()
     @objc
     var newWord = ""
+    var selectedWord = ""
     
     var vm: WordsUnitViewModel!
     var arrWords: [MUnitWord] {
@@ -121,6 +122,7 @@ class WordsUnitViewController: NSViewController, LollyProtocol, NSTableViewDataS
     func searchWord(word: String) {
         wvDictOnline.isHidden = false
         wvDictOffline.isHidden = true
+        selectedWord = word
 
         let url = vm.vmSettings.selectedDictOnline.urlString(word: word, arrAutoCorrect: vmSettings.arrAutoCorrect)
         wvDictOnline.load(URLRequest(url: URL(string: url)!))
@@ -173,8 +175,8 @@ class WordsUnitViewController: NSViewController, LollyProtocol, NSTableViewDataS
         // https://stackoverflow.com/questions/34751860/get-html-from-wkwebview-in-swift
         webView.evaluateJavaScript("document.documentElement.outerHTML.toString()") { (html: Any?, error: Error?) in
             let html = html as! String
-            //            print(html)
-            let str = item.htmlString(html, word: self.newWord)
+            print(html)
+            let str = item.htmlString(html, word: self.selectedWord)
             self.wvDictOffline.loadHTMLString(str, baseURL: nil)
             self.wvDictOnline.isHidden = true
             self.wvDictOffline.isHidden = false
