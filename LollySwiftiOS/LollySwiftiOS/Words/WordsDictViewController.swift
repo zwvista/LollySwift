@@ -13,10 +13,10 @@ import RxSwift
 
 class WordsDictViewController: UIViewController {
 
-    @IBOutlet weak var wvWordHolder: UIView!
+    @IBOutlet weak var wvDictHolder: UIView!
     @IBOutlet weak var btnWord: UIButton!
     @IBOutlet weak var btnDict: UIButton!
-    weak var wvWord: WKWebView!
+    weak var wvDict: WKWebView!
     
     let vm = SearchViewModel(settings: vmSettings) {}
     let ddWord = DropDown(), ddDictOnline = DropDown()
@@ -25,7 +25,7 @@ class WordsDictViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        wvWord = addWKWebView(webViewHolder: wvWordHolder)
+        wvDict = addWKWebView(webViewHolder: wvDictHolder)
         
         ddWord.anchorView = btnWord
         ddWord.dataSource = vm.arrWords
@@ -58,7 +58,7 @@ class WordsDictViewController: UIViewController {
         let item = vmSettings.selectedDictOnline
         btnDict.setTitle(item.DICTNAME, for: .normal)
         let url = item.urlString(word: vm.selectWord, arrAutoCorrect: vmSettings.arrAutoCorrect)
-        wvWord.load(URLRequest(url: URL(string: url)!))
+        wvDict.load(URLRequest(url: URL(string: url)!))
     }
     
     

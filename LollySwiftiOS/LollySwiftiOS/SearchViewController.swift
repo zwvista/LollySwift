@@ -10,10 +10,8 @@ import UIKit
 import WebKit
 
 class SearchViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate {
-    @IBOutlet weak var wvDictOnlineHolder: UIView!
-    @IBOutlet weak var wvDictOfflineHolder: UIView!
-    weak var wvDictOnline: WKWebView!
-    weak var wvDictOffline: WKWebView!
+    @IBOutlet weak var wvDictHolder: UIView!
+    weak var wvDict: WKWebView!
 
     @IBOutlet weak var sbword: UISearchBar!
     
@@ -22,21 +20,16 @@ class SearchViewController: UIViewController, UIWebViewDelegate, UISearchBarDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        wvDictOnline = addWKWebView(webViewHolder: wvDictOnlineHolder)
-        wvDictOffline = addWKWebView(webViewHolder: wvDictOfflineHolder)
-        wvDictOnlineHolder.isHidden = true
-        wvDictOfflineHolder.isHidden = true
+        wvDict = addWKWebView(webViewHolder: wvDictHolder)
+        wvDictHolder.isHidden = true
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        wvDictOnlineHolder.isHidden = false
-        wvDictOfflineHolder.isHidden = true
-        
         word = sbword.text!;
         let item = vmSettings.selectedDictOnline
         let url = item.urlString(word: word, arrAutoCorrect: vmSettings.arrAutoCorrect)
         webViewFinished = false
-        wvDictOnline.load(URLRequest(url: URL(string: url)!))
+        wvDict.load(URLRequest(url: URL(string: url)!))
         sbword.resignFirstResponder()
     }
     
@@ -45,7 +38,7 @@ class SearchViewController: UIViewController, UIWebViewDelegate, UISearchBarDele
     }
 
     func webViewDidFinishLoad(_ webView: UIWebView) {
-        guard webView === wvDictOnline && webView.stringByEvaluatingJavaScript(from: "document.readyState") == "complete" && !webViewFinished else {return}
+        guard webView === wvDict && webView.stringByEvaluatingJavaScript(from: "document.readyState") == "complete" && !webViewFinished else {return}
         
         webViewFinished = true
         let item = vmSettings.selectedDictOnline
@@ -55,9 +48,7 @@ class SearchViewController: UIViewController, UIWebViewDelegate, UISearchBarDele
         let html = NSString(data: data, encoding: String.Encoding.utf8.rawValue)!
         let str = item.htmlString(html as String, word: word)
         
-        wvDictOffline.loadHTMLString(str, baseURL: URL(string: "/Users/bestskip/Documents/zw/"));
-        wvDictOnlineHolder.isHidden = true
-        wvDictOfflineHolder.isHidden = false
+        wvDict.loadHTMLString(str, baseURL: URL(string: "/Users/bestskip/Documents/zw/"));
     }
     
     deinit {

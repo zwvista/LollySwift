@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
-        <plugIn identifier="com.apple.WebKit2IBPlugin" version="14313.18"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <plugIn identifier="com.apple.WebKit2IBPlugin" version="14460.31"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -1098,7 +1097,7 @@
                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     <connections>
-                                                        <binding destination="XfG-lQ-9wD" name="value" keyPath="word" id="N7c-IW-90v"/>
+                                                        <binding destination="XfG-lQ-9wD" name="value" keyPath="newWord" id="U7i-3y-sma"/>
                                                     </connections>
                                                 </searchFieldCell>
                                                 <connections>
@@ -1119,7 +1118,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="229" height="618"/>
                                                 <clipView key="contentView" id="zZJ-JQ-oJH">
                                                     <rect key="frame" x="1" y="0.0" width="227" height="617"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="Cm9-Cw-pAp" viewBased="YES" id="8zG-dc-nsI">
                                                             <rect key="frame" x="0.0" y="0.0" width="227" height="594"/>
@@ -1242,22 +1241,11 @@
                                                     <outlet property="navigationDelegate" destination="XfG-lQ-9wD" id="epB-zd-gGi"/>
                                                 </connections>
                                             </wkWebView>
-                                            <wkWebView translatesAutoresizingMaskIntoConstraints="NO" id="O2b-uh-1IJ" userLabel="Offline WebView">
-                                                <rect key="frame" x="0.0" y="0.0" width="583" height="640"/>
-                                                <wkWebViewConfiguration key="configuration">
-                                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
-                                                    <wkPreferences key="preferences"/>
-                                                </wkWebViewConfiguration>
-                                            </wkWebView>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="xWq-d5-5CB" firstAttribute="top" secondItem="Dyc-Sz-LgB" secondAttribute="top" id="1gq-FQ-cYG"/>
-                                            <constraint firstItem="O2b-uh-1IJ" firstAttribute="leading" secondItem="Dyc-Sz-LgB" secondAttribute="leading" id="2W6-A7-hm0"/>
                                             <constraint firstAttribute="bottom" secondItem="xWq-d5-5CB" secondAttribute="bottom" id="M8M-Ze-rUQ"/>
                                             <constraint firstItem="xWq-d5-5CB" firstAttribute="leading" secondItem="Dyc-Sz-LgB" secondAttribute="leading" id="Tmw-FG-5tt"/>
-                                            <constraint firstAttribute="bottom" secondItem="O2b-uh-1IJ" secondAttribute="bottom" id="b1z-BQ-N9G"/>
-                                            <constraint firstItem="O2b-uh-1IJ" firstAttribute="top" secondItem="Dyc-Sz-LgB" secondAttribute="top" id="h2q-2h-a2D"/>
-                                            <constraint firstAttribute="trailing" secondItem="O2b-uh-1IJ" secondAttribute="trailing" id="jt3-Da-cjx"/>
                                             <constraint firstAttribute="trailing" secondItem="xWq-d5-5CB" secondAttribute="trailing" id="wkB-iN-2aR"/>
                                         </constraints>
                                     </customView>
@@ -1278,11 +1266,11 @@
                     <connections>
                         <outlet property="sfWord" destination="8ww-HD-ydB" id="EVK-HK-GJr"/>
                         <outlet property="tableView" destination="8zG-dc-nsI" id="A4O-jr-d8c"/>
-                        <outlet property="wvDictOffline" destination="O2b-uh-1IJ" id="NdO-e6-baK"/>
-                        <outlet property="wvDictOnline" destination="xWq-d5-5CB" id="EEH-SH-eup"/>
+                        <outlet property="wvDict" destination="xWq-d5-5CB" id="EEH-SH-eup"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <userDefaultsController representsSharedInstance="YES" id="rsN-Ud-POM"/>
             </objects>
             <point key="canvasLocation" x="75" y="928"/>
         </scene>

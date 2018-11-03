@@ -12,9 +12,8 @@ import RxSwift
 
 class WordsUnitViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate, WKNavigationDelegate {
     
-    @IBOutlet weak var wvDictOnline: WKWebView!
+    @IBOutlet weak var wvDict: WKWebView!
     @IBOutlet weak var tfNewWord: NSTextField!
-    @IBOutlet weak var wvDictOffline: WKWebView!
     @IBOutlet weak var tableView: NSTableView!
     
     var timer = Timer()
@@ -38,7 +37,6 @@ class WordsUnitViewController: NSViewController, LollyProtocol, NSTableViewDataS
         
         tableView.registerForDraggedTypes([tableRowDragType])
         refreshTableView(self)
-        wvDictOffline.isHidden = true
     }
 
     override var representedObject: Any? {
@@ -120,12 +118,10 @@ class WordsUnitViewController: NSViewController, LollyProtocol, NSTableViewDataS
     }
     
     func searchWord(word: String) {
-        wvDictOnline.isHidden = false
-        wvDictOffline.isHidden = true
         selectedWord = word
 
         let url = vm.vmSettings.selectedDictOnline.urlString(word: word, arrAutoCorrect: vmSettings.arrAutoCorrect)
-        wvDictOnline.load(URLRequest(url: URL(string: url)!))
+        wvDict.load(URLRequest(url: URL(string: url)!))
     }
     
     func searchWordInTableView() {
@@ -169,7 +165,7 @@ class WordsUnitViewController: NSViewController, LollyProtocol, NSTableViewDataS
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         self.view.window?.makeKeyAndOrderFront(self)
         tableView.becomeFirstResponder()
-        guard webView === wvDictOnline else {return}
+        guard webView === wvDict else {return}
         let item = vmSettings.selectedDictOnline
         guard item.DICTTYPENAME == "OFFLINE-ONLINE" else {return}
         // https://stackoverflow.com/questions/34751860/get-html-from-wkwebview-in-swift
@@ -177,9 +173,7 @@ class WordsUnitViewController: NSViewController, LollyProtocol, NSTableViewDataS
             let html = html as! String
             print(html)
             let str = item.htmlString(html, word: self.selectedWord)
-            self.wvDictOffline.loadHTMLString(str, baseURL: nil)
-            self.wvDictOnline.isHidden = true
-            self.wvDictOffline.isHidden = false
+            self.wvDict.loadHTMLString(str, baseURL: nil)
         }
     }
 
