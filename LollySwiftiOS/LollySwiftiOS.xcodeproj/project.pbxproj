@@ -53,6 +53,7 @@
 		953473E21A0D16CF00FF2D56 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 953473E11A0D16CF00FF2D56 /* Images.xcassets */; };
 		953473E51A0D16CF00FF2D56 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 953473E31A0D16CF00FF2D56 /* LaunchScreen.xib */; };
 		953473F11A0D16CF00FF2D56 /* LollySwiftiOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953473F01A0D16CF00FF2D56 /* LollySwiftiOSTests.swift */; };
+		954B8706218DC007007DC348 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954B8705218DC007007DC348 /* Common.swift */; };
 		954D8B85214389D700651A80 /* PhrasesLangViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C316575207676CF0015C247 /* PhrasesLangViewModel.swift */; };
 		954D8B86214389D700651A80 /* PhrasesUnitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C316576207676CF0015C247 /* PhrasesUnitViewModel.swift */; };
 		954D8B87214389D700651A80 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9471A42081B02F00D040E0 /* SearchViewModel.swift */; };
@@ -151,6 +152,7 @@
 		953473EA1A0D16CF00FF2D56 /* LollySwiftiOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LollySwiftiOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		953473EF1A0D16CF00FF2D56 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		953473F01A0D16CF00FF2D56 /* LollySwiftiOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LollySwiftiOSTests.swift; sourceTree = "<group>"; };
+		954B8705218DC007007DC348 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		95EFF480218419E00094EE3C /* MAutoCorrect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MAutoCorrect.swift; sourceTree = "<group>"; };
 		A2462FE0278FE5DE7FF9A4E2 /* Pods_LollySwiftiOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LollySwiftiOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA5376BDE309080131C3F3FD /* Pods_LollySwiftiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LollySwiftiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -217,6 +219,7 @@
 		8C316578207676CF0015C247 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				954B8705218DC007007DC348 /* Common.swift */,
 				8C31657A207676CF0015C247 /* HtmlApi.swift */,
 				8C316579207676CF0015C247 /* RestApi.swift */,
 				8C0748E6209ED0DA0006BD1B /* RxCodableAlamofire.swift */,
@@ -567,6 +570,7 @@
 				8C316586207676CF0015C247 /* SettingsViewModel.swift in Sources */,
 				8CD16D201D69FE8F00F5F625 /* PhrasesLangDetailViewController.swift in Sources */,
 				8C316593207676CF0015C247 /* MLangPhrase.swift in Sources */,
+				954B8706218DC007007DC348 /* Common.swift in Sources */,
 				8C31658E207676CF0015C247 /* MDictionary.swift in Sources */,
 				8C0748E7209ED0DA0006BD1B /* RxCodableAlamofire.swift in Sources */,
 				8CB025942096CB3E0087462E /* RootViewController.swift in Sources */,

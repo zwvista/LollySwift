@@ -44,6 +44,7 @@
 		8CD8409E20AFD4DA00442133 /* PhrasesUnitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8409B20AFD4D900442133 /* PhrasesUnitViewController.swift */; };
 		8CD8409F20AFD4DA00442133 /* Phrases.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8CD8409C20AFD4D900442133 /* Phrases.storyboard */; };
 		8CE0F27A206E94CF00EEE4AC /* LollyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE0F279206E94CE00EEE4AC /* LollyProtocol.swift */; };
+		954B8708218DC04E007DC348 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954B8707218DC04E007DC348 /* Common.swift */; };
 		954D8B982143907C00651A80 /* PhrasesLangViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CB59D207885140083DDE2 /* PhrasesLangViewModel.swift */; };
 		954D8B992143907C00651A80 /* PhrasesUnitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CB59E207885140083DDE2 /* PhrasesUnitViewModel.swift */; };
 		954D8B9A2143907C00651A80 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAF910920833C4F00933837 /* SearchViewModel.swift */; };
@@ -132,6 +133,7 @@
 		8CD8409B20AFD4D900442133 /* PhrasesUnitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesUnitViewController.swift; sourceTree = "<group>"; };
 		8CD8409C20AFD4D900442133 /* Phrases.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Phrases.storyboard; sourceTree = "<group>"; };
 		8CE0F279206E94CE00EEE4AC /* LollyProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LollyProtocol.swift; sourceTree = "<group>"; };
+		954B8707218DC04E007DC348 /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		95EFF47D21840FB60094EE3C /* MAutoCorrect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MAutoCorrect.swift; sourceTree = "<group>"; };
 		C0A07AB238AF8E83FC5E5DD3 /* Pods-LollySwiftMac.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LollySwiftMac.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-LollySwiftMac/Pods-LollySwiftMac.debug.xcconfig"; sourceTree = "<group>"; };
 		E3F71BC79C6087E4623A422F /* Pods-LollySwiftMac.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LollySwiftMac.release.xcconfig"; path = "../Pods/Target Support Files/Pods-LollySwiftMac/Pods-LollySwiftMac.release.xcconfig"; sourceTree = "<group>"; };
@@ -254,6 +256,7 @@
 		8C2CB5A0207885140083DDE2 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				954B8707218DC04E007DC348 /* Common.swift */,
 				8C2CB5A2207885140083DDE2 /* HtmlApi.swift */,
 				8C2CB5A1207885140083DDE2 /* RestApi.swift */,
 				8C0748E8209EE15C0006BD1B /* RxCodableAlamofire.swift */,
@@ -585,6 +588,7 @@
 				8C2CB5BA207885140083DDE2 /* MUserSetting.swift in Sources */,
 				8C2CB5AE207885140083DDE2 /* SettingsViewModel.swift in Sources */,
 				8C2CB5C3207888260083DDE2 /* WordsUnitViewController.swift in Sources */,
+				954B8708218DC04E007DC348 /* Common.swift in Sources */,
 				8C2CB5B6207885140083DDE2 /* MDictionary.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

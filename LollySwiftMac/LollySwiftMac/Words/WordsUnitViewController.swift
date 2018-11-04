@@ -20,7 +20,8 @@ class WordsUnitViewController: NSViewController, LollyProtocol, NSTableViewDataS
     @objc
     var newWord = ""
     var selectedWord = ""
-    
+    var status: DictWebViewStatus = .ready
+
     var vm: WordsUnitViewModel!
     var arrWords: [MUnitWord] {
         return vm.arrWords
@@ -119,9 +120,21 @@ class WordsUnitViewController: NSViewController, LollyProtocol, NSTableViewDataS
     
     func searchWord(word: String) {
         selectedWord = word
-
+        let item = vmSettings.selectedDictOnline
         let url = vm.vmSettings.selectedDictOnline.urlString(word: word, arrAutoCorrect: vmSettings.arrAutoCorrect)
-        wvDict.load(URLRequest(url: URL(string: url)!))
+        if item.DICTTYPENAME == "OFFLINE" {
+            wvDict.load(URLRequest(url: URL(string: "about:blank")!))
+            RestApi.getHtml(url: url).subscribe(onNext: { html in
+                print(html)
+                let str = item.htmlString(html, word: self.newWord)
+                self.wvDict.loadHTMLString(str, baseURL: nil)
+            }).disposed(by: disposeBag)
+        } else {
+            wvDict.load(URLRequest(url: URL(string: url)!))
+            if item.DICTTYPENAME == "OFFLINE-ONLINE" {
+                status = .navigating
+            }
+        }
     }
     
     func searchWordInTableView() {
@@ -165,15 +178,15 @@ class WordsUnitViewController: NSViewController, LollyProtocol, NSTableViewDataS
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         self.view.window?.makeKeyAndOrderFront(self)
         tableView.becomeFirstResponder()
-        guard webView === wvDict else {return}
+        guard status == .navigating else {return}
         let item = vmSettings.selectedDictOnline
-        guard item.DICTTYPENAME == "OFFLINE-ONLINE" else {return}
         // https://stackoverflow.com/questions/34751860/get-html-from-wkwebview-in-swift
         webView.evaluateJavaScript("document.documentElement.outerHTML.toString()") { (html: Any?, error: Error?) in
             let html = html as! String
             print(html)
             let str = item.htmlString(html, word: self.selectedWord)
             self.wvDict.loadHTMLString(str, baseURL: nil)
+            self.status = .ready
         }
     }
 

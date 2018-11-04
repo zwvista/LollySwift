@@ -17,7 +17,7 @@ class MDictionary: NSObject, Codable {
     var DICTNAME: String?
     var URL: String?
     var CHCONV: String?
-    var TRANSFORM_MAC: String?
+    var TRANSFORM: String?
     var WAIT: Int?
     var TEMPLATE: String?
     
@@ -40,7 +40,7 @@ class MDictOnline : MDictionary {
     fileprivate let debugExtract = false
     
     func htmlString(_ html: String, word: String) -> String {
-        return HtmlApi.extractText(from: html, transform: TRANSFORM_MAC!, template: TEMPLATE!) { (text, template) in
+        return HtmlApi.extractText(from: html, transform: TRANSFORM!, template: TEMPLATE!) { (text, template) in
             
             //            var newTemplate = NSMutableString(string: template)
             //            regex = try! NSRegularExpression(pattern: "\\{\\d\\}")

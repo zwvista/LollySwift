@@ -16,8 +16,8 @@ class SearchViewController: UIViewController, UIWebViewDelegate, UISearchBarDele
     @IBOutlet weak var sbword: UISearchBar!
     
     var word = ""
-    var webViewFinished = false
-    
+    var status: DictWebViewStatus = .ready
+
     override func viewDidLoad() {
         super.viewDidLoad()
         wvDict = addWKWebView(webViewHolder: wvDictHolder)
@@ -28,9 +28,11 @@ class SearchViewController: UIViewController, UIWebViewDelegate, UISearchBarDele
         word = sbword.text!;
         let item = vmSettings.selectedDictOnline
         let url = item.urlString(word: word, arrAutoCorrect: vmSettings.arrAutoCorrect)
-        webViewFinished = false
         wvDict.load(URLRequest(url: URL(string: url)!))
         sbword.resignFirstResponder()
+        if item.DICTTYPENAME == "OFFLINE-ONLINE" {
+            status = .navigating
+        }
     }
     
     func position(for bar: UIBarPositioning) -> UIBarPosition {
@@ -38,17 +40,16 @@ class SearchViewController: UIViewController, UIWebViewDelegate, UISearchBarDele
     }
 
     func webViewDidFinishLoad(_ webView: UIWebView) {
-        guard webView === wvDict && webView.stringByEvaluatingJavaScript(from: "document.readyState") == "complete" && !webViewFinished else {return}
+        guard webView.stringByEvaluatingJavaScript(from: "document.readyState") == "complete" && !status == .navigating else {return}
         
-        webViewFinished = true
         let item = vmSettings.selectedDictOnline
-        guard item.DICTTYPENAME == "OFFLINE-ONLINE" else {return}
         
         let data = URLCache.shared.cachedResponse(for: webView.request!)!.data;
         let html = NSString(data: data, encoding: String.Encoding.utf8.rawValue)!
         let str = item.htmlString(html as String, word: word)
         
         wvDict.loadHTMLString(str, baseURL: URL(string: "/Users/bestskip/Documents/zw/"));
+        status = .ready
     }
     
     deinit {
