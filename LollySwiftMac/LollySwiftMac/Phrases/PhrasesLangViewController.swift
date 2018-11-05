@@ -10,7 +10,7 @@ import Cocoa
 import WebKit
 import RxSwift
 
-class PhrasesUnitViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate, WKNavigationDelegate {
+class PhrasesLangViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate, WKNavigationDelegate {
     
     @IBOutlet weak var tableView: NSTableView!
     
@@ -18,21 +18,15 @@ class PhrasesUnitViewController: NSViewController, LollyProtocol, NSTableViewDat
     @objc
     var newPhrase = ""
     
-    var vm: PhrasesUnitViewModel!
-    var arrPhrases: [MUnitPhrase] {
+    var vm: PhrasesLangViewModel!
+    var arrPhrases: [MLangPhrase] {
         return vm.arrPhrases
     }
-    
-    // https://developer.apple.com/videos/play/wwdc2011/120/
-    // https://stackoverflow.com/questions/2121907/drag-drop-reorder-rows-on-nstableview
-    let tableRowDragType = NSPasteboard.PasteboardType(rawValue: "private.table-row")
     
     let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        tableView.registerForDraggedTypes([tableRowDragType])
         refreshTableView(self)
     }
 
@@ -50,56 +44,8 @@ class PhrasesUnitViewController: NSViewController, LollyProtocol, NSTableViewDat
         let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! NSTableCellView
         let item = arrPhrases[row]
         let columnName = tableColumn!.title
-        cell.textField?.stringValue = columnName == "PART" ? item.PARTSTR(arrParts: vm.vmSettings.arrParts) : String(describing: item.value(forKey: columnName) ?? "")
+        cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
         return cell;
-    }
-    
-    func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
-        let item = NSPasteboardItem()
-        item.setString(String(row), forType: tableRowDragType)
-        return item
-    }
-    
-    func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int, proposedDropOperation dropOperation: NSTableView.DropOperation) -> NSDragOperation {
-        if dropOperation == .above {
-            return .move
-        }
-        return []
-    }
-    
-    func tableView(_ tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int, dropOperation: NSTableView.DropOperation) -> Bool {
-        var oldIndexes = [Int]()
-        info.enumerateDraggingItems(options: [], for: tableView, classes: [NSPasteboardItem.self], searchOptions: [:]) { (draggingItem, _, _) in
-            if let str = (draggingItem.item as! NSPasteboardItem).string(forType: self.tableRowDragType), let index = Int(str) {
-                oldIndexes.append(index)
-            }
-        }
-        
-        var oldIndexOffset = 0
-        var newIndexOffset = 0
-        
-        func moveRow(at oldIndex: Int, to newIndex: Int) {
-            vm.movePhrase(at: oldIndex, to: newIndex)
-            tableView.moveRow(at: oldIndex, to: newIndex)
-        }
-        
-        tableView.beginUpdates()
-        for oldIndex in oldIndexes {
-            if oldIndex < row {
-                moveRow(at: oldIndex + oldIndexOffset, to: row - 1)
-                oldIndexOffset -= 1
-            } else {
-                moveRow(at: oldIndex, to: row + newIndexOffset)
-                newIndexOffset += 1
-            }
-        }
-        let col = tableView.tableColumns.index(where: {$0.title == "SEQNUM"})!
-        vm.reindex {
-            tableView.reloadData(forRowIndexes: [$0], columnIndexes: [col])
-        }
-        tableView.endUpdates()
-        
-        return true
     }
     
     @IBAction func endEditing(_ sender: NSTextField) {
@@ -111,7 +57,7 @@ class PhrasesUnitViewController: NSViewController, LollyProtocol, NSTableViewDat
         let newValue = sender.stringValue
         guard oldValue != newValue else {return}
         item.setValue(newValue, forKey: key)
-        PhrasesUnitViewModel.update(item: item).subscribe().disposed(by: disposeBag)
+        PhrasesLangViewModel.update(item: item).subscribe().disposed(by: disposeBag)
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
@@ -121,9 +67,9 @@ class PhrasesUnitViewController: NSViewController, LollyProtocol, NSTableViewDat
 
     // https://stackoverflow.com/questions/24219441/how-to-use-nstoolbar-in-xcode-6-and-storyboard
     @IBAction func addPhrase(_ sender: Any) {
-        let detailVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesUnitDetailViewController") as! PhrasesUnitDetailViewController
+        let detailVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesLangDetailViewController") as! PhrasesLangDetailViewController
         detailVC.vm = vm
-        detailVC.mPhrase = vm.newUnitPhrase()
+        detailVC.mPhrase = vm.newLangPhrase()
         detailVC.complete = { self.tableView.reloadData(); self.addPhrase(self) }
         self.presentAsSheet(detailVC)
     }
@@ -132,13 +78,13 @@ class PhrasesUnitViewController: NSViewController, LollyProtocol, NSTableViewDat
     }
     
     @IBAction func refreshTableView(_ sender: Any) {
-        vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel) {
+        vm = PhrasesLangViewModel(settings: AppDelegate.theSettingsViewModel) {
             self.tableView.reloadData()
         }
     }
 
     @IBAction func editPhrase(_ sender: Any) {
-        let detailVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesUnitDetailViewController") as! PhrasesUnitDetailViewController
+        let detailVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesLangDetailViewController") as! PhrasesLangDetailViewController
         detailVC.vm = vm
         let i = tableView.selectedRow
         detailVC.mPhrase = vm.arrPhrases[i]
@@ -167,9 +113,9 @@ class PhrasesUnitViewController: NSViewController, LollyProtocol, NSTableViewDat
     }
 }
 
-class PhrasesUnitWindowController: NSWindowController, LollyProtocol {
+class PhrasesLangWindowController: NSWindowController, LollyProtocol {
     
-    var vc: PhrasesUnitViewController {return contentViewController as! PhrasesUnitViewController}
+    var vc: PhrasesLangViewController {return contentViewController as! PhrasesLangViewController}
     @objc var vm: SettingsViewModel {return vmSettings}
     
     override func windowDidLoad() {

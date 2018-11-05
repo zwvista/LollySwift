@@ -10,14 +10,14 @@ import Foundation
 import RxSwift
 
 class PhrasesLangViewModel: NSObject {
-    var settings: SettingsViewModel
+    var vmSettings: SettingsViewModel
     var arrPhrases = [MLangPhrase]()
     var arrPhrasesFiltered: [MLangPhrase]?
     
     let disposeBag = DisposeBag()
     
     public init(settings: SettingsViewModel, complete: @escaping () -> ()) {
-        self.settings = settings
+        self.vmSettings = settings
         let item = settings.arrTextbooks[settings.selectedTextbookIndex]
         super.init()
         MLangPhrase.getDataByLang(item.LANGID).subscribe(onNext: {
@@ -36,12 +36,22 @@ class PhrasesLangViewModel: NSObject {
         return MLangPhrase.update(id, item: item).map { print($0) }
     }
     
+    static func update(item: MLangPhrase) -> Observable<()> {
+        return MLangPhrase.update(item: item).map { print($0) }
+    }
+
     static func create(item: MLangPhrase) -> Observable<Int> {
         return MLangPhrase.create(item: item).map { print($0); return $0.toInt()! }
     }
     
     static func delete(_ id: Int) -> Observable<()> {
         return MLangPhrase.delete(id).map { print($0) }
+    }
+
+    func newLangPhrase() -> MLangPhrase {
+        let item = MLangPhrase()
+        item.LANGID = vmSettings.selectedLang.ID
+        return item
     }
 
 }

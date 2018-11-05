@@ -30,7 +30,7 @@ class MLangWord: NSObject, Codable {
     }
     
     static func update(item: MLangWord) -> Observable<String> {
-        // SQL: UPDATE UNITWORDS SET WORD=?, LEVEL=? WHERE ID=?
+        // SQL: UPDATE LANGWORDS SET WORD=?, LEVEL=? WHERE ID=?
         let url = "\(RestApi.url)LANGWORDS/\(item.ID)"
         return RestApi.update(url: url, body: try! item.toJSONString(prettyPrint: false)!)
     }

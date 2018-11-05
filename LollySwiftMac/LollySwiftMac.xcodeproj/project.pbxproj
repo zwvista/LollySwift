@@ -67,6 +67,8 @@
 		954D8BA92143907C00651A80 /* MUnitWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CB5A5207885140083DDE2 /* MUnitWord.swift */; };
 		954D8BAA2143907C00651A80 /* MUserSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CB5A8207885140083DDE2 /* MUserSetting.swift */; };
 		954D8BAC214395C700651A80 /* RestApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CB5A1207885140083DDE2 /* RestApi.swift */; };
+		958125C62190463F0001159E /* PhrasesLangViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958125C52190463F0001159E /* PhrasesLangViewController.swift */; };
+		958125C82190464A0001159E /* PhrasesLangDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958125C72190464A0001159E /* PhrasesLangDetailViewController.swift */; };
 		95EFF47E21840FB60094EE3C /* MAutoCorrect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EFF47D21840FB60094EE3C /* MAutoCorrect.swift */; };
 		95EFF47F218412DD0094EE3C /* MAutoCorrect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EFF47D21840FB60094EE3C /* MAutoCorrect.swift */; };
 		DA220CE0442B147BB8A850BD /* Pods_LollySwiftMacTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1822EDB9E8ADA45D7C800AF4 /* Pods_LollySwiftMacTests.framework */; };
@@ -140,6 +142,8 @@
 		954B8709218FC18D007DC348 /* WordsBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsBaseViewController.swift; sourceTree = "<group>"; };
 		954B870B218FC223007DC348 /* WordsLangViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsLangViewController.swift; sourceTree = "<group>"; };
 		954B870D218FD274007DC348 /* WordsLangDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsLangDetailViewController.swift; sourceTree = "<group>"; };
+		958125C52190463F0001159E /* PhrasesLangViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesLangViewController.swift; sourceTree = "<group>"; };
+		958125C72190464A0001159E /* PhrasesLangDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesLangDetailViewController.swift; sourceTree = "<group>"; };
 		95EFF47D21840FB60094EE3C /* MAutoCorrect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MAutoCorrect.swift; sourceTree = "<group>"; };
 		C0A07AB238AF8E83FC5E5DD3 /* Pods-LollySwiftMac.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LollySwiftMac.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-LollySwiftMac/Pods-LollySwiftMac.debug.xcconfig"; sourceTree = "<group>"; };
 		E3F71BC79C6087E4623A422F /* Pods-LollySwiftMac.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LollySwiftMac.release.xcconfig"; path = "../Pods/Target Support Files/Pods-LollySwiftMac/Pods-LollySwiftMac.release.xcconfig"; sourceTree = "<group>"; };
@@ -317,7 +321,9 @@
 			children = (
 				8CD8409C20AFD4D900442133 /* Phrases.storyboard */,
 				8CD8409A20AFD4D900442133 /* PhrasesUnitDetailViewController.swift */,
+				958125C72190464A0001159E /* PhrasesLangDetailViewController.swift */,
 				8CD8409B20AFD4D900442133 /* PhrasesUnitViewController.swift */,
+				958125C52190463F0001159E /* PhrasesLangViewController.swift */,
 			);
 			path = Phrases;
 			sourceTree = "<group>";
@@ -572,6 +578,7 @@
 				8C2CB5B8207885140083DDE2 /* MLangWord.swift in Sources */,
 				8C2CB5B2207885140083DDE2 /* PhrasesUnitViewModel.swift in Sources */,
 				8C2CB5AF207885140083DDE2 /* WordsLangViewModel.swift in Sources */,
+				958125C82190464A0001159E /* PhrasesLangDetailViewController.swift in Sources */,
 				8C2CB5B3207885140083DDE2 /* WordsUnitViewModel.swift in Sources */,
 				8C2CB5B7207885140083DDE2 /* MUnitWord.swift in Sources */,
 				954B870A218FC18D007DC348 /* WordsBaseViewController.swift in Sources */,
@@ -586,6 +593,7 @@
 				8C2CB5BB207885140083DDE2 /* MLangPhrase.swift in Sources */,
 				8C2CB5B5207885140083DDE2 /* HtmlApi.swift in Sources */,
 				8CE0F27A206E94CF00EEE4AC /* LollyProtocol.swift in Sources */,
+				958125C62190463F0001159E /* PhrasesLangViewController.swift in Sources */,
 				8C2CB5B4207885140083DDE2 /* RestApi.swift in Sources */,
 				8C2CB5C9207896EC0083DDE2 /* WordsUnitDetailViewController.swift in Sources */,
 				8C2CB5BD207885140083DDE2 /* MUnitPhrase.swift in Sources */,

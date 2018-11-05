@@ -28,6 +28,12 @@ class MLangPhrase: NSObject, Codable {
         return RestApi.update(url: url, body: try! item.toJSONString(prettyPrint: false)!)
     }
     
+    static func update(item: MLangPhrase) -> Observable<String> {
+        // SQL: UPDATE LANGPHRASES SET PHRASE=?, TRANSLATION=? WHERE ID=?
+        let url = "\(RestApi.url)LANGPHRASES/\(item.ID)"
+        return RestApi.update(url: url, body: try! item.toJSONString(prettyPrint: false)!)
+    }
+
     static func create(item: MLangPhrase) -> Observable<String> {
         // SQL: INSERT INTO LANGPHRASES (LANGID, PHRASE, TRANSLATION) VALUES (?,?,?)
         let url = "\(RestApi.url)LANGPHRASES"
