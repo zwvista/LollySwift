@@ -45,6 +45,9 @@
 		8CD8409F20AFD4DA00442133 /* Phrases.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8CD8409C20AFD4D900442133 /* Phrases.storyboard */; };
 		8CE0F27A206E94CF00EEE4AC /* LollyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE0F279206E94CE00EEE4AC /* LollyProtocol.swift */; };
 		954B8708218DC04E007DC348 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954B8707218DC04E007DC348 /* Common.swift */; };
+		954B870A218FC18D007DC348 /* WordsBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954B8709218FC18D007DC348 /* WordsBaseViewController.swift */; };
+		954B870C218FC223007DC348 /* WordsLangViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954B870B218FC223007DC348 /* WordsLangViewController.swift */; };
+		954B870E218FD274007DC348 /* WordsLangDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954B870D218FD274007DC348 /* WordsLangDetailViewController.swift */; };
 		954D8B982143907C00651A80 /* PhrasesLangViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CB59D207885140083DDE2 /* PhrasesLangViewModel.swift */; };
 		954D8B992143907C00651A80 /* PhrasesUnitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CB59E207885140083DDE2 /* PhrasesUnitViewModel.swift */; };
 		954D8B9A2143907C00651A80 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAF910920833C4F00933837 /* SearchViewModel.swift */; };
@@ -134,6 +137,9 @@
 		8CD8409C20AFD4D900442133 /* Phrases.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Phrases.storyboard; sourceTree = "<group>"; };
 		8CE0F279206E94CE00EEE4AC /* LollyProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LollyProtocol.swift; sourceTree = "<group>"; };
 		954B8707218DC04E007DC348 /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
+		954B8709218FC18D007DC348 /* WordsBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsBaseViewController.swift; sourceTree = "<group>"; };
+		954B870B218FC223007DC348 /* WordsLangViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsLangViewController.swift; sourceTree = "<group>"; };
+		954B870D218FD274007DC348 /* WordsLangDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsLangDetailViewController.swift; sourceTree = "<group>"; };
 		95EFF47D21840FB60094EE3C /* MAutoCorrect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MAutoCorrect.swift; sourceTree = "<group>"; };
 		C0A07AB238AF8E83FC5E5DD3 /* Pods-LollySwiftMac.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LollySwiftMac.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-LollySwiftMac/Pods-LollySwiftMac.debug.xcconfig"; sourceTree = "<group>"; };
 		E3F71BC79C6087E4623A422F /* Pods-LollySwiftMac.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LollySwiftMac.release.xcconfig"; path = "../Pods/Target Support Files/Pods-LollySwiftMac/Pods-LollySwiftMac.release.xcconfig"; sourceTree = "<group>"; };
@@ -245,8 +251,8 @@
 				8C2CB59D207885140083DDE2 /* PhrasesLangViewModel.swift */,
 				8C2CB59E207885140083DDE2 /* PhrasesUnitViewModel.swift */,
 				8CAF910920833C4F00933837 /* SearchViewModel.swift */,
-				8C2CB59A207885140083DDE2 /* SettingsViewModel.swift */,
 				8C2CB59B207885140083DDE2 /* WordsLangViewModel.swift */,
+				8C2CB59A207885140083DDE2 /* SettingsViewModel.swift */,
 				8C2CB59C207885140083DDE2 /* WordsTextbookViewModel.swift */,
 				8C2CB59F207885140083DDE2 /* WordsUnitViewModel.swift */,
 			);
@@ -286,7 +292,10 @@
 			children = (
 				8C2CB5C2207888260083DDE2 /* Words.storyboard */,
 				8C2CB5C1207888260083DDE2 /* WordsUnitViewController.swift */,
+				954B870B218FC223007DC348 /* WordsLangViewController.swift */,
+				954B8709218FC18D007DC348 /* WordsBaseViewController.swift */,
 				8C2CB5C7207896EC0083DDE2 /* WordsUnitDetailViewController.swift */,
+				954B870D218FD274007DC348 /* WordsLangDetailViewController.swift */,
 			);
 			path = Words;
 			sourceTree = "<group>";
@@ -565,8 +574,10 @@
 				8C2CB5AF207885140083DDE2 /* WordsLangViewModel.swift in Sources */,
 				8C2CB5B3207885140083DDE2 /* WordsUnitViewModel.swift in Sources */,
 				8C2CB5B7207885140083DDE2 /* MUnitWord.swift in Sources */,
+				954B870A218FC18D007DC348 /* WordsBaseViewController.swift in Sources */,
 				8C2CB5B0207885140083DDE2 /* WordsTextbookViewModel.swift in Sources */,
 				8C2CB5BE207885140083DDE2 /* MLanguage.swift in Sources */,
+				954B870C218FC223007DC348 /* WordsLangViewController.swift in Sources */,
 				8CD8409E20AFD4DA00442133 /* PhrasesUnitViewController.swift in Sources */,
 				8C2CB5BF207885140083DDE2 /* MTextBook.swift in Sources */,
 				8C0ACB581D4391FB00EC6740 /* SettingsViewController.swift in Sources */,
@@ -584,6 +595,7 @@
 				8CD1D929206227800071687B /* LollyWindow.swift in Sources */,
 				8C2CB5B1207885140083DDE2 /* PhrasesLangViewModel.swift in Sources */,
 				8CD8409D20AFD4DA00442133 /* PhrasesUnitDetailViewController.swift in Sources */,
+				954B870E218FD274007DC348 /* WordsLangDetailViewController.swift in Sources */,
 				8C2CB5BC207885140083DDE2 /* MTextbookWord.swift in Sources */,
 				8C2CB5BA207885140083DDE2 /* MUserSetting.swift in Sources */,
 				8C2CB5AE207885140083DDE2 /* SettingsViewModel.swift in Sources */,

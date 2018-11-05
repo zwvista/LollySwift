@@ -40,7 +40,7 @@ class SearchViewController: UIViewController, UIWebViewDelegate, UISearchBarDele
     }
 
     func webViewDidFinishLoad(_ webView: UIWebView) {
-        guard webView.stringByEvaluatingJavaScript(from: "document.readyState") == "complete" && !status == .navigating else {return}
+        guard webView.stringByEvaluatingJavaScript(from: "document.readyState") == "complete" && status == .navigating else {return}
         
         let item = vmSettings.selectedDictOnline
         

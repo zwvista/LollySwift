@@ -59,4 +59,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBAction func phrasesInUnit(_ sender: AnyObject) {
         showWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesUnitWindowController", modal: false)
     }
+    
+    @IBAction func wordsInLanguage(_ sender: AnyObject) {
+        showWindow(storyBoardName: "Words", windowControllerName: "WordsLangWindowController", modal: false)
+    }
+    
+    @IBAction func phrasesInLanguage(_ sender: AnyObject) {
+        showWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesLangWindowController", modal: false)
+    }
 }
