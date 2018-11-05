@@ -17,8 +17,6 @@ class PhrasesLangDetailViewController: NSViewController {
     var mPhrase: MLangPhrase!
     var isAdd: Bool!
 
-    @IBOutlet weak var pubLang: NSPopUpButton!
-    @IBOutlet weak var pubPart: NSPopUpButton!
     @IBOutlet weak var tfPhrase: NSTextField!
     
     let disposeBag = DisposeBag()

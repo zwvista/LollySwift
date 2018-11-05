@@ -10,6 +10,7 @@ import Foundation
 import RxSwift
 
 class PhrasesUnitViewModel: NSObject {
+    @objc
     var vmSettings: SettingsViewModel
     var arrPhrases = [MUnitPhrase]()
     var arrPhrasesFiltered: [MUnitPhrase]?
