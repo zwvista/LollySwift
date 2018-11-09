@@ -11,7 +11,7 @@ import WebKit
 import DropDown
 import RxSwift
 
-class WordsDictViewController: UIViewController {
+class WordsDictViewController: UIViewController, WKNavigationDelegate {
 
     @IBOutlet weak var wvDictHolder: UIView!
     @IBOutlet weak var btnWord: UIButton!
@@ -22,17 +22,19 @@ class WordsDictViewController: UIViewController {
     let ddWord = DropDown(), ddDictOnline = DropDown()
     
     let disposeBag = DisposeBag()
+    var status: DictWebViewStatus = .ready
 
     override func viewDidLoad() {
         super.viewDidLoad()
         wvDict = addWKWebView(webViewHolder: wvDictHolder)
+        wvDict.navigationDelegate = self
         
         ddWord.anchorView = btnWord
         ddWord.dataSource = vm.arrWords
-        ddWord.selectRow(vm.selectWordIndex)
+        ddWord.selectRow(vm.selectedWordIndex)
         ddWord.selectionAction = { (index: Int, item: String) in
-            self.vm.selectWordIndex = index
-            self.selectWordChanged()
+            self.vm.selectedWordIndex = index
+            self.selectedWordChanged()
         }
         
         ddDictOnline.anchorView = btnDict
@@ -45,20 +47,32 @@ class WordsDictViewController: UIViewController {
             }.disposed(by: self.disposeBag)
         }
         
-        selectWordChanged()
+        selectedWordChanged()
     }
     
-    private func selectWordChanged() {
-        btnWord.setTitle(vm.selectWord, for: .normal)
-        navigationItem.title = vm.selectWord
+    private func selectedWordChanged() {
+        btnWord.setTitle(vm.selectedWord, for: .normal)
+        navigationItem.title = vm.selectedWord
         selectDictChanged()
     }
     
     private func selectDictChanged() {
         let item = vmSettings.selectedDictOnline
         btnDict.setTitle(item.DICTNAME, for: .normal)
-        let url = item.urlString(word: vm.selectWord, arrAutoCorrect: vmSettings.arrAutoCorrect)
-        wvDict.load(URLRequest(url: URL(string: url)!))
+        let url = item.urlString(word: vm.selectedWord, arrAutoCorrect: vmSettings.arrAutoCorrect)
+        if item.DICTTYPENAME == "OFFLINE" {
+            wvDict.load(URLRequest(url: URL(string: "about:blank")!))
+            RestApi.getHtml(url: url).subscribe(onNext: { html in
+                print(html)
+                let str = item.htmlString(html, word: self.vm.selectedWord, useTemplate2: true)
+                self.wvDict.loadHTMLString(str, baseURL: nil)
+            }).disposed(by: disposeBag)
+        } else {
+            wvDict.load(URLRequest(url: URL(string: url)!))
+            if item.DICTTYPENAME == "OFFLINE-ONLINE" {
+                status = .navigating
+            }
+        }
     }
     
     
@@ -70,4 +84,16 @@ class WordsDictViewController: UIViewController {
         ddDictOnline.show()
     }
 
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        guard status == .navigating else {return}
+        let item = vmSettings.selectedDictOnline
+        // https://stackoverflow.com/questions/34751860/get-html-from-wkwebview-in-swift
+        webView.evaluateJavaScript("document.documentElement.outerHTML.toString()") { (html: Any?, error: Error?) in
+            let html = html as! String
+            print(html)
+            let str = item.htmlString(html, word: self.vm.selectedWord, useTemplate2: true)
+            self.wvDict.loadHTMLString(str, baseURL: nil)
+            self.status = .ready
+        }
+    }
 }

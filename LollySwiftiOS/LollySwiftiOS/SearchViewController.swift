@@ -46,7 +46,7 @@ class SearchViewController: UIViewController, UIWebViewDelegate, UISearchBarDele
         
         let data = URLCache.shared.cachedResponse(for: webView.request!)!.data;
         let html = NSString(data: data, encoding: String.Encoding.utf8.rawValue)!
-        let str = item.htmlString(html as String, word: word)
+        let str = item.htmlString(html as String, word: word, useTemplate2: true)
         
         wvDict.loadHTMLString(str, baseURL: URL(string: "/Users/bestskip/Documents/zw/"));
         status = .ready

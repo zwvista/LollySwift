@@ -12,9 +12,9 @@ import RxSwift
 class SearchViewModel: NSObject {
     var vmSettings: SettingsViewModel
     var arrWords = [String]()
-    var selectWordIndex = 0
-    var selectWord: String {
-        return arrWords[selectWordIndex]
+    var selectedWordIndex = 0
+    var selectedWord: String {
+        return arrWords[selectedWordIndex]
     }
 
     public init(settings: SettingsViewModel, complete: @escaping () -> ()) {

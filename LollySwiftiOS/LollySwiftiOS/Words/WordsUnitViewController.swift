@@ -131,7 +131,7 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
             controller.mWord = sender as? MUnitWord ?? vm.newUnitWord()
         } else if let controller = segue.destination as? WordsDictViewController {
             controller.vm.arrWords = arrWords.map { $0.WORD }
-            controller.vm.selectWordIndex = tableView.indexPathForSelectedRow!.row
+            controller.vm.selectedWordIndex = tableView.indexPathForSelectedRow!.row
         }
     }
     

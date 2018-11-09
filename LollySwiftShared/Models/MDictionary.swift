@@ -20,7 +20,8 @@ class MDictionary: NSObject, Codable {
     var TRANSFORM: String?
     var WAIT: Int?
     var TEMPLATE: String?
-    
+    var TEMPLATE2: String?
+
     func urlString(word: String, arrAutoCorrect: [MAutoCorrect]) -> String {
         let word2 = CHCONV == "BASIC" ? MAutoCorrect.autoCorrect(text: word, arrAutoCorrect: arrAutoCorrect, colFunc1: { $0.EXTENDED }, colFunc2: { $0.BASIC }) :
             word.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
@@ -39,8 +40,9 @@ class MDictOnline : MDictionary {
     
     fileprivate let debugExtract = false
     
-    func htmlString(_ html: String, word: String) -> String {
-        return HtmlApi.extractText(from: html, transform: TRANSFORM!, template: TEMPLATE!) { (text, template) in
+    func htmlString(_ html: String, word: String, useTemplate2: Bool = false) -> String {
+        let template = useTemplate2 && TEMPLATE2 != nil ? TEMPLATE2! : TEMPLATE!
+        return HtmlApi.extractText(from: html, transform: TRANSFORM!, template: template) { (text, template) in
             
             //            var newTemplate = NSMutableString(string: template)
             //            regex = try! NSRegularExpression(pattern: "\\{\\d\\}")
