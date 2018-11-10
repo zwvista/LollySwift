@@ -18,7 +18,7 @@ class SearchViewController: NSViewController, LollyProtocol, NSTableViewDataSour
 
     @objc
     var newWord = ""
-    var status: DictWebViewStatus = .ready
+    var status = DictWebViewStatus.ready
     
     var arrWords = [MUnitWord]()
     

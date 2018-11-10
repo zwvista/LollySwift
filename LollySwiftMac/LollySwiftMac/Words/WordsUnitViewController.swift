@@ -20,7 +20,7 @@ class WordsUnitViewController: NSViewController, LollyProtocol, NSTableViewDataS
     @objc
     var newWord = ""
     var selectedWord = ""
-    var status: DictWebViewStatus = .ready
+    var status = DictWebViewStatus.ready
 
     var vm: WordsUnitViewModel!
     var arrWords: [MUnitWord] {

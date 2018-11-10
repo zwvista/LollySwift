@@ -16,7 +16,7 @@ class SearchViewController: UIViewController, UIWebViewDelegate, UISearchBarDele
     @IBOutlet weak var sbword: UISearchBar!
     
     var word = ""
-    var status: DictWebViewStatus = .ready
+    var status = DictWebViewStatus.ready
 
     override func viewDidLoad() {
         super.viewDidLoad()
