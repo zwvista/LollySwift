@@ -22,7 +22,7 @@ class WordsDictViewController: UIViewController, WKNavigationDelegate {
     let ddWord = DropDown(), ddDictOnline = DropDown()
     
     let disposeBag = DisposeBag()
-    var status: DictWebViewStatus = .ready
+    var status = DictWebViewStatus.ready
 
     override func viewDidLoad() {
         super.viewDidLoad()
