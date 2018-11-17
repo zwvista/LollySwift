@@ -38,17 +38,9 @@ class MDictOnline : MDictionary {
         return RestApi.getArray(url: url, keyPath: "VDICTSONLINE")
     }
     
-    fileprivate let debugExtract = false
-    
     func htmlString(_ html: String, word: String, useTemplate2: Bool = false) -> String {
-        let template = useTemplate2 && TEMPLATE2 != nil ? TEMPLATE2! : TEMPLATE!
+        let template = useTemplate2 && !(TEMPLATE2 ?? "").isEmpty ? TEMPLATE2! : TEMPLATE!
         return HtmlApi.extractText(from: html, transform: TRANSFORM!, template: template) { (text, template) in
-            
-            //            var newTemplate = NSMutableString(string: template)
-            //            regex = try! NSRegularExpression(pattern: "\\{\\d\\}")
-            //            regex.replaceMatches(in: newTemplate, range: NSMakeRange(0, newTemplate.length), withTemplate: "%@")
-            //            text = NSMutableString(format: newTemplate, word, "", text, RestApi.cssFolder)
-            
             let template = template.replacingOccurrences(of: "{0}", with: word)
                 .replacingOccurrences(of: "{1}", with: RestApi.cssFolder)
                 .replacingOccurrences(of: "{2}", with: text as String)
