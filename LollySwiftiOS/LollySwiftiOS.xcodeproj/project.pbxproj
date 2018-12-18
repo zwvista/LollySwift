@@ -517,6 +517,7 @@
 				"${BUILT_PRODUCTS_DIR}/AKSideMenu/AKSideMenu.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/CodableAlamofire-iOS/CodableAlamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/CrossroadRegex-iOS/Regex.framework",
 				"${BUILT_PRODUCTS_DIR}/DropDown/DropDown.framework",
 				"${BUILT_PRODUCTS_DIR}/EZSwiftExtensions-iOS/EZSwiftExtensions.framework",
 				"${BUILT_PRODUCTS_DIR}/RxAlamofire-iOS/RxAlamofire.framework",
@@ -527,6 +528,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AKSideMenu.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CodableAlamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Regex.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DropDown.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EZSwiftExtensions.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAlamofire.framework",
@@ -765,16 +767,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				"FRAMEWORK_SEARCH_PATHS[arch=*]" = (
-					"$(inherited)",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/AKSideMenu\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire-iOS\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/DropDown\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/EZSwiftExtensions-iOS\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/RxAlamofire-iOS\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/RxCocoa-iOS\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/RxSwift-iOS\"",
-				);
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "$(inherited) \"${PODS_CONFIGURATION_BUILD_DIR}/AKSideMenu\" \"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire-iOS\" \"${PODS_CONFIGURATION_BUILD_DIR}/DropDown\" \"${PODS_CONFIGURATION_BUILD_DIR}/EZSwiftExtensions-iOS\" \"${PODS_CONFIGURATION_BUILD_DIR}/RxAlamofire-iOS\" \"${PODS_CONFIGURATION_BUILD_DIR}/RxCocoa-iOS\" \"${PODS_CONFIGURATION_BUILD_DIR}/RxSwift-iOS\"";
 				HEADER_SEARCH_PATHS = ../Pods;
 				INFOPLIST_FILE = LollySwiftiOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -794,13 +787,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				"FRAMEWORK_SEARCH_PATHS[arch=*]" = (
-					"$(inherited)",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/ActionSheetPicker-3.0\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire-iOS\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/AlamofireObjectMapper-iOS\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/ObjectMapper-iOS\"",
-				);
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "$(inherited) \"${PODS_CONFIGURATION_BUILD_DIR}/ActionSheetPicker-3.0\" \"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire-iOS\" \"${PODS_CONFIGURATION_BUILD_DIR}/AlamofireObjectMapper-iOS\" \"${PODS_CONFIGURATION_BUILD_DIR}/ObjectMapper-iOS\"";
 				HEADER_SEARCH_PATHS = ../Pods;
 				INFOPLIST_FILE = LollySwiftiOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;

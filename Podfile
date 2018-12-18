@@ -10,6 +10,7 @@ pod 'RxAlamofire'
 pod 'EZSwiftExtensions'
 pod 'DropDown'
 pod 'AKSideMenu'
+pod 'CrossroadRegex'
 end
 
 target 'LollySwiftiOSTests' do
@@ -24,6 +25,7 @@ project 'LollySwiftMac/LollySwiftMac'
 pod 'CodableAlamofire'
 pod 'RxAlamofire'
 pod 'EZSwiftExtensions'
+pod 'CrossroadRegex'
 end
 
 target 'LollySwiftMacTests' do

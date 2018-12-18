@@ -44,7 +44,7 @@ class MDictOnline : MDictionary {
             let template = template.replacingOccurrences(of: "{0}", with: word)
                 .replacingOccurrences(of: "{1}", with: RestApi.cssFolder)
                 .replacingOccurrences(of: "{2}", with: text as String)
-            return NSMutableString(string: template)
+            return template
         }
     }
 }

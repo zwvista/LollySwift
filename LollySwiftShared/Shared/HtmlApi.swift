@@ -7,11 +7,12 @@
 //
 
 import Foundation
+import Regex
 
 class HtmlApi {
     static private let debugExtract = false
     
-    static func extractText(from html: String, transform: String, template: String, templateHandler: (NSMutableString, String) -> NSMutableString) -> String {
+    static func extractText(from html: String, transform: String, template: String, templateHandler: (String, String) -> String) -> String {
         let dic = ["<delete>": "", "\\t": "\t", "\\r": "\r", "\\n": "\n"]
         var transform = transform, template = template
         let logPath = "/Users/bestskip/Documents/zw/Log/"
@@ -27,43 +28,43 @@ class HtmlApi {
             print(transform)
         }
         
-        var text = NSMutableString()
+        var text = ""
         
         repeat {
             if transform.isEmpty {break}
             var arr = transform.components(separatedBy: "\r\n")
             if arr.count % 2 == 1 { arr.removeLast() }
-            var regex = try! NSRegularExpression(pattern: arr[0])
-            let m = regex.firstMatch(in: html, range: NSMakeRange(0, html.count))
+            var regex = try! Regex(pattern: arr[0])
+            let m = regex.findFirst(in: html)
             if m == nil {break}
-            text = NSMutableString(string: (html as NSString).substring(with: m!.range))
+            text = m!.matched
             
             func f(_ replacer: String) {
                 var replacer = replacer
                 for (key, value) in dic {
                     replacer = replacer.replacingOccurrences(of: key, with: value)
                 }
-                regex.replaceMatches(in: text, range: NSMakeRange(0, text.length), withTemplate: replacer)
+                text = regex.replaceAll(in: text, with: replacer)
             }
             
             f(arr[1])
             if debugExtract {
                 do {
-                    try text.write(toFile: logPath + "2_extracted.txt", atomically: true, encoding: String.Encoding.utf8.rawValue)
+                    try text.write(to: URL(string: logPath + "2_extracted.txt")!, atomically: true, encoding: .utf8)
                 } catch _ {
                 }
             }
             
             for i in 2 ..< arr.count {
                 if i % 2 == 0 {
-                    regex = try! NSRegularExpression(pattern: arr[i])
+                    regex = try! Regex(pattern: arr[i])
                 } else {
                     f(arr[i])
                 }
             }
             if debugExtract {
                 do {
-                    try text.write(toFile: logPath + "4_cooked.txt", atomically: true, encoding: String.Encoding.utf8.rawValue)
+                    try text.write(to: URL(string: logPath + "4_cooked.txt")!, atomically: true, encoding: .utf8)
                 } catch _ {
                 }
             }
@@ -75,13 +76,13 @@ class HtmlApi {
         
         if debugExtract {
             do {
-                try text.write(toFile: logPath + "6_result.html", atomically: true, encoding: String.Encoding.utf8.rawValue)
+                try text.write(to: URL(string: logPath + "6_result.html")!, atomically: true, encoding: .utf8)
             } catch _ {
             }
         } else {
             print(text)
         }
         
-        return text as String
+        return text
     }
 }
