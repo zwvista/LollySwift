@@ -714,7 +714,7 @@
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
-                        <toolbar key="toolbar" implicitIdentifier="FF31B996-4B8F-4B5C-A970-9F0347F78E89" autosavesConfiguration="NO" displayMode="labelOnly" sizeMode="regular" id="eLC-CK-R4c">
+                        <toolbar key="toolbar" implicitIdentifier="FF31B996-4B8F-4B5C-A970-9F0347F78E89" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="eLC-CK-R4c">
                             <allowedToolbarItems>
                                 <toolbarItem implicitItemIdentifier="612EC45D-8794-4422-A0F4-EA1F80B8720E" label="Add" paletteLabel="Add" tag="-1" image="NSAddTemplate" id="CBI-a3-Upc">
                                     <connections>
@@ -743,6 +743,7 @@
                                             <action selector="dictsOnlineChanged:" target="B8D-0N-5wS" id="mMe-Ma-6MC"/>
                                             <binding destination="h84-vK-DpD" name="content" keyPath="arrangedObjects" id="7Ai-qV-PIq"/>
                                             <binding destination="h84-vK-DpD" name="contentValues" keyPath="arrangedObjects.DICTNAME" previousBinding="7Ai-qV-PIq" id="WaT-l3-noJ"/>
+                                            <binding destination="B8D-0N-5wS" name="selectedIndex" keyPath="vm.selectedDictOnlineIndex" previousBinding="WaT-l3-noJ" id="hI1-m2-OwG"/>
                                         </connections>
                                     </popUpButton>
                                 </toolbarItem>
