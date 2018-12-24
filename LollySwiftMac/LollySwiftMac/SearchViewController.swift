@@ -96,7 +96,6 @@ class SearchWindowController: NSWindowController, LollyProtocol {
     @IBOutlet weak var acDictsOnline: NSArrayController!
     @IBOutlet weak var pubDictsOnline: NSPopUpButton!
     
-    var vc: SearchViewController {return contentViewController as! SearchViewController}
     @objc var vm: SettingsViewModel {return vmSettings}
     
     override func windowDidLoad() {
@@ -106,10 +105,6 @@ class SearchWindowController: NSWindowController, LollyProtocol {
     
     func settingsChanged() {
         acDictsOnline.content = vmSettings.arrDictsOnline
-    }
-    
-    @IBAction func dictsOnlineChanged(_ sender: Any) {
-        vc.searchDict(self)
     }
 }
 

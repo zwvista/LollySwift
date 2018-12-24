@@ -137,13 +137,13 @@ class WordsUnitViewController: NSViewController, LollyProtocol, NSTableViewDataS
         }
     }
     
-    func searchWordInTableView() {
+    @IBAction func searchWordInTableView(_ sender: Any) {
         guard tableView.selectedRow != -1 else {return}
         searchWord(word: arrWords[tableView.selectedRow].WORD)
     }
     
     func tableViewSelectionDidChange(_ notification: Notification) {
-        searchWordInTableView()
+        searchWordInTableView(self)
     }
     
     @IBAction func addNewWord(_ sender: AnyObject) {
@@ -281,7 +281,6 @@ class WordsUnitWindowController: NSWindowController, LollyProtocol {
     @IBOutlet weak var acDictsOnline: NSArrayController!
     @IBOutlet weak var pubDictsOnline: NSPopUpButton!
     
-    var vc: WordsUnitViewController {return contentViewController as! WordsUnitViewController}
     @objc var vm: SettingsViewModel {return vmSettings}
     
     override func windowDidLoad() {
@@ -291,10 +290,6 @@ class WordsUnitWindowController: NSWindowController, LollyProtocol {
     
     func settingsChanged() {
         acDictsOnline.content = vmSettings.arrDictsOnline
-    }
-    
-    @IBAction func dictsOnlineChanged(_ sender: Any) {
-        vc.searchWordInTableView()
     }
 }
 
