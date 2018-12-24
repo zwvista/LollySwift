@@ -17,11 +17,11 @@ class HtmlApi {
         var transform = transform, template = template
         let logPath = "/Users/bestskip/Documents/zw/Log/"
         if debugExtract {
-            transform = (try! NSString(contentsOfFile: logPath + "1_transform.txt", encoding: String.Encoding.utf8.rawValue)) as String
-            template = (try! NSString(contentsOfFile: logPath + "5_template.txt", encoding: String.Encoding.utf8.rawValue)) as String
+            transform = try! String(contentsOfFile: logPath + "1_transform.txt", encoding: .utf8)
+            template = try! String(contentsOfFile: logPath + "5_template.txt", encoding: .utf8)
             let rawStr = html.replacingOccurrences(of: "\r", with: "\\r")
             do {
-                try rawStr.write(toFile: logPath + "0_raw.html", atomically: true, encoding: String.Encoding.utf8)
+                try rawStr.write(toFile: logPath + "0_raw.html", atomically: false, encoding: .utf8)
             } catch _ {
             }
         } else {
@@ -50,7 +50,7 @@ class HtmlApi {
             f(arr[1])
             if debugExtract {
                 do {
-                    try text.write(to: URL(string: logPath + "2_extracted.txt")!, atomically: true, encoding: .utf8)
+                    try text.write(toFile: logPath + "2_extracted.txt", atomically: false, encoding: .utf8)
                 } catch _ {
                 }
             }
@@ -64,7 +64,7 @@ class HtmlApi {
             }
             if debugExtract {
                 do {
-                    try text.write(to: URL(string: logPath + "4_cooked.txt")!, atomically: true, encoding: .utf8)
+                    try text.write(toFile: logPath + "4_cooked.txt", atomically: false, encoding: .utf8)
                 } catch _ {
                 }
             }
@@ -76,7 +76,7 @@ class HtmlApi {
         
         if debugExtract {
             do {
-                try text.write(to: URL(string: logPath + "6_result.html")!, atomically: true, encoding: .utf8)
+                try text.write(toFile: logPath + "6_result.html", atomically: false, encoding: .utf8)
             } catch _ {
             }
         } else {

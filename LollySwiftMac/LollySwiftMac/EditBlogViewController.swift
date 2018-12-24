@@ -21,21 +21,32 @@ class EditBlogViewController: NSViewController {
     }
 
     @IBAction func markedToHtml(_ sender: Any) {
-        // let html = markedToHtml(marked: tvMarked.textStorage.)
+        tvHtml.string = BlogViewModel.markedToHtml(text: tvMarked.string)
     }
     @IBAction func htmlToMarked(_ sender: Any) {
-        print("bbb")
-    }
-
-    func markedToHtml(marked: String) -> String {
-        let strs = marked.split("\n")
-        return marked
+        tvMarked.string = BlogViewModel.htmlToMarked(text: tvHtml.string)
     }
     
-    func htmlToMarked(html: String) -> String {
-        let strs = html.split("\n")
-        return html
+    func replaceSelection(f: (String) -> String) {
+        var s = tvMarked.string
+        let range = tvMarked.selectedRange()
+        s = String(s[Range(range, in: s)!])
+        tvMarked.replaceCharacters(in: tvMarked.selectedRange(), with: f(s))
     }
+
+    @IBAction func addTagB(_ sender: Any) {
+        return replaceSelection(f: BlogViewModel.addTagB)
+    }
+    @IBAction func addTagI(_ sender: Any) {
+        return replaceSelection(f: BlogViewModel.addTagI)
+    }
+    @IBAction func removeTags(_ sender: Any) {
+        return replaceSelection(f: BlogViewModel.removeTags)
+    }
+    @IBAction func addExplanation(_ sender: Any) {
+        return replaceSelection { _ in BlogViewModel.explanation }
+    }
+
 }
 
 class EditBlogWindowController: NSWindowController {

@@ -716,7 +716,11 @@
                         <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
                         <toolbar key="toolbar" implicitIdentifier="FF31B996-4B8F-4B5C-A970-9F0347F78E89" autosavesConfiguration="NO" displayMode="labelOnly" sizeMode="regular" id="eLC-CK-R4c">
                             <allowedToolbarItems>
-                                <toolbarItem implicitItemIdentifier="612EC45D-8794-4422-A0F4-EA1F80B8720E" label="Add" paletteLabel="Add" tag="-1" id="CBI-a3-Upc"/>
+                                <toolbarItem implicitItemIdentifier="612EC45D-8794-4422-A0F4-EA1F80B8720E" label="Add" paletteLabel="Add" tag="-1" image="NSAddTemplate" id="CBI-a3-Upc">
+                                    <connections>
+                                        <action selector="addWord:" target="Oky-zY-oP4" id="Hdx-fL-WmY"/>
+                                    </connections>
+                                </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="34F09C30-A59B-468F-BCC9-7367DF9F1963" label="Online" paletteLabel="Online" id="Tuv-Yq-JTV">
                                     <nil key="toolTip"/>
                                     <size key="minSize" width="100" height="28"/>
@@ -735,6 +739,11 @@
                                                 </items>
                                             </menu>
                                         </popUpButtonCell>
+                                        <connections>
+                                            <action selector="dictsOnlineChanged:" target="B8D-0N-5wS" id="mMe-Ma-6MC"/>
+                                            <binding destination="h84-vK-DpD" name="content" keyPath="arrangedObjects" id="7Ai-qV-PIq"/>
+                                            <binding destination="h84-vK-DpD" name="contentValues" keyPath="arrangedObjects.DICTNAME" previousBinding="7Ai-qV-PIq" id="WaT-l3-noJ"/>
+                                        </connections>
                                     </popUpButton>
                                 </toolbarItem>
                             </allowedToolbarItems>
@@ -802,10 +811,34 @@
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="aqu-JS-6z3"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="rXD-kw-zan"/>
+                                <toolbarItem implicitItemIdentifier="0CC2346B-85EB-468B-9DB1-B37022A8325B" label="+B" paletteLabel="+B" tag="-1" id="d08-Zj-N7R">
+                                    <connections>
+                                        <action selector="addTagB:" target="vaE-wK-YYd" id="G2Y-7I-vlJ"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="E805D9D2-A95D-499E-9ABA-D38FB0D24ADC" label="+I" paletteLabel="+I" tag="-1" id="bXD-JS-Ynf">
+                                    <connections>
+                                        <action selector="addTagI:" target="vaE-wK-YYd" id="reT-Pd-R2d"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="DA30B0CE-D78F-4C3D-B9E3-41EC9FCBEC6C" label="-B-I" paletteLabel="-B-I" tag="-1" id="Ro0-Sn-9C9">
+                                    <connections>
+                                        <action selector="removeTags:" target="vaE-wK-YYd" id="y4T-lo-dHa"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="BCAF5EE7-64D9-4FC5-9982-9925EF400A1E" label="E::" paletteLabel="E::" tag="-1" id="LYl-V1-QYj">
+                                    <connections>
+                                        <action selector="addExplanation:" target="vaE-wK-YYd" id="Q5D-Uc-Ig1"/>
+                                    </connections>
+                                </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="XdH-8w-olZ"/>
                                 <toolbarItem reference="jjN-Ig-zo6"/>
+                                <toolbarItem reference="d08-Zj-N7R"/>
+                                <toolbarItem reference="bXD-JS-Ynf"/>
+                                <toolbarItem reference="Ro0-Sn-9C9"/>
+                                <toolbarItem reference="LYl-V1-QYj"/>
                                 <toolbarItem reference="rXD-kw-zan"/>
                             </defaultToolbarItems>
                         </toolbar>
@@ -955,8 +988,8 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="tvHtml" destination="e8K-mx-I5l" id="CZ8-5K-R90"/>
-                        <outlet property="tvMarked" destination="7Zx-Xa-ReP" id="Abm-lE-KpA"/>
+                        <outlet property="tvHtml" destination="e8K-mx-I5l" id="O9s-lW-yQC"/>
+                        <outlet property="tvMarked" destination="7Zx-Xa-ReP" id="bLQ-No-yal"/>
                         <outlet property="wvBlog" destination="bwf-eO-MWp" id="iS4-Tg-8Ul"/>
                     </connections>
                 </viewController>
@@ -1510,4 +1543,7 @@
             <point key="canvasLocation" x="75" y="928"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="NSAddTemplate" width="11" height="11"/>
+    </resources>
 </document>

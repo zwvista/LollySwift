@@ -73,6 +73,7 @@
 		954D8B95214389DE00651A80 /* MUnitPhrase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C316583207676CF0015C247 /* MUnitPhrase.swift */; };
 		954D8B96214389DE00651A80 /* MUnitWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C31657D207676CF0015C247 /* MUnitWord.swift */; };
 		954D8B97214389DE00651A80 /* MUserSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C316580207676CF0015C247 /* MUserSetting.swift */; };
+		95DB142621CDEB0700FBAF9A /* BlogViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DB142521CDEB0700FBAF9A /* BlogViewModel.swift */; };
 		95EFF481218419E10094EE3C /* MAutoCorrect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EFF480218419E00094EE3C /* MAutoCorrect.swift */; };
 		95EFF48221841BA40094EE3C /* MAutoCorrect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EFF480218419E00094EE3C /* MAutoCorrect.swift */; };
 /* End PBXBuildFile section */
@@ -153,6 +154,7 @@
 		953473EF1A0D16CF00FF2D56 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		953473F01A0D16CF00FF2D56 /* LollySwiftiOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LollySwiftiOSTests.swift; sourceTree = "<group>"; };
 		954B8705218DC007007DC348 /* DictWebViewStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictWebViewStatus.swift; sourceTree = "<group>"; };
+		95DB142521CDEB0700FBAF9A /* BlogViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlogViewModel.swift; sourceTree = "<group>"; };
 		95EFF480218419E00094EE3C /* MAutoCorrect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MAutoCorrect.swift; sourceTree = "<group>"; };
 		A2462FE0278FE5DE7FF9A4E2 /* Pods_LollySwiftiOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LollySwiftiOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA5376BDE309080131C3F3FD /* Pods_LollySwiftiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LollySwiftiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -205,6 +207,7 @@
 		8C316571207676CF0015C247 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				95DB142521CDEB0700FBAF9A /* BlogViewModel.swift */,
 				8C316575207676CF0015C247 /* PhrasesLangViewModel.swift */,
 				8C316576207676CF0015C247 /* PhrasesUnitViewModel.swift */,
 				8C9471A42081B02F00D040E0 /* SearchViewModel.swift */,
@@ -592,6 +595,7 @@
 				8C316592207676CF0015C247 /* MUserSetting.swift in Sources */,
 				8C42B5B01D69A1D900DCB528 /* WordsDictViewController.swift in Sources */,
 				8C0945691D122ACE003503ED /* SettingsViewController.swift in Sources */,
+				95DB142621CDEB0700FBAF9A /* BlogViewModel.swift in Sources */,
 				8CD16D121D69FD8A00F5F625 /* WordsLangDetailViewController.swift in Sources */,
 				8C42B5B21D69A1D900DCB528 /* WordsTextbookViewController.swift in Sources */,
 				8C31658C207676CF0015C247 /* RestApi.swift in Sources */,
@@ -767,7 +771,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "$(inherited) \"${PODS_CONFIGURATION_BUILD_DIR}/AKSideMenu\" \"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire-iOS\" \"${PODS_CONFIGURATION_BUILD_DIR}/DropDown\" \"${PODS_CONFIGURATION_BUILD_DIR}/EZSwiftExtensions-iOS\" \"${PODS_CONFIGURATION_BUILD_DIR}/RxAlamofire-iOS\" \"${PODS_CONFIGURATION_BUILD_DIR}/RxCocoa-iOS\" \"${PODS_CONFIGURATION_BUILD_DIR}/RxSwift-iOS\"";
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/AKSideMenu\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire-iOS\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/DropDown\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/EZSwiftExtensions-iOS\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RxAlamofire-iOS\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RxCocoa-iOS\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/RxSwift-iOS\"",
+				);
 				HEADER_SEARCH_PATHS = ../Pods;
 				INFOPLIST_FILE = LollySwiftiOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -787,7 +800,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "$(inherited) \"${PODS_CONFIGURATION_BUILD_DIR}/ActionSheetPicker-3.0\" \"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire-iOS\" \"${PODS_CONFIGURATION_BUILD_DIR}/AlamofireObjectMapper-iOS\" \"${PODS_CONFIGURATION_BUILD_DIR}/ObjectMapper-iOS\"";
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/ActionSheetPicker-3.0\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire-iOS\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/AlamofireObjectMapper-iOS\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/ObjectMapper-iOS\"",
+				);
 				HEADER_SEARCH_PATHS = ../Pods;
 				INFOPLIST_FILE = LollySwiftiOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;

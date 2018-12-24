@@ -84,6 +84,9 @@ class SearchViewController: NSViewController, LollyProtocol, NSTableViewDataSour
         }
     }
     
+    @IBAction func addWord(_ sender: Any) {
+    }
+    
     func settingsChanged() {
     }
 }

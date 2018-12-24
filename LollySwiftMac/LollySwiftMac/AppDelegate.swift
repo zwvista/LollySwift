@@ -21,7 +21,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         _theSettingsViewModel.getData().subscribe(onNext: {
-            self.wordsInUnit(self)
+            self.search(self)
         }).disposed(by: disposeBag)
         // Insert code here to initialize your application
     }
