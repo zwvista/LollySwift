@@ -17,10 +17,10 @@ class WordsLangViewController: NSViewController, LollyProtocol, NSTableViewDataS
     @IBOutlet weak var tableView: NSTableView!
     
     var timer = Timer()
-    @objc
-    var newWord = ""
+    @objc var newWord = ""
     var selectedWord = ""
     var status = DictWebViewStatus.ready
+    var selectedDictOnlineIndex = 0
 
     var vm: WordsLangViewModel!
     var arrWords: [MLangWord] {
@@ -84,6 +84,9 @@ class WordsLangViewController: NSViewController, LollyProtocol, NSTableViewDataS
     }
     
     @IBAction func searchWordInTableView(_ sender: Any) {
+        if sender is NSPopUpButton {
+            selectedDictOnlineIndex = (sender as! NSPopUpButton).indexOfSelectedItem
+        }
         guard tableView.selectedRow != -1 else {return}
         searchWord(word: arrWords[tableView.selectedRow].WORD)
     }
@@ -193,7 +196,7 @@ class WordsLangWindowController: NSWindowController, LollyProtocol {
     @IBOutlet weak var pubDictsOnline: NSPopUpButton!
     
     @objc var vm: SettingsViewModel {return vmSettings}
-    
+
     override func windowDidLoad() {
         super.windowDidLoad()
         settingsChanged()
@@ -201,6 +204,7 @@ class WordsLangWindowController: NSWindowController, LollyProtocol {
     
     func settingsChanged() {
         acDictsOnline.content = vmSettings.arrDictsOnline
+        pubDictsOnline.selectItem(at: vmSettings.selectedDictOnlineIndex)
     }
 }
 

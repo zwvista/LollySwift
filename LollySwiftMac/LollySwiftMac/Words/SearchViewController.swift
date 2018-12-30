@@ -15,11 +15,10 @@ class SearchViewController: NSViewController, LollyProtocol, NSTableViewDataSour
     @IBOutlet weak var wvDict: WKWebView!
     @IBOutlet weak var sfWord: NSSearchField!
     @IBOutlet weak var tableView: NSTableView!
-
-    @objc
-    var newWord = ""
-    var status = DictWebViewStatus.ready
     
+    @objc var newWord = ""
+    var status = DictWebViewStatus.ready
+    var selectedDictOnlineIndex = 0
     var arrWords = [MUnitWord]()
     
     let disposeBag = DisposeBag()
@@ -43,7 +42,10 @@ class SearchViewController: NSViewController, LollyProtocol, NSTableViewDataSour
     }
     
     @IBAction func searchDict(_ sender: AnyObject) {
-        let item = vmSettings.selectedDictOnline
+        if sender is NSPopUpButton {
+            selectedDictOnlineIndex = (sender as! NSPopUpButton).indexOfSelectedItem
+        }
+        let item = vmSettings.arrDictsOnline[selectedDictOnlineIndex]
         let url = item.urlString(word: newWord, arrAutoCorrect: vmSettings.arrAutoCorrect)
         if item.DICTTYPENAME == "OFFLINE" {
             RestApi.getHtml(url: url).subscribe(onNext: { html in
@@ -97,7 +99,7 @@ class SearchWindowController: NSWindowController, LollyProtocol {
     @IBOutlet weak var pubDictsOnline: NSPopUpButton!
     
     @objc var vm: SettingsViewModel {return vmSettings}
-    
+
     override func windowDidLoad() {
         super.windowDidLoad()
         settingsChanged()
@@ -105,6 +107,7 @@ class SearchWindowController: NSWindowController, LollyProtocol {
     
     func settingsChanged() {
         acDictsOnline.content = vmSettings.arrDictsOnline
+        pubDictsOnline.selectItem(at: vmSettings.selectedDictOnlineIndex)
     }
 }
 
