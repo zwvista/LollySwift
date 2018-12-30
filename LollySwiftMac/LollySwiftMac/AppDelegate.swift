@@ -45,7 +45,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @IBAction func search(_ sender: AnyObject) {
-        showWindow(storyBoardName: "Main", windowControllerName: "SearchWindowController", modal: false)
+        showWindow(storyBoardName: "Words", windowControllerName: "SearchWindowController", modal: false)
     }
 
     @IBAction func settings(_ sender: AnyObject) {
@@ -69,6 +69,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @IBAction func editBlog(_ sender: AnyObject) {
-        showWindow(storyBoardName: "Main", windowControllerName: "EditBlogWindowController", modal: false)
+        showWindow(storyBoardName: "Main", windowControllerName: "BlogWindowController", modal: false)
     }
 }

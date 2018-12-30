@@ -1,5 +1,5 @@
 //
-//  EditBlogViewController.swift
+//  BlogViewController.swift
 //  LollySwiftMac
 //
 //  Created by 趙偉 on 2018/12/16.
@@ -9,7 +9,7 @@
 import Cocoa
 import WebKit
 
-class EditBlogViewController: NSViewController {
+class BlogViewController: NSViewController {
 
     @IBOutlet weak var tvMarked: NSTextView!
     @IBOutlet weak var tvHtml: NSTextView!
@@ -49,7 +49,7 @@ class EditBlogViewController: NSViewController {
 
 }
 
-class EditBlogWindowController: NSWindowController {
+class BlogWindowController: NSWindowController {
     override func windowDidLoad() {
         super.windowDidLoad()
     }
