@@ -675,35 +675,10 @@ Gw
                                         <action selector="refreshTableView:" target="qEo-JS-MYZ" id="DKd-Bn-vNa"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="D15C6E72-5923-4A28-B478-0FBD603820ED" label="Notes" paletteLabel="Notes" tag="-1" id="NyL-Gk-l4k">
+                                <toolbarItem implicitItemIdentifier="D15C6E72-5923-4A28-B478-0FBD603820ED" label="Notes" paletteLabel="Notes" tag="-1" image="NSInfo" id="NyL-Gk-l4k">
                                     <connections>
                                         <action selector="getNotes:" target="qEo-JS-MYZ" id="Kcn-oV-bEh"/>
                                     </connections>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="A7C727D1-4657-4EBF-A1A9-C872D98C8BCC" label="Online" paletteLabel="Online" id="qjd-oo-wQX">
-                                    <nil key="toolTip"/>
-                                    <size key="minSize" width="100" height="28"/>
-                                    <size key="maxSize" width="116" height="28"/>
-                                    <popUpButton key="view" verticalHuggingPriority="750" id="Rfk-Um-0SC">
-                                        <rect key="frame" x="0.0" y="14" width="114" height="28"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <popUpButtonCell key="cell" type="roundTextured" title="Item 1" bezelStyle="texturedRounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" selectedItem="ced-UN-OM1" id="r7o-XQ-XqD">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="menu"/>
-                                            <menu key="menu" id="2SU-y8-fOP">
-                                                <items>
-                                                    <menuItem title="Item 1" state="on" id="ced-UN-OM1"/>
-                                                    <menuItem title="Item 2" id="PYz-H0-iyv"/>
-                                                    <menuItem title="Item 3" id="TaT-jD-omE"/>
-                                                </items>
-                                            </menu>
-                                        </popUpButtonCell>
-                                        <connections>
-                                            <action selector="searchWordInTableView:" target="qEo-JS-MYZ" id="zYN-XR-EJH"/>
-                                            <binding destination="5c0-KO-oOd" name="content" keyPath="arrangedObjects" id="vjU-tc-Ief"/>
-                                            <binding destination="5c0-KO-oOd" name="contentValues" keyPath="arrangedObjects.DICTNAME" previousBinding="vjU-tc-Ief" id="6Dg-8M-Juc"/>
-                                        </connections>
-                                    </popUpButton>
                                 </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
@@ -711,20 +686,20 @@ Gw
                                 <toolbarItem reference="qFb-ob-E6N"/>
                                 <toolbarItem reference="89E-Xj-D8k"/>
                                 <toolbarItem reference="NyL-Gk-l4k"/>
-                                <toolbarItem reference="qjd-oo-wQX"/>
                             </defaultToolbarItems>
+                            <connections>
+                                <outlet property="delegate" destination="P6D-Dv-O3U" id="8GM-CZ-9Kh"/>
+                            </connections>
                         </toolbar>
                         <connections>
                             <outlet property="delegate" destination="P6D-Dv-O3U" id="aPQ-3N-cnk"/>
                         </connections>
                     </window>
                     <connections>
-                        <outlet property="acDictsOnline" destination="5c0-KO-oOd" id="AFt-ic-dsW"/>
-                        <outlet property="pubDictsOnline" destination="Rfk-Um-0SC" id="369-Ze-qdc"/>
+                        <outlet property="toolbar" destination="Otv-HR-BVR" id="aNa-cX-tvx"/>
                         <segue destination="F8i-pe-Ate" kind="relationship" relationship="window.shadowedContentViewController" id="oJj-lN-fK3"/>
                     </connections>
                 </windowController>
-                <arrayController id="5c0-KO-oOd" userLabel="DictsOnline Controller"/>
                 <customObject id="qEo-JS-MYZ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController id="a0V-2N-REe"/>
             </objects>
@@ -1045,51 +1020,26 @@ Gw
                                 <toolbarItem implicitItemIdentifier="360CEF89-3610-451A-B939-34F9335730CF" label="Add" paletteLabel="Add" tag="-1" image="NSAddTemplate" autovalidates="NO" id="9i9-9O-hzD"/>
                                 <toolbarItem implicitItemIdentifier="78890E5B-E0CE-4316-AC39-5F2EC4113E54" label="Delete" paletteLabel="Delete" tag="-1" image="NSRemoveTemplate" id="WeY-7Q-yTj"/>
                                 <toolbarItem implicitItemIdentifier="0FE47FD6-6CD6-4F13-92D4-43D61D94CAF8" label="Refresh" paletteLabel="Refresh" tag="-1" image="NSRefreshTemplate" id="hQG-W0-fgC"/>
-                                <toolbarItem implicitItemIdentifier="A7C727D1-4657-4EBF-A1A9-C872D98C8BCC" label="Online" paletteLabel="Online" id="km6-3u-WO5">
-                                    <nil key="toolTip"/>
-                                    <size key="minSize" width="100" height="28"/>
-                                    <size key="maxSize" width="116" height="28"/>
-                                    <popUpButton key="view" verticalHuggingPriority="750" id="YD9-UA-ohw">
-                                        <rect key="frame" x="0.0" y="14" width="114" height="28"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <popUpButtonCell key="cell" type="roundTextured" title="Item 1" bezelStyle="texturedRounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" selectedItem="Z7p-P3-j7A" id="6My-yA-Xm6">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="menu"/>
-                                            <menu key="menu" id="U9o-Jr-hLZ">
-                                                <items>
-                                                    <menuItem title="Item 1" state="on" id="Z7p-P3-j7A"/>
-                                                    <menuItem title="Item 2" id="EOV-Aa-VGi"/>
-                                                    <menuItem title="Item 3" id="5qg-2L-uN2"/>
-                                                </items>
-                                            </menu>
-                                        </popUpButtonCell>
-                                        <connections>
-                                            <action selector="searchWordInTableView:" target="C0L-6x-tvV" id="5OZ-Av-FBO"/>
-                                            <binding destination="E4F-RU-GdL" name="content" keyPath="arrangedObjects" id="6SI-DI-vR3"/>
-                                            <binding destination="E4F-RU-GdL" name="contentValues" keyPath="arrangedObjects.DICTNAME" previousBinding="6SI-DI-vR3" id="BZj-eg-zXC"/>
-                                        </connections>
-                                    </popUpButton>
-                                </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="9i9-9O-hzD"/>
                                 <toolbarItem reference="WeY-7Q-yTj"/>
                                 <toolbarItem reference="hQG-W0-fgC"/>
-                                <toolbarItem reference="km6-3u-WO5"/>
                             </defaultToolbarItems>
+                            <connections>
+                                <outlet property="delegate" destination="zzS-oe-uMG" id="n8l-AL-cMs"/>
+                            </connections>
                         </toolbar>
                         <connections>
                             <outlet property="delegate" destination="zzS-oe-uMG" id="0RZ-Va-pAg"/>
                         </connections>
                     </window>
                     <connections>
-                        <outlet property="acDictsOnline" destination="E4F-RU-GdL" id="aqd-6L-Oag"/>
-                        <outlet property="pubDictsOnline" destination="YD9-UA-ohw" id="JDr-iD-ogz"/>
+                        <outlet property="toolbar" destination="vPL-tl-wDP" id="nxf-ZY-5ge"/>
                         <segue destination="UkS-Xi-ogF" kind="relationship" relationship="window.shadowedContentViewController" id="tjd-yW-63z"/>
                     </connections>
                 </windowController>
                 <customObject id="C0L-6x-tvV" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <arrayController id="E4F-RU-GdL" userLabel="DictsOnline Controller"/>
             </objects>
             <point key="canvasLocation" x="-308" y="416"/>
         </scene>
@@ -1232,48 +1182,23 @@ Gw
                         <toolbar key="toolbar" implicitIdentifier="FF31B996-4B8F-4B5C-A970-9F0347F78E89" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="B0S-Kp-TOd">
                             <allowedToolbarItems>
                                 <toolbarItem implicitItemIdentifier="612EC45D-8794-4422-A0F4-EA1F80B8720E" label="Add" paletteLabel="Add" tag="-1" image="NSAddTemplate" id="B4O-Cg-FKD"/>
-                                <toolbarItem implicitItemIdentifier="34F09C30-A59B-468F-BCC9-7367DF9F1963" label="Online" paletteLabel="Online" id="TzV-iF-Z7Y">
-                                    <nil key="toolTip"/>
-                                    <size key="minSize" width="100" height="28"/>
-                                    <size key="maxSize" width="116" height="28"/>
-                                    <popUpButton key="view" verticalHuggingPriority="750" id="Dil-kJ-RNS">
-                                        <rect key="frame" x="0.0" y="14" width="114" height="28"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <popUpButtonCell key="cell" type="roundTextured" title="Item 1" bezelStyle="texturedRounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" selectedItem="CxT-Pg-nO1" id="0Di-t1-Lp0">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="menu"/>
-                                            <menu key="menu" id="qxw-QB-7yq">
-                                                <items>
-                                                    <menuItem title="Item 1" state="on" id="CxT-Pg-nO1"/>
-                                                    <menuItem title="Item 2" id="i3p-mm-jX0"/>
-                                                    <menuItem title="Item 3" id="G6d-31-EOT"/>
-                                                </items>
-                                            </menu>
-                                        </popUpButtonCell>
-                                        <connections>
-                                            <action selector="searchDict:" target="sbS-6A-eLA" id="Uhg-L7-1H5"/>
-                                            <binding destination="zQJ-eJ-mWc" name="content" keyPath="arrangedObjects" id="Kxf-RO-hoj"/>
-                                            <binding destination="zQJ-eJ-mWc" name="contentValues" keyPath="arrangedObjects.DICTNAME" previousBinding="Kxf-RO-hoj" id="jR2-9J-6nw"/>
-                                        </connections>
-                                    </popUpButton>
-                                </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="B4O-Cg-FKD"/>
-                                <toolbarItem reference="TzV-iF-Z7Y"/>
                             </defaultToolbarItems>
+                            <connections>
+                                <outlet property="delegate" destination="gRB-PG-hu6" id="ANj-6r-WWg"/>
+                            </connections>
                         </toolbar>
                         <connections>
                             <outlet property="delegate" destination="gRB-PG-hu6" id="8rX-a0-chq"/>
                         </connections>
                     </window>
                     <connections>
-                        <outlet property="acDictsOnline" destination="zQJ-eJ-mWc" id="BeE-oh-Xsl"/>
-                        <outlet property="pubDictsOnline" destination="Dil-kJ-RNS" id="F4W-sh-6bT"/>
+                        <outlet property="toolbar" destination="B0S-Kp-TOd" id="W0q-PG-HeE"/>
                         <segue destination="uuV-PB-hig" kind="relationship" relationship="window.shadowedContentViewController" id="SD5-tO-LTl"/>
                     </connections>
                 </windowController>
-                <arrayController id="zQJ-eJ-mWc" userLabel="DictsOnline Controller"/>
                 <customObject id="sbS-6A-eLA" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="93" y="296"/>
@@ -1317,13 +1242,13 @@ Gw
                                                     <action selector="searchDict:" target="uuV-PB-hig" id="G9r-0j-iYt"/>
                                                 </connections>
                                             </button>
-                                            <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YjK-nl-s88">
+                                            <scrollView autohidesScrollers="YES" horizontalLineScroll="42" horizontalPageScroll="10" verticalLineScroll="42" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YjK-nl-s88">
                                                 <rect key="frame" x="0.0" y="0.0" width="229" height="618"/>
                                                 <clipView key="contentView" id="01U-2c-Nyj">
                                                     <rect key="frame" x="1" y="0.0" width="227" height="617"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
-                                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="gsO-dt-ovX" viewBased="YES" id="WZw-r9-eOf">
+                                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="40" rowSizeStyle="automatic" headerView="gsO-dt-ovX" viewBased="YES" id="WZw-r9-eOf">
                                                             <rect key="frame" x="0.0" y="0.0" width="227" height="592"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <size key="intercellSpacing" width="3" height="2"/>
@@ -1480,6 +1405,7 @@ Gw
     </scenes>
     <resources>
         <image name="NSAddTemplate" width="11" height="11"/>
+        <image name="NSInfo" width="32" height="32"/>
         <image name="NSRefreshTemplate" width="11" height="15"/>
         <image name="NSRemoveTemplate" width="11" height="11"/>
     </resources>

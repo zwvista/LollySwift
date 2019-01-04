@@ -138,8 +138,8 @@ class WordsUnitViewController: NSViewController, LollyProtocol, NSTableViewDataS
     }
     
     @IBAction func searchWordInTableView(_ sender: Any) {
-        if sender is NSPopUpButton {
-            selectedDictOnlineIndex = (sender as! NSPopUpButton).indexOfSelectedItem
+        if sender is NSToolbarItem {
+            selectedDictOnlineIndex = (sender as! NSToolbarItem).tag
         }
         guard tableView.selectedRow != -1 else {return}
         searchWord(word: arrWords[tableView.selectedRow].WORD)
@@ -279,21 +279,12 @@ class WordsUnitViewController: NSViewController, LollyProtocol, NSTableViewDataS
     }
 }
 
-class WordsUnitWindowController: NSWindowController, LollyProtocol {
-
-    @IBOutlet weak var acDictsOnline: NSArrayController!
-    @IBOutlet weak var pubDictsOnline: NSPopUpButton!
-    
-    @objc var vm: SettingsViewModel {return vmSettings}
-
-    override func windowDidLoad() {
-        super.windowDidLoad()
-        settingsChanged()
-    }
-    
-    func settingsChanged() {
-        acDictsOnline.content = vmSettings.arrDictsOnline
-        pubDictsOnline.selectItem(at: vmSettings.selectedDictOnlineIndex)
+class WordsUnitWindowController: WordsWindowController {
+    override var toolbarItemCount: Int { return 4 }
+    override func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
+        let item = super.toolbar(toolbar, itemForItemIdentifier: itemIdentifier, willBeInsertedIntoToolbar: flag)!
+        item.action = #selector(WordsUnitViewController.searchWordInTableView(_:))
+        return item
     }
 }
 

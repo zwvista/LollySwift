@@ -42,8 +42,8 @@ class SearchViewController: NSViewController, LollyProtocol, NSTableViewDataSour
     }
     
     @IBAction func searchDict(_ sender: AnyObject) {
-        if sender is NSPopUpButton {
-            selectedDictOnlineIndex = (sender as! NSPopUpButton).indexOfSelectedItem
+        if sender is NSToolbarItem {
+            selectedDictOnlineIndex = (sender as! NSToolbarItem).tag
         }
         let item = vmSettings.arrDictsOnline[selectedDictOnlineIndex]
         let url = item.urlString(word: newWord, arrAutoCorrect: vmSettings.arrAutoCorrect)
@@ -93,21 +93,11 @@ class SearchViewController: NSViewController, LollyProtocol, NSTableViewDataSour
     }
 }
 
-class SearchWindowController: NSWindowController, LollyProtocol {
-    
-    @IBOutlet weak var acDictsOnline: NSArrayController!
-    @IBOutlet weak var pubDictsOnline: NSPopUpButton!
-    
-    @objc var vm: SettingsViewModel {return vmSettings}
-
-    override func windowDidLoad() {
-        super.windowDidLoad()
-        settingsChanged()
-    }
-    
-    func settingsChanged() {
-        acDictsOnline.content = vmSettings.arrDictsOnline
-        pubDictsOnline.selectItem(at: vmSettings.selectedDictOnlineIndex)
+class SearchWindowController: WordsWindowController {
+    override func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
+        let item = super.toolbar(toolbar, itemForItemIdentifier: itemIdentifier, willBeInsertedIntoToolbar: flag)!
+        item.action = #selector(SearchViewController.searchDict(_:))
+        return item
     }
 }
 
