@@ -10,7 +10,7 @@ import Cocoa
 import WebKit
 import RxSwift
 
-class WordsLangViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate, WKNavigationDelegate {
+class WordsLangViewController: WordsViewController, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate, WKNavigationDelegate {
     
     @IBOutlet weak var wvDict: WKWebView!
     @IBOutlet weak var tfNewWord: NSTextField!
@@ -20,7 +20,6 @@ class WordsLangViewController: NSViewController, LollyProtocol, NSTableViewDataS
     @objc var newWord = ""
     var selectedWord = ""
     var status = DictWebViewStatus.ready
-    var selectedDictOnlineIndex = 0
 
     var vm: WordsLangViewModel!
     var arrWords: [MLangWord] {
@@ -184,7 +183,8 @@ class WordsLangViewController: NSViewController, LollyProtocol, NSTableViewDataS
                                 launchIdentifiers: nil)
     }
     
-    func settingsChanged() {
+    override func settingsChanged() {
+        super.settingsChanged()
         refreshTableView(self)
     }
 

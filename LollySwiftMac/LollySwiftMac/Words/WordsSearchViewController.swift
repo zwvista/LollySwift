@@ -10,7 +10,7 @@ import Cocoa
 import WebKit
 import RxSwift
 
-class SearchViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate, NSSearchFieldDelegate, WKNavigationDelegate {
+class WordsSearchViewController: WordsViewController, NSTableViewDataSource, NSTableViewDelegate, NSSearchFieldDelegate, WKNavigationDelegate {
     
     @IBOutlet weak var wvDict: WKWebView!
     @IBOutlet weak var sfWord: NSSearchField!
@@ -18,7 +18,6 @@ class SearchViewController: NSViewController, LollyProtocol, NSTableViewDataSour
     
     @objc var newWord = ""
     var status = DictWebViewStatus.ready
-    var selectedDictOnlineIndex = 0
     var arrWords = [MUnitWord]()
     
     let disposeBag = DisposeBag()
@@ -90,15 +89,12 @@ class SearchViewController: NSViewController, LollyProtocol, NSTableViewDataSour
     
     @IBAction func addWord(_ sender: Any) {
     }
-    
-    func settingsChanged() {
-    }
 }
 
-class SearchWindowController: WordsWindowController {
+class WordsSearchWindowController: WordsWindowController {
     override func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
         let item = super.toolbar(toolbar, itemForItemIdentifier: itemIdentifier, willBeInsertedIntoToolbar: flag)!
-        item.action = #selector(SearchViewController.searchDict(_:))
+        item.action = #selector(WordsSearchViewController.searchDict(_:))
         return item
     }
 }

@@ -8,6 +8,17 @@
 
 import Cocoa
 
+class WordsViewController: NSViewController, LollyProtocol {
+    var selectedDictOnlineIndex = 0
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        settingsChanged()
+    }
+    func settingsChanged() {
+        selectedDictOnlineIndex = vmSettings.selectedDictOnlineIndex
+    }
+}
+
 class WordsWindowController: NSWindowController, NSToolbarDelegate, LollyProtocol {
     
     @IBOutlet weak var toolbar: NSToolbar!

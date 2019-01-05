@@ -1,5 +1,5 @@
 //
-//  SearchViewController.swift
+//  WordsSearchViewController.swift
 //  LollySwiftiOS
 //
 //  Created by zhaowei on 2014/11/20.
@@ -9,7 +9,7 @@
 import UIKit
 import WebKit
 
-class SearchViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate {
+class WordsSearchViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate {
     @IBOutlet weak var wvDictHolder: UIView!
     weak var wvDict: WKWebView!
 

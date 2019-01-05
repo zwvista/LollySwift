@@ -45,7 +45,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @IBAction func search(_ sender: AnyObject) {
-        showWindow(storyBoardName: "Words", windowControllerName: "SearchWindowController", modal: false)
+        showWindow(storyBoardName: "Words", windowControllerName: "WordsSearchWindowController", modal: false)
     }
 
     @IBAction func settings(_ sender: AnyObject) {
