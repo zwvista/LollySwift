@@ -659,7 +659,6 @@ Gw
                         <toolbar key="toolbar" implicitIdentifier="99476795-252C-48E8-9851-21369EE8577D" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="Otv-HR-BVR">
                             <allowedToolbarItems>
                                 <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="QBw-gC-K6F"/>
-                                <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="Qb5-BJ-Wh6"/>
                                 <toolbarItem implicitItemIdentifier="360CEF89-3610-451A-B939-34F9335730CF" label="Add" paletteLabel="Add" tag="-1" image="NSAddTemplate" autovalidates="NO" id="QRZ-Pa-ivc">
                                     <connections>
                                         <action selector="addWord:" target="qEo-JS-MYZ" id="EBv-2B-FDh"/>
@@ -680,6 +679,46 @@ Gw
                                         <action selector="getNotes:" target="qEo-JS-MYZ" id="Kcn-oV-bEh"/>
                                     </connections>
                                 </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="EED7D168-A935-46A4-B535-11EE2FF5F016" label="Dict" paletteLabel="Dict" image="NSBookmarksTemplate" selectable="YES" id="DTO-su-5Zg">
+                                    <size key="minSize" width="17" height="18"/>
+                                    <size key="maxSize" width="17" height="18"/>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="539F1AD6-500E-4B36-B1F2-1C39EA5D8E55" label="Dict" paletteLabel="Dict" tag="1" image="NSBookmarksTemplate" selectable="YES" id="Bp9-GL-6UU">
+                                    <size key="minSize" width="17" height="18"/>
+                                    <size key="maxSize" width="17" height="18"/>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="DFC7456A-850F-4348-85B2-DE451B8275EC" label="Dict" paletteLabel="Dict" tag="2" image="NSBookmarksTemplate" selectable="YES" id="RKC-th-dbf">
+                                    <size key="minSize" width="17" height="18"/>
+                                    <size key="maxSize" width="17" height="18"/>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="6E97034F-90AD-4A4D-8CAA-C670D7CBB1D3" label="Dict" paletteLabel="Dict" tag="3" image="NSBookmarksTemplate" selectable="YES" id="jwT-5J-Avj">
+                                    <size key="minSize" width="17" height="18"/>
+                                    <size key="maxSize" width="17" height="18"/>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="B03ACB65-F79A-449B-933D-5E4ADD27B191" label="Dict" paletteLabel="Dict" tag="4" image="NSBookmarksTemplate" selectable="YES" id="oqc-nP-Z2o">
+                                    <size key="minSize" width="17" height="18"/>
+                                    <size key="maxSize" width="17" height="18"/>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="BBEC3351-9F02-425C-9FEC-BDECCE317866" label="Dict" paletteLabel="Dict" tag="5" image="NSBookmarksTemplate" selectable="YES" id="YkR-sY-tA0">
+                                    <size key="minSize" width="17" height="18"/>
+                                    <size key="maxSize" width="17" height="18"/>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="7E480CEF-9EBF-4738-A7D2-C7C8E1BD7A5C" label="Dict" paletteLabel="Dict" tag="6" image="NSBookmarksTemplate" selectable="YES" id="F19-l5-Ozm">
+                                    <size key="minSize" width="17" height="18"/>
+                                    <size key="maxSize" width="17" height="18"/>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="37A63838-B738-4145-8DB2-8E60BE8929B9" label="Dict" paletteLabel="Dict" tag="7" image="NSBookmarksTemplate" selectable="YES" id="DIy-ph-00H">
+                                    <size key="minSize" width="17" height="18"/>
+                                    <size key="maxSize" width="17" height="18"/>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="189562F5-5233-448E-8BFF-83291742F7F9" label="Dict" paletteLabel="Dict" tag="8" image="NSBookmarksTemplate" selectable="YES" id="clI-Ap-ex5">
+                                    <size key="minSize" width="17" height="18"/>
+                                    <size key="maxSize" width="17" height="18"/>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="CE0C6A03-00AF-4BB6-91C8-8C2AC98516C3" label="Dict" paletteLabel="Dict" tag="9" image="NSBookmarksTemplate" selectable="YES" id="ACx-e1-tG6">
+                                    <size key="minSize" width="17" height="18"/>
+                                    <size key="maxSize" width="17" height="18"/>
+                                </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="QRZ-Pa-ivc"/>
@@ -696,6 +735,16 @@ Gw
                         </connections>
                     </window>
                     <connections>
+                        <outlet property="tbiDict0" destination="DTO-su-5Zg" id="FBv-IF-Sp1"/>
+                        <outlet property="tbiDict1" destination="Bp9-GL-6UU" id="nWJ-JT-71t"/>
+                        <outlet property="tbiDict2" destination="RKC-th-dbf" id="8h8-yg-OJc"/>
+                        <outlet property="tbiDict3" destination="jwT-5J-Avj" id="Vba-D4-AJB"/>
+                        <outlet property="tbiDict4" destination="oqc-nP-Z2o" id="pXF-B2-3mQ"/>
+                        <outlet property="tbiDict5" destination="YkR-sY-tA0" id="Yiu-I2-dBy"/>
+                        <outlet property="tbiDict6" destination="F19-l5-Ozm" id="1vt-xv-GGr"/>
+                        <outlet property="tbiDict7" destination="DIy-ph-00H" id="mak-qr-j7z"/>
+                        <outlet property="tbiDict8" destination="clI-Ap-ex5" id="yEW-2R-Yul"/>
+                        <outlet property="tbiDict9" destination="ACx-e1-tG6" id="7Gj-wf-KsU"/>
                         <outlet property="toolbar" destination="Otv-HR-BVR" id="aNa-cX-tvx"/>
                         <segue destination="F8i-pe-Ate" kind="relationship" relationship="window.shadowedContentViewController" id="oJj-lN-fK3"/>
                     </connections>
@@ -1016,10 +1065,49 @@ Gw
                         <toolbar key="toolbar" implicitIdentifier="99476795-252C-48E8-9851-21369EE8577D" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="vPL-tl-wDP">
                             <allowedToolbarItems>
                                 <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="eqv-uD-h9x"/>
-                                <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="nuX-OP-B57"/>
                                 <toolbarItem implicitItemIdentifier="360CEF89-3610-451A-B939-34F9335730CF" label="Add" paletteLabel="Add" tag="-1" image="NSAddTemplate" autovalidates="NO" id="9i9-9O-hzD"/>
                                 <toolbarItem implicitItemIdentifier="78890E5B-E0CE-4316-AC39-5F2EC4113E54" label="Delete" paletteLabel="Delete" tag="-1" image="NSRemoveTemplate" id="WeY-7Q-yTj"/>
                                 <toolbarItem implicitItemIdentifier="0FE47FD6-6CD6-4F13-92D4-43D61D94CAF8" label="Refresh" paletteLabel="Refresh" tag="-1" image="NSRefreshTemplate" id="hQG-W0-fgC"/>
+                                <toolbarItem implicitItemIdentifier="C5980D29-00F4-4912-AF7B-6AED2CD7DFAE" label="Dict" paletteLabel="Dict" image="NSBookmarksTemplate" selectable="YES" id="fGn-gK-zZ3">
+                                    <size key="minSize" width="17" height="18"/>
+                                    <size key="maxSize" width="17" height="18"/>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="FD273D0C-FEE6-4EEE-AE9C-0324150C0C9C" label="Dict" paletteLabel="Dict" tag="1" image="NSBookmarksTemplate" selectable="YES" id="K36-bE-yQX">
+                                    <size key="minSize" width="17" height="18"/>
+                                    <size key="maxSize" width="17" height="18"/>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="C8023F2F-A830-42F6-B068-BE9A915F48AF" label="Dict" paletteLabel="Dict" tag="2" image="NSBookmarksTemplate" selectable="YES" id="0JK-ac-oaF">
+                                    <size key="minSize" width="17" height="18"/>
+                                    <size key="maxSize" width="17" height="18"/>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="52B87288-5430-4A4D-BEF7-4C9469433A21" label="Dict" paletteLabel="Dict" tag="3" image="NSBookmarksTemplate" selectable="YES" id="sIz-1S-kmZ">
+                                    <size key="minSize" width="17" height="18"/>
+                                    <size key="maxSize" width="17" height="18"/>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="7BE32CA9-D9EB-4429-AA35-42B6A03DC0D9" label="Dict" paletteLabel="Dict" tag="4" image="NSBookmarksTemplate" selectable="YES" id="hAY-fa-Mfe">
+                                    <size key="minSize" width="17" height="18"/>
+                                    <size key="maxSize" width="17" height="18"/>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="29A55813-0D4C-459C-A895-C993F75552D4" label="Dict" paletteLabel="Dict" tag="5" image="NSBookmarksTemplate" selectable="YES" id="wVz-Ie-hKY">
+                                    <size key="minSize" width="17" height="18"/>
+                                    <size key="maxSize" width="17" height="18"/>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="CBED8467-11B8-40B8-B4F9-B8F7447FB134" label="Dict" paletteLabel="Dict" tag="6" image="NSBookmarksTemplate" selectable="YES" id="lQK-md-kXU">
+                                    <size key="minSize" width="17" height="18"/>
+                                    <size key="maxSize" width="17" height="18"/>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="47F34D53-F3D6-4AC9-8AA5-BD8674F600A3" label="Dict" paletteLabel="Dict" tag="7" image="NSBookmarksTemplate" selectable="YES" id="CaP-eP-hOf">
+                                    <size key="minSize" width="17" height="18"/>
+                                    <size key="maxSize" width="17" height="18"/>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="ECAD7F45-542F-416B-BF2A-4B574B2FBDB9" label="Dict" paletteLabel="Dict" tag="8" image="NSBookmarksTemplate" selectable="YES" id="Bql-nN-leu">
+                                    <size key="minSize" width="17" height="18"/>
+                                    <size key="maxSize" width="17" height="18"/>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="D3EF8B6A-C9E3-4A7C-A18B-210A66851816" label="Dict" paletteLabel="Dict" tag="9" image="NSBookmarksTemplate" selectable="YES" id="ygf-Zl-ORa">
+                                    <size key="minSize" width="17" height="18"/>
+                                    <size key="maxSize" width="17" height="18"/>
+                                </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="9i9-9O-hzD"/>
@@ -1035,13 +1123,23 @@ Gw
                         </connections>
                     </window>
                     <connections>
+                        <outlet property="tbiDict0" destination="fGn-gK-zZ3" id="0Bw-iT-LIE"/>
+                        <outlet property="tbiDict1" destination="K36-bE-yQX" id="xYt-dH-lqN"/>
+                        <outlet property="tbiDict2" destination="0JK-ac-oaF" id="7ai-z7-jhE"/>
+                        <outlet property="tbiDict3" destination="sIz-1S-kmZ" id="UxR-FM-YYz"/>
+                        <outlet property="tbiDict4" destination="hAY-fa-Mfe" id="SUr-jt-jFq"/>
+                        <outlet property="tbiDict5" destination="wVz-Ie-hKY" id="bmM-Du-HlN"/>
+                        <outlet property="tbiDict6" destination="lQK-md-kXU" id="aLm-Ko-O5K"/>
+                        <outlet property="tbiDict7" destination="CaP-eP-hOf" id="SjV-yR-OH4"/>
+                        <outlet property="tbiDict8" destination="Bql-nN-leu" id="TEL-FI-7FH"/>
+                        <outlet property="tbiDict9" destination="ygf-Zl-ORa" id="Hlt-qS-BML"/>
                         <outlet property="toolbar" destination="vPL-tl-wDP" id="nxf-ZY-5ge"/>
                         <segue destination="UkS-Xi-ogF" kind="relationship" relationship="window.shadowedContentViewController" id="tjd-yW-63z"/>
                     </connections>
                 </windowController>
                 <customObject id="C0L-6x-tvV" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-308" y="416"/>
+            <point key="canvasLocation" x="-308" y="417"/>
         </scene>
         <!--Words Lang Detail View Controller-->
         <scene sceneID="aeX-1s-g2X">
@@ -1181,7 +1279,51 @@ Gw
                         <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
                         <toolbar key="toolbar" implicitIdentifier="FF31B996-4B8F-4B5C-A970-9F0347F78E89" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="B0S-Kp-TOd">
                             <allowedToolbarItems>
-                                <toolbarItem implicitItemIdentifier="612EC45D-8794-4422-A0F4-EA1F80B8720E" label="Add" paletteLabel="Add" tag="-1" image="NSAddTemplate" id="B4O-Cg-FKD"/>
+                                <toolbarItem implicitItemIdentifier="612EC45D-8794-4422-A0F4-EA1F80B8720E" label="Add" paletteLabel="Add" tag="-1" image="NSAddTemplate" id="B4O-Cg-FKD">
+                                    <connections>
+                                        <action selector="addWord:" target="sbS-6A-eLA" id="rl1-o0-ihG"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="D497B009-58E7-43B0-A2C8-494B605D2B63" label="Dict" paletteLabel="Dict" image="NSBookmarksTemplate" selectable="YES" id="Wxm-R9-OkX">
+                                    <size key="minSize" width="17" height="18"/>
+                                    <size key="maxSize" width="17" height="18"/>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="134736A7-5F72-4C2A-B619-F013CF9B31F0" label="Dict" paletteLabel="Dict" tag="1" image="NSBookmarksTemplate" selectable="YES" id="VWX-v3-wA2">
+                                    <size key="minSize" width="17" height="18"/>
+                                    <size key="maxSize" width="17" height="18"/>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="3D8CE88C-F540-46D2-B885-BBBBFB2E7A7A" label="Dict" paletteLabel="Dict" tag="2" image="NSBookmarksTemplate" selectable="YES" id="uGR-qA-kIb">
+                                    <size key="minSize" width="17" height="18"/>
+                                    <size key="maxSize" width="17" height="18"/>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="D4F45436-F715-425F-B366-335B48704195" label="Dict" paletteLabel="Dict" tag="3" image="NSBookmarksTemplate" selectable="YES" id="r9e-Zw-LZp">
+                                    <size key="minSize" width="17" height="18"/>
+                                    <size key="maxSize" width="17" height="18"/>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="B2B319C8-1BC4-43BA-9F50-F78897D6643F" label="Dict" paletteLabel="Dict" tag="4" image="NSBookmarksTemplate" selectable="YES" id="ood-hL-nEk">
+                                    <size key="minSize" width="17" height="18"/>
+                                    <size key="maxSize" width="17" height="18"/>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="1CBD47D1-28F5-41A7-8BE2-77165F220EE4" label="Dict" paletteLabel="Dict" tag="5" image="NSBookmarksTemplate" selectable="YES" id="Cgz-j3-zuR">
+                                    <size key="minSize" width="17" height="18"/>
+                                    <size key="maxSize" width="17" height="18"/>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="5357A1CB-265D-4375-95A6-9205CE7244A4" label="Dict" paletteLabel="Dict" tag="6" image="NSBookmarksTemplate" selectable="YES" id="dJ2-9d-ZRn">
+                                    <size key="minSize" width="17" height="18"/>
+                                    <size key="maxSize" width="17" height="18"/>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="959EE156-985C-463E-B8DA-E9BDC45473E6" label="Dict" paletteLabel="Dict" tag="7" image="NSBookmarksTemplate" selectable="YES" id="wUD-6d-Gwr">
+                                    <size key="minSize" width="17" height="18"/>
+                                    <size key="maxSize" width="17" height="18"/>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="538A8F06-97AD-4E7B-8839-03995EBF2026" label="Dict" paletteLabel="Dict" tag="8" image="NSBookmarksTemplate" selectable="YES" id="DN2-79-Kwu">
+                                    <size key="minSize" width="17" height="18"/>
+                                    <size key="maxSize" width="17" height="18"/>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="7130FBE4-0155-4A49-89DB-DDFF253E136C" label="Dict" paletteLabel="Dict" tag="9" image="NSBookmarksTemplate" selectable="YES" id="JNI-gh-WFg">
+                                    <size key="minSize" width="17" height="18"/>
+                                    <size key="maxSize" width="17" height="18"/>
+                                </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="B4O-Cg-FKD"/>
@@ -1195,6 +1337,16 @@ Gw
                         </connections>
                     </window>
                     <connections>
+                        <outlet property="tbiDict0" destination="Wxm-R9-OkX" id="gk1-hC-wZb"/>
+                        <outlet property="tbiDict1" destination="VWX-v3-wA2" id="ebw-hU-lZb"/>
+                        <outlet property="tbiDict2" destination="uGR-qA-kIb" id="Xfs-hX-kGe"/>
+                        <outlet property="tbiDict3" destination="r9e-Zw-LZp" id="YbZ-IH-9v6"/>
+                        <outlet property="tbiDict4" destination="ood-hL-nEk" id="t5i-xT-VPP"/>
+                        <outlet property="tbiDict5" destination="Cgz-j3-zuR" id="v5f-7B-oOP"/>
+                        <outlet property="tbiDict6" destination="dJ2-9d-ZRn" id="0KX-JV-00t"/>
+                        <outlet property="tbiDict7" destination="wUD-6d-Gwr" id="Lup-Gi-WC1"/>
+                        <outlet property="tbiDict8" destination="DN2-79-Kwu" id="zb4-hC-0qi"/>
+                        <outlet property="tbiDict9" destination="JNI-gh-WFg" id="hdg-Xv-rRN"/>
                         <outlet property="toolbar" destination="B0S-Kp-TOd" id="W0q-PG-HeE"/>
                         <segue destination="uuV-PB-hig" kind="relationship" relationship="window.shadowedContentViewController" id="SD5-tO-LTl"/>
                     </connections>
@@ -1405,6 +1557,7 @@ Gw
     </scenes>
     <resources>
         <image name="NSAddTemplate" width="11" height="11"/>
+        <image name="NSBookmarksTemplate" width="17" height="18"/>
         <image name="NSInfo" width="32" height="32"/>
         <image name="NSRefreshTemplate" width="11" height="15"/>
         <image name="NSRemoveTemplate" width="11" height="11"/>

@@ -120,8 +120,8 @@ class WordsUnitViewController: NSViewController, LollyProtocol, NSTableViewDataS
     
     func searchWord(word: String) {
         selectedWord = word
-        let item = vmSettings.selectedDictOnline
-        let url = vm.vmSettings.selectedDictOnline.urlString(word: word, arrAutoCorrect: vmSettings.arrAutoCorrect)
+        let item = vmSettings.arrDictsOnline[selectedDictOnlineIndex]
+        let url = item.urlString(word: word, arrAutoCorrect: vmSettings.arrAutoCorrect)
         if item.DICTTYPENAME == "OFFLINE" {
             wvDict.load(URLRequest(url: URL(string: "about:blank")!))
             RestApi.getHtml(url: url).subscribe(onNext: { html in
@@ -139,7 +139,9 @@ class WordsUnitViewController: NSViewController, LollyProtocol, NSTableViewDataS
     
     @IBAction func searchWordInTableView(_ sender: Any) {
         if sender is NSToolbarItem {
-            selectedDictOnlineIndex = (sender as! NSToolbarItem).tag
+            let tbItem = sender as! NSToolbarItem
+            selectedDictOnlineIndex = tbItem.tag
+            print(tbItem.toolbar!.selectedItemIdentifier!.rawValue)
         }
         guard tableView.selectedRow != -1 else {return}
         searchWord(word: arrWords[tableView.selectedRow].WORD)

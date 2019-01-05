@@ -41,9 +41,11 @@ class SearchViewController: NSViewController, LollyProtocol, NSTableViewDataSour
         return arrWords[row]
     }
     
-    @IBAction func searchDict(_ sender: AnyObject) {
+    @IBAction func searchDict(_ sender: Any) {
         if sender is NSToolbarItem {
-            selectedDictOnlineIndex = (sender as! NSToolbarItem).tag
+            let tbItem = sender as! NSToolbarItem
+            selectedDictOnlineIndex = tbItem.tag
+            print(tbItem.toolbar!.selectedItemIdentifier!.rawValue)
         }
         let item = vmSettings.arrDictsOnline[selectedDictOnlineIndex]
         let url = item.urlString(word: newWord, arrAutoCorrect: vmSettings.arrAutoCorrect)
@@ -100,5 +102,3 @@ class SearchWindowController: WordsWindowController {
         return item
     }
 }
-
-
