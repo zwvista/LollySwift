@@ -22,7 +22,7 @@ class WordsViewController: NSViewController, LollyProtocol {
 class WordsWindowController: NSWindowController, NSToolbarDelegate, LollyProtocol {
     
     @IBOutlet weak var toolbar: NSToolbar!
-    // Could not find outlet collection
+    // Outlet collections not implemented in Cocoa
     // https://stackoverflow.com/questions/24805180/swift-put-multiple-iboutlets-in-an-array
     // @IBOutlet var tbiDicts: [NSToolbarItem]!
     @IBOutlet weak var tbiDict0: NSToolbarItem!
@@ -36,14 +36,14 @@ class WordsWindowController: NSWindowController, NSToolbarDelegate, LollyProtoco
     @IBOutlet weak var tbiDict8: NSToolbarItem!
     @IBOutlet weak var tbiDict9: NSToolbarItem!
     @objc var vm: SettingsViewModel {return vmSettings}
-    var toolbarItemCount: Int { return 1 }
+    private var defaultToolbarItemCount = 0
     
     var identifiers: [NSToolbarItem.Identifier]!
     
     override func windowDidLoad() {
         super.windowDidLoad()
-        print(toolbar.items.count)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.defaultToolbarItemCount = self.toolbar.items.count
             self.settingsChanged()
         }
     }
@@ -61,12 +61,12 @@ class WordsWindowController: NSWindowController, NSToolbarDelegate, LollyProtoco
     }
     
     func settingsChanged() {
-        while toolbar.items.count > toolbarItemCount {
-            toolbar.removeItem(at: toolbarItemCount)
+        while toolbar.items.count > defaultToolbarItemCount {
+            toolbar.removeItem(at: defaultToolbarItemCount)
         }
         for i in 0..<vmSettings.arrDictsOnline.count {
             let itemIdentifier = NSToolbarItem.Identifier(vmSettings.arrDictsOnline[i].DICTNAME!)
-            toolbar.insertItem(withItemIdentifier: itemIdentifier, at: toolbarItemCount + i)
+            toolbar.insertItem(withItemIdentifier: itemIdentifier, at: defaultToolbarItemCount + i)
         }
     }
 }

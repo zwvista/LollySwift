@@ -15,6 +15,8 @@ class BlogViewController: NSViewController {
     @IBOutlet weak var tvHtml: NSTextView!
     @IBOutlet weak var wvBlog: WKWebView!
     
+    var patternNo = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
@@ -46,11 +48,24 @@ class BlogViewController: NSViewController {
     @IBAction func addExplanation(_ sender: Any) {
         return replaceSelection { _ in BlogViewModel.explanation }
     }
-
+    @IBAction func showBlog(_ sender: Any) {
+        let str = "<html><body>\(tvHtml.string)</body></html>"
+        wvBlog.loadHTMLString(str, baseURL: nil)
+    }
+    @IBAction func showPattern(_ sender: Any) {
+        let url = "http://viethuong.web.fc2.com/MONDAI/\(patternNo).html"
+        wvBlog.load(URLRequest(url: URL(string: url)!))
+    }
+    @IBAction func patternChanged(_ sender: Any) {
+        patternNo = (sender as! NSTextField).stringValue
+    }
 }
 
 class BlogWindowController: NSWindowController {
+    @IBOutlet weak var tfPatternNo: NSTextField!
     override func windowDidLoad() {
         super.windowDidLoad()
+        window!.toolbar!.selectedItemIdentifier = NSToolbarItem.Identifier(rawValue: "Blog")
+        (contentViewController as! BlogViewController).patternChanged(tfPatternNo)
     }
 }

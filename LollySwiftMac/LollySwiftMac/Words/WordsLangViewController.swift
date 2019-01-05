@@ -193,7 +193,6 @@ class WordsLangViewController: WordsViewController, NSTableViewDataSource, NSTab
 }
 
 class WordsLangWindowController: WordsWindowController {
-    override var toolbarItemCount: Int { return 3 }
     override func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
         let item = super.toolbar(toolbar, itemForItemIdentifier: itemIdentifier, willBeInsertedIntoToolbar: flag)!
         item.action = #selector(WordsLangViewController.searchWordInTableView(_:))

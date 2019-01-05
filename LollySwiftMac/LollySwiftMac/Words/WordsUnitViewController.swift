@@ -282,7 +282,6 @@ class WordsUnitViewController: WordsViewController, NSTableViewDataSource, NSTab
 }
 
 class WordsUnitWindowController: WordsWindowController {
-    override var toolbarItemCount: Int { return 4 }
     override func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
         let item = super.toolbar(toolbar, itemForItemIdentifier: itemIdentifier, willBeInsertedIntoToolbar: flag)!
         item.action = #selector(WordsUnitViewController.searchWordInTableView(_:))

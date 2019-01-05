@@ -737,37 +737,62 @@
                         <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
                         <toolbar key="toolbar" implicitIdentifier="5E8CD035-C695-44E4-A272-6840FDFE8C8E" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="5w7-h7-oHr">
                             <allowedToolbarItems>
-                                <toolbarItem implicitItemIdentifier="7CF2F82A-1C11-45F5-8ACA-A0B671DD9224" label="M-&gt;H" paletteLabel="M-&gt;H" tag="-1" id="XdH-8w-olZ">
+                                <toolbarItem implicitItemIdentifier="7CF2F82A-1C11-45F5-8ACA-A0B671DD9224" label="M-&gt;H" paletteLabel="M-&gt;H" tag="-1" image="NSTouchBarGoDownTemplate" id="XdH-8w-olZ">
                                     <connections>
                                         <action selector="markedToHtml:" target="vaE-wK-YYd" id="Ixo-JI-2sD"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="E0B72C73-5B52-41CA-986A-D202164AD7F8" label="H-&gt;M" paletteLabel="H-&gt;M" tag="-1" id="jjN-Ig-zo6">
+                                <toolbarItem implicitItemIdentifier="E0B72C73-5B52-41CA-986A-D202164AD7F8" label="H-&gt;M" paletteLabel="H-&gt;M" tag="-1" image="NSTouchBarGoUpTemplate" id="jjN-Ig-zo6">
                                     <connections>
                                         <action selector="htmlToMarked:" target="vaE-wK-YYd" id="UFN-ov-tTL"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="aqu-JS-6z3"/>
-                                <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="rXD-kw-zan"/>
-                                <toolbarItem implicitItemIdentifier="0CC2346B-85EB-468B-9DB1-B37022A8325B" label="+B" paletteLabel="+B" tag="-1" id="d08-Zj-N7R">
+                                <toolbarItem implicitItemIdentifier="0CC2346B-85EB-468B-9DB1-B37022A8325B" label="+B" paletteLabel="+B" tag="-1" image="NSAddTemplate" id="d08-Zj-N7R">
                                     <connections>
                                         <action selector="addTagB:" target="vaE-wK-YYd" id="G2Y-7I-vlJ"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="E805D9D2-A95D-499E-9ABA-D38FB0D24ADC" label="+I" paletteLabel="+I" tag="-1" id="bXD-JS-Ynf">
+                                <toolbarItem implicitItemIdentifier="E805D9D2-A95D-499E-9ABA-D38FB0D24ADC" label="+I" paletteLabel="+I" tag="-1" image="NSAddTemplate" id="bXD-JS-Ynf">
                                     <connections>
                                         <action selector="addTagI:" target="vaE-wK-YYd" id="reT-Pd-R2d"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="DA30B0CE-D78F-4C3D-B9E3-41EC9FCBEC6C" label="-B-I" paletteLabel="-B-I" tag="-1" id="Ro0-Sn-9C9">
+                                <toolbarItem implicitItemIdentifier="DA30B0CE-D78F-4C3D-B9E3-41EC9FCBEC6C" label="-B-I" paletteLabel="-B-I" tag="-1" image="NSRemoveTemplate" id="Ro0-Sn-9C9">
                                     <connections>
                                         <action selector="removeTags:" target="vaE-wK-YYd" id="y4T-lo-dHa"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="BCAF5EE7-64D9-4FC5-9982-9925EF400A1E" label="E::" paletteLabel="E::" tag="-1" id="LYl-V1-QYj">
+                                <toolbarItem implicitItemIdentifier="BCAF5EE7-64D9-4FC5-9982-9925EF400A1E" label="E::" paletteLabel="E::" tag="-1" image="NSTouchBarBookmarksTemplate" id="LYl-V1-QYj">
                                     <connections>
                                         <action selector="addExplanation:" target="vaE-wK-YYd" id="Q5D-Uc-Ig1"/>
                                     </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="2CCA2C23-449F-4700-856E-4BC708BF274D" explicitItemIdentifier="Blog" label="Blog" paletteLabel="Blog" tag="-1" selectable="YES" id="B1t-u8-qBd">
+                                    <connections>
+                                        <action selector="showBlog:" target="vaE-wK-YYd" id="tR6-7s-2Wn"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="CCFFD221-6E8A-4EEB-BAFC-07FDA70FF9D8" explicitItemIdentifier="Pattern" label="Pattern" paletteLabel="Pattern" tag="-1" selectable="YES" id="U1H-SJ-i4E">
+                                    <connections>
+                                        <action selector="showPattern:" target="vaE-wK-YYd" id="nKm-IM-0gJ"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="7B9E1BE1-D8FF-4BC2-B3DE-17FBF9E018BB" label="Pattern No." paletteLabel="Pattern No." id="EDL-Iu-W2r">
+                                    <nil key="toolTip"/>
+                                    <size key="minSize" width="40" height="22"/>
+                                    <size key="maxSize" width="40" height="22"/>
+                                    <textField key="view" verticalHuggingPriority="750" id="Lbj-Ka-Wut">
+                                        <rect key="frame" x="14" y="14" width="40" height="22"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" title="001" drawsBackground="YES" id="piJ-Qn-4oJ">
+                                            <font key="font" usesAppearanceFont="YES"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                        <connections>
+                                            <action selector="patternChanged:" target="vaE-wK-YYd" id="IXk-Ad-OtQ"/>
+                                        </connections>
+                                    </textField>
                                 </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
@@ -777,7 +802,9 @@
                                 <toolbarItem reference="bXD-JS-Ynf"/>
                                 <toolbarItem reference="Ro0-Sn-9C9"/>
                                 <toolbarItem reference="LYl-V1-QYj"/>
-                                <toolbarItem reference="rXD-kw-zan"/>
+                                <toolbarItem reference="B1t-u8-qBd"/>
+                                <toolbarItem reference="U1H-SJ-i4E"/>
+                                <toolbarItem reference="EDL-Iu-W2r"/>
                             </defaultToolbarItems>
                         </toolbar>
                         <connections>
@@ -785,6 +812,7 @@
                         </connections>
                     </window>
                     <connections>
+                        <outlet property="tfPatternNo" destination="Lbj-Ka-Wut" id="iPE-SV-zW3"/>
                         <segue destination="PME-9l-TOe" kind="relationship" relationship="window.shadowedContentViewController" id="gWQ-3V-mE1"/>
                     </connections>
                 </windowController>
@@ -1276,4 +1304,11 @@
             <point key="canvasLocation" x="809" y="579"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="NSAddTemplate" width="11" height="11"/>
+        <image name="NSRemoveTemplate" width="11" height="11"/>
+        <image name="NSTouchBarBookmarksTemplate" width="22" height="30"/>
+        <image name="NSTouchBarGoDownTemplate" width="16" height="30"/>
+        <image name="NSTouchBarGoUpTemplate" width="16" height="30"/>
+    </resources>
 </document>
