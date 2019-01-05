@@ -777,11 +777,11 @@
                                         <action selector="showPattern:" target="vaE-wK-YYd" id="nKm-IM-0gJ"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="7B9E1BE1-D8FF-4BC2-B3DE-17FBF9E018BB" label="Pattern No." paletteLabel="Pattern No." id="EDL-Iu-W2r">
+                                <toolbarItem implicitItemIdentifier="7B9E1BE1-D8FF-4BC2-B3DE-17FBF9E018BB" label="Pattern No." paletteLabel="Pattern No." tag="-1" id="EDL-Iu-W2r">
                                     <nil key="toolTip"/>
                                     <size key="minSize" width="40" height="22"/>
                                     <size key="maxSize" width="40" height="22"/>
-                                    <textField key="view" verticalHuggingPriority="750" id="Lbj-Ka-Wut">
+                                    <textField key="view" verticalHuggingPriority="750" tag="-1" id="Lbj-Ka-Wut">
                                         <rect key="frame" x="14" y="14" width="40" height="22"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" title="001" drawsBackground="YES" id="piJ-Qn-4oJ">
@@ -790,9 +790,36 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                         <connections>
-                                            <action selector="patternChanged:" target="vaE-wK-YYd" id="IXk-Ad-OtQ"/>
+                                            <action selector="patternNoChanged:" target="vaE-wK-YYd" id="IXk-Ad-OtQ"/>
                                         </connections>
                                     </textField>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="431E2A0E-F4CE-4A5F-B316-60FB25A76C58" label="Pattern Text" paletteLabel="Pattern Text" tag="-1" id="9KA-1d-XSR">
+                                    <nil key="toolTip"/>
+                                    <size key="minSize" width="40" height="22"/>
+                                    <size key="maxSize" width="123" height="22"/>
+                                    <textField key="view" verticalHuggingPriority="750" tag="-1" id="r3b-4B-iGP">
+                                        <rect key="frame" x="0.0" y="14" width="119" height="22"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="Nun-Gx-4Ar">
+                                            <font key="font" usesAppearanceFont="YES"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                        <connections>
+                                            <action selector="patternTextChanged:" target="vaE-wK-YYd" id="hwO-m3-12u"/>
+                                        </connections>
+                                    </textField>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="92FE2A03-F4C7-46FE-BBF4-1BD67BE21961" label="Pattern MD" paletteLabel="Pattern MD" tag="-1" id="cwH-9b-MEC">
+                                    <connections>
+                                        <action selector="copyPatternMarkDown:" target="vaE-wK-YYd" id="8yk-Fl-u31"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="4DE715D9-8F20-499D-A8E6-40FF7E6F9438" label="Add Notes" paletteLabel="Add Notes" tag="-1" id="PoU-Ac-WoH">
+                                    <connections>
+                                        <action selector="addNotes:" target="vaE-wK-YYd" id="Juu-xy-k3d"/>
+                                    </connections>
                                 </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
@@ -805,6 +832,9 @@
                                 <toolbarItem reference="B1t-u8-qBd"/>
                                 <toolbarItem reference="U1H-SJ-i4E"/>
                                 <toolbarItem reference="EDL-Iu-W2r"/>
+                                <toolbarItem reference="9KA-1d-XSR"/>
+                                <toolbarItem reference="cwH-9b-MEC"/>
+                                <toolbarItem reference="PoU-Ac-WoH"/>
                             </defaultToolbarItems>
                         </toolbar>
                         <connections>

@@ -16,6 +16,7 @@ class BlogViewController: NSViewController {
     @IBOutlet weak var wvBlog: WKWebView!
     
     var patternNo = ""
+    var patternText = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +25,7 @@ class BlogViewController: NSViewController {
 
     @IBAction func markedToHtml(_ sender: Any) {
         tvHtml.string = BlogViewModel.markedToHtml(text: tvMarked.string)
+        MacApi.copyText(tvHtml.string)
     }
     @IBAction func htmlToMarked(_ sender: Any) {
         tvMarked.string = BlogViewModel.htmlToMarked(text: tvHtml.string)
@@ -49,15 +51,25 @@ class BlogViewController: NSViewController {
         return replaceSelection { _ in BlogViewModel.explanation }
     }
     @IBAction func showBlog(_ sender: Any) {
-        let str = "<html><body>\(tvHtml.string)</body></html>"
+        markedToHtml(sender)
+        let str = BlogViewModel.getHtml(text: tvHtml.string)
         wvBlog.loadHTMLString(str, baseURL: nil)
     }
     @IBAction func showPattern(_ sender: Any) {
-        let url = "http://viethuong.web.fc2.com/MONDAI/\(patternNo).html"
+        let url = BlogViewModel.getPatternUrl(patternNo: patternNo)
         wvBlog.load(URLRequest(url: URL(string: url)!))
     }
-    @IBAction func patternChanged(_ sender: Any) {
+    @IBAction func patternNoChanged(_ sender: Any) {
         patternNo = (sender as! NSTextField).stringValue
+    }
+    @IBAction func patternTextChanged(_ sender: Any) {
+        patternText = (sender as! NSTextField).stringValue
+    }
+    @IBAction func copyPatternMarkDown(_ sender: Any) {
+        let text = BlogViewModel.getPatternMarkDown(patternText: patternText)
+        MacApi.copyText(text)
+    }
+    @IBAction func addNotes(_ sender: Any) {
     }
 }
 
@@ -66,6 +78,6 @@ class BlogWindowController: NSWindowController {
     override func windowDidLoad() {
         super.windowDidLoad()
         window!.toolbar!.selectedItemIdentifier = NSToolbarItem.Identifier(rawValue: "Blog")
-        (contentViewController as! BlogViewController).patternChanged(tfPatternNo)
+        (contentViewController as! BlogViewController).patternNoChanged(tfPatternNo)
     }
 }

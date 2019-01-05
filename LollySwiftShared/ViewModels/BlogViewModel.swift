@@ -57,7 +57,7 @@ class BlogViewModel: NSObject {
                 s = "<strong><span style=\"color:#0000ff;\">(.+?)</span></strong>".r!.replaceAll(in: s, with: "<B>$1</B>")
                 s = "<strong><span style=\"color:#cc00cc;\">(.+?)</span></strong>".r!.replaceAll(in: s, with: "<I>$1</I>")
                 arr[i] = s
-            } else if let m = "<li><strong><span style=\"color:#0000ff;\">(.*?)：</span>(?:</strong><span style=\"color:#006600;\">(.*?)</span>)?(?:<span style=\"color:#cc00cc;\">(.*?)</span>)?</li>".r!.findFirst(in: s) {
+            } else if let m = "<li><strong><span style=\"color:#0000ff;\">(.*?)：</span></strong>(?:<span style=\"color:#006600;\">(.*?)</span>)?(?:<span style=\"color:#cc00cc;\">(.*?)</span>)?</li>".r!.findFirst(in: s) {
                 let (s1, s2, s3) = (m.group(at: 1), m.group(at: 2), m.group(at: 3))
                 s = "* \(s1 ?? "")：\(s2 ?? "")：\(s3 ?? "")"
                 arr[i] = s
@@ -70,15 +70,20 @@ class BlogViewModel: NSObject {
     public static func addTagB(text: String) -> String {
         return "<B>\(text)</B>"
     }
-    
     public static func addTagI(text: String) -> String {
         return "<I>\(text)</I>"
     }
-    
     public static func removeTags(text: String) -> String {
         return "</?[BI]>".r!.replaceAll(in: text, with: "")
     }
-    
     public static let explanation = "* ：：\n"
-
+    public static func getHtml(text: String) -> String {
+        return "<html><body>\(text)</body></html>"
+    }
+    public static func getPatternUrl(patternNo: String) -> String {
+        return "http://viethuong.web.fc2.com/MONDAI/\(patternNo).html"
+    }
+    public static func getPatternMarkDown(patternText: String) -> String {
+        return "* [\(patternText)　文法](https://www.google.com/search?q=\(patternText)　文法)\n* [\(patternText)　句型](https://www.google.com/search?q=\(patternText)　句型)"
+    }
 }

@@ -169,9 +169,7 @@ class WordsLangViewController: WordsViewController, NSTableViewDataSource, NSTab
     
     @IBAction func copyWord(_ sender: Any) {
         let item = vm.arrWords[tableView.selectedRow]
-        let pasteboard = NSPasteboard.general
-        pasteboard.declareTypes([.string], owner: nil)
-        pasteboard.setString(item.WORD, forType: .string)
+        MacApi.copyText(item.WORD)
     }
     
     @IBAction func googleWord(_ sender: Any) {

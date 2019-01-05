@@ -94,9 +94,7 @@ class PhrasesLangViewController: NSViewController, LollyProtocol, NSTableViewDat
     
     @IBAction func copyPhrase(_ sender: Any) {
         let item = vm.arrPhrases[tableView.selectedRow]
-        let pasteboard = NSPasteboard.general
-        pasteboard.declareTypes([.string], owner: nil)
-        pasteboard.setString(item.PHRASE, forType: .string)
+        MacApi.copyText(item.PHRASE)
     }
     
     @IBAction func googlePhrase(_ sender: Any) {
