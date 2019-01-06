@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Regex
 
 class HtmlApi {
     static private let debugExtract = false
@@ -34,7 +33,7 @@ class HtmlApi {
             if transform.isEmpty {break}
             var arr = transform.components(separatedBy: "\r\n")
             if arr.count % 2 == 1 { arr.removeLast() }
-            var regex = try! Regex(pattern: arr[0])
+            var regex = arr[0].r!
             let m = regex.findFirst(in: html)
             if m == nil {break}
             text = m!.matched
@@ -57,7 +56,7 @@ class HtmlApi {
             
             for i in 2 ..< arr.count {
                 if i % 2 == 0 {
-                    regex = try! Regex(pattern: arr[i])
+                    regex = arr[i].r!
                 } else {
                     f(arr[i])
                 }

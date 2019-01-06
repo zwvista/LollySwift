@@ -33,22 +33,25 @@ class NoteViewModel {
     
     func getNotes(wordCount: Int, isNoteEmpty: @escaping (Int) -> Bool, getOne: @escaping (Int) -> Void, allComplete: @escaping () -> Void) {
         guard let mDictNote = mDictNote else {return}
-        let scheduler = SerialDispatchQueueScheduler(qos: .default)
         var i = 0
         var subscription: Disposable?
-        subscription = Observable<Int>.interval(Double(mDictNote.WAIT!) / 1000.0, scheduler: scheduler)
-            .subscribe {
+        subscription = Observable<Int>.interval(Double(mDictNote.WAIT!) / 1000.0, scheduler: MainScheduler.instance)
+            .subscribe { _ in
                 while i < wordCount && !isNoteEmpty(i) {
                     i += 1
                 }
-                if i >= wordCount {
+                if i > wordCount {
                     allComplete()
-                    subscription?.disposed(by: self.disposeBag)
+                    subscription?.dispose()
                 } else {
-                    getOne(i)
+                    if i < wordCount {
+                        getOne(i)
+                    }
+                    // wait for the last one to finish
                     i += 1
                 }
             }
+        subscription?.disposed(by: disposeBag)
     }
 
 }

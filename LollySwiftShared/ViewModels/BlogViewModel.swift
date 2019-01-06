@@ -123,20 +123,31 @@ class BlogViewModel: NSObject {
         return "* [\(patternText)　文法](https://www.google.com/search?q=\(patternText)　文法)\n* [\(patternText)　句型](https://www.google.com/search?q=\(patternText)　句型)"
     }
     
+    private let bigDigits = "０１２３４５６７８９"
     func addNotes(text: String, complete: @escaping (String) -> Void) {
-        var arr = text.split("\n")
+        func f(_ s: String) -> String {
+            var t = s
+            for i in 0...9 {
+                t = t.replacingOccurrences(of: String(i), with: bigDigits[i...i])
+            }
+            return t
+        }
+        var arr = text.components(separatedBy: "\n")
         vmNote.getNotes(wordCount: arr.count, isNoteEmpty: {
-            // !(self.regMarkedEntry.findFirst(in: arr[$0])?.group(at: 2)!.contains("（") ?? true)
             let m = self.regMarkedEntry.findFirst(in: arr[$0])
-            return m != nil && !m!.group(at: 2)!.contains("（")
+            if m == nil { return false }
+            let word = m!.group(at: 2)!
+            return word.allSatisfy { $0 != "（" && !self.bigDigits.contains($0) }
         }, getOne: { i in
             let m = self.regMarkedEntry.findFirst(in: arr[i])!
-            let (s1, s2, s3, s4) = (m.group(at: 1)!, m.group(at: 2)!, m.group(at: 3)!, m.group(at: 4))
-            self.vmNote.getNote(word: s2).subscribe(onNext: { note in
-                let j = note.firstIndex { "０１２３４５６７８９".contains($0) }
+            let (s1, word, s3, s4) = (m.group(at: 1)!, m.group(at: 2)!, m.group(at: 3)!, m.group(at: 4))
+            self.vmNote.getNote(word: word).subscribe(onNext: { note in
+                let j = note.firstIndex { "0"..."9" ~= $0 }
                 // https://stackoverflow.com/questions/45562662/how-can-i-use-string-slicing-subscripts-in-swift-4
-                let s5 = s2 + (j == nil ? "（\(note)）" : "（\(note[..<j!])）\(note[j!...])")
-                arr[i] = "\(s1) \(s5)：\(s3)：\(s4 ?? "")"
+                let s21 = j == nil ? note : String(note[..<j!])
+                let s22 = j == nil ? "" : f(String(note[j!...]))
+                let s2 = word + (s21 == word || s21.isEmpty ? "" : "（\(s21)）") + s22
+                arr[i] = "\(s1) \(s2)：\(s3)：\(s4 ?? "")"
             }).disposed(by: self.disposeBag)
         }, allComplete: {
             let result = arr.joined(separator: "\n")

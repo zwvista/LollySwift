@@ -30,10 +30,6 @@ class BlogViewController: NSViewController  {
         vmBlog = BlogViewModel(settings: vm, disposeBag: disposeBag)
     }
 
-    @IBAction func markedToHtml(_ sender: Any) {
-        tvHtml.string = vmBlog.markedToHtml(text: tvMarked.string)
-        MacApi.copyText(tvHtml.string)
-    }
     @IBAction func htmlToMarked(_ sender: Any) {
         tvMarked.string = vmBlog.htmlToMarked(text: tvHtml.string)
     }
@@ -58,9 +54,10 @@ class BlogViewController: NSViewController  {
         return replaceSelection { _ in vmBlog.explanation }
     }
     @IBAction func showBlog(_ sender: Any) {
-        markedToHtml(sender)
+        tvHtml.string = vmBlog.markedToHtml(text: tvMarked.string)
         let str = vmBlog.getHtml(text: tvHtml.string)
         wvBlog.loadHTMLString(str, baseURL: nil)
+        MacApi.copyText(tvHtml.string)
     }
     @IBAction func showPattern(_ sender: Any) {
         let url = vmBlog.getPatternUrl(patternNo: patternNo)
@@ -85,6 +82,7 @@ class BlogViewController: NSViewController  {
 
 class BlogWindowController: NSWindowController {
     @IBOutlet weak var tfPatternNo: NSTextField!
+    
     override func windowDidLoad() {
         super.windowDidLoad()
         window!.toolbar!.selectedItemIdentifier = NSToolbarItem.Identifier(rawValue: "Blog")

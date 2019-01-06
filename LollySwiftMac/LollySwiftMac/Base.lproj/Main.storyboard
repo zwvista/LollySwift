@@ -737,12 +737,7 @@
                         <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
                         <toolbar key="toolbar" implicitIdentifier="5E8CD035-C695-44E4-A272-6840FDFE8C8E" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="5w7-h7-oHr">
                             <allowedToolbarItems>
-                                <toolbarItem implicitItemIdentifier="7CF2F82A-1C11-45F5-8ACA-A0B671DD9224" label="M-&gt;H" paletteLabel="M-&gt;H" tag="-1" image="NSTouchBarGoDownTemplate" id="XdH-8w-olZ">
-                                    <connections>
-                                        <action selector="markedToHtml:" target="vaE-wK-YYd" id="Ixo-JI-2sD"/>
-                                    </connections>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="E0B72C73-5B52-41CA-986A-D202164AD7F8" label="H-&gt;M" paletteLabel="H-&gt;M" tag="-1" image="NSTouchBarGoUpTemplate" id="jjN-Ig-zo6">
+                                <toolbarItem implicitItemIdentifier="E0B72C73-5B52-41CA-986A-D202164AD7F8" label="Marked" paletteLabel="Marked" tag="-1" image="NSTouchBarGoUpTemplate" id="jjN-Ig-zo6">
                                     <connections>
                                         <action selector="htmlToMarked:" target="vaE-wK-YYd" id="UFN-ov-tTL"/>
                                     </connections>
@@ -823,7 +818,6 @@
                                 </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
-                                <toolbarItem reference="XdH-8w-olZ"/>
                                 <toolbarItem reference="jjN-Ig-zo6"/>
                                 <toolbarItem reference="d08-Zj-N7R"/>
                                 <toolbarItem reference="bXD-JS-Ynf"/>
@@ -1338,7 +1332,6 @@
         <image name="NSAddTemplate" width="11" height="11"/>
         <image name="NSRemoveTemplate" width="11" height="11"/>
         <image name="NSTouchBarBookmarksTemplate" width="22" height="30"/>
-        <image name="NSTouchBarGoDownTemplate" width="16" height="30"/>
         <image name="NSTouchBarGoUpTemplate" width="16" height="30"/>
     </resources>
 </document>
