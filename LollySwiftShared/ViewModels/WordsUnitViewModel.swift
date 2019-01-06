@@ -12,18 +12,18 @@ import RxSwift
 class WordsUnitViewModel: NSObject {
     @objc
     var vmSettings: SettingsViewModel
-    var mDictNote: MDictNote? {
-        return vmSettings.selectedDictNote
-    }
     var arrWords = [MUnitWord]()
     var arrWordsFiltered: [MUnitWord]?
-    // var vmNote: NoteViewModel!
+    var vmNote: NoteViewModel!
+    var mDictNote: MDictNote? {
+        return vmNote.mDictNote
+    }
     let disposeBag: DisposeBag!
 
     public init(settings: SettingsViewModel, disposeBag: DisposeBag, complete: @escaping () -> ()) {
         self.vmSettings = settings
         self.disposeBag = disposeBag
-        // vmNote = NoteViewModel(settings: settings)
+        vmNote = NoteViewModel(settings: settings, disposeBag: disposeBag)
         super.init()
         MUnitWord.getDataByTextbook(settings.USTEXTBOOKID, unitPartFrom: settings.USUNITPARTFROM, unitPartTo: settings.USUNITPARTTO).subscribe(onNext: {
             self.arrWords = $0
@@ -69,7 +69,7 @@ class WordsUnitViewModel: NSObject {
     func newUnitWord() -> MUnitWord {
         let item = MUnitWord()
         item.TEXTBOOKID = vmSettings.USTEXTBOOKID
-        let maxElem = arrWords.max{ ($0.UNIT, $0.PART, $0.SEQNUM) < ($1.UNIT, $1.PART, $1.SEQNUM) }
+        let maxElem = arrWords.max { ($0.UNIT, $0.PART, $0.SEQNUM) < ($1.UNIT, $1.PART, $1.SEQNUM) }
         item.UNIT = maxElem?.UNIT ?? vmSettings.USUNITTO
         item.PART = maxElem?.PART ?? vmSettings.USPARTTO
         item.SEQNUM = (maxElem?.SEQNUM ?? 0) + 1
@@ -82,36 +82,20 @@ class WordsUnitViewModel: NSObject {
     }
 
     func getNote(index: Int) -> Observable<()> {
-        guard let mDictNote = mDictNote else {return Observable.empty() }
         let item = arrWords[index]
-        let url = mDictNote.urlString(word: item.WORD, arrAutoCorrect: vmSettings.arrAutoCorrect)
-        return RestApi.getHtml(url: url).concatMap { (html) -> Observable<()> in
-            print(html)
-            item.NOTE = HtmlApi.extractText(from: html, transform: mDictNote.TRANSFORM!, template: "") { text,_ in return text }
-            return WordsUnitViewModel.update(item.ID, note: item.NOTE!)
+        return vmNote.getNote(word: item.WORD).concatMap { note -> Observable<()> in
+            item.NOTE = note
+            return WordsUnitViewModel.update(item.ID, note: note)
         }
     }
     
-    func getNotes(ifEmpty: Bool, rowComplete: @escaping (Int) -> Void, allComplete: @escaping () -> Void) {
-        guard let mDictNote = mDictNote else {return}
-        let scheduler = SerialDispatchQueueScheduler(qos: .default)
-        var fromIndex = 0, toIndex = arrWords.count
-        Observable<Int>.interval(Double(mDictNote.WAIT!) / 1000.0, scheduler: scheduler)
-            .subscribe { [unowned self] in
-                if ifEmpty {
-                    while fromIndex < toIndex && !(self.arrWords[fromIndex].NOTE ?? "").isEmpty {
-                        fromIndex += 1
-                    }
-                }
-                if fromIndex >= toIndex {
-                    allComplete()
-                } else {
-                    let i = fromIndex
-                    self.getNote(index: i).subscribe {
-                        rowComplete(i)
-                    }.disposed(by: self.disposeBag)
-                    fromIndex += 1
-                }
-            }.disposed(by: disposeBag)
+    func getNotes(ifEmpty: Bool, oneComplete: @escaping (Int) -> Void, allComplete: @escaping () -> Void) {
+        vmNote.getNotes(wordCount: arrWords.count, isNoteEmpty: {
+            !ifEmpty || (self.arrWords[$0].NOTE ?? "").isEmpty
+        }, getOne: { i in
+            self.getNote(index: i).subscribe {
+                oneComplete(i)
+            }.disposed(by: self.disposeBag)
+        }, allComplete: allComplete)
     }
 }

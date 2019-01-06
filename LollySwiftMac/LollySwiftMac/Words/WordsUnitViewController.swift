@@ -252,7 +252,7 @@ class WordsUnitViewController: WordsViewController, NSTableViewDataSource, NSTab
         alert.addButton(withTitle: "Cancel")
         let res = alert.runModal()
         if res != .alertThirdButtonReturn {
-            vm.getNotes(ifEmpty: res == .alertFirstButtonReturn, rowComplete: {
+            vm.getNotes(ifEmpty: res == .alertFirstButtonReturn, oneComplete: {
                 self.tableView.reloadData(forRowIndexes: [$0], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count))
             }, allComplete: {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {

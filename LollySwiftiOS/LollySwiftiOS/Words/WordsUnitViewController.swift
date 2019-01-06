@@ -147,7 +147,7 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
         
         func startTimer(ifEmpty: Bool) {
             self.view.showBlurLoader()
-            vm.getNotes(ifEmpty: ifEmpty, rowComplete: { _ in }, allComplete: {
+            vm.getNotes(ifEmpty: ifEmpty, oneComplete: { _ in }, allComplete: {
                 // https://stackoverflow.com/questions/28302019/getting-a-this-application-is-modifying-the-autolayout-engine-from-a-background
                 DispatchQueue.main.async {
                     self.view.removeBlurLoader()

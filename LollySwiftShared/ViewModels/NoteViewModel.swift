@@ -9,53 +9,44 @@
 import Foundation
 import RxSwift
 
-//class NoteViewModel {
-//
-//    var vmSettings: SettingsViewModel
-//    var mDictNote: MDictNote? {
-//        return vmSettings.selectedDictNote
-//    }
-//    var arrWords = [String]()
-//    var noteFromIndex = 0, noteToIndex = 0, noteIfEmpty = true
-//
-//    let disposeBag = DisposeBag()
-//
-//    public init(settings: SettingsViewModel) {
-//        self.vmSettings = settings
-//    }
-//
-//    func getNote(index: Int) -> Observable<()> {
-//        guard let mDictNote = mDictNote else {return Observable.empty() }
-//        let item = arrWords[index]
-//        let url = mDictNote.urlString(word: item.WORD, arrAutoCorrect: vmSettings.arrAutoCorrect)
-//        return RestApi.getHtml(url: url).concatMap { (html) -> Observable<()> in
-//            print(html)
-//            item.NOTE = HtmlApi.extractText(from: html, transform: mDictNote.TRANSFORM!, template: "") { text,_ in return text }
-//            return WordsUnitViewModel.update(item.ID, note: item.NOTE!)
-//        }
-//    }
-//
-//    func getNotes(ifEmpty: Bool, complete: (Int) -> Void) {
-//        guard let mDictNote = mDictNote else {return}
-//        noteFromIndex = 0; noteToIndex = arrWords.count; noteIfEmpty = ifEmpty
-//        complete(mDictNote.WAIT!)
-//    }
-//
-//    func getNextNote(rowComplete: @escaping (Int) -> Void, allComplete: @escaping () -> Void) {
-//        if noteIfEmpty {
-//            while noteFromIndex < noteToIndex && !(arrWords[noteFromIndex].NOTE ?? "").isEmpty {
-//                noteFromIndex += 1
-//            }
-//        }
-//        if noteFromIndex >= noteToIndex {
-//            allComplete()
-//        } else {
-//            let i = noteFromIndex
-//            getNote(index: i).subscribe {
-//                rowComplete(i)
-//                }.disposed(by: disposeBag)
-//            noteFromIndex += 1
-//        }
-//    }
-//
-//}
+class NoteViewModel {
+
+    var vmSettings: SettingsViewModel
+    var mDictNote: MDictNote? {
+        return vmSettings.selectedDictNote
+    }
+    let disposeBag: DisposeBag!
+
+    init(settings: SettingsViewModel, disposeBag: DisposeBag) {
+        self.vmSettings = settings
+        self.disposeBag = disposeBag
+    }
+
+    func getNote(word: String) -> Observable<String> {
+        guard let mDictNote = mDictNote else { return Observable.empty() }
+        let url = mDictNote.urlString(word: word, arrAutoCorrect: vmSettings.arrAutoCorrect)
+        return RestApi.getHtml(url: url).map { html in
+            print(html)
+            return HtmlApi.extractText(from: html, transform: mDictNote.TRANSFORM!, template: "") { text,_ in return text }
+        }
+    }
+    
+    func getNotes(wordCount: Int, isNoteEmpty: @escaping (Int) -> Bool, getOne: @escaping (Int) -> Void, allComplete: @escaping () -> Void) {
+        guard let mDictNote = mDictNote else {return}
+        let scheduler = SerialDispatchQueueScheduler(qos: .default)
+        var i = 0
+        Observable<Int>.interval(Double(mDictNote.WAIT!) / 1000.0, scheduler: scheduler)
+            .subscribe {
+                while i < wordCount && !isNoteEmpty(i) {
+                    i += 1
+                }
+                if i >= wordCount {
+                    allComplete()
+                } else {
+                    getOne(i)
+                    i += 1
+                }
+            }.disposed(by: disposeBag)
+    }
+
+}
