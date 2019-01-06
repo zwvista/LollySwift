@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class WordsTextbookViewController: WordsBaseViewController, UISearchBarDelegate, UISearchResultsUpdating {
 
@@ -14,11 +15,13 @@ class WordsTextbookViewController: WordsBaseViewController, UISearchBarDelegate,
     var arrWords: [MTextbookWord] {
         return searchController.isActive && searchBar.text != "" ? vm.arrWordsFiltered! : vm.arrWords
     }
+    
+    let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.showBlurLoader()
-        vm = WordsTextbookViewModel(settings: vmSettings) {
+        vm = WordsTextbookViewModel(settings: vmSettings, disposeBag: disposeBag) {
             self.setupSearchController(delegate: self)
             self.tableView.reloadData()
             self.view.removeBlurLoader()

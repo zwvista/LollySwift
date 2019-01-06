@@ -18,6 +18,7 @@ project 'LollySwiftiOS/LollySwiftiOS'
 pod 'CodableAlamofire'
 pod 'RxAlamofire'
 pod 'EZSwiftExtensions'
+pod 'CrossroadRegex'
 end
 
 target 'LollySwiftMac' do

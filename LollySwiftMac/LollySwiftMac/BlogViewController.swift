@@ -15,6 +15,7 @@ class BlogViewController: NSViewController {
     @IBOutlet weak var tvHtml: NSTextView!
     @IBOutlet weak var wvBlog: WKWebView!
     
+    var vmBlog = BlogViewModel()
     var patternNo = ""
     var patternText = ""
     
@@ -24,11 +25,11 @@ class BlogViewController: NSViewController {
     }
 
     @IBAction func markedToHtml(_ sender: Any) {
-        tvHtml.string = BlogViewModel.markedToHtml(text: tvMarked.string)
+        tvHtml.string = vmBlog.markedToHtml(text: tvMarked.string)
         MacApi.copyText(tvHtml.string)
     }
     @IBAction func htmlToMarked(_ sender: Any) {
-        tvMarked.string = BlogViewModel.htmlToMarked(text: tvHtml.string)
+        tvMarked.string = vmBlog.htmlToMarked(text: tvHtml.string)
     }
     
     func replaceSelection(f: (String) -> String) {
@@ -39,24 +40,24 @@ class BlogViewController: NSViewController {
     }
 
     @IBAction func addTagB(_ sender: Any) {
-        return replaceSelection(f: BlogViewModel.addTagB)
+        return replaceSelection(f: vmBlog.addTagB)
     }
     @IBAction func addTagI(_ sender: Any) {
-        return replaceSelection(f: BlogViewModel.addTagI)
+        return replaceSelection(f: vmBlog.addTagI)
     }
     @IBAction func removeTags(_ sender: Any) {
-        return replaceSelection(f: BlogViewModel.removeTags)
+        return replaceSelection(f: vmBlog.removeTags)
     }
     @IBAction func addExplanation(_ sender: Any) {
-        return replaceSelection { _ in BlogViewModel.explanation }
+        return replaceSelection { _ in vmBlog.explanation }
     }
     @IBAction func showBlog(_ sender: Any) {
         markedToHtml(sender)
-        let str = BlogViewModel.getHtml(text: tvHtml.string)
+        let str = vmBlog.getHtml(text: tvHtml.string)
         wvBlog.loadHTMLString(str, baseURL: nil)
     }
     @IBAction func showPattern(_ sender: Any) {
-        let url = BlogViewModel.getPatternUrl(patternNo: patternNo)
+        let url = vmBlog.getPatternUrl(patternNo: patternNo)
         wvBlog.load(URLRequest(url: URL(string: url)!))
     }
     @IBAction func patternNoChanged(_ sender: Any) {
@@ -66,7 +67,7 @@ class BlogViewController: NSViewController {
         patternText = (sender as! NSTextField).stringValue
     }
     @IBAction func copyPatternMarkDown(_ sender: Any) {
-        let text = BlogViewModel.getPatternMarkDown(patternText: patternText)
+        let text = vmBlog.getPatternMarkDown(patternText: patternText)
         MacApi.copyText(text)
     }
     @IBAction func addNotes(_ sender: Any) {

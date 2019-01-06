@@ -13,10 +13,8 @@ class WordsTextbookViewModel: NSObject {
     var settings: SettingsViewModel
     var arrWords = [MTextbookWord]()
     var arrWordsFiltered: [MTextbookWord]?
-    
-    let disposeBag = DisposeBag()
 
-    public init(settings: SettingsViewModel, complete: @escaping () -> ()) {
+    public init(settings: SettingsViewModel, disposeBag: DisposeBag, complete: @escaping () -> ()) {
         self.settings = settings
         let item = settings.arrTextbooks[settings.selectedTextbookIndex]
         super.init()

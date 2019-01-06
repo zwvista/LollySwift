@@ -14,9 +14,7 @@ class PhrasesLangViewModel: NSObject {
     var arrPhrases = [MLangPhrase]()
     var arrPhrasesFiltered: [MLangPhrase]?
     
-    let disposeBag = DisposeBag()
-    
-    public init(settings: SettingsViewModel, complete: @escaping () -> ()) {
+    public init(settings: SettingsViewModel, disposeBag: DisposeBag, complete: @escaping () -> ()) {
         self.vmSettings = settings
         let item = settings.arrTextbooks[settings.selectedTextbookIndex]
         super.init()

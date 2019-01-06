@@ -153,7 +153,7 @@ class WordsLangViewController: WordsViewController, NSTableViewDataSource, NSTab
     }
     
     @IBAction func refreshTableView(_ sender: Any) {
-        vm = WordsLangViewModel(settings: AppDelegate.theSettingsViewModel) {
+        vm = WordsLangViewModel(settings: AppDelegate.theSettingsViewModel, disposeBag: disposeBag) {
             self.tableView.reloadData()
         }
     }

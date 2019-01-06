@@ -17,12 +17,13 @@ class WordsUnitViewModel: NSObject {
     }
     var arrWords = [MUnitWord]()
     var arrWordsFiltered: [MUnitWord]?
-    var noteFromIndex = 0, noteToIndex = 0, noteIfEmpty = true
-    
-    let disposeBag = DisposeBag()
+    // var vmNote: NoteViewModel!
+    let disposeBag: DisposeBag!
 
-    public init(settings: SettingsViewModel, complete: @escaping () -> ()) {
+    public init(settings: SettingsViewModel, disposeBag: DisposeBag, complete: @escaping () -> ()) {
         self.vmSettings = settings
+        self.disposeBag = disposeBag
+        // vmNote = NoteViewModel(settings: settings)
         super.init()
         MUnitWord.getDataByTextbook(settings.USTEXTBOOKID, unitPartFrom: settings.USUNITPARTFROM, unitPartTo: settings.USUNITPARTTO).subscribe(onNext: {
             self.arrWords = $0
@@ -91,26 +92,26 @@ class WordsUnitViewModel: NSObject {
         }
     }
     
-    func getNotes(ifEmpty: Bool, complete: (Int) -> Void) {
+    func getNotes(ifEmpty: Bool, rowComplete: @escaping (Int) -> Void, allComplete: @escaping () -> Void) {
         guard let mDictNote = mDictNote else {return}
-        noteFromIndex = 0; noteToIndex = arrWords.count; noteIfEmpty = ifEmpty
-        complete(mDictNote.WAIT!)
-    }
-    
-    func getNextNote(rowComplete: @escaping (Int) -> Void, allComplete: @escaping () -> Void) {
-        if noteIfEmpty {
-            while noteFromIndex < noteToIndex && !(arrWords[noteFromIndex].NOTE ?? "").isEmpty {
-                noteFromIndex += 1
-            }
-        }
-        if noteFromIndex >= noteToIndex {
-            allComplete()
-        } else {
-            let i = noteFromIndex
-            getNote(index: i).subscribe {
-                rowComplete(i)
+        let scheduler = SerialDispatchQueueScheduler(qos: .default)
+        var fromIndex = 0, toIndex = arrWords.count
+        Observable<Int>.interval(Double(mDictNote.WAIT!) / 1000.0, scheduler: scheduler)
+            .subscribe { [unowned self] in
+                if ifEmpty {
+                    while fromIndex < toIndex && !(self.arrWords[fromIndex].NOTE ?? "").isEmpty {
+                        fromIndex += 1
+                    }
+                }
+                if fromIndex >= toIndex {
+                    allComplete()
+                } else {
+                    let i = fromIndex
+                    self.getNote(index: i).subscribe {
+                        rowComplete(i)
+                    }.disposed(by: self.disposeBag)
+                    fromIndex += 1
+                }
             }.disposed(by: disposeBag)
-            noteFromIndex += 1
-        }
     }
 }

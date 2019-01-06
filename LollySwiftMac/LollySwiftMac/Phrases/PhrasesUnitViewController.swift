@@ -132,7 +132,7 @@ class PhrasesUnitViewController: NSViewController, LollyProtocol, NSTableViewDat
     }
     
     @IBAction func refreshTableView(_ sender: Any) {
-        vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel) {
+        vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel, disposeBag: disposeBag) {
             self.tableView.reloadData()
         }
     }

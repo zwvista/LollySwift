@@ -10,7 +10,7 @@ import Foundation
 
 class BlogViewModel: NSObject {
 
-    public static func markedToHtml(text: String) -> String {
+    public func markedToHtml(text: String) -> String {
         var arr = text.components(separatedBy: "\n")
         let reg = "(\\*\\*?)\\s*(.*?)：(.*?)：(.*)".r!
         var i = 0
@@ -42,7 +42,7 @@ class BlogViewModel: NSObject {
         return arr.joined(separator: "\n")
     }
     
-    public static func htmlToMarked(text: String) -> String {
+    public func htmlToMarked(text: String) -> String {
         var arr = text.split("\n")
         var i = 0
         while i < arr.count {
@@ -67,23 +67,23 @@ class BlogViewModel: NSObject {
         return arr.joined(separator: "\n")
     }
     
-    public static func addTagB(text: String) -> String {
+    public func addTagB(text: String) -> String {
         return "<B>\(text)</B>"
     }
-    public static func addTagI(text: String) -> String {
+    public func addTagI(text: String) -> String {
         return "<I>\(text)</I>"
     }
-    public static func removeTags(text: String) -> String {
+    public func removeTags(text: String) -> String {
         return "</?[BI]>".r!.replaceAll(in: text, with: "")
     }
-    public static let explanation = "* ：：\n"
-    public static func getHtml(text: String) -> String {
+    public let explanation = "* ：：\n"
+    public func getHtml(text: String) -> String {
         return "<html><body>\(text)</body></html>"
     }
-    public static func getPatternUrl(patternNo: String) -> String {
+    public func getPatternUrl(patternNo: String) -> String {
         return "http://viethuong.web.fc2.com/MONDAI/\(patternNo).html"
     }
-    public static func getPatternMarkDown(patternText: String) -> String {
+    public func getPatternMarkDown(patternText: String) -> String {
         return "* [\(patternText)　文法](https://www.google.com/search?q=\(patternText)　文法)\n* [\(patternText)　句型](https://www.google.com/search?q=\(patternText)　句型)"
     }
 }

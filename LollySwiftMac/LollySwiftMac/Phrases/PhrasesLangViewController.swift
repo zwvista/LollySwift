@@ -78,7 +78,7 @@ class PhrasesLangViewController: NSViewController, LollyProtocol, NSTableViewDat
     }
     
     @IBAction func refreshTableView(_ sender: Any) {
-        vm = PhrasesLangViewModel(settings: AppDelegate.theSettingsViewModel) {
+        vm = PhrasesLangViewModel(settings: AppDelegate.theSettingsViewModel, disposeBag: disposeBag) {
             self.tableView.reloadData()
         }
     }

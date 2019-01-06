@@ -145,6 +145,7 @@ strip_invalid_archs() {
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/CodableAlamofire-iOS/CodableAlamofire.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/CrossroadRegex-iOS/Regex.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/EZSwiftExtensions-iOS/EZSwiftExtensions.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RxAlamofire-iOS/RxAlamofire.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RxSwift-iOS/RxSwift.framework"
@@ -152,6 +153,7 @@ fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/CodableAlamofire-iOS/CodableAlamofire.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/CrossroadRegex-iOS/Regex.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/EZSwiftExtensions-iOS/EZSwiftExtensions.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RxAlamofire-iOS/RxAlamofire.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RxSwift-iOS/RxSwift.framework"

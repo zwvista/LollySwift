@@ -61,7 +61,6 @@
 		954D8B89214389D700651A80 /* WordsLangViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C316573207676CF0015C247 /* WordsLangViewModel.swift */; };
 		954D8B8A214389D700651A80 /* WordsTextbookViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C316574207676CF0015C247 /* WordsTextbookViewModel.swift */; };
 		954D8B8B214389D700651A80 /* WordsUnitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C316577207676CF0015C247 /* WordsUnitViewModel.swift */; };
-		954D8B8C214389DB00651A80 /* HtmlApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C31657A207676CF0015C247 /* HtmlApi.swift */; };
 		954D8B8D214389DB00651A80 /* RestApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C316579207676CF0015C247 /* RestApi.swift */; };
 		954D8B8E214389DB00651A80 /* RxCodableAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0748E6209ED0DA0006BD1B /* RxCodableAlamofire.swift */; };
 		954D8B8F214389DE00651A80 /* MDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C31657C207676CF0015C247 /* MDictionary.swift */; };
@@ -74,6 +73,8 @@
 		954D8B96214389DE00651A80 /* MUnitWord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C31657D207676CF0015C247 /* MUnitWord.swift */; };
 		954D8B97214389DE00651A80 /* MUserSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C316580207676CF0015C247 /* MUserSetting.swift */; };
 		95DB142621CDEB0700FBAF9A /* BlogViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DB142521CDEB0700FBAF9A /* BlogViewModel.swift */; };
+		95E43F2D21E1D574001E650C /* NoteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E43F2C21E1D574001E650C /* NoteViewModel.swift */; };
+		95E43F2E21E1E866001E650C /* HtmlApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C31657A207676CF0015C247 /* HtmlApi.swift */; };
 		95EFF481218419E10094EE3C /* MAutoCorrect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EFF480218419E00094EE3C /* MAutoCorrect.swift */; };
 		95EFF48221841BA40094EE3C /* MAutoCorrect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EFF480218419E00094EE3C /* MAutoCorrect.swift */; };
 /* End PBXBuildFile section */
@@ -155,6 +156,7 @@
 		953473F01A0D16CF00FF2D56 /* LollySwiftiOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LollySwiftiOSTests.swift; sourceTree = "<group>"; };
 		954B8705218DC007007DC348 /* DictWebViewStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictWebViewStatus.swift; sourceTree = "<group>"; };
 		95DB142521CDEB0700FBAF9A /* BlogViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlogViewModel.swift; sourceTree = "<group>"; };
+		95E43F2C21E1D574001E650C /* NoteViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteViewModel.swift; sourceTree = "<group>"; };
 		95EFF480218419E00094EE3C /* MAutoCorrect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MAutoCorrect.swift; sourceTree = "<group>"; };
 		A2462FE0278FE5DE7FF9A4E2 /* Pods_LollySwiftiOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LollySwiftiOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA5376BDE309080131C3F3FD /* Pods_LollySwiftiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LollySwiftiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -208,6 +210,7 @@
 			isa = PBXGroup;
 			children = (
 				95DB142521CDEB0700FBAF9A /* BlogViewModel.swift */,
+				95E43F2C21E1D574001E650C /* NoteViewModel.swift */,
 				8C316575207676CF0015C247 /* PhrasesLangViewModel.swift */,
 				8C316576207676CF0015C247 /* PhrasesUnitViewModel.swift */,
 				8C9471A42081B02F00D040E0 /* SearchViewModel.swift */,
@@ -493,6 +496,7 @@
 				"${SRCROOT}/../Pods/Target Support Files/Pods-LollySwiftiOSTests/Pods-LollySwiftiOSTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/CodableAlamofire-iOS/CodableAlamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/CrossroadRegex-iOS/Regex.framework",
 				"${BUILT_PRODUCTS_DIR}/EZSwiftExtensions-iOS/EZSwiftExtensions.framework",
 				"${BUILT_PRODUCTS_DIR}/RxAlamofire-iOS/RxAlamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift-iOS/RxSwift.framework",
@@ -501,6 +505,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CodableAlamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Regex.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EZSwiftExtensions.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAlamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
@@ -581,6 +586,7 @@
 				8CB025942096CB3E0087462E /* RootViewController.swift in Sources */,
 				8C42B5B51D69A1D900DCB528 /* WordsUnitViewController.swift in Sources */,
 				8C9C6A442053F9F700F299C8 /* UIView+ActivityIndicator.swift in Sources */,
+				95E43F2D21E1D574001E650C /* NoteViewModel.swift in Sources */,
 				8C42B5BC1D69A21E00DCB528 /* PhrasesUnitViewController.swift in Sources */,
 				8C9471A52081B02F00D040E0 /* SearchViewModel.swift in Sources */,
 				8C31658F207676CF0015C247 /* MUnitWord.swift in Sources */,
@@ -615,6 +621,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95E43F2E21E1E866001E650C /* HtmlApi.swift in Sources */,
 				954D8B8D214389DB00651A80 /* RestApi.swift in Sources */,
 				954D8B89214389D700651A80 /* WordsLangViewModel.swift in Sources */,
 				954D8B88214389D700651A80 /* SettingsViewModel.swift in Sources */,
@@ -631,7 +638,6 @@
 				954D8B85214389D700651A80 /* PhrasesLangViewModel.swift in Sources */,
 				954D8B87214389D700651A80 /* SearchViewModel.swift in Sources */,
 				954D8B8E214389DB00651A80 /* RxCodableAlamofire.swift in Sources */,
-				954D8B8C214389DB00651A80 /* HtmlApi.swift in Sources */,
 				954D8B8B214389D700651A80 /* WordsUnitViewModel.swift in Sources */,
 				954D8B86214389D700651A80 /* PhrasesUnitViewModel.swift in Sources */,
 				95EFF48221841BA40094EE3C /* MAutoCorrect.swift in Sources */,
@@ -771,16 +777,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				"FRAMEWORK_SEARCH_PATHS[arch=*]" = (
-					"$(inherited)",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/AKSideMenu\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire-iOS\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/DropDown\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/EZSwiftExtensions-iOS\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/RxAlamofire-iOS\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/RxCocoa-iOS\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/RxSwift-iOS\"",
-				);
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "$(inherited) \"${PODS_CONFIGURATION_BUILD_DIR}/AKSideMenu\" \"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire-iOS\" \"${PODS_CONFIGURATION_BUILD_DIR}/DropDown\" \"${PODS_CONFIGURATION_BUILD_DIR}/EZSwiftExtensions-iOS\" \"${PODS_CONFIGURATION_BUILD_DIR}/RxAlamofire-iOS\" \"${PODS_CONFIGURATION_BUILD_DIR}/RxCocoa-iOS\" \"${PODS_CONFIGURATION_BUILD_DIR}/RxSwift-iOS\"";
 				HEADER_SEARCH_PATHS = ../Pods;
 				INFOPLIST_FILE = LollySwiftiOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -800,13 +797,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				"FRAMEWORK_SEARCH_PATHS[arch=*]" = (
-					"$(inherited)",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/ActionSheetPicker-3.0\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire-iOS\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/AlamofireObjectMapper-iOS\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/ObjectMapper-iOS\"",
-				);
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "$(inherited) \"${PODS_CONFIGURATION_BUILD_DIR}/ActionSheetPicker-3.0\" \"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire-iOS\" \"${PODS_CONFIGURATION_BUILD_DIR}/AlamofireObjectMapper-iOS\" \"${PODS_CONFIGURATION_BUILD_DIR}/ObjectMapper-iOS\"";
 				HEADER_SEARCH_PATHS = ../Pods;
 				INFOPLIST_FILE = LollySwiftiOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;

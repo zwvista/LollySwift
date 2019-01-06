@@ -22,7 +22,7 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.showBlurLoader()
-        vm = WordsUnitViewModel(settings: vmSettings) {
+        vm = WordsUnitViewModel(settings: vmSettings, disposeBag: disposeBag) {
             self.setupSearchController(delegate: self)
             self.tableView.reloadData()
             self.view.removeBlurLoader()
@@ -146,22 +146,14 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
         alertController.addAction(addAction)
         
         func startTimer(ifEmpty: Bool) {
-            var subscription: Disposable?
-            vm.getNotes(ifEmpty: ifEmpty) {
-                let scheduler = SerialDispatchQueueScheduler(qos: .default)
-                subscription = Observable<Int>.interval(Double($0) / 1000.0, scheduler: scheduler)
-                    .subscribe { [unowned self] in
-                        self.vm.getNextNote(rowComplete: { _ in }, allComplete: {
-                            subscription?.dispose()
-                            // https://stackoverflow.com/questions/28302019/getting-a-this-application-is-modifying-the-autolayout-engine-from-a-background
-                            DispatchQueue.main.async {
-                                self.view.removeBlurLoader()
-                                self.tableView.reloadData()
-                            }
-                        })
-                    }
-                self.view.showBlurLoader()
-            }
+            self.view.showBlurLoader()
+            vm.getNotes(ifEmpty: ifEmpty, rowComplete: { _ in }, allComplete: {
+                // https://stackoverflow.com/questions/28302019/getting-a-this-application-is-modifying-the-autolayout-engine-from-a-background
+                DispatchQueue.main.async {
+                    self.view.removeBlurLoader()
+                    self.tableView.reloadData()
+                }
+            })
         }
 
         if vm.mDictNote != nil {

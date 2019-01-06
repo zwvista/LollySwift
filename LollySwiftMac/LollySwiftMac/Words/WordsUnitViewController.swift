@@ -207,7 +207,7 @@ class WordsUnitViewController: WordsViewController, NSTableViewDataSource, NSTab
     }
     
     @IBAction func refreshTableView(_ sender: Any) {
-        vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel) {
+        vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel, disposeBag: disposeBag) {
             self.tableView.reloadData()
         }
     }
@@ -252,21 +252,13 @@ class WordsUnitViewController: WordsViewController, NSTableViewDataSource, NSTab
         alert.addButton(withTitle: "Cancel")
         let res = alert.runModal()
         if res != .alertThirdButtonReturn {
-            var subscription: Disposable?
-            vm.getNotes(ifEmpty: res == .alertFirstButtonReturn) {
-                let scheduler = SerialDispatchQueueScheduler(qos: .default)
-                subscription = Observable<Int>.interval(Double($0) / 1000.0, scheduler: scheduler)
-                    .subscribe { _ in
-                        self.vm.getNextNote(rowComplete: {
-                            self.tableView.reloadData(forRowIndexes: [$0], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count))
-                        }, allComplete: {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                subscription?.dispose()
-                                // self.tableView.reloadData()
-                            }
-                        })
-                    }
-            }
+            vm.getNotes(ifEmpty: res == .alertFirstButtonReturn, rowComplete: {
+                self.tableView.reloadData(forRowIndexes: [$0], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count))
+            }, allComplete: {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    // self.tableView.reloadData()
+                }
+            })
         }
     }
     

@@ -14,11 +14,11 @@ class PhrasesUnitViewModel: NSObject {
     var vmSettings: SettingsViewModel
     var arrPhrases = [MUnitPhrase]()
     var arrPhrasesFiltered: [MUnitPhrase]?
-    
-    let disposeBag = DisposeBag()
+    let disposeBag: DisposeBag!
 
-    public init(settings: SettingsViewModel, complete: @escaping () -> ()) {
+    public init(settings: SettingsViewModel, disposeBag: DisposeBag, complete: @escaping () -> ()) {
         self.vmSettings = settings
+        self.disposeBag = disposeBag
         super.init()
         MUnitPhrase.getDataByTextbook(vmSettings.USTEXTBOOKID, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO).subscribe(onNext: {
             self.arrPhrases = $0
