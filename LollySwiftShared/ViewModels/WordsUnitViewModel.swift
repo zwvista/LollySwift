@@ -20,7 +20,7 @@ class WordsUnitViewModel: NSObject {
     }
     let disposeBag: DisposeBag!
 
-    public init(settings: SettingsViewModel, disposeBag: DisposeBag, complete: @escaping () -> ()) {
+    init(settings: SettingsViewModel, disposeBag: DisposeBag, complete: @escaping () -> ()) {
         self.vmSettings = settings
         self.disposeBag = disposeBag
         vmNote = NoteViewModel(settings: settings, disposeBag: disposeBag)

@@ -8,20 +8,26 @@
 
 import Cocoa
 import WebKit
+import RxSwift
 
-class BlogViewController: NSViewController {
+class BlogViewController: NSViewController  {
 
+    var vm: SettingsViewModel {
+        return AppDelegate.theSettingsViewModel
+    }
     @IBOutlet weak var tvMarked: NSTextView!
     @IBOutlet weak var tvHtml: NSTextView!
     @IBOutlet weak var wvBlog: WKWebView!
     
-    var vmBlog = BlogViewModel()
     var patternNo = ""
     var patternText = ""
-    
+    var vmBlog: BlogViewModel!
+
+    let disposeBag = DisposeBag()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do view setup here.
+        vmBlog = BlogViewModel(settings: vm, disposeBag: disposeBag)
     }
 
     @IBAction func markedToHtml(_ sender: Any) {
@@ -71,6 +77,9 @@ class BlogViewController: NSViewController {
         MacApi.copyText(text)
     }
     @IBAction func addNotes(_ sender: Any) {
+        vmBlog.addNotes(text: tvMarked.string) {
+            self.tvMarked.string = $0
+        }
     }
 }
 

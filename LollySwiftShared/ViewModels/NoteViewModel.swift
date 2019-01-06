@@ -27,7 +27,7 @@ class NoteViewModel {
         let url = mDictNote.urlString(word: word, arrAutoCorrect: vmSettings.arrAutoCorrect)
         return RestApi.getHtml(url: url).map { html in
             print(html)
-            return HtmlApi.extractText(from: html, transform: mDictNote.TRANSFORM!, template: "") { text,_ in return text }
+            return HtmlApi.extractText(from: html, transform: mDictNote.TRANSFORM!, template: "") { text,_ in text }
         }
     }
     
@@ -35,18 +35,20 @@ class NoteViewModel {
         guard let mDictNote = mDictNote else {return}
         let scheduler = SerialDispatchQueueScheduler(qos: .default)
         var i = 0
-        Observable<Int>.interval(Double(mDictNote.WAIT!) / 1000.0, scheduler: scheduler)
+        var subscription: Disposable?
+        subscription = Observable<Int>.interval(Double(mDictNote.WAIT!) / 1000.0, scheduler: scheduler)
             .subscribe {
                 while i < wordCount && !isNoteEmpty(i) {
                     i += 1
                 }
                 if i >= wordCount {
                     allComplete()
+                    subscription?.disposed(by: self.disposeBag)
                 } else {
                     getOne(i)
                     i += 1
                 }
-            }.disposed(by: disposeBag)
+            }
     }
 
 }
