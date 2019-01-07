@@ -47,8 +47,11 @@ class BlogViewController: NSViewController  {
     @IBAction func addTagI(_ sender: Any) {
         return replaceSelection(f: vmBlog.addTagI)
     }
-    @IBAction func removeTags(_ sender: Any) {
-        return replaceSelection(f: vmBlog.removeTags)
+    @IBAction func removeTagBI(_ sender: Any) {
+        return replaceSelection(f: vmBlog.removeTagBI)
+    }
+    @IBAction func exchangeTagBI(_ sender: Any) {
+        return replaceSelection(f: vmBlog.exchangeTagBI)
     }
     @IBAction func addExplanation(_ sender: Any) {
         return replaceSelection { _ in vmBlog.explanation }

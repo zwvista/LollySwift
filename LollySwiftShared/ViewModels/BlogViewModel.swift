@@ -109,8 +109,14 @@ class BlogViewModel: NSObject {
     func addTagI(text: String) -> String {
         return "<I>\(text)</I>"
     }
-    func removeTags(text: String) -> String {
+    func removeTagBI(text: String) -> String {
         return "</?[BI]>".r!.replaceAll(in: text, with: "")
+    }
+    func exchangeTagBI(text: String) -> String {
+        var text = "<(/)?B>".r!.replaceAll(in: text, with: "<$1Temp>")
+        text = "<(/)?I>".r!.replaceAll(in: text, with: "<$1B>")
+        text = "<(/)?Temp>".r!.replaceAll(in: text, with: "<$1I>")
+        return text
     }
     let explanation = "* ：：\n"
     func getHtml(text: String) -> String {
