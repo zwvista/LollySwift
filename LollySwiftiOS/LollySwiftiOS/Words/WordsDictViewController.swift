@@ -19,7 +19,7 @@ class WordsDictViewController: UIViewController, WKNavigationDelegate {
     weak var wvDict: WKWebView!
     
     let vm = SearchViewModel(settings: vmSettings) {}
-    let ddWord = DropDown(), ddDictWord = DropDown()
+    let ddWord = DropDown(), ddDictPicker = DropDown()
     
     let disposeBag = DisposeBag()
     var status = DictWebViewStatus.ready
@@ -37,10 +37,10 @@ class WordsDictViewController: UIViewController, WKNavigationDelegate {
             self.selectedWordChanged()
         }
         
-        ddDictWord.anchorView = btnDict
-        ddDictWord.dataSource = vm.vmSettings.arrDictsWord.map { $0.DICTNAME! }
-        ddDictWord.selectRow(vm.vmSettings.selectedDictPickerIndex)
-        ddDictWord.selectionAction = { (index: Int, item: String) in
+        ddDictPicker.anchorView = btnDict
+        ddDictPicker.dataSource = vm.vmSettings.arrDictsPicker.map { $0.DICTNAME }
+        ddDictPicker.selectRow(vm.vmSettings.selectedDictPickerIndex)
+        ddDictPicker.selectionAction = { (index: Int, item: String) in
             self.vm.vmSettings.selectedDictPickerIndex = index
             self.vm.vmSettings.updateDictWord().subscribe {
                 self.selectDictChanged()
@@ -59,39 +59,46 @@ class WordsDictViewController: UIViewController, WKNavigationDelegate {
     private func selectDictChanged() {
         let item = vmSettings.selectedDictPicker
         btnDict.setTitle(item.DICTNAME, for: .normal)
-        let url = item.urlString(word: vm.selectedWord, arrAutoCorrect: vmSettings.arrAutoCorrect)
-        if item.DICTTYPENAME == "OFFLINE" {
-            wvDict.load(URLRequest(url: URL(string: "about:blank")!))
-            RestApi.getHtml(url: url).subscribe(onNext: { html in
-                print(html)
-                let str = item.htmlString(html, word: self.vm.selectedWord, useTemplate2: true)
-                self.wvDict.loadHTMLString(str, baseURL: nil)
-            }).disposed(by: disposeBag)
+        if item.DICTNAME.starts(with: "Custom") {
+            let str = vmSettings.dictHtml(word: vm.selectedWord, dictids: item.dictids())
+            wvDict.loadHTMLString(str, baseURL: nil)
         } else {
-            wvDict.load(URLRequest(url: URL(string: url)!))
-            if item.DICTTYPENAME == "OFFLINE-ONLINE" {
-                status = .navigating
+            let item2 = vmSettings.arrDictsWord.first { $0.DICTNAME == item.DICTNAME }!
+            let url = item2.urlString(word: vm.selectedWord, arrAutoCorrect: vmSettings.arrAutoCorrect)
+            if item2.DICTTYPENAME == "OFFLINE" {
+                wvDict.load(URLRequest(url: URL(string: "about:blank")!))
+                RestApi.getHtml(url: url).subscribe(onNext: { html in
+                    print(html)
+                    let str = item2.htmlString(html, word: self.vm.selectedWord, useTemplate2: true)
+                    self.wvDict.loadHTMLString(str, baseURL: nil)
+                }).disposed(by: disposeBag)
+            } else {
+                wvDict.load(URLRequest(url: URL(string: url)!))
+                if item2.DICTTYPENAME == "OFFLINE-ONLINE" {
+                    status = .navigating
+                }
             }
         }
     }
-    
     
     @IBAction func showWordDropDown(_ sender: AnyObject) {
         ddWord.show()
     }
     
     @IBAction func showDictDropDown(_ sender: AnyObject) {
-        ddDictWord.show()
+        ddDictPicker.show()
     }
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+//        guard webView.stringByEvaluatingJavaScript(from: "document.readyState") == "complete" && status == .navigating else {return}
         guard status == .navigating else {return}
         let item = vmSettings.selectedDictPicker
+        let item2 = vmSettings.arrDictsWord.first { $0.DICTNAME == item.DICTNAME }!
         // https://stackoverflow.com/questions/34751860/get-html-from-wkwebview-in-swift
         webView.evaluateJavaScript("document.documentElement.outerHTML.toString()") { (html: Any?, error: Error?) in
             let html = html as! String
             print(html)
-            let str = item.htmlString(html, word: self.vm.selectedWord, useTemplate2: true)
+            let str = item2.htmlString(html, word: self.vm.selectedWord, useTemplate2: true)
             self.wvDict.loadHTMLString(str, baseURL: nil)
             self.status = .ready
         }

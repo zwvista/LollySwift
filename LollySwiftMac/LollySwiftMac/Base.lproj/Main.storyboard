@@ -1058,12 +1058,12 @@
                             </textField>
                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Bo4-yz-Ptk">
                                 <rect key="frame" x="133" y="172" width="223" height="25"/>
-                                <popUpButtonCell key="cell" type="push" title="Dict Word Popup" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="pp6-jV-8Y6" id="B3v-ro-gsw" userLabel="Dict Word Popup">
+                                <popUpButtonCell key="cell" type="push" title="Dict Picker Popup" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="pp6-jV-8Y6" id="B3v-ro-gsw" userLabel="Dict Picker Popup">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="menu"/>
                                     <menu key="menu" title="OtherViews" id="BCz-wO-xnR">
                                         <items>
-                                            <menuItem title="Dict Word Popup" state="on" id="pp6-jV-8Y6" userLabel="Dict Word Popup"/>
+                                            <menuItem title="Dict Picker Popup" state="on" id="pp6-jV-8Y6" userLabel="Dict Picker Popup"/>
                                             <menuItem title="Item 2" id="YJC-0b-MLZ"/>
                                             <menuItem title="Item 3" id="f84-K6-8SR"/>
                                         </items>
@@ -1102,7 +1102,7 @@
                                     </menu>
                                 </popUpButtonCell>
                                 <connections>
-                                    <action selector="dictWordSelected:" target="HfO-r7-QMx" id="eXI-f7-Ulc"/>
+                                    <action selector="dictNoteSelected:" target="HfO-r7-QMx" id="Rps-re-Ciz"/>
                                     <binding destination="Jpc-QG-itq" name="content" keyPath="arrangedObjects" id="ZsM-lD-aWr"/>
                                     <binding destination="Jpc-QG-itq" name="contentValues" keyPath="arrangedObjects.DICTNAME" previousBinding="ZsM-lD-aWr" id="By1-zi-iAT"/>
                                     <binding destination="HfO-r7-QMx" name="selectedIndex" keyPath="vm.selectedDictNoteIndex" previousBinding="By1-zi-iAT" id="bDo-aF-pze"/>
@@ -1327,7 +1327,7 @@
                         <outlet property="acUnits" destination="7EM-l7-CJV" id="fz0-dS-1CJ"/>
                         <outlet property="btnUnitPartTo" destination="zEX-94-Fpv" id="yKi-qc-X1n"/>
                         <outlet property="pubDictsNote" destination="1oq-rW-MUb" id="X7g-Ef-zSj"/>
-                        <outlet property="pubDictsWord" destination="Bo4-yz-Ptk" id="N50-BQ-j4Q"/>
+                        <outlet property="pubDictsPicker" destination="Bo4-yz-Ptk" id="N50-BQ-j4Q"/>
                         <outlet property="pubLanguages" destination="Yra-vx-iUa" id="FyI-6e-Ins"/>
                         <outlet property="pubPartFrom" destination="PW2-rx-UfY" id="I3r-sr-VCj"/>
                         <outlet property="pubPartTo" destination="Xjt-G8-0bL" id="ZfJ-gt-8PI"/>
@@ -1340,7 +1340,7 @@
                 </viewController>
                 <customObject id="OC9-Mn-GX9" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <arrayController id="Jlp-Py-Ji5" userLabel="Languages Controller"/>
-                <arrayController id="EkI-9N-SJp" userLabel="DictsWord Controller"/>
+                <arrayController id="EkI-9N-SJp" userLabel="DictsPicker Controller"/>
                 <arrayController id="Jpc-QG-itq" userLabel="DictsNote Controller"/>
                 <arrayController id="PzR-zm-jg5" userLabel="Textbooks Controller"/>
                 <arrayController id="7EM-l7-CJV" userLabel="Units Controller"/>

@@ -93,7 +93,7 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="Dictionary(Word):" id="eJT-JA-tAS">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="iwf-56-ICv" detailTextLabel="IO0-9s-jaX" style="IBUITableViewCellStyleSubtitle" id="Fwx-mp-CFd">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="iwf-56-ICv" detailTextLabel="IO0-9s-jaX" style="IBUITableViewCellStyleSubtitle" id="Fwx-mp-CFd" userLabel="Dict Picker Cell">
                                         <rect key="frame" x="0.0" y="100" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Fwx-mp-CFd" id="QBF-at-pxM">
@@ -327,7 +327,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="dictNoteCell" destination="NQn-Gn-Eyq" id="6j7-M9-6XU"/>
-                        <outlet property="dictWordCell" destination="Fwx-mp-CFd" id="fka-5S-txs"/>
+                        <outlet property="dictPickerCell" destination="Fwx-mp-CFd" id="fka-5S-txs"/>
                         <outlet property="langCell" destination="O2T-aL-iGS" id="tdb-qa-jR3"/>
                         <outlet property="lblPartFrom" destination="FeT-5f-mQ9" id="ir3-fT-FH2"/>
                         <outlet property="lblPartTo" destination="JRs-ig-blb" id="DRY-ZG-Yd8"/>

@@ -24,7 +24,7 @@ class SettingsViewController: NSViewController {
     @IBOutlet weak var tfUnitsInAllFrom: NSTextField!
     @IBOutlet weak var tfUnitsInAllTo: NSTextField!
     @IBOutlet weak var pubLanguages: NSPopUpButton!
-    @IBOutlet weak var pubDictsWord: NSPopUpButton!
+    @IBOutlet weak var pubDictsPicker: NSPopUpButton!
     @IBOutlet weak var pubDictsNote: NSPopUpButton!
     @IBOutlet weak var pubTextbooks: NSPopUpButton!
     @IBOutlet weak var pubUnitFrom: NSPopUpButton!
@@ -62,7 +62,7 @@ class SettingsViewController: NSViewController {
     }
     
     @IBAction func dictWordSelected(_ sender: AnyObject) {
-        vm.selectedDictPickerIndex = pubDictsWord.indexOfSelectedItem
+        vm.selectedDictPickerIndex = pubDictsPicker.indexOfSelectedItem
         vm.updateDictWord().subscribe {
             self.updateDictWord()
         }.disposed(by: disposeBag)

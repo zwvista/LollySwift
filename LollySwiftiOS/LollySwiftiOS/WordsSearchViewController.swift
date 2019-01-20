@@ -8,14 +8,16 @@
 
 import UIKit
 import WebKit
+import RxSwift
 
-class WordsSearchViewController: UIViewController, UIWebViewDelegate, UISearchBarDelegate {
+class WordsSearchViewController: UIViewController, WKNavigationDelegate, UISearchBarDelegate {
     @IBOutlet weak var wvDictHolder: UIView!
     weak var wvDict: WKWebView!
 
     @IBOutlet weak var sbword: UISearchBar!
     
     var word = ""
+    let disposeBag = DisposeBag()
     var status = DictWebViewStatus.ready
 
     override func viewDidLoad() {
@@ -25,13 +27,28 @@ class WordsSearchViewController: UIViewController, UIWebViewDelegate, UISearchBa
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        word = sbword.text!;
-        let item = vmSettings.selectedDictPicker
-        let url = item.urlString(word: word, arrAutoCorrect: vmSettings.arrAutoCorrect)
-        wvDict.load(URLRequest(url: URL(string: url)!))
+        word = sbword.text!
         sbword.resignFirstResponder()
-        if item.DICTTYPENAME == "OFFLINE-ONLINE" {
-            status = .navigating
+        let item = vmSettings.selectedDictPicker
+        if item.DICTNAME.starts(with: "Custom") {
+            let str = vmSettings.dictHtml(word: word, dictids: item.dictids())
+            wvDict.loadHTMLString(str, baseURL: nil)
+        } else {
+            let item2 = vmSettings.arrDictsWord.first { $0.DICTNAME == item.DICTNAME }!
+            let url = item2.urlString(word: word, arrAutoCorrect: vmSettings.arrAutoCorrect)
+            if item2.DICTTYPENAME == "OFFLINE" {
+                wvDict.load(URLRequest(url: URL(string: "about:blank")!))
+                RestApi.getHtml(url: url).subscribe(onNext: { html in
+                    print(html)
+                    let str = item2.htmlString(html, word: self.word, useTemplate2: true)
+                    self.wvDict.loadHTMLString(str, baseURL: nil)
+                }).disposed(by: disposeBag)
+            } else {
+                wvDict.load(URLRequest(url: URL(string: url)!))
+                if item2.DICTTYPENAME == "OFFLINE-ONLINE" {
+                    status = .navigating
+                }
+            }
         }
     }
     
@@ -39,19 +56,21 @@ class WordsSearchViewController: UIViewController, UIWebViewDelegate, UISearchBa
         return .top
     }
 
-    func webViewDidFinishLoad(_ webView: UIWebView) {
-        guard webView.stringByEvaluatingJavaScript(from: "document.readyState") == "complete" && status == .navigating else {return}
-        
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        //        guard webView.stringByEvaluatingJavaScript(from: "document.readyState") == "complete" && status == .navigating else {return}
+        guard status == .navigating else {return}
         let item = vmSettings.selectedDictPicker
-        
-        let data = URLCache.shared.cachedResponse(for: webView.request!)!.data;
-        let html = NSString(data: data, encoding: String.Encoding.utf8.rawValue)!
-        let str = item.htmlString(html as String, word: word, useTemplate2: true)
-        
-        wvDict.loadHTMLString(str, baseURL: URL(string: "/Users/bestskip/Documents/zw/"));
-        status = .ready
+        let item2 = vmSettings.arrDictsWord.first { $0.DICTNAME == item.DICTNAME }!
+        // https://stackoverflow.com/questions/34751860/get-html-from-wkwebview-in-swift
+        webView.evaluateJavaScript("document.documentElement.outerHTML.toString()") { (html: Any?, error: Error?) in
+            let html = html as! String
+            print(html)
+            let str = item2.htmlString(html, word: self.word, useTemplate2: true)
+            self.wvDict.loadHTMLString(str, baseURL: nil)
+            self.status = .ready
+        }
     }
-    
+
     deinit {
         print("DEBUG: \(self.className) deinit")
     }

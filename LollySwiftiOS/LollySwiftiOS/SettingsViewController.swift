@@ -12,7 +12,7 @@ import RxSwift
 
 class SettingsViewController: UITableViewController {
     @IBOutlet weak var langCell: UITableViewCell!
-    @IBOutlet weak var dictWordCell: UITableViewCell!
+    @IBOutlet weak var dictPickerCell: UITableViewCell!
     @IBOutlet weak var dictNoteCell: UITableViewCell!
     @IBOutlet weak var textbookCell: UITableViewCell!
     @IBOutlet weak var unitFromCell: UITableViewCell!
@@ -28,7 +28,7 @@ class SettingsViewController: UITableViewController {
     @IBOutlet weak var lblPartToTitle: UILabel!
     
     let ddLang = DropDown()
-    let ddDictWord = DropDown()
+    let ddDictPicker = DropDown()
     let ddDictNote = DropDown()
     let ddTextbook = DropDown()
     let ddUnitFrom = DropDown()
@@ -60,8 +60,8 @@ class SettingsViewController: UITableViewController {
             }.disposed(by: self.disposeBag)
         }
 
-        ddDictWord.anchorView = dictWordCell
-        ddDictWord.selectionAction = { [unowned self] (index: Int, item: String) in
+        ddDictPicker.anchorView = dictPickerCell
+        ddDictPicker.selectionAction = { [unowned self] (index: Int, item: String) in
             guard index != self.vm.selectedDictPickerIndex else {return}
             self.vm.selectedDictPickerIndex = index
             self.vm.updateDictWord().subscribe {
@@ -133,7 +133,7 @@ class SettingsViewController: UITableViewController {
         case 0:
             ddLang.show()
         case 1:
-            ddDictWord.show()
+            ddDictPicker.show()
         case 2:
             ddDictNote.show()
         case 3:
@@ -164,10 +164,11 @@ class SettingsViewController: UITableViewController {
     
     func updateDictWord() {
         let item = vm.selectedDictPicker
-        dictWordCell.textLabel!.text = item.DICTNAME
-        dictWordCell.detailTextLabel!.text = item.URL
-        ddDictWord.dataSource = vm.arrDictsWord.map { $0.DICTNAME! }
-        ddDictWord.selectRow(vm.selectedDictPickerIndex)
+        dictPickerCell.textLabel!.text = item.DICTNAME
+        let item2 = vmSettings.arrDictsWord.first { $0.DICTNAME == item.DICTNAME }
+        dictPickerCell.detailTextLabel!.text = item2?.URL ?? ""
+        ddDictPicker.dataSource = vm.arrDictsPicker.map { $0.DICTNAME }
+        ddDictPicker.selectRow(vm.selectedDictPickerIndex)
     }
     
     func updateDictNote() {
