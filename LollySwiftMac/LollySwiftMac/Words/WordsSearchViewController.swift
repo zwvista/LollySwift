@@ -10,17 +10,9 @@ import Cocoa
 import WebKit
 import RxSwift
 
-class WordsSearchViewController: WordsViewController, NSTableViewDataSource, NSTableViewDelegate, NSSearchFieldDelegate, WKNavigationDelegate {
+class WordsSearchViewController: WordsViewController {
     
-    @IBOutlet weak var wvDict: WKWebView!
-    @IBOutlet weak var sfWord: NSSearchField!
-    @IBOutlet weak var tableView: NSTableView!
-    
-    @objc var newWord = ""
-    var status = DictWebViewStatus.ready
     var arrWords = [MUnitWord]()
-    
-    let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,31 +51,6 @@ class WordsSearchViewController: WordsViewController, NSTableViewDataSource, NST
             if item.DICTTYPENAME == "OFFLINE-ONLINE" {
                 status = .navigating
             }
-        }
-    }
-    
-    func controlTextDidEndEditing(_ obj: Notification) {
-        let searchfield = obj.object as! NSControl
-        if searchfield !== sfWord {return}
-        
-        let dict = (obj as NSNotification).userInfo!
-        let reason = dict["NSTextMovement"] as! NSNumber
-        let code = Int(reason.int32Value)
-        if code == NSReturnTextMovement {
-            searchDict(self)
-        }
-    }
-    
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        guard status == .navigating else {return}
-        let item = vmSettings.selectedDictPicker
-        // https://stackoverflow.com/questions/34751860/get-html-from-wkwebview-in-swift
-        webView.evaluateJavaScript("document.documentElement.outerHTML.toString()") { (html: Any?, error: Error?) in
-//            let html = html as! String
-////            print(html)
-//            let str = item.htmlString(html, word: self.newWord)
-//            self.wvDict.loadHTMLString(str, baseURL: nil)
-//            self.status = .ready
         }
     }
     

@@ -10,16 +10,7 @@ import Cocoa
 import WebKit
 import RxSwift
 
-class WordsUnitViewController: WordsViewController, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate, WKNavigationDelegate {
-    
-    @IBOutlet weak var wvDict: WKWebView!
-    @IBOutlet weak var tfNewWord: NSTextField!
-    @IBOutlet weak var tableView: NSTableView!
-    
-    var timer = Timer()
-    @objc var newWord = ""
-    var selectedWord = ""
-    var status = DictWebViewStatus.ready
+class WordsUnitViewController: WordsViewController {
 
     var vm: WordsUnitViewModel!
     var arrWords: [MUnitWord] {
@@ -29,13 +20,11 @@ class WordsUnitViewController: WordsViewController, NSTableViewDataSource, NSTab
     // https://developer.apple.com/videos/play/wwdc2011/120/
     // https://stackoverflow.com/questions/2121907/drag-drop-reorder-rows-on-nstableview
     let tableRowDragType = NSPasteboard.PasteboardType(rawValue: "private.table-row")
-    
-    let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.registerForDraggedTypes([tableRowDragType])
+        self.tableView.registerForDraggedTypes([tableRowDragType])
         refreshTableView(self)
     }
 
@@ -117,25 +106,6 @@ class WordsUnitViewController: WordsViewController, NSTableViewDataSource, NSTab
         WordsUnitViewModel.update(item: item).subscribe().disposed(by: disposeBag)
     }
     
-    func searchWord(word: String) {
-        selectedWord = word
-        let item = vmSettings.arrDictsWord[selectedDictPickerIndex]
-        let url = item.urlString(word: word, arrAutoCorrect: vmSettings.arrAutoCorrect)
-        if item.DICTTYPENAME == "OFFLINE" {
-            wvDict.load(URLRequest(url: URL(string: "about:blank")!))
-            RestApi.getHtml(url: url).subscribe(onNext: { html in
-                print(html)
-                let str = item.htmlString(html, word: self.newWord)
-                self.wvDict.loadHTMLString(str, baseURL: nil)
-            }).disposed(by: disposeBag)
-        } else {
-            wvDict.load(URLRequest(url: URL(string: url)!))
-            if item.DICTTYPENAME == "OFFLINE-ONLINE" {
-                status = .navigating
-            }
-        }
-    }
-    
     @IBAction func searchWordInTableView(_ sender: Any) {
         if sender is NSToolbarItem {
             let tbItem = sender as! NSToolbarItem
@@ -163,35 +133,8 @@ class WordsUnitViewController: WordsViewController, NSTableViewDataSource, NSTab
         }).disposed(by: disposeBag)
     }
     
-    @IBAction func searchNewWord(_ sender: AnyObject) {
-        commitEditing()
-        guard !newWord.isEmpty else {return}
-        searchWord(word: newWord)
-    }
-
-    func controlTextDidEndEditing(_ obj: Notification) {
-        let searchfield = obj.object as! NSControl
-        guard searchfield === tfNewWord else {return}
-        let dict = (obj as NSNotification).userInfo!
-        let reason = dict["NSTextMovement"] as! NSNumber
-        let code = Int(reason.int32Value)
-        guard code == NSReturnTextMovement else {return}
+    override func addNewWord() {
         addNewWord(self)
-    }
-    
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        self.view.window?.makeKeyAndOrderFront(self)
-        tableView.becomeFirstResponder()
-        guard status == .navigating else {return}
-        let item = vmSettings.selectedDictPicker
-        // https://stackoverflow.com/questions/34751860/get-html-from-wkwebview-in-swift
-        webView.evaluateJavaScript("document.documentElement.outerHTML.toString()") { (html: Any?, error: Error?) in
-//            let html = html as! String
-//            print(html)
-//            let str = item.htmlString(html, word: self.selectedWord)
-//            self.wvDict.loadHTMLString(str, baseURL: nil)
-//            self.status = .ready
-        }
     }
 
     // https://stackoverflow.com/questions/24219441/how-to-use-nstoolbar-in-xcode-6-and-storyboard

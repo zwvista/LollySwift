@@ -7,13 +7,80 @@
 //
 
 import Cocoa
+import WebKit
+import RxSwift
 
-class WordsViewController: NSViewController, LollyProtocol {
+class WordsViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate, WKNavigationDelegate, LollyProtocol {
     var selectedDictPickerIndex = 0
+    
+    @IBOutlet weak var wvDict: WKWebView!
+    @IBOutlet weak var tfNewWord: NSTextField!
+    @IBOutlet weak var tableView: NSTableView!
+    
+    let disposeBag = DisposeBag()
+    
+    @objc var newWord = ""
+    var selectedWord = ""
+    var status = DictWebViewStatus.ready
+
     override func viewDidLoad() {
         super.viewDidLoad()
         settingsChanged()
     }
+    
+    func controlTextDidEndEditing(_ obj: Notification) {
+        let searchfield = obj.object as! NSControl
+        guard searchfield === tfNewWord else {return}
+        let dict = (obj as NSNotification).userInfo!
+        let reason = dict["NSTextMovement"] as! NSNumber
+        let code = Int(reason.int32Value)
+        guard code == NSReturnTextMovement else {return}
+        addNewWord()
+    }
+    
+    @IBAction func searchNewWord(_ sender: AnyObject) {
+        commitEditing()
+        guard !newWord.isEmpty else {return}
+        searchWord(word: newWord)
+    }
+    
+    func searchWord(word: String) {
+        selectedWord = word
+        let item = vmSettings.arrDictsWord[selectedDictPickerIndex]
+        let url = item.urlString(word: word, arrAutoCorrect: vmSettings.arrAutoCorrect)
+        if item.DICTTYPENAME == "OFFLINE" {
+            wvDict.load(URLRequest(url: URL(string: "about:blank")!))
+            RestApi.getHtml(url: url).subscribe(onNext: { html in
+                print(html)
+                let str = item.htmlString(html, word: self.newWord)
+                self.wvDict.loadHTMLString(str, baseURL: nil)
+            }).disposed(by: disposeBag)
+        } else {
+            wvDict.load(URLRequest(url: URL(string: url)!))
+            if item.DICTTYPENAME == "OFFLINE-ONLINE" {
+                status = .navigating
+            }
+        }
+    }
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        self.view.window?.makeKeyAndOrderFront(self)
+        tableView.becomeFirstResponder()
+        guard status == .navigating else {return}
+        let item = vmSettings.selectedDictPicker
+        // https://stackoverflow.com/questions/34751860/get-html-from-wkwebview-in-swift
+        webView.evaluateJavaScript("document.documentElement.outerHTML.toString()") { (html: Any?, error: Error?) in
+            //            let html = html as! String
+            //            print(html)
+            //            let str = item.htmlString(html, word: self.selectedWord)
+            //            self.wvDict.loadHTMLString(str, baseURL: nil)
+            //            self.status = .ready
+        }
+    }
+
+    func addNewWord() {
+    }
+
     func settingsChanged() {
         selectedDictPickerIndex = vmSettings.selectedDictPickerIndex
     }

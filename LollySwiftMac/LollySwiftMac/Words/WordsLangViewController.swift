@@ -10,23 +10,12 @@ import Cocoa
 import WebKit
 import RxSwift
 
-class WordsLangViewController: WordsViewController, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate, WKNavigationDelegate {
-    
-    @IBOutlet weak var wvDict: WKWebView!
-    @IBOutlet weak var tfNewWord: NSTextField!
-    @IBOutlet weak var tableView: NSTableView!
-    
-    var timer = Timer()
-    @objc var newWord = ""
-    var selectedWord = ""
-    var status = DictWebViewStatus.ready
+class WordsLangViewController: WordsViewController {
 
     var vm: WordsLangViewModel!
     var arrWords: [MLangWord] {
         return vm.arrWords
     }
-    
-    let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,25 +52,6 @@ class WordsLangViewController: WordsViewController, NSTableViewDataSource, NSTab
         WordsLangViewModel.update(item: item).subscribe().disposed(by: disposeBag)
     }
     
-    func searchWord(word: String) {
-        selectedWord = word
-        let item = vmSettings.arrDictsWord[selectedDictPickerIndex]
-        let url = item.urlString(word: word, arrAutoCorrect: vmSettings.arrAutoCorrect)
-        if item.DICTTYPENAME == "OFFLINE" {
-            wvDict.load(URLRequest(url: URL(string: "about:blank")!))
-            RestApi.getHtml(url: url).subscribe(onNext: { html in
-                print(html)
-                let str = item.htmlString(html, word: self.newWord)
-                self.wvDict.loadHTMLString(str, baseURL: nil)
-            }).disposed(by: disposeBag)
-        } else {
-            wvDict.load(URLRequest(url: URL(string: url)!))
-            if item.DICTTYPENAME == "OFFLINE-ONLINE" {
-                status = .navigating
-            }
-        }
-    }
-    
     @IBAction func searchWordInTableView(_ sender: Any) {
         if sender is NSToolbarItem {
             let tbItem = sender as! NSToolbarItem
@@ -107,37 +77,6 @@ class WordsLangViewController: WordsViewController, NSTableViewDataSource, NSTab
             self.tfNewWord.stringValue = ""
             self.newWord = ""
         }).disposed(by: disposeBag)
-    }
-    
-    @IBAction func searchNewWord(_ sender: AnyObject) {
-        commitEditing()
-        guard !newWord.isEmpty else {return}
-        searchWord(word: newWord)
-    }
-
-    func controlTextDidEndEditing(_ obj: Notification) {
-        let searchfield = obj.object as! NSControl
-        guard searchfield === tfNewWord else {return}
-        let dict = (obj as NSNotification).userInfo!
-        let reason = dict["NSTextMovement"] as! NSNumber
-        let code = Int(reason.int32Value)
-        guard code == NSReturnTextMovement else {return}
-        addNewWord(self)
-    }
-    
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        self.view.window?.makeKeyAndOrderFront(self)
-        tableView.becomeFirstResponder()
-        guard status == .navigating else {return}
-        let item = vmSettings.selectedDictPicker
-        // https://stackoverflow.com/questions/34751860/get-html-from-wkwebview-in-swift
-        webView.evaluateJavaScript("document.documentElement.outerHTML.toString()") { (html: Any?, error: Error?) in
-//            let html = html as! String
-//            print(html)
-//            let str = item.htmlString(html, word: self.selectedWord)
-//            self.wvDict.loadHTMLString(str, baseURL: nil)
-//            self.status = .ready
-        }
     }
 
     // https://stackoverflow.com/questions/24219441/how-to-use-nstoolbar-in-xcode-6-and-storyboard
