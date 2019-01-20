@@ -46,19 +46,25 @@ class WordsViewController: NSViewController, NSTableViewDataSource, NSTableViewD
     
     func searchWord(word: String) {
         selectedWord = word
-        let item = vmSettings.arrDictsWord[selectedDictPickerIndex]
-        let url = item.urlString(word: word, arrAutoCorrect: vmSettings.arrAutoCorrect)
-        if item.DICTTYPENAME == "OFFLINE" {
-            wvDict.load(URLRequest(url: URL(string: "about:blank")!))
-            RestApi.getHtml(url: url).subscribe(onNext: { html in
-                print(html)
-                let str = item.htmlString(html, word: self.newWord)
-                self.wvDict.loadHTMLString(str, baseURL: nil)
-            }).disposed(by: disposeBag)
+        let item = vmSettings.arrDictsPicker[selectedDictPickerIndex]
+        if item.DICTNAME.starts(with: "Custom") {
+            let str = vmSettings.dictHtml(word: word, dictids: item.dictids())
+            wvDict.loadHTMLString(str, baseURL: nil)
         } else {
-            wvDict.load(URLRequest(url: URL(string: url)!))
-            if item.DICTTYPENAME == "OFFLINE-ONLINE" {
-                status = .navigating
+            let item2 = vmSettings.arrDictsWord.first { $0.DICTNAME == item.DICTNAME }!
+            let url = item2.urlString(word: word, arrAutoCorrect: vmSettings.arrAutoCorrect)
+            if item2.DICTTYPENAME == "OFFLINE" {
+                wvDict.load(URLRequest(url: URL(string: "about:blank")!))
+                RestApi.getHtml(url: url).subscribe(onNext: { html in
+                    print(html)
+                    let str = item2.htmlString(html, word: self.newWord)
+                    self.wvDict.loadHTMLString(str, baseURL: nil)
+                }).disposed(by: disposeBag)
+            } else {
+                wvDict.load(URLRequest(url: URL(string: url)!))
+                if item2.DICTTYPENAME == "OFFLINE-ONLINE" {
+                    status = .navigating
+                }
             }
         }
     }
@@ -92,14 +98,15 @@ class WordsViewController: NSViewController, NSTableViewDataSource, NSTableViewD
         self.view.window?.makeKeyAndOrderFront(self)
         tableView.becomeFirstResponder()
         guard status == .navigating else {return}
-        let item = vmSettings.selectedDictPicker
+        let item = vmSettings.arrDictsPicker[selectedDictPickerIndex]
+        let item2 = vmSettings.arrDictsWord.first { $0.DICTNAME == item.DICTNAME }!
         // https://stackoverflow.com/questions/34751860/get-html-from-wkwebview-in-swift
         webView.evaluateJavaScript("document.documentElement.outerHTML.toString()") { (html: Any?, error: Error?) in
-            //            let html = html as! String
-            //            print(html)
-            //            let str = item.htmlString(html, word: self.selectedWord)
-            //            self.wvDict.loadHTMLString(str, baseURL: nil)
-            //            self.status = .ready
+            let html = html as! String
+            print(html)
+            let str = item2.htmlString(html, word: self.selectedWord)
+            self.wvDict.loadHTMLString(str, baseURL: nil)
+            self.status = .ready
         }
     }
     

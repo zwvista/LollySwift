@@ -50,6 +50,7 @@ class MDictWord : MDictionary {
     }
 }
 
+@objcMembers
 class MDictPicker : NSObject {
     var DICTID = ""
     var DICTNAME = ""
@@ -58,6 +59,10 @@ class MDictPicker : NSObject {
         DICTID = id
         DICTNAME = name
         super.init()
+    }
+    
+    func dictids() -> [String] {
+        return DICTID.split(",")
     }
 }
 

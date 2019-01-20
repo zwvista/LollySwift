@@ -16,7 +16,7 @@ class SettingsViewController: NSViewController {
         return AppDelegate.theSettingsViewModel
     }
     @IBOutlet weak var acLanguages: NSArrayController!
-    @IBOutlet weak var acDictsOnlne: NSArrayController!
+    @IBOutlet weak var acDictsPicker: NSArrayController!
     @IBOutlet weak var acDictsNote: NSArrayController!
     @IBOutlet weak var acTextbooks: NSArrayController!
     @IBOutlet weak var acUnits: NSArrayController!
@@ -129,7 +129,7 @@ class SettingsViewController: NSViewController {
     }
     
     func updateDictWord() {
-        acDictsOnlne.content = vm.arrDictsWord
+        acDictsPicker.content = vm.arrDictsPicker
     }
     
     func updateDictNote() {

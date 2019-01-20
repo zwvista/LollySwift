@@ -178,6 +178,18 @@ class SettingsViewModel: NSObject {
         arrParts = (selectedTextbook.PARTS.components(separatedBy: " "))
     }
     
+    func dictHtml(word: String, dictids: [String]) -> String {
+        var s = "<html><body>\n"
+        for (i, dictid) in dictids.enumerated() {
+            let item = arrDictsWord.first { String($0.DICTID) == dictid }!
+            let ifrId = "ifr\(i + 1)"
+            let url = item.urlString(word: word, arrAutoCorrect: arrAutoCorrect)
+            s += "<iframe id='\(ifrId)' frameborder='1' style='width:100%; height:500px; display:block' src='\(url)'></iframe>\n"
+        }
+        s += "</body></html>\n"
+        return s
+    }
+    
     func updateLang() -> Observable<()> {
         return MUserSetting.update(selectedUSUser.ID, langid: USLANGID).map { print($0) }
     }

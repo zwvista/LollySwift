@@ -1044,13 +1044,13 @@
                                     <binding destination="HfO-r7-QMx" name="selectedIndex" keyPath="vm.selectedLangIndex" previousBinding="H1C-k8-O8E" id="JVn-p4-slO"/>
                                 </connections>
                             </popUpButton>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6If-OE-53N">
-                                <rect key="frame" x="18" y="177" width="114" height="21"/>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6If-OE-53N" userLabel="Dictionary(Word):">
+                                <rect key="frame" x="18" y="177" width="111" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="To2-DO-xyl"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="65" id="txg-O0-gHn"/>
                                 </constraints>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Dictionary(Onlne):" id="fci-TG-8nv">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Dictionary(Word):" id="fci-TG-8nv" userLabel="Dictionary(Word):">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -1073,7 +1073,7 @@
                                     <action selector="dictWordSelected:" target="HfO-r7-QMx" id="zXy-H5-Dgo"/>
                                     <binding destination="EkI-9N-SJp" name="content" keyPath="arrangedObjects" id="cMt-dW-ffF"/>
                                     <binding destination="EkI-9N-SJp" name="contentValues" keyPath="arrangedObjects.DICTNAME" previousBinding="cMt-dW-ffF" id="PXM-QD-ObO"/>
-                                    <binding destination="HfO-r7-QMx" name="selectedIndex" keyPath="vm.selectedDictWordIndex" previousBinding="PXM-QD-ObO" id="78b-ia-5yx"/>
+                                    <binding destination="HfO-r7-QMx" name="selectedIndex" keyPath="vm.selectedDictPickerIndex" previousBinding="PXM-QD-ObO" id="krQ-Cy-jl1"/>
                                 </connections>
                             </popUpButton>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sxf-h3-GJC">
@@ -1320,7 +1320,7 @@
                     </view>
                     <connections>
                         <outlet property="acDictsNote" destination="Jpc-QG-itq" id="9lW-jk-Ujj"/>
-                        <outlet property="acDictsOnlne" destination="EkI-9N-SJp" id="Rc1-Of-Jhr"/>
+                        <outlet property="acDictsPicker" destination="EkI-9N-SJp" id="Rc1-Of-Jhr"/>
                         <outlet property="acLanguages" destination="Jlp-Py-Ji5" id="CFI-rY-PjP"/>
                         <outlet property="acParts" destination="IiA-XH-70P" id="MqS-Qx-qrd"/>
                         <outlet property="acTextbooks" destination="PzR-zm-jg5" id="9cA-Qf-gOJ"/>
