@@ -31,13 +31,17 @@ class SettingsViewModel: NSObject {
         get { return selectedUSLang.VALUE1!.toInt()! }
         set { selectedUSLang.VALUE1 = String(newValue) }
     }
-    var USDICTONLINEID: Int {
-        get { return selectedUSLang.VALUE2!.toInt()! }
-        set { selectedUSLang.VALUE2 = String(newValue) }
+    var USDICTPICKER: String {
+        get { return selectedUSLang.VALUE2! }
+        set { selectedUSLang.VALUE2 = newValue }
     }
     var USDICTNOTEID: Int {
         get { return selectedUSLang.VALUE3!.toInt()! }
         set { selectedUSLang.VALUE3 = String(newValue) }
+    }
+    var USDICTSPICKER: String {
+        get { return selectedUSLang.VALUE4 ?? "0" }
+        set { selectedUSLang.VALUE4 = newValue }
     }
     private var selectedUSTextbookIndex = 0
     private var selectedUSTextbook: MUserSetting {
@@ -80,16 +84,17 @@ class SettingsViewModel: NSObject {
         return arrLanguages[selectedLangIndex]
     }
     
+    var arrDictsWord = [MDictWord]()
     @objc
-    var arrDictsOnline = [MDictOnline]()
+    var arrDictsPicker = [MDictPicker]()
     @objc
-    var selectedDictOnlineIndex = 0 {
+    var selectedDictPickerIndex = 0 {
         didSet {
-            USDICTONLINEID = selectedDictOnline.ID
+            USDICTPICKER = selectedDictPicker.DICTID
         }
     }
-    var selectedDictOnline: MDictOnline {
-        return arrDictsOnline[selectedDictOnlineIndex]
+    var selectedDictPicker: MDictPicker {
+        return arrDictsPicker[selectedDictPickerIndex]
     }
     
     @objc
@@ -137,13 +142,25 @@ class SettingsViewModel: NSObject {
         selectedLangIndex = langindex
         USLANGID = selectedLang.ID
         selectedUSLangIndex = arrUserSettings.index { $0.KIND == 2 && $0.ENTITYID == self.USLANGID }!
-        return Observable.zip(MDictOnline.getDataByLang(self.USLANGID),
+        let dictsPicker = USDICTSPICKER.split("\r\n")
+        return Observable.zip(MDictWord.getDataByLang(self.USLANGID),
                               MDictNote.getDataByLang(self.USLANGID),
                               MTextbook.getDataByLang(self.USLANGID),
                               MAutoCorrect.getDataByLang(self.USLANGID))
             .map {
-                self.arrDictsOnline = $0.0
-                self.selectedDictOnlineIndex = self.arrDictsOnline.index { $0.ID == self.USDICTONLINEID }!
+                self.arrDictsWord = $0.0
+                var i = 0
+                self.arrDictsPicker = dictsPicker.flatMap { d -> [MDictPicker] in
+                    if d == "0" {
+                        return self.arrDictsWord.map { MDictPicker(id: String($0.DICTID), name: $0.DICTNAME!) }
+                    } else {
+                        i += 1
+                        var arr = [MDictPicker]()
+                        arr.append(MDictPicker(id: d, name: "Custom\(i)"))
+                        return arr
+                    }
+                }
+                self.selectedDictPickerIndex = self.arrDictsPicker.index { $0.DICTID == self.USDICTPICKER } ?? 0
                 self.arrDictsNote = $0.1
                 if !self.arrDictsNote.isEmpty {
                     self.selectedDictNoteIndex = self.arrDictsNote.index { $0.ID == self.USDICTNOTEID }!
@@ -165,8 +182,8 @@ class SettingsViewModel: NSObject {
         return MUserSetting.update(selectedUSUser.ID, langid: USLANGID).map { print($0) }
     }
     
-    func updateDictOnline() -> Observable<()> {
-        return MUserSetting.update(selectedUSLang.ID, dictonlineid: USDICTONLINEID).map { print($0) }
+    func updateDictWord() -> Observable<()> {
+        return MUserSetting.update(selectedUSLang.ID, dictpicker: USDICTPICKER).map { print($0) }
     }
     
     func updateDictNote() -> Observable<()> {

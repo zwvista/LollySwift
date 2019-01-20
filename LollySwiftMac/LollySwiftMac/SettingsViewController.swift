@@ -24,7 +24,7 @@ class SettingsViewController: NSViewController {
     @IBOutlet weak var tfUnitsInAllFrom: NSTextField!
     @IBOutlet weak var tfUnitsInAllTo: NSTextField!
     @IBOutlet weak var pubLanguages: NSPopUpButton!
-    @IBOutlet weak var pubDictsOnline: NSPopUpButton!
+    @IBOutlet weak var pubDictsWord: NSPopUpButton!
     @IBOutlet weak var pubDictsNote: NSPopUpButton!
     @IBOutlet weak var pubTextbooks: NSPopUpButton!
     @IBOutlet weak var pubUnitFrom: NSPopUpButton!
@@ -61,17 +61,17 @@ class SettingsViewController: NSViewController {
         }.disposed(by: disposeBag)
     }
     
-    @IBAction func dictOnlineSelected(_ sender: AnyObject) {
-        vm.selectedDictOnlineIndex = pubDictsOnline.indexOfSelectedItem
-        vm.updateDictOnline().subscribe {
-            self.updateDictOnline()
+    @IBAction func dictWordSelected(_ sender: AnyObject) {
+        vm.selectedDictPickerIndex = pubDictsWord.indexOfSelectedItem
+        vm.updateDictWord().subscribe {
+            self.updateDictWord()
         }.disposed(by: disposeBag)
     }
     
     @IBAction func dictNoteSelected(_ sender: AnyObject) {
         vm.selectedDictNoteIndex = pubDictsNote.indexOfSelectedItem
         vm.updateDictNote().subscribe {
-            self.updateDictOnline()
+            self.updateDictWord()
         }.disposed(by: disposeBag)
     }
 
@@ -123,13 +123,13 @@ class SettingsViewController: NSViewController {
 
     func updateLang() {
         acLanguages.content = vm.arrLanguages
-        updateDictOnline()
+        updateDictWord()
         updateDictNote()
         updateTextbook()
     }
     
-    func updateDictOnline() {
-        acDictsOnlne.content = vm.arrDictsOnline
+    func updateDictWord() {
+        acDictsOnlne.content = vm.arrDictsWord
     }
     
     func updateDictNote() {

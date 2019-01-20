@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Regex
 
 class HtmlApi {
     static private let debugExtract = false

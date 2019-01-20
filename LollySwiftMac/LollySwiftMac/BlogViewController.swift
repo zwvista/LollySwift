@@ -19,8 +19,7 @@ class BlogViewController: NSViewController  {
     @IBOutlet weak var tvHtml: NSTextView!
     @IBOutlet weak var wvBlog: WKWebView!
     
-    var patternNo = ""
-    var patternText = ""
+    var wc: BlogWindowController { return view.window!.windowController as! BlogWindowController }
     var vmBlog: BlogViewModel!
 
     let disposeBag = DisposeBag()
@@ -63,17 +62,11 @@ class BlogViewController: NSViewController  {
         MacApi.copyText(tvHtml.string)
     }
     @IBAction func showPattern(_ sender: Any) {
-        let url = vmBlog.getPatternUrl(patternNo: patternNo)
+        let url = vmBlog.getPatternUrl(patternNo: wc.patternNo)
         wvBlog.load(URLRequest(url: URL(string: url)!))
     }
-    @IBAction func patternNoChanged(_ sender: Any) {
-        patternNo = (sender as! NSTextField).stringValue
-    }
-    @IBAction func patternTextChanged(_ sender: Any) {
-        patternText = (sender as! NSTextField).stringValue
-    }
     @IBAction func copyPatternMarkDown(_ sender: Any) {
-        let text = vmBlog.getPatternMarkDown(patternText: patternText)
+        let text = vmBlog.getPatternMarkDown(patternText: wc.patternText)
         MacApi.copyText(text)
     }
     @IBAction func addNotes(_ sender: Any) {
@@ -83,12 +76,15 @@ class BlogViewController: NSViewController  {
     }
 }
 
-class BlogWindowController: NSWindowController {
+class BlogWindowController: NSWindowController, NSTextFieldDelegate {
     @IBOutlet weak var tfPatternNo: NSTextField!
+    @IBOutlet weak var tfPatternText: NSTextField!
     
+    @objc var patternNo = "001"
+    @objc var patternText = ""
+
     override func windowDidLoad() {
         super.windowDidLoad()
         window!.toolbar!.selectedItemIdentifier = NSToolbarItem.Identifier(rawValue: "Blog")
-        (contentViewController as! BlogViewController).patternNoChanged(tfPatternNo)
     }
 }

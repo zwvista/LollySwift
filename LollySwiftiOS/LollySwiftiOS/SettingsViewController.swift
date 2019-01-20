@@ -12,7 +12,7 @@ import RxSwift
 
 class SettingsViewController: UITableViewController {
     @IBOutlet weak var langCell: UITableViewCell!
-    @IBOutlet weak var dictOnlineCell: UITableViewCell!
+    @IBOutlet weak var dictWordCell: UITableViewCell!
     @IBOutlet weak var dictNoteCell: UITableViewCell!
     @IBOutlet weak var textbookCell: UITableViewCell!
     @IBOutlet weak var unitFromCell: UITableViewCell!
@@ -28,7 +28,7 @@ class SettingsViewController: UITableViewController {
     @IBOutlet weak var lblPartToTitle: UILabel!
     
     let ddLang = DropDown()
-    let ddDictOnline = DropDown()
+    let ddDictWord = DropDown()
     let ddDictNote = DropDown()
     let ddTextbook = DropDown()
     let ddUnitFrom = DropDown()
@@ -60,12 +60,12 @@ class SettingsViewController: UITableViewController {
             }.disposed(by: self.disposeBag)
         }
 
-        ddDictOnline.anchorView = dictOnlineCell
-        ddDictOnline.selectionAction = { [unowned self] (index: Int, item: String) in
-            guard index != self.vm.selectedDictOnlineIndex else {return}
-            self.vm.selectedDictOnlineIndex = index
-            self.vm.updateDictOnline().subscribe {
-                self.updateDictOnline()
+        ddDictWord.anchorView = dictWordCell
+        ddDictWord.selectionAction = { [unowned self] (index: Int, item: String) in
+            guard index != self.vm.selectedDictPickerIndex else {return}
+            self.vm.selectedDictPickerIndex = index
+            self.vm.updateDictWord().subscribe {
+                self.updateDictWord()
             }.disposed(by: self.disposeBag)
         }
 
@@ -133,7 +133,7 @@ class SettingsViewController: UITableViewController {
         case 0:
             ddLang.show()
         case 1:
-            ddDictOnline.show()
+            ddDictWord.show()
         case 2:
             ddDictNote.show()
         case 3:
@@ -157,17 +157,17 @@ class SettingsViewController: UITableViewController {
     func updateLang() {
         let item = vm.selectedLang
         langCell.textLabel!.text = item.LANGNAME
-        updateDictOnline()
+        updateDictWord()
         updateDictNote()
         updateTextbook()
     }
     
-    func updateDictOnline() {
-        let item = vm.selectedDictOnline
-        dictOnlineCell.textLabel!.text = item.DICTNAME
-        dictOnlineCell.detailTextLabel!.text = item.URL
-        ddDictOnline.dataSource = vm.arrDictsOnline.map { $0.DICTNAME! }
-        ddDictOnline.selectRow(vm.selectedDictOnlineIndex)
+    func updateDictWord() {
+        let item = vm.selectedDictPicker
+        dictWordCell.textLabel!.text = item.DICTNAME
+        dictWordCell.detailTextLabel!.text = item.URL
+        ddDictWord.dataSource = vm.arrDictsWord.map { $0.DICTNAME! }
+        ddDictWord.selectRow(vm.selectedDictPickerIndex)
     }
     
     func updateDictNote() {

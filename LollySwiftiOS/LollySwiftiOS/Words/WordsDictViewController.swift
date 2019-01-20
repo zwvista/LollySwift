@@ -19,7 +19,7 @@ class WordsDictViewController: UIViewController, WKNavigationDelegate {
     weak var wvDict: WKWebView!
     
     let vm = SearchViewModel(settings: vmSettings) {}
-    let ddWord = DropDown(), ddDictOnline = DropDown()
+    let ddWord = DropDown(), ddDictWord = DropDown()
     
     let disposeBag = DisposeBag()
     var status = DictWebViewStatus.ready
@@ -37,12 +37,12 @@ class WordsDictViewController: UIViewController, WKNavigationDelegate {
             self.selectedWordChanged()
         }
         
-        ddDictOnline.anchorView = btnDict
-        ddDictOnline.dataSource = vm.vmSettings.arrDictsOnline.map { $0.DICTNAME! }
-        ddDictOnline.selectRow(vm.vmSettings.selectedDictOnlineIndex)
-        ddDictOnline.selectionAction = { (index: Int, item: String) in
-            self.vm.vmSettings.selectedDictOnlineIndex = index
-            self.vm.vmSettings.updateDictOnline().subscribe {
+        ddDictWord.anchorView = btnDict
+        ddDictWord.dataSource = vm.vmSettings.arrDictsWord.map { $0.DICTNAME! }
+        ddDictWord.selectRow(vm.vmSettings.selectedDictPickerIndex)
+        ddDictWord.selectionAction = { (index: Int, item: String) in
+            self.vm.vmSettings.selectedDictPickerIndex = index
+            self.vm.vmSettings.updateDictWord().subscribe {
                 self.selectDictChanged()
             }.disposed(by: self.disposeBag)
         }
@@ -57,7 +57,7 @@ class WordsDictViewController: UIViewController, WKNavigationDelegate {
     }
     
     private func selectDictChanged() {
-        let item = vmSettings.selectedDictOnline
+        let item = vmSettings.selectedDictPicker
         btnDict.setTitle(item.DICTNAME, for: .normal)
         let url = item.urlString(word: vm.selectedWord, arrAutoCorrect: vmSettings.arrAutoCorrect)
         if item.DICTTYPENAME == "OFFLINE" {
@@ -81,12 +81,12 @@ class WordsDictViewController: UIViewController, WKNavigationDelegate {
     }
     
     @IBAction func showDictDropDown(_ sender: AnyObject) {
-        ddDictOnline.show()
+        ddDictWord.show()
     }
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         guard status == .navigating else {return}
-        let item = vmSettings.selectedDictOnline
+        let item = vmSettings.selectedDictPicker
         // https://stackoverflow.com/questions/34751860/get-html-from-wkwebview-in-swift
         webView.evaluateJavaScript("document.documentElement.outerHTML.toString()") { (html: Any?, error: Error?) in
             let html = html as! String

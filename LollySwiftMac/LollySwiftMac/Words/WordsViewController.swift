@@ -9,13 +9,13 @@
 import Cocoa
 
 class WordsViewController: NSViewController, LollyProtocol {
-    var selectedDictOnlineIndex = 0
+    var selectedDictPickerIndex = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         settingsChanged()
     }
     func settingsChanged() {
-        selectedDictOnlineIndex = vmSettings.selectedDictOnlineIndex
+        selectedDictPickerIndex = vmSettings.selectedDictPickerIndex
     }
 }
 
@@ -50,11 +50,11 @@ class WordsWindowController: NSWindowController, NSToolbarDelegate, LollyProtoco
     
     func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
         let dictName = itemIdentifier.rawValue
-        let i = vmSettings.arrDictsOnline.firstIndex { $0.DICTNAME == dictName }!
+        let i = vmSettings.arrDictsWord.firstIndex { $0.DICTNAME == dictName }!
         let item = self.value(forKey: "tbiDict\(i)") as! NSToolbarItem
         item.label = dictName
         item.target = contentViewController
-        if i == vmSettings.selectedDictOnlineIndex {
+        if i == vmSettings.selectedDictPickerIndex {
             toolbar.selectedItemIdentifier = item.itemIdentifier
         }
         return item
@@ -64,8 +64,8 @@ class WordsWindowController: NSWindowController, NSToolbarDelegate, LollyProtoco
         while toolbar.items.count > defaultToolbarItemCount {
             toolbar.removeItem(at: defaultToolbarItemCount)
         }
-        for i in 0..<vmSettings.arrDictsOnline.count {
-            let itemIdentifier = NSToolbarItem.Identifier(vmSettings.arrDictsOnline[i].DICTNAME!)
+        for i in 0..<vmSettings.arrDictsWord.count {
+            let itemIdentifier = NSToolbarItem.Identifier(vmSettings.arrDictsWord[i].DICTNAME!)
             toolbar.insertItem(withItemIdentifier: itemIdentifier, at: defaultToolbarItemCount + i)
         }
     }

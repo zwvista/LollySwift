@@ -43,10 +43,10 @@ class WordsSearchViewController: WordsViewController, NSTableViewDataSource, NST
     @IBAction func searchDict(_ sender: Any) {
         if sender is NSToolbarItem {
             let tbItem = sender as! NSToolbarItem
-            selectedDictOnlineIndex = tbItem.tag
+            selectedDictPickerIndex = tbItem.tag
             print(tbItem.toolbar!.selectedItemIdentifier!.rawValue)
         }
-        let item = vmSettings.arrDictsOnline[selectedDictOnlineIndex]
+        let item = vmSettings.arrDictsWord[selectedDictPickerIndex]
         let url = item.urlString(word: newWord, arrAutoCorrect: vmSettings.arrAutoCorrect)
         if item.DICTTYPENAME == "OFFLINE" {
             RestApi.getHtml(url: url).subscribe(onNext: { html in
@@ -76,14 +76,14 @@ class WordsSearchViewController: WordsViewController, NSTableViewDataSource, NST
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         guard status == .navigating else {return}
-        let item = vmSettings.selectedDictOnline
+        let item = vmSettings.selectedDictPicker
         // https://stackoverflow.com/questions/34751860/get-html-from-wkwebview-in-swift
         webView.evaluateJavaScript("document.documentElement.outerHTML.toString()") { (html: Any?, error: Error?) in
-            let html = html as! String
-//            print(html)
-            let str = item.htmlString(html, word: self.newWord)
-            self.wvDict.loadHTMLString(str, baseURL: nil)
-            self.status = .ready
+//            let html = html as! String
+////            print(html)
+//            let str = item.htmlString(html, word: self.newWord)
+//            self.wvDict.loadHTMLString(str, baseURL: nil)
+//            self.status = .ready
         }
     }
     

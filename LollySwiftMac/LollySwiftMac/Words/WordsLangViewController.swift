@@ -65,7 +65,7 @@ class WordsLangViewController: WordsViewController, NSTableViewDataSource, NSTab
     
     func searchWord(word: String) {
         selectedWord = word
-        let item = vmSettings.arrDictsOnline[selectedDictOnlineIndex]
+        let item = vmSettings.arrDictsWord[selectedDictPickerIndex]
         let url = item.urlString(word: word, arrAutoCorrect: vmSettings.arrAutoCorrect)
         if item.DICTTYPENAME == "OFFLINE" {
             wvDict.load(URLRequest(url: URL(string: "about:blank")!))
@@ -85,7 +85,7 @@ class WordsLangViewController: WordsViewController, NSTableViewDataSource, NSTab
     @IBAction func searchWordInTableView(_ sender: Any) {
         if sender is NSToolbarItem {
             let tbItem = sender as! NSToolbarItem
-            selectedDictOnlineIndex = tbItem.tag
+            selectedDictPickerIndex = tbItem.tag
             print(tbItem.toolbar!.selectedItemIdentifier!.rawValue)
         }
         guard tableView.selectedRow != -1 else {return}
@@ -129,14 +129,14 @@ class WordsLangViewController: WordsViewController, NSTableViewDataSource, NSTab
         self.view.window?.makeKeyAndOrderFront(self)
         tableView.becomeFirstResponder()
         guard status == .navigating else {return}
-        let item = vmSettings.selectedDictOnline
+        let item = vmSettings.selectedDictPicker
         // https://stackoverflow.com/questions/34751860/get-html-from-wkwebview-in-swift
         webView.evaluateJavaScript("document.documentElement.outerHTML.toString()") { (html: Any?, error: Error?) in
-            let html = html as! String
-            print(html)
-            let str = item.htmlString(html, word: self.selectedWord)
-            self.wvDict.loadHTMLString(str, baseURL: nil)
-            self.status = .ready
+//            let html = html as! String
+//            print(html)
+//            let str = item.htmlString(html, word: self.selectedWord)
+//            self.wvDict.loadHTMLString(str, baseURL: nil)
+//            self.status = .ready
         }
     }
 

@@ -12,6 +12,7 @@ import RxSwift
 @objcMembers
 class MDictionary: NSObject, Codable {
     var ID = 0
+    var DICTID = 0
     var LANGIDFROM: Int?
     var DICTTYPENAME: String?
     var DICTNAME: String?
@@ -31,11 +32,11 @@ class MDictionary: NSObject, Codable {
     }
 }
 
-class MDictOnline : MDictionary {
-    static func getDataByLang(_ langid: Int) -> Observable<[MDictOnline]> {
-        // SQL: SELECT * FROM VDICTSONLINE WHERE LANGIDFROM = ?
-        let url = "\(RestApi.url)VDICTSONLINE?transform=1&filter=LANGIDFROM,eq,\(langid)"
-        return RestApi.getArray(url: url, keyPath: "VDICTSONLINE")
+class MDictWord : MDictionary {
+    static func getDataByLang(_ langid: Int) -> Observable<[MDictWord]> {
+        // SQL: SELECT * FROM VDICTSWORD WHERE LANGIDFROM = ?
+        let url = "\(RestApi.url)VDICTSWORD?transform=1&filter=LANGIDFROM,eq,\(langid)"
+        return RestApi.getArray(url: url, keyPath: "VDICTSWORD")
     }
     
     func htmlString(_ html: String, word: String, useTemplate2: Bool = false) -> String {
@@ -49,7 +50,15 @@ class MDictOnline : MDictionary {
     }
 }
 
-class MDictOffline : MDictionary {
+class MDictPicker : NSObject {
+    var DICTID = ""
+    var DICTNAME = ""
+    
+    init(id: String, name: String) {
+        DICTID = id
+        DICTNAME = name
+        super.init()
+    }
 }
 
 class MDictNote : MDictionary {

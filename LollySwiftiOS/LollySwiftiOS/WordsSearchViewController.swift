@@ -26,7 +26,7 @@ class WordsSearchViewController: UIViewController, UIWebViewDelegate, UISearchBa
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         word = sbword.text!;
-        let item = vmSettings.selectedDictOnline
+        let item = vmSettings.selectedDictPicker
         let url = item.urlString(word: word, arrAutoCorrect: vmSettings.arrAutoCorrect)
         wvDict.load(URLRequest(url: URL(string: url)!))
         sbword.resignFirstResponder()
@@ -42,7 +42,7 @@ class WordsSearchViewController: UIViewController, UIWebViewDelegate, UISearchBa
     func webViewDidFinishLoad(_ webView: UIWebView) {
         guard webView.stringByEvaluatingJavaScript(from: "document.readyState") == "complete" && status == .navigating else {return}
         
-        let item = vmSettings.selectedDictOnline
+        let item = vmSettings.selectedDictPicker
         
         let data = URLCache.shared.cachedResponse(for: webView.request!)!.data;
         let html = NSString(data: data, encoding: String.Encoding.utf8.rawValue)!

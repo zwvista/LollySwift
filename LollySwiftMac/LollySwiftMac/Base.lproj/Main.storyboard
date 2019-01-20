@@ -788,9 +788,17 @@
                                             <font key="font" usesAppearanceFont="YES"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <connections>
+                                                <binding destination="cCU-1Q-LWr" name="value" keyPath="patternNo" id="cVi-9Z-OqA">
+                                                    <dictionary key="options">
+                                                        <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                                    </dictionary>
+                                                </binding>
+                                            </connections>
                                         </textFieldCell>
                                         <connections>
-                                            <action selector="patternNoChanged:" target="vaE-wK-YYd" id="IXk-Ad-OtQ"/>
+                                            <binding destination="cCU-1Q-LWr" name="value" keyPath="patternNo" id="I5e-5L-C1G"/>
+                                            <outlet property="delegate" destination="cCU-1Q-LWr" id="PUr-X9-O2O"/>
                                         </connections>
                                     </textField>
                                 </toolbarItem>
@@ -807,7 +815,12 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                         <connections>
-                                            <action selector="patternTextChanged:" target="vaE-wK-YYd" id="hwO-m3-12u"/>
+                                            <binding destination="cCU-1Q-LWr" name="value" keyPath="patternText" id="HSm-ar-0v3">
+                                                <dictionary key="options">
+                                                    <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                                </dictionary>
+                                            </binding>
+                                            <outlet property="delegate" destination="cCU-1Q-LWr" id="3yB-7C-sh6"/>
                                         </connections>
                                     </textField>
                                 </toolbarItem>
@@ -843,10 +856,12 @@
                     </window>
                     <connections>
                         <outlet property="tfPatternNo" destination="Lbj-Ka-Wut" id="iPE-SV-zW3"/>
+                        <outlet property="tfPatternText" destination="r3b-4B-iGP" id="uhf-88-G6W"/>
                         <segue destination="PME-9l-TOe" kind="relationship" relationship="window.shadowedContentViewController" id="gWQ-3V-mE1"/>
                     </connections>
                 </windowController>
                 <customObject id="vaE-wK-YYd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <userDefaultsController representsSharedInstance="YES" id="DXz-af-phN"/>
             </objects>
             <point key="canvasLocation" x="1391" y="93"/>
         </scene>
@@ -1043,22 +1058,22 @@
                             </textField>
                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Bo4-yz-Ptk">
                                 <rect key="frame" x="133" y="172" width="223" height="25"/>
-                                <popUpButtonCell key="cell" type="push" title="Dict Online Popup" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="pp6-jV-8Y6" id="B3v-ro-gsw" userLabel="Dict Online Popup">
+                                <popUpButtonCell key="cell" type="push" title="Dict Word Popup" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="pp6-jV-8Y6" id="B3v-ro-gsw" userLabel="Dict Word Popup">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="menu"/>
                                     <menu key="menu" title="OtherViews" id="BCz-wO-xnR">
                                         <items>
-                                            <menuItem title="Dict Online Popup" state="on" id="pp6-jV-8Y6" userLabel="Dict Online Popup"/>
+                                            <menuItem title="Dict Word Popup" state="on" id="pp6-jV-8Y6" userLabel="Dict Word Popup"/>
                                             <menuItem title="Item 2" id="YJC-0b-MLZ"/>
                                             <menuItem title="Item 3" id="f84-K6-8SR"/>
                                         </items>
                                     </menu>
                                 </popUpButtonCell>
                                 <connections>
-                                    <action selector="dictOnlineSelected:" target="HfO-r7-QMx" id="zXy-H5-Dgo"/>
+                                    <action selector="dictWordSelected:" target="HfO-r7-QMx" id="zXy-H5-Dgo"/>
                                     <binding destination="EkI-9N-SJp" name="content" keyPath="arrangedObjects" id="cMt-dW-ffF"/>
                                     <binding destination="EkI-9N-SJp" name="contentValues" keyPath="arrangedObjects.DICTNAME" previousBinding="cMt-dW-ffF" id="PXM-QD-ObO"/>
-                                    <binding destination="HfO-r7-QMx" name="selectedIndex" keyPath="vm.selectedDictOnlineIndex" previousBinding="PXM-QD-ObO" id="78b-ia-5yx"/>
+                                    <binding destination="HfO-r7-QMx" name="selectedIndex" keyPath="vm.selectedDictWordIndex" previousBinding="PXM-QD-ObO" id="78b-ia-5yx"/>
                                 </connections>
                             </popUpButton>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sxf-h3-GJC">
@@ -1087,7 +1102,7 @@
                                     </menu>
                                 </popUpButtonCell>
                                 <connections>
-                                    <action selector="dictOnlineSelected:" target="HfO-r7-QMx" id="eXI-f7-Ulc"/>
+                                    <action selector="dictWordSelected:" target="HfO-r7-QMx" id="eXI-f7-Ulc"/>
                                     <binding destination="Jpc-QG-itq" name="content" keyPath="arrangedObjects" id="ZsM-lD-aWr"/>
                                     <binding destination="Jpc-QG-itq" name="contentValues" keyPath="arrangedObjects.DICTNAME" previousBinding="ZsM-lD-aWr" id="By1-zi-iAT"/>
                                     <binding destination="HfO-r7-QMx" name="selectedIndex" keyPath="vm.selectedDictNoteIndex" previousBinding="By1-zi-iAT" id="bDo-aF-pze"/>
@@ -1312,7 +1327,7 @@
                         <outlet property="acUnits" destination="7EM-l7-CJV" id="fz0-dS-1CJ"/>
                         <outlet property="btnUnitPartTo" destination="zEX-94-Fpv" id="yKi-qc-X1n"/>
                         <outlet property="pubDictsNote" destination="1oq-rW-MUb" id="X7g-Ef-zSj"/>
-                        <outlet property="pubDictsOnline" destination="Bo4-yz-Ptk" id="N50-BQ-j4Q"/>
+                        <outlet property="pubDictsWord" destination="Bo4-yz-Ptk" id="N50-BQ-j4Q"/>
                         <outlet property="pubLanguages" destination="Yra-vx-iUa" id="FyI-6e-Ins"/>
                         <outlet property="pubPartFrom" destination="PW2-rx-UfY" id="I3r-sr-VCj"/>
                         <outlet property="pubPartTo" destination="Xjt-G8-0bL" id="ZfJ-gt-8PI"/>
@@ -1325,7 +1340,7 @@
                 </viewController>
                 <customObject id="OC9-Mn-GX9" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <arrayController id="Jlp-Py-Ji5" userLabel="Languages Controller"/>
-                <arrayController id="EkI-9N-SJp" userLabel="DictsOnline Controller"/>
+                <arrayController id="EkI-9N-SJp" userLabel="DictsWord Controller"/>
                 <arrayController id="Jpc-QG-itq" userLabel="DictsNote Controller"/>
                 <arrayController id="PzR-zm-jg5" userLabel="Textbooks Controller"/>
                 <arrayController id="7EM-l7-CJV" userLabel="Units Controller"/>
