@@ -32,28 +32,10 @@ class WordsSearchViewController: WordsViewController {
         return arrWords[row]
     }
     
-    @IBAction func searchDict(_ sender: Any) {
-        if sender is NSToolbarItem {
-            let tbItem = sender as! NSToolbarItem
-            selectedDictPickerIndex = tbItem.tag
-            print(tbItem.toolbar!.selectedItemIdentifier!.rawValue)
-        }
-        let item = vmSettings.arrDictsWord[selectedDictPickerIndex]
-        let url = item.urlString(word: newWord, arrAutoCorrect: vmSettings.arrAutoCorrect)
-        if item.DICTTYPENAME == "OFFLINE" {
-            RestApi.getHtml(url: url).subscribe(onNext: { html in
-                print(html)
-                let str = item.htmlString(html, word: self.newWord)
-                self.wvDict.loadHTMLString(str, baseURL: nil)
-            }).disposed(by: disposeBag)
-        } else {
-            wvDict.load(URLRequest(url: URL(string: url)!))
-            if item.DICTTYPENAME == "OFFLINE-ONLINE" {
-                status = .navigating
-            }
-        }
+    override func searchWordInTableView() {
+        searchWord(word: arrWords[tableView.selectedRow].WORD)
     }
-    
+
     override func addNewWord() {
         guard !newWord.isEmpty else {return}
         let mWord = MUnitWord()
@@ -66,9 +48,4 @@ class WordsSearchViewController: WordsViewController {
 }
 
 class WordsSearchWindowController: WordsWindowController {
-    override func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
-        let item = super.toolbar(toolbar, itemForItemIdentifier: itemIdentifier, willBeInsertedIntoToolbar: flag)!
-        item.action = #selector(WordsSearchViewController.searchDict(_:))
-        return item
-    }
 }

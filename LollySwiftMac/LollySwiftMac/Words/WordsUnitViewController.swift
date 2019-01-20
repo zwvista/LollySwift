@@ -106,18 +106,8 @@ class WordsUnitViewController: WordsViewController {
         WordsUnitViewModel.update(item: item).subscribe().disposed(by: disposeBag)
     }
     
-    @IBAction func searchWordInTableView(_ sender: Any) {
-        if sender is NSToolbarItem {
-            let tbItem = sender as! NSToolbarItem
-            selectedDictPickerIndex = tbItem.tag
-            print(tbItem.toolbar!.selectedItemIdentifier!.rawValue)
-        }
-        guard tableView.selectedRow != -1 else {return}
+    override func searchWordInTableView() {
         searchWord(word: arrWords[tableView.selectedRow].WORD)
-    }
-    
-    func tableViewSelectionDidChange(_ notification: Notification) {
-        searchWordInTableView(self)
     }
     
     override func addNewWord() {
@@ -174,11 +164,7 @@ class WordsUnitViewController: WordsViewController {
     
     @IBAction func googleWord(_ sender: Any) {
         let item = vm.arrWords[tableView.selectedRow]
-        NSWorkspace.shared.open([URL(string: "https://www.google.com/search?q=\(item.WORD)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!],
-                                withAppBundleIdentifier:"com.apple.Safari",
-                                options: [],
-                                additionalEventParamDescriptor: nil,
-                                launchIdentifiers: nil)
+        googleWord(word: item.WORD)
     }
     
     @IBAction func getNotes(_ sender: Any) {
@@ -211,10 +197,4 @@ class WordsUnitViewController: WordsViewController {
 }
 
 class WordsUnitWindowController: WordsWindowController {
-    override func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
-        let item = super.toolbar(toolbar, itemForItemIdentifier: itemIdentifier, willBeInsertedIntoToolbar: flag)!
-        item.action = #selector(WordsUnitViewController.searchWordInTableView(_:))
-        return item
-    }
 }
-

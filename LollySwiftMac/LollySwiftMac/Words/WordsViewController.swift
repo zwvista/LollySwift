@@ -63,6 +63,31 @@ class WordsViewController: NSViewController, NSTableViewDataSource, NSTableViewD
         }
     }
     
+    @IBAction func searchDict(_ sender: Any) {
+        if sender is NSToolbarItem {
+            let tbItem = sender as! NSToolbarItem
+            selectedDictPickerIndex = tbItem.tag
+            print(tbItem.toolbar!.selectedItemIdentifier!.rawValue)
+        }
+        if tableView.selectedRow == -1 {
+            searchWord(word: newWord)
+        } else {
+            searchWordInTableView()
+        }
+    }
+    
+    func tableViewSelectionDidChange(_ notification: Notification) {
+        searchDict(self)
+    }
+    
+    func googleWord(word: String) {
+        NSWorkspace.shared.open([URL(string: "https://www.google.com/search?q=\(word)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!],
+                                withAppBundleIdentifier:"com.apple.Safari",
+                                options: [],
+                                additionalEventParamDescriptor: nil,
+                                launchIdentifiers: nil)
+    }
+
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         self.view.window?.makeKeyAndOrderFront(self)
         tableView.becomeFirstResponder()
@@ -84,6 +109,9 @@ class WordsViewController: NSViewController, NSTableViewDataSource, NSTableViewD
 
     func addNewWord() {
     }
+    
+    func searchWordInTableView() {
+    }
 
     func settingsChanged() {
         selectedDictPickerIndex = vmSettings.selectedDictPickerIndex
@@ -93,7 +121,7 @@ class WordsViewController: NSViewController, NSTableViewDataSource, NSTableViewD
 class WordsWindowController: NSWindowController, NSToolbarDelegate, LollyProtocol {
     
     @IBOutlet weak var toolbar: NSToolbar!
-    // Outlet collections not implemented in Cocoa
+    // Outlet collections have been implemented for iOS, but not in Cocoa
     // https://stackoverflow.com/questions/24805180/swift-put-multiple-iboutlets-in-an-array
     // @IBOutlet var tbiDicts: [NSToolbarItem]!
     @IBOutlet weak var tbiDict0: NSToolbarItem!
@@ -131,10 +159,11 @@ class WordsWindowController: NSWindowController, NSToolbarDelegate, LollyProtoco
     
     func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
         let dictName = itemIdentifier.rawValue
-        let i = vmSettings.arrDictsWord.firstIndex { $0.DICTNAME == dictName }!
+        let i = vmSettings.arrDictsPicker.firstIndex { $0.DICTNAME == dictName }!
         let item = self.value(forKey: "tbiDict\(i)") as! NSToolbarItem
         item.label = dictName
         item.target = contentViewController
+        item.action = #selector(WordsViewController.searchDict(_:))
         if i == vmSettings.selectedDictPickerIndex {
             toolbar.selectedItemIdentifier = item.itemIdentifier
         }
@@ -145,8 +174,8 @@ class WordsWindowController: NSWindowController, NSToolbarDelegate, LollyProtoco
         while toolbar.items.count > defaultToolbarItemCount {
             toolbar.removeItem(at: defaultToolbarItemCount)
         }
-        for i in 0..<vmSettings.arrDictsWord.count {
-            let itemIdentifier = NSToolbarItem.Identifier(vmSettings.arrDictsWord[i].DICTNAME!)
+        for i in 0..<vmSettings.arrDictsPicker.count {
+            let itemIdentifier = NSToolbarItem.Identifier(vmSettings.arrDictsPicker[i].DICTNAME)
             toolbar.insertItem(withItemIdentifier: itemIdentifier, at: defaultToolbarItemCount + i)
         }
     }
