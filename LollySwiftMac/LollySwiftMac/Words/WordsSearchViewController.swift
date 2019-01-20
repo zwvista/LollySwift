@@ -54,7 +54,14 @@ class WordsSearchViewController: WordsViewController {
         }
     }
     
-    @IBAction func addWord(_ sender: Any) {
+    override func addNewWord() {
+        guard !newWord.isEmpty else {return}
+        let mWord = MUnitWord()
+        mWord.WORD = newWord
+        arrWords.append(mWord)
+        tableView.reloadData()
+        tfNewWord.stringValue = ""
+        newWord = ""
     }
 }
 

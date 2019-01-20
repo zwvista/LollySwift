@@ -77,6 +77,10 @@ class WordsViewController: NSViewController, NSTableViewDataSource, NSTableViewD
             //            self.status = .ready
         }
     }
+    
+    @IBAction func addNewWord(_ sender: Any) {
+        addNewWord()
+    }
 
     func addNewWord() {
     }
@@ -102,6 +106,16 @@ class WordsWindowController: NSWindowController, NSToolbarDelegate, LollyProtoco
     @IBOutlet weak var tbiDict7: NSToolbarItem!
     @IBOutlet weak var tbiDict8: NSToolbarItem!
     @IBOutlet weak var tbiDict9: NSToolbarItem!
+    @IBOutlet weak var tbiDict10: NSToolbarItem!
+    @IBOutlet weak var tbiDict11: NSToolbarItem!
+    @IBOutlet weak var tbiDict12: NSToolbarItem!
+    @IBOutlet weak var tbiDict13: NSToolbarItem!
+    @IBOutlet weak var tbiDict14: NSToolbarItem!
+    @IBOutlet weak var tbiDict15: NSToolbarItem!
+    @IBOutlet weak var tbiDict16: NSToolbarItem!
+    @IBOutlet weak var tbiDict17: NSToolbarItem!
+    @IBOutlet weak var tbiDict18: NSToolbarItem!
+    @IBOutlet weak var tbiDict19: NSToolbarItem!
     @objc var vm: SettingsViewModel {return vmSettings}
     private var defaultToolbarItemCount = 0
     

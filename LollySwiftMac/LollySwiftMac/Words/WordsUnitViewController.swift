@@ -120,7 +120,7 @@ class WordsUnitViewController: WordsViewController {
         searchWordInTableView(self)
     }
     
-    @IBAction func addNewWord(_ sender: AnyObject) {
+    override func addNewWord() {
         guard !newWord.isEmpty else {return}
         let mWord = vm.newUnitWord()
         mWord.WORD = newWord
@@ -131,10 +131,6 @@ class WordsUnitViewController: WordsViewController {
             self.tfNewWord.stringValue = ""
             self.newWord = ""
         }).disposed(by: disposeBag)
-    }
-    
-    override func addNewWord() {
-        addNewWord(self)
     }
 
     // https://stackoverflow.com/questions/24219441/how-to-use-nstoolbar-in-xcode-6-and-storyboard

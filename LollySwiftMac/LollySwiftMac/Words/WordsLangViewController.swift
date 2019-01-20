@@ -66,7 +66,7 @@ class WordsLangViewController: WordsViewController {
         searchWordInTableView(self)
     }
     
-    @IBAction func addNewWord(_ sender: AnyObject) {
+    override func addNewWord() {
         guard !newWord.isEmpty else {return}
         let mWord = vm.newLangWord()
         mWord.WORD = newWord
