@@ -142,7 +142,7 @@ class SettingsViewModel: NSObject {
         selectedLangIndex = langindex
         USLANGID = selectedLang.ID
         selectedUSLangIndex = arrUserSettings.index { $0.KIND == 2 && $0.ENTITYID == self.USLANGID }!
-        let dictsPicker = USDICTSPICKER.split("\r\n")
+        let arrDicts = USDICTSPICKER.split("\r\n")
         return Observable.zip(MDictWord.getDataByLang(self.USLANGID),
                               MDictNote.getDataByLang(self.USLANGID),
                               MTextbook.getDataByLang(self.USLANGID),
@@ -150,7 +150,7 @@ class SettingsViewModel: NSObject {
             .map {
                 self.arrDictsWord = $0.0
                 var i = 0
-                self.arrDictsPicker = dictsPicker.flatMap { d -> [MDictPicker] in
+                self.arrDictsPicker = arrDicts.flatMap { d -> [MDictPicker] in
                     if d == "0" {
                         return self.arrDictsWord.map { MDictPicker(id: String($0.DICTID), name: $0.DICTNAME!) }
                     } else {
@@ -194,7 +194,7 @@ class SettingsViewModel: NSObject {
         return MUserSetting.update(selectedUSUser.ID, langid: USLANGID).map { print($0) }
     }
     
-    func updateDictWord() -> Observable<()> {
+    func updateDictPicker() -> Observable<()> {
         return MUserSetting.update(selectedUSLang.ID, dictpicker: USDICTPICKER).map { print($0) }
     }
     

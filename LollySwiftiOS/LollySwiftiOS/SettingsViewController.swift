@@ -64,8 +64,8 @@ class SettingsViewController: UITableViewController {
         ddDictPicker.selectionAction = { [unowned self] (index: Int, item: String) in
             guard index != self.vm.selectedDictPickerIndex else {return}
             self.vm.selectedDictPickerIndex = index
-            self.vm.updateDictWord().subscribe {
-                self.updateDictWord()
+            self.vm.updateDictPicker().subscribe {
+                self.updateDictPicker()
             }.disposed(by: self.disposeBag)
         }
 
@@ -157,12 +157,12 @@ class SettingsViewController: UITableViewController {
     func updateLang() {
         let item = vm.selectedLang
         langCell.textLabel!.text = item.LANGNAME
-        updateDictWord()
+        updateDictPicker()
         updateDictNote()
         updateTextbook()
     }
     
-    func updateDictWord() {
+    func updateDictPicker() {
         let item = vm.selectedDictPicker
         dictPickerCell.textLabel!.text = item.DICTNAME
         let item2 = vmSettings.arrDictsWord.first { $0.DICTNAME == item.DICTNAME }

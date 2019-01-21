@@ -63,15 +63,15 @@ class SettingsViewController: NSViewController {
     
     @IBAction func dictWordSelected(_ sender: AnyObject) {
         vm.selectedDictPickerIndex = pubDictsPicker.indexOfSelectedItem
-        vm.updateDictWord().subscribe {
-            self.updateDictWord()
+        vm.updateDictPicker().subscribe {
+            self.updateDictPicker()
         }.disposed(by: disposeBag)
     }
     
     @IBAction func dictNoteSelected(_ sender: AnyObject) {
         vm.selectedDictNoteIndex = pubDictsNote.indexOfSelectedItem
         vm.updateDictNote().subscribe {
-            self.updateDictWord()
+            self.updateDictPicker()
         }.disposed(by: disposeBag)
     }
 
@@ -123,12 +123,12 @@ class SettingsViewController: NSViewController {
 
     func updateLang() {
         acLanguages.content = vm.arrLanguages
-        updateDictWord()
+        updateDictPicker()
         updateDictNote()
         updateTextbook()
     }
     
-    func updateDictWord() {
+    func updateDictPicker() {
         acDictsPicker.content = vm.arrDictsPicker
     }
     

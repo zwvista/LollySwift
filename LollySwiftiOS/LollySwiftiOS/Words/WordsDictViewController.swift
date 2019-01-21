@@ -42,7 +42,7 @@ class WordsDictViewController: UIViewController, WKNavigationDelegate {
         ddDictPicker.selectRow(vm.vmSettings.selectedDictPickerIndex)
         ddDictPicker.selectionAction = { (index: Int, item: String) in
             self.vm.vmSettings.selectedDictPickerIndex = index
-            self.vm.vmSettings.updateDictWord().subscribe {
+            self.vm.vmSettings.updateDictPicker().subscribe {
                 self.selectDictChanged()
             }.disposed(by: self.disposeBag)
         }
