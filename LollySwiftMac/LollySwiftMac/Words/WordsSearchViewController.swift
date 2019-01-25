@@ -28,10 +28,14 @@ class WordsSearchViewController: WordsViewController {
         return arrWords.count
     }
     
-    func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
-        return arrWords[row]
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! NSTableCellView
+        let item = arrWords[row]
+        let columnName = tableColumn!.title
+        cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
+        return cell;
     }
-    
+
     override func searchWordInTableView() {
         searchWord(word: arrWords[tableView.selectedRow].WORD)
     }
@@ -40,10 +44,42 @@ class WordsSearchViewController: WordsViewController {
         guard !newWord.isEmpty else {return}
         let mWord = MUnitWord()
         mWord.WORD = newWord
+        mWord.SEQNUM = arrWords.count + 1
+        mWord.NOTE = ""
         arrWords.append(mWord)
         tableView.reloadData()
         tfNewWord.stringValue = ""
         newWord = ""
+    }
+    
+    @IBAction func endEditing(_ sender: NSTextField) {
+        let row = tableView.row(for: sender)
+        let col = tableView.column(for: sender)
+        let key = tableView.tableColumns[col].title
+        let item = arrWords[row]
+        let oldValue = String(describing: item.value(forKey: key))
+        let newValue = sender.stringValue
+        guard oldValue != newValue else {return}
+        item.setValue(newValue, forKey: key)
+    }
+    
+    @IBAction func deleteWord(_ sender: Any) {
+    }
+
+    @IBAction func editWord(_ sender: Any) {
+    }
+    
+    @IBAction func getNote(_ sender: Any) {
+    }
+    
+    @IBAction func copyWord(_ sender: Any) {
+        let item = arrWords[tableView.selectedRow]
+        MacApi.copyText(item.WORD)
+    }
+    
+    @IBAction func googleWord(_ sender: Any) {
+        let item = arrWords[tableView.selectedRow]
+        googleWord(word: item.WORD)
     }
 }
 

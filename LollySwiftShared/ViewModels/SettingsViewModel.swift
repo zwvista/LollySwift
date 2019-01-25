@@ -155,9 +155,7 @@ class SettingsViewModel: NSObject {
                         return self.arrDictsWord.map { MDictPicker(id: String($0.DICTID), name: $0.DICTNAME!) }
                     } else {
                         i += 1
-                        var arr = [MDictPicker]()
-                        arr.append(MDictPicker(id: d, name: "Custom\(i)"))
-                        return arr
+                        return [MDictPicker(id: d, name: "Custom\(i)")]
                     }
                 }
                 self.selectedDictPickerIndex = self.arrDictsPicker.index { $0.DICTID == self.USDICTPICKER } ?? 0
