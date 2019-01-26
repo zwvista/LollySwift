@@ -678,17 +678,65 @@
                                                 <action selector="phrasesInLanguage:" target="Voe-Tx-rLC" id="Oea-V9-MF0"/>
                                             </connections>
                                         </menuItem>
-                                    </items>
-                                </menu>
-                            </menuItem>
-                            <menuItem title="Tools" id="wxr-3q-Mcd">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="Tools" id="F33-fz-NVQ">
-                                    <items>
                                         <menuItem title="Blog" id="FKE-az-Kum">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="editBlog:" target="Voe-Tx-rLC" id="5Wk-81-Yuw"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                            <menuItem title="Blog" id="wxr-3q-Mcd" userLabel="Blog">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Blog" id="F33-fz-NVQ">
+                                    <items>
+                                        <menuItem title="To Marked" id="1sZ-eB-llH">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="htmlToMarked:" target="Ady-hI-5gd" id="fri-96-5AP"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Add B" keyEquivalent="b" id="5ig-nu-1eM">
+                                            <modifierMask key="keyEquivalentModifierMask" control="YES"/>
+                                            <connections>
+                                                <action selector="addTagB:" target="Ady-hI-5gd" id="lCG-h1-kei"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Add I" keyEquivalent="i" id="eJZ-Z9-Nu3">
+                                            <modifierMask key="keyEquivalentModifierMask" control="YES"/>
+                                            <connections>
+                                                <action selector="addTagI:" target="Ady-hI-5gd" id="s7Y-si-44b"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Remove B/I" id="5hT-sX-Vrb">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="removeTagBI:" target="Ady-hI-5gd" id="ITS-4I-uLS"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Exchange B/I" id="REv-wk-gdv">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="exchangeTagBI:" target="Ady-hI-5gd" id="MbZ-o6-c4J"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Show Blog" id="PpZ-Hz-6Tf">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="showBlog:" target="Ady-hI-5gd" id="h1z-bH-9gY"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Show Pattern" id="3Y4-Qq-tEc" userLabel="Pattern">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="showPattern:" target="Ady-hI-5gd" id="iiv-Yh-947"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Pattern MD" id="4uQ-P6-gF3" userLabel="Pattern MD">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="copyPatternMarkDown:" target="Ady-hI-5gd" id="KRV-Fq-8NR"/>
                                             </connections>
                                         </menuItem>
                                     </items>
