@@ -12,12 +12,14 @@ import RxSwift
 @objcMembers
 class MUnitWord: NSObject, Codable {
     var ID = 0
+    var LANGID = 0
     var TEXTBOOKID = 0
     var UNIT = 0
     var PART = 0
     var SEQNUM = 0
     var WORD = ""
     var NOTE: String?
+    var LANGWORDID = 0
     var UNITPART = 0
     
     func PARTSTR(arrParts: [String]) -> String {
@@ -36,30 +38,31 @@ class MUnitWord: NSObject, Codable {
         return RestApi.getArray(url: url, keyPath: "VUNITWORDS")
     }
     
+    static func getDataByLangWord(_ langwordid: Int) -> Observable<[MUnitWord]> {
+        // SQL: SELECT * FROM VUNITWORDS WHERE LANGWORDID=?
+        let url = "\(RestApi.url)VUNITWORDS?filter[]=LANGWORDID,eq,\(langwordid)"
+        return RestApi.getArray(url: url, keyPath: "VUNITWORDS")
+    }
+
     static func update(_ id: Int, seqnum: Int) -> Observable<String> {
         // SQL: UPDATE UNITWORDS SET SEQNUM=? WHERE ID=?
         let url = "\(RestApi.url)UNITWORDS/\(id)"
         let body = "SEQNUM=\(seqnum)"
         return RestApi.update(url: url, body: body)
     }
-    
-    static func update(_ id: Int, note: String) -> Observable<String> {
-        // SQL: UPDATE UNITWORDS SET NOTE=? WHERE ID=?
-        let url = "\(RestApi.url)UNITWORDS/\(id)"
-        let body = "NOTE=\(note)"
-        return RestApi.update(url: url, body: body)
-    }
 
     static func update(item: MUnitWord) -> Observable<String> {
-        // SQL: UPDATE UNITWORDS SET TEXTBOOKID=?, UNIT=?, PART=?, SEQNUM=?, WORD=?, NOTE=? WHERE ID=?
+        // SQL: UPDATE UNITWORDS SET UNIT=?, PART=?, SEQNUM=? WHERE ID=?
         let url = "\(RestApi.url)UNITWORDS/\(item.ID)"
         return RestApi.update(url: url, body: try! item.toJSONString(prettyPrint: false)!)
     }
     
-    static func create(item: MUnitWord) -> Observable<String> {
-        // SQL: INSERT INTO UNITWORDS (TEXTBOOKID, UNIT, PART, SEQNUM, WORD, NOTE) VALUES (?,?,?,?,?,?)
+    static func create(item: MUnitWord) -> Observable<Int> {
+        // SQL: INSERT INTO UNITWORDS (TEXTBOOKID, UNIT, PART, SEQNUM, LANGWORDID) VALUES (?,?,?,?,?)
         let url = "\(RestApi.url)UNITWORDS"
-        return RestApi.create(url: url, body: try! item.toJSONString(prettyPrint: false)!)
+        return RestApi.create(url: url, body: try! item.toJSONString(prettyPrint: false)!).map {
+            return $0.toInt()!
+        }
     }
     
     static func delete(_ id: Int) -> Observable<String> {

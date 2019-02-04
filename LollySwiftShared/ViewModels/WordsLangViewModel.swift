@@ -37,7 +37,7 @@ class WordsLangViewModel: NSObject {
     }
 
     static func create(item: MLangWord) -> Observable<Int> {
-        return MLangWord.create(item: item).map { print($0); return $0.toInt()! }
+        return MLangWord.create(item: item).map { print($0); return $0 }
     }
     
     static func delete(_ id: Int) -> Observable<()> {

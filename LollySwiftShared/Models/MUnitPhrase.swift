@@ -12,12 +12,14 @@ import RxSwift
 @objcMembers
 class MUnitPhrase: NSObject, Codable {
     var ID = 0
+    var LANGID = 0
     var TEXTBOOKID = 0
     var UNIT = 0
     var PART = 0
     var SEQNUM = 0
     var PHRASE = ""
     var TRANSLATION: String?
+    var LANGPHRASEID = 0
     var UNITPART = 0
     
     func PARTSTR(arrParts: [String]) -> String {
@@ -33,6 +35,12 @@ class MUnitPhrase: NSObject, Codable {
         return RestApi.getArray(url: url, keyPath: "VUNITPHRASES")
     }
     
+    static func getDataByLangPhrase(_ langphraseid: Int) -> Observable<[MUnitPhrase]> {
+        // SQL: SELECT * FROM VUNITPHRASES WHERE LANGPHRASEID=?
+        let url = "\(RestApi.url)VUNITPHRASES?filter[]=LANGPHRASEID,eq,\(langphraseid)"
+        return RestApi.getArray(url: url, keyPath: "VUNITPHRASES")
+    }
+
     static func update(_ id: Int, seqnum: Int) -> Observable<String> {
         // SQL: UPDATE UNITPHRASES SET SEQNUM=? WHERE ID=?
         let url = "\(RestApi.url)UNITPHRASES/\(id)"
@@ -41,15 +49,17 @@ class MUnitPhrase: NSObject, Codable {
     }
     
     static func update(item: MUnitPhrase) -> Observable<String> {
-        // SQL: UPDATE UNITPHRASES SET TEXTBOOKID=?, UNIT=?, PART=?, SEQNUM=?, PHRASE=?, TRANSLATION=? WHERE ID=?
+        // SQL: UPDATE UNITPHRASES SET UNIT=?, PART=?, SEQNUM=? WHERE ID=?
         let url = "\(RestApi.url)UNITPHRASES/\(item.ID)"
         return RestApi.update(url: url, body: try! item.toJSONString(prettyPrint: false)!)
     }
     
-    static func create(item: MUnitPhrase) -> Observable<String> {
-        // SQL: INSERT INTO UNITPHRASES (TEXTBOOKID, UNIT, PART, SEQNUM, PHRASE, TRANSLATION) VALUES (?,?,?,?,?,?)
+    static func create(item: MUnitPhrase) -> Observable<Int> {
+        // SQL: INSERT INTO UNITPHRASES (TEXTBOOKID, UNIT, PART, SEQNUM, LANGPHRASEID) VALUES (?,?,?,?,?)
         let url = "\(RestApi.url)UNITPHRASES"
-        return RestApi.create(url: url, body: try! item.toJSONString(prettyPrint: false)!)
+        return RestApi.create(url: url, body: try! item.toJSONString(prettyPrint: false)!).map {
+            return $0.toInt()!
+        }
     }
     
     static func delete(_ id: Int) -> Observable<String> {

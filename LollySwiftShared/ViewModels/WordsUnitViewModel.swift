@@ -39,16 +39,67 @@ class WordsUnitViewModel: NSObject {
         return MUnitWord.update(id, seqnum: seqnum).map { print($0) }
     }
     
-    static func update(_ id: Int, note: String) -> Observable<()> {
-        return MUnitWord.update(id, note: note).map { print($0) }
+    static func update(_ langwordid: Int, note: String) -> Observable<()> {
+        return MLangWord.update(langwordid, note: note).map { print($0) }
     }
 
     static func update(item: MUnitWord) -> Observable<()> {
-        return MUnitWord.update(item: item).map { print($0) }
+        let langwordid = item.LANGWORDID
+        return MUnitWord.getDataByLangWord(langwordid).flatMap { arr -> Observable<Int> in
+            if arr.isEmpty {
+                // non-existing word
+                return Observable.empty()
+            } else {
+                return MLangWord.getDataByLangWord(langid: item.LANGID, word: item.WORD).flatMap { arr2 -> Observable<Int> in
+                    let item2 = MLangWord(item: item)
+                    func f() -> Observable<Int> {
+                        let item3 = arr2[0]
+                        let id = item3.ID
+                        let b = item2.combineNote(item3.NOTE)
+                        item.NOTE = item2.NOTE
+                        return b ? MLangWord.update(id, note: item2.NOTE!).map { _ in id } : Observable.just(id)
+                    }
+                    if arr.count == 1 {
+                        if !arr2.isEmpty {
+                            // existing word
+                            return MLangWord.delete(langwordid).flatMap { _ in f() }
+                        } else {
+                            // new word
+                            return MLangWord.update(item: item2).map { _ in langwordid }
+                        }
+                    } else {
+                        if !arr2.isEmpty {
+                            // existing word
+                            return f()
+                        } else {
+                            // new word
+                            return MLangWord.create(item: item2)
+                        }
+                    }
+                }
+            }
+        }.map {
+            item.LANGWORDID = $0
+            return MUnitWord.update(item: item)
+        }.map { print($0) }
     }
     
     static func create(item: MUnitWord) -> Observable<Int> {
-        return MUnitWord.create(item: item).map { print($0); return $0.toInt()! }
+        return MLangWord.getDataByLangWord(langid: item.LANGID, word: item.WORD).flatMap { arr -> Observable<Int> in
+            if (!arr.isEmpty) {
+                let item2 = arr[0]
+                let id = item2.ID
+                let b = item2.combineNote(item.NOTE)
+                item.NOTE = item2.NOTE
+                return b ? MLangWord.update(id, note: item2.NOTE!).map { _ in id } : Observable.just(id)
+            } else {
+                let item2 = MLangWord(item: item)
+                return MLangWord.create(item: item2)
+            }
+        }.flatMap { id -> Observable<Int> in
+            item.LANGWORDID = id
+            return MUnitWord.create(item: item)
+        }
     }
     
     static func delete(_ id: Int) -> Observable<()> {
@@ -68,6 +119,7 @@ class WordsUnitViewModel: NSObject {
     
     func newUnitWord() -> MUnitWord {
         let item = MUnitWord()
+        item.LANGID = vmSettings.selectedLang.ID
         item.TEXTBOOKID = vmSettings.USTEXTBOOKID
         let maxElem = arrWords.max { ($0.UNIT, $0.PART, $0.SEQNUM) < ($1.UNIT, $1.PART, $1.SEQNUM) }
         item.UNIT = maxElem?.UNIT ?? vmSettings.USUNITTO

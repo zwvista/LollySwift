@@ -15,13 +15,47 @@ class MLangWord: NSObject, Codable {
     var LANGID = 0
     var WORD = ""
     var LEVEL = 0
+    var NOTE: String?
+
+    override init() {
+    }
     
+    init(item: MUnitWord) {
+        ID = item.LANGWORDID
+        LANGID = item.LANGID
+        WORD = item.WORD
+        NOTE = item.NOTE
+        super.init()
+    }
+    
+    func combineNote(_ note: String?) -> Bool {
+        let oldNote = NOTE
+        if !(note ?? "").isEmpty {
+            if (NOTE ?? "").isEmpty {
+                NOTE = note
+            } else {
+                var arr = NOTE!.split(",")
+                if !arr.contains(note!) {
+                    arr.append(note!)
+                    NOTE = arr.joined(separator: ",")
+                }
+            }
+        }
+        return oldNote != NOTE
+    }
+
     static func getDataByLang(_ langid: Int) -> Observable<[MLangWord]> {
-        // SQL: SELECT LANGID, WORD FROM LANGWORDS WHERE LANGID = ?
+        // SQL: SELECT LANGID, WORD FROM LANGWORDS WHERE LANGID=?
         let url = "\(RestApi.url)LANGWORDS?transform=1&filter=LANGID,eq,\(langid)"
         return RestApi.getArray(url: url, keyPath: "LANGWORDS")
     }
-    
+
+    static func getDataByLangWord(langid: Int, word: String) -> Observable<[MLangWord]> {
+        // SQL: SELECT * FROM LANGWORDS WHERE LANGID=? AND WORD=?
+        let url = "\(RestApi.url)LANGWORDS?transform=1&filter[]=LANGID,eq,\(langid)&filter[]=WORD,eq,\(word.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)"
+        return RestApi.getArray(url: url, keyPath: "LANGWORDS")
+    }
+
     static func update(_ id: Int, word: String) -> Observable<String> {
         // SQL: UPDATE LANGWORDS SET WORD=? WHERE ID=?
         let url = "\(RestApi.url)LANGWORDS/\(id)"
@@ -29,16 +63,25 @@ class MLangWord: NSObject, Codable {
         return RestApi.update(url: url, body: body)
     }
     
+    static func update(_ id: Int, note: String) -> Observable<String> {
+        // SQL: UPDATE LANGWORDS SET NOTE=? WHERE ID=?
+        let url = "\(RestApi.url)LANGWORDS/\(id)"
+        let body = "NOTE=\(note)"
+        return RestApi.update(url: url, body: body)
+    }
+
     static func update(item: MLangWord) -> Observable<String> {
         // SQL: UPDATE LANGWORDS SET WORD=?, LEVEL=? WHERE ID=?
         let url = "\(RestApi.url)LANGWORDS/\(item.ID)"
         return RestApi.update(url: url, body: try! item.toJSONString(prettyPrint: false)!)
     }
 
-    static func create(item: MLangWord) -> Observable<String> {
+    static func create(item: MLangWord) -> Observable<Int> {
         // SQL: INSERT INTO LANGWORDS (LANGID, WORD) VALUES (?,?)
         let url = "\(RestApi.url)LANGWORDS"
-        return RestApi.create(url: url, body: try! item.toJSONString(prettyPrint: false)!)
+        return RestApi.create(url: url, body: try! item.toJSONString(prettyPrint: false)!).map {
+            return $0.toInt()!
+        }
     }
     
     static func delete(_ id: Int) -> Observable<String> {

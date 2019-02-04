@@ -39,7 +39,7 @@ class PhrasesLangViewModel: NSObject {
     }
 
     static func create(item: MLangPhrase) -> Observable<Int> {
-        return MLangPhrase.create(item: item).map { print($0); return $0.toInt()! }
+        return MLangPhrase.create(item: item).map { print($0); return $0 }
     }
     
     static func delete(_ id: Int) -> Observable<()> {

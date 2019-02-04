@@ -92,7 +92,7 @@ class SettingsViewController: NSViewController {
     @IBAction func unitFromSelected(_ sender: AnyObject) {
         guard vm.USUNITFROM != pubUnitFrom.indexOfSelectedItem + 1 else {return}
         vm.USUNITFROM = pubUnitFrom.indexOfSelectedItem + 1
-        vm.updateUnitFrom().subscribe { [unowned self] in
+        vm.updateUnitFrom().subscribe {
             if self.btnUnitPartTo.state == .off || self.vm.isInvalidUnitPart {self.updateUnitPartTo()}
         }.disposed(by: disposeBag)
     }
@@ -100,7 +100,7 @@ class SettingsViewController: NSViewController {
     @IBAction func unitToSelected(_ sender: AnyObject) {
         guard vm.USUNITTO != pubUnitTo.indexOfSelectedItem + 1 else {return}
         vm.USUNITTO = pubUnitTo.indexOfSelectedItem + 1
-        vm.updateUnitTo().subscribe { [unowned self] in
+        vm.updateUnitTo().subscribe {
             if self.vm.isInvalidUnitPart {self.updateUnitPartFrom()}
         }.disposed(by: disposeBag)
     }
@@ -108,7 +108,7 @@ class SettingsViewController: NSViewController {
     @IBAction func partFromSelected(_ sender: AnyObject) {
         guard vm.USPARTFROM != pubPartFrom.indexOfSelectedItem + 1 else {return}
         vm.USPARTFROM = pubPartFrom.indexOfSelectedItem + 1
-        vm.updatePartFrom().subscribe { [unowned self] in
+        vm.updatePartFrom().subscribe {
             if self.btnUnitPartTo.state == .off || self.vm.isInvalidUnitPart {self.updateUnitPartTo()}
         }.disposed(by: disposeBag)
     }
@@ -116,7 +116,7 @@ class SettingsViewController: NSViewController {
     @IBAction func partToSelected(_ sender: AnyObject) {
         guard vm.USPARTTO != pubPartTo.indexOfSelectedItem + 1 else {return}
         vm.USPARTTO = pubPartTo.indexOfSelectedItem + 1
-        vm.updatePartTo().subscribe { [unowned self] in
+        vm.updatePartTo().subscribe {
             if self.vm.isInvalidUnitPart {self.updateUnitPartFrom()}
         }.disposed(by: disposeBag)
     }
