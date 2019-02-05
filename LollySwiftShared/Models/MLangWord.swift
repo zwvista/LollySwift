@@ -45,7 +45,7 @@ class MLangWord: NSObject, Codable {
     }
 
     static func getDataByLang(_ langid: Int) -> Observable<[MLangWord]> {
-        // SQL: SELECT LANGID, WORD FROM LANGWORDS WHERE LANGID=?
+        // SQL: SELECT * FROM LANGWORDS WHERE LANGID=?
         let url = "\(RestApi.url)LANGWORDS?transform=1&filter=LANGID,eq,\(langid)"
         return RestApi.getArray(url: url, keyPath: "LANGWORDS")
     }
@@ -53,6 +53,12 @@ class MLangWord: NSObject, Codable {
     static func getDataByLangWord(langid: Int, word: String) -> Observable<[MLangWord]> {
         // SQL: SELECT * FROM LANGWORDS WHERE LANGID=? AND WORD=?
         let url = "\(RestApi.url)LANGWORDS?transform=1&filter[]=LANGID,eq,\(langid)&filter[]=WORD,eq,\(word.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)"
+        return RestApi.getArray(url: url, keyPath: "LANGWORDS")
+    }
+
+    static func getDataById(_ id: Int) -> Observable<[MLangWord]> {
+        // SQL: SELECT * FROM LANGWORDS WHERE ID=?
+        let url = "\(RestApi.url)LANGWORDS?transform=1&filter=ID,eq,\(id)"
         return RestApi.getArray(url: url, keyPath: "LANGWORDS")
     }
 

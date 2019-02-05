@@ -40,7 +40,7 @@ class MUnitWord: NSObject, Codable {
     
     static func getDataByLangWord(_ langwordid: Int) -> Observable<[MUnitWord]> {
         // SQL: SELECT * FROM VUNITWORDS WHERE LANGWORDID=?
-        let url = "\(RestApi.url)VUNITWORDS?filter[]=LANGWORDID,eq,\(langwordid)"
+        let url = "\(RestApi.url)VUNITWORDS?transform=1&filter=LANGWORDID,eq,\(langwordid)"
         return RestApi.getArray(url: url, keyPath: "VUNITWORDS")
     }
 

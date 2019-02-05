@@ -45,35 +45,45 @@ class WordsUnitViewModel: NSObject {
 
     static func update(item: MUnitWord) -> Observable<()> {
         let langwordid = item.LANGWORDID
-        return MUnitWord.getDataByLangWord(langwordid).flatMap { arr -> Observable<Int> in
-            if arr.isEmpty {
+        return MUnitWord.getDataByLangWord(langwordid).flatMap { arrUnit -> Observable<Int> in
+            if arrUnit.isEmpty {
                 // non-existing word
                 return Observable.empty()
             } else {
-                return MLangWord.getDataByLangWord(langid: item.LANGID, word: item.WORD).flatMap { arr2 -> Observable<Int> in
-                    let item2 = MLangWord(item: item)
-                    func f() -> Observable<Int> {
-                        let item3 = arr2[0]
-                        let id = item3.ID
-                        let b = item2.combineNote(item3.NOTE)
-                        item.NOTE = item2.NOTE
-                        return b ? MLangWord.update(id, note: item2.NOTE!).map { _ in id } : Observable.just(id)
-                    }
-                    if arr.count == 1 {
-                        if !arr2.isEmpty {
-                            // existing word
-                            return MLangWord.delete(langwordid).flatMap { _ in f() }
-                        } else {
-                            // new word
-                            return MLangWord.update(item: item2).map { _ in langwordid }
-                        }
+                let itemLang = MLangWord(item: item)
+                return MLangWord.getDataById(langwordid).flatMap { arrLangOld -> Observable<Int> in
+                    if !arrLangOld.isEmpty && arrLangOld[0].WORD == item.WORD {
+                        // word intact
+                        return MLangWord.update(langwordid, note: item.NOTE ?? "").map { _ in langwordid }
                     } else {
-                        if !arr2.isEmpty {
-                            // existing word
-                            return f()
-                        } else {
-                            // new word
-                            return MLangWord.create(item: item2)
+                        // word changed
+                        return MLangWord.getDataByLangWord(langid: item.LANGID, word: item.WORD).flatMap { arrLangNew -> Observable<Int> in
+                            func f() -> Observable<Int> {
+                                let itemLang = arrLangNew[0]
+                                let langwordid = itemLang.ID
+                                let b = itemLang.combineNote(item.NOTE)
+                                item.NOTE = itemLang.NOTE
+                                return b ? MLangWord.update(langwordid, note: item.NOTE ?? "").map { _ in langwordid } : Observable.just(langwordid)
+                            }
+                            if arrUnit.count == 1 {
+                                // exclusive
+                                if arrLangNew.isEmpty {
+                                    // new word
+                                    return MLangWord.update(item: itemLang).map { _ in langwordid }
+                                } else {
+                                    // existing word
+                                    return MLangWord.delete(langwordid).flatMap { _ in f() }
+                                }
+                            } else {
+                                // non-exclusive
+                                if arrLangNew.isEmpty {
+                                    // new word
+                                    return MLangWord.create(item: itemLang)
+                                } else {
+                                    // existing word
+                                    return f()
+                                }
+                            }
                         }
                     }
                 }
@@ -85,19 +95,19 @@ class WordsUnitViewModel: NSObject {
     }
     
     static func create(item: MUnitWord) -> Observable<Int> {
-        return MLangWord.getDataByLangWord(langid: item.LANGID, word: item.WORD).flatMap { arr -> Observable<Int> in
-            if (!arr.isEmpty) {
-                let item2 = arr[0]
-                let id = item2.ID
-                let b = item2.combineNote(item.NOTE)
-                item.NOTE = item2.NOTE
-                return b ? MLangWord.update(id, note: item2.NOTE!).map { _ in id } : Observable.just(id)
+        return MLangWord.getDataByLangWord(langid: item.LANGID, word: item.WORD).flatMap { arrLang -> Observable<Int> in
+            if arrLang.isEmpty {
+                let itemLang = MLangWord(item: item)
+                return MLangWord.create(item: itemLang)
             } else {
-                let item2 = MLangWord(item: item)
-                return MLangWord.create(item: item2)
+                let itemLang = arrLang[0]
+                let langwordid = itemLang.ID
+                let b = itemLang.combineNote(item.NOTE)
+                item.NOTE = itemLang.NOTE
+                return b ? MLangWord.update(item: itemLang).map { _ in langwordid } : Observable.just(langwordid)
             }
-        }.flatMap { id -> Observable<Int> in
-            item.LANGWORDID = id
+        }.flatMap { langwordid -> Observable<Int> in
+            item.LANGWORDID = langwordid
             return MUnitWord.create(item: item)
         }
     }
