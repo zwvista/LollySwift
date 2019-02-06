@@ -20,7 +20,6 @@ class MUnitWord: NSObject, Codable {
     var WORD = ""
     var NOTE: String?
     var LANGWORDID = 0
-    var UNITPART = 0
     
     func PARTSTR(arrParts: [String]) -> String {
         return arrParts[PART - 1]

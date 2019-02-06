@@ -20,7 +20,6 @@ class MUnitPhrase: NSObject, Codable {
     var PHRASE = ""
     var TRANSLATION: String?
     var LANGPHRASEID = 0
-    var UNITPART = 0
     
     func PARTSTR(arrParts: [String]) -> String {
         return arrParts[PART - 1]
@@ -37,7 +36,7 @@ class MUnitPhrase: NSObject, Codable {
     
     static func getDataByLangPhrase(_ langphraseid: Int) -> Observable<[MUnitPhrase]> {
         // SQL: SELECT * FROM VUNITPHRASES WHERE LANGPHRASEID=?
-        let url = "\(RestApi.url)VUNITPHRASES?filter[]=LANGPHRASEID,eq,\(langphraseid)"
+        let url = "\(RestApi.url)VUNITPHRASES?filter=LANGPHRASEID,eq,\(langphraseid)"
         return RestApi.getArray(url: url, keyPath: "VUNITPHRASES")
     }
 

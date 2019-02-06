@@ -104,7 +104,7 @@ class WordsUnitViewModel: NSObject {
                 let langwordid = itemLang.ID
                 let b = itemLang.combineNote(item.NOTE)
                 item.NOTE = itemLang.NOTE
-                return b ? MLangWord.update(item: itemLang).map { _ in langwordid } : Observable.just(langwordid)
+                return b ? MLangWord.update(langwordid, note: item.NOTE ?? "").map { _ in langwordid } : Observable.just(langwordid)
             }
         }.flatMap { langwordid -> Observable<Int> in
             item.LANGWORDID = langwordid

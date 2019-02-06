@@ -44,7 +44,7 @@ class MLangPhrase: NSObject, Codable {
     }
 
     static func getDataByLang(_ langid: Int) -> Observable<[MLangPhrase]> {
-        // SQL: SELECT PHRASE, TRANSLATION FROM LANGPHRASES WHERE LANGID=?
+        // SQL: SELECT * FROM LANGPHRASES WHERE LANGID=?
         let url = "\(RestApi.url)LANGPHRASES?transform=1&filter=LANGID,eq,\(langid)"
         return RestApi.getArray(url: url, keyPath: "LANGPHRASES")
     }
@@ -56,7 +56,7 @@ class MLangPhrase: NSObject, Codable {
     }
     
     static func getDataById(_ id: Int) -> Observable<[MLangPhrase]> {
-        // SQL: SELECT PHRASE, TRANSLATION FROM LANGPHRASES WHERE ID=?
+        // SQL: SELECT * FROM LANGPHRASES WHERE ID=?
         let url = "\(RestApi.url)LANGPHRASES?transform=1&filter=ID,eq,\(id)"
         return RestApi.getArray(url: url, keyPath: "LANGPHRASES")
     }
