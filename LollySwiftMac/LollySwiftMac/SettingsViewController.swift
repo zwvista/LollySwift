@@ -54,7 +54,7 @@ class SettingsViewController: NSViewController {
     }
     
     @IBAction func langSelected(_ sender: AnyObject) {
-        vm.setSelectedLangIndex(pubLanguages.indexOfSelectedItem).concatMap { [unowned self] in
+        vm.setSelectedLangIndex(pubLanguages.indexOfSelectedItem).flatMap {
             self.vm.updateLang()
         }.subscribe {
             self.updateLang()

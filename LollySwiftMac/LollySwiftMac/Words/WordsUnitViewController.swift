@@ -103,7 +103,9 @@ class WordsUnitViewController: WordsViewController {
         let newValue = sender.stringValue
         guard oldValue != newValue else {return}
         item.setValue(newValue, forKey: key)
-        WordsUnitViewModel.update(item: item).subscribe().disposed(by: disposeBag)
+        WordsUnitViewModel.update(item: item).subscribe {
+            self.tableView.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count))
+        }.disposed(by: disposeBag)
     }
     
     override func searchWordInTableView() {

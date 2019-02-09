@@ -130,7 +130,7 @@ class SettingsViewModel: NSObject {
     
     func getData() -> Observable<()> {
         return Observable.zip(MLanguage.getData(), MUserSetting.getData(userid: self.userid))
-            .concatMap { result -> Observable<()> in
+            .flatMap { result -> Observable<()> in
                 self.arrLanguages = result.0
                 self.arrUserSettings = result.1
                 self.selectedUSUserIndex = self.arrUserSettings.index { $0.KIND == 1 }!

@@ -53,7 +53,7 @@ class SettingsViewController: UITableViewController {
         ddLang.selectRow(vm.selectedLangIndex)
         ddLang.selectionAction = { [unowned self] (index: Int, item: String) in
             guard index != self.vm.selectedLangIndex else {return}
-            self.vm.setSelectedLangIndex(index).concatMap {
+            self.vm.setSelectedLangIndex(index).flatMap {
                 self.vm.updateLang()
             }.subscribe {
                 self.updateLang()

@@ -63,16 +63,16 @@ class WordsUnitViewModel: NSObject {
                                 let langwordid = itemLang.ID
                                 let b = itemLang.combineNote(item.NOTE)
                                 item.NOTE = itemLang.NOTE
-                                return b ? MLangWord.update(langwordid, note: item.NOTE ?? "").map { _ in langwordid } : Observable.just(langwordid)
+                                return b ? MLangWord.update(langwordid, note: item.NOTE ?? "").map { result in print(result); return langwordid } : Observable.just(langwordid)
                             }
                             if arrUnit.count == 1 {
                                 // exclusive
                                 if arrLangNew.isEmpty {
                                     // new word
-                                    return MLangWord.update(item: itemLang).map { _ in langwordid }
+                                    return MLangWord.update(item: itemLang).map { result in print(result); return langwordid }
                                 } else {
                                     // existing word
-                                    return MLangWord.delete(langwordid).flatMap { _ in f() }
+                                    return MLangWord.delete(langwordid).flatMap { result -> Observable<Int> in print(result); return f() }
                                 }
                             } else {
                                 // non-exclusive
@@ -88,10 +88,10 @@ class WordsUnitViewModel: NSObject {
                     }
                 }
             }
-        }.map {
-            item.LANGWORDID = $0
-            return MUnitWord.update(item: item)
-        }.map { print($0) }
+        }.flatMap { langwordid -> Observable<()> in
+            item.LANGWORDID = langwordid
+            return MUnitWord.update(item: item).map { print($0) }
+        }
     }
     
     static func create(item: MUnitWord) -> Observable<Int> {
@@ -104,7 +104,7 @@ class WordsUnitViewModel: NSObject {
                 let langwordid = itemLang.ID
                 let b = itemLang.combineNote(item.NOTE)
                 item.NOTE = itemLang.NOTE
-                return b ? MLangWord.update(langwordid, note: item.NOTE ?? "").map { _ in langwordid } : Observable.just(langwordid)
+                return b ? MLangWord.update(langwordid, note: item.NOTE ?? "").map { result in print(result); return langwordid } : Observable.just(langwordid)
             }
         }.flatMap { langwordid -> Observable<Int> in
             item.LANGWORDID = langwordid
@@ -145,7 +145,7 @@ class WordsUnitViewModel: NSObject {
 
     func getNote(index: Int) -> Observable<()> {
         let item = arrWords[index]
-        return vmNote.getNote(word: item.WORD).concatMap { note -> Observable<()> in
+        return vmNote.getNote(word: item.WORD).flatMap { note -> Observable<()> in
             item.NOTE = note
             return WordsUnitViewModel.update(item.ID, note: note)
         }

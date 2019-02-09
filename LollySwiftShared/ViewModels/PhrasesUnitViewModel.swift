@@ -56,16 +56,16 @@ class PhrasesUnitViewModel: NSObject {
                                 let langphraseid = itemLang.ID
                                 let b = itemLang.combineTranslation(item.TRANSLATION)
                                 item.TRANSLATION = itemLang.TRANSLATION
-                                return b ? MLangPhrase.update(langphraseid, translation: item.TRANSLATION ?? "").map { _ in langphraseid } : Observable.just(langphraseid)
+                                return b ? MLangPhrase.update(langphraseid, translation: item.TRANSLATION ?? "").map { result in print(result); return langphraseid } : Observable.just(langphraseid)
                             }
                             if arrUnit.count == 1 {
                                 // exclusive
                                 if arrLangNew.isEmpty {
                                     // new phrase
-                                    return MLangPhrase.update(item: itemLang).map { _ in langphraseid }
+                                    return MLangPhrase.update(item: itemLang).map { result in print(result); return langphraseid }
                                 } else {
                                     // existing phrase
-                                    return MLangPhrase.delete(langphraseid).flatMap { _ in f() }
+                                    return MLangPhrase.delete(langphraseid).flatMap { result -> Observable<Int> in print(result); return f() }
                                 }
                             } else {
                                 if arrLangNew.isEmpty {
@@ -80,10 +80,10 @@ class PhrasesUnitViewModel: NSObject {
                     }
                 }
             }
-        }.map {
-            item.LANGPHRASEID = $0
-            return MUnitPhrase.update(item: item)
-        }.map { print($0) }
+        }.flatMap { langphraseid -> Observable<()> in
+            item.LANGPHRASEID = langphraseid
+            return MUnitPhrase.update(item: item).map { print($0) }
+        }
     }
     
     static func create(item: MUnitPhrase) -> Observable<Int> {

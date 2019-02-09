@@ -111,7 +111,9 @@ class PhrasesUnitViewController: NSViewController, LollyProtocol, NSTableViewDat
         let newValue = sender.stringValue
         guard oldValue != newValue else {return}
         item.setValue(newValue, forKey: key)
-        PhrasesUnitViewModel.update(item: item).subscribe().disposed(by: disposeBag)
+        PhrasesUnitViewModel.update(item: item).subscribe {
+            self.tableView.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count))
+        }.disposed(by: disposeBag)
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
