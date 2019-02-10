@@ -18,11 +18,12 @@ class PhrasesLangViewController: NSViewController, LollyProtocol, NSTableViewDat
     @objc
     var newPhrase = ""
     
+    var wc: PhrasesLangWindowController { return view.window!.windowController as! PhrasesLangWindowController }
     var vm: PhrasesLangViewModel!
     var arrPhrases: [MLangPhrase] {
-        return vm.arrPhrases
+        return vm.arrPhrasesFiltered == nil ? vm.arrPhrases : vm.arrPhrasesFiltered!
     }
-    
+
     let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
@@ -99,11 +100,18 @@ class PhrasesLangViewController: NSViewController, LollyProtocol, NSTableViewDat
     
     @IBAction func googlePhrase(_ sender: Any) {
         let item = vm.arrPhrases[tableView.selectedRow]
-        NSWorkspace.shared.open([URL(string: "https://www.google.com/search?q=\(item.PHRASE)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!],
-                                withAppBundleIdentifier:"com.apple.Safari",
-                                options: [],
-                                additionalEventParamDescriptor: nil,
-                                launchIdentifiers: nil)
+        MacApi.googleString(item.PHRASE)
+    }
+    
+    @IBAction func filterPhrase(_ sender: Any) {
+        let n = (sender as! NSToolbarItem).tag
+        if n == 0 {
+            vm.arrPhrasesFiltered = nil
+        } else {
+            let scope = n == 1 ? "Phrase" : "Translation"
+            vm.filterPhrasesForSearchText(wc.filterText, scope: scope)
+        }
+        self.tableView.reloadData()
     }
     
     func settingsChanged() {
@@ -115,9 +123,11 @@ class PhrasesLangWindowController: NSWindowController, LollyProtocol {
     
     var vc: PhrasesLangViewController {return contentViewController as! PhrasesLangViewController}
     @objc var vm: SettingsViewModel {return vmSettings}
-    
+    @objc var filterText = ""
+
     override func windowDidLoad() {
         super.windowDidLoad()
+        window!.toolbar!.selectedItemIdentifier = NSToolbarItem.Identifier(rawValue: "No Filter")
     }
     
     func settingsChanged() {

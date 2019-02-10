@@ -576,11 +576,32 @@ Gw
                                         <action selector="refreshTableView:" target="qEo-JS-MYZ" id="DKd-Bn-vNa"/>
                                     </connections>
                                 </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="00EC7555-6150-4028-A3F5-B089306DEE64" label="No Filter" paletteLabel="No Filter" tag="-1" id="zIG-xW-1RV"/>
+                                <toolbarItem implicitItemIdentifier="6A1E5789-0232-465A-91A3-4D0A2A345346" label="Phrase" paletteLabel="Phrase" tag="-1" id="zNd-Qk-Hix"/>
+                                <toolbarItem implicitItemIdentifier="C0FBDEA8-0631-4208-847E-315B820985E0" label="Translation" paletteLabel="Translation" tag="-1" id="VlT-C4-z9h"/>
+                                <toolbarItem implicitItemIdentifier="D8BDE684-9F91-4AFD-8ECB-3BA6D1447331" label="Filter" paletteLabel="Filter" tag="-1" id="20i-4s-4I8" userLabel="Filter">
+                                    <nil key="toolTip"/>
+                                    <size key="minSize" width="40" height="22"/>
+                                    <size key="maxSize" width="123" height="22"/>
+                                    <textField key="view" verticalHuggingPriority="750" tag="-1" id="MWj-FL-g0J">
+                                        <rect key="frame" x="0.0" y="14" width="119" height="22"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="Nll-FJ-3U0">
+                                            <font key="font" usesAppearanceFont="YES"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="QRZ-Pa-ivc"/>
                                 <toolbarItem reference="qFb-ob-E6N"/>
                                 <toolbarItem reference="89E-Xj-D8k"/>
+                                <toolbarItem reference="zIG-xW-1RV"/>
+                                <toolbarItem reference="zNd-Qk-Hix"/>
+                                <toolbarItem reference="VlT-C4-z9h"/>
+                                <toolbarItem reference="20i-4s-4I8"/>
                             </defaultToolbarItems>
                         </toolbar>
                         <connections>
@@ -610,7 +631,7 @@ Gw
                                     <rect key="frame" x="1" y="0.0" width="820" height="639"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" ambiguous="YES" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="R8q-7P-bab" viewBased="YES" id="M2g-9p-UVx">
+                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="R8q-7P-bab" viewBased="YES" id="M2g-9p-UVx">
                                             <rect key="frame" x="0.0" y="0.0" width="911" height="614"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
@@ -950,12 +971,52 @@ Gw
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="1up-Vl-Wwc"/>
                                 <toolbarItem implicitItemIdentifier="360CEF89-3610-451A-B939-34F9335730CF" label="Add" paletteLabel="Add" tag="-1" image="NSAddTemplate" autovalidates="NO" id="viz-co-4v0"/>
                                 <toolbarItem implicitItemIdentifier="78890E5B-E0CE-4316-AC39-5F2EC4113E54" label="Delete" paletteLabel="Delete" tag="-1" image="NSRemoveTemplate" id="v5L-iE-Ns3"/>
-                                <toolbarItem implicitItemIdentifier="0FE47FD6-6CD6-4F13-92D4-43D61D94CAF8" label="Refresh" paletteLabel="Refresh" tag="-1" image="NSRefreshTemplate" id="MnR-91-5r0"/>
+                                <toolbarItem implicitItemIdentifier="0FE47FD6-6CD6-4F13-92D4-43D61D94CAF8" label="Refresh" paletteLabel="Refresh" tag="-1" image="NSRefreshTemplate" id="MnR-91-5r0">
+                                    <connections>
+                                        <action selector="refreshTableView:" target="maH-dw-yMa" id="BSZ-bF-rgg"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="73517F02-04F6-43E0-9105-D3532E9A662B" label="No Filter" paletteLabel="No Filter" selectable="YES" id="am4-NL-UIR">
+                                    <connections>
+                                        <action selector="filterPhrase:" target="maH-dw-yMa" id="4e6-45-SA6"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="DBD3169B-F8A8-42D8-B379-D86FA1296E6E" label="Phrase" paletteLabel="Phrase" tag="1" selectable="YES" id="BqT-9W-PEF">
+                                    <connections>
+                                        <action selector="filterPhrase:" target="maH-dw-yMa" id="Fqv-HG-1JR"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="4D7B9004-7664-431B-A310-15C6E881D520" label="Translation" paletteLabel="Translation" tag="2" selectable="YES" id="VeD-pW-P6g">
+                                    <connections>
+                                        <action selector="filterPhrase:" target="maH-dw-yMa" id="TOn-ZP-afK"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="DA7DC071-75F3-4704-8DA3-AB2628008C84" label="Filter" paletteLabel="Filter" tag="-1" id="Fkr-PD-fBq" userLabel="Filter">
+                                    <nil key="toolTip"/>
+                                    <size key="minSize" width="40" height="22"/>
+                                    <size key="maxSize" width="123" height="22"/>
+                                    <textField key="view" verticalHuggingPriority="750" tag="-1" id="qUX-lZ-cQc">
+                                        <rect key="frame" x="0.0" y="14" width="119" height="22"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="b1u-JQ-VZk">
+                                            <font key="font" usesAppearanceFont="YES"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                        <connections>
+                                            <binding destination="t1w-66-vYI" name="value" keyPath="filterText" id="Ixb-uu-kHI"/>
+                                        </connections>
+                                    </textField>
+                                </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="viz-co-4v0"/>
                                 <toolbarItem reference="v5L-iE-Ns3"/>
                                 <toolbarItem reference="MnR-91-5r0"/>
+                                <toolbarItem reference="am4-NL-UIR"/>
+                                <toolbarItem reference="BqT-9W-PEF"/>
+                                <toolbarItem reference="VeD-pW-P6g"/>
+                                <toolbarItem reference="Fkr-PD-fBq"/>
                             </defaultToolbarItems>
                         </toolbar>
                         <connections>

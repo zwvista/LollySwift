@@ -79,7 +79,7 @@ class WordsSearchViewController: WordsViewController {
     
     @IBAction func googleWord(_ sender: Any) {
         let item = arrWords[tableView.selectedRow]
-        googleWord(word: item.WORD)
+        MacApi.googleString(item.WORD)
     }
 }
 

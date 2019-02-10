@@ -85,14 +85,6 @@ class WordsViewController: NSViewController, NSTableViewDataSource, NSTableViewD
     func tableViewSelectionDidChange(_ notification: Notification) {
         searchDict(self)
     }
-    
-    func googleWord(word: String) {
-        NSWorkspace.shared.open([URL(string: "https://www.google.com/search?q=\(word)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!],
-                                withAppBundleIdentifier:"com.apple.Safari",
-                                options: [],
-                                additionalEventParamDescriptor: nil,
-                                launchIdentifiers: nil)
-    }
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         self.view.window?.makeKeyAndOrderFront(self)
@@ -151,6 +143,26 @@ class WordsWindowController: NSWindowController, NSToolbarDelegate, LollyProtoco
     @IBOutlet weak var tbiDict17: NSToolbarItem!
     @IBOutlet weak var tbiDict18: NSToolbarItem!
     @IBOutlet weak var tbiDict19: NSToolbarItem!
+    @IBOutlet weak var tbiDict20: NSToolbarItem!
+    @IBOutlet weak var tbiDict21: NSToolbarItem!
+    @IBOutlet weak var tbiDict22: NSToolbarItem!
+    @IBOutlet weak var tbiDict23: NSToolbarItem!
+    @IBOutlet weak var tbiDict24: NSToolbarItem!
+    @IBOutlet weak var tbiDict25: NSToolbarItem!
+    @IBOutlet weak var tbiDict26: NSToolbarItem!
+    @IBOutlet weak var tbiDict27: NSToolbarItem!
+    @IBOutlet weak var tbiDict28: NSToolbarItem!
+    @IBOutlet weak var tbiDict29: NSToolbarItem!
+    @IBOutlet weak var tbiDict30: NSToolbarItem!
+    @IBOutlet weak var tbiDict31: NSToolbarItem!
+    @IBOutlet weak var tbiDict32: NSToolbarItem!
+    @IBOutlet weak var tbiDict33: NSToolbarItem!
+    @IBOutlet weak var tbiDict34: NSToolbarItem!
+    @IBOutlet weak var tbiDict35: NSToolbarItem!
+    @IBOutlet weak var tbiDict36: NSToolbarItem!
+    @IBOutlet weak var tbiDict37: NSToolbarItem!
+    @IBOutlet weak var tbiDict38: NSToolbarItem!
+    @IBOutlet weak var tbiDict39: NSToolbarItem!
     @objc var vm: SettingsViewModel {return vmSettings}
     private var defaultToolbarItemCount = 0
     

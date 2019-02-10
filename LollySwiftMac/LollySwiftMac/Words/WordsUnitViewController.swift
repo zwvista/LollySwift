@@ -166,7 +166,7 @@ class WordsUnitViewController: WordsViewController {
     
     @IBAction func googleWord(_ sender: Any) {
         let item = vm.arrWords[tableView.selectedRow]
-        googleWord(word: item.WORD)
+        MacApi.googleString(item.WORD)
     }
     
     @IBAction func getNotes(_ sender: Any) {

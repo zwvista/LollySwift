@@ -103,7 +103,7 @@ class WordsLangViewController: WordsViewController {
     
     @IBAction func googleWord(_ sender: Any) {
         let item = vm.arrWords[tableView.selectedRow]
-        googleWord(word: item.WORD)
+        MacApi.googleString(item.WORD)
     }
 
     override func settingsChanged() {

@@ -155,11 +155,7 @@ class PhrasesUnitViewController: NSViewController, LollyProtocol, NSTableViewDat
     
     @IBAction func googlePhrase(_ sender: Any) {
         let item = vm.arrPhrases[tableView.selectedRow]
-        NSWorkspace.shared.open([URL(string: "https://www.google.com/search?q=\(item.PHRASE)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!],
-                                withAppBundleIdentifier:"com.apple.Safari",
-                                options: [],
-                                additionalEventParamDescriptor: nil,
-                                launchIdentifiers: nil)
+        MacApi.googleString(item.PHRASE)
     }
     
     func settingsChanged() {
