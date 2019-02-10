@@ -10,7 +10,7 @@ import Cocoa
 import WebKit
 import RxSwift
 
-class BlogViewController: NSViewController  {
+class BlogViewController: NSViewController, NSMenuItemValidation  {
 
     var vm: SettingsViewModel {
         return AppDelegate.theSettingsViewModel
@@ -56,7 +56,13 @@ class BlogViewController: NSViewController  {
         return replaceSelection { _ in vmBlog.explanation }
     }
     @IBAction func switchPage(_ sender: Any) {
-        let n = (sender as? NSMenuItem)?.tag ?? (sender as! NSControl).tag
+        var n = 0
+        if sender is NSMenuItem {
+            n = (sender as! NSMenuItem).tag
+            wc.scPage.selectedSegment = n
+        } else {
+            n = (sender as! NSSegmentedControl).selectedSegment
+        }
         if n == 0 {
             tvHtml.string = vmBlog.markedToHtml(text: tvMarked.string)
             let str = vmBlog.getHtml(text: tvHtml.string)
@@ -76,6 +82,13 @@ class BlogViewController: NSViewController  {
             self.tvMarked.string = $0
         }
     }
+    func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+        if menuItem.action == #selector(self.switchPage(_:)) {
+            menuItem.state = menuItem.tag == wc.scPage.selectedSegment ? .on : .off
+        }
+        return true
+    }
+    
 }
 
 class BlogWindowController: NSWindowController, NSTextFieldDelegate {
