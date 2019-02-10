@@ -46,6 +46,7 @@ class WordsViewController: NSViewController, NSTableViewDataSource, NSTableViewD
     
     func searchWord(word: String) {
         selectedWord = word
+        status = .ready
         let item = vmSettings.arrDictsPicker[selectedDictPickerIndex]
         if item.DICTNAME.starts(with: "Custom") {
             let str = vmSettings.dictHtml(word: word, dictids: item.dictids())

@@ -55,15 +55,17 @@ class BlogViewController: NSViewController  {
     @IBAction func addExplanation(_ sender: Any) {
         return replaceSelection { _ in vmBlog.explanation }
     }
-    @IBAction func showBlog(_ sender: Any) {
-        tvHtml.string = vmBlog.markedToHtml(text: tvMarked.string)
-        let str = vmBlog.getHtml(text: tvHtml.string)
-        wvBlog.loadHTMLString(str, baseURL: nil)
-        MacApi.copyText(tvHtml.string)
-    }
-    @IBAction func showPattern(_ sender: Any) {
-        let url = vmBlog.getPatternUrl(patternNo: wc.patternNo)
-        wvBlog.load(URLRequest(url: URL(string: url)!))
+    @IBAction func switchPage(_ sender: Any) {
+        let n = (sender as? NSMenuItem)?.tag ?? (sender as! NSControl).tag
+        if n == 0 {
+            tvHtml.string = vmBlog.markedToHtml(text: tvMarked.string)
+            let str = vmBlog.getHtml(text: tvHtml.string)
+            wvBlog.loadHTMLString(str, baseURL: nil)
+            MacApi.copyText(tvHtml.string)
+        } else {
+            let url = vmBlog.getPatternUrl(patternNo: wc.patternNo)
+            wvBlog.load(URLRequest(url: URL(string: url)!))
+        }
     }
     @IBAction func copyPatternMarkDown(_ sender: Any) {
         let text = vmBlog.getPatternMarkDown(patternText: wc.patternText)
@@ -77,6 +79,7 @@ class BlogViewController: NSViewController  {
 }
 
 class BlogWindowController: NSWindowController, NSTextFieldDelegate {
+    @IBOutlet weak var scPage: NSSegmentedControl!
     @IBOutlet weak var tfPatternNo: NSTextField!
     @IBOutlet weak var tfPatternText: NSTextField!
     
@@ -85,6 +88,5 @@ class BlogWindowController: NSWindowController, NSTextFieldDelegate {
 
     override func windowDidLoad() {
         super.windowDidLoad()
-        window!.toolbar!.selectedItemIdentifier = NSToolbarItem.Identifier(rawValue: "Blog")
     }
 }

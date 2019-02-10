@@ -1218,6 +1218,44 @@ Gw
                                 <toolbarItem implicitItemIdentifier="360CEF89-3610-451A-B939-34F9335730CF" label="Add" paletteLabel="Add" tag="-1" image="NSAddTemplate" autovalidates="NO" id="9i9-9O-hzD"/>
                                 <toolbarItem implicitItemIdentifier="78890E5B-E0CE-4316-AC39-5F2EC4113E54" label="Delete" paletteLabel="Delete" tag="-1" image="NSRemoveTemplate" id="WeY-7Q-yTj"/>
                                 <toolbarItem implicitItemIdentifier="0FE47FD6-6CD6-4F13-92D4-43D61D94CAF8" label="Refresh" paletteLabel="Refresh" tag="-1" image="NSRefreshTemplate" id="hQG-W0-fgC"/>
+                                <toolbarItem implicitItemIdentifier="A284A409-7D3E-4ECA-A699-E50D269B193B" label="Filter Type" paletteLabel="Filter Type" sizingBehavior="auto" id="Tbn-JT-Yey">
+                                    <nil key="toolTip"/>
+                                    <segmentedControl key="view" verticalHuggingPriority="750" id="3Q6-8G-XTS">
+                                        <rect key="frame" x="0.0" y="14" width="90" height="23"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="K3o-F8-bmc">
+                                            <font key="font" metaFont="system"/>
+                                            <segments>
+                                                <segment label="None" width="42" selected="YES"/>
+                                                <segment label="Word" width="41" tag="1"/>
+                                            </segments>
+                                        </segmentedCell>
+                                        <connections>
+                                            <action selector="filterPhrase:" target="C0L-6x-tvV" id="LP3-dF-KVz"/>
+                                        </connections>
+                                    </segmentedControl>
+                                    <connections>
+                                        <action selector="filterWord:" target="C0L-6x-tvV" id="vcS-U3-Mny"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="1926CA90-5EC0-4A3B-A8FD-A27ECB678D2A" label="Filter Text" paletteLabel="Filter Text" tag="-1" id="Zrq-nR-sEd">
+                                    <nil key="toolTip"/>
+                                    <size key="minSize" width="40" height="22"/>
+                                    <size key="maxSize" width="123" height="22"/>
+                                    <textField key="view" verticalHuggingPriority="750" tag="-1" id="WiX-Gd-sab">
+                                        <rect key="frame" x="0.0" y="14" width="119" height="22"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="6sb-ND-m1z">
+                                            <font key="font" usesAppearanceFont="YES"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                        <connections>
+                                            <binding destination="zzS-oe-uMG" name="value" keyPath="filterText" id="3mz-Ff-FvN"/>
+                                            <outlet property="delegate" destination="zzS-oe-uMG" id="cQr-Us-hd6"/>
+                                        </connections>
+                                    </textField>
+                                </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="C5980D29-00F4-4912-AF7B-6AED2CD7DFAE" label="Dict" paletteLabel="Dict" image="NSBookmarksTemplate" selectable="YES" id="fGn-gK-zZ3">
                                     <size key="minSize" width="17" height="18"/>
                                     <size key="maxSize" width="17" height="18"/>
@@ -1383,6 +1421,8 @@ Gw
                                 <toolbarItem reference="9i9-9O-hzD"/>
                                 <toolbarItem reference="WeY-7Q-yTj"/>
                                 <toolbarItem reference="hQG-W0-fgC"/>
+                                <toolbarItem reference="Tbn-JT-Yey"/>
+                                <toolbarItem reference="Zrq-nR-sEd"/>
                             </defaultToolbarItems>
                             <connections>
                                 <outlet property="delegate" destination="zzS-oe-uMG" id="n8l-AL-cMs"/>
@@ -1393,6 +1433,7 @@ Gw
                         </connections>
                     </window>
                     <connections>
+                        <outlet property="scFilter" destination="3Q6-8G-XTS" id="K6J-Bl-sjJ"/>
                         <outlet property="tbiDict0" destination="fGn-gK-zZ3" id="0Bw-iT-LIE"/>
                         <outlet property="tbiDict1" destination="K36-bE-yQX" id="xYt-dH-lqN"/>
                         <outlet property="tbiDict10" destination="Mdk-jp-7Ta" id="5W1-HA-i41"/>
@@ -1433,11 +1474,13 @@ Gw
                         <outlet property="tbiDict7" destination="CaP-eP-hOf" id="SjV-yR-OH4"/>
                         <outlet property="tbiDict8" destination="Bql-nN-leu" id="TEL-FI-7FH"/>
                         <outlet property="tbiDict9" destination="ygf-Zl-ORa" id="Hlt-qS-BML"/>
+                        <outlet property="tfFilterText" destination="WiX-Gd-sab" id="My0-gt-qEA"/>
                         <outlet property="toolbar" destination="vPL-tl-wDP" id="nxf-ZY-5ge"/>
                         <segue destination="UkS-Xi-ogF" kind="relationship" relationship="window.shadowedContentViewController" id="tjd-yW-63z"/>
                     </connections>
                 </windowController>
                 <customObject id="C0L-6x-tvV" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <userDefaultsController id="S7I-Ds-weh"/>
             </objects>
             <point key="canvasLocation" x="-308" y="417"/>
         </scene>

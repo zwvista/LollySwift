@@ -12,9 +12,10 @@ import RxSwift
 
 class WordsLangViewController: WordsViewController {
 
+    var wc: WordsLangWindowController { return view.window!.windowController as! WordsLangWindowController }
     var vm: WordsLangViewModel!
     var arrWords: [MLangWord] {
-        return vm.arrWords
+        return vm.arrWordsFiltered == nil ? vm.arrWords : vm.arrWordsFiltered!
     }
 
     override func viewDidLoad() {
@@ -105,6 +106,16 @@ class WordsLangViewController: WordsViewController {
         let item = vm.arrWords[tableView.selectedRow]
         MacApi.googleString(item.WORD)
     }
+    
+    @IBAction func filterWord(_ sender: Any) {
+        let n = (sender as! NSSegmentedControl).selectedSegment
+        if n == 0 {
+            vm.arrWordsFiltered = nil
+        } else {
+            vm.filterWordsForSearchText(wc.filterText, scope: "Word")
+        }
+        self.tableView.reloadData()
+    }
 
     override func settingsChanged() {
         super.settingsChanged()
@@ -115,6 +126,27 @@ class WordsLangViewController: WordsViewController {
     }
 }
 
-class WordsLangWindowController: WordsWindowController {
+class WordsLangWindowController: WordsWindowController, NSTextFieldDelegate {
+    @IBOutlet weak var scFilter: NSSegmentedControl!
+    @IBOutlet weak var tfFilterText: NSTextField!
+    @objc var filterText = ""
+    
+    override func windowDidLoad() {
+        super.windowDidLoad()
+        window!.toolbar!.selectedItemIdentifier = NSToolbarItem.Identifier(rawValue: "No Filter")
+    }
+    
+    func controlTextDidEndEditing(_ obj: Notification) {
+        let searchfield = obj.object as! NSControl
+        guard searchfield === tfFilterText else {return}
+        let dict = (obj as NSNotification).userInfo!
+        let reason = dict["NSTextMovement"] as! NSNumber
+        let code = Int(reason.int32Value)
+        guard code == NSReturnTextMovement else {return}
+        if scFilter.selectedSegment == 0 {
+            scFilter.selectedSegment = 1
+        }
+        (contentViewController as! WordsLangViewController).filterWord(scFilter)
+    }
 }
 

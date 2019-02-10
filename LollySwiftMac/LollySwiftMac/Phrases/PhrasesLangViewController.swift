@@ -10,7 +10,7 @@ import Cocoa
 import WebKit
 import RxSwift
 
-class PhrasesLangViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate, WKNavigationDelegate {
+class PhrasesLangViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate {
     
     @IBOutlet weak var tableView: NSTableView!
     
@@ -104,7 +104,7 @@ class PhrasesLangViewController: NSViewController, LollyProtocol, NSTableViewDat
     }
     
     @IBAction func filterPhrase(_ sender: Any) {
-        let n = (sender as! NSToolbarItem).tag
+        let n = (sender as! NSSegmentedControl).selectedSegment
         if n == 0 {
             vm.arrPhrasesFiltered = nil
         } else {
@@ -119,10 +119,9 @@ class PhrasesLangViewController: NSViewController, LollyProtocol, NSTableViewDat
     }
 }
 
-class PhrasesLangWindowController: NSWindowController, LollyProtocol {
-    
-    var vc: PhrasesLangViewController {return contentViewController as! PhrasesLangViewController}
-    @objc var vm: SettingsViewModel {return vmSettings}
+class PhrasesLangWindowController: NSWindowController, NSTextFieldDelegate {
+    @IBOutlet weak var scFilter: NSSegmentedControl!
+    @IBOutlet weak var tfFilterText: NSTextField!
     @objc var filterText = ""
 
     override func windowDidLoad() {
@@ -130,8 +129,17 @@ class PhrasesLangWindowController: NSWindowController, LollyProtocol {
         window!.toolbar!.selectedItemIdentifier = NSToolbarItem.Identifier(rawValue: "No Filter")
     }
     
-    func settingsChanged() {
-        
+    func controlTextDidEndEditing(_ obj: Notification) {
+        let searchfield = obj.object as! NSControl
+        guard searchfield === tfFilterText else {return}
+        let dict = (obj as NSNotification).userInfo!
+        let reason = dict["NSTextMovement"] as! NSNumber
+        let code = Int(reason.int32Value)
+        guard code == NSReturnTextMovement else {return}
+        if scFilter.selectedSegment == 0 {
+            scFilter.selectedSegment = 1
+        }
+        (contentViewController as! PhrasesLangViewController).filterPhrase(scFilter)
     }
 }
 

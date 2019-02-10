@@ -730,16 +730,16 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="BkR-pX-dEL"/>
-                                        <menuItem title="Show Blog" id="PpZ-Hz-6Tf">
+                                        <menuItem title="Blog Page" id="PpZ-Hz-6Tf">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
-                                                <action selector="showBlog:" target="Ady-hI-5gd" id="h1z-bH-9gY"/>
+                                                <action selector="switchPage:" target="Ady-hI-5gd" id="qAe-05-cJt"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Show Pattern" id="3Y4-Qq-tEc" userLabel="Pattern">
+                                        <menuItem title="Pattern Page" tag="1" id="3Y4-Qq-tEc">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
-                                                <action selector="showPattern:" target="Ady-hI-5gd" id="iiv-Yh-947"/>
+                                                <action selector="switchPage:" target="Ady-hI-5gd" id="p76-gJ-fez"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="Bql-eV-0be"/>
@@ -825,14 +825,24 @@
                                         <action selector="addExplanation:" target="vaE-wK-YYd" id="Q5D-Uc-Ig1"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="2CCA2C23-449F-4700-856E-4BC708BF274D" explicitItemIdentifier="Blog" label="Blog" paletteLabel="Blog" tag="-1" selectable="YES" id="B1t-u8-qBd">
+                                <toolbarItem implicitItemIdentifier="DB7CFED8-9106-44F3-A5EB-514473C925E0" label="Page Type" paletteLabel="Page Type" sizingBehavior="auto" id="8st-Ae-RAu">
+                                    <nil key="toolTip"/>
+                                    <segmentedControl key="view" verticalHuggingPriority="750" id="4b5-aV-cyn">
+                                        <rect key="frame" x="0.0" y="14" width="102" height="23"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="CgK-wf-8U0">
+                                            <font key="font" metaFont="system"/>
+                                            <segments>
+                                                <segment label="Blog" width="42" selected="YES"/>
+                                                <segment label="Pattern" width="53" tag="1"/>
+                                            </segments>
+                                        </segmentedCell>
+                                        <connections>
+                                            <action selector="filterPhrase:" target="vaE-wK-YYd" id="t2d-OF-8c6"/>
+                                        </connections>
+                                    </segmentedControl>
                                     <connections>
-                                        <action selector="showBlog:" target="vaE-wK-YYd" id="tR6-7s-2Wn"/>
-                                    </connections>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="CCFFD221-6E8A-4EEB-BAFC-07FDA70FF9D8" explicitItemIdentifier="Pattern" label="Pattern" paletteLabel="Pattern" tag="-1" selectable="YES" id="U1H-SJ-i4E">
-                                    <connections>
-                                        <action selector="showPattern:" target="vaE-wK-YYd" id="nKm-IM-0gJ"/>
+                                        <action selector="switchPage:" target="vaE-wK-YYd" id="hii-FT-NU8"/>
                                     </connections>
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="7B9E1BE1-D8FF-4BC2-B3DE-17FBF9E018BB" label="Pattern No." paletteLabel="Pattern No." tag="-1" id="EDL-Iu-W2r">
@@ -900,8 +910,7 @@
                                 <toolbarItem reference="Ro0-Sn-9C9"/>
                                 <toolbarItem reference="KSQ-NA-IaZ"/>
                                 <toolbarItem reference="LYl-V1-QYj"/>
-                                <toolbarItem reference="B1t-u8-qBd"/>
-                                <toolbarItem reference="U1H-SJ-i4E"/>
+                                <toolbarItem reference="8st-Ae-RAu"/>
                                 <toolbarItem reference="EDL-Iu-W2r"/>
                                 <toolbarItem reference="9KA-1d-XSR"/>
                                 <toolbarItem reference="cwH-9b-MEC"/>
@@ -913,6 +922,7 @@
                         </connections>
                     </window>
                     <connections>
+                        <outlet property="scPage" destination="4b5-aV-cyn" id="yFg-JV-cUV"/>
                         <outlet property="tfPatternNo" destination="Lbj-Ka-Wut" id="iPE-SV-zW3"/>
                         <outlet property="tfPatternText" destination="r3b-4B-iGP" id="uhf-88-G6W"/>
                         <segue destination="PME-9l-TOe" kind="relationship" relationship="window.shadowedContentViewController" id="gWQ-3V-mE1"/>
