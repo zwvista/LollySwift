@@ -16,7 +16,8 @@ class WordsViewController: NSViewController, NSTableViewDataSource, NSTableViewD
     @IBOutlet weak var wvDict: WKWebView!
     @IBOutlet weak var tfNewWord: NSTextField!
     @IBOutlet weak var tableView: NSTableView!
-    
+    var wc: WordsWindowController!
+
     let disposeBag = DisposeBag()
     
     @objc var newWord = ""
@@ -26,6 +27,11 @@ class WordsViewController: NSViewController, NSTableViewDataSource, NSTableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         settingsChanged()
+    }
+    
+    override func viewDidAppear() {
+        super.viewDidAppear()
+        wc = view.window!.windowController as! WordsWindowController
     }
     
     func controlTextDidEndEditing(_ obj: Notification) {
@@ -118,7 +124,7 @@ class WordsViewController: NSViewController, NSTableViewDataSource, NSTableViewD
     }
 }
 
-class WordsWindowController: NSWindowController, NSToolbarDelegate, LollyProtocol {
+class WordsWindowController: NSWindowController, NSToolbarDelegate, LollyProtocol, NSWindowDelegate {
     
     @IBOutlet weak var toolbar: NSToolbar!
     // Outlet collections have been implemented for iOS, but not in Cocoa
@@ -172,31 +178,33 @@ class WordsWindowController: NSWindowController, NSToolbarDelegate, LollyProtoco
     override func windowDidLoad() {
         super.windowDidLoad()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.defaultToolbarItemCount = self.toolbar.items.count
+            self.defaultToolbarItemCount = self.toolbar.items.count - 40
             self.settingsChanged()
         }
     }
     
-    func toolbar(_ toolbar: NSToolbar, itemForItemIdentifier itemIdentifier: NSToolbarItem.Identifier, willBeInsertedIntoToolbar flag: Bool) -> NSToolbarItem? {
-        let dictName = itemIdentifier.rawValue
-        let i = vmSettings.arrDictsPicker.firstIndex { $0.DICTNAME == dictName }!
-        let item = self.value(forKey: "tbiDict\(i)") as! NSToolbarItem
-        item.label = dictName
-        item.target = contentViewController
-        item.action = #selector(WordsViewController.searchDict(_:))
-        if i == vmSettings.selectedDictPickerIndex {
-            toolbar.selectedItemIdentifier = item.itemIdentifier
-        }
-        return item
-    }
-    
     func settingsChanged() {
-        while toolbar.items.count > defaultToolbarItemCount {
-            toolbar.removeItem(at: defaultToolbarItemCount)
+        let cnt = vmSettings.arrDictsPicker.count
+        for i in 0..<cnt {
+            let item = toolbar.items[defaultToolbarItemCount + i]
+            item.label = vmSettings.arrDictsPicker[i].DICTNAME
+            item.target = contentViewController
+            item.action = #selector(WordsViewController.searchDict(_:))
+            item.isEnabled = true
+            if i == vmSettings.selectedDictPickerIndex {
+                toolbar.selectedItemIdentifier = item.itemIdentifier
+            }
         }
-        for i in 0..<vmSettings.arrDictsPicker.count {
-            let itemIdentifier = NSToolbarItem.Identifier(vmSettings.arrDictsPicker[i].DICTNAME)
-            toolbar.insertItem(withItemIdentifier: itemIdentifier, at: defaultToolbarItemCount + i)
+        for i in cnt..<40 {
+            let item = toolbar.items[defaultToolbarItemCount + i]
+            item.label = ""
+            item.target = nil
+            item.action = nil
+            item.isEnabled = false
         }
+    }
+
+    deinit {
+        print("DEBUG: \(self.className) deinit")
     }
 }

@@ -12,7 +12,7 @@ import RxSwift
 
 class WordsLangViewController: WordsViewController {
 
-    var wc: WordsLangWindowController { return view.window!.windowController as! WordsLangWindowController }
+    var wc2: WordsLangWindowController! { return view.window!.windowController as! WordsLangWindowController }
     var vm: WordsLangViewModel!
     var arrWords: [MLangWord] {
         return vm.arrWordsFiltered == nil ? vm.arrWords : vm.arrWordsFiltered!
@@ -112,7 +112,7 @@ class WordsLangViewController: WordsViewController {
         if n == 0 {
             vm.arrWordsFiltered = nil
         } else {
-            vm.filterWordsForSearchText(wc.filterText, scope: "Word")
+            vm.filterWordsForSearchText(wc2.filterText, scope: "Word")
         }
         self.tableView.reloadData()
     }
