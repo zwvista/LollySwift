@@ -141,7 +141,6 @@ class WordsUnitViewController: WordsViewController {
         vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel, disposeBag: disposeBag) {
             self.tableView.reloadData()
         }
-        wc?.settingsChanged()
     }
 
     @IBAction func editWord(_ sender: Any) {

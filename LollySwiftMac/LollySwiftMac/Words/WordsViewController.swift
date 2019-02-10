@@ -31,7 +31,7 @@ class WordsViewController: NSViewController, NSTableViewDataSource, NSTableViewD
     
     override func viewDidAppear() {
         super.viewDidAppear()
-        wc = view.window!.windowController as! WordsWindowController
+        wc = view.window!.windowController as? WordsWindowController
     }
     
     func controlTextDidEndEditing(_ obj: Notification) {
@@ -184,23 +184,26 @@ class WordsWindowController: NSWindowController, NSToolbarDelegate, LollyProtoco
     }
     
     func settingsChanged() {
-        let cnt = vmSettings.arrDictsPicker.count
-        for i in 0..<cnt {
-            let item = toolbar.items[defaultToolbarItemCount + i]
-            item.label = vmSettings.arrDictsPicker[i].DICTNAME
-            item.target = contentViewController
-            item.action = #selector(WordsViewController.searchDict(_:))
-            item.isEnabled = true
-            if i == vmSettings.selectedDictPickerIndex {
-                toolbar.selectedItemIdentifier = item.itemIdentifier
+        let img = toolbar.items[defaultToolbarItemCount].image
+        for i in 0..<40 {
+            if i < vmSettings.arrDictsPicker.count {
+                let item = toolbar.items[defaultToolbarItemCount + i]
+                item.label = vmSettings.arrDictsPicker[i].DICTNAME
+                item.target = contentViewController
+                item.action = #selector(WordsViewController.searchDict(_:))
+                item.isEnabled = true
+                item.image = img
+                if i == vmSettings.selectedDictPickerIndex {
+                    toolbar.selectedItemIdentifier = item.itemIdentifier
+                }
+            } else {
+                let item = toolbar.items[defaultToolbarItemCount + i]
+                item.label = ""
+                item.target = nil
+                item.action = nil
+                item.image = nil
+                item.isEnabled = false
             }
-        }
-        for i in cnt..<40 {
-            let item = toolbar.items[defaultToolbarItemCount + i]
-            item.label = ""
-            item.target = nil
-            item.action = nil
-            item.isEnabled = false
         }
     }
 

@@ -12,7 +12,7 @@ import RxSwift
 
 class WordsLangViewController: WordsViewController {
 
-    var wc2: WordsLangWindowController! { return view.window!.windowController as! WordsLangWindowController }
+    var wc2: WordsLangWindowController! { return view.window!.windowController as? WordsLangWindowController }
     var vm: WordsLangViewModel!
     var arrWords: [MLangWord] {
         return vm.arrWordsFiltered == nil ? vm.arrWords : vm.arrWordsFiltered!
