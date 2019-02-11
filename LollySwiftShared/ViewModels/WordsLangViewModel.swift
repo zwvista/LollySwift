@@ -13,9 +13,14 @@ class WordsLangViewModel: NSObject {
     var vmSettings: SettingsViewModel
     var arrWords = [MLangWord]()
     var arrWordsFiltered: [MLangWord]?
+    var vmNote: NoteViewModel!
+    var mDictNote: MDictNote? {
+        return vmNote.mDictNote
+    }
 
     public init(settings: SettingsViewModel, disposeBag: DisposeBag, complete: @escaping () -> ()) {
         self.vmSettings = settings
+        vmNote = NoteViewModel(settings: settings, disposeBag: disposeBag)
         let item = settings.arrTextbooks[settings.selectedTextbookIndex]
         super.init()
         MLangWord.getDataByLang(item.LANGID).subscribe(onNext: {
@@ -44,6 +49,14 @@ class WordsLangViewModel: NSObject {
         let item = MLangWord()
         item.LANGID = vmSettings.selectedLang.ID
         return item
+    }
+
+    func getNote(index: Int) -> Observable<()> {
+        let item = arrWords[index]
+        return vmNote.getNote(word: item.WORD).flatMap { note -> Observable<()> in
+            item.NOTE = note
+            return WordsUnitViewModel.update(item.ID, note: note)
+        }
     }
 
 }

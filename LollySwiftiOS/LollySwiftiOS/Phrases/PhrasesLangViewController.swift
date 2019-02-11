@@ -41,9 +41,9 @@ class PhrasesLangViewController: PhrasesBaseViewController, UISearchBarDelegate,
     }
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
-            let i = indexPath.row
-            let item = self.vm.arrPhrases[i]
+        let i = indexPath.row
+        let item = self.vm.arrPhrases[i]
+        func delete() {
             self.yesNoAction(title: "delete", message: "Do you really want to delete the phrase \"\(item.PHRASE)\"?", yesHandler: { (action) in
                 PhrasesLangViewModel.delete(item.ID).subscribe().disposed(by: self.disposeBag)
                 self.vm.arrPhrases.remove(at: i)
@@ -52,13 +52,28 @@ class PhrasesLangViewController: PhrasesBaseViewController, UISearchBarDelegate,
                 tableView.reloadRows(at: [indexPath], with: .fade)
             })
         }
-        let editAction = UITableViewRowAction(style: .normal, title: "Edit") { (action, indexPath) in
-            let item = self.arrPhrases[indexPath.row]
+        func edit() {
             self.performSegue(withIdentifier: "edit", sender: item)
         }
+        let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { _,_ in delete() }
+        let editAction = UITableViewRowAction(style: .normal, title: "Edit") { _,_ in edit() }
         editAction.backgroundColor = .blue
+        let moreAction = UITableViewRowAction(style: .normal, title: "More") { [unowned self] _,_ in
+            let alertController = UIAlertController(title: "Word", message: item.PHRASE, preferredStyle: .alert)
+            let deleteAction2 = UIAlertAction(title: "Delete", style: .destructive) { _ in delete() }
+            alertController.addAction(deleteAction2)
+            let editAction2 = UIAlertAction(title: "Edit", style: .default) { _ in edit() }
+            alertController.addAction(editAction2)
+            let copyPhraseAction = UIAlertAction(title: "Copy Phrase", style: .default) { _ in iOSApi.copyText(item.PHRASE) }
+            alertController.addAction(copyPhraseAction)
+            let googlePhraseAction = UIAlertAction(title: "Google Phrase", style: .default) { _ in iOSApi.googleString(item.PHRASE) }
+            alertController.addAction(googlePhraseAction)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
+            alertController.addAction(cancelAction)
+            self.present(alertController, animated: true) {}
+        }
         
-        return [editAction, deleteAction]
+        return [moreAction, deleteAction]
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

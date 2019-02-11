@@ -40,9 +40,9 @@ class WordsLangViewController: WordsBaseViewController, UISearchBarDelegate, UIS
     }
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
-            let i = indexPath.row
-            let item = self.vm.arrWords[i]
+        let i = indexPath.row
+        let item = self.vm.arrWords[i]
+        func delete() {
             self.yesNoAction(title: "delete", message: "Do you really want to delete the word \"\(item.WORD)\"?", yesHandler: { (action) in
                 WordsLangViewModel.delete(item.ID).subscribe().disposed(by: self.disposeBag)
                 self.vm.arrWords.remove(at: i)
@@ -51,13 +51,36 @@ class WordsLangViewController: WordsBaseViewController, UISearchBarDelegate, UIS
                 tableView.reloadRows(at: [indexPath], with: .fade)
             })
         }
-        let editAction = UITableViewRowAction(style: .normal, title: "Edit") { (action, indexPath) in
-            let item = self.arrWords[indexPath.row]
+        func edit() {
             self.performSegue(withIdentifier: "edit", sender: item)
         }
+        let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { _,_ in delete() }
+        let editAction = UITableViewRowAction(style: .normal, title: "Edit") { _,_ in edit() }
         editAction.backgroundColor = .blue
-        
-        return [editAction, deleteAction]
+        let moreAction = UITableViewRowAction(style: .normal, title: "More") { [unowned self] _,_ in
+            let alertController = UIAlertController(title: "Word", message: item.WORDNOTE, preferredStyle: .alert)
+            let deleteAction2 = UIAlertAction(title: "Delete", style: .destructive) { _ in delete() }
+            alertController.addAction(deleteAction2)
+            let editAction2 = UIAlertAction(title: "Edit", style: .default) { _ in edit() }
+            alertController.addAction(editAction2)
+            if self.vm.mDictNote != nil {
+                let noteAction = UIAlertAction(title: "Retrieve Note", style: .default) { _ in
+                    self.vm.getNote(index: indexPath.row).subscribe {
+                        self.tableView.reloadRows(at: [indexPath], with: .fade)
+                        }.disposed(by: self.disposeBag)
+                }
+                alertController.addAction(noteAction)
+            }
+            let copyWordAction = UIAlertAction(title: "Copy Word", style: .default) { _ in iOSApi.copyText(item.WORD) }
+            alertController.addAction(copyWordAction)
+            let googleWordAction = UIAlertAction(title: "Google Word", style: .default) { _ in iOSApi.googleString(item.WORD) }
+            alertController.addAction(googleWordAction)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
+            alertController.addAction(cancelAction)
+            self.present(alertController, animated: true) {}
+        }
+
+        return [moreAction, deleteAction]
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
