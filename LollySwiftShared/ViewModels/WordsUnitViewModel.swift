@@ -78,6 +78,7 @@ class WordsUnitViewModel: NSObject {
                                 // non-exclusive
                                 if arrLangNew.isEmpty {
                                     // new word
+                                    itemLang.ID = 0
                                     return MLangWord.create(item: itemLang)
                                 } else {
                                     // existing word

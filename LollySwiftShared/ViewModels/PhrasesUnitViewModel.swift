@@ -70,6 +70,7 @@ class PhrasesUnitViewModel: NSObject {
                             } else {
                                 if arrLangNew.isEmpty {
                                     // new phrase
+                                    itemLang.ID = 0
                                     return MLangPhrase.create(item: itemLang)
                                 } else {
                                     // existing phrase

@@ -52,7 +52,8 @@ class MLangPhrase: NSObject, Codable {
     static func getDataByLangPhrase(langid: Int, phrase: String) -> Observable<[MLangPhrase]> {
         // SQL: SELECT * FROM LANGPHRASES WHERE LANGID=? AND PHRASE=?
         let url = "\(RestApi.url)LANGWORDS?transform=1&filter[]=LANGID,eq,\(langid)&filter[]=PHRASE,eq,\(phrase.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)"
-        return RestApi.getArray(url: url, keyPath: "LANGPHRASES")
+        // Api is case insensitive
+        return RestApi.getArray(url: url, keyPath: "LANGPHRASES").map { $0.filter { $0.PHRASE == phrase } }
     }
     
     static func getDataById(_ id: Int) -> Observable<[MLangPhrase]> {
