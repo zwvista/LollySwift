@@ -10,6 +10,7 @@ import UIKit
 
 class PhrasesLangDetailViewController: UITableViewController {
     
+    var vm: PhrasesLangViewModel!
     var mPhrase: MLangPhrase!
     
     @IBOutlet weak var tfID: UITextField!

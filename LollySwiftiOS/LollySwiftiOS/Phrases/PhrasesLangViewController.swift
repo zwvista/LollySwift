@@ -63,7 +63,7 @@ class PhrasesLangViewController: PhrasesBaseViewController, UISearchBarDelegate,
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let item = arrPhrases[indexPath.row]
-        performSegue(withIdentifier: "dict", sender: item)
+        performSegue(withIdentifier: "edit", sender: item)
     }
 
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
@@ -77,6 +77,7 @@ class PhrasesLangViewController: PhrasesBaseViewController, UISearchBarDelegate,
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         if let controller = (segue.destination as? UINavigationController)?.topViewController as? PhrasesLangDetailViewController {
+            controller.vm = vm
             controller.mPhrase = sender as? MLangPhrase ?? MLangPhrase()
         }
     }
