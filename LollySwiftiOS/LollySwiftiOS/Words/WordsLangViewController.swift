@@ -35,7 +35,7 @@ class WordsLangViewController: WordsBaseViewController, UISearchBarDelegate, UIS
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "WordCell", for: indexPath)
         let item = arrWords[indexPath.row]
-        cell.textLabel!.text = item.WORD
+        cell.textLabel!.text = item.WORDNOTE
         return cell;
     }
     
@@ -76,6 +76,7 @@ class WordsLangViewController: WordsBaseViewController, UISearchBarDelegate, UIS
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         if let controller = (segue.destination as? UINavigationController)?.topViewController as? WordsLangDetailViewController {
+            controller.vm = vm
             controller.mWord = sender as? MLangWord ?? MLangWord()
         }
     }

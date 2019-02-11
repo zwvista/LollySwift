@@ -16,6 +16,10 @@ class MLangWord: NSObject, Codable {
     var WORD = ""
     var LEVEL = 0
     var NOTE: String?
+    
+    var WORDNOTE: String {
+        return WORD + ((NOTE ?? "").isEmpty ? "" : "(\(NOTE!))")
+    }
 
     override init() {
     }

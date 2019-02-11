@@ -34,7 +34,7 @@ class MDictionary: NSObject, Codable {
 
 class MDictWord : MDictionary {
     static func getDataByLang(_ langid: Int) -> Observable<[MDictWord]> {
-        // SQL: SELECT * FROM VDICTSWORD WHERE LANGIDFROM = ?
+        // SQL: SELECT * FROM VDICTSWORD WHERE LANGIDFROM=?
         let url = "\(RestApi.url)VDICTSWORD?transform=1&filter=LANGIDFROM,eq,\(langid)"
         return RestApi.getArray(url: url, keyPath: "VDICTSWORD")
     }

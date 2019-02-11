@@ -37,6 +37,7 @@ class WordsUnitDetailViewController: NSViewController {
         self.commitEditing()
         mWord.UNIT = pubUnit.indexOfSelectedItem + 1
         mWord.PART = pubPart.indexOfSelectedItem + 1
+        mWord.WORD = vm.vmSettings.autoCorrectInput(text: mWord.WORD)
         if isAdd {
             vm.arrWords.append(mWord)
             WordsUnitViewModel.create(item: mWord).subscribe(onNext: {

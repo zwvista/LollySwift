@@ -73,9 +73,8 @@ class WordsUnitDetailViewController: UITableViewController, UITextFieldDelegate 
     
     func onDone() {
         mWord.SEQNUM = Int(tfSeqNum.text!)!
-        mWord.WORD = tfWord.text ?? ""
+        mWord.WORD = vm.vmSettings.autoCorrectInput(text: tfWord.text ?? "")
         mWord.NOTE = tfNote.text
-        
         if isAdd {
             if !mWord.WORD.isEmpty {
                 vm.arrWords.append(mWord)

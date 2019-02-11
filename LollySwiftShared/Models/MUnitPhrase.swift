@@ -48,7 +48,7 @@ class MUnitPhrase: NSObject, Codable {
     }
     
     static func update(item: MUnitPhrase) -> Observable<String> {
-        // SQL: UPDATE UNITPHRASES SET UNIT=?, PART=?, SEQNUM=? WHERE ID=?
+        // SQL: UPDATE UNITPHRASES SET UNIT=?, PART=?, SEQNUM=?, LANGPHRASEID=? WHERE ID=?
         let url = "\(RestApi.url)UNITPHRASES/\(item.ID)"
         return RestApi.update(url: url, body: try! item.toJSONString(prettyPrint: false)!)
     }

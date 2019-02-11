@@ -20,7 +20,7 @@ class WordsLangDetailViewController: NSViewController {
     @IBOutlet weak var pubLang: NSPopUpButton!
     @IBOutlet weak var pubPart: NSPopUpButton!
     @IBOutlet weak var tfWord: NSTextField!
-    
+
     let disposeBag = DisposeBag()
 
     override func viewDidLoad() {

@@ -10,19 +10,23 @@ import UIKit
 
 class WordsLangDetailViewController: UITableViewController {
     
+    var vm: WordsLangViewModel!
     var mWord: MLangWord!
     
     @IBOutlet weak var tfID: UITextField!
     @IBOutlet weak var tfWord: UITextField!
+    @IBOutlet weak var tfNote: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         tfID.text = String(mWord.ID)
         tfWord.text = mWord.WORD
+        tfNote.text = mWord.NOTE
     }
     
     func onDone() {
-        mWord.WORD = tfWord.text ?? ""
+        mWord.WORD = vm.vmSettings.autoCorrectInput(text: tfWord.text ?? "")
+        mWord.NOTE = tfNote.text
     }
     
 }

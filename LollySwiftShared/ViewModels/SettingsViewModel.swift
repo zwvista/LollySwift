@@ -219,4 +219,8 @@ class SettingsViewModel: NSObject {
     func updatePartTo() -> Observable<()> {
         return MUserSetting.update(selectedUSTextbook.ID, uspartto: USPARTTO).map { print($0) }
     }
+    
+    func autoCorrectInput(text: String) -> String {
+        return MAutoCorrect.autoCorrect(text: text, arrAutoCorrect: arrAutoCorrect, colFunc1: { $0.INPUT }, colFunc2: { $0.EXTENDED })
+    }
 }
