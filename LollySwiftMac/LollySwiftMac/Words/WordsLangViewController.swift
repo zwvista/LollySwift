@@ -47,7 +47,7 @@ class WordsLangViewController: WordsViewController {
         let key = tableView.tableColumns[col].title
         let item = arrWords[row]
         let oldValue = String(describing: item.value(forKey: key))
-        let newValue = sender.stringValue
+        var newValue = sender.stringValue
         if key == "WORD" {
             newValue = vmSettings.autoCorrectInput(text: newValue)
         }

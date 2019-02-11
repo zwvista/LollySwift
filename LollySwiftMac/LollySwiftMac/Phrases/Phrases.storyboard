@@ -566,6 +566,11 @@ Gw
                                         <action selector="addPhrase:" target="qEo-JS-MYZ" id="0gi-c4-49e"/>
                                     </connections>
                                 </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="0E4C861C-800F-4CAF-BC75-8A43379D5E1F" label="Delete" paletteLabel="Delete" tag="-1" image="NSRemoveTemplate" id="nkL-IN-AUz">
+                                    <connections>
+                                        <action selector="deletePhrase:" target="qEo-JS-MYZ" id="xat-d1-0sF"/>
+                                    </connections>
+                                </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="0FE47FD6-6CD6-4F13-92D4-43D61D94CAF8" label="Refresh" paletteLabel="Refresh" tag="-1" image="NSRefreshTemplate" id="1c8-U5-Ymh">
                                     <connections>
                                         <action selector="refreshTableView:" target="qEo-JS-MYZ" id="cMO-nw-rHU"/>
@@ -574,6 +579,7 @@ Gw
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="aIp-9q-khf"/>
+                                <toolbarItem reference="nkL-IN-AUz"/>
                                 <toolbarItem reference="1c8-U5-Ymh"/>
                             </defaultToolbarItems>
                         </toolbar>
@@ -943,6 +949,11 @@ Gw
                                 <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="l1Q-mq-x31"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="1up-Vl-Wwc"/>
                                 <toolbarItem implicitItemIdentifier="360CEF89-3610-451A-B939-34F9335730CF" label="Add" paletteLabel="Add" tag="-1" image="NSAddTemplate" autovalidates="NO" id="viz-co-4v0"/>
+                                <toolbarItem implicitItemIdentifier="62080154-8F37-4A03-8BCC-C0C62A8B2F03" label="Delete" paletteLabel="Delete" tag="-1" image="NSRemoveTemplate" id="Qp0-0S-2WS">
+                                    <connections>
+                                        <action selector="deletePhrase:" target="maH-dw-yMa" id="PdV-Bt-CFL"/>
+                                    </connections>
+                                </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="0FE47FD6-6CD6-4F13-92D4-43D61D94CAF8" label="Refresh" paletteLabel="Refresh" tag="-1" image="NSRefreshTemplate" id="MnR-91-5r0">
                                     <connections>
                                         <action selector="refreshTableView:" target="maH-dw-yMa" id="BSZ-bF-rgg"/>
@@ -991,6 +1002,7 @@ Gw
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="viz-co-4v0"/>
+                                <toolbarItem reference="Qp0-0S-2WS"/>
                                 <toolbarItem reference="MnR-91-5r0"/>
                                 <toolbarItem reference="2ps-sj-xWc"/>
                                 <toolbarItem reference="Fkr-PD-fBq"/>
@@ -1014,5 +1026,6 @@ Gw
     <resources>
         <image name="NSAddTemplate" width="11" height="11"/>
         <image name="NSRefreshTemplate" width="11" height="15"/>
+        <image name="NSRemoveTemplate" width="11" height="11"/>
     </resources>
 </document>

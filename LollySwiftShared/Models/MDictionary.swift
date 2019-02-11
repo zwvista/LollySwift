@@ -25,8 +25,8 @@ class MDictionary: NSObject, Codable {
 
     func urlString(word: String, arrAutoCorrect: [MAutoCorrect]) -> String {
         let word2 = CHCONV == "BASIC" ? MAutoCorrect.autoCorrect(text: word, arrAutoCorrect: arrAutoCorrect, colFunc1: { $0.EXTENDED }, colFunc2: { $0.BASIC }) :
-            word.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
-        let url = URL!.replacingOccurrences(of: "{0}", with: word2)
+            word
+        let url = URL!.replacingOccurrences(of: "{0}", with: word2.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)
         print(url)
         return url
     }

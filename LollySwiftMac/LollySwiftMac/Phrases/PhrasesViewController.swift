@@ -12,6 +12,10 @@ import RxSwift
 
 class PhrasesViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate {
     
+    @IBOutlet weak var tableView: NSTableView!
+
+    let disposeBag = DisposeBag()
+
     func settingsChanged() {
     }
 }

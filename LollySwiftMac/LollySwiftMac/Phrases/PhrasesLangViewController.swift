@@ -10,21 +10,13 @@ import Cocoa
 import WebKit
 import RxSwift
 
-class PhrasesLangViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate {
-    
-    @IBOutlet weak var tableView: NSTableView!
-    
-    var timer = Timer()
-    @objc
-    var newPhrase = ""
+class PhrasesLangViewController: PhrasesViewController {
     
     var wc: PhrasesLangWindowController { return view.window!.windowController as! PhrasesLangWindowController }
     var vm: PhrasesLangViewModel!
     var arrPhrases: [MLangPhrase] {
         return vm.arrPhrasesFiltered == nil ? vm.arrPhrases : vm.arrPhrasesFiltered!
     }
-
-    let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,18 +47,13 @@ class PhrasesLangViewController: NSViewController, LollyProtocol, NSTableViewDat
         let key = tableView.tableColumns[col].title
         let item = arrPhrases[row]
         let oldValue = String(describing: item.value(forKey: key)!)
-        let newValue = sender.stringValue
+        var newValue = sender.stringValue
         if key == "PHRASE" {
             newValue = vmSettings.autoCorrectInput(text: newValue)
         }
         guard oldValue != newValue else {return}
         item.setValue(newValue, forKey: key)
         PhrasesLangViewModel.update(item: item).subscribe().disposed(by: disposeBag)
-    }
-    
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        self.view.window?.makeKeyAndOrderFront(self)
-        tableView.becomeFirstResponder()
     }
 
     // https://stackoverflow.com/questions/24219441/how-to-use-nstoolbar-in-xcode-6-and-storyboard
@@ -117,7 +104,7 @@ class PhrasesLangViewController: NSViewController, LollyProtocol, NSTableViewDat
         self.tableView.reloadData()
     }
     
-    func settingsChanged() {
+    override func settingsChanged() {
         refreshTableView(self)
     }
 }

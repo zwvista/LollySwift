@@ -10,13 +10,7 @@ import Cocoa
 import WebKit
 import RxSwift
 
-class PhrasesUnitViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate {
-    
-    @IBOutlet weak var tableView: NSTableView!
-    
-    var timer = Timer()
-    @objc
-    var newPhrase = ""
+class PhrasesUnitViewController: PhrasesViewController {
     
     var vm: PhrasesUnitViewModel!
     var arrPhrases: [MUnitPhrase] {
@@ -26,8 +20,6 @@ class PhrasesUnitViewController: NSViewController, LollyProtocol, NSTableViewDat
     // https://developer.apple.com/videos/play/wwdc2011/120/
     // https://stackoverflow.com/questions/2121907/drag-drop-reorder-rows-on-nstableview
     let tableRowDragType = NSPasteboard.PasteboardType(rawValue: "private.table-row")
-    
-    let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -108,7 +100,7 @@ class PhrasesUnitViewController: NSViewController, LollyProtocol, NSTableViewDat
         let key = tableView.tableColumns[col].title
         let item = arrPhrases[row]
         let oldValue = String(describing: item.value(forKey: key)!)
-        let newValue = sender.stringValue
+        var newValue = sender.stringValue
         if key == "PHRASE" {
             newValue = vmSettings.autoCorrectInput(text: newValue)
         }
@@ -117,11 +109,6 @@ class PhrasesUnitViewController: NSViewController, LollyProtocol, NSTableViewDat
         PhrasesUnitViewModel.update(item: item).subscribe {
             self.tableView.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count))
         }.disposed(by: disposeBag)
-    }
-    
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        self.view.window?.makeKeyAndOrderFront(self)
-        tableView.becomeFirstResponder()
     }
 
     // https://stackoverflow.com/questions/24219441/how-to-use-nstoolbar-in-xcode-6-and-storyboard
@@ -161,22 +148,10 @@ class PhrasesUnitViewController: NSViewController, LollyProtocol, NSTableViewDat
         MacApi.googleString(item.PHRASE)
     }
     
-    func settingsChanged() {
+    override func settingsChanged() {
         refreshTableView(self)
     }
 }
 
-class PhrasesUnitWindowController: NSWindowController, LollyProtocol {
-    
-    var vc: PhrasesUnitViewController {return contentViewController as! PhrasesUnitViewController}
-    @objc var vm: SettingsViewModel {return vmSettings}
-    
-    override func windowDidLoad() {
-        super.windowDidLoad()
-    }
-    
-    func settingsChanged() {
-        
-    }
+class PhrasesUnitWindowController: NSWindowController {
 }
-
