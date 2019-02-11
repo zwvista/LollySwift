@@ -33,6 +33,7 @@ class WordsLangDetailViewController: NSViewController {
     @IBAction func okClicked(_ sender: Any) {
         // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
         self.commitEditing()
+        mWord.WORD = vm.vmSettings.autoCorrectInput(text: mWord.WORD)
         if isAdd {
             vm.arrWords.append(mWord)
             WordsLangViewModel.create(item: mWord).subscribe(onNext: {

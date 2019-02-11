@@ -28,10 +28,6 @@ class WordsLangViewModel: NSObject {
         arrWordsFiltered = arrWords.filter { $0.WORD.contains(searchText) }
     }
     
-    static func update(_ id: Int, word: String) -> Observable<()> {
-        return MLangWord.update(id, word: word).map { print($0) }
-    }
-    
     static func update(item: MLangWord) -> Observable<()> {
         return MLangWord.update(item: item).map { print($0) }
     }
@@ -47,7 +43,6 @@ class WordsLangViewModel: NSObject {
     func newLangWord() -> MLangWord {
         let item = MLangWord()
         item.LANGID = vmSettings.selectedLang.ID
-        item.LEVEL = 0
         return item
     }
 

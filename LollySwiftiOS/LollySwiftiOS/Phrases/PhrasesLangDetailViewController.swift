@@ -24,7 +24,7 @@ class PhrasesLangDetailViewController: UITableViewController {
     }
     
     func onDone() {
-        mPhrase.PHRASE = tfPhrase.text ?? ""
+        mPhrase.PHRASE = vm.vmSettings.autoCorrectInput(text: tfPhrase.text ?? "")
         mPhrase.TRANSLATION = tfTranslation.text
     }
     

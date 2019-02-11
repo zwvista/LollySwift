@@ -56,6 +56,9 @@ class PhrasesLangViewController: NSViewController, LollyProtocol, NSTableViewDat
         let item = arrPhrases[row]
         let oldValue = String(describing: item.value(forKey: key)!)
         let newValue = sender.stringValue
+        if key == "PHRASE" {
+            newValue = vmSettings.autoCorrectInput(text: newValue)
+        }
         guard oldValue != newValue else {return}
         item.setValue(newValue, forKey: key)
         PhrasesLangViewModel.update(item: item).subscribe().disposed(by: disposeBag)

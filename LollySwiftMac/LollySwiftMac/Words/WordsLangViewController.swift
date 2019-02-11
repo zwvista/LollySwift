@@ -48,6 +48,9 @@ class WordsLangViewController: WordsViewController {
         let item = arrWords[row]
         let oldValue = String(describing: item.value(forKey: key))
         let newValue = sender.stringValue
+        if key == "WORD" {
+            newValue = vmSettings.autoCorrectInput(text: newValue)
+        }
         guard oldValue != newValue else {return}
         item.setValue(newValue, forKey: key)
         WordsLangViewModel.update(item: item).subscribe().disposed(by: disposeBag)
@@ -60,7 +63,7 @@ class WordsLangViewController: WordsViewController {
     override func addNewWord() {
         guard !newWord.isEmpty else {return}
         let mWord = vm.newLangWord()
-        mWord.WORD = newWord
+        mWord.WORD = vm.vmSettings.autoCorrectInput(text: newWord)
         WordsLangViewModel.create(item: mWord).subscribe(onNext: {
             mWord.ID = $0
             self.vm.arrWords.append(mWord)

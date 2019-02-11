@@ -72,9 +72,8 @@ class PhrasesUnitDetailViewController: UITableViewController, UITextFieldDelegat
 
     func onDone() {
         mPhrase.SEQNUM = Int(tfSeqNum.text!)!
-        mPhrase.PHRASE = tfPhrase.text!
+        mPhrase.PHRASE = vm.vmSettings.autoCorrectInput(text: tfPhrase.text ?? "")
         mPhrase.TRANSLATION = tfTranslation.text
-        
         if isAdd {
             vm.arrPhrases.append(mPhrase)
             PhrasesUnitViewModel.create(item: mPhrase).subscribe(onNext: {

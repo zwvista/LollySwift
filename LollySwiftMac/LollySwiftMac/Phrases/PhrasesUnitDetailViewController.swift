@@ -37,6 +37,7 @@ class PhrasesUnitDetailViewController: NSViewController {
         self.commitEditing()
         mPhrase.UNIT = pubUnit.indexOfSelectedItem + 1
         mPhrase.PART = pubPart.indexOfSelectedItem + 1
+        mPhrase.PHRASE = vm.vmSettings.autoCorrectInput(text: mPhrase.PHRASE)
         if isAdd {
             vm.arrPhrases.append(mPhrase)
             PhrasesUnitViewModel.create(item: mPhrase).subscribe(onNext: {

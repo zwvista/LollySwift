@@ -65,13 +65,6 @@ class MLangWord: NSObject, Codable {
         let url = "\(RestApi.url)LANGWORDS?transform=1&filter=ID,eq,\(id)"
         return RestApi.getArray(url: url, keyPath: "LANGWORDS")
     }
-
-    static func update(_ id: Int, word: String) -> Observable<String> {
-        // SQL: UPDATE LANGWORDS SET WORD=? WHERE ID=?
-        let url = "\(RestApi.url)LANGWORDS/\(id)"
-        let body = "WORD=\(word)"
-        return RestApi.update(url: url, body: body)
-    }
     
     static func update(_ id: Int, note: String) -> Observable<String> {
         // SQL: UPDATE LANGWORDS SET NOTE=? WHERE ID=?
