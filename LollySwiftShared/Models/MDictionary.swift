@@ -32,11 +32,11 @@ class MDictionary: NSObject, Codable {
     }
 }
 
-class MDictWord : MDictionary {
-    static func getDataByLang(_ langid: Int) -> Observable<[MDictWord]> {
-        // SQL: SELECT * FROM VDICTSWORD WHERE LANGIDFROM=?
-        let url = "\(RestApi.url)VDICTSWORD?transform=1&filter=LANGIDFROM,eq,\(langid)"
-        return RestApi.getArray(url: url, keyPath: "VDICTSWORD")
+class MDictMean : MDictionary {
+    static func getDataByLang(_ langid: Int) -> Observable<[MDictMean]> {
+        // SQL: SELECT * FROM VDICTSMEAN WHERE LANGIDFROM=?
+        let url = "\(RestApi.url)VDICTSMEAN?transform=1&filter=LANGIDFROM,eq,\(langid)"
+        return RestApi.getArray(url: url, keyPath: "VDICTSMEAN")
     }
     
     func htmlString(_ html: String, word: String, useTemplate2: Bool = false) -> String {

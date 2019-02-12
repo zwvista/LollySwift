@@ -61,7 +61,7 @@ class SettingsViewController: NSViewController {
         }.disposed(by: disposeBag)
     }
     
-    @IBAction func dictWordSelected(_ sender: AnyObject) {
+    @IBAction func dictMeanSelected(_ sender: AnyObject) {
         vm.selectedDictPickerIndex = pubDictsPicker.indexOfSelectedItem
         vm.updateDictPicker().subscribe {
             self.updateDictPicker()

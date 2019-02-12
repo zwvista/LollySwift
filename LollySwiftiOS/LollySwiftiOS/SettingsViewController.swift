@@ -165,7 +165,7 @@ class SettingsViewController: UITableViewController {
     func updateDictPicker() {
         let item = vm.selectedDictPicker
         dictPickerCell.textLabel!.text = item.DICTNAME
-        let item2 = vmSettings.arrDictsWord.first { $0.DICTNAME == item.DICTNAME }
+        let item2 = vmSettings.arrDictsMean.first { $0.DICTNAME == item.DICTNAME }
         dictPickerCell.detailTextLabel!.text = item2?.URL ?? ""
         ddDictPicker.dataSource = vm.arrDictsPicker.map { $0.DICTNAME }
         ddDictPicker.selectRow(vm.selectedDictPickerIndex)

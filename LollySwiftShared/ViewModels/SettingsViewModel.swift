@@ -84,7 +84,7 @@ class SettingsViewModel: NSObject {
         return arrLanguages[selectedLangIndex]
     }
     
-    var arrDictsWord = [MDictWord]()
+    var arrDictsMean = [MDictMean]()
     @objc
     var arrDictsPicker = [MDictPicker]()
     @objc
@@ -143,16 +143,16 @@ class SettingsViewModel: NSObject {
         USLANGID = selectedLang.ID
         selectedUSLangIndex = arrUserSettings.index { $0.KIND == 2 && $0.ENTITYID == self.USLANGID }!
         let arrDicts = USDICTSPICKER.split("\r\n")
-        return Observable.zip(MDictWord.getDataByLang(self.USLANGID),
+        return Observable.zip(MDictMean.getDataByLang(self.USLANGID),
                               MDictNote.getDataByLang(self.USLANGID),
                               MTextbook.getDataByLang(self.USLANGID),
                               MAutoCorrect.getDataByLang(self.USLANGID))
             .map {
-                self.arrDictsWord = $0.0
+                self.arrDictsMean = $0.0
                 var i = 0
                 self.arrDictsPicker = arrDicts.flatMap { d -> [MDictPicker] in
                     if d == "0" {
-                        return self.arrDictsWord.map { MDictPicker(id: String($0.DICTID), name: $0.DICTNAME!) }
+                        return self.arrDictsMean.map { MDictPicker(id: String($0.DICTID), name: $0.DICTNAME!) }
                     } else {
                         i += 1
                         return [MDictPicker(id: d, name: "Custom\(i)")]
@@ -179,7 +179,7 @@ class SettingsViewModel: NSObject {
     func dictHtml(word: String, dictids: [String]) -> String {
         var s = "<html><body>\n"
         for (i, dictid) in dictids.enumerated() {
-            let item = arrDictsWord.first { String($0.DICTID) == dictid }!
+            let item = arrDictsMean.first { String($0.DICTID) == dictid }!
             let ifrId = "ifr\(i + 1)"
             let url = item.urlString(word: word, arrAutoCorrect: arrAutoCorrect)
             s += "<iframe id='\(ifrId)' frameborder='1' style='width:100%; height:500px; display:block' src='\(url)'></iframe>\n"
