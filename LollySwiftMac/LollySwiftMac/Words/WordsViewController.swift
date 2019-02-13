@@ -11,7 +11,7 @@ import WebKit
 import RxSwift
 
 class WordsViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate, WKNavigationDelegate, LollyProtocol {
-    var selectedDictPickerIndex = 0
+    var selectedDictGroupIndex = 0
     
     @IBOutlet weak var wvDict: WKWebView!
     @IBOutlet weak var tfNewWord: NSTextField!
@@ -53,7 +53,7 @@ class WordsViewController: NSViewController, NSTableViewDataSource, NSTableViewD
     func searchWord(word: String) {
         selectedWord = word
         status = .ready
-        let item = vmSettings.arrDictsPicker[selectedDictPickerIndex]
+        let item = vmSettings.arrDictsGroup[selectedDictGroupIndex]
         if item.DICTNAME.starts(with: "Custom") {
             let str = vmSettings.dictHtml(word: word, dictids: item.dictids())
             wvDict.loadHTMLString(str, baseURL: nil)
@@ -79,7 +79,7 @@ class WordsViewController: NSViewController, NSTableViewDataSource, NSTableViewD
     @IBAction func searchDict(_ sender: Any) {
         if sender is NSToolbarItem {
             let tbItem = sender as! NSToolbarItem
-            selectedDictPickerIndex = tbItem.tag
+            selectedDictGroupIndex = tbItem.tag
             print(tbItem.toolbar!.selectedItemIdentifier!.rawValue)
         }
         if tableView.selectedRow == -1 {
@@ -97,7 +97,7 @@ class WordsViewController: NSViewController, NSTableViewDataSource, NSTableViewD
         self.view.window?.makeKeyAndOrderFront(self)
         tableView.becomeFirstResponder()
         guard status == .navigating else {return}
-        let item = vmSettings.arrDictsPicker[selectedDictPickerIndex]
+        let item = vmSettings.arrDictsGroup[selectedDictGroupIndex]
         let item2 = vmSettings.arrDictsMean.first { $0.DICTNAME == item.DICTNAME }!
         // https://stackoverflow.com/questions/34751860/get-html-from-wkwebview-in-swift
         webView.evaluateJavaScript("document.documentElement.outerHTML.toString()") { (html: Any?, error: Error?) in
@@ -120,7 +120,7 @@ class WordsViewController: NSViewController, NSTableViewDataSource, NSTableViewD
     }
 
     func settingsChanged() {
-        selectedDictPickerIndex = vmSettings.selectedDictPickerIndex
+        selectedDictGroupIndex = vmSettings.selectedDictGroupIndex
     }
 }
 
@@ -186,14 +186,14 @@ class WordsWindowController: NSWindowController, NSToolbarDelegate, LollyProtoco
     func settingsChanged() {
         let img = toolbar.items[defaultToolbarItemCount].image
         for i in 0..<40 {
-            if i < vmSettings.arrDictsPicker.count {
+            if i < vmSettings.arrDictsGroup.count {
                 let item = toolbar.items[defaultToolbarItemCount + i]
-                item.label = vmSettings.arrDictsPicker[i].DICTNAME
+                item.label = vmSettings.arrDictsGroup[i].DICTNAME
                 item.target = contentViewController
                 item.action = #selector(WordsViewController.searchDict(_:))
                 item.isEnabled = true
                 item.image = img
-                if i == vmSettings.selectedDictPickerIndex {
+                if i == vmSettings.selectedDictGroupIndex {
                     toolbar.selectedItemIdentifier = item.itemIdentifier
                 }
             } else {

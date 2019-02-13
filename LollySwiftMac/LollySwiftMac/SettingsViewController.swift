@@ -16,7 +16,7 @@ class SettingsViewController: NSViewController {
         return AppDelegate.theSettingsViewModel
     }
     @IBOutlet weak var acLanguages: NSArrayController!
-    @IBOutlet weak var acDictsPicker: NSArrayController!
+    @IBOutlet weak var acDictsGroup: NSArrayController!
     @IBOutlet weak var acDictsNote: NSArrayController!
     @IBOutlet weak var acTextbooks: NSArrayController!
     @IBOutlet weak var acUnits: NSArrayController!
@@ -24,7 +24,7 @@ class SettingsViewController: NSViewController {
     @IBOutlet weak var tfUnitsInAllFrom: NSTextField!
     @IBOutlet weak var tfUnitsInAllTo: NSTextField!
     @IBOutlet weak var pubLanguages: NSPopUpButton!
-    @IBOutlet weak var pubDictsPicker: NSPopUpButton!
+    @IBOutlet weak var pubDictsGroup: NSPopUpButton!
     @IBOutlet weak var pubDictsNote: NSPopUpButton!
     @IBOutlet weak var pubTextbooks: NSPopUpButton!
     @IBOutlet weak var pubUnitFrom: NSPopUpButton!
@@ -62,16 +62,16 @@ class SettingsViewController: NSViewController {
     }
     
     @IBAction func dictMeanSelected(_ sender: AnyObject) {
-        vm.selectedDictPickerIndex = pubDictsPicker.indexOfSelectedItem
-        vm.updateDictPicker().subscribe {
-            self.updateDictPicker()
+        vm.selectedDictGroupIndex = pubDictsGroup.indexOfSelectedItem
+        vm.updateDictGroup().subscribe {
+            self.updateDictGroup()
         }.disposed(by: disposeBag)
     }
     
     @IBAction func dictNoteSelected(_ sender: AnyObject) {
         vm.selectedDictNoteIndex = pubDictsNote.indexOfSelectedItem
         vm.updateDictNote().subscribe {
-            self.updateDictPicker()
+            self.updateDictGroup()
         }.disposed(by: disposeBag)
     }
 
@@ -123,13 +123,13 @@ class SettingsViewController: NSViewController {
 
     func updateLang() {
         acLanguages.content = vm.arrLanguages
-        updateDictPicker()
+        updateDictGroup()
         updateDictNote()
         updateTextbook()
     }
     
-    func updateDictPicker() {
-        acDictsPicker.content = vm.arrDictsPicker
+    func updateDictGroup() {
+        acDictsGroup.content = vm.arrDictsGroup
     }
     
     func updateDictNote() {
