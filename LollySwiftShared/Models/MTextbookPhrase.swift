@@ -19,16 +19,16 @@ class MTextbookPhrase: NSObject, Codable {
     var SEQNUM = 0
     var PHRASE = ""
     var TRANSLATION: String?
-    var UNITWORDID = 0
-    var LANGWORDID = 0
+    var UNITPHRASEID = 0
+    var LANGPHRASEID = 0
 
     func PARTSTR(arrParts: [String]) -> String {
         return arrParts[PART - 1]
     }
 
-    static func getDataByLang(_ langid: Int) -> Observable<[MTextbookWord]> {
-        // SQL: SELECT * FROM VTEXTBOOKWORDS WHERE LANGID=?
-        let url = "\(RestApi.url)VTEXTBOOKWORDS?transform=1&filter=LANGID,eq,\(langid)&order[]=TEXTBOOKID&order[]=UNIT&order[]=PART&order[]=SEQNUM"
-        return RestApi.getArray(url: url, keyPath: "VTEXTBOOKWORDS")
+    static func getDataByLang(_ langid: Int) -> Observable<[MTextbookPhrase]> {
+        // SQL: SELECT * FROM VTEXTBOOKPHRASES WHERE LANGID=?
+        let url = "\(RestApi.url)VTEXTBOOKPHRASES?transform=1&filter=LANGID,eq,\(langid)&order[]=TEXTBOOKID&order[]=UNIT&order[]=PART&order[]=SEQNUM"
+        return RestApi.getArray(url: url, keyPath: "VTEXTBOOKPHRASES")
     }
 }
