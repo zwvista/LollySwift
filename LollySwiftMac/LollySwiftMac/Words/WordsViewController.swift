@@ -76,6 +76,15 @@ class WordsViewController: NSViewController, NSTableViewDataSource, NSTableViewD
         }
     }
     
+    func openOnlineDict(word: String) {
+        let item = vmSettings.arrDictsGroup[selectedDictGroupIndex]
+        if !item.DICTNAME.starts(with: "Custom") {
+            let item2 = vmSettings.arrDictsMean.first { $0.DICTNAME == item.DICTNAME }!
+            let url = item2.urlString(word: word, arrAutoCorrect: vmSettings.arrAutoCorrect)
+            MacApi.openPage(url)
+        }
+    }
+    
     @IBAction func searchDict(_ sender: Any) {
         if sender is NSToolbarItem {
             let tbItem = sender as! NSToolbarItem

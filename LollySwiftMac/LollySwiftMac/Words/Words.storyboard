@@ -466,6 +466,12 @@
                                 <action selector="googleWord:" target="F8i-pe-Ate" id="JEz-BV-2EV"/>
                             </connections>
                         </menuItem>
+                        <menuItem title="Online Dictionary" id="BqH-TZ-6Ak">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="openOnlineDict:" target="F8i-pe-Ate" id="Kaf-Ae-HMU"/>
+                            </connections>
+                        </menuItem>
                     </items>
                 </menu>
                 <userDefaultsController id="kQx-Qe-nCG"/>
@@ -1316,6 +1322,12 @@ Gw
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
                                 <action selector="googleWord:" target="UkS-Xi-ogF" id="gXF-cQ-pce"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem title="Online Dictionary" id="Xce-Ci-oO6">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="openOnlineDict:" target="UkS-Xi-ogF" id="BDO-Az-0N2"/>
                             </connections>
                         </menuItem>
                     </items>
@@ -2384,6 +2396,12 @@ Gw
                                 <action selector="googleWord:" target="ECR-Tq-pby" id="tfj-b0-JRN"/>
                             </connections>
                         </menuItem>
+                        <menuItem title="Online Dictionary" id="52w-i0-f6l">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="googleWord:" target="UkS-Xi-ogF" id="V6z-Hr-AHZ"/>
+                            </connections>
+                        </menuItem>
                     </items>
                 </menu>
                 <userDefaultsController id="qnH-MI-FLL"/>
@@ -3067,7 +3085,7 @@ Gw
                                                         <outlet property="menu" destination="UPB-Wi-4rN" id="fIC-7H-cu8"/>
                                                     </connections>
                                                 </clipView>
-                                                <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="0.007462686567164179" horizontal="YES" id="qzl-qd-PqN">
+                                                <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="0.5149253731343284" horizontal="YES" id="qzl-qd-PqN">
                                                     <rect key="frame" x="1" y="561" width="430" height="16"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </scroller>
@@ -3079,6 +3097,9 @@ Gw
                                                     <rect key="frame" x="0.0" y="0.0" width="564" height="25"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </tableHeaderView>
+                                                <connections>
+                                                    <outlet property="menu" destination="GlP-Yb-8OM" id="5ls-GI-a8u"/>
+                                                </connections>
                                             </scrollView>
                                         </subviews>
                                         <constraints>
@@ -3167,6 +3188,12 @@ Gw
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
                                 <action selector="googleWord:" target="S5w-0q-IQt" id="RzT-gb-B8i"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem title="Online Dictionary" id="Pzw-TA-ehf">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="openOnlineDict:" target="S5w-0q-IQt" id="eOg-id-Guo"/>
                             </connections>
                         </menuItem>
                     </items>

@@ -81,6 +81,11 @@ class WordsSearchViewController: WordsViewController {
         let item = arrWords[tableView.selectedRow]
         MacApi.googleString(item.WORD)
     }
+    
+    @IBAction func openOnlineDict(_ sender: Any) {
+        let item = arrWords[tableView.selectedRow]
+        openOnlineDict(word: item.WORD)
+    }
 }
 
 class WordsSearchWindowController: WordsWindowController {

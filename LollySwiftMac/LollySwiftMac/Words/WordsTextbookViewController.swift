@@ -104,24 +104,9 @@ class WordsTextbookViewController: WordsViewController {
         MacApi.googleString(item.WORD)
     }
     
-    @IBAction func getNotes(_ sender: Any) {
-//        let alert = NSAlert()
-//        alert.messageText = "Retrieve Notes"
-//        alert.informativeText = "question"
-//        alert.alertStyle = .informational
-//        alert.addButton(withTitle: "Empty Notes Only")
-//        alert.addButton(withTitle: "All Notes")
-//        alert.addButton(withTitle: "Cancel")
-//        let res = alert.runModal()
-//        if res != .alertThirdButtonReturn {
-//            vm.getNotes(ifEmpty: res == .alertFirstButtonReturn, oneComplete: {
-//                self.tableView.reloadData(forRowIndexes: [$0], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count))
-//            }, allComplete: {
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-//                    // self.tableView.reloadData()
-//                }
-//            })
-//        }
+    @IBAction func openOnlineDict(_ sender: Any) {
+        let item = vm.arrWords[tableView.selectedRow]
+        openOnlineDict(word: item.WORD)
     }
     
     override func settingsChanged() {

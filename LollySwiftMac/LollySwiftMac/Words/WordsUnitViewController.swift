@@ -172,6 +172,11 @@ class WordsUnitViewController: WordsViewController {
         MacApi.googleString(item.WORD)
     }
     
+    @IBAction func openOnlineDict(_ sender: Any) {
+        let item = vm.arrWords[tableView.selectedRow]
+        openOnlineDict(word: item.WORD)
+    }
+
     @IBAction func getNotes(_ sender: Any) {
         let alert = NSAlert()
         alert.messageText = "Retrieve Notes"
