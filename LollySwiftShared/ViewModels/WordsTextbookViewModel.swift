@@ -10,12 +10,12 @@ import Foundation
 import RxSwift
 
 class WordsTextbookViewModel: NSObject {
-    var settings: SettingsViewModel
+    var vmSettings: SettingsViewModel
     var arrWords = [MTextbookWord]()
     var arrWordsFiltered: [MTextbookWord]?
 
     public init(settings: SettingsViewModel, disposeBag: DisposeBag, complete: @escaping () -> ()) {
-        self.settings = settings
+        self.vmSettings = settings
         let item = settings.arrTextbooks[settings.selectedTextbookIndex]
         super.init()
         MTextbookWord.getDataByLang(item.LANGID).subscribe(onNext: {

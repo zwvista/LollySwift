@@ -62,6 +62,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         showWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesUnitWindowController", modal: false)
     }
     
+    @IBAction func wordsInTextbook(_ sender: AnyObject) {
+        showWindow(storyBoardName: "Words", windowControllerName: "WordsTextbookWindowController", modal: false)
+    }
+    
+    @IBAction func phrasesInTextbook(_ sender: AnyObject) {
+        showWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesTextbookWindowController", modal: false)
+    }
+
     @IBAction func wordsInLanguage(_ sender: AnyObject) {
         showWindow(storyBoardName: "Words", windowControllerName: "WordsLangWindowController", modal: false)
     }

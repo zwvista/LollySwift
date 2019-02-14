@@ -19,6 +19,7 @@ class MUnitWord: NSObject, Codable {
     var SEQNUM = 0
     var WORD = ""
     var NOTE: String?
+    var LEVEL = 0
     var LANGWORDID = 0
     
     func PARTSTR(arrParts: [String]) -> String {

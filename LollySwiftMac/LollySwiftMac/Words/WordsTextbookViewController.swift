@@ -16,15 +16,9 @@ class WordsTextbookViewController: WordsViewController {
     var arrWords: [MTextbookWord] {
         return vm.arrWords
     }
-    
-    // https://developer.apple.com/videos/play/wwdc2011/120/
-    // https://stackoverflow.com/questions/2121907/drag-drop-reorder-rows-on-nstableview
-    let tableRowDragType = NSPasteboard.PasteboardType(rawValue: "private.table-row")
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.tableView.registerForDraggedTypes([tableRowDragType])
         refreshTableView(self)
     }
 
@@ -42,14 +36,8 @@ class WordsTextbookViewController: WordsViewController {
         let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! NSTableCellView
         let item = arrWords[row]
         let columnName = tableColumn!.title
-//        cell.textField?.stringValue = columnName == "PART" ? item.PARTSTR(arrParts: vm.vmSettings.arrParts) : String(describing: item.value(forKey: columnName) ?? "")
+        cell.textField?.stringValue = columnName == "PART" ? item.PARTSTR(arrParts: vm.vmSettings.arrParts) : String(describing: item.value(forKey: columnName) ?? "")
         return cell;
-    }
-    
-    func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
-        let item = NSPasteboardItem()
-        item.setString(String(row), forType: tableRowDragType)
-        return item
     }
     
     func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int, proposedDropOperation dropOperation: NSTableView.DropOperation) -> NSDragOperation {

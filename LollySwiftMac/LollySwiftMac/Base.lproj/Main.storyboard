@@ -654,16 +654,17 @@
                                                 <action selector="settings:" target="Voe-Tx-rLC" id="e86-g0-PpW"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="M0E-D5-Zbj"/>
                                         <menuItem title="Words in Unit" id="rFh-mG-XP1">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="wordsInUnit:" target="Voe-Tx-rLC" id="mEC-Jh-ryY"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Phrases in Unit" id="OOs-UY-ZL9" userLabel="Phrases in Unit">
+                                        <menuItem title="Words in Textbook" id="qK8-Cp-YNp" userLabel="Words in Textbook">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
-                                                <action selector="phrasesInUnit:" target="Voe-Tx-rLC" id="Pa4-Xq-QaJ"/>
+                                                <action selector="wordsInTextbook:" target="Voe-Tx-rLC" id="7N2-J9-iUw"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Words in Language" id="THZ-eK-HCh">
@@ -672,12 +673,26 @@
                                                 <action selector="wordsInLanguage:" target="Voe-Tx-rLC" id="Zx8-ee-A1x"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="z7G-3H-tyg"/>
+                                        <menuItem title="Phrases in Unit" id="OOs-UY-ZL9" userLabel="Phrases in Unit">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="phrasesInUnit:" target="Voe-Tx-rLC" id="Pa4-Xq-QaJ"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Phrases in Textbook" id="HcN-QM-x6f" userLabel="Phrases in Textbook">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="phrasesInTextbook:" target="Voe-Tx-rLC" id="n4t-ah-lxS"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem title="Phrases in Language" id="nbu-yj-baH" userLabel="Phrases in Language">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="phrasesInLanguage:" target="Voe-Tx-rLC" id="Oea-V9-MF0"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="pYf-WQ-bUK"/>
                                         <menuItem title="Blog" id="FKE-az-Kum">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
@@ -1141,7 +1156,7 @@
                                     <action selector="dictMeanSelected:" target="HfO-r7-QMx" id="zXy-H5-Dgo"/>
                                     <binding destination="EkI-9N-SJp" name="content" keyPath="arrangedObjects" id="cMt-dW-ffF"/>
                                     <binding destination="EkI-9N-SJp" name="contentValues" keyPath="arrangedObjects.DICTNAME" previousBinding="cMt-dW-ffF" id="PXM-QD-ObO"/>
-                                    <binding destination="HfO-r7-QMx" name="selectedIndex" keyPath="vm.selectedDictPickerIndex" previousBinding="PXM-QD-ObO" id="krQ-Cy-jl1"/>
+                                    <binding destination="HfO-r7-QMx" name="selectedIndex" keyPath="vm.selectedDictGroupIndex" previousBinding="PXM-QD-ObO" id="krQ-Cy-jl1"/>
                                 </connections>
                             </popUpButton>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sxf-h3-GJC">

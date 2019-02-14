@@ -14,9 +14,9 @@ class MLangWord: NSObject, Codable {
     var ID = 0
     var LANGID = 0
     var WORD = ""
-    var LEVEL = 0
     var NOTE: String?
-    
+    var LEVEL = 0
+
     var WORDNOTE: String {
         return WORD + ((NOTE ?? "").isEmpty ? "" : "(\(NOTE!))")
     }
@@ -50,21 +50,21 @@ class MLangWord: NSObject, Codable {
 
     static func getDataByLang(_ langid: Int) -> Observable<[MLangWord]> {
         // SQL: SELECT * FROM LANGWORDS WHERE LANGID=?
-        let url = "\(RestApi.url)LANGWORDS?transform=1&filter=LANGID,eq,\(langid)&order=WORD"
-        return RestApi.getArray(url: url, keyPath: "LANGWORDS")
+        let url = "\(RestApi.url)VLANGWORDS?transform=1&filter=LANGID,eq,\(langid)&order=WORD"
+        return RestApi.getArray(url: url, keyPath: "VLANGWORDS")
     }
 
     static func getDataByLangWord(langid: Int, word: String) -> Observable<[MLangWord]> {
         // SQL: SELECT * FROM LANGWORDS WHERE LANGID=? AND WORD=?
-        let url = "\(RestApi.url)LANGWORDS?transform=1&filter[]=LANGID,eq,\(langid)&filter[]=WORD,eq,\(word.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)"
+        let url = "\(RestApi.url)VLANGWORDS?transform=1&filter[]=LANGID,eq,\(langid)&filter[]=WORD,eq,\(word.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)"
         // Api is case insensitive
-        return RestApi.getArray(url: url, keyPath: "LANGWORDS").map { $0.filter { $0.WORD == word } }
+        return RestApi.getArray(url: url, keyPath: "VLANGWORDS").map { $0.filter { $0.WORD == word } }
     }
 
     static func getDataById(_ id: Int) -> Observable<[MLangWord]> {
         // SQL: SELECT * FROM LANGWORDS WHERE ID=?
-        let url = "\(RestApi.url)LANGWORDS?transform=1&filter=ID,eq,\(id)"
-        return RestApi.getArray(url: url, keyPath: "LANGWORDS")
+        let url = "\(RestApi.url)VLANGWORDS?transform=1&filter=ID,eq,\(id)"
+        return RestApi.getArray(url: url, keyPath: "VLANGWORDS")
     }
     
     static func update(_ id: Int, note: String) -> Observable<String> {
