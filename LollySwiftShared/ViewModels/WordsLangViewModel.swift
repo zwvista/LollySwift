@@ -55,7 +55,7 @@ class WordsLangViewModel: NSObject {
         let item = arrWords[index]
         return vmNote.getNote(word: item.WORD).flatMap { note -> Observable<()> in
             item.NOTE = note
-            return WordsUnitViewModel.update(item.ID, note: note)
+            return MLangWord.update(item.ID, note: note).map { print($0) }
         }
     }
 

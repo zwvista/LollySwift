@@ -12,9 +12,10 @@ import RxSwift
 
 class PhrasesTextbookViewController: PhrasesViewController {
     
+    var wc: PhrasesTextbookWindowController { return view.window!.windowController as! PhrasesTextbookWindowController }
     var vm: PhrasesTextbookViewModel!
     var arrPhrases: [MTextbookPhrase] {
-        return vm.arrPhrases
+        return vm.arrPhrasesFiltered == nil ? vm.arrPhrases : vm.arrPhrasesFiltered!
     }
 
     override func viewDidLoad() {
@@ -67,12 +68,12 @@ class PhrasesTextbookViewController: PhrasesViewController {
     }
 
     @IBAction func editPhrase(_ sender: Any) {
-//        let detailVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesUnitDetailViewController") as! PhrasesUnitDetailViewController
-//        detailVC.vm = vm
-//        let i = tableView.selectedRow
-//        detailVC.mPhrase = vm.arrPhrases[i]
-//        detailVC.complete = { self.tableView.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count)) }
-//        self.presentAsModalWindow(detailVC)
+        let detailVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesTextbookDetailViewController") as! PhrasesTextbookDetailViewController
+        detailVC.vm = vm
+        let i = tableView.selectedRow
+        detailVC.mPhrase = vm.arrPhrases[i]
+        detailVC.complete = { self.tableView.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count)) }
+        self.presentAsModalWindow(detailVC)
     }
     
     @IBAction func copyPhrase(_ sender: Any) {
@@ -85,10 +86,42 @@ class PhrasesTextbookViewController: PhrasesViewController {
         MacApi.googleString(item.PHRASE)
     }
     
+    @IBAction func filterPhrase(_ sender: Any) {
+        let n = (sender as! NSSegmentedControl).selectedSegment
+        if n == 0 {
+            vm.arrPhrasesFiltered = nil
+        } else {
+            let scope = n == 1 ? "Phrase" : "Translation"
+            vm.filterPhrasesForSearchText(wc.filterText, scope: scope)
+        }
+        self.tableView.reloadData()
+    }
+
     override func settingsChanged() {
         refreshTableView(self)
     }
 }
 
-class PhrasesTextbookWindowController: NSWindowController {
+class PhrasesTextbookWindowController: NSWindowController, NSTextFieldDelegate {
+    @IBOutlet weak var scFilter: NSSegmentedControl!
+    @IBOutlet weak var tfFilterText: NSTextField!
+    @objc var filterText = ""
+    
+    override func windowDidLoad() {
+        super.windowDidLoad()
+        window!.toolbar!.selectedItemIdentifier = NSToolbarItem.Identifier(rawValue: "No Filter")
+    }
+    
+    func controlTextDidEndEditing(_ obj: Notification) {
+        let searchfield = obj.object as! NSControl
+        guard searchfield === tfFilterText else {return}
+        let dict = (obj as NSNotification).userInfo!
+        let reason = dict["NSTextMovement"] as! NSNumber
+        let code = Int(reason.int32Value)
+        guard code == NSReturnTextMovement else {return}
+        if scFilter.selectedSegment == 0 {
+            scFilter.selectedSegment = 1
+        }
+        (contentViewController as! PhrasesTextbookViewController).filterPhrase(scFilter)
+    }
 }

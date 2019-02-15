@@ -26,7 +26,7 @@ class PhrasesTextbookViewModel: NSObject {
     
     func filterPhrasesForSearchText(_ searchText: String, scope: String) {
         arrPhrasesFiltered = arrPhrases.filter({ (item) -> Bool in
-            return item.PHRASE.contains(searchText)
+            return (scope == "Phrase" ? item.PHRASE : item.TRANSLATION ?? "").contains(searchText)
         })
     }
 

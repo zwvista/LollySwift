@@ -1368,7 +1368,7 @@ Gw
                                             </segments>
                                         </segmentedCell>
                                         <connections>
-                                            <action selector="filterPhrase:" target="C0L-6x-tvV" id="LP3-dF-KVz"/>
+                                            <action selector="filterWord:" target="C0L-6x-tvV" id="Czn-Cs-CBz"/>
                                         </connections>
                                     </segmentedControl>
                                     <connections>
@@ -2424,6 +2424,44 @@ Gw
                                 <toolbarItem implicitItemIdentifier="78890E5B-E0CE-4316-AC39-5F2EC4113E54" label="Delete" paletteLabel="Delete" tag="-1" image="NSRemoveTemplate" id="Gw3-Q0-iwp"/>
                                 <toolbarItem implicitItemIdentifier="0FE47FD6-6CD6-4F13-92D4-43D61D94CAF8" label="Refresh" paletteLabel="Refresh" tag="-1" image="NSRefreshTemplate" id="yQv-Z3-dpb"/>
                                 <toolbarItem implicitItemIdentifier="D15C6E72-5923-4A28-B478-0FBD603820ED" label="Notes" paletteLabel="Notes" tag="-1" image="NSInfo" id="fz0-Vb-TNs"/>
+                                <toolbarItem implicitItemIdentifier="204078EF-7E69-41FF-85E5-6C280CE4D0D3" label="Filter Type" paletteLabel="Filter Type" sizingBehavior="auto" id="MpB-21-MBj">
+                                    <nil key="toolTip"/>
+                                    <segmentedControl key="view" verticalHuggingPriority="750" id="Di7-Xz-xhN">
+                                        <rect key="frame" x="0.0" y="14" width="90" height="23"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="Wfp-WW-PxO">
+                                            <font key="font" metaFont="system"/>
+                                            <segments>
+                                                <segment label="None" width="42" selected="YES"/>
+                                                <segment label="Word" width="41" tag="1"/>
+                                            </segments>
+                                        </segmentedCell>
+                                        <connections>
+                                            <action selector="filterWord:" target="bLJ-EC-iia" id="Bfv-e2-JV2"/>
+                                        </connections>
+                                    </segmentedControl>
+                                    <connections>
+                                        <action selector="filterWord:" target="bLJ-EC-iia" id="8zl-yj-POV"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="4976C7F0-1F81-4F6D-A805-C1C9E447D7F3" label="Filter Text" paletteLabel="Filter Text" tag="-1" id="fRI-C4-MOX">
+                                    <nil key="toolTip"/>
+                                    <size key="minSize" width="40" height="22"/>
+                                    <size key="maxSize" width="123" height="22"/>
+                                    <textField key="view" verticalHuggingPriority="750" tag="-1" id="ExO-b7-rcG">
+                                        <rect key="frame" x="0.0" y="14" width="119" height="22"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="zeA-ft-g3d">
+                                            <font key="font" usesAppearanceFont="YES"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                        <connections>
+                                            <binding destination="a6c-EF-9R2" name="value" keyPath="filterText" id="I2P-PT-KHP"/>
+                                            <outlet property="delegate" destination="a6c-EF-9R2" id="EJB-6K-LJG"/>
+                                        </connections>
+                                    </textField>
+                                </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="EED7D168-A935-46A4-B535-11EE2FF5F016" label="Dict0" paletteLabel="Dict0" image="NSBookmarksTemplate" selectable="YES" id="4dX-Ey-E42">
                                     <size key="minSize" width="17" height="18"/>
                                     <size key="maxSize" width="17" height="18"/>
@@ -2590,6 +2628,8 @@ Gw
                                 <toolbarItem reference="Gw3-Q0-iwp"/>
                                 <toolbarItem reference="yQv-Z3-dpb"/>
                                 <toolbarItem reference="fz0-Vb-TNs"/>
+                                <toolbarItem reference="MpB-21-MBj"/>
+                                <toolbarItem reference="fRI-C4-MOX"/>
                                 <toolbarItem reference="4dX-Ey-E42"/>
                                 <toolbarItem reference="T7d-Ju-aSs"/>
                                 <toolbarItem reference="X1n-sk-uZK"/>
@@ -2640,6 +2680,7 @@ Gw
                         </connections>
                     </window>
                     <connections>
+                        <outlet property="scFilter" destination="Di7-Xz-xhN" id="TO0-F4-kfk"/>
                         <outlet property="tbiDict0" destination="4dX-Ey-E42" id="oub-8q-rod"/>
                         <outlet property="tbiDict1" destination="T7d-Ju-aSs" id="fL5-8E-Wz0"/>
                         <outlet property="tbiDict10" destination="ltX-jU-Im5" id="Gij-58-aOk"/>
@@ -2680,6 +2721,7 @@ Gw
                         <outlet property="tbiDict7" destination="X2N-PF-W5Z" id="68j-qm-Xz4"/>
                         <outlet property="tbiDict8" destination="BSL-3I-cRB" id="oek-Z5-G25"/>
                         <outlet property="tbiDict9" destination="mXd-Nc-beT" id="IXO-Xa-ewe"/>
+                        <outlet property="tfFilterText" destination="ExO-b7-rcG" id="lBm-Qm-fhG"/>
                         <outlet property="toolbar" destination="UkK-DI-MI4" id="jjj-cQ-FPx"/>
                         <segue destination="S5w-0q-IQt" kind="relationship" relationship="window.shadowedContentViewController" id="BKg-qC-gfv"/>
                     </connections>

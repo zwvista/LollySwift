@@ -12,9 +12,10 @@ import RxSwift
 
 class WordsTextbookViewController: WordsViewController {
 
+    var wc2: WordsTextbookWindowController! { return view.window!.windowController as? WordsTextbookWindowController }
     var vm: WordsTextbookViewModel!
     var arrWords: [MTextbookWord] {
-        return vm.arrWords
+        return vm.arrWordsFiltered == nil ? vm.arrWords : vm.arrWordsFiltered!
     }
 
     override func viewDidLoad() {
@@ -71,19 +72,19 @@ class WordsTextbookViewController: WordsViewController {
     }
 
     @IBAction func editWord(_ sender: Any) {
-//        let detailVC = self.storyboard!.instantiateController(withIdentifier: "WordsTextbookDetailViewController") as! WordsTextbookDetailViewController
-//        detailVC.vm = vm
-//        let i = tableView.selectedRow
-//        detailVC.mWord = vm.arrWords[i]
-//        detailVC.complete = { self.tableView.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count)) }
-//        self.presentAsModalWindow(detailVC)
+        let detailVC = self.storyboard!.instantiateController(withIdentifier: "WordsTextbookDetailViewController") as! WordsTextbookDetailViewController
+        detailVC.vm = vm
+        let i = tableView.selectedRow
+        detailVC.mWord = vm.arrWords[i]
+        detailVC.complete = { self.tableView.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count)) }
+        self.presentAsModalWindow(detailVC)
     }
     
     @IBAction func getNote(_ sender: Any) {
-//        let col = tableView.tableColumns.index(where: {$0.title == "NOTE"})!
-//        vm.getNote(index: tableView.selectedRow).subscribe {
-//            self.tableView.reloadData(forRowIndexes: [self.tableView.selectedRow], columnIndexes: [col])
-//        }.disposed(by: disposeBag)
+        let col = tableView.tableColumns.index(where: {$0.title == "NOTE"})!
+        vm.getNote(index: tableView.selectedRow).subscribe {
+            self.tableView.reloadData(forRowIndexes: [self.tableView.selectedRow], columnIndexes: [col])
+        }.disposed(by: disposeBag)
     }
     
     @IBAction func copyWord(_ sender: Any) {
@@ -101,6 +102,16 @@ class WordsTextbookViewController: WordsViewController {
         openOnlineDict(word: item.WORD)
     }
     
+    @IBAction func filterWord(_ sender: Any) {
+        let n = (sender as! NSSegmentedControl).selectedSegment
+        if n == 0 {
+            vm.arrWordsFiltered = nil
+        } else {
+            vm.filterWordsForSearchText(wc2.filterText, scope: "Word")
+        }
+        self.tableView.reloadData()
+    }
+
     override func settingsChanged() {
         super.settingsChanged()
         refreshTableView(self)
@@ -110,5 +121,25 @@ class WordsTextbookViewController: WordsViewController {
     }
 }
 
-class WordsTextbookWindowController: WordsWindowController {
+class WordsTextbookWindowController: WordsWindowController, NSTextFieldDelegate {
+    @IBOutlet weak var scFilter: NSSegmentedControl!
+    @IBOutlet weak var tfFilterText: NSTextField!
+    @objc var filterText = ""
+    
+    override func windowDidLoad() {
+        super.windowDidLoad()
+    }
+    
+    func controlTextDidEndEditing(_ obj: Notification) {
+        let searchfield = obj.object as! NSControl
+        guard searchfield === tfFilterText else {return}
+        let dict = (obj as NSNotification).userInfo!
+        let reason = dict["NSTextMovement"] as! NSNumber
+        let code = Int(reason.int32Value)
+        guard code == NSReturnTextMovement else {return}
+        if scFilter.selectedSegment == 0 {
+            scFilter.selectedSegment = 1
+        }
+        (contentViewController as! WordsTextbookViewController).filterWord(scFilter)
+    }
 }

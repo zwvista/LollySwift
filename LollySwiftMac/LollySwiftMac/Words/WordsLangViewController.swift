@@ -53,7 +53,9 @@ class WordsLangViewController: WordsViewController {
         }
         guard oldValue != newValue else {return}
         item.setValue(newValue, forKey: key)
-        WordsLangViewModel.update(item: item).subscribe().disposed(by: disposeBag)
+        WordsLangViewModel.update(item: item).subscribe {
+            self.tableView.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count))
+        }.disposed(by: disposeBag)
     }
     
     override func searchWordInTableView() {
@@ -100,6 +102,13 @@ class WordsLangViewController: WordsViewController {
         self.presentAsModalWindow(detailVC)
     }
     
+    @IBAction func getNote(_ sender: Any) {
+        let col = tableView.tableColumns.index(where: {$0.title == "NOTE"})!
+        vm.getNote(index: tableView.selectedRow).subscribe {
+            self.tableView.reloadData(forRowIndexes: [self.tableView.selectedRow], columnIndexes: [col])
+        }.disposed(by: disposeBag)
+    }
+
     @IBAction func copyWord(_ sender: Any) {
         let item = vm.arrWords[tableView.selectedRow]
         MacApi.copyText(item.WORD)
@@ -141,7 +150,6 @@ class WordsLangWindowController: WordsWindowController, NSTextFieldDelegate {
     
     override func windowDidLoad() {
         super.windowDidLoad()
-        window!.toolbar!.selectedItemIdentifier = NSToolbarItem.Identifier(rawValue: "No Filter")
     }
     
     func controlTextDidEndEditing(_ obj: Notification) {
