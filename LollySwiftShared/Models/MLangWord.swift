@@ -24,14 +24,22 @@ class MLangWord: NSObject, Codable {
     override init() {
     }
     
-    init(item: MUnitWord) {
-        ID = item.LANGWORDID
-        LANGID = item.LANGID
-        WORD = item.WORD
-        NOTE = item.NOTE
+    init(unititem: MUnitWord) {
+        ID = unititem.LANGWORDID
+        LANGID = unititem.LANGID
+        WORD = unititem.WORD
+        NOTE = unititem.NOTE
         super.init()
     }
     
+    init(textbookitem: MTextbookWord) {
+        ID = textbookitem.LANGWORDID
+        LANGID = textbookitem.LANGID
+        WORD = textbookitem.WORD
+        NOTE = textbookitem.NOTE
+        super.init()
+    }
+
     func combineNote(_ note: String?) -> Bool {
         let oldNote = NOTE
         if !(note ?? "").isEmpty {

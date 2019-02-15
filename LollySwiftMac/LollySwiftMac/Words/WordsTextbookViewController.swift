@@ -40,29 +40,21 @@ class WordsTextbookViewController: WordsViewController {
         return cell;
     }
     
-    func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int, proposedDropOperation dropOperation: NSTableView.DropOperation) -> NSDragOperation {
-        if dropOperation == .above {
-            return .move
-        }
-        return []
-    }
-    
-    
     @IBAction func endEditing(_ sender: NSTextField) {
-//        let row = tableView.row(for: sender)
-//        let col = tableView.column(for: sender)
-//        let key = tableView.tableColumns[col].title
-//        let item = arrWords[row]
-//        let oldValue = String(describing: item.value(forKey: key))
-//        var newValue = sender.stringValue
-//        if key == "WORD" {
-//            newValue = vmSettings.autoCorrectInput(text: newValue)
-//        }
-//        guard oldValue != newValue else {return}
-//        item.setValue(newValue, forKey: key)
-//        WordsTextbookViewModel.update(item: item).subscribe {
-//            self.tableView.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count))
-//        }.disposed(by: disposeBag)
+        let row = tableView.row(for: sender)
+        let col = tableView.column(for: sender)
+        let key = tableView.tableColumns[col].title
+        let item = arrWords[row]
+        let oldValue = String(describing: item.value(forKey: key))
+        var newValue = sender.stringValue
+        if key == "WORD" {
+            newValue = vmSettings.autoCorrectInput(text: newValue)
+        }
+        guard oldValue != newValue else {return}
+        item.setValue(newValue, forKey: key)
+        WordsTextbookViewModel.update(item: item).subscribe {
+            self.tableView.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count))
+        }.disposed(by: disposeBag)
     }
     
     override func searchWordInTableView() {

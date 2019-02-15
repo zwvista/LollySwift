@@ -50,7 +50,7 @@ class WordsUnitViewModel: NSObject {
                 // non-existing word
                 return Observable.empty()
             } else {
-                let itemLang = MLangWord(item: item)
+                let itemLang = MLangWord(unititem: item)
                 return MLangWord.getDataById(langwordid).flatMap { arrLangOld -> Observable<Int> in
                     if !arrLangOld.isEmpty && arrLangOld[0].WORD == item.WORD {
                         // word intact
@@ -98,7 +98,7 @@ class WordsUnitViewModel: NSObject {
     static func create(item: MUnitWord) -> Observable<Int> {
         return MLangWord.getDataByLangWord(langid: item.LANGID, word: item.WORD).flatMap { arrLang -> Observable<Int> in
             if arrLang.isEmpty {
-                let itemLang = MLangWord(item: item)
+                let itemLang = MLangWord(unititem: item)
                 return MLangWord.create(item: itemLang)
             } else {
                 let itemLang = arrLang[0]

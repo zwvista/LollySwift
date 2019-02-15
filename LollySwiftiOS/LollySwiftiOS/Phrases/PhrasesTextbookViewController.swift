@@ -11,8 +11,8 @@ import RxSwift
 
 class PhrasesTextbookViewController: PhrasesBaseViewController, UISearchBarDelegate, UISearchResultsUpdating {
     
-    var vm: PhrasesUnitViewModel!
-    var arrPhrases: [MUnitPhrase] {
+    var vm: PhrasesTextbookViewModel!
+    var arrPhrases: [MTextbookPhrase] {
         return searchController.isActive && searchBar.text != "" ? vm.arrPhrasesFiltered! : vm.arrPhrases
     }
     @IBOutlet weak var btnEdit: UIBarButtonItem!
@@ -22,7 +22,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController, UISearchBarDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.showBlurLoader()
-        vm = PhrasesUnitViewModel(settings: vmSettings, disposeBag: disposeBag) {
+        vm = PhrasesTextbookViewModel(settings: vmSettings, disposeBag: disposeBag) {
             self.setupSearchController(delegate: self)
             self.tableView.reloadData()
             self.view.removeBlurLoader()
@@ -36,7 +36,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController, UISearchBarDeleg
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PhraseCell", for: indexPath) as! PhrasesTextbookCell
         let item = arrPhrases[indexPath.row]
-        cell.lblUnitPartSeqNum!.text = item.UNITPARTSEQNUM(arrParts: vmSettings.arrParts)
+        cell.lblTextbookPartSeqNum!.text = item.UNITPARTSEQNUM(arrParts: vmSettings.arrParts)
         cell.lblPhrase!.text = item.PHRASE
         cell.lblTranslation!.text = item.TRANSLATION
         return cell;
@@ -47,7 +47,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController, UISearchBarDeleg
     }
     
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        return vmSettings.isSingleUnitPart
+        return vmSettings.isSingleTextbookPart
     }
     
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
@@ -66,7 +66,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController, UISearchBarDeleg
         let item = self.vm.arrPhrases[i]
         func delete() {
             self.yesNoAction(title: "delete", message: "Do you really want to delete the phrase \"\(item.PHRASE)\"?", yesHandler: { (action) in
-                PhrasesUnitViewModel.delete(item.ID).subscribe().disposed(by: self.disposeBag)
+                PhrasesTextbookViewModel.delete(item.ID).subscribe().disposed(by: self.disposeBag)
                 self.vm.arrPhrases.remove(at: i)
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }, noHandler: { (action) in
@@ -112,9 +112,9 @@ class PhrasesTextbookViewController: PhrasesBaseViewController, UISearchBarDeleg
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
-        guard let controller = (segue.destination as? UINavigationController)?.topViewController as? PhrasesUnitDetailViewController else {return}
+        guard let controller = (segue.destination as? UINavigationController)?.topViewController as? PhrasesTextbookDetailViewController else {return}
         controller.vm = vm
-        controller.mPhrase = sender as? MUnitPhrase ?? vm.newUnitPhrase()
+        controller.mPhrase = sender as? MTextbookPhrase ?? vm.newTextbookPhrase()
     }
     
     @IBAction func btnEditClicked(_ sender: Any) {
@@ -124,7 +124,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController, UISearchBarDeleg
     
     @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
         guard segue.identifier == "Done" else {return}
-        let controller = segue.source as! PhrasesUnitDetailViewController
+        let controller = segue.source as! PhrasesTextbookDetailViewController
         controller.onDone()
         tableView.reloadData()
         if controller.isAdd {
@@ -138,5 +138,5 @@ class PhrasesTextbookViewController: PhrasesBaseViewController, UISearchBarDeleg
 class PhrasesTextbookCell: UITableViewCell {
     @IBOutlet weak var lblPhrase: UILabel!
     @IBOutlet weak var lblTranslation: UILabel!
-    @IBOutlet weak var lblUnitPartSeqNum: UILabel!
+    @IBOutlet weak var lblTextbookPartSeqNum: UILabel!
 }

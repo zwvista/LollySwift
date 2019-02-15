@@ -30,4 +30,8 @@ class PhrasesTextbookViewModel: NSObject {
         })
     }
 
+    static func update(item: MTextbookPhrase) -> Observable<String> {
+        let item = MLangPhrase(textbookitem: item)
+        return MLangPhrase.update(item: item)
+    }
 }

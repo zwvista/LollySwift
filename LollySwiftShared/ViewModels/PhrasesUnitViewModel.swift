@@ -43,7 +43,7 @@ class PhrasesUnitViewModel: NSObject {
                 // non-existing phrase
                 return Observable.empty()
             } else {
-                let itemLang = MLangPhrase(item: item)
+                let itemLang = MLangPhrase(unititem: item)
                 return MLangPhrase.getDataById(langphraseid).flatMap { arrLangOld -> Observable<Int> in
                     if !arrLangOld.isEmpty && arrLangOld[0].PHRASE == item.PHRASE {
                         // phrase intact
@@ -90,7 +90,7 @@ class PhrasesUnitViewModel: NSObject {
     static func create(item: MUnitPhrase) -> Observable<Int> {
         return MLangPhrase.getDataByLangPhrase(langid: item.LANGID, phrase: item.PHRASE).flatMap { arrLang -> Observable<Int> in
             if arrLang.isEmpty {
-                let itemLang = MLangPhrase(item: item)
+                let itemLang = MLangPhrase(unititem: item)
                 return MLangPhrase.create(item: itemLang)
             } else {
                 let itemLang = arrLang[0]

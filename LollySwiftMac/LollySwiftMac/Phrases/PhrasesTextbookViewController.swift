@@ -12,19 +12,13 @@ import RxSwift
 
 class PhrasesTextbookViewController: PhrasesViewController {
     
-    var vm: PhrasesUnitViewModel!
-    var arrPhrases: [MUnitPhrase] {
+    var vm: PhrasesTextbookViewModel!
+    var arrPhrases: [MTextbookPhrase] {
         return vm.arrPhrases
     }
-    
-    // https://developer.apple.com/videos/play/wwdc2011/120/
-    // https://stackoverflow.com/questions/2121907/drag-drop-reorder-rows-on-nstableview
-    let tableRowDragType = NSPasteboard.PasteboardType(rawValue: "private.table-row")
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        tableView.registerForDraggedTypes([tableRowDragType])
         refreshTableView(self)
     }
 
@@ -46,54 +40,6 @@ class PhrasesTextbookViewController: PhrasesViewController {
         return cell;
     }
     
-    func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
-        let item = NSPasteboardItem()
-        item.setString(String(row), forType: tableRowDragType)
-        return item
-    }
-    
-    func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int, proposedDropOperation dropOperation: NSTableView.DropOperation) -> NSDragOperation {
-        if dropOperation == .above {
-            return .move
-        }
-        return []
-    }
-    
-    func tableView(_ tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int, dropOperation: NSTableView.DropOperation) -> Bool {
-        var oldIndexes = [Int]()
-        info.enumerateDraggingItems(options: [], for: tableView, classes: [NSPasteboardItem.self], searchOptions: [:]) { (draggingItem, _, _) in
-            if let str = (draggingItem.item as! NSPasteboardItem).string(forType: self.tableRowDragType), let index = Int(str) {
-                oldIndexes.append(index)
-            }
-        }
-        
-        var oldIndexOffset = 0
-        var newIndexOffset = 0
-        
-        func moveRow(at oldIndex: Int, to newIndex: Int) {
-            vm.movePhrase(at: oldIndex, to: newIndex)
-            tableView.moveRow(at: oldIndex, to: newIndex)
-        }
-        
-        tableView.beginUpdates()
-        for oldIndex in oldIndexes {
-            if oldIndex < row {
-                moveRow(at: oldIndex + oldIndexOffset, to: row - 1)
-                oldIndexOffset -= 1
-            } else {
-                moveRow(at: oldIndex, to: row + newIndexOffset)
-                newIndexOffset += 1
-            }
-        }
-        let col = tableView.tableColumns.index(where: {$0.title == "SEQNUM"})!
-        vm.reindex {
-            tableView.reloadData(forRowIndexes: [$0], columnIndexes: [col])
-        }
-        tableView.endUpdates()
-        
-        return true
-    }
-    
     @IBAction func endEditing(_ sender: NSTextField) {
         let row = tableView.row(for: sender)
         let col = tableView.column(for: sender)
@@ -106,36 +52,27 @@ class PhrasesTextbookViewController: PhrasesViewController {
         }
         guard oldValue != newValue else {return}
         item.setValue(newValue, forKey: key)
-        PhrasesUnitViewModel.update(item: item).subscribe {
+        PhrasesTextbookViewModel.update(item: item).subscribe {
             self.tableView.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count))
         }.disposed(by: disposeBag)
-    }
-
-    // https://stackoverflow.com/questions/24219441/how-to-use-nstoolbar-in-xcode-6-and-storyboard
-    @IBAction func addPhrase(_ sender: Any) {
-        let detailVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesUnitDetailViewController") as! PhrasesUnitDetailViewController
-        detailVC.vm = vm
-        detailVC.mPhrase = vm.newUnitPhrase()
-        detailVC.complete = { self.tableView.reloadData(); self.addPhrase(self) }
-        self.presentAsSheet(detailVC)
     }
     
     @IBAction func deletePhrase(_ sender: Any) {
     }
     
     @IBAction func refreshTableView(_ sender: Any) {
-        vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel, disposeBag: disposeBag) {
+        vm = PhrasesTextbookViewModel(settings: AppDelegate.theSettingsViewModel, disposeBag: disposeBag) {
             self.tableView.reloadData()
         }
     }
 
     @IBAction func editPhrase(_ sender: Any) {
-        let detailVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesUnitDetailViewController") as! PhrasesUnitDetailViewController
-        detailVC.vm = vm
-        let i = tableView.selectedRow
-        detailVC.mPhrase = vm.arrPhrases[i]
-        detailVC.complete = { self.tableView.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count)) }
-        self.presentAsModalWindow(detailVC)
+//        let detailVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesUnitDetailViewController") as! PhrasesUnitDetailViewController
+//        detailVC.vm = vm
+//        let i = tableView.selectedRow
+//        detailVC.mPhrase = vm.arrPhrases[i]
+//        detailVC.complete = { self.tableView.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count)) }
+//        self.presentAsModalWindow(detailVC)
     }
     
     @IBAction func copyPhrase(_ sender: Any) {

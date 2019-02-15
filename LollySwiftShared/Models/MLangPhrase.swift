@@ -19,14 +19,22 @@ class MLangPhrase: NSObject, Codable {
     override init() {
     }
     
-    init(item: MUnitPhrase) {
-        ID = item.LANGPHRASEID
-        LANGID = item.LANGID
-        PHRASE = item.PHRASE
-        TRANSLATION = item.TRANSLATION
+    init(unititem: MUnitPhrase) {
+        ID = unititem.LANGPHRASEID
+        LANGID = unititem.LANGID
+        PHRASE = unititem.PHRASE
+        TRANSLATION = unititem.TRANSLATION
         super.init()
     }
     
+    init(textbookitem: MTextbookPhrase) {
+        ID = textbookitem.LANGPHRASEID
+        LANGID = textbookitem.LANGID
+        PHRASE = textbookitem.PHRASE
+        TRANSLATION = textbookitem.TRANSLATION
+        super.init()
+    }
+
     func combineTranslation(_ translation: String?) -> Bool {
         let oldTranslation = TRANSLATION
         if !(translation ?? "").isEmpty {

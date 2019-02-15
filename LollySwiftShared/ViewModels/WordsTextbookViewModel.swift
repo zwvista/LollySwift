@@ -29,5 +29,9 @@ class WordsTextbookViewModel: NSObject {
             return item.WORD.contains(searchText)
         })
     }
-
+    
+    static func update(item: MTextbookWord) -> Observable<String> {
+        let item = MLangWord(textbookitem: item)
+        return MLangWord.update(item: item)
+    }
 }
