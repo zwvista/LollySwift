@@ -36,7 +36,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController, UISearchBarDeleg
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PhraseCell", for: indexPath) as! PhrasesTextbookCell
         let item = arrPhrases[indexPath.row]
-        cell.lblTextbookPartSeqNum!.text = item.UNITPARTSEQNUM(arrParts: vmSettings.arrParts)
+//        cell.lblTextbookPartSeqNum!.text = item.UNITPARTSEQNUM(arrParts: vmSettings.arrParts)
         cell.lblPhrase!.text = item.PHRASE
         cell.lblTranslation!.text = item.TRANSLATION
         return cell;
@@ -47,7 +47,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController, UISearchBarDeleg
     }
     
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        return vmSettings.isSingleTextbookPart
+        return vmSettings.isSingleUnitPart
     }
     
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
@@ -55,9 +55,9 @@ class PhrasesTextbookViewController: PhrasesBaseViewController, UISearchBarDeleg
         vm.arrPhrases.remove(at: (sourceIndexPath as NSIndexPath).row)
         vm.arrPhrases.insert(item, at: (destinationIndexPath as NSIndexPath).row)
         tableView.beginUpdates()
-        vm.reindex {
-            tableView.reloadRows(at: [IndexPath(row: $0, section: 0)], with: .fade)
-        }
+//        vm.reindex {
+//            tableView.reloadRows(at: [IndexPath(row: $0, section: 0)], with: .fade)
+//        }
         tableView.endUpdates()
     }
 
@@ -66,7 +66,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController, UISearchBarDeleg
         let item = self.vm.arrPhrases[i]
         func delete() {
             self.yesNoAction(title: "delete", message: "Do you really want to delete the phrase \"\(item.PHRASE)\"?", yesHandler: { (action) in
-                PhrasesTextbookViewModel.delete(item.ID).subscribe().disposed(by: self.disposeBag)
+//                PhrasesTextbookViewModel.delete(item.ID).subscribe().disposed(by: self.disposeBag)
                 self.vm.arrPhrases.remove(at: i)
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }, noHandler: { (action) in
@@ -114,7 +114,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController, UISearchBarDeleg
         super.prepare(for: segue, sender: sender)
         guard let controller = (segue.destination as? UINavigationController)?.topViewController as? PhrasesTextbookDetailViewController else {return}
         controller.vm = vm
-        controller.mPhrase = sender as? MTextbookPhrase ?? vm.newTextbookPhrase()
+        controller.mPhrase = sender as? MTextbookPhrase
     }
     
     @IBAction func btnEditClicked(_ sender: Any) {
@@ -127,11 +127,6 @@ class PhrasesTextbookViewController: PhrasesBaseViewController, UISearchBarDeleg
         let controller = segue.source as! PhrasesTextbookDetailViewController
         controller.onDone()
         tableView.reloadData()
-        if controller.isAdd {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self.performSegue(withIdentifier: "add", sender: self)
-            }
-        }
     }
 }
 

@@ -19,7 +19,6 @@ class PhrasesTextbookDetailViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tfID.text = String(mPhrase.ID)
         tfPhrase.text = mPhrase.PHRASE
         tfTranslation.text = mPhrase.TRANSLATION
     }

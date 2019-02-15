@@ -19,7 +19,6 @@ class WordsTextbookDetailViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tfID.text = String(mWord.ID)
         tfWord.text = mWord.WORD
         tfNote.text = mWord.NOTE
     }
