@@ -161,21 +161,6 @@ class WordsUnitViewController: WordsViewController {
             self.tableView.reloadData(forRowIndexes: [self.tableView.selectedRow], columnIndexes: [col])
         }.disposed(by: disposeBag)
     }
-    
-    @IBAction func copyWord(_ sender: Any) {
-        let item = vm.arrWords[tableView.selectedRow]
-        MacApi.copyText(item.WORD)
-    }
-    
-    @IBAction func googleWord(_ sender: Any) {
-        let item = vm.arrWords[tableView.selectedRow]
-        MacApi.googleString(item.WORD)
-    }
-    
-    @IBAction func openOnlineDict(_ sender: Any) {
-        let item = vm.arrWords[tableView.selectedRow]
-        openOnlineDict(word: item.WORD)
-    }
 
     @IBAction func getNotes(_ sender: Any) {
         let alert = NSAlert()

@@ -71,21 +71,6 @@ class WordsSearchViewController: WordsViewController {
     
     @IBAction func getNote(_ sender: Any) {
     }
-    
-    @IBAction func copyWord(_ sender: Any) {
-        let item = arrWords[tableView.selectedRow]
-        MacApi.copyText(item.WORD)
-    }
-    
-    @IBAction func googleWord(_ sender: Any) {
-        let item = arrWords[tableView.selectedRow]
-        MacApi.googleString(item.WORD)
-    }
-    
-    @IBAction func openOnlineDict(_ sender: Any) {
-        let item = arrWords[tableView.selectedRow]
-        openOnlineDict(word: item.WORD)
-    }
 }
 
 class WordsSearchWindowController: WordsWindowController {

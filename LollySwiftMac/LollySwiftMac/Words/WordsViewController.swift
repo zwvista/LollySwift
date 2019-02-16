@@ -76,15 +76,6 @@ class WordsViewController: NSViewController, NSTableViewDataSource, NSTableViewD
         }
     }
     
-    func openOnlineDict(word: String) {
-        let item = vmSettings.arrDictsGroup[selectedDictGroupIndex]
-        if !item.DICTNAME.starts(with: "Custom") {
-            let item2 = vmSettings.arrDictsMean.first { $0.DICTNAME == item.DICTNAME }!
-            let url = item2.urlString(word: word, arrAutoCorrect: vmSettings.arrAutoCorrect)
-            MacApi.openPage(url)
-        }
-    }
-    
     @IBAction func searchDict(_ sender: Any) {
         if sender is NSToolbarItem {
             let tbItem = sender as! NSToolbarItem
@@ -130,6 +121,23 @@ class WordsViewController: NSViewController, NSTableViewDataSource, NSTableViewD
 
     func settingsChanged() {
         selectedDictGroupIndex = vmSettings.selectedDictGroupIndex
+    }
+    
+    @IBAction func copyWord(_ sender: Any) {
+        MacApi.copyText(selectedWord)
+    }
+    
+    @IBAction func googleWord(_ sender: Any) {
+        MacApi.googleString(selectedWord)
+    }
+    
+    @IBAction func openOnlineDict(_ sender: Any) {
+        let item = vmSettings.arrDictsGroup[selectedDictGroupIndex]
+        if !item.DICTNAME.starts(with: "Custom") {
+            let item2 = vmSettings.arrDictsMean.first { $0.DICTNAME == item.DICTNAME }!
+            let url = item2.urlString(word: selectedWord, arrAutoCorrect: vmSettings.arrAutoCorrect)
+            MacApi.openPage(url)
+        }
     }
 }
 

@@ -109,21 +109,6 @@ class WordsLangViewController: WordsViewController {
         }.disposed(by: disposeBag)
     }
 
-    @IBAction func copyWord(_ sender: Any) {
-        let item = vm.arrWords[tableView.selectedRow]
-        MacApi.copyText(item.WORD)
-    }
-    
-    @IBAction func googleWord(_ sender: Any) {
-        let item = vm.arrWords[tableView.selectedRow]
-        MacApi.googleString(item.WORD)
-    }
-    
-    @IBAction func openOnlineDict(_ sender: Any) {
-        let item = vm.arrWords[tableView.selectedRow]
-        openOnlineDict(word: item.WORD)
-    }
-
     @IBAction func filterWord(_ sender: Any) {
         let n = (sender as! NSSegmentedControl).selectedSegment
         if n == 0 {
