@@ -17,9 +17,10 @@ class WordsLangDetailViewController: NSViewController {
     var item: MLangWord!
     var isAdd: Bool!
 
-    @IBOutlet weak var pubLang: NSPopUpButton!
-    @IBOutlet weak var pubPart: NSPopUpButton!
+    @IBOutlet weak var tfID: NSTextField!
     @IBOutlet weak var tfWord: NSTextField!
+    @IBOutlet weak var tfNote: NSTextField!
+    @IBOutlet weak var tfLevel: NSTextField!
 
     let disposeBag = DisposeBag()
 
@@ -30,7 +31,7 @@ class WordsLangDetailViewController: NSViewController {
     
     override func viewDidAppear() {
         // https://stackoverflow.com/questions/24235815/cocoa-how-to-set-window-title-from-within-view-controller-in-swift
-        tfWord.becomeFirstResponder()
+        (item.WORD.isEmpty ? tfWord : tfNote).becomeFirstResponder()
         view.window?.title = isAdd ? "New Word" : item.WORD
     }
     

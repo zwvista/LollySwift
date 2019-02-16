@@ -24,6 +24,7 @@ class WordsUnitDetailViewController: NSViewController {
     @IBOutlet weak var tfSeqNum: NSTextField!
     @IBOutlet weak var tfWord: NSTextField!
     @IBOutlet weak var tfNote: NSTextField!
+    @IBOutlet weak var tfLevel: NSTextField!
 
     let disposeBag = DisposeBag()
 

@@ -16,12 +16,14 @@ class WordsLangDetailViewController: UITableViewController {
     @IBOutlet weak var tfID: UITextField!
     @IBOutlet weak var tfWord: UITextField!
     @IBOutlet weak var tfNote: UITextField!
+    @IBOutlet weak var tfLevel: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         tfID.text = String(item.ID)
         tfWord.text = item.WORD
         tfNote.text = item.NOTE
+        tfLevel.text = String(item.LEVEL)
     }
     
     func onDone() {

@@ -20,7 +20,7 @@ class MTextbookWord: NSObject, Codable {
     var WORD = ""
     var NOTE: String?
     var LEVEL = 0
-    var UNITWORDID = 0
+    var ENTRYID = 0
     var WORDID = 0
     var UNITS = 0
     var PARTS = ""
