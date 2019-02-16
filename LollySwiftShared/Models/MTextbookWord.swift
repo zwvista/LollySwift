@@ -22,9 +22,10 @@ class MTextbookWord: NSObject, Codable {
     var LEVEL = 0
     var UNITWORDID = 0
     var LANGWORDID = 0
-
-    func PARTSTR(arrParts: [String]) -> String {
-        return arrParts[PART - 1]
+    var UNITS = 0
+    var PARTS = ""
+    var PARTSTR: String {
+        return PARTS.split(" ")[PART - 1]
     }
 
     public override var description: String {

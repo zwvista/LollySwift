@@ -37,7 +37,7 @@ class WordsTextbookViewController: WordsViewController {
         let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! NSTableCellView
         let item = arrWords[row]
         let columnName = tableColumn!.title
-        cell.textField?.stringValue = columnName == "PART" ? item.PARTSTR(arrParts: vm.vmSettings.arrParts) : String(describing: item.value(forKey: columnName) ?? "")
+        cell.textField?.stringValue = columnName == "PART" ? item.PARTSTR : String(describing: item.value(forKey: columnName) ?? "")
         return cell;
     }
     
@@ -75,7 +75,7 @@ class WordsTextbookViewController: WordsViewController {
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "WordsTextbookDetailViewController") as! WordsTextbookDetailViewController
         detailVC.vm = vm
         let i = tableView.selectedRow
-        detailVC.mWord = vm.arrWords[i]
+        detailVC.item = vm.arrWords[i]
         detailVC.complete = { self.tableView.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count)) }
         self.presentAsModalWindow(detailVC)
     }

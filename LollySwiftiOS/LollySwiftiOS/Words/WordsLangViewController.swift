@@ -100,7 +100,7 @@ class WordsLangViewController: WordsBaseViewController, UISearchBarDelegate, UIS
         super.prepare(for: segue, sender: sender)
         if let controller = (segue.destination as? UINavigationController)?.topViewController as? WordsLangDetailViewController {
             controller.vm = vm
-            controller.mWord = sender as? MLangWord ?? MLangWord()
+            controller.item = sender as? MLangWord ?? MLangWord()
         } else if let controller = segue.destination as? WordsDictViewController {
             controller.vm.arrWords = arrWords.map { $0.WORD }
             controller.vm.selectedWordIndex = tableView.indexPathForSelectedRow!.row

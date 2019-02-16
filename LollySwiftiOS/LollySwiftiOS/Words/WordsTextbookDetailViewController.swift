@@ -11,7 +11,7 @@ import UIKit
 class WordsTextbookDetailViewController: UITableViewController {
     
     var vm: WordsTextbookViewModel!
-    var mWord: MTextbookWord!
+    var item: MTextbookWord!
     
     @IBOutlet weak var tfID: UITextField!
     @IBOutlet weak var tfWord: UITextField!
@@ -19,13 +19,13 @@ class WordsTextbookDetailViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tfWord.text = mWord.WORD
-        tfNote.text = mWord.NOTE
+        tfWord.text = item.WORD
+        tfNote.text = item.NOTE
     }
     
     func onDone() {
-        mWord.WORD = vm.vmSettings.autoCorrectInput(text: tfWord.text ?? "")
-        mWord.NOTE = tfNote.text
+        item.WORD = vm.vmSettings.autoCorrectInput(text: tfWord.text ?? "")
+        item.NOTE = tfNote.text
     }
     
 }

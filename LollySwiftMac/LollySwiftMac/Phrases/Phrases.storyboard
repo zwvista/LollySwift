@@ -342,7 +342,7 @@
         <!--Phrases Unit Detail View Controller-->
         <scene sceneID="LaM-qc-uVe">
             <objects>
-                <viewController id="9DB-NE-4YZ" customClass="PhrasesUnitDetailViewController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PhrasesUnitDetailViewController" id="9DB-NE-4YZ" customClass="PhrasesUnitDetailViewController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="lON-XN-W17">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -366,7 +366,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="9DB-NE-4YZ" name="value" keyPath="mPhrase.ID" id="aHz-QU-k6W"/>
+                                    <binding destination="9DB-NE-4YZ" name="value" keyPath="item.ID" id="aHz-QU-k6W"/>
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hbO-7q-XRh">
@@ -435,7 +435,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="9DB-NE-4YZ" name="value" keyPath="mPhrase.SEQNUM" id="7QD-c5-SyB"/>
+                                    <binding destination="9DB-NE-4YZ" name="value" keyPath="item.SEQNUM" id="7QD-c5-SyB"/>
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CdU-W7-fBQ">
@@ -454,7 +454,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="9DB-NE-4YZ" name="value" keyPath="mPhrase.PHRASE" id="oH6-QI-68r"/>
+                                    <binding destination="9DB-NE-4YZ" name="value" keyPath="item.PHRASE" id="oH6-QI-68r"/>
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="S4i-xC-clP">
@@ -473,7 +473,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="9DB-NE-4YZ" name="value" keyPath="mPhrase.TRANSLATION" id="Eed-qT-WH2"/>
+                                    <binding destination="9DB-NE-4YZ" name="value" keyPath="item.TRANSLATION" id="Eed-qT-WH2"/>
                                 </connections>
                             </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OxY-AZ-o3k">
@@ -811,7 +811,7 @@ Gw
         <!--Phrases Lang Detail View Controller-->
         <scene sceneID="rFd-Ja-Sb7">
             <objects>
-                <viewController id="e88-1i-Fvb" customClass="PhrasesLangDetailViewController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PhrasesLangDetailViewController" id="e88-1i-Fvb" customClass="PhrasesLangDetailViewController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="7LW-0g-T76">
                         <rect key="frame" x="0.0" y="0.0" width="368" height="199"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -835,7 +835,7 @@ Gw
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="e88-1i-Fvb" name="value" keyPath="mPhrase.ID" id="LBX-Hx-EAf"/>
+                                    <binding destination="e88-1i-Fvb" name="value" keyPath="item.ID" id="LBX-Hx-EAf"/>
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="T0S-rE-G34">
@@ -857,7 +857,7 @@ Gw
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="e88-1i-Fvb" name="value" keyPath="mPhrase.PHRASE" id="GuA-0W-37v"/>
+                                    <binding destination="e88-1i-Fvb" name="value" keyPath="item.PHRASE" id="GuA-0W-37v"/>
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Be5-zJ-8U2">
@@ -879,7 +879,7 @@ Gw
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="e88-1i-Fvb" name="value" keyPath="mPhrase.TRANSLATION" id="oeU-r0-SoP"/>
+                                    <binding destination="e88-1i-Fvb" name="value" keyPath="item.TRANSLATION" id="oeU-r0-SoP"/>
                                 </connections>
                             </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GlZ-OZ-Z6t">
@@ -1453,7 +1453,7 @@ Gw
                                         <outlet property="menu" destination="UPB-Wi-4rN" id="GWm-pb-Iab"/>
                                     </connections>
                                 </clipView>
-                                <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="0.85426008968609868" horizontal="YES" id="q8p-fJ-0kV">
+                                <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="q8p-fJ-0kV">
                                     <rect key="frame" x="1" y="623" width="820" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
@@ -1510,7 +1510,7 @@ Gw
         <!--Phrases Textbook Detail View Controller-->
         <scene sceneID="2aa-p0-ewY">
             <objects>
-                <viewController id="u1Y-qY-rab" customClass="PhrasesTextbookDetailViewController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PhrasesTextbookDetailViewController" id="u1Y-qY-rab" customClass="PhrasesTextbookDetailViewController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="f7j-eV-lyy">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1534,7 +1534,7 @@ Gw
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="u1Y-qY-rab" name="value" keyPath="mPhrase.ID" id="OKe-7G-03n"/>
+                                    <binding destination="u1Y-qY-rab" name="value" keyPath="item.ID" id="OKe-7G-03n"/>
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ebc-II-ver">
@@ -1603,7 +1603,7 @@ Gw
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="u1Y-qY-rab" name="value" keyPath="mPhrase.SEQNUM" id="59d-0Y-Ah7"/>
+                                    <binding destination="u1Y-qY-rab" name="value" keyPath="item.SEQNUM" id="59d-0Y-Ah7"/>
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4LA-j2-tYc">
@@ -1622,7 +1622,7 @@ Gw
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="u1Y-qY-rab" name="value" keyPath="mPhrase.PHRASE" id="bI9-bt-yd9"/>
+                                    <binding destination="u1Y-qY-rab" name="value" keyPath="item.PHRASE" id="bI9-bt-yd9"/>
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="a7u-jT-rsj">
@@ -1641,7 +1641,7 @@ Gw
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="u1Y-qY-rab" name="value" keyPath="mPhrase.TRANSLATION" id="kX8-M0-DO3"/>
+                                    <binding destination="u1Y-qY-rab" name="value" keyPath="item.TRANSLATION" id="kX8-M0-DO3"/>
                                 </connections>
                             </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ese-H3-3SG">

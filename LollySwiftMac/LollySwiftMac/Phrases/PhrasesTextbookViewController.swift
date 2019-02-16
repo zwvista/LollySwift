@@ -37,7 +37,7 @@ class PhrasesTextbookViewController: PhrasesViewController {
         let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! NSTableCellView
         let item = arrPhrases[row]
         let columnName = tableColumn!.title
-        cell.textField?.stringValue = columnName == "PART" ? item.PARTSTR(arrParts: vm.vmSettings.arrParts) : String(describing: item.value(forKey: columnName) ?? "")
+        cell.textField?.stringValue = columnName == "PART" ? item.PARTSTR : String(describing: item.value(forKey: columnName) ?? "")
         return cell;
     }
     
@@ -71,7 +71,7 @@ class PhrasesTextbookViewController: PhrasesViewController {
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesTextbookDetailViewController") as! PhrasesTextbookDetailViewController
         detailVC.vm = vm
         let i = tableView.selectedRow
-        detailVC.mPhrase = vm.arrPhrases[i]
+        detailVC.item = vm.arrPhrases[i]
         detailVC.complete = { self.tableView.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count)) }
         self.presentAsModalWindow(detailVC)
     }

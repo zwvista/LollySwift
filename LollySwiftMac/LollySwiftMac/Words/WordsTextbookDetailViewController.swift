@@ -14,7 +14,7 @@ class WordsTextbookDetailViewController: NSViewController {
 
     var vm: WordsTextbookViewModel!
     var complete: (() -> Void)?
-    var mWord: MTextbookWord!
+    var item: MTextbookWord!
 
     @IBOutlet weak var pubTextbook: NSPopUpButton!
     @IBOutlet weak var pubPart: NSPopUpButton!
@@ -24,8 +24,8 @@ class WordsTextbookDetailViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        pubTextbook.selectItem(at: mWord.UNIT - 1)
-        pubPart.selectItem(at: mWord.PART - 1)
+        pubTextbook.selectItem(at: item.UNIT - 1)
+        pubPart.selectItem(at: item.PART - 1)
         // not working because this is a view?
         tfWord.becomeFirstResponder()
     }
@@ -33,10 +33,10 @@ class WordsTextbookDetailViewController: NSViewController {
     @IBAction func okClicked(_ sender: Any) {
         // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
         self.commitEditing()
-        mWord.UNIT = pubTextbook.indexOfSelectedItem + 1
-        mWord.PART = pubPart.indexOfSelectedItem + 1
-        mWord.WORD = vm.vmSettings.autoCorrectInput(text: mWord.WORD)
-        WordsTextbookViewModel.update(item: mWord).subscribe {
+        item.UNIT = pubTextbook.indexOfSelectedItem + 1
+        item.PART = pubPart.indexOfSelectedItem + 1
+        item.WORD = vm.vmSettings.autoCorrectInput(text: item.WORD)
+        WordsTextbookViewModel.update(item: item).subscribe {
             self.complete?()
         }.disposed(by: disposeBag)
         dismiss(self)

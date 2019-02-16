@@ -60,7 +60,7 @@ class PhrasesLangViewController: PhrasesViewController {
     @IBAction func addPhrase(_ sender: Any) {
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesLangDetailViewController") as! PhrasesLangDetailViewController
         detailVC.vm = vm
-        detailVC.mPhrase = vm.newLangPhrase()
+        detailVC.item = vm.newLangPhrase()
         detailVC.complete = { self.tableView.reloadData(); self.addPhrase(self) }
         self.presentAsSheet(detailVC)
     }
@@ -78,7 +78,7 @@ class PhrasesLangViewController: PhrasesViewController {
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesLangDetailViewController") as! PhrasesLangDetailViewController
         detailVC.vm = vm
         let i = tableView.selectedRow
-        detailVC.mPhrase = vm.arrPhrases[i]
+        detailVC.item = vm.arrPhrases[i]
         detailVC.complete = { self.tableView.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count)) }
         self.presentAsModalWindow(detailVC)
     }

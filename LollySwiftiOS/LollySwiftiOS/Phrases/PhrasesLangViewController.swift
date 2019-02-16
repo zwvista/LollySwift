@@ -93,7 +93,7 @@ class PhrasesLangViewController: PhrasesBaseViewController, UISearchBarDelegate,
         super.prepare(for: segue, sender: sender)
         if let controller = (segue.destination as? UINavigationController)?.topViewController as? PhrasesLangDetailViewController {
             controller.vm = vm
-            controller.mPhrase = sender as? MLangPhrase ?? MLangPhrase()
+            controller.item = sender as? MLangPhrase ?? MLangPhrase()
         }
     }
     

@@ -14,7 +14,7 @@ class WordsLangDetailViewController: NSViewController {
 
     var vm: WordsLangViewModel!
     var complete: (() -> Void)?
-    var mWord: MLangWord!
+    var item: MLangWord!
     var isAdd: Bool!
 
     @IBOutlet weak var pubLang: NSPopUpButton!
@@ -27,21 +27,21 @@ class WordsLangDetailViewController: NSViewController {
         super.viewDidLoad()
         // not working because this is a view?
         tfWord.becomeFirstResponder()
-        isAdd = mWord.ID == 0
+        isAdd = item.ID == 0
     }
     
     @IBAction func okClicked(_ sender: Any) {
         // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
         self.commitEditing()
-        mWord.WORD = vm.vmSettings.autoCorrectInput(text: mWord.WORD)
+        item.WORD = vm.vmSettings.autoCorrectInput(text: item.WORD)
         if isAdd {
-            vm.arrWords.append(mWord)
-            WordsLangViewModel.create(item: mWord).subscribe(onNext: {
-                self.mWord.ID = $0
+            vm.arrWords.append(item)
+            WordsLangViewModel.create(item: item).subscribe(onNext: {
+                self.item.ID = $0
                 self.complete?()
             }).disposed(by: disposeBag)
         } else {
-            WordsLangViewModel.update(item: mWord).subscribe {
+            WordsLangViewModel.update(item: item).subscribe {
                 self.complete?()
             }.disposed(by: disposeBag)
         }

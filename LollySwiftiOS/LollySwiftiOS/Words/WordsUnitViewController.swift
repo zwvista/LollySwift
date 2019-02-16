@@ -128,7 +128,7 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
         super.prepare(for: segue, sender: sender)
         if let controller = (segue.destination as? UINavigationController)?.topViewController as? WordsUnitDetailViewController {
             controller.vm = vm
-            controller.mWord = sender as? MUnitWord ?? vm.newUnitWord()
+            controller.item = sender as? MUnitWord ?? vm.newUnitWord()
         } else if let controller = segue.destination as? WordsDictViewController {
             controller.vm.arrWords = arrWords.map { $0.WORD }
             controller.vm.selectedWordIndex = tableView.indexPathForSelectedRow!.row
@@ -176,7 +176,7 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
         let controller = segue.source as! WordsUnitDetailViewController
         controller.onDone()
         tableView.reloadData()
-        if controller.isAdd && !controller.mWord.WORD.isEmpty {
+        if controller.isAdd && !controller.item.WORD.isEmpty {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self.performSegue(withIdentifier: "add", sender: self)
             }

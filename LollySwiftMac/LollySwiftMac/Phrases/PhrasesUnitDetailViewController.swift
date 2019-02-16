@@ -14,7 +14,7 @@ class PhrasesUnitDetailViewController: NSViewController {
 
     var vm: PhrasesUnitViewModel!
     var complete: (() -> Void)?
-    var mPhrase: MUnitPhrase!
+    var item: MUnitPhrase!
     var isAdd: Bool!
 
     @IBOutlet weak var pubUnit: NSPopUpButton!
@@ -25,27 +25,27 @@ class PhrasesUnitDetailViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        pubUnit.selectItem(at: mPhrase.UNIT - 1)
-        pubPart.selectItem(at: mPhrase.PART - 1)
+        pubUnit.selectItem(at: item.UNIT - 1)
+        pubPart.selectItem(at: item.PART - 1)
         // not working because this is a view?
         tfPhrase.becomeFirstResponder()
-        isAdd = mPhrase.ID == 0
+        isAdd = item.ID == 0
     }
     
     @IBAction func okClicked(_ sender: Any) {
         // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
         self.commitEditing()
-        mPhrase.UNIT = pubUnit.indexOfSelectedItem + 1
-        mPhrase.PART = pubPart.indexOfSelectedItem + 1
-        mPhrase.PHRASE = vm.vmSettings.autoCorrectInput(text: mPhrase.PHRASE)
+        item.UNIT = pubUnit.indexOfSelectedItem + 1
+        item.PART = pubPart.indexOfSelectedItem + 1
+        item.PHRASE = vm.vmSettings.autoCorrectInput(text: item.PHRASE)
         if isAdd {
-            vm.arrPhrases.append(mPhrase)
-            PhrasesUnitViewModel.create(item: mPhrase).subscribe(onNext: {
-                self.mPhrase.ID = $0
+            vm.arrPhrases.append(item)
+            PhrasesUnitViewModel.create(item: item).subscribe(onNext: {
+                self.item.ID = $0
                 self.complete?()
             }).disposed(by: disposeBag)
         } else {
-            PhrasesUnitViewModel.update(item: mPhrase).subscribe {
+            PhrasesUnitViewModel.update(item: item).subscribe {
                 self.complete?()
             }.disposed(by: disposeBag)
         }

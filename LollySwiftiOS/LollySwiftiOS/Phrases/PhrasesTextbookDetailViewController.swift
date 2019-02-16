@@ -11,7 +11,7 @@ import UIKit
 class PhrasesTextbookDetailViewController: UITableViewController {
     
     var vm: PhrasesTextbookViewModel!
-    var mPhrase: MTextbookPhrase!
+    var item: MTextbookPhrase!
     
     @IBOutlet weak var tfID: UITextField!
     @IBOutlet weak var tfPhrase: UITextField!
@@ -19,13 +19,13 @@ class PhrasesTextbookDetailViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tfPhrase.text = mPhrase.PHRASE
-        tfTranslation.text = mPhrase.TRANSLATION
+        tfPhrase.text = item.PHRASE
+        tfTranslation.text = item.TRANSLATION
     }
     
     func onDone() {
-        mPhrase.PHRASE = vm.vmSettings.autoCorrectInput(text: tfPhrase.text ?? "")
-        mPhrase.TRANSLATION = tfTranslation.text
+        item.PHRASE = vm.vmSettings.autoCorrectInput(text: tfPhrase.text ?? "")
+        item.TRANSLATION = tfTranslation.text
     }
     
 }

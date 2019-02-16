@@ -117,11 +117,11 @@ class WordsUnitViewController: WordsViewController {
     
     override func addNewWord() {
         guard !newWord.isEmpty else {return}
-        let mWord = vm.newUnitWord()
-        mWord.WORD = vm.vmSettings.autoCorrectInput(text: newWord)
-        WordsUnitViewModel.create(item: mWord).subscribe(onNext: {
-            mWord.ID = $0
-            self.vm.arrWords.append(mWord)
+        let item = vm.newUnitWord()
+        item.WORD = vm.vmSettings.autoCorrectInput(text: newWord)
+        WordsUnitViewModel.create(item: item).subscribe(onNext: {
+            item.ID = $0
+            self.vm.arrWords.append(item)
             self.tableView.reloadData()
             self.tfNewWord.stringValue = ""
             self.newWord = ""
@@ -132,7 +132,7 @@ class WordsUnitViewController: WordsViewController {
     @IBAction func addWord(_ sender: Any) {
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "WordsUnitDetailViewController") as! WordsUnitDetailViewController
         detailVC.vm = vm
-        detailVC.mWord = vm.newUnitWord()
+        detailVC.item = vm.newUnitWord()
         detailVC.complete = { self.tableView.reloadData(); self.addWord(self) }
         self.presentAsSheet(detailVC)
     }
@@ -150,7 +150,7 @@ class WordsUnitViewController: WordsViewController {
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "WordsUnitDetailViewController") as! WordsUnitDetailViewController
         detailVC.vm = vm
         let i = tableView.selectedRow
-        detailVC.mWord = vm.arrWords[i]
+        detailVC.item = vm.arrWords[i]
         detailVC.complete = { self.tableView.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count)) }
         self.presentAsModalWindow(detailVC)
     }

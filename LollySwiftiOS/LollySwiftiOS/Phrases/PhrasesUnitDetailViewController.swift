@@ -20,7 +20,7 @@ class PhrasesUnitDetailViewController: UITableViewController, UITextFieldDelegat
     @IBOutlet weak var tfTranslation: UITextField!
 
     var vm: PhrasesUnitViewModel!
-    var mPhrase: MUnitPhrase!
+    var item: MUnitPhrase!
     var isAdd: Bool!
     let ddUnit = DropDown()
     let ddPart = DropDown()
@@ -32,28 +32,28 @@ class PhrasesUnitDetailViewController: UITableViewController, UITextFieldDelegat
         
         ddUnit.anchorView = tfUnit
         ddUnit.dataSource = vm.vmSettings.arrUnits
-        ddUnit.selectRow(mPhrase.UNIT - 1)
+        ddUnit.selectRow(item.UNIT - 1)
         ddUnit.selectionAction = { (index: Int, item: String) in
-            self.mPhrase.UNIT = index + 1
-            self.tfUnit.text = String(self.mPhrase.UNIT)
+            self.item.UNIT = index + 1
+            self.tfUnit.text = String(self.item.UNIT)
         }
         
         ddPart.anchorView = tfPart
         ddPart.dataSource = vm.vmSettings.arrParts
-        ddPart.selectRow(mPhrase.PART - 1)
+        ddPart.selectRow(item.PART - 1)
         ddPart.selectionAction = { (index: Int, item: String) in
-            self.mPhrase.PART = index + 1
-            self.tfPart.text = self.mPhrase.PARTSTR(arrParts: vmSettings.arrParts)
+            self.item.PART = index + 1
+            self.tfPart.text = self.item.PARTSTR(arrParts: vmSettings.arrParts)
         }
         
-        tfID.text = String(mPhrase.ID)
-        tfUnit.text = String(mPhrase.UNIT)
-        tfPart.text = mPhrase.PARTSTR(arrParts: vmSettings.arrParts)
-        tfSeqNum.text = String(mPhrase.SEQNUM)
-        tfPhrase.text = mPhrase.PHRASE
-        tfTranslation.text = mPhrase.TRANSLATION
-        isAdd = mPhrase.ID == 0
-        (mPhrase.PHRASE.isEmpty ? tfPhrase : tfTranslation)?.becomeFirstResponder()
+        tfID.text = String(item.ID)
+        tfUnit.text = String(item.UNIT)
+        tfPart.text = item.PARTSTR(arrParts: vmSettings.arrParts)
+        tfSeqNum.text = String(item.SEQNUM)
+        tfPhrase.text = item.PHRASE
+        tfTranslation.text = item.TRANSLATION
+        isAdd = item.ID == 0
+        (item.PHRASE.isEmpty ? tfPhrase : tfTranslation)?.becomeFirstResponder()
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
@@ -71,16 +71,16 @@ class PhrasesUnitDetailViewController: UITableViewController, UITextFieldDelegat
     }
 
     func onDone() {
-        mPhrase.SEQNUM = Int(tfSeqNum.text!)!
-        mPhrase.PHRASE = vm.vmSettings.autoCorrectInput(text: tfPhrase.text ?? "")
-        mPhrase.TRANSLATION = tfTranslation.text
+        item.SEQNUM = Int(tfSeqNum.text!)!
+        item.PHRASE = vm.vmSettings.autoCorrectInput(text: tfPhrase.text ?? "")
+        item.TRANSLATION = tfTranslation.text
         if isAdd {
-            vm.arrPhrases.append(mPhrase)
-            PhrasesUnitViewModel.create(item: mPhrase).subscribe(onNext: {
-                self.mPhrase.ID = $0
+            vm.arrPhrases.append(item)
+            PhrasesUnitViewModel.create(item: item).subscribe(onNext: {
+                self.item.ID = $0
             }).disposed(by: disposeBag)
         } else {
-            PhrasesUnitViewModel.update(item: mPhrase).subscribe().disposed(by: disposeBag)
+            PhrasesUnitViewModel.update(item: item).subscribe().disposed(by: disposeBag)
         }
     }
     

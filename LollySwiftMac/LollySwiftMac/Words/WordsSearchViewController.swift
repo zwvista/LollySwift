@@ -42,11 +42,11 @@ class WordsSearchViewController: WordsViewController {
 
     override func addNewWord() {
         guard !newWord.isEmpty else {return}
-        let mWord = MUnitWord()
-        mWord.WORD = newWord
-        mWord.SEQNUM = arrWords.count + 1
-        mWord.NOTE = ""
-        arrWords.append(mWord)
+        let item = MUnitWord()
+        item.WORD = newWord
+        item.SEQNUM = arrWords.count + 1
+        item.NOTE = ""
+        arrWords.append(item)
         tableView.reloadData()
         tfNewWord.stringValue = ""
         newWord = ""

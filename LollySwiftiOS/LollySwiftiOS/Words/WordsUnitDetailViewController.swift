@@ -20,7 +20,7 @@ class WordsUnitDetailViewController: UITableViewController, UITextFieldDelegate 
     @IBOutlet weak var tfNote: UITextField!
     
     var vm: WordsUnitViewModel!
-    var mWord: MUnitWord!
+    var item: MUnitWord!
     var isAdd: Bool!
     let ddUnit = DropDown()
     let ddPart = DropDown()
@@ -32,29 +32,29 @@ class WordsUnitDetailViewController: UITableViewController, UITextFieldDelegate 
         
         ddUnit.anchorView = tfUnit
         ddUnit.dataSource = vm.vmSettings.arrUnits
-        ddUnit.selectRow(mWord.UNIT - 1)
+        ddUnit.selectRow(item.UNIT - 1)
         ddUnit.selectionAction = { (index: Int, item: String) in
-            self.mWord.UNIT = index + 1
-            self.tfUnit.text = String(self.mWord.UNIT)
+            self.item.UNIT = index + 1
+            self.tfUnit.text = String(self.item.UNIT)
         }
         
         ddPart.anchorView = tfPart
         ddPart.dataSource = vm.vmSettings.arrParts
-        ddPart.selectRow(mWord.PART - 1)
+        ddPart.selectRow(item.PART - 1)
         ddPart.selectionAction = { (index: Int, item: String) in
-            self.mWord.PART = index + 1
-            self.tfPart.text = self.mWord.PARTSTR(arrParts: vmSettings.arrParts)
+            self.item.PART = index + 1
+            self.tfPart.text = self.item.PARTSTR(arrParts: vmSettings.arrParts)
         }
 
-        tfID.text = String(mWord.ID)
-        tfUnit.text = String(mWord.UNIT)
-        tfPart.text = mWord.PARTSTR(arrParts: vmSettings.arrParts)
-        tfSeqNum.text = String(mWord.SEQNUM)
-        tfWord.text = mWord.WORD
-        tfNote.text = mWord.NOTE
-        isAdd = mWord.ID == 0
+        tfID.text = String(item.ID)
+        tfUnit.text = String(item.UNIT)
+        tfPart.text = item.PARTSTR(arrParts: vmSettings.arrParts)
+        tfSeqNum.text = String(item.SEQNUM)
+        tfWord.text = item.WORD
+        tfNote.text = item.NOTE
+        isAdd = item.ID == 0
         // https://stackoverflow.com/questions/7525437/how-to-set-focus-to-a-textfield-in-iphone
-        (mWord.WORD.isEmpty ? tfWord : tfNote)?.becomeFirstResponder()
+        (item.WORD.isEmpty ? tfWord : tfNote)?.becomeFirstResponder()
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
@@ -72,18 +72,18 @@ class WordsUnitDetailViewController: UITableViewController, UITextFieldDelegate 
     }
     
     func onDone() {
-        mWord.SEQNUM = Int(tfSeqNum.text!)!
-        mWord.WORD = vm.vmSettings.autoCorrectInput(text: tfWord.text ?? "")
-        mWord.NOTE = tfNote.text
+        item.SEQNUM = Int(tfSeqNum.text!)!
+        item.WORD = vm.vmSettings.autoCorrectInput(text: tfWord.text ?? "")
+        item.NOTE = tfNote.text
         if isAdd {
-            if !mWord.WORD.isEmpty {
-                vm.arrWords.append(mWord)
-                WordsUnitViewModel.create(item: mWord).subscribe(onNext: {
-                    self.mWord.ID = $0
+            if !item.WORD.isEmpty {
+                vm.arrWords.append(item)
+                WordsUnitViewModel.create(item: item).subscribe(onNext: {
+                    self.item.ID = $0
                 }).disposed(by: disposeBag)
             }
         } else {
-            WordsUnitViewModel.update(item: mWord).subscribe().disposed(by: disposeBag)
+            WordsUnitViewModel.update(item: item).subscribe().disposed(by: disposeBag)
         }
     }
     

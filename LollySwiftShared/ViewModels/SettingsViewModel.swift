@@ -173,7 +173,7 @@ class SettingsViewModel: NSObject {
         USTEXTBOOKID = selectedTextbook.ID
         selectedUSTextbookIndex = arrUserSettings.index { $0.KIND == 3 && $0.ENTITYID == self.USTEXTBOOKID }!
         arrUnits = (1...selectedTextbook.UNITS).map{ String($0) }
-        arrParts = (selectedTextbook.PARTS.components(separatedBy: " "))
+        arrParts = (selectedTextbook.PARTS.split(" "))
     }
     
     func dictHtml(word: String, dictids: [String]) -> String {

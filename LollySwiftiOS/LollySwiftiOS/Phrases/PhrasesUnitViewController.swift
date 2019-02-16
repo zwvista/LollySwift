@@ -114,7 +114,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, UISearchBarDelegate,
         super.prepare(for: segue, sender: sender)
         guard let controller = (segue.destination as? UINavigationController)?.topViewController as? PhrasesUnitDetailViewController else {return}
         controller.vm = vm
-        controller.mPhrase = sender as? MUnitPhrase ?? vm.newUnitPhrase()
+        controller.item = sender as? MUnitPhrase ?? vm.newUnitPhrase()
     }
     
     @IBAction func btnEditClicked(_ sender: Any) {

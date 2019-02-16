@@ -115,7 +115,7 @@ class PhrasesUnitViewController: PhrasesViewController {
     @IBAction func addPhrase(_ sender: Any) {
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesUnitDetailViewController") as! PhrasesUnitDetailViewController
         detailVC.vm = vm
-        detailVC.mPhrase = vm.newUnitPhrase()
+        detailVC.item = vm.newUnitPhrase()
         detailVC.complete = { self.tableView.reloadData(); self.addPhrase(self) }
         self.presentAsSheet(detailVC)
     }
@@ -133,7 +133,7 @@ class PhrasesUnitViewController: PhrasesViewController {
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesUnitDetailViewController") as! PhrasesUnitDetailViewController
         detailVC.vm = vm
         let i = tableView.selectedRow
-        detailVC.mPhrase = vm.arrPhrases[i]
+        detailVC.item = vm.arrPhrases[i]
         detailVC.complete = { self.tableView.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count)) }
         self.presentAsModalWindow(detailVC)
     }

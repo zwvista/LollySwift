@@ -11,7 +11,7 @@ import UIKit
 class PhrasesLangDetailViewController: UITableViewController {
     
     var vm: PhrasesLangViewModel!
-    var mPhrase: MLangPhrase!
+    var item: MLangPhrase!
     
     @IBOutlet weak var tfID: UITextField!
     @IBOutlet weak var tfPhrase: UITextField!
@@ -19,14 +19,14 @@ class PhrasesLangDetailViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tfID.text = String(mPhrase.ID)
-        tfPhrase.text = mPhrase.PHRASE
-        tfTranslation.text = mPhrase.TRANSLATION
+        tfID.text = String(item.ID)
+        tfPhrase.text = item.PHRASE
+        tfTranslation.text = item.TRANSLATION
     }
     
     func onDone() {
-        mPhrase.PHRASE = vm.vmSettings.autoCorrectInput(text: tfPhrase.text ?? "")
-        mPhrase.TRANSLATION = tfTranslation.text
+        item.PHRASE = vm.vmSettings.autoCorrectInput(text: tfPhrase.text ?? "")
+        item.TRANSLATION = tfTranslation.text
     }
     
 }
