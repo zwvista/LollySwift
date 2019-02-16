@@ -15,6 +15,7 @@ class MLangWord: NSObject, Codable {
     var LANGID = 0
     var WORD = ""
     var NOTE: String?
+    var FAMIID = 0
     var LEVEL = 0
 
     var WORDNOTE: String {

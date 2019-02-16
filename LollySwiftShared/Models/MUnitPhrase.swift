@@ -17,9 +17,9 @@ class MUnitPhrase: NSObject, Codable {
     var UNIT = 0
     var PART = 0
     var SEQNUM = 0
+    var PHRASEID = 0
     var PHRASE = ""
     var TRANSLATION: String?
-    var PHRASEID = 0
     
     func PARTSTR(arrParts: [String]) -> String {
         return arrParts[PART - 1]

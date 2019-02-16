@@ -20,6 +20,7 @@ class WordsLangDetailViewController: NSViewController {
     @IBOutlet weak var tfID: NSTextField!
     @IBOutlet weak var tfWord: NSTextField!
     @IBOutlet weak var tfNote: NSTextField!
+    @IBOutlet weak var tfFamiID: NSTextField!
     @IBOutlet weak var tfLevel: NSTextField!
 
     let disposeBag = DisposeBag()

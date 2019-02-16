@@ -16,32 +16,35 @@ class WordsTextbookDetailViewController: NSViewController {
     var complete: (() -> Void)?
     var item: MTextbookWord!
 
-    @IBOutlet weak var tfID: NSTextField!
-    @IBOutlet weak var pubTextbook: NSPopUpButton!
+    @IBOutlet weak var tfTextbookName: NSTextField!
+    @IBOutlet weak var tfEntryID: NSTextField!
     @IBOutlet weak var pubUnit: NSPopUpButton!
     @IBOutlet weak var pubPart: NSPopUpButton!
     @IBOutlet weak var tfSeqNum: NSTextField!
+    @IBOutlet weak var tfWordID: NSTextField!
     @IBOutlet weak var tfWord: NSTextField!
     @IBOutlet weak var tfNote: NSTextField!
-    
+    @IBOutlet weak var tfFamiID: NSTextField!
+    @IBOutlet weak var tfLevel: NSTextField!
+
     let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        pubTextbook.selectItem(at: item.UNIT - 1)
+        pubUnit.selectItem(at: item.UNIT - 1)
         pubPart.selectItem(at: item.PART - 1)
     }
     
     override func viewDidAppear() {
         // https://stackoverflow.com/questions/24235815/cocoa-how-to-set-window-title-from-within-view-controller-in-swift
-        tfWord.becomeFirstResponder()
+        (item.WORD.isEmpty ? tfWord : tfNote).becomeFirstResponder()
         view.window?.title = item.WORD
     }
 
     @IBAction func okClicked(_ sender: Any) {
         // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
         self.commitEditing()
-        item.UNIT = pubTextbook.indexOfSelectedItem + 1
+        item.UNIT = pubUnit.indexOfSelectedItem + 1
         item.PART = pubPart.indexOfSelectedItem + 1
         item.WORD = vm.vmSettings.autoCorrectInput(text: item.WORD)
         WordsTextbookViewModel.update(item: item).subscribe {

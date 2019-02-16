@@ -20,10 +20,11 @@ class WordsUnitDetailViewController: NSViewController {
     @IBOutlet weak var tfID: NSTextField!
     @IBOutlet weak var pubUnit: NSPopUpButton!
     @IBOutlet weak var pubPart: NSPopUpButton!
-    @IBOutlet weak var tfWordID: NSTextField!
     @IBOutlet weak var tfSeqNum: NSTextField!
+    @IBOutlet weak var tfWordID: NSTextField!
     @IBOutlet weak var tfWord: NSTextField!
     @IBOutlet weak var tfNote: NSTextField!
+    @IBOutlet weak var tfFamiID: NSTextField!
     @IBOutlet weak var tfLevel: NSTextField!
 
     let disposeBag = DisposeBag()

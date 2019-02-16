@@ -14,17 +14,23 @@ class MTextbookPhrase: NSObject, Codable {
     var TEXTBOOKID = 0
     var LANGID = 0
     var TEXTBOOKNAME = ""
+    var ENTRYID = 0
     var UNIT = 0
     var PART = 0
     var SEQNUM = 0
+    var PHRASEID = 0
     var PHRASE = ""
     var TRANSLATION: String?
-    var ENTRYID = 0
-    var PHRASEID = 0
     var UNITS = 0
+    var arrUnits: [String] {
+        return (1...UNITS).map { String($0) }
+    }
     var PARTS = ""
+    var arrParts: [String] {
+        return PARTS.split(" ")
+    }
     var PARTSTR: String {
-        return PARTS.split(" ")[PART - 1]
+        return arrParts[PART - 1]
     }
 
     static func getDataByLang(_ langid: Int) -> Observable<[MTextbookPhrase]> {

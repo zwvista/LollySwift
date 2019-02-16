@@ -17,10 +17,11 @@ class MUnitWord: NSObject, Codable {
     var UNIT = 0
     var PART = 0
     var SEQNUM = 0
+    var WORDID = 0
     var WORD = ""
     var NOTE: String?
+    var FAMIID = 0
     var LEVEL = 0
-    var WORDID = 0
     
     func PARTSTR(arrParts: [String]) -> String {
         return arrParts[PART - 1]

@@ -17,15 +17,22 @@ class MTextbookWord: NSObject, Codable {
     var UNIT = 0
     var PART = 0
     var SEQNUM = 0
+    var WORDID = 0
     var WORD = ""
     var NOTE: String?
+    var FAMIID = 0
     var LEVEL = 0
     var ENTRYID = 0
-    var WORDID = 0
     var UNITS = 0
+    var arrUnits: [String] {
+        return (1...UNITS).map { String($0) }
+    }
     var PARTS = ""
+    var arrParts: [String] {
+        return PARTS.split(" ")
+    }
     var PARTSTR: String {
-        return PARTS.split(" ")[PART - 1]
+        return arrParts[PART - 1]
     }
 
     public override var description: String {
