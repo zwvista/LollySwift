@@ -36,7 +36,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController, UISearchBarDeleg
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PhraseCell", for: indexPath) as! PhrasesTextbookCell
         let item = arrPhrases[indexPath.row]
-//        cell.lblTextbookPartSeqNum!.text = item.UNITPARTSEQNUM(arrParts: vmSettings.arrParts)
+        cell.lblUnitPartSeqNum!.text = item.UNITPARTSEQNUM
         cell.lblPhrase!.text = item.PHRASE
         cell.lblTranslation!.text = item.TRANSLATION
         return cell;
@@ -131,7 +131,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController, UISearchBarDeleg
 }
 
 class PhrasesTextbookCell: UITableViewCell {
+    @IBOutlet weak var lblUnitPartSeqNum: UILabel!
     @IBOutlet weak var lblPhrase: UILabel!
     @IBOutlet weak var lblTranslation: UILabel!
-    @IBOutlet weak var lblTextbookPartSeqNum: UILabel!
 }

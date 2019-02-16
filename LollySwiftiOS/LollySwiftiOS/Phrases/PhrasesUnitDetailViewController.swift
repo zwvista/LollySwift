@@ -16,6 +16,7 @@ class PhrasesUnitDetailViewController: UITableViewController, UITextFieldDelegat
     @IBOutlet weak var tfUnit: UITextField!
     @IBOutlet weak var tfPart: UITextField!
     @IBOutlet weak var tfSeqNum: UITextField!
+    @IBOutlet weak var tfPhraseID: UITextField!
     @IBOutlet weak var tfPhrase: UITextField!
     @IBOutlet weak var tfTranslation: UITextField!
 
@@ -50,6 +51,7 @@ class PhrasesUnitDetailViewController: UITableViewController, UITextFieldDelegat
         tfUnit.text = String(item.UNIT)
         tfPart.text = item.PARTSTR(arrParts: vmSettings.arrParts)
         tfSeqNum.text = String(item.SEQNUM)
+        tfPhraseID.text = String(item.PHRASEID)
         tfPhrase.text = item.PHRASE
         tfTranslation.text = item.TRANSLATION
         isAdd = item.ID == 0

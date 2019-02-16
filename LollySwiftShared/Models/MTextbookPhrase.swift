@@ -32,6 +32,9 @@ class MTextbookPhrase: NSObject, Codable {
     var PARTSTR: String {
         return arrParts[PART - 1]
     }
+    var UNITPARTSEQNUM: String {
+        return "\(UNIT) \(SEQNUM)\n\(PARTSTR)"
+    }
 
     static func getDataByLang(_ langid: Int) -> Observable<[MTextbookPhrase]> {
         // SQL: SELECT * FROM VTEXTBOOKPHRASES WHERE LANGID=?

@@ -16,6 +16,7 @@ class WordsLangDetailViewController: UITableViewController {
     @IBOutlet weak var tfID: UITextField!
     @IBOutlet weak var tfWord: UITextField!
     @IBOutlet weak var tfNote: UITextField!
+    @IBOutlet weak var tfFamiID: UITextField!
     @IBOutlet weak var tfLevel: UITextField!
 
     override func viewDidLoad() {
@@ -23,12 +24,14 @@ class WordsLangDetailViewController: UITableViewController {
         tfID.text = String(item.ID)
         tfWord.text = item.WORD
         tfNote.text = item.NOTE
+        tfFamiID.text = String(item.FAMIID)
         tfLevel.text = String(item.LEVEL)
     }
     
     func onDone() {
         item.WORD = vm.vmSettings.autoCorrectInput(text: tfWord.text ?? "")
         item.NOTE = tfNote.text
+        item.LEVEL = Int(tfLevel.text!)!
     }
     
 }

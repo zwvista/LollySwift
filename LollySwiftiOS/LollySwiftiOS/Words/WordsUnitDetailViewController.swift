@@ -19,6 +19,7 @@ class WordsUnitDetailViewController: UITableViewController, UITextFieldDelegate 
     @IBOutlet weak var tfWordID: UITextField!
     @IBOutlet weak var tfWord: UITextField!
     @IBOutlet weak var tfNote: UITextField!
+    @IBOutlet weak var tfFamiID: UITextField!
     @IBOutlet weak var tfLevel: UITextField!
 
     var vm: WordsUnitViewModel!
@@ -55,6 +56,7 @@ class WordsUnitDetailViewController: UITableViewController, UITextFieldDelegate 
         tfWordID.text = String(item.WORDID)
         tfWord.text = item.WORD
         tfNote.text = item.NOTE
+        tfFamiID.text = String(item.FAMIID)
         tfLevel.text = String(item.LEVEL)
         isAdd = item.ID == 0
         // https://stackoverflow.com/questions/7525437/how-to-set-focus-to-a-textfield-in-iphone

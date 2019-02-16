@@ -136,7 +136,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, UISearchBarDelegate,
 }
 
 class PhrasesUnitCell: UITableViewCell {
+    @IBOutlet weak var lblUnitPartSeqNum: UILabel!
     @IBOutlet weak var lblPhrase: UILabel!
     @IBOutlet weak var lblTranslation: UILabel!
-    @IBOutlet weak var lblUnitPartSeqNum: UILabel!
 }

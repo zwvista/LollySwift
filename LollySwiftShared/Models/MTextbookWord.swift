@@ -34,6 +34,12 @@ class MTextbookWord: NSObject, Codable {
     var PARTSTR: String {
         return arrParts[PART - 1]
     }
+    var UNITPARTSEQNUM: String {
+        return "\(UNIT) \(SEQNUM)\n\(PARTSTR)"
+    }
+    var WORDNOTE: String {
+        return WORD + ((NOTE ?? "").isEmpty ? "" : "(\(NOTE!))")
+    }
 
     public override var description: String {
         return "\(SEQNUM) \(WORD)" + (NOTE?.isEmpty != false ? "" : "(\(NOTE!))")
