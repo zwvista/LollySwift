@@ -10,7 +10,7 @@ import Cocoa
 import WebKit
 import RxSwift
 
-class WordsUnitViewController: WordsViewController {
+class WordsUnitViewController: WordsBaseViewController {
 
     var vm: WordsUnitViewModel!
     var arrWords: [MUnitWord] {

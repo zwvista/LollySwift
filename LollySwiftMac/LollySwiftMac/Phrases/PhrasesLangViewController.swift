@@ -10,7 +10,7 @@ import Cocoa
 import WebKit
 import RxSwift
 
-class PhrasesLangViewController: PhrasesViewController {
+class PhrasesLangViewController: PhrasesBaseViewController {
     
     var wc: PhrasesLangWindowController { return view.window!.windowController as! PhrasesLangWindowController }
     var vm: PhrasesLangViewModel!

@@ -660,23 +660,16 @@
                                 <action selector="presentLeftMenuViewController:" destination="e37-kc-jTQ" id="crO-eY-9Pw"/>
                             </connections>
                         </barButtonItem>
-                        <rightBarButtonItems>
-                            <barButtonItem title="More" id="k7B-0l-B45">
-                                <connections>
-                                    <action selector="btnMoreClicked:" destination="vUM-44-gHw" id="06O-G3-zd4"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem title="Edit" id="Oke-rm-M0M">
-                                <connections>
-                                    <action selector="btnEditClicked:" destination="vUM-44-gHw" id="DWK-II-4P2"/>
-                                    <segue destination="owF-Ne-4GQ" kind="presentation" id="eOE-Ar-S9q"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="blP-wF-3Fe">
+                            <connections>
+                                <segue destination="owF-Ne-4GQ" kind="presentation" identifier="add" id="zmq-6b-91k"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <segue destination="sKF-T7-DSr" kind="show" identifier="dict" id="aiy-wK-I9x"/>
+                        <segue destination="owF-Ne-4GQ" kind="presentation" identifier="edit" id="BQg-Ho-lEE"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e37-kc-jTQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -985,6 +978,7 @@
         <image name="MenuButton" width="25" height="13"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="zmq-6b-91k"/>
         <segue reference="Ol9-Ej-9ED"/>
         <segue reference="aiy-wK-I9x"/>
         <segue reference="K8L-Dr-qQn"/>

@@ -1,5 +1,5 @@
 //
-//  WordsViewController.swift
+//  WordsBaseViewController.swift
 //  LollySwiftMac
 //
 //  Created by 趙偉 on 2019/01/05.
@@ -10,7 +10,7 @@ import Cocoa
 import WebKit
 import RxSwift
 
-class WordsViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate, WKNavigationDelegate, LollyProtocol {
+class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate, WKNavigationDelegate, LollyProtocol {
     var selectedDictGroupIndex = 0
     
     @IBOutlet weak var wvDict: WKWebView!
@@ -207,7 +207,7 @@ class WordsWindowController: NSWindowController, NSToolbarDelegate, LollyProtoco
                 let item = toolbar.items[defaultToolbarItemCount + i]
                 item.label = vmSettings.arrDictsGroup[i].DICTNAME
                 item.target = contentViewController
-                item.action = #selector(WordsViewController.searchDict(_:))
+                item.action = #selector(WordsBaseViewController.searchDict(_:))
                 item.isEnabled = true
                 item.image = img
                 if i == vmSettings.selectedDictGroupIndex {

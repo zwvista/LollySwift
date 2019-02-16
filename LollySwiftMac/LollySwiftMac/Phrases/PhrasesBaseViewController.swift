@@ -10,7 +10,7 @@ import Cocoa
 import WebKit
 import RxSwift
 
-class PhrasesViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate {
+class PhrasesBaseViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate {
     
     @IBOutlet weak var tableView: NSTableView!
 

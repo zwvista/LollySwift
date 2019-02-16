@@ -10,7 +10,7 @@ import Cocoa
 import WebKit
 import RxSwift
 
-class PhrasesUnitViewController: PhrasesViewController {
+class PhrasesUnitViewController: PhrasesBaseViewController {
     
     var vm: PhrasesUnitViewModel!
     var arrPhrases: [MUnitPhrase] {

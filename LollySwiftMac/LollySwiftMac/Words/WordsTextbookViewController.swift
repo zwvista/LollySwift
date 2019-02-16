@@ -10,7 +10,7 @@ import Cocoa
 import WebKit
 import RxSwift
 
-class WordsTextbookViewController: WordsViewController {
+class WordsTextbookViewController: WordsBaseViewController {
 
     var wc2: WordsTextbookWindowController! { return view.window!.windowController as? WordsTextbookWindowController }
     var vm: WordsTextbookViewModel!

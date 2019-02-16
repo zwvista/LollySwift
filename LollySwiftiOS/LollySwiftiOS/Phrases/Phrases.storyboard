@@ -676,19 +676,15 @@
                                 <action selector="presentLeftMenuViewController:" destination="bMr-Ud-9HL" id="oH5-LK-Ppo"/>
                             </connections>
                         </barButtonItem>
-                        <rightBarButtonItems>
-                            <barButtonItem systemItem="add" id="TQv-Rw-iJP"/>
-                            <barButtonItem title="Edit" id="SDY-EJ-zTk">
-                                <connections>
-                                    <action selector="btnEditClicked:" destination="g7b-dT-nAF" id="nnl-9l-sWm"/>
-                                    <segue destination="M9Z-cZ-E1G" kind="presentation" id="XoS-Qv-xe6"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="TQv-Rw-iJP">
+                            <connections>
+                                <segue destination="M9Z-cZ-E1G" kind="presentation" identifier="add" id="udo-bB-MUY"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="btnEdit" destination="SDY-EJ-zTk" id="DBa-7x-WWF"/>
+                        <segue destination="M9Z-cZ-E1G" kind="presentation" identifier="edit" id="3xy-l7-bOU"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bMr-Ud-9HL" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -949,6 +945,7 @@
         <image name="MenuButton" width="25" height="13"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="udo-bB-MUY"/>
         <segue reference="p1U-Lg-pC8"/>
         <segue reference="CIw-HR-KYx"/>
     </inferredMetricsTieBreakers>
