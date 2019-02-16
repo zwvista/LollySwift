@@ -21,7 +21,7 @@ class MTextbookWord: NSObject, Codable {
     var NOTE: String?
     var LEVEL = 0
     var UNITWORDID = 0
-    var LANGWORDID = 0
+    var WORDID = 0
     var UNITS = 0
     var PARTS = ""
     var PARTSTR: String {

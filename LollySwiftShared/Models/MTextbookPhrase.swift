@@ -20,7 +20,7 @@ class MTextbookPhrase: NSObject, Codable {
     var PHRASE = ""
     var TRANSLATION: String?
     var UNITPHRASEID = 0
-    var LANGPHRASEID = 0
+    var PHRASEID = 0
     var UNITS = 0
     var PARTS = ""
     var PARTSTR: String {

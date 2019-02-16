@@ -44,7 +44,7 @@ class WordsTextbookViewModel: NSObject {
         let item = arrWords[index]
         return vmNote.getNote(word: item.WORD).flatMap { note -> Observable<()> in
             item.NOTE = note
-            return MLangWord.update(item.LANGWORDID, note: note).map { print($0) }
+            return MLangWord.update(item.WORDID, note: note).map { print($0) }
         }
     }
 }

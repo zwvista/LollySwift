@@ -25,7 +25,7 @@ class MLangWord: NSObject, Codable {
     }
     
     init(unititem: MUnitWord) {
-        ID = unititem.LANGWORDID
+        ID = unititem.WORDID
         LANGID = unititem.LANGID
         WORD = unititem.WORD
         NOTE = unititem.NOTE
@@ -33,7 +33,7 @@ class MLangWord: NSObject, Codable {
     }
     
     init(textbookitem: MTextbookWord) {
-        ID = textbookitem.LANGWORDID
+        ID = textbookitem.WORDID
         LANGID = textbookitem.LANGID
         WORD = textbookitem.WORD
         NOTE = textbookitem.NOTE

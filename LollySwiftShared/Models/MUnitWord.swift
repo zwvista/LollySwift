@@ -20,7 +20,7 @@ class MUnitWord: NSObject, Codable {
     var WORD = ""
     var NOTE: String?
     var LEVEL = 0
-    var LANGWORDID = 0
+    var WORDID = 0
     
     func PARTSTR(arrParts: [String]) -> String {
         return arrParts[PART - 1]
@@ -38,9 +38,9 @@ class MUnitWord: NSObject, Codable {
         return RestApi.getArray(url: url, keyPath: "VUNITWORDS")
     }
     
-    static func getDataByLangWord(_ langwordid: Int) -> Observable<[MUnitWord]> {
-        // SQL: SELECT * FROM VUNITWORDS WHERE LANGWORDID=?
-        let url = "\(RestApi.url)VUNITWORDS?transform=1&filter=LANGWORDID,eq,\(langwordid)"
+    static func getDataByLangWord(_ wordid: Int) -> Observable<[MUnitWord]> {
+        // SQL: SELECT * FROM VUNITWORDS WHERE WORDID=?
+        let url = "\(RestApi.url)VUNITWORDS?transform=1&filter=WORDID,eq,\(wordid)"
         return RestApi.getArray(url: url, keyPath: "VUNITWORDS")
     }
 
@@ -52,13 +52,13 @@ class MUnitWord: NSObject, Codable {
     }
 
     static func update(item: MUnitWord) -> Observable<String> {
-        // SQL: UPDATE UNITWORDS SET UNIT=?, PART=?, SEQNUM=?, LANGWORDID=? WHERE ID=?
+        // SQL: UPDATE UNITWORDS SET UNIT=?, PART=?, SEQNUM=?, WORDID=? WHERE ID=?
         let url = "\(RestApi.url)UNITWORDS/\(item.ID)"
         return RestApi.update(url: url, body: try! item.toJSONString(prettyPrint: false)!)
     }
     
     static func create(item: MUnitWord) -> Observable<Int> {
-        // SQL: INSERT INTO UNITWORDS (TEXTBOOKID, UNIT, PART, SEQNUM, LANGWORDID) VALUES (?,?,?,?,?)
+        // SQL: INSERT INTO UNITWORDS (TEXTBOOKID, UNIT, PART, SEQNUM, WORDID) VALUES (?,?,?,?,?)
         let url = "\(RestApi.url)UNITWORDS"
         return RestApi.create(url: url, body: try! item.toJSONString(prettyPrint: false)!).map {
             return $0.toInt()!

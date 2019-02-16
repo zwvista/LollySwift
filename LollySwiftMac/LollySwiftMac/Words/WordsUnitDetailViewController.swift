@@ -17,10 +17,14 @@ class WordsUnitDetailViewController: NSViewController {
     var item: MUnitWord!
     var isAdd: Bool!
 
+    @IBOutlet weak var tfID: NSTextField!
     @IBOutlet weak var pubUnit: NSPopUpButton!
     @IBOutlet weak var pubPart: NSPopUpButton!
+    @IBOutlet weak var tfWordID: NSTextField!
+    @IBOutlet weak var tfSeqNum: NSTextField!
     @IBOutlet weak var tfWord: NSTextField!
-    
+    @IBOutlet weak var tfNote: NSTextField!
+
     let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
@@ -32,7 +36,7 @@ class WordsUnitDetailViewController: NSViewController {
     
     override func viewDidAppear() {
         // https://stackoverflow.com/questions/24235815/cocoa-how-to-set-window-title-from-within-view-controller-in-swift
-        tfWord.becomeFirstResponder()
+        (item.WORD.isEmpty ? tfWord : tfNote).becomeFirstResponder()
         view.window?.title = isAdd ? "New Word" : item.WORD
     }
 

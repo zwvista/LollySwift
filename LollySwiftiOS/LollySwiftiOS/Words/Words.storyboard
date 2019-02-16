@@ -320,8 +320,38 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="b1r-hL-yoo">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="XA7-lD-bwD">
                                         <rect key="frame" x="0.0" y="176" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XA7-lD-bwD" id="Kbe-Ea-XNs">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Word ID:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oYL-Dm-VPa">
+                                                    <rect key="frame" x="16" y="14" width="66" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yUP-G3-7V6">
+                                                    <rect key="frame" x="116" y="10" width="243" height="24"/>
+                                                    <color key="textColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="yUP-G3-7V6" firstAttribute="trailing" secondItem="Kbe-Ea-XNs" secondAttribute="trailingMargin" id="6ch-Pj-OmZ"/>
+                                                <constraint firstItem="oYL-Dm-VPa" firstAttribute="top" secondItem="Kbe-Ea-XNs" secondAttribute="topMargin" constant="3" id="K3s-tV-ntD"/>
+                                                <constraint firstItem="yUP-G3-7V6" firstAttribute="top" secondItem="Kbe-Ea-XNs" secondAttribute="topMargin" constant="-1" id="T7l-Z0-Rc2"/>
+                                                <constraint firstItem="oYL-Dm-VPa" firstAttribute="leading" secondItem="Kbe-Ea-XNs" secondAttribute="leadingMargin" id="TRF-KN-EZJ"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="yUP-G3-7V6" secondAttribute="bottom" constant="-1" id="YTv-QB-dlw"/>
+                                                <constraint firstItem="yUP-G3-7V6" firstAttribute="leading" secondItem="Kbe-Ea-XNs" secondAttribute="leadingMargin" constant="100" id="gV0-eY-tBM"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="b1r-hL-yoo">
+                                        <rect key="frame" x="0.0" y="220" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="b1r-hL-yoo" id="aIe-rn-Mkz">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -351,7 +381,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="FxW-Gb-Grd">
-                                        <rect key="frame" x="0.0" y="220" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="264" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FxW-Gb-Grd" id="6ZE-tY-Gno">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -409,6 +439,7 @@
                         <outlet property="tfSeqNum" destination="uAX-rX-JSe" id="xse-Hk-fUT"/>
                         <outlet property="tfUnit" destination="Wgk-3h-Eh0" id="UsD-Sp-mdg"/>
                         <outlet property="tfWord" destination="fbt-Ws-0XR" id="pVd-Fi-H2x"/>
+                        <outlet property="tfWordID" destination="yUP-G3-7V6" id="GuR-gq-Cs1"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O2C-27-NT0" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -13,23 +13,23 @@ import RxSwift
 class MWordsFami: NSObject, Codable {
     var ID = 0
     var USERID = 0
-    var LANGWORDID = 0
+    var WORDID = 0
     var LEVEL = 0
 
-    static func getDataByUserLangWord(userid: Int, langwordid: Int) -> Observable<[MWordsFami]> {
-        // SQL: SELECT * FROM WORDSFAMI WHERE USERID=? AND LANGWORDID=?
-        let url = "\(RestApi.url)WORDSFAMI?transform=1&filter[]=USERID,eq,\(userid)&filter[]=LANGWORDID,eq,\(langwordid)"
+    static func getDataByUserLangWord(userid: Int, wordid: Int) -> Observable<[MWordsFami]> {
+        // SQL: SELECT * FROM WORDSFAMI WHERE USERID=? AND WORDID=?
+        let url = "\(RestApi.url)WORDSFAMI?transform=1&filter[]=USERID,eq,\(userid)&filter[]=WORDID,eq,\(wordid)"
         return RestApi.getArray(url: url, keyPath: "WORDSFAMI")
     }
 
     static func update(item: MWordsFami) -> Observable<String> {
-        // SQL: UPDATE WORDSFAMI SET USERID=?, LANGWORDID=?, LEVEL=? WHERE ID=?
+        // SQL: UPDATE WORDSFAMI SET USERID=?, WORDID=?, LEVEL=? WHERE ID=?
         let url = "\(RestApi.url)WORDSFAMI/\(item.ID)"
         return RestApi.update(url: url, body: try! item.toJSONString(prettyPrint: false)!)
     }
     
     static func create(item: MWordsFami) -> Observable<Int> {
-        // SQL: INSERT INTO WORDSFAMI (USERID, LANGWORDID, LEVEL) VALUES (?,?,?)
+        // SQL: INSERT INTO WORDSFAMI (USERID, WORDID, LEVEL) VALUES (?,?,?)
         let url = "\(RestApi.url)WORDSFAMI"
         return RestApi.create(url: url, body: try! item.toJSONString(prettyPrint: false)!).map {
             return $0.toInt()!

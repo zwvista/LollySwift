@@ -20,7 +20,7 @@ class MLangPhrase: NSObject, Codable {
     }
     
     init(unititem: MUnitPhrase) {
-        ID = unititem.LANGPHRASEID
+        ID = unititem.PHRASEID
         LANGID = unititem.LANGID
         PHRASE = unititem.PHRASE
         TRANSLATION = unititem.TRANSLATION
@@ -28,7 +28,7 @@ class MLangPhrase: NSObject, Codable {
     }
     
     init(textbookitem: MTextbookPhrase) {
-        ID = textbookitem.LANGPHRASEID
+        ID = textbookitem.PHRASEID
         LANGID = textbookitem.LANGID
         PHRASE = textbookitem.PHRASE
         TRANSLATION = textbookitem.TRANSLATION

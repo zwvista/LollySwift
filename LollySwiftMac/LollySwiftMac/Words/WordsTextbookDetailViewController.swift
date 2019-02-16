@@ -16,9 +16,13 @@ class WordsTextbookDetailViewController: NSViewController {
     var complete: (() -> Void)?
     var item: MTextbookWord!
 
+    @IBOutlet weak var tfID: NSTextField!
     @IBOutlet weak var pubTextbook: NSPopUpButton!
+    @IBOutlet weak var pubUnit: NSPopUpButton!
     @IBOutlet weak var pubPart: NSPopUpButton!
+    @IBOutlet weak var tfSeqNum: NSTextField!
     @IBOutlet weak var tfWord: NSTextField!
+    @IBOutlet weak var tfNote: NSTextField!
     
     let disposeBag = DisposeBag()
 
