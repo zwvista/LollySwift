@@ -26,8 +26,12 @@ class PhrasesTextbookDetailViewController: NSViewController {
         super.viewDidLoad()
         pubTextbook.selectItem(at: item.UNIT - 1)
         pubPart.selectItem(at: item.PART - 1)
-        // not working because this is a view?
+    }
+    
+    override func viewDidAppear() {
+        // https://stackoverflow.com/questions/24235815/cocoa-how-to-set-window-title-from-within-view-controller-in-swift
         tfPhrase.becomeFirstResponder()
+        view.window?.title = item.PHRASE
     }
     
     @IBAction func okClicked(_ sender: Any) {

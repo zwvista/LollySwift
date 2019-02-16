@@ -25,9 +25,13 @@ class WordsLangDetailViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // not working because this is a view?
-        tfWord.becomeFirstResponder()
         isAdd = item.ID == 0
+    }
+    
+    override func viewDidAppear() {
+        // https://stackoverflow.com/questions/24235815/cocoa-how-to-set-window-title-from-within-view-controller-in-swift
+        tfWord.becomeFirstResponder()
+        view.window?.title = isAdd ? "New Word" : item.WORD
     }
     
     @IBAction func okClicked(_ sender: Any) {

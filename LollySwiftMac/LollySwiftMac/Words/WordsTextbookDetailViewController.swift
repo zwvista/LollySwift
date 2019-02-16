@@ -26,10 +26,14 @@ class WordsTextbookDetailViewController: NSViewController {
         super.viewDidLoad()
         pubTextbook.selectItem(at: item.UNIT - 1)
         pubPart.selectItem(at: item.PART - 1)
-        // not working because this is a view?
-        tfWord.becomeFirstResponder()
     }
     
+    override func viewDidAppear() {
+        // https://stackoverflow.com/questions/24235815/cocoa-how-to-set-window-title-from-within-view-controller-in-swift
+        tfWord.becomeFirstResponder()
+        view.window?.title = item.WORD
+    }
+
     @IBAction func okClicked(_ sender: Any) {
         // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
         self.commitEditing()
