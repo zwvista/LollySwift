@@ -948,15 +948,19 @@ Gw
                             <allowedToolbarItems>
                                 <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="l1Q-mq-x31"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="1up-Vl-Wwc"/>
-                                <toolbarItem implicitItemIdentifier="360CEF89-3610-451A-B939-34F9335730CF" label="Add" paletteLabel="Add" tag="-1" image="NSAddTemplate" autovalidates="NO" id="viz-co-4v0"/>
+                                <toolbarItem implicitItemIdentifier="360CEF89-3610-451A-B939-34F9335730CF" label="Add" paletteLabel="Add" tag="-1" image="NSAddTemplate" autovalidates="NO" id="viz-co-4v0">
+                                    <connections>
+                                        <action selector="addPhrase:" target="maH-dw-yMa" id="uYP-u5-cIl"/>
+                                    </connections>
+                                </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="62080154-8F37-4A03-8BCC-C0C62A8B2F03" label="Delete" paletteLabel="Delete" tag="-1" image="NSRemoveTemplate" id="Qp0-0S-2WS">
                                     <connections>
-                                        <action selector="deletePhrase:" target="maH-dw-yMa" id="PdV-Bt-CFL"/>
+                                        <action selector="deletePhrase:" target="maH-dw-yMa" id="SqV-5K-Vcc"/>
                                     </connections>
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="0FE47FD6-6CD6-4F13-92D4-43D61D94CAF8" label="Refresh" paletteLabel="Refresh" tag="-1" image="NSRefreshTemplate" id="MnR-91-5r0">
                                     <connections>
-                                        <action selector="refreshTableView:" target="maH-dw-yMa" id="BSZ-bF-rgg"/>
+                                        <action selector="refreshTableView:" target="maH-dw-yMa" id="hfy-Hy-I9Y"/>
                                     </connections>
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="581A0D8F-3AAA-4D81-8477-CAB2F08905AC" label="Filter Type" paletteLabel="Filter Type" sizingBehavior="auto" id="2ps-sj-xWc">
@@ -1036,8 +1040,16 @@ Gw
                             <allowedToolbarItems>
                                 <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="mWe-Lr-j64"/>
                                 <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="qf0-0Q-opR"/>
-                                <toolbarItem implicitItemIdentifier="0E4C861C-800F-4CAF-BC75-8A43379D5E1F" label="Delete" paletteLabel="Delete" tag="-1" image="NSRemoveTemplate" id="j5l-RK-ED6"/>
-                                <toolbarItem implicitItemIdentifier="0FE47FD6-6CD6-4F13-92D4-43D61D94CAF8" label="Refresh" paletteLabel="Refresh" tag="-1" image="NSRefreshTemplate" id="h2r-td-4Tz"/>
+                                <toolbarItem implicitItemIdentifier="0E4C861C-800F-4CAF-BC75-8A43379D5E1F" label="Delete" paletteLabel="Delete" tag="-1" image="NSRemoveTemplate" id="j5l-RK-ED6">
+                                    <connections>
+                                        <action selector="deletePhrase:" target="2fr-uc-31Q" id="MPj-sK-MQH"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="0FE47FD6-6CD6-4F13-92D4-43D61D94CAF8" label="Refresh" paletteLabel="Refresh" tag="-1" image="NSRefreshTemplate" id="h2r-td-4Tz">
+                                    <connections>
+                                        <action selector="refreshTableView:" target="2fr-uc-31Q" id="znl-ny-yHq"/>
+                                    </connections>
+                                </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="397A92A6-4F72-4423-A3F9-6FF621D96EE3" label="Filter Type" paletteLabel="Filter Type" sizingBehavior="auto" id="Kkp-cO-oL0">
                                     <nil key="toolTip"/>
                                     <segmentedControl key="view" verticalHuggingPriority="750" id="xOt-9C-VuQ">

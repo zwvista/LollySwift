@@ -65,6 +65,11 @@ class WordsSearchViewController: WordsViewController {
     
     @IBAction func deleteWord(_ sender: Any) {
     }
+    
+    @IBAction func refreshTableView(_ sender: Any) {
+        arrWords.removeAll()
+        tableView.reloadData()
+    }
 
     @IBAction func editWord(_ sender: Any) {
     }

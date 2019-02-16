@@ -1353,8 +1353,16 @@ Gw
                                         <action selector="addWord:" target="C0L-6x-tvV" id="rvS-l3-g1a"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="78890E5B-E0CE-4316-AC39-5F2EC4113E54" label="Delete" paletteLabel="Delete" tag="-1" image="NSRemoveTemplate" id="WeY-7Q-yTj"/>
-                                <toolbarItem implicitItemIdentifier="0FE47FD6-6CD6-4F13-92D4-43D61D94CAF8" label="Refresh" paletteLabel="Refresh" tag="-1" image="NSRefreshTemplate" id="hQG-W0-fgC"/>
+                                <toolbarItem implicitItemIdentifier="78890E5B-E0CE-4316-AC39-5F2EC4113E54" label="Delete" paletteLabel="Delete" tag="-1" image="NSRemoveTemplate" id="WeY-7Q-yTj">
+                                    <connections>
+                                        <action selector="deleteWord:" target="C0L-6x-tvV" id="n9u-Tz-rdh"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="0FE47FD6-6CD6-4F13-92D4-43D61D94CAF8" label="Refresh" paletteLabel="Refresh" tag="-1" image="NSRefreshTemplate" id="hQG-W0-fgC">
+                                    <connections>
+                                        <action selector="refreshTableView:" target="C0L-6x-tvV" id="VJh-ZY-YRC"/>
+                                    </connections>
+                                </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="A284A409-7D3E-4ECA-A699-E50D269B193B" label="Filter Type" paletteLabel="Filter Type" sizingBehavior="auto" id="Tbn-JT-Yey">
                                     <nil key="toolTip"/>
                                     <segmentedControl key="view" verticalHuggingPriority="750" id="3Q6-8G-XTS">
@@ -1827,13 +1835,16 @@ Gw
                         <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
                         <toolbar key="toolbar" implicitIdentifier="FF31B996-4B8F-4B5C-A970-9F0347F78E89" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="B0S-Kp-TOd">
                             <allowedToolbarItems>
-                                <toolbarItem implicitItemIdentifier="612EC45D-8794-4422-A0F4-EA1F80B8720E" label="Add" paletteLabel="Add" tag="-1" image="NSAddTemplate" id="B4O-Cg-FKD">
+                                <toolbarItem implicitItemIdentifier="6B47998A-6D22-448D-AD74-88E1EFBCC93E" label="Delete" paletteLabel="Delete" tag="-1" image="NSRemoveTemplate" id="4eZ-ad-jLC">
                                     <connections>
-                                        <action selector="addWord:" target="sbS-6A-eLA" id="rl1-o0-ihG"/>
+                                        <action selector="deleteWord:" target="sbS-6A-eLA" id="iEs-b2-r6J"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="6B47998A-6D22-448D-AD74-88E1EFBCC93E" label="Delete" paletteLabel="Delete" tag="-1" image="NSRemoveTemplate" id="4eZ-ad-jLC"/>
-                                <toolbarItem implicitItemIdentifier="2FDBC1DF-3458-4755-9CB4-69D70C625317" label="Refresh" paletteLabel="Refresh" tag="-1" image="NSRefreshTemplate" id="BYI-RE-anA"/>
+                                <toolbarItem implicitItemIdentifier="2FDBC1DF-3458-4755-9CB4-69D70C625317" label="Refresh" paletteLabel="Refresh" tag="-1" image="NSRefreshTemplate" id="BYI-RE-anA">
+                                    <connections>
+                                        <action selector="refreshTableView:" target="sbS-6A-eLA" id="I7o-34-hGi"/>
+                                    </connections>
+                                </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="D497B009-58E7-43B0-A2C8-494B605D2B63" label="Dict0" paletteLabel="Dict0" image="NSBookmarksTemplate" selectable="YES" id="Wxm-R9-OkX">
                                     <size key="minSize" width="17" height="18"/>
                                     <size key="maxSize" width="17" height="18"/>
@@ -1996,7 +2007,6 @@ Gw
                                 </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
-                                <toolbarItem reference="B4O-Cg-FKD"/>
                                 <toolbarItem reference="4eZ-ad-jLC"/>
                                 <toolbarItem reference="BYI-RE-anA"/>
                                 <toolbarItem reference="Wxm-R9-OkX"/>
@@ -2103,18 +2113,18 @@ Gw
                 <customObject id="eF4-rP-JQ0" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <viewController id="ECR-Tq-pby" customClass="WordsSearchViewController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="HyV-oU-X8h">
-                        <rect key="frame" x="0.0" y="0.0" width="822" height="640"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1200" height="600"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <splitView arrangesAllSubviews="NO" dividerStyle="paneSplitter" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kJB-Ei-kLH">
-                                <rect key="frame" x="0.0" y="0.0" width="822" height="640"/>
+                                <rect key="frame" x="0.0" y="0.0" width="1200" height="600"/>
                                 <subviews>
                                     <customView id="ooS-dI-IvX">
-                                        <rect key="frame" x="0.0" y="0.0" width="295" height="640"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="432" height="600"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
                                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fhT-0G-f4c">
-                                                <rect key="frame" x="0.0" y="618" width="171" height="22"/>
+                                                <rect key="frame" x="0.0" y="578" width="308" height="22"/>
                                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="UJS-rt-mBe">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -2128,7 +2138,7 @@ Gw
                                                 </connections>
                                             </textField>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6gy-Tz-aqi">
-                                                <rect key="frame" x="165" y="612" width="65" height="32"/>
+                                                <rect key="frame" x="302" y="572" width="65" height="32"/>
                                                 <buttonCell key="cell" type="push" title="Add" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ODi-N1-uhY">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
@@ -2138,7 +2148,7 @@ Gw
                                                 </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7tC-EU-ySf">
-                                                <rect key="frame" x="218" y="612" width="83" height="32"/>
+                                                <rect key="frame" x="355" y="572" width="83" height="32"/>
                                                 <buttonCell key="cell" type="push" title="Search" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Re8-Yi-wTC">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
@@ -2148,13 +2158,13 @@ Gw
                                                 </connections>
                                             </button>
                                             <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3oW-mT-ATf">
-                                                <rect key="frame" x="0.0" y="0.0" width="295" height="618"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="432" height="578"/>
                                                 <clipView key="contentView" id="KSB-fG-4SN">
-                                                    <rect key="frame" x="1" y="0.0" width="293" height="617"/>
+                                                    <rect key="frame" x="1" y="0.0" width="430" height="577"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="l1D-Jd-Cly" viewBased="YES" id="bSA-4p-g3s">
-                                                            <rect key="frame" x="0.0" y="0.0" width="293" height="592"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="430" height="552"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <size key="intercellSpacing" width="3" height="2"/>
                                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -2303,7 +2313,7 @@ Gw
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </scroller>
                                                 <tableHeaderView key="headerView" id="l1D-Jd-Cly">
-                                                    <rect key="frame" x="0.0" y="0.0" width="293" height="25"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="430" height="25"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </tableHeaderView>
                                             </scrollView>
@@ -2323,11 +2333,11 @@ Gw
                                         </constraints>
                                     </customView>
                                     <customView id="3DF-wI-PX2">
-                                        <rect key="frame" x="305" y="0.0" width="517" height="640"/>
+                                        <rect key="frame" x="442" y="0.0" width="758" height="600"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
                                             <wkWebView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gHo-Yg-Cdv" userLabel="Dict WebView">
-                                                <rect key="frame" x="0.0" y="0.0" width="517" height="640"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="758" height="600"/>
                                                 <wkWebViewConfiguration key="configuration">
                                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
                                                     <wkPreferences key="preferences"/>
@@ -2420,9 +2430,16 @@ Gw
                         <toolbar key="toolbar" implicitIdentifier="99476795-252C-48E8-9851-21369EE8577D" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="UkK-DI-MI4">
                             <allowedToolbarItems>
                                 <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="xzs-1i-uLj"/>
-                                <toolbarItem implicitItemIdentifier="360CEF89-3610-451A-B939-34F9335730CF" label="Add" paletteLabel="Add" tag="-1" image="NSAddTemplate" autovalidates="NO" id="ejd-Mh-1xg"/>
-                                <toolbarItem implicitItemIdentifier="78890E5B-E0CE-4316-AC39-5F2EC4113E54" label="Delete" paletteLabel="Delete" tag="-1" image="NSRemoveTemplate" id="Gw3-Q0-iwp"/>
-                                <toolbarItem implicitItemIdentifier="0FE47FD6-6CD6-4F13-92D4-43D61D94CAF8" label="Refresh" paletteLabel="Refresh" tag="-1" image="NSRefreshTemplate" id="yQv-Z3-dpb"/>
+                                <toolbarItem implicitItemIdentifier="78890E5B-E0CE-4316-AC39-5F2EC4113E54" label="Delete" paletteLabel="Delete" tag="-1" image="NSRemoveTemplate" id="Gw3-Q0-iwp">
+                                    <connections>
+                                        <action selector="deleteWord:" target="bLJ-EC-iia" id="mIw-x7-fvd"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="0FE47FD6-6CD6-4F13-92D4-43D61D94CAF8" label="Refresh" paletteLabel="Refresh" tag="-1" image="NSRefreshTemplate" id="yQv-Z3-dpb">
+                                    <connections>
+                                        <action selector="refreshTableView:" target="bLJ-EC-iia" id="eYi-Kq-kdy"/>
+                                    </connections>
+                                </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="D15C6E72-5923-4A28-B478-0FBD603820ED" label="Notes" paletteLabel="Notes" tag="-1" image="NSInfo" id="fz0-Vb-TNs"/>
                                 <toolbarItem implicitItemIdentifier="204078EF-7E69-41FF-85E5-6C280CE4D0D3" label="Filter Type" paletteLabel="Filter Type" sizingBehavior="auto" id="MpB-21-MBj">
                                     <nil key="toolTip"/>
@@ -2624,7 +2641,6 @@ Gw
                                 </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
-                                <toolbarItem reference="ejd-Mh-1xg"/>
                                 <toolbarItem reference="Gw3-Q0-iwp"/>
                                 <toolbarItem reference="yQv-Z3-dpb"/>
                                 <toolbarItem reference="fz0-Vb-TNs"/>
