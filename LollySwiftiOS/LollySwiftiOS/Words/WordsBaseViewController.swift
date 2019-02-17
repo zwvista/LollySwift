@@ -34,4 +34,8 @@ class WordsBaseViewController: UITableViewController {
             
         }
     }
+
+    deinit {
+        print("DEBUG: \(self.className) deinit")
+    }
 }

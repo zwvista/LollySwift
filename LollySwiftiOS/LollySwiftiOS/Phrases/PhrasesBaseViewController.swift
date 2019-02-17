@@ -28,4 +28,8 @@ class PhrasesBaseViewController: UITableViewController {
         super.viewWillAppear(animated)
         searchController.isActive = false
     }
+
+    deinit {
+        print("DEBUG: \(self.className) deinit")
+    }
 }

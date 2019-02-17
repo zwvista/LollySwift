@@ -16,7 +16,6 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     @IBOutlet weak var wvDict: WKWebView!
     @IBOutlet weak var tfNewWord: NSTextField!
     @IBOutlet weak var tableView: NSTableView!
-    var wc: WordsWindowController!
 
     let disposeBag = DisposeBag()
     
@@ -33,7 +32,6 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     
     override func viewDidAppear() {
         super.viewDidAppear()
-        wc = view.window!.windowController as? WordsWindowController
     }
     
     func controlTextDidEndEditing(_ obj: Notification) {
@@ -143,6 +141,9 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     
     @IBAction func speakOrNotChanged(_ sender: Any) {
         speakOrNot = (sender as! NSSegmentedControl).selectedSegment == 1
+        if speakOrNot {
+            speak(self)
+        }
     }
 
     @IBAction func openOnlineDict(_ sender: Any) {
@@ -152,6 +153,10 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
             let url = item2.urlString(word: selectedWord, arrAutoCorrect: vmSettings.arrAutoCorrect)
             MacApi.openPage(url)
         }
+    }
+
+    deinit {
+        print("DEBUG: \(self.className) deinit")
     }
 }
 

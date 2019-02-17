@@ -315,12 +315,10 @@
                                                 <action trigger="doubleAction" selector="editPhrase:" target="F8i-pe-Ate" id="y4k-Tj-vgq"/>
                                                 <outlet property="dataSource" destination="F8i-pe-Ate" id="WTk-VO-k4I"/>
                                                 <outlet property="delegate" destination="F8i-pe-Ate" id="EHv-ob-M8C"/>
+                                                <outlet property="menu" destination="UPB-Wi-4rN" id="Ix2-Hb-AVO"/>
                                             </connections>
                                         </tableView>
                                     </subviews>
-                                    <connections>
-                                        <outlet property="menu" destination="UPB-Wi-4rN" id="fuj-Ms-Z0a"/>
-                                    </connections>
                                 </clipView>
                                 <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="MWh-UR-fIZ">
                                     <rect key="frame" x="1" y="623" width="820" height="16"/>
@@ -371,6 +369,12 @@
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
                                 <action selector="googlePhrase:" target="F8i-pe-Ate" id="JEz-BV-2EV"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem title="Speak" id="7fw-hu-Vdp" userLabel="Speak">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="speak:" target="F8i-pe-Ate" id="vJc-Ia-jag"/>
                             </connections>
                         </menuItem>
                     </items>
@@ -659,12 +663,9 @@ Gw
                                             </segments>
                                         </segmentedCell>
                                         <connections>
-                                            <action selector="filterWord:" target="qEo-JS-MYZ" id="60K-5k-RLC"/>
+                                            <action selector="speakOrNotChanged:" target="qEo-JS-MYZ" id="WJt-2s-NFU"/>
                                         </connections>
                                     </segmentedControl>
-                                    <connections>
-                                        <action selector="speakOrNotChanged:" target="qEo-JS-MYZ" id="km4-Gs-pBs"/>
-                                    </connections>
                                 </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
@@ -835,12 +836,10 @@ Gw
                                                 <action trigger="doubleAction" selector="editPhrase:" target="CET-Kl-kcd" id="BLI-MX-fR5"/>
                                                 <outlet property="dataSource" destination="CET-Kl-kcd" id="1DA-73-YTO"/>
                                                 <outlet property="delegate" destination="CET-Kl-kcd" id="c0M-ka-IlN"/>
+                                                <outlet property="menu" destination="Rot-bf-Ibg" id="fLF-lt-GGf"/>
                                             </connections>
                                         </tableView>
                                     </subviews>
-                                    <connections>
-                                        <outlet property="menu" destination="UPB-Wi-4rN" id="6TI-3Q-G4B"/>
-                                    </connections>
                                 </clipView>
                                 <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="Mi2-Ke-cT8">
                                     <rect key="frame" x="1" y="623" width="820" height="16"/>
@@ -891,6 +890,12 @@ Gw
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
                                 <action selector="googlePhrase:" target="CET-Kl-kcd" id="EUr-31-RI1"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem title="Speak" id="zwg-X3-mSk" userLabel="Speak">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="speak:" target="CET-Kl-kcd" id="2I9-8W-E6S"/>
                             </connections>
                         </menuItem>
                     </items>
@@ -1069,12 +1074,9 @@ Gw
                                             </segments>
                                         </segmentedCell>
                                         <connections>
-                                            <action selector="filterWord:" target="maH-dw-yMa" id="jW3-zO-JNl"/>
+                                            <action selector="speakOrNotChanged:" target="maH-dw-yMa" id="IbN-1Y-iCt"/>
                                         </connections>
                                     </segmentedControl>
-                                    <connections>
-                                        <action selector="speakOrNotChanged:" target="maH-dw-yMa" id="iYE-Tn-dwl"/>
-                                    </connections>
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="581A0D8F-3AAA-4D81-8477-CAB2F08905AC" label="Filter Type" paletteLabel="Filter Type" sizingBehavior="auto" id="2ps-sj-xWc">
                                     <nil key="toolTip"/>
@@ -1164,6 +1166,23 @@ Gw
                                         <action selector="refreshTableView:" target="2fr-uc-31Q" id="znl-ny-yHq"/>
                                     </connections>
                                 </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="FC24FC80-46F6-47AA-AC78-719B37B9E624" label="Speak?" paletteLabel="Speak?" sizingBehavior="auto" id="804-ZN-kkM" userLabel="Speak?">
+                                    <nil key="toolTip"/>
+                                    <segmentedControl key="view" verticalHuggingPriority="750" id="B9p-kU-Vrg">
+                                        <rect key="frame" x="0.0" y="14" width="95" height="23"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="80n-DU-n4X">
+                                            <font key="font" metaFont="system"/>
+                                            <segments>
+                                                <segment label="Silent" width="42" selected="YES"/>
+                                                <segment label="Speak" width="46" tag="1"/>
+                                            </segments>
+                                        </segmentedCell>
+                                        <connections>
+                                            <action selector="speakOrNotChanged:" target="2fr-uc-31Q" id="Pyq-zv-2PT"/>
+                                        </connections>
+                                    </segmentedControl>
+                                </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="397A92A6-4F72-4423-A3F9-6FF621D96EE3" label="Filter Type" paletteLabel="Filter Type" sizingBehavior="auto" id="Kkp-cO-oL0">
                                     <nil key="toolTip"/>
                                     <segmentedControl key="view" verticalHuggingPriority="750" id="xOt-9C-VuQ">
@@ -1203,26 +1222,6 @@ Gw
                                             <outlet property="delegate" destination="Ngy-o1-fVc" id="2Uw-Vf-Neh"/>
                                         </connections>
                                     </textField>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="99E14998-5CDE-4EC1-B3D0-685AEF38835F" label="Speak?" paletteLabel="Speak?" sizingBehavior="auto" id="804-ZN-kkM" userLabel="Speak?">
-                                    <nil key="toolTip"/>
-                                    <segmentedControl key="view" verticalHuggingPriority="750" id="B9p-kU-Vrg">
-                                        <rect key="frame" x="0.0" y="14" width="95" height="23"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="80n-DU-n4X">
-                                            <font key="font" metaFont="system"/>
-                                            <segments>
-                                                <segment label="Silent" width="42" selected="YES"/>
-                                                <segment label="Speak" width="46" tag="1"/>
-                                            </segments>
-                                        </segmentedCell>
-                                        <connections>
-                                            <action selector="filterWord:" target="2fr-uc-31Q" id="ORL-Xw-WkC"/>
-                                        </connections>
-                                    </segmentedControl>
-                                    <connections>
-                                        <action selector="speakOrNotChanged:" target="2fr-uc-31Q" id="iQm-CP-wAL"/>
-                                    </connections>
                                 </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
@@ -1593,12 +1592,10 @@ Gw
                                                 <action trigger="doubleAction" selector="editPhrase:" target="dNa-67-Lx3" id="v5g-hW-mgQ"/>
                                                 <outlet property="dataSource" destination="dNa-67-Lx3" id="CXk-IL-g3N"/>
                                                 <outlet property="delegate" destination="dNa-67-Lx3" id="D8E-Cb-iqh"/>
+                                                <outlet property="menu" destination="w8F-Rg-pAb" id="pXQ-mj-MAR"/>
                                             </connections>
                                         </tableView>
                                     </subviews>
-                                    <connections>
-                                        <outlet property="menu" destination="UPB-Wi-4rN" id="GWm-pb-Iab"/>
-                                    </connections>
                                 </clipView>
                                 <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="0.0049019607843137254" horizontal="YES" id="q8p-fJ-0kV">
                                     <rect key="frame" x="1" y="623" width="820" height="16"/>
@@ -1646,6 +1643,12 @@ Gw
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
                                 <action selector="googlePhrase:" target="dNa-67-Lx3" id="3ex-DW-7JX"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem title="Speak" id="XjO-pK-T8Q" userLabel="Speak">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="speak:" target="dNa-67-Lx3" id="Zv4-7O-0Xz"/>
                             </connections>
                         </menuItem>
                     </items>

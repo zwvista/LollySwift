@@ -182,10 +182,6 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
             }
         }
     }
-    
-    deinit {
-        print("DEBUG: \(self.className) deinit")
-    }
 }
 
 class WordsUnitCell: UITableViewCell {

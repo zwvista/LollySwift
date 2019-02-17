@@ -12,7 +12,7 @@ import RxSwift
 
 class WordsTextbookViewController: WordsBaseViewController {
 
-    var wc2: WordsTextbookWindowController! { return view.window!.windowController as? WordsTextbookWindowController }
+    var wc: WordsTextbookWindowController! { return view.window!.windowController as? WordsTextbookWindowController }
     var vm: WordsTextbookViewModel!
     var arrWords: [MTextbookWord] {
         return vm.arrWordsFiltered == nil ? vm.arrWords : vm.arrWordsFiltered!
@@ -92,7 +92,7 @@ class WordsTextbookViewController: WordsBaseViewController {
         if n == 0 {
             vm.arrWordsFiltered = nil
         } else {
-            vm.filterWordsForSearchText(wc2.filterText, scope: "Word")
+            vm.filterWordsForSearchText(wc.filterText, scope: "Word")
         }
         self.tableView.reloadData()
     }
@@ -100,9 +100,6 @@ class WordsTextbookViewController: WordsBaseViewController {
     override func settingsChanged() {
         refreshTableView(self)
         super.settingsChanged()
-    }
-
-    deinit {
     }
 }
 

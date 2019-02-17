@@ -475,7 +475,7 @@
                         <menuItem title="Speak" id="HmC-Vr-ske" userLabel="Speak">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
-                                <action selector="speak:" target="F8i-pe-Ate" id="TQh-he-mQG"/>
+                                <action selector="speak:" target="F8i-pe-Ate" id="gWY-YS-ZVx"/>
                             </connections>
                         </menuItem>
                     </items>
@@ -829,12 +829,9 @@ Gw
                                             </segments>
                                         </segmentedCell>
                                         <connections>
-                                            <action selector="filterWord:" target="qEo-JS-MYZ" id="dxk-D7-XY0"/>
+                                            <action selector="speakOrNotChanged:" target="qEo-JS-MYZ" id="JyI-lQ-gvz"/>
                                         </connections>
                                     </segmentedControl>
-                                    <connections>
-                                        <action selector="speakOrNotChanged:" target="qEo-JS-MYZ" id="ggi-cI-vNS"/>
-                                    </connections>
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="EED7D168-A935-46A4-B535-11EE2FF5F016" label="Dict0" paletteLabel="Dict0" image="NSBookmarksTemplate" selectable="YES" id="DTO-su-5Zg">
                                     <size key="minSize" width="17" height="18"/>
@@ -1445,7 +1442,7 @@ Gw
                         <menuItem title="Speak" id="gst-PZ-O5j" userLabel="Speak">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
-                                <action selector="speak:" target="UkS-Xi-ogF" id="4g2-PY-cR6"/>
+                                <action selector="speak:" target="UkS-Xi-ogF" id="OXe-UO-uIV"/>
                             </connections>
                         </menuItem>
                     </items>
@@ -1494,12 +1491,9 @@ Gw
                                             </segments>
                                         </segmentedCell>
                                         <connections>
-                                            <action selector="filterWord:" target="C0L-6x-tvV" id="Ki5-cc-RCO"/>
+                                            <action selector="speakOrNotChanged:" target="C0L-6x-tvV" id="m6s-Hx-3Vf"/>
                                         </connections>
                                     </segmentedControl>
-                                    <connections>
-                                        <action selector="speakOrNotChanged:" target="C0L-6x-tvV" id="sya-bW-A1W"/>
-                                    </connections>
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="A284A409-7D3E-4ECA-A699-E50D269B193B" label="Filter Type" paletteLabel="Filter Type" sizingBehavior="auto" id="Tbn-JT-Yey">
                                     <nil key="toolTip"/>
@@ -1517,9 +1511,6 @@ Gw
                                             <action selector="filterWord:" target="C0L-6x-tvV" id="Czn-Cs-CBz"/>
                                         </connections>
                                     </segmentedControl>
-                                    <connections>
-                                        <action selector="filterWord:" target="C0L-6x-tvV" id="vcS-U3-Mny"/>
-                                    </connections>
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="1926CA90-5EC0-4A3B-A8FD-A27ECB678D2A" label="Filter Text" paletteLabel="Filter Text" tag="-1" id="Zrq-nR-sEd">
                                     <nil key="toolTip"/>
@@ -2027,12 +2018,9 @@ DQ
                                             </segments>
                                         </segmentedCell>
                                         <connections>
-                                            <action selector="filterWord:" target="sbS-6A-eLA" id="Uee-oz-Gvy"/>
+                                            <action selector="speakOrNotChanged:" target="sbS-6A-eLA" id="i8D-W8-OSQ"/>
                                         </connections>
                                     </segmentedControl>
-                                    <connections>
-                                        <action selector="speakOrNotChanged:" target="sbS-6A-eLA" id="wDp-Uh-T8F"/>
-                                    </connections>
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="D497B009-58E7-43B0-A2C8-494B605D2B63" label="Dict0" paletteLabel="Dict0" image="NSBookmarksTemplate" selectable="YES" id="Wxm-R9-OkX">
                                     <size key="minSize" width="17" height="18"/>
@@ -2605,7 +2593,7 @@ DQ
                         <menuItem title="Speak" id="J4t-wg-ADu" userLabel="Speak">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
-                                <action selector="speak:" target="ECR-Tq-pby" id="bZS-t5-PKT"/>
+                                <action selector="speak:" target="ECR-Tq-pby" id="BX8-7a-zZG"/>
                             </connections>
                         </menuItem>
                     </items>
@@ -2650,12 +2638,9 @@ DQ
                                             </segments>
                                         </segmentedCell>
                                         <connections>
-                                            <action selector="filterWord:" target="bLJ-EC-iia" id="anB-Aw-VTG"/>
+                                            <action selector="speakOrNotChanged:" target="bLJ-EC-iia" id="cDT-AR-fg4"/>
                                         </connections>
                                     </segmentedControl>
-                                    <connections>
-                                        <action selector="speakOrNotChanged:" target="bLJ-EC-iia" id="8Ur-TD-Qtl"/>
-                                    </connections>
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="204078EF-7E69-41FF-85E5-6C280CE4D0D3" label="Filter Type" paletteLabel="Filter Type" sizingBehavior="auto" id="MpB-21-MBj">
                                     <nil key="toolTip"/>
@@ -2673,9 +2658,6 @@ DQ
                                             <action selector="filterWord:" target="bLJ-EC-iia" id="Bfv-e2-JV2"/>
                                         </connections>
                                     </segmentedControl>
-                                    <connections>
-                                        <action selector="filterWord:" target="bLJ-EC-iia" id="8zl-yj-POV"/>
-                                    </connections>
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="4976C7F0-1F81-4F6D-A805-C1C9E447D7F3" label="Filter Text" paletteLabel="Filter Text" tag="-1" id="fRI-C4-MOX">
                                     <nil key="toolTip"/>
@@ -3474,7 +3456,7 @@ DQ
                         <menuItem title="Speak" id="oah-xm-73r" userLabel="Speak">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
-                                <action selector="speak:" target="S5w-0q-IQt" id="cd1-tn-Cag"/>
+                                <action selector="speak:" target="S5w-0q-IQt" id="cwp-5x-5sw"/>
                             </connections>
                         </menuItem>
                     </items>

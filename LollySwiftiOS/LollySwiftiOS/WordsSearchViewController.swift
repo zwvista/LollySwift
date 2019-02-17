@@ -74,5 +74,4 @@ class WordsSearchViewController: UIViewController, WKNavigationDelegate, UISearc
     deinit {
         print("DEBUG: \(self.className) deinit")
     }
-
 }

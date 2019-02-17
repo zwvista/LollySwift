@@ -186,9 +186,6 @@ class WordsUnitViewController: WordsBaseViewController {
         refreshTableView(self)
         super.settingsChanged()
     }
-
-    deinit {
-    }
 }
 
 class WordsUnitWindowController: WordsWindowController {

@@ -123,9 +123,6 @@ class WordsLangViewController: WordsBaseViewController {
         refreshTableView(self)
         super.settingsChanged()
     }
-
-    deinit {
-    }
 }
 
 class WordsLangWindowController: WordsWindowController, NSTextFieldDelegate {

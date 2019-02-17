@@ -48,10 +48,17 @@ class PhrasesBaseViewController: NSViewController, LollyProtocol, NSTableViewDat
     
     @IBAction func speakOrNotChanged(_ sender: Any) {
         speakOrNot = (sender as! NSSegmentedControl).selectedSegment == 1
+        if speakOrNot {
+            speak(self)
+        }
     }
 
     func settingsChanged() {
         synth.setVoice(NSSpeechSynthesizer.VoiceName(rawValue: vmSettings.selectedLang.safeVoice))
+    }
+
+    deinit {
+        print("DEBUG: \(self.className) deinit")
     }
 }
 
@@ -59,6 +66,10 @@ class PhrasesWindowController: NSWindowController, NSTextFieldDelegate {
     
     override func windowDidLoad() {
         super.windowDidLoad()
+    }
+
+    deinit {
+        print("DEBUG: \(self.className) deinit")
     }
 }
 
