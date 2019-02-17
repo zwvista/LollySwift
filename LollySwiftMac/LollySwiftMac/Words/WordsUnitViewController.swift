@@ -181,10 +181,10 @@ class WordsUnitViewController: WordsBaseViewController {
             })
         }
     }
-    
+
     override func settingsChanged() {
-        super.settingsChanged()
         refreshTableView(self)
+        super.settingsChanged()
     }
 
     deinit {

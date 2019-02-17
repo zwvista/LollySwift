@@ -98,8 +98,8 @@ class WordsTextbookViewController: WordsBaseViewController {
     }
 
     override func settingsChanged() {
-        super.settingsChanged()
         refreshTableView(self)
+        super.settingsChanged()
     }
 
     deinit {

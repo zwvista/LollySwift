@@ -23,6 +23,8 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     @objc var newWord = ""
     var selectedWord = ""
     var status = DictWebViewStatus.ready
+    let synth = NSSpeechSynthesizer()
+    var speakOrNot = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,6 +93,9 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     
     func tableViewSelectionDidChange(_ notification: Notification) {
         searchDict(self)
+        if speakOrNot {
+            speak(self)
+        }
     }
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
@@ -121,6 +126,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
 
     func settingsChanged() {
         selectedDictGroupIndex = vmSettings.selectedDictGroupIndex
+        synth.setVoice(NSSpeechSynthesizer.VoiceName(rawValue: vmSettings.selectedLang.safeVoice))
     }
     
     @IBAction func copyWord(_ sender: Any) {
@@ -131,6 +137,14 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
         MacApi.googleString(selectedWord)
     }
     
+    @IBAction func speak(_ sender: Any) {
+        synth.startSpeaking(selectedWord)
+    }
+    
+    @IBAction func speakOrNotChanged(_ sender: Any) {
+        speakOrNot = (sender as! NSSegmentedControl).selectedSegment == 1
+    }
+
     @IBAction func openOnlineDict(_ sender: Any) {
         let item = vmSettings.arrDictsGroup[selectedDictGroupIndex]
         if !item.DICTNAME.starts(with: "Custom") {

@@ -12,10 +12,15 @@ import RxSwift
 @objcMembers
 class MLanguage: NSObject, Codable {
     var ID = 0
+    var VOICE: String? = nil
     var LANGNAME = ""
+    var safeVoice: String {
+        return VOICE ?? ""
+    }
     
     enum CodingKeys : String, CodingKey {
         case ID
+        case VOICE = "APPLE_VOICE"
         case LANGNAME = "NAME"
     }
 

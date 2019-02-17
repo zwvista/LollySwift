@@ -472,6 +472,12 @@
                                 <action selector="openOnlineDict:" target="F8i-pe-Ate" id="Kaf-Ae-HMU"/>
                             </connections>
                         </menuItem>
+                        <menuItem title="Speak" id="HmC-Vr-ske" userLabel="Speak">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="speak:" target="F8i-pe-Ate" id="TQh-he-mQG"/>
+                            </connections>
+                        </menuItem>
                     </items>
                 </menu>
                 <userDefaultsController id="kQx-Qe-nCG"/>
@@ -810,6 +816,26 @@ Gw
                                         <action selector="getNotes:" target="qEo-JS-MYZ" id="Kcn-oV-bEh"/>
                                     </connections>
                                 </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="3BBC0F07-8FEB-430F-9C13-97BD14D9E0F7" label="Speak?" paletteLabel="Speak?" sizingBehavior="auto" id="w7y-7L-dbV" userLabel="Speak?">
+                                    <nil key="toolTip"/>
+                                    <segmentedControl key="view" verticalHuggingPriority="750" id="ff1-f4-NOD">
+                                        <rect key="frame" x="0.0" y="14" width="95" height="23"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="DOT-BS-6lm">
+                                            <font key="font" metaFont="system"/>
+                                            <segments>
+                                                <segment label="Silent" width="42" selected="YES"/>
+                                                <segment label="Speak" width="46" tag="1"/>
+                                            </segments>
+                                        </segmentedCell>
+                                        <connections>
+                                            <action selector="filterWord:" target="qEo-JS-MYZ" id="dxk-D7-XY0"/>
+                                        </connections>
+                                    </segmentedControl>
+                                    <connections>
+                                        <action selector="speakOrNotChanged:" target="qEo-JS-MYZ" id="ggi-cI-vNS"/>
+                                    </connections>
+                                </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="EED7D168-A935-46A4-B535-11EE2FF5F016" label="Dict0" paletteLabel="Dict0" image="NSBookmarksTemplate" selectable="YES" id="DTO-su-5Zg">
                                     <size key="minSize" width="17" height="18"/>
                                     <size key="maxSize" width="17" height="18"/>
@@ -976,6 +1002,7 @@ Gw
                                 <toolbarItem reference="qFb-ob-E6N"/>
                                 <toolbarItem reference="89E-Xj-D8k"/>
                                 <toolbarItem reference="NyL-Gk-l4k"/>
+                                <toolbarItem reference="w7y-7L-dbV"/>
                                 <toolbarItem reference="DTO-su-5Zg"/>
                                 <toolbarItem reference="Bp9-GL-6UU"/>
                                 <toolbarItem reference="RKC-th-dbf"/>
@@ -1413,6 +1440,12 @@ Gw
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
                                 <action selector="openOnlineDict:" target="UkS-Xi-ogF" id="BDO-Az-0N2"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem title="Speak" id="gst-PZ-O5j" userLabel="Speak">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="speak:" target="UkS-Xi-ogF" id="4g2-PY-cR6"/>
                             </connections>
                         </menuItem>
                     </items>
@@ -2527,6 +2560,12 @@ DQ
                                 <action selector="googleWord:" target="UkS-Xi-ogF" id="V6z-Hr-AHZ"/>
                             </connections>
                         </menuItem>
+                        <menuItem title="Speak" id="J4t-wg-ADu" userLabel="Speak">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="speak:" target="ECR-Tq-pby" id="bZS-t5-PKT"/>
+                            </connections>
+                        </menuItem>
                     </items>
                 </menu>
                 <userDefaultsController id="qnH-MI-FLL"/>
@@ -3367,6 +3406,12 @@ DQ
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
                                 <action selector="openOnlineDict:" target="S5w-0q-IQt" id="eOg-id-Guo"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem title="Speak" id="oah-xm-73r" userLabel="Speak">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="speak:" target="S5w-0q-IQt" id="cd1-tn-Cag"/>
                             </connections>
                         </menuItem>
                     </items>
