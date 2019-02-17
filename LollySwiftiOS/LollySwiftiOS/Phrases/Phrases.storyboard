@@ -749,8 +749,38 @@
                         <sections>
                             <tableViewSection id="mvR-2k-gld">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="WdQ-fG-YEP">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="oz5-F4-MQQ">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oz5-F4-MQQ" id="ayY-Gm-vbe">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ID:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RnT-xO-mui">
+                                                    <rect key="frame" x="16" y="14" width="21" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9Vl-jg-nLv">
+                                                    <rect key="frame" x="116" y="10" width="243" height="24"/>
+                                                    <color key="textColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="9Vl-jg-nLv" firstAttribute="trailing" secondItem="ayY-Gm-vbe" secondAttribute="trailingMargin" id="4pL-bN-LJx"/>
+                                                <constraint firstItem="9Vl-jg-nLv" firstAttribute="leading" secondItem="ayY-Gm-vbe" secondAttribute="leadingMargin" constant="100" id="5p3-7K-TVV"/>
+                                                <constraint firstItem="9Vl-jg-nLv" firstAttribute="top" secondItem="ayY-Gm-vbe" secondAttribute="topMargin" constant="-1" id="BVy-Fa-Q2l"/>
+                                                <constraint firstItem="RnT-xO-mui" firstAttribute="leading" secondItem="ayY-Gm-vbe" secondAttribute="leadingMargin" id="WFF-pw-Rmi"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="9Vl-jg-nLv" secondAttribute="bottom" constant="-1" id="vwV-hZ-FpK"/>
+                                                <constraint firstItem="RnT-xO-mui" firstAttribute="top" secondItem="ayY-Gm-vbe" secondAttribute="topMargin" constant="3" id="wno-M8-j44"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="WdQ-fG-YEP">
+                                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WdQ-fG-YEP" id="fjJ-Wt-QkZ">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -776,36 +806,6 @@
                                                 <constraint firstItem="JYe-ut-tYh" firstAttribute="leading" secondItem="fjJ-Wt-QkZ" secondAttribute="leadingMargin" id="me0-Lc-Xgb"/>
                                                 <constraint firstItem="JYe-ut-tYh" firstAttribute="top" secondItem="fjJ-Wt-QkZ" secondAttribute="topMargin" constant="3" id="n5y-qf-CiB"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="hgg-Eg-pos" secondAttribute="bottom" constant="-1" id="tfe-ex-WQD"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="oz5-F4-MQQ">
-                                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oz5-F4-MQQ" id="ayY-Gm-vbe">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ENTRYID:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RnT-xO-mui">
-                                                    <rect key="frame" x="16" y="14" width="74.5" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9Vl-jg-nLv">
-                                                    <rect key="frame" x="116" y="10" width="243" height="24"/>
-                                                    <color key="textColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                </textField>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="9Vl-jg-nLv" firstAttribute="trailing" secondItem="ayY-Gm-vbe" secondAttribute="trailingMargin" id="4pL-bN-LJx"/>
-                                                <constraint firstItem="9Vl-jg-nLv" firstAttribute="leading" secondItem="ayY-Gm-vbe" secondAttribute="leadingMargin" constant="100" id="5p3-7K-TVV"/>
-                                                <constraint firstItem="9Vl-jg-nLv" firstAttribute="top" secondItem="ayY-Gm-vbe" secondAttribute="topMargin" constant="-1" id="BVy-Fa-Q2l"/>
-                                                <constraint firstItem="RnT-xO-mui" firstAttribute="leading" secondItem="ayY-Gm-vbe" secondAttribute="leadingMargin" id="WFF-pw-Rmi"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="9Vl-jg-nLv" secondAttribute="bottom" constant="-1" id="vwV-hZ-FpK"/>
-                                                <constraint firstItem="RnT-xO-mui" firstAttribute="top" secondItem="ayY-Gm-vbe" secondAttribute="topMargin" constant="3" id="wno-M8-j44"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -1018,7 +1018,7 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="tfEntryID" destination="9Vl-jg-nLv" id="TPm-Cf-0sW"/>
+                        <outlet property="tfID" destination="9Vl-jg-nLv" id="TPm-Cf-0sW"/>
                         <outlet property="tfPart" destination="CAy-4h-ybD" id="xjV-mg-WW5"/>
                         <outlet property="tfPhrase" destination="U4W-mG-Ma3" id="TlF-Rc-3u1"/>
                         <outlet property="tfPhraseID" destination="ayc-2m-Nu5" id="mZv-GG-uhR"/>

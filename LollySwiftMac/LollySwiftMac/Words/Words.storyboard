@@ -3166,8 +3166,8 @@ DQ
                                                                         </tableCellView>
                                                                     </prototypeCellViews>
                                                                 </tableColumn>
-                                                                <tableColumn identifier="ENTRYID" width="60" minWidth="60" maxWidth="1000" id="Z9f-nc-Uhr" userLabel="UNITWORDID">
-                                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="ENTRYID">
+                                                                <tableColumn identifier="ID" width="60" minWidth="60" maxWidth="1000" id="Z9f-nc-Uhr">
+                                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="ID">
                                                                         <font key="font" metaFont="smallSystem"/>
                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -3206,7 +3206,7 @@ DQ
                                                                         </tableCellView>
                                                                     </prototypeCellViews>
                                                                 </tableColumn>
-                                                                <tableColumn identifier="ID" width="60" minWidth="60" maxWidth="1000" id="DcW-hH-EZL" userLabel="WORDID">
+                                                                <tableColumn identifier="WORDID" width="60" minWidth="60" maxWidth="1000" id="DcW-hH-EZL">
                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="WORDID">
                                                                         <font key="font" metaFont="smallSystem"/>
                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -3383,9 +3383,31 @@ DQ
                         <rect key="frame" x="0.0" y="0.0" width="318" height="405"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fHA-UN-SID">
+                                <rect key="frame" x="18" y="372" width="21" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="ID:" id="0SP-zY-JF5">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6wx-OY-98L">
+                                <rect key="frame" x="100" y="370" width="200" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="rly-kH-5OX"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" enabled="NO" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="8lD-t3-Nq3">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <connections>
+                                    <binding destination="ISB-iF-Apj" name="value" keyPath="item.ID" id="kaA-Vd-ccX"/>
+                                </connections>
+                            </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RZv-F1-evo">
-                                <rect key="frame" x="18" y="341" width="63" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="ENTRYID:" id="QmC-aM-HS3">
+                                <rect key="frame" x="18" y="341" width="78" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="TEXTBOOK:" id="QmC-aM-HS3">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -3402,7 +3424,7 @@ DQ
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="ISB-iF-Apj" name="value" keyPath="item.ENTRYID" id="Sjy-93-x2M"/>
+                                    <binding destination="ISB-iF-Apj" name="value" keyPath="item.TEXTBOOKNAME" id="iyV-XQ-WXH"/>
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Tek-Zx-KKd">
@@ -3430,14 +3452,6 @@ DQ
                                     <binding destination="ISB-iF-Apj" name="content" keyPath="item.arrUnits" id="KYV-9K-MNg"/>
                                 </connections>
                             </popUpButton>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fHA-UN-SID">
-                                <rect key="frame" x="18" y="372" width="78" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="TEXTBOOK:" id="0SP-zY-JF5">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IKM-SX-uZ3">
                                 <rect key="frame" x="18" y="274" width="41" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="PART:" id="0Sa-8P-u83">
@@ -3601,20 +3615,6 @@ Gw
                                     <binding destination="ISB-iF-Apj" name="value" keyPath="item.LEVEL" id="86O-Yj-j43"/>
                                 </connections>
                             </textField>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6wx-OY-98L">
-                                <rect key="frame" x="100" y="370" width="200" height="22"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="rly-kH-5OX"/>
-                                </constraints>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" enabled="NO" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="8lD-t3-Nq3">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                                <connections>
-                                    <binding destination="ISB-iF-Apj" name="value" keyPath="item.TEXTBOOKNAME" id="bwN-bc-eRm"/>
-                                </connections>
-                            </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MJs-oK-VLb">
                                 <rect key="frame" x="18" y="98" width="51" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="FAMIID:" id="rMe-iU-7Bx">
@@ -3688,12 +3688,12 @@ Gw
                     <connections>
                         <outlet property="pubPart" destination="THN-aV-FaB" id="UFs-6D-qzR"/>
                         <outlet property="pubUnit" destination="6RO-Pu-VuH" id="XXZ-cv-lL9"/>
-                        <outlet property="tfEntryID" destination="das-8D-ivt" id="GRm-rq-3zY"/>
                         <outlet property="tfFamiID" destination="7hC-fZ-x2d" id="KhR-15-SmV"/>
+                        <outlet property="tfID" destination="6wx-OY-98L" id="Yie-Dl-REB"/>
                         <outlet property="tfLevel" destination="blq-6H-lmB" id="3Fb-cC-CtC"/>
                         <outlet property="tfNote" destination="vPv-M4-QEG" id="0Dw-Fz-doZ"/>
                         <outlet property="tfSeqNum" destination="Uud-dl-gMf" id="8jE-ae-GTs"/>
-                        <outlet property="tfTextbookName" destination="6wx-OY-98L" id="O08-i9-b6J"/>
+                        <outlet property="tfTextbookName" destination="das-8D-ivt" id="0s4-xW-jPA"/>
                         <outlet property="tfWord" destination="dD3-iV-eW2" id="hX9-S3-u9C"/>
                         <outlet property="tfWordID" destination="OeD-5G-9DP" id="zyb-r3-ORD"/>
                     </connections>

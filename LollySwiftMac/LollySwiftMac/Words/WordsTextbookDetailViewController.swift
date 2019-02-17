@@ -16,8 +16,8 @@ class WordsTextbookDetailViewController: NSViewController {
     var complete: (() -> Void)?
     var item: MTextbookWord!
 
+    @IBOutlet weak var tfID: NSTextField!
     @IBOutlet weak var tfTextbookName: NSTextField!
-    @IBOutlet weak var tfEntryID: NSTextField!
     @IBOutlet weak var pubUnit: NSPopUpButton!
     @IBOutlet weak var pubPart: NSPopUpButton!
     @IBOutlet weak var tfSeqNum: NSTextField!

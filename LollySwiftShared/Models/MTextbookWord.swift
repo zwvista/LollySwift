@@ -11,10 +11,10 @@ import RxSwift
 
 @objcMembers
 class MTextbookWord: NSObject, Codable {
+    var ID = 0
     var TEXTBOOKID = 0
     var LANGID = 0
     var TEXTBOOKNAME = ""
-    var ENTRYID = 0
     var UNIT = 0
     var PART = 0
     var SEQNUM = 0

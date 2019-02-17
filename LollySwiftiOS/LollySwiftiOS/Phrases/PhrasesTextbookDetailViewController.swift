@@ -13,7 +13,7 @@ import RxSwift
 class PhrasesTextbookDetailViewController: UITableViewController {
     
     @IBOutlet weak var tfTextbookName: UITextField!
-    @IBOutlet weak var tfEntryID: UITextField!
+    @IBOutlet weak var tfID: UITextField!
     @IBOutlet weak var tfUnit: UITextField!
     @IBOutlet weak var tfPart: UITextField!
     @IBOutlet weak var tfSeqNum: UITextField!
@@ -44,8 +44,8 @@ class PhrasesTextbookDetailViewController: UITableViewController {
             self.item.PART = index + 1
             self.tfPart.text = self.item.PARTSTR
         }
+        tfID.text = String(item.ID)
         tfTextbookName.text = item.TEXTBOOKNAME
-        tfEntryID.text = String(item.ENTRYID)
         tfUnit.text = String(item.UNIT)
         tfPart.text = item.PARTSTR
         tfSeqNum.text = String(item.SEQNUM)

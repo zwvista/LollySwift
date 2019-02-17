@@ -1445,8 +1445,8 @@ Gw
                                                         </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
-                                                <tableColumn identifier="ENTRYID" width="60" minWidth="60" maxWidth="1000" id="G3X-dZ-CHx">
-                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="ENTRYID">
+                                                <tableColumn identifier="ID" width="60" minWidth="60" maxWidth="1000" id="G3X-dZ-CHx">
+                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="ID">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -1599,15 +1599,37 @@ Gw
                         <rect key="frame" x="0.0" y="0.0" width="450" height="347"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="T5h-os-9h0">
-                                <rect key="frame" x="18" y="273" width="63" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="ENTRYID:" id="LqC-Fw-Wyi">
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MUb-cd-zBP">
+                                <rect key="frame" x="18" y="307" width="21" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="ID:" id="08z-5x-HFx">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zc3-g2-eS6" userLabel="Tf ID">
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9hG-gu-aZp" userLabel="Tf ID">
+                                <rect key="frame" x="120" y="305" width="300" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="axU-Ey-ABQ"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" enabled="NO" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="rBa-nn-Ipm">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <connections>
+                                    <binding destination="u1Y-qY-rab" name="value" keyPath="item.ID" id="UVn-yz-p3s"/>
+                                </connections>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="T5h-os-9h0">
+                                <rect key="frame" x="18" y="273" width="78" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="TEXTBOOK:" id="LqC-Fw-Wyi">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zc3-g2-eS6">
                                 <rect key="frame" x="120" y="271" width="300" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="93d-3a-mwS"/>
@@ -1618,7 +1640,7 @@ Gw
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="u1Y-qY-rab" name="value" keyPath="item.ENTRYID" id="ccL-gY-hfl"/>
+                                    <binding destination="u1Y-qY-rab" name="value" keyPath="item.TEXTBOOKNAME" id="3eo-6B-NhO"/>
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ebc-II-ver">
@@ -1698,6 +1720,28 @@ Gw
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ng7-0q-3ra">
+                                <rect key="frame" x="18" y="135" width="72" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="PHRASEID:" id="9Du-xS-bIl">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Dq2-G0-SU2">
+                                <rect key="frame" x="120" y="133" width="300" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="2NL-aP-cuz"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" enabled="NO" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="ISk-ce-sDF">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <connections>
+                                    <binding destination="u1Y-qY-rab" name="value" keyPath="item.PHRASEID" id="fD0-jL-Uxy"/>
+                                </connections>
+                            </textField>
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="P1B-dm-Xg1">
                                 <rect key="frame" x="120" y="99" width="300" height="22"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="zBl-uG-yBk">
@@ -1726,50 +1770,6 @@ Gw
                                 </textFieldCell>
                                 <connections>
                                     <binding destination="u1Y-qY-rab" name="value" keyPath="item.TRANSLATION" id="kX8-M0-DO3"/>
-                                </connections>
-                            </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MUb-cd-zBP">
-                                <rect key="frame" x="18" y="307" width="78" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="TEXTBOOK:" id="08z-5x-HFx">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9hG-gu-aZp" userLabel="Tf ID">
-                                <rect key="frame" x="120" y="305" width="300" height="22"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="300" id="axU-Ey-ABQ"/>
-                                </constraints>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" enabled="NO" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="rBa-nn-Ipm">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                                <connections>
-                                    <binding destination="u1Y-qY-rab" name="value" keyPath="item.TEXTBOOKNAME" id="hQK-xr-Fht"/>
-                                </connections>
-                            </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ng7-0q-3ra">
-                                <rect key="frame" x="18" y="135" width="72" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="PHRASEID:" id="9Du-xS-bIl">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Dq2-G0-SU2" userLabel="Tf ID">
-                                <rect key="frame" x="120" y="133" width="300" height="22"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="300" id="2NL-aP-cuz"/>
-                                </constraints>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" enabled="NO" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="ISk-ce-sDF">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                                <connections>
-                                    <binding destination="u1Y-qY-rab" name="value" keyPath="item.PHRASEID" id="fD0-jL-Uxy"/>
                                 </connections>
                             </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ese-H3-3SG">
@@ -1846,11 +1846,11 @@ Gw
                     <connections>
                         <outlet property="pubPart" destination="xwb-hj-8vZ" id="eBf-2w-LQv"/>
                         <outlet property="pubUnit" destination="NMb-kK-xDM" id="KTZ-K8-0YI"/>
-                        <outlet property="tfEntryID" destination="zc3-g2-eS6" id="185-wX-na0"/>
+                        <outlet property="tfID" destination="9hG-gu-aZp" id="T7G-fj-l3W"/>
                         <outlet property="tfPhrase" destination="P1B-dm-Xg1" id="kDu-sA-Qqw"/>
                         <outlet property="tfPhraseID" destination="Dq2-G0-SU2" id="8pC-Q6-QkT"/>
                         <outlet property="tfSeqNum" destination="neA-wl-l5j" id="DnX-RU-pzv"/>
-                        <outlet property="tfTextbookName" destination="9hG-gu-aZp" id="jIO-Er-k7q"/>
+                        <outlet property="tfTextbookName" destination="zc3-g2-eS6" id="1zc-E8-L9Z"/>
                         <outlet property="tfTranslation" destination="0XD-Iu-tBq" id="LcL-nL-CoJ"/>
                     </connections>
                 </viewController>
