@@ -14,6 +14,7 @@ class MTextbookWord: NSObject, Codable {
     var TEXTBOOKID = 0
     var LANGID = 0
     var TEXTBOOKNAME = ""
+    var ENTRYID = 0
     var UNIT = 0
     var PART = 0
     var SEQNUM = 0
@@ -22,7 +23,6 @@ class MTextbookWord: NSObject, Codable {
     var NOTE: String?
     var FAMIID = 0
     var LEVEL = 0
-    var ENTRYID = 0
     var UNITS = 0
     var arrUnits: [String] {
         return (1...UNITS).map { String($0) }
