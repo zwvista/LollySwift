@@ -646,11 +646,32 @@ Gw
                                         <action selector="refreshTableView:" target="qEo-JS-MYZ" id="cMO-nw-rHU"/>
                                     </connections>
                                 </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="B7D0159E-C7DD-4119-9E00-29DF2353D602" label="Speak?" paletteLabel="Speak?" sizingBehavior="auto" id="ap0-qD-kxT" userLabel="Speak?">
+                                    <nil key="toolTip"/>
+                                    <segmentedControl key="view" verticalHuggingPriority="750" id="AEn-9N-szO">
+                                        <rect key="frame" x="0.0" y="14" width="95" height="23"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="Ehk-ih-LX7">
+                                            <font key="font" metaFont="system"/>
+                                            <segments>
+                                                <segment label="Silent" width="42" selected="YES"/>
+                                                <segment label="Speak" width="46" tag="1"/>
+                                            </segments>
+                                        </segmentedCell>
+                                        <connections>
+                                            <action selector="filterWord:" target="qEo-JS-MYZ" id="60K-5k-RLC"/>
+                                        </connections>
+                                    </segmentedControl>
+                                    <connections>
+                                        <action selector="speakOrNotChanged:" target="qEo-JS-MYZ" id="km4-Gs-pBs"/>
+                                    </connections>
+                                </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="aIp-9q-khf"/>
                                 <toolbarItem reference="nkL-IN-AUz"/>
                                 <toolbarItem reference="1c8-U5-Ymh"/>
+                                <toolbarItem reference="ap0-qD-kxT"/>
                             </defaultToolbarItems>
                         </toolbar>
                         <connections>
@@ -1035,6 +1056,26 @@ Gw
                                         <action selector="refreshTableView:" target="maH-dw-yMa" id="hfy-Hy-I9Y"/>
                                     </connections>
                                 </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="FC545E41-F140-4585-9301-4ABFA1480B47" label="Speak?" paletteLabel="Speak?" sizingBehavior="auto" id="G08-Sc-Q2L" userLabel="Speak?">
+                                    <nil key="toolTip"/>
+                                    <segmentedControl key="view" verticalHuggingPriority="750" id="4s3-xV-8Zh">
+                                        <rect key="frame" x="0.0" y="14" width="95" height="23"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="Ayj-vy-V4e">
+                                            <font key="font" metaFont="system"/>
+                                            <segments>
+                                                <segment label="Silent" width="42" selected="YES"/>
+                                                <segment label="Speak" width="46" tag="1"/>
+                                            </segments>
+                                        </segmentedCell>
+                                        <connections>
+                                            <action selector="filterWord:" target="maH-dw-yMa" id="jW3-zO-JNl"/>
+                                        </connections>
+                                    </segmentedControl>
+                                    <connections>
+                                        <action selector="speakOrNotChanged:" target="maH-dw-yMa" id="iYE-Tn-dwl"/>
+                                    </connections>
+                                </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="581A0D8F-3AAA-4D81-8477-CAB2F08905AC" label="Filter Type" paletteLabel="Filter Type" sizingBehavior="auto" id="2ps-sj-xWc">
                                     <nil key="toolTip"/>
                                     <segmentedControl key="view" verticalHuggingPriority="750" id="Bzv-q8-cCh">
@@ -1080,6 +1121,7 @@ Gw
                                 <toolbarItem reference="viz-co-4v0"/>
                                 <toolbarItem reference="Qp0-0S-2WS"/>
                                 <toolbarItem reference="MnR-91-5r0"/>
+                                <toolbarItem reference="G08-Sc-Q2L"/>
                                 <toolbarItem reference="2ps-sj-xWc"/>
                                 <toolbarItem reference="Fkr-PD-fBq"/>
                             </defaultToolbarItems>
@@ -1162,10 +1204,31 @@ Gw
                                         </connections>
                                     </textField>
                                 </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="99E14998-5CDE-4EC1-B3D0-685AEF38835F" label="Speak?" paletteLabel="Speak?" sizingBehavior="auto" id="804-ZN-kkM" userLabel="Speak?">
+                                    <nil key="toolTip"/>
+                                    <segmentedControl key="view" verticalHuggingPriority="750" id="B9p-kU-Vrg">
+                                        <rect key="frame" x="0.0" y="14" width="95" height="23"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="80n-DU-n4X">
+                                            <font key="font" metaFont="system"/>
+                                            <segments>
+                                                <segment label="Silent" width="42" selected="YES"/>
+                                                <segment label="Speak" width="46" tag="1"/>
+                                            </segments>
+                                        </segmentedCell>
+                                        <connections>
+                                            <action selector="filterWord:" target="2fr-uc-31Q" id="ORL-Xw-WkC"/>
+                                        </connections>
+                                    </segmentedControl>
+                                    <connections>
+                                        <action selector="speakOrNotChanged:" target="2fr-uc-31Q" id="iQm-CP-wAL"/>
+                                    </connections>
+                                </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="j5l-RK-ED6"/>
                                 <toolbarItem reference="h2r-td-4Tz"/>
+                                <toolbarItem reference="804-ZN-kkM"/>
                                 <toolbarItem reference="Kkp-cO-oL0"/>
                                 <toolbarItem reference="vI1-gZ-xAA"/>
                             </defaultToolbarItems>

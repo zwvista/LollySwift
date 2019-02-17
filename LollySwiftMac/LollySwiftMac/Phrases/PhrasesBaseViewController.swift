@@ -15,8 +15,43 @@ class PhrasesBaseViewController: NSViewController, LollyProtocol, NSTableViewDat
     @IBOutlet weak var tableView: NSTableView!
 
     let disposeBag = DisposeBag()
+    var selectedPhrase = ""
+    let synth = NSSpeechSynthesizer()
+    var speakOrNot = false
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        settingsChanged()
+    }
+
+    func tableViewSelectionDidChange(_ notification: Notification) {
+        selectedPhraseChanged()
+        if speakOrNot {
+            speak(self)
+        }
+    }
+    
+    func selectedPhraseChanged() {
+    }
+    
+    @IBAction func copyPhrase(_ sender: Any) {
+        MacApi.copyText(selectedPhrase)
+    }
+    
+    @IBAction func googlePhrase(_ sender: Any) {
+        MacApi.googleString(selectedPhrase)
+    }
+
+    @IBAction func speak(_ sender: Any) {
+        synth.startSpeaking(selectedPhrase)
+    }
+    
+    @IBAction func speakOrNotChanged(_ sender: Any) {
+        speakOrNot = (sender as! NSSegmentedControl).selectedSegment == 1
+    }
 
     func settingsChanged() {
+        synth.setVoice(NSSpeechSynthesizer.VoiceName(rawValue: vmSettings.selectedLang.safeVoice))
     }
 }
 

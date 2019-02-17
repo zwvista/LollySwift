@@ -138,18 +138,13 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
         self.presentAsModalWindow(detailVC)
     }
     
-    @IBAction func copyPhrase(_ sender: Any) {
-        let item = vm.arrPhrases[tableView.selectedRow]
-        MacApi.copyText(item.PHRASE)
-    }
-    
-    @IBAction func googlePhrase(_ sender: Any) {
-        let item = vm.arrPhrases[tableView.selectedRow]
-        MacApi.googleString(item.PHRASE)
+    override func selectedPhraseChanged() {
+        selectedPhrase = vm.arrPhrases[tableView.selectedRow].PHRASE
     }
     
     override func settingsChanged() {
         refreshTableView(self)
+        super.settingsChanged()
     }
 }
 

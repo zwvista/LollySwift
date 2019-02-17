@@ -83,14 +83,8 @@ class PhrasesLangViewController: PhrasesBaseViewController {
         self.presentAsModalWindow(detailVC)
     }
     
-    @IBAction func copyPhrase(_ sender: Any) {
-        let item = vm.arrPhrases[tableView.selectedRow]
-        MacApi.copyText(item.PHRASE)
-    }
-    
-    @IBAction func googlePhrase(_ sender: Any) {
-        let item = vm.arrPhrases[tableView.selectedRow]
-        MacApi.googleString(item.PHRASE)
+    override func selectedPhraseChanged() {
+        selectedPhrase = vm.arrPhrases[tableView.selectedRow].PHRASE
     }
     
     @IBAction func filterPhrase(_ sender: Any) {
@@ -106,6 +100,7 @@ class PhrasesLangViewController: PhrasesBaseViewController {
     
     override func settingsChanged() {
         refreshTableView(self)
+        super.settingsChanged()
     }
 }
 

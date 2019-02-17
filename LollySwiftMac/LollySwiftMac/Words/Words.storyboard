@@ -1481,6 +1481,26 @@ Gw
                                         <action selector="refreshTableView:" target="C0L-6x-tvV" id="VJh-ZY-YRC"/>
                                     </connections>
                                 </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="65877E8A-4AAD-4354-B4BA-E4E04305BC3D" label="Speak?" paletteLabel="Speak?" sizingBehavior="auto" id="rW9-wQ-RNo" userLabel="Speak?">
+                                    <nil key="toolTip"/>
+                                    <segmentedControl key="view" verticalHuggingPriority="750" id="Onj-4Z-6Vc">
+                                        <rect key="frame" x="0.0" y="14" width="95" height="23"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="ON5-TD-Kmz">
+                                            <font key="font" metaFont="system"/>
+                                            <segments>
+                                                <segment label="Silent" width="42" selected="YES"/>
+                                                <segment label="Speak" width="46" tag="1"/>
+                                            </segments>
+                                        </segmentedCell>
+                                        <connections>
+                                            <action selector="filterWord:" target="C0L-6x-tvV" id="Ki5-cc-RCO"/>
+                                        </connections>
+                                    </segmentedControl>
+                                    <connections>
+                                        <action selector="speakOrNotChanged:" target="C0L-6x-tvV" id="sya-bW-A1W"/>
+                                    </connections>
+                                </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="A284A409-7D3E-4ECA-A699-E50D269B193B" label="Filter Type" paletteLabel="Filter Type" sizingBehavior="auto" id="Tbn-JT-Yey">
                                     <nil key="toolTip"/>
                                     <segmentedControl key="view" verticalHuggingPriority="750" id="3Q6-8G-XTS">
@@ -1684,6 +1704,7 @@ Gw
                                 <toolbarItem reference="9i9-9O-hzD"/>
                                 <toolbarItem reference="WeY-7Q-yTj"/>
                                 <toolbarItem reference="hQG-W0-fgC"/>
+                                <toolbarItem reference="rW9-wQ-RNo"/>
                                 <toolbarItem reference="Tbn-JT-Yey"/>
                                 <toolbarItem reference="Zrq-nR-sEd"/>
                                 <toolbarItem reference="fGn-gK-zZ3"/>
@@ -1993,6 +2014,26 @@ DQ
                                         <action selector="refreshTableView:" target="sbS-6A-eLA" id="I7o-34-hGi"/>
                                     </connections>
                                 </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="AED05BB5-D1F5-4C88-8276-BCB3763762C7" label="Speak?" paletteLabel="Speak?" sizingBehavior="auto" id="wfB-Vc-2Uu" userLabel="Speak?">
+                                    <nil key="toolTip"/>
+                                    <segmentedControl key="view" verticalHuggingPriority="750" id="vB5-1Z-nGE">
+                                        <rect key="frame" x="0.0" y="14" width="95" height="23"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="X5S-3j-nWT">
+                                            <font key="font" metaFont="system"/>
+                                            <segments>
+                                                <segment label="Silent" width="42" selected="YES"/>
+                                                <segment label="Speak" width="46" tag="1"/>
+                                            </segments>
+                                        </segmentedCell>
+                                        <connections>
+                                            <action selector="filterWord:" target="sbS-6A-eLA" id="Uee-oz-Gvy"/>
+                                        </connections>
+                                    </segmentedControl>
+                                    <connections>
+                                        <action selector="speakOrNotChanged:" target="sbS-6A-eLA" id="wDp-Uh-T8F"/>
+                                    </connections>
+                                </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="D497B009-58E7-43B0-A2C8-494B605D2B63" label="Dict0" paletteLabel="Dict0" image="NSBookmarksTemplate" selectable="YES" id="Wxm-R9-OkX">
                                     <size key="minSize" width="17" height="18"/>
                                     <size key="maxSize" width="17" height="18"/>
@@ -2157,6 +2198,7 @@ DQ
                             <defaultToolbarItems>
                                 <toolbarItem reference="4eZ-ad-jLC"/>
                                 <toolbarItem reference="BYI-RE-anA"/>
+                                <toolbarItem reference="wfB-Vc-2Uu"/>
                                 <toolbarItem reference="Wxm-R9-OkX"/>
                                 <toolbarItem reference="VWX-v3-wA2"/>
                                 <toolbarItem reference="uGR-qA-kIb"/>
@@ -2595,6 +2637,26 @@ DQ
                                     </connections>
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="D15C6E72-5923-4A28-B478-0FBD603820ED" label="Notes" paletteLabel="Notes" tag="-1" image="NSInfo" id="fz0-Vb-TNs"/>
+                                <toolbarItem implicitItemIdentifier="FE45CC49-CB22-40E6-9294-4CCBDBA58070" label="Speak?" paletteLabel="Speak?" sizingBehavior="auto" id="7wb-ee-G6V" userLabel="Speak?">
+                                    <nil key="toolTip"/>
+                                    <segmentedControl key="view" verticalHuggingPriority="750" id="9yz-fM-MN3">
+                                        <rect key="frame" x="0.0" y="14" width="95" height="23"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="q1s-rf-Wqe">
+                                            <font key="font" metaFont="system"/>
+                                            <segments>
+                                                <segment label="Silent" width="42" selected="YES"/>
+                                                <segment label="Speak" width="46" tag="1"/>
+                                            </segments>
+                                        </segmentedCell>
+                                        <connections>
+                                            <action selector="filterWord:" target="bLJ-EC-iia" id="anB-Aw-VTG"/>
+                                        </connections>
+                                    </segmentedControl>
+                                    <connections>
+                                        <action selector="speakOrNotChanged:" target="bLJ-EC-iia" id="8Ur-TD-Qtl"/>
+                                    </connections>
+                                </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="204078EF-7E69-41FF-85E5-6C280CE4D0D3" label="Filter Type" paletteLabel="Filter Type" sizingBehavior="auto" id="MpB-21-MBj">
                                     <nil key="toolTip"/>
                                     <segmentedControl key="view" verticalHuggingPriority="750" id="Di7-Xz-xhN">
@@ -2798,6 +2860,7 @@ DQ
                                 <toolbarItem reference="Gw3-Q0-iwp"/>
                                 <toolbarItem reference="yQv-Z3-dpb"/>
                                 <toolbarItem reference="fz0-Vb-TNs"/>
+                                <toolbarItem reference="7wb-ee-G6V"/>
                                 <toolbarItem reference="MpB-21-MBj"/>
                                 <toolbarItem reference="fRI-C4-MOX"/>
                                 <toolbarItem reference="4dX-Ey-E42"/>
