@@ -62,7 +62,7 @@ class PhrasesBaseViewController: NSViewController, LollyProtocol, NSTableViewDat
     }
 }
 
-class PhrasesWindowController: NSWindowController, NSTextFieldDelegate {
+class PhrasesBaseWindowController: NSWindowController, NSTextFieldDelegate {
     
     override func windowDidLoad() {
         super.windowDidLoad()

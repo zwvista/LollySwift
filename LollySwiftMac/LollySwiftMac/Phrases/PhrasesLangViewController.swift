@@ -104,7 +104,7 @@ class PhrasesLangViewController: PhrasesBaseViewController {
     }
 }
 
-class PhrasesLangWindowController: NSWindowController, NSTextFieldDelegate {
+class PhrasesLangWindowController: PhrasesBaseWindowController {
     @IBOutlet weak var scFilter: NSSegmentedControl!
     @IBOutlet weak var tfFilterText: NSTextField!
     @objc var filterText = ""

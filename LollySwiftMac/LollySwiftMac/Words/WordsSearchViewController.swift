@@ -78,5 +78,5 @@ class WordsSearchViewController: WordsBaseViewController {
     }
 }
 
-class WordsSearchWindowController: WordsWindowController {
+class WordsSearchWindowController: WordsBaseWindowController {
 }

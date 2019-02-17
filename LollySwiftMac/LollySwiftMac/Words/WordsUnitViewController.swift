@@ -188,5 +188,5 @@ class WordsUnitViewController: WordsBaseViewController {
     }
 }
 
-class WordsUnitWindowController: WordsWindowController {
+class WordsUnitWindowController: WordsBaseWindowController {
 }

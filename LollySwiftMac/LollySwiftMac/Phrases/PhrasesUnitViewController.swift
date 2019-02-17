@@ -148,5 +148,5 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
     }
 }
 
-class PhrasesUnitWindowController: NSWindowController {
+class PhrasesUnitWindowController: PhrasesBaseWindowController {
 }

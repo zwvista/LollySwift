@@ -97,7 +97,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
     }
 }
 
-class PhrasesTextbookWindowController: NSWindowController, NSTextFieldDelegate {
+class PhrasesTextbookWindowController: PhrasesBaseWindowController {
     @IBOutlet weak var scFilter: NSSegmentedControl!
     @IBOutlet weak var tfFilterText: NSTextField!
     @objc var filterText = ""

@@ -30,8 +30,15 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
         settingsChanged()
     }
     
+    // Prenvent the window controller from being released
+    // The window controller's settingsChanged method needs to be called in SettingsViewController.close
+    var wc: WordsBaseWindowController!
     override func viewDidAppear() {
         super.viewDidAppear()
+        wc = view.window!.windowController as? WordsBaseWindowController
+    }
+    override func viewWillDisappear() {
+        wc = nil
     }
     
     func controlTextDidEndEditing(_ obj: Notification) {
@@ -160,7 +167,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     }
 }
 
-class WordsWindowController: NSWindowController, NSToolbarDelegate, LollyProtocol, NSWindowDelegate {
+class WordsBaseWindowController: NSWindowController, NSToolbarDelegate, LollyProtocol, NSWindowDelegate {
     
     @IBOutlet weak var toolbar: NSToolbar!
     // Outlet collections have been implemented for iOS, but not in Cocoa

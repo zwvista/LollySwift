@@ -125,7 +125,7 @@ class WordsLangViewController: WordsBaseViewController {
     }
 }
 
-class WordsLangWindowController: WordsWindowController, NSTextFieldDelegate {
+class WordsLangWindowController: WordsBaseWindowController, NSTextFieldDelegate {
     @IBOutlet weak var scFilter: NSSegmentedControl!
     @IBOutlet weak var tfFilterText: NSTextField!
     @objc var filterText = ""
