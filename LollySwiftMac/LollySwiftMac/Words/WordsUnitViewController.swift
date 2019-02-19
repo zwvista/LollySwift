@@ -46,6 +46,16 @@ class WordsUnitViewController: WordsBaseViewController {
         return cell;
     }
     
+    override func levelForRow(row: Int) -> Int {
+        return arrWords[row].LEVEL
+    }
+
+    override func levelChanged(by delta: Int, row: Int) -> Observable<()> {
+        let item = arrWords[row]
+        item.LEVEL += delta
+        return MWordFami.update(wordid: item.WORDID, level: item.LEVEL)
+    }
+
     func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
         let item = NSPasteboardItem()
         item.setString(String(row), forType: tableRowDragType)

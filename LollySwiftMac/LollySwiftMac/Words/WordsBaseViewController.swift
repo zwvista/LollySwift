@@ -51,6 +51,16 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
         addNewWord()
     }
     
+    func levelForRow(row: Int) -> Int {
+        return 0
+    }
+    
+    // https://stackoverflow.com/questions/10910779/coloring-rows-in-view-based-nstableview
+    func tableView(_ tableView: NSTableView, didAdd rowView: NSTableRowView, forRow row: Int) {
+        let level = levelForRow(row: row)
+        rowView.backgroundColor = level > 0 ? .yellow : level < 0 ? .gray : .white
+    }
+
     @IBAction func searchNewWord(_ sender: AnyObject) {
         commitEditing()
         guard !newWord.isEmpty else {return}
@@ -121,6 +131,26 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     
     @IBAction func addNewWord(_ sender: Any) {
         addNewWord()
+    }
+
+    func levelChanged(by delta: Int, row: Int) -> Observable<()> {
+        return Observable.empty()
+    }
+    
+    private func changeLevel(by delta: Int) {
+        let row = tableView.selectedRow
+        guard row != -1 else {return}
+        levelChanged(by: delta, row: row).subscribe {
+            self.tableView.reloadData()
+        }.disposed(by: disposeBag)
+    }
+
+    @IBAction func increaseLevel(_ sender: Any) {
+        changeLevel(by: 1)
+    }
+    
+    @IBAction func decreaseLevel(_ sender: Any) {
+        changeLevel(by: -1)
     }
 
     func addNewWord() {

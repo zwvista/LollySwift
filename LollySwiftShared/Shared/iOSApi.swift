@@ -7,8 +7,12 @@
 //
 
 import UIKit
+import AVFoundation
 
 class iOSApi {
+    static let synth = AVSpeechSynthesizer()
+    static let utterance = AVSpeechUtterance()
+    
     static func copyText(_ text: String) {
         UIPasteboard.general.string = text
     }

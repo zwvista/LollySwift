@@ -32,7 +32,9 @@ class SettingsViewController: NSViewController {
     @IBOutlet weak var pubPartFrom: NSPopUpButton!
     @IBOutlet weak var pubPartTo: NSPopUpButton!
     @IBOutlet weak var btnUnitPartTo: NSButton!
-    
+    @IBOutlet weak var btnPrevious: NSButton!
+    @IBOutlet weak var btnNext: NSButton!
+
     let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
@@ -86,6 +88,8 @@ class SettingsViewController: NSViewController {
         let b = btnUnitPartTo.state == .on
         pubUnitTo.isEnabled = b
         pubPartTo.isEnabled = b
+        btnPrevious.isEnabled = !b
+        btnNext.isEnabled = !b
         if sender !== self && !b {updateUnitPartTo()}
     }
     
@@ -119,6 +123,46 @@ class SettingsViewController: NSViewController {
         vm.updatePartTo().subscribe {
             if self.vm.isInvalidUnitPart {self.updateUnitPartFrom()}
         }.disposed(by: disposeBag)
+    }
+    
+    @IBAction func previousUnitPart(_ sender: AnyObject) {
+        if vm.USPARTFROM > 1 {
+            vm.USPARTFROM -= 1
+            vm.updatePartFrom().subscribe {
+                self.pubPartFrom.selectItem(at: self.vm.USPARTFROM - 1)
+                self.updateUnitPartTo()
+            }.disposed(by: disposeBag)
+        } else if vm.USUNITFROM > 1 {
+            vm.USUNITFROM -= 1
+            vm.USPARTFROM = vm.arrParts.count
+            vm.updateUnitFrom().flatMap {
+                self.vm.updatePartFrom()
+            }.subscribe {
+                self.pubUnitFrom.selectItem(at: self.vm.USUNITFROM - 1)
+                self.pubPartFrom.selectItem(at: self.vm.USPARTFROM - 1)
+                self.updateUnitPartTo()
+            }.disposed(by: disposeBag)
+        }
+    }
+
+    @IBAction func nextUnitPart(_ sender: AnyObject) {
+        if vm.USPARTFROM < vm.arrParts.count {
+            vm.USPARTFROM += 1
+            vm.updatePartFrom().subscribe {
+                self.pubPartFrom.selectItem(at: self.vm.USPARTFROM - 1)
+                self.updateUnitPartTo()
+            }.disposed(by: disposeBag)
+        } else if vm.USUNITFROM < vm.arrUnits.count {
+            vm.USUNITFROM += 1
+            vm.USPARTFROM = 1
+            vm.updateUnitFrom().flatMap {
+                self.vm.updatePartFrom()
+            }.subscribe {
+                self.pubUnitFrom.selectItem(at: self.vm.USUNITFROM - 1)
+                self.pubPartFrom.selectItem(at: self.vm.USPARTFROM - 1)
+                self.updateUnitPartTo()
+            }.disposed(by: disposeBag)
+        }
     }
 
     func updateLang() {

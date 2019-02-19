@@ -41,6 +41,16 @@ class WordsLangViewController: WordsBaseViewController {
         return cell;
     }
     
+    override func levelForRow(row: Int) -> Int {
+        return arrWords[row].LEVEL
+    }
+    
+    override func levelChanged(by delta: Int, row: Int) -> Observable<()> {
+        let item = arrWords[row]
+        item.LEVEL += delta
+        return MWordFami.update(wordid: item.ID, level: item.LEVEL)
+    }
+
     @IBAction func endEditing(_ sender: NSTextField) {
         let row = tableView.row(for: sender)
         let col = tableView.column(for: sender)
