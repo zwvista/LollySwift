@@ -26,7 +26,9 @@ class SettingsViewController: UITableViewController {
     @IBOutlet weak var lblPartTo: UILabel!
     @IBOutlet weak var lblUnitToTitle: UILabel!
     @IBOutlet weak var lblPartToTitle: UILabel!
-    
+    @IBOutlet weak var btnPrevious: UIButton!
+    @IBOutlet weak var btnNext: UIButton!
+
     let ddLang = DropDown()
     let ddDictGroup = DropDown()
     let ddDictNote = DropDown()
@@ -214,12 +216,14 @@ class SettingsViewController: UITableViewController {
         if vm.USUNITFROM != vm.USUNITTO {
             vm.USUNITFROM = vm.USUNITTO
             vm.updateUnitFrom().subscribe {
+                self.ddUnitFrom.selectIndex(self.ddUnitTo.indexForSelectedRow!)
                 self.lblUnitFrom.text = self.lblUnitTo.text
             }.disposed(by: disposeBag)
         }
         if vm.USPARTFROM != vm.USPARTTO {
             vm.USPARTFROM = vm.USPARTTO
             vm.updatePartFrom().subscribe {
+                self.ddPartFrom.selectIndex(self.ddPartTo.indexForSelectedRow!)
                 self.lblPartFrom.text = self.lblPartTo.text
             }.disposed(by: disposeBag)
         }
@@ -229,12 +233,14 @@ class SettingsViewController: UITableViewController {
         if vm.USUNITTO != vm.USUNITFROM {
             vm.USUNITTO = vm.USUNITFROM
             vm.updateUnitTo().subscribe {
+                self.ddUnitTo.selectIndex(self.ddUnitFrom.indexForSelectedRow!)
                 self.lblUnitTo.text = self.lblUnitFrom.text
             }.disposed(by: disposeBag)
         }
         if vm.USPARTTO != vm.USPARTFROM {
             vm.USPARTTO = vm.USPARTFROM
             vm.updatePartTo().subscribe {
+                self.ddPartTo.selectIndex(self.ddPartFrom.indexForSelectedRow!)
                 self.lblPartTo.text = self.lblPartFrom.text
             }.disposed(by: disposeBag)
         }
@@ -246,9 +252,57 @@ class SettingsViewController: UITableViewController {
         lblPartTo.isEnabled = b
         lblUnitToTitle.isEnabled = b
         lblPartToTitle.isEnabled = b
+        btnPrevious.isEnabled = !b
+        btnNext.isEnabled = !b
         if sender !== self && !b {updateUnitPartTo()}
     }
     
+    @IBAction func previousUnitPart(_ sender: AnyObject) {
+        if vm.USPARTFROM > 1 {
+            vm.USPARTFROM -= 1
+            vm.updatePartFrom().subscribe {
+                self.ddPartFrom.selectIndex(self.vm.USPARTFROM - 1)
+                self.lblPartFrom.text = self.ddPartFrom.selectedItem
+                self.updateUnitPartTo()
+            }.disposed(by: disposeBag)
+        } else if vm.USUNITFROM > 1 {
+            vm.USUNITFROM -= 1
+            vm.USPARTFROM = vm.arrParts.count
+            vm.updateUnitFrom().flatMap {
+                self.vm.updatePartFrom()
+            }.subscribe {
+                self.ddUnitFrom.selectIndex(self.vm.USUNITFROM - 1)
+                self.ddPartFrom.selectIndex(self.vm.USPARTFROM - 1)
+                self.lblUnitFrom.text = self.ddUnitFrom.selectedItem
+                self.lblPartFrom.text = self.ddPartFrom.selectedItem
+                self.updateUnitPartTo()
+            }.disposed(by: disposeBag)
+        }
+    }
+    
+    @IBAction func nextUnitPart(_ sender: AnyObject) {
+        if vm.USPARTFROM < vm.arrParts.count {
+            vm.USPARTFROM += 1
+            vm.updatePartFrom().subscribe {
+                self.ddPartFrom.selectIndex(self.vm.USPARTFROM - 1)
+                self.lblPartFrom.text = self.ddPartFrom.selectedItem
+                self.updateUnitPartTo()
+            }.disposed(by: disposeBag)
+        } else if vm.USUNITFROM < vm.arrUnits.count {
+            vm.USUNITFROM += 1
+            vm.USPARTFROM = 1
+            vm.updateUnitFrom().flatMap {
+                self.vm.updatePartFrom()
+            }.subscribe {
+                self.ddUnitFrom.selectIndex(self.vm.USUNITFROM - 1)
+                self.ddPartFrom.selectIndex(self.vm.USPARTFROM - 1)
+                self.lblUnitFrom.text = self.ddUnitFrom.selectedItem
+                self.lblPartFrom.text = self.ddPartFrom.selectedItem
+                self.updateUnitPartTo()
+            }.disposed(by: disposeBag)
+        }
+    }
+
     deinit {
         print("DEBUG: \(self.className) deinit")
     }

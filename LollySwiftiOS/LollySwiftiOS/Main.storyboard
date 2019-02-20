@@ -237,6 +237,24 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nhD-RQ-TC9">
+                                                    <rect key="frame" x="102.5" y="5" width="70" height="34"/>
+                                                    <state key="normal" title="Previous">
+                                                        <color key="titleColor" red="1" green="0.2527923882" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="previousUnitPart:" destination="gTE-sX-TI7" eventType="touchUpInside" id="w2M-1e-f8m"/>
+                                                    </connections>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qxR-1m-hkL">
+                                                    <rect key="frame" x="218.5" y="5" width="38" height="34"/>
+                                                    <state key="normal" title="Next">
+                                                        <color key="titleColor" red="1" green="0.2527923882" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="nextUnitPart:" destination="gTE-sX-TI7" eventType="touchUpInside" id="m8L-iH-CcZ"/>
+                                                    </connections>
+                                                </button>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kne-1O-BIw">
                                                     <rect key="frame" x="303" y="6.5" width="51" height="31"/>
                                                     <connections>
@@ -252,9 +270,13 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="dl8-cn-eKl" firstAttribute="leading" secondItem="igc-Jy-Ooc" secondAttribute="leadingMargin" constant="7" id="4OO-dn-DLv"/>
+                                                <constraint firstItem="qxR-1m-hkL" firstAttribute="centerY" secondItem="igc-Jy-Ooc" secondAttribute="centerY" id="Gwf-Qi-vJD"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="Kne-1O-BIw" secondAttribute="trailing" constant="7" id="MaQ-oG-u5i"/>
+                                                <constraint firstItem="qxR-1m-hkL" firstAttribute="centerX" secondItem="igc-Jy-Ooc" secondAttribute="centerX" constant="50" id="bjD-O1-0Qz"/>
+                                                <constraint firstItem="nhD-RQ-TC9" firstAttribute="centerX" secondItem="igc-Jy-Ooc" secondAttribute="centerX" constant="-50" id="jlV-ee-uJG"/>
                                                 <constraint firstItem="Kne-1O-BIw" firstAttribute="centerY" secondItem="dl8-cn-eKl" secondAttribute="centerY" id="k7q-fX-2vB"/>
                                                 <constraint firstItem="Kne-1O-BIw" firstAttribute="centerY" secondItem="igc-Jy-Ooc" secondAttribute="centerY" id="kFs-p5-z6O"/>
+                                                <constraint firstItem="nhD-RQ-TC9" firstAttribute="centerY" secondItem="igc-Jy-Ooc" secondAttribute="centerY" id="kmt-mC-t3g"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -326,6 +348,8 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="btnNext" destination="qxR-1m-hkL" id="Jhi-gD-qtv"/>
+                        <outlet property="btnPrevious" destination="nhD-RQ-TC9" id="fpr-YS-ORA"/>
                         <outlet property="dictGroupCell" destination="Fwx-mp-CFd" id="fka-5S-txs"/>
                         <outlet property="dictNoteCell" destination="NQn-Gn-Eyq" id="6j7-M9-6XU"/>
                         <outlet property="langCell" destination="O2T-aL-iGS" id="tdb-qa-jR3"/>

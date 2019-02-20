@@ -8,6 +8,7 @@
 
 import Foundation
 import WebKit
+import DropDown
 
 extension UIViewController {
     func yesNoAction(title: String?, message: String?, yesHandler: @escaping (UIAlertAction) -> (), noHandler: @escaping (UIAlertAction) -> ()) {
@@ -35,5 +36,12 @@ extension UIViewController {
         wkWebView.leadingAnchor.constraint(equalTo: webViewHolder.leadingAnchor, constant: 0.0).isActive = true
         wkWebView.trailingAnchor.constraint(equalTo: webViewHolder.trailingAnchor, constant: 0.0).isActive = true
         return wkWebView
+    }
+}
+
+extension DropDown {
+    func selectIndex(_ index: Int) {
+        clearSelection()
+        selectRow(index)
     }
 }
