@@ -36,7 +36,7 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "WordCell", for: indexPath) as! WordsUnitCell
         let item = arrWords[indexPath.row]
-        cell.lblUnitPartSeqNum!.text = item.UNITPARTSEQNUM(arrParts: vmSettings.arrParts)
+        cell.lblUnitPartSeqNum!.text = item.UNITPARTSEQNUM(arrUnits: vmSettings.arrUnits, arrParts: vmSettings.arrParts)
         cell.lblWordNote!.text = item.WORDNOTE
         return cell;
     }

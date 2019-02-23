@@ -53,7 +53,7 @@
 		953473E21A0D16CF00FF2D56 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 953473E11A0D16CF00FF2D56 /* Images.xcassets */; };
 		953473E51A0D16CF00FF2D56 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 953473E31A0D16CF00FF2D56 /* LaunchScreen.xib */; };
 		953473F11A0D16CF00FF2D56 /* LollySwiftiOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953473F01A0D16CF00FF2D56 /* LollySwiftiOSTests.swift */; };
-		954B8706218DC007007DC348 /* DictWebViewStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954B8705218DC007007DC348 /* DictWebViewStatus.swift */; };
+		954B8706218DC007007DC348 /* CommonApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954B8705218DC007007DC348 /* CommonApi.swift */; };
 		954D8B85214389D700651A80 /* PhrasesLangViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C316575207676CF0015C247 /* PhrasesLangViewModel.swift */; };
 		954D8B86214389D700651A80 /* PhrasesUnitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C316576207676CF0015C247 /* PhrasesUnitViewModel.swift */; };
 		954D8B87214389D700651A80 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9471A42081B02F00D040E0 /* SearchViewModel.swift */; };
@@ -86,6 +86,7 @@
 		95EFF481218419E10094EE3C /* MAutoCorrect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EFF480218419E00094EE3C /* MAutoCorrect.swift */; };
 		95EFF48221841BA40094EE3C /* MAutoCorrect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EFF480218419E00094EE3C /* MAutoCorrect.swift */; };
 		95F9860B2218A639007225D4 /* MWordFami.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CED3C62216C0680094622F /* MWordFami.swift */; };
+		95FBF5342221A85100AE040C /* CommonApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954B8705218DC007007DC348 /* CommonApi.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -163,7 +164,7 @@
 		953473EA1A0D16CF00FF2D56 /* LollySwiftiOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LollySwiftiOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		953473EF1A0D16CF00FF2D56 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		953473F01A0D16CF00FF2D56 /* LollySwiftiOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LollySwiftiOSTests.swift; sourceTree = "<group>"; };
-		954B8705218DC007007DC348 /* DictWebViewStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictWebViewStatus.swift; sourceTree = "<group>"; };
+		954B8705218DC007007DC348 /* CommonApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonApi.swift; sourceTree = "<group>"; };
 		95CED3B3221170C20094622F /* iOSApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSApi.swift; sourceTree = "<group>"; };
 		95CED3BA221597A90094622F /* MTextbookPhrase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTextbookPhrase.swift; sourceTree = "<group>"; };
 		95CED3C022159C040094622F /* PhrasesTextbookViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesTextbookViewModel.swift; sourceTree = "<group>"; };
@@ -240,7 +241,7 @@
 		8C316578207676CF0015C247 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				954B8705218DC007007DC348 /* DictWebViewStatus.swift */,
+				954B8705218DC007007DC348 /* CommonApi.swift */,
 				8C31657A207676CF0015C247 /* HtmlApi.swift */,
 				95CED3B3221170C20094622F /* iOSApi.swift */,
 				8C316579207676CF0015C247 /* RestApi.swift */,
@@ -601,7 +602,7 @@
 				8C316586207676CF0015C247 /* SettingsViewModel.swift in Sources */,
 				8CD16D201D69FE8F00F5F625 /* PhrasesLangDetailViewController.swift in Sources */,
 				8C316593207676CF0015C247 /* MLangPhrase.swift in Sources */,
-				954B8706218DC007007DC348 /* DictWebViewStatus.swift in Sources */,
+				954B8706218DC007007DC348 /* CommonApi.swift in Sources */,
 				8C31658E207676CF0015C247 /* MDictionary.swift in Sources */,
 				95CED3B4221170C20094622F /* iOSApi.swift in Sources */,
 				8C0748E7209ED0DA0006BD1B /* RxCodableAlamofire.swift in Sources */,
@@ -664,6 +665,7 @@
 				954D8B90214389DE00651A80 /* MLangPhrase.swift in Sources */,
 				95CED3C82216C0D40094622F /* MTextbookPhrase.swift in Sources */,
 				954D8B97214389DE00651A80 /* MUserSetting.swift in Sources */,
+				95FBF5342221A85100AE040C /* CommonApi.swift in Sources */,
 				954D8B96214389DE00651A80 /* MUnitWord.swift in Sources */,
 				954D8B85214389D700651A80 /* PhrasesLangViewModel.swift in Sources */,
 				954D8B87214389D700651A80 /* SearchViewModel.swift in Sources */,

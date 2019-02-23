@@ -172,8 +172,9 @@ class SettingsViewModel: NSObject {
     private func setSelectedTextbookIndex() {
         USTEXTBOOKID = selectedTextbook.ID
         selectedUSTextbookIndex = arrUserSettings.index { $0.KIND == 3 && $0.ENTITYID == self.USTEXTBOOKID }!
-        arrUnits = (1...selectedTextbook.UNITS).map{ String($0) }
-        arrParts = (selectedTextbook.PARTS.split(" "))
+        arrUnits = CommonApi.unitsFrom(info: selectedTextbook.UNITINFO)
+        selectedTextbook.UNITS = arrUnits.count
+        arrParts = CommonApi.partsFrom(parts: selectedTextbook.PARTS)
     }
     
     func dictHtml(word: String, dictids: [String]) -> String {

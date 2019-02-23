@@ -21,11 +21,14 @@ class MUnitPhrase: NSObject, Codable {
     var PHRASE = ""
     var TRANSLATION: String?
     
+    func UNITSTR(arrUnits: [String]) -> String {
+        return arrUnits[UNIT - 1]
+    }
     func PARTSTR(arrParts: [String]) -> String {
         return arrParts[PART - 1]
     }
-    func UNITPARTSEQNUM(arrParts: [String]) -> String {
-        return "\(UNIT) \(SEQNUM)\n\(PARTSTR(arrParts: arrParts))"
+    func UNITPARTSEQNUM(arrUnits: [String], arrParts: [String]) -> String {
+        return "\(UNITSTR(arrUnits: arrUnits)) \(SEQNUM)\n\(PARTSTR(arrParts: arrParts))"
     }
 
     static func getDataByTextbook(_ textbookid: Int, unitPartFrom: Int, unitPartTo: Int) -> Observable<[MUnitPhrase]> {

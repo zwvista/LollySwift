@@ -194,10 +194,6 @@ class SettingsViewController: UITableViewController {
         let item = vm.selectedTextbook
         textbookCell.textLabel!.text = item.TEXTBOOKNAME
         textbookCell.detailTextLabel!.text = "\(item.UNITS) Units"
-        lblUnitFrom.text = "\(vm.USUNITFROM)"
-        lblUnitTo.text = "\(vm.USUNITTO)"
-        lblPartFrom.text = vm.arrParts[vm.USPARTFROM - 1]
-        lblPartTo.text = vm.arrParts[vm.USPARTTO - 1]
         swUnitPartTo.isOn = !vm.isSingleUnitPart
         swUnitPartToValueChanged(self)
         ddTextbook.dataSource = vm.arrTextbooks.map { $0.TEXTBOOKNAME }
@@ -210,6 +206,10 @@ class SettingsViewController: UITableViewController {
         ddUnitTo.selectRow(vm.USUNITTO - 1)
         ddPartTo.dataSource = vm.arrParts
         ddPartTo.selectRow(vm.USPARTTO - 1)
+        lblUnitFrom.text = ddUnitFrom.selectedItem
+        lblUnitTo.text = ddUnitTo.selectedItem
+        lblPartFrom.text = ddPartFrom.selectedItem
+        lblPartTo.text = ddPartTo.selectedItem
     }
     
     func updateUnitPartFrom() {

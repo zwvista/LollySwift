@@ -23,11 +23,14 @@ class MUnitWord: NSObject, Codable {
     var FAMIID = 0
     var LEVEL = 0
     
+    func UNITSTR(arrUnits: [String]) -> String {
+        return arrUnits[UNIT - 1]
+    }
     func PARTSTR(arrParts: [String]) -> String {
         return arrParts[PART - 1]
     }
-    func UNITPARTSEQNUM(arrParts: [String]) -> String {
-        return "\(UNIT) \(SEQNUM)\n\(PARTSTR(arrParts: arrParts))"
+    func UNITPARTSEQNUM(arrUnits: [String], arrParts: [String]) -> String {
+        return "\(UNITSTR(arrUnits: arrUnits)) \(SEQNUM)\n\(PARTSTR(arrParts: arrParts))"
     }
     var WORDNOTE: String {
         return WORD + ((NOTE ?? "").isEmpty ? "" : "(\(NOTE!))")

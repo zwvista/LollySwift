@@ -21,24 +21,46 @@ class MTextbookPhrase: NSObject, Codable {
     var PHRASEID = 0
     var PHRASE = ""
     var TRANSLATION: String?
-    var UNITS = 0
-    var arrUnits: [String] {
-        return (1...UNITS).map { String($0) }
-    }
+    var UNITINFO = ""
     var PARTS = ""
-    var arrParts: [String] {
-        return PARTS.split(" ")
+    
+    enum CodingKeys : String, CodingKey {
+        case ID
+        case TEXTBOOKID
+        case LANGID
+        case TEXTBOOKNAME
+        case UNIT
+        case PART
+        case SEQNUM
+        case PHRASEID
+        case PHRASE
+        case TRANSLATION
+        case UNITINFO
+        case PARTS
+    }
+
+    var arrUnits = [String]()
+    var arrParts = [String]()
+    var UNITSTR: String {
+        return arrUnits[UNIT - 1]
     }
     var PARTSTR: String {
         return arrParts[PART - 1]
     }
     var UNITPARTSEQNUM: String {
-        return "\(UNIT) \(SEQNUM)\n\(PARTSTR)"
+        return "\(UNITSTR) \(SEQNUM)\n\(PARTSTR)"
     }
 
     static func getDataByLang(_ langid: Int) -> Observable<[MTextbookPhrase]> {
         // SQL: SELECT * FROM VTEXTBOOKPHRASES WHERE LANGID=?
         let url = "\(RestApi.url)VTEXTBOOKPHRASES?transform=1&filter=LANGID,eq,\(langid)&order[]=TEXTBOOKID&order[]=UNIT&order[]=PART&order[]=SEQNUM"
-        return RestApi.getArray(url: url, keyPath: "VTEXTBOOKPHRASES")
+        let o: Observable<[MTextbookPhrase]> = RestApi.getArray(url: url, keyPath: "VTEXTBOOKPHRASES")
+        return o.map { arr in
+            arr.forEach { row in
+                row.arrUnits = CommonApi.unitsFrom(info: row.UNITINFO)
+                row.arrParts = CommonApi.partsFrom(parts: row.PARTS)
+            }
+            return arr
+        }
     }
 }

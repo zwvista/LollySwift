@@ -23,19 +23,36 @@ class MTextbookWord: NSObject, Codable {
     var NOTE: String?
     var FAMIID = 0
     var LEVEL = 0
-    var UNITS = 0
-    var arrUnits: [String] {
-        return (1...UNITS).map { String($0) }
-    }
+    var UNITINFO = ""
     var PARTS = ""
-    var arrParts: [String] {
-        return PARTS.split(" ")
+    
+    enum CodingKeys : String, CodingKey {
+        case ID
+        case TEXTBOOKID
+        case LANGID
+        case TEXTBOOKNAME
+        case UNIT
+        case PART
+        case SEQNUM
+        case WORDID
+        case WORD
+        case NOTE
+        case FAMIID
+        case LEVEL
+        case UNITINFO
+        case PARTS
+    }
+    
+    var arrUnits = [String]()
+    var arrParts = [String]()
+    var UNITSTR: String {
+        return arrUnits[UNIT - 1]
     }
     var PARTSTR: String {
         return arrParts[PART - 1]
     }
     var UNITPARTSEQNUM: String {
-        return "\(UNIT) \(SEQNUM)\n\(PARTSTR)"
+        return "\(UNITSTR) \(SEQNUM)\n\(PARTSTR)"
     }
     var WORDNOTE: String {
         return WORD + ((NOTE ?? "").isEmpty ? "" : "(\(NOTE!))")
@@ -48,6 +65,13 @@ class MTextbookWord: NSObject, Codable {
     static func getDataByLang(_ langid: Int) -> Observable<[MTextbookWord]> {
         // SQL: SELECT * FROM VTEXTBOOKWORDS WHERE LANGID=?
         let url = "\(RestApi.url)VTEXTBOOKWORDS?transform=1&filter=LANGID,eq,\(langid)&order[]=TEXTBOOKID&order[]=UNIT&order[]=PART&order[]=SEQNUM"
-        return RestApi.getArray(url: url, keyPath: "VTEXTBOOKWORDS")
+        let o: Observable<[MTextbookWord]> = RestApi.getArray(url: url, keyPath: "VTEXTBOOKWORDS")
+        return o.map { arr in
+            arr.forEach { row in
+                row.arrUnits = CommonApi.unitsFrom(info: row.UNITINFO)
+                row.arrParts = CommonApi.partsFrom(parts: row.PARTS)
+            }
+            return arr
+        }
     }
 }
