@@ -16,7 +16,7 @@ class SettingsViewController: NSViewController {
         return AppDelegate.theSettingsViewModel
     }
     @IBOutlet weak var acLanguages: NSArrayController!
-    @IBOutlet weak var acDictsGroup: NSArrayController!
+    @IBOutlet weak var acDictItems: NSArrayController!
     @IBOutlet weak var acDictsNote: NSArrayController!
     @IBOutlet weak var acTextbooks: NSArrayController!
     @IBOutlet weak var acUnits: NSArrayController!
@@ -24,7 +24,7 @@ class SettingsViewController: NSViewController {
     @IBOutlet weak var tfUnitsInAllFrom: NSTextField!
     @IBOutlet weak var tfUnitsInAllTo: NSTextField!
     @IBOutlet weak var pubLanguages: NSPopUpButton!
-    @IBOutlet weak var pubDictsGroup: NSPopUpButton!
+    @IBOutlet weak var pubDictItems: NSPopUpButton!
     @IBOutlet weak var pubDictsNote: NSPopUpButton!
     @IBOutlet weak var pubTextbooks: NSPopUpButton!
     @IBOutlet weak var pubUnitFrom: NSPopUpButton!
@@ -64,16 +64,16 @@ class SettingsViewController: NSViewController {
     }
     
     @IBAction func dictMeanSelected(_ sender: AnyObject) {
-        vm.selectedDictGroupIndex = pubDictsGroup.indexOfSelectedItem
-        vm.updateDictGroup().subscribe {
-            self.updateDictGroup()
+        vm.selectedDictItemIndex = pubDictItems.indexOfSelectedItem
+        vm.updateDictItem().subscribe {
+            self.updateDictItem()
         }.disposed(by: disposeBag)
     }
     
     @IBAction func dictNoteSelected(_ sender: AnyObject) {
         vm.selectedDictNoteIndex = pubDictsNote.indexOfSelectedItem
         vm.updateDictNote().subscribe {
-            self.updateDictGroup()
+            self.updateDictItem()
         }.disposed(by: disposeBag)
     }
 
@@ -167,13 +167,13 @@ class SettingsViewController: NSViewController {
 
     func updateLang() {
         acLanguages.content = vm.arrLanguages
-        updateDictGroup()
+        updateDictItem()
         updateDictNote()
         updateTextbook()
     }
     
-    func updateDictGroup() {
-        acDictsGroup.content = vm.arrDictsGroup
+    func updateDictItem() {
+        acDictItems.content = vm.arrDictItems
     }
     
     func updateDictNote() {

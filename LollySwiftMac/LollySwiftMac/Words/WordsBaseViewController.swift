@@ -11,7 +11,7 @@ import WebKit
 import RxSwift
 
 class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate, WKNavigationDelegate, LollyProtocol {
-    var selectedDictGroupIndex = 0
+    var selectedDictItemIndex = 0
     
     @IBOutlet weak var wvDict: WKWebView!
     @IBOutlet weak var tfNewWord: NSTextField!
@@ -70,7 +70,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     func searchWord(word: String) {
         selectedWord = word
         status = .ready
-        let item = vmSettings.arrDictsGroup[selectedDictGroupIndex]
+        let item = vmSettings.arrDictItems[selectedDictItemIndex]
         if item.DICTNAME.starts(with: "Custom") {
             let str = vmSettings.dictHtml(word: word, dictids: item.dictids())
             wvDict.loadHTMLString(str, baseURL: nil)
@@ -96,7 +96,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     @IBAction func searchDict(_ sender: Any) {
         if sender is NSToolbarItem {
             let tbItem = sender as! NSToolbarItem
-            selectedDictGroupIndex = tbItem.tag
+            selectedDictItemIndex = tbItem.tag
             print(tbItem.toolbar!.selectedItemIdentifier!.rawValue)
         }
         if tableView.selectedRow == -1 {
@@ -117,7 +117,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
         self.view.window?.makeKeyAndOrderFront(self)
         tableView.becomeFirstResponder()
         guard status == .navigating else {return}
-        let item = vmSettings.arrDictsGroup[selectedDictGroupIndex]
+        let item = vmSettings.arrDictItems[selectedDictItemIndex]
         let item2 = vmSettings.arrDictsMean.first { $0.DICTNAME == item.DICTNAME }!
         // https://stackoverflow.com/questions/34751860/get-html-from-wkwebview-in-swift
         webView.evaluateJavaScript("document.documentElement.outerHTML.toString()") { (html: Any?, error: Error?) in
@@ -160,7 +160,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     }
 
     func settingsChanged() {
-        selectedDictGroupIndex = vmSettings.selectedDictGroupIndex
+        selectedDictItemIndex = vmSettings.selectedDictItemIndex
         synth.setVoice(NSSpeechSynthesizer.VoiceName(rawValue: vmSettings.selectedLang.safeVoice))
     }
     
@@ -184,7 +184,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     }
 
     @IBAction func openOnlineDict(_ sender: Any) {
-        let item = vmSettings.arrDictsGroup[selectedDictGroupIndex]
+        let item = vmSettings.arrDictItems[selectedDictItemIndex]
         if !item.DICTNAME.starts(with: "Custom") {
             let item2 = vmSettings.arrDictsMean.first { $0.DICTNAME == item.DICTNAME }!
             let url = item2.urlString(word: selectedWord, arrAutoCorrect: vmSettings.arrAutoCorrect)
@@ -259,14 +259,14 @@ class WordsBaseWindowController: NSWindowController, NSToolbarDelegate, LollyPro
     func settingsChanged() {
         let img = toolbar.items[defaultToolbarItemCount].image
         for i in 0..<40 {
-            if i < vmSettings.arrDictsGroup.count {
+            if i < vmSettings.arrDictItems.count {
                 let item = toolbar.items[defaultToolbarItemCount + i]
-                item.label = vmSettings.arrDictsGroup[i].DICTNAME
+                item.label = vmSettings.arrDictItems[i].DICTNAME
                 item.target = contentViewController
                 item.action = #selector(WordsBaseViewController.searchDict(_:))
                 item.isEnabled = true
                 item.image = img
-                if i == vmSettings.selectedDictGroupIndex {
+                if i == vmSettings.selectedDictItemIndex {
                     toolbar.selectedItemIdentifier = item.itemIdentifier
                 }
             } else {

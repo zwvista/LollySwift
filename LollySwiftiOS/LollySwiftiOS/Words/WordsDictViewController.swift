@@ -19,7 +19,7 @@ class WordsDictViewController: UIViewController, WKNavigationDelegate {
     weak var wvDict: WKWebView!
     
     let vm = SearchViewModel(settings: vmSettings) {}
-    let ddWord = DropDown(), ddDictGroup = DropDown()
+    let ddWord = DropDown(), ddDictItem = DropDown()
     
     let disposeBag = DisposeBag()
     var status = DictWebViewStatus.ready
@@ -37,12 +37,12 @@ class WordsDictViewController: UIViewController, WKNavigationDelegate {
             self.selectedWordChanged()
         }
         
-        ddDictGroup.anchorView = btnDict
-        ddDictGroup.dataSource = vm.vmSettings.arrDictsGroup.map { $0.DICTNAME }
-        ddDictGroup.selectRow(vm.vmSettings.selectedDictGroupIndex)
-        ddDictGroup.selectionAction = { (index: Int, item: String) in
-            self.vm.vmSettings.selectedDictGroupIndex = index
-            self.vm.vmSettings.updateDictGroup().subscribe {
+        ddDictItem.anchorView = btnDict
+        ddDictItem.dataSource = vm.vmSettings.arrDictItems.map { $0.DICTNAME }
+        ddDictItem.selectRow(vm.vmSettings.selectedDictItemIndex)
+        ddDictItem.selectionAction = { (index: Int, item: String) in
+            self.vm.vmSettings.selectedDictItemIndex = index
+            self.vm.vmSettings.updateDictItem().subscribe {
                 self.selectDictChanged()
             }.disposed(by: self.disposeBag)
         }
@@ -57,7 +57,7 @@ class WordsDictViewController: UIViewController, WKNavigationDelegate {
     }
     
     private func selectDictChanged() {
-        let item = vmSettings.selectedDictGroup
+        let item = vmSettings.selectedDictItem
         btnDict.setTitle(item.DICTNAME, for: .normal)
         if item.DICTNAME.starts(with: "Custom") {
             let str = vmSettings.dictHtml(word: vm.selectedWord, dictids: item.dictids())
@@ -86,13 +86,13 @@ class WordsDictViewController: UIViewController, WKNavigationDelegate {
     }
     
     @IBAction func showDictDropDown(_ sender: AnyObject) {
-        ddDictGroup.show()
+        ddDictItem.show()
     }
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
 //        guard webView.stringByEvaluatingJavaScript(from: "document.readyState") == "complete" && status == .navigating else {return}
         guard status == .navigating else {return}
-        let item = vmSettings.selectedDictGroup
+        let item = vmSettings.selectedDictItem
         let item2 = vmSettings.arrDictsMean.first { $0.DICTNAME == item.DICTNAME }!
         // https://stackoverflow.com/questions/34751860/get-html-from-wkwebview-in-swift
         webView.evaluateJavaScript("document.documentElement.outerHTML.toString()") { (html: Any?, error: Error?) in

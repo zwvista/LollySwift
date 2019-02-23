@@ -51,7 +51,7 @@ class MDictMean : MDictionary {
 }
 
 @objcMembers
-class MDictGroup : NSObject {
+class MDictItem : NSObject {
     var DICTID = ""
     var DICTNAME = ""
     

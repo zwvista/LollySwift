@@ -1209,12 +1209,12 @@
                             </textField>
                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Bo4-yz-Ptk">
                                 <rect key="frame" x="137" y="172" width="223" height="25"/>
-                                <popUpButtonCell key="cell" type="push" title="Dict Group Popup" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="pp6-jV-8Y6" id="B3v-ro-gsw" userLabel="Dict Group Popup">
+                                <popUpButtonCell key="cell" type="push" title="Dict Item Popup" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="pp6-jV-8Y6" id="B3v-ro-gsw" userLabel="Dict Item Popup">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="menu"/>
                                     <menu key="menu" title="OtherViews" id="BCz-wO-xnR">
                                         <items>
-                                            <menuItem title="Dict Group Popup" state="on" id="pp6-jV-8Y6" userLabel="Dict Group Popup"/>
+                                            <menuItem title="Dict Item Popup" state="on" id="pp6-jV-8Y6" userLabel="Dict Item Popup"/>
                                             <menuItem title="Item 2" id="YJC-0b-MLZ"/>
                                             <menuItem title="Item 3" id="f84-K6-8SR"/>
                                         </items>
@@ -1224,7 +1224,7 @@
                                     <action selector="dictMeanSelected:" target="HfO-r7-QMx" id="zXy-H5-Dgo"/>
                                     <binding destination="EkI-9N-SJp" name="content" keyPath="arrangedObjects" id="cMt-dW-ffF"/>
                                     <binding destination="EkI-9N-SJp" name="contentValues" keyPath="arrangedObjects.DICTNAME" previousBinding="cMt-dW-ffF" id="PXM-QD-ObO"/>
-                                    <binding destination="HfO-r7-QMx" name="selectedIndex" keyPath="vm.selectedDictGroupIndex" previousBinding="PXM-QD-ObO" id="krQ-Cy-jl1"/>
+                                    <binding destination="HfO-r7-QMx" name="selectedIndex" keyPath="vm.selectedDictItemIndex" previousBinding="PXM-QD-ObO" id="krQ-Cy-jl1"/>
                                 </connections>
                             </popUpButton>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sxf-h3-GJC">
@@ -1504,7 +1504,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="acDictsGroup" destination="EkI-9N-SJp" id="Rc1-Of-Jhr"/>
+                        <outlet property="acDictItems" destination="EkI-9N-SJp" id="Rc1-Of-Jhr"/>
                         <outlet property="acDictsNote" destination="Jpc-QG-itq" id="9lW-jk-Ujj"/>
                         <outlet property="acLanguages" destination="Jlp-Py-Ji5" id="CFI-rY-PjP"/>
                         <outlet property="acParts" destination="IiA-XH-70P" id="MqS-Qx-qrd"/>
@@ -1513,7 +1513,7 @@
                         <outlet property="btnNext" destination="amm-Ya-sSe" id="nbe-8V-mIA"/>
                         <outlet property="btnPrevious" destination="iaA-UK-MEB" id="Hgm-rS-vte"/>
                         <outlet property="btnUnitPartTo" destination="zEX-94-Fpv" id="yKi-qc-X1n"/>
-                        <outlet property="pubDictsGroup" destination="Bo4-yz-Ptk" id="N50-BQ-j4Q"/>
+                        <outlet property="pubDictItems" destination="Bo4-yz-Ptk" id="N50-BQ-j4Q"/>
                         <outlet property="pubDictsNote" destination="1oq-rW-MUb" id="X7g-Ef-zSj"/>
                         <outlet property="pubLanguages" destination="Yra-vx-iUa" id="FyI-6e-Ins"/>
                         <outlet property="pubPartFrom" destination="PW2-rx-UfY" id="I3r-sr-VCj"/>
@@ -1527,7 +1527,7 @@
                 </viewController>
                 <customObject id="OC9-Mn-GX9" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <arrayController id="Jlp-Py-Ji5" userLabel="Languages Controller"/>
-                <arrayController id="EkI-9N-SJp" userLabel="DictsGroup Controller"/>
+                <arrayController id="EkI-9N-SJp" userLabel="DictItems Controller"/>
                 <arrayController id="Jpc-QG-itq" userLabel="DictsNote Controller"/>
                 <arrayController id="PzR-zm-jg5" userLabel="Textbooks Controller"/>
                 <arrayController id="7EM-l7-CJV" userLabel="Units Controller"/>

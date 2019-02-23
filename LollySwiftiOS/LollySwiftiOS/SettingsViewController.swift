@@ -12,7 +12,7 @@ import RxSwift
 
 class SettingsViewController: UITableViewController {
     @IBOutlet weak var langCell: UITableViewCell!
-    @IBOutlet weak var dictGroupCell: UITableViewCell!
+    @IBOutlet weak var dictItemCell: UITableViewCell!
     @IBOutlet weak var dictNoteCell: UITableViewCell!
     @IBOutlet weak var textbookCell: UITableViewCell!
     @IBOutlet weak var unitFromCell: UITableViewCell!
@@ -30,7 +30,7 @@ class SettingsViewController: UITableViewController {
     @IBOutlet weak var btnNext: UIButton!
 
     let ddLang = DropDown()
-    let ddDictGroup = DropDown()
+    let ddDictItem = DropDown()
     let ddDictNote = DropDown()
     let ddTextbook = DropDown()
     let ddUnitFrom = DropDown()
@@ -62,12 +62,12 @@ class SettingsViewController: UITableViewController {
             }.disposed(by: self.disposeBag)
         }
 
-        ddDictGroup.anchorView = dictGroupCell
-        ddDictGroup.selectionAction = { [unowned self] (index: Int, item: String) in
-            guard index != self.vm.selectedDictGroupIndex else {return}
-            self.vm.selectedDictGroupIndex = index
-            self.vm.updateDictGroup().subscribe {
-                self.updateDictGroup()
+        ddDictItem.anchorView = dictItemCell
+        ddDictItem.selectionAction = { [unowned self] (index: Int, item: String) in
+            guard index != self.vm.selectedDictItemIndex else {return}
+            self.vm.selectedDictItemIndex = index
+            self.vm.updateDictItem().subscribe {
+                self.updateDictItem()
             }.disposed(by: self.disposeBag)
         }
 
@@ -135,7 +135,7 @@ class SettingsViewController: UITableViewController {
         case 0:
             ddLang.show()
         case 1:
-            ddDictGroup.show()
+            ddDictItem.show()
         case 2:
             ddDictNote.show()
         case 3:
@@ -159,18 +159,18 @@ class SettingsViewController: UITableViewController {
     func updateLang() {
         let item = vm.selectedLang
         langCell.textLabel!.text = item.LANGNAME
-        updateDictGroup()
+        updateDictItem()
         updateDictNote()
         updateTextbook()
     }
     
-    func updateDictGroup() {
-        let item = vm.selectedDictGroup
-        dictGroupCell.textLabel!.text = item.DICTNAME
+    func updateDictItem() {
+        let item = vm.selectedDictItem
+        dictItemCell.textLabel!.text = item.DICTNAME
         let item2 = vmSettings.arrDictsMean.first { $0.DICTNAME == item.DICTNAME }
-        dictGroupCell.detailTextLabel!.text = item2?.URL ?? ""
-        ddDictGroup.dataSource = vm.arrDictsGroup.map { $0.DICTNAME }
-        ddDictGroup.selectRow(vm.selectedDictGroupIndex)
+        dictItemCell.detailTextLabel!.text = item2?.URL ?? ""
+        ddDictItem.dataSource = vm.arrDictItems.map { $0.DICTNAME }
+        ddDictItem.selectRow(vm.selectedDictItemIndex)
     }
     
     func updateDictNote() {

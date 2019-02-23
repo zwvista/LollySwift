@@ -16,13 +16,15 @@ class MTextbook: NSObject, Codable {
     var TEXTBOOKNAME = ""
     var UNITS = 0
     var PARTS = ""
-    
+    var UNITINFO: String? = nil
+
     enum CodingKeys : String, CodingKey {
         case ID
         case LANGID
         case TEXTBOOKNAME = "NAME"
         case UNITS
         case PARTS
+        case UNITINFO
     }
 
     static func getDataByLang(_ langid: Int) -> Observable<[MTextbook]> {

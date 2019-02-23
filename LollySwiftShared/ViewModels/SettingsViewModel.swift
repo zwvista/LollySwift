@@ -31,7 +31,7 @@ class SettingsViewModel: NSObject {
         get { return selectedUSLang.VALUE1!.toInt()! }
         set { selectedUSLang.VALUE1 = String(newValue) }
     }
-    var USDICTGROUP: String {
+    var USDICTITEM: String {
         get { return selectedUSLang.VALUE2! }
         set { selectedUSLang.VALUE2 = newValue }
     }
@@ -39,7 +39,7 @@ class SettingsViewModel: NSObject {
         get { return selectedUSLang.VALUE3!.toInt()! }
         set { selectedUSLang.VALUE3 = String(newValue) }
     }
-    var USDICTSGROUP: String {
+    var USDICTITEMS: String {
         get { return selectedUSLang.VALUE4 ?? "0" }
         set { selectedUSLang.VALUE4 = newValue }
     }
@@ -86,15 +86,15 @@ class SettingsViewModel: NSObject {
     
     var arrDictsMean = [MDictMean]()
     @objc
-    var arrDictsGroup = [MDictGroup]()
+    var arrDictItems = [MDictItem]()
     @objc
-    var selectedDictGroupIndex = 0 {
+    var selectedDictItemIndex = 0 {
         didSet {
-            USDICTGROUP = selectedDictGroup.DICTID
+            USDICTITEM = selectedDictItem.DICTID
         }
     }
-    var selectedDictGroup: MDictGroup {
-        return arrDictsGroup[selectedDictGroupIndex]
+    var selectedDictItem: MDictItem {
+        return arrDictItems[selectedDictItemIndex]
     }
     
     @objc
@@ -142,7 +142,7 @@ class SettingsViewModel: NSObject {
         selectedLangIndex = langindex
         USLANGID = selectedLang.ID
         selectedUSLangIndex = arrUserSettings.index { $0.KIND == 2 && $0.ENTITYID == self.USLANGID }!
-        let arrDicts = USDICTSGROUP.split("\r\n")
+        let arrDicts = USDICTITEMS.split("\r\n")
         return Observable.zip(MDictMean.getDataByLang(self.USLANGID),
                               MDictNote.getDataByLang(self.USLANGID),
                               MTextbook.getDataByLang(self.USLANGID),
@@ -150,15 +150,15 @@ class SettingsViewModel: NSObject {
             .map {
                 self.arrDictsMean = $0.0
                 var i = 0
-                self.arrDictsGroup = arrDicts.flatMap { d -> [MDictGroup] in
+                self.arrDictItems = arrDicts.flatMap { d -> [MDictItem] in
                     if d == "0" {
-                        return self.arrDictsMean.map { MDictGroup(id: String($0.DICTID), name: $0.DICTNAME!) }
+                        return self.arrDictsMean.map { MDictItem(id: String($0.DICTID), name: $0.DICTNAME!) }
                     } else {
                         i += 1
-                        return [MDictGroup(id: d, name: "Custom\(i)")]
+                        return [MDictItem(id: d, name: "Custom\(i)")]
                     }
                 }
-                self.selectedDictGroupIndex = self.arrDictsGroup.index { $0.DICTID == self.USDICTGROUP } ?? 0
+                self.selectedDictItemIndex = self.arrDictItems.index { $0.DICTID == self.USDICTITEM } ?? 0
                 self.arrDictsNote = $0.1
                 if !self.arrDictsNote.isEmpty {
                     self.selectedDictNoteIndex = self.arrDictsNote.index { $0.ID == self.USDICTNOTEID }!
@@ -192,8 +192,8 @@ class SettingsViewModel: NSObject {
         return MUserSetting.update(selectedUSUser.ID, langid: USLANGID).map { print($0) }
     }
     
-    func updateDictGroup() -> Observable<()> {
-        return MUserSetting.update(selectedUSLang.ID, dictpicker: USDICTGROUP).map { print($0) }
+    func updateDictItem() -> Observable<()> {
+        return MUserSetting.update(selectedUSLang.ID, dictpicker: USDICTITEM).map { print($0) }
     }
     
     func updateDictNote() -> Observable<()> {
