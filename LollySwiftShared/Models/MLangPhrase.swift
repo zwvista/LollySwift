@@ -59,7 +59,7 @@ class MLangPhrase: NSObject, Codable {
 
     static func getDataByLangPhrase(langid: Int, phrase: String) -> Observable<[MLangPhrase]> {
         // SQL: SELECT * FROM LANGPHRASES WHERE LANGID=? AND PHRASE=?
-        let url = "\(RestApi.url)LANGWORDS?transform=1&filter[]=LANGID,eq,\(langid)&filter[]=PHRASE,eq,\(phrase.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)"
+        let url = "\(RestApi.url)LANGPHRASES?transform=1&filter[]=LANGID,eq,\(langid)&filter[]=PHRASE,eq,\(phrase.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)"
         // Api is case insensitive
         return RestApi.getArray(url: url, keyPath: "LANGPHRASES").map { $0.filter { $0.PHRASE == phrase } }
     }
@@ -72,7 +72,7 @@ class MLangPhrase: NSObject, Codable {
 
     static func update(_ id: Int, translation: String) -> Observable<String> {
         // SQL: UPDATE LANGPHRASES SET TRANSLATION=? WHERE ID=?
-        let url = "\(RestApi.url)LANGWORDS/\(id)"
+        let url = "\(RestApi.url)LANGPHRASES/\(id)"
         let body = "TRANSLATION=\(translation)"
         return RestApi.update(url: url, body: body)
     }

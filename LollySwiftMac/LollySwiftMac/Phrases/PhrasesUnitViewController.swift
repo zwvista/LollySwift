@@ -139,7 +139,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
     }
     
     override func selectedPhraseChanged() {
-        selectedPhrase = vm.arrPhrases[tableView.selectedRow].PHRASE
+        selectedPhrase = tableView.selectedRow == -1 ? "" : vm.arrPhrases[tableView.selectedRow].PHRASE
     }
     
     override func settingsChanged() {

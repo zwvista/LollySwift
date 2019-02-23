@@ -129,12 +129,12 @@ class WordsUnitViewController: WordsBaseViewController {
         guard !newWord.isEmpty else {return}
         let item = vm.newUnitWord()
         item.WORD = vm.vmSettings.autoCorrectInput(text: newWord)
+        self.tfNewWord.stringValue = ""
+        self.newWord = ""
         WordsUnitViewModel.create(item: item).subscribe(onNext: {
             item.ID = $0
             self.vm.arrWords.append(item)
             self.tableView.reloadData()
-            self.tfNewWord.stringValue = ""
-            self.newWord = ""
         }).disposed(by: disposeBag)
     }
 
@@ -190,6 +190,13 @@ class WordsUnitViewController: WordsBaseViewController {
                 }
             })
         }
+    }
+    
+    func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+        if menuItem.action == #selector(self.getNote(_:)) || menuItem.action == #selector(self.getNotes(_:)) {
+            menuItem.state = !vmSettings.arrDictsNote.isEmpty ? .on : .off
+        }
+        return true
     }
 
     override func settingsChanged() {

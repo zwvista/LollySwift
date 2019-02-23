@@ -77,7 +77,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
     }
     
     override func selectedPhraseChanged() {
-        selectedPhrase = vm.arrPhrases[tableView.selectedRow].PHRASE
+        selectedPhrase = tableView.selectedRow == -1 ? "" : vm.arrPhrases[tableView.selectedRow].PHRASE
     }
     
     @IBAction func filterPhrase(_ sender: Any) {
