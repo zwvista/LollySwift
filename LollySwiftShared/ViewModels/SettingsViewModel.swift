@@ -108,6 +108,7 @@ class SettingsViewModel: NSObject {
     var selectedDictNote: MDictNote? {
         return arrDictsNote.isEmpty ? nil : arrDictsNote[selectedDictNoteIndex]
     }
+    var hasNote: Bool { return !arrDictsNote.isEmpty }
 
     @objc
     var arrTextbooks = [MTextbook]()
