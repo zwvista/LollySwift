@@ -45,8 +45,8 @@ class MUserSetting: NSObject, Codable {
         return update(id, body: body)
     }
     
-    static func update(_ id: Int, dictpicker: String) -> Observable<String> {
-        let body = "VALUE2=\(dictpicker)"
+    static func update(_ id: Int, dictitem: String) -> Observable<String> {
+        let body = "VALUE2=\(dictitem)"
         return update(id, body: body)
     }
     

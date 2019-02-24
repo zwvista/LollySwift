@@ -195,7 +195,7 @@ class SettingsViewModel: NSObject {
     }
     
     func updateDictItem() -> Observable<()> {
-        return MUserSetting.update(selectedUSLang.ID, dictpicker: USDICTITEM).map { print($0) }
+        return MUserSetting.update(selectedUSLang.ID, dictitem: USDICTITEM).map { print($0) }
     }
     
     func updateDictNote() -> Observable<()> {
