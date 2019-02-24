@@ -4310,12 +4310,24 @@ Gw
                                     <action selector="checkItems:" target="eyu-wA-IBh" id="4kg-ZE-k1e"/>
                                 </connections>
                             </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WWf-JL-xsu">
+                                <rect key="frame" x="334" y="442" width="104" height="18"/>
+                                <buttonCell key="cell" type="check" title="LEVEL 0 Only" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Shc-Sz-edg">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="levelCheckChanged:" target="eyu-wA-IBh" id="RG8-8W-TmN"/>
+                                    <binding destination="eyu-wA-IBh" name="value" keyPath="level0Only" id="wRq-j1-Yj5"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="E1P-mY-1Xy" firstAttribute="top" secondItem="KTR-p4-Qo7" secondAttribute="bottom" constant="59" id="2C2-jr-VKg"/>
                             <constraint firstItem="Zkj-GP-kyf" firstAttribute="leading" secondItem="xKg-U6-UO5" secondAttribute="trailing" constant="12" symbolic="YES" id="3v9-L5-f3u"/>
                             <constraint firstItem="25w-P2-1xV" firstAttribute="baseline" secondItem="RAD-kz-mWQ" secondAttribute="baseline" id="4E5-ch-2P1"/>
                             <constraint firstItem="u8b-xT-mEO" firstAttribute="leading" secondItem="fJq-9U-2a4" secondAttribute="leading" id="5RW-TV-nhH"/>
+                            <constraint firstItem="WWf-JL-xsu" firstAttribute="leading" secondItem="KTR-p4-Qo7" secondAttribute="trailing" constant="19" id="5sL-ye-kV9"/>
                             <constraint firstItem="Gy2-Uv-LPj" firstAttribute="leading" secondItem="ljz-Ez-HDB" secondAttribute="leading" constant="117" id="7aE-ah-HfP"/>
                             <constraint firstItem="KTR-p4-Qo7" firstAttribute="trailing" secondItem="fJq-9U-2a4" secondAttribute="trailing" id="9hw-JJ-Bmd"/>
                             <constraint firstItem="giE-1J-gQm" firstAttribute="leading" secondItem="d9b-6J-0IQ" secondAttribute="leading" id="BRU-Ub-SRy"/>
@@ -4323,6 +4335,7 @@ Gw
                             <constraint firstItem="oxl-ww-6Dx" firstAttribute="leading" secondItem="ljz-Ez-HDB" secondAttribute="leading" constant="15" id="GOn-3d-BXE"/>
                             <constraint firstItem="u8b-xT-mEO" firstAttribute="top" secondItem="fJq-9U-2a4" secondAttribute="bottom" constant="13" id="I0a-1u-BtA"/>
                             <constraint firstItem="Gy2-Uv-LPj" firstAttribute="leading" secondItem="fJq-9U-2a4" secondAttribute="leading" id="LJG-II-U5l"/>
+                            <constraint firstItem="WWf-JL-xsu" firstAttribute="centerY" secondItem="KTR-p4-Qo7" secondAttribute="centerY" id="NS3-pi-Rhb"/>
                             <constraint firstItem="xKg-U6-UO5" firstAttribute="centerY" secondItem="oxl-ww-6Dx" secondAttribute="centerY" id="PUR-IO-HFZ"/>
                             <constraint firstItem="25w-P2-1xV" firstAttribute="top" secondItem="E1P-mY-1Xy" secondAttribute="bottom" constant="14" id="QI7-ZT-VwC"/>
                             <constraint firstItem="KTR-p4-Qo7" firstAttribute="leading" secondItem="u8b-xT-mEO" secondAttribute="leading" id="ROj-7y-hjQ"/>

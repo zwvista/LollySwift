@@ -32,6 +32,7 @@ class WordsUnitBatchViewController: NSViewController, NSTableViewDataSource, NST
     @objc var part = 1
     @objc var seqnum = 0
     @objc var level = 0
+    @objc var level0Only = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +57,12 @@ class WordsUnitBatchViewController: NSViewController, NSTableViewDataSource, NST
         return cell;
     }
     
+    // https://stackoverflow.com/questions/10910779/coloring-rows-in-view-based-nstableview
+    func tableView(_ tableView: NSTableView, didAdd rowView: NSTableRowView, forRow row: Int) {
+        let level = arrWords[row].LEVEL
+        rowView.backgroundColor = level > 0 ? .yellow : level < 0 ? .gray : .white
+    }
+
     @IBAction func unitCheckChanged(_ sender: Any) {
         pubUnit.isEnabled = unitChecked
     }
@@ -93,7 +100,7 @@ class WordsUnitBatchViewController: NSViewController, NSTableViewDataSource, NST
                 if seqnumChecked { item.SEQNUM += seqnum }
                 o = o.flatMap { MUnitWord.update(item: item) }
             }
-            if levelChecked {
+            if levelChecked && (!level0Only || item.LEVEL == 0) {
                 o = o.flatMap { MWordFami.update(wordid: item.WORDID, level: self.level) }
             }
         }
