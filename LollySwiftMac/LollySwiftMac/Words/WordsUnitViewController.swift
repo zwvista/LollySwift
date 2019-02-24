@@ -168,9 +168,10 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation {
     @IBAction func batchEdit(_ sender: Any) {
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "WordsUnitBatchViewController") as! WordsUnitBatchViewController
         detailVC.vm = vm
-        let item = arrWords[tableView.selectedRow]
-        detailVC.unit = item.UNIT
-        detailVC.part = item.PART
+        let i = tableView.selectedRow
+        let item = i == -1 ? nil : arrWords[tableView.selectedRow]
+        detailVC.unit = item?.UNIT ?? vmSettings.USUNITTO
+        detailVC.part = item?.PART ?? vmSettings.USPARTTO
         detailVC.complete = { self.refreshTableView(self) }
         self.presentAsModalWindow(detailVC)
     }

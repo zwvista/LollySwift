@@ -1,5 +1,5 @@
 //
-//  WordsUnitBatchViewController.swift
+//  PhrasesUnitBatchViewController.swift
 //  LollySwiftMac
 //
 //  Created by 趙偉 on 2018/04/07.
@@ -9,18 +9,17 @@
 import Cocoa
 import RxSwift
 
-class WordsUnitBatchViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
+class PhrasesUnitBatchViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 
-    @objc var vm: WordsUnitViewModel!
+    @objc var vm: PhrasesUnitViewModel!
     var complete: (() -> Void)?
-    var arrWords: [MUnitWord] {
-        return vm.arrWords
+    var arrPhrases: [MUnitPhrase] {
+        return vm.arrPhrases
     }
 
     @IBOutlet weak var pubUnit: NSPopUpButton!
     @IBOutlet weak var pubPart: NSPopUpButton!
     @IBOutlet weak var tfSeqNum: NSTextField!
-    @IBOutlet weak var tfLevel: NSTextField!
     @IBOutlet weak var tableView: NSTableView!
     
     let disposeBag = DisposeBag()
@@ -31,7 +30,6 @@ class WordsUnitBatchViewController: NSViewController, NSTableViewDataSource, NST
     @objc var unit = 1
     @objc var part = 1
     @objc var seqnum = 0
-    @objc var level = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,12 +43,12 @@ class WordsUnitBatchViewController: NSViewController, NSTableViewDataSource, NST
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return arrWords.count
+        return arrPhrases.count
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! NSTableCellView
-        let item = arrWords[row]
+        let item = arrPhrases[row]
         let columnName = tableColumn!.title
         cell.textField?.stringValue = columnName == "UNIT" ? item.UNITSTR(arrUnits: vm.vmSettings.arrUnits) : columnName == "PART" ? item.PARTSTR(arrParts: vm.vmSettings.arrParts) : String(describing: item.value(forKey: columnName) ?? "")
         return cell;
@@ -65,14 +63,11 @@ class WordsUnitBatchViewController: NSViewController, NSTableViewDataSource, NST
     @IBAction func seqnumCheckChanged(_ sender: Any) {
         tfSeqNum.isEnabled = seqnumChecked
     }
-    @IBAction func levelCheckChanged(_ sender: Any) {
-        tfLevel.isEnabled = levelChecked
-    }
     
     @IBAction func checkItems(_ sender: Any) {
         let n = (sender as! NSButton).tag
         for i in 0..<tableView.numberOfRows {
-            let chk = (tableView.view(atColumn: 0, row: i, makeIfNecessary: false)! as! WordsUnitBatchCell).chk!
+            let chk = (tableView.view(atColumn: 0, row: i, makeIfNecessary: false)! as! PhrasesUnitBatchCell).chk!
             chk.state = n == 0 ? .on : n == 1 ? .off : tableView.selectedRowIndexes.contains(i) ? .on : .off
         }
     }
@@ -84,17 +79,14 @@ class WordsUnitBatchViewController: NSViewController, NSTableViewDataSource, NST
         part = pubPart.indexOfSelectedItem + 1
         var o = Observable.just(())
         for i in 0..<tableView.numberOfRows {
-            let chk = (tableView.view(atColumn: 0, row: i, makeIfNecessary: false)! as! WordsUnitBatchCell).chk!
+            let chk = (tableView.view(atColumn: 0, row: i, makeIfNecessary: false)! as! PhrasesUnitBatchCell).chk!
             guard chk.state == .on else {continue}
-            let item = arrWords[i]
+            let item = arrPhrases[i]
             if unitChecked || partChecked || seqnumChecked {
                 if unitChecked { item.UNIT = unit }
                 if partChecked { item.PART = part }
                 if seqnumChecked { item.SEQNUM += seqnum }
-                o = o.flatMap { MUnitWord.update(item: item) }
-            }
-            if levelChecked {
-                o = o.flatMap { MWordFami.update(wordid: item.WORDID, level: self.level) }
+                o = o.flatMap { MUnitPhrase.update(item: item) }
             }
         }
         o.subscribe {
@@ -104,6 +96,6 @@ class WordsUnitBatchViewController: NSViewController, NSTableViewDataSource, NST
     }
 }
 
-class WordsUnitBatchCell: NSTableCellView {
+class PhrasesUnitBatchCell: NSTableCellView {
     @IBOutlet weak var chk: NSButton!
 }
