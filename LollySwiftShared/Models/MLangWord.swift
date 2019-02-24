@@ -76,17 +76,17 @@ class MLangWord: NSObject, Codable {
         return RestApi.getArray(url: url, keyPath: "VLANGWORDS")
     }
     
-    static func update(_ id: Int, note: String) -> Observable<String> {
+    static func update(_ id: Int, note: String) -> Observable<()> {
         // SQL: UPDATE LANGWORDS SET NOTE=? WHERE ID=?
         let url = "\(RestApi.url)LANGWORDS/\(id)"
         let body = "NOTE=\(note)"
-        return RestApi.update(url: url, body: body)
+        return RestApi.update(url: url, body: body).map { print($0) }
     }
 
-    static func update(item: MLangWord) -> Observable<String> {
+    static func update(item: MLangWord) -> Observable<()> {
         // SQL: UPDATE LANGWORDS SET WORD=?, LEVEL=? WHERE ID=?
         let url = "\(RestApi.url)LANGWORDS/\(item.ID)"
-        return RestApi.update(url: url, body: try! item.toJSONString(prettyPrint: false)!)
+        return RestApi.update(url: url, body: try! item.toJSONString(prettyPrint: false)!).map { print($0) }
     }
 
     static func create(item: MLangWord) -> Observable<Int> {
@@ -97,9 +97,9 @@ class MLangWord: NSObject, Codable {
         }
     }
     
-    static func delete(_ id: Int) -> Observable<String> {
+    static func delete(_ id: Int) -> Observable<()> {
         // SQL: DELETE LANGWORDS WHERE ID=?
         let url = "\(RestApi.url)LANGWORDS/\(id)"
-        return RestApi.delete(url: url)
+        return RestApi.delete(url: url).map { print($0) }
     }
 }

@@ -77,16 +77,16 @@ class MLangPhrase: NSObject, Codable {
         return RestApi.update(url: url, body: body)
     }
 
-    static func update(_ id: Int, item: MLangPhrase) -> Observable<String> {
+    static func update(_ id: Int, item: MLangPhrase) -> Observable<()> {
         // SQL: UPDATE LANGPHRASES SET PHRASE=?, TRANSLATION=? WHERE ID=?
         let url = "\(RestApi.url)LANGPHRASES/\(id)"
-        return RestApi.update(url: url, body: try! item.toJSONString(prettyPrint: false)!)
+        return RestApi.update(url: url, body: try! item.toJSONString(prettyPrint: false)!).map { print($0) }
     }
     
-    static func update(item: MLangPhrase) -> Observable<String> {
+    static func update(item: MLangPhrase) -> Observable<()> {
         // SQL: UPDATE LANGPHRASES SET PHRASE=?, TRANSLATION=? WHERE ID=?
         let url = "\(RestApi.url)LANGPHRASES/\(item.ID)"
-        return RestApi.update(url: url, body: try! item.toJSONString(prettyPrint: false)!)
+        return RestApi.update(url: url, body: try! item.toJSONString(prettyPrint: false)!).map { print($0) }
     }
 
     static func create(item: MLangPhrase) -> Observable<Int> {
@@ -97,9 +97,9 @@ class MLangPhrase: NSObject, Codable {
         }
     }
     
-    static func delete(_ id: Int) -> Observable<String> {
+    static func delete(_ id: Int) -> Observable<()> {
         // SQL: DELETE LANGPHRASES WHERE ID=?
         let url = "\(RestApi.url)LANGPHRASES/\(id)"
-        return RestApi.delete(url: url)
+        return RestApi.delete(url: url).map { print($0) }
     }
 }

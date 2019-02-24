@@ -732,8 +732,24 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="AAv-x6-Vbh"/>
-                                        <menuItem title="Retrieve Note" id="wTw-Ar-brs">
+                                        <menuItem title="Retrieve Notes(Empty Only)" id="3Jw-1N-Qp2">
                                             <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="getNotes:" target="Ady-hI-5gd" id="KMc-oL-Gek"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Retrieve Notes(All)" tag="1" id="1l1-aq-4gI">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="getNotes:" target="Ady-hI-5gd" id="fOR-SC-C5C"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="EOF-lU-szg"/>
+                                        <menuItem title="Batch Edit" id="RQq-Nl-s0B">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="batchEdit:" target="Ady-hI-5gd" id="gaU-P0-VDD"/>
+                                            </connections>
                                         </menuItem>
                                     </items>
                                 </menu>
@@ -1163,7 +1179,7 @@
         <scene sceneID="nZc-fZ-RBG">
             <objects>
                 <viewController id="HfO-r7-QMx" customClass="SettingsViewController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" misplaced="YES" id="UlA-4i-lOC">
+                    <view key="view" id="UlA-4i-lOC">
                         <rect key="frame" x="0.0" y="0.0" width="484" height="244"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>

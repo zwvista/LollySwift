@@ -10,7 +10,7 @@ import Cocoa
 import WebKit
 import RxSwift
 
-class WordsTextbookViewController: WordsBaseViewController {
+class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation {
 
     var wc2: WordsTextbookWindowController! { return view.window!.windowController as? WordsTextbookWindowController }
     var vm: WordsTextbookViewModel!
@@ -97,6 +97,14 @@ class WordsTextbookViewController: WordsBaseViewController {
         }.disposed(by: disposeBag)
     }
     
+    // https://stackoverflow.com/questions/9368654/cannot-seem-to-setenabledno-on-nsmenuitem
+    func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+        if menuItem.action == #selector(self.getNote(_:)) {
+            return vmSettings.hasNote
+        }
+        return true
+    }
+
     @IBAction func filterWord(_ sender: Any) {
         let n = (sender as! NSSegmentedControl).selectedSegment
         if n == 0 {

@@ -10,7 +10,7 @@ import Cocoa
 import WebKit
 import RxSwift
 
-class WordsUnitViewController: WordsBaseViewController {
+class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation {
 
     var vm: WordsUnitViewModel!
     var arrWords: [MUnitWord] {
@@ -160,11 +160,21 @@ class WordsUnitViewController: WordsBaseViewController {
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "WordsUnitDetailViewController") as! WordsUnitDetailViewController
         detailVC.vm = vm
         let i = tableView.selectedRow
-        detailVC.item = vm.arrWords[i]
+        detailVC.item = arrWords[i]
         detailVC.complete = { self.tableView.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count)) }
         self.presentAsModalWindow(detailVC)
     }
-    
+  
+    @IBAction func batchEdit(_ sender: Any) {
+        let detailVC = self.storyboard!.instantiateController(withIdentifier: "WordsUnitBatchViewController") as! WordsUnitBatchViewController
+        detailVC.vm = vm
+        let item = arrWords[tableView.selectedRow]
+        detailVC.unit = item.UNIT
+        detailVC.part = item.PART
+        detailVC.complete = { self.refreshTableView(self) }
+        self.presentAsModalWindow(detailVC)
+    }
+
     @IBAction func getNote(_ sender: Any) {
         let col = tableView.tableColumns.index(where: {$0.title == "NOTE"})!
         vm.getNote(index: tableView.selectedRow).subscribe {
@@ -173,28 +183,20 @@ class WordsUnitViewController: WordsBaseViewController {
     }
 
     @IBAction func getNotes(_ sender: Any) {
-        let alert = NSAlert()
-        alert.messageText = "Retrieve Notes"
-        alert.informativeText = "question"
-        alert.alertStyle = .informational
-        alert.addButton(withTitle: "Empty Notes Only")
-        alert.addButton(withTitle: "All Notes")
-        alert.addButton(withTitle: "Cancel")
-        let res = alert.runModal()
-        if res != .alertThirdButtonReturn {
-            vm.getNotes(ifEmpty: res == .alertFirstButtonReturn, oneComplete: {
-                self.tableView.reloadData(forRowIndexes: [$0], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count))
-            }, allComplete: {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    // self.tableView.reloadData()
-                }
-            })
-        }
+        let ifEmpty = (sender as! NSMenuItem).tag == 0
+        vm.getNotes(ifEmpty: ifEmpty, oneComplete: {
+            self.tableView.reloadData(forRowIndexes: [$0], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count))
+        }, allComplete: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                // self.tableView.reloadData()
+            }
+        })
     }
     
+    // https://stackoverflow.com/questions/9368654/cannot-seem-to-setenabledno-on-nsmenuitem
     func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
         if menuItem.action == #selector(self.getNote(_:)) || menuItem.action == #selector(self.getNotes(_:)) {
-            menuItem.state = !vmSettings.arrDictsNote.isEmpty ? .on : .off
+            return vmSettings.hasNote
         }
         return true
     }

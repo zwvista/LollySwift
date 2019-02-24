@@ -10,7 +10,7 @@ import Cocoa
 import WebKit
 import RxSwift
 
-class WordsLangViewController: WordsBaseViewController {
+class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
 
     var wc2: WordsLangWindowController! { return view.window!.windowController as? WordsLangWindowController }
     var vm: WordsLangViewModel!
@@ -117,6 +117,14 @@ class WordsLangViewController: WordsBaseViewController {
         vm.getNote(index: tableView.selectedRow).subscribe {
             self.tableView.reloadData(forRowIndexes: [self.tableView.selectedRow], columnIndexes: [col])
         }.disposed(by: disposeBag)
+    }
+    
+    // https://stackoverflow.com/questions/9368654/cannot-seem-to-setenabledno-on-nsmenuitem
+    func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+        if menuItem.action == #selector(self.getNote(_:)) {
+            return vmSettings.hasNote
+        }
+        return true
     }
 
     @IBAction func filterWord(_ sender: Any) {

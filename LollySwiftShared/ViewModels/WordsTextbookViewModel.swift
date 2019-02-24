@@ -35,7 +35,7 @@ class WordsTextbookViewModel: NSObject {
         })
     }
     
-    static func update(item: MTextbookWord) -> Observable<String> {
+    static func update(item: MTextbookWord) -> Observable<()> {
         let item = MLangWord(textbookitem: item)
         return MLangWord.update(item: item)
     }

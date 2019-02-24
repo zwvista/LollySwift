@@ -43,17 +43,17 @@ class MUnitPhrase: NSObject, Codable {
         return RestApi.getArray(url: url, keyPath: "VUNITPHRASES")
     }
 
-    static func update(_ id: Int, seqnum: Int) -> Observable<String> {
+    static func update(_ id: Int, seqnum: Int) -> Observable<()> {
         // SQL: UPDATE UNITPHRASES SET SEQNUM=? WHERE ID=?
         let url = "\(RestApi.url)UNITPHRASES/\(id)"
         let body = "SEQNUM=\(seqnum)"
-        return RestApi.update(url: url, body: body)
+        return RestApi.update(url: url, body: body).map { print($0) }
     }
     
-    static func update(item: MUnitPhrase) -> Observable<String> {
+    static func update(item: MUnitPhrase) -> Observable<()> {
         // SQL: UPDATE UNITPHRASES SET UNIT=?, PART=?, SEQNUM=?, PHRASEID=? WHERE ID=?
         let url = "\(RestApi.url)UNITPHRASES/\(item.ID)"
-        return RestApi.update(url: url, body: try! item.toJSONString(prettyPrint: false)!)
+        return RestApi.update(url: url, body: try! item.toJSONString(prettyPrint: false)!).map { print($0) }
     }
     
     static func create(item: MUnitPhrase) -> Observable<Int> {
@@ -64,9 +64,9 @@ class MUnitPhrase: NSObject, Codable {
         }
     }
     
-    static func delete(_ id: Int) -> Observable<String> {
+    static func delete(_ id: Int) -> Observable<()> {
         // SQL: DELETE UNITPHRASES WHERE ID=?
         let url = "\(RestApi.url)UNITPHRASES/\(id)"
-        return RestApi.delete(url: url)
+        return RestApi.delete(url: url).map { print($0) }
     }
 }
