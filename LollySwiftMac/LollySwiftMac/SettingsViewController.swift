@@ -128,40 +128,36 @@ class SettingsViewController: NSViewController {
     @IBAction func previousUnitPart(_ sender: AnyObject) {
         if vm.USPARTFROM > 1 {
             vm.USPARTFROM -= 1
-            vm.updatePartFrom().subscribe {
-                self.pubPartFrom.selectItem(at: self.vm.USPARTFROM - 1)
-                self.updateUnitPartTo()
-            }.disposed(by: disposeBag)
+            self.pubPartFrom.selectItem(at: self.vm.USPARTFROM - 1)
+            self.updateUnitPartTo()
+            vm.updatePartFrom().subscribe().disposed(by: disposeBag)
         } else if vm.USUNITFROM > 1 {
             vm.USUNITFROM -= 1
             vm.USPARTFROM = vm.arrParts.count
+            self.pubUnitFrom.selectItem(at: self.vm.USUNITFROM - 1)
+            self.pubPartFrom.selectItem(at: self.vm.USPARTFROM - 1)
+            self.updateUnitPartTo()
             vm.updateUnitFrom().flatMap {
                 self.vm.updatePartFrom()
-            }.subscribe {
-                self.pubUnitFrom.selectItem(at: self.vm.USUNITFROM - 1)
-                self.pubPartFrom.selectItem(at: self.vm.USPARTFROM - 1)
-                self.updateUnitPartTo()
-            }.disposed(by: disposeBag)
+            }.subscribe().disposed(by: disposeBag)
         }
     }
 
     @IBAction func nextUnitPart(_ sender: AnyObject) {
         if vm.USPARTFROM < vm.arrParts.count {
             vm.USPARTFROM += 1
-            vm.updatePartFrom().subscribe {
-                self.pubPartFrom.selectItem(at: self.vm.USPARTFROM - 1)
-                self.updateUnitPartTo()
-            }.disposed(by: disposeBag)
+            self.pubPartFrom.selectItem(at: self.vm.USPARTFROM - 1)
+            self.updateUnitPartTo()
+            vm.updatePartFrom().subscribe().disposed(by: disposeBag)
         } else if vm.USUNITFROM < vm.arrUnits.count {
             vm.USUNITFROM += 1
             vm.USPARTFROM = 1
+            self.pubUnitFrom.selectItem(at: self.vm.USUNITFROM - 1)
+            self.pubPartFrom.selectItem(at: self.vm.USPARTFROM - 1)
+            self.updateUnitPartTo()
             vm.updateUnitFrom().flatMap {
                 self.vm.updatePartFrom()
-            }.subscribe {
-                self.pubUnitFrom.selectItem(at: self.vm.USUNITFROM - 1)
-                self.pubPartFrom.selectItem(at: self.vm.USPARTFROM - 1)
-                self.updateUnitPartTo()
-            }.disposed(by: disposeBag)
+            }.subscribe().disposed(by: disposeBag)
         }
     }
 

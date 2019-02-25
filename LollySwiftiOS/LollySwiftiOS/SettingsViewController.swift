@@ -260,46 +260,42 @@ class SettingsViewController: UITableViewController {
     @IBAction func previousUnitPart(_ sender: AnyObject) {
         if vm.USPARTFROM > 1 {
             vm.USPARTFROM -= 1
-            vm.updatePartFrom().subscribe {
-                self.ddPartFrom.selectIndex(self.vm.USPARTFROM - 1)
-                self.lblPartFrom.text = self.ddPartFrom.selectedItem
-                self.updateUnitPartTo()
-            }.disposed(by: disposeBag)
+            self.ddPartFrom.selectIndex(self.vm.USPARTFROM - 1)
+            self.lblPartFrom.text = self.ddPartFrom.selectedItem
+            self.updateUnitPartTo()
+            vm.updatePartFrom().subscribe().disposed(by: disposeBag)
         } else if vm.USUNITFROM > 1 {
             vm.USUNITFROM -= 1
             vm.USPARTFROM = vm.arrParts.count
+            self.ddUnitFrom.selectIndex(self.vm.USUNITFROM - 1)
+            self.ddPartFrom.selectIndex(self.vm.USPARTFROM - 1)
+            self.lblUnitFrom.text = self.ddUnitFrom.selectedItem
+            self.lblPartFrom.text = self.ddPartFrom.selectedItem
+            self.updateUnitPartTo()
             vm.updateUnitFrom().flatMap {
                 self.vm.updatePartFrom()
-            }.subscribe {
-                self.ddUnitFrom.selectIndex(self.vm.USUNITFROM - 1)
-                self.ddPartFrom.selectIndex(self.vm.USPARTFROM - 1)
-                self.lblUnitFrom.text = self.ddUnitFrom.selectedItem
-                self.lblPartFrom.text = self.ddPartFrom.selectedItem
-                self.updateUnitPartTo()
-            }.disposed(by: disposeBag)
+            }.subscribe().disposed(by: disposeBag)
         }
     }
     
     @IBAction func nextUnitPart(_ sender: AnyObject) {
         if vm.USPARTFROM < vm.arrParts.count {
             vm.USPARTFROM += 1
-            vm.updatePartFrom().subscribe {
-                self.ddPartFrom.selectIndex(self.vm.USPARTFROM - 1)
-                self.lblPartFrom.text = self.ddPartFrom.selectedItem
-                self.updateUnitPartTo()
-            }.disposed(by: disposeBag)
+            self.ddPartFrom.selectIndex(self.vm.USPARTFROM - 1)
+            self.lblPartFrom.text = self.ddPartFrom.selectedItem
+            self.updateUnitPartTo()
+            vm.updatePartFrom().subscribe().disposed(by: disposeBag)
         } else if vm.USUNITFROM < vm.arrUnits.count {
             vm.USUNITFROM += 1
             vm.USPARTFROM = 1
+            self.ddUnitFrom.selectIndex(self.vm.USUNITFROM - 1)
+            self.ddPartFrom.selectIndex(self.vm.USPARTFROM - 1)
+            self.lblUnitFrom.text = self.ddUnitFrom.selectedItem
+            self.lblPartFrom.text = self.ddPartFrom.selectedItem
+            self.updateUnitPartTo()
             vm.updateUnitFrom().flatMap {
                 self.vm.updatePartFrom()
-            }.subscribe {
-                self.ddUnitFrom.selectIndex(self.vm.USUNITFROM - 1)
-                self.ddPartFrom.selectIndex(self.vm.USPARTFROM - 1)
-                self.lblUnitFrom.text = self.ddUnitFrom.selectedItem
-                self.lblPartFrom.text = self.ddPartFrom.selectedItem
-                self.updateUnitPartTo()
-            }.disposed(by: disposeBag)
+            }.subscribe().disposed(by: disposeBag)
         }
     }
 
