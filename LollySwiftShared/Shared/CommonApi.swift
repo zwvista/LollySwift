@@ -30,6 +30,6 @@ class CommonApi {
         return arrUnits
     }
     static func partsFrom(parts: String) -> [String] {
-        return parts.split(" ")
+        return parts.split(",")
     }
 }
