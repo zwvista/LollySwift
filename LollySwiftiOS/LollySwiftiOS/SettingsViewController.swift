@@ -21,9 +21,11 @@ class SettingsViewController: UITableViewController {
     @IBOutlet weak var partToCell: UITableViewCell!
     @IBOutlet weak var lblUnitFrom: UILabel!
     @IBOutlet weak var lblUnitTo: UILabel!
-    @IBOutlet weak var swUnitPartTo: UISwitch!
+    @IBOutlet weak var btnToType: UIButton!
     @IBOutlet weak var lblPartFrom: UILabel!
     @IBOutlet weak var lblPartTo: UILabel!
+    @IBOutlet weak var lblUnitFromTitle: UILabel!
+    @IBOutlet weak var lblPartFromTitle: UILabel!
     @IBOutlet weak var lblUnitToTitle: UILabel!
     @IBOutlet weak var lblPartToTitle: UILabel!
     @IBOutlet weak var btnPrevious: UIButton!
@@ -37,6 +39,7 @@ class SettingsViewController: UITableViewController {
     let ddPartFrom = DropDown()
     let ddUnitTo = DropDown()
     let ddPartTo = DropDown()
+    let ddToType = DropDown()
     
     var vm: SettingsViewModel {
         return vmSettings
@@ -91,42 +94,55 @@ class SettingsViewController: UITableViewController {
 
         ddUnitFrom.anchorView = unitFromCell
         ddUnitFrom.selectionAction = { [unowned self] (index: Int, item: String) in
-            guard self.vm.USUNITFROM != index + 1 else {return}
-            self.vm.USUNITFROM = index + 1
-            self.vm.updateUnitFrom().subscribe { [unowned self] in
-                self.lblUnitFrom.text = item
-                if !self.swUnitPartTo.isOn || self.vm.isInvalidUnitPart {self.updateUnitPartTo()}
-            }.disposed(by: self.disposeBag)
+            guard self.updateUnitFrom(v: index + 1) else {return}
+            if self.ddToType.indexForSelectedRow == 0 {
+                self.updateSingleUnit()
+            } else if self.ddToType.indexForSelectedRow == 1 || self.vm.isInvalidUnitPart {
+                self.updateUnitPartTo()
+            }
         }
 
         ddPartFrom.anchorView = partFromCell
         ddPartFrom.selectionAction = { [unowned self] (index: Int, item: String) in
-            guard self.vm.USPARTFROM != index + 1 else {return}
-            self.vm.USPARTFROM = index + 1
-            self.vm.updatePartFrom().subscribe { [unowned self] in
-                self.lblPartFrom.text = item
-                if !self.swUnitPartTo.isOn || self.vm.isInvalidUnitPart {self.updateUnitPartTo()}
-            }.disposed(by: self.disposeBag)
+            guard self.updatePartFrom(v: index + 1) else {return}
+            if self.ddToType.indexForSelectedRow == 1 || self.vm.isInvalidUnitPart { self.updateUnitPartTo() }
+        }
+        
+        ddToType.dataSource = ["Unit", "Part", "To"]
+        ddToType.anchorView = btnToType
+        ddToType.selectionAction = { [unowned self] (index: Int, item: String) in
+            self.btnToType.titleLabel?.text = item
+            let b = index == 2
+            self.lblUnitTo.isEnabled = b
+            self.lblPartTo.isEnabled = b
+            self.lblUnitToTitle.isEnabled = b
+            self.lblPartToTitle.isEnabled = b
+            self.btnPrevious.isEnabled = !b
+            self.btnNext.isEnabled = !b
+            let b2 = index != 0
+            self.lblPartFrom.isEnabled = b2
+            self.lblPartFromTitle.isEnabled = b2
+            if index == 0 {
+                self.updateSingleUnit()
+            } else if index == 1 {
+                self.updateUnitPartTo()
+            }
+        }
+        ddToType.cancelAction = {
+            // Why do we need this?
+            self.btnToType.titleLabel?.text = self.ddToType.selectedItem
         }
 
         ddUnitTo.anchorView = unitToCell
         ddUnitTo.selectionAction = { [unowned self] (index: Int, item: String) in
-            guard self.vm.USUNITTO != index + 1 else {return}
-            self.vm.USUNITTO = index + 1
-            self.vm.updateUnitTo().subscribe { [unowned self] in
-                self.lblUnitTo.text = item
-                if self.vm.isInvalidUnitPart {self.updateUnitPartFrom()}
-            }.disposed(by: self.disposeBag)
+            guard self.updateUnitTo(v: index + 1) else {return}
+            if self.vm.isInvalidUnitPart {self.updateUnitPartFrom()}
         }
 
         ddPartTo.anchorView = partToCell
         ddPartTo.selectionAction = { [unowned self] (index: Int, item: String) in
-            guard self.vm.USPARTTO != index + 1 else {return}
-            self.vm.USPARTTO = index + 1
-            self.vm.updatePartTo().subscribe { [unowned self] in
-                self.lblPartTo.text = item
-                if self.vm.isInvalidUnitPart {self.updateUnitPartFrom()}
-            }.disposed(by: self.disposeBag)
+            guard self.updatePartTo(v: index + 1) else {return}
+            if self.vm.isInvalidUnitPart {self.updateUnitPartFrom()}
         }
     }
     
@@ -144,11 +160,11 @@ class SettingsViewController: UITableViewController {
             switch indexPath.row {
             case 0:
                 ddUnitFrom.show()
-            case 1:
+            case 1 where ddToType.indexForSelectedRow != 0:
                 ddPartFrom.show()
-            case 3 where swUnitPartTo.isOn:
+            case 3 where ddToType.indexForSelectedRow == 2:
                 ddUnitTo.show()
-            case 4 where swUnitPartTo.isOn:
+            case 4 where ddToType.indexForSelectedRow == 2:
                 ddPartTo.show()
             default:
                 break
@@ -194,8 +210,8 @@ class SettingsViewController: UITableViewController {
         let item = vm.selectedTextbook
         textbookCell.textLabel!.text = item.TEXTBOOKNAME
         textbookCell.detailTextLabel!.text = "\(item.UNITS) Units"
-        swUnitPartTo.isOn = !vm.isSingleUnitPart
-        swUnitPartToValueChanged(self)
+        ddToType.selectRow(vm.isSingleUnitPart ? 1 : vm.isSingleUnit ? 0 : 2)
+        ddToType.selectionAction!(ddToType.indexForSelectedRow!, ddToType.selectedItem!)
         ddTextbook.dataSource = vm.arrTextbooks.map { $0.TEXTBOOKNAME }
         ddTextbook.selectRow(vm.selectedTextbookIndex)
         ddUnitFrom.dataSource = vm.arrUnits
@@ -212,91 +228,92 @@ class SettingsViewController: UITableViewController {
         lblPartTo.text = ddPartTo.selectedItem
     }
     
-    func updateUnitPartFrom() {
-        if vm.USUNITFROM != vm.USUNITTO {
-            vm.USUNITFROM = vm.USUNITTO
-            vm.updateUnitFrom().subscribe {
-                self.ddUnitFrom.selectIndex(self.ddUnitTo.indexForSelectedRow!)
-                self.lblUnitFrom.text = self.lblUnitTo.text
-            }.disposed(by: disposeBag)
-        }
-        if vm.USPARTFROM != vm.USPARTTO {
-            vm.USPARTFROM = vm.USPARTTO
-            vm.updatePartFrom().subscribe {
-                self.ddPartFrom.selectIndex(self.ddPartTo.indexForSelectedRow!)
-                self.lblPartFrom.text = self.lblPartTo.text
-            }.disposed(by: disposeBag)
-        }
+    @IBAction func showToTypeDropDown(_ sender: AnyObject) {
+        ddToType.show()
     }
-    
-    func updateUnitPartTo() {
-        if vm.USUNITTO != vm.USUNITFROM {
-            vm.USUNITTO = vm.USUNITFROM
-            vm.updateUnitTo().subscribe {
-                self.ddUnitTo.selectIndex(self.ddUnitFrom.indexForSelectedRow!)
-                self.lblUnitTo.text = self.lblUnitFrom.text
-            }.disposed(by: disposeBag)
-        }
-        if vm.USPARTTO != vm.USPARTFROM {
-            vm.USPARTTO = vm.USPARTFROM
-            vm.updatePartTo().subscribe {
-                self.ddPartTo.selectIndex(self.ddPartFrom.indexForSelectedRow!)
-                self.lblPartTo.text = self.lblPartFrom.text
-            }.disposed(by: disposeBag)
-        }
-    }
-    
-    @IBAction func swUnitPartToValueChanged(_ sender: AnyObject) {
-        let b = swUnitPartTo.isOn
-        lblUnitTo.isEnabled = b
-        lblPartTo.isEnabled = b
-        lblUnitToTitle.isEnabled = b
-        lblPartToTitle.isEnabled = b
-        btnPrevious.isEnabled = !b
-        btnNext.isEnabled = !b
-        if sender !== self && !b {updateUnitPartTo()}
-    }
-    
+
     @IBAction func previousUnitPart(_ sender: AnyObject) {
-        if vm.USPARTFROM > 1 {
-            vm.USPARTFROM -= 1
-            self.ddPartFrom.selectIndex(self.vm.USPARTFROM - 1)
-            self.lblPartFrom.text = self.ddPartFrom.selectedItem
-            self.updateUnitPartTo()
-            vm.updatePartFrom().subscribe().disposed(by: disposeBag)
+        if ddToType.indexForSelectedRow == 0 {
+            if vm.USUNITFROM > 1 {
+                _ = updateUnitFrom(v: vm.USUNITFROM - 1)
+                _ = updateUnitTo(v: vm.USUNITFROM)
+            }
+        } else if vm.USPARTFROM > 1 {
+            _ = updatePartFrom(v: vm.USPARTFROM - 1)
+            _ = updateUnitPartTo()
         } else if vm.USUNITFROM > 1 {
-            vm.USUNITFROM -= 1
-            vm.USPARTFROM = vm.arrParts.count
-            self.ddUnitFrom.selectIndex(self.vm.USUNITFROM - 1)
-            self.ddPartFrom.selectIndex(self.vm.USPARTFROM - 1)
-            self.lblUnitFrom.text = self.ddUnitFrom.selectedItem
-            self.lblPartFrom.text = self.ddPartFrom.selectedItem
-            self.updateUnitPartTo()
-            vm.updateUnitFrom().flatMap {
-                self.vm.updatePartFrom()
-            }.subscribe().disposed(by: disposeBag)
+            _ = updateUnitFrom(v: vm.USUNITFROM - 1)
+            _ = updatePartFrom(v: vm.arrParts.count)
+            updateUnitPartTo()
         }
     }
     
     @IBAction func nextUnitPart(_ sender: AnyObject) {
-        if vm.USPARTFROM < vm.arrParts.count {
-            vm.USPARTFROM += 1
-            self.ddPartFrom.selectIndex(self.vm.USPARTFROM - 1)
-            self.lblPartFrom.text = self.ddPartFrom.selectedItem
-            self.updateUnitPartTo()
-            vm.updatePartFrom().subscribe().disposed(by: disposeBag)
+        if ddToType.indexForSelectedRow == 0 {
+            if vm.USUNITFROM < vm.arrUnits.count {
+                _ = updateUnitFrom(v: vm.USUNITFROM + 1)
+                _ = updateUnitTo(v: vm.USUNITFROM)
+            }
+        } else if vm.USPARTFROM < vm.arrParts.count {
+            _ = updatePartFrom(v: vm.USPARTFROM + 1)
+            _ = updateUnitPartTo()
         } else if vm.USUNITFROM < vm.arrUnits.count {
-            vm.USUNITFROM += 1
-            vm.USPARTFROM = 1
-            self.ddUnitFrom.selectIndex(self.vm.USUNITFROM - 1)
-            self.ddPartFrom.selectIndex(self.vm.USPARTFROM - 1)
-            self.lblUnitFrom.text = self.ddUnitFrom.selectedItem
-            self.lblPartFrom.text = self.ddPartFrom.selectedItem
-            self.updateUnitPartTo()
-            vm.updateUnitFrom().flatMap {
-                self.vm.updatePartFrom()
-            }.subscribe().disposed(by: disposeBag)
+            _ = updateUnitFrom(v: vm.USUNITFROM + 1)
+            _ = updatePartFrom(v: 1)
+            updateUnitPartTo()
         }
+    }
+    
+    private func updateUnitPartFrom() {
+        _ = updateUnitFrom(v: vm.USUNITTO)
+        _ = updatePartFrom(v: vm.USPARTTO)
+    }
+    
+    private func updateUnitPartTo() {
+        _ = updateUnitTo(v: vm.USUNITFROM)
+        _ = updatePartTo(v: vm.USPARTFROM)
+    }
+    
+    private func updateSingleUnit() {
+        _ = updateUnitTo(v: vm.USUNITFROM)
+        _ = updatePartFrom(v: 1)
+        _ = updatePartTo(v: vm.arrParts.count)
+    }
+
+    private func updateUnitFrom(v: Int) -> Bool {
+        guard vm.USUNITFROM != v else { return false }
+        vm.USUNITFROM = v
+        ddUnitFrom.selectIndex(v - 1)
+        lblUnitFrom.text = self.ddUnitFrom.selectedItem
+        vm.updateUnitFrom().subscribe().disposed(by: disposeBag)
+        return true
+    }
+    
+    private func updateUnitTo(v: Int) -> Bool {
+        guard vm.USUNITTO != v else { return false }
+        vm.USUNITTO = v
+        ddUnitTo.selectIndex(v - 1)
+        lblUnitTo.text = self.ddUnitTo.selectedItem
+        vm.updateUnitTo().subscribe().disposed(by: disposeBag)
+        return true
+    }
+    
+    private func updatePartFrom(v: Int) -> Bool {
+        guard vm.USPARTFROM != v else { return false }
+        vm.USPARTFROM = v
+        ddPartFrom.selectIndex(v - 1)
+        lblPartFrom.text = self.ddPartFrom.selectedItem
+        vm.updatePartFrom().subscribe().disposed(by: disposeBag)
+        return true
+    }
+    
+    private func updatePartTo(v: Int) -> Bool {
+        guard vm.USPARTTO != v else { return false }
+        vm.USPARTTO = v
+        ddPartTo.selectIndex(v - 1)
+        lblPartTo.text = self.ddPartTo.selectedItem
+        vm.updatePartTo().subscribe().disposed(by: disposeBag)
+        return true
     }
 
     deinit {

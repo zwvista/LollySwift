@@ -767,7 +767,7 @@
                                         <menuItem title="Delete" id="Bdo-T3-MSK">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
-                                                <action selector="deletePhrase:" target="Ady-hI-5gd" id="jfC-Vz-tMt"/>
+                                                <action selector="deletePhrase:" target="Ady-hI-5gd" id="WLB-yZ-j3q"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="H4O-Tc-Z2g"/>
@@ -1443,20 +1443,20 @@
                                     <action selector="nextUnitPart:" target="HfO-r7-QMx" id="Kgl-8O-UH9"/>
                                 </connections>
                             </button>
-                            <button translatesAutoresizingMaskIntoConstraints="NO" id="zEX-94-Fpv">
-                                <rect key="frame" x="18" y="53" width="73" height="25"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="chE-kU-NSf"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="49" id="oxg-Le-gy8"/>
-                                </constraints>
-                                <buttonCell key="cell" type="check" title="To" bezelStyle="regularSquare" imagePosition="left" alignment="left" state="on" inset="2" id="dwO-WV-Zvh">
-                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GYX-NJ-ZBj">
+                                <rect key="frame" x="18" y="53" width="111" height="24"/>
+                                <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="17F-Kz-qkd">
                                     <font key="font" metaFont="system"/>
-                                </buttonCell>
+                                    <segments>
+                                        <segment label="Unit" width="35"/>
+                                        <segment label="Part" width="34" selected="YES" tag="1"/>
+                                        <segment label="To" width="34"/>
+                                    </segments>
+                                </segmentedCell>
                                 <connections>
-                                    <action selector="btnUnitPartToClicked:" target="HfO-r7-QMx" id="fYh-0T-KOu"/>
+                                    <action selector="scToTypeClicked:" target="HfO-r7-QMx" id="LYM-pE-vWV"/>
                                 </connections>
-                            </button>
+                            </segmentedControl>
                         </subviews>
                         <constraints>
                             <constraint firstItem="amm-Ya-sSe" firstAttribute="centerY" secondItem="QMz-gd-sUW" secondAttribute="centerY" id="05K-Ot-Dkb"/>
@@ -1466,13 +1466,13 @@
                             <constraint firstItem="Bo4-yz-Ptk" firstAttribute="trailing" secondItem="1oq-rW-MUb" secondAttribute="trailing" id="6xJ-iK-VIC"/>
                             <constraint firstItem="b7U-Wa-ylD" firstAttribute="centerY" secondItem="NLa-HM-eg1" secondAttribute="centerY" id="7XG-Tx-c3Y"/>
                             <constraint firstItem="b7U-Wa-ylD" firstAttribute="leading" secondItem="fnN-We-eae" secondAttribute="leading" id="7t4-J5-Gnh"/>
+                            <constraint firstItem="GYX-NJ-ZBj" firstAttribute="centerY" secondItem="fnN-We-eae" secondAttribute="centerY" id="7w6-uY-Ume"/>
                             <constraint firstItem="Yra-vx-iUa" firstAttribute="leading" secondItem="Bo4-yz-Ptk" secondAttribute="leading" id="9Mq-Jl-PF7"/>
                             <constraint firstItem="NLa-HM-eg1" firstAttribute="leading" secondItem="b7U-Wa-ylD" secondAttribute="trailing" constant="8" symbolic="YES" id="9in-mV-S5Y"/>
                             <constraint firstItem="Yra-vx-iUa" firstAttribute="trailing" secondItem="Bo4-yz-Ptk" secondAttribute="trailing" id="AK7-xY-erj"/>
                             <constraint firstItem="Kfo-kM-SO0" firstAttribute="leading" secondItem="UlA-4i-lOC" secondAttribute="leading" constant="20" symbolic="YES" id="BpP-73-tdm"/>
                             <constraint firstAttribute="trailing" secondItem="PW2-rx-UfY" secondAttribute="trailing" constant="25" id="CEl-LI-ruX"/>
                             <constraint firstItem="iaA-UK-MEB" firstAttribute="leading" secondItem="fnN-We-eae" secondAttribute="leading" id="DQX-hD-jDD"/>
-                            <constraint firstItem="zEX-94-Fpv" firstAttribute="top" secondItem="8FM-8h-XQF" secondAttribute="bottom" constant="18" id="DSl-I7-yBP"/>
                             <constraint firstAttribute="trailing" secondItem="QMz-gd-sUW" secondAttribute="trailing" constant="25" id="Djw-cf-ag4"/>
                             <constraint firstItem="Kfo-kM-SO0" firstAttribute="leading" secondItem="6If-OE-53N" secondAttribute="leading" id="DoC-Sl-cEm"/>
                             <constraint firstItem="GTc-kH-1Ux" firstAttribute="leading" secondItem="RQX-rZ-9Ej" secondAttribute="trailing" constant="59" id="E7W-i4-9sU"/>
@@ -1491,6 +1491,7 @@
                             <constraint firstItem="NHc-fW-dBl" firstAttribute="leading" secondItem="fnN-We-eae" secondAttribute="trailing" constant="8" symbolic="YES" id="Xjb-hf-HyL"/>
                             <constraint firstItem="RQX-rZ-9Ej" firstAttribute="top" secondItem="sxf-h3-GJC" secondAttribute="bottom" constant="7" id="bAV-JR-ecR"/>
                             <constraint firstAttribute="bottom" secondItem="QMz-gd-sUW" secondAttribute="bottom" constant="20" symbolic="YES" id="eUi-PT-tUd"/>
+                            <constraint firstItem="GYX-NJ-ZBj" firstAttribute="leading" secondItem="8FM-8h-XQF" secondAttribute="leading" id="fBT-h4-xYz"/>
                             <constraint firstItem="Xjt-G8-0bL" firstAttribute="leading" secondItem="NHc-fW-dBl" secondAttribute="trailing" constant="25" id="fHA-le-FLc"/>
                             <constraint firstItem="1oq-rW-MUb" firstAttribute="top" secondItem="Bo4-yz-Ptk" secondAttribute="bottom" constant="6" id="fVl-XK-rug"/>
                             <constraint firstItem="Kfo-kM-SO0" firstAttribute="top" secondItem="UlA-4i-lOC" secondAttribute="top" constant="20" symbolic="YES" id="h95-bs-Lbf"/>
@@ -1500,16 +1501,15 @@
                             <constraint firstItem="8FM-8h-XQF" firstAttribute="top" secondItem="b7U-Wa-ylD" secondAttribute="top" id="l03-YF-UDQ"/>
                             <constraint firstItem="RQX-rZ-9Ej" firstAttribute="leading" secondItem="8FM-8h-XQF" secondAttribute="leading" id="luL-OO-2VR"/>
                             <constraint firstItem="fnN-We-eae" firstAttribute="baseline" secondItem="Xjt-G8-0bL" secondAttribute="baseline" id="mky-hd-WAj"/>
-                            <constraint firstItem="sxf-h3-GJC" firstAttribute="centerX" secondItem="zEX-94-Fpv" secondAttribute="centerX" constant="17.5" id="n53-Be-0wz"/>
                             <constraint firstItem="Bo4-yz-Ptk" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6If-OE-53N" secondAttribute="trailing" constant="8" symbolic="YES" id="nzf-Ur-exI"/>
                             <constraint firstItem="RQX-rZ-9Ej" firstAttribute="top" secondItem="GTc-kH-1Ux" secondAttribute="top" id="o6x-wa-Zj8"/>
+                            <constraint firstItem="1oq-rW-MUb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="sxf-h3-GJC" secondAttribute="trailing" constant="8" symbolic="YES" id="oNX-1P-ps6"/>
                             <constraint firstItem="PW2-rx-UfY" firstAttribute="leading" secondItem="Xjt-G8-0bL" secondAttribute="leading" id="or9-mL-E5W"/>
                             <constraint firstItem="iaA-UK-MEB" firstAttribute="centerY" secondItem="QMz-gd-sUW" secondAttribute="centerY" id="pXc-UB-eeI"/>
                             <constraint firstItem="PW2-rx-UfY" firstAttribute="leading" secondItem="NLa-HM-eg1" secondAttribute="trailing" constant="25" id="pmL-2j-e2E"/>
                             <constraint firstItem="fnN-We-eae" firstAttribute="centerY" secondItem="NHc-fW-dBl" secondAttribute="centerY" id="vXJ-yC-eCZ"/>
                             <constraint firstItem="b7U-Wa-ylD" firstAttribute="leading" secondItem="8FM-8h-XQF" secondAttribute="trailing" constant="82" id="wj2-M1-m9m"/>
                             <constraint firstItem="Xjt-G8-0bL" firstAttribute="top" secondItem="PW2-rx-UfY" secondAttribute="bottom" constant="12" id="xE5-xu-8fz"/>
-                            <constraint firstItem="fnN-We-eae" firstAttribute="leading" secondItem="zEX-94-Fpv" secondAttribute="trailing" constant="50" id="y2g-bY-jbL"/>
                             <constraint firstItem="6If-OE-53N" firstAttribute="leading" secondItem="sxf-h3-GJC" secondAttribute="leading" id="zee-bq-bbP"/>
                         </constraints>
                     </view>
@@ -1522,7 +1522,6 @@
                         <outlet property="acUnits" destination="7EM-l7-CJV" id="fz0-dS-1CJ"/>
                         <outlet property="btnNext" destination="amm-Ya-sSe" id="nbe-8V-mIA"/>
                         <outlet property="btnPrevious" destination="iaA-UK-MEB" id="Hgm-rS-vte"/>
-                        <outlet property="btnUnitPartTo" destination="zEX-94-Fpv" id="yKi-qc-X1n"/>
                         <outlet property="pubDictItems" destination="Bo4-yz-Ptk" id="N50-BQ-j4Q"/>
                         <outlet property="pubDictsNote" destination="1oq-rW-MUb" id="X7g-Ef-zSj"/>
                         <outlet property="pubLanguages" destination="Yra-vx-iUa" id="FyI-6e-Ins"/>
@@ -1531,6 +1530,7 @@
                         <outlet property="pubTextbooks" destination="GTc-kH-1Ux" id="51I-aI-Ilk"/>
                         <outlet property="pubUnitFrom" destination="b7U-Wa-ylD" id="I23-ak-1YP"/>
                         <outlet property="pubUnitTo" destination="fnN-We-eae" id="3ng-8B-wSe"/>
+                        <outlet property="scToType" destination="GYX-NJ-ZBj" id="ZZZ-gQ-dml"/>
                         <outlet property="tfUnitsInAllFrom" destination="NLa-HM-eg1" id="NGS-9K-eqz"/>
                         <outlet property="tfUnitsInAllTo" destination="NHc-fW-dBl" id="rFc-gc-gqi"/>
                     </connections>

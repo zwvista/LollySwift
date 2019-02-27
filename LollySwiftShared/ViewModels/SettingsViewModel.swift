@@ -72,6 +72,9 @@ class SettingsViewModel: NSObject {
     var isSingleUnitPart: Bool {
         return USUNITPARTFROM == USUNITPARTTO
     }
+    var isSingleUnit: Bool {
+        return USUNITFROM == USUNITTO && USPARTFROM == 1 && USPARTTO == arrParts.count
+    }
     var isInvalidUnitPart: Bool {
         return USUNITPARTFROM > USUNITPARTTO
     }

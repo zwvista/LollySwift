@@ -31,10 +31,10 @@ class SettingsViewController: NSViewController {
     @IBOutlet weak var pubUnitTo: NSPopUpButton!
     @IBOutlet weak var pubPartFrom: NSPopUpButton!
     @IBOutlet weak var pubPartTo: NSPopUpButton!
-    @IBOutlet weak var btnUnitPartTo: NSButton!
+    @IBOutlet weak var scToType: NSSegmentedControl!
     @IBOutlet weak var btnPrevious: NSButton!
     @IBOutlet weak var btnNext: NSButton!
-
+    
     let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
@@ -84,81 +84,74 @@ class SettingsViewController: NSViewController {
         }.disposed(by: disposeBag)
     }
     
-    @IBAction func btnUnitPartToClicked(_ sender: AnyObject) {
-        let b = btnUnitPartTo.state == .on
+    @IBAction func unitFromSelected(_ sender: AnyObject) {
+        guard updateUnitFrom(v: pubUnitFrom.indexOfSelectedItem + 1) else {return}
+        if scToType.selectedSegment == 0 {
+            updateSingleUnit()
+        } else if scToType.selectedSegment == 1 || vm.isInvalidUnitPart {
+            updateUnitPartTo()
+        }
+    }
+    
+    @IBAction func partFromSelected(_ sender: AnyObject) {
+        guard updatePartFrom(v: pubPartFrom.indexOfSelectedItem + 1) else {return}
+        if scToType.selectedSegment == 1 || vm.isInvalidUnitPart { updateUnitPartTo() }
+    }
+    
+    @IBAction func scToTypeClicked(_ sender: AnyObject) {
+        let b = scToType.selectedSegment == 2
         pubUnitTo.isEnabled = b
         pubPartTo.isEnabled = b
         btnPrevious.isEnabled = !b
         btnNext.isEnabled = !b
-        if sender !== self && !b {updateUnitPartTo()}
+        pubPartFrom.isEnabled = scToType.selectedSegment != 0
+        if scToType.selectedSegment == 0 {
+            updateSingleUnit()
+        } else if scToType.selectedSegment == 1 {
+            updateUnitPartTo()
+        }
     }
-    
-    @IBAction func unitFromSelected(_ sender: AnyObject) {
-        guard vm.USUNITFROM != pubUnitFrom.indexOfSelectedItem + 1 else {return}
-        vm.USUNITFROM = pubUnitFrom.indexOfSelectedItem + 1
-        vm.updateUnitFrom().subscribe {
-            if self.btnUnitPartTo.state == .off || self.vm.isInvalidUnitPart {self.updateUnitPartTo()}
-        }.disposed(by: disposeBag)
-    }
-    
-    @IBAction func unitToSelected(_ sender: AnyObject) {
-        guard vm.USUNITTO != pubUnitTo.indexOfSelectedItem + 1 else {return}
-        vm.USUNITTO = pubUnitTo.indexOfSelectedItem + 1
-        vm.updateUnitTo().subscribe {
-            if self.vm.isInvalidUnitPart {self.updateUnitPartFrom()}
-        }.disposed(by: disposeBag)
-    }
-    
-    @IBAction func partFromSelected(_ sender: AnyObject) {
-        guard vm.USPARTFROM != pubPartFrom.indexOfSelectedItem + 1 else {return}
-        vm.USPARTFROM = pubPartFrom.indexOfSelectedItem + 1
-        vm.updatePartFrom().subscribe {
-            if self.btnUnitPartTo.state == .off || self.vm.isInvalidUnitPart {self.updateUnitPartTo()}
-        }.disposed(by: disposeBag)
-    }
-    
-    @IBAction func partToSelected(_ sender: AnyObject) {
-        guard vm.USPARTTO != pubPartTo.indexOfSelectedItem + 1 else {return}
-        vm.USPARTTO = pubPartTo.indexOfSelectedItem + 1
-        vm.updatePartTo().subscribe {
-            if self.vm.isInvalidUnitPart {self.updateUnitPartFrom()}
-        }.disposed(by: disposeBag)
-    }
-    
+
     @IBAction func previousUnitPart(_ sender: AnyObject) {
-        if vm.USPARTFROM > 1 {
-            vm.USPARTFROM -= 1
-            self.pubPartFrom.selectItem(at: self.vm.USPARTFROM - 1)
-            self.updateUnitPartTo()
-            vm.updatePartFrom().subscribe().disposed(by: disposeBag)
+        if scToType.selectedSegment == 0 {
+            if vm.USUNITFROM > 1 {
+                _ = updateUnitFrom(v: vm.USUNITFROM - 1)
+                _ = updateUnitTo(v: vm.USUNITFROM)
+            }
+        } else if vm.USPARTFROM > 1 {
+            _ = updatePartFrom(v: vm.USPARTFROM - 1)
+            _ = updateUnitPartTo()
         } else if vm.USUNITFROM > 1 {
-            vm.USUNITFROM -= 1
-            vm.USPARTFROM = vm.arrParts.count
-            self.pubUnitFrom.selectItem(at: self.vm.USUNITFROM - 1)
-            self.pubPartFrom.selectItem(at: self.vm.USPARTFROM - 1)
-            self.updateUnitPartTo()
-            vm.updateUnitFrom().flatMap {
-                self.vm.updatePartFrom()
-            }.subscribe().disposed(by: disposeBag)
+            _ = updateUnitFrom(v: vm.USUNITFROM - 1)
+            _ = updatePartFrom(v: vm.arrParts.count)
+            updateUnitPartTo()
         }
     }
 
     @IBAction func nextUnitPart(_ sender: AnyObject) {
-        if vm.USPARTFROM < vm.arrParts.count {
-            vm.USPARTFROM += 1
-            self.pubPartFrom.selectItem(at: self.vm.USPARTFROM - 1)
-            self.updateUnitPartTo()
-            vm.updatePartFrom().subscribe().disposed(by: disposeBag)
+        if scToType.selectedSegment == 0 {
+            if vm.USUNITFROM < vm.arrUnits.count {
+                _ = updateUnitFrom(v: vm.USUNITFROM + 1)
+                _ = updateUnitTo(v: vm.USUNITFROM)
+            }
+        } else if vm.USPARTFROM < vm.arrParts.count {
+            _ = updatePartFrom(v: vm.USPARTFROM + 1)
+            _ = updateUnitPartTo()
         } else if vm.USUNITFROM < vm.arrUnits.count {
-            vm.USUNITFROM += 1
-            vm.USPARTFROM = 1
-            self.pubUnitFrom.selectItem(at: self.vm.USUNITFROM - 1)
-            self.pubPartFrom.selectItem(at: self.vm.USPARTFROM - 1)
-            self.updateUnitPartTo()
-            vm.updateUnitFrom().flatMap {
-                self.vm.updatePartFrom()
-            }.subscribe().disposed(by: disposeBag)
+            _ = updateUnitFrom(v: vm.USUNITFROM + 1)
+            _ = updatePartFrom(v: 1)
+            updateUnitPartTo()
         }
+    }
+
+    @IBAction func unitToSelected(_ sender: AnyObject) {
+        guard updateUnitTo(v: pubUnitTo.indexOfSelectedItem + 1) else {return}
+        if vm.isInvalidUnitPart {self.updateUnitPartFrom()}
+    }
+    
+    @IBAction func partToSelected(_ sender: AnyObject) {
+        guard updatePartTo(v: pubPartTo.indexOfSelectedItem + 1) else {return}
+        vm.updatePartTo().subscribe().disposed(by: disposeBag)
     }
 
     func updateLang() {
@@ -188,40 +181,58 @@ class SettingsViewController: NSViewController {
         pubUnitTo.selectItem(at: vm.USUNITTO - 1)
         pubPartFrom.selectItem(at: vm.USPARTFROM - 1)
         pubPartTo.selectItem(at: vm.USPARTTO - 1)
-        btnUnitPartTo.state = vm.isSingleUnitPart ? .off : .on
-        btnUnitPartToClicked(self)
+        scToType.selectedSegment = vm.isSingleUnitPart ? 1 : vm.isSingleUnit ? 0 : 2
+        scToTypeClicked(self)
     }
     
-    func updateUnitPartFrom() {
-        if vm.USUNITFROM != vm.USUNITTO {
-            vm.USUNITFROM = vm.USUNITTO
-            vm.updateUnitFrom().subscribe {
-                self.pubUnitFrom.selectItem(at: self.pubUnitTo.indexOfSelectedItem)
-            }.disposed(by: disposeBag)
-        }
-        if vm.USPARTFROM != vm.USPARTTO {
-            vm.USPARTFROM = vm.USPARTTO
-            vm.updatePartFrom().subscribe {
-                self.pubPartFrom.selectItem(at: self.pubPartTo.indexOfSelectedItem)
-            }.disposed(by: disposeBag)
-        }
+    private func updateUnitPartFrom() {
+        _ = updateUnitFrom(v: vm.USUNITTO)
+        _ = updatePartFrom(v: vm.USPARTTO)
     }
     
-    func updateUnitPartTo() {
-        if vm.USUNITTO != vm.USUNITFROM {
-            vm.USUNITTO = vm.USUNITFROM
-            vm.updateUnitTo().subscribe {
-                self.pubUnitTo.selectItem(at: self.pubUnitFrom.indexOfSelectedItem)
-            }.disposed(by: disposeBag)
-        }
-        if vm.USPARTTO != vm.USPARTFROM {
-            vm.USPARTTO = vm.USPARTFROM
-            vm.updatePartTo().subscribe {
-                self.pubPartTo.selectItem(at: self.pubPartFrom.indexOfSelectedItem)
-            }.disposed(by: disposeBag)
-        }
+    private func updateUnitPartTo() {
+        _ = updateUnitTo(v: vm.USUNITFROM)
+        _ = updatePartTo(v: vm.USPARTFROM)
     }
     
+    private func updateSingleUnit() {
+        _ = updateUnitTo(v: vm.USUNITFROM)
+        _ = updatePartFrom(v: 1)
+        _ = updatePartTo(v: vm.arrParts.count)
+    }
+    
+    private func updateUnitFrom(v: Int) -> Bool {
+        guard vm.USUNITFROM != v else { return false }
+        vm.USUNITFROM = v
+        pubUnitFrom.selectItem(at: v - 1)
+        vm.updateUnitFrom().subscribe().disposed(by: disposeBag)
+        return true
+    }
+    
+    private func updateUnitTo(v: Int) -> Bool {
+        guard vm.USUNITTO != v else { return false }
+        vm.USUNITTO = v
+        pubUnitTo.selectItem(at: v - 1)
+        vm.updateUnitTo().subscribe().disposed(by: disposeBag)
+        return true
+    }
+    
+    private func updatePartFrom(v: Int) -> Bool {
+        guard vm.USPARTFROM != v else { return false }
+        vm.USPARTFROM = v
+        pubPartFrom.selectItem(at: v - 1)
+        vm.updatePartFrom().subscribe().disposed(by: disposeBag)
+        return true
+    }
+    
+    private func updatePartTo(v: Int) -> Bool {
+        guard vm.USPARTTO != v else { return false }
+        vm.USPARTTO = v
+        pubPartTo.selectItem(at: v - 1)
+        vm.updatePartTo().subscribe().disposed(by: disposeBag)
+        return true
+    }
+
     deinit {
         print("DEBUG: \(self.className) deinit")
     }
