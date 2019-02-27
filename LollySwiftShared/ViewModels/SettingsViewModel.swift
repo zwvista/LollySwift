@@ -73,7 +73,7 @@ class SettingsViewModel: NSObject {
         return USUNITPARTFROM == USUNITPARTTO
     }
     var isSingleUnit: Bool {
-        return USUNITFROM == USUNITTO && USPARTFROM == 1 && USPARTTO == arrParts.count
+        return USUNITFROM == USUNITTO && USPARTFROM == 1 && USPARTTO == partCount
     }
     var isInvalidUnitPart: Bool {
         return USUNITPARTFROM > USUNITPARTTO
@@ -127,8 +127,14 @@ class SettingsViewModel: NSObject {
     
     @objc
     var arrUnits = [String]()
+    var unitCount: Int {
+        return arrUnits.count
+    }
     @objc
     var arrParts = [String]()
+    var partCount: Int {
+        return arrParts.count
+    }
     
     var arrAutoCorrect = [MAutoCorrect]()
     
@@ -177,7 +183,7 @@ class SettingsViewModel: NSObject {
         USTEXTBOOKID = selectedTextbook.ID
         selectedUSTextbookIndex = arrUserSettings.index { $0.KIND == 3 && $0.ENTITYID == self.USTEXTBOOKID }!
         arrUnits = CommonApi.unitsFrom(info: selectedTextbook.UNITINFO)
-        selectedTextbook.UNITS = arrUnits.count
+        selectedTextbook.UNITS = unitCount
         arrParts = CommonApi.partsFrom(parts: selectedTextbook.PARTS)
     }
     

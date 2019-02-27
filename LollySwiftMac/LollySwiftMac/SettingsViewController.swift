@@ -123,21 +123,21 @@ class SettingsViewController: NSViewController {
             _ = updateUnitPartTo()
         } else if vm.USUNITFROM > 1 {
             _ = updateUnitFrom(v: vm.USUNITFROM - 1)
-            _ = updatePartFrom(v: vm.arrParts.count)
+            _ = updatePartFrom(v: vm.partCount)
             updateUnitPartTo()
         }
     }
 
     @IBAction func nextUnitPart(_ sender: AnyObject) {
         if scToType.selectedSegment == 0 {
-            if vm.USUNITFROM < vm.arrUnits.count {
+            if vm.USUNITFROM < vm.unitCount {
                 _ = updateUnitFrom(v: vm.USUNITFROM + 1)
                 _ = updateUnitTo(v: vm.USUNITFROM)
             }
-        } else if vm.USPARTFROM < vm.arrParts.count {
+        } else if vm.USPARTFROM < vm.partCount {
             _ = updatePartFrom(v: vm.USPARTFROM + 1)
             _ = updateUnitPartTo()
-        } else if vm.USUNITFROM < vm.arrUnits.count {
+        } else if vm.USUNITFROM < vm.unitCount {
             _ = updateUnitFrom(v: vm.USUNITFROM + 1)
             _ = updatePartFrom(v: 1)
             updateUnitPartTo()
@@ -198,7 +198,7 @@ class SettingsViewController: NSViewController {
     private func updateSingleUnit() {
         _ = updateUnitTo(v: vm.USUNITFROM)
         _ = updatePartFrom(v: 1)
-        _ = updatePartTo(v: vm.arrParts.count)
+        _ = updatePartTo(v: vm.partCount)
     }
     
     private func updateUnitFrom(v: Int) -> Bool {
