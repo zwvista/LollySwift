@@ -114,14 +114,14 @@ class SettingsViewController: UITableViewController {
             self.btnToType.titleLabel?.text = item
             let b = index == 2
             self.lblUnitTo.isEnabled = b
-            self.lblPartTo.isEnabled = b
+            self.lblPartTo.isEnabled = b && !vm.isSinglePart
             self.lblUnitToTitle.isEnabled = b
-            self.lblPartToTitle.isEnabled = b
+            self.lblPartToTitle.isEnabled = b && !vm.isSinglePart
             self.btnPrevious.isEnabled = !b
             self.btnNext.isEnabled = !b
             let b2 = index != 0
-            self.lblPartFrom.isEnabled = b2
-            self.lblPartFromTitle.isEnabled = b2
+            self.lblPartFrom.isEnabled = b2 && !vm.isSinglePart
+            self.lblPartFromTitle.isEnabled = b2 && !vm.isSinglePart
             if index == 0 {
                 self.updateSingleUnit()
             } else if index == 1 {
@@ -209,8 +209,8 @@ class SettingsViewController: UITableViewController {
     func updateTextbook() {
         let item = vm.selectedTextbook
         textbookCell.textLabel!.text = item.TEXTBOOKNAME
-        textbookCell.detailTextLabel!.text = "\(item.UNITS) Units"
-        ddToType.selectRow(vm.isSingleUnitPart ? 1 : vm.isSingleUnit ? 0 : 2)
+        textbookCell.detailTextLabel!.text = "\(vm.unitCount) Units"
+        ddToType.selectRow(vm.isSingleUnit ? 0 : vm.isSingleUnitPart ? 1 : 2)
         ddToType.selectionAction!(ddToType.indexForSelectedRow!, ddToType.selectedItem!)
         ddTextbook.dataSource = vm.arrTextbooks.map { $0.TEXTBOOKNAME }
         ddTextbook.selectRow(vm.selectedTextbookIndex)

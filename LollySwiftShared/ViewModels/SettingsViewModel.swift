@@ -135,6 +135,9 @@ class SettingsViewModel: NSObject {
     var partCount: Int {
         return arrParts.count
     }
+    var isSinglePart: Bool {
+        return partCount == 1
+    }
     
     var arrAutoCorrect = [MAutoCorrect]()
     
@@ -183,7 +186,6 @@ class SettingsViewModel: NSObject {
         USTEXTBOOKID = selectedTextbook.ID
         selectedUSTextbookIndex = arrUserSettings.index { $0.KIND == 3 && $0.ENTITYID == self.USTEXTBOOKID }!
         arrUnits = CommonApi.unitsFrom(info: selectedTextbook.UNITINFO)
-        selectedTextbook.UNITS = unitCount
         arrParts = CommonApi.partsFrom(parts: selectedTextbook.PARTS)
     }
     

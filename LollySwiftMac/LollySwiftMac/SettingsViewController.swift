@@ -101,10 +101,10 @@ class SettingsViewController: NSViewController {
     @IBAction func scToTypeClicked(_ sender: AnyObject) {
         let b = scToType.selectedSegment == 2
         pubUnitTo.isEnabled = b
-        pubPartTo.isEnabled = b
+        pubPartTo.isEnabled = b && !vm.isSinglePart
         btnPrevious.isEnabled = !b
         btnNext.isEnabled = !b
-        pubPartFrom.isEnabled = scToType.selectedSegment != 0
+        pubPartFrom.isEnabled = scToType.selectedSegment != 0 && !vm.isSinglePart
         if scToType.selectedSegment == 0 {
             updateSingleUnit()
         } else if scToType.selectedSegment == 1 {
@@ -172,7 +172,7 @@ class SettingsViewController: NSViewController {
     func updateTextbook() {
         acTextbooks.content = vm.arrTextbooks
         let item = vm.selectedTextbook
-        let unitsInAll = "(\(item.UNITS) in all)"
+        let unitsInAll = "(\(vm.unitCount) in all)"
         tfUnitsInAllFrom.stringValue = unitsInAll
         tfUnitsInAllTo.stringValue = unitsInAll
         acUnits.content = vm.arrUnits
@@ -181,7 +181,7 @@ class SettingsViewController: NSViewController {
         pubUnitTo.selectItem(at: vm.USUNITTO - 1)
         pubPartFrom.selectItem(at: vm.USPARTFROM - 1)
         pubPartTo.selectItem(at: vm.USPARTTO - 1)
-        scToType.selectedSegment = vm.isSingleUnitPart ? 1 : vm.isSingleUnit ? 0 : 2
+        scToType.selectedSegment = vm.isSingleUnit ? 0 : vm.isSingleUnitPart ? 1 : 2
         scToTypeClicked(self)
     }
     
