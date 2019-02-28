@@ -32,7 +32,7 @@ class PhrasesUnitDetailViewController: UITableViewController, UITextFieldDelegat
         super.viewDidLoad()
         
         ddUnit.anchorView = tfUnit
-        ddUnit.dataSource = vm.vmSettings.arrUnits
+        ddUnit.dataSource = vm.vmSettings.arrUnits.map { $0.label }
         ddUnit.selectRow(item.UNIT - 1)
         ddUnit.selectionAction = { (index: Int, item: String) in
             self.item.UNIT = index + 1
@@ -40,16 +40,16 @@ class PhrasesUnitDetailViewController: UITableViewController, UITextFieldDelegat
         }
         
         ddPart.anchorView = tfPart
-        ddPart.dataSource = vm.vmSettings.arrParts
+        ddPart.dataSource = vm.vmSettings.arrParts.map { $0.label }
         ddPart.selectRow(item.PART - 1)
         ddPart.selectionAction = { (index: Int, item: String) in
             self.item.PART = index + 1
-            self.tfPart.text = self.item.PARTSTR(arrParts: vmSettings.arrParts)
+            self.tfPart.text = self.item.PARTSTR
         }
         
         tfID.text = String(item.ID)
         tfUnit.text = String(item.UNIT)
-        tfPart.text = item.PARTSTR(arrParts: vmSettings.arrParts)
+        tfPart.text = item.PARTSTR
         tfSeqNum.text = String(item.SEQNUM)
         tfPhraseID.text = String(item.PHRASEID)
         tfPhrase.text = item.PHRASE

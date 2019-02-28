@@ -114,14 +114,14 @@ class SettingsViewController: UITableViewController {
             self.btnToType.titleLabel?.text = item
             let b = index == 2
             self.lblUnitTo.isEnabled = b
-            self.lblPartTo.isEnabled = b && !vm.isSinglePart
+            self.lblPartTo.isEnabled = b && !self.vm.isSinglePart
             self.lblUnitToTitle.isEnabled = b
-            self.lblPartToTitle.isEnabled = b && !vm.isSinglePart
+            self.lblPartToTitle.isEnabled = b && !self.vm.isSinglePart
             self.btnPrevious.isEnabled = !b
             self.btnNext.isEnabled = !b
             let b2 = index != 0
-            self.lblPartFrom.isEnabled = b2 && !vm.isSinglePart
-            self.lblPartFromTitle.isEnabled = b2 && !vm.isSinglePart
+            self.lblPartFrom.isEnabled = b2 && !self.vm.isSinglePart
+            self.lblPartFromTitle.isEnabled = b2 && !self.vm.isSinglePart
             if index == 0 {
                 self.updateSingleUnit()
             } else if index == 1 {
@@ -214,13 +214,13 @@ class SettingsViewController: UITableViewController {
         ddToType.selectionAction!(ddToType.indexForSelectedRow!, ddToType.selectedItem!)
         ddTextbook.dataSource = vm.arrTextbooks.map { $0.TEXTBOOKNAME }
         ddTextbook.selectRow(vm.selectedTextbookIndex)
-        ddUnitFrom.dataSource = vm.arrUnits
+        ddUnitFrom.dataSource = vm.arrUnits.map { $0.label }
         ddUnitFrom.selectRow(vm.USUNITFROM - 1)
-        ddPartFrom.dataSource = vm.arrParts
+        ddPartFrom.dataSource = vm.arrParts.map { $0.label }
         ddPartFrom.selectRow(vm.USPARTFROM - 1)
-        ddUnitTo.dataSource = vm.arrUnits
+        ddUnitTo.dataSource = vm.arrUnits.map { $0.label }
         ddUnitTo.selectRow(vm.USUNITTO - 1)
-        ddPartTo.dataSource = vm.arrParts
+        ddPartTo.dataSource = vm.arrParts.map { $0.label }
         ddPartTo.selectRow(vm.USPARTTO - 1)
         lblUnitFrom.text = ddUnitFrom.selectedItem
         lblUnitTo.text = ddUnitTo.selectedItem

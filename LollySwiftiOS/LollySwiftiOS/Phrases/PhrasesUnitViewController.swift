@@ -36,7 +36,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, UISearchBarDelegate,
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PhraseCell", for: indexPath) as! PhrasesUnitCell
         let item = arrPhrases[indexPath.row]
-        cell.lblUnitPartSeqNum!.text = item.UNITPARTSEQNUM(arrUnits: vmSettings.arrUnits, arrParts: vmSettings.arrParts)
+        cell.lblUnitPartSeqNum!.text = item.UNITPARTSEQNUM
         cell.lblPhrase!.text = item.PHRASE
         cell.lblTranslation!.text = item.TRANSLATION
         return cell;

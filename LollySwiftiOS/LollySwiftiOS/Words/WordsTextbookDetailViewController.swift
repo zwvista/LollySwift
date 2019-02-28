@@ -32,7 +32,7 @@ class WordsTextbookDetailViewController: UITableViewController, UITextFieldDeleg
         super.viewDidLoad()
         
         ddUnit.anchorView = tfUnit
-        ddUnit.dataSource = item.arrUnits
+        ddUnit.dataSource = item.arrUnits.map { $0.label }
         ddUnit.selectRow(item.UNIT - 1)
         ddUnit.selectionAction = { (index: Int, item: String) in
             self.item.UNIT = index + 1
@@ -40,7 +40,7 @@ class WordsTextbookDetailViewController: UITableViewController, UITextFieldDeleg
         }
         
         ddPart.anchorView = tfPart
-        ddPart.dataSource = item.arrParts
+        ddPart.dataSource = item.arrParts.map { $0.label }
         ddPart.selectRow(item.PART - 1)
         ddPart.selectionAction = { (index: Int, item: String) in
             self.item.PART = index + 1
