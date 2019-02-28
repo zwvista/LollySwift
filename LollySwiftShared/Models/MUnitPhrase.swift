@@ -20,21 +20,46 @@ class MUnitPhrase: NSObject, Codable {
     var PHRASEID = 0
     var PHRASE = ""
     var TRANSLATION: String?
-    
-    func UNITSTR(arrUnits: [String]) -> String {
-        return arrUnits[UNIT - 1]
+    var UNITS = ""
+    var PARTS = ""
+
+    enum CodingKeys : String, CodingKey {
+        case ID
+        case LANGID
+        case TEXTBOOKID
+        case UNIT
+        case PART
+        case SEQNUM
+        case PHRASEID
+        case PHRASE
+        case TRANSLATION
+        case UNITS
+        case PARTS
     }
-    func PARTSTR(arrParts: [String]) -> String {
-        return arrParts[PART - 1]
+
+    var arrUnits = [MSelectItem]()
+    var arrParts = [MSelectItem]()
+    var UNITSTR: String {
+        return arrUnits.first { $0.value == UNIT }!.label
     }
-    func UNITPARTSEQNUM(arrUnits: [String], arrParts: [String]) -> String {
-        return "\(UNITSTR(arrUnits: arrUnits)) \(SEQNUM)\n\(PARTSTR(arrParts: arrParts))"
+    var PARTSTR: String {
+        return arrParts.first { $0.value == PART }!.label
+    }
+    var UNITPARTSEQNUM: String {
+        return "\(UNITSTR) \(SEQNUM)\n\(PARTSTR)"
     }
 
     static func getDataByTextbook(_ textbookid: Int, unitPartFrom: Int, unitPartTo: Int) -> Observable<[MUnitPhrase]> {
         // SQL: SELECT * FROM VUNITPHRASES WHERE TEXTBOOKID=? AND UNITPART BETWEEN ? AND ? ORDER BY UNITPART,SEQNUM
         let url = "\(RestApi.url)VUNITPHRASES?transform=1&filter[]=TEXTBOOKID,eq,\(textbookid)&filter[]=UNITPART,bt,\(unitPartFrom),\(unitPartTo)&order[]=UNITPART&order[]=SEQNUM"
-        return RestApi.getArray(url: url, keyPath: "VUNITPHRASES")
+        let o: Observable<[MUnitPhrase]> = RestApi.getArray(url: url, keyPath: "VUNITPHRASES")
+        return o.map { arr in
+            arr.forEach { row in
+                row.arrUnits = CommonApi.unitsFrom(info: row.UNITS)
+                row.arrParts = CommonApi.partsFrom(parts: row.PARTS)
+            }
+            return arr
+        }
     }
     
     static func getDataByLangPhrase(_ phraseid: Int) -> Observable<[MUnitPhrase]> {

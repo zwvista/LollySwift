@@ -14,14 +14,14 @@ class MTextbook: NSObject, Codable {
     var ID = 0
     var LANGID = 0
     var TEXTBOOKNAME = ""
-    var UNITINFO = ""
+    var UNITS = ""
     var PARTS = ""
 
     enum CodingKeys : String, CodingKey {
         case ID
         case LANGID
         case TEXTBOOKNAME = "NAME"
-        case UNITINFO
+        case UNITS
         case PARTS
     }
 

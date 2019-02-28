@@ -17,6 +17,8 @@ class PhrasesUnitDetailViewController: NSViewController {
     var item: MUnitPhrase!
     var isAdd: Bool!
 
+    @IBOutlet weak var acUnits: NSArrayController!
+    @IBOutlet weak var acParts: NSArrayController!
     @IBOutlet weak var tfID: NSTextField!
     @IBOutlet weak var pubUnit: NSPopUpButton!
     @IBOutlet weak var pubPart: NSPopUpButton!
@@ -29,8 +31,8 @@ class PhrasesUnitDetailViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        pubUnit.selectItem(at: item.UNIT - 1)
-        pubPart.selectItem(at: item.PART - 1)
+        acUnits.content = item.arrUnits
+        acParts.content = item.arrParts
         isAdd = item.ID == 0
     }
     
@@ -43,8 +45,6 @@ class PhrasesUnitDetailViewController: NSViewController {
     @IBAction func okClicked(_ sender: Any) {
         // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
         self.commitEditing()
-        item.UNIT = pubUnit.indexOfSelectedItem + 1
-        item.PART = pubPart.indexOfSelectedItem + 1
         item.PHRASE = vm.vmSettings.autoCorrectInput(text: item.PHRASE)
         if isAdd {
             vm.arrPhrases.append(item)

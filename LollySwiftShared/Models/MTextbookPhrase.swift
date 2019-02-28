@@ -21,7 +21,7 @@ class MTextbookPhrase: NSObject, Codable {
     var PHRASEID = 0
     var PHRASE = ""
     var TRANSLATION: String?
-    var UNITINFO = ""
+    var UNITS = ""
     var PARTS = ""
     
     enum CodingKeys : String, CodingKey {
@@ -35,17 +35,17 @@ class MTextbookPhrase: NSObject, Codable {
         case PHRASEID
         case PHRASE
         case TRANSLATION
-        case UNITINFO
+        case UNITS
         case PARTS
     }
 
-    var arrUnits = [String]()
-    var arrParts = [String]()
+    var arrUnits = [MSelectItem]()
+    var arrParts = [MSelectItem]()
     var UNITSTR: String {
-        return arrUnits[UNIT - 1]
+        return arrUnits.first { $0.value == UNIT }!.label
     }
     var PARTSTR: String {
-        return arrParts[PART - 1]
+        return arrParts.first { $0.value == PART }!.label
     }
     var UNITPARTSEQNUM: String {
         return "\(UNITSTR) \(SEQNUM)\n\(PARTSTR)"
@@ -57,7 +57,7 @@ class MTextbookPhrase: NSObject, Codable {
         let o: Observable<[MTextbookPhrase]> = RestApi.getArray(url: url, keyPath: "VTEXTBOOKPHRASES")
         return o.map { arr in
             arr.forEach { row in
-                row.arrUnits = CommonApi.unitsFrom(info: row.UNITINFO)
+                row.arrUnits = CommonApi.unitsFrom(info: row.UNITS)
                 row.arrParts = CommonApi.partsFrom(parts: row.PARTS)
             }
             return arr

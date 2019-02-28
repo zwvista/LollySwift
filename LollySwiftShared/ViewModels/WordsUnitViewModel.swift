@@ -136,6 +136,8 @@ class WordsUnitViewModel: NSObject {
         item.UNIT = maxElem?.UNIT ?? vmSettings.USUNITTO
         item.PART = maxElem?.PART ?? vmSettings.USPARTTO
         item.SEQNUM = (maxElem?.SEQNUM ?? 0) + 1
+        item.arrUnits = vmSettings.arrUnits
+        item.arrParts = vmSettings.arrParts
         return item
     }
     

@@ -41,8 +41,8 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! NSTableCellView
         let item = arrPhrases[row]
-        let columnName = tableColumn!.title
-        cell.textField?.stringValue = columnName == "UNIT" ? item.UNITSTR(arrUnits: vm.vmSettings.arrUnits) : columnName == "PART" ? item.PARTSTR(arrParts: vm.vmSettings.arrParts) : String(describing: item.value(forKey: columnName) ?? "")
+        let columnName = tableColumn!.identifier.rawValue
+        cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
         return cell;
     }
     

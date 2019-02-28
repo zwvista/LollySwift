@@ -9,14 +9,15 @@
 import Cocoa
 import RxSwift
 
-@objcMembers
 class WordsUnitDetailViewController: NSViewController {
 
     var vm: WordsUnitViewModel!
     var complete: (() -> Void)?
-    var item: MUnitWord!
+    @objc var item: MUnitWord!
     var isAdd: Bool!
 
+    @IBOutlet weak var acUnits: NSArrayController!
+    @IBOutlet weak var acParts: NSArrayController!
     @IBOutlet weak var tfID: NSTextField!
     @IBOutlet weak var pubUnit: NSPopUpButton!
     @IBOutlet weak var pubPart: NSPopUpButton!
@@ -31,8 +32,8 @@ class WordsUnitDetailViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        pubUnit.selectItem(at: item.UNIT - 1)
-        pubPart.selectItem(at: item.PART - 1)
+        acUnits.content = item.arrUnits
+        acParts.content = item.arrParts
         isAdd = item.ID == 0
     }
     
@@ -45,8 +46,6 @@ class WordsUnitDetailViewController: NSViewController {
     @IBAction func okClicked(_ sender: Any) {
         // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
         self.commitEditing()
-        item.UNIT = pubUnit.indexOfSelectedItem + 1
-        item.PART = pubPart.indexOfSelectedItem + 1
         item.WORD = vm.vmSettings.autoCorrectInput(text: item.WORD)
         if isAdd {
             vm.arrWords.append(item)
@@ -60,5 +59,9 @@ class WordsUnitDetailViewController: NSViewController {
             }.disposed(by: disposeBag)
         }
         dismiss(self)
+    }
+
+    deinit {
+        print("DEBUG: \(self.className) deinit")
     }
 }

@@ -16,6 +16,8 @@ class PhrasesTextbookDetailViewController: NSViewController {
     var complete: (() -> Void)?
     var item: MTextbookPhrase!
 
+    @IBOutlet weak var acUnits: NSArrayController!
+    @IBOutlet weak var acParts: NSArrayController!
     @IBOutlet weak var tfID: NSTextField!
     @IBOutlet weak var tfTextbookName: NSTextField!
     @IBOutlet weak var pubUnit: NSPopUpButton!
@@ -29,8 +31,8 @@ class PhrasesTextbookDetailViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        pubUnit.selectItem(at: item.UNIT - 1)
-        pubPart.selectItem(at: item.PART - 1)
+        acUnits.content = vm.vmSettings.arrUnits
+        acParts.content = vm.vmSettings.arrParts
     }
     
     override func viewDidAppear() {
@@ -42,8 +44,6 @@ class PhrasesTextbookDetailViewController: NSViewController {
     @IBAction func okClicked(_ sender: Any) {
         // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
         self.commitEditing()
-        item.UNIT = pubUnit.indexOfSelectedItem + 1
-        item.PART = pubPart.indexOfSelectedItem + 1
         item.PHRASE = vm.vmSettings.autoCorrectInput(text: item.PHRASE)
         PhrasesTextbookViewModel.update(item: item).subscribe {
             self.complete?()

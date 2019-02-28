@@ -17,6 +17,8 @@ class WordsUnitBatchViewController: NSViewController, NSTableViewDataSource, NST
         return vm.arrWords
     }
 
+    @IBOutlet weak var acUnits: NSArrayController!
+    @IBOutlet weak var acParts: NSArrayController!
     @IBOutlet weak var pubUnit: NSPopUpButton!
     @IBOutlet weak var pubPart: NSPopUpButton!
     @IBOutlet weak var tfSeqNum: NSTextField!
@@ -36,8 +38,8 @@ class WordsUnitBatchViewController: NSViewController, NSTableViewDataSource, NST
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        pubUnit.selectItem(at: unit - 1)
-        pubPart.selectItem(at: part - 1)
+        acUnits.content = vm.vmSettings.arrUnits
+        acParts.content = vm.vmSettings.arrParts
     }
     
     override func viewDidAppear() {
@@ -52,8 +54,8 @@ class WordsUnitBatchViewController: NSViewController, NSTableViewDataSource, NST
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! NSTableCellView
         let item = arrWords[row]
-        let columnName = tableColumn!.title
-        cell.textField?.stringValue = columnName == "UNIT" ? item.UNITSTR(arrUnits: vm.vmSettings.arrUnits) : columnName == "PART" ? item.PARTSTR(arrParts: vm.vmSettings.arrParts) : String(describing: item.value(forKey: columnName) ?? "")
+        let columnName = tableColumn!.identifier.rawValue
+        cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
         return cell;
     }
     
@@ -61,19 +63,6 @@ class WordsUnitBatchViewController: NSViewController, NSTableViewDataSource, NST
     func tableView(_ tableView: NSTableView, didAdd rowView: NSTableRowView, forRow row: Int) {
         let level = arrWords[row].LEVEL
         rowView.backgroundColor = level > 0 ? .yellow : level < 0 ? .gray : .white
-    }
-
-    @IBAction func unitCheckChanged(_ sender: Any) {
-        pubUnit.isEnabled = unitChecked
-    }
-    @IBAction func partCheckChanged(_ sender: Any) {
-        pubPart.isEnabled = partChecked
-    }
-    @IBAction func seqnumCheckChanged(_ sender: Any) {
-        tfSeqNum.isEnabled = seqnumChecked
-    }
-    @IBAction func levelCheckChanged(_ sender: Any) {
-        tfLevel.isEnabled = levelChecked
     }
     
     @IBAction func checkItems(_ sender: Any) {
@@ -87,8 +76,6 @@ class WordsUnitBatchViewController: NSViewController, NSTableViewDataSource, NST
     @IBAction func okClicked(_ sender: Any) {
         // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
         self.commitEditing()
-        unit = pubUnit.indexOfSelectedItem + 1
-        part = pubPart.indexOfSelectedItem + 1
         var o = Observable.just(())
         for i in 0..<tableView.numberOfRows {
             let chk = (tableView.view(atColumn: 0, row: i, makeIfNecessary: false)! as! WordsUnitBatchCell).chk!
@@ -108,6 +95,10 @@ class WordsUnitBatchViewController: NSViewController, NSTableViewDataSource, NST
             self.complete?()
             self.dismiss(self)
         }.disposed(by: disposeBag)
+    }
+
+    deinit {
+        print("DEBUG: \(self.className) deinit")
     }
 }
 

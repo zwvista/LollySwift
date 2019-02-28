@@ -9,13 +9,14 @@
 import Cocoa
 import RxSwift
 
-@objcMembers
 class WordsTextbookDetailViewController: NSViewController {
 
     var vm: WordsTextbookViewModel!
     var complete: (() -> Void)?
-    var item: MTextbookWord!
+    @objc var item: MTextbookWord!
 
+    @IBOutlet weak var acUnits: NSArrayController!
+    @IBOutlet weak var acParts: NSArrayController!
     @IBOutlet weak var tfID: NSTextField!
     @IBOutlet weak var tfTextbookName: NSTextField!
     @IBOutlet weak var pubUnit: NSPopUpButton!
@@ -31,8 +32,8 @@ class WordsTextbookDetailViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        pubUnit.selectItem(at: item.UNIT - 1)
-        pubPart.selectItem(at: item.PART - 1)
+        acUnits.content = item.arrUnits
+        acParts.content = item.arrParts
     }
     
     override func viewDidAppear() {
@@ -44,12 +45,14 @@ class WordsTextbookDetailViewController: NSViewController {
     @IBAction func okClicked(_ sender: Any) {
         // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
         self.commitEditing()
-        item.UNIT = pubUnit.indexOfSelectedItem + 1
-        item.PART = pubPart.indexOfSelectedItem + 1
         item.WORD = vm.vmSettings.autoCorrectInput(text: item.WORD)
         WordsTextbookViewModel.update(item: item).subscribe {
             self.complete?()
         }.disposed(by: disposeBag)
         dismiss(self)
+    }
+
+    deinit {
+        print("DEBUG: \(self.className) deinit")
     }
 }

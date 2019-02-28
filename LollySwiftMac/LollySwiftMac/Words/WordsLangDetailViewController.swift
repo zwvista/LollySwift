@@ -53,4 +53,8 @@ class WordsLangDetailViewController: NSViewController {
         }
         dismiss(self)
     }
+
+    deinit {
+        print("DEBUG: \(self.className) deinit")
+    }
 }

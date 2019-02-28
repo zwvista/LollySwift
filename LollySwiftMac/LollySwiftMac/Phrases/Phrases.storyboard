@@ -28,7 +28,7 @@
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn identifier="UNIT" width="60" minWidth="60" maxWidth="1000" id="oMd-aW-B35">
+                                                <tableColumn identifier="UNITSTR" width="60" minWidth="60" maxWidth="1000" id="oMd-aW-B35">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="UNIT">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -68,7 +68,7 @@
                                                         </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
-                                                <tableColumn identifier="PART" width="60" minWidth="60" maxWidth="1000" id="CC9-Pd-Nya">
+                                                <tableColumn identifier="PARTSTR" width="60" minWidth="60" maxWidth="1000" id="CC9-Pd-Nya">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="PART">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -435,7 +435,10 @@
                                     </menu>
                                 </popUpButtonCell>
                                 <connections>
-                                    <binding destination="9DB-NE-4YZ" name="content" keyPath="vm.vmSettings.arrUnits" id="d17-N3-ngd"/>
+                                    <binding destination="Q0n-G4-6uI" name="content" keyPath="arrangedObjects" id="y5H-eD-3Yk"/>
+                                    <binding destination="Q0n-G4-6uI" name="contentObjects" keyPath="arrangedObjects.value" previousBinding="y5H-eD-3Yk" id="fCn-Fx-CMI"/>
+                                    <binding destination="Q0n-G4-6uI" name="contentValues" keyPath="arrangedObjects.label" previousBinding="fCn-Fx-CMI" id="R4P-s8-rqK"/>
+                                    <binding destination="9DB-NE-4YZ" name="selectedObject" keyPath="item.UNIT" previousBinding="R4P-s8-rqK" id="kgX-Cg-CQD"/>
                                 </connections>
                             </popUpButton>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yeT-vY-SNC">
@@ -460,7 +463,10 @@
                                     </menu>
                                 </popUpButtonCell>
                                 <connections>
-                                    <binding destination="9DB-NE-4YZ" name="content" keyPath="vm.vmSettings.arrParts" id="zpN-EB-WPT"/>
+                                    <binding destination="f9V-Yc-QAP" name="content" keyPath="arrangedObjects" id="63H-mc-LJF"/>
+                                    <binding destination="f9V-Yc-QAP" name="contentObjects" keyPath="arrangedObjects.value" previousBinding="63H-mc-LJF" id="fur-hU-AMx"/>
+                                    <binding destination="f9V-Yc-QAP" name="contentValues" keyPath="arrangedObjects.label" previousBinding="fur-hU-AMx" id="Hci-Tw-CDr"/>
+                                    <binding destination="9DB-NE-4YZ" name="selectedObject" keyPath="item.PART" previousBinding="Hci-Tw-CDr" id="4f7-ez-x7b"/>
                                 </connections>
                             </popUpButton>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XqI-c6-Jm4">
@@ -608,6 +614,8 @@ Gw
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="acParts" destination="f9V-Yc-QAP" id="UZk-2y-6dd"/>
+                        <outlet property="acUnits" destination="Q0n-G4-6uI" id="HHS-dI-CbM"/>
                         <outlet property="pubPart" destination="NV2-Bx-hDX" id="BgC-N7-5bT"/>
                         <outlet property="pubUnit" destination="Lys-TP-MFf" id="ocX-vg-b3L"/>
                         <outlet property="tfID" destination="eA9-Di-RVa" id="lCM-K4-Mqw"/>
@@ -619,6 +627,8 @@ Gw
                 </viewController>
                 <customObject id="GSG-sy-G0i" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController representsSharedInstance="YES" id="sLH-dn-g7j"/>
+                <arrayController id="Q0n-G4-6uI" userLabel="Units Controller"/>
+                <arrayController id="f9V-Yc-QAP" userLabel="Parts Controller"/>
             </objects>
             <point key="canvasLocation" x="-890" y="1809"/>
         </scene>
@@ -1731,7 +1741,10 @@ Gw
                                     </menu>
                                 </popUpButtonCell>
                                 <connections>
-                                    <binding destination="u1Y-qY-rab" name="content" keyPath="item.arrUnits" id="Ch5-iA-7D1"/>
+                                    <binding destination="IRJ-HO-8dx" name="content" keyPath="arrangedObjects" id="Xn8-71-dbk"/>
+                                    <binding destination="IRJ-HO-8dx" name="contentObjects" keyPath="arrangedObjects.value" previousBinding="Xn8-71-dbk" id="dv6-qw-qM2"/>
+                                    <binding destination="IRJ-HO-8dx" name="contentValues" keyPath="arrangedObjects.label" previousBinding="dv6-qw-qM2" id="YUd-Je-pBV"/>
+                                    <binding destination="u1Y-qY-rab" name="selectedObject" keyPath="item.UNIT" previousBinding="YUd-Je-pBV" id="IzY-AK-jTR"/>
                                 </connections>
                             </popUpButton>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6OT-Xr-j1n">
@@ -1756,7 +1769,10 @@ Gw
                                     </menu>
                                 </popUpButtonCell>
                                 <connections>
-                                    <binding destination="u1Y-qY-rab" name="content" keyPath="item.arrParts" id="FX8-Rd-KTY"/>
+                                    <binding destination="OFa-i8-Eih" name="content" keyPath="arrangedObjects" id="X2h-C8-rDG"/>
+                                    <binding destination="OFa-i8-Eih" name="contentObjects" keyPath="arrangedObjects.value" previousBinding="X2h-C8-rDG" id="aUU-jh-wZW"/>
+                                    <binding destination="OFa-i8-Eih" name="contentValues" keyPath="arrangedObjects.label" previousBinding="aUU-jh-wZW" id="6Lb-e1-D5l"/>
+                                    <binding destination="u1Y-qY-rab" name="selectedObject" keyPath="item.PART" previousBinding="6Lb-e1-D5l" id="FGg-wa-mEn"/>
                                 </connections>
                             </popUpButton>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IlD-ID-Pek">
@@ -1910,6 +1926,8 @@ Gw
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="acParts" destination="OFa-i8-Eih" id="ehS-iX-Ye2"/>
+                        <outlet property="acUnits" destination="IRJ-HO-8dx" id="wBw-NK-Zpi"/>
                         <outlet property="pubPart" destination="xwb-hj-8vZ" id="eBf-2w-LQv"/>
                         <outlet property="pubUnit" destination="NMb-kK-xDM" id="KTZ-K8-0YI"/>
                         <outlet property="tfID" destination="9hG-gu-aZp" id="T7G-fj-l3W"/>
@@ -1922,7 +1940,8 @@ Gw
                 </viewController>
                 <customObject id="TCu-5B-5FG" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController id="ZLs-18-S2I"/>
-                <userDefaultsController id="JYm-HQ-jPV"/>
+                <arrayController id="IRJ-HO-8dx" userLabel="Units Controller"/>
+                <arrayController id="OFa-i8-Eih" userLabel="Parts Controller"/>
             </objects>
             <point key="canvasLocation" x="-398" y="1830.5"/>
         </scene>
@@ -1959,7 +1978,11 @@ Gw
                                     </menu>
                                 </popUpButtonCell>
                                 <connections>
-                                    <binding destination="XA9-AL-lPk" name="content" keyPath="vm.vmSettings.arrUnits" id="xmP-MC-dby"/>
+                                    <binding destination="br8-7N-txc" name="content" keyPath="arrangedObjects" id="Nto-Sw-fCf"/>
+                                    <binding destination="br8-7N-txc" name="contentObjects" keyPath="arrangedObjects.value" previousBinding="Nto-Sw-fCf" id="l6W-vD-hrV"/>
+                                    <binding destination="br8-7N-txc" name="contentValues" keyPath="arrangedObjects.label" previousBinding="l6W-vD-hrV" id="dVK-YX-8M7"/>
+                                    <binding destination="XA9-AL-lPk" name="enabled" keyPath="unitChecked" id="DD0-ay-ScM"/>
+                                    <binding destination="XA9-AL-lPk" name="selectedObject" keyPath="unit" previousBinding="dVK-YX-8M7" id="QHX-v3-B1A"/>
                                 </connections>
                             </popUpButton>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FZQ-Ed-o1H">
@@ -1987,7 +2010,11 @@ Gw
                                     </menu>
                                 </popUpButtonCell>
                                 <connections>
-                                    <binding destination="XA9-AL-lPk" name="content" keyPath="vm.vmSettings.arrParts" id="QoR-6N-Lpz"/>
+                                    <binding destination="fqH-n5-w4L" name="content" keyPath="arrangedObjects" id="TgZ-ec-dPr"/>
+                                    <binding destination="fqH-n5-w4L" name="contentObjects" keyPath="arrangedObjects.value" previousBinding="TgZ-ec-dPr" id="Fjw-y0-O76"/>
+                                    <binding destination="fqH-n5-w4L" name="contentValues" keyPath="arrangedObjects.label" previousBinding="Fjw-y0-O76" id="SN3-LU-c5D"/>
+                                    <binding destination="XA9-AL-lPk" name="enabled" keyPath="partChecked" id="7RK-4A-Kt8"/>
+                                    <binding destination="XA9-AL-lPk" name="selectedObject" keyPath="part" previousBinding="SN3-LU-c5D" id="9qI-B8-0jg"/>
                                 </connections>
                             </popUpButton>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="k7v-16-NRE">
@@ -2012,6 +2039,7 @@ Gw
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
+                                    <binding destination="XA9-AL-lPk" name="enabled" keyPath="seqnumChecked" id="xh6-68-dUf"/>
                                     <binding destination="XA9-AL-lPk" name="value" keyPath="seqnum" id="Jmk-oY-faE"/>
                                 </connections>
                             </textField>
@@ -2063,7 +2091,7 @@ Gw
                                                         </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
-                                                <tableColumn identifier="UNIT" width="40" minWidth="40" maxWidth="1000" id="p8b-2I-6dA">
+                                                <tableColumn identifier="UNITSTR" width="40" minWidth="40" maxWidth="1000" id="p8b-2I-6dA">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="UNIT">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2100,7 +2128,7 @@ Gw
                                                         </tableCellView>
                                                     </prototypeCellViews>
                                                 </tableColumn>
-                                                <tableColumn identifier="PART" width="60" minWidth="60" maxWidth="1000" id="TdN-BC-Rzx">
+                                                <tableColumn identifier="PARTSTR" width="60" minWidth="60" maxWidth="1000" id="TdN-BC-Rzx">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="PART">
                                                         <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
@@ -2445,6 +2473,8 @@ Gw
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="acParts" destination="fqH-n5-w4L" id="oie-nf-fny"/>
+                        <outlet property="acUnits" destination="br8-7N-txc" id="NVZ-Uf-bN5"/>
                         <outlet property="pubPart" destination="7Lx-go-k5u" id="gfW-0r-mKS"/>
                         <outlet property="pubUnit" destination="B2s-sk-iew" id="PcL-4w-qWe"/>
                         <outlet property="tableView" destination="gyW-8h-UjQ" id="1rW-NQ-es7"/>
@@ -2453,7 +2483,8 @@ Gw
                 </viewController>
                 <customObject id="eV3-UB-9cu" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController id="eUG-Gt-IJx"/>
-                <userDefaultsController id="58Y-1x-3Nl"/>
+                <arrayController id="br8-7N-txc" userLabel="Units Controller"/>
+                <arrayController id="fqH-n5-w4L" userLabel="Parts Controller"/>
             </objects>
             <point key="canvasLocation" x="-325.5" y="2338"/>
         </scene>

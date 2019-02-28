@@ -22,15 +22,35 @@ class MUnitWord: NSObject, Codable {
     var NOTE: String?
     var FAMIID = 0
     var LEVEL = 0
-    
-    func UNITSTR(arrUnits: [String]) -> String {
-        return arrUnits[UNIT - 1]
+    var UNITS = ""
+    var PARTS = ""
+
+    enum CodingKeys : String, CodingKey {
+        case ID
+        case LANGID
+        case TEXTBOOKID
+        case UNIT
+        case PART
+        case SEQNUM
+        case WORDID
+        case WORD
+        case NOTE
+        case FAMIID
+        case LEVEL
+        case UNITS
+        case PARTS
     }
-    func PARTSTR(arrParts: [String]) -> String {
-        return arrParts[PART - 1]
+
+    var arrUnits = [MSelectItem]()
+    var arrParts = [MSelectItem]()
+    var UNITSTR: String {
+        return arrUnits.first { $0.value == UNIT }!.label
     }
-    func UNITPARTSEQNUM(arrUnits: [String], arrParts: [String]) -> String {
-        return "\(UNITSTR(arrUnits: arrUnits)) \(SEQNUM)\n\(PARTSTR(arrParts: arrParts))"
+    var PARTSTR: String {
+        return arrParts.first { $0.value == PART }!.label
+    }
+    var UNITPARTSEQNUM: String {
+        return "\(UNITSTR) \(SEQNUM)\n\(PARTSTR)"
     }
     var WORDNOTE: String {
         return WORD + ((NOTE ?? "").isEmpty ? "" : "(\(NOTE!))")
@@ -39,7 +59,14 @@ class MUnitWord: NSObject, Codable {
     static func getDataByTextbook(_ textbookid: Int, unitPartFrom: Int, unitPartTo: Int) -> Observable<[MUnitWord]> {
         // SQL: SELECT * FROM VUNITWORDS WHERE TEXTBOOKID=? AND UNITPART BETWEEN ? AND ? ORDER BY UNITPART,SEQNUM
         let url = "\(RestApi.url)VUNITWORDS?transform=1&filter[]=TEXTBOOKID,eq,\(textbookid)&filter[]=UNITPART,bt,\(unitPartFrom),\(unitPartTo)&order[]=UNITPART&order[]=SEQNUM"
-        return RestApi.getArray(url: url, keyPath: "VUNITWORDS")
+        let o: Observable<[MUnitWord]> = RestApi.getArray(url: url, keyPath: "VUNITWORDS")
+        return o.map { arr in
+            arr.forEach { row in
+                row.arrUnits = CommonApi.unitsFrom(info: row.UNITS)
+                row.arrParts = CommonApi.partsFrom(parts: row.PARTS)
+            }
+            return arr
+        }
     }
     
     static func getDataByLangWord(_ wordid: Int) -> Observable<[MUnitWord]> {

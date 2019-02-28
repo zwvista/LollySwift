@@ -171,7 +171,6 @@ class SettingsViewController: NSViewController {
 
     func updateTextbook() {
         acTextbooks.content = vm.arrTextbooks
-        let item = vm.selectedTextbook
         let unitsInAll = "(\(vm.unitCount) in all)"
         tfUnitsInAllFrom.stringValue = unitsInAll
         tfUnitsInAllTo.stringValue = unitsInAll

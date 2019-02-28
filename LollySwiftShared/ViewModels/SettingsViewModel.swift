@@ -126,12 +126,12 @@ class SettingsViewModel: NSObject {
     }
     
     @objc
-    var arrUnits = [String]()
+    var arrUnits = [MSelectItem]()
     var unitCount: Int {
         return arrUnits.count
     }
     @objc
-    var arrParts = [String]()
+    var arrParts = [MSelectItem]()
     var partCount: Int {
         return arrParts.count
     }
@@ -185,7 +185,7 @@ class SettingsViewModel: NSObject {
     private func setSelectedTextbookIndex() {
         USTEXTBOOKID = selectedTextbook.ID
         selectedUSTextbookIndex = arrUserSettings.index { $0.KIND == 3 && $0.ENTITYID == self.USTEXTBOOKID }!
-        arrUnits = CommonApi.unitsFrom(info: selectedTextbook.UNITINFO)
+        arrUnits = CommonApi.unitsFrom(info: selectedTextbook.UNITS)
         arrParts = CommonApi.partsFrom(parts: selectedTextbook.PARTS)
     }
     

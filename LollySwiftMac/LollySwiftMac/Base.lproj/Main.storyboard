@@ -1325,7 +1325,8 @@
                                 </popUpButtonCell>
                                 <connections>
                                     <action selector="unitFromSelected:" target="HfO-r7-QMx" id="Ii5-5G-DUg"/>
-                                    <binding destination="7EM-l7-CJV" name="contentValues" keyPath="arrangedObjects" id="fId-fO-mZl"/>
+                                    <binding destination="7EM-l7-CJV" name="content" keyPath="arrangedObjects" id="7X3-Kn-N99"/>
+                                    <binding destination="7EM-l7-CJV" name="contentValues" keyPath="arrangedObjects.label" previousBinding="7X3-Kn-N99" id="Fkf-jP-bqA"/>
                                 </connections>
                             </popUpButton>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NLa-HM-eg1">
@@ -1351,7 +1352,8 @@
                                 </popUpButtonCell>
                                 <connections>
                                     <action selector="partFromSelected:" target="HfO-r7-QMx" id="yZP-KK-VRp"/>
-                                    <binding destination="IiA-XH-70P" name="contentValues" keyPath="arrangedObjects" id="3aR-YP-rU4"/>
+                                    <binding destination="IiA-XH-70P" name="content" keyPath="arrangedObjects" id="lZm-oS-u12"/>
+                                    <binding destination="IiA-XH-70P" name="contentValues" keyPath="arrangedObjects.label" previousBinding="lZm-oS-u12" id="WmG-Tf-cCq"/>
                                 </connections>
                             </popUpButton>
                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fnN-We-eae">
@@ -1372,7 +1374,8 @@
                                 </popUpButtonCell>
                                 <connections>
                                     <action selector="unitToSelected:" target="HfO-r7-QMx" id="EJw-RY-Aq8"/>
-                                    <binding destination="7EM-l7-CJV" name="contentValues" keyPath="arrangedObjects" id="IyE-WX-zso"/>
+                                    <binding destination="7EM-l7-CJV" name="content" keyPath="arrangedObjects" id="DAv-s4-a2a"/>
+                                    <binding destination="7EM-l7-CJV" name="contentValues" keyPath="arrangedObjects.label" previousBinding="DAv-s4-a2a" id="R6j-xH-vmG"/>
                                 </connections>
                             </popUpButton>
                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Xjt-G8-0bL">
@@ -1393,7 +1396,8 @@
                                 </popUpButtonCell>
                                 <connections>
                                     <action selector="partToSelected:" target="HfO-r7-QMx" id="yNS-jD-weo"/>
-                                    <binding destination="IiA-XH-70P" name="contentValues" keyPath="arrangedObjects" id="lEz-8U-bgI"/>
+                                    <binding destination="IiA-XH-70P" name="content" keyPath="arrangedObjects" id="Q5w-AJ-ptM"/>
+                                    <binding destination="IiA-XH-70P" name="contentValues" keyPath="arrangedObjects.label" previousBinding="Q5w-AJ-ptM" id="seR-pC-riA"/>
                                 </connections>
                             </popUpButton>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="QMz-gd-sUW">
