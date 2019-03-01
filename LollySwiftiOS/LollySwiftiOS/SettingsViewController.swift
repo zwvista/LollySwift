@@ -58,7 +58,7 @@ class SettingsViewController: UITableViewController {
         ddLang.selectRow(vm.selectedLangIndex)
         ddLang.selectionAction = { [unowned self] (index: Int, item: String) in
             guard index != self.vm.selectedLangIndex else {return}
-            self.vm.setSelectedLangIndex(index).flatMap {
+            self.vm.setSelectedLang(self.vm.arrLanguages[index]).flatMap {
                 self.vm.updateLang()
             }.subscribe {
                 self.updateLang()
@@ -68,7 +68,7 @@ class SettingsViewController: UITableViewController {
         ddDictItem.anchorView = dictItemCell
         ddDictItem.selectionAction = { [unowned self] (index: Int, item: String) in
             guard index != self.vm.selectedDictItemIndex else {return}
-            self.vm.selectedDictItemIndex = index
+            self.vm.selectedDictItem = self.vm.arrDictItems[index]
             self.vm.updateDictItem().subscribe {
                 self.updateDictItem()
             }.disposed(by: self.disposeBag)
@@ -77,7 +77,7 @@ class SettingsViewController: UITableViewController {
         ddDictNote.anchorView = dictNoteCell
         ddDictNote.selectionAction = { [unowned self] (index: Int, item: String) in
             guard index != self.vm.selectedDictNoteIndex else {return}
-            self.vm.selectedDictNoteIndex = index
+            self.vm.selectedDictNote = self.vm.arrDictsNote[index]
             self.vm.updateDictNote().subscribe {
                 self.updateDictNote()
             }.disposed(by: self.disposeBag)
@@ -86,7 +86,7 @@ class SettingsViewController: UITableViewController {
         ddTextbook.anchorView = textbookCell
         ddTextbook.selectionAction = { [unowned self] (index: Int, item: String) in
             guard index != self.vm.selectedTextbookIndex else {return}
-            self.vm.selectedTextbookIndex = index
+            self.vm.selectedTextbook = self.vm.arrTextbooks[index]
             self.vm.updateTextbook().subscribe {
                 self.updateTextbook()
             }.disposed(by: self.disposeBag)
@@ -94,7 +94,7 @@ class SettingsViewController: UITableViewController {
 
         ddUnitFrom.anchorView = unitFromCell
         ddUnitFrom.selectionAction = { [unowned self] (index: Int, item: String) in
-            guard self.updateUnitFrom(v: index + 1) else {return}
+            guard self.updateUnitFrom(v: self.vm.arrUnits[index].value) else {return}
             if self.ddToType.indexForSelectedRow == 0 {
                 self.updateSingleUnit()
             } else if self.ddToType.indexForSelectedRow == 1 || self.vm.isInvalidUnitPart {
@@ -104,7 +104,7 @@ class SettingsViewController: UITableViewController {
 
         ddPartFrom.anchorView = partFromCell
         ddPartFrom.selectionAction = { [unowned self] (index: Int, item: String) in
-            guard self.updatePartFrom(v: index + 1) else {return}
+            guard self.updatePartFrom(v: self.vm.arrParts[index].value) else {return}
             if self.ddToType.indexForSelectedRow == 1 || self.vm.isInvalidUnitPart { self.updateUnitPartTo() }
         }
         
@@ -135,13 +135,13 @@ class SettingsViewController: UITableViewController {
 
         ddUnitTo.anchorView = unitToCell
         ddUnitTo.selectionAction = { [unowned self] (index: Int, item: String) in
-            guard self.updateUnitTo(v: index + 1) else {return}
+            guard self.updateUnitTo(v: self.vm.arrUnits[index].value) else {return}
             if self.vm.isInvalidUnitPart {self.updateUnitPartFrom()}
         }
 
         ddPartTo.anchorView = partToCell
         ddPartTo.selectionAction = { [unowned self] (index: Int, item: String) in
-            guard self.updatePartTo(v: index + 1) else {return}
+            guard self.updatePartTo(v: self.vm.arrParts[index].value) else {return}
             if self.vm.isInvalidUnitPart {self.updateUnitPartFrom()}
         }
     }
@@ -173,7 +173,7 @@ class SettingsViewController: UITableViewController {
     }
     
     func updateLang() {
-        let item = vm.selectedLang
+        let item = vm.selectedLang!
         langCell.textLabel!.text = item.LANGNAME
         updateDictItem()
         updateDictNote()
@@ -181,7 +181,7 @@ class SettingsViewController: UITableViewController {
     }
     
     func updateDictItem() {
-        let item = vm.selectedDictItem
+        let item = vm.selectedDictItem!
         dictItemCell.textLabel!.text = item.DICTNAME
         let item2 = vmSettings.arrDictsMean.first { $0.DICTNAME == item.DICTNAME }
         dictItemCell.detailTextLabel!.text = item2?.URL ?? ""
@@ -207,7 +207,7 @@ class SettingsViewController: UITableViewController {
     }
 
     func updateTextbook() {
-        let item = vm.selectedTextbook
+        let item = vm.selectedTextbook!
         textbookCell.textLabel!.text = item.TEXTBOOKNAME
         textbookCell.detailTextLabel!.text = "\(vm.unitCount) Units"
         ddToType.selectRow(vm.isSingleUnit ? 0 : vm.isSingleUnitPart ? 1 : 2)
@@ -283,34 +283,34 @@ class SettingsViewController: UITableViewController {
     private func updateUnitFrom(v: Int) -> Bool {
         guard vm.USUNITFROM != v else { return false }
         vm.USUNITFROM = v
-        ddUnitFrom.selectIndex(v - 1)
+        ddUnitFrom.selectIndex(vm.arrUnits.firstIndex{ $0.value == v }!)
         lblUnitFrom.text = self.ddUnitFrom.selectedItem
         vm.updateUnitFrom().subscribe().disposed(by: disposeBag)
-        return true
-    }
-    
-    private func updateUnitTo(v: Int) -> Bool {
-        guard vm.USUNITTO != v else { return false }
-        vm.USUNITTO = v
-        ddUnitTo.selectIndex(v - 1)
-        lblUnitTo.text = self.ddUnitTo.selectedItem
-        vm.updateUnitTo().subscribe().disposed(by: disposeBag)
         return true
     }
     
     private func updatePartFrom(v: Int) -> Bool {
         guard vm.USPARTFROM != v else { return false }
         vm.USPARTFROM = v
-        ddPartFrom.selectIndex(v - 1)
+        ddPartFrom.selectIndex(vm.arrParts.firstIndex{ $0.value == v }!)
         lblPartFrom.text = self.ddPartFrom.selectedItem
         vm.updatePartFrom().subscribe().disposed(by: disposeBag)
+        return true
+    }
+
+    private func updateUnitTo(v: Int) -> Bool {
+        guard vm.USUNITTO != v else { return false }
+        vm.USUNITTO = v
+        ddUnitTo.selectIndex(vm.arrUnits.firstIndex{ $0.value == v }!)
+        lblUnitTo.text = self.ddUnitTo.selectedItem
+        vm.updateUnitTo().subscribe().disposed(by: disposeBag)
         return true
     }
     
     private func updatePartTo(v: Int) -> Bool {
         guard vm.USPARTTO != v else { return false }
         vm.USPARTTO = v
-        ddPartTo.selectIndex(v - 1)
+        ddPartTo.selectIndex(vm.arrParts.firstIndex{ $0.value == v }!)
         lblPartTo.text = self.ddPartTo.selectedItem
         vm.updatePartTo().subscribe().disposed(by: disposeBag)
         return true

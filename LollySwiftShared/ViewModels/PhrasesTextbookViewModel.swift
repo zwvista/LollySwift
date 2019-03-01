@@ -16,7 +16,7 @@ class PhrasesTextbookViewModel: NSObject {
 
     public init(settings: SettingsViewModel, disposeBag: DisposeBag, complete: @escaping () -> ()) {
         self.vmSettings = settings
-        let item = settings.arrTextbooks[settings.selectedTextbookIndex]
+        let item = settings.selectedTextbook!
         super.init()
         MTextbookPhrase.getDataByLang(item.LANGID).subscribe(onNext: {
             self.arrPhrases = $0

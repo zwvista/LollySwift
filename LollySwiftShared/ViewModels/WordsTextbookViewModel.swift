@@ -21,7 +21,7 @@ class WordsTextbookViewModel: NSObject {
     public init(settings: SettingsViewModel, disposeBag: DisposeBag, complete: @escaping () -> ()) {
         self.vmSettings = settings
         vmNote = NoteViewModel(settings: settings, disposeBag: disposeBag)
-        let item = settings.arrTextbooks[settings.selectedTextbookIndex]
+        let item = settings.selectedTextbook!
         super.init()
         MTextbookWord.getDataByLang(item.LANGID).subscribe(onNext: {
             self.arrWords = $0

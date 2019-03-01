@@ -29,7 +29,7 @@ class WordsSearchViewController: UIViewController, WKNavigationDelegate, UISearc
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         word = sbword.text!
         sbword.resignFirstResponder()
-        let item = vmSettings.selectedDictItem
+        let item = vmSettings.selectedDictItem!
         if item.DICTNAME.starts(with: "Custom") {
             let str = vmSettings.dictHtml(word: word, dictids: item.dictids())
             wvDict.loadHTMLString(str, baseURL: nil)
@@ -59,7 +59,7 @@ class WordsSearchViewController: UIViewController, WKNavigationDelegate, UISearc
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         //        guard webView.stringByEvaluatingJavaScript(from: "document.readyState") == "complete" && status == .navigating else {return}
         guard status == .navigating else {return}
-        let item = vmSettings.selectedDictItem
+        let item = vmSettings.selectedDictItem!
         let item2 = vmSettings.arrDictsMean.first { $0.DICTNAME == item.DICTNAME }!
         // https://stackoverflow.com/questions/34751860/get-html-from-wkwebview-in-swift
         webView.evaluateJavaScript("document.documentElement.outerHTML.toString()") { (html: Any?, error: Error?) in

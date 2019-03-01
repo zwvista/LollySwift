@@ -15,18 +15,12 @@ class SettingsViewModel: NSObject {
     let userid = 1
 
     var arrUserSettings = [MUserSetting]()
-    private var selectedUSUserIndex = 0
-    private var selectedUSUser: MUserSetting {
-        return arrUserSettings[selectedUSUserIndex]
-    }
+    private var selectedUSUser: MUserSetting!
     private var USLANGID: Int {
         get { return selectedUSUser.VALUE1!.toInt()! }
         set { selectedUSUser.VALUE1 = String(newValue) }
     }
-    private var selectedUSLangIndex = 0
-    private var selectedUSLang: MUserSetting {
-        return arrUserSettings[selectedUSLangIndex]
-    }
+    private var selectedUSLang: MUserSetting!
     var USTEXTBOOKID: Int {
         get { return selectedUSLang.VALUE1!.toInt()! }
         set { selectedUSLang.VALUE1 = String(newValue) }
@@ -43,22 +37,23 @@ class SettingsViewModel: NSObject {
         get { return selectedUSLang.VALUE4 ?? "0" }
         set { selectedUSLang.VALUE4 = newValue }
     }
-    private var selectedUSTextbookIndex = 0
-    private var selectedUSTextbook: MUserSetting {
-        return arrUserSettings[selectedUSTextbookIndex]
-    }
+    private var selectedUSTextbook: MUserSetting!
+    @objc
     var USUNITFROM: Int {
         get { return selectedUSTextbook.VALUE1!.toInt()! }
         set { selectedUSTextbook.VALUE1 = String(newValue) }
     }
+    @objc
     var USPARTFROM: Int {
         get { return selectedUSTextbook.VALUE2!.toInt()! }
         set { selectedUSTextbook.VALUE2 = String(newValue) }
     }
+    @objc
     var USUNITTO: Int {
         get { return selectedUSTextbook.VALUE3!.toInt()! }
         set { selectedUSTextbook.VALUE3 = String(newValue) }
     }
+    @objc
     var USPARTTO: Int {
         get { return selectedUSTextbook.VALUE4!.toInt()! }
         set { selectedUSTextbook.VALUE4 = String(newValue) }
@@ -82,47 +77,47 @@ class SettingsViewModel: NSObject {
     @objc
     var arrLanguages = [MLanguage]()
     @objc
-    private(set) var selectedLangIndex = 0
-    var selectedLang: MLanguage {
-        return arrLanguages[selectedLangIndex]
+    var selectedLang: MLanguage!
+    var selectedLangIndex: Int {
+        return arrLanguages.firstIndex { $0 == selectedLang }!
     }
     
     var arrDictsMean = [MDictMean]()
     @objc
     var arrDictItems = [MDictItem]()
     @objc
-    var selectedDictItemIndex = 0 {
+    var selectedDictItem: MDictItem! {
         didSet {
             USDICTITEM = selectedDictItem.DICTID
         }
     }
-    var selectedDictItem: MDictItem {
-        return arrDictItems[selectedDictItemIndex]
+    var selectedDictItemIndex: Int {
+        return arrDictItems.firstIndex { $0 == selectedDictItem }!
     }
     
     @objc
     var arrDictsNote = [MDictNote]()
     @objc
-    var selectedDictNoteIndex = 0 {
+    var selectedDictNote: MDictNote? = nil {
         didSet {
             USDICTNOTEID = selectedDictNote?.ID ?? 0
         }
     }
-    var selectedDictNote: MDictNote? {
-        return arrDictsNote.isEmpty ? nil : arrDictsNote[selectedDictNoteIndex]
+    var selectedDictNoteIndex: Int {
+        return arrDictsNote.firstIndex { $0 == selectedDictNote } ?? 0
     }
     var hasNote: Bool { return !arrDictsNote.isEmpty }
 
     @objc
     var arrTextbooks = [MTextbook]()
     @objc
-    var selectedTextbookIndex = 0 {
+    var selectedTextbook: MTextbook! {
         didSet {
-            setSelectedTextbookIndex()
+            setSelectedTextbook()
         }
     }
-    var selectedTextbook: MTextbook {
-        return arrTextbooks[selectedTextbookIndex]
+    var selectedTextbookIndex: Int {
+        return arrTextbooks.firstIndex { $0 == selectedTextbook }!
     }
     
     @objc
@@ -146,15 +141,15 @@ class SettingsViewModel: NSObject {
             .flatMap { result -> Observable<()> in
                 self.arrLanguages = result.0
                 self.arrUserSettings = result.1
-                self.selectedUSUserIndex = self.arrUserSettings.index { $0.KIND == 1 }!
-                return self.setSelectedLangIndex(self.arrLanguages.index { $0.ID == self.USLANGID }!)
+                self.selectedUSUser = self.arrUserSettings.first { $0.KIND == 1 }!
+                return self.setSelectedLang(self.arrLanguages.first { $0.ID == self.USLANGID }!)
             }
     }
     
-    func setSelectedLangIndex(_ langindex: Int) -> Observable<()> {
-        selectedLangIndex = langindex
+    func setSelectedLang(_ lang: MLanguage) -> Observable<()> {
+        selectedLang = lang
         USLANGID = selectedLang.ID
-        selectedUSLangIndex = arrUserSettings.index { $0.KIND == 2 && $0.ENTITYID == self.USLANGID }!
+        selectedUSLang = arrUserSettings.first { $0.KIND == 2 && $0.ENTITYID == self.USLANGID }!
         let arrDicts = USDICTITEMS.split("\r\n")
         return Observable.zip(MDictMean.getDataByLang(self.USLANGID),
                               MDictNote.getDataByLang(self.USLANGID),
@@ -171,20 +166,18 @@ class SettingsViewModel: NSObject {
                         return [MDictItem(id: d, name: "Custom\(i)")]
                     }
                 }
-                self.selectedDictItemIndex = self.arrDictItems.index { $0.DICTID == self.USDICTITEM } ?? 0
+                self.selectedDictItem = self.arrDictItems.first { $0.DICTID == self.USDICTITEM }!
                 self.arrDictsNote = $0.1
-                if !self.arrDictsNote.isEmpty {
-                    self.selectedDictNoteIndex = self.arrDictsNote.index { $0.ID == self.USDICTNOTEID }!
-                }
+                self.selectedDictNote = self.arrDictsNote.isEmpty ? nil : self.arrDictsNote.first { $0.ID == self.USDICTNOTEID }!
                 self.arrTextbooks = $0.2
-                self.selectedTextbookIndex = self.arrTextbooks.index { $0.ID == self.USTEXTBOOKID }!
+                self.selectedTextbook = self.arrTextbooks.first { $0.ID == self.USTEXTBOOKID }!
                 self.arrAutoCorrect = $0.3
             }
     }
     
-    private func setSelectedTextbookIndex() {
+    private func setSelectedTextbook() {
         USTEXTBOOKID = selectedTextbook.ID
-        selectedUSTextbookIndex = arrUserSettings.index { $0.KIND == 3 && $0.ENTITYID == self.USTEXTBOOKID }!
+        selectedUSTextbook = arrUserSettings.first { $0.KIND == 3 && $0.ENTITYID == self.USTEXTBOOKID }!
         arrUnits = CommonApi.unitsFrom(info: selectedTextbook.UNITS)
         arrParts = CommonApi.partsFrom(parts: selectedTextbook.PARTS)
     }

@@ -41,7 +41,7 @@ class WordsDictViewController: UIViewController, WKNavigationDelegate {
         ddDictItem.dataSource = vm.vmSettings.arrDictItems.map { $0.DICTNAME }
         ddDictItem.selectRow(vm.vmSettings.selectedDictItemIndex)
         ddDictItem.selectionAction = { (index: Int, item: String) in
-            self.vm.vmSettings.selectedDictItemIndex = index
+            self.vm.vmSettings.selectedDictItem = self.vm.vmSettings.arrDictItems[index]
             self.vm.vmSettings.updateDictItem().subscribe {
                 self.selectDictChanged()
             }.disposed(by: self.disposeBag)
@@ -57,7 +57,7 @@ class WordsDictViewController: UIViewController, WKNavigationDelegate {
     }
     
     private func selectDictChanged() {
-        let item = vmSettings.selectedDictItem
+        let item = vmSettings.selectedDictItem!
         btnDict.setTitle(item.DICTNAME, for: .normal)
         if item.DICTNAME.starts(with: "Custom") {
             let str = vmSettings.dictHtml(word: vm.selectedWord, dictids: item.dictids())
@@ -92,7 +92,7 @@ class WordsDictViewController: UIViewController, WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
 //        guard webView.stringByEvaluatingJavaScript(from: "document.readyState") == "complete" && status == .navigating else {return}
         guard status == .navigating else {return}
-        let item = vmSettings.selectedDictItem
+        let item = vmSettings.selectedDictItem!
         let item2 = vmSettings.arrDictsMean.first { $0.DICTNAME == item.DICTNAME }!
         // https://stackoverflow.com/questions/34751860/get-html-from-wkwebview-in-swift
         webView.evaluateJavaScript("document.documentElement.outerHTML.toString()") { (html: Any?, error: Error?) in
