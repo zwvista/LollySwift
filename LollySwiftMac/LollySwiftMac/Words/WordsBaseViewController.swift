@@ -52,14 +52,57 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
         addNewWord()
     }
     
-    func levelForRow(row: Int) -> Int {
-        return 0
+    func itemForRow(row: Int) -> AnyObject? {
+        return nil;
     }
     
     // https://stackoverflow.com/questions/10910779/coloring-rows-in-view-based-nstableview
     func tableView(_ tableView: NSTableView, didAdd rowView: NSTableRowView, forRow row: Int) {
-        let level = levelForRow(row: row)
-        rowView.backgroundColor = level > 0 ? .yellow : level < 0 ? .gray : .white
+        let item = itemForRow(row: row) as! NSObject
+        if let level = item.value(forKey: "LEVEL") as? Int, level != 0, let arr = vmSettings.USLEVELCOLORS![level] {
+            rowView.backgroundColor = NSColor.hexColor(rgbValue: arr[0])
+        }
+    }
+    
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! NSTableCellView
+        let item = itemForRow(row: row) as! NSObject
+        let columnName = tableColumn!.identifier.rawValue
+        cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
+        if let level = item.value(forKey: "LEVEL") as? Int, level != 0, let arr = vmSettings.USLEVELCOLORS![level] {
+            cell.textField?.textColor = NSColor.hexColor(rgbValue: arr[1])
+        }
+        return cell;
+    }
+    
+    func updateTableStatus() {
+        tfTableStatus.stringValue = "\(tableView.numberOfRows) Words"
+    }
+    
+    func tableViewSelectionDidChange(_ notification: Notification) {
+        updateTableStatus()
+        searchDict(self)
+        if speakOrNot {
+            speak(self)
+        }
+    }
+    
+    func endEditing(row: Int) {
+    }
+
+    @IBAction func endEditing(_ sender: NSTextField) {
+        let row = tableView.row(for: sender)
+        let col = tableView.column(for: sender)
+        let key = tableView.tableColumns[col].title
+        let item = itemForRow(row: row) as! NSObject
+        let oldValue = String(describing: item.value(forKey: key))
+        var newValue = sender.stringValue
+        if key == "WORD" {
+            newValue = vmSettings.autoCorrectInput(text: newValue)
+        }
+        guard oldValue != newValue else {return}
+        item.setValue(newValue, forKey: key)
+        endEditing(row: row)
     }
 
     @IBAction func searchNewWord(_ sender: AnyObject) {
@@ -68,8 +111,14 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
         searchWord(word: newWord)
     }
     
+    @IBAction func addNewWord(_ sender: Any) {
+        addNewWord()
+    }
+
+    func addNewWord() {
+    }
+
     func searchWord(word: String) {
-        selectedWord = word
         status = .ready
         let item = vmSettings.arrDictItems[selectedDictItemIndex]
         if item.DICTNAME.starts(with: "Custom") {
@@ -100,22 +149,13 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
             selectedDictItemIndex = tbItem.tag
             print(tbItem.toolbar!.selectedItemIdentifier!.rawValue)
         }
-        if tableView.selectedRow == -1 {
+        let row = tableView.selectedRow
+        if row == -1 {
+            selectedWord = ""
             searchWord(word: newWord)
         } else {
-            searchWordInTableView()
-        }
-    }
-    
-    func updateTableStatus() {
-        tfTableStatus.stringValue = "\(tableView.numberOfRows) Words"
-    }
-    
-    func tableViewSelectionDidChange(_ notification: Notification) {
-        updateTableStatus()
-        searchDict(self)
-        if speakOrNot {
-            speak(self)
+            selectedWord = (itemForRow(row: row) as! NSObject).value(forKey: "WORD") as! String
+            searchWord(word: selectedWord)
         }
     }
 
@@ -134,35 +174,30 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
             self.status = .ready
         }
     }
-    
-    @IBAction func addNewWord(_ sender: Any) {
-        addNewWord()
-    }
 
-    func levelChanged(by delta: Int, row: Int) -> Observable<()> {
-        return Observable.empty()
+    func levelChanged(row: Int) -> Observable<Int> {
+        return Observable.just(0)
     }
     
     private func changeLevel(by delta: Int) {
         let row = tableView.selectedRow
         guard row != -1 else {return}
-        levelChanged(by: delta, row: row).subscribe {
-            self.tableView.reloadData()
-        }.disposed(by: disposeBag)
+        let item = itemForRow(row: row) as! NSObject
+        guard let level = item.value(forKey: "LEVEL") as? Int, let arr = vmSettings.USLEVELCOLORS![level] else {return}
+        let newLevel = level + delta
+        guard newLevel == 0 || arr.contains(newLevel) else {return}
+        item.setValue(newLevel, forKey: "LEVEL")
+        levelChanged(row: row).subscribe(onNext: {
+            if $0 != 0 { self.tableView.reloadData() }
+        }).disposed(by: disposeBag)
     }
 
-    @IBAction func increaseLevel(_ sender: Any) {
+    @IBAction func incLevel(_ sender: Any) {
         changeLevel(by: 1)
     }
     
-    @IBAction func decreaseLevel(_ sender: Any) {
+    @IBAction func decLevel(_ sender: Any) {
         changeLevel(by: -1)
-    }
-
-    func addNewWord() {
-    }
-    
-    func searchWordInTableView() {
     }
 
     func settingsChanged() {

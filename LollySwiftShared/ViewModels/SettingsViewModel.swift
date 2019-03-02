@@ -21,6 +21,16 @@ class SettingsViewModel: NSObject {
         get { return selectedUSUser0.VALUE1!.toInt()! }
         set { selectedUSUser0.VALUE1 = String(newValue) }
     }
+    var USROWSPERPAGEOPTIONS: [Int] {
+        get { return selectedUSUser0.VALUE2!.split(",").map { $0.toInt()! } }
+    }
+    var USROWSPERPAGE: Int {
+        get { return selectedUSUser0.VALUE3!.toInt()! }
+    }
+    var USLEVELCOLORS: [Int: [Int]]!
+    var USREADINTERVAL: Int {
+        get { return selectedUSUser1.VALUE1!.toInt()! }
+    }
     private var selectedUSLang: MUserSetting!
     var USTEXTBOOKID: Int {
         get { return selectedUSLang.VALUE1!.toInt()! }
@@ -144,6 +154,8 @@ class SettingsViewModel: NSObject {
                 self.arrUserSettings = result.1
                 self.selectedUSUser0 = self.arrUserSettings.first { $0.KIND == 1 && $0.ENTITYID == 0 }!
                 self.selectedUSUser1 = self.arrUserSettings.first { $0.KIND == 1 && $0.ENTITYID == 1 }!
+                let arr = self.selectedUSUser0.VALUE4!.split("\r\n").map { $0.split(",") }
+                self.USLEVELCOLORS = Dictionary(grouping: arr) { $0[0].toInt()! }.mapValues { (arr: [[String]]) in [Int(arr[0][1], radix: 16)!, Int(arr[0][2], radix: 16)!] }
                 return self.setSelectedLang(self.arrLanguages.first { $0.ID == self.USLANGID }!)
             }
     }

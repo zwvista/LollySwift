@@ -33,43 +33,20 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
         return arrWords.count
     }
     
-    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! NSTableCellView
-        let item = arrWords[row]
-        let columnName = tableColumn!.identifier.rawValue
-        cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
-        return cell;
-    }
-    
-    override func levelForRow(row: Int) -> Int {
-        return arrWords[row].LEVEL
-    }
-    
-    override func levelChanged(by delta: Int, row: Int) -> Observable<()> {
-        let item = arrWords[row]
-        item.LEVEL += delta
-        return MWordFami.update(wordid: item.WORDID, level: item.LEVEL)
+    override func itemForRow(row: Int) -> AnyObject? {
+        return arrWords[row]
     }
 
-    @IBAction func endEditing(_ sender: NSTextField) {
-        let row = tableView.row(for: sender)
-        let col = tableView.column(for: sender)
-        let key = tableView.tableColumns[col].title
+    override func levelChanged(row: Int) -> Observable<Int> {
         let item = arrWords[row]
-        let oldValue = String(describing: item.value(forKey: key))
-        var newValue = sender.stringValue
-        if key == "WORD" {
-            newValue = vmSettings.autoCorrectInput(text: newValue)
-        }
-        guard oldValue != newValue else {return}
-        item.setValue(newValue, forKey: key)
+        return MWordFami.update(wordid: item.WORDID, level: item.LEVEL).map { 1 }
+    }
+
+    override func endEditing(row: Int) {
+        let item = arrWords[row]
         WordsTextbookViewModel.update(item: item).subscribe {
             self.tableView.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count))
         }.disposed(by: disposeBag)
-    }
-    
-    override func searchWordInTableView() {
-        searchWord(word: arrWords[tableView.selectedRow].WORD)
     }
     
     @IBAction func deleteWord(_ sender: Any) {

@@ -28,16 +28,8 @@ class WordsSearchViewController: WordsBaseViewController {
         return arrWords.count
     }
     
-    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! NSTableCellView
-        let item = arrWords[row]
-        let columnName = tableColumn!.title
-        cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
-        return cell;
-    }
-
-    override func searchWordInTableView() {
-        searchWord(word: arrWords[tableView.selectedRow].WORD)
+    override func itemForRow(row: Int) -> AnyObject? {
+        return arrWords[row]
     }
 
     override func addNewWord() {
@@ -50,17 +42,6 @@ class WordsSearchViewController: WordsBaseViewController {
         tableView.reloadData()
         sfNewWord.stringValue = ""
         newWord = ""
-    }
-    
-    @IBAction func endEditing(_ sender: NSTextField) {
-        let row = tableView.row(for: sender)
-        let col = tableView.column(for: sender)
-        let key = tableView.tableColumns[col].title
-        let item = arrWords[row]
-        let oldValue = String(describing: item.value(forKey: key))
-        let newValue = sender.stringValue
-        guard oldValue != newValue else {return}
-        item.setValue(newValue, forKey: key)
     }
     
     @IBAction func deleteWord(_ sender: Any) {

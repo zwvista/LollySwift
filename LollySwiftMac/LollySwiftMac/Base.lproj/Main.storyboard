@@ -723,13 +723,13 @@
                                         <menuItem title="Increase Level" keyEquivalent="" id="9u6-E6-vjn">
                                             <modifierMask key="keyEquivalentModifierMask" option="YES"/>
                                             <connections>
-                                                <action selector="increaseLevel:" target="Ady-hI-5gd" id="JR0-ix-6CG"/>
+                                                <action selector="incLevel:" target="Ady-hI-5gd" id="JR0-ix-6CG"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Decrease Level" keyEquivalent="" id="Ztb-cn-3DA">
                                             <modifierMask key="keyEquivalentModifierMask" option="YES"/>
                                             <connections>
-                                                <action selector="decreaseLevel:" target="Ady-hI-5gd" id="Cp5-Dp-ldC"/>
+                                                <action selector="decLevel:" target="Ady-hI-5gd" id="Cp5-Dp-ldC"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="AAv-x6-Vbh"/>
@@ -750,6 +750,13 @@
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="batchEdit:" target="Ady-hI-5gd" id="gaU-P0-VDD"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="G9n-xQ-hBf"/>
+                                        <menuItem title="Read" id="x1J-2S-1oG">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="batchEdit:" target="Ady-hI-5gd" id="mu7-pB-Fcl"/>
                                             </connections>
                                         </menuItem>
                                     </items>

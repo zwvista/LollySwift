@@ -38,22 +38,13 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation {
         return arrWords.count
     }
     
-    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! NSTableCellView
-        let item = arrWords[row]
-        let columnName = tableColumn!.identifier.rawValue
-        cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
-        return cell;
-    }
-    
-    override func levelForRow(row: Int) -> Int {
-        return arrWords[row].LEVEL
+    override func itemForRow(row: Int) -> AnyObject? {
+        return arrWords[row]
     }
 
-    override func levelChanged(by delta: Int, row: Int) -> Observable<()> {
+    override func levelChanged(row: Int) -> Observable<Int> {
         let item = arrWords[row]
-        item.LEVEL += delta
-        return MWordFami.update(wordid: item.WORDID, level: item.LEVEL)
+        return MWordFami.update(wordid: item.WORDID, level: item.LEVEL).map { 1 }
     }
 
     func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
@@ -104,25 +95,11 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation {
         return true
     }
     
-    @IBAction func endEditing(_ sender: NSTextField) {
-        let row = tableView.row(for: sender)
-        let col = tableView.column(for: sender)
-        let key = tableView.tableColumns[col].title
+    override func endEditing(row: Int) {
         let item = arrWords[row]
-        let oldValue = String(describing: item.value(forKey: key))
-        var newValue = sender.stringValue
-        if key == "WORD" {
-            newValue = vmSettings.autoCorrectInput(text: newValue)
-        }
-        guard oldValue != newValue else {return}
-        item.setValue(newValue, forKey: key)
         WordsUnitViewModel.update(item: item).subscribe {
             self.tableView.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count))
         }.disposed(by: disposeBag)
-    }
-    
-    override func searchWordInTableView() {
-        searchWord(word: arrWords[tableView.selectedRow].WORD)
     }
     
     override func addNewWord() {
