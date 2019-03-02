@@ -23,20 +23,20 @@
                                         <rect key="frame" x="0.0" y="0.0" width="432" height="600"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
-                                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AOA-N2-K53">
+                                            <searchField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AOA-N2-K53">
                                                 <rect key="frame" x="0.0" y="578" width="308" height="22"/>
-                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="5RA-n6-Fw7">
+                                                <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="5RA-n6-Fw7">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     <connections>
                                                         <binding destination="F8i-pe-Ate" name="value" keyPath="newWord" id="N5u-BD-ESH"/>
                                                     </connections>
-                                                </textFieldCell>
+                                                </searchFieldCell>
                                                 <connections>
                                                     <outlet property="delegate" destination="F8i-pe-Ate" id="4KC-gt-VAW"/>
                                                 </connections>
-                                            </textField>
+                                            </searchField>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ltV-BH-u5n">
                                                 <rect key="frame" x="302" y="572" width="65" height="32"/>
                                                 <buttonCell key="cell" type="push" title="Add" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="1KG-my-7C8">
@@ -58,13 +58,13 @@
                                                 </connections>
                                             </button>
                                             <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JGz-Z7-9aY">
-                                                <rect key="frame" x="0.0" y="0.0" width="432" height="578"/>
+                                                <rect key="frame" x="0.0" y="17" width="432" height="561"/>
                                                 <clipView key="contentView" id="Zcq-Vh-TJP">
-                                                    <rect key="frame" x="1" y="0.0" width="430" height="577"/>
+                                                    <rect key="frame" x="1" y="0.0" width="430" height="560"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="ieV-Ib-SiL" viewBased="YES" id="8Zf-06-OzS">
-                                                            <rect key="frame" x="0.0" y="0.0" width="461" height="554"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="461" height="537"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <size key="intercellSpacing" width="3" height="2"/>
                                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -76,11 +76,11 @@
                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                     </tableHeaderCell>
-                                                                    <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" title="Text Cell" id="a5x-Pl-H5B">
+                                                                    <searchFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" title="Text Cell" id="a5x-Pl-H5B">
                                                                         <font key="font" metaFont="system"/>
                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                                    </textFieldCell>
+                                                                    </searchFieldCell>
                                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                                     <prototypeCellViews>
                                                                         <tableCellView id="EAt-sS-3N4">
@@ -365,7 +365,7 @@
                                                     </connections>
                                                 </clipView>
                                                 <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="MWh-UR-fIZ">
-                                                    <rect key="frame" x="1" y="561" width="430" height="16"/>
+                                                    <rect key="frame" x="1" y="544" width="430" height="16"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </scroller>
                                                 <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="N2m-s2-Gap">
@@ -377,14 +377,24 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </tableHeaderView>
                                             </scrollView>
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IQa-iE-3F1">
+                                                <rect key="frame" x="-2" y="0.0" width="4" height="17"/>
+                                                <textFieldCell key="cell" lineBreakMode="clipping" id="BPa-Xp-ETh">
+                                                    <font key="font" metaFont="system"/>
+                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="AOA-N2-K53" firstAttribute="leading" secondItem="6Rr-wA-xjF" secondAttribute="leading" id="0BW-Qn-vcS"/>
                                             <constraint firstItem="ltV-BH-u5n" firstAttribute="trailing" secondItem="1Jb-tS-hoI" secondAttribute="leading" id="Hzc-es-BMp"/>
                                             <constraint firstItem="JGz-Z7-9aY" firstAttribute="top" secondItem="AOA-N2-K53" secondAttribute="bottom" id="L2O-Iw-1gn"/>
                                             <constraint firstItem="1Jb-tS-hoI" firstAttribute="trailing" secondItem="6Rr-wA-xjF" secondAttribute="trailing" id="LsO-wh-vcR"/>
-                                            <constraint firstAttribute="bottom" secondItem="JGz-Z7-9aY" secondAttribute="bottom" id="OtL-3q-OBi"/>
+                                            <constraint firstItem="IQa-iE-3F1" firstAttribute="leading" secondItem="6Rr-wA-xjF" secondAttribute="leading" id="Mcf-pH-IKN"/>
                                             <constraint firstItem="1Jb-tS-hoI" firstAttribute="top" secondItem="6Rr-wA-xjF" secondAttribute="top" id="QMV-YD-egi"/>
+                                            <constraint firstItem="IQa-iE-3F1" firstAttribute="top" secondItem="JGz-Z7-9aY" secondAttribute="bottom" id="Ugj-1I-Ylr"/>
+                                            <constraint firstAttribute="bottom" secondItem="IQa-iE-3F1" secondAttribute="bottom" id="WW9-qx-LyB"/>
                                             <constraint firstItem="ltV-BH-u5n" firstAttribute="top" secondItem="6Rr-wA-xjF" secondAttribute="top" id="XL4-O0-rra"/>
                                             <constraint firstItem="AOA-N2-K53" firstAttribute="top" secondItem="6Rr-wA-xjF" secondAttribute="top" id="gkv-2X-90T"/>
                                             <constraint firstItem="JGz-Z7-9aY" firstAttribute="leading" secondItem="6Rr-wA-xjF" secondAttribute="leading" id="j2R-cb-V2O"/>
@@ -429,8 +439,9 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="sfNewWord" destination="AOA-N2-K53" id="8dF-vd-y8I"/>
                         <outlet property="tableView" destination="8Zf-06-OzS" id="Vn7-va-cpG"/>
-                        <outlet property="tfNewWord" destination="AOA-N2-K53" id="JJm-gX-0NZ"/>
+                        <outlet property="tfTableStatus" destination="IQa-iE-3F1" id="cbs-gy-uFL"/>
                         <outlet property="wvDict" destination="tEP-Us-q1l" id="0DF-0d-cGv"/>
                     </connections>
                 </viewController>
@@ -482,7 +493,7 @@
                 </menu>
                 <userDefaultsController id="kQx-Qe-nCG"/>
             </objects>
-            <point key="canvasLocation" x="-712" y="1218"/>
+            <point key="canvasLocation" x="-1086" y="848"/>
         </scene>
         <!--Words Unit Detail View Controller-->
         <scene sceneID="LaM-qc-uVe">
@@ -537,8 +548,8 @@
                                 </popUpButtonCell>
                                 <connections>
                                     <binding destination="VTQ-bB-2Fx" name="content" keyPath="arrangedObjects" id="3pM-d7-1S9"/>
-                                    <binding destination="VTQ-bB-2Fx" name="contentObjects" keyPath="arrangedObjects.value" previousBinding="3pM-d7-1S9" id="QVY-IN-a8g"/>
                                     <binding destination="VTQ-bB-2Fx" name="contentValues" keyPath="arrangedObjects.label" previousBinding="QVY-IN-a8g" id="dDH-G5-XuS"/>
+                                    <binding destination="VTQ-bB-2Fx" name="contentObjects" keyPath="arrangedObjects.value" previousBinding="3pM-d7-1S9" id="QVY-IN-a8g"/>
                                     <binding destination="9DB-NE-4YZ" name="selectedObject" keyPath="item.UNIT" previousBinding="dDH-G5-XuS" id="LrS-hW-FQd"/>
                                 </connections>
                             </popUpButton>
@@ -565,8 +576,8 @@
                                 </popUpButtonCell>
                                 <connections>
                                     <binding destination="WY2-p5-H1b" name="content" keyPath="arrangedObjects" id="pZf-M0-tdu"/>
-                                    <binding destination="WY2-p5-H1b" name="contentObjects" keyPath="arrangedObjects.value" previousBinding="pZf-M0-tdu" id="xMy-5Q-Nbn"/>
                                     <binding destination="WY2-p5-H1b" name="contentValues" keyPath="arrangedObjects.label" previousBinding="xMy-5Q-Nbn" id="UW2-X8-mE0"/>
+                                    <binding destination="WY2-p5-H1b" name="contentObjects" keyPath="arrangedObjects.value" previousBinding="pZf-M0-tdu" id="xMy-5Q-Nbn"/>
                                     <binding destination="9DB-NE-4YZ" name="selectedObject" keyPath="item.PART" previousBinding="UW2-X8-mE0" id="4Os-Wc-MDv"/>
                                 </connections>
                             </popUpButton>
@@ -1118,20 +1129,20 @@ Gw
                                         <rect key="frame" x="0.0" y="0.0" width="432" height="600"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
-                                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gcV-CM-abV">
+                                            <searchField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gcV-CM-abV">
                                                 <rect key="frame" x="0.0" y="578" width="308" height="22"/>
-                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="dFk-kd-SQK">
+                                                <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="dFk-kd-SQK">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     <connections>
                                                         <binding destination="UkS-Xi-ogF" name="value" keyPath="newWord" id="0bh-a2-Tt7"/>
                                                     </connections>
-                                                </textFieldCell>
+                                                </searchFieldCell>
                                                 <connections>
                                                     <outlet property="delegate" destination="UkS-Xi-ogF" id="egQ-gg-WMN"/>
                                                 </connections>
-                                            </textField>
+                                            </searchField>
                                             <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tfl-qk-1uh">
                                                 <rect key="frame" x="0.0" y="0.0" width="432" height="578"/>
                                                 <clipView key="contentView" id="hlG-17-BUc">
@@ -1405,8 +1416,8 @@ Gw
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="sfNewWord" destination="gcV-CM-abV" id="8BF-hB-OsN"/>
                         <outlet property="tableView" destination="zh5-gP-ZJa" id="wUb-Zv-H6h"/>
-                        <outlet property="tfNewWord" destination="gcV-CM-abV" id="EFL-GO-1yJ"/>
                         <outlet property="wvDict" destination="Txl-33-AIT" id="hgQ-5V-Jpq"/>
                     </connections>
                 </viewController>
@@ -2304,20 +2315,20 @@ DQ
                                         <rect key="frame" x="0.0" y="0.0" width="432" height="600"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
-                                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fhT-0G-f4c">
+                                            <searchField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fhT-0G-f4c">
                                                 <rect key="frame" x="0.0" y="578" width="308" height="22"/>
-                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="UJS-rt-mBe">
+                                                <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="UJS-rt-mBe">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     <connections>
                                                         <binding destination="ECR-Tq-pby" name="value" keyPath="newWord" id="De4-Hc-kRy"/>
                                                     </connections>
-                                                </textFieldCell>
+                                                </searchFieldCell>
                                                 <connections>
                                                     <outlet property="delegate" destination="ECR-Tq-pby" id="JLu-jc-2yw"/>
                                                 </connections>
-                                            </textField>
+                                            </searchField>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6gy-Tz-aqi">
                                                 <rect key="frame" x="302" y="572" width="65" height="32"/>
                                                 <buttonCell key="cell" type="push" title="Add" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ODi-N1-uhY">
@@ -2550,8 +2561,8 @@ DQ
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="sfNewWord" destination="fhT-0G-f4c" id="Wy6-WK-A8r"/>
                         <outlet property="tableView" destination="bSA-4p-g3s" id="DO7-Qe-vzq"/>
-                        <outlet property="tfNewWord" destination="fhT-0G-f4c" id="URX-Du-alN"/>
                         <outlet property="wvDict" destination="gHo-Yg-Cdv" id="Y9g-gl-Xn4"/>
                     </connections>
                 </viewController>
@@ -2964,20 +2975,20 @@ DQ
                                         <rect key="frame" x="0.0" y="0.0" width="432" height="600"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
-                                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="w87-uB-EsR">
+                                            <searchField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="w87-uB-EsR">
                                                 <rect key="frame" x="0.0" y="578" width="308" height="22"/>
-                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="l1y-2f-Spv">
+                                                <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="l1y-2f-Spv">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     <connections>
                                                         <binding destination="S5w-0q-IQt" name="value" keyPath="newWord" id="rlc-Sb-y3d"/>
                                                     </connections>
-                                                </textFieldCell>
+                                                </searchFieldCell>
                                                 <connections>
                                                     <outlet property="delegate" destination="S5w-0q-IQt" id="zEu-ue-i7a"/>
                                                 </connections>
-                                            </textField>
+                                            </searchField>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="y3o-2y-eVF">
                                                 <rect key="frame" x="302" y="572" width="65" height="32"/>
                                                 <buttonCell key="cell" type="push" title="Add" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="vju-6e-OR7">
@@ -3413,8 +3424,8 @@ DQ
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="sfNewWord" destination="w87-uB-EsR" id="Hko-lL-8cT"/>
                         <outlet property="tableView" destination="NqU-P3-ciK" id="ngY-Mi-EJ0"/>
-                        <outlet property="tfNewWord" destination="w87-uB-EsR" id="xPK-1w-hPf"/>
                         <outlet property="wvDict" destination="mBY-hW-ews" id="jBh-C5-Htb"/>
                     </connections>
                 </viewController>
@@ -3543,8 +3554,8 @@ DQ
                                 </popUpButtonCell>
                                 <connections>
                                     <binding destination="lr9-SX-UbS" name="content" keyPath="arrangedObjects" id="J93-d4-IrP"/>
-                                    <binding destination="lr9-SX-UbS" name="contentObjects" keyPath="arrangedObjects.value" previousBinding="J93-d4-IrP" id="Frs-Ex-0If"/>
                                     <binding destination="lr9-SX-UbS" name="contentValues" keyPath="arrangedObjects.label" previousBinding="Frs-Ex-0If" id="v5Z-UP-9bl"/>
+                                    <binding destination="lr9-SX-UbS" name="contentObjects" keyPath="arrangedObjects.value" previousBinding="J93-d4-IrP" id="Frs-Ex-0If"/>
                                     <binding destination="ISB-iF-Apj" name="selectedObject" keyPath="item.UNIT" previousBinding="v5Z-UP-9bl" id="dak-1B-Snq"/>
                                 </connections>
                             </popUpButton>
@@ -3571,8 +3582,8 @@ DQ
                                 </popUpButtonCell>
                                 <connections>
                                     <binding destination="tEB-fU-HGk" name="content" keyPath="arrangedObjects" id="6fa-X4-CW4"/>
-                                    <binding destination="tEB-fU-HGk" name="contentObjects" keyPath="arrangedObjects.value" previousBinding="6fa-X4-CW4" id="5EL-Sc-bzZ"/>
                                     <binding destination="tEB-fU-HGk" name="contentValues" keyPath="arrangedObjects.label" previousBinding="5EL-Sc-bzZ" id="tGs-zA-De8"/>
+                                    <binding destination="tEB-fU-HGk" name="contentObjects" keyPath="arrangedObjects.value" previousBinding="6fa-X4-CW4" id="5EL-Sc-bzZ"/>
                                     <binding destination="ISB-iF-Apj" name="selectedObject" keyPath="item.PART" previousBinding="tGs-zA-De8" id="vST-OX-vMv"/>
                                 </connections>
                             </popUpButton>
@@ -3839,10 +3850,10 @@ Gw
                                 </popUpButtonCell>
                                 <connections>
                                     <binding destination="AZ5-BW-U8S" name="content" keyPath="arrangedObjects" id="mfl-GY-NLj"/>
-                                    <binding destination="AZ5-BW-U8S" name="contentObjects" keyPath="arrangedObjects.value" previousBinding="mfl-GY-NLj" id="vnI-WG-ZiK"/>
                                     <binding destination="AZ5-BW-U8S" name="contentValues" keyPath="arrangedObjects.label" previousBinding="vnI-WG-ZiK" id="Oqp-WL-yTA"/>
-                                    <binding destination="eyu-wA-IBh" name="enabled" keyPath="unitChecked" id="XYR-dW-k0W"/>
+                                    <binding destination="AZ5-BW-U8S" name="contentObjects" keyPath="arrangedObjects.value" previousBinding="mfl-GY-NLj" id="vnI-WG-ZiK"/>
                                     <binding destination="eyu-wA-IBh" name="selectedObject" keyPath="unit" previousBinding="Oqp-WL-yTA" id="WuF-hu-KfC"/>
+                                    <binding destination="eyu-wA-IBh" name="enabled" keyPath="unitChecked" id="XYR-dW-k0W"/>
                                 </connections>
                             </popUpButton>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="d9b-6J-0IQ">
@@ -3870,10 +3881,10 @@ Gw
                                 </popUpButtonCell>
                                 <connections>
                                     <binding destination="fVu-Eu-8la" name="content" keyPath="arrangedObjects" id="FVz-lP-0yG"/>
-                                    <binding destination="fVu-Eu-8la" name="contentObjects" keyPath="arrangedObjects.value" previousBinding="FVz-lP-0yG" id="qaq-ds-MLl"/>
                                     <binding destination="fVu-Eu-8la" name="contentValues" keyPath="arrangedObjects.label" previousBinding="qaq-ds-MLl" id="NHx-OO-ktH"/>
-                                    <binding destination="eyu-wA-IBh" name="enabled" keyPath="partChecked" id="z3a-qQ-Gzy"/>
+                                    <binding destination="fVu-Eu-8la" name="contentObjects" keyPath="arrangedObjects.value" previousBinding="FVz-lP-0yG" id="qaq-ds-MLl"/>
                                     <binding destination="eyu-wA-IBh" name="selectedObject" keyPath="part" previousBinding="NHx-OO-ktH" id="EnX-ji-76U"/>
+                                    <binding destination="eyu-wA-IBh" name="enabled" keyPath="partChecked" id="z3a-qQ-Gzy"/>
                                 </connections>
                             </popUpButton>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="giE-1J-gQm">
@@ -3897,8 +3908,8 @@ Gw
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="eyu-wA-IBh" name="enabled" keyPath="seqnumChecked" id="EKM-Vd-1jJ"/>
                                     <binding destination="eyu-wA-IBh" name="value" keyPath="seqnum" id="zYd-zB-eqw"/>
+                                    <binding destination="eyu-wA-IBh" name="enabled" keyPath="seqnumChecked" id="EKM-Vd-1jJ"/>
                                 </connections>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Sew-TL-shi">
@@ -3922,8 +3933,8 @@ Gw
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="eyu-wA-IBh" name="enabled" keyPath="levelChecked" id="QCv-wh-IX8"/>
                                     <binding destination="eyu-wA-IBh" name="value" keyPath="level" id="GZm-wT-ktw"/>
+                                    <binding destination="eyu-wA-IBh" name="enabled" keyPath="levelChecked" id="QCv-wh-IX8"/>
                                 </connections>
                             </textField>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E1P-mY-1Xy">

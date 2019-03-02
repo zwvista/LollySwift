@@ -14,8 +14,9 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     var selectedDictItemIndex = 0
     
     @IBOutlet weak var wvDict: WKWebView!
-    @IBOutlet weak var tfNewWord: NSTextField!
+    @IBOutlet weak var sfNewWord: NSSearchField!
     @IBOutlet weak var tableView: NSTableView!
+    @IBOutlet weak var tfTableStatus: NSTextField!
 
     let disposeBag = DisposeBag()
     
@@ -43,7 +44,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     
     func controlTextDidEndEditing(_ obj: Notification) {
         let searchfield = obj.object as! NSControl
-        guard searchfield === tfNewWord else {return}
+        guard searchfield === sfNewWord else {return}
         let dict = (obj as NSNotification).userInfo!
         let reason = dict["NSTextMovement"] as! NSNumber
         let code = Int(reason.int32Value)
@@ -106,7 +107,12 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
         }
     }
     
+    func updateTableStatus() {
+        tfTableStatus.stringValue = "\(tableView.numberOfRows) Words"
+    }
+    
     func tableViewSelectionDidChange(_ notification: Notification) {
+        updateTableStatus()
         searchDict(self)
         if speakOrNot {
             speak(self)
@@ -191,7 +197,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
             MacApi.openPage(url)
         }
     }
-
+    
     deinit {
         print("DEBUG: \(self.className) deinit")
     }

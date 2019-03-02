@@ -129,7 +129,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation {
         guard !newWord.isEmpty else {return}
         let item = vm.newUnitWord()
         item.WORD = vm.vmSettings.autoCorrectInput(text: newWord)
-        self.tfNewWord.stringValue = ""
+        self.sfNewWord.stringValue = ""
         self.newWord = ""
         WordsUnitViewModel.create(item: item).subscribe(onNext: {
             item.ID = $0

@@ -43,21 +43,29 @@ public class LeftMenuViewController: UIViewController, UITableViewDelegate, UITa
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         switch indexPath.row {
-        case 0:            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboardMain.instantiateViewController(withIdentifier: "WordsSearchViewController")), animated: true)
+        case 0:
+            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboardMain.instantiateViewController(withIdentifier: "WordsSearchViewController")), animated: true)
             self.sideMenuViewController!.hideMenuViewController()
-        case 1:            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboardMain.instantiateViewController(withIdentifier: "SettingsViewController")), animated: true)
+        case 1:
+            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboardMain.instantiateViewController(withIdentifier: "SettingsViewController")), animated: true)
             self.sideMenuViewController!.hideMenuViewController()
-        case 2:            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboardWords.instantiateViewController(withIdentifier: "WordsUnitViewController")), animated: true)
+        case 2:
+            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboardWords.instantiateViewController(withIdentifier: "WordsUnitViewController")), animated: true)
             self.sideMenuViewController!.hideMenuViewController()
-        case 3:            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboardWords.instantiateViewController(withIdentifier: "WordsTextbookViewController")), animated: true)
+        case 3:
+            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboardPhrases.instantiateViewController(withIdentifier: "PhrasesUnitViewController")), animated: true)
             self.sideMenuViewController!.hideMenuViewController()
-        case 4:            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboardWords.instantiateViewController(withIdentifier: "WordsLangViewController")), animated: true)
+        case 4:
+            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboardWords.instantiateViewController(withIdentifier: "WordsLangViewController")), animated: true)
             self.sideMenuViewController!.hideMenuViewController()
-        case 5:            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboardPhrases.instantiateViewController(withIdentifier: "PhrasesUnitViewController")), animated: true)
+        case 5:
+            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboardPhrases.instantiateViewController(withIdentifier: "PhrasesLangViewController")), animated: true)
             self.sideMenuViewController!.hideMenuViewController()
-        case 6:            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboardPhrases.instantiateViewController(withIdentifier: "PhrasesTextbookViewController")), animated: true)
+        case 6:
+            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboardWords.instantiateViewController(withIdentifier: "WordsTextbookViewController")), animated: true)
             self.sideMenuViewController!.hideMenuViewController()
-        case 7:            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboardPhrases.instantiateViewController(withIdentifier: "PhrasesLangViewController")), animated: true)
+        case 7:
+            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboardPhrases.instantiateViewController(withIdentifier: "PhrasesTextbookViewController")), animated: true)
             self.sideMenuViewController!.hideMenuViewController()
         default:
             break
@@ -92,7 +100,7 @@ public class LeftMenuViewController: UIViewController, UITableViewDelegate, UITa
             cell!.selectedBackgroundView = UIView()
         }
 
-        var titles = ["Search", "Settings", "Words in Unit", "Words in Textbook", "Words in Language", "Phrases in Unit", "Phrases in Textbook", "Phrases in Language"]
+        var titles = ["Search", "Settings", "Words in Unit", "Phrases in Unit", "Words in Language", "Phrases in Language", "Words in Textbook", "Phrases in Textbook"]
         var images = ["IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty"]
         cell!.textLabel?.text = titles[indexPath.row]
         cell!.imageView?.image = UIImage(named: images[indexPath.row])
