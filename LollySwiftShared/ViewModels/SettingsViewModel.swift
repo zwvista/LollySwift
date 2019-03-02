@@ -15,10 +15,11 @@ class SettingsViewModel: NSObject {
     let userid = 1
 
     var arrUserSettings = [MUserSetting]()
-    private var selectedUSUser: MUserSetting!
+    private var selectedUSUser0: MUserSetting!
+    private var selectedUSUser1: MUserSetting!
     private var USLANGID: Int {
-        get { return selectedUSUser.VALUE1!.toInt()! }
-        set { selectedUSUser.VALUE1 = String(newValue) }
+        get { return selectedUSUser0.VALUE1!.toInt()! }
+        set { selectedUSUser0.VALUE1 = String(newValue) }
     }
     private var selectedUSLang: MUserSetting!
     var USTEXTBOOKID: Int {
@@ -141,7 +142,8 @@ class SettingsViewModel: NSObject {
             .flatMap { result -> Observable<()> in
                 self.arrLanguages = result.0
                 self.arrUserSettings = result.1
-                self.selectedUSUser = self.arrUserSettings.first { $0.KIND == 1 }!
+                self.selectedUSUser0 = self.arrUserSettings.first { $0.KIND == 1 && $0.ENTITYID == 0 }!
+                self.selectedUSUser1 = self.arrUserSettings.first { $0.KIND == 1 && $0.ENTITYID == 1 }!
                 return self.setSelectedLang(self.arrLanguages.first { $0.ID == self.USLANGID }!)
             }
     }
@@ -195,7 +197,7 @@ class SettingsViewModel: NSObject {
     }
     
     func updateLang() -> Observable<()> {
-        return MUserSetting.update(selectedUSUser.ID, langid: USLANGID).map { print($0) }
+        return MUserSetting.update(selectedUSUser0.ID, langid: USLANGID).map { print($0) }
     }
     
     func updateDictItem() -> Observable<()> {
