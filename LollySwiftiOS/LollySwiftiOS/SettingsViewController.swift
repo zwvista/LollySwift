@@ -215,13 +215,13 @@ class SettingsViewController: UITableViewController {
         ddTextbook.dataSource = vm.arrTextbooks.map { $0.TEXTBOOKNAME }
         ddTextbook.selectRow(vm.selectedTextbookIndex)
         ddUnitFrom.dataSource = vm.arrUnits.map { $0.label }
-        ddUnitFrom.selectRow(vm.USUNITFROM - 1)
+        ddUnitFrom.selectRow(vm.arrUnits.firstIndex { $0.value == vm.USUNITFROM }!)
         ddPartFrom.dataSource = vm.arrParts.map { $0.label }
-        ddPartFrom.selectRow(vm.USPARTFROM - 1)
+        ddPartFrom.selectRow(vm.arrUnits.firstIndex { $0.value == vm.USPARTFROM }!)
         ddUnitTo.dataSource = vm.arrUnits.map { $0.label }
-        ddUnitTo.selectRow(vm.USUNITTO - 1)
+        ddUnitTo.selectRow(vm.arrUnits.firstIndex { $0.value == vm.USUNITTO }!)
         ddPartTo.dataSource = vm.arrParts.map { $0.label }
-        ddPartTo.selectRow(vm.USPARTTO - 1)
+        ddPartTo.selectRow(vm.arrUnits.firstIndex { $0.value == vm.USPARTTO }!)
         lblUnitFrom.text = ddUnitFrom.selectedItem
         lblUnitTo.text = ddUnitTo.selectedItem
         lblPartFrom.text = ddPartFrom.selectedItem

@@ -35,17 +35,17 @@ class WordsUnitDetailViewController: UITableViewController, UITextFieldDelegate 
         
         ddUnit.anchorView = tfUnit
         ddUnit.dataSource = vm.vmSettings.arrUnits.map { $0.label }
-        ddUnit.selectRow(item.UNIT - 1)
+        ddUnit.selectRow(vm.vmSettings.arrUnits.firstIndex { $0.value == item.UNIT }!)
         ddUnit.selectionAction = { (index: Int, item: String) in
-            self.item.UNIT = index + 1
+            self.item.UNIT = self.vm.vmSettings.arrUnits[index].value
             self.tfUnit.text = String(self.item.UNIT)
         }
         
         ddPart.anchorView = tfPart
         ddPart.dataSource = vm.vmSettings.arrParts.map { $0.label }
-        ddPart.selectRow(item.PART - 1)
+        ddPart.selectRow(vm.vmSettings.arrUnits.firstIndex { $0.value == item.PART }!)
         ddPart.selectionAction = { (index: Int, item: String) in
-            self.item.PART = index + 1
+            self.item.PART = self.vm.vmSettings.arrParts[index].value
             self.tfPart.text = self.item.PARTSTR
         }
 
