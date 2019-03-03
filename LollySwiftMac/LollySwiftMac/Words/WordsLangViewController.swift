@@ -12,15 +12,18 @@ import RxSwift
 
 class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
 
-    var wc2: WordsLangWindowController! { return view.window!.windowController as? WordsLangWindowController }
     var vm: WordsLangViewModel!
     var arrWords: [MLangWord] {
-        return vm.arrWordsFiltered == nil ? vm.arrWords : vm.arrWordsFiltered!
+        return vm.arrWordsFiltered ?? vm.arrWords
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+
+    override func settingsChanged() {
         refreshTableView(self)
+        super.settingsChanged()
     }
 
     override var representedObject: Any? {
@@ -28,7 +31,7 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
         // Update the view, if already loaded.
         }
     }
-    
+
     //MARK: tableView
 
     override func itemForRow(row: Int) -> AnyObject? {
@@ -111,14 +114,9 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
         if n == 0 {
             vm.arrWordsFiltered = nil
         } else {
-            vm.filterWordsForSearchText(wc2.filterText, scope: "Word")
+            vm.filterWordsForSearchText((wc as! WordsLangWindowController).filterText, scope: "Word")
         }
         self.tableView.reloadData()
-    }
-
-    override func settingsChanged() {
-        refreshTableView(self)
-        super.settingsChanged()
     }
 }
 

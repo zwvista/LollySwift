@@ -20,7 +20,11 @@ class PhrasesLangViewController: PhrasesBaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func settingsChanged() {
         refreshTableView(self)
+        super.settingsChanged()
     }
 
     override var representedObject: Any? {
@@ -96,11 +100,6 @@ class PhrasesLangViewController: PhrasesBaseViewController {
             vm.filterPhrasesForSearchText(wc.filterText, scope: scope)
         }
         self.tableView.reloadData()
-    }
-    
-    override func settingsChanged() {
-        refreshTableView(self)
-        super.settingsChanged()
     }
 }
 

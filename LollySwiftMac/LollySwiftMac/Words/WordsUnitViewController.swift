@@ -23,9 +23,12 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.tableView.registerForDraggedTypes([tableRowDragType])
+    }
+
+    override func settingsChanged() {
         refreshTableView(self)
+        super.settingsChanged()
     }
 
     override var representedObject: Any? {
@@ -177,11 +180,6 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation {
             return vmSettings.hasNote
         }
         return true
-    }
-
-    override func settingsChanged() {
-        refreshTableView(self)
-        super.settingsChanged()
     }
 }
 

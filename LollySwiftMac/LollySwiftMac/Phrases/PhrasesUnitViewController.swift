@@ -23,9 +23,12 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         tableView.registerForDraggedTypes([tableRowDragType])
+    }
+    
+    override func settingsChanged() {
         refreshTableView(self)
+        super.settingsChanged()
     }
 
     override var representedObject: Any? {
@@ -151,11 +154,6 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
     
     override func selectedPhraseChanged() {
         selectedPhrase = tableView.selectedRow == -1 ? "" : vm.arrPhrases[tableView.selectedRow].PHRASE
-    }
-    
-    override func settingsChanged() {
-        refreshTableView(self)
-        super.settingsChanged()
     }
 }
 

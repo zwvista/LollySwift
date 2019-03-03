@@ -20,7 +20,11 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+
+    override func settingsChanged() {
         refreshTableView(self)
+        super.settingsChanged()
     }
 
     override var representedObject: Any? {
@@ -90,11 +94,6 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
             vm.filterWordsForSearchText(wc2.filterText, scope: "Word")
         }
         self.tableView.reloadData()
-    }
-
-    override func settingsChanged() {
-        refreshTableView(self)
-        super.settingsChanged()
     }
 }
 

@@ -642,8 +642,8 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Learn" systemMenu="help" id="yzv-td-Zlb">
                                     <items>
-                                        <menuItem title="Search" id="kdE-P0-huU">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        <menuItem title="Search" keyEquivalent="h" id="kdE-P0-huU">
+                                            <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                             <connections>
                                                 <action selector="search:" target="Voe-Tx-rLC" id="TCk-mA-4cD"/>
                                             </connections>
@@ -655,14 +655,14 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="M0E-D5-Zbj"/>
-                                        <menuItem title="Words in Unit" id="rFh-mG-XP1">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        <menuItem title="Words in Unit" keyEquivalent="w" id="rFh-mG-XP1">
+                                            <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                             <connections>
                                                 <action selector="wordsInUnit:" target="Voe-Tx-rLC" id="mEC-Jh-ryY"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Phrases in Unit" id="OOs-UY-ZL9" userLabel="Phrases in Unit">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        <menuItem title="Phrases in Unit" keyEquivalent="p" id="OOs-UY-ZL9" userLabel="Phrases in Unit">
+                                            <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                             <connections>
                                                 <action selector="phrasesInUnit:" target="Voe-Tx-rLC" id="Pa4-Xq-QaJ"/>
                                             </connections>
