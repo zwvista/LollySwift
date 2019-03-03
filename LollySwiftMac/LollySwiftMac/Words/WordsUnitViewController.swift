@@ -127,7 +127,11 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation {
         self.presentAsSheet(detailVC)
     }
     
-    @IBAction func deleteWord(_ sender: Any) {
+    override func deleteWord(row: Int) {
+        let item = arrWords[row]
+        WordsUnitViewModel.delete(item: item).subscribe{
+            self.refreshTableView(self)
+        }.disposed(by: disposeBag)
     }
     
     @IBAction func refreshTableView(_ sender: Any) {

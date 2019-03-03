@@ -93,7 +93,9 @@ class MLangWord: NSObject, Codable {
         // SQL: INSERT INTO LANGWORDS (LANGID, WORD) VALUES (?,?)
         let url = "\(RestApi.url)LANGWORDS"
         return RestApi.create(url: url, body: try! item.toJSONString(prettyPrint: false)!).map {
-            return $0.toInt()!
+            let id = $0.toInt()!
+            print(id)
+            return id
         }
     }
     

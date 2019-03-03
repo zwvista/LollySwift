@@ -75,10 +75,14 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
         detailVC.complete = { self.tableView.reloadData(); self.addWord(self) }
         self.presentAsSheet(detailVC)
     }
-    
-    @IBAction func deleteWord(_ sender: Any) {
+
+    override func deleteWord(row: Int) {
+        let item = arrWords[row]
+        WordsLangViewModel.delete(item.ID).subscribe {
+            self.refreshTableView(self)
+        }.disposed(by: disposeBag)
     }
-    
+
     @IBAction func refreshTableView(_ sender: Any) {
         vm = WordsLangViewModel(settings: AppDelegate.theSettingsViewModel, disposeBag: disposeBag) {
             self.tableView.reloadData()

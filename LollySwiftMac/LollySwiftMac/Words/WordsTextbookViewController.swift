@@ -53,9 +53,6 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
         }.disposed(by: disposeBag)
     }
     
-    @IBAction func deleteWord(_ sender: Any) {
-    }
-    
     @IBAction func refreshTableView(_ sender: Any) {
         vm = WordsTextbookViewModel(settings: AppDelegate.theSettingsViewModel, disposeBag: disposeBag) {
             self.tableView.reloadData()

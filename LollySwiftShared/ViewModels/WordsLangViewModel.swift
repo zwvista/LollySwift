@@ -34,15 +34,15 @@ class WordsLangViewModel: NSObject {
     }
     
     static func update(item: MLangWord) -> Observable<()> {
-        return MLangWord.update(item: item).map { print($0) }
+        return MLangWord.update(item: item)
     }
 
     static func create(item: MLangWord) -> Observable<Int> {
-        return MLangWord.create(item: item).map { print($0); return $0 }
+        return MLangWord.create(item: item)
     }
     
     static func delete(_ id: Int) -> Observable<()> {
-        return MLangWord.delete(id).map { print($0) }
+        return MLangWord.delete(id)
     }
     
     func newLangWord() -> MLangWord {

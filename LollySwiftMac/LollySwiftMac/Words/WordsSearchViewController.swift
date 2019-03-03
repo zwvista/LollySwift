@@ -44,9 +44,6 @@ class WordsSearchViewController: WordsBaseViewController {
         newWord = ""
     }
     
-    @IBAction func deleteWord(_ sender: Any) {
-    }
-    
     @IBAction func refreshTableView(_ sender: Any) {
         arrWords.removeAll()
         tableView.reloadData()

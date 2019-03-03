@@ -105,10 +105,14 @@ class PhrasesUnitViewModel: NSObject {
         }
     }
     
-    static func delete(_ id: Int) -> Observable<()> {
-        return MUnitPhrase.delete(id).map { print($0) }
+    static func delete(item: MUnitPhrase) -> Observable<()> {
+        return MUnitPhrase.delete(item.ID).flatMap {
+            return MUnitPhrase.getDataByLangPhrase(item.PHRASEID)
+        }.flatMap { arr -> Observable<()> in
+            return !arr.isEmpty ? Observable<()>.empty() : MLangPhrase.delete(item.PHRASEID)
+        }
     }
-    
+
     func reindex(complete: @escaping (Int) -> Void) {
         for i in 1...arrPhrases.count {
             let item = arrPhrases[i - 1]

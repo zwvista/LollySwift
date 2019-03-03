@@ -117,6 +117,15 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
 
     func addNewWord() {
     }
+    
+    @IBAction func deleteWord(_ sender: Any) {
+        let row = tableView.selectedRow
+        guard row != -1 else {return}
+        deleteWord(row: row)
+    }
+    
+    func deleteWord(row: Int) {
+    }
 
     func searchWord(word: String) {
         status = .ready
