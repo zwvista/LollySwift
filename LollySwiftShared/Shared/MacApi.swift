@@ -49,3 +49,12 @@ public extension NSColor {
     }
     
 }
+
+public extension NSControl {
+    // https://stackoverflow.com/questions/49797651/nsbutton-list-or-unbind-existing-bindings-programmatically
+    public func unbindAll() {
+        for b in exposedBindings {
+            unbind(b)
+        }
+    }
+}

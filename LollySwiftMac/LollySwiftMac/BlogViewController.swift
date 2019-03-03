@@ -94,7 +94,7 @@ class BlogViewController: NSViewController, NSMenuItemValidation  {
     }
 }
 
-class BlogWindowController: NSWindowController {
+class BlogWindowController: NSWindowController, NSWindowDelegate {
     @IBOutlet weak var scPage: NSSegmentedControl!
     @IBOutlet weak var tfPatternNo: NSTextField!
     @IBOutlet weak var tfPatternText: NSTextField!
@@ -104,6 +104,11 @@ class BlogWindowController: NSWindowController {
 
     override func windowDidLoad() {
         super.windowDidLoad()
+    }
+    
+    func windowWillClose(_ notification: Notification) {
+        tfPatternNo.unbindAll()
+        tfPatternText.unbindAll()
     }
     
     deinit {

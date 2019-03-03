@@ -238,7 +238,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     }
 }
 
-class WordsBaseWindowController: NSWindowController, NSToolbarDelegate, LollyProtocol, NSWindowDelegate {
+class WordsBaseWindowController: NSWindowController, LollyProtocol, NSWindowDelegate, NSTextFieldDelegate {
     
     @IBOutlet weak var toolbar: NSToolbar!
     // Outlet collections have been implemented for iOS, but not in Cocoa

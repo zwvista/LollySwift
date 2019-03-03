@@ -97,7 +97,7 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
     }
 }
 
-class WordsTextbookWindowController: WordsBaseWindowController, NSTextFieldDelegate {
+class WordsTextbookWindowController: WordsBaseWindowController {
     @IBOutlet weak var scFilter: NSSegmentedControl!
     @IBOutlet weak var tfFilterText: NSTextField!
     @objc var filterText = ""
@@ -117,5 +117,9 @@ class WordsTextbookWindowController: WordsBaseWindowController, NSTextFieldDeleg
             scFilter.selectedSegment = 1
         }
         (contentViewController as! WordsTextbookViewController).filterWord(scFilter)
+    }
+    
+    func windowWillClose(_ notification: Notification) {
+        tfFilterText.unbindAll()
     }
 }

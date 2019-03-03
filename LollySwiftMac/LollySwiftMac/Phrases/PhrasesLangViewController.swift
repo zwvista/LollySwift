@@ -125,5 +125,9 @@ class PhrasesLangWindowController: PhrasesBaseWindowController {
         }
         (contentViewController as! PhrasesLangViewController).filterPhrase(scFilter)
     }
+    
+    func windowWillClose(_ notification: Notification) {
+        tfFilterText.unbindAll()
+    }
 }
 

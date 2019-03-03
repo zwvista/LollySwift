@@ -957,17 +957,9 @@
                                             <font key="font" usesAppearanceFont="YES"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                            <connections>
-                                                <binding destination="cCU-1Q-LWr" name="value" keyPath="patternNo" id="cVi-9Z-OqA">
-                                                    <dictionary key="options">
-                                                        <bool key="NSContinuouslyUpdatesValue" value="YES"/>
-                                                    </dictionary>
-                                                </binding>
-                                            </connections>
                                         </textFieldCell>
                                         <connections>
-                                            <binding destination="cCU-1Q-LWr" name="value" keyPath="patternNo" id="I5e-5L-C1G"/>
-                                            <outlet property="delegate" destination="cCU-1Q-LWr" id="PUr-X9-O2O"/>
+                                            <binding destination="cCU-1Q-LWr" name="value" keyPath="patternNo" id="1jD-Ne-Z01"/>
                                         </connections>
                                     </textField>
                                 </toolbarItem>
@@ -984,12 +976,7 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                         <connections>
-                                            <binding destination="cCU-1Q-LWr" name="value" keyPath="patternText" id="HSm-ar-0v3">
-                                                <dictionary key="options">
-                                                    <bool key="NSContinuouslyUpdatesValue" value="YES"/>
-                                                </dictionary>
-                                            </binding>
-                                            <outlet property="delegate" destination="cCU-1Q-LWr" id="3yB-7C-sh6"/>
+                                            <binding destination="cCU-1Q-LWr" name="value" keyPath="patternText" id="gkj-tJ-CTO"/>
                                         </connections>
                                     </textField>
                                 </toolbarItem>
@@ -1019,13 +1006,13 @@
                             </defaultToolbarItems>
                         </toolbar>
                         <connections>
-                            <outlet property="delegate" destination="cCU-1Q-LWr" id="0eI-CX-1dR"/>
+                            <outlet property="delegate" destination="cCU-1Q-LWr" id="Bmy-8q-9ZD"/>
                         </connections>
                     </window>
                     <connections>
                         <outlet property="scPage" destination="4b5-aV-cyn" id="yFg-JV-cUV"/>
-                        <outlet property="tfPatternNo" destination="Lbj-Ka-Wut" id="iPE-SV-zW3"/>
-                        <outlet property="tfPatternText" destination="r3b-4B-iGP" id="uhf-88-G6W"/>
+                        <outlet property="tfPatternNo" destination="Lbj-Ka-Wut" id="vOf-X7-ekL"/>
+                        <outlet property="tfPatternText" destination="r3b-4B-iGP" id="SlT-Am-1eg"/>
                         <segue destination="PME-9l-TOe" kind="relationship" relationship="window.shadowedContentViewController" id="gWQ-3V-mE1"/>
                     </connections>
                 </windowController>
@@ -1339,8 +1326,8 @@
                                 <connections>
                                     <action selector="unitFromSelected:" target="HfO-r7-QMx" id="Ii5-5G-DUg"/>
                                     <binding destination="7EM-l7-CJV" name="content" keyPath="arrangedObjects" id="7X3-Kn-N99"/>
-                                    <binding destination="7EM-l7-CJV" name="contentObjects" keyPath="arrangedObjects.value" previousBinding="7X3-Kn-N99" id="dcD-FR-M5D"/>
                                     <binding destination="7EM-l7-CJV" name="contentValues" keyPath="arrangedObjects.label" previousBinding="dcD-FR-M5D" id="yGm-Bg-n0g"/>
+                                    <binding destination="7EM-l7-CJV" name="contentObjects" keyPath="arrangedObjects.value" previousBinding="7X3-Kn-N99" id="dcD-FR-M5D"/>
                                     <binding destination="HfO-r7-QMx" name="selectedObject" keyPath="vm.USUNITFROM" previousBinding="yGm-Bg-n0g" id="9pe-df-ynE"/>
                                 </connections>
                             </popUpButton>
@@ -1368,8 +1355,8 @@
                                 <connections>
                                     <action selector="partFromSelected:" target="HfO-r7-QMx" id="yZP-KK-VRp"/>
                                     <binding destination="IiA-XH-70P" name="content" keyPath="arrangedObjects" id="lZm-oS-u12"/>
-                                    <binding destination="IiA-XH-70P" name="contentObjects" keyPath="arrangedObjects.value" previousBinding="lZm-oS-u12" id="Kt4-v2-EBO"/>
                                     <binding destination="IiA-XH-70P" name="contentValues" keyPath="arrangedObjects.label" previousBinding="Kt4-v2-EBO" id="Lez-tq-WuE"/>
+                                    <binding destination="IiA-XH-70P" name="contentObjects" keyPath="arrangedObjects.value" previousBinding="lZm-oS-u12" id="Kt4-v2-EBO"/>
                                     <binding destination="HfO-r7-QMx" name="selectedObject" keyPath="vm.USPARTFROM" previousBinding="Lez-tq-WuE" id="B6O-DS-MFP"/>
                                 </connections>
                             </popUpButton>
@@ -1392,8 +1379,8 @@
                                 <connections>
                                     <action selector="unitToSelected:" target="HfO-r7-QMx" id="EJw-RY-Aq8"/>
                                     <binding destination="7EM-l7-CJV" name="content" keyPath="arrangedObjects" id="DAv-s4-a2a"/>
-                                    <binding destination="7EM-l7-CJV" name="contentObjects" keyPath="arrangedObjects.value" previousBinding="DAv-s4-a2a" id="QX2-kp-3AF"/>
                                     <binding destination="7EM-l7-CJV" name="contentValues" keyPath="arrangedObjects.label" previousBinding="QX2-kp-3AF" id="Tkg-L8-b4f"/>
+                                    <binding destination="7EM-l7-CJV" name="contentObjects" keyPath="arrangedObjects.value" previousBinding="DAv-s4-a2a" id="QX2-kp-3AF"/>
                                     <binding destination="HfO-r7-QMx" name="selectedObject" keyPath="vm.USUNITTO" previousBinding="Tkg-L8-b4f" id="qZE-zj-F3B"/>
                                 </connections>
                             </popUpButton>
@@ -1416,8 +1403,8 @@
                                 <connections>
                                     <action selector="partToSelected:" target="HfO-r7-QMx" id="yNS-jD-weo"/>
                                     <binding destination="IiA-XH-70P" name="content" keyPath="arrangedObjects" id="Q5w-AJ-ptM"/>
-                                    <binding destination="IiA-XH-70P" name="contentObjects" keyPath="arrangedObjects.value" previousBinding="Q5w-AJ-ptM" id="p6v-mX-GMl"/>
                                     <binding destination="IiA-XH-70P" name="contentValues" keyPath="arrangedObjects.label" previousBinding="p6v-mX-GMl" id="2tU-MQ-9Yb"/>
+                                    <binding destination="IiA-XH-70P" name="contentObjects" keyPath="arrangedObjects.value" previousBinding="Q5w-AJ-ptM" id="p6v-mX-GMl"/>
                                     <binding destination="HfO-r7-QMx" name="selectedObject" keyPath="vm.USPARTTO" previousBinding="2tU-MQ-9Yb" id="0Av-gV-ROe"/>
                                 </connections>
                             </popUpButton>

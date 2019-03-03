@@ -23,7 +23,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         _theSettingsViewModel.getData().subscribe(onNext: {
             //self.search(self)
             //self.editBlog(self)
-            //self.wordsInUnit(self)
+            self.wordsInUnit(self)
             //self.wordsInLanguage(self)
         }).disposed(by: disposeBag)
         // Insert code here to initialize your application

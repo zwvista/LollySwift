@@ -118,4 +118,8 @@ class PhrasesTextbookWindowController: PhrasesBaseWindowController {
         }
         (contentViewController as! PhrasesTextbookViewController).filterPhrase(scFilter)
     }
+    
+    func windowWillClose(_ notification: Notification) {
+        tfFilterText.unbindAll()
+    }
 }

@@ -120,7 +120,7 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
     }
 }
 
-class WordsLangWindowController: WordsBaseWindowController, NSTextFieldDelegate {
+class WordsLangWindowController: WordsBaseWindowController {
     @IBOutlet weak var scFilter: NSSegmentedControl!
     @IBOutlet weak var tfFilterText: NSTextField!
     @objc var filterText = ""
@@ -140,6 +140,10 @@ class WordsLangWindowController: WordsBaseWindowController, NSTextFieldDelegate 
             scFilter.selectedSegment = 1
         }
         (contentViewController as! WordsLangViewController).filterWord(scFilter)
+    }
+    
+    func windowWillClose(_ notification: Notification) {
+        tfFilterText.unbindAll()
     }
 }
 
