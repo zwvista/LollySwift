@@ -23,7 +23,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         _theSettingsViewModel.getData().subscribe(onNext: {
             //self.search(self)
             //self.editBlog(self)
-            self.wordsInUnit(self)
+            //self.wordsInUnit(self)
+            //self.wordsInLanguage(self)
         }).disposed(by: disposeBag)
         // Insert code here to initialize your application
     }
@@ -61,14 +62,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBAction func phrasesInUnit(_ sender: AnyObject) {
         showWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesUnitWindowController", modal: false)
     }
-    
-    @IBAction func wordsInTextbook(_ sender: AnyObject) {
-        showWindow(storyBoardName: "Words", windowControllerName: "WordsTextbookWindowController", modal: false)
-    }
-    
-    @IBAction func phrasesInTextbook(_ sender: AnyObject) {
-        showWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesTextbookWindowController", modal: false)
-    }
 
     @IBAction func wordsInLanguage(_ sender: AnyObject) {
         showWindow(storyBoardName: "Words", windowControllerName: "WordsLangWindowController", modal: false)
@@ -76,6 +69,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @IBAction func phrasesInLanguage(_ sender: AnyObject) {
         showWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesLangWindowController", modal: false)
+    }
+    
+    @IBAction func wordsInTextbook(_ sender: AnyObject) {
+        showWindow(storyBoardName: "Words", windowControllerName: "WordsTextbookWindowController", modal: false)
+    }
+    
+    @IBAction func phrasesInTextbook(_ sender: AnyObject) {
+        showWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesTextbookWindowController", modal: false)
     }
     
     @IBAction func editBlog(_ sender: AnyObject) {

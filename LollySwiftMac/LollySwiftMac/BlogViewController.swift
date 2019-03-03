@@ -89,9 +89,12 @@ class BlogViewController: NSViewController, NSMenuItemValidation  {
         return true
     }
     
+    deinit {
+        print("DEBUG: \(self.className) deinit")
+    }
 }
 
-class BlogWindowController: NSWindowController, NSTextFieldDelegate {
+class BlogWindowController: NSWindowController {
     @IBOutlet weak var scPage: NSSegmentedControl!
     @IBOutlet weak var tfPatternNo: NSTextField!
     @IBOutlet weak var tfPatternText: NSTextField!
@@ -101,5 +104,9 @@ class BlogWindowController: NSWindowController, NSTextFieldDelegate {
 
     override func windowDidLoad() {
         super.windowDidLoad()
+    }
+    
+    deinit {
+        print("DEBUG: \(self.className) deinit")
     }
 }
