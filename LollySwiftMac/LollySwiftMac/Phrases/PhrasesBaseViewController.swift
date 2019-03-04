@@ -34,6 +34,37 @@ class PhrasesBaseViewController: NSViewController, LollyProtocol, NSTableViewDat
     func selectedPhraseChanged() {
     }
     
+    func itemForRow(row: Int) -> NSObject? {
+        return nil;
+    }
+
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! NSTableCellView
+        let item = itemForRow(row: row)!
+        let columnName = tableColumn!.identifier.rawValue
+        cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
+        return cell;
+    }
+
+    func endEditing(row: Int) {
+    }
+
+    @IBAction func endEditing(_ sender: NSTextField) {
+        let row = tableView.row(for: sender)
+        guard row != -1 else {return}
+        let col = tableView.column(for: sender)
+        let key = tableView.tableColumns[col].title
+        let item = itemForRow(row: row)!
+        let oldValue = String(describing: item.value(forKey: key)!)
+        var newValue = sender.stringValue
+        if key == "PHRASE" {
+            newValue = vmSettings.autoCorrectInput(text: newValue)
+        }
+        guard oldValue != newValue else {return}
+        item.setValue(newValue, forKey: key)
+        endEditing(row: row)
+    }
+
     @IBAction func copyPhrase(_ sender: Any) {
         MacApi.copyText(selectedPhrase)
     }

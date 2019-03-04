@@ -52,13 +52,13 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
         addNewWord()
     }
     
-    func itemForRow(row: Int) -> AnyObject? {
+    func itemForRow(row: Int) -> NSObject? {
         return nil;
     }
     
     // https://stackoverflow.com/questions/10910779/coloring-rows-in-view-based-nstableview
     func tableView(_ tableView: NSTableView, didAdd rowView: NSTableRowView, forRow row: Int) {
-        let item = itemForRow(row: row) as! NSObject
+        let item = itemForRow(row: row)!
         if let level = item.value(forKey: "LEVEL") as? Int, level != 0, let arr = vmSettings.USLEVELCOLORS![level] {
             rowView.backgroundColor = NSColor.hexColor(rgbValue: arr[0])
         }
@@ -66,7 +66,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! NSTableCellView
-        let item = itemForRow(row: row) as! NSObject
+        let item = itemForRow(row: row)!
         let columnName = tableColumn!.identifier.rawValue
         cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
         if let level = item.value(forKey: "LEVEL") as? Int, level != 0, let arr = vmSettings.USLEVELCOLORS![level] {
@@ -92,9 +92,10 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
 
     @IBAction func endEditing(_ sender: NSTextField) {
         let row = tableView.row(for: sender)
+        guard row != -1 else {return}
         let col = tableView.column(for: sender)
         let key = tableView.tableColumns[col].title
-        let item = itemForRow(row: row) as! NSObject
+        let item = itemForRow(row: row)!
         let oldValue = String(describing: item.value(forKey: key))
         var newValue = sender.stringValue
         if key == "WORD" {
@@ -163,7 +164,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
             selectedWord = ""
             searchWord(word: newWord)
         } else {
-            selectedWord = (itemForRow(row: row) as! NSObject).value(forKey: "WORD") as! String
+            selectedWord = itemForRow(row: row)!.value(forKey: "WORD") as! String
             searchWord(word: selectedWord)
         }
     }
@@ -191,7 +192,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     private func changeLevel(by delta: Int) {
         let row = tableView.selectedRow
         guard row != -1 else {return}
-        let item = itemForRow(row: row) as! NSObject
+        let item = itemForRow(row: row)!
         guard let level = item.value(forKey: "LEVEL") as? Int, let arr = vmSettings.USLEVELCOLORS![level] else {return}
         let newLevel = level + delta
         guard newLevel == 0 || arr.contains(newLevel) else {return}

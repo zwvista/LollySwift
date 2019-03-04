@@ -28,7 +28,7 @@ class WordsSearchViewController: WordsBaseViewController {
         return arrWords.count
     }
     
-    override func itemForRow(row: Int) -> AnyObject? {
+    override func itemForRow(row: Int) -> NSObject? {
         return arrWords[row]
     }
 

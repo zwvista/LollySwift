@@ -41,13 +41,20 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation {
         return arrWords.count
     }
     
-    override func itemForRow(row: Int) -> AnyObject? {
+    override func itemForRow(row: Int) -> NSObject? {
         return arrWords[row]
     }
 
     override func levelChanged(row: Int) -> Observable<Int> {
         let item = arrWords[row]
         return MWordFami.update(wordid: item.WORDID, level: item.LEVEL).map { 1 }
+    }
+    
+    override func endEditing(row: Int) {
+        let item = arrWords[row]
+        WordsUnitViewModel.update(item: item).subscribe {
+            self.tableView.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count))
+            }.disposed(by: disposeBag)
     }
 
     func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
@@ -96,13 +103,6 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation {
         tableView.endUpdates()
         
         return true
-    }
-    
-    override func endEditing(row: Int) {
-        let item = arrWords[row]
-        WordsUnitViewModel.update(item: item).subscribe {
-            self.tableView.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count))
-        }.disposed(by: disposeBag)
     }
     
     override func addNewWord() {

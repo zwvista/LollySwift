@@ -37,26 +37,12 @@ class PhrasesLangViewController: PhrasesBaseViewController {
         return arrPhrases.count
     }
     
-    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! NSTableCellView
-        let item = arrPhrases[row]
-        let columnName = tableColumn!.title
-        cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
-        return cell;
+    override func itemForRow(row: Int) -> NSObject? {
+        return arrPhrases[row]
     }
     
-    @IBAction func endEditing(_ sender: NSTextField) {
-        let row = tableView.row(for: sender)
-        let col = tableView.column(for: sender)
-        let key = tableView.tableColumns[col].title
+    override func endEditing(row: Int) {
         let item = arrPhrases[row]
-        let oldValue = String(describing: item.value(forKey: key)!)
-        var newValue = sender.stringValue
-        if key == "PHRASE" {
-            newValue = vmSettings.autoCorrectInput(text: newValue)
-        }
-        guard oldValue != newValue else {return}
-        item.setValue(newValue, forKey: key)
         PhrasesLangViewModel.update(item: item).subscribe().disposed(by: disposeBag)
     }
 

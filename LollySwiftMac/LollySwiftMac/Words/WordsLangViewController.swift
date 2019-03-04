@@ -34,7 +34,7 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
 
     //MARK: tableView
 
-    override func itemForRow(row: Int) -> AnyObject? {
+    override func itemForRow(row: Int) -> NSObject? {
         return arrWords[row]
     }
 
