@@ -22,6 +22,10 @@ class MDictionary: NSObject, Codable {
     var WAIT: Int?
     var TEMPLATE: String?
     var TEMPLATE2: String?
+    
+    override var description: String {
+        return DICTNAME ?? "";
+    }
 
     func urlString(word: String, arrAutoCorrect: [MAutoCorrect]) -> String {
         let word2 = CHCONV == "BASIC" ? MAutoCorrect.autoCorrect(text: word, arrAutoCorrect: arrAutoCorrect, colFunc1: { $0.EXTENDED }, colFunc2: { $0.BASIC }) :
@@ -55,6 +59,10 @@ class MDictItem : NSObject {
     var DICTID = ""
     var DICTNAME = ""
     
+    override var description: String {
+        return DICTNAME;
+    }
+
     init(id: String, name: String) {
         DICTID = id
         DICTNAME = name

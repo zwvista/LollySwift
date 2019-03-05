@@ -19,6 +19,10 @@ class MLanguage: NSObject, Codable {
         return MAC_VOICE ?? ""
     }
     
+    override var description: String {
+        return LANGNAME;
+    }
+    
     enum CodingKeys : String, CodingKey {
         case ID
         case MAC_VOICE

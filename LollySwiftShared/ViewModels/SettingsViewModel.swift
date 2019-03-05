@@ -109,9 +109,9 @@ class SettingsViewModel: NSObject {
     @objc
     var arrDictsNote = [MDictNote]()
     @objc
-    var selectedDictNote: MDictNote? = nil {
+    var selectedDictNote: MDictNote = MDictNote() {
         didSet {
-            USDICTNOTEID = selectedDictNote?.ID ?? 0
+            USDICTNOTEID = selectedDictNote.ID
         }
     }
     var selectedDictNoteIndex: Int {
@@ -185,7 +185,7 @@ class SettingsViewModel: NSObject {
                 }
                 self.selectedDictItem = self.arrDictItems.first { $0.DICTID == self.USDICTITEM }!
                 self.arrDictsNote = $0.1
-                self.selectedDictNote = self.arrDictsNote.isEmpty ? nil : self.arrDictsNote.first { $0.ID == self.USDICTNOTEID }!
+                self.selectedDictNote = self.arrDictsNote.isEmpty ? MDictNote() : self.arrDictsNote.first { $0.ID == self.USDICTNOTEID }!
                 self.arrTextbooks = $0.2
                 self.selectedTextbook = self.arrTextbooks.first { $0.ID == self.USTEXTBOOKID }!
                 self.arrAutoCorrect = $0.3

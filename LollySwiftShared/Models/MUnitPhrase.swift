@@ -64,7 +64,7 @@ class MUnitPhrase: NSObject, Codable {
     
     static func getDataByLangPhrase(_ phraseid: Int) -> Observable<[MUnitPhrase]> {
         // SQL: SELECT * FROM VUNITPHRASES WHERE PHRASEID=?
-        let url = "\(RestApi.url)VUNITPHRASES?filter=PHRASEID,eq,\(phraseid)"
+        let url = "\(RestApi.url)VUNITPHRASES?transform=1&filter=PHRASEID,eq,\(phraseid)"
         return RestApi.getArray(url: url, keyPath: "VUNITPHRASES")
     }
 

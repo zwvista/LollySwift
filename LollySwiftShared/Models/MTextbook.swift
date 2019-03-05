@@ -16,6 +16,10 @@ class MTextbook: NSObject, Codable {
     var TEXTBOOKNAME = ""
     var UNITS = ""
     var PARTS = ""
+    
+    override var description: String {
+        return TEXTBOOKNAME;
+    }
 
     enum CodingKeys : String, CodingKey {
         case ID
