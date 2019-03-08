@@ -124,7 +124,8 @@ class SettingsViewModel: NSObject {
     @objc
     var selectedTextbook: MTextbook! {
         didSet {
-            setSelectedTextbook()
+            USTEXTBOOKID = selectedTextbook.ID
+            selectedUSTextbook = arrUserSettings.first { $0.KIND == 3 && $0.ENTITYID == selectedTextbook.ID }!
         }
     }
     var selectedTextbookIndex: Int {
@@ -194,11 +195,6 @@ class SettingsViewModel: NSObject {
                 self.selectedTextbook = self.arrTextbooks.first { $0.ID == self.USTEXTBOOKID }!
                 self.arrAutoCorrect = $0.3
             }
-    }
-    
-    private func setSelectedTextbook() {
-        USTEXTBOOKID = selectedTextbook.ID
-        selectedUSTextbook = arrUserSettings.first { $0.KIND == 3 && $0.ENTITYID == self.USTEXTBOOKID }!
     }
     
     func dictHtml(word: String, dictids: [String]) -> String {
