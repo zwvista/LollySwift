@@ -45,14 +45,14 @@ class MUnitPhrase: NSObject, Codable {
         return "\(UNITSTR) \(SEQNUM)\n\(PARTSTR)"
     }
 
-    static func getDataByTextbook(_ textbookid: Int, unitPartFrom: Int, unitPartTo: Int, arrUnits: [MSelectItem], arrParts: [MSelectItem]) -> Observable<[MUnitPhrase]> {
+    static func getDataByTextbook(_ textbook: MTextbook, unitPartFrom: Int, unitPartTo: Int) -> Observable<[MUnitPhrase]> {
         // SQL: SELECT * FROM VUNITPHRASES WHERE TEXTBOOKID=? AND UNITPART BETWEEN ? AND ? ORDER BY UNITPART,SEQNUM
-        let url = "\(RestApi.url)VUNITPHRASES?transform=1&filter[]=TEXTBOOKID,eq,\(textbookid)&filter[]=UNITPART,bt,\(unitPartFrom),\(unitPartTo)&order[]=UNITPART&order[]=SEQNUM"
+        let url = "\(RestApi.url)VUNITPHRASES?transform=1&filter[]=TEXTBOOKID,eq,\(textbook.ID)&filter[]=UNITPART,bt,\(unitPartFrom),\(unitPartTo)&order[]=UNITPART&order[]=SEQNUM"
         let o: Observable<[MUnitPhrase]> = RestApi.getArray(url: url, keyPath: "VUNITPHRASES")
         return o.map { arr in
             arr.forEach { row in
-                row.arrUnits = arrUnits as NSArray
-                row.arrParts = arrParts as NSArray
+                row.arrUnits = textbook.arrUnits as NSArray
+                row.arrParts = textbook.arrParts as NSArray
             }
             return arr
         }

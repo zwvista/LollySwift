@@ -20,7 +20,7 @@ class PhrasesUnitViewModel: NSObject {
         self.vmSettings = settings
         self.disposeBag = disposeBag
         super.init()
-        MUnitPhrase.getDataByTextbook(vmSettings.USTEXTBOOKID, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO, arrUnits: vmSettings.arrUnits, arrParts: vmSettings.arrParts).subscribe(onNext: {
+        MUnitPhrase.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO).subscribe(onNext: {
             self.arrPhrases = $0
             complete()
         }).disposed(by: disposeBag)

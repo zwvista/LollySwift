@@ -25,7 +25,7 @@ class WordsUnitViewModel: NSObject {
         self.disposeBag = disposeBag
         vmNote = NoteViewModel(settings: settings, disposeBag: disposeBag)
         super.init()
-        MUnitWord.getDataByTextbook(settings.USTEXTBOOKID, unitPartFrom: settings.USUNITPARTFROM, unitPartTo: settings.USUNITPARTTO, arrUnits: vmSettings.arrUnits, arrParts: vmSettings.arrParts).subscribe(onNext: {
+        MUnitWord.getDataByTextbook(settings.selectedTextbook, unitPartFrom: settings.USUNITPARTFROM, unitPartTo: settings.USUNITPARTTO).subscribe(onNext: {
             self.arrWords = $0
             complete()
         }).disposed(by: disposeBag)

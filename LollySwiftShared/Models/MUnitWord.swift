@@ -48,15 +48,18 @@ class MUnitWord: NSObject, Codable {
     var UNITPARTSEQNUM: String {
         return "\(UNITSTR) \(SEQNUM)\n\(PARTSTR)"
     }
+    var WORDNOTE: String {
+        return WORD + ((NOTE ?? "").isEmpty ? "" : "(\(NOTE!))")
+    }
 
-    static func getDataByTextbook(_ textbookid: Int, unitPartFrom: Int, unitPartTo: Int, arrUnits: [MSelectItem], arrParts: [MSelectItem]) -> Observable<[MUnitWord]> {
+    static func getDataByTextbook(_ textbook: MTextbook, unitPartFrom: Int, unitPartTo: Int) -> Observable<[MUnitWord]> {
         // SQL: SELECT * FROM VUNITWORDS WHERE TEXTBOOKID=? AND UNITPART BETWEEN ? AND ? ORDER BY UNITPART,SEQNUM
-        let url = "\(RestApi.url)VUNITWORDS?transform=1&filter[]=TEXTBOOKID,eq,\(textbookid)&filter[]=UNITPART,bt,\(unitPartFrom),\(unitPartTo)&order[]=UNITPART&order[]=SEQNUM"
+        let url = "\(RestApi.url)VUNITWORDS?transform=1&filter[]=TEXTBOOKID,eq,\(textbook.ID)&filter[]=UNITPART,bt,\(unitPartFrom),\(unitPartTo)&order[]=UNITPART&order[]=SEQNUM"
         let o: Observable<[MUnitWord]> = RestApi.getArray(url: url, keyPath: "VUNITWORDS")
         return o.map { arr in
             arr.forEach { row in
-                row.arrUnits = arrUnits as NSArray
-                row.arrParts = arrParts as NSArray
+                row.arrUnits = textbook.arrUnits as NSArray
+                row.arrParts = textbook.arrParts as NSArray
             }
             return arr
         }

@@ -27,7 +27,7 @@ class NoteViewModel {
         let url = mDictNote.urlString(word: word, arrAutoCorrect: vmSettings.arrAutoCorrect)
         return RestApi.getHtml(url: url).map { html in
             print(html)
-            return HtmlApi.extractText(from: html, transform: mDictNote.TRANSFORM!, template: "") { text,_ in text }
+            return CommonApi.extractText(from: html, transform: mDictNote.TRANSFORM!, template: "") { text,_ in text }
         }
     }
     

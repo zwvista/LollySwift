@@ -67,7 +67,7 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
         let item = self.vm.arrWords[i]
         func delete() {
             self.yesNoAction(title: "delete", message: "Do you really want to delete the word \"\(item.WORD)\"?", yesHandler: { (action) in
-                WordsUnitViewModel.delete(item.ID).subscribe().disposed(by: self.disposeBag)
+                WordsUnitViewModel.delete(item: item).subscribe().disposed(by: self.disposeBag)
                 self.vm.arrWords.remove(at: i)
                 tableView.deleteRows(at: [indexPath], with: .fade)
                 self.reindex()

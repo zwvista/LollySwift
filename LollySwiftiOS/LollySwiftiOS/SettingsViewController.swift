@@ -197,7 +197,7 @@ class SettingsViewController: UITableViewController {
             dictNoteCell.detailTextLabel!.text = " "
             ddDictNote.dataSource = []
         } else {
-            let item = vm.selectedDictNote!
+            let item = vm.selectedDictNote
             dictNoteCell.textLabel!.text = item.DICTNAME!
             dictNoteCell.detailTextLabel!.text = item.URL!
             dictNoteCell.setNeedsDisplay()

@@ -31,8 +31,8 @@ class PhrasesTextbookDetailViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        acUnits.content = vm.vmSettings.arrUnits
-        acParts.content = vm.vmSettings.arrParts
+        acUnits.content = item.arrUnits
+        acParts.content = item.arrParts
     }
     
     override func viewDidAppear() {

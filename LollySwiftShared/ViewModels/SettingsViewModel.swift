@@ -132,12 +132,16 @@ class SettingsViewModel: NSObject {
     }
     
     @objc
-    var arrUnits = [MSelectItem]()
+    var arrUnits: [MSelectItem] {
+        return selectedTextbook.arrUnits
+    }
     var unitCount: Int {
         return arrUnits.count
     }
     @objc
-    var arrParts = [MSelectItem]()
+    var arrParts: [MSelectItem] {
+        return selectedTextbook.arrParts
+    }
     var partCount: Int {
         return arrParts.count
     }
@@ -195,8 +199,6 @@ class SettingsViewModel: NSObject {
     private func setSelectedTextbook() {
         USTEXTBOOKID = selectedTextbook.ID
         selectedUSTextbook = arrUserSettings.first { $0.KIND == 3 && $0.ENTITYID == self.USTEXTBOOKID }!
-        arrUnits = selectedTextbook.arrUnits
-        arrParts = selectedTextbook.arrParts
     }
     
     func dictHtml(word: String, dictids: [String]) -> String {
