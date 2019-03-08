@@ -16,10 +16,6 @@ class MTextbook: NSObject, Codable {
     var TEXTBOOKNAME = ""
     var UNITS = ""
     var PARTS = ""
-    
-    override var description: String {
-        return TEXTBOOKNAME;
-    }
 
     enum CodingKeys : String, CodingKey {
         case ID
@@ -29,9 +25,23 @@ class MTextbook: NSObject, Codable {
         case PARTS
     }
 
+    var arrUnits = [MSelectItem]()
+    var arrParts = [MSelectItem]()
+
+    override var description: String {
+        return TEXTBOOKNAME;
+    }
+
     static func getDataByLang(_ langid: Int) -> Observable<[MTextbook]> {
         // SQL: SELECT * FROM TEXTBOOKS WHERE LANGID=?
         let url = "\(RestApi.url)TEXTBOOKS?transform=1&filter=LANGID,eq,\(langid)"
-        return RestApi.getArray(url: url, keyPath: "TEXTBOOKS")
+        let o: Observable<[MTextbook]> = RestApi.getArray(url: url, keyPath: "TEXTBOOKS")
+        return o.map { arr in
+            arr.forEach { row in
+                row.arrUnits = CommonApi.unitsFrom(units: row.UNITS)
+                row.arrParts = CommonApi.partsFrom(parts: row.PARTS)
+            }
+            return arr
+        }
     }
 }

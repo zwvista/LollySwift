@@ -25,7 +25,7 @@ class WordsUnitViewModel: NSObject {
         self.disposeBag = disposeBag
         vmNote = NoteViewModel(settings: settings, disposeBag: disposeBag)
         super.init()
-        MUnitWord.getDataByTextbook(settings.USTEXTBOOKID, unitPartFrom: settings.USUNITPARTFROM, unitPartTo: settings.USUNITPARTTO).subscribe(onNext: {
+        MUnitWord.getDataByTextbook(settings.USTEXTBOOKID, unitPartFrom: settings.USUNITPARTFROM, unitPartTo: settings.USUNITPARTTO, arrUnits: vmSettings.arrUnits, arrParts: vmSettings.arrParts).subscribe(onNext: {
             self.arrWords = $0
             complete()
         }).disposed(by: disposeBag)
@@ -140,8 +140,8 @@ class WordsUnitViewModel: NSObject {
         item.UNIT = maxElem?.UNIT ?? vmSettings.USUNITTO
         item.PART = maxElem?.PART ?? vmSettings.USPARTTO
         item.SEQNUM = (maxElem?.SEQNUM ?? 0) + 1
-        item.arrUnits = vmSettings.arrUnits
-        item.arrParts = vmSettings.arrParts
+        item.arrUnits = vmSettings.arrUnits as NSArray
+        item.arrParts = vmSettings.arrParts as NSArray
         return item
     }
     

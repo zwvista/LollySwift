@@ -22,8 +22,6 @@ class MUnitWord: NSObject, Codable {
     var NOTE: String?
     var FAMIID = 0
     var LEVEL = 0
-    var UNITS = ""
-    var PARTS = ""
 
     enum CodingKeys : String, CodingKey {
         case ID
@@ -37,33 +35,28 @@ class MUnitWord: NSObject, Codable {
         case NOTE
         case FAMIID
         case LEVEL
-        case UNITS
-        case PARTS
     }
 
-    var arrUnits = [MSelectItem]()
-    var arrParts = [MSelectItem]()
+    var arrUnits: NSArray!
+    var arrParts: NSArray!
     var UNITSTR: String {
-        return arrUnits.first { $0.value == UNIT }!.label
+        return (arrUnits as! [MSelectItem]).first { $0.value == UNIT }!.label
     }
     var PARTSTR: String {
-        return arrParts.first { $0.value == PART }!.label
+        return (arrParts as! [MSelectItem]).first { $0.value == PART }!.label
     }
     var UNITPARTSEQNUM: String {
         return "\(UNITSTR) \(SEQNUM)\n\(PARTSTR)"
     }
-    var WORDNOTE: String {
-        return WORD + ((NOTE ?? "").isEmpty ? "" : "(\(NOTE!))")
-    }
 
-    static func getDataByTextbook(_ textbookid: Int, unitPartFrom: Int, unitPartTo: Int) -> Observable<[MUnitWord]> {
+    static func getDataByTextbook(_ textbookid: Int, unitPartFrom: Int, unitPartTo: Int, arrUnits: [MSelectItem], arrParts: [MSelectItem]) -> Observable<[MUnitWord]> {
         // SQL: SELECT * FROM VUNITWORDS WHERE TEXTBOOKID=? AND UNITPART BETWEEN ? AND ? ORDER BY UNITPART,SEQNUM
         let url = "\(RestApi.url)VUNITWORDS?transform=1&filter[]=TEXTBOOKID,eq,\(textbookid)&filter[]=UNITPART,bt,\(unitPartFrom),\(unitPartTo)&order[]=UNITPART&order[]=SEQNUM"
         let o: Observable<[MUnitWord]> = RestApi.getArray(url: url, keyPath: "VUNITWORDS")
         return o.map { arr in
             arr.forEach { row in
-                row.arrUnits = CommonApi.unitsFrom(info: row.UNITS)
-                row.arrParts = CommonApi.partsFrom(parts: row.PARTS)
+                row.arrUnits = arrUnits as NSArray
+                row.arrParts = arrParts as NSArray
             }
             return arr
         }

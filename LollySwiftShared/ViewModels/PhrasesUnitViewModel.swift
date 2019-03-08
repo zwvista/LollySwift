@@ -20,7 +20,7 @@ class PhrasesUnitViewModel: NSObject {
         self.vmSettings = settings
         self.disposeBag = disposeBag
         super.init()
-        MUnitPhrase.getDataByTextbook(vmSettings.USTEXTBOOKID, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO).subscribe(onNext: {
+        MUnitPhrase.getDataByTextbook(vmSettings.USTEXTBOOKID, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO, arrUnits: vmSettings.arrUnits, arrParts: vmSettings.arrParts).subscribe(onNext: {
             self.arrPhrases = $0
             complete()
         }).disposed(by: disposeBag)
@@ -132,8 +132,8 @@ class PhrasesUnitViewModel: NSObject {
         item.UNIT = maxElem?.UNIT ?? vmSettings.USUNITTO
         item.PART = maxElem?.PART ?? vmSettings.USPARTTO
         item.SEQNUM = (maxElem?.SEQNUM ?? 0) + 1
-        item.arrUnits = vmSettings.arrUnits
-        item.arrParts = vmSettings.arrParts
+        item.arrUnits = vmSettings.arrUnits as NSArray
+        item.arrParts = vmSettings.arrParts as NSArray
         return item
     }
     

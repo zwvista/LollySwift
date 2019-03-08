@@ -195,8 +195,8 @@ class SettingsViewModel: NSObject {
     private func setSelectedTextbook() {
         USTEXTBOOKID = selectedTextbook.ID
         selectedUSTextbook = arrUserSettings.first { $0.KIND == 3 && $0.ENTITYID == self.USTEXTBOOKID }!
-        arrUnits = CommonApi.unitsFrom(info: selectedTextbook.UNITS)
-        arrParts = CommonApi.partsFrom(parts: selectedTextbook.PARTS)
+        arrUnits = selectedTextbook.arrUnits
+        arrParts = selectedTextbook.arrParts
     }
     
     func dictHtml(word: String, dictids: [String]) -> String {

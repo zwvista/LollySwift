@@ -23,8 +23,6 @@ class MTextbookWord: NSObject, Codable {
     var NOTE: String?
     var FAMIID = 0
     var LEVEL = 0
-    var UNITS = ""
-    var PARTS = ""
     
     enum CodingKeys : String, CodingKey {
         case ID
@@ -39,17 +37,15 @@ class MTextbookWord: NSObject, Codable {
         case NOTE
         case FAMIID
         case LEVEL
-        case UNITS
-        case PARTS
     }
     
-    var arrUnits = [MSelectItem]()
-    var arrParts = [MSelectItem]()
+    var arrUnits: NSArray!
+    var arrParts: NSArray!
     var UNITSTR: String {
-        return arrUnits.first { $0.value == UNIT }!.label
+        return (arrUnits as! [MSelectItem]).first { $0.value == UNIT }!.label
     }
     var PARTSTR: String {
-        return arrParts.first { $0.value == PART }!.label
+        return (arrParts as! [MSelectItem]).first { $0.value == PART }!.label
     }
     var UNITPARTSEQNUM: String {
         return "\(UNITSTR) \(SEQNUM)\n\(PARTSTR)"
@@ -62,14 +58,15 @@ class MTextbookWord: NSObject, Codable {
         return "\(SEQNUM) \(WORD)" + (NOTE?.isEmpty != false ? "" : "(\(NOTE!))")
     }
 
-    static func getDataByLang(_ langid: Int) -> Observable<[MTextbookWord]> {
+    static func getDataByLang(_ langid: Int, arrTextbooks: [MTextbook]) -> Observable<[MTextbookWord]> {
         // SQL: SELECT * FROM VTEXTBOOKWORDS WHERE LANGID=?
         let url = "\(RestApi.url)VTEXTBOOKWORDS?transform=1&filter=LANGID,eq,\(langid)&order[]=TEXTBOOKID&order[]=UNIT&order[]=PART&order[]=SEQNUM"
         let o: Observable<[MTextbookWord]> = RestApi.getArray(url: url, keyPath: "VTEXTBOOKWORDS")
         return o.map { arr in
             arr.forEach { row in
-                row.arrUnits = CommonApi.unitsFrom(info: row.UNITS)
-                row.arrParts = CommonApi.partsFrom(parts: row.PARTS)
+                let row2 = arrTextbooks.first { $0.ID == row.TEXTBOOKID }!
+                row.arrUnits = row2.arrUnits as NSArray
+                row.arrParts = row2.arrParts as NSArray
             }
             return arr
         }
