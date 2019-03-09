@@ -85,7 +85,7 @@ class PhrasesBaseViewController: NSViewController, LollyProtocol, NSTableViewDat
     }
 
     func settingsChanged() {
-        synth.setVoice(NSSpeechSynthesizer.VoiceName(rawValue: vmSettings.selectedLang.safeVoice))
+        synth.setVoice(NSSpeechSynthesizer.VoiceName(rawValue: vmSettings.safeVoice))
     }
 
     deinit {

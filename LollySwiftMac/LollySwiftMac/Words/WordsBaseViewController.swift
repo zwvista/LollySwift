@@ -71,6 +71,8 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
         cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
         if let level = item.value(forKey: "LEVEL") as? Int, level != 0, let arr = vmSettings.USLEVELCOLORS![level] {
             cell.textField?.textColor = NSColor.hexColor(rgbValue: arr[1])
+        } else {
+            cell.textField?.textColor = NSColor.windowFrameTextColor
         }
         return cell;
     }
@@ -212,7 +214,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
 
     func settingsChanged() {
         selectedDictItemIndex = vmSettings.selectedDictItemIndex
-        synth.setVoice(NSSpeechSynthesizer.VoiceName(rawValue: vmSettings.selectedLang.safeVoice))
+        synth.setVoice(NSSpeechSynthesizer.VoiceName(rawValue: vmSettings.safeVoice))
     }
     
     @IBAction func copyWord(_ sender: Any) {

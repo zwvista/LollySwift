@@ -92,7 +92,21 @@ class SettingsViewModel: NSObject {
     var selectedLangIndex: Int {
         return arrLanguages.firstIndex { $0 == selectedLang }!
     }
-    
+
+    @objc
+    var arrVoices = [MVoice]()
+    var arrMacVoices: [MVoice] {
+        return arrVoices.filter { $0.VOICETYPEID == 2 }
+    }
+    @objc
+    var selectedVoice: MVoice!
+    var selectedVoiceIndex: Int {
+        return arrVoices.firstIndex { $0 == selectedVoice }!
+    }
+    var safeVoice: String {
+        return arrMacVoices.isEmpty ? "" : arrMacVoices[0].VOICENAME
+    }
+
     var arrDictsMean = [MDictMean]()
     @objc
     var arrDictItems = [MDictItem]()
@@ -176,7 +190,8 @@ class SettingsViewModel: NSObject {
         return Observable.zip(MDictMean.getDataByLang(self.USLANGID),
                               MDictNote.getDataByLang(self.USLANGID),
                               MTextbook.getDataByLang(self.USLANGID),
-                              MAutoCorrect.getDataByLang(self.USLANGID))
+                              MAutoCorrect.getDataByLang(self.USLANGID),
+                              MVoice.getDataByLang(self.USLANGID))
             .map {
                 self.arrDictsMean = $0.0
                 var i = 0
@@ -194,6 +209,7 @@ class SettingsViewModel: NSObject {
                 self.arrTextbooks = $0.2
                 self.selectedTextbook = self.arrTextbooks.first { $0.ID == self.USTEXTBOOKID }!
                 self.arrAutoCorrect = $0.3
+                self.arrVoices = $0.4
             }
     }
     
