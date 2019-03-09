@@ -14,7 +14,7 @@ class PhrasesTextbookDetailViewController: NSViewController {
 
     var vm: PhrasesTextbookViewModel!
     var complete: (() -> Void)?
-    var item: MTextbookPhrase!
+    var item: MUnitPhrase!
 
     @IBOutlet weak var acUnits: NSArrayController!
     @IBOutlet weak var acParts: NSArrayController!
@@ -45,7 +45,7 @@ class PhrasesTextbookDetailViewController: NSViewController {
         // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
         self.commitEditing()
         item.PHRASE = vm.vmSettings.autoCorrectInput(text: item.PHRASE)
-        PhrasesTextbookViewModel.update(item: item).subscribe {
+        PhrasesUnitViewModel.update(item: item).subscribe {
             self.complete?()
         }.disposed(by: disposeBag)
         dismiss(self)

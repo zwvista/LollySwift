@@ -11,14 +11,14 @@ import RxSwift
 
 class PhrasesTextbookViewModel: NSObject {
     var vmSettings: SettingsViewModel
-    var arrPhrases = [MTextbookPhrase]()
-    var arrPhrasesFiltered: [MTextbookPhrase]?
+    var arrPhrases = [MUnitPhrase]()
+    var arrPhrasesFiltered: [MUnitPhrase]?
 
     public init(settings: SettingsViewModel, disposeBag: DisposeBag, complete: @escaping () -> ()) {
         self.vmSettings = settings
         let item = settings.selectedTextbook!
         super.init()
-        MTextbookPhrase.getDataByLang(item.LANGID, arrTextbooks: vmSettings.arrTextbooks).subscribe(onNext: {
+        MUnitPhrase.getDataByLang(item.LANGID, arrTextbooks: vmSettings.arrTextbooks).subscribe(onNext: {
             self.arrPhrases = $0
             complete()
         }).disposed(by: disposeBag)
@@ -28,10 +28,5 @@ class PhrasesTextbookViewModel: NSObject {
         arrPhrasesFiltered = arrPhrases.filter({ (item) -> Bool in
             return (scope == "Phrase" ? item.PHRASE : item.TRANSLATION ?? "").contains(searchText)
         })
-    }
-
-    static func update(item: MTextbookPhrase) -> Observable<()> {
-        let item = MLangPhrase(textbookitem: item)
-        return MLangPhrase.update(item: item)
     }
 }

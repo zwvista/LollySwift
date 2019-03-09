@@ -14,7 +14,7 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
 
     var wc2: WordsTextbookWindowController! { return view.window!.windowController as? WordsTextbookWindowController }
     var vm: WordsTextbookViewModel!
-    var arrWords: [MTextbookWord] {
+    var arrWords: [MUnitWord] {
         return vm.arrWordsFiltered == nil ? vm.arrWords : vm.arrWordsFiltered!
     }
 
@@ -48,7 +48,7 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
 
     override func endEditing(row: Int) {
         let item = arrWords[row]
-        WordsTextbookViewModel.update(item: item).subscribe {
+        WordsUnitViewModel.update(item: item).subscribe {
             self.tableView.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count))
         }.disposed(by: disposeBag)
     }

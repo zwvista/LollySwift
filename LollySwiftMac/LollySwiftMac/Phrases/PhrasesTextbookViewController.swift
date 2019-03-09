@@ -14,7 +14,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
     
     var wc: PhrasesTextbookWindowController { return view.window!.windowController as! PhrasesTextbookWindowController }
     var vm: PhrasesTextbookViewModel!
-    var arrPhrases: [MTextbookPhrase] {
+    var arrPhrases: [MUnitPhrase] {
         return vm.arrPhrasesFiltered == nil ? vm.arrPhrases : vm.arrPhrasesFiltered!
     }
 
@@ -43,7 +43,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
     
     override func endEditing(row: Int) {
         let item = arrPhrases[row]
-        PhrasesTextbookViewModel.update(item: item).subscribe {
+        PhrasesUnitViewModel.update(item: item).subscribe {
             self.tableView.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count))
         }.disposed(by: disposeBag)
     }

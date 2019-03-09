@@ -32,14 +32,6 @@ class MLangWord: NSObject, Codable {
         NOTE = unititem.NOTE
         super.init()
     }
-    
-    init(textbookitem: MTextbookWord) {
-        ID = textbookitem.WORDID
-        LANGID = textbookitem.LANGID
-        WORD = textbookitem.WORD
-        NOTE = textbookitem.NOTE
-        super.init()
-    }
 
     func combineNote(_ note: String?) -> Bool {
         let oldNote = NOTE

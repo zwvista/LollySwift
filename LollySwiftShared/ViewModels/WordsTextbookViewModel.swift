@@ -11,8 +11,8 @@ import RxSwift
 
 class WordsTextbookViewModel: NSObject {
     var vmSettings: SettingsViewModel
-    var arrWords = [MTextbookWord]()
-    var arrWordsFiltered: [MTextbookWord]?
+    var arrWords = [MUnitWord]()
+    var arrWordsFiltered: [MUnitWord]?
     var vmNote: NoteViewModel!
     var mDictNote: MDictNote? {
         return vmNote.mDictNote
@@ -23,7 +23,7 @@ class WordsTextbookViewModel: NSObject {
         vmNote = NoteViewModel(settings: settings, disposeBag: disposeBag)
         let item = settings.selectedTextbook!
         super.init()
-        MTextbookWord.getDataByLang(item.LANGID, arrTextbooks: vmSettings.arrTextbooks).subscribe(onNext: {
+        MUnitWord.getDataByLang(item.LANGID, arrTextbooks: vmSettings.arrTextbooks).subscribe(onNext: {
             self.arrWords = $0
             complete()
         }).disposed(by: disposeBag)
@@ -33,11 +33,6 @@ class WordsTextbookViewModel: NSObject {
         arrWordsFiltered = arrWords.filter({ (item) -> Bool in
             return item.WORD.contains(searchText)
         })
-    }
-    
-    static func update(item: MTextbookWord) -> Observable<()> {
-        let item = MLangWord(textbookitem: item)
-        return MLangWord.update(item: item)
     }
 
     func getNote(index: Int) -> Observable<()> {

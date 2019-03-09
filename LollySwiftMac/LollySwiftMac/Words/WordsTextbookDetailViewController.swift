@@ -13,7 +13,7 @@ class WordsTextbookDetailViewController: NSViewController {
 
     var vm: WordsTextbookViewModel!
     var complete: (() -> Void)?
-    @objc var item: MTextbookWord!
+    @objc var item: MUnitWord!
 
     @IBOutlet weak var acUnits: NSArrayController!
     @IBOutlet weak var acParts: NSArrayController!
@@ -46,7 +46,7 @@ class WordsTextbookDetailViewController: NSViewController {
         // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
         self.commitEditing()
         item.WORD = vm.vmSettings.autoCorrectInput(text: item.WORD)
-        WordsTextbookViewModel.update(item: item).subscribe {
+        WordsUnitViewModel.update(item: item).subscribe {
             self.complete?()
         }.disposed(by: disposeBag)
         dismiss(self)

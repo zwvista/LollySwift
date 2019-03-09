@@ -26,14 +26,6 @@ class MLangPhrase: NSObject, Codable {
         TRANSLATION = unititem.TRANSLATION
         super.init()
     }
-    
-    init(textbookitem: MTextbookPhrase) {
-        ID = textbookitem.PHRASEID
-        LANGID = textbookitem.LANGID
-        PHRASE = textbookitem.PHRASE
-        TRANSLATION = textbookitem.TRANSLATION
-        super.init()
-    }
 
     func combineTranslation(_ translation: String?) -> Bool {
         let oldTranslation = TRANSLATION

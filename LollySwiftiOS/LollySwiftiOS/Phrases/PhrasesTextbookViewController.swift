@@ -12,7 +12,7 @@ import RxSwift
 class PhrasesTextbookViewController: PhrasesBaseViewController, UISearchBarDelegate, UISearchResultsUpdating {
     
     var vm: PhrasesTextbookViewModel!
-    var arrPhrases: [MTextbookPhrase] {
+    var arrPhrases: [MUnitPhrase] {
         return searchController.isActive && searchBar.text != "" ? vm.arrPhrasesFiltered! : vm.arrPhrases
     }
     @IBOutlet weak var btnEdit: UIBarButtonItem!
@@ -114,7 +114,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController, UISearchBarDeleg
         super.prepare(for: segue, sender: sender)
         guard let controller = (segue.destination as? UINavigationController)?.topViewController as? PhrasesTextbookDetailViewController else {return}
         controller.vm = vm
-        controller.item = sender as? MTextbookPhrase
+        controller.item = sender as? MUnitPhrase
     }
     
     @IBAction func btnEditClicked(_ sender: Any) {

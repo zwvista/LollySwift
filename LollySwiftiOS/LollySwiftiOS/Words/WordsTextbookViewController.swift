@@ -12,7 +12,7 @@ import RxSwift
 class WordsTextbookViewController: WordsBaseViewController, UISearchBarDelegate, UISearchResultsUpdating {
 
     var vm: WordsTextbookViewModel!
-    var arrWords: [MTextbookWord] {
+    var arrWords: [MUnitWord] {
         return searchController.isActive && searchBar.text != "" ? vm.arrWordsFiltered! : vm.arrWords
     }
     
@@ -106,7 +106,7 @@ class WordsTextbookViewController: WordsBaseViewController, UISearchBarDelegate,
         super.prepare(for: segue, sender: sender)
         if let controller = (segue.destination as? UINavigationController)?.topViewController as? WordsTextbookDetailViewController {
             controller.vm = vm
-            controller.item = (sender as! MTextbookWord)
+            controller.item = (sender as! MUnitWord)
         } else if let controller = segue.destination as? WordsDictViewController {
             controller.vm.arrWords = arrWords.map { $0.WORD }
             controller.vm.selectedWordIndex = tableView.indexPathForSelectedRow!.row

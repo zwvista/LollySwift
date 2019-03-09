@@ -1,9 +1,9 @@
 //
-//  MLanguage.swift
+//  MVoice.swift
 //  LollySwiftShared
 //
-//  Created by zhaowei on 2014/11/07.
-//  Copyright (c) 2014年 趙 偉. All rights reserved.
+//  Created by zhaowei on 2019/03/09.
+//  Copyright (c) 2019年 趙 偉. All rights reserved.
 //
 
 import Foundation

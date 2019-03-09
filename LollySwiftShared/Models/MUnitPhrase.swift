@@ -14,6 +14,7 @@ class MUnitPhrase: NSObject, Codable {
     var ID = 0
     var LANGID = 0
     var TEXTBOOKID = 0
+    var TEXTBOOKNAME = ""
     var UNIT = 0
     var PART = 0
     var SEQNUM = 0
@@ -25,6 +26,7 @@ class MUnitPhrase: NSObject, Codable {
         case ID
         case LANGID
         case TEXTBOOKID
+        case TEXTBOOKNAME
         case UNIT
         case PART
         case SEQNUM
@@ -57,7 +59,21 @@ class MUnitPhrase: NSObject, Codable {
             return arr
         }
     }
-    
+
+    static func getDataByLang(_ langid: Int, arrTextbooks: [MTextbook]) -> Observable<[MUnitPhrase]> {
+        // SQL: SELECT * FROM VTEXTBOOKPHRASES WHERE LANGID=?
+        let url = "\(RestApi.url)VUNITPHRASES?transform=1&filter=LANGID,eq,\(langid)&order[]=TEXTBOOKID&order[]=UNIT&order[]=PART&order[]=SEQNUM"
+        let o: Observable<[MUnitPhrase]> = RestApi.getArray(url: url, keyPath: "VUNITPHRASES")
+        return o.map { arr in
+            arr.forEach { row in
+                let row2 = arrTextbooks.first { $0.ID == row.TEXTBOOKID }!
+                row.arrUnits = row2.arrUnits as NSArray
+                row.arrParts = row2.arrParts as NSArray
+            }
+            return arr
+        }
+    }
+
     static func getDataByLangPhrase(_ phraseid: Int) -> Observable<[MUnitPhrase]> {
         // SQL: SELECT * FROM VUNITPHRASES WHERE PHRASEID=?
         let url = "\(RestApi.url)VUNITPHRASES?transform=1&filter=PHRASEID,eq,\(phraseid)"
@@ -76,7 +92,7 @@ class MUnitPhrase: NSObject, Codable {
         let url = "\(RestApi.url)UNITPHRASES/\(item.ID)"
         return RestApi.update(url: url, body: try! item.toJSONString(prettyPrint: false)!).map { print($0) }
     }
-    
+
     static func create(item: MUnitPhrase) -> Observable<Int> {
         // SQL: INSERT INTO UNITPHRASES (TEXTBOOKID, UNIT, PART, SEQNUM, PHRASEID) VALUES (?,?,?,?,?)
         let url = "\(RestApi.url)UNITPHRASES"
