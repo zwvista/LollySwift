@@ -214,7 +214,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
 
     func settingsChanged() {
         selectedDictItemIndex = vmSettings.selectedDictItemIndex
-        synth.setVoice(NSSpeechSynthesizer.VoiceName(rawValue: vmSettings.safeVoice))
+        synth.setVoice(NSSpeechSynthesizer.VoiceName(rawValue: vmSettings.macVoiceName))
     }
     
     @IBAction func copyWord(_ sender: Any) {

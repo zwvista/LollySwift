@@ -74,4 +74,14 @@ class MUserSetting: NSObject, Codable {
         let body = "VALUE4=\(uspartto)"
         return update(id, body: body)
     }
+    
+    static func update(_ id: Int, macvoiceid: Int) -> Observable<String> {
+        let body = "VALUE1=\(macvoiceid)"
+        return update(id, body: body)
+    }
+    
+    static func update(_ id: Int, iosvoiceid: Int) -> Observable<String> {
+        let body = "VALUE2=\(iosvoiceid)"
+        return update(id, body: body)
+    }
 }

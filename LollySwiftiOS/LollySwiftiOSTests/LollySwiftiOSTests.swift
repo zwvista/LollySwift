@@ -24,7 +24,7 @@ class LollySwiftiOSTests: XCTestCase {
     func testExample() {
         let vm = SettingsViewModel()
         vm.getData().subscribe {
-            XCTAssertEqual(vm.arrLanguages.count, 10)
+            XCTAssertEqual(vm.arrLanguages.count, 11)
         }
     }
     

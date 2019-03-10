@@ -31,22 +31,31 @@ class SettingsViewModel: NSObject {
     var USREADINTERVAL: Int {
         get { return selectedUSUser1.VALUE1!.toInt()! }
     }
-    private var selectedUSLang: MUserSetting!
+    private var selectedUSLang2: MUserSetting!
     var USTEXTBOOKID: Int {
-        get { return selectedUSLang.VALUE1!.toInt()! }
-        set { selectedUSLang.VALUE1 = String(newValue) }
+        get { return selectedUSLang2.VALUE1!.toInt()! }
+        set { selectedUSLang2.VALUE1 = String(newValue) }
     }
     var USDICTITEM: String {
-        get { return selectedUSLang.VALUE2! }
-        set { selectedUSLang.VALUE2 = newValue }
+        get { return selectedUSLang2.VALUE2! }
+        set { selectedUSLang2.VALUE2 = newValue }
     }
     var USDICTNOTEID: Int {
-        get { return selectedUSLang.VALUE3!.toInt()! }
-        set { selectedUSLang.VALUE3 = String(newValue) }
+        get { return selectedUSLang2.VALUE3?.toInt() ?? 0 }
+        set { selectedUSLang2.VALUE3 = String(newValue) }
     }
     var USDICTITEMS: String {
-        get { return selectedUSLang.VALUE4 ?? "0" }
-        set { selectedUSLang.VALUE4 = newValue }
+        get { return selectedUSLang2.VALUE4 ?? "0" }
+        set { selectedUSLang2.VALUE4 = newValue }
+    }
+    private var selectedUSLang4: MUserSetting!
+    var USMACVOICEID: Int {
+        get { return selectedUSLang4.VALUE1?.toInt() ?? 0 }
+        set { selectedUSLang4.VALUE1 = String(newValue) }
+    }
+    var USIOSVOICEID: Int {
+        get { return selectedUSLang4.VALUE2?.toInt() ?? 0 }
+        set { selectedUSLang4.VALUE2 = String(newValue) }
     }
     private var selectedUSTextbook: MUserSetting!
     @objc
@@ -94,17 +103,17 @@ class SettingsViewModel: NSObject {
     }
 
     @objc
-    var arrVoices = [MVoice]()
-    var arrMacVoices: [MVoice] {
-        return arrVoices.filter { $0.VOICETYPEID == 2 }
-    }
+    var arrMacVoices: [MVoice]!
     @objc
-    var selectedVoice: MVoice!
-    var selectedVoiceIndex: Int {
-        return arrVoices.firstIndex { $0 == selectedVoice }!
+    var arriOSVoices: [MVoice]!
+    @objc
+    var selectedMacVoice = MVoice()
+    var macVoiceName: String {
+        return selectedMacVoice.VOICENAME
     }
-    var safeVoice: String {
-        return arrMacVoices.isEmpty ? "" : arrMacVoices[0].VOICENAME
+    var selectediOSVoice = MVoice()
+    var selectediOSVoiceIndex: Int {
+        return arriOSVoices.firstIndex { $0 == selectediOSVoice } ?? 0
     }
 
     var arrDictsMean = [MDictMean]()
@@ -185,7 +194,8 @@ class SettingsViewModel: NSObject {
     func setSelectedLang(_ lang: MLanguage) -> Observable<()> {
         selectedLang = lang
         USLANGID = selectedLang.ID
-        selectedUSLang = arrUserSettings.first { $0.KIND == 2 && $0.ENTITYID == self.USLANGID }!
+        selectedUSLang2 = arrUserSettings.first { $0.KIND == 2 && $0.ENTITYID == self.USLANGID }!
+        selectedUSLang4 = arrUserSettings.first { $0.KIND == 4 && $0.ENTITYID == self.USLANGID }!
         let arrDicts = USDICTITEMS.split("\r\n")
         return Observable.zip(MDictMean.getDataByLang(self.USLANGID),
                               MDictNote.getDataByLang(self.USLANGID),
@@ -205,11 +215,18 @@ class SettingsViewModel: NSObject {
                 }
                 self.selectedDictItem = self.arrDictItems.first { $0.DICTID == self.USDICTITEM }!
                 self.arrDictsNote = $0.1
-                self.selectedDictNote = self.arrDictsNote.isEmpty ? MDictNote() : self.arrDictsNote.first { $0.ID == self.USDICTNOTEID }!
+                if self.arrDictsNote.isEmpty { self.arrDictsNote.append(MDictNote()) }
+                self.selectedDictNote = self.arrDictsNote.first { $0.DICTID == self.USDICTNOTEID } ?? self.arrDictsNote[0]
                 self.arrTextbooks = $0.2
                 self.selectedTextbook = self.arrTextbooks.first { $0.ID == self.USTEXTBOOKID }!
                 self.arrAutoCorrect = $0.3
-                self.arrVoices = $0.4
+                let arrVoices = $0.4
+                self.arrMacVoices = arrVoices.filter { $0.VOICETYPEID == 2 }
+                if self.arrMacVoices.isEmpty { self.arrMacVoices.append(MVoice()) }
+                self.arriOSVoices = arrVoices.filter { $0.VOICETYPEID == 3 }
+                if self.arriOSVoices.isEmpty { self.arriOSVoices.append(MVoice()) }
+                self.selectedMacVoice = self.arrMacVoices.first { $0.ID == self.USMACVOICEID } ?? self.arrMacVoices[0]
+                self.selectediOSVoice = self.arriOSVoices.first { $0.ID == self.USIOSVOICEID } ?? self.arriOSVoices[0]
             }
     }
     
@@ -230,15 +247,15 @@ class SettingsViewModel: NSObject {
     }
     
     func updateDictItem() -> Observable<()> {
-        return MUserSetting.update(selectedUSLang.ID, dictitem: USDICTITEM).map { print($0) }
+        return MUserSetting.update(selectedUSLang2.ID, dictitem: USDICTITEM).map { print($0) }
     }
     
     func updateDictNote() -> Observable<()> {
-        return MUserSetting.update(selectedUSLang.ID, dictnoteid: USDICTNOTEID).map { print($0) }
+        return MUserSetting.update(selectedUSLang2.ID, dictnoteid: USDICTNOTEID).map { print($0) }
     }
 
     func updateTextbook() -> Observable<()> {
-        return MUserSetting.update(selectedUSLang.ID, textbookid: USTEXTBOOKID).map { print($0) }
+        return MUserSetting.update(selectedUSLang2.ID, textbookid: USTEXTBOOKID).map { print($0) }
     }
     
     func updateUnitFrom() -> Observable<()> {
@@ -257,6 +274,14 @@ class SettingsViewModel: NSObject {
         return MUserSetting.update(selectedUSTextbook.ID, uspartto: USPARTTO).map { print($0) }
     }
     
+    func updateMacVoice() -> Observable<()> {
+        return MUserSetting.update(selectedUSLang4.ID, macvoiceid: USMACVOICEID).map { print($0) }
+    }
+    
+    func updateiOSVoice() -> Observable<()> {
+        return MUserSetting.update(selectedUSLang4.ID, iosvoiceid: USIOSVOICEID).map { print($0) }
+    }
+
     func autoCorrectInput(text: String) -> String {
         return MAutoCorrect.autoCorrect(text: text, arrAutoCorrect: arrAutoCorrect, colFunc1: { $0.INPUT }, colFunc2: { $0.EXTENDED })
     }

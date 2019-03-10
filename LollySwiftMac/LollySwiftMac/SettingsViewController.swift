@@ -16,6 +16,7 @@ class SettingsViewController: NSViewController {
         return AppDelegate.theSettingsViewModel
     }
     @IBOutlet weak var acLanguages: NSArrayController!
+    @IBOutlet weak var acVoices: NSArrayController!
     @IBOutlet weak var acDictItems: NSArrayController!
     @IBOutlet weak var acDictsNote: NSArrayController!
     @IBOutlet weak var acTextbooks: NSArrayController!
@@ -64,6 +65,13 @@ class SettingsViewController: NSViewController {
         }.disposed(by: disposeBag)
     }
     
+    @IBAction func voiceSelected(_ sender: AnyObject) {
+        vm.USMACVOICEID = vm.selectedMacVoice.ID
+        vm.updateMacVoice().subscribe {
+            self.updateVoice()
+        }.disposed(by: disposeBag)
+    }
+
     @IBAction func dictMeanSelected(_ sender: AnyObject) {
         vm.updateDictItem().subscribe {
             self.updateDictItem()
@@ -154,11 +162,16 @@ class SettingsViewController: NSViewController {
 
     func updateLang() {
         acLanguages.content = vm.arrLanguages
+        updateVoice()
         updateDictItem()
         updateDictNote()
         updateTextbook()
     }
     
+    func updateVoice() {
+        acVoices.content = vm.arrMacVoices
+    }
+
     func updateDictItem() {
         acDictItems.content = vm.arrDictItems
     }
