@@ -131,16 +131,22 @@
                                             <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icons8-room_sound_filled" translatesAutoresizingMaskIntoConstraints="NO" id="oCb-0G-l8A">
+                                            <rect key="frame" x="301" y="9.5" width="25" height="25"/>
+                                        </imageView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="C2u-y8-2qr" firstAttribute="leading" secondItem="hbz-bv-SMG" secondAttribute="leadingMargin" id="2DQ-xS-kMS"/>
                                         <constraint firstItem="Pi7-jZ-brZ" firstAttribute="leading" secondItem="C2u-y8-2qr" secondAttribute="trailingMargin" id="MDj-OE-qbW"/>
+                                        <constraint firstAttribute="trailing" secondItem="oCb-0G-l8A" secondAttribute="trailing" constant="15" id="Z0c-ev-nDb"/>
                                         <constraint firstItem="C2u-y8-2qr" firstAttribute="centerY" secondItem="hbz-bv-SMG" secondAttribute="centerY" id="aSt-Eu-Fks"/>
+                                        <constraint firstItem="oCb-0G-l8A" firstAttribute="centerY" secondItem="Pi7-jZ-brZ" secondAttribute="centerY" id="fkf-S0-yDU"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="Pi7-jZ-brZ" secondAttribute="trailing" id="frF-3w-ImX"/>
                                         <constraint firstItem="Pi7-jZ-brZ" firstAttribute="centerY" secondItem="hbz-bv-SMG" secondAttribute="centerY" id="k75-Yu-a8L"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="imgSpeak" destination="oCb-0G-l8A" id="uM7-40-bpK"/>
                                     <outlet property="lblUnitPartSeqNum" destination="C2u-y8-2qr" id="ADx-f7-vqH"/>
                                     <outlet property="lblWordNote" destination="Pi7-jZ-brZ" id="qgP-W3-090"/>
                                 </connections>
@@ -1269,10 +1275,11 @@
     </scenes>
     <resources>
         <image name="MenuButton" width="25" height="13"/>
+        <image name="icons8-room_sound_filled" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Ol9-Ej-9ED"/>
-        <segue reference="aiy-wK-I9x"/>
+        <segue reference="Wcb-Wk-Ta2"/>
         <segue reference="K8L-Dr-qQn"/>
     </inferredMetricsTieBreakers>
 </document>

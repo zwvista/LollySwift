@@ -12,6 +12,7 @@ import RxSwift
 
 class SettingsViewController: UITableViewController {
     @IBOutlet weak var langCell: UITableViewCell!
+    @IBOutlet weak var voiceCell: UITableViewCell!
     @IBOutlet weak var dictItemCell: UITableViewCell!
     @IBOutlet weak var dictNoteCell: UITableViewCell!
     @IBOutlet weak var textbookCell: UITableViewCell!
@@ -32,6 +33,7 @@ class SettingsViewController: UITableViewController {
     @IBOutlet weak var btnNext: UIButton!
 
     let ddLang = DropDown()
+    let ddVoice = DropDown()
     let ddDictItem = DropDown()
     let ddDictNote = DropDown()
     let ddTextbook = DropDown()
@@ -62,6 +64,15 @@ class SettingsViewController: UITableViewController {
                 self.vm.updateLang()
             }.subscribe {
                 self.updateLang()
+            }.disposed(by: self.disposeBag)
+        }
+
+        ddVoice.anchorView = voiceCell
+        ddVoice.selectionAction = { [unowned self] (index: Int, item: String) in
+            guard index != self.vm.selectediOSVoiceIndex else {return}
+            self.vm.selectediOSVoice = self.vm.arriOSVoices[index]
+            self.vm.updateiOSVoice().subscribe {
+                self.updateVoice()
             }.disposed(by: self.disposeBag)
         }
 
@@ -151,10 +162,12 @@ class SettingsViewController: UITableViewController {
         case 0:
             ddLang.show()
         case 1:
-            ddDictItem.show()
+            ddVoice.show()
         case 2:
-            ddDictNote.show()
+            ddDictItem.show()
         case 3:
+            ddDictNote.show()
+        case 4:
             ddTextbook.show()
         default:
             switch indexPath.row {
@@ -175,9 +188,17 @@ class SettingsViewController: UITableViewController {
     func updateLang() {
         let item = vm.selectedLang!
         langCell.textLabel!.text = item.LANGNAME
+        updateVoice()
         updateDictItem()
         updateDictNote()
         updateTextbook()
+    }
+    
+    func updateVoice() {
+        let item = vm.selectediOSVoice
+        voiceCell.textLabel!.text = item.VOICENAME
+        ddVoice.dataSource = vm.arriOSVoices.map { $0.VOICENAME }
+        ddVoice.selectRow(vm.selectediOSVoiceIndex)
     }
     
     func updateDictItem() {
@@ -198,10 +219,10 @@ class SettingsViewController: UITableViewController {
             ddDictNote.dataSource = []
         } else {
             let item = vm.selectedDictNote
-            dictNoteCell.textLabel!.text = item.DICTNAME!
-            dictNoteCell.detailTextLabel!.text = item.URL!
+            dictNoteCell.textLabel!.text = item.DICTNAME
+            dictNoteCell.detailTextLabel!.text = item.URL ?? ""
             dictNoteCell.setNeedsDisplay()
-            ddDictNote.dataSource = vm.arrDictsNote.map { $0.DICTNAME! }
+            ddDictNote.dataSource = vm.arrDictsNote.map { $0.DICTNAME }
             ddDictNote.selectRow(vm.selectedDictNoteIndex)
         }
     }

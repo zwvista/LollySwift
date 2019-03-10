@@ -13,9 +13,9 @@ import RxSwift
 class MDictionary: NSObject, Codable {
     var ID = 0
     var DICTID = 0
-    var LANGIDFROM: Int?
-    var DICTTYPENAME: String?
-    var DICTNAME: String?
+    var LANGIDFROM = 0
+    var DICTTYPENAME = ""
+    var DICTNAME = ""
     var URL: String?
     var CHCONV: String?
     var TRANSFORM: String?
@@ -24,7 +24,7 @@ class MDictionary: NSObject, Codable {
     var TEMPLATE2: String?
     
     override var description: String {
-        return DICTNAME ?? "";
+        return DICTNAME;
     }
 
     func urlString(word: String, arrAutoCorrect: [MAutoCorrect]) -> String {

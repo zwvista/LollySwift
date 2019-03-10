@@ -107,7 +107,11 @@ class SettingsViewModel: NSObject {
     @objc
     var arriOSVoices: [MVoice]!
     @objc
-    var selectedMacVoice = MVoice()
+    var selectedMacVoice = MVoice() {
+        didSet {
+            USMACVOICEID = selectedMacVoice.ID
+        }
+    }
     var macVoiceName: String {
         return selectedMacVoice.VOICENAME
     }
@@ -132,7 +136,7 @@ class SettingsViewModel: NSObject {
     @objc
     var arrDictsNote = [MDictNote]()
     @objc
-    var selectedDictNote: MDictNote = MDictNote() {
+    var selectedDictNote = MDictNote() {
         didSet {
             USDICTNOTEID = selectedDictNote.ID
         }
@@ -207,7 +211,7 @@ class SettingsViewModel: NSObject {
                 var i = 0
                 self.arrDictItems = arrDicts.flatMap { d -> [MDictItem] in
                     if d == "0" {
-                        return self.arrDictsMean.map { MDictItem(id: String($0.DICTID), name: $0.DICTNAME!) }
+                        return self.arrDictsMean.map { MDictItem(id: String($0.DICTID), name: $0.DICTNAME) }
                     } else {
                         i += 1
                         return [MDictItem(id: d, name: "Custom\(i)")]

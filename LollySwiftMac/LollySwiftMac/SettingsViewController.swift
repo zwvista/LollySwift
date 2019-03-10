@@ -66,7 +66,6 @@ class SettingsViewController: NSViewController {
     }
     
     @IBAction func voiceSelected(_ sender: AnyObject) {
-        vm.USMACVOICEID = vm.selectedMacVoice.ID
         vm.updateMacVoice().subscribe {
             self.updateVoice()
         }.disposed(by: disposeBag)

@@ -91,10 +91,39 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="Voice:" id="fSy-EL-ce3">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="CdO-n2-Ymj" detailTextLabel="lyS-Dw-frS" style="IBUITableViewCellStyleSubtitle" id="hC4-UU-ZMB">
+                                        <rect key="frame" x="0.0" y="100" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hC4-UU-ZMB" id="keD-Dz-F46">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="CdO-n2-Ymj">
+                                                    <rect key="frame" x="16" y="6" width="31.5" height="19.5"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="lyS-Dw-frS">
+                                                    <rect key="frame" x="16" y="25.5" width="40.5" height="13.5"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                    <color key="textColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.47684186699999997" green="0.50480759139999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                             <tableViewSection headerTitle="Dictionary(Word):" id="eJT-JA-tAS">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="iwf-56-ICv" detailTextLabel="IO0-9s-jaX" style="IBUITableViewCellStyleSubtitle" id="Fwx-mp-CFd" userLabel="Dict Item Cell">
-                                        <rect key="frame" x="0.0" y="100" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="172" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Fwx-mp-CFd" id="QBF-at-pxM">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -123,7 +152,7 @@
                             <tableViewSection headerTitle="Dictionary(Note):" id="Cf6-lL-FPm">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="lK7-y7-tcJ" detailTextLabel="80Y-an-3eT" style="IBUITableViewCellStyleSubtitle" id="NQn-Gn-Eyq">
-                                        <rect key="frame" x="0.0" y="172" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="244" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="NQn-Gn-Eyq" id="0dm-8V-kXh">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -152,7 +181,7 @@
                             <tableViewSection headerTitle="Textbook:" id="AdO-JH-QNO">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="Eue-X6-xpf" detailTextLabel="Lab-Mu-P69" style="IBUITableViewCellStyleSubtitle" id="oOh-wh-QMf">
-                                        <rect key="frame" x="0.0" y="244" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="316" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oOh-wh-QMf" id="5m4-Nb-95Y">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -181,7 +210,7 @@
                             <tableViewSection headerTitle="Units &amp; Parts:" id="qyx-R3-MNg">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="9lo-kc-rOo" detailTextLabel="Sts-VQ-Hk5" style="IBUITableViewCellStyleValue1" id="kQ8-rO-c1M">
-                                        <rect key="frame" x="0.0" y="316" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="388" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kQ8-rO-c1M" id="2jN-pG-evX">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -206,7 +235,7 @@
                                         <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="F7P-2l-TP8" detailTextLabel="FeT-5f-mQ9" style="IBUITableViewCellStyleValue1" id="68E-A7-6aW">
-                                        <rect key="frame" x="0.0" y="360" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="432" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="68E-A7-6aW" id="e0e-fu-Pqe">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -231,7 +260,7 @@
                                         <color key="backgroundColor" red="1" green="0.0" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="0Y1-od-WnM">
-                                        <rect key="frame" x="0.0" y="404" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="476" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0Y1-od-WnM" id="igc-Jy-Ooc">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -285,7 +314,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="dfE-Hq-cET" detailTextLabel="4P0-RL-QT8" style="IBUITableViewCellStyleValue1" id="dnB-oo-1Jq">
-                                        <rect key="frame" x="0.0" y="448" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="520" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dnB-oo-1Jq" id="dXK-Ps-XHg">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -310,7 +339,7 @@
                                         <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="C1o-As-Ecg" detailTextLabel="JRs-ig-blb" style="IBUITableViewCellStyleValue1" id="lhA-xM-R6Y">
-                                        <rect key="frame" x="0.0" y="492" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="564" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lhA-xM-R6Y" id="2BZ-bU-Tbt">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
@@ -371,6 +400,7 @@
                         <outlet property="textbookCell" destination="oOh-wh-QMf" id="Vwe-1Z-AhJ"/>
                         <outlet property="unitFromCell" destination="kQ8-rO-c1M" id="oJo-Oy-hJC"/>
                         <outlet property="unitToCell" destination="dnB-oo-1Jq" id="aUb-cB-ua8"/>
+                        <outlet property="voiceCell" destination="hC4-UU-ZMB" id="ALv-4t-WMz"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2es-5j-k9X" userLabel="First Responder" sceneMemberID="firstResponder"/>

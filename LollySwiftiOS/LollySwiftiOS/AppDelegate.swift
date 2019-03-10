@@ -8,6 +8,7 @@
 
 import UIKit
 import RxSwift
+import AVFoundation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     let disposeBag = DisposeBag()
+    static let synth = AVSpeechSynthesizer()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         vmSettings.getData().subscribe().disposed(by: disposeBag)
