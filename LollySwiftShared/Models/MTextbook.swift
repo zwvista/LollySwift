@@ -34,7 +34,7 @@ class MTextbook: NSObject, Codable {
 
     static func getDataByLang(_ langid: Int) -> Observable<[MTextbook]> {
         // SQL: SELECT * FROM TEXTBOOKS WHERE LANGID=?
-        let url = "\(RestApi.url)TEXTBOOKS?transform=1&filter=LANGID,eq,\(langid)"
+        let url = "\(CommonApi.url)TEXTBOOKS?transform=1&filter=LANGID,eq,\(langid)"
         let o: Observable<[MTextbook]> = RestApi.getArray(url: url, keyPath: "TEXTBOOKS")
         func f(units: String) -> [String] {
             if let m = "UNITS,(\\d+)".r!.findFirst(in: units) {

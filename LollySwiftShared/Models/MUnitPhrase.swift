@@ -49,7 +49,7 @@ class MUnitPhrase: NSObject, Codable {
 
     static func getDataByTextbook(_ textbook: MTextbook, unitPartFrom: Int, unitPartTo: Int) -> Observable<[MUnitPhrase]> {
         // SQL: SELECT * FROM VUNITPHRASES WHERE TEXTBOOKID=? AND UNITPART BETWEEN ? AND ? ORDER BY UNITPART,SEQNUM
-        let url = "\(RestApi.url)VUNITPHRASES?transform=1&filter[]=TEXTBOOKID,eq,\(textbook.ID)&filter[]=UNITPART,bt,\(unitPartFrom),\(unitPartTo)&order[]=UNITPART&order[]=SEQNUM"
+        let url = "\(CommonApi.url)VUNITPHRASES?transform=1&filter[]=TEXTBOOKID,eq,\(textbook.ID)&filter[]=UNITPART,bt,\(unitPartFrom),\(unitPartTo)&order[]=UNITPART&order[]=SEQNUM"
         let o: Observable<[MUnitPhrase]> = RestApi.getArray(url: url, keyPath: "VUNITPHRASES")
         return o.map { arr in
             arr.forEach { row in
@@ -62,7 +62,7 @@ class MUnitPhrase: NSObject, Codable {
 
     static func getDataByLang(_ langid: Int, arrTextbooks: [MTextbook]) -> Observable<[MUnitPhrase]> {
         // SQL: SELECT * FROM VTEXTBOOKPHRASES WHERE LANGID=?
-        let url = "\(RestApi.url)VUNITPHRASES?transform=1&filter=LANGID,eq,\(langid)&order[]=TEXTBOOKID&order[]=UNIT&order[]=PART&order[]=SEQNUM"
+        let url = "\(CommonApi.url)VUNITPHRASES?transform=1&filter=LANGID,eq,\(langid)&order[]=TEXTBOOKID&order[]=UNIT&order[]=PART&order[]=SEQNUM"
         let o: Observable<[MUnitPhrase]> = RestApi.getArray(url: url, keyPath: "VUNITPHRASES")
         return o.map { arr in
             arr.forEach { row in
@@ -76,26 +76,26 @@ class MUnitPhrase: NSObject, Codable {
 
     static func getDataByLangPhrase(_ phraseid: Int) -> Observable<[MUnitPhrase]> {
         // SQL: SELECT * FROM VUNITPHRASES WHERE PHRASEID=?
-        let url = "\(RestApi.url)VUNITPHRASES?transform=1&filter=PHRASEID,eq,\(phraseid)"
+        let url = "\(CommonApi.url)VUNITPHRASES?transform=1&filter=PHRASEID,eq,\(phraseid)"
         return RestApi.getArray(url: url, keyPath: "VUNITPHRASES")
     }
 
     static func update(_ id: Int, seqnum: Int) -> Observable<()> {
         // SQL: UPDATE UNITPHRASES SET SEQNUM=? WHERE ID=?
-        let url = "\(RestApi.url)UNITPHRASES/\(id)"
+        let url = "\(CommonApi.url)UNITPHRASES/\(id)"
         let body = "SEQNUM=\(seqnum)"
         return RestApi.update(url: url, body: body).map { print($0) }
     }
     
     static func update(item: MUnitPhrase) -> Observable<()> {
         // SQL: UPDATE UNITPHRASES SET UNIT=?, PART=?, SEQNUM=?, PHRASEID=? WHERE ID=?
-        let url = "\(RestApi.url)UNITPHRASES/\(item.ID)"
+        let url = "\(CommonApi.url)UNITPHRASES/\(item.ID)"
         return RestApi.update(url: url, body: try! item.toJSONString(prettyPrint: false)!).map { print($0) }
     }
 
     static func create(item: MUnitPhrase) -> Observable<Int> {
         // SQL: INSERT INTO UNITPHRASES (TEXTBOOKID, UNIT, PART, SEQNUM, PHRASEID) VALUES (?,?,?,?,?)
-        let url = "\(RestApi.url)UNITPHRASES"
+        let url = "\(CommonApi.url)UNITPHRASES"
         return RestApi.create(url: url, body: try! item.toJSONString(prettyPrint: false)!).map {
             return $0.toInt()!
         }
@@ -103,7 +103,7 @@ class MUnitPhrase: NSObject, Codable {
     
     static func delete(_ id: Int) -> Observable<()> {
         // SQL: DELETE UNITPHRASES WHERE ID=?
-        let url = "\(RestApi.url)UNITPHRASES/\(id)"
+        let url = "\(CommonApi.url)UNITPHRASES/\(id)"
         return RestApi.delete(url: url).map { print($0) }
     }
 }

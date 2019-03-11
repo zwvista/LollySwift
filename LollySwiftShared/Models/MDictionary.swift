@@ -39,7 +39,7 @@ class MDictionary: NSObject, Codable {
 class MDictMean : MDictionary {
     static func getDataByLang(_ langid: Int) -> Observable<[MDictMean]> {
         // SQL: SELECT * FROM VDICTSMEAN WHERE LANGIDFROM=?
-        let url = "\(RestApi.url)VDICTSMEAN?transform=1&filter=LANGIDFROM,eq,\(langid)"
+        let url = "\(CommonApi.url)VDICTSMEAN?transform=1&filter=LANGIDFROM,eq,\(langid)"
         return RestApi.getArray(url: url, keyPath: "VDICTSMEAN")
     }
     
@@ -47,7 +47,7 @@ class MDictMean : MDictionary {
         let template = useTemplate2 && !(TEMPLATE2 ?? "").isEmpty ? TEMPLATE2! : TEMPLATE!
         return CommonApi.extractText(from: html, transform: TRANSFORM!, template: template) { (text, template) in
             let template = template.replacingOccurrences(of: "{0}", with: word)
-                .replacingOccurrences(of: "{1}", with: RestApi.cssFolder)
+                .replacingOccurrences(of: "{1}", with: CommonApi.cssFolder)
                 .replacingOccurrences(of: "{2}", with: text as String)
             return template
         }
@@ -77,7 +77,7 @@ class MDictItem : NSObject {
 class MDictNote : MDictionary {
     static func getDataByLang(_ langid: Int) -> Observable<[MDictNote]> {
         // SQL: SELECT * FROM VDICTSNOTE WHERE LANGIDFROM = ?
-        let url = "\(RestApi.url)VDICTSNOTE?transform=1&filter=LANGIDFROM,eq,\(langid)"
+        let url = "\(CommonApi.url)VDICTSNOTE?transform=1&filter=LANGIDFROM,eq,\(langid)"
         return RestApi.getArray(url: url, keyPath: "VDICTSNOTE")
     }
 }

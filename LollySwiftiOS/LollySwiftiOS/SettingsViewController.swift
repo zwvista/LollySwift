@@ -197,6 +197,7 @@ class SettingsViewController: UITableViewController {
     func updateVoice() {
         let item = vm.selectediOSVoice
         voiceCell.textLabel!.text = item.VOICENAME
+        voiceCell.detailTextLabel!.text = item.VOICELANG
         ddVoice.dataSource = vm.arriOSVoices.map { $0.VOICENAME }
         ddVoice.selectRow(vm.selectediOSVoiceIndex)
     }

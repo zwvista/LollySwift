@@ -30,10 +30,6 @@ class PhrasesLangViewModel: NSObject {
         })
     }
     
-    static func update(_ id: Int, item: MLangPhrase) -> Observable<()> {
-        return MLangPhrase.update(id, item: item).map { print($0) }
-    }
-    
     static func update(item: MLangPhrase) -> Observable<()> {
         return MLangPhrase.update(item: item).map { print($0) }
     }

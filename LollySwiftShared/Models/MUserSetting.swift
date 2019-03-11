@@ -22,12 +22,12 @@ class MUserSetting: NSObject, Codable {
 
     static func getData(userid: Int) -> Observable<[MUserSetting]> {
         // SQL: SELECT * FROM USERSETTINGS WHERE USERID=?
-        let url = "\(RestApi.url)USERSETTINGS?transform=1&filter=USERID,eq,\(userid)"
+        let url = "\(CommonApi.url)USERSETTINGS?transform=1&filter=USERID,eq,\(userid)"
         return RestApi.getArray(url: url, keyPath: "USERSETTINGS")
     }
     
     static func update(_ id: Int, body: String) -> Observable<String> {
-        let url = "\(RestApi.url)USERSETTINGS/\(id)"
+        let url = "\(CommonApi.url)USERSETTINGS/\(id)"
         // SQL: UPDATE USERSETTINGS SET VALUE1=? WHERE ID=?
         // SQL: UPDATE USERSETTINGS SET VALUE2=? WHERE ID=?
         // SQL: UPDATE USERSETTINGS SET VALUE3=? WHERE ID=?

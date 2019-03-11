@@ -12,8 +12,6 @@ import RxSwift
 
 class SettingsViewModel: NSObject {
     
-    let userid = 1
-
     var arrUserSettings = [MUserSetting]()
     private var selectedUSUser0: MUserSetting!
     private var selectedUSUser1: MUserSetting!
@@ -180,7 +178,7 @@ class SettingsViewModel: NSObject {
     var arrAutoCorrect = [MAutoCorrect]()
     
     func getData() -> Observable<()> {
-        return Observable.zip(MLanguage.getData(), MUserSetting.getData(userid: self.userid))
+        return Observable.zip(MLanguage.getData(), MUserSetting.getData(userid: CommonApi.userid))
             .flatMap { result -> Observable<()> in
                 self.arrLanguages = result.0
                 self.arrUserSettings = result.1

@@ -31,7 +31,7 @@ class MVoice: NSObject, Codable {
 
     static func getDataByLang(_ langid: Int) -> Observable<[MVoice]> {
         // SQL: SELECT * FROM VVOICES WHERE LANGID=?
-        let url = "\(RestApi.url)VVOICES?transform=1&filter[]=LANGID,eq,\(langid)"
+        let url = "\(CommonApi.url)VVOICES?transform=1&filter[]=LANGID,eq,\(langid)"
         return RestApi.getArray(url: url, keyPath: "VVOICES")
     }
 }

@@ -40,8 +40,6 @@ extension Encodable {
 }
 
 class RestApi {
-    static let url = "https://zwvista.tk/lolly/api.php/"
-    static let cssFolder = "https://zwvista.tk/lolly/css/"
 
     static func getObject<T: Decodable>(url: String, keyPath: String? = nil) -> Observable<T> {
         return RxCodableAlamofire.object(.get, url, keyPath: keyPath)

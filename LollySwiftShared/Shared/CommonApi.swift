@@ -16,6 +16,10 @@ enum DictWebViewStatus {
 }
 
 class CommonApi {
+    
+    static public let userid = 1
+    static let url = "https://zwvista.tk/lolly/api.php/"
+    static let cssFolder = "https://zwvista.tk/lolly/css/"
     static private let debugExtract = false
     
     static func extractText(from html: String, transform: String, template: String, templateHandler: (String, String) -> String) -> String {

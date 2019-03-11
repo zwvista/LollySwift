@@ -267,7 +267,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nhD-RQ-TC9">
-                                                    <rect key="frame" x="202.5" y="5" width="70" height="34"/>
+                                                    <rect key="frame" x="112" y="5" width="70" height="34"/>
                                                     <state key="normal" title="Previous">
                                                         <color key="titleColor" red="1" green="0.2527923882" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
@@ -278,8 +278,18 @@
                                                         <action selector="previousUnitPart:" destination="gTE-sX-TI7" eventType="touchUpInside" id="w2M-1e-f8m"/>
                                                     </connections>
                                                 </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0oS-ST-GhX">
+                                                    <rect key="frame" x="2" y="0.0" width="56" height="44"/>
+                                                    <color key="backgroundColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <state key="normal" title="Part">
+                                                        <color key="titleColor" red="0.99942404029999998" green="0.98555368190000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="showToTypeDropDown:" destination="gTE-sX-TI7" eventType="touchUpInside" id="tEm-RH-DOg"/>
+                                                    </connections>
+                                                </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qxR-1m-hkL">
-                                                    <rect key="frame" x="318.5" y="5" width="38" height="34"/>
+                                                    <rect key="frame" x="229" y="6" width="38" height="34"/>
                                                     <state key="normal" title="Next">
                                                         <color key="titleColor" red="1" green="0.2527923882" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
@@ -290,25 +300,15 @@
                                                         <action selector="nextUnitPart:" destination="gTE-sX-TI7" eventType="touchUpInside" id="m8L-iH-CcZ"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0oS-ST-GhX">
-                                                    <rect key="frame" x="20" y="0.0" width="162.5" height="43.5"/>
-                                                    <color key="backgroundColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <state key="normal" title="Part">
-                                                        <color key="titleColor" red="0.99942404029999998" green="0.98555368190000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="showToTypeDropDown:" destination="gTE-sX-TI7" eventType="touchUpInside" id="tEm-RH-DOg"/>
-                                                    </connections>
-                                                </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="nhD-RQ-TC9" firstAttribute="leading" secondItem="0oS-ST-GhX" secondAttribute="trailing" constant="20" id="0Ca-8N-ucB"/>
-                                                <constraint firstItem="qxR-1m-hkL" firstAttribute="centerY" secondItem="igc-Jy-Ooc" secondAttribute="centerY" id="Gwf-Qi-vJD"/>
-                                                <constraint firstItem="qxR-1m-hkL" firstAttribute="centerX" secondItem="igc-Jy-Ooc" secondAttribute="centerX" constant="150" id="bjD-O1-0Qz"/>
-                                                <constraint firstItem="nhD-RQ-TC9" firstAttribute="centerX" secondItem="igc-Jy-Ooc" secondAttribute="centerX" constant="50" id="jlV-ee-uJG"/>
+                                                <constraint firstItem="nhD-RQ-TC9" firstAttribute="leading" secondItem="0oS-ST-GhX" secondAttribute="trailing" constant="54" id="0Ca-8N-ucB"/>
+                                                <constraint firstItem="qxR-1m-hkL" firstAttribute="centerY" secondItem="igc-Jy-Ooc" secondAttribute="centerY" constant="1.25" id="Gwf-Qi-vJD"/>
+                                                <constraint firstItem="qxR-1m-hkL" firstAttribute="centerX" secondItem="igc-Jy-Ooc" secondAttribute="centerX" constant="60.5" id="bjD-O1-0Qz"/>
+                                                <constraint firstItem="nhD-RQ-TC9" firstAttribute="centerX" secondItem="igc-Jy-Ooc" secondAttribute="centerX" constant="-40.5" id="jlV-ee-uJG"/>
                                                 <constraint firstItem="nhD-RQ-TC9" firstAttribute="centerY" secondItem="igc-Jy-Ooc" secondAttribute="centerY" id="kmt-mC-t3g"/>
-                                                <constraint firstAttribute="bottom" secondItem="0oS-ST-GhX" secondAttribute="bottom" id="qU9-QH-Y97"/>
-                                                <constraint firstItem="0oS-ST-GhX" firstAttribute="leading" secondItem="igc-Jy-Ooc" secondAttribute="leading" constant="20" id="rk9-j2-fWq"/>
+                                                <constraint firstAttribute="bottom" secondItem="0oS-ST-GhX" secondAttribute="bottom" constant="-0.5" id="qU9-QH-Y97"/>
+                                                <constraint firstItem="0oS-ST-GhX" firstAttribute="leading" secondItem="igc-Jy-Ooc" secondAttribute="leading" constant="2" id="rk9-j2-fWq"/>
                                                 <constraint firstItem="0oS-ST-GhX" firstAttribute="top" secondItem="igc-Jy-Ooc" secondAttribute="top" id="rvQ-06-ZcH"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -405,7 +405,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2es-5j-k9X" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3871" y="169"/>
+            <point key="canvasLocation" x="3869.5999999999999" y="168.6656671664168"/>
         </scene>
         <!--WordsUnitViewController-->
         <scene sceneID="cgk-1m-nd2">

@@ -51,39 +51,39 @@ class MLangWord: NSObject, Codable {
 
     static func getDataByLang(_ langid: Int) -> Observable<[MLangWord]> {
         // SQL: SELECT * FROM LANGWORDS WHERE LANGID=?
-        let url = "\(RestApi.url)VLANGWORDS?transform=1&filter=LANGID,eq,\(langid)&order=WORD"
+        let url = "\(CommonApi.url)VLANGWORDS?transform=1&filter=LANGID,eq,\(langid)&order=WORD"
         return RestApi.getArray(url: url, keyPath: "VLANGWORDS")
     }
 
     static func getDataByLangWord(langid: Int, word: String) -> Observable<[MLangWord]> {
         // SQL: SELECT * FROM LANGWORDS WHERE LANGID=? AND WORD=?
-        let url = "\(RestApi.url)VLANGWORDS?transform=1&filter[]=LANGID,eq,\(langid)&filter[]=WORD,eq,\(word.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)"
+        let url = "\(CommonApi.url)VLANGWORDS?transform=1&filter[]=LANGID,eq,\(langid)&filter[]=WORD,eq,\(word.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)"
         // Api is case insensitive
         return RestApi.getArray(url: url, keyPath: "VLANGWORDS").map { $0.filter { $0.WORD == word } }
     }
 
     static func getDataById(_ id: Int) -> Observable<[MLangWord]> {
         // SQL: SELECT * FROM LANGWORDS WHERE ID=?
-        let url = "\(RestApi.url)VLANGWORDS?transform=1&filter=ID,eq,\(id)"
+        let url = "\(CommonApi.url)VLANGWORDS?transform=1&filter=ID,eq,\(id)"
         return RestApi.getArray(url: url, keyPath: "VLANGWORDS")
     }
     
     static func update(_ id: Int, note: String) -> Observable<()> {
         // SQL: UPDATE LANGWORDS SET NOTE=? WHERE ID=?
-        let url = "\(RestApi.url)LANGWORDS/\(id)"
+        let url = "\(CommonApi.url)LANGWORDS/\(id)"
         let body = "NOTE=\(note)"
         return RestApi.update(url: url, body: body).map { print($0) }
     }
 
     static func update(item: MLangWord) -> Observable<()> {
         // SQL: UPDATE LANGWORDS SET WORD=?, LEVEL=? WHERE ID=?
-        let url = "\(RestApi.url)LANGWORDS/\(item.ID)"
+        let url = "\(CommonApi.url)LANGWORDS/\(item.ID)"
         return RestApi.update(url: url, body: try! item.toJSONString(prettyPrint: false)!).map { print($0) }
     }
 
     static func create(item: MLangWord) -> Observable<Int> {
         // SQL: INSERT INTO LANGWORDS (LANGID, WORD) VALUES (?,?)
-        let url = "\(RestApi.url)LANGWORDS"
+        let url = "\(CommonApi.url)LANGWORDS"
         return RestApi.create(url: url, body: try! item.toJSONString(prettyPrint: false)!).map {
             let id = $0.toInt()!
             print(id)
@@ -93,7 +93,7 @@ class MLangWord: NSObject, Codable {
     
     static func delete(_ id: Int) -> Observable<()> {
         // SQL: DELETE LANGWORDS WHERE ID=?
-        let url = "\(RestApi.url)LANGWORDS/\(id)"
+        let url = "\(CommonApi.url)LANGWORDS/\(id)"
         return RestApi.delete(url: url).map { print($0) }
     }
 }
