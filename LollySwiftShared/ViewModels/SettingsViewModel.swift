@@ -46,14 +46,14 @@ class SettingsViewModel: NSObject {
         get { return selectedUSLang2.VALUE4 ?? "0" }
         set { selectedUSLang2.VALUE4 = newValue }
     }
-    private var selectedUSLang4: MUserSetting!
+    private var selectedUSLang3: MUserSetting!
     var USMACVOICEID: Int {
-        get { return selectedUSLang4.VALUE1?.toInt() ?? 0 }
-        set { selectedUSLang4.VALUE1 = String(newValue) }
+        get { return selectedUSLang3.VALUE2?.toInt() ?? 0 }
+        set { selectedUSLang3.VALUE2 = String(newValue) }
     }
     var USIOSVOICEID: Int {
-        get { return selectedUSLang4.VALUE2?.toInt() ?? 0 }
-        set { selectedUSLang4.VALUE2 = String(newValue) }
+        get { return selectedUSLang3.VALUE3?.toInt() ?? 0 }
+        set { selectedUSLang3.VALUE3 = String(newValue) }
     }
     private var selectedUSTextbook: MUserSetting!
     @objc
@@ -150,7 +150,7 @@ class SettingsViewModel: NSObject {
     var selectedTextbook: MTextbook! {
         didSet {
             USTEXTBOOKID = selectedTextbook.ID
-            selectedUSTextbook = arrUserSettings.first { $0.KIND == 3 && $0.ENTITYID == selectedTextbook.ID }!
+            selectedUSTextbook = arrUserSettings.first { $0.KIND == 11 && $0.ENTITYID == selectedTextbook.ID }!
         }
     }
     var selectedTextbookIndex: Int {
@@ -197,7 +197,7 @@ class SettingsViewModel: NSObject {
         selectedLang = lang
         USLANGID = selectedLang.ID
         selectedUSLang2 = arrUserSettings.first { $0.KIND == 2 && $0.ENTITYID == self.USLANGID }!
-        selectedUSLang4 = arrUserSettings.first { $0.KIND == 4 && $0.ENTITYID == self.USLANGID }!
+        selectedUSLang3 = arrUserSettings.first { $0.KIND == 4 && $0.ENTITYID == self.USLANGID }!
         let arrDicts = USDICTITEMS.split("\r\n")
         return Observable.zip(MDictMean.getDataByLang(self.USLANGID),
                               MDictNote.getDataByLang(self.USLANGID),
@@ -277,11 +277,11 @@ class SettingsViewModel: NSObject {
     }
     
     func updateMacVoice() -> Observable<()> {
-        return MUserSetting.update(selectedUSLang4.ID, macvoiceid: USMACVOICEID).map { print($0) }
+        return MUserSetting.update(selectedUSLang3.ID, macvoiceid: USMACVOICEID).map { print($0) }
     }
     
     func updateiOSVoice() -> Observable<()> {
-        return MUserSetting.update(selectedUSLang4.ID, iosvoiceid: USIOSVOICEID).map { print($0) }
+        return MUserSetting.update(selectedUSLang3.ID, iosvoiceid: USIOSVOICEID).map { print($0) }
     }
 
     func autoCorrectInput(text: String) -> String {

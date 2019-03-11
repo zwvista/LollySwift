@@ -76,12 +76,12 @@ class MUserSetting: NSObject, Codable {
     }
     
     static func update(_ id: Int, macvoiceid: Int) -> Observable<String> {
-        let body = "VALUE1=\(macvoiceid)"
+        let body = "VALUE2=\(macvoiceid)"
         return update(id, body: body)
     }
     
     static func update(_ id: Int, iosvoiceid: Int) -> Observable<String> {
-        let body = "VALUE2=\(iosvoiceid)"
+        let body = "VALUE3=\(iosvoiceid)"
         return update(id, body: body)
     }
 }
