@@ -22,7 +22,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, UISearchBarDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.showBlurLoader()
-        vm = PhrasesUnitViewModel(settings: vmSettings, disposeBag: disposeBag) {
+        vm = PhrasesUnitViewModel(settings: vmSettings, inSelectedTextbook: true, disposeBag: disposeBag) {
             self.setupSearchController(delegate: self)
             self.tableView.reloadData()
             self.view.removeBlurLoader()

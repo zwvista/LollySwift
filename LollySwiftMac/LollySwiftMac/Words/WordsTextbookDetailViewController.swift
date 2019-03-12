@@ -11,7 +11,7 @@ import RxSwift
 
 class WordsTextbookDetailViewController: NSViewController {
 
-    var vm: WordsTextbookViewModel!
+    var vm: WordsUnitViewModel!
     var complete: (() -> Void)?
     @objc var item: MUnitWord!
 

@@ -54,10 +54,10 @@ class PhrasesLangViewController: PhrasesBaseViewController {
         detailVC.complete = { self.tableView.reloadData(); self.addPhrase(self) }
         self.presentAsSheet(detailVC)
     }
-    
-    @IBAction func deletePhrase(_ sender: Any) {
+
+    override func deletePhrase(row: Int) {
     }
-    
+
     @IBAction func refreshTableView(_ sender: Any) {
         vm = PhrasesLangViewModel(settings: AppDelegate.theSettingsViewModel, disposeBag: disposeBag) {
             self.tableView.reloadData()

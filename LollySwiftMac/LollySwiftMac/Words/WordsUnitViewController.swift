@@ -135,7 +135,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation {
     }
     
     @IBAction func refreshTableView(_ sender: Any) {
-        vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel, disposeBag: disposeBag) {
+        vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel, inSelectedTextbook: true, disposeBag: disposeBag) {
             self.tableView.reloadData()
         }
     }

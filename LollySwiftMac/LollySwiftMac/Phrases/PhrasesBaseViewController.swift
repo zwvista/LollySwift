@@ -48,6 +48,15 @@ class PhrasesBaseViewController: NSViewController, LollyProtocol, NSTableViewDat
 
     func endEditing(row: Int) {
     }
+    
+    @IBAction func deletePhrase(_ sender: Any) {
+        let row = tableView.selectedRow
+        guard row != -1 else {return}
+        deletePhrase(row: row)
+    }
+    
+    func deletePhrase(row: Int) {
+    }
 
     @IBAction func endEditing(_ sender: NSTextField) {
         let row = tableView.row(for: sender)

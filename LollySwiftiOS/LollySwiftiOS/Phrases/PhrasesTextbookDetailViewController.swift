@@ -21,7 +21,7 @@ class PhrasesTextbookDetailViewController: UITableViewController {
     @IBOutlet weak var tfPhrase: UITextField!
     @IBOutlet weak var tfTranslation: UITextField!
     
-    var vm: PhrasesTextbookViewModel!
+    var vm: PhrasesUnitViewModel!
     var item: MUnitPhrase!
     let ddUnit = DropDown()
     let ddPart = DropDown()

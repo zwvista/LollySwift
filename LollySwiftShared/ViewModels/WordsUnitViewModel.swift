@@ -20,15 +20,22 @@ class WordsUnitViewModel: NSObject {
     }
     let disposeBag: DisposeBag!
 
-    init(settings: SettingsViewModel, disposeBag: DisposeBag, complete: @escaping () -> ()) {
+    init(settings: SettingsViewModel, inSelectedTextbook: Bool, disposeBag: DisposeBag, complete: @escaping () -> ()) {
         self.vmSettings = settings
         self.disposeBag = disposeBag
         vmNote = NoteViewModel(settings: settings, disposeBag: disposeBag)
         super.init()
-        MUnitWord.getDataByTextbook(settings.selectedTextbook, unitPartFrom: settings.USUNITPARTFROM, unitPartTo: settings.USUNITPARTTO).subscribe(onNext: {
-            self.arrWords = $0
-            complete()
-        }).disposed(by: disposeBag)
+        if inSelectedTextbook {
+            MUnitWord.getDataByTextbook(settings.selectedTextbook, unitPartFrom: settings.USUNITPARTFROM, unitPartTo: settings.USUNITPARTTO).subscribe(onNext: {
+                self.arrWords = $0
+                complete()
+            }).disposed(by: disposeBag)
+        } else {
+            MUnitWord.getDataByLang(settings.selectedTextbook.LANGID, arrTextbooks: settings.arrTextbooks).subscribe(onNext: {
+                self.arrWords = $0
+                complete()
+            }).disposed(by: disposeBag)
+        }
     }
     
     func filterWordsForSearchText(_ searchText: String, scope: String) {

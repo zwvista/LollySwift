@@ -13,7 +13,7 @@ import RxSwift
 class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation {
 
     var wc2: WordsTextbookWindowController! { return view.window!.windowController as? WordsTextbookWindowController }
-    var vm: WordsTextbookViewModel!
+    var vm: WordsUnitViewModel!
     var arrWords: [MUnitWord] {
         return vm.arrWordsFiltered == nil ? vm.arrWords : vm.arrWordsFiltered!
     }
@@ -53,8 +53,15 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
         }.disposed(by: disposeBag)
     }
     
+    override func deleteWord(row: Int) {
+        let item = arrWords[row]
+        WordsUnitViewModel.delete(item: item).subscribe{
+            self.refreshTableView(self)
+        }.disposed(by: disposeBag)
+    }
+
     @IBAction func refreshTableView(_ sender: Any) {
-        vm = WordsTextbookViewModel(settings: AppDelegate.theSettingsViewModel, disposeBag: disposeBag) {
+        vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel, inSelectedTextbook: false, disposeBag: disposeBag) {
             self.tableView.reloadData()
         }
     }

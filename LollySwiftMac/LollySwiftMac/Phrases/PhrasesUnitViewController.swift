@@ -120,11 +120,15 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
         self.presentAsModalWindow(detailVC)
     }
 
-    @IBAction func deletePhrase(_ sender: Any) {
+    override func deletePhrase(row: Int) {
+        let item = arrPhrases[row]
+        PhrasesUnitViewModel.delete(item: item).subscribe{
+            self.refreshTableView(self)
+        }.disposed(by: disposeBag)
     }
     
     @IBAction func refreshTableView(_ sender: Any) {
-        vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel, disposeBag: disposeBag) {
+        vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel, inSelectedTextbook: true, disposeBag: disposeBag) {
             self.tableView.reloadData()
         }
     }

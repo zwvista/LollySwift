@@ -12,7 +12,7 @@ import RxSwift
 @objcMembers
 class PhrasesTextbookDetailViewController: NSViewController {
 
-    var vm: PhrasesTextbookViewModel!
+    var vm: PhrasesUnitViewModel!
     var complete: (() -> Void)?
     var item: MUnitPhrase!
 

@@ -11,7 +11,7 @@ import RxSwift
 
 class PhrasesTextbookViewController: PhrasesBaseViewController, UISearchBarDelegate, UISearchResultsUpdating {
     
-    var vm: PhrasesTextbookViewModel!
+    var vm: PhrasesUnitViewModel!
     var arrPhrases: [MUnitPhrase] {
         return searchController.isActive && searchBar.text != "" ? vm.arrPhrasesFiltered! : vm.arrPhrases
     }
@@ -22,7 +22,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController, UISearchBarDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.showBlurLoader()
-        vm = PhrasesTextbookViewModel(settings: vmSettings, disposeBag: disposeBag) {
+        vm = PhrasesUnitViewModel(settings: vmSettings, inSelectedTextbook: false, disposeBag: disposeBag) {
             self.setupSearchController(delegate: self)
             self.tableView.reloadData()
             self.view.removeBlurLoader()

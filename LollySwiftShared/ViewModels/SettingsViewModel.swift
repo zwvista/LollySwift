@@ -199,11 +199,11 @@ class SettingsViewModel: NSObject {
         selectedUSLang2 = arrUserSettings.first { $0.KIND == 2 && $0.ENTITYID == self.USLANGID }!
         selectedUSLang3 = arrUserSettings.first { $0.KIND == 4 && $0.ENTITYID == self.USLANGID }!
         let arrDicts = USDICTITEMS.split("\r\n")
-        return Observable.zip(MDictMean.getDataByLang(self.USLANGID),
-                              MDictNote.getDataByLang(self.USLANGID),
-                              MTextbook.getDataByLang(self.USLANGID),
-                              MAutoCorrect.getDataByLang(self.USLANGID),
-                              MVoice.getDataByLang(self.USLANGID))
+        return Observable.zip(MDictMean.getDataByLang(USLANGID),
+                              MDictNote.getDataByLang(USLANGID),
+                              MTextbook.getDataByLang(USLANGID),
+                              MAutoCorrect.getDataByLang(USLANGID),
+                              MVoice.getDataByLang(USLANGID))
             .map {
                 self.arrDictsMean = $0.0
                 var i = 0

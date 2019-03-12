@@ -16,14 +16,21 @@ class PhrasesUnitViewModel: NSObject {
     var arrPhrasesFiltered: [MUnitPhrase]?
     let disposeBag: DisposeBag!
 
-    public init(settings: SettingsViewModel, disposeBag: DisposeBag, complete: @escaping () -> ()) {
+    public init(settings: SettingsViewModel, inSelectedTextbook: Bool, disposeBag: DisposeBag, complete: @escaping () -> ()) {
         self.vmSettings = settings
         self.disposeBag = disposeBag
         super.init()
-        MUnitPhrase.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO).subscribe(onNext: {
-            self.arrPhrases = $0
-            complete()
-        }).disposed(by: disposeBag)
+        if inSelectedTextbook {
+            MUnitPhrase.getDataByTextbook(settings.selectedTextbook, unitPartFrom: settings.USUNITPARTFROM, unitPartTo: settings.USUNITPARTTO).subscribe(onNext: {
+                self.arrPhrases = $0
+                complete()
+            }).disposed(by: disposeBag)
+        } else {
+            MUnitPhrase.getDataByLang(settings.selectedTextbook.LANGID, arrTextbooks: settings.arrTextbooks).subscribe(onNext: {
+                self.arrPhrases = $0
+                complete()
+            }).disposed(by: disposeBag)
+        }
     }
     
     func filterPhrasesForSearchText(_ searchText: String, scope: String) {

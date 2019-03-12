@@ -13,7 +13,7 @@ import RxSwift
 class PhrasesTextbookViewController: PhrasesBaseViewController {
     
     var wc: PhrasesTextbookWindowController { return view.window!.windowController as! PhrasesTextbookWindowController }
-    var vm: PhrasesTextbookViewModel!
+    var vm: PhrasesUnitViewModel!
     var arrPhrases: [MUnitPhrase] {
         return vm.arrPhrasesFiltered == nil ? vm.arrPhrases : vm.arrPhrasesFiltered!
     }
@@ -47,12 +47,16 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
             self.tableView.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count))
         }.disposed(by: disposeBag)
     }
-    
-    @IBAction func deletePhrase(_ sender: Any) {
+
+    override func deletePhrase(row: Int) {
+        let item = arrPhrases[row]
+        PhrasesUnitViewModel.delete(item: item).subscribe{
+            self.refreshTableView(self)
+            }.disposed(by: disposeBag)
     }
-    
+
     @IBAction func refreshTableView(_ sender: Any) {
-        vm = PhrasesTextbookViewModel(settings: AppDelegate.theSettingsViewModel, disposeBag: disposeBag) {
+        vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel, inSelectedTextbook: false, disposeBag: disposeBag) {
             self.tableView.reloadData()
         }
     }
