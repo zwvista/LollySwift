@@ -8,8 +8,9 @@
 
 import UIKit
 import RxSwift
+import AVFoundation
 
-class PhrasesUnitViewController: PhrasesBaseViewController, UISearchBarDelegate, UISearchResultsUpdating {
+class PhrasesUnitViewController: PhrasesBaseViewController, UISearchBarDelegate, UISearchResultsUpdating, UIGestureRecognizerDelegate {
     
     var vm: PhrasesUnitViewModel!
     var arrPhrases: [MUnitPhrase] {
@@ -39,6 +40,10 @@ class PhrasesUnitViewController: PhrasesBaseViewController, UISearchBarDelegate,
         cell.lblUnitPartSeqNum!.text = item.UNITPARTSEQNUM
         cell.lblPhrase!.text = item.PHRASE
         cell.lblTranslation!.text = item.TRANSLATION
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        tapGestureRecognizer.delegate = self
+        cell.imgSpeak.addGestureRecognizer(tapGestureRecognizer)
+        cell.imgSpeak.tag = indexPath.row
         return cell;
     }
     
@@ -133,10 +138,18 @@ class PhrasesUnitViewController: PhrasesBaseViewController, UISearchBarDelegate,
             }
         }
     }
+    
+    @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
+        let index = sender!.view!.tag
+        let utterance = AVSpeechUtterance(string: arrPhrases[index].PHRASE)
+        utterance.voice = AVSpeechSynthesisVoice(identifier: vm.vmSettings.selectediOSVoice.VOICENAME)
+        AppDelegate.synth.speak(utterance)
+    }
 }
 
 class PhrasesUnitCell: UITableViewCell {
     @IBOutlet weak var lblUnitPartSeqNum: UILabel!
     @IBOutlet weak var lblPhrase: UILabel!
     @IBOutlet weak var lblTranslation: UILabel!
+    @IBOutlet weak var imgSpeak: UIImageView!
 }

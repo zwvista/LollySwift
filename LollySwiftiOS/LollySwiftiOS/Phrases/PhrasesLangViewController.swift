@@ -8,8 +8,9 @@
 
 import UIKit
 import RxSwift
+import AVFoundation
 
-class PhrasesLangViewController: PhrasesBaseViewController, UISearchBarDelegate, UISearchResultsUpdating {
+class PhrasesLangViewController: PhrasesBaseViewController, UISearchBarDelegate, UISearchResultsUpdating, UIGestureRecognizerDelegate {
     
     var vm: PhrasesLangViewModel!
     var arrPhrases: [MLangPhrase] {
@@ -33,10 +34,14 @@ class PhrasesLangViewController: PhrasesBaseViewController, UISearchBarDelegate,
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PhraseCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PhraseCell", for: indexPath) as! PhrasesLangCell
         let item = arrPhrases[indexPath.row]
-        cell.textLabel!.text = item.PHRASE
-        cell.detailTextLabel?.text = item.TRANSLATION
+        cell.lblPhrase.text = item.PHRASE
+        cell.lblTranslation.text = item.TRANSLATION
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        tapGestureRecognizer.delegate = self
+        cell.imgSpeak.addGestureRecognizer(tapGestureRecognizer)
+        cell.imgSpeak.tag = indexPath.row
         return cell;
     }
     
@@ -102,4 +107,17 @@ class PhrasesLangViewController: PhrasesBaseViewController, UISearchBarDelegate,
         let controller = segue.source as! PhrasesLangDetailViewController
         controller.onDone()
     }
+    
+    @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
+        let index = sender!.view!.tag
+        let utterance = AVSpeechUtterance(string: arrPhrases[index].PHRASE)
+        utterance.voice = AVSpeechSynthesisVoice(identifier: vm.vmSettings.selectediOSVoice.VOICENAME)
+        AppDelegate.synth.speak(utterance)
+    }
+}
+
+class PhrasesLangCell: UITableViewCell {
+    @IBOutlet weak var lblPhrase: UILabel!
+    @IBOutlet weak var lblTranslation: UILabel!
+    @IBOutlet weak var imgSpeak: UIImageView!
 }

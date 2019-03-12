@@ -8,8 +8,9 @@
 
 import UIKit
 import RxSwift
+import AVFoundation
 
-class WordsTextbookViewController: WordsBaseViewController, UISearchBarDelegate, UISearchResultsUpdating {
+class WordsTextbookViewController: WordsBaseViewController, UISearchBarDelegate, UISearchResultsUpdating, UIGestureRecognizerDelegate {
 
     var vm: WordsUnitViewModel!
     var arrWords: [MUnitWord] {
@@ -37,6 +38,10 @@ class WordsTextbookViewController: WordsBaseViewController, UISearchBarDelegate,
         let item = arrWords[indexPath.row]
         cell.lblUnitPartSeqNum!.text = item.UNITPARTSEQNUM
         cell.lblWordNote!.text = item.WORDNOTE
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        tapGestureRecognizer.delegate = self
+        cell.imgSpeak.addGestureRecognizer(tapGestureRecognizer)
+        cell.imgSpeak.tag = indexPath.row
         return cell;
     }
     
@@ -119,9 +124,17 @@ class WordsTextbookViewController: WordsBaseViewController, UISearchBarDelegate,
         controller.onDone()
         tableView.reloadData()
     }
+    
+    @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
+        let index = sender!.view!.tag
+        let utterance = AVSpeechUtterance(string: arrWords[index].WORD)
+        utterance.voice = AVSpeechSynthesisVoice(identifier: vm.vmSettings.selectediOSVoice.VOICENAME)
+        AppDelegate.synth.speak(utterance)
+    }
 }
 
 class WordsTextbookCell: UITableViewCell {
     @IBOutlet weak var lblUnitPartSeqNum: UILabel!
     @IBOutlet weak var lblWordNote: UILabel!
+    @IBOutlet weak var imgSpeak: UIImageView!
 }

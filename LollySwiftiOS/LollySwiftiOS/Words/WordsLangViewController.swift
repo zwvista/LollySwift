@@ -8,8 +8,9 @@
 
 import UIKit
 import RxSwift
+import AVFoundation
 
-class WordsLangViewController: WordsBaseViewController, UISearchBarDelegate, UISearchResultsUpdating {
+class WordsLangViewController: WordsBaseViewController, UISearchBarDelegate, UISearchResultsUpdating, UIGestureRecognizerDelegate {
 
     var vm: WordsLangViewModel!
     var arrWords: [MLangWord] {
@@ -33,9 +34,13 @@ class WordsLangViewController: WordsBaseViewController, UISearchBarDelegate, UIS
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "WordCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "WordCell", for: indexPath) as! WordsLangCell
         let item = arrWords[indexPath.row]
-        cell.textLabel!.text = item.WORDNOTE
+        cell.lblWordNote.text = item.WORDNOTE
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        tapGestureRecognizer.delegate = self
+        cell.imgSpeak.addGestureRecognizer(tapGestureRecognizer)
+        cell.imgSpeak.tag = indexPath.row
         return cell;
     }
     
@@ -112,4 +117,16 @@ class WordsLangViewController: WordsBaseViewController, UISearchBarDelegate, UIS
         let controller = segue.source as! WordsLangDetailViewController
         controller.onDone()
     }
+    
+    @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
+        let index = sender!.view!.tag
+        let utterance = AVSpeechUtterance(string: arrWords[index].WORD)
+        utterance.voice = AVSpeechSynthesisVoice(identifier: vm.vmSettings.selectediOSVoice.VOICENAME)
+        AppDelegate.synth.speak(utterance)
+    }
+}
+
+class WordsLangCell: UITableViewCell {
+    @IBOutlet weak var lblWordNote: UILabel!
+    @IBOutlet weak var imgSpeak: UIImageView!
 }
