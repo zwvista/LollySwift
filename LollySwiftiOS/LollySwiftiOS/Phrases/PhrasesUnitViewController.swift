@@ -55,6 +55,14 @@ class PhrasesUnitViewController: PhrasesBaseViewController, UISearchBarDelegate,
         return vmSettings.isSingleUnitPart
     }
     
+    private func reindex() {
+        tableView.beginUpdates()
+        vm.reindex {
+            self.tableView.reloadRows(at: [IndexPath(row: $0, section: 0)], with: .fade)
+        }
+        tableView.endUpdates()
+    }
+
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         let item = vm.arrPhrases[(sourceIndexPath as NSIndexPath).row]
         vm.arrPhrases.remove(at: (sourceIndexPath as NSIndexPath).row)
@@ -74,6 +82,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, UISearchBarDelegate,
                 PhrasesUnitViewModel.delete(item: item).subscribe().disposed(by: self.disposeBag)
                 self.vm.arrPhrases.remove(at: i)
                 tableView.deleteRows(at: [indexPath], with: .fade)
+                self.reindex()
             }, noHandler: { (action) in
                 tableView.reloadRows(at: [indexPath], with: .fade)
             })

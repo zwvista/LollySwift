@@ -54,10 +54,9 @@ class WordsTextbookViewController: WordsBaseViewController, UISearchBarDelegate,
         let item = self.vm.arrWords[i]
         func delete() {
             self.yesNoAction(title: "delete", message: "Do you really want to delete the word \"\(item.WORD)\"?", yesHandler: { (action) in
-//                WordsUnitViewModel.delete(item.ID).subscribe().disposed(by: self.disposeBag)
-//                self.vm.arrWords.remove(at: i)
-//                tableView.deleteRows(at: [indexPath], with: .fade)
-//                self.reindex()
+                WordsUnitViewModel.delete(item: item).subscribe().disposed(by: self.disposeBag)
+                self.vm.arrWords.remove(at: i)
+                tableView.deleteRows(at: [indexPath], with: .fade)
             }, noHandler: { (action) in
                 tableView.reloadRows(at: [indexPath], with: .fade)
             })

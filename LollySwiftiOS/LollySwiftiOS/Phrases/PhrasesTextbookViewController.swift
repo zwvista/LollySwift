@@ -71,7 +71,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController, UISearchBarDeleg
         let item = self.vm.arrPhrases[i]
         func delete() {
             self.yesNoAction(title: "delete", message: "Do you really want to delete the phrase \"\(item.PHRASE)\"?", yesHandler: { (action) in
-//                PhrasesTextbookViewModel.delete(item.ID).subscribe().disposed(by: self.disposeBag)
+                PhrasesUnitViewModel.delete(item: item).subscribe().disposed(by: self.disposeBag)
                 self.vm.arrPhrases.remove(at: i)
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }, noHandler: { (action) in
