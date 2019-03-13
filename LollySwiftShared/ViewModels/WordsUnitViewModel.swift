@@ -20,12 +20,12 @@ class WordsUnitViewModel: NSObject {
     }
     let disposeBag: DisposeBag!
 
-    init(settings: SettingsViewModel, inSelectedTextbook: Bool, disposeBag: DisposeBag, complete: @escaping () -> ()) {
+    init(settings: SettingsViewModel, inTextbook: Bool, disposeBag: DisposeBag, complete: @escaping () -> ()) {
         self.vmSettings = settings
         self.disposeBag = disposeBag
         vmNote = NoteViewModel(settings: settings, disposeBag: disposeBag)
         super.init()
-        if inSelectedTextbook {
+        if inTextbook {
             MUnitWord.getDataByTextbook(settings.selectedTextbook, unitPartFrom: settings.USUNITPARTFROM, unitPartTo: settings.USUNITPARTTO).subscribe(onNext: {
                 self.arrWords = $0
                 complete()

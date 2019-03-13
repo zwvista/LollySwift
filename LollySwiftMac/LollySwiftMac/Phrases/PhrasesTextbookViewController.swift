@@ -56,7 +56,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
     }
 
     @IBAction func refreshTableView(_ sender: Any) {
-        vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel, inSelectedTextbook: false, disposeBag: disposeBag) {
+        vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: false, disposeBag: disposeBag) {
             self.tableView.reloadData()
         }
     }

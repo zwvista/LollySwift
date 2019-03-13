@@ -16,11 +16,11 @@ class PhrasesUnitViewModel: NSObject {
     var arrPhrasesFiltered: [MUnitPhrase]?
     let disposeBag: DisposeBag!
 
-    public init(settings: SettingsViewModel, inSelectedTextbook: Bool, disposeBag: DisposeBag, complete: @escaping () -> ()) {
+    public init(settings: SettingsViewModel, inTextbook: Bool, disposeBag: DisposeBag, complete: @escaping () -> ()) {
         self.vmSettings = settings
         self.disposeBag = disposeBag
         super.init()
-        if inSelectedTextbook {
+        if inTextbook {
             MUnitPhrase.getDataByTextbook(settings.selectedTextbook, unitPartFrom: settings.USUNITPARTFROM, unitPartTo: settings.USUNITPARTTO).subscribe(onNext: {
                 self.arrPhrases = $0
                 complete()

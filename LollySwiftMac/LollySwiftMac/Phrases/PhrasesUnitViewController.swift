@@ -128,7 +128,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
     }
     
     @IBAction func refreshTableView(_ sender: Any) {
-        vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel, inSelectedTextbook: true, disposeBag: disposeBag) {
+        vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: true, disposeBag: disposeBag) {
             self.tableView.reloadData()
         }
     }
