@@ -34,7 +34,7 @@ class PhrasesBaseViewController: NSViewController, LollyProtocol, NSTableViewDat
     func selectedPhraseChanged() {
     }
     
-    func itemForRow(row: Int) -> NSObject? {
+    func itemForRow(row: Int) -> (MPhraseProtocol & NSObject)? {
         return nil;
     }
 

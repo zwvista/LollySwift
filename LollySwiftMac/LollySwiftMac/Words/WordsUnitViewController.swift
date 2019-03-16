@@ -41,7 +41,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation {
         return arrWords.count
     }
     
-    override func itemForRow(row: Int) -> NSObject? {
+    override func itemForRow(row: Int) -> (MWordProtocol & NSObject)? {
         return arrWords[row]
     }
 
@@ -184,6 +184,21 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation {
             return vmSettings.hasNote
         }
         return true
+    }
+    
+    @IBAction func read(_ sender: Any) {
+        var i = 0
+        let wordCount = arrWords.count
+        var subscription: Disposable?
+        subscription = Observable<Int>.interval(Double(vmSettings.USREADINTERVAL) / 1000.0, scheduler: MainScheduler.instance).subscribe { _ in
+            if i >= wordCount {
+                subscription?.dispose()
+            } else {
+                self.synth.startSpeaking(self.arrWords[i].WORD)
+                i += 1
+            }
+        }
+        subscription?.disposed(by: disposeBag)
     }
 }
 

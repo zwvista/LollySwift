@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 
 @objcMembers
-class MUnitWord: NSObject, Codable {
+class MUnitWord: NSObject, Codable, MWordProtocol {
     var ID = 0
     var LANGID = 0
     var TEXTBOOKID = 0

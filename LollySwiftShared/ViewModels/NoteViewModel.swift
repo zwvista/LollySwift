@@ -35,8 +35,7 @@ class NoteViewModel {
         guard let mDictNote = mDictNote else {return}
         var i = 0
         var subscription: Disposable?
-        subscription = Observable<Int>.interval(Double(mDictNote.WAIT!) / 1000.0, scheduler: MainScheduler.instance)
-            .subscribe { _ in
+        subscription = Observable<Int>.interval(Double(mDictNote.WAIT!) / 1000.0, scheduler: MainScheduler.instance).subscribe { _ in
                 while i < wordCount && !isNoteEmpty(i) {
                     i += 1
                 }

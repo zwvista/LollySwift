@@ -37,7 +37,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
         return arrPhrases.count
     }
     
-    override func itemForRow(row: Int) -> NSObject? {
+    override func itemForRow(row: Int) -> (MPhraseProtocol & NSObject)? {
         return arrPhrases[row]
     }
     

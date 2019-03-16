@@ -52,14 +52,14 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
         addNewWord()
     }
     
-    func itemForRow(row: Int) -> NSObject? {
+    func itemForRow(row: Int) -> (MWordProtocol & NSObject)? {
         return nil;
     }
     
     // https://stackoverflow.com/questions/10910779/coloring-rows-in-view-based-nstableview
     func tableView(_ tableView: NSTableView, didAdd rowView: NSTableRowView, forRow row: Int) {
-        let item = itemForRow(row: row)!
-        if let level = item.value(forKey: "LEVEL") as? Int, level != 0, let arr = vmSettings.USLEVELCOLORS![level] {
+        let level = itemForRow(row: row)!.LEVEL
+        if level != 0, let arr = vmSettings.USLEVELCOLORS![level] {
             rowView.backgroundColor = NSColor.hexColor(rgbValue: arr[0])
         }
     }
@@ -69,7 +69,8 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
         let item = itemForRow(row: row)!
         let columnName = tableColumn!.identifier.rawValue
         cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
-        if let level = item.value(forKey: "LEVEL") as? Int, level != 0, let arr = vmSettings.USLEVELCOLORS![level] {
+        let level = item.LEVEL
+        if level != 0, let arr = vmSettings.USLEVELCOLORS![level] {
             cell.textField?.textColor = NSColor.hexColor(rgbValue: arr[1])
         } else {
             cell.textField?.textColor = NSColor.windowFrameTextColor
@@ -166,7 +167,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
             selectedWord = ""
             searchWord(word: newWord)
         } else {
-            selectedWord = itemForRow(row: row)!.value(forKey: "WORD") as! String
+            selectedWord = itemForRow(row: row)!.WORD
             searchWord(word: selectedWord)
         }
     }
@@ -194,11 +195,12 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     private func changeLevel(by delta: Int) {
         let row = tableView.selectedRow
         guard row != -1 else {return}
-        let item = itemForRow(row: row)!
-        guard let level = item.value(forKey: "LEVEL") as? Int, let arr = vmSettings.USLEVELCOLORS![level] else {return}
+        var item = itemForRow(row: row)!
+        let level = item.LEVEL
+        guard let arr = vmSettings.USLEVELCOLORS![level] else {return}
         let newLevel = level + delta
         guard newLevel == 0 || arr.contains(newLevel) else {return}
-        item.setValue(newLevel, forKey: "LEVEL")
+        item.LEVEL = newLevel
         levelChanged(row: row).subscribe(onNext: {
             if $0 != 0 { self.tableView.reloadData() }
         }).disposed(by: disposeBag)

@@ -37,7 +37,7 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
         return arrWords.count
     }
     
-    override func itemForRow(row: Int) -> NSObject? {
+    override func itemForRow(row: Int) -> (MWordProtocol & NSObject)? {
         return arrWords[row]
     }
 

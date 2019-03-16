@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 
 @objcMembers
-class MLangWord: NSObject, Codable {
+class MLangWord: NSObject, Codable, MWordProtocol {
     var ID = 0
     var LANGID = 0
     var WORD = ""
