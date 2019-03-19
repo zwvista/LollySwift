@@ -165,6 +165,10 @@ class SettingsViewModel: NSObject {
         return arrUnits.count
     }
     @objc
+    var unitsInAll: String {
+        return "(\(unitCount) in all)"
+    }
+    @objc
     var arrParts: [MSelectItem] {
         return selectedTextbook.arrParts
     }

@@ -42,6 +42,7 @@ class SettingsViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         vm.getData().subscribe {
+            self.acLanguages.content = self.vm.arrLanguages
             self.updateLang()
         }.disposed(by: disposeBag)
     }
@@ -66,21 +67,15 @@ class SettingsViewController: NSViewController {
     }
     
     @IBAction func voiceSelected(_ sender: AnyObject) {
-        vm.updateMacVoice().subscribe {
-            self.updateVoice()
-        }.disposed(by: disposeBag)
+        vm.updateMacVoice().subscribe().disposed(by: disposeBag)
     }
 
     @IBAction func dictMeanSelected(_ sender: AnyObject) {
-        vm.updateDictItem().subscribe {
-            self.updateDictItem()
-        }.disposed(by: disposeBag)
+        vm.updateDictItem().subscribe().disposed(by: disposeBag)
     }
     
     @IBAction func dictNoteSelected(_ sender: AnyObject) {
-        vm.updateDictNote().subscribe {
-            self.updateDictItem()
-        }.disposed(by: disposeBag)
+        vm.updateDictNote().subscribe().disposed(by: disposeBag)
     }
 
     @IBAction func textbookSelected(_ sender: AnyObject) {
@@ -160,30 +155,14 @@ class SettingsViewController: NSViewController {
     }
 
     func updateLang() {
-        acLanguages.content = vm.arrLanguages
-        updateVoice()
-        updateDictItem()
-        updateDictNote()
+        acVoices.content = vm.arrMacVoices
+        acDictItems.content = vm.arrDictItems
+        acDictsNote.content = vm.arrDictsNote
+        acTextbooks.content = vm.arrTextbooks
         updateTextbook()
     }
     
-    func updateVoice() {
-        acVoices.content = vm.arrMacVoices
-    }
-
-    func updateDictItem() {
-        acDictItems.content = vm.arrDictItems
-    }
-    
-    func updateDictNote() {
-        acDictsNote.content = vm.arrDictsNote
-    }
-
     func updateTextbook() {
-        acTextbooks.content = vm.arrTextbooks
-        let unitsInAll = "(\(vm.unitCount) in all)"
-        tfUnitsInAllFrom.stringValue = unitsInAll
-        tfUnitsInAllTo.stringValue = unitsInAll
         acUnits.content = vm.arrUnits
         acParts.content = vm.arrParts
         scToType.selectedSegment = vm.isSingleUnit ? 0 : vm.isSingleUnitPart ? 1 : 2

@@ -196,10 +196,8 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
         let row = tableView.selectedRow
         guard row != -1 else {return}
         var item = itemForRow(row: row)!
-        let level = item.LEVEL
-        guard let arr = vmSettings.USLEVELCOLORS![level] else {return}
-        let newLevel = level + delta
-        guard newLevel == 0 || arr.contains(newLevel) else {return}
+        let newLevel = item.LEVEL + delta
+        guard newLevel == 0 || vmSettings.USLEVELCOLORS[newLevel] != nil else {return}
         item.LEVEL = newLevel
         levelChanged(row: row).subscribe(onNext: {
             if $0 != 0 { self.tableView.reloadData() }
