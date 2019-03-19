@@ -41,6 +41,11 @@ class WordsLangViewController: WordsBaseViewController, UISearchBarDelegate, UIS
         tapGestureRecognizer.delegate = self
         cell.imgSpeak.addGestureRecognizer(tapGestureRecognizer)
         cell.imgSpeak.tag = indexPath.row
+        let level = item.LEVEL
+        if level != 0, let arr = vmSettings.USLEVELCOLORS![level] {
+            cell.backgroundColor = UIColor(hexString: arr[0])
+            cell.lblWordNote.textColor = UIColor(hexString: arr[1])
+        }
         return cell;
     }
     

@@ -36,12 +36,18 @@ class WordsTextbookViewController: WordsBaseViewController, UISearchBarDelegate,
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "WordCell", for: indexPath) as! WordsTextbookCell
         let item = arrWords[indexPath.row]
-        cell.lblUnitPartSeqNum!.text = item.UNITPARTSEQNUM
-        cell.lblWordNote!.text = item.WORDNOTE
+        cell.lblUnitPartSeqNum.text = item.UNITPARTSEQNUM
+        cell.lblWordNote.text = item.WORDNOTE
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         tapGestureRecognizer.delegate = self
         cell.imgSpeak.addGestureRecognizer(tapGestureRecognizer)
         cell.imgSpeak.tag = indexPath.row
+        let level = item.LEVEL
+        if level != 0, let arr = vmSettings.USLEVELCOLORS![level] {
+            cell.backgroundColor = UIColor(hexString: arr[0])
+            cell.lblUnitPartSeqNum.textColor = UIColor(hexString: arr[1])
+            cell.lblWordNote.textColor = UIColor(hexString: arr[1])
+        }
         return cell;
     }
     
@@ -77,7 +83,7 @@ class WordsTextbookViewController: WordsBaseViewController, UISearchBarDelegate,
                 let noteAction = UIAlertAction(title: "Retrieve Note", style: .default) { _ in
                     self.vm.getNote(index: indexPath.row).subscribe {
                         self.tableView.reloadRows(at: [indexPath], with: .fade)
-                        }.disposed(by: self.disposeBag)
+                    }.disposed(by: self.disposeBag)
                 }
                 alertController.addAction(noteAction)
             }

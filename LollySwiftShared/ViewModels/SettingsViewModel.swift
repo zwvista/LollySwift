@@ -25,7 +25,7 @@ class SettingsViewModel: NSObject {
     var USROWSPERPAGE: Int {
         get { return selectedUSUser0.VALUE3!.toInt()! }
     }
-    var USLEVELCOLORS: [Int: [Int]]!
+    var USLEVELCOLORS: [Int: [String]]!
     var USREADINTERVAL: Int {
         get { return selectedUSUser1.VALUE1!.toInt()! }
     }
@@ -194,10 +194,8 @@ class SettingsViewModel: NSObject {
                 self.selectedUSUser0 = self.arrUserSettings.first { $0.KIND == 1 && $0.ENTITYID == 0 }!
                 self.selectedUSUser1 = self.arrUserSettings.first { $0.KIND == 1 && $0.ENTITYID == 1 }!
                 let arr = self.selectedUSUser0.VALUE4!.split("\r\n").map { $0.split(",") }
-                self.USLEVELCOLORS = [:]
-                for v in arr {
-                    self.USLEVELCOLORS[v[0].toInt()!] = [Int(v[1], radix: 16)!, Int(v[2], radix: 16)!]
-                }
+                // https://stackoverflow.com/questions/39791084/swift-3-array-to-dictionary
+                self.USLEVELCOLORS = Dictionary(uniqueKeysWithValues: arr.map { ($0[0].toInt()!, [$0[1], $0[2]]) })
                 return self.setSelectedLang(self.arrLanguages.first { $0.ID == self.USLANGID }!)
             }
     }

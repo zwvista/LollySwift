@@ -60,7 +60,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     func tableView(_ tableView: NSTableView, didAdd rowView: NSTableRowView, forRow row: Int) {
         let level = itemForRow(row: row)!.LEVEL
         if level != 0, let arr = vmSettings.USLEVELCOLORS![level] {
-            rowView.backgroundColor = NSColor.hexColor(rgbValue: arr[0])
+            rowView.backgroundColor = NSColor.hexColor(rgbValue: Int(arr[0], radix: 16)!)
         }
     }
     
@@ -71,7 +71,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
         cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
         let level = item.LEVEL
         if level != 0, let arr = vmSettings.USLEVELCOLORS![level] {
-            cell.textField?.textColor = NSColor.hexColor(rgbValue: arr[1])
+            cell.textField?.textColor = NSColor.hexColor(rgbValue: Int(arr[1], radix: 16)!)
         } else {
             cell.textField?.textColor = NSColor.windowFrameTextColor
         }
