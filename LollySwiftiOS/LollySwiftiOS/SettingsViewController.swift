@@ -119,9 +119,10 @@ class SettingsViewController: UITableViewController {
             if self.ddToType.indexForSelectedRow == 1 || self.vm.isInvalidUnitPart { self.updateUnitPartTo() }
         }
         
-        ddToType.dataSource = ["Unit", "Part", "To"]
+        ddToType.dataSource = vm.arrToTypes
         ddToType.anchorView = btnToType
         ddToType.selectionAction = { [unowned self] (index: Int, item: String) in
+            self.vm.toType = index
             self.btnToType.titleLabel?.text = item
             let b = index == 2
             self.lblUnitTo.isEnabled = b
@@ -232,10 +233,10 @@ class SettingsViewController: UITableViewController {
         let item = vm.selectedTextbook!
         textbookCell.textLabel!.text = item.TEXTBOOKNAME
         textbookCell.detailTextLabel!.text = "\(vm.unitCount) Units"
-        ddToType.selectRow(vm.isSingleUnit ? 0 : vm.isSingleUnitPart ? 1 : 2)
-        ddToType.selectionAction!(ddToType.indexForSelectedRow!, ddToType.selectedItem!)
         ddTextbook.dataSource = vm.arrTextbooks.map { $0.TEXTBOOKNAME }
         ddTextbook.selectRow(vm.selectedTextbookIndex)
+        ddToType.selectRow(vm.toType)
+        ddToType.selectionAction!(ddToType.indexForSelectedRow!, ddToType.selectedItem!)
         ddUnitFrom.dataSource = vm.arrUnits.map { $0.label }
         ddUnitFrom.selectRow(vm.arrUnits.firstIndex { $0.value == vm.USUNITFROM }!)
         ddPartFrom.dataSource = vm.arrParts.map { $0.label }

@@ -37,7 +37,6 @@ class SettingsViewController: NSViewController {
     @IBOutlet weak var btnNext: NSButton!
     
     let disposeBag = DisposeBag()
-    @objc var toType = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,34 +85,34 @@ class SettingsViewController: NSViewController {
     
     @IBAction func unitFromSelected(_ sender: AnyObject) {
         guard updateUnitFrom(v: vm.arrUnits[pubUnitFrom.indexOfSelectedItem].value, check: false) else {return}
-        if toType == 0 {
+        if vm.toType == 0 {
             updateSingleUnit()
-        } else if toType == 1 || vm.isInvalidUnitPart {
+        } else if vm.toType == 1 || vm.isInvalidUnitPart {
             updateUnitPartTo()
         }
     }
     
     @IBAction func partFromSelected(_ sender: AnyObject) {
         guard updatePartFrom(v: vm.arrParts[pubPartFrom.indexOfSelectedItem].value, check: false) else {return}
-        if toType == 1 || vm.isInvalidUnitPart { updateUnitPartTo() }
+        if vm.toType == 1 || vm.isInvalidUnitPart { updateUnitPartTo() }
     }
     
     @IBAction func scToTypeClicked(_ sender: AnyObject) {
-        let b = toType == 2
+        let b = vm.toType == 2
         pubUnitTo.isEnabled = b
         pubPartTo.isEnabled = b && !vm.isSinglePart
         btnPrevious.isEnabled = !b
         btnNext.isEnabled = !b
-        pubPartFrom.isEnabled = toType != 0 && !vm.isSinglePart
-        if toType == 0 {
+        pubPartFrom.isEnabled = vm.toType != 0 && !vm.isSinglePart
+        if vm.toType == 0 {
             updateSingleUnit()
-        } else if toType == 1 {
+        } else if vm.toType == 1 {
             updateUnitPartTo()
         }
     }
 
     @IBAction func previousUnitPart(_ sender: AnyObject) {
-        if toType == 0 {
+        if vm.toType == 0 {
             if vm.USUNITFROM > 1 {
                 _ = updateUnitFrom(v: vm.USUNITFROM - 1)
                 _ = updateUnitTo(v: vm.USUNITFROM)
@@ -129,7 +128,7 @@ class SettingsViewController: NSViewController {
     }
 
     @IBAction func nextUnitPart(_ sender: AnyObject) {
-        if toType == 0 {
+        if vm.toType == 0 {
             if vm.USUNITFROM < vm.unitCount {
                 _ = updateUnitFrom(v: vm.USUNITFROM + 1)
                 _ = updateUnitTo(v: vm.USUNITFROM)
@@ -165,7 +164,7 @@ class SettingsViewController: NSViewController {
     func updateTextbook() {
         acUnits.content = vm.arrUnits
         acParts.content = vm.arrParts
-        scToType.selectedSegment = vm.isSingleUnit ? 0 : vm.isSingleUnitPart ? 1 : 2
+        scToType.selectedSegment = vm.toType
         scToType.performClick(self)
     }
     

@@ -85,9 +85,6 @@ class SettingsViewModel: NSObject {
     var isSingleUnitPart: Bool {
         return USUNITPARTFROM == USUNITPARTTO
     }
-    var isSingleUnit: Bool {
-        return USUNITFROM == USUNITTO && USPARTFROM == 1 && USPARTTO == partCount
-    }
     var isInvalidUnitPart: Bool {
         return USUNITPARTFROM > USUNITPARTTO
     }
@@ -151,6 +148,7 @@ class SettingsViewModel: NSObject {
         didSet {
             USTEXTBOOKID = selectedTextbook.ID
             selectedUSTextbook = arrUserSettings.first { $0.KIND == 11 && $0.ENTITYID == selectedTextbook.ID }!
+            toType = isSingleUnit ? 0 : isSingleUnitPart ? 1 : 2
         }
     }
     var selectedTextbookIndex: Int {
@@ -175,10 +173,17 @@ class SettingsViewModel: NSObject {
     var partCount: Int {
         return arrParts.count
     }
+    var isSingleUnit: Bool {
+        return USUNITFROM == USUNITTO && USPARTFROM == 1 && USPARTTO == partCount
+    }
     var isSinglePart: Bool {
         return partCount == 1
     }
     
+    let arrToTypes = ["Unit", "Part", "To"]
+    @objc
+    var toType = 0
+
     var arrAutoCorrect = [MAutoCorrect]()
     
     func getData() -> Observable<()> {
