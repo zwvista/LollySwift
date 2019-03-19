@@ -58,9 +58,13 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation {
     }
 
     func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
-        let item = NSPasteboardItem()
-        item.setString(String(row), forType: tableRowDragType)
-        return item
+        if vm.vmSettings.isSingleUnitPart {
+            let item = NSPasteboardItem()
+            item.setString(String(row), forType: tableRowDragType)
+            return item
+        } else {
+            return nil
+        }
     }
     
     func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int, proposedDropOperation dropOperation: NSTableView.DropOperation) -> NSDragOperation {
