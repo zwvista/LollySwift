@@ -150,7 +150,7 @@ class SettingsViewController: NSViewController {
     
     @IBAction func partToSelected(_ sender: AnyObject) {
         guard updatePartTo(v: vm.arrParts[pubPartTo.indexOfSelectedItem].value, check: false) else {return}
-        vm.updatePartTo().subscribe().disposed(by: disposeBag)
+        if vm.isInvalidUnitPart {self.updateUnitPartFrom()}
     }
 
     func updateLang() {
