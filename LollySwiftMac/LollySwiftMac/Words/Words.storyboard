@@ -1182,55 +1182,100 @@ Gw
                         <rect key="frame" x="0.0" y="0.0" width="1200" height="600"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
+                            <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BlQ-ed-2z2">
+                                <rect key="frame" x="0.0" y="568" width="496" height="32"/>
+                                <subviews>
+                                    <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rkW-xq-aY3">
+                                        <rect key="frame" x="4" y="4" width="99" height="24"/>
+                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="5jE-bC-Yde">
+                                            <font key="font" metaFont="system"/>
+                                            <segments>
+                                                <segment label="Add" width="40" selected="YES"/>
+                                                <segment label="Search" width="52" tag="1"/>
+                                            </segments>
+                                        </segmentedCell>
+                                    </segmentedControl>
+                                    <searchField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aOo-Lm-Ivs">
+                                        <rect key="frame" x="101" y="5" width="150" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="150" id="VzC-Wg-NLf"/>
+                                        </constraints>
+                                        <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="New Word" drawsBackground="YES" id="mKd-Ym-vGD">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <connections>
+                                                <binding destination="F8i-pe-Ate" name="value" keyPath="newWord" id="hPX-dh-xBG"/>
+                                            </connections>
+                                        </searchFieldCell>
+                                        <connections>
+                                            <outlet property="delegate" destination="F8i-pe-Ate" id="Iu5-w4-N3U"/>
+                                        </connections>
+                                    </searchField>
+                                    <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="y4k-LE-Uzx">
+                                        <rect key="frame" x="249" y="4" width="99" height="24"/>
+                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="MQY-ru-gpu">
+                                            <font key="font" metaFont="system"/>
+                                            <segments>
+                                                <segment label="None" width="40" selected="YES"/>
+                                                <segment label="Filter" width="52" tag="1"/>
+                                            </segments>
+                                        </segmentedCell>
+                                    </segmentedControl>
+                                    <searchField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="b1a-Bg-nzC">
+                                        <rect key="frame" x="346" y="5" width="150" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="150" id="eW2-A5-JxK"/>
+                                        </constraints>
+                                        <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Filter" drawsBackground="YES" id="jYe-JR-rhU">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <connections>
+                                                <binding destination="F8i-pe-Ate" name="value" keyPath="newWord" id="KcC-JJ-9ym"/>
+                                            </connections>
+                                        </searchFieldCell>
+                                        <connections>
+                                            <outlet property="delegate" destination="F8i-pe-Ate" id="c8Q-ha-dhs"/>
+                                        </connections>
+                                    </searchField>
+                                </subviews>
+                                <edgeInsets key="edgeInsets" left="6" right="0.0" top="6" bottom="6"/>
+                                <constraints>
+                                    <constraint firstItem="b1a-Bg-nzC" firstAttribute="centerY" secondItem="BlQ-ed-2z2" secondAttribute="centerY" id="5tU-G1-SY4"/>
+                                    <constraint firstAttribute="height" constant="32" id="SGL-vB-nNG"/>
+                                    <constraint firstItem="aOo-Lm-Ivs" firstAttribute="centerY" secondItem="BlQ-ed-2z2" secondAttribute="centerY" id="Y2n-2T-J2N"/>
+                                    <constraint firstItem="rkW-xq-aY3" firstAttribute="centerY" secondItem="BlQ-ed-2z2" secondAttribute="centerY" id="fGd-9H-xUA"/>
+                                    <constraint firstItem="y4k-LE-Uzx" firstAttribute="centerY" secondItem="BlQ-ed-2z2" secondAttribute="centerY" id="spe-QE-yvA"/>
+                                </constraints>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
                             <splitView arrangesAllSubviews="NO" dividerStyle="paneSplitter" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Z1l-we-ohy">
-                                <rect key="frame" x="0.0" y="0.0" width="1200" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="1200" height="568"/>
                                 <subviews>
                                     <customView id="6Dp-Ds-BMu">
-                                        <rect key="frame" x="0.0" y="0.0" width="432" height="600"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="432" height="568"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
-                                            <searchField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gcV-CM-abV">
-                                                <rect key="frame" x="0.0" y="578" width="308" height="22"/>
-                                                <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="dFk-kd-SQK">
-                                                    <font key="font" metaFont="system"/>
-                                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                    <connections>
-                                                        <binding destination="UkS-Xi-ogF" name="value" keyPath="newWord" id="0bh-a2-Tt7"/>
-                                                    </connections>
-                                                </searchFieldCell>
-                                                <connections>
-                                                    <outlet property="delegate" destination="UkS-Xi-ogF" id="egQ-gg-WMN"/>
-                                                </connections>
-                                            </searchField>
-                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3I4-R3-dhC">
-                                                <rect key="frame" x="302" y="572" width="65" height="32"/>
-                                                <buttonCell key="cell" type="push" title="Add" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="MPB-Nq-NZP">
-                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                    <font key="font" metaFont="system"/>
-                                                </buttonCell>
-                                                <connections>
-                                                    <action selector="addNewWord:" target="UkS-Xi-ogF" id="J0f-hi-rWB"/>
-                                                </connections>
-                                            </button>
-                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FkA-uf-SWn">
-                                                <rect key="frame" x="355" y="572" width="83" height="32"/>
-                                                <buttonCell key="cell" type="push" title="Search" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="uXE-s8-RcZ">
-                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                    <font key="font" metaFont="system"/>
-                                                </buttonCell>
-                                                <connections>
-                                                    <action selector="searchNewWord:" target="UkS-Xi-ogF" id="gvL-lG-Sqx"/>
-                                                </connections>
-                                            </button>
                                             <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tfl-qk-1uh">
-                                                <rect key="frame" x="0.0" y="17" width="432" height="561"/>
+                                                <rect key="frame" x="0.0" y="17" width="432" height="551"/>
                                                 <clipView key="contentView" id="hlG-17-BUc">
-                                                    <rect key="frame" x="1" y="0.0" width="430" height="560"/>
+                                                    <rect key="frame" x="1" y="0.0" width="430" height="550"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="y9i-hT-ffa" viewBased="YES" id="zh5-gP-ZJa">
-                                                            <rect key="frame" x="0.0" y="0.0" width="430" height="535"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="430" height="525"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <size key="intercellSpacing" width="3" height="2"/>
                                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1428,27 +1473,20 @@ Gw
                                             </textField>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="FkA-uf-SWn" firstAttribute="top" secondItem="6Dp-Ds-BMu" secondAttribute="top" id="2ZN-Gw-Vb1"/>
-                                            <constraint firstItem="gcV-CM-abV" firstAttribute="leading" secondItem="6Dp-Ds-BMu" secondAttribute="leading" id="BwC-8G-DwZ"/>
-                                            <constraint firstItem="3I4-R3-dhC" firstAttribute="top" secondItem="6Dp-Ds-BMu" secondAttribute="top" id="Idu-xX-35v"/>
                                             <constraint firstItem="ceW-Gp-R3a" firstAttribute="top" secondItem="tfl-qk-1uh" secondAttribute="bottom" id="JOK-4e-jDC"/>
-                                            <constraint firstItem="gcV-CM-abV" firstAttribute="top" secondItem="6Dp-Ds-BMu" secondAttribute="top" id="MVs-zK-hkC"/>
                                             <constraint firstItem="ceW-Gp-R3a" firstAttribute="leading" secondItem="6Dp-Ds-BMu" secondAttribute="leading" id="MqD-pK-Ush"/>
-                                            <constraint firstItem="gcV-CM-abV" firstAttribute="trailing" secondItem="3I4-R3-dhC" secondAttribute="leading" id="NrA-9v-kdU"/>
                                             <constraint firstItem="tfl-qk-1uh" firstAttribute="leading" secondItem="6Dp-Ds-BMu" secondAttribute="leading" id="Obg-5D-4DB"/>
-                                            <constraint firstItem="3I4-R3-dhC" firstAttribute="trailing" secondItem="FkA-uf-SWn" secondAttribute="leading" id="cuJ-LU-Wlp"/>
+                                            <constraint firstItem="tfl-qk-1uh" firstAttribute="top" secondItem="6Dp-Ds-BMu" secondAttribute="top" id="Rqx-Cm-h7j"/>
                                             <constraint firstAttribute="bottom" secondItem="ceW-Gp-R3a" secondAttribute="bottom" id="fuw-qS-nHe"/>
-                                            <constraint firstItem="tfl-qk-1uh" firstAttribute="top" secondItem="gcV-CM-abV" secondAttribute="bottom" id="jxs-s2-8YJ"/>
                                             <constraint firstAttribute="trailing" secondItem="tfl-qk-1uh" secondAttribute="trailing" id="m86-bx-zpc"/>
-                                            <constraint firstItem="FkA-uf-SWn" firstAttribute="trailing" secondItem="6Dp-Ds-BMu" secondAttribute="trailing" id="tkK-pa-ibf"/>
                                         </constraints>
                                     </customView>
                                     <customView id="UOD-4G-Hcg">
-                                        <rect key="frame" x="442" y="0.0" width="758" height="600"/>
+                                        <rect key="frame" x="442" y="0.0" width="758" height="568"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
                                             <wkWebView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Txl-33-AIT" userLabel="Dict WebView">
-                                                <rect key="frame" x="0.0" y="0.0" width="758" height="600"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="758" height="568"/>
                                                 <wkWebViewConfiguration key="configuration">
                                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
                                                     <wkPreferences key="preferences"/>
@@ -1473,14 +1511,15 @@ Gw
                             </splitView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="Z1l-we-ohy" firstAttribute="top" secondItem="MKH-cN-8zE" secondAttribute="top" id="OKi-hK-9cs"/>
                             <constraint firstAttribute="trailing" secondItem="Z1l-we-ohy" secondAttribute="trailing" id="jhW-qs-dxW"/>
                             <constraint firstItem="Z1l-we-ohy" firstAttribute="leading" secondItem="MKH-cN-8zE" secondAttribute="leading" id="kHJ-oB-auQ"/>
+                            <constraint firstItem="BlQ-ed-2z2" firstAttribute="leading" secondItem="MKH-cN-8zE" secondAttribute="leading" id="kPH-3o-rdf"/>
+                            <constraint firstItem="BlQ-ed-2z2" firstAttribute="top" secondItem="MKH-cN-8zE" secondAttribute="top" id="l1W-PV-Jcg"/>
+                            <constraint firstItem="Z1l-we-ohy" firstAttribute="top" secondItem="BlQ-ed-2z2" secondAttribute="bottom" id="qOi-ti-oPa"/>
                             <constraint firstAttribute="bottom" secondItem="Z1l-we-ohy" secondAttribute="bottom" id="u5u-k7-7mg"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="sfNewWord" destination="gcV-CM-abV" id="8BF-hB-OsN"/>
                         <outlet property="tableView" destination="zh5-gP-ZJa" id="wUb-Zv-H6h"/>
                         <outlet property="tfTableStatus" destination="ceW-Gp-R3a" id="Mdi-yT-ZFX"/>
                         <outlet property="wvDict" destination="Txl-33-AIT" id="hgQ-5V-Jpq"/>
@@ -2367,55 +2406,100 @@ DQ
                         <rect key="frame" x="0.0" y="0.0" width="1200" height="600"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
+                            <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e2v-T6-xFM">
+                                <rect key="frame" x="0.0" y="568" width="496" height="32"/>
+                                <subviews>
+                                    <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LrN-UA-Jhg">
+                                        <rect key="frame" x="4" y="4" width="99" height="24"/>
+                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="nA7-7Y-bQb">
+                                            <font key="font" metaFont="system"/>
+                                            <segments>
+                                                <segment label="Add" width="40" selected="YES"/>
+                                                <segment label="Search" width="52" tag="1"/>
+                                            </segments>
+                                        </segmentedCell>
+                                    </segmentedControl>
+                                    <searchField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tTP-k6-3q6">
+                                        <rect key="frame" x="101" y="5" width="150" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="150" id="0MX-Lo-XmQ"/>
+                                        </constraints>
+                                        <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="New Word" drawsBackground="YES" id="0hP-1e-UL1">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <connections>
+                                                <binding destination="F8i-pe-Ate" name="value" keyPath="newWord" id="yde-FJ-gfG"/>
+                                            </connections>
+                                        </searchFieldCell>
+                                        <connections>
+                                            <outlet property="delegate" destination="F8i-pe-Ate" id="SLQ-cV-4F8"/>
+                                        </connections>
+                                    </searchField>
+                                    <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ClQ-77-5d9">
+                                        <rect key="frame" x="249" y="4" width="99" height="24"/>
+                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="Ayj-3g-MLk">
+                                            <font key="font" metaFont="system"/>
+                                            <segments>
+                                                <segment label="None" width="40" selected="YES"/>
+                                                <segment label="Filter" width="52" tag="1"/>
+                                            </segments>
+                                        </segmentedCell>
+                                    </segmentedControl>
+                                    <searchField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gz7-De-6Jn">
+                                        <rect key="frame" x="346" y="5" width="150" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="150" id="CtI-TQ-DT2"/>
+                                        </constraints>
+                                        <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Filter" drawsBackground="YES" id="APH-BV-Ik7">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <connections>
+                                                <binding destination="F8i-pe-Ate" name="value" keyPath="newWord" id="cM5-jY-gWx"/>
+                                            </connections>
+                                        </searchFieldCell>
+                                        <connections>
+                                            <outlet property="delegate" destination="F8i-pe-Ate" id="Tj4-u9-9YA"/>
+                                        </connections>
+                                    </searchField>
+                                </subviews>
+                                <edgeInsets key="edgeInsets" left="6" right="0.0" top="6" bottom="6"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="DNJ-0Z-sbo"/>
+                                    <constraint firstItem="gz7-De-6Jn" firstAttribute="centerY" secondItem="e2v-T6-xFM" secondAttribute="centerY" id="Esm-HE-LHc"/>
+                                    <constraint firstItem="ClQ-77-5d9" firstAttribute="centerY" secondItem="e2v-T6-xFM" secondAttribute="centerY" id="SWI-an-4ND"/>
+                                    <constraint firstItem="LrN-UA-Jhg" firstAttribute="centerY" secondItem="e2v-T6-xFM" secondAttribute="centerY" id="kQw-6s-okJ"/>
+                                    <constraint firstItem="tTP-k6-3q6" firstAttribute="centerY" secondItem="e2v-T6-xFM" secondAttribute="centerY" id="v2P-rD-1Hh"/>
+                                </constraints>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
                             <splitView arrangesAllSubviews="NO" dividerStyle="paneSplitter" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kJB-Ei-kLH">
-                                <rect key="frame" x="0.0" y="0.0" width="1200" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="1200" height="568"/>
                                 <subviews>
                                     <customView id="ooS-dI-IvX">
-                                        <rect key="frame" x="0.0" y="0.0" width="432" height="600"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="432" height="568"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
-                                            <searchField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fhT-0G-f4c">
-                                                <rect key="frame" x="0.0" y="578" width="308" height="22"/>
-                                                <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="UJS-rt-mBe">
-                                                    <font key="font" metaFont="system"/>
-                                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                    <connections>
-                                                        <binding destination="ECR-Tq-pby" name="value" keyPath="newWord" id="De4-Hc-kRy"/>
-                                                    </connections>
-                                                </searchFieldCell>
-                                                <connections>
-                                                    <outlet property="delegate" destination="ECR-Tq-pby" id="JLu-jc-2yw"/>
-                                                </connections>
-                                            </searchField>
-                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6gy-Tz-aqi">
-                                                <rect key="frame" x="302" y="572" width="65" height="32"/>
-                                                <buttonCell key="cell" type="push" title="Add" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ODi-N1-uhY">
-                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                    <font key="font" metaFont="system"/>
-                                                </buttonCell>
-                                                <connections>
-                                                    <action selector="addNewWord:" target="ECR-Tq-pby" id="Bdn-MM-xM8"/>
-                                                </connections>
-                                            </button>
-                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7tC-EU-ySf">
-                                                <rect key="frame" x="355" y="572" width="83" height="32"/>
-                                                <buttonCell key="cell" type="push" title="Search" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Re8-Yi-wTC">
-                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                    <font key="font" metaFont="system"/>
-                                                </buttonCell>
-                                                <connections>
-                                                    <action selector="searchNewWord:" target="ECR-Tq-pby" id="XfY-Dz-feW"/>
-                                                </connections>
-                                            </button>
                                             <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3oW-mT-ATf">
-                                                <rect key="frame" x="0.0" y="17" width="432" height="561"/>
+                                                <rect key="frame" x="0.0" y="17" width="432" height="551"/>
                                                 <clipView key="contentView" id="KSB-fG-4SN">
-                                                    <rect key="frame" x="1" y="0.0" width="430" height="560"/>
+                                                    <rect key="frame" x="1" y="0.0" width="430" height="550"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="l1D-Jd-Cly" viewBased="YES" id="bSA-4p-g3s">
-                                                            <rect key="frame" x="0.0" y="0.0" width="430" height="535"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="430" height="525"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <size key="intercellSpacing" width="3" height="2"/>
                                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -2574,26 +2658,19 @@ DQ
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="sF8-z5-7nv" firstAttribute="top" secondItem="3oW-mT-ATf" secondAttribute="bottom" id="0Wa-qv-O3U"/>
-                                            <constraint firstItem="6gy-Tz-aqi" firstAttribute="top" secondItem="ooS-dI-IvX" secondAttribute="top" id="5MF-9A-SWc"/>
                                             <constraint firstItem="3oW-mT-ATf" firstAttribute="leading" secondItem="ooS-dI-IvX" secondAttribute="leading" id="8F6-Dw-9Ah"/>
-                                            <constraint firstItem="7tC-EU-ySf" firstAttribute="top" secondItem="ooS-dI-IvX" secondAttribute="top" id="93f-PO-gcx"/>
-                                            <constraint firstItem="fhT-0G-f4c" firstAttribute="leading" secondItem="ooS-dI-IvX" secondAttribute="leading" id="9SX-Qr-9bv"/>
-                                            <constraint firstItem="7tC-EU-ySf" firstAttribute="trailing" secondItem="ooS-dI-IvX" secondAttribute="trailing" id="9el-Dr-p86"/>
                                             <constraint firstAttribute="trailing" secondItem="3oW-mT-ATf" secondAttribute="trailing" id="Gky-57-2e7"/>
-                                            <constraint firstItem="3oW-mT-ATf" firstAttribute="top" secondItem="fhT-0G-f4c" secondAttribute="bottom" id="aIY-sE-EdK"/>
                                             <constraint firstItem="sF8-z5-7nv" firstAttribute="leading" secondItem="ooS-dI-IvX" secondAttribute="leading" id="cha-ub-HBA"/>
                                             <constraint firstAttribute="bottom" secondItem="sF8-z5-7nv" secondAttribute="bottom" id="exf-5W-caM"/>
-                                            <constraint firstItem="6gy-Tz-aqi" firstAttribute="trailing" secondItem="7tC-EU-ySf" secondAttribute="leading" id="jr0-8X-f09"/>
-                                            <constraint firstItem="fhT-0G-f4c" firstAttribute="trailing" secondItem="6gy-Tz-aqi" secondAttribute="leading" id="mEi-dM-ntk"/>
-                                            <constraint firstItem="fhT-0G-f4c" firstAttribute="top" secondItem="ooS-dI-IvX" secondAttribute="top" id="zrd-NX-oyO"/>
+                                            <constraint firstItem="3oW-mT-ATf" firstAttribute="top" secondItem="ooS-dI-IvX" secondAttribute="top" id="ezh-Ns-Fvg"/>
                                         </constraints>
                                     </customView>
                                     <customView id="3DF-wI-PX2">
-                                        <rect key="frame" x="442" y="0.0" width="758" height="600"/>
+                                        <rect key="frame" x="442" y="0.0" width="758" height="568"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
                                             <wkWebView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gHo-Yg-Cdv" userLabel="Dict WebView">
-                                                <rect key="frame" x="0.0" y="0.0" width="758" height="600"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="758" height="568"/>
                                                 <wkWebViewConfiguration key="configuration">
                                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
                                                     <wkPreferences key="preferences"/>
@@ -2618,14 +2695,15 @@ DQ
                             </splitView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="kJB-Ei-kLH" firstAttribute="top" secondItem="HyV-oU-X8h" secondAttribute="top" id="9Rd-Y3-JHO"/>
                             <constraint firstAttribute="bottom" secondItem="kJB-Ei-kLH" secondAttribute="bottom" id="Bzu-8K-Ppv"/>
+                            <constraint firstItem="kJB-Ei-kLH" firstAttribute="top" secondItem="e2v-T6-xFM" secondAttribute="bottom" id="Swb-vt-UHH"/>
                             <constraint firstAttribute="trailing" secondItem="kJB-Ei-kLH" secondAttribute="trailing" id="U3F-Qv-M56"/>
                             <constraint firstItem="kJB-Ei-kLH" firstAttribute="leading" secondItem="HyV-oU-X8h" secondAttribute="leading" id="i7Y-x6-haD"/>
+                            <constraint firstItem="e2v-T6-xFM" firstAttribute="top" secondItem="HyV-oU-X8h" secondAttribute="top" id="qK3-zD-R6a"/>
+                            <constraint firstItem="e2v-T6-xFM" firstAttribute="leading" secondItem="HyV-oU-X8h" secondAttribute="leading" id="rS9-Ip-mUH"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="sfNewWord" destination="fhT-0G-f4c" id="Wy6-WK-A8r"/>
                         <outlet property="tableView" destination="bSA-4p-g3s" id="DO7-Qe-vzq"/>
                         <outlet property="tfTableStatus" destination="sF8-z5-7nv" id="3vU-p6-ScG"/>
                         <outlet property="wvDict" destination="gHo-Yg-Cdv" id="Y9g-gl-Xn4"/>
@@ -3030,55 +3108,100 @@ DQ
                         <rect key="frame" x="0.0" y="0.0" width="1200" height="600"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
+                            <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="591-dl-hBy">
+                                <rect key="frame" x="0.0" y="568" width="496" height="32"/>
+                                <subviews>
+                                    <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YZ5-8r-T5b">
+                                        <rect key="frame" x="4" y="4" width="99" height="24"/>
+                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="8Wq-qR-996">
+                                            <font key="font" metaFont="system"/>
+                                            <segments>
+                                                <segment label="Add" width="40" selected="YES"/>
+                                                <segment label="Search" width="52" tag="1"/>
+                                            </segments>
+                                        </segmentedCell>
+                                    </segmentedControl>
+                                    <searchField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="g2Z-9A-Kf3">
+                                        <rect key="frame" x="101" y="5" width="150" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="150" id="8fd-pj-hl5"/>
+                                        </constraints>
+                                        <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="New Word" drawsBackground="YES" id="1aD-Da-SRv">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <connections>
+                                                <binding destination="F8i-pe-Ate" name="value" keyPath="newWord" id="9Yj-5M-nZb"/>
+                                            </connections>
+                                        </searchFieldCell>
+                                        <connections>
+                                            <outlet property="delegate" destination="F8i-pe-Ate" id="clq-bx-z1j"/>
+                                        </connections>
+                                    </searchField>
+                                    <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Kv2-KG-SLC">
+                                        <rect key="frame" x="249" y="4" width="99" height="24"/>
+                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="Fz5-PX-tob">
+                                            <font key="font" metaFont="system"/>
+                                            <segments>
+                                                <segment label="None" width="40" selected="YES"/>
+                                                <segment label="Filter" width="52" tag="1"/>
+                                            </segments>
+                                        </segmentedCell>
+                                    </segmentedControl>
+                                    <searchField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="k4T-Mi-7bE">
+                                        <rect key="frame" x="346" y="5" width="150" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="150" id="A3f-ff-CJM"/>
+                                        </constraints>
+                                        <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Filter" drawsBackground="YES" id="jpH-bn-hlc">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <connections>
+                                                <binding destination="F8i-pe-Ate" name="value" keyPath="newWord" id="X1W-wy-O5w"/>
+                                            </connections>
+                                        </searchFieldCell>
+                                        <connections>
+                                            <outlet property="delegate" destination="F8i-pe-Ate" id="Se6-6q-CSt"/>
+                                        </connections>
+                                    </searchField>
+                                </subviews>
+                                <edgeInsets key="edgeInsets" left="6" right="0.0" top="6" bottom="6"/>
+                                <constraints>
+                                    <constraint firstItem="YZ5-8r-T5b" firstAttribute="centerY" secondItem="591-dl-hBy" secondAttribute="centerY" id="Gdw-fQ-IjS"/>
+                                    <constraint firstItem="Kv2-KG-SLC" firstAttribute="centerY" secondItem="591-dl-hBy" secondAttribute="centerY" id="csG-Q7-VBg"/>
+                                    <constraint firstItem="g2Z-9A-Kf3" firstAttribute="centerY" secondItem="591-dl-hBy" secondAttribute="centerY" id="eiW-Pc-umI"/>
+                                    <constraint firstItem="k4T-Mi-7bE" firstAttribute="centerY" secondItem="591-dl-hBy" secondAttribute="centerY" id="lxf-wE-mv8"/>
+                                    <constraint firstAttribute="height" constant="32" id="rae-dI-Z7C"/>
+                                </constraints>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
                             <splitView arrangesAllSubviews="NO" dividerStyle="paneSplitter" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O0e-Sa-Ja4">
-                                <rect key="frame" x="0.0" y="0.0" width="1200" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="1200" height="568"/>
                                 <subviews>
                                     <customView id="IDt-tN-TIX">
-                                        <rect key="frame" x="0.0" y="0.0" width="432" height="600"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="432" height="568"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
-                                            <searchField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="w87-uB-EsR">
-                                                <rect key="frame" x="0.0" y="578" width="308" height="22"/>
-                                                <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="l1y-2f-Spv">
-                                                    <font key="font" metaFont="system"/>
-                                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                    <connections>
-                                                        <binding destination="S5w-0q-IQt" name="value" keyPath="newWord" id="rlc-Sb-y3d"/>
-                                                    </connections>
-                                                </searchFieldCell>
-                                                <connections>
-                                                    <outlet property="delegate" destination="S5w-0q-IQt" id="zEu-ue-i7a"/>
-                                                </connections>
-                                            </searchField>
-                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="y3o-2y-eVF">
-                                                <rect key="frame" x="302" y="572" width="65" height="32"/>
-                                                <buttonCell key="cell" type="push" title="Add" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="vju-6e-OR7">
-                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                    <font key="font" metaFont="system"/>
-                                                </buttonCell>
-                                                <connections>
-                                                    <action selector="addNewWord:" target="S5w-0q-IQt" id="tXK-p4-vzk"/>
-                                                </connections>
-                                            </button>
-                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LAX-iW-nFP">
-                                                <rect key="frame" x="355" y="572" width="83" height="32"/>
-                                                <buttonCell key="cell" type="push" title="Search" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ham-9i-UCS">
-                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                    <font key="font" metaFont="system"/>
-                                                </buttonCell>
-                                                <connections>
-                                                    <action selector="searchNewWord:" target="S5w-0q-IQt" id="SyJ-dv-RR6"/>
-                                                </connections>
-                                            </button>
                                             <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7yY-Yq-K4z">
-                                                <rect key="frame" x="0.0" y="17" width="432" height="561"/>
+                                                <rect key="frame" x="0.0" y="17" width="432" height="551"/>
                                                 <clipView key="contentView" id="yKO-ui-ZqI">
-                                                    <rect key="frame" x="1" y="0.0" width="430" height="560"/>
+                                                    <rect key="frame" x="1" y="0.0" width="430" height="550"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="zWy-A4-THI" viewBased="YES" id="NqU-P3-ciK">
-                                                            <rect key="frame" x="0.0" y="0.0" width="627" height="535"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="627" height="525"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <size key="intercellSpacing" width="3" height="2"/>
                                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -3439,7 +3562,7 @@ DQ
                                                     </connections>
                                                 </clipView>
                                                 <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="qzl-qd-PqN">
-                                                    <rect key="frame" x="1" y="544" width="430" height="16"/>
+                                                    <rect key="frame" x="1" y="534" width="430" height="16"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </scroller>
                                                 <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="BbR-V9-veY">
@@ -3464,27 +3587,20 @@ DQ
                                             </textField>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="LAX-iW-nFP" firstAttribute="trailing" secondItem="IDt-tN-TIX" secondAttribute="trailing" id="3IR-1m-Khk"/>
-                                            <constraint firstItem="w87-uB-EsR" firstAttribute="top" secondItem="IDt-tN-TIX" secondAttribute="top" id="5Aj-na-aZk"/>
                                             <constraint firstAttribute="bottom" secondItem="Gqc-yq-vq1" secondAttribute="bottom" id="BqC-6W-9ug"/>
-                                            <constraint firstItem="w87-uB-EsR" firstAttribute="trailing" secondItem="y3o-2y-eVF" secondAttribute="leading" id="EgA-mC-JLk"/>
                                             <constraint firstItem="Gqc-yq-vq1" firstAttribute="leading" secondItem="IDt-tN-TIX" secondAttribute="leading" id="Ibo-rk-Bq5"/>
                                             <constraint firstItem="7yY-Yq-K4z" firstAttribute="leading" secondItem="IDt-tN-TIX" secondAttribute="leading" id="Qfg-Tw-VuN"/>
                                             <constraint firstItem="Gqc-yq-vq1" firstAttribute="top" secondItem="7yY-Yq-K4z" secondAttribute="bottom" id="RFi-pm-z2v"/>
-                                            <constraint firstItem="LAX-iW-nFP" firstAttribute="top" secondItem="IDt-tN-TIX" secondAttribute="top" id="SNi-Fc-3O3"/>
                                             <constraint firstAttribute="trailing" secondItem="7yY-Yq-K4z" secondAttribute="trailing" id="Wd9-vX-0mb"/>
-                                            <constraint firstItem="y3o-2y-eVF" firstAttribute="trailing" secondItem="LAX-iW-nFP" secondAttribute="leading" id="c3Y-dL-jVQ"/>
-                                            <constraint firstItem="y3o-2y-eVF" firstAttribute="top" secondItem="IDt-tN-TIX" secondAttribute="top" id="f8w-KX-zll"/>
-                                            <constraint firstItem="w87-uB-EsR" firstAttribute="leading" secondItem="IDt-tN-TIX" secondAttribute="leading" id="mul-bc-ZcO"/>
-                                            <constraint firstItem="7yY-Yq-K4z" firstAttribute="top" secondItem="w87-uB-EsR" secondAttribute="bottom" id="wea-jR-9kh"/>
+                                            <constraint firstItem="7yY-Yq-K4z" firstAttribute="top" secondItem="IDt-tN-TIX" secondAttribute="top" id="eaA-FN-9TB"/>
                                         </constraints>
                                     </customView>
                                     <customView id="Qwh-xx-prU">
-                                        <rect key="frame" x="442" y="0.0" width="758" height="600"/>
+                                        <rect key="frame" x="442" y="0.0" width="758" height="568"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
                                             <wkWebView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mBY-hW-ews" userLabel="Dict WebView">
-                                                <rect key="frame" x="0.0" y="0.0" width="758" height="600"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="758" height="568"/>
                                                 <wkWebViewConfiguration key="configuration">
                                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
                                                     <wkPreferences key="preferences"/>
@@ -3509,14 +3625,15 @@ DQ
                             </splitView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="O0e-Sa-Ja4" firstAttribute="top" secondItem="6WU-p2-idH" secondAttribute="top" id="RX6-wT-xBL"/>
+                            <constraint firstItem="591-dl-hBy" firstAttribute="top" secondItem="6WU-p2-idH" secondAttribute="top" id="K0b-eY-EGp"/>
                             <constraint firstAttribute="bottom" secondItem="O0e-Sa-Ja4" secondAttribute="bottom" id="dAf-c4-zW5"/>
+                            <constraint firstItem="591-dl-hBy" firstAttribute="leading" secondItem="6WU-p2-idH" secondAttribute="leading" id="n86-qN-SQK"/>
+                            <constraint firstItem="O0e-Sa-Ja4" firstAttribute="top" secondItem="591-dl-hBy" secondAttribute="bottom" id="ntJ-Yw-TGE"/>
                             <constraint firstAttribute="trailing" secondItem="O0e-Sa-Ja4" secondAttribute="trailing" id="rZ4-ih-ZmZ"/>
                             <constraint firstItem="O0e-Sa-Ja4" firstAttribute="leading" secondItem="6WU-p2-idH" secondAttribute="leading" id="w6A-L0-Pgf"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="sfNewWord" destination="w87-uB-EsR" id="Hko-lL-8cT"/>
                         <outlet property="tableView" destination="NqU-P3-ciK" id="ngY-Mi-EJ0"/>
                         <outlet property="tfTableStatus" destination="Gqc-yq-vq1" id="dQm-HQ-8AA"/>
                         <outlet property="wvDict" destination="mBY-hW-ews" id="jBh-C5-Htb"/>
