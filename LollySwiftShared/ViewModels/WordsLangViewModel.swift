@@ -9,20 +9,13 @@
 import Foundation
 import RxSwift
 
-class WordsLangViewModel: NSObject {
-    var vmSettings: SettingsViewModel
+class WordsLangViewModel: WordsBaseViewModel {
     var arrWords = [MLangWord]()
     var arrWordsFiltered: [MLangWord]?
-    var vmNote: NoteViewModel!
-    var mDictNote: MDictNote? {
-        return vmNote.mDictNote
-    }
 
     public init(settings: SettingsViewModel, disposeBag: DisposeBag, complete: @escaping () -> ()) {
-        self.vmSettings = settings
-        vmNote = NoteViewModel(settings: settings, disposeBag: disposeBag)
+        super.init(settings: settings, disposeBag: disposeBag)
         let item = settings.selectedTextbook!
-        super.init()
         MLangWord.getDataByLang(item.LANGID).subscribe(onNext: {
             self.arrWords = $0
             complete()

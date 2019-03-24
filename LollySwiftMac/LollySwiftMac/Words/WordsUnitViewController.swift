@@ -14,7 +14,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation {
 
     var vm: WordsUnitViewModel!
     var arrWords: [MUnitWord] {
-        return vm.arrWords
+        return vm.arrWordsFiltered ?? vm.arrWords
     }
     
     // https://developer.apple.com/videos/play/wwdc2011/120/
@@ -54,11 +54,11 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation {
         let item = arrWords[row]
         WordsUnitViewModel.update(item: item).subscribe {
             self.tableView.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count))
-            }.disposed(by: disposeBag)
+        }.disposed(by: disposeBag)
     }
 
     func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
-        if vm.vmSettings.isSingleUnitPart {
+        if vm.vmSettings.isSingleUnitPart && vm.arrWordsFiltered == nil {
             let item = NSPasteboardItem()
             item.setString(String(row), forType: tableRowDragType)
             return item
@@ -203,6 +203,16 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation {
             }
         }
         subscription?.disposed(by: disposeBag)
+    }
+
+    @IBAction func filterWord(_ sender: Any) {
+        let n = (sender as! NSSegmentedControl).selectedSegment
+        if n == 0 {
+            vm.arrWordsFiltered = nil
+        } else {
+            vm.filterWordsForSearchText(filterText, scope: "Word")
+        }
+        self.tableView.reloadData()
     }
 }
 

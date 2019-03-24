@@ -118,36 +118,12 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
         if n == 0 {
             vm.arrWordsFiltered = nil
         } else {
-            vm.filterWordsForSearchText((wc as! WordsLangWindowController).filterText, scope: "Word")
+            vm.filterWordsForSearchText(filterText, scope: "Word")
         }
         self.tableView.reloadData()
     }
 }
 
 class WordsLangWindowController: WordsBaseWindowController {
-    @IBOutlet weak var scFilter: NSSegmentedControl!
-    @IBOutlet weak var tfFilterText: NSTextField!
-    @objc var filterText = ""
-    
-    override func windowDidLoad() {
-        super.windowDidLoad()
-    }
-    
-    func controlTextDidEndEditing(_ obj: Notification) {
-        let searchfield = obj.object as! NSControl
-        guard searchfield === tfFilterText else {return}
-        let dict = (obj as NSNotification).userInfo!
-        let reason = dict["NSTextMovement"] as! NSNumber
-        let code = Int(reason.int32Value)
-        guard code == NSReturnTextMovement else {return}
-        if scFilter.selectedSegment == 0 {
-            scFilter.selectedSegment = 1
-        }
-        (contentViewController as! WordsLangViewController).filterWord(scFilter)
-    }
-    
-    func windowWillClose(_ notification: Notification) {
-        tfFilterText.unbindAll()
-    }
 }
 

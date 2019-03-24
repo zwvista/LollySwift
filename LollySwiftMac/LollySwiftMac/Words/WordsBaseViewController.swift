@@ -14,13 +14,17 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     var selectedDictItemIndex = 0
     
     @IBOutlet weak var wvDict: WKWebView!
+    @IBOutlet weak var scNewWord: NSSegmentedControl!
     @IBOutlet weak var sfNewWord: NSSearchField!
+    @IBOutlet weak var scFilter: NSSegmentedControl!
+    @IBOutlet weak var sfFilter: NSSearchField!
     @IBOutlet weak var tableView: NSTableView!
     @IBOutlet weak var tfTableStatus: NSTextField!
 
     let disposeBag = DisposeBag()
     
     @objc var newWord = ""
+    @objc var filterText = ""
     var selectedWord = ""
     var status = DictWebViewStatus.ready
     let synth = NSSpeechSynthesizer()
@@ -44,14 +48,30 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     
     func controlTextDidEndEditing(_ obj: Notification) {
         let searchfield = obj.object as! NSControl
-        guard searchfield === sfNewWord else {return}
         let dict = (obj as NSNotification).userInfo!
         let reason = dict["NSTextMovement"] as! NSNumber
         let code = Int(reason.int32Value)
         guard code == NSReturnTextMovement else {return}
-        addNewWord()
+        if searchfield === sfNewWord {
+            scNewWordClick(self)
+        } else if searchfield === sfFilter {
+            if !filterText.isEmpty {
+                scFilter.selectedSegment = 1
+            }
+            scFilter.performClick(self)
+        }
     }
     
+    @IBAction func scNewWordClick(_ sender: Any) {
+        commitEditing()
+        guard !newWord.isEmpty else {return}
+        if scNewWord.selectedSegment == 0 {
+            addNewWord()
+        } else {
+            searchWord(word: newWord)
+        }
+    }
+
     func itemForRow(row: Int) -> (MWordProtocol & NSObject)? {
         return nil;
     }
@@ -109,19 +129,9 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
         endEditing(row: row)
     }
 
-    @IBAction func searchNewWord(_ sender: AnyObject) {
-        commitEditing()
-        guard !newWord.isEmpty else {return}
-        searchWord(word: newWord)
-    }
-    
-    @IBAction func addNewWord(_ sender: Any) {
-        addNewWord()
-    }
-
     func addNewWord() {
     }
-    
+
     @IBAction func deleteWord(_ sender: Any) {
         let row = tableView.selectedRow
         guard row != -1 else {return}

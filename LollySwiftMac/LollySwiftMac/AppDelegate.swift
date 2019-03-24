@@ -27,6 +27,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             //self.wordsInLanguage(self)
         }).disposed(by: disposeBag)
         // Insert code here to initialize your application
+
+        // https://forums.developer.apple.com/thread/69484
+        NSSetUncaughtExceptionHandler { exception in
+            print(exception)
+            print(exception.callStackSymbols)
+        }
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

@@ -12,7 +12,6 @@ import RxSwift
 
 class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation {
 
-    var wc2: WordsTextbookWindowController! { return view.window!.windowController as? WordsTextbookWindowController }
     var vm: WordsUnitViewModel!
     var arrWords: [MUnitWord] {
         return vm.arrWordsFiltered == nil ? vm.arrWords : vm.arrWordsFiltered!
@@ -95,35 +94,11 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
         if n == 0 {
             vm.arrWordsFiltered = nil
         } else {
-            vm.filterWordsForSearchText(wc2.filterText, scope: "Word")
+            vm.filterWordsForSearchText(filterText, scope: "Word")
         }
         self.tableView.reloadData()
     }
 }
 
 class WordsTextbookWindowController: WordsBaseWindowController {
-    @IBOutlet weak var scFilter: NSSegmentedControl!
-    @IBOutlet weak var tfFilterText: NSTextField!
-    @objc var filterText = ""
-    
-    override func windowDidLoad() {
-        super.windowDidLoad()
-    }
-    
-    func controlTextDidEndEditing(_ obj: Notification) {
-        let searchfield = obj.object as! NSControl
-        guard searchfield === tfFilterText else {return}
-        let dict = (obj as NSNotification).userInfo!
-        let reason = dict["NSTextMovement"] as! NSNumber
-        let code = Int(reason.int32Value)
-        guard code == NSReturnTextMovement else {return}
-        if scFilter.selectedSegment == 0 {
-            scFilter.selectedSegment = 1
-        }
-        (contentViewController as! WordsTextbookViewController).filterWord(scFilter)
-    }
-    
-    func windowWillClose(_ notification: Notification) {
-        tfFilterText.unbindAll()
-    }
 }
