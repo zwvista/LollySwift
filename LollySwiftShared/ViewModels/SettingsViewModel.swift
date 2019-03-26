@@ -61,20 +61,32 @@ class SettingsViewModel: NSObject {
         get { return selectedUSTextbook.VALUE1!.toInt()! }
         set { selectedUSTextbook.VALUE1 = String(newValue) }
     }
+    var USUNITFROMSTR: String {
+        return selectedTextbook.UNITSTR(USUNITFROM)
+    }
     @objc
     var USPARTFROM: Int {
         get { return selectedUSTextbook.VALUE2!.toInt()! }
         set { selectedUSTextbook.VALUE2 = String(newValue) }
+    }
+    var USPARTFROMSTR: String {
+        return selectedTextbook.PARTSTR(USPARTFROM)
     }
     @objc
     var USUNITTO: Int {
         get { return selectedUSTextbook.VALUE3!.toInt()! }
         set { selectedUSTextbook.VALUE3 = String(newValue) }
     }
+    var USUNITTOSTR: String {
+        return selectedTextbook.UNITSTR(USUNITTO)
+    }
     @objc
     var USPARTTO: Int {
         get { return selectedUSTextbook.VALUE4!.toInt()! }
         set { selectedUSTextbook.VALUE4 = String(newValue) }
+    }
+    var USPARTTOSTR: String {
+        return selectedTextbook.PARTSTR(USPARTTO)
     }
     var USUNITPARTFROM: Int {
         return USUNITFROM * 10 + USPARTFROM

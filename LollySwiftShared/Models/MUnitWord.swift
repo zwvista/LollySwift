@@ -39,13 +39,12 @@ class MUnitWord: NSObject, Codable, MWordProtocol {
         case LEVEL
     }
 
-    var arrUnits: NSArray!
-    var arrParts: NSArray!
+    unowned var textbook: MTextbook!
     var UNITSTR: String {
-        return (arrUnits as! [MSelectItem]).first { $0.value == UNIT }!.label
+        return textbook.UNITSTR(UNIT)
     }
     var PARTSTR: String {
-        return (arrParts as! [MSelectItem]).first { $0.value == PART }!.label
+        return textbook.PARTSTR(PART)
     }
     var UNITPARTSEQNUM: String {
         return "\(UNITSTR) \(SEQNUM)\n\(PARTSTR)"
@@ -63,10 +62,7 @@ class MUnitWord: NSObject, Codable, MWordProtocol {
         let url = "\(CommonApi.url)VUNITWORDS?transform=1&filter[]=TEXTBOOKID,eq,\(textbook.ID)&filter[]=UNITPART,bt,\(unitPartFrom),\(unitPartTo)&order[]=UNITPART&order[]=SEQNUM"
         let o: Observable<[MUnitWord]> = RestApi.getArray(url: url, keyPath: "VUNITWORDS")
         return o.map { arr in
-            arr.forEach { row in
-                row.arrUnits = textbook.arrUnits as NSArray
-                row.arrParts = textbook.arrParts as NSArray
-            }
+            arr.forEach { $0.textbook = textbook }
             return arr
         }
     }
@@ -77,9 +73,7 @@ class MUnitWord: NSObject, Codable, MWordProtocol {
         let o: Observable<[MUnitWord]> = RestApi.getArray(url: url, keyPath: "VUNITWORDS")
         return o.map { arr in
             arr.forEach { row in
-                let row2 = arrTextbooks.first { $0.ID == row.TEXTBOOKID }!
-                row.arrUnits = row2.arrUnits as NSArray
-                row.arrParts = row2.arrParts as NSArray
+                row.textbook = arrTextbooks.first { $0.ID == row.TEXTBOOKID }!
             }
             return arr
         }

@@ -27,6 +27,12 @@ class MTextbook: NSObject, Codable {
 
     var arrUnits = [MSelectItem]()
     var arrParts = [MSelectItem]()
+    func UNITSTR(_ unit: Int) -> String {
+        return arrUnits.first { $0.value == unit }!.label
+    }
+    func PARTSTR(_ part: Int) -> String {
+        return arrParts.first { $0.value == part }!.label
+    }
 
     override var description: String {
         return TEXTBOOKNAME;

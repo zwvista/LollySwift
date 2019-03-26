@@ -139,8 +139,7 @@ class PhrasesUnitViewModel: NSObject {
         item.UNIT = maxElem?.UNIT ?? vmSettings.USUNITTO
         item.PART = maxElem?.PART ?? vmSettings.USPARTTO
         item.SEQNUM = (maxElem?.SEQNUM ?? 0) + 1
-        item.arrUnits = vmSettings.arrUnits as NSArray
-        item.arrParts = vmSettings.arrParts as NSArray
+        item.textbook = vmSettings.selectedTextbook
         return item
     }
     

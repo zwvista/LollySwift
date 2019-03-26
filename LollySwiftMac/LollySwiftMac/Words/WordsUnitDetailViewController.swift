@@ -32,8 +32,8 @@ class WordsUnitDetailViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        acUnits.content = item.arrUnits
-        acParts.content = item.arrParts
+        acUnits.content = item.textbook.arrUnits
+        acParts.content = item.textbook.arrParts
         isAdd = item.ID == 0
     }
     

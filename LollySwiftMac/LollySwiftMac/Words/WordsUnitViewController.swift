@@ -217,7 +217,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation {
     }
     
     override func updateStatusText() {
-        tfStatusText.stringValue = "\(vmSettings.selectedLang.LANGNAME) \(vmSettings.USUNITFROM) \(vmSettings.USPARTFROM) \(vmSettings.USUNITTO) \(vmSettings.USPARTTO) \(tableView.numberOfRows) Words "
+        tfStatusText.stringValue = "\(vmSettings.selectedLang.LANGNAME) \(vmSettings.USUNITFROMSTR) \(vmSettings.USPARTFROMSTR) \(vmSettings.USUNITTOSTR) \(vmSettings.USPARTTOSTR) \(tableView.numberOfRows) Words "
     }
 }
 
