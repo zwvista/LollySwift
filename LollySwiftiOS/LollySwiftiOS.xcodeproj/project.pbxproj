@@ -44,6 +44,7 @@
 		8CD16D121D69FD8A00F5F625 /* WordsLangDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD16D111D69FD8A00F5F625 /* WordsLangDetailViewController.swift */; };
 		8CD16D161D69FDDC00F5F625 /* PhrasesUnitDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD16D151D69FDDC00F5F625 /* PhrasesUnitDetailViewController.swift */; };
 		8CD16D201D69FE8F00F5F625 /* PhrasesLangDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD16D1F1D69FE8F00F5F625 /* PhrasesLangDetailViewController.swift */; };
+		95042354224AD1620038997A /* WordsBaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F199B02244FD150065858E /* WordsBaseViewModel.swift */; };
 		951BB9941A1B803B0087DB94 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 951BB9931A1B803B0087DB94 /* Main.storyboard */; };
 		95267BD71A1E26D000CC2A4B /* WordsSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95267BD61A1E26D000CC2A4B /* WordsSearchViewController.swift */; };
 		953473DB1A0D16CF00FF2D56 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953473DA1A0D16CF00FF2D56 /* AppDelegate.swift */; };
@@ -430,24 +431,24 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = "趙 偉";
 				TargetAttributes = {
 					953473D41A0D16CF00FF2D56 = {
 						CreatedOnToolsVersion = 6.1;
 						DevelopmentTeam = U259NHMY78;
-						LastSwiftMigration = 1000;
+						LastSwiftMigration = 1020;
 					};
 					953473E91A0D16CF00FF2D56 = {
 						CreatedOnToolsVersion = 6.1;
-						LastSwiftMigration = 1000;
+						LastSwiftMigration = 1020;
 						TestTargetID = 953473D41A0D16CF00FF2D56;
 					};
 				};
 			};
 			buildConfigurationList = 953473D01A0D16CF00FF2D56 /* Build configuration list for PBXProject "LollySwiftiOS" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -667,6 +668,7 @@
 				954D8B8B214389D700651A80 /* WordsUnitViewModel.swift in Sources */,
 				954D8B86214389D700651A80 /* PhrasesUnitViewModel.swift in Sources */,
 				95EFF48221841BA40094EE3C /* MAutoCorrect.swift in Sources */,
+				95042354224AD1620038997A /* WordsBaseViewModel.swift in Sources */,
 				954D8B8F214389DE00651A80 /* MDictionary.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -697,6 +699,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -752,6 +755,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -821,7 +825,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "LollySwiftiOS-Bridging-Header.h";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -847,7 +851,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "LollySwiftiOS-Bridging-Header.h";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -865,7 +869,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.zwstudio.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LollySwiftiOS.app/LollySwiftiOS";
 			};
 			name = Debug;
@@ -880,7 +884,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.zwstudio.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LollySwiftiOS.app/LollySwiftiOS";
 			};
 			name = Release;
