@@ -512,7 +512,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/../Pods/Target Support Files/Pods-LollySwiftiOSTests/Pods-LollySwiftiOSTests-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-LollySwiftiOSTests/Pods-LollySwiftiOSTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/CodableAlamofire-iOS/CodableAlamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/CrossroadRegex-iOS/Regex.framework",
@@ -531,7 +531,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-LollySwiftiOSTests/Pods-LollySwiftiOSTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LollySwiftiOSTests/Pods-LollySwiftiOSTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		5CDA5F8771A08BD10796CCCC /* [CP] Embed Pods Frameworks */ = {
@@ -540,7 +540,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/../Pods/Target Support Files/Pods-LollySwiftiOS/Pods-LollySwiftiOS-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-LollySwiftiOS/Pods-LollySwiftiOS-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AKSideMenu/AKSideMenu.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/CodableAlamofire-iOS/CodableAlamofire.framework",
@@ -563,7 +563,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/../Pods/Target Support Files/Pods-LollySwiftiOS/Pods-LollySwiftiOS-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LollySwiftiOS/Pods-LollySwiftiOS-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FFF9CDF2DDB43EF477DFD071 /* [CP] Check Pods Manifest.lock */ = {
@@ -807,16 +807,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				"FRAMEWORK_SEARCH_PATHS[arch=*]" = (
-					"$(inherited)",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/AKSideMenu\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire-iOS\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/DropDown\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/EZSwiftExtensions-iOS\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/RxAlamofire-iOS\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/RxCocoa-iOS\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/RxSwift-iOS\"",
-				);
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "$(inherited) \"${PODS_CONFIGURATION_BUILD_DIR}/AKSideMenu\" \"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire-iOS\" \"${PODS_CONFIGURATION_BUILD_DIR}/DropDown\" \"${PODS_CONFIGURATION_BUILD_DIR}/EZSwiftExtensions-iOS\" \"${PODS_CONFIGURATION_BUILD_DIR}/RxAlamofire-iOS\" \"${PODS_CONFIGURATION_BUILD_DIR}/RxCocoa-iOS\" \"${PODS_CONFIGURATION_BUILD_DIR}/RxSwift-iOS\"";
 				HEADER_SEARCH_PATHS = ../Pods;
 				INFOPLIST_FILE = LollySwiftiOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -836,13 +827,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				"FRAMEWORK_SEARCH_PATHS[arch=*]" = (
-					"$(inherited)",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/ActionSheetPicker-3.0\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire-iOS\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/AlamofireObjectMapper-iOS\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/ObjectMapper-iOS\"",
-				);
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = "$(inherited) \"${PODS_CONFIGURATION_BUILD_DIR}/ActionSheetPicker-3.0\" \"${PODS_CONFIGURATION_BUILD_DIR}/Alamofire-iOS\" \"${PODS_CONFIGURATION_BUILD_DIR}/AlamofireObjectMapper-iOS\" \"${PODS_CONFIGURATION_BUILD_DIR}/ObjectMapper-iOS\"";
 				HEADER_SEARCH_PATHS = ../Pods;
 				INFOPLIST_FILE = LollySwiftiOS/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;

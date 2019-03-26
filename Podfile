@@ -34,4 +34,5 @@ project 'LollySwiftMac/LollySwiftMac'
 pod 'CodableAlamofire'
 pod 'RxAlamofire'
 pod 'EZSwiftExtensions'
+pod 'CrossroadRegex'
 end

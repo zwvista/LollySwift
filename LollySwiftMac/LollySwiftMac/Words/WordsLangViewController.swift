@@ -99,7 +99,7 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
     }
     
     @IBAction func getNote(_ sender: Any) {
-        let col = tableView.tableColumns.index(where: {$0.title == "NOTE"})!
+        let col = tableView.tableColumns.firstIndex(where: {$0.title == "NOTE"})!
         vm.getNote(index: tableView.selectedRow).subscribe {
             self.tableView.reloadData(forRowIndexes: [self.tableView.selectedRow], columnIndexes: [col])
         }.disposed(by: disposeBag)

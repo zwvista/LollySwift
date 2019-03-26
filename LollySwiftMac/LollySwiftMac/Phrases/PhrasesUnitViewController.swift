@@ -88,7 +88,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
                 newIndexOffset += 1
             }
         }
-        let col = tableView.tableColumns.index(where: {$0.title == "SEQNUM"})!
+        let col = tableView.tableColumns.firstIndex(where: {$0.title == "SEQNUM"})!
         vm.reindex {
             tableView.reloadData(forRowIndexes: [$0], columnIndexes: [col])
         }

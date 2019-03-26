@@ -42,7 +42,7 @@ public extension NSColor {
      
      - returns: A NSColor instance from the given hex value
      */
-    public class func hexColor(rgbValue: Int, alpha: CGFloat = 1.0) -> NSColor {
+    class func hexColor(rgbValue: Int, alpha: CGFloat = 1.0) -> NSColor {
         
         return NSColor(red: ((CGFloat)((rgbValue & 0xFF0000) >> 16))/255.0, green:((CGFloat)((rgbValue & 0xFF00) >> 8))/255.0, blue:((CGFloat)(rgbValue & 0xFF))/255.0, alpha:alpha)
         
@@ -52,7 +52,7 @@ public extension NSColor {
 
 public extension NSControl {
     // https://stackoverflow.com/questions/49797651/nsbutton-list-or-unbind-existing-bindings-programmatically
-    public func unbindAll() {
+    func unbindAll() {
         for b in exposedBindings {
             unbind(b)
         }

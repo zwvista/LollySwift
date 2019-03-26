@@ -100,7 +100,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation {
                 newIndexOffset += 1
             }
         }
-        let col = tableView.tableColumns.index(where: {$0.title == "SEQNUM"})!
+        let col = tableView.tableColumns.firstIndex(where: {$0.title == "SEQNUM"})!
         vm.reindex {
             tableView.reloadData(forRowIndexes: [$0], columnIndexes: [col])
         }
@@ -166,7 +166,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation {
     }
 
     @IBAction func getNote(_ sender: Any) {
-        let col = tableView.tableColumns.index(where: {$0.title == "NOTE"})!
+        let col = tableView.tableColumns.firstIndex(where: {$0.title == "NOTE"})!
         vm.getNote(index: tableView.selectedRow).subscribe {
             self.tableView.reloadData(forRowIndexes: [self.tableView.selectedRow], columnIndexes: [col])
         }.disposed(by: disposeBag)
