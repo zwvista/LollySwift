@@ -141,6 +141,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation {
     @IBAction func refreshTableView(_ sender: Any) {
         vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: true, disposeBag: disposeBag) {
             self.tableView.reloadData()
+            self.updateStatusText()
         }
     }
 
@@ -213,6 +214,10 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation {
             vm.filterWordsForSearchText(filterText, scope: "Word")
         }
         self.tableView.reloadData()
+    }
+    
+    override func updateStatusText() {
+        tfStatusText.stringValue = "\(vmSettings.selectedLang.LANGNAME) \(vmSettings.USUNITFROM) \(vmSettings.USPARTFROM) \(vmSettings.USUNITTO) \(vmSettings.USPARTTO) \(tableView.numberOfRows) Words "
     }
 }
 

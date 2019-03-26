@@ -37,10 +37,10 @@ class MTextbook: NSObject, Codable {
         let url = "\(CommonApi.url)TEXTBOOKS?transform=1&filter=LANGID,eq,\(langid)"
         let o: Observable<[MTextbook]> = RestApi.getArray(url: url, keyPath: "TEXTBOOKS")
         func f(units: String) -> [String] {
-            if let m = "UNITS,(\\d+)".r!.findFirst(in: units) {
+            if let m = #"UNITS,(\d+)"#.r!.findFirst(in: units) {
                 let n = Int(m.group(at: 1)!)!
                 return (1...n).map{ String($0) }
-            } else if let m = "PAGES,(\\d+),(\\d+)".r!.findFirst(in: units) {
+            } else if let m = #"PAGES,(\d+),(\d+)"#.r!.findFirst(in: units) {
                 let (n1, n2) = (Int(m.group(at: 1)!)!, Int(m.group(at: 2)!)!)
                 let n = (n1 + n2 - 1) / n2
                 return (1...n).map { "\($0 * n2 - n2 + 1)~\($0 * n2)" }

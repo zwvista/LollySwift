@@ -37,7 +37,7 @@ class BlogViewModel: NSObject {
     private func htmlE2With(_ s: String) -> String { return html2With(s) }
     private func htmlIWith(_ s: String) -> String { return "<strong>\(html2With(s))</strong>" }
     private let htmlEmptyLine = "<div><br></div>"
-    private let regMarkedEntry = "(\\*\\*?)\\s*(.*?)：(.*?)：(.*)".r!
+    private let regMarkedEntry = #"(\*\*?)\s*(.*?)：(.*?)：(.*)"#.r!
     private let regMarkedB = "<B>(.+?)</B>".r!
     private let regMarkedI = "<I>(.+?)</I>".r!
     func markedToHtml(text: String) -> String {

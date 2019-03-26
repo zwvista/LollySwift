@@ -19,14 +19,14 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     @IBOutlet weak var scFilter: NSSegmentedControl!
     @IBOutlet weak var sfFilter: NSSearchField!
     @IBOutlet weak var tableView: NSTableView!
-    @IBOutlet weak var tfTableStatus: NSTextField!
+    @IBOutlet weak var tfStatusText: NSTextField!
 
     let disposeBag = DisposeBag()
     
     @objc var newWord = ""
     @objc var filterText = ""
     var selectedWord = ""
-    var status = DictWebViewStatus.ready
+    var dictStatus = DictWebViewStatus.ready
     let synth = NSSpeechSynthesizer()
     var speakOrNot = false
 
@@ -98,12 +98,12 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
         return cell;
     }
     
-    func updateTableStatus() {
-        tfTableStatus.stringValue = "\(tableView.numberOfRows) Words"
+    func updateStatusText() {
+        tfStatusText.stringValue = "\(tableView.numberOfRows) Words"
     }
     
     func tableViewSelectionDidChange(_ notification: Notification) {
-        updateTableStatus()
+        updateStatusText()
         searchDict(self)
         if speakOrNot {
             speak(self)
@@ -142,7 +142,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     }
 
     func searchWord(word: String) {
-        status = .ready
+        dictStatus = .ready
         let item = vmSettings.arrDictItems[selectedDictItemIndex]
         if item.DICTNAME.starts(with: "Custom") {
             let str = vmSettings.dictHtml(word: word, dictids: item.dictids())
@@ -160,7 +160,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
             } else {
                 wvDict.load(URLRequest(url: URL(string: url)!))
                 if item2.DICTTYPENAME == "OFFLINE-ONLINE" {
-                    status = .navigating
+                    dictStatus = .navigating
                 }
             }
         }
@@ -185,7 +185,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         self.view.window?.makeKeyAndOrderFront(self)
         tableView.becomeFirstResponder()
-        guard status == .navigating else {return}
+        guard dictStatus == .navigating else {return}
         let item = vmSettings.arrDictItems[selectedDictItemIndex]
         let item2 = vmSettings.arrDictsMean.first { $0.DICTNAME == item.DICTNAME }!
         // https://stackoverflow.com/questions/34751860/get-html-from-wkwebview-in-swift
@@ -194,7 +194,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
             print(html)
             let str = item2.htmlString(html, word: self.selectedWord)
             self.wvDict.loadHTMLString(str, baseURL: nil)
-            self.status = .ready
+            self.dictStatus = .ready
         }
     }
 

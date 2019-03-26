@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
         <plugIn identifier="com.apple.WebKit2IBPlugin" version="14460.31"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -126,7 +125,7 @@
                                                 <rect key="frame" x="0.0" y="17" width="428" height="551"/>
                                                 <clipView key="contentView" id="Zcq-Vh-TJP">
                                                     <rect key="frame" x="1" y="0.0" width="426" height="550"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="ieV-Ib-SiL" viewBased="YES" id="8Zf-06-OzS">
                                                             <rect key="frame" x="0.0" y="0.0" width="504" height="527"/>
@@ -527,7 +526,7 @@
                         <outlet property="sfFilter" destination="ZLw-IN-v2O" id="8Fa-tk-Qs2"/>
                         <outlet property="sfNewWord" destination="AOA-N2-K53" id="8dF-vd-y8I"/>
                         <outlet property="tableView" destination="8Zf-06-OzS" id="Vn7-va-cpG"/>
-                        <outlet property="tfTableStatus" destination="IQa-iE-3F1" id="cbs-gy-uFL"/>
+                        <outlet property="tfStatusText" destination="IQa-iE-3F1" id="cbs-gy-uFL"/>
                         <outlet property="wvDict" destination="tEP-Us-q1l" id="0DF-0d-cGv"/>
                     </connections>
                 </viewController>
@@ -1316,7 +1315,7 @@ Gw
                                                 <rect key="frame" x="0.0" y="17" width="432" height="551"/>
                                                 <clipView key="contentView" id="hlG-17-BUc">
                                                     <rect key="frame" x="1" y="0.0" width="430" height="550"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="y9i-hT-ffa" viewBased="YES" id="zh5-gP-ZJa">
                                                             <rect key="frame" x="0.0" y="0.0" width="430" height="525"/>
@@ -1569,7 +1568,7 @@ Gw
                         <outlet property="sfFilter" destination="b1a-Bg-nzC" id="DeR-cP-Vww"/>
                         <outlet property="sfNewWord" destination="aOo-Lm-Ivs" id="Ibt-h7-fuT"/>
                         <outlet property="tableView" destination="zh5-gP-ZJa" id="wUb-Zv-H6h"/>
-                        <outlet property="tfTableStatus" destination="ceW-Gp-R3a" id="Mdi-yT-ZFX"/>
+                        <outlet property="tfStatusText" destination="ceW-Gp-R3a" id="Mdi-yT-ZFX"/>
                         <outlet property="wvDict" destination="Txl-33-AIT" id="hgQ-5V-Jpq"/>
                     </connections>
                 </viewController>
@@ -2481,7 +2480,7 @@ DQ
                                                 <rect key="frame" x="0.0" y="17" width="432" height="551"/>
                                                 <clipView key="contentView" id="KSB-fG-4SN">
                                                     <rect key="frame" x="1" y="0.0" width="430" height="550"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="l1D-Jd-Cly" viewBased="YES" id="bSA-4p-g3s">
                                                             <rect key="frame" x="0.0" y="0.0" width="430" height="525"/>
@@ -2692,7 +2691,7 @@ DQ
                         <outlet property="scNewWord" destination="LrN-UA-Jhg" id="sxV-XW-YrL"/>
                         <outlet property="sfNewWord" destination="tTP-k6-3q6" id="6l6-mO-BX7"/>
                         <outlet property="tableView" destination="bSA-4p-g3s" id="DO7-Qe-vzq"/>
-                        <outlet property="tfTableStatus" destination="sF8-z5-7nv" id="3vU-p6-ScG"/>
+                        <outlet property="tfStatusText" destination="sF8-z5-7nv" id="3vU-p6-ScG"/>
                         <outlet property="wvDict" destination="gHo-Yg-Cdv" id="Y9g-gl-Xn4"/>
                     </connections>
                 </viewController>
@@ -3105,7 +3104,7 @@ DQ
                                                 <rect key="frame" x="0.0" y="17" width="432" height="551"/>
                                                 <clipView key="contentView" id="yKO-ui-ZqI">
                                                     <rect key="frame" x="1" y="0.0" width="430" height="550"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="zWy-A4-THI" viewBased="YES" id="NqU-P3-ciK">
                                                             <rect key="frame" x="0.0" y="0.0" width="627" height="525"/>
@@ -3544,7 +3543,7 @@ DQ
                         <outlet property="scFilter" destination="Kv2-KG-SLC" id="mz9-ry-PMm"/>
                         <outlet property="sfFilter" destination="k4T-Mi-7bE" id="mGh-6q-4HC"/>
                         <outlet property="tableView" destination="NqU-P3-ciK" id="ngY-Mi-EJ0"/>
-                        <outlet property="tfTableStatus" destination="Gqc-yq-vq1" id="dQm-HQ-8AA"/>
+                        <outlet property="tfStatusText" destination="Gqc-yq-vq1" id="dQm-HQ-8AA"/>
                         <outlet property="wvDict" destination="mBY-hW-ews" id="jBh-C5-Htb"/>
                     </connections>
                 </viewController>
@@ -4060,7 +4059,7 @@ Gw
                                 <rect key="frame" x="15" y="63" width="453" height="318"/>
                                 <clipView key="contentView" id="AdB-Oe-Heb">
                                     <rect key="frame" x="1" y="0.0" width="451" height="317"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" autosaveColumns="NO" rowSizeStyle="automatic" headerView="SjH-aE-8Io" viewBased="YES" id="qJx-Ej-Lul">
                                             <rect key="frame" x="0.0" y="0.0" width="547" height="292"/>
