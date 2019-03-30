@@ -165,13 +165,13 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
     
     func onGetData() {
         ddLang.dataSource = vm.arrLanguages.map { $0.LANGNAME }
-        ddLang.selectRow(vm.selectedLangIndex)
     }
     
     func onUpdateLang() {
         let item = vm.selectedLang!
         langCell.textLabel!.text = item.LANGNAME
-        
+        ddLang.selectRow(vm.selectedLangIndex)
+
         ddVoice.dataSource = vm.arriOSVoices.map { $0.VOICENAME }
         onUpdateiOSVoice()
         
@@ -201,18 +201,17 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
     }
     
     func onUpdateDictNote() {
-        if vm.arrDictsNote.isEmpty {
+        let item = vm.selectedDictNote
+        if item.DICTNAME.isEmpty {
             // if the label text is set to an empty string,
             // it will remain to be empty and can no longer be changed. (why ?)
             dictNoteCell.textLabel!.text = " "
             dictNoteCell.detailTextLabel!.text = " "
         } else {
-            let item = vm.selectedDictNote
             dictNoteCell.textLabel!.text = item.DICTNAME
             dictNoteCell.detailTextLabel!.text = item.URL ?? ""
-            dictNoteCell.setNeedsDisplay()
-            ddDictNote.selectRow(vm.selectedDictNoteIndex)
         }
+        ddDictNote.selectRow(vm.selectedDictNoteIndex)
     }
 
     func onUpdateTextbook() {

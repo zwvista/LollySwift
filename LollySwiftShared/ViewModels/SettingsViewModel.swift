@@ -198,7 +198,6 @@ class SettingsViewModel: NSObject {
 
     var arrAutoCorrect = [MAutoCorrect]()
     
-    typealias ActionClosure = () -> ()
     weak var delegate: SettingsViewModelDelegate?
     
     func getData() -> Observable<()> {
