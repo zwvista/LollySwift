@@ -117,10 +117,6 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
             self.lblPartFromTitle.isEnabled = b2 && !self.vm.isSinglePart
             self.vm.updateToType().subscribe().disposed(by: self.disposeBag)
         }
-        ddToType.cancelAction = {
-            // Why do we need this?
-            self.btnToType.titleLabel?.text = self.ddToType.selectedItem
-        }
 
         ddUnitTo.anchorView = unitToCell
         ddUnitTo.selectionAction = { [unowned self] (index: Int, item: String) in
@@ -170,7 +166,7 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
     func onUpdateLang() {
         let item = vm.selectedLang!
         langCell.textLabel!.text = item.LANGNAME
-        ddLang.selectRow(vm.selectedLangIndex)
+        ddLang.selectIndex(vm.selectedLangIndex)
 
         ddVoice.dataSource = vm.arriOSVoices.map { $0.VOICENAME }
         onUpdateiOSVoice()
@@ -189,7 +185,7 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
         let item = vm.selectediOSVoice
         voiceCell.textLabel!.text = item.VOICENAME
         voiceCell.detailTextLabel!.text = item.VOICELANG
-        ddVoice.selectRow(vm.selectediOSVoiceIndex)
+        ddVoice.selectIndex(vm.selectediOSVoiceIndex)
     }
     
     func onUpdateDictItem() {
@@ -197,7 +193,7 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
         dictItemCell.textLabel!.text = item.DICTNAME
         let item2 = vm.arrDictsMean.first { $0.DICTNAME == item.DICTNAME }
         dictItemCell.detailTextLabel!.text = item2?.URL ?? ""
-        ddDictItem.selectRow(vm.selectedDictItemIndex)
+        ddDictItem.selectIndex(vm.selectedDictItemIndex)
     }
     
     func onUpdateDictNote() {
@@ -211,15 +207,15 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
             dictNoteCell.textLabel!.text = item.DICTNAME
             dictNoteCell.detailTextLabel!.text = item.URL ?? ""
         }
-        ddDictNote.selectRow(vm.selectedDictNoteIndex)
+        ddDictNote.selectIndex(vm.selectedDictNoteIndex)
     }
 
     func onUpdateTextbook() {
         let item = vm.selectedTextbook!
         textbookCell.textLabel!.text = item.TEXTBOOKNAME
         textbookCell.detailTextLabel!.text = "\(vm.unitCount) Units"
-        ddTextbook.selectRow(vm.selectedTextbookIndex)
-        ddToType.selectRow(vm.toType)
+        ddTextbook.selectIndex(vm.selectedTextbookIndex)
+        ddToType.selectIndex(vm.toType)
         ddToType.selectionAction!(vm.toType, ddToType.selectedItem!)
         ddUnitFrom.dataSource = vm.arrUnits.map { $0.label }
         onUpdateUnitFrom()

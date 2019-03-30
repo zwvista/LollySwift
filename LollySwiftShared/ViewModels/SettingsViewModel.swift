@@ -216,10 +216,11 @@ class SettingsViewModel: NSObject {
     }
 
     func setSelectedLang(_ lang: MLanguage) -> Observable<()> {
+        let isinit = USLANGID == lang.ID
         selectedLang = lang
         USLANGID = selectedLang.ID
         selectedUSLang2 = arrUserSettings.first { $0.KIND == 2 && $0.ENTITYID == self.USLANGID }!
-        selectedUSLang3 = arrUserSettings.first { $0.KIND == 4 && $0.ENTITYID == self.USLANGID }!
+        selectedUSLang3 = arrUserSettings.first { $0.KIND == 3 && $0.ENTITYID == self.USLANGID }!
         let arrDicts = USDICTITEMS.split("\r\n")
         return Observable.zip(MDictMean.getDataByLang(USLANGID),
                               MDictNote.getDataByLang(USLANGID),
@@ -251,7 +252,12 @@ class SettingsViewModel: NSObject {
                 if self.arriOSVoices.isEmpty { self.arriOSVoices.append(MVoice()) }
                 self.selectedMacVoice = self.arrMacVoices.first { $0.ID == self.USMACVOICEID } ?? self.arrMacVoices[0]
                 self.selectediOSVoice = self.arriOSVoices.first { $0.ID == self.USIOSVOICEID } ?? self.arriOSVoices[0]
-                return self.updateLang()
+                if isinit {
+                    self.delegate?.onUpdateLang()
+                    return Observable.just(())
+                } else {
+                    return self.updateLang()
+                }
             }
     }
     
