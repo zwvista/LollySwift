@@ -36,7 +36,7 @@ class MDictionary: NSObject, Codable {
     }
 }
 
-class MDictMean : MDictionary {
+class MDictMean: MDictionary {
     static func getDataByLang(_ langid: Int) -> Observable<[MDictMean]> {
         // SQL: SELECT * FROM VDICTSMEAN WHERE LANGIDFROM=?
         let url = "\(CommonApi.url)VDICTSMEAN?transform=1&filter=LANGIDFROM,eq,\(langid)&order[]=SEQNUM&order[]=DICTNAME"
@@ -55,7 +55,7 @@ class MDictMean : MDictionary {
 }
 
 @objcMembers
-class MDictItem : NSObject {
+class MDictItem: NSObject {
     var DICTID = ""
     var DICTNAME = ""
     
@@ -74,7 +74,7 @@ class MDictItem : NSObject {
     }
 }
 
-class MDictNote : MDictionary {
+class MDictNote: MDictionary {
     static func getDataByLang(_ langid: Int) -> Observable<[MDictNote]> {
         // SQL: SELECT * FROM VDICTSNOTE WHERE LANGIDFROM = ?
         let url = "\(CommonApi.url)VDICTSNOTE?transform=1&filter=LANGIDFROM,eq,\(langid)"

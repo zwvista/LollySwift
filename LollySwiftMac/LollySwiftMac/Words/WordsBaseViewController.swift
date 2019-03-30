@@ -35,8 +35,9 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
         settingsChanged()
     }
     
-    // Prenvent the window controller from being released
-    // The window controller's settingsChanged method needs to be called in SettingsViewController.close
+    // Take a reference to the window controller in order to prevent it from being released
+    // If the window controller were released, we would not be able to update the dictionaries
+    // by calling its settingsChanged method in SettingsViewController.close
     var wc: WordsBaseWindowController!
     override func viewDidAppear() {
         super.viewDidAppear()
