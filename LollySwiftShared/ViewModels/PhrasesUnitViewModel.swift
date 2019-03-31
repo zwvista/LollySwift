@@ -104,7 +104,7 @@ class PhrasesUnitViewModel: NSObject {
                 let phraseid = itemLang.ID
                 let b = itemLang.combineTranslation(item.TRANSLATION)
                 item.TRANSLATION = itemLang.TRANSLATION
-                return b ? MLangPhrase.update(phraseid, translation: item.TRANSLATION ?? "").map { _ in phraseid } : Observable.just(phraseid)
+                return b ? MLangPhrase.update(phraseid, translation: item.TRANSLATION ?? "").map { phraseid } : Observable.just(phraseid)
             }
         }.flatMap { phraseid -> Observable<Int> in
             item.PHRASEID = phraseid

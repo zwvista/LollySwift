@@ -76,7 +76,7 @@ class MLangWord: NSObject, Codable, MWordProtocol {
     }
 
     static func update(item: MLangWord) -> Observable<()> {
-        // SQL: UPDATE LANGWORDS SET WORD=?, LEVEL=? WHERE ID=?
+        // SQL: UPDATE LANGWORDS SET WORD=?, NOTE=? WHERE ID=?
         let url = "\(CommonApi.url)LANGWORDS/\(item.ID)"
         return RestApi.update(url: url, body: try! item.toJSONString(prettyPrint: false)!).map { print($0) }
     }

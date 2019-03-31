@@ -62,11 +62,11 @@ class MLangPhrase: NSObject, Codable, MPhraseProtocol {
         return RestApi.getArray(url: url, keyPath: "LANGPHRASES")
     }
 
-    static func update(_ id: Int, translation: String) -> Observable<String> {
+    static func update(_ id: Int, translation: String) -> Observable<()> {
         // SQL: UPDATE LANGPHRASES SET TRANSLATION=? WHERE ID=?
         let url = "\(CommonApi.url)LANGPHRASES/\(id)"
         let body = "TRANSLATION=\(translation)"
-        return RestApi.update(url: url, body: body)
+        return RestApi.update(url: url, body: body).map { print($0) }
     }
     
     static func update(item: MLangPhrase) -> Observable<()> {

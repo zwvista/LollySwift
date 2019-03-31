@@ -69,7 +69,7 @@ class WordsUnitViewModel: WordsBaseViewModel {
                                     return MLangWord.update(item: itemLang).map { result in print(result); return wordid }
                                 } else {
                                     // existing word
-                                    return MLangWord.delete(wordid).flatMap { result -> Observable<Int> in print(result); return f() }
+                                    return MLangWord.delete(wordid).flatMap { f() }
                                 }
                             } else {
                                 // non-exclusive
@@ -102,7 +102,7 @@ class WordsUnitViewModel: WordsBaseViewModel {
                 let wordid = itemLang.ID
                 let b = itemLang.combineNote(item.NOTE)
                 item.NOTE = itemLang.NOTE
-                return b ? MLangWord.update(wordid, note: item.NOTE ?? "").map { result in print(result); return wordid } : Observable.just(wordid)
+                return b ? MLangWord.update(wordid, note: item.NOTE ?? "").map { wordid } : Observable.just(wordid)
             }
         }.flatMap { wordid -> Observable<Int> in
             item.WORDID = wordid
