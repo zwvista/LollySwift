@@ -17,6 +17,9 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation {
         return vm.arrWordsFiltered ?? vm.arrWords
     }
     
+    @IBOutlet weak var btnPrevious: NSButton!
+    @IBOutlet weak var btnNext: NSButton!
+
     // https://developer.apple.com/videos/play/wwdc2011/120/
     // https://stackoverflow.com/questions/2121907/drag-drop-reorder-rows-on-nstableview
     let tableRowDragType = NSPasteboard.PasteboardType(rawValue: "private.table-row")
@@ -29,6 +32,9 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation {
     override func settingsChanged() {
         refreshTableView(self)
         super.settingsChanged()
+        let b = vmSettings.toType == 2
+        btnPrevious.isEnabled = !b
+        btnNext.isEnabled = !b
     }
 
     override var representedObject: Any? {
@@ -113,7 +119,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation {
         guard !newWord.isEmpty else {return}
         let item = vm.newUnitWord()
         item.WORD = vm.vmSettings.autoCorrectInput(text: newWord)
-        self.sfNewWord.stringValue = ""
+        self.tfNewWord.stringValue = ""
         self.newWord = ""
         WordsUnitViewModel.create(item: item).subscribe(onNext: {
             item.ID = $0
@@ -216,6 +222,18 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation {
         self.tableView.reloadData()
     }
     
+    @IBAction func previousUnitPart(_ sender: AnyObject) {
+        vmSettings.previousUnitPart().subscribe {
+            self.settingsChanged()
+            }.disposed(by: disposeBag)
+    }
+    
+    @IBAction func nextUnitPart(_ sender: AnyObject) {
+        vmSettings.nextUnitPart().subscribe {
+            self.settingsChanged()
+            }.disposed(by: disposeBag)
+    }
+
     override func updateStatusText() {
         tfStatusText.stringValue = "\(vmSettings.selectedLang.LANGNAME) \(vmSettings.USUNITFROMSTR) \(vmSettings.USPARTFROMSTR) \(vmSettings.USUNITTOSTR) \(vmSettings.USPARTTOSTR) \(tableView.numberOfRows) Words "
     }

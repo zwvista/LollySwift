@@ -14,10 +14,9 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     var selectedDictItemIndex = 0
     
     @IBOutlet weak var wvDict: WKWebView!
-    @IBOutlet weak var scNewWord: NSSegmentedControl!
-    @IBOutlet weak var sfNewWord: NSSearchField!
+    @IBOutlet weak var tfNewWord: NSTextField!
     @IBOutlet weak var scFilter: NSSegmentedControl!
-    @IBOutlet weak var sfFilter: NSSearchField!
+    @IBOutlet weak var tfFilter: NSTextField!
     @IBOutlet weak var tableView: NSTableView!
     @IBOutlet weak var tfStatusText: NSTextField!
 
@@ -53,23 +52,15 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
         let reason = dict["NSTextMovement"] as! NSNumber
         let code = Int(reason.int32Value)
         guard code == NSReturnTextMovement else {return}
-        if searchfield === sfNewWord {
-            scNewWordClick(self)
-        } else if searchfield === sfFilter {
+        if searchfield === tfNewWord {
+            if !newWord.isEmpty {
+                addNewWord()
+            }
+        } else if searchfield === tfFilter {
             if !filterText.isEmpty {
                 scFilter.selectedSegment = 1
             }
             scFilter.performClick(self)
-        }
-    }
-    
-    @IBAction func scNewWordClick(_ sender: Any) {
-        commitEditing()
-        guard !newWord.isEmpty else {return}
-        if scNewWord.selectedSegment == 0 {
-            addNewWord()
-        } else {
-            searchWord(word: newWord)
         }
     }
 
@@ -255,7 +246,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
             MacApi.openPage(url)
         }
     }
-    
+
     deinit {
         print("DEBUG: \(self.className) deinit")
     }

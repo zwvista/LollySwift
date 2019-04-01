@@ -62,7 +62,7 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
             item.ID = $0
             self.vm.arrWords.append(item)
             self.tableView.reloadData()
-            self.sfNewWord.stringValue = ""
+            self.tfNewWord.stringValue = ""
             self.newWord = ""
         }).disposed(by: disposeBag)
     }

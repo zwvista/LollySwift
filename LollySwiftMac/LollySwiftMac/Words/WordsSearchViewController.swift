@@ -40,7 +40,7 @@ class WordsSearchViewController: WordsBaseViewController {
         item.NOTE = ""
         arrWords.append(item)
         tableView.reloadData()
-        sfNewWord.stringValue = ""
+        tfNewWord.stringValue = ""
         newWord = ""
     }
     
