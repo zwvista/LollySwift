@@ -17,6 +17,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     @IBOutlet weak var tfNewWord: NSTextField!
     @IBOutlet weak var scFilter: NSSegmentedControl!
     @IBOutlet weak var tfFilter: NSTextField!
+    @IBOutlet weak var chkLevelGE0Only: NSButton!
     @IBOutlet weak var tableView: NSTableView!
     @IBOutlet weak var tfStatusText: NSTextField!
 
@@ -24,6 +25,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     
     @objc var newWord = ""
     @objc var filterText = ""
+    @objc var levelge0only = false
     var selectedWord = ""
     var dictStatus = DictWebViewStatus.ready
     let synth = NSSpeechSynthesizer()

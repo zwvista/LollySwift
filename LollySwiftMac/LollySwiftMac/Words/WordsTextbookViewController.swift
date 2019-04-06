@@ -91,11 +91,7 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
 
     @IBAction func filterWord(_ sender: Any) {
         let n = (sender as! NSSegmentedControl).selectedSegment
-        if n == 0 {
-            vm.arrWordsFiltered = nil
-        } else {
-            vm.filterWordsForSearchText(filterText, scope: "Word")
-        }
+        vm.applyFilters(filterText: n == 0 ? "" : filterText, scope: "Word", levelge0only: levelge0only)
         self.tableView.reloadData()
     }
 }

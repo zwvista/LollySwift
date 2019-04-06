@@ -22,7 +22,7 @@ class WordsLangViewModel: WordsBaseViewModel {
         }).disposed(by: disposeBag)
     }
     
-    func filterWordsForSearchText(_ searchText: String, scope: String) {
+    func applyFilters(_ searchText: String, scope: String) {
         arrWordsFiltered = arrWords.filter { $0.WORD.contains(searchText) }
     }
     

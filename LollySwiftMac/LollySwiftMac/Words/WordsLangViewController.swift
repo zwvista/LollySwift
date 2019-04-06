@@ -118,7 +118,7 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
         if n == 0 {
             vm.arrWordsFiltered = nil
         } else {
-            vm.filterWordsForSearchText(filterText, scope: "Word")
+            vm.applyFilters(filterText, scope: "Word")
         }
         self.tableView.reloadData()
     }

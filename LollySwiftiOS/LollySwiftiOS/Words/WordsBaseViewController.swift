@@ -16,7 +16,7 @@ class WordsBaseViewController: UITableViewController {
     
     func setupSearchController(delegate: UISearchBarDelegate & UISearchResultsUpdating) {
         // https://stackoverflow.com/questions/28326269/uisearchbar-presented-by-uisearchcontroller-in-table-header-view-animates-too-fa
-        searchController.dimsBackgroundDuringPresentation = true
+        //searchController.dimsBackgroundDuringPresentation = true
         searchBar.scopeButtonTitles = ["Word", "Note"]
         searchController.searchResultsUpdater = delegate
         searchBar.delegate = delegate

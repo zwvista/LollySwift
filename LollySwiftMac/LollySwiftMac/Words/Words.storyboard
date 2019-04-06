@@ -17,20 +17,27 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2hs-X4-l5R">
-                                <rect key="frame" x="0.0" y="568" width="451" height="32"/>
+                                <rect key="frame" x="0.0" y="568" width="567" height="32"/>
                                 <subviews>
                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="E8d-BH-EMc">
                                         <rect key="frame" x="6" y="5" width="96" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="96" id="9nE-RB-Ak4"/>
                                         </constraints>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="pDu-y2-NPV">
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" title="New Word" placeholderString="New Word" drawsBackground="YES" id="pDu-y2-NPV">
                                             <font key="font" usesAppearanceFont="YES"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                         <connections>
-                                            <binding destination="F8i-pe-Ate" name="value" keyPath="newWord" id="Ggd-8Z-u54"/>
+                                            <binding destination="F8i-pe-Ate" name="value" keyPath="newWord" id="Ddq-61-gRU">
+                                                <dictionary key="options">
+                                                    <string key="NSMultipleValuesPlaceholder">New Word</string>
+                                                    <string key="NSNoSelectionPlaceholder">New Word</string>
+                                                    <string key="NSNotApplicablePlaceholder">New Word</string>
+                                                    <string key="NSNullPlaceholder">New Word</string>
+                                                </dictionary>
+                                            </binding>
                                             <outlet property="delegate" destination="F8i-pe-Ate" id="ob3-mw-6dQ"/>
                                         </connections>
                                     </textField>
@@ -59,9 +66,19 @@
                                                     <font key="font" usesAppearanceFont="YES"/>
                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    <connections>
+                                                        <binding destination="F8i-pe-Ate" name="value" keyPath="filterText" id="qAO-Hp-2RZ"/>
+                                                    </connections>
                                                 </textFieldCell>
                                                 <connections>
-                                                    <binding destination="F8i-pe-Ate" name="value" keyPath="filterText" id="VXR-4e-YNq"/>
+                                                    <binding destination="F8i-pe-Ate" name="value" keyPath="filterText" id="hOC-fr-iN7">
+                                                        <dictionary key="options">
+                                                            <string key="NSMultipleValuesPlaceholder">Filter</string>
+                                                            <string key="NSNoSelectionPlaceholder">Filter</string>
+                                                            <string key="NSNotApplicablePlaceholder">Filter</string>
+                                                            <string key="NSNullPlaceholder">Filter</string>
+                                                        </dictionary>
+                                                    </binding>
                                                     <outlet property="delegate" destination="F8i-pe-Ate" id="Zm7-hq-rEG"/>
                                                 </connections>
                                             </textField>
@@ -75,8 +92,19 @@
                                             <real value="3.4028234663852886e+38"/>
                                         </customSpacing>
                                     </stackView>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="azS-bq-eKL">
+                                        <rect key="frame" x="311" y="7" width="110" height="18"/>
+                                        <buttonCell key="cell" type="check" title="Level&gt;=0 Only" bezelStyle="regularSquare" imagePosition="left" inset="2" id="knB-VA-rN0">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="filterWord:" target="F8i-pe-Ate" id="cYr-JK-kIg"/>
+                                            <binding destination="F8i-pe-Ate" name="value" keyPath="levelge0only" id="gRn-yE-dZN"/>
+                                        </connections>
+                                    </button>
                                     <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fmH-1I-baz">
-                                        <rect key="frame" x="313" y="5" width="138" height="22"/>
+                                        <rect key="frame" x="429" y="5" width="138" height="22"/>
                                         <subviews>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KGz-3d-agF">
                                                 <rect key="frame" x="-6" y="-6" width="93" height="32"/>
@@ -114,6 +142,7 @@
                                     <constraint firstItem="IWY-YU-8ee" firstAttribute="top" secondItem="fmH-1I-baz" secondAttribute="top" id="6NT-7I-b89"/>
                                     <constraint firstAttribute="height" constant="32" id="C2z-9h-rqy"/>
                                     <constraint firstItem="E8d-BH-EMc" firstAttribute="bottom" secondItem="IWY-YU-8ee" secondAttribute="bottom" id="CXa-1J-Uvf"/>
+                                    <constraint firstItem="azS-bq-eKL" firstAttribute="centerY" secondItem="2hs-X4-l5R" secondAttribute="centerY" id="cdg-jh-Gts"/>
                                     <constraint firstItem="E8d-BH-EMc" firstAttribute="top" secondItem="IWY-YU-8ee" secondAttribute="top" id="kvH-VL-td3"/>
                                     <constraint firstItem="IWY-YU-8ee" firstAttribute="centerY" secondItem="fmH-1I-baz" secondAttribute="centerY" id="qpv-9v-om0"/>
                                     <constraint firstItem="fmH-1I-baz" firstAttribute="centerY" secondItem="2hs-X4-l5R" secondAttribute="centerY" id="ugi-1M-sDs"/>
@@ -122,8 +151,10 @@
                                     <integer value="1000"/>
                                     <integer value="1000"/>
                                     <integer value="1000"/>
+                                    <integer value="1000"/>
                                 </visibilityPriorities>
                                 <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
@@ -538,6 +569,7 @@
                     <connections>
                         <outlet property="btnNext" destination="fOj-wT-Aqt" id="Qv1-c9-e0h"/>
                         <outlet property="btnPrevious" destination="KGz-3d-agF" id="npL-eO-cK2"/>
+                        <outlet property="chkLevelGE0Only" destination="azS-bq-eKL" id="URS-Zi-evM"/>
                         <outlet property="scFilter" destination="RtU-w4-rmU" id="5fZ-jf-cIo"/>
                         <outlet property="tableView" destination="8Zf-06-OzS" id="Vn7-va-cpG"/>
                         <outlet property="tfFilter" destination="Ntb-I3-XGS" id="Wl9-kJ-Nnx"/>
@@ -1228,13 +1260,20 @@ Gw
                                         <constraints>
                                             <constraint firstAttribute="width" constant="96" id="zw3-98-elI"/>
                                         </constraints>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="dlO-ip-YzM">
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="New Word" drawsBackground="YES" id="dlO-ip-YzM">
                                             <font key="font" usesAppearanceFont="YES"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                         <connections>
-                                            <binding destination="UkS-Xi-ogF" name="value" keyPath="newWord" id="Hkv-SE-IyN"/>
+                                            <binding destination="UkS-Xi-ogF" name="value" keyPath="newWord" id="v5U-Bn-9RF">
+                                                <dictionary key="options">
+                                                    <string key="NSMultipleValuesPlaceholder">New Word</string>
+                                                    <string key="NSNoSelectionPlaceholder">New Word</string>
+                                                    <string key="NSNotApplicablePlaceholder">New Word</string>
+                                                    <string key="NSNullPlaceholder">New Word</string>
+                                                </dictionary>
+                                            </binding>
                                             <outlet property="delegate" destination="UkS-Xi-ogF" id="qRG-sZ-9Mi"/>
                                         </connections>
                                     </textField>
@@ -1259,13 +1298,20 @@ Gw
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="96" id="4lK-yt-2T9"/>
                                                 </constraints>
-                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="ttQ-gT-Jsg">
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Filter" drawsBackground="YES" id="ttQ-gT-Jsg">
                                                     <font key="font" usesAppearanceFont="YES"/>
                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                                 <connections>
-                                                    <binding destination="UkS-Xi-ogF" name="value" keyPath="filterText" id="Eyy-IT-1PA"/>
+                                                    <binding destination="UkS-Xi-ogF" name="value" keyPath="filterText" id="5vL-En-1o3">
+                                                        <dictionary key="options">
+                                                            <string key="NSMultipleValuesPlaceholder">Filter</string>
+                                                            <string key="NSNoSelectionPlaceholder">Filter</string>
+                                                            <string key="NSNotApplicablePlaceholder">Filter</string>
+                                                            <string key="NSNullPlaceholder">Filter</string>
+                                                        </dictionary>
+                                                    </binding>
                                                     <outlet property="delegate" destination="UkS-Xi-ogF" id="biJ-11-a8n"/>
                                                 </connections>
                                             </textField>
@@ -2409,13 +2455,20 @@ DQ
                                         <constraints>
                                             <constraint firstAttribute="width" constant="96" id="G9G-ht-G8M"/>
                                         </constraints>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="wrq-Jg-pKJ">
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="New Word" drawsBackground="YES" id="wrq-Jg-pKJ">
                                             <font key="font" usesAppearanceFont="YES"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                         <connections>
-                                            <binding destination="ECR-Tq-pby" name="value" keyPath="newWord" id="kf3-2b-z8t"/>
+                                            <binding destination="ECR-Tq-pby" name="value" keyPath="newWord" id="CYL-VK-gTR">
+                                                <dictionary key="options">
+                                                    <string key="NSMultipleValuesPlaceholder">New Word</string>
+                                                    <string key="NSNoSelectionPlaceholder">New Word</string>
+                                                    <string key="NSNotApplicablePlaceholder">New Word</string>
+                                                    <string key="NSNullPlaceholder">New Word</string>
+                                                </dictionary>
+                                            </binding>
                                             <outlet property="delegate" destination="ECR-Tq-pby" id="a42-uE-WyS"/>
                                         </connections>
                                     </textField>
@@ -3028,13 +3081,20 @@ DQ
                                         <constraints>
                                             <constraint firstAttribute="width" constant="96" id="HBF-wN-abA"/>
                                         </constraints>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="s5w-Wy-pTB">
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Filter" drawsBackground="YES" id="s5w-Wy-pTB">
                                             <font key="font" usesAppearanceFont="YES"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                         <connections>
-                                            <binding destination="S5w-0q-IQt" name="value" keyPath="filterText" id="fex-rv-Xe4"/>
+                                            <binding destination="S5w-0q-IQt" name="value" keyPath="filterText" id="KpO-pi-GNz">
+                                                <dictionary key="options">
+                                                    <string key="NSMultipleValuesPlaceholder">Filter</string>
+                                                    <string key="NSNoSelectionPlaceholder">Filter</string>
+                                                    <string key="NSNotApplicablePlaceholder">Filter</string>
+                                                    <string key="NSNullPlaceholder">Filter</string>
+                                                </dictionary>
+                                            </binding>
                                             <outlet property="delegate" destination="S5w-0q-IQt" id="Xf0-4K-fE6"/>
                                         </connections>
                                     </textField>

@@ -28,8 +28,18 @@ class WordsUnitViewModel: WordsBaseViewModel {
         }
     }
     
-    func filterWordsForSearchText(_ searchText: String, scope: String) {
-        arrWordsFiltered = arrWords.filter { $0.WORD.contains(searchText) }
+    func applyFilters(filterText: String, scope: String, levelge0only: Bool) {
+        if filterText.isEmpty && !levelge0only {
+            arrWordsFiltered = nil
+        } else {
+            arrWordsFiltered = arrWords
+            if !filterText.isEmpty {
+                arrWordsFiltered = scope == "Word" ? arrWordsFiltered!.filter { $0.WORD.contains(filterText) } : arrWordsFiltered!.filter { $0.NOTE?.contains(filterText) ?? false }
+            }
+            if levelge0only {
+                arrWordsFiltered = arrWordsFiltered!.filter { $0.LEVEL >= 0 }
+            }
+        }
     }
     
     static func update(_ id: Int, seqnum: Int) -> Observable<()> {
