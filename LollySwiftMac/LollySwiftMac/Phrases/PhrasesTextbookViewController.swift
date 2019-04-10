@@ -88,7 +88,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
 
 class PhrasesTextbookWindowController: PhrasesBaseWindowController {
     @IBOutlet weak var scFilter: NSSegmentedControl!
-    @IBOutlet weak var tfFilterText: NSTextField!
+    @IBOutlet weak var tfFilter: NSTextField!
     @objc var filterText = ""
     
     override func windowDidLoad() {
@@ -98,7 +98,7 @@ class PhrasesTextbookWindowController: PhrasesBaseWindowController {
     
     func controlTextDidEndEditing(_ obj: Notification) {
         let searchfield = obj.object as! NSControl
-        guard searchfield === tfFilterText else {return}
+        guard searchfield === tfFilter else {return}
         let dict = (obj as NSNotification).userInfo!
         let reason = dict["NSTextMovement"] as! NSNumber
         let code = Int(reason.int32Value)
@@ -110,6 +110,6 @@ class PhrasesTextbookWindowController: PhrasesBaseWindowController {
     }
     
     func windowWillClose(_ notification: Notification) {
-        tfFilterText.unbindAll()
+        tfFilter.unbindAll()
     }
 }

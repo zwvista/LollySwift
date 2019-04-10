@@ -61,6 +61,8 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
         } else if searchfield === tfFilter {
             if !filterText.isEmpty {
                 scFilter.selectedSegment = 1
+                filterText = vmSettings.autoCorrectInput(text: filterText)
+                tfFilter.stringValue = filterText
             }
             scFilter.performClick(self)
         }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -419,8 +419,8 @@
                                 </popUpButtonCell>
                                 <connections>
                                     <binding destination="Q0n-G4-6uI" name="content" keyPath="arrangedObjects" id="y5H-eD-3Yk"/>
-                                    <binding destination="Q0n-G4-6uI" name="contentObjects" keyPath="arrangedObjects.value" previousBinding="y5H-eD-3Yk" id="fCn-Fx-CMI"/>
                                     <binding destination="Q0n-G4-6uI" name="contentValues" keyPath="arrangedObjects.label" previousBinding="fCn-Fx-CMI" id="R4P-s8-rqK"/>
+                                    <binding destination="Q0n-G4-6uI" name="contentObjects" keyPath="arrangedObjects.value" previousBinding="y5H-eD-3Yk" id="fCn-Fx-CMI"/>
                                     <binding destination="9DB-NE-4YZ" name="selectedObject" keyPath="item.UNIT" previousBinding="R4P-s8-rqK" id="kgX-Cg-CQD"/>
                                 </connections>
                             </popUpButton>
@@ -447,8 +447,8 @@
                                 </popUpButtonCell>
                                 <connections>
                                     <binding destination="f9V-Yc-QAP" name="content" keyPath="arrangedObjects" id="63H-mc-LJF"/>
-                                    <binding destination="f9V-Yc-QAP" name="contentObjects" keyPath="arrangedObjects.value" previousBinding="63H-mc-LJF" id="fur-hU-AMx"/>
                                     <binding destination="f9V-Yc-QAP" name="contentValues" keyPath="arrangedObjects.label" previousBinding="fur-hU-AMx" id="Hci-Tw-CDr"/>
+                                    <binding destination="f9V-Yc-QAP" name="contentObjects" keyPath="arrangedObjects.value" previousBinding="63H-mc-LJF" id="fur-hU-AMx"/>
                                     <binding destination="9DB-NE-4YZ" name="selectedObject" keyPath="item.PART" previousBinding="Hci-Tw-CDr" id="4f7-ez-x7b"/>
                                 </connections>
                             </popUpButton>
@@ -1122,7 +1122,7 @@ Gw
                     </window>
                     <connections>
                         <outlet property="scFilter" destination="Bzv-q8-cCh" id="dbc-HV-yIu"/>
-                        <outlet property="tfFilterText" destination="qUX-lZ-cQc" id="JOz-Es-sYM"/>
+                        <outlet property="tfFilter" destination="qUX-lZ-cQc" id="JOz-Es-sYM"/>
                         <segue destination="CET-Kl-kcd" kind="relationship" relationship="window.shadowedContentViewController" id="ucx-Xf-ffo"/>
                     </connections>
                 </windowController>
@@ -1226,7 +1226,7 @@ Gw
                     </window>
                     <connections>
                         <outlet property="scFilter" destination="xOt-9C-VuQ" id="hgH-OM-ViK"/>
-                        <outlet property="tfFilterText" destination="WJ1-Yl-gvw" id="oTw-i4-YbV"/>
+                        <outlet property="tfFilter" destination="WJ1-Yl-gvw" id="oTw-i4-YbV"/>
                         <segue destination="dNa-67-Lx3" kind="relationship" relationship="window.shadowedContentViewController" id="Dgh-ov-anC"/>
                     </connections>
                 </windowController>
@@ -1703,8 +1703,8 @@ Gw
                                 </popUpButtonCell>
                                 <connections>
                                     <binding destination="IRJ-HO-8dx" name="content" keyPath="arrangedObjects" id="Xn8-71-dbk"/>
-                                    <binding destination="IRJ-HO-8dx" name="contentObjects" keyPath="arrangedObjects.value" previousBinding="Xn8-71-dbk" id="dv6-qw-qM2"/>
                                     <binding destination="IRJ-HO-8dx" name="contentValues" keyPath="arrangedObjects.label" previousBinding="dv6-qw-qM2" id="YUd-Je-pBV"/>
+                                    <binding destination="IRJ-HO-8dx" name="contentObjects" keyPath="arrangedObjects.value" previousBinding="Xn8-71-dbk" id="dv6-qw-qM2"/>
                                     <binding destination="u1Y-qY-rab" name="selectedObject" keyPath="item.UNIT" previousBinding="YUd-Je-pBV" id="IzY-AK-jTR"/>
                                 </connections>
                             </popUpButton>
@@ -1731,8 +1731,8 @@ Gw
                                 </popUpButtonCell>
                                 <connections>
                                     <binding destination="OFa-i8-Eih" name="content" keyPath="arrangedObjects" id="X2h-C8-rDG"/>
-                                    <binding destination="OFa-i8-Eih" name="contentObjects" keyPath="arrangedObjects.value" previousBinding="X2h-C8-rDG" id="aUU-jh-wZW"/>
                                     <binding destination="OFa-i8-Eih" name="contentValues" keyPath="arrangedObjects.label" previousBinding="aUU-jh-wZW" id="6Lb-e1-D5l"/>
+                                    <binding destination="OFa-i8-Eih" name="contentObjects" keyPath="arrangedObjects.value" previousBinding="X2h-C8-rDG" id="aUU-jh-wZW"/>
                                     <binding destination="u1Y-qY-rab" name="selectedObject" keyPath="item.PART" previousBinding="6Lb-e1-D5l" id="FGg-wa-mEn"/>
                                 </connections>
                             </popUpButton>
@@ -1940,10 +1940,10 @@ Gw
                                 </popUpButtonCell>
                                 <connections>
                                     <binding destination="br8-7N-txc" name="content" keyPath="arrangedObjects" id="Nto-Sw-fCf"/>
-                                    <binding destination="br8-7N-txc" name="contentObjects" keyPath="arrangedObjects.value" previousBinding="Nto-Sw-fCf" id="l6W-vD-hrV"/>
                                     <binding destination="br8-7N-txc" name="contentValues" keyPath="arrangedObjects.label" previousBinding="l6W-vD-hrV" id="dVK-YX-8M7"/>
-                                    <binding destination="XA9-AL-lPk" name="enabled" keyPath="unitChecked" id="DD0-ay-ScM"/>
+                                    <binding destination="br8-7N-txc" name="contentObjects" keyPath="arrangedObjects.value" previousBinding="Nto-Sw-fCf" id="l6W-vD-hrV"/>
                                     <binding destination="XA9-AL-lPk" name="selectedObject" keyPath="unit" previousBinding="dVK-YX-8M7" id="QHX-v3-B1A"/>
+                                    <binding destination="XA9-AL-lPk" name="enabled" keyPath="unitChecked" id="DD0-ay-ScM"/>
                                 </connections>
                             </popUpButton>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FZQ-Ed-o1H">
@@ -1972,10 +1972,10 @@ Gw
                                 </popUpButtonCell>
                                 <connections>
                                     <binding destination="fqH-n5-w4L" name="content" keyPath="arrangedObjects" id="TgZ-ec-dPr"/>
-                                    <binding destination="fqH-n5-w4L" name="contentObjects" keyPath="arrangedObjects.value" previousBinding="TgZ-ec-dPr" id="Fjw-y0-O76"/>
                                     <binding destination="fqH-n5-w4L" name="contentValues" keyPath="arrangedObjects.label" previousBinding="Fjw-y0-O76" id="SN3-LU-c5D"/>
-                                    <binding destination="XA9-AL-lPk" name="enabled" keyPath="partChecked" id="7RK-4A-Kt8"/>
+                                    <binding destination="fqH-n5-w4L" name="contentObjects" keyPath="arrangedObjects.value" previousBinding="TgZ-ec-dPr" id="Fjw-y0-O76"/>
                                     <binding destination="XA9-AL-lPk" name="selectedObject" keyPath="part" previousBinding="SN3-LU-c5D" id="9qI-B8-0jg"/>
+                                    <binding destination="XA9-AL-lPk" name="enabled" keyPath="partChecked" id="7RK-4A-Kt8"/>
                                 </connections>
                             </popUpButton>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="k7v-16-NRE">
@@ -2000,8 +2000,8 @@ Gw
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="XA9-AL-lPk" name="enabled" keyPath="seqnumChecked" id="xh6-68-dUf"/>
                                     <binding destination="XA9-AL-lPk" name="value" keyPath="seqnum" id="Jmk-oY-faE"/>
+                                    <binding destination="XA9-AL-lPk" name="enabled" keyPath="seqnumChecked" id="xh6-68-dUf"/>
                                 </connections>
                             </textField>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O1u-1Q-t0h">
@@ -2319,7 +2319,7 @@ Gw
                                         </tableView>
                                     </subviews>
                                 </clipView>
-                                <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="0.99685039370078743" horizontal="YES" id="zOL-Vp-uth">
+                                <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="zOL-Vp-uth">
                                     <rect key="frame" x="1" y="293" width="586" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>

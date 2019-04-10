@@ -91,7 +91,7 @@ class PhrasesLangViewController: PhrasesBaseViewController {
 
 class PhrasesLangWindowController: PhrasesBaseWindowController {
     @IBOutlet weak var scFilter: NSSegmentedControl!
-    @IBOutlet weak var tfFilterText: NSTextField!
+    @IBOutlet weak var tfFilter: NSTextField!
     @objc var filterText = ""
 
     override func windowDidLoad() {
@@ -101,19 +101,21 @@ class PhrasesLangWindowController: PhrasesBaseWindowController {
     
     func controlTextDidEndEditing(_ obj: Notification) {
         let searchfield = obj.object as! NSControl
-        guard searchfield === tfFilterText else {return}
+        guard searchfield === tfFilter else {return}
         let dict = (obj as NSNotification).userInfo!
         let reason = dict["NSTextMovement"] as! NSNumber
         let code = Int(reason.int32Value)
         guard code == NSReturnTextMovement else {return}
         if scFilter.selectedSegment == 0 {
             scFilter.selectedSegment = 1
+            filterText = vmSettings.autoCorrectInput(text: filterText)
+            tfFilter.stringValue = filterText
         }
         (contentViewController as! PhrasesLangViewController).filterPhrase(scFilter)
     }
     
     func windowWillClose(_ notification: Notification) {
-        tfFilterText.unbindAll()
+        tfFilter.unbindAll()
     }
 }
 

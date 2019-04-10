@@ -102,10 +102,13 @@ class PhrasesBaseViewController: NSViewController, LollyProtocol, NSTableViewDat
     }
 }
 
-class PhrasesBaseWindowController: NSWindowController, NSTextFieldDelegate, NSWindowDelegate {
+class PhrasesBaseWindowController: NSWindowController, NSTextFieldDelegate, NSWindowDelegate, LollyProtocol {
     
     override func windowDidLoad() {
         super.windowDidLoad()
+    }
+    
+    func settingsChanged() {
     }
 
     deinit {
