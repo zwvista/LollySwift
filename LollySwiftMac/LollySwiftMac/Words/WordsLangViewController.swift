@@ -114,11 +114,11 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
     }
 
     @IBAction func filterWord(_ sender: Any) {
-        let n = (sender as! NSSegmentedControl).selectedSegment
+        let n = scTextFilter.selectedSegment
         if n == 0 {
             vm.arrWordsFiltered = nil
         } else {
-            vm.applyFilters(textFilter, scope: "Word")
+            vm.applyFilters(textFilter: textFilter, scope: n == 1 ? "Word" : "Note", levelge0only: levelge0only)
         }
         self.tableView.reloadData()
     }

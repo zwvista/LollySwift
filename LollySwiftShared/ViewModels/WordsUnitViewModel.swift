@@ -29,12 +29,12 @@ class WordsUnitViewModel: WordsBaseViewModel {
     }
     
     func applyFilters(textFilter: String, scope: String, levelge0only: Bool, textbookFilter: Int) {
-        if textFilter.isEmpty && !levelge0only {
+        if textFilter.isEmpty && !levelge0only && textbookFilter == 0 {
             arrWordsFiltered = nil
         } else {
             arrWordsFiltered = arrWords
             if !textFilter.isEmpty {
-                arrWordsFiltered = scope == "Word" ? arrWordsFiltered!.filter { $0.WORD.contains(textFilter) } : arrWordsFiltered!.filter { $0.NOTE?.contains(textFilter) ?? false }
+                arrWordsFiltered = arrWordsFiltered!.filter { (scope == "Word" ? $0.WORD : $0.NOTE ?? "").contains(textFilter) }
             }
             if levelge0only {
                 arrWordsFiltered = arrWordsFiltered!.filter { $0.LEVEL >= 0 }

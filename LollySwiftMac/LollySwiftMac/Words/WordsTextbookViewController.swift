@@ -95,8 +95,8 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
     }
 
     @IBAction func filterWord(_ sender: Any) {
-        let n = (sender as! NSSegmentedControl).selectedSegment
-        vm.applyFilters(textFilter: n == 0 ? "" : textFilter, scope: "Word", levelge0only: levelge0only, textbookFilter: textbookFilter)
+        let n = scTextFilter.selectedSegment
+        vm.applyFilters(textFilter: n == 0 ? "" : textFilter, scope: n == 1 ? "Word" : "Note", levelge0only: levelge0only, textbookFilter: textbookFilter)
         self.tableView.reloadData()
     }
 }
