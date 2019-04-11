@@ -1097,7 +1097,7 @@ Gw
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                         <connections>
-                                            <binding destination="t1w-66-vYI" name="value" keyPath="filterText" id="lc9-0C-ueX">
+                                            <binding destination="t1w-66-vYI" name="value" keyPath="textFilter" id="lc9-0C-ueX">
                                                 <dictionary key="options">
                                                     <bool key="NSContinuouslyUpdatesValue" value="YES"/>
                                                 </dictionary>
@@ -1121,7 +1121,7 @@ Gw
                         </connections>
                     </window>
                     <connections>
-                        <outlet property="scFilter" destination="Bzv-q8-cCh" id="dbc-HV-yIu"/>
+                        <outlet property="scTextFilter" destination="Bzv-q8-cCh" id="dbc-HV-yIu"/>
                         <outlet property="tfFilter" destination="qUX-lZ-cQc" id="JOz-Es-sYM"/>
                         <segue destination="CET-Kl-kcd" kind="relationship" relationship="window.shadowedContentViewController" id="ucx-Xf-ffo"/>
                     </connections>
@@ -1202,7 +1202,7 @@ Gw
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                         <connections>
-                                            <binding destination="Ngy-o1-fVc" name="value" keyPath="filterText" id="qfO-ud-JcS">
+                                            <binding destination="Ngy-o1-fVc" name="value" keyPath="textFilter" id="qfO-ud-JcS">
                                                 <dictionary key="options">
                                                     <bool key="NSContinuouslyUpdatesValue" value="YES"/>
                                                 </dictionary>
@@ -1225,7 +1225,7 @@ Gw
                         </connections>
                     </window>
                     <connections>
-                        <outlet property="scFilter" destination="xOt-9C-VuQ" id="hgH-OM-ViK"/>
+                        <outlet property="scTextFilter" destination="xOt-9C-VuQ" id="hgH-OM-ViK"/>
                         <outlet property="tfFilter" destination="WJ1-Yl-gvw" id="oTw-i4-YbV"/>
                         <segue destination="dNa-67-Lx3" kind="relationship" relationship="window.shadowedContentViewController" id="Dgh-ov-anC"/>
                     </connections>

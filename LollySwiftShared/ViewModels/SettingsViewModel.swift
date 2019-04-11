@@ -166,6 +166,8 @@ class SettingsViewModel: NSObject {
     var selectedTextbookIndex: Int {
         return arrTextbooks.firstIndex { $0 == selectedTextbook } ?? 0
     }
+    @objc
+    var arrTextbookFilters = [MSelectItem]()
     
     @objc
     var arrUnits: [MSelectItem] {
@@ -244,6 +246,8 @@ class SettingsViewModel: NSObject {
                 self.selectedDictNote = self.arrDictsNote.first { $0.DICTID == self.USDICTNOTEID } ?? self.arrDictsNote[0]
                 self.arrTextbooks = result.2
                 self.selectedTextbook = self.arrTextbooks.first { $0.ID == self.USTEXTBOOKID }!
+                self.arrTextbookFilters = self.arrTextbooks.map { MSelectItem(value: $0.ID, label: $0.TEXTBOOKNAME) }
+                self.arrTextbookFilters.insert(MSelectItem(value: 0, label: "All Textbooks"), at: 0)
                 self.arrAutoCorrect = result.3
                 let arrVoices = result.4
                 self.arrMacVoices = arrVoices.filter { $0.VOICETYPEID == 2 }

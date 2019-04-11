@@ -83,16 +83,16 @@ class PhrasesLangViewController: PhrasesBaseViewController {
             vm.arrPhrasesFiltered = nil
         } else {
             let scope = n == 1 ? "Phrase" : "Translation"
-            vm.filterPhrasesForSearchText(wc.filterText, scope: scope)
+            vm.filterPhrasesForSearchText(wc.textFilter, scope: scope)
         }
         self.tableView.reloadData()
     }
 }
 
 class PhrasesLangWindowController: PhrasesBaseWindowController {
-    @IBOutlet weak var scFilter: NSSegmentedControl!
+    @IBOutlet weak var scTextFilter: NSSegmentedControl!
     @IBOutlet weak var tfFilter: NSTextField!
-    @objc var filterText = ""
+    @objc var textFilter = ""
 
     override func windowDidLoad() {
         super.windowDidLoad()
@@ -106,12 +106,12 @@ class PhrasesLangWindowController: PhrasesBaseWindowController {
         let reason = dict["NSTextMovement"] as! NSNumber
         let code = Int(reason.int32Value)
         guard code == NSReturnTextMovement else {return}
-        if scFilter.selectedSegment == 0 {
-            scFilter.selectedSegment = 1
-            filterText = vmSettings.autoCorrectInput(text: filterText)
-            tfFilter.stringValue = filterText
+        if scTextFilter.selectedSegment == 0 {
+            scTextFilter.selectedSegment = 1
+            textFilter = vmSettings.autoCorrectInput(text: textFilter)
+            tfFilter.stringValue = textFilter
         }
-        (contentViewController as! PhrasesLangViewController).filterPhrase(scFilter)
+        (contentViewController as! PhrasesLangViewController).filterPhrase(scTextFilter)
     }
     
     func windowWillClose(_ notification: Notification) {

@@ -15,7 +15,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     
     @IBOutlet weak var wvDict: WKWebView!
     @IBOutlet weak var tfNewWord: NSTextField!
-    @IBOutlet weak var scFilter: NSSegmentedControl!
+    @IBOutlet weak var scTextFilter: NSSegmentedControl!
     @IBOutlet weak var tfFilter: NSTextField!
     @IBOutlet weak var chkLevelGE0Only: NSButton!
     @IBOutlet weak var tableView: NSTableView!
@@ -24,7 +24,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     let disposeBag = DisposeBag()
     
     @objc var newWord = ""
-    @objc var filterText = ""
+    @objc var textFilter = ""
     @objc var levelge0only = false
     var selectedWord = ""
     var dictStatus = DictWebViewStatus.ready
@@ -59,12 +59,12 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
                 addNewWord()
             }
         } else if searchfield === tfFilter {
-            if !filterText.isEmpty {
-                scFilter.selectedSegment = 1
-                filterText = vmSettings.autoCorrectInput(text: filterText)
-                tfFilter.stringValue = filterText
+            if !textFilter.isEmpty {
+                scTextFilter.selectedSegment = 1
+                textFilter = vmSettings.autoCorrectInput(text: textFilter)
+                tfFilter.stringValue = textFilter
             }
-            scFilter.performClick(self)
+            scTextFilter.performClick(self)
         }
     }
 

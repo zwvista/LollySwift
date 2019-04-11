@@ -24,7 +24,7 @@
                                         <constraints>
                                             <constraint firstAttribute="width" constant="96" id="9nE-RB-Ak4"/>
                                         </constraints>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="New Word" drawsBackground="YES" id="pDu-y2-NPV">
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="pDu-y2-NPV">
                                             <font key="font" usesAppearanceFont="YES"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -62,16 +62,16 @@
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="96" id="tuA-jr-exd"/>
                                                 </constraints>
-                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Filter" drawsBackground="YES" id="p7g-Xg-FQh">
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="p7g-Xg-FQh">
                                                     <font key="font" usesAppearanceFont="YES"/>
                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     <connections>
-                                                        <binding destination="F8i-pe-Ate" name="value" keyPath="filterText" id="qAO-Hp-2RZ"/>
+                                                        <binding destination="F8i-pe-Ate" name="value" keyPath="textFilter" id="qAO-Hp-2RZ"/>
                                                     </connections>
                                                 </textFieldCell>
                                                 <connections>
-                                                    <binding destination="F8i-pe-Ate" name="value" keyPath="filterText" id="hOC-fr-iN7">
+                                                    <binding destination="F8i-pe-Ate" name="value" keyPath="textFilter" id="hOC-fr-iN7">
                                                         <dictionary key="options">
                                                             <string key="NSMultipleValuesPlaceholder">Filter</string>
                                                             <string key="NSNoSelectionPlaceholder">Filter</string>
@@ -570,7 +570,7 @@
                         <outlet property="btnNext" destination="fOj-wT-Aqt" id="Qv1-c9-e0h"/>
                         <outlet property="btnPrevious" destination="KGz-3d-agF" id="npL-eO-cK2"/>
                         <outlet property="chkLevelGE0Only" destination="azS-bq-eKL" id="URS-Zi-evM"/>
-                        <outlet property="scFilter" destination="RtU-w4-rmU" id="5fZ-jf-cIo"/>
+                        <outlet property="scTextFilter" destination="RtU-w4-rmU" id="5fZ-jf-cIo"/>
                         <outlet property="tableView" destination="8Zf-06-OzS" id="Vn7-va-cpG"/>
                         <outlet property="tfFilter" destination="Ntb-I3-XGS" id="Wl9-kJ-Nnx"/>
                         <outlet property="tfNewWord" destination="E8d-BH-EMc" id="sKW-6f-XqV"/>
@@ -1304,7 +1304,7 @@ Gw
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                                 <connections>
-                                                    <binding destination="UkS-Xi-ogF" name="value" keyPath="filterText" id="5vL-En-1o3">
+                                                    <binding destination="UkS-Xi-ogF" name="value" keyPath="textFilter" id="5vL-En-1o3">
                                                         <dictionary key="options">
                                                             <string key="NSMultipleValuesPlaceholder">Filter</string>
                                                             <string key="NSNoSelectionPlaceholder">Filter</string>
@@ -1598,7 +1598,7 @@ Gw
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="scFilter" destination="y4k-LE-Uzx" id="sh2-9K-DTJ"/>
+                        <outlet property="scTextFilter" destination="y4k-LE-Uzx" id="sh2-9K-DTJ"/>
                         <outlet property="tableView" destination="zh5-gP-ZJa" id="wUb-Zv-H6h"/>
                         <outlet property="tfFilter" destination="HlL-uZ-jh3" id="YHB-JI-fWS"/>
                         <outlet property="tfNewWord" destination="jNk-si-JUF" id="NN0-cI-2Sf"/>
@@ -3087,7 +3087,7 @@ DQ
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                         <connections>
-                                            <binding destination="S5w-0q-IQt" name="value" keyPath="filterText" id="KpO-pi-GNz">
+                                            <binding destination="S5w-0q-IQt" name="value" keyPath="textFilter" id="KpO-pi-GNz">
                                                 <dictionary key="options">
                                                     <string key="NSMultipleValuesPlaceholder">Filter</string>
                                                     <string key="NSNoSelectionPlaceholder">Filter</string>
@@ -3110,7 +3110,17 @@ DQ
                                                     <menuItem title="Item 3" id="8TC-qk-I69"/>
                                                 </items>
                                             </menu>
+                                            <connections>
+                                                <binding destination="4Nk-1I-LLj" name="content" keyPath="arrangedObjects" id="dc4-XA-VPm"/>
+                                                <binding destination="4Nk-1I-LLj" name="contentValues" keyPath="arrangedObjects.label" previousBinding="dc4-XA-VPm" id="T0y-ZO-xfF"/>
+                                            </connections>
                                         </popUpButtonCell>
+                                        <connections>
+                                            <binding destination="4Nk-1I-LLj" name="content" keyPath="arrangedObjects" id="Yfn-e7-h7R"/>
+                                            <binding destination="4Nk-1I-LLj" name="contentObjects" keyPath="arrangedObjects.value" previousBinding="Yfn-e7-h7R" id="X13-W9-hxj"/>
+                                            <binding destination="4Nk-1I-LLj" name="contentValues" keyPath="arrangedObjects.label" previousBinding="X13-W9-hxj" id="FYU-Ma-KTT"/>
+                                            <binding destination="S5w-0q-IQt" name="selectedObject" keyPath="textbookFilter" previousBinding="FYU-Ma-KTT" id="vFh-TG-0Gb"/>
+                                        </connections>
                                     </popUpButton>
                                 </subviews>
                                 <edgeInsets key="edgeInsets" left="6" right="0.0" top="6" bottom="6"/>
@@ -3576,13 +3586,16 @@ DQ
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="scFilter" destination="Kv2-KG-SLC" id="mz9-ry-PMm"/>
+                        <outlet property="acTextbooks" destination="4Nk-1I-LLj" id="WFs-mT-h3l"/>
+                        <outlet property="pubTextbookFilter" destination="bMb-g8-SbI" id="oTT-5T-SxC"/>
+                        <outlet property="scTextFilter" destination="Kv2-KG-SLC" id="mz9-ry-PMm"/>
                         <outlet property="tableView" destination="NqU-P3-ciK" id="ngY-Mi-EJ0"/>
                         <outlet property="tfFilter" destination="6HF-JW-VGd" id="PyX-Gf-maW"/>
                         <outlet property="tfStatusText" destination="Gqc-yq-vq1" id="dQm-HQ-8AA"/>
                         <outlet property="wvDict" destination="mBY-hW-ews" id="jBh-C5-Htb"/>
                     </connections>
                 </viewController>
+                <arrayController id="4Nk-1I-LLj"/>
                 <menu id="GlP-Yb-8OM">
                     <items>
                         <menuItem title="Delete" id="19H-yS-dzM">

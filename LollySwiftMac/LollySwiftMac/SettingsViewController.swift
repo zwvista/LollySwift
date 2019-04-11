@@ -23,7 +23,7 @@ class SettingsViewController: NSViewController, SettingsViewModelDelegate {
     @IBOutlet weak var pubLanguages: NSPopUpButton!
     @IBOutlet weak var pubDictItems: NSPopUpButton!
     @IBOutlet weak var pubDictsNote: NSPopUpButton!
-    @IBOutlet weak var pubTextbooks: NSPopUpButton!
+    @IBOutlet weak var pubTextbookFilters: NSPopUpButton!
     @IBOutlet weak var pubUnitFrom: NSPopUpButton!
     @IBOutlet weak var pubUnitTo: NSPopUpButton!
     @IBOutlet weak var pubPartFrom: NSPopUpButton!

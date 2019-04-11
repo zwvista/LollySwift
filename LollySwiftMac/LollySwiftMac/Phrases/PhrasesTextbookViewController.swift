@@ -80,16 +80,16 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
             vm.arrPhrasesFiltered = nil
         } else {
             let scope = n == 1 ? "Phrase" : "Translation"
-            vm.filterPhrasesForSearchText(wc.filterText, scope: scope)
+            vm.filterPhrasesForSearchText(wc.textFilter, scope: scope)
         }
         self.tableView.reloadData()
     }
 }
 
 class PhrasesTextbookWindowController: PhrasesBaseWindowController {
-    @IBOutlet weak var scFilter: NSSegmentedControl!
+    @IBOutlet weak var scTextFilter: NSSegmentedControl!
     @IBOutlet weak var tfFilter: NSTextField!
-    @objc var filterText = ""
+    @objc var textFilter = ""
     
     override func windowDidLoad() {
         super.windowDidLoad()
@@ -103,10 +103,10 @@ class PhrasesTextbookWindowController: PhrasesBaseWindowController {
         let reason = dict["NSTextMovement"] as! NSNumber
         let code = Int(reason.int32Value)
         guard code == NSReturnTextMovement else {return}
-        if scFilter.selectedSegment == 0 {
-            scFilter.selectedSegment = 1
+        if scTextFilter.selectedSegment == 0 {
+            scTextFilter.selectedSegment = 1
         }
-        (contentViewController as! PhrasesTextbookViewController).filterPhrase(scFilter)
+        (contentViewController as! PhrasesTextbookViewController).filterPhrase(scTextFilter)
     }
     
     func windowWillClose(_ notification: Notification) {

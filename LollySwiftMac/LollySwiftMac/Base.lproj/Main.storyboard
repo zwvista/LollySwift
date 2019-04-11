@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
-        <plugIn identifier="com.apple.WebKit2IBPlugin" version="14460.31"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
+        <plugIn identifier="com.apple.WebKit2IBPlugin" version="14490.70"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -1047,7 +1046,7 @@
                                                                 <rect key="frame" x="0.0" y="-8" width="399" height="430"/>
                                                                 <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="bxF-Ps-0gE">
                                                                     <rect key="frame" x="0.0" y="0.0" width="399" height="430"/>
-                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                    <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
                                                                         <textView importsGraphics="NO" richText="NO" verticallyResizable="YES" allowsUndo="YES" spellingCorrection="YES" smartInsertDelete="YES" id="7Zx-Xa-ReP">
                                                                             <rect key="frame" x="0.0" y="0.0" width="399" height="430"/>
@@ -1060,6 +1059,10 @@
                                                                         </textView>
                                                                     </subviews>
                                                                 </clipView>
+                                                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="uGK-zt-jeB">
+                                                                    <rect key="frame" x="-100" y="-100" width="399" height="16"/>
+                                                                    <autoresizingMask key="autoresizingMask"/>
+                                                                </scroller>
                                                                 <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="v3b-EW-4wO">
                                                                     <rect key="frame" x="383" y="0.0" width="16" height="430"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
@@ -1081,7 +1084,7 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="399" height="168"/>
                                                                 <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="M0b-Kd-Veb">
                                                                     <rect key="frame" x="0.0" y="0.0" width="399" height="168"/>
-                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                    <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
                                                                         <textView importsGraphics="NO" richText="NO" verticallyResizable="YES" allowsUndo="YES" spellingCorrection="YES" smartInsertDelete="YES" id="e8K-mx-I5l">
                                                                             <rect key="frame" x="0.0" y="0.0" width="399" height="168"/>
@@ -1094,6 +1097,10 @@
                                                                         </textView>
                                                                     </subviews>
                                                                 </clipView>
+                                                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="gVr-Ap-e8N">
+                                                                    <rect key="frame" x="-100" y="-100" width="399" height="16"/>
+                                                                    <autoresizingMask key="autoresizingMask"/>
+                                                                </scroller>
                                                                 <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="8zx-jM-GOD">
                                                                     <rect key="frame" x="383" y="0.0" width="16" height="168"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
@@ -1585,7 +1592,7 @@
                         <outlet property="pubLanguages" destination="Yra-vx-iUa" id="FyI-6e-Ins"/>
                         <outlet property="pubPartFrom" destination="PW2-rx-UfY" id="I3r-sr-VCj"/>
                         <outlet property="pubPartTo" destination="Xjt-G8-0bL" id="ZfJ-gt-8PI"/>
-                        <outlet property="pubTextbooks" destination="GTc-kH-1Ux" id="51I-aI-Ilk"/>
+                        <outlet property="pubTextbookFilters" destination="GTc-kH-1Ux" id="51I-aI-Ilk"/>
                         <outlet property="pubUnitFrom" destination="b7U-Wa-ylD" id="I23-ak-1YP"/>
                         <outlet property="pubUnitTo" destination="fnN-We-eae" id="3ng-8B-wSe"/>
                         <outlet property="scToType" destination="GYX-NJ-ZBj" id="ZZZ-gQ-dml"/>

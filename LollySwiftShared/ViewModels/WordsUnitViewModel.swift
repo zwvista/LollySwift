@@ -28,16 +28,19 @@ class WordsUnitViewModel: WordsBaseViewModel {
         }
     }
     
-    func applyFilters(filterText: String, scope: String, levelge0only: Bool) {
-        if filterText.isEmpty && !levelge0only {
+    func applyFilters(textFilter: String, scope: String, levelge0only: Bool, textbookFilter: Int) {
+        if textFilter.isEmpty && !levelge0only {
             arrWordsFiltered = nil
         } else {
             arrWordsFiltered = arrWords
-            if !filterText.isEmpty {
-                arrWordsFiltered = scope == "Word" ? arrWordsFiltered!.filter { $0.WORD.contains(filterText) } : arrWordsFiltered!.filter { $0.NOTE?.contains(filterText) ?? false }
+            if !textFilter.isEmpty {
+                arrWordsFiltered = scope == "Word" ? arrWordsFiltered!.filter { $0.WORD.contains(textFilter) } : arrWordsFiltered!.filter { $0.NOTE?.contains(textFilter) ?? false }
             }
             if levelge0only {
                 arrWordsFiltered = arrWordsFiltered!.filter { $0.LEVEL >= 0 }
+            }
+            if textbookFilter != 0 {
+                arrWordsFiltered = arrWordsFiltered!.filter { $0.TEXTBOOKID == textbookFilter }
             }
         }
     }

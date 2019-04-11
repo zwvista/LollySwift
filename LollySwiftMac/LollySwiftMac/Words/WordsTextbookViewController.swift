@@ -16,9 +16,14 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
     var arrWords: [MUnitWord] {
         return vm.arrWordsFiltered == nil ? vm.arrWords : vm.arrWordsFiltered!
     }
+    
+    @IBOutlet weak var pubTextbookFilter: NSPopUpButton!
+    @IBOutlet weak var acTextbooks: NSArrayController!
+    @objc var textbookFilter = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        acTextbooks.content = vmSettings.arrTextbookFilters
     }
 
     override func settingsChanged() {
@@ -91,7 +96,7 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
 
     @IBAction func filterWord(_ sender: Any) {
         let n = (sender as! NSSegmentedControl).selectedSegment
-        vm.applyFilters(filterText: n == 0 ? "" : filterText, scope: "Word", levelge0only: levelge0only)
+        vm.applyFilters(textFilter: n == 0 ? "" : textFilter, scope: "Word", levelge0only: levelge0only, textbookFilter: textbookFilter)
         self.tableView.reloadData()
     }
 }
