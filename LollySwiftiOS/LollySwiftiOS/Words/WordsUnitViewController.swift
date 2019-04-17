@@ -131,7 +131,7 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
     }
     
     func updateSearchResults(for searchController: UISearchController) {
-        vm.applyFilters(searchBar.text!, scope: searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex])
+        vm.applyFilters(textFilter: searchBar.text!, scope: searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex], levelge0only: false, textbookFilter: 0)
         tableView.reloadData()
     }
     
