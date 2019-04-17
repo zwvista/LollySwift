@@ -63,7 +63,7 @@ class SettingsViewController: NSViewController, SettingsViewModelDelegate {
         vm.updateMacVoice().subscribe().disposed(by: disposeBag)
     }
 
-    @IBAction func dictMeanSelected(_ sender: AnyObject) {
+    @IBAction func dictReferenceSelected(_ sender: AnyObject) {
         vm.updateDictItem().subscribe().disposed(by: disposeBag)
     }
     

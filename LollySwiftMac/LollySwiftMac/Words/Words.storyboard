@@ -1631,6 +1631,73 @@ Gw
             <point key="canvasLocation" x="-301" y="1195"/>
         </scene>
         <!--Window Controller-->
+        <scene sceneID="cXD-iz-n8D">
+            <objects>
+                <windowController storyboardIdentifier="WordsTestWindowController" id="qnx-NH-WRl" sceneMemberID="viewController">
+                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="7Rs-jF-5Jr">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+                        <rect key="contentRect" x="196" y="240" width="480" height="270"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
+                        <toolbar key="toolbar" implicitIdentifier="188DCEDA-C8A3-44EC-B951-529BDEE543EA" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="KjN-jA-3e8">
+                            <allowedToolbarItems>
+                                <toolbarItem implicitItemIdentifier="D7BFDFBE-7FB3-4D82-9239-C47A158CE4C5" label="New Test" paletteLabel="New Test" tag="-1" id="JMO-aE-HGx"/>
+                                <toolbarItem implicitItemIdentifier="66D584FA-7EF2-40D4-A016-3E4F2BE93747" label="Toolbar Item" paletteLabel="Toolbar Item" tag="-1" id="INL-9c-asa"/>
+                            </allowedToolbarItems>
+                            <defaultToolbarItems>
+                                <toolbarItem reference="JMO-aE-HGx"/>
+                            </defaultToolbarItems>
+                        </toolbar>
+                        <connections>
+                            <outlet property="delegate" destination="qnx-NH-WRl" id="now-hG-NqW"/>
+                        </connections>
+                    </window>
+                    <connections>
+                        <segue destination="ypg-jQ-ROv" kind="relationship" relationship="window.shadowedContentViewController" id="vUt-rM-CFx"/>
+                    </connections>
+                </windowController>
+                <customObject id="8fs-z5-j5z" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-83" y="1713"/>
+        </scene>
+        <!--Words Test View Controller-->
+        <scene sceneID="hxW-93-KJY">
+            <objects>
+                <viewController id="ypg-jQ-ROv" customClass="WordsTestViewController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="cC6-V3-CmG">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="W4B-Jb-i8b">
+                                <rect key="frame" x="55" y="145" width="345" height="36"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="tX6-jR-yDW">
+                                    <font key="font" metaFont="system" size="20"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                    </view>
+                </viewController>
+                <customObject id="7eB-YB-0HW" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="8" y="2094"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="FNp-TS-f2b">
+            <objects>
+                <viewController id="kcA-Y1-6NN" sceneMemberID="viewController">
+                    <view key="view" id="2hT-AE-FTh">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="IXQ-Uo-sg8" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="624" y="1688"/>
+        </scene>
+        <!--Window Controller-->
         <scene sceneID="e6e-Vr-SzI">
             <objects>
                 <windowController storyboardIdentifier="WordsLangWindowController" id="zzS-oe-uMG" customClass="WordsLangWindowController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">

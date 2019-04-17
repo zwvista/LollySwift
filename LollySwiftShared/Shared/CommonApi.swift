@@ -26,57 +26,48 @@ class CommonApi {
         let dic = ["<delete>": "", "\\t": "\t", "\\r": "\r", "\\n": "\n"]
         var transform = transform, template = template
         let logPath = "/Users/bestskip/Documents/zw/Log/"
-        if debugExtract {
-            transform = try! String(contentsOfFile: logPath + "1_transform.txt", encoding: .utf8)
-            template = try! String(contentsOfFile: logPath + "5_template.txt", encoding: .utf8)
-            let rawStr = html.replacingOccurrences(of: "\r", with: "\\r")
-            do {
-                try rawStr.write(toFile: logPath + "0_raw.html", atomically: false, encoding: .utf8)
-            } catch _ {
-            }
-        } else {
-            print(transform)
-        }
         
         var text = ""
+        var n = 0
+        func output(fn: String) {
+            do {
+                try text.write(toFile: "\(logPath)\(n)_\(fn)", atomically: false, encoding: .utf8)
+            } catch _ {
+            }
+        }
+        if debugExtract {
+            transform = try! String(contentsOfFile: logPath + "00_transform.txt", encoding: .utf8)
+            template = try! String(contentsOfFile: logPath + "99_template.txt", encoding: .utf8)
+            text = html.replacingOccurrences(of: "\r", with: "\\r")
+            output(fn: "raw.html"); n += 1
+        } else {
+            text = html
+            print(transform)
+        }
         
         repeat {
             if transform.isEmpty {break}
             var arr = transform.components(separatedBy: "\r\n")
             if arr.count % 2 == 1 { arr.removeLast() }
-            var regex = arr[0].r!
-            let m = regex.findFirst(in: html)
-            if m == nil {break}
-            text = m!.matched
-            
-            func f(_ replacer: String) {
-                var replacer = replacer
+
+            var i = 0
+            while i < arr.count {
+                let regex = arr[i].r!
+                var replacer = arr[i + 1]
+                if replacer.starts(with: "<extract>") {
+                    replacer = String(replacer.dropFirst("<extract>".length))
+                    let ms = regex.findAll(in: text)
+                    text = ms.reduce("", { (acc, m) in acc + m.matched })
+                    if text.isEmpty {break}
+                }
                 for (key, value) in dic {
                     replacer = replacer.replacingOccurrences(of: key, with: value)
                 }
                 text = regex.replaceAll(in: text, with: replacer)
-            }
-            
-            f(arr[1])
-            if debugExtract {
-                do {
-                    try text.write(toFile: logPath + "2_extracted.txt", atomically: false, encoding: .utf8)
-                } catch _ {
+                if debugExtract {
+                    output(fn: "transformed.txt"); n += 1
                 }
-            }
-            
-            for i in 2 ..< arr.count {
-                if i % 2 == 0 {
-                    regex = arr[i].r!
-                } else {
-                    f(arr[i])
-                }
-            }
-            if debugExtract {
-                do {
-                    try text.write(toFile: logPath + "4_cooked.txt", atomically: false, encoding: .utf8)
-                } catch _ {
-                }
+                i += 2
             }
             
             if template.isEmpty {break}
@@ -85,10 +76,7 @@ class CommonApi {
         } while false
         
         if debugExtract {
-            do {
-                try text.write(toFile: logPath + "6_result.html", atomically: false, encoding: .utf8)
-            } catch _ {
-            }
+            output(fn: "result.html"); n += 1
         } else {
             print(text)
         }

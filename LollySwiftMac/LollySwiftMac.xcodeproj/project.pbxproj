@@ -89,6 +89,8 @@
 		95EFF47F218412DD0094EE3C /* MAutoCorrect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95EFF47D21840FB60094EE3C /* MAutoCorrect.swift */; };
 		95F199AF224311B90065858E /* speak.png in Resources */ = {isa = PBXBuildFile; fileRef = 95F199AE224311B90065858E /* speak.png */; };
 		95F199B32244FE510065858E /* WordsBaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F199B22244FE510065858E /* WordsBaseViewModel.swift */; };
+		95F6CEBD2263F8CE00C15A1D /* WordsTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F6CEBC2263F8CE00C15A1D /* WordsTestViewController.swift */; };
+		95F6CEBF2264A5ED00C15A1D /* WordsTestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F6CEBE2264A5ED00C15A1D /* WordsTestViewModel.swift */; };
 		DA220CE0442B147BB8A850BD /* Pods_LollySwiftMacTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1822EDB9E8ADA45D7C800AF4 /* Pods_LollySwiftMacTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -177,6 +179,8 @@
 		95EFF47D21840FB60094EE3C /* MAutoCorrect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MAutoCorrect.swift; sourceTree = "<group>"; };
 		95F199AE224311B90065858E /* speak.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = speak.png; sourceTree = "<group>"; };
 		95F199B22244FE510065858E /* WordsBaseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsBaseViewModel.swift; sourceTree = "<group>"; };
+		95F6CEBC2263F8CE00C15A1D /* WordsTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsTestViewController.swift; sourceTree = "<group>"; };
+		95F6CEBE2264A5ED00C15A1D /* WordsTestViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsTestViewModel.swift; sourceTree = "<group>"; };
 		C0A07AB238AF8E83FC5E5DD3 /* Pods-LollySwiftMac.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LollySwiftMac.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-LollySwiftMac/Pods-LollySwiftMac.debug.xcconfig"; sourceTree = "<group>"; };
 		E3F71BC79C6087E4623A422F /* Pods-LollySwiftMac.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LollySwiftMac.release.xcconfig"; path = "../Pods/Target Support Files/Pods-LollySwiftMac/Pods-LollySwiftMac.release.xcconfig"; sourceTree = "<group>"; };
 		F369FEA5447EADCC97C83AE1 /* Pods_LollySwiftMac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LollySwiftMac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -294,6 +298,7 @@
 				95F199B22244FE510065858E /* WordsBaseViewModel.swift */,
 				8C2CB59B207885140083DDE2 /* WordsLangViewModel.swift */,
 				8C2CB59F207885140083DDE2 /* WordsUnitViewModel.swift */,
+				95F6CEBE2264A5ED00C15A1D /* WordsTestViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -342,6 +347,7 @@
 				95B6589E2222E9E10095B0D2 /* WordsUnitBatchViewController.swift */,
 				8C2CB5C7207896EC0083DDE2 /* WordsUnitDetailViewController.swift */,
 				8C2CB5C1207888260083DDE2 /* WordsUnitViewController.swift */,
+				95F6CEBC2263F8CE00C15A1D /* WordsTestViewController.swift */,
 			);
 			path = Words;
 			sourceTree = "<group>";
@@ -650,6 +656,7 @@
 				95DB142821D902C600FBAF9A /* BlogViewController.swift in Sources */,
 				8C1C4F281D31F88800CF5D88 /* AppDelegate.swift in Sources */,
 				8C2CB5BB207885140083DDE2 /* MLangPhrase.swift in Sources */,
+				95F6CEBF2264A5ED00C15A1D /* WordsTestViewModel.swift in Sources */,
 				8CE0F27A206E94CF00EEE4AC /* LollyProtocol.swift in Sources */,
 				95B658A72227D8060095B0D2 /* MSelectItem.swift in Sources */,
 				95C328B0223D3831005FA6E6 /* MWordPhrase.swift in Sources */,
@@ -663,6 +670,7 @@
 				8C0748E9209EE15D0006BD1B /* RxCodableAlamofire.swift in Sources */,
 				95CED3CE2216C6320094622F /* PhrasesTextbookDetailViewController.swift in Sources */,
 				8CD1D929206227800071687B /* LollyWindow.swift in Sources */,
+				95F6CEBD2263F8CE00C15A1D /* WordsTestViewController.swift in Sources */,
 				8C2CB5B1207885140083DDE2 /* PhrasesLangViewModel.swift in Sources */,
 				8CD8409D20AFD4DA00442133 /* PhrasesUnitDetailViewController.swift in Sources */,
 				954B870E218FD274007DC348 /* WordsLangDetailViewController.swift in Sources */,

@@ -63,7 +63,7 @@ class WordsDictViewController: UIViewController, WKNavigationDelegate {
             let str = vmSettings.dictHtml(word: vm.selectedWord, dictids: item.dictids())
             wvDict.loadHTMLString(str, baseURL: nil)
         } else {
-            let item2 = vmSettings.arrDictsMean.first { $0.DICTNAME == item.DICTNAME }!
+            let item2 = vmSettings.arrDictsReference.first { $0.DICTNAME == item.DICTNAME }!
             let url = item2.urlString(word: vm.selectedWord, arrAutoCorrect: vmSettings.arrAutoCorrect)
             if item2.DICTTYPENAME == "OFFLINE" {
                 wvDict.load(URLRequest(url: URL(string: "about:blank")!))
@@ -93,7 +93,7 @@ class WordsDictViewController: UIViewController, WKNavigationDelegate {
 //        guard webView.stringByEvaluatingJavaScript(from: "document.readyState") == "complete" && status == .navigating else {return}
         guard status == .navigating else {return}
         let item = vmSettings.selectedDictItem!
-        let item2 = vmSettings.arrDictsMean.first { $0.DICTNAME == item.DICTNAME }!
+        let item2 = vmSettings.arrDictsReference.first { $0.DICTNAME == item.DICTNAME }!
         // https://stackoverflow.com/questions/34751860/get-html-from-wkwebview-in-swift
         webView.evaluateJavaScript("document.documentElement.outerHTML.toString()") { (html: Any?, error: Error?) in
             let html = html as! String

@@ -191,7 +191,7 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
     func onUpdateDictItem() {
         let item = vm.selectedDictItem!
         dictItemCell.textLabel!.text = item.DICTNAME
-        let item2 = vm.arrDictsMean.first { $0.DICTNAME == item.DICTNAME }
+        let item2 = vm.arrDictsReference.first { $0.DICTNAME == item.DICTNAME }
         dictItemCell.detailTextLabel!.text = item2?.URL ?? ""
         ddDictItem.selectIndex(vm.selectedDictItemIndex)
     }

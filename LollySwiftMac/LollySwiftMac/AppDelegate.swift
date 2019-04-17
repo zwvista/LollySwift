@@ -88,4 +88,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBAction func editBlog(_ sender: AnyObject) {
         showWindow(storyBoardName: "Main", windowControllerName: "BlogWindowController", modal: false)
     }
+    
+    @IBAction func wordsTest(_ sender: AnyObject) {
+        showWindow(storyBoardName: "Words", windowControllerName: "WordsTestWindowController", modal: false)
+    }
 }

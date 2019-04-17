@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
+        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
         <plugIn identifier="com.apple.WebKit2IBPlugin" version="14490.70"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -699,6 +700,13 @@
                                                 <action selector="editBlog:" target="Voe-Tx-rLC" id="5Wk-81-Yuw"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="26y-GQ-xG4"/>
+                                        <menuItem title="Words Test" id="wsa-Tc-VyN">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="wordsTest:" target="Voe-Tx-rLC" id="T2G-N1-WgO"/>
+                                            </connections>
+                                        </menuItem>
                                     </items>
                                 </menu>
                             </menuItem>
@@ -1046,7 +1054,7 @@
                                                                 <rect key="frame" x="0.0" y="-8" width="399" height="430"/>
                                                                 <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="bxF-Ps-0gE">
                                                                     <rect key="frame" x="0.0" y="0.0" width="399" height="430"/>
-                                                                    <autoresizingMask key="autoresizingMask"/>
+                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <textView importsGraphics="NO" richText="NO" verticallyResizable="YES" allowsUndo="YES" spellingCorrection="YES" smartInsertDelete="YES" id="7Zx-Xa-ReP">
                                                                             <rect key="frame" x="0.0" y="0.0" width="399" height="430"/>
@@ -1084,7 +1092,7 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="399" height="168"/>
                                                                 <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="M0b-Kd-Veb">
                                                                     <rect key="frame" x="0.0" y="0.0" width="399" height="168"/>
-                                                                    <autoresizingMask key="autoresizingMask"/>
+                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <textView importsGraphics="NO" richText="NO" verticallyResizable="YES" allowsUndo="YES" spellingCorrection="YES" smartInsertDelete="YES" id="e8K-mx-I5l">
                                                                             <rect key="frame" x="0.0" y="0.0" width="399" height="168"/>
@@ -1233,7 +1241,7 @@
                                     </menu>
                                 </popUpButtonCell>
                                 <connections>
-                                    <action selector="dictMeanSelected:" target="HfO-r7-QMx" id="zXy-H5-Dgo"/>
+                                    <action selector="dictReferenceSelected:" target="HfO-r7-QMx" id="zXy-H5-Dgo"/>
                                     <binding destination="EkI-9N-SJp" name="content" keyPath="arrangedObjects" id="cMt-dW-ffF"/>
                                     <binding destination="EkI-9N-SJp" name="contentValues" keyPath="arrangedObjects.DICTNAME" previousBinding="cMt-dW-ffF" id="PXM-QD-ObO"/>
                                     <binding destination="HfO-r7-QMx" name="selectedObject" keyPath="vm.selectedDictItem" previousBinding="PXM-QD-ObO" id="lS4-sw-xw2"/>

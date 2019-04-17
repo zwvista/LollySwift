@@ -127,7 +127,7 @@ class SettingsViewModel: NSObject {
         return arriOSVoices.firstIndex { $0 == selectediOSVoice } ?? 0
     }
 
-    var arrDictsMean = [MDictMean]()
+    var arrDictsReference = [MDictReference]()
     @objc
     var arrDictItems = [MDictItem]()
     @objc
@@ -224,17 +224,17 @@ class SettingsViewModel: NSObject {
         selectedUSLang2 = arrUserSettings.first { $0.KIND == 2 && $0.ENTITYID == self.USLANGID }!
         selectedUSLang3 = arrUserSettings.first { $0.KIND == 3 && $0.ENTITYID == self.USLANGID }!
         let arrDicts = USDICTITEMS.split("\r\n")
-        return Observable.zip(MDictMean.getDataByLang(USLANGID),
+        return Observable.zip(MDictReference.getDataByLang(USLANGID),
                               MDictNote.getDataByLang(USLANGID),
                               MTextbook.getDataByLang(USLANGID),
                               MAutoCorrect.getDataByLang(USLANGID),
                               MVoice.getDataByLang(USLANGID))
             .flatMap { result -> Observable<()> in
-                self.arrDictsMean = result.0
+                self.arrDictsReference = result.0
                 var i = 0
                 self.arrDictItems = arrDicts.flatMap { d -> [MDictItem] in
                     if d == "0" {
-                        return self.arrDictsMean.map { MDictItem(id: String($0.DICTID), name: $0.DICTNAME) }
+                        return self.arrDictsReference.map { MDictItem(id: String($0.DICTID), name: $0.DICTNAME) }
                     } else {
                         i += 1
                         return [MDictItem(id: d, name: "Custom\(i)")]
@@ -268,7 +268,7 @@ class SettingsViewModel: NSObject {
     func dictHtml(word: String, dictids: [String]) -> String {
         var s = "<html><body>\n"
         for (i, dictid) in dictids.enumerated() {
-            let item = arrDictsMean.first { String($0.DICTID) == dictid }!
+            let item = arrDictsReference.first { String($0.DICTID) == dictid }!
             let ifrId = "ifr\(i + 1)"
             let url = item.urlString(word: word, arrAutoCorrect: arrAutoCorrect)
             s += "<iframe id='\(ifrId)' frameborder='1' style='width:100%; height:500px; display:block' src='\(url)'></iframe>\n"

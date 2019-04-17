@@ -36,11 +36,11 @@ class MDictionary: NSObject, Codable {
     }
 }
 
-class MDictMean: MDictionary {
-    static func getDataByLang(_ langid: Int) -> Observable<[MDictMean]> {
-        // SQL: SELECT * FROM VDICTSMEAN WHERE LANGIDFROM=?
-        let url = "\(CommonApi.url)VDICTSMEAN?transform=1&filter=LANGIDFROM,eq,\(langid)&order[]=SEQNUM&order[]=DICTNAME"
-        return RestApi.getArray(url: url, keyPath: "VDICTSMEAN")
+class MDictReference: MDictionary {
+    static func getDataByLang(_ langid: Int) -> Observable<[MDictReference]> {
+        // SQL: SELECT * FROM VDICTSREFERENCE WHERE LANGIDFROM=?
+        let url = "\(CommonApi.url)VDICTSREFERENCE?transform=1&filter=LANGIDFROM,eq,\(langid)&order[]=SEQNUM&order[]=DICTNAME"
+        return RestApi.getArray(url: url, keyPath: "VDICTSREFERENCE")
     }
     
     func htmlString(_ html: String, word: String, useTemplate2: Bool = false) -> String {

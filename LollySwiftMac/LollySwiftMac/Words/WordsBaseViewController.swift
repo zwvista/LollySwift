@@ -144,7 +144,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
             let str = vmSettings.dictHtml(word: word, dictids: item.dictids())
             wvDict.loadHTMLString(str, baseURL: nil)
         } else {
-            let item2 = vmSettings.arrDictsMean.first { $0.DICTNAME == item.DICTNAME }!
+            let item2 = vmSettings.arrDictsReference.first { $0.DICTNAME == item.DICTNAME }!
             let url = item2.urlString(word: word, arrAutoCorrect: vmSettings.arrAutoCorrect)
             if item2.DICTTYPENAME == "OFFLINE" {
                 wvDict.load(URLRequest(url: URL(string: "about:blank")!))
@@ -183,7 +183,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
         tableView.becomeFirstResponder()
         guard dictStatus == .navigating else {return}
         let item = vmSettings.arrDictItems[selectedDictItemIndex]
-        let item2 = vmSettings.arrDictsMean.first { $0.DICTNAME == item.DICTNAME }!
+        let item2 = vmSettings.arrDictsReference.first { $0.DICTNAME == item.DICTNAME }!
         // https://stackoverflow.com/questions/34751860/get-html-from-wkwebview-in-swift
         webView.evaluateJavaScript("document.documentElement.outerHTML.toString()") { (html: Any?, error: Error?) in
             let html = html as! String
@@ -245,7 +245,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     @IBAction func openOnlineDict(_ sender: Any) {
         let item = vmSettings.arrDictItems[selectedDictItemIndex]
         if !item.DICTNAME.starts(with: "Custom") {
-            let item2 = vmSettings.arrDictsMean.first { $0.DICTNAME == item.DICTNAME }!
+            let item2 = vmSettings.arrDictsReference.first { $0.DICTNAME == item.DICTNAME }!
             let url = item2.urlString(word: selectedWord, arrAutoCorrect: vmSettings.arrAutoCorrect)
             MacApi.openPage(url)
         }
