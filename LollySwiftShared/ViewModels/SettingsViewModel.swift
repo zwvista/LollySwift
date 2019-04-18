@@ -47,6 +47,10 @@ class SettingsViewModel: NSObject {
         set { selectedUSLang2.VALUE4 = newValue }
     }
     private var selectedUSLang3: MUserSetting!
+    var USDICTTRANSLATIONID: Int {
+        get { return selectedUSLang3.VALUE1?.toInt() ?? 0 }
+        set { selectedUSLang3.VALUE1 = String(newValue) }
+    }
     var USMACVOICEID: Int {
         get { return selectedUSLang3.VALUE2?.toInt() ?? 0 }
         set { selectedUSLang3.VALUE2 = String(newValue) }
@@ -151,7 +155,20 @@ class SettingsViewModel: NSObject {
     var selectedDictNoteIndex: Int {
         return arrDictsNote.firstIndex { $0 == selectedDictNote } ?? 0
     }
-    var hasNote: Bool { return !arrDictsNote.isEmpty }
+    var hasDictNote: Bool { return !arrDictsNote.isEmpty }
+    
+    @objc
+    var arrDictsTranslation = [MDictTranslation]()
+    @objc
+    var selectedDictTranslation = MDictTranslation() {
+        didSet {
+            USDICTTRANSLATIONID = selectedDictTranslation.ID
+        }
+    }
+    var selectedDictTranslationIndex: Int {
+        return arrDictsTranslation.firstIndex { $0 == selectedDictTranslation } ?? 0
+    }
+    var hasDictTranslation: Bool { return !arrDictsTranslation.isEmpty }
 
     @objc
     var arrTextbooks = [MTextbook]()
@@ -226,6 +243,7 @@ class SettingsViewModel: NSObject {
         let arrDicts = USDICTITEMS.split("\r\n")
         return Observable.zip(MDictReference.getDataByLang(USLANGID),
                               MDictNote.getDataByLang(USLANGID),
+                              MDictTranslation.getDataByLang(USLANGID),
                               MTextbook.getDataByLang(USLANGID),
                               MAutoCorrect.getDataByLang(USLANGID),
                               MVoice.getDataByLang(USLANGID))
@@ -244,12 +262,15 @@ class SettingsViewModel: NSObject {
                 self.arrDictsNote = result.1
                 if self.arrDictsNote.isEmpty { self.arrDictsNote.append(MDictNote()) }
                 self.selectedDictNote = self.arrDictsNote.first { $0.DICTID == self.USDICTNOTEID } ?? self.arrDictsNote[0]
-                self.arrTextbooks = result.2
+                self.arrDictsTranslation = result.2
+                if self.arrDictsTranslation.isEmpty { self.arrDictsTranslation.append(MDictTranslation()) }
+                self.selectedDictTranslation = self.arrDictsTranslation.first { $0.DICTID == self.USDICTTRANSLATIONID } ?? self.arrDictsTranslation[0]
+                self.arrTextbooks = result.3
                 self.selectedTextbook = self.arrTextbooks.first { $0.ID == self.USTEXTBOOKID }!
                 self.arrTextbookFilters = self.arrTextbooks.map { MSelectItem(value: $0.ID, label: $0.TEXTBOOKNAME) }
                 self.arrTextbookFilters.insert(MSelectItem(value: 0, label: "All Textbooks"), at: 0)
-                self.arrAutoCorrect = result.3
-                let arrVoices = result.4
+                self.arrAutoCorrect = result.4
+                let arrVoices = result.5
                 self.arrMacVoices = arrVoices.filter { $0.VOICETYPEID == 2 }
                 if self.arrMacVoices.isEmpty { self.arrMacVoices.append(MVoice()) }
                 self.arriOSVoices = arrVoices.filter { $0.VOICETYPEID == 3 }

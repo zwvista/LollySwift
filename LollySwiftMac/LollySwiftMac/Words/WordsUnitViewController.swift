@@ -192,7 +192,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation {
     // https://stackoverflow.com/questions/9368654/cannot-seem-to-setenabledno-on-nsmenuitem
     func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
         if menuItem.action == #selector(self.getNote(_:)) || menuItem.action == #selector(self.getNotes(_:)) {
-            return vmSettings.hasNote
+            return vmSettings.hasDictNote
         }
         return true
     }

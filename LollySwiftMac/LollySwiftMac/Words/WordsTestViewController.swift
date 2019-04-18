@@ -10,21 +10,33 @@ import Cocoa
 import RxSwift
 
 class WordsTestViewController: NSViewController, LollyProtocol {
-    var vm: WordsUnitViewModel!
-    var arrWords: [MUnitWord] {
-        return vm.arrWordsFiltered ?? vm.arrWords
-    }
+    var vm: WordsTestViewModel!
     let disposeBag = DisposeBag()
 
+    @IBOutlet weak var tfTranslation: NSTextField!
+    @IBOutlet weak var tfWordTarget: NSTextField!
+    
     func settingsChanged() {
-        
+        vm = WordsTestViewModel(settings: AppDelegate.theSettingsViewModel)
+        newTest(self)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: true, disposeBag: disposeBag) {}
+        settingsChanged()
     }
     
     @IBAction func newTest(_ sender: Any) {
+        vm.newTest().subscribe {
+            self.next(self)
+        }.disposed(by: disposeBag)
+    }
+    
+    @IBAction func next(_ sender: Any) {
+        tfWordTarget.stringValue = vm.currentWord
+        vm.getTranslation().subscribe(onNext: {
+            self.tfTranslation.stringValue = $0
+            self.vm.next()
+        }).disposed(by: disposeBag)
     }
 }

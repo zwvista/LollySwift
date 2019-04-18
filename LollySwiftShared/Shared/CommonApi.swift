@@ -41,7 +41,8 @@ class CommonApi {
             text = html.replacingOccurrences(of: "\r", with: "\\r")
             output(fn: "raw.html"); n += 1
         } else {
-            text = html
+            // NSRegularExpression cannot handle "\r"
+            text = html.replacingOccurrences(of: "\r\n", with: "\n")
             print(transform)
         }
         
@@ -52,7 +53,7 @@ class CommonApi {
 
             var i = 0
             while i < arr.count {
-                let regex = arr[i].r!
+                let regex = arr[i].replacingOccurrences(of: "\\r\\n", with: "\\n").r!
                 var replacer = arr[i + 1]
                 if replacer.starts(with: "<extract>") {
                     replacer = String(replacer.dropFirst("<extract>".length))

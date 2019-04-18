@@ -81,3 +81,11 @@ class MDictNote: MDictionary {
         return RestApi.getArray(url: url, keyPath: "VDICTSNOTE")
     }
 }
+
+class MDictTranslation: MDictionary {
+    static func getDataByLang(_ langid: Int) -> Observable<[MDictTranslation]> {
+        // SQL: SELECT * FROM VDICTSTRANSLATION WHERE LANGIDFROM = ?
+        let url = "\(CommonApi.url)VDICTSTRANSLATION?transform=1&filter=LANGIDFROM,eq,\(langid)"
+        return RestApi.getArray(url: url, keyPath: "VDICTSTRANSLATION")
+    }
+}

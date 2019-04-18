@@ -18,7 +18,7 @@ class BlogViewModel: NSObject {
     init(settings: SettingsViewModel, disposeBag: DisposeBag) {
         self.vmSettings = settings
         self.disposeBag = disposeBag
-        vmNote = NoteViewModel(settings: vmSettings, disposeBag: disposeBag)
+        vmNote = NoteViewModel(settings: settings, disposeBag: disposeBag)
     }
     
     private func html1With(_ s: String) -> String {

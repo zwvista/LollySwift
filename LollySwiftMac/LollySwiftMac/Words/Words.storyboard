@@ -1641,7 +1641,11 @@ Gw
                         <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
                         <toolbar key="toolbar" implicitIdentifier="188DCEDA-C8A3-44EC-B951-529BDEE543EA" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="KjN-jA-3e8">
                             <allowedToolbarItems>
-                                <toolbarItem implicitItemIdentifier="D7BFDFBE-7FB3-4D82-9239-C47A158CE4C5" label="New Test" paletteLabel="New Test" tag="-1" id="JMO-aE-HGx"/>
+                                <toolbarItem implicitItemIdentifier="D7BFDFBE-7FB3-4D82-9239-C47A158CE4C5" label="New Test" paletteLabel="New Test" tag="-1" id="JMO-aE-HGx">
+                                    <connections>
+                                        <action selector="newTest:" target="8fs-z5-j5z" id="y9w-OD-jLo"/>
+                                    </connections>
+                                </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="66D584FA-7EF2-40D4-A016-3E4F2BE93747" label="Toolbar Item" paletteLabel="Toolbar Item" tag="-1" id="INL-9c-asa"/>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
@@ -1668,17 +1672,58 @@ Gw
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="W4B-Jb-i8b">
-                                <rect key="frame" x="55" y="145" width="345" height="36"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="tX6-jR-yDW">
-                                    <font key="font" metaFont="system" size="20"/>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tkR-zI-Crh">
+                                <rect key="frame" x="38" y="167" width="345" height="55"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="TiW-UY-Wxe">
+                                    <font key="font" metaFont="system"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="W4B-Jb-i8b">
+                                <rect key="frame" x="38" y="84" width="345" height="54"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="tX6-jR-yDW">
+                                    <font key="font" metaFont="system" size="25"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="544-Sl-0Ct">
+                                <rect key="frame" x="36" y="248" width="349" height="30"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="7ue-c0-l6u">
+                                    <font key="font" metaFont="system" size="25"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f21-Ix-zj3">
+                                <rect key="frame" x="39" y="36" width="79" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="Check" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="q7p-3s-eoa">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YnT-xa-PQ4">
+                                <rect key="frame" x="147" y="37" width="69" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="Next" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Fjb-xL-sKJ">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="next:" target="ypg-jQ-ROv" id="lPh-V9-8dJ"/>
+                                </connections>
+                            </button>
                         </subviews>
                     </view>
+                    <connections>
+                        <outlet property="tfTranslation" destination="tkR-zI-Crh" id="SZ0-ew-7Cn"/>
+                        <outlet property="tfWordTarget" destination="544-Sl-0Ct" id="oFj-ud-Kir"/>
+                    </connections>
                 </viewController>
                 <customObject id="7eB-YB-0HW" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -3233,8 +3278,8 @@ DQ
                                         <connections>
                                             <action selector="filterWord:" target="S5w-0q-IQt" id="hQa-NT-wtW"/>
                                             <binding destination="4Nk-1I-LLj" name="content" keyPath="arrangedObjects" id="Yfn-e7-h7R"/>
-                                            <binding destination="4Nk-1I-LLj" name="contentObjects" keyPath="arrangedObjects.value" previousBinding="Yfn-e7-h7R" id="X13-W9-hxj"/>
                                             <binding destination="4Nk-1I-LLj" name="contentValues" keyPath="arrangedObjects.label" previousBinding="X13-W9-hxj" id="FYU-Ma-KTT"/>
+                                            <binding destination="4Nk-1I-LLj" name="contentObjects" keyPath="arrangedObjects.value" previousBinding="Yfn-e7-h7R" id="X13-W9-hxj"/>
                                             <binding destination="S5w-0q-IQt" name="selectedObject" keyPath="textbookFilter" previousBinding="FYU-Ma-KTT" id="vFh-TG-0Gb"/>
                                         </connections>
                                     </popUpButton>
