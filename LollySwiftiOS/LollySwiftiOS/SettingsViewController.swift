@@ -15,6 +15,7 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
     @IBOutlet weak var voiceCell: UITableViewCell!
     @IBOutlet weak var dictItemCell: UITableViewCell!
     @IBOutlet weak var dictNoteCell: UITableViewCell!
+    @IBOutlet weak var dictTranslationCell: UITableViewCell!
     @IBOutlet weak var textbookCell: UITableViewCell!
     @IBOutlet weak var unitFromCell: UITableViewCell!
     @IBOutlet weak var partFromCell: UITableViewCell!
@@ -36,6 +37,7 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
     let ddVoice = DropDown()
     let ddDictItem = DropDown()
     let ddDictNote = DropDown()
+    let ddDictTranslation = DropDown()
     let ddTextbook = DropDown()
     let ddUnitFrom = DropDown()
     let ddPartFrom = DropDown()
@@ -79,6 +81,13 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
             guard index != self.vm.selectedDictNoteIndex else {return}
             self.vm.selectedDictNote = self.vm.arrDictsNote[index]
             self.vm.updateDictNote().subscribe().disposed(by: self.disposeBag)
+        }
+
+        ddDictTranslation.anchorView = dictTranslationCell
+        ddDictTranslation.selectionAction = { [unowned self] (index: Int, item: String) in
+            guard index != self.vm.selectedDictTranslationIndex else {return}
+            self.vm.selectedDictTranslation = self.vm.arrDictsTranslation[index]
+            self.vm.updateDictTranslation().subscribe().disposed(by: self.disposeBag)
         }
 
         ddTextbook.anchorView = textbookCell
@@ -142,6 +151,8 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
         case 3:
             ddDictNote.show()
         case 4:
+            ddDictTranslation.show()
+        case 5:
             ddTextbook.show()
         default:
             switch indexPath.row {
@@ -177,6 +188,9 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
         ddDictNote.dataSource = vm.arrDictsNote.isEmpty ? [] : vm.arrDictsNote.map { $0.DICTNAME }
         onUpdateDictNote()
 
+        ddDictTranslation.dataSource = vm.arrDictsTranslation.isEmpty ? [] : vm.arrDictsTranslation.map { $0.DICTNAME }
+        onUpdateDictTranslation()
+
         ddTextbook.dataSource = vm.arrTextbooks.map { $0.TEXTBOOKNAME }
         onUpdateTextbook()
     }
@@ -208,6 +222,20 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
             dictNoteCell.detailTextLabel!.text = item.URL ?? ""
         }
         ddDictNote.selectIndex(vm.selectedDictNoteIndex)
+    }
+    
+    func onUpdateDictTranslation() {
+        let item = vm.selectedDictTranslation
+        if item.DICTNAME.isEmpty {
+            // if the label text is set to an empty string,
+            // it will remain to be empty and can no longer be changed. (why ?)
+            dictTranslationCell.textLabel!.text = " "
+            dictTranslationCell.detailTextLabel!.text = " "
+        } else {
+            dictTranslationCell.textLabel!.text = item.DICTNAME
+            dictTranslationCell.detailTextLabel!.text = item.URL ?? ""
+        }
+        ddDictTranslation.selectIndex(vm.selectedDictTranslationIndex)
     }
 
     func onUpdateTextbook() {
