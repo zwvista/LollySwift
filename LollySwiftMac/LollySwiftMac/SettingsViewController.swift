@@ -15,6 +15,7 @@ class SettingsViewController: NSViewController, SettingsViewModelDelegate {
     @IBOutlet weak var acVoices: NSArrayController!
     @IBOutlet weak var acDictItems: NSArrayController!
     @IBOutlet weak var acDictsNote: NSArrayController!
+    @IBOutlet weak var acDictsTranslation: NSArrayController!
     @IBOutlet weak var acTextbooks: NSArrayController!
     @IBOutlet weak var acUnits: NSArrayController!
     @IBOutlet weak var acParts: NSArrayController!
@@ -23,6 +24,7 @@ class SettingsViewController: NSViewController, SettingsViewModelDelegate {
     @IBOutlet weak var pubLanguages: NSPopUpButton!
     @IBOutlet weak var pubDictItems: NSPopUpButton!
     @IBOutlet weak var pubDictsNote: NSPopUpButton!
+    @IBOutlet weak var pubDictsTranslation: NSPopUpButton!
     @IBOutlet weak var pubTextbookFilters: NSPopUpButton!
     @IBOutlet weak var pubUnitFrom: NSPopUpButton!
     @IBOutlet weak var pubUnitTo: NSPopUpButton!
@@ -69,6 +71,10 @@ class SettingsViewController: NSViewController, SettingsViewModelDelegate {
     
     @IBAction func dictNoteSelected(_ sender: AnyObject) {
         vm.updateDictNote().subscribe().disposed(by: disposeBag)
+    }
+    
+    @IBAction func dictTranslationSelected(_ sender: AnyObject) {
+        vm.updateDictTranslation().subscribe().disposed(by: disposeBag)
     }
 
     @IBAction func textbookSelected(_ sender: AnyObject) {
