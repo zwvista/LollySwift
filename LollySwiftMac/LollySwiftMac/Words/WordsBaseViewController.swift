@@ -49,16 +49,16 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     }
     
     func controlTextDidEndEditing(_ obj: Notification) {
-        let searchfield = obj.object as! NSControl
+        let textfield = obj.object as! NSControl
         let dict = (obj as NSNotification).userInfo!
         let reason = dict["NSTextMovement"] as! NSNumber
         let code = Int(reason.int32Value)
         guard code == NSReturnTextMovement else {return}
-        if searchfield === tfNewWord {
+        if textfield === tfNewWord {
             if !newWord.isEmpty {
                 addNewWord()
             }
-        } else if searchfield === tfFilter {
+        } else if textfield === tfFilter {
             if !textFilter.isEmpty {
                 scTextFilter.selectedSegment = 1
                 textFilter = vmSettings.autoCorrectInput(text: textFilter)

@@ -9,13 +9,18 @@
 import Cocoa
 import RxSwift
 
-class WordsTestViewController: NSViewController, LollyProtocol {
+class WordsTestViewController: NSViewController, LollyProtocol, NSTextFieldDelegate {
     var vm: WordsTestViewModel!
     let disposeBag = DisposeBag()
 
     @IBOutlet weak var tfTranslation: NSTextField!
     @IBOutlet weak var tfWordTarget: NSTextField!
+    @IBOutlet weak var tfCorrect: NSTextField!
+    @IBOutlet weak var tfIncorrect: NSTextField!
+    @IBOutlet weak var tfWordInput: NSTextField!
     
+    @objc var wordInput = ""
+
     func settingsChanged() {
         vm = WordsTestViewModel(settings: AppDelegate.theSettingsViewModel)
         newTest(self)
@@ -26,17 +31,52 @@ class WordsTestViewController: NSViewController, LollyProtocol {
         settingsChanged()
     }
     
+    private func doTest() {
+        tfCorrect.isHidden = true
+        tfIncorrect.isHidden = true
+        tfWordTarget.stringValue = ""
+        tfWordInput.stringValue = ""
+        tfWordInput.becomeFirstResponder()
+        vm.getTranslation().subscribe(onNext: {
+            self.tfTranslation.stringValue = $0
+        }).disposed(by: disposeBag)
+    }
+    
     @IBAction func newTest(_ sender: Any) {
         vm.newTest().subscribe {
-            self.next(self)
+            self.doTest()
         }.disposed(by: disposeBag)
     }
     
     @IBAction func next(_ sender: Any) {
-        tfWordTarget.stringValue = vm.currentWord
-        vm.getTranslation().subscribe(onNext: {
-            self.tfTranslation.stringValue = $0
-            self.vm.next()
-        }).disposed(by: disposeBag)
+        vm.next()
+        doTest()
+    }
+    
+    func controlTextDidEndEditing(_ obj: Notification) {
+        let textfield = obj.object as! NSControl
+        let dict = (obj as NSNotification).userInfo!
+        let reason = dict["NSTextMovement"] as! NSNumber
+        let code = Int(reason.int32Value)
+        guard code == NSReturnTextMovement else {return}
+        if textfield === tfWordInput && !wordInput.isEmpty {
+            if tfCorrect.isHidden && tfIncorrect.isHidden {
+                check(self)
+            } else {
+                next(self)
+            }
+        }
+    }
+    
+    @IBAction func check(_ sender: Any) {
+        wordInput = vmSettings.autoCorrectInput(text: wordInput)
+        tfWordInput.stringValue = wordInput
+        if wordInput == vm.currentWord {
+            tfCorrect.isHidden = false
+        } else {
+            tfIncorrect.isHidden = false
+            tfWordTarget.isHidden = false
+            tfWordTarget.stringValue = vm.currentWord
+        }
     }
 }
