@@ -123,6 +123,7 @@ class SettingsViewController: NSViewController, SettingsViewModelDelegate {
         acVoices.content = vm.arrMacVoices
         acDictItems.content = vm.arrDictItems
         acDictsNote.content = vm.arrDictsNote
+        acDictsTranslation.content = vm.arrDictsTranslation
         acTextbooks.content = vm.arrTextbooks
         onUpdateTextbook()
     }

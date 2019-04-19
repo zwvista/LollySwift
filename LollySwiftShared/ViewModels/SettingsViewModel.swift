@@ -149,7 +149,7 @@ class SettingsViewModel: NSObject {
     @objc
     var selectedDictNote = MDictNote() {
         didSet {
-            USDICTNOTEID = selectedDictNote.ID
+            USDICTNOTEID = selectedDictNote.DICTID
         }
     }
     var selectedDictNoteIndex: Int {
@@ -162,7 +162,7 @@ class SettingsViewModel: NSObject {
     @objc
     var selectedDictTranslation = MDictTranslation() {
         didSet {
-            USDICTTRANSLATIONID = selectedDictTranslation.ID
+            USDICTTRANSLATIONID = selectedDictTranslation.DICTID
         }
     }
     var selectedDictTranslationIndex: Int {
