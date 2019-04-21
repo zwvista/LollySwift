@@ -18,6 +18,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     @IBOutlet weak var scTextFilter: NSSegmentedControl!
     @IBOutlet weak var tfFilter: NSTextField!
     @IBOutlet weak var chkLevelGE0Only: NSButton!
+    @IBOutlet weak var tfURL: NSTextField!
     @IBOutlet weak var tableView: NSTableView!
     @IBOutlet weak var tfStatusText: NSTextField!
 
@@ -181,6 +182,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         self.view.window?.makeKeyAndOrderFront(self)
         tableView.becomeFirstResponder()
+        tfURL.stringValue = webView.url!.absoluteString
         guard dictStatus == .navigating else {return}
         let item = vmSettings.arrDictItems[selectedDictItemIndex]
         let item2 = vmSettings.arrDictsReference.first { $0.DICTNAME == item.DICTNAME }!

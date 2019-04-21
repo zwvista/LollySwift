@@ -13,16 +13,21 @@ class WordsTestViewController: NSViewController, LollyProtocol, NSTextFieldDeleg
     var vm: WordsTestViewModel!
     let disposeBag = DisposeBag()
 
-    @IBOutlet weak var tfTranslation: NSTextField!
-    @IBOutlet weak var tfWordTarget: NSTextField!
+    @IBOutlet weak var tfIndex: NSTextField!
     @IBOutlet weak var tfCorrect: NSTextField!
     @IBOutlet weak var tfIncorrect: NSTextField!
+    @IBOutlet weak var tfWordTarget: NSTextField!
+    @IBOutlet weak var tfTranslation: NSTextField!
     @IBOutlet weak var tfWordInput: NSTextField!
     
     @objc var wordInput = ""
+    
+    let synth = NSSpeechSynthesizer()
+    var speakOrNot = false
 
     func settingsChanged() {
         vm = WordsTestViewModel(settings: AppDelegate.theSettingsViewModel)
+        synth.setVoice(NSSpeechSynthesizer.VoiceName(rawValue: vmSettings.macVoiceName))
         newTest(self)
     }
 
@@ -32,11 +37,16 @@ class WordsTestViewController: NSViewController, LollyProtocol, NSTextFieldDeleg
     }
     
     private func doTest() {
+        tfIndex.stringValue = "\(vm.index + 1)/\(vm.arrWords.count)"
         tfCorrect.isHidden = true
         tfIncorrect.isHidden = true
         tfWordTarget.stringValue = ""
+        wordInput = ""
         tfWordInput.stringValue = ""
         tfWordInput.becomeFirstResponder()
+        if speakOrNot {
+            synth.startSpeaking(vm.currentWord)
+        }
         vm.getTranslation().subscribe(onNext: {
             self.tfTranslation.stringValue = $0
         }).disposed(by: disposeBag)
@@ -78,5 +88,16 @@ class WordsTestViewController: NSViewController, LollyProtocol, NSTextFieldDeleg
             tfWordTarget.isHidden = false
             tfWordTarget.stringValue = vm.currentWord
         }
+    }
+    
+    @IBAction func speakOrNotChanged(_ sender: Any) {
+        speakOrNot = (sender as! NSSegmentedControl).selectedSegment == 1
+        if speakOrNot {
+            synth.startSpeaking(vm.currentWord)
+        }
+    }
+
+    deinit {
+        print("DEBUG: \(self.className) deinit")
     }
 }
