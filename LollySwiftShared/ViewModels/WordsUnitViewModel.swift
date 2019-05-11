@@ -163,7 +163,7 @@ class WordsUnitViewModel: WordsBaseViewModel {
         let item = arrWords[index]
         return vmNote.getNote(word: item.WORD).flatMap { note -> Observable<()> in
             item.NOTE = note
-            return WordsUnitViewModel.update(item.ID, note: note)
+            return WordsUnitViewModel.update(item.WORDID, note: note)
         }
     }
     
