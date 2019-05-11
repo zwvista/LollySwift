@@ -24,6 +24,8 @@ class WordsTestViewController: NSViewController, LollyProtocol, NSTextFieldDeleg
     
     let synth = NSSpeechSynthesizer()
     var speakOrNot = false
+    var shuffled = true
+    var levelge0only = true
 
     func settingsChanged() {
         vm = WordsTestViewModel(settings: AppDelegate.theSettingsViewModel)
@@ -53,7 +55,7 @@ class WordsTestViewController: NSViewController, LollyProtocol, NSTextFieldDeleg
     }
     
     @IBAction func newTest(_ sender: Any) {
-        vm.newTest().subscribe {
+        vm.newTest(shuffled: shuffled, levelge0only: levelge0only).subscribe {
             self.doTest()
         }.disposed(by: disposeBag)
     }
@@ -95,6 +97,14 @@ class WordsTestViewController: NSViewController, LollyProtocol, NSTextFieldDeleg
         if speakOrNot {
             synth.startSpeaking(vm.currentWord)
         }
+    }
+    
+    @IBAction func fixedOrNotChanged(_ sender: Any) {
+        shuffled = (sender as! NSSegmentedControl).selectedSegment == 1
+    }
+    
+    @IBAction func levelAllOrNotChanged(_ sender: Any) {
+        levelge0only = (sender as! NSSegmentedControl).selectedSegment == 1
     }
 
     deinit {

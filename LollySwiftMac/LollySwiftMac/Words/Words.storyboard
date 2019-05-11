@@ -1674,7 +1674,7 @@ Gw
                                         <action selector="newTest:" target="8fs-z5-j5z" id="y9w-OD-jLo"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="5C13EDF6-ECEE-4551-A595-50711F7FE881" label="Speak?" paletteLabel="Speak?" sizingBehavior="auto" id="qRB-d3-flw" userLabel="Speak?">
+                                <toolbarItem implicitItemIdentifier="5C13EDF6-ECEE-4551-A595-50711F7FE881" label="Speak?" paletteLabel="Speak?" sizingBehavior="auto" id="qRB-d3-flw">
                                     <nil key="toolTip"/>
                                     <segmentedControl key="view" verticalHuggingPriority="750" id="tBa-or-L52">
                                         <rect key="frame" x="0.0" y="14" width="95" height="23"/>
@@ -1691,10 +1691,46 @@ Gw
                                         </connections>
                                     </segmentedControl>
                                 </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="B1C452AE-7FBB-4C9F-A722-54CE7113DF07" label="Shuffled?" paletteLabel="Shuffled?" sizingBehavior="auto" id="wVI-Ck-osd">
+                                    <nil key="toolTip"/>
+                                    <segmentedControl key="view" verticalHuggingPriority="750" id="szy-QT-d4w">
+                                        <rect key="frame" x="0.0" y="14" width="114" height="23"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="PQR-g9-0qW">
+                                            <font key="font" metaFont="system"/>
+                                            <segments>
+                                                <segment label="Fixed" width="45"/>
+                                                <segment label="Shuffled" width="62" selected="YES" tag="1"/>
+                                            </segments>
+                                        </segmentedCell>
+                                        <connections>
+                                            <action selector="fixedOrNotChanged:" target="8fs-z5-j5z" id="Q0l-4y-w0l"/>
+                                        </connections>
+                                    </segmentedControl>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="5A603DFE-C7EF-472E-A909-ECC45C1FD9FC" label="Level?" paletteLabel="Level?" sizingBehavior="auto" id="l35-my-hmS">
+                                    <nil key="toolTip"/>
+                                    <segmentedControl key="view" verticalHuggingPriority="750" id="sMy-vg-Aim">
+                                        <rect key="frame" x="0.0" y="14" width="96" height="24"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="og0-Ng-5g1">
+                                            <font key="font" metaFont="system"/>
+                                            <segments>
+                                                <segment label="All" width="42"/>
+                                                <segment label="&gt;= 0" width="46" selected="YES" tag="1"/>
+                                            </segments>
+                                        </segmentedCell>
+                                        <connections>
+                                            <action selector="levelAllOrNotChanged:" target="8fs-z5-j5z" id="7KF-5W-yJV"/>
+                                        </connections>
+                                    </segmentedControl>
+                                </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="JMO-aE-HGx"/>
                                 <toolbarItem reference="qRB-d3-flw"/>
+                                <toolbarItem reference="wVI-Ck-osd"/>
+                                <toolbarItem reference="l35-my-hmS"/>
                             </defaultToolbarItems>
                         </toolbar>
                         <connections>

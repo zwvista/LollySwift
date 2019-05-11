@@ -23,9 +23,11 @@ class WordsTestViewModel {
     var arrWords = [MUnitWord]()
     var index = 0
     
-    func newTest() -> Observable<()> {
+    func newTest(shuffled: Bool, levelge0only: Bool) -> Observable<()> {
         return MUnitWord.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO).map {
-            self.arrWords = $0.shuffled()
+            self.arrWords = $0
+            if levelge0only { self.arrWords = self.arrWords.filter { $0.LEVEL >= 0 } }
+            if shuffled { self.arrWords = self.arrWords.shuffled() }
             self.index = 0
         }
     }
