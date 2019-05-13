@@ -19,6 +19,8 @@ class WordsTestViewController: NSViewController, LollyProtocol, NSTextFieldDeleg
     @IBOutlet weak var tfWordTarget: NSTextField!
     @IBOutlet weak var tfTranslation: NSTextField!
     @IBOutlet weak var tfWordInput: NSTextField!
+    @IBOutlet weak var btnCheck: NSButton!
+    @IBOutlet weak var btnNext: NSButton!
     
     @objc var wordInput = ""
     
@@ -39,19 +41,26 @@ class WordsTestViewController: NSViewController, LollyProtocol, NSTextFieldDeleg
     }
     
     private func doTest() {
-        tfIndex.stringValue = "\(vm.index + 1)/\(vm.arrWords.count)"
+        let b = vm.hasNext()
+        tfIndex.isHidden = !b
         tfCorrect.isHidden = true
         tfIncorrect.isHidden = true
+        btnCheck.isEnabled = b
+        btnNext.isEnabled = b
         tfWordTarget.stringValue = ""
+        tfTranslation.stringValue = ""
         wordInput = ""
         tfWordInput.stringValue = ""
         tfWordInput.becomeFirstResponder()
-        if speakOrNot {
-            synth.startSpeaking(vm.currentWord)
+        if b {
+            tfIndex.stringValue = "\(vm.index + 1)/\(vm.arrWords.count)"
+            if speakOrNot {
+                synth.startSpeaking(vm.currentWord)
+            }
+            vm.getTranslation().subscribe(onNext: {
+                self.tfTranslation.stringValue = $0
+            }).disposed(by: disposeBag)
         }
-        vm.getTranslation().subscribe(onNext: {
-            self.tfTranslation.stringValue = $0
-        }).disposed(by: disposeBag)
     }
     
     @IBAction func newTest(_ sender: Any) {

@@ -15,6 +15,8 @@ class MWordFami: NSObject, Codable {
     var USERID = 0
     var WORDID = 0
     var LEVEL = 0
+    var CORRECT = 0
+    var TOTAL = 0
 
     private static func getDataByUserWord(userid: Int, wordid: Int) -> Observable<[MWordFami]> {
         // SQL: SELECT * FROM WORDSFAMI WHERE USERID=? AND WORDID=?
@@ -55,14 +57,33 @@ class MWordFami: NSObject, Codable {
                 } else {
                     return create(item: item).map { print($0) }
                 }
+            } else if level == 0 && arr[0].CORRECT == 0 && arr[0].TOTAL == 0  {
+                return delete(arr[0].ID).map { print($0) }
             } else {
-                let id = arr[0].ID
-                if level == 0 {
-                    return delete(id).map { print($0) }
-                } else {
-                    item.ID = id
-                    return update(item: item).map { print($0) }
-                }
+                item.ID = arr[0].ID
+                item.CORRECT = arr[0].CORRECT
+                item.TOTAL = arr[0].TOTAL
+                return update(item: item).map { print($0) }
+            }
+        }
+    }
+    
+    static func update(wordid: Int, isCorrect: Bool) -> Observable<()> {
+        let userid = CommonApi.userid
+        return getDataByUserWord(userid: userid, wordid: wordid).flatMap { arr -> Observable<()> in
+            let item = MWordFami()
+            item.USERID = userid
+            item.WORDID = wordid
+            if arr.isEmpty {
+                item.CORRECT = isCorrect ? 1 : 0
+                item.TOTAL = 1
+                return create(item: item).map { print($0) }
+            } else {
+                item.ID = arr[0].ID
+                item.LEVEL = arr[0].LEVEL
+                item.CORRECT = arr[0].CORRECT + (isCorrect ? 1 : 0)
+                item.TOTAL = arr[0].TOTAL + 1
+                return update(item: item).map { print($0) }
             }
         }
     }
