@@ -20,7 +20,6 @@ class WordsTestViewController: NSViewController, LollyProtocol, NSTextFieldDeleg
     @IBOutlet weak var tfTranslation: NSTextField!
     @IBOutlet weak var tfWordInput: NSTextField!
     @IBOutlet weak var btnCheck: NSButton!
-    @IBOutlet weak var btnNext: NSButton!
     
     @objc var wordInput = ""
     
@@ -46,7 +45,7 @@ class WordsTestViewController: NSViewController, LollyProtocol, NSTextFieldDeleg
         tfCorrect.isHidden = true
         tfIncorrect.isHidden = true
         btnCheck.isEnabled = b
-        btnNext.isEnabled = b
+        btnCheck.title = "Check"
         tfWordTarget.stringValue = ""
         tfTranslation.stringValue = ""
         wordInput = ""
@@ -69,11 +68,6 @@ class WordsTestViewController: NSViewController, LollyProtocol, NSTextFieldDeleg
         }.disposed(by: disposeBag)
     }
     
-    @IBAction func next(_ sender: Any) {
-        vm.next()
-        doTest()
-    }
-    
     func controlTextDidEndEditing(_ obj: Notification) {
         let textfield = obj.object as! NSControl
         let dict = (obj as NSNotification).userInfo!
@@ -81,23 +75,26 @@ class WordsTestViewController: NSViewController, LollyProtocol, NSTextFieldDeleg
         let code = Int(reason.int32Value)
         guard code == NSReturnTextMovement else {return}
         if textfield === tfWordInput && !wordInput.isEmpty {
-            if tfCorrect.isHidden && tfIncorrect.isHidden {
-                check(self)
-            } else {
-                next(self)
-            }
+            check(self)
         }
     }
     
     @IBAction func check(_ sender: Any) {
-        wordInput = vmSettings.autoCorrectInput(text: wordInput)
-        tfWordInput.stringValue = wordInput
-        if wordInput == vm.currentWord {
-            tfCorrect.isHidden = false
+        if tfCorrect.isHidden && tfIncorrect.isHidden {
+            wordInput = vmSettings.autoCorrectInput(text: wordInput)
+            tfWordInput.stringValue = wordInput
+            if wordInput == vm.currentWord {
+                tfCorrect.isHidden = false
+            } else {
+                tfIncorrect.isHidden = false
+                tfWordTarget.isHidden = false
+                tfWordTarget.stringValue = vm.currentWord
+            }
+            btnCheck.title = "Next"
         } else {
-            tfIncorrect.isHidden = false
-            tfWordTarget.isHidden = false
-            tfWordTarget.stringValue = vm.currentWord
+            vm.next()
+            doTest()
+            btnCheck.title = "Check"
         }
     }
     

@@ -70,7 +70,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     }
 
     func itemForRow(row: Int) -> (MWordProtocol & NSObject)? {
-        return nil;
+        return nil
     }
     
     // https://stackoverflow.com/questions/10910779/coloring-rows-in-view-based-nstableview
@@ -92,7 +92,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
         } else {
             cell.textField?.textColor = NSColor.windowFrameTextColor
         }
-        return cell;
+        return cell
     }
     
     func updateStatusText() {

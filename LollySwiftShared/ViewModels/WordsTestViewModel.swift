@@ -21,11 +21,13 @@ class WordsTestViewModel {
     }
 
     var arrWords = [MUnitWord]()
+    var arrCorrectIDs = [Int]()
     var index = 0
     
     func newTest(shuffled: Bool, levelge0only: Bool) -> Observable<()> {
         return MUnitWord.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO).map {
             self.arrWords = $0
+            self.arrCorrectIDs = []
             if levelge0only { self.arrWords = self.arrWords.filter { $0.LEVEL >= 0 } }
             if shuffled { self.arrWords = self.arrWords.shuffled() }
             self.index = 0
@@ -37,6 +39,10 @@ class WordsTestViewModel {
     }
     func next() {
         index += 1
+        if !hasNext() {
+            index = 0
+            arrWords = arrWords.filter { !arrCorrectIDs.contains($0.ID) }
+        }
     }
     
     var currentWord: String {
@@ -49,5 +55,13 @@ class WordsTestViewModel {
             print(html)
             return CommonApi.extractText(from: html, transform: mDictTranslation.TRANSFORM!, template: "") { text,_ in text }
         }
+    }
+    
+    func check(wordInput: String) -> Observable<()> {
+        guard hasNext() else {return Observable.empty()}
+        let o = arrWords[index]
+        let isCorrect = o.WORD == wordInput
+        if isCorrect { arrCorrectIDs.append(o.ID) }
+        return MWordFami.update(wordid: o.WORDID, isCorrect: isCorrect)
     }
 }

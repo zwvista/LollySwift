@@ -23,6 +23,8 @@ class MUnitWord: NSObject, Codable, MWordProtocol {
     var NOTE: String?
     var FAMIID = 0
     var LEVEL = 0
+    var CORRECT = 0
+    var TOTAL = 0
 
     enum CodingKeys : String, CodingKey {
         case ID
@@ -37,6 +39,8 @@ class MUnitWord: NSObject, Codable, MWordProtocol {
         case NOTE
         case FAMIID
         case LEVEL
+        case CORRECT
+        case TOTAL
     }
 
     unowned var textbook: MTextbook!
@@ -51,6 +55,9 @@ class MUnitWord: NSObject, Codable, MWordProtocol {
     }
     var WORDNOTE: String {
         return WORD + ((NOTE ?? "").isEmpty ? "" : "(\(NOTE!))")
+    }
+    var ACCURACY: String {
+        return TOTAL == 0 ? "N/A" : (floor(CORRECT.toDouble / TOTAL.toDouble * 10) / 10).toString
     }
 
     public override var description: String {

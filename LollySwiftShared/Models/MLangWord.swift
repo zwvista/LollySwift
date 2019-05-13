@@ -17,6 +17,8 @@ class MLangWord: NSObject, Codable, MWordProtocol {
     var NOTE: String?
     var FAMIID = 0
     var LEVEL = 0
+    var CORRECT = 0
+    var TOTAL = 0
 
     var WORDNOTE: String {
         return WORD + ((NOTE ?? "").isEmpty ? "" : "(\(NOTE!))")
