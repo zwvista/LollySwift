@@ -23,6 +23,9 @@ class MLangWord: NSObject, Codable, MWordProtocol {
     var WORDNOTE: String {
         return WORD + ((NOTE ?? "").isEmpty ? "" : "(\(NOTE!))")
     }
+    var ACCURACY: String {
+        return TOTAL == 0 ? "N/A" : "\(floor(CORRECT.toDouble / TOTAL.toDouble * 10) / 10)%"
+    }
 
     override init() {
     }
