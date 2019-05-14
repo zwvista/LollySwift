@@ -62,6 +62,8 @@ class WordsTestViewModel {
         let o = arrWords[index]
         let isCorrect = o.WORD == wordInput
         if isCorrect { arrCorrectIDs.append(o.ID) }
-        return MWordFami.update(wordid: o.WORDID, isCorrect: isCorrect)
+        return MWordFami.update(wordid: o.WORDID, isCorrect: isCorrect).map {
+            o.CORRECT = $0.CORRECT; o.TOTAL = $0.TOTAL
+        }
     }
 }

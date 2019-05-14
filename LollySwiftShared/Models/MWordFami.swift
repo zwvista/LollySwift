@@ -68,22 +68,22 @@ class MWordFami: NSObject, Codable {
         }
     }
     
-    static func update(wordid: Int, isCorrect: Bool) -> Observable<()> {
+    static func update(wordid: Int, isCorrect: Bool) -> Observable<MWordFami> {
         let userid = CommonApi.userid
-        return getDataByUserWord(userid: userid, wordid: wordid).flatMap { arr -> Observable<()> in
+        return getDataByUserWord(userid: userid, wordid: wordid).flatMap { arr -> Observable<MWordFami> in
             let item = MWordFami()
             item.USERID = userid
             item.WORDID = wordid
             if arr.isEmpty {
                 item.CORRECT = isCorrect ? 1 : 0
                 item.TOTAL = 1
-                return create(item: item).map { print($0) }
+                return create(item: item).map { print($0); return item }
             } else {
                 item.ID = arr[0].ID
                 item.LEVEL = arr[0].LEVEL
                 item.CORRECT = arr[0].CORRECT + (isCorrect ? 1 : 0)
                 item.TOTAL = arr[0].TOTAL + 1
-                return update(item: item).map { print($0) }
+                return update(item: item).map { print($0); return item }
             }
         }
     }
