@@ -27,6 +27,7 @@ class WordsUnitDetailViewController: NSViewController {
     @IBOutlet weak var tfNote: NSTextField!
     @IBOutlet weak var tfFamiID: NSTextField!
     @IBOutlet weak var tfLevel: NSTextField!
+    @IBOutlet weak var tfAccuracy: NSTextField!
 
     let disposeBag = DisposeBag()
 
@@ -41,6 +42,12 @@ class WordsUnitDetailViewController: NSViewController {
         // https://stackoverflow.com/questions/24235815/cocoa-how-to-set-window-title-from-within-view-controller-in-swift
         (item.WORD.isEmpty ? tfWord : tfNote).becomeFirstResponder()
         view.window?.title = isAdd ? "New Word" : item.WORD
+    }
+    
+    @IBAction func clearAccuracy(_ sender: Any) {
+        item.CORRECT = 0
+        item.TOTAL = 0
+        tfAccuracy.stringValue = item.ACCURACY
     }
 
     @IBAction func okClicked(_ sender: Any) {

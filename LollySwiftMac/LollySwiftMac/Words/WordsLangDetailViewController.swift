@@ -22,6 +22,7 @@ class WordsLangDetailViewController: NSViewController {
     @IBOutlet weak var tfNote: NSTextField!
     @IBOutlet weak var tfFamiID: NSTextField!
     @IBOutlet weak var tfLevel: NSTextField!
+    @IBOutlet weak var tfAccuracy: NSTextField!
 
     let disposeBag = DisposeBag()
 
@@ -36,6 +37,12 @@ class WordsLangDetailViewController: NSViewController {
         view.window?.title = isAdd ? "New Word" : item.WORD
     }
     
+    @IBAction func clearAccuracy(_ sender: Any) {
+        item.CORRECT = 0
+        item.TOTAL = 0
+        tfAccuracy.stringValue = item.ACCURACY
+    }
+
     @IBAction func okClicked(_ sender: Any) {
         // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
         self.commitEditing()
