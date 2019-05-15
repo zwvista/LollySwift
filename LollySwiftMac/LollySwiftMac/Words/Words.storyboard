@@ -1784,18 +1784,35 @@ Gw
         <!--Window Controller-->
         <scene sceneID="cXD-iz-n8D">
             <objects>
-                <windowController storyboardIdentifier="WordsTestWindowController" id="qnx-NH-WRl" sceneMemberID="viewController">
-                    <window key="window" title="Words Test" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="7Rs-jF-5Jr">
+                <windowController storyboardIdentifier="WordsReviewWindowController" id="qnx-NH-WRl" sceneMemberID="viewController">
+                    <window key="window" title="Words Review" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="7Rs-jF-5Jr">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
                         <toolbar key="toolbar" implicitIdentifier="188DCEDA-C8A3-44EC-B951-529BDEE543EA" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="KjN-jA-3e8">
                             <allowedToolbarItems>
-                                <toolbarItem implicitItemIdentifier="D7BFDFBE-7FB3-4D82-9239-C47A158CE4C5" label="New Test" paletteLabel="New Test" tag="-1" id="JMO-aE-HGx">
+                                <toolbarItem implicitItemIdentifier="D7BFDFBE-7FB3-4D82-9239-C47A158CE4C5" label="New Test" paletteLabel="New Test" tag="-1" image="NSAdvanced" id="JMO-aE-HGx">
                                     <connections>
                                         <action selector="newTest:" target="8fs-z5-j5z" id="y9w-OD-jLo"/>
                                     </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="CB08AA9E-C0A1-4F4D-A92D-4876CECCB819" label="Mode?" paletteLabel="Mode?" sizingBehavior="auto" id="PBJ-UX-WoG">
+                                    <nil key="toolTip"/>
+                                    <segmentedControl key="view" verticalHuggingPriority="750" id="S3p-Ky-5jW">
+                                        <rect key="frame" x="0.0" y="14" width="99" height="23"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="Pbp-i8-05Y">
+                                            <font key="font" metaFont="system"/>
+                                            <segments>
+                                                <segment label="Review" width="50"/>
+                                                <segment label="Test" width="42" selected="YES" tag="1"/>
+                                            </segments>
+                                        </segmentedCell>
+                                        <connections>
+                                            <action selector="reviewOrTestChanged:" target="8fs-z5-j5z" id="q4T-lk-kcD"/>
+                                        </connections>
+                                    </segmentedControl>
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="5C13EDF6-ECEE-4551-A595-50711F7FE881" label="Speak?" paletteLabel="Speak?" sizingBehavior="auto" id="qRB-d3-flw">
                                     <nil key="toolTip"/>
@@ -1831,12 +1848,12 @@ Gw
                                         </connections>
                                     </segmentedControl>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="5A603DFE-C7EF-472E-A909-ECC45C1FD9FC" label="Level?" paletteLabel="Level?" sizingBehavior="auto" id="l35-my-hmS">
+                                <toolbarItem implicitItemIdentifier="E16763A3-D71B-44F7-B389-312FED1D5EE4" label="Level?" paletteLabel="Level?" sizingBehavior="auto" id="56Q-UU-P0O">
                                     <nil key="toolTip"/>
-                                    <segmentedControl key="view" verticalHuggingPriority="750" id="sMy-vg-Aim">
+                                    <segmentedControl key="view" verticalHuggingPriority="750" id="03k-91-Oud">
                                         <rect key="frame" x="0.0" y="14" width="96" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="og0-Ng-5g1">
+                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="LBE-Je-EDm">
                                             <font key="font" metaFont="system"/>
                                             <segments>
                                                 <segment label="All" width="42"/>
@@ -1844,16 +1861,17 @@ Gw
                                             </segments>
                                         </segmentedCell>
                                         <connections>
-                                            <action selector="levelAllOrNotChanged:" target="8fs-z5-j5z" id="7KF-5W-yJV"/>
+                                            <action selector="levelAllOrNotChanged:" target="8fs-z5-j5z" id="Xne-yp-JFK"/>
                                         </connections>
                                     </segmentedControl>
                                 </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="JMO-aE-HGx"/>
+                                <toolbarItem reference="PBJ-UX-WoG"/>
                                 <toolbarItem reference="qRB-d3-flw"/>
                                 <toolbarItem reference="wVI-Ck-osd"/>
-                                <toolbarItem reference="l35-my-hmS"/>
+                                <toolbarItem reference="56Q-UU-P0O"/>
                             </defaultToolbarItems>
                         </toolbar>
                         <connections>
@@ -1868,10 +1886,10 @@ Gw
             </objects>
             <point key="canvasLocation" x="-83" y="1713"/>
         </scene>
-        <!--Words Test View Controller-->
+        <!--Words Review View Controller-->
         <scene sceneID="hxW-93-KJY">
             <objects>
-                <viewController id="ypg-jQ-ROv" customClass="WordsTestViewController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ypg-jQ-ROv" customClass="WordsReviewViewController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="cC6-V3-CmG">
                         <rect key="frame" x="0.0" y="0.0" width="563" height="271"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -5224,6 +5242,7 @@ Gw
     </scenes>
     <resources>
         <image name="NSAddTemplate" width="11" height="11"/>
+        <image name="NSAdvanced" width="32" height="32"/>
         <image name="NSBookmarksTemplate" width="17" height="18"/>
         <image name="NSRefreshTemplate" width="11" height="15"/>
         <image name="NSRemoveTemplate" width="11" height="11"/>

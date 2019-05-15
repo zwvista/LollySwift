@@ -90,6 +90,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @IBAction func wordsTest(_ sender: AnyObject) {
-        showWindow(storyBoardName: "Words", windowControllerName: "WordsTestWindowController", modal: false)
+        showWindow(storyBoardName: "Words", windowControllerName: "WordsReviewWindowController", modal: false)
     }
 }

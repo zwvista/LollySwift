@@ -1,5 +1,5 @@
 //
-//  WordsTestViewController.swift
+//  WordsReviewViewController.swift
 //  LollySwiftMac
 //
 //  Created by 趙偉 on 2019/04/15.
@@ -9,8 +9,8 @@
 import Cocoa
 import RxSwift
 
-class WordsTestViewController: NSViewController, LollyProtocol, NSTextFieldDelegate {
-    var vm: WordsTestViewModel!
+class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDelegate {
+    var vm: WordsReviewViewModel!
     let disposeBag = DisposeBag()
 
     @IBOutlet weak var tfIndex: NSTextField!
@@ -28,9 +28,10 @@ class WordsTestViewController: NSViewController, LollyProtocol, NSTextFieldDeleg
     var speakOrNot = false
     var shuffled = true
     var levelge0only = true
+    var testMode = true
 
     func settingsChanged() {
-        vm = WordsTestViewModel(settings: AppDelegate.theSettingsViewModel)
+        vm = WordsReviewViewModel(settings: AppDelegate.theSettingsViewModel)
         synth.setVoice(NSSpeechSynthesizer.VoiceName(rawValue: vmSettings.macVoiceName))
         newTest(self)
     }
@@ -45,10 +46,10 @@ class WordsTestViewController: NSViewController, LollyProtocol, NSTextFieldDeleg
         tfIndex.isHidden = !b
         tfCorrect.isHidden = true
         tfIncorrect.isHidden = true
-        tfAccuracy.isHidden = !b
+        tfAccuracy.isHidden = !testMode || !b
         btnCheck.isEnabled = b
-        btnCheck.title = "Check"
-        tfWordTarget.stringValue = ""
+        btnCheck.title = testMode ? "Check" : "Next"
+        tfWordTarget.stringValue = testMode ? "" : vm.currentWord
         tfTranslation.stringValue = ""
         wordInput = ""
         tfWordInput.stringValue = ""
@@ -77,13 +78,16 @@ class WordsTestViewController: NSViewController, LollyProtocol, NSTextFieldDeleg
         let reason = dict["NSTextMovement"] as! NSNumber
         let code = Int(reason.int32Value)
         guard code == NSReturnTextMovement else {return}
-        if textfield === tfWordInput && !wordInput.isEmpty {
+        if textfield === tfWordInput && (!testMode || !wordInput.isEmpty) {
             check(self)
         }
     }
     
     @IBAction func check(_ sender: Any) {
-        if tfCorrect.isHidden && tfIncorrect.isHidden {
+        if !testMode {
+            vm.next()
+            doTest()
+        } else if tfCorrect.isHidden && tfIncorrect.isHidden {
             wordInput = vmSettings.autoCorrectInput(text: wordInput)
             tfWordInput.stringValue = wordInput
             if wordInput == vm.currentWord {
@@ -117,6 +121,10 @@ class WordsTestViewController: NSViewController, LollyProtocol, NSTextFieldDeleg
     
     @IBAction func levelAllOrNotChanged(_ sender: Any) {
         levelge0only = (sender as! NSSegmentedControl).selectedSegment == 1
+    }
+    
+    @IBAction func reviewOrTestChanged(_ sender: Any) {
+        testMode = (sender as! NSSegmentedControl).selectedSegment == 1
     }
 
     deinit {

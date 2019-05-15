@@ -1,5 +1,5 @@
 //
-//  WordsTestViewModel.swift
+//  WordsReviewViewModel.swift
 //  LollySwiftMac
 //
 //  Created by 趙偉 on 2019/04/15.
@@ -9,7 +9,7 @@
 import Foundation
 import RxSwift
 
-class WordsTestViewModel {
+class WordsReviewViewModel {
 
     var vmSettings: SettingsViewModel
     var mDictTranslation: MDictTranslation? {
