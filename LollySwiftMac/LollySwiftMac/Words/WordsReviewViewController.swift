@@ -82,8 +82,7 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
             self.doTest()
         }.disposed(by: disposeBag)
         if reviewMode == 1 {
-            subscription?.dispose()
-            subscription = Observable<Int>.interval(3, scheduler: MainScheduler.instance).subscribe { _ in
+            subscription = Observable<Int>.interval(vmSettings.USREVIEWINTERVAL.toDouble / 1000.0, scheduler: MainScheduler.instance).subscribe { _ in
                 self.check(self)
             }
             subscription?.disposed(by: disposeBag)

@@ -201,7 +201,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation {
         var i = 0
         let wordCount = arrWords.count
         var subscription: Disposable?
-        subscription = Observable<Int>.interval(Double(vmSettings.USREADINTERVAL) / 1000.0, scheduler: MainScheduler.instance).subscribe { _ in
+        subscription = Observable<Int>.interval(vmSettings.USREADINTERVAL.toDouble / 1000.0, scheduler: MainScheduler.instance).subscribe { _ in
             if i >= wordCount {
                 subscription?.dispose()
             } else {

@@ -29,6 +29,9 @@ class SettingsViewModel: NSObject {
     var USREADINTERVAL: Int {
         get { return selectedUSUser1.VALUE1!.toInt()! }
     }
+    var USREVIEWINTERVAL: Int {
+        get { return selectedUSUser1.VALUE2!.toInt()! }
+    }
     private var selectedUSLang2: MUserSetting!
     var USTEXTBOOKID: Int {
         get { return selectedUSLang2.VALUE1!.toInt()! }
