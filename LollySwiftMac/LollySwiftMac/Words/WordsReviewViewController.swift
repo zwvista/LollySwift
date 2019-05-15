@@ -28,7 +28,11 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
     var speakOrNot = false
     var shuffled = true
     var levelge0only = true
-    var testMode = true
+    var reviewMode = 0
+    var isTestMode: Bool {
+        return reviewMode == 2
+    }
+    var subscription: Disposable? = nil
 
     func settingsChanged() {
         vm = WordsReviewViewModel(settings: AppDelegate.theSettingsViewModel)
@@ -41,15 +45,19 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
         settingsChanged()
     }
     
+    override func viewWillDisappear() {
+        subscription?.dispose()
+    }
+    
     private func doTest() {
         let b = vm.hasNext()
         tfIndex.isHidden = !b
         tfCorrect.isHidden = true
         tfIncorrect.isHidden = true
-        tfAccuracy.isHidden = !testMode || !b
+        tfAccuracy.isHidden = !isTestMode || !b
         btnCheck.isEnabled = b
-        btnCheck.title = testMode ? "Check" : "Next"
-        tfWordTarget.stringValue = testMode ? "" : vm.currentWord
+        btnCheck.title = isTestMode ? "Check" : "Next"
+        tfWordTarget.stringValue = isTestMode ? "" : vm.currentWord
         tfTranslation.stringValue = ""
         wordInput = ""
         tfWordInput.stringValue = ""
@@ -63,13 +71,23 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
             vm.getTranslation().subscribe(onNext: {
                 self.tfTranslation.stringValue = $0
             }).disposed(by: disposeBag)
+        } else {
+            subscription?.dispose()
         }
     }
     
     @IBAction func newTest(_ sender: Any) {
+        subscription?.dispose()
         vm.newTest(shuffled: shuffled, levelge0only: levelge0only).subscribe {
             self.doTest()
         }.disposed(by: disposeBag)
+        if reviewMode == 1 {
+            subscription?.dispose()
+            subscription = Observable<Int>.interval(3, scheduler: MainScheduler.instance).subscribe { _ in
+                self.check(self)
+            }
+            subscription?.disposed(by: disposeBag)
+        }
     }
     
     func controlTextDidEndEditing(_ obj: Notification) {
@@ -78,31 +96,31 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
         let reason = dict["NSTextMovement"] as! NSNumber
         let code = Int(reason.int32Value)
         guard code == NSReturnTextMovement else {return}
-        if textfield === tfWordInput && (!testMode || !wordInput.isEmpty) {
+        if textfield === tfWordInput && (!isTestMode || !wordInput.isEmpty) {
             check(self)
         }
     }
     
     @IBAction func check(_ sender: Any) {
-        if !testMode {
-            vm.next()
+        if !isTestMode {
+            vm.next(isTestMode: isTestMode)
             doTest()
         } else if tfCorrect.isHidden && tfIncorrect.isHidden {
             wordInput = vmSettings.autoCorrectInput(text: wordInput)
             tfWordInput.stringValue = wordInput
+            tfWordTarget.isHidden = false
+            tfWordTarget.stringValue = vm.currentWord
             if wordInput == vm.currentWord {
                 tfCorrect.isHidden = false
             } else {
                 tfIncorrect.isHidden = false
-                tfWordTarget.isHidden = false
-                tfWordTarget.stringValue = vm.currentWord
             }
             btnCheck.title = "Next"
             vm.check(wordInput: wordInput).subscribe {
                 
             }.disposed(by: disposeBag)
         } else {
-            vm.next()
+            vm.next(isTestMode: isTestMode)
             doTest()
             btnCheck.title = "Check"
         }
@@ -123,8 +141,9 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
         levelge0only = (sender as! NSSegmentedControl).selectedSegment == 1
     }
     
-    @IBAction func reviewOrTestChanged(_ sender: Any) {
-        testMode = (sender as! NSSegmentedControl).selectedSegment == 1
+    @IBAction func reviewModeChanged(_ sender: Any) {
+        reviewMode = (sender as! NSPopUpButton).indexOfSelectedItem
+        newTest(self)
     }
 
     deinit {

@@ -37,9 +37,9 @@ class WordsReviewViewModel {
     func hasNext() -> Bool {
         return index < arrWords.count
     }
-    func next() {
+    func next(isTestMode: Bool) {
         index += 1
-        if !hasNext() {
+        if isTestMode && !hasNext() {
             index = 0
             arrWords = arrWords.filter { !arrCorrectIDs.contains($0.ID) }
         }
