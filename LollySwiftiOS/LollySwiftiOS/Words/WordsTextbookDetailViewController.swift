@@ -22,7 +22,8 @@ class WordsTextbookDetailViewController: UITableViewController, UITextFieldDeleg
     @IBOutlet weak var tfNote: UITextField!
     @IBOutlet weak var tfFamiID: UITextField!
     @IBOutlet weak var tfLevel: UITextField!
-    
+    @IBOutlet weak var tfAccuracy: UITextField!
+
     var vm: WordsUnitViewModel!
     var item: MUnitWord!
     let ddUnit = DropDown()

@@ -87,4 +87,24 @@ class MWordFami: NSObject, Codable {
             }
         }
     }
+    
+    static func clearAccuracy(wordid: Int) -> Observable<()> {
+        let userid = CommonApi.userid
+        return getDataByUserWord(userid: userid, wordid: wordid).flatMap { arr -> Observable<()> in
+            if arr.isEmpty {
+                return Observable.empty()
+            } else if arr[0].LEVEL == 0 {
+                return delete(arr[0].ID).map { print($0) }
+            } else {
+                let item = MWordFami()
+                item.USERID = userid
+                item.WORDID = wordid
+                item.ID = arr[0].ID
+                item.LEVEL = arr[0].LEVEL
+                item.CORRECT = 0
+                item.TOTAL = 0
+                return update(item: item).map { print($0) }
+            }
+        }
+    }
 }
