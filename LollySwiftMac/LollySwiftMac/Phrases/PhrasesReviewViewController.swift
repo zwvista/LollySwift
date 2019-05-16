@@ -1,5 +1,5 @@
 //
-//  WordsReviewViewController.swift
+//  PhrasesReviewViewController.swift
 //  LollySwiftMac
 //
 //  Created by 趙偉 on 2019/04/15.
@@ -9,30 +9,28 @@
 import Cocoa
 import RxSwift
 
-class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDelegate {
-    var vm: WordsReviewViewModel!
+class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldDelegate {
+    var vm: PhrasesReviewViewModel!
     let disposeBag = DisposeBag()
 
     @IBOutlet weak var tfIndex: NSTextField!
     @IBOutlet weak var tfCorrect: NSTextField!
     @IBOutlet weak var tfIncorrect: NSTextField!
-    @IBOutlet weak var tfAccuracy: NSTextField!
-    @IBOutlet weak var tfWordTarget: NSTextField!
+    @IBOutlet weak var tfPhraseTarget: NSTextField!
     @IBOutlet weak var tfTranslation: NSTextField!
-    @IBOutlet weak var tfWordInput: NSTextField!
+    @IBOutlet weak var tfPhraseInput: NSTextField!
     @IBOutlet weak var btnCheck: NSButton!
     
-    @objc var wordInput = ""
+    @objc var phraseInput = ""
     
     let synth = NSSpeechSynthesizer()
     var speakOrNot = false
     var shuffled = true
-    var levelge0only = true
     var reviewMode = 0
     var subscription: Disposable? = nil
 
     func settingsChanged() {
-        vm = WordsReviewViewModel(settings: AppDelegate.theSettingsViewModel)
+        vm = PhrasesReviewViewModel(settings: AppDelegate.theSettingsViewModel)
         synth.setVoice(NSSpeechSynthesizer.VoiceName(rawValue: vmSettings.macVoiceName))
         newTest(self)
     }
@@ -51,23 +49,18 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
         tfIndex.isHidden = !b
         tfCorrect.isHidden = true
         tfIncorrect.isHidden = true
-        tfAccuracy.isHidden = !vm.isTestMode || !b
         btnCheck.isEnabled = b
         btnCheck.title = vm.isTestMode ? "Check" : "Next"
-        tfWordTarget.stringValue = vm.isTestMode ? "" : vm.currentWord
+        tfPhraseTarget.stringValue = vm.isTestMode ? "" : vm.currentPhrase
         tfTranslation.stringValue = ""
-        wordInput = ""
-        tfWordInput.stringValue = ""
-        tfWordInput.becomeFirstResponder()
+        phraseInput = ""
+        tfPhraseInput.stringValue = ""
+        tfPhraseInput.becomeFirstResponder()
         if b {
-            tfIndex.stringValue = "\(vm.index + 1)/\(vm.arrWords.count)"
-            tfAccuracy.stringValue = vm.arrWords[vm.index].ACCURACY
+            tfIndex.stringValue = "\(vm.index + 1)/\(vm.arrPhrases.count)"
             if speakOrNot {
-                synth.startSpeaking(vm.currentWord)
+                synth.startSpeaking(vm.currentPhrase)
             }
-            vm.getTranslation().subscribe(onNext: {
-                self.tfTranslation.stringValue = $0
-            }).disposed(by: disposeBag)
         } else {
             subscription?.dispose()
         }
@@ -75,7 +68,7 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
     
     @IBAction func newTest(_ sender: Any) {
         subscription?.dispose()
-        vm.newTest(mode: ReviewMode(rawValue: reviewMode)!, shuffled: shuffled, levelge0only: levelge0only).subscribe {
+        vm.newTest(mode: ReviewMode(rawValue: reviewMode)!, shuffled: shuffled).subscribe {
             self.doTest()
         }.disposed(by: disposeBag)
         if vm.mode == .reviewAuto {
@@ -92,7 +85,7 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
         let reason = dict["NSTextMovement"] as! NSNumber
         let code = Int(reason.int32Value)
         guard code == NSReturnTextMovement else {return}
-        if textfield === tfWordInput && (!vm.isTestMode || !wordInput.isEmpty) {
+        if textfield === tfPhraseInput && (!vm.isTestMode || !phraseInput.isEmpty) {
             check(self)
         }
     }
@@ -102,19 +95,17 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
             vm.next()
             doTest()
         } else if tfCorrect.isHidden && tfIncorrect.isHidden {
-            wordInput = vmSettings.autoCorrectInput(text: wordInput)
-            tfWordInput.stringValue = wordInput
-            tfWordTarget.isHidden = false
-            tfWordTarget.stringValue = vm.currentWord
-            if wordInput == vm.currentWord {
+            phraseInput = vmSettings.autoCorrectInput(text: phraseInput)
+            tfPhraseInput.stringValue = phraseInput
+            tfPhraseTarget.isHidden = false
+            tfPhraseTarget.stringValue = vm.currentPhrase
+            if phraseInput == vm.currentPhrase {
                 tfCorrect.isHidden = false
             } else {
                 tfIncorrect.isHidden = false
             }
             btnCheck.title = "Next"
-            vm.check(wordInput: wordInput).subscribe {
-                
-            }.disposed(by: disposeBag)
+            vm.check(phraseInput: phraseInput)
         } else {
             vm.next()
             doTest()
@@ -125,16 +116,12 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
     @IBAction func speakOrNotChanged(_ sender: Any) {
         speakOrNot = (sender as! NSSegmentedControl).selectedSegment == 1
         if speakOrNot {
-            synth.startSpeaking(vm.currentWord)
+            synth.startSpeaking(vm.currentPhrase)
         }
     }
     
     @IBAction func fixedOrNotChanged(_ sender: Any) {
         shuffled = (sender as! NSSegmentedControl).selectedSegment == 1
-    }
-    
-    @IBAction func levelAllOrNotChanged(_ sender: Any) {
-        levelge0only = (sender as! NSSegmentedControl).selectedSegment == 1
     }
     
     @IBAction func reviewModeChanged(_ sender: Any) {

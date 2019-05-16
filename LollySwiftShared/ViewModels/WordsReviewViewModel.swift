@@ -23,8 +23,13 @@ class WordsReviewViewModel {
     var arrWords = [MUnitWord]()
     var arrCorrectIDs = [Int]()
     var index = 0
+    var mode: ReviewMode = .reviewAuto
+    var isTestMode: Bool {
+        return mode == .test
+    }
     
-    func newTest(shuffled: Bool, levelge0only: Bool) -> Observable<()> {
+    func newTest(mode: ReviewMode, shuffled: Bool, levelge0only: Bool) -> Observable<()> {
+        self.mode = mode
         return MUnitWord.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO).map {
             self.arrWords = $0
             self.arrCorrectIDs = []
@@ -37,7 +42,7 @@ class WordsReviewViewModel {
     func hasNext() -> Bool {
         return index < arrWords.count
     }
-    func next(isTestMode: Bool) {
+    func next() {
         index += 1
         if isTestMode && !hasNext() {
             index = 0

@@ -15,6 +15,12 @@ enum DictWebViewStatus {
     case automating
 }
 
+enum ReviewMode: Int {
+    case reviewAuto
+    case test
+    case reviewManual
+}
+
 class CommonApi {
     
     static public let userid = 1
