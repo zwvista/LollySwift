@@ -44,8 +44,10 @@ class WordsLangViewModel: WordsBaseViewModel {
         return MLangWord.create(item: item)
     }
     
-    static func delete(_ id: Int) -> Observable<()> {
-        return MLangWord.delete(id)
+    static func delete(item: MLangWord) -> Observable<()> {
+        return MLangWord.delete(item.ID).flatMap {
+            return MWordFami.delete(item.FAMIID)
+        }
     }
     
     func newLangWord() -> MLangWord {
@@ -58,7 +60,7 @@ class WordsLangViewModel: WordsBaseViewModel {
         let item = arrWords[index]
         return vmNote.getNote(word: item.WORD).flatMap { note -> Observable<()> in
             item.NOTE = note
-            return MLangWord.update(item.ID, note: note).map { print($0) }
+            return MLangWord.update(item.ID, note: note)
         }
     }
 

@@ -40,7 +40,7 @@ class PhrasesUnitViewModel: NSObject {
     }
     
     static func update(_ id: Int, seqnum: Int) -> Observable<()> {
-        return MUnitPhrase.update(id, seqnum: seqnum).map { print($0) }
+        return MUnitPhrase.update(id, seqnum: seqnum)
     }
     
     static func update(item: MUnitPhrase) -> Observable<()> {
@@ -90,7 +90,7 @@ class PhrasesUnitViewModel: NSObject {
             }
         }.flatMap { phraseid -> Observable<()> in
             item.PHRASEID = phraseid
-            return MUnitPhrase.update(item: item).map { print($0) }
+            return MUnitPhrase.update(item: item)
         }
     }
     

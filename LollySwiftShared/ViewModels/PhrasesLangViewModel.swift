@@ -31,15 +31,15 @@ class PhrasesLangViewModel: NSObject {
     }
     
     static func update(item: MLangPhrase) -> Observable<()> {
-        return MLangPhrase.update(item: item).map { print($0) }
+        return MLangPhrase.update(item: item)
     }
 
     static func create(item: MLangPhrase) -> Observable<Int> {
-        return MLangPhrase.create(item: item).map { print($0); return $0 }
+        return MLangPhrase.create(item: item)
     }
     
     static func delete(_ id: Int) -> Observable<()> {
-        return MLangPhrase.delete(id).map { print($0) }
+        return MLangPhrase.delete(id)
     }
 
     func newLangPhrase() -> MLangPhrase {

@@ -78,7 +78,7 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
 
     override func deleteWord(row: Int) {
         let item = arrWords[row]
-        WordsLangViewModel.delete(item.ID).subscribe {
+        WordsLangViewModel.delete(item: item).subscribe {
             self.refreshTableView(self)
         }.disposed(by: disposeBag)
     }

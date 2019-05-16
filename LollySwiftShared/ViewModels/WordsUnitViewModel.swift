@@ -46,11 +46,11 @@ class WordsUnitViewModel: WordsBaseViewModel {
     }
     
     static func update(_ id: Int, seqnum: Int) -> Observable<()> {
-        return MUnitWord.update(id, seqnum: seqnum).map { print($0) }
+        return MUnitWord.update(id, seqnum: seqnum)
     }
     
     static func update(_ wordid: Int, note: String) -> Observable<()> {
-        return MLangWord.update(wordid, note: note).map { print($0) }
+        return MLangWord.update(wordid, note: note)
     }
 
     static func update(item: MUnitWord) -> Observable<()> {
@@ -101,7 +101,7 @@ class WordsUnitViewModel: WordsBaseViewModel {
             }
         }.flatMap { wordid -> Observable<()> in
             item.WORDID = wordid
-            return MUnitWord.update(item: item).map { print($0) }
+            return MUnitWord.update(item: item)
         }
     }
     
@@ -125,9 +125,9 @@ class WordsUnitViewModel: WordsBaseViewModel {
     
     static func delete(item: MUnitWord) -> Observable<()> {
         return MUnitWord.delete(item.ID).flatMap {
-            return MUnitWord.getDataByLangWord(item.WORDID)
-        }.flatMap { arr -> Observable<()> in
-            return !arr.isEmpty ? Observable<()>.empty() : MLangWord.delete(item.WORDID)
+            return MLangWord.delete(item.WORDID)
+        }.flatMap {
+            return MWordFami.delete(item.FAMIID)
         }
     }
 

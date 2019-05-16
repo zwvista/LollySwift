@@ -38,10 +38,10 @@ class MWordFami: NSObject, Codable {
         }
     }
     
-    private static func delete(_ id: Int) -> Observable<String> {
+    static func delete(_ id: Int) -> Observable<()> {
         // SQL: DELETE WORDSFAMI WHERE ID=?
         let url = "\(CommonApi.url)WORDSFAMI/\(id)"
-        return RestApi.delete(url: url)
+        return RestApi.delete(url: url).map { print($0) }
     }
     
     static func update(wordid: Int, level: Int) -> Observable<()> {

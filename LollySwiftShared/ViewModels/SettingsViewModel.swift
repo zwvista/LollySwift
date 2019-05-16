@@ -302,31 +302,31 @@ class SettingsViewModel: NSObject {
     }
     
     func updateLang() -> Observable<()> {
-        return MUserSetting.update(selectedUSUser0.ID, langid: USLANGID).map { print($0); self.delegate?.onUpdateLang() }
+        return MUserSetting.update(selectedUSUser0.ID, langid: USLANGID).map { self.delegate?.onUpdateLang() }
     }
     
     func updateDictItem() -> Observable<()> {
-        return MUserSetting.update(selectedUSLang2.ID, dictitem: USDICTITEM).map { print($0); self.delegate?.onUpdateDictItem() }
+        return MUserSetting.update(selectedUSLang2.ID, dictitem: USDICTITEM).map { self.delegate?.onUpdateDictItem() }
     }
     
     func updateDictNote() -> Observable<()> {
-        return MUserSetting.update(selectedUSLang2.ID, dictnoteid: USDICTNOTEID).map { print($0); self.delegate?.onUpdateDictNote() }
+        return MUserSetting.update(selectedUSLang2.ID, dictnoteid: USDICTNOTEID).map { self.delegate?.onUpdateDictNote() }
     }
     
     func updateDictTranslation() -> Observable<()> {
-        return MUserSetting.update(selectedUSLang3.ID, dicttranslationid: USDICTTRANSLATIONID).map { print($0); self.delegate?.onUpdateDictTranslation() }
+        return MUserSetting.update(selectedUSLang3.ID, dicttranslationid: USDICTTRANSLATIONID).map { self.delegate?.onUpdateDictTranslation() }
     }
 
     func updateTextbook() -> Observable<()> {
-        return MUserSetting.update(selectedUSLang2.ID, textbookid: USTEXTBOOKID).map { print($0); self.delegate?.onUpdateTextbook() }
+        return MUserSetting.update(selectedUSLang2.ID, textbookid: USTEXTBOOKID).map { self.delegate?.onUpdateTextbook() }
     }
     
     func updateMacVoice() -> Observable<()> {
-        return MUserSetting.update(selectedUSLang3.ID, macvoiceid: USMACVOICEID).map { print($0); self.delegate?.onUpdateMacVoice() }
+        return MUserSetting.update(selectedUSLang3.ID, macvoiceid: USMACVOICEID).map { self.delegate?.onUpdateMacVoice() }
     }
     
     func updateiOSVoice() -> Observable<()> {
-        return MUserSetting.update(selectedUSLang3.ID, iosvoiceid: USIOSVOICEID).map { print($0); self.delegate?.onUpdateiOSVoice() }
+        return MUserSetting.update(selectedUSLang3.ID, iosvoiceid: USIOSVOICEID).map { self.delegate?.onUpdateiOSVoice() }
     }
 
     func autoCorrectInput(text: String) -> String {
@@ -411,25 +411,25 @@ class SettingsViewModel: NSObject {
     private func doUpdateUnitFrom(v: Int, check: Bool = true) -> Observable<()> {
         guard !check || USUNITFROM != v else { return Observable.empty() }
         USUNITFROM = v
-        return MUserSetting.update(selectedUSTextbook.ID, usunitfrom: USUNITFROM).map { print($0); self.delegate?.onUpdateUnitFrom() }
+        return MUserSetting.update(selectedUSTextbook.ID, usunitfrom: USUNITFROM).map { self.delegate?.onUpdateUnitFrom() }
     }
     
     private func doUpdatePartFrom(v: Int, check: Bool = true) -> Observable<()> {
         guard !check || USPARTFROM != v else { return Observable.empty() }
         USPARTFROM = v
-        return MUserSetting.update(selectedUSTextbook.ID, uspartfrom: USPARTFROM).map { print($0); self.delegate?.onUpdatePartFrom()  }
+        return MUserSetting.update(selectedUSTextbook.ID, uspartfrom: USPARTFROM).map { self.delegate?.onUpdatePartFrom()  }
     }
     
     private func doUpdateUnitTo(v: Int, check: Bool = true) -> Observable<()> {
         guard !check || USUNITTO != v else { return Observable.empty() }
         USUNITTO = v
-        return MUserSetting.update(selectedUSTextbook.ID, usunitto: USUNITTO).map { print($0); self.delegate?.onUpdateUnitTo() }
+        return MUserSetting.update(selectedUSTextbook.ID, usunitto: USUNITTO).map { self.delegate?.onUpdateUnitTo() }
     }
     
     private func doUpdatePartTo(v: Int, check: Bool = true) -> Observable<()> {
         guard !check || USPARTTO != v else { return Observable.empty() }
         USPARTTO = v
-        return MUserSetting.update(selectedUSTextbook.ID, uspartto: USPARTTO).map { print($0); self.delegate?.onUpdatePartTo() }
+        return MUserSetting.update(selectedUSTextbook.ID, uspartto: USPARTTO).map { self.delegate?.onUpdatePartTo() }
     }
     
 }

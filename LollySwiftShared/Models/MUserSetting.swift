@@ -26,67 +26,67 @@ class MUserSetting: NSObject, Codable {
         return RestApi.getArray(url: url, keyPath: "USERSETTINGS")
     }
     
-    static func update(_ id: Int, body: String) -> Observable<String> {
+    static func update(_ id: Int, body: String) -> Observable<()> {
         let url = "\(CommonApi.url)USERSETTINGS/\(id)"
         // SQL: UPDATE USERSETTINGS SET VALUE1=? WHERE ID=?
         // SQL: UPDATE USERSETTINGS SET VALUE2=? WHERE ID=?
         // SQL: UPDATE USERSETTINGS SET VALUE3=? WHERE ID=?
         // SQL: UPDATE USERSETTINGS SET VALUE4=? WHERE ID=?
-        return RestApi.update(url: url, body: body)
+        return RestApi.update(url: url, body: body).map { print($0) }
     }
 
-    static func update(_ id: Int, langid: Int) -> Observable<String> {
+    static func update(_ id: Int, langid: Int) -> Observable<()> {
         let body = "VALUE1=\(langid)"
-        return update(id, body: body)
+        return update(id, body: body).map { print($0) }
     }
     
-    static func update(_ id: Int, textbookid: Int) -> Observable<String> {
+    static func update(_ id: Int, textbookid: Int) -> Observable<()> {
         let body = "VALUE1=\(textbookid)"
-        return update(id, body: body)
+        return update(id, body: body).map { print($0) }
     }
     
-    static func update(_ id: Int, dictitem: String) -> Observable<String> {
+    static func update(_ id: Int, dictitem: String) -> Observable<()> {
         let body = "VALUE2=\(dictitem)"
-        return update(id, body: body)
+        return update(id, body: body).map { print($0) }
     }
     
-    static func update(_ id: Int, dictnoteid: Int) -> Observable<String> {
+    static func update(_ id: Int, dictnoteid: Int) -> Observable<()> {
         let body = "VALUE3=\(dictnoteid)"
-        return update(id, body: body)
+        return update(id, body: body).map { print($0) }
     }
     
-    static func update(_ id: Int, dicttranslationid: Int) -> Observable<String> {
+    static func update(_ id: Int, dicttranslationid: Int) -> Observable<()> {
         let body = "VALUE1=\(dicttranslationid)"
-        return update(id, body: body)
+        return update(id, body: body).map { print($0) }
     }
 
-    static func update(_ id: Int, usunitfrom: Int) -> Observable<String> {
+    static func update(_ id: Int, usunitfrom: Int) -> Observable<()> {
         let body = "VALUE1=\(usunitfrom)"
-        return update(id, body: body)
+        return update(id, body: body).map { print($0) }
     }
     
-    static func update(_ id: Int, uspartfrom: Int) -> Observable<String> {
+    static func update(_ id: Int, uspartfrom: Int) -> Observable<()> {
         let body = "VALUE2=\(uspartfrom)"
-        return update(id, body: body)
+        return update(id, body: body).map { print($0) }
     }
 
-    static func update(_ id: Int, usunitto: Int) -> Observable<String> {
+    static func update(_ id: Int, usunitto: Int) -> Observable<()> {
         let body = "VALUE3=\(usunitto)"
-        return update(id, body: body)
+        return update(id, body: body).map { print($0) }
     }
     
-    static func update(_ id: Int, uspartto: Int) -> Observable<String> {
+    static func update(_ id: Int, uspartto: Int) -> Observable<()> {
         let body = "VALUE4=\(uspartto)"
-        return update(id, body: body)
+        return update(id, body: body).map { print($0) }
     }
     
-    static func update(_ id: Int, macvoiceid: Int) -> Observable<String> {
+    static func update(_ id: Int, macvoiceid: Int) -> Observable<()> {
         let body = "VALUE2=\(macvoiceid)"
-        return update(id, body: body)
+        return update(id, body: body).map { print($0) }
     }
     
-    static func update(_ id: Int, iosvoiceid: Int) -> Observable<String> {
+    static func update(_ id: Int, iosvoiceid: Int) -> Observable<()> {
         let body = "VALUE3=\(iosvoiceid)"
-        return update(id, body: body)
+        return update(id, body: body).map { print($0) }
     }
 }

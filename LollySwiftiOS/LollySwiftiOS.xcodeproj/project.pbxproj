@@ -86,6 +86,7 @@
 		95F199B12244FD150065858E /* WordsBaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F199B02244FD150065858E /* WordsBaseViewModel.swift */; };
 		95F9860B2218A639007225D4 /* MWordFami.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CED3C62216C0680094622F /* MWordFami.swift */; };
 		95FBF5342221A85100AE040C /* CommonApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954B8705218DC007007DC348 /* CommonApi.swift */; };
+		95FDF62A228D5D6C003DFB1A /* WordsUnitBatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FDF629228D5D6B003DFB1A /* WordsUnitBatchViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -172,6 +173,7 @@
 		95E43F2C21E1D574001E650C /* NoteViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteViewModel.swift; sourceTree = "<group>"; };
 		95EFF480218419E00094EE3C /* MAutoCorrect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MAutoCorrect.swift; sourceTree = "<group>"; };
 		95F199B02244FD150065858E /* WordsBaseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsBaseViewModel.swift; sourceTree = "<group>"; };
+		95FDF629228D5D6B003DFB1A /* WordsUnitBatchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsUnitBatchViewController.swift; sourceTree = "<group>"; };
 		A2462FE0278FE5DE7FF9A4E2 /* Pods_LollySwiftiOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LollySwiftiOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA5376BDE309080131C3F3FD /* Pods_LollySwiftiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LollySwiftiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB60F127B8C0928CBC031C6C /* Pods-LollySwiftiOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LollySwiftiOSTests.release.xcconfig"; path = "../Pods/Target Support Files/Pods-LollySwiftiOSTests/Pods-LollySwiftiOSTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -276,6 +278,7 @@
 				8C42B5AA1D69A1D900DCB528 /* WordsLangViewController.swift */,
 				95CED3C92216C5B20094622F /* WordsTextbookDetailViewController.swift */,
 				8C42B5AB1D69A1D900DCB528 /* WordsTextbookViewController.swift */,
+				95FDF629228D5D6B003DFB1A /* WordsUnitBatchViewController.swift */,
 				8C42B5AC1D69A1D900DCB528 /* WordsUnitDetailViewController.swift */,
 				8C42B5AE1D69A1D900DCB528 /* WordsUnitViewController.swift */,
 			);
@@ -441,6 +444,7 @@
 					};
 					953473E91A0D16CF00FF2D56 = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = U259NHMY78;
 						LastSwiftMigration = 1020;
 						TestTargetID = 953473D41A0D16CF00FF2D56;
 					};
@@ -608,6 +612,7 @@
 				8C42B5B51D69A1D900DCB528 /* WordsUnitViewController.swift in Sources */,
 				8C9C6A442053F9F700F299C8 /* UIView+ActivityIndicator.swift in Sources */,
 				95E43F2D21E1D574001E650C /* NoteViewModel.swift in Sources */,
+				95FDF62A228D5D6C003DFB1A /* WordsUnitBatchViewController.swift in Sources */,
 				95CED3CA2216C5B20094622F /* WordsTextbookDetailViewController.swift in Sources */,
 				95940A942233879C00D35409 /* MVoice.swift in Sources */,
 				95CED3C32215A2270094622F /* PhrasesTextbookViewController.swift in Sources */,
@@ -862,6 +867,7 @@
 			baseConfigurationReference = 3F6D181DCE907E3DD9932AC5 /* Pods-LollySwiftiOSTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = U259NHMY78;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -881,6 +887,7 @@
 			baseConfigurationReference = CB60F127B8C0928CBC031C6C /* Pods-LollySwiftiOSTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = U259NHMY78;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = LollySwiftiOSTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

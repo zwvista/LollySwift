@@ -132,6 +132,13 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     @IBAction func deleteWord(_ sender: Any) {
         let row = tableView.selectedRow
         guard row != -1 else {return}
+        let alert = NSAlert()
+        alert.messageText = "Delete Word"
+        alert.informativeText = "Are you sure?"
+        alert.alertStyle = .warning
+        alert.addButton(withTitle: "Yes")
+        alert.addButton(withTitle: "No")
+        guard alert.runModal() == .alertFirstButtonReturn else {return}
         deleteWord(row: row)
     }
     
