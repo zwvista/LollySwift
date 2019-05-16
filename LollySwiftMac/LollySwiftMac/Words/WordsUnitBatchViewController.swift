@@ -69,7 +69,11 @@ class WordsUnitBatchViewController: NSViewController, NSTableViewDataSource, NST
         let n = (sender as! NSButton).tag
         for i in 0..<tableView.numberOfRows {
             let chk = (tableView.view(atColumn: 0, row: i, makeIfNecessary: false)! as! WordsUnitBatchCell).chk!
-            chk.state = n == 0 ? .on : n == 1 ? .off : tableView.selectedRowIndexes.contains(i) ? .on : .off
+            chk.state =
+                n == 0 ? .on :
+                n == 1 ? .off :
+                !tableView.selectedRowIndexes.contains(i) ? chk.state :
+                n == 2 ? .on : .off
         }
     }
 

@@ -61,6 +61,7 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
             if speakOrNot {
                 synth.startSpeaking(vm.currentPhrase)
             }
+            tfTranslation.stringValue = vm.arrPhrases[vm.index].TRANSLATION ?? ""
         } else {
             subscription?.dispose()
         }
