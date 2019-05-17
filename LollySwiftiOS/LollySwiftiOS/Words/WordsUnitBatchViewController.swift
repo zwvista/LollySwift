@@ -19,8 +19,6 @@ class WordsUnitBatchViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var tfAccuracy: UITextField!
 
     var vm: WordsUnitViewModel!
-    var item: MUnitWord!
-    var isAdd: Bool!
     let ddUnit = DropDown()
     let ddPart = DropDown()
     
@@ -31,27 +29,14 @@ class WordsUnitBatchViewController: UITableViewController, UITextFieldDelegate {
         
         ddUnit.anchorView = tfUnit
         ddUnit.dataSource = vm.vmSettings.arrUnits.map { $0.label }
-        ddUnit.selectRow(vm.vmSettings.arrUnits.firstIndex { $0.value == item.UNIT }!)
         ddUnit.selectionAction = { (index: Int, item: String) in
-            self.item.UNIT = self.vm.vmSettings.arrUnits[index].value
-            self.tfUnit.text = String(self.item.UNIT)
         }
         
         ddPart.anchorView = tfPart
         ddPart.dataSource = vm.vmSettings.arrParts.map { $0.label }
-        ddPart.selectRow(vm.vmSettings.arrUnits.firstIndex { $0.value == item.PART }!)
         ddPart.selectionAction = { (index: Int, item: String) in
-            self.item.PART = self.vm.vmSettings.arrParts[index].value
-            self.tfPart.text = self.item.PARTSTR
         }
 
-        tfUnit.text = String(item.UNIT)
-        tfPart.text = item.PARTSTR
-        tfSeqNum.text = String(item.SEQNUM)
-        tfLevel.text = String(item.LEVEL)
-        tfAccuracy.text = item.ACCURACY
-        isAdd = item.ID == 0
-        // https://stackoverflow.com/questions/7525437/how-to-set-focus-to-a-textfield-in-iphone
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
@@ -69,17 +54,6 @@ class WordsUnitBatchViewController: UITableViewController, UITextFieldDelegate {
     }
     
     func onDone() {
-        item.SEQNUM = Int(tfSeqNum.text!)!
-        if isAdd {
-            if !item.WORD.isEmpty {
-                vm.arrWords.append(item)
-                WordsUnitViewModel.create(item: item).subscribe(onNext: {
-                    self.item.ID = $0
-                }).disposed(by: disposeBag)
-            }
-        } else {
-            WordsUnitViewModel.update(item: item).subscribe().disposed(by: disposeBag)
-        }
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -94,7 +68,9 @@ class WordsUnitBatchViewController: UITableViewController, UITextFieldDelegate {
         let identifier = "WordCell" + (indexPath.section == 0 ? "0\(indexPath.row)" : "10")
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! WordsUnitBatchCell
         if indexPath.section == 0 {
-            cell.tf.tag = indexPath.row + 1
+            if indexPath.row < 4 {
+                cell.tf.tag = indexPath.row + 1
+            }
         } else {
             let item = vm.arrWords[indexPath.row]
             cell.lblUnitPartSeqNum.text = item.UNITPARTSEQNUM

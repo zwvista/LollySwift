@@ -143,6 +143,8 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
         } else if let controller = segue.destination as? WordsDictViewController {
             controller.vm.arrWords = arrWords.map { $0.WORD }
             controller.vm.selectedWordIndex = tableView.indexPathForSelectedRow!.row
+        } else if let controller = (segue.destination as? UINavigationController)?.topViewController as? WordsUnitBatchViewController {
+            controller.vm = vm
         }
     }
     
