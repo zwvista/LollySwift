@@ -54,7 +54,7 @@ class WordsLangViewController: WordsBaseViewController, UISearchBarDelegate, UIS
         let item = self.vm.arrWords[i]
         func delete() {
             self.yesNoAction(title: "delete", message: "Do you really want to delete the word \"\(item.WORD)\"?", yesHandler: { (action) in
-                WordsLangViewModel.delete(item.ID).subscribe().disposed(by: self.disposeBag)
+                WordsLangViewModel.delete(item: item).subscribe().disposed(by: self.disposeBag)
                 self.vm.arrWords.remove(at: i)
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }, noHandler: { (action) in

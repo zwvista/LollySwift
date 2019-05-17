@@ -17,7 +17,7 @@ extension UIViewController {
         alertController.addAction(noAction)
         let yesAction = UIAlertAction(title: "Yes", style: .default, handler: yesHandler)
         alertController.addAction(yesAction)
-        self.present(alertController, animated: true, completion: nil)
+        present(alertController, animated: true, completion: nil)
     }
     
     // https://stackoverflow.com/questions/46793618/ios-wkwebview-vs-uiwebview?rq=1

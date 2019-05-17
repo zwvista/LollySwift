@@ -177,6 +177,10 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
             }
             alertController.addAction(notesEmptyAction)
         }
+        let batchAction = UIAlertAction(title: "Batch Edit", style: .default) { _ in
+            self.performSegue(withIdentifier: "batch", sender: nil)
+        }
+        alertController.addAction(batchAction)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
         alertController.addAction(cancelAction)
         self.present(alertController, animated: true) {}

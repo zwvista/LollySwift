@@ -12,14 +12,9 @@ import RxSwift
 
 class WordsUnitBatchViewController: UITableViewController, UITextFieldDelegate {
 
-    @IBOutlet weak var tfID: UITextField!
     @IBOutlet weak var tfUnit: UITextField!
     @IBOutlet weak var tfPart: UITextField!
     @IBOutlet weak var tfSeqNum: UITextField!
-    @IBOutlet weak var tfWordID: UITextField!
-    @IBOutlet weak var tfWord: UITextField!
-    @IBOutlet weak var tfNote: UITextField!
-    @IBOutlet weak var tfFamiID: UITextField!
     @IBOutlet weak var tfLevel: UITextField!
     @IBOutlet weak var tfAccuracy: UITextField!
 
@@ -50,19 +45,13 @@ class WordsUnitBatchViewController: UITableViewController, UITextFieldDelegate {
             self.tfPart.text = self.item.PARTSTR
         }
 
-        tfID.text = String(item.ID)
         tfUnit.text = String(item.UNIT)
         tfPart.text = item.PARTSTR
         tfSeqNum.text = String(item.SEQNUM)
-        tfWordID.text = String(item.WORDID)
-        tfWord.text = item.WORD
-        tfNote.text = item.NOTE
-        tfFamiID.text = String(item.FAMIID)
         tfLevel.text = String(item.LEVEL)
         tfAccuracy.text = item.ACCURACY
         isAdd = item.ID == 0
         // https://stackoverflow.com/questions/7525437/how-to-set-focus-to-a-textfield-in-iphone
-        (item.WORD.isEmpty ? tfWord : tfNote).becomeFirstResponder()
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
@@ -81,8 +70,6 @@ class WordsUnitBatchViewController: UITableViewController, UITextFieldDelegate {
     
     func onDone() {
         item.SEQNUM = Int(tfSeqNum.text!)!
-        item.WORD = vm.vmSettings.autoCorrectInput(text: tfWord.text ?? "")
-        item.NOTE = tfNote.text
         if isAdd {
             if !item.WORD.isEmpty {
                 vm.arrWords.append(item)
@@ -95,4 +82,32 @@ class WordsUnitBatchViewController: UITableViewController, UITextFieldDelegate {
         }
     }
     
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return section == 0 ? 5 : 5
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let identifier = "WordCell" + (indexPath.section == 0 ? "0\(indexPath.row)" : "10")
+        let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! WordsUnitBatchCell
+        if indexPath.section == 0 {
+            cell.tf.tag = indexPath.row + 1
+        } else {
+            let item = vm.arrWords[indexPath.row]
+            cell.lblUnitPartSeqNum.text = item.UNITPARTSEQNUM
+            cell.lblWordNote.text = item.WORDNOTE
+            cell.swSelected.tag = indexPath.row + 10
+        }
+        return cell
+    }
+}
+
+class WordsUnitBatchCell: UITableViewCell {
+    @IBOutlet weak var tf: UITextField!
+    @IBOutlet weak var lblUnitPartSeqNum: UILabel!
+    @IBOutlet weak var lblWordNote: UILabel!
+    @IBOutlet weak var swSelected: UISwitch!
 }
