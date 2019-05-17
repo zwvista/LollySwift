@@ -126,11 +126,28 @@ class PhrasesUnitViewController: PhrasesBaseViewController, UISearchBarDelegate,
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
-        guard let controller = (segue.destination as? UINavigationController)?.topViewController as? PhrasesUnitDetailViewController else {return}
-        controller.vm = vm
-        controller.item = sender as? MUnitPhrase ?? vm.newUnitPhrase()
+        if let controller = (segue.destination as? UINavigationController)?.topViewController as? PhrasesUnitDetailViewController {
+            controller.vm = vm
+            controller.item = sender as? MUnitPhrase ?? vm.newUnitPhrase()
+        } else if let controller = (segue.destination as? UINavigationController)?.topViewController as? PhrasesUnitBatchViewController {
+            controller.vm = vm
+        }
     }
     
+    @IBAction func btnMoreClicked(_ sender: Any) {
+        let alertController = UIAlertController(title: "Phrases", message: "More", preferredStyle: .alert)
+        let addAction = UIAlertAction(title: "Add", style: .default) { _ in self.performSegue(withIdentifier: "add", sender: self) }
+        alertController.addAction(addAction)
+        
+        let batchAction = UIAlertAction(title: "Batch Edit", style: .default) { _ in
+            self.performSegue(withIdentifier: "batch", sender: nil)
+        }
+        alertController.addAction(batchAction)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
+        alertController.addAction(cancelAction)
+        self.present(alertController, animated: true) {}
+    }
+
     @IBAction func btnEditClicked(_ sender: Any) {
         tableView.isEditing = !tableView.isEditing
         btnEdit.title = tableView.isEditing ? "Done" : "Edit"

@@ -59,8 +59,8 @@ class WordsUnitBatchViewController: UITableViewController, UITextFieldDelegate {
         let level = tfLevel.text?.toInt() ?? 0
         let level0Only = true
         for i in 0..<vm.arrWords.count {
-            let sw = view.viewWithTag(i + 10) as! UISwitch
-            guard sw.isOn else {continue}
+            let cell = tableView.cellForRow(at: IndexPath(row: i, section: 1))!
+            guard cell.accessoryType == .checkmark else {continue}
             let item = vm.arrWords[i]
             if swUnit.isOn || swPart.isOn || swSeqNum.isOn {
                 if swUnit.isOn { item.UNIT = unit }
@@ -120,9 +120,14 @@ class WordsUnitBatchViewController: UITableViewController, UITextFieldDelegate {
             let item = vm.arrWords[indexPath.row]
             cell.lblUnitPartSeqNum.text = item.UNITPARTSEQNUM
             cell.lblWordNote.text = item.WORDNOTE
-            cell.sw.tag = indexPath.row + 10
         }
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard indexPath.section == 1 else {return}
+        let cell = tableView.cellForRow(at: indexPath)!
+        cell.accessoryType = cell.accessoryType == .none ? .checkmark : .none
     }
 }
 

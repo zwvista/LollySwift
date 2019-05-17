@@ -1,5 +1,5 @@
 //
-//  WordsUnitBatchViewController.swift
+//  PhrasesUnitBatchViewController.swift
 //  LollySwiftiOS
 //
 //  Created by 趙偉 on 2016/06/23.
@@ -10,7 +10,7 @@ import UIKit
 import DropDown
 import RxSwift
 
-class WordsUnitBatchViewController: UITableViewController, UITextFieldDelegate {
+class PhrasesUnitBatchViewController: UITableViewController, UITextFieldDelegate {
 
     @IBOutlet weak var swUnit: UISwitch!
     @IBOutlet weak var tfUnit: UITextField!
@@ -18,11 +18,8 @@ class WordsUnitBatchViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var tfPart: UITextField!
     @IBOutlet weak var swSeqNum: UISwitch!
     @IBOutlet weak var tfSeqNum: UITextField!
-    @IBOutlet weak var swLevel: UISwitch!
-    @IBOutlet weak var tfLevel: UITextField!
-    @IBOutlet weak var tfAccuracy: UITextField!
 
-    var vm: WordsUnitViewModel!
+    var vm: PhrasesUnitViewModel!
     let ddUnit = DropDown()
     let ddPart = DropDown()
     
@@ -46,8 +43,7 @@ class WordsUnitBatchViewController: UITableViewController, UITextFieldDelegate {
             }
             return false
         } else {
-            return textField === tfSeqNum ? swSeqNum.isOn :
-                textField === tfLevel ? swLevel.isOn : true
+            return textField === tfSeqNum ? swSeqNum.isOn : true
         }
     }
     
@@ -56,20 +52,15 @@ class WordsUnitBatchViewController: UITableViewController, UITextFieldDelegate {
         let unit = vmSettings.arrUnits[ddUnit.indexForSelectedRow!].value
         let part = vmSettings.arrParts[ddPart.indexForSelectedRow!].value
         let seqnum = tfSeqNum.text?.toInt() ?? 0
-        let level = tfLevel.text?.toInt() ?? 0
-        let level0Only = true
-        for i in 0..<vm.arrWords.count {
-            let sw = view.viewWithTag(i + 10) as! UISwitch
-            guard sw.isOn else {continue}
-            let item = vm.arrWords[i]
+        for i in 0..<vm.arrPhrases.count {
+            let cell = tableView.cellForRow(at: IndexPath(row: i, section: 1))!
+            guard cell.accessoryType == .checkmark else {continue}
+            let item = vm.arrPhrases[i]
             if swUnit.isOn || swPart.isOn || swSeqNum.isOn {
                 if swUnit.isOn { item.UNIT = unit }
                 if swPart.isOn { item.PART = part }
                 if swSeqNum.isOn { item.SEQNUM += seqnum }
-                o = o.flatMap { WordsUnitViewModel.update(item: item) }
-            }
-            if swLevel.isOn && (!level0Only || item.LEVEL == 0) {
-                o = o.flatMap { _ in MWordFami.update(wordid: item.WORDID, level: level) }
+                o = o.flatMap { PhrasesUnitViewModel.update(item: item) }
             }
         }
         o.subscribe().disposed(by: disposeBag)
@@ -80,12 +71,12 @@ class WordsUnitBatchViewController: UITableViewController, UITextFieldDelegate {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? 5 : vm.arrWords.count
+        return section == 0 ? 3 : vm.arrPhrases.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let identifier = "WordCell" + (indexPath.section == 0 ? "0\(indexPath.row)" : "10")
-        let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! WordsUnitBatchCell
+        let identifier = "PhraseCell" + (indexPath.section == 0 ? "0\(indexPath.row)" : "10")
+        let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! PhrasesUnitBatchCell
         if indexPath.section == 0 {
             switch indexPath.row {
             case 0:
@@ -111,24 +102,28 @@ class WordsUnitBatchViewController: UITableViewController, UITextFieldDelegate {
             case 2:
                 tfSeqNum = cell.tf
                 swSeqNum = cell.sw
-            case 3:
-                tfLevel = cell.tf
-                swLevel = cell.sw
             default: break
             }
         } else {
-            let item = vm.arrWords[indexPath.row]
+            let item = vm.arrPhrases[indexPath.row]
             cell.lblUnitPartSeqNum.text = item.UNITPARTSEQNUM
-            cell.lblWordNote.text = item.WORDNOTE
-            cell.sw.tag = indexPath.row + 10
+            cell.lblPhrase!.text = item.PHRASE
+            cell.lblTranslation!.text = item.TRANSLATION
         }
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard indexPath.section == 1 else {return}
+        let cell = tableView.cellForRow(at: indexPath)!
+        cell.accessoryType = cell.accessoryType == .none ? .checkmark : .none
+    }
 }
 
-class WordsUnitBatchCell: UITableViewCell {
+class PhrasesUnitBatchCell: UITableViewCell {
     @IBOutlet weak var tf: UITextField!
     @IBOutlet weak var lblUnitPartSeqNum: UILabel!
-    @IBOutlet weak var lblWordNote: UILabel!
+    @IBOutlet weak var lblPhrase: UILabel!
+    @IBOutlet weak var lblTranslation: UILabel!
     @IBOutlet weak var sw: UISwitch!
 }
