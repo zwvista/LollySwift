@@ -50,6 +50,9 @@ class WordsReviewViewModel {
         }
     }
     
+    var currentItem: MUnitWord? {
+        return hasNext() ? arrWords[index] : nil
+    }
     var currentWord: String {
         return hasNext() ? arrWords[index].WORD : ""
     }

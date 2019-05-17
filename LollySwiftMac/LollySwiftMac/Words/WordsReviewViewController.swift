@@ -54,14 +54,14 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
         tfAccuracy.isHidden = !vm.isTestMode || !b
         btnCheck.isEnabled = b
         btnCheck.title = vm.isTestMode ? "Check" : "Next"
-        tfWordTarget.stringValue = vm.isTestMode ? "" : vm.currentWord
+        tfWordTarget.stringValue = vm.isTestMode ? "" : vm.currentItem?.WORDNOTE ?? ""
         tfTranslation.stringValue = ""
         wordInput = ""
         tfWordInput.stringValue = ""
         tfWordInput.becomeFirstResponder()
         if b {
             tfIndex.stringValue = "\(vm.index + 1)/\(vm.arrWords.count)"
-            tfAccuracy.stringValue = vm.arrWords[vm.index].ACCURACY
+            tfAccuracy.stringValue = vm.currentItem!.ACCURACY
             if speakOrNot {
                 synth.startSpeaking(vm.currentWord)
             }
@@ -112,9 +112,7 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
                 tfIncorrect.isHidden = false
             }
             btnCheck.title = "Next"
-            vm.check(wordInput: wordInput).subscribe {
-                
-            }.disposed(by: disposeBag)
+            vm.check(wordInput: wordInput).subscribe().disposed(by: disposeBag)
         } else {
             vm.next()
             doTest()
