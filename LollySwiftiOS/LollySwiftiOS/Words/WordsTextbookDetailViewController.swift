@@ -49,7 +49,7 @@ class WordsTextbookDetailViewController: UITableViewController, UITextFieldDeleg
         }
         tfID.text = String(item.ID)
         tfTextbookName.text = item.TEXTBOOKNAME
-        tfUnit.text = String(item.UNIT)
+        tfUnit.text = item.UNITSTR
         tfPart.text = item.PARTSTR
         tfSeqNum.text = String(item.SEQNUM)
         tfWordID.text = String(item.WORDID)

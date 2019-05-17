@@ -12,9 +12,13 @@ import RxSwift
 
 class WordsUnitBatchViewController: UITableViewController, UITextFieldDelegate {
 
+    @IBOutlet weak var swUnit: UISwitch!
     @IBOutlet weak var tfUnit: UITextField!
+    @IBOutlet weak var swPart: UISwitch!
     @IBOutlet weak var tfPart: UITextField!
+    @IBOutlet weak var swSeqNum: UISwitch!
     @IBOutlet weak var tfSeqNum: UITextField!
+    @IBOutlet weak var swLevel: UISwitch!
     @IBOutlet weak var tfLevel: UITextField!
     @IBOutlet weak var tfAccuracy: UITextField!
 
@@ -30,15 +34,20 @@ class WordsUnitBatchViewController: UITableViewController, UITextFieldDelegate {
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if textField === tfUnit {
-            self.view.endEditing(true)
-            ddUnit.show()
+            if swUnit.isOn {
+                self.view.endEditing(true)
+                ddUnit.show()
+            }
             return false
         } else if textField === tfPart {
-            self.view.endEditing(true)
-            ddPart.show()
+            if swPart.isOn {
+                self.view.endEditing(true)
+                ddPart.show()
+            }
             return false
         } else {
-            return true
+            return textField === tfSeqNum ? swSeqNum.isOn :
+                textField === tfLevel ? swLevel.isOn : true
         }
     }
     
@@ -50,7 +59,7 @@ class WordsUnitBatchViewController: UITableViewController, UITextFieldDelegate {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? 5 : 5
+        return section == 0 ? 5 : vm.arrWords.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -60,33 +69,37 @@ class WordsUnitBatchViewController: UITableViewController, UITextFieldDelegate {
             switch indexPath.row {
             case 0:
                 tfUnit = cell.tf
-                tfUnit.text = String(vmSettings.USUNITTO)
+                tfUnit.text = vmSettings.arrUnits.first { $0.value == vmSettings.USUNITTO }!.label
                 ddUnit.anchorView = tfUnit
                 ddUnit.dataSource = vmSettings.arrUnits.map { $0.label }
                 ddUnit.selectRow(vmSettings.arrUnits.firstIndex { $0.value == vmSettings.USUNITTO }!)
                 ddUnit.selectionAction = { (index: Int, item: String) in
                     self.tfUnit.text = item
                 }
+                swUnit = cell.sw
             case 1:
                 tfPart = cell.tf
-                tfPart.text = String(vmSettings.USPARTTO)
+                tfPart.text = vmSettings.arrParts.first { $0.value == vmSettings.USPARTTO }!.label
                 ddPart.anchorView = tfPart
                 ddPart.dataSource = vmSettings.arrParts.map { $0.label }
                 ddPart.selectRow(vmSettings.arrParts.firstIndex { $0.value == vmSettings.USPARTTO }!)
                 ddPart.selectionAction = { (index: Int, item: String) in
                     self.tfPart.text = item
                 }
+                swPart = cell.sw
             case 2:
                 tfSeqNum = cell.tf
+                swSeqNum = cell.sw
             case 3:
                 tfLevel = cell.tf
+                swLevel = cell.sw
             default: break
             }
         } else {
             let item = vm.arrWords[indexPath.row]
             cell.lblUnitPartSeqNum.text = item.UNITPARTSEQNUM
             cell.lblWordNote.text = item.WORDNOTE
-            cell.swSelected.tag = indexPath.row + 10
+            cell.sw.tag = indexPath.row + 10
         }
         return cell
     }
@@ -96,5 +109,5 @@ class WordsUnitBatchCell: UITableViewCell {
     @IBOutlet weak var tf: UITextField!
     @IBOutlet weak var lblUnitPartSeqNum: UILabel!
     @IBOutlet weak var lblWordNote: UILabel!
-    @IBOutlet weak var swSelected: UISwitch!
+    @IBOutlet weak var sw: UISwitch!
 }

@@ -51,7 +51,7 @@ class WordsUnitDetailViewController: UITableViewController, UITextFieldDelegate 
         }
 
         tfID.text = String(item.ID)
-        tfUnit.text = String(item.UNIT)
+        tfUnit.text = item.UNITSTR
         tfPart.text = item.PARTSTR
         tfSeqNum.text = String(item.SEQNUM)
         tfWordID.text = String(item.WORDID)
