@@ -158,7 +158,7 @@ class SettingsViewModel: NSObject {
     var selectedDictNoteIndex: Int {
         return arrDictsNote.firstIndex { $0 == selectedDictNote } ?? 0
     }
-    var hasDictNote: Bool { return !arrDictsNote.isEmpty }
+    var hasDictNote: Bool { return arrDictsNote[0].ID != 0 }
     
     @objc
     var arrDictsTranslation = [MDictTranslation]()

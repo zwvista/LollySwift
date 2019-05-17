@@ -98,7 +98,7 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
             alertController.addAction(deleteAction2)
             let editAction2 = UIAlertAction(title: "Edit", style: .default) { _ in edit() }
             alertController.addAction(editAction2)
-            if self.vm.mDictNote != nil {
+            if vmSettings.hasDictNote {
                 let noteAction = UIAlertAction(title: "Retrieve Note", style: .default) { _ in
                     self.vm.getNote(index: indexPath.row).subscribe {
                         self.tableView.reloadRows(at: [indexPath], with: .fade)
@@ -169,7 +169,7 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
             })
         }
 
-        if vm.mDictNote != nil {
+        if vmSettings.hasDictNote {
             let notesAllAction = UIAlertAction(title: "Retrieve All Notes", style: .default) { _ in
                 startTimer(ifEmpty: false)
             }
@@ -190,13 +190,17 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
 
     @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
         guard segue.identifier == "Done" else {return}
-        let controller = segue.source as! WordsUnitDetailViewController
-        controller.onDone()
-        tableView.reloadData()
-        if controller.isAdd && !controller.item.WORD.isEmpty {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self.performSegue(withIdentifier: "add", sender: self)
+        if let controller = segue.source as? WordsUnitDetailViewController {
+            controller.onDone()
+            tableView.reloadData()
+            if controller.isAdd && !controller.item.WORD.isEmpty {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    self.performSegue(withIdentifier: "add", sender: self)
+                }
             }
+        } else if let controller = segue.source as? WordsUnitBatchViewController {
+            controller.onDone()
+            tableView.reloadData()
         }
     }
     

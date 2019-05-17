@@ -9,12 +9,21 @@
 import Foundation
 import RxSwift
 
-class WordsUnitViewModel: WordsBaseViewModel {
+class WordsUnitViewModel: NSObject {
+    var vmSettings: SettingsViewModel
+    var vmNote: NoteViewModel!
+    var mDictNote: MDictNote {
+        return vmNote.mDictNote
+    }
+    let disposeBag: DisposeBag!
     var arrWords = [MUnitWord]()
     var arrWordsFiltered: [MUnitWord]?
 
     init(settings: SettingsViewModel, inTextbook: Bool, disposeBag: DisposeBag, complete: @escaping () -> ()) {
-        super.init(settings: settings, disposeBag: disposeBag)
+        vmSettings = settings
+        self.disposeBag = disposeBag
+        vmNote = NoteViewModel(settings: settings, disposeBag: disposeBag)
+        super.init()
         if inTextbook {
             MUnitWord.getDataByTextbook(settings.selectedTextbook, unitPartFrom: settings.USUNITPARTFROM, unitPartTo: settings.USUNITPARTTO).subscribe(onNext: {
                 self.arrWords = $0

@@ -79,7 +79,7 @@ class WordsTextbookViewController: WordsBaseViewController, UISearchBarDelegate,
             alertController.addAction(deleteAction2)
             let editAction2 = UIAlertAction(title: "Edit", style: .default) { _ in edit() }
             alertController.addAction(editAction2)
-            if self.vm.mDictNote != nil {
+            if vmSettings.hasDictNote {
                 let noteAction = UIAlertAction(title: "Retrieve Note", style: .default) { _ in
                     self.vm.getNote(index: indexPath.row).subscribe {
                         self.tableView.reloadRows(at: [indexPath], with: .fade)

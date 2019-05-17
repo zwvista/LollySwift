@@ -12,7 +12,7 @@ import RxSwift
 class NoteViewModel {
 
     var vmSettings: SettingsViewModel
-    var mDictNote: MDictNote? {
+    var mDictNote: MDictNote {
         return vmSettings.selectedDictNote
     }
     let disposeBag: DisposeBag!
@@ -23,16 +23,16 @@ class NoteViewModel {
     }
 
     func getNote(word: String) -> Observable<String> {
-        guard let mDictNote = mDictNote else { return Observable.empty() }
+        guard vmSettings.hasDictNote else { return Observable.empty() }
         let url = mDictNote.urlString(word: word, arrAutoCorrect: vmSettings.arrAutoCorrect)
         return RestApi.getHtml(url: url).map { html in
             print(html)
-            return CommonApi.extractText(from: html, transform: mDictNote.TRANSFORM!, template: "") { text,_ in text }
+            return CommonApi.extractText(from: html, transform: self.mDictNote.TRANSFORM!, template: "") { text,_ in text }
         }
     }
     
     func getNotes(wordCount: Int, isNoteEmpty: @escaping (Int) -> Bool, getOne: @escaping (Int) -> Void, allComplete: @escaping () -> Void) {
-        guard let mDictNote = mDictNote else {return}
+        guard vmSettings.hasDictNote else {return}
         var i = 0
         var subscription: Disposable?
         subscription = Observable<Int>.interval(Double(mDictNote.WAIT!) / 1000.0, scheduler: MainScheduler.instance).subscribe { _ in
