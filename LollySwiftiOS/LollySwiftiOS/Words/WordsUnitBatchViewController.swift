@@ -26,17 +26,6 @@ class WordsUnitBatchViewController: UITableViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        ddUnit.anchorView = tfUnit
-        ddUnit.dataSource = vm.vmSettings.arrUnits.map { $0.label }
-        ddUnit.selectionAction = { (index: Int, item: String) in
-        }
-        
-        ddPart.anchorView = tfPart
-        ddPart.dataSource = vm.vmSettings.arrParts.map { $0.label }
-        ddPart.selectionAction = { (index: Int, item: String) in
-        }
-
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
@@ -68,8 +57,30 @@ class WordsUnitBatchViewController: UITableViewController, UITextFieldDelegate {
         let identifier = "WordCell" + (indexPath.section == 0 ? "0\(indexPath.row)" : "10")
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! WordsUnitBatchCell
         if indexPath.section == 0 {
-            if indexPath.row < 4 {
-                cell.tf.tag = indexPath.row + 1
+            switch indexPath.row {
+            case 0:
+                tfUnit = cell.tf
+                tfUnit.text = String(vmSettings.USUNITTO)
+                ddUnit.anchorView = tfUnit
+                ddUnit.dataSource = vmSettings.arrUnits.map { $0.label }
+                ddUnit.selectRow(vmSettings.arrUnits.firstIndex { $0.value == vmSettings.USUNITTO }!)
+                ddUnit.selectionAction = { (index: Int, item: String) in
+                    self.tfUnit.text = item
+                }
+            case 1:
+                tfPart = cell.tf
+                tfPart.text = String(vmSettings.USPARTTO)
+                ddPart.anchorView = tfPart
+                ddPart.dataSource = vmSettings.arrParts.map { $0.label }
+                ddPart.selectRow(vmSettings.arrParts.firstIndex { $0.value == vmSettings.USPARTTO }!)
+                ddPart.selectionAction = { (index: Int, item: String) in
+                    self.tfPart.text = item
+                }
+            case 2:
+                tfSeqNum = cell.tf
+            case 3:
+                tfLevel = cell.tf
+            default: break
             }
         } else {
             let item = vm.arrWords[indexPath.row]

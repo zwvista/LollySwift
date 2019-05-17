@@ -111,7 +111,7 @@ class PhrasesLangViewController: PhrasesBaseViewController, UISearchBarDelegate,
     @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
         let index = sender!.view!.tag
         let utterance = AVSpeechUtterance(string: arrPhrases[index].PHRASE)
-        utterance.voice = AVSpeechSynthesisVoice(identifier: vm.vmSettings.selectediOSVoice.VOICENAME)
+        utterance.voice = AVSpeechSynthesisVoice(identifier: vmSettings.selectediOSVoice.VOICENAME)
         AppDelegate.synth.speak(utterance)
     }
 }

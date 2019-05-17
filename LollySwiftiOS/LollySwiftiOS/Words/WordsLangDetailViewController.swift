@@ -30,7 +30,7 @@ class WordsLangDetailViewController: UITableViewController {
     }
     
     func onDone() {
-        item.WORD = vm.vmSettings.autoCorrectInput(text: tfWord.text ?? "")
+        item.WORD = vmSettings.autoCorrectInput(text: tfWord.text ?? "")
         item.NOTE = tfNote.text
         item.LEVEL = Int(tfLevel.text!)!
     }

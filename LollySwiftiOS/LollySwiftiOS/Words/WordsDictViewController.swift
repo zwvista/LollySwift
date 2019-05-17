@@ -38,11 +38,11 @@ class WordsDictViewController: UIViewController, WKNavigationDelegate {
         }
         
         ddDictItem.anchorView = btnDict
-        ddDictItem.dataSource = vm.vmSettings.arrDictItems.map { $0.DICTNAME }
-        ddDictItem.selectRow(vm.vmSettings.selectedDictItemIndex)
+        ddDictItem.dataSource = vmSettings.arrDictItems.map { $0.DICTNAME }
+        ddDictItem.selectRow(vmSettings.selectedDictItemIndex)
         ddDictItem.selectionAction = { (index: Int, item: String) in
-            self.vm.vmSettings.selectedDictItem = self.vm.vmSettings.arrDictItems[index]
-            self.vm.vmSettings.updateDictItem().subscribe {
+            vmSettings.selectedDictItem = vmSettings.arrDictItems[index]
+            vmSettings.updateDictItem().subscribe {
                 self.selectDictChanged()
             }.disposed(by: self.disposeBag)
         }

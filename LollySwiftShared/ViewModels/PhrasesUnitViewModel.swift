@@ -17,7 +17,7 @@ class PhrasesUnitViewModel: NSObject {
     let disposeBag: DisposeBag!
 
     public init(settings: SettingsViewModel, inTextbook: Bool, disposeBag: DisposeBag, complete: @escaping () -> ()) {
-        self.vmSettings = settings
+        vmSettings = settings
         self.disposeBag = disposeBag
         super.init()
         if inTextbook {

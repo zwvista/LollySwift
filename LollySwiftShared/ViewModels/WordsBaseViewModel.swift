@@ -18,7 +18,7 @@ class WordsBaseViewModel: NSObject {
     let disposeBag: DisposeBag!
 
     public init(settings: SettingsViewModel, disposeBag: DisposeBag) {
-        self.vmSettings = settings
+        vmSettings = settings
         self.disposeBag = disposeBag
         vmNote = NoteViewModel(settings: settings, disposeBag: disposeBag)
         super.init()

@@ -35,19 +35,19 @@ class WordsUnitDetailViewController: UITableViewController, UITextFieldDelegate 
         super.viewDidLoad()
         
         ddUnit.anchorView = tfUnit
-        ddUnit.dataSource = vm.vmSettings.arrUnits.map { $0.label }
-        ddUnit.selectRow(vm.vmSettings.arrUnits.firstIndex { $0.value == item.UNIT }!)
+        ddUnit.dataSource = vmSettings.arrUnits.map { $0.label }
+        ddUnit.selectRow(vmSettings.arrUnits.firstIndex { $0.value == item.UNIT }!)
         ddUnit.selectionAction = { (index: Int, item: String) in
-            self.item.UNIT = self.vm.vmSettings.arrUnits[index].value
-            self.tfUnit.text = String(self.item.UNIT)
+            self.item.UNIT = vmSettings.arrUnits[index].value
+            self.tfUnit.text = item
         }
         
         ddPart.anchorView = tfPart
-        ddPart.dataSource = vm.vmSettings.arrParts.map { $0.label }
-        ddPart.selectRow(vm.vmSettings.arrUnits.firstIndex { $0.value == item.PART }!)
+        ddPart.dataSource = vmSettings.arrParts.map { $0.label }
+        ddPart.selectRow(vmSettings.arrParts.firstIndex { $0.value == item.PART }!)
         ddPart.selectionAction = { (index: Int, item: String) in
-            self.item.PART = self.vm.vmSettings.arrParts[index].value
-            self.tfPart.text = self.item.PARTSTR
+            self.item.PART = vmSettings.arrParts[index].value
+            self.tfPart.text = item
         }
 
         tfID.text = String(item.ID)
@@ -81,7 +81,7 @@ class WordsUnitDetailViewController: UITableViewController, UITextFieldDelegate 
     
     func onDone() {
         item.SEQNUM = Int(tfSeqNum.text!)!
-        item.WORD = vm.vmSettings.autoCorrectInput(text: tfWord.text ?? "")
+        item.WORD = vmSettings.autoCorrectInput(text: tfWord.text ?? "")
         item.NOTE = tfNote.text
         if isAdd {
             if !item.WORD.isEmpty {

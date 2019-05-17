@@ -18,7 +18,7 @@ class SearchViewModel: NSObject {
     }
 
     public init(settings: SettingsViewModel, complete: @escaping () -> ()) {
-        self.vmSettings = settings
+        vmSettings = settings
         super.init()
     }
 }

@@ -18,7 +18,7 @@ class NoteViewModel {
     let disposeBag: DisposeBag!
 
     init(settings: SettingsViewModel, disposeBag: DisposeBag) {
-        self.vmSettings = settings
+        vmSettings = settings
         self.disposeBag = disposeBag
     }
 
