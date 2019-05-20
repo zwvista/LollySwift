@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  PhrasesBaseViewController.swift
 //  LollySwiftMac
 //
 //  Created by 趙偉 on 2016/07/10.
@@ -7,7 +7,6 @@
 //
 
 import Cocoa
-import WebKit
 import RxSwift
 
 class PhrasesBaseViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate {

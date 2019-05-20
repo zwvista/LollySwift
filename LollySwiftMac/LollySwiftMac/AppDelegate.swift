@@ -96,4 +96,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBAction func phrasesReview(_ sender: AnyObject) {
         showWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesReviewWindowController", modal: false)
     }
+    
+    @IBAction func textbooks(_ sender: AnyObject) {
+        showWindow(storyBoardName: "Tools", windowControllerName: "TextbooksWindowController", modal: false)
+    }
 }
