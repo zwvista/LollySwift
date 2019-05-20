@@ -1,5 +1,5 @@
 //
-//  TextbookViewModel.swift
+//  TextbooksViewModel.swift
 //  LollySwiftMac
 //
 //  Created by 趙偉 on 2019/05/20.
@@ -9,7 +9,7 @@
 import Foundation
 import RxSwift
 
-class TextbookViewModel: NSObject {
+class TextbooksViewModel: NSObject {
     var vmSettings: SettingsViewModel
     let disposeBag: DisposeBag!
     var arrTextbooks = [MTextbook]()
@@ -22,5 +22,13 @@ class TextbookViewModel: NSObject {
             self.arrTextbooks = $0
             complete()
         }).disposed(by: disposeBag)
+    }
+    
+    static func update(item: MTextbook) -> Observable<()> {
+        return MTextbook.update(item: item)
+    }
+    
+    static func create(item: MTextbook) -> Observable<()> {
+        return MTextbook.create(item: item)
     }
 }

@@ -64,4 +64,18 @@ class MTextbook: NSObject, Codable {
             return arr
         }
     }
+
+    static func update(item: MTextbook) -> Observable<()> {
+        // SQL: UPDATE TEXTBOOKS SET NAME=?, UNITS=?, PARTS=? WHERE ID=?
+        let url = "\(CommonApi.url)TEXTBOOKS/\(item.ID)"
+        return RestApi.update(url: url, body: try! item.toJSONString(prettyPrint: false)!).map { print($0) }
+    }
+
+    static func create(item: MTextbook) -> Observable<()> {
+        // SQL: INSERT INTO TEXTBOOKS (ID, LANGID, NAME, UNITS, PARTS) VALUES (?,?,?,?,?)
+        let url = "\(CommonApi.url)TEXTBOOKS"
+        return RestApi.create(url: url, body: try! item.toJSONString(prettyPrint: false)!).map {
+            return $0.toInt()!
+        }
+    }
 }

@@ -13,7 +13,7 @@ class TextbooksViewController: NSViewController, LollyProtocol, NSTableViewDataS
     
     @IBOutlet weak var tableView: NSTableView!
 
-    var vm: TextbookViewModel!
+    var vm: TextbooksViewModel!
     let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
@@ -26,7 +26,7 @@ class TextbooksViewController: NSViewController, LollyProtocol, NSTableViewDataS
     }
     
     @IBAction func refreshTableView(_ sender: Any) {
-        vm = TextbookViewModel(settings: AppDelegate.theSettingsViewModel, disposeBag: disposeBag) {
+        vm = TextbooksViewModel(settings: AppDelegate.theSettingsViewModel, disposeBag: disposeBag) {
             self.tableView.reloadData()
         }
     }
@@ -41,5 +41,14 @@ class TextbooksViewController: NSViewController, LollyProtocol, NSTableViewDataS
         let columnName = tableColumn!.identifier.rawValue
         cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
         return cell;
+    }
+
+    @IBAction func editTextbook(_ sender: Any) {
+        let detailVC = self.storyboard!.instantiateController(withIdentifier: "TextbooksDetailViewController") as! TextbooksDetailViewController
+        detailVC.vm = vm
+        let i = tableView.selectedRow
+        detailVC.item = vm.arrTextbooks[i]
+        detailVC.complete = { self.tableView.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count)) }
+        self.presentAsModalWindow(detailVC)
     }
 }
