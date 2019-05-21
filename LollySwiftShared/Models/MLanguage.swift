@@ -15,7 +15,7 @@ class MLanguage: NSObject, Codable {
     var LANGNAME = ""
     
     override var description: String {
-        return LANGNAME;
+        return LANGNAME
     }
     
     enum CodingKeys : String, CodingKey {

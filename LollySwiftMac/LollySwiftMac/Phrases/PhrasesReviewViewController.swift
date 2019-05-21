@@ -67,7 +67,7 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
         }
     }
     
-    @IBAction func newTest(_ sender: Any) {
+    @IBAction func newTest(_ sender: AnyObject) {
         subscription?.dispose()
         vm.newTest(mode: ReviewMode(rawValue: reviewMode)!, shuffled: shuffled).subscribe {
             self.doTest()
@@ -91,7 +91,7 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
         }
     }
     
-    @IBAction func check(_ sender: Any) {
+    @IBAction func check(_ sender: AnyObject) {
         if !vm.isTestMode {
             vm.next()
             doTest()
@@ -114,18 +114,18 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
         }
     }
     
-    @IBAction func speakOrNotChanged(_ sender: Any) {
+    @IBAction func speakOrNotChanged(_ sender: AnyObject) {
         speakOrNot = (sender as! NSSegmentedControl).selectedSegment == 1
         if speakOrNot {
             synth.startSpeaking(vm.currentPhrase)
         }
     }
     
-    @IBAction func fixedOrNotChanged(_ sender: Any) {
+    @IBAction func fixedOrNotChanged(_ sender: AnyObject) {
         shuffled = (sender as! NSSegmentedControl).selectedSegment == 1
     }
     
-    @IBAction func reviewModeChanged(_ sender: Any) {
+    @IBAction func reviewModeChanged(_ sender: AnyObject) {
         reviewMode = (sender as! NSPopUpButton).indexOfSelectedItem
         newTest(self)
     }

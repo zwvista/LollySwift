@@ -24,7 +24,7 @@ class MDictionary: NSObject, Codable {
     var TEMPLATE2: String?
     
     override var description: String {
-        return DICTNAME;
+        return DICTNAME
     }
 
     func urlString(word: String, arrAutoCorrect: [MAutoCorrect]) -> String {
@@ -60,7 +60,7 @@ class MDictItem: NSObject {
     var DICTNAME = ""
     
     override var description: String {
-        return DICTNAME;
+        return DICTNAME
     }
 
     init(id: String, name: String) {

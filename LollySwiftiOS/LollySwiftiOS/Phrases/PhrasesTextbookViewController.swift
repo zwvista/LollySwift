@@ -44,7 +44,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController, UISearchBarDeleg
         tapGestureRecognizer.delegate = self
         cell.imgSpeak.addGestureRecognizer(tapGestureRecognizer)
         cell.imgSpeak.tag = indexPath.row
-        return cell;
+        return cell
     }
     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -115,14 +115,14 @@ class PhrasesTextbookViewController: PhrasesBaseViewController, UISearchBarDeleg
         tableView.reloadData()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
         super.prepare(for: segue, sender: sender)
         guard let controller = (segue.destination as? UINavigationController)?.topViewController as? PhrasesTextbookDetailViewController else {return}
         controller.vm = vm
         controller.item = sender as? MUnitPhrase
     }
     
-    @IBAction func btnEditClicked(_ sender: Any) {
+    @IBAction func btnEditClicked(_ sender: AnyObject) {
         tableView.isEditing = !tableView.isEditing
         btnEdit.title = tableView.isEditing ? "Done" : "Edit"
     }

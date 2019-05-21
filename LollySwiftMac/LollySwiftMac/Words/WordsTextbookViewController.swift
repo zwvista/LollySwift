@@ -64,13 +64,13 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
         }.disposed(by: disposeBag)
     }
 
-    @IBAction func refreshTableView(_ sender: Any) {
+    @IBAction func refreshTableView(_ sender: AnyObject) {
         vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: false, disposeBag: disposeBag) {
             self.tableView.reloadData()
         }
     }
 
-    @IBAction func editWord(_ sender: Any) {
+    @IBAction func editWord(_ sender: AnyObject) {
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "WordsTextbookDetailViewController") as! WordsTextbookDetailViewController
         detailVC.vm = vm
         let i = tableView.selectedRow
@@ -79,7 +79,7 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
         self.presentAsModalWindow(detailVC)
     }
     
-    @IBAction func getNote(_ sender: Any) {
+    @IBAction func getNote(_ sender: AnyObject) {
         let col = tableView.tableColumns.firstIndex(where: {$0.title == "NOTE"})!
         vm.getNote(index: tableView.selectedRow).subscribe {
             self.tableView.reloadData(forRowIndexes: [self.tableView.selectedRow], columnIndexes: [col])
@@ -94,7 +94,7 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
         return true
     }
 
-    @IBAction func filterWord(_ sender: Any) {
+    @IBAction func filterWord(_ sender: AnyObject) {
         let n = scTextFilter.selectedSegment
         vm.applyFilters(textFilter: n == 0 ? "" : textFilter, scope: n == 1 ? "Word" : "Note", levelge0only: levelge0only, textbookFilter: textbookFilter)
         self.tableView.reloadData()

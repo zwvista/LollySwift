@@ -129,7 +129,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     func addNewWord() {
     }
 
-    @IBAction func deleteWord(_ sender: Any) {
+    @IBAction func deleteWord(_ sender: AnyObject) {
         let row = tableView.selectedRow
         guard row != -1 else {return}
         let alert = NSAlert()
@@ -170,7 +170,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
         }
     }
     
-    @IBAction func searchDict(_ sender: Any) {
+    @IBAction func searchDict(_ sender: AnyObject) {
         if sender is NSToolbarItem {
             let tbItem = sender as! NSToolbarItem
             selectedDictItemIndex = tbItem.tag
@@ -219,11 +219,11 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
         }).disposed(by: disposeBag)
     }
 
-    @IBAction func incLevel(_ sender: Any) {
+    @IBAction func incLevel(_ sender: AnyObject) {
         changeLevel(by: 1)
     }
     
-    @IBAction func decLevel(_ sender: Any) {
+    @IBAction func decLevel(_ sender: AnyObject) {
         changeLevel(by: -1)
     }
 
@@ -232,26 +232,26 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
         synth.setVoice(NSSpeechSynthesizer.VoiceName(rawValue: vmSettings.macVoiceName))
     }
     
-    @IBAction func copyWord(_ sender: Any) {
+    @IBAction func copyWord(_ sender: AnyObject) {
         MacApi.copyText(selectedWord)
     }
     
-    @IBAction func googleWord(_ sender: Any) {
+    @IBAction func googleWord(_ sender: AnyObject) {
         MacApi.googleString(selectedWord)
     }
     
-    @IBAction func speak(_ sender: Any) {
+    @IBAction func speak(_ sender: AnyObject) {
         synth.startSpeaking(selectedWord)
     }
     
-    @IBAction func speakOrNotChanged(_ sender: Any) {
+    @IBAction func speakOrNotChanged(_ sender: AnyObject) {
         speakOrNot = (sender as! NSSegmentedControl).selectedSegment == 1
         if speakOrNot {
             speak(self)
         }
     }
 
-    @IBAction func openOnlineDict(_ sender: Any) {
+    @IBAction func openOnlineDict(_ sender: AnyObject) {
         let item = vmSettings.arrDictItems[selectedDictItemIndex]
         if !item.DICTNAME.starts(with: "Custom") {
             let item2 = vmSettings.arrDictsReference.first { $0.DICTNAME == item.DICTNAME }!

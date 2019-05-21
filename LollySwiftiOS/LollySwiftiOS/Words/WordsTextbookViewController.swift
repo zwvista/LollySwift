@@ -48,7 +48,7 @@ class WordsTextbookViewController: WordsBaseViewController, UISearchBarDelegate,
             cell.lblUnitPartSeqNum.textColor = UIColor(hexString: arr[1])
             cell.lblWordNote.textColor = UIColor(hexString: arr[1])
         }
-        return cell;
+        return cell
     }
     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -112,7 +112,7 @@ class WordsTextbookViewController: WordsBaseViewController, UISearchBarDelegate,
         tableView.reloadData()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
         super.prepare(for: segue, sender: sender)
         if let controller = (segue.destination as? UINavigationController)?.topViewController as? WordsTextbookDetailViewController {
             controller.vm = vm

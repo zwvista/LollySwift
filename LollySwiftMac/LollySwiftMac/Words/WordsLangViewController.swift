@@ -68,7 +68,7 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
     }
 
     // https://stackoverflow.com/questions/24219441/how-to-use-nstoolbar-in-xcode-6-and-storyboard
-    @IBAction func addWord(_ sender: Any) {
+    @IBAction func addWord(_ sender: AnyObject) {
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "WordsLangDetailViewController") as! WordsLangDetailViewController
         detailVC.vm = vm
         detailVC.item = vm.newLangWord()
@@ -83,13 +83,13 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
         }.disposed(by: disposeBag)
     }
 
-    @IBAction func refreshTableView(_ sender: Any) {
+    @IBAction func refreshTableView(_ sender: AnyObject) {
         vm = WordsLangViewModel(settings: AppDelegate.theSettingsViewModel, disposeBag: disposeBag) {
             self.tableView.reloadData()
         }
     }
 
-    @IBAction func editWord(_ sender: Any) {
+    @IBAction func editWord(_ sender: AnyObject) {
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "WordsLangDetailViewController") as! WordsLangDetailViewController
         detailVC.vm = vm
         let i = tableView.selectedRow
@@ -98,7 +98,7 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
         self.presentAsModalWindow(detailVC)
     }
     
-    @IBAction func getNote(_ sender: Any) {
+    @IBAction func getNote(_ sender: AnyObject) {
         let col = tableView.tableColumns.firstIndex(where: {$0.title == "NOTE"})!
         vm.getNote(index: tableView.selectedRow).subscribe {
             self.tableView.reloadData(forRowIndexes: [self.tableView.selectedRow], columnIndexes: [col])
@@ -113,7 +113,7 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
         return true
     }
 
-    @IBAction func filterWord(_ sender: Any) {
+    @IBAction func filterWord(_ sender: AnyObject) {
         let n = scTextFilter.selectedSegment
         if n == 0 {
             vm.arrWordsFiltered = nil

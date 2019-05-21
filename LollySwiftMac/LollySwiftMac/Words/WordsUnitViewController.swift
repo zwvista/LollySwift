@@ -129,7 +129,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation {
     }
 
     // https://stackoverflow.com/questions/24219441/how-to-use-nstoolbar-in-xcode-6-and-storyboard
-    @IBAction func addWord(_ sender: Any) {
+    @IBAction func addWord(_ sender: AnyObject) {
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "WordsUnitDetailViewController") as! WordsUnitDetailViewController
         detailVC.vm = vm
         detailVC.item = vm.newUnitWord()
@@ -144,14 +144,14 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation {
         }.disposed(by: disposeBag)
     }
     
-    @IBAction func refreshTableView(_ sender: Any) {
+    @IBAction func refreshTableView(_ sender: AnyObject) {
         vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: true, disposeBag: disposeBag) {
             self.tableView.reloadData()
             self.updateStatusText()
         }
     }
 
-    @IBAction func editWord(_ sender: Any) {
+    @IBAction func editWord(_ sender: AnyObject) {
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "WordsUnitDetailViewController") as! WordsUnitDetailViewController
         detailVC.vm = vm
         let i = tableView.selectedRow
@@ -160,7 +160,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation {
         self.presentAsModalWindow(detailVC)
     }
   
-    @IBAction func batchEdit(_ sender: Any) {
+    @IBAction func batchEdit(_ sender: AnyObject) {
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "WordsUnitBatchViewController") as! WordsUnitBatchViewController
         detailVC.vm = vm
         let i = tableView.selectedRow
@@ -171,14 +171,14 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation {
         self.presentAsModalWindow(detailVC)
     }
 
-    @IBAction func getNote(_ sender: Any) {
+    @IBAction func getNote(_ sender: AnyObject) {
         let col = tableView.tableColumns.firstIndex(where: {$0.title == "NOTE"})!
         vm.getNote(index: tableView.selectedRow).subscribe {
             self.tableView.reloadData(forRowIndexes: [self.tableView.selectedRow], columnIndexes: [col])
         }.disposed(by: disposeBag)
     }
 
-    @IBAction func getNotes(_ sender: Any) {
+    @IBAction func getNotes(_ sender: AnyObject) {
         let ifEmpty = (sender as! NSMenuItem).tag == 0
         vm.getNotes(ifEmpty: ifEmpty, oneComplete: {
             self.tableView.reloadData(forRowIndexes: [$0], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count))
@@ -197,7 +197,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation {
         return true
     }
     
-    @IBAction func read(_ sender: Any) {
+    @IBAction func read(_ sender: AnyObject) {
         var i = 0
         let wordCount = arrWords.count
         var subscription: Disposable?
@@ -212,7 +212,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation {
         subscription?.disposed(by: disposeBag)
     }
 
-    @IBAction func filterWord(_ sender: Any) {
+    @IBAction func filterWord(_ sender: AnyObject) {
         let n = scTextFilter.selectedSegment
         vm.applyFilters(textFilter: n == 0 ? "" : textFilter, scope: n == 1 ? "Word" : "Note", levelge0only: levelge0only, textbookFilter: 0)
         self.tableView.reloadData()

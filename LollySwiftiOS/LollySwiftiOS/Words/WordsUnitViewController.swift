@@ -49,7 +49,7 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
             cell.lblUnitPartSeqNum.textColor = UIColor(hexString: arr[1])
             cell.lblWordNote.textColor = UIColor(hexString: arr[1])
         }
-        return cell;
+        return cell
     }
     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -135,7 +135,7 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
         tableView.reloadData()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
         super.prepare(for: segue, sender: sender)
         if let controller = (segue.destination as? UINavigationController)?.topViewController as? WordsUnitDetailViewController {
             controller.vm = vm
@@ -148,12 +148,12 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
         }
     }
     
-    @IBAction func btnEditClicked(_ sender: Any) {
+    @IBAction func btnEditClicked(_ sender: AnyObject) {
         tableView.isEditing = !tableView.isEditing
         btnEdit.title = tableView.isEditing ? "Done" : "Edit"
     }
     
-    @IBAction func btnMoreClicked(_ sender: Any) {
+    @IBAction func btnMoreClicked(_ sender: AnyObject) {
         let alertController = UIAlertController(title: "Words", message: "More", preferredStyle: .alert)
         let addAction = UIAlertAction(title: "Add", style: .default) { _ in self.performSegue(withIdentifier: "add", sender: self) }
         alertController.addAction(addAction)

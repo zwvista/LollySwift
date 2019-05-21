@@ -41,7 +41,7 @@ class PhrasesTextbookDetailViewController: NSViewController {
         view.window?.title = item.PHRASE
     }
     
-    @IBAction func okClicked(_ sender: Any) {
+    @IBAction func okClicked(_ sender: AnyObject) {
         // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
         self.commitEditing()
         item.PHRASE = vm.vmSettings.autoCorrectInput(text: item.PHRASE)

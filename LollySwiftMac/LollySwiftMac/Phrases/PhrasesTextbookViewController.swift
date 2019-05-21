@@ -55,13 +55,13 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
             }.disposed(by: disposeBag)
     }
 
-    @IBAction func refreshTableView(_ sender: Any) {
+    @IBAction func refreshTableView(_ sender: AnyObject) {
         vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: false, disposeBag: disposeBag) {
             self.tableView.reloadData()
         }
     }
 
-    @IBAction func editPhrase(_ sender: Any) {
+    @IBAction func editPhrase(_ sender: AnyObject) {
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesTextbookDetailViewController") as! PhrasesTextbookDetailViewController
         detailVC.vm = vm
         let i = tableView.selectedRow
@@ -74,7 +74,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
         selectedPhrase = tableView.selectedRow == -1 ? "" : vm.arrPhrases[tableView.selectedRow].PHRASE
     }
     
-    @IBAction func filterPhrase(_ sender: Any) {
+    @IBAction func filterPhrase(_ sender: AnyObject) {
         let n = (sender as! NSSegmentedControl).selectedSegment
         if n == 0 {
             vm.arrPhrasesFiltered = nil

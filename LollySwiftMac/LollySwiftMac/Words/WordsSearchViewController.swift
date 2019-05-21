@@ -44,15 +44,15 @@ class WordsSearchViewController: WordsBaseViewController {
         newWord = ""
     }
     
-    @IBAction func refreshTableView(_ sender: Any) {
+    @IBAction func refreshTableView(_ sender: AnyObject) {
         arrWords.removeAll()
         tableView.reloadData()
     }
 
-    @IBAction func editWord(_ sender: Any) {
+    @IBAction func editWord(_ sender: AnyObject) {
     }
     
-    @IBAction func getNote(_ sender: Any) {
+    @IBAction func getNote(_ sender: AnyObject) {
     }
 }
 

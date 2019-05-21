@@ -42,7 +42,7 @@ class PhrasesLangViewController: PhrasesBaseViewController, UISearchBarDelegate,
         tapGestureRecognizer.delegate = self
         cell.imgSpeak.addGestureRecognizer(tapGestureRecognizer)
         cell.imgSpeak.tag = indexPath.row
-        return cell;
+        return cell
     }
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
@@ -94,7 +94,7 @@ class PhrasesLangViewController: PhrasesBaseViewController, UISearchBarDelegate,
         tableView.reloadData()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
         super.prepare(for: segue, sender: sender)
         if let controller = (segue.destination as? UINavigationController)?.topViewController as? PhrasesLangDetailViewController {
             controller.vm = vm

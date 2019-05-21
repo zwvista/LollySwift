@@ -25,7 +25,7 @@ class TextbooksViewController: NSViewController, LollyProtocol, NSTableViewDataS
         refreshTableView(self)
     }
     
-    @IBAction func refreshTableView(_ sender: AnyObject) {
+    @IBAction func refreshTableView(_ sender: Any) {
         vm = TextbooksViewModel(settings: AppDelegate.theSettingsViewModel, disposeBag: disposeBag) {
             self.tableView.reloadData()
         }
@@ -40,10 +40,10 @@ class TextbooksViewController: NSViewController, LollyProtocol, NSTableViewDataS
         let item = vm.arrTextbooks[row]
         let columnName = tableColumn!.identifier.rawValue
         cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
-        return cell
+        return cell;
     }
 
-    @IBAction func editTextbook(_ sender: AnyObject) {
+    @IBAction func editTextbook(_ sender: Any) {
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "TextbooksDetailViewController") as! TextbooksDetailViewController
         detailVC.vm = vm
         let i = tableView.selectedRow
@@ -52,7 +52,7 @@ class TextbooksViewController: NSViewController, LollyProtocol, NSTableViewDataS
         self.presentAsModalWindow(detailVC)
     }
     
-    @IBAction func addTextbook(_ sender: AnyObject) {
+    @IBAction func addTextbook(_ sender: Any) {
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "TextbooksDetailViewController") as! TextbooksDetailViewController
         detailVC.vm = vm
         detailVC.item = vm.newTextbook()

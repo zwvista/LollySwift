@@ -44,7 +44,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, UISearchBarDelegate,
         tapGestureRecognizer.delegate = self
         cell.imgSpeak.addGestureRecognizer(tapGestureRecognizer)
         cell.imgSpeak.tag = indexPath.row
-        return cell;
+        return cell
     }
     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -124,7 +124,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, UISearchBarDelegate,
         tableView.reloadData()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
         super.prepare(for: segue, sender: sender)
         if let controller = (segue.destination as? UINavigationController)?.topViewController as? PhrasesUnitDetailViewController {
             controller.vm = vm
@@ -134,7 +134,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, UISearchBarDelegate,
         }
     }
     
-    @IBAction func btnMoreClicked(_ sender: Any) {
+    @IBAction func btnMoreClicked(_ sender: AnyObject) {
         let alertController = UIAlertController(title: "Phrases", message: "More", preferredStyle: .alert)
         let addAction = UIAlertAction(title: "Add", style: .default) { _ in self.performSegue(withIdentifier: "add", sender: self) }
         alertController.addAction(addAction)
@@ -148,7 +148,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, UISearchBarDelegate,
         self.present(alertController, animated: true) {}
     }
 
-    @IBAction func btnEditClicked(_ sender: Any) {
+    @IBAction func btnEditClicked(_ sender: AnyObject) {
         tableView.isEditing = !tableView.isEditing
         btnEdit.title = tableView.isEditing ? "Done" : "Edit"
     }

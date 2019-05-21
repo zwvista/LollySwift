@@ -26,7 +26,7 @@ class MVoice: NSObject, Codable {
     }
     
     override var description: String {
-        return VOICENAME;
+        return VOICENAME
     }
 
     static func getDataByLang(_ langid: Int) -> Observable<[MVoice]> {

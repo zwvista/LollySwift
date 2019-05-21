@@ -47,7 +47,7 @@ class PhrasesLangViewController: PhrasesBaseViewController {
     }
 
     // https://stackoverflow.com/questions/24219441/how-to-use-nstoolbar-in-xcode-6-and-storyboard
-    @IBAction func addPhrase(_ sender: Any) {
+    @IBAction func addPhrase(_ sender: AnyObject) {
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesLangDetailViewController") as! PhrasesLangDetailViewController
         detailVC.vm = vm
         detailVC.item = vm.newLangPhrase()
@@ -58,13 +58,13 @@ class PhrasesLangViewController: PhrasesBaseViewController {
     override func deletePhrase(row: Int) {
     }
 
-    @IBAction func refreshTableView(_ sender: Any) {
+    @IBAction func refreshTableView(_ sender: AnyObject) {
         vm = PhrasesLangViewModel(settings: AppDelegate.theSettingsViewModel, disposeBag: disposeBag) {
             self.tableView.reloadData()
         }
     }
 
-    @IBAction func editPhrase(_ sender: Any) {
+    @IBAction func editPhrase(_ sender: AnyObject) {
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesLangDetailViewController") as! PhrasesLangDetailViewController
         detailVC.vm = vm
         let i = tableView.selectedRow
@@ -77,7 +77,7 @@ class PhrasesLangViewController: PhrasesBaseViewController {
         selectedPhrase = tableView.selectedRow == -1 ? "" : vm.arrPhrases[tableView.selectedRow].PHRASE
     }
     
-    @IBAction func filterPhrase(_ sender: Any) {
+    @IBAction func filterPhrase(_ sender: AnyObject) {
         let n = (sender as! NSSegmentedControl).selectedSegment
         if n == 0 {
             vm.arrPhrasesFiltered = nil

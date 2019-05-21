@@ -34,7 +34,7 @@ class PhrasesBaseViewController: NSViewController, LollyProtocol, NSTableViewDat
     }
     
     func itemForRow(row: Int) -> (MPhraseProtocol & NSObject)? {
-        return nil;
+        return nil
     }
 
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
@@ -42,13 +42,13 @@ class PhrasesBaseViewController: NSViewController, LollyProtocol, NSTableViewDat
         let item = itemForRow(row: row)!
         let columnName = tableColumn!.identifier.rawValue
         cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
-        return cell;
+        return cell
     }
 
     func endEditing(row: Int) {
     }
     
-    @IBAction func deletePhrase(_ sender: Any) {
+    @IBAction func deletePhrase(_ sender: AnyObject) {
         let row = tableView.selectedRow
         guard row != -1 else {return}
         deletePhrase(row: row)
@@ -73,19 +73,19 @@ class PhrasesBaseViewController: NSViewController, LollyProtocol, NSTableViewDat
         endEditing(row: row)
     }
 
-    @IBAction func copyPhrase(_ sender: Any) {
+    @IBAction func copyPhrase(_ sender: AnyObject) {
         MacApi.copyText(selectedPhrase)
     }
     
-    @IBAction func googlePhrase(_ sender: Any) {
+    @IBAction func googlePhrase(_ sender: AnyObject) {
         MacApi.googleString(selectedPhrase)
     }
 
-    @IBAction func speak(_ sender: Any) {
+    @IBAction func speak(_ sender: AnyObject) {
         synth.startSpeaking(selectedPhrase)
     }
     
-    @IBAction func speakOrNotChanged(_ sender: Any) {
+    @IBAction func speakOrNotChanged(_ sender: AnyObject) {
         speakOrNot = (sender as! NSSegmentedControl).selectedSegment == 1
         if speakOrNot {
             speak(self)

@@ -105,7 +105,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
     }
 
     // https://stackoverflow.com/questions/24219441/how-to-use-nstoolbar-in-xcode-6-and-storyboard
-    @IBAction func addPhrase(_ sender: Any) {
+    @IBAction func addPhrase(_ sender: AnyObject) {
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesUnitDetailViewController") as! PhrasesUnitDetailViewController
         detailVC.vm = vm
         detailVC.item = vm.newUnitPhrase()
@@ -113,7 +113,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
         self.presentAsSheet(detailVC)
     }
     
-    @IBAction func batchEdit(_ sender: Any) {
+    @IBAction func batchEdit(_ sender: AnyObject) {
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesUnitBatchViewController") as! PhrasesUnitBatchViewController
         detailVC.vm = vm
         let i = tableView.selectedRow
@@ -131,13 +131,13 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
         }.disposed(by: disposeBag)
     }
     
-    @IBAction func refreshTableView(_ sender: Any) {
+    @IBAction func refreshTableView(_ sender: AnyObject) {
         vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: true, disposeBag: disposeBag) {
             self.tableView.reloadData()
         }
     }
 
-    @IBAction func editPhrase(_ sender: Any) {
+    @IBAction func editPhrase(_ sender: AnyObject) {
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesUnitDetailViewController") as! PhrasesUnitDetailViewController
         detailVC.vm = vm
         let i = tableView.selectedRow

@@ -25,13 +25,13 @@ extension UIView{
         activityIndicator.center = blurEffectView.contentView.center
         
         self.addSubview(blurEffectView)
-        UIApplication.shared.beginIgnoringInteractionEvents();
+        UIApplication.shared.beginIgnoringInteractionEvents()
     }
     
     func removeBlurLoader(){
         self.subviews.compactMap {  $0 as? UIVisualEffectView }.forEach {
             $0.removeFromSuperview()
         }
-        UIApplication.shared.endIgnoringInteractionEvents();
+        UIApplication.shared.endIgnoringInteractionEvents()
     }
 }

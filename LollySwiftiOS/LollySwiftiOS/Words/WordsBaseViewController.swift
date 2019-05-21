@@ -29,7 +29,7 @@ class WordsBaseViewController: UITableViewController {
         searchController.isActive = false
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
     }
 
     deinit {

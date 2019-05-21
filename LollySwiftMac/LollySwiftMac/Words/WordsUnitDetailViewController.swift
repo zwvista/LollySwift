@@ -44,13 +44,13 @@ class WordsUnitDetailViewController: NSViewController {
         view.window?.title = isAdd ? "New Word" : item.WORD
     }
     
-    @IBAction func clearAccuracy(_ sender: Any) {
+    @IBAction func clearAccuracy(_ sender: AnyObject) {
         item.CORRECT = 0
         item.TOTAL = 0
         tfAccuracy.stringValue = item.ACCURACY
     }
 
-    @IBAction func okClicked(_ sender: Any) {
+    @IBAction func okClicked(_ sender: AnyObject) {
         // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
         self.commitEditing()
         item.WORD = vm.vmSettings.autoCorrectInput(text: item.WORD)

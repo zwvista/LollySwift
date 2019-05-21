@@ -46,7 +46,7 @@ class WordsLangViewController: WordsBaseViewController, UISearchBarDelegate, UIS
             cell.backgroundColor = UIColor(hexString: arr[0])
             cell.lblWordNote.textColor = UIColor(hexString: arr[1])
         }
-        return cell;
+        return cell
     }
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
@@ -106,7 +106,7 @@ class WordsLangViewController: WordsBaseViewController, UISearchBarDelegate, UIS
         tableView.reloadData()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
         super.prepare(for: segue, sender: sender)
         if let controller = (segue.destination as? UINavigationController)?.topViewController as? WordsLangDetailViewController {
             controller.vm = vm

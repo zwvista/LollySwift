@@ -35,7 +35,7 @@ class MTextbook: NSObject, Codable {
     }
 
     override var description: String {
-        return TEXTBOOKNAME;
+        return TEXTBOOKNAME
     }
 
     static func getDataByLang(_ langid: Int) -> Observable<[MTextbook]> {

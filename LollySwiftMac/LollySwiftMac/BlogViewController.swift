@@ -29,7 +29,7 @@ class BlogViewController: NSViewController, NSMenuItemValidation  {
         vmBlog = BlogViewModel(settings: vm, disposeBag: disposeBag)
     }
 
-    @IBAction func htmlToMarked(_ sender: Any) {
+    @IBAction func htmlToMarked(_ sender: AnyObject) {
         tvMarked.string = vmBlog.htmlToMarked(text: tvHtml.string)
     }
     
@@ -40,22 +40,22 @@ class BlogViewController: NSViewController, NSMenuItemValidation  {
         tvMarked.replaceCharacters(in: tvMarked.selectedRange(), with: f(s))
     }
 
-    @IBAction func addTagB(_ sender: Any) {
+    @IBAction func addTagB(_ sender: AnyObject) {
         return replaceSelection(f: vmBlog.addTagB)
     }
-    @IBAction func addTagI(_ sender: Any) {
+    @IBAction func addTagI(_ sender: AnyObject) {
         return replaceSelection(f: vmBlog.addTagI)
     }
-    @IBAction func removeTagBI(_ sender: Any) {
+    @IBAction func removeTagBI(_ sender: AnyObject) {
         return replaceSelection(f: vmBlog.removeTagBI)
     }
-    @IBAction func exchangeTagBI(_ sender: Any) {
+    @IBAction func exchangeTagBI(_ sender: AnyObject) {
         return replaceSelection(f: vmBlog.exchangeTagBI)
     }
-    @IBAction func addExplanation(_ sender: Any) {
+    @IBAction func addExplanation(_ sender: AnyObject) {
         return replaceSelection { _ in vmBlog.explanation }
     }
-    @IBAction func switchPage(_ sender: Any) {
+    @IBAction func switchPage(_ sender: AnyObject) {
         var n = 0
         if sender is NSMenuItem {
             n = (sender as! NSMenuItem).tag
@@ -73,11 +73,11 @@ class BlogViewController: NSViewController, NSMenuItemValidation  {
             wvBlog.load(URLRequest(url: URL(string: url)!))
         }
     }
-    @IBAction func copyPatternMarkDown(_ sender: Any) {
+    @IBAction func copyPatternMarkDown(_ sender: AnyObject) {
         let text = vmBlog.getPatternMarkDown(patternText: wc.patternText)
         MacApi.copyText(text)
     }
-    @IBAction func addNotes(_ sender: Any) {
+    @IBAction func addNotes(_ sender: AnyObject) {
         vmBlog.addNotes(text: tvMarked.string) {
             self.tvMarked.string = $0
         }

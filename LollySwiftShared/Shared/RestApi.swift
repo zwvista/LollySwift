@@ -14,7 +14,7 @@ import RxAlamofire
 
 // https://stackoverflow.com/questions/27855319/post-request-with-a-simple-string-in-body-with-alamofire
 class StringEncoding: ParameterEncoding {
-    let body: String;
+    let body: String
     
     public init(body: String) {
         self.body = body

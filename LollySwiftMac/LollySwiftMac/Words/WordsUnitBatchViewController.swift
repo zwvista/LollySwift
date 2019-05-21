@@ -56,7 +56,7 @@ class WordsUnitBatchViewController: NSViewController, NSTableViewDataSource, NST
         let item = arrWords[row]
         let columnName = tableColumn!.identifier.rawValue
         cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
-        return cell;
+        return cell
     }
     
     // https://stackoverflow.com/questions/10910779/coloring-rows-in-view-based-nstableview
@@ -65,7 +65,7 @@ class WordsUnitBatchViewController: NSViewController, NSTableViewDataSource, NST
         rowView.backgroundColor = level > 0 ? .yellow : level < 0 ? .gray : .white
     }
     
-    @IBAction func checkItems(_ sender: Any) {
+    @IBAction func checkItems(_ sender: AnyObject) {
         let n = (sender as! NSButton).tag
         for i in 0..<tableView.numberOfRows {
             let chk = (tableView.view(atColumn: 0, row: i, makeIfNecessary: false)! as! WordsUnitBatchCell).chk!
@@ -77,7 +77,7 @@ class WordsUnitBatchViewController: NSViewController, NSTableViewDataSource, NST
         }
     }
 
-    @IBAction func okClicked(_ sender: Any) {
+    @IBAction func okClicked(_ sender: AnyObject) {
         // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
         self.commitEditing()
         var o = Observable.just(())
