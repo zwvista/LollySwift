@@ -64,7 +64,7 @@ class TextbooksViewController: NSViewController, LollyProtocol, NSTableViewDataS
         let row = tableView.row(for: sender)
         guard row != -1 else {return}
         let col = tableView.column(for: sender)
-        let key = tableView.tableColumns[col].title
+        let key = tableView.tableColumns[col].identifier.rawValue
         let item = vm.arrTextbooks[row]
         let oldValue = String(describing: item.value(forKey: key))
         let newValue = sender.stringValue

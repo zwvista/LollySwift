@@ -40,7 +40,7 @@ class DictsViewController: NSViewController, LollyProtocol, NSTableViewDataSourc
         let item = vm.arrDicts[row]
         let columnName = tableColumn!.identifier.rawValue
         cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
-        return cell;
+        return cell
     }
 
     @IBAction func editDict(_ sender: Any) {
@@ -64,7 +64,7 @@ class DictsViewController: NSViewController, LollyProtocol, NSTableViewDataSourc
         let row = tableView.row(for: sender)
         guard row != -1 else {return}
         let col = tableView.column(for: sender)
-        let key = tableView.tableColumns[col].title
+        let key = tableView.tableColumns[col].identifier.rawValue
         let item = vm.arrDicts[row]
         let oldValue = String(describing: item.value(forKey: key))
         let newValue = sender.stringValue
