@@ -1,5 +1,5 @@
 //
-//  TextbooksDetailViewController.swift
+//  DictsDetailViewController.swift
 //  LollySwiftMac
 //
 //  Created by 趙偉 on 2018/04/07.
@@ -9,16 +9,16 @@
 import Cocoa
 import RxSwift
 
-class TextbooksDetailViewController: NSViewController {
+class DictsDetailViewController: NSViewController {
 
-    var vm: TextbooksViewModel!
+    var vm: DictsViewModel!
     var complete: (() -> Void)?
-    @objc var item: MTextbook!
+    @objc var item: MDictionary!
     var isAdd: Bool!
 
     @IBOutlet weak var tfID: NSTextField!
     @IBOutlet weak var tfLang: NSTextField!
-    @IBOutlet weak var tfTextbookName: NSTextField!
+    @IBOutlet weak var tfDictName: NSTextField!
     @IBOutlet weak var tfUnits: NSTextField!
     @IBOutlet weak var tfParts: NSTextField!
 
@@ -30,24 +30,24 @@ class TextbooksDetailViewController: NSViewController {
     }
     
     override func viewDidAppear() {
-        view.window?.title = item.TEXTBOOKNAME
+//        view.window?.title = item.TEXTBOOKNAME
         tfID.isEnabled = isAdd
         tfLang.stringValue = vm.vmSettings.selectedLang.LANGNAME
-        (isAdd ? tfID : tfTextbookName).becomeFirstResponder()
+        (isAdd ? tfID : tfDictName).becomeFirstResponder()
     }
 
     @IBAction func okClicked(_ sender: Any) {
         // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
         self.commitEditing()
-        if isAdd {
-            TextbooksViewModel.create(item: item).subscribe {
-                self.complete?()
-            }.disposed(by: disposeBag)
-        } else {
-            TextbooksViewModel.update(item: item).subscribe {
-                self.complete?()
-            }.disposed(by: disposeBag)
-        }
+//        if isAdd {
+//            DictsViewModel.create(item: item).subscribe {
+//                self.complete?()
+//            }.disposed(by: disposeBag)
+//        } else {
+//            DictsViewModel.update(item: item).subscribe {
+//                self.complete?()
+//            }.disposed(by: disposeBag)
+//        }
         dismiss(self)
     }
 

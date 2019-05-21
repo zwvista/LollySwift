@@ -34,6 +34,26 @@ class MDictionary: NSObject, Codable {
         print(url)
         return url
     }
+    
+    static func getAllDataByLang(_ langid: Int) -> Observable<[MDictionary]> {
+        // SQL: SELECT * FROM VDICTIONARIES WHERE LANGIDFROM=?
+        let url = "\(CommonApi.url)VDICTIONARIES?transform=1&filter=LANGIDFROM,eq,\(langid)&order[]=SEQNUM&order[]=DICTNAME"
+        return RestApi.getArray(url: url, keyPath: "VDICTSREFERENCE")
+    }
+
+    static func update(item: MDictionary) -> Observable<()> {
+        // SQL: UPDATE DICTIONARIES SET DICTID=?, LANGIDFROM=?, LANGIDTO=?, NAME=?, SEQNUM=?, DICTTYPEID=?, URL=?, CHCONV=?, AUTOMATION=?, AUTOJUMP=?, DICTTABLE=?, TEMPLATE=?, TEMPLATE2=? WHERE ID=?
+        let url = "\(CommonApi.url)DICTIONARIES/\(item.ID)"
+        return RestApi.update(url: url, body: try! item.toJSONString(prettyPrint: false)!).map { print($0) }
+    }
+    
+    static func create(item: MDictionary) -> Observable<Int> {
+        // SQL: INSERT INTO DICTIONARIES (DICTID, LANGIDFROM, LANGIDTO, NAME, SEQNUM, DICTTYPEID, URL, CHCONV, AUTOMATION, AUTOJUMP, DICTTABLE, TEMPLATE, TEMPLATE2) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)
+        let url = "\(CommonApi.url)DICTIONARIES"
+        return RestApi.create(url: url, body: try! item.toJSONString(prettyPrint: false)!).map {
+            return $0.toInt()!
+        }
+    }
 }
 
 class MDictReference: MDictionary {
