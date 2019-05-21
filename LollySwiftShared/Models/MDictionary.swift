@@ -14,10 +14,15 @@ class MDictionary: NSObject, Codable {
     var ID = 0
     var DICTID = 0
     var LANGIDFROM = 0
+    var LANGNAMEFROM = ""
+    var LANGIDTO = 0
+    var LANGNAMETO = ""
+    var SEQNUM = 0
     var DICTTYPENAME = ""
     var DICTNAME = ""
     var URL: String?
     var CHCONV: String?
+    var TRANSFORM_WIN: String?
     var TRANSFORM: String?
     var WAIT: Int?
     var TEMPLATE: String?
@@ -38,7 +43,7 @@ class MDictionary: NSObject, Codable {
     static func getAllDataByLang(_ langid: Int) -> Observable<[MDictionary]> {
         // SQL: SELECT * FROM VDICTIONARIES WHERE LANGIDFROM=?
         let url = "\(CommonApi.url)VDICTIONARIES?transform=1&filter=LANGIDFROM,eq,\(langid)&order[]=SEQNUM&order[]=DICTNAME"
-        return RestApi.getArray(url: url, keyPath: "VDICTSREFERENCE")
+        return RestApi.getArray(url: url, keyPath: "VDICTIONARIES")
     }
 
     static func update(item: MDictionary) -> Observable<()> {

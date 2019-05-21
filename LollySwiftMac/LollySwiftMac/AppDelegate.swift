@@ -100,4 +100,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBAction func textbooks(_ sender: AnyObject) {
         showWindow(storyBoardName: "Tools", windowControllerName: "TextbooksWindowController", modal: false)
     }
+    
+    @IBAction func dictionaries(_ sender: AnyObject) {
+        showWindow(storyBoardName: "Tools", windowControllerName: "DictsWindowController", modal: false)
+    }
 }
