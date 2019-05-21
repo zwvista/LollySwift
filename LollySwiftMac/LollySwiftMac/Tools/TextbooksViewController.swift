@@ -51,4 +51,27 @@ class TextbooksViewController: NSViewController, LollyProtocol, NSTableViewDataS
         detailVC.complete = { self.tableView.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count)) }
         self.presentAsModalWindow(detailVC)
     }
+    
+    @IBAction func addTextbook(_ sender: Any) {
+        let detailVC = self.storyboard!.instantiateController(withIdentifier: "TextbooksDetailViewController") as! TextbooksDetailViewController
+        detailVC.vm = vm
+        detailVC.item = vm.newTextbook()
+        detailVC.complete = { self.tableView.reloadData() }
+        self.presentAsSheet(detailVC)
+    }
+
+    @IBAction func endEditing(_ sender: NSTextField) {
+        let row = tableView.row(for: sender)
+        guard row != -1 else {return}
+        let col = tableView.column(for: sender)
+        let key = tableView.tableColumns[col].title
+        let item = vm.arrTextbooks[row]
+        let oldValue = String(describing: item.value(forKey: key))
+        let newValue = sender.stringValue
+        guard oldValue != newValue else {return}
+        item.setValue(newValue, forKey: key)
+        TextbooksViewModel.update(item: item).subscribe {
+            self.tableView.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count))
+        }.disposed(by: disposeBag)
+    }
 }

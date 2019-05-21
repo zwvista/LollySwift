@@ -14,9 +14,10 @@ class TextbooksDetailViewController: NSViewController {
     var vm: TextbooksViewModel!
     var complete: (() -> Void)?
     @objc var item: MTextbook!
+    var isAdd: Bool!
 
     @IBOutlet weak var tfID: NSTextField!
-    @IBOutlet weak var tfLangID: NSTextField!
+    @IBOutlet weak var tfLang: NSTextField!
     @IBOutlet weak var tfTextbookName: NSTextField!
     @IBOutlet weak var tfUnits: NSTextField!
     @IBOutlet weak var tfParts: NSTextField!
@@ -25,19 +26,28 @@ class TextbooksDetailViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        isAdd = item.ID == 0
     }
     
     override func viewDidAppear() {
-        tfTextbookName.becomeFirstResponder()
         view.window?.title = item.TEXTBOOKNAME
+        tfID.isEnabled = isAdd
+        tfLang.stringValue = vm.vmSettings.selectedLang.LANGNAME
+        (isAdd ? tfID : tfTextbookName).becomeFirstResponder()
     }
 
     @IBAction func okClicked(_ sender: Any) {
         // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
         self.commitEditing()
-        TextbooksViewModel.update(item: item).subscribe {
-            self.complete?()
-        }.disposed(by: disposeBag)
+        if isAdd {
+            TextbooksViewModel.create(item: item).subscribe {
+                self.complete?()
+            }.disposed(by: disposeBag)
+        } else {
+            TextbooksViewModel.update(item: item).subscribe {
+                self.complete?()
+            }.disposed(by: disposeBag)
+        }
         dismiss(self)
     }
 

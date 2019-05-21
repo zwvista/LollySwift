@@ -31,4 +31,10 @@ class TextbooksViewModel: NSObject {
     static func create(item: MTextbook) -> Observable<()> {
         return MTextbook.create(item: item)
     }
+
+    func newTextbook() -> MTextbook {
+        let item = MTextbook()
+        item.LANGID = vmSettings.selectedLang.ID
+        return item
+    }
 }
