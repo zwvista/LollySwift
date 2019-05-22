@@ -53,7 +53,6 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
         tfIncorrect.isHidden = true
         tfAccuracy.isHidden = !vm.isTestMode || !b
         btnCheck.isEnabled = b
-        btnCheck.title = vm.isTestMode ? "Check" : "Next"
         tfWordTarget.stringValue = vm.isTestMode ? "" : vm.currentItem?.WORDNOTE ?? ""
         tfTranslation.stringValue = ""
         wordInput = ""
@@ -78,6 +77,7 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
         vm.newTest(mode: ReviewMode(rawValue: reviewMode)!, shuffled: shuffled, levelge0only: levelge0only).subscribe {
             self.doTest()
         }.disposed(by: disposeBag)
+        btnCheck.title = vm.isTestMode ? "Check" : "Next"
         if vm.mode == .reviewAuto {
             subscription = Observable<Int>.interval(vmSettings.USREVIEWINTERVAL.toDouble / 1000.0, scheduler: MainScheduler.instance).subscribe { _ in
                 self.check(self)

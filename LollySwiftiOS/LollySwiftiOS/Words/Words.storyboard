@@ -1749,6 +1749,10 @@
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="60"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="check:" destination="8Ga-dG-IVt" eventType="editingDidEnd" id="5LC-D5-Pga"/>
+                                    <outlet property="delegate" destination="8Ga-dG-IVt" id="hfn-Fl-b4p"/>
+                                </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fq8-sQ-8Km">
                                 <rect key="frame" x="16" y="94.5" width="64" height="30"/>

@@ -46,6 +46,9 @@ class PhrasesReviewViewModel {
         }
     }
     
+    var currentItem: MUnitPhrase? {
+        return hasNext() ? arrPhrases[index] : nil
+    }
     var currentPhrase: String {
         return hasNext() ? arrPhrases[index].PHRASE : ""
     }

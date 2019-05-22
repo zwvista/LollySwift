@@ -50,7 +50,6 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
         tfCorrect.isHidden = true
         tfIncorrect.isHidden = true
         btnCheck.isEnabled = b
-        btnCheck.title = vm.isTestMode ? "Check" : "Next"
         tfPhraseTarget.stringValue = vm.isTestMode ? "" : vm.currentPhrase
         tfTranslation.stringValue = ""
         phraseInput = ""
@@ -61,7 +60,7 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
             if speakOrNot {
                 synth.startSpeaking(vm.currentPhrase)
             }
-            tfTranslation.stringValue = vm.arrPhrases[vm.index].TRANSLATION ?? ""
+            tfTranslation.stringValue = vm.currentItem!.TRANSLATION ?? ""
         } else {
             subscription?.dispose()
         }
@@ -72,6 +71,7 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
         vm.newTest(mode: ReviewMode(rawValue: reviewMode)!, shuffled: shuffled).subscribe {
             self.doTest()
         }.disposed(by: disposeBag)
+        btnCheck.title = vm.isTestMode ? "Check" : "Next"
         if vm.mode == .reviewAuto {
             subscription = Observable<Int>.interval(vmSettings.USREVIEWINTERVAL.toDouble / 1000.0, scheduler: MainScheduler.instance).subscribe { _ in
                 self.check(self)

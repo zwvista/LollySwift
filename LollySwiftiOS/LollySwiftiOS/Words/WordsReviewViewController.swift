@@ -62,7 +62,6 @@ class WordsReviewViewController: UIViewController {
         lblIncorrect.isHidden = true
         lblAccuracy.isHidden = !vm.isTestMode || !b
         btnCheck.isEnabled = b
-        btnCheck.titleLabel?.text = vm.isTestMode ? "Check" : "Next"
         lblWordTarget.text = vm.isTestMode ? "" : vm.currentItem?.WORDNOTE ?? ""
         tvTranslation.text = ""
         tfWordInput.text = ""
@@ -88,6 +87,7 @@ class WordsReviewViewController: UIViewController {
         vm.newTest(mode: ReviewMode(rawValue: reviewMode)!, shuffled: shuffled, levelge0only: levelge0only).subscribe {
             self.doTest()
         }.disposed(by: disposeBag)
+        btnCheck.titleLabel?.text = vm.isTestMode ? "Check" : "Next"
         if vm.mode == .reviewAuto {
             subscription = Observable<Int>.interval(vmSettings.USREVIEWINTERVAL.toDouble / 1000.0, scheduler: MainScheduler.instance).subscribe { _ in
                 self.check(self)

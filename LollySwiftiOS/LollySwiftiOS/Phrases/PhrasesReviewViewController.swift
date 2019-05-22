@@ -9,8 +9,9 @@
 import UIKit
 import RxSwift
 import AVFoundation
+import DropDown
 
-class PhrasesReviewViewController: UIViewController {
+class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
     var vm: PhrasesReviewViewModel!
     let disposeBag = DisposeBag()
     
@@ -18,18 +19,32 @@ class PhrasesReviewViewController: UIViewController {
     @IBOutlet weak var lblIndex: UILabel!
     @IBOutlet weak var lblCorrect: UILabel!
     @IBOutlet weak var lblIncorrect: UILabel!
-    @IBOutlet weak var lblTranslation: UITextView!
+    @IBOutlet weak var lblTranslation: UILabel!
     @IBOutlet weak var tfPhraseInput: UITextField!
     @IBOutlet weak var btnCheck: UIButton!
-    
+    @IBOutlet weak var btnReviewMode: UIButton!
+    @IBOutlet weak var swSpeakOrNot: UISwitch!
+    @IBOutlet weak var swFixedOrNot: UISwitch!
+
     var speakOrNot = false
     var shuffled = true
     var levelge0only = true
     var reviewMode = 0
     var subscription: Disposable? = nil
     
+    let ddReviewMode = DropDown()
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        ddReviewMode.anchorView = btnReviewMode
+        ddReviewMode.dataSource = ["Review(Auto)", "Test", "Review(Manual)"]
+        ddReviewMode.selectionAction = { (index: Int, item: String) in
+            self.reviewMode = index
+            self.btnReviewMode.titleLabel?.text = item
+            self.newTest(self)
+        }
+
         vm = PhrasesReviewViewModel(settings: vmSettings)
         newTest(self)
     }
@@ -44,7 +59,6 @@ class PhrasesReviewViewController: UIViewController {
         lblCorrect.isHidden = true
         lblIncorrect.isHidden = true
         btnCheck.isEnabled = b
-        btnCheck.titleLabel?.text = vm.isTestMode ? "Check" : "Next"
         lblPhraseTarget.text = vm.isTestMode ? "" : vm.currentPhrase
         lblTranslation.text = ""
         tfPhraseInput.text = ""
@@ -56,6 +70,7 @@ class PhrasesReviewViewController: UIViewController {
                 utterance.voice = AVSpeechSynthesisVoice(identifier: vmSettings.selectediOSVoice.VOICENAME)
                 AppDelegate.synth.speak(utterance)
             }
+            lblTranslation.text = vm.currentItem!.TRANSLATION ?? ""
         } else {
             subscription?.dispose()
         }
@@ -66,6 +81,7 @@ class PhrasesReviewViewController: UIViewController {
         vm.newTest(mode: ReviewMode(rawValue: reviewMode)!, shuffled: shuffled).subscribe {
             self.doTest()
         }.disposed(by: disposeBag)
+        btnCheck.titleLabel?.text = vm.isTestMode ? "Check" : "Next"
         if vm.mode == .reviewAuto {
             subscription = Observable<Int>.interval(vmSettings.USREVIEWINTERVAL.toDouble / 1000.0, scheduler: MainScheduler.instance).subscribe { _ in
                 self.check(self)
@@ -96,6 +112,26 @@ class PhrasesReviewViewController: UIViewController {
         }
     }
     
+    @IBAction func speakOrNotChanged(_ sender: AnyObject) {
+        speakOrNot = (sender as! UISwitch).isOn
+        if speakOrNot {
+            let utterance = AVSpeechUtterance(string: vm.currentPhrase)
+            utterance.voice = AVSpeechSynthesisVoice(identifier: vmSettings.selectediOSVoice.VOICENAME)
+            AppDelegate.synth.speak(utterance)
+        }
+    }
+    
+    @IBAction func fixedOrNotChanged(_ sender: AnyObject) {
+        shuffled = (sender as! UISwitch).isOn
+    }
+    
+    @IBAction func reviewModeChanged(_ sender: AnyObject) {
+        ddReviewMode.show()
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+    }
     
     deinit {
         print("DEBUG: \(self.className) deinit")
