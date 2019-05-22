@@ -19,8 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     static let synth = AVSpeechSynthesizer()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        vmSettings.getData().subscribe().disposed(by: disposeBag)
         // Override point for customization after application launch.
+        vmSettings.getData().subscribe().disposed(by: disposeBag)
         return true
     }
 

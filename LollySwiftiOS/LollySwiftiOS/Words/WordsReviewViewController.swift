@@ -43,7 +43,7 @@ class WordsReviewViewController: UIViewController, UITextFieldDelegate {
         ddReviewMode.dataSource = ["Review(Auto)", "Test", "Review(Manual)"]
         ddReviewMode.selectionAction = { [unowned self] (index: Int, item: String) in
             self.reviewMode = index
-            self.btnReviewMode.titleLabel?.text = item
+            self.btnReviewMode.setTitle(item, for: .normal)
             self.newTest(self)
         }
         
@@ -63,9 +63,15 @@ class WordsReviewViewController: UIViewController, UITextFieldDelegate {
         lblAccuracy.isHidden = !vm.isTestMode || !b
         btnCheck.isEnabled = b
         lblWordTarget.text = vm.isTestMode ? "" : vm.currentItem?.WORDNOTE ?? ""
+        tvTranslation.isHidden = false
         tvTranslation.text = ""
         tfWordInput.text = ""
-        tfWordInput.becomeFirstResponder()
+        tfWordInput.isHidden = vm.mode == .reviewAuto
+        if !tfWordInput.isHidden {
+            tfWordInput.becomeFirstResponder()
+        } else {
+            view.endEditing(true)
+        }
         if b {
             lblIndex.text = "\(vm.index + 1)/\(vm.arrWords.count)"
             lblAccuracy.text = vm.currentItem!.ACCURACY
@@ -79,6 +85,9 @@ class WordsReviewViewController: UIViewController, UITextFieldDelegate {
             }).disposed(by: disposeBag)
         } else {
             subscription?.dispose()
+            tvTranslation.isHidden = true
+            tfWordInput.isHidden = true
+            view.endEditing(true)
         }
     }
 
@@ -87,7 +96,7 @@ class WordsReviewViewController: UIViewController, UITextFieldDelegate {
         vm.newTest(mode: ReviewMode(rawValue: reviewMode)!, shuffled: shuffled, levelge0only: levelge0only).subscribe {
             self.doTest()
         }.disposed(by: disposeBag)
-        btnCheck.titleLabel?.text = vm.isTestMode ? "Check" : "Next"
+        btnCheck.setTitle(vm.isTestMode ? "Check" : "Next", for: .normal)
         if vm.mode == .reviewAuto {
             subscription = Observable<Int>.interval(vmSettings.USREVIEWINTERVAL.toDouble / 1000.0, scheduler: MainScheduler.instance).subscribe { _ in
                 self.check(self)
@@ -109,12 +118,12 @@ class WordsReviewViewController: UIViewController, UITextFieldDelegate {
             } else {
                 lblIncorrect.isHidden = false
             }
-            btnCheck.titleLabel?.text = "Next"
+            btnCheck.setTitle("Next", for: .normal)
             vm.check(wordInput: tfWordInput.text!).subscribe().disposed(by: disposeBag)
         } else {
             vm.next()
             doTest()
-            btnCheck.titleLabel?.text = "Check"
+            btnCheck.setTitle("Check", for: .normal)
         }
     }
     
@@ -143,7 +152,12 @@ class WordsReviewViewController: UIViewController, UITextFieldDelegate {
         check(self)
         return false
     }
-
+    
+    // https://stackoverflow.com/questions/18755410/how-to-dismiss-keyboard-ios-programmatically-when-pressing-return
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
     deinit {
         print("DEBUG: \(self.className) deinit")
     }

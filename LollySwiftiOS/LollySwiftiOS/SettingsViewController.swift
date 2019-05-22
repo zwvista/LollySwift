@@ -113,7 +113,7 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
         ddToType.anchorView = btnToType
         ddToType.selectionAction = { [unowned self] (index: Int, item: String) in
             self.vm.toType = index
-            self.btnToType.titleLabel?.text = item
+            self.btnToType.setTitle(item, for: .normal)
             let b = index == 2
             self.lblUnitTo.isEnabled = b
             self.lblPartTo.isEnabled = b && !self.vm.isSinglePart

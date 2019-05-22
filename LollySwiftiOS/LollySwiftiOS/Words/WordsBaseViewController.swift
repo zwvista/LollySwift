@@ -13,7 +13,8 @@ class WordsBaseViewController: UITableViewController {
     // https://www.raywenderlich.com/113772/uisearchcontroller-tutorial
     let searchController = UISearchController(searchResultsController: nil)
     var searchBar: UISearchBar { return searchController.searchBar }
-    
+    var colors = [UIColor]()
+
     func setupSearchController(delegate: UISearchBarDelegate & UISearchResultsUpdating) {
         // https://stackoverflow.com/questions/28326269/uisearchbar-presented-by-uisearchcontroller-in-table-header-view-animates-too-fa
         //searchController.dimsBackgroundDuringPresentation = true
