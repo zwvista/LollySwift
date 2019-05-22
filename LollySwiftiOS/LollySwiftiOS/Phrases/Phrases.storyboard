@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -1284,6 +1285,46 @@
                 <exit id="Db9-0t-qih" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="5369" y="2475"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Cfl-44-LcL">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="R3i-vF-Uka" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="v6c-GS-9F2">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="YNc-Wk-NlX" kind="relationship" relationship="rootViewController" id="wSg-KA-j4M"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="e5Y-Et-j75" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2769" y="5303"/>
+        </scene>
+        <!--Phrases Review View Controller-->
+        <scene sceneID="wHA-6F-z2y">
+            <objects>
+                <viewController storyboardIdentifier="PhrasesReviewViewController" id="YNc-Wk-NlX" customClass="PhrasesReviewViewController" customModule="LollySwiftiOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="sxv-Ts-3ro">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="BZ5-uV-j0V"/>
+                    </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="lbg-hW-uXU">
+                        <barButtonItem key="leftBarButtonItem" title="Left" image="MenuButton" id="W2M-vd-jTP">
+                            <connections>
+                                <action selector="presentLeftMenuViewController:" destination="4zA-3I-UJh" id="6BZ-U4-rBe"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4zA-3I-UJh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3750" y="5302"/>
         </scene>
     </scenes>
     <resources>

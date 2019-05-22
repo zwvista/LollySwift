@@ -1681,6 +1681,46 @@
             </objects>
             <point key="canvasLocation" x="5321" y="250"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="RkP-fy-sA6">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="ssN-W0-nzK" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="NaF-Y5-Mnr">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="8Ga-dG-IVt" kind="relationship" relationship="rootViewController" id="MT2-p3-ggo"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4Sv-xT-cx3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2753" y="3125"/>
+        </scene>
+        <!--Words Review View Controller-->
+        <scene sceneID="o3t-ca-zmk">
+            <objects>
+                <viewController storyboardIdentifier="WordsReviewViewController" id="8Ga-dG-IVt" customClass="WordsReviewViewController" customModule="LollySwiftiOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="uur-fY-DIz">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="LIX-g3-L0Q"/>
+                    </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="5L3-Lm-4P0">
+                        <barButtonItem key="leftBarButtonItem" title="Left" image="MenuButton" id="ajY-cl-Fog">
+                            <connections>
+                                <action selector="presentLeftMenuViewController:" destination="qcK-ie-JQE" id="WEO-Ux-K4t"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qcK-ie-JQE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3742" y="3125"/>
+        </scene>
     </scenes>
     <resources>
         <image name="MenuButton" width="25" height="13"/>
@@ -1688,7 +1728,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Ol9-Ej-9ED"/>
-        <segue reference="Wcb-Wk-Ta2"/>
+        <segue reference="pAu-9n-D91"/>
         <segue reference="K8L-Dr-qQn"/>
     </inferredMetricsTieBreakers>
 </document>

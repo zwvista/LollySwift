@@ -20,7 +20,7 @@ public class LeftMenuViewController: UIViewController, UITableViewDelegate, UITa
     override public func viewDidLoad() {
         super.viewDidLoad()
 
-        let tableView = UITableView(frame: CGRect(x: 0, y: (self.view.frame.size.height - 54 * 8) / 2.0, width: self.view.frame.size.width, height: 54 * 8), style: .plain)
+        let tableView = UITableView(frame: CGRect(x: 0, y: (self.view.frame.size.height - 54 * 10) / 2.0, width: self.view.frame.size.width, height: 54 * 10), style: .plain)
         tableView.autoresizingMask = [.flexibleTopMargin, .flexibleBottomMargin, .flexibleWidth]
         tableView.delegate = self
         tableView.dataSource = self
@@ -56,15 +56,21 @@ public class LeftMenuViewController: UIViewController, UITableViewDelegate, UITa
             self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboardPhrases.instantiateViewController(withIdentifier: "PhrasesUnitViewController")), animated: true)
             self.sideMenuViewController!.hideMenuViewController()
         case 4:
-            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboardWords.instantiateViewController(withIdentifier: "WordsLangViewController")), animated: true)
+            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboardWords.instantiateViewController(withIdentifier: "WordsReviewViewController")), animated: true)
             self.sideMenuViewController!.hideMenuViewController()
         case 5:
-            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboardPhrases.instantiateViewController(withIdentifier: "PhrasesLangViewController")), animated: true)
+            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboardPhrases.instantiateViewController(withIdentifier: "PhrasesReviewViewController")), animated: true)
             self.sideMenuViewController!.hideMenuViewController()
         case 6:
-            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboardWords.instantiateViewController(withIdentifier: "WordsTextbookViewController")), animated: true)
+            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboardWords.instantiateViewController(withIdentifier: "WordsLangViewController")), animated: true)
             self.sideMenuViewController!.hideMenuViewController()
         case 7:
+            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboardPhrases.instantiateViewController(withIdentifier: "PhrasesLangViewController")), animated: true)
+            self.sideMenuViewController!.hideMenuViewController()
+        case 8:
+            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboardWords.instantiateViewController(withIdentifier: "WordsTextbookViewController")), animated: true)
+            self.sideMenuViewController!.hideMenuViewController()
+        case 9:
             self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboardPhrases.instantiateViewController(withIdentifier: "PhrasesTextbookViewController")), animated: true)
             self.sideMenuViewController!.hideMenuViewController()
         default:
@@ -83,7 +89,7 @@ public class LeftMenuViewController: UIViewController, UITableViewDelegate, UITa
     }
 
     public func tableView(_ tableView: UITableView, numberOfRowsInSection sectionIndex: Int) -> Int {
-        return 8
+        return 10
     }
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -100,8 +106,8 @@ public class LeftMenuViewController: UIViewController, UITableViewDelegate, UITa
             cell!.selectedBackgroundView = UIView()
         }
 
-        var titles = ["Search", "Settings", "Words in Unit", "Phrases in Unit", "Words in Language", "Phrases in Language", "Words in Textbook", "Phrases in Textbook"]
-        var images = ["IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty"]
+        var titles = ["Search", "Settings", "Words in Unit", "Phrases in Unit", "Words Review", "Phrases Review", "Words in Language", "Phrases in Language", "Words in Textbook", "Phrases in Textbook"]
+        var images = ["IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty"]
         cell!.textLabel?.text = titles[indexPath.row]
         cell!.imageView?.image = UIImage(named: images[indexPath.row])
 

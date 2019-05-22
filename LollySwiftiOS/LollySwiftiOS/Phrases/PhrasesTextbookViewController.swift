@@ -115,7 +115,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController, UISearchBarDeleg
         tableView.reloadData()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         guard let controller = (segue.destination as? UINavigationController)?.topViewController as? PhrasesTextbookDetailViewController else {return}
         controller.vm = vm

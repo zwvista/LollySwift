@@ -112,7 +112,7 @@ class WordsTextbookViewController: WordsBaseViewController, UISearchBarDelegate,
         tableView.reloadData()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         if let controller = (segue.destination as? UINavigationController)?.topViewController as? WordsTextbookDetailViewController {
             controller.vm = vm
