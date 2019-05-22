@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import AVFoundation
+import DropDown
 
 class WordsReviewViewController: UIViewController {
     var vm: WordsReviewViewModel!
@@ -21,16 +22,31 @@ class WordsReviewViewController: UIViewController {
     @IBOutlet weak var lblAccuracy: UILabel!
     @IBOutlet weak var tvTranslation: UITextView!
     @IBOutlet weak var tfWordInput: UITextField!
+    @IBOutlet weak var btnReviewMode: UIButton!
     @IBOutlet weak var btnCheck: UIButton!
-    
+    @IBOutlet weak var swSpeakOrNot: UISwitch!
+    @IBOutlet weak var swFixedOrNot: UISwitch!
+    @IBOutlet weak var swLevelge0OrNot: UISwitch!
+
     var speakOrNot = false
     var shuffled = true
     var levelge0only = true
     var reviewMode = 0
     var subscription: Disposable? = nil
+    
+    let ddReviewMode = DropDown()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        ddReviewMode.anchorView = btnReviewMode
+        ddReviewMode.dataSource = ["Review(Auto)", "Test", "Review(Manual)"]
+        ddReviewMode.selectionAction = { (index: Int, item: String) in
+            self.reviewMode = index
+            self.btnReviewMode.titleLabel?.text = item
+            self.newTest(self)
+        }
+        
         vm = WordsReviewViewModel(settings: vmSettings)
         newTest(self)
     }
@@ -101,7 +117,27 @@ class WordsReviewViewController: UIViewController {
             btnCheck.titleLabel?.text = "Check"
         }
     }
-
+    
+    @IBAction func speakOrNotChanged(_ sender: AnyObject) {
+        speakOrNot = (sender as! UISwitch).isOn
+        if speakOrNot {
+            let utterance = AVSpeechUtterance(string: vm.currentWord)
+            utterance.voice = AVSpeechSynthesisVoice(identifier: vmSettings.selectediOSVoice.VOICENAME)
+            AppDelegate.synth.speak(utterance)
+        }
+    }
+    
+    @IBAction func fixedOrNotChanged(_ sender: AnyObject) {
+        shuffled = (sender as! UISwitch).isOn
+    }
+    
+    @IBAction func levelAllOrNotChanged(_ sender: AnyObject) {
+        levelge0only = (sender as! UISwitch).isOn
+    }
+    
+    @IBAction func reviewModeChanged(_ sender: AnyObject) {
+        ddReviewMode.show()
+    }
 
     deinit {
         print("DEBUG: \(self.className) deinit")

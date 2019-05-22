@@ -23,7 +23,7 @@ class WordsSearchViewController: UIViewController, WKNavigationDelegate, UISearc
     override func viewDidLoad() {
         super.viewDidLoad()
         wvDict = addWKWebView(webViewHolder: wvDictHolder)
-        wvDictHolder.isHidden = true
+        wvDict.navigationDelegate = self
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
