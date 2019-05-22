@@ -39,7 +39,7 @@ class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
         
         ddReviewMode.anchorView = btnReviewMode
         ddReviewMode.dataSource = ["Review(Auto)", "Test", "Review(Manual)"]
-        ddReviewMode.selectionAction = { (index: Int, item: String) in
+        ddReviewMode.selectionAction = { [unowned self] (index: Int, item: String) in
             self.reviewMode = index
             self.btnReviewMode.titleLabel?.text = item
             self.newTest(self)
@@ -129,8 +129,9 @@ class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
         ddReviewMode.show()
     }
     
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        check(self)
+        return false
     }
     
     deinit {

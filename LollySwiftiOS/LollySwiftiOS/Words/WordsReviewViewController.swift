@@ -11,7 +11,7 @@ import RxSwift
 import AVFoundation
 import DropDown
 
-class WordsReviewViewController: UIViewController {
+class WordsReviewViewController: UIViewController, UITextFieldDelegate {
     var vm: WordsReviewViewModel!
     let disposeBag = DisposeBag()
 
@@ -41,7 +41,7 @@ class WordsReviewViewController: UIViewController {
         
         ddReviewMode.anchorView = btnReviewMode
         ddReviewMode.dataSource = ["Review(Auto)", "Test", "Review(Manual)"]
-        ddReviewMode.selectionAction = { (index: Int, item: String) in
+        ddReviewMode.selectionAction = { [unowned self] (index: Int, item: String) in
             self.reviewMode = index
             self.btnReviewMode.titleLabel?.text = item
             self.newTest(self)
@@ -137,6 +137,11 @@ class WordsReviewViewController: UIViewController {
     
     @IBAction func reviewModeChanged(_ sender: AnyObject) {
         ddReviewMode.show()
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        check(self)
+        return false
     }
 
     deinit {

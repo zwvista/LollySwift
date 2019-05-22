@@ -94,7 +94,7 @@ class WordsUnitBatchViewController: UITableViewController, UITextFieldDelegate {
                 ddUnit.anchorView = tfUnit
                 ddUnit.dataSource = vmSettings.arrUnits.map { $0.label }
                 ddUnit.selectRow(vmSettings.arrUnits.firstIndex { $0.value == vmSettings.USUNITTO }!)
-                ddUnit.selectionAction = { (index: Int, item: String) in
+                ddUnit.selectionAction = { [unowned self] (index: Int, item: String) in
                     self.tfUnit.text = item
                 }
                 swUnit = cell.sw
@@ -104,7 +104,7 @@ class WordsUnitBatchViewController: UITableViewController, UITextFieldDelegate {
                 ddPart.anchorView = tfPart
                 ddPart.dataSource = vmSettings.arrParts.map { $0.label }
                 ddPart.selectRow(vmSettings.arrParts.firstIndex { $0.value == vmSettings.USPARTTO }!)
-                ddPart.selectionAction = { (index: Int, item: String) in
+                ddPart.selectionAction = { [unowned self] (index: Int, item: String) in
                     self.tfPart.text = item
                 }
                 swPart = cell.sw

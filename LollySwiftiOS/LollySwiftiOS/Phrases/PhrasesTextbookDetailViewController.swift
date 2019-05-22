@@ -32,7 +32,7 @@ class PhrasesTextbookDetailViewController: UITableViewController {
         ddUnit.anchorView = tfUnit
         ddUnit.dataSource = item.textbook.arrUnits.map { $0.label }
         ddUnit.selectRow(vmSettings.arrUnits.firstIndex { $0.value == item.UNIT }!)
-        ddUnit.selectionAction = { (index: Int, item: String) in
+        ddUnit.selectionAction = { [unowned self] (index: Int, item: String) in
             self.item.UNIT = vmSettings.arrUnits[index].value
             self.tfUnit.text = String(self.item.UNIT)
         }
@@ -40,7 +40,7 @@ class PhrasesTextbookDetailViewController: UITableViewController {
         ddPart.anchorView = tfPart
         ddPart.dataSource = item.textbook.arrParts.map { $0.label }
         ddPart.selectRow(vmSettings.arrUnits.firstIndex { $0.value == item.PART }!)
-        ddPart.selectionAction = { (index: Int, item: String) in
+        ddPart.selectionAction = { [unowned self] (index: Int, item: String) in
             self.item.PART = vmSettings.arrParts[index].value
             self.tfPart.text = self.item.PARTSTR
         }

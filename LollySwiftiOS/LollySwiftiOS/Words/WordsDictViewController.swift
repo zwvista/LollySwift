@@ -32,7 +32,7 @@ class WordsDictViewController: UIViewController, WKNavigationDelegate {
         ddWord.anchorView = btnWord
         ddWord.dataSource = vm.arrWords
         ddWord.selectRow(vm.selectedWordIndex)
-        ddWord.selectionAction = { (index: Int, item: String) in
+        ddWord.selectionAction = { [unowned self] (index: Int, item: String) in
             self.vm.selectedWordIndex = index
             self.selectedWordChanged()
         }
@@ -40,7 +40,7 @@ class WordsDictViewController: UIViewController, WKNavigationDelegate {
         ddDictItem.anchorView = btnDict
         ddDictItem.dataSource = vmSettings.arrDictItems.map { $0.DICTNAME }
         ddDictItem.selectRow(vmSettings.selectedDictItemIndex)
-        ddDictItem.selectionAction = { (index: Int, item: String) in
+        ddDictItem.selectionAction = { [unowned self] (index: Int, item: String) in
             vmSettings.selectedDictItem = vmSettings.arrDictItems[index]
             vmSettings.updateDictItem().subscribe {
                 self.selectDictChanged()
