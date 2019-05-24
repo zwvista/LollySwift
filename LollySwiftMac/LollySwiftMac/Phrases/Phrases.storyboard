@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -78,7 +77,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="1200" height="600"/>
                                 <clipView key="contentView" id="Zcq-Vh-TJP">
                                     <rect key="frame" x="1" y="0.0" width="1198" height="599"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="ieV-Ib-SiL" viewBased="YES" id="8Zf-06-OzS">
                                             <rect key="frame" x="0.0" y="0.0" width="1198" height="576"/>
@@ -776,7 +775,7 @@ Gw
                                 <rect key="frame" x="15" y="63" width="588" height="310"/>
                                 <clipView key="contentView" id="hyR-sz-3vx">
                                     <rect key="frame" x="1" y="0.0" width="586" height="309"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" autosaveColumns="NO" rowSizeStyle="automatic" headerView="xGV-D1-Imv" viewBased="YES" id="gyW-8h-UjQ">
                                             <rect key="frame" x="0.0" y="0.0" width="1221" height="284"/>
@@ -1338,7 +1337,7 @@ Gw
                                 <rect key="frame" x="0.0" y="0.0" width="1200" height="600"/>
                                 <clipView key="contentView" id="jEc-SO-xYY">
                                     <rect key="frame" x="1" y="0.0" width="1198" height="599"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="R8q-7P-bab" viewBased="YES" id="M2g-9p-UVx">
                                             <rect key="frame" x="0.0" y="0.0" width="1198" height="574"/>
@@ -1782,7 +1781,7 @@ Gw
                                 <rect key="frame" x="0.0" y="0.0" width="1200" height="600"/>
                                 <clipView key="contentView" id="Jxc-fy-ceq">
                                     <rect key="frame" x="1" y="0.0" width="1198" height="599"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="cFy-BM-JCq" viewBased="YES" id="vdZ-uq-lvp">
                                             <rect key="frame" x="0.0" y="0.0" width="1198" height="574"/>
@@ -2508,7 +2507,7 @@ Gw
                                             </segments>
                                         </segmentedCell>
                                         <connections>
-                                            <action selector="fixedOrNotChanged:" target="CXB-3h-H4F" id="bJx-8b-Pke"/>
+                                            <action selector="shuffledOrNotChanged:" target="CXB-3h-H4F" id="bJx-8b-Pke"/>
                                         </connections>
                                     </segmentedControl>
                                 </toolbarItem>

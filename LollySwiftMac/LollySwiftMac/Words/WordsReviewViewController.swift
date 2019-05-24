@@ -28,7 +28,6 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
     var speakOrNot = false
     var shuffled = true
     var levelge0only = true
-    var reviewMode = 0
     var subscription: Disposable? = nil
 
     func settingsChanged() {
@@ -74,7 +73,7 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
     
     @IBAction func newTest(_ sender: AnyObject) {
         subscription?.dispose()
-        vm.newTest(mode: ReviewMode(rawValue: reviewMode)!, shuffled: shuffled, levelge0only: levelge0only).subscribe {
+        vm.newTest(shuffled: shuffled, levelge0only: levelge0only).subscribe {
             self.doTest()
         }.disposed(by: disposeBag)
         btnCheck.title = vm.isTestMode ? "Check" : "Next"
@@ -127,7 +126,7 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
         }
     }
     
-    @IBAction func fixedOrNotChanged(_ sender: AnyObject) {
+    @IBAction func shuffledOrNotChanged(_ sender: AnyObject) {
         shuffled = (sender as! NSSegmentedControl).selectedSegment == 1
     }
     
@@ -136,7 +135,7 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
     }
     
     @IBAction func reviewModeChanged(_ sender: AnyObject) {
-        reviewMode = (sender as! NSPopUpButton).indexOfSelectedItem
+        vm.mode = ReviewMode(rawValue: (sender as! NSPopUpButton).indexOfSelectedItem)!
         newTest(self)
     }
 

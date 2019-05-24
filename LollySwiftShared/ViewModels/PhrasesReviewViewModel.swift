@@ -25,8 +25,7 @@ class PhrasesReviewViewModel {
         return mode == .test
     }
     
-    func newTest(mode: ReviewMode, shuffled: Bool) -> Observable<()> {
-        self.mode = mode
+    func newTest(shuffled: Bool) -> Observable<()> {
         return MUnitPhrase.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO).map {
             self.arrPhrases = $0
             self.arrCorrectIDs = []

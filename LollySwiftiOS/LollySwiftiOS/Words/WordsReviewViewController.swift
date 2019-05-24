@@ -24,14 +24,13 @@ class WordsReviewViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var tfWordInput: UITextField!
     @IBOutlet weak var btnReviewMode: UIButton!
     @IBOutlet weak var btnCheck: UIButton!
-    @IBOutlet weak var swSpeakOrNot: UISwitch!
-    @IBOutlet weak var swFixedOrNot: UISwitch!
-    @IBOutlet weak var swLevelge0OrNot: UISwitch!
+    @IBOutlet weak var swSpeak: UISwitch!
+    @IBOutlet weak var swShuffled: UISwitch!
+    @IBOutlet weak var swLevelge0: UISwitch!
 
     var speakOrNot = false
     var shuffled = true
     var levelge0only = true
-    var reviewMode = 0
     var subscription: Disposable? = nil
     
     let ddReviewMode = DropDown()
@@ -42,7 +41,7 @@ class WordsReviewViewController: UIViewController, UITextFieldDelegate {
         ddReviewMode.anchorView = btnReviewMode
         ddReviewMode.dataSource = ["Review(Auto)", "Test", "Review(Manual)"]
         ddReviewMode.selectionAction = { [unowned self] (index: Int, item: String) in
-            self.reviewMode = index
+            self.vm.mode = ReviewMode(rawValue: index)!
             self.btnReviewMode.setTitle(item, for: .normal)
             self.newTest(self)
         }
@@ -93,7 +92,7 @@ class WordsReviewViewController: UIViewController, UITextFieldDelegate {
 
     @IBAction func newTest(_ sender: AnyObject) {
         subscription?.dispose()
-        vm.newTest(mode: ReviewMode(rawValue: reviewMode)!, shuffled: shuffled, levelge0only: levelge0only).subscribe {
+        vm.newTest(shuffled: shuffled, levelge0only: levelge0only).subscribe {
             self.doTest()
         }.disposed(by: disposeBag)
         btnCheck.setTitle(vm.isTestMode ? "Check" : "Next", for: .normal)
@@ -136,7 +135,7 @@ class WordsReviewViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    @IBAction func fixedOrNotChanged(_ sender: AnyObject) {
+    @IBAction func shuffledOrNotChanged(_ sender: AnyObject) {
         shuffled = (sender as! UISwitch).isOn
     }
     

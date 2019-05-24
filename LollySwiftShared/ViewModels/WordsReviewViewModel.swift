@@ -25,8 +25,7 @@ class WordsReviewViewModel {
         return mode == .test
     }
     
-    func newTest(mode: ReviewMode, shuffled: Bool, levelge0only: Bool) -> Observable<()> {
-        self.mode = mode
+    func newTest(shuffled: Bool, levelge0only: Bool) -> Observable<()> {
         return MUnitWord.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO).map {
             self.arrWords = $0
             self.arrCorrectIDs = []

@@ -26,7 +26,6 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
     let synth = NSSpeechSynthesizer()
     var speakOrNot = false
     var shuffled = true
-    var reviewMode = 0
     var subscription: Disposable? = nil
 
     func settingsChanged() {
@@ -68,7 +67,7 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
     
     @IBAction func newTest(_ sender: AnyObject) {
         subscription?.dispose()
-        vm.newTest(mode: ReviewMode(rawValue: reviewMode)!, shuffled: shuffled).subscribe {
+        vm.newTest(shuffled: shuffled).subscribe {
             self.doTest()
         }.disposed(by: disposeBag)
         btnCheck.title = vm.isTestMode ? "Check" : "Next"
@@ -121,12 +120,12 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
         }
     }
     
-    @IBAction func fixedOrNotChanged(_ sender: AnyObject) {
+    @IBAction func shuffledOrNotChanged(_ sender: AnyObject) {
         shuffled = (sender as! NSSegmentedControl).selectedSegment == 1
     }
     
     @IBAction func reviewModeChanged(_ sender: AnyObject) {
-        reviewMode = (sender as! NSPopUpButton).indexOfSelectedItem
+        vm.mode = ReviewMode(rawValue: (sender as! NSPopUpButton).indexOfSelectedItem)!
         newTest(self)
     }
 

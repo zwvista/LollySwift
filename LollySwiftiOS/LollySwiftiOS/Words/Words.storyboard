@@ -1812,7 +1812,7 @@
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oS5-UV-saP">
                                 <rect key="frame" x="163" y="591" width="51" height="31"/>
                                 <connections>
-                                    <action selector="fixedOrNotChanged:" destination="8Ga-dG-IVt" eventType="valueChanged" id="ty8-YH-dF2"/>
+                                    <action selector="shuffledOrNotChanged:" destination="8Ga-dG-IVt" eventType="valueChanged" id="ty8-YH-dF2"/>
                                 </connections>
                             </switch>
                         </subviews>
@@ -1873,9 +1873,9 @@
                         <outlet property="lblIncorrect" destination="iid-L7-Zbl" id="E2u-oH-8U3"/>
                         <outlet property="lblIndex" destination="gES-Yd-HlO" id="xVo-As-n8d"/>
                         <outlet property="lblWordTarget" destination="NAd-9U-bej" id="dmh-Sb-pui"/>
-                        <outlet property="swFixedOrNot" destination="uWK-Q4-4X5" id="q5D-sB-plG"/>
-                        <outlet property="swLevelge0OrNot" destination="oS5-UV-saP" id="BRp-Ke-0sI"/>
-                        <outlet property="swSpeakOrNot" destination="Ioz-8q-sac" id="l4x-fH-NSg"/>
+                        <outlet property="swLevelge0" destination="oS5-UV-saP" id="BRp-Ke-0sI"/>
+                        <outlet property="swShuffled" destination="uWK-Q4-4X5" id="q5D-sB-plG"/>
+                        <outlet property="swSpeak" destination="Ioz-8q-sac" id="l4x-fH-NSg"/>
                         <outlet property="tfWordInput" destination="oX4-dY-Gv7" id="DVQ-P3-chD"/>
                         <outlet property="tvTranslation" destination="Ybz-pg-ywV" id="8Eh-dg-5ae"/>
                     </connections>
