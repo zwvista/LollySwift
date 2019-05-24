@@ -12,9 +12,6 @@ import RxSwift
 class WordsReviewViewModel {
 
     var vmSettings: SettingsViewModel
-    var mDictTranslation: MDictTranslation? {
-        return vmSettings.selectedDictTranslation
-    }
     
     init(settings: SettingsViewModel) {
         self.vmSettings = settings
@@ -39,25 +36,26 @@ class WordsReviewViewModel {
         }
     }
 
-    func hasNext() -> Bool {
+    var hasNext: Bool {
         return index < arrWords.count
     }
     func next() {
         index += 1
-        if isTestMode && !hasNext() {
+        if isTestMode && !hasNext {
             index = 0
             arrWords = arrWords.filter { !arrCorrectIDs.contains($0.ID) }
         }
     }
     
     var currentItem: MUnitWord? {
-        return hasNext() ? arrWords[index] : nil
+        return hasNext ? arrWords[index] : nil
     }
     var currentWord: String {
-        return hasNext() ? arrWords[index].WORD : ""
+        return hasNext ? arrWords[index].WORD : ""
     }
     func getTranslation() -> Observable<String> {
-        guard let mDictTranslation = mDictTranslation else { return Observable.empty() }
+        guard vmSettings.hasDictTranslation else { return Observable.empty() }
+        let mDictTranslation = vmSettings.selectedDictTranslation
         let url = mDictTranslation.urlString(word: currentWord, arrAutoCorrect: vmSettings.arrAutoCorrect)
         return RestApi.getHtml(url: url).map { html in
             print(html)
@@ -66,8 +64,8 @@ class WordsReviewViewModel {
     }
     
     func check(wordInput: String) -> Observable<()> {
-        guard hasNext() else {return Observable.empty()}
-        let o = arrWords[index]
+        guard hasNext else {return Observable.empty()}
+        let o = currentItem!
         let isCorrect = o.WORD == wordInput
         if isCorrect { arrCorrectIDs.append(o.ID) }
         return MWordFami.update(wordid: o.WORDID, isCorrect: isCorrect).map {

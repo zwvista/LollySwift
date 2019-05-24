@@ -45,7 +45,7 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
     }
     
     private func doTest() {
-        let b = vm.hasNext()
+        let b = vm.hasNext
         tfIndex.isHidden = !b
         tfCorrect.isHidden = true
         tfIncorrect.isHidden = true

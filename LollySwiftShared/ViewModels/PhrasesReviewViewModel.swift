@@ -35,26 +35,26 @@ class PhrasesReviewViewModel {
         }
     }
 
-    func hasNext() -> Bool {
+    var hasNext: Bool {
         return index < arrPhrases.count
     }
     func next() {
         index += 1
-        if isTestMode && !hasNext() {
+        if isTestMode && !hasNext {
             index = 0
             arrPhrases = arrPhrases.filter { !arrCorrectIDs.contains($0.ID) }
         }
     }
     
     var currentItem: MUnitPhrase? {
-        return hasNext() ? arrPhrases[index] : nil
+        return hasNext ? arrPhrases[index] : nil
     }
     var currentPhrase: String {
-        return hasNext() ? arrPhrases[index].PHRASE : ""
+        return hasNext ? arrPhrases[index].PHRASE : ""
     }
     
     func check(phraseInput: String) {
-        guard hasNext() else {return}
+        guard hasNext else {return}
         let o = arrPhrases[index]
         let isCorrect = o.PHRASE == phraseInput
         if isCorrect { arrCorrectIDs.append(o.ID) }

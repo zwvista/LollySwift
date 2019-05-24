@@ -56,7 +56,7 @@ class WordsReviewViewController: UIViewController, UITextFieldDelegate {
     }
 
     private func doTest() {
-        let b = vm.hasNext()
+        let b = vm.hasNext
         lblIndex.isHidden = !b
         lblCorrect.isHidden = true
         lblIncorrect.isHidden = true
