@@ -84,9 +84,9 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
 
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let i = indexPath.row
-        let item = self.vm.arrWords[i]
+        let item = vm.arrWords[i]
         func delete() {
-            self.yesNoAction(title: "delete", message: "Do you really want to delete the word \"\(item.WORD)\"?", yesHandler: { (action) in
+            yesNoAction(title: "delete", message: "Do you really want to delete the word \"\(item.WORD)\"?", yesHandler: { (action) in
                 WordsUnitViewModel.delete(item: item).subscribe().disposed(by: self.disposeBag)
                 self.vm.arrWords.remove(at: i)
                 tableView.deleteRows(at: [indexPath], with: .fade)
@@ -119,6 +119,14 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
             alertController.addAction(copyWordAction)
             let googleWordAction = UIAlertAction(title: "Google Word", style: .default) { _ in iOSApi.googleString(item.WORD) }
             alertController.addAction(googleWordAction)
+            let openOnlineDictAction = UIAlertAction(title: "Online Dictionary", style: .default) { _ in
+                if !vmSettings.selectedDictItem.DICTNAME.starts(with: "Custom") {
+                    let itemDict = vmSettings.arrDictsReference.first { $0.DICTNAME == vmSettings.selectedDictItem.DICTNAME }!
+                    let url = itemDict.urlString(word: item.WORD, arrAutoCorrect: vmSettings.arrAutoCorrect)
+                    UIApplication.shared.openURL(URL(string: url)!)
+                }
+            }
+            alertController.addAction(openOnlineDictAction)
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
             alertController.addAction(cancelAction)
             self.present(alertController, animated: true) {}
