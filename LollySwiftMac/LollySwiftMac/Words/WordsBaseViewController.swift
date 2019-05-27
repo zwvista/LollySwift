@@ -163,7 +163,9 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
                 }).disposed(by: disposeBag)
             } else {
                 wvDict.load(URLRequest(url: URL(string: url)!))
-                if item2.DICTTYPENAME == "OFFLINE-ONLINE" {
+                if item2.AUTOMATION != nil {
+                    dictStatus = .automating
+                } else if item2.DICTTYPENAME == "OFFLINE-ONLINE" {
                     dictStatus = .navigating
                 }
             }
@@ -190,16 +192,28 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
         self.view.window?.makeKeyAndOrderFront(self)
         tableView.becomeFirstResponder()
         tfURL.stringValue = webView.url!.absoluteString
-        guard dictStatus == .navigating else {return}
+        guard dictStatus != .ready else {return}
         let item = vmSettings.arrDictItems[selectedDictItemIndex]
         let item2 = vmSettings.arrDictsReference.first { $0.DICTNAME == item.DICTNAME }!
-        // https://stackoverflow.com/questions/34751860/get-html-from-wkwebview-in-swift
-        webView.evaluateJavaScript("document.documentElement.outerHTML.toString()") { (html: Any?, error: Error?) in
-            let html = html as! String
-            print(html)
-            let str = item2.htmlString(html, word: self.selectedWord)
-            self.wvDict.loadHTMLString(str, baseURL: nil)
-            self.dictStatus = .ready
+        switch dictStatus {
+        case .automating:
+            let s = item2.AUTOMATION!.replacingOccurrences(of: "{0}", with: selectedWord)
+            webView.evaluateJavaScript(s) { (html: Any?, error: Error?) in
+                self.dictStatus = .ready
+                if item2.DICTTYPENAME == "OFFLINE-ONLINE" {
+                    self.dictStatus = .navigating
+                }
+            }
+        case .navigating:
+            // https://stackoverflow.com/questions/34751860/get-html-from-wkwebview-in-swift
+            webView.evaluateJavaScript("document.documentElement.outerHTML.toString()") { (html: Any?, error: Error?) in
+                let html = html as! String
+                print(html)
+                let str = item2.htmlString(html, word: self.selectedWord)
+                self.wvDict.loadHTMLString(str, baseURL: nil)
+                self.dictStatus = .ready
+            }
+        default: break
         }
     }
 

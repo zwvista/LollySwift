@@ -22,7 +22,7 @@ class WordsDictViewController: UIViewController, WKNavigationDelegate {
     let ddWord = DropDown(), ddDictItem = DropDown()
     
     let disposeBag = DisposeBag()
-    var status = DictWebViewStatus.ready
+    var dictStatus = DictWebViewStatus.ready
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,8 +74,10 @@ class WordsDictViewController: UIViewController, WKNavigationDelegate {
                 }).disposed(by: disposeBag)
             } else {
                 wvDict.load(URLRequest(url: URL(string: url)!))
-                if item2.DICTTYPENAME == "OFFLINE-ONLINE" {
-                    status = .navigating
+                if item2.AUTOMATION != nil {
+                    dictStatus = .automating
+                } else if item2.DICTTYPENAME == "OFFLINE-ONLINE" {
+                    dictStatus = .navigating
                 }
             }
         }
@@ -91,16 +93,28 @@ class WordsDictViewController: UIViewController, WKNavigationDelegate {
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
 //        guard webView.stringByEvaluatingJavaScript(from: "document.readyState") == "complete" && status == .navigating else {return}
-        guard status == .navigating else {return}
+        guard dictStatus != .ready else {return}
         let item = vmSettings.selectedDictItem!
         let item2 = vmSettings.arrDictsReference.first { $0.DICTNAME == item.DICTNAME }!
         // https://stackoverflow.com/questions/34751860/get-html-from-wkwebview-in-swift
-        webView.evaluateJavaScript("document.documentElement.outerHTML.toString()") { (html: Any?, error: Error?) in
-            let html = html as! String
-            print(html)
-            let str = item2.htmlString(html, word: self.vm.selectedWord, useTemplate2: true)
-            self.wvDict.loadHTMLString(str, baseURL: nil)
-            self.status = .ready
+        switch dictStatus {
+        case .automating:
+            let s = item2.AUTOMATION!.replacingOccurrences(of: "{0}", with: vm.selectedWord)
+            webView.evaluateJavaScript(s) { (html: Any?, error: Error?) in
+                self.dictStatus = .ready
+                if item2.DICTTYPENAME == "OFFLINE-ONLINE" {
+                    self.dictStatus = .navigating
+                }
+            }
+        case .navigating:
+            webView.evaluateJavaScript("document.documentElement.outerHTML.toString()") { (html: Any?, error: Error?) in
+                let html = html as! String
+                print(html)
+                let str = item2.htmlString(html, word: self.vm.selectedWord, useTemplate2: true)
+                self.wvDict.loadHTMLString(str, baseURL: nil)
+                self.dictStatus = .ready
+            }
+        default: break
         }
     }
 }
