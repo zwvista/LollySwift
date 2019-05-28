@@ -19,8 +19,14 @@ class PhrasesBaseViewController: UITableViewController {
         searchController.dimsBackgroundDuringPresentation = true
         searchBar.scopeButtonTitles = ["Phrase", "Translation"]
         searchController.searchResultsUpdater = delegate
+        if #available(iOS 9.1, *) {
+            searchController.obscuresBackgroundDuringPresentation = false
+        }
         searchBar.delegate = delegate
-        tableView.tableHeaderView = searchBar
+        if #available(iOS 11.0, *) {
+            navigationItem.searchController = searchController
+        }
+        searchController.searchBar.placeholder = "Search Phrases"
         definesPresentationContext = true
     }
     

@@ -105,12 +105,17 @@ class WordsLangViewController: WordsBaseViewController, UISearchBarDelegate, UIS
         performSegue(withIdentifier: "dict", sender: item.WORD)
     }
     
+    private func applyFilters() {
+        vm.applyFilters(textFilter: searchBar.text!, scope: searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex], levelge0only: false)
+        tableView.reloadData()
+    }
+    
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        applyFilters()
     }
     
     func updateSearchResults(for searchController: UISearchController) {
-        vm.applyFilters(textFilter: searchBar.text!, scope: searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex], levelge0only: false)
-        tableView.reloadData()
+        applyFilters()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

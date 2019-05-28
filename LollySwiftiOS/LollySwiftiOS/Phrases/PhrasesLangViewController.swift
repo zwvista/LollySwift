@@ -85,13 +85,18 @@ class PhrasesLangViewController: PhrasesBaseViewController, UISearchBarDelegate,
         let item = arrPhrases[indexPath.row]
         performSegue(withIdentifier: "edit", sender: item)
     }
-
+    
+    private func applyFilters() {
+        vm.filterPhrasesForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex])
+        tableView.reloadData()
+    }
+    
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        applyFilters()
     }
     
     func updateSearchResults(for searchController: UISearchController) {
-        vm.filterPhrasesForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex])
-        tableView.reloadData()
+        applyFilters()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
