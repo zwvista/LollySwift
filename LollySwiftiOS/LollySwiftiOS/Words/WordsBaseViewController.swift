@@ -26,8 +26,12 @@ class WordsBaseViewController: UITableViewController {
         searchBar.delegate = delegate
         if #available(iOS 11.0, *) {
             navigationItem.searchController = searchController
+            navigationItem.hidesSearchBarWhenScrolling = false
+        } else {
+            tableView.tableHeaderView = searchController.searchBar
         }
-        searchController.searchBar.placeholder = "Search Words"
+        searchBar.placeholder = "Search Words"
+        searchBar.becomeFirstResponder()
         definesPresentationContext = true
     }
 
