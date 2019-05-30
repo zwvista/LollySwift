@@ -17,10 +17,11 @@ class DictsDetailViewController: NSViewController {
     var isAdd: Bool!
 
     @IBOutlet weak var tfID: NSTextField!
-    @IBOutlet weak var tfLang: NSTextField!
-    @IBOutlet weak var tfDictName: NSTextField!
-    @IBOutlet weak var tfUnits: NSTextField!
-    @IBOutlet weak var tfParts: NSTextField!
+    @IBOutlet weak var tfLangFrom: NSTextField!
+    @IBOutlet weak var pubLangTo: NSPopUpButton!
+    @IBOutlet weak var tfSeqNum: NSTextField!
+    @IBOutlet weak var pubDictType: NSPopUpButton!
+    @IBOutlet weak var tfName: NSTextField!
 
     let disposeBag = DisposeBag()
 
@@ -32,8 +33,8 @@ class DictsDetailViewController: NSViewController {
     override func viewDidAppear() {
 //        view.window?.title = item.TEXTBOOKNAME
         tfID.isEnabled = isAdd
-        tfLang.stringValue = vm.vmSettings.selectedLang.LANGNAME
-        (isAdd ? tfID : tfDictName).becomeFirstResponder()
+        tfLangFrom.stringValue = vm.vmSettings.selectedLang.LANGNAME
+        (isAdd ? tfID : tfSeqNum).becomeFirstResponder()
     }
 
     @IBAction func okClicked(_ sender: Any) {
