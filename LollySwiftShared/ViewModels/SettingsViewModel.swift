@@ -219,14 +219,17 @@ class SettingsViewModel: NSObject {
     var toType = 0
 
     var arrAutoCorrect = [MAutoCorrect]()
+    var arrDictTypes = [MDictType]()
     
     weak var delegate: SettingsViewModelDelegate?
     
     func getData() -> Observable<()> {
-        return Observable.zip(MLanguage.getData(), MUserSetting.getData(userid: CommonApi.userid))
+        return Observable.zip(MLanguage.getData(), MUserSetting.getData(userid: CommonApi.userid),
+                              MDictType.getData())
             .flatMap { result -> Observable<()> in
                 self.arrLanguages = result.0
                 self.arrUserSettings = result.1
+                self.arrDictTypes = result.2
                 self.selectedUSUser0 = self.arrUserSettings.first { $0.KIND == 1 && $0.ENTITYID == 0 }!
                 self.selectedUSUser1 = self.arrUserSettings.first { $0.KIND == 1 && $0.ENTITYID == 1 }!
                 let arr = self.selectedUSUser0.VALUE4!.split("\r\n").map { $0.split(",") }

@@ -18,6 +18,7 @@ class MDictionary: NSObject, Codable {
     var LANGIDTO = 0
     var LANGNAMETO = ""
     var SEQNUM = 0
+    var DICTTYPEID = 0
     var DICTTYPENAME = ""
     var DICTNAME = ""
     var URL: String?
@@ -115,5 +116,16 @@ class MDictTranslation: MDictionary {
         // SQL: SELECT * FROM VDICTSTRANSLATION WHERE LANGIDFROM = ?
         let url = "\(CommonApi.url)VDICTSTRANSLATION?transform=1&filter=LANGIDFROM,eq,\(langid)"
         return RestApi.getArray(url: url, keyPath: "VDICTSTRANSLATION")
+    }
+}
+
+@objcMembers
+class MDictType: NSObject, Codable {
+    var ID = 0
+    var NAME = ""
+    static func getData() -> Observable<[MDictType]> {
+        // SQL: SELECT * FROM DICTTYPES
+        let url = "\(CommonApi.url)DICTTYPES?transform=1"
+        return RestApi.getArray(url: url, keyPath: "DICTTYPES")
     }
 }
