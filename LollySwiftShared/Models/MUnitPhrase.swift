@@ -48,8 +48,8 @@ class MUnitPhrase: NSObject, Codable, MPhraseProtocol {
 
     static func getDataByTextbook(_ textbook: MTextbook, unitPartFrom: Int, unitPartTo: Int) -> Observable<[MUnitPhrase]> {
         // SQL: SELECT * FROM VUNITPHRASES WHERE TEXTBOOKID=? AND UNITPART BETWEEN ? AND ? ORDER BY UNITPART,SEQNUM
-        let url = "\(CommonApi.url)VUNITPHRASES?transform=1&filter[]=TEXTBOOKID,eq,\(textbook.ID)&filter[]=UNITPART,bt,\(unitPartFrom),\(unitPartTo)&order[]=UNITPART&order[]=SEQNUM"
-        let o: Observable<[MUnitPhrase]> = RestApi.getArray(url: url, keyPath: "VUNITPHRASES")
+        let url = "\(CommonApi.url)VUNITPHRASES?filter=TEXTBOOKID,eq,\(textbook.ID)&filter=UNITPART,bt,\(unitPartFrom),\(unitPartTo)&order=UNITPART&order=SEQNUM"
+        let o: Observable<[MUnitPhrase]> = RestApi.getRecords(url: url)
         return o.map { arr in
             arr.forEach { $0.textbook = textbook }
             return arr
@@ -58,8 +58,8 @@ class MUnitPhrase: NSObject, Codable, MPhraseProtocol {
 
     static func getDataByLang(_ langid: Int, arrTextbooks: [MTextbook]) -> Observable<[MUnitPhrase]> {
         // SQL: SELECT * FROM VTEXTBOOKPHRASES WHERE LANGID=?
-        let url = "\(CommonApi.url)VUNITPHRASES?transform=1&filter=LANGID,eq,\(langid)&order[]=TEXTBOOKID&order[]=UNIT&order[]=PART&order[]=SEQNUM"
-        let o: Observable<[MUnitPhrase]> = RestApi.getArray(url: url, keyPath: "VUNITPHRASES")
+        let url = "\(CommonApi.url)VUNITPHRASES?filter=LANGID,eq,\(langid)&order=TEXTBOOKID&order=UNIT&order=PART&order=SEQNUM"
+        let o: Observable<[MUnitPhrase]> = RestApi.getRecords(url: url)
         return o.map { arr in
             arr.forEach { row in
                 row.textbook = arrTextbooks.first { $0.ID == row.TEXTBOOKID }!
@@ -70,8 +70,8 @@ class MUnitPhrase: NSObject, Codable, MPhraseProtocol {
 
     static func getDataByLangPhrase(_ phraseid: Int) -> Observable<[MUnitPhrase]> {
         // SQL: SELECT * FROM VUNITPHRASES WHERE PHRASEID=?
-        let url = "\(CommonApi.url)VUNITPHRASES?transform=1&filter=PHRASEID,eq,\(phraseid)"
-        return RestApi.getArray(url: url, keyPath: "VUNITPHRASES")
+        let url = "\(CommonApi.url)VUNITPHRASES?filter=PHRASEID,eq,\(phraseid)"
+        return RestApi.getRecords(url: url)
     }
 
     static func update(_ id: Int, seqnum: Int) -> Observable<()> {

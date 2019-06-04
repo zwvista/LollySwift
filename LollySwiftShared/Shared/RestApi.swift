@@ -48,6 +48,9 @@ class RestApi {
         print("[RestApi]GET:\(url)")
         return RxCodableAlamofire.object(.get, url, keyPath: keyPath)
     }
+    static func getRecords<T: Decodable>(url: String) -> Observable<[T]> {
+        return getArray(url: url, keyPath: "records")
+    }
     static func update(url: String, body: String) -> Observable<String> {
         print("[RestApi]PUT:\(url) BODY:\(body)")
         return RxAlamofire.string(.put, url, encoding: StringEncoding(body: body))

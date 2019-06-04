@@ -24,7 +24,7 @@ enum ReviewMode: Int {
 class CommonApi {
     
     static public let userid = 1
-    static let url = "https://zwvista.tk/lolly/api.php/"
+    static let url = "https://zwvista.tk/lolly/api.php/records/"
     static let cssFolder = "https://zwvista.tk/lolly/css/"
     static private let debugExtract = false
     

@@ -56,21 +56,21 @@ class MLangWord: NSObject, Codable, MWordProtocol {
 
     static func getDataByLang(_ langid: Int) -> Observable<[MLangWord]> {
         // SQL: SELECT * FROM LANGWORDS WHERE LANGID=?
-        let url = "\(CommonApi.url)VLANGWORDS?transform=1&filter=LANGID,eq,\(langid)&order=WORD"
-        return RestApi.getArray(url: url, keyPath: "VLANGWORDS")
+        let url = "\(CommonApi.url)VLANGWORDS?filter=LANGID,eq,\(langid)&order=WORD"
+        return RestApi.getRecords(url: url)
     }
 
     static func getDataByLangWord(langid: Int, word: String) -> Observable<[MLangWord]> {
         // SQL: SELECT * FROM LANGWORDS WHERE LANGID=? AND WORD=?
-        let url = "\(CommonApi.url)VLANGWORDS?transform=1&filter[]=LANGID,eq,\(langid)&filter[]=WORD,eq,\(word.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)"
+        let url = "\(CommonApi.url)VLANGWORDS?filter=LANGID,eq,\(langid)&filter=WORD,eq,\(word.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)"
         // Api is case insensitive
-        return RestApi.getArray(url: url, keyPath: "VLANGWORDS").map { $0.filter { $0.WORD == word } }
+        return RestApi.getRecords(url: url).map { $0.filter { $0.WORD == word } }
     }
 
     static func getDataById(_ id: Int) -> Observable<[MLangWord]> {
         // SQL: SELECT * FROM LANGWORDS WHERE ID=?
-        let url = "\(CommonApi.url)VLANGWORDS?transform=1&filter=ID,eq,\(id)"
-        return RestApi.getArray(url: url, keyPath: "VLANGWORDS")
+        let url = "\(CommonApi.url)VLANGWORDS?filter=ID,eq,\(id)"
+        return RestApi.getRecords(url: url)
     }
     
     static func update(_ id: Int, note: String) -> Observable<()> {

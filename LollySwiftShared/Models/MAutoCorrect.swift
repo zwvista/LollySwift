@@ -19,8 +19,8 @@ class MAutoCorrect: Codable {
     
     static func getDataByLang(_ langid: Int) -> Observable<[MAutoCorrect]> {
         // SQL: SELECT * FROM AUTOCORRECT WHERE LANGID=?
-        let url = "\(CommonApi.url)AUTOCORRECT?transform=1&filter=LANGID,eq,\(langid)"
-        return RestApi.getArray(url: url, keyPath: "AUTOCORRECT")
+        let url = "\(CommonApi.url)AUTOCORRECT?filter=LANGID,eq,\(langid)"
+        return RestApi.getRecords(url: url)
     }
     
     static func autoCorrect(text: String, arrAutoCorrect: [MAutoCorrect], colFunc1: (MAutoCorrect) -> String, colFunc2: (MAutoCorrect) -> String) -> String {

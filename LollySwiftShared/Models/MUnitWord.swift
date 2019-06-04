@@ -66,8 +66,8 @@ class MUnitWord: NSObject, Codable, MWordProtocol {
 
     static func getDataByTextbook(_ textbook: MTextbook, unitPartFrom: Int, unitPartTo: Int) -> Observable<[MUnitWord]> {
         // SQL: SELECT * FROM VUNITWORDS WHERE TEXTBOOKID=? AND UNITPART BETWEEN ? AND ? ORDER BY UNITPART,SEQNUM
-        let url = "\(CommonApi.url)VUNITWORDS?transform=1&filter[]=TEXTBOOKID,eq,\(textbook.ID)&filter[]=UNITPART,bt,\(unitPartFrom),\(unitPartTo)&order[]=UNITPART&order[]=SEQNUM"
-        let o: Observable<[MUnitWord]> = RestApi.getArray(url: url, keyPath: "VUNITWORDS")
+        let url = "\(CommonApi.url)VUNITWORDS?filter=TEXTBOOKID,eq,\(textbook.ID)&filter=UNITPART,bt,\(unitPartFrom),\(unitPartTo)&order=UNITPART&order=SEQNUM"
+        let o: Observable<[MUnitWord]> = RestApi.getRecords(url: url)
         return o.map { arr in
             arr.forEach { $0.textbook = textbook }
             return arr
@@ -76,8 +76,8 @@ class MUnitWord: NSObject, Codable, MWordProtocol {
 
     static func getDataByLang(_ langid: Int, arrTextbooks: [MTextbook]) -> Observable<[MUnitWord]> {
         // SQL: SELECT * FROM VTEXTBOOKWORDS WHERE LANGID=?
-        let url = "\(CommonApi.url)VUNITWORDS?transform=1&filter=LANGID,eq,\(langid)&order[]=TEXTBOOKID&order[]=UNIT&order[]=PART&order[]=SEQNUM"
-        let o: Observable<[MUnitWord]> = RestApi.getArray(url: url, keyPath: "VUNITWORDS")
+        let url = "\(CommonApi.url)VUNITWORDS?filter=LANGID,eq,\(langid)&order=TEXTBOOKID&order=UNIT&order=PART&order=SEQNUM"
+        let o: Observable<[MUnitWord]> = RestApi.getRecords(url: url)
         return o.map { arr in
             arr.forEach { row in
                 row.textbook = arrTextbooks.first { $0.ID == row.TEXTBOOKID }!
@@ -88,8 +88,8 @@ class MUnitWord: NSObject, Codable, MWordProtocol {
 
     static func getDataByLangWord(_ wordid: Int) -> Observable<[MUnitWord]> {
         // SQL: SELECT * FROM VUNITWORDS WHERE WORDID=?
-        let url = "\(CommonApi.url)VUNITWORDS?transform=1&filter=WORDID,eq,\(wordid)"
-        return RestApi.getArray(url: url, keyPath: "VUNITWORDS")
+        let url = "\(CommonApi.url)VUNITWORDS?filter=WORDID,eq,\(wordid)"
+        return RestApi.getRecords(url: url)
     }
 
     static func update(_ id: Int, seqnum: Int) -> Observable<()> {

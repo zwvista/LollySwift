@@ -20,8 +20,8 @@ class MWordFami: NSObject, Codable {
 
     private static func getDataByUserWord(userid: Int, wordid: Int) -> Observable<[MWordFami]> {
         // SQL: SELECT * FROM WORDSFAMI WHERE USERID=? AND WORDID=?
-        let url = "\(CommonApi.url)WORDSFAMI?transform=1&filter[]=USERID,eq,\(userid)&filter[]=WORDID,eq,\(wordid)"
-        return RestApi.getArray(url: url, keyPath: "WORDSFAMI")
+        let url = "\(CommonApi.url)WORDSFAMI?filter=USERID,eq,\(userid)&filter=WORDID,eq,\(wordid)"
+        return RestApi.getRecords(url: url)
     }
 
     private static func update(item: MWordFami) -> Observable<String> {

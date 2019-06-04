@@ -46,8 +46,8 @@ class MDictionary: NSObject, Codable {
     
     static func getAllDataByLang(_ langid: Int) -> Observable<[MDictionary]> {
         // SQL: SELECT * FROM VDICTIONARIES WHERE LANGIDFROM=?
-        let url = "\(CommonApi.url)VDICTIONARIES?transform=1&filter=LANGIDFROM,eq,\(langid)&order[]=SEQNUM&order[]=DICTNAME"
-        return RestApi.getArray(url: url, keyPath: "VDICTIONARIES")
+        let url = "\(CommonApi.url)VDICTIONARIES?filter=LANGIDFROM,eq,\(langid)&order=SEQNUM&order=DICTNAME"
+        return RestApi.getRecords(url: url)
     }
 
     static func update(item: MDictionary) -> Observable<()> {
@@ -68,8 +68,8 @@ class MDictionary: NSObject, Codable {
 class MDictReference: MDictionary {
     static func getDataByLang(_ langid: Int) -> Observable<[MDictReference]> {
         // SQL: SELECT * FROM VDICTSREFERENCE WHERE LANGIDFROM=?
-        let url = "\(CommonApi.url)VDICTSREFERENCE?transform=1&filter=LANGIDFROM,eq,\(langid)&order[]=SEQNUM&order[]=DICTNAME"
-        return RestApi.getArray(url: url, keyPath: "VDICTSREFERENCE")
+        let url = "\(CommonApi.url)VDICTSREFERENCE?filter=LANGIDFROM,eq,\(langid)&order=SEQNUM&order=DICTNAME"
+        return RestApi.getRecords(url: url)
     }
     
     func htmlString(_ html: String, word: String, useTemplate2: Bool = false) -> String {
@@ -106,16 +106,16 @@ class MDictItem: NSObject {
 class MDictNote: MDictionary {
     static func getDataByLang(_ langid: Int) -> Observable<[MDictNote]> {
         // SQL: SELECT * FROM VDICTSNOTE WHERE LANGIDFROM = ?
-        let url = "\(CommonApi.url)VDICTSNOTE?transform=1&filter=LANGIDFROM,eq,\(langid)"
-        return RestApi.getArray(url: url, keyPath: "VDICTSNOTE")
+        let url = "\(CommonApi.url)VDICTSNOTE?filter=LANGIDFROM,eq,\(langid)"
+        return RestApi.getRecords(url: url)
     }
 }
 
 class MDictTranslation: MDictionary {
     static func getDataByLang(_ langid: Int) -> Observable<[MDictTranslation]> {
         // SQL: SELECT * FROM VDICTSTRANSLATION WHERE LANGIDFROM = ?
-        let url = "\(CommonApi.url)VDICTSTRANSLATION?transform=1&filter=LANGIDFROM,eq,\(langid)"
-        return RestApi.getArray(url: url, keyPath: "VDICTSTRANSLATION")
+        let url = "\(CommonApi.url)VDICTSTRANSLATION?filter=LANGIDFROM,eq,\(langid)"
+        return RestApi.getRecords(url: url)
     }
 }
 
@@ -125,7 +125,7 @@ class MDictType: NSObject, Codable {
     var NAME = ""
     static func getData() -> Observable<[MDictType]> {
         // SQL: SELECT * FROM DICTTYPES
-        let url = "\(CommonApi.url)DICTTYPES?transform=1"
-        return RestApi.getArray(url: url, keyPath: "DICTTYPES")
+        let url = "\(CommonApi.url)DICTTYPES"
+        return RestApi.getRecords(url: url)
     }
 }

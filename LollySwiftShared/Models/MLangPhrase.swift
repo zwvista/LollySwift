@@ -45,21 +45,21 @@ class MLangPhrase: NSObject, Codable, MPhraseProtocol {
 
     static func getDataByLang(_ langid: Int) -> Observable<[MLangPhrase]> {
         // SQL: SELECT * FROM LANGPHRASES WHERE LANGID=?
-        let url = "\(CommonApi.url)LANGPHRASES?transform=1&filter=LANGID,eq,\(langid)&order=PHRASE"
-        return RestApi.getArray(url: url, keyPath: "LANGPHRASES")
+        let url = "\(CommonApi.url)LANGPHRASES?filter=LANGID,eq,\(langid)&order=PHRASE"
+        return RestApi.getRecords(url: url)
     }
 
     static func getDataByLangPhrase(langid: Int, phrase: String) -> Observable<[MLangPhrase]> {
         // SQL: SELECT * FROM LANGPHRASES WHERE LANGID=? AND PHRASE=?
-        let url = "\(CommonApi.url)LANGPHRASES?transform=1&filter[]=LANGID,eq,\(langid)&filter[]=PHRASE,eq,\(phrase.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)"
+        let url = "\(CommonApi.url)LANGPHRASES?filter=LANGID,eq,\(langid)&filter=PHRASE,eq,\(phrase.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)"
         // Api is case insensitive
-        return RestApi.getArray(url: url, keyPath: "LANGPHRASES").map { $0.filter { $0.PHRASE == phrase } }
+        return RestApi.getRecords(url: url).map { $0.filter { $0.PHRASE == phrase } }
     }
     
     static func getDataById(_ id: Int) -> Observable<[MLangPhrase]> {
         // SQL: SELECT * FROM LANGPHRASES WHERE ID=?
-        let url = "\(CommonApi.url)LANGPHRASES?transform=1&filter=ID,eq,\(id)"
-        return RestApi.getArray(url: url, keyPath: "LANGPHRASES")
+        let url = "\(CommonApi.url)LANGPHRASES?filter=ID,eq,\(id)"
+        return RestApi.getRecords(url: url)
     }
 
     static func update(_ id: Int, translation: String) -> Observable<()> {
