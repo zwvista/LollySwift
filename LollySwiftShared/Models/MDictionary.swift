@@ -24,7 +24,6 @@ class MDictionary: NSObject, Codable {
     var URL: String?
     var CHCONV: String?
     var AUTOMATION: String?
-    var AUTOJUMP = 0
     var DICTTABLE: String?
     var TRANSFORM_WIN: String?
     var TRANSFORM: String?

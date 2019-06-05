@@ -26,13 +26,11 @@ class DictsDetailViewController: NSViewController {
     @IBOutlet weak var tfDictName: NSTextField!
     @IBOutlet weak var tfURL: NSTextField!
     @IBOutlet weak var tfChConv: NSTextField!
-    @IBOutlet weak var tfAutomation: NSTextField!
-    @IBOutlet weak var tfAutoJump: NSTextField!
-    @IBOutlet weak var tfDicttable: NSTextField!
-    @IBOutlet weak var tfTransformWin: NSTextField!
-    @IBOutlet weak var tfTransform: NSTextField!
-    @IBOutlet weak var tfTemplate: NSTextField!
-    @IBOutlet weak var tfTemplate2: NSTextField!
+    @IBOutlet weak var tfWait: NSTextField!
+    @IBOutlet weak var tvAutomation: NSTextView!
+    @IBOutlet weak var tvTransform: NSTextView!
+    @IBOutlet weak var tvTemplate: NSTextView!
+    @IBOutlet weak var tvTemplate2: NSTextView!
 
     let disposeBag = DisposeBag()
 
