@@ -35,7 +35,7 @@ extension Encodable {
         let data = try! encoder.encode(self)
         let jsonString = String(data: data, encoding: .utf8)?
             // When posting(creating) a new record, its id must be null.
-            // Otherwise new id will not returned.
+            // Otherwise the generated id will not be returned.
             .replacingOccurrences(of: #""ID":0,"#, with: "")
             .replacingOccurrences(of: #","ID":0"#, with: "")
         return jsonString

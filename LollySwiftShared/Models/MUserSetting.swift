@@ -12,9 +12,9 @@ import RxSwift
 @objcMembers
 class MUserSetting: NSObject, Codable {
     var ID = 0
-    var USERID: Int?
-    var KIND: Int?
-    var ENTITYID: Int?
+    var USERID = 0
+    var KIND = 0
+    var ENTITYID = 0
     var VALUE1: String?
     var VALUE2: String?
     var VALUE3: String?
