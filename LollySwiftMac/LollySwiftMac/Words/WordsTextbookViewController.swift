@@ -74,7 +74,7 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "WordsTextbookDetailViewController") as! WordsTextbookDetailViewController
         detailVC.vm = vm
         let i = tableView.selectedRow
-        detailVC.item = vm.arrWords[i]
+        detailVC.item = arrWords[i]
         detailVC.complete = { self.tableView.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count)) }
         self.presentAsModalWindow(detailVC)
     }

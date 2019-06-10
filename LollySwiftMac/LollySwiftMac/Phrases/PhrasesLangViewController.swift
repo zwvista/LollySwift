@@ -68,7 +68,7 @@ class PhrasesLangViewController: PhrasesBaseViewController {
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesLangDetailViewController") as! PhrasesLangDetailViewController
         detailVC.vm = vm
         let i = tableView.selectedRow
-        detailVC.item = vm.arrPhrases[i]
+        detailVC.item = arrPhrases[i]
         detailVC.complete = { self.tableView.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count)) }
         self.presentAsModalWindow(detailVC)
     }

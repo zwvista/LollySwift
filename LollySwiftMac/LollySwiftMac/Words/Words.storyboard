@@ -368,7 +368,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="96" id="tuA-jr-exd"/>
                                                 </constraints>
-                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="p7g-Xg-FQh">
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Filter" drawsBackground="YES" id="p7g-Xg-FQh">
                                                     <font key="font" usesAppearanceFont="YES"/>
                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -377,14 +377,7 @@
                                                     </connections>
                                                 </textFieldCell>
                                                 <connections>
-                                                    <binding destination="F8i-pe-Ate" name="value" keyPath="textFilter" id="9Ys-TJ-t4o">
-                                                        <dictionary key="options">
-                                                            <string key="NSMultipleValuesPlaceholder">Filter</string>
-                                                            <string key="NSNoSelectionPlaceholder">Filter </string>
-                                                            <string key="NSNotApplicablePlaceholder">Filter </string>
-                                                            <string key="NSNullPlaceholder">Filter</string>
-                                                        </dictionary>
-                                                    </binding>
+                                                    <binding destination="F8i-pe-Ate" name="value" keyPath="textFilter" id="YWM-dh-fE8"/>
                                                     <outlet property="delegate" destination="F8i-pe-Ate" id="Zm7-hq-rEG"/>
                                                 </connections>
                                             </textField>
@@ -2410,14 +2403,7 @@ Gw
                                                     </connections>
                                                 </textFieldCell>
                                                 <connections>
-                                                    <binding destination="UkS-Xi-ogF" name="value" keyPath="textFilter" id="LQf-jB-htf">
-                                                        <dictionary key="options">
-                                                            <string key="NSMultipleValuesPlaceholder">Filter</string>
-                                                            <string key="NSNoSelectionPlaceholder">Filter</string>
-                                                            <string key="NSNotApplicablePlaceholder">Filter</string>
-                                                            <string key="NSNullPlaceholder">Filter</string>
-                                                        </dictionary>
-                                                    </binding>
+                                                    <binding destination="UkS-Xi-ogF" name="value" keyPath="textFilter" id="ugU-ev-Fwp"/>
                                                     <outlet property="delegate" destination="UkS-Xi-ogF" id="3lf-dw-pry"/>
                                                 </connections>
                                             </textField>
@@ -3345,14 +3331,7 @@ Gw
                                                     </connections>
                                                 </textFieldCell>
                                                 <connections>
-                                                    <binding destination="S5w-0q-IQt" name="value" keyPath="textFilter" id="rla-nt-E84">
-                                                        <dictionary key="options">
-                                                            <string key="NSMultipleValuesPlaceholder">Filter</string>
-                                                            <string key="NSNoSelectionPlaceholder">Filter</string>
-                                                            <string key="NSNotApplicablePlaceholder">Filter</string>
-                                                            <string key="NSNullPlaceholder">Filter</string>
-                                                        </dictionary>
-                                                    </binding>
+                                                    <binding destination="S5w-0q-IQt" name="value" keyPath="textFilter" id="DOR-Tl-TSH"/>
                                                     <outlet property="delegate" destination="S5w-0q-IQt" id="EwZ-0v-b31"/>
                                                 </connections>
                                             </textField>
@@ -3843,7 +3822,7 @@ Gw
                                                         <outlet property="menu" destination="UPB-Wi-4rN" id="fIC-7H-cu8"/>
                                                     </connections>
                                                 </clipView>
-                                                <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="qzl-qd-PqN">
+                                                <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="0.50769230769230766" horizontal="YES" id="qzl-qd-PqN">
                                                     <rect key="frame" x="1" y="534" width="430" height="16"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </scroller>
