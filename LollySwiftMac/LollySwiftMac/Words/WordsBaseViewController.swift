@@ -47,7 +47,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
         // For some unknown reason, the placeholder string of the filter text field
         // cannot be set in the storyboard
         // https://stackoverflow.com/questions/5519512/nstextfield-placeholder-text-doesnt-show-unless-editing
-        tfFilter.placeholderString = "Filter"
+        tfFilter?.placeholderString = "Filter"
     }
     override func viewWillDisappear() {
         wc = nil

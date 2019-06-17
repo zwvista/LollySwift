@@ -114,9 +114,9 @@ class PhrasesUnitViewModel: NSObject {
     
     static func delete(item: MUnitPhrase) -> Observable<()> {
         return MUnitPhrase.delete(item.ID).flatMap {
-            return MUnitPhrase.getDataByLangPhrase(item.PHRASEID)
-        }.flatMap { arr -> Observable<()> in
-            return !arr.isEmpty ? Observable<()>.empty() : MLangPhrase.delete(item.PHRASEID)
+            MUnitPhrase.getDataByLangPhrase(item.PHRASEID)
+        }.flatMap { arrUnit in
+            !arrUnit.isEmpty ? Observable.empty() : MLangPhrase.delete(item.PHRASEID)
         }
     }
 

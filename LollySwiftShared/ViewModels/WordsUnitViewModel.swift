@@ -134,9 +134,12 @@ class WordsUnitViewModel: NSObject {
     
     static func delete(item: MUnitWord) -> Observable<()> {
         return MUnitWord.delete(item.ID).flatMap {
-            return MLangWord.delete(item.WORDID)
-        }.flatMap {
-            return MWordFami.delete(item.FAMIID)
+            MUnitWord.getDataByLangWord(item.WORDID)
+        }.flatMap { arrUnit in
+            !arrUnit.isEmpty ? Observable.empty() :
+            MLangWord.delete(item.WORDID).flatMap {
+                MWordFami.delete(item.FAMIID)
+            }
         }
     }
 
