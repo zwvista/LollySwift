@@ -223,6 +223,41 @@ class SettingsViewModel: NSObject {
     
     weak var delegate: SettingsViewModelDelegate?
     
+    override init() {
+        super.init()
+    }
+    
+    init(x: SettingsViewModel) {
+        arrUserSettings = x.arrUserSettings
+        selectedUSUser0 = x.selectedUSUser0
+        selectedUSUser1 = x.selectedUSUser1
+        USLEVELCOLORS = x.USLEVELCOLORS
+        selectedUSLang2 = x.selectedUSLang2
+        selectedUSLang3 = x.selectedUSLang3
+        selectedUSTextbook = x.selectedUSTextbook
+        arrLanguages = x.arrLanguages
+        selectedLang = x.selectedLang
+        arrMacVoices = x.arrMacVoices
+        selectedMacVoice = x.selectedMacVoice
+        arriOSVoices = x.arriOSVoices
+        selectediOSVoice = x.selectediOSVoice
+        arrDictsReference = x.arrDictsReference
+        arrDictItems = x.arrDictItems
+        selectedDictItem = x.selectedDictItem
+        arrDictsNote = x.arrDictsNote
+        selectedDictNote = x.selectedDictNote
+        arrDictsTranslation = x.arrDictsTranslation
+        selectedDictTranslation = x.selectedDictTranslation
+        arrTextbooks = x.arrTextbooks
+        selectedTextbook = x.selectedTextbook
+        arrTextbookFilters = x.arrTextbookFilters
+        toType = x.toType
+        arrAutoCorrect = x.arrAutoCorrect
+        arrDictTypes = x.arrDictTypes
+        delegate = x.delegate
+        super.init()
+    }
+    
     func getData() -> Observable<()> {
         return Observable.zip(MLanguage.getData(), MUserSetting.getData(userid: CommonApi.userid),
                               MDictType.getData())
