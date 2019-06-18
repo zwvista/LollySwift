@@ -15,7 +15,7 @@ class TextbooksViewModel: NSObject {
     var arrTextbooks = [MTextbook]()
     
     init(settings: SettingsViewModel, disposeBag: DisposeBag, complete: @escaping () -> ()) {
-        vmSettings = settings
+        self.vmSettings = SettingsViewModel(settings)
         self.disposeBag = disposeBag
         super.init()
         MTextbook.getDataByLang(settings.selectedLang.ID).subscribe(onNext: {

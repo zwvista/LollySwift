@@ -13,6 +13,9 @@ import RxSwift
 class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
 
     var vm: WordsLangViewModel!
+    override var vmSettings: SettingsViewModel! {
+        return vm.vmSettings
+    }
     var arrWords: [MLangWord] {
         return vm.arrWordsFiltered ?? vm.arrWords
     }

@@ -13,6 +13,9 @@ import RxSwift
 class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation {
 
     var vm: WordsUnitViewModel!
+    override var vmSettings: SettingsViewModel! {
+        return vm.vmSettings
+    }
     var arrWords: [MUnitWord] {
         return vm.arrWordsFiltered ?? vm.arrWords
     }

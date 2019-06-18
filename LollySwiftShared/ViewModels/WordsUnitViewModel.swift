@@ -20,7 +20,7 @@ class WordsUnitViewModel: NSObject {
     var arrWordsFiltered: [MUnitWord]?
 
     init(settings: SettingsViewModel, inTextbook: Bool, disposeBag: DisposeBag, complete: @escaping () -> ()) {
-        vmSettings = settings
+        self.vmSettings = SettingsViewModel(settings)
         self.disposeBag = disposeBag
         vmNote = NoteViewModel(settings: settings, disposeBag: disposeBag)
         super.init()

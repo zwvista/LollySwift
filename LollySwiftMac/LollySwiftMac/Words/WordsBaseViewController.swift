@@ -11,7 +11,6 @@ import WebKit
 import RxSwift
 
 class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate, WKNavigationDelegate, LollyProtocol {
-    var selectedDictItemIndex = 0
     
     @IBOutlet weak var wvDict: WKWebView!
     @IBOutlet weak var tfNewWord: NSTextField!
@@ -22,8 +21,12 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     @IBOutlet weak var tableView: NSTableView!
     @IBOutlet weak var tfStatusText: NSTextField!
 
+    var vmSettings: SettingsViewModel! {
+        return nil
+    }
     let disposeBag = DisposeBag()
     
+    var selectedDictItemIndex = 0
     @objc var newWord = ""
     @objc var textFilter = ""
     @objc var levelge0only = false
@@ -329,7 +332,9 @@ class WordsBaseWindowController: NSWindowController, LollyProtocol, NSWindowDele
     @IBOutlet weak var tbiDict37: NSToolbarItem!
     @IBOutlet weak var tbiDict38: NSToolbarItem!
     @IBOutlet weak var tbiDict39: NSToolbarItem!
-    @objc var vm: SettingsViewModel {return vmSettings}
+    @objc var vm: SettingsViewModel! {
+        return (contentViewController as! WordsBaseViewController).vmSettings
+    }
     private var defaultToolbarItemCount = 0
     
     var identifiers: [NSToolbarItem.Identifier]!
@@ -345,14 +350,14 @@ class WordsBaseWindowController: NSWindowController, LollyProtocol, NSWindowDele
     func settingsChanged() {
         let img = toolbar.items[defaultToolbarItemCount].image
         for i in 0..<40 {
-            if i < vmSettings.arrDictItems.count {
+            if i < vm.arrDictItems.count {
                 let item = toolbar.items[defaultToolbarItemCount + i]
-                item.label = vmSettings.arrDictItems[i].DICTNAME
+                item.label = vm.arrDictItems[i].DICTNAME
                 item.target = contentViewController
                 item.action = #selector(WordsBaseViewController.searchDict(_:))
                 item.isEnabled = true
                 item.image = img
-                if i == vmSettings.selectedDictItemIndex {
+                if i == vm.selectedDictItemIndex {
                     toolbar.selectedItemIdentifier = item.itemIdentifier
                 }
             } else {

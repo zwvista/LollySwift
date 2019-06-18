@@ -11,6 +11,9 @@ import RxSwift
 
 class PhrasesBaseViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate {
     
+    var vmSettings: SettingsViewModel! {
+        return nil
+    }
     @IBOutlet weak var tableView: NSTableView!
 
     let disposeBag = DisposeBag()
@@ -102,7 +105,11 @@ class PhrasesBaseViewController: NSViewController, LollyProtocol, NSTableViewDat
 }
 
 class PhrasesBaseWindowController: NSWindowController, NSTextFieldDelegate, NSWindowDelegate, LollyProtocol {
-    
+
+    @objc var vm: SettingsViewModel! {
+        return (contentViewController as! WordsBaseViewController).vmSettings
+    }
+
     override func windowDidLoad() {
         super.windowDidLoad()
     }

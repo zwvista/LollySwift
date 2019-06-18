@@ -14,6 +14,9 @@ class PhrasesLangViewController: PhrasesBaseViewController {
     
     var wc: PhrasesLangWindowController { return view.window!.windowController as! PhrasesLangWindowController }
     var vm: PhrasesLangViewModel!
+    override var vmSettings: SettingsViewModel! {
+        return vm.vmSettings
+    }
     var arrPhrases: [MLangPhrase] {
         return vm.arrPhrasesFiltered == nil ? vm.arrPhrases : vm.arrPhrasesFiltered!
     }
@@ -108,7 +111,7 @@ class PhrasesLangWindowController: PhrasesBaseWindowController {
         guard code == NSReturnTextMovement else {return}
         if scTextFilter.selectedSegment == 0 {
             scTextFilter.selectedSegment = 1
-            textFilter = vmSettings.autoCorrectInput(text: textFilter)
+            textFilter = vm.autoCorrectInput(text: textFilter)
             tfFilter.stringValue = textFilter
         }
         (contentViewController as! PhrasesLangViewController).filterPhrase(scTextFilter)

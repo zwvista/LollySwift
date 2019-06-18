@@ -14,7 +14,7 @@ class PhrasesReviewViewModel {
     var vmSettings: SettingsViewModel
     
     init(settings: SettingsViewModel) {
-        self.vmSettings = settings
+        self.vmSettings = SettingsViewModel(settings)
     }
 
     var arrPhrases = [MUnitPhrase]()

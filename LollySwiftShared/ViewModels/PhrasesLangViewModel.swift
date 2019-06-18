@@ -15,7 +15,7 @@ class PhrasesLangViewModel: NSObject {
     var arrPhrasesFiltered: [MLangPhrase]?
     
     public init(settings: SettingsViewModel, disposeBag: DisposeBag, complete: @escaping () -> ()) {
-        vmSettings = settings
+        self.vmSettings = SettingsViewModel(settings)
         let item = settings.selectedTextbook!
         super.init()
         MLangPhrase.getDataByLang(item.LANGID).subscribe(onNext: {

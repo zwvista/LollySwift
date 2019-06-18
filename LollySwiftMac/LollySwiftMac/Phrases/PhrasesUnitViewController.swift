@@ -13,6 +13,9 @@ import RxSwift
 class PhrasesUnitViewController: PhrasesBaseViewController {
     
     var vm: PhrasesUnitViewModel!
+    override var vmSettings: SettingsViewModel! {
+        return vm.vmSettings
+    }
     var arrPhrases: [MUnitPhrase] {
         return vm.arrPhrases
     }

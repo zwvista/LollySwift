@@ -20,7 +20,7 @@ class WordsLangViewModel: NSObject {
     var arrWordsFiltered: [MLangWord]?
 
     public init(settings: SettingsViewModel, disposeBag: DisposeBag, complete: @escaping () -> ()) {
-        vmSettings = settings
+        self.vmSettings = SettingsViewModel(settings)
         self.disposeBag = disposeBag
         vmNote = NoteViewModel(settings: settings, disposeBag: disposeBag)
         super.init()

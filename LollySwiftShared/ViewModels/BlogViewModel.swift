@@ -16,7 +16,7 @@ class BlogViewModel: NSObject {
     var vmNote: NoteViewModel!
     let disposeBag: DisposeBag!
     init(settings: SettingsViewModel, disposeBag: DisposeBag) {
-        self.vmSettings = settings
+        self.vmSettings = SettingsViewModel(settings)
         self.disposeBag = disposeBag
         vmNote = NoteViewModel(settings: settings, disposeBag: disposeBag)
     }

@@ -11,6 +11,9 @@ import RxSwift
 
 class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldDelegate {
     var vm: PhrasesReviewViewModel!
+    var vmSettings: SettingsViewModel {
+        return vm.vmSettings
+    }
     let disposeBag = DisposeBag()
 
     @IBOutlet weak var tfIndex: NSTextField!

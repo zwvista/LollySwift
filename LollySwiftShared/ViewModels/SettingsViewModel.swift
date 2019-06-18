@@ -227,7 +227,7 @@ class SettingsViewModel: NSObject {
         super.init()
     }
     
-    init(x: SettingsViewModel) {
+    init(_ x: SettingsViewModel) {
         arrUserSettings = x.arrUserSettings
         selectedUSUser0 = x.selectedUSUser0
         selectedUSUser1 = x.selectedUSUser1

@@ -14,6 +14,9 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
     
     var wc: PhrasesTextbookWindowController { return view.window!.windowController as! PhrasesTextbookWindowController }
     var vm: PhrasesUnitViewModel!
+    override var vmSettings: SettingsViewModel! {
+        return vm.vmSettings
+    }
     var arrPhrases: [MUnitPhrase] {
         return vm.arrPhrasesFiltered == nil ? vm.arrPhrases : vm.arrPhrasesFiltered!
     }
