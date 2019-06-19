@@ -156,6 +156,18 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
         tableView.reloadData()
     }
 
+    @IBAction func previousUnitPart(_ sender: AnyObject) {
+        vmSettings.previousUnitPart().subscribe {
+            self.settingsChanged()
+        }.disposed(by: disposeBag)
+    }
+    
+    @IBAction func nextUnitPart(_ sender: AnyObject) {
+        vmSettings.nextUnitPart().subscribe {
+            self.settingsChanged()
+        }.disposed(by: disposeBag)
+    }
+
     override func updateStatusText() {
         tfStatusText.stringValue = "\(tableView.numberOfRows) Phrases in \(vmSettings.UNITINFO)"
     }

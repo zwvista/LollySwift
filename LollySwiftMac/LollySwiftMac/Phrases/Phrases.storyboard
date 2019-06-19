@@ -82,6 +82,16 @@
                                         </connections>
                                     </textField>
                                 </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="68287BFC-B1C9-44EC-85C9-343B8B3042EF" label="Previous" paletteLabel="Previous" tag="-1" image="NSGoBackTemplate" id="k6U-bs-3i4">
+                                    <connections>
+                                        <action selector="previousUnitPart:" target="qEo-JS-MYZ" id="nmr-nW-K8s"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="89FDFE01-4244-4822-B278-15FA29F04EA6" label="Next" paletteLabel="Next" tag="-1" image="NSGoForwardTemplate" id="rwC-ba-HN6">
+                                    <connections>
+                                        <action selector="nextUnitPart:" target="qEo-JS-MYZ" id="VLk-B5-Hm2"/>
+                                    </connections>
+                                </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="aIp-9q-khf"/>
@@ -89,6 +99,8 @@
                                 <toolbarItem reference="ap0-qD-kxT"/>
                                 <toolbarItem reference="4Dq-5F-r8A"/>
                                 <toolbarItem reference="bzy-ad-vwY"/>
+                                <toolbarItem reference="k6U-bs-3i4"/>
+                                <toolbarItem reference="rwC-ba-HN6"/>
                             </defaultToolbarItems>
                         </toolbar>
                         <connections>
@@ -1284,11 +1296,6 @@ Gw
                                         <action selector="addPhrase:" target="maH-dw-yMa" id="uYP-u5-cIl"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="62080154-8F37-4A03-8BCC-C0C62A8B2F03" label="Delete" paletteLabel="Delete" tag="-1" image="NSRemoveTemplate" id="Qp0-0S-2WS">
-                                    <connections>
-                                        <action selector="deletePhrase:" target="maH-dw-yMa" id="SqV-5K-Vcc"/>
-                                    </connections>
-                                </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="0FE47FD6-6CD6-4F13-92D4-43D61D94CAF8" label="Refresh" paletteLabel="Refresh" tag="-1" image="NSRefreshTemplate" id="MnR-91-5r0">
                                     <connections>
                                         <action selector="refreshTableView:" target="maH-dw-yMa" id="hfy-Hy-I9Y"/>
@@ -1354,7 +1361,6 @@ Gw
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="viz-co-4v0"/>
-                                <toolbarItem reference="Qp0-0S-2WS"/>
                                 <toolbarItem reference="MnR-91-5r0"/>
                                 <toolbarItem reference="G08-Sc-Q2L"/>
                                 <toolbarItem reference="2ps-sj-xWc"/>
@@ -2752,6 +2758,8 @@ Gw
     <resources>
         <image name="NSAddTemplate" width="11" height="11"/>
         <image name="NSAdvanced" width="32" height="32"/>
+        <image name="NSGoBackTemplate" width="9" height="12"/>
+        <image name="NSGoForwardTemplate" width="9" height="12"/>
         <image name="NSRefreshTemplate" width="11" height="15"/>
         <image name="NSRemoveTemplate" width="11" height="11"/>
     </resources>

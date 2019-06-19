@@ -224,13 +224,13 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation {
     @IBAction func previousUnitPart(_ sender: AnyObject) {
         vmSettings.previousUnitPart().subscribe {
             self.settingsChanged()
-            }.disposed(by: disposeBag)
+        }.disposed(by: disposeBag)
     }
     
     @IBAction func nextUnitPart(_ sender: AnyObject) {
         vmSettings.nextUnitPart().subscribe {
             self.settingsChanged()
-            }.disposed(by: disposeBag)
+        }.disposed(by: disposeBag)
     }
 
     override func updateStatusText() {
