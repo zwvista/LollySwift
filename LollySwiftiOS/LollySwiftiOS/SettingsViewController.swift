@@ -114,7 +114,7 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
         ddToType.selectionAction = { [unowned self] (index: Int, item: String) in
             self.vm.toType = UnitPartToType(rawValue: index)!
             self.btnToType.setTitle(item, for: .normal)
-            let b = self.vm.toType == .part
+            let b = self.vm.toType == .to
             self.lblUnitTo.isEnabled = b
             self.lblPartTo.isEnabled = b && !self.vm.isSinglePart
             self.lblUnitToTitle.isEnabled = b
