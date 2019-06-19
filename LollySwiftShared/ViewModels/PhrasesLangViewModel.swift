@@ -24,10 +24,15 @@ class PhrasesLangViewModel: NSObject {
         }).disposed(by: disposeBag)
     }
     
-    func filterPhrasesForSearchText(_ searchText: String, scope: String) {
-        arrPhrasesFiltered = arrPhrases.filter({ (item) -> Bool in
-            return (scope == "Phrase" ? item.PHRASE : item.TRANSLATION ?? "").contains(searchText)
-        })
+    func applyFilters(textFilter: String, scope: String) {
+        if textFilter.isEmpty {
+            arrPhrasesFiltered = nil
+        } else {
+            arrPhrasesFiltered = arrPhrases
+            if !textFilter.isEmpty {
+                arrPhrasesFiltered = arrPhrasesFiltered!.filter { (scope == "Phrase" ? $0.PHRASE : $0.TRANSLATION ?? "").lowercased().contains(textFilter.lowercased()) }
+            }
+        }
     }
     
     static func update(item: MLangPhrase) -> Observable<()> {

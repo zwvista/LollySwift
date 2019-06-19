@@ -131,10 +131,6 @@ class PhrasesBaseWindowController: NSWindowController, NSTextFieldDelegate, NSWi
     @IBOutlet weak var acTextbooks: NSArrayController!
     @objc var textbookFilter = 0
 
-    @objc var vm: SettingsViewModel! {
-        return (contentViewController as! WordsBaseViewController).vmSettings
-    }
-
     override func windowDidLoad() {
         super.windowDidLoad()
     }
@@ -142,6 +138,22 @@ class PhrasesBaseWindowController: NSWindowController, NSTextFieldDelegate, NSWi
     func settingsChanged() {
     }
     
+    func controlTextDidEndEditing(_ obj: Notification) {
+        let searchfield = obj.object as! NSControl
+        guard searchfield === tfFilter else {return}
+        let dict = (obj as NSNotification).userInfo!
+        let reason = dict["NSTextMovement"] as! NSNumber
+        let code = Int(reason.int32Value)
+        guard code == NSReturnTextMovement else {return}
+        if scTextFilter.selectedSegment == 0 {
+            scTextFilter.selectedSegment = 1
+        }
+        filterPhrase()
+    }
+
+    func filterPhrase() {
+    }
+
     func windowWillClose(_ notification: Notification) {
         tfFilter?.unbindAll()
         pubTextbookFilter?.unbindAll()

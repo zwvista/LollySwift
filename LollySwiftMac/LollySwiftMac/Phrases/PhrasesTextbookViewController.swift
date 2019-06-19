@@ -87,16 +87,10 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
 
 class PhrasesTextbookWindowController: PhrasesBaseWindowController {
     
-    func controlTextDidEndEditing(_ obj: Notification) {
-        let searchfield = obj.object as! NSControl
-        guard searchfield === tfFilter else {return}
-        let dict = (obj as NSNotification).userInfo!
-        let reason = dict["NSTextMovement"] as! NSNumber
-        let code = Int(reason.int32Value)
-        guard code == NSReturnTextMovement else {return}
-        if scTextFilter.selectedSegment == 0 {
-            scTextFilter.selectedSegment = 1
-        }
-        (contentViewController as! PhrasesTextbookViewController).filterPhrase(scTextFilter)
+    override func filterPhrase() {
+        let vc = contentViewController as! PhrasesTextbookViewController
+        textFilter = vc.vmSettings.autoCorrectInput(text: textFilter)
+        tfFilter.stringValue = textFilter
+        vc.filterPhrase(scTextFilter)
     }
 }

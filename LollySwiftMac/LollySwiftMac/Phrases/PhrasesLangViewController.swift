@@ -77,14 +77,9 @@ class PhrasesLangViewController: PhrasesBaseViewController {
     }
     
     @IBAction func filterPhrase(_ sender: AnyObject) {
-        let n = (sender as! NSSegmentedControl).selectedSegment
-        if n == 0 {
-            vm.arrPhrasesFiltered = nil
-        } else {
-            let scope = n == 1 ? "Phrase" : "Translation"
-            vm.filterPhrasesForSearchText(wc.textFilter, scope: scope)
-        }
-        self.tableView.reloadData()
+        let n = wc.scTextFilter.selectedSegment
+        vm.applyFilters(textFilter: n == 0 ? "" : wc.textFilter, scope: n == 1 ? "Phrase" : "Translation")
+        tableView.reloadData()
     }
 
     override func updateStatusText() {
@@ -94,19 +89,11 @@ class PhrasesLangViewController: PhrasesBaseViewController {
 
 class PhrasesLangWindowController: PhrasesBaseWindowController {
     
-    func controlTextDidEndEditing(_ obj: Notification) {
-        let searchfield = obj.object as! NSControl
-        guard searchfield === tfFilter else {return}
-        let dict = (obj as NSNotification).userInfo!
-        let reason = dict["NSTextMovement"] as! NSNumber
-        let code = Int(reason.int32Value)
-        guard code == NSReturnTextMovement else {return}
-        if scTextFilter.selectedSegment == 0 {
-            scTextFilter.selectedSegment = 1
-            textFilter = vm.autoCorrectInput(text: textFilter)
-            tfFilter.stringValue = textFilter
-        }
-        (contentViewController as! PhrasesLangViewController).filterPhrase(scTextFilter)
+    override func filterPhrase() {
+        let vc = contentViewController as! PhrasesLangViewController
+        textFilter = vc.vmSettings.autoCorrectInput(text: textFilter)
+        tfFilter.stringValue = textFilter
+        vc.filterPhrase(scTextFilter)
     }
 }
 

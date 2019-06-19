@@ -1347,7 +1347,6 @@ Gw
                                                     <bool key="NSContinuouslyUpdatesValue" value="YES"/>
                                                 </dictionary>
                                             </binding>
-                                            <binding destination="t1w-66-vYI" name="toolTip" keyPath="self" id="fFe-ny-f53"/>
                                             <outlet property="delegate" destination="t1w-66-vYI" id="95e-U8-i3D"/>
                                         </connections>
                                     </textField>
@@ -1828,8 +1827,8 @@ Gw
                                         <connections>
                                             <action selector="filterPhrase:" target="2fr-uc-31Q" id="nPo-bE-Uxi"/>
                                             <binding destination="SeE-SI-0yJ" name="content" keyPath="arrangedObjects" id="opL-D6-tiM"/>
-                                            <binding destination="SeE-SI-0yJ" name="contentObjects" keyPath="arrangedObjects.value" previousBinding="opL-D6-tiM" id="UWa-D6-49m"/>
                                             <binding destination="SeE-SI-0yJ" name="contentValues" keyPath="arrangedObjects.label" previousBinding="UWa-D6-49m" id="SfV-bY-t86"/>
+                                            <binding destination="SeE-SI-0yJ" name="contentObjects" keyPath="arrangedObjects.value" previousBinding="opL-D6-tiM" id="UWa-D6-49m"/>
                                             <binding destination="Ngy-o1-fVc" name="selectedObject" keyPath="textbookFilter" previousBinding="SfV-bY-t86" id="qij-mA-ajd"/>
                                         </connections>
                                     </popUpButton>
