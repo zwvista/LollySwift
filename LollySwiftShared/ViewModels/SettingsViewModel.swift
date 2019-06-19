@@ -389,7 +389,7 @@ class SettingsViewModel: NSObject {
     
     func updatePartFrom() -> Observable<()> {
         return doUpdatePartFrom(v: USPARTFROM, check: false).flatMap {
-            return self.toType == .unit || self.isInvalidUnitPart ? self.doUpdateUnitPartTo() : Observable.empty()
+            return self.toType == .part || self.isInvalidUnitPart ? self.doUpdateUnitPartTo() : Observable.empty()
         }
     }
     

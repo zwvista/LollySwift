@@ -96,7 +96,7 @@ class SettingsViewController: NSViewController, SettingsViewModelDelegate {
     
     @IBAction func scToTypeClicked(_ sender: AnyObject) {
         vm.toType = UnitPartToType(rawValue: scToType.selectedSegment)!
-        let b = vm.toType == .part
+        let b = vm.toType == .to
         pubUnitTo.isEnabled = b
         pubPartTo.isEnabled = b && !vm.isSinglePart
         btnPrevious.isEnabled = !b
