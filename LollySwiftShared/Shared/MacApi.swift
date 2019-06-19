@@ -15,16 +15,12 @@ class MacApi {
         pasteboard.setString(text, forType: .string)
     }
     
-    static func openPage(_ url: String) {
-        NSWorkspace.shared.open([URL(string: url)!],
-                                withAppBundleIdentifier:"com.apple.Safari",
-                                options: [],
-                                additionalEventParamDescriptor: nil,
-                                launchIdentifiers: nil)
+    static func openURL(_ url: String) {
+        NSWorkspace.shared.open(URL(string: url)!)
     }
     
     static func googleString(_ str: String) {
-        openPage("https://www.google.com/search?q=\(str)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)
+        openURL("https://www.google.com/search?q=\(str)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)
     }
 }
 

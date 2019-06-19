@@ -272,13 +272,17 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
         }
     }
 
-    @IBAction func openOnlineDict(_ sender: AnyObject) {
+    @IBAction func openDictURL(_ sender: AnyObject) {
         let item = vmSettings.arrDictItems[selectedDictItemIndex]
         if !item.DICTNAME.starts(with: "Custom") {
             let item2 = vmSettings.arrDictsReference.first { $0.DICTNAME == item.DICTNAME }!
             let url = item2.urlString(word: selectedWord, arrAutoCorrect: vmSettings.arrAutoCorrect)
-            MacApi.openPage(url)
+            MacApi.openURL(url)
         }
+    }
+
+    @IBAction func openURL(_ sender: AnyObject) {
+        MacApi.openURL(tfURL.stringValue)
     }
 
     deinit {

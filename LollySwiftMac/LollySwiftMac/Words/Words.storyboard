@@ -322,7 +322,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2hs-X4-l5R">
-                                <rect key="frame" x="0.0" y="568" width="812" height="32"/>
+                                <rect key="frame" x="0.0" y="568" width="878" height="32"/>
                                 <subviews>
                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="E8d-BH-EMc">
                                         <rect key="frame" x="6" y="5" width="96" height="22"/>
@@ -435,17 +435,40 @@
                                             <real value="3.4028234663852886e+38"/>
                                         </customSpacing>
                                     </stackView>
-                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vJr-9d-1wg">
-                                        <rect key="frame" x="612" y="4" width="200" height="22"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="200" id="elL-ed-VOA"/>
-                                        </constraints>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="Dbl-w1-0dG">
-                                            <font key="font" metaFont="system"/>
-                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
+                                    <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xRk-MG-tIl">
+                                        <rect key="frame" x="612" y="4" width="266" height="22"/>
+                                        <subviews>
+                                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vJr-9d-1wg">
+                                                <rect key="frame" x="0.0" y="0.0" width="200" height="22"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="200" id="elL-ed-VOA"/>
+                                                </constraints>
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="Dbl-w1-0dG">
+                                                    <font key="font" metaFont="system"/>
+                                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Flh-Ra-an3">
+                                                <rect key="frame" x="199" y="-6" width="73" height="32"/>
+                                                <buttonCell key="cell" type="push" title="Open" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ZSF-JD-VK2">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="openURL:" target="F8i-pe-Ate" id="ceY-bc-obg"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <visibilityPriorities>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                        </visibilityPriorities>
+                                        <customSpacing>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                        </customSpacing>
+                                    </stackView>
                                 </subviews>
                                 <edgeInsets key="edgeInsets" left="6" right="0.0" top="6" bottom="6"/>
                                 <constraints>
@@ -927,7 +950,7 @@
                         <outlet property="tfFilter" destination="Ntb-I3-XGS" id="Wl9-kJ-Nnx"/>
                         <outlet property="tfNewWord" destination="E8d-BH-EMc" id="sKW-6f-XqV"/>
                         <outlet property="tfStatusText" destination="IQa-iE-3F1" id="cbs-gy-uFL"/>
-                        <outlet property="tfURL" destination="vJr-9d-1wg" id="HGC-yk-MMO"/>
+                        <outlet property="tfURL" destination="vJr-9d-1wg" id="Rv3-Uh-76H"/>
                         <outlet property="wvDict" destination="tEP-Us-q1l" id="0DF-0d-cGv"/>
                     </connections>
                 </viewController>
@@ -966,7 +989,7 @@
                         <menuItem title="Online Dictionary" id="BqH-TZ-6Ak">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
-                                <action selector="openOnlineDict:" target="F8i-pe-Ate" id="Kaf-Ae-HMU"/>
+                                <action selector="openDictURL:" target="F8i-pe-Ate" id="Kaf-Ae-HMU"/>
                             </connections>
                         </menuItem>
                         <menuItem title="Speak" id="HmC-Vr-ske" userLabel="Speak">
@@ -2324,7 +2347,7 @@ Gw
                         <menuItem title="Online Dictionary" id="Xce-Ci-oO6">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
-                                <action selector="openOnlineDict:" target="UkS-Xi-ogF" id="BDO-Az-0N2"/>
+                                <action selector="openDictURL:" target="UkS-Xi-ogF" id="BDO-Az-0N2"/>
                             </connections>
                         </menuItem>
                         <menuItem title="Speak" id="gst-PZ-O5j" userLabel="Speak">
@@ -2348,7 +2371,7 @@ Gw
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BlQ-ed-2z2">
-                                <rect key="frame" x="0.0" y="568" width="669" height="32"/>
+                                <rect key="frame" x="0.0" y="568" width="735" height="32"/>
                                 <subviews>
                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jNk-si-JUF">
                                         <rect key="frame" x="6" y="4" width="96" height="22"/>
@@ -2428,17 +2451,40 @@ Gw
                                             <binding destination="UkS-Xi-ogF" name="value" keyPath="levelge0only" id="4gD-yR-CXt"/>
                                         </connections>
                                     </button>
-                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vmb-1U-yHY">
-                                        <rect key="frame" x="469" y="4" width="200" height="22"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="200" id="ubp-vj-8A7"/>
-                                        </constraints>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="uis-Gp-fUU">
-                                            <font key="font" metaFont="system"/>
-                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
+                                    <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NCm-wD-K9l">
+                                        <rect key="frame" x="469" y="4" width="266" height="22"/>
+                                        <subviews>
+                                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Xge-cS-C5w">
+                                                <rect key="frame" x="0.0" y="0.0" width="200" height="22"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="200" id="5Ek-4b-anX"/>
+                                                </constraints>
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="gtq-Ux-7RY">
+                                                    <font key="font" metaFont="system"/>
+                                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="I6B-iP-iXR">
+                                                <rect key="frame" x="199" y="-6" width="73" height="32"/>
+                                                <buttonCell key="cell" type="push" title="Open" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="aY5-aE-S78">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="openURL:" target="UkS-Xi-ogF" id="L5X-a6-NRD"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <visibilityPriorities>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                        </visibilityPriorities>
+                                        <customSpacing>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                        </customSpacing>
+                                    </stackView>
                                 </subviews>
                                 <edgeInsets key="edgeInsets" left="6" right="0.0" top="6" bottom="6"/>
                                 <constraints>
@@ -2760,7 +2806,7 @@ Gw
                         <outlet property="tfFilter" destination="lHN-YD-8mt" id="IbK-XI-ePK"/>
                         <outlet property="tfNewWord" destination="jNk-si-JUF" id="NN0-cI-2Sf"/>
                         <outlet property="tfStatusText" destination="ceW-Gp-R3a" id="Mdi-yT-ZFX"/>
-                        <outlet property="tfURL" destination="vmb-1U-yHY" id="LSn-XB-HBf"/>
+                        <outlet property="tfURL" destination="Xge-cS-C5w" id="bi9-J7-ilH"/>
                         <outlet property="wvDict" destination="Txl-33-AIT" id="hgQ-5V-Jpq"/>
                     </connections>
                 </viewController>
@@ -3298,7 +3344,7 @@ Gw
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="591-dl-hBy">
-                                <rect key="frame" x="0.0" y="568" width="645" height="32"/>
+                                <rect key="frame" x="0.0" y="568" width="711" height="32"/>
                                 <subviews>
                                     <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aST-t9-Wtn">
                                         <rect key="frame" x="6" y="4" width="246" height="22"/>
@@ -3377,17 +3423,40 @@ Gw
                                             <binding destination="S5w-0q-IQt" name="selectedObject" keyPath="textbookFilter" previousBinding="FYU-Ma-KTT" id="vFh-TG-0Gb"/>
                                         </connections>
                                     </popUpButton>
-                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RXU-hF-i3C">
-                                        <rect key="frame" x="445" y="4" width="200" height="22"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="200" id="JXy-Vz-STP"/>
-                                        </constraints>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="kod-R3-H8u">
-                                            <font key="font" metaFont="system"/>
-                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                    </textField>
+                                    <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CZL-w4-dfK">
+                                        <rect key="frame" x="445" y="4" width="266" height="22"/>
+                                        <subviews>
+                                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PHg-od-JVu">
+                                                <rect key="frame" x="0.0" y="0.0" width="200" height="22"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="200" id="3Gx-cy-4hF"/>
+                                                </constraints>
+                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="A7h-cw-DjV">
+                                                    <font key="font" metaFont="system"/>
+                                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8qS-Sh-D6S">
+                                                <rect key="frame" x="199" y="-6" width="73" height="32"/>
+                                                <buttonCell key="cell" type="push" title="Open" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="oNE-e3-yQ8">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="openURL:" target="S5w-0q-IQt" id="Jpz-5d-NEu"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <visibilityPriorities>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                        </visibilityPriorities>
+                                        <customSpacing>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                        </customSpacing>
+                                    </stackView>
                                 </subviews>
                                 <edgeInsets key="edgeInsets" left="6" right="0.0" top="6" bottom="6"/>
                                 <constraints>
@@ -3897,7 +3966,7 @@ Gw
                         <outlet property="tableView" destination="NqU-P3-ciK" id="ngY-Mi-EJ0"/>
                         <outlet property="tfFilter" destination="q0R-YJ-VuK" id="bpz-6p-gYr"/>
                         <outlet property="tfStatusText" destination="Gqc-yq-vq1" id="dQm-HQ-8AA"/>
-                        <outlet property="tfURL" destination="RXU-hF-i3C" id="sFc-dw-YSP"/>
+                        <outlet property="tfURL" destination="PHg-od-JVu" id="b0T-Fp-RfZ"/>
                         <outlet property="wvDict" destination="mBY-hW-ews" id="jBh-C5-Htb"/>
                     </connections>
                 </viewController>
@@ -3937,7 +4006,7 @@ Gw
                         <menuItem title="Online Dictionary" id="Pzw-TA-ehf">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
-                                <action selector="openOnlineDict:" target="S5w-0q-IQt" id="eOg-id-Guo"/>
+                                <action selector="openDictURL:" target="S5w-0q-IQt" id="eOg-id-Guo"/>
                             </connections>
                         </menuItem>
                         <menuItem title="Speak" id="oah-xm-73r" userLabel="Speak">
