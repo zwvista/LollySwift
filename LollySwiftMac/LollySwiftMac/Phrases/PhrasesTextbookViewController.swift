@@ -12,7 +12,6 @@ import RxSwift
 
 class PhrasesTextbookViewController: PhrasesBaseViewController {
     
-    var wc: PhrasesTextbookWindowController { return view.window!.windowController as! PhrasesTextbookWindowController }
     var vm: PhrasesUnitViewModel!
     override var vmSettings: SettingsViewModel! {
         return vm.vmSettings
@@ -27,6 +26,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
 
     override func settingsChanged() {
         vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: false, disposeBag: disposeBag, needCopy: true) {
+            self.wc.acTextbooks.content = self.vmSettings.arrTextbookFilters
             self.refreshTableView(self)
         }
         super.settingsChanged()
@@ -75,30 +75,17 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
     }
     
     @IBAction func filterPhrase(_ sender: AnyObject) {
-        let n = (sender as! NSSegmentedControl).selectedSegment
-        if n == 0 {
-            vm.arrPhrasesFiltered = nil
-        } else {
-            let scope = n == 1 ? "Phrase" : "Translation"
-            vm.filterPhrasesForSearchText(wc.textFilter, scope: scope)
-        }
+        let n = wc.scTextFilter.selectedSegment
+        vm.applyFilters(textFilter: n == 0 ? "" : wc.textFilter, scope: n == 1 ? "Phrase" : "Translation", textbookFilter: wc.textbookFilter)
         self.tableView.reloadData()
     }
 
     override func updateStatusText() {
-        tfStatusText.stringValue = "\(tableView.numberOfRows) Phrases in \(vmSettings.TEXTBOOKINFO)"
+        tfStatusText.stringValue = "\(tableView.numberOfRows) Phrases in \(vmSettings.LANGINFO)"
     }
 }
 
 class PhrasesTextbookWindowController: PhrasesBaseWindowController {
-    @IBOutlet weak var scTextFilter: NSSegmentedControl!
-    @IBOutlet weak var tfFilter: NSTextField!
-    @objc var textFilter = ""
-    
-    override func windowDidLoad() {
-        super.windowDidLoad()
-        window!.toolbar!.selectedItemIdentifier = NSToolbarItem.Identifier(rawValue: "No Filter")
-    }
     
     func controlTextDidEndEditing(_ obj: Notification) {
         let searchfield = obj.object as! NSControl
@@ -111,9 +98,5 @@ class PhrasesTextbookWindowController: PhrasesBaseWindowController {
             scTextFilter.selectedSegment = 1
         }
         (contentViewController as! PhrasesTextbookViewController).filterPhrase(scTextFilter)
-    }
-    
-    func windowWillClose(_ notification: Notification) {
-        tfFilter.unbindAll()
     }
 }

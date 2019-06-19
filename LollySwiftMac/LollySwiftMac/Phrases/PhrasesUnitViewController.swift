@@ -17,7 +17,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
         return vm.vmSettings
     }
     var arrPhrases: [MUnitPhrase] {
-        return vm.arrPhrases
+        return vm.arrPhrasesFiltered == nil ? vm.arrPhrases : vm.arrPhrasesFiltered!
     }
     
     // https://developer.apple.com/videos/play/wwdc2011/120/
@@ -51,7 +51,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
     }
     
     func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
-        if vm.vmSettings.isSingleUnitPart {
+        if vmSettings.isSingleUnitPart && vm.arrPhrasesFiltered == nil {
             let item = NSPasteboardItem()
             item.setString(String(row), forType: tableRowDragType)
             return item
@@ -149,6 +149,12 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
         detailVC.complete = { self.tableView.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count)) }
         self.presentAsModalWindow(detailVC)
     }
+    
+    @IBAction func filterPhrase(_ sender: AnyObject) {
+        let n = wc.scTextFilter.selectedSegment
+        vm.applyFilters(textFilter: n == 0 ? "" : wc.textFilter, scope: n == 1 ? "Phrase" : "Translation", textbookFilter: wc.textbookFilter)
+        tableView.reloadData()
+    }
 
     override func updateStatusText() {
         tfStatusText.stringValue = "\(tableView.numberOfRows) Phrases in \(vmSettings.UNITINFO)"
@@ -156,4 +162,17 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
 }
 
 class PhrasesUnitWindowController: PhrasesBaseWindowController {
+    
+    func controlTextDidEndEditing(_ obj: Notification) {
+        let searchfield = obj.object as! NSControl
+        guard searchfield === tfFilter else {return}
+        let dict = (obj as NSNotification).userInfo!
+        let reason = dict["NSTextMovement"] as! NSNumber
+        let code = Int(reason.int32Value)
+        guard code == NSReturnTextMovement else {return}
+        if scTextFilter.selectedSegment == 0 {
+            scTextFilter.selectedSegment = 1
+        }
+        (contentViewController as! PhrasesUnitViewController).filterPhrase(scTextFilter)
+    }
 }

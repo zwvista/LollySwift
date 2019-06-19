@@ -26,11 +26,11 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        acTextbooks.content = vmSettings.arrTextbookFilters
     }
 
     override func settingsChanged() {
         vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: false, disposeBag: disposeBag, needCopy: true) {
+            self.acTextbooks.content = self.vmSettings.arrTextbookFilters
             self.refreshTableView(self)
         }
         super.settingsChanged()
@@ -105,7 +105,7 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
     }
 
     override func updateStatusText() {
-        tfStatusText.stringValue = "\(tableView.numberOfRows) Words in \(vmSettings.TEXTBOOKINFO)"
+        tfStatusText.stringValue = "\(tableView.numberOfRows) Words in \(vmSettings.LANGINFO)"
     }
 }
 

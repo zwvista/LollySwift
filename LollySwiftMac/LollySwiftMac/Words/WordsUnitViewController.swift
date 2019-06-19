@@ -69,7 +69,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation {
     }
 
     func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
-        if vm.vmSettings.isSingleUnitPart && vm.arrWordsFiltered == nil {
+        if vmSettings.isSingleUnitPart && vm.arrWordsFiltered == nil {
             let item = NSPasteboardItem()
             item.setString(String(row), forType: tableRowDragType)
             return item
@@ -123,7 +123,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation {
     override func addNewWord() {
         guard !newWord.isEmpty else {return}
         let item = vm.newUnitWord()
-        item.WORD = vm.vmSettings.autoCorrectInput(text: newWord)
+        item.WORD = vmSettings.autoCorrectInput(text: newWord)
         self.tfNewWord.stringValue = ""
         self.newWord = ""
         WordsUnitViewModel.create(item: item).subscribe(onNext: {

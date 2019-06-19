@@ -12,7 +12,6 @@ import RxSwift
 
 class PhrasesLangViewController: PhrasesBaseViewController {
     
-    var wc: PhrasesLangWindowController { return view.window!.windowController as! PhrasesLangWindowController }
     var vm: PhrasesLangViewModel!
     override var vmSettings: SettingsViewModel! {
         return vm.vmSettings
@@ -94,14 +93,6 @@ class PhrasesLangViewController: PhrasesBaseViewController {
 }
 
 class PhrasesLangWindowController: PhrasesBaseWindowController {
-    @IBOutlet weak var scTextFilter: NSSegmentedControl!
-    @IBOutlet weak var tfFilter: NSTextField!
-    @objc var textFilter = ""
-
-    override func windowDidLoad() {
-        super.windowDidLoad()
-        window!.toolbar!.selectedItemIdentifier = NSToolbarItem.Identifier(rawValue: "No Filter")
-    }
     
     func controlTextDidEndEditing(_ obj: Notification) {
         let searchfield = obj.object as! NSControl
@@ -116,10 +107,6 @@ class PhrasesLangWindowController: PhrasesBaseWindowController {
             tfFilter.stringValue = textFilter
         }
         (contentViewController as! PhrasesLangViewController).filterPhrase(scTextFilter)
-    }
-    
-    func windowWillClose(_ notification: Notification) {
-        tfFilter.unbindAll()
     }
 }
 

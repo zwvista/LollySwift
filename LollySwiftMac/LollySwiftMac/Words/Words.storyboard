@@ -3368,10 +3368,6 @@ Gw
                                                     <menuItem title="Item 3" id="8TC-qk-I69"/>
                                                 </items>
                                             </menu>
-                                            <connections>
-                                                <binding destination="4Nk-1I-LLj" name="content" keyPath="arrangedObjects" id="dc4-XA-VPm"/>
-                                                <binding destination="4Nk-1I-LLj" name="contentValues" keyPath="arrangedObjects.label" previousBinding="dc4-XA-VPm" id="T0y-ZO-xfF"/>
-                                            </connections>
                                         </popUpButtonCell>
                                         <connections>
                                             <action selector="filterWord:" target="S5w-0q-IQt" id="hQa-NT-wtW"/>
@@ -3822,7 +3818,7 @@ Gw
                                                         <outlet property="menu" destination="UPB-Wi-4rN" id="fIC-7H-cu8"/>
                                                     </connections>
                                                 </clipView>
-                                                <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="0.50769230769230766" horizontal="YES" id="qzl-qd-PqN">
+                                                <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="qzl-qd-PqN">
                                                     <rect key="frame" x="1" y="534" width="430" height="16"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </scroller>

@@ -26,6 +26,21 @@ class PhrasesBaseViewController: NSViewController, LollyProtocol, NSTableViewDat
         super.viewDidLoad()
         settingsChanged()
     }
+    
+    // Take a reference to the window controller in order to prevent it from being released
+    // If the window controller were released, we would not be able to retrieve the text filter
+    var wc: PhrasesBaseWindowController!
+    override func viewDidAppear() {
+        super.viewDidAppear()
+        wc = view.window!.windowController as? PhrasesBaseWindowController
+        // For some unknown reason, the placeholder string of the filter text field
+        // cannot be set in the storyboard
+        // https://stackoverflow.com/questions/5519512/nstextfield-placeholder-text-doesnt-show-unless-editing
+        wc.tfFilter?.placeholderString = "Filter"
+    }
+    override func viewWillDisappear() {
+        wc = nil
+    }
 
     func tableViewSelectionDidChange(_ notification: Notification) {
         updateStatusText()
@@ -109,6 +124,12 @@ class PhrasesBaseViewController: NSViewController, LollyProtocol, NSTableViewDat
 }
 
 class PhrasesBaseWindowController: NSWindowController, NSTextFieldDelegate, NSWindowDelegate, LollyProtocol {
+    @IBOutlet weak var scTextFilter: NSSegmentedControl!
+    @IBOutlet weak var tfFilter: NSTextField!
+    @objc var textFilter = ""
+    @IBOutlet weak var pubTextbookFilter: NSPopUpButton!
+    @IBOutlet weak var acTextbooks: NSArrayController!
+    @objc var textbookFilter = 0
 
     @objc var vm: SettingsViewModel! {
         return (contentViewController as! WordsBaseViewController).vmSettings
@@ -119,6 +140,11 @@ class PhrasesBaseWindowController: NSWindowController, NSTextFieldDelegate, NSWi
     }
     
     func settingsChanged() {
+    }
+    
+    func windowWillClose(_ notification: Notification) {
+        tfFilter?.unbindAll()
+        pubTextbookFilter?.unbindAll()
     }
 
     deinit {

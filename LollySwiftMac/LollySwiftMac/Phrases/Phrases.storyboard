@@ -46,11 +46,49 @@
                                         </connections>
                                     </segmentedControl>
                                 </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="96A81DF2-B48B-48F8-96E7-9E355C588C66" label="Filter Type" paletteLabel="Filter Type" sizingBehavior="auto" id="4Dq-5F-r8A">
+                                    <nil key="toolTip"/>
+                                    <segmentedControl key="view" verticalHuggingPriority="750" id="Abr-kh-xne">
+                                        <rect key="frame" x="0.0" y="14" width="176" height="23"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="zGz-6T-6ez">
+                                            <font key="font" metaFont="system"/>
+                                            <segments>
+                                                <segment label="None" width="42" selected="YES"/>
+                                                <segment label="Phrase" width="52" tag="1"/>
+                                                <segment label="Translation" width="74"/>
+                                            </segments>
+                                        </segmentedCell>
+                                        <connections>
+                                            <action selector="filterPhrase:" target="qEo-JS-MYZ" id="Bbz-fB-CKa"/>
+                                        </connections>
+                                    </segmentedControl>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="E3F738D6-5FEA-4A60-ACD1-E66448D7C8B3" label="Filter Text" paletteLabel="Filter Text" tag="-1" id="bzy-ad-vwY">
+                                    <nil key="toolTip"/>
+                                    <size key="minSize" width="40" height="22"/>
+                                    <size key="maxSize" width="123" height="22"/>
+                                    <textField key="view" verticalHuggingPriority="750" tag="-1" id="egf-aC-2Ca">
+                                        <rect key="frame" x="0.0" y="14" width="119" height="22"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Filter" drawsBackground="YES" id="X5k-RF-RYU">
+                                            <font key="font" usesAppearanceFont="YES"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                        <connections>
+                                            <binding destination="P6D-Dv-O3U" name="value" keyPath="textFilter" id="5Ec-eD-0Uo"/>
+                                            <outlet property="delegate" destination="P6D-Dv-O3U" id="4by-Bq-o7Y"/>
+                                        </connections>
+                                    </textField>
+                                </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="aIp-9q-khf"/>
                                 <toolbarItem reference="1c8-U5-Ymh"/>
                                 <toolbarItem reference="ap0-qD-kxT"/>
+                                <toolbarItem reference="4Dq-5F-r8A"/>
+                                <toolbarItem reference="bzy-ad-vwY"/>
                             </defaultToolbarItems>
                         </toolbar>
                         <connections>
@@ -58,6 +96,8 @@
                         </connections>
                     </window>
                     <connections>
+                        <outlet property="scTextFilter" destination="Abr-kh-xne" id="gRZ-8y-mSh"/>
+                        <outlet property="tfFilter" destination="egf-aC-2Ca" id="oM6-nC-xJA"/>
                         <segue destination="F8i-pe-Ate" kind="relationship" relationship="window.shadowedContentViewController" id="oJj-lN-fK3"/>
                     </connections>
                 </windowController>
@@ -1769,6 +1809,31 @@ Gw
                                         </connections>
                                     </textField>
                                 </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="DA210DE9-544D-4441-B39B-43113D47C760" label="Textbook" paletteLabel="Textbook" sizingBehavior="auto" id="Mzc-JS-x3t">
+                                    <nil key="toolTip"/>
+                                    <popUpButton key="view" verticalHuggingPriority="750" id="Pok-YR-gpU">
+                                        <rect key="frame" x="0.0" y="14" width="100" height="24"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <popUpButtonCell key="cell" type="roundTextured" title="Item 1" bezelStyle="texturedRounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" selectedItem="V2U-46-LWX" id="KEy-Dp-glz">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="menu"/>
+                                            <menu key="menu" id="Cd2-Ns-0Vf">
+                                                <items>
+                                                    <menuItem title="Item 1" state="on" id="V2U-46-LWX"/>
+                                                    <menuItem title="Item 2" id="jIz-u5-3Ww"/>
+                                                    <menuItem title="Item 3" id="gZY-Vd-DmH"/>
+                                                </items>
+                                            </menu>
+                                        </popUpButtonCell>
+                                        <connections>
+                                            <action selector="filterPhrase:" target="2fr-uc-31Q" id="nPo-bE-Uxi"/>
+                                            <binding destination="SeE-SI-0yJ" name="content" keyPath="arrangedObjects" id="opL-D6-tiM"/>
+                                            <binding destination="SeE-SI-0yJ" name="contentObjects" keyPath="arrangedObjects.value" previousBinding="opL-D6-tiM" id="UWa-D6-49m"/>
+                                            <binding destination="SeE-SI-0yJ" name="contentValues" keyPath="arrangedObjects.label" previousBinding="UWa-D6-49m" id="SfV-bY-t86"/>
+                                            <binding destination="Ngy-o1-fVc" name="selectedObject" keyPath="textbookFilter" previousBinding="SfV-bY-t86" id="qij-mA-ajd"/>
+                                        </connections>
+                                    </popUpButton>
+                                </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="j5l-RK-ED6"/>
@@ -1776,6 +1841,7 @@ Gw
                                 <toolbarItem reference="804-ZN-kkM"/>
                                 <toolbarItem reference="Kkp-cO-oL0"/>
                                 <toolbarItem reference="vI1-gZ-xAA"/>
+                                <toolbarItem reference="Mzc-JS-x3t"/>
                             </defaultToolbarItems>
                         </toolbar>
                         <connections>
@@ -1783,11 +1849,14 @@ Gw
                         </connections>
                     </window>
                     <connections>
+                        <outlet property="acTextbooks" destination="SeE-SI-0yJ" id="szG-6N-K8L"/>
+                        <outlet property="pubTextbookFilter" destination="Pok-YR-gpU" id="RtO-p2-zEK"/>
                         <outlet property="scTextFilter" destination="xOt-9C-VuQ" id="hgH-OM-ViK"/>
                         <outlet property="tfFilter" destination="WJ1-Yl-gvw" id="oTw-i4-YbV"/>
                         <segue destination="dNa-67-Lx3" kind="relationship" relationship="window.shadowedContentViewController" id="Dgh-ov-anC"/>
                     </connections>
                 </windowController>
+                <arrayController id="SeE-SI-0yJ"/>
                 <customObject id="2fr-uc-31Q" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="554" y="381"/>

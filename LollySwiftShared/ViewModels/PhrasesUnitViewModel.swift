@@ -33,9 +33,17 @@ class PhrasesUnitViewModel: NSObject {
         }
     }
     
-    func filterPhrasesForSearchText(_ searchText: String, scope: String) {
-        arrPhrasesFiltered = arrPhrases.filter { item in
-            (scope == "Phrase" ? item.PHRASE : item.TRANSLATION!).lowercased().contains(searchText.lowercased())
+    func applyFilters(textFilter: String, scope: String, textbookFilter: Int) {
+        if textFilter.isEmpty && textbookFilter == 0 {
+            arrPhrasesFiltered = nil
+        } else {
+            arrPhrasesFiltered = arrPhrases
+            if !textFilter.isEmpty {
+                arrPhrasesFiltered = arrPhrasesFiltered!.filter { (scope == "Phrase" ? $0.PHRASE : $0.TRANSLATION ?? "").lowercased().contains(textFilter.lowercased()) }
+            }
+            if textbookFilter != 0 {
+                arrPhrasesFiltered = arrPhrasesFiltered!.filter { $0.TEXTBOOKID == textbookFilter }
+            }
         }
     }
     
