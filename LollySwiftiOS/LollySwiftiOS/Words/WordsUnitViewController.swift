@@ -23,7 +23,7 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.showBlurLoader()
-        vm = WordsUnitViewModel(settings: vmSettings, inTextbook: true, disposeBag: disposeBag) {
+        vm = WordsUnitViewModel(settings: vmSettings, inTextbook: true, disposeBag: disposeBag, needCopy: false) {
             self.setupSearchController(delegate: self)
             self.tableView.reloadData()
             self.view.removeBlurLoader()

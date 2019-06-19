@@ -62,7 +62,7 @@ class PhrasesLangViewController: PhrasesBaseViewController {
     }
 
     @IBAction func refreshTableView(_ sender: AnyObject) {
-        vm = PhrasesLangViewModel(settings: AppDelegate.theSettingsViewModel, disposeBag: disposeBag) {
+        vm = PhrasesLangViewModel(settings: AppDelegate.theSettingsViewModel, disposeBag: disposeBag, needCopy: true) {
             self.tableView.reloadData()
         }
     }

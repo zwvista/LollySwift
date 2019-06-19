@@ -34,7 +34,7 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
     var subscription: Disposable? = nil
 
     func settingsChanged() {
-        vm = WordsReviewViewModel(settings: AppDelegate.theSettingsViewModel)
+        vm = WordsReviewViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true)
         synth.setVoice(NSSpeechSynthesizer.VoiceName(rawValue: vmSettings.macVoiceName))
         newTest(self)
     }

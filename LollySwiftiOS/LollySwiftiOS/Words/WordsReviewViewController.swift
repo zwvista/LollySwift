@@ -46,7 +46,7 @@ class WordsReviewViewController: UIViewController, UITextFieldDelegate {
             self.newTest(self)
         }
         
-        vm = WordsReviewViewModel(settings: vmSettings)
+        vm = WordsReviewViewModel(settings: vmSettings, needCopy: false)
         newTest(self)
     }
     

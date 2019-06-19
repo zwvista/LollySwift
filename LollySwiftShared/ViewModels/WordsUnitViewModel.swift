@@ -19,8 +19,8 @@ class WordsUnitViewModel: NSObject {
     var arrWords = [MUnitWord]()
     var arrWordsFiltered: [MUnitWord]?
 
-    init(settings: SettingsViewModel, inTextbook: Bool, disposeBag: DisposeBag, complete: @escaping () -> ()) {
-        self.vmSettings = SettingsViewModel(settings)
+    init(settings: SettingsViewModel, inTextbook: Bool, disposeBag: DisposeBag, needCopy: Bool, complete: @escaping () -> ()) {
+        self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
         self.disposeBag = disposeBag
         vmNote = NoteViewModel(settings: settings, disposeBag: disposeBag)
         super.init()

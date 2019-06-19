@@ -59,7 +59,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
     }
 
     @IBAction func refreshTableView(_ sender: AnyObject) {
-        vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: false, disposeBag: disposeBag) {
+        vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: false, disposeBag: disposeBag, needCopy: true) {
             self.tableView.reloadData()
         }
     }

@@ -17,8 +17,8 @@ class SearchViewModel: NSObject {
         return arrWords[selectedWordIndex]
     }
 
-    public init(settings: SettingsViewModel, complete: @escaping () -> ()) {
-        self.vmSettings = SettingsViewModel(settings)
+    public init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> ()) {
+        self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
         super.init()
     }
 }

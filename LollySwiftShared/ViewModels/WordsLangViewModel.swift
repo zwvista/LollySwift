@@ -19,8 +19,8 @@ class WordsLangViewModel: NSObject {
     var arrWords = [MLangWord]()
     var arrWordsFiltered: [MLangWord]?
 
-    public init(settings: SettingsViewModel, disposeBag: DisposeBag, complete: @escaping () -> ()) {
-        self.vmSettings = SettingsViewModel(settings)
+    public init(settings: SettingsViewModel, disposeBag: DisposeBag, needCopy: Bool, complete: @escaping () -> ()) {
+        self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
         self.disposeBag = disposeBag
         vmNote = NoteViewModel(settings: settings, disposeBag: disposeBag)
         super.init()

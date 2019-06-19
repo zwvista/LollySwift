@@ -13,8 +13,8 @@ class PhrasesReviewViewModel {
 
     var vmSettings: SettingsViewModel
     
-    init(settings: SettingsViewModel) {
-        self.vmSettings = SettingsViewModel(settings)
+    init(settings: SettingsViewModel, needCopy: Bool) {
+        self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
     }
 
     var arrPhrases = [MUnitPhrase]()

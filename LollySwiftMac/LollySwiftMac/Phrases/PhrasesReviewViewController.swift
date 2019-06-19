@@ -32,7 +32,7 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
     var subscription: Disposable? = nil
 
     func settingsChanged() {
-        vm = PhrasesReviewViewModel(settings: AppDelegate.theSettingsViewModel)
+        vm = PhrasesReviewViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true)
         synth.setVoice(NSSpeechSynthesizer.VoiceName(rawValue: vmSettings.macVoiceName))
         newTest(self)
     }
