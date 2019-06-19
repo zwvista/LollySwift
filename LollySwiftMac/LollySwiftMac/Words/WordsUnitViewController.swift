@@ -33,7 +33,9 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation {
     }
 
     override func settingsChanged() {
-        refreshTableView(self)
+        vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: true, disposeBag: disposeBag, needCopy: true) {
+            self.refreshTableView(self)
+        }
         super.settingsChanged()
         let b = vmSettings.toType == 2
         btnPrevious.isEnabled = !b
@@ -148,10 +150,8 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation {
     }
     
     @IBAction func refreshTableView(_ sender: AnyObject) {
-        vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: true, disposeBag: disposeBag, needCopy: true) {
-            self.tableView.reloadData()
-            self.updateStatusText()
-        }
+        tableView.reloadData()
+        updateStatusText()
     }
 
     @IBAction func editWord(_ sender: AnyObject) {
@@ -234,7 +234,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation {
     }
 
     override func updateStatusText() {
-        tfStatusText.stringValue = "\(vmSettings.selectedLang.LANGNAME) \(vmSettings.USUNITFROMSTR) \(vmSettings.USPARTFROMSTR) \(vmSettings.USUNITTOSTR) \(vmSettings.USPARTTOSTR) \(tableView.numberOfRows) Words "
+        tfStatusText.stringValue = "\(vmSettings.selectedLang.LANGNAME) \(vmSettings.selectedTextbook.TEXTBOOKNAME) \(vmSettings.USUNITFROMSTR) \(vmSettings.USPARTFROMSTR) \(vmSettings.USUNITTOSTR) \(vmSettings.USPARTTOSTR) \(tableView.numberOfRows) Words "
     }
 }
 

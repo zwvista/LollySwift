@@ -33,7 +33,10 @@ class SettingsViewController: NSViewController, SettingsViewModelDelegate {
     @IBOutlet weak var scToType: NSSegmentedControl!
     @IBOutlet weak var btnPrevious: NSButton!
     @IBOutlet weak var btnNext: NSButton!
-    
+    @IBOutlet weak var btnApplyAll: NSButton!
+    @IBOutlet weak var btnApplyCurrent: NSButton!
+    @IBOutlet weak var btnApplyNone: NSButton!
+
     var vm: SettingsViewModel {
         return AppDelegate.theSettingsViewModel
     }
@@ -47,13 +50,15 @@ class SettingsViewController: NSViewController, SettingsViewModelDelegate {
     }
     
     @IBAction func close(_ sender: AnyObject) {
-        let application = NSApplication.shared
-        application.stopModal()
+        let app = NSApplication.shared
+        app.stopModal()
         // http://stackoverflow.com/questions/5711367/os-x-how-can-a-nsviewcontroller-find-its-window
         self.view.window?.close()
-        for w in NSApplication.shared.windows {
-            if let l = w.windowController as? LollyProtocol { l.settingsChanged() }
+        guard sender !== btnApplyNone else {return}
+        app.enumerateWindows(options: .orderedFrontToBack) { w, b in
             if let l = w.contentViewController as? LollyProtocol { l.settingsChanged() }
+            if let l = w.windowController as? LollyProtocol { l.settingsChanged() }
+            if sender === btnApplyCurrent { b.pointee = true }
         }
     }
     
@@ -95,6 +100,9 @@ class SettingsViewController: NSViewController, SettingsViewModelDelegate {
         pubPartTo.isEnabled = b && !vm.isSinglePart
         btnPrevious.isEnabled = !b
         btnNext.isEnabled = !b
+        let t = vm.toType == 0 ? "Unit" : "Part"
+        btnPrevious.title = "Previous " + t
+        btnNext.title = "Next " + t
         pubPartFrom.isEnabled = vm.toType != 0 && !vm.isSinglePart
         vm.updateToType().subscribe().disposed(by: disposeBag)
     }

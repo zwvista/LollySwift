@@ -15,6 +15,7 @@ class PhrasesBaseViewController: NSViewController, LollyProtocol, NSTableViewDat
         return nil
     }
     @IBOutlet weak var tableView: NSTableView!
+    @IBOutlet weak var tfStatusText: NSTextField!
 
     let disposeBag = DisposeBag()
     var selectedPhrase = ""
@@ -27,13 +28,12 @@ class PhrasesBaseViewController: NSViewController, LollyProtocol, NSTableViewDat
     }
 
     func tableViewSelectionDidChange(_ notification: Notification) {
-        selectedPhraseChanged()
+        updateStatusText()
+        let row = tableView.selectedRow
+        selectedPhrase = row == -1 ? "" : itemForRow(row: row)!.PHRASE
         if speakOrNot {
             speak(self)
         }
-    }
-    
-    func selectedPhraseChanged() {
     }
     
     func itemForRow(row: Int) -> (MPhraseProtocol & NSObject)? {
@@ -97,6 +97,10 @@ class PhrasesBaseViewController: NSViewController, LollyProtocol, NSTableViewDat
 
     func settingsChanged() {
         synth.setVoice(NSSpeechSynthesizer.VoiceName(rawValue: vmSettings.macVoiceName))
+    }
+    
+    func updateStatusText() {
+        tfStatusText.stringValue = "\(tableView.numberOfRows) Phrases"
     }
 
     deinit {

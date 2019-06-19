@@ -73,10 +73,6 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
         self.presentAsModalWindow(detailVC)
     }
     
-    override func selectedPhraseChanged() {
-        selectedPhrase = tableView.selectedRow == -1 ? "" : vm.arrPhrases[tableView.selectedRow].PHRASE
-    }
-    
     @IBAction func filterPhrase(_ sender: AnyObject) {
         let n = (sender as! NSSegmentedControl).selectedSegment
         if n == 0 {

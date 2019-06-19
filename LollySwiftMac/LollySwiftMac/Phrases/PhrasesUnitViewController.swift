@@ -30,7 +30,9 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
     }
     
     override func settingsChanged() {
-        refreshTableView(self)
+        vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: true, disposeBag: disposeBag, needCopy: true) {
+            self.refreshTableView(self)
+        }
         super.settingsChanged()
     }
 
@@ -135,9 +137,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
     }
     
     @IBAction func refreshTableView(_ sender: AnyObject) {
-        vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: true, disposeBag: disposeBag, needCopy: true) {
-            self.tableView.reloadData()
-        }
+        tableView.reloadData()
     }
 
     @IBAction func editPhrase(_ sender: AnyObject) {
@@ -148,9 +148,9 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
         detailVC.complete = { self.tableView.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count)) }
         self.presentAsModalWindow(detailVC)
     }
-    
-    override func selectedPhraseChanged() {
-        selectedPhrase = tableView.selectedRow == -1 ? "" : vm.arrPhrases[tableView.selectedRow].PHRASE
+
+    override func updateStatusText() {
+        tfStatusText.stringValue = "\(vmSettings.selectedLang.LANGNAME) \(vmSettings.selectedTextbook.TEXTBOOKNAME) \(vmSettings.USUNITFROMSTR) \(vmSettings.USPARTFROMSTR) \(vmSettings.USUNITTOSTR) \(vmSettings.USPARTTOSTR) \(tableView.numberOfRows) Words "
     }
 }
 

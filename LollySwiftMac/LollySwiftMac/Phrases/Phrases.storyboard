@@ -75,13 +75,13 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JGz-Z7-9aY">
-                                <rect key="frame" x="0.0" y="0.0" width="1200" height="600"/>
+                                <rect key="frame" x="0.0" y="17" width="1200" height="583"/>
                                 <clipView key="contentView" id="Zcq-Vh-TJP">
-                                    <rect key="frame" x="1" y="0.0" width="1198" height="599"/>
+                                    <rect key="frame" x="1" y="0.0" width="1198" height="582"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="ieV-Ib-SiL" viewBased="YES" id="8Zf-06-OzS">
-                                            <rect key="frame" x="0.0" y="0.0" width="1198" height="576"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="1198" height="559"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -370,21 +370,32 @@
                                     <rect key="frame" x="224" y="17" width="15" height="102"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <tableHeaderView key="headerView" id="ieV-Ib-SiL">
+                                <tableHeaderView key="headerView" wantsLayer="YES" id="ieV-Ib-SiL">
                                     <rect key="frame" x="0.0" y="0.0" width="1198" height="23"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableHeaderView>
                             </scrollView>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="263-Ni-i4x">
+                                <rect key="frame" x="-2" y="0.0" width="4" height="17"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" id="BgQ-Jn-wSR">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="JGz-Z7-9aY" secondAttribute="bottom" id="2t2-o6-fIP"/>
                             <constraint firstItem="JGz-Z7-9aY" firstAttribute="top" secondItem="SJ8-yp-Qms" secondAttribute="top" id="6b1-K9-NZA"/>
+                            <constraint firstAttribute="bottom" secondItem="263-Ni-i4x" secondAttribute="bottom" id="Rgp-6F-XN4"/>
                             <constraint firstItem="JGz-Z7-9aY" firstAttribute="leading" secondItem="SJ8-yp-Qms" secondAttribute="leading" id="aYB-cy-OO9"/>
+                            <constraint firstItem="263-Ni-i4x" firstAttribute="leading" secondItem="SJ8-yp-Qms" secondAttribute="leading" id="ms2-zN-HAd"/>
                             <constraint firstAttribute="trailing" secondItem="JGz-Z7-9aY" secondAttribute="trailing" id="xsM-AX-3gj"/>
+                            <constraint firstItem="JGz-Z7-9aY" firstAttribute="bottom" secondItem="263-Ni-i4x" secondAttribute="top" id="ySK-PK-ydW"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="tableView" destination="8Zf-06-OzS" id="Vn7-va-cpG"/>
+                        <outlet property="tfStatusText" destination="263-Ni-i4x" id="tGd-WW-nMS"/>
                     </connections>
                 </viewController>
                 <menu id="UPB-Wi-4rN">

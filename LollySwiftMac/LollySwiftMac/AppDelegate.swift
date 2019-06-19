@@ -12,15 +12,12 @@ import RxSwift
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
-    fileprivate let _theSettingsViewModel = SettingsViewModel()
-    static var theSettingsViewModel: SettingsViewModel {
-        return (NSApplication.shared.delegate as! AppDelegate)._theSettingsViewModel
-    }
+    static let theSettingsViewModel = SettingsViewModel()
     
     let disposeBag = DisposeBag()
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        _theSettingsViewModel.getData().subscribe(onNext: {
+        AppDelegate.theSettingsViewModel.getData().subscribe(onNext: {
             //self.search(self)
             //self.editBlog(self)
             self.wordsInUnit(self)
