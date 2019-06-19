@@ -35,6 +35,7 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
 
     func settingsChanged() {
         vm = WordsReviewViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true)
+        wc?.pubReviewMode.selectItem(at: vm.mode.rawValue)
         synth.setVoice(NSSpeechSynthesizer.VoiceName(rawValue: vmSettings.macVoiceName))
         newTest(self)
     }
@@ -44,7 +45,16 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
         settingsChanged()
     }
     
+    // Take a reference to the window controller in order to prevent it from being released
+    // Otherwise, we would not be able to access its controls afterwards
+    var wc: WordsReviewWindowController!
+    override func viewDidAppear() {
+        super.viewDidAppear()
+        wc = view.window!.windowController as? WordsReviewWindowController
+        wc?.pubReviewMode.selectItem(at: vm.mode.rawValue)
+    }
     override func viewWillDisappear() {
+        wc = nil
         subscription?.dispose()
     }
     
@@ -145,4 +155,9 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
     deinit {
         print("DEBUG: \(self.className) deinit")
     }
+}
+
+class WordsReviewWindowController: NSWindowController {
+    
+    @IBOutlet weak var pubReviewMode: NSPopUpButton!
 }

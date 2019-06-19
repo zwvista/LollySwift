@@ -21,6 +21,12 @@ enum ReviewMode: Int {
     case reviewManual
 }
 
+enum UnitPartToType: Int {
+    case unit
+    case part
+    case to
+}
+
 class CommonApi {
     
     static public let userid = 1

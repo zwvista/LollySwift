@@ -2552,7 +2552,7 @@ Gw
         <!--Window Controller-->
         <scene sceneID="2Bu-kn-J8J">
             <objects>
-                <windowController storyboardIdentifier="PhrasesReviewWindowController" id="Odf-C9-YYr" sceneMemberID="viewController">
+                <windowController storyboardIdentifier="PhrasesReviewWindowController" id="Odf-C9-YYr" customClass="PhrasesReviewWindowController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
                     <window key="window" title="Phrases Review" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="nRo-92-YZw">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
@@ -2633,6 +2633,7 @@ Gw
                         </connections>
                     </window>
                     <connections>
+                        <outlet property="pubReviewMode" destination="Pb6-3I-oQO" id="mSV-Om-S7i"/>
                         <segue destination="I1g-x1-rZK" kind="relationship" relationship="window.shadowedContentViewController" id="lNL-HZ-8Hu"/>
                     </connections>
                 </windowController>

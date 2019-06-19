@@ -28,7 +28,7 @@ class PhrasesBaseViewController: NSViewController, LollyProtocol, NSTableViewDat
     }
     
     // Take a reference to the window controller in order to prevent it from being released
-    // If the window controller were released, we would not be able to retrieve the text filter
+    // Otherwise, we would not be able to access its controls afterwards
     var wc: PhrasesBaseWindowController!
     override func viewDidAppear() {
         super.viewDidAppear()

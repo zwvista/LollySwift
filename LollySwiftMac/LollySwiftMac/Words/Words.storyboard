@@ -4405,7 +4405,7 @@ Gw
         <!--Window Controller-->
         <scene sceneID="cXD-iz-n8D">
             <objects>
-                <windowController storyboardIdentifier="WordsReviewWindowController" id="qnx-NH-WRl" sceneMemberID="viewController">
+                <windowController storyboardIdentifier="WordsReviewWindowController" id="qnx-NH-WRl" customClass="WordsReviewWindowController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
                     <window key="window" title="Words Review" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="7Rs-jF-5Jr">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
@@ -4504,10 +4504,12 @@ Gw
                         </connections>
                     </window>
                     <connections>
+                        <outlet property="pubReviewMode" destination="Y17-gb-IEt" id="k3I-rk-YP1"/>
                         <segue destination="ypg-jQ-ROv" kind="relationship" relationship="window.shadowedContentViewController" id="vUt-rM-CFx"/>
                     </connections>
                 </windowController>
                 <customObject id="8fs-z5-j5z" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <userDefaultsController id="MBZ-uE-QVC"/>
             </objects>
             <point key="canvasLocation" x="-83" y="1713"/>
         </scene>
