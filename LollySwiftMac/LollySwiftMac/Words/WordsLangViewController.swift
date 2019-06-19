@@ -25,7 +25,9 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
     }
 
     override func settingsChanged() {
-        refreshTableView(self)
+        vm = WordsLangViewModel(settings: AppDelegate.theSettingsViewModel, disposeBag: disposeBag, needCopy: true) {
+            self.refreshTableView(self)
+        }
         super.settingsChanged()
     }
 
@@ -87,9 +89,8 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
     }
 
     @IBAction func refreshTableView(_ sender: AnyObject) {
-        vm = WordsLangViewModel(settings: AppDelegate.theSettingsViewModel, disposeBag: disposeBag, needCopy: true) {
-            self.tableView.reloadData()
-        }
+        tableView.reloadData()
+        updateStatusText()
     }
 
     @IBAction func editWord(_ sender: AnyObject) {
@@ -124,6 +125,10 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
             vm.applyFilters(textFilter: textFilter, scope: n == 1 ? "Word" : "Note", levelge0only: levelge0only)
         }
         self.tableView.reloadData()
+    }
+
+    override func updateStatusText() {
+        tfStatusText.stringValue = "\(tableView.numberOfRows) Words in \(vmSettings.LANGINFO)"
     }
 }
 

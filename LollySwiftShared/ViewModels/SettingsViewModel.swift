@@ -213,6 +213,15 @@ class SettingsViewModel: NSObject {
     var isSinglePart: Bool {
         return partCount == 1
     }
+    var LANGINFO: String {
+        return "\(selectedLang.LANGNAME)"
+    }
+    var TEXTBOOKINFO: String {
+        return "\(LANGINFO)/\(selectedTextbook.TEXTBOOKNAME)"
+    }
+    var UNITINFO: String {
+        return "\(TEXTBOOKINFO)/\(USUNITFROMSTR) \(USPARTFROMSTR) ~ \(USUNITTOSTR) \(USPARTTOSTR)"
+    }
     
     let arrToTypes = ["Unit", "Part", "To"]
     @objc

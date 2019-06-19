@@ -30,7 +30,9 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
     }
 
     override func settingsChanged() {
-        refreshTableView(self)
+        vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: false, disposeBag: disposeBag, needCopy: true) {
+            self.refreshTableView(self)
+        }
         super.settingsChanged()
     }
 
@@ -68,9 +70,8 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
     }
 
     @IBAction func refreshTableView(_ sender: AnyObject) {
-        vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: false, disposeBag: disposeBag, needCopy: true) {
-            self.tableView.reloadData()
-        }
+        tableView.reloadData()
+        updateStatusText()
     }
 
     @IBAction func editWord(_ sender: AnyObject) {
@@ -101,6 +102,10 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
         let n = scTextFilter.selectedSegment
         vm.applyFilters(textFilter: n == 0 ? "" : textFilter, scope: n == 1 ? "Word" : "Note", levelge0only: levelge0only, textbookFilter: textbookFilter)
         self.tableView.reloadData()
+    }
+
+    override func updateStatusText() {
+        tfStatusText.stringValue = "\(tableView.numberOfRows) Words in \(vmSettings.TEXTBOOKINFO)"
     }
 }
 

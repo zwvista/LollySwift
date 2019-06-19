@@ -138,6 +138,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
     
     @IBAction func refreshTableView(_ sender: AnyObject) {
         tableView.reloadData()
+        updateStatusText()
     }
 
     @IBAction func editPhrase(_ sender: AnyObject) {
@@ -150,7 +151,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
     }
 
     override func updateStatusText() {
-        tfStatusText.stringValue = "\(vmSettings.selectedLang.LANGNAME) \(vmSettings.selectedTextbook.TEXTBOOKNAME) \(vmSettings.USUNITFROMSTR) \(vmSettings.USPARTFROMSTR) \(vmSettings.USUNITTOSTR) \(vmSettings.USPARTTOSTR) \(tableView.numberOfRows) Words "
+        tfStatusText.stringValue = "\(tableView.numberOfRows) Phrases in \(vmSettings.UNITINFO)"
     }
 }
 

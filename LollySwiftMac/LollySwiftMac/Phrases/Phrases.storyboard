@@ -1347,13 +1347,13 @@ Gw
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l6c-aw-cLk">
-                                <rect key="frame" x="0.0" y="0.0" width="1200" height="600"/>
+                                <rect key="frame" x="0.0" y="17" width="1200" height="583"/>
                                 <clipView key="contentView" id="jEc-SO-xYY">
-                                    <rect key="frame" x="1" y="0.0" width="1198" height="599"/>
+                                    <rect key="frame" x="1" y="0.0" width="1198" height="582"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="R8q-7P-bab" viewBased="YES" id="M2g-9p-UVx">
-                                            <rect key="frame" x="0.0" y="0.0" width="1198" height="574"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="1198" height="557"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1494,21 +1494,32 @@ Gw
                                     <rect key="frame" x="224" y="17" width="15" height="102"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <tableHeaderView key="headerView" id="R8q-7P-bab">
+                                <tableHeaderView key="headerView" wantsLayer="YES" id="R8q-7P-bab">
                                     <rect key="frame" x="0.0" y="0.0" width="1198" height="25"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableHeaderView>
                             </scrollView>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="t0g-vG-268">
+                                <rect key="frame" x="-2" y="0.0" width="4" height="17"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" id="MGY-yo-TyS">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="t0g-vG-268" firstAttribute="top" secondItem="l6c-aw-cLk" secondAttribute="bottom" id="3Mh-og-fIs"/>
                             <constraint firstAttribute="trailing" secondItem="l6c-aw-cLk" secondAttribute="trailing" id="88y-wn-alZ"/>
+                            <constraint firstItem="t0g-vG-268" firstAttribute="leading" secondItem="ujF-ih-yWP" secondAttribute="leading" id="MNa-4L-GRA"/>
                             <constraint firstItem="l6c-aw-cLk" firstAttribute="leading" secondItem="ujF-ih-yWP" secondAttribute="leading" id="V34-kQ-cg4"/>
+                            <constraint firstAttribute="bottom" secondItem="t0g-vG-268" secondAttribute="bottom" id="VRS-2I-5la"/>
                             <constraint firstItem="l6c-aw-cLk" firstAttribute="top" secondItem="ujF-ih-yWP" secondAttribute="top" id="dv2-Gb-rks"/>
-                            <constraint firstAttribute="bottom" secondItem="l6c-aw-cLk" secondAttribute="bottom" id="lIF-zq-YWl"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="tableView" destination="M2g-9p-UVx" id="xcM-4o-MEv"/>
+                        <outlet property="tfStatusText" destination="t0g-vG-268" id="bEs-yw-I0G"/>
                     </connections>
                 </viewController>
                 <menu id="Rot-bf-Ibg">
@@ -1790,14 +1801,22 @@ Gw
                         <rect key="frame" x="0.0" y="0.0" width="1200" height="600"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7xV-kB-X1d">
+                                <rect key="frame" x="-2" y="0.0" width="4" height="17"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" id="lXw-fz-Z73">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f1F-FW-l8V">
-                                <rect key="frame" x="0.0" y="0.0" width="1200" height="600"/>
+                                <rect key="frame" x="0.0" y="17" width="1200" height="583"/>
                                 <clipView key="contentView" id="Jxc-fy-ceq">
-                                    <rect key="frame" x="1" y="0.0" width="1198" height="599"/>
+                                    <rect key="frame" x="1" y="0.0" width="1198" height="582"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="cFy-BM-JCq" viewBased="YES" id="vdZ-uq-lvp">
-                                            <rect key="frame" x="0.0" y="0.0" width="1198" height="574"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="1198" height="557"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -2130,14 +2149,17 @@ Gw
                             </scrollView>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="7xV-kB-X1d" firstAttribute="leading" secondItem="BSi-qb-EzZ" secondAttribute="leading" id="EyW-Hp-Gk4"/>
                             <constraint firstItem="f1F-FW-l8V" firstAttribute="leading" secondItem="BSi-qb-EzZ" secondAttribute="leading" id="FWw-1z-2TL"/>
                             <constraint firstAttribute="trailing" secondItem="f1F-FW-l8V" secondAttribute="trailing" id="V6x-IW-ugx"/>
-                            <constraint firstItem="f1F-FW-l8V" firstAttribute="top" secondItem="BSi-qb-EzZ" secondAttribute="top" id="b7g-cg-1fh"/>
-                            <constraint firstAttribute="bottom" secondItem="f1F-FW-l8V" secondAttribute="bottom" id="n7z-Gc-bd9"/>
+                            <constraint firstAttribute="bottom" secondItem="7xV-kB-X1d" secondAttribute="bottom" id="Yb5-at-g2k"/>
+                            <constraint firstItem="f1F-FW-l8V" firstAttribute="bottom" secondItem="7xV-kB-X1d" secondAttribute="top" id="b7g-cg-1fh"/>
+                            <constraint firstItem="7xV-kB-X1d" firstAttribute="top" secondItem="f1F-FW-l8V" secondAttribute="top" constant="583" id="wd8-Wr-jtc"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="tableView" destination="vdZ-uq-lvp" id="tc8-TG-G5d"/>
+                        <outlet property="tfStatusText" destination="7xV-kB-X1d" id="0Nc-d3-ctb"/>
                     </connections>
                 </viewController>
                 <menu id="w8F-Rg-pAb">

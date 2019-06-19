@@ -26,7 +26,9 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
     }
 
     override func settingsChanged() {
-        refreshTableView(self)
+        vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: false, disposeBag: disposeBag, needCopy: true) {
+            self.refreshTableView(self)
+        }
         super.settingsChanged()
     }
 
@@ -59,9 +61,8 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
     }
 
     @IBAction func refreshTableView(_ sender: AnyObject) {
-        vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: false, disposeBag: disposeBag, needCopy: true) {
-            self.tableView.reloadData()
-        }
+        tableView.reloadData()
+        updateStatusText()
     }
 
     @IBAction func editPhrase(_ sender: AnyObject) {
@@ -82,6 +83,10 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
             vm.filterPhrasesForSearchText(wc.textFilter, scope: scope)
         }
         self.tableView.reloadData()
+    }
+
+    override func updateStatusText() {
+        tfStatusText.stringValue = "\(tableView.numberOfRows) Phrases in \(vmSettings.TEXTBOOKINFO)"
     }
 }
 
