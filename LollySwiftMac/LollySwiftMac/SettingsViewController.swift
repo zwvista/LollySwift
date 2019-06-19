@@ -101,10 +101,11 @@ class SettingsViewController: NSViewController, SettingsViewModelDelegate {
         pubPartTo.isEnabled = b && !vm.isSinglePart
         btnPrevious.isEnabled = !b
         btnNext.isEnabled = !b
-        let t = vm.toType == .unit ? "Unit" : "Part"
+        let b2 = vm.toType != .unit
+        let t = !b2 ? "Unit" : "Part"
         btnPrevious.title = "Previous " + t
         btnNext.title = "Next " + t
-        pubPartFrom.isEnabled = vm.toType != .unit && !vm.isSinglePart
+        pubPartFrom.isEnabled = b2 && !vm.isSinglePart
         vm.updateToType().subscribe().disposed(by: disposeBag)
     }
 

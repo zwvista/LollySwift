@@ -116,14 +116,14 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
             self.btnToType.setTitle(item, for: .normal)
             let b = self.vm.toType == .to
             self.lblUnitTo.isEnabled = b
+            self.lblUnitToTitle.isEnabled = self.lblUnitTo.isEnabled
             self.lblPartTo.isEnabled = b && !self.vm.isSinglePart
-            self.lblUnitToTitle.isEnabled = b
-            self.lblPartToTitle.isEnabled = b && !self.vm.isSinglePart
+            self.lblPartToTitle.isEnabled = self.lblPartTo.isEnabled
             self.btnPrevious.isEnabled = !b
             self.btnNext.isEnabled = !b
             let b2 = self.vm.toType != .unit
             self.lblPartFrom.isEnabled = b2 && !self.vm.isSinglePart
-            self.lblPartFromTitle.isEnabled = b2 && !self.vm.isSinglePart
+            self.lblPartFromTitle.isEnabled = self.lblPartFrom.isEnabled
             self.vm.updateToType().subscribe().disposed(by: self.disposeBag)
         }
 
