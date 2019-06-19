@@ -112,16 +112,16 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
         ddToType.dataSource = vm.arrToTypes
         ddToType.anchorView = btnToType
         ddToType.selectionAction = { [unowned self] (index: Int, item: String) in
-            self.vm.toType = index
+            self.vm.toType = UnitPartToType(rawValue: index)!
             self.btnToType.setTitle(item, for: .normal)
-            let b = index == 2
+            let b = self.vm.toType == .part
             self.lblUnitTo.isEnabled = b
             self.lblPartTo.isEnabled = b && !self.vm.isSinglePart
             self.lblUnitToTitle.isEnabled = b
             self.lblPartToTitle.isEnabled = b && !self.vm.isSinglePart
             self.btnPrevious.isEnabled = !b
             self.btnNext.isEnabled = !b
-            let b2 = index != 0
+            let b2 = self.vm.toType != .unit
             self.lblPartFrom.isEnabled = b2 && !self.vm.isSinglePart
             self.lblPartFromTitle.isEnabled = b2 && !self.vm.isSinglePart
             self.vm.updateToType().subscribe().disposed(by: self.disposeBag)
@@ -158,11 +158,11 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
             switch indexPath.row {
             case 0:
                 ddUnitFrom.show()
-            case 1 where vm.toType != 0:
+            case 1 where vm.toType != .unit:
                 ddPartFrom.show()
-            case 3 where vm.toType == 2:
+            case 3 where vm.toType == .to:
                 ddUnitTo.show()
-            case 4 where vm.toType == 2:
+            case 4 where vm.toType == .to:
                 ddPartTo.show()
             default:
                 break
@@ -243,8 +243,8 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
         textbookCell.textLabel!.text = item.TEXTBOOKNAME
         textbookCell.detailTextLabel!.text = "\(vm.unitCount) Units"
         ddTextbook.selectIndex(vm.selectedTextbookIndex)
-        ddToType.selectIndex(vm.toType)
-        ddToType.selectionAction!(vm.toType, ddToType.selectedItem!)
+        ddToType.selectIndex(vm.toType.rawValue)
+        ddToType.selectionAction!(vm.toType.rawValue, ddToType.selectedItem!)
         ddUnitFrom.dataSource = vm.arrUnits.map { $0.label }
         onUpdateUnitFrom()
         ddPartFrom.dataSource = vm.arrParts.map { $0.label }

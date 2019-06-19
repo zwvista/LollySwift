@@ -37,7 +37,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation {
             self.refreshTableView(self)
         }
         super.settingsChanged()
-        let b = vmSettings.toType == 2
+        let b = vmSettings.toType == .to
         btnPrevious.isEnabled = !b
         btnNext.isEnabled = !b
     }

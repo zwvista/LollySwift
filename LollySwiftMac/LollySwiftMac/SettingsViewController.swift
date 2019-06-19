@@ -95,15 +95,16 @@ class SettingsViewController: NSViewController, SettingsViewModelDelegate {
     }
     
     @IBAction func scToTypeClicked(_ sender: AnyObject) {
-        let b = vm.toType == 2
+        vm.toType = UnitPartToType(rawValue: scToType.selectedSegment)!
+        let b = vm.toType == .part
         pubUnitTo.isEnabled = b
         pubPartTo.isEnabled = b && !vm.isSinglePart
         btnPrevious.isEnabled = !b
         btnNext.isEnabled = !b
-        let t = vm.toType == 0 ? "Unit" : "Part"
+        let t = vm.toType == .unit ? "Unit" : "Part"
         btnPrevious.title = "Previous " + t
         btnNext.title = "Next " + t
-        pubPartFrom.isEnabled = vm.toType != 0 && !vm.isSinglePart
+        pubPartFrom.isEnabled = vm.toType != .unit && !vm.isSinglePart
         vm.updateToType().subscribe().disposed(by: disposeBag)
     }
 
@@ -139,7 +140,7 @@ class SettingsViewController: NSViewController, SettingsViewModelDelegate {
     func onUpdateTextbook() {
         acUnits.content = vm.arrUnits
         acParts.content = vm.arrParts
-        scToType.selectedSegment = vm.toType
+        scToType.selectedSegment = vm.toType.rawValue
         scToType.performClick(self)
     }
     

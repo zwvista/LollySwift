@@ -160,4 +160,8 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
 class WordsReviewWindowController: NSWindowController {
     
     @IBOutlet weak var pubReviewMode: NSPopUpButton!
+
+    deinit {
+        print("DEBUG: \(self.className) deinit")
+    }
 }

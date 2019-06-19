@@ -87,7 +87,7 @@ class PhrasesLangViewController: PhrasesBaseViewController, UISearchBarDelegate,
     }
     
     private func applyFilters() {
-        vm.filterPhrasesForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex])
+        vm.applyFilters(textFilter: searchBar.text!, scope: searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex])
         tableView.reloadData()
     }
     
