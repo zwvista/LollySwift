@@ -32,6 +32,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
         self.tableView.registerForDraggedTypes([tableRowDragType])
     }
     
+    // https://stackoverflow.com/questions/8017822/how-to-enable-disable-nstoolbaritem
     func validateToolbarItem(_ item: NSToolbarItem) -> Bool {
         let s = item.paletteLabel
         let enabled = !((s == "Previous" || s == "Next") && vmSettings.toType == .to)

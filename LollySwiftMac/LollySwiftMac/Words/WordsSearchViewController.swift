@@ -12,7 +12,10 @@ import RxSwift
 
 class WordsSearchViewController: WordsBaseViewController {
     
-    var arrWords = [MUnitWord]()
+    var vm: WordsSearchViewModel!
+    override var vmSettings: SettingsViewModel! {
+        return vm.vmSettings
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,29 +26,36 @@ class WordsSearchViewController: WordsBaseViewController {
         // Update the view, if already loaded.
         }
     }
-    
+
+    override func settingsChanged() {
+        vm = WordsSearchViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) {
+            self.refreshTableView(self)
+        }
+        super.settingsChanged()
+    }
+
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return arrWords.count
+        return vm.arrWords.count
     }
     
     override func itemForRow(row: Int) -> (MWordProtocol & NSObject)? {
-        return arrWords[row]
+        return vm.arrWords[row]
     }
 
     override func addNewWord() {
         guard !newWord.isEmpty else {return}
         let item = MUnitWord()
         item.WORD = newWord
-        item.SEQNUM = arrWords.count + 1
+        item.SEQNUM = vm.arrWords.count + 1
         item.NOTE = ""
-        arrWords.append(item)
+        vm.arrWords.append(item)
         tableView.reloadData()
         tfNewWord.stringValue = ""
         newWord = ""
     }
     
     @IBAction func refreshTableView(_ sender: AnyObject) {
-        arrWords.removeAll()
+        vm.arrWords.removeAll()
         tableView.reloadData()
     }
 

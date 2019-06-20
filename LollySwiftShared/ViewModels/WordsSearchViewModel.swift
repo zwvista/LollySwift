@@ -1,5 +1,5 @@
 //
-//  SearchViewModel.swift
+//  WordsSearchViewModel.swift
 //  LollySwiftiOS
 //
 //  Created by 趙偉 on 2018/04/14.
@@ -9,13 +9,9 @@
 import Foundation
 import RxSwift
 
-class SearchViewModel: NSObject {
+class WordsSearchViewModel: NSObject {
     var vmSettings: SettingsViewModel
-    var arrWords = [String]()
-    var selectedWordIndex = 0
-    var selectedWord: String {
-        return arrWords[selectedWordIndex]
-    }
+    var arrWords = [MUnitWord]()
 
     public init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> ()) {
         self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)

@@ -18,7 +18,7 @@ class WordsDictViewController: UIViewController, WKNavigationDelegate {
     @IBOutlet weak var btnDict: UIButton!
     weak var wvDict: WKWebView!
     
-    let vm = SearchViewModel(settings: vmSettings, needCopy: false) {}
+    let vm = WordsDictViewModel(settings: vmSettings, needCopy: false) {}
     let ddWord = DropDown(), ddDictItem = DropDown()
     
     let disposeBag = DisposeBag()
