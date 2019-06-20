@@ -35,7 +35,7 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
 
     func settingsChanged() {
         vm = WordsReviewViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true)
-        wc?.pubReviewMode.selectItem(at: vm.mode.rawValue)
+        updateToolbar()
         synth.setVoice(NSSpeechSynthesizer.VoiceName(rawValue: vmSettings.macVoiceName))
         newTest(self)
     }
@@ -51,13 +51,16 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
     override func viewDidAppear() {
         super.viewDidAppear()
         wc = view.window!.windowController as? WordsReviewWindowController
-        wc?.pubReviewMode.selectItem(at: vm.mode.rawValue)
+        updateToolbar()
     }
     override func viewWillDisappear() {
         wc = nil
         subscription?.dispose()
     }
-    
+    func updateToolbar() {
+        wc?.pubReviewMode.selectItem(at: vm.mode.rawValue)
+    }
+
     private func doTest() {
         let b = vm.hasNext
         tfIndex.isHidden = !b

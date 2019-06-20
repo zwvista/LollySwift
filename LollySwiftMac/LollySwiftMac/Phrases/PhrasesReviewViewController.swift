@@ -33,7 +33,7 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
 
     func settingsChanged() {
         vm = PhrasesReviewViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true)
-        wc?.pubReviewMode.selectItem(at: vm.mode.rawValue)
+        updateToolbar()
         synth.setVoice(NSSpeechSynthesizer.VoiceName(rawValue: vmSettings.macVoiceName))
         newTest(self)
     }
@@ -49,11 +49,14 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
     override func viewDidAppear() {
         super.viewDidAppear()
         wc = view.window!.windowController as? PhrasesReviewWindowController
-        wc?.pubReviewMode.selectItem(at: vm.mode.rawValue)
+        updateToolbar()
     }
     override func viewWillDisappear() {
         wc = nil
         subscription?.dispose()
+    }
+    func updateToolbar() {
+        wc?.pubReviewMode.selectItem(at: vm.mode.rawValue)
     }
     
     private func doTest() {

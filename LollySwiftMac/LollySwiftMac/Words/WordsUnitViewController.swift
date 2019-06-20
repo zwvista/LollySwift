@@ -10,7 +10,7 @@ import Cocoa
 import WebKit
 import RxSwift
 
-class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation {
+class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NSToolbarItemValidation {
 
     var vm: WordsUnitViewModel!
     override var vmSettings: SettingsViewModel! {
@@ -31,15 +31,18 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation {
         super.viewDidLoad()
         self.tableView.registerForDraggedTypes([tableRowDragType])
     }
+    
+    func validateToolbarItem(_ item: NSToolbarItem) -> Bool {
+        let s = item.paletteLabel
+        let enabled = !((s == "Previous" || s == "Next") && vmSettings.toType == .to)
+        return enabled
+    }
 
     override func settingsChanged() {
         vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: true, disposeBag: disposeBag, needCopy: true) {
             self.refreshTableView(self)
         }
         super.settingsChanged()
-        let b = vmSettings.toType == .to
-        btnPrevious.isEnabled = !b
-        btnNext.isEnabled = !b
     }
 
     override var representedObject: Any? {
@@ -199,21 +202,6 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation {
         }
         return true
     }
-    
-    @IBAction func read(_ sender: AnyObject) {
-        var i = 0
-        let wordCount = arrWords.count
-        var subscription: Disposable?
-        subscription = Observable<Int>.interval(vmSettings.USREADINTERVAL.toDouble / 1000.0, scheduler: MainScheduler.instance).subscribe { _ in
-            if i >= wordCount {
-                subscription?.dispose()
-            } else {
-                self.synth.startSpeaking(self.arrWords[i].WORD)
-                i += 1
-            }
-        }
-        subscription?.disposed(by: disposeBag)
-    }
 
     @IBAction func filterWord(_ sender: AnyObject) {
         let n = scTextFilter.selectedSegment
@@ -239,4 +227,6 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation {
 }
 
 class WordsUnitWindowController: WordsBaseWindowController {
+    @IBOutlet weak var tbiPrevious: NSToolbarItem!
+    @IBOutlet weak var tbiNext: NSToolbarItem!
 }

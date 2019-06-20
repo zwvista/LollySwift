@@ -28,6 +28,16 @@
                                         <action selector="refreshTableView:" target="qEo-JS-MYZ" id="DKd-Bn-vNa"/>
                                     </connections>
                                 </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="291A5883-1D99-44A0-BF49-E2DF822D7C37" label="Previous" paletteLabel="Previous" tag="-1" image="NSGoBackTemplate" id="Sz3-dA-8wy">
+                                    <connections>
+                                        <action selector="previousUnitPart:" target="qEo-JS-MYZ" id="rXj-X9-5GJ"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="703491DD-BC7F-4D49-941C-2CD665646CBD" label="Next" paletteLabel="Next" tag="-1" image="NSGoForwardTemplate" id="NzO-tI-dsC">
+                                    <connections>
+                                        <action selector="nextUnitPart:" target="qEo-JS-MYZ" id="eVO-Qs-vWm"/>
+                                    </connections>
+                                </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="5840EA6A-9373-4835-BF09-47736B2C5BA9" label="Speak?" paletteLabel="Speak?" sizingBehavior="auto" id="w7y-7L-dbV" userLabel="Speak?">
                                     <nil key="toolTip"/>
                                     <segmentedControl key="view" verticalHuggingPriority="750" id="ff1-f4-NOD">
@@ -44,11 +54,6 @@
                                             <action selector="speakOrNotChanged:" target="qEo-JS-MYZ" id="JyI-lQ-gvz"/>
                                         </connections>
                                     </segmentedControl>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="203D2DF8-5A6F-4A40-A945-3303DF6A433A" label="Read" paletteLabel="Read" tag="-1" image="speak" id="qFb-ob-E6N">
-                                    <connections>
-                                        <action selector="read:" target="qEo-JS-MYZ" id="IFF-yI-BoH"/>
-                                    </connections>
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="EED7D168-A935-46A4-B535-11EE2FF5F016" label="Dict0" paletteLabel="Dict0" image="NSBookmarksTemplate" selectable="YES" id="DTO-su-5Zg">
                                     <size key="minSize" width="17" height="18"/>
@@ -214,8 +219,9 @@
                             <defaultToolbarItems>
                                 <toolbarItem reference="QRZ-Pa-ivc"/>
                                 <toolbarItem reference="89E-Xj-D8k"/>
+                                <toolbarItem reference="Sz3-dA-8wy"/>
+                                <toolbarItem reference="NzO-tI-dsC"/>
                                 <toolbarItem reference="w7y-7L-dbV"/>
-                                <toolbarItem reference="qFb-ob-E6N"/>
                                 <toolbarItem reference="DTO-su-5Zg"/>
                                 <toolbarItem reference="Bp9-GL-6UU"/>
                                 <toolbarItem reference="RKC-th-dbf"/>
@@ -303,6 +309,8 @@
                         <outlet property="tbiDict7" destination="DIy-ph-00H" id="mak-qr-j7z"/>
                         <outlet property="tbiDict8" destination="clI-Ap-ex5" id="yEW-2R-Yul"/>
                         <outlet property="tbiDict9" destination="ACx-e1-tG6" id="7Gj-wf-KsU"/>
+                        <outlet property="tbiNext" destination="NzO-tI-dsC" id="aej-FF-Xrx"/>
+                        <outlet property="tbiPrevious" destination="Sz3-dA-8wy" id="NYH-F9-0sh"/>
                         <outlet property="toolbar" destination="Otv-HR-BVR" id="aNa-cX-tvx"/>
                         <segue destination="F8i-pe-Ate" kind="relationship" relationship="window.shadowedContentViewController" id="oJj-lN-fK3"/>
                     </connections>
@@ -322,10 +330,10 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2hs-X4-l5R">
-                                <rect key="frame" x="0.0" y="568" width="878" height="32"/>
+                                <rect key="frame" x="0.0" y="568" width="735" height="32"/>
                                 <subviews>
                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="E8d-BH-EMc">
-                                        <rect key="frame" x="6" y="5" width="96" height="22"/>
+                                        <rect key="frame" x="6" y="4" width="96" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="96" id="9nE-RB-Ak4"/>
                                         </constraints>
@@ -347,7 +355,7 @@
                                         </connections>
                                     </textField>
                                     <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IWY-YU-8ee">
-                                        <rect key="frame" x="107" y="5" width="246" height="22"/>
+                                        <rect key="frame" x="107" y="4" width="246" height="22"/>
                                         <subviews>
                                             <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RtU-w4-rmU">
                                                 <rect key="frame" x="-2" y="-1" width="154" height="24"/>
@@ -402,41 +410,8 @@
                                             <binding destination="F8i-pe-Ate" name="value" keyPath="levelge0only" id="gRn-yE-dZN"/>
                                         </connections>
                                     </button>
-                                    <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fmH-1I-baz">
-                                        <rect key="frame" x="469" y="5" width="138" height="22"/>
-                                        <subviews>
-                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KGz-3d-agF">
-                                                <rect key="frame" x="-6" y="-6" width="93" height="32"/>
-                                                <buttonCell key="cell" type="push" title="Previous" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="iTx-Av-EVD">
-                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                    <font key="font" metaFont="system"/>
-                                                </buttonCell>
-                                                <connections>
-                                                    <action selector="previousUnitPart:" target="F8i-pe-Ate" id="Hmu-o7-eDb"/>
-                                                </connections>
-                                            </button>
-                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fOj-wT-Aqt">
-                                                <rect key="frame" x="75" y="-6" width="69" height="32"/>
-                                                <buttonCell key="cell" type="push" title="Next" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="68O-a3-eYs">
-                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                    <font key="font" metaFont="system"/>
-                                                </buttonCell>
-                                                <connections>
-                                                    <action selector="nextUnitPart:" target="F8i-pe-Ate" id="VEN-c7-QU0"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                        <visibilityPriorities>
-                                            <integer value="1000"/>
-                                            <integer value="1000"/>
-                                        </visibilityPriorities>
-                                        <customSpacing>
-                                            <real value="3.4028234663852886e+38"/>
-                                            <real value="3.4028234663852886e+38"/>
-                                        </customSpacing>
-                                    </stackView>
                                     <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xRk-MG-tIl">
-                                        <rect key="frame" x="612" y="4" width="266" height="22"/>
+                                        <rect key="frame" x="469" y="4" width="266" height="22"/>
                                         <subviews>
                                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vJr-9d-1wg">
                                                 <rect key="frame" x="0.0" y="0.0" width="200" height="22"/>
@@ -472,23 +447,18 @@
                                 </subviews>
                                 <edgeInsets key="edgeInsets" left="6" right="0.0" top="6" bottom="6"/>
                                 <constraints>
-                                    <constraint firstItem="IWY-YU-8ee" firstAttribute="top" secondItem="fmH-1I-baz" secondAttribute="top" id="6NT-7I-b89"/>
                                     <constraint firstAttribute="height" constant="32" id="C2z-9h-rqy"/>
                                     <constraint firstItem="E8d-BH-EMc" firstAttribute="bottom" secondItem="IWY-YU-8ee" secondAttribute="bottom" id="CXa-1J-Uvf"/>
                                     <constraint firstItem="azS-bq-eKL" firstAttribute="centerY" secondItem="2hs-X4-l5R" secondAttribute="centerY" id="cdg-jh-Gts"/>
                                     <constraint firstItem="E8d-BH-EMc" firstAttribute="top" secondItem="IWY-YU-8ee" secondAttribute="top" id="kvH-VL-td3"/>
-                                    <constraint firstItem="IWY-YU-8ee" firstAttribute="centerY" secondItem="fmH-1I-baz" secondAttribute="centerY" id="qpv-9v-om0"/>
-                                    <constraint firstItem="fmH-1I-baz" firstAttribute="centerY" secondItem="2hs-X4-l5R" secondAttribute="centerY" id="ugi-1M-sDs"/>
                                 </constraints>
                                 <visibilityPriorities>
                                     <integer value="1000"/>
                                     <integer value="1000"/>
                                     <integer value="1000"/>
                                     <integer value="1000"/>
-                                    <integer value="1000"/>
                                 </visibilityPriorities>
                                 <customSpacing>
-                                    <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
@@ -942,8 +912,6 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="btnNext" destination="fOj-wT-Aqt" id="Qv1-c9-e0h"/>
-                        <outlet property="btnPrevious" destination="KGz-3d-agF" id="npL-eO-cK2"/>
                         <outlet property="chkLevelGE0Only" destination="azS-bq-eKL" id="URS-Zi-evM"/>
                         <outlet property="scTextFilter" destination="RtU-w4-rmU" id="5fZ-jf-cIo"/>
                         <outlet property="tableView" destination="8Zf-06-OzS" id="Vn7-va-cpG"/>
@@ -5282,8 +5250,9 @@ Gw
         <image name="NSAddTemplate" width="11" height="11"/>
         <image name="NSAdvanced" width="32" height="32"/>
         <image name="NSBookmarksTemplate" width="17" height="18"/>
+        <image name="NSGoBackTemplate" width="9" height="12"/>
+        <image name="NSGoForwardTemplate" width="9" height="12"/>
         <image name="NSRefreshTemplate" width="11" height="15"/>
         <image name="NSRemoveTemplate" width="11" height="11"/>
-        <image name="speak" width="25" height="25"/>
     </resources>
 </document>

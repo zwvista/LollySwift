@@ -10,7 +10,7 @@ import Cocoa
 import WebKit
 import RxSwift
 
-class PhrasesUnitViewController: PhrasesBaseViewController {
+class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidation {
     
     var vm: PhrasesUnitViewModel!
     override var vmSettings: SettingsViewModel! {
@@ -29,6 +29,12 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
         tableView.registerForDraggedTypes([tableRowDragType])
     }
     
+    func validateToolbarItem(_ item: NSToolbarItem) -> Bool {
+        let s = item.paletteLabel
+        let enabled = !((s == "Previous" || s == "Next") && vmSettings.toType == .to)
+        return enabled
+    }
+
     override func settingsChanged() {
         vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: true, disposeBag: disposeBag, needCopy: true) {
             self.refreshTableView(self)
