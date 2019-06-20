@@ -34,10 +34,13 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     var dictStatus = DictWebViewStatus.ready
     let synth = NSSpeechSynthesizer()
     var speakOrNot = false
+    var responder: NSResponder? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
         settingsChanged()
+        wvDict.allowsMagnification = true
+        wvDict.allowsBackForwardNavigationGestures = true
     }
     
     // Take a reference to the window controller in order to prevent it from being released
@@ -108,6 +111,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     func tableViewSelectionDidChange(_ notification: Notification) {
         updateStatusText()
         searchDict(self)
+        responder = tableView
         if speakOrNot {
             speak(self)
         }
@@ -197,7 +201,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         // Regain focus if it's stolen by the webView
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.view.window!.makeFirstResponder(self.tableView)
+            self.view.window!.makeFirstResponder(self.responder)
         }
         tfURL.stringValue = webView.url!.absoluteString
         guard dictStatus != .ready else {return}

@@ -128,13 +128,14 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
         guard !newWord.isEmpty else {return}
         let item = vm.newUnitWord()
         item.WORD = vmSettings.autoCorrectInput(text: newWord)
-        self.tfNewWord.stringValue = ""
-        self.newWord = ""
+        tfNewWord.stringValue = ""
+        newWord = ""
         WordsUnitViewModel.create(item: item).subscribe(onNext: {
             item.ID = $0
             self.vm.arrWords.append(item)
             self.tableView.reloadData()
             self.tableView.selectRowIndexes(IndexSet(integer: self.arrWords.count - 1), byExtendingSelection: false)
+            self.responder = self.tfNewWord
         }).disposed(by: disposeBag)
     }
 
