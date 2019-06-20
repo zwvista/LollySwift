@@ -33,7 +33,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     var selectedWord = ""
     var dictStatus = DictWebViewStatus.ready
     let synth = NSSpeechSynthesizer()
-    var speakOrNot = false
+    var isSpeaking = true
     var responder: NSResponder? = nil
 
     override func viewDidLoad() {
@@ -49,6 +49,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     override func viewDidAppear() {
         super.viewDidAppear()
         wc = view.window!.windowController as? WordsBaseWindowController
+        wc.scSpeak.selectedSegment = isSpeaking ? 1 : 0
         // For some unknown reason, the placeholder string of the filter text field
         // cannot be set in the storyboard
         // https://stackoverflow.com/questions/5519512/nstextfield-placeholder-text-doesnt-show-unless-editing
@@ -112,7 +113,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
         updateStatusText()
         searchDict(self)
         responder = tableView
-        if speakOrNot {
+        if isSpeaking {
             speak(self)
         }
     }
@@ -271,8 +272,8 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     }
     
     @IBAction func speakOrNotChanged(_ sender: AnyObject) {
-        speakOrNot = (sender as! NSSegmentedControl).selectedSegment == 1
-        if speakOrNot {
+        isSpeaking = (sender as! NSSegmentedControl).selectedSegment == 1
+        if isSpeaking {
             speak(self)
         }
     }
@@ -298,6 +299,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
 class WordsBaseWindowController: NSWindowController, LollyProtocol, NSWindowDelegate, NSTextFieldDelegate {
     
     @IBOutlet weak var toolbar: NSToolbar!
+    @IBOutlet weak var scSpeak: NSSegmentedControl!
     // Outlet collections have been implemented for iOS, but not in Cocoa
     // https://stackoverflow.com/questions/24805180/swift-put-multiple-iboutlets-in-an-array
     // @IBOutlet var tbiDicts: [NSToolbarItem]!

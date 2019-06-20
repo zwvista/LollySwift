@@ -27,7 +27,7 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
     @objc var phraseInput = ""
     
     let synth = NSSpeechSynthesizer()
-    var speakOrNot = false
+    var isSpeaking = true
     var shuffled = true
     var subscription: Disposable? = nil
 
@@ -49,6 +49,7 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
     override func viewDidAppear() {
         super.viewDidAppear()
         wc = view.window!.windowController as? PhrasesReviewWindowController
+        wc.scSpeak.selectedSegment = isSpeaking ? 1 : 0
         updateToolbar()
     }
     override func viewWillDisappear() {
@@ -72,7 +73,7 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
         tfPhraseInput.becomeFirstResponder()
         if b {
             tfIndex.stringValue = "\(vm.index + 1)/\(vm.arrPhrases.count)"
-            if speakOrNot {
+            if isSpeaking {
                 synth.startSpeaking(vm.currentPhrase)
             }
             tfTranslation.stringValue = vm.currentItem!.TRANSLATION ?? ""
@@ -130,8 +131,8 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
     }
     
     @IBAction func speakOrNotChanged(_ sender: AnyObject) {
-        speakOrNot = (sender as! NSSegmentedControl).selectedSegment == 1
-        if speakOrNot {
+        isSpeaking = (sender as! NSSegmentedControl).selectedSegment == 1
+        if isSpeaking {
             synth.startSpeaking(vm.currentPhrase)
         }
     }
@@ -152,6 +153,7 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
 
 class PhrasesReviewWindowController: NSWindowController {
     
+    @IBOutlet weak var scSpeak: NSSegmentedControl!
     @IBOutlet weak var pubReviewMode: NSPopUpButton!
 
     deinit {

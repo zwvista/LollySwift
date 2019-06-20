@@ -20,7 +20,7 @@ class PhrasesBaseViewController: NSViewController, LollyProtocol, NSTableViewDat
     let disposeBag = DisposeBag()
     var selectedPhrase = ""
     let synth = NSSpeechSynthesizer()
-    var speakOrNot = false
+    var isSpeaking = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +33,7 @@ class PhrasesBaseViewController: NSViewController, LollyProtocol, NSTableViewDat
     override func viewDidAppear() {
         super.viewDidAppear()
         wc = view.window!.windowController as? PhrasesBaseWindowController
+        wc.scSpeak.selectedSegment = isSpeaking ? 1 : 0
         // For some unknown reason, the placeholder string of the filter text field
         // cannot be set in the storyboard
         // https://stackoverflow.com/questions/5519512/nstextfield-placeholder-text-doesnt-show-unless-editing
@@ -46,7 +47,7 @@ class PhrasesBaseViewController: NSViewController, LollyProtocol, NSTableViewDat
         updateStatusText()
         let row = tableView.selectedRow
         selectedPhrase = row == -1 ? "" : itemForRow(row: row)!.PHRASE
-        if speakOrNot {
+        if isSpeaking {
             speak(self)
         }
     }
@@ -104,8 +105,8 @@ class PhrasesBaseViewController: NSViewController, LollyProtocol, NSTableViewDat
     }
     
     @IBAction func speakOrNotChanged(_ sender: AnyObject) {
-        speakOrNot = (sender as! NSSegmentedControl).selectedSegment == 1
-        if speakOrNot {
+        isSpeaking = (sender as! NSSegmentedControl).selectedSegment == 1
+        if isSpeaking {
             speak(self)
         }
     }
@@ -124,6 +125,7 @@ class PhrasesBaseViewController: NSViewController, LollyProtocol, NSTableViewDat
 }
 
 class PhrasesBaseWindowController: NSWindowController, NSTextFieldDelegate, NSWindowDelegate, LollyProtocol {
+    @IBOutlet weak var scSpeak: NSSegmentedControl!
     @IBOutlet weak var scTextFilter: NSSegmentedControl!
     @IBOutlet weak var tfFilter: NSTextField!
     @objc var textFilter = ""

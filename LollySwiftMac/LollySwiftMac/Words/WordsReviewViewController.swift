@@ -28,7 +28,7 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
     @objc var wordInput = ""
     
     let synth = NSSpeechSynthesizer()
-    var speakOrNot = false
+    var isSpeaking = true
     var shuffled = true
     var levelge0only = true
     var subscription: Disposable? = nil
@@ -51,6 +51,7 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
     override func viewDidAppear() {
         super.viewDidAppear()
         wc = view.window!.windowController as? WordsReviewWindowController
+        wc.scSpeak.selectedSegment = isSpeaking ? 1 : 0
         updateToolbar()
     }
     override func viewWillDisappear() {
@@ -76,7 +77,7 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
         if b {
             tfIndex.stringValue = "\(vm.index + 1)/\(vm.arrWords.count)"
             tfAccuracy.stringValue = vm.currentItem!.ACCURACY
-            if speakOrNot {
+            if isSpeaking {
                 synth.startSpeaking(vm.currentWord)
             }
             vm.getTranslation().subscribe(onNext: {
@@ -136,8 +137,8 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
     }
     
     @IBAction func speakOrNotChanged(_ sender: AnyObject) {
-        speakOrNot = (sender as! NSSegmentedControl).selectedSegment == 1
-        if speakOrNot {
+        isSpeaking = (sender as! NSSegmentedControl).selectedSegment == 1
+        if isSpeaking {
             synth.startSpeaking(vm.currentWord)
         }
     }
@@ -162,6 +163,7 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
 
 class WordsReviewWindowController: NSWindowController {
     
+    @IBOutlet weak var scSpeak: NSSegmentedControl!
     @IBOutlet weak var pubReviewMode: NSPopUpButton!
 
     deinit {

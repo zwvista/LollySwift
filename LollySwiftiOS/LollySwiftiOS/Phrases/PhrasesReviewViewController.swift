@@ -26,7 +26,7 @@ class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var swSpeak: UISwitch!
     @IBOutlet weak var swShuffled: UISwitch!
 
-    var speakOrNot = false
+    var isSpeaking = false
     var shuffled = true
     var levelge0only = true
     var subscription: Disposable? = nil
@@ -70,7 +70,7 @@ class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
         }
         if b {
             lblIndex.text = "\(vm.index + 1)/\(vm.arrPhrases.count)"
-            if speakOrNot {
+            if isSpeaking {
                 let utterance = AVSpeechUtterance(string: vm.currentPhrase)
                 utterance.voice = AVSpeechSynthesisVoice(identifier: vmSettings.selectediOSVoice.VOICENAME)
                 AppDelegate.synth.speak(utterance)
@@ -120,8 +120,8 @@ class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func speakOrNotChanged(_ sender: AnyObject) {
-        speakOrNot = (sender as! UISwitch).isOn
-        if speakOrNot {
+        isSpeaking = (sender as! UISwitch).isOn
+        if isSpeaking {
             let utterance = AVSpeechUtterance(string: vm.currentPhrase)
             utterance.voice = AVSpeechSynthesisVoice(identifier: vmSettings.selectediOSVoice.VOICENAME)
             AppDelegate.synth.speak(utterance)

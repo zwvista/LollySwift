@@ -28,7 +28,7 @@ class WordsReviewViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var swShuffled: UISwitch!
     @IBOutlet weak var swLevelge0: UISwitch!
 
-    var speakOrNot = false
+    var isSpeaking = false
     var shuffled = true
     var levelge0only = true
     var subscription: Disposable? = nil
@@ -74,7 +74,7 @@ class WordsReviewViewController: UIViewController, UITextFieldDelegate {
         if b {
             lblIndex.text = "\(vm.index + 1)/\(vm.arrWords.count)"
             lblAccuracy.text = vm.currentItem!.ACCURACY
-            if speakOrNot {
+            if isSpeaking {
                 let utterance = AVSpeechUtterance(string: vm.currentWord)
                 utterance.voice = AVSpeechSynthesisVoice(identifier: vmSettings.selectediOSVoice.VOICENAME)
                 AppDelegate.synth.speak(utterance)
@@ -127,8 +127,8 @@ class WordsReviewViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func speakOrNotChanged(_ sender: AnyObject) {
-        speakOrNot = (sender as! UISwitch).isOn
-        if speakOrNot {
+        isSpeaking = (sender as! UISwitch).isOn
+        if isSpeaking {
             let utterance = AVSpeechUtterance(string: vm.currentWord)
             utterance.voice = AVSpeechSynthesisVoice(identifier: vmSettings.selectediOSVoice.VOICENAME)
             AppDelegate.synth.speak(utterance)
