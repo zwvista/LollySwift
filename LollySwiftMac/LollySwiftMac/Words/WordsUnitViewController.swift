@@ -134,6 +134,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
             item.ID = $0
             self.vm.arrWords.append(item)
             self.tableView.reloadData()
+            self.tableView.selectRowIndexes(IndexSet(integer: self.arrWords.count - 1), byExtendingSelection: false)
         }).disposed(by: disposeBag)
     }
 

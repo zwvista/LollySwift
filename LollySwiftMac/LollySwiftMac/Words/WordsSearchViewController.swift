@@ -52,6 +52,7 @@ class WordsSearchViewController: WordsBaseViewController {
         tableView.reloadData()
         tfNewWord.stringValue = ""
         newWord = ""
+        tableView.selectRowIndexes(IndexSet(integer: vm.arrWords.count - 1), byExtendingSelection: false)
     }
     
     @IBAction func refreshTableView(_ sender: AnyObject) {

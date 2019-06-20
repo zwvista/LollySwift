@@ -195,8 +195,10 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     }
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        self.view.window?.makeKeyAndOrderFront(self)
-        tableView.becomeFirstResponder()
+        // Regain focus if it's stolen by the webView
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.view.window!.makeFirstResponder(self.tableView)
+        }
         tfURL.stringValue = webView.url!.absoluteString
         guard dictStatus != .ready else {return}
         let item = vmSettings.arrDictItems[selectedDictItemIndex]
