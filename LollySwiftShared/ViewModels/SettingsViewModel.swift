@@ -410,9 +410,18 @@ class SettingsViewModel: NSObject {
             toType == .part ? doUpdateUnitPartTo() : Observable.empty()
     }
     
-    func toggleToType() -> Observable<()> {
-        toType = toType == .unit ? .part : toType == .part ? .unit : toType
-        return updateToType()
+    func toggleToType(v: Int) -> Observable<()> {
+        switch toType {
+        case .unit:
+            toType = .part
+            USPARTFROM = v
+            return doUpdatePartFrom(v: v).concat(doUpdateUnitPartTo())
+        case .part:
+            toType = .unit
+            return doUpdateSingleUnit()
+        default:
+            return Observable.empty()
+        }
     }
 
     func previousUnitPart() -> Observable<()> {
