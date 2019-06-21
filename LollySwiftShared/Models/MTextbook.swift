@@ -56,13 +56,12 @@ class MTextbook: NSObject, Codable {
                 return []
             }
         }
-        return o.map { arr in
+        return o.do(onNext: { arr in
             arr.forEach { row in
                 row.arrUnits = f(units: row.UNITS).enumerated().map { MSelectItem(value: $0.0 + 1, label: $0.1) }
                 row.arrParts = row.PARTS.split(",").enumerated().map { MSelectItem(value: $0.0 + 1, label: $0.1) }
             }
-            return arr
-        }
+        })
     }
 
     static func update(item: MTextbook) -> Observable<()> {
@@ -71,11 +70,9 @@ class MTextbook: NSObject, Codable {
         return RestApi.update(url: url, body: try! item.toJSONString(prettyPrint: false)!).map { print($0) }
     }
 
-    static func create(item: MTextbook) -> Observable<()> {
+    static func create(item: MTextbook) -> Observable<Int> {
         // SQL: INSERT INTO TEXTBOOKS (ID, LANGID, NAME, UNITS, PARTS) VALUES (?,?,?,?,?)
         let url = "\(CommonApi.url)TEXTBOOKS"
-        return RestApi.create(url: url, body: try! item.toJSONString(prettyPrint: false)!).map {
-            return $0.toInt()!
-        }
+        return RestApi.create(url: url, body: try! item.toJSONString(prettyPrint: false)!).map { $0.toInt()! }.do(onNext: { print($0) })
     }
 }

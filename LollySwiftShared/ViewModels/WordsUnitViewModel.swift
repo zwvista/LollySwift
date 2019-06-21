@@ -133,14 +133,12 @@ class WordsUnitViewModel: NSObject {
     }
     
     static func delete(item: MUnitWord) -> Observable<()> {
-        return MUnitWord.delete(item.ID).flatMap {
-            MUnitWord.getDataByLangWord(item.WORDID)
-        }.flatMap { arrUnit in
-            !arrUnit.isEmpty ? Observable.empty() :
-            MLangWord.delete(item.WORDID).flatMap {
-                MWordFami.delete(item.FAMIID)
+        return MUnitWord.delete(item.ID).concat(
+            MUnitWord.getDataByLangWord(item.WORDID).flatMap {
+                !$0.isEmpty ? Observable.empty() :
+                Observable.zip(MLangWord.delete(item.WORDID), MWordFami.delete(item.FAMIID)).map{_ in}
             }
-        }
+        )
     }
 
     func reindex(complete: @escaping (Int) -> ()) {

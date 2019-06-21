@@ -121,11 +121,11 @@ class PhrasesUnitViewModel: NSObject {
     }
     
     static func delete(item: MUnitPhrase) -> Observable<()> {
-        return MUnitPhrase.delete(item.ID).flatMap {
-            MUnitPhrase.getDataByLangPhrase(item.PHRASEID)
-        }.flatMap { arrUnit in
-            !arrUnit.isEmpty ? Observable.empty() : MLangPhrase.delete(item.PHRASEID)
-        }
+        return MUnitPhrase.delete(item.ID).concat(
+            MUnitPhrase.getDataByLangPhrase(item.PHRASEID).flatMap {
+                !$0.isEmpty ? Observable.empty() : MLangPhrase.delete(item.PHRASEID)
+            }
+        )
     }
 
     func reindex(complete: @escaping (Int) -> Void) {

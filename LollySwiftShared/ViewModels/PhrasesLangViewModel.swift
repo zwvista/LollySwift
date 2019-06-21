@@ -44,6 +44,7 @@ class PhrasesLangViewModel: NSObject {
     }
     
     static func delete(_ id: Int) -> Observable<()> {
+        // TODO check before deletion
         return MLangPhrase.delete(id)
     }
 

@@ -348,31 +348,31 @@ class SettingsViewModel: NSObject {
     }
     
     func updateLang() -> Observable<()> {
-        return MUserSetting.update(selectedUSUser0.ID, langid: USLANGID).map { self.delegate?.onUpdateLang() }
+        return MUserSetting.update(selectedUSUser0.ID, langid: USLANGID).do { self.delegate?.onUpdateLang() }
     }
     
     func updateDictItem() -> Observable<()> {
-        return MUserSetting.update(selectedUSLang2.ID, dictitem: USDICTITEM).map { self.delegate?.onUpdateDictItem() }
+        return MUserSetting.update(selectedUSLang2.ID, dictitem: USDICTITEM).do { self.delegate?.onUpdateDictItem() }
     }
     
     func updateDictNote() -> Observable<()> {
-        return MUserSetting.update(selectedUSLang2.ID, dictnoteid: USDICTNOTEID).map { self.delegate?.onUpdateDictNote() }
+        return MUserSetting.update(selectedUSLang2.ID, dictnoteid: USDICTNOTEID).do { self.delegate?.onUpdateDictNote() }
     }
     
     func updateDictTranslation() -> Observable<()> {
-        return MUserSetting.update(selectedUSLang3.ID, dicttranslationid: USDICTTRANSLATIONID).map { self.delegate?.onUpdateDictTranslation() }
+        return MUserSetting.update(selectedUSLang3.ID, dicttranslationid: USDICTTRANSLATIONID).do { self.delegate?.onUpdateDictTranslation() }
     }
 
     func updateTextbook() -> Observable<()> {
-        return MUserSetting.update(selectedUSLang2.ID, textbookid: USTEXTBOOKID).map { self.delegate?.onUpdateTextbook() }
+        return MUserSetting.update(selectedUSLang2.ID, textbookid: USTEXTBOOKID).do { self.delegate?.onUpdateTextbook() }
     }
     
     func updateMacVoice() -> Observable<()> {
-        return MUserSetting.update(selectedUSLang3.ID, macvoiceid: USMACVOICEID).map { self.delegate?.onUpdateMacVoice() }
+        return MUserSetting.update(selectedUSLang3.ID, macvoiceid: USMACVOICEID).do { self.delegate?.onUpdateMacVoice() }
     }
     
     func updateiOSVoice() -> Observable<()> {
-        return MUserSetting.update(selectedUSLang3.ID, iosvoiceid: USIOSVOICEID).map { self.delegate?.onUpdateiOSVoice() }
+        return MUserSetting.update(selectedUSLang3.ID, iosvoiceid: USIOSVOICEID).do { self.delegate?.onUpdateiOSVoice() }
     }
 
     func autoCorrectInput(text: String) -> String {
@@ -380,29 +380,29 @@ class SettingsViewModel: NSObject {
     }
     
     func updateUnitFrom() -> Observable<()> {
-        return doUpdateUnitFrom(v: USUNITFROM, check: false).flatMap {
-            return self.toType == .unit ? self.doUpdateSingleUnit() :
-                self.toType == .part || self.isInvalidUnitPart ? self.doUpdateUnitPartTo() :
+        return doUpdateUnitFrom(v: USUNITFROM, check: false).concat(
+            toType == .unit ? doUpdateSingleUnit() :
+                toType == .part || isInvalidUnitPart ? doUpdateUnitPartTo() :
                 Observable.empty()
-        }
+        )
     }
     
     func updatePartFrom() -> Observable<()> {
-        return doUpdatePartFrom(v: USPARTFROM, check: false).flatMap {
-            return self.toType == .part || self.isInvalidUnitPart ? self.doUpdateUnitPartTo() : Observable.empty()
-        }
+        return doUpdatePartFrom(v: USPARTFROM, check: false).concat(
+            toType == .part || isInvalidUnitPart ? doUpdateUnitPartTo() : Observable.empty()
+        )
     }
     
     func updateUnitTo() -> Observable<()> {
-        return doUpdateUnitTo(v: USUNITTO, check: false).flatMap {
-            return self.isInvalidUnitPart ? self.doUpdateUnitPartFrom() : Observable.empty()
-        }
+        return doUpdateUnitTo(v: USUNITTO, check: false).concat(
+            isInvalidUnitPart ? doUpdateUnitPartFrom() : Observable.empty()
+        )
     }
     
     func updatePartTo() -> Observable<()> {
-        return doUpdatePartTo(v: USPARTTO, check: false).flatMap {
-            return self.isInvalidUnitPart ? self.doUpdateUnitPartFrom() : Observable.empty()
-        }
+        return doUpdatePartTo(v: USPARTTO, check: false).concat(
+            isInvalidUnitPart ? doUpdateUnitPartFrom() : Observable.empty()
+        )
     }
     
     func updateToType() -> Observable<()> {
@@ -410,12 +410,12 @@ class SettingsViewModel: NSObject {
             toType == .part ? doUpdateUnitPartTo() : Observable.empty()
     }
     
-    func toggleToType(v: Int) -> Observable<()> {
+    func toggleToType(part: Int) -> Observable<()> {
         switch toType {
         case .unit:
             toType = .part
-            USPARTFROM = v
-            return doUpdatePartFrom(v: v).concat(doUpdateUnitPartTo())
+            USPARTFROM = part
+            return Observable.zip(doUpdatePartFrom(v: part), doUpdateUnitPartTo()).map{_ in }
         case .part:
             toType = .unit
             return doUpdateSingleUnit()
@@ -471,25 +471,25 @@ class SettingsViewModel: NSObject {
     private func doUpdateUnitFrom(v: Int, check: Bool = true) -> Observable<()> {
         guard !check || USUNITFROM != v else { return Observable.empty() }
         USUNITFROM = v
-        return MUserSetting.update(selectedUSTextbook.ID, usunitfrom: USUNITFROM).map { self.delegate?.onUpdateUnitFrom() }
+        return MUserSetting.update(selectedUSTextbook.ID, usunitfrom: USUNITFROM).do { self.delegate?.onUpdateUnitFrom() }
     }
     
     private func doUpdatePartFrom(v: Int, check: Bool = true) -> Observable<()> {
         guard !check || USPARTFROM != v else { return Observable.empty() }
         USPARTFROM = v
-        return MUserSetting.update(selectedUSTextbook.ID, uspartfrom: USPARTFROM).map { self.delegate?.onUpdatePartFrom()  }
+        return MUserSetting.update(selectedUSTextbook.ID, uspartfrom: USPARTFROM).do { self.delegate?.onUpdatePartFrom()  }
     }
     
     private func doUpdateUnitTo(v: Int, check: Bool = true) -> Observable<()> {
         guard !check || USUNITTO != v else { return Observable.empty() }
         USUNITTO = v
-        return MUserSetting.update(selectedUSTextbook.ID, usunitto: USUNITTO).map { self.delegate?.onUpdateUnitTo() }
+        return MUserSetting.update(selectedUSTextbook.ID, usunitto: USUNITTO).do { self.delegate?.onUpdateUnitTo() }
     }
     
     private func doUpdatePartTo(v: Int, check: Bool = true) -> Observable<()> {
         guard !check || USPARTTO != v else { return Observable.empty() }
         USPARTTO = v
-        return MUserSetting.update(selectedUSTextbook.ID, uspartto: USPARTTO).map { self.delegate?.onUpdatePartTo() }
+        return MUserSetting.update(selectedUSTextbook.ID, uspartto: USPARTTO).do { self.delegate?.onUpdatePartTo() }
     }
     
 }

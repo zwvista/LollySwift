@@ -66,10 +66,10 @@ class WordsUnitBatchViewController: UITableViewController, UITextFieldDelegate {
                 if swUnit.isOn { item.UNIT = unit }
                 if swPart.isOn { item.PART = part }
                 if swSeqNum.isOn { item.SEQNUM += seqnum }
-                o = o.flatMap { WordsUnitViewModel.update(item: item) }
+                o = o.concat(WordsUnitViewModel.update(item: item))
             }
             if swLevel.isOn && (!level0Only || item.LEVEL == 0) {
-                o = o.flatMap { _ in MWordFami.update(wordid: item.WORDID, level: level) }
+                o = o.concat(MWordFami.update(wordid: item.WORDID, level: level))
             }
         }
         o.subscribe().disposed(by: disposeBag)

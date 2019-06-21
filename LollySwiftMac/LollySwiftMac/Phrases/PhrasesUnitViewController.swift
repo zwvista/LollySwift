@@ -177,8 +177,8 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     
     @IBAction func toggleToType(_ sender: AnyObject) {
         let row = tableView.selectedRow
-        let v = row == -1 ? vmSettings.arrParts[0].value : arrPhrases[row].PART
-        vmSettings.toggleToType(v: v).concat(vm.reload()).subscribe {
+        let part = row == -1 ? vmSettings.arrParts[0].value : arrPhrases[row].PART
+        vmSettings.toggleToType(part: part).concat(vm.reload()).subscribe {
             self.refreshTableView(self)
         }.disposed(by: disposeBag)
     }

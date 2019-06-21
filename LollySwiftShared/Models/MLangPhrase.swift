@@ -78,9 +78,7 @@ class MLangPhrase: NSObject, Codable, MPhraseProtocol {
     static func create(item: MLangPhrase) -> Observable<Int> {
         // SQL: INSERT INTO LANGPHRASES (LANGID, PHRASE, TRANSLATION) VALUES (?,?,?)
         let url = "\(CommonApi.url)LANGPHRASES"
-        return RestApi.create(url: url, body: try! item.toJSONString(prettyPrint: false)!).map {
-            return $0.toInt()!
-        }
+        return RestApi.create(url: url, body: try! item.toJSONString(prettyPrint: false)!).map { $0.toInt()! }.do(onNext: { print($0) })
     }
     
     static func delete(_ id: Int) -> Observable<()> {

@@ -50,22 +50,20 @@ class MUnitPhrase: NSObject, Codable, MPhraseProtocol {
         // SQL: SELECT * FROM VUNITPHRASES WHERE TEXTBOOKID=? AND UNITPART BETWEEN ? AND ? ORDER BY UNITPART,SEQNUM
         let url = "\(CommonApi.url)VUNITPHRASES?filter=TEXTBOOKID,eq,\(textbook.ID)&filter=UNITPART,bt,\(unitPartFrom),\(unitPartTo)&order=UNITPART&order=SEQNUM"
         let o: Observable<[MUnitPhrase]> = RestApi.getRecords(url: url)
-        return o.map { arr in
+        return o.do(onNext: { arr in
             arr.forEach { $0.textbook = textbook }
-            return arr
-        }
+        })
     }
 
     static func getDataByLang(_ langid: Int, arrTextbooks: [MTextbook]) -> Observable<[MUnitPhrase]> {
         // SQL: SELECT * FROM VTEXTBOOKPHRASES WHERE LANGID=?
         let url = "\(CommonApi.url)VUNITPHRASES?filter=LANGID,eq,\(langid)&order=TEXTBOOKID&order=UNIT&order=PART&order=SEQNUM"
         let o: Observable<[MUnitPhrase]> = RestApi.getRecords(url: url)
-        return o.map { arr in
+        return o.do(onNext: { arr in
             arr.forEach { row in
                 row.textbook = arrTextbooks.first { $0.ID == row.TEXTBOOKID }!
             }
-            return arr
-        }
+        })
     }
 
     static func getDataByLangPhrase(_ phraseid: Int) -> Observable<[MUnitPhrase]> {
@@ -90,9 +88,7 @@ class MUnitPhrase: NSObject, Codable, MPhraseProtocol {
     static func create(item: MUnitPhrase) -> Observable<Int> {
         // SQL: INSERT INTO UNITPHRASES (TEXTBOOKID, UNIT, PART, SEQNUM, PHRASEID) VALUES (?,?,?,?,?)
         let url = "\(CommonApi.url)UNITPHRASES"
-        return RestApi.create(url: url, body: try! item.toJSONString(prettyPrint: false)!).map {
-            return $0.toInt()!
-        }
+        return RestApi.create(url: url, body: try! item.toJSONString(prettyPrint: false)!).map { $0.toInt()! }.do(onNext: { print($0) })
     }
     
     static func delete(_ id: Int) -> Observable<()> {

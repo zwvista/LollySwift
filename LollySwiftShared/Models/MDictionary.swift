@@ -58,9 +58,7 @@ class MDictionary: NSObject, Codable {
     static func create(item: MDictionary) -> Observable<Int> {
         // SQL: INSERT INTO DICTIONARIES (DICTID, LANGIDFROM, LANGIDTO, NAME, SEQNUM, DICTTYPEID, URL, CHCONV, AUTOMATION, AUTOJUMP, DICTTABLE, TEMPLATE, TEMPLATE2) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)
         let url = "\(CommonApi.url)DICTIONARIES"
-        return RestApi.create(url: url, body: try! item.toJSONString(prettyPrint: false)!).map {
-            return $0.toInt()!
-        }
+        return RestApi.create(url: url, body: try! item.toJSONString(prettyPrint: false)!).map { $0.toInt()! }.do(onNext: { print($0) })
     }
 }
 

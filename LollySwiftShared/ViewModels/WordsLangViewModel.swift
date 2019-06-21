@@ -54,6 +54,7 @@ class WordsLangViewModel: NSObject {
     }
     
     static func delete(item: MLangWord) -> Observable<()> {
+        // TODO check before deletion
         return MLangWord.delete(item.ID).flatMap {
             return MWordFami.delete(item.FAMIID)
         }

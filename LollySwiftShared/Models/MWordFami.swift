@@ -24,18 +24,16 @@ class MWordFami: NSObject, Codable {
         return RestApi.getRecords(url: url)
     }
 
-    private static func update(item: MWordFami) -> Observable<String> {
+    private static func update(item: MWordFami) -> Observable<()> {
         // SQL: UPDATE WORDSFAMI SET USERID=?, WORDID=?, LEVEL=? WHERE ID=?
         let url = "\(CommonApi.url)WORDSFAMI/\(item.ID)"
-        return RestApi.update(url: url, body: try! item.toJSONString(prettyPrint: false)!)
+        return RestApi.update(url: url, body: try! item.toJSONString(prettyPrint: false)!).map { print($0) }
     }
     
     private static func create(item: MWordFami) -> Observable<Int> {
         // SQL: INSERT INTO WORDSFAMI (USERID, WORDID, LEVEL) VALUES (?,?,?)
         let url = "\(CommonApi.url)WORDSFAMI"
-        return RestApi.create(url: url, body: try! item.toJSONString(prettyPrint: false)!).map {
-            return $0.toInt()!
-        }
+        return RestApi.create(url: url, body: try! item.toJSONString(prettyPrint: false)!).map { $0.toInt()! }.do(onNext: { print($0) })
     }
     
     static func delete(_ id: Int) -> Observable<()> {
@@ -63,7 +61,7 @@ class MWordFami: NSObject, Codable {
                 item.ID = arr[0].ID
                 item.CORRECT = arr[0].CORRECT
                 item.TOTAL = arr[0].TOTAL
-                return update(item: item).map { print($0) }
+                return update(item: item)
             }
         }
     }
@@ -83,7 +81,7 @@ class MWordFami: NSObject, Codable {
                 item.LEVEL = arr[0].LEVEL
                 item.CORRECT = arr[0].CORRECT + (isCorrect ? 1 : 0)
                 item.TOTAL = arr[0].TOTAL + 1
-                return update(item: item).map { print($0); return item }
+                return update(item: item).map { item }
             }
         }
     }
@@ -94,7 +92,7 @@ class MWordFami: NSObject, Codable {
             if arr.isEmpty {
                 return Observable.empty()
             } else if arr[0].LEVEL == 0 {
-                return delete(arr[0].ID).map { print($0) }
+                return delete(arr[0].ID)
             } else {
                 let item = MWordFami()
                 item.USERID = userid
@@ -103,7 +101,7 @@ class MWordFami: NSObject, Codable {
                 item.LEVEL = arr[0].LEVEL
                 item.CORRECT = 0
                 item.TOTAL = 0
-                return update(item: item).map { print($0) }
+                return update(item: item)
             }
         }
     }

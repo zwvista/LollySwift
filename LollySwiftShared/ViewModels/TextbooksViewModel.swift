@@ -28,7 +28,7 @@ class TextbooksViewModel: NSObject {
         return MTextbook.update(item: item)
     }
     
-    static func create(item: MTextbook) -> Observable<()> {
+    static func create(item: MTextbook) -> Observable<Int> {
         return MTextbook.create(item: item)
     }
 

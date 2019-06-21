@@ -89,11 +89,7 @@ class MLangWord: NSObject, Codable, MWordProtocol {
     static func create(item: MLangWord) -> Observable<Int> {
         // SQL: INSERT INTO LANGWORDS (LANGID, WORD) VALUES (?,?)
         let url = "\(CommonApi.url)LANGWORDS"
-        return RestApi.create(url: url, body: try! item.toJSONString(prettyPrint: false)!).map {
-            let id = $0.toInt()!
-            print(id)
-            return id
-        }
+        return RestApi.create(url: url, body: try! item.toJSONString(prettyPrint: false)!).map { $0.toInt()! }.do(onNext: { print($0) })
     }
     
     static func delete(_ id: Int) -> Observable<()> {

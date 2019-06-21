@@ -68,22 +68,20 @@ class MUnitWord: NSObject, Codable, MWordProtocol {
         // SQL: SELECT * FROM VUNITWORDS WHERE TEXTBOOKID=? AND UNITPART BETWEEN ? AND ? ORDER BY UNITPART,SEQNUM
         let url = "\(CommonApi.url)VUNITWORDS?filter=TEXTBOOKID,eq,\(textbook.ID)&filter=UNITPART,bt,\(unitPartFrom),\(unitPartTo)&order=UNITPART&order=SEQNUM"
         let o: Observable<[MUnitWord]> = RestApi.getRecords(url: url)
-        return o.map { arr in
+        return o.do(onNext: { arr in
             arr.forEach { $0.textbook = textbook }
-            return arr
-        }
+        })
     }
 
     static func getDataByLang(_ langid: Int, arrTextbooks: [MTextbook]) -> Observable<[MUnitWord]> {
         // SQL: SELECT * FROM VTEXTBOOKWORDS WHERE LANGID=?
         let url = "\(CommonApi.url)VUNITWORDS?filter=LANGID,eq,\(langid)&order=TEXTBOOKID&order=UNIT&order=PART&order=SEQNUM"
         let o: Observable<[MUnitWord]> = RestApi.getRecords(url: url)
-        return o.map { arr in
+        return o.do(onNext: { arr in
             arr.forEach { row in
                 row.textbook = arrTextbooks.first { $0.ID == row.TEXTBOOKID }!
             }
-            return arr
-        }
+        })
     }
 
     static func getDataByLangWord(_ wordid: Int) -> Observable<[MUnitWord]> {
@@ -108,9 +106,7 @@ class MUnitWord: NSObject, Codable, MWordProtocol {
     static func create(item: MUnitWord) -> Observable<Int> {
         // SQL: INSERT INTO UNITWORDS (TEXTBOOKID, UNIT, PART, SEQNUM, WORDID) VALUES (?,?,?,?,?)
         let url = "\(CommonApi.url)UNITWORDS"
-        return RestApi.create(url: url, body: try! item.toJSONString(prettyPrint: false)!).map {
-            return $0.toInt()!
-        }
+        return RestApi.create(url: url, body: try! item.toJSONString(prettyPrint: false)!).map { $0.toInt()! }.do(onNext: { print($0) })
     }
     
     static func delete(_ id: Int) -> Observable<()> {
