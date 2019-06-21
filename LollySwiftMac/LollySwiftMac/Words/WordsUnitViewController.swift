@@ -32,10 +32,18 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
         self.tableView.registerForDraggedTypes([tableRowDragType])
     }
     
+    // https://stackoverflow.com/questions/9368654/cannot-seem-to-setenabledno-on-nsmenuitem
+    func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+        if menuItem.action == #selector(self.getNote(_:)) || menuItem.action == #selector(self.getNotes(_:)) {
+            return vmSettings.hasDictNote
+        }
+        return true
+    }
+
     // https://stackoverflow.com/questions/8017822/how-to-enable-disable-nstoolbaritem
     func validateToolbarItem(_ item: NSToolbarItem) -> Bool {
         let s = item.paletteLabel
-        let enabled = !((s == "Previous" || s == "Next") && vmSettings.toType == .to)
+        let enabled = !((s == "Previous" || s == "Next") && vmSettings.toType == .to || s == "Notes" && !vmSettings.hasDictNote)
         return enabled
     }
 
@@ -188,7 +196,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     }
 
     @IBAction func getNotes(_ sender: AnyObject) {
-        let ifEmpty = (sender as! NSMenuItem).tag == 0
+        let ifEmpty = sender is NSToolbarItem || (sender as! NSMenuItem).tag == 0
         vm.getNotes(ifEmpty: ifEmpty, oneComplete: {
             self.tableView.reloadData(forRowIndexes: [$0], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count))
         }, allComplete: {
@@ -196,14 +204,6 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
                 // self.tableView.reloadData()
             }
         })
-    }
-    
-    // https://stackoverflow.com/questions/9368654/cannot-seem-to-setenabledno-on-nsmenuitem
-    func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
-        if menuItem.action == #selector(self.getNote(_:)) || menuItem.action == #selector(self.getNotes(_:)) {
-            return vmSettings.hasDictNote
-        }
-        return true
     }
 
     @IBAction func filterWord(_ sender: AnyObject) {

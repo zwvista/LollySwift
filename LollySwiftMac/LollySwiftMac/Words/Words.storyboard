@@ -23,7 +23,9 @@
                                         <action selector="refreshTableView:" target="qEo-JS-MYZ" id="DKd-Bn-vNa"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="948B4ECB-535E-48FD-9BE9-086953248697" label="U &lt;-&gt; P" paletteLabel="U &lt;-&gt; P" tag="-1" id="nYN-tF-Yfe">
+                                <toolbarItem implicitItemIdentifier="948B4ECB-535E-48FD-9BE9-086953248697" label="U &lt;-&gt; P" paletteLabel="U &lt;-&gt; P" tag="-1" image="NSBonjour" id="nYN-tF-Yfe">
+                                    <size key="minSize" width="32" height="32"/>
+                                    <size key="maxSize" width="32" height="32"/>
                                     <connections>
                                         <action selector="toggleToType:" target="qEo-JS-MYZ" id="sd1-vf-8dE"/>
                                     </connections>
@@ -54,6 +56,13 @@
                                             <action selector="speakOrNotChanged:" target="qEo-JS-MYZ" id="JyI-lQ-gvz"/>
                                         </connections>
                                     </segmentedControl>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="A9049F6E-5E6B-4D8A-B8C7-2083CB110EAB" label="Notes" paletteLabel="Notes" tag="-1" image="NSInfo" id="AO7-Bt-aI3">
+                                    <size key="minSize" width="32" height="32"/>
+                                    <size key="maxSize" width="32" height="32"/>
+                                    <connections>
+                                        <action selector="getNotes:" target="qEo-JS-MYZ" id="ygT-AV-BVL"/>
+                                    </connections>
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="EED7D168-A935-46A4-B535-11EE2FF5F016" label="Dict0" paletteLabel="Dict0" image="NSBookmarksTemplate" selectable="YES" id="DTO-su-5Zg">
                                     <size key="minSize" width="17" height="18"/>
@@ -222,6 +231,7 @@
                                 <toolbarItem reference="Sz3-dA-8wy"/>
                                 <toolbarItem reference="NzO-tI-dsC"/>
                                 <toolbarItem reference="w7y-7L-dbV"/>
+                                <toolbarItem reference="AO7-Bt-aI3"/>
                                 <toolbarItem reference="DTO-su-5Zg"/>
                                 <toolbarItem reference="Bp9-GL-6UU"/>
                                 <toolbarItem reference="RKC-th-dbf"/>
@@ -5277,9 +5287,11 @@ Gw
     <resources>
         <image name="NSAddTemplate" width="11" height="11"/>
         <image name="NSAdvanced" width="32" height="32"/>
+        <image name="NSBonjour" width="32" height="32"/>
         <image name="NSBookmarksTemplate" width="17" height="18"/>
         <image name="NSGoBackTemplate" width="9" height="12"/>
         <image name="NSGoForwardTemplate" width="9" height="12"/>
+        <image name="NSInfo" width="32" height="32"/>
         <image name="NSRefreshTemplate" width="11" height="15"/>
         <image name="NSRemoveTemplate" width="11" height="11"/>
     </resources>
