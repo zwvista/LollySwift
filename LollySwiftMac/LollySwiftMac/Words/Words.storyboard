@@ -18,14 +18,14 @@
                         <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
                         <toolbar key="toolbar" implicitIdentifier="99476795-252C-48E8-9851-21369EE8577D" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="Otv-HR-BVR">
                             <allowedToolbarItems>
-                                <toolbarItem implicitItemIdentifier="360CEF89-3610-451A-B939-34F9335730CF" label="Add" paletteLabel="Add" tag="-1" image="NSAddTemplate" autovalidates="NO" id="QRZ-Pa-ivc">
-                                    <connections>
-                                        <action selector="addWord:" target="qEo-JS-MYZ" id="EBv-2B-FDh"/>
-                                    </connections>
-                                </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="0FE47FD6-6CD6-4F13-92D4-43D61D94CAF8" label="Refresh" paletteLabel="Refresh" tag="-1" image="NSRefreshTemplate" id="89E-Xj-D8k">
                                     <connections>
                                         <action selector="refreshTableView:" target="qEo-JS-MYZ" id="DKd-Bn-vNa"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="948B4ECB-535E-48FD-9BE9-086953248697" label="U &lt;-&gt; P" paletteLabel="U &lt;-&gt; P" tag="-1" id="nYN-tF-Yfe">
+                                    <connections>
+                                        <action selector="toggleToType:" target="qEo-JS-MYZ" id="sd1-vf-8dE"/>
                                     </connections>
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="291A5883-1D99-44A0-BF49-E2DF822D7C37" label="Previous" paletteLabel="Previous" tag="-1" image="NSGoBackTemplate" id="Sz3-dA-8wy">
@@ -217,8 +217,8 @@
                                 </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
-                                <toolbarItem reference="QRZ-Pa-ivc"/>
                                 <toolbarItem reference="89E-Xj-D8k"/>
+                                <toolbarItem reference="nYN-tF-Yfe"/>
                                 <toolbarItem reference="Sz3-dA-8wy"/>
                                 <toolbarItem reference="NzO-tI-dsC"/>
                                 <toolbarItem reference="w7y-7L-dbV"/>

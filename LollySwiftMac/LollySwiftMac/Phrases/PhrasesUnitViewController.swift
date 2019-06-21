@@ -164,14 +164,20 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     }
 
     @IBAction func previousUnitPart(_ sender: AnyObject) {
-        vmSettings.previousUnitPart().subscribe {
-            self.settingsChanged()
+        vmSettings.previousUnitPart().concat(vm.reload()).subscribe {
+            self.refreshTableView(self)
         }.disposed(by: disposeBag)
     }
     
     @IBAction func nextUnitPart(_ sender: AnyObject) {
-        vmSettings.nextUnitPart().subscribe {
-            self.settingsChanged()
+        vmSettings.nextUnitPart().concat(vm.reload()).subscribe {
+            self.refreshTableView(self)
+        }.disposed(by: disposeBag)
+    }
+    
+    @IBAction func toggleToType(_ sender: AnyObject) {
+        vmSettings.toggleToType().concat(vm.reload()).subscribe {
+            self.refreshTableView(self)
         }.disposed(by: disposeBag)
     }
 

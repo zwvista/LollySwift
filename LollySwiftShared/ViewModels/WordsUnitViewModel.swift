@@ -15,25 +15,25 @@ class WordsUnitViewModel: NSObject {
     var mDictNote: MDictNote {
         return vmNote.mDictNote
     }
+    let inTextbook: Bool
     let disposeBag: DisposeBag!
     var arrWords = [MUnitWord]()
     var arrWordsFiltered: [MUnitWord]?
 
     init(settings: SettingsViewModel, inTextbook: Bool, disposeBag: DisposeBag, needCopy: Bool, complete: @escaping () -> ()) {
         self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
+        self.inTextbook = inTextbook
         self.disposeBag = disposeBag
         vmNote = NoteViewModel(settings: settings, disposeBag: disposeBag)
         super.init()
-        if inTextbook {
-            MUnitWord.getDataByTextbook(settings.selectedTextbook, unitPartFrom: settings.USUNITPARTFROM, unitPartTo: settings.USUNITPARTTO).subscribe(onNext: {
-                self.arrWords = $0
-                complete()
-            }).disposed(by: disposeBag)
-        } else {
-            MUnitWord.getDataByLang(settings.selectedTextbook.LANGID, arrTextbooks: settings.arrTextbooks).subscribe(onNext: {
-                self.arrWords = $0
-                complete()
-            }).disposed(by: disposeBag)
+        reload().subscribe { complete() }.disposed(by: disposeBag)
+    }
+    
+    func reload() -> Observable<()> {
+        return (inTextbook ? MUnitWord.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO) : MUnitWord.getDataByLang(vmSettings.selectedTextbook.LANGID, arrTextbooks: vmSettings.arrTextbooks))
+        .map {
+            self.arrWords = $0
+            self.arrWordsFiltered = nil
         }
     }
     
@@ -73,7 +73,7 @@ class WordsUnitViewModel: NSObject {
                 return MLangWord.getDataById(wordid).flatMap { arrLangOld -> Observable<Int> in
                     if !arrLangOld.isEmpty && arrLangOld[0].WORD == item.WORD {
                         // word intact
-                        return MLangWord.update(wordid, note: item.NOTE ?? "").map { _ in wordid }
+                        return MLangWord.update(wordid, note: item.NOTE ?? "").map { wordid }
                     } else {
                         // word changed
                         return MLangWord.getDataByLangWord(langid: item.LANGID, word: item.WORD).flatMap { arrLangNew -> Observable<Int> in
@@ -82,13 +82,13 @@ class WordsUnitViewModel: NSObject {
                                 let wordid = itemLang.ID
                                 let b = itemLang.combineNote(item.NOTE)
                                 item.NOTE = itemLang.NOTE
-                                return b ? MLangWord.update(wordid, note: item.NOTE ?? "").map { result in print(result); return wordid } : Observable.just(wordid)
+                                return b ? MLangWord.update(wordid, note: item.NOTE ?? "").map { wordid } : Observable.just(wordid)
                             }
                             if arrUnit.count == 1 {
                                 // exclusive
                                 if arrLangNew.isEmpty {
                                     // new word
-                                    return MLangWord.update(item: itemLang).map { result in print(result); return wordid }
+                                    return MLangWord.update(item: itemLang).map { wordid }
                                 } else {
                                     // existing word
                                     return MLangWord.delete(wordid).flatMap { f() }

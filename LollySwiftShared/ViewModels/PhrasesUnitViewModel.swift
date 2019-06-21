@@ -12,27 +12,27 @@ import RxSwift
 class PhrasesUnitViewModel: NSObject {
     @objc
     var vmSettings: SettingsViewModel
+    let inTextbook: Bool
+    let disposeBag: DisposeBag!
     var arrPhrases = [MUnitPhrase]()
     var arrPhrasesFiltered: [MUnitPhrase]?
-    let disposeBag: DisposeBag!
 
     public init(settings: SettingsViewModel, inTextbook: Bool, disposeBag: DisposeBag, needCopy: Bool, complete: @escaping () -> ()) {
         self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
+        self.inTextbook = inTextbook
         self.disposeBag = disposeBag
         super.init()
-        if inTextbook {
-            MUnitPhrase.getDataByTextbook(settings.selectedTextbook, unitPartFrom: settings.USUNITPARTFROM, unitPartTo: settings.USUNITPARTTO).subscribe(onNext: {
-                self.arrPhrases = $0
-                complete()
-            }).disposed(by: disposeBag)
-        } else {
-            MUnitPhrase.getDataByLang(settings.selectedTextbook.LANGID, arrTextbooks: settings.arrTextbooks).subscribe(onNext: {
-                self.arrPhrases = $0
-                complete()
-            }).disposed(by: disposeBag)
-        }
+        reload().subscribe { complete() }.disposed(by: disposeBag)
     }
     
+    func reload() -> Observable<()> {
+        return (inTextbook ? MUnitPhrase.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO) : MUnitPhrase.getDataByLang(vmSettings.selectedTextbook.LANGID, arrTextbooks: vmSettings.arrTextbooks))
+        .map {
+            self.arrPhrases = $0
+            self.arrPhrasesFiltered = nil
+        }
+    }
+
     func applyFilters(textFilter: String, scope: String, textbookFilter: Int) {
         if textFilter.isEmpty && textbookFilter == 0 {
             arrPhrasesFiltered = nil
@@ -62,7 +62,7 @@ class PhrasesUnitViewModel: NSObject {
                 return MLangPhrase.getDataById(phraseid).flatMap { arrLangOld -> Observable<Int> in
                     if !arrLangOld.isEmpty && arrLangOld[0].PHRASE == item.PHRASE {
                         // phrase intact
-                        return MLangPhrase.update(phraseid, translation: item.TRANSLATION ?? "").map { _ in phraseid }
+                        return MLangPhrase.update(phraseid, translation: item.TRANSLATION ?? "").map { phraseid }
                     } else {
                         // phrase changed
                         return MLangPhrase.getDataByLangPhrase(langid: item.LANGID, phrase: item.PHRASE).flatMap { arrLangNew -> Observable<Int> in
@@ -71,16 +71,16 @@ class PhrasesUnitViewModel: NSObject {
                                 let phraseid = itemLang.ID
                                 let b = itemLang.combineTranslation(item.TRANSLATION)
                                 item.TRANSLATION = itemLang.TRANSLATION
-                                return b ? MLangPhrase.update(phraseid, translation: item.TRANSLATION ?? "").map { result in print(result); return phraseid } : Observable.just(phraseid)
+                                return b ? MLangPhrase.update(phraseid, translation: item.TRANSLATION ?? "").map { phraseid } : Observable.just(phraseid)
                             }
                             if arrUnit.count == 1 {
                                 // exclusive
                                 if arrLangNew.isEmpty {
                                     // new phrase
-                                    return MLangPhrase.update(item: itemLang).map { result in print(result); return phraseid }
+                                    return MLangPhrase.update(item: itemLang).map { phraseid }
                                 } else {
                                     // existing phrase
-                                    return MLangPhrase.delete(phraseid).flatMap { result -> Observable<Int> in print(result); return f() }
+                                    return MLangPhrase.delete(phraseid).flatMap { f() }
                                 }
                             } else {
                                 if arrLangNew.isEmpty {
