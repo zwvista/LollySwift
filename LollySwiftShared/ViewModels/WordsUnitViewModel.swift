@@ -80,9 +80,14 @@ class WordsUnitViewModel: NSObject {
                             func f() -> Observable<Int> {
                                 let itemLang = arrLangNew[0]
                                 let wordid = itemLang.ID
-                                let b = itemLang.combineNote(item.NOTE)
                                 item.NOTE = itemLang.NOTE
-                                return b ? MLangWord.update(wordid, note: item.NOTE ?? "").map { wordid } : Observable.just(wordid)
+                                return MWordFami.getDataByUserWord(userid: CommonApi.userid, wordid: wordid).map { arrFami -> Int in
+                                    if !arrFami.isEmpty {
+                                        item.CORRECT = arrFami[0].CORRECT
+                                        item.TOTAL = arrFami[0].TOTAL
+                                    }
+                                    return wordid
+                                }
                             }
                             if arrUnit.count == 1 {
                                 // exclusive
@@ -124,7 +129,13 @@ class WordsUnitViewModel: NSObject {
                 let wordid = itemLang.ID
                 let b = itemLang.combineNote(item.NOTE)
                 item.NOTE = itemLang.NOTE
-                return b ? MLangWord.update(wordid, note: item.NOTE ?? "").map { wordid } : Observable.just(wordid)
+                return MWordFami.getDataByUserWord(userid: CommonApi.userid, wordid: wordid).flatMap { arrFami -> Observable<Int> in
+                    if !arrFami.isEmpty {
+                        item.CORRECT = arrFami[0].CORRECT
+                        item.TOTAL = arrFami[0].TOTAL
+                    }
+                    return b ? MLangWord.update(wordid, note: item.NOTE ?? "").map { wordid } : Observable.just(wordid)
+                }
             }
         }.flatMap { wordid -> Observable<Int> in
             item.WORDID = wordid

@@ -57,7 +57,7 @@ class MUnitWord: NSObject, Codable, MWordProtocol {
         return WORD + ((NOTE ?? "").isEmpty ? "" : "(\(NOTE!))")
     }
     var ACCURACY: String {
-        return TOTAL == 0 ? "N/A" : "\(floor(CORRECT.toDouble / TOTAL.toDouble * 1000) / 10)%"
+        return CommonApi.getAccuracy(CORRECT: CORRECT, TOTAL: TOTAL)
     }
 
     public override var description: String {
