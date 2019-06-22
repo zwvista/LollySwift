@@ -141,6 +141,8 @@ class SettingsViewController: NSViewController, SettingsViewModelDelegate {
     func onUpdateTextbook() {
         acUnits.content = vm.arrUnits
         acParts.content = vm.arrParts
+        tfUnitsInAllFrom.stringValue = vm.unitsInAll
+        tfUnitsInAllTo.stringValue = vm.unitsInAll
         scToType.selectedSegment = vm.toType.rawValue
         scToType.performClick(self)
     }
