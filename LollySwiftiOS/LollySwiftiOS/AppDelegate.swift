@@ -17,16 +17,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     let disposeBag = DisposeBag()
     static let synth = AVSpeechSynthesizer()
-    private static let _initializeComplete = ReplaySubject<()>.create(bufferSize: 1)
-    static var initializeComplete: ReplaySubject<()> {
-        return _initializeComplete
+    private static let _initializeObject = ReplaySubject<()>.create(bufferSize: 1)
+    static var initializeObject: ReplaySubject<()> {
+        return _initializeObject
     }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         vmSettings.getData().subscribe {
-            AppDelegate._initializeComplete.onNext(())
-            AppDelegate._initializeComplete.onCompleted()
+            AppDelegate._initializeObject.onNext(())
+            AppDelegate._initializeObject.onCompleted()
         }.disposed(by: disposeBag)
         return true
     }

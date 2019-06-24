@@ -28,7 +28,7 @@ class WordsSearchViewController: UIViewController, WKNavigationDelegate, UISearc
         wvDict = addWKWebView(webViewHolder: wvDictHolder)
         wvDict.navigationDelegate = self
         
-        AppDelegate.initializeComplete.subscribe {
+        AppDelegate.initializeObject.subscribe {
             self.ddDictItem.anchorView = self.btnDict
             self.ddDictItem.dataSource = vmSettings.arrDictItems.map { $0.DICTNAME }
             self.ddDictItem.selectRow(vmSettings.selectedDictItemIndex)
