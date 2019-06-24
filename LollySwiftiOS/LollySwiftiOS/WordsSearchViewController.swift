@@ -8,6 +8,7 @@
 
 import UIKit
 import WebKit
+import DropDown
 import RxSwift
 
 class WordsSearchViewController: UIViewController, WKNavigationDelegate, UISearchBarDelegate {
@@ -15,21 +16,37 @@ class WordsSearchViewController: UIViewController, WKNavigationDelegate, UISearc
     weak var wvDict: WKWebView!
 
     @IBOutlet weak var sbword: UISearchBar!
-    
+    @IBOutlet weak var btnDict: UIButton!
+
     var word = ""
     let disposeBag = DisposeBag()
     var status = DictWebViewStatus.ready
+    let ddDictItem = DropDown()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         wvDict = addWKWebView(webViewHolder: wvDictHolder)
         wvDict.navigationDelegate = self
+        
+        AppDelegate.initializeComplete.subscribe {
+            self.ddDictItem.anchorView = self.btnDict
+            self.ddDictItem.dataSource = vmSettings.arrDictItems.map { $0.DICTNAME }
+            self.ddDictItem.selectRow(vmSettings.selectedDictItemIndex)
+            self.ddDictItem.selectionAction = { [unowned self] (index: Int, item: String) in
+                vmSettings.selectedDictItem = vmSettings.arrDictItems[index]
+                vmSettings.updateDictItem().subscribe {
+                    self.searchBarSearchButtonClicked(self.sbword)
+                }.disposed(by: self.disposeBag)
+            }
+            self.searchBarSearchButtonClicked(self.sbword)
+        }.disposed(by: disposeBag)
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         word = sbword.text!
         sbword.resignFirstResponder()
         let item = vmSettings.selectedDictItem!
+        btnDict.setTitle(item.DICTNAME, for: .normal)
         if item.DICTNAME.starts(with: "Custom") {
             let str = vmSettings.dictHtml(word: word, dictids: item.dictids())
             wvDict.loadHTMLString(str, baseURL: nil)
@@ -54,6 +71,10 @@ class WordsSearchViewController: UIViewController, WKNavigationDelegate, UISearc
     
     func position(for bar: UIBarPositioning) -> UIBarPosition {
         return .top
+    }
+    
+    @IBAction func showDictDropDown(_ sender: AnyObject) {
+        ddDictItem.show()
     }
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
