@@ -8,9 +8,8 @@
 
 import UIKit
 import RxSwift
-import AVFoundation
 
-class PhrasesTextbookViewController: PhrasesBaseViewController, UISearchBarDelegate, UISearchResultsUpdating, UIGestureRecognizerDelegate {
+class PhrasesTextbookViewController: PhrasesBaseViewController {
     
     var vm: PhrasesUnitViewModel!
     var arrPhrases: [MUnitPhrase] {
@@ -34,21 +33,8 @@ class PhrasesTextbookViewController: PhrasesBaseViewController, UISearchBarDeleg
         return arrPhrases.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PhraseCell", for: indexPath) as! PhrasesTextbookCell
-        let item = arrPhrases[indexPath.row]
-        cell.lblUnitPartSeqNum!.text = item.UNITPARTSEQNUM
-        cell.lblPhrase!.text = item.PHRASE
-        cell.lblTranslation!.text = item.TRANSLATION
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
-        tapGestureRecognizer.delegate = self
-        cell.imgSpeak.addGestureRecognizer(tapGestureRecognizer)
-        cell.imgSpeak.tag = indexPath.row
-        return cell
-    }
-    
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
+    override func itemForRow(row: Int) -> (MPhraseProtocol & NSObject)? {
+        return arrPhrases[row]
     }
     
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
@@ -107,17 +93,9 @@ class PhrasesTextbookViewController: PhrasesBaseViewController, UISearchBarDeleg
         performSegue(withIdentifier: "edit", sender: item)
     }
     
-    private func applyFilters() {
+    override func applyFilters() {
         vm.applyFilters(textFilter: searchBar.text!, scope: searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex], textbookFilter: 0)
         tableView.reloadData()
-    }
-    
-    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        applyFilters()
-    }
-    
-    func updateSearchResults(for searchController: UISearchController) {
-        applyFilters()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -138,18 +116,4 @@ class PhrasesTextbookViewController: PhrasesBaseViewController, UISearchBarDeleg
         controller.onDone()
         tableView.reloadData()
     }
-    
-    @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
-        let index = sender!.view!.tag
-        let utterance = AVSpeechUtterance(string: arrPhrases[index].PHRASE)
-        utterance.voice = AVSpeechSynthesisVoice(identifier: vmSettings.selectediOSVoice.VOICENAME)
-        AppDelegate.synth.speak(utterance)
-    }
-}
-
-class PhrasesTextbookCell: UITableViewCell {
-    @IBOutlet weak var lblUnitPartSeqNum: UILabel!
-    @IBOutlet weak var lblPhrase: UILabel!
-    @IBOutlet weak var lblTranslation: UILabel!
-    @IBOutlet weak var imgSpeak: UIImageView!
 }

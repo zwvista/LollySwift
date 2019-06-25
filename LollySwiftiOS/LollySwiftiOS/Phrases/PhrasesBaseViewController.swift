@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import AVFoundation
 
-class PhrasesBaseViewController: UITableViewController {
+class PhrasesBaseViewController: UITableViewController, UISearchBarDelegate, UISearchResultsUpdating, UIGestureRecognizerDelegate {
     
     // https://www.raywenderlich.com/113772/uisearchcontroller-tutorial
     let searchController = UISearchController(searchResultsController: nil)
@@ -39,7 +40,58 @@ class PhrasesBaseViewController: UITableViewController {
         searchController.isActive = false
     }
 
+    func itemForRow(row: Int) -> (MPhraseProtocol & NSObject)? {
+        return nil
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PhraseCell", for: indexPath) as! PhrasesCommonCell
+        let item = itemForRow(row: indexPath.row)!
+        if cell.lblUnitPartSeqNum != nil {
+            cell.lblUnitPartSeqNum.text = (item.value(forKey: "UNITPARTSEQNUM") as! String)
+        }
+        cell.lblPhrase!.text = item.PHRASE
+        cell.lblTranslation!.text = item.TRANSLATION
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        tapGestureRecognizer.delegate = self
+        cell.lblPhrase.addGestureRecognizer(tapGestureRecognizer)
+        cell.lblPhrase.tag = indexPath.row
+        let tapGestureRecognizer2 = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        tapGestureRecognizer2.delegate = self
+        cell.lblPhrase.addGestureRecognizer(tapGestureRecognizer2)
+        cell.lblPhrase.tag = indexPath.row
+        return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
+        let index = sender!.view!.tag
+        let utterance = AVSpeechUtterance(string: itemForRow(row: index)!.PHRASE)
+        utterance.voice = AVSpeechSynthesisVoice(identifier: vmSettings.selectediOSVoice.VOICENAME)
+        AppDelegate.synth.speak(utterance)
+    }
+
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        applyFilters()
+    }
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        applyFilters()
+    }
+    
+    func applyFilters() {
+    }
+
     deinit {
         print("DEBUG: \(self.className) deinit")
     }
+}
+
+class PhrasesCommonCell: UITableViewCell {
+    @IBOutlet weak var lblUnitPartSeqNum: UILabel!
+    @IBOutlet weak var lblPhrase: UILabel!
+    @IBOutlet weak var lblTranslation: UILabel!
 }

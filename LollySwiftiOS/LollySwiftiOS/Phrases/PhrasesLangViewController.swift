@@ -8,9 +8,8 @@
 
 import UIKit
 import RxSwift
-import AVFoundation
 
-class PhrasesLangViewController: PhrasesBaseViewController, UISearchBarDelegate, UISearchResultsUpdating, UIGestureRecognizerDelegate {
+class PhrasesLangViewController: PhrasesBaseViewController {
     
     var vm: PhrasesLangViewModel!
     var arrPhrases: [MLangPhrase] {
@@ -33,16 +32,8 @@ class PhrasesLangViewController: PhrasesBaseViewController, UISearchBarDelegate,
         return arrPhrases.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PhraseCell", for: indexPath) as! PhrasesLangCell
-        let item = arrPhrases[indexPath.row]
-        cell.lblPhrase.text = item.PHRASE
-        cell.lblTranslation.text = item.TRANSLATION
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
-        tapGestureRecognizer.delegate = self
-        cell.imgSpeak.addGestureRecognizer(tapGestureRecognizer)
-        cell.imgSpeak.tag = indexPath.row
-        return cell
+    override func itemForRow(row: Int) -> (MPhraseProtocol & NSObject)? {
+        return arrPhrases[row]
     }
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
@@ -86,17 +77,9 @@ class PhrasesLangViewController: PhrasesBaseViewController, UISearchBarDelegate,
         performSegue(withIdentifier: "edit", sender: item)
     }
     
-    private func applyFilters() {
+    override func applyFilters() {
         vm.applyFilters(textFilter: searchBar.text!, scope: searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex])
         tableView.reloadData()
-    }
-    
-    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        applyFilters()
-    }
-    
-    func updateSearchResults(for searchController: UISearchController) {
-        applyFilters()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -112,17 +95,4 @@ class PhrasesLangViewController: PhrasesBaseViewController, UISearchBarDelegate,
         let controller = segue.source as! PhrasesLangDetailViewController
         controller.onDone()
     }
-    
-    @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
-        let index = sender!.view!.tag
-        let utterance = AVSpeechUtterance(string: arrPhrases[index].PHRASE)
-        utterance.voice = AVSpeechSynthesisVoice(identifier: vmSettings.selectediOSVoice.VOICENAME)
-        AppDelegate.synth.speak(utterance)
-    }
-}
-
-class PhrasesLangCell: UITableViewCell {
-    @IBOutlet weak var lblPhrase: UILabel!
-    @IBOutlet weak var lblTranslation: UILabel!
-    @IBOutlet weak var imgSpeak: UIImageView!
 }
