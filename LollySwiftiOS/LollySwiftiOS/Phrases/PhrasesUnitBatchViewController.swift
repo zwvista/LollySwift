@@ -74,9 +74,9 @@ class PhrasesUnitBatchViewController: UITableViewController, UITextFieldDelegate
         return section == 0 ? 3 : vm.arrPhrases.count
     }
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return indexPath.section == 0 ? UITableView.automaticDimension : 88
-    }
+//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return indexPath.section == 0 ? UITableView.automaticDimension : 88
+//    }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let identifier = "PhraseCell" + (indexPath.section == 0 ? "0\(indexPath.row)" : "10")
@@ -124,10 +124,7 @@ class PhrasesUnitBatchViewController: UITableViewController, UITextFieldDelegate
     }
 }
 
-class PhrasesUnitBatchCell: UITableViewCell {
+class PhrasesUnitBatchCell: PhrasesCommonCell {
     @IBOutlet weak var tf: UITextField!
-    @IBOutlet weak var lblUnitPartSeqNum: UILabel!
-    @IBOutlet weak var lblPhrase: UILabel!
-    @IBOutlet weak var lblTranslation: UILabel!
     @IBOutlet weak var sw: UISwitch!
 }

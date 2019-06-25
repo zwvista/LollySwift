@@ -83,9 +83,9 @@ class WordsUnitBatchViewController: UITableViewController, UITextFieldDelegate {
         return section == 0 ? 5 : vm.arrWords.count
     }
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return indexPath.section == 0 ? UITableView.automaticDimension : 88
-    }
+//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return indexPath.section == 0 ? UITableView.automaticDimension : 88
+//    }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let identifier = "WordCell" + (indexPath.section == 0 ? "0\(indexPath.row)" : "10")

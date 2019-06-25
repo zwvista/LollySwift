@@ -22,7 +22,7 @@ class WordsLangViewModel: NSObject {
     public init(settings: SettingsViewModel, disposeBag: DisposeBag, needCopy: Bool, complete: @escaping () -> ()) {
         self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
         self.disposeBag = disposeBag
-        vmNote = NoteViewModel(settings: settings, disposeBag: disposeBag)
+        vmNote = NoteViewModel(settings: vmSettings, disposeBag: disposeBag)
         super.init()
         let item = settings.selectedTextbook!
         MLangWord.getDataByLang(item.LANGID).subscribe(onNext: {

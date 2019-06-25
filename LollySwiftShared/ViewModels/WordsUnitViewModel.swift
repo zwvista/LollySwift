@@ -24,7 +24,7 @@ class WordsUnitViewModel: NSObject {
         self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
         self.inTextbook = inTextbook
         self.disposeBag = disposeBag
-        vmNote = NoteViewModel(settings: settings, disposeBag: disposeBag)
+        vmNote = NoteViewModel(settings: vmSettings, disposeBag: disposeBag)
         super.init()
         reload().subscribe { complete() }.disposed(by: disposeBag)
     }
