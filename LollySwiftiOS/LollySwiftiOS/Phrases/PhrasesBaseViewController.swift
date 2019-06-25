@@ -52,14 +52,6 @@ class PhrasesBaseViewController: UITableViewController, UISearchBarDelegate, UIS
         }
         cell.lblPhrase!.text = item.PHRASE
         cell.lblTranslation!.text = item.TRANSLATION
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
-        tapGestureRecognizer.delegate = self
-        cell.lblPhrase.addGestureRecognizer(tapGestureRecognizer)
-        cell.lblPhrase.tag = indexPath.row
-        let tapGestureRecognizer2 = UITapGestureRecognizer(target: self, action: #selector(handleTap))
-        tapGestureRecognizer2.delegate = self
-        cell.lblPhrase.addGestureRecognizer(tapGestureRecognizer2)
-        cell.lblPhrase.tag = indexPath.row
         return cell
     }
     
@@ -67,11 +59,15 @@ class PhrasesBaseViewController: UITableViewController, UISearchBarDelegate, UIS
         return true
     }
     
-    @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
-        let index = sender!.view!.tag
-        let utterance = AVSpeechUtterance(string: itemForRow(row: index)!.PHRASE)
-        utterance.voice = AVSpeechSynthesisVoice(identifier: vmSettings.selectediOSVoice.VOICENAME)
-        AppDelegate.synth.speak(utterance)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let item = itemForRow(row: indexPath.row)!
+        if tableView.isEditing {
+            performSegue(withIdentifier: "edit", sender: item)
+        } else {
+            let utterance = AVSpeechUtterance(string: item.PHRASE)
+            utterance.voice = AVSpeechSynthesisVoice(identifier: vmSettings.selectediOSVoice.VOICENAME)
+            AppDelegate.synth.speak(utterance)
+        }
     }
 
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {

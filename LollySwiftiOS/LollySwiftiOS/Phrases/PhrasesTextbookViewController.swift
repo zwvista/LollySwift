@@ -88,11 +88,6 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
         return [moreAction, deleteAction]
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let item = arrPhrases[indexPath.row]
-        performSegue(withIdentifier: "edit", sender: item)
-    }
-    
     override func applyFilters() {
         vm.applyFilters(textFilter: searchBar.text!, scope: searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex], textbookFilter: 0)
         tableView.reloadData()

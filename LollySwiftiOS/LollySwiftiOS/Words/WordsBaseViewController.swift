@@ -53,14 +53,6 @@ class WordsBaseViewController: UITableViewController, UISearchBarDelegate, UISea
         }
         cell.lblWord.text = item.WORD
         cell.lblNote.text = item.NOTE
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
-        tapGestureRecognizer.delegate = self
-        cell.lblWord.addGestureRecognizer(tapGestureRecognizer)
-        cell.lblWord.tag = indexPath.row
-        let tapGestureRecognizer2 = UITapGestureRecognizer(target: self, action: #selector(handleTap))
-        tapGestureRecognizer2.delegate = self
-        cell.lblNote.addGestureRecognizer(tapGestureRecognizer2)
-        cell.lblNote.tag = indexPath.row
         let level = item.LEVEL
         if indexPath.row == 0 {
             colors.append(cell.backgroundColor!)
@@ -91,12 +83,21 @@ class WordsBaseViewController: UITableViewController, UISearchBarDelegate, UISea
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
-
-    @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
-        let index = sender!.view!.tag
-        let utterance = AVSpeechUtterance(string: itemForRow(row: index)!.WORD)
-        utterance.voice = AVSpeechSynthesisVoice(identifier: vmSettings.selectediOSVoice.VOICENAME)
-        AppDelegate.synth.speak(utterance)
+    
+    override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+        let item = itemForRow(row: indexPath.row)!
+        performSegue(withIdentifier: "dict", sender: item)
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let item = itemForRow(row: indexPath.row)!
+        if tableView.isEditing {
+            performSegue(withIdentifier: "edit", sender: item)
+        } else {
+            let utterance = AVSpeechUtterance(string: item.WORD)
+            utterance.voice = AVSpeechSynthesisVoice(identifier: vmSettings.selectediOSVoice.VOICENAME)
+            AppDelegate.synth.speak(utterance)
+        }
     }
     
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {

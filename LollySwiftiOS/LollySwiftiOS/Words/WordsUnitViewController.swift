@@ -106,15 +106,6 @@ class WordsUnitViewController: WordsBaseViewController {
 
         return [moreAction, deleteAction]
     }
-
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let item = arrWords[indexPath.row]
-        if tableView.isEditing {
-            performSegue(withIdentifier: "edit", sender: item)
-        } else {
-            performSegue(withIdentifier: "dict", sender: item.WORD)
-        }
-    }
     
     override func applyFilters() {
         vm.applyFilters(textFilter: searchBar.text!, scope: searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex], levelge0only: false, textbookFilter: 0)
@@ -128,7 +119,7 @@ class WordsUnitViewController: WordsBaseViewController {
             controller.item = sender as? MUnitWord ?? vm.newUnitWord()
         } else if let controller = segue.destination as? WordsDictViewController {
             controller.vm.arrWords = arrWords.map { $0.WORD }
-            controller.vm.selectedWordIndex = tableView.indexPathForSelectedRow!.row
+            controller.vm.selectedWordIndex = vm.arrWords.indexes(of: sender as! MUnitWord)[0]
         } else if let controller = (segue.destination as? UINavigationController)?.topViewController as? WordsUnitBatchViewController {
             controller.vm = vm
         }
