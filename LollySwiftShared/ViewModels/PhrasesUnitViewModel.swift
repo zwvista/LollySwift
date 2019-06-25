@@ -53,7 +53,7 @@ class PhrasesUnitViewModel: NSObject {
     
     static func update(item: MUnitPhrase) -> Observable<()> {
         let phraseid = item.PHRASEID
-        return MUnitPhrase.getDataByLangPhrase(phraseid).flatMap { arrUnit -> Observable<Int> in
+        return MUnitPhrase.getDataByPhraseId(phraseid).flatMap { arrUnit -> Observable<Int> in
             if arrUnit.isEmpty {
                 // non-existing phrase
                 return Observable.empty()
@@ -122,7 +122,7 @@ class PhrasesUnitViewModel: NSObject {
     
     static func delete(item: MUnitPhrase) -> Observable<()> {
         return MUnitPhrase.delete(item.ID).concat(
-            MUnitPhrase.getDataByLangPhrase(item.PHRASEID).flatMap {
+            MUnitPhrase.getDataByPhraseId(item.PHRASEID).flatMap {
                 !$0.isEmpty ? Observable.empty() : MLangPhrase.delete(item.PHRASEID)
             }
         )

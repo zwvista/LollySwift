@@ -66,10 +66,22 @@ class MUnitPhrase: NSObject, Codable, MPhraseProtocol {
         })
     }
 
-    static func getDataByLangPhrase(_ phraseid: Int) -> Observable<[MUnitPhrase]> {
+    static func getDataByPhraseId(_ phraseid: Int) -> Observable<[MUnitPhrase]> {
         // SQL: SELECT * FROM VUNITPHRASES WHERE PHRASEID=?
         let url = "\(CommonApi.url)VUNITPHRASES?filter=PHRASEID,eq,\(phraseid)"
         return RestApi.getRecords(url: url)
+    }
+
+    static func getDataByLangPhrase(langid: Int, phrase: String, arrTextbooks: [MTextbook]) -> Observable<[MUnitPhrase]> {
+        // SQL: SELECT * FROM VUNITPHRASES WHERE LANGID=? AND PHRASE=?
+        let url = "\(CommonApi.url)VUNITPHRASES?filter=LANGID,eq,\(langid)&filter=PHRASE,eq,\(phrase.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)"
+        // Api is case insensitive
+        let o: Observable<[MUnitPhrase]> = RestApi.getRecords(url: url).map { $0.filter { $0.PHRASE == phrase } }
+        return o.do(onNext: { arr in
+            arr.forEach { row in
+                row.textbook = arrTextbooks.first { $0.ID == row.TEXTBOOKID }!
+            }
+        })
     }
 
     static func update(_ id: Int, seqnum: Int) -> Observable<()> {

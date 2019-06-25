@@ -10,11 +10,15 @@ import Cocoa
 import RxSwift
 
 @objcMembers
-class PhrasesTextbookDetailViewController: NSViewController {
+class PhrasesTextbookDetailViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 
     var vm: PhrasesUnitViewModel!
+    var vmSingle: SinglePhraseViewModel!
     var complete: (() -> Void)?
     var item: MUnitPhrase!
+    var arrPhrases: [MUnitPhrase] {
+        return vmSingle.arrPhrases
+    }
 
     @IBOutlet weak var acUnits: NSArrayController!
     @IBOutlet weak var acParts: NSArrayController!
@@ -26,6 +30,7 @@ class PhrasesTextbookDetailViewController: NSViewController {
     @IBOutlet weak var tfPhraseID: NSTextField!
     @IBOutlet weak var tfPhrase: NSTextField!
     @IBOutlet weak var tfTranslation: NSTextField!
+    @IBOutlet weak var tableView: NSTableView!
 
     let disposeBag = DisposeBag()
 
@@ -33,6 +38,9 @@ class PhrasesTextbookDetailViewController: NSViewController {
         super.viewDidLoad()
         acUnits.content = item.textbook.arrUnits
         acParts.content = item.textbook.arrParts
+        vmSingle = SinglePhraseViewModel(phrase: item.PHRASE, settings: vm.vmSettings, disposeBag: disposeBag) {
+            self.tableView.reloadData()
+        }
     }
     
     override func viewDidAppear() {
@@ -49,5 +57,17 @@ class PhrasesTextbookDetailViewController: NSViewController {
             self.complete?()
         }.disposed(by: disposeBag)
         dismiss(self)
+    }
+    
+    func numberOfRows(in tableView: NSTableView) -> Int {
+        return arrPhrases.count
+    }
+    
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! NSTableCellView
+        let item = arrPhrases[row]
+        let columnName = tableColumn!.identifier.rawValue
+        cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
+        return cell
     }
 }
