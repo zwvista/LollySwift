@@ -64,7 +64,7 @@ class WordsUnitViewModel: NSObject {
 
     static func update(item: MUnitWord) -> Observable<()> {
         let wordid = item.WORDID
-        return MUnitWord.getDataByLangWord(wordid).flatMap { arrUnit -> Observable<Int> in
+        return MUnitWord.getDataByWordId(wordid).flatMap { arrUnit -> Observable<Int> in
             if arrUnit.isEmpty {
                 // non-existing word
                 return Observable.empty()
@@ -145,7 +145,7 @@ class WordsUnitViewModel: NSObject {
     
     static func delete(item: MUnitWord) -> Observable<()> {
         return MUnitWord.delete(item.ID).concat(
-            MUnitWord.getDataByLangWord(item.WORDID).flatMap {
+            MUnitWord.getDataByWordId(item.WORDID).flatMap {
                 !$0.isEmpty ? Observable.empty() :
                 Observable.zip(MLangWord.delete(item.WORDID), MWordFami.delete(item.FAMIID)).map{_ in}
             }

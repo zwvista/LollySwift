@@ -84,10 +84,22 @@ class MUnitWord: NSObject, Codable, MWordProtocol {
         })
     }
 
-    static func getDataByLangWord(_ wordid: Int) -> Observable<[MUnitWord]> {
+    static func getDataByWordId(_ wordid: Int) -> Observable<[MUnitWord]> {
         // SQL: SELECT * FROM VUNITWORDS WHERE WORDID=?
         let url = "\(CommonApi.url)VUNITWORDS?filter=WORDID,eq,\(wordid)"
         return RestApi.getRecords(url: url)
+    }
+
+    static func getDataByLangWord(langid: Int, word: String, arrTextbooks: [MTextbook]) -> Observable<[MUnitWord]> {
+        // SQL: SELECT * FROM VUNITWORDS WHERE LANGID=? AND WORD=?
+        let url = "\(CommonApi.url)VUNITWORDS?filter=LANGID,eq,\(langid)&filter=WORD,eq,\(word.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)"
+        // Api is case insensitive
+        let o: Observable<[MUnitWord]> = RestApi.getRecords(url: url).map { $0.filter { $0.WORD == word } }
+        return o.do(onNext: { arr in
+            arr.forEach { row in
+                row.textbook = arrTextbooks.first { $0.ID == row.TEXTBOOKID }!
+            }
+        })
     }
 
     static func update(_ id: Int, seqnum: Int) -> Observable<()> {

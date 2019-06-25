@@ -9,11 +9,15 @@
 import Cocoa
 import RxSwift
 
-class WordsTextbookDetailViewController: NSViewController {
+class WordsTextbookDetailViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 
     var vm: WordsUnitViewModel!
+    var vmSingle: SingleWordViewModel!
     var complete: (() -> Void)?
     @objc var item: MUnitWord!
+    var arrWords: [MUnitWord] {
+        return vmSingle.arrWords
+    }
 
     @IBOutlet weak var acUnits: NSArrayController!
     @IBOutlet weak var acParts: NSArrayController!
@@ -28,6 +32,7 @@ class WordsTextbookDetailViewController: NSViewController {
     @IBOutlet weak var tfFamiID: NSTextField!
     @IBOutlet weak var tfLevel: NSTextField!
     @IBOutlet weak var tfAccuracy: NSTextField!
+    @IBOutlet weak var tableView: NSTableView!
 
     let disposeBag = DisposeBag()
 
@@ -35,6 +40,9 @@ class WordsTextbookDetailViewController: NSViewController {
         super.viewDidLoad()
         acUnits.content = item.textbook.arrUnits
         acParts.content = item.textbook.arrParts
+        vmSingle = SingleWordViewModel(word: item.WORD, settings: vm.vmSettings, disposeBag: disposeBag) {
+            self.tableView.reloadData()
+        }
     }
     
     override func viewDidAppear() {
@@ -57,6 +65,24 @@ class WordsTextbookDetailViewController: NSViewController {
             self.complete?()
         }.disposed(by: disposeBag)
         dismiss(self)
+    }
+    
+    func numberOfRows(in tableView: NSTableView) -> Int {
+        return arrWords.count
+    }
+    
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! NSTableCellView
+        let item = arrWords[row]
+        let columnName = tableColumn!.identifier.rawValue
+        cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
+        return cell
+    }
+    
+    // https://stackoverflow.com/questions/10910779/coloring-rows-in-view-based-nstableview
+    func tableView(_ tableView: NSTableView, didAdd rowView: NSTableRowView, forRow row: Int) {
+        let level = arrWords[row].LEVEL
+        rowView.backgroundColor = level > 0 ? .yellow : level < 0 ? .gray : .white
     }
 
     deinit {

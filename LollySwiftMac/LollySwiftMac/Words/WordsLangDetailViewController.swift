@@ -10,12 +10,16 @@ import Cocoa
 import RxSwift
 
 @objcMembers
-class WordsLangDetailViewController: NSViewController {
+class WordsLangDetailViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 
     var vm: WordsLangViewModel!
+    var vmSingle: SingleWordViewModel!
     var complete: (() -> Void)?
     var item: MLangWord!
     var isAdd: Bool!
+    var arrWords: [MUnitWord] {
+        return vmSingle.arrWords
+    }
 
     @IBOutlet weak var tfID: NSTextField!
     @IBOutlet weak var tfWord: NSTextField!
@@ -23,12 +27,16 @@ class WordsLangDetailViewController: NSViewController {
     @IBOutlet weak var tfFamiID: NSTextField!
     @IBOutlet weak var tfLevel: NSTextField!
     @IBOutlet weak var tfAccuracy: NSTextField!
+    @IBOutlet weak var tableView: NSTableView!
 
     let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         isAdd = item.ID == 0
+        vmSingle = SingleWordViewModel(word: item.WORD, settings: vm.vmSettings, disposeBag: disposeBag) {
+            self.tableView.reloadData()
+        }
     }
     
     override func viewDidAppear() {
@@ -59,6 +67,24 @@ class WordsLangDetailViewController: NSViewController {
             }.disposed(by: disposeBag)
         }
         dismiss(self)
+    }
+    
+    func numberOfRows(in tableView: NSTableView) -> Int {
+        return arrWords.count
+    }
+    
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! NSTableCellView
+        let item = arrWords[row]
+        let columnName = tableColumn!.identifier.rawValue
+        cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
+        return cell
+    }
+    
+    // https://stackoverflow.com/questions/10910779/coloring-rows-in-view-based-nstableview
+    func tableView(_ tableView: NSTableView, didAdd rowView: NSTableRowView, forRow row: Int) {
+        let level = arrWords[row].LEVEL
+        rowView.backgroundColor = level > 0 ? .yellow : level < 0 ? .gray : .white
     }
 
     deinit {

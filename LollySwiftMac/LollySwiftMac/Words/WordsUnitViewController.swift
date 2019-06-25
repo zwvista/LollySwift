@@ -238,6 +238,4 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
 }
 
 class WordsUnitWindowController: WordsBaseWindowController {
-    @IBOutlet weak var tbiPrevious: NSToolbarItem!
-    @IBOutlet weak var tbiNext: NSToolbarItem!
 }
