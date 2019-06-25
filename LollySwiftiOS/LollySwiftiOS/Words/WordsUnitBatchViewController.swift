@@ -83,6 +83,10 @@ class WordsUnitBatchViewController: UITableViewController, UITextFieldDelegate {
         return section == 0 ? 5 : vm.arrWords.count
     }
     
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return indexPath.section == 0 ? UITableView.automaticDimension : 88
+    }
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let identifier = "WordCell" + (indexPath.section == 0 ? "0\(indexPath.row)" : "10")
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! WordsUnitBatchCell
@@ -119,7 +123,8 @@ class WordsUnitBatchViewController: UITableViewController, UITextFieldDelegate {
         } else {
             let item = vm.arrWords[indexPath.row]
             cell.lblUnitPartSeqNum.text = item.UNITPARTSEQNUM
-            cell.lblWordNote.text = item.WORDNOTE
+            cell.lblWord.text = item.WORD
+            cell.lblNote.text = item.NOTE
         }
         return cell
     }
@@ -131,9 +136,7 @@ class WordsUnitBatchViewController: UITableViewController, UITextFieldDelegate {
     }
 }
 
-class WordsUnitBatchCell: UITableViewCell {
+class WordsUnitBatchCell: WordsCommonCell {
     @IBOutlet weak var tf: UITextField!
-    @IBOutlet weak var lblUnitPartSeqNum: UILabel!
-    @IBOutlet weak var lblWordNote: UILabel!
     @IBOutlet weak var sw: UISwitch!
 }
