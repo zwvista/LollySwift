@@ -47,3 +47,9 @@ class WordsBaseViewController: UITableViewController {
         print("DEBUG: \(self.className) deinit")
     }
 }
+
+class WordsCommonCell: UITableViewCell {
+    @IBOutlet weak var lblUnitPartSeqNum: UILabel!
+    @IBOutlet weak var lblWord: UILabel!
+    @IBOutlet weak var lblNote: UILabel!
+}
