@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import AVFoundation
 
-class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UISearchResultsUpdating, UIGestureRecognizerDelegate {
+class WordsUnitViewController: WordsBaseViewController {
 
     var vm: WordsUnitViewModel!
     var arrWords: [MUnitWord] {
@@ -33,44 +33,9 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return arrWords.count
     }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "WordCell", for: indexPath) as! WordsCommonCell
-        let item = arrWords[indexPath.row]
-        cell.lblUnitPartSeqNum.text = item.UNITPARTSEQNUM
-        cell.lblWord.text = item.WORD
-        cell.lblNote.text = item.NOTE
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
-        tapGestureRecognizer.delegate = self
-        cell.lblWord.addGestureRecognizer(tapGestureRecognizer)
-        cell.lblWord.tag = indexPath.row
-        let tapGestureRecognizer2 = UITapGestureRecognizer(target: self, action: #selector(handleTap))
-        tapGestureRecognizer2.delegate = self
-        cell.lblNote.addGestureRecognizer(tapGestureRecognizer2)
-        cell.lblNote.tag = indexPath.row
-        let level = item.LEVEL
-        if indexPath.row == 0 {
-            colors.append(cell.backgroundColor!)
-            colors.append(cell.lblUnitPartSeqNum.textColor!)
-            colors.append(cell.lblWord.textColor)
-            colors.append(cell.lblNote.textColor)
-        }
-        if level != 0, let arr = vmSettings.USLEVELCOLORS![level] {
-            cell.backgroundColor = UIColor(hexString: arr[0])
-            cell.lblUnitPartSeqNum.textColor = UIColor(hexString: arr[1])
-            cell.lblWord.textColor = UIColor(hexString: arr[1])
-            cell.lblNote.textColor = UIColor(hexString: arr[1])
-        } else {
-            cell.backgroundColor = colors[0]
-            cell.lblUnitPartSeqNum.textColor = colors[1]
-            cell.lblWord.textColor = colors[2]
-            cell.lblNote.textColor = colors[3]
-        }
-        return cell
-    }
     
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
+    override func itemForRow(row: Int) -> (MWordProtocol & NSObject)? {
+        return arrWords[row]
     }
     
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
@@ -152,17 +117,9 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
         }
     }
     
-    private func applyFilters() {
+    override func applyFilters() {
         vm.applyFilters(textFilter: searchBar.text!, scope: searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex], levelge0only: false, textbookFilter: 0)
         tableView.reloadData()
-    }
-
-    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        applyFilters()
-    }
-    
-    func updateSearchResults(for searchController: UISearchController) {
-        applyFilters()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -232,14 +189,5 @@ class WordsUnitViewController: WordsBaseViewController, UISearchBarDelegate, UIS
             controller.onDone()
             tableView.reloadData()
         }
-    }
-    
-    @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
-        let index = sender!.view!.tag
-        let word = arrWords[index].WORD
-        print("DEBUG: word \(word) tapped")
-        let utterance = AVSpeechUtterance(string: word)
-        utterance.voice = AVSpeechSynthesisVoice(identifier: vmSettings.selectediOSVoice.VOICENAME)
-        AppDelegate.synth.speak(utterance)
     }
 }

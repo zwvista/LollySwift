@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import AVFoundation
 
-class WordsBaseViewController: UITableViewController {
+class WordsBaseViewController: UITableViewController, UISearchBarDelegate, UISearchResultsUpdating, UIGestureRecognizerDelegate {
 
     // https://www.raywenderlich.com/113772/uisearchcontroller-tutorial
     let searchController = UISearchController(searchResultsController: nil)
@@ -39,8 +40,74 @@ class WordsBaseViewController: UITableViewController {
         super.viewWillAppear(animated)
         searchController.isActive = false
     }
+
+    func itemForRow(row: Int) -> (MWordProtocol & NSObject)? {
+        return nil
+    }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "WordCell", for: indexPath) as! WordsCommonCell
+        let item = itemForRow(row: indexPath.row)!
+        if cell.lblUnitPartSeqNum != nil {
+            cell.lblUnitPartSeqNum.text = (item.value(forKey: "UNITPARTSEQNUM") as! String)
+        }
+        cell.lblWord.text = item.WORD
+        cell.lblNote.text = item.NOTE
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        tapGestureRecognizer.delegate = self
+        cell.lblWord.addGestureRecognizer(tapGestureRecognizer)
+        cell.lblWord.tag = indexPath.row
+        let tapGestureRecognizer2 = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+        tapGestureRecognizer2.delegate = self
+        cell.lblNote.addGestureRecognizer(tapGestureRecognizer2)
+        cell.lblNote.tag = indexPath.row
+        let level = item.LEVEL
+        if indexPath.row == 0 {
+            colors.append(cell.backgroundColor!)
+            colors.append(cell.lblWord.textColor)
+            colors.append(cell.lblNote.textColor)
+            if cell.lblUnitPartSeqNum != nil {
+                colors.append(cell.lblUnitPartSeqNum.textColor!)
+            }
+        }
+        if level != 0, let arr = vmSettings.USLEVELCOLORS![level] {
+            cell.backgroundColor = UIColor(hexString: arr[0])
+            cell.lblWord.textColor = UIColor(hexString: arr[1])
+            cell.lblNote.textColor = UIColor(hexString: arr[1])
+            if cell.lblUnitPartSeqNum != nil {
+                cell.lblUnitPartSeqNum.textColor = UIColor(hexString: arr[1])
+            }
+        } else {
+            cell.backgroundColor = colors[0]
+            cell.lblWord.textColor = colors[1]
+            cell.lblNote.textColor = colors[2]
+            if cell.lblUnitPartSeqNum != nil {
+                cell.lblUnitPartSeqNum.textColor = colors[3]
+            }
+        }
+        return cell
+    }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+
+    @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
+        let index = sender!.view!.tag
+        let utterance = AVSpeechUtterance(string: itemForRow(row: index)!.WORD)
+        utterance.voice = AVSpeechSynthesisVoice(identifier: vmSettings.selectediOSVoice.VOICENAME)
+        AppDelegate.synth.speak(utterance)
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        applyFilters()
+    }
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        applyFilters()
+    }
+    
+    func applyFilters() {
     }
 
     deinit {
