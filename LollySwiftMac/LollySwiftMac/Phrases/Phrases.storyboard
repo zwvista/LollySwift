@@ -63,6 +63,13 @@
                                         </connections>
                                     </segmentedControl>
                                 </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="FD06D586-2677-4BA2-9C62-C56ED4377FFA" label="Review" paletteLabel="Review" tag="-1" image="NSSlideshowTemplate" id="zRW-6M-K1p">
+                                    <size key="minSize" width="17" height="14"/>
+                                    <size key="maxSize" width="17" height="14"/>
+                                    <connections>
+                                        <action selector="reviewPhrases:" target="qEo-JS-MYZ" id="oii-ka-Xfq"/>
+                                    </connections>
+                                </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="96A81DF2-B48B-48F8-96E7-9E355C588C66" label="Filter Type" paletteLabel="Filter Type" sizingBehavior="auto" id="4Dq-5F-r8A">
                                     <nil key="toolTip"/>
                                     <segmentedControl key="view" verticalHuggingPriority="750" id="Abr-kh-xne">
@@ -107,6 +114,7 @@
                                 <toolbarItem reference="k6U-bs-3i4"/>
                                 <toolbarItem reference="rwC-ba-HN6"/>
                                 <toolbarItem reference="ap0-qD-kxT"/>
+                                <toolbarItem reference="zRW-6M-K1p"/>
                                 <toolbarItem reference="4Dq-5F-r8A"/>
                                 <toolbarItem reference="bzy-ad-vwY"/>
                             </defaultToolbarItems>
@@ -3748,5 +3756,6 @@ Gw
         <image name="NSGoForwardTemplate" width="9" height="12"/>
         <image name="NSRefreshTemplate" width="11" height="15"/>
         <image name="NSRemoveTemplate" width="11" height="11"/>
+        <image name="NSSlideshowTemplate" width="17" height="14"/>
     </resources>
 </document>

@@ -13,7 +13,7 @@ import RxSwift
 class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NSToolbarItemValidation {
 
     var vm: WordsUnitViewModel!
-    let vmReview = EmbeddedReviewViewModel()
+    var vmReview: EmbeddedReviewViewModel!
     override var vmSettings: SettingsViewModel! {
         return vm.vmSettings
     }
@@ -27,6 +27,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        vmReview = EmbeddedReviewViewModel(disposeBag: disposeBag)
         self.tableView.registerForDraggedTypes([tableRowDragType])
     }
     
@@ -236,8 +237,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     
     @IBAction func reviewWords(_ sender: AnyObject) {
         if vmReview.subscription != nil {
-            vmReview.subscription?.dispose()
-            vmReview.subscription = nil
+            vmReview.stop()
         } else {
             let optionsVC = NSStoryboard(name: "Tools", bundle: nil).instantiateController(withIdentifier: "ReviewOptionsViewController") as! ReviewOptionsViewController
             optionsVC.mode = 0
@@ -253,21 +253,12 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
                 if self.vmReview.shuffled {
                     arrWords = arrWords.shuffled()
                 }
-                self.vmReview.arrIDs = arrWords.map { $0.ID }
-                var i = 0
-                let wordCount = self.vmReview.arrIDs.count
-                self.vmReview.subscription = Observable<Int>.interval(Double(self.vmSettings.USREADINTERVAL) / 1000.0, scheduler: MainScheduler.instance).subscribe { _ in
-                    if i < wordCount {
-                        if let row = self.arrWords.firstIndex(where: { $0.ID == self.vmReview.arrIDs[i] }) {
-                            self.tableView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
-                        }
-                        i += 1
-                    } else {
-                        self.vmReview.subscription?.dispose()
-                        self.vmReview.subscription = nil
+                let arrIDs = arrWords.map{ $0.ID }
+                self.vmReview.start(arrIDs: arrIDs, interval: Double(self.vmSettings.USREADINTERVAL) / 1000.0) { [unowned self] i in
+                    if let row = self.arrWords.firstIndex(where: { $0.ID == arrIDs[i] }) {
+                        self.tableView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
                     }
                 }
-                self.vmReview.subscription?.disposed(by: self.disposeBag)
             }
             self.presentAsSheet(optionsVC)
         }

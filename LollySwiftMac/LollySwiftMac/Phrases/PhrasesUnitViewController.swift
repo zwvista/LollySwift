@@ -13,6 +13,7 @@ import RxSwift
 class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidation {
     
     var vm: PhrasesUnitViewModel!
+    var vmReview: EmbeddedReviewViewModel!
     override var vmSettings: SettingsViewModel! {
         return vm.vmSettings
     }
@@ -26,6 +27,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        vmReview = EmbeddedReviewViewModel(disposeBag: disposeBag)
         tableView.registerForDraggedTypes([tableRowDragType])
     }
     
@@ -185,6 +187,31 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
 
     override func updateStatusText() {
         tfStatusText.stringValue = "\(tableView.numberOfRows) Phrases in \(vmSettings.UNITINFO)"
+    }
+    
+    @IBAction func reviewPhrases(_ sender: AnyObject) {
+        if vmReview.subscription != nil {
+            vmReview.stop()
+        } else {
+            let optionsVC = NSStoryboard(name: "Tools", bundle: nil).instantiateController(withIdentifier: "ReviewOptionsViewController") as! ReviewOptionsViewController
+            optionsVC.mode = 0
+            optionsVC.shuffled = vmReview.shuffled
+            optionsVC.complete = { [unowned self] in
+                self.vmReview.shuffled = optionsVC.shuffled
+                self.vmReview.levelge0only = optionsVC.levelge0only!
+                var arrPhrases = self.arrPhrases
+                if self.vmReview.shuffled {
+                    arrPhrases = arrPhrases.shuffled()
+                }
+                let arrIDs = arrPhrases.map{ $0.ID }
+                self.vmReview.start(arrIDs: arrIDs, interval: Double(self.vmSettings.USREADINTERVAL) / 1000.0) { [unowned self] i in
+                    if let row = self.arrPhrases.firstIndex(where: { $0.ID == arrIDs[i] }) {
+                        self.tableView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
+                    }
+                }
+            }
+            self.presentAsSheet(optionsVC)
+        }
     }
 }
 
