@@ -26,11 +26,13 @@ class SettingsViewModel: NSObject {
         get { return selectedUSUser0.VALUE3!.toInt()! }
     }
     var USLEVELCOLORS: [Int: [String]]!
-    var USREADINTERVAL: Int {
+    var USSCANINTERVAL: Int {
         get { return selectedUSUser1.VALUE1!.toInt()! }
+        set { selectedUSUser1.VALUE1 = String(newValue) }
     }
     var USREVIEWINTERVAL: Int {
         get { return selectedUSUser1.VALUE2!.toInt()! }
+        set { selectedUSUser1.VALUE2 = String(newValue) }
     }
     private var selectedUSLang2: MUserSetting!
     var USTEXTBOOKID: Int {
