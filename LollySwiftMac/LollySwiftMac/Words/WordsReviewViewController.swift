@@ -35,14 +35,12 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
 
     func settingsChanged() {
         vm = WordsReviewViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true)
-        updateToolbar()
         synth.setVoice(NSSpeechSynthesizer.VoiceName(rawValue: vmSettings.macVoiceName))
         newTest(self)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        settingsChanged()
     }
     
     // Take a reference to the window controller in order to prevent it from being released
@@ -52,14 +50,11 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
         super.viewDidAppear()
         wc = view.window!.windowController as? WordsReviewWindowController
         wc.scSpeak.selectedSegment = isSpeaking ? 1 : 0
-        updateToolbar()
+        settingsChanged()
     }
     override func viewWillDisappear() {
         wc = nil
         subscription?.dispose()
-    }
-    func updateToolbar() {
-        wc?.pubReviewMode.selectItem(at: vm.mode.rawValue)
     }
 
     private func doTest() {
@@ -89,17 +84,27 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
     }
     
     @IBAction func newTest(_ sender: AnyObject) {
-        subscription?.dispose()
-        vm.newTest(shuffled: shuffled, levelge0only: levelge0only).subscribe {
-            self.doTest()
-        }.disposed(by: disposeBag)
-        btnCheck.title = vm.isTestMode ? "Check" : "Next"
-        if vm.mode == .reviewAuto {
-            subscription = Observable<Int>.interval(vmSettings.USREVIEWINTERVAL.toDouble / 1000.0, scheduler: MainScheduler.instance).subscribe { _ in
-                self.check(self)
+        let optionsVC = NSStoryboard(name: "Tools", bundle: nil).instantiateController(withIdentifier: "ReviewOptionsViewController") as! ReviewOptionsViewController
+        optionsVC.mode = vm.mode.rawValue
+        optionsVC.shuffled = shuffled
+        optionsVC.levelge0only = levelge0only
+        optionsVC.complete = { [unowned self] in
+            self.vm.mode = ReviewMode(rawValue: optionsVC.pubMode.indexOfSelectedItem)!
+            self.shuffled = optionsVC.shuffled
+            self.levelge0only = optionsVC.levelge0only
+            self.subscription?.dispose()
+            self.vm.newTest(shuffled: self.shuffled, levelge0only: self.levelge0only).subscribe {
+                self.doTest()
+            }.disposed(by: self.disposeBag)
+            self.btnCheck.title = self.vm.isTestMode ? "Check" : "Next"
+            if self.vm.mode == .reviewAuto {
+                self.subscription = Observable<Int>.interval(self.vmSettings.USREVIEWINTERVAL.toDouble / 1000.0, scheduler: MainScheduler.instance).subscribe { _ in
+                    self.check(self)
+                }
+                self.subscription?.disposed(by: self.disposeBag)
             }
-            subscription?.disposed(by: disposeBag)
         }
+        self.presentAsSheet(optionsVC)
     }
     
     func controlTextDidEndEditing(_ obj: Notification) {
@@ -142,19 +147,6 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
             synth.startSpeaking(vm.currentWord)
         }
     }
-    
-    @IBAction func shuffledOrNotChanged(_ sender: AnyObject) {
-        shuffled = (sender as! NSSegmentedControl).selectedSegment == 1
-    }
-    
-    @IBAction func levelAllOrNotChanged(_ sender: AnyObject) {
-        levelge0only = (sender as! NSSegmentedControl).selectedSegment == 1
-    }
-    
-    @IBAction func reviewModeChanged(_ sender: AnyObject) {
-        vm.mode = ReviewMode(rawValue: (sender as! NSPopUpButton).indexOfSelectedItem)!
-        newTest(self)
-    }
 
     deinit {
         print("DEBUG: \(self.className) deinit")
@@ -164,7 +156,6 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
 class WordsReviewWindowController: NSWindowController {
     
     @IBOutlet weak var scSpeak: NSSegmentedControl!
-    @IBOutlet weak var pubReviewMode: NSPopUpButton!
 
     deinit {
         print("DEBUG: \(self.className) deinit")

@@ -5639,27 +5639,6 @@ Gw
                                         <action selector="newTest:" target="8fs-z5-j5z" id="y9w-OD-jLo"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="6E63C884-9A2F-441A-AD60-AD11852D1C51" label="Mode?" paletteLabel="Mode?" sizingBehavior="auto" id="OiT-9D-joz">
-                                    <nil key="toolTip"/>
-                                    <popUpButton key="view" verticalHuggingPriority="750" id="Y17-gb-IEt">
-                                        <rect key="frame" x="0.0" y="14" width="121" height="24"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <popUpButtonCell key="cell" type="roundTextured" title="Review(Auto)" bezelStyle="texturedRounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" selectedItem="Ubz-2B-e7L" id="qEz-l7-apw">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="menu"/>
-                                            <menu key="menu" id="YAg-Y1-zVi">
-                                                <items>
-                                                    <menuItem title="Review(Auto)" state="on" id="Ubz-2B-e7L"/>
-                                                    <menuItem title="Test" id="A6d-2n-8ky"/>
-                                                    <menuItem title="Review(Manual)" id="RoT-DH-nbj"/>
-                                                </items>
-                                            </menu>
-                                        </popUpButtonCell>
-                                        <connections>
-                                            <action selector="reviewModeChanged:" target="8fs-z5-j5z" id="2cY-Zc-YLW"/>
-                                        </connections>
-                                    </popUpButton>
-                                </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="5C13EDF6-ECEE-4551-A595-50711F7FE881" label="Speak?" paletteLabel="Speak?" sizingBehavior="auto" id="qRB-d3-flw">
                                     <nil key="toolTip"/>
                                     <segmentedControl key="view" verticalHuggingPriority="750" id="tBa-or-L52">
@@ -5677,47 +5656,10 @@ Gw
                                         </connections>
                                     </segmentedControl>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="B1C452AE-7FBB-4C9F-A722-54CE7113DF07" label="Shuffled?" paletteLabel="Shuffled?" sizingBehavior="auto" id="wVI-Ck-osd">
-                                    <nil key="toolTip"/>
-                                    <segmentedControl key="view" verticalHuggingPriority="750" id="szy-QT-d4w">
-                                        <rect key="frame" x="0.0" y="14" width="114" height="23"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="PQR-g9-0qW">
-                                            <font key="font" metaFont="system"/>
-                                            <segments>
-                                                <segment label="Fixed" width="45"/>
-                                                <segment label="Shuffled" width="62" selected="YES" tag="1"/>
-                                            </segments>
-                                        </segmentedCell>
-                                        <connections>
-                                            <action selector="shuffledOrNotChanged:" target="8fs-z5-j5z" id="Q0l-4y-w0l"/>
-                                        </connections>
-                                    </segmentedControl>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="E16763A3-D71B-44F7-B389-312FED1D5EE4" label="Level?" paletteLabel="Level?" sizingBehavior="auto" id="56Q-UU-P0O">
-                                    <nil key="toolTip"/>
-                                    <segmentedControl key="view" verticalHuggingPriority="750" id="03k-91-Oud">
-                                        <rect key="frame" x="0.0" y="14" width="87" height="23"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="LBE-Je-EDm">
-                                            <font key="font" metaFont="system"/>
-                                            <segments>
-                                                <segment label="All" width="40"/>
-                                                <segment label="&gt;= 0" width="40" selected="YES" tag="1"/>
-                                            </segments>
-                                        </segmentedCell>
-                                        <connections>
-                                            <action selector="levelAllOrNotChanged:" target="8fs-z5-j5z" id="Xne-yp-JFK"/>
-                                        </connections>
-                                    </segmentedControl>
-                                </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="JMO-aE-HGx"/>
-                                <toolbarItem reference="OiT-9D-joz"/>
                                 <toolbarItem reference="qRB-d3-flw"/>
-                                <toolbarItem reference="wVI-Ck-osd"/>
-                                <toolbarItem reference="56Q-UU-P0O"/>
                             </defaultToolbarItems>
                         </toolbar>
                         <connections>
@@ -5725,7 +5667,6 @@ Gw
                         </connections>
                     </window>
                     <connections>
-                        <outlet property="pubReviewMode" destination="Y17-gb-IEt" id="k3I-rk-YP1"/>
                         <outlet property="scSpeak" destination="tBa-or-L52" id="VYG-H8-L3i"/>
                         <segue destination="ypg-jQ-ROv" kind="relationship" relationship="window.shadowedContentViewController" id="vUt-rM-CFx"/>
                     </connections>

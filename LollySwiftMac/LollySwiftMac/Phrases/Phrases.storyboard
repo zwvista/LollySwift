@@ -1005,7 +1005,7 @@ Gw
                                         </tableView>
                                     </subviews>
                                 </clipView>
-                                <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="0.98942917547568709" horizontal="YES" id="tt1-2S-MUd">
+                                <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="tt1-2S-MUd">
                                     <rect key="frame" x="1" y="103" width="581" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
@@ -2369,7 +2369,7 @@ Gw
                                         </tableView>
                                     </subviews>
                                 </clipView>
-                                <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="nAC-2E-Ee0">
+                                <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="nAC-2E-Ee0">
                                     <rect key="frame" x="1" y="103" width="586" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
@@ -3486,7 +3486,7 @@ Gw
                                         </tableView>
                                     </subviews>
                                 </clipView>
-                                <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="0.99363057324840764" horizontal="YES" id="bhH-DG-YLN">
+                                <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="bhH-DG-YLN">
                                     <rect key="frame" x="1" y="103" width="583" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
@@ -3587,27 +3587,6 @@ Gw
                                         <action selector="newTest:" target="CXB-3h-H4F" id="WGN-bE-I77"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="6E63C884-9A2F-441A-AD60-AD11852D1C51" label="Mode?" paletteLabel="Mode?" sizingBehavior="auto" id="M5T-LZ-5G7">
-                                    <nil key="toolTip"/>
-                                    <popUpButton key="view" verticalHuggingPriority="750" id="Pb6-3I-oQO">
-                                        <rect key="frame" x="0.0" y="14" width="121" height="24"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <popUpButtonCell key="cell" type="roundTextured" title="Review(Auto)" bezelStyle="texturedRounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" selectedItem="Tg0-Hs-vuZ" id="S6X-XM-0fa">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="menu"/>
-                                            <menu key="menu" id="pNT-WG-xeN">
-                                                <items>
-                                                    <menuItem title="Review(Auto)" state="on" id="Tg0-Hs-vuZ"/>
-                                                    <menuItem title="Test" id="z7C-lP-rjM"/>
-                                                    <menuItem title="Review(Manual)" id="s24-FK-PhN"/>
-                                                </items>
-                                            </menu>
-                                        </popUpButtonCell>
-                                        <connections>
-                                            <action selector="reviewModeChanged:" target="CXB-3h-H4F" id="tfm-p4-klL"/>
-                                        </connections>
-                                    </popUpButton>
-                                </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="5C13EDF6-ECEE-4551-A595-50711F7FE881" label="Speak?" paletteLabel="Speak?" sizingBehavior="auto" id="uLb-lb-OJM">
                                     <nil key="toolTip"/>
                                     <segmentedControl key="view" verticalHuggingPriority="750" id="Lr1-Ub-Ecw">
@@ -3625,29 +3604,10 @@ Gw
                                         </connections>
                                     </segmentedControl>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="B1C452AE-7FBB-4C9F-A722-54CE7113DF07" label="Shuffled?" paletteLabel="Shuffled?" sizingBehavior="auto" id="b4Z-ds-uHo">
-                                    <nil key="toolTip"/>
-                                    <segmentedControl key="view" verticalHuggingPriority="750" id="E87-hs-DES">
-                                        <rect key="frame" x="0.0" y="14" width="114" height="23"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="JyO-Sh-czM">
-                                            <font key="font" metaFont="system"/>
-                                            <segments>
-                                                <segment label="Fixed" width="45"/>
-                                                <segment label="Shuffled" width="62" selected="YES" tag="1"/>
-                                            </segments>
-                                        </segmentedCell>
-                                        <connections>
-                                            <action selector="shuffledOrNotChanged:" target="CXB-3h-H4F" id="bJx-8b-Pke"/>
-                                        </connections>
-                                    </segmentedControl>
-                                </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="wMG-or-oAQ"/>
-                                <toolbarItem reference="M5T-LZ-5G7"/>
                                 <toolbarItem reference="uLb-lb-OJM"/>
-                                <toolbarItem reference="b4Z-ds-uHo"/>
                             </defaultToolbarItems>
                         </toolbar>
                         <connections>
@@ -3655,7 +3615,6 @@ Gw
                         </connections>
                     </window>
                     <connections>
-                        <outlet property="pubReviewMode" destination="Pb6-3I-oQO" id="mSV-Om-S7i"/>
                         <outlet property="scSpeak" destination="Lr1-Ub-Ecw" id="SmO-ZD-0Ir"/>
                         <segue destination="I1g-x1-rZK" kind="relationship" relationship="window.shadowedContentViewController" id="lNL-HZ-8Hu"/>
                     </connections>

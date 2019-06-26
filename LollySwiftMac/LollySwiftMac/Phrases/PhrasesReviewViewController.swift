@@ -33,16 +33,14 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
 
     func settingsChanged() {
         vm = PhrasesReviewViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true)
-        updateToolbar()
         synth.setVoice(NSSpeechSynthesizer.VoiceName(rawValue: vmSettings.macVoiceName))
         newTest(self)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        settingsChanged()
     }
-    
+
     // Take a reference to the window controller in order to prevent it from being released
     // Otherwise, we would not be able to access its controls afterwards
     var wc: PhrasesReviewWindowController!
@@ -50,14 +48,11 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
         super.viewDidAppear()
         wc = view.window!.windowController as? PhrasesReviewWindowController
         wc.scSpeak.selectedSegment = isSpeaking ? 1 : 0
-        updateToolbar()
+        settingsChanged()
     }
     override func viewWillDisappear() {
         wc = nil
         subscription?.dispose()
-    }
-    func updateToolbar() {
-        wc?.pubReviewMode.selectItem(at: vm.mode.rawValue)
     }
     
     private func doTest() {
@@ -83,17 +78,25 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
     }
     
     @IBAction func newTest(_ sender: AnyObject) {
-        subscription?.dispose()
-        vm.newTest(shuffled: shuffled).subscribe {
-            self.doTest()
-        }.disposed(by: disposeBag)
-        btnCheck.title = vm.isTestMode ? "Check" : "Next"
-        if vm.mode == .reviewAuto {
-            subscription = Observable<Int>.interval(vmSettings.USREVIEWINTERVAL.toDouble / 1000.0, scheduler: MainScheduler.instance).subscribe { _ in
-                self.check(self)
+        let optionsVC = NSStoryboard(name: "Tools", bundle: nil).instantiateController(withIdentifier: "ReviewOptionsViewController") as! ReviewOptionsViewController
+        optionsVC.mode = vm.mode.rawValue
+        optionsVC.shuffled = shuffled
+        optionsVC.complete = { [unowned self] in
+            self.vm.mode = ReviewMode(rawValue: optionsVC.pubMode.indexOfSelectedItem)!
+            self.shuffled = optionsVC.shuffled
+            self.subscription?.dispose()
+            self.vm.newTest(shuffled: self.shuffled).subscribe {
+                self.doTest()
+            }.disposed(by: self.disposeBag)
+            self.btnCheck.title = self.vm.isTestMode ? "Check" : "Next"
+            if self.vm.mode == .reviewAuto {
+                self.subscription = Observable<Int>.interval(self.vmSettings.USREVIEWINTERVAL.toDouble / 1000.0, scheduler: MainScheduler.instance).subscribe { _ in
+                    self.check(self)
+                }
+                self.subscription?.disposed(by: self.disposeBag)
             }
-            subscription?.disposed(by: disposeBag)
         }
+        self.presentAsSheet(optionsVC)
     }
     
     func controlTextDidEndEditing(_ obj: Notification) {
@@ -136,15 +139,6 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
             synth.startSpeaking(vm.currentPhrase)
         }
     }
-    
-    @IBAction func shuffledOrNotChanged(_ sender: AnyObject) {
-        shuffled = (sender as! NSSegmentedControl).selectedSegment == 1
-    }
-    
-    @IBAction func reviewModeChanged(_ sender: AnyObject) {
-        vm.mode = ReviewMode(rawValue: (sender as! NSPopUpButton).indexOfSelectedItem)!
-        newTest(self)
-    }
 
     deinit {
         print("DEBUG: \(self.className) deinit")
@@ -154,7 +148,6 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
 class PhrasesReviewWindowController: NSWindowController {
     
     @IBOutlet weak var scSpeak: NSSegmentedControl!
-    @IBOutlet weak var pubReviewMode: NSPopUpButton!
 
     deinit {
         print("DEBUG: \(self.className) deinit")
