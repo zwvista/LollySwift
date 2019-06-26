@@ -91,7 +91,7 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
         optionsVC.complete = { [unowned self] in
             self.vm.mode = ReviewMode(rawValue: optionsVC.pubMode.indexOfSelectedItem)!
             self.shuffled = optionsVC.shuffled
-            self.levelge0only = optionsVC.levelge0only
+            self.levelge0only = optionsVC.levelge0only!
             self.subscription?.dispose()
             self.vm.newTest(shuffled: self.shuffled, levelge0only: self.levelge0only).subscribe {
                 self.doTest()
