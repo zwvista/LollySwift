@@ -24,8 +24,6 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
     @IBOutlet weak var tfPhraseInput: NSTextField!
     @IBOutlet weak var btnCheck: NSButton!
     
-    @objc var phraseInput = ""
-    
     let synth = NSSpeechSynthesizer()
     var isSpeaking = true
     var shuffled = true
@@ -61,9 +59,9 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
         tfCorrect.isHidden = true
         tfIncorrect.isHidden = true
         btnCheck.isEnabled = b
-        tfPhraseTarget.stringValue = vm.isTestMode ? "" : vm.currentPhrase
-        tfTranslation.stringValue = ""
-        phraseInput = ""
+        tfPhraseTarget.stringValue = vm.currentPhrase
+        tfTranslation.stringValue = vm.currentItem?.TRANSLATION ?? ""
+        tfPhraseTarget.isHidden = vm.isTestMode
         tfPhraseInput.stringValue = ""
         tfPhraseInput.becomeFirstResponder()
         if b {
@@ -71,7 +69,6 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
             if isSpeaking {
                 synth.startSpeaking(vm.currentPhrase)
             }
-            tfTranslation.stringValue = vm.currentItem!.TRANSLATION ?? ""
         } else {
             subscription?.dispose()
         }
@@ -105,9 +102,8 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
         let reason = dict["NSTextMovement"] as! NSNumber
         let code = Int(reason.int32Value)
         guard code == NSReturnTextMovement else {return}
-        if textfield === tfPhraseInput && (!vm.isTestMode || !phraseInput.isEmpty) {
-            check(self)
-        }
+        guard textfield === tfPhraseInput, !(vm.isTestMode && tfPhraseInput.stringValue.isEmpty) else {return}
+        check(self)
     }
     
     @IBAction func check(_ sender: AnyObject) {
@@ -115,17 +111,15 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
             vm.next()
             doTest()
         } else if tfCorrect.isHidden && tfIncorrect.isHidden {
-            phraseInput = vmSettings.autoCorrectInput(text: phraseInput)
-            tfPhraseInput.stringValue = phraseInput
+            tfPhraseInput.stringValue = vmSettings.autoCorrectInput(text: tfPhraseInput.stringValue)
             tfPhraseTarget.isHidden = false
-            tfPhraseTarget.stringValue = vm.currentPhrase
-            if phraseInput == vm.currentPhrase {
+            if tfPhraseInput.stringValue == vm.currentPhrase {
                 tfCorrect.isHidden = false
             } else {
                 tfIncorrect.isHidden = false
             }
             btnCheck.title = "Next"
-            vm.check(phraseInput: phraseInput)
+            vm.check(phraseInput: tfPhraseTarget.stringValue)
         } else {
             vm.next()
             doTest()

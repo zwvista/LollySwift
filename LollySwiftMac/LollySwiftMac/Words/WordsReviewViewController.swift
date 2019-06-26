@@ -21,11 +21,10 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
     @IBOutlet weak var tfIncorrect: NSTextField!
     @IBOutlet weak var tfAccuracy: NSTextField!
     @IBOutlet weak var tfWordTarget: NSTextField!
+    @IBOutlet weak var tfNoteTarget: NSTextField!
     @IBOutlet weak var tfTranslation: NSTextField!
     @IBOutlet weak var tfWordInput: NSTextField!
     @IBOutlet weak var btnCheck: NSButton!
-    
-    @objc var wordInput = ""
     
     let synth = NSSpeechSynthesizer()
     var isSpeaking = true
@@ -64,9 +63,11 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
         tfIncorrect.isHidden = true
         tfAccuracy.isHidden = !vm.isTestMode || !b
         btnCheck.isEnabled = b
-        tfWordTarget.stringValue = vm.isTestMode ? "" : vm.currentItem?.WORDNOTE ?? ""
+        tfWordTarget.stringValue = vm.currentWord
+        tfNoteTarget.stringValue = vm.currentItem?.NOTE ?? ""
+        tfWordTarget.isHidden = vm.isTestMode
+        tfNoteTarget.isHidden = vm.isTestMode
         tfTranslation.stringValue = ""
-        wordInput = ""
         tfWordInput.stringValue = ""
         tfWordInput.becomeFirstResponder()
         if b {
@@ -113,9 +114,8 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
         let reason = dict["NSTextMovement"] as! NSNumber
         let code = Int(reason.int32Value)
         guard code == NSReturnTextMovement else {return}
-        if textfield === tfWordInput && (!vm.isTestMode || !wordInput.isEmpty) {
-            check(self)
-        }
+        guard textfield === tfWordInput, !(vm.isTestMode && tfWordInput.stringValue.isEmpty) else {return}
+        check(self)
     }
     
     @IBAction func check(_ sender: AnyObject) {
@@ -123,17 +123,16 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
             vm.next()
             doTest()
         } else if tfCorrect.isHidden && tfIncorrect.isHidden {
-            wordInput = vmSettings.autoCorrectInput(text: wordInput)
-            tfWordInput.stringValue = wordInput
+            tfWordInput.stringValue = vmSettings.autoCorrectInput(text: tfWordInput.stringValue)
             tfWordTarget.isHidden = false
-            tfWordTarget.stringValue = vm.currentWord
-            if wordInput == vm.currentWord {
+            tfNoteTarget.isHidden = false
+            if tfWordInput.stringValue == vm.currentWord {
                 tfCorrect.isHidden = false
             } else {
                 tfIncorrect.isHidden = false
             }
             btnCheck.title = "Next"
-            vm.check(wordInput: wordInput).subscribe().disposed(by: disposeBag)
+            vm.check(wordInput: tfWordInput.stringValue).subscribe().disposed(by: disposeBag)
         } else {
             vm.next()
             doTest()
