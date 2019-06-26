@@ -9,7 +9,7 @@
 import Foundation
 import RxSwift
 
-class NoteViewModel {
+class NoteViewModel: NSObject {
 
     var vmSettings: SettingsViewModel
     var mDictNote: MDictNote {

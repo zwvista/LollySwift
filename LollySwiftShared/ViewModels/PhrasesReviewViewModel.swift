@@ -9,7 +9,7 @@
 import Foundation
 import RxSwift
 
-class PhrasesReviewViewModel {
+class PhrasesReviewViewModel: NSObject {
 
     var vmSettings: SettingsViewModel
     

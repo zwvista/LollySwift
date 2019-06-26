@@ -13,15 +13,13 @@ import RxSwift
 class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NSToolbarItemValidation {
 
     var vm: WordsUnitViewModel!
+    let vmReview = EmbeddedReviewViewModel()
     override var vmSettings: SettingsViewModel! {
         return vm.vmSettings
     }
     var arrWords: [MUnitWord] {
         return vm.arrWordsFiltered ?? vm.arrWords
     }
-    
-    @IBOutlet weak var btnPrevious: NSButton!
-    @IBOutlet weak var btnNext: NSButton!
 
     // https://developer.apple.com/videos/play/wwdc2011/120/
     // https://stackoverflow.com/questions/2121907/drag-drop-reorder-rows-on-nstableview
@@ -123,7 +121,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
                 newIndexOffset += 1
             }
         }
-        let col = tableView.tableColumns.firstIndex(where: {$0.title == "SEQNUM"})!
+        let col = tableView.tableColumns.firstIndex { $0.title == "SEQNUM" }!
         vm.reindex {
             tableView.reloadData(forRowIndexes: [$0], columnIndexes: [col])
         }
@@ -189,7 +187,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     }
 
     @IBAction func getNote(_ sender: AnyObject) {
-        let col = tableView.tableColumns.firstIndex(where: {$0.title == "NOTE"})!
+        let col = tableView.tableColumns.firstIndex { $0.title == "NOTE" }!
         vm.getNote(index: tableView.selectedRow).subscribe {
             self.tableView.reloadData(forRowIndexes: [self.tableView.selectedRow], columnIndexes: [col])
         }.disposed(by: disposeBag)
@@ -234,6 +232,45 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
 
     override func updateStatusText() {
         tfStatusText.stringValue = "\(tableView.numberOfRows) Words in \(vmSettings.UNITINFO)"
+    }
+    
+    @IBAction func reviewWords(_ sender: AnyObject) {
+        if vmReview.subscription != nil {
+            vmReview.subscription?.dispose()
+            vmReview.subscription = nil
+        } else {
+            let optionsVC = NSStoryboard(name: "Tools", bundle: nil).instantiateController(withIdentifier: "ReviewOptionsViewController") as! ReviewOptionsViewController
+            optionsVC.mode = 0
+            optionsVC.shuffled = vmReview.shuffled
+            optionsVC.levelge0only = vmReview.levelge0only
+            optionsVC.complete = { [unowned self] in
+                self.vmReview.shuffled = optionsVC.shuffled
+                self.vmReview.levelge0only = optionsVC.levelge0only!
+                var arrWords = self.arrWords
+                if self.vmReview.levelge0only {
+                    arrWords = arrWords.filter { $0.LEVEL >= 0 }
+                }
+                if self.vmReview.shuffled {
+                    arrWords = arrWords.shuffled()
+                }
+                self.vmReview.arrIDs = arrWords.map { $0.ID }
+                var i = 0
+                let wordCount = self.vmReview.arrIDs.count
+                self.vmReview.subscription = Observable<Int>.interval(Double(self.vmSettings.USREADINTERVAL) / 1000.0, scheduler: MainScheduler.instance).subscribe { _ in
+                    if i < wordCount {
+                        if let row = self.arrWords.firstIndex(where: { $0.ID == self.vmReview.arrIDs[i] }) {
+                            self.tableView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
+                        }
+                        i += 1
+                    } else {
+                        self.vmReview.subscription?.dispose()
+                        self.vmReview.subscription = nil
+                    }
+                }
+                self.vmReview.subscription?.disposed(by: self.disposeBag)
+            }
+            self.presentAsSheet(optionsVC)
+        }
     }
 }
 

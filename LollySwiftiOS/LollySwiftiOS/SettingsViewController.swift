@@ -268,22 +268,22 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
     }
 
     func onUpdateUnitFrom() {
-        ddUnitFrom.selectIndex(vm.arrUnits.firstIndex{ $0.value == vm.USUNITFROM }!)
+        ddUnitFrom.selectIndex(vm.arrUnits.firstIndex { $0.value == vm.USUNITFROM }!)
         lblUnitFrom.text = ddUnitFrom.selectedItem
     }
     
     func onUpdatePartFrom() {
-        ddPartFrom.selectIndex(vm.arrParts.firstIndex{ $0.value == vm.USPARTFROM }!)
+        ddPartFrom.selectIndex(vm.arrParts.firstIndex { $0.value == vm.USPARTFROM }!)
         lblPartFrom.text = ddPartFrom.selectedItem
     }
 
     func onUpdateUnitTo() {
-        ddUnitTo.selectIndex(vm.arrUnits.firstIndex{ $0.value == vm.USUNITTO }!)
+        ddUnitTo.selectIndex(vm.arrUnits.firstIndex { $0.value == vm.USUNITTO }!)
         lblUnitTo.text = ddUnitTo.selectedItem
     }
     
     func onUpdatePartTo() {
-        ddPartTo.selectIndex(vm.arrParts.firstIndex{ $0.value == vm.USPARTTO }!)
+        ddPartTo.selectIndex(vm.arrParts.firstIndex { $0.value == vm.USPARTTO }!)
         lblPartTo.text = ddPartTo.selectedItem
     }
 

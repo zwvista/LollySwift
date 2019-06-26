@@ -9,7 +9,7 @@
 import Foundation
 import RxSwift
 
-class SingleWordViewModel {
+class SingleWordViewModel: NSObject {
 
     var vmSettings: SettingsViewModel
     let disposeBag: DisposeBag!
@@ -18,6 +18,7 @@ class SingleWordViewModel {
     init(word: String, settings: SettingsViewModel, disposeBag: DisposeBag, complete: @escaping () -> ()) {
         vmSettings = settings
         self.disposeBag = disposeBag
+        super.init()
         MUnitWord.getDataByLangWord(langid: vmSettings.selectedLang.ID, word: word, arrTextbooks: vmSettings.arrTextbooks).map {
             self.arrWords = $0
         }.subscribe {
