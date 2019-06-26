@@ -141,7 +141,7 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
         }
     }
     
-    @IBAction func speakOrNotChanged(_ sender: AnyObject) {
+    @IBAction func isSpeakingChanged(_ sender: AnyObject) {
         isSpeaking = (sender as! NSSegmentedControl).selectedSegment == 1
         if isSpeaking {
             synth.startSpeaking(vm.currentWord)

@@ -271,7 +271,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
         synth.startSpeaking(selectedWord)
     }
     
-    @IBAction func speakOrNotChanged(_ sender: AnyObject) {
+    @IBAction func isSpeakingChanged(_ sender: AnyObject) {
         isSpeaking = (sender as! NSSegmentedControl).selectedSegment == 1
         if isSpeaking {
             speak(self)

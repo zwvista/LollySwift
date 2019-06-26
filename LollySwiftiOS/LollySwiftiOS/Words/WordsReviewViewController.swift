@@ -126,7 +126,7 @@ class WordsReviewViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    @IBAction func speakOrNotChanged(_ sender: AnyObject) {
+    @IBAction func isSpeakingChanged(_ sender: AnyObject) {
         isSpeaking = (sender as! UISwitch).isOn
         if isSpeaking {
             let utterance = AVSpeechUtterance(string: vm.currentWord)

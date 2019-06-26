@@ -104,7 +104,7 @@ class PhrasesBaseViewController: NSViewController, LollyProtocol, NSTableViewDat
         synth.startSpeaking(selectedPhrase)
     }
     
-    @IBAction func speakOrNotChanged(_ sender: AnyObject) {
+    @IBAction func isSpeakingChanged(_ sender: AnyObject) {
         isSpeaking = (sender as! NSSegmentedControl).selectedSegment == 1
         if isSpeaking {
             speak(self)
