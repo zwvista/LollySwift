@@ -37,56 +37,61 @@ class MUserSetting: NSObject, Codable {
 
     static func update(_ id: Int, langid: Int) -> Observable<()> {
         let body = "VALUE1=\(langid)"
-        return update(id, body: body).map { print($0) }
+        return update(id, body: body)
     }
     
     static func update(_ id: Int, textbookid: Int) -> Observable<()> {
         let body = "VALUE1=\(textbookid)"
-        return update(id, body: body).map { print($0) }
+        return update(id, body: body)
     }
     
     static func update(_ id: Int, dictitem: String) -> Observable<()> {
         let body = "VALUE2=\(dictitem)"
-        return update(id, body: body).map { print($0) }
+        return update(id, body: body)
     }
     
     static func update(_ id: Int, dictnoteid: Int) -> Observable<()> {
         let body = "VALUE3=\(dictnoteid)"
-        return update(id, body: body).map { print($0) }
+        return update(id, body: body)
     }
     
     static func update(_ id: Int, dicttranslationid: Int) -> Observable<()> {
         let body = "VALUE1=\(dicttranslationid)"
-        return update(id, body: body).map { print($0) }
+        return update(id, body: body)
     }
 
     static func update(_ id: Int, usunitfrom: Int) -> Observable<()> {
         let body = "VALUE1=\(usunitfrom)"
-        return update(id, body: body).map { print($0) }
+        return update(id, body: body)
     }
     
     static func update(_ id: Int, uspartfrom: Int) -> Observable<()> {
         let body = "VALUE2=\(uspartfrom)"
-        return update(id, body: body).map { print($0) }
+        return update(id, body: body)
     }
 
     static func update(_ id: Int, usunitto: Int) -> Observable<()> {
         let body = "VALUE3=\(usunitto)"
-        return update(id, body: body).map { print($0) }
+        return update(id, body: body)
     }
     
     static func update(_ id: Int, uspartto: Int) -> Observable<()> {
         let body = "VALUE4=\(uspartto)"
-        return update(id, body: body).map { print($0) }
+        return update(id, body: body)
     }
     
     static func update(_ id: Int, macvoiceid: Int) -> Observable<()> {
         let body = "VALUE2=\(macvoiceid)"
-        return update(id, body: body).map { print($0) }
+        return update(id, body: body)
     }
     
     static func update(_ id: Int, iosvoiceid: Int) -> Observable<()> {
         let body = "VALUE3=\(iosvoiceid)"
-        return update(id, body: body).map { print($0) }
+        return update(id, body: body)
     }
+}
+
+struct MUserSettingInfo {
+    var USERSETTINGID = 0
+    var VALUEID = 0
 }

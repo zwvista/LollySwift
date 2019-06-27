@@ -13,8 +13,15 @@ import RxSwift
 class SettingsViewModel: NSObject {
     
     var arrUserSettings = [MUserSetting]()
+    private func getUSValue(info: MUserSettingInfo) -> String? {
+        return arrUserSettings.first { $0.ID == info.USERSETTINGID }!.value(forKeyPath: "VALUE\(info.VALUEID)") as? String
+    }
+    private func setUSValue(info: MUserSettingInfo, value: String) {
+        arrUserSettings.first { $0.ID == info.USERSETTINGID }!.setValue(value, forKey: "VALUE\(info.VALUEID)")
+    }
     private var selectedUSUser0: MUserSetting!
     private var selectedUSUser1: MUserSetting!
+    private var USLANGID_INFO = MUserSettingInfo()
     private var USLANGID: Int {
         get { return selectedUSUser0.VALUE1!.toInt()! }
         set { selectedUSUser0.VALUE1 = String(newValue) }

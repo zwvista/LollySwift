@@ -86,6 +86,10 @@
 		95F0A8A022925DC200D1B9A2 /* WordsReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F0A89E22925DC200D1B9A2 /* WordsReviewViewModel.swift */; };
 		95F0A8A122925DC200D1B9A2 /* PhrasesReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F0A89F22925DC200D1B9A2 /* PhrasesReviewViewModel.swift */; };
 		95F5400722BBA9BB00E3FD6A /* WordsDictViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F5400622BBA9BB00E3FD6A /* WordsDictViewModel.swift */; };
+		95F5401422C3905300E3FD6A /* MUSMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F5401322C3905200E3FD6A /* MUSMapping.swift */; };
+		95F5401822C3909900E3FD6A /* EmbeddedReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F5401522C3909900E3FD6A /* EmbeddedReviewViewModel.swift */; };
+		95F5401922C3909900E3FD6A /* SingleWordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F5401622C3909900E3FD6A /* SingleWordViewModel.swift */; };
+		95F5401A22C3909900E3FD6A /* SinglePhraseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F5401722C3909900E3FD6A /* SinglePhraseViewModel.swift */; };
 		95F9860B2218A639007225D4 /* MWordFami.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CED3C62216C0680094622F /* MWordFami.swift */; };
 		95FBF5342221A85100AE040C /* CommonApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954B8705218DC007007DC348 /* CommonApi.swift */; };
 		95FDF62A228D5D6C003DFB1A /* WordsUnitBatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FDF629228D5D6B003DFB1A /* WordsUnitBatchViewController.swift */; };
@@ -179,6 +183,10 @@
 		95F0A89E22925DC200D1B9A2 /* WordsReviewViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsReviewViewModel.swift; sourceTree = "<group>"; };
 		95F0A89F22925DC200D1B9A2 /* PhrasesReviewViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesReviewViewModel.swift; sourceTree = "<group>"; };
 		95F5400622BBA9BB00E3FD6A /* WordsDictViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsDictViewModel.swift; sourceTree = "<group>"; };
+		95F5401322C3905200E3FD6A /* MUSMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MUSMapping.swift; sourceTree = "<group>"; };
+		95F5401522C3909900E3FD6A /* EmbeddedReviewViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmbeddedReviewViewModel.swift; sourceTree = "<group>"; };
+		95F5401622C3909900E3FD6A /* SingleWordViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleWordViewModel.swift; sourceTree = "<group>"; };
+		95F5401722C3909900E3FD6A /* SinglePhraseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SinglePhraseViewModel.swift; sourceTree = "<group>"; };
 		95FDF629228D5D6B003DFB1A /* WordsUnitBatchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsUnitBatchViewController.swift; sourceTree = "<group>"; };
 		A2462FE0278FE5DE7FF9A4E2 /* Pods_LollySwiftiOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LollySwiftiOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA5376BDE309080131C3F3FD /* Pods_LollySwiftiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LollySwiftiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -231,12 +239,15 @@
 		8C316571207676CF0015C247 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				95F5401522C3909900E3FD6A /* EmbeddedReviewViewModel.swift */,
 				95E43F2C21E1D574001E650C /* NoteViewModel.swift */,
 				8C316575207676CF0015C247 /* PhrasesLangViewModel.swift */,
 				95F0A89F22925DC200D1B9A2 /* PhrasesReviewViewModel.swift */,
 				8C316576207676CF0015C247 /* PhrasesUnitViewModel.swift */,
-				95F5400622BBA9BB00E3FD6A /* WordsDictViewModel.swift */,
 				8C316572207676CF0015C247 /* SettingsViewModel.swift */,
+				95F5401722C3909900E3FD6A /* SinglePhraseViewModel.swift */,
+				95F5401622C3909900E3FD6A /* SingleWordViewModel.swift */,
+				95F5400622BBA9BB00E3FD6A /* WordsDictViewModel.swift */,
 				8C316573207676CF0015C247 /* WordsLangViewModel.swift */,
 				95F0A89E22925DC200D1B9A2 /* WordsReviewViewModel.swift */,
 				8C316577207676CF0015C247 /* WordsUnitViewModel.swift */,
@@ -268,6 +279,7 @@
 				8C316583207676CF0015C247 /* MUnitPhrase.swift */,
 				8C31657D207676CF0015C247 /* MUnitWord.swift */,
 				8C316580207676CF0015C247 /* MUserSetting.swift */,
+				95F5401322C3905200E3FD6A /* MUSMapping.swift */,
 				95940A932233879B00D35409 /* MVoice.swift */,
 				95CED3C62216C0680094622F /* MWordFami.swift */,
 				95C328B1223D48BD005FA6E6 /* MWordPhrase.swift */,
@@ -612,11 +624,13 @@
 				95EFF481218419E10094EE3C /* MAutoCorrect.swift in Sources */,
 				8C316586207676CF0015C247 /* SettingsViewModel.swift in Sources */,
 				8CD16D201D69FE8F00F5F625 /* PhrasesLangDetailViewController.swift in Sources */,
+				95F5401A22C3909900E3FD6A /* SinglePhraseViewModel.swift in Sources */,
 				8C316593207676CF0015C247 /* MLangPhrase.swift in Sources */,
 				954B8706218DC007007DC348 /* CommonApi.swift in Sources */,
 				95F5400722BBA9BB00E3FD6A /* WordsDictViewModel.swift in Sources */,
 				8C31658E207676CF0015C247 /* MDictionary.swift in Sources */,
 				95CED3B4221170C20094622F /* iOSApi.swift in Sources */,
+				95F5401822C3909900E3FD6A /* EmbeddedReviewViewModel.swift in Sources */,
 				8C0748E7209ED0DA0006BD1B /* RxCodableAlamofire.swift in Sources */,
 				95CED3C72216C0680094622F /* MWordFami.swift in Sources */,
 				8CB025942096CB3E0087462E /* RootViewController.swift in Sources */,
@@ -654,9 +668,11 @@
 				8C1CF684206A2A4800714C33 /* Extensions.swift in Sources */,
 				8C42B5B31D69A1D900DCB528 /* WordsUnitDetailViewController.swift in Sources */,
 				8C42B5BA1D69A21E00DCB528 /* PhrasesBaseViewController.swift in Sources */,
+				95F5401922C3909900E3FD6A /* SingleWordViewModel.swift in Sources */,
 				8CD16D161D69FDDC00F5F625 /* PhrasesUnitDetailViewController.swift in Sources */,
 				8C316595207676CF0015C247 /* MUnitPhrase.swift in Sources */,
 				953473DB1A0D16CF00FF2D56 /* AppDelegate.swift in Sources */,
+				95F5401422C3905300E3FD6A /* MUSMapping.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
