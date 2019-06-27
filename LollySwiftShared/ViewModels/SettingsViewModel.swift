@@ -12,6 +12,7 @@ import RxSwift
 
 class SettingsViewModel: NSObject {
     
+    var arrUSMappings = [MUSMapping]()
     var arrUserSettings = [MUserSetting]()
     private func getUSValue(info: MUserSettingInfo) -> String? {
         return arrUserSettings.first { $0.ID == info.USERSETTINGID }!.value(forKeyPath: "VALUE\(info.VALUEID)") as? String
@@ -19,27 +20,30 @@ class SettingsViewModel: NSObject {
     private func setUSValue(info: MUserSettingInfo, value: String) {
         arrUserSettings.first { $0.ID == info.USERSETTINGID }!.setValue(value, forKey: "VALUE\(info.VALUEID)")
     }
-    private var selectedUSUser0: MUserSetting!
-    private var selectedUSUser1: MUserSetting!
-    private var USLANGID_INFO = MUserSettingInfo()
+    private var INFO_USLANGID = MUserSettingInfo()
     private var USLANGID: Int {
-        get { return selectedUSUser0.VALUE1!.toInt()! }
-        set { selectedUSUser0.VALUE1 = String(newValue) }
+        get { return getUSValue(info: INFO_USLANGID)!.toInt()! }
+        set { setUSValue(info: INFO_USLANGID, value: String(newValue)) }
     }
+    private var INFO_USROWSPERPAGEOPTIONS = MUserSettingInfo()
     var USROWSPERPAGEOPTIONS: [Int] {
-        get { return selectedUSUser0.VALUE2!.split(",").map { $0.toInt()! } }
+        get { return getUSValue(info: INFO_USROWSPERPAGEOPTIONS)!.split(",").map { $0.toInt()! } }
     }
+    private var INFO_USROWSPERPAGE = MUserSettingInfo()
     var USROWSPERPAGE: Int {
-        get { return selectedUSUser0.VALUE3!.toInt()! }
+        get { return getUSValue(info: INFO_USROWSPERPAGE)!.toInt()! }
     }
+    private var INFO_USLEVELCOLORS = MUserSettingInfo()
     var USLEVELCOLORS: [Int: [String]]!
+    private var INFO_USSCANINTERVAL = MUserSettingInfo()
     var USSCANINTERVAL: Int {
-        get { return selectedUSUser1.VALUE1!.toInt()! }
-        set { selectedUSUser1.VALUE1 = String(newValue) }
+        get { return getUSValue(info: INFO_USSCANINTERVAL)!.toInt()! }
+        set { setUSValue(info: INFO_USSCANINTERVAL, value: String(newValue)) }
     }
+    private var INFO_USREVIEWINTERVAL = MUserSettingInfo()
     var USREVIEWINTERVAL: Int {
-        get { return selectedUSUser1.VALUE2!.toInt()! }
-        set { selectedUSUser1.VALUE2 = String(newValue) }
+        get { return getUSValue(info: INFO_USREVIEWINTERVAL)!.toInt()! }
+        set { setUSValue(info: INFO_USREVIEWINTERVAL, value: String(newValue)) }
     }
     private var selectedUSLang2: MUserSetting!
     var USTEXTBOOKID: Int {
@@ -245,10 +249,15 @@ class SettingsViewModel: NSObject {
     }
     
     init(_ x: SettingsViewModel) {
+        arrUSMappings = x.arrUSMappings
         arrUserSettings = x.arrUserSettings
-        selectedUSUser0 = x.selectedUSUser0
-        selectedUSUser1 = x.selectedUSUser1
+        INFO_USLANGID = x.INFO_USLANGID
+        INFO_USROWSPERPAGEOPTIONS = x.INFO_USROWSPERPAGEOPTIONS
+        INFO_USROWSPERPAGE = x.INFO_USROWSPERPAGE
+        INFO_USLEVELCOLORS = x.INFO_USLEVELCOLORS
         USLEVELCOLORS = x.USLEVELCOLORS
+        INFO_USSCANINTERVAL = x.INFO_USSCANINTERVAL
+        INFO_USREVIEWINTERVAL = x.INFO_USREVIEWINTERVAL
         selectedUSLang2 = x.selectedUSLang2
         selectedUSLang3 = x.selectedUSLang3
         selectedUSTextbook = x.selectedUSTextbook
@@ -275,16 +284,29 @@ class SettingsViewModel: NSObject {
         super.init()
     }
     
+    private func getUSInfo(name: String) -> MUserSettingInfo {
+        let o = arrUSMappings.first { $0.NAME == name }!
+        let o2 = arrUserSettings.first { $0.KIND == o.KIND && $0.ENTITYID == o.ENTITYID }!
+        return MUserSettingInfo(USERSETTINGID: o2.ID, VALUEID: o.VALUEID)
+    }
+    
     func getData() -> Observable<()> {
-        return Observable.zip(MLanguage.getData(), MUserSetting.getData(userid: CommonApi.userid),
+        return Observable.zip(MLanguage.getData(),
+                              MUSMapping.getData(),
+                              MUserSetting.getData(userid: CommonApi.userid),
                               MDictType.getData())
             .flatMap { result -> Observable<()> in
                 self.arrLanguages = result.0
-                self.arrUserSettings = result.1
-                self.arrDictTypes = result.2
-                self.selectedUSUser0 = self.arrUserSettings.first { $0.KIND == 1 && $0.ENTITYID == 0 }!
-                self.selectedUSUser1 = self.arrUserSettings.first { $0.KIND == 1 && $0.ENTITYID == 1 }!
-                let arr = self.selectedUSUser0.VALUE4!.split("\r\n").map { $0.split(",") }
+                self.arrUSMappings = result.1
+                self.arrUserSettings = result.2
+                self.arrDictTypes = result.3
+                self.INFO_USLANGID = self.getUSInfo(name: MUSMapping.NAME_USLANGID)
+                self.INFO_USROWSPERPAGEOPTIONS = self.getUSInfo(name: MUSMapping.NAME_USROWSPERPAGEOPTIONS)
+                self.INFO_USROWSPERPAGE = self.getUSInfo(name: MUSMapping.NAME_USROWSPERPAGE)
+                self.INFO_USLEVELCOLORS = self.getUSInfo(name: MUSMapping.NAME_USLEVELCOLORS)
+                self.INFO_USSCANINTERVAL = self.getUSInfo(name: MUSMapping.NAME_USSCANINTERVAL)
+                self.INFO_USREVIEWINTERVAL = self.getUSInfo(name: MUSMapping.NAME_USREVIEWINTERVAL)
+                let arr = self.getUSValue(info: self.INFO_USLEVELCOLORS)!.split("\r\n").map { $0.split(",") }
                 // https://stackoverflow.com/questions/39791084/swift-3-array-to-dictionary
                 self.USLEVELCOLORS = Dictionary(uniqueKeysWithValues: arr.map { ($0[0].toInt()!, [$0[1], $0[2]]) })
                 self.delegate?.onGetData()
@@ -357,7 +379,7 @@ class SettingsViewModel: NSObject {
     }
     
     func updateLang() -> Observable<()> {
-        return MUserSetting.update(selectedUSUser0.ID, langid: USLANGID).do { self.delegate?.onUpdateLang() }
+        return MUserSetting.update(info: INFO_USLANGID, intValue: USLANGID).do { self.delegate?.onUpdateLang() }
     }
     
     func updateDictItem() -> Observable<()> {

@@ -34,10 +34,10 @@ class MUserSetting: NSObject, Codable {
         // SQL: UPDATE USERSETTINGS SET VALUE4=? WHERE ID=?
         return RestApi.update(url: url, body: body).map { print($0) }
     }
-
-    static func update(_ id: Int, langid: Int) -> Observable<()> {
-        let body = "VALUE1=\(langid)"
-        return update(id, body: body)
+    
+    static func update(info: MUserSettingInfo, intValue: Int) -> Observable<()> {
+        let body = "VALUE\(info.VALUEID)=\(intValue)"
+        return update(info.USERSETTINGID, body: body)
     }
     
     static func update(_ id: Int, textbookid: Int) -> Observable<()> {
