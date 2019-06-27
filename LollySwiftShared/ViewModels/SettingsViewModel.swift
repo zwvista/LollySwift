@@ -409,7 +409,11 @@ class SettingsViewModel: NSObject {
     func updateLang() -> Observable<()> {
         return MUserSetting.update(info: INFO_USLANGID, intValue: USLANGID).do { self.delegate?.onUpdateLang() }
     }
-    
+
+    func updateTextbook() -> Observable<()> {
+        return MUserSetting.update(info: INFO_USTEXTBOOKID, intValue: USTEXTBOOKID).do { self.delegate?.onUpdateTextbook() }
+    }
+
     func updateDictItem() -> Observable<()> {
         return MUserSetting.update(info: INFO_USDICTITEM, stringValue: USDICTITEM).do { self.delegate?.onUpdateDictItem() }
     }
@@ -420,10 +424,6 @@ class SettingsViewModel: NSObject {
     
     func updateDictTranslation() -> Observable<()> {
         return MUserSetting.update(info: INFO_USDICTTRANSLATIONID, intValue: USDICTTRANSLATIONID).do { self.delegate?.onUpdateDictTranslation() }
-    }
-
-    func updateTextbook() -> Observable<()> {
-        return MUserSetting.update(info: INFO_USTEXTBOOKID, intValue: USTEXTBOOKID).do { self.delegate?.onUpdateTextbook() }
     }
     
     func updateMacVoice() -> Observable<()> {
