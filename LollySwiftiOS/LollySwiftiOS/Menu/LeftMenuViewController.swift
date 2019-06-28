@@ -20,7 +20,8 @@ public class LeftMenuViewController: UIViewController, UITableViewDelegate, UITa
     override public func viewDidLoad() {
         super.viewDidLoad()
 
-        let tableView = UITableView(frame: CGRect(x: 0, y: (self.view.frame.size.height - 54 * 10) / 2.0, width: self.view.frame.size.width, height: 54 * 10), style: .plain)
+        let frameht = self.view.frame.size.height, tvht = (54 * 10).toCGFloat
+        let tableView = UITableView(frame: CGRect(x: 0, y: max(0, (frameht - tvht) / 2.0), width: self.view.frame.size.width, height: min(frameht, tvht)), style: .plain)
         tableView.autoresizingMask = [.flexibleTopMargin, .flexibleBottomMargin, .flexibleWidth]
         tableView.delegate = self
         tableView.dataSource = self
@@ -32,6 +33,8 @@ public class LeftMenuViewController: UIViewController, UITableViewDelegate, UITa
 
         self.tableView = tableView
         self.view.addSubview(self.tableView!)
+        // https://stackoverflow.com/questions/13733354/uitableview-doesnt-scroll
+        self.view.bringSubviewToFront(self.tableView!)
         
         storyboardMain = UIStoryboard(name: "Main", bundle: nil)
         storyboardWords = UIStoryboard(name: "Words", bundle: nil)
