@@ -51,7 +51,7 @@ class MUnitWord: NSObject, Codable, MWordProtocol {
         return textbook.PARTSTR(PART)
     }
     var UNITPARTSEQNUM: String {
-        return "\(UNITSTR) \(SEQNUM)\n\(PARTSTR)"
+        return "\(UNITSTR)\n\(PARTSTR)\n\(SEQNUM)"
     }
     var WORDNOTE: String {
         return WORD + ((NOTE ?? "").isEmpty ? "" : "(\(NOTE!))")

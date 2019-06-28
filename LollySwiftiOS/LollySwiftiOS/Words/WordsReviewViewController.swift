@@ -15,6 +15,7 @@ class WordsReviewViewController: UIViewController, UITextFieldDelegate {
     let disposeBag = DisposeBag()
 
     @IBOutlet weak var lblWordTarget: UILabel!
+    @IBOutlet weak var lblNoteTarget: UILabel!
     @IBOutlet weak var lblIndex: UILabel!
     @IBOutlet weak var lblCorrect: UILabel!
     @IBOutlet weak var lblIncorrect: UILabel!
@@ -60,7 +61,10 @@ class WordsReviewViewController: UIViewController, UITextFieldDelegate {
         lblIncorrect.isHidden = true
         lblAccuracy.isHidden = !vm.isTestMode || !b
         btnCheck.isEnabled = b
-        lblWordTarget.text = vm.isTestMode ? "" : vm.currentItem?.WORDNOTE ?? ""
+        lblWordTarget.text = vm.currentWord
+        lblNoteTarget.text = vm.currentItem?.NOTE ?? ""
+        lblWordTarget.isHidden = vm.isTestMode
+        lblNoteTarget.isHidden = vm.isTestMode
         tvTranslation.isHidden = false
         tvTranslation.text = ""
         tfWordInput.text = ""
@@ -108,7 +112,7 @@ class WordsReviewViewController: UIViewController, UITextFieldDelegate {
         } else if lblCorrect.isHidden && lblIncorrect.isHidden {
             tfWordInput.text = vmSettings.autoCorrectInput(text: tfWordInput.text!)
             lblWordTarget.isHidden = false
-            lblWordTarget.text = vm.currentWord
+            lblNoteTarget.isHidden = false
             if tfWordInput.text == vm.currentWord {
                 lblCorrect.isHidden = false
             } else {
