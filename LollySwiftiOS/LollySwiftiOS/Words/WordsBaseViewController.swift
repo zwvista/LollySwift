@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import AVFoundation
 
 class WordsBaseViewController: UITableViewController, UISearchBarDelegate, UISearchResultsUpdating, UIGestureRecognizerDelegate {
 
@@ -94,9 +93,7 @@ class WordsBaseViewController: UITableViewController, UISearchBarDelegate, UISea
         if tableView.isEditing {
             performSegue(withIdentifier: "edit", sender: item)
         } else {
-            let utterance = AVSpeechUtterance(string: item.WORD)
-            utterance.voice = AVSpeechSynthesisVoice(identifier: vmSettings.selectediOSVoice.VOICENAME)
-            AppDelegate.synth.speak(utterance)
+            AppDelegate.speak(string: item.WORD)
         }
     }
     

@@ -12,9 +12,12 @@ import RxSwift
 class WordsDictViewModel: NSObject {
     var vmSettings: SettingsViewModel
     var arrWords = [String]()
-    var selectedWordIndex = 0
-    var selectedWord: String {
-        return arrWords[selectedWordIndex]
+    var currentWordIndex = 0
+    var currentWord: String {
+        return arrWords[currentWordIndex]
+    }
+    func next(_ delta: Int) {
+        currentWordIndex = (currentWordIndex + delta + arrWords.count) % arrWords.count
     }
 
     public init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> ()) {

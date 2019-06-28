@@ -119,7 +119,7 @@ class WordsUnitViewController: WordsBaseViewController {
             controller.item = sender as? MUnitWord ?? vm.newUnitWord()
         } else if let controller = segue.destination as? WordsDictViewController {
             controller.vm.arrWords = arrWords.map { $0.WORD }
-            controller.vm.selectedWordIndex = vm.arrWords.indexes(of: sender as! MUnitWord)[0]
+            controller.vm.currentWordIndex = vm.arrWords.indexes(of: sender as! MUnitWord)[0]
         } else if let controller = (segue.destination as? UINavigationController)?.topViewController as? WordsUnitBatchViewController {
             controller.vm = vm
         }

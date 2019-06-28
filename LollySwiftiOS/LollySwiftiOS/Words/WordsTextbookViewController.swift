@@ -92,7 +92,7 @@ class WordsTextbookViewController: WordsBaseViewController {
             controller.item = (sender as! MUnitWord)
         } else if let controller = segue.destination as? WordsDictViewController {
             controller.vm.arrWords = arrWords.map { $0.WORD }
-            controller.vm.selectedWordIndex = vm.arrWords.indexes(of: sender as! MUnitWord)[0]
+            controller.vm.currentWordIndex = vm.arrWords.indexes(of: sender as! MUnitWord)[0]
         }
     }
 

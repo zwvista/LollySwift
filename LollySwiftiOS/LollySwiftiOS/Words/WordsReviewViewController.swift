@@ -8,7 +8,6 @@
 
 import UIKit
 import RxSwift
-import AVFoundation
 import DropDown
 
 class WordsReviewViewController: UIViewController, UITextFieldDelegate {
@@ -75,9 +74,7 @@ class WordsReviewViewController: UIViewController, UITextFieldDelegate {
             lblIndex.text = "\(vm.index + 1)/\(vm.arrWords.count)"
             lblAccuracy.text = vm.currentItem!.ACCURACY
             if isSpeaking {
-                let utterance = AVSpeechUtterance(string: vm.currentWord)
-                utterance.voice = AVSpeechSynthesisVoice(identifier: vmSettings.selectediOSVoice.VOICENAME)
-                AppDelegate.synth.speak(utterance)
+                AppDelegate.speak(string: vm.currentWord)
             }
             vm.getTranslation().subscribe(onNext: {
                 self.tvTranslation.text = $0
@@ -129,9 +126,7 @@ class WordsReviewViewController: UIViewController, UITextFieldDelegate {
     @IBAction func isSpeakingChanged(_ sender: AnyObject) {
         isSpeaking = (sender as! UISwitch).isOn
         if isSpeaking {
-            let utterance = AVSpeechUtterance(string: vm.currentWord)
-            utterance.voice = AVSpeechSynthesisVoice(identifier: vmSettings.selectediOSVoice.VOICENAME)
-            AppDelegate.synth.speak(utterance)
+            AppDelegate.speak(string: vm.currentWord)
         }
     }
     

@@ -8,7 +8,6 @@
 
 import UIKit
 import RxSwift
-import AVFoundation
 import DropDown
 
 class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
@@ -71,9 +70,7 @@ class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
         if b {
             lblIndex.text = "\(vm.index + 1)/\(vm.arrPhrases.count)"
             if isSpeaking {
-                let utterance = AVSpeechUtterance(string: vm.currentPhrase)
-                utterance.voice = AVSpeechSynthesisVoice(identifier: vmSettings.selectediOSVoice.VOICENAME)
-                AppDelegate.synth.speak(utterance)
+                AppDelegate.speak(string: vm.currentPhrase)
             }
             lblTranslation.text = vm.currentItem!.TRANSLATION ?? ""
         } else {
@@ -122,9 +119,7 @@ class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
     @IBAction func isSpeakingChanged(_ sender: AnyObject) {
         isSpeaking = (sender as! UISwitch).isOn
         if isSpeaking {
-            let utterance = AVSpeechUtterance(string: vm.currentPhrase)
-            utterance.voice = AVSpeechSynthesisVoice(identifier: vmSettings.selectediOSVoice.VOICENAME)
-            AppDelegate.synth.speak(utterance)
+            AppDelegate.speak(string: vm.currentPhrase)
         }
     }
     
