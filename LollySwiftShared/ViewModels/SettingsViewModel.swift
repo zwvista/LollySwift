@@ -441,8 +441,8 @@ class SettingsViewModel: NSObject {
     func updateUnitFrom() -> Observable<()> {
         return doUpdateUnitFrom(v: USUNITFROM, check: false).concat(
             toType == .unit ? doUpdateSingleUnit() :
-                toType == .part || isInvalidUnitPart ? doUpdateUnitPartTo() :
-                Observable.empty()
+            toType == .part || isInvalidUnitPart ? doUpdateUnitPartTo() :
+            Observable.empty()
         )
     }
     
