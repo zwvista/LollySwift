@@ -197,4 +197,18 @@ class WordsUnitViewModel: NSObject {
             }.disposed(by: self.disposeBag)
         }, allComplete: allComplete)
     }
+
+    func clearNote(index: Int) -> Observable<()> {
+        let item = arrWords[index]
+        item.NOTE = NoteViewModel.zeroNote
+        return WordsUnitViewModel.update(item.WORDID, note: item.NOTE!)
+    }
+    
+    func clearNotes(ifEmpty: Bool, oneComplete: @escaping (Int) -> Void) -> Observable<()> {
+        return vmNote.clearNotes(wordCount: arrWords.count, isNoteEmpty: {
+            !ifEmpty || (self.arrWords[$0].NOTE ?? "").isEmpty
+        }, getOne: { i in
+            self.clearNote(index: i).do { oneComplete(i) }
+        })
+    }
 }

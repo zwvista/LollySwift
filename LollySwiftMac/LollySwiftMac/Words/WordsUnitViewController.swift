@@ -204,6 +204,24 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
             }
         })
     }
+    
+    @IBAction func clearNote(_ sender: AnyObject) {
+        let col = tableView.tableColumns.firstIndex { $0.title == "NOTE" }!
+        vm.clearNote(index: tableView.selectedRow).subscribe {
+            self.tableView.reloadData(forRowIndexes: [self.tableView.selectedRow], columnIndexes: [col])
+        }.disposed(by: disposeBag)
+    }
+    
+    @IBAction func clearNotes(_ sender: AnyObject) {
+        let ifEmpty = sender is NSToolbarItem || (sender as! NSMenuItem).tag == 0
+        vm.clearNotes(ifEmpty: ifEmpty, oneComplete: {
+            self.tableView.reloadData(forRowIndexes: [$0], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count))
+        }).subscribe {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                // self.tableView.reloadData()
+            }
+        }.disposed(by: disposeBag)
+    }
 
     @IBAction func filterWord(_ sender: AnyObject) {
         let n = scTextFilter.selectedSegment

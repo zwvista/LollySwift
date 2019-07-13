@@ -16,6 +16,7 @@ class NoteViewModel {
         return vmSettings.selectedDictNote
     }
     let disposeBag: DisposeBag!
+    static let zeroNote = "O"
 
     init(settings: SettingsViewModel, disposeBag: DisposeBag) {
         vmSettings = settings
@@ -51,6 +52,21 @@ class NoteViewModel {
                 }
             }
         subscription?.disposed(by: disposeBag)
+    }
+    
+    func clearNotes(wordCount: Int, isNoteEmpty: @escaping (Int) -> Bool, getOne: @escaping (Int) -> Observable<()>) -> Observable<()> {
+        var i = 0
+        var o = Observable.just(())
+        while i < wordCount {
+            while i < wordCount && !isNoteEmpty(i) {
+                i += 1
+            }
+            if i < wordCount {
+                o = o.concat(getOne(i))
+            }
+            i += 1
+        }
+        return o
     }
 
 }

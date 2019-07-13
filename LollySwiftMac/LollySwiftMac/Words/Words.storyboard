@@ -64,6 +64,13 @@
                                         <action selector="getNotes:" target="qEo-JS-MYZ" id="ygT-AV-BVL"/>
                                     </connections>
                                 </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="291AF6B4-04F0-40CF-81F3-4C01F296B744" label="Clear" paletteLabel="Clear" tag="-1" image="NSTrashEmpty" id="CmT-oF-fsB">
+                                    <size key="minSize" width="32" height="32"/>
+                                    <size key="maxSize" width="32" height="32"/>
+                                    <connections>
+                                        <action selector="clearNotes:" target="qEo-JS-MYZ" id="gTf-4o-Bc0"/>
+                                    </connections>
+                                </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="5DFE0218-AE6E-462C-904E-A5766B674FAC" label="Review" paletteLabel="Review" tag="-1" image="NSSlideshowTemplate" id="ua2-kt-YrY">
                                     <size key="minSize" width="17" height="14"/>
                                     <size key="maxSize" width="17" height="14"/>
@@ -239,6 +246,7 @@
                                 <toolbarItem reference="NzO-tI-dsC"/>
                                 <toolbarItem reference="w7y-7L-dbV"/>
                                 <toolbarItem reference="AO7-Bt-aI3"/>
+                                <toolbarItem reference="CmT-oF-fsB"/>
                                 <toolbarItem reference="ua2-kt-YrY"/>
                                 <toolbarItem reference="DTO-su-5Zg"/>
                                 <toolbarItem reference="Bp9-GL-6UU"/>
@@ -941,22 +949,29 @@
                 </viewController>
                 <menu id="UPB-Wi-4rN">
                     <items>
-                        <menuItem title="Delete" id="Pck-ev-rQc">
+                        <menuItem title="Retrieve Note" id="f3L-ih-FsA">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
-                                <action selector="deleteWord:" target="F8i-pe-Ate" id="BzB-Nh-cKZ"/>
+                                <action selector="getNote:" target="F8i-pe-Ate" id="4cQ-BD-asf"/>
                             </connections>
                         </menuItem>
+                        <menuItem title="Clear Note" id="nfF-hi-sXF">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="clearNote:" target="F8i-pe-Ate" id="GmX-LE-gxI"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem isSeparatorItem="YES" id="mjK-LQ-yUt"/>
                         <menuItem title="Edit" id="Hn0-Zh-OQJ">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
                                 <action selector="editWord:" target="F8i-pe-Ate" id="xzH-Hm-3gz"/>
                             </connections>
                         </menuItem>
-                        <menuItem title="Retrieve Note" id="f3L-ih-FsA">
+                        <menuItem title="Delete" id="Pck-ev-rQc">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
-                                <action selector="getNote:" target="F8i-pe-Ate" id="4cQ-BD-asf"/>
+                                <action selector="deleteWord:" target="F8i-pe-Ate" id="BzB-Nh-cKZ"/>
                             </connections>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="jXj-dq-pnm"/>
@@ -6497,5 +6512,6 @@ Gw
         <image name="NSRefreshTemplate" width="11" height="15"/>
         <image name="NSRemoveTemplate" width="11" height="11"/>
         <image name="NSSlideshowTemplate" width="17" height="14"/>
+        <image name="NSTrashEmpty" width="32" height="32"/>
     </resources>
 </document>

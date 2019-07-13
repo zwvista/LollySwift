@@ -746,13 +746,26 @@
                                                 <action selector="getNotes:" target="Ady-hI-5gd" id="KMc-oL-Gek"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem title="Clear Notes(Empty Only)" id="Rva-Fd-toY">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="clearNotes:" target="Ady-hI-5gd" id="Tlr-er-Zvg"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="EOF-lU-szg"/>
                                         <menuItem title="Retrieve Notes(All)" tag="1" id="1l1-aq-4gI">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="getNotes:" target="Ady-hI-5gd" id="fOR-SC-C5C"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="EOF-lU-szg"/>
+                                        <menuItem title="Clear Notes(All)" tag="1" id="SqC-If-cmf">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="clearNotes:" target="Ady-hI-5gd" id="kxv-IQ-HFb"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="ayx-K9-iLA"/>
                                         <menuItem title="Batch Edit" id="RQq-Nl-s0B">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
