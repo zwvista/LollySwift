@@ -25,9 +25,12 @@ class PhrasesReviewViewModel: NSObject {
         return mode == .test
     }
     
-    func newTest(shuffled: Bool) -> Observable<()> {
+    func newTest(shuffled: Bool, groupSelected: Int, groupCount: Int) -> Observable<()> {
         return MUnitPhrase.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO).map {
             self.arrPhrases = $0
+            let count = self.arrPhrases.count
+            let (from, to) = (count * (groupSelected - 1) / groupCount, count * groupSelected / groupCount)
+            self.arrPhrases = [MUnitPhrase](self.arrPhrases[from..<to])
             self.arrCorrectIDs = []
             if shuffled { self.arrPhrases = self.arrPhrases.shuffled() }
             self.index = 0

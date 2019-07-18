@@ -194,11 +194,11 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
             vmReview.stop()
         } else {
             let optionsVC = NSStoryboard(name: "Tools", bundle: nil).instantiateController(withIdentifier: "ReviewOptionsViewController") as! ReviewOptionsViewController
-            optionsVC.mode = 0
-            optionsVC.shuffled = vmReview.shuffled
+            optionsVC.vm.mode = 0
+            optionsVC.vm.shuffled = vmReview.shuffled
             optionsVC.complete = { [unowned self] in
-                self.vmReview.shuffled = optionsVC.shuffled
-                self.vmReview.levelge0only = optionsVC.levelge0only!
+                self.vmReview.shuffled = optionsVC.vm.shuffled
+                self.vmReview.levelge0only = optionsVC.vm.levelge0only!
                 var arrPhrases = self.arrPhrases
                 if self.vmReview.shuffled {
                     arrPhrases = arrPhrases.shuffled()

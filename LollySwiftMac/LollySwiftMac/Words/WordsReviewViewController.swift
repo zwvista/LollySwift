@@ -30,6 +30,8 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
     var isSpeaking = true
     var shuffled = true
     var levelge0only = true
+    var groupSelected = 1
+    var groupCount = 1
     var subscription: Disposable? = nil
 
     func settingsChanged() {
@@ -86,15 +88,19 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
     
     @IBAction func newTest(_ sender: AnyObject) {
         let optionsVC = NSStoryboard(name: "Tools", bundle: nil).instantiateController(withIdentifier: "ReviewOptionsViewController") as! ReviewOptionsViewController
-        optionsVC.mode = vm.mode.rawValue
-        optionsVC.shuffled = shuffled
-        optionsVC.levelge0only = levelge0only
+        optionsVC.vm.mode = vm.mode.rawValue
+        optionsVC.vm.shuffled = shuffled
+        optionsVC.vm.levelge0only = levelge0only
+        optionsVC.vm.groupSelected = groupSelected
+        optionsVC.vm.groupCount = groupCount
         optionsVC.complete = { [unowned self] in
             self.vm.mode = ReviewMode(rawValue: optionsVC.pubMode.indexOfSelectedItem)!
-            self.shuffled = optionsVC.shuffled
-            self.levelge0only = optionsVC.levelge0only!
+            self.shuffled = optionsVC.vm.shuffled
+            self.levelge0only = optionsVC.vm.levelge0only!
+            self.groupSelected = optionsVC.vm.groupSelected
+            self.groupCount = optionsVC.vm.groupCount
             self.subscription?.dispose()
-            self.vm.newTest(shuffled: self.shuffled, levelge0only: self.levelge0only).subscribe {
+            self.vm.newTest(shuffled: self.shuffled, levelge0only: self.levelge0only, groupSelected: self.groupSelected, groupCount: self.groupCount).subscribe {
                 self.doTest()
             }.disposed(by: self.disposeBag)
             self.btnCheck.title = self.vm.isTestMode ? "Check" : "Next"

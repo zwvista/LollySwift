@@ -27,6 +27,8 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
     let synth = NSSpeechSynthesizer()
     var isSpeaking = true
     var shuffled = true
+    var groupSelected = 1
+    var groupCount = 1
     var subscription: Disposable? = nil
 
     func settingsChanged() {
@@ -76,13 +78,17 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
     
     @IBAction func newTest(_ sender: AnyObject) {
         let optionsVC = NSStoryboard(name: "Tools", bundle: nil).instantiateController(withIdentifier: "ReviewOptionsViewController") as! ReviewOptionsViewController
-        optionsVC.mode = vm.mode.rawValue
-        optionsVC.shuffled = shuffled
+        optionsVC.vm.mode = vm.mode.rawValue
+        optionsVC.vm.shuffled = shuffled
+        optionsVC.vm.groupSelected = groupSelected
+        optionsVC.vm.groupCount = groupCount
         optionsVC.complete = { [unowned self] in
             self.vm.mode = ReviewMode(rawValue: optionsVC.pubMode.indexOfSelectedItem)!
-            self.shuffled = optionsVC.shuffled
+            self.shuffled = optionsVC.vm.shuffled
+            self.groupSelected = optionsVC.vm.groupSelected
+            self.groupCount = optionsVC.vm.groupCount
             self.subscription?.dispose()
-            self.vm.newTest(shuffled: self.shuffled).subscribe {
+            self.vm.newTest(shuffled: self.shuffled, groupSelected: self.groupSelected, groupCount: self.groupCount).subscribe {
                 self.doTest()
             }.disposed(by: self.disposeBag)
             self.btnCheck.title = self.vm.isTestMode ? "Check" : "Next"

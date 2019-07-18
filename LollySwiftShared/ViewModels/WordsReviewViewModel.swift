@@ -25,9 +25,12 @@ class WordsReviewViewModel: NSObject {
         return mode == .test
     }
     
-    func newTest(shuffled: Bool, levelge0only: Bool) -> Observable<()> {
+    func newTest(shuffled: Bool, levelge0only: Bool, groupSelected: Int, groupCount: Int) -> Observable<()> {
         return MUnitWord.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO).map {
             self.arrWords = $0
+            let count = self.arrWords.count
+            let (from, to) = (count * (groupSelected - 1) / groupCount, count * groupSelected / groupCount)
+            self.arrWords = [MUnitWord](self.arrWords[from..<to])
             self.arrCorrectIDs = []
             if levelge0only { self.arrWords = self.arrWords.filter { $0.LEVEL >= 0 } }
             if shuffled { self.arrWords = self.arrWords.shuffled() }

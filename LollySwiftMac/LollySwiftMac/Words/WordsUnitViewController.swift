@@ -258,12 +258,12 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
             vmReview.stop()
         } else {
             let optionsVC = NSStoryboard(name: "Tools", bundle: nil).instantiateController(withIdentifier: "ReviewOptionsViewController") as! ReviewOptionsViewController
-            optionsVC.mode = 0
-            optionsVC.shuffled = vmReview.shuffled
-            optionsVC.levelge0only = vmReview.levelge0only
+            optionsVC.vm.mode = 0
+            optionsVC.vm.shuffled = vmReview.shuffled
+            optionsVC.vm.levelge0only = vmReview.levelge0only
             optionsVC.complete = { [unowned self] in
-                self.vmReview.shuffled = optionsVC.shuffled
-                self.vmReview.levelge0only = optionsVC.levelge0only!
+                self.vmReview.shuffled = optionsVC.vm.shuffled
+                self.vmReview.levelge0only = optionsVC.vm.levelge0only!
                 var arrWords = self.arrWords
                 if self.vmReview.levelge0only {
                     arrWords = arrWords.filter { $0.LEVEL >= 0 }
