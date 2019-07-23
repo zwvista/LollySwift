@@ -45,6 +45,20 @@ class MUnitPhrase: NSObject, Codable, MPhraseProtocol {
     var UNITPARTSEQNUM: String {
         return "\(UNITSTR) \(SEQNUM)\n\(PARTSTR)"
     }
+    
+    func copy(from x: MUnitPhrase) {
+        ID = x.ID
+        LANGID = x.LANGID
+        TEXTBOOKID = x.TEXTBOOKID
+        TEXTBOOKNAME = x.TEXTBOOKNAME
+        UNIT = x.UNIT
+        PART = x.PART
+        SEQNUM = x.SEQNUM
+        PHRASEID = x.PHRASEID
+        PHRASE = x.PHRASE
+        TRANSLATION = x.TRANSLATION
+        textbook = x.textbook
+    }
 
     static func getDataByTextbook(_ textbook: MTextbook, unitPartFrom: Int, unitPartTo: Int) -> Observable<[MUnitPhrase]> {
         // SQL: SELECT * FROM VUNITPHRASES WHERE TEXTBOOKID=? AND UNITPART BETWEEN ? AND ? ORDER BY UNITPART,SEQNUM

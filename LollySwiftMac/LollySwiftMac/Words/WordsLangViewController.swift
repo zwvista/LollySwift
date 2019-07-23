@@ -97,8 +97,12 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "WordsLangDetailViewController") as! WordsLangDetailViewController
         detailVC.vm = vm
         let i = tableView.selectedRow
-        detailVC.item = arrWords[i]
-        detailVC.complete = { self.tableView.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count)) }
+        detailVC.item = MLangWord()
+        detailVC.item.copy(from: arrWords[i])
+        detailVC.complete = {
+            self.arrWords[i].copy(from: detailVC.item)
+            self.tableView.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count))
+        }
         self.presentAsModalWindow(detailVC)
     }
     

@@ -10,7 +10,7 @@ import Cocoa
 
 class ReviewOptionsViewController: NSViewController {
 
-    @objc var vm = ReviewOptionsViewModel()
+    @objc var options = MReviewOptions()
     var complete: (() -> Void)?
 
     @IBOutlet weak var pubMode: NSPopUpButton!
@@ -20,9 +20,9 @@ class ReviewOptionsViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        pubMode.selectItem(at: vm.mode)
-        scOrder.selectedSegment = vm.shuffled ? 1 : 0
-        if let b = vm.levelge0only {
+        pubMode.selectItem(at: options.mode)
+        scOrder.selectedSegment = options.shuffled ? 1 : 0
+        if let b = options.levelge0only {
             scLevel.selectedSegment = b ? 1 : 0
         } else {
             lblLevel.isHidden = true
@@ -32,9 +32,9 @@ class ReviewOptionsViewController: NSViewController {
     
     @IBAction func okClicked(_ sender: AnyObject) {
         self.commitEditing()
-        vm.mode = pubMode.indexOfSelectedItem
-        vm.shuffled = scOrder.selectedSegment == 1
-        vm.levelge0only = scLevel.selectedSegment == 1
+        options.mode = pubMode.indexOfSelectedItem
+        options.shuffled = scOrder.selectedSegment == 1
+        options.levelge0only = scLevel.selectedSegment == 1
         complete?()
         dismiss(self)
     }

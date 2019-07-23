@@ -154,8 +154,12 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesUnitDetailViewController") as! PhrasesUnitDetailViewController
         detailVC.vm = vm
         let i = tableView.selectedRow
-        detailVC.item = arrPhrases[i]
-        detailVC.complete = { self.tableView.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count)) }
+        detailVC.item = MUnitPhrase()
+        detailVC.item.copy(from: arrPhrases[i])
+        detailVC.complete = {
+            self.arrPhrases[i].copy(from: detailVC.item)
+            self.tableView.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count))
+        }
         self.presentAsModalWindow(detailVC)
     }
     
@@ -194,11 +198,11 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
             vmReview.stop()
         } else {
             let optionsVC = NSStoryboard(name: "Tools", bundle: nil).instantiateController(withIdentifier: "ReviewOptionsViewController") as! ReviewOptionsViewController
-            optionsVC.vm.mode = 0
-            optionsVC.vm.shuffled = vmReview.shuffled
+            optionsVC.options.mode = 0
+            optionsVC.options.shuffled = vmReview.shuffled
             optionsVC.complete = { [unowned self] in
-                self.vmReview.shuffled = optionsVC.vm.shuffled
-                self.vmReview.levelge0only = optionsVC.vm.levelge0only!
+                self.vmReview.shuffled = optionsVC.options.shuffled
+                self.vmReview.levelge0only = optionsVC.options.levelge0only!
                 var arrPhrases = self.arrPhrases
                 if self.vmReview.shuffled {
                     arrPhrases = arrPhrases.shuffled()

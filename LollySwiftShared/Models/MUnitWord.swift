@@ -59,6 +59,24 @@ class MUnitWord: NSObject, Codable, MWordProtocol {
     var ACCURACY: String {
         return CommonApi.getAccuracy(CORRECT: CORRECT, TOTAL: TOTAL)
     }
+    
+    func copy(from x: MUnitWord) {
+        ID = x.ID
+        LANGID = x.LANGID
+        TEXTBOOKID = x.TEXTBOOKID
+        TEXTBOOKNAME = x.TEXTBOOKNAME
+        UNIT = x.UNIT
+        PART = x.PART
+        SEQNUM = x.SEQNUM
+        WORDID = x.WORDID
+        WORD = x.WORD
+        NOTE = x.NOTE
+        FAMIID = x.FAMIID
+        LEVEL = x.LEVEL
+        CORRECT = x.CORRECT
+        TOTAL = x.TOTAL
+        textbook = x.textbook
+    }
 
     public override var description: String {
         return "\(SEQNUM) \(WORD)" + (NOTE?.isEmpty != false ? "" : "(\(NOTE!))")

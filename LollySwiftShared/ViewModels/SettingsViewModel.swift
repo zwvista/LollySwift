@@ -473,7 +473,6 @@ class SettingsViewModel: NSObject {
         switch toType {
         case .unit:
             toType = .part
-            USPARTFROM = part
             return Observable.zip(doUpdatePartFrom(v: part), doUpdateUnitPartTo()).map{_ in }
         case .part:
             toType = .unit

@@ -1,5 +1,5 @@
 //
-//  ReviewOptionsViewModel.swift
+//  MReviewOptions.swift
 //  LollySwiftMac
 //
 //  Created by 趙偉 on 2019/07/18.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ReviewOptionsViewModel: NSObject {
+class MReviewOptions: NSObject {
     var mode = 0
     @objc var interval = 3
     var shuffled = false

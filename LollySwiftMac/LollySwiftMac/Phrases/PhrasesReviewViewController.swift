@@ -78,15 +78,15 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
     
     @IBAction func newTest(_ sender: AnyObject) {
         let optionsVC = NSStoryboard(name: "Tools", bundle: nil).instantiateController(withIdentifier: "ReviewOptionsViewController") as! ReviewOptionsViewController
-        optionsVC.vm.mode = vm.mode.rawValue
-        optionsVC.vm.shuffled = shuffled
-        optionsVC.vm.groupSelected = groupSelected
-        optionsVC.vm.groupCount = groupCount
+        optionsVC.options.mode = vm.mode.rawValue
+        optionsVC.options.shuffled = shuffled
+        optionsVC.options.groupSelected = groupSelected
+        optionsVC.options.groupCount = groupCount
         optionsVC.complete = { [unowned self] in
             self.vm.mode = ReviewMode(rawValue: optionsVC.pubMode.indexOfSelectedItem)!
-            self.shuffled = optionsVC.vm.shuffled
-            self.groupSelected = optionsVC.vm.groupSelected
-            self.groupCount = optionsVC.vm.groupCount
+            self.shuffled = optionsVC.options.shuffled
+            self.groupSelected = optionsVC.options.groupSelected
+            self.groupCount = optionsVC.options.groupCount
             self.subscription?.dispose()
             self.vm.newTest(shuffled: self.shuffled, groupSelected: self.groupSelected, groupCount: self.groupCount).subscribe {
                 self.doTest()

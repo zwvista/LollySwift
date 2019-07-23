@@ -26,6 +26,13 @@ class MLangPhrase: NSObject, Codable, MPhraseProtocol {
         TRANSLATION = unititem.TRANSLATION
         super.init()
     }
+    
+    func copy(from x: MLangPhrase) {
+        ID = x.ID
+        LANGID = x.LANGID
+        PHRASE = x.PHRASE
+        TRANSLATION = x.TRANSLATION
+    }
 
     func combineTranslation(_ translation: String?) -> Bool {
         let oldTranslation = TRANSLATION
