@@ -82,7 +82,7 @@ class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func newTest(_ sender: AnyObject) {
         subscription?.dispose()
-        vm.newTest(shuffled: shuffled).subscribe {
+        vm.newTest(shuffled: shuffled, groupSelected: 1, groupCount: 1).subscribe {
             self.doTest()
         }.disposed(by: disposeBag)
         btnCheck.setTitle(vm.isTestMode ? "Check" : "Next", for: .normal)

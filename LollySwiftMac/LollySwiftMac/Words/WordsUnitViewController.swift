@@ -42,7 +42,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     // https://stackoverflow.com/questions/8017822/how-to-enable-disable-nstoolbaritem
     func validateToolbarItem(_ item: NSToolbarItem) -> Bool {
         let s = item.paletteLabel
-        let enabled = !((s == "Previous" || s == "Next") && vmSettings.toType == .to || s == "Notes" && !vmSettings.hasDictNote)
+        let enabled = !((s == "Previous" || s == "Next" || s == "U <-> P") && vmSettings.toType == .to || s == "Notes" && !vmSettings.hasDictNote)
         return enabled
     }
 
