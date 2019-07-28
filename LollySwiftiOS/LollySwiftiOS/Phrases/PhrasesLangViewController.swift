@@ -49,7 +49,7 @@ class PhrasesLangViewController: PhrasesBaseViewController {
             })
         }
         func edit() {
-            self.performSegue(withIdentifier: "edit", sender: item)
+            performSegue(withIdentifier: "edit", sender: item)
         }
         let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { _,_ in delete() }
         let editAction = UITableViewRowAction(style: .normal, title: "Edit") { _,_ in edit() }

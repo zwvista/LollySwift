@@ -92,6 +92,7 @@ class WordsReviewViewController: UIViewController, UITextFieldDelegate {
     }
 
     @IBAction func newTest(_ sender: AnyObject) {
+        performSegue(withIdentifier: "options", sender: sender)
         subscription?.dispose()
         vm.newTest(shuffled: shuffled, levelge0only: levelge0only, groupSelected: 1, groupCount: 1).subscribe {
             self.doTest()
@@ -156,6 +157,12 @@ class WordsReviewViewController: UIViewController, UITextFieldDelegate {
         view.endEditing(true)
     }
     
+    @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
+        guard segue.identifier == "Done" else {return}
+        let controller = segue.source as! ReviewOptionsViewController
+        controller.onDone()
+    }
+
     deinit {
         print("DEBUG: \(self.className) deinit")
     }

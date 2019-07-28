@@ -140,6 +140,12 @@ class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
+    
+    @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
+        guard segue.identifier == "Done" else {return}
+        let controller = segue.source as! ReviewOptionsViewController
+        controller.onDone()
+    }
 
     deinit {
         print("DEBUG: \(self.className) deinit")
