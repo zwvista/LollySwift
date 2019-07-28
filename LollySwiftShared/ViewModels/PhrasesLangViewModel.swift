@@ -16,14 +16,16 @@ class PhrasesLangViewModel: NSObject {
     
     public init(settings: SettingsViewModel, disposeBag: DisposeBag, needCopy: Bool, complete: @escaping () -> ()) {
         self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
-        let item = settings.selectedTextbook!
         super.init()
-        MLangPhrase.getDataByLang(item.LANGID).subscribe(onNext: {
-            self.arrPhrases = $0
-            complete()
-        }).disposed(by: disposeBag)
+        reload().subscribe { complete() }.disposed(by: disposeBag)
     }
     
+    func reload() -> Observable<()> {
+        return MLangPhrase.getDataByLang(vmSettings.selectedTextbook!.LANGID).map {
+            self.arrPhrases = $0
+        }
+    }
+
     func applyFilters(textFilter: String, scope: String) {
         if textFilter.isEmpty {
             arrPhrasesFiltered = nil

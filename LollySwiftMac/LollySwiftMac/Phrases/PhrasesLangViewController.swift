@@ -26,7 +26,7 @@ class PhrasesLangViewController: PhrasesBaseViewController {
     
     override func settingsChanged() {
         vm = PhrasesLangViewModel(settings: AppDelegate.theSettingsViewModel, disposeBag: disposeBag, needCopy: true) {
-            self.refreshTableView(self)
+            self.doRefresh()
         }
         super.settingsChanged()
     }
@@ -63,8 +63,9 @@ class PhrasesLangViewController: PhrasesBaseViewController {
     }
 
     @IBAction func refreshTableView(_ sender: AnyObject) {
-        tableView.reloadData()
-        updateStatusText()
+        vm.reload().subscribe {
+            self.doRefresh()
+        }.disposed(by: disposeBag)
     }
 
     @IBAction func editPhrase(_ sender: AnyObject) {

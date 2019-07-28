@@ -31,7 +31,7 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
     override func settingsChanged() {
         vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: false, disposeBag: disposeBag, needCopy: true) {
             self.acTextbooks.content = self.vmSettings.arrTextbookFilters
-            self.refreshTableView(self)
+            self.doRefresh()
         }
         super.settingsChanged()
     }
@@ -65,13 +65,14 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
     override func deleteWord(row: Int) {
         let item = arrWords[row]
         WordsUnitViewModel.delete(item: item).subscribe{
-            self.refreshTableView(self)
+            self.doRefresh()
         }.disposed(by: disposeBag)
     }
 
     @IBAction func refreshTableView(_ sender: AnyObject) {
-        tableView.reloadData()
-        updateStatusText()
+        vm.reload().subscribe {
+            self.doRefresh()
+        }.disposed(by: disposeBag)
     }
 
     @IBAction func editWord(_ sender: AnyObject) {

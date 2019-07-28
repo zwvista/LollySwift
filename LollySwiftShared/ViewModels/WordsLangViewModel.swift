@@ -24,11 +24,13 @@ class WordsLangViewModel: NSObject {
         self.disposeBag = disposeBag
         vmNote = NoteViewModel(settings: vmSettings, disposeBag: disposeBag)
         super.init()
-        let item = settings.selectedTextbook!
-        MLangWord.getDataByLang(item.LANGID).subscribe(onNext: {
+        reload().subscribe { complete() }.disposed(by: disposeBag)
+    }
+    
+    func reload() -> Observable<()> {
+        return MLangWord.getDataByLang(vmSettings.selectedTextbook!.LANGID).map {
             self.arrWords = $0
-            complete()
-        }).disposed(by: disposeBag)
+        }
     }
     
     func applyFilters(textFilter: String, scope: String, levelge0only: Bool) {

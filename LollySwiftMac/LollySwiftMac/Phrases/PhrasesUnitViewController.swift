@@ -40,7 +40,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
 
     override func settingsChanged() {
         vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: true, disposeBag: disposeBag, needCopy: true) {
-            self.refreshTableView(self)
+            self.doRefresh()
         }
         super.settingsChanged()
     }
@@ -134,20 +134,21 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
         let item = i == -1 ? nil : arrPhrases[tableView.selectedRow]
         detailVC.unit = item?.UNIT ?? vmSettings.USUNITTO
         detailVC.part = item?.PART ?? vmSettings.USPARTTO
-        detailVC.complete = { self.refreshTableView(self) }
+        detailVC.complete = { self.doRefresh() }
         self.presentAsModalWindow(detailVC)
     }
 
     override func deletePhrase(row: Int) {
         let item = arrPhrases[row]
         PhrasesUnitViewModel.delete(item: item).subscribe{
-            self.refreshTableView(self)
+            self.doRefresh()
         }.disposed(by: disposeBag)
     }
     
     @IBAction func refreshTableView(_ sender: AnyObject) {
-        tableView.reloadData()
-        updateStatusText()
+        vm.reload().subscribe {
+            self.doRefresh()
+        }.disposed(by: disposeBag)
     }
 
     @IBAction func editPhrase(_ sender: AnyObject) {
@@ -171,13 +172,13 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
 
     @IBAction func previousUnitPart(_ sender: AnyObject) {
         vmSettings.previousUnitPart().concat(vm.reload()).subscribe {
-            self.refreshTableView(self)
+            self.doRefresh()
         }.disposed(by: disposeBag)
     }
     
     @IBAction func nextUnitPart(_ sender: AnyObject) {
         vmSettings.nextUnitPart().concat(vm.reload()).subscribe {
-            self.refreshTableView(self)
+            self.doRefresh()
         }.disposed(by: disposeBag)
     }
     
@@ -185,7 +186,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
         let row = tableView.selectedRow
         let part = row == -1 ? vmSettings.arrParts[0].value : arrPhrases[row].PART
         vmSettings.toggleToType(part: part).concat(vm.reload()).subscribe {
-            self.refreshTableView(self)
+            self.doRefresh()
         }.disposed(by: disposeBag)
     }
 

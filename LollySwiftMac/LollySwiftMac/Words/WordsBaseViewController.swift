@@ -59,6 +59,11 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
         wc = nil
     }
     
+    func doRefresh() {
+        tableView.reloadData()
+        updateStatusText()
+    }
+
     func controlTextDidEndEditing(_ obj: Notification) {
         let textfield = obj.object as! NSControl
         let dict = (obj as NSNotification).userInfo!

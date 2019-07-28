@@ -27,7 +27,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
     override func settingsChanged() {
         vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: false, disposeBag: disposeBag, needCopy: true) {
             self.wc.acTextbooks.content = self.vmSettings.arrTextbookFilters
-            self.refreshTableView(self)
+            self.doRefresh()
         }
         super.settingsChanged()
     }
@@ -56,13 +56,14 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
     override func deletePhrase(row: Int) {
         let item = arrPhrases[row]
         PhrasesUnitViewModel.delete(item: item).subscribe{
-            self.refreshTableView(self)
-            }.disposed(by: disposeBag)
+            self.doRefresh()
+        }.disposed(by: disposeBag)
     }
 
     @IBAction func refreshTableView(_ sender: AnyObject) {
-        tableView.reloadData()
-        updateStatusText()
+        vm.reload().subscribe {
+            self.doRefresh()
+        }.disposed(by: disposeBag)
     }
 
     @IBAction func editPhrase(_ sender: AnyObject) {

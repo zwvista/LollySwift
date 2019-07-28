@@ -26,7 +26,7 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
 
     override func settingsChanged() {
         vm = WordsLangViewModel(settings: AppDelegate.theSettingsViewModel, disposeBag: disposeBag, needCopy: true) {
-            self.refreshTableView(self)
+            self.doRefresh()
         }
         super.settingsChanged()
     }
@@ -84,13 +84,14 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
     override func deleteWord(row: Int) {
         let item = arrWords[row]
         WordsLangViewModel.delete(item: item).subscribe {
-            self.refreshTableView(self)
+            self.doRefresh()
         }.disposed(by: disposeBag)
     }
 
     @IBAction func refreshTableView(_ sender: AnyObject) {
-        tableView.reloadData()
-        updateStatusText()
+        vm.reload().subscribe {
+            self.doRefresh()
+        }.disposed(by: disposeBag)
     }
 
     @IBAction func editWord(_ sender: AnyObject) {

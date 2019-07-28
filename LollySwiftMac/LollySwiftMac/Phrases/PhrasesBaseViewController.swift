@@ -42,6 +42,11 @@ class PhrasesBaseViewController: NSViewController, LollyProtocol, NSTableViewDat
     override func viewWillDisappear() {
         wc = nil
     }
+    
+    func doRefresh() {
+        tableView.reloadData()
+        updateStatusText()
+    }
 
     func tableViewSelectionDidChange(_ notification: Notification) {
         updateStatusText()

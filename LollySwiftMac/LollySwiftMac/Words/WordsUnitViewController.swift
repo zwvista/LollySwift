@@ -48,7 +48,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
 
     override func settingsChanged() {
         vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: true, disposeBag: disposeBag, needCopy: true) {
-            self.refreshTableView(self)
+            self.doRefresh()
         }
         super.settingsChanged()
     }
@@ -158,13 +158,14 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     override func deleteWord(row: Int) {
         let item = arrWords[row]
         WordsUnitViewModel.delete(item: item).subscribe{
-            self.refreshTableView(self)
+            self.doRefresh()
         }.disposed(by: disposeBag)
     }
     
     @IBAction func refreshTableView(_ sender: AnyObject) {
-        tableView.reloadData()
-        updateStatusText()
+        vm.reload().subscribe {
+            self.doRefresh()
+        }.disposed(by: disposeBag)
     }
 
     @IBAction func editWord(_ sender: AnyObject) {
@@ -187,7 +188,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
         let item = i == -1 ? nil : arrWords[tableView.selectedRow]
         detailVC.unit = item?.UNIT ?? vmSettings.USUNITTO
         detailVC.part = item?.PART ?? vmSettings.USPARTTO
-        detailVC.complete = { self.refreshTableView(self) }
+        detailVC.complete = { self.doRefresh() }
         self.presentAsModalWindow(detailVC)
     }
 
@@ -235,13 +236,13 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     
     @IBAction func previousUnitPart(_ sender: AnyObject) {
         vmSettings.previousUnitPart().concat(vm.reload()).subscribe {
-            self.refreshTableView(self)
+            self.doRefresh()
         }.disposed(by: disposeBag)
     }
     
     @IBAction func nextUnitPart(_ sender: AnyObject) {
         vmSettings.nextUnitPart().concat(vm.reload()).subscribe {
-            self.refreshTableView(self)
+            self.doRefresh()
         }.disposed(by: disposeBag)
     }
     
@@ -249,7 +250,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
         let row = tableView.selectedRow
         let part = row == -1 ? vmSettings.arrParts[0].value : arrWords[row].PART
         vmSettings.toggleToType(part: part).concat(vm.reload()).subscribe {
-            self.refreshTableView(self)
+            self.doRefresh()
         }.disposed(by: disposeBag)
     }
 
