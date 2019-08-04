@@ -19,3 +19,17 @@ class MSelectItem: NSObject {
         super.init()
     }
 }
+
+protocol MWordProtocol {
+    var LANGID: Int { get set }
+    var WORD: String { get set }
+    var NOTE: String? { get set }
+    var FAMIID: Int { get set }
+    var LEVEL: Int { get set }
+}
+
+protocol MPhraseProtocol {
+    var LANGID: Int { get set }
+    var PHRASE: String { get set }
+    var TRANSLATION: String? { get set }
+}

@@ -11,3 +11,7 @@ import Cocoa
 class LollyWindow: NSWindow {
 
 }
+
+class LollyCheckCell: NSTableCellView {
+    @IBOutlet weak var chk: NSButton!
+}

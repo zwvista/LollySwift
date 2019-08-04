@@ -286,6 +286,13 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
             self.presentAsSheet(optionsVC)
         }
     }
+
+    @IBAction func selectPhrases(_ sender: AnyObject) {
+        let detailVC = NSStoryboard(name: "Phrases", bundle: nil).instantiateController(withIdentifier: "PhrasesSelectViewController") as! PhrasesSelectViewController
+        detailVC.complete = {
+        }
+        self.presentAsModalWindow(detailVC)
+    }
 }
 
 class WordsUnitWindowController: WordsBaseWindowController {

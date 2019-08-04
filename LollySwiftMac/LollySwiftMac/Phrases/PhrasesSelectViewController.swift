@@ -1,46 +1,36 @@
 //
-//  PhrasesUnitBatchViewController.swift
+//  PhrasesSelectViewController.swift
 //  LollySwiftMac
 //
-//  Created by 趙偉 on 2018/04/07.
-//  Copyright © 2018年 趙偉. All rights reserved.
+//  Created by 趙偉 on 2019/08/04.
+//  Copyright © 2019年 趙偉. All rights reserved.
 //
 
 import Cocoa
 import RxSwift
 
-class PhrasesUnitBatchViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
+class PhrasesSelectViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 
-    @objc var vm: PhrasesUnitViewModel!
+    @objc var vm: PhrasesLangViewModel!
     var complete: (() -> Void)?
-    var arrPhrases: [MUnitPhrase] {
+    var arrPhrases: [MLangPhrase] {
         return vm.arrPhrases
     }
 
-    @IBOutlet weak var acUnits: NSArrayController!
-    @IBOutlet weak var acParts: NSArrayController!
-    @IBOutlet weak var pubUnit: NSPopUpButton!
-    @IBOutlet weak var pubPart: NSPopUpButton!
-    @IBOutlet weak var tfSeqNum: NSTextField!
+    @IBOutlet weak var scTextFilter: NSSegmentedControl!
+    @IBOutlet weak var tfFilter: NSTextField!
+    @objc var textFilter = ""
     @IBOutlet weak var tableView: NSTableView!
     
     let disposeBag = DisposeBag()
-    @objc var unitChecked = false
-    @objc var partChecked = false
-    @objc var seqnumChecked = false
-    @objc var unit = 1
-    @objc var part = 1
-    @objc var seqnum = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        acUnits.content = vm.vmSettings.arrUnits
-        acParts.content = vm.vmSettings.arrParts
     }
     
     override func viewDidAppear() {
         // https://stackoverflow.com/questions/24235815/cocoa-how-to-set-window-title-from-within-view-controller-in-swift
-        view.window?.title = "Batch Edit"
+        view.window?.title = "Select Phrase"
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
@@ -75,12 +65,6 @@ class PhrasesUnitBatchViewController: NSViewController, NSTableViewDataSource, N
             let chk = (tableView.view(atColumn: 0, row: i, makeIfNecessary: false)! as! LollyCheckCell).chk!
             guard chk.state == .on else {continue}
             let item = arrPhrases[i]
-            if unitChecked || partChecked || seqnumChecked {
-                if unitChecked { item.UNIT = unit }
-                if partChecked { item.PART = part }
-                if seqnumChecked { item.SEQNUM += seqnum }
-                o = o.concat(PhrasesUnitViewModel.update(item: item))
-            }
         }
         o.subscribe {
             self.complete?()

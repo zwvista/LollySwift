@@ -68,7 +68,7 @@ class WordsUnitBatchViewController: NSViewController, NSTableViewDataSource, NST
     @IBAction func checkItems(_ sender: AnyObject) {
         let n = (sender as! NSButton).tag
         for i in 0..<tableView.numberOfRows {
-            let chk = (tableView.view(atColumn: 0, row: i, makeIfNecessary: false)! as! WordsUnitBatchCell).chk!
+            let chk = (tableView.view(atColumn: 0, row: i, makeIfNecessary: false)! as! LollyCheckCell).chk!
             chk.state =
                 n == 0 ? .on :
                 n == 1 ? .off :
@@ -82,7 +82,7 @@ class WordsUnitBatchViewController: NSViewController, NSTableViewDataSource, NST
         self.commitEditing()
         var o = Observable.just(())
         for i in 0..<tableView.numberOfRows {
-            let chk = (tableView.view(atColumn: 0, row: i, makeIfNecessary: false)! as! WordsUnitBatchCell).chk!
+            let chk = (tableView.view(atColumn: 0, row: i, makeIfNecessary: false)! as! LollyCheckCell).chk!
             guard chk.state == .on else {continue}
             let item = arrWords[i]
             if unitChecked || partChecked || seqnumChecked {
@@ -104,8 +104,4 @@ class WordsUnitBatchViewController: NSViewController, NSTableViewDataSource, NST
     deinit {
         print("DEBUG: \(self.className) deinit")
     }
-}
-
-class WordsUnitBatchCell: NSTableCellView {
-    @IBOutlet weak var chk: NSButton!
 }

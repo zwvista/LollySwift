@@ -93,17 +93,17 @@ class WordsReviewViewController: UIViewController, UITextFieldDelegate {
 
     @IBAction func newTest(_ sender: AnyObject) {
         performSegue(withIdentifier: "options", sender: sender)
-        subscription?.dispose()
-        vm.newTest(shuffled: shuffled, levelge0only: levelge0only, groupSelected: 1, groupCount: 1).subscribe {
-            self.doTest()
-        }.disposed(by: disposeBag)
-        btnCheck.setTitle(vm.isTestMode ? "Check" : "Next", for: .normal)
-        if vm.mode == .reviewAuto {
-            subscription = Observable<Int>.interval(vmSettings.USREVIEWINTERVAL.toDouble / 1000.0, scheduler: MainScheduler.instance).subscribe { _ in
-                self.check(self)
-            }
-            subscription?.disposed(by: disposeBag)
-        }
+//        subscription?.dispose()
+//        vm.newTest(shuffled: shuffled, levelge0only: levelge0only, groupSelected: 1, groupCount: 1).subscribe {
+//            self.doTest()
+//        }.disposed(by: disposeBag)
+//        btnCheck.setTitle(vm.isTestMode ? "Check" : "Next", for: .normal)
+//        if vm.mode == .reviewAuto {
+//            subscription = Observable<Int>.interval(vmSettings.USREVIEWINTERVAL.toDouble / 1000.0, scheduler: MainScheduler.instance).subscribe { _ in
+//                self.check(self)
+//            }
+//            subscription?.disposed(by: disposeBag)
+//        }
     }
     
     @IBAction func check(_ sender: AnyObject) {

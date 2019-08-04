@@ -1,5 +1,5 @@
 //
-//  WordsPhrases.swift
+//  MWordPhrase.swift
 //  LollySwiftMac
 //
 //  Created by 趙偉 on 2019/03/16.
@@ -7,17 +7,23 @@
 //
 
 import Foundation
+import RxSwift
 
-protocol MWordProtocol {
-    var LANGID: Int { get set }
-    var WORD: String { get set }
-    var NOTE: String? { get set }
-    var FAMIID: Int { get set }
-    var LEVEL: Int { get set }
-}
+@objcMembers
+class MWordPhrase: NSObject, Codable {
+    var ID = 0
+    var WORDID = 0
+    var PHRASEID = 0
+    
+    static func getPhrasesByWord(wordid: Int) -> Observable<[MWordPhrase]> {
+        // SQL: SELECT * FROM WORDSPHRASES WHERE WORDID=?
+        let url = "\(CommonApi.url)WORDSPHRASES?filter=WORDID,eq,\(wordid)"
+        return RestApi.getRecords(url: url)
+    }
 
-protocol MPhraseProtocol {
-    var LANGID: Int { get set }
-    var PHRASE: String { get set }
-    var TRANSLATION: String? { get set }
+    static func getWordsByPhrase(phraseid: Int) -> Observable<[MWordPhrase]> {
+        // SQL: SELECT * FROM WORDSPHRASES WHERE PHRASEID=?
+        let url = "\(CommonApi.url)WORDSPHRASES?filter=PHRASEID,eq,\(phraseid)"
+        return RestApi.getRecords(url: url)
+    }
 }
