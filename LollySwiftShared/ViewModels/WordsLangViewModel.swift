@@ -18,6 +18,7 @@ class WordsLangViewModel: NSObject {
     let disposeBag: DisposeBag!
     var arrWords = [MLangWord]()
     var arrWordsFiltered: [MLangWord]?
+    var arrPhrases = [MLangPhrase]()
 
     public init(settings: SettingsViewModel, disposeBag: DisposeBag, needCopy: Bool, complete: @escaping () -> ()) {
         self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
@@ -75,5 +76,10 @@ class WordsLangViewModel: NSObject {
             return MLangWord.update(item.ID, note: note)
         }
     }
-
+    
+    func searchPhrases(wordid: Int) -> Observable<()> {
+        return MWordPhrase.getPhrasesByWord(wordid: wordid).map {
+            self.arrPhrases = $0
+        }
+    }
 }

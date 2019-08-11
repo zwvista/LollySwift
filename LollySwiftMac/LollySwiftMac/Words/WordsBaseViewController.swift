@@ -18,8 +18,9 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     @IBOutlet weak var tfFilter: NSTextField!
     @IBOutlet weak var chkLevelGE0Only: NSButton!
     @IBOutlet weak var tfURL: NSTextField!
-    @IBOutlet weak var tableView: NSTableView!
+    @IBOutlet weak var tvWords: NSTableView!
     @IBOutlet weak var tfStatusText: NSTextField!
+    @IBOutlet weak var tvPhrases: NSTableView!
 
     var vmSettings: SettingsViewModel! {
         return nil
@@ -36,6 +37,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     let synth = NSSpeechSynthesizer()
     var isSpeaking = true
     var responder: NSResponder? = nil
+    var arrPhrases: [MLangPhrase]! { return nil }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,7 +63,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     }
     
     func doRefresh() {
-        tableView.reloadData()
+        tvWords.reloadData()
         updateStatusText()
     }
 
@@ -91,6 +93,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     
     // https://stackoverflow.com/questions/10910779/coloring-rows-in-view-based-nstableview
     func tableView(_ tableView: NSTableView, didAdd rowView: NSTableRowView, forRow row: Int) {
+        guard tableView === tvWords else {return}
         let level = itemForRow(row: row)!.LEVEL
         if level != 0, let arr = vmSettings.USLEVELCOLORS![level] {
             rowView.backgroundColor = NSColor.hexColor(rgbValue: Int(arr[0], radix: 16)!)
@@ -99,25 +102,33 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! NSTableCellView
-        let item = itemForRow(row: row)!
         let columnName = tableColumn!.identifier.rawValue
-        cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
-        let level = item.LEVEL
-        if level != 0, let arr = vmSettings.USLEVELCOLORS![level] {
-            cell.textField?.textColor = NSColor.hexColor(rgbValue: Int(arr[1], radix: 16)!)
+        if tableView === tvWords {
+            let item = itemForRow(row: row)!
+            cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
+            let level = item.LEVEL
+            if level != 0, let arr = vmSettings.USLEVELCOLORS![level] {
+                cell.textField?.textColor = NSColor.hexColor(rgbValue: Int(arr[1], radix: 16)!)
+            } else {
+                cell.textField?.textColor = NSColor.windowFrameTextColor
+            }
         } else {
-            cell.textField?.textColor = NSColor.windowFrameTextColor
+            let item = arrPhrases[row]
+            cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
         }
         return cell
     }
     
     func updateStatusText() {
-        tfStatusText.stringValue = "\(tableView.numberOfRows) Words"
+        tfStatusText.stringValue = "\(tvWords.numberOfRows) Words"
     }
     
     func tableViewSelectionDidChange(_ notification: Notification) {
+        guard notification.object as! NSTableView === tvWords else {return}
         updateStatusText()
         searchDict(self)
+        responder = tvWords
+        searchPhrases()
         if isSpeaking {
             speak(self)
         }
@@ -127,10 +138,10 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     }
 
     @IBAction func endEditing(_ sender: NSTextField) {
-        let row = tableView.row(for: sender)
+        let row = tvWords.row(for: sender)
         guard row != -1 else {return}
-        let col = tableView.column(for: sender)
-        let key = tableView.tableColumns[col].identifier.rawValue
+        let col = tvWords.column(for: sender)
+        let key = tvWords.tableColumns[col].identifier.rawValue
         let item = itemForRow(row: row)!
         let oldValue = String(describing: item.value(forKey: key))
         var newValue = sender.stringValue
@@ -146,7 +157,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     }
 
     @IBAction func deleteWord(_ sender: AnyObject) {
-        let row = tableView.selectedRow
+        let row = tvWords.selectedRow
         guard row != -1 else {return}
         let alert = NSAlert()
         alert.messageText = "Delete Word"
@@ -194,7 +205,10 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
             selectedDictItemIndex = tbItem.tag
             print(tbItem.toolbar!.selectedItemIdentifier!.rawValue)
         }
-        let row = tableView.selectedRow
+        if responder == nil {
+            responder = tvWords
+        }
+        let row = tvWords.selectedRow
         if row == -1 {
             selectedWord = ""
             selectedWordID = 0
@@ -206,11 +220,17 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
             searchWord(word: selectedWord)
         }
     }
+    
+    func searchPhrases() {
+    }
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         // Regain focus if it's stolen by the webView
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.view.window!.makeFirstResponder(self.responder)
+        if responder != nil {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self.view.window!.makeFirstResponder(self.responder)
+                self.responder = nil
+            }
         }
         tfURL.stringValue = webView.url!.absoluteString
         guard dictStatus != .ready else {return}
@@ -243,14 +263,14 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     }
     
     private func changeLevel(by delta: Int) {
-        let row = tableView.selectedRow
+        let row = tvWords.selectedRow
         guard row != -1 else {return}
         var item = itemForRow(row: row)!
         let newLevel = item.LEVEL + delta
         guard newLevel == 0 || vmSettings.USLEVELCOLORS[newLevel] != nil else {return}
         item.LEVEL = newLevel
         levelChanged(row: row).subscribe(onNext: {
-            if $0 != 0 { self.tableView.reloadData() }
+            if $0 != 0 { self.tvWords.reloadData() }
         }).disposed(by: disposeBag)
     }
 

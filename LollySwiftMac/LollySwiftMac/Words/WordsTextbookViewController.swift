@@ -58,7 +58,7 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
     override func endEditing(row: Int) {
         let item = arrWords[row]
         WordsUnitViewModel.update(item: item).subscribe {
-            self.tableView.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count))
+            self.tvWords.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvWords.tableColumns.count))
         }.disposed(by: disposeBag)
     }
     
@@ -78,20 +78,20 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
     @IBAction func editWord(_ sender: AnyObject) {
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "WordsTextbookDetailViewController") as! WordsTextbookDetailViewController
         detailVC.vm = vm
-        let i = tableView.selectedRow
+        let i = tvWords.selectedRow
         detailVC.item = MUnitWord()
         detailVC.item.copy(from: arrWords[i])
         detailVC.complete = {
             self.arrWords[i].copy(from: detailVC.item)
-            self.tableView.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count))
+            self.tvWords.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tvWords.tableColumns.count))
         }
         self.presentAsModalWindow(detailVC)
     }
     
     @IBAction func getNote(_ sender: AnyObject) {
-        let col = tableView.tableColumns.firstIndex { $0.title == "NOTE" }!
-        vm.getNote(index: tableView.selectedRow).subscribe {
-            self.tableView.reloadData(forRowIndexes: [self.tableView.selectedRow], columnIndexes: [col])
+        let col = tvWords.tableColumns.firstIndex { $0.title == "NOTE" }!
+        vm.getNote(index: tvWords.selectedRow).subscribe {
+            self.tvWords.reloadData(forRowIndexes: [self.tvWords.selectedRow], columnIndexes: [col])
         }.disposed(by: disposeBag)
     }
     
@@ -106,11 +106,11 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
     @IBAction func filterWord(_ sender: AnyObject) {
         let n = scTextFilter.selectedSegment
         vm.applyFilters(textFilter: n == 0 ? "" : textFilter, scope: n == 1 ? "Word" : "Note", levelge0only: levelge0only, textbookFilter: textbookFilter)
-        self.tableView.reloadData()
+        self.tvWords.reloadData()
     }
 
     override func updateStatusText() {
-        tfStatusText.stringValue = "\(tableView.numberOfRows) Words in \(vmSettings.LANGINFO)"
+        tfStatusText.stringValue = "\(tvWords.numberOfRows) Words in \(vmSettings.LANGINFO)"
     }
 }
 

@@ -55,7 +55,7 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
     override func endEditing(row: Int) {
         let item = arrWords[row]
         WordsLangViewModel.update(item: item).subscribe {
-            self.tableView.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count))
+            self.tvWords.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvWords.tableColumns.count))
         }.disposed(by: disposeBag)
     }
     
@@ -66,7 +66,7 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
         WordsLangViewModel.create(item: item).subscribe(onNext: {
             item.ID = $0
             self.vm.arrWords.append(item)
-            self.tableView.reloadData()
+            self.tvWords.reloadData()
             self.tfNewWord.stringValue = ""
             self.newWord = ""
         }).disposed(by: disposeBag)
@@ -77,7 +77,7 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "WordsLangDetailViewController") as! WordsLangDetailViewController
         detailVC.vm = vm
         detailVC.item = vm.newLangWord()
-        detailVC.complete = { self.tableView.reloadData(); self.addWord(self) }
+        detailVC.complete = { self.tvWords.reloadData(); self.addWord(self) }
         self.presentAsSheet(detailVC)
     }
 
@@ -97,20 +97,20 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
     @IBAction func editWord(_ sender: AnyObject) {
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "WordsLangDetailViewController") as! WordsLangDetailViewController
         detailVC.vm = vm
-        let i = tableView.selectedRow
+        let i = tvWords.selectedRow
         detailVC.item = MLangWord()
         detailVC.item.copy(from: arrWords[i])
         detailVC.complete = {
             self.arrWords[i].copy(from: detailVC.item)
-            self.tableView.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count))
+            self.tvWords.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tvWords.tableColumns.count))
         }
         self.presentAsModalWindow(detailVC)
     }
     
     @IBAction func getNote(_ sender: AnyObject) {
-        let col = tableView.tableColumns.firstIndex { $0.title == "NOTE" }!
-        vm.getNote(index: tableView.selectedRow).subscribe {
-            self.tableView.reloadData(forRowIndexes: [self.tableView.selectedRow], columnIndexes: [col])
+        let col = tvWords.tableColumns.firstIndex { $0.title == "NOTE" }!
+        vm.getNote(index: tvWords.selectedRow).subscribe {
+            self.tvWords.reloadData(forRowIndexes: [self.tvWords.selectedRow], columnIndexes: [col])
         }.disposed(by: disposeBag)
     }
     
@@ -129,11 +129,11 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
         } else {
             vm.applyFilters(textFilter: textFilter, scope: n == 1 ? "Word" : "Note", levelge0only: levelge0only)
         }
-        self.tableView.reloadData()
+        self.tvWords.reloadData()
     }
 
     override func updateStatusText() {
-        tfStatusText.stringValue = "\(tableView.numberOfRows) Words in \(vmSettings.LANGINFO)"
+        tfStatusText.stringValue = "\(tvWords.numberOfRows) Words in \(vmSettings.LANGINFO)"
     }
 }
 

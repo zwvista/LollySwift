@@ -1034,6 +1034,10 @@
                                                                                     </prototypeCellViews>
                                                                                 </tableColumn>
                                                                             </tableColumns>
+                                                                            <connections>
+                                                                                <outlet property="dataSource" destination="F8i-pe-Ate" id="eiK-1b-mXf"/>
+                                                                                <outlet property="delegate" destination="F8i-pe-Ate" id="gve-lk-i0H"/>
+                                                                            </connections>
                                                                         </tableView>
                                                                     </subviews>
                                                                 </clipView>
@@ -1113,11 +1117,12 @@
                     <connections>
                         <outlet property="chkLevelGE0Only" destination="azS-bq-eKL" id="URS-Zi-evM"/>
                         <outlet property="scTextFilter" destination="RtU-w4-rmU" id="5fZ-jf-cIo"/>
-                        <outlet property="tableView" destination="8Zf-06-OzS" id="Vn7-va-cpG"/>
                         <outlet property="tfFilter" destination="Ntb-I3-XGS" id="Wl9-kJ-Nnx"/>
                         <outlet property="tfNewWord" destination="E8d-BH-EMc" id="sKW-6f-XqV"/>
                         <outlet property="tfStatusText" destination="IQa-iE-3F1" id="cbs-gy-uFL"/>
                         <outlet property="tfURL" destination="vJr-9d-1wg" id="Rv3-Uh-76H"/>
+                        <outlet property="tvPhrases" destination="Qfw-F3-HQ5" id="Fbg-lF-wt9"/>
+                        <outlet property="tvWords" destination="8Zf-06-OzS" id="RxN-UB-rk0"/>
                         <outlet property="wvDict" destination="pwn-BR-F7c" id="G1a-1X-0fx"/>
                     </connections>
                 </viewController>
@@ -3574,11 +3579,12 @@ Gw
                     <connections>
                         <outlet property="chkLevelGE0Only" destination="kMc-8z-lz9" id="fge-ID-0iU"/>
                         <outlet property="scTextFilter" destination="6UI-Xq-Ybp" id="kEF-HB-cSG"/>
-                        <outlet property="tableView" destination="zh5-gP-ZJa" id="wUb-Zv-H6h"/>
                         <outlet property="tfFilter" destination="lHN-YD-8mt" id="IbK-XI-ePK"/>
                         <outlet property="tfNewWord" destination="jNk-si-JUF" id="NN0-cI-2Sf"/>
                         <outlet property="tfStatusText" destination="ceW-Gp-R3a" id="Mdi-yT-ZFX"/>
                         <outlet property="tfURL" destination="Xge-cS-C5w" id="bi9-J7-ilH"/>
+                        <outlet property="tvPhrases" destination="Q7P-CR-qaw" id="7lL-0u-a18"/>
+                        <outlet property="tvWords" destination="zh5-gP-ZJa" id="01L-Ee-drg"/>
                         <outlet property="wvDict" destination="Txl-33-AIT" id="hgQ-5V-Jpq"/>
                     </connections>
                 </viewController>
@@ -5322,10 +5328,11 @@ Gw
                         <outlet property="acTextbooks" destination="4Nk-1I-LLj" id="WFs-mT-h3l"/>
                         <outlet property="pubTextbookFilter" destination="bMb-g8-SbI" id="oTT-5T-SxC"/>
                         <outlet property="scTextFilter" destination="RYe-rB-ZXc" id="N6N-0c-3c3"/>
-                        <outlet property="tableView" destination="NqU-P3-ciK" id="ngY-Mi-EJ0"/>
                         <outlet property="tfFilter" destination="q0R-YJ-VuK" id="bpz-6p-gYr"/>
                         <outlet property="tfStatusText" destination="Gqc-yq-vq1" id="dQm-HQ-8AA"/>
                         <outlet property="tfURL" destination="PHg-od-JVu" id="b0T-Fp-RfZ"/>
+                        <outlet property="tvPhrases" destination="b9S-TN-OQT" id="tmj-qS-mNb"/>
+                        <outlet property="tvWords" destination="NqU-P3-ciK" id="x3G-Mx-HV6"/>
                         <outlet property="wvDict" destination="pDu-tW-uI3" id="u1A-te-89n"/>
                     </connections>
                 </viewController>
