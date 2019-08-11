@@ -9,7 +9,7 @@
 import Cocoa
 import RxSwift
 
-class PhrasesSelectViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
+class PhrasesSelectViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate {
 
     @objc var vm: PhrasesUnitViewModel!
     var vmSettings: SettingsViewModel! {
@@ -26,16 +26,20 @@ class PhrasesSelectViewController: NSViewController, NSTableViewDataSource, NSTa
     @IBOutlet weak var pubTextbookFilter: NSPopUpButton!
     @IBOutlet weak var acTextbooks: NSArrayController!
     @objc var textbookFilter = 0
-    @IBOutlet weak var scScopeFilter: NSSegmentedControl!
+    @IBOutlet weak var scPhraseScope: NSSegmentedControl!
     @IBOutlet weak var tableView: NSTableView!
     
     let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: true, disposeBag: disposeBag, needCopy: true) {
+        reload(self)
+    }
+    
+    @IBAction func reload(_ sender: AnyObject) {
+        vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: scPhraseScope.selectedSegment == 0, disposeBag: disposeBag, needCopy: true) {
             self.acTextbooks.content = self.vmSettings.arrTextbookFilters
-            self.tableView.reloadData()
+            self.filterPhrase(self)
         }
     }
     
@@ -56,6 +60,25 @@ class PhrasesSelectViewController: NSViewController, NSTableViewDataSource, NSTa
         return cell
     }
     
+    @IBAction func filterPhrase(_ sender: AnyObject) {
+        let n = scTextFilter.selectedSegment
+        vm.applyFilters(textFilter: n == 0 ? "" : textFilter, scope: n == 1 ? "Phrase" : "Translation", textbookFilter: textbookFilter)
+        tableView.reloadData()
+    }
+    
+    func controlTextDidEndEditing(_ obj: Notification) {
+        let searchfield = obj.object as! NSControl
+        guard searchfield === tfFilter else {return}
+        let dict = (obj as NSNotification).userInfo!
+        let reason = dict["NSTextMovement"] as! NSNumber
+        let code = Int(reason.int32Value)
+        guard code == NSReturnTextMovement else {return}
+        if scTextFilter.selectedSegment == 0 {
+            scTextFilter.selectedSegment = 1
+        }
+        filterPhrase(self)
+    }
+
     @IBAction func checkItems(_ sender: AnyObject) {
         let n = (sender as! NSButton).tag
         for i in 0..<tableView.numberOfRows {
