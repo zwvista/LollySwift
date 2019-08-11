@@ -18,7 +18,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
         return vm.vmSettings
     }
     var arrPhrases: [MUnitPhrase] {
-        return vm.arrPhrasesFiltered == nil ? vm.arrPhrases : vm.arrPhrasesFiltered!
+        return vm.arrPhrasesFiltered ?? vm.arrPhrases
     }
     
     // https://developer.apple.com/videos/play/wwdc2011/120/

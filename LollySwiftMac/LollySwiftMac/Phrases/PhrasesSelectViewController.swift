@@ -11,21 +11,32 @@ import RxSwift
 
 class PhrasesSelectViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 
-    @objc var vm: PhrasesLangViewModel!
+    @objc var vm: PhrasesUnitViewModel!
+    var vmSettings: SettingsViewModel! {
+        return vm.vmSettings
+    }
     var complete: (() -> Void)?
-    var arrPhrases: [MLangPhrase] {
-        return vm.arrPhrases
+    var arrPhrases: [MUnitPhrase] {
+        return vm.arrPhrasesFiltered ?? vm.arrPhrases
     }
 
     @IBOutlet weak var scTextFilter: NSSegmentedControl!
     @IBOutlet weak var tfFilter: NSTextField!
     @objc var textFilter = ""
+    @IBOutlet weak var pubTextbookFilter: NSPopUpButton!
+    @IBOutlet weak var acTextbooks: NSArrayController!
+    @objc var textbookFilter = 0
+    @IBOutlet weak var scScopeFilter: NSSegmentedControl!
     @IBOutlet weak var tableView: NSTableView!
     
     let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: true, disposeBag: disposeBag, needCopy: true) {
+            self.acTextbooks.content = self.vmSettings.arrTextbookFilters
+            self.tableView.reloadData()
+        }
     }
     
     override func viewDidAppear() {

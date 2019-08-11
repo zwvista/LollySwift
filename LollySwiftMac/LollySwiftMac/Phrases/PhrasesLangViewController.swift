@@ -17,7 +17,7 @@ class PhrasesLangViewController: PhrasesBaseViewController {
         return vm.vmSettings
     }
     var arrPhrases: [MLangPhrase] {
-        return vm.arrPhrasesFiltered == nil ? vm.arrPhrases : vm.arrPhrasesFiltered!
+        return vm.arrPhrasesFiltered ?? vm.arrPhrases
     }
 
     override func viewDidLoad() {

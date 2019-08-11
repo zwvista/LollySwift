@@ -17,7 +17,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
         return vm.vmSettings
     }
     var arrPhrases: [MUnitPhrase] {
-        return vm.arrPhrasesFiltered == nil ? vm.arrPhrases : vm.arrPhrasesFiltered!
+        return vm.arrPhrasesFiltered ?? vm.arrPhrases
     }
 
     override func viewDidLoad() {
