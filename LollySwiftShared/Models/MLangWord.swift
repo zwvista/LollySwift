@@ -13,6 +13,7 @@ import RxSwift
 class MLangWord: NSObject, Codable, MWordProtocol {
     var ID = 0
     var LANGID = 0
+    var WORDID: Int { return ID }
     var WORD = ""
     var NOTE: String?
     var FAMIID = 0

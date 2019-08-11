@@ -15,6 +15,7 @@ class PhrasesSelectViewController: NSViewController, NSTableViewDataSource, NSTa
     var vmSettings: SettingsViewModel! {
         return vm.vmSettings
     }
+    var wordid = 0
     var complete: (() -> Void)?
     var arrPhrases: [MUnitPhrase] {
         return vm.arrPhrasesFiltered ?? vm.arrPhrases
@@ -99,6 +100,7 @@ class PhrasesSelectViewController: NSViewController, NSTableViewDataSource, NSTa
             let chk = (tableView.view(atColumn: 0, row: i, makeIfNecessary: false)! as! LollyCheckCell).chk!
             guard chk.state == .on else {continue}
             let item = arrPhrases[i]
+            o = o.concat(MWordPhrase.connect(wordid: wordid, phraseid: item.PHRASEID))
         }
         o.subscribe {
             self.complete?()

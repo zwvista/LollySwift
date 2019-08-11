@@ -12,6 +12,7 @@ import RxSwift
 @objcMembers
 class MLangPhrase: NSObject, Codable, MPhraseProtocol {
     var ID = 0
+    var PHRASEID: Int { return ID }
     var LANGID = 0
     var PHRASE = ""
     var TRANSLATION: String?

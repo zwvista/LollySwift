@@ -31,6 +31,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     @objc var textFilter = ""
     @objc var levelge0only = false
     var selectedWord = ""
+    var selectedWordID = 0
     var dictStatus = DictWebViewStatus.ready
     let synth = NSSpeechSynthesizer()
     var isSpeaking = true
@@ -117,7 +118,6 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     func tableViewSelectionDidChange(_ notification: Notification) {
         updateStatusText()
         searchDict(self)
-        responder = tableView
         if isSpeaking {
             speak(self)
         }
@@ -197,9 +197,12 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
         let row = tableView.selectedRow
         if row == -1 {
             selectedWord = ""
+            selectedWordID = 0
             searchWord(word: newWord)
         } else {
-            selectedWord = itemForRow(row: row)!.WORD
+            let item = itemForRow(row: row)!
+            selectedWord = item.WORD
+            selectedWordID = item.WORDID
             searchWord(word: selectedWord)
         }
     }

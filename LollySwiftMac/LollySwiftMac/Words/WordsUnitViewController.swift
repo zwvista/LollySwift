@@ -288,8 +288,10 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     }
 
     @IBAction func selectPhrases(_ sender: AnyObject) {
+        guard selectedWordID != 0 else {return}
         let detailVC = NSStoryboard(name: "Phrases", bundle: nil).instantiateController(withIdentifier: "PhrasesSelectViewController") as! PhrasesSelectViewController
         detailVC.textFilter = selectedWord
+        detailVC.wordid = selectedWordID
         detailVC.complete = {
         }
         self.presentAsModalWindow(detailVC)

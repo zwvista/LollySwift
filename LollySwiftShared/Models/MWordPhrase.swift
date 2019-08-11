@@ -35,7 +35,7 @@ class MWordPhrase: NSObject, Codable {
     
     static func connect(wordid: Int, phraseid: Int) -> Observable<()> {
         return getDataByWordPhrase(wordid: wordid, phraseid: phraseid).flatMap { arr -> Observable<()> in
-            if arr.isEmpty {
+            if !arr.isEmpty {
                 return Observable.empty()
             } else {
                 let item = MWordPhrase()
