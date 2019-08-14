@@ -114,6 +114,13 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
         }.disposed(by: disposeBag)
     }
     
+    @IBAction func clearNote(_ sender: AnyObject) {
+        let col = tvWords.tableColumns.firstIndex { $0.title == "NOTE" }!
+        vm.clearNote(index: tvWords.selectedRow).subscribe {
+            self.tvWords.reloadData(forRowIndexes: [self.tvWords.selectedRow], columnIndexes: [col])
+        }.disposed(by: disposeBag)
+    }
+
     // https://stackoverflow.com/questions/9368654/cannot-seem-to-setenabledno-on-nsmenuitem
     func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
         if menuItem.action == #selector(self.getNote(_:)) {
@@ -134,6 +141,17 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
 
     override func updateStatusText() {
         tfStatusText.stringValue = "\(tvWords.numberOfRows) Words in \(vmSettings.LANGINFO)"
+    }
+
+    @IBAction func selectPhrases(_ sender: AnyObject) {
+        guard selectedWordID != 0 else {return}
+        let detailVC = NSStoryboard(name: "Phrases", bundle: nil).instantiateController(withIdentifier: "PhrasesSelectViewController") as! PhrasesSelectViewController
+        detailVC.textFilter = selectedWord
+        detailVC.wordid = selectedWordID
+        detailVC.complete = {
+            self.searchPhrases()
+        }
+        self.presentAsModalWindow(detailVC)
     }
 }
 

@@ -76,7 +76,13 @@ class WordsLangViewModel: NSObject {
             return MLangWord.update(item.ID, note: note)
         }
     }
-    
+
+    func clearNote(index: Int) -> Observable<()> {
+        let item = arrWords[index]
+        item.NOTE = NoteViewModel.zeroNote
+        return WordsUnitViewModel.update(item.ID, note: item.NOTE!)
+    }
+
     func searchPhrases(wordid: Int) -> Observable<()> {
         return MWordPhrase.getPhrasesByWord(wordid: wordid).map {
             self.arrPhrases = $0

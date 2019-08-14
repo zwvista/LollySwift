@@ -285,7 +285,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
                 if self.vmReview.shuffled {
                     arrWords = arrWords.shuffled()
                 }
-                let arrIDs = arrWords.map{ $0.ID }
+                let arrIDs = arrWords.map { $0.ID }
                 self.vmReview.start(arrIDs: arrIDs, interval: Double(self.vmSettings.USSCANINTERVAL) / 1000.0) { [unowned self] i in
                     if let row = self.arrWords.firstIndex(where: { $0.ID == arrIDs[i] }) {
                         self.tvWords.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
@@ -302,7 +302,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
         detailVC.textFilter = selectedWord
         detailVC.wordid = selectedWordID
         detailVC.complete = {
-            self.tvPhrases.reloadData()
+            self.searchPhrases()
         }
         self.presentAsModalWindow(detailVC)
     }
