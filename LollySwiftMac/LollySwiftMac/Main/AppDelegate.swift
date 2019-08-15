@@ -50,6 +50,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
     
+    func findOrShowWindow(storyBoardName: String, windowControllerName: String) {
+        if let w = NSApplication.shared.windows.first(where: { $0.windowController!.className.contains( windowControllerName) }) {
+            // https://stackoverflow.com/questions/29328281/os-x-menubar-application-how-to-bring-window-to-front
+            w.makeKeyAndOrderFront(nil)
+        } else {
+            showWindow(storyBoardName: storyBoardName, windowControllerName: windowControllerName, modal: false)
+        }
+    }
+    
     @IBAction func search(_ sender: AnyObject) {
         showWindow(storyBoardName: "Words", windowControllerName: "WordsSearchWindowController", modal: false)
     }
@@ -59,22 +68,42 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @IBAction func wordsInUnit(_ sender: AnyObject) {
+        findOrShowWindow(storyBoardName: "Words", windowControllerName: "WordsUnitWindowController")
+    }
+    
+    @IBAction func wordsInUnitNew(_ sender: AnyObject) {
         showWindow(storyBoardName: "Words", windowControllerName: "WordsUnitWindowController", modal: false)
     }
-    
+
     @IBAction func phrasesInUnit(_ sender: AnyObject) {
-        showWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesUnitWindowController", modal: false)
+        findOrShowWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesUnitWindowController")
     }
 
-    @IBAction func wordsInLanguage(_ sender: AnyObject) {
-        showWindow(storyBoardName: "Words", windowControllerName: "WordsLangWindowController", modal: false)
+    @IBAction func phrasesInUnitNew(_ sender: AnyObject) {
+        showWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesUnitWindowController", modal: false)
     }
     
-    @IBAction func phrasesInLanguage(_ sender: AnyObject) {
-        showWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesLangWindowController", modal: false)
+    @IBAction func wordsReview(_ sender: AnyObject) {
+        findOrShowWindow(storyBoardName: "Words", windowControllerName: "WordsReviewWindowController")
     }
     
+    @IBAction func wordsReviewNew(_ sender: AnyObject) {
+        showWindow(storyBoardName: "Words", windowControllerName: "WordsReviewWindowController", modal: false)
+    }
+
+    @IBAction func phrasesReview(_ sender: AnyObject) {
+        findOrShowWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesReviewWindowController")
+    }
+
+    @IBAction func phrasesReviewNew(_ sender: AnyObject) {
+        showWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesReviewWindowController", modal: false)
+    }
+
     @IBAction func wordsInTextbook(_ sender: AnyObject) {
+        findOrShowWindow(storyBoardName: "Words", windowControllerName: "WordsTextbookWindowController")
+    }
+    
+    @IBAction func wordsInTextbookNew(_ sender: AnyObject) {
         showWindow(storyBoardName: "Words", windowControllerName: "WordsTextbookWindowController", modal: false)
     }
     
@@ -82,16 +111,28 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         showWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesTextbookWindowController", modal: false)
     }
     
+    @IBAction func phrasesInTextbookNew(_ sender: AnyObject) {
+        showWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesTextbookWindowController", modal: false)
+    }
+
+    @IBAction func wordsInLanguage(_ sender: AnyObject) {
+        findOrShowWindow(storyBoardName: "Words", windowControllerName: "WordsLangWindowController")
+    }
+
+    @IBAction func wordsInLanguageNew(_ sender: AnyObject) {
+        showWindow(storyBoardName: "Words", windowControllerName: "WordsLangWindowController", modal: false)
+    }
+
+    @IBAction func phrasesInLanguage(_ sender: AnyObject) {
+        findOrShowWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesLangWindowController")
+    }
+
+    @IBAction func phrasesInLanguageNew(_ sender: AnyObject) {
+        showWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesLangWindowController", modal: false)
+    }
+
     @IBAction func editBlog(_ sender: AnyObject) {
         showWindow(storyBoardName: "Main", windowControllerName: "BlogWindowController", modal: false)
-    }
-    
-    @IBAction func wordsReview(_ sender: AnyObject) {
-        showWindow(storyBoardName: "Words", windowControllerName: "WordsReviewWindowController", modal: false)
-    }
-    
-    @IBAction func phrasesReview(_ sender: AnyObject) {
-        showWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesReviewWindowController", modal: false)
     }
     
     @IBAction func textbooks(_ sender: AnyObject) {
