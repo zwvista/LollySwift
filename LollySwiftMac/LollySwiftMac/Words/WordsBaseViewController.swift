@@ -124,13 +124,20 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     }
     
     func tableViewSelectionDidChange(_ notification: Notification) {
-        guard notification.object as! NSTableView === tvWords else {return}
-        updateStatusText()
-        searchDict(self)
-        responder = tvWords
-        searchPhrases()
-        if isSpeaking {
-            speak(self)
+        let tv = notification.object as! NSTableView
+        if tv === tvWords {
+            updateStatusText()
+            searchDict(self)
+            responder = tvWords
+            searchPhrases()
+            if isSpeaking {
+                speak(self)
+            }
+        } else {
+            let row = tvPhrases.selectedRow
+            if isSpeaking && row != -1 {
+                synth.startSpeaking(arrPhrases[row].PHRASE)
+            }
         }
     }
     
