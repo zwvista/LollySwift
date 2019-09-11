@@ -51,7 +51,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func findOrShowWindow(storyBoardName: String, windowControllerName: String) {
-        if let w = NSApplication.shared.windows.first(where: { $0.windowController!.className.contains( windowControllerName) }) {
+        if let w = NSApplication.shared.windows.first(where: { $0.windowController?.className.contains( windowControllerName) ?? false }) {
             // https://stackoverflow.com/questions/29328281/os-x-menubar-application-how-to-bring-window-to-front
             w.makeKeyAndOrderFront(nil)
         } else {

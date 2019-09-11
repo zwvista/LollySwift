@@ -49,7 +49,7 @@ class BlogViewModel: NSObject {
                 let (s1, s2, s3, s4) = (m.group(at: 1)!, m.group(at: 2)!, m.group(at: 3)!, m.group(at: 4))
                 s = htmlWordWith(s2) + (s3.isEmpty ? "" : htmlE1With(s3)) + ((s4 ?? "").isEmpty ? "" : htmlE2With(s4!))
                 arr[i] = (s1 == "*" ? "<li>" : "<br>") + s
-                if (i == 0 || arr[i - 1].hasPrefix("<div>")) {
+                if i == 0 || arr[i - 1].hasPrefix("<div>") {
                     arr.insert("<ul>", at: i)
                     i += 1
                 }
