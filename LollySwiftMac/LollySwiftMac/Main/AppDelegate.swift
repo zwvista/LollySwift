@@ -142,4 +142,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBAction func dictionaries(_ sender: AnyObject) {
         showWindow(storyBoardName: "Tools", windowControllerName: "DictsWindowController", modal: false)
     }
+    
+    @IBAction func readNUmber(_ sender: AnyObject) {
+        showWindow(storyBoardName: "Main", windowControllerName: "ReadNumberWindowController", modal: false)
+    }
 }
