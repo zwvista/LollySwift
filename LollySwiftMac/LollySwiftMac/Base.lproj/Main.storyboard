@@ -1139,11 +1139,35 @@
         <scene sceneID="fMb-BL-HAI">
             <objects>
                 <windowController storyboardIdentifier="ReadNumberWindowController" id="2Nv-Kb-WaU" customClass="ReadNumberWindowController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
-                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="KyB-Fb-cp0">
+                    <window key="window" title="Read Number" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="KyB-Fb-cp0">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
+                        <toolbar key="toolbar" implicitIdentifier="55E5566E-F48C-43DE-814A-1A373DD057EE" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="w0g-9v-EGJ">
+                            <allowedToolbarItems>
+                                <toolbarItem implicitItemIdentifier="8773739D-6209-490F-9F3D-D5858B8C3C7D" label="Speak?" paletteLabel="Speak?" sizingBehavior="auto" id="m6z-fd-gBU" userLabel="Speak?">
+                                    <nil key="toolTip"/>
+                                    <segmentedControl key="view" verticalHuggingPriority="750" id="a2o-et-iJI">
+                                        <rect key="frame" x="0.0" y="14" width="95" height="23"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="vLe-mL-U9g">
+                                            <font key="font" metaFont="system"/>
+                                            <segments>
+                                                <segment label="Silent" width="42" selected="YES"/>
+                                                <segment label="Speak" width="46" tag="1"/>
+                                            </segments>
+                                        </segmentedCell>
+                                        <connections>
+                                            <action selector="isSpeakingChanged:" target="KLh-g0-wzW" id="fYo-hK-OzY"/>
+                                        </connections>
+                                    </segmentedControl>
+                                </toolbarItem>
+                            </allowedToolbarItems>
+                            <defaultToolbarItems>
+                                <toolbarItem reference="m6z-fd-gBU"/>
+                            </defaultToolbarItems>
+                        </toolbar>
                         <connections>
                             <outlet property="delegate" destination="2Nv-Kb-WaU" id="NyM-6Z-fka"/>
                         </connections>
@@ -1161,13 +1185,53 @@
             <objects>
                 <viewController id="loC-Uj-4zm" customClass="ReadNumberViewController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="Kma-ap-heV">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="554" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="xfX-XA-ulZ">
+                                <rect key="frame" x="11" y="160" width="523" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="8cW-CC-h3b"/>
+                                </constraints>
+                                <textFieldCell key="cell" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="xlS-FD-cdG">
+                                    <font key="font" metaFont="system" size="25"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <connections>
+                                    <binding destination="loC-Uj-4zm" name="value" keyPath="vm.num" id="aEB-Hx-Cg7"/>
+                                    <outlet property="delegate" destination="loC-Uj-4zm" id="IJm-I9-rSm"/>
+                                </connections>
+                            </textField>
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="s6y-li-pNW">
+                                <rect key="frame" x="11" y="80" width="523" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="Ew5-ai-pVP"/>
+                                </constraints>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="xlE-4F-2lg">
+                                    <font key="font" metaFont="system" size="25"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="s6y-li-pNW" firstAttribute="trailing" secondItem="xfX-XA-ulZ" secondAttribute="trailing" id="0Gx-M3-SW2"/>
+                            <constraint firstItem="xfX-XA-ulZ" firstAttribute="top" secondItem="Kma-ap-heV" secondAttribute="top" constant="80" id="5aT-6b-pIu"/>
+                            <constraint firstItem="s6y-li-pNW" firstAttribute="leading" secondItem="xfX-XA-ulZ" secondAttribute="leading" id="QXA-pN-1uu"/>
+                            <constraint firstItem="xfX-XA-ulZ" firstAttribute="leading" secondItem="Kma-ap-heV" secondAttribute="leading" constant="11" id="afJ-Xh-iIJ"/>
+                            <constraint firstAttribute="trailing" secondItem="xfX-XA-ulZ" secondAttribute="trailing" constant="20" symbolic="YES" id="i73-gt-v4p"/>
+                            <constraint firstItem="s6y-li-pNW" firstAttribute="top" secondItem="xfX-XA-ulZ" secondAttribute="bottom" constant="20" id="wzX-OQ-hvo"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tfNumber" destination="xfX-XA-ulZ" id="FY6-yZ-Ize"/>
+                        <outlet property="tfText" destination="s6y-li-pNW" id="dJ1-2e-huq"/>
+                    </connections>
                 </viewController>
                 <customObject id="vP5-0W-prE" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2138" y="579"/>
+            <point key="canvasLocation" x="2190" y="579"/>
         </scene>
         <!--Blog View Controller-->
         <scene sceneID="rWR-Pz-Lcy">
