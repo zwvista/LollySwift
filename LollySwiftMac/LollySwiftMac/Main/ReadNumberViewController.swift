@@ -50,4 +50,8 @@ class ReadNumberWindowController: NSWindowController {
     override func windowDidLoad() {
         super.windowDidLoad()
     }
+        
+    deinit {
+        print("DEBUG: \(self.className) deinit")
+    }
 }

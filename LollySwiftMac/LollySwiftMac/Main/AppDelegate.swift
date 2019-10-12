@@ -20,8 +20,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         AppDelegate.theSettingsViewModel.getData().subscribe(onNext: {
             //self.search(self)
             //self.editBlog(self)
-            self.wordsInUnit(self)
+            //self.wordsInUnit(self)
             //self.wordsInLanguage(self)
+            self.readNumber(self)
         }).disposed(by: disposeBag)
         // Insert code here to initialize your application
 
@@ -143,7 +144,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         showWindow(storyBoardName: "Tools", windowControllerName: "DictsWindowController", modal: false)
     }
     
-    @IBAction func readNUmber(_ sender: AnyObject) {
+    @IBAction func readNumber(_ sender: AnyObject) {
         showWindow(storyBoardName: "Main", windowControllerName: "ReadNumberWindowController", modal: false)
     }
 }
