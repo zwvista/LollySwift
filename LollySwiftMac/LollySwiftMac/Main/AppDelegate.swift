@@ -19,10 +19,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         AppDelegate.theSettingsViewModel.getData().subscribe(onNext: {
             //self.search(self)
-            //self.editBlog(self)
+            self.editBlog(self)
             //self.wordsInUnit(self)
             //self.wordsInLanguage(self)
-            self.readNumber(self)
+            //self.readNumber(self)
         }).disposed(by: disposeBag)
         // Insert code here to initialize your application
 
@@ -146,5 +146,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @IBAction func readNumber(_ sender: AnyObject) {
         showWindow(storyBoardName: "Main", windowControllerName: "ReadNumberWindowController", modal: false)
+    }
+    
+    func searchWord(word: String) {
+        guard let w = NSApplication.shared.windows.first(where: { $0.windowController?.className.contains( "WordsSearchWindowController") ?? false }) else {return}
+        let v = w.contentViewController as! WordsSearchViewController
+        v.addNewWord(word: word)
     }
 }

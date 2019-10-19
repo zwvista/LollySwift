@@ -118,7 +118,9 @@ class BlogViewModel: NSObject {
         text = "<(/)?Temp>".r!.replaceAll(in: text, with: "<$1I>")
         return text
     }
-    let explanation = "* ：：\n"
+    func getExplanation(text: String) -> String {
+        return "* \(text)：：\n"
+    }
     func getHtml(text: String) -> String {
         return "<html><body>\(text)</body></html>"
     }

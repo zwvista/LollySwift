@@ -35,8 +35,8 @@ class BlogViewController: NSViewController, NSMenuItemValidation  {
     
     func replaceSelection(f: (String) -> String) {
         var s = tvMarked.string
-        let range = tvMarked.selectedRange()
-        s = String(s[Range(range, in: s)!])
+        let range = Range(tvMarked.selectedRange(), in: s)!
+        s = String(s[range])
         tvMarked.replaceCharacters(in: tvMarked.selectedRange(), with: f(s))
     }
 
@@ -53,7 +53,12 @@ class BlogViewController: NSViewController, NSMenuItemValidation  {
         return replaceSelection(f: vmBlog.exchangeTagBI)
     }
     @IBAction func addExplanation(_ sender: AnyObject) {
-        return replaceSelection { _ in vmBlog.explanation }
+        let s = tvMarked.string
+        let range = Range(tvMarked.selectedRange(), in: s)!
+        let t = String(s[range])
+        var range2 = s.range(of: "\n", options: .caseInsensitive, range: range.upperBound..<s.endIndex) ?? (s.endIndex..<s.endIndex)
+        tvMarked.replaceCharacters(in: NSRange(range2.upperBound..<range2.upperBound, in: s), with: vmBlog.getExplanation(text: t))
+        (NSApplication.shared.delegate as! AppDelegate).searchWord(word: t)
     }
     @IBAction func switchPage(_ sender: AnyObject) {
         var n = 0

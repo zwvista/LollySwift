@@ -56,6 +56,11 @@ class WordsSearchViewController: WordsBaseViewController {
         responder = tfNewWord
     }
     
+    func addNewWord(word: String) {
+        newWord = word
+        addNewWord()
+    }
+    
     @IBAction func refreshTableView(_ sender: AnyObject) {
         vm.arrWords.removeAll()
         tvWords.reloadData()
