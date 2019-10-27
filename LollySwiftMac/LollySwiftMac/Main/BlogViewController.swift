@@ -41,24 +41,21 @@ class BlogViewController: NSViewController, NSMenuItemValidation  {
     }
 
     @IBAction func addTagB(_ sender: AnyObject) {
-        return replaceSelection(f: vmBlog.addTagB)
+        replaceSelection(f: vmBlog.addTagB)
     }
     @IBAction func addTagI(_ sender: AnyObject) {
-        return replaceSelection(f: vmBlog.addTagI)
+        replaceSelection(f: vmBlog.addTagI)
     }
     @IBAction func removeTagBI(_ sender: AnyObject) {
-        return replaceSelection(f: vmBlog.removeTagBI)
+        replaceSelection(f: vmBlog.removeTagBI)
     }
     @IBAction func exchangeTagBI(_ sender: AnyObject) {
-        return replaceSelection(f: vmBlog.exchangeTagBI)
+        replaceSelection(f: vmBlog.exchangeTagBI)
     }
     @IBAction func addExplanation(_ sender: AnyObject) {
-        let s = tvMarked.string
-        let range = Range(tvMarked.selectedRange(), in: s)!
-        let t = String(s[range])
-        var range2 = s.range(of: "\n", options: .caseInsensitive, range: range.upperBound..<s.endIndex) ?? (s.endIndex..<s.endIndex)
-        tvMarked.replaceCharacters(in: NSRange(range2.upperBound..<range2.upperBound, in: s), with: vmBlog.getExplanation(text: t))
-        (NSApplication.shared.delegate as! AppDelegate).searchWord(word: t)
+        let s = NSPasteboard.general.string(forType: .string) ?? ""
+        replaceSelection { _ in vmBlog.getExplanation(text: s) }
+        (NSApplication.shared.delegate as! AppDelegate).searchWord(word: s)
     }
     @IBAction func switchPage(_ sender: AnyObject) {
         var n = 0

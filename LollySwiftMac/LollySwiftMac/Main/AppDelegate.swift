@@ -19,8 +19,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         AppDelegate.theSettingsViewModel.getData().subscribe(onNext: {
             //self.search(self)
-            self.editBlog(self)
-            //self.wordsInUnit(self)
+            //self.editBlog(self)
+            self.wordsInUnit(self)
             //self.wordsInLanguage(self)
             //self.readNumber(self)
         }).disposed(by: disposeBag)
