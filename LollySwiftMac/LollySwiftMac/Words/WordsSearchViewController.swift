@@ -71,6 +71,10 @@ class WordsSearchViewController: WordsBaseViewController {
     
     @IBAction func getNote(_ sender: AnyObject) {
     }
+    
+    override func needRegainFocus() -> Bool {
+        return false
+    }
 }
 
 class WordsSearchWindowController: WordsBaseWindowController {

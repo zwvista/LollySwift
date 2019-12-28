@@ -230,10 +230,14 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     
     func searchPhrases() {
     }
+    
+    func needRegainFocus() -> Bool {
+        return true
+    }
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         // Regain focus if it's stolen by the webView
-        if responder != nil {
+        if responder != nil && needRegainFocus() {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self.view.window!.makeFirstResponder(self.responder)
                 self.responder = nil
