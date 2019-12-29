@@ -51,6 +51,9 @@
 		954B870C218FC223007DC348 /* WordsLangViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954B870B218FC223007DC348 /* WordsLangViewController.swift */; };
 		954B870E218FD274007DC348 /* WordsLangDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954B870D218FD274007DC348 /* WordsLangDetailViewController.swift */; };
 		954CB5ED23B7114100A03900 /* MLangPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954CB5EC23B7114100A03900 /* MLangPattern.swift */; };
+		954CB5F023B713DA00A03900 /* Patterns.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 954CB5EF23B713DA00A03900 /* Patterns.storyboard */; };
+		954CB5F223B714C500A03900 /* PatternsLangViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954CB5F123B714C500A03900 /* PatternsLangViewController.swift */; };
+		954CB5F423B7175500A03900 /* PatternsLangViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954CB5F323B7175500A03900 /* PatternsLangViewModel.swift */; };
 		954D8B982143907C00651A80 /* PhrasesLangViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CB59D207885140083DDE2 /* PhrasesLangViewModel.swift */; };
 		954D8B992143907C00651A80 /* PhrasesUnitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CB59E207885140083DDE2 /* PhrasesUnitViewModel.swift */; };
 		954D8B9A2143907C00651A80 /* WordsSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAF910920833C4F00933837 /* WordsSearchViewModel.swift */; };
@@ -179,6 +182,9 @@
 		954B870B218FC223007DC348 /* WordsLangViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsLangViewController.swift; sourceTree = "<group>"; };
 		954B870D218FD274007DC348 /* WordsLangDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsLangDetailViewController.swift; sourceTree = "<group>"; };
 		954CB5EC23B7114100A03900 /* MLangPattern.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLangPattern.swift; sourceTree = "<group>"; };
+		954CB5EF23B713DA00A03900 /* Patterns.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Patterns.storyboard; sourceTree = "<group>"; };
+		954CB5F123B714C500A03900 /* PatternsLangViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternsLangViewController.swift; sourceTree = "<group>"; };
+		954CB5F323B7175500A03900 /* PatternsLangViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternsLangViewModel.swift; sourceTree = "<group>"; };
 		958125C52190463F0001159E /* PhrasesLangViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesLangViewController.swift; sourceTree = "<group>"; };
 		958125C72190464A0001159E /* PhrasesLangDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesLangDetailViewController.swift; sourceTree = "<group>"; };
 		958BAB14235182B3007F50BB /* ReadNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadNumberViewController.swift; sourceTree = "<group>"; };
@@ -281,6 +287,7 @@
 				8C6E2EDC1EBB97CF00AC114F /* LollySwiftMac-Bridging-Header.h */,
 				9534728322BB68EE00517D71 /* Main */,
 				8C1C4F2D1D31F88800CF5D88 /* Main.storyboard */,
+				954CB5EE23B7139800A03900 /* Patterns */,
 				8CD8409920AFD4D900442133 /* Phrases */,
 				95F0A89B22913B7000D1B9A2 /* Tools */,
 				8C2CB5C0207888260083DDE2 /* Words */,
@@ -324,6 +331,7 @@
 				95F0A8AC2293C6A700D1B9A2 /* DictsViewModel.swift */,
 				95F5400F22C35C3800E3FD6A /* EmbeddedReviewViewModel.swift */,
 				95E43F2A21E1D568001E650C /* NoteViewModel.swift */,
+				954CB5F323B7175500A03900 /* PatternsLangViewModel.swift */,
 				8C2CB59D207885140083DDE2 /* PhrasesLangViewModel.swift */,
 				95FDF627228CF9B1003DFB1A /* PhrasesReviewViewModel.swift */,
 				8C2CB59E207885140083DDE2 /* PhrasesUnitViewModel.swift */,
@@ -434,6 +442,15 @@
 				9534728622BB68EE00517D71 /* speak.png */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		954CB5EE23B7139800A03900 /* Patterns */ = {
+			isa = PBXGroup;
+			children = (
+				954CB5EF23B713DA00A03900 /* Patterns.storyboard */,
+				954CB5F123B714C500A03900 /* PatternsLangViewController.swift */,
+			);
+			path = Patterns;
 			sourceTree = "<group>";
 		};
 		95F0A89B22913B7000D1B9A2 /* Tools */ = {
@@ -581,6 +598,7 @@
 				8C1C4F2F1D31F88800CF5D88 /* Main.storyboard in Resources */,
 				8C2CB5C4207888260083DDE2 /* Words.storyboard in Resources */,
 				95F0A89D22913B8300D1B9A2 /* Tools.storyboard in Resources */,
+				954CB5F023B713DA00A03900 /* Patterns.storyboard in Resources */,
 				8CD8409F20AFD4DA00442133 /* Phrases.storyboard in Resources */,
 				9534728C22BB68EE00517D71 /* speak.png in Resources */,
 			);
@@ -720,6 +738,7 @@
 				9534728E22BB68EE00517D71 /* AppDelegate.swift in Sources */,
 				8C2CB5BE207885140083DDE2 /* MLanguage.swift in Sources */,
 				95CED3B62211C8300094622F /* WordsTextbookViewController.swift in Sources */,
+				954CB5F223B714C500A03900 /* PatternsLangViewController.swift in Sources */,
 				954B870C218FC223007DC348 /* WordsLangViewController.swift in Sources */,
 				951385D522F6C94800E47D35 /* PhrasesSelectViewController.swift in Sources */,
 				95F0A8A7229293DF00D1B9A2 /* TextbooksDetailViewController.swift in Sources */,
@@ -749,6 +768,7 @@
 				8CAF910A20833C4F00933837 /* WordsSearchViewModel.swift in Sources */,
 				95CED3B2221048B50094622F /* PhrasesBaseViewController.swift in Sources */,
 				95EFF47E21840FB60094EE3C /* MAutoCorrect.swift in Sources */,
+				954CB5F423B7175500A03900 /* PatternsLangViewModel.swift in Sources */,
 				8C0748E9209EE15D0006BD1B /* RxCodableAlamofire.swift in Sources */,
 				954CB5ED23B7114100A03900 /* MLangPattern.swift in Sources */,
 				95CED3CE2216C6320094622F /* PhrasesTextbookDetailViewController.swift in Sources */,

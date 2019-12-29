@@ -162,6 +162,10 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
 
     func addNewWord() {
     }
+    
+    func confirmDelete() -> Bool {
+        return true
+    }
 
     @IBAction func deleteWord(_ sender: AnyObject) {
         let row = tvWords.selectedRow
@@ -172,7 +176,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
         alert.alertStyle = .warning
         alert.addButton(withTitle: "Yes")
         alert.addButton(withTitle: "No")
-        guard alert.runModal() == .alertFirstButtonReturn else {return}
+        guard !confirmDelete() || alert.runModal() == .alertFirstButtonReturn else {return}
         deleteWord(row: row)
     }
     

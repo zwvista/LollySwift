@@ -69,6 +69,15 @@ class WordsSearchViewController: WordsBaseViewController {
     @IBAction func editWord(_ sender: AnyObject) {
     }
     
+    override func confirmDelete() -> Bool {
+        return false
+    }
+
+    override func deleteWord(row: Int) {
+        vm.arrWords.remove(at: row)
+        tvWords.reloadData()
+    }
+
     @IBAction func getNote(_ sender: AnyObject) {
     }
     
