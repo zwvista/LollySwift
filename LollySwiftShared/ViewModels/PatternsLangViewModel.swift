@@ -13,7 +13,8 @@ class PatternsLangViewModel: NSObject {
     var vmSettings: SettingsViewModel
     var arrPatterns = [MLangPattern]()
     var arrPatternsFiltered: [MLangPattern]?
-    
+    var arrPhrases = [MLangPhrase]()
+
     public init(settings: SettingsViewModel, disposeBag: DisposeBag, needCopy: Bool, complete: @escaping () -> ()) {
         self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
         super.init()

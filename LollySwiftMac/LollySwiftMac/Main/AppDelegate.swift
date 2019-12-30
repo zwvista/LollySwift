@@ -20,9 +20,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         AppDelegate.theSettingsViewModel.getData().subscribe(onNext: {
             //self.search(self)
             //self.editBlog(self)
-            self.wordsInUnit(self)
+            //self.wordsInUnit(self)
             //self.wordsInLanguage(self)
             //self.readNumber(self)
+            self.patternsInLanguage(self)
         }).disposed(by: disposeBag)
         // Insert code here to initialize your application
 
@@ -130,6 +131,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBAction func phrasesInLanguageNew(_ sender: AnyObject) {
         showWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesLangWindowController", modal: false)
+    }
+    
+    @IBAction func patternsInLanguage(_ sender: AnyObject) {
+        findOrShowWindow(storyBoardName: "Patterns", windowControllerName: "PatternsLangWindowController")
+    }
+    
+    @IBAction func patternsInLanguageNew(_ sender: AnyObject) {
+        showWindow(storyBoardName: "Patterns", windowControllerName: "PatternsLangWindowController", modal: false)
     }
 
     @IBAction func editBlog(_ sender: AnyObject) {

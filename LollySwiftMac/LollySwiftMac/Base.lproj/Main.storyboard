@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15400"/>
-        <plugIn identifier="com.apple.WebKit2IBPlugin" version="15400"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15702"/>
+        <plugIn identifier="com.apple.WebKit2IBPlugin" version="15702"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -763,6 +763,12 @@
                                                 <action selector="phrasesInLanguage:" target="Voe-Tx-rLC" id="Oea-V9-MF0"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem title="Patterns in Language" id="pT9-Qx-pzA">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="patternsInLanguage:" target="Voe-Tx-rLC" id="dOE-Aw-UOV"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem title="New (In Language)" id="bJ4-vC-KVX">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <menu key="submenu" title="New (In Language)" id="ovP-ZP-UgG">
@@ -779,15 +785,14 @@
                                                             <action selector="phrasesInLanguageNew:" target="Ady-hI-5gd" id="SnD-Ty-gMr"/>
                                                         </connections>
                                                     </menuItem>
+                                                    <menuItem title="Patterns in Language (New)" id="mrQ-hR-1wh">
+                                                        <modifierMask key="keyEquivalentModifierMask"/>
+                                                        <connections>
+                                                            <action selector="patternsInLanguageNew:" target="Voe-Tx-rLC" id="xWH-4Y-izD"/>
+                                                        </connections>
+                                                    </menuItem>
                                                 </items>
                                             </menu>
-                                        </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="z7G-3H-tyg"/>
-                                        <menuItem title="Blog" id="FKE-az-Kum">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                            <connections>
-                                                <action selector="editBlog:" target="Voe-Tx-rLC" id="5Wk-81-Yuw"/>
-                                            </connections>
                                         </menuItem>
                                     </items>
                                 </menu>
@@ -946,6 +951,12 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Tools" id="JeG-Gt-ix8">
                                     <items>
+                                        <menuItem title="Blog" id="FKE-az-Kum">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="editBlog:" target="Voe-Tx-rLC" id="5Wk-81-Yuw"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem title="Textbooks" id="LlE-b6-XJk">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
