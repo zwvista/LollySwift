@@ -75,6 +75,10 @@ class BlogViewController: NSViewController, NSMenuItemValidation  {
             wvBlog.load(URLRequest(url: URL(string: url)!))
         }
     }
+    @IBAction func openPattern(_ sender: AnyObject) {
+        let url = vmBlog.getPatternUrl(patternNo: wc.patternNo)
+        MacApi.openURL(url)
+    }
     @IBAction func copyPatternMarkDown(_ sender: AnyObject) {
         let text = vmBlog.getPatternMarkDown(patternText: wc.patternText)
         MacApi.copyText(text)

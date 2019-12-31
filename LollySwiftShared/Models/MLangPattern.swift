@@ -19,6 +19,13 @@ class MLangPattern: NSObject, Codable {
     override init() {
     }
     
+    func copy(from x: MLangPattern) {
+        ID = x.ID
+        LANGID = x.LANGID
+        PATTERN = x.PATTERN
+        NOTE = x.NOTE
+    }
+
     static func getDataByLang(_ langid: Int) -> Observable<[MLangPattern]> {
         // SQL: SELECT * FROM LANGPATTERNS WHERE LANGID=?
         let url = "\(CommonApi.url)LANGPATTERNS?filter=LANGID,eq,\(langid)&order=PATTERN"

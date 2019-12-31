@@ -70,6 +70,19 @@ class PatternsLangViewController: NSViewController, LollyProtocol, NSTableViewDa
             self.doRefresh()
         }.disposed(by: disposeBag)
     }
+    
+    @IBAction func editPattern(_ sender: AnyObject) {
+        let detailVC = self.storyboard!.instantiateController(withIdentifier: "PatternsLangDetailViewController") as! PatternsLangDetailViewController
+        detailVC.vm = vm
+        let i = tvPatterns.selectedRow
+        detailVC.item = MLangPattern()
+        detailVC.item.copy(from: arrPatterns[i])
+        detailVC.complete = {
+            self.arrPatterns[i].copy(from: detailVC.item)
+            self.tvPatterns.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tvPatterns.tableColumns.count))
+        }
+        self.presentAsModalWindow(detailVC)
+    }
 
     func updateStatusText() {
         tfStatusText.stringValue = "\(tvPatterns.numberOfRows) Patterns"
