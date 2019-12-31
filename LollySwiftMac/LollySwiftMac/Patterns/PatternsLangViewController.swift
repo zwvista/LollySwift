@@ -13,7 +13,7 @@ import RxSwift
 class PatternsLangViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate {
 
     @IBOutlet weak var wvDict: WKWebView!
-    @IBOutlet weak var tfNewWord: NSTextField!
+    @IBOutlet weak var tfNewPattern: NSTextField!
     @IBOutlet weak var scTextFilter: NSSegmentedControl!
     @IBOutlet weak var tfFilter: NSTextField!
     @IBOutlet weak var tfURL: NSTextField!
@@ -23,6 +23,8 @@ class PatternsLangViewController: NSViewController, LollyProtocol, NSTableViewDa
 
     var vm: PatternsLangViewModel!
     let disposeBag = DisposeBag()
+    @objc var newPattern = ""
+    @objc var textFilter = ""
     var vmSettings: SettingsViewModel! {
         return vm.vmSettings
     }
@@ -36,12 +38,32 @@ class PatternsLangViewController: NSViewController, LollyProtocol, NSTableViewDa
     override func viewDidLoad() {
         super.viewDidLoad()
         settingsChanged()
+        wvDict.allowsMagnification = true
+        wvDict.allowsBackForwardNavigationGestures = true
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
         return tableView === tvPatterns ? arrPatterns.count : arrPhrases.count
     }
     
+    @IBAction func endEditing(_ sender: NSTextField) {
+        let row = tvPatterns.row(for: sender)
+        guard row != -1 else {return}
+        let col = tvPatterns.column(for: sender)
+        let key = tvPatterns.tableColumns[col].identifier.rawValue
+        let item = arrPatterns[row]
+        let oldValue = String(describing: item.value(forKey: key))
+        var newValue = sender.stringValue
+        if key == "PATTERN" {
+            newValue = vmSettings.autoCorrectInput(text: newValue)
+        }
+        guard oldValue != newValue else {return}
+        item.setValue(newValue, forKey: key)
+        PatternsLangViewModel.update(item: item).subscribe {
+            self.tvPatterns.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvPatterns.tableColumns.count))
+        }.disposed(by: disposeBag)
+    }
+
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! NSTableCellView
         let columnName = tableColumn!.identifier.rawValue
@@ -65,6 +87,26 @@ class PatternsLangViewController: NSViewController, LollyProtocol, NSTableViewDa
         updateStatusText()
     }
     
+    func controlTextDidEndEditing(_ obj: Notification) {
+        let textfield = obj.object as! NSControl
+        let dict = (obj as NSNotification).userInfo!
+        let reason = dict["NSTextMovement"] as! NSNumber
+        let code = Int(reason.int32Value)
+        guard code == NSReturnTextMovement else {return}
+        if textfield === tfNewPattern {
+            if !newPattern.isEmpty {
+                
+            }
+        } else if textfield === tfFilter {
+            if !textFilter.isEmpty {
+                scTextFilter.selectedSegment = 1
+                textFilter = vmSettings.autoCorrectInput(text: textFilter)
+                tfFilter.stringValue = textFilter
+            }
+            scTextFilter.performClick(self)
+        }
+    }
+
     @IBAction func refreshTableView(_ sender: AnyObject) {
         vm.reload().subscribe {
             self.doRefresh()
