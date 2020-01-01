@@ -94,9 +94,16 @@ class PatternsLangViewController: NSViewController, LollyProtocol, NSTableViewDa
         let code = Int(reason.int32Value)
         guard code == NSReturnTextMovement else {return}
         if textfield === tfNewPattern {
-            if !newPattern.isEmpty {
-                
-            }
+            guard  !newPattern.isEmpty else {return}
+            let item = vm.newLangPattern()
+            item.PATTERN = vm.vmSettings.autoCorrectInput(text: newPattern)
+            PatternsLangViewModel.create(item: item).subscribe(onNext: {
+                item.ID = $0
+                self.vm.arrPatterns.append(item)
+                self.tvPatterns.reloadData()
+                self.tfNewPattern.stringValue = ""
+                self.newPattern = ""
+            }).disposed(by: disposeBag)
         } else if textfield === tfFilter {
             if !textFilter.isEmpty {
                 scTextFilter.selectedSegment = 1
@@ -113,6 +120,15 @@ class PatternsLangViewController: NSViewController, LollyProtocol, NSTableViewDa
         }.disposed(by: disposeBag)
     }
     
+    // https://stackoverflow.com/questions/24219441/how-to-use-nstoolbar-in-xcode-6-and-storyboard
+    @IBAction func addPattern(_ sender: AnyObject) {
+        let detailVC = self.storyboard!.instantiateController(withIdentifier: "PatternsLangDetailViewController") as! PatternsLangDetailViewController
+        detailVC.vm = vm
+        detailVC.item = vm.newLangPattern()
+        detailVC.complete = { self.tvPatterns.reloadData(); self.addPattern(self) }
+        self.presentAsSheet(detailVC)
+    }
+
     @IBAction func editPattern(_ sender: AnyObject) {
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "PatternsLangDetailViewController") as! PatternsLangDetailViewController
         detailVC.vm = vm
@@ -131,10 +147,10 @@ class PatternsLangViewController: NSViewController, LollyProtocol, NSTableViewDa
     }
     
     @IBAction func selectPhrases(_ sender: AnyObject) {
-//        guard selectedWordID != 0 else {return}
+//        guard selectedPatternID != 0 else {return}
 //        let detailVC = NSStoryboard(name: "Phrases", bundle: nil).instantiateController(withIdentifier: "PhrasesSelectViewController") as! PhrasesSelectViewController
-//        detailVC.textFilter = selectedWord
-//        detailVC.wordid = selectedWordID
+//        detailVC.textFilter = selectedPattern
+//        detailVC.wordid = selectedPatternID
 //        detailVC.complete = {
 //            self.searchPhrases()
 //        }

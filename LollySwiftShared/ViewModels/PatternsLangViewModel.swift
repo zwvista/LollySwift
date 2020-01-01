@@ -49,4 +49,10 @@ class PatternsLangViewModel: NSObject {
     static func delete(_ id: Int) -> Observable<()> {
         return MLangPattern.delete(id)
     }
+    
+    func newLangPattern() -> MLangPattern {
+        let item = MLangPattern()
+        item.LANGID = vmSettings.selectedLang.ID
+        return item
+    }
 }
