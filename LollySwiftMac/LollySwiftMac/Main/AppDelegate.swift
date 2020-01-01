@@ -134,11 +134,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @IBAction func patternsInLanguage(_ sender: AnyObject) {
-        findOrShowWindow(storyBoardName: "Patterns", windowControllerName: "PatternsLangWindowController")
+        findOrShowWindow(storyBoardName: "Patterns", windowControllerName: "PatternsWindowController")
     }
     
     @IBAction func patternsInLanguageNew(_ sender: AnyObject) {
-        showWindow(storyBoardName: "Patterns", windowControllerName: "PatternsLangWindowController", modal: false)
+        showWindow(storyBoardName: "Patterns", windowControllerName: "PatternsWindowController", modal: false)
     }
 
     @IBAction func editBlog(_ sender: AnyObject) {

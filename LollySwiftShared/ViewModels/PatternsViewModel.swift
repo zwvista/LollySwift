@@ -1,5 +1,5 @@
 //
-//  PatternsLangViewModel.swift
+//  PatternsViewModel.swift
 //  LollySwiftMac
 //
 //  Created by 趙偉 on 2019/12/28.
@@ -9,10 +9,10 @@
 import Foundation
 import RxSwift
 
-class PatternsLangViewModel: NSObject {
+class PatternsViewModel: NSObject {
     var vmSettings: SettingsViewModel
-    var arrPatterns = [MLangPattern]()
-    var arrPatternsFiltered: [MLangPattern]?
+    var arrPatterns = [MPattern]()
+    var arrPatternsFiltered: [MPattern]?
     var arrPhrases = [MLangPhrase]()
 
     public init(settings: SettingsViewModel, disposeBag: DisposeBag, needCopy: Bool, complete: @escaping () -> ()) {
@@ -22,7 +22,7 @@ class PatternsLangViewModel: NSObject {
     }
     
     func reload() -> Observable<()> {
-        return MLangPattern.getDataByLang(vmSettings.selectedTextbook!.LANGID).map {
+        return MPattern.getDataByLang(vmSettings.selectedTextbook!.LANGID).map {
             self.arrPatterns = $0
         }
     }
@@ -38,20 +38,20 @@ class PatternsLangViewModel: NSObject {
         }
     }
     
-    static func update(item: MLangPattern) -> Observable<()> {
-        return MLangPattern.update(item: item)
+    static func update(item: MPattern) -> Observable<()> {
+        return MPattern.update(item: item)
     }
 
-    static func create(item: MLangPattern) -> Observable<Int> {
-        return MLangPattern.create(item: item)
+    static func create(item: MPattern) -> Observable<Int> {
+        return MPattern.create(item: item)
     }
     
     static func delete(_ id: Int) -> Observable<()> {
-        return MLangPattern.delete(id)
+        return MPattern.delete(id)
     }
     
-    func newLangPattern() -> MLangPattern {
-        let item = MLangPattern()
+    func newLangPattern() -> MPattern {
+        let item = MPattern()
         item.LANGID = vmSettings.selectedLang.ID
         return item
     }

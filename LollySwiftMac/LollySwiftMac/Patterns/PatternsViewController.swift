@@ -1,5 +1,5 @@
 //
-//  PatternsLangViewController.swift
+//  PatternsViewController.swift
 //  LollySwiftMac
 //
 //  Created by 趙偉 on 2019/12/28.
@@ -10,7 +10,7 @@ import Cocoa
 import WebKit
 import RxSwift
 
-class PatternsLangViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate {
+class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate {
 
     @IBOutlet weak var wvDict: WKWebView!
     @IBOutlet weak var tfNewPattern: NSTextField!
@@ -21,14 +21,14 @@ class PatternsLangViewController: NSViewController, LollyProtocol, NSTableViewDa
     @IBOutlet weak var tfStatusText: NSTextField!
     @IBOutlet weak var tvPhrases: NSTableView!
 
-    var vm: PatternsLangViewModel!
+    var vm: PatternsViewModel!
     let disposeBag = DisposeBag()
     @objc var newPattern = ""
     @objc var textFilter = ""
     var vmSettings: SettingsViewModel! {
         return vm.vmSettings
     }
-    var arrPatterns: [MLangPattern] {
+    var arrPatterns: [MPattern] {
         return vm.arrPatternsFiltered ?? vm.arrPatterns
     }
     var arrPhrases: [MLangPhrase] {
@@ -59,7 +59,7 @@ class PatternsLangViewController: NSViewController, LollyProtocol, NSTableViewDa
         }
         guard oldValue != newValue else {return}
         item.setValue(newValue, forKey: key)
-        PatternsLangViewModel.update(item: item).subscribe {
+        PatternsViewModel.update(item: item).subscribe {
             self.tvPatterns.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvPatterns.tableColumns.count))
         }.disposed(by: disposeBag)
     }
@@ -78,7 +78,7 @@ class PatternsLangViewController: NSViewController, LollyProtocol, NSTableViewDa
     }
 
     func settingsChanged() {
-        vm = PatternsLangViewModel(settings: AppDelegate.theSettingsViewModel, disposeBag: disposeBag, needCopy: true) {
+        vm = PatternsViewModel(settings: AppDelegate.theSettingsViewModel, disposeBag: disposeBag, needCopy: true) {
             self.doRefresh()
         }
     }
@@ -97,7 +97,7 @@ class PatternsLangViewController: NSViewController, LollyProtocol, NSTableViewDa
             guard  !newPattern.isEmpty else {return}
             let item = vm.newLangPattern()
             item.PATTERN = vm.vmSettings.autoCorrectInput(text: newPattern)
-            PatternsLangViewModel.create(item: item).subscribe(onNext: {
+            PatternsViewModel.create(item: item).subscribe(onNext: {
                 item.ID = $0
                 self.vm.arrPatterns.append(item)
                 self.tvPatterns.reloadData()
@@ -122,7 +122,7 @@ class PatternsLangViewController: NSViewController, LollyProtocol, NSTableViewDa
     
     // https://stackoverflow.com/questions/24219441/how-to-use-nstoolbar-in-xcode-6-and-storyboard
     @IBAction func addPattern(_ sender: AnyObject) {
-        let detailVC = self.storyboard!.instantiateController(withIdentifier: "PatternsLangDetailViewController") as! PatternsLangDetailViewController
+        let detailVC = self.storyboard!.instantiateController(withIdentifier: "PatternsDetailViewController") as! PatternsDetailViewController
         detailVC.vm = vm
         detailVC.item = vm.newLangPattern()
         detailVC.complete = { self.tvPatterns.reloadData(); self.addPattern(self) }
@@ -130,10 +130,10 @@ class PatternsLangViewController: NSViewController, LollyProtocol, NSTableViewDa
     }
 
     @IBAction func editPattern(_ sender: AnyObject) {
-        let detailVC = self.storyboard!.instantiateController(withIdentifier: "PatternsLangDetailViewController") as! PatternsLangDetailViewController
+        let detailVC = self.storyboard!.instantiateController(withIdentifier: "PatternsDetailViewController") as! PatternsDetailViewController
         detailVC.vm = vm
         let i = tvPatterns.selectedRow
-        detailVC.item = MLangPattern()
+        detailVC.item = MPattern()
         detailVC.item.copy(from: arrPatterns[i])
         detailVC.complete = {
             self.arrPatterns[i].copy(from: detailVC.item)
@@ -162,7 +162,7 @@ class PatternsLangViewController: NSViewController, LollyProtocol, NSTableViewDa
     }
 }
 
-class PatternsLangWindowController: NSWindowController, LollyProtocol, NSWindowDelegate, NSTextFieldDelegate {
+class PatternsWindowController: NSWindowController, LollyProtocol, NSWindowDelegate, NSTextFieldDelegate {
     
     @IBOutlet weak var toolbar: NSToolbar!
     @IBOutlet weak var scSpeak: NSSegmentedControl!

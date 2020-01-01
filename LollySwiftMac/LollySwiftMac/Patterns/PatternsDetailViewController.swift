@@ -1,5 +1,5 @@
 //
-//  PatternsLangDetailViewController.swift
+//  PatternsDetailViewController.swift
 //  LollySwiftMac
 //
 //  Created by 趙偉 on 2020/01/01.
@@ -10,11 +10,11 @@ import Cocoa
 import RxSwift
 
 @objcMembers
-class PatternsLangDetailViewController: NSViewController {
+class PatternsDetailViewController: NSViewController {
     
-    var vm: PatternsLangViewModel!
+    var vm: PatternsViewModel!
     var complete: (() -> Void)?
-    var item: MLangPattern!
+    var item: MPattern!
     var isAdd: Bool!
 
     @IBOutlet weak var tfID: NSTextField!
@@ -40,12 +40,12 @@ class PatternsLangDetailViewController: NSViewController {
         item.PATTERN = vm.vmSettings.autoCorrectInput(text: item.PATTERN)
         if isAdd {
             vm.arrPatterns.append(item)
-            PatternsLangViewModel.create(item: item).subscribe(onNext: {
+            PatternsViewModel.create(item: item).subscribe(onNext: {
                 self.item.ID = $0
                 self.complete?()
             }).disposed(by: disposeBag)
         } else {
-            PatternsLangViewModel.update(item: item).subscribe {
+            PatternsViewModel.update(item: item).subscribe {
                 self.complete?()
             }.disposed(by: disposeBag)
         }
