@@ -18,6 +18,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     @IBOutlet weak var tfFilter: NSTextField!
     @IBOutlet weak var tfURL: NSTextField!
     @IBOutlet weak var tvPatterns: NSTableView!
+    @IBOutlet weak var tvPatternsPages: NSTableView!
     @IBOutlet weak var tfStatusText: NSTextField!
     @IBOutlet weak var tvPhrases: NSTableView!
 
