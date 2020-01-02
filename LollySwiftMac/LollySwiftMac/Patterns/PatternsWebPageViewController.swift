@@ -20,6 +20,7 @@ class PatternsWebPageViewController: NSViewController {
     @IBOutlet weak var tfID: NSTextField!
     @IBOutlet weak var tfPatternID: NSTextField!
     @IBOutlet weak var tfPattern: NSTextField!
+    @IBOutlet weak var tfSeqNum: NSTextField!
     @IBOutlet weak var tfWebPage: NSTextField!
 
     let disposeBag = DisposeBag()

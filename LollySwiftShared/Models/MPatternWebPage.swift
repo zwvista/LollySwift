@@ -14,6 +14,7 @@ class MPatternWebPage: NSObject, Codable {
     var ID = 0
     var PATTERNID = 0
     var PATTERN = ""
+    var SEQNUM = 0
     var WEBPAGE = ""
     
     override init() {
@@ -23,6 +24,7 @@ class MPatternWebPage: NSObject, Codable {
         ID = x.ID
         PATTERNID = x.PATTERNID
         PATTERN = x.PATTERN
+        SEQNUM = x.SEQNUM
         WEBPAGE = x.WEBPAGE
     }
 
@@ -38,14 +40,21 @@ class MPatternWebPage: NSObject, Codable {
         return RestApi.getRecords(url: url)
     }
     
+    static func update(_ id: Int, seqnum: Int) -> Observable<()> {
+        // SQL: UPDATE PATTERNSWEBPAGES SET SEQNUM=? WHERE ID=?
+        let url = "\(CommonApi.url)PATTERNSWEBPAGES/\(id)"
+        let body = "SEQNUM=\(seqnum)"
+        return RestApi.update(url: url, body: body).map { print($0) }
+    }
+
     static func update(item: MPatternWebPage) -> Observable<()> {
-        // SQL: UPDATE PATTERNSWEBPAGES SET PATTERNID=?, WEBPAGE=? WHERE ID=?
+        // SQL: UPDATE PATTERNSWEBPAGES SET WEBPAGE=? WHERE ID=?
         let url = "\(CommonApi.url)PATTERNSWEBPAGES/\(item.ID)"
         return RestApi.update(url: url, body: try! item.toJSONString(prettyPrint: false)!).map { print($0) }
     }
 
     static func create(item: MPatternWebPage) -> Observable<Int> {
-        // SQL: INSERT INTO PATTERNSWEBPAGES (LANGID, PATTERNID, WEBPAGE) VALUES (?,?,?)
+        // SQL: INSERT INTO PATTERNSWEBPAGES (PATTERNID, SEQNUM, WEBPAGE) VALUES (?,?,?)
         let url = "\(CommonApi.url)PATTERNSWEBPAGES"
         return RestApi.create(url: url, body: try! item.toJSONString(prettyPrint: false)!).map { $0.toInt()! }.do(onNext: { print($0) })
     }
