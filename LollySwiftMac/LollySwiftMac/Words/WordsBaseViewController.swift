@@ -148,7 +148,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
         let col = tvWords.column(for: sender)
         let key = tvWords.tableColumns[col].identifier.rawValue
         let item = itemForRow(row: row)!
-        let oldValue = CommonApi.toString(object: item.value(forKey: key))
+        let oldValue = String(describing: item.value(forKey: key) ?? "")
         var newValue = sender.stringValue
         if key == "WORD" {
             newValue = vmSettings.autoCorrectInput(text: newValue)

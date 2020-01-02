@@ -87,7 +87,7 @@ class PhrasesBaseViewController: NSViewController, LollyProtocol, NSTableViewDat
         let col = tableView.column(for: sender)
         let key = tableView.tableColumns[col].identifier.rawValue
         let item = itemForRow(row: row)!
-        let oldValue = CommonApi.toString(object: item.value(forKey: key))
+        let oldValue = String(describing: item.value(forKey: key) ?? "")
         var newValue = sender.stringValue
         if key == "PHRASE" {
             newValue = vmSettings.autoCorrectInput(text: newValue)

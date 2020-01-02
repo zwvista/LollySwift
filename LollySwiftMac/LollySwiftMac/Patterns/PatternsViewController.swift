@@ -12,7 +12,7 @@ import RxSwift
 
 class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate {
 
-    @IBOutlet weak var wvDict: WKWebView!
+    @IBOutlet weak var wvWebPage: WKWebView!
     @IBOutlet weak var tfNewPattern: NSTextField!
     @IBOutlet weak var scTextFilter: NSSegmentedControl!
     @IBOutlet weak var tfFilter: NSTextField!
@@ -46,8 +46,8 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     override func viewDidLoad() {
         super.viewDidLoad()
         settingsChanged()
-        wvDict.allowsMagnification = true
-        wvDict.allowsBackForwardNavigationGestures = true
+        wvWebPage.allowsMagnification = true
+        wvWebPage.allowsBackForwardNavigationGestures = true
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
@@ -61,7 +61,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
         let col = tv.column(for: sender)
         let key = tv.tableColumns[col].identifier.rawValue
         let item = (tv === tvPatterns ? arrPatterns[row] : tv === tvWebPages ? arrWebPages[row] : arrPhrases[row]) as NSObject
-        let oldValue = CommonApi.toString(object: item.value(forKey: key))
+        let oldValue = String(describing: item.value(forKey: key) ?? "")
         var newValue = sender.stringValue
         if key == "PATTERN" {
             newValue = vmSettings.autoCorrectInput(text: newValue)
@@ -103,25 +103,29 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
             if row == -1 {
                 selectedPattern = ""
                 selectedPatternID = 0
-                searchWebPages(pattern: newPattern)
+                vm.arrWebPages = []
+                tvWebPages.reloadData()
+                vm.arrPhrases = []
+                tvPhrases.reloadData()
             } else {
                 let item = arrPatterns[row]
                 selectedPattern = item.PATTERN
                 selectedPatternID = item.ID
-                searchWebPages(pattern: selectedPattern)
-            }
-
-//            responder = tvPatterns
-//            searchPhrases()
-            if isSpeaking {
-                speak(self)
+                vm.getWebPages(patternid: selectedPatternID).subscribe {
+                    self.tvWebPages.reloadData()
+                }.disposed(by: disposeBag)
+                //            responder = tvPatterns
+                //            searchPhrases()
+                if isSpeaking {
+                    speak(self)
+                }
             }
         } else if tv === tvWebPages {
             let row = tvPatterns.selectedRow
             if row == -1 {
             } else {
                 let item = arrWebPages[row]
-                wvDict.load(URLRequest(url: URL(string: item.WEBPAGE)!))
+                wvWebPage.load(URLRequest(url: URL(string: item.WEBPAGE)!))
             }
         } else {
             let row = tvPhrases.selectedRow
@@ -148,12 +152,6 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
         if isSpeaking {
             speak(self)
         }
-    }
-
-    func searchWebPages(pattern: String) {
-        vm.getWebPages(patternid: selectedPatternID).subscribe {
-            self.tvWebPages.reloadData()
-        }.disposed(by: disposeBag)
     }
 
     func settingsChanged() {

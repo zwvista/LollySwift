@@ -66,7 +66,7 @@ class TextbooksViewController: NSViewController, LollyProtocol, NSTableViewDataS
         let col = tableView.column(for: sender)
         let key = tableView.tableColumns[col].identifier.rawValue
         let item = vm.arrTextbooks[row]
-        let oldValue = CommonApi.toString(object: item.value(forKey: key))
+        let oldValue = String(describing: item.value(forKey: key) ?? "")
         let newValue = sender.stringValue
         guard oldValue != newValue else {return}
         item.setValue(newValue, forKey: key)

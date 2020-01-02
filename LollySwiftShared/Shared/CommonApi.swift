@@ -100,12 +100,4 @@ class CommonApi {
     static func getAccuracy(CORRECT: Int, TOTAL: Int) -> String {
         return TOTAL == 0 ? "N/A" : "\(floor(CORRECT.toDouble / TOTAL.toDouble * 1000) / 10)%"
     }
-    
-    static func toString(object: Any?) -> String {
-        if let v = object {
-            return String(describing: v)
-        } else {
-            return ""
-        }
-    }
 }
