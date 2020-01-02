@@ -75,9 +75,11 @@ class PatternsViewModel: NSObject {
         return MPatternWebPage.delete(id)
     }
     
-    func newLangPatternWebPage() -> MPatternWebPage {
+    func newLangPatternWebPage(patternid: Int, pattern: String) -> MPatternWebPage {
         let item = MPatternWebPage()
-        item.PATTERNID = vmSettings.selectedLang.ID
+        item.PATTERNID = patternid
+        item.PATTERN = pattern
+        item.SEQNUM = (arrWebPages.max { $0.SEQNUM < $1.SEQNUM }?.SEQNUM ?? 0) + 1
         return item
     }
 }

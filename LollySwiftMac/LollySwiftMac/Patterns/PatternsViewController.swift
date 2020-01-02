@@ -10,7 +10,7 @@ import Cocoa
 import WebKit
 import RxSwift
 
-class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate {
+class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate, NSToolbarItemValidation {
 
     @IBOutlet weak var wvWebPage: WKWebView!
     @IBOutlet weak var tfNewPattern: NSTextField!
@@ -50,6 +50,22 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
         wvWebPage.allowsBackForwardNavigationGestures = true
     }
     
+    // Take a reference to the window controller in order to prevent it from being released
+    // Otherwise, we would not be able to access its controls afterwards
+    var wc: PatternsWindowController!
+    override func viewDidAppear() {
+        super.viewDidAppear()
+        wc = view.window!.windowController as? PatternsWindowController
+        wc.scSpeak.selectedSegment = isSpeaking ? 1 : 0
+        // For some unknown reason, the placeholder string of the filter text field
+        // cannot be set in the storyboard
+        // https://stackoverflow.com/questions/5519512/nstextfield-placeholder-text-doesnt-show-unless-editing
+        tfFilter?.placeholderString = "Filter"
+    }
+    override func viewWillDisappear() {
+        wc = nil
+    }
+
     func numberOfRows(in tableView: NSTableView) -> Int {
         return tableView === tvPatterns ? arrPatterns.count : tableView === tvWebPages ? arrWebPages.count : arrPhrases.count
     }
@@ -135,6 +151,14 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
         }
     }
     
+    // https://stackoverflow.com/questions/8017822/how-to-enable-disable-nstoolbaritem
+    func validateToolbarItem(_ item: NSToolbarItem) -> Bool {
+        let s = item.paletteLabel
+        print(s)
+        let enabled = !(s == "+WebPage" && selectedPatternID == 0)
+        return enabled
+    }
+
     @IBAction func copyPattern(_ sender: AnyObject) {
         MacApi.copyText(selectedPattern)
     }
@@ -220,7 +244,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     @IBAction func addWebPage(_ sender: AnyObject) {
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "PatternsWebPageViewController") as! PatternsWebPageViewController
         detailVC.vm = vm
-        detailVC.item = vm.newLangPatternWebPage()
+        detailVC.item = vm.newLangPatternWebPage(patternid: selectedPatternID, pattern: selectedPattern)
         detailVC.complete = { self.tvPatterns.reloadData(); self.addPattern(self) }
         self.presentAsSheet(detailVC)
     }
