@@ -18,19 +18,23 @@
                         <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
                         <toolbar key="toolbar" implicitIdentifier="99476795-252C-48E8-9851-21369EE8577D" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="UjX-zw-eJb">
                             <allowedToolbarItems>
-                                <toolbarItem implicitItemIdentifier="1C88DE2E-0D00-4A8D-99D5-CAB4FA7CCC04" label="+Pattern" paletteLabel="+Pattern" tag="-1" image="NSAddTemplate" id="DQc-fq-lgV">
+                                <toolbarItem implicitItemIdentifier="1C88DE2E-0D00-4A8D-99D5-CAB4FA7CCC04" label="Add Pattern" paletteLabel="Add Pattern" tag="-1" image="NSAddTemplate" id="DQc-fq-lgV">
                                     <size key="minSize" width="11" height="11"/>
                                     <size key="maxSize" width="11" height="11"/>
                                     <connections>
                                         <action selector="addPattern:" target="a6B-GY-iSb" id="BIr-th-45u"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="8336954A-720E-4CA9-B1CD-EB059EB788AD" label="+WebPage" paletteLabel="+WebPage" tag="-1" image="NSAddTemplate" id="9HE-GS-3JU">
+                                <toolbarItem implicitItemIdentifier="8336954A-720E-4CA9-B1CD-EB059EB788AD" label="Add WebPage" paletteLabel="Add WebPage" tag="-1" image="NSAddTemplate" id="9HE-GS-3JU">
                                     <size key="minSize" width="11" height="11"/>
                                     <size key="maxSize" width="11" height="11"/>
                                     <connections>
                                         <action selector="addWebPage:" target="a6B-GY-iSb" id="a0k-QC-1CA"/>
                                     </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="873D5CF4-3E69-4FE7-A406-4516544A445B" label="Add Phrase" paletteLabel="Add Phrase" tag="-1" image="NSAddTemplate" id="oTs-48-SE5">
+                                    <size key="minSize" width="11" height="11"/>
+                                    <size key="maxSize" width="11" height="11"/>
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="78890E5B-E0CE-4316-AC39-5F2EC4113E54" label="Delete" paletteLabel="Delete" tag="-1" image="NSRemoveTemplate" id="efe-HR-Jf2"/>
                                 <toolbarItem implicitItemIdentifier="0FE47FD6-6CD6-4F13-92D4-43D61D94CAF8" label="Refresh" paletteLabel="Refresh" tag="-1" image="NSRefreshTemplate" id="nFJ-EQ-uxA">
@@ -52,213 +56,14 @@
                                         </segmentedCell>
                                     </segmentedControl>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="C5980D29-00F4-4912-AF7B-6AED2CD7DFAE" label="Dict0" paletteLabel="Dict0" image="NSBookmarksTemplate" selectable="YES" id="fLR-u0-JVD">
-                                    <size key="minSize" width="17" height="18"/>
-                                    <size key="maxSize" width="17" height="18"/>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="FD273D0C-FEE6-4EEE-AE9C-0324150C0C9C" label="Dict1" paletteLabel="Dict1" tag="1" image="NSBookmarksTemplate" selectable="YES" id="mFE-mV-VxG">
-                                    <size key="minSize" width="17" height="18"/>
-                                    <size key="maxSize" width="17" height="18"/>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="C8023F2F-A830-42F6-B068-BE9A915F48AF" label="Dict2" paletteLabel="Dict2" tag="2" image="NSBookmarksTemplate" selectable="YES" id="dfy-t0-xyt">
-                                    <size key="minSize" width="17" height="18"/>
-                                    <size key="maxSize" width="17" height="18"/>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="52B87288-5430-4A4D-BEF7-4C9469433A21" label="Dict3" paletteLabel="Dict3" tag="3" image="NSBookmarksTemplate" selectable="YES" id="puL-1w-Yle">
-                                    <size key="minSize" width="17" height="18"/>
-                                    <size key="maxSize" width="17" height="18"/>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="7BE32CA9-D9EB-4429-AA35-42B6A03DC0D9" label="Dict4" paletteLabel="Dict4" tag="4" image="NSBookmarksTemplate" selectable="YES" id="qnx-th-abk">
-                                    <size key="minSize" width="17" height="18"/>
-                                    <size key="maxSize" width="17" height="18"/>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="29A55813-0D4C-459C-A895-C993F75552D4" label="Dict5" paletteLabel="Dict5" tag="5" image="NSBookmarksTemplate" selectable="YES" id="xAO-OW-eYO">
-                                    <size key="minSize" width="17" height="18"/>
-                                    <size key="maxSize" width="17" height="18"/>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="CBED8467-11B8-40B8-B4F9-B8F7447FB134" label="Dict6" paletteLabel="Dict6" tag="6" image="NSBookmarksTemplate" selectable="YES" id="csu-Nh-4TT">
-                                    <size key="minSize" width="17" height="18"/>
-                                    <size key="maxSize" width="17" height="18"/>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="47F34D53-F3D6-4AC9-8AA5-BD8674F600A3" label="Dict7" paletteLabel="Dict7" tag="7" image="NSBookmarksTemplate" selectable="YES" id="jaJ-aB-yIb">
-                                    <size key="minSize" width="17" height="18"/>
-                                    <size key="maxSize" width="17" height="18"/>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="ECAD7F45-542F-416B-BF2A-4B574B2FBDB9" label="Dict8" paletteLabel="Dict8" tag="8" image="NSBookmarksTemplate" selectable="YES" id="vOF-mM-ZqK">
-                                    <size key="minSize" width="17" height="18"/>
-                                    <size key="maxSize" width="17" height="18"/>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="D3EF8B6A-C9E3-4A7C-A18B-210A66851816" label="Dict9" paletteLabel="Dict9" tag="9" image="NSBookmarksTemplate" selectable="YES" id="lg1-iL-4BX">
-                                    <size key="minSize" width="17" height="18"/>
-                                    <size key="maxSize" width="17" height="18"/>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="02C979ED-A573-43F9-B2D4-4D2B516AD3BA" label="Dict10" paletteLabel="Dict10" tag="10" image="NSBookmarksTemplate" selectable="YES" id="ads-vS-x4f">
-                                    <size key="minSize" width="17" height="18"/>
-                                    <size key="maxSize" width="17" height="18"/>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="808EE4DF-8968-4A86-BC69-85E802B5AE2B" label="Dict11" paletteLabel="Dict11" tag="11" image="NSBookmarksTemplate" selectable="YES" id="dV2-H2-Ea0">
-                                    <size key="minSize" width="17" height="18"/>
-                                    <size key="maxSize" width="17" height="18"/>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="29165EC7-0AB7-47F1-9C12-BF5A9AE49B1A" label="Dict12" paletteLabel="Dict12" tag="12" image="NSBookmarksTemplate" selectable="YES" id="Orb-5Y-4Ex">
-                                    <size key="minSize" width="17" height="18"/>
-                                    <size key="maxSize" width="17" height="18"/>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="F0DF8D9A-B0EB-40C2-8CFC-EC0E6C2F8AE6" label="Dict13" paletteLabel="Dict13" tag="13" image="NSBookmarksTemplate" selectable="YES" id="CMJ-Dm-TTI">
-                                    <size key="minSize" width="17" height="18"/>
-                                    <size key="maxSize" width="17" height="18"/>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="9011C603-C90F-4414-BE19-B5EF2ED01DA6" label="Dict14" paletteLabel="Dict14" tag="14" image="NSBookmarksTemplate" selectable="YES" id="LtP-ub-ihR">
-                                    <size key="minSize" width="17" height="18"/>
-                                    <size key="maxSize" width="17" height="18"/>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="FAD876D7-21C9-4769-868E-D0EA8F52AC89" label="Dict15" paletteLabel="Dict15" tag="15" image="NSBookmarksTemplate" selectable="YES" id="FJ8-rC-6Ak">
-                                    <size key="minSize" width="17" height="18"/>
-                                    <size key="maxSize" width="17" height="18"/>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="FAA5508F-16E2-42CA-9BB2-CF990EBEACE2" label="Dict16" paletteLabel="Dict16" tag="16" image="NSBookmarksTemplate" selectable="YES" id="QnI-5Z-Ofq">
-                                    <size key="minSize" width="17" height="18"/>
-                                    <size key="maxSize" width="17" height="18"/>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="57450FAA-9ED8-4F29-94BF-D1A78F001215" label="Dict17" paletteLabel="Dict17" tag="17" image="NSBookmarksTemplate" selectable="YES" id="oWi-7Z-bMZ">
-                                    <size key="minSize" width="17" height="18"/>
-                                    <size key="maxSize" width="17" height="18"/>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="F9F3E925-9E88-4124-AD30-CB5A52DB1094" label="Dict18" paletteLabel="Dict18" tag="18" image="NSBookmarksTemplate" selectable="YES" id="0K7-8Z-E5s">
-                                    <size key="minSize" width="17" height="18"/>
-                                    <size key="maxSize" width="17" height="18"/>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="FA946314-F1C6-4903-88DA-E09D43557F06" label="Dict19" paletteLabel="Dict19" tag="19" image="NSBookmarksTemplate" selectable="YES" id="exG-po-BHO">
-                                    <size key="minSize" width="17" height="18"/>
-                                    <size key="maxSize" width="17" height="18"/>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="A2C54D43-F455-47BA-AA31-FBACEB3F7BFA" label="Dict20" paletteLabel="Dict20" tag="20" image="NSBookmarksTemplate" selectable="YES" id="wmi-3U-VWh">
-                                    <size key="minSize" width="17" height="18"/>
-                                    <size key="maxSize" width="17" height="18"/>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="C7B23102-B498-41AF-BAD4-D2BE562C2837" label="Dict21" paletteLabel="Dict21" tag="21" image="NSBookmarksTemplate" selectable="YES" id="Z8o-zN-x7t">
-                                    <size key="minSize" width="17" height="18"/>
-                                    <size key="maxSize" width="17" height="18"/>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="BE0A8F6F-A088-475E-9B3C-3C704B2062C5" label="Dict22" paletteLabel="Dict22" tag="22" image="NSBookmarksTemplate" selectable="YES" id="yAx-82-2aV">
-                                    <size key="minSize" width="17" height="18"/>
-                                    <size key="maxSize" width="17" height="18"/>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="FB2B3D93-9A1D-415B-8C5C-53AD5FAB5DF2" label="Dict23" paletteLabel="Dict23" tag="23" image="NSBookmarksTemplate" selectable="YES" id="BiL-k8-rAr">
-                                    <size key="minSize" width="17" height="18"/>
-                                    <size key="maxSize" width="17" height="18"/>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="AE766ADE-75FC-49E0-BEBB-18A9E423B3E8" label="Dict24" paletteLabel="Dict24" tag="24" image="NSBookmarksTemplate" selectable="YES" id="PZv-tx-4hY">
-                                    <size key="minSize" width="17" height="18"/>
-                                    <size key="maxSize" width="17" height="18"/>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="CCF66222-EAD9-41C6-8CB2-3E1F2260B39B" label="Dict25" paletteLabel="Dict25" tag="25" image="NSBookmarksTemplate" selectable="YES" id="A3q-8z-3u8">
-                                    <size key="minSize" width="17" height="18"/>
-                                    <size key="maxSize" width="17" height="18"/>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="00170676-8163-438B-B1E8-A7EDFCB0B8E7" label="Dict26" paletteLabel="Dict26" tag="26" image="NSBookmarksTemplate" selectable="YES" id="RFO-BY-ElX">
-                                    <size key="minSize" width="17" height="18"/>
-                                    <size key="maxSize" width="17" height="18"/>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="3D21321E-FC34-4A7C-BA09-206CA3C2191E" label="Dict27" paletteLabel="Dict27" tag="27" image="NSBookmarksTemplate" selectable="YES" id="ZEf-BT-MgU">
-                                    <size key="minSize" width="17" height="18"/>
-                                    <size key="maxSize" width="17" height="18"/>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="3CC394EA-E059-4442-A7ED-42F8AE1B460E" label="Dict28" paletteLabel="Dict28" tag="28" image="NSBookmarksTemplate" selectable="YES" id="wU5-Wp-zXz">
-                                    <size key="minSize" width="17" height="18"/>
-                                    <size key="maxSize" width="17" height="18"/>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="FB7B16EC-04FF-468E-975D-6BC5E8BB43B6" label="Dict29" paletteLabel="Dict29" tag="29" image="NSBookmarksTemplate" selectable="YES" id="4e8-29-6Aj">
-                                    <size key="minSize" width="17" height="18"/>
-                                    <size key="maxSize" width="17" height="18"/>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="E6EF3A1A-9DCB-43E8-BBA4-D855E9C873DB" label="Dict30" paletteLabel="Dict30" tag="30" image="NSBookmarksTemplate" selectable="YES" id="UYd-4b-B1h">
-                                    <size key="minSize" width="17" height="18"/>
-                                    <size key="maxSize" width="17" height="18"/>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="47954A4D-B059-47CE-9A97-B406D12A8851" label="Dict31" paletteLabel="Dict31" tag="31" image="NSBookmarksTemplate" selectable="YES" id="PXc-cr-aaA">
-                                    <size key="minSize" width="17" height="18"/>
-                                    <size key="maxSize" width="17" height="18"/>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="0E83DD82-3E63-4DC1-AF23-CA5D4D664728" label="Dict32" paletteLabel="Dict32" tag="32" image="NSBookmarksTemplate" selectable="YES" id="BVZ-6E-X4a">
-                                    <size key="minSize" width="17" height="18"/>
-                                    <size key="maxSize" width="17" height="18"/>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="5E9E8FB8-15C0-4E95-B103-5991CE8549DC" label="Dict33" paletteLabel="Dict33" tag="33" image="NSBookmarksTemplate" selectable="YES" id="lOW-56-cSl">
-                                    <size key="minSize" width="17" height="18"/>
-                                    <size key="maxSize" width="17" height="18"/>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="5FBB793A-D0D0-4788-AD1B-0C0BF4083FCF" label="Dict34" paletteLabel="Dict34" tag="34" image="NSBookmarksTemplate" selectable="YES" id="Gdh-d0-EW5">
-                                    <size key="minSize" width="17" height="18"/>
-                                    <size key="maxSize" width="17" height="18"/>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="325C47C5-4D85-443F-91F2-89B5AE7618CE" label="Dict35" paletteLabel="Dict35" tag="35" image="NSBookmarksTemplate" selectable="YES" id="E1p-5u-iqa">
-                                    <size key="minSize" width="17" height="18"/>
-                                    <size key="maxSize" width="17" height="18"/>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="CC527DE2-17C7-4632-AB5F-0C8A2FE33FCE" label="Dict36" paletteLabel="Dict36" tag="36" image="NSBookmarksTemplate" selectable="YES" id="QCc-cd-yO6">
-                                    <size key="minSize" width="17" height="18"/>
-                                    <size key="maxSize" width="17" height="18"/>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="E21EB27D-534C-47A0-A12E-43E167FB2B91" label="Dict37" paletteLabel="Dict37" tag="37" image="NSBookmarksTemplate" selectable="YES" id="gOm-wf-895">
-                                    <size key="minSize" width="17" height="18"/>
-                                    <size key="maxSize" width="17" height="18"/>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="E79BD835-087A-453F-885E-8AB8B9BB538D" label="Dict38" paletteLabel="Dict38" tag="38" image="NSBookmarksTemplate" selectable="YES" id="XbC-IE-Mrz">
-                                    <size key="minSize" width="17" height="18"/>
-                                    <size key="maxSize" width="17" height="18"/>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="4617ADFA-D5F0-4D14-931E-5D8B321D98D4" label="Dict39" paletteLabel="Dict39" tag="39" image="NSBookmarksTemplate" selectable="YES" id="vEh-Vk-aAx">
-                                    <size key="minSize" width="17" height="18"/>
-                                    <size key="maxSize" width="17" height="18"/>
-                                </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
                                 <toolbarItem reference="DQc-fq-lgV"/>
                                 <toolbarItem reference="9HE-GS-3JU"/>
+                                <toolbarItem reference="oTs-48-SE5"/>
                                 <toolbarItem reference="efe-HR-Jf2"/>
                                 <toolbarItem reference="nFJ-EQ-uxA"/>
                                 <toolbarItem reference="Jsv-Az-yP3"/>
-                                <toolbarItem reference="fLR-u0-JVD"/>
-                                <toolbarItem reference="mFE-mV-VxG"/>
-                                <toolbarItem reference="dfy-t0-xyt"/>
-                                <toolbarItem reference="puL-1w-Yle"/>
-                                <toolbarItem reference="qnx-th-abk"/>
-                                <toolbarItem reference="xAO-OW-eYO"/>
-                                <toolbarItem reference="csu-Nh-4TT"/>
-                                <toolbarItem reference="jaJ-aB-yIb"/>
-                                <toolbarItem reference="vOF-mM-ZqK"/>
-                                <toolbarItem reference="lg1-iL-4BX"/>
-                                <toolbarItem reference="ads-vS-x4f"/>
-                                <toolbarItem reference="dV2-H2-Ea0"/>
-                                <toolbarItem reference="Orb-5Y-4Ex"/>
-                                <toolbarItem reference="CMJ-Dm-TTI"/>
-                                <toolbarItem reference="LtP-ub-ihR"/>
-                                <toolbarItem reference="FJ8-rC-6Ak"/>
-                                <toolbarItem reference="QnI-5Z-Ofq"/>
-                                <toolbarItem reference="oWi-7Z-bMZ"/>
-                                <toolbarItem reference="0K7-8Z-E5s"/>
-                                <toolbarItem reference="exG-po-BHO"/>
-                                <toolbarItem reference="wmi-3U-VWh"/>
-                                <toolbarItem reference="Z8o-zN-x7t"/>
-                                <toolbarItem reference="yAx-82-2aV"/>
-                                <toolbarItem reference="BiL-k8-rAr"/>
-                                <toolbarItem reference="PZv-tx-4hY"/>
-                                <toolbarItem reference="A3q-8z-3u8"/>
-                                <toolbarItem reference="RFO-BY-ElX"/>
-                                <toolbarItem reference="ZEf-BT-MgU"/>
-                                <toolbarItem reference="wU5-Wp-zXz"/>
-                                <toolbarItem reference="4e8-29-6Aj"/>
-                                <toolbarItem reference="UYd-4b-B1h"/>
-                                <toolbarItem reference="PXc-cr-aaA"/>
-                                <toolbarItem reference="BVZ-6E-X4a"/>
-                                <toolbarItem reference="lOW-56-cSl"/>
-                                <toolbarItem reference="Gdh-d0-EW5"/>
-                                <toolbarItem reference="E1p-5u-iqa"/>
-                                <toolbarItem reference="QCc-cd-yO6"/>
-                                <toolbarItem reference="gOm-wf-895"/>
-                                <toolbarItem reference="XbC-IE-Mrz"/>
-                                <toolbarItem reference="vEh-Vk-aAx"/>
                             </defaultToolbarItems>
                         </toolbar>
                         <connections>
@@ -267,46 +72,6 @@
                     </window>
                     <connections>
                         <outlet property="scSpeak" destination="nx8-Ko-DJR" id="kKy-xi-CCr"/>
-                        <outlet property="tbiDict0" destination="fLR-u0-JVD" id="bW6-nX-UrM"/>
-                        <outlet property="tbiDict1" destination="mFE-mV-VxG" id="rK5-sx-2xn"/>
-                        <outlet property="tbiDict10" destination="ads-vS-x4f" id="qm8-FK-GAW"/>
-                        <outlet property="tbiDict11" destination="dV2-H2-Ea0" id="mVT-kM-tAQ"/>
-                        <outlet property="tbiDict12" destination="Orb-5Y-4Ex" id="04e-mk-l2v"/>
-                        <outlet property="tbiDict13" destination="CMJ-Dm-TTI" id="QgB-ID-X2Q"/>
-                        <outlet property="tbiDict14" destination="LtP-ub-ihR" id="bQS-BH-u9U"/>
-                        <outlet property="tbiDict15" destination="FJ8-rC-6Ak" id="rDM-Oq-aRE"/>
-                        <outlet property="tbiDict16" destination="QnI-5Z-Ofq" id="Hfj-nV-C6C"/>
-                        <outlet property="tbiDict17" destination="oWi-7Z-bMZ" id="LYu-wF-NBZ"/>
-                        <outlet property="tbiDict18" destination="0K7-8Z-E5s" id="C4R-X9-n6q"/>
-                        <outlet property="tbiDict19" destination="exG-po-BHO" id="QbF-lx-SuI"/>
-                        <outlet property="tbiDict2" destination="dfy-t0-xyt" id="Ihl-ns-jCk"/>
-                        <outlet property="tbiDict20" destination="wmi-3U-VWh" id="7PR-ms-qpS"/>
-                        <outlet property="tbiDict21" destination="Z8o-zN-x7t" id="anQ-X2-Mn7"/>
-                        <outlet property="tbiDict22" destination="yAx-82-2aV" id="3WP-bY-FYG"/>
-                        <outlet property="tbiDict23" destination="BiL-k8-rAr" id="8LF-Bd-JTF"/>
-                        <outlet property="tbiDict24" destination="PZv-tx-4hY" id="gbp-eV-dBF"/>
-                        <outlet property="tbiDict25" destination="A3q-8z-3u8" id="X9v-dk-dT6"/>
-                        <outlet property="tbiDict26" destination="RFO-BY-ElX" id="rec-CK-BQW"/>
-                        <outlet property="tbiDict27" destination="ZEf-BT-MgU" id="enQ-xo-DDE"/>
-                        <outlet property="tbiDict28" destination="wU5-Wp-zXz" id="LGW-mP-ITc"/>
-                        <outlet property="tbiDict29" destination="4e8-29-6Aj" id="Y8E-XM-byV"/>
-                        <outlet property="tbiDict3" destination="puL-1w-Yle" id="sdx-Zm-UsR"/>
-                        <outlet property="tbiDict30" destination="UYd-4b-B1h" id="a5d-f8-b5E"/>
-                        <outlet property="tbiDict31" destination="PXc-cr-aaA" id="qAl-Aj-wET"/>
-                        <outlet property="tbiDict32" destination="BVZ-6E-X4a" id="S3Y-eK-dOv"/>
-                        <outlet property="tbiDict33" destination="lOW-56-cSl" id="W5N-3Y-4zR"/>
-                        <outlet property="tbiDict34" destination="Gdh-d0-EW5" id="0tD-Zr-WFu"/>
-                        <outlet property="tbiDict35" destination="E1p-5u-iqa" id="3q7-fe-Foe"/>
-                        <outlet property="tbiDict36" destination="QCc-cd-yO6" id="FVu-eV-Vnv"/>
-                        <outlet property="tbiDict37" destination="gOm-wf-895" id="FjU-Ss-dCh"/>
-                        <outlet property="tbiDict38" destination="XbC-IE-Mrz" id="lHz-a9-ASs"/>
-                        <outlet property="tbiDict39" destination="vEh-Vk-aAx" id="bvB-0g-41Q"/>
-                        <outlet property="tbiDict4" destination="qnx-th-abk" id="3uJ-yK-e4n"/>
-                        <outlet property="tbiDict5" destination="xAO-OW-eYO" id="GXL-KU-L09"/>
-                        <outlet property="tbiDict6" destination="csu-Nh-4TT" id="6Iq-9K-uxe"/>
-                        <outlet property="tbiDict7" destination="jaJ-aB-yIb" id="dWB-qb-svb"/>
-                        <outlet property="tbiDict8" destination="vOF-mM-ZqK" id="n9I-Ej-M1J"/>
-                        <outlet property="tbiDict9" destination="lg1-iL-4BX" id="abW-JK-aAS"/>
                         <outlet property="toolbar" destination="UjX-zw-eJb" id="wf9-le-4JB"/>
                         <segue destination="JiS-vG-Xmg" kind="relationship" relationship="window.shadowedContentViewController" id="NNB-ME-jEC"/>
                     </connections>
@@ -472,7 +237,7 @@
                                                                             <tableColumns>
                                                                                 <tableColumn identifier="ID" width="60" minWidth="60" maxWidth="1000" id="Esl-hY-J9U" userLabel="ID">
                                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="ID">
-                                                                                        <font key="font" metaFont="menu" size="11"/>
+                                                                                        <font key="font" metaFont="controlContent" size="11"/>
                                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                                     </tableHeaderCell>
@@ -509,7 +274,7 @@
                                                                                 </tableColumn>
                                                                                 <tableColumn identifier="PATTERN" width="160" minWidth="40" maxWidth="1000" id="Ct8-j9-AmY">
                                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="PATTERN">
-                                                                                        <font key="font" metaFont="menu" size="11"/>
+                                                                                        <font key="font" metaFont="controlContent" size="11"/>
                                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                                     </tableHeaderCell>
@@ -549,7 +314,7 @@
                                                                                 </tableColumn>
                                                                                 <tableColumn identifier="NOTE" width="199" minWidth="40" maxWidth="1000" id="dwr-7O-SQe">
                                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="NOTE">
-                                                                                        <font key="font" metaFont="menu" size="11"/>
+                                                                                        <font key="font" metaFont="controlContent" size="11"/>
                                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                                     </tableHeaderCell>
@@ -639,7 +404,7 @@
                                                                             <tableColumns>
                                                                                 <tableColumn identifier="ID" width="60" minWidth="60" maxWidth="1000" id="Rz1-mW-KjO" userLabel="ID">
                                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="ID">
-                                                                                        <font key="font" metaFont="menu" size="11"/>
+                                                                                        <font key="font" metaFont="controlContent" size="11"/>
                                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                                     </tableHeaderCell>
@@ -676,7 +441,7 @@
                                                                                 </tableColumn>
                                                                                 <tableColumn identifier="SEQNUM" width="60" minWidth="60" maxWidth="1000" id="yWW-qS-uTQ">
                                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="SEQNUM">
-                                                                                        <font key="font" metaFont="menu" size="11"/>
+                                                                                        <font key="font" metaFont="controlContent" size="11"/>
                                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                                     </tableHeaderCell>
@@ -713,7 +478,7 @@
                                                                                 </tableColumn>
                                                                                 <tableColumn identifier="WEBPAGE" width="200" minWidth="40" maxWidth="1000" id="aUY-vi-57K">
                                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="WEBPAGE">
-                                                                                        <font key="font" metaFont="menu" size="11"/>
+                                                                                        <font key="font" metaFont="controlContent" size="11"/>
                                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                                     </tableHeaderCell>
@@ -823,7 +588,7 @@
                                                                             <tableColumns>
                                                                                 <tableColumn identifier="ID" width="60" minWidth="60" maxWidth="1000" id="4Xd-f3-27d" userLabel="ID">
                                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="ID">
-                                                                                        <font key="font" metaFont="menu" size="11"/>
+                                                                                        <font key="font" metaFont="controlContent" size="11"/>
                                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                                     </tableHeaderCell>
@@ -860,7 +625,7 @@
                                                                                 </tableColumn>
                                                                                 <tableColumn identifier="PHRASE" width="300" minWidth="100" maxWidth="1000" id="xgp-xE-dke">
                                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="PHRASE">
-                                                                                        <font key="font" metaFont="menu" size="11"/>
+                                                                                        <font key="font" metaFont="controlContent" size="11"/>
                                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                                     </tableHeaderCell>
@@ -897,7 +662,7 @@
                                                                                 </tableColumn>
                                                                                 <tableColumn identifier="TRANSLATION" width="387" minWidth="100" maxWidth="1000" id="9dW-Lg-vFp">
                                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="TRANSLATION">
-                                                                                        <font key="font" metaFont="menu" size="11"/>
+                                                                                        <font key="font" metaFont="controlContent" size="11"/>
                                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                                     </tableHeaderCell>
@@ -1379,7 +1144,6 @@ Gw
     </scenes>
     <resources>
         <image name="NSAddTemplate" width="11" height="11"/>
-        <image name="NSBookmarksTemplate" width="17" height="18"/>
         <image name="NSRefreshTemplate" width="11" height="15"/>
         <image name="NSRemoveTemplate" width="11" height="11"/>
     </resources>
