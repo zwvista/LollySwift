@@ -14,12 +14,12 @@ class PatternsPageViewController: NSViewController {
     
     var vm: PatternsViewModel!
     var complete: (() -> Void)?
-    var item: MPattern!
+    var item: MPatternWebPage!
     var isAdd: Bool!
 
     @IBOutlet weak var tfID: NSTextField!
     @IBOutlet weak var tfPattern: NSTextField!
-    @IBOutlet weak var tfNote: NSTextField!
+    @IBOutlet weak var tfPage: NSTextField!
 
     let disposeBag = DisposeBag()
 
@@ -30,22 +30,21 @@ class PatternsPageViewController: NSViewController {
     
     override func viewDidAppear() {
         // https://stackoverflow.com/questions/24235815/cocoa-how-to-set-window-title-from-within-view-controller-in-swift
-        (item.PATTERN.isEmpty ? tfPattern : tfNote).becomeFirstResponder()
-        view.window?.title = isAdd ? "New Pattern" : item.PATTERN
+        tfPage.becomeFirstResponder()
+        view.window?.title = isAdd ? "New Page" : item.WEBPAGE
     }
 
     @IBAction func okClicked(_ sender: AnyObject) {
         // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
         self.commitEditing()
-        item.PATTERN = vm.vmSettings.autoCorrectInput(text: item.PATTERN)
         if isAdd {
-            vm.arrPatterns.append(item)
-            PatternsViewModel.create(item: item).subscribe(onNext: {
+            vm.arrWebPages.append(item)
+            PatternsViewModel.createWebPage(item: item).subscribe(onNext: {
                 self.item.ID = $0
                 self.complete?()
             }).disposed(by: disposeBag)
         } else {
-            PatternsViewModel.update(item: item).subscribe {
+            PatternsViewModel.updateWebPage(item: item).subscribe {
                 self.complete?()
             }.disposed(by: disposeBag)
         }

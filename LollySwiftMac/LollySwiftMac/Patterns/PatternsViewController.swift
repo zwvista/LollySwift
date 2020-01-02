@@ -18,7 +18,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     @IBOutlet weak var tfFilter: NSTextField!
     @IBOutlet weak var tfURL: NSTextField!
     @IBOutlet weak var tvPatterns: NSTableView!
-    @IBOutlet weak var tvPatternsPages: NSTableView!
+    @IBOutlet weak var tvWebPages: NSTableView!
     @IBOutlet weak var tfStatusText: NSTextField!
     @IBOutlet weak var tvPhrases: NSTableView!
 
@@ -26,11 +26,16 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     let disposeBag = DisposeBag()
     @objc var newPattern = ""
     @objc var textFilter = ""
+    var selectedPattern = ""
+    var selectedPatternID = 0
     var vmSettings: SettingsViewModel! {
         return vm.vmSettings
     }
     var arrPatterns: [MPattern] {
         return vm.arrPatternsFiltered ?? vm.arrPatterns
+    }
+    var arrWebPages: [MPatternWebPage] {
+        return vm.arrWebPages
     }
     var arrPhrases: [MLangPhrase] {
         return vm.arrPhrases
@@ -44,7 +49,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return tableView === tvPatterns ? arrPatterns.count : arrPhrases.count
+        return tableView === tvPatterns ? arrPatterns.count : tableView === tvWebPages ? arrWebPages.count : arrPhrases.count
     }
     
     @IBAction func endEditing(_ sender: NSTextField) {
@@ -71,11 +76,56 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
         if tableView === tvPatterns {
             let item = arrPatterns[row]
             cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
+        } else if tableView === tvWebPages {
+            let item = arrWebPages[row]
+            cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
         } else {
             let item = arrPhrases[row]
             cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
         }
         return cell
+    }
+    
+    func tableViewSelectionDidChange(_ notification: Notification) {
+        let tv = notification.object as! NSTableView
+        if tv === tvPatterns {
+            updateStatusText()
+            let row = tvPatterns.selectedRow
+            if row == -1 {
+                selectedPattern = ""
+                selectedPatternID = 0
+                searchWebPages(pattern: newPattern)
+            } else {
+                let item = arrPatterns[row]
+                selectedPattern = item.PATTERN
+                selectedPatternID = item.ID
+                searchWebPages(pattern: selectedPattern)
+            }
+
+//            responder = tvPatterns
+//            searchPhrases()
+//            if isSpeaking {
+//                speak(self)
+//            }
+        } else if tv === tvWebPages {
+            let row = tvPatterns.selectedRow
+            if row == -1 {
+            } else {
+                let item = arrWebPages[row]
+                wvDict.load(URLRequest(url: URL(string: item.WEBPAGE)!))
+            }
+        } else {
+//            let row = tvPhrases.selectedRow
+//            if isSpeaking && row != -1 {
+//                synth.startSpeaking(arrPhrases[row].PHRASE)
+//            }
+        }
+    }
+    
+    func searchWebPages(pattern: String) {
+        vm.getWebPages(patternid: selectedPatternID).subscribe {
+            self.tvWebPages.reloadData()
+        }.disposed(by: disposeBag)
     }
 
     func settingsChanged() {
@@ -138,6 +188,27 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
         detailVC.item.copy(from: arrPatterns[i])
         detailVC.complete = {
             self.arrPatterns[i].copy(from: detailVC.item)
+            self.tvPatterns.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tvPatterns.tableColumns.count))
+        }
+        self.presentAsModalWindow(detailVC)
+    }
+
+    @IBAction func addWebPage(_ sender: AnyObject) {
+        let detailVC = self.storyboard!.instantiateController(withIdentifier: "PatternsPageViewController") as! PatternsPageViewController
+        detailVC.vm = vm
+        detailVC.item = vm.newLangPatternWebPage()
+        detailVC.complete = { self.tvPatterns.reloadData(); self.addPattern(self) }
+        self.presentAsSheet(detailVC)
+    }
+
+    @IBAction func editWebPage(_ sender: AnyObject) {
+        let detailVC = self.storyboard!.instantiateController(withIdentifier: "PatternsPageViewController") as! PatternsPageViewController
+        detailVC.vm = vm
+        let i = tvPatterns.selectedRow
+        detailVC.item = MPatternWebPage()
+        detailVC.item.copy(from: arrWebPages[i])
+        detailVC.complete = {
+            self.arrWebPages[i].copy(from: detailVC.item)
             self.tvPatterns.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tvPatterns.tableColumns.count))
         }
         self.presentAsModalWindow(detailVC)

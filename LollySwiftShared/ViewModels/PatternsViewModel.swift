@@ -13,6 +13,7 @@ class PatternsViewModel: NSObject {
     var vmSettings: SettingsViewModel
     var arrPatterns = [MPattern]()
     var arrPatternsFiltered: [MPattern]?
+    var arrWebPages = [MPatternWebPage]()
     var arrPhrases = [MLangPhrase]()
 
     public init(settings: SettingsViewModel, disposeBag: DisposeBag, needCopy: Bool, complete: @escaping () -> ()) {
@@ -53,6 +54,30 @@ class PatternsViewModel: NSObject {
     func newLangPattern() -> MPattern {
         let item = MPattern()
         item.LANGID = vmSettings.selectedLang.ID
+        return item
+    }
+    
+    func getWebPages(patternid: Int) -> Observable<()> {
+        return MPatternWebPage.getDataByPattern(patternid).map {
+            self.arrWebPages = $0
+        }
+    }
+
+    static func updateWebPage(item: MPatternWebPage) -> Observable<()> {
+        return MPatternWebPage.update(item: item)
+    }
+
+    static func createWebPage(item: MPatternWebPage) -> Observable<Int> {
+        return MPatternWebPage.create(item: item)
+    }
+    
+    static func deleteWebPage(_ id: Int) -> Observable<()> {
+        return MPatternWebPage.delete(id)
+    }
+    
+    func newLangPatternWebPage() -> MPatternWebPage {
+        let item = MPatternWebPage()
+        item.PATTERNID = vmSettings.selectedLang.ID
         return item
     }
 }
