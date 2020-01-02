@@ -13,6 +13,7 @@ import RxSwift
 class MPatternWebPage: NSObject, Codable {
     var ID = 0
     var PATTERNID = 0
+    var PATTERN = ""
     var WEBPAGE = ""
     
     override init() {
@@ -21,18 +22,19 @@ class MPatternWebPage: NSObject, Codable {
     func copy(from x: MPatternWebPage) {
         ID = x.ID
         PATTERNID = x.PATTERNID
+        PATTERN = x.PATTERN
         WEBPAGE = x.WEBPAGE
     }
 
     static func getDataByPattern(_ patternid: Int) -> Observable<[MPatternWebPage]> {
         // SQL: SELECT * FROM PATTERNSWEBPAGES WHERE PATTERNID=?
-        let url = "\(CommonApi.url)PATTERNSWEBPAGES?filter=PATTERNID,eq,\(patternid)"
+        let url = "\(CommonApi.url)VPATTERNSWEBPAGES?filter=PATTERNID,eq,\(patternid)"
         return RestApi.getRecords(url: url)
     }
     
     static func getDataById(_ id: Int) -> Observable<[MPatternWebPage]> {
         // SQL: SELECT * FROM PATTERNSWEBPAGES WHERE ID=?
-        let url = "\(CommonApi.url)PATTERNSWEBPAGES?filter=ID,eq,\(id)"
+        let url = "\(CommonApi.url)VPATTERNSWEBPAGES?filter=ID,eq,\(id)"
         return RestApi.getRecords(url: url)
     }
     

@@ -166,7 +166,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
         let code = Int(reason.int32Value)
         guard code == NSReturnTextMovement else {return}
         if textfield === tfNewPattern {
-            guard  !newPattern.isEmpty else {return}
+            guard !newPattern.isEmpty else {return}
             let item = vm.newLangPattern()
             item.PATTERN = vm.vmSettings.autoCorrectInput(text: newPattern)
             PatternsViewModel.create(item: item).subscribe(onNext: {
