@@ -1,5 +1,5 @@
 //
-//  PatternsPageViewController.swift
+//  PatternsWebPageViewController.swift
 //  LollySwiftMac
 //
 //  Created by 趙偉 on 2020/01/01.
@@ -10,7 +10,7 @@ import Cocoa
 import RxSwift
 
 @objcMembers
-class PatternsPageViewController: NSViewController {
+class PatternsWebPageViewController: NSViewController {
     
     var vm: PatternsViewModel!
     var complete: (() -> Void)?

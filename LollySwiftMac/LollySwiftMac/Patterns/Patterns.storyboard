@@ -989,11 +989,17 @@
                             <modifierMask key="keyEquivalentModifierMask"/>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="VMN-Nf-kpc"/>
-                        <menuItem title="Copy Word" id="yNF-w5-eEb">
+                        <menuItem title="Copy Pattern" id="yNF-w5-eEb">
                             <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="copyPattern:" target="JnV-nh-oBL" id="s0A-GQ-LDX"/>
+                            </connections>
                         </menuItem>
-                        <menuItem title="Google Word" id="MsA-rN-fPZ">
+                        <menuItem title="Google Pattern" id="MsA-rN-fPZ">
                             <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="googlePattern:" target="JnV-nh-oBL" id="lUU-5I-HTl"/>
+                            </connections>
                         </menuItem>
                         <menuItem title="Online Dictionary" id="3kN-M6-zLB">
                             <modifierMask key="keyEquivalentModifierMask"/>
@@ -1001,6 +1007,9 @@
                         <menuItem isSeparatorItem="YES" id="YPu-wG-lPk"/>
                         <menuItem title="Speak" id="vbg-7F-s7m" userLabel="Speak">
                             <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="speak:" target="JnV-nh-oBL" id="1yd-z1-7sd"/>
+                            </connections>
                         </menuItem>
                     </items>
                 </menu>
@@ -1140,10 +1149,10 @@ Gw
             </objects>
             <point key="canvasLocation" x="-591" y="948"/>
         </scene>
-        <!--Patterns Page View Controller-->
+        <!--Patterns Web Page View Controller-->
         <scene sceneID="x5l-IQ-cwH">
             <objects>
-                <viewController storyboardIdentifier="PatternsPageViewController" id="tdj-xc-OeD" customClass="PatternsPageViewController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PatternsWebPageViewController" id="tdj-xc-OeD" customClass="PatternsWebPageViewController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="GTg-T7-iUv">
                         <rect key="frame" x="0.0" y="0.0" width="339" height="168"/>
                         <autoresizingMask key="autoresizingMask"/>

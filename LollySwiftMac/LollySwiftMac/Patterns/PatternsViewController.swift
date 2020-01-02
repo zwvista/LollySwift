@@ -28,6 +28,8 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     @objc var textFilter = ""
     var selectedPattern = ""
     var selectedPatternID = 0
+    let synth = NSSpeechSynthesizer()
+    var isSpeaking = true
     var vmSettings: SettingsViewModel! {
         return vm.vmSettings
     }
@@ -104,9 +106,9 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
 
 //            responder = tvPatterns
 //            searchPhrases()
-//            if isSpeaking {
-//                speak(self)
-//            }
+            if isSpeaking {
+                speak(self)
+            }
         } else if tv === tvWebPages {
             let row = tvPatterns.selectedRow
             if row == -1 {
@@ -115,13 +117,32 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
                 wvDict.load(URLRequest(url: URL(string: item.WEBPAGE)!))
             }
         } else {
-//            let row = tvPhrases.selectedRow
-//            if isSpeaking && row != -1 {
-//                synth.startSpeaking(arrPhrases[row].PHRASE)
-//            }
+            let row = tvPhrases.selectedRow
+            if isSpeaking && row != -1 {
+                synth.startSpeaking(arrPhrases[row].PHRASE)
+            }
         }
     }
     
+    @IBAction func copyPattern(_ sender: AnyObject) {
+        MacApi.copyText(selectedPattern)
+    }
+    
+    @IBAction func googlePattern(_ sender: AnyObject) {
+        MacApi.googleString(selectedPattern)
+    }
+    
+    @IBAction func speak(_ sender: AnyObject) {
+        synth.startSpeaking(selectedPattern)
+    }
+    
+    @IBAction func isSpeakingChanged(_ sender: AnyObject) {
+        isSpeaking = (sender as! NSSegmentedControl).selectedSegment == 1
+        if isSpeaking {
+            speak(self)
+        }
+    }
+
     func searchWebPages(pattern: String) {
         vm.getWebPages(patternid: selectedPatternID).subscribe {
             self.tvWebPages.reloadData()
@@ -194,7 +215,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     }
 
     @IBAction func addWebPage(_ sender: AnyObject) {
-        let detailVC = self.storyboard!.instantiateController(withIdentifier: "PatternsPageViewController") as! PatternsPageViewController
+        let detailVC = self.storyboard!.instantiateController(withIdentifier: "PatternsWebPageViewController") as! PatternsWebPageViewController
         detailVC.vm = vm
         detailVC.item = vm.newLangPatternWebPage()
         detailVC.complete = { self.tvPatterns.reloadData(); self.addPattern(self) }
@@ -202,7 +223,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     }
 
     @IBAction func editWebPage(_ sender: AnyObject) {
-        let detailVC = self.storyboard!.instantiateController(withIdentifier: "PatternsPageViewController") as! PatternsPageViewController
+        let detailVC = self.storyboard!.instantiateController(withIdentifier: "PatternsWebPageViewController") as! PatternsWebPageViewController
         detailVC.vm = vm
         let i = tvPatterns.selectedRow
         detailVC.item = MPatternWebPage()
