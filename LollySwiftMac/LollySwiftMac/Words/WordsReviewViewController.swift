@@ -116,9 +116,7 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
     
     func controlTextDidEndEditing(_ obj: Notification) {
         let textfield = obj.object as! NSControl
-        let dict = (obj as NSNotification).userInfo!
-        let reason = dict["NSTextMovement"] as! NSNumber
-        let code = Int(reason.int32Value)
+        let code = (obj.userInfo!["NSTextMovement"] as! NSNumber).intValue
         guard code == NSReturnTextMovement else {return}
         guard textfield === tfWordInput, !(vm.isTestMode && tfWordInput.stringValue.isEmpty) else {return}
         check(self)

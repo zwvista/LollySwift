@@ -55,21 +55,28 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     }
     
     @IBAction func endEditing(_ sender: NSTextField) {
-        let row = tvPatterns.row(for: sender)
+        let tv = sender.superview!.superview!.superview as! NSTableView
+        let row = tv.row(for: sender)
         guard row != -1 else {return}
-        let col = tvPatterns.column(for: sender)
-        let key = tvPatterns.tableColumns[col].identifier.rawValue
-        let item = arrPatterns[row]
-        let oldValue = String(describing: item.value(forKey: key))
+        let col = tv.column(for: sender)
+        let key = tv.tableColumns[col].identifier.rawValue
+        let item = (tv === tvPatterns ? arrPatterns[row] : tv === tvWebPages ? arrWebPages[row] : arrPhrases[row]) as NSObject
+        let oldValue = CommonApi.toString(object: item.value(forKey: key))
         var newValue = sender.stringValue
         if key == "PATTERN" {
             newValue = vmSettings.autoCorrectInput(text: newValue)
         }
         guard oldValue != newValue else {return}
         item.setValue(newValue, forKey: key)
-        PatternsViewModel.update(item: item).subscribe {
-            self.tvPatterns.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvPatterns.tableColumns.count))
-        }.disposed(by: disposeBag)
+        if tv === tvPatterns {
+            PatternsViewModel.update(item: item as! MPattern).subscribe {
+                tv.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvPatterns.tableColumns.count))
+            }.disposed(by: disposeBag)
+        } else if tv === tvWebPages {
+            PatternsViewModel.updateWebPage(item: item as! MPatternWebPage).subscribe {
+                tv.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvPatterns.tableColumns.count))
+            }.disposed(by: disposeBag)
+        }
     }
 
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
@@ -161,9 +168,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     
     func controlTextDidEndEditing(_ obj: Notification) {
         let textfield = obj.object as! NSControl
-        let dict = (obj as NSNotification).userInfo!
-        let reason = dict["NSTextMovement"] as! NSNumber
-        let code = Int(reason.int32Value)
+        let code = (obj.userInfo!["NSTextMovement"] as! NSNumber).intValue
         guard code == NSReturnTextMovement else {return}
         if textfield === tfNewPattern {
             guard !newPattern.isEmpty else {return}

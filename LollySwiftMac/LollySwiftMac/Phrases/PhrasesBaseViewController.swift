@@ -87,7 +87,7 @@ class PhrasesBaseViewController: NSViewController, LollyProtocol, NSTableViewDat
         let col = tableView.column(for: sender)
         let key = tableView.tableColumns[col].identifier.rawValue
         let item = itemForRow(row: row)!
-        let oldValue = String(describing: item.value(forKey: key)!)
+        let oldValue = CommonApi.toString(object: item.value(forKey: key))
         var newValue = sender.stringValue
         if key == "PHRASE" {
             newValue = vmSettings.autoCorrectInput(text: newValue)
@@ -148,9 +148,7 @@ class PhrasesBaseWindowController: NSWindowController, NSTextFieldDelegate, NSWi
     func controlTextDidEndEditing(_ obj: Notification) {
         let searchfield = obj.object as! NSControl
         guard searchfield === tfFilter else {return}
-        let dict = (obj as NSNotification).userInfo!
-        let reason = dict["NSTextMovement"] as! NSNumber
-        let code = Int(reason.int32Value)
+        let code = (obj.userInfo!["NSTextMovement"] as! NSNumber).intValue
         guard code == NSReturnTextMovement else {return}
         if scTextFilter.selectedSegment == 0 {
             scTextFilter.selectedSegment = 1

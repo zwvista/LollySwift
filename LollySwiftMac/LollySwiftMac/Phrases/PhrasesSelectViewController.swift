@@ -70,9 +70,7 @@ class PhrasesSelectViewController: NSViewController, NSTableViewDataSource, NSTa
     func controlTextDidEndEditing(_ obj: Notification) {
         let searchfield = obj.object as! NSControl
         guard searchfield === tfFilter else {return}
-        let dict = (obj as NSNotification).userInfo!
-        let reason = dict["NSTextMovement"] as! NSNumber
-        let code = Int(reason.int32Value)
+        let code = (obj.userInfo!["NSTextMovement"] as! NSNumber).intValue
         guard code == NSReturnTextMovement else {return}
         if scTextFilter.selectedSegment == 0 {
             scTextFilter.selectedSegment = 1

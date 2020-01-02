@@ -30,9 +30,7 @@ class ReadNumberViewController: NSViewController, NSTextFieldDelegate {
     
     func controlTextDidEndEditing(_ obj: Notification) {
         let textfield = obj.object as! NSControl
-        let dict = (obj as NSNotification).userInfo!
-        let reason = dict["NSTextMovement"] as! NSNumber
-        let code = Int(reason.int32Value)
+        let code = (obj.userInfo!["NSTextMovement"] as! NSNumber).intValue
         guard code == NSReturnTextMovement else {return}
         guard textfield === tfNumber else {return}
         guard let _ = tfNumber.stringValue.toInt() else {return}

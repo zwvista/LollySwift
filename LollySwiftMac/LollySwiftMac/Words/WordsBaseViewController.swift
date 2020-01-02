@@ -69,9 +69,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
 
     func controlTextDidEndEditing(_ obj: Notification) {
         let textfield = obj.object as! NSControl
-        let dict = (obj as NSNotification).userInfo!
-        let reason = dict["NSTextMovement"] as! NSNumber
-        let code = Int(reason.int32Value)
+        let code = (obj.userInfo!["NSTextMovement"] as! NSNumber).intValue
         guard code == NSReturnTextMovement else {return}
         if textfield === tfNewWord {
             if !newWord.isEmpty {
@@ -150,7 +148,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
         let col = tvWords.column(for: sender)
         let key = tvWords.tableColumns[col].identifier.rawValue
         let item = itemForRow(row: row)!
-        let oldValue = String(describing: item.value(forKey: key))
+        let oldValue = CommonApi.toString(object: item.value(forKey: key))
         var newValue = sender.stringValue
         if key == "WORD" {
             newValue = vmSettings.autoCorrectInput(text: newValue)
