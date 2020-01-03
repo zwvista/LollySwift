@@ -38,6 +38,12 @@ class MPatternPhrase: NSObject, Codable {
         return RestApi.getRecords(url: url)
     }
     
+    static func getDataByPatternPhrase(patternid: Int, phraseid: Int) -> Observable<[MPatternPhrase]> {
+        // SQL: SELECT * FROM VPATTERNSPHRASES WHERE PATTERNID=? AND PHRASEID=?
+        let url = "\(CommonApi.url)VPATTERNSPHRASES?filter=PATTERNID,eq,\(patternid)&filter=PHRASEID,eq,\(phraseid)"
+        return RestApi.getRecords(url: url)
+    }
+
     static func getDataById(_ id: Int) -> Observable<[MPatternPhrase]> {
         // SQL: SELECT * FROM VPATTERNSPHRASES WHERE ID=?
         let url = "\(CommonApi.url)VPATTERNSPHRASES?filter=ID,eq,\(id)"
@@ -67,5 +73,28 @@ class MPatternPhrase: NSObject, Codable {
         // SQL: DELETE PATTERNSPHRASES WHERE ID=?
         let url = "\(CommonApi.url)PATTERNSPhraseS/\(id)"
         return RestApi.delete(url: url).map { print($0) }
+    }
+    
+    static func connect(patternid: Int, phraseid: Int) -> Observable<()> {
+        return getDataByPatternPhrase(patternid: patternid, phraseid: phraseid).flatMap { arr -> Observable<()> in
+            if !arr.isEmpty {
+                return Observable.empty()
+            } else {
+                let item = MPatternPhrase()
+                item.PATTERNID = patternid
+                item.PHRASEID = phraseid
+                return create(item: item).map { print($0) }
+            }
+        }
+    }
+    
+    static func disconnect(patternid: Int, phraseid: Int) -> Observable<()> {
+        return getDataByPatternPhrase(patternid: patternid, phraseid: phraseid).flatMap { arr -> Observable<()> in
+            var o = Observable.just(())
+            for v in arr {
+                o = o.concat(delete(v.ID))
+            }
+            return o
+        }
     }
 }

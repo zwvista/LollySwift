@@ -284,7 +284,7 @@ class SentencePatternsViewController: NSViewController, LollyProtocol, NSTableVi
     @IBAction func selectPhrases(_ sender: AnyObject) {
         let detailVC = NSStoryboard(name: "Phrases", bundle: nil).instantiateController(withIdentifier: "PhrasesSelectViewController") as! PhrasesSelectViewController
         detailVC.textFilter = selectedPattern
-        detailVC.wordid = selectedPatternID
+        detailVC.patternid = selectedPatternID
         detailVC.complete = {
             self.searchPhrases()
         }
