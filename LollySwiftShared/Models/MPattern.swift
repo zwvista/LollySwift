@@ -14,6 +14,7 @@ class MPattern: NSObject, Codable {
     var ID = 0
     var LANGID = 0
     var PATTERN = ""
+    var PATTERNTYPEID = 0
     var NOTE: String?
     
     override init() {
@@ -23,12 +24,13 @@ class MPattern: NSObject, Codable {
         ID = x.ID
         LANGID = x.LANGID
         PATTERN = x.PATTERN
+        PATTERNTYPEID = x.PATTERNTYPEID
         NOTE = x.NOTE
     }
 
-    static func getDataByLang(_ langid: Int) -> Observable<[MPattern]> {
-        // SQL: SELECT * FROM PATTERNS WHERE LANGID=?
-        let url = "\(CommonApi.url)PATTERNS?filter=LANGID,eq,\(langid)&order=PATTERN"
+    static func getSentenceDataByLang(_ langid: Int) -> Observable<[MPattern]> {
+        // SQL: SELECT * FROM VPATTERNS WHERE LANGID=? AND PATTERNTYPEID = 2
+        let url = "\(CommonApi.url)VPATTERNS?filter=LANGID,eq,\(langid)&filter=PATTERNTYPEID,eq,2&order=PATTERN"
         return RestApi.getRecords(url: url)
     }
     

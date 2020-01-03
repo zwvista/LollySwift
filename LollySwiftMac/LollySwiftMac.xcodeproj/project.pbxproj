@@ -52,8 +52,8 @@
 		954B870E218FD274007DC348 /* WordsLangDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954B870D218FD274007DC348 /* WordsLangDetailViewController.swift */; };
 		954CB5ED23B7114100A03900 /* MPattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954CB5EC23B7114100A03900 /* MPattern.swift */; };
 		954CB5F023B713DA00A03900 /* Patterns.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 954CB5EF23B713DA00A03900 /* Patterns.storyboard */; };
-		954CB5F223B714C500A03900 /* PatternsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954CB5F123B714C500A03900 /* PatternsViewController.swift */; };
-		954CB5F423B7175500A03900 /* PatternsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954CB5F323B7175500A03900 /* PatternsViewModel.swift */; };
+		954CB5F223B714C500A03900 /* SentencePatternsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954CB5F123B714C500A03900 /* SentencePatternsViewController.swift */; };
+		954CB5F423B7175500A03900 /* SentencePatternsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954CB5F323B7175500A03900 /* SentencePatternsViewModel.swift */; };
 		954CB5F623BBD58800A03900 /* PatternsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954CB5F523BBD58800A03900 /* PatternsDetailViewController.swift */; };
 		954D8B982143907C00651A80 /* PhrasesLangViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CB59D207885140083DDE2 /* PhrasesLangViewModel.swift */; };
 		954D8B992143907C00651A80 /* PhrasesUnitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CB59E207885140083DDE2 /* PhrasesUnitViewModel.swift */; };
@@ -79,7 +79,7 @@
 		9593779922C4CE37009FFBD0 /* MUSMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F5401122C38F8F00E3FD6A /* MUSMapping.swift */; };
 		95940A922233865700D35409 /* MVoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95940A912233865700D35409 /* MVoice.swift */; };
 		95940A95223389A300D35409 /* MVoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95940A912233865700D35409 /* MVoice.swift */; };
-		959D21EE23BCF73E005BED48 /* PatternsWebPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959D21ED23BCF73E005BED48 /* PatternsWebPageViewController.swift */; };
+		959D21EE23BCF73E005BED48 /* SentencePatternsWebPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959D21ED23BCF73E005BED48 /* SentencePatternsWebPageViewController.swift */; };
 		95B6589F2222E9E10095B0D2 /* WordsUnitBatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B6589E2222E9E10095B0D2 /* WordsUnitBatchViewController.swift */; };
 		95B658A1222322960095B0D2 /* PhrasesUnitBatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B658A0222322960095B0D2 /* PhrasesUnitBatchViewController.swift */; };
 		95B658A72227D8060095B0D2 /* MCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B658A62227D8060095B0D2 /* MCommon.swift */; };
@@ -186,8 +186,8 @@
 		954B870D218FD274007DC348 /* WordsLangDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsLangDetailViewController.swift; sourceTree = "<group>"; };
 		954CB5EC23B7114100A03900 /* MPattern.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPattern.swift; sourceTree = "<group>"; };
 		954CB5EF23B713DA00A03900 /* Patterns.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Patterns.storyboard; sourceTree = "<group>"; };
-		954CB5F123B714C500A03900 /* PatternsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternsViewController.swift; sourceTree = "<group>"; };
-		954CB5F323B7175500A03900 /* PatternsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternsViewModel.swift; sourceTree = "<group>"; };
+		954CB5F123B714C500A03900 /* SentencePatternsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentencePatternsViewController.swift; sourceTree = "<group>"; };
+		954CB5F323B7175500A03900 /* SentencePatternsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentencePatternsViewModel.swift; sourceTree = "<group>"; };
 		954CB5F523BBD58800A03900 /* PatternsDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternsDetailViewController.swift; sourceTree = "<group>"; };
 		957A18C723BDA4D600428DA3 /* MPatternWebPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPatternWebPage.swift; sourceTree = "<group>"; };
 		958125C52190463F0001159E /* PhrasesLangViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesLangViewController.swift; sourceTree = "<group>"; };
@@ -195,7 +195,7 @@
 		958BAB14235182B3007F50BB /* ReadNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadNumberViewController.swift; sourceTree = "<group>"; };
 		958BAB1823518838007F50BB /* ReadNumberViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadNumberViewModel.swift; sourceTree = "<group>"; };
 		95940A912233865700D35409 /* MVoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVoice.swift; sourceTree = "<group>"; };
-		959D21ED23BCF73E005BED48 /* PatternsWebPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatternsWebPageViewController.swift; sourceTree = "<group>"; };
+		959D21ED23BCF73E005BED48 /* SentencePatternsWebPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SentencePatternsWebPageViewController.swift; sourceTree = "<group>"; };
 		95B6589E2222E9E10095B0D2 /* WordsUnitBatchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsUnitBatchViewController.swift; sourceTree = "<group>"; };
 		95B658A0222322960095B0D2 /* PhrasesUnitBatchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesUnitBatchViewController.swift; sourceTree = "<group>"; };
 		95B658A62227D8060095B0D2 /* MCommon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCommon.swift; sourceTree = "<group>"; };
@@ -337,7 +337,7 @@
 				95F0A8AC2293C6A700D1B9A2 /* DictsViewModel.swift */,
 				95F5400F22C35C3800E3FD6A /* EmbeddedReviewViewModel.swift */,
 				95E43F2A21E1D568001E650C /* NoteViewModel.swift */,
-				954CB5F323B7175500A03900 /* PatternsViewModel.swift */,
+				954CB5F323B7175500A03900 /* SentencePatternsViewModel.swift */,
 				8C2CB59D207885140083DDE2 /* PhrasesLangViewModel.swift */,
 				95FDF627228CF9B1003DFB1A /* PhrasesReviewViewModel.swift */,
 				8C2CB59E207885140083DDE2 /* PhrasesUnitViewModel.swift */,
@@ -456,8 +456,8 @@
 			children = (
 				954CB5EF23B713DA00A03900 /* Patterns.storyboard */,
 				954CB5F523BBD58800A03900 /* PatternsDetailViewController.swift */,
-				954CB5F123B714C500A03900 /* PatternsViewController.swift */,
-				959D21ED23BCF73E005BED48 /* PatternsWebPageViewController.swift */,
+				954CB5F123B714C500A03900 /* SentencePatternsViewController.swift */,
+				959D21ED23BCF73E005BED48 /* SentencePatternsWebPageViewController.swift */,
 			);
 			path = Patterns;
 			sourceTree = "<group>";
@@ -749,7 +749,7 @@
 				9534728E22BB68EE00517D71 /* AppDelegate.swift in Sources */,
 				8C2CB5BE207885140083DDE2 /* MLanguage.swift in Sources */,
 				95CED3B62211C8300094622F /* WordsTextbookViewController.swift in Sources */,
-				954CB5F223B714C500A03900 /* PatternsViewController.swift in Sources */,
+				954CB5F223B714C500A03900 /* SentencePatternsViewController.swift in Sources */,
 				954B870C218FC223007DC348 /* WordsLangViewController.swift in Sources */,
 				951385D522F6C94800E47D35 /* PhrasesSelectViewController.swift in Sources */,
 				95F0A8A7229293DF00D1B9A2 /* TextbooksDetailViewController.swift in Sources */,
@@ -779,7 +779,7 @@
 				8CAF910A20833C4F00933837 /* WordsSearchViewModel.swift in Sources */,
 				95CED3B2221048B50094622F /* PhrasesBaseViewController.swift in Sources */,
 				95EFF47E21840FB60094EE3C /* MAutoCorrect.swift in Sources */,
-				954CB5F423B7175500A03900 /* PatternsViewModel.swift in Sources */,
+				954CB5F423B7175500A03900 /* SentencePatternsViewModel.swift in Sources */,
 				8C0748E9209EE15D0006BD1B /* RxCodableAlamofire.swift in Sources */,
 				954CB5ED23B7114100A03900 /* MPattern.swift in Sources */,
 				95CED3CE2216C6320094622F /* PhrasesTextbookDetailViewController.swift in Sources */,
@@ -798,7 +798,7 @@
 				8C2CB5C3207888260083DDE2 /* WordsUnitViewController.swift in Sources */,
 				95F0A8A32292640D00D1B9A2 /* TextbooksViewController.swift in Sources */,
 				958BAB1923518838007F50BB /* ReadNumberViewModel.swift in Sources */,
-				959D21EE23BCF73E005BED48 /* PatternsWebPageViewController.swift in Sources */,
+				959D21EE23BCF73E005BED48 /* SentencePatternsWebPageViewController.swift in Sources */,
 				954B8708218DC04E007DC348 /* CommonApi.swift in Sources */,
 				8C2CB5B6207885140083DDE2 /* MDictionary.swift in Sources */,
 			);
@@ -919,7 +919,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -970,7 +970,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -992,7 +992,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = com.zwstudio.LollySwiftMac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1015,7 +1015,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				PRODUCT_BUNDLE_IDENTIFIER = com.zwstudio.LollySwiftMac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

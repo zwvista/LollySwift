@@ -12,7 +12,7 @@ import RxSwift
 @objcMembers
 class PatternsDetailViewController: NSViewController {
     
-    var vm: PatternsViewModel!
+    var vm: SentencePatternsViewModel!
     var complete: (() -> Void)?
     var item: MPattern!
     var isAdd: Bool!
@@ -33,19 +33,19 @@ class PatternsDetailViewController: NSViewController {
         (item.PATTERN.isEmpty ? tfPattern : tfNote).becomeFirstResponder()
         view.window?.title = isAdd ? "New Pattern" : item.PATTERN
     }
-
+    
     @IBAction func okClicked(_ sender: AnyObject) {
         // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
         self.commitEditing()
         item.PATTERN = vm.vmSettings.autoCorrectInput(text: item.PATTERN)
         if isAdd {
             vm.arrPatterns.append(item)
-            PatternsViewModel.create(item: item).subscribe(onNext: {
+            SentencePatternsViewModel.create(item: item).subscribe(onNext: {
                 self.item.ID = $0
                 self.complete?()
             }).disposed(by: disposeBag)
         } else {
-            PatternsViewModel.update(item: item).subscribe {
+            SentencePatternsViewModel.update(item: item).subscribe {
                 self.complete?()
             }.disposed(by: disposeBag)
         }

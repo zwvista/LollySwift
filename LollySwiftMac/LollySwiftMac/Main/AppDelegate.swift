@@ -23,7 +23,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             self.wordsInUnit(self)
             //self.wordsInLanguage(self)
             //self.readNumber(self)
-            //self.patternsInLanguage(self)
+            //self.sentencePatternsInLanguage(self)
         }).disposed(by: disposeBag)
         // Insert code here to initialize your application
 
@@ -133,12 +133,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         showWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesLangWindowController", modal: false)
     }
     
-    @IBAction func patternsInLanguage(_ sender: AnyObject) {
-        findOrShowWindow(storyBoardName: "Patterns", windowControllerName: "PatternsWindowController")
+    @IBAction func sentencePatternsInLanguage(_ sender: AnyObject) {
+        findOrShowWindow(storyBoardName: "Patterns", windowControllerName: "SentencePatternsWindowController")
     }
     
-    @IBAction func patternsInLanguageNew(_ sender: AnyObject) {
-        showWindow(storyBoardName: "Patterns", windowControllerName: "PatternsWindowController", modal: false)
+    @IBAction func sentencePatternsInLanguageNew(_ sender: AnyObject) {
+        showWindow(storyBoardName: "Patterns", windowControllerName: "SentencePatternsWindowController", modal: false)
     }
 
     @IBAction func editBlog(_ sender: AnyObject) {

@@ -118,11 +118,11 @@ class MDictTranslation: MDictionary {
 
 @objcMembers
 class MDictType: NSObject, Codable {
-    var ID = 0
+    var CODE = 0
     var NAME = ""
     static func getData() -> Observable<[MDictType]> {
-        // SQL: SELECT * FROM DICTTYPES
-        let url = "\(CommonApi.url)DICTTYPES"
+        // SQL: SELECT * FROM CODES WHERE KIND = 1
+        let url = "\(CommonApi.url)CODES?filter=KIND,eq,1"
         return RestApi.getRecords(url: url)
     }
 }
