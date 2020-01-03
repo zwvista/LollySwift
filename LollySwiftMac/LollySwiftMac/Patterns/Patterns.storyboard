@@ -31,9 +31,12 @@
                                         <action selector="addWebPage:" target="a6B-GY-iSb" id="a0k-QC-1CA"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="873D5CF4-3E69-4FE7-A406-4516544A445B" label="Add Phrase" paletteLabel="Add Phrase" tag="-1" image="NSAddTemplate" id="oTs-48-SE5">
+                                <toolbarItem implicitItemIdentifier="873D5CF4-3E69-4FE7-A406-4516544A445B" label="Select Phrase" paletteLabel="Select Phrase" tag="-1" image="NSAddTemplate" id="oTs-48-SE5">
                                     <size key="minSize" width="11" height="11"/>
                                     <size key="maxSize" width="11" height="11"/>
+                                    <connections>
+                                        <action selector="selectPhrases:" target="a6B-GY-iSb" id="lpP-mb-Q0N"/>
+                                    </connections>
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="78890E5B-E0CE-4316-AC39-5F2EC4113E54" label="Delete" paletteLabel="Delete" tag="-1" image="NSRemoveTemplate" id="efe-HR-Jf2"/>
                                 <toolbarItem implicitItemIdentifier="0FE47FD6-6CD6-4F13-92D4-43D61D94CAF8" label="Refresh" paletteLabel="Refresh" tag="-1" image="NSRefreshTemplate" id="nFJ-EQ-uxA">
@@ -795,6 +798,9 @@
                         </menuItem>
                         <menuItem title="Select Phrases" id="IU1-fg-KVy">
                             <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="selectPhrases:" target="JnV-nh-oBL" id="arZ-i6-K8p"/>
+                            </connections>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="Xfk-yj-04T"/>
                         <menuItem title="Delete" id="E7y-gU-Gw8">

@@ -10,7 +10,7 @@ import Cocoa
 import WebKit
 import RxSwift
 
-class SentencePatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate, NSToolbarItemValidation {
+class SentencePatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate, NSMenuItemValidation, NSToolbarItemValidation {
 
     @IBOutlet weak var wvWebPage: WKWebView!
     @IBOutlet weak var tfNewPattern: NSTextField!
@@ -151,10 +151,18 @@ class SentencePatternsViewController: NSViewController, LollyProtocol, NSTableVi
         }
     }
     
+    // https://stackoverflow.com/questions/9368654/cannot-seem-to-setenabledno-on-nsmenuitem
+    func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+        if menuItem.action == #selector(selectPhrases(_:)) {
+            return selectedPatternID != 0
+        }
+        return true
+    }
+
     // https://stackoverflow.com/questions/8017822/how-to-enable-disable-nstoolbaritem
     func validateToolbarItem(_ item: NSToolbarItem) -> Bool {
         let s = item.paletteLabel
-        let enabled = !((s == "Add WebPage" || s == "Add Phrase") && selectedPatternID == 0)
+        let enabled = !((s == "Add WebPage" || s == "Select Phrase") && selectedPatternID == 0)
         return enabled
     }
 
@@ -267,14 +275,13 @@ class SentencePatternsViewController: NSViewController, LollyProtocol, NSTableVi
     }
     
     @IBAction func selectPhrases(_ sender: AnyObject) {
-//        guard selectedPatternID != 0 else {return}
-//        let detailVC = NSStoryboard(name: "Phrases", bundle: nil).instantiateController(withIdentifier: "PhrasesSelectViewController") as! PhrasesSelectViewController
-//        detailVC.textFilter = selectedPattern
-//        detailVC.wordid = selectedPatternID
-//        detailVC.complete = {
+        let detailVC = NSStoryboard(name: "Phrases", bundle: nil).instantiateController(withIdentifier: "PhrasesSelectViewController") as! PhrasesSelectViewController
+        detailVC.textFilter = selectedPattern
+        detailVC.wordid = selectedPatternID
+        detailVC.complete = {
 //            self.searchPhrases()
-//        }
-//        self.presentAsModalWindow(detailVC)
+        }
+        self.presentAsModalWindow(detailVC)
     }
 
     deinit {

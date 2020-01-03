@@ -89,7 +89,7 @@ class BlogViewController: NSViewController, NSMenuItemValidation  {
         }
     }
     func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
-        if menuItem.action == #selector(self.switchPage(_:)) {
+        if menuItem.action == #selector(switchPage(_:)) {
             menuItem.state = menuItem.tag == wc.scPage.selectedSegment ? .on : .off
         }
         return true
