@@ -43,6 +43,12 @@ class MPatternPhrase: NSObject, Codable {
         let url = "\(CommonApi.url)VPATTERNSPHRASES?filter=PATTERNID,eq,\(patternid)&filter=PHRASEID,eq,\(phraseid)"
         return RestApi.getRecords(url: url)
     }
+    
+    static func getDataByPhrase(phraseid: Int) -> Observable<[MPatternPhrase]> {
+        // SQL: SELECT * FROM VPATTERNSPHRASES WHERE PHRASEID=?
+        let url = "\(CommonApi.url)VPATTERNSPHRASES?filter=PHRASEID,eq,\(phraseid)"
+        return RestApi.getRecords(url: url)
+    }
 
     static func getDataById(_ id: Int) -> Observable<[MPatternPhrase]> {
         // SQL: SELECT * FROM VPATTERNSPHRASES WHERE ID=?
@@ -71,18 +77,30 @@ class MPatternPhrase: NSObject, Codable {
     
     static func delete(_ id: Int) -> Observable<()> {
         // SQL: DELETE PATTERNSPHRASES WHERE ID=?
-        let url = "\(CommonApi.url)PATTERNSPhraseS/\(id)"
+        let url = "\(CommonApi.url)PATTERNSPHRASES/\(id)"
         return RestApi.delete(url: url).map { print($0) }
     }
     
-    static func connect(patternid: Int, phraseid: Int) -> Observable<()> {
-        return getDataByPatternPhrase(patternid: patternid, phraseid: phraseid).flatMap { arr -> Observable<()> in
-            if !arr.isEmpty {
+    static func deleteByPhrase(phraseid: Int) -> Observable<()> {
+        // SQL: DELETE UNITPHRASES WHERE PHRASEID=?
+        return getDataByPhrase(phraseid: phraseid).flatMap { arr -> Observable<()> in
+            if arr.isEmpty {
                 return Observable.empty()
             } else {
+                let ids = arr.map { $0.ID.description }.joined(separator: ",")
+                let url = "\(CommonApi.url)PATTERNSPHRASES/\(ids)"
+                return RestApi.delete(url: url).map { print($0) }
+            }
+        }
+    }
+
+    static func connect(patternid: Int, phraseid: Int) -> Observable<()> {
+        return getDataByPatternPhrase(patternid: patternid, phraseid: phraseid).flatMap { arr -> Observable<()> in
+            return !arr.isEmpty ? Observable.empty() : getDataByPattern(patternid).flatMap { arr2 -> Observable<()> in
                 let item = MPatternPhrase()
                 item.PATTERNID = patternid
                 item.PHRASEID = phraseid
+                item.SEQNUM = arr2.count + 1
                 return create(item: item).map { print($0) }
             }
         }

@@ -33,6 +33,32 @@ class MWordPhrase: NSObject, Codable {
         return RestApi.delete(url: url).map { print($0) }
     }
     
+    static func deleteByWord(wordid: Int) -> Observable<()> {
+        // SQL: DELETE UNITPHRASES WHERE PHRASEID=?
+        return getPhrasesByWord(wordid: wordid).flatMap { arr -> Observable<()> in
+            if arr.isEmpty {
+                return Observable.empty()
+            } else {
+                let ids = arr.map { $0.ID.description }.joined(separator: ",")
+                let url = "\(CommonApi.url)WORDSPHRASES/\(ids)"
+                return RestApi.delete(url: url).map { print($0) }
+            }
+        }
+    }
+
+    static func deleteByPhrase(phraseid: Int) -> Observable<()> {
+        // SQL: DELETE UNITPHRASES WHERE PHRASEID=?
+        return getWordsByPhrase(phraseid: phraseid).flatMap { arr -> Observable<()> in
+            if arr.isEmpty {
+                return Observable.empty()
+            } else {
+                let ids = arr.map { $0.ID.description }.joined(separator: ",")
+                let url = "\(CommonApi.url)WORDSPHRASES/\(ids)"
+                return RestApi.delete(url: url).map { print($0) }
+            }
+        }
+    }
+
     static func connect(wordid: Int, phraseid: Int) -> Observable<()> {
         return getDataByWordPhrase(wordid: wordid, phraseid: phraseid).flatMap { arr -> Observable<()> in
             if !arr.isEmpty {

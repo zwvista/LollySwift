@@ -122,4 +122,17 @@ class MUnitPhrase: NSObject, Codable, MPhraseProtocol {
         let url = "\(CommonApi.url)UNITPHRASES/\(id)"
         return RestApi.delete(url: url).map { print($0) }
     }
+    
+    static func deleteByPhrase(phraseid: Int) -> Observable<()> {
+        // SQL: DELETE UNITPHRASES WHERE PHRASEID=?
+        return getDataByPhraseId(phraseid).flatMap { arr -> Observable<()> in
+            if arr.isEmpty {
+                return Observable.empty()
+            } else {
+                let ids = arr.map { $0.ID.description }.joined(separator: ",")
+                let url = "\(CommonApi.url)UNITPHRASES/\(ids)"
+                return RestApi.delete(url: url).map { print($0) }
+            }
+        }
+    }
 }
