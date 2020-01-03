@@ -14,7 +14,7 @@ class SentencePatternsViewModel: NSObject {
     var arrPatterns = [MPattern]()
     var arrPatternsFiltered: [MPattern]?
     var arrWebPages = [MPatternWebPage]()
-    var arrPhrases = [MLangPhrase]()
+    var arrPhrases = [MPatternPhrase]()
 
     public init(settings: SettingsViewModel, disposeBag: DisposeBag, needCopy: Bool, complete: @escaping () -> ()) {
         self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
@@ -82,5 +82,11 @@ class SentencePatternsViewModel: NSObject {
         item.PATTERN = pattern
         item.SEQNUM = (arrWebPages.max { $0.SEQNUM < $1.SEQNUM }?.SEQNUM ?? 0) + 1
         return item
+    }
+    
+    func searchPhrases(patternid: Int) -> Observable<()> {
+        return MPatternPhrase.getDataByPattern(patternid).map {
+            self.arrPhrases = $0
+        }
     }
 }

@@ -176,7 +176,15 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
             self.doRefresh()
         }.disposed(by: disposeBag)
     }
-
+    
+    @IBAction func doubleAction(_ sender: AnyObject) {
+        if NSApp.currentEvent!.modifierFlags.contains(.option) {
+            selectPhrases(sender)
+        } else {
+            editWord(sender)
+        }
+    }
+    
     @IBAction func editWord(_ sender: AnyObject) {
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "WordsUnitDetailViewController") as! WordsUnitDetailViewController
         detailVC.vm = vm

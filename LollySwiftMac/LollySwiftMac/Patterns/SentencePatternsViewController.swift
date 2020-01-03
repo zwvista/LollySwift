@@ -39,7 +39,7 @@ class SentencePatternsViewController: NSViewController, LollyProtocol, NSTableVi
     var arrWebPages: [MPatternWebPage] {
         return vm.arrWebPages
     }
-    var arrPhrases: [MLangPhrase] {
+    var arrPhrases: [MPatternPhrase] {
         return vm.arrPhrases
     }
 
@@ -130,8 +130,7 @@ class SentencePatternsViewController: NSViewController, LollyProtocol, NSTableVi
                 vm.getWebPages(patternid: selectedPatternID).subscribe {
                     self.tvWebPages.reloadData()
                 }.disposed(by: disposeBag)
-                //            responder = tvPatterns
-                //            searchPhrases()
+                searchPhrases()
                 if isSpeaking {
                     speak(self)
                 }
@@ -274,14 +273,28 @@ class SentencePatternsViewController: NSViewController, LollyProtocol, NSTableVi
         tfStatusText.stringValue = "\(tvPatterns.numberOfRows) Patterns"
     }
     
+    @IBAction func doubleAction(_ sender: AnyObject) {
+        if NSApp.currentEvent!.modifierFlags.contains(.option) {
+            selectPhrases(sender)
+        } else {
+            editPattern(sender)
+        }
+    }
+
     @IBAction func selectPhrases(_ sender: AnyObject) {
         let detailVC = NSStoryboard(name: "Phrases", bundle: nil).instantiateController(withIdentifier: "PhrasesSelectViewController") as! PhrasesSelectViewController
         detailVC.textFilter = selectedPattern
         detailVC.wordid = selectedPatternID
         detailVC.complete = {
-//            self.searchPhrases()
+            self.searchPhrases()
         }
         self.presentAsModalWindow(detailVC)
+    }
+    
+    func searchPhrases() {
+        vm.searchPhrases(patternid: selectedPatternID).subscribe {
+            self.tvPhrases.reloadData()
+        }.disposed(by: disposeBag)
     }
 
     deinit {
