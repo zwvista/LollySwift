@@ -11,9 +11,13 @@ import RxSwift
 
 @objcMembers
 class MPatternPhrase: NSObject, Codable {
-    var ID = 0
     var PATTERNID = 0
+    var LANGID = 0
     var PATTERN = ""
+    var PATTERNTYPEID = 0
+    var PATTERNTYPENAME = ""
+    var NOTE: String?
+    var ID = 0
     var SEQNUM = 0
     var PHRASEID = 0
     var PHRASE = ""
@@ -23,9 +27,13 @@ class MPatternPhrase: NSObject, Codable {
     }
     
     func copy(from x: MPatternPhrase) {
-        ID = x.ID
         PATTERNID = x.PATTERNID
+        LANGID = x.LANGID
         PATTERN = x.PATTERN
+        PATTERNTYPEID = x.PATTERNTYPEID
+        PATTERNTYPENAME = x.PATTERNTYPENAME
+        NOTE = x.NOTE
+        ID = x.ID
         SEQNUM = x.SEQNUM
         PHRASEID = x.PHRASEID
         PHRASE = x.PHRASE
