@@ -75,6 +75,13 @@ class PhrasesBaseViewController: NSViewController, LollyProtocol, NSTableViewDat
     @IBAction func deletePhrase(_ sender: AnyObject) {
         let row = tableView.selectedRow
         guard row != -1 else {return}
+        let alert = NSAlert()
+        alert.messageText = "Delete Phrase"
+        alert.informativeText = "Are you sure?"
+        alert.alertStyle = .warning
+        alert.addButton(withTitle: "Yes")
+        alert.addButton(withTitle: "No")
+        guard alert.runModal() == .alertFirstButtonReturn else {return}
         deletePhrase(row: row)
     }
     

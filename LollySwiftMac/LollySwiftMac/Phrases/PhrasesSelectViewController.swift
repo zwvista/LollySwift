@@ -96,8 +96,8 @@ class PhrasesSelectViewController: NSViewController, NSTableViewDataSource, NSTa
         self.commitEditing()
         var o = Observable.just(())
         for i in 0..<tableView.numberOfRows {
-            let chk = (tableView.view(atColumn: 0, row: i, makeIfNecessary: false)! as! LollyCheckCell).chk!
-            guard chk.state == .on else {continue}
+            guard let col = tableView.view(atColumn: 0, row: i, makeIfNecessary: false) else {continue}
+            guard (col as! LollyCheckCell).chk!.state == .on else {continue}
             let item = arrPhrases[i]
             if wordid != 0 {
                 o = o.concat(MWordPhrase.connect(wordid: wordid, phraseid: item.PHRASEID))

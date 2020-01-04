@@ -31,6 +31,7 @@ class PhrasesLangDetailViewController: NSViewController, NSTableViewDataSource, 
     override func viewDidLoad() {
         super.viewDidLoad()
         isAdd = item.ID == 0
+        guard isAdd else {return}
         vmSingle = SinglePhraseViewModel(phrase: item.PHRASE, settings: vm.vmSettings, disposeBag: disposeBag) {
             self.tableView.reloadData()
         }

@@ -34,6 +34,7 @@ class WordsLangDetailViewController: NSViewController, NSTableViewDataSource, NS
     override func viewDidLoad() {
         super.viewDidLoad()
         isAdd = item.ID == 0
+        guard isAdd else {return}
         vmSingle = SingleWordViewModel(word: item.WORD, settings: vm.vmSettings, disposeBag: disposeBag) {
             self.tableView.reloadData()
         }
