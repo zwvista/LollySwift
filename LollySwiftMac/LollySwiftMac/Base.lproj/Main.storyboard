@@ -1103,7 +1103,11 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                         <connections>
-                                            <binding destination="cCU-1Q-LWr" name="value" keyPath="patternNo" id="1jD-Ne-Z01"/>
+                                            <binding destination="cCU-1Q-LWr" name="value" keyPath="patternNo" id="eKy-6W-eSz">
+                                                <dictionary key="options">
+                                                    <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                                </dictionary>
+                                            </binding>
                                         </connections>
                                     </textField>
                                 </toolbarItem>
@@ -1127,7 +1131,11 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                         <connections>
-                                            <binding destination="cCU-1Q-LWr" name="value" keyPath="patternText" id="gkj-tJ-CTO"/>
+                                            <binding destination="cCU-1Q-LWr" name="value" keyPath="patternText" id="6Tl-az-3Qc">
+                                                <dictionary key="options">
+                                                    <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                                </dictionary>
+                                            </binding>
                                         </connections>
                                     </textField>
                                 </toolbarItem>

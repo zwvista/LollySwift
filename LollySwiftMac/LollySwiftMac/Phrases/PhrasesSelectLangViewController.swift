@@ -1,5 +1,5 @@
 //
-//  PhrasesSelectViewController.swift
+//  PhrasesSelectLangViewController.swift
 //  LollySwiftMac
 //
 //  Created by 趙偉 on 2019/08/04.
@@ -9,25 +9,22 @@
 import Cocoa
 import RxSwift
 
-class PhrasesSelectViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate {
+class PhrasesSelectLangViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate {
 
-    @objc var vm: PhrasesUnitViewModel!
+    @objc var vm: PhrasesLangViewModel!
     var vmSettings: SettingsViewModel! {
         return vm.vmSettings
     }
     var wordid = 0
     var patternid = 0
     var complete: (() -> Void)?
-    var arrPhrases: [MUnitPhrase] {
+    var arrPhrases: [MLangPhrase] {
         return vm.arrPhrasesFiltered ?? vm.arrPhrases
     }
 
     @IBOutlet weak var scTextFilter: NSSegmentedControl!
     @IBOutlet weak var tfFilter: NSTextField!
     @objc var textFilter = ""
-    @IBOutlet weak var pubTextbookFilter: NSPopUpButton!
-    @IBOutlet weak var acTextbooks: NSArrayController!
-    @objc var textbookFilter = 0
     @IBOutlet weak var scPhraseScope: NSSegmentedControl!
     @IBOutlet weak var tableView: NSTableView!
     
@@ -39,8 +36,7 @@ class PhrasesSelectViewController: NSViewController, NSTableViewDataSource, NSTa
     }
     
     @IBAction func reload(_ sender: AnyObject) {
-        vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: scPhraseScope.selectedSegment == 0, disposeBag: disposeBag, needCopy: true) {
-            self.acTextbooks.content = self.vmSettings.arrTextbookFilters
+        vm = PhrasesLangViewModel(settings: AppDelegate.theSettingsViewModel, disposeBag: disposeBag, needCopy: true) {
             self.filterPhrase(self)
         }
     }
@@ -64,7 +60,7 @@ class PhrasesSelectViewController: NSViewController, NSTableViewDataSource, NSTa
     
     @IBAction func filterPhrase(_ sender: AnyObject) {
         let n = scTextFilter.selectedSegment
-        vm.applyFilters(textFilter: n == 0 ? "" : textFilter, scope: n == 1 ? "Phrase" : "Translation", textbookFilter: textbookFilter)
+        vm.applyFilters(textFilter: n == 0 ? "" : textFilter, scope: n == 1 ? "Phrase" : "Translation")
         tableView.reloadData()
     }
     

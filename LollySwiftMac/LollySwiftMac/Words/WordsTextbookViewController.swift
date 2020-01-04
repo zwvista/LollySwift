@@ -128,7 +128,7 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
 
     @IBAction func selectPhrases(_ sender: AnyObject) {
         guard selectedWordID != 0 else {return}
-        let detailVC = NSStoryboard(name: "Phrases", bundle: nil).instantiateController(withIdentifier: "PhrasesSelectViewController") as! PhrasesSelectViewController
+        let detailVC = NSStoryboard(name: "Phrases", bundle: nil).instantiateController(withIdentifier: "PhrasesSelectUnitViewController") as! PhrasesSelectUnitViewController
         detailVC.textFilter = selectedWord
         detailVC.wordid = selectedWordID
         detailVC.complete = {
