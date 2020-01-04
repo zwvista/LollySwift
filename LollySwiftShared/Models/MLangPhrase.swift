@@ -28,6 +28,14 @@ class MLangPhrase: NSObject, Codable, MPhraseProtocol {
         super.init()
     }
     
+    init(patternitem: MPatternPhrase) {
+        ID = patternitem.PHRASEID
+        LANGID = patternitem.LANGID
+        PHRASE = patternitem.PHRASE
+        TRANSLATION = patternitem.TRANSLATION
+        super.init()
+    }
+
     func copy(from x: MLangPhrase) {
         ID = x.ID
         LANGID = x.LANGID

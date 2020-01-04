@@ -84,6 +84,10 @@ class SentencePatternsViewModel: NSObject {
         return item
     }
     
+    static func updatePhrase(item: MPatternPhrase) -> Observable<()> {
+        return MLangPhrase.update(item: MLangPhrase(patternitem: item))
+    }
+
     func searchPhrases(patternid: Int) -> Observable<()> {
         return MPatternPhrase.getDataByPatternId(patternid).map {
             self.arrPhrases = $0

@@ -92,6 +92,10 @@ class SentencePatternsViewController: NSViewController, LollyProtocol, NSTableVi
             SentencePatternsViewModel.updateWebPage(item: item as! MPatternWebPage).subscribe {
                 tv.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvPatterns.tableColumns.count))
             }.disposed(by: disposeBag)
+        } else if tv == tvPhrases {
+            SentencePatternsViewModel.updatePhrase(item: item as! MPatternPhrase).subscribe {
+                tv.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvPatterns.tableColumns.count))
+            }.disposed(by: disposeBag)
         }
     }
 

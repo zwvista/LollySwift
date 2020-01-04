@@ -239,7 +239,7 @@
                                                                             <tableColumns>
                                                                                 <tableColumn identifier="ID" width="60" minWidth="60" maxWidth="1000" id="Esl-hY-J9U" userLabel="ID">
                                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="ID">
-                                                                                        <font key="font" metaFont="label" size="11"/>
+                                                                                        <font key="font" metaFont="controlContent" size="11"/>
                                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                                     </tableHeaderCell>
@@ -276,7 +276,7 @@
                                                                                 </tableColumn>
                                                                                 <tableColumn identifier="PATTERN" width="160" minWidth="40" maxWidth="1000" id="Ct8-j9-AmY">
                                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="PATTERN">
-                                                                                        <font key="font" metaFont="label" size="11"/>
+                                                                                        <font key="font" metaFont="controlContent" size="11"/>
                                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                                     </tableHeaderCell>
@@ -316,7 +316,7 @@
                                                                                 </tableColumn>
                                                                                 <tableColumn identifier="NOTE" width="212" minWidth="40" maxWidth="1000" id="dwr-7O-SQe">
                                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="NOTE">
-                                                                                        <font key="font" metaFont="label" size="11"/>
+                                                                                        <font key="font" metaFont="controlContent" size="11"/>
                                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                                     </tableHeaderCell>
@@ -406,7 +406,7 @@
                                                                             <tableColumns>
                                                                                 <tableColumn identifier="ID" width="60" minWidth="60" maxWidth="1000" id="Rz1-mW-KjO" userLabel="ID">
                                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="ID">
-                                                                                        <font key="font" metaFont="label" size="11"/>
+                                                                                        <font key="font" metaFont="controlContent" size="11"/>
                                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                                     </tableHeaderCell>
@@ -443,7 +443,7 @@
                                                                                 </tableColumn>
                                                                                 <tableColumn identifier="SEQNUM" width="60" minWidth="60" maxWidth="1000" id="yWW-qS-uTQ">
                                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="SEQNUM">
-                                                                                        <font key="font" metaFont="label" size="11"/>
+                                                                                        <font key="font" metaFont="controlContent" size="11"/>
                                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                                     </tableHeaderCell>
@@ -480,7 +480,7 @@
                                                                                 </tableColumn>
                                                                                 <tableColumn identifier="WEBPAGE" width="312" minWidth="40" maxWidth="1000" id="aUY-vi-57K">
                                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="WEBPAGE">
-                                                                                        <font key="font" metaFont="label" size="11"/>
+                                                                                        <font key="font" metaFont="controlContent" size="11"/>
                                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                                     </tableHeaderCell>
@@ -539,6 +539,9 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="441" height="25"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                 </tableHeaderView>
+                                                                <connections>
+                                                                    <outlet property="menu" destination="CLO-m3-rDv" id="DfO-cW-9Wm"/>
+                                                                </connections>
                                                             </scrollView>
                                                         </subviews>
                                                         <constraints>
@@ -590,7 +593,7 @@
                                                                             <tableColumns>
                                                                                 <tableColumn identifier="ID" width="60" minWidth="60" maxWidth="1000" id="4Xd-f3-27d" userLabel="ID">
                                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="ID">
-                                                                                        <font key="font" metaFont="label" size="11"/>
+                                                                                        <font key="font" metaFont="controlContent" size="11"/>
                                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                                     </tableHeaderCell>
@@ -627,7 +630,7 @@
                                                                                 </tableColumn>
                                                                                 <tableColumn identifier="PHRASE" width="300" minWidth="100" maxWidth="1000" id="xgp-xE-dke">
                                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="PHRASE">
-                                                                                        <font key="font" metaFont="label" size="11"/>
+                                                                                        <font key="font" metaFont="controlContent" size="11"/>
                                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                                     </tableHeaderCell>
@@ -649,6 +652,9 @@
                                                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                                                     </textFieldCell>
+                                                                                                    <connections>
+                                                                                                        <action selector="endEditing:" target="JiS-vG-Xmg" id="mME-tt-yB3"/>
+                                                                                                    </connections>
                                                                                                 </textField>
                                                                                             </subviews>
                                                                                             <constraints>
@@ -664,7 +670,7 @@
                                                                                 </tableColumn>
                                                                                 <tableColumn identifier="TRANSLATION" width="387" minWidth="100" maxWidth="1000" id="9dW-Lg-vFp">
                                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="TRANSLATION">
-                                                                                        <font key="font" metaFont="label" size="11"/>
+                                                                                        <font key="font" metaFont="controlContent" size="11"/>
                                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                                     </tableHeaderCell>
@@ -686,6 +692,9 @@
                                                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                                                     </textFieldCell>
+                                                                                                    <connections>
+                                                                                                        <action selector="endEditing:" target="JiS-vG-Xmg" id="jM4-e9-OBO"/>
+                                                                                                    </connections>
                                                                                                 </textField>
                                                                                             </subviews>
                                                                                             <constraints>
@@ -719,6 +728,9 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="756" height="25"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                 </tableHeaderView>
+                                                                <connections>
+                                                                    <outlet property="menu" destination="D4o-HK-iWI" id="akS-qL-YML"/>
+                                                                </connections>
                                                             </scrollView>
                                                         </subviews>
                                                         <constraints>
@@ -792,7 +804,7 @@
                         <outlet property="wvWebPage" destination="w1A-W0-K33" id="0gd-aR-61J"/>
                     </connections>
                 </viewController>
-                <menu id="lQY-c3-QUZ">
+                <menu id="lQY-c3-QUZ" userLabel="MenuPatterns">
                     <items>
                         <menuItem title="Edit" id="Emo-RX-m7b">
                             <modifierMask key="keyEquivalentModifierMask"/>
@@ -832,6 +844,35 @@
                             <connections>
                                 <action selector="speak:" target="JnV-nh-oBL" id="1yd-z1-7sd"/>
                             </connections>
+                        </menuItem>
+                    </items>
+                </menu>
+                <menu id="CLO-m3-rDv" userLabel="MenuWebPages">
+                    <items>
+                        <menuItem title="Item 1" id="vcR-wQ-ow8">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem title="Item 2" id="j81-I8-ar5">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem title="Item 3" id="2TI-qc-YLn">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                    </items>
+                </menu>
+                <menu id="D4o-HK-iWI" userLabel="MenuPhrases">
+                    <items>
+                        <menuItem title="Select" id="FnD-7Q-EA3">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem title="Add" id="MeO-cc-E5F">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem title="Edit" id="zrU-tc-hgD">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem title="Remove" id="d4t-qf-7tg">
+                            <modifierMask key="keyEquivalentModifierMask"/>
                         </menuItem>
                     </items>
                 </menu>
