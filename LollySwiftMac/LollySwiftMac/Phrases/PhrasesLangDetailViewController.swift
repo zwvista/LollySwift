@@ -18,7 +18,7 @@ class PhrasesLangDetailViewController: NSViewController, NSTableViewDataSource, 
     var item: MLangPhrase!
     var isAdd: Bool!
     var arrPhrases: [MUnitPhrase] {
-        return vmSingle.arrPhrases
+        return vmSingle != nil ? vmSingle.arrPhrases : [MUnitPhrase]()
     }
 
     @IBOutlet weak var tfID: NSTextField!

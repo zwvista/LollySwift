@@ -18,7 +18,7 @@ class WordsLangDetailViewController: NSViewController, NSTableViewDataSource, NS
     var item: MLangWord!
     var isAdd: Bool!
     var arrWords: [MUnitWord] {
-        return vmSingle.arrWords
+        return vmSingle != nil ? vmSingle.arrWords : [MUnitWord]()
     }
 
     @IBOutlet weak var tfID: NSTextField!

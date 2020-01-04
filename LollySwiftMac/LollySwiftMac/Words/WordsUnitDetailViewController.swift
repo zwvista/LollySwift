@@ -17,7 +17,7 @@ class WordsUnitDetailViewController: NSViewController, NSTableViewDataSource, NS
     @objc var item: MUnitWord!
     var isAdd: Bool!
     var arrWords: [MUnitWord] {
-        return vmSingle.arrWords
+        return vmSingle != nil ? vmSingle.arrWords : [MUnitWord]()
     }
 
     @IBOutlet weak var acUnits: NSArrayController!

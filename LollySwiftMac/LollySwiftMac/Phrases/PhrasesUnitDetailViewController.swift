@@ -18,7 +18,7 @@ class PhrasesUnitDetailViewController: NSViewController, NSTableViewDataSource, 
     var item: MUnitPhrase!
     var isAdd: Bool!
     var arrPhrases: [MUnitPhrase] {
-        return vmSingle.arrPhrases
+        return vmSingle != nil ? vmSingle.arrPhrases : [MUnitPhrase]()
     }
 
     @IBOutlet weak var acUnits: NSArrayController!
