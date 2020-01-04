@@ -14,8 +14,6 @@ class MPatternPhrase: NSObject, Codable {
     var PATTERNID = 0
     var LANGID = 0
     var PATTERN = ""
-    var PATTERNTYPEID = 0
-    var PATTERNTYPENAME = ""
     var NOTE: String?
     var ID = 0
     var SEQNUM = 0
@@ -30,8 +28,6 @@ class MPatternPhrase: NSObject, Codable {
         PATTERNID = x.PATTERNID
         LANGID = x.LANGID
         PATTERN = x.PATTERN
-        PATTERNTYPEID = x.PATTERNTYPEID
-        PATTERNTYPENAME = x.PATTERNTYPENAME
         NOTE = x.NOTE
         ID = x.ID
         SEQNUM = x.SEQNUM

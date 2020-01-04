@@ -54,7 +54,6 @@ class SentencePatternsViewModel: NSObject {
     func newSentencePattern() -> MPattern {
         let item = MPattern()
         item.LANGID = vmSettings.selectedLang.ID
-        item.PATTERNTYPEID = 2
         return item
     }
     
