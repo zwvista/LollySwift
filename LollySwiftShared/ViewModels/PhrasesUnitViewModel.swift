@@ -123,7 +123,7 @@ class PhrasesUnitViewModel: NSObject {
     static func delete(item: MUnitPhrase) -> Observable<()> {
         let phraseid = item.PHRASEID
         return MUnitPhrase.delete(item.ID).concat(
-            Observable.zip(MUnitPhrase.getDataByPhraseId(phraseid), MWordPhrase.getWordsByPhrase(phraseid: phraseid), MPatternPhrase.getDataByPhrase(phraseid: phraseid)).flatMap {
+            Observable.zip(MUnitPhrase.getDataByPhraseId(phraseid), MWordPhrase.getWordsByPhraseId(phraseid), MPatternPhrase.getDataByPhraseId(phraseid)).flatMap {
                 !($0.0.isEmpty && $0.1.isEmpty && $0.2.isEmpty) ? Observable.empty() : MLangPhrase.delete(phraseid)
             }
         )

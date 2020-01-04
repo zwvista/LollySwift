@@ -32,19 +32,19 @@ class MPatternPhrase: NSObject, Codable {
         TRANSLATION = x.TRANSLATION
     }
 
-    static func getDataByPattern(_ patternid: Int) -> Observable<[MPatternPhrase]> {
+    static func getDataByPatternId(_ patternid: Int) -> Observable<[MPatternPhrase]> {
         // SQL: SELECT * FROM VPATTERNSPHRASES WHERE PATTERNID=?
         let url = "\(CommonApi.url)VPATTERNSPHRASES?filter=PATTERNID,eq,\(patternid)"
         return RestApi.getRecords(url: url)
     }
     
-    static func getDataByPatternPhrase(patternid: Int, phraseid: Int) -> Observable<[MPatternPhrase]> {
+    static func getDataByPatternIdPhraseId(patternid: Int, phraseid: Int) -> Observable<[MPatternPhrase]> {
         // SQL: SELECT * FROM VPATTERNSPHRASES WHERE PATTERNID=? AND PHRASEID=?
         let url = "\(CommonApi.url)VPATTERNSPHRASES?filter=PATTERNID,eq,\(patternid)&filter=PHRASEID,eq,\(phraseid)"
         return RestApi.getRecords(url: url)
     }
     
-    static func getDataByPhrase(phraseid: Int) -> Observable<[MPatternPhrase]> {
+    static func getDataByPhraseId(_ phraseid: Int) -> Observable<[MPatternPhrase]> {
         // SQL: SELECT * FROM VPATTERNSPHRASES WHERE PHRASEID=?
         let url = "\(CommonApi.url)VPATTERNSPHRASES?filter=PHRASEID,eq,\(phraseid)"
         return RestApi.getRecords(url: url)
@@ -81,9 +81,9 @@ class MPatternPhrase: NSObject, Codable {
         return RestApi.delete(url: url).map { print($0) }
     }
     
-    static func deleteByPhrase(phraseid: Int) -> Observable<()> {
-        // SQL: DELETE UNITPHRASES WHERE PHRASEID=?
-        return getDataByPhrase(phraseid: phraseid).flatMap { arr -> Observable<()> in
+    static func deleteByPhraseId(_ phraseid: Int) -> Observable<()> {
+        // SQL: DELETE PATTERNSPHRASES WHERE PHRASEID=?
+        return getDataByPhraseId(phraseid).flatMap { arr -> Observable<()> in
             if arr.isEmpty {
                 return Observable.empty()
             } else {
@@ -95,8 +95,8 @@ class MPatternPhrase: NSObject, Codable {
     }
 
     static func connect(patternid: Int, phraseid: Int) -> Observable<()> {
-        return getDataByPatternPhrase(patternid: patternid, phraseid: phraseid).flatMap { arr -> Observable<()> in
-            return !arr.isEmpty ? Observable.empty() : getDataByPattern(patternid).flatMap { arr2 -> Observable<()> in
+        return getDataByPatternIdPhraseId(patternid: patternid, phraseid: phraseid).flatMap { arr -> Observable<()> in
+            return !arr.isEmpty ? Observable.empty() : getDataByPatternId(patternid).flatMap { arr2 -> Observable<()> in
                 let item = MPatternPhrase()
                 item.PATTERNID = patternid
                 item.PHRASEID = phraseid
@@ -107,7 +107,7 @@ class MPatternPhrase: NSObject, Codable {
     }
     
     static func disconnect(patternid: Int, phraseid: Int) -> Observable<()> {
-        return getDataByPatternPhrase(patternid: patternid, phraseid: phraseid).flatMap { arr -> Observable<()> in
+        return getDataByPatternIdPhraseId(patternid: patternid, phraseid: phraseid).flatMap { arr -> Observable<()> in
             var o = Observable.just(())
             for v in arr {
                 o = o.concat(delete(v.ID))

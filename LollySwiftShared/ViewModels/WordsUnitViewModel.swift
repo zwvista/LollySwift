@@ -147,7 +147,7 @@ class WordsUnitViewModel: NSObject {
     static func delete(item: MUnitWord) -> Observable<()> {
         let wordid = item.WORDID
         return MUnitWord.delete(item.ID).concat(
-            Observable.zip(MUnitWord.getDataByWordId(wordid), MWordPhrase.getPhrasesByWord(wordid: wordid)).flatMap {
+            Observable.zip(MUnitWord.getDataByWordId(wordid), MWordPhrase.getPhrasesByWordId(wordid)).flatMap {
                 !($0.0.isEmpty && $0.1.isEmpty) ? Observable.empty() :
                 Observable.zip(MLangWord.delete(item.WORDID), MWordFami.delete(item.FAMIID)).map{_ in}
             }
@@ -215,7 +215,7 @@ class WordsUnitViewModel: NSObject {
     }
     
     func searchPhrases(wordid: Int) -> Observable<()> {
-        return MWordPhrase.getPhrasesByWord(wordid: wordid).map {
+        return MWordPhrase.getPhrasesByWordId(wordid).map {
             self.arrPhrases = $0
         }
     }

@@ -123,7 +123,7 @@ class MUnitPhrase: NSObject, Codable, MPhraseProtocol {
         return RestApi.delete(url: url).map { print($0) }
     }
     
-    static func deleteByPhrase(phraseid: Int) -> Observable<()> {
+    static func deleteByPhraseId(_ phraseid: Int) -> Observable<()> {
         // SQL: DELETE UNITPHRASES WHERE PHRASEID=?
         return getDataByPhraseId(phraseid).flatMap { arr -> Observable<()> in
             if arr.isEmpty {
