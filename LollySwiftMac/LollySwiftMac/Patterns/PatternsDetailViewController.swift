@@ -12,7 +12,7 @@ import RxSwift
 @objcMembers
 class PatternsDetailViewController: NSViewController {
     
-    var vm: SentencePatternsViewModel!
+    var vm: PatternsViewModel!
     var complete: (() -> Void)?
     var item: MPattern!
     var isAdd: Bool!
@@ -40,12 +40,12 @@ class PatternsDetailViewController: NSViewController {
         item.PATTERN = vm.vmSettings.autoCorrectInput(text: item.PATTERN)
         if isAdd {
             vm.arrPatterns.append(item)
-            SentencePatternsViewModel.create(item: item).subscribe(onNext: {
+            PatternsViewModel.create(item: item).subscribe(onNext: {
                 self.item.ID = $0
                 self.complete?()
             }).disposed(by: disposeBag)
         } else {
-            SentencePatternsViewModel.update(item: item).subscribe {
+            PatternsViewModel.update(item: item).subscribe {
                 self.complete?()
             }.disposed(by: disposeBag)
         }

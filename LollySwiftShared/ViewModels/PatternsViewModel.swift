@@ -1,5 +1,5 @@
 //
-//  SentencePatternsViewModel.swift
+//  PatternsViewModel.swift
 //  LollySwiftMac
 //
 //  Created by 趙偉 on 2019/12/28.
@@ -9,7 +9,7 @@
 import Foundation
 import RxSwift
 
-class SentencePatternsViewModel: NSObject {
+class PatternsViewModel: NSObject {
     var vmSettings: SettingsViewModel
     var arrPatterns = [MPattern]()
     var arrPatternsFiltered: [MPattern]?

@@ -1,5 +1,5 @@
 //
-//  SentencePatternsViewController.swift
+//  PatternsViewController.swift
 //  LollySwiftMac
 //
 //  Created by 趙偉 on 2019/12/28.
@@ -10,7 +10,7 @@ import Cocoa
 import WebKit
 import RxSwift
 
-class SentencePatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate, NSMenuItemValidation, NSToolbarItemValidation {
+class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate, NSMenuItemValidation, NSToolbarItemValidation {
 
     @IBOutlet weak var wvWebPage: WKWebView!
     @IBOutlet weak var tfNewPattern: NSTextField!
@@ -22,7 +22,7 @@ class SentencePatternsViewController: NSViewController, LollyProtocol, NSTableVi
     @IBOutlet weak var tfStatusText: NSTextField!
     @IBOutlet weak var tvPhrases: NSTableView!
 
-    var vm: SentencePatternsViewModel!
+    var vm: PatternsViewModel!
     let disposeBag = DisposeBag()
     @objc var newPattern = ""
     @objc var textFilter = ""
@@ -52,10 +52,10 @@ class SentencePatternsViewController: NSViewController, LollyProtocol, NSTableVi
     
     // Take a reference to the window controller in order to prevent it from being released
     // Otherwise, we would not be able to access its controls afterwards
-    var wc: SentencePatternsWindowController!
+    var wc: PatternsWindowController!
     override func viewDidAppear() {
         super.viewDidAppear()
-        wc = view.window!.windowController as? SentencePatternsWindowController
+        wc = view.window!.windowController as? PatternsWindowController
         wc.scSpeak.selectedSegment = isSpeaking ? 1 : 0
         // For some unknown reason, the placeholder string of the filter text field
         // cannot be set in the storyboard
@@ -85,15 +85,15 @@ class SentencePatternsViewController: NSViewController, LollyProtocol, NSTableVi
         guard oldValue != newValue else {return}
         item.setValue(newValue, forKey: key)
         if tv === tvPatterns {
-            SentencePatternsViewModel.update(item: item as! MPattern).subscribe {
+            PatternsViewModel.update(item: item as! MPattern).subscribe {
                 tv.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvPatterns.tableColumns.count))
             }.disposed(by: disposeBag)
         } else if tv === tvWebPages {
-            SentencePatternsViewModel.updateWebPage(item: item as! MPatternWebPage).subscribe {
+            PatternsViewModel.updateWebPage(item: item as! MPatternWebPage).subscribe {
                 tv.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvPatterns.tableColumns.count))
             }.disposed(by: disposeBag)
         } else if tv == tvPhrases {
-            SentencePatternsViewModel.updatePhrase(item: item as! MPatternPhrase).subscribe {
+            PatternsViewModel.updatePhrase(item: item as! MPatternPhrase).subscribe {
                 tv.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvPatterns.tableColumns.count))
             }.disposed(by: disposeBag)
         }
@@ -189,7 +189,7 @@ class SentencePatternsViewController: NSViewController, LollyProtocol, NSTableVi
     }
 
     func settingsChanged() {
-        vm = SentencePatternsViewModel(settings: AppDelegate.theSettingsViewModel, disposeBag: disposeBag, needCopy: true) {
+        vm = PatternsViewModel(settings: AppDelegate.theSettingsViewModel, disposeBag: disposeBag, needCopy: true) {
             self.doRefresh()
         }
         synth.setVoice(NSSpeechSynthesizer.VoiceName(rawValue: vmSettings.macVoiceName))
@@ -207,7 +207,7 @@ class SentencePatternsViewController: NSViewController, LollyProtocol, NSTableVi
             guard !newPattern.isEmpty else {return}
             let item = vm.newSentencePattern()
             item.PATTERN = vm.vmSettings.autoCorrectInput(text: newPattern)
-            SentencePatternsViewModel.create(item: item).subscribe(onNext: {
+            PatternsViewModel.create(item: item).subscribe(onNext: {
                 item.ID = $0
                 self.vm.arrPatterns.append(item)
                 self.tvPatterns.reloadData()
@@ -253,7 +253,7 @@ class SentencePatternsViewController: NSViewController, LollyProtocol, NSTableVi
     }
 
     @IBAction func addWebPage(_ sender: AnyObject) {
-        let detailVC = self.storyboard!.instantiateController(withIdentifier: "SentencePatternsWebPageViewController") as! SentencePatternsWebPageViewController
+        let detailVC = self.storyboard!.instantiateController(withIdentifier: "PatternsWebPageViewController") as! PatternsWebPageViewController
         detailVC.vm = vm
         detailVC.item = vm.newLangPatternWebPage(patternid: selectedPatternID, pattern: selectedPattern)
         detailVC.complete = { self.tvWebPages.reloadData(); self.addWebPage(self) }
@@ -261,7 +261,7 @@ class SentencePatternsViewController: NSViewController, LollyProtocol, NSTableVi
     }
 
     @IBAction func editWebPage(_ sender: AnyObject) {
-        let detailVC = self.storyboard!.instantiateController(withIdentifier: "SentencePatternsWebPageViewController") as! SentencePatternsWebPageViewController
+        let detailVC = self.storyboard!.instantiateController(withIdentifier: "PatternsWebPageViewController") as! PatternsWebPageViewController
         detailVC.vm = vm
         let i = tvPatterns.selectedRow
         detailVC.item = MPatternWebPage()
@@ -306,7 +306,7 @@ class SentencePatternsViewController: NSViewController, LollyProtocol, NSTableVi
     }
 }
 
-class SentencePatternsWindowController: NSWindowController, LollyProtocol, NSWindowDelegate, NSTextFieldDelegate {
+class PatternsWindowController: NSWindowController, LollyProtocol, NSWindowDelegate, NSTextFieldDelegate {
     
     @IBOutlet weak var toolbar: NSToolbar!
     @IBOutlet weak var scSpeak: NSSegmentedControl!

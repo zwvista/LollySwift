@@ -1,5 +1,5 @@
 //
-//  SentencePatternsWebPageViewController.swift
+//  PatternsWebPageViewController.swift
 //  LollySwiftMac
 //
 //  Created by 趙偉 on 2020/01/01.
@@ -10,9 +10,9 @@ import Cocoa
 import RxSwift
 
 @objcMembers
-class SentencePatternsWebPageViewController: NSViewController {
+class PatternsWebPageViewController: NSViewController {
     
-    var vm: SentencePatternsViewModel!
+    var vm: PatternsViewModel!
     var complete: (() -> Void)?
     var item: MPatternWebPage!
     var isAdd: Bool!
@@ -41,12 +41,12 @@ class SentencePatternsWebPageViewController: NSViewController {
         self.commitEditing()
         if isAdd {
             vm.arrWebPages.append(item)
-            SentencePatternsViewModel.createWebPage(item: item).subscribe(onNext: {
+            PatternsViewModel.createWebPage(item: item).subscribe(onNext: {
                 self.item.ID = $0
                 self.complete?()
             }).disposed(by: disposeBag)
         } else {
-            SentencePatternsViewModel.updateWebPage(item: item).subscribe {
+            PatternsViewModel.updateWebPage(item: item).subscribe {
                 self.complete?()
             }.disposed(by: disposeBag)
         }
