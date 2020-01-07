@@ -23,7 +23,7 @@ class PatternsViewModel: NSObject {
     }
     
     func reload() -> Observable<()> {
-        return MPattern.getSentenceDataByLang(vmSettings.selectedTextbook!.LANGID).map {
+        return MPattern.getDataByLang(vmSettings.selectedTextbook!.LANGID).map {
             self.arrPatterns = $0
         }
     }
@@ -51,7 +51,7 @@ class PatternsViewModel: NSObject {
         return MPattern.delete(id)
     }
     
-    func newSentencePattern() -> MPattern {
+    func newPattern() -> MPattern {
         let item = MPattern()
         item.LANGID = vmSettings.selectedLang.ID
         return item

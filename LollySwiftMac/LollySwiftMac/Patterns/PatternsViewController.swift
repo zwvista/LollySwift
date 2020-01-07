@@ -205,7 +205,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
         guard code == NSReturnTextMovement else {return}
         if textfield === tfNewPattern {
             guard !newPattern.isEmpty else {return}
-            let item = vm.newSentencePattern()
+            let item = vm.newPattern()
             item.PATTERN = vm.vmSettings.autoCorrectInput(text: newPattern)
             PatternsViewModel.create(item: item).subscribe(onNext: {
                 item.ID = $0
@@ -234,7 +234,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     @IBAction func addPattern(_ sender: AnyObject) {
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "PatternsDetailViewController") as! PatternsDetailViewController
         detailVC.vm = vm
-        detailVC.item = vm.newSentencePattern()
+        detailVC.item = vm.newPattern()
         detailVC.complete = { self.tvPatterns.reloadData(); self.addPattern(self) }
         self.presentAsSheet(detailVC)
     }

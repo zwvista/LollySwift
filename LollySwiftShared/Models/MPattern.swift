@@ -26,7 +26,7 @@ class MPattern: NSObject, Codable {
         NOTE = x.NOTE
     }
 
-    static func getSentenceDataByLang(_ langid: Int) -> Observable<[MPattern]> {
+    static func getDataByLang(_ langid: Int) -> Observable<[MPattern]> {
         // SQL: SELECT * FROM PATTERNS WHERE LANGID=?
         let url = "\(CommonApi.url)PATTERNS?filter=LANGID,eq,\(langid)&order=PATTERN"
         return RestApi.getRecords(url: url)
