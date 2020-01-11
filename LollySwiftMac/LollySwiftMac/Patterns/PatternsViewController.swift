@@ -255,7 +255,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     @IBAction func addWebPage(_ sender: AnyObject) {
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "PatternsWebPageViewController") as! PatternsWebPageViewController
         detailVC.vm = vm
-        detailVC.item = vm.newLangPatternWebPage(patternid: selectedPatternID, pattern: selectedPattern)
+        detailVC.item = vm.newPatternWebPage(patternid: selectedPatternID, pattern: selectedPattern)
         detailVC.complete = { self.tvWebPages.reloadData(); self.addWebPage(self) }
         self.presentAsSheet(detailVC)
     }

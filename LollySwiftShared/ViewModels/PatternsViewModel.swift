@@ -75,7 +75,7 @@ class PatternsViewModel: NSObject {
         return MPatternWebPage.delete(id)
     }
     
-    func newLangPatternWebPage(patternid: Int, pattern: String) -> MPatternWebPage {
+    func newPatternWebPage(patternid: Int, pattern: String) -> MPatternWebPage {
         let item = MPatternWebPage()
         item.PATTERNID = patternid
         item.PATTERN = pattern

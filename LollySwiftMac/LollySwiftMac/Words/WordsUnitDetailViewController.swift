@@ -41,7 +41,7 @@ class WordsUnitDetailViewController: NSViewController, NSTableViewDataSource, NS
         acUnits.content = item.textbook.arrUnits
         acParts.content = item.textbook.arrParts
         isAdd = item.ID == 0
-        guard isAdd else {return}
+        guard !isAdd else {return}
         vmSingle = SingleWordViewModel(word: item.WORD, settings: vm.vmSettings, disposeBag: disposeBag) {
             self.tableView.reloadData()
         }
