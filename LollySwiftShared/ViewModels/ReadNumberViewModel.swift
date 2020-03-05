@@ -16,8 +16,8 @@ class ReadNumber {
         let num = num % 1_0000_0000
         func f(n: Int, unit: String) -> String {
             let (n4, n3, n2, n1) = (n / 1000, n % 1000 / 100, n % 100 / 10, n % 10)
-            var s = n4 == 0 ? "" : numbers4[n4]
-            s += n3 == 0 ? "" : numbers3[n3]
+            var s = n4 == 0 ? "" : numbers4[n4 - 1]
+            s += n3 == 0 ? "" : numbers3[n3 - 1]
             s += n2 == 0 ? "" : n2 == 1 ? numbers1[10] : numbers1[n2] + numbers1[10]
             s += n1 == 0 ? "" : numbers1[n1]
             return s + unit
