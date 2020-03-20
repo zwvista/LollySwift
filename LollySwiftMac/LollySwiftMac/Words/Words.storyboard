@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15702"/>
-        <plugIn identifier="com.apple.WebKit2IBPlugin" version="15702"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15705"/>
+        <plugIn identifier="com.apple.WebKit2IBPlugin" version="15705"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -355,7 +354,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" misplaced="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2hs-X4-l5R">
-                                <rect key="frame" x="0.0" y="544" width="731" height="32"/>
+                                <rect key="frame" x="0.0" y="544" width="680" height="32"/>
                                 <subviews>
                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="E8d-BH-EMc">
                                         <rect key="frame" x="6" y="5" width="96" height="21"/>
@@ -368,6 +367,7 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                         <connections>
+                                            <action selector="addNewWord:" target="F8i-pe-Ate" id="yEt-2S-3Pq"/>
                                             <binding destination="F8i-pe-Ate" name="value" keyPath="newWord" id="Ddq-61-gRU">
                                                 <dictionary key="options">
                                                     <string key="NSMultipleValuesPlaceholder">New Word</string>
@@ -376,44 +376,42 @@
                                                     <string key="NSNullPlaceholder">New Word</string>
                                                 </dictionary>
                                             </binding>
-                                            <outlet property="delegate" destination="F8i-pe-Ate" id="ob3-mw-6dQ"/>
                                         </connections>
                                     </textField>
                                     <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IWY-YU-8ee">
-                                        <rect key="frame" x="107" y="5" width="242" height="21"/>
+                                        <rect key="frame" x="107" y="5" width="191" height="21"/>
                                         <subviews>
                                             <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RtU-w4-rmU">
-                                                <rect key="frame" x="-2" y="-2" width="150" height="24"/>
+                                                <rect key="frame" x="-2" y="-2" width="99" height="24"/>
                                                 <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="gmR-VQ-F1T">
                                                     <font key="font" metaFont="system"/>
                                                     <segments>
-                                                        <segment label="None" width="40" selected="YES"/>
-                                                        <segment label="Word" width="52" tag="1"/>
-                                                        <segment label="Note"/>
+                                                        <segment label="Word" width="40" selected="YES"/>
+                                                        <segment label="Note" width="52" tag="1"/>
                                                     </segments>
                                                 </segmentedCell>
                                                 <connections>
                                                     <action selector="filterWord:" target="F8i-pe-Ate" id="hdV-BY-6az"/>
                                                 </connections>
                                             </segmentedControl>
-                                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ntb-I3-XGS">
-                                                <rect key="frame" x="146" y="0.0" width="96" height="21"/>
+                                            <searchField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ntb-I3-XGS">
+                                                <rect key="frame" x="95" y="0.0" width="96" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="96" id="tuA-jr-exd"/>
                                                 </constraints>
-                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Filter" drawsBackground="YES" id="p7g-Xg-FQh">
+                                                <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" placeholderString="Filter" drawsBackground="YES" sendsSearchStringImmediately="YES" sendsWholeSearchString="YES" id="p7g-Xg-FQh">
                                                     <font key="font" usesAppearanceFont="YES"/>
                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     <connections>
                                                         <binding destination="F8i-pe-Ate" name="value" keyPath="textFilter" id="qAO-Hp-2RZ"/>
                                                     </connections>
-                                                </textFieldCell>
+                                                </searchFieldCell>
                                                 <connections>
                                                     <binding destination="F8i-pe-Ate" name="value" keyPath="textFilter" id="YWM-dh-fE8"/>
-                                                    <outlet property="delegate" destination="F8i-pe-Ate" id="Zm7-hq-rEG"/>
+                                                    <outlet property="delegate" destination="F8i-pe-Ate" id="YQJ-cI-ymr"/>
                                                 </connections>
-                                            </textField>
+                                            </searchField>
                                         </subviews>
                                         <visibilityPriorities>
                                             <integer value="1000"/>
@@ -425,7 +423,7 @@
                                         </customSpacing>
                                     </stackView>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="azS-bq-eKL">
-                                        <rect key="frame" x="352" y="7" width="110" height="18"/>
+                                        <rect key="frame" x="301" y="7" width="110" height="18"/>
                                         <buttonCell key="cell" type="check" title="Level&gt;=0 Only" bezelStyle="regularSquare" imagePosition="left" inset="2" id="knB-VA-rN0">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -436,7 +434,7 @@
                                         </connections>
                                     </button>
                                     <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xRk-MG-tIl">
-                                        <rect key="frame" x="465" y="5" width="266" height="21"/>
+                                        <rect key="frame" x="414" y="5" width="266" height="21"/>
                                         <subviews>
                                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vJr-9d-1wg">
                                                 <rect key="frame" x="0.0" y="0.0" width="200" height="21"/>
@@ -520,7 +518,7 @@
                                                             <tableColumns>
                                                                 <tableColumn identifier="UNITSTR" width="40" minWidth="40" maxWidth="1000" id="oMd-aW-B35">
                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="UNIT">
-                                                                        <font key="font" metaFont="menu" size="11"/>
+                                                                        <font key="font" metaFont="label" size="11"/>
                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                     </tableHeaderCell>
@@ -557,7 +555,7 @@
                                                                 </tableColumn>
                                                                 <tableColumn identifier="PARTSTR" width="60" minWidth="60" maxWidth="1000" id="CC9-Pd-Nya">
                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="PART">
-                                                                        <font key="font" metaFont="menu" size="11"/>
+                                                                        <font key="font" metaFont="label" size="11"/>
                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                     </tableHeaderCell>
@@ -594,7 +592,7 @@
                                                                 </tableColumn>
                                                                 <tableColumn identifier="SEQNUM" width="60" minWidth="60" maxWidth="1000" id="gVT-7q-xsr">
                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="SEQNUM">
-                                                                        <font key="font" metaFont="menu" size="11"/>
+                                                                        <font key="font" metaFont="label" size="11"/>
                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                     </tableHeaderCell>
@@ -631,7 +629,7 @@
                                                                 </tableColumn>
                                                                 <tableColumn identifier="WORD" width="80" minWidth="40" maxWidth="1000" id="d8a-wj-MVV">
                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="WORD">
-                                                                        <font key="font" metaFont="menu" size="11"/>
+                                                                        <font key="font" metaFont="label" size="11"/>
                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                     </tableHeaderCell>
@@ -671,7 +669,7 @@
                                                                 </tableColumn>
                                                                 <tableColumn identifier="NOTE" width="80" minWidth="80" maxWidth="1000" id="YC9-WM-oeK">
                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="NOTE">
-                                                                        <font key="font" metaFont="menu" size="11"/>
+                                                                        <font key="font" metaFont="label" size="11"/>
                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                     </tableHeaderCell>
@@ -711,7 +709,7 @@
                                                                 </tableColumn>
                                                                 <tableColumn identifier="LEVEL" width="40" minWidth="40" maxWidth="1000" id="6MZ-k7-XZz" userLabel="LEVEL">
                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="LEVEL">
-                                                                        <font key="font" metaFont="menu" size="11"/>
+                                                                        <font key="font" metaFont="label" size="11"/>
                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                     </tableHeaderCell>
@@ -751,7 +749,7 @@
                                                                 </tableColumn>
                                                                 <tableColumn identifier="ACCURACY" width="60" minWidth="60" maxWidth="1000" id="Kiu-Sc-2x2">
                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="ACCURACY">
-                                                                        <font key="font" metaFont="menu" size="11"/>
+                                                                        <font key="font" metaFont="label" size="11"/>
                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                     </tableHeaderCell>
@@ -791,7 +789,7 @@
                                                                 </tableColumn>
                                                                 <tableColumn identifier="WORDID" width="60" minWidth="60" maxWidth="1000" id="f5Q-RD-HWk" userLabel="WORDID">
                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="WORDID">
-                                                                        <font key="font" metaFont="menu" size="11"/>
+                                                                        <font key="font" metaFont="label" size="11"/>
                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                     </tableHeaderCell>
@@ -828,7 +826,7 @@
                                                                 </tableColumn>
                                                                 <tableColumn identifier="ID" width="60" minWidth="60" maxWidth="1000" id="1FB-aq-TMt" userLabel="ID">
                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="ID">
-                                                                        <font key="font" metaFont="menu" size="11"/>
+                                                                        <font key="font" metaFont="label" size="11"/>
                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                     </tableHeaderCell>
@@ -924,7 +922,7 @@
                                                                             <tableColumns>
                                                                                 <tableColumn identifier="ID" width="60" minWidth="60" maxWidth="1000" id="3bH-yX-Rv7" userLabel="ID">
                                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="ID">
-                                                                                        <font key="font" metaFont="menu" size="11"/>
+                                                                                        <font key="font" metaFont="label" size="11"/>
                                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                                     </tableHeaderCell>
@@ -961,7 +959,7 @@
                                                                                 </tableColumn>
                                                                                 <tableColumn identifier="PHRASE" width="300" minWidth="100" maxWidth="1000" id="IYu-Eo-LDA">
                                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="PHRASE">
-                                                                                        <font key="font" metaFont="menu" size="11"/>
+                                                                                        <font key="font" metaFont="label" size="11"/>
                                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                                     </tableHeaderCell>
@@ -998,7 +996,7 @@
                                                                                 </tableColumn>
                                                                                 <tableColumn identifier="TRANSLATION" width="391" minWidth="100" maxWidth="1000" id="m6g-PP-jsn">
                                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="TRANSLATION">
-                                                                                        <font key="font" metaFont="menu" size="11"/>
+                                                                                        <font key="font" metaFont="label" size="11"/>
                                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                                     </tableHeaderCell>
@@ -1438,7 +1436,7 @@ Gw
                                             <tableColumns>
                                                 <tableColumn identifier="TEXTBOOKNAME" width="150" minWidth="150" maxWidth="1000" id="cb9-NI-KRe" userLabel="TEXTBOOKNAME">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="TEXTBOOKNAME">
-                                                        <font key="font" metaFont="menu" size="11"/>
+                                                        <font key="font" metaFont="label" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -1475,7 +1473,7 @@ Gw
                                                 </tableColumn>
                                                 <tableColumn identifier="UNITSTR" width="40" minWidth="40" maxWidth="1000" id="DoC-dz-R9q">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="UNIT">
-                                                        <font key="font" metaFont="menu" size="11"/>
+                                                        <font key="font" metaFont="label" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -1512,7 +1510,7 @@ Gw
                                                 </tableColumn>
                                                 <tableColumn identifier="PARTSTR" width="60" minWidth="60" maxWidth="1000" id="WXa-fN-hIv">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="PART">
-                                                        <font key="font" metaFont="menu" size="11"/>
+                                                        <font key="font" metaFont="label" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -1549,7 +1547,7 @@ Gw
                                                 </tableColumn>
                                                 <tableColumn identifier="SEQNUM" width="60" minWidth="60" maxWidth="1000" id="3HC-2C-zSd">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="SEQNUM">
-                                                        <font key="font" metaFont="menu" size="11"/>
+                                                        <font key="font" metaFont="label" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -1586,7 +1584,7 @@ Gw
                                                 </tableColumn>
                                                 <tableColumn identifier="WORD" width="80" minWidth="40" maxWidth="1000" id="DOt-eh-mq7">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="WORD">
-                                                        <font key="font" metaFont="menu" size="11"/>
+                                                        <font key="font" metaFont="label" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -1623,7 +1621,7 @@ Gw
                                                 </tableColumn>
                                                 <tableColumn identifier="NOTE" width="80" minWidth="80" maxWidth="1000" id="obe-M2-ysV">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="NOTE">
-                                                        <font key="font" metaFont="menu" size="11"/>
+                                                        <font key="font" metaFont="label" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -1660,7 +1658,7 @@ Gw
                                                 </tableColumn>
                                                 <tableColumn identifier="LEVEL" width="40" minWidth="40" maxWidth="1000" id="JUm-5c-mVa" userLabel="LEVEL">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="LEVEL">
-                                                        <font key="font" metaFont="menu" size="11"/>
+                                                        <font key="font" metaFont="label" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -1697,7 +1695,7 @@ Gw
                                                 </tableColumn>
                                                 <tableColumn identifier="ACCURACY" width="60" minWidth="60" maxWidth="1000" id="NOC-7H-y46">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="ACCURACY">
-                                                        <font key="font" metaFont="menu" size="11"/>
+                                                        <font key="font" metaFont="label" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -1734,7 +1732,7 @@ Gw
                                                 </tableColumn>
                                                 <tableColumn identifier="WORDID" width="60" minWidth="60" maxWidth="1000" id="mXZ-Yo-nBl" userLabel="WORDID">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="WORDID">
-                                                        <font key="font" metaFont="menu" size="11"/>
+                                                        <font key="font" metaFont="label" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -1771,7 +1769,7 @@ Gw
                                                 </tableColumn>
                                                 <tableColumn identifier="ID" width="60" minWidth="60" maxWidth="1000" id="eBG-Vw-6VP" userLabel="ID">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="ID">
-                                                        <font key="font" metaFont="menu" size="11"/>
+                                                        <font key="font" metaFont="label" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -1982,7 +1980,7 @@ DQ
                                             <tableColumns>
                                                 <tableColumn identifier="CHECK" width="40" minWidth="40" maxWidth="1000" id="qgs-Cv-Fyt">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
-                                                        <font key="font" metaFont="menu" size="11"/>
+                                                        <font key="font" metaFont="label" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -2017,7 +2015,7 @@ DQ
                                                 </tableColumn>
                                                 <tableColumn identifier="UNITSTR" width="40" minWidth="40" maxWidth="1000" id="jXR-B6-QH6">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="UNIT">
-                                                        <font key="font" metaFont="menu" size="11"/>
+                                                        <font key="font" metaFont="label" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -2054,7 +2052,7 @@ DQ
                                                 </tableColumn>
                                                 <tableColumn identifier="PARTSTR" width="60" minWidth="60" maxWidth="1000" id="wDZ-vP-a33">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="PART">
-                                                        <font key="font" metaFont="menu" size="11"/>
+                                                        <font key="font" metaFont="label" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -2091,7 +2089,7 @@ DQ
                                                 </tableColumn>
                                                 <tableColumn identifier="SEQNUM" width="60" minWidth="60" maxWidth="1000" id="kXT-3O-fRH">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="SEQNUM">
-                                                        <font key="font" metaFont="menu" size="11"/>
+                                                        <font key="font" metaFont="label" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -2128,7 +2126,7 @@ DQ
                                                 </tableColumn>
                                                 <tableColumn identifier="WORD" width="80" minWidth="40" maxWidth="1000" id="nBN-7e-nCo">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="WORD">
-                                                        <font key="font" metaFont="menu" size="11"/>
+                                                        <font key="font" metaFont="label" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -2165,7 +2163,7 @@ DQ
                                                 </tableColumn>
                                                 <tableColumn identifier="NOTE" width="80" minWidth="80" maxWidth="1000" id="V6i-Dx-VF5">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="NOTE">
-                                                        <font key="font" metaFont="menu" size="11"/>
+                                                        <font key="font" metaFont="label" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -2202,7 +2200,7 @@ DQ
                                                 </tableColumn>
                                                 <tableColumn identifier="LEVEL" width="40" minWidth="40" maxWidth="1000" id="eTD-3g-nZa" userLabel="LEVEL">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="LEVEL">
-                                                        <font key="font" metaFont="menu" size="11"/>
+                                                        <font key="font" metaFont="label" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -2239,7 +2237,7 @@ DQ
                                                 </tableColumn>
                                                 <tableColumn identifier="ACCURACY" width="60" minWidth="60" maxWidth="1000" id="j6N-6K-w3W">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="ACCURACY">
-                                                        <font key="font" metaFont="menu" size="11"/>
+                                                        <font key="font" metaFont="label" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -2276,7 +2274,7 @@ DQ
                                                 </tableColumn>
                                                 <tableColumn identifier="WORDID" width="60" minWidth="60" maxWidth="1000" id="joE-qb-XcR" userLabel="WORDID">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="WORDID">
-                                                        <font key="font" metaFont="menu" size="11"/>
+                                                        <font key="font" metaFont="label" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -2313,7 +2311,7 @@ DQ
                                                 </tableColumn>
                                                 <tableColumn identifier="ID" width="60" minWidth="60" maxWidth="1000" id="ejl-n8-lna" userLabel="ID">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="ID">
-                                                        <font key="font" metaFont="menu" size="11"/>
+                                                        <font key="font" metaFont="label" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -2974,7 +2972,7 @@ Gw
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" misplaced="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BlQ-ed-2z2">
-                                <rect key="frame" x="0.0" y="542" width="731" height="32"/>
+                                <rect key="frame" x="0.0" y="542" width="680" height="32"/>
                                 <subviews>
                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jNk-si-JUF">
                                         <rect key="frame" x="6" y="5" width="96" height="21"/>
@@ -2987,6 +2985,7 @@ Gw
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                         <connections>
+                                            <action selector="addNewWord:" target="UkS-Xi-ogF" id="Tx0-Hn-BrU"/>
                                             <binding destination="UkS-Xi-ogF" name="value" keyPath="newWord" id="v5U-Bn-9RF">
                                                 <dictionary key="options">
                                                     <string key="NSMultipleValuesPlaceholder">New Word</string>
@@ -2995,44 +2994,42 @@ Gw
                                                     <string key="NSNullPlaceholder">New Word</string>
                                                 </dictionary>
                                             </binding>
-                                            <outlet property="delegate" destination="UkS-Xi-ogF" id="qRG-sZ-9Mi"/>
                                         </connections>
                                     </textField>
                                     <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QPS-jS-KzP">
-                                        <rect key="frame" x="107" y="5" width="242" height="21"/>
+                                        <rect key="frame" x="107" y="5" width="191" height="21"/>
                                         <subviews>
                                             <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6UI-Xq-Ybp">
-                                                <rect key="frame" x="-2" y="-2" width="150" height="24"/>
+                                                <rect key="frame" x="-2" y="-2" width="99" height="24"/>
                                                 <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="eAy-V0-MAi">
                                                     <font key="font" metaFont="system"/>
                                                     <segments>
-                                                        <segment label="None" width="40" selected="YES"/>
-                                                        <segment label="Word" width="52" tag="1"/>
-                                                        <segment label="Note"/>
+                                                        <segment label="Word" width="40" selected="YES"/>
+                                                        <segment label="Note" width="52" tag="1"/>
                                                     </segments>
                                                 </segmentedCell>
                                                 <connections>
                                                     <action selector="filterWord:" target="UkS-Xi-ogF" id="23s-pn-6d2"/>
                                                 </connections>
                                             </segmentedControl>
-                                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lHN-YD-8mt">
-                                                <rect key="frame" x="146" y="0.0" width="96" height="21"/>
+                                            <searchField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lHN-YD-8mt">
+                                                <rect key="frame" x="95" y="0.0" width="96" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="96" id="A1r-OT-h3N"/>
                                                 </constraints>
-                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="zqX-zk-elq">
+                                                <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="zqX-zk-elq">
                                                     <font key="font" usesAppearanceFont="YES"/>
                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     <connections>
                                                         <binding destination="UkS-Xi-ogF" name="value" keyPath="textFilter" id="Sgp-VU-e42"/>
                                                     </connections>
-                                                </textFieldCell>
+                                                </searchFieldCell>
                                                 <connections>
                                                     <binding destination="UkS-Xi-ogF" name="value" keyPath="textFilter" id="ugU-ev-Fwp"/>
                                                     <outlet property="delegate" destination="UkS-Xi-ogF" id="3lf-dw-pry"/>
                                                 </connections>
-                                            </textField>
+                                            </searchField>
                                         </subviews>
                                         <visibilityPriorities>
                                             <integer value="1000"/>
@@ -3044,7 +3041,7 @@ Gw
                                         </customSpacing>
                                     </stackView>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kMc-8z-lz9">
-                                        <rect key="frame" x="352" y="7" width="110" height="18"/>
+                                        <rect key="frame" x="301" y="7" width="110" height="18"/>
                                         <buttonCell key="cell" type="check" title="Level&gt;=0 Only" bezelStyle="regularSquare" imagePosition="left" inset="2" id="g1t-62-FDD">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -3055,7 +3052,7 @@ Gw
                                         </connections>
                                     </button>
                                     <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NCm-wD-K9l">
-                                        <rect key="frame" x="465" y="5" width="266" height="21"/>
+                                        <rect key="frame" x="414" y="5" width="266" height="21"/>
                                         <subviews>
                                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Xge-cS-C5w">
                                                 <rect key="frame" x="0.0" y="0.0" width="200" height="21"/>
@@ -3137,7 +3134,7 @@ Gw
                                                             <tableColumns>
                                                                 <tableColumn identifier="ID" width="60" minWidth="60" maxWidth="1000" id="eK7-OD-uvX" userLabel="ID">
                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="ID">
-                                                                        <font key="font" metaFont="menu" size="11"/>
+                                                                        <font key="font" metaFont="label" size="11"/>
                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                     </tableHeaderCell>
@@ -3174,7 +3171,7 @@ Gw
                                                                 </tableColumn>
                                                                 <tableColumn identifier="WORD" width="80" minWidth="40" maxWidth="1000" id="Pzp-HC-rj8">
                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="WORD">
-                                                                        <font key="font" metaFont="menu" size="11"/>
+                                                                        <font key="font" metaFont="label" size="11"/>
                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                     </tableHeaderCell>
@@ -3214,7 +3211,7 @@ Gw
                                                                 </tableColumn>
                                                                 <tableColumn identifier="NOTE" width="78" minWidth="40" maxWidth="1000" id="GTF-h7-dI1">
                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="NOTE">
-                                                                        <font key="font" metaFont="menu" size="11"/>
+                                                                        <font key="font" metaFont="label" size="11"/>
                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                     </tableHeaderCell>
@@ -3254,7 +3251,7 @@ Gw
                                                                 </tableColumn>
                                                                 <tableColumn identifier="LEVEL" width="40" minWidth="40" maxWidth="1000" id="ZBf-gx-Xq7" userLabel="LEVEL">
                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="LEVEL">
-                                                                        <font key="font" metaFont="menu" size="11"/>
+                                                                        <font key="font" metaFont="label" size="11"/>
                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                     </tableHeaderCell>
@@ -3294,7 +3291,7 @@ Gw
                                                                 </tableColumn>
                                                                 <tableColumn identifier="ACCURACY" width="60" minWidth="60" maxWidth="1000" id="ira-6w-OaJ">
                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="ACCURACY">
-                                                                        <font key="font" metaFont="menu" size="11"/>
+                                                                        <font key="font" metaFont="label" size="11"/>
                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                     </tableHeaderCell>
@@ -3390,7 +3387,7 @@ Gw
                                                                             <tableColumns>
                                                                                 <tableColumn identifier="ID" width="60" minWidth="60" maxWidth="1000" id="tvp-yk-eQj" userLabel="ID">
                                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="ID">
-                                                                                        <font key="font" metaFont="menu" size="11"/>
+                                                                                        <font key="font" metaFont="label" size="11"/>
                                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                                     </tableHeaderCell>
@@ -3427,7 +3424,7 @@ Gw
                                                                                 </tableColumn>
                                                                                 <tableColumn identifier="PHRASE" width="300" minWidth="100" maxWidth="1000" id="ZKk-Ur-bLZ">
                                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="PHRASE">
-                                                                                        <font key="font" metaFont="menu" size="11"/>
+                                                                                        <font key="font" metaFont="label" size="11"/>
                                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                                     </tableHeaderCell>
@@ -3464,7 +3461,7 @@ Gw
                                                                                 </tableColumn>
                                                                                 <tableColumn identifier="TRANSLATION" width="387" minWidth="100" maxWidth="1000" id="8r1-uf-s3l">
                                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="TRANSLATION">
-                                                                                        <font key="font" metaFont="menu" size="11"/>
+                                                                                        <font key="font" metaFont="label" size="11"/>
                                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                                     </tableHeaderCell>
@@ -3848,7 +3845,7 @@ Gw
                                             <tableColumns>
                                                 <tableColumn identifier="TEXTBOOKNAME" width="150" minWidth="150" maxWidth="1000" id="wnw-1s-uFy" userLabel="TEXTBOOKNAME">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="TEXTBOOKNAME">
-                                                        <font key="font" metaFont="menu" size="11"/>
+                                                        <font key="font" metaFont="label" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -3885,7 +3882,7 @@ Gw
                                                 </tableColumn>
                                                 <tableColumn identifier="UNITSTR" width="40" minWidth="40" maxWidth="1000" id="RcO-Fm-GeJ">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="UNIT">
-                                                        <font key="font" metaFont="menu" size="11"/>
+                                                        <font key="font" metaFont="label" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -3922,7 +3919,7 @@ Gw
                                                 </tableColumn>
                                                 <tableColumn identifier="PARTSTR" width="60" minWidth="60" maxWidth="1000" id="qkv-9H-qMA">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="PART">
-                                                        <font key="font" metaFont="menu" size="11"/>
+                                                        <font key="font" metaFont="label" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -3959,7 +3956,7 @@ Gw
                                                 </tableColumn>
                                                 <tableColumn identifier="SEQNUM" width="60" minWidth="60" maxWidth="1000" id="gdS-po-fKn">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="SEQNUM">
-                                                        <font key="font" metaFont="menu" size="11"/>
+                                                        <font key="font" metaFont="label" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -3996,7 +3993,7 @@ Gw
                                                 </tableColumn>
                                                 <tableColumn identifier="WORD" width="80" minWidth="40" maxWidth="1000" id="efK-3Y-fzb">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="WORD">
-                                                        <font key="font" metaFont="menu" size="11"/>
+                                                        <font key="font" metaFont="label" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -4033,7 +4030,7 @@ Gw
                                                 </tableColumn>
                                                 <tableColumn identifier="NOTE" width="80" minWidth="80" maxWidth="1000" id="Ofo-Dq-4D9">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="NOTE">
-                                                        <font key="font" metaFont="menu" size="11"/>
+                                                        <font key="font" metaFont="label" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -4070,7 +4067,7 @@ Gw
                                                 </tableColumn>
                                                 <tableColumn identifier="LEVEL" width="40" minWidth="40" maxWidth="1000" id="8Gf-FE-nmx" userLabel="LEVEL">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="LEVEL">
-                                                        <font key="font" metaFont="menu" size="11"/>
+                                                        <font key="font" metaFont="label" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -4107,7 +4104,7 @@ Gw
                                                 </tableColumn>
                                                 <tableColumn identifier="ACCURACY" width="60" minWidth="60" maxWidth="1000" id="Ml2-D6-NcA">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="ACCURACY">
-                                                        <font key="font" metaFont="menu" size="11"/>
+                                                        <font key="font" metaFont="label" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -4144,7 +4141,7 @@ Gw
                                                 </tableColumn>
                                                 <tableColumn identifier="WORDID" width="60" minWidth="60" maxWidth="1000" id="A0f-S4-Mnt" userLabel="WORDID">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="WORDID">
-                                                        <font key="font" metaFont="menu" size="11"/>
+                                                        <font key="font" metaFont="label" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -4181,7 +4178,7 @@ Gw
                                                 </tableColumn>
                                                 <tableColumn identifier="ID" width="60" minWidth="60" maxWidth="1000" id="uaO-6o-tXA" userLabel="ID">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="ID">
-                                                        <font key="font" metaFont="menu" size="11"/>
+                                                        <font key="font" metaFont="label" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -4597,43 +4594,42 @@ Gw
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" misplaced="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="591-dl-hBy">
-                                <rect key="frame" x="0.0" y="542" width="707" height="32"/>
+                                <rect key="frame" x="0.0" y="542" width="656" height="32"/>
                                 <subviews>
                                     <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aST-t9-Wtn">
-                                        <rect key="frame" x="6" y="5" width="242" height="21"/>
+                                        <rect key="frame" x="6" y="5" width="191" height="21"/>
                                         <subviews>
                                             <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RYe-rB-ZXc">
-                                                <rect key="frame" x="-2" y="-2" width="150" height="24"/>
+                                                <rect key="frame" x="-2" y="-2" width="99" height="24"/>
                                                 <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="mc1-zg-2Yg">
                                                     <font key="font" metaFont="system"/>
                                                     <segments>
-                                                        <segment label="None" width="40" selected="YES"/>
-                                                        <segment label="Word" width="52" tag="1"/>
-                                                        <segment label="Note"/>
+                                                        <segment label="Word" width="40" selected="YES"/>
+                                                        <segment label="Note" width="52" tag="1"/>
                                                     </segments>
                                                 </segmentedCell>
                                                 <connections>
                                                     <action selector="filterWord:" target="S5w-0q-IQt" id="heq-q8-RJX"/>
                                                 </connections>
                                             </segmentedControl>
-                                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="q0R-YJ-VuK">
-                                                <rect key="frame" x="146" y="0.0" width="96" height="21"/>
+                                            <searchField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="q0R-YJ-VuK">
+                                                <rect key="frame" x="95" y="0.0" width="96" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="96" id="3LF-F0-2Z4"/>
                                                 </constraints>
-                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="bdW-MI-v9N">
+                                                <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="bdW-MI-v9N">
                                                     <font key="font" usesAppearanceFont="YES"/>
                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     <connections>
                                                         <binding destination="S5w-0q-IQt" name="value" keyPath="textFilter" id="sGO-JE-NPg"/>
                                                     </connections>
-                                                </textFieldCell>
+                                                </searchFieldCell>
                                                 <connections>
                                                     <binding destination="S5w-0q-IQt" name="value" keyPath="textFilter" id="DOR-Tl-TSH"/>
                                                     <outlet property="delegate" destination="S5w-0q-IQt" id="EwZ-0v-b31"/>
                                                 </connections>
-                                            </textField>
+                                            </searchField>
                                         </subviews>
                                         <visibilityPriorities>
                                             <integer value="1000"/>
@@ -4645,7 +4641,7 @@ Gw
                                         </customSpacing>
                                     </stackView>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NMr-Z8-A1O">
-                                        <rect key="frame" x="251" y="7" width="110" height="18"/>
+                                        <rect key="frame" x="200" y="7" width="110" height="18"/>
                                         <buttonCell key="cell" type="check" title="Level&gt;=0 Only" bezelStyle="regularSquare" imagePosition="left" inset="2" id="bRX-pc-aWN">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -4656,7 +4652,7 @@ Gw
                                         </connections>
                                     </button>
                                     <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bMb-g8-SbI">
-                                        <rect key="frame" x="362" y="2" width="77" height="25"/>
+                                        <rect key="frame" x="311" y="2" width="77" height="25"/>
                                         <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="zrr-aJ-pQb" id="opE-Nq-I27">
                                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -4677,7 +4673,7 @@ Gw
                                         </connections>
                                     </popUpButton>
                                     <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CZL-w4-dfK">
-                                        <rect key="frame" x="441" y="5" width="266" height="21"/>
+                                        <rect key="frame" x="390" y="5" width="266" height="21"/>
                                         <subviews>
                                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PHg-od-JVu">
                                                 <rect key="frame" x="0.0" y="0.0" width="200" height="21"/>
@@ -4759,7 +4755,7 @@ Gw
                                                             <tableColumns>
                                                                 <tableColumn identifier="TEXTBOOKNAME" width="100" minWidth="100" maxWidth="1000" id="PBz-16-shL" userLabel="TEXTBOOKNAME">
                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="TEXTBOOKNAME">
-                                                                        <font key="font" metaFont="menu" size="11"/>
+                                                                        <font key="font" metaFont="label" size="11"/>
                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                     </tableHeaderCell>
@@ -4796,7 +4792,7 @@ Gw
                                                                 </tableColumn>
                                                                 <tableColumn identifier="UNITSTR" width="60" minWidth="60" maxWidth="1000" id="mqo-9u-1Wo">
                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="UNIT">
-                                                                        <font key="font" metaFont="menu" size="11"/>
+                                                                        <font key="font" metaFont="label" size="11"/>
                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                     </tableHeaderCell>
@@ -4833,7 +4829,7 @@ Gw
                                                                 </tableColumn>
                                                                 <tableColumn identifier="PARTSTR" width="60" minWidth="60" maxWidth="1000" id="g68-cD-kdN">
                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="PART">
-                                                                        <font key="font" metaFont="menu" size="11"/>
+                                                                        <font key="font" metaFont="label" size="11"/>
                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                     </tableHeaderCell>
@@ -4870,7 +4866,7 @@ Gw
                                                                 </tableColumn>
                                                                 <tableColumn identifier="SEQNUM" width="60" minWidth="60" maxWidth="1000" id="lC9-5X-RHE">
                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="SEQNUM">
-                                                                        <font key="font" metaFont="menu" size="11"/>
+                                                                        <font key="font" metaFont="label" size="11"/>
                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                     </tableHeaderCell>
@@ -4907,7 +4903,7 @@ Gw
                                                                 </tableColumn>
                                                                 <tableColumn identifier="WORD" width="80" minWidth="40" maxWidth="1000" id="Juu-2Z-Ncp">
                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="WORD">
-                                                                        <font key="font" metaFont="menu" size="11"/>
+                                                                        <font key="font" metaFont="label" size="11"/>
                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                     </tableHeaderCell>
@@ -4947,7 +4943,7 @@ Gw
                                                                 </tableColumn>
                                                                 <tableColumn identifier="NOTE" width="80" minWidth="80" maxWidth="1000" id="Fi6-83-Fv8">
                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="NOTE">
-                                                                        <font key="font" metaFont="menu" size="11"/>
+                                                                        <font key="font" metaFont="label" size="11"/>
                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                     </tableHeaderCell>
@@ -4987,7 +4983,7 @@ Gw
                                                                 </tableColumn>
                                                                 <tableColumn identifier="LEVEL" width="40" minWidth="40" maxWidth="1000" id="nGp-05-xjm" userLabel="LEVEL">
                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="LEVEL">
-                                                                        <font key="font" metaFont="menu" size="11"/>
+                                                                        <font key="font" metaFont="label" size="11"/>
                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                     </tableHeaderCell>
@@ -5027,7 +5023,7 @@ Gw
                                                                 </tableColumn>
                                                                 <tableColumn identifier="ACCURACY" width="60" minWidth="60" maxWidth="1000" id="ryg-jJ-IEG">
                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="ACCURACY">
-                                                                        <font key="font" metaFont="menu" size="11"/>
+                                                                        <font key="font" metaFont="label" size="11"/>
                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                     </tableHeaderCell>
@@ -5064,7 +5060,7 @@ Gw
                                                                 </tableColumn>
                                                                 <tableColumn identifier="WORDID" width="60" minWidth="60" maxWidth="1000" id="DcW-hH-EZL">
                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="WORDID">
-                                                                        <font key="font" metaFont="menu" size="11"/>
+                                                                        <font key="font" metaFont="label" size="11"/>
                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                     </tableHeaderCell>
@@ -5101,7 +5097,7 @@ Gw
                                                                 </tableColumn>
                                                                 <tableColumn identifier="ID" width="60" minWidth="60" maxWidth="1000" id="Z9f-nc-Uhr">
                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="ID">
-                                                                        <font key="font" metaFont="menu" size="11"/>
+                                                                        <font key="font" metaFont="label" size="11"/>
                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                     </tableHeaderCell>
@@ -5197,7 +5193,7 @@ Gw
                                                                             <tableColumns>
                                                                                 <tableColumn identifier="ID" width="60" minWidth="60" maxWidth="1000" id="2Ql-uQ-LLU" userLabel="ID">
                                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="ID">
-                                                                                        <font key="font" metaFont="menu" size="11"/>
+                                                                                        <font key="font" metaFont="label" size="11"/>
                                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                                     </tableHeaderCell>
@@ -5234,7 +5230,7 @@ Gw
                                                                                 </tableColumn>
                                                                                 <tableColumn identifier="PHRASE" width="300" minWidth="100" maxWidth="1000" id="KHp-Ah-Xgw">
                                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="PHRASE">
-                                                                                        <font key="font" metaFont="menu" size="11"/>
+                                                                                        <font key="font" metaFont="label" size="11"/>
                                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                                     </tableHeaderCell>
@@ -5271,7 +5267,7 @@ Gw
                                                                                 </tableColumn>
                                                                                 <tableColumn identifier="TRANSLATION" width="387" minWidth="100" maxWidth="1000" id="ONu-hV-TEc">
                                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="TRANSLATION">
-                                                                                        <font key="font" metaFont="menu" size="11"/>
+                                                                                        <font key="font" metaFont="label" size="11"/>
                                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                                     </tableHeaderCell>
@@ -5778,7 +5774,7 @@ Gw
                                             <tableColumns>
                                                 <tableColumn identifier="TEXTBOOKNAME" width="150" minWidth="150" maxWidth="1000" id="VOw-jf-2H3" userLabel="TEXTBOOKNAME">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="TEXTBOOKNAME">
-                                                        <font key="font" metaFont="menu" size="11"/>
+                                                        <font key="font" metaFont="label" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -5815,7 +5811,7 @@ Gw
                                                 </tableColumn>
                                                 <tableColumn identifier="UNITSTR" width="40" minWidth="40" maxWidth="1000" id="TML-X5-gF4">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="UNIT">
-                                                        <font key="font" metaFont="menu" size="11"/>
+                                                        <font key="font" metaFont="label" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -5852,7 +5848,7 @@ Gw
                                                 </tableColumn>
                                                 <tableColumn identifier="PARTSTR" width="60" minWidth="60" maxWidth="1000" id="IEe-92-gXQ">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="PART">
-                                                        <font key="font" metaFont="menu" size="11"/>
+                                                        <font key="font" metaFont="label" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -5889,7 +5885,7 @@ Gw
                                                 </tableColumn>
                                                 <tableColumn identifier="SEQNUM" width="60" minWidth="60" maxWidth="1000" id="ggM-UQ-PB7">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="SEQNUM">
-                                                        <font key="font" metaFont="menu" size="11"/>
+                                                        <font key="font" metaFont="label" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -5926,7 +5922,7 @@ Gw
                                                 </tableColumn>
                                                 <tableColumn identifier="WORD" width="80" minWidth="40" maxWidth="1000" id="SuJ-iu-sNG">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="WORD">
-                                                        <font key="font" metaFont="menu" size="11"/>
+                                                        <font key="font" metaFont="label" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -5963,7 +5959,7 @@ Gw
                                                 </tableColumn>
                                                 <tableColumn identifier="NOTE" width="80" minWidth="80" maxWidth="1000" id="cPw-ar-ayD">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="NOTE">
-                                                        <font key="font" metaFont="menu" size="11"/>
+                                                        <font key="font" metaFont="label" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -6000,7 +5996,7 @@ Gw
                                                 </tableColumn>
                                                 <tableColumn identifier="LEVEL" width="40" minWidth="40" maxWidth="1000" id="F6B-13-PJz" userLabel="LEVEL">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="LEVEL">
-                                                        <font key="font" metaFont="menu" size="11"/>
+                                                        <font key="font" metaFont="label" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -6037,7 +6033,7 @@ Gw
                                                 </tableColumn>
                                                 <tableColumn identifier="ACCURACY" width="60" minWidth="60" maxWidth="1000" id="f5i-Ed-Fj6">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="ACCURACY">
-                                                        <font key="font" metaFont="menu" size="11"/>
+                                                        <font key="font" metaFont="label" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -6074,7 +6070,7 @@ Gw
                                                 </tableColumn>
                                                 <tableColumn identifier="WORDID" width="60" minWidth="60" maxWidth="1000" id="6XB-vi-CmD" userLabel="WORDID">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="WORDID">
-                                                        <font key="font" metaFont="menu" size="11"/>
+                                                        <font key="font" metaFont="label" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -6111,7 +6107,7 @@ Gw
                                                 </tableColumn>
                                                 <tableColumn identifier="ID" width="60" minWidth="60" maxWidth="1000" id="AON-w0-l9d" userLabel="ID">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="ID">
-                                                        <font key="font" metaFont="menu" size="11"/>
+                                                        <font key="font" metaFont="label" size="11"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -6758,11 +6754,11 @@ Gw
                 <customObject id="eF4-rP-JQ0" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <viewController id="ECR-Tq-pby" customClass="WordsSearchViewController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" misplaced="YES" id="HyV-oU-X8h">
-                        <rect key="frame" x="0.0" y="0.0" width="1200" height="574"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1200" height="548"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e2v-T6-xFM">
-                                <rect key="frame" x="0.0" y="334" width="368" height="32"/>
+                            <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" misplaced="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e2v-T6-xFM">
+                                <rect key="frame" x="0.0" y="516" width="368" height="32"/>
                                 <subviews>
                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Rrd-iU-HLe">
                                         <rect key="frame" x="6" y="5" width="96" height="21"/>
@@ -6775,6 +6771,7 @@ Gw
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                         <connections>
+                                            <action selector="addNewWord:" target="ECR-Tq-pby" id="KuW-GI-oP5"/>
                                             <binding destination="ECR-Tq-pby" name="value" keyPath="newWord" id="CYL-VK-gTR">
                                                 <dictionary key="options">
                                                     <string key="NSMultipleValuesPlaceholder">New Word</string>
@@ -6783,7 +6780,6 @@ Gw
                                                     <string key="NSNullPlaceholder">New Word</string>
                                                 </dictionary>
                                             </binding>
-                                            <outlet property="delegate" destination="ECR-Tq-pby" id="a42-uE-WyS"/>
                                         </connections>
                                     </textField>
                                     <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EOK-2v-SfU">
@@ -6834,21 +6830,21 @@ Gw
                                     <real value="3.4028234663852886e+38"/>
                                 </customSpacing>
                             </stackView>
-                            <splitView arrangesAllSubviews="NO" dividerStyle="paneSplitter" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kJB-Ei-kLH">
-                                <rect key="frame" x="0.0" y="0.0" width="1200" height="334"/>
+                            <splitView misplaced="YES" arrangesAllSubviews="NO" dividerStyle="paneSplitter" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kJB-Ei-kLH">
+                                <rect key="frame" x="0.0" y="0.0" width="1200" height="518"/>
                                 <subviews>
                                     <customView misplaced="YES" id="ooS-dI-IvX">
-                                        <rect key="frame" x="0.0" y="0.0" width="432" height="334"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="432" height="518"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
-                                            <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3oW-mT-ATf">
-                                                <rect key="frame" x="0.0" y="-10" width="432" height="318"/>
+                                            <scrollView misplaced="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3oW-mT-ATf">
+                                                <rect key="frame" x="0.0" y="15" width="432" height="501"/>
                                                 <clipView key="contentView" id="KSB-fG-4SN">
-                                                    <rect key="frame" x="1" y="0.0" width="430" height="317"/>
+                                                    <rect key="frame" x="1" y="0.0" width="430" height="500"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="l1D-Jd-Cly" viewBased="YES" id="bSA-4p-g3s">
-                                                            <rect key="frame" x="0.0" y="0.0" width="430" height="292"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="430" height="475"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <size key="intercellSpacing" width="3" height="2"/>
                                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -6856,7 +6852,7 @@ Gw
                                                             <tableColumns>
                                                                 <tableColumn identifier="SEQNUM" width="40" minWidth="40" maxWidth="1000" id="hvV-hY-lDN">
                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="SEQNUM">
-                                                                        <font key="font" metaFont="menu" size="11"/>
+                                                                        <font key="font" metaFont="label" size="11"/>
                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                     </tableHeaderCell>
@@ -6893,7 +6889,7 @@ Gw
                                                                 </tableColumn>
                                                                 <tableColumn identifier="WORD" width="80" minWidth="40" maxWidth="1000" id="yGY-eL-93W">
                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="WORD">
-                                                                        <font key="font" metaFont="menu" size="11"/>
+                                                                        <font key="font" metaFont="label" size="11"/>
                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                     </tableHeaderCell>
@@ -6933,7 +6929,7 @@ Gw
                                                                 </tableColumn>
                                                                 <tableColumn identifier="NOTE" width="78" minWidth="40" maxWidth="1000" id="8gy-5F-c2Q">
                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="NOTE">
-                                                                        <font key="font" metaFont="menu" size="11"/>
+                                                                        <font key="font" metaFont="label" size="11"/>
                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                     </tableHeaderCell>
@@ -6997,7 +6993,7 @@ Gw
                                                 </connections>
                                             </scrollView>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sF8-z5-7nv">
-                                                <rect key="frame" x="-2" y="-26" width="4" height="16"/>
+                                                <rect key="frame" x="-2" y="0.0" width="4" height="16"/>
                                                 <textFieldCell key="cell" lineBreakMode="clipping" id="w50-wa-1gO">
                                                     <font key="font" metaFont="system"/>
                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -7015,11 +7011,11 @@ Gw
                                         </constraints>
                                     </customView>
                                     <customView misplaced="YES" id="3DF-wI-PX2">
-                                        <rect key="frame" x="442" y="0.0" width="758" height="334"/>
+                                        <rect key="frame" x="442" y="0.0" width="758" height="518"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
-                                            <wkWebView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gHo-Yg-Cdv" userLabel="Dict WebView">
-                                                <rect key="frame" x="0.0" y="-26" width="758" height="334"/>
+                                            <wkWebView wantsLayer="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gHo-Yg-Cdv" userLabel="Dict WebView">
+                                                <rect key="frame" x="0.0" y="0.0" width="758" height="518"/>
                                                 <wkWebViewConfiguration key="configuration">
                                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
                                                     <wkPreferences key="preferences"/>

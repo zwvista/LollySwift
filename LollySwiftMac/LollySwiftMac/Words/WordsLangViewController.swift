@@ -130,12 +130,7 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
     }
 
     @IBAction func filterWord(_ sender: AnyObject) {
-        let n = scTextFilter.selectedSegment
-        if n == 0 {
-            vm.arrWordsFiltered = nil
-        } else {
-            vm.applyFilters(textFilter: textFilter, scope: n == 1 ? "Word" : "Note", levelge0only: levelge0only)
-        }
+        vm.applyFilters(textFilter: textFilter, scope: scTextFilter.selectedSegment == 0 ? "Word" : "Note", levelge0only: levelge0only)
         self.tvWords.reloadData()
     }
 

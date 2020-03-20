@@ -10,7 +10,7 @@ import Cocoa
 import WebKit
 import RxSwift
 
-class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate, WKNavigationDelegate, LollyProtocol {
+class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSSearchFieldDelegate, WKNavigationDelegate, LollyProtocol {
     
     @IBOutlet weak var wvDict: WKWebView!
     @IBOutlet weak var tfNewWord: NSTextField!
@@ -66,23 +66,21 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
         tvWords.reloadData()
         updateStatusText()
     }
-
-    func controlTextDidEndEditing(_ obj: Notification) {
-        let textfield = obj.object as! NSControl
-        let code = (obj.userInfo!["NSTextMovement"] as! NSNumber).intValue
-        guard code == NSReturnTextMovement else {return}
-        if textfield === tfNewWord {
-            if !newWord.isEmpty {
-                addNewWord()
-            }
-        } else if textfield === tfFilter {
-            if !textFilter.isEmpty {
-                scTextFilter.selectedSegment = 1
-                textFilter = vmSettings.autoCorrectInput(text: textFilter)
-                tfFilter.stringValue = textFilter
-            }
-            scTextFilter.performClick(self)
+    
+    @IBAction func addNewWord(_ sender: Any) {
+        if !newWord.isEmpty {
+            addNewWord()
         }
+    }
+    
+    func searchFieldDidStartSearching(_ sender: NSSearchField) {
+        textFilter = vmSettings.autoCorrectInput(text: textFilter)
+        tfFilter.stringValue = textFilter
+        scTextFilter.performClick(self)
+    }
+
+    func searchFieldDidEndSearching(_ sender: NSSearchField) {
+        scTextFilter.performClick(self)
     }
 
     func itemForRow(row: Int) -> (MWordProtocol & NSObject)? {
