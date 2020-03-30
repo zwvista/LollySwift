@@ -348,7 +348,6 @@ class SettingsViewModel: NSObject {
         INFO_USDICTTRANSLATIONID = getUSInfo(name: MUSMapping.NAME_USDICTTRANSLATIONID)
         INFO_USMACVOICEID = getUSInfo(name: MUSMapping.NAME_USMACVOICEID)
         INFO_USIOSVOICEID = getUSInfo(name: MUSMapping.NAME_USIOSVOICEID)
-        let arrDicts = USDICTITEMS.split("\r\n")
         return Observable.zip(MDictReference.getDataByLang(USLANGID),
                               MDictNote.getDataByLang(USLANGID),
                               MDictTranslation.getDataByLang(USLANGID),
@@ -357,15 +356,7 @@ class SettingsViewModel: NSObject {
                               MVoice.getDataByLang(USLANGID))
             .flatMap { result -> Observable<()> in
                 self.arrDictsReference = result.0
-                var i = 0
-                self.arrDictItems = arrDicts.flatMap { d -> [MDictItem] in
-                    if d == "0" {
-                        return self.arrDictsReference.map { MDictItem(id: String($0.DICTID), name: $0.DICTNAME) }
-                    } else {
-                        i += 1
-                        return [MDictItem(id: d, name: "Custom\(i)")]
-                    }
-                }
+                self.arrDictItems = self.arrDictsReference.map { MDictItem(id: String($0.DICTID), name: $0.DICTNAME) }
                 self.selectedDictItem = self.arrDictItems.first { $0.DICTID == self.USDICTITEM }!
                 self.arrDictsNote = result.1
                 if self.arrDictsNote.isEmpty { self.arrDictsNote.append(MDictNote()) }
@@ -392,18 +383,6 @@ class SettingsViewModel: NSObject {
                     return self.updateLang()
                 }
             }
-    }
-    
-    func dictHtml(word: String, dictids: [String]) -> String {
-        var s = "<html><body>\n"
-        for (i, dictid) in dictids.enumerated() {
-            let item = arrDictsReference.first { String($0.DICTID) == dictid }!
-            let ifrId = "ifr\(i + 1)"
-            let url = item.urlString(word: word, arrAutoCorrect: arrAutoCorrect)
-            s += "<iframe id='\(ifrId)' frameborder='1' style='width:100%; height:500px; display:block' src='\(url)'></iframe>\n"
-        }
-        s += "</body></html>\n"
-        return s
     }
     
     func updateLang() -> Observable<()> {

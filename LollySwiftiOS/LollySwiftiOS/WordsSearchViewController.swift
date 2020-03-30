@@ -47,24 +47,19 @@ class WordsSearchViewController: UIViewController, WKNavigationDelegate, UISearc
         sbword.resignFirstResponder()
         let item = vmSettings.selectedDictItem!
         btnDict.setTitle(item.DICTNAME, for: .normal)
-        if item.DICTNAME.starts(with: "Custom") {
-            let str = vmSettings.dictHtml(word: word, dictids: item.dictids())
-            wvDict.loadHTMLString(str, baseURL: nil)
+        let item2 = vmSettings.arrDictsReference.first { $0.DICTNAME == item.DICTNAME }!
+        let url = item2.urlString(word: word, arrAutoCorrect: vmSettings.arrAutoCorrect)
+        if item2.DICTTYPENAME == "OFFLINE" {
+            wvDict.load(URLRequest(url: URL(string: "about:blank")!))
+            RestApi.getHtml(url: url).subscribe(onNext: { html in
+                print(html)
+                let str = item2.htmlString(html, word: self.word, useTemplate2: true)
+                self.wvDict.loadHTMLString(str, baseURL: nil)
+            }).disposed(by: disposeBag)
         } else {
-            let item2 = vmSettings.arrDictsReference.first { $0.DICTNAME == item.DICTNAME }!
-            let url = item2.urlString(word: word, arrAutoCorrect: vmSettings.arrAutoCorrect)
-            if item2.DICTTYPENAME == "OFFLINE" {
-                wvDict.load(URLRequest(url: URL(string: "about:blank")!))
-                RestApi.getHtml(url: url).subscribe(onNext: { html in
-                    print(html)
-                    let str = item2.htmlString(html, word: self.word, useTemplate2: true)
-                    self.wvDict.loadHTMLString(str, baseURL: nil)
-                }).disposed(by: disposeBag)
-            } else {
-                wvDict.load(URLRequest(url: URL(string: url)!))
-                if item2.DICTTYPENAME == "OFFLINE-ONLINE" {
-                    status = .navigating
-                }
+            wvDict.load(URLRequest(url: URL(string: url)!))
+            if item2.DICTTYPENAME == "OFFLINE-ONLINE" {
+                status = .navigating
             }
         }
     }
