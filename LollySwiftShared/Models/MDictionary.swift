@@ -25,7 +25,6 @@ class MDictionary: NSObject, Codable {
     var CHCONV: String?
     var AUTOMATION: String?
     var DICTTABLE: String?
-    var TRANSFORM_WIN: String?
     var TRANSFORM: String?
     var WAIT = 0
     var TEMPLATE: String?

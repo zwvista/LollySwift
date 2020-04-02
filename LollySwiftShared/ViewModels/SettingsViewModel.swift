@@ -60,11 +60,6 @@ class SettingsViewModel: NSObject {
         get { return getUSValue(info: INFO_USDICTNOTEID)?.toInt() ?? 0 }
         set { setUSValue(info: INFO_USDICTNOTEID, value: String(newValue) )}
     }
-    private var INFO_USDICTITEMS = MUserSettingInfo()
-    var USDICTITEMS: String {
-        get { return getUSValue(info: INFO_USDICTITEMS) ?? "0" }
-        set { setUSValue(info: INFO_USDICTITEMS, value: newValue) }
-    }
     private var INFO_USDICTTRANSLATIONID = MUserSettingInfo()
     var USDICTTRANSLATIONID: Int {
         get { return getUSValue(info: INFO_USDICTTRANSLATIONID)?.toInt() ?? 0 }
@@ -272,7 +267,6 @@ class SettingsViewModel: NSObject {
         INFO_USTEXTBOOKID = x.INFO_USTEXTBOOKID
         INFO_USDICTITEM = x.INFO_USDICTITEM
         INFO_USDICTNOTEID = x.INFO_USDICTNOTEID
-        INFO_USDICTITEMS = x.INFO_USDICTITEMS
         INFO_USDICTTRANSLATIONID = x.INFO_USDICTTRANSLATIONID
         INFO_USMACVOICEID = x.INFO_USMACVOICEID
         INFO_USIOSVOICEID = x.INFO_USIOSVOICEID
@@ -344,7 +338,6 @@ class SettingsViewModel: NSObject {
         INFO_USTEXTBOOKID = getUSInfo(name: MUSMapping.NAME_USTEXTBOOKID)
         INFO_USDICTITEM = getUSInfo(name: MUSMapping.NAME_USDICTITEM)
         INFO_USDICTNOTEID = getUSInfo(name: MUSMapping.NAME_USDICTNOTEID)
-        INFO_USDICTITEMS = getUSInfo(name: MUSMapping.NAME_USDICTITEMS)
         INFO_USDICTTRANSLATIONID = getUSInfo(name: MUSMapping.NAME_USDICTTRANSLATIONID)
         INFO_USMACVOICEID = getUSInfo(name: MUSMapping.NAME_USMACVOICEID)
         INFO_USIOSVOICEID = getUSInfo(name: MUSMapping.NAME_USIOSVOICEID)

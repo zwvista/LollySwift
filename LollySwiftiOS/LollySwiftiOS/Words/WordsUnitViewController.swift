@@ -92,11 +92,9 @@ class WordsUnitViewController: WordsBaseViewController {
             let googleWordAction = UIAlertAction(title: "Google Word", style: .default) { _ in iOSApi.googleString(item.WORD) }
             alertController.addAction(googleWordAction)
             let openOnlineDictAction = UIAlertAction(title: "Online Dictionary", style: .default) { _ in
-                if !vmSettings.selectedDictItem.DICTNAME.starts(with: "Custom") {
-                    let itemDict = vmSettings.arrDictsReference.first { $0.DICTNAME == vmSettings.selectedDictItem.DICTNAME }!
-                    let url = itemDict.urlString(word: item.WORD, arrAutoCorrect: vmSettings.arrAutoCorrect)
-                    UIApplication.shared.openURL(URL(string: url)!)
-                }
+                let itemDict = vmSettings.arrDictsReference.first { $0.DICTNAME == vmSettings.selectedDictItem.DICTNAME }!
+                let url = itemDict.urlString(word: item.WORD, arrAutoCorrect: vmSettings.arrAutoCorrect)
+                UIApplication.shared.openURL(URL(string: url)!)
             }
             alertController.addAction(openOnlineDictAction)
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
