@@ -7,12 +7,84 @@
 //
 
 import Cocoa
+import WebKit
+import RxSwift
 
-class WordsDictViewController: NSViewController {
+class WordsDictViewController: NSViewController, WKNavigationDelegate {
+
+    @IBOutlet weak var wvDict: WKWebView!
+    @IBOutlet weak var tfURL: NSTextField!
+    weak var vcWords: WordsBaseViewController!
+
+    var dictStatus = DictWebViewStatus.ready
+    var word = ""
+    var dict: MDictReference!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do view setup here.
+        wvDict.allowsMagnification = true
+        wvDict.allowsBackForwardNavigationGestures = true
     }
     
+    func searchWord(word: String) {
+        self.word = word
+        dictStatus = .ready
+//        let item = vmSettings.arrDictItems[selectedDictItemIndex]
+//        let item2 = vmSettings.arrDictsReference.first { $0.DICTNAME == item.DICTNAME }!
+        let url = dict.urlString(word: word, arrAutoCorrect: vcWords.vmSettings.arrAutoCorrect)
+        if dict.DICTTYPENAME == "OFFLINE" {
+            wvDict.load(URLRequest(url: URL(string: "about:blank")!))
+            RestApi.getHtml(url: url).subscribe(onNext: { html in
+                print(html)
+                let str = self.dict.htmlString(html, word: word)
+                self.wvDict.loadHTMLString(str, baseURL: nil)
+            }).disposed(by: vcWords.disposeBag)
+        } else {
+            wvDict.load(URLRequest(url: URL(string: url)!))
+            if dict.AUTOMATION != nil {
+                dictStatus = .automating
+            } else if dict.DICTTYPENAME == "OFFLINE-ONLINE" {
+                dictStatus = .navigating
+            }
+        }
+    }
+
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        // Regain focus if it's stolen by the webView
+        if vcWords.responder != nil && vcWords.needRegainFocus() {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self.vcWords.view.window!.makeFirstResponder(self.vcWords.responder)
+                self.vcWords.responder = nil
+            }
+        }
+        tfURL.stringValue = webView.url!.absoluteString
+        guard dictStatus != .ready else {return}
+//        let item = vmSettings.arrDictItems[selectedDictItemIndex]
+//        let item2 = vmSettings.arrDictsReference.first { $0.DICTNAME == item.DICTNAME }!
+        switch dictStatus {
+        case .automating:
+            let s = dict.AUTOMATION!.replacingOccurrences(of: "{0}", with: word)
+            webView.evaluateJavaScript(s) { (html: Any?, error: Error?) in
+                self.dictStatus = .ready
+                if self.dict.DICTTYPENAME == "OFFLINE-ONLINE" {
+                    self.dictStatus = .navigating
+                }
+            }
+        case .navigating:
+            // https://stackoverflow.com/questions/34751860/get-html-from-wkwebview-in-swift
+            webView.evaluateJavaScript("document.documentElement.outerHTML.toString()") { (html: Any?, error: Error?) in
+                let html = html as! String
+                print(html)
+                let str = self.dict.htmlString(html, word: self.word)
+                self.wvDict.loadHTMLString(str, baseURL: nil)
+                self.dictStatus = .ready
+            }
+        default: break
+        }
+    }
+    
+    @IBAction func openURL(_ sender: AnyObject) {
+        MacApi.openURL(tfURL.stringValue)
+    }
+
 }

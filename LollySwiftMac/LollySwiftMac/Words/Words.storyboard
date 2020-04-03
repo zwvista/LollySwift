@@ -7057,7 +7057,7 @@ Gw
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
-                                            <action selector="openURL:" target="S5w-0q-IQt" id="TIx-R1-Wn2"/>
+                                            <action selector="openURL:" target="KoL-af-t1E" id="O6Y-xV-LNa"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -7077,7 +7077,7 @@ Gw
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
                                 <connections>
-                                    <outlet property="navigationDelegate" destination="S5w-0q-IQt" id="Air-dp-Grw"/>
+                                    <outlet property="navigationDelegate" destination="KoL-af-t1E" id="dQV-xJ-0Rq"/>
                                 </connections>
                             </wkWebView>
                         </subviews>
@@ -7091,6 +7091,10 @@ Gw
                             <constraint firstAttribute="trailing" secondItem="TiV-Sk-ZrH" secondAttribute="trailing" id="tVQ-LO-94Q"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tfURL" destination="Pyw-im-LRM" id="nSE-u0-Qom"/>
+                        <outlet property="wvDict" destination="FAc-C5-ac0" id="Q55-rC-jsj"/>
+                    </connections>
                 </viewController>
                 <customObject id="8sn-qL-0im" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>

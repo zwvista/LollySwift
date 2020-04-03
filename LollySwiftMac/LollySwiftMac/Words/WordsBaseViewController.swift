@@ -7,17 +7,14 @@
 //
 
 import Cocoa
-import WebKit
 import RxSwift
 
-class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSSearchFieldDelegate, WKNavigationDelegate, LollyProtocol {
+class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSSearchFieldDelegate, LollyProtocol {
     
-    @IBOutlet weak var wvDict: WKWebView!
     @IBOutlet weak var tfNewWord: NSTextField!
     @IBOutlet weak var scTextFilter: NSSegmentedControl!
     @IBOutlet weak var tfFilter: NSTextField!
     @IBOutlet weak var chkLevelGE0Only: NSButton!
-    @IBOutlet weak var tfURL: NSTextField!
     @IBOutlet weak var tvWords: NSTableView!
     @IBOutlet weak var tfStatusText: NSTextField!
     @IBOutlet weak var tvPhrases: NSTableView!
@@ -33,7 +30,6 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     @objc var levelge0only = false
     var selectedWord = ""
     var selectedWordID = 0
-    var dictStatus = DictWebViewStatus.ready
     let synth = NSSpeechSynthesizer()
     var isSpeaking = true
     var responder: NSResponder? = nil
@@ -42,8 +38,6 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     override func viewDidLoad() {
         super.viewDidLoad()
         settingsChanged()
-        wvDict.allowsMagnification = true
-        wvDict.allowsBackForwardNavigationGestures = true
     }
     
     // Take a reference to the window controller in order to prevent it from being released
@@ -178,34 +172,11 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     
     func deleteWord(row: Int) {
     }
-
-    func searchWord(word: String) {
-        dictStatus = .ready
-        let item = vmSettings.arrDictItems[selectedDictItemIndex]
-        let item2 = vmSettings.arrDictsReference.first { $0.DICTNAME == item.DICTNAME }!
-        let url = item2.urlString(word: word, arrAutoCorrect: vmSettings.arrAutoCorrect)
-        if item2.DICTTYPENAME == "OFFLINE" {
-            wvDict.load(URLRequest(url: URL(string: "about:blank")!))
-            RestApi.getHtml(url: url).subscribe(onNext: { html in
-                print(html)
-                let str = item2.htmlString(html, word: self.newWord)
-                self.wvDict.loadHTMLString(str, baseURL: nil)
-            }).disposed(by: disposeBag)
-        } else {
-            wvDict.load(URLRequest(url: URL(string: url)!))
-            if item2.AUTOMATION != nil {
-                dictStatus = .automating
-            } else if item2.DICTTYPENAME == "OFFLINE-ONLINE" {
-                dictStatus = .navigating
-            }
-        }
-    }
     
     @IBAction func searchDict(_ sender: AnyObject) {
-        if sender is NSToolbarItem {
-            let tbItem = sender as! NSToolbarItem
-            selectedDictItemIndex = tbItem.tag
-            print(tbItem.toolbar!.selectedItemIdentifier!.rawValue)
+        if sender is NSButton {
+            let btn = sender as! NSButton
+            selectedDictItemIndex = btn.tag
         }
         if responder == nil {
             responder = tvWords
@@ -214,12 +185,12 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
         if row == -1 {
             selectedWord = ""
             selectedWordID = 0
-            searchWord(word: newWord)
+            //searchWord(word: newWord)
         } else {
             let item = itemForRow(row: row)!
             selectedWord = item.WORD
             selectedWordID = item.WORDID
-            searchWord(word: selectedWord)
+            //searchWord(word: selectedWord)
         }
     }
     
@@ -228,40 +199,6 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     
     func needRegainFocus() -> Bool {
         return true
-    }
-
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        // Regain focus if it's stolen by the webView
-        if responder != nil && needRegainFocus() {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self.view.window!.makeFirstResponder(self.responder)
-                self.responder = nil
-            }
-        }
-        tfURL.stringValue = webView.url!.absoluteString
-        guard dictStatus != .ready else {return}
-        let item = vmSettings.arrDictItems[selectedDictItemIndex]
-        let item2 = vmSettings.arrDictsReference.first { $0.DICTNAME == item.DICTNAME }!
-        switch dictStatus {
-        case .automating:
-            let s = item2.AUTOMATION!.replacingOccurrences(of: "{0}", with: selectedWord)
-            webView.evaluateJavaScript(s) { (html: Any?, error: Error?) in
-                self.dictStatus = .ready
-                if item2.DICTTYPENAME == "OFFLINE-ONLINE" {
-                    self.dictStatus = .navigating
-                }
-            }
-        case .navigating:
-            // https://stackoverflow.com/questions/34751860/get-html-from-wkwebview-in-swift
-            webView.evaluateJavaScript("document.documentElement.outerHTML.toString()") { (html: Any?, error: Error?) in
-                let html = html as! String
-                print(html)
-                let str = item2.htmlString(html, word: self.selectedWord)
-                self.wvDict.loadHTMLString(str, baseURL: nil)
-                self.dictStatus = .ready
-            }
-        default: break
-        }
     }
 
     func levelChanged(row: Int) -> Observable<Int> {
@@ -317,10 +254,6 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
         let item2 = vmSettings.arrDictsReference.first { $0.DICTNAME == item.DICTNAME }!
         let url = item2.urlString(word: selectedWord, arrAutoCorrect: vmSettings.arrAutoCorrect)
         MacApi.openURL(url)
-    }
-
-    @IBAction func openURL(_ sender: AnyObject) {
-        MacApi.openURL(tfURL.stringValue)
     }
 
     deinit {
@@ -391,25 +324,16 @@ class WordsBaseWindowController: NSWindowController, LollyProtocol, NSWindowDele
     }
     
     func settingsChanged() {
-        let img = toolbar.items[defaultToolbarItemCount].image
         for i in 0..<40 {
+            let item = toolbar.items[defaultToolbarItemCount + i]
+            item.image = nil
             if i < vm.arrDictItems.count {
-                let item = toolbar.items[defaultToolbarItemCount + i]
                 item.label = vm.arrDictItems[i].DICTNAME
-                item.target = contentViewController
-                item.action = #selector(WordsBaseViewController.searchDict(_:))
-                item.isEnabled = true
-                item.image = img
-                if i == vm.selectedDictItemIndex {
-                    toolbar.selectedItemIdentifier = item.itemIdentifier
-                }
+                let btn = NSButton(checkboxWithTitle: "", target: self.contentViewController, action: #selector(WordsBaseViewController.searchDict(_:)))
+                btn.tag = i
+                item.view = btn
             } else {
-                let item = toolbar.items[defaultToolbarItemCount + i]
                 item.label = ""
-                item.target = nil
-                item.action = nil
-                item.image = nil
-                item.isEnabled = false
             }
         }
     }
