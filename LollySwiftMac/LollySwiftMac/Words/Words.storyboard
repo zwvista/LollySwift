@@ -7031,6 +7031,71 @@ Gw
             </objects>
             <point key="canvasLocation" x="557" y="1218"/>
         </scene>
+        <!--Words Dict View Controller-->
+        <scene sceneID="8zO-Co-ZRI">
+            <objects>
+                <viewController id="KoL-af-t1E" customClass="WordsDictViewController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="ABY-LX-n9m">
+                        <rect key="frame" x="0.0" y="0.0" width="499" height="375"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TiV-Sk-ZrH">
+                                <rect key="frame" x="0.0" y="354" width="499" height="21"/>
+                                <subviews>
+                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Pyw-im-LRM">
+                                        <rect key="frame" x="0.0" y="0.0" width="433" height="21"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="URL" drawsBackground="YES" id="Jzy-oR-ueg">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LoD-Wg-rwg">
+                                        <rect key="frame" x="432" y="-7" width="73" height="32"/>
+                                        <buttonCell key="cell" type="push" title="Open" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="vjP-sA-bOz">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="openURL:" target="S5w-0q-IQt" id="TIx-R1-Wn2"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
+                            <wkWebView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FAc-C5-ac0" userLabel="Dict WebView">
+                                <rect key="frame" x="0.0" y="0.0" width="499" height="354"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                                <connections>
+                                    <outlet property="navigationDelegate" destination="S5w-0q-IQt" id="Air-dp-Grw"/>
+                                </connections>
+                            </wkWebView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="TiV-Sk-ZrH" firstAttribute="leading" secondItem="ABY-LX-n9m" secondAttribute="leading" id="6ZK-Dl-bH3"/>
+                            <constraint firstItem="FAc-C5-ac0" firstAttribute="leading" secondItem="ABY-LX-n9m" secondAttribute="leading" id="FXA-S8-Sfe"/>
+                            <constraint firstAttribute="trailing" secondItem="FAc-C5-ac0" secondAttribute="trailing" id="WiI-UN-ms9"/>
+                            <constraint firstItem="TiV-Sk-ZrH" firstAttribute="top" secondItem="ABY-LX-n9m" secondAttribute="top" id="cE4-qf-tOA"/>
+                            <constraint firstItem="FAc-C5-ac0" firstAttribute="top" secondItem="TiV-Sk-ZrH" secondAttribute="bottom" id="g7J-Xm-pH8"/>
+                            <constraint firstAttribute="bottom" secondItem="FAc-C5-ac0" secondAttribute="bottom" id="iA2-Jw-Vgu"/>
+                            <constraint firstAttribute="trailing" secondItem="TiV-Sk-ZrH" secondAttribute="trailing" id="tVQ-LO-94Q"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <customObject id="8sn-qL-0im" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="999.5" y="476.5"/>
+        </scene>
     </scenes>
     <resources>
         <image name="NSAddTemplate" width="11" height="11"/>
