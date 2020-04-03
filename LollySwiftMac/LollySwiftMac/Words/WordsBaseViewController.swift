@@ -353,6 +353,9 @@ class WordsBaseWindowController: NSWindowController, LollyProtocol, NSWindowDele
                 let btn = NSButton(checkboxWithTitle: "", target: self.contentViewController, action: #selector(WordsBaseViewController.searchDict(_:)))
                 btn.tag = i
                 item.view = btn
+                if i == vm.selectedDictItemIndex {
+                    btn.performClick(self)
+                }
             } else {
                 item.label = ""
             }

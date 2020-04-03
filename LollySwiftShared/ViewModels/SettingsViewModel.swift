@@ -60,6 +60,11 @@ class SettingsViewModel: NSObject {
         get { return getUSValue(info: INFO_USDICTNOTEID)?.toInt() ?? 0 }
         set { setUSValue(info: INFO_USDICTNOTEID, value: String(newValue) )}
     }
+    private var INFO_USDICTITEMS = MUserSettingInfo()
+    var USDICTITEMS: String {
+        get { return getUSValue(info: INFO_USDICTITEMS)! }
+        set { setUSValue(info: INFO_USDICTITEMS, value: newValue) }
+    }
     private var INFO_USDICTTRANSLATIONID = MUserSettingInfo()
     var USDICTTRANSLATIONID: Int {
         get { return getUSValue(info: INFO_USDICTTRANSLATIONID)?.toInt() ?? 0 }
@@ -157,6 +162,11 @@ class SettingsViewModel: NSObject {
     var selectedDictItem: MDictItem! {
         didSet {
             USDICTITEM = selectedDictItem.DICTID
+        }
+    }
+    var selectedDictItems = [MDictItem]() {
+        didSet {
+            USDICTITEMS = selectedDictItems.map { $0.DICTID }.joined(separator: ",")
         }
     }
     var selectedDictItemIndex: Int {
@@ -267,6 +277,7 @@ class SettingsViewModel: NSObject {
         INFO_USTEXTBOOKID = x.INFO_USTEXTBOOKID
         INFO_USDICTITEM = x.INFO_USDICTITEM
         INFO_USDICTNOTEID = x.INFO_USDICTNOTEID
+        INFO_USDICTITEMS = x.INFO_USDICTITEMS
         INFO_USDICTTRANSLATIONID = x.INFO_USDICTTRANSLATIONID
         INFO_USMACVOICEID = x.INFO_USMACVOICEID
         INFO_USIOSVOICEID = x.INFO_USIOSVOICEID
@@ -283,6 +294,7 @@ class SettingsViewModel: NSObject {
         arrDictsReference = x.arrDictsReference
         arrDictItems = x.arrDictItems
         selectedDictItem = x.selectedDictItem
+        selectedDictItems = x.selectedDictItems
         arrDictsNote = x.arrDictsNote
         selectedDictNote = x.selectedDictNote
         arrDictsTranslation = x.arrDictsTranslation
@@ -338,6 +350,7 @@ class SettingsViewModel: NSObject {
         INFO_USTEXTBOOKID = getUSInfo(name: MUSMapping.NAME_USTEXTBOOKID)
         INFO_USDICTITEM = getUSInfo(name: MUSMapping.NAME_USDICTITEM)
         INFO_USDICTNOTEID = getUSInfo(name: MUSMapping.NAME_USDICTNOTEID)
+        INFO_USDICTITEMS = getUSInfo(name: MUSMapping.NAME_USDICTITEMS)
         INFO_USDICTTRANSLATIONID = getUSInfo(name: MUSMapping.NAME_USDICTTRANSLATIONID)
         INFO_USMACVOICEID = getUSInfo(name: MUSMapping.NAME_USMACVOICEID)
         INFO_USIOSVOICEID = getUSInfo(name: MUSMapping.NAME_USIOSVOICEID)
@@ -351,6 +364,8 @@ class SettingsViewModel: NSObject {
                 self.arrDictsReference = result.0
                 self.arrDictItems = self.arrDictsReference.map { MDictItem(id: String($0.DICTID), name: $0.DICTNAME) }
                 self.selectedDictItem = self.arrDictItems.first { $0.DICTID == self.USDICTITEM }!
+                let dictitems = self.USDICTITEMS.split(",")
+                self.selectedDictItems = self.arrDictItems.filter { dictitems.contains($0.DICTID) }
                 self.arrDictsNote = result.1
                 if self.arrDictsNote.isEmpty { self.arrDictsNote.append(MDictNote()) }
                 self.selectedDictNote = self.arrDictsNote.first { $0.DICTID == self.USDICTNOTEID } ?? self.arrDictsNote[0]
