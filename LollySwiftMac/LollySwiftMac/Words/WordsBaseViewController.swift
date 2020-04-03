@@ -18,7 +18,8 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     @IBOutlet weak var tvWords: NSTableView!
     @IBOutlet weak var tfStatusText: NSTextField!
     @IBOutlet weak var tvPhrases: NSTableView!
-
+    @IBOutlet weak var tabView: NSTabView!
+    
     var vmSettings: SettingsViewModel! {
         return nil
     }
@@ -177,7 +178,27 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
         if sender is NSButton {
             let btn = sender as! NSButton
             selectedDictItemIndex = btn.tag
+            let item = vmSettings.arrDictItems[selectedDictItemIndex]
+            let name = item.DICTNAME
+            let item2 = vmSettings.arrDictsReference.first { $0.DICTNAME == name }!
+            if let tvi = tabView.tabViewItems.first(where: { $0.label == name }) {
+                tabView.removeTabViewItem(tvi)
+            } else {
+                let vc = storyboard!.instantiateController(withIdentifier: "WordsDictViewController") as! WordsDictViewController
+                vc.vcWords = self
+                vc.dict = item2
+                let tvi = NSTabViewItem(viewController: vc)
+                tvi.label = name
+                tabView.addTabViewItem(tvi)
+            }
         }
+        
+        func f(word: String) {
+            for item in tabView.tabViewItems {
+                (item.viewController as? WordsDictViewController)?.searchWord(word: word)
+            }
+        }
+        
         if responder == nil {
             responder = tvWords
         }
@@ -185,12 +206,12 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
         if row == -1 {
             selectedWord = ""
             selectedWordID = 0
-            //searchWord(word: newWord)
+            f(word: newWord)
         } else {
             let item = itemForRow(row: row)!
             selectedWord = item.WORD
             selectedWordID = item.WORDID
-            //searchWord(word: selectedWord)
+            f(word: selectedWord)
         }
     }
     

@@ -354,7 +354,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" misplaced="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2hs-X4-l5R">
-                                <rect key="frame" x="0.0" y="544" width="680" height="32"/>
+                                <rect key="frame" x="0.0" y="544" width="409" height="32"/>
                                 <subviews>
                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="E8d-BH-EMc">
                                         <rect key="frame" x="6" y="5" width="96" height="21"/>
@@ -433,40 +433,6 @@
                                             <binding destination="F8i-pe-Ate" name="value" keyPath="levelge0only" id="gRn-yE-dZN"/>
                                         </connections>
                                     </button>
-                                    <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xRk-MG-tIl">
-                                        <rect key="frame" x="414" y="5" width="266" height="21"/>
-                                        <subviews>
-                                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vJr-9d-1wg">
-                                                <rect key="frame" x="0.0" y="0.0" width="200" height="21"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="200" id="elL-ed-VOA"/>
-                                                </constraints>
-                                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="URL" drawsBackground="YES" id="Dbl-w1-0dG">
-                                                    <font key="font" metaFont="system"/>
-                                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                </textFieldCell>
-                                            </textField>
-                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Flh-Ra-an3">
-                                                <rect key="frame" x="199" y="-7" width="73" height="32"/>
-                                                <buttonCell key="cell" type="push" title="Open" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ZSF-JD-VK2">
-                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                    <font key="font" metaFont="system"/>
-                                                </buttonCell>
-                                                <connections>
-                                                    <action selector="openURL:" target="F8i-pe-Ate" id="ceY-bc-obg"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                        <visibilityPriorities>
-                                            <integer value="1000"/>
-                                            <integer value="1000"/>
-                                        </visibilityPriorities>
-                                        <customSpacing>
-                                            <real value="3.4028234663852886e+38"/>
-                                            <real value="3.4028234663852886e+38"/>
-                                        </customSpacing>
-                                    </stackView>
                                 </subviews>
                                 <edgeInsets key="edgeInsets" left="6" right="0.0" top="6" bottom="6"/>
                                 <constraints>
@@ -479,10 +445,8 @@
                                     <integer value="1000"/>
                                     <integer value="1000"/>
                                     <integer value="1000"/>
-                                    <integer value="1000"/>
                                 </visibilityPriorities>
                                 <customSpacing>
-                                    <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
@@ -1052,22 +1016,16 @@
                                                         <rect key="frame" x="0.0" y="90" width="762" height="446"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
-                                                            <wkWebView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pwn-BR-F7c" userLabel="Dict WebView">
-                                                                <rect key="frame" x="0.0" y="0.0" width="762" height="444"/>
-                                                                <wkWebViewConfiguration key="configuration">
-                                                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
-                                                                    <wkPreferences key="preferences"/>
-                                                                </wkWebViewConfiguration>
-                                                                <connections>
-                                                                    <outlet property="navigationDelegate" destination="F8i-pe-Ate" id="lWx-yg-pAq"/>
-                                                                </connections>
-                                                            </wkWebView>
+                                                            <tabView translatesAutoresizingMaskIntoConstraints="NO" id="KCG-rY-0wH">
+                                                                <rect key="frame" x="-7" y="-10" width="776" height="460"/>
+                                                                <font key="font" metaFont="system"/>
+                                                            </tabView>
                                                         </subviews>
                                                         <constraints>
-                                                            <constraint firstItem="pwn-BR-F7c" firstAttribute="leading" secondItem="5kl-2a-v66" secondAttribute="leading" id="DcY-iq-QJv"/>
-                                                            <constraint firstAttribute="trailing" secondItem="pwn-BR-F7c" secondAttribute="trailing" id="YFG-oQ-6WG"/>
-                                                            <constraint firstAttribute="bottom" secondItem="pwn-BR-F7c" secondAttribute="bottom" id="e71-gO-prs"/>
-                                                            <constraint firstItem="pwn-BR-F7c" firstAttribute="top" secondItem="5kl-2a-v66" secondAttribute="top" id="rtZ-WB-3ps"/>
+                                                            <constraint firstItem="KCG-rY-0wH" firstAttribute="leading" secondItem="5kl-2a-v66" secondAttribute="leading" id="3XQ-aD-1J1"/>
+                                                            <constraint firstAttribute="bottom" secondItem="KCG-rY-0wH" secondAttribute="bottom" id="Bbq-ZR-Ysg"/>
+                                                            <constraint firstItem="KCG-rY-0wH" firstAttribute="top" secondItem="5kl-2a-v66" secondAttribute="top" id="fRF-qF-oQm"/>
+                                                            <constraint firstAttribute="trailing" secondItem="KCG-rY-0wH" secondAttribute="trailing" id="zuh-nl-XQ6"/>
                                                         </constraints>
                                                     </customView>
                                                 </subviews>
@@ -1103,13 +1061,12 @@
                     <connections>
                         <outlet property="chkLevelGE0Only" destination="azS-bq-eKL" id="URS-Zi-evM"/>
                         <outlet property="scTextFilter" destination="RtU-w4-rmU" id="5fZ-jf-cIo"/>
+                        <outlet property="tabView" destination="KCG-rY-0wH" id="Oqe-os-Tey"/>
                         <outlet property="tfFilter" destination="Ntb-I3-XGS" id="Wl9-kJ-Nnx"/>
                         <outlet property="tfNewWord" destination="E8d-BH-EMc" id="sKW-6f-XqV"/>
                         <outlet property="tfStatusText" destination="IQa-iE-3F1" id="cbs-gy-uFL"/>
-                        <outlet property="tfURL" destination="vJr-9d-1wg" id="Rv3-Uh-76H"/>
                         <outlet property="tvPhrases" destination="Qfw-F3-HQ5" id="Fbg-lF-wt9"/>
                         <outlet property="tvWords" destination="8Zf-06-OzS" id="RxN-UB-rk0"/>
-                        <outlet property="wvDict" destination="pwn-BR-F7c" id="G1a-1X-0fx"/>
                     </connections>
                 </viewController>
                 <menu id="UPB-Wi-4rN">
@@ -7034,7 +6991,7 @@ Gw
         <!--Words Dict View Controller-->
         <scene sceneID="8zO-Co-ZRI">
             <objects>
-                <viewController id="KoL-af-t1E" customClass="WordsDictViewController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WordsDictViewController" id="KoL-af-t1E" customClass="WordsDictViewController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="ABY-LX-n9m">
                         <rect key="frame" x="0.0" y="0.0" width="499" height="375"/>
                         <autoresizingMask key="autoresizingMask"/>

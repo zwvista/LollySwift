@@ -19,24 +19,24 @@ class WordsDictViewController: NSViewController, WKNavigationDelegate {
     var dictStatus = DictWebViewStatus.ready
     var word = ""
     var dict: MDictReference!
+    var webInitilized = false
+    var url = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
         wvDict.allowsMagnification = true
         wvDict.allowsBackForwardNavigationGestures = true
+        webInitilized = true
+        load()
     }
     
-    func searchWord(word: String) {
-        self.word = word
-        dictStatus = .ready
-//        let item = vmSettings.arrDictItems[selectedDictItemIndex]
-//        let item2 = vmSettings.arrDictsReference.first { $0.DICTNAME == item.DICTNAME }!
-        let url = dict.urlString(word: word, arrAutoCorrect: vcWords.vmSettings.arrAutoCorrect)
+    private func load() {
+        guard webInitilized, !url.isEmpty else {return}
         if dict.DICTTYPENAME == "OFFLINE" {
             wvDict.load(URLRequest(url: URL(string: "about:blank")!))
             RestApi.getHtml(url: url).subscribe(onNext: { html in
                 print(html)
-                let str = self.dict.htmlString(html, word: word)
+                let str = self.dict.htmlString(html, word: self.word)
                 self.wvDict.loadHTMLString(str, baseURL: nil)
             }).disposed(by: vcWords.disposeBag)
         } else {
@@ -47,6 +47,13 @@ class WordsDictViewController: NSViewController, WKNavigationDelegate {
                 dictStatus = .navigating
             }
         }
+    }
+    
+    func searchWord(word: String) {
+        self.word = word
+        dictStatus = .ready
+        url = dict.urlString(word: word, arrAutoCorrect: vcWords.vmSettings.arrAutoCorrect)
+        load()
     }
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
@@ -59,8 +66,6 @@ class WordsDictViewController: NSViewController, WKNavigationDelegate {
         }
         tfURL.stringValue = webView.url!.absoluteString
         guard dictStatus != .ready else {return}
-//        let item = vmSettings.arrDictItems[selectedDictItemIndex]
-//        let item2 = vmSettings.arrDictsReference.first { $0.DICTNAME == item.DICTNAME }!
         switch dictStatus {
         case .automating:
             let s = dict.AUTOMATION!.replacingOccurrences(of: "{0}", with: word)
