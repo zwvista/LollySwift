@@ -35,6 +35,9 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     var isSpeaking = true
     var responder: NSResponder? = nil
     var arrPhrases: [MLangPhrase]! { return nil }
+    
+    let imageOff = NSImage(named: "NSStatusNone")
+    let imageOn = NSImage(named: "NSStatusAvailable")
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -175,15 +178,17 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     }
     
     @IBAction func searchDict(_ sender: AnyObject) {
-        if sender is NSButton {
-            let btn = sender as! NSButton
-            selectedDictItemIndex = btn.tag
+        if sender is NSToolbarItem {
+            let tbi = sender as! NSToolbarItem
+            selectedDictItemIndex = tbi.tag
             let item = vmSettings.arrDictItems[selectedDictItemIndex]
             let name = item.DICTNAME
             let item2 = vmSettings.arrDictsReference.first { $0.DICTNAME == name }!
             if let tvi = tabView.tabViewItems.first(where: { $0.label == name }) {
+                tbi.image = imageOff
                 tabView.removeTabViewItem(tvi)
             } else {
+                tbi.image = imageOn
                 let vc = storyboard!.instantiateController(withIdentifier: "WordsDictViewController") as! WordsDictViewController
                 vc.vcWords = self
                 vc.dict = item2
@@ -347,17 +352,23 @@ class WordsBaseWindowController: NSWindowController, LollyProtocol, NSWindowDele
     func settingsChanged() {
         for i in 0..<40 {
             let item = toolbar.items[defaultToolbarItemCount + i]
-            item.image = nil
             if i < vm.arrDictItems.count {
                 item.label = vm.arrDictItems[i].DICTNAME
-                let btn = NSButton(checkboxWithTitle: "", target: self.contentViewController, action: #selector(WordsBaseViewController.searchDict(_:)))
-                btn.tag = i
-                item.view = btn
+                item.tag = i
+                item.target = contentViewController
+                item.action = #selector(WordsBaseViewController.searchDict(_:))
+                item.image = (contentViewController as! WordsBaseViewController).imageOff
+                item.isEnabled = true
                 if i == vm.selectedDictItemIndex {
-                    btn.performClick(self)
+                    (contentViewController as! WordsBaseViewController).searchDict(item)
                 }
             } else {
                 item.label = ""
+                item.tag = -1
+                item.image = nil
+                item.target = nil
+                item.action = nil
+                item.isEnabled = false
             }
         }
     }
