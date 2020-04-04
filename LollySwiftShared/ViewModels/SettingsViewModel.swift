@@ -62,7 +62,7 @@ class SettingsViewModel: NSObject {
     }
     private var INFO_USDICTITEMS = MUserSettingInfo()
     var USDICTITEMS: String {
-        get { return getUSValue(info: INFO_USDICTITEMS)! }
+        get { return getUSValue(info: INFO_USDICTITEMS) ?? "" }
         set { setUSValue(info: INFO_USDICTITEMS, value: newValue) }
     }
     private var INFO_USDICTTRANSLATIONID = MUserSettingInfo()
@@ -364,7 +364,7 @@ class SettingsViewModel: NSObject {
                 self.arrDictsReference = result.0
                 self.arrDictItems = self.arrDictsReference.map { MDictItem(id: String($0.DICTID), name: $0.DICTNAME) }
                 self.selectedDictItem = self.arrDictItems.first { $0.DICTID == self.USDICTITEM }!
-                self.selectedDictItems = self.USDICTITEMS.split(",").map { id in self.arrDictItems.first { String($0.DICTID) == id }! }
+                self.selectedDictItems = self.USDICTITEMS.split(",").flatMap { id in self.arrDictItems.filter { $0.DICTID == id } }
                 self.arrDictsNote = result.1
                 if self.arrDictsNote.isEmpty { self.arrDictsNote.append(MDictNote()) }
                 self.selectedDictNote = self.arrDictsNote.first { $0.DICTID == self.USDICTNOTEID } ?? self.arrDictsNote[0]

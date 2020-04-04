@@ -281,6 +281,12 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
         let item = itemForRow(row: row)!
         searchWord(word: item.WORD)
     }
+    
+    func removeAllTabs() {
+        while !tabView.tabViewItems.isEmpty {
+            tabView.removeTabViewItem(tabView.tabViewItems[0])
+        }
+    }
 
     deinit {
         print("DEBUG: \(self.className) deinit")
@@ -353,6 +359,7 @@ class WordsBaseWindowController: NSWindowController, LollyProtocol, NSWindowDele
     }
     
     func settingsChanged() {
+        vc.removeAllTabs()
         for i in 0..<40 {
             let item = toolbar.items[defaultToolbarItemCount + i]
             if i < vm.arrDictItems.count {
@@ -362,9 +369,6 @@ class WordsBaseWindowController: NSWindowController, LollyProtocol, NSWindowDele
                 item.action = #selector(WordsBaseViewController.searchDict(_:))
                 item.image = vc.imageOff
                 item.isEnabled = true
-                if i == vm.selectedDictItemIndex {
-                    vc.searchDict(item)
-                }
             } else {
                 item.label = ""
                 item.tag = -1
@@ -373,6 +377,10 @@ class WordsBaseWindowController: NSWindowController, LollyProtocol, NSWindowDele
                 item.action = nil
                 item.isEnabled = false
             }
+        }
+        for o in vm.selectedDictItems {
+            let item = toolbar.items.first { $0.label == o.DICTNAME }!
+            vc.searchDict(item)
         }
     }
 
