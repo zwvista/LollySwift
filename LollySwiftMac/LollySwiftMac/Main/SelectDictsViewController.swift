@@ -15,7 +15,7 @@ class SelectDictsViewController: NSViewController, NSTableViewDataSource, NSTabl
     @IBOutlet weak var tvSelected: NSTableView!
     @IBOutlet weak var btnAdd: NSButton!
     @IBOutlet weak var btnRemove: NSButton!
-    @IBOutlet weak var btnRemoveAvailable: NSButton!
+    @IBOutlet weak var btnRemoveAll: NSButton!
     
     var vm: SettingsViewModel {
         return AppDelegate.theSettingsViewModel
@@ -34,6 +34,9 @@ class SelectDictsViewController: NSViewController, NSTableViewDataSource, NSTabl
         tvSelected.registerForDraggedTypes([tableRowDragType])
         dictsSelected = vm.selectedDictItems
         updateDictsAvailable()
+    }
+    override func viewDidAppear() {
+        view.window?.title = "Select Dictionaries"
     }
     
     private func updateDictsAvailable() {
