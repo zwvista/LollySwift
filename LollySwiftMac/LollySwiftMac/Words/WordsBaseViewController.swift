@@ -198,12 +198,6 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
             }
         }
         
-        func f(word: String) {
-            for item in tabView.tabViewItems {
-                (item.viewController as? WordsDictViewController)?.searchWord(word: word)
-            }
-        }
-        
         if responder == nil {
             responder = tvWords
         }
@@ -211,12 +205,18 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
         if row == -1 {
             selectedWord = ""
             selectedWordID = 0
-            f(word: newWord)
+            searchWord(word: newWord)
         } else {
             let item = itemForRow(row: row)!
             selectedWord = item.WORD
             selectedWordID = item.WORDID
-            f(word: selectedWord)
+            searchWord(word: selectedWord)
+        }
+    }
+    
+    func searchWord(word: String) {
+        for item in tabView.tabViewItems {
+            (item.viewController as? WordsDictViewController)?.searchWord(word: word)
         }
     }
     
@@ -275,11 +275,11 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
         }
     }
 
-    @IBAction func openDictURL(_ sender: AnyObject) {
-        let item = vmSettings.arrDictItems[selectedDictItemIndex]
-        let item2 = vmSettings.arrDictsReference.first { $0.DICTNAME == item.DICTNAME }!
-        let url = item2.urlString(word: selectedWord, arrAutoCorrect: vmSettings.arrAutoCorrect)
-        MacApi.openURL(url)
+    @IBAction func openOnlineDict(_ sender: AnyObject) {
+        let row = tvWords.selectedRow
+        guard row != -1 else {return}
+        let item = itemForRow(row: row)!
+        searchWord(word: item.WORD)
     }
 
     deinit {

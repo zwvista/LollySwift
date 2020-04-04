@@ -142,7 +142,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @IBAction func editBlog(_ sender: AnyObject) {
-        showWindow(storyBoardName: "Main", windowControllerName: "BlogWindowController", modal: false)
+        showWindow(storyBoardName: "Tools", windowControllerName: "BlogWindowController", modal: false)
     }
     
     @IBAction func textbooks(_ sender: AnyObject) {

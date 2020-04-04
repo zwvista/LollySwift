@@ -198,7 +198,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
         if vmReview.subscription != nil {
             vmReview.stop()
         } else {
-            let optionsVC = NSStoryboard(name: "Tools", bundle: nil).instantiateController(withIdentifier: "ReviewOptionsViewController") as! ReviewOptionsViewController
+            let optionsVC = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: "ReviewOptionsViewController") as! ReviewOptionsViewController
             optionsVC.options.mode = 0
             optionsVC.options.shuffled = vmReview.shuffled
             optionsVC.complete = { [unowned self] in

@@ -87,7 +87,7 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
     }
     
     @IBAction func newTest(_ sender: AnyObject) {
-        let optionsVC = NSStoryboard(name: "Tools", bundle: nil).instantiateController(withIdentifier: "ReviewOptionsViewController") as! ReviewOptionsViewController
+        let optionsVC = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: "ReviewOptionsViewController") as! ReviewOptionsViewController
         optionsVC.options.mode = vm.mode.rawValue
         optionsVC.options.shuffled = shuffled
         optionsVC.options.levelge0only = levelge0only

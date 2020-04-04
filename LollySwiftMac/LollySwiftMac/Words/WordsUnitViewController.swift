@@ -278,7 +278,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
         if vmReview.subscription != nil {
             vmReview.stop()
         } else {
-            let optionsVC = NSStoryboard(name: "Tools", bundle: nil).instantiateController(withIdentifier: "ReviewOptionsViewController") as! ReviewOptionsViewController
+            let optionsVC = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: "ReviewOptionsViewController") as! ReviewOptionsViewController
             optionsVC.options.mode = 0
             optionsVC.options.shuffled = vmReview.shuffled
             optionsVC.options.levelge0only = vmReview.levelge0only
