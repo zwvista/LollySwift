@@ -405,6 +405,10 @@ class SettingsViewModel: NSObject {
         return MUserSetting.update(info: INFO_USDICTITEM, stringValue: USDICTITEM).do { self.delegate?.onUpdateDictItem() }
     }
     
+    func updateDictItems() -> Observable<()> {
+        return MUserSetting.update(info: INFO_USDICTITEMS, stringValue: USDICTITEMS).do { self.delegate?.onUpdateDictItems() }
+    }
+
     func updateDictNote() -> Observable<()> {
         return MUserSetting.update(info: INFO_USDICTNOTEID, intValue: USDICTNOTEID).do { self.delegate?.onUpdateDictNote() }
     }
@@ -543,6 +547,7 @@ protocol SettingsViewModelDelegate : NSObjectProtocol {
     func onGetData()
     func onUpdateLang()
     func onUpdateDictItem()
+    func onUpdateDictItems()
     func onUpdateDictNote()
     func onUpdateDictTranslation()
     func onUpdateTextbook()
@@ -557,6 +562,7 @@ extension SettingsViewModelDelegate {
     func onGetData(){}
     func onUpdateLang(){}
     func onUpdateDictItem(){}
+    func onUpdateDictItems(){}
     func onUpdateDictNote(){}
     func onUpdateDictTranslation(){}
     func onUpdateTextbook(){}

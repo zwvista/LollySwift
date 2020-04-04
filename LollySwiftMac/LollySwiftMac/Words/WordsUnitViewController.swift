@@ -31,7 +31,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     override func viewDidLoad() {
         super.viewDidLoad()
         vmReview = EmbeddedReviewViewModel(disposeBag: disposeBag)
-        self.tvWords.registerForDraggedTypes([tableRowDragType])
+        tvWords.registerForDraggedTypes([tableRowDragType])
     }
     
     // https://stackoverflow.com/questions/9368654/cannot-seem-to-setenabledno-on-nsmenuitem

@@ -13,7 +13,6 @@ import RxSwift
 class SettingsViewController: NSViewController, SettingsViewModelDelegate {
     @IBOutlet weak var acLanguages: NSArrayController!
     @IBOutlet weak var acVoices: NSArrayController!
-    @IBOutlet weak var acDictItems: NSArrayController!
     @IBOutlet weak var acDictsNote: NSArrayController!
     @IBOutlet weak var acDictsTranslation: NSArrayController!
     @IBOutlet weak var acTextbooks: NSArrayController!
@@ -22,7 +21,7 @@ class SettingsViewController: NSViewController, SettingsViewModelDelegate {
     @IBOutlet weak var tfUnitsInAllFrom: NSTextField!
     @IBOutlet weak var tfUnitsInAllTo: NSTextField!
     @IBOutlet weak var pubLanguages: NSPopUpButton!
-    @IBOutlet weak var pubDictItems: NSPopUpButton!
+    @IBOutlet weak var tvDictItems: NSTextView!
     @IBOutlet weak var pubDictsNote: NSPopUpButton!
     @IBOutlet weak var pubDictsTranslation: NSPopUpButton!
     @IBOutlet weak var pubTextbookFilters: NSPopUpButton!
@@ -68,10 +67,6 @@ class SettingsViewController: NSViewController, SettingsViewModelDelegate {
     
     @IBAction func voiceSelected(_ sender: AnyObject) {
         vm.updateMacVoice().subscribe().disposed(by: disposeBag)
-    }
-
-    @IBAction func dictReferenceSelected(_ sender: AnyObject) {
-        vm.updateDictItem().subscribe().disposed(by: disposeBag)
     }
     
     @IBAction func dictNoteSelected(_ sender: AnyObject) {
@@ -131,11 +126,23 @@ class SettingsViewController: NSViewController, SettingsViewModelDelegate {
 
     func onUpdateLang() {
         acVoices.content = vm.arrMacVoices
-        acDictItems.content = vm.arrDictItems
+        updateDictItems()
         acDictsNote.content = vm.arrDictsNote
         acDictsTranslation.content = vm.arrDictsTranslation
         acTextbooks.content = vm.arrTextbooks
         onUpdateTextbook()
+    }
+    
+    private func updateDictItems() {
+        tvDictItems.string = vm.selectedDictItems.map { $0.DICTNAME }.joined(separator: "\n")
+    }
+    
+    @IBAction func selectDicts(_ sender: Any) {
+        let dictVC = storyboard!.instantiateController(withIdentifier: "SelectDictsViewController") as! SelectDictsViewController
+        dictVC.complete = {
+            self.updateDictItems()
+        }
+        self.presentAsModalWindow(dictVC)
     }
     
     func onUpdateTextbook() {
