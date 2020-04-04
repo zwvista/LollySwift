@@ -364,8 +364,7 @@ class SettingsViewModel: NSObject {
                 self.arrDictsReference = result.0
                 self.arrDictItems = self.arrDictsReference.map { MDictItem(id: String($0.DICTID), name: $0.DICTNAME) }
                 self.selectedDictItem = self.arrDictItems.first { $0.DICTID == self.USDICTITEM }!
-                let dictitems = self.USDICTITEMS.split(",")
-                self.selectedDictItems = self.arrDictItems.filter { dictitems.contains($0.DICTID) }
+                self.selectedDictItems = self.USDICTITEMS.split(",").map { id in self.arrDictItems.first { String($0.DICTID) == id }! }
                 self.arrDictsNote = result.1
                 if self.arrDictsNote.isEmpty { self.arrDictsNote.append(MDictNote()) }
                 self.selectedDictNote = self.arrDictsNote.first { $0.DICTID == self.USDICTNOTEID } ?? self.arrDictsNote[0]

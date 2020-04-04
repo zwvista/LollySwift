@@ -3,7 +3,7 @@
 //  LollySwiftMac
 //
 //  Created by 趙偉 on 2020/04/05.
-//  Copyright © 2020 趙偉. All rights reserved.
+//  Copyright © 2020 趙偉. Available rights reserved.
 //
 
 import Cocoa
@@ -11,17 +11,17 @@ import RxSwift
 
 class SelectDictsViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 
-    @IBOutlet weak var tvAll: NSTableView!
+    @IBOutlet weak var tvAvailable: NSTableView!
     @IBOutlet weak var tvSelected: NSTableView!
     @IBOutlet weak var btnAdd: NSButton!
     @IBOutlet weak var btnRemove: NSButton!
-    @IBOutlet weak var btnRemoveAll: NSButton!
+    @IBOutlet weak var btnRemoveAvailable: NSButton!
     
     var vm: SettingsViewModel {
         return AppDelegate.theSettingsViewModel
     }
     let disposeBag = DisposeBag()
-    var dictsAll: [MDictionary]!
+    var dictsAvailable: [MDictionary]!
     var dictsSelected: [MDictItem]!
     var complete: (() -> Void)?
 
@@ -33,22 +33,22 @@ class SelectDictsViewController: NSViewController, NSTableViewDataSource, NSTabl
         super.viewDidLoad()
         tvSelected.registerForDraggedTypes([tableRowDragType])
         dictsSelected = vm.selectedDictItems
-        updateDictsAll()
+        updateDictsAvailable()
     }
     
-    private func updateDictsAll() {
-        dictsAll = vm.arrDictsReference.filter { d in !dictsSelected.contains { $0.DICTNAME == d.DICTNAME } }
+    private func updateDictsAvailable() {
+        dictsAvailable = vm.arrDictsReference.filter { d in !dictsSelected.contains { $0.DICTNAME == d.DICTNAME } }
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return tableView === tvAll ? dictsAll.count : dictsSelected.count
+        return tableView === tvAvailable ? dictsAvailable.count : dictsSelected.count
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! NSTableCellView
         let columnName = tableColumn!.identifier.rawValue
-        if tableView === tvAll {
-            let item = dictsAll[row]
+        if tableView === tvAvailable {
+            let item = dictsAvailable[row]
             cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
         } else {
             let item = dictsSelected[row]
@@ -102,8 +102,8 @@ class SelectDictsViewController: NSViewController, NSTableViewDataSource, NSTabl
     
     @IBAction func addRemoveItems(_ sender: AnyObject) {
         if sender === btnAdd {
-            for i in tvAll.selectedRowIndexes {
-                let o = dictsAll[i]
+            for i in tvAvailable.selectedRowIndexes {
+                let o = dictsAvailable[i]
                 dictsSelected.append(MDictItem(id: String(o.DICTID), name: o.DICTNAME))
             }
         } else if sender === btnRemove {
@@ -113,8 +113,8 @@ class SelectDictsViewController: NSViewController, NSTableViewDataSource, NSTabl
         } else {
             dictsSelected.removeAll()
         }
-        updateDictsAll()
-        tvAll.reloadData()
+        updateDictsAvailable()
+        tvAvailable.reloadData()
         tvSelected.reloadData()
     }
 
