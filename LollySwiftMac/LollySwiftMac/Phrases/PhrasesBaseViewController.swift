@@ -27,8 +27,8 @@ class PhrasesBaseViewController: NSViewController, LollyProtocol, NSTableViewDat
         settingsChanged()
     }
     
-    // Take a reference to the window controller in order to prevent it from being released
-    // Otherwise, we would not be able to access its controls afterwards
+    // Hold a reference to the window controller in order to prevent it from being released
+    // Without it, we would not be able to access its child controls afterwards
     var wc: PhrasesBaseWindowController!
     override func viewDidAppear() {
         super.viewDidAppear()

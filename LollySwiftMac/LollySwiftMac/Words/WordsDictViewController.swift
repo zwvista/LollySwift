@@ -91,5 +91,8 @@ class WordsDictViewController: NSViewController, WKNavigationDelegate {
     @IBAction func openURL(_ sender: AnyObject) {
         MacApi.openURL(tfURL.stringValue)
     }
-
+    
+    deinit {
+        print("DEBUG: \(self.className) deinit")
+    }
 }

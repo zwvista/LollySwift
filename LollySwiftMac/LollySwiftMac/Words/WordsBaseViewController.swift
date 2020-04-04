@@ -44,8 +44,8 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
         settingsChanged()
     }
     
-    // Take a reference to the window controller in order to prevent it from being released
-    // Otherwise, we would not be able to access its controls afterwards
+    // Hold a reference to the window controller in order to prevent it from being released
+    // Without it, we would not be able to access its child controls afterwards
     var wc: WordsBaseWindowController!
     override func viewDidAppear() {
         super.viewDidAppear()
@@ -334,8 +334,11 @@ class WordsBaseWindowController: NSWindowController, LollyProtocol, NSWindowDele
     @IBOutlet weak var tbiDict37: NSToolbarItem!
     @IBOutlet weak var tbiDict38: NSToolbarItem!
     @IBOutlet weak var tbiDict39: NSToolbarItem!
+    var vc: WordsBaseViewController {
+        return contentViewController as! WordsBaseViewController
+    }
     @objc var vm: SettingsViewModel! {
-        return (contentViewController as! WordsBaseViewController).vmSettings
+        return vc.vmSettings
     }
     private var defaultToolbarItemCount = 0
     
@@ -357,10 +360,10 @@ class WordsBaseWindowController: NSWindowController, LollyProtocol, NSWindowDele
                 item.tag = i
                 item.target = contentViewController
                 item.action = #selector(WordsBaseViewController.searchDict(_:))
-                item.image = (contentViewController as! WordsBaseViewController).imageOff
+                item.image = vc.imageOff
                 item.isEnabled = true
                 if i == vm.selectedDictItemIndex {
-                    (contentViewController as! WordsBaseViewController).searchDict(item)
+                    vc.searchDict(item)
                 }
             } else {
                 item.label = ""
