@@ -198,6 +198,12 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
             }
         }
         
+        func f(word: String) {
+            for item in tabView.tabViewItems {
+                (item.viewController as! WordsDictViewController).searchWord(word: word)
+            }
+        }
+
         if responder == nil {
             responder = tvWords
         }
@@ -205,18 +211,12 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
         if row == -1 {
             selectedWord = ""
             selectedWordID = 0
-            searchWord(word: newWord)
+            f(word: newWord)
         } else {
             let item = itemForRow(row: row)!
             selectedWord = item.WORD
             selectedWordID = item.WORDID
-            searchWord(word: selectedWord)
-        }
-    }
-    
-    func searchWord(word: String) {
-        for item in tabView.tabViewItems {
-            (item.viewController as? WordsDictViewController)?.searchWord(word: word)
+            f(word: selectedWord)
         }
     }
     
@@ -278,8 +278,12 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     @IBAction func openOnlineDict(_ sender: AnyObject) {
         let row = tvWords.selectedRow
         guard row != -1 else {return}
-        let item = itemForRow(row: row)!
-        searchWord(word: item.WORD)
+        let word = itemForRow(row: row)!.WORD
+        for item in tabView.tabViewItems {
+            let vc = item.viewController as! WordsDictViewController
+            let url = vc.dict.urlString(word: word, arrAutoCorrect: vmSettings.arrAutoCorrect)
+            MacApi.openURL(url)
+        }
     }
     
     func removeAllTabs() {
