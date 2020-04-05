@@ -126,15 +126,11 @@ class SettingsViewController: NSViewController, SettingsViewModelDelegate, NSTab
 
     func onUpdateLang() {
         acVoices.content = vm.arrMacVoices
-        updateDictsReference()
+        tvDictsReference.reloadData()
         acDictsNote.content = vm.arrDictsNote
         acDictsTranslation.content = vm.arrDictsTranslation
         acTextbooks.content = vm.arrTextbooks
         onUpdateTextbook()
-    }
-    
-    private func updateDictsReference() {
-        tvDictsReference.reloadData()
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
@@ -151,7 +147,7 @@ class SettingsViewController: NSViewController, SettingsViewModelDelegate, NSTab
     @IBAction func selectDicts(_ sender: Any) {
         let dictVC = storyboard!.instantiateController(withIdentifier: "SelectDictsViewController") as! SelectDictsViewController
         dictVC.complete = {
-            self.updateDictsReference()
+            self.tvDictsReference.reloadData()
         }
         self.presentAsModalWindow(dictVC)
     }
