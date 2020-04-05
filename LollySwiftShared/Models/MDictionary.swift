@@ -42,7 +42,7 @@ class MDictionary: NSObject, Codable {
         return url
     }
     
-    static func getAllDataByLang(_ langid: Int) -> Observable<[MDictionary]> {
+    static func getDictsByLang(_ langid: Int) -> Observable<[MDictionary]> {
         // SQL: SELECT * FROM VDICTIONARIES WHERE LANGIDFROM=?
         let url = "\(CommonApi.url)VDICTIONARIES?filter=LANGIDFROM,eq,\(langid)&order=SEQNUM&order=DICTNAME"
         return RestApi.getRecords(url: url)
@@ -59,10 +59,8 @@ class MDictionary: NSObject, Codable {
         let url = "\(CommonApi.url)DICTIONARIES"
         return RestApi.create(url: url, body: try! item.toJSONString(prettyPrint: false)!).map { $0.toInt()! }.do(onNext: { print($0) })
     }
-}
 
-class MDictReference: MDictionary {
-    static func getDataByLang(_ langid: Int) -> Observable<[MDictReference]> {
+    static func getDictsReferenceByLang(_ langid: Int) -> Observable<[MDictionary]> {
         // SQL: SELECT * FROM VDICTSREFERENCE WHERE LANGIDFROM=?
         let url = "\(CommonApi.url)VDICTSREFERENCE?filter=LANGIDFROM,eq,\(langid)&order=SEQNUM&order=DICTNAME"
         return RestApi.getRecords(url: url)
@@ -77,38 +75,14 @@ class MDictReference: MDictionary {
             return template
         }
     }
-}
 
-@objcMembers
-class MDictItem: NSObject {
-    var DICTID = ""
-    var DICTNAME = ""
-    
-    override var description: String {
-        return DICTNAME
-    }
-
-    init(id: String, name: String) {
-        DICTID = id
-        DICTNAME = name
-        super.init()
-    }
-    
-    func dictids() -> [String] {
-        return DICTID.split(",")
-    }
-}
-
-class MDictNote: MDictionary {
-    static func getDataByLang(_ langid: Int) -> Observable<[MDictNote]> {
+    static func getDictsNoteByLang(_ langid: Int) -> Observable<[MDictionary]> {
         // SQL: SELECT * FROM VDICTSNOTE WHERE LANGIDFROM = ?
         let url = "\(CommonApi.url)VDICTSNOTE?filter=LANGIDFROM,eq,\(langid)"
         return RestApi.getRecords(url: url)
     }
-}
-
-class MDictTranslation: MDictionary {
-    static func getDataByLang(_ langid: Int) -> Observable<[MDictTranslation]> {
+    
+    static func getDictsTranslationByLang(_ langid: Int) -> Observable<[MDictionary]> {
         // SQL: SELECT * FROM VDICTSTRANSLATION WHERE LANGIDFROM = ?
         let url = "\(CommonApi.url)VDICTSTRANSLATION?filter=LANGIDFROM,eq,\(langid)"
         return RestApi.getRecords(url: url)

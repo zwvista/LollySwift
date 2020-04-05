@@ -18,7 +18,7 @@ class DictsViewModel: NSObject {
         vmSettings = settings
         self.disposeBag = disposeBag
         super.init()
-        MDictionary.getAllDataByLang(settings.selectedLang.ID).subscribe(onNext: {
+        MDictionary.getDictsByLang(settings.selectedLang.ID).subscribe(onNext: {
             self.arrDicts = $0
             complete()
         }).disposed(by: disposeBag)

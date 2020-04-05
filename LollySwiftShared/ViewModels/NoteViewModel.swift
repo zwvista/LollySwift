@@ -12,7 +12,7 @@ import RxSwift
 class NoteViewModel {
 
     var vmSettings: SettingsViewModel
-    var mDictNote: MDictNote {
+    var mDictNote: MDictionary {
         return vmSettings.selectedDictNote
     }
     let disposeBag: DisposeBag!

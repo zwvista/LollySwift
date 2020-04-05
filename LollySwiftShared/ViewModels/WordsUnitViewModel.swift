@@ -12,7 +12,7 @@ import RxSwift
 class WordsUnitViewModel: NSObject {
     var vmSettings: SettingsViewModel
     var vmNote: NoteViewModel!
-    var mDictNote: MDictNote {
+    var mDictNote: MDictionary {
         return vmNote.mDictNote
     }
     let inTextbook: Bool

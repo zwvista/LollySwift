@@ -155,28 +155,26 @@ class SettingsViewModel: NSObject {
         return arriOSVoices.firstIndex { $0 == selectediOSVoice } ?? 0
     }
 
-    var arrDictsReference = [MDictReference]()
     @objc
-    var arrDictItems = [MDictItem]()
-    @objc
-    var selectedDictItem: MDictItem! {
+    var arrDictsReference = [MDictionary]()
+    var selectedDictReference: MDictionary! {
         didSet {
-            USDICTITEM = selectedDictItem.DICTID
+            USDICTITEM = String(selectedDictReference.DICTID)
         }
     }
-    var selectedDictItems = [MDictItem]() {
+    var selectedDictsReference = [MDictionary]() {
         didSet {
-            USDICTITEMS = selectedDictItems.map { $0.DICTID }.joined(separator: ",")
+            USDICTITEMS = selectedDictsReference.map { String($0.DICTID) }.joined(separator: ",")
         }
     }
     var selectedDictItemIndex: Int {
-        return arrDictItems.firstIndex { $0 == selectedDictItem } ?? 0
+        return arrDictsReference.firstIndex { $0 == selectedDictReference } ?? 0
     }
     
     @objc
-    var arrDictsNote = [MDictNote]()
+    var arrDictsNote = [MDictionary]()
     @objc
-    var selectedDictNote = MDictNote() {
+    var selectedDictNote = MDictionary() {
         didSet {
             USDICTNOTEID = selectedDictNote.DICTID
         }
@@ -187,9 +185,9 @@ class SettingsViewModel: NSObject {
     var hasDictNote: Bool { return arrDictsNote[0].ID != 0 }
     
     @objc
-    var arrDictsTranslation = [MDictTranslation]()
+    var arrDictsTranslation = [MDictionary]()
     @objc
-    var selectedDictTranslation = MDictTranslation() {
+    var selectedDictTranslation = MDictionary() {
         didSet {
             USDICTTRANSLATIONID = selectedDictTranslation.DICTID
         }
@@ -292,9 +290,8 @@ class SettingsViewModel: NSObject {
         arriOSVoices = x.arriOSVoices
         selectediOSVoice = x.selectediOSVoice
         arrDictsReference = x.arrDictsReference
-        arrDictItems = x.arrDictItems
-        selectedDictItem = x.selectedDictItem
-        selectedDictItems = x.selectedDictItems
+        selectedDictReference = x.selectedDictReference
+        selectedDictsReference = x.selectedDictsReference
         arrDictsNote = x.arrDictsNote
         selectedDictNote = x.selectedDictNote
         arrDictsTranslation = x.arrDictsTranslation
@@ -354,22 +351,21 @@ class SettingsViewModel: NSObject {
         INFO_USDICTTRANSLATIONID = getUSInfo(name: MUSMapping.NAME_USDICTTRANSLATIONID)
         INFO_USMACVOICEID = getUSInfo(name: MUSMapping.NAME_USMACVOICEID)
         INFO_USIOSVOICEID = getUSInfo(name: MUSMapping.NAME_USIOSVOICEID)
-        return Observable.zip(MDictReference.getDataByLang(USLANGID),
-                              MDictNote.getDataByLang(USLANGID),
-                              MDictTranslation.getDataByLang(USLANGID),
+        return Observable.zip(MDictionary.getDictsReferenceByLang(USLANGID),
+                              MDictionary.getDictsNoteByLang(USLANGID),
+                              MDictionary.getDictsTranslationByLang(USLANGID),
                               MTextbook.getDataByLang(USLANGID),
                               MAutoCorrect.getDataByLang(USLANGID),
                               MVoice.getDataByLang(USLANGID))
             .flatMap { result -> Observable<()> in
                 self.arrDictsReference = result.0
-                self.arrDictItems = self.arrDictsReference.map { MDictItem(id: String($0.DICTID), name: $0.DICTNAME) }
-                self.selectedDictItem = self.arrDictItems.first { $0.DICTID == self.USDICTITEM }!
-                self.selectedDictItems = self.USDICTITEMS.split(",").flatMap { id in self.arrDictItems.filter { $0.DICTID == id } }
+                self.selectedDictReference = self.arrDictsReference.first { String($0.DICTID) == self.USDICTITEM }!
+                self.selectedDictsReference = self.USDICTITEMS.split(",").flatMap { id in self.arrDictsReference.filter { String($0.DICTID) == id } }
                 self.arrDictsNote = result.1
-                if self.arrDictsNote.isEmpty { self.arrDictsNote.append(MDictNote()) }
+                if self.arrDictsNote.isEmpty { self.arrDictsNote.append(MDictionary()) }
                 self.selectedDictNote = self.arrDictsNote.first { $0.DICTID == self.USDICTNOTEID } ?? self.arrDictsNote[0]
                 self.arrDictsTranslation = result.2
-                if self.arrDictsTranslation.isEmpty { self.arrDictsTranslation.append(MDictTranslation()) }
+                if self.arrDictsTranslation.isEmpty { self.arrDictsTranslation.append(MDictionary()) }
                 self.selectedDictTranslation = self.arrDictsTranslation.first { $0.DICTID == self.USDICTTRANSLATIONID } ?? self.arrDictsTranslation[0]
                 self.arrTextbooks = result.3
                 self.selectedTextbook = self.arrTextbooks.first { $0.ID == self.USTEXTBOOKID }!

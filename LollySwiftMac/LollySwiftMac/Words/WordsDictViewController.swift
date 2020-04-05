@@ -18,7 +18,7 @@ class WordsDictViewController: NSViewController, WKNavigationDelegate {
 
     var dictStatus = DictWebViewStatus.ready
     var word = ""
-    var dict: MDictReference!
+    var dict: MDictionary!
     var webInitilized = false
     var url = ""
 

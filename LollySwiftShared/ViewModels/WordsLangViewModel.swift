@@ -12,7 +12,7 @@ import RxSwift
 class WordsLangViewModel: NSObject {
     var vmSettings: SettingsViewModel
     var vmNote: NoteViewModel!
-    var mDictNote: MDictNote {
+    var mDictNote: MDictionary {
         return vmNote.mDictNote
     }
     let disposeBag: DisposeBag!

@@ -181,7 +181,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
         if sender is NSToolbarItem {
             let tbi = sender as! NSToolbarItem
             selectedDictItemIndex = tbi.tag
-            let item = vmSettings.arrDictItems[selectedDictItemIndex]
+            let item = vmSettings.arrDictsReference[selectedDictItemIndex]
             let name = item.DICTNAME
             let item2 = vmSettings.arrDictsReference.first { $0.DICTNAME == name }!
             if let tvi = tabView.tabViewItems.first(where: { $0.label == name }) {
@@ -362,8 +362,8 @@ class WordsBaseWindowController: NSWindowController, LollyProtocol, NSWindowDele
         vc.removeAllTabs()
         for i in 0..<40 {
             let item = toolbar.items[defaultToolbarItemCount + i]
-            if i < vm.arrDictItems.count {
-                item.label = vm.arrDictItems[i].DICTNAME
+            if i < vm.arrDictsReference.count {
+                item.label = vm.arrDictsReference[i].DICTNAME
                 item.tag = i
                 item.target = contentViewController
                 item.action = #selector(WordsBaseViewController.searchDict(_:))
@@ -378,7 +378,7 @@ class WordsBaseWindowController: NSWindowController, LollyProtocol, NSWindowDele
                 item.isEnabled = false
             }
         }
-        for o in vm.selectedDictItems {
+        for o in vm.selectedDictsReference {
             let item = toolbar.items.first { $0.label == o.DICTNAME }!
             vc.searchDict(item)
         }

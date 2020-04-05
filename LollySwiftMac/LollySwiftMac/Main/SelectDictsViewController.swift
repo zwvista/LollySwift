@@ -22,7 +22,7 @@ class SelectDictsViewController: NSViewController, NSTableViewDataSource, NSTabl
     }
     let disposeBag = DisposeBag()
     var dictsAvailable: [MDictionary]!
-    var dictsSelected: [MDictItem]!
+    var dictsSelected: [MDictionary]!
     var complete: (() -> Void)?
 
     // https://developer.apple.com/videos/play/wwdc2011/120/
@@ -32,7 +32,7 @@ class SelectDictsViewController: NSViewController, NSTableViewDataSource, NSTabl
     override func viewDidLoad() {
         super.viewDidLoad()
         tvSelected.registerForDraggedTypes([tableRowDragType])
-        dictsSelected = vm.selectedDictItems
+        dictsSelected = vm.selectedDictsReference
         updateDictsAvailable()
     }
     override func viewDidAppear() {
@@ -106,8 +106,7 @@ class SelectDictsViewController: NSViewController, NSTableViewDataSource, NSTabl
     @IBAction func addRemoveItems(_ sender: AnyObject) {
         if sender === btnAdd {
             for i in tvAvailable.selectedRowIndexes {
-                let o = dictsAvailable[i]
-                dictsSelected.append(MDictItem(id: String(o.DICTID), name: o.DICTNAME))
+                dictsSelected.append(dictsAvailable[i])
             }
         } else if sender === btnRemove {
             for i in tvSelected.selectedRowIndexes.reversed() {
@@ -122,7 +121,7 @@ class SelectDictsViewController: NSViewController, NSTableViewDataSource, NSTabl
     }
 
     @IBAction func okClicked(_ sender: AnyObject) {
-        vm.selectedDictItems = dictsSelected
+        vm.selectedDictsReference = dictsSelected
         vm.updateDictItems().subscribe {
             self.complete?()
         }.disposed(by: disposeBag)

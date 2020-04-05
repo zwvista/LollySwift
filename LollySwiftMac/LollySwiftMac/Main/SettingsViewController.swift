@@ -134,7 +134,7 @@ class SettingsViewController: NSViewController, SettingsViewModelDelegate {
     }
     
     private func updateDictItems() {
-        tvDictItems.string = vm.selectedDictItems.map { $0.DICTNAME }.joined(separator: "\n")
+        tvDictItems.string = vm.selectedDictsReference.map { $0.DICTNAME }.joined(separator: "\n")
     }
     
     @IBAction func selectDicts(_ sender: Any) {
