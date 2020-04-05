@@ -10,7 +10,7 @@ import Cocoa
 import RxSwift
 
 @objcMembers
-class SettingsViewController: NSViewController, SettingsViewModelDelegate {
+class SettingsViewController: NSViewController, SettingsViewModelDelegate, NSTableViewDataSource, NSTableViewDelegate {
     @IBOutlet weak var acLanguages: NSArrayController!
     @IBOutlet weak var acVoices: NSArrayController!
     @IBOutlet weak var acDictsNote: NSArrayController!
@@ -21,7 +21,7 @@ class SettingsViewController: NSViewController, SettingsViewModelDelegate {
     @IBOutlet weak var tfUnitsInAllFrom: NSTextField!
     @IBOutlet weak var tfUnitsInAllTo: NSTextField!
     @IBOutlet weak var pubLanguages: NSPopUpButton!
-    @IBOutlet weak var tvDictsReference: NSTextView!
+    @IBOutlet weak var tvDictsReference: NSTableView!
     @IBOutlet weak var pubDictsNote: NSPopUpButton!
     @IBOutlet weak var pubDictsTranslation: NSPopUpButton!
     @IBOutlet weak var pubTextbookFilters: NSPopUpButton!
@@ -134,9 +134,20 @@ class SettingsViewController: NSViewController, SettingsViewModelDelegate {
     }
     
     private func updateDictsReference() {
-        tvDictsReference.string = vm.selectedDictsReference.map { $0.DICTNAME }.joined(separator: "\n")
+        tvDictsReference.reloadData()
     }
     
+    func numberOfRows(in tableView: NSTableView) -> Int {
+        return vm.selectedDictsReference.count
+    }
+    
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! NSTableCellView
+        let columnName = tableColumn!.identifier.rawValue
+        cell.textField?.stringValue = String(describing: vm.selectedDictsReference[row].value(forKey: columnName) ?? "")
+        return cell
+    }
+
     @IBAction func selectDicts(_ sender: Any) {
         let dictVC = storyboard!.instantiateController(withIdentifier: "SelectDictsViewController") as! SelectDictsViewController
         dictVC.complete = {
