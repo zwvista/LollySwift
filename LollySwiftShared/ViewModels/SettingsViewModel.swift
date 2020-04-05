@@ -167,7 +167,7 @@ class SettingsViewModel: NSObject {
             USDICTITEMS = selectedDictsReference.map { String($0.DICTID) }.joined(separator: ",")
         }
     }
-    var selectedDictItemIndex: Int {
+    var selectedDictReferenceIndex: Int {
         return arrDictsReference.firstIndex { $0 == selectedDictReference } ?? 0
     }
     
@@ -396,12 +396,12 @@ class SettingsViewModel: NSObject {
         return MUserSetting.update(info: INFO_USTEXTBOOKID, intValue: USTEXTBOOKID).do { self.delegate?.onUpdateTextbook() }
     }
 
-    func updateDictItem() -> Observable<()> {
-        return MUserSetting.update(info: INFO_USDICTITEM, stringValue: USDICTITEM).do { self.delegate?.onUpdateDictItem() }
+    func updateDictReference() -> Observable<()> {
+        return MUserSetting.update(info: INFO_USDICTITEM, stringValue: USDICTITEM).do { self.delegate?.onUpdateDictReference() }
     }
     
-    func updateDictItems() -> Observable<()> {
-        return MUserSetting.update(info: INFO_USDICTITEMS, stringValue: USDICTITEMS).do { self.delegate?.onUpdateDictItems() }
+    func updateDictsReference() -> Observable<()> {
+        return MUserSetting.update(info: INFO_USDICTITEMS, stringValue: USDICTITEMS).do { self.delegate?.onUpdateDictsReference() }
     }
 
     func updateDictNote() -> Observable<()> {
@@ -541,8 +541,8 @@ class SettingsViewModel: NSObject {
 protocol SettingsViewModelDelegate : NSObjectProtocol {
     func onGetData()
     func onUpdateLang()
-    func onUpdateDictItem()
-    func onUpdateDictItems()
+    func onUpdateDictReference()
+    func onUpdateDictsReference()
     func onUpdateDictNote()
     func onUpdateDictTranslation()
     func onUpdateTextbook()
@@ -556,8 +556,8 @@ protocol SettingsViewModelDelegate : NSObjectProtocol {
 extension SettingsViewModelDelegate {
     func onGetData(){}
     func onUpdateLang(){}
-    func onUpdateDictItem(){}
-    func onUpdateDictItems(){}
+    func onUpdateDictReference(){}
+    func onUpdateDictsReference(){}
     func onUpdateDictNote(){}
     func onUpdateDictTranslation(){}
     func onUpdateTextbook(){}

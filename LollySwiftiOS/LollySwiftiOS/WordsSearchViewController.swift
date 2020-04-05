@@ -21,7 +21,7 @@ class WordsSearchViewController: UIViewController, WKNavigationDelegate, UISearc
     var word = ""
     let disposeBag = DisposeBag()
     var status = DictWebViewStatus.ready
-    let ddDictItem = DropDown()
+    let ddDictReference = DropDown()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,12 +29,12 @@ class WordsSearchViewController: UIViewController, WKNavigationDelegate, UISearc
         wvDict.navigationDelegate = self
         
         AppDelegate.initializeObject.subscribe {
-            self.ddDictItem.anchorView = self.btnDict
-            self.ddDictItem.dataSource = vmSettings.arrDictItems.map { $0.DICTNAME }
-            self.ddDictItem.selectRow(vmSettings.selectedDictItemIndex)
-            self.ddDictItem.selectionAction = { [unowned self] (index: Int, item: String) in
-                vmSettings.selectedDictItem = vmSettings.arrDictItems[index]
-                vmSettings.updateDictItem().subscribe {
+            self.ddDictReference.anchorView = self.btnDict
+            self.ddDictReference.dataSource = vmSettings.arrDictsReference.map { $0.DICTNAME }
+            self.ddDictReference.selectRow(vmSettings.selectedDictReferenceIndex)
+            self.ddDictReference.selectionAction = { [unowned self] (index: Int, item: String) in
+                vmSettings.selectedDictReference = vmSettings.arrDictsReference[index]
+                vmSettings.updateDictReference().subscribe {
                     self.searchBarSearchButtonClicked(self.sbword)
                 }.disposed(by: self.disposeBag)
             }
@@ -45,7 +45,7 @@ class WordsSearchViewController: UIViewController, WKNavigationDelegate, UISearc
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         word = sbword.text!
         sbword.resignFirstResponder()
-        let item = vmSettings.selectedDictItem!
+        let item = vmSettings.selectedDictReference!
         btnDict.setTitle(item.DICTNAME, for: .normal)
         let item2 = vmSettings.arrDictsReference.first { $0.DICTNAME == item.DICTNAME }!
         let url = item2.urlString(word: word, arrAutoCorrect: vmSettings.arrAutoCorrect)
@@ -69,13 +69,13 @@ class WordsSearchViewController: UIViewController, WKNavigationDelegate, UISearc
     }
     
     @IBAction func showDictDropDown(_ sender: AnyObject) {
-        ddDictItem.show()
+        ddDictReference.show()
     }
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         //        guard webView.stringByEvaluatingJavaScript(from: "document.readyState") == "complete" && status == .navigating else {return}
         guard status == .navigating else {return}
-        let item = vmSettings.selectedDictItem!
+        let item = vmSettings.selectedDictReference!
         let item2 = vmSettings.arrDictsReference.first { $0.DICTNAME == item.DICTNAME }!
         // https://stackoverflow.com/questions/34751860/get-html-from-wkwebview-in-swift
         webView.evaluateJavaScript("document.documentElement.outerHTML.toString()") { (html: Any?, error: Error?) in

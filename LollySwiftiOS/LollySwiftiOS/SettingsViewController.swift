@@ -35,7 +35,7 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
 
     let ddLang = DropDown()
     let ddVoice = DropDown()
-    let ddDictItem = DropDown()
+    let ddDictReference = DropDown()
     let ddDictNote = DropDown()
     let ddDictTranslation = DropDown()
     let ddTextbook = DropDown()
@@ -69,11 +69,11 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
             self.vm.updateiOSVoice().subscribe().disposed(by: self.disposeBag)
         }
 
-        ddDictItem.anchorView = dictItemCell
-        ddDictItem.selectionAction = { [unowned self] (index: Int, item: String) in
-            guard index != self.vm.selectedDictItemIndex else {return}
-            self.vm.selectedDictItem = self.vm.arrDictItems[index]
-            self.vm.updateDictItem().subscribe().disposed(by: self.disposeBag)
+        ddDictReference.anchorView = dictItemCell
+        ddDictReference.selectionAction = { [unowned self] (index: Int, item: String) in
+            guard index != self.vm.selectedDictReferenceIndex else {return}
+            self.vm.selectedDictReference = self.vm.arrDictsReference[index]
+            self.vm.updateDictReference().subscribe().disposed(by: self.disposeBag)
         }
 
         ddDictNote.anchorView = dictNoteCell
@@ -147,7 +147,7 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
         case 1:
             ddVoice.show()
         case 2:
-            ddDictItem.show()
+            ddDictReference.show()
         case 3:
             ddDictNote.show()
         case 4:
@@ -182,8 +182,8 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
         ddVoice.dataSource = vm.arriOSVoices.map { $0.VOICENAME }
         onUpdateiOSVoice()
         
-        ddDictItem.dataSource = vm.arrDictItems.map { $0.DICTNAME }
-        onUpdateDictItem()
+        ddDictReference.dataSource = vm.arrDictsReference.map { $0.DICTNAME }
+        onUpdateDictReference()
 
         ddDictNote.dataSource = vm.arrDictsNote.isEmpty ? [] : vm.arrDictsNote.map { $0.DICTNAME }
         onUpdateDictNote()
@@ -202,12 +202,12 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
         ddVoice.selectIndex(vm.selectediOSVoiceIndex)
     }
     
-    func onUpdateDictItem() {
-        let item = vm.selectedDictItem!
+    func onUpdateDictReference() {
+        let item = vm.selectedDictReference!
         dictItemCell.textLabel!.text = item.DICTNAME
         let item2 = vm.arrDictsReference.first { $0.DICTNAME == item.DICTNAME }
         dictItemCell.detailTextLabel!.text = item2?.URL ?? ""
-        ddDictItem.selectIndex(vm.selectedDictItemIndex)
+        ddDictReference.selectIndex(vm.selectedDictReferenceIndex)
     }
     
     func onUpdateDictNote() {

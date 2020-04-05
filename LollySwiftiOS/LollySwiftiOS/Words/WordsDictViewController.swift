@@ -19,7 +19,7 @@ class WordsDictViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
     weak var wvDict: WKWebView!
     
     let vm = WordsDictViewModel(settings: vmSettings, needCopy: false) {}
-    let ddWord = DropDown(), ddDictItem = DropDown()
+    let ddWord = DropDown(), ddDictReference = DropDown()
     
     let disposeBag = DisposeBag()
     var dictStatus = DictWebViewStatus.ready
@@ -45,12 +45,12 @@ class WordsDictViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
             self.currentWordChanged()
         }
         
-        ddDictItem.anchorView = btnDict
-        ddDictItem.dataSource = vmSettings.arrDictItems.map { $0.DICTNAME }
-        ddDictItem.selectRow(vmSettings.selectedDictItemIndex)
-        ddDictItem.selectionAction = { [unowned self] (index: Int, item: String) in
-            vmSettings.selectedDictItem = vmSettings.arrDictItems[index]
-            vmSettings.updateDictItem().subscribe {
+        ddDictReference.anchorView = btnDict
+        ddDictReference.dataSource = vmSettings.arrDictsReference.map { $0.DICTNAME }
+        ddDictReference.selectRow(vmSettings.selectedDictReferenceIndex)
+        ddDictReference.selectionAction = { [unowned self] (index: Int, item: String) in
+            vmSettings.selectedDictReference = vmSettings.arrDictsReference[index]
+            vmSettings.updateDictReference().subscribe {
                 self.selectDictChanged()
             }.disposed(by: self.disposeBag)
         }
@@ -66,7 +66,7 @@ class WordsDictViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
     }
     
     private func selectDictChanged() {
-        let item = vmSettings.selectedDictItem!
+        let item = vmSettings.selectedDictReference!
         btnDict.setTitle(item.DICTNAME, for: .normal)
         let item2 = vmSettings.arrDictsReference.first { $0.DICTNAME == item.DICTNAME }!
         let url = item2.urlString(word: vm.currentWord, arrAutoCorrect: vmSettings.arrAutoCorrect)
@@ -92,13 +92,13 @@ class WordsDictViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
     }
     
     @IBAction func showDictDropDown(_ sender: AnyObject) {
-        ddDictItem.show()
+        ddDictReference.show()
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
 //        guard webView.stringByEvaluatingJavaScript(from: "document.readyState") == "complete" && status == .navigating else {return}
         guard dictStatus != .ready else {return}
-        let item = vmSettings.selectedDictItem!
+        let item = vmSettings.selectedDictReference!
         let item2 = vmSettings.arrDictsReference.first { $0.DICTNAME == item.DICTNAME }!
         // https://stackoverflow.com/questions/34751860/get-html-from-wkwebview-in-swift
         switch dictStatus {

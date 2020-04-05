@@ -21,7 +21,7 @@ class SettingsViewController: NSViewController, SettingsViewModelDelegate {
     @IBOutlet weak var tfUnitsInAllFrom: NSTextField!
     @IBOutlet weak var tfUnitsInAllTo: NSTextField!
     @IBOutlet weak var pubLanguages: NSPopUpButton!
-    @IBOutlet weak var tvDictItems: NSTextView!
+    @IBOutlet weak var tvDictsReference: NSTextView!
     @IBOutlet weak var pubDictsNote: NSPopUpButton!
     @IBOutlet weak var pubDictsTranslation: NSPopUpButton!
     @IBOutlet weak var pubTextbookFilters: NSPopUpButton!
@@ -126,21 +126,21 @@ class SettingsViewController: NSViewController, SettingsViewModelDelegate {
 
     func onUpdateLang() {
         acVoices.content = vm.arrMacVoices
-        updateDictItems()
+        updateDictsReference()
         acDictsNote.content = vm.arrDictsNote
         acDictsTranslation.content = vm.arrDictsTranslation
         acTextbooks.content = vm.arrTextbooks
         onUpdateTextbook()
     }
     
-    private func updateDictItems() {
-        tvDictItems.string = vm.selectedDictsReference.map { $0.DICTNAME }.joined(separator: "\n")
+    private func updateDictsReference() {
+        tvDictsReference.string = vm.selectedDictsReference.map { $0.DICTNAME }.joined(separator: "\n")
     }
     
     @IBAction func selectDicts(_ sender: Any) {
         let dictVC = storyboard!.instantiateController(withIdentifier: "SelectDictsViewController") as! SelectDictsViewController
         dictVC.complete = {
-            self.updateDictItems()
+            self.updateDictsReference()
         }
         self.presentAsModalWindow(dictVC)
     }

@@ -25,7 +25,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     }
     let disposeBag = DisposeBag()
     
-    var selectedDictItemIndex = 0
+    var selectedDictReferenceIndex = 0
     @objc var newWord = ""
     @objc var textFilter = ""
     @objc var levelge0only = false
@@ -180,8 +180,8 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     @IBAction func searchDict(_ sender: AnyObject) {
         if sender is NSToolbarItem {
             let tbi = sender as! NSToolbarItem
-            selectedDictItemIndex = tbi.tag
-            let item = vmSettings.arrDictsReference[selectedDictItemIndex]
+            selectedDictReferenceIndex = tbi.tag
+            let item = vmSettings.arrDictsReference[selectedDictReferenceIndex]
             let name = item.DICTNAME
             let item2 = vmSettings.arrDictsReference.first { $0.DICTNAME == name }!
             if let tvi = tabView.tabViewItems.first(where: { $0.label == name }) {
@@ -252,7 +252,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     }
 
     func settingsChanged() {
-        selectedDictItemIndex = vmSettings.selectedDictItemIndex
+        selectedDictReferenceIndex = vmSettings.selectedDictReferenceIndex
         synth.setVoice(NSSpeechSynthesizer.VoiceName(rawValue: vmSettings.macVoiceName))
     }
     
