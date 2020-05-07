@@ -1140,7 +1140,7 @@ Gw
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="tdj-xc-OeD" name="value" keyPath="item.WEBPAGE" id="iMz-oJ-F2r"/>
+                                    <binding destination="tdj-xc-OeD" name="value" keyPath="item.TITLE" id="4I5-Zg-jiF"/>
                                 </connections>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aOM-3V-2RO">
@@ -1185,7 +1185,7 @@ Gw
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="tdj-xc-OeD" name="value" keyPath="item.WEBPAGE" id="Ekb-HC-kiS"/>
+                                    <binding destination="tdj-xc-OeD" name="value" keyPath="item.URL" id="awi-qy-Brf"/>
                                 </connections>
                             </textField>
                         </subviews>
@@ -1232,7 +1232,8 @@ Gw
                         <outlet property="tfPattern" destination="Smo-K7-aUj" id="LWR-hD-Ka9"/>
                         <outlet property="tfPatternID" destination="GrY-IH-3v9" id="64U-vq-9Y2"/>
                         <outlet property="tfSeqNum" destination="MIY-zJ-xmQ" id="k3u-4V-Tgc"/>
-                        <outlet property="tfWebPage" destination="YC9-Kz-ieY" id="Jdd-r2-MAu"/>
+                        <outlet property="tfTitle" destination="YC9-Kz-ieY" id="wiP-O5-mUz"/>
+                        <outlet property="tfURL" destination="oYl-nJ-aGQ" id="e5u-M4-jhp"/>
                     </connections>
                 </viewController>
                 <customObject id="R95-Ea-SXC" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

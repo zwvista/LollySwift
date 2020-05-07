@@ -21,7 +21,8 @@ class PatternsWebPageViewController: NSViewController {
     @IBOutlet weak var tfPatternID: NSTextField!
     @IBOutlet weak var tfPattern: NSTextField!
     @IBOutlet weak var tfSeqNum: NSTextField!
-    @IBOutlet weak var tfWebPage: NSTextField!
+    @IBOutlet weak var tfTitle: NSTextField!
+    @IBOutlet weak var tfURL: NSTextField!
 
     let disposeBag = DisposeBag()
 
@@ -32,7 +33,7 @@ class PatternsWebPageViewController: NSViewController {
     
     override func viewDidAppear() {
         // https://stackoverflow.com/questions/24235815/cocoa-how-to-set-window-title-from-within-view-controller-in-swift
-        tfWebPage.becomeFirstResponder()
+        tfTitle.becomeFirstResponder()
         view.window?.title = isAdd ? "New Page" : item.TITLE
     }
 
