@@ -15,8 +15,9 @@ class MPatternWebPage: NSObject, Codable {
     var PATTERNID = 0
     var PATTERN = ""
     var SEQNUM = 0
-    var WEBPAGE = ""
-    
+    var TITLE = ""
+    var URL = ""
+
     override init() {
     }
     
@@ -25,7 +26,8 @@ class MPatternWebPage: NSObject, Codable {
         PATTERNID = x.PATTERNID
         PATTERN = x.PATTERN
         SEQNUM = x.SEQNUM
-        WEBPAGE = x.WEBPAGE
+        TITLE = x.TITLE
+        URL = x.URL
     }
 
     static func getDataByPattern(_ patternid: Int) -> Observable<[MPatternWebPage]> {

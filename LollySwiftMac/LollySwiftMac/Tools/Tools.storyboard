@@ -56,13 +56,13 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3v7-BO-AEi">
-                                <rect key="frame" x="0.0" y="0.0" width="1200" height="367"/>
+                                <rect key="frame" x="0.0" y="0.0" width="1200" height="315"/>
                                 <clipView key="contentView" id="KQl-JQ-Uyh">
-                                    <rect key="frame" x="1" y="0.0" width="1198" height="366"/>
+                                    <rect key="frame" x="1" y="0.0" width="1198" height="314"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="nnA-cq-Dpg" viewBased="YES" id="CPQ-Qn-Rxf">
-                                            <rect key="frame" x="0.0" y="0.0" width="1388" height="341"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="1388" height="289"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -223,7 +223,7 @@
                                     </subviews>
                                 </clipView>
                                 <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="gYj-ko-IyP">
-                                    <rect key="frame" x="1" y="350" width="1198" height="16"/>
+                                    <rect key="frame" x="1" y="298" width="1198" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="QbE-qG-5hE">
@@ -1068,9 +1068,9 @@ Gw
                                 </popUpButtonCell>
                                 <connections>
                                     <binding destination="6jh-Gj-9AD" name="content" keyPath="arrangedObjects" id="Zyb-F1-YGE"/>
-                                    <binding destination="6jh-Gj-9AD" name="contentObjects" keyPath="arrangedObjects.ID" previousBinding="Zyb-F1-YGE" id="dns-jL-5Ze"/>
-                                    <binding destination="6jh-Gj-9AD" name="contentValues" keyPath="arrangedObjects.NAME" previousBinding="dns-jL-5Ze" id="4sl-Sr-FfP"/>
-                                    <binding destination="3W4-9G-1wH" name="selectedObject" keyPath="item.DICTTYPEID" previousBinding="4sl-Sr-FfP" id="qHz-GE-vpR"/>
+                                    <binding destination="6jh-Gj-9AD" name="contentObjects" keyPath="arrangedObjects.CODE" previousBinding="Zyb-F1-YGE" id="dfu-Qn-vcP"/>
+                                    <binding destination="6jh-Gj-9AD" name="contentValues" keyPath="arrangedObjects.NAME" previousBinding="dfu-Qn-vcP" id="AL0-zf-Qbt"/>
+                                    <binding destination="3W4-9G-1wH" name="selectedObject" keyPath="item.DICTTYPEID" previousBinding="AL0-zf-Qbt" id="i3g-nr-f0K"/>
                                 </connections>
                             </popUpButton>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZhM-fO-gNm">

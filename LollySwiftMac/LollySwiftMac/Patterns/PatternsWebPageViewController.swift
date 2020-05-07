@@ -33,7 +33,7 @@ class PatternsWebPageViewController: NSViewController {
     override func viewDidAppear() {
         // https://stackoverflow.com/questions/24235815/cocoa-how-to-set-window-title-from-within-view-controller-in-swift
         tfWebPage.becomeFirstResponder()
-        view.window?.title = isAdd ? "New Page" : item.WEBPAGE
+        view.window?.title = isAdd ? "New Page" : item.TITLE
     }
 
     @IBAction func okClicked(_ sender: AnyObject) {

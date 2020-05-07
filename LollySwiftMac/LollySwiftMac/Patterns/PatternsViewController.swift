@@ -144,7 +144,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
             if row == -1 {
             } else {
                 let item = arrWebPages[row]
-                wvWebPage.load(URLRequest(url: URL(string: item.WEBPAGE)!))
+                wvWebPage.load(URLRequest(url: URL(string: item.URL)!))
             }
         } else {
             let row = tvPhrases.selectedRow
