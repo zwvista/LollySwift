@@ -140,7 +140,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
                 }
             }
         } else if tv === tvWebPages {
-            let row = tvPatterns.selectedRow
+            let row = tvWebPages.selectedRow
             if row == -1 {
             } else {
                 let item = arrWebPages[row]
