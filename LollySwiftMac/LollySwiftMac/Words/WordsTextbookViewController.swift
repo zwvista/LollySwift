@@ -13,12 +13,8 @@ import RxSwift
 class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation {
 
     var vm: WordsUnitViewModel!
-    override var vmSettings: SettingsViewModel! {
-        return vm.vmSettings
-    }
-    var arrWords: [MUnitWord] {
-        return vm.arrWordsFiltered == nil ? vm.arrWords : vm.arrWordsFiltered!
-    }
+    override var vmSettings: SettingsViewModel! { vm.vmSettings }
+    var arrWords: [MUnitWord] { vm.arrWordsFiltered == nil ? vm.arrWords : vm.arrWordsFiltered! }
     
     @IBOutlet weak var pubTextbookFilter: NSPopUpButton!
     @IBOutlet weak var acTextbooks: NSArrayController!
@@ -43,11 +39,11 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return arrWords.count
+        arrWords.count
     }
     
     override func itemForRow(row: Int) -> (MWordProtocol & NSObject)? {
-        return arrWords[row]
+        arrWords[row]
     }
 
     override func levelChanged(row: Int) -> Observable<Int> {

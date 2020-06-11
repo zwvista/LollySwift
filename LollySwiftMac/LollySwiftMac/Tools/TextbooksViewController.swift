@@ -32,7 +32,7 @@ class TextbooksViewController: NSViewController, LollyProtocol, NSTableViewDataS
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return vm.arrTextbooks.count
+        vm.arrTextbooks.count
     }
 
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {

@@ -13,7 +13,7 @@ import RxSwift
 class MLangWord: NSObject, Codable, MWordProtocol {
     var ID = 0
     var LANGID = 0
-    var WORDID: Int { return ID }
+    var WORDID: Int { ID }
     var WORD = ""
     var NOTE: String?
     var FAMIID = 0
@@ -21,12 +21,8 @@ class MLangWord: NSObject, Codable, MWordProtocol {
     var CORRECT = 0
     var TOTAL = 0
 
-    var WORDNOTE: String {
-        return WORD + ((NOTE ?? "").isEmpty ? "" : "(\(NOTE!))")
-    }
-    var ACCURACY: String {
-        return TOTAL == 0 ? "N/A" : "\(floor(CORRECT.toDouble / TOTAL.toDouble * 1000) / 10)%"
-    }
+    var WORDNOTE: String { WORD + ((NOTE ?? "").isEmpty ? "" : "(\(NOTE!))") }
+    var ACCURACY: String { TOTAL == 0 ? "N/A" : "\(floor(CORRECT.toDouble / TOTAL.toDouble * 1000) / 10)%" }
 
     override init() {
     }

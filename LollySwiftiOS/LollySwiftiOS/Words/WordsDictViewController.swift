@@ -123,7 +123,7 @@ class WordsDictViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
     }
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return true
+        true
     }
     
     private func swipe(_ delta: Int) {

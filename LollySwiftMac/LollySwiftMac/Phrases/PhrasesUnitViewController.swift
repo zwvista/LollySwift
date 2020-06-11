@@ -14,12 +14,8 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     
     var vm: PhrasesUnitViewModel!
     var vmReview: EmbeddedReviewViewModel!
-    override var vmSettings: SettingsViewModel! {
-        return vm.vmSettings
-    }
-    var arrPhrases: [MUnitPhrase] {
-        return vm.arrPhrasesFiltered ?? vm.arrPhrases
-    }
+    override var vmSettings: SettingsViewModel! { vm.vmSettings }
+    var arrPhrases: [MUnitPhrase] { vm.arrPhrasesFiltered ?? vm.arrPhrases }
     
     // https://developer.apple.com/videos/play/wwdc2011/120/
     // https://stackoverflow.com/questions/2121907/drag-drop-reorder-rows-on-nstableview
@@ -52,11 +48,11 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return arrPhrases.count
+        arrPhrases.count
     }
     
     override func itemForRow(row: Int) -> (MPhraseProtocol & NSObject)? {
-        return arrPhrases[row]
+        arrPhrases[row]
     }
     
     func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {

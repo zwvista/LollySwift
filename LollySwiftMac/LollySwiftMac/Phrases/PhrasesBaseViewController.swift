@@ -11,9 +11,7 @@ import RxSwift
 
 class PhrasesBaseViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate {
     
-    var vmSettings: SettingsViewModel! {
-        return nil
-    }
+    var vmSettings: SettingsViewModel! { nil }
     @IBOutlet weak var tableView: NSTableView!
     @IBOutlet weak var tfStatusText: NSTextField!
 
@@ -58,7 +56,7 @@ class PhrasesBaseViewController: NSViewController, LollyProtocol, NSTableViewDat
     }
     
     func itemForRow(row: Int) -> (MPhraseProtocol & NSObject)? {
-        return nil
+        nil
     }
 
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {

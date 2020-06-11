@@ -44,21 +44,11 @@ class MUnitWord: NSObject, Codable, MWordProtocol {
     }
 
     unowned var textbook: MTextbook!
-    var UNITSTR: String {
-        return textbook.UNITSTR(UNIT)
-    }
-    var PARTSTR: String {
-        return textbook.PARTSTR(PART)
-    }
-    var UNITPARTSEQNUM: String {
-        return "\(UNITSTR)\n\(PARTSTR)\n\(SEQNUM)"
-    }
-    var WORDNOTE: String {
-        return WORD + ((NOTE ?? "").isEmpty ? "" : "(\(NOTE!))")
-    }
-    var ACCURACY: String {
-        return CommonApi.getAccuracy(CORRECT: CORRECT, TOTAL: TOTAL)
-    }
+    var UNITSTR: String { textbook.UNITSTR(UNIT) }
+    var PARTSTR: String { textbook.PARTSTR(PART) }
+    var UNITPARTSEQNUM: String { "\(UNITSTR)\n\(PARTSTR)\n\(SEQNUM)" }
+    var WORDNOTE: String { WORD + ((NOTE ?? "").isEmpty ? "" : "(\(NOTE!))") }
+    var ACCURACY: String { CommonApi.getAccuracy(CORRECT: CORRECT, TOTAL: TOTAL) }
     
     func copy(from x: MUnitWord) {
         ID = x.ID
@@ -78,9 +68,7 @@ class MUnitWord: NSObject, Codable, MWordProtocol {
         textbook = x.textbook
     }
 
-    public override var description: String {
-        return "\(SEQNUM) \(WORD)" + (NOTE?.isEmpty != false ? "" : "(\(NOTE!))")
-    }
+    public override var description: String { "\(SEQNUM) \(WORD)" + (NOTE?.isEmpty != false ? "" : "(\(NOTE!))") }
 
     static func getDataByTextbook(_ textbook: MTextbook, unitPartFrom: Int, unitPartTo: Int) -> Observable<[MUnitWord]> {
         // SQL: SELECT * FROM VUNITWORDS WHERE TEXTBOOKID=? AND UNITPART BETWEEN ? AND ? ORDER BY UNITPART,SEQNUM

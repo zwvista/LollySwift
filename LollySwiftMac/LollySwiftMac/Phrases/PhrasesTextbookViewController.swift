@@ -13,12 +13,8 @@ import RxSwift
 class PhrasesTextbookViewController: PhrasesBaseViewController {
     
     var vm: PhrasesUnitViewModel!
-    override var vmSettings: SettingsViewModel! {
-        return vm.vmSettings
-    }
-    var arrPhrases: [MUnitPhrase] {
-        return vm.arrPhrasesFiltered ?? vm.arrPhrases
-    }
+    override var vmSettings: SettingsViewModel! { vm.vmSettings }
+    var arrPhrases: [MUnitPhrase] { vm.arrPhrasesFiltered ?? vm.arrPhrases }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,11 +35,11 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return arrPhrases.count
+        arrPhrases.count
     }
     
     override func itemForRow(row: Int) -> (MPhraseProtocol & NSObject)? {
-        return arrPhrases[row]
+        arrPhrases[row]
     }
     
     override func endEditing(row: Int) {

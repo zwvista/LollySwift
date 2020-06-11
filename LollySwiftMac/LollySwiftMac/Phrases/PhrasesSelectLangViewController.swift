@@ -12,15 +12,11 @@ import RxSwift
 class PhrasesSelectLangViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate {
 
     @objc var vm: PhrasesLangViewModel!
-    var vmSettings: SettingsViewModel! {
-        return vm.vmSettings
-    }
+    var vmSettings: SettingsViewModel! { vm.vmSettings }
     var wordid = 0
     var patternid = 0
     var complete: (() -> Void)?
-    var arrPhrases: [MLangPhrase] {
-        return vm.arrPhrasesFiltered ?? vm.arrPhrases
-    }
+    var arrPhrases: [MLangPhrase] { vm.arrPhrasesFiltered ?? vm.arrPhrases }
 
     @IBOutlet weak var scTextFilter: NSSegmentedControl!
     @IBOutlet weak var tfFilter: NSTextField!
@@ -47,7 +43,7 @@ class PhrasesSelectLangViewController: NSViewController, NSTableViewDataSource, 
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return arrPhrases.count
+        arrPhrases.count
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {

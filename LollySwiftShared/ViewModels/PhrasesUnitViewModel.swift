@@ -26,7 +26,7 @@ class PhrasesUnitViewModel: NSObject {
     }
     
     func reload() -> Observable<()> {
-        return (inTextbook ? MUnitPhrase.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO) : MUnitPhrase.getDataByLang(vmSettings.selectedTextbook.LANGID, arrTextbooks: vmSettings.arrTextbooks))
+        (inTextbook ? MUnitPhrase.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO) : MUnitPhrase.getDataByLang(vmSettings.selectedTextbook.LANGID, arrTextbooks: vmSettings.arrTextbooks))
         .map {
             self.arrPhrases = $0
             self.arrPhrasesFiltered = nil
@@ -48,7 +48,7 @@ class PhrasesUnitViewModel: NSObject {
     }
     
     static func update(_ id: Int, seqnum: Int) -> Observable<()> {
-        return MUnitPhrase.update(id, seqnum: seqnum)
+        MUnitPhrase.update(id, seqnum: seqnum)
     }
     
     static func update(item: MUnitPhrase) -> Observable<()> {
@@ -103,7 +103,7 @@ class PhrasesUnitViewModel: NSObject {
     }
     
     static func create(item: MUnitPhrase) -> Observable<Int> {
-        return MLangPhrase.getDataByLangPhrase(langid: item.LANGID, phrase: item.PHRASE).flatMap { arrLang -> Observable<Int> in
+        MLangPhrase.getDataByLangPhrase(langid: item.LANGID, phrase: item.PHRASE).flatMap { arrLang -> Observable<Int> in
             if arrLang.isEmpty {
                 let itemLang = MLangPhrase(unititem: item)
                 return MLangPhrase.create(item: itemLang)

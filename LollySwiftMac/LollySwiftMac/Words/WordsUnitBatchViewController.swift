@@ -13,9 +13,7 @@ class WordsUnitBatchViewController: NSViewController, NSTableViewDataSource, NST
 
     @objc var vm: WordsUnitViewModel!
     var complete: (() -> Void)?
-    var arrWords: [MUnitWord] {
-        return vm.arrWords
-    }
+    var arrWords: [MUnitWord] { vm.arrWords }
 
     @IBOutlet weak var acUnits: NSArrayController!
     @IBOutlet weak var acParts: NSArrayController!
@@ -48,7 +46,7 @@ class WordsUnitBatchViewController: NSViewController, NSTableViewDataSource, NST
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return arrWords.count
+        arrWords.count
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {

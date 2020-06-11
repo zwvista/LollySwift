@@ -21,12 +21,10 @@ class WordsReviewViewModel: NSObject {
     var arrCorrectIDs = [Int]()
     var index = 0
     var mode: ReviewMode = .reviewAuto
-    var isTestMode: Bool {
-        return mode == .test
-    }
+    var isTestMode: Bool { mode == .test }
     
     func newTest(shuffled: Bool, levelge0only: Bool, groupSelected: Int, groupCount: Int) -> Observable<()> {
-        return MUnitWord.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO).map {
+        MUnitWord.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO).map {
             self.arrWords = $0
             let count = self.arrWords.count
             let (from, to) = (count * (groupSelected - 1) / groupCount, count * groupSelected / groupCount)
@@ -38,9 +36,7 @@ class WordsReviewViewModel: NSObject {
         }
     }
 
-    var hasNext: Bool {
-        return index < arrWords.count
-    }
+    var hasNext: Bool { index < arrWords.count }
     func next() {
         index += 1
         if isTestMode && !hasNext {
@@ -49,12 +45,8 @@ class WordsReviewViewModel: NSObject {
         }
     }
     
-    var currentItem: MUnitWord? {
-        return hasNext ? arrWords[index] : nil
-    }
-    var currentWord: String {
-        return hasNext ? arrWords[index].WORD : ""
-    }
+    var currentItem: MUnitWord? { hasNext ? arrWords[index] : nil }
+    var currentWord: String { hasNext ? arrWords[index].WORD : "" }
     func getTranslation() -> Observable<String> {
         guard vmSettings.hasDictTranslation else { return Observable.empty() }
         let mDictTranslation = vmSettings.selectedDictTranslation

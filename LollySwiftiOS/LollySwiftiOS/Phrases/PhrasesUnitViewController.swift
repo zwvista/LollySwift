@@ -12,9 +12,7 @@ import RxSwift
 class PhrasesUnitViewController: PhrasesBaseViewController {
     
     var vm: PhrasesUnitViewModel!
-    var arrPhrases: [MUnitPhrase] {
-        return searchController.isActive && searchBar.text != "" ? vm.arrPhrasesFiltered! : vm.arrPhrases
-    }
+    var arrPhrases: [MUnitPhrase] { searchController.isActive && searchBar.text != "" ? vm.arrPhrasesFiltered! : vm.arrPhrases }
     @IBOutlet weak var btnEdit: UIBarButtonItem!
     
     let disposeBag = DisposeBag()
@@ -30,15 +28,15 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arrPhrases.count
+        arrPhrases.count
     }
     
     override func itemForRow(row: Int) -> (MPhraseProtocol & NSObject)? {
-        return arrPhrases[row]
+        arrPhrases[row]
     }
 
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        return vmSettings.isSingleUnitPart
+        vmSettings.isSingleUnitPart
     }
     
     private func reindex() {

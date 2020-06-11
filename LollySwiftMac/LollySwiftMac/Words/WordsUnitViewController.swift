@@ -14,15 +14,9 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
 
     var vm: WordsUnitViewModel!
     var vmReview: EmbeddedReviewViewModel!
-    override var vmSettings: SettingsViewModel! {
-        return vm.vmSettings
-    }
-    var arrWords: [MUnitWord] {
-        return vm.arrWordsFiltered ?? vm.arrWords
-    }
-    override var arrPhrases: [MLangPhrase] {
-        return vm.arrPhrases
-    }
+    override var vmSettings: SettingsViewModel! { vm.vmSettings }
+    var arrWords: [MUnitWord] { vm.arrWordsFiltered ?? vm.arrWords }
+    override var arrPhrases: [MLangPhrase] { vm.arrPhrases }
 
     // https://developer.apple.com/videos/play/wwdc2011/120/
     // https://stackoverflow.com/questions/2121907/drag-drop-reorder-rows-on-nstableview
@@ -63,11 +57,11 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return tableView === tvWords ? arrWords.count : arrPhrases.count
+        tableView === tvWords ? arrWords.count : arrPhrases.count
     }
     
     override func itemForRow(row: Int) -> (MWordProtocol & NSObject)? {
-        return arrWords[row]
+        arrWords[row]
     }
 
     override func levelChanged(row: Int) -> Observable<Int> {

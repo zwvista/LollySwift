@@ -65,7 +65,7 @@ class WordsSearchViewController: UIViewController, WKNavigationDelegate, UISearc
     }
     
     func position(for bar: UIBarPositioning) -> UIBarPosition {
-        return .top
+        .top
     }
     
     @IBAction func showDictDropDown(_ sender: AnyObject) {

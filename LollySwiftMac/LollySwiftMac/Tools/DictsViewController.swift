@@ -32,7 +32,7 @@ class DictsViewController: NSViewController, LollyProtocol, NSTableViewDataSourc
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return vm.arrDicts.count
+        vm.arrDicts.count
     }
 
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {

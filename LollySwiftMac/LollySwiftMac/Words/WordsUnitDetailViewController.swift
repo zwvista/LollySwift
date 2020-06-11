@@ -16,9 +16,7 @@ class WordsUnitDetailViewController: NSViewController, NSTableViewDataSource, NS
     var complete: (() -> Void)?
     @objc var item: MUnitWord!
     var isAdd: Bool!
-    var arrWords: [MUnitWord] {
-        return vmSingle != nil ? vmSingle.arrWords : [MUnitWord]()
-    }
+    var arrWords: [MUnitWord] { vmSingle != nil ? vmSingle.arrWords : [MUnitWord]() }
 
     @IBOutlet weak var acUnits: NSArrayController!
     @IBOutlet weak var acParts: NSArrayController!
@@ -78,7 +76,7 @@ class WordsUnitDetailViewController: NSViewController, NSTableViewDataSource, NS
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return arrWords.count
+        arrWords.count
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {

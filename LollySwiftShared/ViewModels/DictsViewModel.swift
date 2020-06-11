@@ -25,11 +25,11 @@ class DictsViewModel: NSObject {
     }
     
     static func update(item: MDictionary) -> Observable<()> {
-        return MDictionary.update(item: item)
+        MDictionary.update(item: item)
     }
 
     static func create(item: MDictionary) -> Observable<Int> {
-        return MDictionary.create(item: item)
+        MDictionary.create(item: item)
     }
 
     func newDict() -> MDictionary {

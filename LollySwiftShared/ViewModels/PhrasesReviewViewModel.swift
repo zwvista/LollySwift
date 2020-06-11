@@ -21,12 +21,10 @@ class PhrasesReviewViewModel: NSObject {
     var arrCorrectIDs = [Int]()
     var index = 0
     var mode: ReviewMode = .reviewAuto
-    var isTestMode: Bool {
-        return mode == .test
-    }
+    var isTestMode: Bool { mode == .test }
     
     func newTest(shuffled: Bool, groupSelected: Int, groupCount: Int) -> Observable<()> {
-        return MUnitPhrase.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO).map {
+        MUnitPhrase.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO).map {
             self.arrPhrases = $0
             let count = self.arrPhrases.count
             let (from, to) = (count * (groupSelected - 1) / groupCount, count * groupSelected / groupCount)
@@ -37,9 +35,7 @@ class PhrasesReviewViewModel: NSObject {
         }
     }
 
-    var hasNext: Bool {
-        return index < arrPhrases.count
-    }
+    var hasNext: Bool { index < arrPhrases.count }
     func next() {
         index += 1
         if isTestMode && !hasNext {
@@ -48,12 +44,8 @@ class PhrasesReviewViewModel: NSObject {
         }
     }
     
-    var currentItem: MUnitPhrase? {
-        return hasNext ? arrPhrases[index] : nil
-    }
-    var currentPhrase: String {
-        return hasNext ? arrPhrases[index].PHRASE : ""
-    }
+    var currentItem: MUnitPhrase? { hasNext ? arrPhrases[index] : nil }
+    var currentPhrase: String { hasNext ? arrPhrases[index].PHRASE : "" }
     
     func check(phraseInput: String) {
         guard hasNext else {return}

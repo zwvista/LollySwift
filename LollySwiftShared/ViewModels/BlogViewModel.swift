@@ -22,20 +22,20 @@ class BlogViewModel: NSObject {
     }
     
     private func html1With(_ s: String) -> String {
-        return "<strong><span style=\"color:#0000ff;\">\(s)</span></strong>"
+        "<strong><span style=\"color:#0000ff;\">\(s)</span></strong>"
     }
-    private func htmlWordWith(_ s: String) -> String { return html1With(s + "：") }
-    private func htmlBWith(_ s: String) -> String { return html1With(s) }
+    private func htmlWordWith(_ s: String) -> String { html1With(s + "：") }
+    private func htmlBWith(_ s: String) -> String { html1With(s) }
     // tag for explantion 1
     private func htmlE1With(_ s: String) -> String {
-        return "<span style=\"color:#006600;\">\(s)</span>"
+        "<span style=\"color:#006600;\">\(s)</span>"
     }
     private func html2With(_ s: String) -> String {
-        return "<span style=\"color:#cc00cc;\">\(s)</span>"
+        "<span style=\"color:#cc00cc;\">\(s)</span>"
     }
     // tag for explantion 2
-    private func htmlE2With(_ s: String) -> String { return html2With(s) }
-    private func htmlIWith(_ s: String) -> String { return "<strong>\(html2With(s))</strong>" }
+    private func htmlE2With(_ s: String) -> String { html2With(s) }
+    private func htmlIWith(_ s: String) -> String { "<strong>\(html2With(s))</strong>" }
     private let htmlEmptyLine = "<div><br></div>"
     private let regMarkedEntry = #"(\*\*?)\s*(.*?)：(.*?)：(.*)"#.r!
     private let regMarkedB = "<B>(.+?)</B>".r!
@@ -75,15 +75,15 @@ class BlogViewModel: NSObject {
     }
     
     private let regLine = "<div>(.*?)</div>".r!
-    private var regHtmlB: Regex { return htmlBWith("(.+?)").r! }
-    private var regHtmlI: Regex { return htmlIWith("(.+?)").r! }
-    private var regHtmlEntry: Regex { return "(<li>|<br>)\(htmlWordWith("(.*?)"))(?:\(htmlE1With("(.*?)")))?(?:\(htmlE2With("(.*?)")))?(?:</li>)?".r! }
+    private var regHtmlB: Regex { htmlBWith("(.+?)").r! }
+    private var regHtmlI: Regex { htmlIWith("(.+?)").r! }
+    private var regHtmlEntry: Regex {  "(<li>|<br>)\(htmlWordWith("(.*?)"))(?:\(htmlE1With("(.*?)")))?(?:\(htmlE2With("(.*?)")))?(?:</li>)?".r! }
     func htmlToMarked(text: String) -> String {
         var arr = text.split("\n")
         var i = 0
         while i < arr.count {
             var s = arr[i]
-            if s == "<ul>" || s == "</ul>" {
+            if s == "<!-- wp:html -->" || s == "<!-- /wp:html -->" || s == "<ul>" || s == "</ul>" {
                 arr.remove(at: i)
                 i -= 1
             } else if s == htmlEmptyLine {
@@ -104,13 +104,13 @@ class BlogViewModel: NSObject {
     }
     
     func addTagB(text: String) -> String {
-        return "<B>\(text)</B>"
+        "<B>\(text)</B>"
     }
     func addTagI(text: String) -> String {
-        return "<I>\(text)</I>"
+        "<I>\(text)</I>"
     }
     func removeTagBI(text: String) -> String {
-        return "</?[BI]>".r!.replaceAll(in: text, with: "")
+        "</?[BI]>".r!.replaceAll(in: text, with: "")
     }
     func exchangeTagBI(text: String) -> String {
         var text = "<(/)?B>".r!.replaceAll(in: text, with: "<$1Temp>")
@@ -119,16 +119,16 @@ class BlogViewModel: NSObject {
         return text
     }
     func getExplanation(text: String) -> String {
-        return "* \(text)：：\n"
+        "* \(text)：：\n"
     }
     func getHtml(text: String) -> String {
-        return "<html><body>\(text)</body></html>"
+        "<html><body>\(text)</body></html>"
     }
     func getPatternUrl(patternNo: String) -> String {
-        return "http://viethuong.web.fc2.com/MONDAI/\(patternNo).html"
+        "http://viethuong.web.fc2.com/MONDAI/\(patternNo).html"
     }
     func getPatternMarkDown(patternText: String) -> String {
-        return "* [\(patternText)　文法](https://www.google.com/search?q=\(patternText)　文法)\n* [\(patternText)　句型](https://www.google.com/search?q=\(patternText)　句型)"
+        "* [\(patternText)　文法](https://www.google.com/search?q=\(patternText)　文法)\n* [\(patternText)　句型](https://www.google.com/search?q=\(patternText)　句型)"
     }
     
     private let bigDigits = "０１２３４５６７８９"

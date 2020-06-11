@@ -12,9 +12,7 @@ import RxSwift
 class WordsLangViewController: WordsBaseViewController {
 
     var vm: WordsLangViewModel!
-    var arrWords: [MLangWord] {
-        return searchController.isActive && searchBar.text != "" ? vm.arrWordsFiltered! : vm.arrWords
-    }
+    var arrWords: [MLangWord] { searchController.isActive && searchBar.text != "" ? vm.arrWordsFiltered! : vm.arrWords }
     
     let disposeBag = DisposeBag()
 
@@ -29,11 +27,11 @@ class WordsLangViewController: WordsBaseViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arrWords.count
+        arrWords.count
     }
     
     override func itemForRow(row: Int) -> (MWordProtocol & NSObject)? {
-        return arrWords[row]
+        arrWords[row]
     }
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {

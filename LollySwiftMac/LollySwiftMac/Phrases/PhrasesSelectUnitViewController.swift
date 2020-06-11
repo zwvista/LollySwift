@@ -12,15 +12,11 @@ import RxSwift
 class PhrasesSelectUnitViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate {
 
     @objc var vm: PhrasesUnitViewModel!
-    var vmSettings: SettingsViewModel! {
-        return vm.vmSettings
-    }
+    var vmSettings: SettingsViewModel! { vm.vmSettings }
     var wordid = 0
     var patternid = 0
     var complete: (() -> Void)?
-    var arrPhrases: [MUnitPhrase] {
-        return vm.arrPhrasesFiltered ?? vm.arrPhrases
-    }
+    var arrPhrases: [MUnitPhrase] { vm.arrPhrasesFiltered ?? vm.arrPhrases }
 
     @IBOutlet weak var scTextFilter: NSSegmentedControl!
     @IBOutlet weak var tfFilter: NSTextField!
@@ -51,7 +47,7 @@ class PhrasesSelectUnitViewController: NSViewController, NSTableViewDataSource, 
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return arrPhrases.count
+        arrPhrases.count
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {

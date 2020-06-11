@@ -48,7 +48,7 @@ class MWordPhrase: NSObject, Codable {
 
     static func deleteByPhraseId(_ phraseid: Int) -> Observable<()> {
         // SQL: DELETE WORDSPHRASES WHERE PHRASEID=?
-        return getWordsByPhraseId(phraseid).flatMap { arr -> Observable<()> in
+        getWordsByPhraseId(phraseid).flatMap { arr -> Observable<()> in
             if arr.isEmpty {
                 return Observable.empty()
             } else {
@@ -60,7 +60,7 @@ class MWordPhrase: NSObject, Codable {
     }
 
     static func connect(wordid: Int, phraseid: Int) -> Observable<()> {
-        return getDataByWordPhrase(wordid: wordid, phraseid: phraseid).flatMap { arr -> Observable<()> in
+        getDataByWordPhrase(wordid: wordid, phraseid: phraseid).flatMap { arr -> Observable<()> in
             if !arr.isEmpty {
                 return Observable.empty()
             } else {
@@ -73,7 +73,7 @@ class MWordPhrase: NSObject, Codable {
     }
     
     static func disconnect(wordid: Int, phraseid: Int) -> Observable<()> {
-        return getDataByWordPhrase(wordid: wordid, phraseid: phraseid).flatMap { arr -> Observable<()> in
+        getDataByWordPhrase(wordid: wordid, phraseid: phraseid).flatMap { arr -> Observable<()> in
             var o = Observable.just(())
             for v in arr {
                 o = o.concat(delete(v.ID))

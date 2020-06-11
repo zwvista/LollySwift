@@ -45,9 +45,7 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
     let ddPartTo = DropDown()
     let ddToType = DropDown()
     
-    var vm: SettingsViewModel {
-        return vmSettings
-    }
+    var vm: SettingsViewModel { vmSettings }
     
     let disposeBag = DisposeBag()
     

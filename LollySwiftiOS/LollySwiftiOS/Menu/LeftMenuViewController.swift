@@ -84,15 +84,15 @@ public class LeftMenuViewController: UIViewController, UITableViewDelegate, UITa
     // MARK: - <UITableViewDataSource>
 
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 54
+        54
     }
 
     public func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        1
     }
 
     public func tableView(_ tableView: UITableView, numberOfRowsInSection sectionIndex: Int) -> Int {
-        return 10
+        10
     }
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

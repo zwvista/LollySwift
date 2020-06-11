@@ -16,9 +16,7 @@ class PhrasesTextbookDetailViewController: NSViewController, NSTableViewDataSour
     var vmSingle: SinglePhraseViewModel!
     var complete: (() -> Void)?
     var item: MUnitPhrase!
-    var arrPhrases: [MUnitPhrase] {
-        return vmSingle.arrPhrases
-    }
+    var arrPhrases: [MUnitPhrase] { vmSingle.arrPhrases }
 
     @IBOutlet weak var acUnits: NSArrayController!
     @IBOutlet weak var acParts: NSArrayController!
@@ -60,7 +58,7 @@ class PhrasesTextbookDetailViewController: NSViewController, NSTableViewDataSour
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return arrPhrases.count
+        arrPhrases.count
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {

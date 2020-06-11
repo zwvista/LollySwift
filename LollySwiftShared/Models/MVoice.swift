@@ -25,9 +25,7 @@ class MVoice: NSObject, Codable {
         case VOICENAME
     }
     
-    override var description: String {
-        return VOICENAME
-    }
+    override var description: String { VOICENAME }
 
     static func getDataByLang(_ langid: Int) -> Observable<[MVoice]> {
         // SQL: SELECT * FROM VVOICES WHERE LANGID=?

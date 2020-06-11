@@ -76,15 +76,15 @@ class WordsUnitBatchViewController: UITableViewController, UITextFieldDelegate {
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        2
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? 5 : vm.arrWords.count
+        section == 0 ? 5 : vm.arrWords.count
     }
     
 //    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return indexPath.section == 0 ? UITableView.automaticDimension : 88
+//        indexPath.section == 0 ? UITableView.automaticDimension : 88
 //    }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

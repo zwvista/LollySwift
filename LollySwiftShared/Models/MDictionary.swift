@@ -30,9 +30,7 @@ class MDictionary: NSObject, Codable {
     var TEMPLATE: String?
     var TEMPLATE2: String?
     
-    override var description: String {
-        return DICTNAME
-    }
+    override var description: String { DICTNAME }
 
     func urlString(word: String, arrAutoCorrect: [MAutoCorrect]) -> String {
         let word2 = CHCONV == "BASIC" ? MAutoCorrect.autoCorrect(text: word, arrAutoCorrect: arrAutoCorrect, colFunc1: { $0.EXTENDED }, colFunc2: { $0.BASIC }) :

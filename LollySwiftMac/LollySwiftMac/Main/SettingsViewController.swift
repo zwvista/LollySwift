@@ -36,9 +36,7 @@ class SettingsViewController: NSViewController, SettingsViewModelDelegate, NSTab
     @IBOutlet weak var btnApplyCurrent: NSButton!
     @IBOutlet weak var btnApplyNone: NSButton!
 
-    var vm: SettingsViewModel {
-        return AppDelegate.theSettingsViewModel
-    }
+    var vm: SettingsViewModel { AppDelegate.theSettingsViewModel }
 
     let disposeBag = DisposeBag()
 
@@ -134,7 +132,7 @@ class SettingsViewController: NSViewController, SettingsViewModelDelegate, NSTab
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return vm.selectedDictsReference.count
+        vm.selectedDictsReference.count
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {

@@ -15,127 +15,109 @@ class SettingsViewModel: NSObject {
     var arrUSMappings = [MUSMapping]()
     var arrUserSettings = [MUserSetting]()
     private func getUSValue(info: MUserSettingInfo) -> String? {
-        return arrUserSettings.first { $0.ID == info.USERSETTINGID }!.value(forKeyPath: "VALUE\(info.VALUEID)") as? String
+        arrUserSettings.first { $0.ID == info.USERSETTINGID }!.value(forKeyPath: "VALUE\(info.VALUEID)") as? String
     }
     private func setUSValue(info: MUserSettingInfo, value: String) {
         arrUserSettings.first { $0.ID == info.USERSETTINGID }!.setValue(value, forKey: "VALUE\(info.VALUEID)")
     }
     private var INFO_USLANGID = MUserSettingInfo()
     private var USLANGID: Int {
-        get { return getUSValue(info: INFO_USLANGID)!.toInt()! }
+        get { getUSValue(info: INFO_USLANGID)!.toInt()! }
         set { setUSValue(info: INFO_USLANGID, value: String(newValue)) }
     }
     private var INFO_USROWSPERPAGEOPTIONS = MUserSettingInfo()
     var USROWSPERPAGEOPTIONS: [Int] {
-        get { return getUSValue(info: INFO_USROWSPERPAGEOPTIONS)!.split(",").map { $0.toInt()! } }
+        get { getUSValue(info: INFO_USROWSPERPAGEOPTIONS)!.split(",").map { $0.toInt()! } }
     }
     private var INFO_USROWSPERPAGE = MUserSettingInfo()
     var USROWSPERPAGE: Int {
-        get { return getUSValue(info: INFO_USROWSPERPAGE)!.toInt()! }
+        get { getUSValue(info: INFO_USROWSPERPAGE)!.toInt()! }
     }
     private var INFO_USLEVELCOLORS = MUserSettingInfo()
     var USLEVELCOLORS: [Int: [String]]!
     private var INFO_USSCANINTERVAL = MUserSettingInfo()
     var USSCANINTERVAL: Int {
-        get { return getUSValue(info: INFO_USSCANINTERVAL)!.toInt()! }
+        get { getUSValue(info: INFO_USSCANINTERVAL)!.toInt()! }
         set { setUSValue(info: INFO_USSCANINTERVAL, value: String(newValue)) }
     }
     private var INFO_USREVIEWINTERVAL = MUserSettingInfo()
     var USREVIEWINTERVAL: Int {
-        get { return getUSValue(info: INFO_USREVIEWINTERVAL)!.toInt()! }
+        get { getUSValue(info: INFO_USREVIEWINTERVAL)!.toInt()! }
         set { setUSValue(info: INFO_USREVIEWINTERVAL, value: String(newValue)) }
     }
     private var INFO_USTEXTBOOKID = MUserSettingInfo()
     var USTEXTBOOKID: Int {
-        get { return getUSValue(info: INFO_USTEXTBOOKID)!.toInt()! }
+        get { getUSValue(info: INFO_USTEXTBOOKID)!.toInt()! }
         set { setUSValue(info: INFO_USTEXTBOOKID, value: String(newValue)) }
     }
     private var INFO_USDICTREFERENCE = MUserSettingInfo()
     var USDICTREFERENCE: String {
-        get { return getUSValue(info: INFO_USDICTREFERENCE)! }
+        get { getUSValue(info: INFO_USDICTREFERENCE)! }
         set { setUSValue(info: INFO_USDICTREFERENCE, value: newValue) }
     }
     private var INFO_USDICTNOTE = MUserSettingInfo()
     var USDICTNOTE: Int {
-        get { return getUSValue(info: INFO_USDICTNOTE)?.toInt() ?? 0 }
+        get { getUSValue(info: INFO_USDICTNOTE)?.toInt() ?? 0 }
         set { setUSValue(info: INFO_USDICTNOTE, value: String(newValue) )}
     }
     private var INFO_USDICTSREFERENCE = MUserSettingInfo()
     var USDICTSREFERENCE: String {
-        get { return getUSValue(info: INFO_USDICTSREFERENCE) ?? "" }
+        get { getUSValue(info: INFO_USDICTSREFERENCE) ?? "" }
         set { setUSValue(info: INFO_USDICTSREFERENCE, value: newValue) }
     }
     private var INFO_USDICTTRANSLATION = MUserSettingInfo()
     var USDICTTRANSLATION: Int {
-        get { return getUSValue(info: INFO_USDICTTRANSLATION)?.toInt() ?? 0 }
+        get { getUSValue(info: INFO_USDICTTRANSLATION)?.toInt() ?? 0 }
         set { setUSValue(info: INFO_USDICTTRANSLATION, value: String(newValue)) }
     }
     private var INFO_USMACVOICEID = MUserSettingInfo()
     var USMACVOICEID: Int {
-        get { return getUSValue(info: INFO_USMACVOICEID)?.toInt() ?? 0 }
+        get { getUSValue(info: INFO_USMACVOICEID)?.toInt() ?? 0 }
         set { setUSValue(info: INFO_USMACVOICEID, value: String(newValue)) }
     }
     private var INFO_USIOSVOICEID = MUserSettingInfo()
     var USIOSVOICEID: Int {
-        get { return getUSValue(info: INFO_USIOSVOICEID)?.toInt() ?? 0 }
+        get { getUSValue(info: INFO_USIOSVOICEID)?.toInt() ?? 0 }
         set { setUSValue(info: INFO_USIOSVOICEID, value: String(newValue)) }
     }
     private var INFO_USUNITFROM = MUserSettingInfo()
     @objc
     var USUNITFROM: Int {
-        get { return getUSValue(info: INFO_USUNITFROM)!.toInt()! }
+        get { getUSValue(info: INFO_USUNITFROM)!.toInt()! }
         set { setUSValue(info: INFO_USUNITFROM, value: String(newValue)) }
     }
-    var USUNITFROMSTR: String {
-        return selectedTextbook.UNITSTR(USUNITFROM)
-    }
+    var USUNITFROMSTR: String { selectedTextbook.UNITSTR(USUNITFROM) }
     private var INFO_USPARTFROM = MUserSettingInfo()
     @objc
     var USPARTFROM: Int {
-        get { return getUSValue(info: INFO_USPARTFROM)!.toInt()! }
+        get { getUSValue(info: INFO_USPARTFROM)!.toInt()! }
         set { setUSValue(info: INFO_USPARTFROM, value: String(newValue)) }
     }
-    var USPARTFROMSTR: String {
-        return selectedTextbook.PARTSTR(USPARTFROM)
-    }
+    var USPARTFROMSTR: String { selectedTextbook.PARTSTR(USPARTFROM) }
     private var INFO_USUNITTO = MUserSettingInfo()
     @objc
     var USUNITTO: Int {
-        get { return getUSValue(info: INFO_USUNITTO)!.toInt()! }
+        get { getUSValue(info: INFO_USUNITTO)!.toInt()! }
         set { setUSValue(info: INFO_USUNITTO, value: String(newValue)) }
     }
-    var USUNITTOSTR: String {
-        return selectedTextbook.UNITSTR(USUNITTO)
-    }
+    var USUNITTOSTR: String { selectedTextbook.UNITSTR(USUNITTO) }
     private var INFO_USPARTTO = MUserSettingInfo()
     @objc
     var USPARTTO: Int {
-        get { return getUSValue(info: INFO_USPARTTO)!.toInt()! }
+        get { getUSValue(info: INFO_USPARTTO)!.toInt()! }
         set { setUSValue(info: INFO_USPARTTO, value: String(newValue)) }
     }
-    var USPARTTOSTR: String {
-        return selectedTextbook.PARTSTR(USPARTTO)
-    }
-    var USUNITPARTFROM: Int {
-        return USUNITFROM * 10 + USPARTFROM
-    }
-    var USUNITPARTTO: Int {
-        return USUNITTO * 10 + USPARTTO
-    }
-    var isSingleUnitPart: Bool {
-        return USUNITPARTFROM == USUNITPARTTO
-    }
-    var isInvalidUnitPart: Bool {
-        return USUNITPARTFROM > USUNITPARTTO
-    }
+    var USPARTTOSTR: String { selectedTextbook.PARTSTR(USPARTTO) }
+    var USUNITPARTFROM: Int { USUNITFROM * 10 + USPARTFROM }
+    var USUNITPARTTO: Int { USUNITTO * 10 + USPARTTO }
+    var isSingleUnitPart: Bool { USUNITPARTFROM == USUNITPARTTO }
+    var isInvalidUnitPart: Bool { USUNITPARTFROM > USUNITPARTTO }
 
     @objc
     var arrLanguages = [MLanguage]()
     @objc
     var selectedLang: MLanguage!
-    var selectedLangIndex: Int {
-        return arrLanguages.firstIndex { $0 == selectedLang } ?? 0
-    }
+    var selectedLangIndex: Int { arrLanguages.firstIndex { $0 == selectedLang } ?? 0 }
 
     @objc
     var arrMacVoices: [MVoice]!
@@ -147,13 +129,9 @@ class SettingsViewModel: NSObject {
             USMACVOICEID = selectedMacVoice.ID
         }
     }
-    var macVoiceName: String {
-        return selectedMacVoice.VOICENAME
-    }
+    var macVoiceName: String { selectedMacVoice.VOICENAME }
     var selectediOSVoice = MVoice()
-    var selectediOSVoiceIndex: Int {
-        return arriOSVoices.firstIndex { $0 == selectediOSVoice } ?? 0
-    }
+    var selectediOSVoiceIndex: Int { arriOSVoices.firstIndex { $0 == selectediOSVoice } ?? 0 }
 
     @objc
     var arrDictsReference = [MDictionary]()
@@ -167,9 +145,7 @@ class SettingsViewModel: NSObject {
             USDICTSREFERENCE = selectedDictsReference.map { String($0.DICTID) }.joined(separator: ",")
         }
     }
-    var selectedDictReferenceIndex: Int {
-        return arrDictsReference.firstIndex { $0 == selectedDictReference } ?? 0
-    }
+    var selectedDictReferenceIndex: Int { arrDictsReference.firstIndex { $0 == selectedDictReference } ?? 0 }
     
     @objc
     var arrDictsNote = [MDictionary]()
@@ -179,10 +155,8 @@ class SettingsViewModel: NSObject {
             USDICTNOTE = selectedDictNote.DICTID
         }
     }
-    var selectedDictNoteIndex: Int {
-        return arrDictsNote.firstIndex { $0 == selectedDictNote } ?? 0
-    }
-    var hasDictNote: Bool { return arrDictsNote[0].ID != 0 }
+    var selectedDictNoteIndex: Int { arrDictsNote.firstIndex { $0 == selectedDictNote } ?? 0 }
+    var hasDictNote: Bool { arrDictsNote[0].ID != 0 }
     
     @objc
     var arrDictsTranslation = [MDictionary]()
@@ -192,10 +166,8 @@ class SettingsViewModel: NSObject {
             USDICTTRANSLATION = selectedDictTranslation.DICTID
         }
     }
-    var selectedDictTranslationIndex: Int {
-        return arrDictsTranslation.firstIndex { $0 == selectedDictTranslation } ?? 0
-    }
-    var hasDictTranslation: Bool { return !arrDictsTranslation.isEmpty }
+    var selectedDictTranslationIndex: Int { arrDictsTranslation.firstIndex { $0 == selectedDictTranslation } ?? 0 }
+    var hasDictTranslation: Bool { !arrDictsTranslation.isEmpty }
 
     @objc
     var arrTextbooks = [MTextbook]()
@@ -210,45 +182,23 @@ class SettingsViewModel: NSObject {
             toType = isSingleUnit ? .unit : isSingleUnitPart ? .part : .to
         }
     }
-    var selectedTextbookIndex: Int {
-        return arrTextbooks.firstIndex { $0 == selectedTextbook } ?? 0
-    }
+    var selectedTextbookIndex: Int { arrTextbooks.firstIndex { $0 == selectedTextbook } ?? 0 }
     @objc
     var arrTextbookFilters = [MSelectItem]()
     
     @objc
-    var arrUnits: [MSelectItem] {
-        return selectedTextbook.arrUnits
-    }
-    var unitCount: Int {
-        return arrUnits.count
-    }
+    var arrUnits: [MSelectItem] { selectedTextbook.arrUnits }
+    var unitCount: Int { arrUnits.count }
     @objc
-    var unitsInAll: String {
-        return "(\(unitCount) in all)"
-    }
+    var unitsInAll: String { "(\(unitCount) in all)" }
     @objc
-    var arrParts: [MSelectItem] {
-        return selectedTextbook.arrParts
-    }
-    var partCount: Int {
-        return arrParts.count
-    }
-    var isSingleUnit: Bool {
-        return USUNITFROM == USUNITTO && USPARTFROM == 1 && USPARTTO == partCount
-    }
-    var isSinglePart: Bool {
-        return partCount == 1
-    }
-    var LANGINFO: String {
-        return "\(selectedLang.LANGNAME)"
-    }
-    var TEXTBOOKINFO: String {
-        return "\(LANGINFO)/\(selectedTextbook.TEXTBOOKNAME)"
-    }
-    var UNITINFO: String {
-        return "\(TEXTBOOKINFO)/\(USUNITFROMSTR) \(USPARTFROMSTR) ~ \(USUNITTOSTR) \(USPARTTOSTR)"
-    }
+    var arrParts: [MSelectItem] { selectedTextbook.arrParts }
+    var partCount: Int { arrParts.count }
+    var isSingleUnit: Bool { USUNITFROM == USUNITTO && USPARTFROM == 1 && USPARTTO == partCount }
+    var isSinglePart: Bool { partCount == 1 }
+    var LANGINFO: String { "\(selectedLang.LANGNAME)" }
+    var TEXTBOOKINFO: String { "\(LANGINFO)/\(selectedTextbook.TEXTBOOKNAME)" }
+    var UNITINFO: String { "\(TEXTBOOKINFO)/\(USUNITFROMSTR) \(USPARTFROMSTR) ~ \(USUNITTOSTR) \(USPARTTOSTR)" }
     
     let arrToTypes = ["Unit", "Part", "To"]
     var toType: UnitPartToType = .unit
@@ -317,7 +267,7 @@ class SettingsViewModel: NSObject {
     }
     
     func getData() -> Observable<()> {
-        return Observable.zip(MLanguage.getData(),
+        Observable.zip(MLanguage.getData(),
                               MUSMapping.getData(),
                               MUserSetting.getData(userid: CommonApi.userid),
                               MDictType.getData())
@@ -389,43 +339,43 @@ class SettingsViewModel: NSObject {
     }
     
     func updateLang() -> Observable<()> {
-        return MUserSetting.update(info: INFO_USLANGID, intValue: USLANGID).do { self.delegate?.onUpdateLang() }
+        MUserSetting.update(info: INFO_USLANGID, intValue: USLANGID).do { self.delegate?.onUpdateLang() }
     }
 
     func updateTextbook() -> Observable<()> {
-        return MUserSetting.update(info: INFO_USTEXTBOOKID, intValue: USTEXTBOOKID).do { self.delegate?.onUpdateTextbook() }
+        MUserSetting.update(info: INFO_USTEXTBOOKID, intValue: USTEXTBOOKID).do { self.delegate?.onUpdateTextbook() }
     }
 
     func updateDictReference() -> Observable<()> {
-        return MUserSetting.update(info: INFO_USDICTREFERENCE, stringValue: USDICTREFERENCE).do { self.delegate?.onUpdateDictReference() }
+        MUserSetting.update(info: INFO_USDICTREFERENCE, stringValue: USDICTREFERENCE).do { self.delegate?.onUpdateDictReference() }
     }
     
     func updateDictsReference() -> Observable<()> {
-        return MUserSetting.update(info: INFO_USDICTSREFERENCE, stringValue: USDICTSREFERENCE).do { self.delegate?.onUpdateDictsReference() }
+        MUserSetting.update(info: INFO_USDICTSREFERENCE, stringValue: USDICTSREFERENCE).do { self.delegate?.onUpdateDictsReference() }
     }
 
     func updateDictNote() -> Observable<()> {
-        return MUserSetting.update(info: INFO_USDICTNOTE, intValue: USDICTNOTE).do { self.delegate?.onUpdateDictNote() }
+        MUserSetting.update(info: INFO_USDICTNOTE, intValue: USDICTNOTE).do { self.delegate?.onUpdateDictNote() }
     }
     
     func updateDictTranslation() -> Observable<()> {
-        return MUserSetting.update(info: INFO_USDICTTRANSLATION, intValue: USDICTTRANSLATION).do { self.delegate?.onUpdateDictTranslation() }
+        MUserSetting.update(info: INFO_USDICTTRANSLATION, intValue: USDICTTRANSLATION).do { self.delegate?.onUpdateDictTranslation() }
     }
     
     func updateMacVoice() -> Observable<()> {
-        return MUserSetting.update(info: INFO_USMACVOICEID, intValue: USMACVOICEID).do { self.delegate?.onUpdateMacVoice() }
+        MUserSetting.update(info: INFO_USMACVOICEID, intValue: USMACVOICEID).do { self.delegate?.onUpdateMacVoice() }
     }
     
     func updateiOSVoice() -> Observable<()> {
-        return MUserSetting.update(info: INFO_USIOSVOICEID, intValue: USIOSVOICEID).do { self.delegate?.onUpdateiOSVoice() }
+        MUserSetting.update(info: INFO_USIOSVOICEID, intValue: USIOSVOICEID).do { self.delegate?.onUpdateiOSVoice() }
     }
 
     func autoCorrectInput(text: String) -> String {
-        return MAutoCorrect.autoCorrect(text: text, arrAutoCorrect: arrAutoCorrect, colFunc1: { $0.INPUT }, colFunc2: { $0.EXTENDED })
+        MAutoCorrect.autoCorrect(text: text, arrAutoCorrect: arrAutoCorrect, colFunc1: { $0.INPUT }, colFunc2: { $0.EXTENDED })
     }
     
     func updateUnitFrom() -> Observable<()> {
-        return doUpdateUnitFrom(v: USUNITFROM, check: false).concat(
+        doUpdateUnitFrom(v: USUNITFROM, check: false).concat(
             toType == .unit ? doUpdateSingleUnit() :
             toType == .part || isInvalidUnitPart ? doUpdateUnitPartTo() :
             Observable.empty()
@@ -433,25 +383,25 @@ class SettingsViewModel: NSObject {
     }
     
     func updatePartFrom() -> Observable<()> {
-        return doUpdatePartFrom(v: USPARTFROM, check: false).concat(
+        doUpdatePartFrom(v: USPARTFROM, check: false).concat(
             toType == .part || isInvalidUnitPart ? doUpdateUnitPartTo() : Observable.empty()
         )
     }
     
     func updateUnitTo() -> Observable<()> {
-        return doUpdateUnitTo(v: USUNITTO, check: false).concat(
+        doUpdateUnitTo(v: USUNITTO, check: false).concat(
             isInvalidUnitPart ? doUpdateUnitPartFrom() : Observable.empty()
         )
     }
     
     func updatePartTo() -> Observable<()> {
-        return doUpdatePartTo(v: USPARTTO, check: false).concat(
+        doUpdatePartTo(v: USPARTTO, check: false).concat(
             isInvalidUnitPart ? doUpdateUnitPartFrom() : Observable.empty()
         )
     }
     
     func updateToType() -> Observable<()> {
-        return toType == .unit ? doUpdateSingleUnit() :
+        toType == .unit ? doUpdateSingleUnit() :
             toType == .part ? doUpdateUnitPartTo() : Observable.empty()
     }
     
@@ -501,15 +451,15 @@ class SettingsViewModel: NSObject {
     }
     
     private func doUpdateUnitPartFrom() -> Observable<()> {
-        return Observable.zip(doUpdateUnitFrom(v: USUNITTO), doUpdatePartFrom(v: USPARTTO)).map{_ in }
+        Observable.zip(doUpdateUnitFrom(v: USUNITTO), doUpdatePartFrom(v: USPARTTO)).map{_ in }
     }
     
     private func doUpdateUnitPartTo() -> Observable<()> {
-        return Observable.zip(doUpdateUnitTo(v: USUNITFROM), doUpdatePartTo(v: USPARTFROM)).map{_ in }
+        Observable.zip(doUpdateUnitTo(v: USUNITFROM), doUpdatePartTo(v: USPARTFROM)).map{_ in }
     }
     
     private func doUpdateSingleUnit() -> Observable<()> {
-        return Observable.zip(doUpdateUnitTo(v: USUNITFROM), doUpdatePartFrom(v: 1), doUpdatePartTo(v: partCount)).map{_ in }
+        Observable.zip(doUpdateUnitTo(v: USUNITFROM), doUpdatePartFrom(v: 1), doUpdatePartTo(v: partCount)).map{_ in }
     }
 
     private func doUpdateUnitFrom(v: Int, check: Bool = true) -> Observable<()> {

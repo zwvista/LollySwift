@@ -23,7 +23,7 @@ class PatternsViewModel: NSObject {
     }
     
     func reload() -> Observable<()> {
-        return MPattern.getDataByLang(vmSettings.selectedTextbook!.LANGID).map {
+        MPattern.getDataByLang(vmSettings.selectedTextbook!.LANGID).map {
             self.arrPatterns = $0
         }
     }
@@ -40,15 +40,15 @@ class PatternsViewModel: NSObject {
     }
     
     static func update(item: MPattern) -> Observable<()> {
-        return MPattern.update(item: item)
+        MPattern.update(item: item)
     }
 
     static func create(item: MPattern) -> Observable<Int> {
-        return MPattern.create(item: item)
+        MPattern.create(item: item)
     }
     
     static func delete(_ id: Int) -> Observable<()> {
-        return MPattern.delete(id)
+        MPattern.delete(id)
     }
     
     func newPattern() -> MPattern {
@@ -58,21 +58,21 @@ class PatternsViewModel: NSObject {
     }
     
     func getWebPages(patternid: Int) -> Observable<()> {
-        return MPatternWebPage.getDataByPattern(patternid).map {
+        MPatternWebPage.getDataByPattern(patternid).map {
             self.arrWebPages = $0
         }
     }
 
     static func updateWebPage(item: MPatternWebPage) -> Observable<()> {
-        return MPatternWebPage.update(item: item)
+        MPatternWebPage.update(item: item)
     }
 
     static func createWebPage(item: MPatternWebPage) -> Observable<Int> {
-        return MPatternWebPage.create(item: item)
+        MPatternWebPage.create(item: item)
     }
     
     static func deleteWebPage(_ id: Int) -> Observable<()> {
-        return MPatternWebPage.delete(id)
+        MPatternWebPage.delete(id)
     }
     
     func newPatternWebPage(patternid: Int, pattern: String) -> MPatternWebPage {
@@ -84,11 +84,11 @@ class PatternsViewModel: NSObject {
     }
     
     static func updatePhrase(item: MPatternPhrase) -> Observable<()> {
-        return MLangPhrase.update(item: MLangPhrase(patternitem: item))
+        MLangPhrase.update(item: MLangPhrase(patternitem: item))
     }
 
     func searchPhrases(patternid: Int) -> Observable<()> {
-        return MPatternPhrase.getDataByPatternId(patternid).map {
+        MPatternPhrase.getDataByPatternId(patternid).map {
             self.arrPhrases = $0
         }
     }

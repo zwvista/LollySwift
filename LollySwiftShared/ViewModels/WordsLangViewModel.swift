@@ -12,9 +12,7 @@ import RxSwift
 class WordsLangViewModel: NSObject {
     var vmSettings: SettingsViewModel
     var vmNote: NoteViewModel!
-    var mDictNote: MDictionary {
-        return vmNote.mDictNote
-    }
+    var mDictNote: MDictionary { vmNote.mDictNote }
     let disposeBag: DisposeBag!
     var arrWords = [MLangWord]()
     var arrWordsFiltered: [MLangWord]?
@@ -29,7 +27,7 @@ class WordsLangViewModel: NSObject {
     }
     
     func reload() -> Observable<()> {
-        return MLangWord.getDataByLang(vmSettings.selectedTextbook!.LANGID).map {
+        MLangWord.getDataByLang(vmSettings.selectedTextbook!.LANGID).map {
             self.arrWords = $0
         }
     }
@@ -49,15 +47,15 @@ class WordsLangViewModel: NSObject {
     }
     
     static func update(item: MLangWord) -> Observable<()> {
-        return MLangWord.update(item: item)
+        MLangWord.update(item: item)
     }
 
     static func create(item: MLangWord) -> Observable<Int> {
-        return MLangWord.create(item: item)
+        MLangWord.create(item: item)
     }
     
     static func delete(item: MLangWord) -> Observable<()> {
-        return Observable.zip(MLangWord.delete(item.ID), MWordFami.delete(item.FAMIID), MWordPhrase.deleteByWordId(item.ID)).map {_ in }
+        Observable.zip(MLangWord.delete(item.ID), MWordFami.delete(item.FAMIID), MWordPhrase.deleteByWordId(item.ID)).map {_ in }
     }
     
     func newLangWord() -> MLangWord {
@@ -81,7 +79,7 @@ class WordsLangViewModel: NSObject {
     }
 
     func searchPhrases(wordid: Int) -> Observable<()> {
-        return MWordPhrase.getPhrasesByWordId(wordid).map {
+        MWordPhrase.getPhrasesByWordId(wordid).map {
             self.arrPhrases = $0
         }
     }

@@ -12,7 +12,7 @@ class WordsBaseViewController: UITableViewController, UISearchBarDelegate, UISea
 
     // https://www.raywenderlich.com/113772/uisearchcontroller-tutorial
     let searchController = UISearchController(searchResultsController: nil)
-    var searchBar: UISearchBar { return searchController.searchBar }
+    var searchBar: UISearchBar { searchController.searchBar }
     var colors = [UIColor]()
 
     func setupSearchController(delegate: UISearchBarDelegate & UISearchResultsUpdating) {
@@ -41,7 +41,7 @@ class WordsBaseViewController: UITableViewController, UISearchBarDelegate, UISea
     }
 
     func itemForRow(row: Int) -> (MWordProtocol & NSObject)? {
-        return nil
+        nil
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -80,7 +80,7 @@ class WordsBaseViewController: UITableViewController, UISearchBarDelegate, UISea
     }
     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
+        true
     }
     
     override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {

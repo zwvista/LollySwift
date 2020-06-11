@@ -30,18 +30,10 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     var selectedPatternID = 0
     let synth = NSSpeechSynthesizer()
     var isSpeaking = true
-    var vmSettings: SettingsViewModel! {
-        return vm.vmSettings
-    }
-    var arrPatterns: [MPattern] {
-        return vm.arrPatternsFiltered ?? vm.arrPatterns
-    }
-    var arrWebPages: [MPatternWebPage] {
-        return vm.arrWebPages
-    }
-    var arrPhrases: [MPatternPhrase] {
-        return vm.arrPhrases
-    }
+    var vmSettings: SettingsViewModel! { vm.vmSettings }
+    var arrPatterns: [MPattern] { vm.arrPatternsFiltered ?? vm.arrPatterns }
+    var arrWebPages: [MPatternWebPage] { vm.arrWebPages }
+    var arrPhrases: [MPatternPhrase] { vm.arrPhrases }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,7 +59,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     }
 
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return tableView === tvPatterns ? arrPatterns.count : tableView === tvWebPages ? arrWebPages.count : arrPhrases.count
+        tableView === tvPatterns ? arrPatterns.count : tableView === tvWebPages ? arrWebPages.count : arrPhrases.count
     }
     
     @IBAction func endEditing(_ sender: NSTextField) {

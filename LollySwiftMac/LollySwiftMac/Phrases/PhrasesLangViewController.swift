@@ -13,12 +13,8 @@ import RxSwift
 class PhrasesLangViewController: PhrasesBaseViewController {
     
     var vm: PhrasesLangViewModel!
-    override var vmSettings: SettingsViewModel! {
-        return vm.vmSettings
-    }
-    var arrPhrases: [MLangPhrase] {
-        return vm.arrPhrasesFiltered ?? vm.arrPhrases
-    }
+    override var vmSettings: SettingsViewModel! { vm.vmSettings }
+    var arrPhrases: [MLangPhrase] { vm.arrPhrasesFiltered ?? vm.arrPhrases }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,11 +34,11 @@ class PhrasesLangViewController: PhrasesBaseViewController {
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return arrPhrases.count
+        arrPhrases.count
     }
     
     override func itemForRow(row: Int) -> (MPhraseProtocol & NSObject)? {
-        return arrPhrases[row]
+        arrPhrases[row]
     }
     
     override func endEditing(row: Int) {

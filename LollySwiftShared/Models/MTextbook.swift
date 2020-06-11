@@ -28,15 +28,13 @@ class MTextbook: NSObject, Codable {
     var arrUnits = [MSelectItem]()
     var arrParts = [MSelectItem]()
     func UNITSTR(_ unit: Int) -> String {
-        return arrUnits.first { $0.value == unit }!.label
+        arrUnits.first { $0.value == unit }!.label
     }
     func PARTSTR(_ part: Int) -> String {
-        return arrParts.first { $0.value == part }!.label
+        arrParts.first { $0.value == part }!.label
     }
 
-    override var description: String {
-        return TEXTBOOKNAME
-    }
+    override var description: String { TEXTBOOKNAME }
 
     static func getDataByLang(_ langid: Int) -> Observable<[MTextbook]> {
         // SQL: SELECT * FROM TEXTBOOKS WHERE LANGID=?

@@ -17,9 +17,7 @@ class PhrasesLangDetailViewController: NSViewController, NSTableViewDataSource, 
     var complete: (() -> Void)?
     var item: MLangPhrase!
     var isAdd: Bool!
-    var arrPhrases: [MUnitPhrase] {
-        return vmSingle != nil ? vmSingle.arrPhrases : [MUnitPhrase]()
-    }
+    var arrPhrases: [MUnitPhrase] { vmSingle != nil ? vmSingle.arrPhrases : [MUnitPhrase]() }
 
     @IBOutlet weak var tfID: NSTextField!
     @IBOutlet weak var tfPhrase: NSTextField!
@@ -62,7 +60,7 @@ class PhrasesLangDetailViewController: NSViewController, NSTableViewDataSource, 
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return arrPhrases.count
+        arrPhrases.count
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {

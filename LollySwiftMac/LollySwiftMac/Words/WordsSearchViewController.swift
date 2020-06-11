@@ -13,9 +13,7 @@ import RxSwift
 class WordsSearchViewController: WordsBaseViewController {
     
     var vm: WordsSearchViewModel!
-    override var vmSettings: SettingsViewModel! {
-        return vm.vmSettings
-    }
+    override var vmSettings: SettingsViewModel! { vm.vmSettings }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,11 +33,11 @@ class WordsSearchViewController: WordsBaseViewController {
     }
 
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return vm.arrWords.count
+        vm.arrWords.count
     }
     
     override func itemForRow(row: Int) -> (MWordProtocol & NSObject)? {
-        return vm.arrWords[row]
+        vm.arrWords[row]
     }
 
     override func addNewWord() {
@@ -70,7 +68,7 @@ class WordsSearchViewController: WordsBaseViewController {
     }
     
     override func confirmDelete() -> Bool {
-        return false
+        false
     }
 
     override func deleteWord(row: Int) {
@@ -82,7 +80,7 @@ class WordsSearchViewController: WordsBaseViewController {
     }
     
     override func needRegainFocus() -> Bool {
-        return false
+        false
     }
 }
 

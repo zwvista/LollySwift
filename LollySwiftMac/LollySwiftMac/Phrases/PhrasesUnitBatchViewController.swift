@@ -13,9 +13,7 @@ class PhrasesUnitBatchViewController: NSViewController, NSTableViewDataSource, N
 
     @objc var vm: PhrasesUnitViewModel!
     var complete: (() -> Void)?
-    var arrPhrases: [MUnitPhrase] {
-        return vm.arrPhrases
-    }
+    var arrPhrases: [MUnitPhrase] { vm.arrPhrases }
 
     @IBOutlet weak var acUnits: NSArrayController!
     @IBOutlet weak var acParts: NSArrayController!
@@ -44,7 +42,7 @@ class PhrasesUnitBatchViewController: NSViewController, NSTableViewDataSource, N
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return arrPhrases.count
+        arrPhrases.count
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {

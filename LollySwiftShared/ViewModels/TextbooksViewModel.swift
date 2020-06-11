@@ -25,11 +25,11 @@ class TextbooksViewModel: NSObject {
     }
     
     static func update(item: MTextbook) -> Observable<()> {
-        return MTextbook.update(item: item)
+        MTextbook.update(item: item)
     }
     
     static func create(item: MTextbook) -> Observable<Int> {
-        return MTextbook.create(item: item)
+        MTextbook.create(item: item)
     }
 
     func newTextbook() -> MTextbook {

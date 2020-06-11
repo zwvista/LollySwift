@@ -40,7 +40,7 @@ class PhrasesBaseViewController: UITableViewController, UISearchBarDelegate, UIS
     }
 
     func itemForRow(row: Int) -> (MPhraseProtocol & NSObject)? {
-        return nil
+        nil
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -55,7 +55,7 @@ class PhrasesBaseViewController: UITableViewController, UISearchBarDelegate, UIS
     }
     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
+        true
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

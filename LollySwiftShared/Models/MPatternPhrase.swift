@@ -87,7 +87,7 @@ class MPatternPhrase: NSObject, Codable {
     
     static func deleteByPhraseId(_ phraseid: Int) -> Observable<()> {
         // SQL: DELETE PATTERNSPHRASES WHERE PHRASEID=?
-        return getDataByPhraseId(phraseid).flatMap { arr -> Observable<()> in
+        getDataByPhraseId(phraseid).flatMap { arr -> Observable<()> in
             if arr.isEmpty {
                 return Observable.empty()
             } else {
@@ -99,7 +99,7 @@ class MPatternPhrase: NSObject, Codable {
     }
 
     static func connect(patternid: Int, phraseid: Int) -> Observable<()> {
-        return getDataByPatternIdPhraseId(patternid: patternid, phraseid: phraseid).flatMap { arr -> Observable<()> in
+        getDataByPatternIdPhraseId(patternid: patternid, phraseid: phraseid).flatMap { arr -> Observable<()> in
             return !arr.isEmpty ? Observable.empty() : getDataByPatternId(patternid).flatMap { arr2 -> Observable<()> in
                 let item = MPatternPhrase()
                 item.PATTERNID = patternid
@@ -111,7 +111,7 @@ class MPatternPhrase: NSObject, Codable {
     }
     
     static func disconnect(patternid: Int, phraseid: Int) -> Observable<()> {
-        return getDataByPatternIdPhraseId(patternid: patternid, phraseid: phraseid).flatMap { arr -> Observable<()> in
+        getDataByPatternIdPhraseId(patternid: patternid, phraseid: phraseid).flatMap { arr -> Observable<()> in
             var o = Observable.just(())
             for v in arr {
                 o = o.concat(delete(v.ID))

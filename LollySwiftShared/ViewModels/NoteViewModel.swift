@@ -12,9 +12,7 @@ import RxSwift
 class NoteViewModel {
 
     var vmSettings: SettingsViewModel
-    var mDictNote: MDictionary {
-        return vmSettings.selectedDictNote
-    }
+    var mDictNote: MDictionary { vmSettings.selectedDictNote }
     let disposeBag: DisposeBag!
     static let zeroNote = "O"
 

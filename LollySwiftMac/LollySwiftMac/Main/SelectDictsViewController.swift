@@ -17,9 +17,7 @@ class SelectDictsViewController: NSViewController, NSTableViewDataSource, NSTabl
     @IBOutlet weak var btnRemove: NSButton!
     @IBOutlet weak var btnRemoveAll: NSButton!
     
-    var vm: SettingsViewModel {
-        return AppDelegate.theSettingsViewModel
-    }
+    var vm: SettingsViewModel { AppDelegate.theSettingsViewModel }
     let disposeBag = DisposeBag()
     var dictsAvailable: [MDictionary]!
     var dictsSelected: [MDictionary]!
@@ -44,7 +42,7 @@ class SelectDictsViewController: NSViewController, NSTableViewDataSource, NSTabl
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return tableView === tvAvailable ? dictsAvailable.count : dictsSelected.count
+        tableView === tvAvailable ? dictsAvailable.count : dictsSelected.count
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {

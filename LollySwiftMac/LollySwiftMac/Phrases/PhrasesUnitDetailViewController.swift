@@ -17,9 +17,7 @@ class PhrasesUnitDetailViewController: NSViewController, NSTableViewDataSource, 
     var complete: (() -> Void)?
     var item: MUnitPhrase!
     var isAdd: Bool!
-    var arrPhrases: [MUnitPhrase] {
-        return vmSingle != nil ? vmSingle.arrPhrases : [MUnitPhrase]()
-    }
+    var arrPhrases: [MUnitPhrase] { vmSingle != nil ? vmSingle.arrPhrases : [MUnitPhrase]() }
 
     @IBOutlet weak var acUnits: NSArrayController!
     @IBOutlet weak var acParts: NSArrayController!
@@ -70,7 +68,7 @@ class PhrasesUnitDetailViewController: NSViewController, NSTableViewDataSource, 
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return arrPhrases.count
+        arrPhrases.count
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {

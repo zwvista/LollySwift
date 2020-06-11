@@ -13,12 +13,8 @@ import RxSwift
 class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
 
     var vm: WordsLangViewModel!
-    override var vmSettings: SettingsViewModel! {
-        return vm.vmSettings
-    }
-    var arrWords: [MLangWord] {
-        return vm.arrWordsFiltered ?? vm.arrWords
-    }
+    override var vmSettings: SettingsViewModel! { vm.vmSettings }
+    var arrWords: [MLangWord] { vm.arrWordsFiltered ?? vm.arrWords }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,11 +36,11 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
     //MARK: tableView
 
     override func itemForRow(row: Int) -> (MWordProtocol & NSObject)? {
-        return arrWords[row]
+        arrWords[row]
     }
 
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return arrWords.count
+        arrWords.count
     }
     
     override func levelChanged(row: Int) -> Observable<Int> {

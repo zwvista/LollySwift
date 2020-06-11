@@ -12,14 +12,12 @@ import RxSwift
 
 class BlogViewController: NSViewController, NSMenuItemValidation  {
 
-    var vm: SettingsViewModel {
-        return AppDelegate.theSettingsViewModel
-    }
+    var vm: SettingsViewModel { AppDelegate.theSettingsViewModel }
     @IBOutlet weak var tvMarked: NSTextView!
     @IBOutlet weak var tvHtml: NSTextView!
     @IBOutlet weak var wvBlog: WKWebView!
     
-    var wc: BlogWindowController { return view.window!.windowController as! BlogWindowController }
+    var wc: BlogWindowController { view.window!.windowController as! BlogWindowController }
     var vmBlog: BlogViewModel!
 
     let disposeBag = DisposeBag()

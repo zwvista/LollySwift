@@ -18,9 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let disposeBag = DisposeBag()
     static let synth = AVSpeechSynthesizer()
     private static let _initializeObject = ReplaySubject<()>.create(bufferSize: 1)
-    static var initializeObject: ReplaySubject<()> {
-        return _initializeObject
-    }
+    static var initializeObject: ReplaySubject<()> { _initializeObject }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.

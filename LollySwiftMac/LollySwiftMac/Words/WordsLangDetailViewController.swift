@@ -17,9 +17,7 @@ class WordsLangDetailViewController: NSViewController, NSTableViewDataSource, NS
     var complete: (() -> Void)?
     var item: MLangWord!
     var isAdd: Bool!
-    var arrWords: [MUnitWord] {
-        return vmSingle != nil ? vmSingle.arrWords : [MUnitWord]()
-    }
+    var arrWords: [MUnitWord] { vmSingle != nil ? vmSingle.arrWords : [MUnitWord]() }
 
     @IBOutlet weak var tfID: NSTextField!
     @IBOutlet weak var tfWord: NSTextField!
@@ -71,7 +69,7 @@ class WordsLangDetailViewController: NSViewController, NSTableViewDataSource, NS
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return arrWords.count
+        arrWords.count
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {

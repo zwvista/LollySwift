@@ -46,14 +46,14 @@ extension Encodable {
 class RestApi {
 
     static func getObject<T: Decodable>(url: String, keyPath: String? = nil) -> Observable<T> {
-        return RxCodableAlamofire.object(.get, url, keyPath: keyPath)
+        RxCodableAlamofire.object(.get, url, keyPath: keyPath)
     }
     static func getArray<T: Decodable>(url: String, keyPath: String? = nil) -> Observable<[T]> {
         print("[RestApi]GET:\(url)")
         return RxCodableAlamofire.object(.get, url, keyPath: keyPath)
     }
     static func getRecords<T: Decodable>(url: String) -> Observable<[T]> {
-        return getArray(url: url, keyPath: "records")
+        getArray(url: url, keyPath: "records")
     }
     static func update(url: String, body: String) -> Observable<String> {
         print("[RestApi]PUT:\(url) BODY:\(body)")

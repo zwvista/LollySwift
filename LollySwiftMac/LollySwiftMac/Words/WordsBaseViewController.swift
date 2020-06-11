@@ -20,9 +20,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     @IBOutlet weak var tvPhrases: NSTableView!
     @IBOutlet weak var tabView: NSTabView!
     
-    var vmSettings: SettingsViewModel! {
-        return nil
-    }
+    var vmSettings: SettingsViewModel! { nil }
     let disposeBag = DisposeBag()
     
     var selectedDictReferenceIndex = 0
@@ -34,7 +32,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     let synth = NSSpeechSynthesizer()
     var isSpeaking = true
     var responder: NSResponder? = nil
-    var arrPhrases: [MLangPhrase]! { return nil }
+    var arrPhrases: [MLangPhrase]! { nil }
     
     let imageOff = NSImage(named: "NSStatusNone")
     let imageOn = NSImage(named: "NSStatusAvailable")
@@ -82,7 +80,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     }
 
     func itemForRow(row: Int) -> (MWordProtocol & NSObject)? {
-        return nil
+        nil
     }
     
     // https://stackoverflow.com/questions/10910779/coloring-rows-in-view-based-nstableview
@@ -158,7 +156,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     }
     
     func confirmDelete() -> Bool {
-        return true
+        true
     }
 
     @IBAction func deleteWord(_ sender: AnyObject) {
@@ -224,11 +222,11 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     }
     
     func needRegainFocus() -> Bool {
-        return true
+        true
     }
 
     func levelChanged(row: Int) -> Observable<Int> {
-        return Observable.just(0)
+        Observable.just(0)
     }
     
     private func changeLevel(by delta: Int) {
@@ -344,12 +342,8 @@ class WordsBaseWindowController: NSWindowController, LollyProtocol, NSWindowDele
     @IBOutlet weak var tbiDict37: NSToolbarItem!
     @IBOutlet weak var tbiDict38: NSToolbarItem!
     @IBOutlet weak var tbiDict39: NSToolbarItem!
-    var vc: WordsBaseViewController {
-        return contentViewController as! WordsBaseViewController
-    }
-    @objc var vm: SettingsViewModel! {
-        return vc.vmSettings
-    }
+    var vc: WordsBaseViewController { contentViewController as! WordsBaseViewController }
+    @objc var vm: SettingsViewModel! { vc.vmSettings }
     private var defaultToolbarItemCount = 0
     
     var identifiers: [NSToolbarItem.Identifier]!

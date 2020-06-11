@@ -39,7 +39,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationShouldTerminateAfterLastWindowClosed() -> Bool {
-        return true
+        true
     }
     
     func showWindow(storyBoardName: String, windowControllerName: String, modal: Bool) {

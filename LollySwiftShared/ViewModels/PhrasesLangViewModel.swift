@@ -21,7 +21,7 @@ class PhrasesLangViewModel: NSObject {
     }
     
     func reload() -> Observable<()> {
-        return MLangPhrase.getDataByLang(vmSettings.selectedTextbook!.LANGID).map {
+        MLangPhrase.getDataByLang(vmSettings.selectedTextbook!.LANGID).map {
             self.arrPhrases = $0
         }
     }
@@ -38,15 +38,15 @@ class PhrasesLangViewModel: NSObject {
     }
     
     static func update(item: MLangPhrase) -> Observable<()> {
-        return MLangPhrase.update(item: item)
+        MLangPhrase.update(item: item)
     }
 
     static func create(item: MLangPhrase) -> Observable<Int> {
-        return MLangPhrase.create(item: item)
+        MLangPhrase.create(item: item)
     }
     
     static func delete(_ id: Int) -> Observable<()> {
-        return Observable.zip(MLangPhrase.delete(id), MUnitPhrase.deleteByPhraseId(id), MWordPhrase.deleteByPhraseId(id), MPatternPhrase.deleteByPhraseId(id)).map {_ in }
+        Observable.zip(MLangPhrase.delete(id), MUnitPhrase.deleteByPhraseId(id), MWordPhrase.deleteByPhraseId(id), MPatternPhrase.deleteByPhraseId(id)).map {_ in }
     }
 
     func newLangPhrase() -> MLangPhrase {

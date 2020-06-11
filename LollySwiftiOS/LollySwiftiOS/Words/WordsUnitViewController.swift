@@ -12,9 +12,7 @@ import RxSwift
 class WordsUnitViewController: WordsBaseViewController {
 
     var vm: WordsUnitViewModel!
-    var arrWords: [MUnitWord] {
-        return searchController.isActive && searchBar.text != "" ? vm.arrWordsFiltered! : vm.arrWords
-    }
+    var arrWords: [MUnitWord] { searchController.isActive && searchBar.text != "" ? vm.arrWordsFiltered! : vm.arrWords }
     @IBOutlet weak var btnEdit: UIBarButtonItem!
     
     let disposeBag = DisposeBag()
@@ -30,15 +28,15 @@ class WordsUnitViewController: WordsBaseViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arrWords.count
+        arrWords.count
     }
     
     override func itemForRow(row: Int) -> (MWordProtocol & NSObject)? {
-        return arrWords[row]
+        arrWords[row]
     }
     
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        return vmSettings.isSingleUnitPart
+        vmSettings.isSingleUnitPart
     }
     
     private func reindex() {

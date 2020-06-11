@@ -12,9 +12,7 @@ import RxSwift
 class WordsUnitViewModel: NSObject {
     var vmSettings: SettingsViewModel
     var vmNote: NoteViewModel!
-    var mDictNote: MDictionary {
-        return vmNote.mDictNote
-    }
+    var mDictNote: MDictionary { vmNote.mDictNote }
     let inTextbook: Bool
     let disposeBag: DisposeBag!
     var arrWords = [MUnitWord]()
@@ -31,7 +29,7 @@ class WordsUnitViewModel: NSObject {
     }
     
     func reload() -> Observable<()> {
-        return (inTextbook ? MUnitWord.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO) : MUnitWord.getDataByLang(vmSettings.selectedTextbook.LANGID, arrTextbooks: vmSettings.arrTextbooks))
+        (inTextbook ? MUnitWord.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO) : MUnitWord.getDataByLang(vmSettings.selectedTextbook.LANGID, arrTextbooks: vmSettings.arrTextbooks))
         .map {
             self.arrWords = $0
             self.arrWordsFiltered = nil
@@ -56,11 +54,11 @@ class WordsUnitViewModel: NSObject {
     }
     
     static func update(_ id: Int, seqnum: Int) -> Observable<()> {
-        return MUnitWord.update(id, seqnum: seqnum)
+        MUnitWord.update(id, seqnum: seqnum)
     }
     
     static func update(_ wordid: Int, note: String) -> Observable<()> {
-        return MLangWord.update(wordid, note: note)
+        MLangWord.update(wordid, note: note)
     }
 
     static func update(item: MUnitWord) -> Observable<()> {
@@ -121,7 +119,7 @@ class WordsUnitViewModel: NSObject {
     }
     
     static func create(item: MUnitWord) -> Observable<Int> {
-        return MLangWord.getDataByLangWord(langid: item.LANGID, word: item.WORD).flatMap { arrLang -> Observable<Int> in
+        MLangWord.getDataByLangWord(langid: item.LANGID, word: item.WORD).flatMap { arrLang -> Observable<Int> in
             if arrLang.isEmpty {
                 let itemLang = MLangWord(unititem: item)
                 return MLangWord.create(item: itemLang)
@@ -207,7 +205,7 @@ class WordsUnitViewModel: NSObject {
     }
     
     func clearNotes(ifEmpty: Bool, oneComplete: @escaping (Int) -> Void) -> Observable<()> {
-        return vmNote.clearNotes(wordCount: arrWords.count, isNoteEmpty: {
+        vmNote.clearNotes(wordCount: arrWords.count, isNoteEmpty: {
             !ifEmpty || (self.arrWords[$0].NOTE ?? "").isEmpty
         }, getOne: { i in
             self.clearNote(index: i).do { oneComplete(i) }
@@ -215,7 +213,7 @@ class WordsUnitViewModel: NSObject {
     }
     
     func searchPhrases(wordid: Int) -> Observable<()> {
-        return MWordPhrase.getPhrasesByWordId(wordid).map {
+        MWordPhrase.getPhrasesByWordId(wordid).map {
             self.arrPhrases = $0
         }
     }

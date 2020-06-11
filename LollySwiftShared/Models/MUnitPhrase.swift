@@ -36,15 +36,9 @@ class MUnitPhrase: NSObject, Codable, MPhraseProtocol {
     }
 
     unowned var textbook: MTextbook!
-    var UNITSTR: String {
-        return textbook.UNITSTR(UNIT)
-    }
-    var PARTSTR: String {
-        return textbook.PARTSTR(PART)
-    }
-    var UNITPARTSEQNUM: String {
-        return "\(UNITSTR) \(SEQNUM)\n\(PARTSTR)"
-    }
+    var UNITSTR: String { textbook.UNITSTR(UNIT) }
+    var PARTSTR: String { textbook.PARTSTR(PART) }
+    var UNITPARTSEQNUM: String { "\(UNITSTR) \(SEQNUM)\n\(PARTSTR)" }
     
     func copy(from x: MUnitPhrase) {
         ID = x.ID

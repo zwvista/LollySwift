@@ -13,9 +13,7 @@ class WordsDictViewModel: NSObject {
     var vmSettings: SettingsViewModel
     var arrWords = [String]()
     var currentWordIndex = 0
-    var currentWord: String {
-        return arrWords[currentWordIndex]
-    }
+    var currentWord: String { arrWords[currentWordIndex] }
     func next(_ delta: Int) {
         currentWordIndex = (currentWordIndex + delta + arrWords.count) % arrWords.count
     }
