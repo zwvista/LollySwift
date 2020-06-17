@@ -100,7 +100,7 @@ class MPatternPhrase: NSObject, Codable {
 
     static func connect(patternid: Int, phraseid: Int) -> Observable<()> {
         getDataByPatternIdPhraseId(patternid: patternid, phraseid: phraseid).flatMap { arr -> Observable<()> in
-            return !arr.isEmpty ? Observable.empty() : getDataByPatternId(patternid).flatMap { arr2 -> Observable<()> in
+            !arr.isEmpty ? Observable.empty() : getDataByPatternId(patternid).flatMap { arr2 -> Observable<()> in
                 let item = MPatternPhrase()
                 item.PATTERNID = patternid
                 item.PHRASEID = phraseid

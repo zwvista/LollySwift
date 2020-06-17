@@ -12,7 +12,7 @@ class PhrasesBaseViewController: UITableViewController, UISearchBarDelegate, UIS
     
     // https://www.raywenderlich.com/113772/uisearchcontroller-tutorial
     let searchController = UISearchController(searchResultsController: nil)
-    var searchBar: UISearchBar { return searchController.searchBar }
+    var searchBar: UISearchBar { searchController.searchBar }
     
     func setupSearchController(delegate: UISearchBarDelegate & UISearchResultsUpdating) {
         // https://stackoverflow.com/questions/28326269/uisearchbar-presented-by-uisearchcontroller-in-table-header-view-animates-too-fa
