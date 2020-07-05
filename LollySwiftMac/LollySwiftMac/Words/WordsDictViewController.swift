@@ -21,6 +21,8 @@ class WordsDictViewController: NSViewController, WKNavigationDelegate {
     var dict: MDictionary!
     var webInitilized = false
     var url = ""
+    var subscription: Disposable? = nil
+    let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,10 +61,13 @@ class WordsDictViewController: NSViewController, WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         // Regain focus if it's stolen by the webView
         if vcWords.responder != nil && vcWords.needRegainFocus() {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self.vcWords.view.window!.makeFirstResponder(self.vcWords.responder)
+            subscription?.dispose()
+            subscription = Observable<Int>.timer(0.5, period: 1, scheduler: MainScheduler.instance).subscribe { _ in
+                self.subscription?.dispose()
+                self.vcWords.responder?.window!.makeFirstResponder(self.vcWords.responder)
                 self.vcWords.responder = nil
             }
+            subscription?.disposed(by: self.disposeBag)
         }
         tfURL.stringValue = webView.url!.absoluteString
         guard dictStatus != .ready else {return}

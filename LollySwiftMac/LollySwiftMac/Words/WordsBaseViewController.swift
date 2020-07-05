@@ -31,7 +31,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     var selectedWordID = 0
     let synth = NSSpeechSynthesizer()
     var isSpeaking = true
-    var responder: NSResponder? = nil
+    weak var responder: NSView? = nil
     var arrPhrases: [MLangPhrase]! { nil }
     
     let imageOff = NSImage(named: "NSStatusNone")
@@ -120,7 +120,6 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
         if tv === tvWords {
             updateStatusText()
             searchDict(self)
-            responder = tvWords
             searchPhrases()
             if isSpeaking {
                 speak(self)
