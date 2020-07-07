@@ -20,6 +20,7 @@ class PatternsDetailViewController: NSViewController {
     @IBOutlet weak var tfID: NSTextField!
     @IBOutlet weak var tfPattern: NSTextField!
     @IBOutlet weak var tfNote: NSTextField!
+    @IBOutlet weak var tfTag: NSTextField!
 
     let disposeBag = DisposeBag()
 

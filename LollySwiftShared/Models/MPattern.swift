@@ -15,7 +15,8 @@ class MPattern: NSObject, Codable {
     var LANGID = 0
     var PATTERN = ""
     var NOTE: String?
-    
+    var TAG: String?
+
     override init() {
     }
     
@@ -24,6 +25,7 @@ class MPattern: NSObject, Codable {
         LANGID = x.LANGID
         PATTERN = x.PATTERN
         NOTE = x.NOTE
+        TAG = x.TAG
     }
 
     static func getDataByLang(_ langid: Int) -> Observable<[MPattern]> {
@@ -37,22 +39,15 @@ class MPattern: NSObject, Codable {
         let url = "\(CommonApi.url)PATTERNS?filter=ID,eq,\(id)"
         return RestApi.getRecords(url: url)
     }
-
-    static func update(_ id: Int, note: String) -> Observable<()> {
-        // SQL: UPDATE PATTERNS SET NOTE=? WHERE ID=?
-        let url = "\(CommonApi.url)PATTERNS/\(id)"
-        let body = "NOTE=\(note)"
-        return RestApi.update(url: url, body: body).map { print($0) }
-    }
     
     static func update(item: MPattern) -> Observable<()> {
-        // SQL: UPDATE PATTERNS SET PATTERN=?, NOTE=? WHERE ID=?
+        // SQL: UPDATE PATTERNS SET PATTERN=?, NOTE=?, TAG=? WHERE ID=?
         let url = "\(CommonApi.url)PATTERNS/\(item.ID)"
         return RestApi.update(url: url, body: try! item.toJSONString(prettyPrint: false)!).map { print($0) }
     }
 
     static func create(item: MPattern) -> Observable<Int> {
-        // SQL: INSERT INTO PATTERNS (LANGID, PATTERN, NOTE) VALUES (?,?,?)
+        // SQL: INSERT INTO PATTERNS (LANGID, PATTERN, NOTE, TAG) VALUES (?,?,?,?)
         let url = "\(CommonApi.url)PATTERNS"
         return RestApi.create(url: url, body: try! item.toJSONString(prettyPrint: false)!).map { $0.toInt()! }.do(onNext: { print($0) })
     }
