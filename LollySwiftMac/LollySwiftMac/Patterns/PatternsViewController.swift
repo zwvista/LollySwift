@@ -255,7 +255,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     @IBAction func editWebPage(_ sender: AnyObject) {
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "PatternsWebPageViewController") as! PatternsWebPageViewController
         detailVC.vm = vm
-        let i = tvPatterns.selectedRow
+        let i = tvWebPages.selectedRow
         detailVC.item = MPatternWebPage()
         detailVC.item.copy(from: arrWebPages[i])
         detailVC.complete = {

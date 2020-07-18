@@ -15,6 +15,7 @@ class MPatternWebPage: NSObject, Codable {
     var PATTERNID = 0
     var PATTERN = ""
     var SEQNUM = 0
+    var WEBPAGEID = 0
     var TITLE = ""
     var URL = ""
 
@@ -26,18 +27,19 @@ class MPatternWebPage: NSObject, Codable {
         PATTERNID = x.PATTERNID
         PATTERN = x.PATTERN
         SEQNUM = x.SEQNUM
+        WEBPAGEID = x.WEBPAGEID
         TITLE = x.TITLE
         URL = x.URL
     }
 
     static func getDataByPattern(_ patternid: Int) -> Observable<[MPatternWebPage]> {
-        // SQL: SELECT * FROM PATTERNSWEBPAGES WHERE PATTERNID=?
-        let url = "\(CommonApi.url)VPATTERNSWEBPAGES?filter=PATTERNID,eq,\(patternid)"
+        // SQL: SELECT * FROM VPATTERNSWEBPAGES WHERE PATTERNID=?
+        let url = "\(CommonApi.url)VPATTERNSWEBPAGES?filter=PATTERNID,eq,\(patternid)&order=SEQNUM"
         return RestApi.getRecords(url: url)
     }
     
     static func getDataById(_ id: Int) -> Observable<[MPatternWebPage]> {
-        // SQL: SELECT * FROM PATTERNSWEBPAGES WHERE ID=?
+        // SQL: SELECT * FROM VPATTERNSWEBPAGES WHERE ID=?
         let url = "\(CommonApi.url)VPATTERNSWEBPAGES?filter=ID,eq,\(id)"
         return RestApi.getRecords(url: url)
     }
