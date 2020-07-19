@@ -125,6 +125,9 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
                 selectedPatternID = item.ID
                 vm.getWebPages(patternid: selectedPatternID).subscribe {
                     self.tvWebPages.reloadData()
+                    if self.tvWebPages.numberOfRows > 0 {
+                        self.tvWebPages.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
+                    }
                 }.disposed(by: disposeBag)
                 searchPhrases()
                 if isSpeaking {
