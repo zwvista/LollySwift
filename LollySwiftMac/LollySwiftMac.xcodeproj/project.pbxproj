@@ -113,6 +113,7 @@
 		95F0A8AA2293C64400D1B9A2 /* DictsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F0A8A82293C64300D1B9A2 /* DictsViewController.swift */; };
 		95F0A8AB2293C64400D1B9A2 /* DictsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F0A8A92293C64400D1B9A2 /* DictsDetailViewController.swift */; };
 		95F0A8AD2293C6A700D1B9A2 /* DictsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F0A8AC2293C6A700D1B9A2 /* DictsViewModel.swift */; };
+		95F0FFC824C66DE800509DF3 /* WordsUnitDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F0FFC724C66DE800509DF3 /* WordsUnitDetail.swift */; };
 		95F5400A22C1C3B700E3FD6A /* SingleWordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F5400922C1C3B700E3FD6A /* SingleWordViewModel.swift */; };
 		95F5400C22C1FADD00E3FD6A /* SinglePhraseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F5400B22C1FADD00E3FD6A /* SinglePhraseViewModel.swift */; };
 		95F5401022C35C3800E3FD6A /* EmbeddedReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F5400F22C35C3800E3FD6A /* EmbeddedReviewViewModel.swift */; };
@@ -232,6 +233,7 @@
 		95F0A8A82293C64300D1B9A2 /* DictsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictsViewController.swift; sourceTree = "<group>"; };
 		95F0A8A92293C64400D1B9A2 /* DictsDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictsDetailViewController.swift; sourceTree = "<group>"; };
 		95F0A8AC2293C6A700D1B9A2 /* DictsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictsViewModel.swift; sourceTree = "<group>"; };
+		95F0FFC724C66DE800509DF3 /* WordsUnitDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsUnitDetail.swift; sourceTree = "<group>"; };
 		95F5400922C1C3B700E3FD6A /* SingleWordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleWordViewModel.swift; sourceTree = "<group>"; };
 		95F5400B22C1FADD00E3FD6A /* SinglePhraseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinglePhraseViewModel.swift; sourceTree = "<group>"; };
 		95F5400F22C35C3800E3FD6A /* EmbeddedReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbeddedReviewViewModel.swift; sourceTree = "<group>"; };
@@ -345,23 +347,9 @@
 		8C2CB599207885140083DDE2 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				95DB142321CDEA7B00FBAF9A /* BlogViewModel.swift */,
-				95F0A8AC2293C6A700D1B9A2 /* DictsViewModel.swift */,
-				95F5400F22C35C3800E3FD6A /* EmbeddedReviewViewModel.swift */,
-				95E43F2A21E1D568001E650C /* NoteViewModel.swift */,
-				954CB5F323B7175500A03900 /* PatternsViewModel.swift */,
-				8C2CB59D207885140083DDE2 /* PhrasesLangViewModel.swift */,
-				95FDF627228CF9B1003DFB1A /* PhrasesReviewViewModel.swift */,
-				8C2CB59E207885140083DDE2 /* PhrasesUnitViewModel.swift */,
-				958BAB1823518838007F50BB /* ReadNumberViewModel.swift */,
-				8C2CB59A207885140083DDE2 /* SettingsViewModel.swift */,
-				95F5400B22C1FADD00E3FD6A /* SinglePhraseViewModel.swift */,
-				95F5400922C1C3B700E3FD6A /* SingleWordViewModel.swift */,
-				95F0A8A4229264EA00D1B9A2 /* TextbooksViewModel.swift */,
-				8C2CB59B207885140083DDE2 /* WordsLangViewModel.swift */,
-				95F6CEBE2264A5ED00C15A1D /* WordsReviewViewModel.swift */,
-				8CAF910920833C4F00933837 /* WordsSearchViewModel.swift */,
-				8C2CB59F207885140083DDE2 /* WordsUnitViewModel.swift */,
+				95F0FFC924C9565A00509DF3 /* Misc */,
+				95F0FFC624C66DA100509DF3 /* Phrases */,
+				95F0FFC524C5AFC400509DF3 /* Words */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -491,6 +479,45 @@
 				95F0A89C22913B8300D1B9A2 /* Tools.storyboard */,
 			);
 			path = Tools;
+			sourceTree = "<group>";
+		};
+		95F0FFC524C5AFC400509DF3 /* Words */ = {
+			isa = PBXGroup;
+			children = (
+				95F5400922C1C3B700E3FD6A /* SingleWordViewModel.swift */,
+				8C2CB59B207885140083DDE2 /* WordsLangViewModel.swift */,
+				95F6CEBE2264A5ED00C15A1D /* WordsReviewViewModel.swift */,
+				8CAF910920833C4F00933837 /* WordsSearchViewModel.swift */,
+				8C2CB59F207885140083DDE2 /* WordsUnitViewModel.swift */,
+				95F0FFC724C66DE800509DF3 /* WordsUnitDetail.swift */,
+			);
+			path = Words;
+			sourceTree = "<group>";
+		};
+		95F0FFC624C66DA100509DF3 /* Phrases */ = {
+			isa = PBXGroup;
+			children = (
+				8C2CB59D207885140083DDE2 /* PhrasesLangViewModel.swift */,
+				95FDF627228CF9B1003DFB1A /* PhrasesReviewViewModel.swift */,
+				8C2CB59E207885140083DDE2 /* PhrasesUnitViewModel.swift */,
+				95F5400B22C1FADD00E3FD6A /* SinglePhraseViewModel.swift */,
+			);
+			path = Phrases;
+			sourceTree = "<group>";
+		};
+		95F0FFC924C9565A00509DF3 /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				95DB142321CDEA7B00FBAF9A /* BlogViewModel.swift */,
+				95F0A8AC2293C6A700D1B9A2 /* DictsViewModel.swift */,
+				95F5400F22C35C3800E3FD6A /* EmbeddedReviewViewModel.swift */,
+				95E43F2A21E1D568001E650C /* NoteViewModel.swift */,
+				954CB5F323B7175500A03900 /* PatternsViewModel.swift */,
+				958BAB1823518838007F50BB /* ReadNumberViewModel.swift */,
+				8C2CB59A207885140083DDE2 /* SettingsViewModel.swift */,
+				95F0A8A4229264EA00D1B9A2 /* TextbooksViewModel.swift */,
+			);
+			path = Misc;
 			sourceTree = "<group>";
 		};
 		C97659C9C63745E490850F6D /* Pods */ = {
@@ -757,6 +784,7 @@
 				95F0A8AA2293C64400D1B9A2 /* DictsViewController.swift in Sources */,
 				8C2CB5AF207885140083DDE2 /* WordsLangViewModel.swift in Sources */,
 				9541890E2438FE6D00DB7230 /* BlogViewController.swift in Sources */,
+				95F0FFC824C66DE800509DF3 /* WordsUnitDetail.swift in Sources */,
 				9593779922C4CE37009FFBD0 /* MUSMapping.swift in Sources */,
 				958125C82190464A0001159E /* PhrasesLangDetailViewController.swift in Sources */,
 				954CB5F623BBD58800A03900 /* PatternsDetailViewController.swift in Sources */,
