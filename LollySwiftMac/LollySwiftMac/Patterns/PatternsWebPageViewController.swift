@@ -65,6 +65,12 @@ class PatternsWebPageViewController: NSViewController {
     @IBAction func existingWebPageID(_ sender: Any) {
         let webPageVC = self.storyboard!.instantiateController(withIdentifier: "WebPageSelectViewController") as! WebPageSelectViewController
         webPageVC.vm = vm
+        webPageVC.complete = {
+            let o = webPageVC.vmWebPage.selectedWebPage!
+            self.item.WEBPAGEID = o.ID
+            self.item.TITLE = o.TITLE
+            self.item.URL = o.URL
+        }
         self.presentAsModalWindow(webPageVC)
     }
     

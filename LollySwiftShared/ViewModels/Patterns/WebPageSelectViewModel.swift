@@ -14,6 +14,7 @@ class WebPageSelectViewModel: NSObject {
     @objc var url = ""
     var vmSettings: SettingsViewModel
     var arrWebPages = [MWebPage]()
+    var selectedWebPage: MWebPage?
     
     public init(settings: SettingsViewModel, disposeBag: DisposeBag, complete: @escaping () -> ()) {
         self.vmSettings = settings

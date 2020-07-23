@@ -11,13 +11,13 @@ import RxSwift
 
 @objcMembers
 class MPatternWebPage: NSObject, Codable {
-    var ID = 0
-    var PATTERNID = 0
-    var PATTERN = ""
-    var SEQNUM = 0
-    var WEBPAGEID = 0
-    var TITLE = ""
-    var URL = ""
+    dynamic var ID = 0
+    dynamic var PATTERNID = 0
+    dynamic var PATTERN = ""
+    dynamic var SEQNUM = 0
+    dynamic var WEBPAGEID = 0
+    dynamic var TITLE = ""
+    dynamic var URL = ""
 
     override init() {
     }

@@ -15,6 +15,7 @@ class WebPageSelectViewController: NSViewController, NSTableViewDataSource, NSTa
     var vm: PatternsViewModel!
     var vmWebPage: WebPageSelectViewModel!
     var complete: (() -> Void)?
+    var arrWebPages: [MWebPage] { vmWebPage.arrWebPages }
 
     @IBOutlet weak var tfTitle: NSTextField!
     @IBOutlet weak var tfURL: NSTextField!
@@ -38,15 +39,20 @@ class WebPageSelectViewController: NSViewController, NSTableViewDataSource, NSTa
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        vmWebPage.arrWebPages.count
+        arrWebPages.count
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! NSTableCellView
         let columnName = tableColumn!.identifier.rawValue
-        let item = vmWebPage.arrWebPages[row]
+        let item = arrWebPages[row]
         cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
         return cell
+    }
+    
+    func tableViewSelectionDidChange(_ notification: Notification) {
+        let row = tvWebPages.selectedRow
+        vmWebPage.selectedWebPage = row == -1 ? nil : arrWebPages[row]
     }
 
     @IBAction func okClicked(_ sender: AnyObject) {
