@@ -81,6 +81,7 @@
 		957A18DC23C0885100428DA3 /* PhrasesSelectLangViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957A18DB23C0885100428DA3 /* PhrasesSelectLangViewController.swift */; };
 		958125C62190463F0001159E /* PhrasesLangViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958125C52190463F0001159E /* PhrasesLangViewController.swift */; };
 		958125C82190464A0001159E /* PhrasesLangDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958125C72190464A0001159E /* PhrasesLangDetailViewController.swift */; };
+		95840F4024C96AF400D6BA6D /* WebPageSelectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95840F3F24C96AF400D6BA6D /* WebPageSelectViewModel.swift */; };
 		958BAB1923518838007F50BB /* ReadNumberViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958BAB1823518838007F50BB /* ReadNumberViewModel.swift */; };
 		9593779922C4CE37009FFBD0 /* MUSMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F5401122C38F8F00E3FD6A /* MUSMapping.swift */; };
 		95940A922233865700D35409 /* MVoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95940A912233865700D35409 /* MVoice.swift */; };
@@ -206,6 +207,7 @@
 		957A18DB23C0885100428DA3 /* PhrasesSelectLangViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesSelectLangViewController.swift; sourceTree = "<group>"; };
 		958125C52190463F0001159E /* PhrasesLangViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesLangViewController.swift; sourceTree = "<group>"; };
 		958125C72190464A0001159E /* PhrasesLangDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesLangDetailViewController.swift; sourceTree = "<group>"; };
+		95840F3F24C96AF400D6BA6D /* WebPageSelectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebPageSelectViewModel.swift; sourceTree = "<group>"; };
 		958BAB1823518838007F50BB /* ReadNumberViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadNumberViewModel.swift; sourceTree = "<group>"; };
 		95940A912233865700D35409 /* MVoice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MVoice.swift; sourceTree = "<group>"; };
 		959D21ED23BCF73E005BED48 /* PatternsWebPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatternsWebPageViewController.swift; sourceTree = "<group>"; };
@@ -348,6 +350,7 @@
 			isa = PBXGroup;
 			children = (
 				95F0FFC924C9565A00509DF3 /* Misc */,
+				95840F3E24C96AD100D6BA6D /* Patterns */,
 				95F0FFC624C66DA100509DF3 /* Phrases */,
 				95F0FFC524C5AFC400509DF3 /* Words */,
 			);
@@ -467,6 +470,15 @@
 			path = Patterns;
 			sourceTree = "<group>";
 		};
+		95840F3E24C96AD100D6BA6D /* Patterns */ = {
+			isa = PBXGroup;
+			children = (
+				954CB5F323B7175500A03900 /* PatternsViewModel.swift */,
+				95840F3F24C96AF400D6BA6D /* WebPageSelectViewModel.swift */,
+			);
+			path = Patterns;
+			sourceTree = "<group>";
+		};
 		95F0A89B22913B7000D1B9A2 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
@@ -512,7 +524,6 @@
 				95F0A8AC2293C6A700D1B9A2 /* DictsViewModel.swift */,
 				95F5400F22C35C3800E3FD6A /* EmbeddedReviewViewModel.swift */,
 				95E43F2A21E1D568001E650C /* NoteViewModel.swift */,
-				954CB5F323B7175500A03900 /* PatternsViewModel.swift */,
 				958BAB1823518838007F50BB /* ReadNumberViewModel.swift */,
 				8C2CB59A207885140083DDE2 /* SettingsViewModel.swift */,
 				95F0A8A4229264EA00D1B9A2 /* TextbooksViewModel.swift */,
@@ -852,6 +863,7 @@
 				958BAB1923518838007F50BB /* ReadNumberViewModel.swift in Sources */,
 				959D21EE23BCF73E005BED48 /* PatternsWebPageViewController.swift in Sources */,
 				954B8708218DC04E007DC348 /* CommonApi.swift in Sources */,
+				95840F4024C96AF400D6BA6D /* WebPageSelectViewModel.swift in Sources */,
 				8C2CB5B6207885140083DDE2 /* MDictionary.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

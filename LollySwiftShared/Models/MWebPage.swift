@@ -29,6 +29,20 @@ class MWebPage: NSObject, Codable {
         let url = "\(CommonApi.url)WEBPAGES?filter=ID,eq,\(id)"
         return RestApi.getRecords(url: url)
     }
+    
+    static func getDataBySearch(title t: String, url u: String) -> Observable<[MWebPage]> {
+        // SQL: SELECT * FROM WEBPAGES WHERE LOCATE(?, TITLE) <> 0 AND LOCATE(?, URL) <> 0
+        var filter = ""
+        if !t.isEmpty {
+            filter = "?filter=TITLE,cs,\(t.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)"
+        }
+        if !u.isEmpty {
+            filter += filter.isEmpty ? "?" : "&"
+            filter += "filter=URL,cs,\(u.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)"
+        }
+        let url = "\(CommonApi.url)WEBPAGES\(filter)"
+        return RestApi.getRecords(url: url)
+    }
 
     static func update(item: MWebPage) -> Observable<()> {
         // SQL: UPDATE WEBPAGES SET WEBPAGE=? WHERE ID=?

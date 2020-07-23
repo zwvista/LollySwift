@@ -10,43 +10,49 @@ import Cocoa
 import RxSwift
 
 @objcMembers
-class WebPageSelectViewController: NSViewController {
+class WebPageSelectViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
     
     var vm: PatternsViewModel!
+    var vmWebPage: WebPageSelectViewModel!
     var complete: (() -> Void)?
-    var item: MPatternWebPage!
-    var isAdd: Bool!
 
     @IBOutlet weak var tfTitle: NSTextField!
     @IBOutlet weak var tfURL: NSTextField!
-
+    @IBOutlet weak var tvWebPages: NSTableView!
+    
     let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        isAdd = item.ID == 0
+        search(self)
+    }
+    
+    @IBAction func search(_ sender: Any) {
+        vmWebPage = WebPageSelectViewModel(settings: vm.vmSettings, disposeBag: disposeBag) {
+            self.tvWebPages.reloadData()
+        }
     }
     
     override func viewDidAppear() {
-        // https://stackoverflow.com/questions/24235815/cocoa-how-to-set-window-title-from-within-view-controller-in-swift
-        tfTitle.becomeFirstResponder()
-        view.window?.title = isAdd ? "New Page" : item.TITLE
+        view.window?.title = "Existing Page"
+    }
+    
+    func numberOfRows(in tableView: NSTableView) -> Int {
+        vmWebPage.arrWebPages.count
+    }
+    
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! NSTableCellView
+        let columnName = tableColumn!.identifier.rawValue
+        let item = vmWebPage.arrWebPages[row]
+        cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
+        return cell
     }
 
     @IBAction func okClicked(_ sender: AnyObject) {
         // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
         self.commitEditing()
-        if isAdd {
-            vm.arrWebPages.append(item)
-            PatternsViewModel.createWebPage(item: item).subscribe(onNext: {
-                self.item.ID = $0
-                self.complete?()
-            }).disposed(by: disposeBag)
-        } else {
-            PatternsViewModel.updateWebPage(item: item).subscribe {
-                self.complete?()
-            }.disposed(by: disposeBag)
-        }
+        self.complete?()
         dismiss(self)
     }
     
