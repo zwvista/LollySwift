@@ -35,7 +35,7 @@ class PhrasesBaseViewController: NSViewController, LollyProtocol, NSTableViewDat
         // For some unknown reason, the placeholder string of the filter text field
         // cannot be set in the storyboard
         // https://stackoverflow.com/questions/5519512/nstextfield-placeholder-text-doesnt-show-unless-editing
-        wc.tfFilter?.placeholderString = "Filter"
+        wc.sfFilter?.placeholderString = "Filter"
     }
     override func viewWillDisappear() {
         wc = nil
@@ -137,7 +137,7 @@ class PhrasesBaseViewController: NSViewController, LollyProtocol, NSTableViewDat
 class PhrasesBaseWindowController: NSWindowController, NSTextFieldDelegate, NSWindowDelegate, LollyProtocol {
     @IBOutlet weak var scSpeak: NSSegmentedControl!
     @IBOutlet weak var scTextFilter: NSSegmentedControl!
-    @IBOutlet weak var tfFilter: NSTextField!
+    @IBOutlet weak var sfFilter: NSSearchField!
     @objc var textFilter = ""
     @IBOutlet weak var pubTextbookFilter: NSPopUpButton!
     @IBOutlet weak var acTextbooks: NSArrayController!
@@ -152,7 +152,7 @@ class PhrasesBaseWindowController: NSWindowController, NSTextFieldDelegate, NSWi
     
     func controlTextDidEndEditing(_ obj: Notification) {
         let searchfield = obj.object as! NSControl
-        guard searchfield === tfFilter else {return}
+        guard searchfield === sfFilter else {return}
         let code = (obj.userInfo!["NSTextMovement"] as! NSNumber).intValue
         guard code == NSReturnTextMovement else {return}
         if scTextFilter.selectedSegment == 0 {
@@ -165,7 +165,7 @@ class PhrasesBaseWindowController: NSWindowController, NSTextFieldDelegate, NSWi
     }
 
     func windowWillClose(_ notification: Notification) {
-        tfFilter?.unbindAll()
+        sfFilter?.unbindAll()
         pubTextbookFilter?.unbindAll()
     }
 

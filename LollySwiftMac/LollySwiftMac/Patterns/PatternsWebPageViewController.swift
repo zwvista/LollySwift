@@ -21,14 +21,19 @@ class PatternsWebPageViewController: NSViewController {
     @IBOutlet weak var tfPatternID: NSTextField!
     @IBOutlet weak var tfPattern: NSTextField!
     @IBOutlet weak var tfSeqNum: NSTextField!
+    @IBOutlet weak var tfWebPageID: NSTextField!
     @IBOutlet weak var tfTitle: NSTextField!
     @IBOutlet weak var tfURL: NSTextField!
-
+    @IBOutlet weak var btnNew: NSButton!
+    @IBOutlet weak var btnExisting: NSButton!
+    
     let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         isAdd = item.ID == 0
+        btnNew.isEnabled = isAdd
+        btnExisting.isEnabled = isAdd
     }
     
     override func viewDidAppear() {
@@ -52,6 +57,12 @@ class PatternsWebPageViewController: NSViewController {
             }.disposed(by: disposeBag)
         }
         dismiss(self)
+    }
+    @IBAction func newWebPageID(_ sender: Any) {
+        tfWebPageID.stringValue = "0"
+    }
+    
+    @IBAction func existingWebPageID(_ sender: Any) {
     }
     
     deinit {

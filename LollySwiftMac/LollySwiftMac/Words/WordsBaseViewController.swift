@@ -13,7 +13,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     
     @IBOutlet weak var tfNewWord: NSTextField!
     @IBOutlet weak var scTextFilter: NSSegmentedControl!
-    @IBOutlet weak var tfFilter: NSTextField!
+    @IBOutlet weak var sfFilter: NSSearchField!
     @IBOutlet weak var chkLevelGE0Only: NSButton!
     @IBOutlet weak var tvWords: NSTableView!
     @IBOutlet weak var tfStatusText: NSTextField!
@@ -52,7 +52,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
         // For some unknown reason, the placeholder string of the filter text field
         // cannot be set in the storyboard
         // https://stackoverflow.com/questions/5519512/nstextfield-placeholder-text-doesnt-show-unless-editing
-        tfFilter?.placeholderString = "Filter"
+        sfFilter?.placeholderString = "Filter"
     }
     override func viewWillDisappear() {
         wc = nil
@@ -71,7 +71,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     
     func searchFieldDidStartSearching(_ sender: NSSearchField) {
         textFilter = vmSettings.autoCorrectInput(text: textFilter)
-        tfFilter.stringValue = textFilter
+        sfFilter.stringValue = textFilter
         scTextFilter.performClick(self)
     }
 

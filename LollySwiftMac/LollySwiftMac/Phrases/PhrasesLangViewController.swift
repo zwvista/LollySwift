@@ -96,7 +96,7 @@ class PhrasesLangWindowController: PhrasesBaseWindowController {
     override func filterPhrase() {
         let vc = contentViewController as! PhrasesLangViewController
         textFilter = vc.vmSettings.autoCorrectInput(text: textFilter)
-        tfFilter.stringValue = textFilter
+        sfFilter.stringValue = textFilter
         vc.filterPhrase(scTextFilter)
     }
 }

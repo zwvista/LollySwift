@@ -221,7 +221,7 @@ class PhrasesUnitWindowController: PhrasesBaseWindowController {
     override func filterPhrase() {
         let vc = contentViewController as! PhrasesUnitViewController
         textFilter = vc.vmSettings.autoCorrectInput(text: textFilter)
-        tfFilter.stringValue = textFilter
+        sfFilter.stringValue = textFilter
         vc.filterPhrase(scTextFilter)
     }
 }

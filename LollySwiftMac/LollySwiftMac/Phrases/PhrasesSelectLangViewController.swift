@@ -19,7 +19,7 @@ class PhrasesSelectLangViewController: NSViewController, NSTableViewDataSource, 
     var arrPhrases: [MLangPhrase] { vm.arrPhrasesFiltered ?? vm.arrPhrases }
 
     @IBOutlet weak var scTextFilter: NSSegmentedControl!
-    @IBOutlet weak var tfFilter: NSTextField!
+    @IBOutlet weak var sfFilter: NSSearchField!
     @objc var textFilter = ""
     @IBOutlet weak var scPhraseScope: NSSegmentedControl!
     @IBOutlet weak var tableView: NSTableView!
@@ -62,7 +62,7 @@ class PhrasesSelectLangViewController: NSViewController, NSTableViewDataSource, 
     
     func controlTextDidEndEditing(_ obj: Notification) {
         let searchfield = obj.object as! NSControl
-        guard searchfield === tfFilter else {return}
+        guard searchfield === sfFilter else {return}
         let code = (obj.userInfo!["NSTextMovement"] as! NSNumber).intValue
         guard code == NSReturnTextMovement else {return}
         if scTextFilter.selectedSegment == 0 {
@@ -84,7 +84,7 @@ class PhrasesSelectLangViewController: NSViewController, NSTableViewDataSource, 
     }
 
     @IBAction func okClicked(_ sender: AnyObject) {
-        guard view.window?.firstResponder != tfFilter.window else {return}
+        guard view.window?.firstResponder != sfFilter.window else {return}
         // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
         self.commitEditing()
         var o = Observable.just(())
