@@ -104,17 +104,17 @@ extension Array where Element: Equatable {
 
     /// EZSE: Checks if the main array contains the parameter array
     public func contains(_ array: [Element]) -> Bool {
-        return array.testAll { self.firstIndex(of: $0) ?? -1 >= 0 }
+        return array.testAll { self.index(of: $0) ?? -1 >= 0 }
     }
 
     /// EZSE: Checks if self contains a list of items.
     public func contains(_ elements: Element...) -> Bool {
-        return elements.testAll { self.firstIndex(of: $0) ?? -1 >= 0 }
+        return elements.testAll { self.index(of: $0) ?? -1 >= 0 }
     }
 
     /// EZSE: Returns the indexes of the object
     public func indexes(of element: Element) -> [Int] {
-        return enumerated().compactMap { ($0.element == element) ? $0.offset : nil }
+        return enumerated().flatMap { ($0.element == element) ? $0.offset : nil }
     }
 
     /// EZSE: Returns the last index of the object
@@ -124,7 +124,7 @@ extension Array where Element: Equatable {
 
     /// EZSE: Removes the first given object
     public mutating func removeFirst(_ element: Element) {
-        guard let index = firstIndex(of: element) else { return }
+        guard let index = index(of: element) else { return }
         self.remove(at: index)
     }
 
@@ -217,6 +217,14 @@ extension Array where Element: Hashable {
     }
 }
 
+extension Collection {
+    
+    /// Returns the element at the specified index if it is within bounds, otherwise nil.
+    public subscript (safe index: Index) -> Iterator.Element? {
+        return indices.contains(index) ? self[index] : nil
+    }
+}
+
 // MARK: - Deprecated 1.8
 
 extension Array {
@@ -298,7 +306,7 @@ extension Array {
     /// through the mapFunction and discarding nil return values.
     @available(*, deprecated: 1.6, renamed: "flatMap(_:)")
     public func mapFilter<V>(mapFunction map: (Element) -> (V)?) -> [V] {
-        return compactMap { map($0) }
+        return flatMap { map($0) }
     }
 
     /// EZSE: Iterates on each element of the array with its index.  (Index, Element)

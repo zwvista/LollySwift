@@ -4,7 +4,6 @@
 //
 //  Created by Goktug Yilmaz on 15/07/15.
 //  Copyright (c) 2015 Goktug Yilmaz. All rights reserved.
-// swiftlint:disable trailing_whitespace
 
 #if os(iOS) || os(tvOS)
 
@@ -60,7 +59,7 @@ extension UIViewController {
     
     ///EZSE: Removes keyboardWillShowNotification()'s NotificationCenter Observer
     open func removeKeyboardWillShowNotification() {
-        self.removeNotificationObserver(UIResponder.keyboardWillShowNotification.rawValue)
+        self.removeNotificationObserver(UIResponder.keyboardDidHideNotification.rawValue)
     }
     
     ///EZSE: Removes keyboardDidShowNotification()'s NotificationCenter Observer
@@ -231,7 +230,7 @@ extension UIViewController {
     }
 
     /// EZSE: Hide or show navigation bar
-    public var isNavBarHidden:Bool {
+    public var isNavBarHidden: Bool {
         get {
             return (navigationController?.isNavigationBarHidden)!
         }

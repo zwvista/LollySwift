@@ -26,10 +26,10 @@ open class BlockButton: UIButton {
         defaultInit()
     }
 
-//    public init(x: CGFloat, y: CGFloat, w: CGFloat, h: CGFloat) {
-//        super.init(frame: CGRect(x: x, y: y, width: w, height: h))
-//        defaultInit()
-//    }
+    public init(x: CGFloat, y: CGFloat, w: CGFloat, h: CGFloat) {
+        super.init(frame: CGRect(x: x, y: y, width: w, height: h))
+        defaultInit()
+    }
 
     public init(x: CGFloat, y: CGFloat, w: CGFloat, h: CGFloat, action: BlockButtonAction?) {
         super.init (frame: CGRect(x: x, y: y, width: w, height: h))

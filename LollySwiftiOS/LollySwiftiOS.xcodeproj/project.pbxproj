@@ -103,14 +103,12 @@
 		95F0FFEF24C957AB00509DF3 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F0FFDC24C957AA00509DF3 /* SettingsViewModel.swift */; };
 		95F0FFF024C957AB00509DF3 /* ReadNumberViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F0FFDD24C957AA00509DF3 /* ReadNumberViewModel.swift */; };
 		95F0FFF124C957AB00509DF3 /* EmbeddedReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F0FFDE24C957AA00509DF3 /* EmbeddedReviewViewModel.swift */; };
-		95F0FFF224C957AB00509DF3 /* PatternsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F0FFDF24C957AA00509DF3 /* PatternsViewModel.swift */; };
 		95F0FFF424C957AB00509DF3 /* NoteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F0FFE124C957AA00509DF3 /* NoteViewModel.swift */; };
 		95F0FFF524C957AB00509DF3 /* DictsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F0FFE224C957AA00509DF3 /* DictsViewModel.swift */; };
 		95F0FFF624C95AFF00509DF3 /* TextbooksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F0FFDB24C957AA00509DF3 /* TextbooksViewModel.swift */; };
 		95F0FFF724C95B0300509DF3 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F0FFDC24C957AA00509DF3 /* SettingsViewModel.swift */; };
 		95F0FFF824C95B0500509DF3 /* ReadNumberViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F0FFDD24C957AA00509DF3 /* ReadNumberViewModel.swift */; };
 		95F0FFF924C95B0900509DF3 /* EmbeddedReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F0FFDE24C957AA00509DF3 /* EmbeddedReviewViewModel.swift */; };
-		95F0FFFA24C95B0900509DF3 /* PatternsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F0FFDF24C957AA00509DF3 /* PatternsViewModel.swift */; };
 		95F0FFFB24C95B0900509DF3 /* NoteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F0FFE124C957AA00509DF3 /* NoteViewModel.swift */; };
 		95F0FFFC24C95B0900509DF3 /* DictsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F0FFE224C957AA00509DF3 /* DictsViewModel.swift */; };
 		95F0FFFD24C95B0D00509DF3 /* SinglePhraseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F0FFD624C957AA00509DF3 /* SinglePhraseViewModel.swift */; };
@@ -221,7 +219,6 @@
 		95F0FFDC24C957AA00509DF3 /* SettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		95F0FFDD24C957AA00509DF3 /* ReadNumberViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadNumberViewModel.swift; sourceTree = "<group>"; };
 		95F0FFDE24C957AA00509DF3 /* EmbeddedReviewViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmbeddedReviewViewModel.swift; sourceTree = "<group>"; };
-		95F0FFDF24C957AA00509DF3 /* PatternsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatternsViewModel.swift; sourceTree = "<group>"; };
 		95F0FFE124C957AA00509DF3 /* NoteViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteViewModel.swift; sourceTree = "<group>"; };
 		95F0FFE224C957AA00509DF3 /* DictsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictsViewModel.swift; sourceTree = "<group>"; };
 		95F5401322C3905200E3FD6A /* MUSMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MUSMapping.swift; sourceTree = "<group>"; };
@@ -473,7 +470,6 @@
 				95F0FFDC24C957AA00509DF3 /* SettingsViewModel.swift */,
 				95F0FFDD24C957AA00509DF3 /* ReadNumberViewModel.swift */,
 				95F0FFDE24C957AA00509DF3 /* EmbeddedReviewViewModel.swift */,
-				95F0FFDF24C957AA00509DF3 /* PatternsViewModel.swift */,
 				95F0FFE124C957AA00509DF3 /* NoteViewModel.swift */,
 				95F0FFE224C957AA00509DF3 /* DictsViewModel.swift */,
 			);
@@ -611,23 +607,12 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-LollySwiftiOSTests/Pods-LollySwiftiOSTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/CodableAlamofire-iOS/CodableAlamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/CrossroadRegex-iOS/Regex.framework",
-				"${BUILT_PRODUCTS_DIR}/EZSwiftExtensions-iOS/EZSwiftExtensions.framework",
-				"${BUILT_PRODUCTS_DIR}/RxAlamofire-iOS/RxAlamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/RxSwift-iOS/RxSwift.framework",
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LollySwiftiOSTests/Pods-LollySwiftiOSTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CodableAlamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Regex.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EZSwiftExtensions.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAlamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LollySwiftiOSTests/Pods-LollySwiftiOSTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -639,27 +624,12 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-LollySwiftiOS/Pods-LollySwiftiOS-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/AKSideMenu/AKSideMenu.framework",
-				"${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/CodableAlamofire-iOS/CodableAlamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/CrossroadRegex-iOS/Regex.framework",
-				"${BUILT_PRODUCTS_DIR}/DropDown/DropDown.framework",
-				"${BUILT_PRODUCTS_DIR}/EZSwiftExtensions-iOS/EZSwiftExtensions.framework",
-				"${BUILT_PRODUCTS_DIR}/RxAlamofire-iOS/RxAlamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/RxSwift-iOS/RxSwift.framework",
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LollySwiftiOS/Pods-LollySwiftiOS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AKSideMenu.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CodableAlamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Regex.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DropDown.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EZSwiftExtensions.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxAlamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LollySwiftiOS/Pods-LollySwiftiOS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -718,7 +688,6 @@
 				8C42B5B51D69A1D900DCB528 /* WordsUnitViewController.swift in Sources */,
 				8C9C6A442053F9F700F299C8 /* UIView+ActivityIndicator.swift in Sources */,
 				957A18D423BF495500428DA3 /* MPattern.swift in Sources */,
-				95F0FFF224C957AB00509DF3 /* PatternsViewModel.swift in Sources */,
 				95FDF62A228D5D6C003DFB1A /* WordsUnitBatchViewController.swift in Sources */,
 				95F0FFEA24C957AB00509DF3 /* SinglePhraseViewModel.swift in Sources */,
 				95CED3CA2216C5B20094622F /* WordsTextbookDetailViewController.swift in Sources */,
@@ -777,7 +746,6 @@
 				954D8B91214389DE00651A80 /* MLanguage.swift in Sources */,
 				95F0FFF824C95B0500509DF3 /* ReadNumberViewModel.swift in Sources */,
 				954D8B95214389DE00651A80 /* MUnitPhrase.swift in Sources */,
-				95F0FFFA24C95B0900509DF3 /* PatternsViewModel.swift in Sources */,
 				95F0000024C95B0D00509DF3 /* PhrasesUnitViewModel.swift in Sources */,
 				953473F11A0D16CF00FF2D56 /* LollySwiftiOSTests.swift in Sources */,
 				95F0FFF924C95B0900509DF3 /* EmbeddedReviewViewModel.swift in Sources */,
@@ -877,7 +845,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -926,7 +894,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -954,9 +922,9 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/RxCocoa-iOS\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/RxSwift-iOS\"",
 				);
-				HEADER_SEARCH_PATHS = ../Pods;
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = LollySwiftiOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -984,9 +952,9 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/AlamofireObjectMapper-iOS\"",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/ObjectMapper-iOS\"",
 				);
-				HEADER_SEARCH_PATHS = ../Pods;
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = LollySwiftiOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

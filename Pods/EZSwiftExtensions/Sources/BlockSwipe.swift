@@ -18,7 +18,8 @@ open class BlockSwipe: UISwipeGestureRecognizer {
         super.init(target: target, action: action)
     }
 
-    public convenience init (direction: UISwipeGestureRecognizer.Direction,
+    public convenience init (
+        direction: UISwipeGestureRecognizer.Direction,
         fingerCount: Int = 1,
         action: ((UISwipeGestureRecognizer) -> Void)?) {
             self.init()
