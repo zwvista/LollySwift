@@ -10,7 +10,6 @@ import Cocoa
 import WebKit
 import RxSwift
 import NSObject_Rx
-import NSObject_Rx
 
 class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate, NSMenuItemValidation, NSToolbarItemValidation {
 
@@ -35,12 +34,17 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     var arrPatterns: [MPattern] { vm.arrPatternsFiltered ?? vm.arrPatterns }
     var arrWebPages: [MPatternWebPage] { vm.arrWebPages }
     var arrPhrases: [MPatternPhrase] { vm.arrPhrases }
+    
+    // https://developer.apple.com/videos/play/wwdc2011/120/
+    // https://stackoverflow.com/questions/2121907/drag-drop-reorder-rows-on-nstableview
+    let tableRowDragType = NSPasteboard.PasteboardType(rawValue: "private.table-row")
 
     override func viewDidLoad() {
         super.viewDidLoad()
         settingsChanged()
         wvWebPage.allowsMagnification = true
         wvWebPage.allowsBackForwardNavigationGestures = true
+        tvWebPages.registerForDraggedTypes([tableRowDragType])
     }
     
     // Hold a reference to the window controller in order to prevent it from being released
@@ -295,6 +299,58 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
         vm.searchPhrases(patternid: selectedPatternID).subscribe {
             self.tvPhrases.reloadData()
         } ~ rx.disposeBag
+    }
+    
+    func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
+        if tableView === tvWebPages {
+            let item = NSPasteboardItem()
+            item.setString(String(row), forType: tableRowDragType)
+            return item
+        } else {
+            return nil
+        }
+    }
+    
+    func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int, proposedDropOperation dropOperation: NSTableView.DropOperation) -> NSDragOperation {
+        if dropOperation == .above {
+            return .move
+        }
+        return []
+    }
+    
+    func tableView(_ tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int, dropOperation: NSTableView.DropOperation) -> Bool {
+        var oldIndexes = [Int]()
+        info.enumerateDraggingItems(options: [], for: tableView, classes: [NSPasteboardItem.self], searchOptions: [:]) { (draggingItem, _, _) in
+            if let str = (draggingItem.item as! NSPasteboardItem).string(forType: self.tableRowDragType), let index = Int(str) {
+                oldIndexes.append(index)
+            }
+        }
+        
+        var oldIndexOffset = 0
+        var newIndexOffset = 0
+        
+        func moveRow(at oldIndex: Int, to newIndex: Int) {
+            vm.moveWebPage(at: oldIndex, to: newIndex)
+            tableView.moveRow(at: oldIndex, to: newIndex)
+        }
+        
+        tableView.beginUpdates()
+        for oldIndex in oldIndexes {
+            if oldIndex < row {
+                moveRow(at: oldIndex + oldIndexOffset, to: row - 1)
+                oldIndexOffset -= 1
+            } else {
+                moveRow(at: oldIndex, to: row + newIndexOffset)
+                newIndexOffset += 1
+            }
+        }
+        let col = tableView.tableColumns.firstIndex { $0.title == "SEQNUM" }!
+        vm.reindexWebPage {
+            tableView.reloadData(forRowIndexes: [$0], columnIndexes: [col])
+        }
+        tableView.endUpdates()
+        
+        return true
     }
 
     deinit {

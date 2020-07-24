@@ -83,6 +83,22 @@ class PatternsViewModel: NSObject {
         return item
     }
     
+    func moveWebPage(at oldIndex: Int, to newIndex: Int) {
+        let item = arrWebPages.remove(at: oldIndex)
+        arrWebPages.insert(item, at: newIndex)
+    }
+    
+    func reindexWebPage(complete: @escaping (Int) -> ()) {
+        for i in 1...arrWebPages.count {
+            let item = arrWebPages[i - 1]
+            guard item.SEQNUM != i else {continue}
+            item.SEQNUM = i
+            MPatternWebPage.update(item.ID, seqnum: item.SEQNUM).subscribe(onNext: {
+                complete(i - 1)
+            }) ~ rx.disposeBag
+        }
+    }
+
     static func updatePhrase(item: MPatternPhrase) -> Observable<()> {
         MLangPhrase.update(item: MLangPhrase(patternitem: item))
     }
