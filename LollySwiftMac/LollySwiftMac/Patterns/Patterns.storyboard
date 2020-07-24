@@ -117,10 +117,10 @@
                                         </connections>
                                     </textField>
                                     <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hoJ-Fy-vSX">
-                                        <rect key="frame" x="191" y="5" width="203" height="21"/>
+                                        <rect key="frame" x="191" y="4" width="203" height="22"/>
                                         <subviews>
                                             <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lax-hb-G91">
-                                                <rect key="frame" x="-2" y="-2" width="111" height="24"/>
+                                                <rect key="frame" x="-2" y="-1" width="111" height="24"/>
                                                 <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="Cfk-Fp-bHo">
                                                     <font key="font" metaFont="system"/>
                                                     <segments>
@@ -129,12 +129,12 @@
                                                     </segments>
                                                 </segmentedCell>
                                             </segmentedControl>
-                                            <searchField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JOv-46-g8J">
-                                                <rect key="frame" x="107" y="0.0" width="96" height="21"/>
+                                            <searchField verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JOv-46-g8J">
+                                                <rect key="frame" x="107" y="0.0" width="96" height="22"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="96" id="Vbt-0T-9Ss"/>
                                                 </constraints>
-                                                <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="yje-Rk-mpC">
+                                                <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" id="yje-Rk-mpC">
                                                     <font key="font" usesAppearanceFont="YES"/>
                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
