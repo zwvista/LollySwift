@@ -62,7 +62,7 @@ class WordsDictViewController: NSViewController, WKNavigationDelegate {
         // Regain focus if it's stolen by the webView
         if vcWords.responder != nil && vcWords.needRegainFocus() {
             subscription?.dispose()
-            subscription = Observable<Int>.timer(0.5, period: 1, scheduler: MainScheduler.instance).subscribe { _ in
+            subscription = Observable<Int>.timer(DispatchTimeInterval.milliseconds(500), period: DispatchTimeInterval.milliseconds(1000), scheduler: MainScheduler.instance).subscribe { _ in
                 self.subscription?.dispose()
                 self.vcWords?.responder?.window!.makeFirstResponder(self.vcWords.responder)
                 self.vcWords?.responder = nil

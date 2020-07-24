@@ -87,7 +87,7 @@ class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
         } ~ rx.disposeBag
         btnCheck.setTitle(vm.isTestMode ? "Check" : "Next", for: .normal)
         if vm.mode == .reviewAuto {
-            subscription = Observable<Int>.interval(vmSettings.USREVIEWINTERVAL.toDouble / 1000.0, scheduler: MainScheduler.instance).subscribe { _ in
+            subscription = Observable<Int>.interval(DispatchTimeInterval.milliseconds(vmSettings.USREVIEWINTERVAL), scheduler: MainScheduler.instance).subscribe { _ in
                 self.check(self)
             }
             subscription?.disposed(by: rx.disposeBag)

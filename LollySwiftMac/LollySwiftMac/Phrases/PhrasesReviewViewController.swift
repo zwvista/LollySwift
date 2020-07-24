@@ -91,7 +91,7 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
             } ~ self.rx.disposeBag
             self.btnCheck.title = self.vm.isTestMode ? "Check" : "Next"
             if self.vm.mode == .reviewAuto {
-                self.subscription = Observable<Int>.interval(self.vmSettings.USREVIEWINTERVAL.toDouble / 1000.0, scheduler: MainScheduler.instance).subscribe { _ in
+                self.subscription = Observable<Int>.interval(DispatchTimeInterval.milliseconds(self.vmSettings.USREVIEWINTERVAL), scheduler: MainScheduler.instance).subscribe { _ in
                     self.check(self)
                 }
                 self.subscription?.disposed(by: self.rx.disposeBag)

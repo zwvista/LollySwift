@@ -20,10 +20,10 @@ class EmbeddedReviewViewModel: NSObject {
         subscription = nil
     }
     
-    func start(arrIDs: [Int], interval: Double, getOne: @escaping (Int) -> ()) {
+    func start(arrIDs: [Int], interval: Int, getOne: @escaping (Int) -> ()) {
         var i = 0
         let wordCount = arrIDs.count
-        subscription = Observable<Int>.interval(interval, scheduler: MainScheduler.instance).subscribe { _ in
+        subscription = Observable<Int>.interval(DispatchTimeInterval.milliseconds(interval), scheduler: MainScheduler.instance).subscribe { _ in
             if i < wordCount {
                 getOne(i)
                 i += 1
