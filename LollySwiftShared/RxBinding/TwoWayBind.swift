@@ -38,6 +38,11 @@ public func <~> <T>(relay: BehaviorRelay<T>, property: ControlProperty<T>) -> Di
 }
 
 #if os(iOS)
+
+public func <~> <T>(relay: BehaviorRelay<String>, textInput: TextInput<T>) -> Disposable {
+    return relay.twoWaybind(to: textInput)
+}
+
 extension BehaviorRelay where Element == String {
     
     func twoWaybind<Base>(to textInput: TextInput<Base>) -> Disposable {
