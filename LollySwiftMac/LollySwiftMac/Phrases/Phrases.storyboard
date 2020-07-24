@@ -72,14 +72,13 @@
                                 <toolbarItem implicitItemIdentifier="96A81DF2-B48B-48F8-96E7-9E355C588C66" label="Filter Scope" paletteLabel="Filter Scope" sizingBehavior="auto" id="4Dq-5F-r8A">
                                     <nil key="toolTip"/>
                                     <segmentedControl key="view" verticalHuggingPriority="750" id="Abr-kh-xne">
-                                        <rect key="frame" x="0.0" y="14" width="176" height="23"/>
+                                        <rect key="frame" x="0.0" y="14" width="134" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="zGz-6T-6ez">
                                             <font key="font" metaFont="system"/>
                                             <segments>
-                                                <segment label="None" width="42" selected="YES"/>
-                                                <segment label="Phrase" width="52" tag="1"/>
-                                                <segment label="Translation" width="74"/>
+                                                <segment label="Phrase" width="52" selected="YES"/>
+                                                <segment label="Translation" width="74" tag="1"/>
                                             </segments>
                                         </segmentedCell>
                                         <connections>
@@ -91,19 +90,19 @@
                                     <nil key="toolTip"/>
                                     <size key="minSize" width="40" height="22"/>
                                     <size key="maxSize" width="123" height="22"/>
-                                    <textField key="view" verticalHuggingPriority="750" tag="-1" id="egf-aC-2Ca">
+                                    <searchField key="view" verticalHuggingPriority="750" tag="-1" id="egf-aC-2Ca">
                                         <rect key="frame" x="0.0" y="14" width="119" height="22"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="X5k-RF-RYU">
+                                        <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="X5k-RF-RYU">
                                             <font key="font" usesAppearanceFont="YES"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
+                                        </searchFieldCell>
                                         <connections>
                                             <binding destination="P6D-Dv-O3U" name="value" keyPath="textFilter" id="5Ec-eD-0Uo"/>
                                             <outlet property="delegate" destination="P6D-Dv-O3U" id="4by-Bq-o7Y"/>
                                         </connections>
-                                    </textField>
+                                    </searchField>
                                 </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
@@ -1651,14 +1650,13 @@ Gw
                                 <toolbarItem implicitItemIdentifier="581A0D8F-3AAA-4D81-8477-CAB2F08905AC" label="Filter Scope" paletteLabel="Filter Scope" sizingBehavior="auto" id="2ps-sj-xWc">
                                     <nil key="toolTip"/>
                                     <segmentedControl key="view" verticalHuggingPriority="750" id="Bzv-q8-cCh">
-                                        <rect key="frame" x="0.0" y="14" width="176" height="23"/>
+                                        <rect key="frame" x="0.0" y="14" width="134" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="REr-qu-yks">
                                             <font key="font" metaFont="system"/>
                                             <segments>
-                                                <segment label="None" width="42" selected="YES"/>
-                                                <segment label="Phrase" width="52" tag="1"/>
-                                                <segment label="Translation" width="74"/>
+                                                <segment label="Phrase" width="52" selected="YES"/>
+                                                <segment label="Translation" width="74" tag="1"/>
                                             </segments>
                                         </segmentedCell>
                                         <connections>
@@ -1670,14 +1668,14 @@ Gw
                                     <nil key="toolTip"/>
                                     <size key="minSize" width="40" height="22"/>
                                     <size key="maxSize" width="123" height="22"/>
-                                    <textField key="view" verticalHuggingPriority="750" tag="-1" id="qUX-lZ-cQc">
+                                    <searchField key="view" verticalHuggingPriority="750" tag="-1" id="qUX-lZ-cQc">
                                         <rect key="frame" x="0.0" y="14" width="119" height="22"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="b1u-JQ-VZk">
+                                        <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="b1u-JQ-VZk">
                                             <font key="font" usesAppearanceFont="YES"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
+                                        </searchFieldCell>
                                         <connections>
                                             <binding destination="t1w-66-vYI" name="value" keyPath="textFilter" id="lc9-0C-ueX">
                                                 <dictionary key="options">
@@ -1686,7 +1684,7 @@ Gw
                                             </binding>
                                             <outlet property="delegate" destination="t1w-66-vYI" id="95e-U8-i3D"/>
                                         </connections>
-                                    </textField>
+                                    </searchField>
                                 </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
@@ -2434,14 +2432,13 @@ Gw
                                 <toolbarItem implicitItemIdentifier="397A92A6-4F72-4423-A3F9-6FF621D96EE3" label="Filter Scope" paletteLabel="Filter Scope" sizingBehavior="auto" id="Kkp-cO-oL0">
                                     <nil key="toolTip"/>
                                     <segmentedControl key="view" verticalHuggingPriority="750" id="xOt-9C-VuQ">
-                                        <rect key="frame" x="0.0" y="14" width="176" height="23"/>
+                                        <rect key="frame" x="0.0" y="14" width="134" height="24"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="UNO-xA-Xc1">
                                             <font key="font" metaFont="system"/>
                                             <segments>
-                                                <segment label="None" width="42" selected="YES"/>
-                                                <segment label="Phrase" width="52" tag="1"/>
-                                                <segment label="Translation" width="74"/>
+                                                <segment label="Phrase" width="52" selected="YES"/>
+                                                <segment label="Translation" width="74" tag="1"/>
                                             </segments>
                                         </segmentedCell>
                                         <connections>
@@ -2453,14 +2450,14 @@ Gw
                                     <nil key="toolTip"/>
                                     <size key="minSize" width="40" height="22"/>
                                     <size key="maxSize" width="123" height="22"/>
-                                    <textField key="view" verticalHuggingPriority="750" tag="-1" id="WJ1-Yl-gvw">
+                                    <searchField key="view" verticalHuggingPriority="750" tag="-1" id="WJ1-Yl-gvw">
                                         <rect key="frame" x="0.0" y="14" width="119" height="22"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Filter" drawsBackground="YES" id="JZ7-fT-CRf">
+                                        <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Filter" drawsBackground="YES" id="JZ7-fT-CRf">
                                             <font key="font" usesAppearanceFont="YES"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
+                                        </searchFieldCell>
                                         <connections>
                                             <binding destination="Ngy-o1-fVc" name="value" keyPath="textFilter" id="qfO-ud-JcS">
                                                 <dictionary key="options">
@@ -2469,7 +2466,7 @@ Gw
                                             </binding>
                                             <outlet property="delegate" destination="Ngy-o1-fVc" id="2Uw-Vf-Neh"/>
                                         </connections>
-                                    </textField>
+                                    </searchField>
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="DA210DE9-544D-4441-B39B-43113D47C760" label="Textbook" paletteLabel="Textbook" sizingBehavior="auto" id="Mzc-JS-x3t">
                                     <nil key="toolTip"/>
@@ -3763,13 +3760,12 @@ Gw
                                 </textFieldCell>
                             </textField>
                             <segmentedControl verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KUD-8l-y9O">
-                                <rect key="frame" x="116.5" y="433" width="176" height="23"/>
+                                <rect key="frame" x="116.5" y="433" width="133" height="23"/>
                                 <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="fiS-Vx-8vq">
                                     <font key="font" metaFont="system"/>
                                     <segments>
-                                        <segment label="None" width="42" selected="YES"/>
-                                        <segment label="Phrase" width="52" tag="1"/>
-                                        <segment label="Translation" width="74"/>
+                                        <segment label="Phrase" width="52" selected="YES"/>
+                                        <segment label="Translation" width="74" tag="1"/>
                                     </segments>
                                 </segmentedCell>
                                 <connections>
@@ -3784,16 +3780,16 @@ Gw
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" verticalCompressionResistancePriority="751" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FdX-3v-q2K">
+                            <searchField verticalHuggingPriority="750" verticalCompressionResistancePriority="751" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FdX-3v-q2K">
                                 <rect key="frame" x="413" y="435" width="150" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="Sgl-DV-30n"/>
                                 </constraints>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="qEA-mt-uwb">
+                                <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="qEA-mt-uwb">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
+                                </searchFieldCell>
                                 <connections>
                                     <binding destination="AiZ-TH-pho" name="value" keyPath="textFilter" id="bse-o5-Ne3">
                                         <dictionary key="options">
@@ -3802,7 +3798,7 @@ Gw
                                     </binding>
                                     <outlet property="delegate" destination="AiZ-TH-pho" id="DrE-oG-hnr"/>
                                 </connections>
-                            </textField>
+                            </searchField>
                             <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="71c-DY-Ene">
                                 <rect key="frame" x="14" y="389" width="56" height="32"/>
                                 <buttonCell key="cell" type="push" title="All" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="BQf-9D-Hgx">
@@ -4302,13 +4298,12 @@ Gw
                                 </textFieldCell>
                             </textField>
                             <segmentedControl verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L3e-kT-ObZ">
-                                <rect key="frame" x="116.5" y="433" width="176" height="23"/>
+                                <rect key="frame" x="116.5" y="433" width="133" height="23"/>
                                 <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="loM-Ck-wtI">
                                     <font key="font" metaFont="system"/>
                                     <segments>
-                                        <segment label="None" width="42" selected="YES"/>
-                                        <segment label="Phrase" width="52" tag="1"/>
-                                        <segment label="Translation" width="74"/>
+                                        <segment label="Phrase" width="52" selected="YES"/>
+                                        <segment label="Translation" width="74" tag="1"/>
                                     </segments>
                                 </segmentedCell>
                                 <connections>
@@ -4323,16 +4318,16 @@ Gw
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" verticalCompressionResistancePriority="751" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="skY-wh-bmd">
+                            <searchField verticalHuggingPriority="750" verticalCompressionResistancePriority="751" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="skY-wh-bmd">
                                 <rect key="frame" x="413" y="435" width="150" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="b4M-GS-6Fi"/>
                                 </constraints>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="Nqi-1H-oNy">
+                                <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="Nqi-1H-oNy">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
+                                </searchFieldCell>
                                 <connections>
                                     <binding destination="phB-rr-do0" name="value" keyPath="textFilter" id="519-aU-8e3">
                                         <dictionary key="options">
@@ -4341,7 +4336,7 @@ Gw
                                     </binding>
                                     <outlet property="delegate" destination="phB-rr-do0" id="5wU-Up-S7A"/>
                                 </connections>
-                            </textField>
+                            </searchField>
                             <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Old-z1-YCW">
                                 <rect key="frame" x="14" y="389" width="56" height="32"/>
                                 <buttonCell key="cell" type="push" title="All" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="3su-3D-mAH">
@@ -4619,7 +4614,7 @@ Gw
                             <constraint firstItem="skY-wh-bmd" firstAttribute="leading" secondItem="HUk-rH-lvP" secondAttribute="trailing" constant="33" id="pPQ-14-BHt"/>
                             <constraint firstItem="vaj-Un-Cbf" firstAttribute="centerY" secondItem="Old-z1-YCW" secondAttribute="centerY" id="pWb-Zt-e3s"/>
                             <constraint firstItem="skY-wh-bmd" firstAttribute="centerY" secondItem="9Hc-sL-4nR" secondAttribute="centerY" id="tPa-qM-2nF"/>
-                            <constraint firstItem="HUk-rH-lvP" firstAttribute="leading" secondItem="L3e-kT-ObZ" secondAttribute="trailing" constant="24" id="uQ6-7B-sp4"/>
+                            <constraint firstItem="HUk-rH-lvP" firstAttribute="leading" secondItem="L3e-kT-ObZ" secondAttribute="trailing" constant="67" id="uQ6-7B-sp4"/>
                             <constraint firstItem="Old-z1-YCW" firstAttribute="top" secondItem="9Hc-sL-4nR" secondAttribute="bottom" constant="20" id="v2D-kk-ZtB"/>
                             <constraint firstAttribute="bottom" secondItem="jHb-wp-UIt" secondAttribute="bottom" constant="63" id="wS9-3a-GVf"/>
                             <constraint firstItem="6iB-dA-2QG" firstAttribute="leading" secondItem="ZT1-PZ-HJF" secondAttribute="leading" constant="20" id="yVA-WS-BlZ"/>

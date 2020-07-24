@@ -55,7 +55,7 @@ class PhrasesSelectLangViewController: NSViewController, NSTableViewDataSource, 
     
     @IBAction func filterPhrase(_ sender: AnyObject) {
         let n = scTextFilter.selectedSegment
-        vm.applyFilters(textFilter: n == 0 ? "" : textFilter, scope: n == 1 ? "Phrase" : "Translation")
+        vm.applyFilters(textFilter: textFilter, scope: n == 0 ? "Phrase" : "Translation")
         tableView.reloadData()
     }
     

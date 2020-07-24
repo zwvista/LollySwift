@@ -163,7 +163,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     
     @IBAction func filterPhrase(_ sender: AnyObject) {
         let n = wc.scTextFilter.selectedSegment
-        vm.applyFilters(textFilter: n == 0 ? "" : wc.textFilter, scope: n == 1 ? "Phrase" : "Translation", textbookFilter: wc.textbookFilter)
+        vm.applyFilters(textFilter: wc.textFilter, scope: n == 0 ? "Phrase" : "Translation", textbookFilter: wc.textbookFilter)
         tableView.reloadData()
     }
 
@@ -218,11 +218,4 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
 }
 
 class PhrasesUnitWindowController: PhrasesBaseWindowController {
-    
-    override func filterPhrase() {
-        let vc = contentViewController as! PhrasesUnitViewController
-        textFilter = vc.vmSettings.autoCorrectInput(text: textFilter)
-        sfFilter.stringValue = textFilter
-        vc.filterPhrase(scTextFilter)
-    }
 }

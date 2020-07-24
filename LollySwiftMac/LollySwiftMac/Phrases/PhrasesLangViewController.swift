@@ -83,7 +83,7 @@ class PhrasesLangViewController: PhrasesBaseViewController {
     
     @IBAction func filterPhrase(_ sender: AnyObject) {
         let n = wc.scTextFilter.selectedSegment
-        vm.applyFilters(textFilter: n == 0 ? "" : wc.textFilter, scope: n == 1 ? "Phrase" : "Translation")
+        vm.applyFilters(textFilter: wc.textFilter, scope: n == 0 ? "Phrase" : "Translation")
         tableView.reloadData()
     }
 
@@ -93,12 +93,5 @@ class PhrasesLangViewController: PhrasesBaseViewController {
 }
 
 class PhrasesLangWindowController: PhrasesBaseWindowController {
-    
-    override func filterPhrase() {
-        let vc = contentViewController as! PhrasesLangViewController
-        textFilter = vc.vmSettings.autoCorrectInput(text: textFilter)
-        sfFilter.stringValue = textFilter
-        vc.filterPhrase(scTextFilter)
-    }
 }
 

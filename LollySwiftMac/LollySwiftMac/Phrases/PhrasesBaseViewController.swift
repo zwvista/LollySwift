@@ -10,7 +10,7 @@ import Cocoa
 import RxSwift
 import NSObject_Rx
 
-class PhrasesBaseViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate {
+class PhrasesBaseViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, LollyProtocol {
     
     var vmSettings: SettingsViewModel! { nil }
     @IBOutlet weak var tableView: NSTableView!
@@ -134,7 +134,7 @@ class PhrasesBaseViewController: NSViewController, LollyProtocol, NSTableViewDat
     }
 }
 
-class PhrasesBaseWindowController: NSWindowController, NSTextFieldDelegate, NSWindowDelegate, LollyProtocol {
+class PhrasesBaseWindowController: NSWindowController, NSSearchFieldDelegate, NSWindowDelegate, LollyProtocol {
     @IBOutlet weak var scSpeak: NSSegmentedControl!
     @IBOutlet weak var scTextFilter: NSSegmentedControl!
     @IBOutlet weak var sfFilter: NSSearchField!
@@ -142,6 +142,8 @@ class PhrasesBaseWindowController: NSWindowController, NSTextFieldDelegate, NSWi
     @IBOutlet weak var pubTextbookFilter: NSPopUpButton!
     @IBOutlet weak var acTextbooks: NSArrayController!
     @objc var textbookFilter = 0
+    var vc: PhrasesBaseViewController { contentViewController as! PhrasesBaseViewController }
+    @objc var vm: SettingsViewModel! { vc.vmSettings }
 
     override func windowDidLoad() {
         super.windowDidLoad()
@@ -150,18 +152,14 @@ class PhrasesBaseWindowController: NSWindowController, NSTextFieldDelegate, NSWi
     func settingsChanged() {
     }
     
-    func controlTextDidEndEditing(_ obj: Notification) {
-        let searchfield = obj.object as! NSControl
-        guard searchfield === sfFilter else {return}
-        let code = (obj.userInfo!["NSTextMovement"] as! NSNumber).intValue
-        guard code == NSReturnTextMovement else {return}
-        if scTextFilter.selectedSegment == 0 {
-            scTextFilter.selectedSegment = 1
-        }
-        filterPhrase()
+    func searchFieldDidStartSearching(_ sender: NSSearchField) {
+        textFilter = vm.autoCorrectInput(text: textFilter)
+        sfFilter.stringValue = textFilter
+        scTextFilter.performClick(self)
     }
 
-    func filterPhrase() {
+    func searchFieldDidEndSearching(_ sender: NSSearchField) {
+        scTextFilter.performClick(self)
     }
 
     func windowWillClose(_ notification: Notification) {
