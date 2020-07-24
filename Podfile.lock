@@ -6,14 +6,13 @@ PODS:
   - CrossroadRegex (1.1.0)
   - DropDown (2.3.13)
   - EZSwiftExtensions (2.0)
+  - "NSObject+Rx (5.1.0)":
+    - RxSwift (~> 5.1)
   - RxAlamofire (5.6.0):
     - RxAlamofire/Core (= 5.6.0)
   - RxAlamofire/Core (5.6.0):
     - Alamofire (~> 5.1)
     - RxSwift (~> 5.1)
-  - RxBinding (0.4):
-    - RxCocoa (< 6.0.0, >= 5.0.0)
-    - RxSwift (< 6.0.0, >= 5.0.0)
   - RxCocoa (5.1.1):
     - RxRelay (~> 5)
     - RxSwift (~> 5)
@@ -27,8 +26,8 @@ DEPENDENCIES:
   - CrossroadRegex
   - DropDown
   - EZSwiftExtensions
+  - "NSObject+Rx"
   - RxAlamofire
-  - RxBinding
   - RxCocoa
 
 SPEC REPOS:
@@ -39,8 +38,8 @@ SPEC REPOS:
     - CrossroadRegex
     - DropDown
     - EZSwiftExtensions
+    - "NSObject+Rx"
     - RxAlamofire
-    - RxBinding
     - RxCocoa
     - RxRelay
     - RxSwift
@@ -52,12 +51,12 @@ SPEC CHECKSUMS:
   CrossroadRegex: 5eaadb3f7b4014728f1cbd1014756b126c1dbd9a
   DropDown: 8a2116376c1981888557f72ec2ffc9a5e0e456ec
   EZSwiftExtensions: f73648a591e529a1dbd83c22b19fd3e57df6fb7d
+  "NSObject+Rx": fa6bbcc1ab1faa06b01466bc09b1e0692bbc5946
   RxAlamofire: f34ddbab56fa2a36f99737f4d4ecc22288a1384f
-  RxBinding: da433c012633802a72c2a5bec8775b86f4cddeb8
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
   RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
 
-PODFILE CHECKSUM: ef399755fcdb11a0b81a2046d6d5f2508622772e
+PODFILE CHECKSUM: 29c513a2ffba2c2f9f5ee5f48d2ea248c018530b
 
 COCOAPODS: 1.10.0.beta.1

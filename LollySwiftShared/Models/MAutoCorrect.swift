@@ -9,13 +9,14 @@
 import Foundation
 import RxSwift
 
+@objcMembers
 class MAutoCorrect: Codable {
-    var ID = 0
-    var LANGID = 0
-    var SEQNUM = 0
-    var INPUT = ""
-    var EXTENDED = ""
-    var BASIC = ""
+    dynamic var ID = 0
+    dynamic var LANGID = 0
+    dynamic var SEQNUM = 0
+    dynamic var INPUT = ""
+    dynamic var EXTENDED = ""
+    dynamic var BASIC = ""
     
     static func getDataByLang(_ langid: Int) -> Observable<[MAutoCorrect]> {
         // SQL: SELECT * FROM AUTOCORRECT WHERE LANGID=?

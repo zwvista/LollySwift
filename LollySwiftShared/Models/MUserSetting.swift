@@ -11,14 +11,14 @@ import RxSwift
 
 @objcMembers
 class MUserSetting: NSObject, Codable {
-    var ID = 0
-    var USERID = 0
-    var KIND = 0
-    var ENTITYID = 0
-    var VALUE1: String?
-    var VALUE2: String?
-    var VALUE3: String?
-    var VALUE4: String?
+    dynamic var ID = 0
+    dynamic var USERID = 0
+    dynamic var KIND = 0
+    dynamic var ENTITYID = 0
+    dynamic var VALUE1: String?
+    dynamic var VALUE2: String?
+    dynamic var VALUE3: String?
+    dynamic var VALUE4: String?
 
     static func getData(userid: Int) -> Observable<[MUserSetting]> {
         // SQL: SELECT * FROM USERSETTINGS WHERE USERID=?

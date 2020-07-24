@@ -11,9 +11,9 @@ import RxSwift
 
 @objcMembers
 class MWordPhrase: NSObject, Codable {
-    var ID = 0
-    var WORDID = 0
-    var PHRASEID = 0
+    dynamic var ID = 0
+    dynamic var WORDID = 0
+    dynamic var PHRASEID = 0
     
     private static func getDataByWordPhrase(wordid: Int, phraseid: Int) -> Observable<[MWordPhrase]> {
         // SQL: SELECT * FROM WORDSPHRASES WHERE WORDID=? AND PHRASEID=?

@@ -11,11 +11,11 @@ import RxSwift
 
 @objcMembers
 class MTextbook: NSObject, Codable {
-    var ID = 0
-    var LANGID = 0
-    var TEXTBOOKNAME = ""
-    var UNITS = ""
-    var PARTS = ""
+    dynamic var ID = 0
+    dynamic var LANGID = 0
+    dynamic var TEXTBOOKNAME = ""
+    dynamic var UNITS = ""
+    dynamic var PARTS = ""
 
     enum CodingKeys : String, CodingKey {
         case ID

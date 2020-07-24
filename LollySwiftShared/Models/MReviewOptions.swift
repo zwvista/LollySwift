@@ -10,9 +10,9 @@ import Foundation
 
 class MReviewOptions: NSObject {
     var mode = 0
-    @objc var interval = 3
+    @objc dynamic var interval = 3
     var shuffled = false
     var levelge0only: Bool?
-    @objc var groupCount = 1
-    @objc var groupSelected = 1
+    @objc dynamic var groupCount = 1
+    @objc dynamic var groupSelected = 1
 }

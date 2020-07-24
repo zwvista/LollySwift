@@ -11,11 +11,11 @@ import RxSwift
 
 @objcMembers
 class MLangPhrase: NSObject, Codable, MPhraseProtocol {
-    var ID = 0
-    var PHRASEID: Int { ID }
-    var LANGID = 0
-    var PHRASE = ""
-    var TRANSLATION: String?
+    dynamic var ID = 0
+    dynamic var PHRASEID: Int { ID }
+    dynamic var LANGID = 0
+    dynamic var PHRASE = ""
+    dynamic var TRANSLATION: String?
     
     override init() {
     }

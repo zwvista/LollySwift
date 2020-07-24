@@ -11,16 +11,16 @@ import RxSwift
 
 @objcMembers
 class MUnitPhrase: NSObject, Codable, MPhraseProtocol {
-    var ID = 0
-    var LANGID = 0
-    var TEXTBOOKID = 0
-    var TEXTBOOKNAME = ""
-    var UNIT = 0
-    var PART = 0
-    var SEQNUM = 0
-    var PHRASEID = 0
-    var PHRASE = ""
-    var TRANSLATION: String?
+    dynamic var ID = 0
+    dynamic var LANGID = 0
+    dynamic var TEXTBOOKID = 0
+    dynamic var TEXTBOOKNAME = ""
+    dynamic var UNIT = 0
+    dynamic var PART = 0
+    dynamic var SEQNUM = 0
+    dynamic var PHRASEID = 0
+    dynamic var PHRASE = ""
+    dynamic var TRANSLATION: String?
 
     enum CodingKeys : String, CodingKey {
         case ID

@@ -11,20 +11,20 @@ import RxSwift
 
 @objcMembers
 class MUnitWord: NSObject, Codable, MWordProtocol {
-    var ID = 0
-    var LANGID = 0
-    var TEXTBOOKID = 0
-    var TEXTBOOKNAME = ""
-    var UNIT = 0
-    var PART = 0
-    var SEQNUM = 0
-    var WORDID = 0
-    var WORD = ""
-    var NOTE: String?
-    var FAMIID = 0
-    var LEVEL = 0
-    var CORRECT = 0
-    var TOTAL = 0
+    dynamic var ID = 0
+    dynamic var LANGID = 0
+    dynamic var TEXTBOOKID = 0
+    dynamic var TEXTBOOKNAME = ""
+    dynamic var UNIT = 0
+    dynamic var PART = 0
+    dynamic var SEQNUM = 0
+    dynamic var WORDID = 0
+    dynamic var WORD = ""
+    dynamic var NOTE: String?
+    dynamic var FAMIID = 0
+    dynamic var LEVEL = 0
+    dynamic var CORRECT = 0
+    dynamic var TOTAL = 0
 
     enum CodingKeys : String, CodingKey {
         case ID

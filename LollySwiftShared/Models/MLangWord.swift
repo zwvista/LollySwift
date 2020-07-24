@@ -11,15 +11,15 @@ import RxSwift
 
 @objcMembers
 class MLangWord: NSObject, Codable, MWordProtocol {
-    var ID = 0
-    var LANGID = 0
-    var WORDID: Int { ID }
-    var WORD = ""
-    var NOTE: String?
-    var FAMIID = 0
-    var LEVEL = 0
-    var CORRECT = 0
-    var TOTAL = 0
+    dynamic var ID = 0
+    dynamic var LANGID = 0
+    dynamic var WORDID: Int { ID }
+    dynamic var WORD = ""
+    dynamic var NOTE: String?
+    dynamic var FAMIID = 0
+    dynamic var LEVEL = 0
+    dynamic var CORRECT = 0
+    dynamic var TOTAL = 0
 
     var WORDNOTE: String { WORD + ((NOTE ?? "").isEmpty ? "" : "(\(NOTE!))") }
     var ACCURACY: String { TOTAL == 0 ? "N/A" : "\(floor(CORRECT.toDouble / TOTAL.toDouble * 1000) / 10)%" }

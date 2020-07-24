@@ -8,14 +8,13 @@
 
 import Cocoa
 import RxSwift
+import NSObject_Rx
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     static let theSettingsViewModel = SettingsViewModel()
     
-    let disposeBag = DisposeBag()
-
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         AppDelegate.theSettingsViewModel.getData().subscribe(onNext: {
             //self.search(self)
@@ -24,8 +23,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             //self.wordsInLanguage(self)
             //self.readNumber(self)
             //self.patternsInLanguage(self)
-        }).disposed(by: disposeBag)
-        // Insert code here to initialize your application
+        }) ~ rx.disposeBag
 
         // https://forums.developer.apple.com/thread/69484
         NSSetUncaughtExceptionHandler { exception in

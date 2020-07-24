@@ -11,24 +11,23 @@ import RxSwift
 
 @objcMembers
 class MDictionary: NSObject, Codable {
-    var ID = 0
-    var DICTID = 0
-    var LANGIDFROM = 0
-    var LANGNAMEFROM = ""
-    var LANGIDTO = 0
-    var LANGNAMETO = ""
-    var SEQNUM = 0
-    var DICTTYPEID = 0
-    var DICTTYPENAME = ""
-    var DICTNAME = ""
-    var URL: String?
-    var CHCONV: String?
-    var AUTOMATION: String?
-    var DICTTABLE: String?
-    var TRANSFORM: String?
-    var WAIT = 0
-    var TEMPLATE: String?
-    var TEMPLATE2: String?
+    dynamic var ID = 0
+    dynamic var DICTID = 0
+    dynamic var LANGIDFROM = 0
+    dynamic var LANGNAMEFROM = ""
+    dynamic var LANGIDTO = 0
+    dynamic var LANGNAMETO = ""
+    dynamic var SEQNUM = 0
+    dynamic var DICTTYPEID = 0
+    dynamic var DICTTYPENAME = ""
+    dynamic var DICTNAME = ""
+    dynamic var URL: String?
+    dynamic var CHCONV: String?
+    dynamic var AUTOMATION: String?
+    dynamic var TRANSFORM: String?
+    dynamic var WAIT = 0
+    dynamic var TEMPLATE: String?
+    dynamic var TEMPLATE2: String?
     
     override var description: String { DICTNAME }
 

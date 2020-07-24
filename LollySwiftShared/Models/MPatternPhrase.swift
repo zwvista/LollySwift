@@ -11,15 +11,15 @@ import RxSwift
 
 @objcMembers
 class MPatternPhrase: NSObject, Codable {
-    var PATTERNID = 0
-    var LANGID = 0
-    var PATTERN = ""
-    var NOTE: String?
-    var ID = 0
-    var SEQNUM = 0
-    var PHRASEID = 0
-    var PHRASE = ""
-    var TRANSLATION: String?
+    dynamic var PATTERNID = 0
+    dynamic var LANGID = 0
+    dynamic var PATTERN = ""
+    dynamic var NOTE: String?
+    dynamic var ID = 0
+    dynamic var SEQNUM = 0
+    dynamic var PHRASEID = 0
+    dynamic var PHRASE = ""
+    dynamic var TRANSLATION: String?
 
     override init() {
     }

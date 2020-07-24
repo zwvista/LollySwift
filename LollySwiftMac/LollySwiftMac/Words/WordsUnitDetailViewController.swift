@@ -12,11 +12,10 @@ import RxSwift
 class WordsUnitDetailViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 
     var vm: WordsUnitViewModel!
-    var vmSingle: SingleWordViewModel!
+    var vmDetail: WordsUnitDetailViewModel!
     var complete: (() -> Void)?
     @objc var item: MUnitWord!
-    var isAdd: Bool!
-    var arrWords: [MUnitWord] { vmSingle != nil ? vmSingle.arrWords : [MUnitWord]() }
+    var arrWords: [MUnitWord] { vmDetail.vmSingle.arrWords }
 
     @IBOutlet weak var acUnits: NSArrayController!
     @IBOutlet weak var acParts: NSArrayController!
@@ -38,9 +37,7 @@ class WordsUnitDetailViewController: NSViewController, NSTableViewDataSource, NS
         super.viewDidLoad()
         acUnits.content = item.textbook.arrUnits
         acParts.content = item.textbook.arrParts
-        isAdd = item.ID == 0
-        guard !isAdd else {return}
-        vmSingle = SingleWordViewModel(word: item.WORD, settings: vm.vmSettings, disposeBag: disposeBag) {
+        vmDetail = WordsUnitDetailViewModel(vm: vm, item: item, disposeBag: disposeBag, okComplete: complete) {
             self.tableView.reloadData()
         }
     }
@@ -48,7 +45,7 @@ class WordsUnitDetailViewController: NSViewController, NSTableViewDataSource, NS
     override func viewDidAppear() {
         // https://stackoverflow.com/questions/24235815/cocoa-how-to-set-window-title-from-within-view-controller-in-swift
         (item.WORD.isEmpty ? tfWord : tfNote).becomeFirstResponder()
-        view.window?.title = isAdd ? "New Word" : item.WORD
+        view.window?.title = vmDetail.isAdd ? "New Word" : item.WORD
     }
     
     @IBAction func clearAccuracy(_ sender: AnyObject) {
@@ -60,18 +57,7 @@ class WordsUnitDetailViewController: NSViewController, NSTableViewDataSource, NS
     @IBAction func okClicked(_ sender: AnyObject) {
         // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
         self.commitEditing()
-        item.WORD = vm.vmSettings.autoCorrectInput(text: item.WORD)
-        if isAdd {
-            vm.arrWords.append(item)
-            WordsUnitViewModel.create(item: item).subscribe(onNext: {
-                self.item.ID = $0
-                self.complete?()
-            }).disposed(by: disposeBag)
-        } else {
-            WordsUnitViewModel.update(item: item).subscribe {
-                self.complete?()
-            }.disposed(by: disposeBag)
-        }
+        vmDetail.onOK()
         dismiss(self)
     }
     

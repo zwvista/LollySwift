@@ -11,11 +11,11 @@ import RxSwift
 
 @objcMembers
 class MPattern: NSObject, Codable {
-    var ID = 0
-    var LANGID = 0
-    var PATTERN = ""
-    var NOTE: String?
-    var TAGS: String?
+    dynamic var ID = 0
+    dynamic var LANGID = 0
+    dynamic var PATTERN = ""
+    dynamic var NOTE: String?
+    dynamic var TAGS: String?
 
     override init() {
     }

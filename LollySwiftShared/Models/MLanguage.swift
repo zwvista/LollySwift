@@ -11,8 +11,8 @@ import RxSwift
 
 @objcMembers
 class MLanguage: NSObject, Codable {
-    var ID = 0
-    var LANGNAME = ""
+    dynamic var ID = 0
+    dynamic var LANGNAME = ""
     
     override var description: String { LANGNAME }
     

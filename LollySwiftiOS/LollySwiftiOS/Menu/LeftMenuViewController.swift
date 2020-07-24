@@ -109,8 +109,8 @@ public class LeftMenuViewController: UIViewController, UITableViewDelegate, UITa
             cell!.selectedBackgroundView = UIView()
         }
 
-        var titles = ["Search", "Settings", "Words in Unit", "Phrases in Unit", "Words Review", "Phrases Review", "Words in Textbook", "Phrases in Textbook", "Words in Language", "Phrases in Language"]
-        var images = ["IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty"]
+        let titles = ["Search", "Settings", "Words in Unit", "Phrases in Unit", "Words Review", "Phrases Review", "Words in Textbook", "Phrases in Textbook", "Words in Language", "Phrases in Language"]
+        let images = ["IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty"]
         cell!.textLabel?.text = titles[indexPath.row]
         cell!.imageView?.image = UIImage(named: images[indexPath.row])
 

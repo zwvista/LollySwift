@@ -11,11 +11,11 @@ import RxSwift
 
 @objcMembers
 class MVoice: NSObject, Codable {
-    var ID = 0
-    var LANGID = 0
-    var VOICETYPEID = 0
-    var VOICELANG: String? = nil
-    var VOICENAME = ""
+    dynamic var ID = 0
+    dynamic var LANGID = 0
+    dynamic var VOICETYPEID = 0
+    dynamic var VOICELANG: String? = nil
+    dynamic var VOICENAME = ""
     
     enum CodingKeys : String, CodingKey {
         case ID

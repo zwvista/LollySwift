@@ -11,12 +11,12 @@ import RxSwift
 
 @objcMembers
 class MWordFami: NSObject, Codable {
-    var ID = 0
-    var USERID = 0
-    var WORDID = 0
-    var LEVEL = 0
-    var CORRECT = 0
-    var TOTAL = 0
+    dynamic var ID = 0
+    dynamic var USERID = 0
+    dynamic var WORDID = 0
+    dynamic var LEVEL = 0
+    dynamic var CORRECT = 0
+    dynamic var TOTAL = 0
 
     static func getDataByUserWord(userid: Int, wordid: Int) -> Observable<[MWordFami]> {
         // SQL: SELECT * FROM WORDSFAMI WHERE USERID=? AND WORDID=?

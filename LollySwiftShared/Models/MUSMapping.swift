@@ -10,12 +10,12 @@ import Foundation
 import RxSwift
 
 class MUSMapping: NSObject, Codable {
-    var ID = 0
-    var NAME = ""
-    var KIND = 0
-    var ENTITYID = 0
-    var VALUEID = 0
-    var LEVEL = 0
+    dynamic var ID = 0
+    dynamic var NAME = ""
+    dynamic var KIND = 0
+    dynamic var ENTITYID = 0
+    dynamic var VALUEID = 0
+    dynamic var LEVEL = 0
 
     static let NAME_USLANGID = "USLANGID"
     static let NAME_USROWSPERPAGEOPTIONS = "USROWSPERPAGEOPTIONS"
