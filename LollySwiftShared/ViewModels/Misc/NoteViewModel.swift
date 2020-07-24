@@ -9,16 +9,14 @@
 import Foundation
 import RxSwift
 
-class NoteViewModel {
+class NoteViewModel: NSObject {
 
     var vmSettings: SettingsViewModel
     var mDictNote: MDictionary { vmSettings.selectedDictNote }
-    let disposeBag: DisposeBag!
     static let zeroNote = "O"
 
-    init(settings: SettingsViewModel, disposeBag: DisposeBag) {
+    init(settings: SettingsViewModel) {
         vmSettings = settings
-        self.disposeBag = disposeBag
     }
 
     func getNote(word: String) -> Observable<String> {
@@ -49,7 +47,7 @@ class NoteViewModel {
                     i += 1
                 }
             }
-        subscription?.disposed(by: disposeBag)
+        subscription?.disposed(by: rx.disposeBag)
     }
     
     func clearNotes(wordCount: Int, isNoteEmpty: @escaping (Int) -> Bool, getOne: @escaping (Int) -> Observable<()>) -> Observable<()> {

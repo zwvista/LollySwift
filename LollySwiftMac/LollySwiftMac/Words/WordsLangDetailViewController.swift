@@ -8,6 +8,7 @@
 
 import Cocoa
 import RxSwift
+import NSObject_Rx
 
 @objcMembers
 class WordsLangDetailViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
@@ -27,13 +28,11 @@ class WordsLangDetailViewController: NSViewController, NSTableViewDataSource, NS
     @IBOutlet weak var tfAccuracy: NSTextField!
     @IBOutlet weak var tableView: NSTableView!
 
-    let disposeBag = DisposeBag()
-
     override func viewDidLoad() {
         super.viewDidLoad()
         isAdd = item.ID == 0
         guard !isAdd else {return}
-        vmSingle = SingleWordViewModel(word: item.WORD, settings: vm.vmSettings, disposeBag: disposeBag) {
+        vmSingle = SingleWordViewModel(word: item.WORD, settings: vm.vmSettings) {
             self.tableView.reloadData()
         }
     }
@@ -59,11 +58,11 @@ class WordsLangDetailViewController: NSViewController, NSTableViewDataSource, NS
             WordsLangViewModel.create(item: item).subscribe(onNext: {
                 self.item.ID = $0
                 self.complete?()
-            }).disposed(by: disposeBag)
+            }) ~ rx.disposeBag
         } else {
             WordsLangViewModel.update(item: item).subscribe {
                 self.complete?()
-            }.disposed(by: disposeBag)
+            } ~ rx.disposeBag
         }
         dismiss(self)
     }

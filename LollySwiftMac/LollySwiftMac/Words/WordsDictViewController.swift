@@ -9,6 +9,7 @@
 import Cocoa
 import WebKit
 import RxSwift
+import NSObject_Rx
 
 class WordsDictViewController: NSViewController, WKNavigationDelegate {
 
@@ -22,7 +23,6 @@ class WordsDictViewController: NSViewController, WKNavigationDelegate {
     var webInitilized = false
     var url = ""
     var subscription: Disposable? = nil
-    let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +40,7 @@ class WordsDictViewController: NSViewController, WKNavigationDelegate {
                 print(html)
                 let str = self.dict.htmlString(html, word: self.word)
                 self.wvDict.loadHTMLString(str, baseURL: nil)
-            }).disposed(by: vcWords.disposeBag)
+            }) ~ rx.disposeBag
         } else {
             wvDict.load(URLRequest(url: URL(string: url)!))
             if dict.AUTOMATION != nil {
@@ -67,7 +67,7 @@ class WordsDictViewController: NSViewController, WKNavigationDelegate {
                 self.vcWords?.responder?.window!.makeFirstResponder(self.vcWords.responder)
                 self.vcWords?.responder = nil
             }
-            subscription?.disposed(by: self.disposeBag)
+            subscription?.disposed(by: self.rx.disposeBag)
         }
         tfURL.stringValue = webView.url!.absoluteString
         guard dictStatus != .ready else {return}

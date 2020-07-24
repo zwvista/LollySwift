@@ -9,6 +9,7 @@
 import Cocoa
 import WebKit
 import RxSwift
+import NSObject_Rx
 
 class PhrasesLangViewController: PhrasesBaseViewController {
     
@@ -21,7 +22,7 @@ class PhrasesLangViewController: PhrasesBaseViewController {
     }
     
     override func settingsChanged() {
-        vm = PhrasesLangViewModel(settings: AppDelegate.theSettingsViewModel, disposeBag: disposeBag, needCopy: true) {
+        vm = PhrasesLangViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) {
             self.doRefresh()
         }
         super.settingsChanged()
@@ -43,7 +44,7 @@ class PhrasesLangViewController: PhrasesBaseViewController {
     
     override func endEditing(row: Int) {
         let item = arrPhrases[row]
-        PhrasesLangViewModel.update(item: item).subscribe().disposed(by: disposeBag)
+        PhrasesLangViewModel.update(item: item).subscribe() ~ rx.disposeBag
     }
 
     // https://stackoverflow.com/questions/24219441/how-to-use-nstoolbar-in-xcode-6-and-storyboard
@@ -58,13 +59,13 @@ class PhrasesLangViewController: PhrasesBaseViewController {
     override func deletePhrase(row: Int) {
         PhrasesLangViewModel.delete(arrPhrases[row].ID).subscribe {
             self.doRefresh()
-        }.disposed(by: disposeBag)
+        } ~ rx.disposeBag
     }
 
     @IBAction func refreshTableView(_ sender: AnyObject) {
         vm.reload().subscribe {
             self.doRefresh()
-        }.disposed(by: disposeBag)
+        } ~ rx.disposeBag
     }
 
     @IBAction func editPhrase(_ sender: AnyObject) {

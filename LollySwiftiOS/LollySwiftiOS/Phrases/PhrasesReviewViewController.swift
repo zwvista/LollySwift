@@ -9,10 +9,10 @@
 import UIKit
 import RxSwift
 import DropDown
+import NSObject_Rx
 
 class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
     var vm: PhrasesReviewViewModel!
-    let disposeBag = DisposeBag()
     
     @IBOutlet weak var lblPhraseTarget: UILabel!
     @IBOutlet weak var lblIndex: UILabel!
@@ -84,13 +84,13 @@ class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
         subscription?.dispose()
         vm.newTest(shuffled: shuffled, groupSelected: 1, groupCount: 1).subscribe {
             self.doTest()
-        }.disposed(by: disposeBag)
+        } ~ rx.disposeBag
         btnCheck.setTitle(vm.isTestMode ? "Check" : "Next", for: .normal)
         if vm.mode == .reviewAuto {
             subscription = Observable<Int>.interval(vmSettings.USREVIEWINTERVAL.toDouble / 1000.0, scheduler: MainScheduler.instance).subscribe { _ in
                 self.check(self)
             }
-            subscription?.disposed(by: disposeBag)
+            subscription?.disposed(by: rx.disposeBag)
         }
     }
     

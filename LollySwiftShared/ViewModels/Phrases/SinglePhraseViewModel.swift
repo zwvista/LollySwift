@@ -8,21 +8,20 @@
 
 import Foundation
 import RxSwift
+import NSObject_Rx
 
 class SinglePhraseViewModel: NSObject {
     
     var vmSettings: SettingsViewModel
-    let disposeBag: DisposeBag!
     var arrPhrases = [MUnitPhrase]()
     
-    init(phrase: String, settings: SettingsViewModel, disposeBag: DisposeBag, complete: @escaping () -> ()) {
+    init(phrase: String, settings: SettingsViewModel, complete: @escaping () -> ()) {
         vmSettings = settings
-        self.disposeBag = disposeBag
         super.init()
         MUnitPhrase.getDataByLangPhrase(langid: vmSettings.selectedLang.ID, phrase: phrase, arrTextbooks: vmSettings.arrTextbooks).map {
             self.arrPhrases = $0
         }.subscribe {
             complete()
-        }.disposed(by: disposeBag)
+        } ~ rx.disposeBag
     }
 }

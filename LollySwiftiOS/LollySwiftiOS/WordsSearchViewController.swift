@@ -10,6 +10,7 @@ import UIKit
 import WebKit
 import DropDown
 import RxSwift
+import NSObject_Rx
 
 class WordsSearchViewController: UIViewController, WKNavigationDelegate, UISearchBarDelegate {
     @IBOutlet weak var wvDictHolder: UIView!
@@ -19,7 +20,6 @@ class WordsSearchViewController: UIViewController, WKNavigationDelegate, UISearc
     @IBOutlet weak var btnDict: UIButton!
 
     var word = ""
-    let disposeBag = DisposeBag()
     var status = DictWebViewStatus.ready
     let ddDictReference = DropDown()
 
@@ -36,10 +36,10 @@ class WordsSearchViewController: UIViewController, WKNavigationDelegate, UISearc
                 vmSettings.selectedDictReference = vmSettings.arrDictsReference[index]
                 vmSettings.updateDictReference().subscribe {
                     self.searchBarSearchButtonClicked(self.sbword)
-                }.disposed(by: self.disposeBag)
+                } ~ self.rx.disposeBag
             }
             self.searchBarSearchButtonClicked(self.sbword)
-        }.disposed(by: disposeBag)
+        } ~ rx.disposeBag
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -55,7 +55,7 @@ class WordsSearchViewController: UIViewController, WKNavigationDelegate, UISearc
                 print(html)
                 let str = item2.htmlString(html, word: self.word, useTemplate2: true)
                 self.wvDict.loadHTMLString(str, baseURL: nil)
-            }).disposed(by: disposeBag)
+            }) ~ rx.disposeBag
         } else {
             wvDict.load(URLRequest(url: URL(string: url)!))
             if item2.DICTTYPENAME == "OFFLINE-ONLINE" {

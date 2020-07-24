@@ -8,6 +8,7 @@
 
 import UIKit
 import RxSwift
+import NSObject_Rx
 
 class WordsUnitViewController: WordsBaseViewController {
 
@@ -15,12 +16,10 @@ class WordsUnitViewController: WordsBaseViewController {
     var arrWords: [MUnitWord] { searchController.isActive && searchBar.text != "" ? vm.arrWordsFiltered! : vm.arrWords }
     @IBOutlet weak var btnEdit: UIBarButtonItem!
     
-    let disposeBag = DisposeBag()
-
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.showBlurLoader()
-        vm = WordsUnitViewModel(settings: vmSettings, inTextbook: true, disposeBag: disposeBag, needCopy: false) {
+        vm = WordsUnitViewModel(settings: vmSettings, inTextbook: true, needCopy: false) {
             self.setupSearchController(delegate: self)
             self.tableView.reloadData()
             self.view.removeBlurLoader()
@@ -57,7 +56,7 @@ class WordsUnitViewController: WordsBaseViewController {
         let item = vm.arrWords[i]
         func delete() {
             yesNoAction(title: "delete", message: "Do you really want to delete the word \"\(item.WORD)\"?", yesHandler: { (action) in
-                WordsUnitViewModel.delete(item: item).subscribe().disposed(by: self.disposeBag)
+                WordsUnitViewModel.delete(item: item).subscribe() ~ self.rx.disposeBag
                 self.vm.arrWords.remove(at: i)
                 tableView.deleteRows(at: [indexPath], with: .fade)
                 self.reindex()
@@ -81,7 +80,7 @@ class WordsUnitViewController: WordsBaseViewController {
                 let noteAction = UIAlertAction(title: "Retrieve Note", style: .default) { _ in
                     self.vm.getNote(index: indexPath.row).subscribe {
                         self.tableView.reloadRows(at: [indexPath], with: .fade)
-                    }.disposed(by: self.disposeBag)
+                    } ~ self.rx.disposeBag
                 }
                 alertController.addAction(noteAction)
             }

@@ -8,6 +8,7 @@
 
 import Cocoa
 import RxSwift
+import NSObject_Rx
 
 class DictsDetailViewController: NSViewController {
 
@@ -32,8 +33,6 @@ class DictsDetailViewController: NSViewController {
     @IBOutlet weak var tvTemplate: NSTextView!
     @IBOutlet weak var tvTemplate2: NSTextView!
 
-    let disposeBag = DisposeBag()
-
     override func viewDidLoad() {
         super.viewDidLoad()
         isAdd = item.ID == 0
@@ -54,11 +53,11 @@ class DictsDetailViewController: NSViewController {
 //        if isAdd {
 //            DictsViewModel.create(item: item).subscribe {
 //                self.complete?()
-//            }.disposed(by: disposeBag)
+//            } ~ rx.disposeBag
 //        } else {
 //            DictsViewModel.update(item: item).subscribe {
 //                self.complete?()
-//            }.disposed(by: disposeBag)
+//            } ~ rx.disposeBag
 //        }
         dismiss(self)
     }

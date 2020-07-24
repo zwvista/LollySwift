@@ -8,6 +8,7 @@
 
 import Cocoa
 import RxSwift
+import NSObject_Rx
 
 @objcMembers
 class PatternsWebPageViewController: NSViewController {
@@ -27,8 +28,6 @@ class PatternsWebPageViewController: NSViewController {
     @IBOutlet weak var btnNew: NSButton!
     @IBOutlet weak var btnExisting: NSButton!
     
-    let disposeBag = DisposeBag()
-
     override func viewDidLoad() {
         super.viewDidLoad()
         isAdd = item.ID == 0
@@ -50,11 +49,11 @@ class PatternsWebPageViewController: NSViewController {
             PatternsViewModel.createWebPage(item: item).subscribe(onNext: {
                 self.item.ID = $0
                 self.complete?()
-            }).disposed(by: disposeBag)
+            }) ~ rx.disposeBag
         } else {
             PatternsViewModel.updateWebPage(item: item).subscribe {
                 self.complete?()
-            }.disposed(by: disposeBag)
+            } ~ rx.disposeBag
         }
         dismiss(self)
     }

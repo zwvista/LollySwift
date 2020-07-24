@@ -16,10 +16,10 @@ class WebPageSelectViewModel: NSObject {
     var arrWebPages = [MWebPage]()
     var selectedWebPage: MWebPage?
     
-    public init(settings: SettingsViewModel, disposeBag: DisposeBag, complete: @escaping () -> ()) {
+    public init(settings: SettingsViewModel, complete: @escaping () -> ()) {
         self.vmSettings = settings
         super.init()
-        reload().subscribe { complete() }.disposed(by: disposeBag)
+        reload().subscribe { complete() } ~ rx.disposeBag
     }
     
     func reload() -> Observable<()> {

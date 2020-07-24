@@ -14,10 +14,10 @@ class PhrasesLangViewModel: NSObject {
     var arrPhrases = [MLangPhrase]()
     var arrPhrasesFiltered: [MLangPhrase]?
     
-    public init(settings: SettingsViewModel, disposeBag: DisposeBag, needCopy: Bool, complete: @escaping () -> ()) {
+    public init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> ()) {
         self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
         super.init()
-        reload().subscribe { complete() }.disposed(by: disposeBag)
+        reload().subscribe { complete() } ~ rx.disposeBag
     }
     
     func reload() -> Observable<()> {

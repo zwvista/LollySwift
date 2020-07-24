@@ -9,13 +9,13 @@
 import UIKit
 import RxSwift
 import AVFoundation
+import NSObject_Rx
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    let disposeBag = DisposeBag()
     static let synth = AVSpeechSynthesizer()
     private static let _initializeObject = ReplaySubject<()>.create(bufferSize: 1)
     static var initializeObject: ReplaySubject<()> { _initializeObject }
@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         vmSettings.getData().subscribe {
             AppDelegate._initializeObject.onNext(())
             AppDelegate._initializeObject.onCompleted()
-        }.disposed(by: disposeBag)
+        } ~ rx.disposeBag
         return true
     }
 

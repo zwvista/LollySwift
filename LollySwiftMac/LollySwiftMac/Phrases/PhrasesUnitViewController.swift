@@ -9,6 +9,7 @@
 import Cocoa
 import WebKit
 import RxSwift
+import NSObject_Rx
 
 class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidation {
     
@@ -23,7 +24,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        vmReview = EmbeddedReviewViewModel(disposeBag: disposeBag)
+        vmReview = EmbeddedReviewViewModel()
         tableView.registerForDraggedTypes([tableRowDragType])
     }
     
@@ -35,7 +36,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     }
 
     override func settingsChanged() {
-        vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: true, disposeBag: disposeBag, needCopy: true) {
+        vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: true, needCopy: true) {
             self.doRefresh()
         }
         super.settingsChanged()
@@ -111,7 +112,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
         let item = arrPhrases[row]
         PhrasesUnitViewModel.update(item: item).subscribe {
             self.tableView.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count))
-        }.disposed(by: disposeBag)
+        } ~ rx.disposeBag
     }
 
     // https://stackoverflow.com/questions/24219441/how-to-use-nstoolbar-in-xcode-6-and-storyboard
@@ -138,13 +139,13 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
         let item = arrPhrases[row]
         PhrasesUnitViewModel.delete(item: item).subscribe{
             self.doRefresh()
-        }.disposed(by: disposeBag)
+        } ~ rx.disposeBag
     }
     
     @IBAction func refreshTableView(_ sender: AnyObject) {
         vm.reload().subscribe {
             self.doRefresh()
-        }.disposed(by: disposeBag)
+        } ~ rx.disposeBag
     }
 
     @IBAction func editPhrase(_ sender: AnyObject) {
@@ -169,13 +170,13 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     @IBAction func previousUnitPart(_ sender: AnyObject) {
         vmSettings.previousUnitPart().concat(vm.reload()).subscribe {
             self.doRefresh()
-        }.disposed(by: disposeBag)
+        } ~ rx.disposeBag
     }
     
     @IBAction func nextUnitPart(_ sender: AnyObject) {
         vmSettings.nextUnitPart().concat(vm.reload()).subscribe {
             self.doRefresh()
-        }.disposed(by: disposeBag)
+        } ~ rx.disposeBag
     }
     
     @IBAction func toggleToType(_ sender: AnyObject) {
@@ -183,7 +184,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
         let part = row == -1 ? vmSettings.arrParts[0].value : arrPhrases[row].PART
         vmSettings.toggleToType(part: part).concat(vm.reload()).subscribe {
             self.doRefresh()
-        }.disposed(by: disposeBag)
+        } ~ rx.disposeBag
     }
 
     override func updateStatusText() {

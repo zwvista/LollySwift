@@ -9,6 +9,7 @@
 import UIKit
 import DropDown
 import RxSwift
+import NSObject_Rx
 
 class WordsUnitBatchViewController: UITableViewController, UITextFieldDelegate {
 
@@ -26,8 +27,6 @@ class WordsUnitBatchViewController: UITableViewController, UITextFieldDelegate {
     let ddUnit = DropDown()
     let ddPart = DropDown()
     
-    let disposeBag = DisposeBag()
-
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -72,7 +71,7 @@ class WordsUnitBatchViewController: UITableViewController, UITextFieldDelegate {
                 o = o.concat(MWordFami.update(wordid: item.WORDID, level: level))
             }
         }
-        o.subscribe().disposed(by: disposeBag)
+        o.subscribe() ~ rx.disposeBag
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {

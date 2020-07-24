@@ -8,6 +8,7 @@
 
 import Cocoa
 import RxSwift
+import NSObject_Rx
 
 class PhrasesBaseViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate {
     
@@ -15,7 +16,6 @@ class PhrasesBaseViewController: NSViewController, LollyProtocol, NSTableViewDat
     @IBOutlet weak var tableView: NSTableView!
     @IBOutlet weak var tfStatusText: NSTextField!
 
-    let disposeBag = DisposeBag()
     var selectedPhrase = ""
     let synth = NSSpeechSynthesizer()
     var isSpeaking = true

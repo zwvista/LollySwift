@@ -8,21 +8,20 @@
 
 import Foundation
 import RxSwift
+import NSObject_Rx
 
 class PhrasesUnitViewModel: NSObject {
     @objc
     var vmSettings: SettingsViewModel
     let inTextbook: Bool
-    let disposeBag: DisposeBag!
     var arrPhrases = [MUnitPhrase]()
     var arrPhrasesFiltered: [MUnitPhrase]?
 
-    public init(settings: SettingsViewModel, inTextbook: Bool, disposeBag: DisposeBag, needCopy: Bool, complete: @escaping () -> ()) {
+    public init(settings: SettingsViewModel, inTextbook: Bool, needCopy: Bool, complete: @escaping () -> ()) {
         self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
         self.inTextbook = inTextbook
-        self.disposeBag = disposeBag
         super.init()
-        reload().subscribe { complete() }.disposed(by: disposeBag)
+        reload().subscribe { complete() } ~ rx.disposeBag
     }
     
     func reload() -> Observable<()> {
@@ -136,7 +135,7 @@ class PhrasesUnitViewModel: NSObject {
             item.SEQNUM = i
             PhrasesUnitViewModel.update(item.ID, seqnum: item.SEQNUM).subscribe(onNext: {
                 complete(i - 1)
-            }).disposed(by: disposeBag)
+            }) ~ rx.disposeBag
         }
     }
 

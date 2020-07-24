@@ -8,11 +8,11 @@
 
 import Cocoa
 import RxSwift
+import NSObject_Rx
 
 class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldDelegate {
     var vm: PhrasesReviewViewModel!
     var vmSettings: SettingsViewModel { vm.vmSettings }
-    let disposeBag = DisposeBag()
 
     @IBOutlet weak var tfIndex: NSTextField!
     @IBOutlet weak var tfCorrect: NSTextField!
@@ -88,13 +88,13 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
             self.subscription?.dispose()
             self.vm.newTest(shuffled: self.shuffled, groupSelected: self.groupSelected, groupCount: self.groupCount).subscribe {
                 self.doTest()
-            }.disposed(by: self.disposeBag)
+            } ~ self.rx.disposeBag
             self.btnCheck.title = self.vm.isTestMode ? "Check" : "Next"
             if self.vm.mode == .reviewAuto {
                 self.subscription = Observable<Int>.interval(self.vmSettings.USREVIEWINTERVAL.toDouble / 1000.0, scheduler: MainScheduler.instance).subscribe { _ in
                     self.check(self)
                 }
-                self.subscription?.disposed(by: self.disposeBag)
+                self.subscription?.disposed(by: self.rx.disposeBag)
             }
         }
         self.presentAsSheet(optionsVC)

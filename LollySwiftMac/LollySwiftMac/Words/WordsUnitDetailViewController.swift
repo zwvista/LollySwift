@@ -8,6 +8,7 @@
 
 import Cocoa
 import RxSwift
+import NSObject_Rx
 
 class WordsUnitDetailViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 
@@ -31,13 +32,11 @@ class WordsUnitDetailViewController: NSViewController, NSTableViewDataSource, NS
     @IBOutlet weak var tfAccuracy: NSTextField!
     @IBOutlet weak var tableView: NSTableView!
 
-    let disposeBag = DisposeBag()
-
     override func viewDidLoad() {
         super.viewDidLoad()
         acUnits.content = item.textbook.arrUnits
         acParts.content = item.textbook.arrParts
-        vmDetail = WordsUnitDetailViewModel(vm: vm, item: item, disposeBag: disposeBag, okComplete: complete) {
+        vmDetail = WordsUnitDetailViewModel(vm: vm, item: item, okComplete: complete) {
             self.tableView.reloadData()
         }
     }

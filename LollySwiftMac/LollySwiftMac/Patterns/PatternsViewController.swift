@@ -9,6 +9,8 @@
 import Cocoa
 import WebKit
 import RxSwift
+import NSObject_Rx
+import NSObject_Rx
 
 class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate, NSMenuItemValidation, NSToolbarItemValidation {
 
@@ -23,7 +25,6 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     @IBOutlet weak var tvPhrases: NSTableView!
 
     var vm: PatternsViewModel!
-    let disposeBag = DisposeBag()
     @objc var newPattern = ""
     @objc var textFilter = ""
     var selectedPattern = ""
@@ -79,15 +80,15 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
         if tv === tvPatterns {
             PatternsViewModel.update(item: item as! MPattern).subscribe {
                 tv.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvPatterns.tableColumns.count))
-            }.disposed(by: disposeBag)
+            } ~ rx.disposeBag
         } else if tv === tvWebPages {
             PatternsViewModel.updateWebPage(item: item as! MPatternWebPage).subscribe {
                 tv.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvPatterns.tableColumns.count))
-            }.disposed(by: disposeBag)
+            } ~ rx.disposeBag
         } else if tv == tvPhrases {
             PatternsViewModel.updatePhrase(item: item as! MPatternPhrase).subscribe {
                 tv.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvPatterns.tableColumns.count))
-            }.disposed(by: disposeBag)
+            } ~ rx.disposeBag
         }
     }
 
@@ -128,7 +129,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
                     if self.tvWebPages.numberOfRows > 0 {
                         self.tvWebPages.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
                     }
-                }.disposed(by: disposeBag)
+                } ~ rx.disposeBag
                 searchPhrases()
                 if isSpeaking {
                     speak(self)
@@ -184,7 +185,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     }
 
     func settingsChanged() {
-        vm = PatternsViewModel(settings: AppDelegate.theSettingsViewModel, disposeBag: disposeBag, needCopy: true) {
+        vm = PatternsViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) {
             self.doRefresh()
         }
         synth.setVoice(NSSpeechSynthesizer.VoiceName(rawValue: vmSettings.macVoiceName))
@@ -208,7 +209,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
                 self.tvPatterns.reloadData()
                 self.tfNewPattern.stringValue = ""
                 self.newPattern = ""
-            }).disposed(by: disposeBag)
+            }) ~ rx.disposeBag
         } else if textfield === sfFilter {
             if !textFilter.isEmpty {
                 scTextFilter.selectedSegment = 1
@@ -222,7 +223,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     @IBAction func refreshTableView(_ sender: AnyObject) {
         vm.reload().subscribe {
             self.doRefresh()
-        }.disposed(by: disposeBag)
+        } ~ rx.disposeBag
     }
     
     // https://stackoverflow.com/questions/24219441/how-to-use-nstoolbar-in-xcode-6-and-storyboard
@@ -293,7 +294,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     func searchPhrases() {
         vm.searchPhrases(patternid: selectedPatternID).subscribe {
             self.tvPhrases.reloadData()
-        }.disposed(by: disposeBag)
+        } ~ rx.disposeBag
     }
 
     deinit {

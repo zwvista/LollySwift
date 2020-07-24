@@ -8,6 +8,7 @@
 
 import Cocoa
 import RxSwift
+import NSObject_Rx
 
 @objcMembers
 class WebPageSelectViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
@@ -21,15 +22,13 @@ class WebPageSelectViewController: NSViewController, NSTableViewDataSource, NSTa
     @IBOutlet weak var tfURL: NSTextField!
     @IBOutlet weak var tvWebPages: NSTableView!
     
-    let disposeBag = DisposeBag()
-
     override func viewDidLoad() {
         super.viewDidLoad()
         search(self)
     }
     
     @IBAction func search(_ sender: Any) {
-        vmWebPage = WebPageSelectViewModel(settings: vm.vmSettings, disposeBag: disposeBag) {
+        vmWebPage = WebPageSelectViewModel(settings: vm.vmSettings) {
             self.tvWebPages.reloadData()
         }
     }

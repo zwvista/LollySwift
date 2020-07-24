@@ -8,24 +8,23 @@
 
 import Foundation
 import RxSwift
+import NSObject_Rx
 
 class WordsUnitViewModel: NSObject {
     var vmSettings: SettingsViewModel
     var vmNote: NoteViewModel!
     var mDictNote: MDictionary { vmNote.mDictNote }
     let inTextbook: Bool
-    let disposeBag: DisposeBag!
     var arrWords = [MUnitWord]()
     var arrWordsFiltered: [MUnitWord]?
     var arrPhrases = [MLangPhrase]()
 
-    init(settings: SettingsViewModel, inTextbook: Bool, disposeBag: DisposeBag, needCopy: Bool, complete: @escaping () -> ()) {
+    init(settings: SettingsViewModel, inTextbook: Bool, needCopy: Bool, complete: @escaping () -> ()) {
         self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
         self.inTextbook = inTextbook
-        self.disposeBag = disposeBag
-        vmNote = NoteViewModel(settings: vmSettings, disposeBag: disposeBag)
+        vmNote = NoteViewModel(settings: settings)
         super.init()
-        reload().subscribe { complete() }.disposed(by: disposeBag)
+        reload().subscribe { complete() } ~ rx.disposeBag
     }
     
     func reload() -> Observable<()> {
@@ -159,7 +158,7 @@ class WordsUnitViewModel: NSObject {
             item.SEQNUM = i
             WordsUnitViewModel.update(item.ID, seqnum: item.SEQNUM).subscribe(onNext: {
                 complete(i - 1)
-            }).disposed(by: disposeBag)
+            }) ~ rx.disposeBag
         }
     }
     
@@ -194,7 +193,7 @@ class WordsUnitViewModel: NSObject {
         }, getOne: { i in
             self.getNote(index: i).subscribe {
                 oneComplete(i)
-            }.disposed(by: self.disposeBag)
+            } ~ self.rx.disposeBag
         }, allComplete: allComplete)
     }
 

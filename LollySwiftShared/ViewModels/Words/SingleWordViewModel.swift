@@ -12,17 +12,15 @@ import RxSwift
 class SingleWordViewModel: NSObject {
 
     var vmSettings: SettingsViewModel
-    let disposeBag: DisposeBag!
     var arrWords = [MUnitWord]()
 
-    init(word: String, settings: SettingsViewModel, disposeBag: DisposeBag, complete: @escaping () -> ()) {
+    init(word: String, settings: SettingsViewModel, complete: @escaping () -> ()) {
         vmSettings = settings
-        self.disposeBag = disposeBag
         super.init()
         MUnitWord.getDataByLangWord(langid: vmSettings.selectedLang.ID, word: word, arrTextbooks: vmSettings.arrTextbooks).map {
             self.arrWords = $0
         }.subscribe {
             complete()
-        }.disposed(by: disposeBag)
+            } ~ rx.disposeBag
     }
 }

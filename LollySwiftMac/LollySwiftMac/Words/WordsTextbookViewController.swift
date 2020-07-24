@@ -9,6 +9,7 @@
 import Cocoa
 import WebKit
 import RxSwift
+import NSObject_Rx
 
 class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation {
 
@@ -25,7 +26,7 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
     }
 
     override func settingsChanged() {
-        vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: false, disposeBag: disposeBag, needCopy: true) {
+        vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: false, needCopy: true) {
             self.acTextbooks.content = self.vmSettings.arrTextbookFilters
             self.doRefresh()
         }
@@ -55,26 +56,26 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
         let item = arrWords[row]
         WordsUnitViewModel.update(item: item).subscribe {
             self.tvWords.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvWords.tableColumns.count))
-        }.disposed(by: disposeBag)
+        } ~ rx.disposeBag
     }
     
     override func searchPhrases() {
         vm.searchPhrases(wordid: selectedWordID).subscribe {
             self.tvPhrases.reloadData()
-        }.disposed(by: disposeBag)
+        } ~ rx.disposeBag
     }
 
     override func deleteWord(row: Int) {
         let item = arrWords[row]
         WordsUnitViewModel.delete(item: item).subscribe{
             self.doRefresh()
-        }.disposed(by: disposeBag)
+        } ~ rx.disposeBag
     }
 
     @IBAction func refreshTableView(_ sender: AnyObject) {
         vm.reload().subscribe {
             self.doRefresh()
-        }.disposed(by: disposeBag)
+        } ~ rx.disposeBag
     }
 
     @IBAction func editWord(_ sender: AnyObject) {
@@ -94,14 +95,14 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
         let col = tvWords.tableColumns.firstIndex { $0.title == "NOTE" }!
         vm.getNote(index: tvWords.selectedRow).subscribe {
             self.tvWords.reloadData(forRowIndexes: [self.tvWords.selectedRow], columnIndexes: [col])
-        }.disposed(by: disposeBag)
+        } ~ rx.disposeBag
     }
     
     @IBAction func clearNote(_ sender: AnyObject) {
         let col = tvWords.tableColumns.firstIndex { $0.title == "NOTE" }!
         vm.clearNote(index: tvWords.selectedRow).subscribe {
             self.tvWords.reloadData(forRowIndexes: [self.tvWords.selectedRow], columnIndexes: [col])
-        }.disposed(by: disposeBag)
+        } ~ rx.disposeBag
     }
 
     // https://stackoverflow.com/questions/9368654/cannot-seem-to-setenabledno-on-nsmenuitem

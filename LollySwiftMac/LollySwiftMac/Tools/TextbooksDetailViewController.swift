@@ -8,6 +8,7 @@
 
 import Cocoa
 import RxSwift
+import NSObject_Rx
 
 class TextbooksDetailViewController: NSViewController {
 
@@ -21,8 +22,6 @@ class TextbooksDetailViewController: NSViewController {
     @IBOutlet weak var tfTextbookName: NSTextField!
     @IBOutlet weak var tfUnits: NSTextField!
     @IBOutlet weak var tfParts: NSTextField!
-
-    let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,11 +41,11 @@ class TextbooksDetailViewController: NSViewController {
         if isAdd {
             TextbooksViewModel.create(item: item).subscribe {
                 self.complete?()
-            }.disposed(by: disposeBag)
+            } ~ rx.disposeBag
         } else {
             TextbooksViewModel.update(item: item).subscribe {
                 self.complete?()
-            }.disposed(by: disposeBag)
+            } ~ rx.disposeBag
         }
         dismiss(self)
     }

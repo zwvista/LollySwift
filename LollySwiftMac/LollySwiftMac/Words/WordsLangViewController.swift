@@ -9,6 +9,7 @@
 import Cocoa
 import WebKit
 import RxSwift
+import NSObject_Rx
 
 class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
 
@@ -21,7 +22,7 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
     }
 
     override func settingsChanged() {
-        vm = WordsLangViewModel(settings: AppDelegate.theSettingsViewModel, disposeBag: disposeBag, needCopy: true) {
+        vm = WordsLangViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) {
             self.doRefresh()
         }
         super.settingsChanged()
@@ -52,7 +53,7 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
         let item = arrWords[row]
         WordsLangViewModel.update(item: item).subscribe {
             self.tvWords.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvWords.tableColumns.count))
-        }.disposed(by: disposeBag)
+        } ~ rx.disposeBag
     }
     
     override func addNewWord() {
@@ -65,7 +66,7 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
             self.tvWords.reloadData()
             self.tfNewWord.stringValue = ""
             self.newWord = ""
-        }).disposed(by: disposeBag)
+        }) ~ rx.disposeBag
     }
 
     // https://stackoverflow.com/questions/24219441/how-to-use-nstoolbar-in-xcode-6-and-storyboard
@@ -81,13 +82,13 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
         let item = arrWords[row]
         WordsLangViewModel.delete(item: item).subscribe {
             self.doRefresh()
-        }.disposed(by: disposeBag)
+        } ~ rx.disposeBag
     }
 
     @IBAction func refreshTableView(_ sender: AnyObject) {
         vm.reload().subscribe {
             self.doRefresh()
-        }.disposed(by: disposeBag)
+        } ~ rx.disposeBag
     }
 
     @IBAction func editWord(_ sender: AnyObject) {
@@ -107,14 +108,14 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
         let col = tvWords.tableColumns.firstIndex { $0.title == "NOTE" }!
         vm.getNote(index: tvWords.selectedRow).subscribe {
             self.tvWords.reloadData(forRowIndexes: [self.tvWords.selectedRow], columnIndexes: [col])
-        }.disposed(by: disposeBag)
+        } ~ rx.disposeBag
     }
     
     @IBAction func clearNote(_ sender: AnyObject) {
         let col = tvWords.tableColumns.firstIndex { $0.title == "NOTE" }!
         vm.clearNote(index: tvWords.selectedRow).subscribe {
             self.tvWords.reloadData(forRowIndexes: [self.tvWords.selectedRow], columnIndexes: [col])
-        }.disposed(by: disposeBag)
+        } ~ rx.disposeBag
     }
 
     // https://stackoverflow.com/questions/9368654/cannot-seem-to-setenabledno-on-nsmenuitem

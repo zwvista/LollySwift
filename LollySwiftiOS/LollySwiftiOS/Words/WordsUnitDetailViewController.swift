@@ -9,6 +9,7 @@
 import UIKit
 import DropDown
 import RxSwift
+import NSObject_Rx
 
 class WordsUnitDetailViewController: UITableViewController, UITextFieldDelegate {
 
@@ -29,8 +30,6 @@ class WordsUnitDetailViewController: UITableViewController, UITextFieldDelegate 
     let ddUnit = DropDown()
     let ddPart = DropDown()
     
-    let disposeBag = DisposeBag()
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -88,10 +87,10 @@ class WordsUnitDetailViewController: UITableViewController, UITextFieldDelegate 
                 vm.arrWords.append(item)
                 WordsUnitViewModel.create(item: item).subscribe(onNext: {
                     self.item.ID = $0
-                }).disposed(by: disposeBag)
+                }) ~ rx.disposeBag
             }
         } else {
-            WordsUnitViewModel.update(item: item).subscribe().disposed(by: disposeBag)
+            WordsUnitViewModel.update(item: item).subscribe() ~ rx.disposeBag
         }
     }
     

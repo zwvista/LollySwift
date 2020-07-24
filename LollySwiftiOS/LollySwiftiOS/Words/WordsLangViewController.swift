@@ -8,18 +8,17 @@
 
 import UIKit
 import RxSwift
+import NSObject_Rx
 
 class WordsLangViewController: WordsBaseViewController {
 
     var vm: WordsLangViewModel!
     var arrWords: [MLangWord] { searchController.isActive && searchBar.text != "" ? vm.arrWordsFiltered! : vm.arrWords }
-    
-    let disposeBag = DisposeBag()
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.view.showBlurLoader()
-        vm = WordsLangViewModel(settings: vmSettings, disposeBag: disposeBag, needCopy: false) {
+        vm = WordsLangViewModel(settings: vmSettings, needCopy: false) {
             self.setupSearchController(delegate: self)
             self.tableView.reloadData()
             self.view.removeBlurLoader()
@@ -39,7 +38,7 @@ class WordsLangViewController: WordsBaseViewController {
         let item = self.vm.arrWords[i]
         func delete() {
             self.yesNoAction(title: "delete", message: "Do you really want to delete the word \"\(item.WORD)\"?", yesHandler: { (action) in
-                WordsLangViewModel.delete(item: item).subscribe().disposed(by: self.disposeBag)
+                WordsLangViewModel.delete(item: item).subscribe() ~ self.rx.disposeBag
                 self.vm.arrWords.remove(at: i)
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }, noHandler: { (action) in
@@ -62,7 +61,7 @@ class WordsLangViewController: WordsBaseViewController {
                 let noteAction = UIAlertAction(title: "Retrieve Note", style: .default) { _ in
                     self.vm.getNote(index: indexPath.row).subscribe {
                         self.tableView.reloadRows(at: [indexPath], with: .fade)
-                        }.disposed(by: self.disposeBag)
+                    } ~ self.rx.disposeBag
                 }
                 alertController.addAction(noteAction)
             }

@@ -9,10 +9,10 @@
 import UIKit
 import RxSwift
 import DropDown
+import NSObject_Rx
 
 class WordsReviewViewController: UIViewController, UITextFieldDelegate {
     var vm: WordsReviewViewModel!
-    let disposeBag = DisposeBag()
 
     @IBOutlet weak var lblWordTarget: UILabel!
     @IBOutlet weak var lblNoteTarget: UILabel!
@@ -82,7 +82,7 @@ class WordsReviewViewController: UIViewController, UITextFieldDelegate {
             }
             vm.getTranslation().subscribe(onNext: {
                 self.tvTranslation.text = $0
-            }).disposed(by: disposeBag)
+            }) ~ rx.disposeBag
         } else {
             subscription?.dispose()
             tvTranslation.isHidden = true
@@ -96,13 +96,13 @@ class WordsReviewViewController: UIViewController, UITextFieldDelegate {
 //        subscription?.dispose()
 //        vm.newTest(shuffled: shuffled, levelge0only: levelge0only, groupSelected: 1, groupCount: 1).subscribe {
 //            self.doTest()
-//        }.disposed(by: disposeBag)
+//        } ~ rx.disposeBag
 //        btnCheck.setTitle(vm.isTestMode ? "Check" : "Next", for: .normal)
 //        if vm.mode == .reviewAuto {
 //            subscription = Observable<Int>.interval(vmSettings.USREVIEWINTERVAL.toDouble / 1000.0, scheduler: MainScheduler.instance).subscribe { _ in
 //                self.check(self)
 //            }
-//            subscription?.disposed(by: disposeBag)
+//            subscription? ~ rx.disposeBag
 //        }
     }
     
@@ -120,7 +120,7 @@ class WordsReviewViewController: UIViewController, UITextFieldDelegate {
                 lblIncorrect.isHidden = false
             }
             btnCheck.setTitle("Next", for: .normal)
-            vm.check(wordInput: tfWordInput.text!).subscribe().disposed(by: disposeBag)
+            vm.check(wordInput: tfWordInput.text!).subscribe() ~ rx.disposeBag
         } else {
             vm.next()
             doTest()

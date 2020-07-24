@@ -8,11 +8,11 @@
 
 import Cocoa
 import RxSwift
+import NSObject_Rx
 
 class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDelegate {
     var vm: WordsReviewViewModel!
     var vmSettings: SettingsViewModel { vm.vmSettings }
-    let disposeBag = DisposeBag()
 
     @IBOutlet weak var tfIndex: NSTextField!
     @IBOutlet weak var tfCorrect: NSTextField!
@@ -78,7 +78,7 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
             }
             vm.getTranslation().subscribe(onNext: {
                 self.tfTranslation.stringValue = $0
-            }).disposed(by: disposeBag)
+            }) ~ rx.disposeBag
         } else {
             subscription?.dispose()
         }
@@ -100,13 +100,13 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
             self.subscription?.dispose()
             self.vm.newTest(shuffled: self.shuffled, levelge0only: self.levelge0only, groupSelected: self.groupSelected, groupCount: self.groupCount).subscribe {
                 self.doTest()
-            }.disposed(by: self.disposeBag)
+            } ~ self.rx.disposeBag
             self.btnCheck.title = self.vm.isTestMode ? "Check" : "Next"
             if self.vm.mode == .reviewAuto {
                 self.subscription = Observable<Int>.interval(self.vmSettings.USREVIEWINTERVAL.toDouble / 1000.0, scheduler: MainScheduler.instance).subscribe { _ in
                     self.check(self)
                 }
-                self.subscription?.disposed(by: self.disposeBag)
+                self.subscription?.disposed(by: self.rx.disposeBag)
             }
         }
         self.presentAsSheet(optionsVC)
@@ -134,7 +134,7 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
                 tfIncorrect.isHidden = false
             }
             btnCheck.title = "Next"
-            vm.check(wordInput: tfWordInput.stringValue).subscribe().disposed(by: disposeBag)
+            vm.check(wordInput: tfWordInput.stringValue).subscribe() ~ rx.disposeBag
         } else {
             vm.next()
             doTest()

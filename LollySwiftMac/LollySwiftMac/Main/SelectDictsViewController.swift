@@ -8,6 +8,7 @@
 
 import Cocoa
 import RxSwift
+import NSObject_Rx
 
 class SelectDictsViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 
@@ -18,7 +19,6 @@ class SelectDictsViewController: NSViewController, NSTableViewDataSource, NSTabl
     @IBOutlet weak var btnRemoveAll: NSButton!
     
     var vm: SettingsViewModel { AppDelegate.theSettingsViewModel }
-    let disposeBag = DisposeBag()
     var dictsAvailable: [MDictionary]!
     var dictsSelected: [MDictionary]!
     var complete: (() -> Void)?
@@ -122,7 +122,7 @@ class SelectDictsViewController: NSViewController, NSTableViewDataSource, NSTabl
         vm.selectedDictsReference = dictsSelected
         vm.updateDictsReference().subscribe {
             self.complete?()
-        }.disposed(by: disposeBag)
+        } ~ rx.disposeBag
         dismiss(self)
     }
     

@@ -8,6 +8,7 @@
 
 import Cocoa
 import RxSwift
+import NSObject_Rx
 
 @objcMembers
 class PatternsDetailViewController: NSViewController {
@@ -21,8 +22,6 @@ class PatternsDetailViewController: NSViewController {
     @IBOutlet weak var tfPattern: NSTextField!
     @IBOutlet weak var tfNote: NSTextField!
     @IBOutlet weak var tfTags: NSTextField!
-
-    let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,11 +43,11 @@ class PatternsDetailViewController: NSViewController {
             PatternsViewModel.create(item: item).subscribe(onNext: {
                 self.item.ID = $0
                 self.complete?()
-            }).disposed(by: disposeBag)
+            }) ~ rx.disposeBag
         } else {
             PatternsViewModel.update(item: item).subscribe {
                 self.complete?()
-            }.disposed(by: disposeBag)
+            } ~ rx.disposeBag
         }
         dismiss(self)
     }

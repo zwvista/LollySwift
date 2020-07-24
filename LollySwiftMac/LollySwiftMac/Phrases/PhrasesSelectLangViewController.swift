@@ -8,6 +8,7 @@
 
 import Cocoa
 import RxSwift
+import NSObject_Rx
 
 class PhrasesSelectLangViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate {
 
@@ -24,15 +25,13 @@ class PhrasesSelectLangViewController: NSViewController, NSTableViewDataSource, 
     @IBOutlet weak var scPhraseScope: NSSegmentedControl!
     @IBOutlet weak var tableView: NSTableView!
     
-    let disposeBag = DisposeBag()
-
     override func viewDidLoad() {
         super.viewDidLoad()
         reload(self)
     }
     
     @IBAction func reload(_ sender: AnyObject) {
-        vm = PhrasesLangViewModel(settings: AppDelegate.theSettingsViewModel, disposeBag: disposeBag, needCopy: true) {
+        vm = PhrasesLangViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) {
             self.filterPhrase(self)
         }
     }
@@ -101,6 +100,6 @@ class PhrasesSelectLangViewController: NSViewController, NSTableViewDataSource, 
         o.subscribe {
             self.complete?()
             self.dismiss(self)
-        }.disposed(by: disposeBag)
+        } ~ rx.disposeBag
     }
 }

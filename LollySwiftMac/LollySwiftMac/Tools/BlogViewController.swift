@@ -9,6 +9,7 @@
 import Cocoa
 import WebKit
 import RxSwift
+import NSObject_Rx
 
 class BlogViewController: NSViewController, NSMenuItemValidation  {
 
@@ -20,11 +21,9 @@ class BlogViewController: NSViewController, NSMenuItemValidation  {
     var wc: BlogWindowController { view.window!.windowController as! BlogWindowController }
     var vmBlog: BlogViewModel!
 
-    let disposeBag = DisposeBag()
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        vmBlog = BlogViewModel(settings: vm, disposeBag: disposeBag)
+        vmBlog = BlogViewModel(settings: vm)
     }
 
     @IBAction func htmlToMarked(_ sender: AnyObject) {

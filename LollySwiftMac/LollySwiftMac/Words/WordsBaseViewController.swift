@@ -8,6 +8,7 @@
 
 import Cocoa
 import RxSwift
+import NSObject_Rx
 
 class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSSearchFieldDelegate, LollyProtocol {
     
@@ -21,7 +22,6 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     @IBOutlet weak var tabView: NSTabView!
     
     var vmSettings: SettingsViewModel! { nil }
-    let disposeBag = DisposeBag()
     
     var selectedDictReferenceIndex = 0
     @objc var newWord = ""
@@ -237,7 +237,7 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
         item.LEVEL = newLevel
         levelChanged(row: row).subscribe(onNext: {
             if $0 != 0 { self.tvWords.reloadData() }
-        }).disposed(by: disposeBag)
+        }) ~ rx.disposeBag
     }
 
     @IBAction func incLevel(_ sender: AnyObject) {

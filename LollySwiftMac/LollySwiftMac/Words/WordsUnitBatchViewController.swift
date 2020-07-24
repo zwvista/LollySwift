@@ -8,6 +8,7 @@
 
 import Cocoa
 import RxSwift
+import NSObject_Rx
 
 class WordsUnitBatchViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 
@@ -23,7 +24,6 @@ class WordsUnitBatchViewController: NSViewController, NSTableViewDataSource, NST
     @IBOutlet weak var tfLevel: NSTextField!
     @IBOutlet weak var tableView: NSTableView!
     
-    let disposeBag = DisposeBag()
     @objc var unitChecked = false
     @objc var partChecked = false
     @objc var seqnumChecked = false
@@ -96,7 +96,7 @@ class WordsUnitBatchViewController: NSViewController, NSTableViewDataSource, NST
         o.subscribe {
             self.complete?()
             self.dismiss(self)
-        }.disposed(by: disposeBag)
+        } ~ rx.disposeBag
     }
 
     deinit {

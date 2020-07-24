@@ -8,6 +8,7 @@
 
 import Cocoa
 import RxSwift
+import NSObject_Rx
 
 @objcMembers
 class PhrasesTextbookDetailViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
@@ -30,13 +31,11 @@ class PhrasesTextbookDetailViewController: NSViewController, NSTableViewDataSour
     @IBOutlet weak var tfTranslation: NSTextField!
     @IBOutlet weak var tableView: NSTableView!
 
-    let disposeBag = DisposeBag()
-
     override func viewDidLoad() {
         super.viewDidLoad()
         acUnits.content = item.textbook.arrUnits
         acParts.content = item.textbook.arrParts
-        vmSingle = SinglePhraseViewModel(phrase: item.PHRASE, settings: vm.vmSettings, disposeBag: disposeBag) {
+        vmSingle = SinglePhraseViewModel(phrase: item.PHRASE, settings: vm.vmSettings) {
             self.tableView.reloadData()
         }
     }
@@ -53,7 +52,7 @@ class PhrasesTextbookDetailViewController: NSViewController, NSTableViewDataSour
         item.PHRASE = vm.vmSettings.autoCorrectInput(text: item.PHRASE)
         PhrasesUnitViewModel.update(item: item).subscribe {
             self.complete?()
-        }.disposed(by: disposeBag)
+        } ~ rx.disposeBag
         dismiss(self)
     }
     

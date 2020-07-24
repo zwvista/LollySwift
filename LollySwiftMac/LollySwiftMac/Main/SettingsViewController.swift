@@ -8,6 +8,7 @@
 
 import Cocoa
 import RxSwift
+import NSObject_Rx
 
 @objcMembers
 class SettingsViewController: NSViewController, SettingsViewModelDelegate, NSTableViewDataSource, NSTableViewDelegate {
@@ -38,12 +39,10 @@ class SettingsViewController: NSViewController, SettingsViewModelDelegate, NSTab
 
     var vm: SettingsViewModel { AppDelegate.theSettingsViewModel }
 
-    let disposeBag = DisposeBag()
-
     override func viewDidLoad() {
         super.viewDidLoad()
         vm.delegate = self
-        vm.getData().subscribe().disposed(by: disposeBag)
+        vm.getData().subscribe() ~ rx.disposeBag
     }
     
     @IBAction func close(_ sender: AnyObject) {
@@ -60,31 +59,31 @@ class SettingsViewController: NSViewController, SettingsViewModelDelegate, NSTab
     }
     
     @IBAction func langSelected(_ sender: AnyObject) {
-        vm.setSelectedLang(vm.selectedLang).subscribe().disposed(by: disposeBag)
+        vm.setSelectedLang(vm.selectedLang).subscribe() ~ rx.disposeBag
     }
     
     @IBAction func voiceSelected(_ sender: AnyObject) {
-        vm.updateMacVoice().subscribe().disposed(by: disposeBag)
+        vm.updateMacVoice().subscribe() ~ rx.disposeBag
     }
     
     @IBAction func dictNoteSelected(_ sender: AnyObject) {
-        vm.updateDictNote().subscribe().disposed(by: disposeBag)
+        vm.updateDictNote().subscribe() ~ rx.disposeBag
     }
     
     @IBAction func dictTranslationSelected(_ sender: AnyObject) {
-        vm.updateDictTranslation().subscribe().disposed(by: disposeBag)
+        vm.updateDictTranslation().subscribe() ~ rx.disposeBag
     }
 
     @IBAction func textbookSelected(_ sender: AnyObject) {
-        vm.updateTextbook().subscribe().disposed(by: disposeBag)
+        vm.updateTextbook().subscribe() ~ rx.disposeBag
     }
     
     @IBAction func unitFromSelected(_ sender: AnyObject) {
-        vm.updateUnitFrom().subscribe().disposed(by: disposeBag)
+        vm.updateUnitFrom().subscribe() ~ rx.disposeBag
     }
     
     @IBAction func partFromSelected(_ sender: AnyObject) {
-        vm.updatePartFrom().subscribe().disposed(by: disposeBag)
+        vm.updatePartFrom().subscribe() ~ rx.disposeBag
     }
     
     @IBAction func scToTypeClicked(_ sender: AnyObject) {
@@ -99,23 +98,23 @@ class SettingsViewController: NSViewController, SettingsViewModelDelegate, NSTab
         btnPrevious.title = "Previous " + t
         btnNext.title = "Next " + t
         pubPartFrom.isEnabled = b2 && !vm.isSinglePart
-        vm.updateToType().subscribe().disposed(by: disposeBag)
+        vm.updateToType().subscribe() ~ rx.disposeBag
     }
 
     @IBAction func previousUnitPart(_ sender: AnyObject) {
-        vm.previousUnitPart().subscribe().disposed(by: disposeBag)
+        vm.previousUnitPart().subscribe() ~ rx.disposeBag
     }
 
     @IBAction func nextUnitPart(_ sender: AnyObject) {
-        vm.nextUnitPart().subscribe().disposed(by: disposeBag)
+        vm.nextUnitPart().subscribe() ~ rx.disposeBag
     }
 
     @IBAction func unitToSelected(_ sender: AnyObject) {
-        vm.updateUnitTo().subscribe().disposed(by: disposeBag)
+        vm.updateUnitTo().subscribe() ~ rx.disposeBag
     }
     
     @IBAction func partToSelected(_ sender: AnyObject) {
-        vm.updatePartTo().subscribe().disposed(by: disposeBag)
+        vm.updatePartTo().subscribe() ~ rx.disposeBag
     }
     
     func onGetData() {

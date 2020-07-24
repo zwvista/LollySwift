@@ -10,6 +10,7 @@ import UIKit
 import WebKit
 import DropDown
 import RxSwift
+import NSObject_Rx
 
 class WordsDictViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, UIGestureRecognizerDelegate {
 
@@ -21,7 +22,6 @@ class WordsDictViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
     let vm = WordsDictViewModel(settings: vmSettings, needCopy: false) {}
     let ddWord = DropDown(), ddDictReference = DropDown()
     
-    let disposeBag = DisposeBag()
     var dictStatus = DictWebViewStatus.ready
 
     override func viewDidLoad() {
@@ -52,7 +52,7 @@ class WordsDictViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
             vmSettings.selectedDictReference = vmSettings.arrDictsReference[index]
             vmSettings.updateDictReference().subscribe {
                 self.selectDictChanged()
-            }.disposed(by: self.disposeBag)
+            } ~ self.rx.disposeBag
         }
         
         currentWordChanged()
@@ -76,7 +76,7 @@ class WordsDictViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
                 print(html)
                 let str = item2.htmlString(html, word: self.vm.currentWord, useTemplate2: true)
                 self.wvDict.loadHTMLString(str, baseURL: nil)
-            }).disposed(by: disposeBag)
+            }) ~ rx.disposeBag
         } else {
             wvDict.load(URLRequest(url: URL(string: url)!))
             if item2.AUTOMATION != nil {

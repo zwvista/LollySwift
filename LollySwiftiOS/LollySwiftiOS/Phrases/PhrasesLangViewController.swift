@@ -8,18 +8,17 @@
 
 import UIKit
 import RxSwift
+import NSObject_Rx
 
 class PhrasesLangViewController: PhrasesBaseViewController {
     
     var vm: PhrasesLangViewModel!
     var arrPhrases: [MLangPhrase] { searchController.isActive && searchBar.text != "" ? vm.arrPhrasesFiltered! : vm.arrPhrases }
     
-    let disposeBag = DisposeBag()
-
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.view.showBlurLoader()
-        vm = PhrasesLangViewModel(settings: vmSettings, disposeBag: disposeBag, needCopy: false) {
+        vm = PhrasesLangViewModel(settings: vmSettings, needCopy: false) {
             self.setupSearchController(delegate: self)
             self.tableView.reloadData()
             self.view.removeBlurLoader()
@@ -39,7 +38,7 @@ class PhrasesLangViewController: PhrasesBaseViewController {
         let item = self.vm.arrPhrases[i]
         func delete() {
             self.yesNoAction(title: "delete", message: "Do you really want to delete the phrase \"\(item.PHRASE)\"?", yesHandler: { (action) in
-                PhrasesLangViewModel.delete(item.ID).subscribe().disposed(by: self.disposeBag)
+                PhrasesLangViewModel.delete(item.ID).subscribe() ~ self.rx.disposeBag
                 self.vm.arrPhrases.remove(at: i)
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }, noHandler: { (action) in

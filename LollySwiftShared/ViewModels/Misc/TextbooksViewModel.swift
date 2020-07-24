@@ -8,20 +8,19 @@
 
 import Foundation
 import RxSwift
+import NSObject_Rx
 
 class TextbooksViewModel: NSObject {
     var vmSettings: SettingsViewModel
-    let disposeBag: DisposeBag!
     var arrTextbooks = [MTextbook]()
     
-    init(settings: SettingsViewModel, disposeBag: DisposeBag, needCopy: Bool, complete: @escaping () -> ()) {
+    init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> ()) {
         self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
-        self.disposeBag = disposeBag
         super.init()
         MTextbook.getDataByLang(settings.selectedLang.ID).subscribe(onNext: {
             self.arrTextbooks = $0
             complete()
-        }).disposed(by: disposeBag)
+        }) ~ rx.disposeBag
     }
     
     static func update(item: MTextbook) -> Observable<()> {

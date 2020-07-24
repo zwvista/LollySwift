@@ -11,17 +11,15 @@ import RxSwift
 
 class DictsViewModel: NSObject {
     var vmSettings: SettingsViewModel
-    let disposeBag: DisposeBag!
     var arrDicts = [MDictionary]()
     
-    init(settings: SettingsViewModel, disposeBag: DisposeBag, complete: @escaping () -> ()) {
+    init(settings: SettingsViewModel, complete: @escaping () -> ()) {
         vmSettings = settings
-        self.disposeBag = disposeBag
         super.init()
         MDictionary.getDictsByLang(settings.selectedLang.ID).subscribe(onNext: {
             self.arrDicts = $0
             complete()
-        }).disposed(by: disposeBag)
+        }) ~ rx.disposeBag
     }
     
     static func update(item: MDictionary) -> Observable<()> {

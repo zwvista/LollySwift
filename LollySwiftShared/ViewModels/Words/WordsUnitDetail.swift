@@ -17,14 +17,13 @@ class WordsUnitDetailViewModel: NSObject {
     var disposeBag: DisposeBag!
     var isAdd: Bool!
 
-    init(vm: WordsUnitViewModel, item: MUnitWord, disposeBag: DisposeBag, okComplete: (() -> Void)?, initComplete: @escaping () -> ()) {
+    init(vm: WordsUnitViewModel, item: MUnitWord, okComplete: (() -> Void)?, initComplete: @escaping () -> ()) {
         self.vm = vm
         self.item = item
-        self.disposeBag = disposeBag
         self.complete = okComplete
         isAdd = item.ID == 0
         guard !isAdd else {return}
-        vmSingle = SingleWordViewModel(word: item.WORD, settings: vm.vmSettings, disposeBag: disposeBag, complete: initComplete)
+        vmSingle = SingleWordViewModel(word: item.WORD, settings: vm.vmSettings, complete: initComplete)
     }
     
     func onOK() {
@@ -34,11 +33,11 @@ class WordsUnitDetailViewModel: NSObject {
             WordsUnitViewModel.create(item: item).subscribe(onNext: {
                 self.item.ID = $0
                 self.complete?()
-            }).disposed(by: disposeBag)
+            }) ~ rx.disposeBag
         } else {
             WordsUnitViewModel.update(item: item).subscribe {
                 self.complete?()
-            }.disposed(by: disposeBag)
+            } ~ rx.disposeBag
         }
     }
 }

@@ -9,6 +9,8 @@
 import Cocoa
 import WebKit
 import RxSwift
+import NSObject_Rx
+import NSObject_Rx
 
 class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NSToolbarItemValidation {
 
@@ -24,7 +26,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        vmReview = EmbeddedReviewViewModel(disposeBag: disposeBag)
+        vmReview = EmbeddedReviewViewModel()
         tvWords.registerForDraggedTypes([tableRowDragType])
     }
     
@@ -44,7 +46,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     }
 
     override func settingsChanged() {
-        vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: true, disposeBag: disposeBag, needCopy: true) {
+        vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: true, needCopy: true) {
             self.doRefresh()
         }
         super.settingsChanged()
@@ -73,13 +75,13 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
         let item = arrWords[row]
         WordsUnitViewModel.update(item: item).subscribe {
             self.tvWords.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvWords.tableColumns.count))
-        }.disposed(by: disposeBag)
+        } ~ rx.disposeBag
     }
     
     override func searchPhrases() {
         vm.searchPhrases(wordid: selectedWordID).subscribe {
             self.tvPhrases.reloadData()
-        }.disposed(by: disposeBag)
+        } ~ rx.disposeBag
     }
 
     func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
@@ -146,7 +148,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
             self.tvWords.reloadData()
             self.tvWords.selectRowIndexes(IndexSet(integer: self.arrWords.count - 1), byExtendingSelection: false)
             self.responder = self.tfNewWord
-        }).disposed(by: disposeBag)
+        }) ~ rx.disposeBag
     }
 
     // https://stackoverflow.com/questions/24219441/how-to-use-nstoolbar-in-xcode-6-and-storyboard
@@ -162,13 +164,13 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
         let item = arrWords[row]
         WordsUnitViewModel.delete(item: item).subscribe{
             self.doRefresh()
-        }.disposed(by: disposeBag)
+        } ~ rx.disposeBag
     }
     
     @IBAction func refreshTableView(_ sender: AnyObject) {
         vm.reload().subscribe {
             self.doRefresh()
-        }.disposed(by: disposeBag)
+        } ~ rx.disposeBag
     }
     
     @IBAction func doubleAction(_ sender: AnyObject) {
@@ -207,7 +209,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
         let col = tvWords.tableColumns.firstIndex { $0.title == "NOTE" }!
         vm.getNote(index: tvWords.selectedRow).subscribe {
             self.tvWords.reloadData(forRowIndexes: [self.tvWords.selectedRow], columnIndexes: [col])
-        }.disposed(by: disposeBag)
+        } ~ rx.disposeBag
     }
 
     @IBAction func getNotes(_ sender: AnyObject) {
@@ -225,7 +227,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
         let col = tvWords.tableColumns.firstIndex { $0.title == "NOTE" }!
         vm.clearNote(index: tvWords.selectedRow).subscribe {
             self.tvWords.reloadData(forRowIndexes: [self.tvWords.selectedRow], columnIndexes: [col])
-        }.disposed(by: disposeBag)
+        } ~ rx.disposeBag
     }
     
     @IBAction func clearNotes(_ sender: AnyObject) {
@@ -236,7 +238,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 // self.tableView.reloadData()
             }
-        }.disposed(by: disposeBag)
+        } ~ rx.disposeBag
     }
 
     @IBAction func filterWord(_ sender: AnyObject) {
@@ -247,13 +249,13 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     @IBAction func previousUnitPart(_ sender: AnyObject) {
         vmSettings.previousUnitPart().concat(vm.reload()).subscribe {
             self.doRefresh()
-        }.disposed(by: disposeBag)
+        } ~ rx.disposeBag
     }
     
     @IBAction func nextUnitPart(_ sender: AnyObject) {
         vmSettings.nextUnitPart().concat(vm.reload()).subscribe {
             self.doRefresh()
-        }.disposed(by: disposeBag)
+        } ~ rx.disposeBag
     }
     
     @IBAction func toggleToType(_ sender: AnyObject) {
@@ -261,7 +263,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
         let part = row == -1 ? vmSettings.arrParts[0].value : arrWords[row].PART
         vmSettings.toggleToType(part: part).concat(vm.reload()).subscribe {
             self.doRefresh()
-        }.disposed(by: disposeBag)
+        } ~ rx.disposeBag
     }
 
     override func updateStatusText() {

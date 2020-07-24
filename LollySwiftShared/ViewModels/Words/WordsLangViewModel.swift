@@ -8,22 +8,21 @@
 
 import Foundation
 import RxSwift
+import NSObject_Rx
 
 class WordsLangViewModel: NSObject {
     var vmSettings: SettingsViewModel
     var vmNote: NoteViewModel!
     var mDictNote: MDictionary { vmNote.mDictNote }
-    let disposeBag: DisposeBag!
     var arrWords = [MLangWord]()
     var arrWordsFiltered: [MLangWord]?
     var arrPhrases = [MLangPhrase]()
 
-    public init(settings: SettingsViewModel, disposeBag: DisposeBag, needCopy: Bool, complete: @escaping () -> ()) {
+    public init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> ()) {
         self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
-        self.disposeBag = disposeBag
-        vmNote = NoteViewModel(settings: vmSettings, disposeBag: disposeBag)
+        vmNote = NoteViewModel(settings: vmSettings)
         super.init()
-        reload().subscribe { complete() }.disposed(by: disposeBag)
+        reload().subscribe { complete() } ~ rx.disposeBag
     }
     
     func reload() -> Observable<()> {

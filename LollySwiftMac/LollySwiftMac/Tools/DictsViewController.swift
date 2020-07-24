@@ -8,13 +8,13 @@
 
 import Cocoa
 import RxSwift
+import NSObject_Rx
 
 class DictsViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate {
     
     @IBOutlet weak var tableView: NSTableView!
 
     var vm: DictsViewModel!
-    let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +26,7 @@ class DictsViewController: NSViewController, LollyProtocol, NSTableViewDataSourc
     }
     
     @IBAction func refreshTableView(_ sender: Any) {
-        vm = DictsViewModel(settings: AppDelegate.theSettingsViewModel, disposeBag: disposeBag) {
+        vm = DictsViewModel(settings: AppDelegate.theSettingsViewModel) {
             self.tableView.reloadData()
         }
     }
@@ -72,6 +72,6 @@ class DictsViewController: NSViewController, LollyProtocol, NSTableViewDataSourc
         item.setValue(newValue, forKey: key)
         DictsViewModel.update(item: item).subscribe {
             self.tableView.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count))
-        }.disposed(by: disposeBag)
+        } ~ rx.disposeBag
     }
 }

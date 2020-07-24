@@ -8,13 +8,13 @@
 
 import Cocoa
 import RxSwift
+import NSObject_Rx
 
 class TextbooksViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate {
     
     @IBOutlet weak var tableView: NSTableView!
 
     var vm: TextbooksViewModel!
-    let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +26,7 @@ class TextbooksViewController: NSViewController, LollyProtocol, NSTableViewDataS
     }
     
     @IBAction func refreshTableView(_ sender: AnyObject) {
-        vm = TextbooksViewModel(settings: AppDelegate.theSettingsViewModel, disposeBag: disposeBag, needCopy: true) {
+        vm = TextbooksViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) {
             self.tableView.reloadData()
         }
     }
@@ -72,6 +72,6 @@ class TextbooksViewController: NSViewController, LollyProtocol, NSTableViewDataS
         item.setValue(newValue, forKey: key)
         TextbooksViewModel.update(item: item).subscribe {
             self.tableView.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count))
-        }.disposed(by: disposeBag)
+        } ~ rx.disposeBag
     }
 }

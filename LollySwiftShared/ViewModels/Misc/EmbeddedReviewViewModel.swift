@@ -8,16 +8,12 @@
 
 import Foundation
 import RxSwift
+import NSObject_Rx
 
-class EmbeddedReviewViewModel {
+class EmbeddedReviewViewModel: NSObject {
     var shuffled = false
     var levelge0only = true
     var subscription: Disposable? = nil
-    let disposeBag: DisposeBag!
-
-    init(disposeBag: DisposeBag) {
-        self.disposeBag = disposeBag
-    }
 
     func stop() {
         subscription?.dispose()
@@ -35,6 +31,6 @@ class EmbeddedReviewViewModel {
                 self.stop()
             }
         }
-        subscription?.disposed(by: disposeBag)
+        subscription?.disposed(by: rx.disposeBag)
     }
 }

@@ -8,6 +8,7 @@
 
 import Cocoa
 import RxSwift
+import NSObject_Rx
 
 class PhrasesSelectUnitViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate {
 
@@ -27,15 +28,13 @@ class PhrasesSelectUnitViewController: NSViewController, NSTableViewDataSource, 
     @IBOutlet weak var scPhraseScope: NSSegmentedControl!
     @IBOutlet weak var tableView: NSTableView!
     
-    let disposeBag = DisposeBag()
-
     override func viewDidLoad() {
         super.viewDidLoad()
         reload(self)
     }
     
     @IBAction func reload(_ sender: AnyObject) {
-        vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: scPhraseScope.selectedSegment == 0, disposeBag: disposeBag, needCopy: true) {
+        vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: scPhraseScope.selectedSegment == 0, needCopy: true) {
             self.acTextbooks.content = self.vmSettings.arrTextbookFilters
             self.filterPhrase(self)
         }
@@ -105,6 +104,6 @@ class PhrasesSelectUnitViewController: NSViewController, NSTableViewDataSource, 
         o.subscribe {
             self.complete?()
             self.dismiss(self)
-        }.disposed(by: disposeBag)
+        } ~ rx.disposeBag
     }
 }

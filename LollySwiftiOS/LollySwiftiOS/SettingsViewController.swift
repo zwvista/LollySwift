@@ -9,6 +9,7 @@
 import UIKit
 import DropDown
 import RxSwift
+import NSObject_Rx
 
 class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
     @IBOutlet weak var langCell: UITableViewCell!
@@ -47,64 +48,62 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
     
     var vm: SettingsViewModel { vmSettings }
     
-    let disposeBag = DisposeBag()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         vm.delegate = self
-        vm.getData().subscribe().disposed(by: disposeBag)
+        vm.getData().subscribe() ~ rx.disposeBag
 
         ddLang.anchorView = langCell
         ddLang.selectionAction = { [unowned self] (index: Int, item: String) in
             guard index != self.vm.selectedLangIndex else {return}
-            self.vm.setSelectedLang(self.vm.arrLanguages[index]).subscribe().disposed(by: self.disposeBag)
+            self.vm.setSelectedLang(self.vm.arrLanguages[index]).subscribe() ~ self.rx.disposeBag
         }
 
         ddVoice.anchorView = voiceCell
         ddVoice.selectionAction = { [unowned self] (index: Int, item: String) in
             guard index != self.vm.selectediOSVoiceIndex else {return}
             self.vm.selectediOSVoice = self.vm.arriOSVoices[index]
-            self.vm.updateiOSVoice().subscribe().disposed(by: self.disposeBag)
+            self.vm.updateiOSVoice().subscribe() ~ self.rx.disposeBag
         }
 
         ddDictReference.anchorView = dictItemCell
         ddDictReference.selectionAction = { [unowned self] (index: Int, item: String) in
             guard index != self.vm.selectedDictReferenceIndex else {return}
             self.vm.selectedDictReference = self.vm.arrDictsReference[index]
-            self.vm.updateDictReference().subscribe().disposed(by: self.disposeBag)
+            self.vm.updateDictReference().subscribe() ~ self.rx.disposeBag
         }
 
         ddDictNote.anchorView = dictNoteCell
         ddDictNote.selectionAction = { [unowned self] (index: Int, item: String) in
             guard index != self.vm.selectedDictNoteIndex else {return}
             self.vm.selectedDictNote = self.vm.arrDictsNote[index]
-            self.vm.updateDictNote().subscribe().disposed(by: self.disposeBag)
+            self.vm.updateDictNote().subscribe() ~ self.rx.disposeBag
         }
 
         ddDictTranslation.anchorView = dictTranslationCell
         ddDictTranslation.selectionAction = { [unowned self] (index: Int, item: String) in
             guard index != self.vm.selectedDictTranslationIndex else {return}
             self.vm.selectedDictTranslation = self.vm.arrDictsTranslation[index]
-            self.vm.updateDictTranslation().subscribe().disposed(by: self.disposeBag)
+            self.vm.updateDictTranslation().subscribe() ~ self.rx.disposeBag
         }
 
         ddTextbook.anchorView = textbookCell
         ddTextbook.selectionAction = { [unowned self] (index: Int, item: String) in
             guard index != self.vm.selectedTextbookIndex else {return}
             self.vm.selectedTextbook = self.vm.arrTextbooks[index]
-            self.vm.updateTextbook().subscribe().disposed(by: self.disposeBag)
+            self.vm.updateTextbook().subscribe() ~ self.rx.disposeBag
         }
 
         ddUnitFrom.anchorView = unitFromCell
         ddUnitFrom.selectionAction = { [unowned self] (index: Int, item: String) in
             self.vm.USUNITFROM = self.vm.arrUnits[index].value
-            self.vm.updateUnitFrom().subscribe().disposed(by: self.disposeBag)
+            self.vm.updateUnitFrom().subscribe() ~ self.rx.disposeBag
         }
 
         ddPartFrom.anchorView = partFromCell
         ddPartFrom.selectionAction = { [unowned self] (index: Int, item: String) in
             self.vm.USPARTFROM = self.vm.arrParts[index].value
-            self.vm.updatePartFrom().subscribe().disposed(by: self.disposeBag)
+            self.vm.updatePartFrom().subscribe() ~ self.rx.disposeBag
         }
         
         ddToType.dataSource = vm.arrToTypes
@@ -122,19 +121,19 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
             let b2 = self.vm.toType != .unit
             self.lblPartFrom.isEnabled = b2 && !self.vm.isSinglePart
             self.lblPartFromTitle.isEnabled = self.lblPartFrom.isEnabled
-            self.vm.updateToType().subscribe().disposed(by: self.disposeBag)
+            self.vm.updateToType().subscribe() ~ self.rx.disposeBag
         }
 
         ddUnitTo.anchorView = unitToCell
         ddUnitTo.selectionAction = { [unowned self] (index: Int, item: String) in
             self.vm.USUNITTO = self.vm.arrUnits[index].value
-            self.vm.updateUnitTo().subscribe().disposed(by: self.disposeBag)
+            self.vm.updateUnitTo().subscribe() ~ self.rx.disposeBag
         }
 
         ddPartTo.anchorView = partToCell
         ddPartTo.selectionAction = { [unowned self] (index: Int, item: String) in
             self.vm.USPARTTO = self.vm.arrParts[index].value
-            self.vm.updatePartTo().subscribe().disposed(by: self.disposeBag)
+            self.vm.updatePartTo().subscribe() ~ self.rx.disposeBag
         }
     }
     
@@ -258,11 +257,11 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
     }
 
     @IBAction func previousUnitPart(_ sender: AnyObject) {
-        vm.previousUnitPart().subscribe().disposed(by: disposeBag)
+        vm.previousUnitPart().subscribe() ~ rx.disposeBag
     }
     
     @IBAction func nextUnitPart(_ sender: AnyObject) {
-        vm.nextUnitPart().subscribe().disposed(by: disposeBag)
+        vm.nextUnitPart().subscribe() ~ rx.disposeBag
     }
 
     func onUpdateUnitFrom() {

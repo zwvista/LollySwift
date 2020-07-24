@@ -9,16 +9,15 @@
 import Foundation
 import Regex
 import RxSwift
+import NSObject_Rx
 
 class BlogViewModel: NSObject {
     
     var vmSettings: SettingsViewModel
     var vmNote: NoteViewModel!
-    let disposeBag: DisposeBag!
-    init(settings: SettingsViewModel, disposeBag: DisposeBag) {
+    init(settings: SettingsViewModel) {
         self.vmSettings = SettingsViewModel(settings)
-        self.disposeBag = disposeBag
-        vmNote = NoteViewModel(settings: settings, disposeBag: disposeBag)
+        vmNote = NoteViewModel(settings: settings)
     }
     
     private func html1With(_ s: String) -> String {
@@ -156,7 +155,7 @@ class BlogViewModel: NSObject {
                 let s22 = j == nil ? "" : f(String(note[j!...]))
                 let s2 = word + (s21 == word || s21.isEmpty ? "" : "（\(s21)）") + s22
                 arr[i] = "\(s1) \(s2)：\(s3)：\(s4 ?? "")"
-            }).disposed(by: self.disposeBag)
+            }) ~ self.rx.disposeBag
         }, allComplete: {
             let result = arr.joined(separator: "\n")
             complete(result)
