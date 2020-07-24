@@ -16,7 +16,7 @@ class WordsUnitDetailViewController: NSViewController, NSTableViewDataSource, NS
     var vmDetail: WordsUnitDetailViewModel!
     var complete: (() -> Void)?
     @objc var item: MUnitWord!
-    var arrWords: [MUnitWord] { vmDetail.vmSingle.arrWords }
+    var arrWords: [MUnitWord] { vmDetail.vmSingle?.arrWords ?? [MUnitWord]() }
 
     @IBOutlet weak var acUnits: NSArrayController!
     @IBOutlet weak var acParts: NSArrayController!
