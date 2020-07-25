@@ -76,12 +76,6 @@ class MUnitPhrase: NSObject, Codable, MPhraseProtocol {
         let url = "\(CommonApi.urlAPI)VUNITPHRASES?filter=LANGID,eq,\(langid)&order=TEXTBOOKID&order=UNIT&order=PART&order=SEQNUM"
         return setTextbook(RestApi.getRecords(url: url), arrTextbooks: arrTextbooks)
     }
-
-    static func getDataByPhraseId(_ phraseid: Int) -> Observable<[MUnitPhrase]> {
-        // SQL: SELECT * FROM VUNITPHRASES WHERE PHRASEID=?
-        let url = "\(CommonApi.urlAPI)VUNITPHRASES?filter=PHRASEID,eq,\(phraseid)"
-        return RestApi.getRecords(url: url)
-    }
     
     static func getDataById(_ id: Int, arrTextbooks: [MTextbook]) -> Observable<MUnitPhrase?> {
         // SQL: SELECT * FROM VUNITPHRASES WHERE ID=?
@@ -122,18 +116,5 @@ class MUnitPhrase: NSObject, Codable, MPhraseProtocol {
         let url = "\(CommonApi.urlSP)UNITPHRASES_DELETE"
         let parameters = try! item.toParameters()
         return RestApi.callSP(url: url, parameters: parameters).map { print($0) }
-    }
-    
-    static func deleteByPhraseId(_ phraseid: Int) -> Observable<()> {
-        // SQL: DELETE UNITPHRASES WHERE PHRASEID=?
-        return getDataByPhraseId(phraseid).flatMap { arr -> Observable<()> in
-            if arr.isEmpty {
-                return Observable.empty()
-            } else {
-                let ids = arr.map { $0.ID.description }.joined(separator: ",")
-                let url = "\(CommonApi.urlAPI)UNITPHRASES/\(ids)"
-                return RestApi.delete(url: url).map { print($0) }
-            }
-        }
     }
 }

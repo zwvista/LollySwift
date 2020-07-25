@@ -46,7 +46,8 @@ class PhrasesLangViewModel: NSObject {
     }
     
     static func delete(_ id: Int) -> Observable<()> {
-        Observable.zip(MLangPhrase.delete(id), MUnitPhrase.deleteByPhraseId(id), MWordPhrase.deleteByPhraseId(id), MPatternPhrase.deleteByPhraseId(id)).map {_ in }
+//        Observable.zip(MLangPhrase.delete(id), MUnitPhrase.deleteByPhraseId(id), MWordPhrase.deleteByPhraseId(id), MPatternPhrase.deleteByPhraseId(id)).map {_ in }
+        Observable.empty()
     }
 
     func newLangPhrase() -> MLangPhrase {

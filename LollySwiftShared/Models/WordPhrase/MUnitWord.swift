@@ -92,12 +92,6 @@ class MUnitWord: NSObject, Codable, MWordProtocol {
         let url = "\(CommonApi.urlAPI)VUNITWORDS?filter=LANGID,eq,\(langid)&order=TEXTBOOKID&order=UNIT&order=PART&order=SEQNUM"
         return setTextbook(RestApi.getRecords(url: url), arrTextbooks: arrTextbooks)
     }
-
-    static func getDataByWordId(_ wordid: Int) -> Observable<[MUnitWord]> {
-        // SQL: SELECT * FROM VUNITWORDS WHERE WORDID=?
-        let url = "\(CommonApi.urlAPI)VUNITWORDS?filter=WORDID,eq,\(wordid)"
-        return RestApi.getRecords(url: url)
-    }
     
     static func getDataById(_ id: Int, arrTextbooks: [MTextbook]) -> Observable<MUnitWord?> {
         // SQL: SELECT * FROM VUNITWORDS WHERE ID=?
