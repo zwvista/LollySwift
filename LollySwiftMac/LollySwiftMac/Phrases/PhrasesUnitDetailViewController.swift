@@ -54,12 +54,11 @@ class PhrasesUnitDetailViewController: NSViewController, NSTableViewDataSource, 
         item.PHRASE = vm.vmSettings.autoCorrectInput(text: item.PHRASE)
         if isAdd {
             vm.arrPhrases.append(item)
-            PhrasesUnitViewModel.create(item: item).subscribe(onNext: {
-                self.item.ID = $0
+            vm.create(item: item).subscribe {
                 self.complete?()
-            }) ~ rx.disposeBag
+            } ~ rx.disposeBag
         } else {
-            PhrasesUnitViewModel.update(item: item).subscribe {
+            vm.update(item: item).subscribe {
                 self.complete?()
             } ~ rx.disposeBag
         }

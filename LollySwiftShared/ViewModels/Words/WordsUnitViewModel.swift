@@ -79,13 +79,7 @@ class WordsUnitViewModel: NSObject {
     }
     
     static func delete(item: MUnitWord) -> Observable<()> {
-        let wordid = item.WORDID
-        return MUnitWord.delete(item.ID).concat(
-            Observable.zip(MUnitWord.getDataByWordId(wordid), MWordPhrase.getPhrasesByWordId(wordid)).flatMap {
-                !($0.0.isEmpty && $0.1.isEmpty) ? Observable.empty() :
-                Observable.zip(MLangWord.delete(item.WORDID), MWordFami.delete(item.FAMIID)).map{_ in}
-            }
-        )
+        MUnitWord.delete(item: item)
     }
 
     func reindex(complete: @escaping (Int) -> ()) {

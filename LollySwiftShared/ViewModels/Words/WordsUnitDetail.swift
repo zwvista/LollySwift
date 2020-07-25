@@ -30,9 +30,9 @@ class WordsUnitDetailViewModel: NSObject {
         item.WORD = vm.vmSettings.autoCorrectInput(text: item.WORD)
         if isAdd {
             vm.arrWords.append(item)
-            vm.create(item: item).subscribe(onNext: {
+            vm.create(item: item).subscribe {
                 self.complete?()
-            }) ~ rx.disposeBag
+            } ~ rx.disposeBag
         } else {
             vm.update(item: item).subscribe {
                 self.complete?()

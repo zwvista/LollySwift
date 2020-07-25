@@ -142,12 +142,12 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
         item.WORD = vmSettings.autoCorrectInput(text: newWord)
         tfNewWord.stringValue = ""
         newWord = ""
-        vm.create(item: item).subscribe(onNext: {
+        vm.create(item: item).subscribe {
             self.vm.arrWords.append(item)
             self.tvWords.reloadData()
             self.tvWords.selectRowIndexes(IndexSet(integer: self.arrWords.count - 1), byExtendingSelection: false)
             self.responder = self.tfNewWord
-        }) ~ rx.disposeBag
+        } ~ rx.disposeBag
     }
 
     // https://stackoverflow.com/questions/24219441/how-to-use-nstoolbar-in-xcode-6-and-storyboard

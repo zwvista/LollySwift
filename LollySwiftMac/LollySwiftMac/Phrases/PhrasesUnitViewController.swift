@@ -110,7 +110,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     
     override func endEditing(row: Int) {
         let item = arrPhrases[row]
-        PhrasesUnitViewModel.update(item: item).subscribe {
+        vm.update(item: item).subscribe {
             self.tableView.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count))
         } ~ rx.disposeBag
     }

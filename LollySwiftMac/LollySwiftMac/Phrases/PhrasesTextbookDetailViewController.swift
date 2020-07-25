@@ -50,7 +50,7 @@ class PhrasesTextbookDetailViewController: NSViewController, NSTableViewDataSour
         // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
         self.commitEditing()
         item.PHRASE = vm.vmSettings.autoCorrectInput(text: item.PHRASE)
-        PhrasesUnitViewModel.update(item: item).subscribe {
+        vm.update(item: item).subscribe {
             self.complete?()
         } ~ rx.disposeBag
         dismiss(self)

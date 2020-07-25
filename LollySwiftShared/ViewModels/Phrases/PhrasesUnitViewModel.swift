@@ -50,82 +50,26 @@ class PhrasesUnitViewModel: NSObject {
         MUnitPhrase.update(id, seqnum: seqnum)
     }
     
-    static func update(item: MUnitPhrase) -> Observable<()> {
-        let phraseid = item.PHRASEID
-        return MUnitPhrase.getDataByPhraseId(phraseid).flatMap { arrUnit -> Observable<Int> in
-            if arrUnit.isEmpty {
-                // non-existing phrase
-                return Observable.empty()
-            } else {
-                let itemLang = MLangPhrase(unititem: item)
-                return MLangPhrase.getDataById(phraseid).flatMap { arrLangOld -> Observable<Int> in
-                    if !arrLangOld.isEmpty && arrLangOld[0].PHRASE == item.PHRASE {
-                        // phrase intact
-                        return MLangPhrase.update(phraseid, translation: item.TRANSLATION ?? "").map { phraseid }
-                    } else {
-                        // phrase changed
-                        return MLangPhrase.getDataByLangPhrase(langid: item.LANGID, phrase: item.PHRASE).flatMap { arrLangNew -> Observable<Int> in
-                            func f() -> Observable<Int> {
-                                let itemLang = arrLangNew[0]
-                                let phraseid = itemLang.ID
-                                let b = itemLang.combineTranslation(item.TRANSLATION)
-                                item.TRANSLATION = itemLang.TRANSLATION
-                                return b ? MLangPhrase.update(phraseid, translation: item.TRANSLATION ?? "").map { phraseid } : Observable.just(phraseid)
-                            }
-                            if arrUnit.count == 1 {
-                                // exclusive
-                                if arrLangNew.isEmpty {
-                                    // new phrase
-                                    return MLangPhrase.update(item: itemLang).map { phraseid }
-                                } else {
-                                    // existing phrase
-                                    return MLangPhrase.delete(phraseid).flatMap { f() }
-                                }
-                            } else {
-                                if arrLangNew.isEmpty {
-                                    // new phrase
-                                    itemLang.ID = 0
-                                    return MLangPhrase.create(item: itemLang)
-                                } else {
-                                    // existing phrase
-                                    return f()
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }.flatMap { phraseid -> Observable<()> in
-            item.PHRASEID = phraseid
-            return MUnitPhrase.update(item: item)
+    func update(item: MUnitPhrase) -> Observable<()> {
+        MUnitPhrase.update(item: item).flatMap {
+            MUnitPhrase.getDataById(item.ID, arrTextbooks: self.vmSettings.arrTextbooks)
+        }.map {
+            guard let o = $0 else {return}
+            item.copy(from: o)
         }
     }
     
-    static func create(item: MUnitPhrase) -> Observable<Int> {
-        MLangPhrase.getDataByLangPhrase(langid: item.LANGID, phrase: item.PHRASE).flatMap { arrLang -> Observable<Int> in
-            if arrLang.isEmpty {
-                let itemLang = MLangPhrase(unititem: item)
-                return MLangPhrase.create(item: itemLang)
-            } else {
-                let itemLang = arrLang[0]
-                let phraseid = itemLang.ID
-                let b = itemLang.combineTranslation(item.TRANSLATION)
-                item.TRANSLATION = itemLang.TRANSLATION
-                return b ? MLangPhrase.update(phraseid, translation: item.TRANSLATION ?? "").map { phraseid } : Observable.just(phraseid)
-            }
-        }.flatMap { phraseid -> Observable<Int> in
-            item.PHRASEID = phraseid
-            return MUnitPhrase.create(item: item)
+    func create(item: MUnitPhrase) -> Observable<()> {
+        MUnitPhrase.create(item: item).flatMap {
+           MUnitPhrase.getDataById($0, arrTextbooks: self.vmSettings.arrTextbooks)
+        }.map {
+           guard let o = $0 else {return}
+           item.copy(from: o)
         }
     }
     
     static func delete(item: MUnitPhrase) -> Observable<()> {
-        let phraseid = item.PHRASEID
-        return MUnitPhrase.delete(item.ID).concat(
-            Observable.zip(MUnitPhrase.getDataByPhraseId(phraseid), MWordPhrase.getWordsByPhraseId(phraseid), MPatternPhrase.getDataByPhraseId(phraseid)).flatMap {
-                !($0.0.isEmpty && $0.1.isEmpty && $0.2.isEmpty) ? Observable.empty() : MLangPhrase.delete(phraseid)
-            }
-        )
+        MUnitPhrase.delete(item: item)
     }
 
     func reindex(complete: @escaping (Int) -> Void) {

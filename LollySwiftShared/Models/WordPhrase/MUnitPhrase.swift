@@ -62,16 +62,19 @@ class MUnitPhrase: NSObject, Codable, MPhraseProtocol {
             arr.forEach { $0.textbook = textbook }
         })
     }
-
-    static func getDataByLang(_ langid: Int, arrTextbooks: [MTextbook]) -> Observable<[MUnitPhrase]> {
-        // SQL: SELECT * FROM VTEXTBOOKPHRASES WHERE LANGID=?
-        let url = "\(CommonApi.urlAPI)VUNITPHRASES?filter=LANGID,eq,\(langid)&order=TEXTBOOKID&order=UNIT&order=PART&order=SEQNUM"
-        let o: Observable<[MUnitPhrase]> = RestApi.getRecords(url: url)
+    
+    private static func setTextbook(_ o: Observable<[MUnitPhrase]>, arrTextbooks: [MTextbook]) -> Observable<[MUnitPhrase]> {
         return o.do(onNext: { arr in
             arr.forEach { row in
                 row.textbook = arrTextbooks.first { $0.ID == row.TEXTBOOKID }!
             }
         })
+    }
+
+    static func getDataByLang(_ langid: Int, arrTextbooks: [MTextbook]) -> Observable<[MUnitPhrase]> {
+        // SQL: SELECT * FROM VTEXTBOOKPHRASES WHERE LANGID=?
+        let url = "\(CommonApi.urlAPI)VUNITPHRASES?filter=LANGID,eq,\(langid)&order=TEXTBOOKID&order=UNIT&order=PART&order=SEQNUM"
+        return setTextbook(RestApi.getRecords(url: url), arrTextbooks: arrTextbooks)
     }
 
     static func getDataByPhraseId(_ phraseid: Int) -> Observable<[MUnitPhrase]> {
@@ -79,17 +82,18 @@ class MUnitPhrase: NSObject, Codable, MPhraseProtocol {
         let url = "\(CommonApi.urlAPI)VUNITPHRASES?filter=PHRASEID,eq,\(phraseid)"
         return RestApi.getRecords(url: url)
     }
+    
+    static func getDataById(_ id: Int, arrTextbooks: [MTextbook]) -> Observable<MUnitPhrase?> {
+        // SQL: SELECT * FROM VUNITPHRASES WHERE ID=?
+        let url = "\(CommonApi.urlAPI)VUNITPHRASES?filter=ID,eq,\(id)"
+        return setTextbook(RestApi.getRecords(url: url), arrTextbooks: arrTextbooks).map { $0.isEmpty ? nil : $0[0] }
+    }
 
     static func getDataByLangPhrase(langid: Int, phrase: String, arrTextbooks: [MTextbook]) -> Observable<[MUnitPhrase]> {
         // SQL: SELECT * FROM VUNITPHRASES WHERE LANGID=? AND PHRASE=?
         let url = "\(CommonApi.urlAPI)VUNITPHRASES?filter=LANGID,eq,\(langid)&filter=PHRASE,eq,\(phrase.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)"
         // Api is case insensitive
-        let o: Observable<[MUnitPhrase]> = RestApi.getRecords(url: url).map { $0.filter { $0.PHRASE == phrase } }
-        return o.do(onNext: { arr in
-            arr.forEach { row in
-                row.textbook = arrTextbooks.first { $0.ID == row.TEXTBOOKID }!
-            }
-        })
+        return setTextbook(RestApi.getRecords(url: url).map { $0.filter { $0.PHRASE == phrase } }, arrTextbooks: arrTextbooks)
     }
 
     static func update(_ id: Int, seqnum: Int) -> Observable<()> {
@@ -100,21 +104,24 @@ class MUnitPhrase: NSObject, Codable, MPhraseProtocol {
     }
     
     static func update(item: MUnitPhrase) -> Observable<()> {
-        // SQL: UPDATE UNITPHRASES SET UNIT=?, PART=?, SEQNUM=?, PHRASEID=? WHERE ID=?
-        let url = "\(CommonApi.urlAPI)UNITPHRASES/\(item.ID)"
-        return RestApi.update(url: url, body: try! item.toJSONString()!).map { print($0) }
+        // SQL: CALL UNITPHRASES_UPDATE
+        let url = "\(CommonApi.urlSP)UNITPHRASES_UPDATE"
+        let parameters = try! item.toParameters()
+        return RestApi.callSP(url: url, parameters: parameters).map { print($0) }
     }
 
     static func create(item: MUnitPhrase) -> Observable<Int> {
-        // SQL: INSERT INTO UNITPHRASES (TEXTBOOKID, UNIT, PART, SEQNUM, PHRASEID) VALUES (?,?,?,?,?)
-        let url = "\(CommonApi.urlAPI)UNITPHRASES"
-        return RestApi.create(url: url, body: try! item.toJSONString()!).map { $0.toInt()! }.do(onNext: { print($0) })
+        // SQL: CALL UNITPHRASES_CREATE
+        let url = "\(CommonApi.urlSP)UNITPHRASES_CREATE"
+        let parameters = try! item.toParameters()
+        return RestApi.callSP(url: url, parameters: parameters).map { print($0); return $0.NEW_ID!.toInt()! }
     }
     
-    static func delete(_ id: Int) -> Observable<()> {
-        // SQL: DELETE UNITPHRASES WHERE ID=?
-        let url = "\(CommonApi.urlAPI)UNITPHRASES/\(id)"
-        return RestApi.delete(url: url).map { print($0) }
+    static func delete(item: MUnitPhrase) -> Observable<()> {
+        // SQL: CALL UNITPHRASES_DELETE
+        let url = "\(CommonApi.urlSP)UNITPHRASES_DELETE"
+        let parameters = try! item.toParameters()
+        return RestApi.callSP(url: url, parameters: parameters).map { print($0) }
     }
     
     static func deleteByPhraseId(_ phraseid: Int) -> Observable<()> {

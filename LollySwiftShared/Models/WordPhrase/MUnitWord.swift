@@ -133,9 +133,10 @@ class MUnitWord: NSObject, Codable, MWordProtocol {
         return RestApi.callSP(url: url, parameters: parameters).map { print($0); return $0.NEW_ID!.toInt()! }
     }
     
-    static func delete(_ id: Int) -> Observable<()> {
-        // SQL: DELETE UNITWORDS WHERE ID=?
-        let url = "\(CommonApi.urlAPI)UNITWORDS/\(id)"
-        return RestApi.delete(url: url).map { print($0) }
+    static func delete(item: MUnitWord) -> Observable<()> {
+        // SQL: CALL UNITWORDS_DELETE
+        let url = "\(CommonApi.urlSP)UNITWORDS_DELETE"
+        let parameters = try! item.toParameters()
+        return RestApi.callSP(url: url, parameters: parameters).map { print($0) }
     }
 }
