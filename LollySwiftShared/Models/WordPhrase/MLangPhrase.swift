@@ -64,13 +64,6 @@ class MLangPhrase: NSObject, Codable, MPhraseProtocol {
         let url = "\(CommonApi.urlAPI)LANGPHRASES?filter=LANGID,eq,\(langid)&order=PHRASE"
         return RestApi.getRecords(url: url)
     }
-
-    static func getDataByLangPhrase(langid: Int, phrase: String) -> Observable<[MLangPhrase]> {
-        // SQL: SELECT * FROM LANGPHRASES WHERE LANGID=? AND PHRASE=?
-        let url = "\(CommonApi.urlAPI)LANGPHRASES?filter=LANGID,eq,\(langid)&filter=PHRASE,eq,\(phrase.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)"
-        // Api is case insensitive
-        return RestApi.getRecords(url: url).map { $0.filter { $0.PHRASE == phrase } }
-    }
     
     static func getDataById(_ id: Int) -> Observable<[MLangPhrase]> {
         // SQL: SELECT * FROM LANGPHRASES WHERE ID=?

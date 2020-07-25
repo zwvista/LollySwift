@@ -68,13 +68,6 @@ class MLangWord: NSObject, Codable, MWordProtocol {
         return RestApi.getRecords(url: url)
     }
 
-    static func getDataByLangWord(langid: Int, word: String) -> Observable<[MLangWord]> {
-        // SQL: SELECT * FROM LANGWORDS WHERE LANGID=? AND WORD=?
-        let url = "\(CommonApi.urlAPI)VLANGWORDS?filter=LANGID,eq,\(langid)&filter=WORD,eq,\(word.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)"
-        // Api is case insensitive
-        return RestApi.getRecords(url: url).map { $0.filter { $0.WORD == word } }
-    }
-
     static func getDataById(_ id: Int) -> Observable<[MLangWord]> {
         // SQL: SELECT * FROM LANGWORDS WHERE ID=?
         let url = "\(CommonApi.urlAPI)VLANGWORDS?filter=ID,eq,\(id)"
@@ -89,10 +82,9 @@ class MLangWord: NSObject, Codable, MWordProtocol {
     }
 
     static func update(item: MLangWord) -> Observable<()> {
-        // SQL: CALL UNITWORDS_UPDDATE
-        let url = "\(CommonApi.urlSP)UNITWORDS_UPDDATE"
-        let parameters = try! item.toParameters()
-        return RestApi.callSP(url: url, parameters: parameters).map { print($0) }
+        // SQL: UPDATE LANGWORDS SET WORD=?, NOTE=? WHERE ID=?
+        let url = "\(CommonApi.urlAPI)LANGWORDS/\(item.ID)"
+        return RestApi.update(url: url, body: try! item.toJSONString(prettyPrint: false)!).map { print($0) }
     }
 
     static func create(item: MLangWord) -> Observable<Int> {
