@@ -30,12 +30,11 @@ class WordsUnitDetailViewModel: NSObject {
         item.WORD = vm.vmSettings.autoCorrectInput(text: item.WORD)
         if isAdd {
             vm.arrWords.append(item)
-            WordsUnitViewModel.create(item: item).subscribe(onNext: {
-                self.item.ID = $0
+            vm.create(item: item).subscribe(onNext: {
                 self.complete?()
             }) ~ rx.disposeBag
         } else {
-            WordsUnitViewModel.update(item: item).subscribe {
+            vm.update(item: item).subscribe {
                 self.complete?()
             } ~ rx.disposeBag
         }

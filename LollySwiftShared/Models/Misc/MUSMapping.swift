@@ -42,7 +42,7 @@ class MUSMapping: NSObject, Codable {
 
     static func getData() -> Observable<[MUSMapping]> {
         // SQL: SELECT * FROM USMAPPINGS
-        let url = "\(CommonApi.url)USMAPPINGS"
+        let url = "\(CommonApi.urlAPI)USMAPPINGS"
         return RestApi.getRecords(url: url)
     }
 }

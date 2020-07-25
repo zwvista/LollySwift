@@ -38,7 +38,7 @@ class MTextbook: NSObject, Codable {
 
     static func getDataByLang(_ langid: Int) -> Observable<[MTextbook]> {
         // SQL: SELECT * FROM TEXTBOOKS WHERE LANGID=?
-        let url = "\(CommonApi.url)TEXTBOOKS?filter=LANGID,eq,\(langid)"
+        let url = "\(CommonApi.urlAPI)TEXTBOOKS?filter=LANGID,eq,\(langid)"
         let o: Observable<[MTextbook]> = RestApi.getRecords(url: url)
         func f(units: String) -> [String] {
             if let m = #"UNITS,(\d+)"#.r!.findFirst(in: units) {
@@ -64,13 +64,13 @@ class MTextbook: NSObject, Codable {
 
     static func update(item: MTextbook) -> Observable<()> {
         // SQL: UPDATE TEXTBOOKS SET NAME=?, UNITS=?, PARTS=? WHERE ID=?
-        let url = "\(CommonApi.url)TEXTBOOKS/\(item.ID)"
-        return RestApi.update(url: url, body: try! item.toJSONString(prettyPrint: false)!).map { print($0) }
+        let url = "\(CommonApi.urlAPI)TEXTBOOKS/\(item.ID)"
+        return RestApi.update(url: url, body: try! item.toJSONString()!).map { print($0) }
     }
 
     static func create(item: MTextbook) -> Observable<Int> {
         // SQL: INSERT INTO TEXTBOOKS (ID, LANGID, NAME, UNITS, PARTS) VALUES (?,?,?,?,?)
-        let url = "\(CommonApi.url)TEXTBOOKS"
-        return RestApi.create(url: url, body: try! item.toJSONString(prettyPrint: false)!).map { $0.toInt()! }.do(onNext: { print($0) })
+        let url = "\(CommonApi.urlAPI)TEXTBOOKS"
+        return RestApi.create(url: url, body: try! item.toJSONString()!).map { $0.toInt()! }.do(onNext: { print($0) })
     }
 }

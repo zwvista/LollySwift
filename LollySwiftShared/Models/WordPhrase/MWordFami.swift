@@ -20,25 +20,25 @@ class MWordFami: NSObject, Codable {
 
     static func getDataByUserWord(userid: Int, wordid: Int) -> Observable<[MWordFami]> {
         // SQL: SELECT * FROM WORDSFAMI WHERE USERID=? AND WORDID=?
-        let url = "\(CommonApi.url)WORDSFAMI?filter=USERID,eq,\(userid)&filter=WORDID,eq,\(wordid)"
+        let url = "\(CommonApi.urlAPI)WORDSFAMI?filter=USERID,eq,\(userid)&filter=WORDID,eq,\(wordid)"
         return RestApi.getRecords(url: url)
     }
 
     private static func update(item: MWordFami) -> Observable<()> {
         // SQL: UPDATE WORDSFAMI SET USERID=?, WORDID=?, LEVEL=? WHERE ID=?
-        let url = "\(CommonApi.url)WORDSFAMI/\(item.ID)"
-        return RestApi.update(url: url, body: try! item.toJSONString(prettyPrint: false)!).map { print($0) }
+        let url = "\(CommonApi.urlAPI)WORDSFAMI/\(item.ID)"
+        return RestApi.update(url: url, body: try! item.toJSONString()!).map { print($0) }
     }
     
     private static func create(item: MWordFami) -> Observable<Int> {
         // SQL: INSERT INTO WORDSFAMI (USERID, WORDID, LEVEL) VALUES (?,?,?)
-        let url = "\(CommonApi.url)WORDSFAMI"
-        return RestApi.create(url: url, body: try! item.toJSONString(prettyPrint: false)!).map { $0.toInt()! }.do(onNext: { print($0) })
+        let url = "\(CommonApi.urlAPI)WORDSFAMI"
+        return RestApi.create(url: url, body: try! item.toJSONString()!).map { $0.toInt()! }.do(onNext: { print($0) })
     }
     
     static func delete(_ id: Int) -> Observable<()> {
         // SQL: DELETE WORDSFAMI WHERE ID=?
-        let url = "\(CommonApi.url)WORDSFAMI/\(id)"
+        let url = "\(CommonApi.urlAPI)WORDSFAMI/\(id)"
         return RestApi.delete(url: url).map { print($0) }
     }
     

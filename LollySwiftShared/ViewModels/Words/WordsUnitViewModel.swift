@@ -60,84 +60,21 @@ class WordsUnitViewModel: NSObject {
         MLangWord.update(wordid, note: note)
     }
 
-    static func update(item: MUnitWord) -> Observable<()> {
-        let wordid = item.WORDID
-        return MUnitWord.getDataByWordId(wordid).flatMap { arrUnit -> Observable<Int> in
-            if arrUnit.isEmpty {
-                // non-existing word
-                return Observable.empty()
-            } else {
-                let itemLang = MLangWord(unititem: item)
-                return MLangWord.getDataById(wordid).flatMap { arrLangOld -> Observable<Int> in
-                    if !arrLangOld.isEmpty && arrLangOld[0].WORD == item.WORD {
-                        // word intact
-                        return MLangWord.update(wordid, note: item.NOTE ?? "").map { wordid }
-                    } else {
-                        // word changed
-                        return MLangWord.getDataByLangWord(langid: item.LANGID, word: item.WORD).flatMap { arrLangNew -> Observable<Int> in
-                            func f() -> Observable<Int> {
-                                let itemLang = arrLangNew[0]
-                                let wordid = itemLang.ID
-                                item.NOTE = itemLang.NOTE
-                                return MWordFami.getDataByUserWord(userid: CommonApi.userid, wordid: wordid).map { arrFami -> Int in
-                                    if !arrFami.isEmpty {
-                                        item.CORRECT = arrFami[0].CORRECT
-                                        item.TOTAL = arrFami[0].TOTAL
-                                    }
-                                    return wordid
-                                }
-                            }
-                            if arrUnit.count == 1 {
-                                // exclusive
-                                if arrLangNew.isEmpty {
-                                    // new word
-                                    return MLangWord.update(item: itemLang).map { wordid }
-                                } else {
-                                    // existing word
-                                    return MLangWord.delete(wordid).flatMap { f() }
-                                }
-                            } else {
-                                // non-exclusive
-                                if arrLangNew.isEmpty {
-                                    // new word
-                                    itemLang.ID = 0
-                                    return MLangWord.create(item: itemLang)
-                                } else {
-                                    // existing word
-                                    return f()
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }.flatMap { wordid -> Observable<()> in
-            item.WORDID = wordid
-            return MUnitWord.update(item: item)
+    func update(item: MUnitWord) -> Observable<()> {
+        MUnitWord.update(item: item).flatMap {
+            MUnitWord.getDataById(item.ID, arrTextbooks: self.vmSettings.arrTextbooks)
+        }.map {
+            guard let o = $0 else {return}
+            item.copy(from: o)
         }
     }
     
-    static func create(item: MUnitWord) -> Observable<Int> {
-        MLangWord.getDataByLangWord(langid: item.LANGID, word: item.WORD).flatMap { arrLang -> Observable<Int> in
-            if arrLang.isEmpty {
-                let itemLang = MLangWord(unititem: item)
-                return MLangWord.create(item: itemLang)
-            } else {
-                let itemLang = arrLang[0]
-                let wordid = itemLang.ID
-                let b = itemLang.combineNote(item.NOTE)
-                item.NOTE = itemLang.NOTE
-                return MWordFami.getDataByUserWord(userid: CommonApi.userid, wordid: wordid).flatMap { arrFami -> Observable<Int> in
-                    if !arrFami.isEmpty {
-                        item.CORRECT = arrFami[0].CORRECT
-                        item.TOTAL = arrFami[0].TOTAL
-                    }
-                    return b ? MLangWord.update(wordid, note: item.NOTE ?? "").map { wordid } : Observable.just(wordid)
-                }
-            }
-        }.flatMap { wordid -> Observable<Int> in
-            item.WORDID = wordid
-            return MUnitWord.create(item: item)
+    func create(item: MUnitWord) -> Observable<()> {
+        MUnitWord.create(item: item).flatMap {
+           MUnitWord.getDataById($0, arrTextbooks: self.vmSettings.arrTextbooks)
+        }.map {
+           guard let o = $0 else {return}
+           item.copy(from: o)
         }
     }
     

@@ -385,25 +385,9 @@
 		8C2CB5A3207885140083DDE2 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				95EFF47D21840FB60094EE3C /* MAutoCorrect.swift */,
-				95B658A62227D8060095B0D2 /* MCommon.swift */,
-				8C2CB5A4207885140083DDE2 /* MDictionary.swift */,
-				8C2CB5A9207885140083DDE2 /* MLangPhrase.swift */,
-				8C2CB5AC207885140083DDE2 /* MLanguage.swift */,
-				8C2CB5A6207885140083DDE2 /* MLangWord.swift */,
-				954CB5EC23B7114100A03900 /* MPattern.swift */,
-				957A18D923BF9C6600428DA3 /* MPatternPhrase.swift */,
-				957A18C723BDA4D600428DA3 /* MPatternWebPage.swift */,
-				95AA9D1B24C1EF00002E8B6D /* MWebPage.swift */,
-				95DAEBCD22DF8B1100A3C361 /* MReviewOptions.swift */,
-				8C2CB5AD207885140083DDE2 /* MTextbook.swift */,
-				8C2CB5AB207885140083DDE2 /* MUnitPhrase.swift */,
-				8C2CB5A5207885140083DDE2 /* MUnitWord.swift */,
-				8C2CB5A8207885140083DDE2 /* MUserSetting.swift */,
-				95F5401122C38F8F00E3FD6A /* MUSMapping.swift */,
-				95940A912233865700D35409 /* MVoice.swift */,
-				95CED3C42215DA450094622F /* MWordFami.swift */,
-				95C328AF223D3831005FA6E6 /* MWordPhrase.swift */,
+				95F1FA4E24CBD75B006CA15D /* Misc */,
+				95F1FA4D24CBD750006CA15D /* Pattern */,
+				95F1FA4C24CBD745006CA15D /* WordPhrase */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -555,6 +539,46 @@
 				95F1FA3124CB1F90006CA15D /* Emit.swift */,
 			);
 			path = RxBinding;
+			sourceTree = "<group>";
+		};
+		95F1FA4C24CBD745006CA15D /* WordPhrase */ = {
+			isa = PBXGroup;
+			children = (
+				8C2CB5A9207885140083DDE2 /* MLangPhrase.swift */,
+				8C2CB5A6207885140083DDE2 /* MLangWord.swift */,
+				8C2CB5AB207885140083DDE2 /* MUnitPhrase.swift */,
+				8C2CB5A5207885140083DDE2 /* MUnitWord.swift */,
+				95CED3C42215DA450094622F /* MWordFami.swift */,
+				95C328AF223D3831005FA6E6 /* MWordPhrase.swift */,
+			);
+			path = WordPhrase;
+			sourceTree = "<group>";
+		};
+		95F1FA4D24CBD750006CA15D /* Pattern */ = {
+			isa = PBXGroup;
+			children = (
+				954CB5EC23B7114100A03900 /* MPattern.swift */,
+				957A18D923BF9C6600428DA3 /* MPatternPhrase.swift */,
+				957A18C723BDA4D600428DA3 /* MPatternWebPage.swift */,
+				95AA9D1B24C1EF00002E8B6D /* MWebPage.swift */,
+			);
+			path = Pattern;
+			sourceTree = "<group>";
+		};
+		95F1FA4E24CBD75B006CA15D /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				95EFF47D21840FB60094EE3C /* MAutoCorrect.swift */,
+				95B658A62227D8060095B0D2 /* MCommon.swift */,
+				8C2CB5A4207885140083DDE2 /* MDictionary.swift */,
+				8C2CB5AC207885140083DDE2 /* MLanguage.swift */,
+				95DAEBCD22DF8B1100A3C361 /* MReviewOptions.swift */,
+				8C2CB5AD207885140083DDE2 /* MTextbook.swift */,
+				8C2CB5A8207885140083DDE2 /* MUserSetting.swift */,
+				95F5401122C38F8F00E3FD6A /* MUSMapping.swift */,
+				95940A912233865700D35409 /* MVoice.swift */,
+			);
+			path = Misc;
 			sourceTree = "<group>";
 		};
 		C97659C9C63745E490850F6D /* Pods */ = {

@@ -73,7 +73,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     
     override func endEditing(row: Int) {
         let item = arrWords[row]
-        WordsUnitViewModel.update(item: item).subscribe {
+        vm.update(item: item).subscribe {
             self.tvWords.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvWords.tableColumns.count))
         } ~ rx.disposeBag
     }
@@ -142,8 +142,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
         item.WORD = vmSettings.autoCorrectInput(text: newWord)
         tfNewWord.stringValue = ""
         newWord = ""
-        WordsUnitViewModel.create(item: item).subscribe(onNext: {
-            item.ID = $0
+        vm.create(item: item).subscribe(onNext: {
             self.vm.arrWords.append(item)
             self.tvWords.reloadData()
             self.tvWords.selectRowIndexes(IndexSet(integer: self.arrWords.count - 1), byExtendingSelection: false)

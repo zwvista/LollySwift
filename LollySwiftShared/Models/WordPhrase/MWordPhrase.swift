@@ -17,19 +17,19 @@ class MWordPhrase: NSObject, Codable {
     
     private static func getDataByWordPhrase(wordid: Int, phraseid: Int) -> Observable<[MWordPhrase]> {
         // SQL: SELECT * FROM WORDSPHRASES WHERE WORDID=? AND PHRASEID=?
-        let url = "\(CommonApi.url)WORDSPHRASES?filter=WORDID,eq,\(wordid)&filter=PHRASEID,eq,\(phraseid)"
+        let url = "\(CommonApi.urlAPI)WORDSPHRASES?filter=WORDID,eq,\(wordid)&filter=PHRASEID,eq,\(phraseid)"
         return RestApi.getRecords(url: url)
     }
 
     private static func create(item: MWordPhrase) -> Observable<Int> {
         // SQL: INSERT INTO WORDSPHRASES (WORDID, PHRASEID) VALUES (?,?)
-        let url = "\(CommonApi.url)WORDSPHRASES"
-        return RestApi.create(url: url, body: try! item.toJSONString(prettyPrint: false)!).map { $0.toInt()! }.do(onNext: { print($0) })
+        let url = "\(CommonApi.urlAPI)WORDSPHRASES"
+        return RestApi.create(url: url, body: try! item.toJSONString()!).map { $0.toInt()! }.do(onNext: { print($0) })
     }
     
     private static func delete(_ id: Int) -> Observable<()> {
         // SQL: DELETE WORDSPHRASES WHERE ID=?
-        let url = "\(CommonApi.url)WORDSPHRASES/\(id)"
+        let url = "\(CommonApi.urlAPI)WORDSPHRASES/\(id)"
         return RestApi.delete(url: url).map { print($0) }
     }
     
@@ -40,7 +40,7 @@ class MWordPhrase: NSObject, Codable {
                 return Observable.empty()
             } else {
                 let ids = arr.map { $0.ID.description }.joined(separator: ",")
-                let url = "\(CommonApi.url)WORDSPHRASES/\(ids)"
+                let url = "\(CommonApi.urlAPI)WORDSPHRASES/\(ids)"
                 return RestApi.delete(url: url).map { print($0) }
             }
         }
@@ -53,7 +53,7 @@ class MWordPhrase: NSObject, Codable {
                 return Observable.empty()
             } else {
                 let ids = arr.map { $0.ID.description }.joined(separator: ",")
-                let url = "\(CommonApi.url)WORDSPHRASES/\(ids)"
+                let url = "\(CommonApi.urlAPI)WORDSPHRASES/\(ids)"
                 return RestApi.delete(url: url).map { print($0) }
             }
         }
@@ -84,13 +84,13 @@ class MWordPhrase: NSObject, Codable {
     
     static func getPhrasesByWordId(_ wordid: Int) -> Observable<[MLangPhrase]> {
         // SQL: SELECT * FROM VPHRASESWORD WHERE WORDID=?
-        let url = "\(CommonApi.url)VPHRASESWORD?filter=WORDID,eq,\(wordid)"
+        let url = "\(CommonApi.urlAPI)VPHRASESWORD?filter=WORDID,eq,\(wordid)"
         return RestApi.getRecords(url: url)
     }
 
     static func getWordsByPhraseId(_ phraseid: Int) -> Observable<[MLangWord]> {
         // SQL: SELECT * FROM VWORDSPHRASE WHERE PHRASEID=?
-        let url = "\(CommonApi.url)VWORDSPHRASE?filter=PHRASEID,eq,\(phraseid)"
+        let url = "\(CommonApi.urlAPI)VWORDSPHRASE?filter=PHRASEID,eq,\(phraseid)"
         return RestApi.getRecords(url: url)
     }
 }

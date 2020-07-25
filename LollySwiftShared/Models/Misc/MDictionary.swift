@@ -41,25 +41,25 @@ class MDictionary: NSObject, Codable {
     
     static func getDictsByLang(_ langid: Int) -> Observable<[MDictionary]> {
         // SQL: SELECT * FROM VDICTIONARIES WHERE LANGIDFROM=?
-        let url = "\(CommonApi.url)VDICTIONARIES?filter=LANGIDFROM,eq,\(langid)&order=SEQNUM&order=DICTNAME"
+        let url = "\(CommonApi.urlAPI)VDICTIONARIES?filter=LANGIDFROM,eq,\(langid)&order=SEQNUM&order=DICTNAME"
         return RestApi.getRecords(url: url)
     }
 
     static func update(item: MDictionary) -> Observable<()> {
         // SQL: UPDATE DICTIONARIES SET DICTID=?, LANGIDFROM=?, LANGIDTO=?, NAME=?, SEQNUM=?, DICTTYPEID=?, URL=?, CHCONV=?, AUTOMATION=?, AUTOJUMP=?, DICTTABLE=?, TEMPLATE=?, TEMPLATE2=? WHERE ID=?
-        let url = "\(CommonApi.url)DICTIONARIES/\(item.ID)"
-        return RestApi.update(url: url, body: try! item.toJSONString(prettyPrint: false)!).map { print($0) }
+        let url = "\(CommonApi.urlAPI)DICTIONARIES/\(item.ID)"
+        return RestApi.update(url: url, body: try! item.toJSONString()!).map { print($0) }
     }
     
     static func create(item: MDictionary) -> Observable<Int> {
         // SQL: INSERT INTO DICTIONARIES (DICTID, LANGIDFROM, LANGIDTO, NAME, SEQNUM, DICTTYPEID, URL, CHCONV, AUTOMATION, AUTOJUMP, DICTTABLE, TEMPLATE, TEMPLATE2) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)
-        let url = "\(CommonApi.url)DICTIONARIES"
-        return RestApi.create(url: url, body: try! item.toJSONString(prettyPrint: false)!).map { $0.toInt()! }.do(onNext: { print($0) })
+        let url = "\(CommonApi.urlAPI)DICTIONARIES"
+        return RestApi.create(url: url, body: try! item.toJSONString()!).map { $0.toInt()! }.do(onNext: { print($0) })
     }
 
     static func getDictsReferenceByLang(_ langid: Int) -> Observable<[MDictionary]> {
         // SQL: SELECT * FROM VDICTSREFERENCE WHERE LANGIDFROM=?
-        let url = "\(CommonApi.url)VDICTSREFERENCE?filter=LANGIDFROM,eq,\(langid)&order=SEQNUM&order=DICTNAME"
+        let url = "\(CommonApi.urlAPI)VDICTSREFERENCE?filter=LANGIDFROM,eq,\(langid)&order=SEQNUM&order=DICTNAME"
         return RestApi.getRecords(url: url)
     }
     
@@ -75,13 +75,13 @@ class MDictionary: NSObject, Codable {
 
     static func getDictsNoteByLang(_ langid: Int) -> Observable<[MDictionary]> {
         // SQL: SELECT * FROM VDICTSNOTE WHERE LANGIDFROM = ?
-        let url = "\(CommonApi.url)VDICTSNOTE?filter=LANGIDFROM,eq,\(langid)"
+        let url = "\(CommonApi.urlAPI)VDICTSNOTE?filter=LANGIDFROM,eq,\(langid)"
         return RestApi.getRecords(url: url)
     }
     
     static func getDictsTranslationByLang(_ langid: Int) -> Observable<[MDictionary]> {
         // SQL: SELECT * FROM VDICTSTRANSLATION WHERE LANGIDFROM = ?
-        let url = "\(CommonApi.url)VDICTSTRANSLATION?filter=LANGIDFROM,eq,\(langid)"
+        let url = "\(CommonApi.urlAPI)VDICTSTRANSLATION?filter=LANGIDFROM,eq,\(langid)"
         return RestApi.getRecords(url: url)
     }
 }
@@ -92,7 +92,7 @@ class MDictType: NSObject, Codable {
     var NAME = ""
     static func getData() -> Observable<[MDictType]> {
         // SQL: SELECT * FROM CODES WHERE KIND = 1
-        let url = "\(CommonApi.url)CODES?filter=KIND,eq,1"
+        let url = "\(CommonApi.urlAPI)CODES?filter=KIND,eq,1"
         return RestApi.getRecords(url: url)
     }
 }

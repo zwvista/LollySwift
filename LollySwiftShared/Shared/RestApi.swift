@@ -29,7 +29,7 @@ class StringEncoding: ParameterEncoding {
 
 extension Encodable {
     
-    public func toJSONString(prettyPrint: Bool) throws -> String? {
+    public func toJSONString(prettyPrint: Bool = false) throws -> String? {
         let encoder = JSONEncoder()
         if prettyPrint { encoder.outputFormatting = .prettyPrinted }
         let data = try! encoder.encode(self)
@@ -41,6 +41,20 @@ extension Encodable {
         return jsonString
     }
     
+    // https://stackoverflow.com/questions/45209743/how-can-i-use-swift-s-codable-to-encode-into-a-dictionary
+    public func toParameters() throws -> Parameters {
+        let data = try! JSONEncoder().encode(self)
+        let dictionary = try! JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String: Any]
+        return dictionary.map { (k, v) in ("P_" + k, v) }
+    }
+    
+}
+
+class MSPResult: NSObject, Codable {
+    var NEW_ID: String?
+    var result = ""
+    
+    override var description: String { try! toJSONString() ?? "" }
 }
 
 class RestApi {
@@ -70,5 +84,10 @@ class RestApi {
     static func getHtml(url: String) -> Observable<String> {
         print("[RestApi]GET:\(url)")
         return RxAlamofire.string(.get, url)
+    }
+    static func callSP(url: String, parameters: Parameters) -> Observable<MSPResult> {
+        print("[RestApi]SP:\(url)")
+        let o: Observable<[[MSPResult]]> = RxCodableAlamofire.object(.post, url, parameters: parameters)
+        return o.map { $0[0][0] }
     }
 }

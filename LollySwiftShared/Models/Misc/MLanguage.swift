@@ -23,7 +23,7 @@ class MLanguage: NSObject, Codable {
 
     static func getData() -> Observable<[MLanguage]> {
         // SQL: SELECT * FROM LANGUAGES WHERE ID<>0
-        let url = "\(CommonApi.url)LANGUAGES?filter=ID,neq,0"
+        let url = "\(CommonApi.urlAPI)LANGUAGES?filter=ID,neq,0"
         return RestApi.getRecords(url: url)
     }
 }

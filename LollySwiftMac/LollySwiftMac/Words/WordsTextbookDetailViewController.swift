@@ -58,7 +58,7 @@ class WordsTextbookDetailViewController: NSViewController, NSTableViewDataSource
         // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
         self.commitEditing()
         item.WORD = vm.vmSettings.autoCorrectInput(text: item.WORD)
-        WordsUnitViewModel.update(item: item).subscribe {
+        vm.update(item: item).subscribe {
             self.complete?()
         } ~ rx.disposeBag
         dismiss(self)

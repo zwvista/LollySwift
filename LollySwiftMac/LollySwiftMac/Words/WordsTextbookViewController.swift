@@ -54,7 +54,7 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
 
     override func endEditing(row: Int) {
         let item = arrWords[row]
-        WordsUnitViewModel.update(item: item).subscribe {
+        vm.update(item: item).subscribe {
             self.tvWords.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvWords.tableColumns.count))
         } ~ rx.disposeBag
     }
