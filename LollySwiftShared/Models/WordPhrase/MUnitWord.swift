@@ -101,7 +101,7 @@ class MUnitWord: NSObject, Codable, MWordProtocol {
 
     static func getDataByLangWord(langid: Int, word: String, arrTextbooks: [MTextbook]) -> Observable<[MUnitWord]> {
         // SQL: SELECT * FROM VUNITWORDS WHERE LANGID=? AND WORD=?
-        let url = "\(CommonApi.urlAPI)VUNITWORDS?filter=LANGID,eq,\(langid)&filter=WORD,eq,\(word.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)"
+        let url = "\(CommonApi.urlAPI)VUNITWORDS?filter=LANGID,eq,\(langid)&filter=WORD,eq,\(word.urlEncoded())"
         // Api is case insensitive
         return setTextbook(RestApi.getRecords(url: url).map { $0.filter { $0.WORD == word } }, arrTextbooks: arrTextbooks)
     }

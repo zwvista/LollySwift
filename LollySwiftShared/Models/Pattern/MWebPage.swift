@@ -34,11 +34,11 @@ class MWebPage: NSObject, Codable {
         // SQL: SELECT * FROM WEBPAGES WHERE LOCATE(?, TITLE) <> 0 AND LOCATE(?, URL) <> 0
         var filter = ""
         if !t.isEmpty {
-            filter = "?filter=TITLE,cs,\(t.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)"
+            filter = "?filter=TITLE,cs,\(t.urlEncoded())"
         }
         if !u.isEmpty {
             filter += filter.isEmpty ? "?" : "&"
-            filter += "filter=URL,cs,\(u.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)"
+            filter += "filter=URL,cs,\(u.urlEncoded())"
         }
         let url = "\(CommonApi.urlAPI)WEBPAGES\(filter)"
         return RestApi.getRecords(url: url)

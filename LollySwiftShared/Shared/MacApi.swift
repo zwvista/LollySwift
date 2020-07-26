@@ -20,7 +20,7 @@ class MacApi {
     }
     
     static func googleString(_ str: String) {
-        openURL("https://www.google.com/search?q=\(str)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)
+        openURL("https://www.google.com/search?q=\(str.urlEncoded())")
     }
 }
 

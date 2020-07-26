@@ -85,7 +85,7 @@ class MUnitPhrase: NSObject, Codable, MPhraseProtocol {
 
     static func getDataByLangPhrase(langid: Int, phrase: String, arrTextbooks: [MTextbook]) -> Observable<[MUnitPhrase]> {
         // SQL: SELECT * FROM VUNITPHRASES WHERE LANGID=? AND PHRASE=?
-        let url = "\(CommonApi.urlAPI)VUNITPHRASES?filter=LANGID,eq,\(langid)&filter=PHRASE,eq,\(phrase.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)"
+        let url = "\(CommonApi.urlAPI)VUNITPHRASES?filter=LANGID,eq,\(langid)&filter=PHRASE,eq,\(phrase.urlEncoded())"
         // Api is case insensitive
         return setTextbook(RestApi.getRecords(url: url).map { $0.filter { $0.PHRASE == phrase } }, arrTextbooks: arrTextbooks)
     }
