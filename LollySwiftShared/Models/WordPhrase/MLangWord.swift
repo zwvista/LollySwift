@@ -93,9 +93,10 @@ class MLangWord: NSObject, Codable, MWordProtocol {
         return RestApi.create(url: url, body: try! item.toJSONString()!).map { $0.toInt()! }.do(onNext: { print($0) })
     }
     
-    static func delete(_ id: Int) -> Observable<()> {
-        // SQL: DELETE LANGWORDS WHERE ID=?
-        let url = "\(CommonApi.urlAPI)LANGWORDS/\(id)"
-        return RestApi.delete(url: url).map { print($0) }
+    static func delete(item: MLangWord) -> Observable<()> {
+        // SQL: CALL LANGWORDS_DELETE
+        let url = "\(CommonApi.urlSP)LANGWORDS_DELETE"
+        let parameters = try! item.toParameters()
+        return RestApi.callSP(url: url, parameters: parameters).map { print($0) }
     }
 }

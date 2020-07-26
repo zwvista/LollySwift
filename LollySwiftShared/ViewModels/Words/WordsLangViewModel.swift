@@ -54,8 +54,7 @@ class WordsLangViewModel: NSObject {
     }
     
     static func delete(item: MLangWord) -> Observable<()> {
-//        Observable.zip(MLangWord.delete(item.ID), MUnitWord.deleteByWordId(id), MWordFami.delete(item.FAMIID), MWordPhrase.deleteByWordId(item.ID)).map {_ in }
-        Observable.empty()
+        MLangWord.delete(item: item)
     }
     
     func newLangWord() -> MLangWord {

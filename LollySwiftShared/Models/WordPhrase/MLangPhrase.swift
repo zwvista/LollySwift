@@ -90,9 +90,10 @@ class MLangPhrase: NSObject, Codable, MPhraseProtocol {
         return RestApi.create(url: url, body: try! item.toJSONString()!).map { $0.toInt()! }.do(onNext: { print($0) })
     }
     
-    static func delete(_ id: Int) -> Observable<()> {
-        // SQL: DELETE LANGPHRASES WHERE ID=?
-        let url = "\(CommonApi.urlAPI)LANGPHRASES/\(id)"
-        return RestApi.delete(url: url).map { print($0) }
+    static func delete(item: MLangPhrase) -> Observable<()> {
+        // SQL: CALL LANGPHRASES_DELETE
+        let url = "\(CommonApi.urlSP)LANGPHRASES_DELETE"
+        let parameters = try! item.toParameters()
+        return RestApi.callSP(url: url, parameters: parameters).map { print($0) }
     }
 }
