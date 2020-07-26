@@ -12,25 +12,24 @@ import RxSwift
 class PhrasesReviewViewModel: NSObject {
 
     var vmSettings: SettingsViewModel
-    
-    init(settings: SettingsViewModel, needCopy: Bool) {
-        self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
-    }
-
     var arrPhrases = [MUnitPhrase]()
     var arrCorrectIDs = [Int]()
     var index = 0
     var mode: ReviewMode = .reviewAuto
     var isTestMode: Bool { mode == .test }
-    
-    func newTest(shuffled: Bool, groupSelected: Int, groupCount: Int) -> Observable<()> {
+
+    init(settings: SettingsViewModel, needCopy: Bool) {
+        self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
+    }
+
+    func newTest(options: MReviewOptions) -> Observable<()> {
         MUnitPhrase.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO).map {
             self.arrPhrases = $0
             let count = self.arrPhrases.count
-            let (from, to) = (count * (groupSelected - 1) / groupCount, count * groupSelected / groupCount)
+            let (from, to) = (count * (options.groupSelected - 1) / options.groupCount, count * options.groupSelected / options.groupCount)
             self.arrPhrases = [MUnitPhrase](self.arrPhrases[from..<to])
             self.arrCorrectIDs = []
-            if shuffled { self.arrPhrases = self.arrPhrases.shuffled() }
+            if options.shuffled { self.arrPhrases = self.arrPhrases.shuffled() }
             self.index = 0
         }
     }

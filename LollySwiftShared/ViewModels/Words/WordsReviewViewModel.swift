@@ -12,26 +12,25 @@ import RxSwift
 class WordsReviewViewModel: NSObject {
 
     var vmSettings: SettingsViewModel
-    
-    init(settings: SettingsViewModel, needCopy: Bool) {
-        self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
-    }
-
     var arrWords = [MUnitWord]()
     var arrCorrectIDs = [Int]()
     var index = 0
     var mode: ReviewMode = .reviewAuto
     var isTestMode: Bool { mode == .test }
-    
-    func newTest(shuffled: Bool, levelge0only: Bool, groupSelected: Int, groupCount: Int) -> Observable<()> {
+
+    init(settings: SettingsViewModel, needCopy: Bool) {
+        self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
+    }
+
+    func newTest(options: MReviewOptions) -> Observable<()> {
         MUnitWord.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO).map {
             self.arrWords = $0
             let count = self.arrWords.count
-            let (from, to) = (count * (groupSelected - 1) / groupCount, count * groupSelected / groupCount)
+            let (from, to) = (count * (options.groupSelected - 1) / options.groupCount, count * options.groupSelected / options.groupCount)
             self.arrWords = [MUnitWord](self.arrWords[from..<to])
             self.arrCorrectIDs = []
-            if levelge0only { self.arrWords = self.arrWords.filter { $0.LEVEL >= 0 } }
-            if shuffled { self.arrWords = self.arrWords.shuffled() }
+            if options.levelge0only! { self.arrWords = self.arrWords.filter { $0.LEVEL >= 0 } }
+            if options.shuffled { self.arrWords = self.arrWords.shuffled() }
             self.index = 0
         }
     }

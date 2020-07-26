@@ -15,4 +15,13 @@ class MReviewOptions: NSObject {
     var levelge0only: Bool?
     @objc dynamic var groupCount = 1
     @objc dynamic var groupSelected = 1
+    
+    func copy(from x: MReviewOptions) {
+        mode = x.mode
+        interval = x.interval
+        shuffled = x.shuffled
+        levelge0only = x.levelge0only
+        groupCount = x.groupCount
+        groupSelected = x.groupSelected
+    }
 }
