@@ -48,7 +48,7 @@ class DictsDetailViewController: NSViewController {
     }
 
     @IBAction func editTransform(_ sender: Any) {
-        let tranformVC = self.storyboard!.instantiateController(withIdentifier: "DictsDetailViewController") as! DictsDetailViewController
+        let tranformVC = self.storyboard!.instantiateController(withIdentifier: "TransformEditViewController") as! TransformEditViewController
         tranformVC.complete = {  }
         self.presentAsModalWindow(tranformVC)
     }
