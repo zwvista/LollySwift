@@ -47,18 +47,24 @@ class DictsDetailViewController: NSViewController {
         acDictTypes.content = vm.vmSettings.arrDictTypes
     }
 
+    @IBAction func editTransform(_ sender: Any) {
+        let tranformVC = self.storyboard!.instantiateController(withIdentifier: "DictsDetailViewController") as! DictsDetailViewController
+        tranformVC.complete = {  }
+        self.presentAsModalWindow(tranformVC)
+    }
+    
     @IBAction func okClicked(_ sender: Any) {
         // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
         self.commitEditing()
-//        if isAdd {
-//            DictsViewModel.create(item: item).subscribe {
-//                self.complete?()
-//            } ~ rx.disposeBag
-//        } else {
-//            DictsViewModel.update(item: item).subscribe {
-//                self.complete?()
-//            } ~ rx.disposeBag
-//        }
+        if isAdd {
+            DictsViewModel.create(item: item).subscribe {
+                self.complete?()
+            } ~ rx.disposeBag
+        } else {
+            DictsViewModel.update(item: item).subscribe {
+                self.complete?()
+            } ~ rx.disposeBag
+        }
         dismiss(self)
     }
 
