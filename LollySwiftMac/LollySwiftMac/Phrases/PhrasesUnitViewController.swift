@@ -14,7 +14,7 @@ import NSObject_Rx
 class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidation {
     
     var vm: PhrasesUnitViewModel!
-    var vmReview: EmbeddedReviewViewModel!
+    var vmReview = EmbeddedReviewViewModel()
     override var vmSettings: SettingsViewModel! { vm.vmSettings }
     var arrPhrases: [MUnitPhrase] { vm.arrPhrasesFiltered ?? vm.arrPhrases }
     
@@ -24,7 +24,6 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        vmReview = EmbeddedReviewViewModel()
         tableView.registerForDraggedTypes([tableRowDragType])
     }
     
@@ -192,28 +191,23 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     }
     
     @IBAction func reviewPhrases(_ sender: AnyObject) {
-        if vmReview.subscription != nil {
-            vmReview.stop()
-        } else {
-            let optionsVC = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: "ReviewOptionsViewController") as! ReviewOptionsViewController
-            optionsVC.options.mode = 0
-            optionsVC.options.shuffled = vmReview.shuffled
-            optionsVC.complete = { [unowned self] in
-                self.vmReview.shuffled = optionsVC.options.shuffled
-                self.vmReview.levelge0only = optionsVC.options.levelge0only!
-                var arrPhrases = self.arrPhrases
-                if self.vmReview.shuffled {
-                    arrPhrases = arrPhrases.shuffled()
-                }
-                let arrIDs = arrPhrases.map{ $0.ID }
-                self.vmReview.start(arrIDs: arrIDs, interval: self.vmSettings.USSCANINTERVAL) { [unowned self] i in
-                    if let row = self.arrPhrases.firstIndex(where: { $0.ID == arrIDs[i] }) {
-                        self.tableView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
-                    }
+        vmReview.stop()
+        let optionsVC = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: "ReviewOptionsViewController") as! ReviewOptionsViewController
+        optionsVC.options.copy(from: vmReview.options)
+        optionsVC.complete = { [unowned self] in
+            self.vmReview.options.copy(from: optionsVC.options)
+            var arrPhrases = self.arrPhrases
+            if self.vmReview.options.shuffled {
+                arrPhrases = arrPhrases.shuffled()
+            }
+            let arrIDs = arrPhrases.map{ $0.ID }
+            self.vmReview.start(arrIDs: arrIDs, interval: self.vmReview.options.interval) { [unowned self] i in
+                if let row = self.arrPhrases.firstIndex(where: { $0.ID == arrIDs[i] }) {
+                    self.tableView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
                 }
             }
-            self.presentAsSheet(optionsVC)
         }
+        self.presentAsSheet(optionsVC)
     }
 }
 

@@ -47,7 +47,7 @@ class NoteViewModel: NSObject {
                     i += 1
                 }
             }
-        subscription?.disposed(by: rx.disposeBag)
+        subscription! ~ rx.disposeBag
     }
     
     func clearNotes(wordCount: Int, isNoteEmpty: @escaping (Int) -> Bool, getOne: @escaping (Int) -> Observable<()>) -> Observable<()> {

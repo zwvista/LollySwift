@@ -71,10 +71,10 @@ class WordsUnitViewModel: NSObject {
     
     func create(item: MUnitWord) -> Observable<()> {
         MUnitWord.create(item: item).flatMap {
-           MUnitWord.getDataById($0, arrTextbooks: self.vmSettings.arrTextbooks)
+            MUnitWord.getDataById($0, arrTextbooks: self.vmSettings.arrTextbooks)
         }.map {
-           guard let o = $0 else {return}
-           item.copy(from: o)
+            guard let o = $0 else {return}
+            item.copy(from: o)
         }
     }
     

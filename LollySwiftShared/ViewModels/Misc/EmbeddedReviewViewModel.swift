@@ -11,8 +11,7 @@ import RxSwift
 import NSObject_Rx
 
 class EmbeddedReviewViewModel: NSObject {
-    var shuffled = false
-    var levelge0only = true
+    var options = MReviewOptions(isEmbedded: true)
     var subscription: Disposable? = nil
 
     func stop() {
@@ -23,7 +22,7 @@ class EmbeddedReviewViewModel: NSObject {
     func start(arrIDs: [Int], interval: Int, getOne: @escaping (Int) -> ()) {
         var i = 0
         let wordCount = arrIDs.count
-        subscription = Observable<Int>.interval(DispatchTimeInterval.milliseconds(interval), scheduler: MainScheduler.instance).subscribe { _ in
+        subscription = Observable<Int>.interval(DispatchTimeInterval.seconds(interval), scheduler: MainScheduler.instance).subscribe { _ in
             if i < wordCount {
                 getOne(i)
                 i += 1
@@ -31,6 +30,6 @@ class EmbeddedReviewViewModel: NSObject {
                 self.stop()
             }
         }
-        subscription?.disposed(by: rx.disposeBag)
+        subscription! ~ rx.disposeBag
     }
 }

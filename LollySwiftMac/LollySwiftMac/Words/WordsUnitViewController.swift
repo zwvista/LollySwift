@@ -15,7 +15,7 @@ import NSObject_Rx
 class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NSToolbarItemValidation {
 
     var vm: WordsUnitViewModel!
-    var vmReview: EmbeddedReviewViewModel!
+    var vmReview = EmbeddedReviewViewModel()
     override var vmSettings: SettingsViewModel! { vm.vmSettings }
     var arrWords: [MUnitWord] { vm.arrWordsFiltered ?? vm.arrWords }
     override var arrPhrases: [MLangPhrase] { vm.arrPhrases }
@@ -26,7 +26,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        vmReview = EmbeddedReviewViewModel()
+        vmReview.options.levelge0only = true
         tvWords.registerForDraggedTypes([tableRowDragType])
     }
     
@@ -270,32 +270,26 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     }
     
     @IBAction func reviewWords(_ sender: AnyObject) {
-        if vmReview.subscription != nil {
-            vmReview.stop()
-        } else {
-            let optionsVC = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: "ReviewOptionsViewController") as! ReviewOptionsViewController
-            optionsVC.options.mode = 0
-            optionsVC.options.shuffled = vmReview.shuffled
-            optionsVC.options.levelge0only = vmReview.levelge0only
-            optionsVC.complete = { [unowned self] in
-                self.vmReview.shuffled = optionsVC.options.shuffled
-                self.vmReview.levelge0only = optionsVC.options.levelge0only!
-                var arrWords = self.arrWords
-                if self.vmReview.levelge0only {
-                    arrWords = arrWords.filter { $0.LEVEL >= 0 }
-                }
-                if self.vmReview.shuffled {
-                    arrWords = arrWords.shuffled()
-                }
-                let arrIDs = arrWords.map { $0.ID }
-                self.vmReview.start(arrIDs: arrIDs, interval: self.vmSettings.USSCANINTERVAL) { [unowned self] i in
-                    if let row = self.arrWords.firstIndex(where: { $0.ID == arrIDs[i] }) {
-                        self.tvWords.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
-                    }
+        vmReview.stop()
+        let optionsVC = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: "ReviewOptionsViewController") as! ReviewOptionsViewController
+        optionsVC.options.copy(from: vmReview.options)
+        optionsVC.complete = { [unowned self] in
+            self.vmReview.options.copy(from: optionsVC.options)
+            var arrWords = self.arrWords
+            if self.vmReview.options.levelge0only! {
+                arrWords = arrWords.filter { $0.LEVEL >= 0 }
+            }
+            if self.vmReview.options.shuffled {
+                arrWords = arrWords.shuffled()
+            }
+            let arrIDs = arrWords.map { $0.ID }
+            self.vmReview.start(arrIDs: arrIDs, interval: self.vmReview.options.interval) { [unowned self] i in
+                if let row = self.arrWords.firstIndex(where: { $0.ID == arrIDs[i] }) {
+                    self.tvWords.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
                 }
             }
-            self.presentAsSheet(optionsVC)
         }
+        self.presentAsSheet(optionsVC)
     }
 
     @IBAction func selectPhrases(_ sender: AnyObject) {

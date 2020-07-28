@@ -84,10 +84,8 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
     @IBAction func newTest(_ sender: AnyObject) {
         let optionsVC = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: "ReviewOptionsViewController") as! ReviewOptionsViewController
         optionsVC.options.copy(from: options)
-        optionsVC.options.mode = vm.mode.rawValue
         optionsVC.complete = { [unowned self] in
             self.options.copy(from: optionsVC.options)
-            self.vm.mode = ReviewMode(rawValue: optionsVC.pubMode.indexOfSelectedItem)!
             self.subscription?.dispose()
             self.vm.newTest(options: self.options).subscribe {
                 self.doTest()

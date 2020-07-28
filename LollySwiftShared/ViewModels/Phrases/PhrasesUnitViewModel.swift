@@ -61,10 +61,10 @@ class PhrasesUnitViewModel: NSObject {
     
     func create(item: MUnitPhrase) -> Observable<()> {
         MUnitPhrase.create(item: item).flatMap {
-           MUnitPhrase.getDataById($0, arrTextbooks: self.vmSettings.arrTextbooks)
+            MUnitPhrase.getDataById($0, arrTextbooks: self.vmSettings.arrTextbooks)
         }.map {
-           guard let o = $0 else {return}
-           item.copy(from: o)
+            guard let o = $0 else {return}
+            item.copy(from: o)
         }
     }
     

@@ -20,7 +20,8 @@ class ReviewOptionsViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        pubMode.selectItem(at: options.mode)
+        pubMode.isEnabled = !options.isEmbedded
+        pubMode.selectItem(at: options.mode.rawValue)
         scOrder.selectedSegment = options.shuffled ? 1 : 0
         if let b = options.levelge0only {
             scLevel.selectedSegment = b ? 1 : 0
@@ -32,7 +33,7 @@ class ReviewOptionsViewController: NSViewController {
     
     @IBAction func okClicked(_ sender: AnyObject) {
         self.commitEditing()
-        options.mode = pubMode.indexOfSelectedItem
+        options.mode = ReviewMode(rawValue: pubMode.indexOfSelectedItem)!
         options.shuffled = scOrder.selectedSegment == 1
         options.levelge0only = scLevel.selectedSegment == 1
         complete?()

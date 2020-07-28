@@ -90,7 +90,7 @@ class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
             subscription = Observable<Int>.interval(DispatchTimeInterval.milliseconds(vmSettings.USREVIEWINTERVAL), scheduler: MainScheduler.instance).subscribe { _ in
                 self.check(self)
             }
-            subscription?.disposed(by: rx.disposeBag)
+            subscription! ~ rx.disposeBag
         }
     }
     
