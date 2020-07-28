@@ -77,11 +77,9 @@ class PhrasesUnitDetailViewController: UITableViewController, UITextFieldDelegat
         item.TRANSLATION = tfTranslation.text
         if isAdd {
             vm.arrPhrases.append(item)
-            PhrasesUnitViewModel.create(item: item).subscribe(onNext: {
-                self.item.ID = $0
-            }) ~ rx.disposeBag
+            vm.create(item: item).subscribe() ~ rx.disposeBag
         } else {
-            PhrasesUnitViewModel.update(item: item).subscribe() ~ rx.disposeBag
+            vm.update(item: item).subscribe() ~ rx.disposeBag
         }
     }
     

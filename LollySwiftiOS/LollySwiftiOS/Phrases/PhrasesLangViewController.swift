@@ -38,7 +38,7 @@ class PhrasesLangViewController: PhrasesBaseViewController {
         let item = self.vm.arrPhrases[i]
         func delete() {
             self.yesNoAction(title: "delete", message: "Do you really want to delete the phrase \"\(item.PHRASE)\"?", yesHandler: { (action) in
-                PhrasesLangViewModel.delete(item.ID).subscribe() ~ self.rx.disposeBag
+                PhrasesLangViewModel.delete(item: item).subscribe() ~ self.rx.disposeBag
                 self.vm.arrPhrases.remove(at: i)
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }, noHandler: { (action) in

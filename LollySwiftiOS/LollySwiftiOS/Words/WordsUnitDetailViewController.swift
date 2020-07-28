@@ -83,14 +83,11 @@ class WordsUnitDetailViewController: UITableViewController, UITextFieldDelegate 
         item.WORD = vmSettings.autoCorrectInput(text: tfWord.text ?? "")
         item.NOTE = tfNote.text
         if isAdd {
-            if !item.WORD.isEmpty {
-                vm.arrWords.append(item)
-                WordsUnitViewModel.create(item: item).subscribe(onNext: {
-                    self.item.ID = $0
-                }) ~ rx.disposeBag
-            }
+            guard item.WORD.isEmpty else {return}
+            vm.arrWords.append(item)
+            vm.create(item: item).subscribe() ~ rx.disposeBag
         } else {
-            WordsUnitViewModel.update(item: item).subscribe() ~ rx.disposeBag
+            vm.update(item: item).subscribe() ~ rx.disposeBag
         }
     }
     

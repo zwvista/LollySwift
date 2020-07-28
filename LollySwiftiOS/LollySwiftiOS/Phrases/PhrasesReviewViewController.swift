@@ -26,8 +26,7 @@ class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var swShuffled: UISwitch!
 
     var isSpeaking = false
-    var shuffled = true
-    var levelge0only = true
+    var options = MReviewOptions()
     var subscription: Disposable? = nil
     
     let ddReviewMode = DropDown()
@@ -82,7 +81,7 @@ class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func newTest(_ sender: AnyObject) {
         subscription?.dispose()
-        vm.newTest(shuffled: shuffled, groupSelected: 1, groupCount: 1).subscribe {
+        vm.newTest(options: options).subscribe {
             self.doTest()
         } ~ rx.disposeBag
         btnCheck.setTitle(vm.isTestMode ? "Check" : "Next", for: .normal)
@@ -124,7 +123,7 @@ class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func shuffledOrNotChanged(_ sender: AnyObject) {
-        shuffled = (sender as! UISwitch).isOn
+        options.shuffled = (sender as! UISwitch).isOn
     }
     
     @IBAction func reviewModeChanged(_ sender: AnyObject) {

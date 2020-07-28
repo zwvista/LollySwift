@@ -59,7 +59,7 @@ class PhrasesUnitBatchViewController: UITableViewController, UITextFieldDelegate
                 if swUnit.isOn { item.UNIT = unit }
                 if swPart.isOn { item.PART = part }
                 if swSeqNum.isOn { item.SEQNUM += seqnum }
-                o = o.concat(PhrasesUnitViewModel.update(item: item))
+                o = o.concat(vm.update(item: item))
             }
         }
         o.subscribe() ~ rx.disposeBag
