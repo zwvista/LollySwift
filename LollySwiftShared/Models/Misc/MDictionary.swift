@@ -85,14 +85,3 @@ class MDictionary: NSObject, Codable {
         return RestApi.getRecords(url: url)
     }
 }
-
-@objcMembers
-class MDictType: NSObject, Codable {
-    var CODE = 0
-    var NAME = ""
-    static func getData() -> Observable<[MDictType]> {
-        // SQL: SELECT * FROM CODES WHERE KIND = 1
-        let url = "\(CommonApi.urlAPI)CODES?filter=KIND,eq,1"
-        return RestApi.getRecords(url: url)
-    }
-}

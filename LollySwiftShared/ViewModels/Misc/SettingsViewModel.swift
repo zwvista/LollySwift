@@ -204,7 +204,7 @@ class SettingsViewModel: NSObject {
     var toType: UnitPartToType = .unit
 
     var arrAutoCorrect = [MAutoCorrect]()
-    var arrDictTypes = [MDictType]()
+    var arrDictTypes = [MCode]()
     
     weak var delegate: SettingsViewModelDelegate?
     
@@ -270,7 +270,7 @@ class SettingsViewModel: NSObject {
         Observable.zip(MLanguage.getData(),
                               MUSMapping.getData(),
                               MUserSetting.getData(userid: CommonApi.userid),
-                              MDictType.getData())
+                              MCode.getData())
             .flatMap { result -> Observable<()> in
                 self.arrLanguages = result.0
                 self.arrUSMappings = result.1

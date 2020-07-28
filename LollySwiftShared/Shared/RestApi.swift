@@ -50,13 +50,6 @@ extension Encodable {
     
 }
 
-class MSPResult: NSObject, Codable {
-    var NEW_ID: String?
-    var result = ""
-    
-    override var description: String { try! toJSONString() ?? "" }
-}
-
 class RestApi {
 
     static func getObject<T: Decodable>(url: String, keyPath: String? = nil) -> Observable<T> {

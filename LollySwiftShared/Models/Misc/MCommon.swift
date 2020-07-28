@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RxSwift
 
 @objcMembers
 class MSelectItem: NSObject {
@@ -20,18 +21,27 @@ class MSelectItem: NSObject {
     }
 }
 
-protocol MWordProtocol {
-    var LANGID: Int { get set }
-    var WORDID: Int { get }
-    var WORD: String { get set }
-    var NOTE: String? { get set }
-    var FAMIID: Int { get set }
-    var LEVEL: Int { get set }
+@objcMembers
+class MCode: NSObject, Codable {
+    var CODE = 0
+    var NAME = ""
+    static func getData() -> Observable<[MCode]> {
+        // SQL: SELECT * FROM CODES WHERE KIND = 1
+        let url = "\(CommonApi.urlAPI)CODES?filter=KIND,eq,1"
+        return RestApi.getRecords(url: url)
+    }
 }
 
-protocol MPhraseProtocol {
-    var LANGID: Int { get set }
-    var PHRASEID: Int { get }
-    var PHRASE: String { get set }
-    var TRANSLATION: String? { get set }
+class MSPResult: NSObject, Codable {
+    var NEW_ID: String?
+    var result = ""
+    
+    override var description: String { try! toJSONString() ?? "" }
+}
+
+@objcMembers
+class MTransformItem: NSObject, Codable {
+    var index = 0
+    var extractor = ""
+    var replacement = ""
 }

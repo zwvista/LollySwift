@@ -1,5 +1,5 @@
 //
-//  WordsUnitDetail.swift
+//  WordsUnitDetailViewModel.swift
 //  LollySwiftMac
 //
 //  Created by 趙偉 on 2020/07/21.
@@ -14,7 +14,6 @@ class WordsUnitDetailViewModel: NSObject {
     var item: MUnitWord!
     var complete: (() -> Void)?
     var vmSingle: SingleWordViewModel!
-    var disposeBag: DisposeBag!
     var isAdd: Bool!
 
     init(vm: WordsUnitViewModel, item: MUnitWord, okComplete: (() -> Void)?, initComplete: @escaping () -> ()) {

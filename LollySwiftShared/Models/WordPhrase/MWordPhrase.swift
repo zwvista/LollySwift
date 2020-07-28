@@ -9,6 +9,22 @@
 import Foundation
 import RxSwift
 
+protocol MWordProtocol {
+    var LANGID: Int { get set }
+    var WORDID: Int { get }
+    var WORD: String { get set }
+    var NOTE: String? { get set }
+    var FAMIID: Int { get set }
+    var LEVEL: Int { get set }
+}
+
+protocol MPhraseProtocol {
+    var LANGID: Int { get set }
+    var PHRASEID: Int { get }
+    var PHRASE: String { get set }
+    var TRANSLATION: String? { get set }
+}
+
 @objcMembers
 class MWordPhrase: NSObject, Codable {
     dynamic var ID = 0
