@@ -1935,12 +1935,12 @@ Gw
         <scene sceneID="rFd-Ja-Sb7">
             <objects>
                 <viewController storyboardIdentifier="PhrasesLangDetailViewController" id="e88-1i-Fvb" customClass="PhrasesLangDetailViewController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="7LW-0g-T76">
-                        <rect key="frame" x="0.0" y="0.0" width="623" height="307"/>
+                    <view key="view" misplaced="YES" id="7LW-0g-T76">
+                        <rect key="frame" x="0.0" y="0.0" width="623" height="282"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="G5G-43-Jyw">
-                                <rect key="frame" x="18" y="271" width="21" height="16"/>
+                                <rect key="frame" x="18" y="220" width="21" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="ID:" id="eDa-CQ-sWN">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1948,7 +1948,7 @@ Gw
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="y7a-1Y-9lE">
-                                <rect key="frame" x="120" y="269" width="300" height="21"/>
+                                <rect key="frame" x="120" y="217" width="300" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="9LQ-Az-1An"/>
                                 </constraints>
@@ -1962,7 +1962,7 @@ Gw
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="T0S-rE-G34">
-                                <rect key="frame" x="18" y="237" width="59" height="16"/>
+                                <rect key="frame" x="18" y="186" width="59" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="PHRASE:" id="Ln1-ZD-Xld">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1970,7 +1970,7 @@ Gw
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0TT-Hs-IdS">
-                                <rect key="frame" x="120" y="235" width="300" height="21"/>
+                                <rect key="frame" x="120" y="183" width="300" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="15R-TL-30D"/>
                                 </constraints>
@@ -1984,7 +1984,7 @@ Gw
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Be5-zJ-8U2">
-                                <rect key="frame" x="18" y="203" width="97" height="16"/>
+                                <rect key="frame" x="18" y="152" width="97" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="TRANSLATION:" id="VIF-d5-R2e">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1992,7 +1992,7 @@ Gw
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="W1W-t3-DxX">
-                                <rect key="frame" x="120" y="201" width="300" height="21"/>
+                                <rect key="frame" x="120" y="149" width="300" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="meS-yp-tU0"/>
                                 </constraints>
@@ -2032,13 +2032,13 @@ Gw
                                 </connections>
                             </button>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M3b-Qm-bOT">
-                                <rect key="frame" x="20" y="55" width="588" height="123"/>
+                                <rect key="frame" x="20" y="55" width="588" height="71"/>
                                 <clipView key="contentView" id="4bV-li-2gb">
-                                    <rect key="frame" x="1" y="0.0" width="586" height="122"/>
+                                    <rect key="frame" x="1" y="0.0" width="586" height="70"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" autosaveColumns="NO" rowSizeStyle="automatic" headerView="btb-BO-IVj" viewBased="YES" id="QpT-RC-McY">
-                                            <rect key="frame" x="0.0" y="0.0" width="1054" height="97"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="1054" height="45"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -2341,7 +2341,7 @@ Gw
                                     </subviews>
                                 </clipView>
                                 <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="nAC-2E-Ee0">
-                                    <rect key="frame" x="1" y="106" width="586" height="16"/>
+                                    <rect key="frame" x="1" y="54" width="586" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="Pch-WB-iZt">
