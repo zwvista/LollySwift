@@ -30,5 +30,14 @@ class TransformEditViewModel: NSObject {
         templateText = template
         arrTranformItems = CommonApi.toTransformItems(transform: transform)
     }
+    
+    func reindex(complete: @escaping (Int) -> ()) {
+        for i in 1...arrTranformItems.count {
+            let item = arrTranformItems[i - 1]
+            guard item.index != i else {continue}
+            item.index = i
+            complete(i - 1)
+        }
+    }
 
 }

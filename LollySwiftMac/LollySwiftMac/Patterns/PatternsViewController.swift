@@ -344,7 +344,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
                 newIndexOffset += 1
             }
         }
-        let col = tableView.tableColumns.firstIndex { $0.title == "SEQNUM" }!
+        let col = tableView.tableColumns.firstIndex { $0.identifier.rawValue == "SEQNUM" }!
         vm.reindexWebPage {
             tableView.reloadData(forRowIndexes: [$0], columnIndexes: [col])
         }

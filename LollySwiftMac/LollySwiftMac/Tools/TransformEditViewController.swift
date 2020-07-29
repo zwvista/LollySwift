@@ -17,10 +17,13 @@ class TransformEditViewController: NSViewController, NSTableViewDataSource, NSTa
 
     @IBOutlet weak var tvTranformItems: NSTableView!
     
+    let tableRowDragType = NSPasteboard.PasteboardType(rawValue: "private.table-row")
+
     override func viewDidLoad() {
         super.viewDidLoad()
         vm = TransformEditViewModel(transform: TRANSFORM, template: TEMPLATE)
         tvTranformItems.reloadData()
+        tvTranformItems.registerForDraggedTypes([tableRowDragType])
     }
 
     func numberOfRows(in tableView: NSTableView) -> Int {
@@ -33,5 +36,52 @@ class TransformEditViewController: NSViewController, NSTableViewDataSource, NSTa
         let item = vm.arrTranformItems[row]
         cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
         return cell
+    }
+    
+    func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
+        let item = NSPasteboardItem()
+        item.setString(String(row), forType: tableRowDragType)
+        return item
+    }
+    
+    func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int, proposedDropOperation dropOperation: NSTableView.DropOperation) -> NSDragOperation {
+        if dropOperation == .above {
+            return .move
+        }
+        return []
+    }
+    
+    func tableView(_ tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int, dropOperation: NSTableView.DropOperation) -> Bool {
+        var oldIndexes = [Int]()
+        info.enumerateDraggingItems(options: [], for: tableView, classes: [NSPasteboardItem.self], searchOptions: [:]) { (draggingItem, _, _) in
+            if let str = (draggingItem.item as! NSPasteboardItem).string(forType: self.tableRowDragType), let index = Int(str) {
+                oldIndexes.append(index)
+            }
+        }
+        
+        var oldIndexOffset = 0
+        var newIndexOffset = 0
+        
+        tableView.beginUpdates()
+        for oldIndex in oldIndexes {
+            if oldIndex < row {
+                tableView.moveRow(at: oldIndex + oldIndexOffset, to: row - 1)
+                oldIndexOffset -= 1
+            } else {
+                tableView.moveRow(at: oldIndex, to: row + newIndexOffset)
+                newIndexOffset += 1
+            }
+        }
+        let col = tableView.tableColumns.firstIndex { $0.identifier.rawValue == "index" }!
+        vm.reindex {
+            tableView.reloadData(forRowIndexes: [$0], columnIndexes: [col])
+        }
+        tableView.endUpdates()
+        
+        return true
+    }
+
+    deinit {
+        print("DEBUG: \(self.className) deinit")
     }
 }

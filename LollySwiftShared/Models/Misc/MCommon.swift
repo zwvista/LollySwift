@@ -40,8 +40,14 @@ class MSPResult: NSObject, Codable {
 }
 
 @objcMembers
-class MTransformItem: NSObject, Codable {
-    var index = 0
-    var extractor = ""
-    var replacement = ""
+class MTransformItem: NSObject {
+    dynamic var index = 0
+    dynamic var extractor = ""
+    dynamic var replacement = ""
+    
+    func copy(from x: MTransformItem) {
+        index = x.index
+        extractor = x.extractor
+        replacement = x.replacement
+    }
 }

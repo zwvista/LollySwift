@@ -9,10 +9,20 @@
 import Cocoa
 
 class TransformItemEditController: NSViewController {
+    
+    @objc var item: MTransformItem!
 
+    @IBOutlet weak var tfIndex: NSTextField!
+    @IBOutlet weak var tfExtractor: NSTextField!
+    @IBOutlet weak var tfReplacement: NSTextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
     }
     
+    deinit {
+        print("DEBUG: \(self.className) deinit")
+    }
+
 }
