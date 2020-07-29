@@ -13,9 +13,16 @@ class TransformEditViewController: NSViewController, NSTableViewDataSource, NSTa
     var complete: (() -> Void)?
     @objc var vm: TransformEditViewModel!
     var TRANSFORM = ""
-    var TEMPLATE = ""
+    @objc var TEMPLATE = ""
+    @objc var URL = ""
 
     @IBOutlet weak var tvTranformItems: NSTableView!
+    @IBOutlet weak var tfSourceWord: NSTextField!
+    @IBOutlet weak var tfURL: NSTextField!
+    @IBOutlet weak var tvSource: NSTextView!
+    @IBOutlet weak var tvResult: NSTextView!
+    @IBOutlet weak var tvInterim: NSTextView!
+    @IBOutlet weak var tvTemplate: NSTextView!
     
     let tableRowDragType = NSPasteboard.PasteboardType(rawValue: "private.table-row")
 
