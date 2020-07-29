@@ -31,6 +31,11 @@ class TransformEditViewModel: NSObject {
         arrTranformItems = CommonApi.toTransformItems(transform: transform)
     }
     
+    func moveTransformItem(at oldIndex: Int, to newIndex: Int) {
+        let item = arrTranformItems.remove(at: oldIndex)
+        arrTranformItems.insert(item, at: newIndex)
+    }
+
     func reindex(complete: @escaping (Int) -> ()) {
         for i in 1...arrTranformItems.count {
             let item = arrTranformItems[i - 1]

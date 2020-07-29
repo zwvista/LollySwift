@@ -62,13 +62,18 @@ class TransformEditViewController: NSViewController, NSTableViewDataSource, NSTa
         var oldIndexOffset = 0
         var newIndexOffset = 0
         
+        func moveRow(at oldIndex: Int, to newIndex: Int) {
+            vm.moveTransformItem(at: oldIndex, to: newIndex)
+            tableView.moveRow(at: oldIndex, to: newIndex)
+        }
+
         tableView.beginUpdates()
         for oldIndex in oldIndexes {
             if oldIndex < row {
-                tableView.moveRow(at: oldIndex + oldIndexOffset, to: row - 1)
+                moveRow(at: oldIndex + oldIndexOffset, to: row - 1)
                 oldIndexOffset -= 1
             } else {
-                tableView.moveRow(at: oldIndex, to: row + newIndexOffset)
+                moveRow(at: oldIndex, to: row + newIndexOffset)
                 newIndexOffset += 1
             }
         }
