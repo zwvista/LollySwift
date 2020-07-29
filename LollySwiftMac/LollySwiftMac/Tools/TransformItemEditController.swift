@@ -11,6 +11,7 @@ import Cocoa
 class TransformItemEditController: NSViewController {
     
     @objc var item: MTransformItem!
+    var complete: (() -> Void)?
 
     @IBOutlet weak var tfIndex: NSTextField!
     @IBOutlet weak var tfExtractor: NSTextField!

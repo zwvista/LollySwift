@@ -85,6 +85,18 @@ class TransformEditViewController: NSViewController, NSTableViewDataSource, NSTa
         
         return true
     }
+    
+    @IBAction func editTransformItem(_ sender: AnyObject) {
+        let itemEditVC = self.storyboard!.instantiateController(withIdentifier: "TransformItemEditController") as! TransformItemEditController
+        let i = tvTranformItems.selectedRow
+        itemEditVC.item = MTransformItem()
+        itemEditVC.item.copy(from: vm.arrTranformItems[i])
+        itemEditVC.complete = {
+            self.vm.arrTranformItems[i].copy(from: itemEditVC.item)
+            self.tvTranformItems.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tvTranformItems.tableColumns.count))
+        }
+        self.presentAsModalWindow(itemEditVC)
+    }
 
     deinit {
         print("DEBUG: \(self.className) deinit")
