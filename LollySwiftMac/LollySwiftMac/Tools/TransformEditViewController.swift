@@ -86,6 +86,13 @@ class TransformEditViewController: NSViewController, NSTableViewDataSource, NSTa
         return true
     }
     
+    @IBAction func addTransformItem(_ sender: AnyObject) {
+        let itemEditVC = self.storyboard!.instantiateController(withIdentifier: "TransformItemEditController") as! TransformItemEditController
+        itemEditVC.item = vm.newTransformItem()
+        itemEditVC.complete = { self.tvTranformItems.reloadData() }
+        self.presentAsSheet(itemEditVC)
+    }
+
     @IBAction func editTransformItem(_ sender: AnyObject) {
         let itemEditVC = self.storyboard!.instantiateController(withIdentifier: "TransformItemEditController") as! TransformItemEditController
         let i = tvTranformItems.selectedRow

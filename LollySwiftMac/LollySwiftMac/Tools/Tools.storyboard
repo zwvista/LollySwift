@@ -1602,6 +1602,7 @@ Gw
                                                                 <action trigger="doubleAction" selector="editTransformItem:" target="uYA-vF-nxS" id="djm-NU-jy5"/>
                                                                 <outlet property="dataSource" destination="uYA-vF-nxS" id="e1V-Nt-rhm"/>
                                                                 <outlet property="delegate" destination="uYA-vF-nxS" id="VDf-ZN-LUH"/>
+                                                                <outlet property="menu" destination="iYN-J1-sb3" id="tZ4-7C-s9A"/>
                                                             </connections>
                                                         </tableView>
                                                     </subviews>
@@ -1883,6 +1884,25 @@ Gw
                     </connections>
                 </viewController>
                 <customObject id="cTb-10-ieR" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <menu id="iYN-J1-sb3">
+                    <items>
+                        <menuItem title="Add" id="aYw-dB-IxV">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="addTransformItem:" target="uYA-vF-nxS" id="mNb-Sz-7wm"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem title="Edit" id="V6t-fo-4Rw">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="editTransformItem:" target="uYA-vF-nxS" id="Axm-24-AHC"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem title="Delete" id="hWH-Ps-CwG">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                    </items>
+                </menu>
             </objects>
             <point key="canvasLocation" x="167.5" y="1938.5"/>
         </scene>
