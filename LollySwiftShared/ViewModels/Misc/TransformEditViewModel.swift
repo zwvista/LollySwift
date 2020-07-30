@@ -13,9 +13,9 @@ import NSObject_Rx
 class TransformEditViewModel: NSObject {
     
     var TRANSFORM = ""
-    var TEMPLATE = ""
-    @objc dynamic var templateText = ""
-    @objc dynamic var sourceURL = ""
+    @objc dynamic var TEMPLATE = ""
+    @objc dynamic var URL = ""
+    @objc dynamic var sourceWord = ""
     @objc dynamic var sourceText = ""
     @objc dynamic var resultText = ""
     @objc dynamic var interimText = ""
@@ -24,11 +24,8 @@ class TransformEditViewModel: NSObject {
     var arrTranformItems = [MTransformItem]()
     var InterimResults = [String]()
     
-    init(transform: String, template: String, url: String) {
-        TRANSFORM = transform
-        TEMPLATE = template
-        templateText = template
-        arrTranformItems = CommonApi.toTransformItems(transform: transform)
+    func initItems() {
+        arrTranformItems = CommonApi.toTransformItems(transform: TRANSFORM)
     }
     
     func newTransformItem() -> MTransformItem {
@@ -49,6 +46,13 @@ class TransformEditViewModel: NSObject {
             item.index = i
             complete(i - 1)
         }
+    }
+    
+    func getHtml() {
+        
+    }
+    
+    func executeTransform() {
     }
 
 }

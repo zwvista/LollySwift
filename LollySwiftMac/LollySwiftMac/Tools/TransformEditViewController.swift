@@ -12,10 +12,7 @@ import WebKit
 class TransformEditViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 
     var complete: (() -> Void)?
-    @objc var vm: TransformEditViewModel!
-    var TRANSFORM = ""
-    @objc var TEMPLATE = ""
-    @objc var URL = ""
+    @objc var vm = TransformEditViewModel()
 
     @IBOutlet weak var tvTranformItems: NSTableView!
     @IBOutlet weak var tfSourceWord: NSTextField!
@@ -31,7 +28,7 @@ class TransformEditViewController: NSViewController, NSTableViewDataSource, NSTa
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        vm = TransformEditViewModel(transform: TRANSFORM, template: TEMPLATE, url: URL)
+        vm.initItems()
         tvTranformItems.reloadData()
         tvTranformItems.registerForDraggedTypes([tableRowDragType])
     }
@@ -115,6 +112,12 @@ class TransformEditViewController: NSViewController, NSTableViewDataSource, NSTa
         self.presentAsModalWindow(itemEditVC)
     }
 
+    @IBAction func getHtml(_ sender: Any) {
+    }
+    
+    @IBAction func executeTransform(_ sender: Any) {
+    }
+    
     deinit {
         print("DEBUG: \(self.className) deinit")
     }
