@@ -118,6 +118,7 @@ class TransformEditViewController: NSViewController, NSTableViewDataSource, NSTa
     }
     
     @IBAction func executeTransform(_ sender: Any) {
+        vm.executeTransform()
     }
     
     deinit {

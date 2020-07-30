@@ -64,7 +64,7 @@ class BlogViewController: NSViewController, NSMenuItemValidation  {
         }
         if n == 0 {
             tvHtml.string = vmBlog.markedToHtml(text: tvMarked.string)
-            let str = CommonApi.getHtml(text: tvHtml.string)
+            let str = CommonApi.toHtml(text: tvHtml.string)
             wvBlog.loadHTMLString(str, baseURL: nil)
             MacApi.copyText(tvHtml.string)
         } else {

@@ -55,7 +55,7 @@ class CommonApi {
     static func doTransform(text: String, item: MTransformItem) -> String {
         let dic = ["<delete>": "", "\\t": "\t", "\\n": "\n"]
         var s = text
-        let regex = item.extractor.r!
+        let regex = try! Regex(pattern: item.extractor)
         var replacement = item.replacement
         if replacement.starts(with: "<extract>") {
             replacement = String(replacement.dropFirst("<extract>".length))
@@ -89,7 +89,7 @@ class CommonApi {
         TOTAL == 0 ? "N/A" : "\(floor(CORRECT.toDouble / TOTAL.toDouble * 1000) / 10)%"
     }
     
-    static func getHtml(text: String) -> String {
+    static func toHtml(text: String) -> String {
         "<html><body>\(text)</body></html>"
     }
 }

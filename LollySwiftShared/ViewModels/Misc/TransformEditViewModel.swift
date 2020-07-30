@@ -19,6 +19,7 @@ class TransformEditViewModel: NSObject {
     @objc dynamic var sourceText = ""
     var sourceUrl = ""
     @objc dynamic var resultText = ""
+    var resultHtml = ""
     @objc dynamic var interimText = ""
     @objc dynamic var interimMaxIndex = 0
     @objc dynamic var interimIndex = 0
@@ -55,6 +56,17 @@ class TransformEditViewModel: NSObject {
     }
     
     func executeTransform() {
+        var text = CommonApi.removeReturns(html: sourceText)
+        InterimResults = [text]
+        for item in arrTranformItems {
+            text = CommonApi.doTransform(text: text, item: item)
+            InterimResults.append(text)
+        }
+        interimMaxIndex = InterimResults.count - 1
+        resultText = text
+        resultHtml = TEMPLATE.isEmpty ? CommonApi.toHtml(text: text) : TEMPLATE.replacingOccurrences(of: "{0}", with: sourceWord)
+        .replacingOccurrences(of: "{1}", with: CommonApi.cssFolder)
+        .replacingOccurrences(of: "{2}", with: text as String)
     }
 
 }
