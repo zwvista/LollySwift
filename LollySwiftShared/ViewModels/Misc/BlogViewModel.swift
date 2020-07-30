@@ -120,9 +120,6 @@ class BlogViewModel: NSObject {
     func getExplanation(text: String) -> String {
         "* \(text)：：\n"
     }
-    func getHtml(text: String) -> String {
-        "<html><body>\(text)</body></html>"
-    }
     func getPatternUrl(patternNo: String) -> String {
         "http://viethuong.web.fc2.com/MONDAI/\(patternNo).html"
     }

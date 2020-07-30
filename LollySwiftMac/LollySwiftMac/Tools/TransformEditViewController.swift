@@ -113,6 +113,8 @@ class TransformEditViewController: NSViewController, NSTableViewDataSource, NSTa
     }
 
     @IBAction func getHtml(_ sender: Any) {
+        vm.getHtml()
+        wvSource.load(URLRequest(url: URL(string: vm.sourceUrl)!))
     }
     
     @IBAction func executeTransform(_ sender: Any) {

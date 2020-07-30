@@ -88,4 +88,8 @@ class CommonApi {
     static func getAccuracy(CORRECT: Int, TOTAL: Int) -> String {
         TOTAL == 0 ? "N/A" : "\(floor(CORRECT.toDouble / TOTAL.toDouble * 1000) / 10)%"
     }
+    
+    static func getHtml(text: String) -> String {
+        "<html><body>\(text)</body></html>"
+    }
 }

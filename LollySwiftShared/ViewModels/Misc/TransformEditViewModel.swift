@@ -17,6 +17,7 @@ class TransformEditViewModel: NSObject {
     @objc dynamic var URL = ""
     @objc dynamic var sourceWord = ""
     @objc dynamic var sourceText = ""
+    var sourceUrl = ""
     @objc dynamic var resultText = ""
     @objc dynamic var interimText = ""
     @objc dynamic var interimMaxIndex = 0
@@ -49,7 +50,8 @@ class TransformEditViewModel: NSObject {
     }
     
     func getHtml() {
-        
+        sourceUrl = URL.replacingOccurrences(of: "{0}", with: sourceWord)
+        RestApi.getHtml(url: sourceUrl).subscribe(onNext: { self.sourceText = $0 }) ~ rx.disposeBag
     }
     
     func executeTransform() {
