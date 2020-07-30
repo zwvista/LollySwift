@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import WebKit
 
 class TransformEditViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 
@@ -20,7 +21,9 @@ class TransformEditViewController: NSViewController, NSTableViewDataSource, NSTa
     @IBOutlet weak var tfSourceWord: NSTextField!
     @IBOutlet weak var tfURL: NSTextField!
     @IBOutlet weak var tvSource: NSTextView!
+    @IBOutlet weak var wvSource: WKWebView!
     @IBOutlet weak var tvResult: NSTextView!
+    @IBOutlet weak var wvResult: WKWebView!
     @IBOutlet weak var tvInterim: NSTextView!
     @IBOutlet weak var tvTemplate: NSTextView!
     
@@ -28,7 +31,7 @@ class TransformEditViewController: NSViewController, NSTableViewDataSource, NSTa
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        vm = TransformEditViewModel(transform: TRANSFORM, template: TEMPLATE)
+        vm = TransformEditViewModel(transform: TRANSFORM, template: TEMPLATE, url: URL)
         tvTranformItems.reloadData()
         tvTranformItems.registerForDraggedTypes([tableRowDragType])
     }

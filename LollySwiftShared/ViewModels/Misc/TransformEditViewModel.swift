@@ -24,7 +24,7 @@ class TransformEditViewModel: NSObject {
     var arrTranformItems = [MTransformItem]()
     var InterimResults = [String]()
     
-    init(transform: String, template: String) {
+    init(transform: String, template: String, url: String) {
         TRANSFORM = transform
         TEMPLATE = template
         templateText = template
