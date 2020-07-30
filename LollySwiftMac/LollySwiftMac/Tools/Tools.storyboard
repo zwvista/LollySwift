@@ -1623,7 +1623,7 @@ Gw
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="F1z-Sd-XWd" secondAttribute="bottom" id="VcM-dl-fOx"/>
-                                            <constraint firstAttribute="trailing" secondItem="F1z-Sd-XWd" secondAttribute="trailing" constant="-1" id="X5P-C0-i4r"/>
+                                            <constraint firstAttribute="trailing" secondItem="F1z-Sd-XWd" secondAttribute="trailing" id="X5P-C0-i4r"/>
                                             <constraint firstItem="F1z-Sd-XWd" firstAttribute="top" secondItem="nQC-0k-mzW" secondAttribute="top" id="lb3-oN-jwN"/>
                                             <constraint firstItem="F1z-Sd-XWd" firstAttribute="leading" secondItem="nQC-0k-mzW" secondAttribute="leading" id="y06-2G-YXD"/>
                                         </constraints>
@@ -1642,7 +1642,7 @@ Gw
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="5" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="abg-4j-HZZ">
-                                                                    <rect key="frame" x="0.0" y="693" width="892" height="32"/>
+                                                                    <rect key="frame" x="0.0" y="693" width="979" height="32"/>
                                                                     <subviews>
                                                                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SBN-sz-lK9">
                                                                             <rect key="frame" x="0.0" y="11" width="100" height="21"/>
@@ -1657,6 +1657,9 @@ Gw
                                                                         </textField>
                                                                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5PM-M7-R1J">
                                                                             <rect key="frame" x="105" y="11" width="700" height="21"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="ake-3M-Jz0"/>
+                                                                            </constraints>
                                                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="URL" drawsBackground="YES" id="L6s-BJ-OeO">
                                                                                 <font key="font" metaFont="system"/>
                                                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -1676,20 +1679,33 @@ Gw
                                                                                 <font key="font" metaFont="system"/>
                                                                             </buttonCell>
                                                                         </button>
+                                                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fKg-9T-0lN">
+                                                                            <rect key="frame" x="891" y="4" width="94" height="32"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="width" constant="82" id="Hbk-k4-MdV"/>
+                                                                            </constraints>
+                                                                            <buttonCell key="cell" type="push" title="Transform" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="X1X-Df-Vhj">
+                                                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                                <font key="font" metaFont="system"/>
+                                                                            </buttonCell>
+                                                                        </button>
                                                                     </subviews>
                                                                     <constraints>
                                                                         <constraint firstItem="5PM-M7-R1J" firstAttribute="leading" secondItem="SBN-sz-lK9" secondAttribute="trailing" constant="5" id="2nR-tY-DY5"/>
                                                                         <constraint firstAttribute="height" constant="32" id="6PS-qf-4nG"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="fKg-9T-0lN" secondAttribute="trailing" id="N4R-68-fWe"/>
+                                                                        <constraint firstItem="fKg-9T-0lN" firstAttribute="leading" secondItem="3Wz-q0-tpJ" secondAttribute="trailing" constant="5" id="Ru7-JD-gPu"/>
                                                                         <constraint firstItem="SBN-sz-lK9" firstAttribute="leading" secondItem="abg-4j-HZZ" secondAttribute="leading" id="fCA-GK-6X9"/>
                                                                         <constraint firstItem="3Wz-q0-tpJ" firstAttribute="leading" secondItem="5PM-M7-R1J" secondAttribute="trailing" constant="5" id="tXg-ni-pCr"/>
-                                                                        <constraint firstAttribute="trailing" secondItem="3Wz-q0-tpJ" secondAttribute="trailing" id="th0-Fx-wt2"/>
                                                                     </constraints>
                                                                     <visibilityPriorities>
                                                                         <integer value="1000"/>
                                                                         <integer value="1000"/>
                                                                         <integer value="1000"/>
+                                                                        <integer value="1000"/>
                                                                     </visibilityPriorities>
                                                                     <customSpacing>
+                                                                        <real value="3.4028234663852886e+38"/>
                                                                         <real value="3.4028234663852886e+38"/>
                                                                         <real value="3.4028234663852886e+38"/>
                                                                         <real value="3.4028234663852886e+38"/>
@@ -1775,7 +1791,7 @@ Gw
                                                     </tabViewItem>
                                                     <tabViewItem label="Result" identifier="" id="Svu-pC-iJO">
                                                         <view key="view" id="Oqp-Dl-ahn">
-                                                            <rect key="frame" x="10" y="33" width="853" height="750"/>
+                                                            <rect key="frame" x="10" y="33" width="844" height="750"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <splitView misplaced="YES" arrangesAllSubviews="NO" dividerStyle="paneSplitter" translatesAutoresizingMaskIntoConstraints="NO" id="ryC-bF-bgT">
@@ -1789,7 +1805,7 @@ Gw
                                                                                     <rect key="frame" x="0.0" y="0.0" width="690" height="364"/>
                                                                                     <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="nWd-AN-O1e">
                                                                                         <rect key="frame" x="0.0" y="0.0" width="690" height="364"/>
-                                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                                        <autoresizingMask key="autoresizingMask"/>
                                                                                         <subviews>
                                                                                             <textView importsGraphics="NO" richText="NO" verticallyResizable="YES" spellingCorrection="YES" smartInsertDelete="YES" id="1Lz-8M-re7">
                                                                                                 <rect key="frame" x="0.0" y="0.0" width="690" height="364"/>
@@ -1855,7 +1871,7 @@ Gw
                                                     </tabViewItem>
                                                     <tabViewItem label="Interim" identifier="" id="bRf-Eg-pwN">
                                                         <view key="view" id="t3R-jh-BPF">
-                                                            <rect key="frame" x="10" y="33" width="853" height="750"/>
+                                                            <rect key="frame" x="10" y="33" width="844" height="750"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v7M-kq-DM2">
@@ -1887,7 +1903,7 @@ Gw
                                                                     <rect key="frame" x="0.0" y="381" width="634" height="322"/>
                                                                     <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="4kZ-5E-PFy">
                                                                         <rect key="frame" x="0.0" y="0.0" width="634" height="322"/>
-                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                        <autoresizingMask key="autoresizingMask"/>
                                                                         <subviews>
                                                                             <textView importsGraphics="NO" richText="NO" verticallyResizable="YES" spellingCorrection="YES" smartInsertDelete="YES" id="Usq-wK-lxu">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="634" height="322"/>
@@ -1923,14 +1939,14 @@ Gw
                                                     </tabViewItem>
                                                     <tabViewItem label="Template" identifier="" id="pNs-de-e3q">
                                                         <view key="view" id="W1y-Mb-iUp">
-                                                            <rect key="frame" x="10" y="33" width="853" height="750"/>
+                                                            <rect key="frame" x="10" y="33" width="844" height="750"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r5s-ti-zjp">
                                                                     <rect key="frame" x="0.0" y="381" width="634" height="344"/>
                                                                     <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="VzF-g8-4eZ">
                                                                         <rect key="frame" x="0.0" y="0.0" width="634" height="344"/>
-                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                        <autoresizingMask key="autoresizingMask"/>
                                                                         <subviews>
                                                                             <textView importsGraphics="NO" richText="NO" verticallyResizable="YES" spellingCorrection="YES" smartInsertDelete="YES" id="4WT-0z-9a9">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="634" height="344"/>
