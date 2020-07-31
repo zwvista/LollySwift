@@ -12,9 +12,8 @@ import NSObject_Rx
 
 class TransformEditViewModel: NSObject {
     
-    var TRANSFORM = ""
+    @objc var item: MDictionary!
     @objc dynamic var TEMPLATE = ""
-    @objc dynamic var URL = ""
     @objc dynamic var sourceWord = ""
     @objc dynamic var sourceText = ""
     var sourceUrl = ""
@@ -27,7 +26,8 @@ class TransformEditViewModel: NSObject {
     var InterimResults = [String]()
     
     func initItems() {
-        arrTranformItems = CommonApi.toTransformItems(transform: TRANSFORM)
+        TEMPLATE = item.TEMPLATE ?? ""
+        arrTranformItems = CommonApi.toTransformItems(transform: item.TRANSFORM ?? "")
     }
     
     func newTransformItem() -> MTransformItem {
@@ -51,7 +51,7 @@ class TransformEditViewModel: NSObject {
     }
     
     func getHtml() {
-        sourceUrl = URL.replacingOccurrences(of: "{0}", with: sourceWord.urlEncoded())
+        sourceUrl = item.URL!.replacingOccurrences(of: "{0}", with: sourceWord.urlEncoded())
         RestApi.getHtml(url: sourceUrl).subscribe(onNext: { self.sourceText = $0 }) ~ rx.disposeBag
     }
     
@@ -71,6 +71,11 @@ class TransformEditViewModel: NSObject {
     
     func updateInterimText() {
         interimText = InterimResults[interimIndex]
+    }
+    
+    func onOK() {
+        item.TRANSFORM = arrTranformItems.flatMap { [$0.extractor, $0.replacement] }.joined(separator: "\r\n")
+        item.TEMPLATE = TEMPLATE
     }
 
 }

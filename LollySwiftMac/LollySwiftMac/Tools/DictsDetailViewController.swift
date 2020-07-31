@@ -49,9 +49,7 @@ class DictsDetailViewController: NSViewController {
 
     @IBAction func editTransform(_ sender: Any) {
         let tranformVC = self.storyboard!.instantiateController(withIdentifier: "TransformEditViewController") as! TransformEditViewController
-        tranformVC.vm.TRANSFORM = item.TRANSFORM ?? ""
-        tranformVC.vm.TEMPLATE = ((sender as! NSButton).tag == 0 ? item.TEMPLATE : item.TEMPLATE2) ?? ""
-        tranformVC.vm.URL = item.URL ?? ""
+        tranformVC.vm.item = item
         tranformVC.complete = {  }
         self.presentAsModalWindow(tranformVC)
     }

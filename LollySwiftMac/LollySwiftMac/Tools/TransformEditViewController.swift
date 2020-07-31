@@ -126,6 +126,12 @@ class TransformEditViewController: NSViewController, NSTableViewDataSource, NSTa
         vm.updateInterimText()
     }
     
+    @IBAction func okClicked(_ sender: Any) {
+        // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
+        self.commitEditing()
+        dismiss(self)
+    }
+
     deinit {
         print("DEBUG: \(self.className) deinit")
     }
