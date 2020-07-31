@@ -96,7 +96,10 @@ class TransformEditViewController: NSViewController, NSTableViewDataSource, NSTa
     @IBAction func addTransformItem(_ sender: AnyObject) {
         let itemEditVC = self.storyboard!.instantiateController(withIdentifier: "TransformItemEditController") as! TransformItemEditController
         itemEditVC.item = vm.newTransformItem()
-        itemEditVC.complete = { self.tvTranformItems.reloadData() }
+        itemEditVC.complete = {
+            self.vm.arrTranformItems.append(itemEditVC.item)
+            self.tvTranformItems.reloadData()
+        }
         self.presentAsSheet(itemEditVC)
     }
 
@@ -129,6 +132,7 @@ class TransformEditViewController: NSViewController, NSTableViewDataSource, NSTa
     @IBAction func okClicked(_ sender: Any) {
         // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
         self.commitEditing()
+        vm.onOK()
         dismiss(self)
     }
 
