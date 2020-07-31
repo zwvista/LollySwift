@@ -92,4 +92,10 @@ class CommonApi {
     static func toHtml(text: String) -> String {
         "<html><body>\(text)</body></html>"
     }
+    
+    static func applyTemplate(template: String, word: String, text: String) -> String {
+        template.replacingOccurrences(of: "{0}", with: word)
+        .replacingOccurrences(of: "{1}", with: CommonApi.cssFolder)
+        .replacingOccurrences(of: "{2}", with: text)
+    }
 }

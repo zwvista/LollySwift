@@ -1655,7 +1655,11 @@ Gw
                                                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
                                                                             <connections>
-                                                                                <binding destination="uYA-vF-nxS" name="value" keyPath="vm.sourceWord" id="Any-FZ-NVQ"/>
+                                                                                <binding destination="uYA-vF-nxS" name="value" keyPath="vm.sourceWord" id="Y8m-eJ-7HY">
+                                                                                    <dictionary key="options">
+                                                                                        <bool key="NSContinuouslyUpdatesValue" value="YES"/>
+                                                                                    </dictionary>
+                                                                                </binding>
                                                                             </connections>
                                                                         </textField>
                                                                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5PM-M7-R1J">
@@ -1902,10 +1906,19 @@ Gw
                                                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
+                                                                            <connections>
+                                                                                <action selector="interimIndexChanged:" target="uYA-vF-nxS" id="DyU-ZF-fYQ"/>
+                                                                                <binding destination="uYA-vF-nxS" name="value" keyPath="vm.interimIndex" id="mj6-wC-ZPz"/>
+                                                                            </connections>
                                                                         </textField>
                                                                         <stepper horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FAo-7U-9bo">
                                                                             <rect key="frame" x="827" y="-3" width="19" height="28"/>
                                                                             <stepperCell key="cell" continuous="YES" alignment="left" minValue="1" maxValue="10" doubleValue="3" id="1xZ-YP-U8Z"/>
+                                                                            <connections>
+                                                                                <action selector="interimIndexChanged:" target="uYA-vF-nxS" id="UNb-SM-DEH"/>
+                                                                                <binding destination="uYA-vF-nxS" name="maxValue" keyPath="vm.interimMaxIndex" id="gh1-TQ-sQs"/>
+                                                                                <binding destination="uYA-vF-nxS" name="value" keyPath="vm.interimIndex" previousBinding="gh1-TQ-sQs" id="WNh-E5-Eyy"/>
+                                                                            </connections>
                                                                         </stepper>
                                                                     </subviews>
                                                                     <visibilityPriorities>

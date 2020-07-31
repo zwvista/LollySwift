@@ -62,11 +62,15 @@ class TransformEditViewModel: NSObject {
             text = CommonApi.doTransform(text: text, item: item)
             InterimResults.append(text)
         }
+        interimIndex = 0
         interimMaxIndex = InterimResults.count - 1
+        interimText = sourceText
         resultText = text
-        resultHtml = TEMPLATE.isEmpty ? CommonApi.toHtml(text: text) : TEMPLATE.replacingOccurrences(of: "{0}", with: sourceWord)
-        .replacingOccurrences(of: "{1}", with: CommonApi.cssFolder)
-        .replacingOccurrences(of: "{2}", with: text as String)
+        resultHtml = TEMPLATE.isEmpty ? CommonApi.toHtml(text: text) : CommonApi.applyTemplate(template: TEMPLATE, word: sourceWord, text: text)
+    }
+    
+    func updateInterimText() {
+        interimText = InterimResults[interimIndex]
     }
 
 }

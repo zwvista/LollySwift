@@ -119,6 +119,11 @@ class TransformEditViewController: NSViewController, NSTableViewDataSource, NSTa
     
     @IBAction func executeTransform(_ sender: Any) {
         vm.executeTransform()
+        wvResult.loadHTMLString(vm.resultHtml, baseURL: nil)
+    }
+    
+    @IBAction func interimIndexChanged(_ sender: Any) {
+        vm.updateInterimText()
     }
     
     deinit {
