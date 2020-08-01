@@ -1447,7 +1447,7 @@ Gw
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4dF-pg-41s">
-                                <rect key="frame" x="1037" y="13" width="59" height="32"/>
+                                <rect key="frame" x="1254" y="13" width="59" height="32"/>
                                 <buttonCell key="cell" type="push" title="OK" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="e23-pY-Tlc">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -1460,7 +1460,7 @@ DQ
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nkh-9R-nNp">
-                                <rect key="frame" x="1104" y="13" width="82" height="32"/>
+                                <rect key="frame" x="1321" y="13" width="82" height="32"/>
                                 <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="OVE-Cc-cOk">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -1654,7 +1654,7 @@ Gw
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="5" horizontalStackHuggingPriority="250" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="abg-4j-HZZ">
-                                                                    <rect key="frame" x="0.0" y="693" width="975" height="32"/>
+                                                                    <rect key="frame" x="0.0" y="693" width="1060" height="32"/>
                                                                     <subviews>
                                                                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SBN-sz-lK9">
                                                                             <rect key="frame" x="0.0" y="11" width="100" height="21"/>
@@ -1714,13 +1714,27 @@ Gw
                                                                                 <action selector="executeTransform:" target="uYA-vF-nxS" id="8ng-wR-Wet"/>
                                                                             </connections>
                                                                         </button>
+                                                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SgA-HE-3Ha">
+                                                                            <rect key="frame" x="974" y="4" width="92" height="32"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="width" constant="80" id="b8y-H1-RCv"/>
+                                                                            </constraints>
+                                                                            <buttonCell key="cell" type="push" title="Get &amp; Transform" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="VF7-tv-vfy">
+                                                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                                <font key="font" metaFont="system"/>
+                                                                            </buttonCell>
+                                                                            <connections>
+                                                                                <action selector="getHtmlAndTransform:" target="uYA-vF-nxS" id="maX-ec-p9s"/>
+                                                                            </connections>
+                                                                        </button>
                                                                     </subviews>
                                                                     <constraints>
                                                                         <constraint firstItem="5PM-M7-R1J" firstAttribute="leading" secondItem="SBN-sz-lK9" secondAttribute="trailing" constant="5" id="2nR-tY-DY5"/>
+                                                                        <constraint firstItem="SgA-HE-3Ha" firstAttribute="leading" secondItem="fKg-9T-0lN" secondAttribute="trailing" constant="5" id="4RC-dO-eGQ"/>
                                                                         <constraint firstAttribute="height" constant="32" id="6PS-qf-4nG"/>
-                                                                        <constraint firstAttribute="trailing" secondItem="fKg-9T-0lN" secondAttribute="trailing" id="N4R-68-fWe"/>
                                                                         <constraint firstItem="fKg-9T-0lN" firstAttribute="leading" secondItem="3Wz-q0-tpJ" secondAttribute="trailing" constant="5" id="Ru7-JD-gPu"/>
                                                                         <constraint firstItem="SBN-sz-lK9" firstAttribute="leading" secondItem="abg-4j-HZZ" secondAttribute="leading" id="fCA-GK-6X9"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="SgA-HE-3Ha" secondAttribute="trailing" id="hRH-uZ-6oP"/>
                                                                         <constraint firstItem="3Wz-q0-tpJ" firstAttribute="leading" secondItem="5PM-M7-R1J" secondAttribute="trailing" constant="5" id="tXg-ni-pCr"/>
                                                                     </constraints>
                                                                     <visibilityPriorities>
@@ -1728,8 +1742,10 @@ Gw
                                                                         <integer value="1000"/>
                                                                         <integer value="1000"/>
                                                                         <integer value="1000"/>
+                                                                        <integer value="1000"/>
                                                                     </visibilityPriorities>
                                                                     <customSpacing>
+                                                                        <real value="3.4028234663852886e+38"/>
                                                                         <real value="3.4028234663852886e+38"/>
                                                                         <real value="3.4028234663852886e+38"/>
                                                                         <real value="3.4028234663852886e+38"/>
@@ -1833,7 +1849,7 @@ Gw
                                                                                     <rect key="frame" x="0.0" y="0.0" width="690" height="364"/>
                                                                                     <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="nWd-AN-O1e">
                                                                                         <rect key="frame" x="0.0" y="0.0" width="690" height="364"/>
-                                                                                        <autoresizingMask key="autoresizingMask"/>
+                                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                                         <subviews>
                                                                                             <textView importsGraphics="NO" richText="NO" verticallyResizable="YES" spellingCorrection="YES" smartInsertDelete="YES" id="1Lz-8M-re7">
                                                                                                 <rect key="frame" x="0.0" y="0.0" width="690" height="364"/>
@@ -1989,7 +2005,7 @@ Gw
                                                                     <rect key="frame" x="0.0" y="0.0" width="843" height="725"/>
                                                                     <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="VzF-g8-4eZ">
                                                                         <rect key="frame" x="0.0" y="0.0" width="843" height="725"/>
-                                                                        <autoresizingMask key="autoresizingMask"/>
+                                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                         <subviews>
                                                                             <textView importsGraphics="NO" richText="NO" verticallyResizable="YES" spellingCorrection="YES" smartInsertDelete="YES" id="4WT-0z-9a9">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="843" height="725"/>
@@ -2059,6 +2075,7 @@ Gw
                         <outlet property="tvSource" destination="7w3-ab-coU" id="rio-I6-l79"/>
                         <outlet property="tvTemplate" destination="4WT-0z-9a9" id="unJ-Gq-5lw"/>
                         <outlet property="tvTranformItems" destination="zY3-dT-hda" id="og1-pt-3fP"/>
+                        <outlet property="tvTransform" destination="wWr-o4-exa" id="cwe-yH-NkD"/>
                         <outlet property="wvResult" destination="ALV-iV-K5S" id="TQ0-uo-ErA"/>
                         <outlet property="wvSource" destination="PQO-pr-kkM" id="C3f-ZV-3yq"/>
                     </connections>

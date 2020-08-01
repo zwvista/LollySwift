@@ -23,6 +23,7 @@ class TransformEditViewController: NSViewController, NSTableViewDataSource, NSTa
     @IBOutlet weak var wvResult: WKWebView!
     @IBOutlet weak var tvInterim: NSTextView!
     @IBOutlet weak var tvTemplate: NSTextView!
+    @IBOutlet weak var tvTransform: NSTabView!
     
     let tableRowDragType = NSPasteboard.PasteboardType(rawValue: "private.table-row")
 
@@ -116,15 +117,23 @@ class TransformEditViewController: NSViewController, NSTableViewDataSource, NSTa
     }
 
     @IBAction func getHtml(_ sender: Any) {
-        vm.getHtml()
+        vm.getHtml().subscribe() ~ rx.disposeBag
         wvSource.load(URLRequest(url: URL(string: vm.sourceUrl)!))
     }
     
     @IBAction func executeTransform(_ sender: Any) {
         vm.executeTransform()
         wvResult.loadHTMLString(vm.resultHtml, baseURL: nil)
+        tvTransform.selectTabViewItem(at: 1)
     }
     
+    @IBAction func getHtmlAndTransform(_ sender: Any) {
+        vm.getHtml().subscribe {
+            self.executeTransform(sender)
+        } ~ rx.disposeBag
+        wvSource.load(URLRequest(url: URL(string: vm.sourceUrl)!))
+    }
+
     @IBAction func interimIndexChanged(_ sender: Any) {
         vm.updateInterimText()
     }

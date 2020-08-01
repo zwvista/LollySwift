@@ -50,9 +50,9 @@ class TransformEditViewModel: NSObject {
         }
     }
     
-    func getHtml() {
+    func getHtml() -> Observable<()> {
         sourceUrl = item.URL!.replacingOccurrences(of: "{0}", with: sourceWord.urlEncoded())
-        RestApi.getHtml(url: sourceUrl).subscribe(onNext: { self.sourceText = $0 }) ~ rx.disposeBag
+        return RestApi.getHtml(url: sourceUrl).map { self.sourceText = $0 }
     }
     
     func executeTransform() {
