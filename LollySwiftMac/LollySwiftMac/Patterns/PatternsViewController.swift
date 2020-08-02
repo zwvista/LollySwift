@@ -344,7 +344,6 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     func searchFieldDidStartSearching(_ sender: NSSearchField) {
         textFilter = vmSettings.autoCorrectInput(text: textFilter)
         sfFilter.stringValue = textFilter
-        scTextFilter.performClick(self)
     }
 
     func searchFieldDidEndSearching(_ sender: NSSearchField) {
@@ -352,7 +351,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     }
     
     @IBAction func filterPattern(_ sender: AnyObject) {
-        vm.applyFilters(textFilter: textFilter, scope: scTextFilter.selectedSegment == 0 ? "Word" : scTextFilter.selectedSegment == 1 ? "Note" : "Tags")
+        vm.applyFilters(textFilter: textFilter, scope: scTextFilter.selectedSegment == 0 ? "Pattern" : scTextFilter.selectedSegment == 1 ? "Note" : "Tags")
         self.tvPatterns.reloadData()
     }
 

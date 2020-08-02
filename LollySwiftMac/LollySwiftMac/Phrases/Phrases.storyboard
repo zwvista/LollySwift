@@ -93,12 +93,13 @@
                                     <searchField key="view" verticalHuggingPriority="750" tag="-1" textCompletion="NO" id="egf-aC-2Ca">
                                         <rect key="frame" x="0.0" y="14" width="119" height="22"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" id="X5k-RF-RYU">
+                                        <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" sendsWholeSearchString="YES" id="X5k-RF-RYU">
                                             <font key="font" usesAppearanceFont="YES"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </searchFieldCell>
                                         <connections>
+                                            <action selector="filterPhrase:" target="qEo-JS-MYZ" id="RWb-wA-zfA"/>
                                             <binding destination="P6D-Dv-O3U" name="value" keyPath="textFilter" id="5Ec-eD-0Uo"/>
                                             <outlet property="delegate" destination="P6D-Dv-O3U" id="4by-Bq-o7Y"/>
                                         </connections>
@@ -1671,12 +1672,13 @@ Gw
                                     <searchField key="view" verticalHuggingPriority="750" tag="-1" textCompletion="NO" id="qUX-lZ-cQc">
                                         <rect key="frame" x="0.0" y="14" width="119" height="22"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" id="b1u-JQ-VZk">
+                                        <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" sendsWholeSearchString="YES" id="b1u-JQ-VZk">
                                             <font key="font" usesAppearanceFont="YES"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </searchFieldCell>
                                         <connections>
+                                            <action selector="filterPhrase:" target="maH-dw-yMa" id="C1J-eD-0CJ"/>
                                             <binding destination="t1w-66-vYI" name="value" keyPath="textFilter" id="lc9-0C-ueX">
                                                 <dictionary key="options">
                                                     <bool key="NSContinuouslyUpdatesValue" value="YES"/>
@@ -1935,12 +1937,12 @@ Gw
         <scene sceneID="rFd-Ja-Sb7">
             <objects>
                 <viewController storyboardIdentifier="PhrasesLangDetailViewController" id="e88-1i-Fvb" customClass="PhrasesLangDetailViewController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" misplaced="YES" id="7LW-0g-T76">
+                    <view key="view" id="7LW-0g-T76">
                         <rect key="frame" x="0.0" y="0.0" width="623" height="282"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="G5G-43-Jyw">
-                                <rect key="frame" x="18" y="220" width="21" height="16"/>
+                                <rect key="frame" x="18" y="246" width="21" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="ID:" id="eDa-CQ-sWN">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1948,7 +1950,7 @@ Gw
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="y7a-1Y-9lE">
-                                <rect key="frame" x="120" y="217" width="300" height="21"/>
+                                <rect key="frame" x="120" y="244" width="300" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="9LQ-Az-1An"/>
                                 </constraints>
@@ -1962,7 +1964,7 @@ Gw
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="T0S-rE-G34">
-                                <rect key="frame" x="18" y="186" width="59" height="16"/>
+                                <rect key="frame" x="18" y="212" width="59" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="PHRASE:" id="Ln1-ZD-Xld">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1970,7 +1972,7 @@ Gw
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0TT-Hs-IdS">
-                                <rect key="frame" x="120" y="183" width="300" height="21"/>
+                                <rect key="frame" x="120" y="210" width="300" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="15R-TL-30D"/>
                                 </constraints>
@@ -1984,7 +1986,7 @@ Gw
                                 </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Be5-zJ-8U2">
-                                <rect key="frame" x="18" y="152" width="97" height="16"/>
+                                <rect key="frame" x="18" y="178" width="97" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="TRANSLATION:" id="VIF-d5-R2e">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1992,7 +1994,7 @@ Gw
                                 </textFieldCell>
                             </textField>
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="W1W-t3-DxX">
-                                <rect key="frame" x="120" y="149" width="300" height="21"/>
+                                <rect key="frame" x="120" y="176" width="300" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="meS-yp-tU0"/>
                                 </constraints>
@@ -2032,13 +2034,13 @@ Gw
                                 </connections>
                             </button>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M3b-Qm-bOT">
-                                <rect key="frame" x="20" y="55" width="588" height="71"/>
+                                <rect key="frame" x="20" y="55" width="588" height="98"/>
                                 <clipView key="contentView" id="4bV-li-2gb">
-                                    <rect key="frame" x="1" y="0.0" width="586" height="70"/>
+                                    <rect key="frame" x="1" y="0.0" width="586" height="97"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" autosaveColumns="NO" rowSizeStyle="automatic" headerView="btb-BO-IVj" viewBased="YES" id="QpT-RC-McY">
-                                            <rect key="frame" x="0.0" y="0.0" width="1054" height="45"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="1054" height="72"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -2341,7 +2343,7 @@ Gw
                                     </subviews>
                                 </clipView>
                                 <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="nAC-2E-Ee0">
-                                    <rect key="frame" x="1" y="54" width="586" height="16"/>
+                                    <rect key="frame" x="1" y="81" width="586" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="Pch-WB-iZt">
@@ -2453,12 +2455,13 @@ Gw
                                     <searchField key="view" verticalHuggingPriority="750" tag="-1" textCompletion="NO" id="WJ1-Yl-gvw">
                                         <rect key="frame" x="0.0" y="14" width="119" height="22"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Filter" usesSingleLineMode="YES" bezelStyle="round" id="JZ7-fT-CRf">
+                                        <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Filter" usesSingleLineMode="YES" bezelStyle="round" sendsWholeSearchString="YES" id="JZ7-fT-CRf">
                                             <font key="font" usesAppearanceFont="YES"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </searchFieldCell>
                                         <connections>
+                                            <action selector="filterPhrase:" target="2fr-uc-31Q" id="vaP-To-Jbx"/>
                                             <binding destination="Ngy-o1-fVc" name="value" keyPath="textFilter" id="qfO-ud-JcS">
                                                 <dictionary key="options">
                                                     <bool key="NSContinuouslyUpdatesValue" value="YES"/>

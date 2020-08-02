@@ -138,12 +138,13 @@
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="96" id="Vbt-0T-9Ss"/>
                                                 </constraints>
-                                                <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" placeholderString="Filter" usesSingleLineMode="YES" bezelStyle="round" id="yje-Rk-mpC">
+                                                <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" placeholderString="Filter" usesSingleLineMode="YES" bezelStyle="round" sendsWholeSearchString="YES" id="yje-Rk-mpC">
                                                     <font key="font" usesAppearanceFont="YES"/>
                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </searchFieldCell>
                                                 <connections>
+                                                    <action selector="filterPattern:" target="JiS-vG-Xmg" id="fkD-P8-zDu"/>
                                                     <binding destination="JiS-vG-Xmg" name="value" keyPath="textFilter" id="zvo-yr-XUo"/>
                                                     <outlet property="delegate" destination="JiS-vG-Xmg" id="q1L-C1-SgL"/>
                                                 </connections>

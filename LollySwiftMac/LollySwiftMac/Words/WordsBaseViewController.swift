@@ -72,7 +72,6 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     func searchFieldDidStartSearching(_ sender: NSSearchField) {
         textFilter = vmSettings.autoCorrectInput(text: textFilter)
         sfFilter.stringValue = textFilter
-        scTextFilter.performClick(self)
     }
 
     func searchFieldDidEndSearching(_ sender: NSSearchField) {

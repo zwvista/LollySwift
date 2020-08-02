@@ -399,15 +399,13 @@
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="96" id="tuA-jr-exd"/>
                                                 </constraints>
-                                                <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" placeholderString="Filter" usesSingleLineMode="YES" bezelStyle="round" id="p7g-Xg-FQh">
+                                                <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" placeholderString="Filter" usesSingleLineMode="YES" bezelStyle="round" sendsWholeSearchString="YES" id="p7g-Xg-FQh">
                                                     <font key="font" usesAppearanceFont="YES"/>
                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                    <connections>
-                                                        <binding destination="F8i-pe-Ate" name="value" keyPath="textFilter" id="qAO-Hp-2RZ"/>
-                                                    </connections>
                                                 </searchFieldCell>
                                                 <connections>
+                                                    <action selector="filterWord:" target="F8i-pe-Ate" id="n5z-b1-BFB"/>
                                                     <binding destination="F8i-pe-Ate" name="value" keyPath="textFilter" id="YWM-dh-fE8"/>
                                                     <outlet property="delegate" destination="F8i-pe-Ate" id="YQJ-cI-ymr"/>
                                                 </connections>
@@ -2942,7 +2940,7 @@ Gw
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="96" id="A1r-OT-h3N"/>
                                                 </constraints>
-                                                <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" id="zqX-zk-elq">
+                                                <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" sendsWholeSearchString="YES" id="zqX-zk-elq">
                                                     <font key="font" usesAppearanceFont="YES"/>
                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -2951,6 +2949,7 @@ Gw
                                                     </connections>
                                                 </searchFieldCell>
                                                 <connections>
+                                                    <action selector="filterWord:" target="UkS-Xi-ogF" id="Icf-np-l9e"/>
                                                     <binding destination="UkS-Xi-ogF" name="value" keyPath="textFilter" id="ugU-ev-Fwp"/>
                                                     <outlet property="delegate" destination="UkS-Xi-ogF" id="3lf-dw-pry"/>
                                                 </connections>
@@ -4481,7 +4480,7 @@ Gw
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="96" id="3LF-F0-2Z4"/>
                                                 </constraints>
-                                                <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" id="bdW-MI-v9N">
+                                                <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" sendsWholeSearchString="YES" id="bdW-MI-v9N">
                                                     <font key="font" usesAppearanceFont="YES"/>
                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -4490,6 +4489,7 @@ Gw
                                                     </connections>
                                                 </searchFieldCell>
                                                 <connections>
+                                                    <action selector="filterWord:" target="S5w-0q-IQt" id="lkq-PM-02G"/>
                                                     <binding destination="S5w-0q-IQt" name="value" keyPath="textFilter" id="DOR-Tl-TSH"/>
                                                     <outlet property="delegate" destination="S5w-0q-IQt" id="EwZ-0v-b31"/>
                                                 </connections>
@@ -4557,7 +4557,7 @@ Gw
                                 <rect key="frame" x="0.0" y="0.0" width="1200" height="534"/>
                                 <subviews>
                                     <customView misplaced="YES" id="IDt-tN-TIX">
-                                        <rect key="frame" x="0.0" y="0.0" width="432" height="534"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="391" height="534"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Gqc-yq-vq1">
@@ -4986,7 +4986,7 @@ Gw
                                         </constraints>
                                     </customView>
                                     <customView misplaced="YES" id="Qwh-xx-prU">
-                                        <rect key="frame" x="442" y="0.0" width="758" height="534"/>
+                                        <rect key="frame" x="401" y="0.0" width="799" height="534"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
                                             <splitView misplaced="YES" arrangesAllSubviews="NO" dividerStyle="paneSplitter" translatesAutoresizingMaskIntoConstraints="NO" id="Ctk-Q9-TAw">

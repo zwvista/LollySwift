@@ -155,7 +155,6 @@ class PhrasesBaseWindowController: NSWindowController, NSSearchFieldDelegate, NS
     func searchFieldDidStartSearching(_ sender: NSSearchField) {
         textFilter = vm.autoCorrectInput(text: textFilter)
         sfFilter.stringValue = textFilter
-        scTextFilter.performClick(self)
     }
 
     func searchFieldDidEndSearching(_ sender: NSSearchField) {
