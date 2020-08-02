@@ -1747,9 +1747,6 @@ Gw
 DQ
 </string>
                                 </buttonCell>
-                                <connections>
-                                    <action selector="okClicked:" target="Sru-VC-AXo" id="T9W-DA-KUq"/>
-                                </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="i7O-RW-Eo5">
                                 <rect key="frame" x="243" y="13" width="82" height="32"/>
@@ -1793,6 +1790,7 @@ Gw
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btnOK" destination="z1B-Vz-6g6" id="fe7-71-cdR"/>
                         <outlet property="tfID" destination="BY2-qq-Dtb" id="OOY-5N-EtI"/>
                         <outlet property="tfNote" destination="VQh-1f-nso" id="wVN-yI-SjO"/>
                         <outlet property="tfPattern" destination="Eyx-8O-SuC" id="y4f-Rv-fcf"/>

@@ -29,6 +29,7 @@ class PatternsDetailViewController: NSViewController {
     }
     
     override func viewDidAppear() {
+        super.viewDidAppear()
         // https://stackoverflow.com/questions/24235815/cocoa-how-to-set-window-title-from-within-view-controller-in-swift
         (!vmDetail.isAdd ? tfPattern : tfNote).becomeFirstResponder()
         view.window?.title = vmDetail.isAdd ? "New Pattern" : item.PATTERN

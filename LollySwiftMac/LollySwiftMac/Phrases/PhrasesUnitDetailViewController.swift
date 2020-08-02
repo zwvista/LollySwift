@@ -43,6 +43,7 @@ class PhrasesUnitDetailViewController: NSViewController, NSTableViewDataSource, 
     }
     
     override func viewDidAppear() {
+        super.viewDidAppear()
         // https://stackoverflow.com/questions/24235815/cocoa-how-to-set-window-title-from-within-view-controller-in-swift
         (item.PHRASE.isEmpty ? tfPhrase : tfTranslation).becomeFirstResponder()
         view.window?.title = isAdd ? "New Word" : item.PHRASE

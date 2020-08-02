@@ -34,6 +34,7 @@ class SelectDictsViewController: NSViewController, NSTableViewDataSource, NSTabl
         updateDictsAvailable()
     }
     override func viewDidAppear() {
+        super.viewDidAppear()
         view.window?.title = "Select Dictionaries"
     }
     

@@ -22,8 +22,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             //self.wordsInUnit(self)
             //self.wordsInLanguage(self)
             //self.readNumber(self)
-            //self.patternsInLanguage(self)
-            self.phrasesInUnit(self)
+            self.patternsInLanguage(self)
+            //self.phrasesInUnit(self)
         }) ~ rx.disposeBag
 
         // https://forums.developer.apple.com/thread/69484

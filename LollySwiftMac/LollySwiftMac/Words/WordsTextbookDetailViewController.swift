@@ -43,6 +43,7 @@ class WordsTextbookDetailViewController: NSViewController, NSTableViewDataSource
     }
     
     override func viewDidAppear() {
+        super.viewDidAppear()
         // https://stackoverflow.com/questions/24235815/cocoa-how-to-set-window-title-from-within-view-controller-in-swift
         (item.WORD.isEmpty ? tfWord : tfNote).becomeFirstResponder()
         view.window?.title = item.WORD

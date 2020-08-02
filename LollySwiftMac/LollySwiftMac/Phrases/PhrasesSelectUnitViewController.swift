@@ -41,6 +41,7 @@ class PhrasesSelectUnitViewController: NSViewController, NSTableViewDataSource, 
     }
     
     override func viewDidAppear() {
+        super.viewDidAppear()
         // https://stackoverflow.com/questions/24235815/cocoa-how-to-set-window-title-from-within-view-controller-in-swift
         view.window?.title = "Select Phrase"
     }

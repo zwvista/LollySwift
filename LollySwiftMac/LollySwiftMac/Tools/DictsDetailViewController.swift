@@ -39,6 +39,7 @@ class DictsDetailViewController: NSViewController {
     }
     
     override func viewDidAppear() {
+        super.viewDidAppear()
         view.window?.title = item.DICTNAME
         tfID.isEnabled = isAdd
         tfLangFrom.stringValue = vm.vmSettings.selectedLang.LANGNAME

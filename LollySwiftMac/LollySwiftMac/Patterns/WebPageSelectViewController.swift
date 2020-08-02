@@ -34,6 +34,7 @@ class WebPageSelectViewController: NSViewController, NSTableViewDataSource, NSTa
     }
     
     override func viewDidAppear() {
+        super.viewDidAppear()
         view.window?.title = "Existing Page"
     }
     

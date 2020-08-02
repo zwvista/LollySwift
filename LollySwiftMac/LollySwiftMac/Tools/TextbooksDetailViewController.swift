@@ -29,6 +29,7 @@ class TextbooksDetailViewController: NSViewController {
     }
     
     override func viewDidAppear() {
+        super.viewDidAppear()
         view.window?.title = item.TEXTBOOKNAME
         tfID.isEnabled = isAdd
         tfLang.stringValue = vm.vmSettings.selectedLang.LANGNAME
