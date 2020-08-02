@@ -27,10 +27,10 @@ class PatternsEditViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         vmEdit = PatternsEditViewModel(vm: vm, item: item, complete: complete)
-        vmEdit.itemEdit.ID ~> tfID.rx.text.orEmpty ~ rx.disposeBag
-        vmEdit.itemEdit.PATTERN <~> tfPattern.rx.text.orEmpty ~ rx.disposeBag
-        vmEdit.itemEdit.NOTE <~> tfNote.rx.text ~ rx.disposeBag
-        vmEdit.itemEdit.TAGS <~> tfTags.rx.text ~ rx.disposeBag
+        _ = vmEdit.itemEdit.ID ~> tfID.rx.text.orEmpty
+        _ = vmEdit.itemEdit.PATTERN <~> tfPattern.rx.text.orEmpty
+        _ = vmEdit.itemEdit.NOTE <~> tfNote.rx.text
+        _ = vmEdit.itemEdit.TAGS <~> tfTags.rx.text
         btnOK.rx.tap.subscribe { [unowned self] _ in
             self.vmEdit.onOK()
             self.dismiss(self.btnOK)

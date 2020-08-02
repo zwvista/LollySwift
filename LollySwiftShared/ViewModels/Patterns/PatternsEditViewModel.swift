@@ -39,4 +39,8 @@ class PatternsEditViewModel: NSObject {
             } ~ rx.disposeBag
         }
     }
+    
+    deinit {
+        print("DEBUG: \(self.className) deinit")
+    }
 }
