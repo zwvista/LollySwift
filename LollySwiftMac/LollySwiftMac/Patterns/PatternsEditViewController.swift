@@ -1,5 +1,5 @@
 //
-//  PatternsDetailViewController.swift
+//  PatternsEditViewController.swift
 //  LollySwiftMac
 //
 //  Created by 趙偉 on 2020/01/01.
@@ -11,10 +11,10 @@ import RxSwift
 import NSObject_Rx
 
 @objcMembers
-class PatternsDetailViewController: NSViewController {
+class PatternsEditViewController: NSViewController {
     
     var vm: PatternsViewModel!
-    var vmDetail: PatternsDetailViewModel!
+    var vmEdit: PatternsEditViewModel!
     var complete: (() -> Void)?
     var item: MPattern!
 
@@ -25,19 +25,23 @@ class PatternsDetailViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        vmDetail = PatternsDetailViewModel(vm: vm, item: item, complete: complete)
+        vmEdit = PatternsEditViewModel(vm: vm, item: item, complete: complete)
+        vmEdit.itemEdit.ID ~> tfID.rx.text.orEmpty ~ rx.disposeBag
+        vmEdit.itemEdit.PATTERN <~> tfPattern.rx.text.orEmpty ~ rx.disposeBag
+        vmEdit.itemEdit.NOTE <~> tfNote.rx.text ~ rx.disposeBag
+        vmEdit.itemEdit.TAGS <~> tfTags.rx.text ~ rx.disposeBag
     }
     
     override func viewDidAppear() {
         // https://stackoverflow.com/questions/24235815/cocoa-how-to-set-window-title-from-within-view-controller-in-swift
-        (!vmDetail.isAdd ? tfPattern : tfNote).becomeFirstResponder()
-        view.window?.title = vmDetail.isAdd ? "New Pattern" : item.PATTERN
+        (!vmEdit.isAdd ? tfPattern : tfNote).becomeFirstResponder()
+        view.window?.title = vmEdit.isAdd ? "New Pattern" : item.PATTERN
     }
     
     @IBAction func okClicked(_ sender: AnyObject) {
         // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
         self.commitEditing()
-        vmDetail.onOK()
+        vmEdit.onOK()
         dismiss(self)
     }
     

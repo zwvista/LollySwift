@@ -8,6 +8,7 @@
 
 import Foundation
 import RxSwift
+import RxRelay
 
 @objcMembers
 class MPattern: NSObject, Codable {
@@ -56,5 +57,25 @@ class MPattern: NSObject, Codable {
         // SQL: DELETE PATTERNS WHERE ID=?
         let url = "\(CommonApi.urlAPI)PATTERNS/\(id)"
         return RestApi.delete(url: url).map { print($0) }
+    }
+}
+
+class MPatternEdit {
+    var ID: BehaviorRelay<String>
+    var PATTERN: BehaviorRelay<String>
+    var NOTE: BehaviorRelay<String?>
+    var TAGS: BehaviorRelay<String?>
+    
+    init(x: MPattern) {
+        ID = BehaviorRelay(value: x.ID.toString)
+        PATTERN = BehaviorRelay(value: x.PATTERN)
+        NOTE = BehaviorRelay(value: x.NOTE)
+        TAGS = BehaviorRelay(value: x.TAGS)
+    }
+    
+    func save(to x: MPattern) {
+        x.PATTERN = PATTERN.value
+        x.NOTE = NOTE.value
+        x.TAGS = TAGS.value
     }
 }
