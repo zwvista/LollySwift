@@ -95,7 +95,7 @@ class WordsUnitBatchViewController: NSViewController, NSTableViewDataSource, NST
         }
         o.subscribe {
             self.complete?()
-            self.dismiss(self)
+            self.dismiss(sender)
         } ~ rx.disposeBag
     }
 

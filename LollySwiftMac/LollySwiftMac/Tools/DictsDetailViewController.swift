@@ -66,7 +66,7 @@ class DictsDetailViewController: NSViewController {
                 self.complete?()
             } ~ rx.disposeBag
         }
-        dismiss(self)
+        dismiss(sender)
     }
 
     deinit {

@@ -142,7 +142,7 @@ class TransformEditViewController: NSViewController, NSTableViewDataSource, NSTa
         // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
         self.commitEditing()
         vm.onOK()
-        dismiss(self)
+        dismiss(sender)
     }
 
     deinit {

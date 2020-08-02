@@ -57,7 +57,7 @@ class WordsUnitDetailViewController: NSViewController, NSTableViewDataSource, NS
         // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
         self.commitEditing()
         vmDetail.onOK()
-        dismiss(self)
+        dismiss(sender)
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {

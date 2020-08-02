@@ -61,7 +61,7 @@ class WordsTextbookDetailViewController: NSViewController, NSTableViewDataSource
         vm.update(item: item).subscribe {
             self.complete?()
         } ~ rx.disposeBag
-        dismiss(self)
+        dismiss(sender)
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {

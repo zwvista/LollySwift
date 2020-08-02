@@ -37,7 +37,7 @@ class ReviewOptionsViewController: NSViewController {
         options.shuffled = scOrder.selectedSegment == 1
         options.levelge0only = scLevel.selectedSegment == 1
         complete?()
-        dismiss(self)
+        dismiss(sender)
     }
 
     deinit {

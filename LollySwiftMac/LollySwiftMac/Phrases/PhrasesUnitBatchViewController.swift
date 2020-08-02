@@ -82,7 +82,11 @@ class PhrasesUnitBatchViewController: NSViewController, NSTableViewDataSource, N
         }
         o.subscribe {
             self.complete?()
-            self.dismiss(self)
+            self.dismiss(sender)
         } ~ rx.disposeBag
+    }
+    
+    deinit {
+        print("DEBUG: \(self.className) deinit")
     }
 }

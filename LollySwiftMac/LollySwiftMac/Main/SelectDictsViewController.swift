@@ -123,7 +123,7 @@ class SelectDictsViewController: NSViewController, NSTableViewDataSource, NSTabl
         vm.updateDictsReference().subscribe {
             self.complete?()
         } ~ rx.disposeBag
-        dismiss(self)
+        dismiss(sender)
     }
     
     deinit {

@@ -47,7 +47,7 @@ class TextbooksDetailViewController: NSViewController {
                 self.complete?()
             } ~ rx.disposeBag
         }
-        dismiss(self)
+        dismiss(sender)
     }
 
     deinit {

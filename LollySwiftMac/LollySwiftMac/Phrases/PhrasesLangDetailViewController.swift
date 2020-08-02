@@ -55,7 +55,7 @@ class PhrasesLangDetailViewController: NSViewController, NSTableViewDataSource, 
                 self.complete?()
             } ~ rx.disposeBag
         }
-        dismiss(self)
+        dismiss(sender)
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
@@ -68,5 +68,9 @@ class PhrasesLangDetailViewController: NSViewController, NSTableViewDataSource, 
         let columnName = tableColumn!.identifier.rawValue
         cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
         return cell
+    }
+    
+    deinit {
+        print("DEBUG: \(self.className) deinit")
     }
 }

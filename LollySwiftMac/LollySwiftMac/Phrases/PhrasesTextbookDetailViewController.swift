@@ -53,7 +53,7 @@ class PhrasesTextbookDetailViewController: NSViewController, NSTableViewDataSour
         vm.update(item: item).subscribe {
             self.complete?()
         } ~ rx.disposeBag
-        dismiss(self)
+        dismiss(sender)
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
@@ -66,5 +66,9 @@ class PhrasesTextbookDetailViewController: NSViewController, NSTableViewDataSour
         let columnName = tableColumn!.identifier.rawValue
         cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
         return cell
+    }
+    
+    deinit {
+        print("DEBUG: \(self.className) deinit")
     }
 }

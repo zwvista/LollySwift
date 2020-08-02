@@ -100,7 +100,11 @@ class PhrasesSelectUnitViewController: NSViewController, NSTableViewDataSource, 
         }
         o.subscribe {
             self.complete?()
-            self.dismiss(self)
+            self.dismiss(sender)
         } ~ rx.disposeBag
+    }
+    
+    deinit {
+        print("DEBUG: \(self.className) deinit")
     }
 }

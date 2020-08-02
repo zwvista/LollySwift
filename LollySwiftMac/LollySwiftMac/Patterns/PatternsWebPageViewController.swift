@@ -55,7 +55,7 @@ class PatternsWebPageViewController: NSViewController {
                 self.complete?()
             } ~ rx.disposeBag
         }
-        dismiss(self)
+        dismiss(sender)
     }
     @IBAction func newWebPageID(_ sender: Any) {
         tfWebPageID.stringValue = "0"

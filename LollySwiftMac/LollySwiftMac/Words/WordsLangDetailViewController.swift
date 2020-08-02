@@ -64,7 +64,7 @@ class WordsLangDetailViewController: NSViewController, NSTableViewDataSource, NS
                 self.complete?()
             } ~ rx.disposeBag
         }
-        dismiss(self)
+        dismiss(sender)
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
