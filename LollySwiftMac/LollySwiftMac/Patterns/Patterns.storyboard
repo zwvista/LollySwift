@@ -92,7 +92,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" misplaced="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H5k-Cg-pWu">
-                                <rect key="frame" x="0.0" y="544" width="665" height="32"/>
+                                <rect key="frame" x="0.0" y="544" width="698" height="32"/>
                                 <subviews>
                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JU5-n7-zwA">
                                         <rect key="frame" x="6" y="5" width="180" height="21"/>
@@ -105,6 +105,7 @@
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                         <connections>
+                                            <action selector="addNewPattern:" target="JiS-vG-Xmg" id="XXq-gh-OyH"/>
                                             <binding destination="JiS-vG-Xmg" name="value" keyPath="newPattern" id="OEb-yN-adL">
                                                 <dictionary key="options">
                                                     <string key="NSMultipleValuesPlaceholder">New Pattern</string>
@@ -113,35 +114,38 @@
                                                     <string key="NSNullPlaceholder">New Pattern</string>
                                                 </dictionary>
                                             </binding>
-                                            <outlet property="delegate" destination="JiS-vG-Xmg" id="b5K-KL-cV0"/>
                                         </connections>
                                     </textField>
                                     <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hoJ-Fy-vSX">
-                                        <rect key="frame" x="191" y="4" width="203" height="22"/>
+                                        <rect key="frame" x="191" y="4" width="236" height="22"/>
                                         <subviews>
                                             <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lax-hb-G91">
-                                                <rect key="frame" x="-2" y="-1" width="111" height="24"/>
+                                                <rect key="frame" x="-2" y="-1" width="144" height="24"/>
                                                 <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="Cfk-Fp-bHo">
                                                     <font key="font" metaFont="system"/>
                                                     <segments>
                                                         <segment label="Pattern" width="52" selected="YES"/>
-                                                        <segment label="Note" width="52" tag="1"/>
+                                                        <segment label="Note" width="42" tag="1"/>
+                                                        <segment label="Tags" width="42"/>
                                                     </segments>
                                                 </segmentedCell>
+                                                <connections>
+                                                    <action selector="filterPattern:" target="JiS-vG-Xmg" id="iXU-7D-Gxs"/>
+                                                </connections>
                                             </segmentedControl>
                                             <searchField verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JOv-46-g8J">
-                                                <rect key="frame" x="107" y="0.0" width="96" height="22"/>
+                                                <rect key="frame" x="140" y="0.0" width="96" height="22"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="96" id="Vbt-0T-9Ss"/>
                                                 </constraints>
-                                                <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" id="yje-Rk-mpC">
+                                                <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" placeholderString="Filter" usesSingleLineMode="YES" bezelStyle="round" id="yje-Rk-mpC">
                                                     <font key="font" usesAppearanceFont="YES"/>
                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </searchFieldCell>
                                                 <connections>
                                                     <binding destination="JiS-vG-Xmg" name="value" keyPath="textFilter" id="zvo-yr-XUo"/>
-                                                    <outlet property="delegate" destination="JiS-vG-Xmg" id="uXe-7l-dKq"/>
+                                                    <outlet property="delegate" destination="JiS-vG-Xmg" id="q1L-C1-SgL"/>
                                                 </connections>
                                             </searchField>
                                         </subviews>
@@ -155,7 +159,7 @@
                                         </customSpacing>
                                     </stackView>
                                     <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3zY-Jh-US8">
-                                        <rect key="frame" x="399" y="5" width="266" height="21"/>
+                                        <rect key="frame" x="432" y="5" width="266" height="21"/>
                                         <subviews>
                                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SGa-Ua-VHQ">
                                                 <rect key="frame" x="0.0" y="0.0" width="200" height="21"/>

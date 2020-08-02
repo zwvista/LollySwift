@@ -11,7 +11,7 @@ import WebKit
 import RxSwift
 import NSObject_Rx
 
-class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate, NSMenuItemValidation, NSToolbarItemValidation {
+class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate, NSSearchFieldDelegate, NSMenuItemValidation, NSToolbarItemValidation {
 
     @IBOutlet weak var wvWebPage: WKWebView!
     @IBOutlet weak var tfNewPattern: NSTextField!
@@ -199,29 +199,17 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
         updateStatusText()
     }
     
-    func controlTextDidEndEditing(_ obj: Notification) {
-        let textfield = obj.object as! NSControl
-        let code = (obj.userInfo!["NSTextMovement"] as! NSNumber).intValue
-        guard code == NSReturnTextMovement else {return}
-        if textfield === tfNewPattern {
-            guard !newPattern.isEmpty else {return}
-            let item = vm.newPattern()
-            item.PATTERN = vm.vmSettings.autoCorrectInput(text: newPattern)
-            PatternsViewModel.create(item: item).subscribe(onNext: {
-                item.ID = $0
-                self.vm.arrPatterns.append(item)
-                self.tvPatterns.reloadData()
-                self.tfNewPattern.stringValue = ""
-                self.newPattern = ""
-            }) ~ rx.disposeBag
-        } else if textfield === sfFilter {
-            if !textFilter.isEmpty {
-                scTextFilter.selectedSegment = 1
-                textFilter = vmSettings.autoCorrectInput(text: textFilter)
-                sfFilter.stringValue = textFilter
-            }
-            scTextFilter.performClick(self)
-        }
+    @IBAction func addNewPattern(_ sender: Any) {
+        guard !newPattern.isEmpty else {return}
+        let item = vm.newPattern()
+        item.PATTERN = vm.vmSettings.autoCorrectInput(text: newPattern)
+        PatternsViewModel.create(item: item).subscribe(onNext: {
+            item.ID = $0
+            self.vm.arrPatterns.append(item)
+            self.tvPatterns.reloadData()
+            self.tfNewPattern.stringValue = ""
+            self.newPattern = ""
+        }) ~ rx.disposeBag
     }
 
     @IBAction func refreshTableView(_ sender: AnyObject) {
@@ -351,6 +339,21 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
         tableView.endUpdates()
         
         return true
+    }
+    
+    func searchFieldDidStartSearching(_ sender: NSSearchField) {
+        textFilter = vmSettings.autoCorrectInput(text: textFilter)
+        sfFilter.stringValue = textFilter
+        scTextFilter.performClick(self)
+    }
+
+    func searchFieldDidEndSearching(_ sender: NSSearchField) {
+        scTextFilter.performClick(self)
+    }
+    
+    @IBAction func filterPattern(_ sender: AnyObject) {
+        vm.applyFilters(textFilter: textFilter, scope: scTextFilter.selectedSegment == 0 ? "Word" : scTextFilter.selectedSegment == 1 ? "Note" : "Tags")
+        self.tvPatterns.reloadData()
     }
 
     deinit {

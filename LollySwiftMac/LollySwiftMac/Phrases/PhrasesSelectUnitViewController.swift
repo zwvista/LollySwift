@@ -68,9 +68,6 @@ class PhrasesSelectUnitViewController: NSViewController, NSTableViewDataSource, 
         guard searchfield === sfFilter else {return}
         let code = (obj.userInfo!["NSTextMovement"] as! NSNumber).intValue
         guard code == NSReturnTextMovement else {return}
-        if scTextFilter.selectedSegment == 0 {
-            scTextFilter.selectedSegment = 1
-        }
         filterPhrase(self)
     }
 

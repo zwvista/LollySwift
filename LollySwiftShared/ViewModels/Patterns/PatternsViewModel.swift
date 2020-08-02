@@ -34,7 +34,7 @@ class PatternsViewModel: NSObject {
         } else {
             arrPatternsFiltered = arrPatterns
             if !textFilter.isEmpty {
-                arrPatternsFiltered = arrPatternsFiltered!.filter { (scope == "Pattern" ? $0.PATTERN : $0.NOTE ?? "").lowercased().contains(textFilter.lowercased()) }
+                arrPatternsFiltered = arrPatternsFiltered!.filter { (scope == "Pattern" ? $0.PATTERN : scope == "Note" ? $0.NOTE ?? "" : $0.TAGS ?? "").lowercased().contains(textFilter.lowercased()) }
             }
         }
     }
