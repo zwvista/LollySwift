@@ -20,14 +20,6 @@ class MPattern: NSObject, Codable {
 
     override init() {
     }
-    
-    func copy(from x: MPattern) {
-        ID = x.ID
-        LANGID = x.LANGID
-        PATTERN = x.PATTERN
-        NOTE = x.NOTE
-        TAGS = x.TAGS
-    }
 
     static func getDataByLang(_ langid: Int) -> Observable<[MPattern]> {
         // SQL: SELECT * FROM PATTERNS WHERE LANGID=?
