@@ -13,30 +13,25 @@ class PatternsEditViewModel: NSObject {
     var vm: PatternsViewModel!
     var item: MPattern!
     var itemEdit: MPatternEdit!
-    var complete: (() -> Void)?
     var isAdd: Bool!
 
-    init(vm: PatternsViewModel, item: MPattern, complete: (() -> Void)?) {
+    init(vm: PatternsViewModel, item: MPattern) {
         self.vm = vm
         self.item = item
-        self.complete = complete
         itemEdit = MPatternEdit(x: item)
         isAdd = item.ID == 0
     }
     
-    func onOK() {
+    func onOK() -> Observable<()> {
         itemEdit.save(to: item)
         item.PATTERN = vm.vmSettings.autoCorrectInput(text: item.PATTERN)
         if isAdd {
             vm.arrPatterns.append(item)
-            PatternsViewModel.create(item: item).subscribe(onNext: {
+            return PatternsViewModel.create(item: item).map {
                 self.item.ID = $0
-                self.complete?()
-            }) ~ rx.disposeBag
+            }
         } else {
-            PatternsViewModel.update(item: item).subscribe {
-                self.complete?()
-            } ~ rx.disposeBag
+            return PatternsViewModel.update(item: item)
         }
     }
     

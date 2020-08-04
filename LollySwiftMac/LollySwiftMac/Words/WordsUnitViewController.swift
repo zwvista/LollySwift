@@ -10,7 +10,6 @@ import Cocoa
 import WebKit
 import RxSwift
 import NSObject_Rx
-import NSObject_Rx
 
 class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NSToolbarItemValidation {
 

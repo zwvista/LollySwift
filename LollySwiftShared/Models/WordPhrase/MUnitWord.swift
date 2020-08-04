@@ -8,6 +8,7 @@
 
 import Foundation
 import RxSwift
+import RxRelay
 
 @objcMembers
 class MUnitWord: NSObject, Codable, MWordProtocol {
@@ -132,5 +133,32 @@ class MUnitWord: NSObject, Codable, MWordProtocol {
         let url = "\(CommonApi.urlSP)UNITWORDS_DELETE"
         let parameters = try! item.toParameters()
         return RestApi.callSP(url: url, parameters: parameters).map { print($0) }
+    }
+}
+
+class MUnitWordEdit {
+    var ID: BehaviorRelay<String>
+    var SEQNUM: BehaviorRelay<String>
+    var WORDID: BehaviorRelay<String>
+    var WORD: BehaviorRelay<String>
+    var NOTE: BehaviorRelay<String?>
+    var FAMIID: BehaviorRelay<String>
+    var LEVEL: BehaviorRelay<String>
+    var ACCURACY: BehaviorRelay<String>
+
+    init(x: MUnitWord) {
+        ID = BehaviorRelay(value: x.ID.toString)
+        SEQNUM = BehaviorRelay(value: x.SEQNUM.toString)
+        WORDID = BehaviorRelay(value: x.ID.toString)
+        WORD = BehaviorRelay(value: x.WORD)
+        NOTE = BehaviorRelay(value: x.NOTE)
+        FAMIID = BehaviorRelay(value: x.FAMIID.toString)
+        LEVEL = BehaviorRelay(value: x.LEVEL.toString)
+        ACCURACY = BehaviorRelay(value: x.ACCURACY)
+    }
+    
+    func save(to x: MUnitWord) {
+        x.WORD = WORD.value
+        x.NOTE = NOTE.value
     }
 }
