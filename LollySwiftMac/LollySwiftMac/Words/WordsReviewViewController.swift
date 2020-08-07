@@ -11,7 +11,7 @@ import RxSwift
 import NSObject_Rx
 
 class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDelegate {
-    var vm: WordsReviewViewModel!
+    @objc dynamic var vm: WordsReviewViewModel!
     var vmSettings: SettingsViewModel { vm.vmSettings }
 
     @IBOutlet weak var tfIndex: NSTextField!
@@ -25,9 +25,6 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
     @IBOutlet weak var btnCheck: NSButton!
     
     let synth = NSSpeechSynthesizer()
-    var isSpeaking = true
-    let options = MReviewOptions()
-    var subscription: Disposable? = nil
 
     func settingsChanged() {
         vm = WordsReviewViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true)
@@ -45,57 +42,41 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
     override func viewDidAppear() {
         super.viewDidAppear()
         wc = view.window!.windowController as? WordsReviewWindowController
-        wc.scSpeak.selectedSegment = isSpeaking ? 1 : 0
+        wc.scSpeak.selectedSegment = vm.isSpeaking ? 1 : 0
         settingsChanged()
     }
     override func viewWillDisappear() {
         wc = nil
-        subscription?.dispose()
+        vm.subscription?.dispose()
     }
 
     private func doTest() {
-        let b = vm.hasNext
-        tfIndex.isHidden = !b
-        tfCorrect.isHidden = true
-        tfIncorrect.isHidden = true
-        tfAccuracy.isHidden = !vm.isTestMode || !b
-        btnCheck.isEnabled = b
-        tfWordTarget.stringValue = vm.currentWord
-        tfNoteTarget.stringValue = vm.currentItem?.NOTE ?? ""
-        tfWordTarget.isHidden = vm.isTestMode
-        tfNoteTarget.isHidden = vm.isTestMode
-        tfTranslation.stringValue = ""
-        tfWordInput.stringValue = ""
+        vm.doTest()
         tfWordInput.becomeFirstResponder()
-        if b {
-            tfIndex.stringValue = "\(vm.index + 1)/\(vm.arrWords.count)"
-            tfAccuracy.stringValue = vm.currentItem!.ACCURACY
-            if isSpeaking {
+        if vm.hasNext {
+            if vm.isSpeaking {
                 synth.startSpeaking(vm.currentWord)
             }
-            vm.getTranslation().subscribe(onNext: {
-                self.tfTranslation.stringValue = $0
-            }) ~ rx.disposeBag
         } else {
-            subscription?.dispose()
+            vm.subscription?.dispose()
         }
     }
     
     @IBAction func newTest(_ sender: AnyObject) {
         let optionsVC = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: "ReviewOptionsViewController") as! ReviewOptionsViewController
-        optionsVC.options.copy(from: options)
+        optionsVC.options.copy(from: vm.options)
         optionsVC.complete = { [unowned self] in
-            self.options.copy(from: optionsVC.options)
-            self.subscription?.dispose()
-            self.vm.newTest(options: self.options).subscribe {
+            self.vm.options.copy(from: optionsVC.options)
+            self.vm.subscription?.dispose()
+            self.vm.newTest(options: self.vm.options).subscribe {
                 self.doTest()
             } ~ self.rx.disposeBag
-            self.btnCheck.title = self.vm.isTestMode ? "Check" : "Next"
+            self.vm.checkTitle = self.vm.isTestMode ? "Check" : "Next"
             if self.vm.mode == .reviewAuto {
-                self.subscription = Observable<Int>.interval(DispatchTimeInterval.milliseconds( self.vmSettings.USREVIEWINTERVAL), scheduler: MainScheduler.instance).subscribe { _ in
+                self.vm.subscription = Observable<Int>.interval(DispatchTimeInterval.milliseconds( self.vmSettings.USREVIEWINTERVAL), scheduler: MainScheduler.instance).subscribe { _ in
                     self.check(self)
                 }
-                self.subscription?.disposed(by: self.rx.disposeBag)
+                self.vm.subscription?.disposed(by: self.rx.disposeBag)
             }
         }
         self.presentAsSheet(optionsVC)
@@ -105,7 +86,7 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
         let textfield = obj.object as! NSControl
         let code = (obj.userInfo!["NSTextMovement"] as! NSNumber).intValue
         guard code == NSReturnTextMovement else {return}
-        guard textfield === tfWordInput, !(vm.isTestMode && tfWordInput.stringValue.isEmpty) else {return}
+        guard textfield === tfWordInput, !(vm.isTestMode && vm.wordInputString.isEmpty) else {return}
         check(self)
     }
     
@@ -113,27 +94,27 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
         if !vm.isTestMode {
             vm.next()
             doTest()
-        } else if tfCorrect.isHidden && tfIncorrect.isHidden {
-            tfWordInput.stringValue = vmSettings.autoCorrectInput(text: tfWordInput.stringValue)
-            tfWordTarget.isHidden = false
-            tfNoteTarget.isHidden = false
-            if tfWordInput.stringValue == vm.currentWord {
-                tfCorrect.isHidden = false
+        } else if vm.correctHidden && vm.incorrectHidden {
+            vm.wordInputString = vmSettings.autoCorrectInput(text: vm.wordInputString)
+            vm.wordTargetHidden = false
+            vm.noteTargetHidden = false
+            if vm.wordInputString == vm.currentWord {
+                vm.correctHidden = false
             } else {
-                tfIncorrect.isHidden = false
+                vm.incorrectHidden = false
             }
-            btnCheck.title = "Next"
-            vm.check(wordInput: tfWordInput.stringValue).subscribe() ~ rx.disposeBag
+            vm.checkTitle = "Next"
+            vm.check(wordInput: vm.wordInputString).subscribe() ~ rx.disposeBag
         } else {
             vm.next()
             doTest()
-            btnCheck.title = "Check"
+            vm.checkTitle = "Check"
         }
     }
     
     @IBAction func isSpeakingChanged(_ sender: AnyObject) {
-        isSpeaking = (sender as! NSSegmentedControl).selectedSegment == 1
-        if isSpeaking {
+        vm.isSpeaking = (sender as! NSSegmentedControl).selectedSegment == 1
+        if vm.isSpeaking {
             synth.startSpeaking(vm.currentWord)
         }
     }

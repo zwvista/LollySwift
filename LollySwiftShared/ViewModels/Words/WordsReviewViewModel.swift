@@ -17,6 +17,24 @@ class WordsReviewViewModel: NSObject {
     var index = 0
     var mode: ReviewMode = .reviewAuto
     var isTestMode: Bool { mode == .test }
+    var subscription: Disposable? = nil
+    var isSpeaking = true
+    let options = MReviewOptions()
+
+    @objc dynamic var indexString = ""
+    @objc dynamic var indexHidden = false
+    @objc dynamic var correctHidden = false
+    @objc dynamic var incorrectHidden = false
+    @objc dynamic var accuracyString = ""
+    @objc dynamic var accuracyHidden = false
+    @objc dynamic var checkEnabled = false
+    @objc dynamic var wordTargetString = ""
+    @objc dynamic var noteTargetString = ""
+    @objc dynamic var wordTargetHidden = false
+    @objc dynamic var noteTargetHidden = false
+    @objc dynamic var translationString = ""
+    @objc dynamic var wordInputString = ""
+    @objc dynamic var checkTitle = ""
 
     init(settings: SettingsViewModel, needCopy: Bool) {
         self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
@@ -64,6 +82,27 @@ class WordsReviewViewModel: NSObject {
         return MWordFami.update(wordid: o.WORDID, isCorrect: isCorrect).map {
             o.CORRECT = $0.CORRECT
             o.TOTAL = $0.TOTAL
+        }
+    }
+    
+    func doTest() {
+        indexHidden = !hasNext
+        correctHidden = true
+        incorrectHidden = true
+        accuracyHidden = !isTestMode || !hasNext
+        checkEnabled = hasNext
+        wordTargetString = currentWord
+        noteTargetString = currentItem?.NOTE ?? ""
+        wordTargetHidden = isTestMode
+        noteTargetHidden = isTestMode
+        translationString = ""
+        wordInputString = ""
+        if hasNext {
+            indexString = "\(index + 1)/\(arrWords.count)"
+            accuracyString = currentItem!.ACCURACY
+            getTranslation().subscribe(onNext: {
+                self.translationString = $0
+            }) ~ rx.disposeBag
         }
     }
 }

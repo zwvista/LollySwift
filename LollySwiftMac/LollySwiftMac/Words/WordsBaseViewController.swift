@@ -355,6 +355,7 @@ class WordsBaseWindowController: NSWindowController, LollyProtocol, NSWindowDele
     }
     
     func settingsChanged() {
+        vc.tvWords.selectRowIndexes(IndexSet(), byExtendingSelection: false)
         vc.removeAllTabs()
         for i in 0..<40 {
             let item = toolbar.items[defaultToolbarItemCount + i]
