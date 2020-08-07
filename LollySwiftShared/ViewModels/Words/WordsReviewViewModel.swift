@@ -15,8 +15,7 @@ class WordsReviewViewModel: NSObject {
     var arrWords = [MUnitWord]()
     var arrCorrectIDs = [Int]()
     var index = 0
-    var mode: ReviewMode = .reviewAuto
-    var isTestMode: Bool { mode == .test }
+    var isTestMode: Bool { options.mode == .test }
     var subscription: Disposable? = nil
     var isSpeaking = true
     let options = MReviewOptions()
@@ -55,8 +54,8 @@ class WordsReviewViewModel: NSObject {
             self.index = 0
             self.doTest()
             self.checkTitle = self.isTestMode ? "Check" : "Next"
-            if self.mode == .reviewAuto {
-                self.subscription = Observable<Int>.interval(DispatchTimeInterval.milliseconds( self.vmSettings.USREVIEWINTERVAL), scheduler: MainScheduler.instance).subscribe { _ in
+            if self.options.mode == .reviewAuto {
+                self.subscription = Observable<Int>.interval(DispatchTimeInterval.seconds( self.options.interval), scheduler: MainScheduler.instance).subscribe { _ in
                     self.check()
                 }
                 self.subscription?.disposed(by: self.rx.disposeBag)
@@ -103,7 +102,7 @@ class WordsReviewViewModel: NSObject {
             let o = currentItem!
             let isCorrect = o.WORD == wordInputString
             if isCorrect { arrCorrectIDs.append(o.ID) }
-            return MWordFami.update(wordid: o.WORDID, isCorrect: isCorrect).map {
+            MWordFami.update(wordid: o.WORDID, isCorrect: isCorrect).map {
                 o.CORRECT = $0.CORRECT
                 o.TOTAL = $0.TOTAL
             }.subscribe() ~ rx.disposeBag

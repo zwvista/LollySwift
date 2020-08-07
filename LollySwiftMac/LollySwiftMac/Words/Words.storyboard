@@ -6218,8 +6218,8 @@ Gw
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <action selector="wordInput:" target="ypg-jQ-ROv" id="H7h-6O-oJy"/>
                                     <binding destination="ypg-jQ-ROv" name="value" keyPath="vm.wordInputString" id="sDa-mb-eDR"/>
+                                    <outlet property="delegate" destination="ypg-jQ-ROv" id="sra-Uw-tIK"/>
                                 </connections>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="f21-Ix-zj3">

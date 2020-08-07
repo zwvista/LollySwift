@@ -10,7 +10,7 @@ import Cocoa
 import RxSwift
 import NSObject_Rx
 
-class WordsReviewViewController: NSViewController, LollyProtocol {
+class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDelegate {
     @objc dynamic var vm: WordsReviewViewModel!
     var vmSettings: SettingsViewModel { vm.vmSettings }
 
@@ -48,9 +48,9 @@ class WordsReviewViewController: NSViewController, LollyProtocol {
     var wc: WordsReviewWindowController!
     override func viewDidAppear() {
         super.viewDidAppear()
+        settingsChanged()
         wc = view.window!.windowController as? WordsReviewWindowController
         wc.scSpeak.selectedSegment = vm.isSpeaking ? 1 : 0
-        settingsChanged()
     }
     override func viewWillDisappear() {
         wc = nil
@@ -67,8 +67,11 @@ class WordsReviewViewController: NSViewController, LollyProtocol {
         self.presentAsSheet(optionsVC)
     }
     
-    @IBAction func wordInput(_ sender: AnyObject) {
-        guard !(vm.isTestMode && vm.wordInputString.isEmpty) else {return}
+    func controlTextDidEndEditing(_ obj: Notification) {
+        let textfield = obj.object as! NSControl
+        let code = (obj.userInfo!["NSTextMovement"] as! NSNumber).intValue
+        guard code == NSReturnTextMovement else {return}
+        guard textfield === tfWordInput, !(vm.isTestMode && vm.wordInputString.isEmpty) else {return}
         vm.check()
     }
     
