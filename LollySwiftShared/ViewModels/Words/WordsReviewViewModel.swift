@@ -20,6 +20,7 @@ class WordsReviewViewModel: NSObject {
     var subscription: Disposable? = nil
     var isSpeaking = true
     let options = MReviewOptions()
+    let doTestAction: (() -> Void)?
 
     @objc dynamic var indexString = ""
     @objc dynamic var indexHidden = false
@@ -36,21 +37,31 @@ class WordsReviewViewModel: NSObject {
     @objc dynamic var wordInputString = ""
     @objc dynamic var checkTitle = ""
 
-    init(settings: SettingsViewModel, needCopy: Bool) {
+    init(settings: SettingsViewModel, needCopy: Bool, doTestAction: (() -> Void)? = nil) {
         self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
+        self.doTestAction = doTestAction
     }
 
-    func newTest(options: MReviewOptions) -> Observable<()> {
-        MUnitWord.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO).map {
+    func newTest() {
+        subscription?.dispose()
+        MUnitWord.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO).subscribe(onNext: {
             self.arrWords = $0
             let count = self.arrWords.count
-            let (from, to) = (count * (options.groupSelected - 1) / options.groupCount, count * options.groupSelected / options.groupCount)
+            let (from, to) = (count * (self.options.groupSelected - 1) / self.options.groupCount, count * self.options.groupSelected / self.options.groupCount)
             self.arrWords = [MUnitWord](self.arrWords[from..<to])
             self.arrCorrectIDs = []
-            if options.levelge0only! { self.arrWords = self.arrWords.filter { $0.LEVEL >= 0 } }
-            if options.shuffled { self.arrWords = self.arrWords.shuffled() }
+            if self.options.levelge0only! { self.arrWords = self.arrWords.filter { $0.LEVEL >= 0 } }
+            if self.options.shuffled { self.arrWords = self.arrWords.shuffled() }
             self.index = 0
-        }
+            self.doTest()
+            self.checkTitle = self.isTestMode ? "Check" : "Next"
+            if self.mode == .reviewAuto {
+                self.subscription = Observable<Int>.interval(DispatchTimeInterval.milliseconds( self.vmSettings.USREVIEWINTERVAL), scheduler: MainScheduler.instance).subscribe { _ in
+                    self.check()
+                }
+                self.subscription?.disposed(by: self.rx.disposeBag)
+            }
+        }) ~ self.rx.disposeBag
     }
 
     var hasNext: Bool { index < arrWords.count }
@@ -74,14 +85,32 @@ class WordsReviewViewModel: NSObject {
         }
     }
     
-    func check(wordInput: String) -> Observable<()> {
-        guard hasNext else {return Observable.empty()}
-        let o = currentItem!
-        let isCorrect = o.WORD == wordInput
-        if isCorrect { arrCorrectIDs.append(o.ID) }
-        return MWordFami.update(wordid: o.WORDID, isCorrect: isCorrect).map {
-            o.CORRECT = $0.CORRECT
-            o.TOTAL = $0.TOTAL
+    func check() {
+        if !isTestMode {
+            next()
+            doTest()
+        } else if correctHidden && incorrectHidden {
+            wordInputString = vmSettings.autoCorrectInput(text: wordInputString)
+            wordTargetHidden = false
+            noteTargetHidden = false
+            if wordInputString == currentWord {
+                correctHidden = false
+            } else {
+                incorrectHidden = false
+            }
+            checkTitle = "Next"
+            guard hasNext else {return}
+            let o = currentItem!
+            let isCorrect = o.WORD == wordInputString
+            if isCorrect { arrCorrectIDs.append(o.ID) }
+            return MWordFami.update(wordid: o.WORDID, isCorrect: isCorrect).map {
+                o.CORRECT = $0.CORRECT
+                o.TOTAL = $0.TOTAL
+            }.subscribe() ~ rx.disposeBag
+        } else {
+            next()
+            doTest()
+            checkTitle = "Check"
         }
     }
     
@@ -97,12 +126,15 @@ class WordsReviewViewModel: NSObject {
         noteTargetHidden = isTestMode
         translationString = ""
         wordInputString = ""
+        doTestAction?()
         if hasNext {
             indexString = "\(index + 1)/\(arrWords.count)"
             accuracyString = currentItem!.ACCURACY
             getTranslation().subscribe(onNext: {
                 self.translationString = $0
             }) ~ rx.disposeBag
+        } else {
+            subscription?.dispose()
         }
     }
 }

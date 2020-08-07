@@ -10,7 +10,7 @@ import Cocoa
 import RxSwift
 import NSObject_Rx
 
-class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDelegate {
+class WordsReviewViewController: NSViewController, LollyProtocol {
     @objc dynamic var vm: WordsReviewViewModel!
     var vmSettings: SettingsViewModel { vm.vmSettings }
 
@@ -27,7 +27,14 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
     let synth = NSSpeechSynthesizer()
 
     func settingsChanged() {
-        vm = WordsReviewViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true)
+        vm = WordsReviewViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) {
+            self.tfWordInput.becomeFirstResponder()
+            if self.vm.hasNext {
+                if self.vm.isSpeaking {
+                    self.synth.startSpeaking(self.vm.currentWord)
+                }
+            }
+        }
         synth.setVoice(NSSpeechSynthesizer.VoiceName(rawValue: vmSettings.macVoiceName))
         newTest(self)
     }
@@ -49,67 +56,24 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
         wc = nil
         vm.subscription?.dispose()
     }
-
-    private func doTest() {
-        vm.doTest()
-        tfWordInput.becomeFirstResponder()
-        if vm.hasNext {
-            if vm.isSpeaking {
-                synth.startSpeaking(vm.currentWord)
-            }
-        } else {
-            vm.subscription?.dispose()
-        }
-    }
     
     @IBAction func newTest(_ sender: AnyObject) {
         let optionsVC = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: "ReviewOptionsViewController") as! ReviewOptionsViewController
         optionsVC.options.copy(from: vm.options)
         optionsVC.complete = { [unowned self] in
             self.vm.options.copy(from: optionsVC.options)
-            self.vm.subscription?.dispose()
-            self.vm.newTest(options: self.vm.options).subscribe {
-                self.doTest()
-            } ~ self.rx.disposeBag
-            self.vm.checkTitle = self.vm.isTestMode ? "Check" : "Next"
-            if self.vm.mode == .reviewAuto {
-                self.vm.subscription = Observable<Int>.interval(DispatchTimeInterval.milliseconds( self.vmSettings.USREVIEWINTERVAL), scheduler: MainScheduler.instance).subscribe { _ in
-                    self.check(self)
-                }
-                self.vm.subscription?.disposed(by: self.rx.disposeBag)
-            }
+            self.vm.newTest()
         }
         self.presentAsSheet(optionsVC)
     }
     
-    func controlTextDidEndEditing(_ obj: Notification) {
-        let textfield = obj.object as! NSControl
-        let code = (obj.userInfo!["NSTextMovement"] as! NSNumber).intValue
-        guard code == NSReturnTextMovement else {return}
-        guard textfield === tfWordInput, !(vm.isTestMode && vm.wordInputString.isEmpty) else {return}
-        check(self)
+    @IBAction func wordInput(_ sender: AnyObject) {
+        guard !(vm.isTestMode && vm.wordInputString.isEmpty) else {return}
+        vm.check()
     }
     
     @IBAction func check(_ sender: AnyObject) {
-        if !vm.isTestMode {
-            vm.next()
-            doTest()
-        } else if vm.correctHidden && vm.incorrectHidden {
-            vm.wordInputString = vmSettings.autoCorrectInput(text: vm.wordInputString)
-            vm.wordTargetHidden = false
-            vm.noteTargetHidden = false
-            if vm.wordInputString == vm.currentWord {
-                vm.correctHidden = false
-            } else {
-                vm.incorrectHidden = false
-            }
-            vm.checkTitle = "Next"
-            vm.check(wordInput: vm.wordInputString).subscribe() ~ rx.disposeBag
-        } else {
-            vm.next()
-            doTest()
-            vm.checkTitle = "Check"
-        }
+        vm.check()
     }
     
     @IBAction func isSpeakingChanged(_ sender: AnyObject) {
