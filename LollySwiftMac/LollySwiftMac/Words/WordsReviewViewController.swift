@@ -12,7 +12,6 @@ import NSObject_Rx
 
 class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDelegate {
     @objc dynamic var vm: WordsReviewViewModel!
-    var vmSettings: SettingsViewModel { vm.vmSettings }
 
     @IBOutlet weak var tfIndex: NSTextField!
     @IBOutlet weak var tfCorrect: NSTextField!
@@ -27,15 +26,13 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
     let synth = NSSpeechSynthesizer()
 
     func settingsChanged() {
-        vm = WordsReviewViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) {
+        vm = WordsReviewViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) { [unowned self] in
             self.tfWordInput.becomeFirstResponder()
-            if self.vm.hasNext {
-                if self.vm.isSpeaking {
-                    self.synth.startSpeaking(self.vm.currentWord)
-                }
+            if self.vm.hasNext && self.vm.isSpeaking {
+                self.synth.startSpeaking(self.vm.currentWord)
             }
         }
-        synth.setVoice(NSSpeechSynthesizer.VoiceName(rawValue: vmSettings.macVoiceName))
+        synth.setVoice(NSSpeechSynthesizer.VoiceName(rawValue: vm.vmSettings.macVoiceName))
         newTest(self)
     }
 

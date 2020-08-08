@@ -39,18 +39,20 @@ class WordsReviewViewModel: NSObject {
     init(settings: SettingsViewModel, needCopy: Bool, doTestAction: (() -> Void)? = nil) {
         self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
         self.doTestAction = doTestAction
+        options.shuffled = true
     }
 
     func newTest() {
         subscription?.dispose()
         MUnitWord.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO).subscribe(onNext: {
             self.arrWords = $0
-            let count = self.arrWords.count
-            let (from, to) = (count * (self.options.groupSelected - 1) / self.options.groupCount, count * self.options.groupSelected / self.options.groupCount)
-            self.arrWords = [MUnitWord](self.arrWords[from..<to])
-            self.arrCorrectIDs = []
             if self.options.levelge0only! { self.arrWords = self.arrWords.filter { $0.LEVEL >= 0 } }
+            let count = self.arrWords.count
+            let from = count * (self.options.groupSelected - 1) / self.options.groupCount
+            let to = count * self.options.groupSelected / self.options.groupCount
+            self.arrWords = [MUnitWord](self.arrWords[from..<to])
             if self.options.shuffled { self.arrWords = self.arrWords.shuffled() }
+            self.arrCorrectIDs = []
             self.index = 0
             self.doTest()
             self.checkTitle = self.isTestMode ? "Check" : "Next"
