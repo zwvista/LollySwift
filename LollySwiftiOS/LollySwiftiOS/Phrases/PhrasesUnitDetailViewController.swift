@@ -20,10 +20,12 @@ class PhrasesUnitDetailViewController: UITableViewController, UITextFieldDelegat
     @IBOutlet weak var tfPhraseID: UITextField!
     @IBOutlet weak var tfPhrase: UITextField!
     @IBOutlet weak var tfTranslation: UITextField!
+    @IBOutlet weak var btnDone: UIBarButtonItem!
 
     var vm: PhrasesUnitViewModel!
     var item: MUnitPhrase!
-    var isAdd: Bool!
+    var vmEdit: PhrasesUnitEditViewModel!
+    var itemEdit: MUnitPhraseEdit { vmEdit.itemEdit }
     let ddUnit = DropDown()
     let ddPart = DropDown()
     
@@ -32,28 +34,28 @@ class PhrasesUnitDetailViewController: UITableViewController, UITextFieldDelegat
         
         ddUnit.anchorView = tfUnit
         ddUnit.dataSource = vmSettings.arrUnits.map { $0.label }
-        ddUnit.selectRow(vmSettings.arrUnits.firstIndex { $0.value == item.UNIT }!)
+        ddUnit.selectRow(itemEdit.indexUNIT.value)
         ddUnit.selectionAction = { [unowned self] (index: Int, item: String) in
-            self.item.UNIT = vmSettings.arrUnits[index].value
-            self.tfUnit.text = String(self.item.UNIT)
+            self.itemEdit.indexUNIT.accept(index)
+            self.itemEdit.UNITSTR.accept(item)
         }
         
         ddPart.anchorView = tfPart
         ddPart.dataSource = vmSettings.arrParts.map { $0.label }
-        ddPart.selectRow(vmSettings.arrUnits.firstIndex { $0.value == item.PART }!)
+        ddPart.selectRow(itemEdit.indexPART.value)
         ddPart.selectionAction = { [unowned self] (index: Int, item: String) in
-            self.item.PART = vmSettings.arrParts[index].value
-            self.tfPart.text = self.item.PARTSTR
+            self.itemEdit.indexPART.accept(index)
+            self.itemEdit.PARTSTR.accept(item)
         }
         
-        tfID.text = String(item.ID)
-        tfUnit.text = String(item.UNIT)
-        tfPart.text = item.PARTSTR
-        tfSeqNum.text = String(item.SEQNUM)
-        tfPhraseID.text = String(item.PHRASEID)
-        tfPhrase.text = item.PHRASE
-        tfTranslation.text = item.TRANSLATION
-        isAdd = item.ID == 0
+        _ = itemEdit.ID ~> tfID.rx.text.orEmpty
+        _ = itemEdit.UNITSTR <~> tfUnit.rx.textInput
+        _ = itemEdit.PARTSTR <~> tfPart.rx.textInput
+        _ = itemEdit.SEQNUM <~> tfSeqNum.rx.textInput
+        _ = itemEdit.PHRASEID ~> tfPhraseID.rx.text.orEmpty
+        _ = itemEdit.PHRASE <~> tfPhrase.rx.textInput
+        _ = itemEdit.TRANSLATION <~> tfTranslation.rx.text
+        _ = vmEdit.isOKEnabled ~> btnDone.rx.isEnabled
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -73,18 +75,6 @@ class PhrasesUnitDetailViewController: UITableViewController, UITextFieldDelegat
             return false
         } else {
             return true
-        }
-    }
-
-    func onDone() {
-        item.SEQNUM = Int(tfSeqNum.text!)!
-        item.PHRASE = vmSettings.autoCorrectInput(text: tfPhrase.text ?? "")
-        item.TRANSLATION = tfTranslation.text
-        if isAdd {
-            vm.arrPhrases.append(item)
-            vm.create(item: item).subscribe() ~ rx.disposeBag
-        } else {
-            vm.update(item: item).subscribe() ~ rx.disposeBag
         }
     }
     

@@ -13,10 +13,10 @@ import NSObject_Rx
 class PhrasesTextbookEditViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 
     var vm: PhrasesUnitViewModel!
-    var vmEdit: PhrasesUnitEditViewModel!
-    var itemEdit: MUnitPhraseEdit { vmEdit.itemEdit }
     var complete: (() -> Void)?
     var item: MUnitPhrase!
+    var vmEdit: PhrasesUnitEditViewModel!
+    var itemEdit: MUnitPhraseEdit { vmEdit.itemEdit }
     var arrPhrases: [MUnitPhrase] { vmEdit.vmSingle.arrPhrases }
 
     @IBOutlet weak var acUnits: NSArrayController!
@@ -59,7 +59,7 @@ class PhrasesTextbookEditViewController: NSViewController, NSTableViewDataSource
     override func viewDidAppear() {
         super.viewDidAppear()
         // https://stackoverflow.com/questions/24235815/cocoa-how-to-set-window-title-from-within-view-controller-in-swift
-        (item.PHRASE.isEmpty ? tfPhrase : tfTranslation).becomeFirstResponder()
+        (vmEdit.isAdd ? tfPhrase : tfTranslation).becomeFirstResponder()
         view.window?.title = item.PHRASE
     }
     

@@ -96,7 +96,8 @@ class WordsTextbookViewController: WordsBaseViewController {
     @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
         guard segue.identifier == "Done" else {return}
         let controller = segue.source as! WordsTextbookDetailViewController
-        controller.onDone()
-        tableView.reloadData()
+        controller.vmEdit.onOK().subscribe {
+            self.tableView.reloadData()
+        } ~ rx.disposeBag
     }
 }

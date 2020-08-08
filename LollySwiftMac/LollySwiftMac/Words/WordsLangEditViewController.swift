@@ -13,10 +13,10 @@ import NSObject_Rx
 class WordsLangEditViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 
     var vm: WordsLangViewModel!
-    var vmEdit: WordsLangEditViewModel!
-    var itemEdit: MLangWordEdit { vmEdit.itemEdit }
     var complete: (() -> Void)?
     @objc var item: MLangWord!
+    var vmEdit: WordsLangEditViewModel!
+    var itemEdit: MLangWordEdit { vmEdit.itemEdit }
     var arrWords: [MUnitWord] { vmEdit.vmSingle?.arrWords ?? [MUnitWord]() }
 
     @IBOutlet weak var tfID: NSTextField!

@@ -13,10 +13,10 @@ import NSObject_Rx
 class PhrasesUnitEditViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 
     var vm: PhrasesUnitViewModel!
-    var vmEdit: PhrasesUnitEditViewModel!
-    var itemEdit: MUnitPhraseEdit { vmEdit.itemEdit }
     var complete: (() -> Void)?
     @objc var item: MUnitPhrase!
+    var vmEdit: PhrasesUnitEditViewModel!
+    var itemEdit: MUnitPhraseEdit { vmEdit.itemEdit }
     var arrPhrases: [MUnitPhrase] { vmEdit.vmSingle?.arrPhrases ?? [MUnitPhrase]() }
 
     @IBOutlet weak var acUnits: NSArrayController!

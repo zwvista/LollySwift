@@ -13,10 +13,10 @@ import NSObject_Rx
 class PhrasesLangEditViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 
     var vm: PhrasesLangViewModel!
-    var vmEdit: PhrasesLangEditViewModel!
-    var itemEdit: MLangPhraseEdit { vmEdit.itemEdit }
     var complete: (() -> Void)?
     var item: MLangPhrase!
+    var vmEdit: PhrasesLangEditViewModel!
+    var itemEdit: MLangPhraseEdit { vmEdit.itemEdit }
     var arrPhrases: [MUnitPhrase] { vmEdit.vmSingle?.arrPhrases ?? [MUnitPhrase]() }
 
     @IBOutlet weak var tfID: NSTextField!

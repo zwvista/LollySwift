@@ -9,7 +9,6 @@
 import UIKit
 import DropDown
 import RxSwift
-import NSObject_Rx
 
 class WordsUnitDetailViewController: UITableViewController, UITextFieldDelegate {
 
@@ -26,9 +25,9 @@ class WordsUnitDetailViewController: UITableViewController, UITextFieldDelegate 
     @IBOutlet weak var btnDone: UIBarButtonItem!
     
     var vm: WordsUnitViewModel!
+    var item: MUnitWord!
     var vmEdit: WordsUnitEditViewModel!
     var itemEdit: MUnitWordEdit { vmEdit.itemEdit }
-    var item: MUnitWord!
     let ddUnit = DropDown()
     let ddPart = DropDown()
     

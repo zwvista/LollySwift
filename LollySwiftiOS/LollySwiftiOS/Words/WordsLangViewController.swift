@@ -96,6 +96,8 @@ class WordsLangViewController: WordsBaseViewController {
     @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
         guard segue.identifier == "Done" else {return}
         let controller = segue.source as! WordsLangDetailViewController
-        controller.onDone()
+        controller.vmEdit.onOK().subscribe {
+            self.tableView.reloadData()
+        } ~ rx.disposeBag
     }
 }

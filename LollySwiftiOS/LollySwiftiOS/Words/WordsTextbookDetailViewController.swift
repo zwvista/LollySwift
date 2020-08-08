@@ -23,46 +23,55 @@ class WordsTextbookDetailViewController: UITableViewController, UITextFieldDeleg
     @IBOutlet weak var tfFamiID: UITextField!
     @IBOutlet weak var tfLevel: UITextField!
     @IBOutlet weak var tfAccuracy: UITextField!
+    @IBOutlet weak var btnDone: UIBarButtonItem!
 
     var vm: WordsUnitViewModel!
     var item: MUnitWord!
+    var vmEdit: WordsUnitEditViewModel!
+    var itemEdit: MUnitWordEdit { vmEdit.itemEdit }
     let ddUnit = DropDown()
     let ddPart = DropDown()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        vmEdit = WordsUnitEditViewModel(vm: vm, item: item) {
+            self.tableView.reloadData()
+        }
+
         ddUnit.anchorView = tfUnit
         ddUnit.dataSource = item.textbook.arrUnits.map { $0.label }
-        ddUnit.selectRow(vmSettings.arrUnits.firstIndex { $0.value == item.UNIT }!)
+        ddUnit.selectRow(itemEdit.indexUNIT.value)
         ddUnit.selectionAction = { [unowned self] (index: Int, item: String) in
-            self.item.UNIT = vmSettings.arrUnits[index].value
-            self.tfUnit.text = String(self.item.UNIT)
+            self.itemEdit.indexUNIT.accept(index)
+            self.itemEdit.UNITSTR.accept(item)
         }
         
         ddPart.anchorView = tfPart
         ddPart.dataSource = item.textbook.arrParts.map { $0.label }
-        ddPart.selectRow(vmSettings.arrUnits.firstIndex { $0.value == item.PART }!)
+        ddPart.selectRow(itemEdit.indexPART.value)
         ddPart.selectionAction = { [unowned self] (index: Int, item: String) in
-            self.item.PART = vmSettings.arrParts[index].value
-            self.tfPart.text = self.item.PARTSTR
+            self.itemEdit.indexPART.accept(index)
+            self.itemEdit.PARTSTR.accept(item)
         }
-        tfID.text = String(item.ID)
-        tfTextbookName.text = item.TEXTBOOKNAME
-        tfUnit.text = item.UNITSTR
-        tfPart.text = item.PARTSTR
-        tfSeqNum.text = String(item.SEQNUM)
-        tfWordID.text = String(item.WORDID)
-        tfWord.text = item.WORD
-        tfNote.text = item.NOTE
-        tfFamiID.text = String(item.FAMIID)
-        tfLevel.text = String(item.LEVEL)
+        
+        _ = itemEdit.ID ~> tfID.rx.text.orEmpty
+        _ = itemEdit.TEXTBOOKNAME ~> tfTextbookName.rx.text.orEmpty
+        _ = itemEdit.UNITSTR <~> tfUnit.rx.textInput
+        _ = itemEdit.PARTSTR <~> tfPart.rx.textInput
+        _ = itemEdit.SEQNUM <~> tfSeqNum.rx.textInput
+        _ = itemEdit.WORDID ~> tfWordID.rx.text
+        _ = itemEdit.WORD <~> tfWord.rx.textInput
+        _ = itemEdit.NOTE <~> tfNote.rx.text
+        _ = itemEdit.FAMIID ~> tfFamiID.rx.text
+        _ = itemEdit.LEVEL <~> tfLevel.rx.textInput
+        _ = itemEdit.ACCURACY ~> tfAccuracy.rx.text
+        _ = vmEdit.isOKEnabled ~> btnDone.rx.isEnabled
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         // https://stackoverflow.com/questions/7525437/how-to-set-focus-to-a-textfield-in-iphone
-        (item.WORD.isEmpty ? tfWord : tfNote).becomeFirstResponder()
+        (vmEdit.isAdd ? tfWord : tfNote).becomeFirstResponder()
     }
 
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
@@ -77,13 +86,6 @@ class WordsTextbookDetailViewController: UITableViewController, UITextFieldDeleg
         } else {
             return true
         }
-    }
-
-    func onDone() {
-        item.SEQNUM = Int(tfSeqNum.text!)!
-        item.WORD = vmSettings.autoCorrectInput(text: tfWord.text ?? "")
-        item.NOTE = tfNote.text
-        item.LEVEL = Int(tfLevel.text!)!
     }
     
     deinit {

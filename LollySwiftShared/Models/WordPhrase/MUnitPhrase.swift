@@ -123,7 +123,9 @@ class MUnitPhrase: NSObject, Codable, MPhraseProtocol {
 class MUnitPhraseEdit {
     var ID: BehaviorRelay<String>
     var TEXTBOOKNAME: BehaviorRelay<String>
+    var UNITSTR: BehaviorRelay<String>
     var indexUNIT: BehaviorRelay<Int>
+    var PARTSTR: BehaviorRelay<String>
     var indexPART: BehaviorRelay<Int>
     var SEQNUM: BehaviorRelay<String>
     var PHRASEID: BehaviorRelay<String>
@@ -133,7 +135,9 @@ class MUnitPhraseEdit {
     init(x: MUnitPhrase) {
         ID = BehaviorRelay(value: x.ID.toString)
         TEXTBOOKNAME = BehaviorRelay(value: x.TEXTBOOKNAME)
+        UNITSTR = BehaviorRelay(value: x.UNITSTR)
         indexUNIT = BehaviorRelay(value: x.textbook.arrUnits.firstIndex { $0.value == x.UNIT } ?? -1)
+        PARTSTR = BehaviorRelay(value: x.PARTSTR)
         indexPART = BehaviorRelay(value: x.textbook.arrParts.firstIndex { $0.value == x.PART } ?? -1)
         SEQNUM = BehaviorRelay(value: x.SEQNUM.toString)
         PHRASEID = BehaviorRelay(value: x.PHRASEID.toString)

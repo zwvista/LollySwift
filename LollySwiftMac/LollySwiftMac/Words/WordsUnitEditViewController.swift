@@ -13,10 +13,10 @@ import NSObject_Rx
 class WordsUnitEditViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 
     var vm: WordsUnitViewModel!
-    var vmEdit: WordsUnitEditViewModel!
-    var itemEdit: MUnitWordEdit { vmEdit.itemEdit }
     var complete: (() -> Void)?
     @objc var item: MUnitWord!
+    var vmEdit: WordsUnitEditViewModel!
+    var itemEdit: MUnitWordEdit { vmEdit.itemEdit }
     var arrWords: [MUnitWord] { vmEdit.vmSingle?.arrWords ?? [MUnitWord]() }
 
     @IBOutlet weak var acUnits: NSArrayController!

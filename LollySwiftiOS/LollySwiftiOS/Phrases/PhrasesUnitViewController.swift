@@ -131,12 +131,11 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
     @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
         guard segue.identifier == "Done" else {return}
         let controller = segue.source as! PhrasesUnitDetailViewController
-        controller.onDone()
-        tableView.reloadData()
-        if controller.isAdd {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        controller.vmEdit.onOK().subscribe {
+            self.tableView.reloadData()
+            if controller.vmEdit.isAdd {
                 self.performSegue(withIdentifier: "add", sender: self)
             }
-        }
+        } ~ rx.disposeBag
     }
 }

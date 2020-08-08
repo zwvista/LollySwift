@@ -12,27 +12,26 @@ class PhrasesLangDetailViewController: UITableViewController {
     
     var vm: PhrasesLangViewModel!
     var item: MLangPhrase!
-    
+    var vmEdit: PhrasesLangEditViewModel!
+    var itemEdit: MLangPhraseEdit { vmEdit.itemEdit }
+
     @IBOutlet weak var tfID: UITextField!
     @IBOutlet weak var tfPhrase: UITextField!
     @IBOutlet weak var tfTranslation: UITextField!
+    @IBOutlet weak var btnDone: UIBarButtonItem!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tfID.text = String(item.ID)
-        tfPhrase.text = item.PHRASE
-        tfTranslation.text = item.TRANSLATION
+        _ = itemEdit.ID ~> tfID.rx.text.orEmpty
+        _ = itemEdit.PHRASE <~> tfPhrase.rx.text.orEmpty
+        _ = itemEdit.TRANSLATION <~> tfTranslation.rx.text
+        _ = vmEdit.isOKEnabled ~> btnDone.rx.isEnabled
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         // https://stackoverflow.com/questions/7525437/how-to-set-focus-to-a-textfield-in-iphone
-        (item.PHRASE.isEmpty ? tfPhrase : tfTranslation).becomeFirstResponder()
-    }
-
-    func onDone() {
-        item.PHRASE = vmSettings.autoCorrectInput(text: tfPhrase.text ?? "")
-        item.TRANSLATION = tfTranslation.text
+        (vmEdit.isAdd ? tfPhrase : tfTranslation).becomeFirstResponder()
     }
     
     deinit {
