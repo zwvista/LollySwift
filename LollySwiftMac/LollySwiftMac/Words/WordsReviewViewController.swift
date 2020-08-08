@@ -50,6 +50,7 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
         wc.scSpeak.selectedSegment = vm.isSpeaking ? 1 : 0
     }
     override func viewWillDisappear() {
+        super.viewWillDisappear()
         wc = nil
         vm.subscription?.dispose()
     }

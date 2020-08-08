@@ -8,7 +8,6 @@
 
 import Foundation
 import RxSwift
-import NSObject_Rx
 
 class TextbooksViewModel: NSObject {
     var vmSettings: SettingsViewModel

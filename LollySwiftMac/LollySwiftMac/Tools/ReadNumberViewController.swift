@@ -25,6 +25,7 @@ class ReadNumberViewController: NSViewController, NSTextFieldDelegate {
     }
     
     override func viewWillDisappear() {
+        super.viewWillDisappear()
         _observers.removeAll()
     }
     

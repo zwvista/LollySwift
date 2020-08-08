@@ -38,6 +38,7 @@ class PhrasesBaseViewController: NSViewController, NSTableViewDataSource, NSTabl
         wc.sfFilter?.placeholderString = "Filter"
     }
     override func viewWillDisappear() {
+        super.viewWillDisappear()
         wc = nil
     }
     

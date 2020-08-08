@@ -8,7 +8,6 @@
 
 import Foundation
 import RxSwift
-import NSObject_Rx
 
 class WordsLangViewModel: NSObject {
     var vmSettings: SettingsViewModel

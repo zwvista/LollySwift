@@ -21,6 +21,6 @@ class SingleWordViewModel: NSObject {
             self.arrWords = $0
         }.subscribe {
             complete()
-            } ~ rx.disposeBag
+        } ~ rx.disposeBag
     }
 }

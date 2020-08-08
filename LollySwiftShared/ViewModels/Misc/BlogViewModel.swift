@@ -9,7 +9,6 @@
 import Foundation
 import Regex
 import RxSwift
-import NSObject_Rx
 
 class BlogViewModel: NSObject {
     

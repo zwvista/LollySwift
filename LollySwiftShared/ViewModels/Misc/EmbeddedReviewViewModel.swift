@@ -8,7 +8,6 @@
 
 import Foundation
 import RxSwift
-import NSObject_Rx
 
 class EmbeddedReviewViewModel: NSObject {
     var options = MReviewOptions(isEmbedded: true)

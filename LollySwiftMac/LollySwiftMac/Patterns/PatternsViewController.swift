@@ -60,6 +60,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
         sfFilter?.placeholderString = "Filter"
     }
     override func viewWillDisappear() {
+        super.viewWillDisappear()
         wc = nil
     }
 

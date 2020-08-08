@@ -51,6 +51,7 @@ class WordsReviewViewController: UIViewController, UITextFieldDelegate {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         subscription?.dispose()
     }
 
