@@ -164,8 +164,12 @@ class MUnitWordEdit {
     }
     
     func save(to x: MUnitWord) {
-        x.UNIT = x.textbook.arrUnits[indexUNIT.value].value
-        x.PART = x.textbook.arrUnits[indexPART.value].value
+        if indexUNIT.value != -1 {
+            x.UNIT = x.textbook.arrUnits[indexUNIT.value].value
+        }
+        if indexPART.value != -1 {
+            x.PART = x.textbook.arrUnits[indexPART.value].value
+        }
         x.SEQNUM = SEQNUM.value.toInt()!
         x.WORD = WORD.value
         x.NOTE = NOTE.value

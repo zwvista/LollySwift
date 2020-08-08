@@ -116,11 +116,11 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
 
     // https://stackoverflow.com/questions/24219441/how-to-use-nstoolbar-in-xcode-6-and-storyboard
     @IBAction func addPhrase(_ sender: AnyObject) {
-        let detailVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesUnitDetailViewController") as! PhrasesUnitDetailViewController
-        detailVC.vm = vm
-        detailVC.item = vm.newUnitPhrase()
-        detailVC.complete = { self.tableView.reloadData(); self.addPhrase(self) }
-        self.presentAsSheet(detailVC)
+        let editVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesUnitEditViewController") as! PhrasesUnitEditViewController
+        editVC.vm = vm
+        editVC.item = vm.newUnitPhrase()
+        editVC.complete = { self.tableView.reloadData(); self.addPhrase(self) }
+        self.presentAsSheet(editVC)
     }
     
     @IBAction func batchEdit(_ sender: AnyObject) {
@@ -148,16 +148,14 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     }
 
     @IBAction func editPhrase(_ sender: AnyObject) {
-        let detailVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesUnitDetailViewController") as! PhrasesUnitDetailViewController
-        detailVC.vm = vm
+        let editVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesUnitEditViewController") as! PhrasesUnitEditViewController
+        editVC.vm = vm
         let i = tableView.selectedRow
-        detailVC.item = MUnitPhrase()
-        detailVC.item.copy(from: arrPhrases[i])
-        detailVC.complete = { [unowned detailVC] in
-            self.arrPhrases[i].copy(from: detailVC.item)
+        editVC.item = arrPhrases[i]
+        editVC.complete = {
             self.tableView.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count))
         }
-        self.presentAsModalWindow(detailVC)
+        self.presentAsModalWindow(editVC)
     }
     
     @IBAction func filterPhrase(_ sender: AnyObject) {

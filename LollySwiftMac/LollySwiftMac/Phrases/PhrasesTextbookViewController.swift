@@ -63,16 +63,14 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
     }
 
     @IBAction func editPhrase(_ sender: AnyObject) {
-        let detailVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesTextbookDetailViewController") as! PhrasesTextbookDetailViewController
-        detailVC.vm = vm
+        let editVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesTextbookEditViewController") as! PhrasesTextbookEditViewController
+        editVC.vm = vm
         let i = tableView.selectedRow
-        detailVC.item = MUnitPhrase()
-        detailVC.item.copy(from: arrPhrases[i])
-        detailVC.complete = { [unowned detailVC] in
-            self.arrPhrases[i].copy(from: detailVC.item)
+        editVC.item = arrPhrases[i]
+        editVC.complete = {
             self.tableView.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count))
         }
-        self.presentAsModalWindow(detailVC)
+        self.presentAsModalWindow(editVC)
     }
     
     @IBAction func filterPhrase(_ sender: AnyObject) {

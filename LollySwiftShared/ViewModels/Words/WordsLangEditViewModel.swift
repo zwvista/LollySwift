@@ -1,5 +1,5 @@
 //
-//  WordsLangDetailViewModel.swift
+//  WordsLangEditViewModel.swift
 //  LollySwiftMac
 //
 //  Created by 趙偉 on 2020/07/21.
@@ -9,21 +9,24 @@
 import Foundation
 import RxSwift
 
-class WordsLangDetailViewModel: NSObject {
+class WordsLangEditViewModel: NSObject {
     var vm: WordsLangViewModel!
     var item: MLangWord!
+    var itemEdit: MLangWordEdit!
     var vmSingle: SingleWordViewModel!
     var isAdd: Bool!
 
     init(vm: WordsLangViewModel, item: MLangWord, complete: @escaping () -> ()) {
         self.vm = vm
         self.item = item
+        itemEdit = MLangWordEdit(x: item)
         isAdd = item.ID == 0
         guard !isAdd else {return}
         vmSingle = SingleWordViewModel(word: item.WORD, settings: vm.vmSettings, complete: complete)
     }
     
     func onOK() -> Observable<()> {
+        itemEdit.save(to: item)
         item.WORD = vm.vmSettings.autoCorrectInput(text: item.WORD)
         if isAdd {
             vm.arrWords.append(item)

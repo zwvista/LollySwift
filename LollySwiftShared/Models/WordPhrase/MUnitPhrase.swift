@@ -8,6 +8,7 @@
 
 import Foundation
 import RxSwift
+import RxRelay
 
 @objcMembers
 class MUnitPhrase: NSObject, Codable, MPhraseProtocol {
@@ -116,5 +117,39 @@ class MUnitPhrase: NSObject, Codable, MPhraseProtocol {
         let url = "\(CommonApi.urlSP)UNITPHRASES_DELETE"
         let parameters = try! item.toParameters()
         return RestApi.callSP(url: url, parameters: parameters).map { print($0) }
+    }
+}
+
+class MUnitPhraseEdit {
+    var ID: BehaviorRelay<String>
+    var TEXTBOOKNAME: BehaviorRelay<String>
+    var indexUNIT: BehaviorRelay<Int>
+    var indexPART: BehaviorRelay<Int>
+    var SEQNUM: BehaviorRelay<String>
+    var PHRASEID: BehaviorRelay<String>
+    var PHRASE: BehaviorRelay<String>
+    var TRANSLATION: BehaviorRelay<String?>
+
+    init(x: MUnitPhrase) {
+        ID = BehaviorRelay(value: x.ID.toString)
+        TEXTBOOKNAME = BehaviorRelay(value: x.TEXTBOOKNAME)
+        indexUNIT = BehaviorRelay(value: x.textbook.arrUnits.firstIndex { $0.value == x.UNIT } ?? -1)
+        indexPART = BehaviorRelay(value: x.textbook.arrParts.firstIndex { $0.value == x.PART } ?? -1)
+        SEQNUM = BehaviorRelay(value: x.SEQNUM.toString)
+        PHRASEID = BehaviorRelay(value: x.PHRASEID.toString)
+        PHRASE = BehaviorRelay(value: x.PHRASE)
+        TRANSLATION = BehaviorRelay(value: x.TRANSLATION)
+    }
+    
+    func save(to x: MUnitPhrase) {
+        if indexUNIT.value != -1 {
+            x.UNIT = x.textbook.arrUnits[indexUNIT.value].value
+        }
+        if indexPART.value != -1 {
+            x.PART = x.textbook.arrUnits[indexPART.value].value
+        }
+        x.SEQNUM = SEQNUM.value.toInt()!
+        x.PHRASE = PHRASE.value
+        x.TRANSLATION = TRANSLATION.value
     }
 }

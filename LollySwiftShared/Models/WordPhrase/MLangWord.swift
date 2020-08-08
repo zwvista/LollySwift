@@ -8,6 +8,7 @@
 
 import Foundation
 import RxSwift
+import RxRelay
 
 @objcMembers
 class MLangWord: NSObject, Codable, MWordProtocol {
@@ -98,5 +99,29 @@ class MLangWord: NSObject, Codable, MWordProtocol {
         let url = "\(CommonApi.urlSP)LANGWORDS_DELETE"
         let parameters = try! item.toParameters()
         return RestApi.callSP(url: url, parameters: parameters).map { print($0) }
+    }
+}
+
+class MLangWordEdit {
+    var ID: BehaviorRelay<String>
+    var WORD: BehaviorRelay<String>
+    var NOTE: BehaviorRelay<String?>
+    var FAMIID: BehaviorRelay<String>
+    var LEVEL: BehaviorRelay<String>
+    var ACCURACY: BehaviorRelay<String>
+
+    init(x: MLangWord) {
+        ID = BehaviorRelay(value: x.ID.toString)
+        WORD = BehaviorRelay(value: x.WORD)
+        NOTE = BehaviorRelay(value: x.NOTE)
+        FAMIID = BehaviorRelay(value: x.FAMIID.toString)
+        LEVEL = BehaviorRelay(value: x.LEVEL.toString)
+        ACCURACY = BehaviorRelay(value: x.ACCURACY)
+    }
+    
+    func save(to x: MLangWord) {
+        x.WORD = WORD.value
+        x.NOTE = NOTE.value
+        x.LEVEL = LEVEL.value.toInt()!
     }
 }

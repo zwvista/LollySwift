@@ -1,5 +1,5 @@
 //
-//  PhrasesUnitDetailViewModel.swift
+//  PhrasesLangEditViewModel.swift
 //  LollySwiftMac
 //
 //  Created by 趙偉 on 2020/07/21.
@@ -9,27 +9,30 @@
 import Foundation
 import RxSwift
 
-class PhrasesUnitDetailViewModel: NSObject {
-    var vm: PhrasesUnitViewModel!
-    var item: MUnitPhrase!
+class PhrasesLangEditViewModel: NSObject {
+    var vm: PhrasesLangViewModel!
+    var item: MLangPhrase!
+    var itemEdit: MLangPhraseEdit!
     var vmSingle: SinglePhraseViewModel!
     var isAdd: Bool!
 
-    init(vm: PhrasesUnitViewModel, item: MUnitPhrase, complete: @escaping () -> ()) {
+    init(vm: PhrasesLangViewModel, item: MLangPhrase, complete: @escaping () -> ()) {
         self.vm = vm
         self.item = item
+        itemEdit = MLangPhraseEdit(x: item)
         isAdd = item.ID == 0
         guard !isAdd else {return}
         vmSingle = SinglePhraseViewModel(phrase: item.PHRASE, settings: vm.vmSettings, complete: complete)
     }
     
     func onOK() -> Observable<()> {
+        itemEdit.save(to: item)
         item.PHRASE = vm.vmSettings.autoCorrectInput(text: item.PHRASE)
         if isAdd {
             vm.arrPhrases.append(item)
-            return vm.create(item: item)
+            return PhrasesLangViewModel.create(item: item)
         } else {
-            return vm.update(item: item)
+            return PhrasesLangViewModel.update(item: item)
         }
     }
 }

@@ -1,5 +1,5 @@
 //
-//  WordsLangDetailViewController.swift
+//  WordsLangEditViewController.swift
 //  LollySwiftMac
 //
 //  Created by 趙偉 on 2018/04/07.
@@ -10,14 +10,13 @@ import Cocoa
 import RxSwift
 import NSObject_Rx
 
-@objcMembers
-class WordsLangDetailViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
+class WordsLangEditViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 
     var vm: WordsLangViewModel!
-    var vmDetail: WordsLangDetailViewModel!
+    var vmEdit: WordsLangEditViewModel!
     var complete: (() -> Void)?
     @objc var item: MLangWord!
-    var arrWords: [MUnitWord] { vmDetail.vmSingle?.arrWords ?? [MUnitWord]() }
+    var arrWords: [MUnitWord] { vmEdit.vmSingle?.arrWords ?? [MUnitWord]() }
 
     @IBOutlet weak var tfID: NSTextField!
     @IBOutlet weak var tfWord: NSTextField!
@@ -26,34 +25,38 @@ class WordsLangDetailViewController: NSViewController, NSTableViewDataSource, NS
     @IBOutlet weak var tfLevel: NSTextField!
     @IBOutlet weak var tfAccuracy: NSTextField!
     @IBOutlet weak var tableView: NSTableView!
+    @IBOutlet weak var btnOK: NSButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        vmDetail = WordsLangDetailViewModel(vm: vm, item: item) {
+        vmEdit = WordsLangEditViewModel(vm: vm, item: item) {
             self.tableView.reloadData()
         }
+        _ = vmEdit.itemEdit.ID ~> tfID.rx.text.orEmpty
+        _ = vmEdit.itemEdit.WORD <~> tfWord.rx.text.orEmpty
+        _ = vmEdit.itemEdit.NOTE <~> tfNote.rx.text
+        _ = vmEdit.itemEdit.FAMIID ~> tfFamiID.rx.text.orEmpty
+        _ = vmEdit.itemEdit.LEVEL <~> tfLevel.rx.text.orEmpty
+        _ = vmEdit.itemEdit.ACCURACY ~> tfAccuracy.rx.text.orEmpty
+        btnOK.rx.tap.flatMap { [unowned self] _ in
+            self.vmEdit.onOK()
+        }.subscribe { [unowned self] _ in
+            self.complete?()
+            self.dismiss(self.btnOK)
+        } ~ rx.disposeBag
     }
     
     override func viewDidAppear() {
         super.viewDidAppear()
         // https://stackoverflow.com/questions/24235815/cocoa-how-to-set-window-title-from-within-view-controller-in-swift
-        (item.WORD.isEmpty ? tfWord : tfNote).becomeFirstResponder()
-        view.window?.title = vmDetail.isAdd ? "New Word" : item.WORD
+        (vmEdit.isAdd ? tfWord : tfNote).becomeFirstResponder()
+        view.window?.title = vmEdit.isAdd ? "New Word" : item.WORD
     }
     
     @IBAction func clearAccuracy(_ sender: AnyObject) {
         item.CORRECT = 0
         item.TOTAL = 0
         tfAccuracy.stringValue = item.ACCURACY
-    }
-
-    @IBAction func okClicked(_ sender: AnyObject) {
-        // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
-        self.commitEditing()
-        vmDetail.onOK().subscribe {
-            self.complete?()
-            self.dismiss(sender)
-        } ~ rx.disposeBag
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {

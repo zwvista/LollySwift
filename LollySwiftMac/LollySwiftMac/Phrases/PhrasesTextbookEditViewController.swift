@@ -1,5 +1,5 @@
 //
-//  PhrasesTextbookDetailViewController.swift
+//  PhrasesTextbookEditViewController.swift
 //  LollySwiftMac
 //
 //  Created by 趙偉 on 2018/04/07.
@@ -10,14 +10,13 @@ import Cocoa
 import RxSwift
 import NSObject_Rx
 
-@objcMembers
-class PhrasesTextbookDetailViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
+class PhrasesTextbookEditViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 
     var vm: PhrasesUnitViewModel!
-    var vmDetail: PhrasesUnitDetailViewModel!
+    var vmEdit: PhrasesUnitEditViewModel!
     var complete: (() -> Void)?
     var item: MUnitPhrase!
-    var arrPhrases: [MUnitPhrase] { vmDetail.vmSingle.arrPhrases }
+    var arrPhrases: [MUnitPhrase] { vmEdit.vmSingle.arrPhrases }
 
     @IBOutlet weak var acUnits: NSArrayController!
     @IBOutlet weak var acParts: NSArrayController!
@@ -30,14 +29,29 @@ class PhrasesTextbookDetailViewController: NSViewController, NSTableViewDataSour
     @IBOutlet weak var tfPhrase: NSTextField!
     @IBOutlet weak var tfTranslation: NSTextField!
     @IBOutlet weak var tableView: NSTableView!
+    @IBOutlet weak var btnOK: NSButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         acUnits.content = item.textbook.arrUnits
         acParts.content = item.textbook.arrParts
-        vmDetail = PhrasesUnitDetailViewModel(vm: vm, item: item) {
+        vmEdit = PhrasesUnitEditViewModel(vm: vm, item: item) {
             self.tableView.reloadData()
         }
+        _ = vmEdit.itemEdit.ID ~> tfID.rx.text.orEmpty
+        _ = vmEdit.itemEdit.TEXTBOOKNAME ~> tfTextbookName.rx.text.orEmpty
+        _ = vmEdit.itemEdit.indexUNIT <~> pubUnit.rx.selectedItemIndex
+        _ = vmEdit.itemEdit.indexPART <~> pubPart.rx.selectedItemIndex
+        _ = vmEdit.itemEdit.SEQNUM <~> tfSeqNum.rx.text.orEmpty
+        _ = vmEdit.itemEdit.PHRASEID ~> tfPhraseID.rx.text.orEmpty
+        _ = vmEdit.itemEdit.PHRASE <~> tfPhrase.rx.text.orEmpty
+        _ = vmEdit.itemEdit.TRANSLATION <~> tfTranslation.rx.text
+        btnOK.rx.tap.flatMap { [unowned self] _ in
+            self.vmEdit.onOK()
+        }.subscribe { [unowned self] _ in
+            self.complete?()
+            self.dismiss(self.btnOK)
+        } ~ rx.disposeBag
     }
     
     override func viewDidAppear() {
@@ -45,15 +59,6 @@ class PhrasesTextbookDetailViewController: NSViewController, NSTableViewDataSour
         // https://stackoverflow.com/questions/24235815/cocoa-how-to-set-window-title-from-within-view-controller-in-swift
         (item.PHRASE.isEmpty ? tfPhrase : tfTranslation).becomeFirstResponder()
         view.window?.title = item.PHRASE
-    }
-    
-    @IBAction func okClicked(_ sender: AnyObject) {
-        // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
-        self.commitEditing()
-        vmDetail.onOK().subscribe {
-            self.complete?()
-            self.dismiss(sender)
-        } ~ rx.disposeBag
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {

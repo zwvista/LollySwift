@@ -8,6 +8,7 @@
 
 import Foundation
 import RxSwift
+import RxRelay
 
 @objcMembers
 class MLangPhrase: NSObject, Codable, MPhraseProtocol {
@@ -95,5 +96,22 @@ class MLangPhrase: NSObject, Codable, MPhraseProtocol {
         let url = "\(CommonApi.urlSP)LANGPHRASES_DELETE"
         let parameters = try! item.toParameters()
         return RestApi.callSP(url: url, parameters: parameters).map { print($0) }
+    }
+}
+
+class MLangPhraseEdit {
+    var ID: BehaviorRelay<String>
+    var PHRASE: BehaviorRelay<String>
+    var TRANSLATION: BehaviorRelay<String?>
+
+    init(x: MLangPhrase) {
+        ID = BehaviorRelay(value: x.ID.toString)
+        PHRASE = BehaviorRelay(value: x.PHRASE)
+        TRANSLATION = BehaviorRelay(value: x.TRANSLATION)
+    }
+    
+    func save(to x: MLangPhrase) {
+        x.PHRASE = PHRASE.value
+        x.TRANSLATION = TRANSLATION.value
     }
 }

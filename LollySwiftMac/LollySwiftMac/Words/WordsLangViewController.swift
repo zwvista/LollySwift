@@ -70,11 +70,11 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
 
     // https://stackoverflow.com/questions/24219441/how-to-use-nstoolbar-in-xcode-6-and-storyboard
     @IBAction func addWord(_ sender: AnyObject) {
-        let detailVC = self.storyboard!.instantiateController(withIdentifier: "WordsLangDetailViewController") as! WordsLangDetailViewController
-        detailVC.vm = vm
-        detailVC.item = vm.newLangWord()
-        detailVC.complete = { self.tvWords.reloadData(); self.addWord(self) }
-        self.presentAsSheet(detailVC)
+        let editVC = self.storyboard!.instantiateController(withIdentifier: "WordsLangEditViewController") as! WordsLangEditViewController
+        editVC.vm = vm
+        editVC.item = vm.newLangWord()
+        editVC.complete = { self.tvWords.reloadData(); self.addWord(self) }
+        self.presentAsSheet(editVC)
     }
 
     override func deleteWord(row: Int) {
@@ -91,16 +91,14 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
     }
 
     @IBAction func editWord(_ sender: AnyObject) {
-        let detailVC = self.storyboard!.instantiateController(withIdentifier: "WordsLangDetailViewController") as! WordsLangDetailViewController
-        detailVC.vm = vm
+        let editVC = self.storyboard!.instantiateController(withIdentifier: "WordsLangEditViewController") as! WordsLangEditViewController
+        editVC.vm = vm
         let i = tvWords.selectedRow
-        detailVC.item = MLangWord()
-        detailVC.item.copy(from: arrWords[i])
-        detailVC.complete = { [unowned detailVC] in
-            self.arrWords[i].copy(from: detailVC.item)
+        editVC.item = arrWords[i]
+        editVC.complete = {
             self.tvWords.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tvWords.tableColumns.count))
         }
-        self.presentAsModalWindow(detailVC)
+        self.presentAsModalWindow(editVC)
     }
     
     @IBAction func getNote(_ sender: AnyObject) {
