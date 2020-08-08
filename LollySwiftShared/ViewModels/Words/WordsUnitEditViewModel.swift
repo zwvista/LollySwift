@@ -8,6 +8,7 @@
 
 import Foundation
 import RxSwift
+import RxRelay
 
 class WordsUnitEditViewModel: NSObject {
     var vm: WordsUnitViewModel!
@@ -15,12 +16,14 @@ class WordsUnitEditViewModel: NSObject {
     var itemEdit: MUnitWordEdit!
     var vmSingle: SingleWordViewModel!
     var isAdd: Bool!
+    var isOKEnabled = BehaviorRelay(value: false)
 
     init(vm: WordsUnitViewModel, item: MUnitWord, complete: @escaping () -> ()) {
         self.vm = vm
         self.item = item
         itemEdit = MUnitWordEdit(x: item)
         isAdd = item.ID == 0
+        _ = itemEdit.WORD.map { !$0.isEmpty } ~> isOKEnabled
         guard !isAdd else {return}
         vmSingle = SingleWordViewModel(word: item.WORD, settings: vm.vmSettings, complete: complete)
     }

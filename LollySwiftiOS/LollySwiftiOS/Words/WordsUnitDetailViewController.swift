@@ -23,7 +23,8 @@ class WordsUnitDetailViewController: UITableViewController, UITextFieldDelegate 
     @IBOutlet weak var tfFamiID: UITextField!
     @IBOutlet weak var tfLevel: UITextField!
     @IBOutlet weak var tfAccuracy: UITextField!
-
+    @IBOutlet weak var btnDone: UIBarButtonItem!
+    
     var vm: WordsUnitViewModel!
     var vmEdit: WordsUnitEditViewModel!
     var itemEdit: MUnitWordEdit { vmEdit.itemEdit }
@@ -63,6 +64,7 @@ class WordsUnitDetailViewController: UITableViewController, UITextFieldDelegate 
         _ = itemEdit.FAMIID ~> tfFamiID.rx.text
         _ = itemEdit.LEVEL <~> tfLevel.rx.textInput
         _ = itemEdit.ACCURACY ~> tfAccuracy.rx.text
+        _ = vmEdit.isOKEnabled ~> btnDone.rx.isEnabled
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -83,11 +85,6 @@ class WordsUnitDetailViewController: UITableViewController, UITextFieldDelegate 
         } else {
             return true
         }
-    }
-    
-    func onDone() {
-        guard item.WORD.isEmpty else {return}
-        vmEdit.onOK().subscribe() ~ rx.disposeBag
     }
     
     deinit {

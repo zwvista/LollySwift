@@ -8,6 +8,7 @@
 
 import Foundation
 import RxSwift
+import RxRelay
 
 class PhrasesLangEditViewModel: NSObject {
     var vm: PhrasesLangViewModel!
@@ -15,12 +16,14 @@ class PhrasesLangEditViewModel: NSObject {
     var itemEdit: MLangPhraseEdit!
     var vmSingle: SinglePhraseViewModel!
     var isAdd: Bool!
+    var isOKEnabled = BehaviorRelay(value: false)
 
     init(vm: PhrasesLangViewModel, item: MLangPhrase, complete: @escaping () -> ()) {
         self.vm = vm
         self.item = item
         itemEdit = MLangPhraseEdit(x: item)
         isAdd = item.ID == 0
+        _ = itemEdit.PHRASE.map { !$0.isEmpty } ~> isOKEnabled
         guard !isAdd else {return}
         vmSingle = SinglePhraseViewModel(phrase: item.PHRASE, settings: vm.vmSettings, complete: complete)
     }

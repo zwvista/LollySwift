@@ -51,6 +51,7 @@ class WordsUnitEditViewController: NSViewController, NSTableViewDataSource, NSTa
         _ = itemEdit.FAMIID ~> tfFamiID.rx.text.orEmpty
         _ = itemEdit.LEVEL <~> tfLevel.rx.text.orEmpty
         _ = itemEdit.ACCURACY ~> tfAccuracy.rx.text.orEmpty
+        _ = vmEdit.isOKEnabled ~> btnOK.rx.isEnabled
         btnOK.rx.tap.flatMap { [unowned self] _ in
             self.vmEdit.onOK()
         }.subscribe { [unowned self] _ in

@@ -47,6 +47,7 @@ class PhrasesTextbookEditViewController: NSViewController, NSTableViewDataSource
         _ = itemEdit.PHRASEID ~> tfPhraseID.rx.text.orEmpty
         _ = itemEdit.PHRASE <~> tfPhrase.rx.text.orEmpty
         _ = itemEdit.TRANSLATION <~> tfTranslation.rx.text
+        _ = vmEdit.isOKEnabled ~> btnOK.rx.isEnabled
         btnOK.rx.tap.flatMap { [unowned self] _ in
             self.vmEdit.onOK()
         }.subscribe { [unowned self] _ in
