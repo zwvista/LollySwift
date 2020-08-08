@@ -82,9 +82,9 @@ class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func newTest(_ sender: AnyObject) {
         subscription?.dispose()
-        vm.newTest(options: options).subscribe {
-            self.doTest()
-        } ~ rx.disposeBag
+//        vm.newTest(options: options).subscribe {
+//            self.doTest()
+//        } ~ rx.disposeBag
         btnCheck.setTitle(vm.isTestMode ? "Check" : "Next", for: .normal)
         if vm.mode == .reviewAuto {
             subscription = Observable<Int>.interval(DispatchTimeInterval.milliseconds(vmSettings.USREVIEWINTERVAL), scheduler: MainScheduler.instance).subscribe { _ in
@@ -108,7 +108,7 @@ class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
                 lblIncorrect.isHidden = false
             }
             btnCheck.setTitle("Next", for: .normal)
-            vm.check(phraseInput: tfPhraseInput.text!)
+//            vm.check(phraseInput: tfPhraseInput.text!)
         } else {
             vm.next()
             doTest()

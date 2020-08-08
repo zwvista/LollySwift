@@ -24,7 +24,6 @@
 		8C42B5BA1D69A21E00DCB528 /* PhrasesBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C42B5B71D69A21E00DCB528 /* PhrasesBaseViewController.swift */; };
 		8C42B5BB1D69A21E00DCB528 /* PhrasesLangViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C42B5B81D69A21E00DCB528 /* PhrasesLangViewController.swift */; };
 		8C42B5BC1D69A21E00DCB528 /* PhrasesUnitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C42B5B91D69A21E00DCB528 /* PhrasesUnitViewController.swift */; };
-		8C9C6A442053F9F700F299C8 /* UIView+ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9C6A432053F9F700F299C8 /* UIView+ActivityIndicator.swift */; };
 		8CB025932096CB3E0087462E /* LeftMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB025912096CB3E0087462E /* LeftMenuViewController.swift */; };
 		8CB025942096CB3E0087462E /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB025922096CB3E0087462E /* RootViewController.swift */; };
 		8CD16D121D69FD8A00F5F625 /* WordsLangDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD16D111D69FD8A00F5F625 /* WordsLangDetailViewController.swift */; };
@@ -180,7 +179,6 @@
 		8C42B5B71D69A21E00DCB528 /* PhrasesBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesBaseViewController.swift; sourceTree = "<group>"; };
 		8C42B5B81D69A21E00DCB528 /* PhrasesLangViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesLangViewController.swift; sourceTree = "<group>"; };
 		8C42B5B91D69A21E00DCB528 /* PhrasesUnitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesUnitViewController.swift; sourceTree = "<group>"; };
-		8C9C6A432053F9F700F299C8 /* UIView+ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+ActivityIndicator.swift"; sourceTree = "<group>"; };
 		8CB025912096CB3E0087462E /* LeftMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftMenuViewController.swift; sourceTree = "<group>"; };
 		8CB025922096CB3E0087462E /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		8CD16D111D69FD8A00F5F625 /* WordsLangDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsLangDetailViewController.swift; sourceTree = "<group>"; };
@@ -317,6 +315,7 @@
 				95CED3B3221170C20094622F /* iOSApi.swift */,
 				8C316579207676CF0015C247 /* RestApi.swift */,
 				8C0748E6209ED0DA0006BD1B /* RxCodableAlamofire.swift */,
+				8C1CF683206A2A4800714C33 /* Extensions.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -419,8 +418,6 @@
 				8C0945681D122ACE003503ED /* SettingsViewController.swift */,
 				953473D81A0D16CF00FF2D56 /* Supporting Files */,
 				8C42B5A71D69A1D900DCB528 /* Words */,
-				8C9C6A432053F9F700F299C8 /* UIView+ActivityIndicator.swift */,
-				8C1CF683206A2A4800714C33 /* Extensions.swift */,
 				95F5846122C653A500268DAA /* ReviewOptionsViewController.swift */,
 			);
 			path = LollySwiftiOS;
@@ -762,7 +759,6 @@
 				95F1FA7024CBD7B1006CA15D /* MUserSetting.swift in Sources */,
 				95F1FA3D24CB1FE7006CA15D /* DisposedBy.swift in Sources */,
 				95F1FA6724CBD7B1006CA15D /* MWordFami.swift in Sources */,
-				8C9C6A442053F9F700F299C8 /* UIView+ActivityIndicator.swift in Sources */,
 				95FDF62A228D5D6C003DFB1A /* WordsUnitBatchViewController.swift in Sources */,
 				95F0FFEA24C957AB00509DF3 /* SinglePhraseViewModel.swift in Sources */,
 				95CED3CA2216C5B20094622F /* WordsTextbookDetailViewController.swift in Sources */,

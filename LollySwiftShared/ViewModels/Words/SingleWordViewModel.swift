@@ -8,6 +8,7 @@
 
 import Foundation
 import RxSwift
+import NSObject_Rx
 
 class SingleWordViewModel: NSObject {
 

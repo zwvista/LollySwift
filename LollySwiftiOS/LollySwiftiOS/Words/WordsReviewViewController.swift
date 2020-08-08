@@ -41,7 +41,7 @@ class WordsReviewViewController: UIViewController, UITextFieldDelegate {
         ddReviewMode.anchorView = btnReviewMode
         ddReviewMode.dataSource = ["Review(Auto)", "Test", "Review(Manual)"]
         ddReviewMode.selectionAction = { [unowned self] (index: Int, item: String) in
-            self.vm.mode = ReviewMode(rawValue: index)!
+            self.vm.options.mode = ReviewMode(rawValue: index)!
             self.btnReviewMode.setTitle(item, for: .normal)
             self.newTest(self)
         }
@@ -69,7 +69,7 @@ class WordsReviewViewController: UIViewController, UITextFieldDelegate {
         tvTranslation.isHidden = false
         tvTranslation.text = ""
         tfWordInput.text = ""
-        tfWordInput.isHidden = vm.mode == .reviewAuto
+        tfWordInput.isHidden = vm.options.mode == .reviewAuto
         if !tfWordInput.isHidden {
             tfWordInput.becomeFirstResponder()
         } else {
@@ -121,7 +121,7 @@ class WordsReviewViewController: UIViewController, UITextFieldDelegate {
                 lblIncorrect.isHidden = false
             }
             btnCheck.setTitle("Next", for: .normal)
-            vm.check(wordInput: tfWordInput.text!).subscribe() ~ rx.disposeBag
+//            vm.check(wordInput: tfWordInput.text!).subscribe() ~ rx.disposeBag
         } else {
             vm.next()
             doTest()
