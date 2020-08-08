@@ -14,11 +14,10 @@ import NSObject_Rx
 class WordsLangDetailViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 
     var vm: WordsLangViewModel!
-    var vmSingle: SingleWordViewModel!
+    var vmDetail: WordsLangDetailViewModel!
     var complete: (() -> Void)?
-    var item: MLangWord!
-    var isAdd: Bool!
-    var arrWords: [MUnitWord] { vmSingle != nil ? vmSingle.arrWords : [MUnitWord]() }
+    @objc var item: MLangWord!
+    var arrWords: [MUnitWord] { vmDetail.vmSingle?.arrWords ?? [MUnitWord]() }
 
     @IBOutlet weak var tfID: NSTextField!
     @IBOutlet weak var tfWord: NSTextField!
@@ -30,9 +29,7 @@ class WordsLangDetailViewController: NSViewController, NSTableViewDataSource, NS
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        isAdd = item.ID == 0
-        guard !isAdd else {return}
-        vmSingle = SingleWordViewModel(word: item.WORD, settings: vm.vmSettings) {
+        vmDetail = WordsLangDetailViewModel(vm: vm, item: item, okComplete: complete) {
             self.tableView.reloadData()
         }
     }
@@ -41,7 +38,7 @@ class WordsLangDetailViewController: NSViewController, NSTableViewDataSource, NS
         super.viewDidAppear()
         // https://stackoverflow.com/questions/24235815/cocoa-how-to-set-window-title-from-within-view-controller-in-swift
         (item.WORD.isEmpty ? tfWord : tfNote).becomeFirstResponder()
-        view.window?.title = isAdd ? "New Word" : item.WORD
+        view.window?.title = vmDetail.isAdd ? "New Word" : item.WORD
     }
     
     @IBAction func clearAccuracy(_ sender: AnyObject) {
@@ -53,18 +50,7 @@ class WordsLangDetailViewController: NSViewController, NSTableViewDataSource, NS
     @IBAction func okClicked(_ sender: AnyObject) {
         // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
         self.commitEditing()
-        item.WORD = vm.vmSettings.autoCorrectInput(text: item.WORD)
-        if isAdd {
-            vm.arrWords.append(item)
-            WordsLangViewModel.create(item: item).subscribe(onNext: {
-                self.item.ID = $0
-                self.complete?()
-            }) ~ rx.disposeBag
-        } else {
-            WordsLangViewModel.update(item: item).subscribe {
-                self.complete?()
-            } ~ rx.disposeBag
-        }
+        vmDetail.onOK()
         dismiss(sender)
     }
     
