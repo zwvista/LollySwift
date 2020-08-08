@@ -151,11 +151,11 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
 
     // https://stackoverflow.com/questions/24219441/how-to-use-nstoolbar-in-xcode-6-and-storyboard
     @IBAction func addWord(_ sender: AnyObject) {
-        let detailVC = self.storyboard!.instantiateController(withIdentifier: "WordsUnitDetailViewController") as! WordsUnitDetailViewController
-        detailVC.vm = vm
-        detailVC.item = vm.newUnitWord()
-        detailVC.complete = { self.tvWords.reloadData(); self.addWord(self) }
-        self.presentAsSheet(detailVC)
+        let editVC = self.storyboard!.instantiateController(withIdentifier: "WordsUnitEditViewController") as! WordsUnitEditViewController
+        editVC.vm = vm
+        editVC.item = vm.newUnitWord()
+        editVC.complete = { self.tvWords.reloadData(); self.addWord(self) }
+        self.presentAsSheet(editVC)
     }
     
     override func deleteWord(row: Int) {
@@ -180,16 +180,14 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     }
     
     @IBAction func editWord(_ sender: AnyObject) {
-        let detailVC = self.storyboard!.instantiateController(withIdentifier: "WordsUnitDetailViewController") as! WordsUnitDetailViewController
-        detailVC.vm = vm
+        let editVC = self.storyboard!.instantiateController(withIdentifier: "WordsUnitEditViewController") as! WordsUnitEditViewController
+        editVC.vm = vm
         let i = tvWords.selectedRow
-        detailVC.item = MUnitWord()
-        detailVC.item.copy(from: arrWords[i])
-        detailVC.complete = { [unowned detailVC] in
-            self.arrWords[i].copy(from: detailVC.item)
+        editVC.item = arrWords[i]
+        editVC.complete = {
             self.tvWords.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tvWords.tableColumns.count))
         }
-        self.presentAsModalWindow(detailVC)
+        self.presentAsModalWindow(editVC)
     }
   
     @IBAction func batchEdit(_ sender: AnyObject) {

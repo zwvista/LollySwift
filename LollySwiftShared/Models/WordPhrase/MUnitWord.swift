@@ -138,6 +138,9 @@ class MUnitWord: NSObject, Codable, MWordProtocol {
 
 class MUnitWordEdit {
     var ID: BehaviorRelay<String>
+    var TEXTBOOKNAME: BehaviorRelay<String>
+    var indexUNIT: BehaviorRelay<Int>
+    var indexPART: BehaviorRelay<Int>
     var SEQNUM: BehaviorRelay<String>
     var WORDID: BehaviorRelay<String>
     var WORD: BehaviorRelay<String>
@@ -148,8 +151,11 @@ class MUnitWordEdit {
 
     init(x: MUnitWord) {
         ID = BehaviorRelay(value: x.ID.toString)
+        TEXTBOOKNAME = BehaviorRelay(value: x.TEXTBOOKNAME)
+        indexUNIT = BehaviorRelay(value: x.textbook.arrUnits.firstIndex { $0.value == x.UNIT } ?? -1)
+        indexPART = BehaviorRelay(value: x.textbook.arrParts.firstIndex { $0.value == x.PART } ?? -1)
         SEQNUM = BehaviorRelay(value: x.SEQNUM.toString)
-        WORDID = BehaviorRelay(value: x.ID.toString)
+        WORDID = BehaviorRelay(value: x.WORDID.toString)
         WORD = BehaviorRelay(value: x.WORD)
         NOTE = BehaviorRelay(value: x.NOTE)
         FAMIID = BehaviorRelay(value: x.FAMIID.toString)
@@ -158,7 +164,11 @@ class MUnitWordEdit {
     }
     
     func save(to x: MUnitWord) {
+        x.UNIT = x.textbook.arrUnits[indexUNIT.value].value
+        x.PART = x.textbook.arrUnits[indexPART.value].value
+        x.SEQNUM = SEQNUM.value.toInt()!
         x.WORD = WORD.value
         x.NOTE = NOTE.value
+        x.LEVEL = LEVEL.value.toInt()!
     }
 }

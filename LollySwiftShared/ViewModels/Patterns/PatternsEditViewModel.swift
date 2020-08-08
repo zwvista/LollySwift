@@ -27,9 +27,7 @@ class PatternsEditViewModel: NSObject {
         item.PATTERN = vm.vmSettings.autoCorrectInput(text: item.PATTERN)
         if isAdd {
             vm.arrPatterns.append(item)
-            return PatternsViewModel.create(item: item).map {
-                self.item.ID = $0
-            }
+            return PatternsViewModel.create(item: item)
         } else {
             return PatternsViewModel.update(item: item)
         }

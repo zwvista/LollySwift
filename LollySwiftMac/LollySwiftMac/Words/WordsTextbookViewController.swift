@@ -79,16 +79,14 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
     }
 
     @IBAction func editWord(_ sender: AnyObject) {
-        let detailVC = self.storyboard!.instantiateController(withIdentifier: "WordsTextbookDetailViewController") as! WordsTextbookDetailViewController
-        detailVC.vm = vm
+        let editVC = self.storyboard!.instantiateController(withIdentifier: "WordsTextbookEditViewController") as! WordsTextbookEditViewController
+        editVC.vm = vm
         let i = tvWords.selectedRow
-        detailVC.item = MUnitWord()
-        detailVC.item.copy(from: arrWords[i])
-        detailVC.complete = { [unowned detailVC] in
-            self.arrWords[i].copy(from: detailVC.item)
+        editVC.item = arrWords[i]
+        editVC.complete = {
             self.tvWords.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tvWords.tableColumns.count))
         }
-        self.presentAsModalWindow(detailVC)
+        self.presentAsModalWindow(editVC)
     }
     
     @IBAction func getNote(_ sender: AnyObject) {

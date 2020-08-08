@@ -43,8 +43,10 @@ class PatternsViewModel: NSObject {
         MPattern.update(item: item)
     }
 
-    static func create(item: MPattern) -> Observable<Int> {
-        MPattern.create(item: item)
+    static func create(item: MPattern) -> Observable<()> {
+        MPattern.create(item: item).map {
+            item.ID = $0
+        }
     }
     
     static func delete(_ id: Int) -> Observable<()> {

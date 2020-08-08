@@ -204,13 +204,12 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
         guard !newPattern.isEmpty else {return}
         let item = vm.newPattern()
         item.PATTERN = vm.vmSettings.autoCorrectInput(text: newPattern)
-        PatternsViewModel.create(item: item).subscribe(onNext: {
-            item.ID = $0
+        PatternsViewModel.create(item: item).subscribe {
             self.vm.arrPatterns.append(item)
             self.tvPatterns.reloadData()
             self.tfNewPattern.stringValue = ""
             self.newPattern = ""
-        }) ~ rx.disposeBag
+        } ~ rx.disposeBag
     }
 
     @IBAction func refreshTableView(_ sender: AnyObject) {
