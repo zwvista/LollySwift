@@ -1,5 +1,5 @@
 //
-//  WordsUnitDetailViewController.swift
+//  WordsUnitEditViewController.swift
 //  LollySwiftiOS
 //
 //  Created by 趙偉 on 2016/06/23.
@@ -10,7 +10,7 @@ import UIKit
 import DropDown
 import RxSwift
 
-class WordsUnitDetailViewController: UITableViewController, UITextFieldDelegate {
+class WordsUnitEditViewController: UITableViewController, UITextFieldDelegate {
 
     @IBOutlet weak var tfID: UITextField!
     @IBOutlet weak var tfUnit: UITextField!

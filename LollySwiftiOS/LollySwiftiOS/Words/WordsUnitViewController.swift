@@ -109,7 +109,7 @@ class WordsUnitViewController: WordsBaseViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
-        if let controller = (segue.destination as? UINavigationController)?.topViewController as? WordsUnitDetailViewController {
+        if let controller = (segue.destination as? UINavigationController)?.topViewController as? WordsUnitEditViewController {
             controller.vm = vm
             controller.item = sender as? MUnitWord ?? vm.newUnitWord()
         } else if let controller = segue.destination as? WordsDictViewController {
@@ -162,7 +162,7 @@ class WordsUnitViewController: WordsBaseViewController {
 
     @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
         guard segue.identifier == "Done" else {return}
-        if let controller = segue.source as? WordsUnitDetailViewController {
+        if let controller = segue.source as? WordsUnitEditViewController {
             controller.vmEdit.onOK().subscribe {
                 self.tableView.reloadData()
                 if controller.vmEdit.isAdd {

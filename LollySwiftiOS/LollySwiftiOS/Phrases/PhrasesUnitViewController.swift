@@ -101,7 +101,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
-        if let controller = (segue.destination as? UINavigationController)?.topViewController as? PhrasesUnitDetailViewController {
+        if let controller = (segue.destination as? UINavigationController)?.topViewController as? PhrasesUnitEditViewController {
             controller.vm = vm
             controller.item = sender as? MUnitPhrase ?? vm.newUnitPhrase()
         } else if let controller = (segue.destination as? UINavigationController)?.topViewController as? PhrasesUnitBatchViewController {
@@ -130,7 +130,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
     
     @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
         guard segue.identifier == "Done" else {return}
-        let controller = segue.source as! PhrasesUnitDetailViewController
+        let controller = segue.source as! PhrasesUnitEditViewController
         controller.vmEdit.onOK().subscribe {
             self.tableView.reloadData()
             if controller.vmEdit.isAdd {

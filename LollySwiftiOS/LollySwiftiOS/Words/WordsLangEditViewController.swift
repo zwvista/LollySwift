@@ -1,5 +1,5 @@
 //
-//  WordsLangDetailViewController.swift
+//  WordsLangEditViewController.swift
 //  LollySwiftiOS
 //
 //  Created by 趙偉 on 2016/06/23.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WordsLangDetailViewController: UITableViewController {
+class WordsLangEditViewController: UITableViewController {
     
     var vm: WordsLangViewModel!
     var item: MLangWord!

@@ -1,5 +1,5 @@
 //
-//  PhrasesUnitDetailViewController.swift
+//  PhrasesTextbookEditViewController.swift
 //  LollySwiftiOS
 //
 //  Created by 趙偉 on 2016/06/23.
@@ -9,10 +9,10 @@
 import UIKit
 import DropDown
 import RxSwift
-import NSObject_Rx
 
-class PhrasesUnitDetailViewController: UITableViewController, UITextFieldDelegate {
- 
+class PhrasesTextbookEditViewController: UITableViewController {
+    
+    @IBOutlet weak var tfTextbookName: UITextField!
     @IBOutlet weak var tfID: UITextField!
     @IBOutlet weak var tfUnit: UITextField!
     @IBOutlet weak var tfPart: UITextField!
@@ -28,12 +28,12 @@ class PhrasesUnitDetailViewController: UITableViewController, UITextFieldDelegat
     var itemEdit: MUnitPhraseEdit { vmEdit.itemEdit }
     let ddUnit = DropDown()
     let ddPart = DropDown()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         ddUnit.anchorView = tfUnit
-        ddUnit.dataSource = vmSettings.arrUnits.map { $0.label }
+        ddUnit.dataSource = item.textbook.arrUnits.map { $0.label }
         ddUnit.selectRow(itemEdit.indexUNIT.value)
         ddUnit.selectionAction = { [unowned self] (index: Int, item: String) in
             self.itemEdit.indexUNIT.accept(index)
@@ -41,7 +41,7 @@ class PhrasesUnitDetailViewController: UITableViewController, UITextFieldDelegat
         }
         
         ddPart.anchorView = tfPart
-        ddPart.dataSource = vmSettings.arrParts.map { $0.label }
+        ddPart.dataSource = item.textbook.arrParts.map { $0.label }
         ddPart.selectRow(itemEdit.indexPART.value)
         ddPart.selectionAction = { [unowned self] (index: Int, item: String) in
             self.itemEdit.indexPART.accept(index)
@@ -49,6 +49,7 @@ class PhrasesUnitDetailViewController: UITableViewController, UITextFieldDelegat
         }
         
         _ = itemEdit.ID ~> tfID.rx.text.orEmpty
+        _ = itemEdit.TEXTBOOKNAME ~> tfTextbookName.rx.text.orEmpty
         _ = itemEdit.UNITSTR <~> tfUnit.rx.textInput
         _ = itemEdit.PARTSTR <~> tfPart.rx.textInput
         _ = itemEdit.SEQNUM <~> tfSeqNum.rx.textInput
@@ -61,7 +62,7 @@ class PhrasesUnitDetailViewController: UITableViewController, UITextFieldDelegat
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         // https://stackoverflow.com/questions/7525437/how-to-set-focus-to-a-textfield-in-iphone
-        (item.PHRASE.isEmpty ? tfPhrase : tfTranslation)?.becomeFirstResponder()
+        (item.PHRASE.isEmpty ? tfPhrase : tfTranslation).becomeFirstResponder()
     }
 
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {

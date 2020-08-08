@@ -426,10 +426,10 @@
             </objects>
             <point key="canvasLocation" x="4511" y="945"/>
         </scene>
-        <!--Words in Unit (Detail)-->
+        <!--Words in Unit (Edit)-->
         <scene sceneID="yGF-4W-vrW">
             <objects>
-                <tableViewController id="QN4-GC-g9m" customClass="WordsUnitDetailViewController" customModule="LollySwiftiOS" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="QN4-GC-g9m" customClass="WordsUnitEditViewController" customModule="LollySwiftiOS" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="6Nl-a9-dWa">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -757,7 +757,7 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Words in Unit (Detail)" id="Q6g-Lk-kvp">
+                    <navigationItem key="navigationItem" title="Words in Unit (Edit)" id="Q6g-Lk-kvp">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="sth-eW-xfI">
                             <connections>
                                 <segue destination="t3J-qd-atj" kind="unwind" identifier="Cancel" unwindAction="prepareForUnwind:" id="jN4-yU-lBF"/>
@@ -967,10 +967,10 @@
             </objects>
             <point key="canvasLocation" x="4534" y="1700"/>
         </scene>
-        <!--Words in Language (Detail)-->
+        <!--Words in Language (Edit)-->
         <scene sceneID="amg-39-okH">
             <objects>
-                <tableViewController id="Upn-ig-Dmd" customClass="WordsLangDetailViewController" customModule="LollySwiftiOS" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="Upn-ig-Dmd" customClass="WordsLangEditViewController" customModule="LollySwiftiOS" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="MwV-d7-kcZ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1172,7 +1172,7 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Words in Language (Detail)" id="Hof-v9-F8H">
+                    <navigationItem key="navigationItem" title="Words in Language (Edit)" id="Hof-v9-F8H">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="LLn-t3-d4s">
                             <connections>
                                 <segue destination="FrM-0z-36j" kind="unwind" unwindAction="prepareForUnwind:" id="gpi-QC-oDW"/>
@@ -1311,10 +1311,10 @@
             </objects>
             <point key="canvasLocation" x="4534" y="2391"/>
         </scene>
-        <!--Words in Textbook (Detail)-->
+        <!--Words in Textbook (Edit)-->
         <scene sceneID="TVL-hU-sn1">
             <objects>
-                <tableViewController id="UlR-6Y-73o" customClass="WordsTextbookDetailViewController" customModule="LollySwiftiOS" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="UlR-6Y-73o" customClass="WordsTextbookEditViewController" customModule="LollySwiftiOS" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="iUa-i9-spe">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1672,7 +1672,7 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Words in Textbook (Detail)" id="1kl-al-FZr">
+                    <navigationItem key="navigationItem" title="Words in Textbook (Edit)" id="1kl-al-FZr">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="xX0-xI-ApK">
                             <connections>
                                 <segue destination="eel-i9-fbg" kind="unwind" identifier="Cancel" unwindAction="prepareForUnwind:" id="19A-Ks-3EB"/>
