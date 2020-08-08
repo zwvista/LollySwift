@@ -15,6 +15,7 @@ class PatternsEditViewController: NSViewController {
     
     var vm: PatternsViewModel!
     var vmEdit: PatternsEditViewModel!
+    var itemEdit: MPatternEdit { vmEdit.itemEdit }
     var complete: (() -> Void)?
     var item: MPattern!
 
@@ -27,10 +28,10 @@ class PatternsEditViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         vmEdit = PatternsEditViewModel(vm: vm, item: item)
-        _ = vmEdit.itemEdit.ID ~> tfID.rx.text.orEmpty
-        _ = vmEdit.itemEdit.PATTERN <~> tfPattern.rx.text.orEmpty
-        _ = vmEdit.itemEdit.NOTE <~> tfNote.rx.text
-        _ = vmEdit.itemEdit.TAGS <~> tfTags.rx.text
+        _ = itemEdit.ID ~> tfID.rx.text.orEmpty
+        _ = itemEdit.PATTERN <~> tfPattern.rx.text.orEmpty
+        _ = itemEdit.NOTE <~> tfNote.rx.text
+        _ = itemEdit.TAGS <~> tfTags.rx.text
         btnOK.rx.tap.flatMap { [unowned self] _ in
             self.vmEdit.onOK()
         }.subscribe { [unowned self] _ in

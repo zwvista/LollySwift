@@ -52,10 +52,14 @@ class PhrasesTextbookDetailViewController: UITableViewController {
         tfPhraseID.text = String(item.PHRASEID)
         tfPhrase.text = item.PHRASE
         tfTranslation.text = item.TRANSLATION
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         // https://stackoverflow.com/questions/7525437/how-to-set-focus-to-a-textfield-in-iphone
         (item.PHRASE.isEmpty ? tfPhrase : tfTranslation).becomeFirstResponder()
     }
-    
+
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if textField === tfUnit {
             self.view.endEditing(true)
@@ -76,4 +80,7 @@ class PhrasesTextbookDetailViewController: UITableViewController {
         item.TRANSLATION = tfTranslation.text
     }
     
+    deinit {
+        print("DEBUG: \(self.className) deinit")
+    }
 }

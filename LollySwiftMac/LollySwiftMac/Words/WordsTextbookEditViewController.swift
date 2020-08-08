@@ -14,6 +14,7 @@ class WordsTextbookEditViewController: NSViewController, NSTableViewDataSource, 
 
     var vm: WordsUnitViewModel!
     var vmEdit: WordsUnitEditViewModel!
+    var itemEdit: MUnitWordEdit { vmEdit.itemEdit }
     var complete: (() -> Void)?
     @objc var item: MUnitWord!
     var arrWords: [MUnitWord] { vmEdit.vmSingle.arrWords }
@@ -41,17 +42,17 @@ class WordsTextbookEditViewController: NSViewController, NSTableViewDataSource, 
         vmEdit = WordsUnitEditViewModel(vm: vm, item: item) {
             self.tableView.reloadData()
         }
-        _ = vmEdit.itemEdit.ID ~> tfID.rx.text.orEmpty
-        _ = vmEdit.itemEdit.TEXTBOOKNAME ~> tfTextbookName.rx.text.orEmpty
-        _ = vmEdit.itemEdit.indexUNIT <~> pubUnit.rx.selectedItemIndex
-        _ = vmEdit.itemEdit.indexPART <~> pubPart.rx.selectedItemIndex
-        _ = vmEdit.itemEdit.SEQNUM <~> tfSeqNum.rx.text.orEmpty
-        _ = vmEdit.itemEdit.WORDID ~> tfWordID.rx.text.orEmpty
-        _ = vmEdit.itemEdit.WORD <~> tfWord.rx.text.orEmpty
-        _ = vmEdit.itemEdit.NOTE <~> tfNote.rx.text
-        _ = vmEdit.itemEdit.FAMIID ~> tfFamiID.rx.text.orEmpty
-        _ = vmEdit.itemEdit.LEVEL <~> tfLevel.rx.text.orEmpty
-        _ = vmEdit.itemEdit.ACCURACY ~> tfAccuracy.rx.text.orEmpty
+        _ = itemEdit.ID ~> tfID.rx.text.orEmpty
+        _ = itemEdit.TEXTBOOKNAME ~> tfTextbookName.rx.text.orEmpty
+        _ = itemEdit.indexUNIT <~> pubUnit.rx.selectedItemIndex
+        _ = itemEdit.indexPART <~> pubPart.rx.selectedItemIndex
+        _ = itemEdit.SEQNUM <~> tfSeqNum.rx.text.orEmpty
+        _ = itemEdit.WORDID ~> tfWordID.rx.text.orEmpty
+        _ = itemEdit.WORD <~> tfWord.rx.text.orEmpty
+        _ = itemEdit.NOTE <~> tfNote.rx.text
+        _ = itemEdit.FAMIID ~> tfFamiID.rx.text.orEmpty
+        _ = itemEdit.LEVEL <~> tfLevel.rx.text.orEmpty
+        _ = itemEdit.ACCURACY ~> tfAccuracy.rx.text.orEmpty
         btnOK.rx.tap.flatMap { [unowned self] _ in
             self.vmEdit.onOK()
         }.subscribe { [unowned self] _ in

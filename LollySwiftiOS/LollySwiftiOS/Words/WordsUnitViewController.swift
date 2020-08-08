@@ -165,7 +165,7 @@ class WordsUnitViewController: WordsBaseViewController {
         if let controller = segue.source as? WordsUnitDetailViewController {
             controller.onDone()
             tableView.reloadData()
-            if controller.isAdd && !controller.item.WORD.isEmpty {
+            if controller.vmEdit.isAdd && !controller.item.WORD.isEmpty {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     self.performSegue(withIdentifier: "add", sender: self)
                 }

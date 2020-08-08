@@ -139,7 +139,9 @@ class MUnitWord: NSObject, Codable, MWordProtocol {
 class MUnitWordEdit {
     var ID: BehaviorRelay<String>
     var TEXTBOOKNAME: BehaviorRelay<String>
+    var UNITSTR: BehaviorRelay<String>
     var indexUNIT: BehaviorRelay<Int>
+    var PARTSTR: BehaviorRelay<String>
     var indexPART: BehaviorRelay<Int>
     var SEQNUM: BehaviorRelay<String>
     var WORDID: BehaviorRelay<String>
@@ -152,7 +154,9 @@ class MUnitWordEdit {
     init(x: MUnitWord) {
         ID = BehaviorRelay(value: x.ID.toString)
         TEXTBOOKNAME = BehaviorRelay(value: x.TEXTBOOKNAME)
+        UNITSTR = BehaviorRelay(value: x.UNITSTR)
         indexUNIT = BehaviorRelay(value: x.textbook.arrUnits.firstIndex { $0.value == x.UNIT } ?? -1)
+        PARTSTR = BehaviorRelay(value: x.PARTSTR)
         indexPART = BehaviorRelay(value: x.textbook.arrParts.firstIndex { $0.value == x.PART } ?? -1)
         SEQNUM = BehaviorRelay(value: x.SEQNUM.toString)
         WORDID = BehaviorRelay(value: x.WORDID.toString)

@@ -14,6 +14,7 @@ class PhrasesLangEditViewController: NSViewController, NSTableViewDataSource, NS
 
     var vm: PhrasesLangViewModel!
     var vmEdit: PhrasesLangEditViewModel!
+    var itemEdit: MLangPhraseEdit { vmEdit.itemEdit }
     var complete: (() -> Void)?
     var item: MLangPhrase!
     var arrPhrases: [MUnitPhrase] { vmEdit.vmSingle?.arrPhrases ?? [MUnitPhrase]() }
@@ -29,9 +30,9 @@ class PhrasesLangEditViewController: NSViewController, NSTableViewDataSource, NS
         vmEdit = PhrasesLangEditViewModel(vm: vm, item: item) {
             self.tableView.reloadData()
         }
-        _ = vmEdit.itemEdit.ID ~> tfID.rx.text.orEmpty
-        _ = vmEdit.itemEdit.PHRASE <~> tfPhrase.rx.text.orEmpty
-        _ = vmEdit.itemEdit.TRANSLATION <~> tfTranslation.rx.text
+        _ = itemEdit.ID ~> tfID.rx.text.orEmpty
+        _ = itemEdit.PHRASE <~> tfPhrase.rx.text.orEmpty
+        _ = itemEdit.TRANSLATION <~> tfTranslation.rx.text
         btnOK.rx.tap.flatMap { [unowned self] _ in
             self.vmEdit.onOK()
         }.subscribe { [unowned self] _ in

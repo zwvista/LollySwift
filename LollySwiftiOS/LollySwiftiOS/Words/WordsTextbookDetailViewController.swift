@@ -57,10 +57,14 @@ class WordsTextbookDetailViewController: UITableViewController, UITextFieldDeleg
         tfNote.text = item.NOTE
         tfFamiID.text = String(item.FAMIID)
         tfLevel.text = String(item.LEVEL)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         // https://stackoverflow.com/questions/7525437/how-to-set-focus-to-a-textfield-in-iphone
         (item.WORD.isEmpty ? tfWord : tfNote).becomeFirstResponder()
     }
-    
+
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if textField === tfUnit {
             self.view.endEditing(true)
@@ -82,4 +86,7 @@ class WordsTextbookDetailViewController: UITableViewController, UITextFieldDeleg
         item.LEVEL = Int(tfLevel.text!)!
     }
     
+    deinit {
+        print("DEBUG: \(self.className) deinit")
+    }
 }

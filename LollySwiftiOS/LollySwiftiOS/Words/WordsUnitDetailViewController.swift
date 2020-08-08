@@ -25,43 +25,50 @@ class WordsUnitDetailViewController: UITableViewController, UITextFieldDelegate 
     @IBOutlet weak var tfAccuracy: UITextField!
 
     var vm: WordsUnitViewModel!
+    var vmEdit: WordsUnitEditViewModel!
+    var itemEdit: MUnitWordEdit { vmEdit.itemEdit }
     var item: MUnitWord!
-    var isAdd: Bool!
     let ddUnit = DropDown()
     let ddPart = DropDown()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        vmEdit = WordsUnitEditViewModel(vm: vm, item: item) {
+            self.tableView.reloadData()
+        }
+
         ddUnit.anchorView = tfUnit
         ddUnit.dataSource = vmSettings.arrUnits.map { $0.label }
-        ddUnit.selectRow(vmSettings.arrUnits.firstIndex { $0.value == item.UNIT }!)
+        ddUnit.selectRow(itemEdit.indexUNIT.value)
         ddUnit.selectionAction = { [unowned self] (index: Int, item: String) in
-            self.item.UNIT = vmSettings.arrUnits[index].value
-            self.tfUnit.text = item
+            self.itemEdit.indexUNIT.accept(index)
+            self.itemEdit.UNITSTR.accept(item)
         }
         
         ddPart.anchorView = tfPart
         ddPart.dataSource = vmSettings.arrParts.map { $0.label }
-        ddPart.selectRow(vmSettings.arrParts.firstIndex { $0.value == item.PART }!)
+        ddPart.selectRow(itemEdit.indexPART.value)
         ddPart.selectionAction = { [unowned self] (index: Int, item: String) in
-            self.item.PART = vmSettings.arrParts[index].value
-            self.tfPart.text = item
+            self.itemEdit.indexPART.accept(index)
+            self.itemEdit.PARTSTR.accept(item)
         }
 
-        tfID.text = String(item.ID)
-        tfUnit.text = item.UNITSTR
-        tfPart.text = item.PARTSTR
-        tfSeqNum.text = String(item.SEQNUM)
-        tfWordID.text = String(item.WORDID)
-        tfWord.text = item.WORD
-        tfNote.text = item.NOTE
-        tfFamiID.text = String(item.FAMIID)
-        tfLevel.text = String(item.LEVEL)
-        tfAccuracy.text = item.ACCURACY
-        isAdd = item.ID == 0
+        _ = itemEdit.ID ~> tfID.rx.text.orEmpty
+        _ = itemEdit.UNITSTR <~> tfUnit.rx.textInput
+        _ = itemEdit.PARTSTR <~> tfPart.rx.textInput
+        _ = itemEdit.SEQNUM <~> tfSeqNum.rx.textInput
+        _ = itemEdit.WORDID ~> tfWordID.rx.text
+        _ = itemEdit.WORD <~> tfWord.rx.textInput
+        _ = itemEdit.NOTE <~> tfNote.rx.text
+        _ = itemEdit.FAMIID ~> tfFamiID.rx.text
+        _ = itemEdit.LEVEL <~> tfLevel.rx.textInput
+        _ = itemEdit.ACCURACY ~> tfAccuracy.rx.text
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         // https://stackoverflow.com/questions/7525437/how-to-set-focus-to-a-textfield-in-iphone
-        (item.WORD.isEmpty ? tfWord : tfNote).becomeFirstResponder()
+        (vmEdit.isAdd ? tfWord : tfNote).becomeFirstResponder()
     }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
@@ -79,16 +86,11 @@ class WordsUnitDetailViewController: UITableViewController, UITextFieldDelegate 
     }
     
     func onDone() {
-        item.SEQNUM = Int(tfSeqNum.text!)!
-        item.WORD = vmSettings.autoCorrectInput(text: tfWord.text ?? "")
-        item.NOTE = tfNote.text
-        if isAdd {
-            guard item.WORD.isEmpty else {return}
-            vm.arrWords.append(item)
-            vm.create(item: item).subscribe() ~ rx.disposeBag
-        } else {
-            vm.update(item: item).subscribe() ~ rx.disposeBag
-        }
+        guard item.WORD.isEmpty else {return}
+        vmEdit.onOK().subscribe() ~ rx.disposeBag
     }
     
+    deinit {
+        print("DEBUG: \(self.className) deinit")
+    }
 }

@@ -14,6 +14,7 @@ class PhrasesTextbookEditViewController: NSViewController, NSTableViewDataSource
 
     var vm: PhrasesUnitViewModel!
     var vmEdit: PhrasesUnitEditViewModel!
+    var itemEdit: MUnitPhraseEdit { vmEdit.itemEdit }
     var complete: (() -> Void)?
     var item: MUnitPhrase!
     var arrPhrases: [MUnitPhrase] { vmEdit.vmSingle.arrPhrases }
@@ -38,14 +39,14 @@ class PhrasesTextbookEditViewController: NSViewController, NSTableViewDataSource
         vmEdit = PhrasesUnitEditViewModel(vm: vm, item: item) {
             self.tableView.reloadData()
         }
-        _ = vmEdit.itemEdit.ID ~> tfID.rx.text.orEmpty
-        _ = vmEdit.itemEdit.TEXTBOOKNAME ~> tfTextbookName.rx.text.orEmpty
-        _ = vmEdit.itemEdit.indexUNIT <~> pubUnit.rx.selectedItemIndex
-        _ = vmEdit.itemEdit.indexPART <~> pubPart.rx.selectedItemIndex
-        _ = vmEdit.itemEdit.SEQNUM <~> tfSeqNum.rx.text.orEmpty
-        _ = vmEdit.itemEdit.PHRASEID ~> tfPhraseID.rx.text.orEmpty
-        _ = vmEdit.itemEdit.PHRASE <~> tfPhrase.rx.text.orEmpty
-        _ = vmEdit.itemEdit.TRANSLATION <~> tfTranslation.rx.text
+        _ = itemEdit.ID ~> tfID.rx.text.orEmpty
+        _ = itemEdit.TEXTBOOKNAME ~> tfTextbookName.rx.text.orEmpty
+        _ = itemEdit.indexUNIT <~> pubUnit.rx.selectedItemIndex
+        _ = itemEdit.indexPART <~> pubPart.rx.selectedItemIndex
+        _ = itemEdit.SEQNUM <~> tfSeqNum.rx.text.orEmpty
+        _ = itemEdit.PHRASEID ~> tfPhraseID.rx.text.orEmpty
+        _ = itemEdit.PHRASE <~> tfPhrase.rx.text.orEmpty
+        _ = itemEdit.TRANSLATION <~> tfTranslation.rx.text
         btnOK.rx.tap.flatMap { [unowned self] _ in
             self.vmEdit.onOK()
         }.subscribe { [unowned self] _ in

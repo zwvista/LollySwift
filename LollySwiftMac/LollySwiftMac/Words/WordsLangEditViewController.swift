@@ -14,6 +14,7 @@ class WordsLangEditViewController: NSViewController, NSTableViewDataSource, NSTa
 
     var vm: WordsLangViewModel!
     var vmEdit: WordsLangEditViewModel!
+    var itemEdit: MLangWordEdit { vmEdit.itemEdit }
     var complete: (() -> Void)?
     @objc var item: MLangWord!
     var arrWords: [MUnitWord] { vmEdit.vmSingle?.arrWords ?? [MUnitWord]() }
@@ -32,12 +33,12 @@ class WordsLangEditViewController: NSViewController, NSTableViewDataSource, NSTa
         vmEdit = WordsLangEditViewModel(vm: vm, item: item) {
             self.tableView.reloadData()
         }
-        _ = vmEdit.itemEdit.ID ~> tfID.rx.text.orEmpty
-        _ = vmEdit.itemEdit.WORD <~> tfWord.rx.text.orEmpty
-        _ = vmEdit.itemEdit.NOTE <~> tfNote.rx.text
-        _ = vmEdit.itemEdit.FAMIID ~> tfFamiID.rx.text.orEmpty
-        _ = vmEdit.itemEdit.LEVEL <~> tfLevel.rx.text.orEmpty
-        _ = vmEdit.itemEdit.ACCURACY ~> tfAccuracy.rx.text.orEmpty
+        _ = itemEdit.ID ~> tfID.rx.text.orEmpty
+        _ = itemEdit.WORD <~> tfWord.rx.text.orEmpty
+        _ = itemEdit.NOTE <~> tfNote.rx.text
+        _ = itemEdit.FAMIID ~> tfFamiID.rx.text.orEmpty
+        _ = itemEdit.LEVEL <~> tfLevel.rx.text.orEmpty
+        _ = itemEdit.ACCURACY ~> tfAccuracy.rx.text.orEmpty
         btnOK.rx.tap.flatMap { [unowned self] _ in
             self.vmEdit.onOK()
         }.subscribe { [unowned self] _ in

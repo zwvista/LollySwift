@@ -54,9 +54,14 @@ class PhrasesUnitDetailViewController: UITableViewController, UITextFieldDelegat
         tfPhrase.text = item.PHRASE
         tfTranslation.text = item.TRANSLATION
         isAdd = item.ID == 0
-        (item.PHRASE.isEmpty ? tfPhrase : tfTranslation)?.becomeFirstResponder()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        // https://stackoverflow.com/questions/7525437/how-to-set-focus-to-a-textfield-in-iphone
+        (item.PHRASE.isEmpty ? tfPhrase : tfTranslation)?.becomeFirstResponder()
+    }
+
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if textField === tfUnit {
             self.view.endEditing(true)
@@ -83,4 +88,7 @@ class PhrasesUnitDetailViewController: UITableViewController, UITextFieldDelegat
         }
     }
     
+    deinit {
+        print("DEBUG: \(self.className) deinit")
+    }
 }

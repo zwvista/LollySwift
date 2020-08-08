@@ -29,10 +29,19 @@ class WordsLangDetailViewController: UITableViewController {
         tfLevel.text = String(item.LEVEL)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        // https://stackoverflow.com/questions/7525437/how-to-set-focus-to-a-textfield-in-iphone
+        (item.WORD.isEmpty ? tfWord : tfNote).becomeFirstResponder()
+    }
+
     func onDone() {
         item.WORD = vmSettings.autoCorrectInput(text: tfWord.text ?? "")
         item.NOTE = tfNote.text
         item.LEVEL = Int(tfLevel.text!)!
     }
     
+    deinit {
+        print("DEBUG: \(self.className) deinit")
+    }
 }
