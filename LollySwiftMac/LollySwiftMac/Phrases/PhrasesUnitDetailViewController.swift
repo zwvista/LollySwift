@@ -14,11 +14,10 @@ import NSObject_Rx
 class PhrasesUnitDetailViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 
     var vm: PhrasesUnitViewModel!
-    var vmSingle: SinglePhraseViewModel!
+    var vmDetail: PhrasesUnitDetailViewModel!
     var complete: (() -> Void)?
     var item: MUnitPhrase!
-    var isAdd: Bool!
-    var arrPhrases: [MUnitPhrase] { vmSingle?.arrPhrases ?? [MUnitPhrase]() }
+    var arrPhrases: [MUnitPhrase] { vmDetail.vmSingle?.arrPhrases ?? [MUnitPhrase]() }
 
     @IBOutlet weak var acUnits: NSArrayController!
     @IBOutlet weak var acParts: NSArrayController!
@@ -35,9 +34,7 @@ class PhrasesUnitDetailViewController: NSViewController, NSTableViewDataSource, 
         super.viewDidLoad()
         acUnits.content = item.textbook.arrUnits
         acParts.content = item.textbook.arrParts
-        isAdd = item.ID == 0
-        guard !isAdd else {return}
-        vmSingle = SinglePhraseViewModel(phrase: item.PHRASE, settings: vm.vmSettings) {
+        vmDetail = PhrasesUnitDetailViewModel(vm: vm, item: item, okComplete: complete) {
             self.tableView.reloadData()
         }
     }
@@ -46,23 +43,13 @@ class PhrasesUnitDetailViewController: NSViewController, NSTableViewDataSource, 
         super.viewDidAppear()
         // https://stackoverflow.com/questions/24235815/cocoa-how-to-set-window-title-from-within-view-controller-in-swift
         (item.PHRASE.isEmpty ? tfPhrase : tfTranslation).becomeFirstResponder()
-        view.window?.title = isAdd ? "New Word" : item.PHRASE
+        view.window?.title = vmDetail.isAdd ? "New Word" : item.PHRASE
     }
 
     @IBAction func okClicked(_ sender: AnyObject) {
         // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
         self.commitEditing()
-        item.PHRASE = vm.vmSettings.autoCorrectInput(text: item.PHRASE)
-        if isAdd {
-            vm.arrPhrases.append(item)
-            vm.create(item: item).subscribe {
-                self.complete?()
-            } ~ rx.disposeBag
-        } else {
-            vm.update(item: item).subscribe {
-                self.complete?()
-            } ~ rx.disposeBag
-        }
+        vmDetail.onOK()
         dismiss(sender)
     }
     

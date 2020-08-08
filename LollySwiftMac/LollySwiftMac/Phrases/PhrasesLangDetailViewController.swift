@@ -14,11 +14,10 @@ import NSObject_Rx
 class PhrasesLangDetailViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 
     var vm: PhrasesLangViewModel!
-    var vmSingle: SinglePhraseViewModel!
+    var vmDetail: PhrasesLangDetailViewModel!
     var complete: (() -> Void)?
     var item: MLangPhrase!
-    var isAdd: Bool!
-    var arrPhrases: [MUnitPhrase] { vmSingle != nil ? vmSingle.arrPhrases : [MUnitPhrase]() }
+    var arrPhrases: [MUnitPhrase] { vmDetail.vmSingle?.arrPhrases ?? [MUnitPhrase]() }
 
     @IBOutlet weak var tfID: NSTextField!
     @IBOutlet weak var tfPhrase: NSTextField!
@@ -27,9 +26,7 @@ class PhrasesLangDetailViewController: NSViewController, NSTableViewDataSource, 
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        isAdd = item.ID == 0
-        guard !isAdd else {return}
-        vmSingle = SinglePhraseViewModel(phrase: item.PHRASE, settings: vm.vmSettings) {
+        vmDetail = PhrasesLangDetailViewModel(vm: vm, item: item, okComplete: complete) {
             self.tableView.reloadData()
         }
     }
@@ -38,24 +35,13 @@ class PhrasesLangDetailViewController: NSViewController, NSTableViewDataSource, 
         super.viewDidAppear()
         // https://stackoverflow.com/questions/24235815/cocoa-how-to-set-window-title-from-within-view-controller-in-swift
         (item.PHRASE.isEmpty ? tfPhrase : tfTranslation).becomeFirstResponder()
-        view.window?.title = isAdd ? "New Word" : item.PHRASE
+        view.window?.title = vmDetail.isAdd ? "New Word" : item.PHRASE
     }
     
     @IBAction func okClicked(_ sender: AnyObject) {
         // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
         self.commitEditing()
-        item.PHRASE = vm.vmSettings.autoCorrectInput(text: item.PHRASE)
-        if isAdd {
-            vm.arrPhrases.append(item)
-            PhrasesLangViewModel.create(item: item).subscribe(onNext: {
-                self.item.ID = $0
-                self.complete?()
-            }) ~ rx.disposeBag
-        } else {
-            PhrasesLangViewModel.update(item: item).subscribe {
-                self.complete?()
-            } ~ rx.disposeBag
-        }
+        vmDetail.onOK()
         dismiss(sender)
     }
     
