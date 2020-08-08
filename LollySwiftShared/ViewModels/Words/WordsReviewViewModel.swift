@@ -23,8 +23,8 @@ class WordsReviewViewModel: NSObject {
 
     @objc dynamic var indexString = ""
     @objc dynamic var indexHidden = false
-    @objc dynamic var correctHidden = false
-    @objc dynamic var incorrectHidden = false
+    @objc dynamic var correctHidden = true
+    @objc dynamic var incorrectHidden = true
     @objc dynamic var accuracyString = ""
     @objc dynamic var accuracyHidden = false
     @objc dynamic var checkEnabled = false
@@ -34,7 +34,7 @@ class WordsReviewViewModel: NSObject {
     @objc dynamic var noteTargetHidden = false
     @objc dynamic var translationString = ""
     @objc dynamic var wordInputString = ""
-    @objc dynamic var checkTitle = ""
+    @objc dynamic var checkTitle = "Check"
 
     init(settings: SettingsViewModel, needCopy: Bool, doTestAction: (() -> Void)? = nil) {
         self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)

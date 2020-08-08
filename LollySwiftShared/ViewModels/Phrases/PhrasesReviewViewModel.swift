@@ -24,14 +24,14 @@ class PhrasesReviewViewModel: NSObject {
 
     @objc dynamic var indexString = ""
     @objc dynamic var indexHidden = false
-    @objc dynamic var correctHidden = false
-    @objc dynamic var incorrectHidden = false
+    @objc dynamic var correctHidden = true
+    @objc dynamic var incorrectHidden = true
     @objc dynamic var checkEnabled = false
     @objc dynamic var phraseTargetString = ""
     @objc dynamic var phraseTargetHidden = false
     @objc dynamic var translationString = ""
     @objc dynamic var phraseInputString = ""
-    @objc dynamic var checkTitle = ""
+    @objc dynamic var checkTitle = "Check"
 
     init(settings: SettingsViewModel, needCopy: Bool, doTestAction: (() -> Void)? = nil) {
         self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
