@@ -41,8 +41,10 @@ class PhrasesLangViewModel: NSObject {
         MLangPhrase.update(item: item)
     }
 
-    static func create(item: MLangPhrase) -> Observable<Int> {
-        MLangPhrase.create(item: item)
+    static func create(item: MLangPhrase) -> Observable<()> {
+        MLangPhrase.create(item: item).map {
+            item.ID = $0
+        }
     }
     
     static func delete(item: MLangPhrase) -> Observable<()> {

@@ -185,7 +185,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
         let i = tvWords.selectedRow
         detailVC.item = MUnitWord()
         detailVC.item.copy(from: arrWords[i])
-        detailVC.complete = {
+        detailVC.complete = { [unowned detailVC] in
             self.arrWords[i].copy(from: detailVC.item)
             self.tvWords.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tvWords.tableColumns.count))
         }

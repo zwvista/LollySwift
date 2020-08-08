@@ -60,13 +60,12 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
         guard !newWord.isEmpty else {return}
         let item = vm.newLangWord()
         item.WORD = vm.vmSettings.autoCorrectInput(text: newWord)
-        WordsLangViewModel.create(item: item).subscribe(onNext: {
-            item.ID = $0
+        WordsLangViewModel.create(item: item).subscribe {
             self.vm.arrWords.append(item)
             self.tvWords.reloadData()
             self.tfNewWord.stringValue = ""
             self.newWord = ""
-        }) ~ rx.disposeBag
+        } ~ rx.disposeBag
     }
 
     // https://stackoverflow.com/questions/24219441/how-to-use-nstoolbar-in-xcode-6-and-storyboard
@@ -97,7 +96,7 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
         let i = tvWords.selectedRow
         detailVC.item = MLangWord()
         detailVC.item.copy(from: arrWords[i])
-        detailVC.complete = {
+        detailVC.complete = { [unowned detailVC] in
             self.arrWords[i].copy(from: detailVC.item)
             self.tvWords.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tvWords.tableColumns.count))
         }

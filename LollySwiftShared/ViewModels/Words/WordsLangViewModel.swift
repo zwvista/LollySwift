@@ -48,8 +48,10 @@ class WordsLangViewModel: NSObject {
         MLangWord.update(item: item)
     }
 
-    static func create(item: MLangWord) -> Observable<Int> {
-        MLangWord.create(item: item)
+    static func create(item: MLangWord) -> Observable<()> {
+        MLangWord.create(item: item).map {
+            item.ID = $0
+        }
     }
     
     static func delete(item: MLangWord) -> Observable<()> {

@@ -74,7 +74,7 @@ class PhrasesLangViewController: PhrasesBaseViewController {
         let i = tableView.selectedRow
         detailVC.item = MLangPhrase()
         detailVC.item.copy(from: arrPhrases[i])
-        detailVC.complete = {
+        detailVC.complete = { [unowned detailVC] in
             self.arrPhrases[i].copy(from: detailVC.item)
             self.tableView.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count))
         }

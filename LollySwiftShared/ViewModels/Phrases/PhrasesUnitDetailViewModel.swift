@@ -12,30 +12,24 @@ import RxSwift
 class PhrasesUnitDetailViewModel: NSObject {
     var vm: PhrasesUnitViewModel!
     var item: MUnitPhrase!
-    var complete: (() -> Void)?
     var vmSingle: SinglePhraseViewModel!
     var isAdd: Bool!
 
-    init(vm: PhrasesUnitViewModel, item: MUnitPhrase, okComplete: (() -> Void)?, initComplete: @escaping () -> ()) {
+    init(vm: PhrasesUnitViewModel, item: MUnitPhrase, complete: @escaping () -> ()) {
         self.vm = vm
         self.item = item
-        self.complete = okComplete
         isAdd = item.ID == 0
         guard !isAdd else {return}
-        vmSingle = SinglePhraseViewModel(phrase: item.PHRASE, settings: vm.vmSettings, complete: initComplete)
+        vmSingle = SinglePhraseViewModel(phrase: item.PHRASE, settings: vm.vmSettings, complete: complete)
     }
     
-    func onOK() {
+    func onOK() -> Observable<()> {
         item.PHRASE = vm.vmSettings.autoCorrectInput(text: item.PHRASE)
         if isAdd {
             vm.arrPhrases.append(item)
-            vm.create(item: item).subscribe {
-                self.complete?()
-            } ~ rx.disposeBag
+            return vm.create(item: item)
         } else {
-            vm.update(item: item).subscribe {
-                self.complete?()
-            } ~ rx.disposeBag
+            return vm.update(item: item)
         }
     }
 }

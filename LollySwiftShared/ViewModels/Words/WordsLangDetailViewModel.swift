@@ -12,30 +12,24 @@ import RxSwift
 class WordsLangDetailViewModel: NSObject {
     var vm: WordsLangViewModel!
     var item: MLangWord!
-    var complete: (() -> Void)?
     var vmSingle: SingleWordViewModel!
     var isAdd: Bool!
 
-    init(vm: WordsLangViewModel, item: MLangWord, okComplete: (() -> Void)?, initComplete: @escaping () -> ()) {
+    init(vm: WordsLangViewModel, item: MLangWord, complete: @escaping () -> ()) {
         self.vm = vm
         self.item = item
-        self.complete = okComplete
         isAdd = item.ID == 0
         guard !isAdd else {return}
-        vmSingle = SingleWordViewModel(word: item.WORD, settings: vm.vmSettings, complete: initComplete)
+        vmSingle = SingleWordViewModel(word: item.WORD, settings: vm.vmSettings, complete: complete)
     }
     
-    func onOK() {
+    func onOK() -> Observable<()> {
         item.WORD = vm.vmSettings.autoCorrectInput(text: item.WORD)
         if isAdd {
             vm.arrWords.append(item)
-            WordsLangViewModel.create(item: item).subscribe {
-                self.complete?()
-            } ~ rx.disposeBag
+            return WordsLangViewModel.create(item: item)
         } else {
-            WordsLangViewModel.update(item: item).subscribe {
-                self.complete?()
-            } ~ rx.disposeBag
+            return WordsLangViewModel.update(item: item)
         }
     }
 }

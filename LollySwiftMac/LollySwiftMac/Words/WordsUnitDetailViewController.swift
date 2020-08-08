@@ -36,7 +36,7 @@ class WordsUnitDetailViewController: NSViewController, NSTableViewDataSource, NS
         super.viewDidLoad()
         acUnits.content = item.textbook.arrUnits
         acParts.content = item.textbook.arrParts
-        vmDetail = WordsUnitDetailViewModel(vm: vm, item: item, okComplete: complete) {
+        vmDetail = WordsUnitDetailViewModel(vm: vm, item: item) {
             self.tableView.reloadData()
         }
     }
@@ -57,8 +57,10 @@ class WordsUnitDetailViewController: NSViewController, NSTableViewDataSource, NS
     @IBAction func okClicked(_ sender: AnyObject) {
         // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
         self.commitEditing()
-        vmDetail.onOK()
-        dismiss(sender)
+        vmDetail.onOK().subscribe {
+            self.complete?()
+            self.dismiss(sender)
+        } ~ rx.disposeBag
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
