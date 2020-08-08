@@ -13,10 +13,10 @@ import NSObject_Rx
 class WordsTextbookDetailViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 
     var vm: WordsUnitViewModel!
-    var vmSingle: SingleWordViewModel!
+    var vmDetail: WordsUnitDetailViewModel!
     var complete: (() -> Void)?
     @objc var item: MUnitWord!
-    var arrWords: [MUnitWord] { vmSingle.arrWords }
+    var arrWords: [MUnitWord] { vmDetail.vmSingle.arrWords }
 
     @IBOutlet weak var acUnits: NSArrayController!
     @IBOutlet weak var acParts: NSArrayController!
@@ -37,7 +37,7 @@ class WordsTextbookDetailViewController: NSViewController, NSTableViewDataSource
         super.viewDidLoad()
         acUnits.content = item.textbook.arrUnits
         acParts.content = item.textbook.arrParts
-        vmSingle = SingleWordViewModel(word: item.WORD, settings: vm.vmSettings) {
+        vmDetail = WordsUnitDetailViewModel(vm: vm, item: item, okComplete: complete) {
             self.tableView.reloadData()
         }
     }
@@ -58,10 +58,7 @@ class WordsTextbookDetailViewController: NSViewController, NSTableViewDataSource
     @IBAction func okClicked(_ sender: AnyObject) {
         // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
         self.commitEditing()
-        item.WORD = vm.vmSettings.autoCorrectInput(text: item.WORD)
-        vm.update(item: item).subscribe {
-            self.complete?()
-        } ~ rx.disposeBag
+        vmDetail.onOK()
         dismiss(sender)
     }
     
