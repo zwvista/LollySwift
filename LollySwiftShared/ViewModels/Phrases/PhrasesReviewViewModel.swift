@@ -8,6 +8,7 @@
 
 import Foundation
 import RxSwift
+import RxRelay
 
 class PhrasesReviewViewModel: NSObject {
 
@@ -22,16 +23,16 @@ class PhrasesReviewViewModel: NSObject {
     let options = MReviewOptions()
     let doTestAction: (() -> Void)?
 
-    @objc dynamic var indexString = ""
-    @objc dynamic var indexHidden = false
-    @objc dynamic var correctHidden = true
-    @objc dynamic var incorrectHidden = true
-    @objc dynamic var checkEnabled = false
-    @objc dynamic var phraseTargetString = ""
-    @objc dynamic var phraseTargetHidden = false
-    @objc dynamic var translationString = ""
-    @objc dynamic var phraseInputString = ""
-    @objc dynamic var checkTitle = "Check"
+    var indexString = BehaviorRelay(value: "")
+    var indexHidden = BehaviorRelay(value: false)
+    var correctHidden = BehaviorRelay(value: true)
+    var incorrectHidden = BehaviorRelay(value: true)
+    var checkEnabled = BehaviorRelay(value: false)
+    var phraseTargetString = BehaviorRelay(value: "")
+    var phraseTargetHidden = BehaviorRelay(value: false)
+    var translationString = BehaviorRelay(value: "")
+    var phraseInputString = BehaviorRelay(value: "")
+    var checkTitle = BehaviorRelay(value: "Check")
 
     init(settings: SettingsViewModel, needCopy: Bool, doTestAction: (() -> Void)? = nil) {
         self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
@@ -51,7 +52,7 @@ class PhrasesReviewViewModel: NSObject {
             self.index = 0
             self.subscription?.dispose()
             self.doTest()
-            self.checkTitle = self.isTestMode ? "Check" : "Next"
+            self.checkTitle.accept(self.isTestMode ? "Check" : "Next")
             if self.mode == .reviewAuto {
                 self.subscription = Observable<Int>.interval(DispatchTimeInterval.seconds(self.options.interval), scheduler: MainScheduler.instance).subscribe { _ in
                     self.check()
@@ -77,38 +78,38 @@ class PhrasesReviewViewModel: NSObject {
         if !isTestMode {
             next()
             doTest()
-        } else if correctHidden && incorrectHidden {
-            phraseInputString = vmSettings.autoCorrectInput(text: phraseInputString)
-            phraseTargetHidden = false
-            if phraseInputString == currentPhrase {
-                correctHidden = false
+        } else if correctHidden.value && incorrectHidden.value {
+            phraseInputString.accept(vmSettings.autoCorrectInput(text: phraseInputString.value))
+            phraseTargetHidden.accept(false)
+            if phraseInputString.value == currentPhrase {
+                correctHidden.accept(false)
             } else {
-                incorrectHidden = false
+                incorrectHidden.accept(false)
             }
-            checkTitle = "Next"
+            checkTitle.accept("Next")
             guard hasNext else {return}
             let o = arrPhrases[index]
-            let isCorrect = o.PHRASE == phraseInputString
+            let isCorrect = o.PHRASE == phraseInputString.value
             if isCorrect { arrCorrectIDs.append(o.ID) }
         } else {
             next()
             doTest()
-            checkTitle = "Check"
+            checkTitle.accept("Check")
         }
     }
     
     func doTest() {
-        indexHidden = !hasNext
-        correctHidden = true
-        incorrectHidden = true
-        checkEnabled = hasNext
-        phraseTargetString = currentPhrase
-        translationString = currentItem?.TRANSLATION ?? ""
-        phraseTargetHidden = isTestMode
-        phraseInputString = ""
+        indexHidden.accept(!hasNext)
+        correctHidden.accept(true)
+        incorrectHidden.accept(true)
+        checkEnabled.accept(hasNext)
+        phraseTargetString.accept(currentPhrase)
+        translationString.accept(currentItem?.TRANSLATION ?? "")
+        phraseTargetHidden.accept(isTestMode)
+        phraseInputString.accept("")
         doTestAction?()
         if hasNext {
-            indexString = "\(index + 1)/\(arrPhrases.count)"
+            indexString.accept("\(index + 1)/\(arrPhrases.count)")
         } else {
             subscription?.dispose()
         }

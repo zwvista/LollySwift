@@ -32,6 +32,18 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
             }
         }
         synth.setVoice(NSSpeechSynthesizer.VoiceName(rawValue: vmSettings.macVoiceName))
+        
+        _ = vm.indexString <~> tfIndex.rx.text.orEmpty
+        _ = vm.indexHidden ~> tfIndex.rx.isHidden
+        _ = vm.correctHidden ~> tfCorrect.rx.isHidden
+        _ = vm.incorrectHidden ~> tfIncorrect.rx.isHidden
+        _ = vm.checkEnabled ~> btnCheck.rx.isHidden
+        _ = vm.phraseTargetString <~> tfPhraseTarget.rx.text.orEmpty
+        _ = vm.phraseTargetHidden ~> tfPhraseTarget.rx.isHidden
+        _ = vm.translationString <~> tfTranslation.rx.text.orEmpty
+        _ = vm.phraseInputString <~> tfPhraseInput.rx.text.orEmpty
+        _ = vm.checkTitle ~> btnCheck.rx.title
+        
         newTest(self)
     }
 
@@ -68,7 +80,7 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
         let textfield = obj.object as! NSControl
         let code = (obj.userInfo!["NSTextMovement"] as! NSNumber).intValue
         guard code == NSReturnTextMovement else {return}
-        guard textfield === tfPhraseInput, !(vm.isTestMode && tfPhraseInput.stringValue.isEmpty) else {return}
+        guard textfield === tfPhraseInput, !(vm.isTestMode && vm.phraseInputString.value.isEmpty) else {return}
         vm.check()
     }
     

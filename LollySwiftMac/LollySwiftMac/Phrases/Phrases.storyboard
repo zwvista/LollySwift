@@ -3543,10 +3543,6 @@ Gw
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
-                                <connections>
-                                    <binding destination="I1g-x1-rZK" name="hidden" keyPath="vm.indexHidden" id="cGb-Bm-bSz"/>
-                                    <binding destination="I1g-x1-rZK" name="value" keyPath="vm.indexString" id="5ow-g3-Ftr"/>
-                                </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5q9-Ad-ZAs">
                                 <rect key="frame" x="92" y="239" width="85" height="29"/>
@@ -3555,9 +3551,6 @@ Gw
                                     <color key="textColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
-                                <connections>
-                                    <binding destination="I1g-x1-rZK" name="hidden" keyPath="vm.correctHidden" id="k94-Eb-3dj"/>
-                                </connections>
                             </textField>
                             <textField horizontalHuggingPriority="252" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3SA-ko-IAe">
                                 <rect key="frame" x="92" y="239" width="110" height="29"/>
@@ -3569,9 +3562,6 @@ Gw
                                     <color key="textColor" name="systemPinkColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
-                                <connections>
-                                    <binding destination="I1g-x1-rZK" name="hidden" keyPath="vm.incorrectHidden" id="sQQ-im-weU"/>
-                                </connections>
                             </textField>
                             <textField horizontalHuggingPriority="253" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Fhl-OE-S8U">
                                 <rect key="frame" x="18" y="190" width="64" height="29"/>
@@ -3583,10 +3573,6 @@ Gw
                                     <color key="textColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
-                                <connections>
-                                    <binding destination="I1g-x1-rZK" name="hidden" keyPath="vm.phraseTargetHidden" id="7Y6-FC-y2k"/>
-                                    <binding destination="I1g-x1-rZK" name="value" keyPath="vm.phraseTargetString" id="3dc-Cl-cvB"/>
-                                </connections>
                             </textField>
                             <textField horizontalHuggingPriority="253" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="WC7-er-c2b">
                                 <rect key="frame" x="18" y="141" width="64" height="29"/>
@@ -3598,9 +3584,6 @@ Gw
                                     <color key="textColor" red="1" green="0.2527923882" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
-                                <connections>
-                                    <binding destination="I1g-x1-rZK" name="value" keyPath="vm.translationString" id="u4b-go-k4g"/>
-                                </connections>
                             </textField>
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UT0-VP-Vmh">
                                 <rect key="frame" x="20" y="61" width="523" height="60"/>
@@ -3613,7 +3596,6 @@ Gw
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                                 <connections>
-                                    <binding destination="I1g-x1-rZK" name="value" keyPath="vm.phraseInputString" id="yjh-dB-jw8"/>
                                     <outlet property="delegate" destination="I1g-x1-rZK" id="Sur-hE-qSQ"/>
                                 </connections>
                             </textField>
@@ -3625,8 +3607,6 @@ Gw
                                 </buttonCell>
                                 <connections>
                                     <action selector="check:" target="I1g-x1-rZK" id="g3L-Fa-rAT"/>
-                                    <binding destination="I1g-x1-rZK" name="enabled" keyPath="vm.checkEnabled" id="3Jw-k0-hp2"/>
-                                    <binding destination="I1g-x1-rZK" name="title" keyPath="vm.checkTitle" id="kvW-Fs-pYr"/>
                                 </connections>
                             </button>
                         </subviews>
