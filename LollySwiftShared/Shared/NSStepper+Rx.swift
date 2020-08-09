@@ -1,9 +1,9 @@
 //
-//  NSButton+Rx.swift
+//  NSStepper+Rx.swift
 //  RxCocoa
 //
-//  Created by Krunoslav Zaher on 5/17/15.
-//  Copyright © 2015 Krunoslav Zaher. All rights reserved.
+//  Created by 趙偉 on 2020/08/10.
+//  Copyright © 2018 趙偉. All rights reserved.
 //
 
 #if os(macOS)

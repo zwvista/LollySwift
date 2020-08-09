@@ -40,7 +40,7 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
         _ = vm.incorrectHidden ~> tfIncorrect.rx.isHidden
         _ = vm.accuracyString ~> tfAccuracy.rx.text.orEmpty
         _ = vm.accuracyHidden ~> tfAccuracy.rx.isHidden
-        _ = vm.checkEnabled ~> btnCheck.rx.isHidden
+        _ = vm.checkEnabled ~> btnCheck.rx.isEnabled
         _ = vm.wordTargetString ~> tfWordTarget.rx.text.orEmpty
         _ = vm.noteTargetString ~> tfNoteTarget.rx.text.orEmpty
         _ = vm.wordTargetHidden ~> tfWordTarget.rx.isHidden

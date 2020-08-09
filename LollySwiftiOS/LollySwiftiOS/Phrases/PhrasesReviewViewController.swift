@@ -37,7 +37,7 @@ class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
         ddReviewMode.anchorView = btnReviewMode
         ddReviewMode.dataSource = ["Review(Auto)", "Test", "Review(Manual)"]
         ddReviewMode.selectionAction = { [unowned self] (index: Int, item: String) in
-            self.vm.mode = ReviewMode(rawValue: index)!
+            self.vm.options.mode = ReviewMode(rawValue: index)!
             // https://stackoverflow.com/questions/11417077/changing-uibutton-text
             self.btnReviewMode.setTitle(item, for: .normal)
             self.newTest(self)
@@ -61,7 +61,7 @@ class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
         lblPhraseTarget.text = vm.isTestMode ? "" : vm.currentPhrase
         lblTranslation.text = ""
         tfPhraseInput.text = ""
-        tfPhraseInput.isHidden = vm.mode == .reviewAuto
+        tfPhraseInput.isHidden = vm.options.mode == .reviewAuto
         if !tfPhraseInput.isHidden {
             tfPhraseInput.becomeFirstResponder()
         } else {
@@ -86,7 +86,7 @@ class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
 //            self.doTest()
 //        } ~ rx.disposeBag
         btnCheck.setTitle(vm.isTestMode ? "Check" : "Next", for: .normal)
-        if vm.mode == .reviewAuto {
+        if vm.options.mode == .reviewAuto {
             subscription = Observable<Int>.interval(DispatchTimeInterval.milliseconds(vmSettings.USREVIEWINTERVAL), scheduler: MainScheduler.instance).subscribe { _ in
                 self.check(self)
             }

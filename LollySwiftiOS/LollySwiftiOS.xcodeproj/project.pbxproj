@@ -46,6 +46,8 @@
 		95837E9924DF360E00B5D2AE /* PhrasesUnitEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95837E9124DF35E200B5D2AE /* PhrasesUnitEditViewModel.swift */; };
 		95837E9A24DF361600B5D2AE /* WordsLangEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95837E9524DF35EB00B5D2AE /* WordsLangEditViewModel.swift */; };
 		95837E9B24DF361A00B5D2AE /* WordsUnitEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95837E9424DF35EB00B5D2AE /* WordsUnitEditViewModel.swift */; };
+		95837EAA24E0A3D100B5D2AE /* ReviewOptionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95837EA924E0A3D100B5D2AE /* ReviewOptionsViewModel.swift */; };
+		95837EAB24E0A3DE00B5D2AE /* ReviewOptionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95837EA924E0A3D100B5D2AE /* ReviewOptionsViewModel.swift */; };
 		95AA19662295081F003620A2 /* PhrasesReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AA19652295081F003620A2 /* PhrasesReviewViewController.swift */; };
 		95AA196822950834003620A2 /* WordsReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AA196722950834003620A2 /* WordsReviewViewController.swift */; };
 		95CED3B4221170C20094622F /* iOSApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CED3B3221170C20094622F /* iOSApi.swift */; };
@@ -200,6 +202,7 @@
 		95837E9124DF35E200B5D2AE /* PhrasesUnitEditViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesUnitEditViewModel.swift; sourceTree = "<group>"; };
 		95837E9424DF35EB00B5D2AE /* WordsUnitEditViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsUnitEditViewModel.swift; sourceTree = "<group>"; };
 		95837E9524DF35EB00B5D2AE /* WordsLangEditViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsLangEditViewModel.swift; sourceTree = "<group>"; };
+		95837EA924E0A3D100B5D2AE /* ReviewOptionsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewOptionsViewModel.swift; sourceTree = "<group>"; };
 		95AA19652295081F003620A2 /* PhrasesReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhrasesReviewViewController.swift; sourceTree = "<group>"; };
 		95AA196722950834003620A2 /* WordsReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsReviewViewController.swift; sourceTree = "<group>"; };
 		95CED3B3221170C20094622F /* iOSApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSApi.swift; sourceTree = "<group>"; };
@@ -479,12 +482,13 @@
 		95F0FFDA24C957AA00509DF3 /* Misc */ = {
 			isa = PBXGroup;
 			children = (
-				95F0FFDB24C957AA00509DF3 /* TextbooksViewModel.swift */,
-				95F0FFDC24C957AA00509DF3 /* SettingsViewModel.swift */,
-				95F0FFDD24C957AA00509DF3 /* ReadNumberViewModel.swift */,
+				95F0FFE224C957AA00509DF3 /* DictsViewModel.swift */,
 				95F0FFDE24C957AA00509DF3 /* EmbeddedReviewViewModel.swift */,
 				95F0FFE124C957AA00509DF3 /* NoteViewModel.swift */,
-				95F0FFE224C957AA00509DF3 /* DictsViewModel.swift */,
+				95F0FFDD24C957AA00509DF3 /* ReadNumberViewModel.swift */,
+				95837EA924E0A3D100B5D2AE /* ReviewOptionsViewModel.swift */,
+				95F0FFDC24C957AA00509DF3 /* SettingsViewModel.swift */,
+				95F0FFDB24C957AA00509DF3 /* TextbooksViewModel.swift */,
 			);
 			path = Misc;
 			sourceTree = "<group>";
@@ -753,6 +757,7 @@
 				95F0FFE524C957AA00509DF3 /* WordsDictViewModel.swift in Sources */,
 				95F1FA6824CBD7B1006CA15D /* MLangPhrase.swift in Sources */,
 				8CB025942096CB3E0087462E /* RootViewController.swift in Sources */,
+				95837EAA24E0A3D100B5D2AE /* ReviewOptionsViewModel.swift in Sources */,
 				8C42B5B51D69A1D900DCB528 /* WordsUnitViewController.swift in Sources */,
 				95F1FA7024CBD7B1006CA15D /* MUserSetting.swift in Sources */,
 				95F1FA3D24CB1FE7006CA15D /* DisposedBy.swift in Sources */,
@@ -843,6 +848,7 @@
 				95F0FFF624C95AFF00509DF3 /* TextbooksViewModel.swift in Sources */,
 				95F1FA8524CBD7C0006CA15D /* MUnitWord.swift in Sources */,
 				95F1FA4B24CB2A31006CA15D /* Emit.swift in Sources */,
+				95837EAB24E0A3DE00B5D2AE /* ReviewOptionsViewModel.swift in Sources */,
 				95F0FFFC24C95B0900509DF3 /* DictsViewModel.swift in Sources */,
 				95F1FA7D24CBD7C0006CA15D /* MUserSetting.swift in Sources */,
 				95F1FA8824CBD7C0006CA15D /* MLangPhrase.swift in Sources */,
