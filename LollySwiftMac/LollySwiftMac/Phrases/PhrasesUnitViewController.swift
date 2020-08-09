@@ -192,7 +192,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
         vmReview.stop()
         let optionsVC = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: "ReviewOptionsViewController") as! ReviewOptionsViewController
         optionsVC.options.copy(from: vmReview.options)
-        optionsVC.complete = { [unowned self] in
+        optionsVC.complete = { [unowned optionsVC] in
             self.vmReview.options.copy(from: optionsVC.options)
             var arrPhrases = self.arrPhrases
             if self.vmReview.options.shuffled {

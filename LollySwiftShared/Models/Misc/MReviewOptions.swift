@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RxRelay
 
 class MReviewOptions: NSObject {
     var isEmbedded = false
@@ -30,5 +31,36 @@ class MReviewOptions: NSObject {
         levelge0only = x.levelge0only
         groupCount = x.groupCount
         groupSelected = x.groupSelected
+    }
+}
+
+class MReviewOptionsEdit {
+    var mode: BehaviorRelay<Int>
+    var interval: BehaviorRelay<Int>
+    var shuffled: BehaviorRelay<Bool>
+    var levelge0only: BehaviorRelay<Bool>
+    var levelHidden: BehaviorRelay<Bool>
+    var groupCount: BehaviorRelay<Int>
+    var groupSelected: BehaviorRelay<Int>
+    
+    init(x: MReviewOptions) {
+        mode = BehaviorRelay(value: x.mode.rawValue)
+        interval = BehaviorRelay(value: x.interval)
+        shuffled = BehaviorRelay(value: x.shuffled)
+        levelge0only = BehaviorRelay(value: x.levelge0only ?? false)
+        levelHidden = BehaviorRelay(value: x.levelge0only == nil)
+        groupCount = BehaviorRelay(value: x.groupCount)
+        groupSelected = BehaviorRelay(value: x.groupSelected)
+    }
+    
+    func save(to x: MReviewOptions) {
+        x.mode = ReviewMode(rawValue: mode.value)!
+        x.interval = interval.value
+        x.shuffled = shuffled.value
+        if (x.levelge0only != nil) {
+            x.levelge0only = levelge0only.value
+        }
+        x.groupCount = groupCount.value
+        x.groupSelected = groupSelected.value
     }
 }

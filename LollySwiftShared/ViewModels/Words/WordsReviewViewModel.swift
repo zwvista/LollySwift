@@ -40,6 +40,7 @@ class WordsReviewViewModel: NSObject {
     init(settings: SettingsViewModel, needCopy: Bool, doTestAction: (() -> Void)? = nil) {
         self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
         self.doTestAction = doTestAction
+        options.levelge0only = true
         options.shuffled = true
     }
 

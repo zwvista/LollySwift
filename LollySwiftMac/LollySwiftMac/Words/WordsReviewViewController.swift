@@ -73,9 +73,8 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
     
     @IBAction func newTest(_ sender: AnyObject) {
         let optionsVC = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: "ReviewOptionsViewController") as! ReviewOptionsViewController
-        optionsVC.options.copy(from: vm.options)
+        optionsVC.options = vm.options
         optionsVC.complete = { [unowned self] in
-            self.vm.options.copy(from: optionsVC.options)
             self.vm.newTest()
         }
         self.presentAsSheet(optionsVC)

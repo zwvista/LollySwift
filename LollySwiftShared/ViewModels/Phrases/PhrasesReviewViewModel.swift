@@ -16,11 +16,10 @@ class PhrasesReviewViewModel: NSObject {
     var arrPhrases = [MUnitPhrase]()
     var arrCorrectIDs = [Int]()
     var index = 0
-    var mode: ReviewMode = .reviewAuto
-    var isTestMode: Bool { mode == .test }
+    let options = MReviewOptions()
+    var isTestMode: Bool { options.mode == .test }
     var subscription: Disposable? = nil
     var isSpeaking = true
-    let options = MReviewOptions()
     let doTestAction: (() -> Void)?
 
     var indexString = BehaviorRelay(value: "")
@@ -53,7 +52,7 @@ class PhrasesReviewViewModel: NSObject {
             self.subscription?.dispose()
             self.doTest()
             self.checkTitle.accept(self.isTestMode ? "Check" : "Next")
-            if self.mode == .reviewAuto {
+            if self.options.mode == .reviewAuto {
                 self.subscription = Observable<Int>.interval(DispatchTimeInterval.seconds(self.options.interval), scheduler: MainScheduler.instance).subscribe { _ in
                     self.check()
                 }

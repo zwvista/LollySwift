@@ -270,7 +270,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
         vmReview.stop()
         let optionsVC = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: "ReviewOptionsViewController") as! ReviewOptionsViewController
         optionsVC.options.copy(from: vmReview.options)
-        optionsVC.complete = { [unowned self] in
+        optionsVC.complete = { [unowned optionsVC] in
             self.vmReview.options.copy(from: optionsVC.options)
             var arrWords = self.arrWords
             if self.vmReview.options.levelge0only! {
