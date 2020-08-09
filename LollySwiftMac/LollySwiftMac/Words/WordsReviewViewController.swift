@@ -34,18 +34,18 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
         }
         synth.setVoice(NSSpeechSynthesizer.VoiceName(rawValue: vm.vmSettings.macVoiceName))
         
-        _ = vm.indexString <~> tfIndex.rx.text.orEmpty
+        _ = vm.indexString ~> tfIndex.rx.text.orEmpty
         _ = vm.indexHidden ~> tfIndex.rx.isHidden
         _ = vm.correctHidden ~> tfCorrect.rx.isHidden
         _ = vm.incorrectHidden ~> tfIncorrect.rx.isHidden
-        _ = vm.accuracyString <~> tfAccuracy.rx.text.orEmpty
+        _ = vm.accuracyString ~> tfAccuracy.rx.text.orEmpty
         _ = vm.accuracyHidden ~> tfAccuracy.rx.isHidden
         _ = vm.checkEnabled ~> btnCheck.rx.isHidden
-        _ = vm.wordTargetString <~> tfWordTarget.rx.text.orEmpty
-        _ = vm.noteTargetString <~> tfNoteTarget.rx.text.orEmpty
+        _ = vm.wordTargetString ~> tfWordTarget.rx.text.orEmpty
+        _ = vm.noteTargetString ~> tfNoteTarget.rx.text.orEmpty
         _ = vm.wordTargetHidden ~> tfWordTarget.rx.isHidden
         _ = vm.noteTargetHidden ~> tfNoteTarget.rx.isHidden
-        _ = vm.translationString <~> tfTranslation.rx.text.orEmpty
+        _ = vm.translationString ~> tfTranslation.rx.text.orEmpty
         _ = vm.wordInputString <~> tfWordInput.rx.text.orEmpty
         _ = vm.checkTitle ~> btnCheck.rx.title
         
