@@ -8,6 +8,7 @@
 
 import Foundation
 import RxSwift
+import RxRelay
 
 class WordsReviewViewModel: NSObject {
 
@@ -21,20 +22,20 @@ class WordsReviewViewModel: NSObject {
     let options = MReviewOptions()
     let doTestAction: (() -> Void)?
 
-    @objc dynamic var indexString = ""
-    @objc dynamic var indexHidden = false
-    @objc dynamic var correctHidden = true
-    @objc dynamic var incorrectHidden = true
-    @objc dynamic var accuracyString = ""
-    @objc dynamic var accuracyHidden = false
-    @objc dynamic var checkEnabled = false
-    @objc dynamic var wordTargetString = ""
-    @objc dynamic var noteTargetString = ""
-    @objc dynamic var wordTargetHidden = false
-    @objc dynamic var noteTargetHidden = false
-    @objc dynamic var translationString = ""
-    @objc dynamic var wordInputString = ""
-    @objc dynamic var checkTitle = "Check"
+    var indexString = BehaviorRelay(value: "")
+    var indexHidden = BehaviorRelay(value: false)
+    var correctHidden = BehaviorRelay(value: true)
+    var incorrectHidden = BehaviorRelay(value: true)
+    var accuracyString = BehaviorRelay(value: "")
+    var accuracyHidden = BehaviorRelay(value: false)
+    var checkEnabled = BehaviorRelay(value: false)
+    var wordTargetString = BehaviorRelay(value: "")
+    var noteTargetString = BehaviorRelay(value: "")
+    var wordTargetHidden = BehaviorRelay(value: false)
+    var noteTargetHidden = BehaviorRelay(value: false)
+    var translationString = BehaviorRelay(value: "")
+    var wordInputString = BehaviorRelay(value: "")
+    var checkTitle = BehaviorRelay(value: "Check")
 
     init(settings: SettingsViewModel, needCopy: Bool, doTestAction: (() -> Void)? = nil) {
         self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
@@ -55,7 +56,7 @@ class WordsReviewViewModel: NSObject {
             self.arrCorrectIDs = []
             self.index = 0
             self.doTest()
-            self.checkTitle = self.isTestMode ? "Check" : "Next"
+            self.checkTitle.accept(self.isTestMode ? "Check" : "Next")
             if self.options.mode == .reviewAuto {
                 self.subscription = Observable<Int>.interval(DispatchTimeInterval.seconds( self.options.interval), scheduler: MainScheduler.instance).subscribe { _ in
                     self.check()
@@ -90,19 +91,19 @@ class WordsReviewViewModel: NSObject {
         if !isTestMode {
             next()
             doTest()
-        } else if correctHidden && incorrectHidden {
-            wordInputString = vmSettings.autoCorrectInput(text: wordInputString)
-            wordTargetHidden = false
-            noteTargetHidden = false
-            if wordInputString == currentWord {
-                correctHidden = false
+        } else if correctHidden.value && incorrectHidden.value {
+            wordInputString.accept(vmSettings.autoCorrectInput(text: wordInputString.value))
+            wordTargetHidden.accept(false)
+            noteTargetHidden.accept(false)
+            if wordInputString.value == currentWord {
+                correctHidden.accept(false)
             } else {
-                incorrectHidden = false
+                incorrectHidden.accept(false)
             }
-            checkTitle = "Next"
+            checkTitle.accept("Next")
             guard hasNext else {return}
             let o = currentItem!
-            let isCorrect = o.WORD == wordInputString
+            let isCorrect = o.WORD == wordInputString.value
             if isCorrect { arrCorrectIDs.append(o.ID) }
             MWordFami.update(wordid: o.WORDID, isCorrect: isCorrect).map {
                 o.CORRECT = $0.CORRECT
@@ -111,28 +112,28 @@ class WordsReviewViewModel: NSObject {
         } else {
             next()
             doTest()
-            checkTitle = "Check"
+            checkTitle.accept("Check")
         }
     }
     
     func doTest() {
-        indexHidden = !hasNext
-        correctHidden = true
-        incorrectHidden = true
-        accuracyHidden = !isTestMode || !hasNext
-        checkEnabled = hasNext
-        wordTargetString = currentWord
-        noteTargetString = currentItem?.NOTE ?? ""
-        wordTargetHidden = isTestMode
-        noteTargetHidden = isTestMode
-        translationString = ""
-        wordInputString = ""
+        indexHidden.accept(!hasNext)
+        correctHidden.accept(true)
+        incorrectHidden.accept(true)
+        accuracyHidden.accept(!isTestMode || !hasNext)
+        checkEnabled.accept(hasNext)
+        wordTargetString.accept(currentWord)
+        noteTargetString.accept(currentItem?.NOTE ?? "")
+        wordTargetHidden.accept(isTestMode)
+        noteTargetHidden.accept(isTestMode)
+        translationString.accept("")
+        wordInputString.accept("")
         doTestAction?()
         if hasNext {
-            indexString = "\(index + 1)/\(arrWords.count)"
-            accuracyString = currentItem!.ACCURACY
+            indexString.accept("\(index + 1)/\(arrWords.count)")
+            accuracyString.accept(currentItem!.ACCURACY)
             getTranslation().subscribe(onNext: {
-                self.translationString = $0
+                self.translationString.accept($0)
             }) ~ rx.disposeBag
         } else {
             subscription?.dispose()
