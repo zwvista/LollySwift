@@ -31,7 +31,7 @@ class PhrasesReviewViewModel: NSObject {
     var phraseTargetHidden = BehaviorRelay(value: false)
     var translationString = BehaviorRelay(value: "")
     var phraseInputString = BehaviorRelay(value: "")
-    var checkTitle = BehaviorRelay(value: "Check")
+    var checkTitle = BehaviorRelay<String?>(value: "Check")
 
     init(settings: SettingsViewModel, needCopy: Bool, doTestAction: (() -> Void)? = nil) {
         self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)

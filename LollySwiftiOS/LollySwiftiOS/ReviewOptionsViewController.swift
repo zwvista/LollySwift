@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import DropDown
+import RxSwift
+import NSObject_Rx
 
 class ReviewOptionsViewController: UITableViewController {
     
@@ -14,24 +17,31 @@ class ReviewOptionsViewController: UITableViewController {
     var vm: ReviewOptionsViewModel!
     var complete: (() -> Void)?
     
-    @IBOutlet weak var tfMode: UILabel!
-    @IBOutlet weak var scOrder: UISwitch!
-    @IBOutlet weak var scLevel: UISwitch!
-    @IBOutlet weak var lblLevel: UILabel!
+    @IBOutlet weak var reviewModeCell: UITableViewCell!
+    @IBOutlet weak var lblReviewMode: UILabel!
+    @IBOutlet weak var swOrder: UISwitch!
     @IBOutlet weak var tfInterval: UITextField!
+    @IBOutlet weak var lblLevel: UILabel!
+    @IBOutlet weak var swLevel: UISwitch!
     @IBOutlet weak var tfGroupSelected: UITextField!
     @IBOutlet weak var tfGroupCount: UITextField!
     @IBOutlet weak var btnDone: UIBarButtonItem!
+    let ddReviewMode = DropDown()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         vm = ReviewOptionsViewModel(options: options)
         
-//        _ = vm.optionsEdit.mode <~> pubMode.rx.selectedItemIndex
-        _ = vm.optionsEdit.shuffled <~> scOrder.rx.isOn
+        ddReviewMode.anchorView = reviewModeCell
+        ddReviewMode.dataSource = ["Review(Auto)", "Test", "Review(Manual)"]
+        ddReviewMode.selectionAction = { [unowned self] (index: Int, item: String) in
+            self.vm.optionsEdit.mode.accept(index)
+        }
+
+        _ = vm.optionsEdit.shuffled <~> swOrder.rx.isOn
         _ = vm.optionsEdit.levelHidden ~> lblLevel.rx.isHidden
-        _ = vm.optionsEdit.levelHidden ~> scLevel.rx.isHidden
-        _ = vm.optionsEdit.levelge0only <~> scLevel.rx.isOn
+        _ = vm.optionsEdit.levelHidden ~> swLevel.rx.isHidden
+        _ = vm.optionsEdit.levelge0only <~> swLevel.rx.isOn
 //        _ = vm.optionsEdit.interval <~> stpInterval.rx.integerValue
         _ = vm.optionsEdit.interval.map { $0.toString } ~> tfInterval.rx.text.orEmpty
 //        _ = vm.optionsEdit.groupSelected <~> stpGroupSelected.rx.integerValue
@@ -40,6 +50,12 @@ class ReviewOptionsViewController: UITableViewController {
         _ = vm.optionsEdit.groupCount.map { $0.toString } ~> tfGroupCount.rx.text.orEmpty
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            ddReviewMode.show()
+        }
+    }
+
     func onDone() {
     }
 }

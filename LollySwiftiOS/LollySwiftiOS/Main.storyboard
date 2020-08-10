@@ -794,6 +794,16 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="lblLevel" destination="wud-Vi-ab9" id="OlR-Mu-9Oh"/>
+                        <outlet property="lblReviewMode" destination="M7I-ky-V51" id="ra1-w2-HXR"/>
+                        <outlet property="reviewModeCell" destination="pi7-3O-CBE" id="2ae-Jh-MN6"/>
+                        <outlet property="swLevel" destination="IFj-Da-e6b" id="c0X-kK-XJS"/>
+                        <outlet property="swOrder" destination="4ne-UE-24c" id="MZd-Mf-Zo2"/>
+                        <outlet property="tfGroupCount" destination="LFf-rS-Xtm" id="axX-wf-FA1"/>
+                        <outlet property="tfGroupSelected" destination="7pl-XO-j3A" id="E1D-f8-VHC"/>
+                        <outlet property="tfInterval" destination="sTc-ZC-1DG" id="hHY-EP-IrL"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fjw-AE-1AW" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="ffl-i1-fbg" userLabel="Exit" sceneMemberID="exit"/>
