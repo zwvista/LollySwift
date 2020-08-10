@@ -14,108 +14,55 @@ import NSObject_Rx
 class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
     var vm: PhrasesReviewViewModel!
     
-    @IBOutlet weak var lblPhraseTarget: UILabel!
     @IBOutlet weak var lblIndex: UILabel!
     @IBOutlet weak var lblCorrect: UILabel!
     @IBOutlet weak var lblIncorrect: UILabel!
+    @IBOutlet weak var lblPhraseTarget: UILabel!
     @IBOutlet weak var lblTranslation: UILabel!
     @IBOutlet weak var tfPhraseInput: UITextField!
     @IBOutlet weak var btnCheck: UIButton!
-    @IBOutlet weak var btnReviewMode: UIButton!
     @IBOutlet weak var swSpeak: UISwitch!
-    @IBOutlet weak var swShuffled: UISwitch!
 
     var isSpeaking = false
-    var options = MReviewOptions()
-    var subscription: Disposable? = nil
     
     let ddReviewMode = DropDown()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        ddReviewMode.anchorView = btnReviewMode
-        ddReviewMode.dataSource = ["Review(Auto)", "Test", "Review(Manual)"]
-        ddReviewMode.selectionAction = { [unowned self] (index: Int, item: String) in
-            self.vm.options.mode = ReviewMode(rawValue: index)!
-            // https://stackoverflow.com/questions/11417077/changing-uibutton-text
-            self.btnReviewMode.setTitle(item, for: .normal)
-            self.newTest(self)
+        vm = PhrasesReviewViewModel(settings: vmSettings, needCopy: false) { [unowned self] in
+            self.tfPhraseInput.becomeFirstResponder()
+            if self.vm.hasNext && self.vm.isSpeaking {
+                AppDelegate.speak(string: self.vm.currentPhrase)
+            }
         }
-
-        vm = PhrasesReviewViewModel(settings: vmSettings, needCopy: false)
+        
+        _ = vm.indexString ~> lblIndex.rx.text
+        _ = vm.indexHidden ~> lblIndex.rx.isHidden
+        _ = vm.correctHidden ~> lblCorrect.rx.isHidden
+        _ = vm.incorrectHidden ~> lblIncorrect.rx.isHidden
+        _ = vm.checkEnabled ~> btnCheck.rx.isEnabled
+        _ = vm.phraseTargetString ~> lblPhraseTarget.rx.text
+        _ = vm.phraseTargetHidden ~> lblPhraseTarget.rx.isHidden
+        _ = vm.translationString ~> lblTranslation.rx.text
+        _ = vm.phraseInputString <~> tfPhraseInput.rx.text.orEmpty
+        _ = vm.checkTitle ~> btnCheck.rx.title(for: .normal)
+        
         newTest(self)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        subscription?.dispose()
+        vm.subscription?.dispose()
     }
 
-    private func doTest() {
-        let b = vm.hasNext
-        lblIndex.isHidden = !b
-        lblCorrect.isHidden = true
-        lblIncorrect.isHidden = true
-        btnCheck.isEnabled = b
-        lblPhraseTarget.text = vm.isTestMode ? "" : vm.currentPhrase
-        lblTranslation.text = ""
-        tfPhraseInput.text = ""
-        tfPhraseInput.isHidden = vm.options.mode == .reviewAuto
-        if !tfPhraseInput.isHidden {
-            tfPhraseInput.becomeFirstResponder()
-        } else {
-            view.endEditing(true)
-        }
-        if b {
-            lblIndex.text = "\(vm.index + 1)/\(vm.arrPhrases.count)"
-            if isSpeaking {
-                AppDelegate.speak(string: vm.currentPhrase)
-            }
-            lblTranslation.text = vm.currentItem!.TRANSLATION ?? ""
-        } else {
-            subscription?.dispose()
-            tfPhraseInput.isHidden = true
-            view.endEditing(true)
-        }
-    }
-    
     @IBAction func newTest(_ sender: AnyObject) {
-        subscription?.dispose()
-//        vm.newTest(options: options).subscribe {
-//            self.doTest()
-//        } ~ rx.disposeBag
-        btnCheck.setTitle(vm.isTestMode ? "Check" : "Next", for: .normal)
-        if vm.options.mode == .reviewAuto {
-            subscription = Observable<Int>.interval(DispatchTimeInterval.milliseconds(vmSettings.USREVIEWINTERVAL), scheduler: MainScheduler.instance).subscribe { _ in
-                self.check(self)
-            }
-            subscription! ~ rx.disposeBag
-        }
+        performSegue(withIdentifier: "options", sender: sender)
     }
     
     @IBAction func check(_ sender: AnyObject) {
-        if !vm.isTestMode {
-            vm.next()
-            doTest()
-        } else if lblCorrect.isHidden && lblIncorrect.isHidden {
-            tfPhraseInput.text = vmSettings.autoCorrectInput(text: tfPhraseInput.text!)
-            lblPhraseTarget.isHidden = false
-            lblPhraseTarget.text = vm.currentPhrase
-            if tfPhraseInput.text == vm.currentPhrase {
-                lblCorrect.isHidden = false
-            } else {
-                lblIncorrect.isHidden = false
-            }
-            btnCheck.setTitle("Next", for: .normal)
-//            vm.check(phraseInput: tfPhraseInput.text!)
-        } else {
-            vm.next()
-            doTest()
-            btnCheck.setTitle("Check", for: .normal)
-        }
+        vm.check()
     }
-    
+
     @IBAction func isSpeakingChanged(_ sender: AnyObject) {
         isSpeaking = (sender as! UISwitch).isOn
         if isSpeaking {
@@ -123,16 +70,8 @@ class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    @IBAction func shuffledOrNotChanged(_ sender: AnyObject) {
-        options.shuffled = (sender as! UISwitch).isOn
-    }
-    
-    @IBAction func reviewModeChanged(_ sender: AnyObject) {
-        ddReviewMode.show()
-    }
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        check(self)
+        vm.check()
         return false
     }
     
@@ -141,10 +80,16 @@ class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
         view.endEditing(true)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        if let controller = (segue.destination as? UINavigationController)?.topViewController as? ReviewOptionsViewController {
+            controller.options = vm.options
+        }
+    }
+
     @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
         guard segue.identifier == "Done" else {return}
-        let controller = segue.source as! ReviewOptionsViewController
-        controller.onDone()
+        vm.newTest()
     }
 
     deinit {
