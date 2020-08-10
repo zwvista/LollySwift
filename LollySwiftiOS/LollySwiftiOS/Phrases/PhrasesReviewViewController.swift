@@ -31,7 +31,7 @@ class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         vm = PhrasesReviewViewModel(settings: vmSettings, needCopy: false) { [unowned self] in
             self.tfPhraseInput.becomeFirstResponder()
-            if self.vm.hasNext && self.vm.isSpeaking {
+            if self.vm.hasNext && self.vm.isSpeaking.value {
                 AppDelegate.speak(string: self.vm.currentPhrase)
             }
         }
@@ -46,7 +46,8 @@ class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
         _ = vm.translationString ~> lblTranslation.rx.text
         _ = vm.phraseInputString <~> tfPhraseInput.rx.text.orEmpty
         _ = vm.checkTitle ~> btnCheck.rx.title(for: .normal)
-        
+        _ = vm.isSpeaking ~> swSpeak.rx.isOn
+
         newTest(self)
     }
     
@@ -64,7 +65,6 @@ class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
     }
 
     @IBAction func isSpeakingChanged(_ sender: AnyObject) {
-        isSpeaking = (sender as! UISwitch).isOn
         if isSpeaking {
             AppDelegate.speak(string: vm.currentPhrase)
         }

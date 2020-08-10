@@ -31,7 +31,7 @@ class WordsReviewViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         vm = WordsReviewViewModel(settings: vmSettings, needCopy: false) { [unowned self] in
             self.tfWordInput.becomeFirstResponder()
-            if self.vm.hasNext && self.vm.isSpeaking {
+            if self.vm.hasNext && self.vm.isSpeaking.value {
                 AppDelegate.speak(string: self.vm.currentWord)
             }
         }
@@ -50,6 +50,7 @@ class WordsReviewViewController: UIViewController, UITextFieldDelegate {
         _ = vm.translationString ~> tvTranslation.rx.text
         _ = vm.wordInputString <~> tfWordInput.rx.text.orEmpty
         _ = vm.checkTitle ~> btnCheck.rx.title(for: .normal)
+        _ = vm.isSpeaking <~> swSpeak.rx.isOn
 
         newTest(self)
     }
@@ -68,7 +69,6 @@ class WordsReviewViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func isSpeakingChanged(_ sender: AnyObject) {
-        isSpeaking = (sender as! UISwitch).isOn
         if isSpeaking {
             AppDelegate.speak(string: vm.currentWord)
         }

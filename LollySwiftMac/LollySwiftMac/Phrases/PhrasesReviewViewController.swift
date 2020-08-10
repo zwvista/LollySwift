@@ -27,7 +27,7 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
     func settingsChanged() {
         vm = PhrasesReviewViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) { [unowned self] in
             self.tfPhraseInput.becomeFirstResponder()
-            if self.vm.hasNext && self.vm.isSpeaking {
+            if self.vm.hasNext && self.vm.isSpeaking.value {
                self.synth.startSpeaking(self.vm.currentPhrase)
             }
         }
@@ -58,7 +58,7 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
         super.viewDidAppear()
         settingsChanged()
         wc = view.window!.windowController as? PhrasesReviewWindowController
-        wc.scSpeak.selectedSegment = vm.isSpeaking ? 1 : 0
+        _ = vm.isSpeaking <~> wc.scSpeak.rx.isOn
     }
     override func viewWillDisappear() {
         super.viewWillDisappear()
@@ -88,8 +88,7 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
     }
     
     @IBAction func isSpeakingChanged(_ sender: AnyObject) {
-        vm.isSpeaking = (sender as! NSSegmentedControl).selectedSegment == 1
-        if vm.isSpeaking {
+        if vm.isSpeaking.value {
             synth.startSpeaking(vm.currentPhrase)
         }
     }

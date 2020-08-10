@@ -18,7 +18,6 @@ class WordsReviewViewModel: NSObject {
     var index = 0
     var isTestMode: Bool { options.mode == .test }
     var subscription: Disposable? = nil
-    var isSpeaking = true
     let options = MReviewOptions()
     let doTestAction: (() -> Void)?
 
@@ -36,6 +35,7 @@ class WordsReviewViewModel: NSObject {
     var translationString = BehaviorRelay(value: "")
     var wordInputString = BehaviorRelay(value: "")
     var checkTitle = BehaviorRelay(value: "Check")
+    var isSpeaking = BehaviorRelay(value: true)
 
     init(settings: SettingsViewModel, needCopy: Bool, doTestAction: (() -> Void)? = nil) {
         self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)

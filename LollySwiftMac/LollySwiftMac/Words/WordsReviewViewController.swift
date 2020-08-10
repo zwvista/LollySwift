@@ -28,7 +28,7 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
     func settingsChanged() {
         vm = WordsReviewViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) { [unowned self] in
             self.tfWordInput.becomeFirstResponder()
-            if self.vm.hasNext && self.vm.isSpeaking {
+            if self.vm.hasNext && self.vm.isSpeaking.value {
                 self.synth.startSpeaking(self.vm.currentWord)
             }
         }
@@ -48,7 +48,7 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
         _ = vm.translationString ~> tfTranslation.rx.text.orEmpty
         _ = vm.wordInputString <~> tfWordInput.rx.text.orEmpty
         _ = vm.checkTitle ~> btnCheck.rx.title
-        
+
         newTest(self)
     }
 
@@ -63,7 +63,7 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
         super.viewDidAppear()
         settingsChanged()
         wc = view.window!.windowController as? WordsReviewWindowController
-        wc.scSpeak.selectedSegment = vm.isSpeaking ? 1 : 0
+        _ = vm.isSpeaking <~> wc.scSpeak.rx.isOn
     }
     override func viewWillDisappear() {
         super.viewWillDisappear()
@@ -93,8 +93,7 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
     }
     
     @IBAction func isSpeakingChanged(_ sender: AnyObject) {
-        vm.isSpeaking = (sender as! NSSegmentedControl).selectedSegment == 1
-        if vm.isSpeaking {
+        if vm.isSpeaking.value {
             synth.startSpeaking(vm.currentWord)
         }
     }

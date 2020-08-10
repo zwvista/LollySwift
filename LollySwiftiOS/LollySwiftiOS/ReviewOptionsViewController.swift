@@ -55,7 +55,8 @@ class ReviewOptionsViewController: UITableViewController {
             ddReviewMode.show()
         }
     }
-
-    func onDone() {
+    
+    deinit {
+        print("DEBUG: \(self.className) deinit")
     }
 }

@@ -19,7 +19,6 @@ class PhrasesReviewViewModel: NSObject {
     let options = MReviewOptions()
     var isTestMode: Bool { options.mode == .test }
     var subscription: Disposable? = nil
-    var isSpeaking = true
     let doTestAction: (() -> Void)?
 
     var indexString = BehaviorRelay(value: "")
@@ -31,7 +30,8 @@ class PhrasesReviewViewModel: NSObject {
     var phraseTargetHidden = BehaviorRelay(value: false)
     var translationString = BehaviorRelay(value: "")
     var phraseInputString = BehaviorRelay(value: "")
-    var checkTitle = BehaviorRelay<String?>(value: "Check")
+    var checkTitle = BehaviorRelay(value: "Check")
+    var isSpeaking = BehaviorRelay(value: true)
 
     init(settings: SettingsViewModel, needCopy: Bool, doTestAction: (() -> Void)? = nil) {
         self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
