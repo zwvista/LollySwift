@@ -64,6 +64,11 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
         settingsChanged()
         wc = view.window!.windowController as? WordsReviewWindowController
         _ = vm.isSpeaking <~> wc.scSpeak.rx.isOn
+        vm.isSpeaking.subscribe(onNext: { isSpeaking in
+            if isSpeaking {
+                self.synth.startSpeaking(self.vm.currentWord)
+            }
+        }) ~ rx.disposeBag
     }
     override func viewWillDisappear() {
         super.viewWillDisappear()
@@ -91,12 +96,6 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
     @IBAction func check(_ sender: AnyObject) {
         vm.check()
     }
-    
-    @IBAction func isSpeakingChanged(_ sender: AnyObject) {
-        if vm.isSpeaking.value {
-            synth.startSpeaking(vm.currentWord)
-        }
-    }
 
     deinit {
         print("DEBUG: \(self.className) deinit")
@@ -106,7 +105,7 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
 class WordsReviewWindowController: NSWindowController {
     
     @IBOutlet weak var scSpeak: NSSegmentedControl!
-
+    
     deinit {
         print("DEBUG: \(self.className) deinit")
     }

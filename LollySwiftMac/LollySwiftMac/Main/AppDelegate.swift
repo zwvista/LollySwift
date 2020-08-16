@@ -153,7 +153,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @IBAction func readNumber(_ sender: AnyObject) {
-        showWindow(storyBoardName: "Main", windowControllerName: "ReadNumberWindowController", modal: false)
+        showWindow(storyBoardName: "Tools", windowControllerName: "ReadNumberWindowController", modal: false)
     }
     
     func searchWord(word: String) {
