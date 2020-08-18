@@ -47,31 +47,9 @@ class MLangWord: NSObject, Codable, MWordProtocol {
         TOTAL = x.TOTAL
     }
 
-    func combineNote(_ note: String?) -> Bool {
-        let oldNote = NOTE
-        if !(note ?? "").isEmpty {
-            if (NOTE ?? "").isEmpty {
-                NOTE = note
-            } else {
-                var arr = NOTE!.split(",")
-                if !arr.contains(note!) {
-                    arr.append(note!)
-                    NOTE = arr.joined(separator: ",")
-                }
-            }
-        }
-        return oldNote != NOTE
-    }
-
     static func getDataByLang(_ langid: Int) -> Observable<[MLangWord]> {
         // SQL: SELECT * FROM LANGWORDS WHERE LANGID=?
         let url = "\(CommonApi.urlAPI)VLANGWORDS?filter=LANGID,eq,\(langid)&order=WORD"
-        return RestApi.getRecords(url: url)
-    }
-
-    static func getDataById(_ id: Int) -> Observable<[MLangWord]> {
-        // SQL: SELECT * FROM LANGWORDS WHERE ID=?
-        let url = "\(CommonApi.urlAPI)VLANGWORDS?filter=ID,eq,\(id)"
         return RestApi.getRecords(url: url)
     }
     

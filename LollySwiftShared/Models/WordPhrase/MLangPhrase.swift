@@ -44,31 +44,9 @@ class MLangPhrase: NSObject, Codable, MPhraseProtocol {
         TRANSLATION = x.TRANSLATION
     }
 
-    func combineTranslation(_ translation: String?) -> Bool {
-        let oldTranslation = TRANSLATION
-        if !(translation ?? "").isEmpty {
-            if (TRANSLATION ?? "").isEmpty {
-                TRANSLATION = translation
-            } else {
-                var arr = TRANSLATION!.split(",")
-                if !arr.contains(translation!) {
-                    arr.append(translation!)
-                    TRANSLATION = arr.joined(separator: ",")
-                }
-            }
-        }
-        return oldTranslation != TRANSLATION
-    }
-
     static func getDataByLang(_ langid: Int) -> Observable<[MLangPhrase]> {
         // SQL: SELECT * FROM LANGPHRASES WHERE LANGID=?
         let url = "\(CommonApi.urlAPI)LANGPHRASES?filter=LANGID,eq,\(langid)&order=PHRASE"
-        return RestApi.getRecords(url: url)
-    }
-    
-    static func getDataById(_ id: Int) -> Observable<[MLangPhrase]> {
-        // SQL: SELECT * FROM LANGPHRASES WHERE ID=?
-        let url = "\(CommonApi.urlAPI)LANGPHRASES?filter=ID,eq,\(id)"
         return RestApi.getRecords(url: url)
     }
 
