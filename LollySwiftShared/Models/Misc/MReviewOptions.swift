@@ -12,7 +12,7 @@ import RxRelay
 class MReviewOptions: NSObject {
     var isEmbedded = false
     var mode: ReviewMode = .reviewAuto
-    @objc dynamic var interval = 3
+    @objc dynamic var interval = 5
     var shuffled = false
     var levelge0only: Bool?
     @objc dynamic var groupCount = 1
@@ -21,16 +21,6 @@ class MReviewOptions: NSObject {
     init(isEmbedded: Bool = false) {
         self.isEmbedded = isEmbedded
         super.init()
-    }
-    
-    func copy(from x: MReviewOptions) {
-        isEmbedded = x.isEmbedded
-        mode = x.mode
-        interval = x.interval
-        shuffled = x.shuffled
-        levelge0only = x.levelge0only
-        groupCount = x.groupCount
-        groupSelected = x.groupSelected
     }
 }
 

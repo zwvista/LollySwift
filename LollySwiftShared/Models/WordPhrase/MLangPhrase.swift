@@ -37,13 +37,6 @@ class MLangPhrase: NSObject, Codable, MPhraseProtocol {
         super.init()
     }
 
-    func copy(from x: MLangPhrase) {
-        ID = x.ID
-        LANGID = x.LANGID
-        PHRASE = x.PHRASE
-        TRANSLATION = x.TRANSLATION
-    }
-
     static func getDataByLang(_ langid: Int) -> Observable<[MLangPhrase]> {
         // SQL: SELECT * FROM LANGPHRASES WHERE LANGID=?
         let url = "\(CommonApi.urlAPI)LANGPHRASES?filter=LANGID,eq,\(langid)&order=PHRASE"

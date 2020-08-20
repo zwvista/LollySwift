@@ -35,17 +35,6 @@ class MLangWord: NSObject, Codable, MWordProtocol {
         NOTE = unititem.NOTE
         super.init()
     }
-    
-    func copy(from x: MLangWord) {
-        ID = x.ID
-        LANGID = x.LANGID
-        WORD = x.WORD
-        NOTE = x.NOTE
-        FAMIID = x.FAMIID
-        LEVEL = x.LEVEL
-        CORRECT = x.CORRECT
-        TOTAL = x.TOTAL
-    }
 
     static func getDataByLang(_ langid: Int) -> Observable<[MLangWord]> {
         // SQL: SELECT * FROM LANGWORDS WHERE LANGID=?

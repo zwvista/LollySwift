@@ -23,18 +23,6 @@ class MPatternPhrase: NSObject, Codable {
 
     override init() {
     }
-    
-    func copy(from x: MPatternPhrase) {
-        PATTERNID = x.PATTERNID
-        LANGID = x.LANGID
-        PATTERN = x.PATTERN
-        NOTE = x.NOTE
-        ID = x.ID
-        SEQNUM = x.SEQNUM
-        PHRASEID = x.PHRASEID
-        PHRASE = x.PHRASE
-        TRANSLATION = x.TRANSLATION
-    }
 
     static func getDataByPatternId(_ patternid: Int) -> Observable<[MPatternPhrase]> {
         // SQL: SELECT * FROM VPATTERNSPHRASES WHERE PATTERNID=?

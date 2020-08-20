@@ -18,12 +18,6 @@ class MWebPage: NSObject, Codable {
     override init() {
     }
     
-    func copy(from x: MWebPage) {
-        ID = x.ID
-        TITLE = x.TITLE
-        URL = x.URL
-    }
-    
     static func getDataById(_ id: Int) -> Observable<[MWebPage]> {
         // SQL: SELECT * FROM WEBPAGES WHERE ID=?
         let url = "\(CommonApi.urlAPI)WEBPAGES?filter=ID,eq,\(id)"
