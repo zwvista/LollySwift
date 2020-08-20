@@ -36,7 +36,8 @@ class WordsUnitEditViewModel: NSObject {
         return isAdd ? vm.create(item: item).map {
             self.vm.arrWords.append($0!)
         } : vm.update(item: item).map {
-            self.vm.arrWords[self.index] = $0!
+            var arrWords = self.vm.arrWordsFiltered ?? self.vm.arrWords
+            arrWords[self.index] = $0!
         }
     }
 }

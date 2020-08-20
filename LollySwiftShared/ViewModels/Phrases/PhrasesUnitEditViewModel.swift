@@ -36,7 +36,8 @@ class PhrasesUnitEditViewModel: NSObject {
         return isAdd ? vm.create(item: item).map {
             self.vm.arrPhrases.append($0!)
         } : vm.update(item: item).map {
-            self.vm.arrPhrases[self.index] = $0!
+            var arrPhrases = self.vm.arrPhrasesFiltered ?? self.vm.arrPhrases
+            arrPhrases[self.index] = $0!
         }
     }
 }
