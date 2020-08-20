@@ -12,10 +12,9 @@ import NSObject_Rx
 
 class WordsTextbookEditViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 
-    var vm: WordsUnitViewModel!
     var complete: (() -> Void)?
-    @objc var item: MUnitWord!
     var vmEdit: WordsUnitEditViewModel!
+    var item: MUnitWord { vmEdit.item }
     var itemEdit: MUnitWordEdit { vmEdit.itemEdit }
     var arrWords: [MUnitWord] { vmEdit.vmSingle.arrWords }
 
@@ -34,14 +33,17 @@ class WordsTextbookEditViewController: NSViewController, NSTableViewDataSource, 
     @IBOutlet weak var tfAccuracy: NSTextField!
     @IBOutlet weak var tableView: NSTableView!
     @IBOutlet weak var btnOK: NSButton!
+    
+    func startEdit(vm: WordsUnitViewModel, index: Int = -1) {
+        vmEdit = WordsUnitEditViewModel(vm: vm, index: index) {
+            self.tableView.reloadData()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         acUnits.content = item.textbook.arrUnits
         acParts.content = item.textbook.arrParts
-        vmEdit = WordsUnitEditViewModel(vm: vm, item: item) {
-            self.tableView.reloadData()
-        }
         _ = itemEdit.ID ~> tfID.rx.text.orEmpty
         _ = itemEdit.TEXTBOOKNAME ~> tfTextbookName.rx.text.orEmpty
         _ = itemEdit.indexUNIT <~> pubUnit.rx.selectedItemIndex

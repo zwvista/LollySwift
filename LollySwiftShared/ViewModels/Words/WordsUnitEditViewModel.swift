@@ -15,12 +15,14 @@ class WordsUnitEditViewModel: NSObject {
     var item: MUnitWord!
     var itemEdit: MUnitWordEdit!
     var vmSingle: SingleWordViewModel!
+    var index = -1
     var isAdd: Bool!
     var isOKEnabled = BehaviorRelay(value: false)
 
-    init(vm: WordsUnitViewModel, item: MUnitWord, complete: @escaping () -> ()) {
+    init(vm: WordsUnitViewModel, index: Int, complete: @escaping () -> ()) {
         self.vm = vm
-        self.item = item
+        self.index = index
+        item = index == -1 ? vm.newUnitWord() : vm.arrWords[index]
         itemEdit = MUnitWordEdit(x: item)
         isAdd = item.ID == 0
         _ = itemEdit.WORD.map { !$0.isEmpty } ~> isOKEnabled
@@ -31,11 +33,10 @@ class WordsUnitEditViewModel: NSObject {
     func onOK() -> Observable<()> {
         itemEdit.save(to: item)
         item.WORD = vm.vmSettings.autoCorrectInput(text: item.WORD)
-        if isAdd {
-            vm.arrWords.append(item)
-            return vm.create(item: item)
-        } else {
-            return vm.update(item: item)
+        return isAdd ? vm.create(item: item).map {
+            self.vm.arrWords.append($0!)
+        } : vm.update(item: item).map {
+            self.vm.arrWords[self.index] = $0!
         }
     }
 }

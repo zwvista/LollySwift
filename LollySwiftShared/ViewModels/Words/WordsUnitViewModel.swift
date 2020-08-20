@@ -60,21 +60,15 @@ class WordsUnitViewModel: NSObject {
         MLangWord.update(wordid, note: note)
     }
 
-    func update(item: MUnitWord) -> Observable<()> {
+    func update(item: MUnitWord) -> Observable<MUnitWord?> {
         MUnitWord.update(item: item).flatMap {
             MUnitWord.getDataById(item.ID, arrTextbooks: self.vmSettings.arrTextbooks)
-        }.map {
-            guard let o = $0 else {return}
-            item.copy(from: o)
         }
     }
     
-    func create(item: MUnitWord) -> Observable<()> {
+    func create(item: MUnitWord) -> Observable<MUnitWord?> {
         MUnitWord.create(item: item).flatMap {
             MUnitWord.getDataById($0, arrTextbooks: self.vmSettings.arrTextbooks)
-        }.map {
-            guard let o = $0 else {return}
-            item.copy(from: o)
         }
     }
     

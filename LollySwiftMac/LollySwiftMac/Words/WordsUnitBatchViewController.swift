@@ -88,7 +88,7 @@ class WordsUnitBatchViewController: NSViewController, NSTableViewDataSource, NST
                 if unitChecked { item.UNIT = unit }
                 if partChecked { item.PART = part }
                 if seqnumChecked { item.SEQNUM += seqnum }
-                o = o.concat(vm.update(item: item))
+                o = o.concat(vm.update(item: item).map {_ in })
             }
             if levelChecked && (!level0Only || item.LEVEL == 0) {
                 o = o.concat(MWordFami.update(wordid: item.WORDID, level: self.level))
