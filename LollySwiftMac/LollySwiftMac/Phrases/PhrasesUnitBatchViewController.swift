@@ -78,7 +78,7 @@ class PhrasesUnitBatchViewController: NSViewController, NSTableViewDataSource, N
                 if unitChecked { item.UNIT = unit }
                 if partChecked { item.PART = part }
                 if seqnumChecked { item.SEQNUM += seqnum }
-                o = o.concat(vm.update(item: item))
+                o = o.concat(vm.update(item: item).map {_ in })
             }
         }
         o.subscribe {

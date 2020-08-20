@@ -117,8 +117,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     // https://stackoverflow.com/questions/24219441/how-to-use-nstoolbar-in-xcode-6-and-storyboard
     @IBAction func addPhrase(_ sender: AnyObject) {
         let editVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesUnitEditViewController") as! PhrasesUnitEditViewController
-        editVC.vm = vm
-        editVC.item = vm.newUnitPhrase()
+        editVC.startEdit(vm: vm)
         editVC.complete = { self.tableView.reloadData(); self.addPhrase(self) }
         self.presentAsSheet(editVC)
     }
@@ -149,9 +148,8 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
 
     @IBAction func editPhrase(_ sender: AnyObject) {
         let editVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesUnitEditViewController") as! PhrasesUnitEditViewController
-        editVC.vm = vm
         let i = tableView.selectedRow
-        editVC.item = arrPhrases[i]
+        editVC.startEdit(vm: vm, index: i)
         editVC.complete = {
             self.tableView.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count))
         }

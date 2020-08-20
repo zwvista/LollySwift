@@ -10,7 +10,6 @@ import Foundation
 import RxSwift
 
 class PhrasesUnitViewModel: NSObject {
-    @objc
     var vmSettings: SettingsViewModel
     let inTextbook: Bool
     var arrPhrases = [MUnitPhrase]()
@@ -49,21 +48,15 @@ class PhrasesUnitViewModel: NSObject {
         MUnitPhrase.update(id, seqnum: seqnum)
     }
     
-    func update(item: MUnitPhrase) -> Observable<()> {
+    func update(item: MUnitPhrase) -> Observable<MUnitPhrase?> {
         MUnitPhrase.update(item: item).flatMap {
             MUnitPhrase.getDataById(item.ID, arrTextbooks: self.vmSettings.arrTextbooks)
-        }.map {
-            guard let o = $0 else {return}
-            item.copy(from: o)
         }
     }
     
-    func create(item: MUnitPhrase) -> Observable<()> {
+    func create(item: MUnitPhrase) -> Observable<MUnitPhrase?> {
         MUnitPhrase.create(item: item).flatMap {
             MUnitPhrase.getDataById($0, arrTextbooks: self.vmSettings.arrTextbooks)
-        }.map {
-            guard let o = $0 else {return}
-            item.copy(from: o)
         }
     }
     

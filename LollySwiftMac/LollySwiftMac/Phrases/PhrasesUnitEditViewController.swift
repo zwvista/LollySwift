@@ -12,10 +12,9 @@ import NSObject_Rx
 
 class PhrasesUnitEditViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 
-    var vm: PhrasesUnitViewModel!
     var complete: (() -> Void)?
-    @objc var item: MUnitPhrase!
     var vmEdit: PhrasesUnitEditViewModel!
+    var item: MUnitPhrase { vmEdit.item }
     var itemEdit: MUnitPhraseEdit { vmEdit.itemEdit }
     var arrPhrases: [MUnitPhrase] { vmEdit.vmSingle?.arrPhrases ?? [MUnitPhrase]() }
 
@@ -30,14 +29,17 @@ class PhrasesUnitEditViewController: NSViewController, NSTableViewDataSource, NS
     @IBOutlet weak var tfTranslation: NSTextField!
     @IBOutlet weak var tableView: NSTableView!
     @IBOutlet weak var btnOK: NSButton!
+    
+    func startEdit(vm: PhrasesUnitViewModel, index: Int = -1) {
+        vmEdit = PhrasesUnitEditViewModel(vm: vm, index: index) {
+            self.tableView.reloadData()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         acUnits.content = item.textbook.arrUnits
         acParts.content = item.textbook.arrParts
-        vmEdit = PhrasesUnitEditViewModel(vm: vm, item: item) {
-            self.tableView.reloadData()
-        }
         _ = itemEdit.ID ~> tfID.rx.text.orEmpty
         _ = itemEdit.indexUNIT <~> pubUnit.rx.selectedItemIndex
         _ = itemEdit.indexPART <~> pubPart.rx.selectedItemIndex

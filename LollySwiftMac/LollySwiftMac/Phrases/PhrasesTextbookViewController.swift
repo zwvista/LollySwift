@@ -64,9 +64,8 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
 
     @IBAction func editPhrase(_ sender: AnyObject) {
         let editVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesTextbookEditViewController") as! PhrasesTextbookEditViewController
-        editVC.vm = vm
         let i = tableView.selectedRow
-        editVC.item = arrPhrases[i]
+        editVC.startEdit(vm: vm, index: i)
         editVC.complete = {
             self.tableView.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count))
         }
