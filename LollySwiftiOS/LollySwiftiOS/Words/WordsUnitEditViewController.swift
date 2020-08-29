@@ -24,18 +24,20 @@ class WordsUnitEditViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var tfAccuracy: UITextField!
     @IBOutlet weak var btnDone: UIBarButtonItem!
     
-    var vm: WordsUnitViewModel!
-    var item: MUnitWord!
     var vmEdit: WordsUnitEditViewModel!
+    var item: MUnitWord { vmEdit.item }
     var itemEdit: MUnitWordEdit { vmEdit.itemEdit }
     let ddUnit = DropDown()
     let ddPart = DropDown()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        vmEdit = WordsUnitEditViewModel(vm: vm, item: item) {
+    func startEdit(vm: WordsUnitViewModel, index: Int = -1) {
+        vmEdit = WordsUnitEditViewModel(vm: vm, index: index) {
             self.tableView.reloadData()
         }
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
 
         ddUnit.anchorView = tfUnit
         ddUnit.dataSource = vmSettings.arrUnits.map { $0.label }

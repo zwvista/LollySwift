@@ -75,8 +75,15 @@ class PhrasesReviewViewModel: NSObject {
     
     func check() {
         if !isTestMode {
-            next()
-            doTest()
+            var b = true
+            if options.mode == .reviewManual && !phraseInputString.value.isEmpty && phraseInputString.value != currentPhrase {
+                b = false
+                incorrectHidden.accept(false)
+            }
+            if b {
+                next()
+                doTest()
+            }
         } else if correctHidden.value && incorrectHidden.value {
             phraseInputString.accept(vmSettings.autoCorrectInput(text: phraseInputString.value))
             phraseTargetHidden.accept(false)

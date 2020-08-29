@@ -65,7 +65,7 @@ class WordsUnitBatchViewController: UITableViewController, UITextFieldDelegate {
                 if swUnit.isOn { item.UNIT = unit }
                 if swPart.isOn { item.PART = part }
                 if swSeqNum.isOn { item.SEQNUM += seqnum }
-                o = o.concat(vm.update(item: item))
+                o = o.concat(vm.update(item: item).map {_ in })
             }
             if swLevel.isOn && (!level0Only || item.LEVEL == 0) {
                 o = o.concat(MWordFami.update(wordid: item.WORDID, level: level))

@@ -22,12 +22,17 @@ class PhrasesTextbookEditViewController: UITableViewController {
     @IBOutlet weak var tfTranslation: UITextField!
     @IBOutlet weak var btnDone: UIBarButtonItem!
 
-    var vm: PhrasesUnitViewModel!
-    var item: MUnitPhrase!
     var vmEdit: PhrasesUnitEditViewModel!
+    var item: MUnitPhrase { vmEdit.item }
     var itemEdit: MUnitPhraseEdit { vmEdit.itemEdit }
     let ddUnit = DropDown()
     let ddPart = DropDown()
+    
+    func startEdit(vm: PhrasesUnitViewModel, index: Int = -1) {
+        vmEdit = PhrasesUnitEditViewModel(vm: vm, index: index) {
+            self.tableView.reloadData()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

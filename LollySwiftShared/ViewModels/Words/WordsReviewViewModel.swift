@@ -90,8 +90,15 @@ class WordsReviewViewModel: NSObject {
     
     func check() {
         if !isTestMode {
-            next()
-            doTest()
+            var b = true
+            if options.mode == .reviewManual && !wordInputString.value.isEmpty && wordInputString.value != currentWord {
+                b = false
+                incorrectHidden.accept(false)
+            }
+            if b {
+                next()
+                doTest()
+            }
         } else if correctHidden.value && incorrectHidden.value {
             wordInputString.accept(vmSettings.autoCorrectInput(text: wordInputString.value))
             wordTargetHidden.accept(false)
