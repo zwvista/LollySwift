@@ -13,7 +13,7 @@ import NSObject_Rx
 class WordsTextbookDetailViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 
     var complete: (() -> Void)?
-    var vmEdit: WordsUnitEditViewModel!
+    var vmEdit: WordsUnitDetailViewModel!
     var item: MUnitWord { vmEdit.item }
     var itemEdit: MUnitWordEdit { vmEdit.itemEdit }
     var arrWords: [MUnitWord] { vmEdit.vmSingle.arrWords }
@@ -35,7 +35,7 @@ class WordsTextbookDetailViewController: NSViewController, NSTableViewDataSource
     @IBOutlet weak var btnOK: NSButton!
     
     func startEdit(vm: WordsUnitViewModel, index: Int = -1) {
-        vmEdit = WordsUnitEditViewModel(vm: vm, index: index) {
+        vmEdit = WordsUnitDetailViewModel(vm: vm, index: index) {
             self.tableView.reloadData()
         }
     }

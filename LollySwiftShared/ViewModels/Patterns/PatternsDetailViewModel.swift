@@ -1,5 +1,5 @@
 //
-//  PatternsEditViewModel.swift
+//  PatternsDetailViewModel.swift
 //  LollySwiftMac
 //
 //  Created by 趙偉 on 2020/07/21.
@@ -9,7 +9,7 @@
 import Foundation
 import RxSwift
 
-class PatternsEditViewModel: NSObject {
+class PatternsDetailViewModel: NSObject {
     var vm: PatternsViewModel!
     var item: MPattern!
     var itemEdit: MPatternEdit!

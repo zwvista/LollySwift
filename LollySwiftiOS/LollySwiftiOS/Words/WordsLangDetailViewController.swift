@@ -12,7 +12,7 @@ class WordsLangDetailViewController: UITableViewController {
     
     var vm: WordsLangViewModel!
     var item: MLangWord!
-    var vmEdit: WordsLangEditViewModel!
+    var vmEdit: WordsLangDetailViewModel!
     var itemEdit: MLangWordEdit { vmEdit.itemEdit }
 
     @IBOutlet weak var tfID: UITextField!
@@ -25,7 +25,7 @@ class WordsLangDetailViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        vmEdit = WordsLangEditViewModel(vm: vm, item: item) {
+        vmEdit = WordsLangDetailViewModel(vm: vm, item: item) {
             self.tableView.reloadData()
         }
         _ = itemEdit.ID ~> tfID.rx.text.orEmpty

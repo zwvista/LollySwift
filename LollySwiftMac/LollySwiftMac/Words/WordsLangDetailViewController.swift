@@ -15,7 +15,7 @@ class WordsLangDetailViewController: NSViewController, NSTableViewDataSource, NS
     var vm: WordsLangViewModel!
     var complete: (() -> Void)?
     @objc var item: MLangWord!
-    var vmEdit: WordsLangEditViewModel!
+    var vmEdit: WordsLangDetailViewModel!
     var itemEdit: MLangWordEdit { vmEdit.itemEdit }
     var arrWords: [MUnitWord] { vmEdit.vmSingle?.arrWords ?? [MUnitWord]() }
 
@@ -30,7 +30,7 @@ class WordsLangDetailViewController: NSViewController, NSTableViewDataSource, NS
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        vmEdit = WordsLangEditViewModel(vm: vm, item: item) {
+        vmEdit = WordsLangDetailViewModel(vm: vm, item: item) {
             self.tableView.reloadData()
         }
         _ = itemEdit.ID ~> tfID.rx.text.orEmpty

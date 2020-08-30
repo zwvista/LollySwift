@@ -1,5 +1,5 @@
 //
-//  TransformEditViewModel.swift
+//  TransformDetailViewModel.swift
 //  LollySwiftMac
 //
 //  Created by 趙偉 on 2020/07/29.
@@ -9,7 +9,7 @@
 import Foundation
 import RxSwift
 
-class TransformEditViewModel: NSObject {
+class TransformDetailViewModel: NSObject {
     
     @objc var item: MDictionary!
     @objc dynamic var TEMPLATE = ""

@@ -14,7 +14,7 @@ import NSObject_Rx
 class PatternsDetailViewController: NSViewController {
     
     var vm: PatternsViewModel!
-    var vmEdit: PatternsEditViewModel!
+    var vmEdit: PatternsDetailViewModel!
     var itemEdit: MPatternEdit { vmEdit.itemEdit }
     var complete: (() -> Void)?
     var item: MPattern!
@@ -27,7 +27,7 @@ class PatternsDetailViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        vmEdit = PatternsEditViewModel(vm: vm, item: item)
+        vmEdit = PatternsDetailViewModel(vm: vm, item: item)
         _ = itemEdit.ID ~> tfID.rx.text.orEmpty
         _ = itemEdit.PATTERN <~> tfPattern.rx.text.orEmpty
         _ = itemEdit.NOTE <~> tfNote.rx.text

@@ -1,5 +1,5 @@
 //
-//  WordsLangEditViewModel.swift
+//  WordsLangDetailViewModel.swift
 //  LollySwiftMac
 //
 //  Created by 趙偉 on 2020/07/21.
@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 import RxRelay
 
-class WordsLangEditViewModel: NSObject {
+class WordsLangDetailViewModel: NSObject {
     var vm: WordsLangViewModel!
     var item: MLangWord!
     var itemEdit: MLangWordEdit!

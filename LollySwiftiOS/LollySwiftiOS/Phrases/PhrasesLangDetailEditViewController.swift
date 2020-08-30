@@ -12,7 +12,7 @@ class PhrasesLangDetailViewController: UITableViewController {
     
     var vm: PhrasesLangViewModel!
     var item: MLangPhrase!
-    var vmEdit: PhrasesLangEditViewModel!
+    var vmEdit: PhrasesLangDetailViewModel!
     var itemEdit: MLangPhraseEdit { vmEdit.itemEdit }
 
     @IBOutlet weak var tfID: UITextField!

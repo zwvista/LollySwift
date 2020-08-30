@@ -1,5 +1,5 @@
 //
-//  PhrasesLangEditViewModel.swift
+//  PhrasesUnitDetailViewModel.swift
 //  LollySwiftMac
 //
 //  Created by 趙偉 on 2020/07/21.
@@ -10,18 +10,20 @@ import Foundation
 import RxSwift
 import RxRelay
 
-class PhrasesLangEditViewModel: NSObject {
-    var vm: PhrasesLangViewModel!
-    var item: MLangPhrase!
-    var itemEdit: MLangPhraseEdit!
+class PhrasesUnitDetailViewModel: NSObject {
+    var vm: PhrasesUnitViewModel!
+    var item: MUnitPhrase!
+    var itemEdit: MUnitPhraseEdit!
     var vmSingle: SinglePhraseViewModel!
+    var index = -1
     var isAdd: Bool!
     var isOKEnabled = BehaviorRelay(value: false)
 
-    init(vm: PhrasesLangViewModel, item: MLangPhrase, complete: @escaping () -> ()) {
+    init(vm: PhrasesUnitViewModel, index: Int, complete: @escaping () -> ()) {
         self.vm = vm
-        self.item = item
-        itemEdit = MLangPhraseEdit(x: item)
+        self.index = index
+        item = index == -1 ? vm.newUnitPhrase() : vm.arrPhrases[index]
+        itemEdit = MUnitPhraseEdit(x: item)
         isAdd = item.ID == 0
         _ = itemEdit.PHRASE.map { !$0.isEmpty } ~> isOKEnabled
         guard !isAdd else {return}
@@ -31,11 +33,11 @@ class PhrasesLangEditViewModel: NSObject {
     func onOK() -> Observable<()> {
         itemEdit.save(to: item)
         item.PHRASE = vm.vmSettings.autoCorrectInput(text: item.PHRASE)
-        if isAdd {
-            vm.arrPhrases.append(item)
-            return PhrasesLangViewModel.create(item: item)
-        } else {
-            return PhrasesLangViewModel.update(item: item)
+        return isAdd ? vm.create(item: item).map {
+            self.vm.arrPhrases.append($0!)
+        } : vm.update(item: item).map {
+            var arrPhrases = self.vm.arrPhrasesFiltered ?? self.vm.arrPhrases
+            arrPhrases[self.index] = $0!
         }
     }
 }

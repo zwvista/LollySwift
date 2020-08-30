@@ -25,14 +25,14 @@ class WordsTextbookDetailViewController: UITableViewController, UITextFieldDeleg
     @IBOutlet weak var tfAccuracy: UITextField!
     @IBOutlet weak var btnDone: UIBarButtonItem!
 
-    var vmEdit: WordsUnitEditViewModel!
+    var vmEdit: WordsUnitDetailViewModel!
     var item: MUnitWord { vmEdit.item }
     var itemEdit: MUnitWordEdit { vmEdit.itemEdit }
     let ddUnit = DropDown()
     let ddPart = DropDown()
     
     func startEdit(vm: WordsUnitViewModel, index: Int = -1) {
-        vmEdit = WordsUnitEditViewModel(vm: vm, index: index) {
+        vmEdit = WordsUnitDetailViewModel(vm: vm, index: index) {
             self.tableView.reloadData()
         }
     }

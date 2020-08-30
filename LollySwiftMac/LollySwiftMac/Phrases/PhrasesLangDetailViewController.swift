@@ -15,7 +15,7 @@ class PhrasesLangDetailViewController: NSViewController, NSTableViewDataSource, 
     var vm: PhrasesLangViewModel!
     var complete: (() -> Void)?
     var item: MLangPhrase!
-    var vmEdit: PhrasesLangEditViewModel!
+    var vmEdit: PhrasesLangDetailViewModel!
     var itemEdit: MLangPhraseEdit { vmEdit.itemEdit }
     var arrPhrases: [MUnitPhrase] { vmEdit.vmSingle?.arrPhrases ?? [MUnitPhrase]() }
 
@@ -27,7 +27,7 @@ class PhrasesLangDetailViewController: NSViewController, NSTableViewDataSource, 
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        vmEdit = PhrasesLangEditViewModel(vm: vm, item: item) {
+        vmEdit = PhrasesLangDetailViewModel(vm: vm, item: item) {
             self.tableView.reloadData()
         }
         _ = itemEdit.ID ~> tfID.rx.text.orEmpty

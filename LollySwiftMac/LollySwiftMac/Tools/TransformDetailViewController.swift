@@ -12,7 +12,7 @@ import WebKit
 class TransformDetailViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 
     var complete: (() -> Void)?
-    @objc var vm = TransformEditViewModel()
+    @objc var vm = TransformDetailViewModel()
 
     @IBOutlet weak var tvTranformItems: NSTableView!
     @IBOutlet weak var tfSourceWord: NSTextField!

@@ -13,7 +13,7 @@ import NSObject_Rx
 class PhrasesUnitDetailViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 
     var complete: (() -> Void)?
-    var vmEdit: PhrasesUnitEditViewModel!
+    var vmEdit: PhrasesUnitDetailViewModel!
     var item: MUnitPhrase { vmEdit.item }
     var itemEdit: MUnitPhraseEdit { vmEdit.itemEdit }
     var arrPhrases: [MUnitPhrase] { vmEdit.vmSingle?.arrPhrases ?? [MUnitPhrase]() }
@@ -31,7 +31,7 @@ class PhrasesUnitDetailViewController: NSViewController, NSTableViewDataSource, 
     @IBOutlet weak var btnOK: NSButton!
     
     func startEdit(vm: PhrasesUnitViewModel, index: Int = -1) {
-        vmEdit = PhrasesUnitEditViewModel(vm: vm, index: index) {
+        vmEdit = PhrasesUnitDetailViewModel(vm: vm, index: index) {
             self.tableView.reloadData()
         }
     }

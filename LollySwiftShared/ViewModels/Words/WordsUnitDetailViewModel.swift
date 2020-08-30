@@ -1,5 +1,5 @@
 //
-//  WordsUnitEditViewModel.swift
+//  WordsUnitDetailViewModel.swift
 //  LollySwiftMac
 //
 //  Created by 趙偉 on 2020/07/21.
@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 import RxRelay
 
-class WordsUnitEditViewModel: NSObject {
+class WordsUnitDetailViewModel: NSObject {
     var vm: WordsUnitViewModel!
     var item: MUnitWord!
     var itemEdit: MUnitWordEdit!
