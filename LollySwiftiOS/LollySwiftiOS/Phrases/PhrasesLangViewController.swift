@@ -76,7 +76,7 @@ class PhrasesLangViewController: PhrasesBaseViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
-        if let controller = (segue.destination as? UINavigationController)?.topViewController as? PhrasesLangEditViewController {
+        if let controller = (segue.destination as? UINavigationController)?.topViewController as? PhrasesLangDetailViewController {
             controller.vm = vm
             controller.item = sender as? MLangPhrase ?? MLangPhrase()
         }
@@ -84,7 +84,7 @@ class PhrasesLangViewController: PhrasesBaseViewController {
     
     @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
         guard segue.identifier == "Done" else {return}
-        let controller = segue.source as! PhrasesLangEditViewController
+        let controller = segue.source as! PhrasesLangDetailViewController
         controller.vmEdit.onOK().subscribe {
             self.tableView.reloadData()
         } ~ rx.disposeBag

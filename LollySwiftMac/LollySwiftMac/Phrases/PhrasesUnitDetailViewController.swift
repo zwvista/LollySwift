@@ -1,5 +1,5 @@
 //
-//  PhrasesLangEditViewController.swift
+//  PhrasesUnitDetailViewController.swift
 //  LollySwiftMac
 //
 //  Created by 趙偉 on 2018/04/07.
@@ -10,27 +10,41 @@ import Cocoa
 import RxSwift
 import NSObject_Rx
 
-class PhrasesLangEditViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
+class PhrasesUnitDetailViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 
-    var vm: PhrasesLangViewModel!
     var complete: (() -> Void)?
-    var item: MLangPhrase!
-    var vmEdit: PhrasesLangEditViewModel!
-    var itemEdit: MLangPhraseEdit { vmEdit.itemEdit }
+    var vmEdit: PhrasesUnitEditViewModel!
+    var item: MUnitPhrase { vmEdit.item }
+    var itemEdit: MUnitPhraseEdit { vmEdit.itemEdit }
     var arrPhrases: [MUnitPhrase] { vmEdit.vmSingle?.arrPhrases ?? [MUnitPhrase]() }
 
+    @IBOutlet weak var acUnits: NSArrayController!
+    @IBOutlet weak var acParts: NSArrayController!
     @IBOutlet weak var tfID: NSTextField!
+    @IBOutlet weak var pubUnit: NSPopUpButton!
+    @IBOutlet weak var pubPart: NSPopUpButton!
+    @IBOutlet weak var tfSeqNum: NSTextField!
+    @IBOutlet weak var tfPhraseID: NSTextField!
     @IBOutlet weak var tfPhrase: NSTextField!
     @IBOutlet weak var tfTranslation: NSTextField!
     @IBOutlet weak var tableView: NSTableView!
     @IBOutlet weak var btnOK: NSButton!
+    
+    func startEdit(vm: PhrasesUnitViewModel, index: Int = -1) {
+        vmEdit = PhrasesUnitEditViewModel(vm: vm, index: index) {
+            self.tableView.reloadData()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        vmEdit = PhrasesLangEditViewModel(vm: vm, item: item) {
-            self.tableView.reloadData()
-        }
+        acUnits.content = item.textbook.arrUnits
+        acParts.content = item.textbook.arrParts
         _ = itemEdit.ID ~> tfID.rx.text.orEmpty
+        _ = itemEdit.indexUNIT <~> pubUnit.rx.selectedItemIndex
+        _ = itemEdit.indexPART <~> pubPart.rx.selectedItemIndex
+        _ = itemEdit.SEQNUM <~> tfSeqNum.rx.text.orEmpty
+        _ = itemEdit.PHRASEID ~> tfPhraseID.rx.text.orEmpty
         _ = itemEdit.PHRASE <~> tfPhrase.rx.text.orEmpty
         _ = itemEdit.TRANSLATION <~> tfTranslation.rx.text
         _ = vmEdit.isOKEnabled ~> btnOK.rx.isEnabled

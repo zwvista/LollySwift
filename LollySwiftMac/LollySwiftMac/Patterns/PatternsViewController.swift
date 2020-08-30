@@ -220,7 +220,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     
     // https://stackoverflow.com/questions/24219441/how-to-use-nstoolbar-in-xcode-6-and-storyboard
     @IBAction func addPattern(_ sender: AnyObject) {
-        let editVC = self.storyboard!.instantiateController(withIdentifier: "PatternsEditViewController") as! PatternsEditViewController
+        let editVC = self.storyboard!.instantiateController(withIdentifier: "PatternsDetailViewController") as! PatternsDetailViewController
         editVC.vm = vm
         editVC.item = vm.newPattern()
         editVC.complete = { self.tvPatterns.reloadData(); self.addPattern(self) }
@@ -228,7 +228,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     }
 
     @IBAction func editPattern(_ sender: AnyObject) {
-        let editVC = self.storyboard!.instantiateController(withIdentifier: "PatternsEditViewController") as! PatternsEditViewController
+        let editVC = self.storyboard!.instantiateController(withIdentifier: "PatternsDetailViewController") as! PatternsDetailViewController
         editVC.vm = vm
         let i = tvPatterns.selectedRow
         editVC.item = arrPatterns[i]

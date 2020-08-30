@@ -1,5 +1,5 @@
 //
-//  PhrasesUnitEditViewController.swift
+//  PhrasesTextbookDetailViewController.swift
 //  LollySwiftMac
 //
 //  Created by 趙偉 on 2018/04/07.
@@ -10,17 +10,18 @@ import Cocoa
 import RxSwift
 import NSObject_Rx
 
-class PhrasesUnitEditViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
+class PhrasesTextbookDetailViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 
     var complete: (() -> Void)?
     var vmEdit: PhrasesUnitEditViewModel!
     var item: MUnitPhrase { vmEdit.item }
     var itemEdit: MUnitPhraseEdit { vmEdit.itemEdit }
-    var arrPhrases: [MUnitPhrase] { vmEdit.vmSingle?.arrPhrases ?? [MUnitPhrase]() }
+    var arrPhrases: [MUnitPhrase] { vmEdit.vmSingle.arrPhrases }
 
     @IBOutlet weak var acUnits: NSArrayController!
     @IBOutlet weak var acParts: NSArrayController!
     @IBOutlet weak var tfID: NSTextField!
+    @IBOutlet weak var tfTextbookName: NSTextField!
     @IBOutlet weak var pubUnit: NSPopUpButton!
     @IBOutlet weak var pubPart: NSPopUpButton!
     @IBOutlet weak var tfSeqNum: NSTextField!
@@ -41,6 +42,7 @@ class PhrasesUnitEditViewController: NSViewController, NSTableViewDataSource, NS
         acUnits.content = item.textbook.arrUnits
         acParts.content = item.textbook.arrParts
         _ = itemEdit.ID ~> tfID.rx.text.orEmpty
+        _ = itemEdit.TEXTBOOKNAME ~> tfTextbookName.rx.text.orEmpty
         _ = itemEdit.indexUNIT <~> pubUnit.rx.selectedItemIndex
         _ = itemEdit.indexPART <~> pubPart.rx.selectedItemIndex
         _ = itemEdit.SEQNUM <~> tfSeqNum.rx.text.orEmpty
@@ -60,7 +62,7 @@ class PhrasesUnitEditViewController: NSViewController, NSTableViewDataSource, NS
         super.viewDidAppear()
         // https://stackoverflow.com/questions/24235815/cocoa-how-to-set-window-title-from-within-view-controller-in-swift
         (vmEdit.isAdd ? tfPhrase : tfTranslation).becomeFirstResponder()
-        view.window?.title = vmEdit.isAdd ? "New Phrase" : item.PHRASE
+        view.window?.title = item.PHRASE
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {

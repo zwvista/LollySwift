@@ -1,5 +1,5 @@
 //
-//  PhrasesUnitEditViewController.swift
+//  WordsUnitDetailViewController.swift
 //  LollySwiftiOS
 //
 //  Created by 趙偉 on 2016/06/23.
@@ -9,34 +9,36 @@
 import UIKit
 import DropDown
 import RxSwift
-import NSObject_Rx
 
-class PhrasesUnitEditViewController: UITableViewController, UITextFieldDelegate {
- 
+class WordsUnitDetailViewController: UITableViewController, UITextFieldDelegate {
+
     @IBOutlet weak var tfID: UITextField!
     @IBOutlet weak var tfUnit: UITextField!
     @IBOutlet weak var tfPart: UITextField!
     @IBOutlet weak var tfSeqNum: UITextField!
-    @IBOutlet weak var tfPhraseID: UITextField!
-    @IBOutlet weak var tfPhrase: UITextField!
-    @IBOutlet weak var tfTranslation: UITextField!
+    @IBOutlet weak var tfWordID: UITextField!
+    @IBOutlet weak var tfWord: UITextField!
+    @IBOutlet weak var tfNote: UITextField!
+    @IBOutlet weak var tfFamiID: UITextField!
+    @IBOutlet weak var tfLevel: UITextField!
+    @IBOutlet weak var tfAccuracy: UITextField!
     @IBOutlet weak var btnDone: UIBarButtonItem!
-
-    var vmEdit: PhrasesUnitEditViewModel!
-    var item: MUnitPhrase { vmEdit.item }
-    var itemEdit: MUnitPhraseEdit { vmEdit.itemEdit }
+    
+    var vmEdit: WordsUnitEditViewModel!
+    var item: MUnitWord { vmEdit.item }
+    var itemEdit: MUnitWordEdit { vmEdit.itemEdit }
     let ddUnit = DropDown()
     let ddPart = DropDown()
     
-    func startEdit(vm: PhrasesUnitViewModel, index: Int = -1) {
-        vmEdit = PhrasesUnitEditViewModel(vm: vm, index: index) {
+    func startEdit(vm: WordsUnitViewModel, index: Int = -1) {
+        vmEdit = WordsUnitEditViewModel(vm: vm, index: index) {
             self.tableView.reloadData()
         }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         ddUnit.anchorView = tfUnit
         ddUnit.dataSource = vmSettings.arrUnits.map { $0.label }
         ddUnit.selectRow(itemEdit.indexUNIT.value)
@@ -52,23 +54,26 @@ class PhrasesUnitEditViewController: UITableViewController, UITextFieldDelegate 
             self.itemEdit.indexPART.accept(index)
             self.itemEdit.PARTSTR.accept(item)
         }
-        
+
         _ = itemEdit.ID ~> tfID.rx.text.orEmpty
         _ = itemEdit.UNITSTR <~> tfUnit.rx.textInput
         _ = itemEdit.PARTSTR <~> tfPart.rx.textInput
         _ = itemEdit.SEQNUM <~> tfSeqNum.rx.textInput
-        _ = itemEdit.PHRASEID ~> tfPhraseID.rx.text.orEmpty
-        _ = itemEdit.PHRASE <~> tfPhrase.rx.textInput
-        _ = itemEdit.TRANSLATION <~> tfTranslation.rx.text
+        _ = itemEdit.WORDID ~> tfWordID.rx.text
+        _ = itemEdit.WORD <~> tfWord.rx.textInput
+        _ = itemEdit.NOTE <~> tfNote.rx.text
+        _ = itemEdit.FAMIID ~> tfFamiID.rx.text
+        _ = itemEdit.LEVEL <~> tfLevel.rx.textInput
+        _ = itemEdit.ACCURACY ~> tfAccuracy.rx.text
         _ = vmEdit.isOKEnabled ~> btnDone.rx.isEnabled
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         // https://stackoverflow.com/questions/7525437/how-to-set-focus-to-a-textfield-in-iphone
-        (item.PHRASE.isEmpty ? tfPhrase : tfTranslation)?.becomeFirstResponder()
+        (vmEdit.isAdd ? tfWord : tfNote).becomeFirstResponder()
     }
-
+    
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if textField === tfUnit {
             self.view.endEditing(true)

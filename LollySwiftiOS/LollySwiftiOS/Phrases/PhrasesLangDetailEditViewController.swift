@@ -1,5 +1,5 @@
 //
-//  PhrasesLangEditViewController.swift
+//  PhrasesLangDetailViewController.swift
 //  LollySwiftiOS
 //
 //  Created by 趙偉 on 2016/06/23.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PhrasesLangEditViewController: UITableViewController {
+class PhrasesLangDetailViewController: UITableViewController {
     
     var vm: PhrasesLangViewModel!
     var item: MLangPhrase!

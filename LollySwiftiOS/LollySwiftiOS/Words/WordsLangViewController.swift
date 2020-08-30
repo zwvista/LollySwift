@@ -84,7 +84,7 @@ class WordsLangViewController: WordsBaseViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
-        if let controller = (segue.destination as? UINavigationController)?.topViewController as? WordsLangEditViewController {
+        if let controller = (segue.destination as? UINavigationController)?.topViewController as? WordsLangDetailViewController {
             controller.vm = vm
             controller.item = sender as? MLangWord ?? MLangWord()
         } else if let controller = segue.destination as? WordsDictViewController {
@@ -95,7 +95,7 @@ class WordsLangViewController: WordsBaseViewController {
     
     @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
         guard segue.identifier == "Done" else {return}
-        let controller = segue.source as! WordsLangEditViewController
+        let controller = segue.source as! WordsLangDetailViewController
         controller.vmEdit.onOK().subscribe {
             self.tableView.reloadData()
         } ~ rx.disposeBag

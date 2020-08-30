@@ -84,7 +84,7 @@ class WordsTextbookViewController: WordsBaseViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
-        if let controller = (segue.destination as? UINavigationController)?.topViewController as? WordsTextbookEditViewController {
+        if let controller = (segue.destination as? UINavigationController)?.topViewController as? WordsTextbookDetailViewController {
             let index = arrWords.firstIndex(of: sender as! MUnitWord)!
             controller.startEdit(vm: vm, index: index)
         } else if let controller = segue.destination as? WordsDictViewController {
@@ -95,7 +95,7 @@ class WordsTextbookViewController: WordsBaseViewController {
 
     @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
         guard segue.identifier == "Done" else {return}
-        let controller = segue.source as! WordsTextbookEditViewController
+        let controller = segue.source as! WordsTextbookDetailViewController
         controller.vmEdit.onOK().subscribe {
             self.tableView.reloadData()
         } ~ rx.disposeBag

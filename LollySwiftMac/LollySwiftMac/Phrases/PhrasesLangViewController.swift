@@ -49,7 +49,7 @@ class PhrasesLangViewController: PhrasesBaseViewController {
 
     // https://stackoverflow.com/questions/24219441/how-to-use-nstoolbar-in-xcode-6-and-storyboard
     @IBAction func addPhrase(_ sender: AnyObject) {
-        let editVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesLangEditViewController") as! PhrasesLangEditViewController
+        let editVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesLangDetailViewController") as! PhrasesLangDetailViewController
         editVC.vm = vm
         editVC.item = vm.newLangPhrase()
         editVC.complete = { self.tableView.reloadData(); self.addPhrase(self) }
@@ -69,7 +69,7 @@ class PhrasesLangViewController: PhrasesBaseViewController {
     }
 
     @IBAction func editPhrase(_ sender: AnyObject) {
-        let editVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesLangEditViewController") as! PhrasesLangEditViewController
+        let editVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesLangDetailViewController") as! PhrasesLangDetailViewController
         editVC.vm = vm
         let i = tableView.selectedRow
         editVC.item = arrPhrases[i]

@@ -1,5 +1,5 @@
 //
-//  TransformEditViewController.swift
+//  TransformDetailViewController.swift
 //  LollySwiftMac
 //
 //  Created by 趙偉 on 2020/07/28.
@@ -9,7 +9,7 @@
 import Cocoa
 import WebKit
 
-class TransformEditViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
+class TransformDetailViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 
     var complete: (() -> Void)?
     @objc var vm = TransformEditViewModel()

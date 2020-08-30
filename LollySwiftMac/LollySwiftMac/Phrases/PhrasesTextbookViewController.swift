@@ -63,7 +63,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
     }
 
     @IBAction func editPhrase(_ sender: AnyObject) {
-        let editVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesTextbookEditViewController") as! PhrasesTextbookEditViewController
+        let editVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesTextbookDetailViewController") as! PhrasesTextbookDetailViewController
         let i = tableView.selectedRow
         editVC.startEdit(vm: vm, index: i)
         editVC.complete = {

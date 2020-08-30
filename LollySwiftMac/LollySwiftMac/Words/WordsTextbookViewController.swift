@@ -79,7 +79,7 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
     }
 
     @IBAction func editWord(_ sender: AnyObject) {
-        let editVC = self.storyboard!.instantiateController(withIdentifier: "WordsTextbookEditViewController") as! WordsTextbookEditViewController
+        let editVC = self.storyboard!.instantiateController(withIdentifier: "WordsTextbookDetailViewController") as! WordsTextbookDetailViewController
         let i = tvWords.selectedRow
         editVC.startEdit(vm: vm, index: i)
         editVC.complete = {

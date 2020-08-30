@@ -1,5 +1,5 @@
 //
-//  WordsLangEditViewController.swift
+//  WordsLangDetailViewController.swift
 //  LollySwiftMac
 //
 //  Created by 趙偉 on 2018/04/07.
@@ -10,7 +10,7 @@ import Cocoa
 import RxSwift
 import NSObject_Rx
 
-class WordsLangEditViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
+class WordsLangDetailViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 
     var vm: WordsLangViewModel!
     var complete: (() -> Void)?

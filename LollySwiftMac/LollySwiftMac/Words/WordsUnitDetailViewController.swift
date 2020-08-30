@@ -1,5 +1,5 @@
 //
-//  WordsUnitEditViewController.swift
+//  WordsUnitDetailViewController.swift
 //  LollySwiftMac
 //
 //  Created by 趙偉 on 2018/04/07.
@@ -10,7 +10,7 @@ import Cocoa
 import RxSwift
 import NSObject_Rx
 
-class WordsUnitEditViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
+class WordsUnitDetailViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 
     var complete: (() -> Void)?
     var vmEdit: WordsUnitEditViewModel!
