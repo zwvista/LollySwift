@@ -43,11 +43,6 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
     func numberOfRows(in tableView: NSTableView) -> Int {
         arrWords.count
     }
-    
-    override func levelChanged(row: Int) -> Observable<Int> {
-        let item = arrWords[row]
-        return MWordFami.update(wordid: item.ID, level: item.LEVEL).map { 1 }
-    }
 
     override func endEditing(row: Int) {
         let item = arrWords[row]
@@ -124,7 +119,7 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
     }
 
     @IBAction func filterWord(_ sender: AnyObject) {
-        vm.applyFilters(textFilter: textFilter, scope: scTextFilter.selectedSegment == 0 ? "Word" : "Note", levelge0only: levelge0only)
+        vm.applyFilters(textFilter: textFilter, scope: scTextFilter.selectedSegment == 0 ? "Word" : "Note")
         self.tvWords.reloadData()
     }
 

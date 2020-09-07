@@ -103,7 +103,7 @@ class WordsUnitViewController: WordsBaseViewController {
     }
     
     override func applyFilters() {
-        vm.applyFilters(textFilter: searchBar.text!, scope: searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex], levelge0only: false, textbookFilter: 0)
+        vm.applyFilters(textFilter: searchBar.text!, scope: searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex], textbookFilter: 0)
         tableView.reloadData()
     }
     

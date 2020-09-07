@@ -15,7 +15,6 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     @IBOutlet weak var tfNewWord: NSTextField!
     @IBOutlet weak var scTextFilter: NSSegmentedControl!
     @IBOutlet weak var sfFilter: NSSearchField!
-    @IBOutlet weak var chkLevelGE0Only: NSButton!
     @IBOutlet weak var tvWords: NSTableView!
     @IBOutlet weak var tfStatusText: NSTextField!
     @IBOutlet weak var tvPhrases: NSTableView!
@@ -26,7 +25,6 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     var selectedDictReferenceIndex = 0
     @objc var newWord = ""
     @objc var textFilter = ""
-    @objc var levelge0only = false
     var selectedWord = ""
     var selectedWordID = 0
     let synth = NSSpeechSynthesizer()
@@ -83,27 +81,12 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
         nil
     }
     
-    // https://stackoverflow.com/questions/10910779/coloring-rows-in-view-based-nstableview
-    func tableView(_ tableView: NSTableView, didAdd rowView: NSTableRowView, forRow row: Int) {
-        guard tableView === tvWords else {return}
-        let level = itemForRow(row: row)!.LEVEL
-        if level != 0, let arr = vmSettings.USLEVELCOLORS![level] {
-            rowView.backgroundColor = NSColor.hexColor(rgbValue: Int(arr[0], radix: 16)!)
-        }
-    }
-    
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! NSTableCellView
         let columnName = tableColumn!.identifier.rawValue
         if tableView === tvWords {
             let item = itemForRow(row: row)!
             cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
-            let level = item.LEVEL
-            if level != 0, let arr = vmSettings.USLEVELCOLORS![level] {
-                cell.textField?.textColor = NSColor.hexColor(rgbValue: Int(arr[1], radix: 16)!)
-            } else {
-                cell.textField?.textColor = NSColor.windowFrameTextColor
-            }
         } else {
             let item = arrPhrases[row]
             cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
@@ -222,30 +205,6 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     
     func needRegainFocus() -> Bool {
         true
-    }
-
-    func levelChanged(row: Int) -> Observable<Int> {
-        Observable.just(0)
-    }
-    
-    private func changeLevel(by delta: Int) {
-        let row = tvWords.selectedRow
-        guard row != -1 else {return}
-        var item = itemForRow(row: row)!
-        let newLevel = item.LEVEL + delta
-        guard newLevel == 0 || vmSettings.USLEVELCOLORS[newLevel] != nil else {return}
-        item.LEVEL = newLevel
-        levelChanged(row: row).subscribe(onNext: {
-            if $0 != 0 { self.tvWords.reloadData() }
-        }) ~ rx.disposeBag
-    }
-
-    @IBAction func incLevel(_ sender: AnyObject) {
-        changeLevel(by: 1)
-    }
-    
-    @IBAction func decLevel(_ sender: AnyObject) {
-        changeLevel(by: -1)
     }
 
     func settingsChanged() {

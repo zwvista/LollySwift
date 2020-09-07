@@ -19,7 +19,6 @@ class WordsLangDetailViewController: UITableViewController {
     @IBOutlet weak var tfWord: UITextField!
     @IBOutlet weak var tfNote: UITextField!
     @IBOutlet weak var tfFamiID: UITextField!
-    @IBOutlet weak var tfLevel: UITextField!
     @IBOutlet weak var tfAccuracy: UITextField!
     @IBOutlet weak var btnDone: UIBarButtonItem!
 
@@ -32,7 +31,6 @@ class WordsLangDetailViewController: UITableViewController {
         _ = itemEdit.WORD <~> tfWord.rx.text.orEmpty
         _ = itemEdit.NOTE <~> tfNote.rx.text
         _ = itemEdit.FAMIID ~> tfFamiID.rx.text.orEmpty
-        _ = itemEdit.LEVEL <~> tfLevel.rx.text.orEmpty
         _ = itemEdit.ACCURACY ~> tfAccuracy.rx.text.orEmpty
         _ = vmEdit.isOKEnabled ~> btnDone.rx.isEnabled
     }

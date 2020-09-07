@@ -20,7 +20,6 @@ class WordsUnitDetailViewController: UITableViewController, UITextFieldDelegate 
     @IBOutlet weak var tfWord: UITextField!
     @IBOutlet weak var tfNote: UITextField!
     @IBOutlet weak var tfFamiID: UITextField!
-    @IBOutlet weak var tfLevel: UITextField!
     @IBOutlet weak var tfAccuracy: UITextField!
     @IBOutlet weak var btnDone: UIBarButtonItem!
     
@@ -63,7 +62,6 @@ class WordsUnitDetailViewController: UITableViewController, UITextFieldDelegate 
         _ = itemEdit.WORD <~> tfWord.rx.textInput
         _ = itemEdit.NOTE <~> tfNote.rx.text
         _ = itemEdit.FAMIID ~> tfFamiID.rx.text
-        _ = itemEdit.LEVEL <~> tfLevel.rx.textInput
         _ = itemEdit.ACCURACY ~> tfAccuracy.rx.text
         _ = vmEdit.isOKEnabled ~> btnDone.rx.isEnabled
     }

@@ -19,8 +19,6 @@ class WordsUnitBatchViewController: UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var tfPart: UITextField!
     @IBOutlet weak var swSeqNum: UISwitch!
     @IBOutlet weak var tfSeqNum: UITextField!
-    @IBOutlet weak var swLevel: UISwitch!
-    @IBOutlet weak var tfLevel: UITextField!
     @IBOutlet weak var tfAccuracy: UITextField!
 
     var vm: WordsUnitViewModel!
@@ -45,8 +43,7 @@ class WordsUnitBatchViewController: UITableViewController, UITextFieldDelegate {
             }
             return false
         } else {
-            return textField === tfSeqNum ? swSeqNum.isOn :
-                textField === tfLevel ? swLevel.isOn : true
+            return textField === tfSeqNum ? swSeqNum.isOn : true
         }
     }
     
@@ -55,8 +52,6 @@ class WordsUnitBatchViewController: UITableViewController, UITextFieldDelegate {
         let unit = vmSettings.arrUnits[ddUnit.indexForSelectedRow!].value
         let part = vmSettings.arrParts[ddPart.indexForSelectedRow!].value
         let seqnum = tfSeqNum.text?.toInt() ?? 0
-        let level = tfLevel.text?.toInt() ?? 0
-        let level0Only = true
         for i in 0..<vm.arrWords.count {
             let cell = tableView.cellForRow(at: IndexPath(row: i, section: 1))!
             guard cell.accessoryType == .checkmark else {continue}
@@ -66,9 +61,6 @@ class WordsUnitBatchViewController: UITableViewController, UITextFieldDelegate {
                 if swPart.isOn { item.PART = part }
                 if swSeqNum.isOn { item.SEQNUM += seqnum }
                 o = o.concat(vm.update(item: item).map {_ in })
-            }
-            if swLevel.isOn && (!level0Only || item.LEVEL == 0) {
-                o = o.concat(MWordFami.update(wordid: item.WORDID, level: level))
             }
         }
         o.subscribe() ~ rx.disposeBag
@@ -114,9 +106,6 @@ class WordsUnitBatchViewController: UITableViewController, UITextFieldDelegate {
             case 2:
                 tfSeqNum = cell.tf
                 swSeqNum = cell.sw
-            case 3:
-                tfLevel = cell.tf
-                swLevel = cell.sw
             default: break
             }
         } else {

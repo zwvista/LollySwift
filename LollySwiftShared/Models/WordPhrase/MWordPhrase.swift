@@ -15,7 +15,6 @@ protocol MWordProtocol {
     var WORD: String { get set }
     var NOTE: String? { get set }
     var FAMIID: Int { get set }
-    var LEVEL: Int { get set }
 }
 
 protocol MPhraseProtocol {

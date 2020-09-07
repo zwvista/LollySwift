@@ -18,7 +18,6 @@ class MLangWord: NSObject, Codable, MWordProtocol {
     dynamic var WORD = ""
     dynamic var NOTE: String?
     dynamic var FAMIID = 0
-    dynamic var LEVEL = 0
     dynamic var CORRECT = 0
     dynamic var TOTAL = 0
 
@@ -74,7 +73,6 @@ class MLangWordEdit {
     var WORD: BehaviorRelay<String>
     var NOTE: BehaviorRelay<String?>
     var FAMIID: BehaviorRelay<String>
-    var LEVEL: BehaviorRelay<String>
     var ACCURACY: BehaviorRelay<String>
 
     init(x: MLangWord) {
@@ -82,13 +80,11 @@ class MLangWordEdit {
         WORD = BehaviorRelay(value: x.WORD)
         NOTE = BehaviorRelay(value: x.NOTE)
         FAMIID = BehaviorRelay(value: x.FAMIID.toString)
-        LEVEL = BehaviorRelay(value: x.LEVEL.toString)
         ACCURACY = BehaviorRelay(value: x.ACCURACY)
     }
     
     func save(to x: MLangWord) {
         x.WORD = WORD.value
         x.NOTE = NOTE.value
-        x.LEVEL = LEVEL.value.toInt()!
     }
 }

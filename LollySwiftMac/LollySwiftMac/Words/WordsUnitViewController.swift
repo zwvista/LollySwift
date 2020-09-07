@@ -25,7 +25,6 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        vmReview.options.levelge0only = true
         tvWords.registerForDraggedTypes([tableRowDragType])
     }
     
@@ -63,11 +62,6 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     
     override func itemForRow(row: Int) -> (MWordProtocol & NSObject)? {
         arrWords[row]
-    }
-
-    override func levelChanged(row: Int) -> Observable<Int> {
-        let item = arrWords[row]
-        return MWordFami.update(wordid: item.WORDID, level: item.LEVEL).map { 1 }
     }
     
     override func endEditing(row: Int) {
@@ -236,7 +230,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     }
 
     @IBAction func filterWord(_ sender: AnyObject) {
-        vm.applyFilters(textFilter: textFilter, scope: scTextFilter.selectedSegment == 0 ? "Word" : "Note", levelge0only: levelge0only, textbookFilter: 0)
+        vm.applyFilters(textFilter: textFilter, scope: scTextFilter.selectedSegment == 0 ? "Word" : "Note", textbookFilter: 0)
         self.tvWords.reloadData()
     }
     
@@ -270,9 +264,6 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
         optionsVC.options = vmReview.options
         optionsVC.complete = { [unowned self] in
             var arrWords = self.arrWords
-            if self.vmReview.options.levelge0only! {
-                arrWords = arrWords.filter { $0.LEVEL >= 0 }
-            }
             if self.vmReview.options.shuffled {
                 arrWords = arrWords.shuffled()
             }

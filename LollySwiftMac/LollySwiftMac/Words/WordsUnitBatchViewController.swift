@@ -21,18 +21,14 @@ class WordsUnitBatchViewController: NSViewController, NSTableViewDataSource, NST
     @IBOutlet weak var pubUnit: NSPopUpButton!
     @IBOutlet weak var pubPart: NSPopUpButton!
     @IBOutlet weak var tfSeqNum: NSTextField!
-    @IBOutlet weak var tfLevel: NSTextField!
     @IBOutlet weak var tableView: NSTableView!
     
     @objc var unitChecked = false
     @objc var partChecked = false
     @objc var seqnumChecked = false
-    @objc var levelChecked = false
     @objc var unit = 1
     @objc var part = 1
     @objc var seqnum = 0
-    @objc var level = 0
-    @objc var level0Only = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,12 +52,6 @@ class WordsUnitBatchViewController: NSViewController, NSTableViewDataSource, NST
         let columnName = tableColumn!.identifier.rawValue
         cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
         return cell
-    }
-    
-    // https://stackoverflow.com/questions/10910779/coloring-rows-in-view-based-nstableview
-    func tableView(_ tableView: NSTableView, didAdd rowView: NSTableRowView, forRow row: Int) {
-        let level = arrWords[row].LEVEL
-        rowView.backgroundColor = level > 0 ? .yellow : level < 0 ? .gray : .white
     }
     
     @IBAction func checkItems(_ sender: AnyObject) {
@@ -89,9 +79,6 @@ class WordsUnitBatchViewController: NSViewController, NSTableViewDataSource, NST
                 if partChecked { item.PART = part }
                 if seqnumChecked { item.SEQNUM += seqnum }
                 o = o.concat(vm.update(item: item).map {_ in })
-            }
-            if levelChecked && (!level0Only || item.LEVEL == 0) {
-                o = o.concat(MWordFami.update(wordid: item.WORDID, level: self.level))
             }
         }
         o.subscribe {

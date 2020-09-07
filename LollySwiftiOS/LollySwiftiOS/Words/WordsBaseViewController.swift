@@ -52,28 +52,12 @@ class WordsBaseViewController: UITableViewController, UISearchBarDelegate, UISea
         }
         cell.lblWord.text = item.WORD
         cell.lblNote.text = item.NOTE
-        let level = item.LEVEL
         if indexPath.row == 0 {
             colors.append(cell.backgroundColor!)
             colors.append(cell.lblWord.textColor)
             colors.append(cell.lblNote.textColor)
             if cell.lblUnitPartSeqNum != nil {
                 colors.append(cell.lblUnitPartSeqNum.textColor!)
-            }
-        }
-        if level != 0, let arr = vmSettings.USLEVELCOLORS![level] {
-            cell.backgroundColor = UIColor(hexString: arr[0])
-            cell.lblWord.textColor = UIColor(hexString: arr[1])
-            cell.lblNote.textColor = UIColor(hexString: arr[1])
-            if cell.lblUnitPartSeqNum != nil {
-                cell.lblUnitPartSeqNum.textColor = UIColor(hexString: arr[1])
-            }
-        } else {
-            cell.backgroundColor = colors[0]
-            cell.lblWord.textColor = colors[1]
-            cell.lblNote.textColor = colors[2]
-            if cell.lblUnitPartSeqNum != nil {
-                cell.lblUnitPartSeqNum.textColor = colors[3]
             }
         }
         return cell

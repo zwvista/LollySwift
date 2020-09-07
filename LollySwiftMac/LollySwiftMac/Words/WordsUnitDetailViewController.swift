@@ -28,7 +28,6 @@ class WordsUnitDetailViewController: NSViewController, NSTableViewDataSource, NS
     @IBOutlet weak var tfWord: NSTextField!
     @IBOutlet weak var tfNote: NSTextField!
     @IBOutlet weak var tfFamiID: NSTextField!
-    @IBOutlet weak var tfLevel: NSTextField!
     @IBOutlet weak var tfAccuracy: NSTextField!
     @IBOutlet weak var tableView: NSTableView!
     @IBOutlet weak var btnOK: NSButton!
@@ -51,7 +50,6 @@ class WordsUnitDetailViewController: NSViewController, NSTableViewDataSource, NS
         _ = itemEdit.WORD <~> tfWord.rx.text.orEmpty
         _ = itemEdit.NOTE <~> tfNote.rx.text
         _ = itemEdit.FAMIID ~> tfFamiID.rx.text.orEmpty
-        _ = itemEdit.LEVEL <~> tfLevel.rx.text.orEmpty
         _ = itemEdit.ACCURACY ~> tfAccuracy.rx.text.orEmpty
         _ = vmEdit.isOKEnabled ~> btnOK.rx.isEnabled
         btnOK.rx.tap.flatMap { [unowned self] _ in
@@ -85,12 +83,6 @@ class WordsUnitDetailViewController: NSViewController, NSTableViewDataSource, NS
         let columnName = tableColumn!.identifier.rawValue
         cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
         return cell
-    }
-    
-    // https://stackoverflow.com/questions/10910779/coloring-rows-in-view-based-nstableview
-    func tableView(_ tableView: NSTableView, didAdd rowView: NSTableRowView, forRow row: Int) {
-        let level = arrWords[row].LEVEL
-        rowView.backgroundColor = level > 0 ? .yellow : level < 0 ? .gray : .white
     }
 
     deinit {

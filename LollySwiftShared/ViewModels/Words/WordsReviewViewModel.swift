@@ -40,7 +40,6 @@ class WordsReviewViewModel: NSObject {
     init(settings: SettingsViewModel, needCopy: Bool, doTestAction: (() -> Void)? = nil) {
         self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
         self.doTestAction = doTestAction
-        options.levelge0only = true
         options.shuffled = true
     }
 
@@ -48,7 +47,6 @@ class WordsReviewViewModel: NSObject {
         subscription?.dispose()
         MUnitWord.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO).subscribe(onNext: {
             self.arrWords = $0
-            if self.options.levelge0only! { self.arrWords = self.arrWords.filter { $0.LEVEL >= 0 } }
             let count = self.arrWords.count
             let from = count * (self.options.groupSelected - 1) / self.options.groupCount
             let to = count * self.options.groupSelected / self.options.groupCount

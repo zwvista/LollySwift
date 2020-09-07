@@ -23,7 +23,6 @@ class MUnitWord: NSObject, Codable, MWordProtocol {
     dynamic var WORD = ""
     dynamic var NOTE: String?
     dynamic var FAMIID = 0
-    dynamic var LEVEL = 0
     dynamic var CORRECT = 0
     dynamic var TOTAL = 0
 
@@ -39,7 +38,6 @@ class MUnitWord: NSObject, Codable, MWordProtocol {
         case WORD
         case NOTE
         case FAMIID
-        case LEVEL
         case CORRECT
         case TOTAL
     }
@@ -130,7 +128,6 @@ class MUnitWordEdit {
     var WORD: BehaviorRelay<String>
     var NOTE: BehaviorRelay<String?>
     var FAMIID: BehaviorRelay<String>
-    var LEVEL: BehaviorRelay<String>
     var ACCURACY: BehaviorRelay<String>
 
     init(x: MUnitWord) {
@@ -145,7 +142,6 @@ class MUnitWordEdit {
         WORD = BehaviorRelay(value: x.WORD)
         NOTE = BehaviorRelay(value: x.NOTE)
         FAMIID = BehaviorRelay(value: x.FAMIID.toString)
-        LEVEL = BehaviorRelay(value: x.LEVEL.toString)
         ACCURACY = BehaviorRelay(value: x.ACCURACY)
     }
     
@@ -159,6 +155,5 @@ class MUnitWordEdit {
         x.SEQNUM = SEQNUM.value.toInt()!
         x.WORD = WORD.value
         x.NOTE = NOTE.value
-        x.LEVEL = LEVEL.value.toInt()!
     }
 }

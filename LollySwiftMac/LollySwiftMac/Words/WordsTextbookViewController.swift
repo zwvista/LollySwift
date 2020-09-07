@@ -47,11 +47,6 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
         arrWords[row]
     }
 
-    override func levelChanged(row: Int) -> Observable<Int> {
-        let item = arrWords[row]
-        return MWordFami.update(wordid: item.WORDID, level: item.LEVEL).map { 1 }
-    }
-
     override func endEditing(row: Int) {
         let item = arrWords[row]
         vm.update(item: item).subscribe {
@@ -111,7 +106,7 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
     }
 
     @IBAction func filterWord(_ sender: AnyObject) {
-        vm.applyFilters(textFilter: textFilter, scope: scTextFilter.selectedSegment == 0 ? "Word" : "Note", levelge0only: levelge0only, textbookFilter: textbookFilter)
+        vm.applyFilters(textFilter: textFilter, scope: scTextFilter.selectedSegment == 0 ? "Word" : "Note", textbookFilter: textbookFilter)
         self.tvWords.reloadData()
     }
 

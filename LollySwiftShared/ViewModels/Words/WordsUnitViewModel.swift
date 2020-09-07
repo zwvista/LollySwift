@@ -35,16 +35,13 @@ class WordsUnitViewModel: NSObject {
         }
     }
     
-    func applyFilters(textFilter: String, scope: String, levelge0only: Bool, textbookFilter: Int) {
-        if textFilter.isEmpty && !levelge0only && textbookFilter == 0 {
+    func applyFilters(textFilter: String, scope: String, textbookFilter: Int) {
+        if textFilter.isEmpty && textbookFilter == 0 {
             arrWordsFiltered = nil
         } else {
             arrWordsFiltered = arrWords
             if !textFilter.isEmpty {
                 arrWordsFiltered = arrWordsFiltered!.filter { (scope == "Word" ? $0.WORD : $0.NOTE ?? "").lowercased().contains(textFilter.lowercased()) }
-            }
-            if levelge0only {
-                arrWordsFiltered = arrWordsFiltered!.filter { $0.LEVEL >= 0 }
             }
             if textbookFilter != 0 {
                 arrWordsFiltered = arrWordsFiltered!.filter { $0.TEXTBOOKID == textbookFilter }
