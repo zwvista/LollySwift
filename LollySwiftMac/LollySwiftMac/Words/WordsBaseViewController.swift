@@ -31,13 +31,18 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     var isSpeaking = true
     weak var responder: NSView? = nil
     var arrPhrases: [MLangPhrase]! { nil }
-    
+//    var textFilter = BehaviorRelay(value: "")
+//    var scopeFilter = BehaviorRelay(value: SettingsViewModel.arrScopeWordFilters[0])
+//    var textbookFilter = BehaviorRelay(value: 0)
+
     let imageOff = NSImage(named: "NSStatusNone")
     let imageOn = NSImage(named: "NSStatusAvailable")
 
     override func viewDidLoad() {
         super.viewDidLoad()
         settingsChanged()
+//        _ = vm.textFilter <~> sfFilter.rx.text.orEmpty
+//        _ = vm.scopeFilter <~> scTextFilter.rx.selectedLabel
     }
     
     // Hold a reference to the window controller in order to prevent it from being released

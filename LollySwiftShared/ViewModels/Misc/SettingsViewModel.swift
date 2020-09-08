@@ -202,6 +202,10 @@ class SettingsViewModel: NSObject {
     
     let arrToTypes = ["Unit", "Part", "To"]
     var toType: UnitPartToType = .unit
+    
+    static let arrScopeWordFilters = ["Word", "Note"]
+    static let arrScopePhraseFilters = ["Phrase", "Translation"]
+    static let arrScopePatternFilters = ["Pattern", "Note", "Tags"]
 
     var arrAutoCorrect = [MAutoCorrect]()
     var arrDictTypes = [MCode]()
