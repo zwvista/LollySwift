@@ -20,10 +20,10 @@ class SettingsViewModel: NSObject {
     private func setUSValue(info: MUserSettingInfo, value: String) {
         arrUserSettings.first { $0.ID == info.USERSETTINGID }!.setValue(value, forKey: "VALUE\(info.VALUEID)")
     }
-    private var INFO_USLANGID = MUserSettingInfo()
-    private var USLANGID: Int {
-        get { getUSValue(info: INFO_USLANGID)!.toInt()! }
-        set { setUSValue(info: INFO_USLANGID, value: String(newValue)) }
+    private var INFO_USLANG = MUserSettingInfo()
+    private var USLANG: Int {
+        get { getUSValue(info: INFO_USLANG)!.toInt()! }
+        set { setUSValue(info: INFO_USLANG, value: String(newValue)) }
     }
     private var INFO_USROWSPERPAGEOPTIONS = MUserSettingInfo()
     var USROWSPERPAGEOPTIONS: [Int] {
@@ -45,10 +45,10 @@ class SettingsViewModel: NSObject {
         get { getUSValue(info: INFO_USREVIEWINTERVAL)!.toInt()! }
         set { setUSValue(info: INFO_USREVIEWINTERVAL, value: String(newValue)) }
     }
-    private var INFO_USTEXTBOOKID = MUserSettingInfo()
-    var USTEXTBOOKID: Int {
-        get { getUSValue(info: INFO_USTEXTBOOKID)!.toInt()! }
-        set { setUSValue(info: INFO_USTEXTBOOKID, value: String(newValue)) }
+    private var INFO_USTEXTBOOK = MUserSettingInfo()
+    var USTEXTBOOK: Int {
+        get { getUSValue(info: INFO_USTEXTBOOK)!.toInt()! }
+        set { setUSValue(info: INFO_USTEXTBOOK, value: String(newValue)) }
     }
     private var INFO_USDICTREFERENCE = MUserSettingInfo()
     var USDICTREFERENCE: String {
@@ -70,15 +70,15 @@ class SettingsViewModel: NSObject {
         get { getUSValue(info: INFO_USDICTTRANSLATION)?.toInt() ?? 0 }
         set { setUSValue(info: INFO_USDICTTRANSLATION, value: String(newValue)) }
     }
-    private var INFO_USMACVOICEID = MUserSettingInfo()
-    var USMACVOICEID: Int {
-        get { getUSValue(info: INFO_USMACVOICEID)?.toInt() ?? 0 }
-        set { setUSValue(info: INFO_USMACVOICEID, value: String(newValue)) }
+    private var INFO_USMACVOICE = MUserSettingInfo()
+    var USMACVOICE: Int {
+        get { getUSValue(info: INFO_USMACVOICE)?.toInt() ?? 0 }
+        set { setUSValue(info: INFO_USMACVOICE, value: String(newValue)) }
     }
-    private var INFO_USIOSVOICEID = MUserSettingInfo()
-    var USIOSVOICEID: Int {
-        get { getUSValue(info: INFO_USIOSVOICEID)?.toInt() ?? 0 }
-        set { setUSValue(info: INFO_USIOSVOICEID, value: String(newValue)) }
+    private var INFO_USIOSVOICE = MUserSettingInfo()
+    var USIOSVOICE: Int {
+        get { getUSValue(info: INFO_USIOSVOICE)?.toInt() ?? 0 }
+        set { setUSValue(info: INFO_USIOSVOICE, value: String(newValue)) }
     }
     private var INFO_USUNITFROM = MUserSettingInfo()
     @objc
@@ -126,7 +126,7 @@ class SettingsViewModel: NSObject {
     @objc
     var selectedMacVoice = MVoice() {
         didSet {
-            USMACVOICEID = selectedMacVoice.ID
+            USMACVOICE = selectedMacVoice.ID
         }
     }
     var macVoiceName: String { selectedMacVoice.VOICENAME }
@@ -174,7 +174,7 @@ class SettingsViewModel: NSObject {
     @objc
     var selectedTextbook: MTextbook! {
         didSet {
-            USTEXTBOOKID = selectedTextbook.ID
+            USTEXTBOOK = selectedTextbook.ID
             INFO_USUNITFROM = getUSInfo(name: MUSMapping.NAME_USUNITFROM)
             INFO_USPARTFROM = getUSInfo(name: MUSMapping.NAME_USPARTFROM)
             INFO_USUNITTO = getUSInfo(name: MUSMapping.NAME_USUNITTO)
@@ -219,20 +219,20 @@ class SettingsViewModel: NSObject {
     init(_ x: SettingsViewModel) {
         arrUSMappings = x.arrUSMappings
         arrUserSettings = x.arrUserSettings
-        INFO_USLANGID = x.INFO_USLANGID
+        INFO_USLANG = x.INFO_USLANG
         INFO_USROWSPERPAGEOPTIONS = x.INFO_USROWSPERPAGEOPTIONS
         INFO_USROWSPERPAGE = x.INFO_USROWSPERPAGE
         INFO_USLEVELCOLORS = x.INFO_USLEVELCOLORS
         USLEVELCOLORS = x.USLEVELCOLORS
         INFO_USSCANINTERVAL = x.INFO_USSCANINTERVAL
         INFO_USREVIEWINTERVAL = x.INFO_USREVIEWINTERVAL
-        INFO_USTEXTBOOKID = x.INFO_USTEXTBOOKID
+        INFO_USTEXTBOOK = x.INFO_USTEXTBOOK
         INFO_USDICTREFERENCE = x.INFO_USDICTREFERENCE
         INFO_USDICTNOTE = x.INFO_USDICTNOTE
         INFO_USDICTSREFERENCE = x.INFO_USDICTSREFERENCE
         INFO_USDICTTRANSLATION = x.INFO_USDICTTRANSLATION
-        INFO_USMACVOICEID = x.INFO_USMACVOICEID
-        INFO_USIOSVOICEID = x.INFO_USIOSVOICEID
+        INFO_USMACVOICE = x.INFO_USMACVOICE
+        INFO_USIOSVOICE = x.INFO_USIOSVOICE
         INFO_USUNITFROM = x.INFO_USUNITFROM
         INFO_USPARTFROM = x.INFO_USPARTFROM
         INFO_USUNITTO = x.INFO_USUNITTO
@@ -280,7 +280,7 @@ class SettingsViewModel: NSObject {
                 self.arrUSMappings = result.1
                 self.arrUserSettings = result.2
                 self.arrDictTypes = result.3
-                self.INFO_USLANGID = self.getUSInfo(name: MUSMapping.NAME_USLANGID)
+                self.INFO_USLANG = self.getUSInfo(name: MUSMapping.NAME_USLANG)
                 self.INFO_USROWSPERPAGEOPTIONS = self.getUSInfo(name: MUSMapping.NAME_USROWSPERPAGEOPTIONS)
                 self.INFO_USROWSPERPAGE = self.getUSInfo(name: MUSMapping.NAME_USROWSPERPAGE)
                 self.INFO_USLEVELCOLORS = self.getUSInfo(name: MUSMapping.NAME_USLEVELCOLORS)
@@ -290,27 +290,27 @@ class SettingsViewModel: NSObject {
                 // https://stackoverflow.com/questions/39791084/swift-3-array-to-dictionary
                 self.USLEVELCOLORS = Dictionary(uniqueKeysWithValues: arr.map { ($0[0].toInt()!, [$0[1], $0[2]]) })
                 self.delegate?.onGetData()
-                return self.setSelectedLang(self.arrLanguages.first { $0.ID == self.USLANGID }!)
+                return self.setSelectedLang(self.arrLanguages.first { $0.ID == self.USLANG }!)
             }
     }
 
     func setSelectedLang(_ lang: MLanguage) -> Observable<()> {
-        let isinit = USLANGID == lang.ID
-        USLANGID = lang.ID
+        let isinit = USLANG == lang.ID
+        USLANG = lang.ID
         selectedLang = lang
-        INFO_USTEXTBOOKID = getUSInfo(name: MUSMapping.NAME_USTEXTBOOKID)
+        INFO_USTEXTBOOK = getUSInfo(name: MUSMapping.NAME_USTEXTBOOK)
         INFO_USDICTREFERENCE = getUSInfo(name: MUSMapping.NAME_USDICTREFERENCE)
         INFO_USDICTNOTE = getUSInfo(name: MUSMapping.NAME_USDICTNOTE)
         INFO_USDICTSREFERENCE = getUSInfo(name: MUSMapping.NAME_USDICTSREFERENCE)
         INFO_USDICTTRANSLATION = getUSInfo(name: MUSMapping.NAME_USDICTTRANSLATION)
-        INFO_USMACVOICEID = getUSInfo(name: MUSMapping.NAME_USMACVOICEID)
-        INFO_USIOSVOICEID = getUSInfo(name: MUSMapping.NAME_USIOSVOICEID)
-        return Observable.zip(MDictionary.getDictsReferenceByLang(USLANGID),
-                              MDictionary.getDictsNoteByLang(USLANGID),
-                              MDictionary.getDictsTranslationByLang(USLANGID),
-                              MTextbook.getDataByLang(USLANGID),
-                              MAutoCorrect.getDataByLang(USLANGID),
-                              MVoice.getDataByLang(USLANGID))
+        INFO_USMACVOICE = getUSInfo(name: MUSMapping.NAME_USMACVOICE)
+        INFO_USIOSVOICE = getUSInfo(name: MUSMapping.NAME_USIOSVOICE)
+        return Observable.zip(MDictionary.getDictsReferenceByLang(USLANG),
+                              MDictionary.getDictsNoteByLang(USLANG),
+                              MDictionary.getDictsTranslationByLang(USLANG),
+                              MTextbook.getDataByLang(USLANG),
+                              MAutoCorrect.getDataByLang(USLANG),
+                              MVoice.getDataByLang(USLANG))
             .flatMap { result -> Observable<()> in
                 self.arrDictsReference = result.0
                 self.selectedDictReference = self.arrDictsReference.first { String($0.DICTID) == self.USDICTREFERENCE }!
@@ -322,7 +322,7 @@ class SettingsViewModel: NSObject {
                 if self.arrDictsTranslation.isEmpty { self.arrDictsTranslation.append(MDictionary()) }
                 self.selectedDictTranslation = self.arrDictsTranslation.first { $0.DICTID == self.USDICTTRANSLATION } ?? self.arrDictsTranslation[0]
                 self.arrTextbooks = result.3
-                self.selectedTextbook = self.arrTextbooks.first { $0.ID == self.USTEXTBOOKID }!
+                self.selectedTextbook = self.arrTextbooks.first { $0.ID == self.USTEXTBOOK }!
                 self.arrTextbookFilters = self.arrTextbooks.map { MSelectItem(value: $0.ID, label: $0.TEXTBOOKNAME) }
                 self.arrTextbookFilters.insert(MSelectItem(value: 0, label: "All Textbooks"), at: 0)
                 self.arrAutoCorrect = result.4
@@ -331,8 +331,8 @@ class SettingsViewModel: NSObject {
                 if self.arrMacVoices.isEmpty { self.arrMacVoices.append(MVoice()) }
                 self.arriOSVoices = arrVoices.filter { $0.VOICETYPEID == 3 }
                 if self.arriOSVoices.isEmpty { self.arriOSVoices.append(MVoice()) }
-                self.selectedMacVoice = self.arrMacVoices.first { $0.ID == self.USMACVOICEID } ?? self.arrMacVoices[0]
-                self.selectediOSVoice = self.arriOSVoices.first { $0.ID == self.USIOSVOICEID } ?? self.arriOSVoices[0]
+                self.selectedMacVoice = self.arrMacVoices.first { $0.ID == self.USMACVOICE } ?? self.arrMacVoices[0]
+                self.selectediOSVoice = self.arriOSVoices.first { $0.ID == self.USIOSVOICE } ?? self.arriOSVoices[0]
                 if isinit {
                     self.delegate?.onUpdateLang()
                     return Observable.just(())
@@ -343,11 +343,11 @@ class SettingsViewModel: NSObject {
     }
     
     func updateLang() -> Observable<()> {
-        MUserSetting.update(info: INFO_USLANGID, intValue: USLANGID).do { self.delegate?.onUpdateLang() }
+        MUserSetting.update(info: INFO_USLANG, intValue: USLANG).do { self.delegate?.onUpdateLang() }
     }
 
     func updateTextbook() -> Observable<()> {
-        MUserSetting.update(info: INFO_USTEXTBOOKID, intValue: USTEXTBOOKID).do { self.delegate?.onUpdateTextbook() }
+        MUserSetting.update(info: INFO_USTEXTBOOK, intValue: USTEXTBOOK).do { self.delegate?.onUpdateTextbook() }
     }
 
     func updateDictReference() -> Observable<()> {
@@ -367,11 +367,11 @@ class SettingsViewModel: NSObject {
     }
     
     func updateMacVoice() -> Observable<()> {
-        MUserSetting.update(info: INFO_USMACVOICEID, intValue: USMACVOICEID).do { self.delegate?.onUpdateMacVoice() }
+        MUserSetting.update(info: INFO_USMACVOICE, intValue: USMACVOICE).do { self.delegate?.onUpdateMacVoice() }
     }
     
     func updateiOSVoice() -> Observable<()> {
-        MUserSetting.update(info: INFO_USIOSVOICEID, intValue: USIOSVOICEID).do { self.delegate?.onUpdateiOSVoice() }
+        MUserSetting.update(info: INFO_USIOSVOICE, intValue: USIOSVOICE).do { self.delegate?.onUpdateiOSVoice() }
     }
 
     func autoCorrectInput(text: String) -> String {

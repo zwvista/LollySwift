@@ -87,7 +87,7 @@ class WordsUnitViewModel: NSObject {
     func newUnitWord() -> MUnitWord {
         let item = MUnitWord()
         item.LANGID = vmSettings.selectedLang.ID
-        item.TEXTBOOKID = vmSettings.USTEXTBOOKID
+        item.TEXTBOOKID = vmSettings.USTEXTBOOK
         let maxElem = arrWords.max { ($0.UNIT, $0.PART, $0.SEQNUM) < ($1.UNIT, $1.PART, $1.SEQNUM) }
         item.UNIT = maxElem?.UNIT ?? vmSettings.USUNITTO
         item.PART = maxElem?.PART ?? vmSettings.USPARTTO
