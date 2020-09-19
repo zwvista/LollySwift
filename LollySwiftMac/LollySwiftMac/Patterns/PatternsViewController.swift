@@ -83,17 +83,17 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
         guard oldValue != newValue else {return}
         item.setValue(newValue, forKey: key)
         if tv === tvPatterns {
-            PatternsViewModel.update(item: item as! MPattern).subscribe {
+            PatternsViewModel.update(item: item as! MPattern).subscribe(onNext: {
                 tv.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvPatterns.tableColumns.count))
-            } ~ rx.disposeBag
+            }) ~ rx.disposeBag
         } else if tv === tvWebPages {
-            PatternsViewModel.updateWebPage(item: item as! MPatternWebPage).subscribe {
+            PatternsViewModel.updateWebPage(item: item as! MPatternWebPage).subscribe(onNext: {
                 tv.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvPatterns.tableColumns.count))
-            } ~ rx.disposeBag
+            }) ~ rx.disposeBag
         } else if tv == tvPhrases {
-            PatternsViewModel.updatePhrase(item: item as! MPatternPhrase).subscribe {
+            PatternsViewModel.updatePhrase(item: item as! MPatternPhrase).subscribe(onNext: {
                 tv.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvPatterns.tableColumns.count))
-            } ~ rx.disposeBag
+            }) ~ rx.disposeBag
         }
     }
 
@@ -129,12 +129,12 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
                 let item = arrPatterns[row]
                 selectedPattern = item.PATTERN
                 selectedPatternID = item.ID
-                vm.getWebPages(patternid: selectedPatternID).subscribe {
+                vm.getWebPages(patternid: selectedPatternID).subscribe(onNext: {
                     self.tvWebPages.reloadData()
                     if self.tvWebPages.numberOfRows > 0 {
                         self.tvWebPages.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
                     }
-                } ~ rx.disposeBag
+                }) ~ rx.disposeBag
                 searchPhrases()
                 if isSpeaking {
                     speak(self)
@@ -204,18 +204,18 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
         guard !newPattern.isEmpty else {return}
         let item = vm.newPattern()
         item.PATTERN = vm.vmSettings.autoCorrectInput(text: newPattern)
-        PatternsViewModel.create(item: item).subscribe {
+        PatternsViewModel.create(item: item).subscribe(onNext: {
             self.vm.arrPatterns.append(item)
             self.tvPatterns.reloadData()
             self.tfNewPattern.stringValue = ""
             self.newPattern = ""
-        } ~ rx.disposeBag
+        }) ~ rx.disposeBag
     }
 
     @IBAction func refreshTableView(_ sender: AnyObject) {
-        vm.reload().subscribe {
+        vm.reload().subscribe(onNext: {
             self.doRefresh()
-        } ~ rx.disposeBag
+        }) ~ rx.disposeBag
     }
     
     // https://stackoverflow.com/questions/24219441/how-to-use-nstoolbar-in-xcode-6-and-storyboard
@@ -282,9 +282,9 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     }
     
     func searchPhrases() {
-        vm.searchPhrases(patternid: selectedPatternID).subscribe {
+        vm.searchPhrases(patternid: selectedPatternID).subscribe(onNext: {
             self.tvPhrases.reloadData()
-        } ~ rx.disposeBag
+        }) ~ rx.disposeBag
     }
     
     func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {

@@ -109,9 +109,9 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     
     override func endEditing(row: Int) {
         let item = arrPhrases[row]
-        vm.update(item: item).subscribe {
+        vm.update(item: item).subscribe(onNext: {_ in 
             self.tableView.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count))
-        } ~ rx.disposeBag
+        }) ~ rx.disposeBag
     }
 
     // https://stackoverflow.com/questions/24219441/how-to-use-nstoolbar-in-xcode-6-and-storyboard
@@ -135,15 +135,15 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
 
     override func deletePhrase(row: Int) {
         let item = arrPhrases[row]
-        PhrasesUnitViewModel.delete(item: item).subscribe{
+        PhrasesUnitViewModel.delete(item: item).subscribe(onNext: {
             self.doRefresh()
-        } ~ rx.disposeBag
+        }) ~ rx.disposeBag
     }
     
     @IBAction func refreshTableView(_ sender: AnyObject) {
-        vm.reload().subscribe {
+        vm.reload().subscribe(onNext: {
             self.doRefresh()
-        } ~ rx.disposeBag
+        }) ~ rx.disposeBag
     }
 
     @IBAction func editPhrase(_ sender: AnyObject) {
@@ -163,23 +163,23 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     }
 
     @IBAction func previousUnitPart(_ sender: AnyObject) {
-        vmSettings.previousUnitPart().concat(vm.reload()).subscribe {
+        vmSettings.previousUnitPart().concat(vm.reload()).subscribe(onNext: {
             self.doRefresh()
-        } ~ rx.disposeBag
+        }) ~ rx.disposeBag
     }
     
     @IBAction func nextUnitPart(_ sender: AnyObject) {
-        vmSettings.nextUnitPart().concat(vm.reload()).subscribe {
+        vmSettings.nextUnitPart().concat(vm.reload()).subscribe(onNext: {
             self.doRefresh()
-        } ~ rx.disposeBag
+        }) ~ rx.disposeBag
     }
     
     @IBAction func toggleToType(_ sender: AnyObject) {
         let row = tableView.selectedRow
         let part = row == -1 ? vmSettings.arrParts[0].value : arrPhrases[row].PART
-        vmSettings.toggleToType(part: part).concat(vm.reload()).subscribe {
+        vmSettings.toggleToType(part: part).concat(vm.reload()).subscribe(onNext: {
             self.doRefresh()
-        } ~ rx.disposeBag
+        }) ~ rx.disposeBag
     }
 
     override func updateStatusText() {

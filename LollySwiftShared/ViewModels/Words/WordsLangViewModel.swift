@@ -21,7 +21,7 @@ class WordsLangViewModel: NSObject {
         self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
         vmNote = NoteViewModel(settings: vmSettings)
         super.init()
-        reload().subscribe { complete() } ~ rx.disposeBag
+        reload().subscribe(onNext: { complete() }) ~ rx.disposeBag
     }
     
     func reload() -> Observable<()> {

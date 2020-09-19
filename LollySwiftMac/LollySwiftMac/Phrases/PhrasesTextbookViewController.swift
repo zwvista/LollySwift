@@ -44,22 +44,22 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
     
     override func endEditing(row: Int) {
         let item = arrPhrases[row]
-        vm.update(item: item).subscribe {
+        vm.update(item: item).subscribe(onNext: {_ in 
             self.tableView.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count))
-        } ~ rx.disposeBag
+        }) ~ rx.disposeBag
     }
 
     override func deletePhrase(row: Int) {
         let item = arrPhrases[row]
-        PhrasesUnitViewModel.delete(item: item).subscribe{
+        PhrasesUnitViewModel.delete(item: item).subscribe(onNext: {
             self.doRefresh()
-        } ~ rx.disposeBag
+        }) ~ rx.disposeBag
     }
 
     @IBAction func refreshTableView(_ sender: AnyObject) {
-        vm.reload().subscribe {
+        vm.reload().subscribe(onNext: {
             self.doRefresh()
-        } ~ rx.disposeBag
+        }) ~ rx.disposeBag
     }
 
     @IBAction func editPhrase(_ sender: AnyObject) {

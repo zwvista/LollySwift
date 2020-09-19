@@ -19,7 +19,7 @@ class WebPageSelectViewModel: NSObject {
     public init(settings: SettingsViewModel, complete: @escaping () -> ()) {
         self.vmSettings = settings
         super.init()
-        reload().subscribe { complete() } ~ rx.disposeBag
+        reload().subscribe(onNext: { complete() }) ~ rx.disposeBag
     }
     
     func reload() -> Observable<()> {

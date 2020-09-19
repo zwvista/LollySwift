@@ -121,9 +121,9 @@ class SelectDictsViewController: NSViewController, NSTableViewDataSource, NSTabl
 
     @IBAction func okClicked(_ sender: AnyObject) {
         vm.selectedDictsReference = dictsSelected
-        vm.updateDictsReference().subscribe {
+        vm.updateDictsReference().subscribe(onNext: {
             self.complete?()
-        } ~ rx.disposeBag
+        }) ~ rx.disposeBag
         dismiss(sender)
     }
     

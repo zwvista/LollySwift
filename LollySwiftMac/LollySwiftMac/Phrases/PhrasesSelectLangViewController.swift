@@ -95,10 +95,10 @@ class PhrasesSelectLangViewController: NSViewController, NSTableViewDataSource, 
                 o = o.concat(MPatternPhrase.connect(patternid: patternid, phraseid: item.PHRASEID))
             }
         }
-        o.subscribe {
+        o.subscribe(onNext: {
             self.complete?()
             self.dismiss(sender)
-        } ~ rx.disposeBag
+        }) ~ rx.disposeBag
     }
     
     deinit {

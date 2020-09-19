@@ -66,15 +66,15 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     
     override func endEditing(row: Int) {
         let item = arrWords[row]
-        vm.update(item: item).subscribe {
+        vm.update(item: item).subscribe(onNext: {_ in 
             self.tvWords.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvWords.tableColumns.count))
-        } ~ rx.disposeBag
+        }) ~ rx.disposeBag
     }
     
     override func searchPhrases() {
-        vm.searchPhrases(wordid: selectedWordID).subscribe {
+        vm.searchPhrases(wordid: selectedWordID).subscribe(onNext: {
             self.tvPhrases.reloadData()
-        } ~ rx.disposeBag
+        }) ~ rx.disposeBag
     }
 
     func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
@@ -135,12 +135,12 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
         item.WORD = vmSettings.autoCorrectInput(text: newWord)
         tfNewWord.stringValue = ""
         newWord = ""
-        vm.create(item: item).subscribe {
+        vm.create(item: item).subscribe(onNext: {_ in 
             self.vm.arrWords.append(item)
             self.tvWords.reloadData()
             self.tvWords.selectRowIndexes(IndexSet(integer: self.arrWords.count - 1), byExtendingSelection: false)
             self.responder = self.tfNewWord
-        } ~ rx.disposeBag
+        }) ~ rx.disposeBag
     }
 
     // https://stackoverflow.com/questions/24219441/how-to-use-nstoolbar-in-xcode-6-and-storyboard
@@ -153,15 +153,15 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     
     override func deleteWord(row: Int) {
         let item = arrWords[row]
-        WordsUnitViewModel.delete(item: item).subscribe{
+        WordsUnitViewModel.delete(item: item).subscribe(onNext: {
             self.doRefresh()
-        } ~ rx.disposeBag
+        }) ~ rx.disposeBag
     }
     
     @IBAction func refreshTableView(_ sender: AnyObject) {
-        vm.reload().subscribe {
+        vm.reload().subscribe(onNext: {
             self.doRefresh()
-        } ~ rx.disposeBag
+        }) ~ rx.disposeBag
     }
     
     @IBAction func doubleAction(_ sender: AnyObject) {
@@ -195,9 +195,9 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
 
     @IBAction func getNote(_ sender: AnyObject) {
         let col = tvWords.tableColumns.firstIndex { $0.title == "NOTE" }!
-        vm.getNote(index: tvWords.selectedRow).subscribe {
+        vm.getNote(index: tvWords.selectedRow).subscribe(onNext: {
             self.tvWords.reloadData(forRowIndexes: [self.tvWords.selectedRow], columnIndexes: [col])
-        } ~ rx.disposeBag
+        }) ~ rx.disposeBag
     }
 
     @IBAction func getNotes(_ sender: AnyObject) {
@@ -213,20 +213,20 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     
     @IBAction func clearNote(_ sender: AnyObject) {
         let col = tvWords.tableColumns.firstIndex { $0.title == "NOTE" }!
-        vm.clearNote(index: tvWords.selectedRow).subscribe {
+        vm.clearNote(index: tvWords.selectedRow).subscribe(onNext: {
             self.tvWords.reloadData(forRowIndexes: [self.tvWords.selectedRow], columnIndexes: [col])
-        } ~ rx.disposeBag
+        }) ~ rx.disposeBag
     }
     
     @IBAction func clearNotes(_ sender: AnyObject) {
         let ifEmpty = sender is NSToolbarItem || (sender as! NSMenuItem).tag == 0
         vm.clearNotes(ifEmpty: ifEmpty, oneComplete: {
             self.tvWords.reloadData(forRowIndexes: [$0], columnIndexes: IndexSet(0..<self.tvWords.tableColumns.count))
-        }).subscribe {
+        }).subscribe(onNext: {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 // self.tableView.reloadData()
             }
-        } ~ rx.disposeBag
+        }) ~ rx.disposeBag
     }
 
     @IBAction func filterWord(_ sender: AnyObject) {
@@ -235,23 +235,23 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     }
     
     @IBAction func previousUnitPart(_ sender: AnyObject) {
-        vmSettings.previousUnitPart().concat(vm.reload()).subscribe {
+        vmSettings.previousUnitPart().concat(vm.reload()).subscribe(onNext: {
             self.doRefresh()
-        } ~ rx.disposeBag
+        }) ~ rx.disposeBag
     }
     
     @IBAction func nextUnitPart(_ sender: AnyObject) {
-        vmSettings.nextUnitPart().concat(vm.reload()).subscribe {
+        vmSettings.nextUnitPart().concat(vm.reload()).subscribe(onNext: {
             self.doRefresh()
-        } ~ rx.disposeBag
+        }) ~ rx.disposeBag
     }
     
     @IBAction func toggleToType(_ sender: AnyObject) {
         let row = tvWords.selectedRow
         let part = row == -1 ? vmSettings.arrParts[0].value : arrWords[row].PART
-        vmSettings.toggleToType(part: part).concat(vm.reload()).subscribe {
+        vmSettings.toggleToType(part: part).concat(vm.reload()).subscribe(onNext: {
             self.doRefresh()
-        } ~ rx.disposeBag
+        }) ~ rx.disposeBag
     }
 
     override func updateStatusText() {

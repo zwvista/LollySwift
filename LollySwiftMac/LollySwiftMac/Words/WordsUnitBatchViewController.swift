@@ -81,10 +81,10 @@ class WordsUnitBatchViewController: NSViewController, NSTableViewDataSource, NST
                 o = o.concat(vm.update(item: item).map {_ in })
             }
         }
-        o.subscribe {
+        o.subscribe(onNext: {
             self.complete?()
             self.dismiss(sender)
-        } ~ rx.disposeBag
+        }) ~ rx.disposeBag
     }
 
     deinit {

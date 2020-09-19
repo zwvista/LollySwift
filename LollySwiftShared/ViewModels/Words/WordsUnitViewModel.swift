@@ -24,7 +24,7 @@ class WordsUnitViewModel: NSObject {
         self.inTextbook = inTextbook
         vmNote = NoteViewModel(settings: settings)
         super.init()
-        reload().subscribe { complete() } ~ rx.disposeBag
+        reload().subscribe(onNext: { complete() }) ~ rx.disposeBag
     }
     
     func reload() -> Observable<()> {
@@ -113,9 +113,9 @@ class WordsUnitViewModel: NSObject {
         vmNote.getNotes(wordCount: arrWords.count, isNoteEmpty: {
             !ifEmpty || (self.arrWords[$0].NOTE ?? "").isEmpty
         }, getOne: { i in
-            self.getNote(index: i).subscribe {
+            self.getNote(index: i).subscribe(onNext: {
                 oneComplete(i)
-            } ~ self.rx.disposeBag
+            }) ~ self.rx.disposeBag
         }, allComplete: allComplete)
     }
 
@@ -129,7 +129,7 @@ class WordsUnitViewModel: NSObject {
         vmNote.clearNotes(wordCount: arrWords.count, isNoteEmpty: {
             !ifEmpty || (self.arrWords[$0].NOTE ?? "").isEmpty
         }, getOne: { i in
-            self.clearNote(index: i).do { oneComplete(i) }
+            self.clearNote(index: i).do(onNext: { oneComplete(i) })
         })
     }
     

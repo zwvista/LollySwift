@@ -17,7 +17,7 @@ class PhrasesLangViewModel: NSObject {
     public init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> ()) {
         self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
         super.init()
-        reload().subscribe { complete() } ~ rx.disposeBag
+        reload().subscribe(onNext: { complete() }) ~ rx.disposeBag
     }
     
     func reload() -> Observable<()> {

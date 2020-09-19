@@ -52,9 +52,9 @@ class PatternsWebPageViewController: NSViewController {
                 self.complete?()
             }) ~ rx.disposeBag
         } else {
-            PatternsViewModel.updateWebPage(item: item).subscribe {
+            PatternsViewModel.updateWebPage(item: item).subscribe(onNext: {
                 self.complete?()
-            } ~ rx.disposeBag
+            }) ~ rx.disposeBag
         }
         dismiss(sender)
     }

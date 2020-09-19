@@ -343,35 +343,35 @@ class SettingsViewModel: NSObject {
     }
     
     func updateLang() -> Observable<()> {
-        MUserSetting.update(info: INFO_USLANG, intValue: USLANG).do { self.delegate?.onUpdateLang() }
+        MUserSetting.update(info: INFO_USLANG, intValue: USLANG).do(onNext: { self.delegate?.onUpdateLang() })
     }
 
     func updateTextbook() -> Observable<()> {
-        MUserSetting.update(info: INFO_USTEXTBOOK, intValue: USTEXTBOOK).do { self.delegate?.onUpdateTextbook() }
+        MUserSetting.update(info: INFO_USTEXTBOOK, intValue: USTEXTBOOK).do(onNext: { self.delegate?.onUpdateTextbook() })
     }
 
     func updateDictReference() -> Observable<()> {
-        MUserSetting.update(info: INFO_USDICTREFERENCE, stringValue: USDICTREFERENCE).do { self.delegate?.onUpdateDictReference() }
+        MUserSetting.update(info: INFO_USDICTREFERENCE, stringValue: USDICTREFERENCE).do(onNext: { self.delegate?.onUpdateDictReference() })
     }
     
     func updateDictsReference() -> Observable<()> {
-        MUserSetting.update(info: INFO_USDICTSREFERENCE, stringValue: USDICTSREFERENCE).do { self.delegate?.onUpdateDictsReference() }
+        MUserSetting.update(info: INFO_USDICTSREFERENCE, stringValue: USDICTSREFERENCE).do(onNext: { self.delegate?.onUpdateDictsReference() })
     }
 
     func updateDictNote() -> Observable<()> {
-        MUserSetting.update(info: INFO_USDICTNOTE, intValue: USDICTNOTE).do { self.delegate?.onUpdateDictNote() }
+        MUserSetting.update(info: INFO_USDICTNOTE, intValue: USDICTNOTE).do(onNext: { self.delegate?.onUpdateDictNote() })
     }
     
     func updateDictTranslation() -> Observable<()> {
-        MUserSetting.update(info: INFO_USDICTTRANSLATION, intValue: USDICTTRANSLATION).do { self.delegate?.onUpdateDictTranslation() }
+        MUserSetting.update(info: INFO_USDICTTRANSLATION, intValue: USDICTTRANSLATION).do(onNext: { self.delegate?.onUpdateDictTranslation() })
     }
     
     func updateMacVoice() -> Observable<()> {
-        MUserSetting.update(info: INFO_USMACVOICE, intValue: USMACVOICE).do { self.delegate?.onUpdateMacVoice() }
+        MUserSetting.update(info: INFO_USMACVOICE, intValue: USMACVOICE).do(onNext: { self.delegate?.onUpdateMacVoice() })
     }
     
     func updateiOSVoice() -> Observable<()> {
-        MUserSetting.update(info: INFO_USIOSVOICE, intValue: USIOSVOICE).do { self.delegate?.onUpdateiOSVoice() }
+        MUserSetting.update(info: INFO_USIOSVOICE, intValue: USIOSVOICE).do(onNext: { self.delegate?.onUpdateiOSVoice() })
     }
 
     func autoCorrectInput(text: String) -> String {
@@ -469,25 +469,25 @@ class SettingsViewModel: NSObject {
     private func doUpdateUnitFrom(v: Int, check: Bool = true) -> Observable<()> {
         guard !check || USUNITFROM != v else { return Observable.empty() }
         USUNITFROM = v
-        return MUserSetting.update(info: INFO_USUNITFROM, intValue: USUNITFROM).do { self.delegate?.onUpdateUnitFrom() }
+        return MUserSetting.update(info: INFO_USUNITFROM, intValue: USUNITFROM).do(onNext: { self.delegate?.onUpdateUnitFrom() })
     }
     
     private func doUpdatePartFrom(v: Int, check: Bool = true) -> Observable<()> {
         guard !check || USPARTFROM != v else { return Observable.empty() }
         USPARTFROM = v
-        return MUserSetting.update(info: INFO_USPARTFROM, intValue: USPARTFROM).do { self.delegate?.onUpdatePartFrom()  }
+        return MUserSetting.update(info: INFO_USPARTFROM, intValue: USPARTFROM).do(onNext: { self.delegate?.onUpdatePartFrom()  })
     }
     
     private func doUpdateUnitTo(v: Int, check: Bool = true) -> Observable<()> {
         guard !check || USUNITTO != v else { return Observable.empty() }
         USUNITTO = v
-        return MUserSetting.update(info: INFO_USUNITTO, intValue: USUNITTO).do { self.delegate?.onUpdateUnitTo() }
+        return MUserSetting.update(info: INFO_USUNITTO, intValue: USUNITTO).do(onNext: { self.delegate?.onUpdateUnitTo() })
     }
     
     private func doUpdatePartTo(v: Int, check: Bool = true) -> Observable<()> {
         guard !check || USPARTTO != v else { return Observable.empty() }
         USPARTTO = v
-        return MUserSetting.update(info: INFO_USPARTTO, intValue: USPARTTO).do { self.delegate?.onUpdatePartTo() }
+        return MUserSetting.update(info: INFO_USPARTTO, intValue: USPARTTO).do(onNext: { self.delegate?.onUpdatePartTo() })
     }
     
 }
