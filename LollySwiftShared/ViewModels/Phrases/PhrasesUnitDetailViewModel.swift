@@ -15,14 +15,12 @@ class PhrasesUnitDetailViewModel: NSObject {
     var item: MUnitPhrase!
     var itemEdit: MUnitPhraseEdit!
     var vmSingle: SinglePhraseViewModel!
-    var index = -1
     var isAdd: Bool!
     var isOKEnabled = BehaviorRelay(value: false)
 
-    init(vm: PhrasesUnitViewModel, index: Int, complete: @escaping () -> ()) {
+    init(vm: PhrasesUnitViewModel, item: MUnitPhrase, complete: @escaping () -> ()) {
         self.vm = vm
-        self.index = index
-        item = index == -1 ? vm.newUnitPhrase() : vm.arrPhrases[index]
+        self.item = item
         itemEdit = MUnitPhraseEdit(x: item)
         isAdd = item.ID == 0
         _ = itemEdit.PHRASE.map { !$0.isEmpty } ~> isOKEnabled
@@ -33,11 +31,6 @@ class PhrasesUnitDetailViewModel: NSObject {
     func onOK() -> Observable<()> {
         itemEdit.save(to: item)
         item.PHRASE = vm.vmSettings.autoCorrectInput(text: item.PHRASE)
-        return isAdd ? vm.create(item: item).map {
-            self.vm.arrPhrases.append($0!)
-        } : vm.update(item: item).map {
-            var arrPhrases = self.vm.arrPhrasesFiltered ?? self.vm.arrPhrases
-            arrPhrases[self.index] = $0!
-        }
+        return isAdd ? vm.create(item: item) : vm.update(item: item)
     }
 }

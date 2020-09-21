@@ -48,15 +48,19 @@ class PhrasesUnitViewModel: NSObject {
         MUnitPhrase.update(id, seqnum: seqnum)
     }
     
-    func update(item: MUnitPhrase) -> Observable<MUnitPhrase?> {
+    func update(item: MUnitPhrase) -> Observable<()> {
         MUnitPhrase.update(item: item).flatMap {
             MUnitPhrase.getDataById(item.ID, arrTextbooks: self.vmSettings.arrTextbooks)
+        }.map {
+            if let o = $0 { self.arrPhrases.append(o) }
         }
     }
     
-    func create(item: MUnitPhrase) -> Observable<MUnitPhrase?> {
+    func create(item: MUnitPhrase) -> Observable<()> {
         MUnitPhrase.create(item: item).flatMap {
             MUnitPhrase.getDataById($0, arrTextbooks: self.vmSettings.arrTextbooks)
+        }.map {
+            if let o = $0 { self.arrPhrases.append(o) }
         }
     }
     
