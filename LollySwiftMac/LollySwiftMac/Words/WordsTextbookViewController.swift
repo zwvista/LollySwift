@@ -76,7 +76,7 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
     @IBAction func editWord(_ sender: AnyObject) {
         let editVC = self.storyboard!.instantiateController(withIdentifier: "WordsTextbookDetailViewController") as! WordsTextbookDetailViewController
         let i = tvWords.selectedRow
-        editVC.startEdit(vm: vm, index: i)
+        editVC.startEdit(vm: vm, item: arrWords[i])
         editVC.complete = {
             self.tvWords.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tvWords.tableColumns.count))
         }

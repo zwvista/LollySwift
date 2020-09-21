@@ -99,3 +99,24 @@ class CommonApi {
         .replacingOccurrences(of: "{2}", with: text)
     }
 }
+
+// https://stackoverflow.com/questions/780897/how-do-i-find-all-the-property-keys-of-a-kvc-compliant-objective-c-object
+extension Encodable {
+     public func toDictionary() -> [String: AnyObject]? {
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        guard let data =  try? encoder.encode(self),
+              let json = try? JSONSerialization.jsonObject(with: data, options: .init(rawValue: 0)), let jsonDict = json as? [String: AnyObject] else {
+            return nil
+        }
+        return jsonDict
+    }
+}
+
+func copyProperties<T: Encodable & NSObject>(from a: T, to b: T) {
+    let keys = a.toDictionary()!.keys
+    for k in keys {
+        let v = String(describing: a.value(forKey: k) ?? "")
+        b.setValue(v, forKey: k)
+    }
+}

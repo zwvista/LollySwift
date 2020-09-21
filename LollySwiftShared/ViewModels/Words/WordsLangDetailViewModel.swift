@@ -31,11 +31,6 @@ class WordsLangDetailViewModel: NSObject {
     func onOK() -> Observable<()> {
         itemEdit.save(to: item)
         item.WORD = vm.vmSettings.autoCorrectInput(text: item.WORD)
-        if isAdd {
-            vm.arrWords.append(item)
-            return WordsLangViewModel.create(item: item)
-        } else {
-            return WordsLangViewModel.update(item: item)
-        }
+        return isAdd ? WordsLangViewModel.create(item: item) : WordsLangViewModel.update(item: item)
     }
 }

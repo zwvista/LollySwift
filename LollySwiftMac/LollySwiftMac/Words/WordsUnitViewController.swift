@@ -146,7 +146,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     // https://stackoverflow.com/questions/24219441/how-to-use-nstoolbar-in-xcode-6-and-storyboard
     @IBAction func addWord(_ sender: AnyObject) {
         let editVC = self.storyboard!.instantiateController(withIdentifier: "WordsUnitDetailViewController") as! WordsUnitDetailViewController
-        editVC.startEdit(vm: vm)
+        editVC.startEdit(vm: vm, item: vm.newUnitWord())
         editVC.complete = { self.tvWords.reloadData(); self.addWord(self) }
         self.presentAsSheet(editVC)
     }
@@ -175,7 +175,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     @IBAction func editWord(_ sender: AnyObject) {
         let editVC = self.storyboard!.instantiateController(withIdentifier: "WordsUnitDetailViewController") as! WordsUnitDetailViewController
         let i = tvWords.selectedRow
-        editVC.startEdit(vm: vm, index: i)
+        editVC.startEdit(vm: vm, item: arrWords[tvWords.selectedRow])
         editVC.complete = {
             self.tvWords.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tvWords.tableColumns.count))
         }
