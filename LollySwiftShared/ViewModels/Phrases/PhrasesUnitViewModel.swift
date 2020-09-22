@@ -52,7 +52,7 @@ class PhrasesUnitViewModel: NSObject {
         MUnitPhrase.update(item: item).flatMap {
             MUnitPhrase.getDataById(item.ID, arrTextbooks: self.vmSettings.arrTextbooks)
         }.map {
-            if let o = $0 { self.arrPhrases.append(o) }
+            if let o = $0 { copyProperties(from: o, to: item) }
         }
     }
     

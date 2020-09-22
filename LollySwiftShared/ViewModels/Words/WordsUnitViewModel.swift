@@ -61,7 +61,7 @@ class WordsUnitViewModel: NSObject {
         MUnitWord.update(item: item).flatMap {
             MUnitWord.getDataById(item.ID, arrTextbooks: self.vmSettings.arrTextbooks)
         }.map {
-            if let o = $0 { self.arrWords.append(o) }
+            if let o = $0 { copyProperties(from: o, to: item) }
         }
     }
     
@@ -69,7 +69,7 @@ class WordsUnitViewModel: NSObject {
         MUnitWord.create(item: item).flatMap {
             MUnitWord.getDataById($0, arrTextbooks: self.vmSettings.arrTextbooks)
         }.map {
-            if let o = $0 { copyProperties(from: o, to: item) }
+            if let o = $0 { self.arrWords.append(o) }
         }
     }
     

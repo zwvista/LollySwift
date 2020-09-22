@@ -135,8 +135,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
         item.WORD = vmSettings.autoCorrectInput(text: newWord)
         tfNewWord.stringValue = ""
         newWord = ""
-        vm.create(item: item).subscribe(onNext: {_ in 
-            self.vm.arrWords.append(item)
+        vm.create(item: item).subscribe(onNext: {_ in
             self.tvWords.reloadData()
             self.tvWords.selectRowIndexes(IndexSet(integer: self.arrWords.count - 1), byExtendingSelection: false)
             self.responder = self.tfNewWord
@@ -175,6 +174,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     @IBAction func editWord(_ sender: AnyObject) {
         let editVC = self.storyboard!.instantiateController(withIdentifier: "WordsUnitDetailViewController") as! WordsUnitDetailViewController
         let i = tvWords.selectedRow
+        if i == -1 {return}
         editVC.startEdit(vm: vm, item: arrWords[tvWords.selectedRow])
         editVC.complete = {
             self.tvWords.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tvWords.tableColumns.count))
