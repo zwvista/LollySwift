@@ -50,8 +50,19 @@ class MUnitPhrase: NSObject, Codable, MPhraseProtocol {
         })
     }
     
-    private static func setTextbook(_ o: Observable<[MUnitPhrase]>, arrTextbooks: [MTextbook]) -> Observable<[MUnitPhrase]> {
+    static func getDataByTextbook(_ textbook: MTextbook) -> Observable<[MUnitPhrase]> {
+        // SQL: SELECT * FROM VUNITPHRASES WHERE TEXTBOOKID=? ORDER BY PHRASEID
+        let url = "\(CommonApi.urlAPI)VUNITPHRASES?filter=TEXTBOOKID,eq,\(textbook.ID)&order=PHRASEID"
+        let o: Observable<[MUnitPhrase]> = RestApi.getRecords(url: url)
         return o.do(onNext: { arr in
+            arr.forEach { $0.textbook = textbook }
+        })
+    }
+
+    private static func setTextbook(_ o: Observable<[MUnitPhrase]>, arrTextbooks: [MTextbook]) -> Observable<[MUnitPhrase]> {
+        return o.map { arr in
+            Dictionary(grouping: arr) { $0.PHRASEID }.values.compactMap { $0[0] }
+        }.do(onNext: { arr in
             arr.forEach { row in
                 row.textbook = arrTextbooks.first { $0.ID == row.TEXTBOOKID }!
             }

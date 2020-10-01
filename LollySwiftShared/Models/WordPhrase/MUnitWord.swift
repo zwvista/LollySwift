@@ -64,7 +64,9 @@ class MUnitWord: NSObject, Codable, MWordProtocol {
         // SQL: SELECT * FROM VUNITWORDS WHERE TEXTBOOKID=? ORDER BY WORDID
         let url = "\(CommonApi.urlAPI)VUNITWORDS?filter=TEXTBOOKID,eq,\(textbook.ID)&order=WORDID"
         let o: Observable<[MUnitWord]> = RestApi.getRecords(url: url)
-        return o.do(onNext: { arr in
+        return o.map { arr in
+            Dictionary(grouping: arr) { $0.WORDID }.values.compactMap { $0[0] }
+        }.do(onNext: { arr in
             arr.forEach { $0.textbook = textbook }
         })
     }

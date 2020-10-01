@@ -17,7 +17,7 @@ class PhrasesReviewViewModel: NSObject {
     var arrCorrectIDs = [Int]()
     var index = 0
     let options = MReviewOptions()
-    var isTestMode: Bool { options.mode == .test }
+    var isTestMode: Bool { options.mode == .test || options.mode == .textbook }
     var subscription: Disposable? = nil
     let doTestAction: (() -> Void)?
 
@@ -40,25 +40,42 @@ class PhrasesReviewViewModel: NSObject {
     }
 
     func newTest() {
-        MUnitPhrase.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO).subscribe(onNext: {
-            self.arrPhrases = $0
-            let count = self.arrPhrases.count
-            let from = count * (self.options.groupSelected - 1) / self.options.groupCount
-            let to = count * self.options.groupSelected / self.options.groupCount
-            self.arrPhrases = [MUnitPhrase](self.arrPhrases[from..<to])
-            if self.options.shuffled { self.arrPhrases = self.arrPhrases.shuffled() }
+        func f() {
             self.arrCorrectIDs = []
             self.index = 0
-            self.subscription?.dispose()
             self.doTest()
             self.checkTitle.accept(self.isTestMode ? "Check" : "Next")
-            if self.options.mode == .reviewAuto {
-                self.subscription = Observable<Int>.interval(DispatchTimeInterval.seconds(self.options.interval), scheduler: MainScheduler.instance).subscribe { _ in
-                    self.check()
+        }
+        self.subscription?.dispose()
+        if options.mode == .textbook {
+            MUnitPhrase.getDataByTextbook(vmSettings.selectedTextbook).subscribe(onNext: { arr in
+                self.arrPhrases = []
+                let cnt = min(50, arr.count)
+                while self.arrPhrases.count < cnt {
+                    let o = arr.random()!
+                    if !self.arrPhrases.contains(where: { $0.ID == o.ID }) {
+                        self.arrPhrases.append(o)
+                    }
                 }
-                self.subscription?.disposed(by: self.rx.disposeBag)
-            }
-        }) ~ self.rx.disposeBag
+                f()
+            }) ~ self.rx.disposeBag
+        } else {
+            MUnitPhrase.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO).subscribe(onNext: {
+                self.arrPhrases = $0
+                let count = self.arrPhrases.count
+                let from = count * (self.options.groupSelected - 1) / self.options.groupCount
+                let to = count * self.options.groupSelected / self.options.groupCount
+                self.arrPhrases = [MUnitPhrase](self.arrPhrases[from..<to])
+                if self.options.shuffled { self.arrPhrases = self.arrPhrases.shuffled() }
+                f()
+                if self.options.mode == .reviewAuto {
+                    self.subscription = Observable<Int>.interval(DispatchTimeInterval.seconds(self.options.interval), scheduler: MainScheduler.instance).subscribe { _ in
+                        self.check()
+                    }
+                    self.subscription?.disposed(by: self.rx.disposeBag)
+                }
+            }) ~ self.rx.disposeBag
+        }
     }
 
     var hasNext: Bool { index < arrPhrases.count }
