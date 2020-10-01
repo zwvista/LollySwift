@@ -60,6 +60,15 @@ class MUnitWord: NSObject, Codable, MWordProtocol {
         })
     }
     
+    static func getDataByTextbook(_ textbook: MTextbook) -> Observable<[MUnitWord]> {
+        // SQL: SELECT * FROM VUNITWORDS WHERE TEXTBOOKID=? ORDER BY WORDID
+        let url = "\(CommonApi.urlAPI)VUNITWORDS?filter=TEXTBOOKID,eq,\(textbook.ID)&order=WORDID"
+        let o: Observable<[MUnitWord]> = RestApi.getRecords(url: url)
+        return o.do(onNext: { arr in
+            arr.forEach { $0.textbook = textbook }
+        })
+    }
+    
     private static func setTextbook(_ o: Observable<[MUnitWord]>, arrTextbooks: [MTextbook]) -> Observable<[MUnitWord]> {
         return o.do(onNext: { arr in
             arr.forEach { row in

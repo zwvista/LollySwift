@@ -22,6 +22,7 @@ class ReviewOptionsViewController: NSViewController {
     @IBOutlet weak var stpGroupSelected: NSStepper!
     @IBOutlet weak var tfGroupCount: NSTextField!
     @IBOutlet weak var stpGroupCount: NSStepper!
+    @IBOutlet weak var scSpeak: NSSegmentedControl!
     @IBOutlet weak var btnOK: NSButton!
 
     override func viewDidLoad() {
@@ -37,6 +38,7 @@ class ReviewOptionsViewController: NSViewController {
         _ = vm.optionsEdit.groupSelected.map { $0.toString } ~> tfGroupSelected.rx.text.orEmpty
         _ = vm.optionsEdit.groupCount <~> stpGroupCount.rx.integerValue
         _ = vm.optionsEdit.groupCount.map { $0.toString } ~> tfGroupCount.rx.text.orEmpty
+        _ = vm.optionsEdit.speakingEnabled <~> scSpeak.rx.isOn
         btnOK.rx.tap.subscribe { [unowned self] _ in
             self.vm.onOK()
             self.complete?()

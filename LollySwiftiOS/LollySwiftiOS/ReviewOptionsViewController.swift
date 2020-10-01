@@ -31,7 +31,7 @@ class ReviewOptionsViewController: UITableViewController {
         vm = ReviewOptionsViewModel(options: options)
         
         ddReviewMode.anchorView = reviewModeCell
-        ddReviewMode.dataSource = ["Review(Auto)", "Test", "Review(Manual)"]
+        ddReviewMode.dataSource = ["Review(Auto)", "Review(Manual)", "Test", "Textbook"]
         ddReviewMode.selectionAction = { [unowned self] (index: Int, item: String) in
             self.vm.optionsEdit.mode.accept(index)
         }

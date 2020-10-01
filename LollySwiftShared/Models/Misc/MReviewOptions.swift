@@ -12,10 +12,11 @@ import RxRelay
 class MReviewOptions: NSObject {
     var isEmbedded = false
     var mode: ReviewMode = .reviewAuto
-    @objc dynamic var interval = 5
+    var interval = 5
     var shuffled = false
-    @objc dynamic var groupCount = 1
-    @objc dynamic var groupSelected = 1
+    var groupCount = 1
+    var groupSelected = 1
+    var speakingEnabled = true
     
     init(isEmbedded: Bool = false) {
         self.isEmbedded = isEmbedded
@@ -29,6 +30,7 @@ class MReviewOptionsEdit {
     var shuffled: BehaviorRelay<Bool>
     var groupCount: BehaviorRelay<Int>
     var groupSelected: BehaviorRelay<Int>
+    var speakingEnabled: BehaviorRelay<Bool>
     
     init(x: MReviewOptions) {
         mode = BehaviorRelay(value: x.mode.rawValue)
@@ -36,6 +38,7 @@ class MReviewOptionsEdit {
         shuffled = BehaviorRelay(value: x.shuffled)
         groupCount = BehaviorRelay(value: x.groupCount)
         groupSelected = BehaviorRelay(value: x.groupSelected)
+        speakingEnabled = BehaviorRelay(value: x.speakingEnabled)
     }
     
     func save(to x: MReviewOptions) {

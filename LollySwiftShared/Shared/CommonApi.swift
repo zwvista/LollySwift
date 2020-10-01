@@ -17,8 +17,9 @@ enum DictWebViewStatus {
 
 enum ReviewMode: Int {
     case reviewAuto
-    case test
     case reviewManual
+    case test
+    case textbook
 }
 
 enum UnitPartToType: Int {
