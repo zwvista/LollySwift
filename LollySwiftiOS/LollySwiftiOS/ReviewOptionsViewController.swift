@@ -20,10 +20,11 @@ class ReviewOptionsViewController: UITableViewController {
     @IBOutlet weak var reviewModeCell: UITableViewCell!
     @IBOutlet weak var lblReviewMode: UILabel!
     @IBOutlet weak var swOrder: UISwitch!
+    @IBOutlet weak var swSpeak: UISwitch!
     @IBOutlet weak var tfInterval: UITextField!
     @IBOutlet weak var tfGroupSelected: UITextField!
     @IBOutlet weak var tfGroupCount: UITextField!
-    @IBOutlet weak var btnDone: UIBarButtonItem!
+    @IBOutlet weak var tfReviewCount: UITextField!
     let ddReviewMode = DropDown()
 
     override func viewDidLoad() {
@@ -37,12 +38,14 @@ class ReviewOptionsViewController: UITableViewController {
         }
 
         _ = vm.optionsEdit.shuffled <~> swOrder.rx.isOn
+        _ = vm.optionsEdit.speakingEnabled <~> swSpeak.rx.isOn
 //        _ = vm.optionsEdit.interval <~> stpInterval.rx.integerValue
         _ = vm.optionsEdit.interval.map { $0.toString } ~> tfInterval.rx.text.orEmpty
 //        _ = vm.optionsEdit.groupSelected <~> stpGroupSelected.rx.integerValue
         _ = vm.optionsEdit.groupSelected.map { $0.toString } ~> tfGroupSelected.rx.text.orEmpty
 //        _ = vm.optionsEdit.groupCount <~> stpGroupCount.rx.integerValue
         _ = vm.optionsEdit.groupCount.map { $0.toString } ~> tfGroupCount.rx.text.orEmpty
+        _ = vm.optionsEdit.reviewCount.map { $0.toString } ~> tfReviewCount.rx.text.orEmpty
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

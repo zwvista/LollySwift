@@ -23,7 +23,8 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
     @IBOutlet weak var tfTranslation: NSTextField!
     @IBOutlet weak var tfWordInput: NSTextField!
     @IBOutlet weak var btnCheck: NSButton!
-    
+    @IBOutlet weak var btnSearch: NSButton!
+
     let synth = NSSpeechSynthesizer()
 
     func settingsChanged() {
@@ -51,6 +52,7 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
         _ = vm.translationString ~> tfTranslation.rx.text.orEmpty
         _ = vm.wordInputString <~> tfWordInput.rx.text.orEmpty
         _ = vm.checkTitle ~> btnCheck.rx.title
+        _ = vm.searchEnabled ~> btnSearch.rx.isEnabled
 
         newTest(self)
     }
