@@ -50,6 +50,7 @@ class MReviewOptionsEdit {
         x.shuffled = shuffled.value
         x.groupCount = groupCount.value
         x.groupSelected = groupSelected.value
+        x.speakingEnabled = speakingEnabled.value
         x.reviewCount = reviewCount.value
     }
 }

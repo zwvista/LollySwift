@@ -54,6 +54,7 @@ class WordsReviewViewModel: NSObject {
             self.checkTitle.accept(self.isTestMode ? "Check" : "Next")
         }
         subscription?.dispose()
+        isSpeaking.accept(options.speakingEnabled)
         if options.mode == .textbook {
             MUnitWord.getDataByTextbook(vmSettings.selectedTextbook).subscribe(onNext: { arr in
                 var arr2 = [MUnitWord]()
