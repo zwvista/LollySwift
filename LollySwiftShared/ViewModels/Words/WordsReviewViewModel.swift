@@ -30,12 +30,15 @@ class WordsReviewViewModel: NSObject {
     var checkEnabled = BehaviorRelay(value: false)
     var wordTargetString = BehaviorRelay(value: "")
     var noteTargetString = BehaviorRelay(value: "")
+    var wordHintString = BehaviorRelay(value: "")
     var wordTargetHidden = BehaviorRelay(value: false)
     var noteTargetHidden = BehaviorRelay(value: false)
+    var wordHintHidden = BehaviorRelay(value: false)
     var translationString = BehaviorRelay(value: "")
     var wordInputString = BehaviorRelay(value: "")
     var checkTitle = BehaviorRelay(value: "Check")
     var isSpeaking = BehaviorRelay(value: true)
+    var searchEnabled = BehaviorRelay(value: false)
 
     init(settings: SettingsViewModel, needCopy: Bool, doTestAction: (() -> Void)? = nil) {
         self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
@@ -62,7 +65,7 @@ class WordsReviewViewModel: NSObject {
                     }
                 }
                 self.arrWords = []
-                let cnt = min(50, arr.count)
+                let cnt = min(self.options.reviewCount, arr.count)
                 while self.arrWords.count < cnt {
                     let o = arr2.random()!
                     if !self.arrWords.contains(where: { $0.ID == o.ID }) {
@@ -131,6 +134,8 @@ class WordsReviewViewModel: NSObject {
             } else {
                 incorrectHidden.accept(false)
             }
+            wordHintHidden.accept(true)
+            searchEnabled.accept(true)
             checkTitle.accept("Next")
             guard hasNext else {return}
             let o = currentItem!
@@ -155,10 +160,13 @@ class WordsReviewViewModel: NSObject {
         checkEnabled.accept(hasNext)
         wordTargetString.accept(currentWord)
         noteTargetString.accept(currentItem?.NOTE ?? "")
+        wordHintString.accept(currentItem?.WORD.length.toString ?? "")
         wordTargetHidden.accept(isTestMode)
         noteTargetHidden.accept(isTestMode)
+        wordHintHidden.accept(!isTestMode)
         translationString.accept("")
         wordInputString.accept("")
+        searchEnabled.accept(false)
         doTestAction?()
         if hasNext {
             indexString.accept("\(index + 1)/\(arrWords.count)")

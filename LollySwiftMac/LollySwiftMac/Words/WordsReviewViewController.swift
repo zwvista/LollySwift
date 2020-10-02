@@ -19,6 +19,7 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
     @IBOutlet weak var tfAccuracy: NSTextField!
     @IBOutlet weak var tfWordTarget: NSTextField!
     @IBOutlet weak var tfNoteTarget: NSTextField!
+    @IBOutlet weak var tfWordHint: NSTextField!
     @IBOutlet weak var tfTranslation: NSTextField!
     @IBOutlet weak var tfWordInput: NSTextField!
     @IBOutlet weak var btnCheck: NSButton!
@@ -43,8 +44,10 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
         _ = vm.checkEnabled ~> btnCheck.rx.isEnabled
         _ = vm.wordTargetString ~> tfWordTarget.rx.text.orEmpty
         _ = vm.noteTargetString ~> tfNoteTarget.rx.text.orEmpty
+        _ = vm.wordHintString ~> tfWordHint.rx.text.orEmpty
         _ = vm.wordTargetHidden ~> tfWordTarget.rx.isHidden
         _ = vm.noteTargetHidden ~> tfNoteTarget.rx.isHidden
+        _ = vm.wordHintHidden ~> tfWordHint.rx.isHidden
         _ = vm.translationString ~> tfTranslation.rx.text.orEmpty
         _ = vm.wordInputString <~> tfWordInput.rx.text.orEmpty
         _ = vm.checkTitle ~> btnCheck.rx.title

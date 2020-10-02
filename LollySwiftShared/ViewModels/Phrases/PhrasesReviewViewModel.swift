@@ -49,14 +49,8 @@ class PhrasesReviewViewModel: NSObject {
         self.subscription?.dispose()
         if options.mode == .textbook {
             MUnitPhrase.getDataByTextbook(vmSettings.selectedTextbook).subscribe(onNext: { arr in
-                self.arrPhrases = []
-                let cnt = min(50, arr.count)
-                while self.arrPhrases.count < cnt {
-                    let o = arr.random()!
-                    if !self.arrPhrases.contains(where: { $0.ID == o.ID }) {
-                        self.arrPhrases.append(o)
-                    }
-                }
+                let cnt = min(self.options.reviewCount, arr.count)
+                self.arrPhrases = Array(arr.shuffled()[0..<cnt])
                 f()
             }) ~ self.rx.disposeBag
         } else {
