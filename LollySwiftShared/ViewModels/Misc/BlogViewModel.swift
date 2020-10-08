@@ -13,10 +13,8 @@ import RxSwift
 class BlogViewModel: NSObject {
     
     var vmSettings: SettingsViewModel
-    var vmNote: NoteViewModel!
     init(settings: SettingsViewModel) {
         self.vmSettings = SettingsViewModel(settings)
-        vmNote = NoteViewModel(settings: settings)
     }
     
     private func html1With(_ s: String) -> String {
@@ -136,7 +134,7 @@ class BlogViewModel: NSObject {
             return t
         }
         var arr = text.components(separatedBy: "\n")
-        vmNote.getNotes(wordCount: arr.count, isNoteEmpty: {
+        vmSettings.getNotes(wordCount: arr.count, isNoteEmpty: {
             let m = self.regMarkedEntry.findFirst(in: arr[$0])
             if m == nil { return false }
             let word = m!.group(at: 2)!
@@ -144,7 +142,7 @@ class BlogViewModel: NSObject {
         }, getOne: { i in
             let m = self.regMarkedEntry.findFirst(in: arr[i])!
             let (s1, word, s3, s4) = (m.group(at: 1)!, m.group(at: 2)!, m.group(at: 3)!, m.group(at: 4))
-            self.vmNote.getNote(word: word).subscribe(onNext: { note in
+            self.vmSettings.getNote(word: word).subscribe(onNext: { note in
                 let j = note.firstIndex { "0"..."9" ~= $0 }
                 // https://stackoverflow.com/questions/45562662/how-can-i-use-string-slicing-subscripts-in-swift-4
                 let s21 = j == nil ? note : String(note[..<j!])

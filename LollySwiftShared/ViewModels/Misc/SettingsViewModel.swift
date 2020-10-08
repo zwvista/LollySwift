@@ -490,6 +490,52 @@ class SettingsViewModel: NSObject {
         return MUserSetting.update(info: INFO_USPARTTO, intValue: USPARTTO).do(onNext: { self.delegate?.onUpdatePartTo() })
     }
     
+    static let zeroNote = "O"
+    func getNote(word: String) -> Observable<String> {
+        guard hasDictNote else { return Observable.empty() }
+        let url = selectedDictNote.urlString(word: word, arrAutoCorrect: arrAutoCorrect)
+        return RestApi.getHtml(url: url).map { html in
+            print(html)
+            return CommonApi.extractText(from: html, transform: self.selectedDictNote.TRANSFORM!, template: "") { text,_ in text }
+        }
+    }
+    
+    func getNotes(wordCount: Int, isNoteEmpty: @escaping (Int) -> Bool, getOne: @escaping (Int) -> Void, allComplete: @escaping () -> Void) {
+        guard hasDictNote else {return}
+        var i = 0
+        var subscription: Disposable?
+        subscription = Observable<Int>.interval(DispatchTimeInterval.milliseconds(selectedDictNote.WAIT), scheduler: MainScheduler.instance).subscribe { _ in
+                while i < wordCount && !isNoteEmpty(i) {
+                    i += 1
+                }
+                if i > wordCount {
+                    allComplete()
+                    subscription?.dispose()
+                } else {
+                    if i < wordCount {
+                        getOne(i)
+                    }
+                    // wait for the last one to finish
+                    i += 1
+                }
+            }
+        subscription! ~ rx.disposeBag
+    }
+    
+    func clearNotes(wordCount: Int, isNoteEmpty: @escaping (Int) -> Bool, getOne: @escaping (Int) -> Observable<()>) -> Observable<()> {
+        var i = 0
+        var o = Observable.just(())
+        while i < wordCount {
+            while i < wordCount && !isNoteEmpty(i) {
+                i += 1
+            }
+            if i < wordCount {
+                o = o.concat(getOne(i))
+            }
+            i += 1
+        }
+        return o
+    }
 }
 
 protocol SettingsViewModelDelegate : NSObjectProtocol {

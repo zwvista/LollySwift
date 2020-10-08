@@ -12,8 +12,6 @@ import NSObject_Rx
 
 class WordsUnitViewModel: NSObject {
     var vmSettings: SettingsViewModel
-    var vmNote: NoteViewModel!
-    var mDictNote: MDictionary { vmNote.mDictNote }
     let inTextbook: Bool
     var arrWords = [MUnitWord]()
     var arrWordsFiltered: [MUnitWord]?
@@ -22,7 +20,6 @@ class WordsUnitViewModel: NSObject {
     init(settings: SettingsViewModel, inTextbook: Bool, needCopy: Bool, complete: @escaping () -> ()) {
         self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
         self.inTextbook = inTextbook
-        vmNote = NoteViewModel(settings: settings)
         super.init()
         reload().subscribe(onNext: { complete() }) ~ rx.disposeBag
     }
@@ -107,14 +104,14 @@ class WordsUnitViewModel: NSObject {
 
     func getNote(index: Int) -> Observable<()> {
         let item = arrWords[index]
-        return vmNote.getNote(word: item.WORD).flatMap { note -> Observable<()> in
+        return vmSettings.getNote(word: item.WORD).flatMap { note -> Observable<()> in
             item.NOTE = note
             return WordsUnitViewModel.update(item.WORDID, note: note)
         }
     }
     
     func getNotes(ifEmpty: Bool, oneComplete: @escaping (Int) -> Void, allComplete: @escaping () -> Void) {
-        vmNote.getNotes(wordCount: arrWords.count, isNoteEmpty: {
+        vmSettings.getNotes(wordCount: arrWords.count, isNoteEmpty: {
             !ifEmpty || (self.arrWords[$0].NOTE ?? "").isEmpty
         }, getOne: { i in
             self.getNote(index: i).subscribe(onNext: {
@@ -125,12 +122,12 @@ class WordsUnitViewModel: NSObject {
 
     func clearNote(index: Int) -> Observable<()> {
         let item = arrWords[index]
-        item.NOTE = NoteViewModel.zeroNote
+        item.NOTE = SettingsViewModel.zeroNote
         return WordsUnitViewModel.update(item.WORDID, note: item.NOTE!)
     }
     
     func clearNotes(ifEmpty: Bool, oneComplete: @escaping (Int) -> Void) -> Observable<()> {
-        vmNote.clearNotes(wordCount: arrWords.count, isNoteEmpty: {
+        vmSettings.clearNotes(wordCount: arrWords.count, isNoteEmpty: {
             !ifEmpty || (self.arrWords[$0].NOTE ?? "").isEmpty
         }, getOne: { i in
             self.clearNote(index: i).do(onNext: { oneComplete(i) })

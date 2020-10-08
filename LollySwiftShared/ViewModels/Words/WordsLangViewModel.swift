@@ -11,15 +11,12 @@ import RxSwift
 
 class WordsLangViewModel: NSObject {
     var vmSettings: SettingsViewModel
-    var vmNote: NoteViewModel!
-    var mDictNote: MDictionary { vmNote.mDictNote }
     var arrWords = [MLangWord]()
     var arrWordsFiltered: [MLangWord]?
     var arrPhrases = [MLangPhrase]()
 
     public init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> ()) {
         self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
-        vmNote = NoteViewModel(settings: vmSettings)
         super.init()
         reload().subscribe(onNext: { complete() }) ~ rx.disposeBag
     }
@@ -63,7 +60,7 @@ class WordsLangViewModel: NSObject {
 
     func getNote(index: Int) -> Observable<()> {
         let item = arrWords[index]
-        return vmNote.getNote(word: item.WORD).flatMap { note -> Observable<()> in
+        return vmSettings.getNote(word: item.WORD).flatMap { note -> Observable<()> in
             item.NOTE = note
             return MLangWord.update(item.ID, note: note)
         }
@@ -71,7 +68,7 @@ class WordsLangViewModel: NSObject {
 
     func clearNote(index: Int) -> Observable<()> {
         let item = arrWords[index]
-        item.NOTE = NoteViewModel.zeroNote
+        item.NOTE = SettingsViewModel.zeroNote
         return WordsUnitViewModel.update(item.ID, note: item.NOTE!)
     }
 
