@@ -60,7 +60,8 @@ class WordsReviewViewModel: NSObject {
                 var arr2 = [MUnitWord]()
                 for o in arr {
                     let s = o.ACCURACY
-                    let t = min(6, 11 - (s.last != "%" ? 0 : (s.replacingOccurrences(of: "%", with: "").toDouble()! / 10).toInt))
+                    let percentage = s.last != "%" ? 0 : s.replacingOccurrences(of: "%", with: "").toDouble()!
+                    let t = 6 - (percentage / 20).toInt
                     for _ in 0..<t {
                         arr2.append(o)
                     }
@@ -145,6 +146,7 @@ class WordsReviewViewModel: NSObject {
             MWordFami.update(wordid: o.WORDID, isCorrect: isCorrect).map {
                 o.CORRECT = $0.CORRECT
                 o.TOTAL = $0.TOTAL
+                self.accuracyString.accept(o.ACCURACY)
             }.subscribe() ~ rx.disposeBag
         } else {
             next()
