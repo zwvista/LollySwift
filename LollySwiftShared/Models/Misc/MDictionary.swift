@@ -18,7 +18,7 @@ class MDictionary: NSObject, Codable {
     dynamic var LANGIDTO = 0
     dynamic var LANGNAMETO = ""
     dynamic var SEQNUM = 0
-    dynamic var DICTTYPEID = 0
+    dynamic var DICTTYPECODE = 0
     dynamic var DICTTYPENAME = ""
     dynamic var DICTNAME = ""
     dynamic var URL: String?
@@ -45,18 +45,6 @@ class MDictionary: NSObject, Codable {
         return RestApi.getRecords(url: url)
     }
 
-    static func update(item: MDictionary) -> Observable<()> {
-        // SQL: UPDATE DICTIONARIES SET DICTID=?, LANGIDFROM=?, LANGIDTO=?, NAME=?, SEQNUM=?, DICTTYPEID=?, URL=?, CHCONV=?, AUTOMATION=?, AUTOJUMP=?, DICTTABLE=?, TEMPLATE=?, TEMPLATE2=? WHERE ID=?
-        let url = "\(CommonApi.urlAPI)DICTIONARIES/\(item.ID)"
-        return RestApi.update(url: url, body: try! item.toJSONString()!).map { print($0) }
-    }
-    
-    static func create(item: MDictionary) -> Observable<Int> {
-        // SQL: INSERT INTO DICTIONARIES (DICTID, LANGIDFROM, LANGIDTO, NAME, SEQNUM, DICTTYPEID, URL, CHCONV, AUTOMATION, AUTOJUMP, DICTTABLE, TEMPLATE, TEMPLATE2) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)
-        let url = "\(CommonApi.urlAPI)DICTIONARIES"
-        return RestApi.create(url: url, body: try! item.toJSONString()!).map { $0.toInt()! }.do(onNext: { print($0) })
-    }
-
     static func getDictsReferenceByLang(_ langid: Int) -> Observable<[MDictionary]> {
         // SQL: SELECT * FROM VDICTSREFERENCE WHERE LANGIDFROM=?
         let url = "\(CommonApi.urlAPI)VDICTSREFERENCE?filter=LANGIDFROM,eq,\(langid)&order=SEQNUM&order=DICTNAME"
@@ -79,5 +67,71 @@ class MDictionary: NSObject, Codable {
         // SQL: SELECT * FROM VDICTSTRANSLATION WHERE LANGIDFROM = ?
         let url = "\(CommonApi.urlAPI)VDICTSTRANSLATION?filter=LANGIDFROM,eq,\(langid)"
         return RestApi.getRecords(url: url)
+    }
+}
+
+@objcMembers
+class MDictionaryDict: NSObject, Codable {
+    dynamic var ID = 0
+    dynamic var DICTID = 0
+    dynamic var LANGIDFROM = 0
+    dynamic var LANGNAMEFROM = ""
+    dynamic var LANGIDTO = 0
+    dynamic var LANGNAMETO = ""
+    dynamic var SEQNUM = 0
+    dynamic var DICTTYPECODE = 0
+    dynamic var DICTTYPENAME = ""
+    dynamic var DICTNAME = ""
+    dynamic var URL: String?
+    dynamic var CHCONV: String?
+    dynamic var AUTOMATION: String?
+    dynamic var TRANSFORM: String?
+    dynamic var WAIT = 0
+    dynamic var TEMPLATE: String?
+    dynamic var TEMPLATE2: String?
+
+    static func update(item: MDictionary) -> Observable<()> {
+        // SQL: UPDATE DICTIONARIES SET DICTID=?, LANGIDFROM=?, LANGIDTO=?, NAME=?, SEQNUM=?, DICTTYPECODE=?, URL=?, CHCONV=?, AUTOMATION=?, AUTOJUMP=?, DICTTABLE=?, TEMPLATE=?, TEMPLATE2=? WHERE ID=?
+        let url = "\(CommonApi.urlAPI)DICTIONARIES/\(item.ID)"
+        return RestApi.update(url: url, body: try! item.toJSONString()!).map { print($0) }
+    }
+    
+    static func create(item: MDictionary) -> Observable<Int> {
+        // SQL: INSERT INTO DICTIONARIES (DICTID, LANGIDFROM, LANGIDTO, NAME, SEQNUM, DICTTYPECODE, URL, CHCONV, AUTOMATION, AUTOJUMP, DICTTABLE, TEMPLATE, TEMPLATE2) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)
+        let url = "\(CommonApi.urlAPI)DICTIONARIES"
+        return RestApi.create(url: url, body: try! item.toJSONString()!).map { $0.toInt()! }.do(onNext: { print($0) })
+    }
+}
+
+@objcMembers
+class MDictionarySite: NSObject, Codable {
+    dynamic var ID = 0
+    dynamic var DICTID = 0
+    dynamic var LANGIDFROM = 0
+    dynamic var LANGNAMEFROM = ""
+    dynamic var LANGIDTO = 0
+    dynamic var LANGNAMETO = ""
+    dynamic var SEQNUM = 0
+    dynamic var DICTTYPECODE = 0
+    dynamic var DICTTYPENAME = ""
+    dynamic var DICTNAME = ""
+    dynamic var URL: String?
+    dynamic var CHCONV: String?
+    dynamic var AUTOMATION: String?
+    dynamic var TRANSFORM: String?
+    dynamic var WAIT = 0
+    dynamic var TEMPLATE: String?
+    dynamic var TEMPLATE2: String?
+    
+    static func update(item: MDictionary) -> Observable<()> {
+        // SQL: UPDATE SITES SET DICTID=?, LANGIDFROM=?, LANGIDTO=?, NAME=?, SEQNUM=?, DICTTYPECODE=?, URL=?, CHCONV=?, AUTOMATION=?, AUTOJUMP=?, DICTTABLE=?, TEMPLATE=?, TEMPLATE2=? WHERE ID=?
+        let url = "\(CommonApi.urlAPI)SITES/\(item.ID)"
+        return RestApi.update(url: url, body: try! item.toJSONString()!).map { print($0) }
+    }
+    
+    static func create(item: MDictionary) -> Observable<Int> {
+        // SQL: INSERT INTO SITES (DICTID, LANGIDFROM, LANGIDTO, NAME, SEQNUM, DICTTYPECODE, URL, CHCONV, AUTOMATION, AUTOJUMP, DICTTABLE, TEMPLATE, TEMPLATE2) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)
+        let url = "\(CommonApi.urlAPI)SITES"
+        return RestApi.create(url: url, body: try! item.toJSONString()!).map { $0.toInt()! }.do(onNext: { print($0) })
     }
 }
