@@ -350,12 +350,12 @@
             <objects>
                 <customObject id="HDX-Px-tzN" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <viewController id="F8i-pe-Ate" customClass="WordsUnitViewController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="SJ8-yp-Qms">
-                        <rect key="frame" x="0.0" y="0.0" width="1200" height="574"/>
+                    <view key="view" misplaced="YES" id="SJ8-yp-Qms">
+                        <rect key="frame" x="0.0" y="0.0" width="1200" height="572"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2hs-X4-l5R">
-                                <rect key="frame" x="0.0" y="542" width="298" height="32"/>
+                            <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" misplaced="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2hs-X4-l5R">
+                                <rect key="frame" x="0.0" y="541" width="298" height="32"/>
                                 <subviews>
                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="E8d-BH-EMc">
                                         <rect key="frame" x="6" y="5" width="96" height="21"/>
@@ -437,16 +437,15 @@
                                     <real value="3.4028234663852886e+38"/>
                                 </customSpacing>
                             </stackView>
-                            <splitView fixedFrame="YES" arrangesAllSubviews="NO" dividerStyle="paneSplitter" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oIz-Qq-T1N">
-                                <rect key="frame" x="0.0" y="0.0" width="1200" height="542"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            <splitView misplaced="YES" arrangesAllSubviews="NO" dividerStyle="paneSplitter" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oIz-Qq-T1N">
+                                <rect key="frame" x="0.0" y="40" width="1200" height="496"/>
                                 <subviews>
                                     <customView id="6Rr-wA-xjF">
-                                        <rect key="frame" x="0.0" y="0.0" width="428" height="542"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="428" height="496"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
                                             <splitView misplaced="YES" arrangesAllSubviews="NO" dividerStyle="paneSplitter" translatesAutoresizingMaskIntoConstraints="NO" id="BWR-Ye-oGT">
-                                                <rect key="frame" x="0.0" y="6" width="428" height="536"/>
+                                                <rect key="frame" x="0.0" y="-40" width="428" height="536"/>
                                                 <subviews>
                                                     <customView misplaced="YES" id="CQX-zp-6Ft">
                                                         <rect key="frame" x="0.0" y="0.0" width="428" height="418"/>
@@ -978,7 +977,7 @@
                                                                 </tableHeaderView>
                                                             </scrollView>
                                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IQa-iE-3F1">
-                                                                <rect key="frame" x="-2" y="0.0" width="4" height="62"/>
+                                                                <rect key="frame" x="-2" y="0.0" width="4" height="16"/>
                                                                 <textFieldCell key="cell" lineBreakMode="clipping" id="BPa-Xp-ETh">
                                                                     <font key="font" metaFont="system"/>
                                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1010,11 +1009,11 @@
                                         </constraints>
                                     </customView>
                                     <customView id="bA1-VX-afL">
-                                        <rect key="frame" x="438" y="0.0" width="762" height="542"/>
+                                        <rect key="frame" x="438" y="0.0" width="762" height="496"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
                                             <tabView translatesAutoresizingMaskIntoConstraints="NO" id="KCG-rY-0wH">
-                                                <rect key="frame" x="-7" y="-10" width="776" height="558"/>
+                                                <rect key="frame" x="-7" y="-10" width="776" height="512"/>
                                                 <font key="font" metaFont="system"/>
                                             </tabView>
                                         </subviews>
@@ -1034,7 +1033,11 @@
                         </subviews>
                         <constraints>
                             <constraint firstItem="2hs-X4-l5R" firstAttribute="leading" secondItem="SJ8-yp-Qms" secondAttribute="leading" id="2sJ-7N-lTh"/>
+                            <constraint firstItem="oIz-Qq-T1N" firstAttribute="top" secondItem="2hs-X4-l5R" secondAttribute="bottom" id="Kas-Fd-ct5"/>
                             <constraint firstItem="2hs-X4-l5R" firstAttribute="top" secondItem="SJ8-yp-Qms" secondAttribute="top" id="Vso-FS-lhx"/>
+                            <constraint firstAttribute="trailing" secondItem="oIz-Qq-T1N" secondAttribute="trailing" id="hTN-DV-eNh"/>
+                            <constraint firstItem="oIz-Qq-T1N" firstAttribute="leading" secondItem="SJ8-yp-Qms" secondAttribute="leading" id="ifv-GU-XRw"/>
+                            <constraint firstAttribute="bottom" secondItem="oIz-Qq-T1N" secondAttribute="bottom" id="jx6-Oy-Zm4"/>
                         </constraints>
                     </view>
                     <connections>
