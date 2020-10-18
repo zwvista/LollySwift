@@ -10,7 +10,7 @@ import Cocoa
 import RxSwift
 import NSObject_Rx
 
-class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSSearchFieldDelegate, LollyProtocol {
+class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSSearchFieldDelegate, LollyProtocol {
     
     @IBOutlet weak var tfNewWord: NSTextField!
     @IBOutlet weak var scTextFilter: NSSegmentedControl!
@@ -258,7 +258,10 @@ class WordsBaseViewController: NSViewController, NSTableViewDataSource, NSTableV
     }
 }
 
-class WordsBaseWindowController: NSWindowController, LollyProtocol, NSWindowDelegate, NSTextFieldDelegate {
+class WordsBaseViewController: WordsPhrasesBaseViewController {
+}
+
+class WordsPhrasesBaseWindowController: NSWindowController, LollyProtocol, NSWindowDelegate, NSTextFieldDelegate {
     
     @IBOutlet weak var toolbar: NSToolbar!
     @IBOutlet weak var scSpeak: NSSegmentedControl!
@@ -305,7 +308,7 @@ class WordsBaseWindowController: NSWindowController, LollyProtocol, NSWindowDele
     @IBOutlet weak var tbiDict37: NSToolbarItem!
     @IBOutlet weak var tbiDict38: NSToolbarItem!
     @IBOutlet weak var tbiDict39: NSToolbarItem!
-    var vc: WordsBaseViewController { contentViewController as! WordsBaseViewController }
+    var vc: WordsPhrasesBaseViewController { contentViewController as! WordsPhrasesBaseViewController }
     @objc var vm: SettingsViewModel! { vc.vmSettings }
     private var defaultToolbarItemCount = 0
     
@@ -349,4 +352,7 @@ class WordsBaseWindowController: NSWindowController, LollyProtocol, NSWindowDele
     deinit {
         print("DEBUG: \(self.className) deinit")
     }
+}
+
+class WordsBaseWindowController: WordsPhrasesBaseWindowController {
 }
