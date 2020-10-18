@@ -27,10 +27,10 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
     @objc var textFilter = ""
     var selectedWord = ""
     var selectedWordID = 0
+    var selectedPhrase = ""
     let synth = NSSpeechSynthesizer()
     var isSpeaking = true
     weak var responder: NSView? = nil
-    var arrPhrases: [MLangPhrase]! { nil }
 //    var textFilter = BehaviorRelay(value: "")
 //    var scopeFilter = BehaviorRelay(value: SettingsViewModel.arrScopeWordFilters[0])
 //    var textbookFilter = BehaviorRelay(value: 0)
@@ -47,10 +47,10 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
     
     // Hold a reference to the window controller in order to prevent it from being released
     // Without it, we would not be able to access its child controls afterwards
-    var wc: WordsBaseWindowController!
+    var wc: WordsPhrasesBaseWindowController!
     override func viewDidAppear() {
         super.viewDidAppear()
-        wc = view.window!.windowController as? WordsBaseWindowController
+        wc = view.window!.windowController as? WordsPhrasesBaseWindowController
         wc.scSpeak.selectedSegment = isSpeaking ? 1 : 0
         // For some unknown reason, the placeholder string of the filter text field
         // cannot be set in the storyboard
@@ -120,14 +120,14 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
             selectedWordID = 0
             f(word: newWord)
         } else {
-            let item = itemForRow(row: row)!
+            let item = wordItemForRow(row: row)!
             selectedWord = item.WORD
             selectedWordID = item.WORDID
             f(word: selectedWord)
         }
     }
 
-    func itemForRow(row: Int) -> (MWordProtocol & NSObject)? {
+    func wordItemForRow(row: Int) -> (MWordProtocol & NSObject)? {
         nil
     }
     
@@ -142,6 +142,8 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
 
 class WordsBaseViewController: WordsPhrasesBaseViewController {
     
+    var arrPhrases: [MLangPhrase]! { nil }
+
     func doRefresh() {
         tvWords.reloadData()
         updateStatusText()
@@ -166,7 +168,7 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
         let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! NSTableCellView
         let columnName = tableColumn!.identifier.rawValue
         if tableView === tvWords {
-            let item = itemForRow(row: row)!
+            let item = wordItemForRow(row: row)!
             cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
         } else {
             let item = arrPhrases[row]
@@ -204,7 +206,7 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
         guard row != -1 else {return}
         let col = tvWords.column(for: sender)
         let key = tvWords.tableColumns[col].identifier.rawValue
-        let item = itemForRow(row: row)!
+        let item = wordItemForRow(row: row)!
         let oldValue = String(describing: item.value(forKey: key) ?? "")
         var newValue = sender.stringValue
         if key == "WORD" {
@@ -252,7 +254,7 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
     @IBAction func openOnlineDict(_ sender: AnyObject) {
         let row = tvWords.selectedRow
         guard row != -1 else {return}
-        let word = itemForRow(row: row)!.WORD
+        let word = wordItemForRow(row: row)!.WORD
         for item in tabView.tabViewItems {
             let vc = item.viewController as! WordsDictViewController
             let url = vc.dict.urlString(word: word, arrAutoCorrect: vmSettings.arrAutoCorrect)

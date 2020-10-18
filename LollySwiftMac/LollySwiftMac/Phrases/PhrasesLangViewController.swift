@@ -38,7 +38,7 @@ class PhrasesLangViewController: PhrasesBaseViewController {
         arrPhrases.count
     }
     
-    override func itemForRow(row: Int) -> (MPhraseProtocol & NSObject)? {
+    override func phraseItemForRow(row: Int) -> (MPhraseProtocol & NSObject)? {
         arrPhrases[row]
     }
     
@@ -80,8 +80,7 @@ class PhrasesLangViewController: PhrasesBaseViewController {
     }
     
     @IBAction func filterPhrase(_ sender: AnyObject) {
-        let n = wc.scTextFilter.selectedSegment
-        vm.applyFilters(textFilter: wc.textFilter, scope: n == 0 ? "Phrase" : "Translation")
+        vm.applyFilters(textFilter: textFilter, scope: scTextFilter.selectedSegment == 0 ? "Phrase" : "Translation")
         tvPhrases.reloadData()
     }
 

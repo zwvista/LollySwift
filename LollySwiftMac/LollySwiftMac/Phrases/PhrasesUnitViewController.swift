@@ -51,7 +51,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
         arrPhrases.count
     }
     
-    override func itemForRow(row: Int) -> (MPhraseProtocol & NSObject)? {
+    override func phraseItemForRow(row: Int) -> (MPhraseProtocol & NSObject)? {
         arrPhrases[row]
     }
     
@@ -158,8 +158,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     }
     
     @IBAction func filterPhrase(_ sender: AnyObject) {
-        let n = wc.scTextFilter.selectedSegment
-        vm.applyFilters(textFilter: wc.textFilter, scope: n == 0 ? "Phrase" : "Translation", textbookFilter: wc.textbookFilter)
+        vm.applyFilters(textFilter: textFilter, scope: scTextFilter.selectedSegment == 0 ? "Phrase" : "Translation", textbookFilter: 0)
         tvPhrases.reloadData()
     }
 

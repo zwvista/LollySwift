@@ -15,6 +15,10 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
     var vm: PhrasesUnitViewModel!
     override var vmSettings: SettingsViewModel! { vm.vmSettings }
     var arrPhrases: [MUnitPhrase] { vm.arrPhrasesFiltered ?? vm.arrPhrases }
+    
+    @IBOutlet weak var pubTextbookFilter: NSPopUpButton!
+    @IBOutlet weak var acTextbooks: NSArrayController!
+    @objc var textbookFilter = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +26,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
 
     override func settingsChanged() {
         vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: false, needCopy: true) {
-            self.wc.acTextbooks.content = self.vmSettings.arrTextbookFilters
+            self.acTextbooks.content = self.vmSettings.arrTextbookFilters
             self.doRefresh()
         }
         super.settingsChanged()
@@ -38,7 +42,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
         arrPhrases.count
     }
     
-    override func itemForRow(row: Int) -> (MPhraseProtocol & NSObject)? {
+    override func phraseItemForRow(row: Int) -> (MPhraseProtocol & NSObject)? {
         arrPhrases[row]
     }
     
@@ -74,8 +78,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
     }
     
     @IBAction func filterPhrase(_ sender: AnyObject) {
-        let n = wc.scTextFilter.selectedSegment
-        vm.applyFilters(textFilter: wc.textFilter, scope: n == 0 ? "Phrase" : "Translation", textbookFilter: wc.textbookFilter)
+        vm.applyFilters(textFilter: textFilter, scope: scTextFilter.selectedSegment == 0 ? "Phrase" : "Translation", textbookFilter: textbookFilter)
         self.tvPhrases.reloadData()
     }
 

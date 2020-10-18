@@ -60,7 +60,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
         tableView === tvWords ? arrWords.count : arrPhrases.count
     }
     
-    override func itemForRow(row: Int) -> (MWordProtocol & NSObject)? {
+    override func wordItemForRow(row: Int) -> (MWordProtocol & NSObject)? {
         arrWords[row]
     }
     

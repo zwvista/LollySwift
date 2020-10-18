@@ -36,7 +36,7 @@ class WordsSearchViewController: WordsBaseViewController {
         vm.arrWords.count
     }
     
-    override func itemForRow(row: Int) -> (MWordProtocol & NSObject)? {
+    override func wordItemForRow(row: Int) -> (MWordProtocol & NSObject)? {
         vm.arrWords[row]
     }
 
