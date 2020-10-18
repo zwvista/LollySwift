@@ -67,14 +67,17 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
         synth.setVoice(NSSpeechSynthesizer.VoiceName(rawValue: vmSettings.macVoiceName))
     }
     
+    func speak() {
+    }
+    
     @IBAction func speak(_ sender: AnyObject) {
-        synth.startSpeaking(selectedWord)
+        speak()
     }
     
     @IBAction func isSpeakingChanged(_ sender: AnyObject) {
         isSpeaking = (sender as! NSSegmentedControl).selectedSegment == 1
         if isSpeaking {
-            speak(self)
+            speak()
         }
     }
     
@@ -177,6 +180,10 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
         return cell
     }
     
+    override func speak() {
+        synth.startSpeaking(selectedWord)
+    }
+
     func updateStatusText() {
         tfStatusText.stringValue = "\(tvWords.numberOfRows) Words"
     }

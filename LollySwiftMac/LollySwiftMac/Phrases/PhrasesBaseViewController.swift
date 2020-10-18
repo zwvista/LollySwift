@@ -90,9 +90,9 @@ class PhrasesBaseViewController: WordsPhrasesBaseViewController {
         MacApi.googleString(selectedPhrase)
     }
 
-//    @IBAction func speak(_ sender: AnyObject) {
-//        synth.startSpeaking(selectedPhrase)
-//    }
+    override func speak() {
+        synth.startSpeaking(selectedPhrase)
+    }
     
     func updateStatusText() {
         tfStatusText.stringValue = "\(tvPhrases.numberOfRows) Phrases"

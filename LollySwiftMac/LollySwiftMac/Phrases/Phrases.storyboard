@@ -70,42 +70,6 @@
                                         <action selector="reviewPhrases:" target="qEo-JS-MYZ" id="oii-ka-Xfq"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="96A81DF2-B48B-48F8-96E7-9E355C588C66" label="Filter Scope" paletteLabel="Filter Scope" sizingBehavior="auto" id="4Dq-5F-r8A">
-                                    <nil key="toolTip"/>
-                                    <segmentedControl key="view" verticalHuggingPriority="750" id="Abr-kh-xne">
-                                        <rect key="frame" x="0.0" y="14" width="133" height="23"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="zGz-6T-6ez">
-                                            <font key="font" metaFont="system"/>
-                                            <segments>
-                                                <segment label="Phrase" width="52" selected="YES"/>
-                                                <segment label="Translation" width="74" tag="1"/>
-                                            </segments>
-                                        </segmentedCell>
-                                        <connections>
-                                            <action selector="filterPhrase:" target="qEo-JS-MYZ" id="Bbz-fB-CKa"/>
-                                        </connections>
-                                    </segmentedControl>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="E3F738D6-5FEA-4A60-ACD1-E66448D7C8B3" label="Filter Text" paletteLabel="Filter Text" tag="-1" id="bzy-ad-vwY">
-                                    <nil key="toolTip"/>
-                                    <size key="minSize" width="40" height="22"/>
-                                    <size key="maxSize" width="123" height="22"/>
-                                    <searchField key="view" verticalHuggingPriority="750" tag="-1" textCompletion="NO" id="egf-aC-2Ca">
-                                        <rect key="frame" x="0.0" y="14" width="119" height="22"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" sendsWholeSearchString="YES" id="X5k-RF-RYU">
-                                            <font key="font" usesAppearanceFont="YES"/>
-                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </searchFieldCell>
-                                        <connections>
-                                            <action selector="filterPhrase:" target="qEo-JS-MYZ" id="RWb-wA-zfA"/>
-                                            <binding destination="P6D-Dv-O3U" name="value" keyPath="textFilter" id="5Ec-eD-0Uo"/>
-                                            <outlet property="delegate" destination="P6D-Dv-O3U" id="4by-Bq-o7Y"/>
-                                        </connections>
-                                    </searchField>
-                                </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="61362FB7-9611-4676-A4CB-FC051938C2B2" label="Dict0" paletteLabel="Dict0" image="NSStatusNone" id="Jjm-r9-Cl4">
                                     <size key="minSize" width="17" height="18"/>
                                     <size key="maxSize" width="17" height="18"/>
@@ -275,8 +239,6 @@
                                 <toolbarItem reference="rwC-ba-HN6"/>
                                 <toolbarItem reference="ap0-qD-kxT"/>
                                 <toolbarItem reference="zRW-6M-K1p"/>
-                                <toolbarItem reference="4Dq-5F-r8A"/>
-                                <toolbarItem reference="bzy-ad-vwY"/>
                                 <toolbarItem reference="Jjm-r9-Cl4"/>
                                 <toolbarItem reference="Ujj-lX-z7U"/>
                                 <toolbarItem reference="gQ7-X9-J2K"/>
@@ -324,9 +286,48 @@
                         </connections>
                     </window>
                     <connections>
-                        <outlet property="scSpeak" destination="AEn-9N-szO" id="vDU-jF-i30"/>
-                        <outlet property="scTextFilter" destination="Abr-kh-xne" id="gRZ-8y-mSh"/>
-                        <outlet property="sfFilter" destination="egf-aC-2Ca" id="oM6-nC-xJA"/>
+                        <outlet property="scSpeak" destination="AEn-9N-szO" id="t6E-Zy-kdc"/>
+                        <outlet property="tbiDict0" destination="Jjm-r9-Cl4" id="oDD-dV-ExZ"/>
+                        <outlet property="tbiDict1" destination="Ujj-lX-z7U" id="gZV-Zi-7Cy"/>
+                        <outlet property="tbiDict10" destination="paB-vP-rdh" id="nS5-jl-jnz"/>
+                        <outlet property="tbiDict11" destination="16V-Bi-PEb" id="0dV-Qt-9af"/>
+                        <outlet property="tbiDict12" destination="jLG-sC-Yev" id="U0a-2n-ftY"/>
+                        <outlet property="tbiDict13" destination="nu1-TN-h6d" id="e1R-kN-CE9"/>
+                        <outlet property="tbiDict14" destination="zvO-EG-UOx" id="XNd-da-B0f"/>
+                        <outlet property="tbiDict15" destination="eYL-ba-GU8" id="Qkg-jR-nfg"/>
+                        <outlet property="tbiDict16" destination="MUk-Xd-jOs" id="gi3-EQ-nAX"/>
+                        <outlet property="tbiDict17" destination="tmS-xv-yV4" id="Ubt-ZG-R1n"/>
+                        <outlet property="tbiDict18" destination="y44-EM-6KA" id="8Uk-nH-KfA"/>
+                        <outlet property="tbiDict19" destination="SdR-8c-r96" id="ey7-9o-j71"/>
+                        <outlet property="tbiDict2" destination="gQ7-X9-J2K" id="Bzi-fM-QXh"/>
+                        <outlet property="tbiDict20" destination="Ri0-av-VO8" id="ee8-mf-4u4"/>
+                        <outlet property="tbiDict21" destination="X3w-qh-dVp" id="Gdw-wc-yjY"/>
+                        <outlet property="tbiDict22" destination="Y8J-cM-veD" id="9AR-Dw-RAN"/>
+                        <outlet property="tbiDict23" destination="PzD-Wp-OY1" id="WyK-1d-3OA"/>
+                        <outlet property="tbiDict24" destination="LNp-tA-hA7" id="LT4-TM-1wv"/>
+                        <outlet property="tbiDict25" destination="29T-wC-VkQ" id="Zwf-em-P9d"/>
+                        <outlet property="tbiDict26" destination="yIl-lT-2qF" id="noZ-eL-GGg"/>
+                        <outlet property="tbiDict27" destination="Xrw-P5-EZG" id="qxn-4v-HJK"/>
+                        <outlet property="tbiDict28" destination="3Ld-he-fNT" id="dgs-d3-tCI"/>
+                        <outlet property="tbiDict29" destination="aSx-mL-oNM" id="B6f-4l-Ibe"/>
+                        <outlet property="tbiDict3" destination="3C1-HO-nlO" id="767-tF-t3x"/>
+                        <outlet property="tbiDict30" destination="ZUw-Ii-AZl" id="qNZ-MY-36z"/>
+                        <outlet property="tbiDict31" destination="Bg6-Tf-CNu" id="a8Z-9a-XFG"/>
+                        <outlet property="tbiDict32" destination="bIr-N8-AkR" id="9NH-XI-0Rr"/>
+                        <outlet property="tbiDict33" destination="3cV-uu-zhr" id="vj0-go-20O"/>
+                        <outlet property="tbiDict34" destination="qBI-bg-q5P" id="D7u-g2-n1x"/>
+                        <outlet property="tbiDict35" destination="Dfo-sH-Dhr" id="bbu-89-v91"/>
+                        <outlet property="tbiDict36" destination="FzO-30-yo3" id="34c-ta-moW"/>
+                        <outlet property="tbiDict37" destination="ZaD-ck-oM2" id="zWv-p5-9mZ"/>
+                        <outlet property="tbiDict38" destination="aHY-Mg-sFI" id="JwH-vw-vEB"/>
+                        <outlet property="tbiDict39" destination="6af-Tx-NGn" id="5mv-Hu-p1L"/>
+                        <outlet property="tbiDict4" destination="6DX-O9-gI8" id="azd-lm-ShF"/>
+                        <outlet property="tbiDict5" destination="Gqp-si-imc" id="Oj3-jZ-Uby"/>
+                        <outlet property="tbiDict6" destination="SYz-1r-x3h" id="VE8-r3-TKs"/>
+                        <outlet property="tbiDict7" destination="Lgg-aL-DEa" id="myo-cE-3E2"/>
+                        <outlet property="tbiDict8" destination="Fra-Kg-ubs" id="5A7-Kk-VnV"/>
+                        <outlet property="tbiDict9" destination="mIi-Vx-rty" id="Xb1-Ti-3hj"/>
+                        <outlet property="toolbar" destination="IpQ-OR-gOP" id="E0s-sM-pSe"/>
                         <segue destination="F8i-pe-Ate" kind="relationship" relationship="window.shadowedContentViewController" id="oJj-lN-fK3"/>
                     </connections>
                 </windowController>
@@ -2113,46 +2114,6 @@ Gw
                                         </connections>
                                     </segmentedControl>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="6814314D-18D1-4B95-A119-B3924E47A64A" label="Filter Scope" paletteLabel="Filter Scope" sizingBehavior="auto" id="2ps-sj-xWc">
-                                    <nil key="toolTip"/>
-                                    <segmentedControl key="view" verticalHuggingPriority="750" id="Bzv-q8-cCh">
-                                        <rect key="frame" x="0.0" y="14" width="134" height="24"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="REr-qu-yks">
-                                            <font key="font" metaFont="system"/>
-                                            <segments>
-                                                <segment label="Phrase" width="52" selected="YES"/>
-                                                <segment label="Translation" width="74" tag="1"/>
-                                            </segments>
-                                        </segmentedCell>
-                                        <connections>
-                                            <action selector="filterPhrase:" target="maH-dw-yMa" id="KJe-aq-1xT"/>
-                                        </connections>
-                                    </segmentedControl>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="7802AEBB-32EF-45D7-B7F1-102F3D9336CD" label="Filter Text" paletteLabel="Filter Text" tag="-1" id="Fkr-PD-fBq">
-                                    <nil key="toolTip"/>
-                                    <size key="minSize" width="40" height="22"/>
-                                    <size key="maxSize" width="123" height="22"/>
-                                    <searchField key="view" verticalHuggingPriority="750" tag="-1" textCompletion="NO" id="qUX-lZ-cQc">
-                                        <rect key="frame" x="0.0" y="14" width="119" height="22"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" sendsWholeSearchString="YES" id="b1u-JQ-VZk">
-                                            <font key="font" usesAppearanceFont="YES"/>
-                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </searchFieldCell>
-                                        <connections>
-                                            <action selector="filterPhrase:" target="maH-dw-yMa" id="C1J-eD-0CJ"/>
-                                            <binding destination="t1w-66-vYI" name="value" keyPath="textFilter" id="lc9-0C-ueX">
-                                                <dictionary key="options">
-                                                    <bool key="NSContinuouslyUpdatesValue" value="YES"/>
-                                                </dictionary>
-                                            </binding>
-                                            <outlet property="delegate" destination="t1w-66-vYI" id="95e-U8-i3D"/>
-                                        </connections>
-                                    </searchField>
-                                </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="48672D26-32EC-438E-B580-5C23940683E2" label="Dict0" paletteLabel="Dict0" image="NSStatusNone" id="8Wc-ck-zMh">
                                     <size key="minSize" width="17" height="18"/>
                                     <size key="maxSize" width="17" height="18"/>
@@ -2318,8 +2279,6 @@ Gw
                                 <toolbarItem reference="viz-co-4v0"/>
                                 <toolbarItem reference="MnR-91-5r0"/>
                                 <toolbarItem reference="G08-Sc-Q2L"/>
-                                <toolbarItem reference="2ps-sj-xWc"/>
-                                <toolbarItem reference="Fkr-PD-fBq"/>
                                 <toolbarItem reference="8Wc-ck-zMh"/>
                                 <toolbarItem reference="0Ei-Ch-XXK"/>
                                 <toolbarItem reference="LSq-mm-R7n"/>
@@ -2367,9 +2326,48 @@ Gw
                         </connections>
                     </window>
                     <connections>
-                        <outlet property="scSpeak" destination="4s3-xV-8Zh" id="b67-pR-tpJ"/>
-                        <outlet property="scTextFilter" destination="Bzv-q8-cCh" id="dbc-HV-yIu"/>
-                        <outlet property="sfFilter" destination="qUX-lZ-cQc" id="JOz-Es-sYM"/>
+                        <outlet property="scSpeak" destination="4s3-xV-8Zh" id="eRB-SF-pln"/>
+                        <outlet property="tbiDict0" destination="8Wc-ck-zMh" id="FPv-24-By3"/>
+                        <outlet property="tbiDict1" destination="0Ei-Ch-XXK" id="3Q4-z6-0S8"/>
+                        <outlet property="tbiDict10" destination="a53-Be-pwD" id="0qw-Lc-uNV"/>
+                        <outlet property="tbiDict11" destination="yU2-u1-gK8" id="qcU-ub-hiC"/>
+                        <outlet property="tbiDict12" destination="Ubr-Ek-gU0" id="k9P-X2-87F"/>
+                        <outlet property="tbiDict13" destination="lQn-Tb-oPt" id="SYB-nH-q7O"/>
+                        <outlet property="tbiDict14" destination="lP2-AJ-Oab" id="T1r-uA-md1"/>
+                        <outlet property="tbiDict15" destination="5Vp-7u-oz2" id="kg8-97-GFx"/>
+                        <outlet property="tbiDict16" destination="8JA-El-zWk" id="dHr-Fh-FPN"/>
+                        <outlet property="tbiDict17" destination="5Zl-eH-zJV" id="rtL-VD-yjq"/>
+                        <outlet property="tbiDict18" destination="NvG-Ad-3PH" id="qMb-lB-MRQ"/>
+                        <outlet property="tbiDict19" destination="pZe-L6-6ar" id="T5x-rF-N8D"/>
+                        <outlet property="tbiDict2" destination="LSq-mm-R7n" id="MST-gK-8kh"/>
+                        <outlet property="tbiDict20" destination="Lqr-TU-NA5" id="Fss-Xx-OOg"/>
+                        <outlet property="tbiDict21" destination="B0W-J3-fDP" id="Zi1-aa-dJI"/>
+                        <outlet property="tbiDict22" destination="XXO-Ev-12D" id="bvx-aL-IBO"/>
+                        <outlet property="tbiDict23" destination="AEP-5B-dBG" id="Ble-bS-mYb"/>
+                        <outlet property="tbiDict24" destination="cjM-bz-Daz" id="NoM-wU-2Ct"/>
+                        <outlet property="tbiDict25" destination="HSV-uA-WRL" id="Gn1-6r-YJk"/>
+                        <outlet property="tbiDict26" destination="cTt-jn-pvm" id="87S-c4-6dF"/>
+                        <outlet property="tbiDict27" destination="KhO-li-GMG" id="FQg-YI-6N5"/>
+                        <outlet property="tbiDict28" destination="e3l-ZE-F9x" id="79Q-Uf-gWQ"/>
+                        <outlet property="tbiDict29" destination="SIE-AX-LmY" id="Ok0-VT-EOT"/>
+                        <outlet property="tbiDict3" destination="tvj-BG-tb1" id="tf5-7k-iiX"/>
+                        <outlet property="tbiDict30" destination="qKP-Qu-hq3" id="etJ-gQ-cIl"/>
+                        <outlet property="tbiDict31" destination="uAb-e6-57Q" id="Hlv-pg-0I2"/>
+                        <outlet property="tbiDict32" destination="d4j-gj-uyR" id="T6c-DZ-iZK"/>
+                        <outlet property="tbiDict33" destination="wqI-MR-rpY" id="vKP-uQ-Pfb"/>
+                        <outlet property="tbiDict34" destination="TJf-8b-V3E" id="3cJ-jr-K7e"/>
+                        <outlet property="tbiDict35" destination="jo1-4X-MtU" id="aT3-TP-5cs"/>
+                        <outlet property="tbiDict36" destination="Fgb-GD-0xL" id="pCA-vN-Fph"/>
+                        <outlet property="tbiDict37" destination="SZT-0H-va5" id="xlA-fA-tHa"/>
+                        <outlet property="tbiDict38" destination="XfF-LV-PRV" id="PQV-yt-Gkw"/>
+                        <outlet property="tbiDict39" destination="odv-Th-9If" id="sDY-Vu-kTH"/>
+                        <outlet property="tbiDict4" destination="mRM-yh-R0J" id="HyH-sU-WHc"/>
+                        <outlet property="tbiDict5" destination="U9G-Zs-wBs" id="Y4t-Aw-UdY"/>
+                        <outlet property="tbiDict6" destination="zh4-9i-dcr" id="J6v-RI-JAQ"/>
+                        <outlet property="tbiDict7" destination="vNV-1K-cuM" id="176-zP-lLb"/>
+                        <outlet property="tbiDict8" destination="Ija-OC-4pE" id="lrF-Dv-i2Y"/>
+                        <outlet property="tbiDict9" destination="hOg-ly-VE9" id="aMq-bO-2iJ"/>
+                        <outlet property="toolbar" destination="I8C-Mh-LCH" id="eN7-oW-BjB"/>
                         <segue destination="CET-Kl-kcd" kind="relationship" relationship="window.shadowedContentViewController" id="ucx-Xf-ffo"/>
                     </connections>
                 </windowController>
@@ -3371,71 +3369,6 @@ Gw
                                         </connections>
                                     </segmentedControl>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="7BE58BEA-0D91-4A31-A939-6A21F6AD325E" label="Filter Scope" paletteLabel="Filter Scope" sizingBehavior="auto" id="Kkp-cO-oL0">
-                                    <nil key="toolTip"/>
-                                    <segmentedControl key="view" verticalHuggingPriority="750" id="xOt-9C-VuQ">
-                                        <rect key="frame" x="0.0" y="14" width="134" height="24"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="UNO-xA-Xc1">
-                                            <font key="font" metaFont="system"/>
-                                            <segments>
-                                                <segment label="Phrase" width="52" selected="YES"/>
-                                                <segment label="Translation" width="74" tag="1"/>
-                                            </segments>
-                                        </segmentedCell>
-                                        <connections>
-                                            <action selector="filterPhrase:" target="2fr-uc-31Q" id="KQG-UO-BNR"/>
-                                        </connections>
-                                    </segmentedControl>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="36B9D37B-B239-4DD8-B2E9-C4A708E89D07" label="Filter Text" paletteLabel="Filter Text" tag="-1" id="vI1-gZ-xAA">
-                                    <nil key="toolTip"/>
-                                    <size key="minSize" width="40" height="22"/>
-                                    <size key="maxSize" width="123" height="22"/>
-                                    <searchField key="view" verticalHuggingPriority="750" tag="-1" textCompletion="NO" id="WJ1-Yl-gvw">
-                                        <rect key="frame" x="0.0" y="14" width="119" height="22"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Filter" usesSingleLineMode="YES" bezelStyle="round" sendsWholeSearchString="YES" id="JZ7-fT-CRf">
-                                            <font key="font" usesAppearanceFont="YES"/>
-                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </searchFieldCell>
-                                        <connections>
-                                            <action selector="filterPhrase:" target="2fr-uc-31Q" id="vaP-To-Jbx"/>
-                                            <binding destination="Ngy-o1-fVc" name="value" keyPath="textFilter" id="qfO-ud-JcS">
-                                                <dictionary key="options">
-                                                    <bool key="NSContinuouslyUpdatesValue" value="YES"/>
-                                                </dictionary>
-                                            </binding>
-                                            <outlet property="delegate" destination="Ngy-o1-fVc" id="2Uw-Vf-Neh"/>
-                                        </connections>
-                                    </searchField>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="65149BA5-BEA6-4013-A995-FD1798EDF567" label="Textbook" paletteLabel="Textbook" sizingBehavior="auto" id="Mzc-JS-x3t">
-                                    <nil key="toolTip"/>
-                                    <popUpButton key="view" verticalHuggingPriority="750" id="Pok-YR-gpU">
-                                        <rect key="frame" x="0.0" y="14" width="100" height="24"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <popUpButtonCell key="cell" type="roundTextured" title="Item 1" bezelStyle="texturedRounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" selectedItem="V2U-46-LWX" id="KEy-Dp-glz">
-                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                            <font key="font" metaFont="menu"/>
-                                            <menu key="menu" id="Cd2-Ns-0Vf">
-                                                <items>
-                                                    <menuItem title="Item 1" state="on" id="V2U-46-LWX"/>
-                                                    <menuItem title="Item 2" id="jIz-u5-3Ww"/>
-                                                    <menuItem title="Item 3" id="gZY-Vd-DmH"/>
-                                                </items>
-                                            </menu>
-                                        </popUpButtonCell>
-                                        <connections>
-                                            <action selector="filterPhrase:" target="2fr-uc-31Q" id="nPo-bE-Uxi"/>
-                                            <binding destination="SeE-SI-0yJ" name="content" keyPath="arrangedObjects" id="opL-D6-tiM"/>
-                                            <binding destination="SeE-SI-0yJ" name="contentValues" keyPath="arrangedObjects.label" previousBinding="UWa-D6-49m" id="SfV-bY-t86"/>
-                                            <binding destination="SeE-SI-0yJ" name="contentObjects" keyPath="arrangedObjects.value" previousBinding="opL-D6-tiM" id="UWa-D6-49m"/>
-                                            <binding destination="Ngy-o1-fVc" name="selectedObject" keyPath="textbookFilter" previousBinding="SfV-bY-t86" id="qij-mA-ajd"/>
-                                        </connections>
-                                    </popUpButton>
-                                </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="FEDD5BE5-928E-4B40-A486-2F79323EA5B1" label="Dict0" paletteLabel="Dict0" image="NSStatusNone" id="Z4W-BH-O2c">
                                     <size key="minSize" width="17" height="18"/>
                                     <size key="maxSize" width="17" height="18"/>
@@ -3601,9 +3534,6 @@ Gw
                                 <toolbarItem reference="j5l-RK-ED6"/>
                                 <toolbarItem reference="h2r-td-4Tz"/>
                                 <toolbarItem reference="804-ZN-kkM"/>
-                                <toolbarItem reference="Kkp-cO-oL0"/>
-                                <toolbarItem reference="vI1-gZ-xAA"/>
-                                <toolbarItem reference="Mzc-JS-x3t"/>
                                 <toolbarItem reference="Z4W-BH-O2c"/>
                                 <toolbarItem reference="cyd-PE-uch"/>
                                 <toolbarItem reference="s53-Dg-Lza"/>
@@ -3652,10 +3582,48 @@ Gw
                     </window>
                     <connections>
                         <outlet property="acTextbooks" destination="SeE-SI-0yJ" id="szG-6N-K8L"/>
-                        <outlet property="pubTextbookFilter" destination="Pok-YR-gpU" id="RtO-p2-zEK"/>
-                        <outlet property="scSpeak" destination="B9p-kU-Vrg" id="l8r-l8-tDW"/>
-                        <outlet property="scTextFilter" destination="xOt-9C-VuQ" id="hgH-OM-ViK"/>
-                        <outlet property="sfFilter" destination="WJ1-Yl-gvw" id="oTw-i4-YbV"/>
+                        <outlet property="scSpeak" destination="B9p-kU-Vrg" id="c7j-as-JK4"/>
+                        <outlet property="tbiDict0" destination="Z4W-BH-O2c" id="ZZo-ln-d3s"/>
+                        <outlet property="tbiDict1" destination="cyd-PE-uch" id="nU3-Ta-EIG"/>
+                        <outlet property="tbiDict10" destination="Rz1-Q8-wRg" id="Sdh-2o-Rp4"/>
+                        <outlet property="tbiDict11" destination="6FU-vi-USg" id="z0U-oU-F4g"/>
+                        <outlet property="tbiDict12" destination="Lah-04-7Ve" id="tde-Rc-ucN"/>
+                        <outlet property="tbiDict13" destination="nTO-jI-ioL" id="ue8-1H-Ngv"/>
+                        <outlet property="tbiDict14" destination="GBQ-se-dbm" id="xik-iY-jO9"/>
+                        <outlet property="tbiDict15" destination="W3J-GW-A1y" id="JUN-bD-F9i"/>
+                        <outlet property="tbiDict16" destination="dpx-0n-W0P" id="GvZ-x4-wfd"/>
+                        <outlet property="tbiDict17" destination="a9v-Rb-SyQ" id="M3q-RC-wRL"/>
+                        <outlet property="tbiDict18" destination="n6S-sx-bDx" id="SHe-NX-vUU"/>
+                        <outlet property="tbiDict19" destination="uHn-ih-ce3" id="pw6-hg-IFL"/>
+                        <outlet property="tbiDict2" destination="s53-Dg-Lza" id="VMS-LF-dYE"/>
+                        <outlet property="tbiDict20" destination="dEB-1Y-Rtv" id="Yn7-4b-K6E"/>
+                        <outlet property="tbiDict21" destination="gUj-Rv-dgf" id="Ll8-Iy-5pn"/>
+                        <outlet property="tbiDict22" destination="n30-qO-8gc" id="Lho-fU-CYd"/>
+                        <outlet property="tbiDict23" destination="Ool-ZI-rhP" id="C8S-W5-cCC"/>
+                        <outlet property="tbiDict24" destination="rvI-Wr-In6" id="wHP-Fw-xcz"/>
+                        <outlet property="tbiDict25" destination="e2Z-Zi-do7" id="rd9-FH-u5p"/>
+                        <outlet property="tbiDict26" destination="ugo-gZ-9eY" id="gC2-83-aIW"/>
+                        <outlet property="tbiDict27" destination="tpG-DG-BqC" id="IL2-CQ-52E"/>
+                        <outlet property="tbiDict28" destination="Gio-dt-oRg" id="Nhg-vm-RTe"/>
+                        <outlet property="tbiDict29" destination="d0H-9j-gc8" id="J8N-J2-Ge5"/>
+                        <outlet property="tbiDict3" destination="zNs-QT-01t" id="sgA-XW-nzN"/>
+                        <outlet property="tbiDict30" destination="yk2-SQ-x9O" id="LOI-QI-sfK"/>
+                        <outlet property="tbiDict31" destination="kzL-8p-Hbc" id="cjl-Kt-xbw"/>
+                        <outlet property="tbiDict32" destination="BHq-HA-BJv" id="33t-dG-VyO"/>
+                        <outlet property="tbiDict33" destination="Knv-0A-QdJ" id="Cm0-Qw-hrv"/>
+                        <outlet property="tbiDict34" destination="oUG-bQ-JI5" id="GZD-xY-JaI"/>
+                        <outlet property="tbiDict35" destination="aOp-K1-YW6" id="UfN-Hf-ubi"/>
+                        <outlet property="tbiDict36" destination="8fk-cz-dzg" id="i43-2W-W6l"/>
+                        <outlet property="tbiDict37" destination="2Oa-Al-prk" id="Ea7-ph-jor"/>
+                        <outlet property="tbiDict38" destination="Jbe-XI-gIc" id="i9n-nC-rPD"/>
+                        <outlet property="tbiDict39" destination="9qB-EP-Sot" id="iHX-SR-8Nc"/>
+                        <outlet property="tbiDict4" destination="XPA-79-xjf" id="ObB-i6-hu6"/>
+                        <outlet property="tbiDict5" destination="nah-Ii-ciC" id="3rc-Az-sTl"/>
+                        <outlet property="tbiDict6" destination="Wag-BT-yB4" id="Kor-O2-T9m"/>
+                        <outlet property="tbiDict7" destination="GSh-vF-L2h" id="254-rn-tAu"/>
+                        <outlet property="tbiDict8" destination="t8N-FL-VsO" id="HB8-xN-b1g"/>
+                        <outlet property="tbiDict9" destination="FmR-rP-E8K" id="O4k-Ms-w6p"/>
+                        <outlet property="toolbar" destination="Uwx-Ut-JBy" id="ePe-ys-UDQ"/>
                         <segue destination="dNa-67-Lx3" kind="relationship" relationship="window.shadowedContentViewController" id="Dgh-ov-anC"/>
                     </connections>
                 </windowController>
