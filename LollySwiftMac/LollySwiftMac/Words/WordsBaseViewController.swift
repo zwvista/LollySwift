@@ -61,6 +61,86 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
         super.viewWillDisappear()
         wc = nil
     }
+
+    func settingsChanged() {
+        selectedDictReferenceIndex = vmSettings.selectedDictReferenceIndex
+        synth.setVoice(NSSpeechSynthesizer.VoiceName(rawValue: vmSettings.macVoiceName))
+    }
+    
+    @IBAction func speak(_ sender: AnyObject) {
+        synth.startSpeaking(selectedWord)
+    }
+    
+    @IBAction func isSpeakingChanged(_ sender: AnyObject) {
+        isSpeaking = (sender as! NSSegmentedControl).selectedSegment == 1
+        if isSpeaking {
+            speak(self)
+        }
+    }
+    
+    func removeAllTabs() {
+        while !tabView.tabViewItems.isEmpty {
+            tabView.removeTabViewItem(tabView.tabViewItems[0])
+        }
+    }
+    
+    @IBAction func searchDict(_ sender: AnyObject) {
+        if sender is NSToolbarItem {
+            let tbi = sender as! NSToolbarItem
+            selectedDictReferenceIndex = tbi.tag
+            let item = vmSettings.arrDictsReference[selectedDictReferenceIndex]
+            let name = item.DICTNAME
+            let item2 = vmSettings.arrDictsReference.first { $0.DICTNAME == name }!
+            if let tvi = tabView.tabViewItems.first(where: { $0.label == name }) {
+                tbi.image = imageOff
+                tabView.removeTabViewItem(tvi)
+            } else {
+                tbi.image = imageOn
+                let vc = storyboard!.instantiateController(withIdentifier: "WordsDictViewController") as! WordsDictViewController
+                vc.vcWords = self
+                vc.dict = item2
+                let tvi = NSTabViewItem(viewController: vc)
+                tvi.label = name
+                tabView.addTabViewItem(tvi)
+            }
+        }
+        
+        func f(word: String) {
+            for item in tabView.tabViewItems {
+                (item.viewController as! WordsDictViewController).searchWord(word: word)
+            }
+        }
+
+        if responder == nil {
+            responder = tvWords
+        }
+        let row = tvWords.selectedRow
+        if row == -1 {
+            selectedWord = ""
+            selectedWordID = 0
+            f(word: newWord)
+        } else {
+            let item = itemForRow(row: row)!
+            selectedWord = item.WORD
+            selectedWordID = item.WORDID
+            f(word: selectedWord)
+        }
+    }
+
+    func itemForRow(row: Int) -> (MWordProtocol & NSObject)? {
+        nil
+    }
+    
+    func needRegainFocus() -> Bool {
+        true
+    }
+
+    deinit {
+        print("DEBUG: \(self.className) deinit")
+    }
+}
+
+class WordsBaseViewController: WordsPhrasesBaseViewController {
     
     func doRefresh() {
         tvWords.reloadData()
@@ -82,10 +162,6 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
         scTextFilter.performClick(self)
     }
 
-    func itemForRow(row: Int) -> (MWordProtocol & NSObject)? {
-        nil
-    }
-    
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! NSTableCellView
         let columnName = tableColumn!.identifier.rawValue
@@ -162,59 +238,7 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
     func deleteWord(row: Int) {
     }
     
-    @IBAction func searchDict(_ sender: AnyObject) {
-        if sender is NSToolbarItem {
-            let tbi = sender as! NSToolbarItem
-            selectedDictReferenceIndex = tbi.tag
-            let item = vmSettings.arrDictsReference[selectedDictReferenceIndex]
-            let name = item.DICTNAME
-            let item2 = vmSettings.arrDictsReference.first { $0.DICTNAME == name }!
-            if let tvi = tabView.tabViewItems.first(where: { $0.label == name }) {
-                tbi.image = imageOff
-                tabView.removeTabViewItem(tvi)
-            } else {
-                tbi.image = imageOn
-                let vc = storyboard!.instantiateController(withIdentifier: "WordsDictViewController") as! WordsDictViewController
-                vc.vcWords = self
-                vc.dict = item2
-                let tvi = NSTabViewItem(viewController: vc)
-                tvi.label = name
-                tabView.addTabViewItem(tvi)
-            }
-        }
-        
-        func f(word: String) {
-            for item in tabView.tabViewItems {
-                (item.viewController as! WordsDictViewController).searchWord(word: word)
-            }
-        }
-
-        if responder == nil {
-            responder = tvWords
-        }
-        let row = tvWords.selectedRow
-        if row == -1 {
-            selectedWord = ""
-            selectedWordID = 0
-            f(word: newWord)
-        } else {
-            let item = itemForRow(row: row)!
-            selectedWord = item.WORD
-            selectedWordID = item.WORDID
-            f(word: selectedWord)
-        }
-    }
-    
     func searchPhrases() {
-    }
-    
-    func needRegainFocus() -> Bool {
-        true
-    }
-
-    func settingsChanged() {
-        selectedDictReferenceIndex = vmSettings.selectedDictReferenceIndex
-        synth.setVoice(NSSpeechSynthesizer.VoiceName(rawValue: vmSettings.macVoiceName))
     }
     
     @IBAction func copyWord(_ sender: AnyObject) {
@@ -223,17 +247,6 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
     
     @IBAction func googleWord(_ sender: AnyObject) {
         MacApi.googleString(selectedWord)
-    }
-    
-    @IBAction func speak(_ sender: AnyObject) {
-        synth.startSpeaking(selectedWord)
-    }
-    
-    @IBAction func isSpeakingChanged(_ sender: AnyObject) {
-        isSpeaking = (sender as! NSSegmentedControl).selectedSegment == 1
-        if isSpeaking {
-            speak(self)
-        }
     }
 
     @IBAction func openOnlineDict(_ sender: AnyObject) {
@@ -246,19 +259,6 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
             MacApi.openURL(url)
         }
     }
-    
-    func removeAllTabs() {
-        while !tabView.tabViewItems.isEmpty {
-            tabView.removeTabViewItem(tabView.tabViewItems[0])
-        }
-    }
-
-    deinit {
-        print("DEBUG: \(self.className) deinit")
-    }
-}
-
-class WordsBaseViewController: WordsPhrasesBaseViewController {
 }
 
 class WordsPhrasesBaseWindowController: NSWindowController, LollyProtocol, NSWindowDelegate, NSTextFieldDelegate {
