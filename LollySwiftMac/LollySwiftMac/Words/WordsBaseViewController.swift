@@ -88,6 +88,30 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
         }
     }
     
+    func selectedWordChanged() {
+        let row = tvWords.selectedRow
+        if row == -1 {
+            selectedWord = ""
+            selectedWordID = 0
+        } else {
+            let item = wordItemForRow(row: row)!
+            selectedWord = item.WORD
+            selectedWordID = item.WORDID
+        }
+    }
+    
+    func selectedPhraseChanged() {
+        let row = tvPhrases.selectedRow
+        if row == -1 {
+            selectedPhrase = ""
+            selectedPhraseID = 0
+        } else {
+            let item = phraseItemForRow(row: row)!
+            selectedPhrase = item.PHRASE
+            selectedPhraseID = item.PHRASEID
+        }
+    }
+
     @IBAction func searchDict(_ sender: AnyObject) {
         if sender is NSToolbarItem {
             let tbi = sender as! NSToolbarItem
@@ -108,33 +132,23 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
                 tabView.addTabViewItem(tvi)
             }
         }
-        
-        func f(word: String) {
-            for item in tabView.tabViewItems {
-                (item.viewController as! WordsDictViewController).searchWord(word: word)
-            }
-        }
-
         if responder == nil {
             responder = tvWords
         }
-        let row = tvWords.selectedRow
-        if row == -1 {
-            selectedWord = ""
-            selectedWordID = 0
-            f(word: newWord)
-        } else {
-            let item = wordItemForRow(row: row)!
-            selectedWord = item.WORD
-            selectedWordID = item.WORDID
-            f(word: selectedWord)
+        let word = selectedWord.isEmpty ? newWord : selectedWord
+        for item in tabView.tabViewItems {
+            (item.viewController as! WordsDictViewController).searchWord(word: word)
         }
     }
 
     func wordItemForRow(row: Int) -> (MWordProtocol & NSObject)? {
         nil
     }
-    
+
+    func phraseItemForRow(row: Int) -> (MPhraseProtocol & NSObject)? {
+        nil
+    }
+
     func needRegainFocus() -> Bool {
         true
     }
@@ -188,16 +202,17 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
     func tableViewSelectionDidChange(_ notification: Notification) {
         let tv = notification.object as! NSTableView
         if tv === tvWords {
+            selectedWordChanged()
             updateStatusText()
             searchDict(self)
             searchPhrases()
             if isSpeaking {
-                speak(self)
+                speak()
             }
         } else {
-            let row = tvPhrases.selectedRow
-            if isSpeaking && row != -1 {
-                synth.startSpeaking(arrPhrases[row].PHRASE)
+            selectedPhraseChanged()
+            if isSpeaking {
+                synth.startSpeaking(selectedPhrase)
             }
         }
     }
@@ -247,6 +262,10 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
     func searchPhrases() {
     }
     
+    override func phraseItemForRow(row: Int) -> (MPhraseProtocol & NSObject)? {
+        arrPhrases[row]
+    }
+
     @IBAction func copyWord(_ sender: AnyObject) {
         MacApi.copyText(selectedWord)
     }

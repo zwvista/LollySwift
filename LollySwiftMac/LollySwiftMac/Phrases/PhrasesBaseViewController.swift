@@ -48,23 +48,18 @@ class PhrasesBaseViewController: WordsPhrasesBaseViewController {
     func tableViewSelectionDidChange(_ notification: Notification) {
         let tv = notification.object as! NSTableView
         if tv === tvPhrases {
+            selectedPhraseChanged()
             updateStatusText()
             searchWords()
             if isSpeaking {
-                speak(self)
+                speak()
             }
         } else {
-            let row = tvWords.selectedRow
+            selectedWordChanged()
             searchDict(self)
-            if isSpeaking && row != -1 {
-                synth.startSpeaking(arrWords[row].WORD)
+            if isSpeaking {
+                synth.startSpeaking(selectedWord)
             }
-        }
-        updateStatusText()
-        let row = tvPhrases.selectedRow
-        selectedPhrase = row == -1 ? "" : phraseItemForRow(row: row)!.PHRASE
-        if isSpeaking {
-            speak(self)
         }
     }
 
@@ -86,10 +81,6 @@ class PhrasesBaseViewController: WordsPhrasesBaseViewController {
         item.setValue(newValue, forKey: key)
         endEditing(row: row)
     }
-
-    func phraseItemForRow(row: Int) -> (MPhraseProtocol & NSObject)? {
-        nil
-    }
     
     @IBAction func deletePhrase(_ sender: AnyObject) {
         let row = tvPhrases.selectedRow
@@ -108,6 +99,10 @@ class PhrasesBaseViewController: WordsPhrasesBaseViewController {
     }
     
     func searchWords() {
+    }
+    
+    override func wordItemForRow(row: Int) -> (MWordProtocol & NSObject)? {
+        arrWords[row]
     }
 
     @IBAction func copyPhrase(_ sender: AnyObject) {
