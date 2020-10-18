@@ -28,6 +28,7 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
     var selectedWord = ""
     var selectedWordID = 0
     var selectedPhrase = ""
+    var selectedPhraseID = 0
     let synth = NSSpeechSynthesizer()
     var isSpeaking = true
     weak var responder: NSView? = nil
@@ -99,7 +100,7 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
                 tabView.removeTabViewItem(tvi)
             } else {
                 tbi.image = imageOn
-                let vc = storyboard!.instantiateController(withIdentifier: "WordsDictViewController") as! WordsDictViewController
+                let vc = NSStoryboard(name: "Words", bundle: nil).instantiateController(withIdentifier: "WordsDictViewController") as! WordsDictViewController
                 vc.vcWords = self
                 vc.dict = item2
                 let tvi = NSTabViewItem(viewController: vc)
@@ -166,6 +167,10 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
     func searchFieldDidEndSearching(_ sender: NSSearchField) {
         scTextFilter.performClick(self)
     }
+    
+    override func speak() {
+        synth.startSpeaking(selectedWord)
+    }
 
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! NSTableCellView
@@ -178,14 +183,6 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
             cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
         }
         return cell
-    }
-    
-    override func speak() {
-        synth.startSpeaking(selectedWord)
-    }
-
-    func updateStatusText() {
-        tfStatusText.stringValue = "\(tvWords.numberOfRows) Words"
     }
     
     func tableViewSelectionDidChange(_ notification: Notification) {
@@ -267,6 +264,10 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
             let url = vc.dict.urlString(word: word, arrAutoCorrect: vmSettings.arrAutoCorrect)
             MacApi.openURL(url)
         }
+    }
+
+    func updateStatusText() {
+        tfStatusText.stringValue = "\(tvWords.numberOfRows) Words"
     }
 }
 

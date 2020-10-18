@@ -48,13 +48,26 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        arrPhrases.count
+        tableView === tvPhrases ? arrPhrases.count : arrWords.count
     }
     
     override func phraseItemForRow(row: Int) -> (MPhraseProtocol & NSObject)? {
         arrPhrases[row]
     }
     
+    override func endEditing(row: Int) {
+        let item = arrPhrases[row]
+        vm.update(item: item).subscribe(onNext: {_ in
+            self.tvPhrases.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvPhrases.tableColumns.count))
+        }) ~ rx.disposeBag
+    }
+    
+    override func searchWords() {
+        vm.searchWords(phraseid: selectedPhraseID).subscribe(onNext: {
+            self.tvPhrases.reloadData()
+        }) ~ rx.disposeBag
+    }
+
     func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
         if vmSettings.isSingleUnitPart && vm.arrPhrasesFiltered == nil {
             let item = NSPasteboardItem()
@@ -105,13 +118,6 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
         tableView.endUpdates()
         
         return true
-    }
-    
-    override func endEditing(row: Int) {
-        let item = arrPhrases[row]
-        vm.update(item: item).subscribe(onNext: {_ in 
-            self.tvPhrases.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvPhrases.tableColumns.count))
-        }) ~ rx.disposeBag
     }
 
     // https://stackoverflow.com/questions/24219441/how-to-use-nstoolbar-in-xcode-6-and-storyboard

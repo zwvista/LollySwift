@@ -14,6 +14,7 @@ class PhrasesUnitViewModel: NSObject {
     let inTextbook: Bool
     var arrPhrases = [MUnitPhrase]()
     var arrPhrasesFiltered: [MUnitPhrase]?
+    var arrWords = [MLangWord]()
 
     public init(settings: SettingsViewModel, inTextbook: Bool, needCopy: Bool, complete: @escaping () -> ()) {
         self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
@@ -94,5 +95,11 @@ class PhrasesUnitViewModel: NSObject {
     func movePhrase(at oldIndex: Int, to newIndex: Int) {
         let item = arrPhrases.remove(at: oldIndex)
         arrPhrases.insert(item, at: newIndex)
+    }
+    
+    func searchWords(phraseid: Int) -> Observable<()> {
+        MWordPhrase.getWordsByPhraseId(phraseid).map {
+            self.arrWords = $0
+        }
     }
 }

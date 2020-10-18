@@ -12,6 +12,8 @@ import NSObject_Rx
 
 class PhrasesBaseViewController: WordsPhrasesBaseViewController {
     
+    var arrWords: [MLangWord]! { nil }
+
     func doRefresh() {
         tvPhrases.reloadData()
         updateStatusText()
@@ -26,7 +28,38 @@ class PhrasesBaseViewController: WordsPhrasesBaseViewController {
         scTextFilter.performClick(self)
     }
 
+    override func speak() {
+        synth.startSpeaking(selectedPhrase)
+    }
+
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! NSTableCellView
+        let columnName = tableColumn!.identifier.rawValue
+        if tableView === tvPhrases {
+            let item = phraseItemForRow(row: row)!
+            cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
+        } else {
+            let item = arrWords[row]
+            cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
+        }
+        return cell
+    }
+
     func tableViewSelectionDidChange(_ notification: Notification) {
+        let tv = notification.object as! NSTableView
+        if tv === tvPhrases {
+            updateStatusText()
+            searchWords()
+            if isSpeaking {
+                speak(self)
+            }
+        } else {
+            let row = tvWords.selectedRow
+            searchDict(self)
+            if isSpeaking && row != -1 {
+                synth.startSpeaking(arrWords[row].WORD)
+            }
+        }
         updateStatusText()
         let row = tvPhrases.selectedRow
         selectedPhrase = row == -1 ? "" : phraseItemForRow(row: row)!.PHRASE
@@ -34,36 +67,8 @@ class PhrasesBaseViewController: WordsPhrasesBaseViewController {
             speak(self)
         }
     }
-    
-    func phraseItemForRow(row: Int) -> (MPhraseProtocol & NSObject)? {
-        nil
-    }
-
-    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! NSTableCellView
-        let item = phraseItemForRow(row: row)!
-        let columnName = tableColumn!.identifier.rawValue
-        cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
-        return cell
-    }
 
     func endEditing(row: Int) {
-    }
-    
-    @IBAction func deletePhrase(_ sender: AnyObject) {
-        let row = tvPhrases.selectedRow
-        guard row != -1 else {return}
-        let alert = NSAlert()
-        alert.messageText = "Delete Phrase"
-        alert.informativeText = "Are you sure?"
-        alert.alertStyle = .warning
-        alert.addButton(withTitle: "Yes")
-        alert.addButton(withTitle: "No")
-        guard alert.runModal() == .alertFirstButtonReturn else {return}
-        deletePhrase(row: row)
-    }
-    
-    func deletePhrase(row: Int) {
     }
 
     @IBAction func endEditing(_ sender: NSTextField) {
@@ -82,6 +87,29 @@ class PhrasesBaseViewController: WordsPhrasesBaseViewController {
         endEditing(row: row)
     }
 
+    func phraseItemForRow(row: Int) -> (MPhraseProtocol & NSObject)? {
+        nil
+    }
+    
+    @IBAction func deletePhrase(_ sender: AnyObject) {
+        let row = tvPhrases.selectedRow
+        guard row != -1 else {return}
+        let alert = NSAlert()
+        alert.messageText = "Delete Phrase"
+        alert.informativeText = "Are you sure?"
+        alert.alertStyle = .warning
+        alert.addButton(withTitle: "Yes")
+        alert.addButton(withTitle: "No")
+        guard alert.runModal() == .alertFirstButtonReturn else {return}
+        deletePhrase(row: row)
+    }
+    
+    func deletePhrase(row: Int) {
+    }
+    
+    func searchWords() {
+    }
+
     @IBAction func copyPhrase(_ sender: AnyObject) {
         MacApi.copyText(selectedPhrase)
     }
@@ -89,24 +117,12 @@ class PhrasesBaseViewController: WordsPhrasesBaseViewController {
     @IBAction func googlePhrase(_ sender: AnyObject) {
         MacApi.googleString(selectedPhrase)
     }
-
-    override func speak() {
-        synth.startSpeaking(selectedPhrase)
-    }
     
     func updateStatusText() {
         tfStatusText.stringValue = "\(tvPhrases.numberOfRows) Phrases"
     }
-
-    deinit {
-        print("DEBUG: \(self.className) deinit")
-    }
 }
 
 class PhrasesBaseWindowController: WordsPhrasesBaseWindowController {
-
-    deinit {
-        print("DEBUG: \(self.className) deinit")
-    }
 }
 
