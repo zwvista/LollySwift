@@ -24,7 +24,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.registerForDraggedTypes([tableRowDragType])
+        tvPhrases.registerForDraggedTypes([tableRowDragType])
     }
     
     // https://stackoverflow.com/questions/8017822/how-to-enable-disable-nstoolbaritem
@@ -110,7 +110,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     override func endEditing(row: Int) {
         let item = arrPhrases[row]
         vm.update(item: item).subscribe(onNext: {_ in 
-            self.tableView.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count))
+            self.tvPhrases.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvPhrases.tableColumns.count))
         }) ~ rx.disposeBag
     }
 
@@ -118,15 +118,15 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     @IBAction func addPhrase(_ sender: AnyObject) {
         let editVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesUnitDetailViewController") as! PhrasesUnitDetailViewController
         editVC.startEdit(vm: vm, item: vm.newUnitPhrase())
-        editVC.complete = { self.tableView.reloadData(); self.addPhrase(self) }
+        editVC.complete = { self.tvPhrases.reloadData(); self.addPhrase(self) }
         self.presentAsSheet(editVC)
     }
     
     @IBAction func batchEdit(_ sender: AnyObject) {
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesUnitBatchViewController") as! PhrasesUnitBatchViewController
         detailVC.vm = vm
-        let i = tableView.selectedRow
-        let item = i == -1 ? nil : arrPhrases[tableView.selectedRow]
+        let i = tvPhrases.selectedRow
+        let item = i == -1 ? nil : arrPhrases[tvPhrases.selectedRow]
         detailVC.unit = item?.UNIT ?? vmSettings.USUNITTO
         detailVC.part = item?.PART ?? vmSettings.USPARTTO
         detailVC.complete = { self.doRefresh() }
@@ -148,11 +148,11 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
 
     @IBAction func editPhrase(_ sender: AnyObject) {
         let editVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesUnitDetailViewController") as! PhrasesUnitDetailViewController
-        let i = tableView.selectedRow
+        let i = tvPhrases.selectedRow
         if i == -1 {return}
         editVC.startEdit(vm: vm, item: arrPhrases[i])
         editVC.complete = {
-            self.tableView.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count))
+            self.tvPhrases.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tvPhrases.tableColumns.count))
         }
         self.presentAsModalWindow(editVC)
     }
@@ -160,7 +160,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     @IBAction func filterPhrase(_ sender: AnyObject) {
         let n = wc.scTextFilter.selectedSegment
         vm.applyFilters(textFilter: wc.textFilter, scope: n == 0 ? "Phrase" : "Translation", textbookFilter: wc.textbookFilter)
-        tableView.reloadData()
+        tvPhrases.reloadData()
     }
 
     @IBAction func previousUnitPart(_ sender: AnyObject) {
@@ -176,7 +176,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     }
     
     @IBAction func toggleToType(_ sender: AnyObject) {
-        let row = tableView.selectedRow
+        let row = tvPhrases.selectedRow
         let part = row == -1 ? vmSettings.arrParts[0].value : arrPhrases[row].PART
         vmSettings.toggleToType(part: part).concat(vm.reload()).subscribe(onNext: {
             self.doRefresh()
@@ -184,7 +184,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     }
 
     override func updateStatusText() {
-        tfStatusText.stringValue = "\(tableView.numberOfRows) Phrases in \(vmSettings.UNITINFO)"
+        tfStatusText.stringValue = "\(tvPhrases.numberOfRows) Phrases in \(vmSettings.UNITINFO)"
     }
     
     @IBAction func reviewPhrases(_ sender: AnyObject) {
@@ -199,7 +199,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
             let arrIDs = arrPhrases.map{ $0.ID }
             self.vmReview.start(arrIDs: arrIDs, interval: self.vmReview.options.interval) { [unowned self] i in
                 if let row = self.arrPhrases.firstIndex(where: { $0.ID == arrIDs[i] }) {
-                    self.tableView.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
+                    self.tvPhrases.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
                 }
             }
         }

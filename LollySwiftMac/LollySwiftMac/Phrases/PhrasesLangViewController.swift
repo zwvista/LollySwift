@@ -52,7 +52,7 @@ class PhrasesLangViewController: PhrasesBaseViewController {
         let editVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesLangDetailViewController") as! PhrasesLangDetailViewController
         editVC.vm = vm
         editVC.item = vm.newLangPhrase()
-        editVC.complete = { self.tableView.reloadData(); self.addPhrase(self) }
+        editVC.complete = { self.tvPhrases.reloadData(); self.addPhrase(self) }
         self.presentAsSheet(editVC)
     }
 
@@ -71,10 +71,10 @@ class PhrasesLangViewController: PhrasesBaseViewController {
     @IBAction func editPhrase(_ sender: AnyObject) {
         let editVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesLangDetailViewController") as! PhrasesLangDetailViewController
         editVC.vm = vm
-        let i = tableView.selectedRow
+        let i = tvPhrases.selectedRow
         editVC.item = arrPhrases[i]
         editVC.complete = {
-            self.tableView.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count))
+            self.tvPhrases.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tvPhrases.tableColumns.count))
         }
         self.presentAsModalWindow(editVC)
     }
@@ -82,11 +82,11 @@ class PhrasesLangViewController: PhrasesBaseViewController {
     @IBAction func filterPhrase(_ sender: AnyObject) {
         let n = wc.scTextFilter.selectedSegment
         vm.applyFilters(textFilter: wc.textFilter, scope: n == 0 ? "Phrase" : "Translation")
-        tableView.reloadData()
+        tvPhrases.reloadData()
     }
 
     override func updateStatusText() {
-        tfStatusText.stringValue = "\(tableView.numberOfRows) Phrases in \(vmSettings.LANGINFO)"
+        tfStatusText.stringValue = "\(tvPhrases.numberOfRows) Phrases in \(vmSettings.LANGINFO)"
     }
 }
 

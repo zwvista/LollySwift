@@ -45,7 +45,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
     override func endEditing(row: Int) {
         let item = arrPhrases[row]
         vm.update(item: item).subscribe(onNext: {_ in 
-            self.tableView.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count))
+            self.tvPhrases.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvPhrases.tableColumns.count))
         }) ~ rx.disposeBag
     }
 
@@ -64,11 +64,11 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
 
     @IBAction func editPhrase(_ sender: AnyObject) {
         let editVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesTextbookDetailViewController") as! PhrasesTextbookDetailViewController
-        let i = tableView.selectedRow
+        let i = tvPhrases.selectedRow
         if i == -1 {return}
         editVC.startEdit(vm: vm, item: arrPhrases[i])
         editVC.complete = {
-            self.tableView.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count))
+            self.tvPhrases.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tvPhrases.tableColumns.count))
         }
         self.presentAsModalWindow(editVC)
     }
@@ -76,11 +76,11 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
     @IBAction func filterPhrase(_ sender: AnyObject) {
         let n = wc.scTextFilter.selectedSegment
         vm.applyFilters(textFilter: wc.textFilter, scope: n == 0 ? "Phrase" : "Translation", textbookFilter: wc.textbookFilter)
-        self.tableView.reloadData()
+        self.tvPhrases.reloadData()
     }
 
     override func updateStatusText() {
-        tfStatusText.stringValue = "\(tableView.numberOfRows) Phrases in \(vmSettings.LANGINFO)"
+        tfStatusText.stringValue = "\(tvPhrases.numberOfRows) Phrases in \(vmSettings.LANGINFO)"
     }
 }
 

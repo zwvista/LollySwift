@@ -13,7 +13,7 @@ import NSObject_Rx
 class PhrasesBaseViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, LollyProtocol {
     
     var vmSettings: SettingsViewModel! { nil }
-    @IBOutlet weak var tableView: NSTableView!
+    @IBOutlet weak var tvPhrases: NSTableView!
     @IBOutlet weak var tfStatusText: NSTextField!
 
     var selectedPhrase = ""
@@ -43,13 +43,13 @@ class PhrasesBaseViewController: NSViewController, NSTableViewDataSource, NSTabl
     }
     
     func doRefresh() {
-        tableView.reloadData()
+        tvPhrases.reloadData()
         updateStatusText()
     }
 
     func tableViewSelectionDidChange(_ notification: Notification) {
         updateStatusText()
-        let row = tableView.selectedRow
+        let row = tvPhrases.selectedRow
         selectedPhrase = row == -1 ? "" : itemForRow(row: row)!.PHRASE
         if isSpeaking {
             speak(self)
@@ -72,7 +72,7 @@ class PhrasesBaseViewController: NSViewController, NSTableViewDataSource, NSTabl
     }
     
     @IBAction func deletePhrase(_ sender: AnyObject) {
-        let row = tableView.selectedRow
+        let row = tvPhrases.selectedRow
         guard row != -1 else {return}
         let alert = NSAlert()
         alert.messageText = "Delete Phrase"
@@ -88,10 +88,10 @@ class PhrasesBaseViewController: NSViewController, NSTableViewDataSource, NSTabl
     }
 
     @IBAction func endEditing(_ sender: NSTextField) {
-        let row = tableView.row(for: sender)
+        let row = tvPhrases.row(for: sender)
         guard row != -1 else {return}
-        let col = tableView.column(for: sender)
-        let key = tableView.tableColumns[col].identifier.rawValue
+        let col = tvPhrases.column(for: sender)
+        let key = tvPhrases.tableColumns[col].identifier.rawValue
         let item = itemForRow(row: row)!
         let oldValue = String(describing: item.value(forKey: key) ?? "")
         var newValue = sender.stringValue
@@ -127,7 +127,7 @@ class PhrasesBaseViewController: NSViewController, NSTableViewDataSource, NSTabl
     }
     
     func updateStatusText() {
-        tfStatusText.stringValue = "\(tableView.numberOfRows) Phrases"
+        tfStatusText.stringValue = "\(tvPhrases.numberOfRows) Phrases"
     }
 
     deinit {
