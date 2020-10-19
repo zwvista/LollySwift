@@ -28,10 +28,6 @@ class PhrasesBaseViewController: WordsPhrasesBaseViewController {
         scTextFilter.performClick(self)
     }
 
-    override func speak() {
-        synth.startSpeaking(selectedPhrase)
-    }
-
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! NSTableCellView
         let columnName = tableColumn!.identifier.rawValue
@@ -51,17 +47,12 @@ class PhrasesBaseViewController: WordsPhrasesBaseViewController {
             selectedPhraseChanged()
             updateStatusText()
             searchWords()
-            if isSpeaking {
-                speak()
-            }
         } else {
             selectedWordChanged()
             searchDict(self)
             responder = tvPhrases
-            if isSpeaking {
-                synth.startSpeaking(selectedWord)
-            }
         }
+        speak()
     }
 
     func endEditing(row: Int) {

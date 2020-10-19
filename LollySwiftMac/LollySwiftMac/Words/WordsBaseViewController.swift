@@ -69,6 +69,13 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
     }
     
     func speak() {
+        guard isSpeaking else {return}
+        let responder = view.window!.firstResponder
+        if responder == tvPhrases {
+            synth.startSpeaking(selectedPhrase)
+        } else if responder == tvWords {
+            synth.startSpeaking(selectedWord)
+        }
     }
     
     @IBAction func speak(_ sender: AnyObject) {
@@ -77,9 +84,7 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
     
     @IBAction func isSpeakingChanged(_ sender: AnyObject) {
         isSpeaking = (sender as! NSSegmentedControl).selectedSegment == 1
-        if isSpeaking {
-            speak()
-        }
+        speak()
     }
     
     func removeAllTabs() {
@@ -181,10 +186,6 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
     func searchFieldDidEndSearching(_ sender: NSSearchField) {
         scTextFilter.performClick(self)
     }
-    
-    override func speak() {
-        synth.startSpeaking(selectedWord)
-    }
 
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! NSTableCellView
@@ -206,15 +207,10 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
             updateStatusText()
             searchDict(self)
             searchPhrases()
-            if isSpeaking {
-                speak()
-            }
         } else {
             selectedPhraseChanged()
-            if isSpeaking {
-                synth.startSpeaking(selectedPhrase)
-            }
         }
+        speak()
     }
     
     func endEditing(row: Int) {
