@@ -66,6 +66,9 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     override func searchWords() {
         vm.searchWords(phraseid: selectedPhraseID).subscribe(onNext: {
             self.tvWords.reloadData()
+            if self.tvWords.numberOfRows > 0 {
+                self.tvWords.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
+            }
         }) ~ rx.disposeBag
     }
 

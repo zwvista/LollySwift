@@ -13,7 +13,8 @@ class PhrasesLangViewModel: NSObject {
     var vmSettings: SettingsViewModel
     var arrPhrases = [MLangPhrase]()
     var arrPhrasesFiltered: [MLangPhrase]?
-    
+    var arrWords = [MLangWord]()
+
     public init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> ()) {
         self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
         super.init()
@@ -57,4 +58,9 @@ class PhrasesLangViewModel: NSObject {
         return item
     }
 
+    func searchWords(phraseid: Int) -> Observable<()> {
+        MWordPhrase.getWordsByPhraseId(phraseid).map {
+            self.arrWords = $0
+        }
+    }
 }

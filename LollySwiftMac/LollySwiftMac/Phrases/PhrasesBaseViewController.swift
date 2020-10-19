@@ -57,6 +57,7 @@ class PhrasesBaseViewController: WordsPhrasesBaseViewController {
         } else {
             selectedWordChanged()
             searchDict(self)
+            responder = tvPhrases
             if isSpeaking {
                 synth.startSpeaking(selectedWord)
             }
