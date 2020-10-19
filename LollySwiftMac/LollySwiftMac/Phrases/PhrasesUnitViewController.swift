@@ -155,6 +155,14 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
             self.doRefresh()
         }) ~ rx.disposeBag
     }
+    
+    @IBAction func doubleAction(_ sender: AnyObject) {
+        if NSApp.currentEvent!.modifierFlags.contains(.option) {
+            selectWords(sender)
+        } else {
+            editPhrase(sender)
+        }
+    }
 
     @IBAction func editPhrase(_ sender: AnyObject) {
         let editVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesUnitDetailViewController") as! PhrasesUnitDetailViewController
@@ -213,6 +221,17 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
             }
         }
         self.presentAsSheet(optionsVC)
+    }
+
+    @IBAction func selectWords(_ sender: AnyObject) {
+        guard selectedPhraseID != 0 else {return}
+        let detailVC = NSStoryboard(name: "Words", bundle: nil).instantiateController(withIdentifier: "WordsSelectUnitViewController") as! WordsSelectUnitViewController
+        detailVC.textFilter = selectedPhrase
+        detailVC.phraseid = selectedPhraseID
+        detailVC.complete = {
+            self.searchWords()
+        }
+        self.presentAsModalWindow(detailVC)
     }
 }
 
