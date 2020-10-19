@@ -355,7 +355,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" misplaced="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2hs-X4-l5R">
-                                <rect key="frame" x="0.0" y="541" width="298" height="32"/>
+                                <rect key="frame" x="0.0" y="541" width="303" height="32"/>
                                 <subviews>
                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="E8d-BH-EMc">
                                         <rect key="frame" x="6" y="5" width="96" height="21"/>
@@ -379,60 +379,47 @@
                                             </binding>
                                         </connections>
                                     </textField>
-                                    <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IWY-YU-8ee">
-                                        <rect key="frame" x="107" y="5" width="191" height="21"/>
-                                        <subviews>
-                                            <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RtU-w4-rmU">
-                                                <rect key="frame" x="-2" y="-2" width="99" height="24"/>
-                                                <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="gmR-VQ-F1T">
-                                                    <font key="font" metaFont="system"/>
-                                                    <segments>
-                                                        <segment label="Word" width="40" selected="YES"/>
-                                                        <segment label="Note" width="52" tag="1"/>
-                                                    </segments>
-                                                </segmentedCell>
-                                                <connections>
-                                                    <action selector="filterWord:" target="F8i-pe-Ate" id="hdV-BY-6az"/>
-                                                </connections>
-                                            </segmentedControl>
-                                            <searchField verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ntb-I3-XGS">
-                                                <rect key="frame" x="95" y="0.0" width="96" height="21"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="96" id="tuA-jr-exd"/>
-                                                </constraints>
-                                                <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" placeholderString="Filter" usesSingleLineMode="YES" bezelStyle="round" sendsWholeSearchString="YES" id="p7g-Xg-FQh">
-                                                    <font key="font" usesAppearanceFont="YES"/>
-                                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                </searchFieldCell>
-                                                <connections>
-                                                    <action selector="filterWord:" target="F8i-pe-Ate" id="n5z-b1-BFB"/>
-                                                    <binding destination="F8i-pe-Ate" name="value" keyPath="textFilter" id="YWM-dh-fE8"/>
-                                                    <outlet property="delegate" destination="F8i-pe-Ate" id="YQJ-cI-ymr"/>
-                                                </connections>
-                                            </searchField>
-                                        </subviews>
-                                        <visibilityPriorities>
-                                            <integer value="1000"/>
-                                            <integer value="1000"/>
-                                        </visibilityPriorities>
-                                        <customSpacing>
-                                            <real value="3.4028234663852886e+38"/>
-                                            <real value="3.4028234663852886e+38"/>
-                                        </customSpacing>
-                                    </stackView>
+                                    <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RtU-w4-rmU">
+                                        <rect key="frame" x="105" y="3" width="99" height="24"/>
+                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="gmR-VQ-F1T">
+                                            <font key="font" metaFont="system"/>
+                                            <segments>
+                                                <segment label="Word" width="40" selected="YES"/>
+                                                <segment label="Note" width="52" tag="1"/>
+                                            </segments>
+                                        </segmentedCell>
+                                        <connections>
+                                            <action selector="filterWord:" target="F8i-pe-Ate" id="hdV-BY-6az"/>
+                                        </connections>
+                                    </segmentedControl>
+                                    <searchField verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ntb-I3-XGS">
+                                        <rect key="frame" x="207" y="4" width="96" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="96" id="tuA-jr-exd"/>
+                                        </constraints>
+                                        <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" placeholderString="Filter" usesSingleLineMode="YES" bezelStyle="round" sendsWholeSearchString="YES" id="p7g-Xg-FQh">
+                                            <font key="font" usesAppearanceFont="YES"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </searchFieldCell>
+                                        <connections>
+                                            <action selector="filterWord:" target="F8i-pe-Ate" id="n5z-b1-BFB"/>
+                                            <binding destination="F8i-pe-Ate" name="value" keyPath="textFilter" id="YWM-dh-fE8"/>
+                                            <outlet property="delegate" destination="F8i-pe-Ate" id="YQJ-cI-ymr"/>
+                                        </connections>
+                                    </searchField>
                                 </subviews>
                                 <edgeInsets key="edgeInsets" left="6" right="0.0" top="6" bottom="6"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="C2z-9h-rqy"/>
-                                    <constraint firstItem="E8d-BH-EMc" firstAttribute="bottom" secondItem="IWY-YU-8ee" secondAttribute="bottom" id="CXa-1J-Uvf"/>
-                                    <constraint firstItem="E8d-BH-EMc" firstAttribute="top" secondItem="IWY-YU-8ee" secondAttribute="top" id="kvH-VL-td3"/>
                                 </constraints>
                                 <visibilityPriorities>
                                     <integer value="1000"/>
                                     <integer value="1000"/>
+                                    <integer value="1000"/>
                                 </visibilityPriorities>
                                 <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                 </customSpacing>
@@ -2709,7 +2696,7 @@ Gw
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" misplaced="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BlQ-ed-2z2">
-                                <rect key="frame" x="0.0" y="540" width="298" height="32"/>
+                                <rect key="frame" x="0.0" y="540" width="303" height="32"/>
                                 <subviews>
                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jNk-si-JUF">
                                         <rect key="frame" x="6" y="5" width="96" height="21"/>
@@ -2733,51 +2720,38 @@ Gw
                                             </binding>
                                         </connections>
                                     </textField>
-                                    <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QPS-jS-KzP">
-                                        <rect key="frame" x="107" y="4" width="191" height="22"/>
-                                        <subviews>
-                                            <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6UI-Xq-Ybp">
-                                                <rect key="frame" x="-2" y="-1" width="99" height="24"/>
-                                                <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="eAy-V0-MAi">
-                                                    <font key="font" metaFont="system"/>
-                                                    <segments>
-                                                        <segment label="Word" width="40" selected="YES"/>
-                                                        <segment label="Note" width="52" tag="1"/>
-                                                    </segments>
-                                                </segmentedCell>
-                                                <connections>
-                                                    <action selector="filterWord:" target="UkS-Xi-ogF" id="23s-pn-6d2"/>
-                                                </connections>
-                                            </segmentedControl>
-                                            <searchField verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lHN-YD-8mt">
-                                                <rect key="frame" x="95" y="0.0" width="96" height="22"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="96" id="A1r-OT-h3N"/>
-                                                </constraints>
-                                                <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" sendsWholeSearchString="YES" id="zqX-zk-elq">
-                                                    <font key="font" usesAppearanceFont="YES"/>
-                                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                    <connections>
-                                                        <binding destination="UkS-Xi-ogF" name="value" keyPath="textFilter" id="Sgp-VU-e42"/>
-                                                    </connections>
-                                                </searchFieldCell>
-                                                <connections>
-                                                    <action selector="filterWord:" target="UkS-Xi-ogF" id="Icf-np-l9e"/>
-                                                    <binding destination="UkS-Xi-ogF" name="value" keyPath="textFilter" id="ugU-ev-Fwp"/>
-                                                    <outlet property="delegate" destination="UkS-Xi-ogF" id="3lf-dw-pry"/>
-                                                </connections>
-                                            </searchField>
-                                        </subviews>
-                                        <visibilityPriorities>
-                                            <integer value="1000"/>
-                                            <integer value="1000"/>
-                                        </visibilityPriorities>
-                                        <customSpacing>
-                                            <real value="3.4028234663852886e+38"/>
-                                            <real value="3.4028234663852886e+38"/>
-                                        </customSpacing>
-                                    </stackView>
+                                    <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6UI-Xq-Ybp">
+                                        <rect key="frame" x="105" y="3" width="99" height="24"/>
+                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="eAy-V0-MAi">
+                                            <font key="font" metaFont="system"/>
+                                            <segments>
+                                                <segment label="Word" width="40" selected="YES"/>
+                                                <segment label="Note" width="52" tag="1"/>
+                                            </segments>
+                                        </segmentedCell>
+                                        <connections>
+                                            <action selector="filterWord:" target="UkS-Xi-ogF" id="23s-pn-6d2"/>
+                                        </connections>
+                                    </segmentedControl>
+                                    <searchField verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lHN-YD-8mt">
+                                        <rect key="frame" x="207" y="4" width="96" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="96" id="A1r-OT-h3N"/>
+                                        </constraints>
+                                        <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" sendsWholeSearchString="YES" id="zqX-zk-elq">
+                                            <font key="font" usesAppearanceFont="YES"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <connections>
+                                                <binding destination="UkS-Xi-ogF" name="value" keyPath="textFilter" id="Sgp-VU-e42"/>
+                                            </connections>
+                                        </searchFieldCell>
+                                        <connections>
+                                            <action selector="filterWord:" target="UkS-Xi-ogF" id="Icf-np-l9e"/>
+                                            <binding destination="UkS-Xi-ogF" name="value" keyPath="textFilter" id="ugU-ev-Fwp"/>
+                                            <outlet property="delegate" destination="UkS-Xi-ogF" id="3lf-dw-pry"/>
+                                        </connections>
+                                    </searchField>
                                 </subviews>
                                 <edgeInsets key="edgeInsets" left="6" right="0.0" top="6" bottom="6"/>
                                 <constraints>
@@ -2786,8 +2760,10 @@ Gw
                                 <visibilityPriorities>
                                     <integer value="1000"/>
                                     <integer value="1000"/>
+                                    <integer value="1000"/>
                                 </visibilityPriorities>
                                 <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                 </customSpacing>
@@ -4137,55 +4113,42 @@ Gw
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" misplaced="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="591-dl-hBy">
-                                <rect key="frame" x="0.0" y="540" width="274" height="32"/>
+                                <rect key="frame" x="0.0" y="540" width="279" height="32"/>
                                 <subviews>
-                                    <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aST-t9-Wtn">
-                                        <rect key="frame" x="6" y="4" width="191" height="22"/>
-                                        <subviews>
-                                            <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RYe-rB-ZXc">
-                                                <rect key="frame" x="-2" y="-1" width="99" height="24"/>
-                                                <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="mc1-zg-2Yg">
-                                                    <font key="font" metaFont="system"/>
-                                                    <segments>
-                                                        <segment label="Word" width="40" selected="YES"/>
-                                                        <segment label="Note" width="52" tag="1"/>
-                                                    </segments>
-                                                </segmentedCell>
-                                                <connections>
-                                                    <action selector="filterWord:" target="S5w-0q-IQt" id="heq-q8-RJX"/>
-                                                </connections>
-                                            </segmentedControl>
-                                            <searchField verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q0R-YJ-VuK">
-                                                <rect key="frame" x="95" y="0.0" width="96" height="22"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="96" id="3LF-F0-2Z4"/>
-                                                </constraints>
-                                                <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" sendsWholeSearchString="YES" id="bdW-MI-v9N">
-                                                    <font key="font" usesAppearanceFont="YES"/>
-                                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                    <connections>
-                                                        <binding destination="S5w-0q-IQt" name="value" keyPath="textFilter" id="sGO-JE-NPg"/>
-                                                    </connections>
-                                                </searchFieldCell>
-                                                <connections>
-                                                    <action selector="filterWord:" target="S5w-0q-IQt" id="lkq-PM-02G"/>
-                                                    <binding destination="S5w-0q-IQt" name="value" keyPath="textFilter" id="DOR-Tl-TSH"/>
-                                                    <outlet property="delegate" destination="S5w-0q-IQt" id="EwZ-0v-b31"/>
-                                                </connections>
-                                            </searchField>
-                                        </subviews>
-                                        <visibilityPriorities>
-                                            <integer value="1000"/>
-                                            <integer value="1000"/>
-                                        </visibilityPriorities>
-                                        <customSpacing>
-                                            <real value="3.4028234663852886e+38"/>
-                                            <real value="3.4028234663852886e+38"/>
-                                        </customSpacing>
-                                    </stackView>
+                                    <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RYe-rB-ZXc">
+                                        <rect key="frame" x="4" y="3" width="99" height="24"/>
+                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="mc1-zg-2Yg">
+                                            <font key="font" metaFont="system"/>
+                                            <segments>
+                                                <segment label="Word" width="40" selected="YES"/>
+                                                <segment label="Note" width="52" tag="1"/>
+                                            </segments>
+                                        </segmentedCell>
+                                        <connections>
+                                            <action selector="filterWord:" target="S5w-0q-IQt" id="heq-q8-RJX"/>
+                                        </connections>
+                                    </segmentedControl>
+                                    <searchField verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q0R-YJ-VuK">
+                                        <rect key="frame" x="106" y="4" width="96" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="96" id="3LF-F0-2Z4"/>
+                                        </constraints>
+                                        <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" sendsWholeSearchString="YES" id="bdW-MI-v9N">
+                                            <font key="font" usesAppearanceFont="YES"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <connections>
+                                                <binding destination="S5w-0q-IQt" name="value" keyPath="textFilter" id="sGO-JE-NPg"/>
+                                            </connections>
+                                        </searchFieldCell>
+                                        <connections>
+                                            <action selector="filterWord:" target="S5w-0q-IQt" id="lkq-PM-02G"/>
+                                            <binding destination="S5w-0q-IQt" name="value" keyPath="textFilter" id="DOR-Tl-TSH"/>
+                                            <outlet property="delegate" destination="S5w-0q-IQt" id="EwZ-0v-b31"/>
+                                        </connections>
+                                    </searchField>
                                     <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bMb-g8-SbI">
-                                        <rect key="frame" x="200" y="2" width="77" height="25"/>
+                                        <rect key="frame" x="205" y="2" width="77" height="25"/>
                                         <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="zrr-aJ-pQb" id="opE-Nq-I27">
                                             <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="menu"/>
@@ -4213,8 +4176,10 @@ Gw
                                 <visibilityPriorities>
                                     <integer value="1000"/>
                                     <integer value="1000"/>
+                                    <integer value="1000"/>
                                 </visibilityPriorities>
                                 <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                 </customSpacing>

@@ -3659,53 +3659,53 @@ Gw
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" fixedFrame="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dkf-Zg-i4Y">
-                                <rect key="frame" x="0.0" y="532" width="255" height="44"/>
+                                <rect key="frame" x="0.0" y="500" width="135" height="76"/>
                                 <subviews>
-                                    <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ejt-Lt-1YN">
-                                        <rect key="frame" x="6" y="6" width="249" height="32"/>
-                                        <subviews>
-                                            <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Z2E-Vs-GJu">
-                                                <rect key="frame" x="-2" y="8" width="133" height="25"/>
-                                                <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="D6b-m9-IMu">
-                                                    <font key="font" metaFont="system"/>
-                                                    <segments>
-                                                        <segment label="Phrase" width="52" selected="YES"/>
-                                                        <segment label="Translation" width="74" tag="1"/>
-                                                    </segments>
-                                                </segmentedCell>
-                                            </segmentedControl>
-                                            <searchField verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qwt-EA-gPb">
-                                                <rect key="frame" x="129" y="10" width="120" height="22"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="120" id="8ra-Dg-n6e"/>
-                                                </constraints>
-                                                <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" placeholderString="Filter" usesSingleLineMode="YES" bezelStyle="round" sendsWholeSearchString="YES" id="qov-rq-sy4">
-                                                    <font key="font" usesAppearanceFont="YES"/>
-                                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                </searchFieldCell>
-                                            </searchField>
-                                        </subviews>
+                                    <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Z2E-Vs-GJu">
+                                        <rect key="frame" x="4" y="47" width="133" height="24"/>
+                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="D6b-m9-IMu">
+                                            <font key="font" metaFont="system"/>
+                                            <segments>
+                                                <segment label="Phrase" width="52" selected="YES"/>
+                                                <segment label="Translation" width="74" tag="1"/>
+                                            </segments>
+                                        </segmentedCell>
+                                    </segmentedControl>
+                                    <searchField verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qwt-EA-gPb">
+                                        <rect key="frame" x="6" y="27" width="120" height="22"/>
                                         <constraints>
-                                            <constraint firstItem="Z2E-Vs-GJu" firstAttribute="centerY" secondItem="qwt-EA-gPb" secondAttribute="centerY" id="bOO-xh-mPi"/>
-                                            <constraint firstItem="Z2E-Vs-GJu" firstAttribute="top" secondItem="qwt-EA-gPb" secondAttribute="top" id="klQ-qy-eBW"/>
-                                            <constraint firstAttribute="height" constant="32" id="unJ-UY-Oee"/>
+                                            <constraint firstAttribute="width" constant="120" id="8ra-Dg-n6e"/>
                                         </constraints>
-                                        <visibilityPriorities>
-                                            <integer value="1000"/>
-                                            <integer value="1000"/>
-                                        </visibilityPriorities>
-                                        <customSpacing>
-                                            <real value="3.4028234663852886e+38"/>
-                                            <real value="3.4028234663852886e+38"/>
-                                        </customSpacing>
-                                    </stackView>
+                                        <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" placeholderString="Filter" usesSingleLineMode="YES" bezelStyle="round" sendsWholeSearchString="YES" id="qov-rq-sy4">
+                                            <font key="font" usesAppearanceFont="YES"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </searchFieldCell>
+                                    </searchField>
+                                    <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="csX-uE-UJZ">
+                                        <rect key="frame" x="4" y="3" width="77" height="25"/>
+                                        <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="9W0-HK-l2h" id="QnM-fW-Bro">
+                                            <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="menu"/>
+                                            <menu key="menu" id="xh2-yp-kR7">
+                                                <items>
+                                                    <menuItem title="Item 1" state="on" id="9W0-HK-l2h"/>
+                                                    <menuItem title="Item 2" id="YKA-gz-vce"/>
+                                                    <menuItem title="Item 3" id="Vc3-hf-OhN"/>
+                                                </items>
+                                            </menu>
+                                        </popUpButtonCell>
+                                    </popUpButton>
                                 </subviews>
                                 <edgeInsets key="edgeInsets" left="6" right="0.0" top="6" bottom="6"/>
                                 <visibilityPriorities>
                                     <integer value="1000"/>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
                                 </visibilityPriorities>
                                 <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                 </customSpacing>
                             </stackView>
@@ -4302,6 +4302,8 @@ Gw
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="acTextbooks" destination="xCb-Qj-9og" id="Esl-fg-Dto"/>
+                        <outlet property="pubTextbookFilter" destination="csX-uE-UJZ" id="jQ2-10-tcz"/>
                         <outlet property="scTextFilter" destination="Z2E-Vs-GJu" id="XEB-1g-uJG"/>
                         <outlet property="sfFilter" destination="qwt-EA-gPb" id="ypR-71-hYE"/>
                         <outlet property="tabView" destination="tDX-Dg-PDJ" id="fyZ-iX-VOg"/>
@@ -4310,6 +4312,7 @@ Gw
                         <outlet property="tvWords" destination="svn-Fw-kKy" id="eeO-5c-duH"/>
                     </connections>
                 </viewController>
+                <arrayController id="xCb-Qj-9og"/>
                 <menu id="w8F-Rg-pAb">
                     <items>
                         <menuItem title="Delete" id="GVF-r0-zMV">
