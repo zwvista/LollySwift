@@ -105,8 +105,8 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
     @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
         guard segue.identifier == "Done" else {return}
         let controller = segue.source as! PhrasesTextbookDetailViewController
-        controller.vmEdit.onOK().subscribe {
+        controller.vmEdit.onOK().subscribe(onNext: {
             self.tableView.reloadData()
-        } ~ rx.disposeBag
+        }) ~ rx.disposeBag
     }
 }

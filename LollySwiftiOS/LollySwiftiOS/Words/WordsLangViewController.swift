@@ -59,9 +59,9 @@ class WordsLangViewController: WordsBaseViewController {
             alertController.addAction(editAction2)
             if vmSettings.hasDictNote {
                 let noteAction = UIAlertAction(title: "Retrieve Note", style: .default) { _ in
-                    self.vm.getNote(index: indexPath.row).subscribe {
+                    self.vm.getNote(index: indexPath.row).subscribe(onNext: {
                         self.tableView.reloadRows(at: [indexPath], with: .fade)
-                    } ~ self.rx.disposeBag
+                    }) ~ self.rx.disposeBag
                 }
                 alertController.addAction(noteAction)
             }
@@ -96,8 +96,8 @@ class WordsLangViewController: WordsBaseViewController {
     @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
         guard segue.identifier == "Done" else {return}
         let controller = segue.source as! WordsLangDetailViewController
-        controller.vmEdit.onOK().subscribe {
+        controller.vmEdit.onOK().subscribe(onNext: {
             self.tableView.reloadData()
-        } ~ rx.disposeBag
+        }) ~ rx.disposeBag
     }
 }

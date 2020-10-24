@@ -18,6 +18,6 @@ class iOSApi {
     }
     
     static func googleString(_ str: String) {
-        UIApplication.shared.openURL(URL(string: "https://www.google.com/search?q=\(str.urlEncoded())")!)
+        UIApplication.shared.open(URL(string: "https://www.google.com/search?q=\(str.urlEncoded())")!)
     }
 }

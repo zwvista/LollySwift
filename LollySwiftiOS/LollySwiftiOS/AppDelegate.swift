@@ -22,10 +22,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        vmSettings.getData().subscribe {
+        vmSettings.getData().subscribe(onNext: {
             AppDelegate._initializeObject.onNext(())
             AppDelegate._initializeObject.onCompleted()
-        } ~ rx.disposeBag
+        }) ~ rx.disposeBag
         return true
     }
 

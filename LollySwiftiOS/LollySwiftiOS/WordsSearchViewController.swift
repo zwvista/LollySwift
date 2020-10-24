@@ -28,18 +28,18 @@ class WordsSearchViewController: UIViewController, WKNavigationDelegate, UISearc
         wvDict = addWKWebView(webViewHolder: wvDictHolder)
         wvDict.navigationDelegate = self
         
-        AppDelegate.initializeObject.subscribe {
+        AppDelegate.initializeObject.subscribe(onNext: {
             self.ddDictReference.anchorView = self.btnDict
             self.ddDictReference.dataSource = vmSettings.arrDictsReference.map { $0.DICTNAME }
             self.ddDictReference.selectRow(vmSettings.selectedDictReferenceIndex)
             self.ddDictReference.selectionAction = { [unowned self] (index: Int, item: String) in
                 vmSettings.selectedDictReference = vmSettings.arrDictsReference[index]
-                vmSettings.updateDictReference().subscribe {
+                vmSettings.updateDictReference().subscribe(onNext: {
                     self.searchBarSearchButtonClicked(self.sbword)
-                } ~ self.rx.disposeBag
+                }) ~ self.rx.disposeBag
             }
             self.searchBarSearchButtonClicked(self.sbword)
-        } ~ rx.disposeBag
+        }) ~ rx.disposeBag
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {

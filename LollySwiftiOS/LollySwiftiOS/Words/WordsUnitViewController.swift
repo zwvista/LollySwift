@@ -78,9 +78,9 @@ class WordsUnitViewController: WordsBaseViewController {
             alertController.addAction(editAction2)
             if vmSettings.hasDictNote {
                 let noteAction = UIAlertAction(title: "Retrieve Note", style: .default) { _ in
-                    self.vm.getNote(index: indexPath.row).subscribe {
+                    self.vm.getNote(index: indexPath.row).subscribe(onNext: {
                         self.tableView.reloadRows(at: [indexPath], with: .fade)
-                    } ~ self.rx.disposeBag
+                    }) ~ self.rx.disposeBag
                 }
                 alertController.addAction(noteAction)
             }
@@ -91,7 +91,7 @@ class WordsUnitViewController: WordsBaseViewController {
             let openOnlineDictAction = UIAlertAction(title: "Online Dictionary", style: .default) { _ in
                 let itemDict = vmSettings.arrDictsReference.first { $0.DICTNAME == vmSettings.selectedDictReference.DICTNAME }!
                 let url = itemDict.urlString(word: item.WORD, arrAutoCorrect: vmSettings.arrAutoCorrect)
-                UIApplication.shared.openURL(URL(string: url)!)
+                UIApplication.shared.open(URL(string: url)!)
             }
             alertController.addAction(openOnlineDictAction)
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
@@ -163,12 +163,12 @@ class WordsUnitViewController: WordsBaseViewController {
     @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
         guard segue.identifier == "Done" else {return}
         if let controller = segue.source as? WordsUnitDetailViewController {
-            controller.vmEdit.onOK().subscribe {
+            controller.vmEdit.onOK().subscribe(onNext: {
                 self.tableView.reloadData()
                 if controller.vmEdit.isAdd {
                     self.performSegue(withIdentifier: "add", sender: self)
                 }
-            } ~ rx.disposeBag
+            }) ~ rx.disposeBag
         } else if let controller = segue.source as? WordsUnitBatchViewController {
             controller.onDone()
             tableView.reloadData()
