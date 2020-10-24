@@ -30,8 +30,8 @@ class WordsTextbookDetailViewController: UITableViewController, UITextFieldDeleg
     let ddUnit = DropDown()
     let ddPart = DropDown()
     
-    func startEdit(vm: WordsUnitViewModel, index: Int = -1) {
-        vmEdit = WordsUnitDetailViewModel(vm: vm, index: index) {
+    func startEdit(vm: WordsUnitViewModel, item: MUnitWord) {
+        vmEdit = WordsUnitDetailViewModel(vm: vm, item: item) {
             self.tableView.reloadData()
         }
     }

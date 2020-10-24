@@ -108,6 +108,16 @@ class PhrasesBaseViewController: WordsPhrasesBaseViewController {
     func updateStatusText() {
         tfStatusText.stringValue = "\(tvPhrases.numberOfRows) Phrases"
     }
+    
+    override func speak() {
+        guard isSpeaking else {return}
+        let responder = view.window!.firstResponder
+        if responder == tvWords {
+            synth.startSpeaking(selectedWord)
+        } else {
+            synth.startSpeaking(selectedPhrase)
+        }
+    }
 }
 
 class PhrasesBaseWindowController: WordsPhrasesBaseWindowController {

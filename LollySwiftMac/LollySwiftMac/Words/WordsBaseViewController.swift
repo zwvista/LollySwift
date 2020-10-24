@@ -69,13 +69,6 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
     }
     
     func speak() {
-        guard isSpeaking else {return}
-        let responder = view.window!.firstResponder
-        if responder == tvPhrases {
-            synth.startSpeaking(selectedPhrase)
-        } else if responder == tvWords {
-            synth.startSpeaking(selectedWord)
-        }
     }
     
     @IBAction func speak(_ sender: AnyObject) {
@@ -283,6 +276,16 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
 
     func updateStatusText() {
         tfStatusText.stringValue = "\(tvWords.numberOfRows) Words"
+    }
+    
+    override func speak() {
+        guard isSpeaking else {return}
+        let responder = view.window!.firstResponder
+        if responder == tvPhrases {
+            synth.startSpeaking(selectedPhrase)
+        } else {
+            synth.startSpeaking(selectedWord)
+        }
     }
 }
 

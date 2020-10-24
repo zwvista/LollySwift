@@ -93,8 +93,8 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         guard let controller = (segue.destination as? UINavigationController)?.topViewController as? PhrasesTextbookDetailViewController else {return}
-        let index = arrPhrases.firstIndex(of: sender as! MUnitPhrase)!
-        controller.startEdit(vm: vm, index: index)
+        let item = sender as! MUnitPhrase
+        controller.startEdit(vm: vm, item: item)
     }
     
     @IBAction func btnEditClicked(_ sender: AnyObject) {
