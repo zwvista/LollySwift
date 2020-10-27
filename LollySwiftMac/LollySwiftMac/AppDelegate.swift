@@ -141,19 +141,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @IBAction func editBlog(_ sender: AnyObject) {
-        showWindow(storyBoardName: "Tools", windowControllerName: "BlogWindowController", modal: false)
+        showWindow(storyBoardName: "Misc", windowControllerName: "BlogWindowController", modal: false)
     }
     
     @IBAction func textbooks(_ sender: AnyObject) {
-        showWindow(storyBoardName: "Tools", windowControllerName: "TextbooksWindowController", modal: false)
+        showWindow(storyBoardName: "Misc", windowControllerName: "TextbooksWindowController", modal: false)
     }
     
     @IBAction func dictionaries(_ sender: AnyObject) {
-        showWindow(storyBoardName: "Tools", windowControllerName: "DictsWindowController", modal: false)
+        showWindow(storyBoardName: "Dicts", windowControllerName: "DictsWindowController", modal: false)
     }
     
     @IBAction func readNumber(_ sender: AnyObject) {
-        showWindow(storyBoardName: "Tools", windowControllerName: "ReadNumberWindowController", modal: false)
+        showWindow(storyBoardName: "Misc", windowControllerName: "ReadNumberWindowController", modal: false)
     }
     
     func searchWord(word: String) {
