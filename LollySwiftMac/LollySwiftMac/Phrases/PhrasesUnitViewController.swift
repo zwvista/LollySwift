@@ -225,7 +225,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
 
     @IBAction func selectWords(_ sender: AnyObject) {
         guard selectedPhraseID != 0 else {return}
-        let detailVC = NSStoryboard(name: "Words", bundle: nil).instantiateController(withIdentifier: "WordsSelectUnitViewController") as! WordsSelectUnitViewController
+        let detailVC = NSStoryboard(name: "Words", bundle: nil).instantiateController(withIdentifier: "WordsLinkViewController") as! WordsLinkViewController
         detailVC.textFilter = selectedPhrase
         detailVC.phraseid = selectedPhraseID
         detailVC.complete = {

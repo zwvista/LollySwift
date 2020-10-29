@@ -1,5 +1,5 @@
 //
-//  WordsSelectUnitViewController.swift
+//  PhrasesLinkViewController.swift
 //  LollySwiftMac
 //
 //  Created by 趙偉 on 2019/08/04.
@@ -10,21 +10,19 @@ import Cocoa
 import RxSwift
 import NSObject_Rx
 
-class WordsSelectUnitViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate {
+class PhrasesLinkViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate {
 
-    @objc var vm: WordsUnitViewModel!
+    @objc var vm: PhrasesLangViewModel!
     var vmSettings: SettingsViewModel! { vm.vmSettings }
-    var phraseid = 0
+    var wordid = 0
+    var patternid = 0
     var complete: (() -> Void)?
-    var arrWords: [MUnitWord] { vm.arrWordsFiltered ?? vm.arrWords }
+    var arrPhrases: [MLangPhrase] { vm.arrPhrasesFiltered ?? vm.arrPhrases }
 
     @IBOutlet weak var scTextFilter: NSSegmentedControl!
     @IBOutlet weak var sfFilter: NSSearchField!
     @objc var textFilter = ""
-    @IBOutlet weak var pubTextbookFilter: NSPopUpButton!
-    @IBOutlet weak var acTextbooks: NSArrayController!
-    @objc var textbookFilter = 0
-    @IBOutlet weak var scWordScope: NSSegmentedControl!
+    @IBOutlet weak var scPhraseScope: NSSegmentedControl!
     @IBOutlet weak var tableView: NSTableView!
     
     override func viewDidLoad() {
@@ -33,33 +31,32 @@ class WordsSelectUnitViewController: NSViewController, NSTableViewDataSource, NS
     }
     
     @IBAction func reload(_ sender: AnyObject) {
-        vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: scWordScope.selectedSegment == 0, needCopy: true) {
-            self.acTextbooks.content = self.vmSettings.arrTextbookFilters
-            self.filterWord(self)
+        vm = PhrasesLangViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) {
+            self.filterPhrase(self)
         }
     }
     
     override func viewDidAppear() {
         super.viewDidAppear()
         // https://stackoverflow.com/questions/24235815/cocoa-how-to-set-window-title-from-within-view-controller-in-swift
-        view.window?.title = "Select Word"
+        view.window?.title = "Link Phrase"
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        arrWords.count
+        arrPhrases.count
     }
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! NSTableCellView
-        let item = arrWords[row]
+        let item = arrPhrases[row]
         let columnName = tableColumn!.identifier.rawValue
         cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
         return cell
     }
     
-    @IBAction func filterWord(_ sender: AnyObject) {
+    @IBAction func filterPhrase(_ sender: AnyObject) {
         let n = scTextFilter.selectedSegment
-        vm.applyFilters(textFilter: textFilter, scope: n == 0 ? "Word" : "Note", textbookFilter: textbookFilter)
+        vm.applyFilters(textFilter: textFilter, scope: n == 0 ? "Phrase" : "Translation")
         tableView.reloadData()
     }
     
@@ -68,7 +65,7 @@ class WordsSelectUnitViewController: NSViewController, NSTableViewDataSource, NS
         guard searchfield === sfFilter else {return}
         let code = (obj.userInfo!["NSTextMovement"] as! NSNumber).intValue
         guard code == NSReturnTextMovement else {return}
-        filterWord(self)
+        filterPhrase(self)
     }
 
     @IBAction func checkItems(_ sender: AnyObject) {
@@ -91,9 +88,11 @@ class WordsSelectUnitViewController: NSViewController, NSTableViewDataSource, NS
         for i in 0..<tableView.numberOfRows {
             guard let col = tableView.view(atColumn: 0, row: i, makeIfNecessary: false) else {continue}
             guard (col as! LollyCheckCell).chk!.state == .on else {continue}
-            let item = arrWords[i]
-            if phraseid != 0 {
-                o = o.concat(MWordPhrase.connect(wordid: item.WORDID, phraseid: phraseid))
+            let item = arrPhrases[i]
+            if wordid != 0 {
+                o = o.concat(MWordPhrase.connect(wordid: wordid, phraseid: item.PHRASEID))
+            } else if patternid != 0 {
+                o = o.concat(MPatternPhrase.connect(patternid: patternid, phraseid: item.PHRASEID))
             }
         }
         o.subscribe(onNext: {

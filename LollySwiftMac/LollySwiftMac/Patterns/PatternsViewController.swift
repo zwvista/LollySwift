@@ -272,7 +272,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     }
 
     @IBAction func selectPhrases(_ sender: AnyObject) {
-        let detailVC = NSStoryboard(name: "Phrases", bundle: nil).instantiateController(withIdentifier: "PhrasesSelectLangViewController") as! PhrasesSelectLangViewController
+        let detailVC = NSStoryboard(name: "Phrases", bundle: nil).instantiateController(withIdentifier: "PhrasesLinkViewController") as! PhrasesLinkViewController
         detailVC.textFilter = selectedPattern
         detailVC.patternid = selectedPatternID
         detailVC.complete = {

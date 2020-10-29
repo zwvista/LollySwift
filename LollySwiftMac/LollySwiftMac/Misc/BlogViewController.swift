@@ -24,6 +24,7 @@ class BlogViewController: NSViewController, NSMenuItemValidation  {
     override func viewDidLoad() {
         super.viewDidLoad()
         vmBlog = BlogViewModel(settings: vm)
+        tvMarked.font = NSFont.systemFont(ofSize: 15)
     }
 
     @IBAction func htmlToMarked(_ sender: AnyObject) {

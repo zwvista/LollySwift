@@ -157,6 +157,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func searchWord(word: String) {
+        search(self)
         guard let w = NSApplication.shared.windows.first(where: { $0.windowController?.className.contains( "WordsSearchWindowController") ?? false }) else {return}
         let v = w.contentViewController as! WordsSearchViewController
         v.addNewWord(word: word)
