@@ -14,7 +14,8 @@ import NSObject_Rx
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     static let theSettingsViewModel = SettingsViewModel()
-    
+    let synth = NSSpeechSynthesizer()
+
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         AppDelegate.theSettingsViewModel.getData().subscribe(onNext: {
             //self.search(self)
@@ -160,6 +161,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         showWindow(storyBoardName: "Misc", windowControllerName: "ReadNumberWindowController", modal: false)
     }
     
+    @IBAction func speak(_ sender: AnyObject) {
+        synth.setVoice(NSSpeechSynthesizer.VoiceName(rawValue: AppDelegate.theSettingsViewModel.macVoiceName))
+        let s = NSPasteboard.general.string(forType: .string) ?? ""
+        synth.startSpeaking(s)
+    }
+
     func searchWord(word: String) {
         let w = NSApplication.shared.windows.first!
         search(self)
