@@ -28,14 +28,6 @@ class MLangPhrase: NSObject, Codable, MPhraseProtocol {
         TRANSLATION = unititem.TRANSLATION
         super.init()
     }
-    
-    init(patternitem: MPatternPhrase) {
-        ID = patternitem.PHRASEID
-        LANGID = patternitem.LANGID
-        PHRASE = patternitem.PHRASE
-        TRANSLATION = patternitem.TRANSLATION
-        super.init()
-    }
 
     static func getDataByLang(_ langid: Int) -> Observable<[MLangPhrase]> {
         // SQL: SELECT * FROM LANGPHRASES WHERE LANGID=?

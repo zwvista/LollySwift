@@ -14,7 +14,6 @@ class PatternsViewModel: NSObject {
     var arrPatterns = [MPattern]()
     var arrPatternsFiltered: [MPattern]?
     var arrWebPages = [MPatternWebPage]()
-    var arrPhrases = [MPatternPhrase]()
 
     public init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> ()) {
         self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
@@ -98,16 +97,6 @@ class PatternsViewModel: NSObject {
             MPatternWebPage.update(item.ID, seqnum: item.SEQNUM).subscribe(onNext: {
                 complete(i - 1)
             }) ~ rx.disposeBag
-        }
-    }
-
-    static func updatePhrase(item: MPatternPhrase) -> Observable<()> {
-        MLangPhrase.update(item: MLangPhrase(patternitem: item))
-    }
-
-    func searchPhrases(patternid: Int) -> Observable<()> {
-        MPatternPhrase.getDataByPatternId(patternid).map {
-            self.arrPhrases = $0
         }
     }
 }

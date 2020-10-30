@@ -15,7 +15,6 @@ class PhrasesLinkViewController: NSViewController, NSTableViewDataSource, NSTabl
     @objc var vm: PhrasesLangViewModel!
     var vmSettings: SettingsViewModel! { vm.vmSettings }
     var wordid = 0
-    var patternid = 0
     var complete: (() -> Void)?
     var arrPhrases: [MLangPhrase] { vm.arrPhrasesFiltered ?? vm.arrPhrases }
 
@@ -91,8 +90,6 @@ class PhrasesLinkViewController: NSViewController, NSTableViewDataSource, NSTabl
             let item = arrPhrases[i]
             if wordid != 0 {
                 o = o.concat(MWordPhrase.connect(wordid: wordid, phraseid: item.PHRASEID))
-            } else if patternid != 0 {
-                o = o.concat(MPatternPhrase.connect(patternid: patternid, phraseid: item.PHRASEID))
             }
         }
         o.subscribe(onNext: {

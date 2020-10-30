@@ -14,14 +14,12 @@ import NSObject_Rx
 class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate, NSSearchFieldDelegate, NSMenuItemValidation, NSToolbarItemValidation {
 
     @IBOutlet weak var wvWebPage: WKWebView!
-    @IBOutlet weak var tfNewPattern: NSTextField!
     @IBOutlet weak var scTextFilter: NSSegmentedControl!
     @IBOutlet weak var sfFilter: NSSearchField!
     @IBOutlet weak var tfURL: NSTextField!
     @IBOutlet weak var tvPatterns: NSTableView!
     @IBOutlet weak var tvWebPages: NSTableView!
     @IBOutlet weak var tfStatusText: NSTextField!
-    @IBOutlet weak var tvPhrases: NSTableView!
 
     var vm: PatternsViewModel!
     @objc var newPattern = ""
@@ -33,7 +31,6 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     var vmSettings: SettingsViewModel! { vm.vmSettings }
     var arrPatterns: [MPattern] { vm.arrPatternsFiltered ?? vm.arrPatterns }
     var arrWebPages: [MPatternWebPage] { vm.arrWebPages }
-    var arrPhrases: [MPatternPhrase] { vm.arrPhrases }
     
     // https://developer.apple.com/videos/play/wwdc2011/120/
     // https://stackoverflow.com/questions/2121907/drag-drop-reorder-rows-on-nstableview
@@ -65,7 +62,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     }
 
     func numberOfRows(in tableView: NSTableView) -> Int {
-        tableView === tvPatterns ? arrPatterns.count : tableView === tvWebPages ? arrWebPages.count : arrPhrases.count
+        tableView === tvPatterns ? arrPatterns.count : arrWebPages.count
     }
     
     @IBAction func endEditing(_ sender: NSTextField) {
@@ -74,7 +71,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
         guard row != -1 else {return}
         let col = tv.column(for: sender)
         let key = tv.tableColumns[col].identifier.rawValue
-        let item = (tv === tvPatterns ? arrPatterns[row] : tv === tvWebPages ? arrWebPages[row] : arrPhrases[row]) as NSObject
+        let item = (tv === tvPatterns ? arrPatterns[row] : arrWebPages[row]) as NSObject
         let oldValue = String(describing: item.value(forKey: key) ?? "")
         var newValue = sender.stringValue
         if key == "PATTERN" {
@@ -90,10 +87,6 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
             PatternsViewModel.updateWebPage(item: item as! MPatternWebPage).subscribe(onNext: {
                 tv.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvPatterns.tableColumns.count))
             }) ~ rx.disposeBag
-        } else if tv == tvPhrases {
-            PatternsViewModel.updatePhrase(item: item as! MPatternPhrase).subscribe(onNext: {
-                tv.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvPatterns.tableColumns.count))
-            }) ~ rx.disposeBag
         }
     }
 
@@ -105,9 +98,6 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
             cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
         } else if tableView === tvWebPages {
             let item = arrWebPages[row]
-            cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
-        } else {
-            let item = arrPhrases[row]
             cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
         }
         return cell
@@ -123,8 +113,6 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
                 selectedPatternID = 0
                 vm.arrWebPages = []
                 tvWebPages.reloadData()
-                vm.arrPhrases = []
-                tvPhrases.reloadData()
             } else {
                 let item = arrPatterns[row]
                 selectedPattern = item.PATTERN
@@ -135,7 +123,6 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
                         self.tvWebPages.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
                     }
                 }) ~ rx.disposeBag
-                searchPhrases()
                 if isSpeaking {
                     speak(self)
                 }
@@ -147,19 +134,11 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
                 let item = arrWebPages[row]
                 wvWebPage.load(URLRequest(url: URL(string: item.URL)!))
             }
-        } else {
-            let row = tvPhrases.selectedRow
-            if isSpeaking && row != -1 {
-                synth.startSpeaking(arrPhrases[row].PHRASE)
-            }
         }
     }
     
     // https://stackoverflow.com/questions/9368654/cannot-seem-to-setenabledno-on-nsmenuitem
     func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
-        if menuItem.action == #selector(selectPhrases(_:)) {
-            return selectedPatternID != 0
-        }
         return true
     }
 
@@ -200,18 +179,6 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
         updateStatusText()
     }
     
-    @IBAction func addNewPattern(_ sender: Any) {
-        guard !newPattern.isEmpty else {return}
-        let item = vm.newPattern()
-        item.PATTERN = vm.vmSettings.autoCorrectInput(text: newPattern)
-        PatternsViewModel.create(item: item).subscribe(onNext: {
-            self.vm.arrPatterns.append(item)
-            self.tvPatterns.reloadData()
-            self.tfNewPattern.stringValue = ""
-            self.newPattern = ""
-        }) ~ rx.disposeBag
-    }
-
     @IBAction func refreshTableView(_ sender: AnyObject) {
         vm.reload().subscribe(onNext: {
             self.doRefresh()
@@ -264,27 +231,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     }
     
     @IBAction func doubleAction(_ sender: AnyObject) {
-        if NSApp.currentEvent!.modifierFlags.contains(.option) {
-            selectPhrases(sender)
-        } else {
-            editPattern(sender)
-        }
-    }
-
-    @IBAction func selectPhrases(_ sender: AnyObject) {
-        let detailVC = NSStoryboard(name: "Phrases", bundle: nil).instantiateController(withIdentifier: "PhrasesLinkViewController") as! PhrasesLinkViewController
-        detailVC.textFilter = selectedPattern
-        detailVC.patternid = selectedPatternID
-        detailVC.complete = {
-            self.searchPhrases()
-        }
-        self.presentAsModalWindow(detailVC)
-    }
-    
-    func searchPhrases() {
-        vm.searchPhrases(patternid: selectedPatternID).subscribe(onNext: {
-            self.tvPhrases.reloadData()
-        }) ~ rx.disposeBag
+        editPattern(sender)
     }
     
     func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
