@@ -141,13 +141,17 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
             self.responder = self.tfNewWord
         }) ~ rx.disposeBag
     }
+    
+    func addWord(phraseid: Int) {
+        let editVC = self.storyboard!.instantiateController(withIdentifier: "WordsUnitDetailViewController") as! WordsUnitDetailViewController
+        editVC.startEdit(vm: vm, item: vm.newUnitWord(), phraseid: phraseid)
+        editVC.complete = { self.tvWords.reloadData(); self.addWord(self) }
+        self.presentAsSheet(editVC)
+    }
 
     // https://stackoverflow.com/questions/24219441/how-to-use-nstoolbar-in-xcode-6-and-storyboard
     @IBAction func addWord(_ sender: AnyObject) {
-        let editVC = self.storyboard!.instantiateController(withIdentifier: "WordsUnitDetailViewController") as! WordsUnitDetailViewController
-        editVC.startEdit(vm: vm, item: vm.newUnitWord())
-        editVC.complete = { self.tvWords.reloadData(); self.addWord(self) }
-        self.presentAsSheet(editVC)
+        addWord(phraseid: 0)
     }
     
     override func deleteWord(row: Int) {
@@ -175,7 +179,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
         let editVC = self.storyboard!.instantiateController(withIdentifier: "WordsUnitDetailViewController") as! WordsUnitDetailViewController
         let i = tvWords.selectedRow
         if i == -1 {return}
-        editVC.startEdit(vm: vm, item: arrWords[tvWords.selectedRow])
+        editVC.startEdit(vm: vm, item: arrWords[tvWords.selectedRow], phraseid: 0)
         editVC.complete = {
             self.tvWords.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tvWords.tableColumns.count))
         }

@@ -51,8 +51,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
     
+    func findWindow(windowControllerName: String) -> NSWindow? {
+        NSApplication.shared.windows.first(where: { $0.windowController?.className.contains( windowControllerName) ?? false })
+    }
+    
     func findOrShowWindow(storyBoardName: String, windowControllerName: String) {
-        if let w = NSApplication.shared.windows.first(where: { $0.windowController?.className.contains( windowControllerName) ?? false }) {
+        if let w = findWindow(windowControllerName: windowControllerName) {
             // https://stackoverflow.com/questions/29328281/os-x-menubar-application-how-to-bring-window-to-front
             w.makeKeyAndOrderFront(nil)
         } else {
@@ -61,7 +65,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @IBAction func search(_ sender: AnyObject) {
-        showWindow(storyBoardName: "Words", windowControllerName: "WordsSearchWindowController", modal: false)
+        findOrShowWindow(storyBoardName: "Words", windowControllerName: "WordsSearchWindowController")
     }
 
     @IBAction func settings(_ sender: AnyObject) {
@@ -157,9 +161,26 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func searchWord(word: String) {
+        let w = NSApplication.shared.windows.first!
         search(self)
-        guard let w = NSApplication.shared.windows.first(where: { $0.windowController?.className.contains( "WordsSearchWindowController") ?? false }) else {return}
-        let v = w.contentViewController as! WordsSearchViewController
+        let v = NSApplication.shared.windows.first!.contentViewController as! WordsSearchViewController
         v.addNewWord(word: word)
+        w.makeKeyAndOrderFront(nil)
+    }
+    
+    func addNewUnitPhrase(wordid: Int) {
+        let w = NSApplication.shared.windows.first!
+        phrasesInUnit(self)
+        let v = NSApplication.shared.windows.first!.contentViewController as! PhrasesUnitViewController
+        v.addPhrase(wordid: wordid)
+        w.makeKeyAndOrderFront(nil)
+    }
+    
+    func addNewUnitWord(phraseid: Int) {
+        let w = NSApplication.shared.windows.first!
+        wordsInUnit(self)
+        let v = NSApplication.shared.windows.first!.contentViewController as! WordsUnitViewController
+        v.addWord(phraseid: phraseid)
+        w.makeKeyAndOrderFront(nil)
     }
 }

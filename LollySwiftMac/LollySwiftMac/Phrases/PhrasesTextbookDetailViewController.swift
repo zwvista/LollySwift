@@ -32,7 +32,7 @@ class PhrasesTextbookDetailViewController: NSViewController, NSTableViewDataSour
     @IBOutlet weak var btnOK: NSButton!
     
     func startEdit(vm: PhrasesUnitViewModel, item: MUnitPhrase) {
-        vmEdit = PhrasesUnitDetailViewModel(vm: vm, item: item) {
+        vmEdit = PhrasesUnitDetailViewModel(vm: vm, item: item, wordid: 0) {
             self.tableView.reloadData()
         }
     }

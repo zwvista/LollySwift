@@ -123,13 +123,17 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
         
         return true
     }
+    
+    func addPhrase(wordid: Int) {
+        let editVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesUnitDetailViewController") as! PhrasesUnitDetailViewController
+        editVC.startEdit(vm: vm, item: vm.newUnitPhrase(), wordid: wordid)
+        editVC.complete = { self.tvPhrases.reloadData(); self.addPhrase(self) }
+        self.presentAsSheet(editVC)
+    }
 
     // https://stackoverflow.com/questions/24219441/how-to-use-nstoolbar-in-xcode-6-and-storyboard
     @IBAction func addPhrase(_ sender: AnyObject) {
-        let editVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesUnitDetailViewController") as! PhrasesUnitDetailViewController
-        editVC.startEdit(vm: vm, item: vm.newUnitPhrase())
-        editVC.complete = { self.tvPhrases.reloadData(); self.addPhrase(self) }
-        self.presentAsSheet(editVC)
+        addPhrase(wordid: 0)
     }
     
     @IBAction func batchEdit(_ sender: AnyObject) {
@@ -168,7 +172,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
         let editVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesUnitDetailViewController") as! PhrasesUnitDetailViewController
         let i = tvPhrases.selectedRow
         if i == -1 {return}
-        editVC.startEdit(vm: vm, item: arrPhrases[i])
+        editVC.startEdit(vm: vm, item: arrPhrases[i], wordid: 0)
         editVC.complete = {
             self.tvPhrases.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tvPhrases.tableColumns.count))
         }

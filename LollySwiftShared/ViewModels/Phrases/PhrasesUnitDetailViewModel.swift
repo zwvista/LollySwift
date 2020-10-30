@@ -13,14 +13,16 @@ import RxRelay
 class PhrasesUnitDetailViewModel: NSObject {
     var vm: PhrasesUnitViewModel!
     var item: MUnitPhrase!
+    var wordid: Int
     var itemEdit: MUnitPhraseEdit!
     var vmSingle: SinglePhraseViewModel!
     var isAdd: Bool!
     var isOKEnabled = BehaviorRelay(value: false)
 
-    init(vm: PhrasesUnitViewModel, item: MUnitPhrase, complete: @escaping () -> ()) {
+    init(vm: PhrasesUnitViewModel, item: MUnitPhrase, wordid: Int, complete: @escaping () -> ()) {
         self.vm = vm
         self.item = item
+        self.wordid = wordid
         itemEdit = MUnitPhraseEdit(x: item)
         isAdd = item.ID == 0
         _ = itemEdit.PHRASE.map { !$0.isEmpty } ~> isOKEnabled
@@ -31,6 +33,6 @@ class PhrasesUnitDetailViewModel: NSObject {
     func onOK() -> Observable<()> {
         itemEdit.save(to: item)
         item.PHRASE = vm.vmSettings.autoCorrectInput(text: item.PHRASE)
-        return isAdd ? vm.create(item: item) : vm.update(item: item)
+        return !isAdd ? vm.update(item: item) : vm.create(item: item).flatMap { self.wordid == 0 ? Observable.just(()) : MWordPhrase.connect(wordid: self.wordid, phraseid: self.item.PHRASEID) }
     }
 }

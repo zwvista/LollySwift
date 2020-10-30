@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097.2"/>
-        <plugIn identifier="com.apple.WebKit2IBPlugin" version="16097.2"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17156"/>
+        <plugIn identifier="com.apple.WebKit2IBPlugin" version="17156"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -232,7 +233,7 @@
                                                                 <rect key="frame" x="0.0" y="2" width="443" height="372"/>
                                                                 <clipView key="contentView" id="yYf-IS-emK">
                                                                     <rect key="frame" x="1" y="0.0" width="441" height="371"/>
-                                                                    <autoresizingMask key="autoresizingMask"/>
+                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="t0V-vX-4mw" viewBased="YES" id="z73-cL-LaQ">
                                                                             <rect key="frame" x="0.0" y="0.0" width="544" height="346"/>
@@ -435,7 +436,7 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="443" height="135"/>
                                                                 <clipView key="contentView" id="HBB-my-8Fc">
                                                                     <rect key="frame" x="1" y="0.0" width="441" height="134"/>
-                                                                    <autoresizingMask key="autoresizingMask"/>
+                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="rYk-Lg-jCM" viewBased="YES" id="iTQ-eI-v7K">
                                                                             <rect key="frame" x="0.0" y="0.0" width="607" height="109"/>
@@ -694,7 +695,7 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="758" height="82"/>
                                                                 <clipView key="contentView" id="a25-0K-CIK">
                                                                     <rect key="frame" x="1" y="0.0" width="756" height="81"/>
-                                                                    <autoresizingMask key="autoresizingMask"/>
+                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="5Ix-mI-eyw" viewBased="YES" id="nvp-P1-ASj">
                                                                             <rect key="frame" x="0.0" y="0.0" width="756" height="56"/>
@@ -1387,6 +1388,32 @@ Gw
             </objects>
             <point key="canvasLocation" x="-161" y="1015"/>
         </scene>
+        <!--Patterns Merge View Controller-->
+        <scene sceneID="XCp-NW-VzQ">
+            <objects>
+                <viewController id="y3o-ZY-bbe" customClass="PatternsMergeViewController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="Pjg-5Y-d27">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="BZY-Q1-HuS" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="312" y="1054"/>
+        </scene>
+        <!--Patterns Split View Controller-->
+        <scene sceneID="JnI-Hh-OXX">
+            <objects>
+                <viewController id="bOa-Qw-q0Q" customClass="PatternsSplitViewController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="emR-fr-FoU">
+                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="LGh-Im-HQb" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="252" y="1490"/>
+        </scene>
         <!--Web Page Select View Controller-->
         <scene sceneID="aJm-H6-zWz">
             <objects>
@@ -1477,7 +1504,7 @@ Gw
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <clipView key="contentView" id="cDx-wt-P7z">
                                     <rect key="frame" x="1" y="0.0" width="588" height="234"/>
-                                    <autoresizingMask key="autoresizingMask"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="q4J-08-mBW" viewBased="YES" id="0xW-Ig-eTT">
                                             <rect key="frame" x="0.0" y="0.0" width="588" height="209"/>

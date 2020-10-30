@@ -61,7 +61,10 @@ class PhrasesUnitViewModel: NSObject {
         MUnitPhrase.create(item: item).flatMap {
             MUnitPhrase.getDataById($0, arrTextbooks: self.vmSettings.arrTextbooks)
         }.map {
-            if let o = $0 { self.arrPhrases.append(o) }
+            if let o = $0 {
+                self.arrPhrases.append(o)
+                copyProperties(from: o, to: item)
+            }
         }
     }
     
