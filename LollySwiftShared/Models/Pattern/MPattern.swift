@@ -15,8 +15,8 @@ class MPattern: NSObject, Codable {
     dynamic var ID = 0
     dynamic var LANGID = 0
     dynamic var PATTERN = ""
-    dynamic var NOTE: String?
-    dynamic var TAGS: String?
+    dynamic var NOTE = ""
+    dynamic var TAGS = ""
 
     override init() {
     }
@@ -55,8 +55,8 @@ class MPattern: NSObject, Codable {
 class MPatternEdit {
     var ID: BehaviorRelay<String>
     var PATTERN: BehaviorRelay<String>
-    var NOTE: BehaviorRelay<String?>
-    var TAGS: BehaviorRelay<String?>
+    var NOTE: BehaviorRelay<String>
+    var TAGS: BehaviorRelay<String>
     
     init(x: MPattern) {
         ID = BehaviorRelay(value: x.ID.toString)
@@ -70,4 +70,9 @@ class MPatternEdit {
         x.NOTE = NOTE.value
         x.TAGS = TAGS.value
     }
+}
+
+class MPatternVariation: NSObject {
+    dynamic var index = 0
+    dynamic var variation = ""
 }

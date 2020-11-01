@@ -496,7 +496,7 @@ class SettingsViewModel: NSObject {
         let url = selectedDictNote.urlString(word: word, arrAutoCorrect: arrAutoCorrect)
         return RestApi.getHtml(url: url).map { html in
             print(html)
-            return CommonApi.extractText(from: html, transform: self.selectedDictNote.TRANSFORM!, template: "") { text,_ in text }
+            return CommonApi.extractText(from: html, transform: self.selectedDictNote.TRANSFORM, template: "") { text,_ in text }
         }
     }
     

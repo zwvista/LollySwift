@@ -30,8 +30,8 @@ class PatternsDetailViewController: NSViewController {
         vmEdit = PatternsDetailViewModel(vm: vm, item: item)
         _ = itemEdit.ID ~> tfID.rx.text.orEmpty
         _ = itemEdit.PATTERN <~> tfPattern.rx.text.orEmpty
-        _ = itemEdit.NOTE <~> tfNote.rx.text
-        _ = itemEdit.TAGS <~> tfTags.rx.text
+        _ = itemEdit.NOTE <~> tfNote.rx.text.orEmpty
+        _ = itemEdit.TAGS <~> tfTags.rx.text.orEmpty
         btnOK.rx.tap.flatMap { [unowned self] _ in
             self.vmEdit.onOK()
         }.subscribe { [unowned self] _ in

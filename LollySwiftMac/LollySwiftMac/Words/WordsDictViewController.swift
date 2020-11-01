@@ -73,7 +73,7 @@ class WordsDictViewController: NSViewController, WKNavigationDelegate {
         guard dictStatus != .ready else {return}
         switch dictStatus {
         case .automating:
-            let s = dict.AUTOMATION!.replacingOccurrences(of: "{0}", with: word)
+            let s = dict.AUTOMATION.replacingOccurrences(of: "{0}", with: word)
             webView.evaluateJavaScript(s) { (html: Any?, error: Error?) in
                 self.dictStatus = .ready
                 if self.dict.DICTTYPENAME == "OFFLINE-ONLINE" {

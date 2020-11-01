@@ -21,20 +21,20 @@ class MDictionary: NSObject, Codable {
     dynamic var DICTTYPECODE = 0
     dynamic var DICTTYPENAME = ""
     dynamic var DICTNAME = ""
-    dynamic var URL: String?
-    dynamic var CHCONV: String?
-    dynamic var AUTOMATION: String?
-    dynamic var TRANSFORM: String?
+    dynamic var URL = ""
+    dynamic var CHCONV = ""
+    dynamic var AUTOMATION = ""
+    dynamic var TRANSFORM = ""
     dynamic var WAIT = 0
-    dynamic var TEMPLATE: String?
-    dynamic var TEMPLATE2: String?
+    dynamic var TEMPLATE = ""
+    dynamic var TEMPLATE2 = ""
     
     override var description: String { DICTNAME }
 
     func urlString(word: String, arrAutoCorrect: [MAutoCorrect]) -> String {
         let word2 = CHCONV == "BASIC" ? MAutoCorrect.autoCorrect(text: word, arrAutoCorrect: arrAutoCorrect, colFunc1: { $0.EXTENDED }, colFunc2: { $0.BASIC }) :
             word
-        let url = URL!.replacingOccurrences(of: "{0}", with: word2.urlEncoded())
+        let url = URL.replacingOccurrences(of: "{0}", with: word2.urlEncoded())
         print(url)
         return url
     }
@@ -52,8 +52,8 @@ class MDictionary: NSObject, Codable {
     }
     
     func htmlString(_ html: String, word: String, useTemplate2: Bool = false) -> String {
-        let template = useTemplate2 && !(TEMPLATE2 ?? "").isEmpty ? TEMPLATE2! : TEMPLATE!
-        return CommonApi.extractText(from: html, transform: TRANSFORM!, template: template) { (text, template) in CommonApi.applyTemplate(template: template, word: word, text: text)
+        let template = useTemplate2 && !(TEMPLATE2 ?? "").isEmpty ? TEMPLATE2 : TEMPLATE
+        return CommonApi.extractText(from: html, transform: TRANSFORM, template: template) { (text, template) in CommonApi.applyTemplate(template: template, word: word, text: text)
         }
     }
 
@@ -82,13 +82,13 @@ class MDictionaryDict: NSObject, Codable {
     dynamic var DICTTYPECODE = 0
     dynamic var DICTTYPENAME = ""
     dynamic var DICTNAME = ""
-    dynamic var URL: String?
-    dynamic var CHCONV: String?
-    dynamic var AUTOMATION: String?
-    dynamic var TRANSFORM: String?
+    dynamic var URL = ""
+    dynamic var CHCONV = ""
+    dynamic var AUTOMATION = ""
+    dynamic var TRANSFORM = ""
     dynamic var WAIT = 0
-    dynamic var TEMPLATE: String?
-    dynamic var TEMPLATE2: String?
+    dynamic var TEMPLATE = ""
+    dynamic var TEMPLATE2 = ""
 
     static func update(item: MDictionary) -> Observable<()> {
         // SQL: UPDATE DICTIONARIES SET DICTID=?, LANGIDFROM=?, LANGIDTO=?, NAME=?, SEQNUM=?, DICTTYPECODE=?, URL=?, CHCONV=?, AUTOMATION=?, AUTOJUMP=?, DICTTABLE=?, TEMPLATE=?, TEMPLATE2=? WHERE ID=?
@@ -115,13 +115,13 @@ class MDictionarySite: NSObject, Codable {
     dynamic var DICTTYPECODE = 0
     dynamic var DICTTYPENAME = ""
     dynamic var DICTNAME = ""
-    dynamic var URL: String?
-    dynamic var CHCONV: String?
-    dynamic var AUTOMATION: String?
-    dynamic var TRANSFORM: String?
+    dynamic var URL = ""
+    dynamic var CHCONV = ""
+    dynamic var AUTOMATION = ""
+    dynamic var TRANSFORM = ""
     dynamic var WAIT = 0
-    dynamic var TEMPLATE: String?
-    dynamic var TEMPLATE2: String?
+    dynamic var TEMPLATE = ""
+    dynamic var TEMPLATE2 = ""
     
     static func update(item: MDictionary) -> Observable<()> {
         // SQL: UPDATE SITES SET DICTID=?, LANGIDFROM=?, LANGIDTO=?, NAME=?, SEQNUM=?, DICTTYPECODE=?, URL=?, CHCONV=?, AUTOMATION=?, AUTOJUMP=?, DICTTABLE=?, TEMPLATE=?, TEMPLATE2=? WHERE ID=?

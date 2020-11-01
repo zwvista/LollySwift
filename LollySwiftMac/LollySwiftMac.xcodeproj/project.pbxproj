@@ -96,6 +96,8 @@
 		95AA9D1C24C1EF00002E8B6D /* MWebPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AA9D1B24C1EF00002E8B6D /* MWebPage.swift */; };
 		95AF43B7254BDA9E00FD71CB /* PatternsMergeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AF43B6254BDA9E00FD71CB /* PatternsMergeViewController.swift */; };
 		95AF43BD254BDAB000FD71CB /* PatternsSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AF43BB254BDAB000FD71CB /* PatternsSplitViewController.swift */; };
+		95AF43CA254E660700FD71CB /* PatternsMergeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AF43C9254E660700FD71CB /* PatternsMergeViewModel.swift */; };
+		95AF43CF254E661600FD71CB /* PatternsSplitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AF43CE254E661600FD71CB /* PatternsSplitViewModel.swift */; };
 		95B04C41253D7327009BF514 /* PhrasesLinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B04C40253D7327009BF514 /* PhrasesLinkViewController.swift */; };
 		95B04C49253DF5C2009BF514 /* WordsLinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B04C48253DF5C2009BF514 /* WordsLinkViewController.swift */; };
 		95B6589F2222E9E10095B0D2 /* WordsUnitBatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B6589E2222E9E10095B0D2 /* WordsUnitBatchViewController.swift */; };
@@ -238,6 +240,8 @@
 		95AA9D1B24C1EF00002E8B6D /* MWebPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MWebPage.swift; sourceTree = "<group>"; };
 		95AF43B6254BDA9E00FD71CB /* PatternsMergeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternsMergeViewController.swift; sourceTree = "<group>"; };
 		95AF43BB254BDAB000FD71CB /* PatternsSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternsSplitViewController.swift; sourceTree = "<group>"; };
+		95AF43C9254E660700FD71CB /* PatternsMergeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternsMergeViewModel.swift; sourceTree = "<group>"; };
+		95AF43CE254E661600FD71CB /* PatternsSplitViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternsSplitViewModel.swift; sourceTree = "<group>"; };
 		95B04C40253D7327009BF514 /* PhrasesLinkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesLinkViewController.swift; sourceTree = "<group>"; };
 		95B04C48253DF5C2009BF514 /* WordsLinkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsLinkViewController.swift; sourceTree = "<group>"; };
 		95B6589E2222E9E10095B0D2 /* WordsUnitBatchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsUnitBatchViewController.swift; sourceTree = "<group>"; };
@@ -499,6 +503,8 @@
 			isa = PBXGroup;
 			children = (
 				95E6BFAF24D7182E00CB7380 /* PatternsDetailViewModel.swift */,
+				95AF43C9254E660700FD71CB /* PatternsMergeViewModel.swift */,
+				95AF43CE254E661600FD71CB /* PatternsSplitViewModel.swift */,
 				954CB5F323B7175500A03900 /* PatternsViewModel.swift */,
 				95840F3F24C96AF400D6BA6D /* WebPageSelectViewModel.swift */,
 			);
@@ -877,6 +883,7 @@
 				9534728E22BB68EE00517D71 /* AppDelegate.swift in Sources */,
 				8C2CB5BE207885140083DDE2 /* MLanguage.swift in Sources */,
 				9508C767243605D0004A0D73 /* WordsDictViewController.swift in Sources */,
+				95AF43CF254E661600FD71CB /* PatternsSplitViewModel.swift in Sources */,
 				95837E7F24DEAFC500B5D2AE /* PhrasesUnitDetailViewModel.swift in Sources */,
 				95CED3B62211C8300094622F /* WordsTextbookViewController.swift in Sources */,
 				954CB5F223B714C500A03900 /* PatternsViewController.swift in Sources */,
@@ -899,6 +906,7 @@
 				95837E7E24DEAFC500B5D2AE /* PhrasesLangDetailViewModel.swift in Sources */,
 				9534728B22BB68EE00517D71 /* LollyWindow.swift in Sources */,
 				95F5400C22C1FADD00E3FD6A /* SinglePhraseViewModel.swift in Sources */,
+				95AF43CA254E660700FD71CB /* PatternsMergeViewModel.swift in Sources */,
 				8C2CB5BB207885140083DDE2 /* MLangPhrase.swift in Sources */,
 				95F6CEBF2264A5ED00C15A1D /* WordsReviewViewModel.swift in Sources */,
 				95B658A72227D8060095B0D2 /* MCommon.swift in Sources */,
