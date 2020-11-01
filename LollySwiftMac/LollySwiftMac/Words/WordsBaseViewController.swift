@@ -158,7 +158,12 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
 
 class WordsBaseViewController: WordsPhrasesBaseViewController {
     
-    var arrPhrases: [MLangPhrase]! { nil }
+    var vmPhrasesLang: PhrasesLangViewModel!
+
+    override func settingsChanged() {
+        super.settingsChanged()
+        vmPhrasesLang = PhrasesLangViewModel(settings: vmSettings)
+    }
 
     func doRefresh() {
         tvWords.reloadData()
@@ -187,7 +192,7 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
             let item = wordItemForRow(row: row)!
             cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
         } else {
-            let item = arrPhrases[row]
+            let item = vmPhrasesLang.arrPhrases[row]
             cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
         }
         return cell
@@ -199,7 +204,7 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
             selectedWordChanged()
             updateStatusText()
             searchDict(self)
-            searchPhrases()
+            getPhrases()
         } else {
             selectedPhraseChanged()
         }
@@ -248,11 +253,8 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
     func deleteWord(row: Int) {
     }
     
-    func searchPhrases() {
-    }
-    
     override func phraseItemForRow(row: Int) -> (MPhraseProtocol & NSObject)? {
-        arrPhrases[row]
+        vmPhrasesLang.arrPhrases[row]
     }
 
     @IBAction func copyWord(_ sender: AnyObject) {
@@ -286,6 +288,12 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
         } else {
             synth.startSpeaking(selectedWord)
         }
+    }
+    
+    func getPhrases() {
+        vmPhrasesLang.getPhrases(wordid: selectedWordID).subscribe(onNext: {
+            self.tvPhrases.reloadData()
+        }) ~ rx.disposeBag
     }
 }
 

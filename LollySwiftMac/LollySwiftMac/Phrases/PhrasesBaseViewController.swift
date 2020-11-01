@@ -12,7 +12,12 @@ import NSObject_Rx
 
 class PhrasesBaseViewController: WordsPhrasesBaseViewController {
     
-    var arrWords: [MLangWord]! { nil }
+    var vmWordsLang: WordsLangViewModel!
+
+    override func settingsChanged() {
+        super.settingsChanged()
+        vmWordsLang = WordsLangViewModel(settings: vmSettings)
+    }
 
     func doRefresh() {
         tvPhrases.reloadData()
@@ -35,7 +40,7 @@ class PhrasesBaseViewController: WordsPhrasesBaseViewController {
             let item = phraseItemForRow(row: row)!
             cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
         } else {
-            let item = arrWords[row]
+            let item = vmWordsLang.arrWords[row]
             cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
         }
         return cell
@@ -46,7 +51,7 @@ class PhrasesBaseViewController: WordsPhrasesBaseViewController {
         if tv === tvPhrases {
             selectedPhraseChanged()
             updateStatusText()
-            searchWords()
+            getWords()
         } else {
             selectedWordChanged()
             searchDict(self)
@@ -89,12 +94,9 @@ class PhrasesBaseViewController: WordsPhrasesBaseViewController {
     
     func deletePhrase(row: Int) {
     }
-    
-    func searchWords() {
-    }
-    
+        
     override func wordItemForRow(row: Int) -> (MWordProtocol & NSObject)? {
-        arrWords[row]
+        vmWordsLang.arrWords[row]
     }
 
     @IBAction func copyPhrase(_ sender: AnyObject) {
@@ -117,6 +119,15 @@ class PhrasesBaseViewController: WordsPhrasesBaseViewController {
         } else {
             synth.startSpeaking(selectedPhrase)
         }
+    }
+    
+    func getWords() {
+        vmWordsLang.getWords(phraseid: selectedPhraseID).subscribe(onNext: {
+            self.tvWords.reloadData()
+            if self.tvWords.numberOfRows > 0 {
+                self.tvWords.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
+            }
+        }) ~ rx.disposeBag
     }
 }
 

@@ -15,7 +15,6 @@ class WordsUnitViewModel: NSObject {
     let inTextbook: Bool
     var arrWords = [MUnitWord]()
     var arrWordsFiltered: [MUnitWord]?
-    var arrPhrases = [MLangPhrase]()
 
     init(settings: SettingsViewModel, inTextbook: Bool, needCopy: Bool, complete: @escaping () -> ()) {
         self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
@@ -135,11 +134,5 @@ class WordsUnitViewModel: NSObject {
         }, getOne: { i in
             self.clearNote(index: i).do(onNext: { oneComplete(i) })
         })
-    }
-    
-    func searchPhrases(wordid: Int) -> Observable<()> {
-        MWordPhrase.getPhrasesByWordId(wordid).map {
-            self.arrPhrases = $0
-        }
     }
 }

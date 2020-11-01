@@ -16,7 +16,6 @@ class PhrasesLangViewController: PhrasesBaseViewController {
     var vm: PhrasesLangViewModel!
     override var vmSettings: SettingsViewModel! { vm.vmSettings }
     var arrPhrases: [MLangPhrase] { vm.arrPhrasesFiltered ?? vm.arrPhrases }
-    override var arrWords: [MLangWord] { vm.arrWords }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,15 +45,6 @@ class PhrasesLangViewController: PhrasesBaseViewController {
     override func endEditing(row: Int) {
         let item = arrPhrases[row]
         PhrasesLangViewModel.update(item: item).subscribe() ~ rx.disposeBag
-    }
-    
-    override func searchWords() {
-        vm.searchWords(phraseid: selectedPhraseID).subscribe(onNext: {
-            self.tvWords.reloadData()
-            if self.tvWords.numberOfRows > 0 {
-                self.tvWords.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
-            }
-        }) ~ rx.disposeBag
     }
 
     // https://stackoverflow.com/questions/24219441/how-to-use-nstoolbar-in-xcode-6-and-storyboard
@@ -112,7 +102,7 @@ class PhrasesLangViewController: PhrasesBaseViewController {
         detailVC.textFilter = selectedPhrase
         detailVC.phraseid = selectedPhraseID
         detailVC.complete = {
-            self.searchWords()
+            self.getWords()
         }
         self.presentAsModalWindow(detailVC)
     }

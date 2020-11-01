@@ -15,7 +15,6 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
     var vm: PhrasesUnitViewModel!
     override var vmSettings: SettingsViewModel! { vm.vmSettings }
     var arrPhrases: [MUnitPhrase] { vm.arrPhrasesFiltered ?? vm.arrPhrases }
-    override var arrWords: [MLangWord] { vm.arrWords }
 
     @IBOutlet weak var pubTextbookFilter: NSPopUpButton!
     @IBOutlet weak var acTextbooks: NSArrayController!
@@ -40,7 +39,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        tableView === tvPhrases ? arrPhrases.count : arrWords.count
+        tableView === tvPhrases ? arrPhrases.count : vmWordsLang.arrWords.count
     }
     
     override func phraseItemForRow(row: Int) -> (MPhraseProtocol & NSObject)? {
@@ -51,15 +50,6 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
         let item = arrPhrases[row]
         vm.update(item: item).subscribe(onNext: {_ in 
             self.tvPhrases.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvPhrases.tableColumns.count))
-        }) ~ rx.disposeBag
-    }
-    
-    override func searchWords() {
-        vm.searchWords(phraseid: selectedPhraseID).subscribe(onNext: {
-            self.tvWords.reloadData()
-            if self.tvWords.numberOfRows > 0 {
-                self.tvWords.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
-            }
         }) ~ rx.disposeBag
     }
 
@@ -110,7 +100,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
         detailVC.textFilter = selectedPhrase
         detailVC.phraseid = selectedPhraseID
         detailVC.complete = {
-            self.searchWords()
+            self.getWords()
         }
         self.presentAsModalWindow(detailVC)
     }

@@ -17,7 +17,6 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     var vmReview = EmbeddedReviewViewModel()
     override var vmSettings: SettingsViewModel! { vm.vmSettings }
     var arrWords: [MUnitWord] { vm.arrWordsFiltered ?? vm.arrWords }
-    override var arrPhrases: [MLangPhrase] { vm.arrPhrases }
 
     // https://developer.apple.com/videos/play/wwdc2011/120/
     // https://stackoverflow.com/questions/2121907/drag-drop-reorder-rows-on-nstableview
@@ -57,7 +56,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        tableView === tvWords ? arrWords.count : arrPhrases.count
+        tableView === tvWords ? arrWords.count : vmPhrasesLang.arrPhrases.count
     }
     
     override func wordItemForRow(row: Int) -> (MWordProtocol & NSObject)? {
@@ -68,12 +67,6 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
         let item = arrWords[row]
         vm.update(item: item).subscribe(onNext: {_ in 
             self.tvWords.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvWords.tableColumns.count))
-        }) ~ rx.disposeBag
-    }
-    
-    override func searchPhrases() {
-        vm.searchPhrases(wordid: selectedWordID).subscribe(onNext: {
-            self.tvPhrases.reloadData()
         }) ~ rx.disposeBag
     }
 
@@ -287,7 +280,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
         detailVC.textFilter = selectedWord
         detailVC.wordid = selectedWordID
         detailVC.complete = {
-            self.searchPhrases()
+            self.getPhrases()
         }
         self.presentAsModalWindow(detailVC)
     }

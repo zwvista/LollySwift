@@ -17,7 +17,6 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     var vmReview = EmbeddedReviewViewModel()
     override var vmSettings: SettingsViewModel! { vm.vmSettings }
     var arrPhrases: [MUnitPhrase] { vm.arrPhrasesFiltered ?? vm.arrPhrases }
-    override var arrWords: [MLangWord] { vm.arrWords }
 
     // https://developer.apple.com/videos/play/wwdc2011/120/
     // https://stackoverflow.com/questions/2121907/drag-drop-reorder-rows-on-nstableview
@@ -49,7 +48,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        tableView === tvPhrases ? arrPhrases.count : arrWords.count
+        tableView === tvPhrases ? arrPhrases.count : vmWordsLang.arrWords.count
     }
     
     override func phraseItemForRow(row: Int) -> (MPhraseProtocol & NSObject)? {
@@ -60,15 +59,6 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
         let item = arrPhrases[row]
         vm.update(item: item).subscribe(onNext: {_ in
             self.tvPhrases.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvPhrases.tableColumns.count))
-        }) ~ rx.disposeBag
-    }
-    
-    override func searchWords() {
-        vm.searchWords(phraseid: selectedPhraseID).subscribe(onNext: {
-            self.tvWords.reloadData()
-            if self.tvWords.numberOfRows > 0 {
-                self.tvWords.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
-            }
         }) ~ rx.disposeBag
     }
 
@@ -233,7 +223,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
         detailVC.textFilter = selectedPhrase
         detailVC.phraseid = selectedPhraseID
         detailVC.complete = {
-            self.searchWords()
+            self.getWords()
         }
         self.presentAsModalWindow(detailVC)
     }

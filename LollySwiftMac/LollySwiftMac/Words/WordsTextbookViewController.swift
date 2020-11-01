@@ -53,12 +53,6 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
             self.tvWords.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvWords.tableColumns.count))
         }) ~ rx.disposeBag
     }
-    
-    override func searchPhrases() {
-        vm.searchPhrases(wordid: selectedWordID).subscribe(onNext: {
-            self.tvPhrases.reloadData()
-        }) ~ rx.disposeBag
-    }
 
     override func deleteWord(row: Int) {
         let item = arrWords[row]
@@ -129,7 +123,7 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
         detailVC.textFilter = selectedWord
         detailVC.wordid = selectedWordID
         detailVC.complete = {
-            self.searchPhrases()
+            self.getPhrases()
         }
         self.presentAsModalWindow(detailVC)
     }
