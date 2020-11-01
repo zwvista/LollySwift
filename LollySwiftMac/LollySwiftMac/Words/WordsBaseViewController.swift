@@ -295,6 +295,17 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
             self.tvPhrases.reloadData()
         }) ~ rx.disposeBag
     }
+
+    @IBAction func editPhrase(_ sender: AnyObject) {
+        let editVC = NSStoryboard(name: "Phrases", bundle: nil).instantiateController(withIdentifier: "PhrasesLangDetailViewController") as! PhrasesLangDetailViewController
+        editVC.vm = vmPhrasesLang
+        let i = tvPhrases.selectedRow
+        editVC.item = vmPhrasesLang.arrPhrases[i]
+        editVC.complete = {
+            self.tvPhrases.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tvPhrases.tableColumns.count))
+        }
+        self.presentAsModalWindow(editVC)
+    }
 }
 
 class WordsPhrasesBaseWindowController: NSWindowController, LollyProtocol, NSWindowDelegate, NSTextFieldDelegate {
