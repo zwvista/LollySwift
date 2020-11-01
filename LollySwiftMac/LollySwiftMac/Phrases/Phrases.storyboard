@@ -871,6 +871,7 @@
                                                                             <connections>
                                                                                 <outlet property="dataSource" destination="F8i-pe-Ate" id="7Uc-co-DKD"/>
                                                                                 <outlet property="delegate" destination="F8i-pe-Ate" id="fX3-ox-4AL"/>
+                                                                                <outlet property="menu" destination="8bc-jT-Z9y" id="pyM-fF-Xei"/>
                                                                             </connections>
                                                                         </tableView>
                                                                     </subviews>
@@ -957,7 +958,7 @@
                         <outlet property="tvWords" destination="7N6-WE-Kfk" id="2PF-zL-Yc5"/>
                     </connections>
                 </viewController>
-                <menu id="UPB-Wi-4rN">
+                <menu id="UPB-Wi-4rN" userLabel="Phrases Menu">
                     <items>
                         <menuItem title="Edit" id="Hn0-Zh-OQJ">
                             <modifierMask key="keyEquivalentModifierMask"/>
@@ -1000,6 +1001,38 @@
                             <connections>
                                 <action selector="speak:" target="F8i-pe-Ate" id="vJc-Ia-jag"/>
                             </connections>
+                        </menuItem>
+                    </items>
+                </menu>
+                <menu id="8bc-jT-Z9y" userLabel="Words Menu">
+                    <items>
+                        <menuItem title="Retrieve Note" id="KYG-br-tnS">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem title="Clear Note" id="x7p-cO-FcL">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem isSeparatorItem="YES" id="Mi3-Fc-n6d"/>
+                        <menuItem title="Edit" id="xRg-zw-YoK">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem isSeparatorItem="YES" id="OyS-gn-Uqv"/>
+                        <menuItem title="Unlink" id="daJ-2g-Ski">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem isSeparatorItem="YES" id="aB3-lj-PPH"/>
+                        <menuItem title="Copy Word" id="Nff-8M-9Og">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem title="Google Word" id="qRf-vC-8cw">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem title="Online Dictionary" id="6xs-E7-Poi">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem isSeparatorItem="YES" id="I37-rV-6Ud"/>
+                        <menuItem title="Speak" id="Tkb-VQ-wmz" userLabel="Speak">
+                            <modifierMask key="keyEquivalentModifierMask"/>
                         </menuItem>
                     </items>
                 </menu>
@@ -2798,6 +2831,7 @@ Gw
                                                                             <connections>
                                                                                 <outlet property="dataSource" destination="CET-Kl-kcd" id="V2t-RR-q8y"/>
                                                                                 <outlet property="delegate" destination="CET-Kl-kcd" id="XTl-lR-cZe"/>
+                                                                                <outlet property="menu" destination="4lm-Ap-pkj" id="Mrl-3s-YcR"/>
                                                                             </connections>
                                                                         </tableView>
                                                                     </subviews>
@@ -2884,7 +2918,7 @@ Gw
                         <outlet property="tvWords" destination="Wpd-f7-GOr" id="DQh-PV-1II"/>
                     </connections>
                 </viewController>
-                <menu id="Rot-bf-Ibg">
+                <menu id="Rot-bf-Ibg" userLabel="Phrases Menu">
                     <items>
                         <menuItem title="Edit" id="p90-Vh-Kmi">
                             <modifierMask key="keyEquivalentModifierMask"/>
@@ -2924,6 +2958,38 @@ Gw
                             <connections>
                                 <action selector="speak:" target="CET-Kl-kcd" id="2I9-8W-E6S"/>
                             </connections>
+                        </menuItem>
+                    </items>
+                </menu>
+                <menu id="4lm-Ap-pkj" userLabel="Words Menu">
+                    <items>
+                        <menuItem title="Retrieve Note" id="T3p-J3-eL0">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem title="Clear Note" id="BYW-l2-Xyh">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem isSeparatorItem="YES" id="EmA-Bj-bwL"/>
+                        <menuItem title="Edit" id="WMq-EM-hEd">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem isSeparatorItem="YES" id="yN4-SA-CdT"/>
+                        <menuItem title="Unlink" id="ss4-RV-mNt">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem isSeparatorItem="YES" id="lFu-x2-heB"/>
+                        <menuItem title="Copy Word" id="dvm-3y-LD5">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem title="Google Word" id="skg-Ql-94j">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem title="Online Dictionary" id="DaK-IU-fDT">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem isSeparatorItem="YES" id="ksH-iC-zvY"/>
+                        <menuItem title="Speak" id="6X7-Aj-B9f" userLabel="Speak">
+                            <modifierMask key="keyEquivalentModifierMask"/>
                         </menuItem>
                     </items>
                 </menu>
@@ -4274,6 +4340,7 @@ Gw
                                                                             <connections>
                                                                                 <outlet property="dataSource" destination="dNa-67-Lx3" id="GBr-fh-0Az"/>
                                                                                 <outlet property="delegate" destination="dNa-67-Lx3" id="0gG-Tm-UHO"/>
+                                                                                <outlet property="menu" destination="paV-m3-arV" id="kwn-ki-D4j"/>
                                                                             </connections>
                                                                         </tableView>
                                                                     </subviews>
@@ -4363,7 +4430,7 @@ Gw
                     </connections>
                 </viewController>
                 <arrayController id="xCb-Qj-9og"/>
-                <menu id="w8F-Rg-pAb">
+                <menu id="w8F-Rg-pAb" userLabel="Phrases Menu">
                     <items>
                         <menuItem title="Edit" id="2Rf-EE-JYT">
                             <modifierMask key="keyEquivalentModifierMask"/>
@@ -4403,6 +4470,38 @@ Gw
                             <connections>
                                 <action selector="speak:" target="dNa-67-Lx3" id="Zv4-7O-0Xz"/>
                             </connections>
+                        </menuItem>
+                    </items>
+                </menu>
+                <menu id="paV-m3-arV" userLabel="Words Menu">
+                    <items>
+                        <menuItem title="Retrieve Note" id="6aE-qR-h4s">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem title="Clear Note" id="RNK-k5-p74">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem isSeparatorItem="YES" id="spf-3I-Jk0"/>
+                        <menuItem title="Edit" id="GpQ-FE-Ja3">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem isSeparatorItem="YES" id="XaG-Mf-img"/>
+                        <menuItem title="Unlink" id="FY5-Ft-PAy">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem isSeparatorItem="YES" id="Ku6-kq-wz6"/>
+                        <menuItem title="Copy Word" id="IhF-NB-xuN">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem title="Google Word" id="ren-zL-GVa">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem title="Online Dictionary" id="pRh-m3-cFm">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem isSeparatorItem="YES" id="PwT-Rv-vcH"/>
+                        <menuItem title="Speak" id="hZU-4i-1TK" userLabel="Speak">
+                            <modifierMask key="keyEquivalentModifierMask"/>
                         </menuItem>
                     </items>
                 </menu>
