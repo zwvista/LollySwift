@@ -52,7 +52,7 @@ class MDictionary: NSObject, Codable {
     }
     
     func htmlString(_ html: String, word: String, useTemplate2: Bool = false) -> String {
-        let template = useTemplate2 && !(TEMPLATE2 ?? "").isEmpty ? TEMPLATE2 : TEMPLATE
+        let template = useTemplate2 && !TEMPLATE2.isEmpty ? TEMPLATE2 : TEMPLATE
         return CommonApi.extractText(from: html, transform: TRANSFORM, template: template) { (text, template) in CommonApi.applyTemplate(template: template, word: word, text: text)
         }
     }

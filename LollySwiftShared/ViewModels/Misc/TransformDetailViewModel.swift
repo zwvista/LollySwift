@@ -25,8 +25,8 @@ class TransformDetailViewModel: NSObject {
     var InterimResults = [String]()
     
     func initItems() {
-        TEMPLATE = item.TEMPLATE ?? ""
-        arrTranformItems = CommonApi.toTransformItems(transform: item.TRANSFORM ?? "")
+        TEMPLATE = item.TEMPLATE
+        arrTranformItems = CommonApi.toTransformItems(transform: item.TRANSFORM)
     }
     
     func newTransformItem() -> MTransformItem {

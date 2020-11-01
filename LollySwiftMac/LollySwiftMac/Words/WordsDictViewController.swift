@@ -43,7 +43,7 @@ class WordsDictViewController: NSViewController, WKNavigationDelegate {
             }) ~ rx.disposeBag
         } else {
             wvDict.load(URLRequest(url: URL(string: url)!))
-            if dict.AUTOMATION != nil {
+            if !dict.AUTOMATION.isEmpty {
                 dictStatus = .automating
             } else if dict.DICTTYPENAME == "OFFLINE-ONLINE" {
                 dictStatus = .navigating
