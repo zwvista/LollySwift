@@ -10,6 +10,9 @@ import Cocoa
 
 class PatternsSplitViewController: NSViewController {
 
+    @IBOutlet weak var tvPatterns: NSTableView!
+    @IBOutlet weak var tvPatternVariations: NSTableView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.

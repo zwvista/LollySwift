@@ -299,6 +299,18 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
         vm.applyFilters(textFilter: textFilter, scope: scTextFilter.selectedSegment == 0 ? "Pattern" : scTextFilter.selectedSegment == 1 ? "Note" : "Tags")
         self.tvPatterns.reloadData()
     }
+    
+    @IBAction func mergePatterns(_ sender: AnyObject) {
+        let mergeVC = self.storyboard!.instantiateController(withIdentifier: "PatternsMergeViewController") as! PatternsMergeViewController
+        let items = tvPatterns.selectedRowIndexes.map { arrPatterns[$0] }
+        mergeVC.vm = PatternsMergeViewModel(items: items)
+        self.presentAsModalWindow(mergeVC)
+    }
+    
+    @IBAction func splitPattern(_ sender: AnyObject) {
+        let splitVC = self.storyboard!.instantiateController(withIdentifier: "PatternsSplitViewController") as! PatternsSplitViewController
+        self.presentAsModalWindow(splitVC)
+    }
 
     deinit {
         print("DEBUG: \(self.className) deinit")

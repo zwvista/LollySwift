@@ -58,6 +58,13 @@ class MPatternEdit {
     var NOTE: BehaviorRelay<String>
     var TAGS: BehaviorRelay<String>
     
+    init() {
+        ID = BehaviorRelay(value: "")
+        PATTERN = BehaviorRelay(value: "")
+        NOTE = BehaviorRelay(value: "")
+        TAGS = BehaviorRelay(value: "")
+    }
+
     init(x: MPattern) {
         ID = BehaviorRelay(value: x.ID.toString)
         PATTERN = BehaviorRelay(value: x.PATTERN)
@@ -72,6 +79,7 @@ class MPatternEdit {
     }
 }
 
+@objcMembers
 class MPatternVariation: NSObject {
     dynamic var index = 0
     dynamic var variation = ""

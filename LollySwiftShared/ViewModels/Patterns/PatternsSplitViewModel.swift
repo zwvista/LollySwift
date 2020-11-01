@@ -10,4 +10,6 @@ import Foundation
 
 class PatternsSplitViewModel: NSObject {
     var arrPatterns = [MPattern]()
+    var arrPatternVariations = [MPatternVariation]()
+    var itemEdit = MPatternEdit()
 }
