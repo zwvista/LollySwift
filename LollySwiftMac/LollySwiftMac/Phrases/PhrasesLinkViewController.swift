@@ -89,7 +89,7 @@ class PhrasesLinkViewController: NSViewController, NSTableViewDataSource, NSTabl
             guard (col as! LollyCheckCell).chk!.state == .on else {continue}
             let item = arrPhrases[i]
             if wordid != 0 {
-                o = o.concat(MWordPhrase.connect(wordid: wordid, phraseid: item.PHRASEID))
+                o = o.concat(MWordPhrase.link(wordid: wordid, phraseid: item.PHRASEID))
             }
         }
         o.subscribe(onNext: {

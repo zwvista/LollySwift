@@ -959,18 +959,29 @@
                 </viewController>
                 <menu id="UPB-Wi-4rN">
                     <items>
-                        <menuItem title="Delete" id="Pck-ev-rQc">
-                            <modifierMask key="keyEquivalentModifierMask"/>
-                            <connections>
-                                <action selector="deletePhrase:" target="F8i-pe-Ate" id="BzB-Nh-cKZ"/>
-                            </connections>
-                        </menuItem>
                         <menuItem title="Edit" id="Hn0-Zh-OQJ">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
                                 <action selector="editPhrase:" target="F8i-pe-Ate" id="xzH-Hm-3gz"/>
                             </connections>
                         </menuItem>
+                        <menuItem title="Link a New Word" id="RIy-TF-xP9">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem title="Link Existing Words" id="u9y-2B-Xi8">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="linkWords:" target="F8i-pe-Ate" id="pit-xo-wEA"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem isSeparatorItem="YES" id="Znd-8P-LoQ"/>
+                        <menuItem title="Delete" id="Pck-ev-rQc">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="deletePhrase:" target="F8i-pe-Ate" id="BzB-Nh-cKZ"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem isSeparatorItem="YES" id="Q1a-hi-yW2"/>
                         <menuItem title="Copy Phrase" id="cu5-BV-j0w">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
@@ -983,6 +994,7 @@
                                 <action selector="googlePhrase:" target="F8i-pe-Ate" id="JEz-BV-2EV"/>
                             </connections>
                         </menuItem>
+                        <menuItem isSeparatorItem="YES" id="Cyv-tP-Voo"/>
                         <menuItem title="Speak" id="7fw-hu-Vdp" userLabel="Speak">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
@@ -2874,18 +2886,26 @@ Gw
                 </viewController>
                 <menu id="Rot-bf-Ibg">
                     <items>
-                        <menuItem title="Delete" id="XmD-LO-Wcq">
-                            <modifierMask key="keyEquivalentModifierMask"/>
-                            <connections>
-                                <action selector="deletePhrase:" target="CET-Kl-kcd" id="5eo-OJ-yzp"/>
-                            </connections>
-                        </menuItem>
                         <menuItem title="Edit" id="p90-Vh-Kmi">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
                                 <action selector="editPhrase:" target="CET-Kl-kcd" id="DVJ-4g-zx9"/>
                             </connections>
                         </menuItem>
+                        <menuItem title="Link Existing Words" id="Apd-O0-xOC">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="linkWords:" target="CET-Kl-kcd" id="jcs-Zh-dE2"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem isSeparatorItem="YES" id="uhU-cw-Gfp"/>
+                        <menuItem title="Delete" id="XmD-LO-Wcq">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="deletePhrase:" target="CET-Kl-kcd" id="5eo-OJ-yzp"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem isSeparatorItem="YES" id="jKK-YT-FFz"/>
                         <menuItem title="Copy Phrase" id="D3H-2h-HIa">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
@@ -2898,6 +2918,7 @@ Gw
                                 <action selector="googlePhrase:" target="CET-Kl-kcd" id="EUr-31-RI1"/>
                             </connections>
                         </menuItem>
+                        <menuItem isSeparatorItem="YES" id="XoP-zg-Lzk"/>
                         <menuItem title="Speak" id="zwg-X3-mSk" userLabel="Speak">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
@@ -4344,15 +4365,26 @@ Gw
                 <arrayController id="xCb-Qj-9og"/>
                 <menu id="w8F-Rg-pAb">
                     <items>
+                        <menuItem title="Edit" id="2Rf-EE-JYT">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="editPhrase:" target="dNa-67-Lx3" id="LdE-dI-dH0"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem title="Link Existing Words" id="cfT-6Z-QbM">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="linkWords:" target="dNa-67-Lx3" id="YOH-hC-HKm"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem isSeparatorItem="YES" id="vbA-Hf-UQC"/>
                         <menuItem title="Delete" id="GVF-r0-zMV">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
                                 <action selector="deletePhrase:" target="dNa-67-Lx3" id="sQW-Wd-KWL"/>
                             </connections>
                         </menuItem>
-                        <menuItem title="Edit" id="2Rf-EE-JYT">
-                            <modifierMask key="keyEquivalentModifierMask"/>
-                        </menuItem>
+                        <menuItem isSeparatorItem="YES" id="MtP-VT-UIx"/>
                         <menuItem title="Copy Phrase" id="R6g-LO-fvG">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
@@ -4365,6 +4397,7 @@ Gw
                                 <action selector="googlePhrase:" target="dNa-67-Lx3" id="3ex-DW-7JX"/>
                             </connections>
                         </menuItem>
+                        <menuItem isSeparatorItem="YES" id="ZyY-wd-CEj"/>
                         <menuItem title="Speak" id="XjO-pK-T8Q" userLabel="Speak">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
