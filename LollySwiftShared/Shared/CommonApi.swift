@@ -121,3 +121,9 @@ func copyProperties<T: Encodable & NSObject>(from a: T, to b: T) {
         b.setValue(v, forKey: k)
     }
 }
+
+extension Array where Element == String {
+    public func splitUsingCommaAndMerge() -> String {
+        Array(Set(flatMap { $0.components(separatedBy: ",") }.filter { !$0.isEmpty })).joined(separator: ",")
+    }
+}

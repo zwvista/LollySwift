@@ -169,7 +169,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     
     @IBAction func doubleAction(_ sender: AnyObject) {
         if NSApp.currentEvent!.modifierFlags.contains(.option) {
-            selectPhrases(sender)
+            linkPhrases(sender)
         } else {
             editWord(sender)
         }
@@ -281,7 +281,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
         self.presentAsSheet(optionsVC)
     }
 
-    @IBAction func selectPhrases(_ sender: AnyObject) {
+    @IBAction func linkPhrases(_ sender: AnyObject) {
         guard selectedWordID != 0 else {return}
         let detailVC = NSStoryboard(name: "Phrases", bundle: nil).instantiateController(withIdentifier: "PhrasesLinkViewController") as! PhrasesLinkViewController
         detailVC.textFilter = selectedWord

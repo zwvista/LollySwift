@@ -367,6 +367,11 @@
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </searchFieldCell>
+                                        <connections>
+                                            <action selector="filterPhrase:" target="F8i-pe-Ate" id="DeN-UV-xRY"/>
+                                            <binding destination="F8i-pe-Ate" name="value" keyPath="textFilter" id="chW-xI-awa"/>
+                                            <outlet property="delegate" destination="F8i-pe-Ate" id="ml7-bj-WO0"/>
+                                        </connections>
                                     </searchField>
                                 </subviews>
                                 <edgeInsets key="edgeInsets" left="6" right="0.0" top="6" bottom="6"/>
@@ -987,6 +992,7 @@
                     </items>
                 </menu>
                 <userDefaultsController id="kQx-Qe-nCG"/>
+                <userDefaultsController id="qIW-st-8dU"/>
             </objects>
             <point key="canvasLocation" x="-838" y="1280"/>
         </scene>
@@ -2416,6 +2422,11 @@ Gw
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </searchFieldCell>
+                                        <connections>
+                                            <action selector="filterPhrase:" target="CET-Kl-kcd" id="Vd4-2a-cRo"/>
+                                            <binding destination="CET-Kl-kcd" name="value" keyPath="textFilter" id="3N6-Lb-1fX"/>
+                                            <outlet property="delegate" destination="CET-Kl-kcd" id="xgS-r2-lgz"/>
+                                        </connections>
                                     </searchField>
                                 </subviews>
                                 <edgeInsets key="edgeInsets" left="6" right="0.0" top="6" bottom="6"/>
@@ -2576,7 +2587,7 @@ Gw
                                                                                 </tableColumn>
                                                                             </tableColumns>
                                                                             <connections>
-                                                                                <action trigger="doubleAction" selector="editPhrase:" target="CET-Kl-kcd" id="BLI-MX-fR5"/>
+                                                                                <action trigger="doubleAction" selector="doubleAction:" target="CET-Kl-kcd" id="F7f-iV-xS8"/>
                                                                                 <outlet property="dataSource" destination="CET-Kl-kcd" id="1DA-73-YTO"/>
                                                                                 <outlet property="delegate" destination="CET-Kl-kcd" id="c0M-ka-IlN"/>
                                                                                 <outlet property="menu" destination="Rot-bf-Ibg" id="fLF-lt-GGf"/>
@@ -3681,6 +3692,11 @@ Gw
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </searchFieldCell>
+                                        <connections>
+                                            <action selector="filterPhrase:" target="dNa-67-Lx3" id="3eR-FX-i8Y"/>
+                                            <binding destination="dNa-67-Lx3" name="value" keyPath="textFilter" id="BgY-ug-Zf2"/>
+                                            <outlet property="delegate" destination="dNa-67-Lx3" id="h2g-cT-j8F"/>
+                                        </connections>
                                     </searchField>
                                     <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="csX-uE-UJZ">
                                         <rect key="frame" x="253" y="2" width="77" height="25"/>
@@ -4042,7 +4058,7 @@ Gw
                                                                                 </tableColumn>
                                                                             </tableColumns>
                                                                             <connections>
-                                                                                <action trigger="doubleAction" selector="editPhrase:" target="dNa-67-Lx3" id="v5g-hW-mgQ"/>
+                                                                                <action trigger="doubleAction" selector="doubleAction:" target="dNa-67-Lx3" id="oDQ-Mj-okC"/>
                                                                                 <outlet property="dataSource" destination="dNa-67-Lx3" id="CXk-IL-g3N"/>
                                                                                 <outlet property="delegate" destination="dNa-67-Lx3" id="D8E-Cb-iqh"/>
                                                                                 <outlet property="menu" destination="w8F-Rg-pAb" id="pXQ-mj-MAR"/>

@@ -22,6 +22,12 @@ class PatternsMergeViewModel: NSObject {
             o.variation = $0.element
             return o
         }
+        itemEdit.NOTE.accept(items.map { $0.NOTE }.splitUsingCommaAndMerge())
+        itemEdit.TAGS.accept(items.map { $0.TAGS }.splitUsingCommaAndMerge())
+    }
+    
+    func mergePatterns() {
+        itemEdit.PATTERN.accept(Array(Set(arrPatternVariations.map { $0.variation })).joined(separator: "／"))
     }
 
 }

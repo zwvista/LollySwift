@@ -84,6 +84,14 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
             self.doRefresh()
         }) ~ rx.disposeBag
     }
+    
+    @IBAction func doubleAction(_ sender: AnyObject) {
+        if NSApp.currentEvent!.modifierFlags.contains(.option) {
+            linkPhrases(sender)
+        } else {
+            editWord(sender)
+        }
+    }
 
     @IBAction func editWord(_ sender: AnyObject) {
         let editVC = self.storyboard!.instantiateController(withIdentifier: "WordsLangDetailViewController") as! WordsLangDetailViewController
@@ -127,7 +135,7 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
         tfStatusText.stringValue = "\(tvWords.numberOfRows) Words in \(vmSettings.LANGINFO)"
     }
 
-    @IBAction func selectPhrases(_ sender: AnyObject) {
+    @IBAction func linkPhrases(_ sender: AnyObject) {
         guard selectedWordID != 0 else {return}
         let detailVC = NSStoryboard(name: "Phrases", bundle: nil).instantiateController(withIdentifier: "PhrasesLinkViewController") as! PhrasesLinkViewController
         detailVC.textFilter = selectedWord
