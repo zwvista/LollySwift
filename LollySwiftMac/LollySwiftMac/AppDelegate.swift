@@ -56,17 +56,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         NSApplication.shared.windows.first(where: { $0.windowController?.className.contains( windowControllerName) ?? false })
     }
     
-    func findOrShowWindow(storyBoardName: String, windowControllerName: String) {
+    func findOrShowWindow(storyBoardName: String, windowControllerName: String) -> NSWindow {
         if let w = findWindow(windowControllerName: windowControllerName) {
             // https://stackoverflow.com/questions/29328281/os-x-menubar-application-how-to-bring-window-to-front
             w.makeKeyAndOrderFront(nil)
+            return w
         } else {
             showWindow(storyBoardName: storyBoardName, windowControllerName: windowControllerName, modal: false)
+            return findWindow(windowControllerName: windowControllerName)!
         }
     }
     
     @IBAction func search(_ sender: AnyObject) {
-        findOrShowWindow(storyBoardName: "Words", windowControllerName: "WordsSearchWindowController")
+        _ = findOrShowWindow(storyBoardName: "Words", windowControllerName: "WordsSearchWindowController")
     }
 
     @IBAction func settings(_ sender: AnyObject) {
@@ -74,7 +76,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @IBAction func wordsInUnit(_ sender: AnyObject) {
-        findOrShowWindow(storyBoardName: "Words", windowControllerName: "WordsUnitWindowController")
+        _ = findOrShowWindow(storyBoardName: "Words", windowControllerName: "WordsUnitWindowController")
     }
     
     @IBAction func wordsInUnitNew(_ sender: AnyObject) {
@@ -82,7 +84,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @IBAction func phrasesInUnit(_ sender: AnyObject) {
-        findOrShowWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesUnitWindowController")
+        _ = findOrShowWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesUnitWindowController")
     }
 
     @IBAction func phrasesInUnitNew(_ sender: AnyObject) {
@@ -90,7 +92,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @IBAction func wordsReview(_ sender: AnyObject) {
-        findOrShowWindow(storyBoardName: "Words", windowControllerName: "WordsReviewWindowController")
+        _ = findOrShowWindow(storyBoardName: "Words", windowControllerName: "WordsReviewWindowController")
     }
     
     @IBAction func wordsReviewNew(_ sender: AnyObject) {
@@ -98,7 +100,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @IBAction func phrasesReview(_ sender: AnyObject) {
-        findOrShowWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesReviewWindowController")
+        _ = findOrShowWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesReviewWindowController")
     }
 
     @IBAction func phrasesReviewNew(_ sender: AnyObject) {
@@ -106,7 +108,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @IBAction func wordsInTextbook(_ sender: AnyObject) {
-        findOrShowWindow(storyBoardName: "Words", windowControllerName: "WordsTextbookWindowController")
+        _ = findOrShowWindow(storyBoardName: "Words", windowControllerName: "WordsTextbookWindowController")
     }
     
     @IBAction func wordsInTextbookNew(_ sender: AnyObject) {
@@ -122,7 +124,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @IBAction func wordsInLanguage(_ sender: AnyObject) {
-        findOrShowWindow(storyBoardName: "Words", windowControllerName: "WordsLangWindowController")
+        _ = findOrShowWindow(storyBoardName: "Words", windowControllerName: "WordsLangWindowController")
     }
 
     @IBAction func wordsInLanguageNew(_ sender: AnyObject) {
@@ -130,7 +132,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @IBAction func phrasesInLanguage(_ sender: AnyObject) {
-        findOrShowWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesLangWindowController")
+        _ = findOrShowWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesLangWindowController")
     }
 
     @IBAction func phrasesInLanguageNew(_ sender: AnyObject) {
@@ -138,7 +140,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @IBAction func patternsInLanguage(_ sender: AnyObject) {
-        findOrShowWindow(storyBoardName: "Patterns", windowControllerName: "PatternsWindowController")
+        _ = findOrShowWindow(storyBoardName: "Patterns", windowControllerName: "PatternsWindowController")
     }
     
     @IBAction func patternsInLanguageNew(_ sender: AnyObject) {
@@ -168,25 +170,23 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func searchWord(word: String) {
-        let w = NSApplication.shared.windows.first!
-        search(self)
-        let v = NSApplication.shared.windows.first!.contentViewController as! WordsSearchViewController
+        let w = NSApplication.shared.windows.last!
+        let v = findOrShowWindow(storyBoardName: "Words", windowControllerName: "WordsSearchWindowController").contentViewController as! WordsSearchViewController
         v.addNewWord(word: word)
         w.makeKeyAndOrderFront(nil)
     }
     
     func addNewUnitPhrase(wordid: Int) {
-        let w = NSApplication.shared.windows.first!
-        phrasesInUnit(self)
-        let v = NSApplication.shared.windows.first!.contentViewController as! PhrasesUnitViewController
+        let w = NSApplication.shared.windows.last!
+        let v = findOrShowWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesUnitViewController").contentViewController as! PhrasesUnitViewController
         v.addPhrase(wordid: wordid)
         w.makeKeyAndOrderFront(nil)
     }
     
     func addNewUnitWord(phraseid: Int) {
-        let w = NSApplication.shared.windows.first!
+        let w = NSApplication.shared.windows.last!
         wordsInUnit(self)
-        let v = NSApplication.shared.windows.first!.contentViewController as! WordsUnitViewController
+        let v = findOrShowWindow(storyBoardName: "Words", windowControllerName: "WordsUnitViewController").contentViewController as! WordsUnitViewController
         v.addWord(phraseid: phraseid)
         w.makeKeyAndOrderFront(nil)
     }
