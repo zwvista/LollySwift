@@ -17,6 +17,8 @@ class MPattern: NSObject, Codable {
     dynamic var PATTERN = ""
     dynamic var NOTE = ""
     dynamic var TAGS = ""
+    dynamic var IDS_MERGE = ""
+    dynamic var PATTERNS_SPLIT = ""
 
     override init() {
     }
@@ -48,6 +50,18 @@ class MPattern: NSObject, Codable {
     static func delete(_ id: Int) -> Observable<()> {
         // SQL: DELETE PATTERNS WHERE ID=?
         let url = "\(CommonApi.urlAPI)PATTERNS/\(id)"
+        return RestApi.delete(url: url).map { print($0) }
+    }
+    
+    static func mergePatterns(item: MPattern) -> Observable<()> {
+        // SQL: DELETE PATTERNS WHERE ID=?
+        let url = "\(CommonApi.urlAPI)PATTERNS_MERGE"
+        return RestApi.delete(url: url).map { print($0) }
+    }
+    
+    static func splitPattern(item: MPattern) -> Observable<()> {
+        // SQL: DELETE PATTERNS WHERE ID=?
+        let url = "\(CommonApi.urlAPI)PATTERNS_SPLIT"
         return RestApi.delete(url: url).map { print($0) }
     }
 }

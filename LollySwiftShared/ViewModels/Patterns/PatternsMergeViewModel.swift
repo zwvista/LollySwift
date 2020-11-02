@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RxSwift
 
 class PatternsMergeViewModel: NSObject {
     var arrPatterns: [MPattern]
@@ -29,5 +30,15 @@ class PatternsMergeViewModel: NSObject {
     func mergePatterns() {
         itemEdit.PATTERN.accept(Array(Set(arrPatternVariations.map { $0.variation })).joined(separator: "／"))
     }
-
+    
+    func onOK() -> Observable<()> {
+        let item = MPattern()
+        itemEdit.save(to: item)
+        item.IDS_MERGE = arrPatterns.sorted { $0.ID < $1.ID }.map { $0.ID.toString }.joined(separator: ",")
+        return MPattern.mergePatterns(item: item)
+    }
+    
+    deinit {
+        print("DEBUG: \(self.className) deinit")
+    }
 }
