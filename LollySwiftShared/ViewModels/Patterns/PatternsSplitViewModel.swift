@@ -29,6 +29,15 @@ class PatternsSplitViewModel: NSObject {
     func splitPattern() {
         itemEdit.PATTERN.accept(Array(Set(arrPatternVariations.map { $0.variation })).joined(separator: ","))
     }
+    
+    func reindexVariations(complete: (Int) -> ()) {
+        for i in 1...arrPatternVariations.count {
+            let item = arrPatternVariations[i - 1]
+            guard item.index != i else {continue}
+            item.index = i
+            complete(i - 1)
+        }
+    }
 
     func onOK() -> Observable<()> {
         let item = MPattern()

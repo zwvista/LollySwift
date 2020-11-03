@@ -1163,24 +1163,24 @@ Gw
             <objects>
                 <viewController storyboardIdentifier="PatternsMergeViewController" id="y3o-ZY-bbe" customClass="PatternsMergeViewController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="Pjg-5Y-d27">
-                        <rect key="frame" x="0.0" y="0.0" width="510" height="360"/>
+                        <rect key="frame" x="0.0" y="0.0" width="510" height="450"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <splitView arrangesAllSubviews="NO" dividerStyle="paneSplitter" translatesAutoresizingMaskIntoConstraints="NO" id="du4-Az-AIZ">
-                                <rect key="frame" x="0.0" y="168" width="510" height="192"/>
+                                <rect key="frame" x="0.0" y="168" width="510" height="282"/>
                                 <subviews>
                                     <customView misplaced="YES" id="9dc-VF-OAN">
-                                        <rect key="frame" x="0.0" y="0.0" width="510" height="89"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="510" height="133"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
                                             <scrollView misplaced="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RFw-Nj-BZw">
-                                                <rect key="frame" x="0.0" y="0.0" width="510" height="89"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="510" height="133"/>
                                                 <clipView key="contentView" id="vah-xl-Weh">
-                                                    <rect key="frame" x="1" y="0.0" width="508" height="88"/>
+                                                    <rect key="frame" x="1" y="0.0" width="508" height="132"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="MTI-Rb-AHs" viewBased="YES" id="U0w-Wg-Ezu">
-                                                            <rect key="frame" x="0.0" y="0.0" width="508" height="63"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="508" height="107"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <size key="intercellSpacing" width="3" height="2"/>
                                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1369,17 +1369,17 @@ Gw
                                         </constraints>
                                     </customView>
                                     <customView misplaced="YES" id="Zlu-tV-cHf">
-                                        <rect key="frame" x="0.0" y="99" width="510" height="93"/>
+                                        <rect key="frame" x="0.0" y="143" width="510" height="139"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
                                             <scrollView misplaced="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dnJ-4a-eyy">
-                                                <rect key="frame" x="0.0" y="0.0" width="510" height="93"/>
+                                                <rect key="frame" x="0.0" y="-1" width="510" height="140"/>
                                                 <clipView key="contentView" id="w3a-n5-KSX">
-                                                    <rect key="frame" x="1" y="0.0" width="508" height="92"/>
+                                                    <rect key="frame" x="1" y="0.0" width="508" height="139"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="YTW-Xp-96t" viewBased="YES" id="cp7-4W-Yyl">
-                                                            <rect key="frame" x="0.0" y="0.0" width="508" height="67"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="508" height="114"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <size key="intercellSpacing" width="3" height="2"/>
                                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1441,6 +1441,9 @@ Gw
                                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                                     </textFieldCell>
+                                                                                    <connections>
+                                                                                        <action selector="endEditing:" target="y3o-ZY-bbe" id="X8M-1a-BIH"/>
+                                                                                    </connections>
                                                                                 </textField>
                                                                             </subviews>
                                                                             <connections>
@@ -1592,31 +1595,31 @@ Gw
                 </viewController>
                 <customObject id="BZY-Q1-HuS" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="312" y="1086"/>
+            <point key="canvasLocation" x="312" y="1059"/>
         </scene>
         <!--Patterns Split View Controller-->
         <scene sceneID="JnI-Hh-OXX">
             <objects>
                 <viewController storyboardIdentifier="PatternsSplitViewController" id="bOa-Qw-q0Q" customClass="PatternsSplitViewController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="emR-fr-FoU">
-                        <rect key="frame" x="0.0" y="0.0" width="510" height="360"/>
+                        <rect key="frame" x="0.0" y="0.0" width="510" height="450"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <splitView arrangesAllSubviews="NO" dividerStyle="paneSplitter" translatesAutoresizingMaskIntoConstraints="NO" id="A3M-63-rHA">
-                                <rect key="frame" x="0.0" y="130" width="510" height="230"/>
+                                <rect key="frame" x="0.0" y="130" width="510" height="320"/>
                                 <subviews>
                                     <customView misplaced="YES" id="6aS-8F-dHb">
-                                        <rect key="frame" x="0.0" y="0.0" width="510" height="108"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="510" height="152"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
                                             <scrollView misplaced="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9uU-aj-veT">
-                                                <rect key="frame" x="0.0" y="0.0" width="510" height="108"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="510" height="152"/>
                                                 <clipView key="contentView" id="QdH-48-gHo">
-                                                    <rect key="frame" x="1" y="0.0" width="508" height="107"/>
+                                                    <rect key="frame" x="1" y="0.0" width="508" height="151"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="O62-z1-y4x" viewBased="YES" id="ma6-bs-XRn">
-                                                            <rect key="frame" x="0.0" y="0.0" width="508" height="82"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="508" height="126"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <size key="intercellSpacing" width="3" height="2"/>
                                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1805,17 +1808,17 @@ Gw
                                         </constraints>
                                     </customView>
                                     <customView misplaced="YES" id="VE5-fR-r4o">
-                                        <rect key="frame" x="0.0" y="118" width="510" height="112"/>
+                                        <rect key="frame" x="0.0" y="162" width="510" height="158"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
                                             <scrollView misplaced="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DEK-K5-fdo">
-                                                <rect key="frame" x="0.0" y="0.0" width="510" height="112"/>
+                                                <rect key="frame" x="0.0" y="-1" width="510" height="159"/>
                                                 <clipView key="contentView" id="Gmd-Li-cfd">
-                                                    <rect key="frame" x="1" y="0.0" width="508" height="111"/>
+                                                    <rect key="frame" x="1" y="0.0" width="508" height="158"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
                                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="hkd-Fr-fCL" viewBased="YES" id="cav-0e-Ms2">
-                                                            <rect key="frame" x="0.0" y="0.0" width="508" height="86"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="508" height="133"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <size key="intercellSpacing" width="3" height="2"/>
                                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1877,6 +1880,9 @@ Gw
                                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                                     </textFieldCell>
+                                                                                    <connections>
+                                                                                        <action selector="endEditing:" target="bOa-Qw-q0Q" id="w4S-1f-G5X"/>
+                                                                                    </connections>
                                                                                 </textField>
                                                                             </subviews>
                                                                             <connections>
@@ -2006,7 +2012,7 @@ Gw
                 </viewController>
                 <customObject id="LGh-Im-HQb" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="312" y="1520"/>
+            <point key="canvasLocation" x="312" y="1572"/>
         </scene>
         <!--Web Page Select View Controller-->
         <scene sceneID="aJm-H6-zWz">

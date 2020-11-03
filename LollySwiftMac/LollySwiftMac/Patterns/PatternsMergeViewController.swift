@@ -48,6 +48,13 @@ class PatternsMergeViewController: NSViewController, NSTableViewDataSource, NSTa
         return cell
     }
     
+    @IBAction func endEditing(_ sender: NSTextField) {
+        let row = tvPatternVariations.row(for: sender)
+        guard row != -1 else {return}
+        vm.arrPatternVariations[row].variation = sender.stringValue
+        vm.mergePatterns()
+    }
+
     func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
         let item = NSPasteboardItem()
         item.setString(String(row), forType: tableRowDragType)
@@ -93,7 +100,8 @@ class PatternsMergeViewController: NSViewController, NSTableViewDataSource, NSTa
         }
         tableView.endUpdates()
         
+        vm.mergePatterns()
+        
         return true
     }
-
 }
