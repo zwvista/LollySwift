@@ -20,6 +20,14 @@ class MPattern: NSObject, Codable {
     dynamic var IDS_MERGE = ""
     dynamic var PATTERNS_SPLIT = ""
 
+    enum CodingKeys : String, CodingKey {
+        case ID
+        case LANGID
+        case PATTERN
+        case NOTE
+        case TAGS
+    }
+
     override init() {
     }
 

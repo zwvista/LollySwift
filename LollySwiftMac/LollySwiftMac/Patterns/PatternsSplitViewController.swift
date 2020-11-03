@@ -12,6 +12,8 @@ class PatternsSplitViewController: NSViewController {
 
     @IBOutlet weak var tvPatterns: NSTableView!
     @IBOutlet weak var tvPatternVariations: NSTableView!
+    @IBOutlet weak var tfPattern: NSTextField!
+    @IBOutlet weak var tfId: NSTextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -19,7 +19,7 @@ class PatternsSplitViewModel: NSObject {
         let strs = item.PATTERN.split("／")
         arrPatternVariations = strs.enumerated().map {
             let o = MPatternVariation()
-            o.index = $0.offset
+            o.index = $0.offset + 1
             o.variation = $0.element
             return o
         }

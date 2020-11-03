@@ -19,10 +19,12 @@ class PatternsMergeViewModel: NSObject {
         let strs = Array(Set(items.flatMap { $0.PATTERN.split("／") }))
         arrPatternVariations = strs.enumerated().map {
             let o = MPatternVariation()
-            o.index = $0.offset
+            o.index = $0.offset + 1
             o.variation = $0.element
             return o
         }
+        super.init()
+        mergePatterns()
         itemEdit.NOTE.accept(items.map { $0.NOTE }.splitUsingCommaAndMerge())
         itemEdit.TAGS.accept(items.map { $0.TAGS }.splitUsingCommaAndMerge())
     }

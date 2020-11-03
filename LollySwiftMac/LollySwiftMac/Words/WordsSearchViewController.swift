@@ -82,6 +82,9 @@ class WordsSearchViewController: WordsBaseViewController {
     override func needRegainFocus() -> Bool {
         false
     }
+    
+    override func getPhrases() {
+    }
 }
 
 class WordsSearchWindowController: WordsBaseWindowController {
