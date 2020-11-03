@@ -127,3 +127,10 @@ extension Array where Element == String {
         Array(Set(flatMap { $0.components(separatedBy: ",") }.filter { !$0.isEmpty })).joined(separator: ",")
     }
 }
+
+extension Array {
+    public mutating func moveElement(at oldIndex: Int, to newIndex: Int) {
+        let item = remove(at: oldIndex)
+        insert(item, at: newIndex)
+    }
+}

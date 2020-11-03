@@ -99,7 +99,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
         var newIndexOffset = 0
         
         func moveRow(at oldIndex: Int, to newIndex: Int) {
-            vm.moveWord(at: oldIndex, to: newIndex)
+            vm.arrWords.moveElement(at: oldIndex, to: newIndex)
             tableView.moveRow(at: oldIndex, to: newIndex)
         }
         

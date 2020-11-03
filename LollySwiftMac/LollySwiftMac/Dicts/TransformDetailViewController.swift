@@ -71,7 +71,7 @@ class TransformDetailViewController: NSViewController, NSTableViewDataSource, NS
         var newIndexOffset = 0
         
         func moveRow(at oldIndex: Int, to newIndex: Int) {
-            vm.moveTransformItem(at: oldIndex, to: newIndex)
+            vm.arrTranformItems.moveElement(at: oldIndex, to: newIndex)
             tableView.moveRow(at: oldIndex, to: newIndex)
         }
 

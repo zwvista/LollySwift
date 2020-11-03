@@ -263,7 +263,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
         var newIndexOffset = 0
         
         func moveRow(at oldIndex: Int, to newIndex: Int) {
-            vm.moveWebPage(at: oldIndex, to: newIndex)
+            vm.arrWebPages.moveElement(at: oldIndex, to: newIndex)
             tableView.moveRow(at: oldIndex, to: newIndex)
         }
         

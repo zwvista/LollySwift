@@ -83,12 +83,7 @@ class PatternsViewModel: NSObject {
         item.SEQNUM = (arrWebPages.max { $0.SEQNUM < $1.SEQNUM }?.SEQNUM ?? 0) + 1
         return item
     }
-    
-    func moveWebPage(at oldIndex: Int, to newIndex: Int) {
-        let item = arrWebPages.remove(at: oldIndex)
-        arrWebPages.insert(item, at: newIndex)
-    }
-    
+        
     func reindexWebPage(complete: @escaping (Int) -> ()) {
         for i in 1...arrWebPages.count {
             let item = arrWebPages[i - 1]

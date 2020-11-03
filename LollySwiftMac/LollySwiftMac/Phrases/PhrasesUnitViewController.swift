@@ -91,7 +91,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
         var newIndexOffset = 0
         
         func moveRow(at oldIndex: Int, to newIndex: Int) {
-            vm.movePhrase(at: oldIndex, to: newIndex)
+            vm.arrPhrases.moveElement(at: oldIndex, to: newIndex)
             tableView.moveRow(at: oldIndex, to: newIndex)
         }
         

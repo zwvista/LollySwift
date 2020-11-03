@@ -99,11 +99,6 @@ class WordsUnitViewModel: NSObject {
         return item
     }
     
-    func moveWord(at oldIndex: Int, to newIndex: Int) {
-        let item = arrWords.remove(at: oldIndex)
-        arrWords.insert(item, at: newIndex)
-    }
-
     func getNote(index: Int) -> Observable<()> {
         let item = arrWords[index]
         return vmSettings.getNote(word: item.WORD).flatMap { note -> Observable<()> in

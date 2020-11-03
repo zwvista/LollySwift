@@ -82,8 +82,7 @@ class SelectDictsViewController: NSViewController, NSTableViewDataSource, NSTabl
         var newIndexOffset = 0
         
         func moveRow(at oldIndex: Int, to newIndex: Int) {
-            let item = dictsSelected.remove(at: oldIndex)
-            dictsSelected.insert(item, at: newIndex)
+            dictsSelected.moveElement(at: oldIndex, to: newIndex)
             tableView.moveRow(at: oldIndex, to: newIndex)
         }
         

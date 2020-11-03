@@ -72,26 +72,26 @@ class PatternsMergeViewController: NSViewController, NSTableViewDataSource, NSTa
         var oldIndexOffset = 0
         var newIndexOffset = 0
         
-//        func moveRow(at oldIndex: Int, to newIndex: Int) {
-//            vm.moveWord(at: oldIndex, to: newIndex)
-//            tableView.moveRow(at: oldIndex, to: newIndex)
-//        }
-//
-//        tableView.beginUpdates()
-//        for oldIndex in oldIndexes {
-//            if oldIndex < row {
-//                moveRow(at: oldIndex + oldIndexOffset, to: row - 1)
-//                oldIndexOffset -= 1
-//            } else {
-//                moveRow(at: oldIndex, to: row + newIndexOffset)
-//                newIndexOffset += 1
-//            }
-//        }
-//        let col = tableView.tableColumns.firstIndex { $0.identifier.rawValue == "SEQNUM" }!
-//        vm.reindex {
-//            tableView.reloadData(forRowIndexes: [$0], columnIndexes: [col])
-//        }
-//        tableView.endUpdates()
+        func moveRow(at oldIndex: Int, to newIndex: Int) {
+            vm.arrPatternVariations.moveElement(at: oldIndex, to: newIndex)
+            tableView.moveRow(at: oldIndex, to: newIndex)
+        }
+
+        tableView.beginUpdates()
+        for oldIndex in oldIndexes {
+            if oldIndex < row {
+                moveRow(at: oldIndex + oldIndexOffset, to: row - 1)
+                oldIndexOffset -= 1
+            } else {
+                moveRow(at: oldIndex, to: row + newIndexOffset)
+                newIndexOffset += 1
+            }
+        }
+        let col = tableView.tableColumns.firstIndex { $0.identifier.rawValue == "index" }!
+        vm.reindexVariations {
+            tableView.reloadData(forRowIndexes: [$0], columnIndexes: [col])
+        }
+        tableView.endUpdates()
         
         return true
     }

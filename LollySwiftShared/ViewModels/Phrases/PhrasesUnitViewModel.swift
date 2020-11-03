@@ -93,9 +93,4 @@ class PhrasesUnitViewModel: NSObject {
         item.textbook = vmSettings.selectedTextbook
         return item
     }
-    
-    func movePhrase(at oldIndex: Int, to newIndex: Int) {
-        let item = arrPhrases.remove(at: oldIndex)
-        arrPhrases.insert(item, at: newIndex)
-    }
 }
