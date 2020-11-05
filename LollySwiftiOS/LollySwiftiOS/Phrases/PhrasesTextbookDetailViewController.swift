@@ -28,8 +28,8 @@ class PhrasesTextbookDetailViewController: UITableViewController {
     let ddUnit = DropDown()
     let ddPart = DropDown()
     
-    func startEdit(vm: PhrasesUnitViewModel, item: MUnitPhrase) {
-        vmEdit = PhrasesUnitDetailViewModel(vm: vm, item: item) {
+    func startEdit(vm: PhrasesUnitViewModel, item: MUnitPhrase, wordid: Int) {
+        vmEdit = PhrasesUnitDetailViewModel(vm: vm, item: item, wordid: wordid) {
             self.tableView.reloadData()
         }
     }

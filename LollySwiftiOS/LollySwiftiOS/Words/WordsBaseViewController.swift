@@ -13,7 +13,6 @@ class WordsBaseViewController: UITableViewController, UISearchBarDelegate, UISea
     // https://www.raywenderlich.com/113772/uisearchcontroller-tutorial
     let searchController = UISearchController(searchResultsController: nil)
     var searchBar: UISearchBar { searchController.searchBar }
-    var colors = [UIColor]()
 
     func setupSearchController(delegate: UISearchBarDelegate & UISearchResultsUpdating) {
         // https://stackoverflow.com/questions/28326269/uisearchbar-presented-by-uisearchcontroller-in-table-header-view-animates-too-fa
@@ -52,14 +51,6 @@ class WordsBaseViewController: UITableViewController, UISearchBarDelegate, UISea
         }
         cell.lblWord.text = item.WORD
         cell.lblNote.text = item.NOTE
-        if indexPath.row == 0 {
-            colors.append(cell.backgroundColor!)
-            colors.append(cell.lblWord.textColor)
-            colors.append(cell.lblNote.textColor)
-            if cell.lblUnitPartSeqNum != nil {
-                colors.append(cell.lblUnitPartSeqNum.textColor!)
-            }
-        }
         return cell
     }
     

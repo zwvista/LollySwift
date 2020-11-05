@@ -103,7 +103,7 @@ class WordsDictViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
         // https://stackoverflow.com/questions/34751860/get-html-from-wkwebview-in-swift
         switch dictStatus {
         case .automating:
-            let s = item2.AUTOMATION!.replacingOccurrences(of: "{0}", with: vm.currentWord)
+            let s = item2.AUTOMATION.replacingOccurrences(of: "{0}", with: vm.currentWord)
             webView.evaluateJavaScript(s) { (html: Any?, error: Error?) in
                 self.dictStatus = .ready
                 if item2.DICTTYPENAME == "OFFLINE-ONLINE" {

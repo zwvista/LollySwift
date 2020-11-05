@@ -103,7 +103,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
         super.prepare(for: segue, sender: sender)
         if let controller = (segue.destination as? UINavigationController)?.topViewController as? PhrasesUnitDetailViewController {
             let item = segue.identifier == "Add" ? vm.newUnitPhrase() : sender as! MUnitPhrase
-            controller.startEdit(vm: vm, item: item)
+            controller.startEdit(vm: vm, item: item, wordid: 0)
         } else if let controller = (segue.destination as? UINavigationController)?.topViewController as? PhrasesUnitBatchViewController {
             controller.vm = vm
         }

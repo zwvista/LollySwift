@@ -20,7 +20,7 @@ public class LeftMenuViewController: UIViewController, UITableViewDelegate, UITa
     override public func viewDidLoad() {
         super.viewDidLoad()
 
-        let frameht = self.view.frame.size.height, tvht = (54 * 10).toCGFloat
+        let frameht = self.view.frame.size.height, tvht = (54 * 11).toCGFloat
         let tableView = UITableView(frame: CGRect(x: 0, y: max(0, (frameht - tvht) / 2.0), width: self.view.frame.size.width, height: min(frameht, tvht)), style: .plain)
         tableView.autoresizingMask = [.flexibleTopMargin, .flexibleBottomMargin, .flexibleWidth]
         tableView.delegate = self
@@ -76,6 +76,9 @@ public class LeftMenuViewController: UIViewController, UITableViewDelegate, UITa
         case 9:
             self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboardPhrases.instantiateViewController(withIdentifier: "PhrasesLangViewController")), animated: true)
             self.sideMenuViewController!.hideMenuViewController()
+        case 10:
+            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboardPhrases.instantiateViewController(withIdentifier: "PhrasesLangViewController")), animated: true)
+            self.sideMenuViewController!.hideMenuViewController()
         default:
             break
         }
@@ -92,7 +95,7 @@ public class LeftMenuViewController: UIViewController, UITableViewDelegate, UITa
     }
 
     public func tableView(_ tableView: UITableView, numberOfRowsInSection sectionIndex: Int) -> Int {
-        10
+        11
     }
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -109,8 +112,8 @@ public class LeftMenuViewController: UIViewController, UITableViewDelegate, UITa
             cell!.selectedBackgroundView = UIView()
         }
 
-        let titles = ["Search", "Settings", "Words in Unit", "Phrases in Unit", "Words Review", "Phrases Review", "Words in Textbook", "Phrases in Textbook", "Words in Language", "Phrases in Language"]
-        let images = ["IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty"]
+        let titles = ["Search", "Settings", "Words in Unit", "Phrases in Unit", "Words Review", "Phrases Review", "Words in Textbook", "Phrases in Textbook", "Words in Language", "Phrases in Language", "Patterns in Language"]
+        let images = ["IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty"]
         cell!.textLabel?.text = titles[indexPath.row]
         cell!.imageView?.image = UIImage(named: images[indexPath.row])
 

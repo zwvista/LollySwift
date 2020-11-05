@@ -86,7 +86,7 @@ class WordsTextbookViewController: WordsBaseViewController {
         super.prepare(for: segue, sender: sender)
         if let controller = (segue.destination as? UINavigationController)?.topViewController as? WordsTextbookDetailViewController {
             let item = sender as! MUnitWord
-            controller.startEdit(vm: vm, item: item)
+            controller.startEdit(vm: vm, item: item, phraseid: 0)
         } else if let controller = segue.destination as? WordsDictViewController {
             controller.vm.arrWords = arrWords.map { $0.WORD }
             controller.vm.currentWordIndex = vm.arrWords.indexes(of: sender as! MUnitWord)[0]
