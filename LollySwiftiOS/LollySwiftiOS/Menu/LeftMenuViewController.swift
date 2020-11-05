@@ -11,7 +11,7 @@ import UIKit
 public class LeftMenuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var tableView: UITableView?
-    var storyboardMain, storyboardWords, storyboardPhrases: UIStoryboard!
+    var storyboardMain, storyboardWords, storyboardPhrases, storyboardPatterns: UIStoryboard!
 
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -39,6 +39,7 @@ public class LeftMenuViewController: UIViewController, UITableViewDelegate, UITa
         storyboardMain = UIStoryboard(name: "Main", bundle: nil)
         storyboardWords = UIStoryboard(name: "Words", bundle: nil)
         storyboardPhrases = UIStoryboard(name: "Phrases", bundle: nil)
+        storyboardPatterns = UIStoryboard(name: "Patterns", bundle: nil)
     }
 
     // MARK: - <UITableViewDelegate>
@@ -77,7 +78,7 @@ public class LeftMenuViewController: UIViewController, UITableViewDelegate, UITa
             self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboardPhrases.instantiateViewController(withIdentifier: "PhrasesLangViewController")), animated: true)
             self.sideMenuViewController!.hideMenuViewController()
         case 10:
-            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboardPhrases.instantiateViewController(withIdentifier: "PhrasesLangViewController")), animated: true)
+            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboardPatterns.instantiateViewController(withIdentifier: "PatternsViewController")), animated: true)
             self.sideMenuViewController!.hideMenuViewController()
         default:
             break

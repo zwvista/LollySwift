@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -500,6 +500,16 @@
             </objects>
             <point key="canvasLocation" x="3702" y="1035"/>
         </scene>
+        <!--PatternsViewController-->
+        <scene sceneID="fTE-eg-PDh">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Patterns" referencedIdentifier="PatternsViewController" id="D21-9j-1Zx" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="gfJ-sy-o35"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GPq-FD-hYR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3686" y="1121"/>
+        </scene>
         <!--Root View Controller-->
         <scene sceneID="UQS-xF-bFr">
             <objects>
@@ -541,6 +551,7 @@
                         <segue destination="FNy-Po-4Kj" kind="show" id="yjl-4i-y95"/>
                         <segue destination="dPf-2g-ycm" kind="show" id="Ig2-pf-U6p"/>
                         <segue destination="T2A-6G-Dnh" kind="show" id="9rV-tP-16X"/>
+                        <segue destination="D21-9j-1Zx" kind="show" id="Ew2-jt-a1u"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Bd-jG-Nll" userLabel="First Responder" sceneMemberID="firstResponder"/>
