@@ -24,9 +24,11 @@ class PatternsSplitViewModel: NSObject {
             return o
         }
         itemEdit = MPatternEdit(x: item)
+        super.init()
+        mergeVariations()
     }
 
-    func splitPattern() {
+    func mergeVariations() {
         itemEdit.PATTERN.accept(Array(Set(arrPatternVariations.map { $0.variation })).joined(separator: ","))
     }
     

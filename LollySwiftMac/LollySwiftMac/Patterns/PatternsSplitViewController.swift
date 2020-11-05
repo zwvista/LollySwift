@@ -37,7 +37,7 @@ class PatternsSplitViewController: NSViewController {
         let row = tvPatternVariations.row(for: sender)
         guard row != -1 else {return}
         vm.arrPatternVariations[row].variation = sender.stringValue
-        vm.splitPattern()
+        vm.mergeVariations()
     }
 
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
@@ -98,7 +98,7 @@ class PatternsSplitViewController: NSViewController {
         }
         tableView.endUpdates()
         
-        vm.splitPattern()
+        vm.mergeVariations()
         
         return true
     }

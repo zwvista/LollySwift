@@ -52,7 +52,7 @@ class PatternsMergeViewController: NSViewController, NSTableViewDataSource, NSTa
         let row = tvPatternVariations.row(for: sender)
         guard row != -1 else {return}
         vm.arrPatternVariations[row].variation = sender.stringValue
-        vm.mergePatterns()
+        vm.mergeVariations()
     }
 
     func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
@@ -100,7 +100,7 @@ class PatternsMergeViewController: NSViewController, NSTableViewDataSource, NSTa
         }
         tableView.endUpdates()
         
-        vm.mergePatterns()
+        vm.mergeVariations()
         
         return true
     }
