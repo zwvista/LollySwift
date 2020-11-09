@@ -27,9 +27,9 @@ class PatternsViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PatternCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PatternCell", for: indexPath) as! PatternsCell
         let item = arrPatterns[indexPath.row]
-        cell.textLabel?.text = item.PATTERN
+        cell.lblPattern.text = item.PATTERN
         return cell
     }
 
@@ -37,4 +37,8 @@ class PatternsViewController: UITableViewController {
     deinit {
         print("DEBUG: \(self.className) deinit")
     }
+}
+
+class PatternsCell: UITableViewCell {
+    @IBOutlet weak var lblPattern: UILabel!
 }
