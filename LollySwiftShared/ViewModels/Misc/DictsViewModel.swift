@@ -22,20 +22,12 @@ class DictsViewModel: NSObject {
         }) ~ rx.disposeBag
     }
     
-    static func updateDict(item: MDictionary) -> Observable<()> {
-        MDictionaryDict.update(item: item)
+    static func update(item: MDictionary) -> Observable<()> {
+        MDictionary.update(item: item)
     }
 
-    static func createDict(item: MDictionary) -> Observable<Int> {
-        MDictionaryDict.create(item: item)
-    }
-    
-    static func updateSite(item: MDictionary) -> Observable<()> {
-        MDictionarySite.update(item: item)
-    }
-
-    static func createSite(item: MDictionary) -> Observable<Int> {
-        MDictionarySite.create(item: item)
+    static func create(item: MDictionary) -> Observable<Int> {
+        MDictionary.create(item: item)
     }
 
     func newDict() -> MDictionary {
