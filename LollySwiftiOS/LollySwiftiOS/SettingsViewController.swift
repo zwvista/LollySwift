@@ -216,7 +216,7 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
             dictNoteCell.detailTextLabel!.text = " "
         } else {
             dictNoteCell.textLabel!.text = item.DICTNAME
-            dictNoteCell.detailTextLabel!.text = item.URL ?? ""
+            dictNoteCell.detailTextLabel!.text = item.URL
         }
         ddDictNote.selectIndex(vm.selectedDictNoteIndex)
     }
@@ -230,7 +230,7 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
             dictTranslationCell.detailTextLabel!.text = " "
         } else {
             dictTranslationCell.textLabel!.text = item.DICTNAME
-            dictTranslationCell.detailTextLabel!.text = item.URL ?? ""
+            dictTranslationCell.detailTextLabel!.text = item.URL
         }
         ddDictTranslation.selectIndex(vm.selectedDictTranslationIndex)
     }
