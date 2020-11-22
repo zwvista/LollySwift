@@ -30,5 +30,17 @@ class WebTextbooksViewController: NSViewController, LollyProtocol, NSTableViewDa
             self.tableView.reloadData()
         }
     }
+    
+    func numberOfRows(in tableView: NSTableView) -> Int {
+        vm.arrWebTextbooks.count
+    }
+
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! NSTableCellView
+        let item = vm.arrWebTextbooks[row]
+        let columnName = tableColumn!.identifier.rawValue
+        cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
+        return cell
+    }
 
 }
