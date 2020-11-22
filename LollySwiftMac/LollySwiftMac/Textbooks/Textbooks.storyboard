@@ -497,6 +497,12 @@ Gw
                                                     <menuItem title="Item 3" id="IMG-RA-hbb"/>
                                                 </items>
                                             </menu>
+                                            <connections>
+                                                <binding destination="vWy-xu-GvI" name="content" keyPath="arrangedObjects" id="lbK-m2-kZJ"/>
+                                                <binding destination="vWy-xu-GvI" name="contentObjects" keyPath="arrangedObjects.value" previousBinding="lbK-m2-kZJ" id="ZRR-Ne-1cd"/>
+                                                <binding destination="vWy-xu-GvI" name="contentValues" keyPath="arrangedObjects.label" previousBinding="ZRR-Ne-1cd" id="v7Y-a9-Z54"/>
+                                                <binding destination="3Cf-sR-kY7" name="selectedObject" keyPath="textbookFilter" previousBinding="v7Y-a9-Z54" id="L6l-eO-Sbu"/>
+                                            </connections>
                                         </popUpButtonCell>
                                     </popUpButton>
                                 </subviews>
@@ -815,9 +821,13 @@ Gw
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="acTextbooks" destination="vWy-xu-GvI" id="XFD-PM-N8r"/>
+                        <outlet property="pubTextbookFilter" destination="0bf-0n-0zP" id="awl-zA-1Pw"/>
                         <outlet property="tableView" destination="cEG-EI-zqX" id="Ijx-De-jXD"/>
+                        <outlet property="wvWebPage" destination="Cl2-Vo-ScA" id="PoL-ap-DuN"/>
                     </connections>
                 </viewController>
+                <arrayController id="vWy-xu-GvI"/>
                 <customObject id="M44-Gy-bUQ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="372" y="392.5"/>

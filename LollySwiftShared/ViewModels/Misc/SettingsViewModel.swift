@@ -185,7 +185,9 @@ class SettingsViewModel: NSObject {
     var selectedTextbookIndex: Int { arrTextbooks.firstIndex { $0 == selectedTextbook } ?? 0 }
     @objc
     var arrTextbookFilters = [MSelectItem]()
-    
+    @objc
+    var arrWebTextbookFilters = [MSelectItem]()
+
     @objc
     var arrUnits: [MSelectItem] { selectedTextbook.arrUnits }
     var unitCount: Int { arrUnits.count }
@@ -253,6 +255,7 @@ class SettingsViewModel: NSObject {
         arrTextbooks = x.arrTextbooks
         selectedTextbook = x.selectedTextbook
         arrTextbookFilters = x.arrTextbookFilters
+        arrWebTextbookFilters = x.arrWebTextbookFilters
         toType = x.toType
         arrAutoCorrect = x.arrAutoCorrect
         arrDictTypes = x.arrDictTypes
@@ -325,6 +328,8 @@ class SettingsViewModel: NSObject {
                 self.selectedTextbook = self.arrTextbooks.first { $0.ID == self.USTEXTBOOK }!
                 self.arrTextbookFilters = self.arrTextbooks.map { MSelectItem(value: $0.ID, label: $0.TEXTBOOKNAME) }
                 self.arrTextbookFilters.insert(MSelectItem(value: 0, label: "All Textbooks"), at: 0)
+                self.arrWebTextbookFilters = self.arrTextbooks.filter { $0.ISWEB == 1 }.map { MSelectItem(value: $0.ID, label: $0.TEXTBOOKNAME) }
+                self.arrWebTextbookFilters.insert(MSelectItem(value: 0, label: "All Textbooks"), at: 0)
                 self.arrAutoCorrect = result.4
                 let arrVoices = result.5
                 self.arrMacVoices = arrVoices.filter { $0.VOICETYPEID == 2 }

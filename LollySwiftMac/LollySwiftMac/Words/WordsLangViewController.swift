@@ -128,7 +128,7 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
 
     @IBAction func filterWord(_ sender: AnyObject) {
         vm.applyFilters(textFilter: textFilter, scope: scTextFilter.selectedSegment == 0 ? "Word" : "Note")
-        self.tvWords.reloadData()
+        tvWords.reloadData()
     }
 
     override func updateStatusText() {

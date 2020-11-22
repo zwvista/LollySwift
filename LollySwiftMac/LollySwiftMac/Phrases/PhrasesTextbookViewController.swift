@@ -87,7 +87,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
     
     @IBAction func filterPhrase(_ sender: AnyObject) {
         vm.applyFilters(textFilter: textFilter, scope: scTextFilter.selectedSegment == 0 ? "Phrase" : "Translation", textbookFilter: textbookFilter)
-        self.tvPhrases.reloadData()
+        tvPhrases.reloadData()
     }
 
     override func updateStatusText() {

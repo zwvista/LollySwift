@@ -12,13 +12,19 @@ import RxSwift
 class WebTextbooksViewModel: NSObject {
     var vmSettings: SettingsViewModel
     var arrWebTextbooks = [MWebTextbook]()
-    
+    var arrWebTextbooksFiltered: [MWebTextbook]?
+
     init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> ()) {
         self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
         super.init()
         MWebTextbook.getDataByLang(settings.selectedLang.ID).subscribe(onNext: {
             self.arrWebTextbooks = $0
+            self.arrWebTextbooksFiltered = nil
             complete()
         }) ~ rx.disposeBag
+    }
+    
+    func applyFilters(textbookFilter: Int) {
+        arrWebTextbooksFiltered = textbookFilter == 0 ? nil : arrWebTextbooks.filter { $0.TEXTBOOKID == textbookFilter }
     }
 }
