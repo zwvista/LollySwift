@@ -29,7 +29,7 @@ class PatternsSplitViewModel: NSObject {
     }
 
     func mergeVariations() {
-        itemEdit.PATTERN.accept(Array(Set(arrPatternVariations.map { $0.variation })).joined(separator: ","))
+        itemEdit.PATTERN.accept(arrPatternVariations.map { $0.variation }.unique().joined(separator: ","))
     }
     
     func reindexVariations(complete: (Int) -> ()) {
