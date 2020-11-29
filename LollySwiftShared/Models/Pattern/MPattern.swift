@@ -17,16 +17,8 @@ class MPattern: NSObject, Codable {
     dynamic var PATTERN = ""
     dynamic var NOTE = ""
     dynamic var TAGS = ""
-    dynamic var IDS_MERGE = ""
-    dynamic var PATTERNS_SPLIT = ""
-
-    enum CodingKeys : String, CodingKey {
-        case ID
-        case LANGID
-        case PATTERN
-        case NOTE
-        case TAGS
-    }
+    dynamic var IDS_MERGE: String?
+    dynamic var PATTERNS_SPLIT: String?
 
     override init() {
     }
@@ -62,15 +54,17 @@ class MPattern: NSObject, Codable {
     }
     
     static func mergePatterns(item: MPattern) -> Observable<()> {
-        // SQL: DELETE PATTERNS WHERE ID=?
-        let url = "\(CommonApi.urlAPI)PATTERNS_MERGE"
-        return RestApi.delete(url: url).map { print($0) }
+        // SQL: PATTERNS_MERGE
+        let url = "\(CommonApi.urlSP)PATTERNS_MERGE"
+        let parameters = try! item.toParameters()
+        return RestApi.callSP(url: url, parameters: parameters).map { print($0) }
     }
     
     static func splitPattern(item: MPattern) -> Observable<()> {
-        // SQL: DELETE PATTERNS WHERE ID=?
-        let url = "\(CommonApi.urlAPI)PATTERNS_SPLIT"
-        return RestApi.delete(url: url).map { print($0) }
+        // SQL: PATTERNS_SPLIT
+        let url = "\(CommonApi.urlSP)PATTERNS_SPLIT"
+        let parameters = try! item.toParameters()
+        return RestApi.callSP(url: url, parameters: parameters).map { print($0) }
     }
 }
 
