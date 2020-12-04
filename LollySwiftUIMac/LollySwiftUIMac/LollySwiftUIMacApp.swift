@@ -6,9 +6,20 @@
 //
 
 import SwiftUI
+import RxSwift
 
 @main
 struct LollySwiftUIMacApp: App {
+
+    static let theSettingsViewModel = SettingsViewModel()
+    let synth = NSSpeechSynthesizer()
+    let disposeBag = DisposeBag()
+    
+    init() {
+        LollySwiftUIMacApp.theSettingsViewModel.getData().subscribe(onNext: {
+        }) ~ disposeBag
+    }
+
     var body: some Scene {
         WindowGroup {
             ContentView()
