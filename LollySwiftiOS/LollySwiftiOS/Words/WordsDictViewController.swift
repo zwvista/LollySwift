@@ -68,20 +68,19 @@ class WordsDictViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
     private func selectDictChanged() {
         let item = vmSettings.selectedDictReference!
         btnDict.setTitle(item.DICTNAME, for: .normal)
-        let item2 = vmSettings.arrDictsReference.first { $0.DICTNAME == item.DICTNAME }!
-        let url = item2.urlString(word: vm.currentWord, arrAutoCorrect: vmSettings.arrAutoCorrect)
-        if item2.DICTTYPENAME == "OFFLINE" {
+        let url = item.urlString(word: vm.currentWord, arrAutoCorrect: vmSettings.arrAutoCorrect)
+        if item.DICTTYPENAME == "OFFLINE" {
             wvDict.load(URLRequest(url: URL(string: "about:blank")!))
             RestApi.getHtml(url: url).subscribe(onNext: { html in
                 print(html)
-                let str = item2.htmlString(html, word: self.vm.currentWord, useTemplate2: true)
+                let str = item.htmlString(html, word: self.vm.currentWord, useTemplate2: true)
                 self.wvDict.loadHTMLString(str, baseURL: nil)
             }) ~ rx.disposeBag
         } else {
             wvDict.load(URLRequest(url: URL(string: url)!))
-            if !item2.AUTOMATION.isEmpty {
+            if !item.AUTOMATION.isEmpty {
                 dictStatus = .automating
-            } else if item2.DICTTYPENAME == "OFFLINE-ONLINE" {
+            } else if item.DICTTYPENAME == "OFFLINE-ONLINE" {
                 dictStatus = .navigating
             }
         }
@@ -99,14 +98,13 @@ class WordsDictViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
 //        guard webView.stringByEvaluatingJavaScript(from: "document.readyState") == "complete" && status == .navigating else {return}
         guard dictStatus != .ready else {return}
         let item = vmSettings.selectedDictReference!
-        let item2 = vmSettings.arrDictsReference.first { $0.DICTNAME == item.DICTNAME }!
         // https://stackoverflow.com/questions/34751860/get-html-from-wkwebview-in-swift
         switch dictStatus {
         case .automating:
-            let s = item2.AUTOMATION.replacingOccurrences(of: "{0}", with: vm.currentWord)
+            let s = item.AUTOMATION.replacingOccurrences(of: "{0}", with: vm.currentWord)
             webView.evaluateJavaScript(s) { (html: Any?, error: Error?) in
                 self.dictStatus = .ready
-                if item2.DICTTYPENAME == "OFFLINE-ONLINE" {
+                if item.DICTTYPENAME == "OFFLINE-ONLINE" {
                     self.dictStatus = .navigating
                 }
             }
@@ -114,7 +112,7 @@ class WordsDictViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
             webView.evaluateJavaScript("document.documentElement.outerHTML.toString()") { (html: Any?, error: Error?) in
                 let html = html as! String
                 print(html)
-                let str = item2.htmlString(html, word: self.vm.currentWord, useTemplate2: true)
+                let str = item.htmlString(html, word: self.vm.currentWord, useTemplate2: true)
                 self.wvDict.loadHTMLString(str, baseURL: nil)
                 self.dictStatus = .ready
             }
