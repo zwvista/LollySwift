@@ -35,7 +35,7 @@ class PhrasesLangViewController: PhrasesBaseViewController {
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        arrPhrases.count
+        tableView === tvPhrases ? arrPhrases.count : vmWordsLang.arrWords.count
     }
     
     override func phraseItemForRow(row: Int) -> (MPhraseProtocol & NSObject)? {

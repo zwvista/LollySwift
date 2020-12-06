@@ -40,7 +40,7 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        arrWords.count
+        tableView === tvWords ? arrWords.count : vmPhrasesLang.arrPhrases.count
     }
     
     override func wordItemForRow(row: Int) -> (MWordProtocol & NSObject)? {
