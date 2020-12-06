@@ -104,7 +104,14 @@ class PatternsMergeViewController: NSViewController, NSTableViewDataSource, NSTa
         
         return true
     }
-
+    
+    @IBAction func deleteVariation(_ sender: Any) {
+        let row = tvPatternVariations.selectedRow
+        guard row != -1 else {return}
+        vm.arrPatternVariations.remove(at: row)
+        tvPatternVariations.reloadData()
+    }
+    
     @IBAction func okClicked(_ sender: AnyObject) {
         // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
         self.commitEditing()
