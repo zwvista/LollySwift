@@ -39,6 +39,9 @@
                                 <state key="normal" title="Button">
                                     <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="showScopeFilterDropDown:" destination="Kja-H8-0Ak" eventType="touchUpInside" id="iMn-YY-Mvv"/>
+                                </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="88" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="QsG-w8-IST">
                                 <rect key="frame" x="0.0" y="144" width="414" height="718"/>
@@ -70,9 +73,12 @@
                                     <outlet property="delegate" destination="Kja-H8-0Ak" id="b0d-Ig-hyE"/>
                                 </connections>
                             </tableView>
-                            <searchBar contentMode="redraw" placeholder="Enter a word here" translatesAutoresizingMaskIntoConstraints="NO" id="1D0-3n-VX2" userLabel="Word SearchBar">
+                            <searchBar contentMode="redraw" placeholder="Filter" translatesAutoresizingMaskIntoConstraints="NO" id="1D0-3n-VX2">
                                 <rect key="frame" x="0.0" y="88" width="276" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Kja-H8-0Ak" id="AaH-Wf-iv7"/>
+                                </connections>
                             </searchBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="EW5-lo-bde"/>
@@ -103,6 +109,8 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="btnScopeFilter" destination="r5t-kG-eRF" id="o7q-z1-dkP"/>
+                        <outlet property="sbTextFilter" destination="1D0-3n-VX2" id="cQw-q4-073"/>
                         <outlet property="tableView" destination="QsG-w8-IST" id="raC-sW-gQU"/>
                         <segue destination="jxH-Re-jyk" kind="presentation" identifier="edit" id="AWN-1D-kqT"/>
                         <segue destination="jxH-Re-jyk" kind="presentation" identifier="add" id="FLZ-e9-gwV"/>

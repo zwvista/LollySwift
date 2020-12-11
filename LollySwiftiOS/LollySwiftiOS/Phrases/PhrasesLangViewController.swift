@@ -13,13 +13,12 @@ import NSObject_Rx
 class PhrasesLangViewController: PhrasesBaseViewController {
     
     var vm: PhrasesLangViewModel!
-    var arrPhrases: [MLangPhrase] { searchController.isActive && searchBar.text != "" ? vm.arrPhrasesFiltered! : vm.arrPhrases }
+    var arrPhrases: [MLangPhrase] { sbTextFilter.text != "" ? vm.arrPhrasesFiltered! : vm.arrPhrases }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.view.showBlurLoader()
         vm = PhrasesLangViewModel(settings: vmSettings, needCopy: false) {
-            self.setupSearchController(delegate: self)
             self.tableView.reloadData()
             self.view.removeBlurLoader()
         }
@@ -33,7 +32,7 @@ class PhrasesLangViewController: PhrasesBaseViewController {
         arrPhrases[row]
     }
     
-    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let i = indexPath.row
         let item = self.vm.arrPhrases[i]
         func delete() {
@@ -70,7 +69,7 @@ class PhrasesLangViewController: PhrasesBaseViewController {
     }
     
     override func applyFilters() {
-        vm.applyFilters(textFilter: searchBar.text!, scope: searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex])
+        vm.applyFilters(textFilter: sbTextFilter.text!, scope: btnScopeFilter.titleLabel!.text!)
         tableView.reloadData()
     }
     

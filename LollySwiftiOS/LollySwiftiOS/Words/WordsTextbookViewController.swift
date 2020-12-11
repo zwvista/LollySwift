@@ -77,7 +77,7 @@ class WordsTextbookViewController: WordsBaseViewController {
     }
     
     override func applyFilters() {
-        vm.applyFilters(textFilter: sbTextFilter.text!, scope: sbTextFilter.scopeButtonTitles![sbTextFilter.selectedScopeButtonIndex], textbookFilter: 0)
+        vm.applyFilters(textFilter: sbTextFilter.text!, scope: btnScopeFilter.titleLabel!.text!, textbookFilter: 0)
         tableView.reloadData()
     }
     

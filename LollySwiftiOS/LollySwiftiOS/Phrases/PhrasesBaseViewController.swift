@@ -7,43 +7,41 @@
 //
 
 import UIKit
+import DropDown
 
-class PhrasesBaseViewController: UITableViewController, UISearchBarDelegate, UISearchResultsUpdating, UIGestureRecognizerDelegate {
+class PhrasesBaseViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UIGestureRecognizerDelegate {
     
-    // https://www.raywenderlich.com/113772/uisearchcontroller-tutorial
-    let searchController = UISearchController(searchResultsController: nil)
-    var searchBar: UISearchBar { searchController.searchBar }
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var sbTextFilter: UISearchBar!
+    @IBOutlet weak var btnScopeFilter: UIButton!
     
-    func setupSearchController(delegate: UISearchBarDelegate & UISearchResultsUpdating) {
-        // https://stackoverflow.com/questions/28326269/uisearchbar-presented-by-uisearchcontroller-in-table-header-view-animates-too-fa
-        searchController.dimsBackgroundDuringPresentation = true
-        searchBar.scopeButtonTitles = ["Phrase", "Translation"]
-        searchController.searchResultsUpdater = delegate
-        if #available(iOS 9.1, *) {
-            searchController.obscuresBackgroundDuringPresentation = false
+    let ddScopeFilter = DropDown()
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        ddScopeFilter.anchorView = btnScopeFilter
+        ddScopeFilter.dataSource = SettingsViewModel.arrScopePhraseFilters
+        ddScopeFilter.selectRow(0)
+        ddScopeFilter.selectionAction = { [unowned self] (index: Int, item: String) in
+            btnScopeFilter.setTitle(item, for: .normal)
+            self.searchBarSearchButtonClicked(self.sbTextFilter)
         }
-        searchBar.delegate = delegate
-        if #available(iOS 11.0, *) {
-            navigationItem.searchController = searchController
-            navigationItem.hidesSearchBarWhenScrolling = false
-        } else {
-            tableView.tableHeaderView = searchController.searchBar
-        }
-        searchBar.placeholder = "Search Phrases"
-        searchBar.becomeFirstResponder()
-        definesPresentationContext = true
+        btnScopeFilter.setTitle(SettingsViewModel.arrScopePhraseFilters[0], for: .normal)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        searchController.isActive = false
+    func position(for bar: UIBarPositioning) -> UIBarPosition {
+        .top
+    }
+    
+    @IBAction func showScopeFilterDropDown(_ sender: AnyObject) {
+        ddScopeFilter.show()
     }
 
     func itemForRow(row: Int) -> (MPhraseProtocol & NSObject)? {
         nil
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PhraseCell", for: indexPath) as! PhrasesCommonCell
         let item = itemForRow(row: indexPath.row)!
         if cell.lblUnitPartSeqNum != nil {
@@ -54,11 +52,11 @@ class PhrasesBaseViewController: UITableViewController, UISearchBarDelegate, UIS
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         true
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let item = itemForRow(row: indexPath.row)!
         if tableView.isEditing {
             performSegue(withIdentifier: "edit", sender: item)
@@ -66,12 +64,17 @@ class PhrasesBaseViewController: UITableViewController, UISearchBarDelegate, UIS
             AppDelegate.speak(string: item.PHRASE)
         }
     }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        0
+    }
 
-    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.endEditing(true)
         applyFilters()
     }
-    
-    func updateSearchResults(for searchController: UISearchController) {
+
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         applyFilters()
     }
     

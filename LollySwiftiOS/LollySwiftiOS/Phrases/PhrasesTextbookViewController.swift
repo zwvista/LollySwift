@@ -13,14 +13,13 @@ import NSObject_Rx
 class PhrasesTextbookViewController: PhrasesBaseViewController {
     
     var vm: PhrasesUnitViewModel!
-    var arrPhrases: [MUnitPhrase] { searchController.isActive && searchBar.text != "" ? vm.arrPhrasesFiltered! : vm.arrPhrases }
+    var arrPhrases: [MUnitPhrase] { sbTextFilter.text != "" ? vm.arrPhrasesFiltered! : vm.arrPhrases }
     @IBOutlet weak var btnEdit: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.showBlurLoader()
         vm = PhrasesUnitViewModel(settings: vmSettings, inTextbook: false, needCopy: false) {
-            self.setupSearchController(delegate: self)
             self.tableView.reloadData()
             self.view.removeBlurLoader()
         }
@@ -34,11 +33,11 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
         arrPhrases[row]
     }
     
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         vmSettings.isSingleUnitPart
     }
     
-    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         let item = vm.arrPhrases[(sourceIndexPath as NSIndexPath).row]
         vm.arrPhrases.remove(at: (sourceIndexPath as NSIndexPath).row)
         vm.arrPhrases.insert(item, at: (destinationIndexPath as NSIndexPath).row)
@@ -49,7 +48,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
         tableView.endUpdates()
     }
 
-    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let i = indexPath.row
         let item = self.vm.arrPhrases[i]
         func delete() {
@@ -86,7 +85,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
     }
     
     override func applyFilters() {
-        vm.applyFilters(textFilter: searchBar.text!, scope: searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex], textbookFilter: 0)
+        vm.applyFilters(textFilter: sbTextFilter.text!, scope: btnScopeFilter.titleLabel!.text!, textbookFilter: 0)
         tableView.reloadData()
     }
     

@@ -7,21 +7,43 @@
 //
 
 import UIKit
+import DropDown
 import RxSwift
 import NSObject_Rx
 
-class PatternsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class PatternsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
     var vm: PatternsViewModel!
-    var arrPatterns: [MPattern] { vm.arrPatterns }
-    @IBOutlet weak var btnEdit: UIBarButtonItem!
+    var arrPatterns: [MPattern] {  sbTextFilter.text != "" ? vm.arrPatternsFiltered! : vm.arrPatterns }
+
     @IBOutlet weak var tableView: UITableView!
-    
+    @IBOutlet weak var sbTextFilter: UISearchBar!
+    @IBOutlet weak var btnScopeFilter: UIButton!
+    @IBOutlet weak var btnEdit: UIBarButtonItem!
+
+    let ddScopeFilter = DropDown()
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        ddScopeFilter.anchorView = btnScopeFilter
+        ddScopeFilter.dataSource = SettingsViewModel.arrScopePatternFilters
+        ddScopeFilter.selectRow(0)
+        ddScopeFilter.selectionAction = { [unowned self] (index: Int, item: String) in
+            btnScopeFilter.setTitle(item, for: .normal)
+            self.searchBarSearchButtonClicked(self.sbTextFilter)
+        }
+        btnScopeFilter.setTitle(SettingsViewModel.arrScopePatternFilters[0], for: .normal)
         vm = PatternsViewModel(settings: vmSettings, needCopy: false) {
             self.tableView.reloadData()
         }
+    }
+    
+    func position(for bar: UIBarPositioning) -> UIBarPosition {
+        .top
+    }
+    
+    @IBAction func showScopeFilterDropDown(_ sender: AnyObject) {
+        ddScopeFilter.show()
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -35,6 +57,15 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
         return cell
     }
 
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.endEditing(true)
+        applyFilters()
+    }
+    
+    func applyFilters() {
+        vm.applyFilters(textFilter: sbTextFilter.text!, scope: btnScopeFilter.titleLabel!.text!)
+        tableView.reloadData()
+    }
 
     deinit {
         print("DEBUG: \(self.className) deinit")
