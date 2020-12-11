@@ -130,11 +130,20 @@
                             </connections>
                         </barButtonItem>
                         <rightBarButtonItems>
-                            <barButtonItem title="More" id="jd4-kM-lW2"/>
-                            <barButtonItem title="Edit" id="tkY-ef-lej"/>
+                            <barButtonItem title="More" id="jd4-kM-lW2">
+                                <connections>
+                                    <action selector="btnMoreClicked:" destination="KE4-zf-I62" id="ugB-lj-ofo"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Edit" id="tkY-ef-lej">
+                                <connections>
+                                    <action selector="btnEditClicked:" destination="KE4-zf-I62" id="bbW-6X-wwu"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="btnEdit" destination="tkY-ef-lej" id="v1V-V6-E5l"/>
                         <outlet property="btnScopeFilter" destination="4gB-9M-6OY" id="fwt-q1-Mfu"/>
                         <outlet property="sbTextFilter" destination="rOS-W4-bJA" id="5Gt-yt-fyQ"/>
                         <outlet property="tableView" destination="GaJ-d4-ywS" id="Yfa-35-SXR"/>
@@ -760,14 +769,17 @@
                                 <action selector="presentLeftMenuViewController:" destination="Vhd-0o-Qm2" id="oJT-og-ZwC"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="q5J-9g-Gi2"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="q5J-9g-Gi2">
+                            <connections>
+                                <segue destination="6lO-S6-79a" kind="presentation" identifier="add" id="NSp-3Q-h6o"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="btnScopeFilter" destination="3dG-cU-Qlf" id="sLI-sq-5Nl"/>
                         <outlet property="sbTextFilter" destination="LqL-uu-EC9" id="8Fd-th-0kx"/>
                         <outlet property="tableView" destination="woS-Ns-enw" id="aLq-Cd-tQy"/>
                         <segue destination="6lO-S6-79a" kind="presentation" identifier="edit" id="Gtu-Tx-yPv"/>
-                        <segue destination="6lO-S6-79a" kind="presentation" identifier="add" id="ks4-Qu-tu0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vhd-0o-Qm2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1524,7 +1536,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ks4-Qu-tu0"/>
+        <segue reference="NSp-3Q-h6o"/>
         <segue reference="L9T-gz-DS0"/>
     </inferredMetricsTieBreakers>
     <resources>

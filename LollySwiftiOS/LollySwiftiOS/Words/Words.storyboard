@@ -130,11 +130,20 @@
                             </connections>
                         </barButtonItem>
                         <rightBarButtonItems>
-                            <barButtonItem title="More" id="5nA-Iy-L8D"/>
-                            <barButtonItem title="Edit" id="tvw-dv-ZMC"/>
+                            <barButtonItem title="More" id="5nA-Iy-L8D">
+                                <connections>
+                                    <action selector="btnMoreClicked:" destination="Vop-7l-4yd" id="b2r-VX-See"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Edit" id="tvw-dv-ZMC">
+                                <connections>
+                                    <action selector="btnEditClicked:" destination="Vop-7l-4yd" id="LPt-6G-vI4"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="btnEdit" destination="tvw-dv-ZMC" id="Ej7-xh-sED"/>
                         <outlet property="btnScopeFilter" destination="GPr-Q6-GpP" id="OjQ-Zl-8Je"/>
                         <outlet property="sbTextFilter" destination="6mm-Is-ar6" id="WHb-gt-kBb"/>
                         <outlet property="tableView" destination="aiE-1g-sH6" id="nxX-jl-j8N"/>
@@ -865,21 +874,21 @@
                                 <rect key="frame" x="0.0" y="144" width="414" height="718"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="WordCell" rowHeight="88" id="W1S-J6-mmA" customClass="WordsCommonCell" customModule="LollySwiftiOS" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="detailButton" indentationWidth="10" reuseIdentifier="WordCell" rowHeight="88" id="W1S-J6-mmA" customClass="WordsCommonCell" customModule="LollySwiftiOS" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="88"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="W1S-J6-mmA" id="dtL-H5-i8i">
-                                            <rect key="frame" x="0.0" y="0.0" width="383" height="88"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="370" height="88"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ucb-Ab-cqF">
-                                                    <rect key="frame" x="20" y="7" width="363" height="30"/>
+                                                    <rect key="frame" x="20" y="7" width="350" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                                     <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qZf-o1-0CX">
-                                                    <rect key="frame" x="20" y="54" width="363" height="24"/>
+                                                    <rect key="frame" x="20" y="54" width="350" height="24"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <color key="textColor" red="1" green="0.2527923882" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -928,15 +937,18 @@
                                 <action selector="presentLeftMenuViewController:" destination="0GF-CN-JDe" id="Mnz-oz-w4J"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="sFP-fZ-wpy"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="sFP-fZ-wpy">
+                            <connections>
+                                <segue destination="3V8-CG-zzI" kind="presentation" identifier="add" id="TNO-jG-07H"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="btnScopeFilter" destination="vGf-Mu-tKF" id="KcR-zL-xEk"/>
                         <outlet property="sbTextFilter" destination="hkS-FY-b3N" id="2y5-jH-mRR"/>
                         <outlet property="tableView" destination="aFQ-SS-MQc" id="c2B-4p-F8J"/>
                         <segue destination="3V8-CG-zzI" kind="presentation" identifier="edit" id="Kws-Jf-rhx"/>
-                        <segue destination="3V8-CG-zzI" kind="presentation" identifier="add" id="kbR-Fp-YeE"/>
-                        <segue destination="sKF-T7-DSr" kind="show" id="4Dp-8R-0mJ"/>
+                        <segue destination="sKF-T7-DSr" kind="show" identifier="dict" id="4Dp-8R-0mJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0GF-CN-JDe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1206,11 +1218,11 @@
                                 <rect key="frame" x="0.0" y="144" width="414" height="718"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="WordCell" rowHeight="88" id="h4I-9y-tps" customClass="WordsCommonCell" customModule="LollySwiftiOS" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="detailButton" indentationWidth="10" reuseIdentifier="WordCell" rowHeight="88" id="h4I-9y-tps" customClass="WordsCommonCell" customModule="LollySwiftiOS" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="88"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="h4I-9y-tps" id="xPJ-Yy-aBd">
-                                            <rect key="frame" x="0.0" y="0.0" width="383" height="88"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="370" height="88"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AqE-17-vsa">
@@ -1223,13 +1235,13 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MNy-5h-cY0">
-                                                    <rect key="frame" x="75" y="7" width="308" height="30"/>
+                                                    <rect key="frame" x="75" y="7" width="295" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                                     <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QJq-Ka-V6L">
-                                                    <rect key="frame" x="75" y="54" width="308" height="24"/>
+                                                    <rect key="frame" x="75" y="54" width="295" height="24"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <color key="textColor" red="1" green="0.2527923882" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -1287,7 +1299,7 @@
                         <outlet property="sbTextFilter" destination="jpU-G1-PiU" id="Drt-1c-IS0"/>
                         <outlet property="tableView" destination="26N-j5-mtJ" id="r7c-c6-hcu"/>
                         <segue destination="owF-Ne-4GQ" kind="presentation" identifier="edit" id="2py-E2-Zrt"/>
-                        <segue destination="sKF-T7-DSr" kind="show" id="v1a-tF-5Us"/>
+                        <segue destination="sKF-T7-DSr" kind="show" identifier="dict" id="v1a-tF-5Us"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mXf-kh-5kz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1848,7 +1860,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Kws-Jf-rhx"/>
+        <segue reference="TNO-jG-07H"/>
         <segue reference="v1a-tF-5Us"/>
         <segue reference="drm-CW-Gpi"/>
     </inferredMetricsTieBreakers>
