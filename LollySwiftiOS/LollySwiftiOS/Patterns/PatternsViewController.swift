@@ -14,6 +14,7 @@ class PatternsViewController: UITableViewController {
     
     var vm: PatternsViewModel!
     var arrPatterns: [MPattern] { vm.arrPatterns }
+    @IBOutlet weak var btnEdit: UIBarButtonItem!
 
     override func viewDidLoad() {
         super.viewDidLoad()

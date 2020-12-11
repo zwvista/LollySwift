@@ -8,12 +8,14 @@
 
 import Foundation
 import RxSwift
+import RxRelay
 
 class PatternsDetailViewModel: NSObject {
     var vm: PatternsViewModel!
     var item: MPattern!
     var itemEdit: MPatternEdit!
     var isAdd: Bool!
+    var isOKEnabled = BehaviorRelay(value: false)
 
     init(vm: PatternsViewModel, item: MPattern) {
         self.vm = vm
