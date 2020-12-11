@@ -72,6 +72,11 @@ class WordsBaseViewController: UITableViewController, UISearchBarDelegate, UISea
         }
     }
     
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.endEditing(true)
+        applyFilters()
+    }
+
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         applyFilters()
     }

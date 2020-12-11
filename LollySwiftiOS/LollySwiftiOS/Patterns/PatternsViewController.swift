@@ -10,12 +10,13 @@ import UIKit
 import RxSwift
 import NSObject_Rx
 
-class PatternsViewController: UITableViewController {
+class PatternsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var vm: PatternsViewModel!
     var arrPatterns: [MPattern] { vm.arrPatterns }
     @IBOutlet weak var btnEdit: UIBarButtonItem!
-
+    @IBOutlet weak var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         vm = PatternsViewModel(settings: vmSettings, needCopy: false) {
@@ -23,11 +24,11 @@ class PatternsViewController: UITableViewController {
         }
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         arrPatterns.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PatternCell", for: indexPath) as! PatternsCell
         let item = arrPatterns[indexPath.row]
         cell.lblPattern.text = item.PATTERN
