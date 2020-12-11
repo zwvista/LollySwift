@@ -71,7 +71,7 @@ class WordsUnitBatchViewController: UITableViewController, UITextFieldDelegate {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        section == 0 ? 5 : vm.arrWords.count
+        section == 0 ? 4 : vm.arrWords.count
     }
     
 //    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
