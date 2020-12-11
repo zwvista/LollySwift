@@ -13,13 +13,12 @@ import NSObject_Rx
 class WordsLangViewController: WordsBaseViewController {
 
     var vm: WordsLangViewModel!
-    var arrWords: [MLangWord] { searchController.isActive && searchBar.text != "" ? vm.arrWordsFiltered! : vm.arrWords }
+    var arrWords: [MLangWord] { sbTextFilter.text != "" ? vm.arrWordsFiltered! : vm.arrWords }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.view.showBlurLoader()
         vm = WordsLangViewModel(settings: vmSettings, needCopy: false) {
-            self.setupSearchController(delegate: self)
             self.tableView.reloadData()
             self.view.removeBlurLoader()
         }
@@ -33,7 +32,7 @@ class WordsLangViewController: WordsBaseViewController {
         arrWords[row]
     }
     
-    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let i = indexPath.row
         let item = self.vm.arrWords[i]
         func delete() {
@@ -78,7 +77,7 @@ class WordsLangViewController: WordsBaseViewController {
     }
     
     override func applyFilters() {
-        vm.applyFilters(textFilter: searchBar.text!, scope: searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex])
+        vm.applyFilters(textFilter: sbTextFilter.text!, scope: sbTextFilter.scopeButtonTitles![sbTextFilter.selectedScopeButtonIndex])
         tableView.reloadData()
     }
     

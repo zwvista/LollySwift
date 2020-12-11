@@ -13,13 +13,12 @@ import NSObject_Rx
 class WordsTextbookViewController: WordsBaseViewController {
 
     var vm: WordsUnitViewModel!
-    var arrWords: [MUnitWord] { searchController.isActive && searchBar.text != "" ? vm.arrWordsFiltered! : vm.arrWords }
+    var arrWords: [MUnitWord] { sbTextFilter.text != "" ? vm.arrWordsFiltered! : vm.arrWords }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.showBlurLoader()
         vm = WordsUnitViewModel(settings: vmSettings, inTextbook: false, needCopy: false) {
-            self.setupSearchController(delegate: self)
             self.tableView.reloadData()
             self.view.removeBlurLoader()
         }
@@ -33,7 +32,7 @@ class WordsTextbookViewController: WordsBaseViewController {
         arrWords[row]
     }
 
-    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let i = indexPath.row
         let item = self.vm.arrWords[i]
         func delete() {
@@ -78,7 +77,7 @@ class WordsTextbookViewController: WordsBaseViewController {
     }
     
     override func applyFilters() {
-        vm.applyFilters(textFilter: searchBar.text!, scope: searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex], textbookFilter: 0)
+        vm.applyFilters(textFilter: sbTextFilter.text!, scope: sbTextFilter.scopeButtonTitles![sbTextFilter.selectedScopeButtonIndex], textbookFilter: 0)
         tableView.reloadData()
     }
     

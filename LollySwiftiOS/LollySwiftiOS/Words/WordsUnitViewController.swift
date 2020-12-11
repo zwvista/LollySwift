@@ -13,14 +13,13 @@ import NSObject_Rx
 class WordsUnitViewController: WordsBaseViewController {
 
     var vm: WordsUnitViewModel!
-    var arrWords: [MUnitWord] { searchController.isActive && searchBar.text != "" ? vm.arrWordsFiltered! : vm.arrWords }
+    var arrWords: [MUnitWord] { sbTextFilter.text != "" ? vm.arrWordsFiltered! : vm.arrWords }
     @IBOutlet weak var btnEdit: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.showBlurLoader()
         vm = WordsUnitViewModel(settings: vmSettings, inTextbook: true, needCopy: false) {
-            self.setupSearchController(delegate: self)
             self.tableView.reloadData()
             self.view.removeBlurLoader()
         }
@@ -34,7 +33,7 @@ class WordsUnitViewController: WordsBaseViewController {
         arrWords[row]
     }
     
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         vmSettings.isSingleUnitPart
     }
     
@@ -46,12 +45,12 @@ class WordsUnitViewController: WordsBaseViewController {
         tableView.endUpdates()
     }
     
-    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         vm.arrWords.moveElement(at: sourceIndexPath.row, to: destinationIndexPath.row)
         reindex()
     }
 
-    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let i = indexPath.row
         let item = vm.arrWords[i]
         func delete() {
@@ -103,7 +102,7 @@ class WordsUnitViewController: WordsBaseViewController {
     }
     
     override func applyFilters() {
-        vm.applyFilters(textFilter: searchBar.text!, scope: searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex], textbookFilter: 0)
+        vm.applyFilters(textFilter: sbTextFilter.text!, scope: sbTextFilter.scopeButtonTitles![sbTextFilter.selectedScopeButtonIndex], textbookFilter: 0)
         tableView.reloadData()
     }
     

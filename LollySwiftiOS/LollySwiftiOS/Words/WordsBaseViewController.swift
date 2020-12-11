@@ -8,42 +8,17 @@
 
 import UIKit
 
-class WordsBaseViewController: UITableViewController, UISearchBarDelegate, UISearchResultsUpdating, UIGestureRecognizerDelegate {
+class WordsBaseViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating, UIGestureRecognizerDelegate {
 
-    // https://www.raywenderlich.com/113772/uisearchcontroller-tutorial
-    let searchController = UISearchController(searchResultsController: nil)
-    var searchBar: UISearchBar { searchController.searchBar }
-
-    func setupSearchController(delegate: UISearchBarDelegate & UISearchResultsUpdating) {
-        // https://stackoverflow.com/questions/28326269/uisearchbar-presented-by-uisearchcontroller-in-table-header-view-animates-too-fa
-        //searchController.dimsBackgroundDuringPresentation = true
-        searchBar.scopeButtonTitles = ["Word", "Note"]
-        searchController.searchResultsUpdater = delegate
-        if #available(iOS 9.1, *) {
-            searchController.obscuresBackgroundDuringPresentation = false
-        }
-        searchBar.delegate = delegate
-        if #available(iOS 11.0, *) {
-            navigationItem.searchController = searchController
-            navigationItem.hidesSearchBarWhenScrolling = false
-        } else {
-            tableView.tableHeaderView = searchController.searchBar
-        }
-        searchBar.placeholder = "Search Words"
-        searchBar.becomeFirstResponder()
-        definesPresentationContext = true
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        searchController.isActive = false
-    }
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var sbTextFilter: UISearchBar!
+    @IBOutlet weak var btnScopeFilter: UIButton!
 
     func itemForRow(row: Int) -> (MWordProtocol & NSObject)? {
         nil
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    @objc(tableView:cellForRowAtIndexPath:) func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "WordCell", for: indexPath) as! WordsCommonCell
         let item = itemForRow(row: indexPath.row)!
         if cell.lblUnitPartSeqNum != nil {
@@ -54,16 +29,16 @@ class WordsBaseViewController: UITableViewController, UISearchBarDelegate, UISea
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         true
     }
     
-    override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
         let item = itemForRow(row: indexPath.row)!
         performSegue(withIdentifier: "dict", sender: item)
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let item = itemForRow(row: indexPath.row)!
         if tableView.isEditing {
             performSegue(withIdentifier: "edit", sender: item)
@@ -72,6 +47,10 @@ class WordsBaseViewController: UITableViewController, UISearchBarDelegate, UISea
         }
     }
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        0
+    }
+
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.endEditing(true)
         applyFilters()
