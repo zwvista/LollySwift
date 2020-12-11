@@ -44,7 +44,7 @@ class WordsSearchViewController: UIViewController, WKNavigationDelegate, UISearc
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         word = sbword.text!
-        sbword.resignFirstResponder()
+        sbword.endEditing(true)
         let item = vmSettings.selectedDictReference!
         btnDict.setTitle(item.DICTNAME, for: .normal)
         let item2 = vmSettings.arrDictsReference.first { $0.DICTNAME == item.DICTNAME }!

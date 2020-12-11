@@ -33,9 +33,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" placeholder="Enter a word here" translatesAutoresizingMaskIntoConstraints="NO" id="6mm-Is-ar6">
+                            <searchBar contentMode="redraw" placeholder="Filter" translatesAutoresizingMaskIntoConstraints="NO" id="6mm-Is-ar6">
                                 <rect key="frame" x="0.0" y="88" width="276" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Vop-7l-4yd" id="qFo-Xv-9ca"/>
+                                </connections>
                             </searchBar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GPr-Q6-GpP">
                                 <rect key="frame" x="276" y="88" width="138" height="56"/>
@@ -43,6 +46,9 @@
                                 <state key="normal" title="Button">
                                     <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="showScopeFilterDropDown:" destination="Vop-7l-4yd" eventType="touchUpInside" id="oTE-Tq-pEx"/>
+                                </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="88" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="aiE-1g-sH6">
                                 <rect key="frame" x="0.0" y="144" width="414" height="718"/>
@@ -166,18 +172,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" showsSearchResultsButton="YES" showsScopeBar="YES" id="X9t-El-9XJ">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <textInputTraits key="textInputTraits"/>
-                            <scopeButtonTitles>
-                                <string>Title</string>
-                                <string>Title</string>
-                            </scopeButtonTitles>
-                        </searchBar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="WordCell00" id="WiG-T1-FND" customClass="WordsUnitBatchCell" customModule="LollySwiftiOS" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="84" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WiG-T1-FND" id="Lbz-Ti-a63">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -219,7 +216,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="WordCell01" id="lYR-gR-gxq" customClass="WordsUnitBatchCell" customModule="LollySwiftiOS" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="128" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="72" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lYR-gR-gxq" id="S35-og-oHL">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -261,7 +258,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="WordCell02" id="tO2-x5-vHs" customClass="WordsUnitBatchCell" customModule="LollySwiftiOS" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="172" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="116" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tO2-x5-vHs" id="f1u-lG-akE">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -303,7 +300,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="WordCell03" id="EgW-Go-TlZ" customClass="WordsUnitBatchCell" customModule="LollySwiftiOS" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="216" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="160" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EgW-Go-TlZ" id="itC-bu-egQ">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -329,7 +326,7 @@
                                 </tableViewCellContentView>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="WordCell10" rowHeight="88" id="14D-jF-2oH" customClass="WordsUnitBatchCell" customModule="LollySwiftiOS" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="260" width="414" height="88"/>
+                                <rect key="frame" x="0.0" y="204" width="414" height="88"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="14D-jF-2oH" id="Knj-xN-l3A">
                                     <rect key="frame" x="0.0" y="0.0" width="370" height="88"/>
@@ -847,9 +844,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" placeholder="Enter a word here" translatesAutoresizingMaskIntoConstraints="NO" id="hkS-FY-b3N">
+                            <searchBar contentMode="redraw" placeholder="Filter" translatesAutoresizingMaskIntoConstraints="NO" id="hkS-FY-b3N">
                                 <rect key="frame" x="0.0" y="88" width="276" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="SJN-sv-FSe" id="3b4-a5-UEL"/>
+                                </connections>
                             </searchBar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vGf-Mu-tKF">
                                 <rect key="frame" x="276" y="88" width="138" height="56"/>
@@ -857,6 +857,9 @@
                                 <state key="normal" title="Button">
                                     <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="showScopeFilterDropDown:" destination="SJN-sv-FSe" eventType="touchUpInside" id="qaV-Ab-jxC"/>
+                                </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="88" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="aFQ-SS-MQc">
                                 <rect key="frame" x="0.0" y="144" width="414" height="718"/>
@@ -1182,9 +1185,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" placeholder="Enter a word here" translatesAutoresizingMaskIntoConstraints="NO" id="jpU-G1-PiU">
+                            <searchBar contentMode="redraw" placeholder="Filter" translatesAutoresizingMaskIntoConstraints="NO" id="jpU-G1-PiU">
                                 <rect key="frame" x="0.0" y="88" width="276" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="SwL-I5-435" id="Z8G-tO-cLj"/>
+                                </connections>
                             </searchBar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qnI-2g-f6k">
                                 <rect key="frame" x="276" y="88" width="138" height="56"/>
@@ -1192,6 +1198,9 @@
                                 <state key="normal" title="Button">
                                     <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="showScopeFilterDropDown:" destination="SwL-I5-435" eventType="touchUpInside" id="5Sv-1d-AUN"/>
+                                </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="88" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="26N-j5-mtJ">
                                 <rect key="frame" x="0.0" y="144" width="414" height="718"/>
@@ -1840,7 +1849,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="Kws-Jf-rhx"/>
-        <segue reference="AhY-9e-jhY"/>
+        <segue reference="v1a-tF-5Us"/>
         <segue reference="drm-CW-Gpi"/>
     </inferredMetricsTieBreakers>
     <resources>

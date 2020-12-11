@@ -7,12 +7,35 @@
 //
 
 import UIKit
+import DropDown
 
-class WordsBaseViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UISearchResultsUpdating, UIGestureRecognizerDelegate {
+class WordsBaseViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UIGestureRecognizerDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var sbTextFilter: UISearchBar!
     @IBOutlet weak var btnScopeFilter: UIButton!
+    
+    let ddScopeFilter = DropDown()
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        ddScopeFilter.anchorView = btnScopeFilter
+        ddScopeFilter.dataSource = SettingsViewModel.arrScopeWordFilters
+        ddScopeFilter.selectRow(0)
+        ddScopeFilter.selectionAction = { [unowned self] (index: Int, item: String) in
+            btnScopeFilter.setTitle(item, for: .normal)
+            self.searchBarSearchButtonClicked(self.sbTextFilter)
+        }
+        btnScopeFilter.setTitle(SettingsViewModel.arrScopeWordFilters[0], for: .normal)
+    }
+    
+    func position(for bar: UIBarPositioning) -> UIBarPosition {
+        .top
+    }
+    
+    @IBAction func showScopeFilterDropDown(_ sender: AnyObject) {
+        ddScopeFilter.show()
+    }
 
     func itemForRow(row: Int) -> (MWordProtocol & NSObject)? {
         nil
@@ -57,10 +80,6 @@ class WordsBaseViewController: UIViewController, UITableViewDelegate, UITableVie
     }
 
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        applyFilters()
-    }
-    
-    func updateSearchResults(for searchController: UISearchController) {
         applyFilters()
     }
     
