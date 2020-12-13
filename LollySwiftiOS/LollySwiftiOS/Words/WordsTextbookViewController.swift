@@ -17,7 +17,7 @@ class WordsTextbookViewController: WordsBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.showBlurLoader()
+        view.showBlurLoader()
         vm = WordsUnitViewModel(settings: vmSettings, inTextbook: false, needCopy: false) {
             self.tableView.reloadData()
             self.view.removeBlurLoader()

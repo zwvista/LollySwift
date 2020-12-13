@@ -17,7 +17,7 @@ class PhrasesLangViewController: PhrasesBaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.view.showBlurLoader()
+        view.showBlurLoader()
         vm = PhrasesLangViewModel(settings: vmSettings, needCopy: false) {
             self.tableView.reloadData()
             self.view.removeBlurLoader()

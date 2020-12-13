@@ -33,8 +33,10 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
             self.searchBarSearchButtonClicked(self.sbTextFilter)
         }
         btnScopeFilter.setTitle(SettingsViewModel.arrScopePatternFilters[0], for: .normal)
+        view.showBlurLoader()
         vm = PatternsViewModel(settings: vmSettings, needCopy: false) {
             self.tableView.reloadData()
+            self.view.removeBlurLoader()
         }
     }
     
@@ -55,6 +57,35 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
         let item = arrPatterns[indexPath.row]
         cell.lblPattern.text = item.PATTERN
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let item = arrPatterns[indexPath.row]
+        AppDelegate.speak(string: item.PATTERN)
+    }
+
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let i = indexPath.row
+        let item = vm.arrPatterns[i]
+        func delete() {
+            yesNoAction(title: "delete", message: "Do you really want to delete the pattern \"\(item.PATTERN)\"?", yesHandler: { (action) in
+                PatternsViewModel.delete(item.ID).subscribe() ~ self.rx.disposeBag
+                self.vm.arrPatterns.remove(at: i)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            }, noHandler: { (action) in
+                tableView.reloadRows(at: [indexPath], with: .fade)
+            })
+        }
+        func edit() {
+            performSegue(withIdentifier: "edit", sender: item)
+        }
+        let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { _,_ in delete() }
+        let editAction = UITableViewRowAction(style: .normal, title: "Edit") { _,_ in edit() }
+        editAction.backgroundColor = .blue
+        let moreAction = UITableViewRowAction(style: .normal, title: "More") { [unowned self] _,_ in
+        }
+
+        return [moreAction, deleteAction]
     }
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {

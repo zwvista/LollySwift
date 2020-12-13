@@ -18,7 +18,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.showBlurLoader()
+        view.showBlurLoader()
         vm = PhrasesUnitViewModel(settings: vmSettings, inTextbook: true, needCopy: false) {
             self.tableView.reloadData()
             self.view.removeBlurLoader()
