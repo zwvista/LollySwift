@@ -83,6 +83,14 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
         let editAction = UITableViewRowAction(style: .normal, title: "Edit") { _,_ in edit() }
         editAction.backgroundColor = .blue
         let moreAction = UITableViewRowAction(style: .normal, title: "More") { [unowned self] _,_ in
+            let alertController = UIAlertController(title: "Pattern", message: item.PATTERN, preferredStyle: .alert)
+            let deleteAction2 = UIAlertAction(title: "Delete", style: .destructive) { _ in delete() }
+            alertController.addAction(deleteAction2)
+            let editAction2 = UIAlertAction(title: "Edit", style: .default) { _ in edit() }
+            alertController.addAction(editAction2)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
+            alertController.addAction(cancelAction)
+            self.present(alertController, animated: true) {}
         }
 
         return [moreAction, deleteAction]
@@ -96,6 +104,26 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
     func applyFilters() {
         vm.applyFilters(textFilter: sbTextFilter.text!, scope: btnScopeFilter.titleLabel!.text!)
         tableView.reloadData()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        if let controller = (segue.destination as? UINavigationController)?.topViewController as? PatternsDetailViewController {
+            let item = segue.identifier == "add" ? vm.newPattern() : sender as! MPattern
+            controller.startEdit(vm: vm, item: item)
+        }
+    }
+
+    @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
+        guard segue.identifier == "Done" else {return}
+        if let controller = segue.source as? PatternsDetailViewController {
+            controller.vmEdit.onOK().subscribe(onNext: {
+                self.tableView.reloadData()
+                if controller.vmEdit.isAdd {
+                    self.performSegue(withIdentifier: "add", sender: self)
+                }
+            }) ~ rx.disposeBag
+        }
     }
 
     deinit {

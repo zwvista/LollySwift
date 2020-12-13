@@ -101,7 +101,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         if let controller = (segue.destination as? UINavigationController)?.topViewController as? PhrasesUnitDetailViewController {
-            let item = segue.identifier == "Add" ? vm.newUnitPhrase() : sender as! MUnitPhrase
+            let item = segue.identifier == "add" ? vm.newUnitPhrase() : sender as! MUnitPhrase
             controller.startEdit(vm: vm, item: item, wordid: 0)
         } else if let controller = (segue.destination as? UINavigationController)?.topViewController as? PhrasesUnitBatchViewController {
             controller.vm = vm

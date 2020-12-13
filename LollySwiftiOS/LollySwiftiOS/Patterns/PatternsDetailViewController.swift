@@ -20,6 +20,10 @@ class PatternsDetailViewController: UITableViewController {
     @IBOutlet weak var tfNote: UITextField!
     @IBOutlet weak var tfTags: UITextField!
     @IBOutlet weak var btnDone: UIBarButtonItem!
+    
+    func startEdit(vm: PatternsViewModel, item: MPattern) {
+        vmEdit = PatternsDetailViewModel(vm: vm, item: item)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

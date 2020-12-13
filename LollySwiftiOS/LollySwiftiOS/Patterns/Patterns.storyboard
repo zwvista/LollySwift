@@ -103,14 +103,17 @@
                                 <action selector="presentLeftMenuViewController:" destination="0f6-eh-sBq" id="6OF-Px-Hxg"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="7oO-l3-tjY"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="7oO-l3-tjY">
+                            <connections>
+                                <segue destination="jxH-Re-jyk" kind="presentation" identifier="add" id="wux-pG-UQE"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="btnScopeFilter" destination="r5t-kG-eRF" id="o7q-z1-dkP"/>
                         <outlet property="sbTextFilter" destination="1D0-3n-VX2" id="cQw-q4-073"/>
                         <outlet property="tableView" destination="QsG-w8-IST" id="raC-sW-gQU"/>
                         <segue destination="jxH-Re-jyk" kind="presentation" identifier="edit" id="AWN-1D-kqT"/>
-                        <segue destination="jxH-Re-jyk" kind="presentation" identifier="add" id="FLZ-e9-gwV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0f6-eh-sBq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -307,7 +310,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="AWN-1D-kqT"/>
+        <segue reference="wux-pG-UQE"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="MenuButton" width="25" height="13"/>

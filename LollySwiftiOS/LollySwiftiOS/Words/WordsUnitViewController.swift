@@ -109,7 +109,7 @@ class WordsUnitViewController: WordsBaseViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         if let controller = (segue.destination as? UINavigationController)?.topViewController as? WordsUnitDetailViewController {
-            let item = segue.identifier == "Add" ? vm.newUnitWord() : sender as! MUnitWord
+            let item = segue.identifier == "add" ? vm.newUnitWord() : sender as! MUnitWord
             controller.startEdit(vm: vm, item: item, phraseid: 0)
         } else if let controller = segue.destination as? WordsDictViewController {
             controller.vm.arrWords = arrWords.map { $0.WORD }
