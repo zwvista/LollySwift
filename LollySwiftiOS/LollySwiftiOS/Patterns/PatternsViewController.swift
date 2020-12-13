@@ -19,7 +19,6 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var sbTextFilter: UISearchBar!
     @IBOutlet weak var btnScopeFilter: UIButton!
-    @IBOutlet weak var btnEdit: UIBarButtonItem!
 
     let ddScopeFilter = DropDown()
 

@@ -48,8 +48,4 @@ class PatternsMergeViewModel: NSObject {
         item.IDS_MERGE = arrPatterns.sorted { $0.ID < $1.ID }.map { $0.ID.toString }.joined(separator: ",")
         return MPattern.mergePatterns(item: item)
     }
-    
-    deinit {
-        print("DEBUG: \(self.className) deinit")
-    }
 }

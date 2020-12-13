@@ -35,8 +35,4 @@ class PatternsDetailViewModel: NSObject {
             return PatternsViewModel.update(item: item)
         }
     }
-    
-    deinit {
-        print("DEBUG: \(self.className) deinit")
-    }
 }

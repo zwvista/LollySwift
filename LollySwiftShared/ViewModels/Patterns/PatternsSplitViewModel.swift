@@ -47,8 +47,4 @@ class PatternsSplitViewModel: NSObject {
         item.PATTERNS_SPLIT = item.PATTERN
         return MPattern.mergePatterns(item: item)
     }
-
-    deinit {
-        print("DEBUG: \(self.className) deinit")
-    }
 }

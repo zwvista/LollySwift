@@ -114,6 +114,7 @@
                         <outlet property="sbTextFilter" destination="1D0-3n-VX2" id="cQw-q4-073"/>
                         <outlet property="tableView" destination="QsG-w8-IST" id="raC-sW-gQU"/>
                         <segue destination="jxH-Re-jyk" kind="presentation" identifier="edit" id="AWN-1D-kqT"/>
+                        <segue destination="fhO-BY-xb8" kind="presentation" identifier="page" id="egg-no-yyc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0f6-eh-sBq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -135,6 +136,22 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Yy-wu-C41" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="619" y="-233"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="cap-w6-XvN">
+            <objects>
+                <navigationController id="fhO-BY-xb8" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="WD2-TH-9Na">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="cXB-gx-cf6" kind="relationship" relationship="rootViewController" id="430-2r-BTz"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="35Q-vy-rAm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="602" y="-916"/>
         </scene>
         <!--Patterns in Language (Edit)-->
         <scene sceneID="xUX-t2-jdX">
@@ -307,6 +324,112 @@
                 <exit id="lru-2d-WIP" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1454" y="-233"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="ezp-hX-h5f">
+            <objects>
+                <navigationController id="tNP-bw-tcR" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hen-6B-ogs">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="u7K-kW-pYn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="623" y="456"/>
+        </scene>
+        <!--Table View Controller-->
+        <scene sceneID="jqk-gN-GFw">
+            <objects>
+                <tableViewController id="nEx-BK-Py0" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="TnW-8F-kG2">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="U8e-ww-xUY">
+                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="U8e-ww-xUY" id="snh-AV-aya">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="nEx-BK-Py0" id="u6T-zR-7fv"/>
+                            <outlet property="delegate" destination="nEx-BK-Py0" id="bEm-3h-HDX"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6KQ-Fw-Gef" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1454" y="455"/>
+        </scene>
+        <!--Pattern Web Pages-->
+        <scene sceneID="glL-wo-Ytn">
+            <objects>
+                <viewController storyboardIdentifier="WordsSearchViewController" id="cXB-gx-cf6" customClass="WordsSearchViewController" customModule="LollySwiftiOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Acn-mT-ao0">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" placeholder="Enter a word here" translatesAutoresizingMaskIntoConstraints="NO" id="qVu-I4-cTC" userLabel="Word SearchBar">
+                                <rect key="frame" x="0.0" y="56" width="276" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="cXB-gx-cf6" id="bYJ-vl-Nx7"/>
+                                </connections>
+                            </searchBar>
+                            <view multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qdr-K4-ce8" userLabel="Wv Dict Holder">
+                                <rect key="frame" x="0.0" y="112" width="414" height="647"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mHp-X4-uv4">
+                                <rect key="frame" x="276" y="56" width="138" height="56"/>
+                                <color key="backgroundColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="showDictDropDown:" destination="cXB-gx-cf6" eventType="touchUpInside" id="iyo-Ze-rE0"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="BAr-eE-VCO"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="qVu-I4-cTC" firstAttribute="leading" secondItem="Acn-mT-ao0" secondAttribute="leadingMargin" constant="-20" id="1PW-b3-d0H"/>
+                            <constraint firstItem="BAr-eE-VCO" firstAttribute="top" secondItem="mHp-X4-uv4" secondAttribute="top" id="4sA-ri-cA1"/>
+                            <constraint firstItem="qdr-K4-ce8" firstAttribute="top" secondItem="qVu-I4-cTC" secondAttribute="bottom" id="7y8-nv-VJJ"/>
+                            <constraint firstItem="BAr-eE-VCO" firstAttribute="bottom" secondItem="qdr-K4-ce8" secondAttribute="bottom" symbolic="YES" id="98N-9b-G7Z"/>
+                            <constraint firstItem="mHp-X4-uv4" firstAttribute="width" secondItem="Acn-mT-ao0" secondAttribute="width" multiplier="1:3" id="Dn6-Ag-FUK"/>
+                            <constraint firstItem="qVu-I4-cTC" firstAttribute="width" secondItem="Acn-mT-ao0" secondAttribute="width" multiplier="2:3" id="NUf-gv-NhB"/>
+                            <constraint firstItem="qdr-K4-ce8" firstAttribute="leading" secondItem="BAr-eE-VCO" secondAttribute="leading" id="Qc9-KB-fbO"/>
+                            <constraint firstItem="BAr-eE-VCO" firstAttribute="trailing" secondItem="qdr-K4-ce8" secondAttribute="trailing" id="SLu-S1-pfg"/>
+                            <constraint firstItem="BAr-eE-VCO" firstAttribute="trailing" secondItem="mHp-X4-uv4" secondAttribute="trailing" id="Tps-Gy-qnL"/>
+                            <constraint firstItem="mHp-X4-uv4" firstAttribute="centerY" secondItem="qVu-I4-cTC" secondAttribute="centerY" id="ldh-4Q-mNh"/>
+                            <constraint firstItem="qVu-I4-cTC" firstAttribute="top" secondItem="BAr-eE-VCO" secondAttribute="top" id="nbF-8U-L13"/>
+                        </constraints>
+                    </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Pattern Web Pages" id="rlz-6y-dYZ">
+                        <barButtonItem key="leftBarButtonItem" title="Left" image="MenuButton" id="9fi-kC-cKk">
+                            <connections>
+                                <action selector="presentLeftMenuViewController:" destination="Hw5-bZ-rry" id="y5O-Qz-HSc"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="btnDict" destination="mHp-X4-uv4" id="8HL-PZ-4ks"/>
+                        <outlet property="sbword" destination="qVu-I4-cTC" id="UBI-79-b7i"/>
+                        <outlet property="wvDictHolder" destination="qdr-K4-ce8" id="Y8O-iL-DSI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hw5-bZ-rry" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1454" y="-916"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
