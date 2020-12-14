@@ -14,6 +14,11 @@ class PatternsViewModel: NSObject {
     var arrPatterns = [MPattern]()
     var arrPatternsFiltered: [MPattern]?
     var arrWebPages = [MPatternWebPage]()
+    var currentWebPageIndex = 0
+    var currentWebPageTitle: String { arrWebPages[currentWebPageIndex].TITLE }
+    func next(_ delta: Int) {
+        currentWebPageIndex = (currentWebPageIndex + delta + arrWebPages.count) % arrWebPages.count
+    }
 
     public init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> ()) {
         self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
