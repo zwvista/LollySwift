@@ -41,8 +41,6 @@ class PatternsWebPagesViewController: UIViewController, WKUIDelegate, WKNavigati
             self.vm.currentWebPageIndex = index
             self.currentWebPageChanged()
         }
-        
-        currentWebPageChanged()
     }
     
     private func currentWebPageChanged() {

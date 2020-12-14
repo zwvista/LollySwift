@@ -145,7 +145,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     // https://stackoverflow.com/questions/8017822/how-to-enable-disable-nstoolbaritem
     func validateToolbarItem(_ item: NSToolbarItem) -> Bool {
         let s = item.paletteLabel
-        let enabled = !((s == "Add WebPage" || s == "Select Phrase") && selectedPatternID == 0)
+        let enabled = !(s == "Add WebPage" && selectedPatternID == 0)
         return enabled
     }
 

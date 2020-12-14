@@ -78,6 +78,9 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
         func edit() {
             performSegue(withIdentifier: "edit", sender: item)
         }
+        func showWebPages() {
+            performSegue(withIdentifier: "pages", sender: item)
+        }
         let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { _,_ in delete() }
         let editAction = UITableViewRowAction(style: .normal, title: "Edit") { _,_ in edit() }
         editAction.backgroundColor = .blue
@@ -87,6 +90,8 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
             alertController.addAction(deleteAction2)
             let editAction2 = UIAlertAction(title: "Edit", style: .default) { _ in edit() }
             alertController.addAction(editAction2)
+            let showWebPagesAction = UIAlertAction(title: "Web Pages", style: .default) { _ in showWebPages() }
+            alertController.addAction(showWebPagesAction)
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
             alertController.addAction(cancelAction)
             self.present(alertController, animated: true) {}
@@ -110,6 +115,8 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
         if let controller = (segue.destination as? UINavigationController)?.topViewController as? PatternsDetailViewController {
             let item = segue.identifier == "add" ? vm.newPattern() : sender as! MPattern
             controller.startEdit(vm: vm, item: item)
+        } else if let controller = (segue.destination as? UINavigationController)?.topViewController as? PatternsWebPagesViewController {
+            controller.vm = vm
         }
     }
 
