@@ -928,9 +928,6 @@ Gw
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
-                                <connections>
-                                    <binding destination="tdj-xc-OeD" name="value" keyPath="item.ID" id="FgG-9Y-g6V"/>
-                                </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gxf-a6-XYz">
                                 <rect key="frame" x="18" y="233" width="78" height="16"/>
@@ -947,9 +944,6 @@ Gw
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
-                                <connections>
-                                    <binding destination="tdj-xc-OeD" name="value" keyPath="item.PATTERNID" id="DMt-dy-iiM"/>
-                                </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RUQ-Ws-DkD">
                                 <rect key="frame" x="18" y="200" width="65" height="16"/>
@@ -966,9 +960,6 @@ Gw
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
-                                <connections>
-                                    <binding destination="tdj-xc-OeD" name="value" keyPath="item.PATTERN" id="dVO-WT-Rg1"/>
-                                </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pVN-Xe-AwW">
                                 <rect key="frame" x="18" y="167" width="64" height="16"/>
@@ -985,9 +976,6 @@ Gw
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
-                                <connections>
-                                    <binding destination="tdj-xc-OeD" name="value" keyPath="item.SEQNUM" id="Yax-mE-tW8"/>
-                                </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jis-tA-nEv">
                                 <rect key="frame" x="18" y="134" width="83" height="16"/>
@@ -1004,9 +992,6 @@ Gw
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
-                                <connections>
-                                    <binding destination="tdj-xc-OeD" name="value" keyPath="item.WEBPAGEID" id="fQh-uA-NDY"/>
-                                </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="TSg-hU-sqy">
                                 <rect key="frame" x="18" y="101" width="43" height="16"/>
@@ -1023,9 +1008,6 @@ Gw
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
-                                <connections>
-                                    <binding destination="tdj-xc-OeD" name="value" keyPath="item.TITLE" id="4I5-Zg-jiF"/>
-                                </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ddq-11-iu3">
                                 <rect key="frame" x="18" y="68" width="34" height="16"/>
@@ -1042,9 +1024,6 @@ Gw
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
-                                <connections>
-                                    <binding destination="tdj-xc-OeD" name="value" keyPath="item.URL" id="awi-qy-Brf"/>
-                                </connections>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aOM-3V-2RO">
                                 <rect key="frame" x="244" y="13" width="59" height="32"/>
@@ -1149,6 +1128,7 @@ Gw
                     <connections>
                         <outlet property="btnExisting" destination="l86-89-CJF" id="LGj-RY-fjB"/>
                         <outlet property="btnNew" destination="Vn6-Tw-Myt" id="6t9-KZ-z1A"/>
+                        <outlet property="btnOK" destination="aOM-3V-2RO" id="a9b-cg-6zu"/>
                         <outlet property="tfID" destination="8gP-n9-hU2" id="BCj-Uz-ONK"/>
                         <outlet property="tfPattern" destination="Smo-K7-aUj" id="LWR-hD-Ka9"/>
                         <outlet property="tfPatternID" destination="GrY-IH-3v9" id="64U-vq-9Y2"/>

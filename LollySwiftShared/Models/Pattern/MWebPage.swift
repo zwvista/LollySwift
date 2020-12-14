@@ -17,7 +17,13 @@ class MWebPage: NSObject, Codable {
 
     override init() {
     }
-    
+
+    init(x: MPatternWebPage) {
+        ID = x.WEBPAGEID
+        TITLE = x.TITLE
+        URL = x.URL
+    }
+
     static func getDataById(_ id: Int) -> Observable<[MWebPage]> {
         // SQL: SELECT * FROM WEBPAGES WHERE ID=?
         let url = "\(CommonApi.urlAPI)WEBPAGES?filter=ID,eq,\(id)"
@@ -38,8 +44,22 @@ class MWebPage: NSObject, Codable {
         return RestApi.getRecords(url: url)
     }
 
+    static func update(item: MPatternWebPage) -> Observable<()> {
+        // SQL: UPDATE WEBPAGES SET TITLE=?, URL=? WHERE ID=?
+        let item2 = MWebPage(x: item)
+        let url = "\(CommonApi.urlAPI)WEBPAGES/\(item.ID)"
+        return RestApi.update(url: url, body: try! item2.toJSONString()!).map { print($0) }
+    }
+
+    static func create(item: MPatternWebPage) -> Observable<Int> {
+        // SQL: INSERT INTO WEBPAGES (TITLE, URL) VALUES (?,?)
+        let item2 = MWebPage(x: item)
+        let url = "\(CommonApi.urlAPI)WEBPAGES"
+        return RestApi.create(url: url, body: try! item2.toJSONString()!).map { $0.toInt()! }.do(onNext: { print($0) })
+    }
+
     static func update(item: MWebPage) -> Observable<()> {
-        // SQL: UPDATE WEBPAGES SET WEBPAGE=? WHERE ID=?
+        // SQL: UPDATE WEBPAGES SET TITLE=?, URL=? WHERE ID=?
         let url = "\(CommonApi.urlAPI)WEBPAGES/\(item.ID)"
         return RestApi.update(url: url, body: try! item.toJSONString()!).map { print($0) }
     }

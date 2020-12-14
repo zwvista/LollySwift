@@ -14,24 +14,23 @@ class PatternsWebPageEditViewModel: NSObject {
     var vm: PatternsViewModel!
     var item: MPatternWebPage!
     var itemEdit: MPatternWebPageEdit!
-    var isAdd: Bool!
+    var isAddPatternWebPage: Bool!
+    var isAddWebPage: Bool!
     var isOKEnabled = BehaviorRelay(value: false)
 
     init(vm: PatternsViewModel, item: MPatternWebPage) {
         self.vm = vm
         self.item = item
         itemEdit = MPatternWebPageEdit(x: item)
-        isAdd = item.WEBPAGEID == 0
-        _ = itemEdit.PATTERN.map { !$0.isEmpty } ~> isOKEnabled
+        isAddPatternWebPage = item.WEBPAGEID == 0
+        isAddWebPage = item.ID == 0
+        _ = Observable.zip(itemEdit.TITLE, itemEdit.URL) .map { !$0.0.isEmpty && !$0.1.isEmpty } ~> isOKEnabled
     }
     
     func onOK() -> Observable<()> {
         itemEdit.save(to: item)
-        if isAdd {
-            vm.arrWebPages.append(item)
-            return PatternsViewModel.createWebPage(item: item)
-        } else {
-            return PatternsViewModel.updateWebPage(item: item)
+        return (isAddPatternWebPage ? PatternsViewModel.createWebPage(item: item) : PatternsViewModel.updateWebPage(item: item)).flatMap {
+            self.isAddWebPage ? PatternsViewModel.createPatternWebPage(item: self.item) : PatternsViewModel.updatePatternWebPage(item: self.item)
         }
     }
 }

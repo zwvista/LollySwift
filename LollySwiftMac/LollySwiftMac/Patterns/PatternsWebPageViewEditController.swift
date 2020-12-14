@@ -14,9 +14,10 @@ import NSObject_Rx
 class PatternsWebPageEditViewController: NSViewController {
     
     var vm: PatternsViewModel!
+    var vmEdit: PatternsWebPageEditViewModel!
+    var itemEdit: MPatternWebPageEdit { vmEdit.itemEdit }
     var complete: (() -> Void)?
     var item: MPatternWebPage!
-    var isAdd: Bool!
 
     @IBOutlet weak var tfID: NSTextField!
     @IBOutlet weak var tfPatternID: NSTextField!
@@ -27,38 +28,37 @@ class PatternsWebPageEditViewController: NSViewController {
     @IBOutlet weak var tfURL: NSTextField!
     @IBOutlet weak var btnNew: NSButton!
     @IBOutlet weak var btnExisting: NSButton!
-    
+    @IBOutlet weak var btnOK: NSButton!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        isAdd = item.ID == 0
-        btnNew.isEnabled = isAdd
-        btnExisting.isEnabled = isAdd
+        vmEdit = PatternsWebPageEditViewModel(vm: vm, item: item)
+        _ = itemEdit.ID ~> tfID.rx.text.orEmpty
+        _ = itemEdit.PATTERNID <~> tfPatternID.rx.text.orEmpty
+        _ = itemEdit.PATTERN <~> tfPattern.rx.text.orEmpty
+        _ = itemEdit.SEQNUM <~> tfSeqNum.rx.text.orEmpty
+        _ = itemEdit.WEBPAGEID ~> tfWebPageID.rx.text.orEmpty
+        _ = itemEdit.TITLE <~> tfTitle.rx.text.orEmpty
+        _ = itemEdit.URL <~> tfURL.rx.text.orEmpty
+        btnNew.isEnabled = vmEdit.isAddWebPage
+        btnExisting.isEnabled = vmEdit.isAddWebPage
+        btnOK.rx.tap.flatMap { [unowned self] _ in
+            self.vmEdit.onOK()
+        }.subscribe { [unowned self] _ in
+            self.complete?()
+            self.dismiss(self.btnOK)
+        } ~ rx.disposeBag
     }
     
     override func viewDidAppear() {
         super.viewDidAppear()
         // https://stackoverflow.com/questions/24235815/cocoa-how-to-set-window-title-from-within-view-controller-in-swift
         tfTitle.becomeFirstResponder()
-        view.window?.title = isAdd ? "New Page" : item.TITLE
+        view.window?.title = vmEdit.isAddPatternWebPage ? "New Pattern Web Page" : item.TITLE
     }
 
-    @IBAction func okClicked(_ sender: AnyObject) {
-        // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
-        self.commitEditing()
-        if isAdd {
-            vm.arrWebPages.append(item)
-            PatternsViewModel.createWebPage(item: item).subscribe(onNext: {
-                self.complete?()
-            }) ~ rx.disposeBag
-        } else {
-            PatternsViewModel.updateWebPage(item: item).subscribe(onNext: {
-                self.complete?()
-            }) ~ rx.disposeBag
-        }
-        dismiss(sender)
-    }
     @IBAction func newWebPageID(_ sender: Any) {
-        tfWebPageID.stringValue = "0"
+        itemEdit.WEBPAGEID.accept("0")
     }
     
     @IBAction func existingWebPageID(_ sender: Any) {
@@ -66,9 +66,9 @@ class PatternsWebPageEditViewController: NSViewController {
         webPageVC.vm = vm
         webPageVC.complete = {
             let o = webPageVC.vmWebPage.selectedWebPage!
-            self.item.WEBPAGEID = o.ID
-            self.item.TITLE = o.TITLE
-            self.item.URL = o.URL
+            self.itemEdit.WEBPAGEID.accept(o.ID.toString)
+            self.itemEdit.TITLE.accept(o.TITLE)
+            self.itemEdit.URL.accept(o.URL)
         }
         self.presentAsModalWindow(webPageVC)
     }
