@@ -8,6 +8,7 @@
 
 import Foundation
 import RxSwift
+import RxRelay
 
 @objcMembers
 class MPatternWebPage: NSObject, Codable {
@@ -67,5 +68,42 @@ class MPatternWebPage: NSObject, Codable {
         // SQL: DELETE PATTERNSWEBPAGES WHERE ID=?
         let url = "\(CommonApi.urlAPI)PATTERNSWEBPAGES/\(id)"
         return RestApi.delete(url: url).map { print($0) }
+    }
+}
+
+class MPatternWebPageEdit {
+    var ID: BehaviorRelay<String>
+    var PATTERNID: BehaviorRelay<String>
+    var PATTERN: BehaviorRelay<String>
+    var SEQNUM: BehaviorRelay<String>
+    var WEBPAGEID: BehaviorRelay<String>
+    var TITLE: BehaviorRelay<String>
+    var URL: BehaviorRelay<String>
+    
+    init() {
+        ID = BehaviorRelay(value: "")
+        PATTERNID = BehaviorRelay(value: "")
+        PATTERN = BehaviorRelay(value: "")
+        SEQNUM = BehaviorRelay(value: "")
+        WEBPAGEID = BehaviorRelay(value: "")
+        TITLE = BehaviorRelay(value: "")
+        URL = BehaviorRelay(value: "")
+    }
+
+    init(x: MPatternWebPage) {
+        ID = BehaviorRelay(value: x.ID.toString)
+        PATTERNID = BehaviorRelay(value: x.PATTERNID.toString)
+        PATTERN = BehaviorRelay(value: x.PATTERN)
+        SEQNUM = BehaviorRelay(value: x.SEQNUM.toString)
+        WEBPAGEID = BehaviorRelay(value: x.WEBPAGEID.toString)
+        TITLE = BehaviorRelay(value: x.TITLE)
+        URL = BehaviorRelay(value: x.URL)
+    }
+    
+    func save(to x: MPatternWebPage) {
+        x.SEQNUM = SEQNUM.value.toInt()!
+        x.WEBPAGEID = WEBPAGEID.value.toInt()!
+        x.TITLE = TITLE.value
+        x.URL = URL.value
     }
 }

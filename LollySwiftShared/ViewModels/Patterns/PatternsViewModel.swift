@@ -68,8 +68,10 @@ class PatternsViewModel: NSObject {
         MPatternWebPage.update(item: item)
     }
 
-    static func createWebPage(item: MPatternWebPage) -> Observable<Int> {
-        MPatternWebPage.create(item: item)
+    static func createWebPage(item: MPatternWebPage) -> Observable<()> {
+        MPatternWebPage.create(item: item).map {
+            item.WEBPAGEID = $0
+        }
     }
     
     static func deleteWebPage(_ id: Int) -> Observable<()> {

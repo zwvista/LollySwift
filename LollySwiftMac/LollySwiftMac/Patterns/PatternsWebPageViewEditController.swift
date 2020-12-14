@@ -1,5 +1,5 @@
 //
-//  PatternsWebPageViewController.swift
+//  PatternsWebPageEditViewController.swift
 //  LollySwiftMac
 //
 //  Created by 趙偉 on 2020/01/01.
@@ -11,7 +11,7 @@ import RxSwift
 import NSObject_Rx
 
 @objcMembers
-class PatternsWebPageViewController: NSViewController {
+class PatternsWebPageEditViewController: NSViewController {
     
     var vm: PatternsViewModel!
     var complete: (() -> Void)?
@@ -48,7 +48,6 @@ class PatternsWebPageViewController: NSViewController {
         if isAdd {
             vm.arrWebPages.append(item)
             PatternsViewModel.createWebPage(item: item).subscribe(onNext: {
-                self.item.ID = $0
                 self.complete?()
             }) ~ rx.disposeBag
         } else {
