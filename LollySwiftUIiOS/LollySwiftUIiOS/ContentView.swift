@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var text = ""
     var body: some View {
-        Text("Hello, world!")
+        SearchBar(text: $text, placeholder: "Word") {_ in }
             .padding()
     }
 }

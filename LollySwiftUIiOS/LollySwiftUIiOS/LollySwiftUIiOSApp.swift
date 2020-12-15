@@ -31,7 +31,7 @@ struct LollySwiftUIiOSApp: App {
     static func speak(string: String) {
         let utterance = AVSpeechUtterance(string: string)
         utterance.voice = AVSpeechSynthesisVoice(identifier: vmSettings.selectediOSVoice.VOICENAME)
-        AppDelegate.synth.speak(utterance)
+        LollySwiftUIiOSApp.synth.speak(utterance)
     }
 }
 
