@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// https://qiita.com/murao24/items/d4acd2343acf87ac8a33
 struct SearchBar: UIViewRepresentable {
     @Binding var text: String
     var placeholder: String

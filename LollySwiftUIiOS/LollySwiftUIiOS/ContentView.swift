@@ -10,8 +10,16 @@ import SwiftUI
 struct ContentView: View {
     @State var text = ""
     var body: some View {
-        SearchBar(text: $text, placeholder: "Word") {_ in }
-            .padding()
+        VStack {
+            SearchBar(text: $text, placeholder: "Word") {_ in }
+                .padding()
+            WebView(req: ContentView.makeURLRequest())
+        }
+    }
+
+    static func makeURLRequest() -> URLRequest {
+        let request = URLRequest(url: URL(string: "https://www.google.co.jp")!)
+        return request
     }
 }
 
