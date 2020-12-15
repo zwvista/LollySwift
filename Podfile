@@ -55,6 +55,36 @@ pod 'EZSwiftExtensions'
 pod 'CrossroadRegex'
 end
 
+target 'LollySwiftUIiOS' do
+platform :ios, '13.6'
+project 'LollySwiftUIiOS/LollySwiftUIiOS'
+pod 'CodableAlamofire'
+pod 'RxAlamofire'
+pod 'EZSwiftExtensions'
+pod 'RxCocoa'
+pod 'NSObject+Rx'
+pod 'RxSwiftExt', '~> 5'
+pod 'RxDataSources'
+pod 'DropDown'
+pod 'AKSideMenu'
+pod 'CrossroadRegex'
+end
+
+target 'LollySwiftUIiOSTests' do
+platform :ios, '13.6'
+project 'LollySwiftUIiOS/LollySwiftUIiOS'
+pod 'CodableAlamofire'
+pod 'RxAlamofire'
+pod 'EZSwiftExtensions'
+pod 'RxCocoa'
+pod 'NSObject+Rx'
+pod 'RxSwiftExt', '~> 5'
+pod 'RxDataSources'
+pod 'DropDown'
+pod 'AKSideMenu'
+pod 'CrossroadRegex'
+end
+
 target 'LollySwiftUIMac' do
 platform :osx, '10.15'
 project 'LollySwiftUIMac/LollySwiftUIMac'
