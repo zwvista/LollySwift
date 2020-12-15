@@ -105,7 +105,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="7oO-l3-tjY">
                             <connections>
-                                <segue destination="tNP-bw-tcR" kind="presentation" identifier="add" id="wYg-5a-uIy"/>
+                                <segue destination="jxH-Re-jyk" kind="presentation" identifier="add" id="XXt-Pm-Ua7"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -161,11 +161,18 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Pattern Web Pages" id="rlz-6y-dYZ">
-                        <barButtonItem key="rightBarButtonItem" title="Edit" id="D5B-ZZ-nfW">
-                            <connections>
-                                <segue destination="tNP-bw-tcR" kind="presentation" id="qu2-hw-ubW"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="DlY-E3-bgG">
+                                <connections>
+                                    <segue destination="tNP-bw-tcR" kind="presentation" identifier="add" id="1zN-sM-V9H"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Edit" id="D5B-ZZ-nfW">
+                                <connections>
+                                    <segue destination="tNP-bw-tcR" kind="presentation" identifier="edit" id="qu2-hw-ubW"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -191,7 +198,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Yy-wu-C41" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="662" y="599"/>
+            <point key="canvasLocation" x="1639" y="-233"/>
         </scene>
         <!--Patterns in Language (Edit)-->
         <scene sceneID="xUX-t2-jdX">
@@ -363,7 +370,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JKf-M6-U7X" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="lru-2d-WIP" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1497" y="599"/>
+            <point key="canvasLocation" x="2474" y="-233"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ezp-hX-h5f">
@@ -379,7 +386,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u7K-kW-pYn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="662" y="-233"/>
+            <point key="canvasLocation" x="1632" y="-944"/>
         </scene>
         <!--Patterns Web Page (Edit)-->
         <scene sceneID="Hbe-6T-4I2">
@@ -664,11 +671,12 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pkg-Si-xoO" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Uba-OZ-YoZ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1504" y="-233"/>
+            <point key="canvasLocation" x="2474" y="-944"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="qu2-hw-ubW"/>
+        <segue reference="1zN-sM-V9H"/>
+        <segue reference="XXt-Pm-Ua7"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="MenuButton" width="25" height="13"/>
