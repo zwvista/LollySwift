@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    static let synth = AVSpeechSynthesizer()
+    private static let synth = AVSpeechSynthesizer()
     private static let _initializeObject = ReplaySubject<()>.create(bufferSize: 1)
     static var initializeObject: ReplaySubject<()> { _initializeObject }
 
@@ -59,4 +59,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
-var vmSettings = SettingsViewModel()
+let vmSettings = SettingsViewModel()
