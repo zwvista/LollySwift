@@ -114,29 +114,12 @@
                         <outlet property="sbTextFilter" destination="1D0-3n-VX2" id="cQw-q4-073"/>
                         <outlet property="tableView" destination="QsG-w8-IST" id="raC-sW-gQU"/>
                         <segue destination="jxH-Re-jyk" kind="presentation" identifier="edit" id="AWN-1D-kqT"/>
-                        <segue destination="fhO-BY-xb8" kind="show" identifier="pages" id="zPC-5o-gFQ"/>
+                        <segue destination="cXB-gx-cf6" kind="show" identifier="pages" id="bJI-Er-aEr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0f6-eh-sBq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-167" y="-233"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="cap-w6-XvN">
-            <objects>
-                <navigationController id="fhO-BY-xb8" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="hao-nN-ex0"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="WD2-TH-9Na">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="cXB-gx-cf6" kind="relationship" relationship="rootViewController" id="430-2r-BTz"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="35Q-vy-rAm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="602" y="-916"/>
         </scene>
         <!--Pattern Web Pages-->
         <scene sceneID="glL-wo-Ytn">
@@ -160,7 +143,7 @@
                                 </connections>
                             </button>
                             <view multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qdr-K4-ce8">
-                                <rect key="frame" x="0.0" y="106" width="414" height="653"/>
+                                <rect key="frame" x="0.0" y="152" width="414" height="661"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                         </subviews>
@@ -178,11 +161,6 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Pattern Web Pages" id="rlz-6y-dYZ">
-                        <barButtonItem key="leftBarButtonItem" title="Left" image="MenuButton" id="9fi-kC-cKk">
-                            <connections>
-                                <action selector="presentLeftMenuViewController:" destination="Hw5-bZ-rry" id="y5O-Qz-HSc"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="aDL-YJ-PQP">
                             <connections>
                                 <segue destination="tNP-bw-tcR" kind="presentation" id="gHR-O2-wlD"/>
@@ -197,7 +175,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hw5-bZ-rry" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1453.6231884057972" y="-916.07142857142856"/>
+            <point key="canvasLocation" x="619" y="-944"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="4wz-Ar-5sf">
@@ -401,7 +379,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u7K-kW-pYn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2372" y="-916"/>
+            <point key="canvasLocation" x="1536" y="-944"/>
         </scene>
         <!--Patterns Web Page (Edit)-->
         <scene sceneID="Hbe-6T-4I2">
@@ -686,7 +664,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pkg-Si-xoO" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Uba-OZ-YoZ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3214" y="-916"/>
+            <point key="canvasLocation" x="2378" y="-944"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

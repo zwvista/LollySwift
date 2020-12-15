@@ -32,7 +32,7 @@ class PatternsWebPageEditViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        vmEdit = PatternsWebPageEditViewModel(vm: vm, item: item)
+        vmEdit = PatternsWebPageEditViewModel(item: item)
         _ = itemEdit.ID ~> tfID.rx.text.orEmpty
         _ = itemEdit.PATTERNID <~> tfPatternID.rx.text.orEmpty
         _ = itemEdit.PATTERN <~> tfPattern.rx.text.orEmpty

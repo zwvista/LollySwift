@@ -13,6 +13,9 @@ class PatternsViewModel: NSObject {
     var vmSettings: SettingsViewModel
     var arrPatterns = [MPattern]()
     var arrPatternsFiltered: [MPattern]?
+    var selectedPatternItem: MPattern?
+    var selectedPattern: String { selectedPatternItem?.PATTERN ?? "" }
+    var selectedPatternID: Int { selectedPatternItem?.ID ?? 0 }
     var arrWebPages = [MPatternWebPage]()
     var currentWebPageIndex = 0
     var currentWebPageTitle: String { arrWebPages[currentWebPageIndex].TITLE }
@@ -63,8 +66,8 @@ class PatternsViewModel: NSObject {
         return item
     }
     
-    func getWebPages(patternid: Int) -> Observable<()> {
-        MPatternWebPage.getDataByPattern(patternid).map {
+    func getWebPages() -> Observable<()> {
+        MPatternWebPage.getDataByPattern(selectedPatternID).map {
             self.arrWebPages = $0
         }
     }
@@ -93,10 +96,10 @@ class PatternsViewModel: NSObject {
         MPatternWebPage.delete(id)
     }
     
-    func newPatternWebPage(patternid: Int, pattern: String) -> MPatternWebPage {
+    func newPatternWebPage() -> MPatternWebPage {
         let item = MPatternWebPage()
-        item.PATTERNID = patternid
-        item.PATTERN = pattern
+        item.PATTERNID = selectedPatternID
+        item.PATTERN = selectedPattern
         item.SEQNUM = (arrWebPages.max { $0.SEQNUM < $1.SEQNUM }?.SEQNUM ?? 0) + 1
         return item
     }

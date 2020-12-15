@@ -24,8 +24,6 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     var vm: PatternsViewModel!
     @objc var newPattern = ""
     @objc var textFilter = ""
-    var selectedPattern = ""
-    var selectedPatternID = 0
     let synth = NSSpeechSynthesizer()
     var isSpeaking = true
     var vmSettings: SettingsViewModel! { vm.vmSettings }
@@ -108,16 +106,12 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
         if tv === tvPatterns {
             updateStatusText()
             let row = tvPatterns.selectedRow
+            vm.selectedPatternItem = row == -1 ? nil : arrPatterns[row]
             if row == -1 {
-                selectedPattern = ""
-                selectedPatternID = 0
                 vm.arrWebPages = []
                 tvWebPages.reloadData()
             } else {
-                let item = arrPatterns[row]
-                selectedPattern = item.PATTERN
-                selectedPatternID = item.ID
-                vm.getWebPages(patternid: selectedPatternID).subscribe(onNext: {
+                vm.getWebPages().subscribe(onNext: {
                     self.tvWebPages.reloadData()
                     if self.tvWebPages.numberOfRows > 0 {
                         self.tvWebPages.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
@@ -145,20 +139,20 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     // https://stackoverflow.com/questions/8017822/how-to-enable-disable-nstoolbaritem
     func validateToolbarItem(_ item: NSToolbarItem) -> Bool {
         let s = item.paletteLabel
-        let enabled = !(s == "Add WebPage" && selectedPatternID == 0)
+        let enabled = !(s == "Add WebPage" && vm.selectedPatternID == 0)
         return enabled
     }
 
     @IBAction func copyPattern(_ sender: AnyObject) {
-        MacApi.copyText(selectedPattern)
+        MacApi.copyText(vm.selectedPattern)
     }
     
     @IBAction func googlePattern(_ sender: AnyObject) {
-        MacApi.googleString(selectedPattern)
+        MacApi.googleString(vm.selectedPattern)
     }
     
     @IBAction func speak(_ sender: AnyObject) {
-        synth.startSpeaking(selectedPattern)
+        synth.startSpeaking(vm.selectedPattern)
     }
     
     @IBAction func isSpeakingChanged(_ sender: AnyObject) {
@@ -208,7 +202,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     @IBAction func addWebPage(_ sender: AnyObject) {
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "PatternsWebPageEditViewController") as! PatternsWebPageEditViewController
         detailVC.vm = vm
-        detailVC.item = vm.newPatternWebPage(patternid: selectedPatternID, pattern: selectedPattern)
+        detailVC.item = vm.newPatternWebPage()
         detailVC.complete = { self.tvWebPages.reloadData(); self.addWebPage(self) }
         self.presentAsSheet(detailVC)
     }
