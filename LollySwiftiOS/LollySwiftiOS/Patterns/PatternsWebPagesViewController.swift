@@ -47,10 +47,10 @@ class PatternsWebPagesViewController: UIViewController, WKUIDelegate, WKNavigati
     }
     
     private func currentWebPageChanged() {
-        AppDelegate.speak(string: vm.currentWebPageTitle)
-        btnWebPage.setTitle(vm.currentWebPageTitle, for: .normal)
-        navigationItem.title = vm.currentWebPageTitle
-        wvWebPage.load(URLRequest(url: URL(string: vm.currentWebPageURL)!))
+        AppDelegate.speak(string: vm.currentWebPage.TITLE)
+        btnWebPage.setTitle(vm.currentWebPage.TITLE, for: .normal)
+        navigationItem.title = vm.currentWebPage.TITLE
+        wvWebPage.load(URLRequest(url: URL(string: vm.currentWebPage.URL)!))
     }
     
     @IBAction func showWebPageDropDown(_ sender: AnyObject) {
@@ -63,7 +63,7 @@ class PatternsWebPagesViewController: UIViewController, WKUIDelegate, WKNavigati
     
     private func swipe(_ delta: Int) {
         vm.next(delta)
-        ddWebPage.selectionAction!(vm.currentWebPageIndex, vm.currentWebPageTitle)
+        ddWebPage.selectionAction!(vm.currentWebPageIndex, vm.currentWebPage.TITLE)
     }
     
     @IBAction func swipeLeft(_ sender: UISwipeGestureRecognizer){
@@ -72,6 +72,22 @@ class PatternsWebPagesViewController: UIViewController, WKUIDelegate, WKNavigati
     
     @IBAction func swipeRight(_ sender: UISwipeGestureRecognizer){
         swipe(1)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        if let controller = (segue.destination as? UINavigationController)?.topViewController as? PatternsWebPageEditViewController {
+            let item = segue.identifier == "add" ? vm.newPatternWebPage() : vm.currentWebPage
+            controller.startEdit(item: item)
+        }
+    }
+
+    @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
+        guard segue.identifier == "Done" else {return}
+        if let controller = segue.source as? PatternsWebPageEditViewController {
+            controller.vmEdit.onOK().subscribe(onNext: {
+            }) ~ rx.disposeBag
+        }
     }
 
 }

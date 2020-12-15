@@ -18,8 +18,7 @@ class PatternsViewModel: NSObject {
     var selectedPatternID: Int { selectedPatternItem?.ID ?? 0 }
     var arrWebPages = [MPatternWebPage]()
     var currentWebPageIndex = 0
-    var currentWebPageTitle: String { arrWebPages[currentWebPageIndex].TITLE }
-    var currentWebPageURL: String { arrWebPages[currentWebPageIndex].URL }
+    var currentWebPage: MPatternWebPage { arrWebPages[currentWebPageIndex] }
     func next(_ delta: Int) {
         currentWebPageIndex = (currentWebPageIndex + delta + arrWebPages.count) % arrWebPages.count
     }
