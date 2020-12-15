@@ -34,19 +34,23 @@ class PatternsWebPagesViewController: UIViewController, WKUIDelegate, WKNavigati
         swipeGesture2.delegate = self
         wvWebPage.addGestureRecognizer(swipeGesture2)
 
-        ddWebPage.anchorView = btnWebPage
-        ddWebPage.dataSource = vm.arrWebPages.map { $0.TITLE }
-        ddWebPage.selectRow(vm.currentWebPageIndex)
-        ddWebPage.selectionAction = { [unowned self] (index: Int, item: String) in
-            self.vm.currentWebPageIndex = index
+        vm.getWebPages().subscribe(onNext: {
+            self.ddWebPage.anchorView = self.btnWebPage
+            self.ddWebPage.dataSource = self.vm.arrWebPages.map { $0.TITLE }
+            self.ddWebPage.selectRow(self.vm.currentWebPageIndex)
+            self.ddWebPage.selectionAction = { [unowned self] (index: Int, item: String) in
+                self.vm.currentWebPageIndex = index
+                self.currentWebPageChanged()
+            }
             self.currentWebPageChanged()
-        }
+        }) ~ rx.disposeBag
     }
     
     private func currentWebPageChanged() {
         AppDelegate.speak(string: vm.currentWebPageTitle)
         btnWebPage.setTitle(vm.currentWebPageTitle, for: .normal)
         navigationItem.title = vm.currentWebPageTitle
+        wvWebPage.load(URLRequest(url: URL(string: vm.currentWebPageURL)!))
     }
     
     @IBAction func showWebPageDropDown(_ sender: AnyObject) {

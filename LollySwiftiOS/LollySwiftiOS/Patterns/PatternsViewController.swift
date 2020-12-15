@@ -59,8 +59,8 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let item = arrPatterns[indexPath.row]
-        AppDelegate.speak(string: item.PATTERN)
+        vm.selectedPatternItem = arrPatterns[indexPath.row]
+        AppDelegate.speak(string: vm.selectedPatternItem!.PATTERN)
     }
 
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
@@ -115,7 +115,7 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
         if let controller = (segue.destination as? UINavigationController)?.topViewController as? PatternsDetailViewController {
             let item = segue.identifier == "add" ? vm.newPattern() : sender as! MPattern
             controller.startEdit(vm: vm, item: item)
-        } else if let controller = (segue.destination as? UINavigationController)?.topViewController as? PatternsWebPagesViewController {
+        } else if let controller = segue.destination as? PatternsWebPagesViewController {
             controller.vm = vm
         }
     }
