@@ -55,6 +55,7 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
         let cell = tableView.dequeueReusableCell(withIdentifier: "PatternCell", for: indexPath) as! PatternsCell
         let item = arrPatterns[indexPath.row]
         cell.lblPattern.text = item.PATTERN
+        cell.lblTags.text = item.TAGS
         return cell
     }
     
@@ -147,4 +148,5 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
 
 class PatternsCell: UITableViewCell {
     @IBOutlet weak var lblPattern: UILabel!
+    @IBOutlet weak var lblTags: UILabel!
 }

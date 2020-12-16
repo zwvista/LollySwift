@@ -47,24 +47,38 @@
                                 <rect key="frame" x="0.0" y="144" width="414" height="718"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailButton" indentationWidth="10" reuseIdentifier="PatternCell" id="ApK-pc-Bel" customClass="PatternsCell" customModule="LollySwiftiOS" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="detailButton" indentationWidth="10" reuseIdentifier="PatternCell" rowHeight="88" id="xs4-Ig-sDC" customClass="PatternsCell" customModule="LollySwiftiOS" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="88"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ApK-pc-Bel" id="uJJ-ee-Ape">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xs4-Ig-sDC" id="aS8-z1-aQ5">
                                             <rect key="frame" x="0.0" y="0.0" width="370" height="88"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eeK-0E-zL2">
-                                                    <rect key="frame" x="25" y="6" width="363" height="71"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KRY-Hb-cCO">
+                                                    <rect key="frame" x="20" y="10" width="350" height="24"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uCP-hh-jfu">
+                                                    <rect key="frame" x="20" y="54" width="350" height="24"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                    <color key="textColor" red="1" green="0.2527923882" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="leadingMargin" secondItem="KRY-Hb-cCO" secondAttribute="leading" id="5A7-dr-ZV5"/>
+                                                <constraint firstAttribute="trailing" secondItem="KRY-Hb-cCO" secondAttribute="trailing" id="Cvc-nV-1Xi"/>
+                                                <constraint firstItem="uCP-hh-jfu" firstAttribute="centerY" secondItem="aS8-z1-aQ5" secondAttribute="centerY" multiplier="3:2" id="EhF-j0-mcq"/>
+                                                <constraint firstItem="uCP-hh-jfu" firstAttribute="leading" secondItem="aS8-z1-aQ5" secondAttribute="leadingMargin" id="IdG-Rp-IuS"/>
+                                                <constraint firstItem="KRY-Hb-cCO" firstAttribute="centerY" secondItem="aS8-z1-aQ5" secondAttribute="centerY" multiplier="1:2" id="jxC-lV-Osq"/>
+                                                <constraint firstAttribute="trailing" secondItem="uCP-hh-jfu" secondAttribute="trailing" id="pbo-Vp-ZgS"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="lblPattern" destination="eeK-0E-zL2" id="dWV-3F-vgg"/>
+                                            <outlet property="lblPattern" destination="KRY-Hb-cCO" id="4Bq-Fy-WQ5"/>
+                                            <outlet property="lblTags" destination="uCP-hh-jfu" id="fu6-og-NXf"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
