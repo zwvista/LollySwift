@@ -35,10 +35,10 @@ class WebPageSelectViewController: UIViewController, UITableViewDelegate, UITabl
             switch indexPath.row {
             case 0:
                 tfTitle = cell.tf
-                _ = vmWebPage.title ~> tfTitle.rx.text.orEmpty
+                _ = vmWebPage.title <~> tfTitle.rx.text.orEmpty
             case 1:
                 tfURL = cell.tf
-                _ = vmWebPage.url ~> tfURL.rx.text.orEmpty
+                _ = vmWebPage.url <~> tfURL.rx.text.orEmpty
             default: break
             }
         } else {

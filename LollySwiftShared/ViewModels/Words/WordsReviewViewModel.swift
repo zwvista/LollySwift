@@ -86,7 +86,7 @@ class WordsReviewViewModel: NSObject {
                 if self.options.shuffled { self.arrWords = self.arrWords.shuffled() }
                 f()
                 if self.options.mode == .reviewAuto {
-                    self.subscription = Observable<Int>.interval(DispatchTimeInterval.seconds( self.options.interval), scheduler: MainScheduler.instance).subscribe { _ in
+                    self.subscription = Observable<Int>.interval(.seconds( self.options.interval), scheduler: MainScheduler.instance).subscribe { _ in
                         self.check()
                     }
                     self.subscription?.disposed(by: self.rx.disposeBag)

@@ -509,7 +509,7 @@ class SettingsViewModel: NSObject {
         guard hasDictNote else {return}
         var i = 0
         var subscription: Disposable?
-        subscription = Observable<Int>.interval(DispatchTimeInterval.milliseconds(selectedDictNote.WAIT), scheduler: MainScheduler.instance).subscribe { _ in
+        subscription = Observable<Int>.interval(.milliseconds(selectedDictNote.WAIT), scheduler: MainScheduler.instance).subscribe { _ in
                 while i < wordCount && !isNoteEmpty(i) {
                     i += 1
                 }
