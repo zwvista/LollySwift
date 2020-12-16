@@ -61,7 +61,6 @@ class WordsDictViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
     private func currentWordChanged() {
         AppDelegate.speak(string: vm.currentWord)
         btnWord.setTitle(vm.currentWord, for: .normal)
-        navigationItem.title = vm.currentWord
         selectDictChanged()
     }
     

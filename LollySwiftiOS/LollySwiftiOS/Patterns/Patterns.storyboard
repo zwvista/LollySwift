@@ -125,7 +125,7 @@
         <!--Pattern Web Pages (Browse)-->
         <scene sceneID="glL-wo-Ytn">
             <objects>
-                <viewController storyboardIdentifier="PatternsWebPagesBrowseViewController" id="cXB-gx-cf6" customClass="PatternsWebPagesBrowseViewController" sceneMemberID="viewController">
+                <viewController id="cXB-gx-cf6" customClass="PatternsWebPagesBrowseViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Acn-mT-ao0">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -140,7 +140,7 @@
                                     <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="showWebPageDropDown:" destination="cXB-gx-cf6" eventType="touchUpInside" id="lVf-Cg-wnW"/>
+                                    <action selector="showWebPageDropDown:" destination="cXB-gx-cf6" eventType="touchUpInside" id="S5I-R5-hya"/>
                                 </connections>
                             </button>
                             <view multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qdr-K4-ce8">
@@ -164,7 +164,7 @@
                     <navigationItem key="navigationItem" title="Pattern Web Pages (Browse)" id="rlz-6y-dYZ"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="btnWebPage" destination="mHp-X4-uv4" id="rvP-33-W65"/>
+                        <outlet property="btnWebPage" destination="mHp-X4-uv4" id="I3z-L0-Xjq"/>
                         <outlet property="wvWebPageHolder" destination="qdr-K4-ce8" id="zbA-34-teA"/>
                     </connections>
                 </viewController>
@@ -930,7 +930,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="B1n-eS-jTf"/>
+        <segue reference="Iee-Ji-JgU"/>
         <segue reference="XXt-Pm-Ua7"/>
     </inferredMetricsTieBreakers>
     <resources>

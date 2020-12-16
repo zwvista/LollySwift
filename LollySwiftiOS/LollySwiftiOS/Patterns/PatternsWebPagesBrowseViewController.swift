@@ -48,7 +48,6 @@ class PatternsWebPagesBrowseViewController: UIViewController, WKUIDelegate, WKNa
     
     private func currentWebPageChanged() {
         AppDelegate.speak(string: vm.currentWebPage.TITLE)
-        btnWebPage.setTitle(vm.currentWebPage.TITLE, for: .normal)
         navigationItem.title = vm.currentWebPage.TITLE
         wvWebPage.load(URLRequest(url: URL(string: vm.currentWebPage.URL)!))
     }
