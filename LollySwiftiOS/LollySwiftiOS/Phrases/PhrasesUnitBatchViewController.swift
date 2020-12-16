@@ -13,6 +13,8 @@ import NSObject_Rx
 
 class PhrasesUnitBatchViewController: UITableViewController, UITextFieldDelegate {
 
+    @IBOutlet weak var tvActions: UITableView!
+    @IBOutlet weak var tvPhrases: UITableView!
     @IBOutlet weak var swUnit: UISwitch!
     @IBOutlet weak var tfUnit: UITextField!
     @IBOutlet weak var swPart: UISwitch!
@@ -52,7 +54,7 @@ class PhrasesUnitBatchViewController: UITableViewController, UITextFieldDelegate
         let part = vmSettings.arrParts[ddPart.indexForSelectedRow!].value
         let seqnum = tfSeqNum.text?.toInt() ?? 0
         for i in 0..<vm.arrPhrases.count {
-            let cell = tableView.cellForRow(at: IndexPath(row: i, section: 1))!
+            let cell = tvPhrases.cellForRow(at: IndexPath(row: i, section: 0))!
             guard cell.accessoryType == .checkmark else {continue}
             let item = vm.arrPhrases[i]
             if swUnit.isOn || swPart.isOn || swSeqNum.isOn {
@@ -65,22 +67,18 @@ class PhrasesUnitBatchViewController: UITableViewController, UITextFieldDelegate
         o.subscribe() ~ rx.disposeBag
     }
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        2
-    }
-    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        section == 0 ? 3 : vm.arrPhrases.count
+        tableView === tvActions ? 3 : vm.arrPhrases.count
     }
     
 //    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        indexPath.section == 0 ? UITableView.automaticDimension : 88
+//        tableView === tvActions ? UITableView.automaticDimension : 88
 //    }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let identifier = "PhraseCell" + (indexPath.section == 0 ? "0\(indexPath.row)" : "10")
+        let identifier = "PhraseCell" + (tableView === tvActions ? "0\(indexPath.row)" : "10")
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! PhrasesUnitBatchCell
-        if indexPath.section == 0 {
+        if tableView === tvActions {
             switch indexPath.row {
             case 0:
                 tfUnit = cell.tf
@@ -117,7 +115,7 @@ class PhrasesUnitBatchViewController: UITableViewController, UITextFieldDelegate
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard indexPath.section == 1 else {return}
+        guard tableView === tvPhrases else {return}
         let cell = tableView.cellForRow(at: indexPath)!
         cell.accessoryType = cell.accessoryType == .none ? .checkmark : .none
     }

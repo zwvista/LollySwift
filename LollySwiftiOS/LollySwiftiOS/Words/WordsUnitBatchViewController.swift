@@ -55,7 +55,7 @@ class WordsUnitBatchViewController: UIViewController, UITableViewDelegate, UITab
         let part = vmSettings.arrParts[ddPart.indexForSelectedRow!].value
         let seqnum = tfSeqNum.text?.toInt() ?? 0
         for i in 0..<vm.arrWords.count {
-            let cell = tvWords.cellForRow(at: IndexPath(row: i, section: 1))!
+            let cell = tvWords.cellForRow(at: IndexPath(row: i, section: 0))!
             guard cell.accessoryType == .checkmark else {continue}
             let item = vm.arrWords[i]
             if swUnit.isOn || swPart.isOn || swSeqNum.isOn {
