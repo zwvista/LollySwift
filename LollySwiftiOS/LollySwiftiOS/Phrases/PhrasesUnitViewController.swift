@@ -46,14 +46,8 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
     }
 
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        let item = vm.arrPhrases[(sourceIndexPath as NSIndexPath).row]
-        vm.arrPhrases.remove(at: (sourceIndexPath as NSIndexPath).row)
-        vm.arrPhrases.insert(item, at: (destinationIndexPath as NSIndexPath).row)
-        tableView.beginUpdates()
-        vm.reindex {
-            tableView.reloadRows(at: [IndexPath(row: $0, section: 0)], with: .fade)
-        }
-        tableView.endUpdates()
+        vm.arrPhrases.moveElement(at: sourceIndexPath.row, to: destinationIndexPath.row)
+        reindex()
     }
 
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {

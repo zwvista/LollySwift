@@ -1,5 +1,5 @@
 //
-//  PatternsWebPagesViewController.swift
+//  PatternsWebPagesBrowseViewController.swift
 //  LollySwiftiOS
 //
 //  Created by 趙偉 on 2016/06/23.
@@ -12,7 +12,7 @@ import DropDown
 import RxSwift
 import NSObject_Rx
 
-class PatternsWebPagesViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, UIGestureRecognizerDelegate {
+class PatternsWebPagesBrowseViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, UIGestureRecognizerDelegate {
 
     @IBOutlet weak var wvWebPageHolder: UIView!
     @IBOutlet weak var btnWebPage: UIButton!

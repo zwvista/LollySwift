@@ -114,8 +114,8 @@
                         <outlet property="sbTextFilter" destination="1D0-3n-VX2" id="cQw-q4-073"/>
                         <outlet property="tableView" destination="QsG-w8-IST" id="raC-sW-gQU"/>
                         <segue destination="jxH-Re-jyk" kind="presentation" identifier="edit" id="AWN-1D-kqT"/>
-                        <segue destination="cXB-gx-cf6" kind="show" identifier="browse" id="bJI-Er-aEr"/>
-                        <segue destination="S8R-dj-RvU" kind="show" id="G7U-K4-A6o"/>
+                        <segue destination="cXB-gx-cf6" kind="show" identifier="browse pages" id="bJI-Er-aEr"/>
+                        <segue destination="S8R-dj-RvU" kind="show" identifier="edit pages" id="G7U-K4-A6o"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0f6-eh-sBq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -423,10 +423,22 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Patterns Web Pages (Edit)" id="eVZ-dS-NZY">
                         <rightBarButtonItems>
-                            <barButtonItem title="More" id="aHO-Ch-Zvk"/>
-                            <barButtonItem title="Edit" id="RSI-sk-QN4"/>
+                            <barButtonItem systemItem="add" id="Xxc-be-oUZ">
+                                <connections>
+                                    <segue destination="tNP-bw-tcR" kind="presentation" identifier="add" id="Iee-Ji-JgU"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Edit" id="RSI-sk-QN4">
+                                <connections>
+                                    <action selector="btnEditClicked:" destination="S8R-dj-RvU" id="Qz9-0P-Wyp"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
+                    <connections>
+                        <outlet property="btnEdit" destination="RSI-sk-QN4" id="Sdi-ue-3i2"/>
+                        <segue destination="tNP-bw-tcR" kind="presentation" identifier="edit" id="B1n-eS-jTf"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G4o-N5-3xf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -437,7 +449,7 @@
             <objects>
                 <navigationController id="tNP-bw-tcR" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="hen-6B-ogs">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -453,7 +465,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="PatternsWebPageEditViewController" id="vot-zX-OeE" customClass="PatternsWebPageEditViewController" customModule="LollySwiftiOS" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="pKu-lC-4Tb">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <sections>
@@ -918,6 +930,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="B1n-eS-jTf"/>
         <segue reference="XXt-Pm-Ua7"/>
     </inferredMetricsTieBreakers>
     <resources>

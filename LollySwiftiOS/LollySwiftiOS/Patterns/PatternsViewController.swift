@@ -78,9 +78,6 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
         func edit() {
             performSegue(withIdentifier: "edit", sender: item)
         }
-        func showWebPages() {
-            performSegue(withIdentifier: "browse", sender: item)
-        }
         let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { _,_ in delete() }
         let editAction = UITableViewRowAction(style: .normal, title: "Edit") { _,_ in edit() }
         editAction.backgroundColor = .blue
@@ -90,9 +87,9 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
             alertController.addAction(deleteAction2)
             let editAction2 = UIAlertAction(title: "Edit", style: .default) { _ in edit() }
             alertController.addAction(editAction2)
-            let browseWebPagesAction = UIAlertAction(title: "Browse Web Pages", style: .default) { _ in showWebPages() }
+            let browseWebPagesAction = UIAlertAction(title: "Browse Web Pages", style: .default) { _ in performSegue(withIdentifier: "browse pages", sender: item) }
             alertController.addAction(browseWebPagesAction)
-            let editWebPagesAction = UIAlertAction(title: "Edit Web Pages", style: .default) { _ in showWebPages() }
+            let editWebPagesAction = UIAlertAction(title: "Edit Web Pages", style: .default) { _ in performSegue(withIdentifier: "edit pages", sender: item) }
             alertController.addAction(editWebPagesAction)
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
             alertController.addAction(cancelAction)
@@ -104,7 +101,7 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
         vm.selectedPatternItem = arrPatterns[indexPath.row]
-        performSegue(withIdentifier: "browse", sender: vm.selectedPatternItem)
+        performSegue(withIdentifier: "browse pages", sender: vm.selectedPatternItem)
     }
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -122,7 +119,9 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
         if let controller = (segue.destination as? UINavigationController)?.topViewController as? PatternsDetailViewController {
             let item = segue.identifier == "add" ? vm.newPattern() : sender as! MPattern
             controller.startEdit(vm: vm, item: item)
-        } else if let controller = segue.destination as? PatternsWebPagesViewController {
+        } else if let controller = segue.destination as? PatternsWebPagesBrowseViewController {
+            controller.vm = vm
+        } else if let controller = segue.destination as? PatternsWebPagesEditViewController {
             controller.vm = vm
         }
     }
