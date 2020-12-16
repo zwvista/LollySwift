@@ -100,8 +100,8 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        vm.selectedPatternItem = arrPatterns[indexPath.row]
-        performSegue(withIdentifier: "browse pages", sender: vm.selectedPatternItem)
+        let item = arrPatterns[indexPath.row]
+        performSegue(withIdentifier: "browse pages", sender: item)
     }
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -120,8 +120,10 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
             let item = segue.identifier == "add" ? vm.newPattern() : sender as! MPattern
             controller.startEdit(vm: vm, item: item)
         } else if let controller = segue.destination as? PatternsWebPagesBrowseViewController {
+            vm.selectedPatternItem = sender as? MPattern
             controller.vm = vm
         } else if let controller = segue.destination as? PatternsWebPagesEditViewController {
+            vm.selectedPatternItem = sender as? MPattern
             controller.vm = vm
         }
     }
