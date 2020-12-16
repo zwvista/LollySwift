@@ -8,10 +8,11 @@
 
 import Foundation
 import RxSwift
+import RxRelay
 
 class WebPageSelectViewModel: NSObject {
-    @objc var title = ""
-    @objc var url = ""
+    var title = BehaviorRelay(value: "")
+    var url = BehaviorRelay(value: "")
     var vmSettings: SettingsViewModel
     var arrWebPages = [MWebPage]()
     var selectedWebPage: MWebPage?
@@ -20,10 +21,11 @@ class WebPageSelectViewModel: NSObject {
         self.vmSettings = settings
         super.init()
         reload().subscribe(onNext: { complete() }) ~ rx.disposeBag
+        Observable.combineLatest(title.debounce(DispatchTimeInterval.milliseconds(500), scheduler: MainScheduler.instance), url.debounce(DispatchTimeInterval.milliseconds(500), scheduler: MainScheduler.instance)).flatMap { (t, u) in self.reload() }.subscribe(onNext: { complete() }) ~ rx.disposeBag
     }
     
     func reload() -> Observable<()> {
-        MWebPage.getDataBySearch(title: title, url: url).map {
+        MWebPage.getDataBySearch(title: title.value, url: url.value).map {
             self.arrWebPages = $0
         }
     }

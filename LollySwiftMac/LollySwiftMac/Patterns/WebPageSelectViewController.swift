@@ -31,6 +31,8 @@ class WebPageSelectViewController: NSViewController, NSTableViewDataSource, NSTa
         vmWebPage = WebPageSelectViewModel(settings: vm.vmSettings) {
             self.tvWebPages.reloadData()
         }
+        _ = vmWebPage.title ~> tfTitle.rx.text.orEmpty
+        _ = vmWebPage.url ~> tfURL.rx.text.orEmpty
     }
     
     override func viewDidAppear() {

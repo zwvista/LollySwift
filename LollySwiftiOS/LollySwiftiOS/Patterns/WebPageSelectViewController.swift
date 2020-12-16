@@ -15,17 +15,17 @@ class WebPageSelectViewController: UIViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var tfTitle: UITextField!
     @IBOutlet weak var tfURL: UITextField!
 
-    var vm: WebPageSelectViewModel!
+    var vmWebPage: WebPageSelectViewModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        vm = WebPageSelectViewModel(settings: vmSettings) {
+        vmWebPage = WebPageSelectViewModel(settings: vmSettings) {
             self.tvWebPages.reloadData()
         }
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        tableView === tvSearch ? 2 : vm.arrWebPages.count
+        tableView === tvSearch ? 2 : vmWebPage.arrWebPages.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -35,12 +35,14 @@ class WebPageSelectViewController: UIViewController, UITableViewDelegate, UITabl
             switch indexPath.row {
             case 0:
                 tfTitle = cell.tf
+                _ = vmWebPage.title ~> tfTitle.rx.text.orEmpty
             case 1:
                 tfURL = cell.tf
+                _ = vmWebPage.url ~> tfURL.rx.text.orEmpty
             default: break
             }
         } else {
-            let item = vm.arrWebPages[indexPath.row]
+            let item = vmWebPage.arrWebPages[indexPath.row]
             cell.lblTitle!.text = item.TITLE
             cell.lblURL!.text = item.URL
          }
