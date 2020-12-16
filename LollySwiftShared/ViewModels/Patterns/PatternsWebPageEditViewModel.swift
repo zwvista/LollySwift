@@ -22,7 +22,7 @@ class PatternsWebPageEditViewModel: NSObject {
         itemEdit = MPatternWebPageEdit(x: item)
         isAddWebPage = item.WEBPAGEID == 0
         isAddPatternWebPage = item.ID == 0
-        _ = Observable.zip(itemEdit.TITLE, itemEdit.URL) .map { !$0.0.isEmpty && !$0.1.isEmpty } ~> isOKEnabled
+        _ = Observable.combineLatest(itemEdit.TITLE, itemEdit.URL).map { !$0.0.isEmpty && !$0.1.isEmpty } ~> isOKEnabled
     }
     
     func onOK() -> Observable<()> {

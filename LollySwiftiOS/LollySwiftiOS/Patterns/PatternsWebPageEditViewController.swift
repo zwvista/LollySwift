@@ -53,14 +53,14 @@ class PatternsWebPageEditViewController: UITableViewController {
     }
     
     @IBAction func newWebPage(_ sender: AnyObject) {
-        itemEdit.ID.accept("0")
+        itemEdit.WEBPAGEID.accept("0")
         itemEdit.TITLE.accept("")
         itemEdit.URL.accept("")
     }
 
     @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
         if let controller = segue.source as? WebPageSelectViewController, let item = controller.vmWebPage.selectedWebPage {
-            itemEdit.ID.accept(item.ID.toString)
+            itemEdit.WEBPAGEID.accept(item.ID.toString)
             itemEdit.TITLE.accept(item.TITLE)
             itemEdit.URL.accept(item.URL)
         }

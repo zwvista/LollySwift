@@ -99,6 +99,11 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
 
         return [moreAction, deleteAction]
     }
+    
+    func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+        vm.selectedPatternItem = vm.arrPatterns[indexPath.row]
+        performSegue(withIdentifier: "pages", sender: vm.selectedPatternItem)
+    }
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.endEditing(true)
