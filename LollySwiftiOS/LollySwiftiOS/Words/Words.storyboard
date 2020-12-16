@@ -409,12 +409,12 @@
                     <navigationItem key="navigationItem" title="Words in Unit (Batch)" id="cE7-Rs-duo">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="3aW-le-btm">
                             <connections>
-                                <segue destination="9iX-Iw-ayv" kind="unwind" identifier="Done" unwindAction="prepareForUnwind:" id="4Ep-Ao-6W2"/>
+                                <segue destination="9iX-Iw-ayv" kind="unwind" identifier="Cancel" unwindAction="prepareForUnwind:" id="Ol6-ch-OD7"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="VVL-ls-oMA">
                             <connections>
-                                <segue destination="9iX-Iw-ayv" kind="unwind" unwindAction="prepareForUnwind:" id="RNM-Lk-fHo"/>
+                                <segue destination="9iX-Iw-ayv" kind="unwind" identifier="Done" unwindAction="prepareForUnwind:" id="v8a-Rf-LnH"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -748,12 +748,12 @@
                     <navigationItem key="navigationItem" title="Words in Unit (Edit)" id="Q6g-Lk-kvp">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="sth-eW-xfI">
                             <connections>
-                                <segue destination="t3J-qd-atj" kind="unwind" identifier="Cancel" unwindAction="prepareForUnwind:" id="jN4-yU-lBF"/>
+                                <segue destination="t3J-qd-atj" kind="unwind" identifier="Cancel" unwindAction="prepareForUnwind:" id="K56-0S-wqm"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="ccC-Vc-uTM">
                             <connections>
-                                <segue destination="t3J-qd-atj" kind="unwind" identifier="Done" unwindAction="prepareForUnwind:" id="DPZ-FY-OPN"/>
+                                <segue destination="t3J-qd-atj" kind="unwind" identifier="Done" unwindAction="prepareForUnwind:" id="16E-0w-viY"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
