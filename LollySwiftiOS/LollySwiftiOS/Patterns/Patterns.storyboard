@@ -563,6 +563,9 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zpc-Df-grl">
                                                     <rect key="frame" x="164" y="7" width="54" height="30"/>
                                                     <state key="normal" title="Existing"/>
+                                                    <connections>
+                                                        <segue destination="q1S-Wv-Irz" kind="presentation" id="Tsl-5J-uVb"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -672,6 +675,46 @@
                 <exit id="Uba-OZ-YoZ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2474" y="-944"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Kp7-ao-tfH">
+            <objects>
+                <navigationController id="q1S-Wv-Irz" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="j1b-0Z-yGM">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="N1f-Jg-2qZ" kind="relationship" relationship="rootViewController" id="F1b-Xv-UJL"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Cm6-9p-9mI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3190" y="-928"/>
+        </scene>
+        <!--Web Page Select-->
+        <scene sceneID="na5-Ng-zyO">
+            <objects>
+                <viewController id="N1f-Jg-2qZ" customClass="WebPageSelectViewController" customModule="LollySwiftiOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="LIG-pO-PfP">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="R4a-sC-4st"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Web Page Select" id="FJh-V2-5Vb">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="CBr-bs-dex">
+                            <connections>
+                                <segue destination="9zJ-ym-MXs" kind="unwind" unwindAction="prepareForUnwind:" id="LnK-pA-wIM"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="fOC-ot-HMM"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TUi-0u-Deq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="9zJ-ym-MXs" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="4017" y="-928"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

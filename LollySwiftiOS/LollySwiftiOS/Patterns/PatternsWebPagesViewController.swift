@@ -90,4 +90,7 @@ class PatternsWebPagesViewController: UIViewController, WKUIDelegate, WKNavigati
         }
     }
 
+    deinit {
+        print("DEBUG: \(self.className) deinit")
+    }
 }

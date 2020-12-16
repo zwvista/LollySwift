@@ -52,6 +52,14 @@ class PatternsWebPageEditViewController: UITableViewController {
         tfTitle.becomeFirstResponder()
     }
     
+    @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
+        guard segue.identifier == "Done" else {return}
+        if let controller = segue.source as? PatternsWebPageEditViewController {
+            controller.vmEdit.onOK().subscribe(onNext: {
+            }) ~ rx.disposeBag
+        }
+    }
+
     deinit {
         print("DEBUG: \(self.className) deinit")
     }
