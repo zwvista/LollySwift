@@ -79,7 +79,7 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
             performSegue(withIdentifier: "edit", sender: item)
         }
         func showWebPages() {
-            performSegue(withIdentifier: "pages", sender: item)
+            performSegue(withIdentifier: "browse", sender: item)
         }
         let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { _,_ in delete() }
         let editAction = UITableViewRowAction(style: .normal, title: "Edit") { _,_ in edit() }
@@ -102,7 +102,7 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
         vm.selectedPatternItem = arrPatterns[indexPath.row]
-        performSegue(withIdentifier: "pages", sender: vm.selectedPatternItem)
+        performSegue(withIdentifier: "browse", sender: vm.selectedPatternItem)
     }
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {

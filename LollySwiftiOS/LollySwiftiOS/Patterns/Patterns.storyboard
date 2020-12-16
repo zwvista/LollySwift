@@ -114,17 +114,18 @@
                         <outlet property="sbTextFilter" destination="1D0-3n-VX2" id="cQw-q4-073"/>
                         <outlet property="tableView" destination="QsG-w8-IST" id="raC-sW-gQU"/>
                         <segue destination="jxH-Re-jyk" kind="presentation" identifier="edit" id="AWN-1D-kqT"/>
-                        <segue destination="cXB-gx-cf6" kind="show" identifier="pages" id="bJI-Er-aEr"/>
+                        <segue destination="cXB-gx-cf6" kind="show" identifier="browse" id="bJI-Er-aEr"/>
+                        <segue destination="S8R-dj-RvU" kind="show" id="G7U-K4-A6o"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0f6-eh-sBq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-167" y="-233"/>
         </scene>
-        <!--Pattern Web Pages-->
+        <!--Pattern Web Pages (Browse)-->
         <scene sceneID="glL-wo-Ytn">
             <objects>
-                <viewController storyboardIdentifier="PatternsWebPagesViewController" id="cXB-gx-cf6" customClass="PatternsWebPagesViewController" customModule="LollySwiftiOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PatternsWebPagesBrowseViewController" id="cXB-gx-cf6" customClass="PatternsWebPagesBrowseViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Acn-mT-ao0">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -160,20 +161,7 @@
                         </constraints>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Pattern Web Pages" id="rlz-6y-dYZ">
-                        <rightBarButtonItems>
-                            <barButtonItem systemItem="add" id="DlY-E3-bgG">
-                                <connections>
-                                    <segue destination="tNP-bw-tcR" kind="presentation" identifier="add" id="1zN-sM-V9H"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem title="Edit" id="D5B-ZZ-nfW">
-                                <connections>
-                                    <segue destination="tNP-bw-tcR" kind="presentation" identifier="edit" id="qu2-hw-ubW"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Pattern Web Pages (Browse)" id="rlz-6y-dYZ"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="btnWebPage" destination="mHp-X4-uv4" id="rvP-33-W65"/>
@@ -198,7 +186,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Yy-wu-C41" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1639" y="-233"/>
+            <point key="canvasLocation" x="796" y="729"/>
         </scene>
         <!--Patterns in Language (Edit)-->
         <scene sceneID="xUX-t2-jdX">
@@ -370,14 +358,48 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JKf-M6-U7X" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="lru-2d-WIP" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2474" y="-233"/>
+            <point key="canvasLocation" x="1632" y="729"/>
+        </scene>
+        <!--Patterns Web Pages (Edit)-->
+        <scene sceneID="E2P-Hi-er7">
+            <objects>
+                <tableViewController id="S8R-dj-RvU" customClass="PatternsWebPagesEditViewController" customModule="LollySwiftiOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="sjl-yJ-KK9">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="5LG-z7-Q1E">
+                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5LG-z7-Q1E" id="6Uo-i8-nHG">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="S8R-dj-RvU" id="aaA-UE-Jrj"/>
+                            <outlet property="delegate" destination="S8R-dj-RvU" id="zJp-dW-afc"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Patterns Web Pages (Edit)" id="eVZ-dS-NZY">
+                        <rightBarButtonItems>
+                            <barButtonItem title="More" id="aHO-Ch-Zvk"/>
+                            <barButtonItem title="Edit" id="RSI-sk-QN4"/>
+                        </rightBarButtonItems>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="G4o-N5-3xf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="816" y="-233"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ezp-hX-h5f">
             <objects>
                 <navigationController id="tNP-bw-tcR" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="hen-6B-ogs">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -386,14 +408,14 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="u7K-kW-pYn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1632" y="-944"/>
+            <point key="canvasLocation" x="1693" y="-233"/>
         </scene>
         <!--Patterns Web Page (Edit)-->
         <scene sceneID="Hbe-6T-4I2">
             <objects>
                 <tableViewController storyboardIdentifier="PatternsWebPageEditViewController" id="vot-zX-OeE" customClass="PatternsWebPageEditViewController" customModule="LollySwiftiOS" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="pKu-lC-4Tb">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <sections>
@@ -677,7 +699,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pkg-Si-xoO" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Uba-OZ-YoZ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2474" y="-944"/>
+            <point key="canvasLocation" x="2535" y="-233"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Kp7-ao-tfH">
@@ -693,7 +715,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cm6-9p-9mI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3190" y="-928"/>
+            <point key="canvasLocation" x="3251" y="-217"/>
         </scene>
         <!--Web Page Select-->
         <scene sceneID="na5-Ng-zyO">
@@ -854,11 +876,10 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TUi-0u-Deq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="9zJ-ym-MXs" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4017" y="-928"/>
+            <point key="canvasLocation" x="4077" y="-217"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="1zN-sM-V9H"/>
         <segue reference="XXt-Pm-Ua7"/>
     </inferredMetricsTieBreakers>
     <resources>

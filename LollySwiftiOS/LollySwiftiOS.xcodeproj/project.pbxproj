@@ -54,8 +54,9 @@
 		95837EAB24E0A3DE00B5D2AE /* ReviewOptionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95837EA924E0A3D100B5D2AE /* ReviewOptionsViewModel.swift */; };
 		9587EBF42583435B00777AEE /* PatternsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9587EBF32583435B00777AEE /* PatternsDetailViewController.swift */; };
 		9587EC212586FDE900777AEE /* PatternsWebPageEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9587EC202586FDE900777AEE /* PatternsWebPageEditViewModel.swift */; };
-		9587EC282587208B00777AEE /* PatternsWebPagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9587EC272587208A00777AEE /* PatternsWebPagesViewController.swift */; };
+		9587EC282587208B00777AEE /* PatternsWebPagesBrowseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9587EC272587208A00777AEE /* PatternsWebPagesBrowseViewController.swift */; };
 		9587EC2D2587236400777AEE /* PatternsWebPageEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9587EC2C2587236400777AEE /* PatternsWebPageEditViewController.swift */; };
+		9589CACA258A086300F80499 /* PatternsWebPagesEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9589CAC9258A086300F80499 /* PatternsWebPagesEditViewController.swift */; };
 		95AA19662295081F003620A2 /* PhrasesReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AA19652295081F003620A2 /* PhrasesReviewViewController.swift */; };
 		95AA196822950834003620A2 /* WordsReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95AA196722950834003620A2 /* WordsReviewViewController.swift */; };
 		95CED3B4221170C20094622F /* iOSApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CED3B3221170C20094622F /* iOSApi.swift */; };
@@ -219,8 +220,9 @@
 		95837EA924E0A3D100B5D2AE /* ReviewOptionsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewOptionsViewModel.swift; sourceTree = "<group>"; };
 		9587EBF32583435B00777AEE /* PatternsDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatternsDetailViewController.swift; sourceTree = "<group>"; };
 		9587EC202586FDE900777AEE /* PatternsWebPageEditViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatternsWebPageEditViewModel.swift; sourceTree = "<group>"; };
-		9587EC272587208A00777AEE /* PatternsWebPagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatternsWebPagesViewController.swift; sourceTree = "<group>"; };
+		9587EC272587208A00777AEE /* PatternsWebPagesBrowseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatternsWebPagesBrowseViewController.swift; sourceTree = "<group>"; };
 		9587EC2C2587236400777AEE /* PatternsWebPageEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatternsWebPageEditViewController.swift; sourceTree = "<group>"; };
+		9589CAC9258A086300F80499 /* PatternsWebPagesEditViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatternsWebPagesEditViewController.swift; sourceTree = "<group>"; };
 		95AA19652295081F003620A2 /* PhrasesReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhrasesReviewViewController.swift; sourceTree = "<group>"; };
 		95AA196722950834003620A2 /* WordsReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsReviewViewController.swift; sourceTree = "<group>"; };
 		95CED3B3221170C20094622F /* iOSApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSApi.swift; sourceTree = "<group>"; };
@@ -578,7 +580,8 @@
 				9587EBF32583435B00777AEE /* PatternsDetailViewController.swift */,
 				95FCBE53255449A000859C1F /* PatternsViewController.swift */,
 				9587EC2C2587236400777AEE /* PatternsWebPageEditViewController.swift */,
-				9587EC272587208A00777AEE /* PatternsWebPagesViewController.swift */,
+				9587EC272587208A00777AEE /* PatternsWebPagesBrowseViewController.swift */,
+				9589CAC9258A086300F80499 /* PatternsWebPagesEditViewController.swift */,
 				95F632E425899A6A000CFD23 /* WebPageSelectViewController.swift */,
 			);
 			path = Patterns;
@@ -811,10 +814,11 @@
 				95837E9624DF35EB00B5D2AE /* WordsUnitDetailViewModel.swift in Sources */,
 				95F0FFE524C957AA00509DF3 /* WordsDictViewModel.swift in Sources */,
 				95F1FA6824CBD7B1006CA15D /* MLangPhrase.swift in Sources */,
+				9589CACA258A086300F80499 /* PatternsWebPagesEditViewController.swift in Sources */,
 				8CB025942096CB3E0087462E /* RootViewController.swift in Sources */,
 				95837EAA24E0A3D100B5D2AE /* ReviewOptionsViewModel.swift in Sources */,
 				8C42B5B51D69A1D900DCB528 /* WordsUnitViewController.swift in Sources */,
-				9587EC282587208B00777AEE /* PatternsWebPagesViewController.swift in Sources */,
+				9587EC282587208B00777AEE /* PatternsWebPagesBrowseViewController.swift in Sources */,
 				95F1FA7024CBD7B1006CA15D /* MUserSetting.swift in Sources */,
 				95F1FA3D24CB1FE7006CA15D /* DisposedBy.swift in Sources */,
 				95F1FA6724CBD7B1006CA15D /* MWordFami.swift in Sources */,
