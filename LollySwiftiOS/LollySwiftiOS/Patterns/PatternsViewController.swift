@@ -90,8 +90,10 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
             alertController.addAction(deleteAction2)
             let editAction2 = UIAlertAction(title: "Edit", style: .default) { _ in edit() }
             alertController.addAction(editAction2)
-            let showWebPagesAction = UIAlertAction(title: "Web Pages", style: .default) { _ in showWebPages() }
-            alertController.addAction(showWebPagesAction)
+            let browseWebPagesAction = UIAlertAction(title: "Browse Web Pages", style: .default) { _ in showWebPages() }
+            alertController.addAction(browseWebPagesAction)
+            let editWebPagesAction = UIAlertAction(title: "Edit Web Pages", style: .default) { _ in showWebPages() }
+            alertController.addAction(editWebPagesAction)
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
             alertController.addAction(cancelAction)
             self.present(alertController, animated: true) {}

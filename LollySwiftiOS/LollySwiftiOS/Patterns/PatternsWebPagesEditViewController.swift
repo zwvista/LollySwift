@@ -21,7 +21,20 @@ class PatternsWebPagesEditViewController: UITableViewController {
         vm.getWebPages().subscribe(onNext: {
         }) ~ rx.disposeBag
     }
-        
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        vm.arrWebPages.count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "WebPageCell10", for: indexPath) as! WebPagesCell
+        let item = vm.arrWebPages[indexPath.row]
+        cell.lblSeqNum!.text = item.SEQNUM.toString
+        cell.lblTitle!.text = item.TITLE
+        cell.lblURL!.text = item.URL
+        return cell
+    }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         if let controller = (segue.destination as? UINavigationController)?.topViewController as? PatternsWebPageEditViewController {

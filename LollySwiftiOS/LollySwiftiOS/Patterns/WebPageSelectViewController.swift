@@ -60,6 +60,7 @@ class WebPageSelectViewController: UIViewController, UITableViewDelegate, UITabl
 }
 
 class WebPagesCell: UITableViewCell {
+    @IBOutlet weak var lblSeqNum: UILabel!
     @IBOutlet weak var tf: UITextField!
     @IBOutlet weak var lblTitle: UILabel!
     @IBOutlet weak var lblURL: UILabel!
