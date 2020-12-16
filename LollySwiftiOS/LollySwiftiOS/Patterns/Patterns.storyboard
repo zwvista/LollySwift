@@ -559,6 +559,9 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6E1-2T-tGQ">
                                                     <rect key="frame" x="122" y="7" width="31" height="30"/>
                                                     <state key="normal" title="New"/>
+                                                    <connections>
+                                                        <action selector="newWebPage:" destination="vot-zX-OeE" eventType="touchUpInside" id="Ei0-6I-gKG"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zpc-Df-grl">
                                                     <rect key="frame" x="164" y="7" width="54" height="30"/>
@@ -839,7 +842,7 @@
                     <navigationItem key="navigationItem" title="Web Page Select" id="FJh-V2-5Vb">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="CBr-bs-dex">
                             <connections>
-                                <segue destination="9zJ-ym-MXs" kind="unwind" unwindAction="prepareForUnwind:" id="LnK-pA-wIM"/>
+                                <segue destination="9zJ-ym-MXs" kind="unwind" identifier="close" unwindAction="prepareForUnwind:" id="LnK-pA-wIM"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="fOC-ot-HMM"/>

@@ -48,6 +48,11 @@ class WebPageSelectViewController: UIViewController, UITableViewDelegate, UITabl
          }
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        vmWebPage.selectedWebPage = vmWebPage.arrWebPages[indexPath.row]
+        performSegue(withIdentifier: "close", sender: self)
+    }
 
     deinit {
         print("DEBUG: \(self.className) deinit")

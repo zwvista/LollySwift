@@ -52,11 +52,17 @@ class PatternsWebPageEditViewController: UITableViewController {
         tfTitle.becomeFirstResponder()
     }
     
+    @IBAction func newWebPage(_ sender: AnyObject) {
+        itemEdit.ID.accept("0")
+        itemEdit.TITLE.accept("")
+        itemEdit.URL.accept("")
+    }
+
     @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
-        guard segue.identifier == "Done" else {return}
-        if let controller = segue.source as? PatternsWebPageEditViewController {
-            controller.vmEdit.onOK().subscribe(onNext: {
-            }) ~ rx.disposeBag
+        if let controller = segue.source as? WebPageSelectViewController, let item = controller.vmWebPage.selectedWebPage {
+            itemEdit.ID.accept(item.ID.toString)
+            itemEdit.TITLE.accept(item.TITLE)
+            itemEdit.URL.accept(item.URL)
         }
     }
 
