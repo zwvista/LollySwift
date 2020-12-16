@@ -101,7 +101,7 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        vm.selectedPatternItem = vm.arrPatterns[indexPath.row]
+        vm.selectedPatternItem = arrPatterns[indexPath.row]
         performSegue(withIdentifier: "pages", sender: vm.selectedPatternItem)
     }
 
