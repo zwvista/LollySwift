@@ -14,6 +14,7 @@ class WordsBaseViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var sbTextFilter: UISearchBar!
     @IBOutlet weak var btnScopeFilter: UIButton!
+    let refreshControl = UIRefreshControl()
     
     let ddScopeFilter = DropDown()
 
@@ -27,6 +28,7 @@ class WordsBaseViewController: UIViewController, UITableViewDelegate, UITableVie
             self.searchBarSearchButtonClicked(self.sbTextFilter)
         }
         btnScopeFilter.setTitle(SettingsViewModel.arrScopeWordFilters[0], for: .normal)
+        tableView.refreshControl = refreshControl
     }
     
     func position(for bar: UIBarPositioning) -> UIBarPosition {

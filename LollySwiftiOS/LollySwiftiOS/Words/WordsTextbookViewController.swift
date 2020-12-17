@@ -17,8 +17,14 @@ class WordsTextbookViewController: WordsBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
+        refresh(refreshControl)
+    }
+    
+    @objc func refresh(_ sender: UIRefreshControl) {
         view.showBlurLoader()
         vm = WordsUnitViewModel(settings: vmSettings, inTextbook: false, needCopy: false) {
+            sender.endRefreshing()
             self.tableView.reloadData()
             self.view.removeBlurLoader()
         }

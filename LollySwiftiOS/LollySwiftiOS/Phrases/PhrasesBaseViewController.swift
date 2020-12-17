@@ -14,7 +14,8 @@ class PhrasesBaseViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var sbTextFilter: UISearchBar!
     @IBOutlet weak var btnScopeFilter: UIButton!
-    
+    let refreshControl = UIRefreshControl()
+
     let ddScopeFilter = DropDown()
 
     override func viewDidLoad() {
@@ -27,6 +28,7 @@ class PhrasesBaseViewController: UIViewController, UITableViewDelegate, UITableV
             self.searchBarSearchButtonClicked(self.sbTextFilter)
         }
         btnScopeFilter.setTitle(SettingsViewModel.arrScopePhraseFilters[0], for: .normal)
+        tableView.refreshControl = refreshControl
     }
     
     func position(for bar: UIBarPositioning) -> UIBarPosition {

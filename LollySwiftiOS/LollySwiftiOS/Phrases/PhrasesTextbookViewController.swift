@@ -18,13 +18,19 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
+        refresh(refreshControl)
+    }
+    
+    @objc func refresh(_ sender: UIRefreshControl) {
         view.showBlurLoader()
         vm = PhrasesUnitViewModel(settings: vmSettings, inTextbook: false, needCopy: false) {
+            sender.endRefreshing()
             self.tableView.reloadData()
             self.view.removeBlurLoader()
         }
     }
-    
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         arrPhrases.count
     }

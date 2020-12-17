@@ -17,13 +17,19 @@ class WordsLangViewController: WordsBaseViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
+        refresh(refreshControl)
+    }
+    
+    @objc func refresh(_ sender: UIRefreshControl) {
         view.showBlurLoader()
         vm = WordsLangViewModel(settings: vmSettings, needCopy: false) {
+            sender.endRefreshing()
             self.tableView.reloadData()
             self.view.removeBlurLoader()
         }
     }
-    
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         arrWords.count
     }
