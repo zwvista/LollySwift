@@ -21,7 +21,7 @@ class MUnitWord: NSObject, Codable, MWordProtocol {
     dynamic var SEQNUM = 0
     dynamic var WORDID = 0
     dynamic var WORD = ""
-    dynamic var NOTE: String?
+    dynamic var NOTE = ""
     dynamic var FAMIID = 0
     dynamic var CORRECT = 0
     dynamic var TOTAL = 0
@@ -46,10 +46,10 @@ class MUnitWord: NSObject, Codable, MWordProtocol {
     var UNITSTR: String { textbook.UNITSTR(UNIT) }
     var PARTSTR: String { textbook.PARTSTR(PART) }
     var UNITPARTSEQNUM: String { "\(UNITSTR)\n\(PARTSTR)\n\(SEQNUM)" }
-    var WORDNOTE: String { WORD + ((NOTE ?? "").isEmpty ? "" : "(\(NOTE!))") }
+    var WORDNOTE: String { WORD + (NOTE.isEmpty ? "" : "(\(NOTE))") }
     var ACCURACY: String { CommonApi.getAccuracy(CORRECT: CORRECT, TOTAL: TOTAL) }
 
-    public override var description: String { "\(SEQNUM) \(WORD)" + (NOTE?.isEmpty != false ? "" : "(\(NOTE!))") }
+    public override var description: String { "\(SEQNUM) \(WORD)" + (NOTE.isEmpty ? "" : "(\(NOTE))") }
 
     static func getDataByTextbook(_ textbook: MTextbook, unitPartFrom: Int, unitPartTo: Int) -> Observable<[MUnitWord]> {
         // SQL: SELECT * FROM VUNITWORDS WHERE TEXTBOOKID=? AND UNITPART BETWEEN ? AND ? ORDER BY UNITPART,SEQNUM
@@ -137,7 +137,7 @@ class MUnitWordEdit {
     var SEQNUM: BehaviorRelay<String>
     var WORDID: BehaviorRelay<String>
     var WORD: BehaviorRelay<String>
-    var NOTE: BehaviorRelay<String?>
+    var NOTE: BehaviorRelay<String>
     var FAMIID: BehaviorRelay<String>
     var ACCURACY: BehaviorRelay<String>
 

@@ -68,7 +68,7 @@ class WordsLangViewModel: NSObject {
     func clearNote(index: Int) -> Observable<()> {
         let item = arrWords[index]
         item.NOTE = SettingsViewModel.zeroNote
-        return WordsUnitViewModel.update(item.ID, note: item.NOTE!)
+        return WordsUnitViewModel.update(item.ID, note: item.NOTE)
     }
     
     public init(settings: SettingsViewModel) {

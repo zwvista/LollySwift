@@ -21,7 +21,7 @@ class MUnitPhrase: NSObject, Codable, MPhraseProtocol {
     dynamic var SEQNUM = 0
     dynamic var PHRASEID = 0
     dynamic var PHRASE = ""
-    dynamic var TRANSLATION: String?
+    dynamic var TRANSLATION = ""
 
     enum CodingKeys : String, CodingKey {
         case ID
@@ -127,7 +127,7 @@ class MUnitPhraseEdit {
     var SEQNUM: BehaviorRelay<String>
     var PHRASEID: BehaviorRelay<String>
     var PHRASE: BehaviorRelay<String>
-    var TRANSLATION: BehaviorRelay<String?>
+    var TRANSLATION: BehaviorRelay<String>
 
     init(x: MUnitPhrase) {
         ID = BehaviorRelay(value: x.ID.toString)

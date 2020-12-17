@@ -13,7 +13,7 @@ protocol MWordProtocol {
     var LANGID: Int { get set }
     var WORDID: Int { get }
     var WORD: String { get set }
-    var NOTE: String? { get set }
+    var NOTE: String { get set }
     var FAMIID: Int { get set }
 }
 
@@ -21,7 +21,7 @@ protocol MPhraseProtocol {
     var LANGID: Int { get set }
     var PHRASEID: Int { get }
     var PHRASE: String { get set }
-    var TRANSLATION: String? { get set }
+    var TRANSLATION: String { get set }
 }
 
 @objcMembers

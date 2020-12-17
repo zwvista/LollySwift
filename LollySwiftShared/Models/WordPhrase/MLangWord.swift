@@ -16,12 +16,12 @@ class MLangWord: NSObject, Codable, MWordProtocol {
     dynamic var LANGID = 0
     dynamic var WORDID: Int { ID }
     dynamic var WORD = ""
-    dynamic var NOTE: String?
+    dynamic var NOTE = ""
     dynamic var FAMIID = 0
     dynamic var CORRECT = 0
     dynamic var TOTAL = 0
 
-    var WORDNOTE: String { WORD + ((NOTE ?? "").isEmpty ? "" : "(\(NOTE!))") }
+    var WORDNOTE: String { WORD + (NOTE.isEmpty ? "" : "(\(NOTE))") }
     var ACCURACY: String { TOTAL == 0 ? "N/A" : "\(floor(CORRECT.toDouble / TOTAL.toDouble * 1000) / 10)%" }
 
     override init() {
@@ -71,7 +71,7 @@ class MLangWord: NSObject, Codable, MWordProtocol {
 class MLangWordEdit {
     var ID: BehaviorRelay<String>
     var WORD: BehaviorRelay<String>
-    var NOTE: BehaviorRelay<String?>
+    var NOTE: BehaviorRelay<String>
     var FAMIID: BehaviorRelay<String>
     var ACCURACY: BehaviorRelay<String>
 

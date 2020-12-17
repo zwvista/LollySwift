@@ -72,7 +72,7 @@ class WordsUnitBatchViewController: UIViewController, UITableViewDelegate, UITab
         tableView === tvActions ? 4 : vm.arrWords.count
     }
     
-//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 //        tableView === tvActions ? UITableView.automaticDimension : 88
 //    }
 

@@ -18,11 +18,17 @@ class PatternsWebPagesEditViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        vm.getWebPages().subscribe(onNext: {
-            self.tableView.reloadData()
-        }) ~ rx.disposeBag
+        refreshControl = UIRefreshControl()
+        refreshControl!.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
+        refresh(refreshControl!)
     }
     
+    @objc func refresh(_ sender: UIRefreshControl) {
+        vm.getWebPages().subscribe(onNext: {
+            sender.endRefreshing()
+        }) ~ rx.disposeBag
+    }
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         vm.arrWebPages.count
     }

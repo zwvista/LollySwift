@@ -16,7 +16,7 @@ class MLangPhrase: NSObject, Codable, MPhraseProtocol {
     dynamic var PHRASEID: Int { ID }
     dynamic var LANGID = 0
     dynamic var PHRASE = ""
-    dynamic var TRANSLATION: String?
+    dynamic var TRANSLATION = ""
     
     override init() {
     }
@@ -65,7 +65,7 @@ class MLangPhrase: NSObject, Codable, MPhraseProtocol {
 class MLangPhraseEdit {
     var ID: BehaviorRelay<String>
     var PHRASE: BehaviorRelay<String>
-    var TRANSLATION: BehaviorRelay<String?>
+    var TRANSLATION: BehaviorRelay<String>
 
     init(x: MLangPhrase) {
         ID = BehaviorRelay(value: x.ID.toString)

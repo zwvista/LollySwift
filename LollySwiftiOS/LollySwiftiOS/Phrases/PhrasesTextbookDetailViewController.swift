@@ -60,7 +60,7 @@ class PhrasesTextbookDetailViewController: UITableViewController {
         _ = itemEdit.SEQNUM <~> tfSeqNum.rx.textInput
         _ = itemEdit.PHRASEID ~> tfPhraseID.rx.text.orEmpty
         _ = itemEdit.PHRASE <~> tfPhrase.rx.textInput
-        _ = itemEdit.TRANSLATION <~> tfTranslation.rx.text
+        _ = itemEdit.TRANSLATION <~> tfTranslation.rx.textInput
         _ = vmEdit.isOKEnabled ~> btnDone.rx.isEnabled
     }
     

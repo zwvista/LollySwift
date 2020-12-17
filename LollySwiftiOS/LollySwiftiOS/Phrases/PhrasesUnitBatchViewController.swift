@@ -11,7 +11,7 @@ import DropDown
 import RxSwift
 import NSObject_Rx
 
-class PhrasesUnitBatchViewController: UITableViewController, UITextFieldDelegate {
+class PhrasesUnitBatchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
 
     @IBOutlet weak var tvActions: UITableView!
     @IBOutlet weak var tvPhrases: UITableView!
@@ -67,15 +67,15 @@ class PhrasesUnitBatchViewController: UITableViewController, UITextFieldDelegate
         o.subscribe() ~ rx.disposeBag
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         tableView === tvActions ? 3 : vm.arrPhrases.count
     }
     
-//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 //        tableView === tvActions ? UITableView.automaticDimension : 88
 //    }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let identifier = "PhraseCell" + (tableView === tvActions ? "0\(indexPath.row)" : "10")
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! PhrasesUnitBatchCell
         if tableView === tvActions {
@@ -114,7 +114,7 @@ class PhrasesUnitBatchViewController: UITableViewController, UITextFieldDelegate
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard tableView === tvPhrases else {return}
         let cell = tableView.cellForRow(at: indexPath)!
         cell.accessoryType = cell.accessoryType == .none ? .checkmark : .none

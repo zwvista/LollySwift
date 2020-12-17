@@ -51,7 +51,6 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         vm.delegate = self
-        vm.getData().subscribe() ~ rx.disposeBag
 
         ddLang.anchorView = langCell
         ddLang.selectionAction = { [unowned self] (index: Int, item: String) in
@@ -135,8 +134,18 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
             self.vm.USPARTTO = self.vm.arrParts[index].value
             self.vm.updatePartTo().subscribe() ~ self.rx.disposeBag
         }
+        
+        refreshControl = UIRefreshControl()
+        refreshControl!.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
+        refresh(refreshControl!)
     }
     
+    @objc func refresh(_ sender: UIRefreshControl) {
+        vm.getData().subscribe(onNext: {
+            sender.endRefreshing()
+        }) ~ rx.disposeBag
+    }
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
         case 0:
