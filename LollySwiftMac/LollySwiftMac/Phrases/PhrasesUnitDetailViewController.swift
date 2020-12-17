@@ -46,7 +46,7 @@ class PhrasesUnitDetailViewController: NSViewController, NSTableViewDataSource, 
         _ = itemEdit.SEQNUM <~> tfSeqNum.rx.text.orEmpty
         _ = itemEdit.PHRASEID ~> tfPhraseID.rx.text.orEmpty
         _ = itemEdit.PHRASE <~> tfPhrase.rx.text.orEmpty
-        _ = itemEdit.TRANSLATION <~> tfTranslation.rx.text
+        _ = itemEdit.TRANSLATION <~> tfTranslation.rx.text.orEmpty
         _ = vmEdit.isOKEnabled ~> btnOK.rx.isEnabled
         btnOK.rx.tap.flatMap { [unowned self] _ in
             self.vmEdit.onOK()

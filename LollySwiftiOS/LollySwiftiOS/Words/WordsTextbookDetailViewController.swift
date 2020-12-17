@@ -57,12 +57,12 @@ class WordsTextbookDetailViewController: UITableViewController, UITextFieldDeleg
         
         _ = itemEdit.ID ~> tfID.rx.text.orEmpty
         _ = itemEdit.TEXTBOOKNAME ~> tfTextbookName.rx.text.orEmpty
-        _ = itemEdit.UNITSTR <~> tfUnit.rx.textInput
-        _ = itemEdit.PARTSTR <~> tfPart.rx.textInput
-        _ = itemEdit.SEQNUM <~> tfSeqNum.rx.textInput
+        _ = itemEdit.UNITSTR <~> tfUnit.rx.text.orEmpty
+        _ = itemEdit.PARTSTR <~> tfPart.rx.text.orEmpty
+        _ = itemEdit.SEQNUM <~> tfSeqNum.rx.text.orEmpty
         _ = itemEdit.WORDID ~> tfWordID.rx.text
-        _ = itemEdit.WORD <~> tfWord.rx.textInput
-        _ = itemEdit.NOTE <~> tfNote.rx.textInput
+        _ = itemEdit.WORD <~> tfWord.rx.text.orEmpty
+        _ = itemEdit.NOTE <~> tfNote.rx.text.orEmpty
         _ = itemEdit.FAMIID ~> tfFamiID.rx.text
         _ = itemEdit.ACCURACY ~> tfAccuracy.rx.text
         _ = vmEdit.isOKEnabled ~> btnDone.rx.isEnabled

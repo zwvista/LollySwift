@@ -32,7 +32,7 @@ class PhrasesLangDetailViewController: NSViewController, NSTableViewDataSource, 
         }
         _ = itemEdit.ID ~> tfID.rx.text.orEmpty
         _ = itemEdit.PHRASE <~> tfPhrase.rx.text.orEmpty
-        _ = itemEdit.TRANSLATION <~> tfTranslation.rx.text
+        _ = itemEdit.TRANSLATION <~> tfTranslation.rx.text.orEmpty
         _ = vmEdit.isOKEnabled ~> btnOK.rx.isEnabled
         btnOK.rx.tap.flatMap { [unowned self] _ in
             self.vmEdit.onOK()

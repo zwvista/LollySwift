@@ -39,7 +39,7 @@ class MUnitPhrase: NSObject, Codable, MPhraseProtocol {
     unowned var textbook: MTextbook!
     var UNITSTR: String { textbook.UNITSTR(UNIT) }
     var PARTSTR: String { textbook.PARTSTR(PART) }
-    var UNITPARTSEQNUM: String { "\(UNITSTR) \(SEQNUM)\n\(PARTSTR)" }
+    var UNITPARTSEQNUM: String { "\(UNITSTR)\n\(PARTSTR)\n\(SEQNUM)" }
 
     static func getDataByTextbook(_ textbook: MTextbook, unitPartFrom: Int, unitPartTo: Int) -> Observable<[MUnitPhrase]> {
         // SQL: SELECT * FROM VUNITPHRASES WHERE TEXTBOOKID=? AND UNITPART BETWEEN ? AND ? ORDER BY UNITPART,SEQNUM

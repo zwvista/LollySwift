@@ -23,8 +23,8 @@ class PhrasesLangDetailViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         _ = itemEdit.ID ~> tfID.rx.text.orEmpty
-        _ = itemEdit.PHRASE <~> tfPhrase.rx.textInput
-        _ = itemEdit.TRANSLATION <~> tfTranslation.rx.textInput
+        _ = itemEdit.PHRASE <~> tfPhrase.rx.text.orEmpty
+        _ = itemEdit.TRANSLATION <~> tfTranslation.rx.text.orEmpty
         _ = vmEdit.isOKEnabled ~> btnDone.rx.isEnabled
     }
     

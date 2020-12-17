@@ -35,12 +35,12 @@ class PatternsWebPageEditViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         _ = itemEdit.ID ~> tfID.rx.text.orEmpty
-        _ = itemEdit.PATTERNID <~> tfPatternID.rx.textInput
-        _ = itemEdit.PATTERN <~> tfPattern.rx.textInput
-        _ = itemEdit.SEQNUM <~> tfSeqNum.rx.textInput
+        _ = itemEdit.PATTERNID <~> tfPatternID.rx.text.orEmpty
+        _ = itemEdit.PATTERN <~> tfPattern.rx.text.orEmpty
+        _ = itemEdit.SEQNUM <~> tfSeqNum.rx.text.orEmpty
         _ = itemEdit.WEBPAGEID ~> tfWebPageID.rx.text.orEmpty
-        _ = itemEdit.TITLE <~> tfTitle.rx.textInput
-        _ = itemEdit.URL <~> tfURL.rx.textInput
+        _ = itemEdit.TITLE <~> tfTitle.rx.text.orEmpty
+        _ = itemEdit.URL <~> tfURL.rx.text.orEmpty
         btnNew.isEnabled = vmEdit.isAddWebPage
         btnExisting.isEnabled = vmEdit.isAddWebPage
         _ = vmEdit.isOKEnabled ~> btnDone.rx.isEnabled
