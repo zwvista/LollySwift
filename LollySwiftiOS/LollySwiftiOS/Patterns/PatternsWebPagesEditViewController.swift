@@ -1,5 +1,5 @@
 //
-//  PatternsWebPagesEditViewController.swift
+//  PatternsWebPagesListViewController.swift
 //  LollySwiftiOS
 //
 //  Created by 趙偉 on 2016/06/23.
@@ -11,7 +11,7 @@ import WebKit
 import RxSwift
 import NSObject_Rx
 
-class PatternsWebPagesEditViewController: UITableViewController {
+class PatternsWebPagesListViewController: UITableViewController {
     
     var vm: PatternsViewModel!
     @IBOutlet weak var btnEdit: UIBarButtonItem!

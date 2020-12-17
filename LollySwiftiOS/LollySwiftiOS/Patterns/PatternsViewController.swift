@@ -123,7 +123,7 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
         } else if let controller = segue.destination as? PatternsWebPagesBrowseViewController {
             vm.selectedPatternItem = sender as? MPattern
             controller.vm = vm
-        } else if let controller = segue.destination as? PatternsWebPagesEditViewController {
+        } else if let controller = segue.destination as? PatternsWebPagesListViewController {
             vm.selectedPatternItem = sender as? MPattern
             controller.vm = vm
         }
