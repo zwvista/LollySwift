@@ -62,6 +62,17 @@ class PatternsWebPagesEditViewController: UITableViewController {
         reindex()
     }
 
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let i = indexPath.row
+        let item = vm.arrWebPages[i]
+        func edit() {
+            performSegue(withIdentifier: "edit", sender: item)
+        }
+        let editAction = UITableViewRowAction(style: .normal, title: "Edit") { _,_ in edit() }
+        editAction.backgroundColor = .blue
+        return [editAction]
+    }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         if let controller = (segue.destination as? UINavigationController)?.topViewController as? PatternsWebPageEditViewController {
