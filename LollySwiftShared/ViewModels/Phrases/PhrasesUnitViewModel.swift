@@ -36,7 +36,7 @@ class PhrasesUnitViewModel: NSObject {
         } else {
             arrPhrasesFiltered = arrPhrases
             if !textFilter.isEmpty {
-                arrPhrasesFiltered = arrPhrasesFiltered!.filter { (scope == "Phrase" ? $0.PHRASE : $0.TRANSLATION ?? "").lowercased().contains(textFilter.lowercased()) }
+                arrPhrasesFiltered = arrPhrasesFiltered!.filter { (scope == "Phrase" ? $0.PHRASE : $0.TRANSLATION).lowercased().contains(textFilter.lowercased()) }
             }
             if textbookFilter != 0 {
                 arrPhrasesFiltered = arrPhrasesFiltered!.filter { $0.TEXTBOOKID == textbookFilter }

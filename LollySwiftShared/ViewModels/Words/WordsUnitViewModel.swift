@@ -37,7 +37,7 @@ class WordsUnitViewModel: NSObject {
         } else {
             arrWordsFiltered = arrWords
             if !textFilter.isEmpty {
-                arrWordsFiltered = arrWordsFiltered!.filter { (scope == "Word" ? $0.WORD : $0.NOTE ?? "").lowercased().contains(textFilter.lowercased()) }
+                arrWordsFiltered = arrWordsFiltered!.filter { (scope == "Word" ? $0.WORD : $0.NOTE).lowercased().contains(textFilter.lowercased()) }
             }
             if textbookFilter != 0 {
                 arrWordsFiltered = arrWordsFiltered!.filter { $0.TEXTBOOKID == textbookFilter }
@@ -109,7 +109,7 @@ class WordsUnitViewModel: NSObject {
     
     func getNotes(ifEmpty: Bool, oneComplete: @escaping (Int) -> Void, allComplete: @escaping () -> Void) {
         vmSettings.getNotes(wordCount: arrWords.count, isNoteEmpty: {
-            !ifEmpty || (self.arrWords[$0].NOTE ?? "").isEmpty
+            !ifEmpty || (self.arrWords[$0].NOTE).isEmpty
         }, getOne: { i in
             self.getNote(index: i).subscribe(onNext: {
                 oneComplete(i)

@@ -32,7 +32,7 @@ class WordsLangViewModel: NSObject {
         } else {
             arrWordsFiltered = arrWords
             if !textFilter.isEmpty {
-                arrWordsFiltered = arrWordsFiltered!.filter { (scope == "Word" ? $0.WORD : $0.NOTE ?? "").contains(textFilter) }
+                arrWordsFiltered = arrWordsFiltered!.filter { (scope == "Word" ? $0.WORD : $0.NOTE).contains(textFilter) }
             }
         }
     }
