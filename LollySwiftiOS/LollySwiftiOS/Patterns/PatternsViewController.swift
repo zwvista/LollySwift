@@ -92,6 +92,10 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
             alertController.addAction(browseWebPagesAction)
             let editWebPagesAction = UIAlertAction(title: "Edit Web Pages", style: .default) { _ in performSegue(withIdentifier: "edit pages", sender: item) }
             alertController.addAction(editWebPagesAction)
+            let copyPatternAction = UIAlertAction(title: "Copy Pattern", style: .default) { _ in iOSApi.copyText(item.PATTERN) }
+            alertController.addAction(copyPatternAction)
+            let googlePatternAction = UIAlertAction(title: "Google Pattern", style: .default) { _ in iOSApi.googleString(item.PATTERN) }
+            alertController.addAction(googlePatternAction)
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
             alertController.addAction(cancelAction)
             self.present(alertController, animated: true) {}
