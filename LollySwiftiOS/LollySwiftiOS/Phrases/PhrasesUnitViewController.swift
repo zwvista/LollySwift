@@ -13,7 +13,7 @@ import NSObject_Rx
 class PhrasesUnitViewController: PhrasesBaseViewController {
     
     var vm: PhrasesUnitViewModel!
-    var arrPhrases: [MUnitPhrase] { sbTextFilter.text != "" ? vm.arrPhrasesFiltered! : vm.arrPhrases }
+    var arrPhrases: [MUnitPhrase] { vm.arrPhrasesFiltered ?? vm.arrPhrases }
     @IBOutlet weak var btnEdit: UIBarButtonItem!
     
     override func viewDidLoad() {

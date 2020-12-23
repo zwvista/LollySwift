@@ -13,7 +13,7 @@ import NSObject_Rx
 class PhrasesLangViewController: PhrasesBaseViewController {
     
     var vm: PhrasesLangViewModel!
-    var arrPhrases: [MLangPhrase] { sbTextFilter.text != "" ? vm.arrPhrasesFiltered! : vm.arrPhrases }
+    var arrPhrases: [MLangPhrase] { vm.arrPhrasesFiltered ?? vm.arrPhrases }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

@@ -7,17 +7,28 @@
 //
 
 import UIKit
+import DropDown
 import RxSwift
 import NSObject_Rx
 
 class PhrasesTextbookViewController: PhrasesBaseViewController {
     
     var vm: PhrasesUnitViewModel!
-    var arrPhrases: [MUnitPhrase] { sbTextFilter.text != "" ? vm.arrPhrasesFiltered! : vm.arrPhrases }
-    @IBOutlet weak var btnEdit: UIBarButtonItem!
-    
+    var arrPhrases: [MUnitPhrase] { vm.arrPhrasesFiltered ?? vm.arrPhrases }
+
+    @IBOutlet weak var btnTextbookFilter: UIButton!
+    let ddTextbookFilter = DropDown()
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        ddTextbookFilter.anchorView = btnTextbookFilter
+        ddTextbookFilter.dataSource = vmSettings.arrTextbookFilters.map { $0.label }
+        ddTextbookFilter.selectRow(0)
+        ddTextbookFilter.selectionAction = { [unowned self] (index: Int, item: String) in
+            btnTextbookFilter.setTitle(item, for: .normal)
+            self.searchBarSearchButtonClicked(self.sbTextFilter)
+        }
+        btnTextbookFilter.setTitle(vmSettings.arrTextbookFilters[0].label, for: .normal)
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         refresh(refreshControl)
     }
@@ -29,6 +40,10 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
             self.tableView.reloadData()
             self.view.removeBlurLoader()
         }
+    }
+    
+    @IBAction func showTextbookFilterDropDown(_ sender: AnyObject) {
+        ddTextbookFilter.show()
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -91,7 +106,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
     }
     
     override func applyFilters() {
-        vm.applyFilters(textFilter: sbTextFilter.text!, scope: btnScopeFilter.titleLabel!.text!, textbookFilter: 0)
+        vm.applyFilters(textFilter: sbTextFilter.text!, scope: ddScopeFilter.selectedItem!, textbookFilter: vmSettings.arrTextbookFilters.first { $0.label == ddTextbookFilter.selectedItem! }!.value)
         tableView.reloadData()
     }
     
@@ -100,11 +115,6 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
         guard let controller = (segue.destination as? UINavigationController)?.topViewController as? PhrasesTextbookDetailViewController else {return}
         let item = sender as! MUnitPhrase
         controller.startEdit(vm: vm, item: item, wordid: 0)
-    }
-    
-    @IBAction func btnEditClicked(_ sender: AnyObject) {
-        tableView.isEditing = !tableView.isEditing
-        btnEdit.title = tableView.isEditing ? "Done" : "Edit"
     }
     
     @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {

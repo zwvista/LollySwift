@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -1235,8 +1235,18 @@
                                     <action selector="showScopeFilterDropDown:" destination="SwL-I5-435" eventType="touchUpInside" id="5Sv-1d-AUN"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qcr-pX-hSw">
+                                <rect key="frame" x="0.0" y="144" width="414" height="56"/>
+                                <color key="backgroundColor" red="1" green="0.2527923882" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="showTextbookFilterDropDown:" destination="SwL-I5-435" eventType="touchUpInside" id="cMf-Uc-krq"/>
+                                </connections>
+                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="88" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="26N-j5-mtJ">
-                                <rect key="frame" x="0.0" y="144" width="414" height="718"/>
+                                <rect key="frame" x="0.0" y="200" width="414" height="662"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="detailButton" indentationWidth="10" reuseIdentifier="WordCell" rowHeight="88" id="h4I-9y-tps" customClass="WordsCommonCell" customModule="LollySwiftiOS" customModuleProvider="target">
@@ -1296,15 +1306,19 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="jpU-G1-PiU" firstAttribute="leading" secondItem="FOB-iP-b55" secondAttribute="leading" id="0oV-9Q-c1r"/>
+                            <constraint firstItem="Qcr-pX-hSw" firstAttribute="height" secondItem="qnI-2g-f6k" secondAttribute="height" id="1QY-jX-UiM"/>
+                            <constraint firstItem="Qcr-pX-hSw" firstAttribute="leading" secondItem="FOB-iP-b55" secondAttribute="leading" id="6Px-c5-Hoo"/>
                             <constraint firstItem="qnI-2g-f6k" firstAttribute="width" secondItem="FOB-iP-b55" secondAttribute="width" multiplier="1:3" id="8PG-oI-cKN"/>
                             <constraint firstItem="FOB-iP-b55" firstAttribute="trailing" secondItem="26N-j5-mtJ" secondAttribute="trailing" id="GWz-c0-hpZ"/>
+                            <constraint firstItem="FOB-iP-b55" firstAttribute="trailing" secondItem="Qcr-pX-hSw" secondAttribute="trailing" id="HlK-xE-NpN"/>
                             <constraint firstItem="qnI-2g-f6k" firstAttribute="top" secondItem="FOB-iP-b55" secondAttribute="top" id="Nzu-vw-hyf"/>
                             <constraint firstItem="jpU-G1-PiU" firstAttribute="width" secondItem="FOB-iP-b55" secondAttribute="width" multiplier="2:3" id="Qjk-px-SBp"/>
+                            <constraint firstItem="26N-j5-mtJ" firstAttribute="top" secondItem="Qcr-pX-hSw" secondAttribute="bottom" id="Sb1-SG-yjX"/>
                             <constraint firstItem="26N-j5-mtJ" firstAttribute="leading" secondItem="FOB-iP-b55" secondAttribute="leading" id="cLE-YZ-Oee"/>
                             <constraint firstItem="qnI-2g-f6k" firstAttribute="centerY" secondItem="jpU-G1-PiU" secondAttribute="centerY" id="gnk-Ha-2No"/>
                             <constraint firstItem="FOB-iP-b55" firstAttribute="top" secondItem="jpU-G1-PiU" secondAttribute="top" id="kD6-U2-aZa"/>
                             <constraint firstItem="FOB-iP-b55" firstAttribute="trailing" secondItem="qnI-2g-f6k" secondAttribute="trailing" id="oPb-86-jDw"/>
-                            <constraint firstItem="26N-j5-mtJ" firstAttribute="top" secondItem="jpU-G1-PiU" secondAttribute="bottom" id="zcy-2Q-ykD"/>
+                            <constraint firstItem="Qcr-pX-hSw" firstAttribute="top" secondItem="jpU-G1-PiU" secondAttribute="bottom" id="wIc-9X-IQT"/>
                             <constraint firstItem="26N-j5-mtJ" firstAttribute="bottom" secondItem="FOB-iP-b55" secondAttribute="bottom" id="zwH-b0-iUE"/>
                         </constraints>
                     </view>
@@ -1317,6 +1331,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="btnScopeFilter" destination="qnI-2g-f6k" id="Dhj-nr-8mn"/>
+                        <outlet property="btnTextbookFilter" destination="Qcr-pX-hSw" id="8yK-Ki-UmT"/>
                         <outlet property="sbTextFilter" destination="jpU-G1-PiU" id="Drt-1c-IS0"/>
                         <outlet property="tableView" destination="26N-j5-mtJ" id="r7c-c6-hcu"/>
                         <segue destination="owF-Ne-4GQ" kind="presentation" identifier="edit" id="2py-E2-Zrt"/>
@@ -1325,7 +1340,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mXf-kh-5kz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3741" y="2391"/>
+            <point key="canvasLocation" x="3740.579710144928" y="2390.625"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="2GX-AL-mM6">
@@ -1882,7 +1897,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="TNO-jG-07H"/>
-        <segue reference="AhY-9e-jhY"/>
+        <segue reference="v1a-tF-5Us"/>
         <segue reference="drm-CW-Gpi"/>
     </inferredMetricsTieBreakers>
     <resources>

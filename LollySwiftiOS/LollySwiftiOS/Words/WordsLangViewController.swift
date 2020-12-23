@@ -13,7 +13,7 @@ import NSObject_Rx
 class WordsLangViewController: WordsBaseViewController {
 
     var vm: WordsLangViewModel!
-    var arrWords: [MLangWord] { sbTextFilter.text != "" ? vm.arrWordsFiltered! : vm.arrWords }
+    var arrWords: [MLangWord] { vm.arrWordsFiltered ?? vm.arrWords }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

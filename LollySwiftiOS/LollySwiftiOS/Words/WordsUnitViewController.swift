@@ -13,7 +13,7 @@ import NSObject_Rx
 class WordsUnitViewController: WordsBaseViewController {
 
     var vm: WordsUnitViewModel!
-    var arrWords: [MUnitWord] { sbTextFilter.text != "" ? vm.arrWordsFiltered! : vm.arrWords }
+    var arrWords: [MUnitWord] { vm.arrWordsFiltered ?? vm.arrWords }
     @IBOutlet weak var btnEdit: UIBarButtonItem!
     
     override func viewDidLoad() {

@@ -7,16 +7,28 @@
 //
 
 import UIKit
+import DropDown
 import RxSwift
 import NSObject_Rx
 
 class WordsTextbookViewController: WordsBaseViewController {
 
     var vm: WordsUnitViewModel!
-    var arrWords: [MUnitWord] { sbTextFilter.text != "" ? vm.arrWordsFiltered! : vm.arrWords }
+    var arrWords: [MUnitWord] { vm.arrWordsFiltered ?? vm.arrWords }
     
+    @IBOutlet weak var btnTextbookFilter: UIButton!
+    let ddTextbookFilter = DropDown()
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        ddTextbookFilter.anchorView = btnTextbookFilter
+        ddTextbookFilter.dataSource = vmSettings.arrTextbookFilters.map { $0.label }
+        ddTextbookFilter.selectRow(0)
+        ddTextbookFilter.selectionAction = { [unowned self] (index: Int, item: String) in
+            btnTextbookFilter.setTitle(item, for: .normal)
+            self.searchBarSearchButtonClicked(self.sbTextFilter)
+        }
+        btnTextbookFilter.setTitle(vmSettings.arrTextbookFilters[0].label, for: .normal)
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         refresh(refreshControl)
     }
@@ -28,6 +40,10 @@ class WordsTextbookViewController: WordsBaseViewController {
             self.tableView.reloadData()
             self.view.removeBlurLoader()
         }
+    }
+    
+    @IBAction func showTextbookFilterDropDown(_ sender: AnyObject) {
+        ddTextbookFilter.show()
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -83,7 +99,7 @@ class WordsTextbookViewController: WordsBaseViewController {
     }
     
     override func applyFilters() {
-        vm.applyFilters(textFilter: sbTextFilter.text!, scope: btnScopeFilter.titleLabel!.text!, textbookFilter: 0)
+        vm.applyFilters(textFilter: sbTextFilter.text!, scope: ddScopeFilter.selectedItem!, textbookFilter: vmSettings.arrTextbookFilters.first { $0.label == ddTextbookFilter.selectedItem! }!.value)
         tableView.reloadData()
     }
     
