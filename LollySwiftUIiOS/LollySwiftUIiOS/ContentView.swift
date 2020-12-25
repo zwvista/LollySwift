@@ -8,17 +8,22 @@
 import SwiftUI
 
 struct ContentView: View {
+    @ObservedObject var vm = vmSettings
     @State var text = ""
     var body: some View {
         VStack {
             SearchBar(text: $text, placeholder: "Word") {_ in }
-                .padding()
+            Picker("Dictionary", selection: $vm.selectedDictReference) {
+                ForEach(vm.arrDictsReference, id: \.self) {
+                    Text($0.DICTNAME)
+                }
+            }
             WebView(req: ContentView.makeURLRequest())
         }
     }
 
     static func makeURLRequest() -> URLRequest {
-        let request = URLRequest(url: URL(string: "https://www.google.co.jp")!)
+        let request = URLRequest(url: URL(string: "about:blank")!)
         return request
     }
 }
