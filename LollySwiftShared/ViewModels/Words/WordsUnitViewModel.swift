@@ -114,7 +114,7 @@ class WordsUnitViewModel: NSObject {
             self.getNote(index: i).subscribe(onNext: {
                 oneComplete(i)
             }) ~ self.rx.disposeBag
-        }, allComplete: allComplete)
+        }, allComplete: allComplete) ~ self.rx.disposeBag
     }
 
     func clearNote(index: Int) -> Observable<()> {

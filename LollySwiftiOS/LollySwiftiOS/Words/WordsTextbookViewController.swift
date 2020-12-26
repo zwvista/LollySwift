@@ -79,12 +79,18 @@ class WordsTextbookViewController: WordsBaseViewController {
             let editAction2 = UIAlertAction(title: "Edit", style: .default) { _ in edit() }
             alertController.addAction(editAction2)
             if vmSettings.hasDictNote {
-                let noteAction = UIAlertAction(title: "Retrieve Note", style: .default) { _ in
+                let getNoteAction = UIAlertAction(title: "Retrieve Note", style: .default) { _ in
                     self.vm.getNote(index: indexPath.row).subscribe(onNext: {
                         self.tableView.reloadRows(at: [indexPath], with: .fade)
                     }) ~ self.rx.disposeBag
                 }
-                alertController.addAction(noteAction)
+                alertController.addAction(getNoteAction)
+                let clearNoteAction = UIAlertAction(title: "Clear Note", style: .default) { _ in
+                    self.vm.clearNote(index: indexPath.row).subscribe(onNext: {
+                        self.tableView.reloadRows(at: [indexPath], with: .fade)
+                    }) ~ self.rx.disposeBag
+                }
+                alertController.addAction(clearNoteAction)
             }
             let copyWordAction = UIAlertAction(title: "Copy Word", style: .default) { _ in iOSApi.copyText(item.WORD) }
             alertController.addAction(copyWordAction)

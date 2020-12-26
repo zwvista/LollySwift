@@ -82,12 +82,18 @@ class WordsUnitViewController: WordsBaseViewController {
             let editAction2 = UIAlertAction(title: "Edit", style: .default) { _ in edit() }
             alertController.addAction(editAction2)
             if vmSettings.hasDictNote {
-                let noteAction = UIAlertAction(title: "Retrieve Note", style: .default) { _ in
+                let getNoteAction = UIAlertAction(title: "Retrieve Note", style: .default) { _ in
                     self.vm.getNote(index: indexPath.row).subscribe(onNext: {
                         self.tableView.reloadRows(at: [indexPath], with: .fade)
                     }) ~ self.rx.disposeBag
                 }
-                alertController.addAction(noteAction)
+                alertController.addAction(getNoteAction)
+                let clearNoteAction = UIAlertAction(title: "Clear Note", style: .default) { _ in
+                    self.vm.clearNote(index: indexPath.row).subscribe(onNext: {
+                        self.tableView.reloadRows(at: [indexPath], with: .fade)
+                    }) ~ self.rx.disposeBag
+                }
+                alertController.addAction(clearNoteAction)
             }
             let copyWordAction = UIAlertAction(title: "Copy Word", style: .default) { _ in iOSApi.copyText(item.WORD) }
             alertController.addAction(copyWordAction)
@@ -147,14 +153,26 @@ class WordsUnitViewController: WordsBaseViewController {
         }
 
         if vmSettings.hasDictNote {
-            let notesAllAction = UIAlertAction(title: "Retrieve All Notes", style: .default) { _ in
+            let getNotesAllAction = UIAlertAction(title: "Retrieve All Notes", style: .default) { _ in
                 startTimer(ifEmpty: false)
             }
-            alertController.addAction(notesAllAction)
-            let notesEmptyAction = UIAlertAction(title: "Retrieve Notes If Empty", style: .default) { _ in
+            alertController.addAction(getNotesAllAction)
+            let getNotesEmptyAction = UIAlertAction(title: "Retrieve Notes If Empty", style: .default) { _ in
                 startTimer(ifEmpty: true)
             }
-            alertController.addAction(notesEmptyAction)
+            alertController.addAction(getNotesEmptyAction)
+            let clearNotesAllAction = UIAlertAction(title: "Clear All Notes", style: .default) { _ in
+                self.vm.clearNotes(ifEmpty: false) { i in
+                    self.tableView.reloadRows(at: [IndexPath(row: i, section: 0)], with: .fade)
+                }.subscribe() ~ self.rx.disposeBag
+            }
+            alertController.addAction(clearNotesAllAction)
+            let clearNotesEmptyAction = UIAlertAction(title: "Clear Notes If Empty", style: .default) { _ in
+                self.vm.clearNotes(ifEmpty: true) { i in
+                    self.tableView.reloadRows(at: [IndexPath(row: i, section: 0)], with: .fade)
+                }.subscribe() ~ self.rx.disposeBag
+            }
+            alertController.addAction(clearNotesEmptyAction)
         }
         let batchAction = UIAlertAction(title: "Batch Edit", style: .default) { _ in
             self.performSegue(withIdentifier: "batch", sender: nil)

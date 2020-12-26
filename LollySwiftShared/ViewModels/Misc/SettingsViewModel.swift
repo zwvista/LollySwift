@@ -505,8 +505,8 @@ class SettingsViewModel: NSObject {
         }
     }
     
-    func getNotes(wordCount: Int, isNoteEmpty: @escaping (Int) -> Bool, getOne: @escaping (Int) -> Void, allComplete: @escaping () -> Void) {
-        guard hasDictNote else {return}
+    func getNotes(wordCount: Int, isNoteEmpty: @escaping (Int) -> Bool, getOne: @escaping (Int) -> Void, allComplete: @escaping () -> Void) -> Disposable {
+        guard hasDictNote else { return Observable<Any>.empty().subscribe() }
         var i = 0
         var subscription: Disposable?
         subscription = Observable<Int>.interval(.milliseconds(selectedDictNote.WAIT), scheduler: MainScheduler.instance).subscribe { _ in
@@ -524,7 +524,7 @@ class SettingsViewModel: NSObject {
                     i += 1
                 }
             }
-        subscription! ~ rx.disposeBag
+        return subscription!
     }
     
     func clearNotes(wordCount: Int, isNoteEmpty: @escaping (Int) -> Bool, getOne: @escaping (Int) -> Observable<()>) -> Observable<()> {
