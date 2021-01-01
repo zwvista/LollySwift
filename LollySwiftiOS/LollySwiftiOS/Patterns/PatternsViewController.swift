@@ -19,6 +19,7 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var sbTextFilter: UISearchBar!
     @IBOutlet weak var btnScopeFilter: UIButton!
+    let refreshControl = UIRefreshControl()
 
     let ddScopeFilter = DropDown()
 
@@ -32,8 +33,15 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
             self.searchBarSearchButtonClicked(self.sbTextFilter)
         }
         btnScopeFilter.setTitle(SettingsViewModel.arrScopePatternFilters[0], for: .normal)
+        tableView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
+        refresh(refreshControl)
+    }
+    
+    @objc func refresh(_ sender: UIRefreshControl) {
         view.showBlurLoader()
         vm = PatternsViewModel(settings: vmSettings, needCopy: false) {
+            sender.endRefreshing()
             self.tableView.reloadData()
             self.view.removeBlurLoader()
         }
