@@ -1,5 +1,5 @@
 //
-//  PatternsDetailViewModel.swift
+//  PatternsWebPagesDetailViewModel.swift
 //  LollySwiftMac
 //
 //  Created by 趙偉 on 2020/07/21.
@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 import RxRelay
 
-class PatternsWebPageEditViewModel: NSObject {
+class PatternsWebPagesDetailViewModel: NSObject {
     var item: MPatternWebPage!
     var itemEdit: MPatternWebPageEdit!
     var isAddPatternWebPage: Bool!
@@ -27,8 +27,8 @@ class PatternsWebPageEditViewModel: NSObject {
     
     func onOK() -> Observable<()> {
         itemEdit.save(to: item)
-        return (isAddWebPage ? PatternsViewModel.createWebPage(item: item) : PatternsViewModel.updateWebPage(item: item)).flatMap {
-            self.isAddPatternWebPage ? PatternsViewModel.createPatternWebPage(item: self.item) : PatternsViewModel.updatePatternWebPage(item: self.item)
+        return (isAddWebPage ? PatternsWebPagesViewModel.createWebPage(item: item) : PatternsWebPagesViewModel.updateWebPage(item: item)).flatMap {
+            self.isAddPatternWebPage ? PatternsWebPagesViewModel.createPatternWebPage(item: self.item) : PatternsWebPagesViewModel.updatePatternWebPage(item: self.item)
         }
     }
 }

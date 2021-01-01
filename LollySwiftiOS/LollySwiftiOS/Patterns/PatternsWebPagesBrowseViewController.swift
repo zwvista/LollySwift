@@ -18,7 +18,7 @@ class PatternsWebPagesBrowseViewController: UIViewController, WKUIDelegate, WKNa
     @IBOutlet weak var btnWebPage: UIButton!
     weak var wvWebPage: WKWebView!
     
-    var vm: PatternsViewModel!
+    var vm: PatternsWebPagesViewModel!
     let ddWebPage = DropDown()
 
     override func viewDidLoad() {

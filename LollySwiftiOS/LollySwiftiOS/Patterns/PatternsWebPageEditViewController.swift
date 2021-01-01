@@ -12,7 +12,7 @@ import WebKit
 class PatternsWebPageEditViewController: UITableViewController {
 
     var vm: PatternsViewModel!
-    var vmEdit: PatternsWebPageEditViewModel!
+    var vmEdit: PatternsWebPagesDetailViewModel!
     var itemEdit: MPatternWebPageEdit { vmEdit.itemEdit }
     var complete: (() -> Void)?
     var item: MPatternWebPage!
@@ -29,7 +29,7 @@ class PatternsWebPageEditViewController: UITableViewController {
     @IBOutlet weak var btnDone: UIBarButtonItem!
     
     func startEdit(item: MPatternWebPage) {
-        vmEdit = PatternsWebPageEditViewModel(item: item)
+        vmEdit = PatternsWebPagesDetailViewModel(item: item)
     }
 
     override func viewDidLoad() {

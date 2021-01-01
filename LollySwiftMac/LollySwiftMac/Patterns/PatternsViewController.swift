@@ -22,13 +22,14 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     @IBOutlet weak var tfStatusText: NSTextField!
 
     var vm: PatternsViewModel!
+    var vmWP: PatternsWebPagesViewModel!
     @objc var newPattern = ""
     @objc var textFilter = ""
     let synth = NSSpeechSynthesizer()
     var isSpeaking = true
     var vmSettings: SettingsViewModel! { vm.vmSettings }
     var arrPatterns: [MPattern] { vm.arrPatternsFiltered ?? vm.arrPatterns }
-    var arrWebPages: [MPatternWebPage] { vm.arrWebPages }
+    var arrWebPages: [MPatternWebPage] { vmWP.arrWebPages }
     
     // https://developer.apple.com/videos/play/wwdc2011/120/
     // https://stackoverflow.com/questions/2121907/drag-drop-reorder-rows-on-nstableview
@@ -82,7 +83,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
                 tv.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvPatterns.tableColumns.count))
             }) ~ rx.disposeBag
         } else if tv === tvWebPages {
-            PatternsViewModel.updateWebPage(item: item as! MPatternWebPage).subscribe(onNext: {
+            PatternsWebPagesViewModel.updateWebPage(item: item as! MPatternWebPage).subscribe(onNext: {
                 tv.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvPatterns.tableColumns.count))
             }) ~ rx.disposeBag
         }
@@ -107,19 +108,15 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
             updateStatusText()
             let row = tvPatterns.selectedRow
             vm.selectedPatternItem = row == -1 ? nil : arrPatterns[row]
-            if row == -1 {
-                vm.arrWebPages = []
-                tvWebPages.reloadData()
-            } else {
-                vm.getWebPages().subscribe(onNext: {
-                    self.tvWebPages.reloadData()
-                    if self.tvWebPages.numberOfRows > 0 {
-                        self.tvWebPages.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
-                    }
-                }) ~ rx.disposeBag
-                if isSpeaking {
-                    speak(self)
+            vmWP.selectedPatternItem = vm.selectedPatternItem
+            vmWP.getWebPages().subscribe(onNext: {
+                self.tvWebPages.reloadData()
+                if self.tvWebPages.numberOfRows > 0 {
+                    self.tvWebPages.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
                 }
+            }) ~ rx.disposeBag
+            if isSpeaking {
+                speak(self)
             }
         } else if tv === tvWebPages {
             let row = tvWebPages.selectedRow
@@ -166,6 +163,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
         vm = PatternsViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) {
             self.doRefresh()
         }
+        vmWP = PatternsWebPagesViewModel(settings: vm.vmSettings, needCopy: false)
         synth.setVoice(NSSpeechSynthesizer.VoiceName(rawValue: vmSettings.macVoiceName))
     }
     func doRefresh() {
@@ -202,7 +200,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     @IBAction func addWebPage(_ sender: AnyObject) {
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "PatternsWebPageEditViewController") as! PatternsWebPageEditViewController
         detailVC.vm = vm
-        detailVC.item = vm.newPatternWebPage()
+        detailVC.item = vmWP.newPatternWebPage()
         detailVC.complete = { self.tvWebPages.reloadData(); self.addWebPage(self) }
         self.presentAsSheet(detailVC)
     }
@@ -257,7 +255,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
         var newIndexOffset = 0
         
         func moveRow(at oldIndex: Int, to newIndex: Int) {
-            vm.arrWebPages.moveElement(at: oldIndex, to: newIndex)
+            vmWP.arrWebPages.moveElement(at: oldIndex, to: newIndex)
             tableView.moveRow(at: oldIndex, to: newIndex)
         }
         
@@ -272,7 +270,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
             }
         }
         let col = tableView.tableColumns.firstIndex { $0.identifier.rawValue == "SEQNUM" }!
-        vm.reindexWebPage {
+        vmWP.reindexWebPage {
             tableView.reloadData(forRowIndexes: [$0], columnIndexes: [col])
         }
         tableView.endUpdates()

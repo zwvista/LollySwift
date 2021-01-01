@@ -14,7 +14,7 @@ import NSObject_Rx
 class PatternsWebPageEditViewController: NSViewController {
     
     var vm: PatternsViewModel!
-    var vmEdit: PatternsWebPageEditViewModel!
+    var vmEdit: PatternsWebPagesDetailViewModel!
     var itemEdit: MPatternWebPageEdit { vmEdit.itemEdit }
     var complete: (() -> Void)?
     var item: MPatternWebPage!
@@ -32,7 +32,7 @@ class PatternsWebPageEditViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        vmEdit = PatternsWebPageEditViewModel(item: item)
+        vmEdit = PatternsWebPagesDetailViewModel(item: item)
         _ = itemEdit.ID ~> tfID.rx.text.orEmpty
         _ = itemEdit.PATTERNID <~> tfPatternID.rx.text.orEmpty
         _ = itemEdit.PATTERN <~> tfPattern.rx.text.orEmpty

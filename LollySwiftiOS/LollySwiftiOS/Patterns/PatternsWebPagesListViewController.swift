@@ -13,7 +13,7 @@ import NSObject_Rx
 
 class PatternsWebPagesListViewController: UITableViewController {
     
-    var vm: PatternsViewModel!
+    var vm: PatternsWebPagesViewModel!
     @IBOutlet weak var btnEdit: UIBarButtonItem!
 
     override func viewDidLoad() {

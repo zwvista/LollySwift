@@ -153,6 +153,6 @@ class BlogViewModel: NSObject {
         }, allComplete: {
             let result = arr.joined(separator: "\n")
             complete(result)
-        })
+        }) ~ rx.disposeBag
     }
 }

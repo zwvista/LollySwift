@@ -126,10 +126,12 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
             controller.startEdit(vm: vm, item: item)
         } else if let controller = segue.destination as? PatternsWebPagesBrowseViewController {
             vm.selectedPatternItem = sender as? MPattern
-            controller.vm = vm
+            controller.vm = PatternsWebPagesViewModel(settings: vmSettings, needCopy: false)
+            controller.vm.selectedPatternItem = vm.selectedPatternItem
         } else if let controller = segue.destination as? PatternsWebPagesListViewController {
             vm.selectedPatternItem = sender as? MPattern
-            controller.vm = vm
+            controller.vm = PatternsWebPagesViewModel(settings: vmSettings, needCopy: false)
+            controller.vm.selectedPatternItem = vm.selectedPatternItem
         }
     }
 
