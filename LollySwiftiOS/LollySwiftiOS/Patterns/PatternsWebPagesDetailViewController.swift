@@ -1,5 +1,5 @@
 //
-//  PatternsWebPageEditViewController.swift
+//  PatternsWebPagesDetailViewController.swift
 //  LollySwiftiOS
 //
 //  Created by 趙偉 on 2016/06/23.
@@ -9,7 +9,7 @@
 import UIKit
 import WebKit
 
-class PatternsWebPageEditViewController: UITableViewController {
+class PatternsWebPagesDetailViewController: UITableViewController {
 
     var vm: PatternsViewModel!
     var vmEdit: PatternsWebPagesDetailViewModel!

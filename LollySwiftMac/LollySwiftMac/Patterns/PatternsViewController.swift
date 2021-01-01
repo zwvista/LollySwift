@@ -198,7 +198,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     }
 
     @IBAction func addWebPage(_ sender: AnyObject) {
-        let detailVC = self.storyboard!.instantiateController(withIdentifier: "PatternsWebPageEditViewController") as! PatternsWebPageEditViewController
+        let detailVC = self.storyboard!.instantiateController(withIdentifier: "PatternsWebPagesDetailViewController") as! PatternsWebPagesDetailViewController
         detailVC.vm = vm
         detailVC.item = vmWP.newPatternWebPage()
         detailVC.complete = { self.tvWebPages.reloadData(); self.addWebPage(self) }
@@ -206,7 +206,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     }
 
     @IBAction func editWebPage(_ sender: AnyObject) {
-        let detailVC = self.storyboard!.instantiateController(withIdentifier: "PatternsWebPageEditViewController") as! PatternsWebPageEditViewController
+        let detailVC = self.storyboard!.instantiateController(withIdentifier: "PatternsWebPagesDetailViewController") as! PatternsWebPagesDetailViewController
         detailVC.vm = vm
         let i = tvWebPages.selectedRow
         detailVC.item = MPatternWebPage()

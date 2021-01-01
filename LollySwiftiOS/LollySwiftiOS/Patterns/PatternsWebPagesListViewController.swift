@@ -26,6 +26,7 @@ class PatternsWebPagesListViewController: UITableViewController {
     @objc func refresh(_ sender: UIRefreshControl) {
         vm.getWebPages().subscribe(onNext: {
             sender.endRefreshing()
+            self.tableView.reloadData()
         }) ~ rx.disposeBag
     }
 
@@ -81,7 +82,7 @@ class PatternsWebPagesListViewController: UITableViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
-        if let controller = (segue.destination as? UINavigationController)?.topViewController as? PatternsWebPageEditViewController {
+        if let controller = (segue.destination as? UINavigationController)?.topViewController as? PatternsWebPagesDetailViewController {
             let item = segue.identifier == "add" ? vm.newPatternWebPage() : vm.currentWebPage
             controller.startEdit(item: item)
         }
@@ -94,7 +95,7 @@ class PatternsWebPagesListViewController: UITableViewController {
 
     @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
         guard segue.identifier == "Done" else {return}
-        if let controller = segue.source as? PatternsWebPageEditViewController {
+        if let controller = segue.source as? PatternsWebPagesDetailViewController {
             controller.vmEdit.onOK().subscribe(onNext: {
             }) ~ rx.disposeBag
         }

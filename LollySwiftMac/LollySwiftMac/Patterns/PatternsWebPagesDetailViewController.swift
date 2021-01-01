@@ -1,5 +1,5 @@
 //
-//  PatternsWebPageEditViewController.swift
+//  PatternsWebPagesDetailViewController.swift
 //  LollySwiftMac
 //
 //  Created by 趙偉 on 2020/01/01.
@@ -11,7 +11,7 @@ import RxSwift
 import NSObject_Rx
 
 @objcMembers
-class PatternsWebPageEditViewController: NSViewController {
+class PatternsWebPagesDetailViewController: NSViewController {
     
     var vm: PatternsViewModel!
     var vmEdit: PatternsWebPagesDetailViewModel!
