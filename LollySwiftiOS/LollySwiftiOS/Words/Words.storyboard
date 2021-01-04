@@ -1219,34 +1219,53 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" placeholder="Filter" translatesAutoresizingMaskIntoConstraints="NO" id="jpU-G1-PiU">
-                                <rect key="frame" x="0.0" y="88" width="276" height="56"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <outlet property="delegate" destination="SwL-I5-435" id="Z8G-tO-cLj"/>
                                 </connections>
                             </searchBar>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qnI-2g-f6k">
-                                <rect key="frame" x="276" y="88" width="138" height="56"/>
-                                <color key="backgroundColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Button">
-                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="showScopeFilterDropDown:" destination="SwL-I5-435" eventType="touchUpInside" id="5Sv-1d-AUN"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qcr-pX-hSw">
-                                <rect key="frame" x="0.0" y="144" width="414" height="56"/>
-                                <color key="backgroundColor" red="1" green="0.2527923882" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Button">
-                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="showTextbookFilterDropDown:" destination="SwL-I5-435" eventType="touchUpInside" id="cMf-Uc-krq"/>
-                                </connections>
-                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IWv-Jl-GLt">
+                                <rect key="frame" x="0.0" y="144" width="414" height="44"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Soe-lr-94u">
+                                        <rect key="frame" x="0.0" y="0.0" width="207" height="44"/>
+                                        <color key="backgroundColor" red="1" green="0.2527923882" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Button">
+                                            <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="showTextbookFilterDropDown:" destination="SwL-I5-435" eventType="touchUpInside" id="uKv-C9-gBf"/>
+                                            <action selector="showWordDropDown:" destination="sKF-T7-DSr" eventType="touchUpInside" id="qaZ-4N-D6O"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Pq-5y-y9l">
+                                        <rect key="frame" x="207" y="0.0" width="207" height="44"/>
+                                        <color key="backgroundColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Button">
+                                            <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="showDictDropDown:" destination="sKF-T7-DSr" eventType="touchUpInside" id="nEg-Ha-zGi"/>
+                                            <action selector="showScopeFilterDropDown:" destination="SwL-I5-435" eventType="touchUpInside" id="Wn0-kw-m29"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="1Pq-5y-y9l" firstAttribute="centerY" secondItem="IWv-Jl-GLt" secondAttribute="centerY" id="DXa-gn-Hc1"/>
+                                    <constraint firstItem="Soe-lr-94u" firstAttribute="centerY" secondItem="IWv-Jl-GLt" secondAttribute="centerY" id="Hj7-1v-S0F"/>
+                                    <constraint firstAttribute="trailing" secondItem="1Pq-5y-y9l" secondAttribute="trailing" id="cBC-Hw-hLN"/>
+                                    <constraint firstItem="Soe-lr-94u" firstAttribute="width" secondItem="IWv-Jl-GLt" secondAttribute="width" multiplier="1:2" id="hgq-kP-EcP"/>
+                                    <constraint firstItem="Soe-lr-94u" firstAttribute="height" secondItem="IWv-Jl-GLt" secondAttribute="height" id="jYO-5M-1UE"/>
+                                    <constraint firstItem="Soe-lr-94u" firstAttribute="leading" secondItem="IWv-Jl-GLt" secondAttribute="leading" id="uGC-9O-g9P"/>
+                                    <constraint firstAttribute="height" constant="44" id="vg2-W9-Qlr"/>
+                                    <constraint firstItem="1Pq-5y-y9l" firstAttribute="width" secondItem="IWv-Jl-GLt" secondAttribute="width" multiplier="1:2" id="wZx-Oj-xB3"/>
+                                    <constraint firstItem="1Pq-5y-y9l" firstAttribute="height" secondItem="IWv-Jl-GLt" secondAttribute="height" id="x5l-he-Zmg"/>
+                                </constraints>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="88" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="26N-j5-mtJ">
-                                <rect key="frame" x="0.0" y="200" width="414" height="662"/>
+                                <rect key="frame" x="0.0" y="188" width="414" height="674"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="detailButton" indentationWidth="10" reuseIdentifier="WordCell" rowHeight="88" id="h4I-9y-tps" customClass="WordsCommonCell" customModule="LollySwiftiOS" customModuleProvider="target">
@@ -1306,19 +1325,14 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="jpU-G1-PiU" firstAttribute="leading" secondItem="FOB-iP-b55" secondAttribute="leading" id="0oV-9Q-c1r"/>
-                            <constraint firstItem="Qcr-pX-hSw" firstAttribute="height" secondItem="qnI-2g-f6k" secondAttribute="height" id="1QY-jX-UiM"/>
-                            <constraint firstItem="Qcr-pX-hSw" firstAttribute="leading" secondItem="FOB-iP-b55" secondAttribute="leading" id="6Px-c5-Hoo"/>
-                            <constraint firstItem="qnI-2g-f6k" firstAttribute="width" secondItem="FOB-iP-b55" secondAttribute="width" multiplier="1:3" id="8PG-oI-cKN"/>
+                            <constraint firstItem="IWv-Jl-GLt" firstAttribute="trailing" secondItem="FOB-iP-b55" secondAttribute="trailing" id="3mm-Du-4Wk"/>
                             <constraint firstItem="FOB-iP-b55" firstAttribute="trailing" secondItem="26N-j5-mtJ" secondAttribute="trailing" id="GWz-c0-hpZ"/>
-                            <constraint firstItem="FOB-iP-b55" firstAttribute="trailing" secondItem="Qcr-pX-hSw" secondAttribute="trailing" id="HlK-xE-NpN"/>
-                            <constraint firstItem="qnI-2g-f6k" firstAttribute="top" secondItem="FOB-iP-b55" secondAttribute="top" id="Nzu-vw-hyf"/>
-                            <constraint firstItem="jpU-G1-PiU" firstAttribute="width" secondItem="FOB-iP-b55" secondAttribute="width" multiplier="2:3" id="Qjk-px-SBp"/>
-                            <constraint firstItem="26N-j5-mtJ" firstAttribute="top" secondItem="Qcr-pX-hSw" secondAttribute="bottom" id="Sb1-SG-yjX"/>
+                            <constraint firstItem="IWv-Jl-GLt" firstAttribute="top" secondItem="jpU-G1-PiU" secondAttribute="bottom" id="Qjf-aR-ppT"/>
+                            <constraint firstItem="FOB-iP-b55" firstAttribute="trailing" secondItem="jpU-G1-PiU" secondAttribute="trailing" id="XnS-II-qOF"/>
+                            <constraint firstItem="26N-j5-mtJ" firstAttribute="top" secondItem="IWv-Jl-GLt" secondAttribute="bottom" id="aHQ-io-i6b"/>
                             <constraint firstItem="26N-j5-mtJ" firstAttribute="leading" secondItem="FOB-iP-b55" secondAttribute="leading" id="cLE-YZ-Oee"/>
-                            <constraint firstItem="qnI-2g-f6k" firstAttribute="centerY" secondItem="jpU-G1-PiU" secondAttribute="centerY" id="gnk-Ha-2No"/>
                             <constraint firstItem="FOB-iP-b55" firstAttribute="top" secondItem="jpU-G1-PiU" secondAttribute="top" id="kD6-U2-aZa"/>
-                            <constraint firstItem="FOB-iP-b55" firstAttribute="trailing" secondItem="qnI-2g-f6k" secondAttribute="trailing" id="oPb-86-jDw"/>
-                            <constraint firstItem="Qcr-pX-hSw" firstAttribute="top" secondItem="jpU-G1-PiU" secondAttribute="bottom" id="wIc-9X-IQT"/>
+                            <constraint firstItem="IWv-Jl-GLt" firstAttribute="leading" secondItem="FOB-iP-b55" secondAttribute="leading" id="vCl-0q-OEe"/>
                             <constraint firstItem="26N-j5-mtJ" firstAttribute="bottom" secondItem="FOB-iP-b55" secondAttribute="bottom" id="zwH-b0-iUE"/>
                         </constraints>
                     </view>
@@ -1330,8 +1344,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="btnScopeFilter" destination="qnI-2g-f6k" id="Dhj-nr-8mn"/>
-                        <outlet property="btnTextbookFilter" destination="Qcr-pX-hSw" id="8yK-Ki-UmT"/>
+                        <outlet property="btnScopeFilter" destination="1Pq-5y-y9l" id="ZFo-MG-shm"/>
+                        <outlet property="btnTextbookFilter" destination="Soe-lr-94u" id="iDG-dy-opO"/>
                         <outlet property="sbTextFilter" destination="jpU-G1-PiU" id="Drt-1c-IS0"/>
                         <outlet property="tableView" destination="26N-j5-mtJ" id="r7c-c6-hcu"/>
                         <segue destination="owF-Ne-4GQ" kind="presentation" identifier="edit" id="2py-E2-Zrt"/>

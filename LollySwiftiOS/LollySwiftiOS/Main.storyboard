@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="4oo-5C-FmD">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="4oo-5C-FmD">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,41 +17,68 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" placeholder="Enter a word here" translatesAutoresizingMaskIntoConstraints="NO" id="WeM-cp-4ab" userLabel="Word SearchBar">
-                                <rect key="frame" x="0.0" y="88" width="276" height="56"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <outlet property="delegate" destination="vXZ-lx-hvc" id="49t-V6-g9T"/>
                                 </connections>
                             </searchBar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fBk-xs-qcc">
+                                <rect key="frame" x="0.0" y="144" width="414" height="44"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CDk-cA-WXX">
+                                        <rect key="frame" x="0.0" y="0.0" width="207" height="44"/>
+                                        <color key="backgroundColor" red="1" green="0.2527923882" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Button">
+                                            <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="showLangDropDown:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="zfR-oo-iu9"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ox3-ZP-bnd">
+                                        <rect key="frame" x="207" y="0.0" width="207" height="44"/>
+                                        <color key="backgroundColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Button">
+                                            <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="showDictDropDown:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="OmS-IM-S1v"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="CDk-cA-WXX" firstAttribute="height" secondItem="fBk-xs-qcc" secondAttribute="height" id="CHP-Ol-XV1"/>
+                                    <constraint firstItem="Ox3-ZP-bnd" firstAttribute="height" secondItem="fBk-xs-qcc" secondAttribute="height" id="KBd-UQ-w9e"/>
+                                    <constraint firstItem="CDk-cA-WXX" firstAttribute="leading" secondItem="fBk-xs-qcc" secondAttribute="leading" id="KQN-1n-T9T"/>
+                                    <constraint firstAttribute="height" constant="44" id="Ms5-8O-W0O"/>
+                                    <constraint firstItem="CDk-cA-WXX" firstAttribute="width" secondItem="fBk-xs-qcc" secondAttribute="width" multiplier="1:2" id="U55-Pd-8BY"/>
+                                    <constraint firstItem="Ox3-ZP-bnd" firstAttribute="width" secondItem="fBk-xs-qcc" secondAttribute="width" multiplier="1:2" id="cEv-lH-gGk"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ox3-ZP-bnd" secondAttribute="trailing" id="jgM-fK-86g"/>
+                                    <constraint firstItem="Ox3-ZP-bnd" firstAttribute="centerY" secondItem="fBk-xs-qcc" secondAttribute="centerY" id="spm-wX-ZGm"/>
+                                    <constraint firstItem="CDk-cA-WXX" firstAttribute="centerY" secondItem="fBk-xs-qcc" secondAttribute="centerY" id="ylH-Bh-wIC"/>
+                                </constraints>
+                            </view>
                             <view multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r8x-qA-DhI" userLabel="Wv Dict Holder">
-                                <rect key="frame" x="0.0" y="144" width="414" height="669"/>
+                                <rect key="frame" x="0.0" y="188" width="414" height="625"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lX5-r1-CPa">
-                                <rect key="frame" x="276" y="88" width="138" height="56"/>
-                                <color key="backgroundColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Button">
-                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="showDictDropDown:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Haw-L0-P92"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Zyp-Pf-Fxa"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="Zyp-Pf-Fxa" firstAttribute="top" secondItem="lX5-r1-CPa" secondAttribute="top" id="03p-SI-D1V"/>
+                            <constraint firstItem="WeM-cp-4ab" firstAttribute="leading" secondItem="Zyp-Pf-Fxa" secondAttribute="leading" id="4VX-ie-bbs"/>
                             <constraint firstItem="Zyp-Pf-Fxa" firstAttribute="trailing" secondItem="r8x-qA-DhI" secondAttribute="trailing" id="9GJ-jX-OBp"/>
-                            <constraint firstItem="WeM-cp-4ab" firstAttribute="width" secondItem="kh9-bI-dsS" secondAttribute="width" multiplier="2:3" id="Dwl-uf-e4B"/>
                             <constraint firstItem="r8x-qA-DhI" firstAttribute="leading" secondItem="Zyp-Pf-Fxa" secondAttribute="leading" id="EQw-8D-ver"/>
                             <constraint firstItem="Zyp-Pf-Fxa" firstAttribute="bottom" secondItem="r8x-qA-DhI" secondAttribute="bottom" symbolic="YES" id="Kkr-hy-MfJ"/>
-                            <constraint firstItem="Zyp-Pf-Fxa" firstAttribute="trailing" secondItem="lX5-r1-CPa" secondAttribute="trailing" id="MAS-s2-1LW"/>
-                            <constraint firstItem="lX5-r1-CPa" firstAttribute="centerY" secondItem="WeM-cp-4ab" secondAttribute="centerY" id="nE4-5t-SO6"/>
-                            <constraint firstItem="lX5-r1-CPa" firstAttribute="width" secondItem="kh9-bI-dsS" secondAttribute="width" multiplier="1:3" id="qyi-6X-LbM"/>
-                            <constraint firstItem="r8x-qA-DhI" firstAttribute="top" secondItem="WeM-cp-4ab" secondAttribute="bottom" id="rQD-2P-Bph"/>
+                            <constraint firstItem="fBk-xs-qcc" firstAttribute="leading" secondItem="Zyp-Pf-Fxa" secondAttribute="leading" id="XIE-an-aXF"/>
+                            <constraint firstItem="fBk-xs-qcc" firstAttribute="trailing" secondItem="Zyp-Pf-Fxa" secondAttribute="trailing" id="r6P-sd-cAI"/>
+                            <constraint firstItem="Zyp-Pf-Fxa" firstAttribute="trailing" secondItem="WeM-cp-4ab" secondAttribute="trailing" id="uUH-G4-vEG"/>
                             <constraint firstItem="WeM-cp-4ab" firstAttribute="top" secondItem="Zyp-Pf-Fxa" secondAttribute="top" id="uY5-qf-k1x"/>
-                            <constraint firstItem="WeM-cp-4ab" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-20" id="yMv-9e-2wk"/>
+                            <constraint firstItem="fBk-xs-qcc" firstAttribute="top" secondItem="WeM-cp-4ab" secondAttribute="bottom" id="v6P-kU-lVj"/>
+                            <constraint firstItem="r8x-qA-DhI" firstAttribute="top" secondItem="fBk-xs-qcc" secondAttribute="bottom" id="vuN-Ru-ZiZ"/>
+                            <constraint firstItem="WeM-cp-4ab" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="yMv-9e-2wk"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
@@ -64,7 +91,8 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="btnDict" destination="lX5-r1-CPa" id="Rfb-0c-oJX"/>
+                        <outlet property="btnDict" destination="Ox3-ZP-bnd" id="1hW-dZ-tXx"/>
+                        <outlet property="btnLang" destination="CDk-cA-WXX" id="ibC-uh-goF"/>
                         <outlet property="sbword" destination="WeM-cp-4ab" id="dTE-XR-0MA"/>
                         <outlet property="wvDictHolder" destination="r8x-qA-DhI" id="Wh2-aR-Qvk"/>
                     </connections>

@@ -211,8 +211,7 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
     func onUpdateDictReference() {
         let item = vm.selectedDictReference!
         dictItemCell.textLabel!.text = item.DICTNAME
-        let item2 = vm.arrDictsReference.first { $0.DICTNAME == item.DICTNAME }
-        dictItemCell.detailTextLabel!.text = item2?.URL ?? ""
+        dictItemCell.detailTextLabel!.text = item.URL
         ddDictReference.selectIndex(vm.selectedDictReferenceIndex)
     }
     

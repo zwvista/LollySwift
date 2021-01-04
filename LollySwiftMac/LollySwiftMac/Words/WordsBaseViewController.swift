@@ -116,7 +116,6 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
             selectedDictReferenceIndex = tbi.tag
             let item = vmSettings.arrDictsReference[selectedDictReferenceIndex]
             let name = item.DICTNAME
-            let item2 = vmSettings.arrDictsReference.first { $0.DICTNAME == name }!
             if let tvi = tabView.tabViewItems.first(where: { $0.label == name }) {
                 tbi.image = imageOff
                 tabView.removeTabViewItem(tvi)
@@ -124,7 +123,7 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
                 tbi.image = imageOn
                 let vc = NSStoryboard(name: "Words", bundle: nil).instantiateController(withIdentifier: "WordsDictViewController") as! WordsDictViewController
                 vc.vcWords = self
-                vc.dict = item2
+                vc.dict = item
                 let tvi = NSTabViewItem(viewController: vc)
                 tvi.label = name
                 tabView.addTabViewItem(tvi)
