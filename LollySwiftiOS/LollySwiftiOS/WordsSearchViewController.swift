@@ -31,7 +31,7 @@ class WordsSearchViewController: UIViewController, WKNavigationDelegate, UISearc
         wvDict.navigationDelegate = self
         vmSettings.delegate = self
         
-        AppDelegate.initializeObject.subscribe(onNext: {
+        vmSettings.getData().subscribe(onNext: {
             self.ddLang.anchorView = self.btnLang
             self.ddLang.selectionAction = { [unowned self] (index: Int, item: String) in
                 guard index != vmSettings.selectedLangIndex else {return}
