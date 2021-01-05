@@ -32,9 +32,6 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
     let synth = NSSpeechSynthesizer()
     var isSpeaking = true
     weak var responder: NSView? = nil
-//    var textFilter = BehaviorRelay(value: "")
-//    var scopeFilter = BehaviorRelay(value: SettingsViewModel.arrScopeWordFilters[0])
-//    var textbookFilter = BehaviorRelay(value: 0)
 
     let imageOff = NSImage(named: "NSStatusNone")
     let imageOn = NSImage(named: "NSStatusAvailable")
