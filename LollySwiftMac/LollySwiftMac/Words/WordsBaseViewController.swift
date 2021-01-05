@@ -13,7 +13,7 @@ import NSObject_Rx
 class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSSearchFieldDelegate, LollyProtocol {
     
     @IBOutlet weak var tfNewWord: NSTextField!
-    @IBOutlet weak var scTextFilter: NSSegmentedControl!
+    @IBOutlet weak var scScopeFilter: NSSegmentedControl!
     @IBOutlet weak var sfFilter: NSSearchField!
     @IBOutlet weak var tvWords: NSTableView!
     @IBOutlet weak var tfStatusText: NSTextField!
@@ -43,7 +43,7 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
         super.viewDidLoad()
         settingsChanged()
 //        _ = vm.textFilter <~> sfFilter.rx.text.orEmpty
-//        _ = vm.scopeFilter <~> scTextFilter.rx.selectedLabel
+//        _ = vm.scopeFilter <~> scScopeFilter.rx.selectedLabel
     }
     
     // Hold a reference to the window controller in order to prevent it from being released
@@ -181,7 +181,7 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
     }
 
     func searchFieldDidEndSearching(_ sender: NSSearchField) {
-        scTextFilter.performClick(self)
+        scScopeFilter.performClick(self)
     }
 
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {

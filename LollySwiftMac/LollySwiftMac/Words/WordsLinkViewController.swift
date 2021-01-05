@@ -18,7 +18,7 @@ class WordsLinkViewController: NSViewController, NSTableViewDataSource, NSTableV
     var complete: (() -> Void)?
     var arrWords: [MLangWord] { vm.arrWordsFiltered ?? vm.arrWords }
 
-    @IBOutlet weak var scTextFilter: NSSegmentedControl!
+    @IBOutlet weak var scScopeFilter: NSSegmentedControl!
     @IBOutlet weak var sfFilter: NSSearchField!
     @objc var textFilter = ""
     @IBOutlet weak var scWordScope: NSSegmentedControl!
@@ -54,7 +54,7 @@ class WordsLinkViewController: NSViewController, NSTableViewDataSource, NSTableV
     }
     
     @IBAction func filterWord(_ sender: AnyObject) {
-        let n = scTextFilter.selectedSegment
+        let n = scScopeFilter.selectedSegment
         vm.applyFilters(textFilter: textFilter, scope: n == 0 ? "Word" : "Note")
         tableView.reloadData()
     }

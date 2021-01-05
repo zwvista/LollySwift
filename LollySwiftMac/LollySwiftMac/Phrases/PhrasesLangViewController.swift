@@ -88,7 +88,7 @@ class PhrasesLangViewController: PhrasesBaseViewController {
     }
     
     @IBAction func filterPhrase(_ sender: AnyObject) {
-        vm.applyFilters(textFilter: textFilter, scope: scTextFilter.selectedSegment == 0 ? "Phrase" : "Translation")
+        vm.applyFilters(textFilter: textFilter, scope: scScopeFilter.selectedSegment == 0 ? "Phrase" : "Translation")
         tvPhrases.reloadData()
     }
 

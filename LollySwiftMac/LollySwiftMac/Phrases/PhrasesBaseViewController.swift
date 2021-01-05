@@ -30,7 +30,7 @@ class PhrasesBaseViewController: WordsPhrasesBaseViewController {
     }
 
     func searchFieldDidEndSearching(_ sender: NSSearchField) {
-        scTextFilter.performClick(self)
+        scScopeFilter.performClick(self)
     }
 
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {

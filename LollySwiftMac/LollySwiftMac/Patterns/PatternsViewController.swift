@@ -14,7 +14,7 @@ import NSObject_Rx
 class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate, NSSearchFieldDelegate, NSMenuItemValidation, NSToolbarItemValidation {
 
     @IBOutlet weak var wvWebPage: WKWebView!
-    @IBOutlet weak var scTextFilter: NSSegmentedControl!
+    @IBOutlet weak var scScopeFilter: NSSegmentedControl!
     @IBOutlet weak var sfFilter: NSSearchField!
     @IBOutlet weak var tfURL: NSTextField!
     @IBOutlet weak var tvPatterns: NSTableView!
@@ -284,11 +284,11 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     }
 
     func searchFieldDidEndSearching(_ sender: NSSearchField) {
-        scTextFilter.performClick(self)
+        scScopeFilter.performClick(self)
     }
     
     @IBAction func filterPattern(_ sender: AnyObject) {
-        vm.applyFilters(textFilter: textFilter, scope: scTextFilter.selectedSegment == 0 ? "Pattern" : scTextFilter.selectedSegment == 1 ? "Note" : "Tags")
+        vm.applyFilters(textFilter: textFilter, scope: scScopeFilter.selectedSegment == 0 ? "Pattern" : scScopeFilter.selectedSegment == 1 ? "Note" : "Tags")
         self.tvPatterns.reloadData()
     }
     

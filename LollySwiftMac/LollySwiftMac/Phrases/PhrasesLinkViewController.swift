@@ -18,7 +18,7 @@ class PhrasesLinkViewController: NSViewController, NSTableViewDataSource, NSTabl
     var complete: (() -> Void)?
     var arrPhrases: [MLangPhrase] { vm.arrPhrasesFiltered ?? vm.arrPhrases }
 
-    @IBOutlet weak var scTextFilter: NSSegmentedControl!
+    @IBOutlet weak var scScopeFilter: NSSegmentedControl!
     @IBOutlet weak var sfFilter: NSSearchField!
     @objc var textFilter = ""
     @IBOutlet weak var scPhraseScope: NSSegmentedControl!
@@ -54,7 +54,7 @@ class PhrasesLinkViewController: NSViewController, NSTableViewDataSource, NSTabl
     }
     
     @IBAction func filterPhrase(_ sender: AnyObject) {
-        let n = scTextFilter.selectedSegment
+        let n = scScopeFilter.selectedSegment
         vm.applyFilters(textFilter: textFilter, scope: n == 0 ? "Phrase" : "Translation")
         tableView.reloadData()
     }
