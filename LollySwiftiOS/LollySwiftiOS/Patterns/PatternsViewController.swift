@@ -47,10 +47,6 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
-    func position(for bar: UIBarPositioning) -> UIBarPosition {
-        .top
-    }
-    
     @IBAction func showScopeFilterDropDown(_ sender: AnyObject) {
         ddScopeFilter.show()
     }

@@ -65,10 +65,6 @@ class WordsSearchViewController: UIViewController, WKNavigationDelegate, UISearc
         }
     }
     
-    func position(for bar: UIBarPositioning) -> UIBarPosition {
-        .top
-    }
-    
     @IBAction func showLangDropDown(_ sender: AnyObject) {
         ddLang.show()
     }

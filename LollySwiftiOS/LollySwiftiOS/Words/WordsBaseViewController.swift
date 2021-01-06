@@ -31,10 +31,6 @@ class WordsBaseViewController: UIViewController, UITableViewDelegate, UITableVie
         tableView.refreshControl = refreshControl
     }
     
-    func position(for bar: UIBarPositioning) -> UIBarPosition {
-        .top
-    }
-    
     @IBAction func showScopeFilterDropDown(_ sender: AnyObject) {
         ddScopeFilter.show()
     }

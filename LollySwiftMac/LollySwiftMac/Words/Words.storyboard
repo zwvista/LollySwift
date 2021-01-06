@@ -6231,7 +6231,7 @@ Gw
                                         </textFieldCell>
                                         <connections>
                                             <action selector="addNewWord:" target="ECR-Tq-pby" id="KuW-GI-oP5"/>
-                                            <binding destination="ECR-Tq-pby" name="value" keyPath="newWord" id="CYL-VK-gTR">
+                                            <binding destination="ECR-Tq-pby" name="value" keyPath="vm.newWord" id="9PU-FV-LL0">
                                                 <dictionary key="options">
                                                     <string key="NSMultipleValuesPlaceholder">New Word</string>
                                                     <string key="NSNoSelectionPlaceholder">New Word</string>
@@ -6517,6 +6517,7 @@ Gw
                     </items>
                 </menu>
                 <userDefaultsController id="qnH-MI-FLL"/>
+                <userDefaultsController representsSharedInstance="YES" id="HED-kD-8b4"/>
             </objects>
             <point key="canvasLocation" x="557" y="1218"/>
         </scene>
