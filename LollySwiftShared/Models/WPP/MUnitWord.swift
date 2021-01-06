@@ -140,6 +140,7 @@ class MUnitWordEdit {
     let NOTE: BehaviorRelay<String>
     let FAMIID: BehaviorRelay<String>
     let ACCURACY: BehaviorRelay<String>
+    let WORDS = BehaviorRelay(value: "")
 
     init(x: MUnitWord) {
         ID = BehaviorRelay(value: x.ID.toString)
