@@ -10,16 +10,14 @@ import Foundation
 import RxSwift
 import NSObject_Rx
 
-class WordsUnitViewModel: NSObject {
-    var vmSettings: SettingsViewModel
+class WordsUnitViewModel: WordsBaseViewModel {
     let inTextbook: Bool
     var arrWords = [MUnitWord]()
     var arrWordsFiltered: [MUnitWord]?
 
     init(settings: SettingsViewModel, inTextbook: Bool, needCopy: Bool, complete: @escaping () -> ()) {
-        self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
         self.inTextbook = inTextbook
-        super.init()
+        super.init(settings: settings, needCopy: needCopy)
         reload().subscribe(onNext: { complete() }) ~ rx.disposeBag
     }
     

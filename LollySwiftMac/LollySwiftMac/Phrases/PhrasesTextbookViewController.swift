@@ -12,7 +12,8 @@ import RxSwift
 
 class PhrasesTextbookViewController: PhrasesBaseViewController {
     
-    var vm: PhrasesUnitViewModel!
+    @objc var vm: PhrasesUnitViewModel!
+    override var vmPhrases: PhrasesBaseViewModel { vm }
     override var vmSettings: SettingsViewModel! { vm.vmSettings }
     var arrPhrases: [MUnitPhrase] { vm.arrPhrasesFiltered ?? vm.arrPhrases }
 
@@ -86,7 +87,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
     }
     
     @IBAction func filterPhrase(_ sender: AnyObject) {
-        vm.applyFilters(textFilter: textFilter, scope: scScopeFilter.selectedSegment == 0 ? "Phrase" : "Translation", textbookFilter: textbookFilter)
+        vm.applyFilters(textFilter: vm.textFilter, scope: scScopeFilter.selectedSegment == 0 ? "Phrase" : "Translation", textbookFilter: textbookFilter)
         tvPhrases.reloadData()
     }
 
@@ -95,10 +96,10 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
     }
 
     @IBAction func linkWords(_ sender: AnyObject) {
-        guard selectedPhraseID != 0 else {return}
+        guard vm.selectedPhraseID != 0 else {return}
         let detailVC = NSStoryboard(name: "Words", bundle: nil).instantiateController(withIdentifier: "WordsLinkViewController") as! WordsLinkViewController
-        detailVC.textFilter = selectedPhrase
-        detailVC.phraseid = selectedPhraseID
+        detailVC.textFilter = vm.selectedPhrase
+        detailVC.phraseid = vm.selectedPhraseID
         detailVC.complete = {
             self.getWords()
         }

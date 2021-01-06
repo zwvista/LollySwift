@@ -9,14 +9,12 @@
 import Foundation
 import RxSwift
 
-class WordsLangViewModel: NSObject {
-    var vmSettings: SettingsViewModel
+class WordsLangViewModel: WordsBaseViewModel {
     var arrWords = [MLangWord]()
     var arrWordsFiltered: [MLangWord]?
 
     public init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> ()) {
-        self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
-        super.init()
+        super.init(settings: settings, needCopy: needCopy)
         reload().subscribe(onNext: { complete() }) ~ rx.disposeBag
     }
     
@@ -72,8 +70,7 @@ class WordsLangViewModel: NSObject {
     }
     
     public init(settings: SettingsViewModel) {
-        self.vmSettings = settings
-        super.init()
+        super.init(settings: settings, needCopy: false)
     }
     
     func getWords(phraseid: Int) -> Observable<()> {

@@ -21,14 +21,10 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
     @IBOutlet weak var tabView: NSTabView!
     
     var vmSettings: SettingsViewModel! { nil }
-    
+    var vmWords: WordsBaseViewModel! { nil }
+    var vmPhrases: PhrasesBaseViewModel! { nil }
+
     var selectedDictReferenceIndex = 0
-    @objc var newWord = ""
-    @objc var textFilter = ""
-    var selectedWord = ""
-    var selectedWordID = 0
-    var selectedPhrase = ""
-    var selectedPhraseID = 0
     let synth = NSSpeechSynthesizer()
     var isSpeaking = true
     weak var responder: NSView? = nil
@@ -39,8 +35,6 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
     override func viewDidLoad() {
         super.viewDidLoad()
         settingsChanged()
-//        _ = vm.textFilter <~> sfFilter.rx.text.orEmpty
-//        _ = vm.scopeFilter <~> scScopeFilter.rx.selectedLabel
     }
     
     // Hold a reference to the window controller in order to prevent it from being released
@@ -86,24 +80,24 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
     func selectedWordChanged() {
         let row = tvWords.selectedRow
         if row == -1 {
-            selectedWord = ""
-            selectedWordID = 0
+            vmWords.selectedWord = ""
+            vmWords.selectedWordID = 0
         } else {
             let item = wordItemForRow(row: row)!
-            selectedWord = item.WORD
-            selectedWordID = item.WORDID
+            vmWords.selectedWord = item.WORD
+            vmWords.selectedWordID = item.WORDID
         }
     }
     
     func selectedPhraseChanged() {
         let row = tvPhrases.selectedRow
         if row == -1 {
-            selectedPhrase = ""
-            selectedPhraseID = 0
+            vmPhrases.selectedPhrase = ""
+            vmPhrases.selectedPhraseID = 0
         } else {
             let item = phraseItemForRow(row: row)!
-            selectedPhrase = item.PHRASE
-            selectedPhraseID = item.PHRASEID
+            vmPhrases.selectedPhrase = item.PHRASE
+            vmPhrases.selectedPhraseID = item.PHRASEID
         }
     }
 
@@ -129,7 +123,7 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
         if responder == nil {
             responder = tvWords
         }
-        let word = selectedWord.isEmpty ? newWord : selectedWord
+        let word = vmWords.selectedWord.isEmpty ? vmWords.newWord : vmWords.selectedWord
         for item in tabView.tabViewItems {
             (item.viewController as! WordsDictViewController).searchWord(word: word)
         }
@@ -155,6 +149,13 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
 class WordsBaseViewController: WordsPhrasesBaseViewController {
     
     var vmPhrasesLang: PhrasesLangViewModel!
+    override var vmPhrases: PhrasesBaseViewModel { vmPhrasesLang }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+//        _ = vmWords.textFilter <~> sfFilter.rx.text.orEmpty
+        _ = vmWords.scopeFilter <~> scScopeFilter.rx.selectedLabel
+    }
 
     override func settingsChanged() {
         super.settingsChanged()
@@ -167,14 +168,13 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
     }
     
     @IBAction func addNewWord(_ sender: Any) {
-        if !newWord.isEmpty {
+        if !vmWords.newWord.isEmpty {
             addNewWord()
         }
     }
     
     func searchFieldDidStartSearching(_ sender: NSSearchField) {
-        textFilter = vmSettings.autoCorrectInput(text: textFilter)
-        sfFilter.stringValue = textFilter
+        vmWords.textFilter = vmSettings.autoCorrectInput(text: vmWords.textFilter)
     }
 
     func searchFieldDidEndSearching(_ sender: NSSearchField) {
@@ -254,11 +254,11 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
     }
 
     @IBAction func copyWord(_ sender: AnyObject) {
-        MacApi.copyText(selectedWord)
+        MacApi.copyText(vmWords.selectedWord)
     }
     
     @IBAction func googleWord(_ sender: AnyObject) {
-        MacApi.googleString(selectedWord)
+        MacApi.googleString(vmWords.selectedWord)
     }
 
     @IBAction func openOnlineDict(_ sender: AnyObject) {
@@ -280,14 +280,14 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
         guard isSpeaking else {return}
         let responder = view.window!.firstResponder
         if responder == tvPhrases {
-            synth.startSpeaking(selectedPhrase)
+            synth.startSpeaking(vmPhrases.selectedPhrase)
         } else {
-            synth.startSpeaking(selectedWord)
+            synth.startSpeaking(vmWords.selectedWord)
         }
     }
     
     func getPhrases() {
-        vmPhrasesLang.getPhrases(wordid: selectedWordID).subscribe(onNext: {
+        vmPhrasesLang.getPhrases(wordid: vmWords.selectedWordID).subscribe(onNext: {
             self.tvPhrases.reloadData()
         }) ~ rx.disposeBag
     }

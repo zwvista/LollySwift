@@ -13,7 +13,8 @@ import NSObject_Rx
 
 class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidation {
     
-    var vm: PhrasesUnitViewModel!
+    @objc var vm: PhrasesUnitViewModel!
+    override var vmPhrases: PhrasesBaseViewModel { vm }
     var vmReview = EmbeddedReviewViewModel()
     override var vmSettings: SettingsViewModel! { vm.vmSettings }
     var arrPhrases: [MUnitPhrase] { vm.arrPhrasesFiltered ?? vm.arrPhrases }
@@ -170,7 +171,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     }
     
     @IBAction func filterPhrase(_ sender: AnyObject) {
-        vm.applyFilters(textFilter: textFilter, scope: scScopeFilter.selectedSegment == 0 ? "Phrase" : "Translation", textbookFilter: 0)
+        vm.applyFilters(textFilter: vm.textFilter, scope: scScopeFilter.selectedSegment == 0 ? "Phrase" : "Translation", textbookFilter: 0)
         tvPhrases.reloadData()
     }
 
@@ -218,10 +219,10 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     }
 
     @IBAction func linkWords(_ sender: AnyObject) {
-        guard selectedPhraseID != 0 else {return}
+        guard vm.selectedPhraseID != 0 else {return}
         let detailVC = NSStoryboard(name: "Words", bundle: nil).instantiateController(withIdentifier: "WordsLinkViewController") as! WordsLinkViewController
-        detailVC.textFilter = selectedPhrase
-        detailVC.phraseid = selectedPhraseID
+        detailVC.textFilter = vm.selectedPhrase
+        detailVC.phraseid = vm.selectedPhraseID
         detailVC.complete = {
             self.getWords()
         }

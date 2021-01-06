@@ -13,6 +13,13 @@ import NSObject_Rx
 class PhrasesBaseViewController: WordsPhrasesBaseViewController {
     
     var vmWordsLang: WordsLangViewModel!
+    override var vmWords: WordsBaseViewModel { vmWordsLang }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+//        _ = vmPhrases.textFilter <~> sfFilter.rx.text.orEmpty
+        _ = vmPhrases.scopeFilter <~> scScopeFilter.rx.selectedLabel
+    }
 
     override func settingsChanged() {
         super.settingsChanged()
@@ -25,8 +32,7 @@ class PhrasesBaseViewController: WordsPhrasesBaseViewController {
     }
     
     func searchFieldDidStartSearching(_ sender: NSSearchField) {
-        textFilter = vmSettings.autoCorrectInput(text: textFilter)
-        sfFilter.stringValue = textFilter
+        vmPhrases.textFilter = vmSettings.autoCorrectInput(text: vmPhrases.textFilter)
     }
 
     func searchFieldDidEndSearching(_ sender: NSSearchField) {
@@ -100,11 +106,11 @@ class PhrasesBaseViewController: WordsPhrasesBaseViewController {
     }
 
     @IBAction func copyPhrase(_ sender: AnyObject) {
-        MacApi.copyText(selectedPhrase)
+        MacApi.copyText(vmPhrases.selectedPhrase)
     }
     
     @IBAction func googlePhrase(_ sender: AnyObject) {
-        MacApi.googleString(selectedPhrase)
+        MacApi.googleString(vmPhrases.selectedPhrase)
     }
     
     func updateStatusText() {
@@ -115,14 +121,14 @@ class PhrasesBaseViewController: WordsPhrasesBaseViewController {
         guard isSpeaking else {return}
         let responder = view.window!.firstResponder
         if responder == tvWords {
-            synth.startSpeaking(selectedWord)
+            synth.startSpeaking(vmWords.selectedWord)
         } else {
-            synth.startSpeaking(selectedPhrase)
+            synth.startSpeaking(vmPhrases.selectedPhrase)
         }
     }
     
     func getWords() {
-        vmWordsLang.getWords(phraseid: selectedPhraseID).subscribe(onNext: {
+        vmWordsLang.getWords(phraseid: vmPhrases.selectedPhraseID).subscribe(onNext: {
             self.tvWords.reloadData()
             if self.tvWords.numberOfRows > 0 {
                 self.tvWords.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)

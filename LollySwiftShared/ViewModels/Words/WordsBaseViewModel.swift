@@ -12,7 +12,7 @@ import RxRelay
 
 class WordsPhrasesBaseViewModel: NSObject {
     var vmSettings: SettingsViewModel
-    let textFilter = BehaviorRelay(value: "")
+    @objc dynamic var textFilter = ""
     let textbookFilter = BehaviorRelay(value: 0)
 
     init(settings: SettingsViewModel, needCopy: Bool) {
@@ -22,7 +22,7 @@ class WordsPhrasesBaseViewModel: NSObject {
 
 class WordsBaseViewModel: WordsPhrasesBaseViewModel {
     let scopeFilter = BehaviorRelay(value: SettingsViewModel.arrScopeWordFilters[0])
-    var newWord = ""
+    @objc dynamic var newWord = ""
     var selectedWord = ""
     var selectedWordID = 0
 }

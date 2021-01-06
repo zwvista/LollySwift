@@ -12,6 +12,7 @@ import RxSwift
 class WordsSearchViewModel: NSObject {
     var vmSettings: SettingsViewModel
     var arrWords = [MUnitWord]()
+    var newWord = ""
 
     public init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> ()) {
         self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)

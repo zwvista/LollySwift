@@ -375,7 +375,7 @@
                                         </textFieldCell>
                                         <connections>
                                             <action selector="addNewWord:" target="F8i-pe-Ate" id="yEt-2S-3Pq"/>
-                                            <binding destination="F8i-pe-Ate" name="value" keyPath="newWord" id="Ddq-61-gRU">
+                                            <binding destination="F8i-pe-Ate" name="value" keyPath="vm.newWord" id="qlL-8f-gMT">
                                                 <dictionary key="options">
                                                     <string key="NSMultipleValuesPlaceholder">New Word</string>
                                                     <string key="NSNoSelectionPlaceholder">New Word</string>
@@ -410,7 +410,7 @@
                                         </searchFieldCell>
                                         <connections>
                                             <action selector="filterWord:" target="F8i-pe-Ate" id="n5z-b1-BFB"/>
-                                            <binding destination="F8i-pe-Ate" name="value" keyPath="textFilter" id="YWM-dh-fE8"/>
+                                            <binding destination="F8i-pe-Ate" name="value" keyPath="vm.textFilter" id="Hzv-MI-reA"/>
                                             <outlet property="delegate" destination="F8i-pe-Ate" id="YQJ-cI-ymr"/>
                                         </connections>
                                     </searchField>
@@ -2752,7 +2752,7 @@ Gw
                                         </textFieldCell>
                                         <connections>
                                             <action selector="addNewWord:" target="UkS-Xi-ogF" id="Tx0-Hn-BrU"/>
-                                            <binding destination="UkS-Xi-ogF" name="value" keyPath="newWord" id="v5U-Bn-9RF">
+                                            <binding destination="UkS-Xi-ogF" name="value" keyPath="vm.newWord" id="SR0-v9-g7v">
                                                 <dictionary key="options">
                                                     <string key="NSMultipleValuesPlaceholder">New Word</string>
                                                     <string key="NSNoSelectionPlaceholder">New Word</string>
@@ -2790,7 +2790,7 @@ Gw
                                         </searchFieldCell>
                                         <connections>
                                             <action selector="filterWord:" target="UkS-Xi-ogF" id="Icf-np-l9e"/>
-                                            <binding destination="UkS-Xi-ogF" name="value" keyPath="textFilter" id="ugU-ev-Fwp"/>
+                                            <binding destination="UkS-Xi-ogF" name="value" keyPath="vm.textFilter" id="Oxy-Mq-taK"/>
                                             <outlet property="delegate" destination="UkS-Xi-ogF" id="3lf-dw-pry"/>
                                         </connections>
                                     </searchField>
@@ -4215,7 +4215,7 @@ Gw
                                         </searchFieldCell>
                                         <connections>
                                             <action selector="filterWord:" target="S5w-0q-IQt" id="lkq-PM-02G"/>
-                                            <binding destination="S5w-0q-IQt" name="value" keyPath="textFilter" id="DOR-Tl-TSH"/>
+                                            <binding destination="S5w-0q-IQt" name="value" keyPath="vm.textFilter" id="NZS-tz-6Vd"/>
                                             <outlet property="delegate" destination="S5w-0q-IQt" id="EwZ-0v-b31"/>
                                         </connections>
                                     </searchField>

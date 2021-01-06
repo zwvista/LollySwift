@@ -9,16 +9,14 @@
 import Foundation
 import RxSwift
 
-class PhrasesUnitViewModel: NSObject {
-    var vmSettings: SettingsViewModel
+class PhrasesUnitViewModel: PhrasesBaseViewModel {
     let inTextbook: Bool
     var arrPhrases = [MUnitPhrase]()
     var arrPhrasesFiltered: [MUnitPhrase]?
 
     public init(settings: SettingsViewModel, inTextbook: Bool, needCopy: Bool, complete: @escaping () -> ()) {
-        self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
         self.inTextbook = inTextbook
-        super.init()
+        super.init(settings: settings, needCopy: needCopy)
         reload().subscribe(onNext: { complete() }) ~ rx.disposeBag
     }
     

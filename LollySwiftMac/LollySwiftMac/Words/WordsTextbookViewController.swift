@@ -13,7 +13,8 @@ import NSObject_Rx
 
 class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation {
 
-    var vm: WordsUnitViewModel!
+    @objc var vm: WordsUnitViewModel!
+    override var vmWords: WordsBaseViewModel { vm }
     override var vmSettings: SettingsViewModel! { vm.vmSettings }
     var arrWords: [MUnitWord] { vm.arrWordsFiltered == nil ? vm.arrWords : vm.arrWordsFiltered! }
     
@@ -109,7 +110,7 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
     }
 
     @IBAction func filterWord(_ sender: AnyObject) {
-        vm.applyFilters(textFilter: textFilter, scope: scScopeFilter.selectedSegment == 0 ? "Word" : "Note", textbookFilter: textbookFilter)
+        vm.applyFilters(textFilter: vm.textFilter, scope: scScopeFilter.selectedSegment == 0 ? "Word" : "Note", textbookFilter: textbookFilter)
         tvWords.reloadData()
     }
 
@@ -118,10 +119,10 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
     }
 
     @IBAction func linkPhrases(_ sender: AnyObject) {
-        guard selectedWordID != 0 else {return}
+        guard vm.selectedWordID != 0 else {return}
         let detailVC = NSStoryboard(name: "Phrases", bundle: nil).instantiateController(withIdentifier: "PhrasesLinkViewController") as! PhrasesLinkViewController
-        detailVC.textFilter = selectedWord
-        detailVC.wordid = selectedWordID
+        detailVC.textFilter = vm.selectedWord
+        detailVC.wordid = vm.selectedWordID
         detailVC.complete = {
             self.getPhrases()
         }
