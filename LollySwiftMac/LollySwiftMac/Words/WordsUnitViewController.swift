@@ -176,11 +176,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     
     @IBAction func batchAdd(_ sender: AnyObject) {
         let batchVC = self.storyboard!.instantiateController(withIdentifier: "WordsUnitBatchAddViewController") as! WordsUnitBatchAddViewController
-        let i = tvWords.selectedRow
-        let item = i == -1 ? nil : arrWords[i]
-        let unit = item?.UNIT ?? vmSettings.USUNITTO
-        let part = item?.PART ?? vmSettings.USPARTTO
-        batchVC.startEdit(vm: vm, unit: unit, part: part)
+        batchVC.startEdit(vm: vm)
         batchVC.complete = { self.doRefresh() }
         self.presentAsModalWindow(batchVC)
     }

@@ -14,13 +14,9 @@ class WordsUnitBatchAddViewModel: NSObject {
     var vm: WordsUnitViewModel!
     let words = BehaviorRelay(value: "")
     let isOKEnabled = BehaviorRelay(value: false)
-    var unit = 1
-    var part = 1
 
-    init(vm: WordsUnitViewModel, unit: Int, part: Int) {
+    init(vm: WordsUnitViewModel) {
         self.vm = vm
-        self.unit = unit
-        self.part = part
     }
     
     func onOK() -> Observable<()> {

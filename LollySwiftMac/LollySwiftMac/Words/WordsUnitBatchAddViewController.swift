@@ -16,8 +16,8 @@ class WordsUnitBatchAddViewController: NSViewController {
     
     @IBOutlet weak var btnOK: NSButton!
     
-    func startEdit(vm: WordsUnitViewModel, unit: Int, part: Int) {
-        vmEdit = WordsUnitBatchAddViewModel(vm: vm, unit: unit, part: part)
+    func startEdit(vm: WordsUnitViewModel) {
+        vmEdit = WordsUnitBatchAddViewModel(vm: vm)
     }
 
     override func viewDidLoad() {
