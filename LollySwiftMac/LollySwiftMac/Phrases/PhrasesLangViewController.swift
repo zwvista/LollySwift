@@ -28,12 +28,6 @@ class PhrasesLangViewController: PhrasesBaseViewController {
         }
         super.settingsChanged()
     }
-
-    override var representedObject: Any? {
-        didSet {
-        // Update the view, if already loaded.
-        }
-    }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
         tableView === tvPhrases ? arrPhrases.count : vmWordsLang.arrWords.count

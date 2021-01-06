@@ -126,7 +126,7 @@ class WordsUnitViewController: WordsBaseViewController {
         } else if let controller = segue.destination as? WordsDictViewController {
             controller.vm.arrWords = arrWords.map(\.WORD)
             controller.vm.currentWordIndex = vm.arrWords.indexes(of: sender as! MUnitWord)[0]
-        } else if let controller = (segue.destination as? UINavigationController)?.topViewController as? WordsUnitBatchViewController {
+        } else if let controller = (segue.destination as? UINavigationController)?.topViewController as? WordsUnitBatchEditViewController {
             controller.vm = vm
         }
     }
@@ -192,7 +192,7 @@ class WordsUnitViewController: WordsBaseViewController {
                     self.performSegue(withIdentifier: "add", sender: self)
                 }
             }) ~ rx.disposeBag
-        } else if let controller = segue.source as? WordsUnitBatchViewController {
+        } else if let controller = segue.source as? WordsUnitBatchEditViewController {
             controller.onDone()
             tableView.reloadData()
         }

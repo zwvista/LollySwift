@@ -1,5 +1,5 @@
 //
-//  PhrasesUnitBatchViewController.swift
+//  PhrasesUnitBatchEditViewController.swift
 //  LollySwiftMac
 //
 //  Created by 趙偉 on 2018/04/07.
@@ -10,7 +10,7 @@ import Cocoa
 import RxSwift
 import NSObject_Rx
 
-class PhrasesUnitBatchViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
+class PhrasesUnitBatchEditViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 
     @objc var vm: PhrasesUnitViewModel!
     var complete: (() -> Void)?

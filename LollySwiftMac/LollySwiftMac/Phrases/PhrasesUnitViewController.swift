@@ -41,12 +41,6 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
         }
         super.settingsChanged()
     }
-
-    override var representedObject: Any? {
-        didSet {
-        // Update the view, if already loaded.
-        }
-    }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
         tableView === tvPhrases ? arrPhrases.count : vmWordsLang.arrWords.count
@@ -128,7 +122,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     }
     
     @IBAction func batchEdit(_ sender: AnyObject) {
-        let detailVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesUnitBatchViewController") as! PhrasesUnitBatchViewController
+        let detailVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesUnitBatchEditViewController") as! PhrasesUnitBatchEditViewController
         detailVC.vm = vm
         let i = tvPhrases.selectedRow
         let item = i == -1 ? nil : arrPhrases[tvPhrases.selectedRow]

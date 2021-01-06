@@ -29,12 +29,6 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
         super.settingsChanged()
     }
 
-    override var representedObject: Any? {
-        didSet {
-        // Update the view, if already loaded.
-        }
-    }
-
     //MARK: tableView
 
     override func wordItemForRow(row: Int) -> (MWordProtocol & NSObject)? {

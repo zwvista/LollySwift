@@ -1,5 +1,5 @@
 //
-//  WordsUnitBatchViewController.swift
+//  WordsUnitBatchEditViewController.swift
 //  LollySwiftMac
 //
 //  Created by 趙偉 on 2018/04/07.
@@ -10,7 +10,7 @@ import Cocoa
 import RxSwift
 import NSObject_Rx
 
-class WordsUnitBatchViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
+class WordsUnitBatchEditViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 
     @objc var vm: WordsUnitViewModel!
     var complete: (() -> Void)?

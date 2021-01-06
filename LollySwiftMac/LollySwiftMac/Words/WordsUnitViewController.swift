@@ -49,12 +49,6 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
         }
         super.settingsChanged()
     }
-
-    override var representedObject: Any? {
-        didSet {
-        // Update the view, if already loaded.
-        }
-    }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
         tableView === tvWords ? arrWords.count : vmPhrasesLang.arrPhrases.count
@@ -137,10 +131,10 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     }
     
     func addWord(phraseid: Int) {
-        let editVC = self.storyboard!.instantiateController(withIdentifier: "WordsUnitDetailViewController") as! WordsUnitDetailViewController
-        editVC.startEdit(vm: vm, item: vm.newUnitWord(), phraseid: phraseid)
-        editVC.complete = { self.tvWords.reloadData(); self.addWord(self) }
-        self.presentAsSheet(editVC)
+        let detailVC = self.storyboard!.instantiateController(withIdentifier: "WordsUnitDetailViewController") as! WordsUnitDetailViewController
+        detailVC.startEdit(vm: vm, item: vm.newUnitWord(), phraseid: phraseid)
+        detailVC.complete = { self.tvWords.reloadData(); self.addWord(self) }
+        self.presentAsSheet(detailVC)
     }
 
     // https://stackoverflow.com/questions/24219441/how-to-use-nstoolbar-in-xcode-6-and-storyboard
@@ -170,25 +164,36 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     }
     
     @IBAction func editWord(_ sender: AnyObject) {
-        let editVC = self.storyboard!.instantiateController(withIdentifier: "WordsUnitDetailViewController") as! WordsUnitDetailViewController
+        let detailVC = self.storyboard!.instantiateController(withIdentifier: "WordsUnitDetailViewController") as! WordsUnitDetailViewController
         let i = tvWords.selectedRow
         if i == -1 {return}
-        editVC.startEdit(vm: vm, item: arrWords[tvWords.selectedRow], phraseid: 0)
-        editVC.complete = {
+        detailVC.startEdit(vm: vm, item: arrWords[tvWords.selectedRow], phraseid: 0)
+        detailVC.complete = {
             self.tvWords.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tvWords.tableColumns.count))
         }
-        self.presentAsModalWindow(editVC)
-    }
-  
-    @IBAction func batchEdit(_ sender: AnyObject) {
-        let detailVC = self.storyboard!.instantiateController(withIdentifier: "WordsUnitBatchViewController") as! WordsUnitBatchViewController
-        detailVC.vm = vm
-        let i = tvWords.selectedRow
-        let item = i == -1 ? nil : arrWords[tvWords.selectedRow]
-        detailVC.unit = item?.UNIT ?? vmSettings.USUNITTO
-        detailVC.part = item?.PART ?? vmSettings.USPARTTO
-        detailVC.complete = { self.doRefresh() }
         self.presentAsModalWindow(detailVC)
+    }
+    
+    @IBAction func batchAdd(_ sender: AnyObject) {
+        let batchVC = self.storyboard!.instantiateController(withIdentifier: "WordsUnitBatchAddViewController") as! WordsUnitBatchAddViewController
+        let i = tvWords.selectedRow
+        let item = i == -1 ? nil : arrWords[i]
+        let unit = item?.UNIT ?? vmSettings.USUNITTO
+        let part = item?.PART ?? vmSettings.USPARTTO
+        batchVC.startEdit(vm: vm, unit: unit, part: part)
+        batchVC.complete = { self.doRefresh() }
+        self.presentAsModalWindow(batchVC)
+    }
+
+    @IBAction func batchEdit(_ sender: AnyObject) {
+        let batchVC = self.storyboard!.instantiateController(withIdentifier: "WordsUnitBatchEditViewController") as! WordsUnitBatchEditViewController
+        batchVC.vm = vm
+        let i = tvWords.selectedRow
+        let item = i == -1 ? nil : arrWords[i]
+        batchVC.unit = item?.UNIT ?? vmSettings.USUNITTO
+        batchVC.part = item?.PART ?? vmSettings.USPARTTO
+        batchVC.complete = { self.doRefresh() }
+        self.presentAsModalWindow(batchVC)
     }
 
     @IBAction func getNote(_ sender: AnyObject) {

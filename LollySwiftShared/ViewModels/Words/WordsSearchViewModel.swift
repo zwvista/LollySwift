@@ -9,13 +9,12 @@
 import Foundation
 import RxSwift
 
-class WordsSearchViewModel: NSObject {
-    var vmSettings: SettingsViewModel
+class WordsSearchViewModel: WordsBaseViewModel {
     var arrWords = [MUnitWord]()
-    @objc dynamic var newWord = ""
 
     public init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> ()) {
-        self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
-        super.init()
+        super.init(settings: settings, needCopy: needCopy)
+        arrWords.removeAll()
+        complete()
     }
 }

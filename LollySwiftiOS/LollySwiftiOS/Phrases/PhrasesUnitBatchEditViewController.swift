@@ -1,5 +1,5 @@
 //
-//  WordsUnitBatchViewController.swift
+//  PhrasesUnitBatchEditViewController.swift
 //  LollySwiftiOS
 //
 //  Created by 趙偉 on 2016/06/23.
@@ -11,19 +11,18 @@ import DropDown
 import RxSwift
 import NSObject_Rx
 
-class WordsUnitBatchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
+class PhrasesUnitBatchEditViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
 
     @IBOutlet weak var tvActions: UITableView!
-    @IBOutlet weak var tvWords: UITableView!
+    @IBOutlet weak var tvPhrases: UITableView!
     @IBOutlet weak var swUnit: UISwitch!
     @IBOutlet weak var tfUnit: UITextField!
     @IBOutlet weak var swPart: UISwitch!
     @IBOutlet weak var tfPart: UITextField!
     @IBOutlet weak var swSeqNum: UISwitch!
     @IBOutlet weak var tfSeqNum: UITextField!
-    @IBOutlet weak var tfAccuracy: UITextField!
 
-    var vm: WordsUnitViewModel!
+    var vm: PhrasesUnitViewModel!
     let ddUnit = DropDown()
     let ddPart = DropDown()
     
@@ -54,10 +53,10 @@ class WordsUnitBatchViewController: UIViewController, UITableViewDelegate, UITab
         let unit = vmSettings.arrUnits[ddUnit.indexForSelectedRow!].value
         let part = vmSettings.arrParts[ddPart.indexForSelectedRow!].value
         let seqnum = tfSeqNum.text?.toInt() ?? 0
-        for i in 0..<vm.arrWords.count {
-            let cell = tvWords.cellForRow(at: IndexPath(row: i, section: 0))!
+        for i in 0..<vm.arrPhrases.count {
+            let cell = tvPhrases.cellForRow(at: IndexPath(row: i, section: 0))!
             guard cell.accessoryType == .checkmark else {continue}
-            let item = vm.arrWords[i]
+            let item = vm.arrPhrases[i]
             if swUnit.isOn || swPart.isOn || swSeqNum.isOn {
                 if swUnit.isOn { item.UNIT = unit }
                 if swPart.isOn { item.PART = part }
@@ -69,7 +68,7 @@ class WordsUnitBatchViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        tableView === tvActions ? 4 : vm.arrWords.count
+        tableView === tvActions ? 3 : vm.arrPhrases.count
     }
     
 //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -77,8 +76,8 @@ class WordsUnitBatchViewController: UIViewController, UITableViewDelegate, UITab
 //    }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let identifier = "WordCell" + (tableView === tvActions ? "0\(indexPath.row)" : "10")
-        let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! WordsUnitBatchCell
+        let identifier = "PhraseCell" + (tableView === tvActions ? "0\(indexPath.row)" : "10")
+        let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! PhrasesUnitBatchEditCell
         if tableView === tvActions {
             switch indexPath.row {
             case 0:
@@ -107,22 +106,22 @@ class WordsUnitBatchViewController: UIViewController, UITableViewDelegate, UITab
             default: break
             }
         } else {
-            let item = vm.arrWords[indexPath.row]
+            let item = vm.arrPhrases[indexPath.row]
             cell.lblUnitPartSeqNum.text = item.UNITPARTSEQNUM
-            cell.lblWord.text = item.WORD
-            cell.lblNote.text = item.NOTE
+            cell.lblPhrase!.text = item.PHRASE
+            cell.lblTranslation!.text = item.TRANSLATION
         }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard tableView === tvWords else {return}
+        guard tableView === tvPhrases else {return}
         let cell = tableView.cellForRow(at: indexPath)!
         cell.accessoryType = cell.accessoryType == .none ? .checkmark : .none
     }
 }
 
-class WordsUnitBatchCell: WordsCommonCell {
+class PhrasesUnitBatchEditCell: PhrasesCommonCell {
     @IBOutlet weak var tf: UITextField!
     @IBOutlet weak var sw: UISwitch!
 }

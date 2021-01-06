@@ -19,12 +19,6 @@ class WordsSearchViewController: WordsBaseViewController {
         super.viewDidLoad()
     }
 
-    override var representedObject: Any? {
-        didSet {
-        // Update the view, if already loaded.
-        }
-    }
-
     override func settingsChanged() {
         vm = WordsSearchViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) {
             self.refreshTableView(self)
