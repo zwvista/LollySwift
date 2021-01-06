@@ -52,8 +52,7 @@ class MDictionary: NSObject, Codable {
     override var description: String { DICTNAME }
 
     func urlString(word: String, arrAutoCorrect: [MAutoCorrect]) -> String {
-        let word2 = CHCONV == "BASIC" ? MAutoCorrect.autoCorrect(text: word, arrAutoCorrect: arrAutoCorrect, colFunc1: { $0.EXTENDED }, colFunc2: { $0.BASIC }) :
-            word
+        let word2 = CHCONV == "BASIC" ? MAutoCorrect.autoCorrect(text: word, arrAutoCorrect: arrAutoCorrect, colFunc1: \.EXTENDED, colFunc2: \.BASIC) : word
         let url = URL.replacingOccurrences(of: "{0}", with: word2.urlEncoded())
         print(url)
         return url

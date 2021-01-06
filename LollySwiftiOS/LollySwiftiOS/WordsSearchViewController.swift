@@ -78,7 +78,7 @@ class WordsSearchViewController: UIViewController, WKNavigationDelegate, UISearc
     }
     
     func onGetData() {
-        ddLang.dataSource = vmSettings.arrLanguages.map { $0.LANGNAME }
+        ddLang.dataSource = vmSettings.arrLanguages.map(\.LANGNAME)
     }
     
     func onUpdateLang() {
@@ -86,7 +86,7 @@ class WordsSearchViewController: UIViewController, WKNavigationDelegate, UISearc
         btnLang.setTitle(item.LANGNAME, for: .normal)
         ddLang.selectIndex(vmSettings.selectedLangIndex)
         
-        ddDictReference.dataSource = vmSettings.arrDictsReference.map { $0.DICTNAME }
+        ddDictReference.dataSource = vmSettings.arrDictsReference.map(\.DICTNAME)
         onUpdateDictReference()
     }
     

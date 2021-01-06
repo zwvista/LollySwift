@@ -22,7 +22,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         ddTextbookFilter.anchorView = btnTextbookFilter
-        ddTextbookFilter.dataSource = vmSettings.arrTextbookFilters.map { $0.label }
+        ddTextbookFilter.dataSource = vmSettings.arrTextbookFilters.map(\.label)
         ddTextbookFilter.selectRow(0)
         ddTextbookFilter.selectionAction = { [unowned self] (index: Int, item: String) in
             btnTextbookFilter.setTitle(item, for: .normal)

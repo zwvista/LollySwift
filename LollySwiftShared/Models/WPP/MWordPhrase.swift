@@ -54,7 +54,7 @@ class MWordPhrase: NSObject, Codable {
             if arr.isEmpty {
                 return Observable.empty()
             } else {
-                let ids = arr.map { $0.ID.description }.joined(separator: ",")
+                let ids = arr.map(\.ID.toString).joined(separator: ",")
                 let url = "\(CommonApi.urlAPI)WORDSPHRASES/\(ids)"
                 return RestApi.delete(url: url).map { print($0) }
             }
@@ -67,7 +67,7 @@ class MWordPhrase: NSObject, Codable {
             if arr.isEmpty {
                 return Observable.empty()
             } else {
-                let ids = arr.map { $0.ID.description }.joined(separator: ",")
+                let ids = arr.map(\.ID.toString).joined(separator: ",")
                 let url = "\(CommonApi.urlAPI)WORDSPHRASES/\(ids)"
                 return RestApi.delete(url: url).map { print($0) }
             }

@@ -207,7 +207,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
             if self.vmReview.options.shuffled {
                 arrPhrases = arrPhrases.shuffled()
             }
-            let arrIDs = arrPhrases.map{ $0.ID }
+            let arrIDs = arrPhrases.map(\.ID)
             self.vmReview.start(arrIDs: arrIDs, interval: self.vmReview.options.interval) { [unowned self] i in
                 if let row = self.arrPhrases.firstIndex(where: { $0.ID == arrIDs[i] }) {
                     self.tvPhrases.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)

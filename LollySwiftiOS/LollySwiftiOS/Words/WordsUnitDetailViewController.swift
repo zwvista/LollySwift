@@ -39,7 +39,7 @@ class WordsUnitDetailViewController: UITableViewController, UITextFieldDelegate 
         super.viewDidLoad()
 
         ddUnit.anchorView = tfUnit
-        ddUnit.dataSource = vmSettings.arrUnits.map { $0.label }
+        ddUnit.dataSource = vmSettings.arrUnits.map(\.label)
         ddUnit.selectRow(itemEdit.indexUNIT.value)
         ddUnit.selectionAction = { [unowned self] (index: Int, item: String) in
             self.itemEdit.indexUNIT.accept(index)
@@ -47,7 +47,7 @@ class WordsUnitDetailViewController: UITableViewController, UITextFieldDelegate 
         }
         
         ddPart.anchorView = tfPart
-        ddPart.dataSource = vmSettings.arrParts.map { $0.label }
+        ddPart.dataSource = vmSettings.arrParts.map(\.label)
         ddPart.selectRow(itemEdit.indexPART.value)
         ddPart.selectionAction = { [unowned self] (index: Int, item: String) in
             self.itemEdit.indexPART.accept(index)

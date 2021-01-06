@@ -361,7 +361,7 @@ class SettingsViewModel: NSObject, ObservableObject {
     }
 
     func autoCorrectInput(text: String) -> String {
-        MAutoCorrect.autoCorrect(text: text, arrAutoCorrect: arrAutoCorrect, colFunc1: { $0.INPUT }, colFunc2: { $0.EXTENDED })
+        MAutoCorrect.autoCorrect(text: text, arrAutoCorrect: arrAutoCorrect, colFunc1: \.INPUT, colFunc2: \.EXTENDED)
     }
     
     func updateUnitFrom() -> Observable<()> {

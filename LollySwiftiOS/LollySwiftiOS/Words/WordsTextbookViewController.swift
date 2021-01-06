@@ -22,7 +22,7 @@ class WordsTextbookViewController: WordsBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         ddTextbookFilter.anchorView = btnTextbookFilter
-        ddTextbookFilter.dataSource = vmSettings.arrTextbookFilters.map { $0.label }
+        ddTextbookFilter.dataSource = vmSettings.arrTextbookFilters.map(\.label)
         ddTextbookFilter.selectRow(0)
         ddTextbookFilter.selectionAction = { [unowned self] (index: Int, item: String) in
             btnTextbookFilter.setTitle(item, for: .normal)
@@ -115,7 +115,7 @@ class WordsTextbookViewController: WordsBaseViewController {
             let item = sender as! MUnitWord
             controller.startEdit(vm: vm, item: item, phraseid: 0)
         } else if let controller = segue.destination as? WordsDictViewController {
-            controller.vm.arrWords = arrWords.map { $0.WORD }
+            controller.vm.arrWords = arrWords.map(\.WORD)
             controller.vm.currentWordIndex = vm.arrWords.indexes(of: sender as! MUnitWord)[0]
         }
     }

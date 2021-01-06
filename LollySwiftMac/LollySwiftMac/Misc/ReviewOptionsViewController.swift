@@ -35,14 +35,14 @@ class ReviewOptionsViewController: NSViewController {
         _ = vm.optionsEdit.mode <~> pubMode.rx.selectedItemIndex
         _ = vm.optionsEdit.shuffled <~> scOrder.rx.isOn
         _ = vm.optionsEdit.interval <~> stpInterval.rx.integerValue
-        _ = vm.optionsEdit.interval.map { $0.toString } ~> tfInterval.rx.text.orEmpty
+        _ = vm.optionsEdit.interval.map(\.toString) ~> tfInterval.rx.text.orEmpty
         _ = vm.optionsEdit.groupSelected <~> stpGroupSelected.rx.integerValue
-        _ = vm.optionsEdit.groupSelected.map { $0.toString } ~> tfGroupSelected.rx.text.orEmpty
+        _ = vm.optionsEdit.groupSelected.map(\.toString) ~> tfGroupSelected.rx.text.orEmpty
         _ = vm.optionsEdit.groupCount <~> stpGroupCount.rx.integerValue
-        _ = vm.optionsEdit.groupCount.map { $0.toString } ~> tfGroupCount.rx.text.orEmpty
+        _ = vm.optionsEdit.groupCount.map(\.toString) ~> tfGroupCount.rx.text.orEmpty
         _ = vm.optionsEdit.speakingEnabled <~> scSpeak.rx.isOn
         _ = vm.optionsEdit.reviewCount <~> stpReviewCount.rx.integerValue
-        _ = vm.optionsEdit.reviewCount.map { $0.toString } ~> tfReviewCount.rx.text.orEmpty
+        _ = vm.optionsEdit.reviewCount.map(\.toString) ~> tfReviewCount.rx.text.orEmpty
         btnOK.rx.tap.subscribe { [unowned self] _ in
             self.vm.onOK()
             self.complete?()

@@ -25,12 +25,12 @@ class PatternsMergeViewModel: NSObject {
         }
         super.init()
         mergeVariations()
-        itemEdit.NOTE.accept(items.map { $0.NOTE }.splitUsingCommaAndMerge())
-        itemEdit.TAGS.accept(items.map { $0.TAGS }.splitUsingCommaAndMerge())
+        itemEdit.NOTE.accept(items.map(\.NOTE).splitUsingCommaAndMerge())
+        itemEdit.TAGS.accept(items.map(\.TAGS).splitUsingCommaAndMerge())
     }
     
     func mergeVariations() {
-        itemEdit.PATTERN.accept(arrPatternVariations.map { $0.variation }.unique().joined(separator: "／"))
+        itemEdit.PATTERN.accept(arrPatternVariations.map(\.variation).unique().joined(separator: "／"))
     }
     
     func reindexVariations(complete: (Int) -> ()) {
@@ -45,7 +45,7 @@ class PatternsMergeViewModel: NSObject {
     func onOK() -> Observable<()> {
         let item = MPattern()
         itemEdit.save(to: item)
-        item.IDS_MERGE = arrPatterns.sorted { $0.ID < $1.ID }.map { $0.ID.toString }.joined(separator: ",")
+        item.IDS_MERGE = arrPatterns.sorted { $0.ID < $1.ID }.map(\.ID.toString).joined(separator: ",")
         return MPattern.mergePatterns(item: item)
     }
 }

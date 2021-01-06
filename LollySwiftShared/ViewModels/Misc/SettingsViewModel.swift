@@ -142,7 +142,7 @@ class SettingsViewModel: NSObject {
     }
     var selectedDictsReference = [MDictionary]() {
         didSet {
-            USDICTSREFERENCE = selectedDictsReference.map { String($0.DICTID) }.joined(separator: ",")
+            USDICTSREFERENCE = selectedDictsReference.map(\.DICTID.toString).joined(separator: ",")
         }
     }
     var selectedDictReferenceIndex: Int { arrDictsReference.firstIndex { $0 == selectedDictReference } ?? 0 }
@@ -380,7 +380,7 @@ class SettingsViewModel: NSObject {
     }
 
     func autoCorrectInput(text: String) -> String {
-        MAutoCorrect.autoCorrect(text: text, arrAutoCorrect: arrAutoCorrect, colFunc1: { $0.INPUT }, colFunc2: { $0.EXTENDED })
+        MAutoCorrect.autoCorrect(text: text, arrAutoCorrect: arrAutoCorrect, colFunc1: \.INPUT, colFunc2: \.EXTENDED)
     }
     
     func updateUnitFrom() -> Observable<()> {

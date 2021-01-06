@@ -177,7 +177,7 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
     }
     
     func onGetData() {
-        ddLang.dataSource = vm.arrLanguages.map { $0.LANGNAME }
+        ddLang.dataSource = vm.arrLanguages.map(\.LANGNAME)
     }
     
     func onUpdateLang() {
@@ -185,19 +185,19 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
         langCell.textLabel!.text = item.LANGNAME
         ddLang.selectIndex(vm.selectedLangIndex)
 
-        ddVoice.dataSource = vm.arriOSVoices.map { $0.VOICENAME }
+        ddVoice.dataSource = vm.arriOSVoices.map(\.VOICENAME)
         onUpdateiOSVoice()
         
-        ddDictReference.dataSource = vm.arrDictsReference.map { $0.DICTNAME }
+        ddDictReference.dataSource = vm.arrDictsReference.map(\.DICTNAME)
         onUpdateDictReference()
 
-        ddDictNote.dataSource = vm.arrDictsNote.isEmpty ? [] : vm.arrDictsNote.map { $0.DICTNAME }
+        ddDictNote.dataSource = vm.arrDictsNote.isEmpty ? [] : vm.arrDictsNote.map(\.DICTNAME)
         onUpdateDictNote()
 
-        ddDictTranslation.dataSource = vm.arrDictsTranslation.isEmpty ? [] : vm.arrDictsTranslation.map { $0.DICTNAME }
+        ddDictTranslation.dataSource = vm.arrDictsTranslation.isEmpty ? [] : vm.arrDictsTranslation.map(\.DICTNAME)
         onUpdateDictTranslation()
 
-        ddTextbook.dataSource = vm.arrTextbooks.map { $0.TEXTBOOKNAME }
+        ddTextbook.dataSource = vm.arrTextbooks.map(\.TEXTBOOKNAME)
         onUpdateTextbook()
     }
     
@@ -250,13 +250,13 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
         ddTextbook.selectIndex(vm.selectedTextbookIndex)
         ddToType.selectIndex(vm.toType.rawValue)
         ddToType.selectionAction!(vm.toType.rawValue, ddToType.selectedItem!)
-        ddUnitFrom.dataSource = vm.arrUnits.map { $0.label }
+        ddUnitFrom.dataSource = vm.arrUnits.map(\.label)
         onUpdateUnitFrom()
-        ddPartFrom.dataSource = vm.arrParts.map { $0.label }
+        ddPartFrom.dataSource = vm.arrParts.map(\.label)
         onUpdatePartFrom()
-        ddUnitTo.dataSource = vm.arrUnits.map { $0.label }
+        ddUnitTo.dataSource = vm.arrUnits.map(\.label)
         onUpdateUnitTo()
-        ddPartTo.dataSource = vm.arrParts.map { $0.label }
+        ddPartTo.dataSource = vm.arrParts.map(\.label)
         onUpdatePartTo()
     }
     

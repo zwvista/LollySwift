@@ -36,7 +36,7 @@ class PatternsWebPagesBrowseViewController: UIViewController, WKUIDelegate, WKNa
 
         vm.getWebPages().subscribe(onNext: {
             self.ddWebPage.anchorView = self.btnWebPage
-            self.ddWebPage.dataSource = self.vm.arrWebPages.map { $0.TITLE }
+            self.ddWebPage.dataSource = self.vm.arrWebPages.map(\.TITLE)
             self.ddWebPage.selectRow(self.vm.currentWebPageIndex)
             self.ddWebPage.selectionAction = { [unowned self] (index: Int, item: String) in
                 self.vm.currentWebPageIndex = index

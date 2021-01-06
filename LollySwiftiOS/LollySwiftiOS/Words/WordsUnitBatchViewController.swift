@@ -85,7 +85,7 @@ class WordsUnitBatchViewController: UIViewController, UITableViewDelegate, UITab
                 tfUnit = cell.tf
                 tfUnit.text = vmSettings.arrUnits.first { $0.value == vmSettings.USUNITTO }!.label
                 ddUnit.anchorView = tfUnit
-                ddUnit.dataSource = vmSettings.arrUnits.map { $0.label }
+                ddUnit.dataSource = vmSettings.arrUnits.map(\.label)
                 ddUnit.selectRow(vmSettings.arrUnits.firstIndex { $0.value == vmSettings.USUNITTO }!)
                 ddUnit.selectionAction = { [unowned self] (index: Int, item: String) in
                     self.tfUnit.text = item
@@ -95,7 +95,7 @@ class WordsUnitBatchViewController: UIViewController, UITableViewDelegate, UITab
                 tfPart = cell.tf
                 tfPart.text = vmSettings.arrParts.first { $0.value == vmSettings.USPARTTO }!.label
                 ddPart.anchorView = tfPart
-                ddPart.dataSource = vmSettings.arrParts.map { $0.label }
+                ddPart.dataSource = vmSettings.arrParts.map(\.label)
                 ddPart.selectRow(vmSettings.arrParts.firstIndex { $0.value == vmSettings.USPARTTO }!)
                 ddPart.selectionAction = { [unowned self] (index: Int, item: String) in
                     self.tfPart.text = item

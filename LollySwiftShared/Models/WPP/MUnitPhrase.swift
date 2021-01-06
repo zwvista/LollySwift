@@ -61,7 +61,7 @@ class MUnitPhrase: NSObject, Codable, MPhraseProtocol {
 
     private static func setTextbook(_ o: Observable<[MUnitPhrase]>, arrTextbooks: [MTextbook]) -> Observable<[MUnitPhrase]> {
         return o.map { arr in
-            Dictionary(grouping: arr) { $0.PHRASEID }.values.compactMap { $0[0] }
+            Dictionary(grouping: arr, by: \.PHRASEID).values.compactMap { $0[0] }
         }.do(onNext: { arr in
             arr.forEach { row in
                 row.textbook = arrTextbooks.first { $0.ID == row.TEXTBOOKID }!

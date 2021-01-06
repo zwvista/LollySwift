@@ -264,7 +264,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
             if self.vmReview.options.shuffled {
                 arrWords = arrWords.shuffled()
             }
-            let arrIDs = arrWords.map { $0.ID }
+            let arrIDs = arrWords.map(\.ID)
             self.vmReview.start(arrIDs: arrIDs, interval: self.vmReview.options.interval) { [unowned self] i in
                 if let row = self.arrWords.firstIndex(where: { $0.ID == arrIDs[i] }) {
                     self.tvWords.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)

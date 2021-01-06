@@ -46,7 +46,7 @@ class WordsDictViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
         }
         
         ddDictReference.anchorView = btnDict
-        ddDictReference.dataSource = vmSettings.arrDictsReference.map { $0.DICTNAME }
+        ddDictReference.dataSource = vmSettings.arrDictsReference.map(\.DICTNAME)
         ddDictReference.selectRow(vmSettings.selectedDictReferenceIndex)
         ddDictReference.selectionAction = { [unowned self] (index: Int, item: String) in
             vmSettings.selectedDictReference = vmSettings.arrDictsReference[index]

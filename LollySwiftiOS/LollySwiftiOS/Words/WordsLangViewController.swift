@@ -99,7 +99,7 @@ class WordsLangViewController: WordsBaseViewController {
             controller.vm = vm
             controller.item = sender as? MLangWord ?? MLangWord()
         } else if let controller = segue.destination as? WordsDictViewController {
-            controller.vm.arrWords = arrWords.map { $0.WORD }
+            controller.vm.arrWords = arrWords.map(\.WORD)
             controller.vm.currentWordIndex = vm.arrWords.indexes(of: sender as! MLangWord)[0]
         }
     }
