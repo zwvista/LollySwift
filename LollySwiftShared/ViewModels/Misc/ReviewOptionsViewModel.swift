@@ -12,7 +12,7 @@ import RxRelay
 class ReviewOptionsViewModel: NSObject {
     var options: MReviewOptions!
     var optionsEdit: MReviewOptionsEdit!
-    var modeEnabled: BehaviorRelay<Bool>
+    let modeEnabled: BehaviorRelay<Bool>
     
     init(options: MReviewOptions) {
         self.options = options

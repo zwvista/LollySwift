@@ -63,9 +63,9 @@ class MLangPhrase: NSObject, Codable, MPhraseProtocol {
 }
 
 class MLangPhraseEdit {
-    var ID: BehaviorRelay<String>
-    var PHRASE: BehaviorRelay<String>
-    var TRANSLATION: BehaviorRelay<String>
+    let ID: BehaviorRelay<String>
+    let PHRASE: BehaviorRelay<String>
+    let TRANSLATION: BehaviorRelay<String>
 
     init(x: MLangPhrase) {
         ID = BehaviorRelay(value: x.ID.toString)

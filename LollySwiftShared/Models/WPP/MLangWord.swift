@@ -69,11 +69,11 @@ class MLangWord: NSObject, Codable, MWordProtocol {
 }
 
 class MLangWordEdit {
-    var ID: BehaviorRelay<String>
-    var WORD: BehaviorRelay<String>
-    var NOTE: BehaviorRelay<String>
-    var FAMIID: BehaviorRelay<String>
-    var ACCURACY: BehaviorRelay<String>
+    let ID: BehaviorRelay<String>
+    let WORD: BehaviorRelay<String>
+    let NOTE: BehaviorRelay<String>
+    let FAMIID: BehaviorRelay<String>
+    let ACCURACY: BehaviorRelay<String>
 
     init(x: MLangWord) {
         ID = BehaviorRelay(value: x.ID.toString)

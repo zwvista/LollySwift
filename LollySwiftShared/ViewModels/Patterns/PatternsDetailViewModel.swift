@@ -15,7 +15,7 @@ class PatternsDetailViewModel: NSObject {
     var item: MPattern!
     var itemEdit: MPatternEdit!
     var isAdd: Bool!
-    var isOKEnabled = BehaviorRelay(value: false)
+    let isOKEnabled = BehaviorRelay(value: false)
 
     init(vm: PatternsViewModel, item: MPattern) {
         self.vm = vm

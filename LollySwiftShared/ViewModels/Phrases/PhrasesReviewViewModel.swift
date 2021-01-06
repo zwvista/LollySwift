@@ -21,17 +21,17 @@ class PhrasesReviewViewModel: NSObject {
     var subscription: Disposable? = nil
     let doTestAction: (() -> Void)?
 
-    var indexString = BehaviorRelay(value: "")
-    var indexHidden = BehaviorRelay(value: false)
-    var correctHidden = BehaviorRelay(value: true)
-    var incorrectHidden = BehaviorRelay(value: true)
-    var checkEnabled = BehaviorRelay(value: false)
-    var phraseTargetString = BehaviorRelay(value: "")
-    var phraseTargetHidden = BehaviorRelay(value: false)
-    var translationString = BehaviorRelay(value: "")
-    var phraseInputString = BehaviorRelay(value: "")
-    var checkTitle = BehaviorRelay(value: "Check")
-    var isSpeaking = BehaviorRelay(value: true)
+    let indexString = BehaviorRelay(value: "")
+    let indexHidden = BehaviorRelay(value: false)
+    let correctHidden = BehaviorRelay(value: true)
+    let incorrectHidden = BehaviorRelay(value: true)
+    let checkEnabled = BehaviorRelay(value: false)
+    let phraseTargetString = BehaviorRelay(value: "")
+    let phraseTargetHidden = BehaviorRelay(value: false)
+    let translationString = BehaviorRelay(value: "")
+    let phraseInputString = BehaviorRelay(value: "")
+    let checkTitle = BehaviorRelay(value: "Check")
+    let isSpeaking = BehaviorRelay(value: true)
 
     init(settings: SettingsViewModel, needCopy: Bool, doTestAction: (() -> Void)? = nil) {
         self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)

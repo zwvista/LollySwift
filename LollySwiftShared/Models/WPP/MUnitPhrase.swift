@@ -118,16 +118,16 @@ class MUnitPhrase: NSObject, Codable, MPhraseProtocol {
 }
 
 class MUnitPhraseEdit {
-    var ID: BehaviorRelay<String>
-    var TEXTBOOKNAME: BehaviorRelay<String>
-    var UNITSTR: BehaviorRelay<String>
-    var indexUNIT: BehaviorRelay<Int>
-    var PARTSTR: BehaviorRelay<String>
-    var indexPART: BehaviorRelay<Int>
-    var SEQNUM: BehaviorRelay<String>
-    var PHRASEID: BehaviorRelay<String>
-    var PHRASE: BehaviorRelay<String>
-    var TRANSLATION: BehaviorRelay<String>
+    let ID: BehaviorRelay<String>
+    let TEXTBOOKNAME: BehaviorRelay<String>
+    let UNITSTR: BehaviorRelay<String>
+    let indexUNIT: BehaviorRelay<Int>
+    let PARTSTR: BehaviorRelay<String>
+    let indexPART: BehaviorRelay<Int>
+    let SEQNUM: BehaviorRelay<String>
+    let PHRASEID: BehaviorRelay<String>
+    let PHRASE: BehaviorRelay<String>
+    let TRANSLATION: BehaviorRelay<String>
 
     init(x: MUnitPhrase) {
         ID = BehaviorRelay(value: x.ID.toString)

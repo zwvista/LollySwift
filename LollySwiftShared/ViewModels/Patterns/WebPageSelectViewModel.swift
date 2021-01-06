@@ -11,8 +11,8 @@ import RxSwift
 import RxRelay
 
 class WebPageSelectViewModel: NSObject {
-    var title = BehaviorRelay(value: "")
-    var url = BehaviorRelay(value: "")
+    let title = BehaviorRelay(value: "")
+    let url = BehaviorRelay(value: "")
     var vmSettings: SettingsViewModel
     var arrWebPages = [MWebPage]()
     var selectedWebPage: MWebPage?

@@ -17,7 +17,7 @@ class PhrasesUnitDetailViewModel: NSObject {
     var itemEdit: MUnitPhraseEdit!
     var vmSingle: SinglePhraseViewModel!
     var isAdd: Bool!
-    var isOKEnabled = BehaviorRelay(value: false)
+    let isOKEnabled = BehaviorRelay(value: false)
 
     init(vm: PhrasesUnitViewModel, item: MUnitPhrase, wordid: Int, complete: @escaping () -> ()) {
         self.vm = vm

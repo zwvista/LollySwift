@@ -26,13 +26,13 @@ class MReviewOptions: NSObject {
 }
 
 class MReviewOptionsEdit {
-    var mode: BehaviorRelay<Int>
-    var interval: BehaviorRelay<Int>
-    var shuffled: BehaviorRelay<Bool>
-    var groupCount: BehaviorRelay<Int>
-    var groupSelected: BehaviorRelay<Int>
-    var speakingEnabled: BehaviorRelay<Bool>
-    var reviewCount: BehaviorRelay<Int>
+    let mode: BehaviorRelay<Int>
+    let interval: BehaviorRelay<Int>
+    let shuffled: BehaviorRelay<Bool>
+    let groupCount: BehaviorRelay<Int>
+    let groupSelected: BehaviorRelay<Int>
+    let speakingEnabled: BehaviorRelay<Bool>
+    let reviewCount: BehaviorRelay<Int>
 
     init(x: MReviewOptions) {
         mode = BehaviorRelay(value: x.mode.rawValue)

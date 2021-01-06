@@ -16,7 +16,7 @@ class WordsLangDetailViewModel: NSObject {
     var itemEdit: MLangWordEdit!
     var vmSingle: SingleWordViewModel!
     var isAdd: Bool!
-    var isOKEnabled = BehaviorRelay(value: false)
+    let isOKEnabled = BehaviorRelay(value: false)
 
     init(vm: WordsLangViewModel, item: MLangWord, complete: @escaping () -> ()) {
         self.vm = vm

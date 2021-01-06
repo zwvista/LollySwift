@@ -128,18 +128,18 @@ class MUnitWord: NSObject, Codable, MWordProtocol {
 }
 
 class MUnitWordEdit {
-    var ID: BehaviorRelay<String>
-    var TEXTBOOKNAME: BehaviorRelay<String>
-    var UNITSTR: BehaviorRelay<String>
-    var indexUNIT: BehaviorRelay<Int>
-    var PARTSTR: BehaviorRelay<String>
-    var indexPART: BehaviorRelay<Int>
-    var SEQNUM: BehaviorRelay<String>
-    var WORDID: BehaviorRelay<String>
-    var WORD: BehaviorRelay<String>
-    var NOTE: BehaviorRelay<String>
-    var FAMIID: BehaviorRelay<String>
-    var ACCURACY: BehaviorRelay<String>
+    let ID: BehaviorRelay<String>
+    let TEXTBOOKNAME: BehaviorRelay<String>
+    let UNITSTR: BehaviorRelay<String>
+    let indexUNIT: BehaviorRelay<Int>
+    let PARTSTR: BehaviorRelay<String>
+    let indexPART: BehaviorRelay<Int>
+    let SEQNUM: BehaviorRelay<String>
+    let WORDID: BehaviorRelay<String>
+    let WORD: BehaviorRelay<String>
+    let NOTE: BehaviorRelay<String>
+    let FAMIID: BehaviorRelay<String>
+    let ACCURACY: BehaviorRelay<String>
 
     init(x: MUnitWord) {
         ID = BehaviorRelay(value: x.ID.toString)
