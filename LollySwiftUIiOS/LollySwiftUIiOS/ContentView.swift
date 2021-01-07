@@ -18,6 +18,7 @@ struct ContentView: View {
                     Text($0.DICTNAME)
                 }
             }
+            .onChange(of: vm.selectedDictReference) { print($0) }
             WebView(req: ContentView.makeURLRequest())
         }
     }

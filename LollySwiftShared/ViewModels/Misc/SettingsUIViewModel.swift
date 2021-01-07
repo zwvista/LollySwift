@@ -127,7 +127,7 @@ class SettingsViewModel: NSObject, ObservableObject {
     @Published
     var arrDictsReference = [MDictionary]()
     @Published
-    var selectedDictReference: MDictionary! {
+    var selectedDictReference = MDictionary() {
         didSet {
             USDICTREFERENCE = String(selectedDictReference.DICTID)
         }
