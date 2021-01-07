@@ -6,24 +6,47 @@
 //
 
 import SwiftUI
+import RxSwift
+import WebKit
 
 struct ContentView: View {
     @ObservedObject var vm = vmSettings
-    @State var text = ""
+    @State var word = ""
     @ObservedObject var webViewStore = WebViewStore()
+    @State var status = DictWebViewStatus.ready
+    let disposeBag = DisposeBag()
+    var wvDict: WKWebView { webViewStore.webView }
     var body: some View {
         VStack {
-            SearchBar(text: $text, placeholder: "Word") {_ in }
+            SearchBar(text: $word, placeholder: "Word") {_ in }
             Picker(selection: $vm.selectedDictReference, label: Text(vm.selectedDictReference.DICTNAME == "" ? "Choose a Dictionary" : vm.selectedDictReference.DICTNAME)) {
                 ForEach(vm.arrDictsReference, id: \.self) {
                     Text($0.DICTNAME)
                 }
             }
             .pickerStyle(MenuPickerStyle())
-            .onChange(of: vm.selectedDictReference) { print($0) }
-            WebView(webView: webViewStore.webView)
-        }.onAppear {
-            self.webViewStore.webView.load(URLRequest(url: URL(string: "about:blank")!))
+            .onChange(of: vm.selectedDictReference) {_ in
+                searchDict()
+            }
+            WebView(webView: wvDict)
+        }
+    }
+    
+    func searchDict() {
+        let item = vmSettings.selectedDictReference
+        let url = item.urlString(word: word, arrAutoCorrect: vmSettings.arrAutoCorrect)
+        if item.DICTTYPENAME == "OFFLINE" {
+            wvDict.load(URLRequest(url: URL(string: "about:blank")!))
+            RestApi.getHtml(url: url).subscribe(onNext: { html in
+                print(html)
+                let str = item.htmlString(html, word: word, useTemplate2: true)
+                wvDict.loadHTMLString(str, baseURL: nil)
+            }) ~ disposeBag
+        } else {
+            wvDict.load(URLRequest(url: URL(string: url)!))
+            if item.DICTTYPENAME == "OFFLINE-ONLINE" {
+                status = .navigating
+            }
         }
     }
 }
