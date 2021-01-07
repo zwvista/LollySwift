@@ -128,6 +128,7 @@ class MUnitPhraseEdit {
     let PHRASEID: BehaviorRelay<String>
     let PHRASE: BehaviorRelay<String>
     let TRANSLATION: BehaviorRelay<String>
+    let PHRASES = BehaviorRelay(value: "")
 
     init(x: MUnitPhrase) {
         ID = BehaviorRelay(value: x.ID.toString)

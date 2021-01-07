@@ -121,15 +121,22 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
         addPhrase(wordid: 0)
     }
     
+    @IBAction func batchAdd(_ sender: AnyObject) {
+        let batchVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesUnitBatchAddViewController") as! PhrasesUnitBatchAddViewController
+        batchVC.startEdit(vm: vm)
+        batchVC.complete = { self.doRefresh() }
+        self.presentAsModalWindow(batchVC)
+    }
+
     @IBAction func batchEdit(_ sender: AnyObject) {
-        let detailVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesUnitBatchEditViewController") as! PhrasesUnitBatchEditViewController
-        detailVC.vm = vm
+        let batchVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesUnitBatchEditViewController") as! PhrasesUnitBatchEditViewController
+        batchVC.vm = vm
         let i = tvPhrases.selectedRow
         let item = i == -1 ? nil : arrPhrases[tvPhrases.selectedRow]
-        detailVC.unit = item?.UNIT ?? vmSettings.USUNITTO
-        detailVC.part = item?.PART ?? vmSettings.USPARTTO
-        detailVC.complete = { self.doRefresh() }
-        self.presentAsModalWindow(detailVC)
+        batchVC.unit = item?.UNIT ?? vmSettings.USUNITTO
+        batchVC.part = item?.PART ?? vmSettings.USPARTTO
+        batchVC.complete = { self.doRefresh() }
+        self.presentAsModalWindow(batchVC)
     }
 
     override func deletePhrase(row: Int) {

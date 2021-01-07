@@ -14,7 +14,6 @@ class WordsUnitBatchAddViewModel: NSObject {
     var vm: WordsUnitViewModel!
     var item: MUnitWord!
     var itemEdit: MUnitWordEdit!
-    let words = BehaviorRelay(value: "")
     let isOKEnabled = BehaviorRelay(value: false)
 
     init(vm: WordsUnitViewModel) {
