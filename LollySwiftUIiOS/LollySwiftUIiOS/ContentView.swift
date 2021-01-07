@@ -15,7 +15,7 @@ struct ContentView: View {
             SearchBar(text: $text, placeholder: "Word") {_ in }
             Picker("Dictionary", selection: $vm.selectedDictReference) {
                 ForEach(vm.arrDictsReference, id: \.self) {
-                    Text($0.DICTNAME).tag($0)
+                    Text($0.DICTNAME)
                 }
             }
             WebView(req: ContentView.makeURLRequest())
