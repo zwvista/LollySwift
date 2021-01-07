@@ -6,90 +6,106 @@
 //
 
 import SwiftUI
+import Combine
 import WebKit
 
-// https://qiita.com/noby111/items/2830d9f9c76c83df79a1
-struct WebView: UIViewControllerRepresentable {
-    var req : URLRequest
-
-    class Coodinator: NSObject, WKNavigationDelegate, WKUIDelegate {
-        var parent : WebView
-
-        init(_ parent: WebView) {
-            self.parent = parent
-        }
-
-        func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-            print("load started")
-        }
-
-        func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-            print("load finished")
-        }
-
-        func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-            print(error)
-        }
+// https://github.com/kylehickinson/SwiftUI-WebView/blob/master/Sources/WebView/WebView.swift
+public class WebViewStore: ObservableObject {
+  @Published public var webView: WKWebView {
+    didSet {
+      setupObservers()
     }
-
-    func makeCoordinator() -> WebView.Coodinator {
-        return Coodinator(self)
+  }
+  
+  public init(webView: WKWebView = WKWebView()) {
+    self.webView = webView
+    setupObservers()
+  }
+  
+  private func setupObservers() {
+    func subscriber<Value>(for keyPath: KeyPath<WKWebView, Value>) -> NSKeyValueObservation {
+      return webView.observe(keyPath, options: [.prior]) { _, change in
+        if change.isPrior {
+          self.objectWillChange.send()
+        }
+      }
     }
-
-    func makeUIViewController(context: Context) -> EmbeddedWebviewController {
-        let webViewController = EmbeddedWebviewController(coordinator: context.coordinator)
-        webViewController.loadUrl(req)
-
-        return webViewController
+    // Setup observers for all KVO compliant properties
+    observers = [
+      subscriber(for: \.title),
+      subscriber(for: \.url),
+      subscriber(for: \.isLoading),
+      subscriber(for: \.estimatedProgress),
+      subscriber(for: \.hasOnlySecureContent),
+      subscriber(for: \.serverTrust),
+      subscriber(for: \.canGoBack),
+      subscriber(for: \.canGoForward)
+    ]
+  }
+  
+  private var observers: [NSKeyValueObservation] = []
+  
+  deinit {
+    observers.forEach {
+      // Not even sure if this is required?
+      // Probably wont be needed in future betas?
+      $0.invalidate()
     }
-
-    func updateUIViewController(_ uiViewController: EmbeddedWebviewController, context: UIViewControllerRepresentableContext<WebView>) {
-
-    }
+  }
 }
 
-class EmbeddedWebviewController: UIViewController {
-
-    var webview: WKWebView
-
-    public var delegate: WebView.Coordinator? = nil
-
-    init(coordinator: WebView.Coordinator) {
-        self.delegate = coordinator
-        self.webview = WKWebView()
-        super.init(nibName: nil, bundle: nil)
+/// A container for using a WKWebView in SwiftUI
+public struct WebView: View, UIViewRepresentable {
+  /// The WKWebView to display
+  public let webView: WKWebView
+  
+  public typealias UIViewType = UIViewContainerView<WKWebView>
+  
+  public init(webView: WKWebView) {
+    self.webView = webView
+  }
+  
+  public func makeUIView(context: UIViewRepresentableContext<WebView>) -> WebView.UIViewType {
+    return UIViewContainerView()
+  }
+  
+  public func updateUIView(_ uiView: WebView.UIViewType, context: UIViewRepresentableContext<WebView>) {
+    // If its the same content view we don't need to update.
+    if uiView.contentView !== webView {
+      uiView.contentView = webView
     }
+  }
+}
 
-    required init?(coder: NSCoder) {
-        self.webview = WKWebView()
-        super.init(coder: coder)
+/// A UIView which simply adds some view to its view hierarchy
+public class UIViewContainerView<ContentView: UIView>: UIView {
+  var contentView: ContentView? {
+    willSet {
+      contentView?.removeFromSuperview()
     }
-
-    public func loadUrl(_ req: URLRequest) {
-        webview.load(req)
+    didSet {
+      if let contentView = contentView {
+        addSubview(contentView)
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+          contentView.leadingAnchor.constraint(equalTo: leadingAnchor),
+          contentView.trailingAnchor.constraint(equalTo: trailingAnchor),
+          contentView.topAnchor.constraint(equalTo: topAnchor),
+          contentView.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ])
+      }
     }
-
-    override func loadView() {
-        self.webview.navigationDelegate = self.delegate
-        self.webview.uiDelegate = self.delegate
-        view = webview
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
+  }
 }
 
 struct WebView_Previews: PreviewProvider {
-
+    static var webViewStore = WebViewStore()
+    
     static var previews: some View {
         VStack{
-            WebView(req: self.makeURLRequest())
+            WebView(webView: webViewStore.webView)
+        }.onAppear {
+            self.webViewStore.webView.load(URLRequest(url: URL(string: "https://apple.com")!))
         }
-    }
-
-    static func makeURLRequest() -> URLRequest {
-        let request = URLRequest(url: URL(string: "https://www.google.co.jp")!)
-        return request
     }
 }

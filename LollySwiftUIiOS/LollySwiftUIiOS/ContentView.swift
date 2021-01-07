@@ -10,22 +10,21 @@ import SwiftUI
 struct ContentView: View {
     @ObservedObject var vm = vmSettings
     @State var text = ""
+    @ObservedObject var webViewStore = WebViewStore()
     var body: some View {
         VStack {
             SearchBar(text: $text, placeholder: "Word") {_ in }
-            Picker("Dictionary", selection: $vm.selectedDictReference) {
+            Picker(selection: $vm.selectedDictReference, label: Text(vm.selectedDictReference.DICTNAME == "" ? "Choose a Dictionary" : vm.selectedDictReference.DICTNAME)) {
                 ForEach(vm.arrDictsReference, id: \.self) {
                     Text($0.DICTNAME)
                 }
             }
+            .pickerStyle(MenuPickerStyle())
             .onChange(of: vm.selectedDictReference) { print($0) }
-            WebView(req: ContentView.makeURLRequest())
+            WebView(webView: webViewStore.webView)
+        }.onAppear {
+            self.webViewStore.webView.load(URLRequest(url: URL(string: "about:blank")!))
         }
-    }
-
-    static func makeURLRequest() -> URLRequest {
-        let request = URLRequest(url: URL(string: "about:blank")!)
-        return request
     }
 }
 
