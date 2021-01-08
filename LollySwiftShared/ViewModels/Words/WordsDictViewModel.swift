@@ -18,8 +18,8 @@ class WordsDictViewModel: NSObject {
         currentWordIndex = (currentWordIndex + delta + arrWords.count) % arrWords.count
     }
 
-    public init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> ()) {
-        self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
+    init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> ()) {
+        vmSettings = !needCopy ? settings : SettingsViewModel(settings)
         super.init()
     }
 }

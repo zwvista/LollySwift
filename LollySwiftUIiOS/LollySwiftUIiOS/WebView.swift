@@ -10,14 +10,15 @@ import Combine
 import WebKit
 
 // https://github.com/kylehickinson/SwiftUI-WebView/blob/master/Sources/WebView/WebView.swift
-public class WebViewStore: ObservableObject {
-  @Published public var webView: WKWebView {
+// https://qiita.com/noby111/items/2830d9f9c76c83df79a1
+class WebViewStore: ObservableObject {
+  @Published var webView: WKWebView {
     didSet {
       setupObservers()
     }
   }
   
-  public init(webView: WKWebView = WKWebView()) {
+  init(webView: WKWebView = WKWebView()) {
     self.webView = webView
     setupObservers()
   }
@@ -55,30 +56,55 @@ public class WebViewStore: ObservableObject {
 }
 
 /// A container for using a WKWebView in SwiftUI
-public struct WebView: View, UIViewRepresentable {
+struct WebView: View, UIViewRepresentable {
   /// The WKWebView to display
-  public let webView: WKWebView
+  let webView: WKWebView
+    let onNavigationFinished: () -> Void
   
-  public typealias UIViewType = UIViewContainerView<WKWebView>
+  typealias UIViewType = UIViewContainerView<WKWebView>
   
-  public init(webView: WKWebView) {
-    self.webView = webView
-  }
-  
-  public func makeUIView(context: UIViewRepresentableContext<WebView>) -> WebView.UIViewType {
+    class Coodinator: NSObject, WKNavigationDelegate, WKUIDelegate {
+        let parent : WebView
+        let onNavigationFinished: () -> Void
+
+        init(_ parent: WebView, onNavigationFinished: @escaping () -> Void) {
+            self.parent = parent
+            self.onNavigationFinished = onNavigationFinished
+        }
+
+        func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+            print("load started")
+        }
+
+        func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+            print("load finished")
+            onNavigationFinished()
+        }
+
+        func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+            print(error)
+        }
+    }
+
+    func makeCoordinator() -> WebView.Coodinator {
+        return Coodinator(self, onNavigationFinished: onNavigationFinished)
+    }
+
+  func makeUIView(context: UIViewRepresentableContext<WebView>) -> WebView.UIViewType {
     return UIViewContainerView()
   }
   
-  public func updateUIView(_ uiView: WebView.UIViewType, context: UIViewRepresentableContext<WebView>) {
+  func updateUIView(_ uiView: WebView.UIViewType, context: UIViewRepresentableContext<WebView>) {
     // If its the same content view we don't need to update.
     if uiView.contentView !== webView {
       uiView.contentView = webView
+        webView.navigationDelegate = context.coordinator
     }
   }
 }
 
 /// A UIView which simply adds some view to its view hierarchy
-public class UIViewContainerView<ContentView: UIView>: UIView {
+class UIViewContainerView<ContentView: UIView>: UIView {
   var contentView: ContentView? {
     willSet {
       contentView?.removeFromSuperview()
@@ -103,9 +129,9 @@ struct WebView_Previews: PreviewProvider {
     
     static var previews: some View {
         VStack{
-            WebView(webView: webViewStore.webView)
+            WebView(webView: webViewStore.webView, onNavigationFinished: {})
         }.onAppear {
-            self.webViewStore.webView.load(URLRequest(url: URL(string: "https://apple.com")!))
+            webViewStore.webView.load(URLRequest(url: URL(string: "https://apple.com")!))
         }
     }
 }
