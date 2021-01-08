@@ -19,9 +19,10 @@ struct ContentView: View {
     var body: some View {
         VStack {
             SearchBar(text: $word, placeholder: "Word") {_ in }
-            Picker(selection: $vm.selectedDictReference, label: Text(vm.selectedDictReference.DICTNAME == "" ? "Choose a Dictionary" : vm.selectedDictReference.DICTNAME)) {
+            // https://stackoverflow.com/questions/59348093/picker-for-optional-data-type-in-swiftui
+            Picker(selection: $vm.selectedDictReference, label: Text(vm.selectedDictReference?.DICTNAME ?? "Choose a Dictionary")) {
                 ForEach(vm.arrDictsReference, id: \.self) {
-                    Text($0.DICTNAME)
+                    Text($0.DICTNAME).tag($0 as MDictionary?)
                 }
             }
             .pickerStyle(MenuPickerStyle())
@@ -33,7 +34,7 @@ struct ContentView: View {
     }
     
     func searchDict() {
-        let item = vmSettings.selectedDictReference
+        let item = vmSettings.selectedDictReference!
         let url = item.urlString(word: word, arrAutoCorrect: vmSettings.arrAutoCorrect)
         if item.DICTTYPENAME == "OFFLINE" {
             wvDict.load(URLRequest(url: URL(string: "about:blank")!))
