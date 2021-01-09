@@ -14,21 +14,18 @@ import NSObject_Rx
 
 class WordsSearchViewController: UIViewController, WKNavigationDelegate, UISearchBarDelegate, SettingsViewModelDelegate {
     @IBOutlet weak var wvDictHolder: UIView!
-    weak var wvDict: WKWebView!
+    var dictStore: DictStore!
 
     @IBOutlet weak var sbword: UISearchBar!
     @IBOutlet weak var btnLang: UIButton!
     @IBOutlet weak var btnDict: UIButton!
 
-    var word = ""
-    var status = DictWebViewStatus.ready
     let ddLang = DropDown()
     let ddDictReference = DropDown()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        wvDict = addWKWebView(webViewHolder: wvDictHolder)
-        wvDict.navigationDelegate = self
+        dictStore = DictStore(settings: vmSettings, wvDict: addWKWebView(webViewHolder: wvDictHolder))
         vmSettings.delegate = self
         
         vmSettings.getData().subscribe(onNext: {
@@ -40,29 +37,16 @@ class WordsSearchViewController: UIViewController, WKNavigationDelegate, UISearc
             self.ddDictReference.anchorView = self.btnDict
             self.ddDictReference.selectionAction = { [unowned self] (index: Int, item: String) in
                 guard index != vmSettings.selectedDictReferenceIndex else {return}
+                vmSettings.selectedDictReference = vmSettings.arrDictsReference[index]
                 vmSettings.updateDictReference().subscribe() ~ self.rx.disposeBag
             }
         }) ~ rx.disposeBag
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        word = sbword.text!
         sbword.endEditing(true)
-        let item = vmSettings.selectedDictReference!
-        let url = item.urlString(word: word, arrAutoCorrect: vmSettings.arrAutoCorrect)
-        if item.DICTTYPENAME == "OFFLINE" {
-            wvDict.load(URLRequest(url: URL(string: "about:blank")!))
-            RestApi.getHtml(url: url).subscribe(onNext: { html in
-                print(html)
-                let str = item.htmlString(html, word: self.word, useTemplate2: true)
-                self.wvDict.loadHTMLString(str, baseURL: nil)
-            }) ~ rx.disposeBag
-        } else {
-            wvDict.load(URLRequest(url: URL(string: url)!))
-            if item.DICTTYPENAME == "OFFLINE-ONLINE" {
-                status = .navigating
-            }
-        }
+        dictStore.word = sbword.text!
+        dictStore.searchDict()
     }
     
     @IBAction func showLangDropDown(_ sender: AnyObject) {
@@ -87,24 +71,9 @@ class WordsSearchViewController: UIViewController, WKNavigationDelegate, UISearc
     }
     
     func onUpdateDictReference() {
-        let item = vmSettings.selectedDictReference!
-        btnDict.setTitle(item.DICTNAME, for: .normal)
+        btnDict.setTitle(vmSettings.selectedDictReference!.DICTNAME, for: .normal)
         ddDictReference.selectIndex(vmSettings.selectedDictReferenceIndex)
-        searchBarSearchButtonClicked(sbword)
-    }
-
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        //        guard webView.stringByEvaluatingJavaScript(from: "document.readyState") == "complete" && status == .navigating else {return}
-        guard status == .navigating else {return}
-        let item = vmSettings.selectedDictReference!
-        // https://stackoverflow.com/questions/34751860/get-html-from-wkwebview-in-swift
-        webView.evaluateJavaScript("document.documentElement.outerHTML.toString()") { (html: Any?, error: Error?) in
-            let html = html as! String
-            print(html)
-            let str = item.htmlString(html, word: self.word, useTemplate2: true)
-            self.wvDict.loadHTMLString(str, baseURL: nil)
-            self.status = .ready
-        }
+        dictStore.searchDict()
     }
 
     deinit {

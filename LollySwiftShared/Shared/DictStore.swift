@@ -1,5 +1,5 @@
 //
-//  DictWebView.swift
+//  DictStore.swift
 //  LollySwiftiOS
 //
 //  Created by 趙　偉 on 2021/01/08.
@@ -9,23 +9,35 @@
 import Foundation
 import WebKit
 
-class DictWebView: WKWebView, WKNavigationDelegate {
+class DictStore: NSObject, WKNavigationDelegate {
     
     var dictStatus = DictWebViewStatus.ready
     var word = ""
     var dict: MDictionary!
     var urlString = ""
     
-    func SearchDict() {
+    var vmSettings: SettingsViewModel
+    weak var wvDict: WKWebView!
+    
+    init(settings: SettingsViewModel, wvDict: WKWebView) {
+        vmSettings = settings
+        self.wvDict = wvDict
+        super.init()
+        self.wvDict.navigationDelegate = self
+    }
+    
+    func searchDict() {
+        dict = vmSettings.selectedDictReference!
+        urlString = dict.urlString(word: word, arrAutoCorrect: vmSettings.arrAutoCorrect)
         if dict.DICTTYPENAME == "OFFLINE" {
-            load(URLRequest(url: URL(string: "about:blank")!))
+            wvDict.load(URLRequest(url: URL(string: "about:blank")!))
             RestApi.getHtml(url: urlString).subscribe(onNext: { html in
                 print(html)
                 let str = self.dict.htmlString(html, word: self.word)
-                self.loadHTMLString(str, baseURL: nil)
+                self.wvDict.loadHTMLString(str, baseURL: nil)
             }) ~ rx.disposeBag
         } else {
-            load(URLRequest(url: URL(string: urlString)!))
+            wvDict.load(URLRequest(url: URL(string: urlString)!))
             if !dict.AUTOMATION.isEmpty {
                 dictStatus = .automating
             } else if dict.DICTTYPENAME == "OFFLINE-ONLINE" {
@@ -35,6 +47,7 @@ class DictWebView: WKWebView, WKNavigationDelegate {
     }
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        //        guard webView.stringByEvaluatingJavaScript(from: "document.readyState") == "complete" && status == .navigating else {return}
         guard dictStatus != .ready else {return}
         switch dictStatus {
         case .automating:
@@ -51,7 +64,7 @@ class DictWebView: WKWebView, WKNavigationDelegate {
                 let html = html as! String
                 print(html)
                 let str = self.dict.htmlString(html, word: self.word)
-                self.loadHTMLString(str, baseURL: nil)
+                self.wvDict.loadHTMLString(str, baseURL: nil)
                 self.dictStatus = .ready
             }
         default: break

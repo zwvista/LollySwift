@@ -17,8 +17,8 @@ class WordsDictViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
     @IBOutlet weak var wvDictHolder: UIView!
     @IBOutlet weak var btnWord: UIButton!
     @IBOutlet weak var btnDict: UIButton!
-    weak var wvDict: WKWebView!
-    
+    var dictStore: DictStore!
+
     let vm = WordsDictViewModel(settings: vmSettings, needCopy: false) {}
     let ddWord = DropDown(), ddDictReference = DropDown()
     
@@ -26,16 +26,15 @@ class WordsDictViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        wvDict = addWKWebView(webViewHolder: wvDictHolder)
-        wvDict.navigationDelegate = self
+        dictStore = DictStore(settings: vmSettings, wvDict: addWKWebView(webViewHolder: wvDictHolder))
         let swipeGesture1 = UISwipeGestureRecognizer(target: self, action: #selector(swipeLeft(_:)))
         swipeGesture1.direction = .left
         swipeGesture1.delegate = self
-        wvDict.addGestureRecognizer(swipeGesture1)
+        dictStore.wvDict.addGestureRecognizer(swipeGesture1)
         let swipeGesture2 = UISwipeGestureRecognizer(target: self, action: #selector(swipeRight(_:)))
         swipeGesture2.direction = .right
         swipeGesture2.delegate = self
-        wvDict.addGestureRecognizer(swipeGesture2)
+        dictStore.wvDict.addGestureRecognizer(swipeGesture2)
 
         ddWord.anchorView = btnWord
         ddWord.dataSource = vm.arrWords
@@ -61,28 +60,13 @@ class WordsDictViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
     private func currentWordChanged() {
         AppDelegate.speak(string: vm.currentWord)
         btnWord.setTitle(vm.currentWord, for: .normal)
+        dictStore.word = vm.currentWord
         selectDictChanged()
     }
     
     private func selectDictChanged() {
-        let item = vmSettings.selectedDictReference!
-        btnDict.setTitle(item.DICTNAME, for: .normal)
-        let url = item.urlString(word: vm.currentWord, arrAutoCorrect: vmSettings.arrAutoCorrect)
-        if item.DICTTYPENAME == "OFFLINE" {
-            wvDict.load(URLRequest(url: URL(string: "about:blank")!))
-            RestApi.getHtml(url: url).subscribe(onNext: { html in
-                print(html)
-                let str = item.htmlString(html, word: self.vm.currentWord, useTemplate2: true)
-                self.wvDict.loadHTMLString(str, baseURL: nil)
-            }) ~ rx.disposeBag
-        } else {
-            wvDict.load(URLRequest(url: URL(string: url)!))
-            if !item.AUTOMATION.isEmpty {
-                dictStatus = .automating
-            } else if item.DICTTYPENAME == "OFFLINE-ONLINE" {
-                dictStatus = .navigating
-            }
-        }
+        btnDict.setTitle(vmSettings.selectedDictReference!.DICTNAME, for: .normal)
+        dictStore.searchDict()
     }
     
     @IBAction func showWordDropDown(_ sender: AnyObject) {
@@ -91,32 +75,6 @@ class WordsDictViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
     
     @IBAction func showDictDropDown(_ sender: AnyObject) {
         ddDictReference.show()
-    }
-    
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-//        guard webView.stringByEvaluatingJavaScript(from: "document.readyState") == "complete" && status == .navigating else {return}
-        guard dictStatus != .ready else {return}
-        let item = vmSettings.selectedDictReference!
-        // https://stackoverflow.com/questions/34751860/get-html-from-wkwebview-in-swift
-        switch dictStatus {
-        case .automating:
-            let s = item.AUTOMATION.replacingOccurrences(of: "{0}", with: vm.currentWord)
-            webView.evaluateJavaScript(s) { (html: Any?, error: Error?) in
-                self.dictStatus = .ready
-                if item.DICTTYPENAME == "OFFLINE-ONLINE" {
-                    self.dictStatus = .navigating
-                }
-            }
-        case .navigating:
-            webView.evaluateJavaScript("document.documentElement.outerHTML.toString()") { (html: Any?, error: Error?) in
-                let html = html as! String
-                print(html)
-                let str = item.htmlString(html, word: self.vm.currentWord, useTemplate2: true)
-                self.wvDict.loadHTMLString(str, baseURL: nil)
-                self.dictStatus = .ready
-            }
-        default: break
-        }
     }
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
