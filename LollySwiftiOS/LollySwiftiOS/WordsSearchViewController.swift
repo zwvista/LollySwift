@@ -26,6 +26,7 @@ class WordsSearchViewController: UIViewController, WKNavigationDelegate, UISearc
     override func viewDidLoad() {
         super.viewDidLoad()
         dictStore = DictStore(settings: vmSettings, wvDict: addWKWebView(webViewHolder: wvDictHolder))
+        dictStore.wvDict.navigationDelegate = self
         vmSettings.delegate = self
         
         vmSettings.getData().subscribe(onNext: {
@@ -74,6 +75,10 @@ class WordsSearchViewController: UIViewController, WKNavigationDelegate, UISearc
         btnDict.setTitle(vmSettings.selectedDictReference!.DICTNAME, for: .normal)
         ddDictReference.selectIndex(vmSettings.selectedDictReferenceIndex)
         dictStore.searchDict()
+    }
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        dictStore.onNavigationFinished()
     }
 
     deinit {

@@ -8,8 +8,9 @@
 
 import Foundation
 import WebKit
+import NSObject_Rx
 
-class DictStore: NSObject, WKNavigationDelegate {
+class DictStore: NSObject {
     
     var dictStatus = DictWebViewStatus.ready
     var word = ""
@@ -22,8 +23,6 @@ class DictStore: NSObject, WKNavigationDelegate {
     init(settings: SettingsViewModel, wvDict: WKWebView) {
         vmSettings = settings
         self.wvDict = wvDict
-        super.init()
-        self.wvDict.navigationDelegate = self
     }
     
     func searchDict() {
@@ -46,13 +45,13 @@ class DictStore: NSObject, WKNavigationDelegate {
         }
     }
 
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+    func onNavigationFinished() {
         //        guard webView.stringByEvaluatingJavaScript(from: "document.readyState") == "complete" && status == .navigating else {return}
         guard dictStatus != .ready else {return}
         switch dictStatus {
         case .automating:
             let s = dict.AUTOMATION.replacingOccurrences(of: "{0}", with: word)
-            webView.evaluateJavaScript(s) { (html: Any?, error: Error?) in
+            wvDict.evaluateJavaScript(s) { (html: Any?, error: Error?) in
                 self.dictStatus = .ready
                 if self.dict.DICTTYPENAME == "OFFLINE-ONLINE" {
                     self.dictStatus = .navigating
@@ -60,7 +59,7 @@ class DictStore: NSObject, WKNavigationDelegate {
             }
         case .navigating:
             // https://stackoverflow.com/questions/34751860/get-html-from-wkwebview-in-swift
-            webView.evaluateJavaScript("document.documentElement.outerHTML.toString()") { (html: Any?, error: Error?) in
+            wvDict.evaluateJavaScript("document.documentElement.outerHTML.toString()") { (html: Any?, error: Error?) in
                 let html = html as! String
                 print(html)
                 let str = self.dict.htmlString(html, word: self.word)

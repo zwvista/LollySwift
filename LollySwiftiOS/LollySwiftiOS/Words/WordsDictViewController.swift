@@ -27,6 +27,7 @@ class WordsDictViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         dictStore = DictStore(settings: vmSettings, wvDict: addWKWebView(webViewHolder: wvDictHolder))
+        dictStore.wvDict.navigationDelegate = self
         let swipeGesture1 = UISwipeGestureRecognizer(target: self, action: #selector(swipeLeft(_:)))
         swipeGesture1.direction = .left
         swipeGesture1.delegate = self
@@ -92,6 +93,10 @@ class WordsDictViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
     
     @IBAction func swipeRight(_ sender: UISwipeGestureRecognizer){
         swipe(1)
+    }
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        dictStore.onNavigationFinished()
     }
 
 }
