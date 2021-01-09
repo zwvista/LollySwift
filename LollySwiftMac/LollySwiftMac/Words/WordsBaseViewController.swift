@@ -24,7 +24,6 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
     var vmWords: WordsBaseViewModel! { nil }
     var vmPhrases: PhrasesBaseViewModel! { nil }
 
-    var selectedDictReferenceIndex = 0
     let synth = NSSpeechSynthesizer()
     var isSpeaking = true
     weak var responder: NSView? = nil
@@ -55,7 +54,6 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
     }
 
     func settingsChanged() {
-        selectedDictReferenceIndex = vmSettings.selectedDictReferenceIndex
         synth.setVoice(NSSpeechSynthesizer.VoiceName(rawValue: vmSettings.macVoiceName))
     }
     
@@ -104,8 +102,7 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
     @IBAction func searchDict(_ sender: AnyObject) {
         if sender is NSToolbarItem {
             let tbi = sender as! NSToolbarItem
-            selectedDictReferenceIndex = tbi.tag
-            let item = vmSettings.arrDictsReference[selectedDictReferenceIndex]
+            let item = vmSettings.arrDictsReference[tbi.tag]
             let name = item.DICTNAME
             if let tvi = tabView.tabViewItems.first(where: { $0.label == name }) {
                 tbi.image = imageOff
@@ -264,11 +261,9 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
     @IBAction func openOnlineDict(_ sender: AnyObject) {
         let row = tvWords.selectedRow
         guard row != -1 else {return}
-        let word = wordItemForRow(row: row)!.WORD
         for item in tabView.tabViewItems {
             let vc = item.viewController as! WordsDictViewController
-            let url = vc.dict.urlString(word: word, arrAutoCorrect: vmSettings.arrAutoCorrect)
-            MacApi.openURL(url)
+            MacApi.openURL(vc.url)
         }
     }
 

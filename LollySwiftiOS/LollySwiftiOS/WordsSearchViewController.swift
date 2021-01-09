@@ -74,6 +74,7 @@ class WordsSearchViewController: UIViewController, WKNavigationDelegate, UISearc
     func onUpdateDictReference() {
         btnDict.setTitle(vmSettings.selectedDictReference!.DICTNAME, for: .normal)
         ddDictReference.selectIndex(vmSettings.selectedDictReferenceIndex)
+        dictStore.dict = vmSettings.selectedDictReference
         dictStore.searchDict()
     }
     

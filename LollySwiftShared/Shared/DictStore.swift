@@ -15,7 +15,7 @@ class DictStore: NSObject {
     var dictStatus = DictWebViewStatus.ready
     var word = ""
     var dict: MDictionary!
-    var urlString = ""
+    var url = ""
     
     var vmSettings: SettingsViewModel
     weak var wvDict: WKWebView!
@@ -26,17 +26,17 @@ class DictStore: NSObject {
     }
     
     func searchDict() {
-        dict = vmSettings.selectedDictReference!
-        urlString = dict.urlString(word: word, arrAutoCorrect: vmSettings.arrAutoCorrect)
+        url = dict.urlString(word: word, arrAutoCorrect: vmSettings.arrAutoCorrect)
+        dictStatus = .ready
         if dict.DICTTYPENAME == "OFFLINE" {
             wvDict.load(URLRequest(url: URL(string: "about:blank")!))
-            RestApi.getHtml(url: urlString).subscribe(onNext: { html in
+            RestApi.getHtml(url: url).subscribe(onNext: { html in
                 print(html)
                 let str = self.dict.htmlString(html, word: self.word)
                 self.wvDict.loadHTMLString(str, baseURL: nil)
             }) ~ rx.disposeBag
         } else {
-            wvDict.load(URLRequest(url: URL(string: urlString)!))
+            wvDict.load(URLRequest(url: URL(string: url)!))
             if !dict.AUTOMATION.isEmpty {
                 dictStatus = .automating
             } else if dict.DICTTYPENAME == "OFFLINE-ONLINE" {

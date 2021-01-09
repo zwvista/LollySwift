@@ -17,15 +17,17 @@ class WordsDictViewController: NSViewController, WKNavigationDelegate {
     @IBOutlet weak var tfURL: NSTextField!
     weak var vcWords: WordsPhrasesBaseViewController!
 
-    var dictStatus = DictWebViewStatus.ready
     var word = ""
     var dict: MDictionary!
     var webInitilized = false
-    var url = ""
+    var url: String { dictStore.url }
     var subscription: Disposable? = nil
+    var dictStore: DictStore!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        dictStore = DictStore(settings: vcWords.vmSettings, wvDict: wvDict)
+        dictStore.dict = dict
         wvDict.allowsMagnification = true
         wvDict.allowsBackForwardNavigationGestures = true
         webInitilized = true
@@ -33,28 +35,13 @@ class WordsDictViewController: NSViewController, WKNavigationDelegate {
     }
     
     private func load() {
-        guard webInitilized, !url.isEmpty else {return}
-        if dict.DICTTYPENAME == "OFFLINE" {
-            wvDict.load(URLRequest(url: URL(string: "about:blank")!))
-            RestApi.getHtml(url: url).subscribe(onNext: { html in
-                print(html)
-                let str = self.dict.htmlString(html, word: self.word)
-                self.wvDict.loadHTMLString(str, baseURL: nil)
-            }) ~ rx.disposeBag
-        } else {
-            wvDict.load(URLRequest(url: URL(string: url)!))
-            if !dict.AUTOMATION.isEmpty {
-                dictStatus = .automating
-            } else if dict.DICTTYPENAME == "OFFLINE-ONLINE" {
-                dictStatus = .navigating
-            }
-        }
+        guard webInitilized else {return}
+        dictStore.word = word
+        dictStore.searchDict()
     }
     
     func searchWord(word: String) {
         self.word = word
-        dictStatus = .ready
-        url = dict.urlString(word: word, arrAutoCorrect: vcWords.vmSettings.arrAutoCorrect)
         load()
     }
 
@@ -70,27 +57,7 @@ class WordsDictViewController: NSViewController, WKNavigationDelegate {
             subscription?.disposed(by: self.rx.disposeBag)
         }
         tfURL.stringValue = webView.url!.absoluteString
-        guard dictStatus != .ready else {return}
-        switch dictStatus {
-        case .automating:
-            let s = dict.AUTOMATION.replacingOccurrences(of: "{0}", with: word)
-            webView.evaluateJavaScript(s) { (html: Any?, error: Error?) in
-                self.dictStatus = .ready
-                if self.dict.DICTTYPENAME == "OFFLINE-ONLINE" {
-                    self.dictStatus = .navigating
-                }
-            }
-        case .navigating:
-            // https://stackoverflow.com/questions/34751860/get-html-from-wkwebview-in-swift
-            webView.evaluateJavaScript("document.documentElement.outerHTML.toString()") { (html: Any?, error: Error?) in
-                let html = html as! String
-                print(html)
-                let str = self.dict.htmlString(html, word: self.word)
-                self.wvDict.loadHTMLString(str, baseURL: nil)
-                self.dictStatus = .ready
-            }
-        default: break
-        }
+        dictStore.onNavigationFinished()
     }
     
     @IBAction func openURL(_ sender: AnyObject) {

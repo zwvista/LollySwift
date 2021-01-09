@@ -67,6 +67,7 @@ class WordsDictViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
     
     private func selectDictChanged() {
         btnDict.setTitle(vmSettings.selectedDictReference!.DICTNAME, for: .normal)
+        dictStore.dict = vmSettings.selectedDictReference
         dictStore.searchDict()
     }
     
