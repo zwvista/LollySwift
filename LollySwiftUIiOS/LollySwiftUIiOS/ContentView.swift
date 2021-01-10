@@ -20,10 +20,9 @@ struct ContentView: View {
         VStack {
             SearchBar(text: $dictStore.word, placeholder: "Word") {_ in dictStore.searchDict() }
             HStack {
-                // https://stackoverflow.com/questions/59348093/picker-for-optional-data-type-in-swiftui
-                Picker(selection: $vm.selectedLang, label: Text(vm.selectedLang?.LANGNAME ?? "Language")) {
+                Picker(selection: $vm.selectedLang, label: Text(vm.selectedLang.LANGNAME.defaultIfEmpty("Language"))) {
                     ForEach(vm.arrLanguages, id: \.self) {
-                        Text($0.LANGNAME).tag($0 as MLanguage?)
+                        Text($0.LANGNAME)
                     }
                 }
                 .padding().background(Color.green)
@@ -31,9 +30,9 @@ struct ContentView: View {
                 .onChange(of: vm.selectedLang) {
                     vmSettings.setSelectedLang($0).subscribe() ~ disposeBag
                 }
-                Picker(selection: $vm.selectedDictReference, label: Text(vm.selectedDictReference?.DICTNAME ?? "Dictionary")) {
+                Picker(selection: $vm.selectedDictReference, label: Text(vm.selectedDictReference.DICTNAME.defaultIfEmpty( "Dictionary"))) {
                     ForEach(vm.arrDictsReference, id: \.self) {
-                        Text($0.DICTNAME).tag($0 as MDictionary?)
+                        Text($0.DICTNAME)
                     }
                 }
                 .padding().background(Color.orange)

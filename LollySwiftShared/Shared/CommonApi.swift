@@ -147,3 +147,9 @@ extension Array where Element : Equatable {
         return uniqueValues
     }
 }
+
+extension String {
+    func defaultIfEmpty(_ d: String) -> String {
+        isEmpty ? d : self
+    }
+}

@@ -112,7 +112,7 @@ class SettingsViewModel: NSObject, ObservableObject {
     @Published
     var arrLanguages = [MLanguage]()
     @Published
-    var selectedLang: MLanguage!
+    var selectedLang = MLanguage()
     var selectedLangIndex: Int { arrLanguages.firstIndex { $0 == selectedLang } ?? 0 }
 
     var arrMacVoices: [MVoice]!
@@ -129,7 +129,7 @@ class SettingsViewModel: NSObject, ObservableObject {
     @Published
     var arrDictsReference = [MDictionary]()
     @Published
-    var selectedDictReference: MDictionary! {
+    var selectedDictReference = MDictionary() {
         didSet {
             USDICTREFERENCE = String(selectedDictReference.DICTID)
         }
