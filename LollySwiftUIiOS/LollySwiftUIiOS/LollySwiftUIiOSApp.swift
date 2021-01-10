@@ -12,16 +12,7 @@ import AVFoundation
 @main
 struct LollySwiftUIiOSApp: App {
     private static let synth = AVSpeechSynthesizer()
-    private static let _initializeObject = ReplaySubject<()>.create(bufferSize: 1)
-    static var initializeObject: ReplaySubject<()> { _initializeObject }
-    let disposeBag = DisposeBag()
     
-    init() {
-        vmSettings.getData().subscribe(onNext: {
-            LollySwiftUIiOSApp._initializeObject.onNext(())
-            LollySwiftUIiOSApp._initializeObject.onCompleted()
-        }) ~ disposeBag
-    }
     var body: some Scene {
         WindowGroup {
             ContentView()

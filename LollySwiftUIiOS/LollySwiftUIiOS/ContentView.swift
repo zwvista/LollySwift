@@ -14,12 +14,24 @@ struct ContentView: View {
     @ObservedObject var webViewStore = WebViewStore()
     @ObservedObject var dictStore = DictStoreUI()
     var wvDict: WKWebView { webViewStore.webView }
+    let disposeBag = DisposeBag()
+
     var body: some View {
         VStack {
             SearchBar(text: $dictStore.word, placeholder: "Word") {_ in dictStore.searchDict() }
             HStack {
                 // https://stackoverflow.com/questions/59348093/picker-for-optional-data-type-in-swiftui
-                Picker(selection: $vm.selectedDictReference, label: Text(vm.selectedDictReference?.DICTNAME ?? "Choose a Dictionary")) {
+                Picker(selection: $vm.selectedLang, label: Text(vm.selectedLang?.LANGNAME ?? "Language")) {
+                    ForEach(vm.arrLanguages, id: \.self) {
+                        Text($0.LANGNAME).tag($0 as MLanguage?)
+                    }
+                }
+                .padding().background(Color.green)
+                .pickerStyle(MenuPickerStyle())
+                .onChange(of: vm.selectedLang) {
+                    vmSettings.setSelectedLang($0).subscribe() ~ disposeBag
+                }
+                Picker(selection: $vm.selectedDictReference, label: Text(vm.selectedDictReference?.DICTNAME ?? "Dictionary")) {
                     ForEach(vm.arrDictsReference, id: \.self) {
                         Text($0.DICTNAME).tag($0 as MDictionary?)
                     }
@@ -37,6 +49,7 @@ struct ContentView: View {
         }.onAppear {
             dictStore.vmSettings = vmSettings
             dictStore.wvDict = wvDict
+            vm.getData().subscribe() ~ disposeBag
         }
     }
 }

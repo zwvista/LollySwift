@@ -109,7 +109,9 @@ class SettingsViewModel: NSObject, ObservableObject {
     var isSingleUnitPart: Bool { USUNITPARTFROM == USUNITPARTTO }
     var isInvalidUnitPart: Bool { USUNITPARTFROM > USUNITPARTTO }
 
+    @Published
     var arrLanguages = [MLanguage]()
+    @Published
     var selectedLang: MLanguage!
     var selectedLangIndex: Int { arrLanguages.firstIndex { $0 == selectedLang } ?? 0 }
 
