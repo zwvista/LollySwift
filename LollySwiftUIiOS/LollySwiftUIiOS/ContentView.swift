@@ -6,49 +6,25 @@
 //
 
 import SwiftUI
-import RxSwift
-import WebKit
 
 struct ContentView: View {
-    @ObservedObject var vm = vmSettings
-    @ObservedObject var webViewStore = WebViewStore()
-    @ObservedObject var dictStore = DictStoreUI()
-    var wvDict: WKWebView { webViewStore.webView }
-    let disposeBag = DisposeBag()
-
+    @State var isOpenSideMenu: Bool = false
+    @State var bindPage: LollyPage = .wordsUnit
     var body: some View {
-        VStack {
-            SearchBar(text: $dictStore.word, placeholder: "Word") {_ in dictStore.searchDict() }
-            HStack {
-                Picker(selection: $vm.selectedLang, label: Text(vm.selectedLang.LANGNAME.defaultIfEmpty("Language"))) {
-                    ForEach(vm.arrLanguages, id: \.self) {
-                        Text($0.LANGNAME)
-                    }
-                }
-                .padding().background(Color.green)
-                .pickerStyle(MenuPickerStyle())
-                .onChange(of: vm.selectedLang) {
-                    vmSettings.setSelectedLang($0).subscribe() ~ disposeBag
-                }
-                Picker(selection: $vm.selectedDictReference, label: Text(vm.selectedDictReference.DICTNAME.defaultIfEmpty( "Dictionary"))) {
-                    ForEach(vm.arrDictsReference, id: \.self) {
-                        Text($0.DICTNAME)
-                    }
-                }
-                .padding().background(Color.orange)
-                .pickerStyle(MenuPickerStyle())
-                .onChange(of: vm.selectedDictReference) {
-                    dictStore.dict = $0
-                    dictStore.searchDict()
-                }
+        ZStack{
+            NavigationView {
+                SearchView()
+                    .navigationBarItems(leading: (
+                        Button(action: {
+                            self.isOpenSideMenu.toggle()
+                        }) {
+                            Image(systemName: "line.horizontal.3")
+                                .imageScale(.large)
+                    }))
             }
-            WebView(webView: wvDict) {
-                dictStore.onNavigationFinished()
-            }
-        }.onAppear {
-            dictStore.vmSettings = vmSettings
-            dictStore.wvDict = wvDict
-            vm.getData().subscribe() ~ disposeBag
+
+            SideMenuView(isOpen: $isOpenSideMenu, bindPage: $bindPage)
+                .edgesIgnoringSafeArea(.all)
         }
     }
 }

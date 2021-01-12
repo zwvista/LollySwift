@@ -8,36 +8,9 @@
 
 import SwiftUI
 
-struct ContentView2: View {
-    @State var isOpenSideMenu: Bool = false
-    @State var bindPage: LollyPage = .wordsUnit
-    var body: some View {
-        ZStack{
-            NavigationView {
-                Text("")
-                    .navigationBarTitle("メイン画面")
-                    .navigationBarItems(leading: (
-                        Button(action: {
-                            self.isOpenSideMenu.toggle()
-                        }) {
-                            Image(systemName: "line.horizontal.3")
-                                .imageScale(.large)
-                    }))
-            }
-
-            SideMenuView(isOpen: $isOpenSideMenu, bindPage: $bindPage)
-                .edgesIgnoringSafeArea(.all)
-        }
-    }
-}
-
-struct ContentView2_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView2()
-    }
-}
-
 enum LollyPage {
+    case search
+    case settings
     case wordsUnit
     case phrasesUnit
     case wordsTextbook
@@ -67,12 +40,14 @@ struct SideMenuView: View {
 
             HStack {
                 VStack() {
-                    SideMenuContentView(topPadding: 100, systemName: "person", text: "Words in Unit", page: .wordsUnit, bindPage: $bindPage, isOpen: $isOpen)
-                    SideMenuContentView(systemName: "bookmark", text: "Phrases in Unit", page: .wordsUnit, bindPage: $bindPage, isOpen: $isOpen)
-                    SideMenuContentView(systemName: "gear", text: "Words in Unit", page: .wordsUnit, bindPage: $bindPage, isOpen: $isOpen)
+                    SideMenuContentView(topPadding: 100, systemName: "gear", text: "Search", page: .search, bindPage: $bindPage, isOpen: $isOpen)
+                    SideMenuContentView(systemName: "gear", text: "Setting", page: .settings, bindPage: $bindPage, isOpen: $isOpen)
                     SideMenuContentView(systemName: "person", text: "Words in Unit", page: .wordsUnit, bindPage: $bindPage, isOpen: $isOpen)
-                    SideMenuContentView(systemName: "bookmark", text: "Phrases in Unit", page: .wordsUnit, bindPage: $bindPage, isOpen: $isOpen)
-                    SideMenuContentView(systemName: "gear", text: "Setting", page: .wordsUnit, bindPage: $bindPage, isOpen: $isOpen)
+                    SideMenuContentView(systemName: "bookmark", text: "Phrases in Unit", page: .phrasesUnit, bindPage: $bindPage, isOpen: $isOpen)
+                    SideMenuContentView(systemName: "gear", text: "Words in Textbook", page: .wordsTextbook, bindPage: $bindPage, isOpen: $isOpen)
+                    SideMenuContentView(systemName: "person", text: "Phrases in Textbook", page: .phrasesTextbook, bindPage: $bindPage, isOpen: $isOpen)
+                    SideMenuContentView(systemName: "bookmark", text: "Words in Language", page: .wordsLang, bindPage: $bindPage, isOpen: $isOpen)
+                    SideMenuContentView(systemName: "bookmark", text: "Phrases in Language", page: .phrasesLang, bindPage: $bindPage, isOpen: $isOpen)
                     Spacer()
                 }
                 .frame(width: width)
