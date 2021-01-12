@@ -10,11 +10,11 @@ import SwiftUI
 
 struct ContentView2: View {
     @State var isOpenSideMenu: Bool = false
-    @State var text = "Hello, World!"
+    @State var bindPage: LollyPage = .wordsUnit
     var body: some View {
         ZStack{
             NavigationView {
-                Text(text)
+                Text("")
                     .navigationBarTitle("メイン画面")
                     .navigationBarItems(leading: (
                         Button(action: {
@@ -25,7 +25,7 @@ struct ContentView2: View {
                     }))
             }
 
-            SideMenuView(isOpen: $isOpenSideMenu, text: $text)
+            SideMenuView(isOpen: $isOpenSideMenu, bindPage: $bindPage)
                 .edgesIgnoringSafeArea(.all)
         }
     }
@@ -37,10 +37,19 @@ struct ContentView2_Previews: PreviewProvider {
     }
 }
 
+enum LollyPage {
+    case wordsUnit
+    case phrasesUnit
+    case wordsTextbook
+    case phrasesTextbook
+    case wordsLang
+    case phrasesLang
+}
+
 // https://dev.classmethod.jp/articles/swiftui_overlay_sidemenu/
 struct SideMenuView: View {
     @Binding var isOpen: Bool
-    @Binding var text: String
+    @Binding var bindPage: LollyPage
     let width: CGFloat = 270
 
     var body: some View {
@@ -58,9 +67,12 @@ struct SideMenuView: View {
 
             HStack {
                 VStack() {
-                    SideMenuContentView(topPadding: 100, systemName: "person", text: "Profile", bindText: $text, isOpen: $isOpen)
-                    SideMenuContentView(systemName: "bookmark", text: "Bookmark", bindText: $text, isOpen: $isOpen)
-                    SideMenuContentView(systemName: "gear", text: "Setting", bindText: $text, isOpen: $isOpen)
+                    SideMenuContentView(topPadding: 100, systemName: "person", text: "Words in Unit", page: .wordsUnit, bindPage: $bindPage, isOpen: $isOpen)
+                    SideMenuContentView(systemName: "bookmark", text: "Phrases in Unit", page: .wordsUnit, bindPage: $bindPage, isOpen: $isOpen)
+                    SideMenuContentView(systemName: "gear", text: "Words in Unit", page: .wordsUnit, bindPage: $bindPage, isOpen: $isOpen)
+                    SideMenuContentView(systemName: "person", text: "Words in Unit", page: .wordsUnit, bindPage: $bindPage, isOpen: $isOpen)
+                    SideMenuContentView(systemName: "bookmark", text: "Phrases in Unit", page: .wordsUnit, bindPage: $bindPage, isOpen: $isOpen)
+                    SideMenuContentView(systemName: "gear", text: "Setting", page: .wordsUnit, bindPage: $bindPage, isOpen: $isOpen)
                     Spacer()
                 }
                 .frame(width: width)
@@ -77,13 +89,15 @@ struct SideMenuContentView: View {
     let topPadding: CGFloat
     let systemName: String
     let text: String
-    @Binding var bindText: String
+    let page: LollyPage
+    @Binding var bindPage: LollyPage
     @Binding var isOpen: Bool
 
-    init(topPadding: CGFloat = 30, systemName: String, text: String, bindText: Binding<String>, isOpen: Binding<Bool>) {
+    init(topPadding: CGFloat = 30, systemName: String, text: String, page: LollyPage, bindPage: Binding<LollyPage>, isOpen: Binding<Bool>) {
         self.topPadding = topPadding
         self.systemName = systemName
-        self._bindText = bindText
+        self.page = page
+        self._bindPage = bindPage
         self._isOpen = isOpen
         self.text = text
     }
@@ -102,7 +116,7 @@ struct SideMenuContentView: View {
         .padding(.top, topPadding)
         .padding(.leading, 32)
         .onTapGesture {
-            self.bindText = self.text
+            self.bindPage = self.page
             self.isOpen = false
         }
     }
