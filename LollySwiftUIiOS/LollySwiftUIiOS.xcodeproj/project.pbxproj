@@ -54,6 +54,7 @@
 		957B535525A70F9800C18B06 /* WordsUnitBatchAddViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957B535325A70F9700C18B06 /* WordsUnitBatchAddViewModel.swift */; };
 		957B535E25A70FB100C18B06 /* PhrasesBaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957B535C25A70FB000C18B06 /* PhrasesBaseViewModel.swift */; };
 		957B535F25A70FB100C18B06 /* PhrasesUnitBatchAddViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957B535D25A70FB100C18B06 /* PhrasesUnitBatchAddViewModel.swift */; };
+		957B538D25AD442500C18B06 /* SideMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957B538C25AD442500C18B06 /* SideMenuView.swift */; };
 		95919218258D00190070DBFD /* MCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95919204258D00190070DBFD /* MCommon.swift */; };
 		95919219258D00190070DBFD /* MDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95919205258D00190070DBFD /* MDictionary.swift */; };
 		9591921A258D00190070DBFD /* MAutoCorrect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95919206258D00190070DBFD /* MAutoCorrect.swift */; };
@@ -154,6 +155,7 @@
 		957B535325A70F9700C18B06 /* WordsUnitBatchAddViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsUnitBatchAddViewModel.swift; sourceTree = "<group>"; };
 		957B535C25A70FB000C18B06 /* PhrasesBaseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesBaseViewModel.swift; sourceTree = "<group>"; };
 		957B535D25A70FB100C18B06 /* PhrasesUnitBatchAddViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesUnitBatchAddViewModel.swift; sourceTree = "<group>"; };
+		957B538C25AD442500C18B06 /* SideMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideMenuView.swift; sourceTree = "<group>"; };
 		95919204258D00190070DBFD /* MCommon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCommon.swift; sourceTree = "<group>"; };
 		95919205258D00190070DBFD /* MDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MDictionary.swift; sourceTree = "<group>"; };
 		95919206258D00190070DBFD /* MAutoCorrect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MAutoCorrect.swift; sourceTree = "<group>"; };
@@ -244,12 +246,13 @@
 		953FCCFE25745D3D00666503 /* LollySwiftUIiOS */ = {
 			isa = PBXGroup;
 			children = (
-				953FCCFF25745D3D00666503 /* LollySwiftUIiOSApp.swift */,
-				953FCD0125745D3D00666503 /* ContentView.swift */,
 				953FCD0325745D4000666503 /* Assets.xcassets */,
+				953FCD0125745D3D00666503 /* ContentView.swift */,
 				953FCD0825745D4000666503 /* Info.plist */,
+				953FCCFF25745D3D00666503 /* LollySwiftUIiOSApp.swift */,
 				953FCD0525745D4000666503 /* Preview Content */,
 				95F632DA2588BC93000CFD23 /* SearchBar.swift */,
+				957B538C25AD442500C18B06 /* SideMenuView.swift */,
 				95F632DF2588C0B8000CFD23 /* WebView.swift */,
 			);
 			path = LollySwiftUIiOS;
@@ -694,6 +697,7 @@
 				953FCE6725792A8800666503 /* Emit.swift in Sources */,
 				953FCE4E25792A8800666503 /* WebTextbooksViewModel.swift in Sources */,
 				9501FBA12595C83F00C1B13B /* SettingsUIViewModel.swift in Sources */,
+				957B538D25AD442500C18B06 /* SideMenuView.swift in Sources */,
 				95919221258D00190070DBFD /* MTextbook.swift in Sources */,
 				953FCE6425792A8800666503 /* TwoWayBind.swift in Sources */,
 				953FCE4C25792A8800666503 /* TransformDetailViewModel.swift in Sources */,

@@ -48,7 +48,7 @@ public class LeftMenuViewController: UIViewController, UITableViewDelegate, UITa
         tableView.deselectRow(at: indexPath, animated: true)
         switch indexPath.row {
         case 0:
-            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboardMain.instantiateViewController(withIdentifier: "WordsSearchViewController")), animated: true)
+            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboardMain.instantiateViewController(withIdentifier: "SearchViewController")), animated: true)
             self.sideMenuViewController!.hideMenuViewController()
         case 1:
             self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboardMain.instantiateViewController(withIdentifier: "SettingsViewController")), animated: true)

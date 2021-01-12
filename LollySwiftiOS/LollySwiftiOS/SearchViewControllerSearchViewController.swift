@@ -1,5 +1,5 @@
 //
-//  WordsSearchViewController.swift
+//  SearchViewController.swift
 //  LollySwiftiOS
 //
 //  Created by zhaowei on 2014/11/20.
@@ -12,7 +12,7 @@ import DropDown
 import RxSwift
 import NSObject_Rx
 
-class WordsSearchViewController: UIViewController, WKNavigationDelegate, UISearchBarDelegate, SettingsViewModelDelegate {
+class SearchViewController: UIViewController, WKNavigationDelegate, UISearchBarDelegate, SettingsViewModelDelegate {
     @IBOutlet weak var wvDictHolder: UIView!
     var dictStore: DictStore!
 
