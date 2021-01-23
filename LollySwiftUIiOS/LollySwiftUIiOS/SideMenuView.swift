@@ -8,19 +8,19 @@
 
 import SwiftUI
 
-let textSearch = "Search"
-let textSettings = "Settings"
-let textWordsUnit = "Words in Unit"
-let textPhrasesUnit = "Phrases in Unit"
-let textWordsTextbook = "Words in Textbook"
-let textPhrasesTextbook = "Phrases in Textbook"
-let textWordsLang = "Words in Language"
-let textPhrasesLang = "Phrases in Language"
+let titleSearch = "Search"
+let titleSettings = "Settings"
+let titleWordsUnit = "Words in Unit"
+let titlePhrasesUnit = "Phrases in Unit"
+let titleWordsTitlebook = "Words in Titlebook"
+let titlePhrasesTitlebook = "Phrases in Titlebook"
+let titleWordsLang = "Words in Language"
+let titlePhrasesLang = "Phrases in Language"
 
 // https://dev.classmethod.jp/articles/swiftui_overlay_sidemenu/
 struct SideMenuView: View {
     @Binding var isOpen: Bool
-    @Binding var bindText: String
+    @Binding var bindTitle: String
     let width: CGFloat = 270
 
     var body: some View {
@@ -38,14 +38,14 @@ struct SideMenuView: View {
 
             HStack {
                 VStack() {
-                    SideMenuContentView(topPadding: 100, systemName: "gear", text: textSearch, bindText: $bindText, isOpen: $isOpen)
-                    SideMenuContentView(systemName: "gear", text: textSettings, bindText: $bindText, isOpen: $isOpen)
-                    SideMenuContentView(systemName: "person", text: textWordsUnit, bindText: $bindText, isOpen: $isOpen)
-                    SideMenuContentView(systemName: "bookmark", text: textPhrasesUnit, bindText: $bindText, isOpen: $isOpen)
-                    SideMenuContentView(systemName: "gear", text: textWordsTextbook, bindText: $bindText, isOpen: $isOpen)
-                    SideMenuContentView(systemName: "person", text: textPhrasesTextbook, bindText: $bindText, isOpen: $isOpen)
-                    SideMenuContentView(systemName: "bookmark", text: textWordsLang, bindText: $bindText, isOpen: $isOpen)
-                    SideMenuContentView(systemName: "bookmark", text: textPhrasesLang, bindText: $bindText, isOpen: $isOpen)
+                    SideMenuContentView(topPadding: 100, systemName: "gear", title: titleSearch, bindTitle: $bindTitle, isOpen: $isOpen)
+                    SideMenuContentView(systemName: "gear", title: titleSettings, bindTitle: $bindTitle, isOpen: $isOpen)
+                    SideMenuContentView(systemName: "person", title: titleWordsUnit, bindTitle: $bindTitle, isOpen: $isOpen)
+                    SideMenuContentView(systemName: "bookmark", title: titlePhrasesUnit, bindTitle: $bindTitle, isOpen: $isOpen)
+                    SideMenuContentView(systemName: "gear", title: titleWordsTitlebook, bindTitle: $bindTitle, isOpen: $isOpen)
+                    SideMenuContentView(systemName: "person", title: titlePhrasesTitlebook, bindTitle: $bindTitle, isOpen: $isOpen)
+                    SideMenuContentView(systemName: "bookmark", title: titleWordsLang, bindTitle: $bindTitle, isOpen: $isOpen)
+                    SideMenuContentView(systemName: "bookmark", title: titlePhrasesLang, bindTitle: $bindTitle, isOpen: $isOpen)
                     Spacer()
                 }
                 .frame(width: width)
@@ -61,16 +61,16 @@ struct SideMenuView: View {
 struct SideMenuContentView: View {
     let topPadding: CGFloat
     let systemName: String
-    let text: String
-    @Binding var bindText: String
+    let title: String
+    @Binding var bindTitle: String
     @Binding var isOpen: Bool
 
-    init(topPadding: CGFloat = 30, systemName: String, text: String, bindText: Binding<String>, isOpen: Binding<Bool>) {
+    init(topPadding: CGFloat = 30, systemName: String, title: String, bindTitle: Binding<String>, isOpen: Binding<Bool>) {
         self.topPadding = topPadding
         self.systemName = systemName
-        self._bindText = bindText
+        self._bindTitle = bindTitle
         self._isOpen = isOpen
-        self.text = text
+        self.title = title
     }
 
     var body: some View {
@@ -79,7 +79,7 @@ struct SideMenuContentView: View {
                 .foregroundColor(.gray)
                 .imageScale(.large)
                 .frame(width: 32.0)
-            Text(text)
+            Text(title)
                 .foregroundColor(.gray)
                 .font(.headline)
             Spacer()
@@ -87,7 +87,7 @@ struct SideMenuContentView: View {
         .padding(.top, topPadding)
         .padding(.leading, 32)
         .onTapGesture {
-            self.bindText = self.text
+            self.bindTitle = self.title
             self.isOpen = false
         }
     }

@@ -9,11 +9,12 @@ import SwiftUI
 
 struct ContentView: View {
     @State var isOpenSideMenu: Bool = false
-    @State var bindText = textWordsUnit
+    @State var bindTitle = titleWordsUnit
     var body: some View {
         ZStack{
             NavigationView {
                 SearchView()
+                    .navigationTitle(bindTitle)
                     .navigationBarItems(leading: (
                         Button(action: {
                             self.isOpenSideMenu.toggle()
@@ -23,7 +24,7 @@ struct ContentView: View {
                     }))
             }
 
-            SideMenuView(isOpen: $isOpenSideMenu, bindText: $bindText)
+            SideMenuView(isOpen: $isOpenSideMenu, bindTitle: $bindTitle)
                 .edgesIgnoringSafeArea(.all)
         }
     }
