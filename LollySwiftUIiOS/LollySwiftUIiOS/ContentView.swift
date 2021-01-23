@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State var isOpenSideMenu: Bool = false
-    @State var bindPage: LollyPage = .wordsUnit
+    @State var bindText = textWordsUnit
     var body: some View {
         ZStack{
             NavigationView {
@@ -23,7 +23,7 @@ struct ContentView: View {
                     }))
             }
 
-            SideMenuView(isOpen: $isOpenSideMenu, bindPage: $bindPage)
+            SideMenuView(isOpen: $isOpenSideMenu, bindText: $bindText)
                 .edgesIgnoringSafeArea(.all)
         }
     }

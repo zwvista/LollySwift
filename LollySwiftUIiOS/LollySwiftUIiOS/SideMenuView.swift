@@ -8,21 +8,19 @@
 
 import SwiftUI
 
-enum LollyPage {
-    case search
-    case settings
-    case wordsUnit
-    case phrasesUnit
-    case wordsTextbook
-    case phrasesTextbook
-    case wordsLang
-    case phrasesLang
-}
+let textSearch = "Search"
+let textSettings = "Settings"
+let textWordsUnit = "Words in Unit"
+let textPhrasesUnit = "Phrases in Unit"
+let textWordsTextbook = "Words in Textbook"
+let textPhrasesTextbook = "Phrases in Textbook"
+let textWordsLang = "Words in Language"
+let textPhrasesLang = "Phrases in Language"
 
 // https://dev.classmethod.jp/articles/swiftui_overlay_sidemenu/
 struct SideMenuView: View {
     @Binding var isOpen: Bool
-    @Binding var bindPage: LollyPage
+    @Binding var bindText: String
     let width: CGFloat = 270
 
     var body: some View {
@@ -40,14 +38,14 @@ struct SideMenuView: View {
 
             HStack {
                 VStack() {
-                    SideMenuContentView(topPadding: 100, systemName: "gear", text: "Search", page: .search, bindPage: $bindPage, isOpen: $isOpen)
-                    SideMenuContentView(systemName: "gear", text: "Setting", page: .settings, bindPage: $bindPage, isOpen: $isOpen)
-                    SideMenuContentView(systemName: "person", text: "Words in Unit", page: .wordsUnit, bindPage: $bindPage, isOpen: $isOpen)
-                    SideMenuContentView(systemName: "bookmark", text: "Phrases in Unit", page: .phrasesUnit, bindPage: $bindPage, isOpen: $isOpen)
-                    SideMenuContentView(systemName: "gear", text: "Words in Textbook", page: .wordsTextbook, bindPage: $bindPage, isOpen: $isOpen)
-                    SideMenuContentView(systemName: "person", text: "Phrases in Textbook", page: .phrasesTextbook, bindPage: $bindPage, isOpen: $isOpen)
-                    SideMenuContentView(systemName: "bookmark", text: "Words in Language", page: .wordsLang, bindPage: $bindPage, isOpen: $isOpen)
-                    SideMenuContentView(systemName: "bookmark", text: "Phrases in Language", page: .phrasesLang, bindPage: $bindPage, isOpen: $isOpen)
+                    SideMenuContentView(topPadding: 100, systemName: "gear", text: textSearch, bindText: $bindText, isOpen: $isOpen)
+                    SideMenuContentView(systemName: "gear", text: textSettings, bindText: $bindText, isOpen: $isOpen)
+                    SideMenuContentView(systemName: "person", text: textWordsUnit, bindText: $bindText, isOpen: $isOpen)
+                    SideMenuContentView(systemName: "bookmark", text: textPhrasesUnit, bindText: $bindText, isOpen: $isOpen)
+                    SideMenuContentView(systemName: "gear", text: textWordsTextbook, bindText: $bindText, isOpen: $isOpen)
+                    SideMenuContentView(systemName: "person", text: textPhrasesTextbook, bindText: $bindText, isOpen: $isOpen)
+                    SideMenuContentView(systemName: "bookmark", text: textWordsLang, bindText: $bindText, isOpen: $isOpen)
+                    SideMenuContentView(systemName: "bookmark", text: textPhrasesLang, bindText: $bindText, isOpen: $isOpen)
                     Spacer()
                 }
                 .frame(width: width)
@@ -64,15 +62,13 @@ struct SideMenuContentView: View {
     let topPadding: CGFloat
     let systemName: String
     let text: String
-    let page: LollyPage
-    @Binding var bindPage: LollyPage
+    @Binding var bindText: String
     @Binding var isOpen: Bool
 
-    init(topPadding: CGFloat = 30, systemName: String, text: String, page: LollyPage, bindPage: Binding<LollyPage>, isOpen: Binding<Bool>) {
+    init(topPadding: CGFloat = 30, systemName: String, text: String, bindText: Binding<String>, isOpen: Binding<Bool>) {
         self.topPadding = topPadding
         self.systemName = systemName
-        self.page = page
-        self._bindPage = bindPage
+        self._bindText = bindText
         self._isOpen = isOpen
         self.text = text
     }
@@ -91,7 +87,7 @@ struct SideMenuContentView: View {
         .padding(.top, topPadding)
         .padding(.leading, 32)
         .onTapGesture {
-            self.bindPage = self.page
+            self.bindText = self.text
             self.isOpen = false
         }
     }
