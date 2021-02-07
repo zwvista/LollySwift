@@ -79,7 +79,7 @@ class RestApi {
         return RxAlamofire.string(.get, url)
     }
     static func callSP(url: String, parameters: Parameters) -> Observable<MSPResult> {
-        print("[RestApi]SP:\(url)")
+        print("[RestApi]SP:\(url) BODY:\(parameters)")
         let o: Observable<[[MSPResult]]> = RxCodableAlamofire.object(.post, url, parameters: parameters)
         return o.map { $0[0][0] }
     }
