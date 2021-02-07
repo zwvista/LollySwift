@@ -51,7 +51,7 @@ class WordsDictViewController: NSViewController, WKNavigationDelegate {
             subscription?.dispose()
             subscription = Observable<Int>.timer(DispatchTimeInterval.milliseconds(500), period: DispatchTimeInterval.milliseconds(1000), scheduler: MainScheduler.instance).subscribe { _ in
                 self.subscription?.dispose()
-                self.vcWords?.responder?.window!.makeFirstResponder(self.vcWords.responder)
+                self.vcWords?.responder?.window?.makeFirstResponder(self.vcWords.responder)
                 self.vcWords?.responder = nil
             }
             subscription?.disposed(by: self.rx.disposeBag)
