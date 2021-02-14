@@ -4340,9 +4340,6 @@ Gw
                                                 <segment label="Note" width="52" tag="1"/>
                                             </segments>
                                         </segmentedCell>
-                                        <connections>
-                                            <action selector="filterWord:" target="S5w-0q-IQt" id="heq-q8-RJX"/>
-                                        </connections>
                                     </segmentedControl>
                                     <searchField verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q0R-YJ-VuK">
                                         <rect key="frame" x="108" y="4" width="96" height="22"/>
@@ -4353,9 +4350,6 @@ Gw
                                             <font key="font" usesAppearanceFont="YES"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                            <connections>
-                                                <binding destination="S5w-0q-IQt" name="value" keyPath="textFilter" id="sGO-JE-NPg"/>
-                                            </connections>
                                         </searchFieldCell>
                                     </searchField>
                                     <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bMb-g8-SbI">
