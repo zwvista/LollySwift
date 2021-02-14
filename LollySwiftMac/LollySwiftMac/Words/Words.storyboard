@@ -368,14 +368,11 @@
                                         <constraints>
                                             <constraint firstAttribute="width" constant="96" id="9nE-RB-Ak4"/>
                                         </constraints>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="pDu-y2-NPV">
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="New Word" drawsBackground="YES" id="pDu-y2-NPV">
                                             <font key="font" usesAppearanceFont="YES"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
-                                        <connections>
-                                            <action selector="addNewWord:" target="F8i-pe-Ate" id="yEt-2S-3Pq"/>
-                                        </connections>
                                     </textField>
                                     <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RtU-w4-rmU">
                                         <rect key="frame" x="105" y="3" width="101" height="24"/>
@@ -4360,11 +4357,6 @@ Gw
                                                 <binding destination="S5w-0q-IQt" name="value" keyPath="textFilter" id="sGO-JE-NPg"/>
                                             </connections>
                                         </searchFieldCell>
-                                        <connections>
-                                            <action selector="filterWord:" target="S5w-0q-IQt" id="lkq-PM-02G"/>
-                                            <binding destination="S5w-0q-IQt" name="value" keyPath="vm.textFilter" id="NZS-tz-6Vd"/>
-                                            <outlet property="delegate" destination="S5w-0q-IQt" id="EwZ-0v-b31"/>
-                                        </connections>
                                     </searchField>
                                     <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bMb-g8-SbI">
                                         <rect key="frame" x="206" y="2" width="78" height="25"/>

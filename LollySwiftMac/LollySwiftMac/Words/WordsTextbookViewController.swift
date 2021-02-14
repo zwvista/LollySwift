@@ -24,6 +24,8 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        sfFilter.rx.textSearch.subscribe(onNext: { [unowned self] _ in self.filterWord(self) }) ~ rx.disposeBag
+        scScopeFilter.rx.selectedLabel.subscribe(onNext: { [unowned self] _ in self.filterWord(self) }) ~ rx.disposeBag
     }
 
     override func settingsChanged() {
@@ -104,7 +106,7 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
     }
 
     @IBAction func filterWord(_ sender: AnyObject) {
-        vm.applyFilters(textFilter: vm.textFilter.value, scope: scScopeFilter.selectedSegment == 0 ? "Word" : "Note", textbookFilter: textbookFilter)
+        vm.applyFilters()
         tvWords.reloadData()
     }
 

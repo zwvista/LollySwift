@@ -23,12 +23,15 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     // https://stackoverflow.com/questions/2121907/drag-drop-reorder-rows-on-nstableview
     let tableRowDragType = NSPasteboard.PasteboardType(rawValue: "private.table-row")
 
+    func filterWord() {
+        vm.applyFilters()
+        tvWords.reloadData()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        sfFilter.rx.textSearch.subscribe(onNext: { [unowned self] _ in
-            self.vm.applyFilters(textFilter: self.vm.textFilter.value, scope: self.scScopeFilter.selectedSegment == 0 ? "Word" : "Note", textbookFilter: 0)
-            self.tvWords.reloadData()
-        }) ~ rx.disposeBag
+        sfFilter.rx.textSearch.subscribe(onNext: { [unowned self] _ in self.filterWord() }) ~ rx.disposeBag
+        scScopeFilter.rx.selectedLabel.subscribe(onNext: { [unowned self] _ in self.filterWord() }) ~ rx.disposeBag
         tvWords.registerForDraggedTypes([tableRowDragType])
     }
     

@@ -29,16 +29,16 @@ class WordsUnitViewModel: WordsBaseViewModel {
         }
     }
     
-    func applyFilters(textFilter: String, scope: String, textbookFilter: Int) {
-        if textFilter.isEmpty && textbookFilter == 0 {
+    func applyFilters() {
+        if textFilter.value.isEmpty && textbookFilter.value == 0 {
             arrWordsFiltered = nil
         } else {
             arrWordsFiltered = arrWords
-            if !textFilter.isEmpty {
-                arrWordsFiltered = arrWordsFiltered!.filter { (scope == "Word" ? $0.WORD : $0.NOTE).lowercased().contains(textFilter.lowercased()) }
+            if !textFilter.value.isEmpty {
+                arrWordsFiltered = arrWordsFiltered!.filter { (scopeFilter.value == "Word" ? $0.WORD : $0.NOTE).lowercased().contains(textFilter.value.lowercased()) }
             }
-            if textbookFilter != 0 {
-                arrWordsFiltered = arrWordsFiltered!.filter { $0.TEXTBOOKID == textbookFilter }
+            if textbookFilter.value != 0 {
+                arrWordsFiltered = arrWordsFiltered!.filter { $0.TEXTBOOKID == textbookFilter.value }
             }
         }
     }
