@@ -47,14 +47,14 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
     }
     
     override func addNewWord() {
-        guard !vm.newWord.isEmpty else {return}
+        guard !vm.newWord.value.isEmpty else {return}
         let item = vm.newLangWord()
-        item.WORD = vm.vmSettings.autoCorrectInput(text: vm.newWord)
+        item.WORD = vm.vmSettings.autoCorrectInput(text: vm.newWord.value)
         WordsLangViewModel.create(item: item).subscribe(onNext: {
             self.vm.arrWords.append(item)
             self.tvWords.reloadData()
             self.tfNewWord.stringValue = ""
-            self.vm.newWord = ""
+            self.vm.newWord.accept("")
         }) ~ rx.disposeBag
     }
 
@@ -122,7 +122,7 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
     }
 
     @IBAction func filterWord(_ sender: AnyObject) {
-        vm.applyFilters(textFilter: vm.textFilter, scope: scScopeFilter.selectedSegment == 0 ? "Word" : "Note")
+        vm.applyFilters(textFilter: vm.textFilter.value, scope: scScopeFilter.selectedSegment == 0 ? "Word" : "Note")
         tvWords.reloadData()
     }
 

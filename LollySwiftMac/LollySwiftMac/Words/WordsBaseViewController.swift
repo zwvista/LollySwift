@@ -120,7 +120,7 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
         if responder == nil {
             responder = tvWords
         }
-        let word = vmWords.selectedWord.isEmpty ? vmWords.newWord : vmWords.selectedWord
+        let word = vmWords.selectedWord.isEmpty ? vmWords.newWord.value : vmWords.selectedWord
         for item in tabView.tabViewItems {
             (item.viewController as! WordsDictViewController).searchWord(word: word)
         }
@@ -150,8 +150,22 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        _ = vmWords.textFilter <~> sfFilter.rx.text.orEmpty
+        if let tfNewWord = tfNewWord {
+            _ = vmWords.newWord <~> tfNewWord.rx.text.orEmpty
+            tfNewWord.rx.text.subscribe(onNext: { [unowned self] _ in
+                if !self.vmWords.newWord.value.isEmpty {
+                    self.addNewWord()
+                }
+            }) ~ rx.disposeBag
+        }
+        _ = vmWords.textFilter <~> sfFilter.rx.textSearch.orEmpty
         _ = vmWords.scopeFilter <~> scScopeFilter.rx.selectedLabel
+        sfFilter.rx.searchFieldDidEndSearching.subscribe { [unowned self] _ in
+            self.vmWords.textFilter.accept(self.vmSettings.autoCorrectInput(text: self.vmWords.textFilter.value))
+        } ~ rx.disposeBag
+        sfFilter.rx.searchFieldDidEndSearching.subscribe { [unowned self] _ in
+            self.scScopeFilter.performClick(self)
+        } ~ rx.disposeBag
     }
 
     override func settingsChanged() {
@@ -162,20 +176,6 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
     func doRefresh() {
         tvWords.reloadData()
         updateStatusText()
-    }
-    
-    @IBAction func addNewWord(_ sender: Any) {
-        if !vmWords.newWord.isEmpty {
-            addNewWord()
-        }
-    }
-    
-    func searchFieldDidStartSearching(_ sender: NSSearchField) {
-        vmWords.textFilter = vmSettings.autoCorrectInput(text: vmWords.textFilter)
-    }
-
-    func searchFieldDidEndSearching(_ sender: NSSearchField) {
-        scScopeFilter.performClick(self)
     }
 
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {

@@ -375,14 +375,6 @@
                                         </textFieldCell>
                                         <connections>
                                             <action selector="addNewWord:" target="F8i-pe-Ate" id="yEt-2S-3Pq"/>
-                                            <binding destination="F8i-pe-Ate" name="value" keyPath="vm.newWord" id="qlL-8f-gMT">
-                                                <dictionary key="options">
-                                                    <string key="NSMultipleValuesPlaceholder">New Word</string>
-                                                    <string key="NSNoSelectionPlaceholder">New Word</string>
-                                                    <string key="NSNotApplicablePlaceholder">New Word</string>
-                                                    <string key="NSNullPlaceholder">New Word</string>
-                                                </dictionary>
-                                            </binding>
                                         </connections>
                                     </textField>
                                     <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RtU-w4-rmU">
@@ -408,11 +400,6 @@
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </searchFieldCell>
-                                        <connections>
-                                            <action selector="filterWord:" target="F8i-pe-Ate" id="n5z-b1-BFB"/>
-                                            <binding destination="F8i-pe-Ate" name="value" keyPath="vm.textFilter" id="Hzv-MI-reA"/>
-                                            <outlet property="delegate" destination="F8i-pe-Ate" id="YQJ-cI-ymr"/>
-                                        </connections>
                                     </searchField>
                                 </subviews>
                                 <edgeInsets key="edgeInsets" left="6" right="0.0" top="6" bottom="6"/>

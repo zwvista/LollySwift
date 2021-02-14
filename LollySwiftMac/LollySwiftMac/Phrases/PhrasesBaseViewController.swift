@@ -17,8 +17,14 @@ class PhrasesBaseViewController: WordsPhrasesBaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        _ = vmPhrases.textFilter <~> sfFilter.rx.text.orEmpty
+        _ = vmPhrases.textFilter <~> sfFilter.rx.textSearch.orEmpty
         _ = vmPhrases.scopeFilter <~> scScopeFilter.rx.selectedLabel
+        sfFilter.rx.searchFieldDidEndSearching.subscribe { _ in
+            self.vmPhrases.textFilter.accept(self.vmSettings.autoCorrectInput(text: self.vmPhrases.textFilter.value))
+        } ~ rx.disposeBag
+        sfFilter.rx.searchFieldDidEndSearching.subscribe { _ in
+            self.scScopeFilter.performClick(self)
+        } ~ rx.disposeBag
     }
 
     override func settingsChanged() {
@@ -29,14 +35,6 @@ class PhrasesBaseViewController: WordsPhrasesBaseViewController {
     func doRefresh() {
         tvPhrases.reloadData()
         updateStatusText()
-    }
-    
-    func searchFieldDidStartSearching(_ sender: NSSearchField) {
-        vmPhrases.textFilter = vmSettings.autoCorrectInput(text: vmPhrases.textFilter)
-    }
-
-    func searchFieldDidEndSearching(_ sender: NSSearchField) {
-        scScopeFilter.performClick(self)
     }
 
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {

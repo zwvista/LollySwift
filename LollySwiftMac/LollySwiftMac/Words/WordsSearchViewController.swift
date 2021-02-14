@@ -35,21 +35,21 @@ class WordsSearchViewController: WordsBaseViewController {
     }
 
     override func addNewWord() {
-        guard !vm.newWord.isEmpty else {return}
+        guard !vm.newWord.value.isEmpty else {return}
         let item = MUnitWord()
-        item.WORD = vm.newWord
+        item.WORD = vm.newWord.value
         item.SEQNUM = vm.arrWords.count + 1
         item.NOTE = ""
         vm.arrWords.append(item)
         tvWords.reloadData()
         tfNewWord.stringValue = ""
-        vm.newWord = ""
+        vm.newWord.accept("")
         tvWords.selectRowIndexes(IndexSet(integer: vm.arrWords.count - 1), byExtendingSelection: false)
         responder = tfNewWord
     }
     
     func addNewWord(word: String) {
-        vm.newWord = word
+        vm.newWord.accept(word)
         addNewWord()
     }
     

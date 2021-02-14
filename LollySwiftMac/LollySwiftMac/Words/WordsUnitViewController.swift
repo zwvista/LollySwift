@@ -13,7 +13,7 @@ import NSObject_Rx
 
 class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NSToolbarItemValidation {
 
-    @objc var vm: WordsUnitViewModel!
+    var vm: WordsUnitViewModel!
     override var vmWords: WordsBaseViewModel { vm }
     var vmReview = EmbeddedReviewViewModel()
     override var vmSettings: SettingsViewModel! { vm.vmSettings }
@@ -25,6 +25,10 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        sfFilter.rx.textSearch.subscribe(onNext: { [unowned self] _ in
+            self.vm.applyFilters(textFilter: self.vm.textFilter.value, scope: self.scScopeFilter.selectedSegment == 0 ? "Word" : "Note", textbookFilter: 0)
+            self.tvWords.reloadData()
+        }) ~ rx.disposeBag
         tvWords.registerForDraggedTypes([tableRowDragType])
     }
     
@@ -118,11 +122,11 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     }
     
     override func addNewWord() {
-        guard !vm.newWord.isEmpty else {return}
+        guard !vm.newWord.value.isEmpty else {return}
         let item = vm.newUnitWord()
-        item.WORD = vmSettings.autoCorrectInput(text: vm.newWord)
+        item.WORD = vmSettings.autoCorrectInput(text: vm.newWord.value)
         tfNewWord.stringValue = ""
-        vm.newWord = ""
+        vm.newWord.accept("")
         vm.create(item: item).subscribe(onNext: {_ in
             self.tvWords.reloadData()
             self.tvWords.selectRowIndexes(IndexSet(integer: self.arrWords.count - 1), byExtendingSelection: false)
@@ -226,11 +230,6 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
                 // self.tableView.reloadData()
             }
         }) ~ rx.disposeBag
-    }
-
-    @IBAction func filterWord(_ sender: AnyObject) {
-        vm.applyFilters(textFilter: vm.textFilter, scope: scScopeFilter.selectedSegment == 0 ? "Word" : "Note", textbookFilter: 0)
-        tvWords.reloadData()
     }
     
     @IBAction func previousUnitPart(_ sender: AnyObject) {

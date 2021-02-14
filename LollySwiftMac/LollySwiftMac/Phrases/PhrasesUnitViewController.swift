@@ -172,7 +172,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     }
     
     @IBAction func filterPhrase(_ sender: AnyObject) {
-        vm.applyFilters(textFilter: vm.textFilter, scope: scScopeFilter.selectedSegment == 0 ? "Phrase" : "Translation", textbookFilter: 0)
+        vm.applyFilters(textFilter: vm.textFilter.value, scope: scScopeFilter.selectedSegment == 0 ? "Phrase" : "Translation", textbookFilter: 0)
         tvPhrases.reloadData()
     }
 
