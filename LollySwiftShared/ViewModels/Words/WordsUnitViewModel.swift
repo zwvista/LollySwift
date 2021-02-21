@@ -62,10 +62,13 @@ class WordsUnitViewModel: WordsBaseViewModel {
     func create(item: MUnitWord) -> Observable<()> {
         MUnitWord.create(item: item).flatMap {
             MUnitWord.getDataById($0, arrTextbooks: self.vmSettings.arrTextbooks)
-        }.map {
-            if let o = $0 {
+        }.flatMap { o -> Observable<()> in
+            if let o = o {
                 self.arrWords.append(o)
                 copyProperties(from: o, to: item)
+                return self.getNote(item: item)
+            } else {
+                return Observable.just(())
             }
         }
     }
@@ -98,8 +101,11 @@ class WordsUnitViewModel: WordsBaseViewModel {
     }
     
     func getNote(index: Int) -> Observable<()> {
-        let item = arrWords[index]
-        return vmSettings.getNote(word: item.WORD).flatMap { note -> Observable<()> in
+        getNote(item: arrWords[index])
+    }
+    
+    func getNote(item: MUnitWord) -> Observable<()> {
+        vmSettings.getNote(word: item.WORD).flatMap { note -> Observable<()> in
             item.NOTE = note
             return WordsUnitViewModel.update(item.WORDID, note: note)
         }

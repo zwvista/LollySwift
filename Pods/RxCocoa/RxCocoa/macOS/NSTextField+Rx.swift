@@ -34,7 +34,7 @@ open class RxTextFieldDelegateProxy
         self.register { RxTextFieldDelegateProxy(textField: $0) }
     }
 
-    fileprivate let textSubject = PublishSubject<String?>()
+    public let textSubject = PublishSubject<String?>()
 
     // MARK: Delegate methods
     open func controlTextDidChange(_ notification: Notification) {

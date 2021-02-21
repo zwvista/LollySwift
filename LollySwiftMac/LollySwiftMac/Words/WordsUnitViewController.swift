@@ -30,7 +30,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        sfFilter.rx.textSearch.subscribe(onNext: { [unowned self] _ in self.filterWord() }) ~ rx.disposeBag
+        sfFilter.rx.text.subscribe(onNext: { [unowned self] _ in self.filterWord() }) ~ rx.disposeBag
         scScopeFilter.rx.selectedLabel.subscribe(onNext: { [unowned self] _ in self.filterWord() }) ~ rx.disposeBag
         tvWords.registerForDraggedTypes([tableRowDragType])
     }

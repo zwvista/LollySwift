@@ -152,13 +152,13 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
         super.viewDidLoad()
         if let tfNewWord = tfNewWord {
             _ = vmWords.newWord <~> tfNewWord.rx.text.orEmpty
-            tfNewWord.rx.text.subscribe(onNext: { [unowned self] _ in
+            tfNewWord.rx.controlTextDidEndEditing.subscribe(onNext: { [unowned self] _ in
                 if !self.vmWords.newWord.value.isEmpty {
                     self.addNewWord()
                 }
             }) ~ rx.disposeBag
         }
-        _ = vmWords.textFilter <~> sfFilter.rx.textSearch.orEmpty
+        _ = vmWords.textFilter <~> sfFilter.rx.text.orEmpty
         _ = vmWords.scopeFilter <~> scScopeFilter.rx.selectedLabel
         sfFilter.rx.searchFieldDidEndSearching.subscribe { [unowned self] _ in
             self.vmWords.textFilter.accept(self.vmSettings.autoCorrectInput(text: self.vmWords.textFilter.value))

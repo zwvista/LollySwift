@@ -24,7 +24,7 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        sfFilter.rx.textSearch.subscribe(onNext: { [unowned self] _ in self.filterWord(self) }) ~ rx.disposeBag
+        sfFilter.rx.text.subscribe(onNext: { [unowned self] _ in self.filterWord(self) }) ~ rx.disposeBag
         scScopeFilter.rx.selectedLabel.subscribe(onNext: { [unowned self] _ in self.filterWord(self) }) ~ rx.disposeBag
     }
 

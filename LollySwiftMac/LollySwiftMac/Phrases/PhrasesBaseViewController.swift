@@ -17,7 +17,7 @@ class PhrasesBaseViewController: WordsPhrasesBaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        _ = vmPhrases.textFilter <~> sfFilter.rx.textSearch.orEmpty
+        _ = vmPhrases.textFilter <~> sfFilter.rx.text.orEmpty
         _ = vmPhrases.scopeFilter <~> scScopeFilter.rx.selectedLabel
         sfFilter.rx.searchFieldDidEndSearching.subscribe { _ in
             self.vmPhrases.textFilter.accept(self.vmSettings.autoCorrectInput(text: self.vmPhrases.textFilter.value))
