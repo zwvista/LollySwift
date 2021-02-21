@@ -66,7 +66,7 @@ class WordsUnitViewModel: WordsBaseViewModel {
             if let o = o {
                 self.arrWords.append(o)
                 copyProperties(from: o, to: item)
-                return self.getNote(item: item)
+                return item.NOTE.isEmpty ? self.getNote(item: item) : Observable.just(())
             } else {
                 return Observable.just(())
             }
