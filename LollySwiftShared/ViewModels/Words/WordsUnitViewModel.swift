@@ -52,10 +52,16 @@ class WordsUnitViewModel: WordsBaseViewModel {
     }
 
     func update(item: MUnitWord) -> Observable<()> {
-        MUnitWord.update(item: item).flatMap {
-            MUnitWord.getDataById(item.ID, arrTextbooks: self.vmSettings.arrTextbooks)
-        }.map {
-            if let o = $0 { copyProperties(from: o, to: item) }
+        MUnitWord.update(item: item).flatMap { result in
+            MUnitWord.getDataById(item.ID, arrTextbooks: self.vmSettings.arrTextbooks).map { ($0, result) }
+        }.flatMap { (o, result) -> Observable<()> in
+            if let o = o {
+                let b = result == "2" || result == "4"
+                copyProperties(from: o, to: item)
+                return b || item.NOTE.isEmpty ? self.getNote(item: item) : Observable.just(())
+            } else {
+                return Observable.just(())
+            }
         }
     }
     

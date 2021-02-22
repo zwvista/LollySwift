@@ -105,11 +105,11 @@ class MUnitWord: NSObject, Codable, MWordProtocol {
         return RestApi.update(url: url, body: body).map { print($0) }
     }
 
-    static func update(item: MUnitWord) -> Observable<()> {
+    static func update(item: MUnitWord) -> Observable<String> {
         // SQL: CALL UNITWORDS_UPDATE
         let url = "\(CommonApi.urlSP)UNITWORDS_UPDATE"
         let parameters = try! item.toParameters()
-        return RestApi.callSP(url: url, parameters: parameters).map { print($0) }
+        return RestApi.callSP(url: url, parameters: parameters).map { print($0); return $0.result }
     }
 
     static func create(item: MUnitWord) -> Observable<Int> {
