@@ -46,4 +46,8 @@ class PhrasesUnitBatchAddViewController: NSViewController {
         super.viewDidAppear()
         view.window?.title = "Batch Add"
     }
+
+    deinit {
+        print("DEBUG: \(self.className) deinit")
+    }
 }

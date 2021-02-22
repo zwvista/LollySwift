@@ -27,9 +27,11 @@ class PhrasesUnitBatchAddViewModel: NSObject {
         var o = Observable.just(())
         let phrases = itemEdit.PHRASES.value.split("\n")
         for i in stride(from: 0, to: phrases.count, by: 2) {
-            item.PHRASE = vm.vmSettings.autoCorrectInput(text: phrases[i])
-            item.TRANSLATION = phrases[i + 1]
-            o = o.concat(vm.create(item: item))
+            let item2 = MUnitPhrase()
+            copyProperties(from: item, to: item2)
+            item2.PHRASE = vm.vmSettings.autoCorrectInput(text: phrases[i])
+            item2.TRANSLATION = phrases[i + 1]
+            o = o.flatMap { [unowned self] _ in self.vm.create(item: item2) }
             item.SEQNUM += 1
         }
         return o
