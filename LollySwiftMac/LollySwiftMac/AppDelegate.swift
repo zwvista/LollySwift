@@ -182,7 +182,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func addNewUnitPhrase(wordid: Int) {
         let w = NSApplication.shared.windows.last!
-        let v = findOrShowWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesUnitViewController").contentViewController as! PhrasesUnitViewController
+        let v = findOrShowWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesUnitWindowController").contentViewController as! PhrasesUnitViewController
         v.addPhrase(wordid: wordid)
         w.makeKeyAndOrderFront(nil)
     }
@@ -190,7 +190,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func addNewUnitWord(phraseid: Int) {
         let w = NSApplication.shared.windows.last!
         wordsInUnit(self)
-        let v = findOrShowWindow(storyBoardName: "Words", windowControllerName: "WordsUnitViewController").contentViewController as! WordsUnitViewController
+        let v = findOrShowWindow(storyBoardName: "Words", windowControllerName: "WordsUnitWindowController").contentViewController as! WordsUnitViewController
         v.addWord(phraseid: phraseid)
         w.makeKeyAndOrderFront(nil)
     }

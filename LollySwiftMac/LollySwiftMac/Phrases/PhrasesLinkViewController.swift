@@ -30,9 +30,9 @@ class PhrasesLinkViewController: NSViewController, NSTableViewDataSource, NSTabl
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        reload(self)
         sfFilter.rx.text.subscribe(onNext: { [unowned self] _ in self.filterPhrase() }) ~ rx.disposeBag
         scScopeFilter.rx.selectedLabel.subscribe(onNext: { [unowned self] _ in self.filterPhrase() }) ~ rx.disposeBag
-        reload(self)
     }
     
     @IBAction func reload(_ sender: AnyObject) {

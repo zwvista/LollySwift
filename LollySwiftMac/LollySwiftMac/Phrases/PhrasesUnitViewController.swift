@@ -161,7 +161,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     
     @IBAction func doubleAction(_ sender: AnyObject) {
         if NSApp.currentEvent!.modifierFlags.contains(.option) {
-            linkWords(sender)
+            linkExistingWords(sender)
         } else {
             editPhrase(sender)
         }
@@ -221,7 +221,13 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
         self.presentAsSheet(optionsVC)
     }
 
-    @IBAction func linkWords(_ sender: AnyObject) {
+    @IBAction func linkNewWord(_ sender: AnyObject) {
+        guard vm.selectedPhraseID != 0 else {return}
+        (NSApplication.shared.delegate as! AppDelegate).addNewUnitWord(phraseid: vm.selectedPhraseID)
+    }
+
+
+    @IBAction func linkExistingWords(_ sender: AnyObject) {
         guard vm.selectedPhraseID != 0 else {return}
         let detailVC = NSStoryboard(name: "Words", bundle: nil).instantiateController(withIdentifier: "WordsLinkViewController") as! WordsLinkViewController
         detailVC.textFilter = vm.selectedPhrase

@@ -972,11 +972,14 @@
                         </menuItem>
                         <menuItem title="Link a New Word" id="RIy-TF-xP9">
                             <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="linkNewWord:" target="F8i-pe-Ate" id="Ysx-XZ-TY2"/>
+                            </connections>
                         </menuItem>
                         <menuItem title="Link Existing Words" id="u9y-2B-Xi8">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
-                                <action selector="linkWords:" target="F8i-pe-Ate" id="pit-xo-wEA"/>
+                                <action selector="linkExistingWords:" target="F8i-pe-Ate" id="7qd-lv-4cj"/>
                             </connections>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="Znd-8P-LoQ"/>
@@ -1041,7 +1044,6 @@
                     </items>
                 </menu>
                 <userDefaultsController id="kQx-Qe-nCG"/>
-                <userDefaultsController id="qIW-st-8dU"/>
             </objects>
             <point key="canvasLocation" x="-838" y="1280"/>
         </scene>
