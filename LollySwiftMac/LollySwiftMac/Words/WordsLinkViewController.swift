@@ -12,26 +12,32 @@ import NSObject_Rx
 
 class WordsLinkViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate {
 
-    @objc var vm: WordsLangViewModel!
+    var vm: WordsLangViewModel!
     var vmSettings: SettingsViewModel! { vm.vmSettings }
     var phraseid = 0
+    var textFilter = ""
     var complete: (() -> Void)?
     var arrWords: [MLangWord] { vm.arrWordsFiltered ?? vm.arrWords }
 
     @IBOutlet weak var scScopeFilter: NSSegmentedControl!
     @IBOutlet weak var sfFilter: NSSearchField!
-    @objc var textFilter = ""
-    @IBOutlet weak var scWordScope: NSSegmentedControl!
     @IBOutlet weak var tableView: NSTableView!
     
+    func filterWord() {
+        vm.applyFilters()
+        tableView.reloadData()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        sfFilter.rx.text.subscribe(onNext: { [unowned self] _ in self.filterWord() }) ~ rx.disposeBag
+        scScopeFilter.rx.selectedLabel.subscribe(onNext: { [unowned self] _ in self.filterWord() }) ~ rx.disposeBag
         reload(self)
     }
     
     @IBAction func reload(_ sender: AnyObject) {
         vm = WordsLangViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) {
-            self.filterWord(self)
+            self.filterWord()
         }
     }
     
@@ -51,20 +57,6 @@ class WordsLinkViewController: NSViewController, NSTableViewDataSource, NSTableV
         let columnName = tableColumn!.identifier.rawValue
         cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
         return cell
-    }
-    
-    @IBAction func filterWord(_ sender: AnyObject) {
-        let n = scScopeFilter.selectedSegment
-        vm.applyFilters(textFilter: textFilter, scope: n == 0 ? "Word" : "Note")
-        tableView.reloadData()
-    }
-    
-    func controlTextDidEndEditing(_ obj: Notification) {
-        let searchfield = obj.object as! NSControl
-        guard searchfield === sfFilter else {return}
-        let code = (obj.userInfo!["NSTextMovement"] as! NSNumber).intValue
-        guard code == NSReturnTextMovement else {return}
-        filterWord(self)
     }
 
     @IBAction func checkItems(_ sender: AnyObject) {

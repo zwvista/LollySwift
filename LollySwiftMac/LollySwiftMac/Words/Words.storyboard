@@ -2912,16 +2912,13 @@ Gw
                                                 <segment label="Note" width="52" tag="1"/>
                                             </segments>
                                         </segmentedCell>
-                                        <connections>
-                                            <action selector="filterWord:" target="UkS-Xi-ogF" id="23s-pn-6d2"/>
-                                        </connections>
                                     </segmentedControl>
                                     <searchField verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lHN-YD-8mt">
                                         <rect key="frame" x="209" y="4" width="96" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="96" id="A1r-OT-h3N"/>
                                         </constraints>
-                                        <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" sendsWholeSearchString="YES" id="zqX-zk-elq">
+                                        <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Filter" usesSingleLineMode="YES" bezelStyle="round" sendsWholeSearchString="YES" id="zqX-zk-elq">
                                             <font key="font" usesAppearanceFont="YES"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -2929,11 +2926,6 @@ Gw
                                                 <binding destination="UkS-Xi-ogF" name="value" keyPath="textFilter" id="Sgp-VU-e42"/>
                                             </connections>
                                         </searchFieldCell>
-                                        <connections>
-                                            <action selector="filterWord:" target="UkS-Xi-ogF" id="Icf-np-l9e"/>
-                                            <binding destination="UkS-Xi-ogF" name="value" keyPath="vm.textFilter" id="Oxy-Mq-taK"/>
-                                            <outlet property="delegate" destination="UkS-Xi-ogF" id="3lf-dw-pry"/>
-                                        </connections>
                                     </searchField>
                                 </subviews>
                                 <edgeInsets key="edgeInsets" left="6" right="0.0" top="6" bottom="6"/>
@@ -6751,9 +6743,6 @@ Gw
                                         <segment label="Note" width="74" tag="1"/>
                                     </segments>
                                 </segmentedCell>
-                                <connections>
-                                    <action selector="filterPhrase:" target="87w-F5-jjx" id="slJ-JT-YMW"/>
-                                </connections>
                             </segmentedControl>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Ee-sZ-SQe">
                                 <rect key="frame" x="314" y="437" width="68" height="16"/>
@@ -6773,14 +6762,6 @@ Gw
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </searchFieldCell>
-                                <connections>
-                                    <binding destination="87w-F5-jjx" name="value" keyPath="textFilter" id="Cth-8g-CH5">
-                                        <dictionary key="options">
-                                            <bool key="NSContinuouslyUpdatesValue" value="YES"/>
-                                        </dictionary>
-                                    </binding>
-                                    <outlet property="delegate" destination="87w-F5-jjx" id="TaG-43-ECJ"/>
-                                </connections>
                             </searchField>
                             <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YIm-K1-xpv">
                                 <rect key="frame" x="14" y="389" width="56" height="32"/>

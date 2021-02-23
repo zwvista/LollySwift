@@ -18,8 +18,15 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
     override var vmSettings: SettingsViewModel! { vm.vmSettings }
     var arrWords: [MLangWord] { vm.arrWordsFiltered ?? vm.arrWords }
 
+    func filterWord() {
+        vm.applyFilters()
+        tvWords.reloadData()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        sfFilter.rx.text.subscribe(onNext: { [unowned self] _ in self.filterWord() }) ~ rx.disposeBag
+        scScopeFilter.rx.selectedLabel.subscribe(onNext: { [unowned self] _ in self.filterWord() }) ~ rx.disposeBag
     }
 
     override func settingsChanged() {
@@ -119,11 +126,6 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
             return vmSettings.hasDictNote
         }
         return true
-    }
-
-    @IBAction func filterWord(_ sender: AnyObject) {
-        vm.applyFilters(textFilter: vm.textFilter.value, scope: scScopeFilter.selectedSegment == 0 ? "Word" : "Note")
-        tvWords.reloadData()
     }
 
     override func updateStatusText() {

@@ -12,26 +12,32 @@ import NSObject_Rx
 
 class PhrasesLinkViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate {
 
-    @objc var vm: PhrasesLangViewModel!
+    var vm: PhrasesLangViewModel!
     var vmSettings: SettingsViewModel! { vm.vmSettings }
     var wordid = 0
+    var textFilter = ""
     var complete: (() -> Void)?
     var arrPhrases: [MLangPhrase] { vm.arrPhrasesFiltered ?? vm.arrPhrases }
 
     @IBOutlet weak var scScopeFilter: NSSegmentedControl!
     @IBOutlet weak var sfFilter: NSSearchField!
-    @objc var textFilter = ""
-    @IBOutlet weak var scPhraseScope: NSSegmentedControl!
     @IBOutlet weak var tableView: NSTableView!
     
+    func filterPhrase() {
+        vm.applyFilters()
+        tableView.reloadData()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        sfFilter.rx.text.subscribe(onNext: { [unowned self] _ in self.filterPhrase() }) ~ rx.disposeBag
+        scScopeFilter.rx.selectedLabel.subscribe(onNext: { [unowned self] _ in self.filterPhrase() }) ~ rx.disposeBag
         reload(self)
     }
     
     @IBAction func reload(_ sender: AnyObject) {
         vm = PhrasesLangViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) {
-            self.filterPhrase(self)
+            self.filterPhrase()
         }
     }
     
@@ -51,20 +57,6 @@ class PhrasesLinkViewController: NSViewController, NSTableViewDataSource, NSTabl
         let columnName = tableColumn!.identifier.rawValue
         cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
         return cell
-    }
-    
-    @IBAction func filterPhrase(_ sender: AnyObject) {
-        let n = scScopeFilter.selectedSegment
-        vm.applyFilters(textFilter: textFilter, scope: n == 0 ? "Phrase" : "Translation")
-        tableView.reloadData()
-    }
-    
-    func controlTextDidEndEditing(_ obj: Notification) {
-        let searchfield = obj.object as! NSControl
-        guard searchfield === sfFilter else {return}
-        let code = (obj.userInfo!["NSTextMovement"] as! NSNumber).intValue
-        guard code == NSReturnTextMovement else {return}
-        filterPhrase(self)
     }
 
     @IBAction func checkItems(_ sender: AnyObject) {

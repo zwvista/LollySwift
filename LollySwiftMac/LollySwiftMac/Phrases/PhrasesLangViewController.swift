@@ -17,9 +17,16 @@ class PhrasesLangViewController: PhrasesBaseViewController {
     override var vmPhrases: PhrasesBaseViewModel { vm }
     override var vmSettings: SettingsViewModel! { vm.vmSettings }
     var arrPhrases: [MLangPhrase] { vm.arrPhrasesFiltered ?? vm.arrPhrases }
+    
+    func filterPhrase() {
+        vm.applyFilters()
+        tvPhrases.reloadData()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        sfFilter.rx.text.subscribe(onNext: { [unowned self] _ in self.filterPhrase() }) ~ rx.disposeBag
+        scScopeFilter.rx.selectedLabel.subscribe(onNext: { [unowned self] _ in self.filterPhrase() }) ~ rx.disposeBag
     }
     
     override func settingsChanged() {
@@ -80,11 +87,6 @@ class PhrasesLangViewController: PhrasesBaseViewController {
             self.tvPhrases.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tvPhrases.tableColumns.count))
         }
         self.presentAsModalWindow(editVC)
-    }
-    
-    @IBAction func filterPhrase(_ sender: AnyObject) {
-        vm.applyFilters(textFilter: vm.textFilter.value, scope: scScopeFilter.selectedSegment == 0 ? "Phrase" : "Translation")
-        tvPhrases.reloadData()
     }
 
     override func updateStatusText() {

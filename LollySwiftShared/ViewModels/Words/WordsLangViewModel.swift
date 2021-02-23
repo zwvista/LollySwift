@@ -24,13 +24,13 @@ class WordsLangViewModel: WordsBaseViewModel {
         }
     }
     
-    func applyFilters(textFilter: String, scope: String) {
-        if textFilter.isEmpty {
+    func applyFilters() {
+        if textFilter.value.isEmpty {
             arrWordsFiltered = nil
         } else {
             arrWordsFiltered = arrWords
-            if !textFilter.isEmpty {
-                arrWordsFiltered = arrWordsFiltered!.filter { (scope == "Word" ? $0.WORD : $0.NOTE).contains(textFilter) }
+            if !textFilter.value.isEmpty {
+                arrWordsFiltered = arrWordsFiltered!.filter { (scopeFilter.value == "Word" ? $0.WORD : $0.NOTE).lowercased().contains(textFilter.value.lowercased()) }
             }
         }
     }
