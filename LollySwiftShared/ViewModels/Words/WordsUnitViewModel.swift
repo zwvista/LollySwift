@@ -30,15 +30,15 @@ class WordsUnitViewModel: WordsBaseViewModel {
     }
     
     func applyFilters() {
-        if textFilter.value.isEmpty && textbookFilter.value == 0 {
+        if textFilter.value.isEmpty && textbookFilter == 0 {
             arrWordsFiltered = nil
         } else {
             arrWordsFiltered = arrWords
             if !textFilter.value.isEmpty {
                 arrWordsFiltered = arrWordsFiltered!.filter { (scopeFilter.value == "Word" ? $0.WORD : $0.NOTE).lowercased().contains(textFilter.value.lowercased()) }
             }
-            if textbookFilter.value != 0 {
-                arrWordsFiltered = arrWordsFiltered!.filter { $0.TEXTBOOKID == textbookFilter.value }
+            if textbookFilter != 0 {
+                arrWordsFiltered = arrWordsFiltered!.filter { $0.TEXTBOOKID == textbookFilter }
             }
         }
     }

@@ -383,9 +383,6 @@
                                                 <segment label="Note" width="52" tag="1"/>
                                             </segments>
                                         </segmentedCell>
-                                        <connections>
-                                            <action selector="filterWord:" target="F8i-pe-Ate" id="hdV-BY-6az"/>
-                                        </connections>
                                     </segmentedControl>
                                     <searchField verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ntb-I3-XGS">
                                         <rect key="frame" x="209" y="4" width="96" height="22"/>
@@ -4346,7 +4343,7 @@ Gw
                                         <constraints>
                                             <constraint firstAttribute="width" constant="96" id="3LF-F0-2Z4"/>
                                         </constraints>
-                                        <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" usesSingleLineMode="YES" bezelStyle="round" sendsWholeSearchString="YES" id="bdW-MI-v9N">
+                                        <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Filter" usesSingleLineMode="YES" bezelStyle="round" sendsWholeSearchString="YES" id="bdW-MI-v9N">
                                             <font key="font" usesAppearanceFont="YES"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -4366,11 +4363,9 @@ Gw
                                             </menu>
                                         </popUpButtonCell>
                                         <connections>
-                                            <action selector="filterWord:" target="S5w-0q-IQt" id="hQa-NT-wtW"/>
                                             <binding destination="4Nk-1I-LLj" name="content" keyPath="arrangedObjects" id="Yfn-e7-h7R"/>
                                             <binding destination="4Nk-1I-LLj" name="contentValues" keyPath="arrangedObjects.label" previousBinding="X13-W9-hxj" id="FYU-Ma-KTT"/>
                                             <binding destination="4Nk-1I-LLj" name="contentObjects" keyPath="arrangedObjects.value" previousBinding="Yfn-e7-h7R" id="X13-W9-hxj"/>
-                                            <binding destination="S5w-0q-IQt" name="selectedObject" keyPath="textbookFilter" previousBinding="FYU-Ma-KTT" id="vFh-TG-0Gb"/>
                                         </connections>
                                     </popUpButton>
                                 </subviews>

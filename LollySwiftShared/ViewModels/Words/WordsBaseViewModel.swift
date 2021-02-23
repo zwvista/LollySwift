@@ -13,7 +13,10 @@ import RxRelay
 class WordsPhrasesBaseViewModel: NSObject {
     var vmSettings: SettingsViewModel
     let textFilter = BehaviorRelay(value: "")
-    let textbookFilter = BehaviorRelay(value: 0)
+    let indexTextbookFilter = BehaviorRelay(value: 0)
+    var textbookFilter: Int {
+        indexTextbookFilter.value == -1 ? 0 : vmSettings.arrTextbookFilters[indexTextbookFilter.value].value
+    }
 
     init(settings: SettingsViewModel, needCopy: Bool) {
         vmSettings = !needCopy ? settings : SettingsViewModel(settings)

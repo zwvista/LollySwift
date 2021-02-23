@@ -28,13 +28,13 @@ class PhrasesUnitViewModel: PhrasesBaseViewModel {
         }
     }
 
-    func applyFilters(textFilter: String, scope: String, textbookFilter: Int) {
-        if textFilter.isEmpty && textbookFilter == 0 {
+    func applyFilters() {
+        if textFilter.value.isEmpty && textbookFilter == 0 {
             arrPhrasesFiltered = nil
         } else {
             arrPhrasesFiltered = arrPhrases
-            if !textFilter.isEmpty {
-                arrPhrasesFiltered = arrPhrasesFiltered!.filter { (scope == "Phrase" ? $0.PHRASE : $0.TRANSLATION).lowercased().contains(textFilter.lowercased()) }
+            if !textFilter.value.isEmpty {
+                arrPhrasesFiltered = arrPhrasesFiltered!.filter { (scopeFilter.value == "Phrase" ? $0.PHRASE : $0.TRANSLATION).lowercased().contains(textFilter.value.lowercased()) }
             }
             if textbookFilter != 0 {
                 arrPhrasesFiltered = arrPhrasesFiltered!.filter { $0.TEXTBOOKID == textbookFilter }

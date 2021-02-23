@@ -22,9 +22,16 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     // https://developer.apple.com/videos/play/wwdc2011/120/
     // https://stackoverflow.com/questions/2121907/drag-drop-reorder-rows-on-nstableview
     let tableRowDragType = NSPasteboard.PasteboardType(rawValue: "private.table-row")
+    
+    func filterPhrase() {
+        vm.applyFilters()
+        tvPhrases.reloadData()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        sfFilter.rx.text.subscribe(onNext: { [unowned self] _ in self.filterPhrase() }) ~ rx.disposeBag
+        scScopeFilter.rx.selectedLabel.subscribe(onNext: { [unowned self] _ in self.filterPhrase() }) ~ rx.disposeBag
         tvPhrases.registerForDraggedTypes([tableRowDragType])
     }
     
@@ -169,11 +176,6 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
             self.tvPhrases.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tvPhrases.tableColumns.count))
         }
         self.presentAsModalWindow(editVC)
-    }
-    
-    @IBAction func filterPhrase(_ sender: AnyObject) {
-        vm.applyFilters(textFilter: vm.textFilter.value, scope: scScopeFilter.selectedSegment == 0 ? "Phrase" : "Translation", textbookFilter: 0)
-        tvPhrases.reloadData()
     }
 
     @IBAction func previousUnitPart(_ sender: AnyObject) {

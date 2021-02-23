@@ -20,12 +20,18 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
     
     @IBOutlet weak var pubTextbookFilter: NSPopUpButton!
     @IBOutlet weak var acTextbooks: NSArrayController!
-    @objc var textbookFilter = 0
+
+    func filterWord() {
+        vm.applyFilters()
+        tvWords.reloadData()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        sfFilter.rx.text.subscribe(onNext: { [unowned self] _ in self.filterWord(self) }) ~ rx.disposeBag
-        scScopeFilter.rx.selectedLabel.subscribe(onNext: { [unowned self] _ in self.filterWord(self) }) ~ rx.disposeBag
+        sfFilter.rx.text.subscribe(onNext: { [unowned self] _ in self.filterWord() }) ~ rx.disposeBag
+        scScopeFilter.rx.selectedLabel.subscribe(onNext: { [unowned self] _ in self.filterWord() }) ~ rx.disposeBag
+        _ = vm.indexTextbookFilter <~> pubTextbookFilter.rx.selectedItemIndex
+        pubTextbookFilter.rx.selectedItemIndex.subscribe(onNext: { [unowned self] _ in self.filterWord() }) ~ rx.disposeBag
     }
 
     override func settingsChanged() {
@@ -103,11 +109,6 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
             return vmSettings.hasDictNote
         }
         return true
-    }
-
-    @IBAction func filterWord(_ sender: AnyObject) {
-        vm.applyFilters()
-        tvWords.reloadData()
     }
 
     override func updateStatusText() {

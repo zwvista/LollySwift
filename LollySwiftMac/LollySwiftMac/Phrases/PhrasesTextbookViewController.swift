@@ -20,9 +20,18 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
     @IBOutlet weak var pubTextbookFilter: NSPopUpButton!
     @IBOutlet weak var acTextbooks: NSArrayController!
     @objc var textbookFilter = 0
+    
+    func filterPhrase() {
+        vm.applyFilters()
+        tvPhrases.reloadData()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        sfFilter.rx.text.subscribe(onNext: { [unowned self] _ in self.filterPhrase() }) ~ rx.disposeBag
+        scScopeFilter.rx.selectedLabel.subscribe(onNext: { [unowned self] _ in self.filterPhrase() }) ~ rx.disposeBag
+        _ = vm.indexTextbookFilter <~> pubTextbookFilter.rx.selectedItemIndex
+        pubTextbookFilter.rx.selectedItemIndex.subscribe(onNext: { [unowned self] _ in self.filterPhrase() }) ~ rx.disposeBag
     }
 
     override func settingsChanged() {
@@ -78,11 +87,6 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
             self.tvPhrases.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tvPhrases.tableColumns.count))
         }
         self.presentAsModalWindow(editVC)
-    }
-    
-    @IBAction func filterPhrase(_ sender: AnyObject) {
-        vm.applyFilters(textFilter: vm.textFilter.value, scope: scScopeFilter.selectedSegment == 0 ? "Phrase" : "Translation", textbookFilter: textbookFilter)
-        tvPhrases.reloadData()
     }
 
     override func updateStatusText() {
