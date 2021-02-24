@@ -30,15 +30,14 @@ class WordsLinkViewController: NSViewController, NSTableViewDataSource, NSTableV
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        reload(self)
-        sfFilter.rx.text.subscribe(onNext: { [unowned self] _ in self.filterWord() }) ~ rx.disposeBag
-        scScopeFilter.rx.selectedLabel.subscribe(onNext: { [unowned self] _ in self.filterWord() }) ~ rx.disposeBag
-    }
-    
-    @IBAction func reload(_ sender: AnyObject) {
         vm = WordsLangViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) {
             self.filterWord()
         }
+        vm.textFilter.accept(textFilter)
+        _ = vm.textFilter <~> sfFilter.rx.text.orEmpty
+        _ = vm.scopeFilter <~> scScopeFilter.rx.selectedLabel
+        sfFilter.rx.text.subscribe(onNext: { [unowned self] _ in self.filterWord() }) ~ rx.disposeBag
+        scScopeFilter.rx.selectedLabel.subscribe(onNext: { [unowned self] _ in self.filterWord() }) ~ rx.disposeBag
     }
     
     override func viewDidAppear() {

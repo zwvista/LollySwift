@@ -30,15 +30,14 @@ class PhrasesLinkViewController: NSViewController, NSTableViewDataSource, NSTabl
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        reload(self)
-        sfFilter.rx.text.subscribe(onNext: { [unowned self] _ in self.filterPhrase() }) ~ rx.disposeBag
-        scScopeFilter.rx.selectedLabel.subscribe(onNext: { [unowned self] _ in self.filterPhrase() }) ~ rx.disposeBag
-    }
-    
-    @IBAction func reload(_ sender: AnyObject) {
         vm = PhrasesLangViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) {
             self.filterPhrase()
         }
+        vm.textFilter.accept(textFilter)
+        _ = vm.textFilter <~> sfFilter.rx.text.orEmpty
+        _ = vm.scopeFilter <~> scScopeFilter.rx.selectedLabel
+        sfFilter.rx.text.subscribe(onNext: { [unowned self] _ in self.filterPhrase() }) ~ rx.disposeBag
+        scScopeFilter.rx.selectedLabel.subscribe(onNext: { [unowned self] _ in self.filterPhrase() }) ~ rx.disposeBag
     }
     
     override func viewDidAppear() {
