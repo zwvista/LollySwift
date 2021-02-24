@@ -26,10 +26,10 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
         ddTextbookFilter.dataSource = vmSettings.arrTextbookFilters.map(\.label)
         ddTextbookFilter.selectRow(0)
         ddTextbookFilter.selectionAction = { [unowned self] (index: Int, item: String) in
-            btnTextbookFilter.setTitle(item, for: .normal)
+            self.vmBase.stringTextbookFilter.accept(item)
             self.searchBarSearchButtonClicked(self.sbTextFilter)
         }
-        btnTextbookFilter.setTitle(vmSettings.arrTextbookFilters[0].label, for: .normal)
+        _ = vmBase.stringTextbookFilter ~> btnTextbookFilter.rx.title(for: .normal)
     }
     
     override func refresh() {

@@ -14,12 +14,18 @@ class WordsPhrasesBaseViewModel: NSObject {
     var vmSettings: SettingsViewModel
     let textFilter = BehaviorRelay(value: "")
     let indexTextbookFilter = BehaviorRelay(value: 0)
+    let stringTextbookFilter = BehaviorRelay(value: "")
     var textbookFilter: Int {
         indexTextbookFilter.value == -1 ? 0 : vmSettings.arrTextbookFilters[indexTextbookFilter.value].value
     }
 
     init(settings: SettingsViewModel, needCopy: Bool) {
         vmSettings = !needCopy ? settings : SettingsViewModel(settings)
+        super.init()
+        stringTextbookFilter.accept(vmSettings.arrTextbookFilters[0].label)
+        stringTextbookFilter.subscribe(onNext: { s in
+            self.indexTextbookFilter.accept(self.vmSettings.arrTextbookFilters.firstIndex { $0.label == s }!)
+        }) ~ rx.disposeBag
     }
 }
 
