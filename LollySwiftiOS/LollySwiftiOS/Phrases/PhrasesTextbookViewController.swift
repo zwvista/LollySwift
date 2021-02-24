@@ -30,16 +30,12 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
             self.searchBarSearchButtonClicked(self.sbTextFilter)
         }
         btnTextbookFilter.setTitle(vmSettings.arrTextbookFilters[0].label, for: .normal)
-        refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
-        refresh(refreshControl)
-        _ = vm.textFilter <~> sbTextFilter.rx.text.orEmpty
-        _ = vm.scopeFilter ~> btnScopeFilter.rx.title(for: .normal)
     }
     
-    @objc func refresh(_ sender: UIRefreshControl) {
+    override func refresh() {
         view.showBlurLoader()
         vm = PhrasesUnitViewModel(settings: vmSettings, inTextbook: false, needCopy: false) {
-            sender.endRefreshing()
+            self.refreshControl.endRefreshing()
             self.tableView.reloadData()
             self.view.removeBlurLoader()
         }

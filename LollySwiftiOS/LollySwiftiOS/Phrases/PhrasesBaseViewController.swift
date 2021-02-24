@@ -29,8 +29,19 @@ class PhrasesBaseViewController: UIViewController, UITableViewDelegate, UITableV
             self.searchBarSearchButtonClicked(self.sbTextFilter)
         }
         tableView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
+        refresh()
+        _ = vmBase.textFilter <~> sbTextFilter.rx.text.orEmpty
+        _ = vmBase.scopeFilter ~> btnScopeFilter.rx.title(for: .normal)
     }
     
+    @objc func refresh(_ sender: UIRefreshControl) {
+        refresh()
+    }
+    
+    func refresh() {
+    }
+
     @IBAction func showScopeFilterDropDown(_ sender: AnyObject) {
         ddScopeFilter.show()
     }

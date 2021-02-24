@@ -16,18 +16,14 @@ class PhrasesLangViewController: PhrasesBaseViewController {
     var arrPhrases: [MLangPhrase] { vm.arrPhrasesFiltered ?? vm.arrPhrases }
     override var vmBase: PhrasesBaseViewModel! { vm }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
-        refresh(refreshControl)
-        _ = vm.textFilter <~> sbTextFilter.rx.text.orEmpty
-        _ = vm.scopeFilter ~> btnScopeFilter.rx.title(for: .normal)
+    override func viewDidLoad() {
+        super.viewDidLoad()
     }
-    
-    @objc func refresh(_ sender: UIRefreshControl) {
+
+    override func refresh() {
         view.showBlurLoader()
         vm = PhrasesLangViewModel(settings: vmSettings, needCopy: false) {
-            sender.endRefreshing()
+            self.refreshControl.endRefreshing()
             self.tableView.reloadData()
             self.view.removeBlurLoader()
         }
