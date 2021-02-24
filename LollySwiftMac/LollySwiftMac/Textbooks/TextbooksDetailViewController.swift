@@ -20,7 +20,7 @@ class TextbooksDetailViewController: NSViewController {
     @IBOutlet weak var tfID: NSTextField!
     @IBOutlet weak var tfLang: NSTextField!
     @IBOutlet weak var tfTextbookName: NSTextField!
-    @IBOutlet weak var tfUnits: NSTextField!
+    @IBOutlet weak var tvUnits: NSTextView!
     @IBOutlet weak var tfParts: NSTextField!
 
     override func viewDidLoad() {
