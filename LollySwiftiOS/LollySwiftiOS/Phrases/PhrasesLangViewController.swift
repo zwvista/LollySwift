@@ -14,11 +14,14 @@ class PhrasesLangViewController: PhrasesBaseViewController {
     
     var vm: PhrasesLangViewModel!
     var arrPhrases: [MLangPhrase] { vm.arrPhrasesFiltered ?? vm.arrPhrases }
-    
+    override var vmBase: PhrasesBaseViewModel! { vm }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         refresh(refreshControl)
+        _ = vm.textFilter <~> sbTextFilter.rx.text.orEmpty
+        _ = vm.scopeFilter ~> btnScopeFilter.rx.title(for: .normal)
     }
     
     @objc func refresh(_ sender: UIRefreshControl) {
@@ -75,7 +78,7 @@ class PhrasesLangViewController: PhrasesBaseViewController {
     }
     
     override func applyFilters() {
-        vm.applyFilters(textFilter: sbTextFilter.text!, scope: btnScopeFilter.titleLabel!.text!)
+        vm.applyFilters()
         tableView.reloadData()
     }
     

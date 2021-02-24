@@ -18,6 +18,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
 
     @IBOutlet weak var btnTextbookFilter: UIButton!
     let ddTextbookFilter = DropDown()
+    override var vmBase: PhrasesBaseViewModel! { vm }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +32,8 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
         btnTextbookFilter.setTitle(vmSettings.arrTextbookFilters[0].label, for: .normal)
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         refresh(refreshControl)
+        _ = vm.textFilter <~> sbTextFilter.rx.text.orEmpty
+        _ = vm.scopeFilter ~> btnScopeFilter.rx.title(for: .normal)
     }
     
     @objc func refresh(_ sender: UIRefreshControl) {
@@ -106,7 +109,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
     }
     
     override func applyFilters() {
-        vm.applyFilters(textFilter: sbTextFilter.text!, scope: ddScopeFilter.selectedItem!, textbookFilter: vmSettings.arrTextbookFilters.first { $0.label == ddTextbookFilter.selectedItem! }!.value)
+        vm.applyFilters()
         tableView.reloadData()
     }
     

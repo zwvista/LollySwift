@@ -15,11 +15,14 @@ class WordsUnitViewController: WordsBaseViewController {
     @objc var vm: WordsUnitViewModel!
     var arrWords: [MUnitWord] { vm.arrWordsFiltered ?? vm.arrWords }
     @IBOutlet weak var btnEdit: UIBarButtonItem!
-    
+    override var vmBase: WordsBaseViewModel! { vm }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         refresh(refreshControl)
+        _ = vm.textFilter <~> sbTextFilter.rx.text.orEmpty
+        _ = vm.scopeFilter ~> btnScopeFilter.rx.title(for: .normal)
     }
     
     @objc func refresh(_ sender: UIRefreshControl) {
@@ -114,7 +117,7 @@ class WordsUnitViewController: WordsBaseViewController {
     }
     
     override func applyFilters() {
-        vm.applyFilters(textFilter: sbTextFilter.text!, scope: btnScopeFilter.titleLabel!.text!, textbookFilter: 0)
+        vm.applyFilters()
         tableView.reloadData()
     }
     

@@ -17,6 +17,7 @@ class PhrasesBaseViewController: UIViewController, UITableViewDelegate, UITableV
     let refreshControl = UIRefreshControl()
 
     let ddScopeFilter = DropDown()
+    var vmBase: PhrasesBaseViewModel! { nil }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,10 +25,9 @@ class PhrasesBaseViewController: UIViewController, UITableViewDelegate, UITableV
         ddScopeFilter.dataSource = SettingsViewModel.arrScopePhraseFilters
         ddScopeFilter.selectRow(0)
         ddScopeFilter.selectionAction = { [unowned self] (index: Int, item: String) in
-            btnScopeFilter.setTitle(item, for: .normal)
+            vmBase.scopeFilter.accept(item)
             self.searchBarSearchButtonClicked(self.sbTextFilter)
         }
-        btnScopeFilter.setTitle(SettingsViewModel.arrScopePhraseFilters[0], for: .normal)
         tableView.refreshControl = refreshControl
     }
     
