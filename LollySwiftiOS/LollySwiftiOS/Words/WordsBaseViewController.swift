@@ -9,7 +9,7 @@
 import UIKit
 import DropDown
 
-class WordsBaseViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UIGestureRecognizerDelegate {
+class WordsBaseViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var sbTextFilter: UISearchBar!
@@ -26,13 +26,18 @@ class WordsBaseViewController: UIViewController, UITableViewDelegate, UITableVie
         ddScopeFilter.selectRow(0)
         ddScopeFilter.selectionAction = { [unowned self] (index: Int, item: String) in
             vmBase.scopeFilter.accept(item)
-            self.searchBarSearchButtonClicked(self.sbTextFilter)
         }
         tableView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         refresh()
         _ = vmBase.textFilter <~> sbTextFilter.rx.text.orEmpty
         _ = vmBase.scopeFilter ~> btnScopeFilter.rx.title(for: .normal)
+        vmBase.textFilter.subscribe(onNext: { [unowned self] _ in
+            self.applyFilters()
+        }) ~ rx.disposeBag
+        vmBase.scopeFilter.subscribe(onNext: { [unowned self] _ in
+            self.applyFilters()
+        }) ~ rx.disposeBag
     }
     
     @objc func refresh(_ sender: UIRefreshControl) {
@@ -81,15 +86,6 @@ class WordsBaseViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         0
-    }
-
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.endEditing(true)
-        applyFilters()
-    }
-
-    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        applyFilters()
     }
     
     func applyFilters() {

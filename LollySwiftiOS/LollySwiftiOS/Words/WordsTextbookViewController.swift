@@ -27,9 +27,11 @@ class WordsTextbookViewController: WordsBaseViewController {
         ddTextbookFilter.selectRow(0)
         ddTextbookFilter.selectionAction = { [unowned self] (index: Int, item: String) in
             self.vmBase.stringTextbookFilter.accept(item)
-            self.searchBarSearchButtonClicked(self.sbTextFilter)
         }
         _ = vmBase.stringTextbookFilter ~> btnTextbookFilter.rx.title(for: .normal)
+        vmBase.stringTextbookFilter.subscribe(onNext: { [unowned self] _ in
+            self.applyFilters()
+        }) ~ rx.disposeBag
     }
     
     override func refresh() {

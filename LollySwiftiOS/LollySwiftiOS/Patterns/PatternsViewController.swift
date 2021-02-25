@@ -11,7 +11,7 @@ import DropDown
 import RxSwift
 import NSObject_Rx
 
-class PatternsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
+class PatternsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var vm: PatternsViewModel!
     var arrPatterns: [MPattern] {  sbTextFilter.text != "" ? vm.arrPatternsFiltered! : vm.arrPatterns }
@@ -35,7 +35,6 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
         ddScopeFilter.selectRow(0)
         ddScopeFilter.selectionAction = { [unowned self] (index: Int, item: String) in
             vm.scopeFilter.accept(item)
-            self.searchBarSearchButtonClicked(self.sbTextFilter)
         }
         btnScopeFilter.setTitle(SettingsViewModel.arrScopePatternFilters[0], for: .normal)
         tableView.refreshControl = refreshControl
@@ -43,6 +42,12 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
         refresh(refreshControl)
         _ = vm.textFilter <~> sbTextFilter.rx.text.orEmpty
         _ = vm.scopeFilter ~> btnScopeFilter.rx.title(for: .normal)
+        vm.textFilter.subscribe(onNext: { [unowned self] _ in
+            self.applyFilters()
+        }) ~ rx.disposeBag
+        vm.scopeFilter.subscribe(onNext: { [unowned self] _ in
+            self.applyFilters()
+        }) ~ rx.disposeBag
     }
     
     @objc func refresh(_ sender: UIRefreshControl) {
@@ -118,11 +123,6 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
         let item = arrPatterns[indexPath.row]
         performSegue(withIdentifier: "browse pages", sender: item)
-    }
-
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.endEditing(true)
-        applyFilters()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
