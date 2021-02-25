@@ -34,10 +34,14 @@ class PhrasesLinkViewController: NSViewController, NSTableViewDataSource, NSTabl
             self.applyFilters()
         }
         vm.textFilter.accept(textFilter)
-        _ = vm.textFilter <~> sfTextFilter.rx.textSearch.orEmpty
+        _ = vm.textFilter <~> sfTextFilter.rx.text.orEmpty
         _ = vm.scopeFilter <~> scScopeFilter.rx.selectedLabel
-        sfTextFilter.rx.textSearch.subscribe(onNext: { [unowned self] _ in self.applyFilters() }) ~ rx.disposeBag
-        scScopeFilter.rx.selectedLabel.subscribe(onNext: { [unowned self] _ in self.applyFilters() }) ~ rx.disposeBag
+        sfTextFilter.rx.text.subscribe(onNext: { [unowned self] _ in
+            self.applyFilters()
+        }) ~ rx.disposeBag
+        scScopeFilter.rx.selectedLabel.subscribe(onNext: { [unowned self] _ in
+            self.applyFilters()
+        }) ~ rx.disposeBag
     }
     
     override func viewDidAppear() {
