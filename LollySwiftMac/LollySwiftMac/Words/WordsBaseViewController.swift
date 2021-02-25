@@ -137,6 +137,9 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
     func needRegainFocus() -> Bool {
         true
     }
+    
+    func applyFilters() {
+    }
 
     deinit {
         print("DEBUG: \(self.className) deinit")
@@ -160,12 +163,14 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
         }
         _ = vmWords.textFilter <~> sfFilter.rx.text.orEmpty
         _ = vmWords.scopeFilter <~> scScopeFilter.rx.selectedLabel
-        sfFilter.rx.searchFieldDidEndSearching.subscribe { [unowned self] _ in
+        sfFilter.rx.searchFieldDidStartSearching.subscribe { [unowned self] _ in
             self.vmWords.textFilter.accept(self.vmSettings.autoCorrectInput(text: self.vmWords.textFilter.value))
         } ~ rx.disposeBag
         sfFilter.rx.searchFieldDidEndSearching.subscribe { [unowned self] _ in
             self.scScopeFilter.performClick(self)
         } ~ rx.disposeBag
+        sfFilter.rx.text.subscribe(onNext: { [unowned self] _ in self.applyFilters() }) ~ rx.disposeBag
+        scScopeFilter.rx.selectedLabel.subscribe(onNext: { [unowned self] _ in self.applyFilters() }) ~ rx.disposeBag
     }
 
     override func settingsChanged() {

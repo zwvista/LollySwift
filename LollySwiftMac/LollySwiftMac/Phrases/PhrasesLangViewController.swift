@@ -13,20 +13,18 @@ import NSObject_Rx
 
 class PhrasesLangViewController: PhrasesBaseViewController {
     
-    @objc var vm: PhrasesLangViewModel!
+    var vm: PhrasesLangViewModel!
     override var vmPhrases: PhrasesBaseViewModel { vm }
     override var vmSettings: SettingsViewModel! { vm.vmSettings }
     var arrPhrases: [MLangPhrase] { vm.arrPhrasesFiltered ?? vm.arrPhrases }
     
-    func filterPhrase() {
+    override func applyFilters() {
         vm.applyFilters()
         tvPhrases.reloadData()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        sfFilter.rx.text.subscribe(onNext: { [unowned self] _ in self.filterPhrase() }) ~ rx.disposeBag
-        scScopeFilter.rx.selectedLabel.subscribe(onNext: { [unowned self] _ in self.filterPhrase() }) ~ rx.disposeBag
     }
     
     override func settingsChanged() {

@@ -33,7 +33,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     // https://stackoverflow.com/questions/2121907/drag-drop-reorder-rows-on-nstableview
     let tableRowDragType = NSPasteboard.PasteboardType(rawValue: "private.table-row")
     
-    func filterPattern() {
+    func applyFilters() {
         vm.applyFilters()
         self.tvPatterns.reloadData()
     }
@@ -46,14 +46,14 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
         tvWebPages.registerForDraggedTypes([tableRowDragType])
         _ = vm.textFilter <~> sfFilter.rx.text.orEmpty
         _ = vm.scopeFilter <~> scScopeFilter.rx.selectedLabel
-        sfFilter.rx.searchFieldDidEndSearching.subscribe { [unowned self] _ in
+        sfFilter.rx.searchFieldDidStartSearching.subscribe { [unowned self] _ in
             self.vm.textFilter.accept(self.vmSettings.autoCorrectInput(text: self.vm.textFilter.value))
         } ~ rx.disposeBag
         sfFilter.rx.searchFieldDidEndSearching.subscribe { [unowned self] _ in
             self.scScopeFilter.performClick(self)
         } ~ rx.disposeBag
-        sfFilter.rx.text.subscribe(onNext: { [unowned self] _ in self.filterPattern() }) ~ rx.disposeBag
-        scScopeFilter.rx.selectedLabel.subscribe(onNext: { [unowned self] _ in self.filterPattern() }) ~ rx.disposeBag
+        sfFilter.rx.text.subscribe(onNext: { [unowned self] _ in self.applyFilters() }) ~ rx.disposeBag
+        scScopeFilter.rx.selectedLabel.subscribe(onNext: { [unowned self] _ in self.applyFilters() }) ~ rx.disposeBag
     }
     
     // Hold a reference to the window controller in order to prevent it from being released

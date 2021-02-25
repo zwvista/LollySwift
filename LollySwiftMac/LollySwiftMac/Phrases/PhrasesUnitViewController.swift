@@ -13,7 +13,7 @@ import NSObject_Rx
 
 class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidation {
     
-    @objc var vm: PhrasesUnitViewModel!
+    var vm: PhrasesUnitViewModel!
     override var vmPhrases: PhrasesBaseViewModel { vm }
     var vmReview = EmbeddedReviewViewModel()
     override var vmSettings: SettingsViewModel! { vm.vmSettings }
@@ -23,15 +23,13 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     // https://stackoverflow.com/questions/2121907/drag-drop-reorder-rows-on-nstableview
     let tableRowDragType = NSPasteboard.PasteboardType(rawValue: "private.table-row")
     
-    func filterPhrase() {
+    override func applyFilters() {
         vm.applyFilters()
         tvPhrases.reloadData()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        sfFilter.rx.text.subscribe(onNext: { [unowned self] _ in self.filterPhrase() }) ~ rx.disposeBag
-        scScopeFilter.rx.selectedLabel.subscribe(onNext: { [unowned self] _ in self.filterPhrase() }) ~ rx.disposeBag
         tvPhrases.registerForDraggedTypes([tableRowDragType])
     }
     

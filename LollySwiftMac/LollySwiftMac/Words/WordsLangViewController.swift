@@ -13,7 +13,7 @@ import NSObject_Rx
 
 class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
 
-    @objc var vm: WordsLangViewModel!
+    var vm: WordsLangViewModel!
     override var vmWords: WordsBaseViewModel { vm }
     override var vmSettings: SettingsViewModel! { vm.vmSettings }
     var arrWords: [MLangWord] { vm.arrWordsFiltered ?? vm.arrWords }
@@ -25,8 +25,6 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        sfFilter.rx.text.subscribe(onNext: { [unowned self] _ in self.filterWord() }) ~ rx.disposeBag
-        scScopeFilter.rx.selectedLabel.subscribe(onNext: { [unowned self] _ in self.filterWord() }) ~ rx.disposeBag
     }
 
     override func settingsChanged() {

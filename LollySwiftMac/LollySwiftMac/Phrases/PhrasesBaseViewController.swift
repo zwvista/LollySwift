@@ -19,12 +19,14 @@ class PhrasesBaseViewController: WordsPhrasesBaseViewController {
         super.viewDidLoad()
         _ = vmPhrases.textFilter <~> sfFilter.rx.text.orEmpty
         _ = vmPhrases.scopeFilter <~> scScopeFilter.rx.selectedLabel
-        sfFilter.rx.searchFieldDidEndSearching.subscribe { _ in
+        sfFilter.rx.searchFieldDidStartSearching.subscribe { _ in
             self.vmPhrases.textFilter.accept(self.vmSettings.autoCorrectInput(text: self.vmPhrases.textFilter.value))
         } ~ rx.disposeBag
         sfFilter.rx.searchFieldDidEndSearching.subscribe { _ in
             self.scScopeFilter.performClick(self)
         } ~ rx.disposeBag
+        sfFilter.rx.text.subscribe(onNext: { [unowned self] _ in self.applyFilters() }) ~ rx.disposeBag
+        scScopeFilter.rx.selectedLabel.subscribe(onNext: { [unowned self] _ in self.applyFilters() }) ~ rx.disposeBag
     }
 
     override func settingsChanged() {

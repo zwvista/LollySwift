@@ -13,7 +13,7 @@ import NSObject_Rx
 
 class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation {
 
-    @objc var vm: WordsUnitViewModel!
+    var vm: WordsUnitViewModel!
     override var vmWords: WordsBaseViewModel { vm }
     override var vmSettings: SettingsViewModel! { vm.vmSettings }
     var arrWords: [MUnitWord] { vm.arrWordsFiltered == nil ? vm.arrWords : vm.arrWordsFiltered! }
@@ -21,17 +21,14 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
     @IBOutlet weak var pubTextbookFilter: NSPopUpButton!
     @IBOutlet weak var acTextbooks: NSArrayController!
 
-    func filterWord() {
+    override func applyFilters() {
         vm.applyFilters()
         tvWords.reloadData()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        sfFilter.rx.text.subscribe(onNext: { [unowned self] _ in self.filterWord() }) ~ rx.disposeBag
-        scScopeFilter.rx.selectedLabel.subscribe(onNext: { [unowned self] _ in self.filterWord() }) ~ rx.disposeBag
-        _ = vm.indexTextbookFilter <~> pubTextbookFilter.rx.selectedItemIndex
-        pubTextbookFilter.rx.selectedItemIndex.subscribe(onNext: { [unowned self] _ in self.filterWord() }) ~ rx.disposeBag
+        pubTextbookFilter.rx.selectedItemIndex.subscribe(onNext: { [unowned self] _ in self.applyFilters() }) ~ rx.disposeBag
     }
 
     override func settingsChanged() {
