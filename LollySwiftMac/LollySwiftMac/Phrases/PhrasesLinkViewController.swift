@@ -20,7 +20,7 @@ class PhrasesLinkViewController: NSViewController, NSTableViewDataSource, NSTabl
     var arrPhrases: [MLangPhrase] { vm.arrPhrasesFiltered ?? vm.arrPhrases }
 
     @IBOutlet weak var scScopeFilter: NSSegmentedControl!
-    @IBOutlet weak var sfFilter: NSSearchField!
+    @IBOutlet weak var sfTextFilter: NSSearchField!
     @IBOutlet weak var tableView: NSTableView!
     
     func filterPhrase() {
@@ -34,9 +34,9 @@ class PhrasesLinkViewController: NSViewController, NSTableViewDataSource, NSTabl
             self.filterPhrase()
         }
         vm.textFilter.accept(textFilter)
-        _ = vm.textFilter <~> sfFilter.rx.text.orEmpty
+        _ = vm.textFilter <~> sfTextFilter.rx.textSearch.orEmpty
         _ = vm.scopeFilter <~> scScopeFilter.rx.selectedLabel
-        sfFilter.rx.text.subscribe(onNext: { [unowned self] _ in self.filterPhrase() }) ~ rx.disposeBag
+        sfTextFilter.rx.textSearch.subscribe(onNext: { [unowned self] _ in self.filterPhrase() }) ~ rx.disposeBag
         scScopeFilter.rx.selectedLabel.subscribe(onNext: { [unowned self] _ in self.filterPhrase() }) ~ rx.disposeBag
     }
     
@@ -71,7 +71,7 @@ class PhrasesLinkViewController: NSViewController, NSTableViewDataSource, NSTabl
     }
 
     @IBAction func okClicked(_ sender: AnyObject) {
-        guard view.window?.firstResponder != sfFilter.window else {return}
+        guard view.window?.firstResponder != sfTextFilter.window else {return}
         // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
         self.commitEditing()
         var o = Observable.just(())

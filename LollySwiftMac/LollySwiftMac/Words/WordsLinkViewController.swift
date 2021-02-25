@@ -20,7 +20,7 @@ class WordsLinkViewController: NSViewController, NSTableViewDataSource, NSTableV
     var arrWords: [MLangWord] { vm.arrWordsFiltered ?? vm.arrWords }
 
     @IBOutlet weak var scScopeFilter: NSSegmentedControl!
-    @IBOutlet weak var sfFilter: NSSearchField!
+    @IBOutlet weak var sfTextFilter: NSSearchField!
     @IBOutlet weak var tableView: NSTableView!
     
     func filterWord() {
@@ -34,9 +34,9 @@ class WordsLinkViewController: NSViewController, NSTableViewDataSource, NSTableV
             self.filterWord()
         }
         vm.textFilter.accept(textFilter)
-        _ = vm.textFilter <~> sfFilter.rx.text.orEmpty
+        _ = vm.textFilter <~> sfTextFilter.rx.textSearch.orEmpty
         _ = vm.scopeFilter <~> scScopeFilter.rx.selectedLabel
-        sfFilter.rx.text.subscribe(onNext: { [unowned self] _ in self.filterWord() }) ~ rx.disposeBag
+        sfTextFilter.rx.textSearch.subscribe(onNext: { [unowned self] _ in self.filterWord() }) ~ rx.disposeBag
         scScopeFilter.rx.selectedLabel.subscribe(onNext: { [unowned self] _ in self.filterWord() }) ~ rx.disposeBag
     }
     
@@ -71,7 +71,7 @@ class WordsLinkViewController: NSViewController, NSTableViewDataSource, NSTableV
     }
 
     @IBAction func okClicked(_ sender: AnyObject) {
-        guard view.window?.firstResponder != sfFilter.window else {return}
+        guard view.window?.firstResponder != sfTextFilter.window else {return}
         // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
         self.commitEditing()
         var o = Observable.just(())

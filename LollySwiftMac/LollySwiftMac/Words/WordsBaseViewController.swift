@@ -14,7 +14,7 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
     
     @IBOutlet weak var tfNewWord: NSTextField!
     @IBOutlet weak var scScopeFilter: NSSegmentedControl!
-    @IBOutlet weak var sfFilter: NSSearchField!
+    @IBOutlet weak var sfTextFilter: NSSearchField!
     @IBOutlet weak var tvWords: NSTableView!
     @IBOutlet weak var tfStatusText: NSTextField!
     @IBOutlet weak var tvPhrases: NSTableView!
@@ -34,8 +34,8 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
     override func viewDidLoad() {
         super.viewDidLoad()
         settingsChanged()
-        sfFilter.rx.searchFieldDidEndSearching.subscribe { [unowned self] _ in self.applyFilters() } ~ rx.disposeBag
-        sfFilter.rx.text.subscribe(onNext: { [unowned self] _ in self.applyFilters() }) ~ rx.disposeBag
+        sfTextFilter.rx.searchFieldDidEndSearching.subscribe { [unowned self] _ in self.applyFilters() } ~ rx.disposeBag
+        sfTextFilter.rx.textSearch.subscribe(onNext: { [unowned self] _ in self.applyFilters() }) ~ rx.disposeBag
         scScopeFilter.rx.selectedLabel.subscribe(onNext: { [unowned self] _ in self.applyFilters() }) ~ rx.disposeBag
     }
     
@@ -49,7 +49,7 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
         // For some unknown reason, the placeholder string of the filter text field
         // cannot be set in the storyboard
         // https://stackoverflow.com/questions/5519512/nstextfield-placeholder-text-doesnt-show-unless-editing
-        sfFilter?.placeholderString = "Filter"
+        sfTextFilter?.placeholderString = "Filter"
     }
     override func viewWillDisappear() {
         super.viewWillDisappear()
@@ -164,9 +164,9 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
                 }
             }) ~ rx.disposeBag
         }
-        _ = vmWords.textFilter <~> sfFilter.rx.text.orEmpty
+        _ = vmWords.textFilter <~> sfTextFilter.rx.textSearch.orEmpty
         _ = vmWords.scopeFilter <~> scScopeFilter.rx.selectedLabel
-        sfFilter.rx.searchFieldDidStartSearching.subscribe { [unowned self] _ in
+        sfTextFilter.rx.searchFieldDidStartSearching.subscribe { [unowned self] _ in
             self.vmWords.textFilter.accept(self.vmSettings.autoCorrectInput(text: self.vmWords.textFilter.value))
         } ~ rx.disposeBag
     }

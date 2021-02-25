@@ -15,7 +15,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
 
     @IBOutlet weak var wvWebPage: WKWebView!
     @IBOutlet weak var scScopeFilter: NSSegmentedControl!
-    @IBOutlet weak var sfFilter: NSSearchField!
+    @IBOutlet weak var sfTextFilter: NSSearchField!
     @IBOutlet weak var tfURL: NSTextField!
     @IBOutlet weak var tvPatterns: NSTableView!
     @IBOutlet weak var tvWebPages: NSTableView!
@@ -44,13 +44,13 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
         wvWebPage.allowsMagnification = true
         wvWebPage.allowsBackForwardNavigationGestures = true
         tvWebPages.registerForDraggedTypes([tableRowDragType])
-        _ = vm.textFilter <~> sfFilter.rx.text.orEmpty
+        _ = vm.textFilter <~> sfTextFilter.rx.textSearch.orEmpty
         _ = vm.scopeFilter <~> scScopeFilter.rx.selectedLabel
-        sfFilter.rx.searchFieldDidStartSearching.subscribe { [unowned self] _ in
+        sfTextFilter.rx.searchFieldDidStartSearching.subscribe { [unowned self] _ in
             self.vm.textFilter.accept(self.vmSettings.autoCorrectInput(text: self.vm.textFilter.value))
         } ~ rx.disposeBag
-        sfFilter.rx.searchFieldDidEndSearching.subscribe { [unowned self] _ in self.applyFilters() } ~ rx.disposeBag
-        sfFilter.rx.text.subscribe(onNext: { [unowned self] _ in self.applyFilters() }) ~ rx.disposeBag
+        sfTextFilter.rx.searchFieldDidEndSearching.subscribe { [unowned self] _ in self.applyFilters() } ~ rx.disposeBag
+        sfTextFilter.rx.textSearch.subscribe(onNext: { [unowned self] _ in self.applyFilters() }) ~ rx.disposeBag
         scScopeFilter.rx.selectedLabel.subscribe(onNext: { [unowned self] _ in self.applyFilters() }) ~ rx.disposeBag
     }
     
@@ -64,7 +64,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
         // For some unknown reason, the placeholder string of the filter text field
         // cannot be set in the storyboard
         // https://stackoverflow.com/questions/5519512/nstextfield-placeholder-text-doesnt-show-unless-editing
-        sfFilter?.placeholderString = "Filter"
+        sfTextFilter?.placeholderString = "Filter"
     }
     override func viewWillDisappear() {
         super.viewWillDisappear()
