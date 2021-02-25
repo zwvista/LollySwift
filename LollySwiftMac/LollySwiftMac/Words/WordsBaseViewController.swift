@@ -34,9 +34,6 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
     override func viewDidLoad() {
         super.viewDidLoad()
         settingsChanged()
-        sfTextFilter.rx.searchFieldDidEndSearching.subscribe { [unowned self] _ in self.applyFilters() } ~ rx.disposeBag
-        sfTextFilter.rx.textSearch.subscribe(onNext: { [unowned self] _ in self.applyFilters() }) ~ rx.disposeBag
-        scScopeFilter.rx.selectedLabel.subscribe(onNext: { [unowned self] _ in self.applyFilters() }) ~ rx.disposeBag
     }
     
     // Hold a reference to the window controller in order to prevent it from being released
@@ -169,6 +166,15 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
         sfTextFilter.rx.searchFieldDidStartSearching.subscribe { [unowned self] _ in
             self.vmWords.textFilter.accept(self.vmSettings.autoCorrectInput(text: self.vmWords.textFilter.value))
         } ~ rx.disposeBag
+        sfTextFilter.rx.searchFieldDidEndSearching.subscribe { [unowned self] _ in
+            self.applyFilters()
+        } ~ rx.disposeBag
+        sfTextFilter.rx.textSearch.subscribe(onNext: { [unowned self] _ in
+            self.applyFilters()
+        }) ~ rx.disposeBag
+        scScopeFilter.rx.selectedLabel.subscribe(onNext: { [unowned self] _ in
+            self.applyFilters()
+        }) ~ rx.disposeBag
     }
 
     override func settingsChanged() {

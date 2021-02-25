@@ -24,6 +24,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     let tableRowDragType = NSPasteboard.PasteboardType(rawValue: "private.table-row")
 
     override func applyFilters() {
+        print(vm.textFilter.value)
         vm.applyFilters()
         tvWords.reloadData()
     }

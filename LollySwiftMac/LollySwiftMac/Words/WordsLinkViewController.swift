@@ -23,7 +23,7 @@ class WordsLinkViewController: NSViewController, NSTableViewDataSource, NSTableV
     @IBOutlet weak var sfTextFilter: NSSearchField!
     @IBOutlet weak var tableView: NSTableView!
     
-    func filterWord() {
+    func applyFilters() {
         vm.applyFilters()
         tableView.reloadData()
     }
@@ -31,13 +31,13 @@ class WordsLinkViewController: NSViewController, NSTableViewDataSource, NSTableV
     override func viewDidLoad() {
         super.viewDidLoad()
         vm = WordsLangViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) {
-            self.filterWord()
+            self.applyFilters()
         }
         vm.textFilter.accept(textFilter)
         _ = vm.textFilter <~> sfTextFilter.rx.textSearch.orEmpty
         _ = vm.scopeFilter <~> scScopeFilter.rx.selectedLabel
-        sfTextFilter.rx.textSearch.subscribe(onNext: { [unowned self] _ in self.filterWord() }) ~ rx.disposeBag
-        scScopeFilter.rx.selectedLabel.subscribe(onNext: { [unowned self] _ in self.filterWord() }) ~ rx.disposeBag
+        sfTextFilter.rx.textSearch.subscribe(onNext: { [unowned self] _ in self.applyFilters() }) ~ rx.disposeBag
+        scScopeFilter.rx.selectedLabel.subscribe(onNext: { [unowned self] _ in self.applyFilters() }) ~ rx.disposeBag
     }
     
     override func viewDidAppear() {

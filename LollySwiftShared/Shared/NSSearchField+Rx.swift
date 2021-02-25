@@ -91,6 +91,11 @@ extension Reactive where Base: NSSearchField {
         return ControlProperty(values: source, valueSink: observer.asObserver())
     }
     
+    public var controlTextDidChange: ControlEvent<()> {
+        let source = delegateSearch.methodInvoked(#selector(RxSearchFieldDelegateProxy.controlTextDidChange(_:))).map {_ in }
+        return ControlEvent(events: source)
+    }
+
     public var searchFieldDidStartSearching: ControlEvent<()> {
         let source = delegateSearch.methodInvoked(#selector(RxSearchFieldDelegateProxy.searchFieldDidStartSearching(_:))).map {_ in }
         return ControlEvent(events: source)

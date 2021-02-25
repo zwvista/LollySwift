@@ -22,6 +22,15 @@ class PhrasesBaseViewController: WordsPhrasesBaseViewController {
         sfTextFilter.rx.searchFieldDidStartSearching.subscribe { _ in
             self.vmPhrases.textFilter.accept(self.vmSettings.autoCorrectInput(text: self.vmPhrases.textFilter.value))
         } ~ rx.disposeBag
+        sfTextFilter.rx.searchFieldDidEndSearching.subscribe { [unowned self] _ in
+            self.applyFilters()
+        } ~ rx.disposeBag
+        sfTextFilter.rx.textSearch.subscribe(onNext: { [unowned self] _ in
+            self.applyFilters()
+        }) ~ rx.disposeBag
+        scScopeFilter.rx.selectedLabel.subscribe(onNext: { [unowned self] _ in
+            self.applyFilters()
+        }) ~ rx.disposeBag
     }
 
     override func settingsChanged() {

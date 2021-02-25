@@ -23,7 +23,7 @@ class PhrasesLinkViewController: NSViewController, NSTableViewDataSource, NSTabl
     @IBOutlet weak var sfTextFilter: NSSearchField!
     @IBOutlet weak var tableView: NSTableView!
     
-    func filterPhrase() {
+    func applyFilters() {
         vm.applyFilters()
         tableView.reloadData()
     }
@@ -31,13 +31,13 @@ class PhrasesLinkViewController: NSViewController, NSTableViewDataSource, NSTabl
     override func viewDidLoad() {
         super.viewDidLoad()
         vm = PhrasesLangViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) {
-            self.filterPhrase()
+            self.applyFilters()
         }
         vm.textFilter.accept(textFilter)
         _ = vm.textFilter <~> sfTextFilter.rx.textSearch.orEmpty
         _ = vm.scopeFilter <~> scScopeFilter.rx.selectedLabel
-        sfTextFilter.rx.textSearch.subscribe(onNext: { [unowned self] _ in self.filterPhrase() }) ~ rx.disposeBag
-        scScopeFilter.rx.selectedLabel.subscribe(onNext: { [unowned self] _ in self.filterPhrase() }) ~ rx.disposeBag
+        sfTextFilter.rx.textSearch.subscribe(onNext: { [unowned self] _ in self.applyFilters() }) ~ rx.disposeBag
+        scScopeFilter.rx.selectedLabel.subscribe(onNext: { [unowned self] _ in self.applyFilters() }) ~ rx.disposeBag
     }
     
     override func viewDidAppear() {
