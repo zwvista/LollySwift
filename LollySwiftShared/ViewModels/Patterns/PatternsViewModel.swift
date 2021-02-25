@@ -8,6 +8,7 @@
 
 import Foundation
 import RxSwift
+import RxRelay
 
 class PatternsViewModel: NSObject {
     var vmSettings: SettingsViewModel
@@ -16,6 +17,8 @@ class PatternsViewModel: NSObject {
     var selectedPatternItem: MPattern?
     var selectedPattern: String { selectedPatternItem?.PATTERN ?? "" }
     var selectedPatternID: Int { selectedPatternItem?.ID ?? 0 }
+    let textFilter = BehaviorRelay(value: "")
+    let scopeFilter = BehaviorRelay(value: SettingsViewModel.arrScopePatternFilters[0])
 
     public init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> ()) {
         self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
@@ -29,13 +32,13 @@ class PatternsViewModel: NSObject {
         }
     }
     
-    func applyFilters(textFilter: String, scope: String) {
-        if textFilter.isEmpty {
+    func applyFilters() {
+        if textFilter.value.isEmpty {
             arrPatternsFiltered = nil
         } else {
             arrPatternsFiltered = arrPatterns
-            if !textFilter.isEmpty {
-                arrPatternsFiltered = arrPatternsFiltered!.filter { (scope == "Pattern" ? $0.PATTERN : scope == "Note" ? $0.NOTE : $0.TAGS).lowercased().contains(textFilter.lowercased()) }
+            if !textFilter.value.isEmpty {
+                arrPatternsFiltered = arrPatternsFiltered!.filter { (scopeFilter.value == "Pattern" ? $0.PATTERN : scopeFilter.value == "Note" ? $0.NOTE : $0.TAGS).lowercased().contains(textFilter.value.lowercased()) }
             }
         }
     }

@@ -11,7 +11,7 @@ import WebKit
 import RxSwift
 import NSObject_Rx
 
-class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate, NSSearchFieldDelegate, NSMenuItemValidation, NSToolbarItemValidation {
+class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate, NSMenuItemValidation, NSToolbarItemValidation {
 
     @IBOutlet weak var wvWebPage: WKWebView!
     @IBOutlet weak var scScopeFilter: NSSegmentedControl!
@@ -23,8 +23,6 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
 
     var vm: PatternsViewModel!
     var vmWP: PatternsWebPagesViewModel!
-    @objc var newPattern = ""
-    @objc var textFilter = ""
     let synth = NSSpeechSynthesizer()
     var isSpeaking = true
     var vmSettings: SettingsViewModel! { vm.vmSettings }
@@ -34,6 +32,11 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     // https://developer.apple.com/videos/play/wwdc2011/120/
     // https://stackoverflow.com/questions/2121907/drag-drop-reorder-rows-on-nstableview
     let tableRowDragType = NSPasteboard.PasteboardType(rawValue: "private.table-row")
+    
+    func filterPattern() {
+        vm.applyFilters()
+        self.tvPatterns.reloadData()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +44,16 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
         wvWebPage.allowsMagnification = true
         wvWebPage.allowsBackForwardNavigationGestures = true
         tvWebPages.registerForDraggedTypes([tableRowDragType])
+        _ = vm.textFilter <~> sfFilter.rx.text.orEmpty
+        _ = vm.scopeFilter <~> scScopeFilter.rx.selectedLabel
+        sfFilter.rx.searchFieldDidEndSearching.subscribe { [unowned self] _ in
+            self.vm.textFilter.accept(self.vmSettings.autoCorrectInput(text: self.vm.textFilter.value))
+        } ~ rx.disposeBag
+        sfFilter.rx.searchFieldDidEndSearching.subscribe { [unowned self] _ in
+            self.scScopeFilter.performClick(self)
+        } ~ rx.disposeBag
+        sfFilter.rx.text.subscribe(onNext: { [unowned self] _ in self.filterPattern() }) ~ rx.disposeBag
+        scScopeFilter.rx.selectedLabel.subscribe(onNext: { [unowned self] _ in self.filterPattern() }) ~ rx.disposeBag
     }
     
     // Hold a reference to the window controller in order to prevent it from being released
@@ -276,20 +289,6 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
         tableView.endUpdates()
         
         return true
-    }
-    
-    func searchFieldDidStartSearching(_ sender: NSSearchField) {
-        textFilter = vmSettings.autoCorrectInput(text: textFilter)
-        sfFilter.stringValue = textFilter
-    }
-
-    func searchFieldDidEndSearching(_ sender: NSSearchField) {
-        scScopeFilter.performClick(self)
-    }
-    
-    @IBAction func filterPattern(_ sender: AnyObject) {
-        vm.applyFilters(textFilter: textFilter, scope: scScopeFilter.selectedSegment == 0 ? "Pattern" : scScopeFilter.selectedSegment == 1 ? "Note" : "Tags")
-        self.tvPatterns.reloadData()
     }
     
     @IBAction func mergePatterns(_ sender: AnyObject) {
