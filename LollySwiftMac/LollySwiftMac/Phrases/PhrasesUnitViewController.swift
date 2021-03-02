@@ -135,11 +135,9 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
 
     @IBAction func batchEdit(_ sender: AnyObject) {
         let batchVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesUnitBatchEditViewController") as! PhrasesUnitBatchEditViewController
-        batchVC.vm = vm
         let i = tvPhrases.selectedRow
         let item = i == -1 ? nil : arrPhrases[tvPhrases.selectedRow]
-        batchVC.unit = item?.UNIT ?? vmSettings.USUNITTO
-        batchVC.part = item?.PART ?? vmSettings.USPARTTO
+        batchVC.startEdit(vm: vm, unit: item?.UNIT ?? vmSettings.USUNITTO, part: item?.PART ?? vmSettings.USPARTTO)
         batchVC.complete = { self.doRefresh() }
         self.presentAsModalWindow(batchVC)
     }
