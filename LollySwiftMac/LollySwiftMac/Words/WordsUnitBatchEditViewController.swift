@@ -12,9 +12,10 @@ import NSObject_Rx
 
 class WordsUnitBatchEditViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 
-    @objc var vm: WordsUnitViewModel!
+    var vmEdit: WordsUnitBatchEditViewModel!
+    var vmSettings: SettingsViewModel { vmEdit.vm.vmSettings }
     var complete: (() -> Void)?
-    var arrWords: [MUnitWord] { vm.arrWords }
+    var arrWords: [MUnitWord] { vmEdit.vm.arrWords }
 
     @IBOutlet weak var acUnits: NSArrayController!
     @IBOutlet weak var acParts: NSArrayController!
@@ -25,18 +26,38 @@ class WordsUnitBatchEditViewController: NSViewController, NSTableViewDataSource,
     @IBOutlet weak var chkUnit: NSButton!
     @IBOutlet weak var chkPart: NSButton!
     @IBOutlet weak var chkSeqNum: NSButton!
+    @IBOutlet weak var btnOK: NSButton!
 
-    @objc var unitChecked = false
-    @objc var partChecked = false
-    @objc var seqnumChecked = false
-    @objc var unit = 1
-    @objc var part = 1
-    @objc var seqnum = 0
+    func startEdit(vm: WordsUnitViewModel, unit: Int, part: Int) {
+        vmEdit = WordsUnitBatchEditViewModel(vm: vm, unit: unit, part: part)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        acUnits.content = vm.vmSettings.arrUnits
-        acParts.content = vm.vmSettings.arrParts
+        acUnits.content = vmSettings.arrUnits
+        acParts.content = vmSettings.arrParts
+        _ = vmEdit.indexUNIT <~> pubUnit.rx.selectedItemIndex
+        _ = vmEdit.indexPART <~> pubPart.rx.selectedItemIndex
+        _ = vmEdit.SEQNUM <~> tfSeqNum.rx.text.orEmpty
+        _ = vmEdit.unitIsChecked <~> chkUnit.rx.isOn
+        _ = vmEdit.partIsChecked <~> chkPart.rx.isOn
+        _ = vmEdit.seqnumIsChecked <~> chkSeqNum.rx.isOn
+        _ = vmEdit.unitIsChecked ~> pubUnit.rx.isEnabled
+        _ = vmEdit.partIsChecked ~> pubPart.rx.isEnabled
+        _ = vmEdit.seqnumIsChecked ~> tfSeqNum.rx.isEnabled
+        btnOK.rx.tap.flatMap { [unowned self] _ -> Observable<()> in
+            // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
+            self.commitEditing()
+            var rows = [Bool]()
+            for i in 0..<tableView.numberOfRows {
+                let chk = (tableView.view(atColumn: 0, row: i, makeIfNecessary: false)! as! LollyCheckCell).chk!
+                rows.append(chk.state == .on)
+            }
+            return self.vmEdit.onOK(rows: rows)
+        }.subscribe(onNext: { [unowned self] in
+            self.complete?()
+            self.dismiss(self.btnOK)
+        }) ~ rx.disposeBag
     }
     
     override func viewDidAppear() {
@@ -67,27 +88,6 @@ class WordsUnitBatchEditViewController: NSViewController, NSTableViewDataSource,
                 !tableView.selectedRowIndexes.contains(i) ? chk.state :
                 n == 2 ? .on : .off
         }
-    }
-
-    @IBAction func okClicked(_ sender: AnyObject) {
-        // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
-        self.commitEditing()
-        var o = Observable.just(())
-        for i in 0..<tableView.numberOfRows {
-            let chk = (tableView.view(atColumn: 0, row: i, makeIfNecessary: false)! as! LollyCheckCell).chk!
-            guard chk.state == .on else {continue}
-            let item = arrWords[i]
-            if unitChecked || partChecked || seqnumChecked {
-                if unitChecked { item.UNIT = unit }
-                if partChecked { item.PART = part }
-                if seqnumChecked { item.SEQNUM += seqnum }
-                o = o.concat(vm.update(item: item).map {_ in })
-            }
-        }
-        o.subscribe(onNext: {
-            self.complete?()
-            self.dismiss(sender)
-        }) ~ rx.disposeBag
     }
 
     deinit {

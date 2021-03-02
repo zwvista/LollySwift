@@ -23,6 +23,17 @@ extension Reactive where Base: NSButton {
             }
         )
     }
+
+    /// Reactive wrapper for `isOn` property`.
+    public var isOn: ControlProperty<Bool> {
+        return self.base.rx.controlProperty(
+            getter: { control in
+                return control.state == .on
+            }, setter: { (control: NSButton, isOn: Bool) in
+                control.state = isOn ? .on : .off
+            }
+        )
+    }
 }
 
 #endif

@@ -2324,9 +2324,6 @@ DQ
 DQ
 </string>
                                 </buttonCell>
-                                <connections>
-                                    <action selector="okClicked:" target="eyu-wA-IBh" id="ItS-SH-Iku"/>
-                                </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RAD-kz-mWQ">
                                 <rect key="frame" x="361" y="22" width="76" height="32"/>
@@ -2347,9 +2344,6 @@ Gw
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
-                                <connections>
-                                    <binding destination="eyu-wA-IBh" name="value" keyPath="unitChecked" id="Jrf-Ex-1fg"/>
-                                </connections>
                             </button>
                             <popUpButton verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gy2-Uv-LPj">
                                 <rect key="frame" x="118" y="466" width="205" height="25"/>
@@ -2368,8 +2362,6 @@ Gw
                                     <binding destination="AZ5-BW-U8S" name="content" keyPath="arrangedObjects" id="mfl-GY-NLj"/>
                                     <binding destination="AZ5-BW-U8S" name="contentValues" keyPath="arrangedObjects.label" previousBinding="vnI-WG-ZiK" id="Oqp-WL-yTA"/>
                                     <binding destination="AZ5-BW-U8S" name="contentObjects" keyPath="arrangedObjects.value" previousBinding="mfl-GY-NLj" id="vnI-WG-ZiK"/>
-                                    <binding destination="eyu-wA-IBh" name="selectedObject" keyPath="unit" previousBinding="Oqp-WL-yTA" id="WuF-hu-KfC"/>
-                                    <binding destination="eyu-wA-IBh" name="enabled" keyPath="unitChecked" id="XYR-dW-k0W"/>
                                 </connections>
                             </popUpButton>
                             <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d9b-6J-0IQ">
@@ -2378,9 +2370,6 @@ Gw
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
-                                <connections>
-                                    <binding destination="eyu-wA-IBh" name="value" keyPath="partChecked" id="prg-Td-MeX"/>
-                                </connections>
                             </button>
                             <popUpButton verticalHuggingPriority="750" verticalCompressionResistancePriority="751" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fJq-9U-2a4">
                                 <rect key="frame" x="118" y="431" width="205" height="25"/>
@@ -2399,8 +2388,6 @@ Gw
                                     <binding destination="fVu-Eu-8la" name="content" keyPath="arrangedObjects" id="FVz-lP-0yG"/>
                                     <binding destination="fVu-Eu-8la" name="contentValues" keyPath="arrangedObjects.label" previousBinding="qaq-ds-MLl" id="NHx-OO-ktH"/>
                                     <binding destination="fVu-Eu-8la" name="contentObjects" keyPath="arrangedObjects.value" previousBinding="FVz-lP-0yG" id="qaq-ds-MLl"/>
-                                    <binding destination="eyu-wA-IBh" name="selectedObject" keyPath="part" previousBinding="NHx-OO-ktH" id="EnX-ji-76U"/>
-                                    <binding destination="eyu-wA-IBh" name="enabled" keyPath="partChecked" id="z3a-qQ-Gzy"/>
                                 </connections>
                             </popUpButton>
                             <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="giE-1J-gQm">
@@ -2409,9 +2396,6 @@ Gw
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
-                                <connections>
-                                    <binding destination="eyu-wA-IBh" name="value" keyPath="seqnumChecked" id="Zw0-1j-Czc"/>
-                                </connections>
                             </button>
                             <textField verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="u8b-xT-mEO">
                                 <rect key="frame" x="120" y="400" width="200" height="21"/>
@@ -2423,10 +2407,6 @@ Gw
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
-                                <connections>
-                                    <binding destination="eyu-wA-IBh" name="value" keyPath="seqnum" id="zYd-zB-eqw"/>
-                                    <binding destination="eyu-wA-IBh" name="enabled" keyPath="seqnumChecked" id="EKM-Vd-1jJ"/>
-                                </connections>
                             </textField>
                             <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oxl-ww-6Dx">
                                 <rect key="frame" x="14" y="356" width="56" height="32"/>
@@ -2504,6 +2484,7 @@ Gw
                     <connections>
                         <outlet property="acParts" destination="fVu-Eu-8la" id="Nvd-9F-6cn"/>
                         <outlet property="acUnits" destination="AZ5-BW-U8S" id="m3k-jW-RTb"/>
+                        <outlet property="btnOK" destination="25w-P2-1xV" id="MJu-hw-GeG"/>
                         <outlet property="chkPart" destination="d9b-6J-0IQ" id="2JU-97-fjI"/>
                         <outlet property="chkSeqNum" destination="giE-1J-gQm" id="x6M-ie-MYH"/>
                         <outlet property="chkUnit" destination="V1h-DM-a3d" id="G0g-yY-6Bk"/>

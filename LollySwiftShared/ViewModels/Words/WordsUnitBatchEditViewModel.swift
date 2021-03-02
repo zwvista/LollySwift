@@ -12,33 +12,35 @@ import RxRelay
 
 class WordsUnitBatchEditViewModel: NSObject {
     var vm: WordsUnitViewModel!
-    var item: MUnitWord!
-    var itemEdit: MUnitWordEdit!
     let isOKEnabled = BehaviorRelay(value: false)
 
     let indexUNIT = BehaviorRelay(value: 0)
+    var UNIT: Int { vm.vmSettings.arrUnits[indexUNIT.value].value }
     let indexPART = BehaviorRelay(value: 0)
+    var PART: Int { vm.vmSettings.arrParts[indexPART.value].value }
     let SEQNUM = BehaviorRelay(value: "")
     let unitIsChecked = BehaviorRelay(value: false)
     let partIsChecked = BehaviorRelay(value: false)
     let seqnumIsChecked = BehaviorRelay(value: false)
 
-    init(vm: WordsUnitViewModel) {
+    init(vm: WordsUnitViewModel, unit: Int, part: Int) {
         self.vm = vm
-        item = vm.newUnitWord()
-        itemEdit = MUnitWordEdit(x: item)
+        indexUNIT.accept(vm.vmSettings.arrUnits.firstIndex { $0.value == unit }!)
+        indexPART.accept(vm.vmSettings.arrParts.firstIndex { $0.value == part }!)
     }
     
-    func onOK() -> Observable<()> {
-        itemEdit.save(to: item)
+    func onOK(rows: [Bool]) -> Observable<()> {
         var o = Observable.just(())
-        let words = itemEdit.WORDS.value.split("\n")
-        for s in words {
-            let item2 = MUnitWord()
-            copyProperties(from: item, to: item2)
-            item2.WORD = vm.vmSettings.autoCorrectInput(text: s)
-            o = o.flatMap { [unowned self] _ in self.vm.create(item: item2) }
-            item.SEQNUM += 1
+        for i in rows.indices {
+            let isChecked = rows[i]
+            guard isChecked else {continue}
+            let item = vm.arrWords[i]
+            if unitIsChecked.value || partIsChecked.value || seqnumIsChecked.value {
+                if unitIsChecked.value { item.UNIT = UNIT }
+                if partIsChecked.value { item.PART = PART }
+                if seqnumIsChecked.value { item.SEQNUM += SEQNUM.value.toInt()! }
+                o = o.flatMap { [unowned self] _ in self.vm.update(item: item) }
+            }
         }
         return o
     }
