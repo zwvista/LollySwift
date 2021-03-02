@@ -22,7 +22,10 @@ class WordsUnitBatchEditViewController: NSViewController, NSTableViewDataSource,
     @IBOutlet weak var pubPart: NSPopUpButton!
     @IBOutlet weak var tfSeqNum: NSTextField!
     @IBOutlet weak var tableView: NSTableView!
-    
+    @IBOutlet weak var chkUnit: NSButton!
+    @IBOutlet weak var chkPart: NSButton!
+    @IBOutlet weak var chkSeqNum: NSButton!
+
     @objc var unitChecked = false
     @objc var partChecked = false
     @objc var seqnumChecked = false
