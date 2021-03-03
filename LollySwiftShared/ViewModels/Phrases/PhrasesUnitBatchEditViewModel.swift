@@ -31,8 +31,7 @@ class PhrasesUnitBatchEditViewModel: NSObject {
     
     func onOK(rows: [Bool]) -> Observable<()> {
         var o = Observable.just(())
-        for i in rows.indices {
-            let isChecked = rows[i]
+        for (i, isChecked) in rows.enumerated() {
             guard isChecked else {continue}
             let item = vm.arrPhrases[i]
             if unitIsChecked.value || partIsChecked.value || seqnumIsChecked.value {
