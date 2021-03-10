@@ -13,6 +13,7 @@ import RxSwift
 class WordsSearchViewController: WordsBaseViewController {
     
     @objc var vm: WordsSearchViewModel!
+    override var vmWords: WordsBaseViewModel { vm }
     override var vmSettings: SettingsViewModel! { vm.vmSettings }
 
     override func viewDidLoad() {

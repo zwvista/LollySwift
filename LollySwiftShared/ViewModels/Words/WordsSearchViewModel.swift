@@ -15,6 +15,8 @@ class WordsSearchViewModel: WordsBaseViewModel {
     public init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> ()) {
         super.init(settings: settings, needCopy: needCopy)
         arrWords.removeAll()
-        complete()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            complete()
+        }
     }
 }

@@ -161,20 +161,22 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
                 }
             }) ~ rx.disposeBag
         }
-        _ = vmWords.textFilter <~> sfTextFilter.rx.text.orEmpty
-        _ = vmWords.scopeFilter <~> scScopeFilter.rx.selectedLabel
-        sfTextFilter.rx.searchFieldDidStartSearching.subscribe { [unowned self] _ in
-            self.vmWords.textFilter.accept(self.vmSettings.autoCorrectInput(text: self.vmWords.textFilter.value))
-        } ~ rx.disposeBag
-        sfTextFilter.rx.searchFieldDidEndSearching.subscribe { [unowned self] _ in
-            self.applyFilters()
-        } ~ rx.disposeBag
-        sfTextFilter.rx.text.subscribe(onNext: { [unowned self] _ in
-            self.applyFilters()
-        }) ~ rx.disposeBag
-        scScopeFilter.rx.selectedLabel.subscribe(onNext: { [unowned self] _ in
-            self.applyFilters()
-        }) ~ rx.disposeBag
+        if let sfTextFilter = sfTextFilter {
+            _ = vmWords.textFilter <~> sfTextFilter.rx.text.orEmpty
+            _ = vmWords.scopeFilter <~> scScopeFilter.rx.selectedLabel
+            sfTextFilter.rx.searchFieldDidStartSearching.subscribe { [unowned self] _ in
+                self.vmWords.textFilter.accept(self.vmSettings.autoCorrectInput(text: self.vmWords.textFilter.value))
+            } ~ rx.disposeBag
+            sfTextFilter.rx.searchFieldDidEndSearching.subscribe { [unowned self] _ in
+                self.applyFilters()
+            } ~ rx.disposeBag
+            sfTextFilter.rx.text.subscribe(onNext: { [unowned self] _ in
+                self.applyFilters()
+            }) ~ rx.disposeBag
+            scScopeFilter.rx.selectedLabel.subscribe(onNext: { [unowned self] _ in
+                self.applyFilters()
+            }) ~ rx.disposeBag
+        }
     }
 
     override func settingsChanged() {
