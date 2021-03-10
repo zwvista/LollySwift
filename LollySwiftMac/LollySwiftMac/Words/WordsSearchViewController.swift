@@ -21,10 +21,8 @@ class WordsSearchViewController: WordsBaseViewController {
     }
 
     override func settingsChanged() {
-        vm = WordsSearchViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) {
-            guard self.vm != nil else {return}
-            self.refreshTableView(self)
-        }
+        vm = WordsSearchViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true)
+        tvWords.reloadData()
         super.settingsChanged()
     }
 
@@ -38,13 +36,8 @@ class WordsSearchViewController: WordsBaseViewController {
 
     override func addNewWord() {
         guard !vm.newWord.value.isEmpty else {return}
-        let item = MUnitWord()
-        item.WORD = vm.newWord.value
-        item.SEQNUM = vm.arrWords.count + 1
-        item.NOTE = ""
-        vm.arrWords.append(item)
+        vm.addNewWord()
         tvWords.reloadData()
-        vm.newWord.accept("")
         tvWords.selectRowIndexes(IndexSet(integer: vm.arrWords.count - 1), byExtendingSelection: false)
         responder = tfNewWord
     }

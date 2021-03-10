@@ -11,9 +11,13 @@ import RxSwift
 
 class WordsSearchViewModel: WordsBaseViewModel {
     var arrWords = [MUnitWord]()
-
-    public init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> ()) {
-        super.init(settings: settings, needCopy: needCopy)
-        complete()
+    
+    func addNewWord() {
+        let item = MUnitWord()
+        item.WORD = newWord.value
+        item.SEQNUM = arrWords.count + 1
+        item.NOTE = ""
+        arrWords.append(item)
+        newWord.accept("")
     }
 }
