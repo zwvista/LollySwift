@@ -12,7 +12,7 @@ import RxSwift
 
 class WordsSearchViewController: WordsBaseViewController {
     
-    @objc var vm: WordsSearchViewModel!
+    var vm: WordsSearchViewModel!
     override var vmWords: WordsBaseViewModel { vm }
     override var vmSettings: SettingsViewModel! { vm.vmSettings }
 
@@ -22,6 +22,7 @@ class WordsSearchViewController: WordsBaseViewController {
 
     override func settingsChanged() {
         vm = WordsSearchViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) {
+            guard self.vm != nil else {return}
             self.refreshTableView(self)
         }
         super.settingsChanged()
@@ -43,7 +44,6 @@ class WordsSearchViewController: WordsBaseViewController {
         item.NOTE = ""
         vm.arrWords.append(item)
         tvWords.reloadData()
-        tfNewWord.stringValue = ""
         vm.newWord.accept("")
         tvWords.selectRowIndexes(IndexSet(integer: vm.arrWords.count - 1), byExtendingSelection: false)
         responder = tfNewWord
