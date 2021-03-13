@@ -33,6 +33,11 @@ class TransformDetailViewController: NSViewController, NSTableViewDataSource, NS
         tvTranformItems.reloadData()
         tvTranformItems.registerForDraggedTypes([tableRowDragType])
     }
+    
+    override func viewDidAppear() {
+        super.viewDidAppear()
+        view.window?.title = "Transform Edit"
+    }
 
     func numberOfRows(in tableView: NSTableView) -> Int {
         vm.arrTranformItems.count

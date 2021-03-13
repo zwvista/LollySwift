@@ -56,18 +56,29 @@ class CommonApi {
     static func doTransform(text: String, item: MTransformItem) -> String {
         let dic = ["<delete>": "", "\\t": "\t", "\\n": "\n"]
         var s = text
-        let regex = try! Regex(pattern: item.extractor)
+        // https://github.com/crossroadlabs/Regex/issues/51
+//        let regex = try! Regex(pattern: item.extractor)
+        let regex2 = try! NSRegularExpression(pattern: item.extractor)
         var replacement = item.replacement
         if replacement.starts(with: "<extract>") {
             replacement = String(replacement.dropFirst("<extract>".length))
-            let ms = regex.findAll(in: s)
-            s = ms.reduce("", { (acc, m) in acc + m.matched })
+//            let ms = regex.findAll(in: s)
+            let ms = regex2.matches(in: s, range: NSRange(s.startIndex..., in: s))
+            var i = 1
+            s = ms.reduce("", { (acc, m) -> String in
+//                let s2 = m.matched
+                let s2 = s[Range(m.range(at: 0), in: s)!]
+                print("[TRANSFORM\(i)]\(s2)[/TRANSFORM\(i)]")
+                i += 1
+                return acc + s2
+            })
             if s.isEmpty { return s }
         }
         for (key, value) in dic {
             replacement = replacement.replacingOccurrences(of: key, with: value)
         }
-        s = regex.replaceAll(in: s, with: replacement)
+//        s = regex.replaceAll(in: s, with: replacement)
+        s = regex2.stringByReplacingMatches(in: s, range: NSRange(s.startIndex..., in: s), withTemplate: replacement)
         return s
     }
     
