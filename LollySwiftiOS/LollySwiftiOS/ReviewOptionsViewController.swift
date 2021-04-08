@@ -32,11 +32,13 @@ class ReviewOptionsViewController: UITableViewController {
         vm = ReviewOptionsViewModel(options: options)
         
         ddReviewMode.anchorView = reviewModeCell
-        ddReviewMode.dataSource = ["Review(Auto)", "Review(Manual)", "Test", "Textbook"]
+        ddReviewMode.dataSource = SettingsViewModel.reviewModes
         ddReviewMode.selectionAction = { [unowned self] (index: Int, item: String) in
             self.vm.optionsEdit.mode.accept(index)
+            self.vm.optionsEdit.modeString.accept(item)
         }
 
+        _ = vm.optionsEdit.modeString ~> lblReviewMode.rx.text
         _ = vm.optionsEdit.shuffled <~> swOrder.rx.isOn
         _ = vm.optionsEdit.speakingEnabled <~> swSpeak.rx.isOn
 //        _ = vm.optionsEdit.interval <~> stpInterval.rx.integerValue

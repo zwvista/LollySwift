@@ -27,6 +27,7 @@ class MReviewOptions: NSObject {
 
 class MReviewOptionsEdit {
     let mode: BehaviorRelay<Int>
+    let modeString: BehaviorRelay<String>
     let interval: BehaviorRelay<Int>
     let shuffled: BehaviorRelay<Bool>
     let groupCount: BehaviorRelay<Int>
@@ -36,6 +37,7 @@ class MReviewOptionsEdit {
 
     init(x: MReviewOptions) {
         mode = BehaviorRelay(value: x.mode.rawValue)
+        modeString = BehaviorRelay(value: SettingsViewModel.reviewModes[x.mode.rawValue])
         interval = BehaviorRelay(value: x.interval)
         shuffled = BehaviorRelay(value: x.shuffled)
         groupCount = BehaviorRelay(value: x.groupCount)

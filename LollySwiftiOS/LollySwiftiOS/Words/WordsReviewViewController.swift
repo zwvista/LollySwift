@@ -93,7 +93,10 @@ class WordsReviewViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
         guard segue.identifier == "Done" else {return}
-        vm.newTest()
+        if let controller = segue.source as? ReviewOptionsViewController {
+            controller.vm.onOK()
+            vm.newTest()
+        }
     }
 
     deinit {
