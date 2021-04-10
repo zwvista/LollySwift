@@ -163,7 +163,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     
     @IBAction func doubleAction(_ sender: AnyObject) {
         if NSApp.currentEvent!.modifierFlags.contains(.option) {
-            linkExistingPhrases(sender)
+            associateExistingPhrases(sender)
         } else {
             editWord(sender)
         }
@@ -275,14 +275,14 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
         self.presentAsSheet(optionsVC)
     }
 
-    @IBAction func linkNewPhrase(_ sender: AnyObject) {
+    @IBAction func associateNewPhrase(_ sender: AnyObject) {
         guard vm.selectedWordID != 0 else {return}
         (NSApplication.shared.delegate as! AppDelegate).addNewUnitPhrase(wordid: vm.selectedWordID)
     }
 
-    @IBAction func linkExistingPhrases(_ sender: AnyObject) {
+    @IBAction func associateExistingPhrases(_ sender: AnyObject) {
         guard vm.selectedWordID != 0 else {return}
-        let detailVC = NSStoryboard(name: "Phrases", bundle: nil).instantiateController(withIdentifier: "PhrasesLinkViewController") as! PhrasesLinkViewController
+        let detailVC = NSStoryboard(name: "Phrases", bundle: nil).instantiateController(withIdentifier: "PhrasesAssociateViewController") as! PhrasesAssociateViewController
         detailVC.textFilter = vm.selectedWord
         detailVC.wordid = vm.selectedWordID
         detailVC.complete = {

@@ -69,7 +69,7 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
     
     @IBAction func doubleAction(_ sender: AnyObject) {
         if NSApp.currentEvent!.modifierFlags.contains(.option) {
-            linkPhrases(sender)
+            associatePhrases(sender)
         } else {
             editWord(sender)
         }
@@ -112,9 +112,9 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
         tfStatusText.stringValue = "\(tvWords.numberOfRows) Words in \(vmSettings.LANGINFO)"
     }
 
-    @IBAction func linkPhrases(_ sender: AnyObject) {
+    @IBAction func associatePhrases(_ sender: AnyObject) {
         guard vm.selectedWordID != 0 else {return}
-        let detailVC = NSStoryboard(name: "Phrases", bundle: nil).instantiateController(withIdentifier: "PhrasesLinkViewController") as! PhrasesLinkViewController
+        let detailVC = NSStoryboard(name: "Phrases", bundle: nil).instantiateController(withIdentifier: "PhrasesAssociateViewController") as! PhrasesAssociateViewController
         detailVC.textFilter = vm.selectedWord
         detailVC.wordid = vm.selectedWordID
         detailVC.complete = {

@@ -1,5 +1,5 @@
 //
-//  PhrasesLinkViewController.swift
+//  PhrasesAssociateViewController.swift
 //  LollySwiftMac
 //
 //  Created by 趙偉 on 2019/08/04.
@@ -10,7 +10,7 @@ import Cocoa
 import RxSwift
 import NSObject_Rx
 
-class PhrasesLinkViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate {
+class PhrasesAssociateViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate {
 
     var vm: PhrasesLangViewModel!
     var vmSettings: SettingsViewModel! { vm.vmSettings }
@@ -47,7 +47,7 @@ class PhrasesLinkViewController: NSViewController, NSTableViewDataSource, NSTabl
     override func viewDidAppear() {
         super.viewDidAppear()
         // https://stackoverflow.com/questions/24235815/cocoa-how-to-set-window-title-from-within-view-controller-in-swift
-        view.window?.title = "Link Phrase"
+        view.window?.title = "Associate Phrase"
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
@@ -84,7 +84,7 @@ class PhrasesLinkViewController: NSViewController, NSTableViewDataSource, NSTabl
             guard (col as! LollyCheckCell).chk!.state == .on else {continue}
             let item = arrPhrases[i]
             if wordid != 0 {
-                o = o.concat(MWordPhrase.link(wordid: wordid, phraseid: item.PHRASEID))
+                o = o.concat(MWordPhrase.associate(wordid: wordid, phraseid: item.PHRASEID))
             }
         }
         o.subscribe(onNext: {

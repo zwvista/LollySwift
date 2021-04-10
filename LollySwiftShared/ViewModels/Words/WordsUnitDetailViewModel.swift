@@ -33,6 +33,6 @@ class WordsUnitDetailViewModel: NSObject {
     func onOK() -> Observable<()> {
         itemEdit.save(to: item)
         item.WORD = vm.vmSettings.autoCorrectInput(text: item.WORD)
-        return !isAdd ? vm.update(item: item) : vm.create(item: item).flatMap { self.phraseid == 0 ? Observable.just(()) : MWordPhrase.link(wordid: self.item.WORDID, phraseid: self.phraseid) }
+        return !isAdd ? vm.update(item: item) : vm.create(item: item).flatMap { self.phraseid == 0 ? Observable.just(()) : MWordPhrase.associate(wordid: self.item.WORDID, phraseid: self.phraseid) }
     }
 }

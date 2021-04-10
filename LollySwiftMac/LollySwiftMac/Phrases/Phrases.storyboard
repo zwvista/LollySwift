@@ -970,16 +970,16 @@
                                 <action selector="editPhrase:" target="F8i-pe-Ate" id="xzH-Hm-3gz"/>
                             </connections>
                         </menuItem>
-                        <menuItem title="Link a New Word" id="RIy-TF-xP9">
+                        <menuItem title="Associate a New Word" id="RIy-TF-xP9">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
-                                <action selector="linkNewWord:" target="F8i-pe-Ate" id="Ysx-XZ-TY2"/>
+                                <action selector="associateNewWord:" target="F8i-pe-Ate" id="Ysx-XZ-TY2"/>
                             </connections>
                         </menuItem>
-                        <menuItem title="Link Existing Words" id="u9y-2B-Xi8">
+                        <menuItem title="Associate Existing Words" id="u9y-2B-Xi8">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
-                                <action selector="linkExistingWords:" target="F8i-pe-Ate" id="7qd-lv-4cj"/>
+                                <action selector="associateExistingWords:" target="F8i-pe-Ate" id="7qd-lv-4cj"/>
                             </connections>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="Znd-8P-LoQ"/>
@@ -1024,7 +1024,7 @@
                             <modifierMask key="keyEquivalentModifierMask"/>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="OyS-gn-Uqv"/>
-                        <menuItem title="Unlink" id="daJ-2g-Ski">
+                        <menuItem title="Dissociate" id="daJ-2g-Ski">
                             <modifierMask key="keyEquivalentModifierMask"/>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="aB3-lj-PPH"/>
@@ -3073,10 +3073,10 @@ Gw
                                 <action selector="editPhrase:" target="CET-Kl-kcd" id="DVJ-4g-zx9"/>
                             </connections>
                         </menuItem>
-                        <menuItem title="Link Existing Words" id="Apd-O0-xOC">
+                        <menuItem title="Associate Existing Words" id="Apd-O0-xOC">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
-                                <action selector="linkWords:" target="CET-Kl-kcd" id="jcs-Zh-dE2"/>
+                                <action selector="associateWords:" target="CET-Kl-kcd" id="jcs-Zh-dE2"/>
                             </connections>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="uhU-cw-Gfp"/>
@@ -3121,7 +3121,7 @@ Gw
                             <modifierMask key="keyEquivalentModifierMask"/>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="yN4-SA-CdT"/>
-                        <menuItem title="Unlink" id="ss4-RV-mNt">
+                        <menuItem title="Dissociate" id="ss4-RV-mNt">
                             <modifierMask key="keyEquivalentModifierMask"/>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="lFu-x2-heB"/>
@@ -4585,10 +4585,10 @@ Gw
                                 <action selector="editPhrase:" target="dNa-67-Lx3" id="LdE-dI-dH0"/>
                             </connections>
                         </menuItem>
-                        <menuItem title="Link Existing Words" id="cfT-6Z-QbM">
+                        <menuItem title="Associate Existing Words" id="cfT-6Z-QbM">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
-                                <action selector="linkWords:" target="dNa-67-Lx3" id="YOH-hC-HKm"/>
+                                <action selector="associateWords:" target="dNa-67-Lx3" id="YOH-hC-HKm"/>
                             </connections>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="vbA-Hf-UQC"/>
@@ -4633,7 +4633,7 @@ Gw
                             <modifierMask key="keyEquivalentModifierMask"/>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="XaG-Mf-img"/>
-                        <menuItem title="Unlink" id="FY5-Ft-PAy">
+                        <menuItem title="Dissociate" id="FY5-Ft-PAy">
                             <modifierMask key="keyEquivalentModifierMask"/>
                         </menuItem>
                         <menuItem isSeparatorItem="YES" id="Ku6-kq-wz6"/>
@@ -5409,10 +5409,10 @@ Gw
             </objects>
             <point key="canvasLocation" x="353.5" y="2091.5"/>
         </scene>
-        <!--Phrases Link View Controller-->
+        <!--Phrases Associate View Controller-->
         <scene sceneID="4A8-MF-tgE">
             <objects>
-                <viewController storyboardIdentifier="PhrasesLinkViewController" id="phB-rr-do0" customClass="PhrasesLinkViewController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PhrasesAssociateViewController" id="phB-rr-do0" customClass="PhrasesAssociateViewController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" misplaced="YES" id="ZT1-PZ-HJF">
                         <rect key="frame" x="0.0" y="0.0" width="623" height="509"/>
                         <autoresizingMask key="autoresizingMask"/>

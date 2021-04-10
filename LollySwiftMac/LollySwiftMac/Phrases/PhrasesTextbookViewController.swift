@@ -68,7 +68,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
     
     @IBAction func doubleAction(_ sender: AnyObject) {
         if NSApp.currentEvent!.modifierFlags.contains(.option) {
-            linkWords(sender)
+            associateWords(sender)
         } else {
             editPhrase(sender)
         }
@@ -89,9 +89,9 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
         tfStatusText.stringValue = "\(tvPhrases.numberOfRows) Phrases in \(vmSettings.LANGINFO)"
     }
 
-    @IBAction func linkWords(_ sender: AnyObject) {
+    @IBAction func associateWords(_ sender: AnyObject) {
         guard vm.selectedPhraseID != 0 else {return}
-        let detailVC = NSStoryboard(name: "Words", bundle: nil).instantiateController(withIdentifier: "WordsLinkViewController") as! WordsLinkViewController
+        let detailVC = NSStoryboard(name: "Words", bundle: nil).instantiateController(withIdentifier: "WordsAssociateViewController") as! WordsAssociateViewController
         detailVC.textFilter = vm.selectedPhrase
         detailVC.phraseid = vm.selectedPhraseID
         detailVC.complete = {
