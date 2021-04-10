@@ -16,7 +16,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     static let theSettingsViewModel = SettingsViewModel()
     let synth = NSSpeechSynthesizer()
 
-    func applicationDidFinishLaunching(_ aNotification: Notification) {
+    func setup() {
         AppDelegate.theSettingsViewModel.getData().subscribe(onNext: {
             //self.search(self)
             //self.editBlog(self)
@@ -26,6 +26,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             //self.patternsInLanguage(self)
             //self.phrasesInUnit(self)
         }) ~ rx.disposeBag
+    }
+
+    func applicationDidFinishLaunching(_ aNotification: Notification) {
+
+        CommonApi.userid = UserDefaults.standard.integer(forKey: "userid")
+        if CommonApi.userid == 0 {
+            login(self)
+        } else {
+            setup()
+        }
 
         // https://forums.developer.apple.com/thread/69484
         NSSetUncaughtExceptionHandler { exception in
@@ -42,14 +52,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         true
     }
     
-    func showWindow(storyBoardName: String, windowControllerName: String, modal: Bool) {
+    func showWindow(storyBoardName: String, windowControllerName: String) {
         let storyboard = NSStoryboard(name: storyBoardName, bundle: nil)
         let wc = storyboard.instantiateController(withIdentifier: windowControllerName) as! NSWindowController
-        if modal {
-            NSApplication.shared.runModal(for: wc.window!)
-        } else {
-            wc.showWindow(self)
-        }
+        wc.showWindow(self)
     }
     
     func findWindow(windowControllerName: String) -> NSWindow? {
@@ -62,17 +68,36 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             w.makeKeyAndOrderFront(nil)
             return w
         } else {
-            showWindow(storyBoardName: storyBoardName, windowControllerName: windowControllerName, modal: false)
+            showWindow(storyBoardName: storyBoardName, windowControllerName: windowControllerName)
             return findWindow(windowControllerName: windowControllerName)!
         }
     }
     
+    func runModal(storyBoardName: String, windowControllerName: String) -> NSApplication.ModalResponse {
+        let storyboard = NSStoryboard(name: storyBoardName, bundle: nil)
+        let wc = storyboard.instantiateController(withIdentifier: windowControllerName) as! NSWindowController
+        return NSApplication.shared.runModal(for: wc.window!)
+    }
+
+    @IBAction func login(_ sender: AnyObject) {
+        NSApplication.shared.enumerateWindows(options: .orderedFrontToBack) { window, stop in
+            window.close()
+        }
+        UserDefaults.standard.removeObject(forKey: "userid")
+        let r = runModal(storyBoardName: "Main", windowControllerName: "LoginWindowController")
+        if r == .OK {
+            setup()
+        } else {
+            NSApplication.shared.terminate(self)
+        }
+    }
+
     @IBAction func search(_ sender: AnyObject) {
         _ = findOrShowWindow(storyBoardName: "Words", windowControllerName: "WordsSearchWindowController")
     }
 
     @IBAction func settings(_ sender: AnyObject) {
-        showWindow(storyBoardName: "Main", windowControllerName: "SettingsWindowController", modal: true)
+        _ = runModal(storyBoardName: "Main", windowControllerName: "SettingsWindowController")
     }
     
     @IBAction func wordsInUnit(_ sender: AnyObject) {
@@ -80,7 +105,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @IBAction func wordsInUnitNew(_ sender: AnyObject) {
-        showWindow(storyBoardName: "Words", windowControllerName: "WordsUnitWindowController", modal: false)
+        showWindow(storyBoardName: "Words", windowControllerName: "WordsUnitWindowController")
     }
 
     @IBAction func phrasesInUnit(_ sender: AnyObject) {
@@ -88,7 +113,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @IBAction func phrasesInUnitNew(_ sender: AnyObject) {
-        showWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesUnitWindowController", modal: false)
+        showWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesUnitWindowController")
     }
     
     @IBAction func wordsReview(_ sender: AnyObject) {
@@ -96,7 +121,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @IBAction func wordsReviewNew(_ sender: AnyObject) {
-        showWindow(storyBoardName: "Words", windowControllerName: "WordsReviewWindowController", modal: false)
+        showWindow(storyBoardName: "Words", windowControllerName: "WordsReviewWindowController")
     }
 
     @IBAction func phrasesReview(_ sender: AnyObject) {
@@ -104,7 +129,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @IBAction func phrasesReviewNew(_ sender: AnyObject) {
-        showWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesReviewWindowController", modal: false)
+        showWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesReviewWindowController")
     }
 
     @IBAction func wordsInTextbook(_ sender: AnyObject) {
@@ -112,15 +137,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @IBAction func wordsInTextbookNew(_ sender: AnyObject) {
-        showWindow(storyBoardName: "Words", windowControllerName: "WordsTextbookWindowController", modal: false)
+        showWindow(storyBoardName: "Words", windowControllerName: "WordsTextbookWindowController")
     }
     
     @IBAction func phrasesInTextbook(_ sender: AnyObject) {
-        showWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesTextbookWindowController", modal: false)
+        showWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesTextbookWindowController")
     }
     
     @IBAction func phrasesInTextbookNew(_ sender: AnyObject) {
-        showWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesTextbookWindowController", modal: false)
+        showWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesTextbookWindowController")
     }
 
     @IBAction func wordsInLanguage(_ sender: AnyObject) {
@@ -128,7 +153,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @IBAction func wordsInLanguageNew(_ sender: AnyObject) {
-        showWindow(storyBoardName: "Words", windowControllerName: "WordsLangWindowController", modal: false)
+        showWindow(storyBoardName: "Words", windowControllerName: "WordsLangWindowController")
     }
 
     @IBAction func phrasesInLanguage(_ sender: AnyObject) {
@@ -136,7 +161,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @IBAction func phrasesInLanguageNew(_ sender: AnyObject) {
-        showWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesLangWindowController", modal: false)
+        showWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesLangWindowController")
     }
     
     @IBAction func patternsInLanguage(_ sender: AnyObject) {
@@ -144,27 +169,27 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     @IBAction func patternsInLanguageNew(_ sender: AnyObject) {
-        showWindow(storyBoardName: "Patterns", windowControllerName: "PatternsWindowController", modal: false)
+        showWindow(storyBoardName: "Patterns", windowControllerName: "PatternsWindowController")
     }
 
     @IBAction func editBlog(_ sender: AnyObject) {
-        showWindow(storyBoardName: "Misc", windowControllerName: "BlogWindowController", modal: false)
+        showWindow(storyBoardName: "Misc", windowControllerName: "BlogWindowController")
     }
     
     @IBAction func textbooks(_ sender: AnyObject) {
-        showWindow(storyBoardName: "Textbooks", windowControllerName: "TextbooksWindowController", modal: false)
+        showWindow(storyBoardName: "Textbooks", windowControllerName: "TextbooksWindowController")
     }
     
     @IBAction func webtextbooks(_ sender: AnyObject) {
-        showWindow(storyBoardName: "Textbooks", windowControllerName: "WebTextbooksWindowController", modal: false)
+        showWindow(storyBoardName: "Textbooks", windowControllerName: "WebTextbooksWindowController")
     }
 
     @IBAction func dictionaries(_ sender: AnyObject) {
-        showWindow(storyBoardName: "Dicts", windowControllerName: "DictsWindowController", modal: false)
+        showWindow(storyBoardName: "Dicts", windowControllerName: "DictsWindowController")
     }
     
     @IBAction func readNumber(_ sender: AnyObject) {
-        showWindow(storyBoardName: "Misc", windowControllerName: "ReadNumberWindowController", modal: false)
+        showWindow(storyBoardName: "Misc", windowControllerName: "ReadNumberWindowController")
     }
     
     @IBAction func speak(_ sender: AnyObject) {

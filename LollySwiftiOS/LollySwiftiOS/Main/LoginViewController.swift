@@ -27,7 +27,7 @@ class LoginViewController: UIViewController {
         vm.login().subscribe(onNext: {
             CommonApi.userid = $0
             if CommonApi.userid == 0 {
-                let alert = UIAlertController(title: "Login", message:  "Wrong Username or Password", preferredStyle:  UIAlertController.Style.alert)
+                let alert = UIAlertController(title: "Login", message:  "Wrong Username or Password!", preferredStyle:  UIAlertController.Style.alert)
                 let defaultAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) {_ in }
                 alert.addAction(defaultAction)
                 self.present(alert, animated: true, completion: nil)

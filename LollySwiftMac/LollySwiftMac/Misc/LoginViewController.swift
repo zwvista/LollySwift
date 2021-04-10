@@ -6,10 +6,10 @@
 //  Copyright © 2021 趙偉. All rights reserved.
 //
 
-import UIKit
+import Cocoa
 import RxSwift
 
-class LoginViewController: UIViewController {
+class LoginViewController: NSViewController {
 
     let vm = LoginViewModel()
 
@@ -18,8 +18,30 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        _ = vm.username <~> tfUsername.rx.textInput
-        _ = vm.password <~> tfPassword.rx.textInput
+        _ = vm.username <~> tfUsername.rx.text.orEmpty
+        _ = vm.password <~> tfPassword.rx.text.orEmpty
     }
 
+    @IBAction func login(_ sender: Any) {
+        vm.login().subscribe(onNext: {
+            CommonApi.userid = $0
+            if CommonApi.userid == 0 {
+                let alert = NSAlert()
+                alert.alertStyle = .critical
+                alert.messageText = "Login"
+                alert.informativeText = "Wrong Username or Password!"
+                alert.addButton(withTitle: "OK")
+                alert.runModal()
+            } else {
+                UserDefaults.standard.set(CommonApi.userid, forKey: "userid")
+                NSApplication.shared.stopModal(withCode: .OK)
+                self.view.window?.close()
+            }
+        }) ~ rx.disposeBag
+    }
+
+    @IBAction func exit(_ sender: Any) {
+        NSApplication.shared.stopModal(withCode: .cancel)
+        self.view.window?.close()
+    }
 }
