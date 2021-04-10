@@ -22,9 +22,8 @@ class SearchViewController: UIViewController, WKNavigationDelegate, UISearchBarD
 
     let ddLang = DropDown()
     let ddDictReference = DropDown()
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    
+    func setup() {
         dictStore = DictStore(settings: vmSettings, wvDict: addWKWebView(webViewHolder: wvDictHolder))
         dictStore.wvDict.navigationDelegate = self
         vmSettings.delegate = self
@@ -43,7 +42,25 @@ class SearchViewController: UIViewController, WKNavigationDelegate, UISearchBarD
             }
         }) ~ rx.disposeBag
     }
-    
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        CommonApi.userid = UserDefaults.standard.integer(forKey: "userid")
+        if CommonApi.userid == 0 {
+            logout(self)
+        } else {
+            setup()
+        }
+    }
+
+    @IBAction func logout(_ sender: Any) {
+        UserDefaults.standard.removeObject(forKey: "userid")
+        if let vc = self.storyboard?.instantiateVC(LoginViewController.self) {
+            vc.completion = { self.setup() }
+            self.present(vc, animated: true) {}
+        }
+    }
+
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         sbword.endEditing(true)
         dictStore.word = sbword.text!
@@ -81,7 +98,7 @@ class SearchViewController: UIViewController, WKNavigationDelegate, UISearchBarD
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         dictStore.onNavigationFinished()
     }
-
+    
     deinit {
         print("DEBUG: \(self.className) deinit")
     }

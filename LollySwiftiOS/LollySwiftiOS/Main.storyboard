@@ -5,6 +5,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -88,6 +89,11 @@
                                 <action selector="presentLeftMenuViewController:" destination="x5A-6p-PRh" id="1Zd-D6-VQY"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Logout" id="RUn-WV-7sp">
+                            <connections>
+                                <action selector="logout:" destination="vXZ-lx-hvc" id="dRa-AU-RvN"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -106,7 +112,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="SettingsViewController" id="gTE-sX-TI7" customClass="SettingsViewController" customModule="LollySwiftiOS" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="wnl-Mz-rhF">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="580"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <sections>
@@ -538,6 +544,68 @@
             </objects>
             <point key="canvasLocation" x="3686" y="1121"/>
         </scene>
+        <!--Login View Controller-->
+        <scene sceneID="YF6-xM-2Kz">
+            <objects>
+                <viewController storyboardIdentifier="LoginViewController" id="IGk-sv-GRa" customClass="LoginViewController" customModule="LollySwiftiOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="qvm-Zc-2dp">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="65" translatesAutoresizingMaskIntoConstraints="NO" id="5tz-dT-W13">
+                                <rect key="frame" x="20" y="234" width="374" height="428.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lolly" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W5v-V6-dTY">
+                                        <rect key="frame" x="138" y="0.0" width="98.5" height="60"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ict-Xb-cxt">
+                                        <rect key="frame" x="0.0" y="125" width="374" height="57.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HTe-Bq-LgG">
+                                        <rect key="frame" x="0.0" y="247.5" width="374" height="56"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NHD-Hj-w78">
+                                        <rect key="frame" x="128.5" y="368.5" width="117" height="60"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                        <state key="normal" title="LOGIN"/>
+                                        <connections>
+                                            <action selector="login:" destination="IGk-sv-GRa" eventType="touchUpInside" id="4z1-ff-Dpv"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="HTe-Bq-LgG" secondAttribute="trailing" id="LWf-Iy-AY2"/>
+                                    <constraint firstAttribute="trailing" secondItem="ict-Xb-cxt" secondAttribute="trailing" id="SUj-hF-sPY"/>
+                                    <constraint firstItem="ict-Xb-cxt" firstAttribute="leading" secondItem="5tz-dT-W13" secondAttribute="leading" id="Tox-da-Eax"/>
+                                    <constraint firstItem="HTe-Bq-LgG" firstAttribute="leading" secondItem="5tz-dT-W13" secondAttribute="leading" id="uib-Tz-cIU"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="cc7-2V-gJs"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="5tz-dT-W13" firstAttribute="leading" secondItem="cc7-2V-gJs" secondAttribute="leading" constant="20" id="JiV-8K-641"/>
+                            <constraint firstItem="5tz-dT-W13" firstAttribute="centerY" secondItem="qvm-Zc-2dp" secondAttribute="centerY" id="Pxy-n1-I92"/>
+                            <constraint firstItem="cc7-2V-gJs" firstAttribute="trailing" secondItem="5tz-dT-W13" secondAttribute="trailing" constant="20" id="XJ4-ni-bH8"/>
+                            <constraint firstItem="cc7-2V-gJs" firstAttribute="trailing" secondItem="5tz-dT-W13" secondAttribute="trailing" constant="20" id="f7P-UT-Ezf"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tfPassword" destination="HTe-Bq-LgG" id="Wtn-xH-IwB"/>
+                        <outlet property="tfUsername" destination="ict-Xb-cxt" id="RcE-xz-YeL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="i1a-Oa-wWf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4934.7826086956529" y="-573.21428571428567"/>
+        </scene>
         <!--Root View Controller-->
         <scene sceneID="UQS-xF-bFr">
             <objects>
@@ -640,7 +708,7 @@
             <objects>
                 <tableViewController id="uxJ-bK-mnX" customClass="ReviewOptionsViewController" customModule="LollySwiftiOS" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="VKQ-38-ibB">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <sections>
@@ -895,5 +963,8 @@
     </scenes>
     <resources>
         <image name="MenuButton" width="25" height="13"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

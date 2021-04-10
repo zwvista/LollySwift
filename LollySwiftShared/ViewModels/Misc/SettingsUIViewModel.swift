@@ -259,7 +259,7 @@ class SettingsViewModel: NSObject, ObservableObject {
     func getData() -> Observable<()> {
         Observable.zip(MLanguage.getData(),
                               MUSMapping.getData(),
-                              MUserSetting.getData(userid: CommonApi.userid),
+                              MUserSetting.getData(),
                               MCode.getData())
             .flatMap { result -> Observable<()> in
                 self.arrLanguages = result.0

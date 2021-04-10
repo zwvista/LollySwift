@@ -20,9 +20,9 @@ class MUserSetting: NSObject, Codable {
     dynamic var VALUE3: String?
     dynamic var VALUE4: String?
 
-    static func getData(userid: Int) -> Observable<[MUserSetting]> {
+    static func getData() -> Observable<[MUserSetting]> {
         // SQL: SELECT * FROM USERSETTINGS WHERE USERID=?
-        let url = "\(CommonApi.urlAPI)USERSETTINGS?filter=USERID,eq,\(userid)"
+        let url = "\(CommonApi.urlAPI)USERSETTINGS?filter=USERID,eq,\(CommonApi.userid)"
         return RestApi.getRecords(url: url)
     }
     
