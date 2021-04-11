@@ -12,7 +12,7 @@ import RxSwift
 @objcMembers
 class MUserSetting: NSObject, Codable {
     dynamic var ID = 0
-    dynamic var USERID = 0
+    dynamic var USERID = ""
     dynamic var KIND = 0
     dynamic var ENTITYID = 0
     dynamic var VALUE1: String?

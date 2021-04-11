@@ -30,8 +30,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
 
-        CommonApi.userid = UserDefaults.standard.integer(forKey: "userid")
-        if CommonApi.userid == 0 {
+        CommonApi.userid = UserDefaults.standard.string(forKey: "userid") ?? ""
+        if CommonApi.userid.isEmpty {
             login(self)
         } else {
             setup()

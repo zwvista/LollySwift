@@ -12,7 +12,7 @@ import RxSwift
 @objcMembers
 class MWordFami: NSObject, Codable {
     dynamic var ID = 0
-    dynamic var USERID = 0
+    dynamic var USERID = ""
     dynamic var WORDID = 0
     dynamic var CORRECT = 0
     dynamic var TOTAL = 0

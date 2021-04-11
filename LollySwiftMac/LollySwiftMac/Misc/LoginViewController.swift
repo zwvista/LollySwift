@@ -25,7 +25,7 @@ class LoginViewController: NSViewController {
     @IBAction func login(_ sender: Any) {
         vm.login().subscribe(onNext: {
             CommonApi.userid = $0
-            if CommonApi.userid == 0 {
+            if CommonApi.userid.isEmpty {
                 let alert = NSAlert()
                 alert.alertStyle = .critical
                 alert.messageText = "Login"

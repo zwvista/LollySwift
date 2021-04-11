@@ -12,6 +12,7 @@ import RxSwift
 @objcMembers
 class MUser: NSObject, Codable {
     dynamic var ID = 0
+    dynamic var USERID = ""
     dynamic var USERNAME = ""
     dynamic var PASSWORD = ""
 
