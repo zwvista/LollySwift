@@ -312,7 +312,7 @@ class SettingsViewModel: NSObject {
         return Observable.zip(MDictionary.getDictsReferenceByLang(USLANG),
                               MDictionary.getDictsNoteByLang(USLANG),
                               MDictionary.getDictsTranslationByLang(USLANG),
-                              MTextbook.getDataByLang(USLANG),
+                              MTextbook.getDataByLang(USLANG, arrUserSettings: arrUserSettings),
                               MAutoCorrect.getDataByLang(USLANG),
                               MVoice.getDataByLang(USLANG))
             .flatMap { result -> Observable<()> in

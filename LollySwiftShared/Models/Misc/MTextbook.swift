@@ -38,10 +38,11 @@ class MTextbook: NSObject, Codable {
 
     override var description: String { TEXTBOOKNAME }
 
-    static func getDataByLang(_ langid: Int) -> Observable<[MTextbook]> {
+    static func getDataByLang(_ langid: Int, arrUserSettings: [MUserSetting]) -> Observable<[MTextbook]> {
         // SQL: SELECT * FROM TEXTBOOKS WHERE LANGID=?
         let url = "\(CommonApi.urlAPI)TEXTBOOKS?filter=LANGID,eq,\(langid)"
-        let o: Observable<[MTextbook]> = RestApi.getRecords(url: url)
+        var o: Observable<[MTextbook]> = RestApi.getRecords(url: url)
+        o = o.map { $0.filter { row in arrUserSettings.contains { $0.KIND == 11 && $0.ENTITYID == row.ID } } }
         func f(units: String) -> [String] {
             if let m = #"UNITS,(\d+)"#.r!.findFirst(in: units) {
                 let n = Int(m.group(at: 1)!)!
