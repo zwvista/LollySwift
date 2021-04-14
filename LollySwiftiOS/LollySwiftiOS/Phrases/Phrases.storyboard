@@ -1488,20 +1488,27 @@
                                 <color key="textColor" name="systemPinkColor" catalog="System" colorSpace="catalog"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Speak" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wgw-Lx-Trj">
-                                <rect key="frame" x="16" y="140.5" width="47.5" height="20.5"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pjh-Df-B20">
+                                <rect key="frame" x="16" y="140.5" width="43" height="30"/>
+                                <state key="normal" title="Speak"/>
+                                <connections>
+                                    <action selector="speak:" destination="YNc-Wk-NlX" eventType="touchUpInside" id="nza-bV-81F"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Speak" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wgw-Lx-Trj">
+                                <rect key="frame" x="195" y="145.5" width="47.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="QL0-uc-kz6">
-                                <rect key="frame" x="16" y="171" width="51" height="31"/>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="QL0-uc-kz6">
+                                <rect key="frame" x="195" y="176" width="51" height="31"/>
                                 <connections>
                                     <action selector="isSpeakingChanged:" destination="YNc-Wk-NlX" eventType="valueChanged" id="Id9-rG-STC"/>
                                 </connections>
                             </switch>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zdB-R1-TuT">
-                                <rect key="frame" x="354" y="136" width="44" height="30"/>
+                                <rect key="frame" x="354" y="140.5" width="44" height="30"/>
                                 <state key="normal" title="Check"/>
                                 <connections>
                                     <action selector="check:" destination="YNc-Wk-NlX" eventType="touchUpInside" id="Csy-e2-FqT"/>
@@ -1511,20 +1518,21 @@
                         <viewLayoutGuide key="safeArea" id="BZ5-uV-j0V"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="wgw-Lx-Trj" firstAttribute="leading" secondItem="zxm-JC-n6l" secondAttribute="leading" id="1Xg-NN-rlQ"/>
                             <constraint firstItem="BZ5-uV-j0V" firstAttribute="trailing" secondItem="54y-dL-pp4" secondAttribute="trailing" constant="16" id="2ha-Df-L1F"/>
                             <constraint firstItem="QL0-uc-kz6" firstAttribute="top" secondItem="wgw-Lx-Trj" secondAttribute="bottom" constant="10" id="4IM-fu-mB1"/>
                             <constraint firstItem="BZ5-uV-j0V" firstAttribute="trailing" secondItem="zdB-R1-TuT" secondAttribute="trailing" constant="16" id="65J-uA-pLG"/>
                             <constraint firstItem="4Fx-Tx-UT6" firstAttribute="centerY" secondItem="sxv-Ts-3ro" secondAttribute="centerY" id="6FD-uD-Sot"/>
                             <constraint firstItem="54y-dL-pp4" firstAttribute="centerY" secondItem="zxm-JC-n6l" secondAttribute="centerY" id="96F-QQ-QXu"/>
                             <constraint firstItem="zxm-JC-n6l" firstAttribute="top" secondItem="BZ5-uV-j0V" secondAttribute="top" constant="16" id="9Rv-Fu-kgf"/>
-                            <constraint firstItem="zdB-R1-TuT" firstAttribute="centerY" secondItem="wgw-Lx-Trj" secondAttribute="centerY" id="LQv-A6-O8y"/>
+                            <constraint firstItem="zdB-R1-TuT" firstAttribute="centerY" secondItem="Pjh-Df-B20" secondAttribute="centerY" id="VKS-gt-7yH"/>
+                            <constraint firstItem="Pjh-Df-B20" firstAttribute="leading" secondItem="zxm-JC-n6l" secondAttribute="leading" id="aUH-Pw-siy"/>
                             <constraint firstItem="QL0-uc-kz6" firstAttribute="leading" secondItem="wgw-Lx-Trj" secondAttribute="leading" id="gc9-t6-rLZ"/>
-                            <constraint firstItem="wgw-Lx-Trj" firstAttribute="top" secondItem="zxm-JC-n6l" secondAttribute="bottom" constant="16" id="hpG-Yh-OWe"/>
                             <constraint firstItem="BZ5-uV-j0V" firstAttribute="trailing" secondItem="4Fx-Tx-UT6" secondAttribute="trailing" constant="16" id="jf1-6I-ddc"/>
+                            <constraint firstItem="wgw-Lx-Trj" firstAttribute="centerY" secondItem="Pjh-Df-B20" secondAttribute="centerY" id="o73-Nv-tY6"/>
                             <constraint firstItem="4Fx-Tx-UT6" firstAttribute="leading" secondItem="BZ5-uV-j0V" secondAttribute="leading" constant="16" id="vWR-Ol-4Yc"/>
                             <constraint firstItem="eqT-am-6PI" firstAttribute="centerY" secondItem="zxm-JC-n6l" secondAttribute="centerY" id="vaQ-Fs-6TO"/>
                             <constraint firstItem="zxm-JC-n6l" firstAttribute="leading" secondItem="BZ5-uV-j0V" secondAttribute="leading" constant="16" id="zJO-V6-iWF"/>
+                            <constraint firstItem="Pjh-Df-B20" firstAttribute="top" secondItem="zxm-JC-n6l" secondAttribute="bottom" constant="16" id="zf8-by-sJe"/>
                             <constraint firstItem="BZ5-uV-j0V" firstAttribute="trailing" secondItem="eqT-am-6PI" secondAttribute="trailing" constant="16" id="zps-BH-dBn"/>
                         </constraints>
                     </view>
@@ -1544,6 +1552,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="btnCheck" destination="zdB-R1-TuT" id="lyq-nE-J9j"/>
+                        <outlet property="btnSpeak" destination="Pjh-Df-B20" id="ASi-Vs-pUh"/>
                         <outlet property="lblCorrect" destination="54y-dL-pp4" id="pWD-y0-RyG"/>
                         <outlet property="lblIncorrect" destination="eqT-am-6PI" id="yCQ-iq-BGH"/>
                         <outlet property="lblIndex" destination="zxm-JC-n6l" id="Yb4-hR-UXy"/>

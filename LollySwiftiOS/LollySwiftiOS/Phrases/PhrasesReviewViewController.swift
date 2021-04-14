@@ -20,6 +20,7 @@ class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var lblPhraseTarget: UILabel!
     @IBOutlet weak var lblTranslation: UILabel!
     @IBOutlet weak var tfPhraseInput: UITextField!
+    @IBOutlet weak var btnSpeak: UIButton!
     @IBOutlet weak var btnCheck: UIButton!
     @IBOutlet weak var swSpeak: UISwitch!
 
@@ -66,10 +67,14 @@ class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
 
     @IBAction func isSpeakingChanged(_ sender: AnyObject) {
         if isSpeaking {
-            AppDelegate.speak(string: vm.currentPhrase)
+            speak(sender)
         }
     }
     
+    @IBAction func speak(_ sender: AnyObject) {
+        AppDelegate.speak(string: vm.currentPhrase)
+    }
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         vm.check()
         return false

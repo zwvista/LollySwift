@@ -71,7 +71,7 @@ class WordsReviewViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func isSpeakingChanged(_ sender: AnyObject) {
         if isSpeaking {
-            AppDelegate.speak(string: vm.currentWord)
+            speak(sender)
         }
     }
     
