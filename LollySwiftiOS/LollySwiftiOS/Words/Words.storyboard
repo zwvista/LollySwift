@@ -1808,34 +1808,41 @@
                                 <color key="textColor" name="systemPinkColor" catalog="System" colorSpace="catalog"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Speak" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="etc-b2-lUw">
-                                <rect key="frame" x="16" y="140.5" width="47.5" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Ioz-8q-sac">
-                                <rect key="frame" x="16" y="171" width="51" height="31"/>
-                                <connections>
-                                    <action selector="isSpeakingChanged:" destination="8Ga-dG-IVt" eventType="valueChanged" id="Pa6-k1-5g9"/>
-                                </connections>
-                            </switch>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yz2-mK-wU4">
-                                <rect key="frame" x="354" y="136" width="44" height="30"/>
+                                <rect key="frame" x="354" y="140.5" width="44" height="30"/>
                                 <state key="normal" title="Check"/>
                                 <connections>
                                     <action selector="check:" destination="8Ga-dG-IVt" eventType="touchUpInside" id="Fqh-8N-Uy5"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UgZ-kc-r9G">
+                                <rect key="frame" x="16" y="140.5" width="43" height="30"/>
+                                <state key="normal" title="Speak"/>
+                                <connections>
+                                    <action selector="speak:" destination="8Ga-dG-IVt" eventType="touchUpInside" id="3ar-ED-AdL"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Speak" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="etc-b2-lUw">
+                                <rect key="frame" x="183.5" y="145.5" width="47.5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Ioz-8q-sac">
+                                <rect key="frame" x="183.5" y="176" width="51" height="31"/>
+                                <connections>
+                                    <action selector="isSpeakingChanged:" destination="8Ga-dG-IVt" eventType="valueChanged" id="Pa6-k1-5g9"/>
+                                </connections>
+                            </switch>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="LIX-g3-L0Q"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="etc-b2-lUw" firstAttribute="top" secondItem="gES-Yd-HlO" secondAttribute="bottom" constant="16" id="1hP-mA-Z3z"/>
+                            <constraint firstItem="etc-b2-lUw" firstAttribute="centerY" secondItem="UgZ-kc-r9G" secondAttribute="centerY" id="0K3-1I-YBJ"/>
+                            <constraint firstItem="yz2-mK-wU4" firstAttribute="centerY" secondItem="UgZ-kc-r9G" secondAttribute="centerY" id="1lj-OO-UdE"/>
                             <constraint firstItem="Ioz-8q-sac" firstAttribute="top" secondItem="etc-b2-lUw" secondAttribute="bottom" constant="10" id="32k-2b-zHL"/>
-                            <constraint firstItem="etc-b2-lUw" firstAttribute="leading" secondItem="gES-Yd-HlO" secondAttribute="leading" id="50W-aB-wVE"/>
                             <constraint firstItem="Ioz-8q-sac" firstAttribute="leading" secondItem="etc-b2-lUw" secondAttribute="leading" id="6Ew-cc-7uG"/>
-                            <constraint firstItem="yz2-mK-wU4" firstAttribute="centerY" secondItem="etc-b2-lUw" secondAttribute="centerY" id="7qh-yc-3Xs"/>
+                            <constraint firstItem="etc-b2-lUw" firstAttribute="centerX" secondItem="uur-fY-DIz" secondAttribute="centerX" id="Aq2-l8-arP"/>
                             <constraint firstItem="gES-Yd-HlO" firstAttribute="top" secondItem="LIX-g3-L0Q" secondAttribute="top" constant="16" id="Kez-ED-Bg9"/>
                             <constraint firstItem="LIX-g3-L0Q" firstAttribute="trailing" secondItem="iid-L7-Zbl" secondAttribute="trailing" constant="16" id="LtW-YN-1R1"/>
                             <constraint firstItem="LIX-g3-L0Q" firstAttribute="trailing" secondItem="yDQ-AY-Qok" secondAttribute="trailing" constant="16" id="QKS-NT-Y0H"/>
@@ -1844,10 +1851,12 @@
                             <constraint firstItem="vvF-tj-7rD" firstAttribute="centerY" secondItem="gES-Yd-HlO" secondAttribute="centerY" id="ZAF-9v-ONk"/>
                             <constraint firstItem="gES-Yd-HlO" firstAttribute="leading" secondItem="LIX-g3-L0Q" secondAttribute="leading" constant="16" id="csw-Fa-G1Q"/>
                             <constraint firstItem="0WC-vu-KkX" firstAttribute="centerY" secondItem="gES-Yd-HlO" secondAttribute="centerY" id="hex-ap-48d"/>
+                            <constraint firstItem="UgZ-kc-r9G" firstAttribute="top" secondItem="gES-Yd-HlO" secondAttribute="bottom" constant="16" id="hiX-3L-fEZ"/>
                             <constraint firstItem="LIX-g3-L0Q" firstAttribute="trailing" secondItem="vvF-tj-7rD" secondAttribute="trailing" constant="16" id="rNO-gn-SwT"/>
                             <constraint firstItem="yDQ-AY-Qok" firstAttribute="centerY" secondItem="uur-fY-DIz" secondAttribute="centerY" id="thy-a0-t2F"/>
                             <constraint firstItem="yDQ-AY-Qok" firstAttribute="leading" secondItem="LIX-g3-L0Q" secondAttribute="leading" constant="16" id="uLT-qh-tn5"/>
                             <constraint firstItem="LIX-g3-L0Q" firstAttribute="trailing" secondItem="yz2-mK-wU4" secondAttribute="trailing" constant="16" id="xDh-mQ-0W2"/>
+                            <constraint firstItem="UgZ-kc-r9G" firstAttribute="leading" secondItem="gES-Yd-HlO" secondAttribute="leading" id="xfz-lm-yVK"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
@@ -1866,6 +1875,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="btnCheck" destination="yz2-mK-wU4" id="fuA-Bg-Lsc"/>
+                        <outlet property="btnSpeak" destination="UgZ-kc-r9G" id="VqZ-7v-3o8"/>
                         <outlet property="lblAccuracy" destination="0WC-vu-KkX" id="kL4-pg-1Zr"/>
                         <outlet property="lblCorrect" destination="vvF-tj-7rD" id="Rqq-oH-2kf"/>
                         <outlet property="lblIncorrect" destination="iid-L7-Zbl" id="E2u-oH-8U3"/>

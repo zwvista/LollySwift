@@ -22,6 +22,7 @@ class WordsReviewViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var lblNoteTarget: UILabel!
     @IBOutlet weak var tvTranslation: UITextView!
     @IBOutlet weak var tfWordInput: UITextField!
+    @IBOutlet weak var btnSpeak: UIButton!
     @IBOutlet weak var btnCheck: UIButton!
     @IBOutlet weak var swSpeak: UISwitch!
 
@@ -73,7 +74,11 @@ class WordsReviewViewController: UIViewController, UITextFieldDelegate {
             AppDelegate.speak(string: vm.currentWord)
         }
     }
-        
+    
+    @IBAction func speak(_ sender: AnyObject) {
+        AppDelegate.speak(string: vm.currentWord)
+    }
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         vm.check()
         return false
