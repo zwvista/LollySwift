@@ -39,7 +39,7 @@ class MWordPhrase: NSObject, Codable {
     private static func create(item: MWordPhrase) -> Observable<Int> {
         // SQL: INSERT INTO WORDSPHRASES (WORDID, PHRASEID) VALUES (?,?)
         let url = "\(CommonApi.urlAPI)WORDSPHRASES"
-        return RestApi.create(url: url, body: try! item.toJSONString()!).map { $0.toInt()! }.do(onNext: { print($0) })
+        return RestApi.create(url: url, body: try! item.toJSONString()!).map { Int($0)! }.do(onNext: { print($0) })
     }
     
     private static func delete(_ id: Int) -> Observable<()> {
@@ -54,7 +54,7 @@ class MWordPhrase: NSObject, Codable {
             if arr.isEmpty {
                 return Observable.empty()
             } else {
-                let ids = arr.map(\.ID.toString).joined(separator: ",")
+                let ids = arr.map { String($0.ID) }.joined(separator: ",")
                 let url = "\(CommonApi.urlAPI)WORDSPHRASES/\(ids)"
                 return RestApi.delete(url: url).map { print($0) }
             }
@@ -67,7 +67,7 @@ class MWordPhrase: NSObject, Codable {
             if arr.isEmpty {
                 return Observable.empty()
             } else {
-                let ids = arr.map(\.ID.toString).joined(separator: ",")
+                let ids = arr.map { String($0.ID) }.joined(separator: ",")
                 let url = "\(CommonApi.urlAPI)WORDSPHRASES/\(ids)"
                 return RestApi.delete(url: url).map { print($0) }
             }

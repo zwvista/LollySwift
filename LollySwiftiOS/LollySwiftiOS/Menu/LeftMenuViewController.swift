@@ -20,7 +20,7 @@ public class LeftMenuViewController: UIViewController, UITableViewDelegate, UITa
     override public func viewDidLoad() {
         super.viewDidLoad()
 
-        let frameht = self.view.frame.size.height, tvht = (54 * 11).toCGFloat
+        let frameht = self.view.frame.size.height, tvht = CGFloat(54 * 11)
         let tableView = UITableView(frame: CGRect(x: 0, y: max(0, (frameht - tvht) / 2.0), width: self.view.frame.size.width, height: min(frameht, tvht)), style: .plain)
         tableView.autoresizingMask = [.flexibleTopMargin, .flexibleBottomMargin, .flexibleWidth]
         tableView.delegate = self

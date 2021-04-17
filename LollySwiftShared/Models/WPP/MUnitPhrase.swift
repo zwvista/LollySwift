@@ -98,21 +98,21 @@ class MUnitPhrase: NSObject, Codable, MPhraseProtocol {
     static func update(item: MUnitPhrase) -> Observable<()> {
         // SQL: CALL UNITPHRASES_UPDATE
         let url = "\(CommonApi.urlSP)UNITPHRASES_UPDATE"
-        let parameters = try! item.toParameters()
+        let parameters = item.toParameters()
         return RestApi.callSP(url: url, parameters: parameters).map { print($0) }
     }
 
     static func create(item: MUnitPhrase) -> Observable<Int> {
         // SQL: CALL UNITPHRASES_CREATE
         let url = "\(CommonApi.urlSP)UNITPHRASES_CREATE"
-        let parameters = try! item.toParameters()
-        return RestApi.callSP(url: url, parameters: parameters).map { print($0); return $0.NEW_ID!.toInt()! }
+        let parameters = item.toParameters()
+        return RestApi.callSP(url: url, parameters: parameters).map { print($0); return Int($0.NEW_ID!)! }
     }
     
     static func delete(item: MUnitPhrase) -> Observable<()> {
         // SQL: CALL UNITPHRASES_DELETE
         let url = "\(CommonApi.urlSP)UNITPHRASES_DELETE"
-        let parameters = try! item.toParameters()
+        let parameters = item.toParameters()
         return RestApi.callSP(url: url, parameters: parameters).map { print($0) }
     }
 }
@@ -131,14 +131,14 @@ class MUnitPhraseEdit {
     let PHRASES = BehaviorRelay(value: "")
 
     init(x: MUnitPhrase) {
-        ID = BehaviorRelay(value: x.ID.toString)
+        ID = BehaviorRelay(value: String(x.ID))
         TEXTBOOKNAME = BehaviorRelay(value: x.TEXTBOOKNAME)
         UNITSTR = BehaviorRelay(value: x.UNITSTR)
         indexUNIT = BehaviorRelay(value: x.textbook.arrUnits.firstIndex { $0.value == x.UNIT } ?? -1)
         PARTSTR = BehaviorRelay(value: x.PARTSTR)
         indexPART = BehaviorRelay(value: x.textbook.arrParts.firstIndex { $0.value == x.PART } ?? -1)
-        SEQNUM = BehaviorRelay(value: x.SEQNUM.toString)
-        PHRASEID = BehaviorRelay(value: x.PHRASEID.toString)
+        SEQNUM = BehaviorRelay(value: String(x.SEQNUM))
+        PHRASEID = BehaviorRelay(value: String(x.PHRASEID))
         PHRASE = BehaviorRelay(value: x.PHRASE)
         TRANSLATION = BehaviorRelay(value: x.TRANSLATION)
     }
@@ -150,7 +150,7 @@ class MUnitPhraseEdit {
         if indexPART.value != -1 {
             x.PART = x.textbook.arrUnits[indexPART.value].value
         }
-        x.SEQNUM = SEQNUM.value.toInt()!
+        x.SEQNUM = Int(SEQNUM.value)!
         x.PHRASE = PHRASE.value
         x.TRANSLATION = TRANSLATION.value
     }

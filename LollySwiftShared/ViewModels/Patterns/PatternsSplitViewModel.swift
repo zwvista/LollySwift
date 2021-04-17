@@ -16,11 +16,11 @@ class PatternsSplitViewModel: NSObject {
     
     init(item: MPattern) {
         arrPatterns = [item]
-        let strs = item.PATTERN.split("／")
+        let strs = item.PATTERN.split(separator: "／")
         arrPatternVariations = strs.enumerated().map {
             let o = MPatternVariation()
             o.index = $0.offset + 1
-            o.variation = $0.element
+            o.variation = String($0.element)
             return o
         }
         itemEdit = MPatternEdit(x: item)
@@ -29,7 +29,7 @@ class PatternsSplitViewModel: NSObject {
     }
 
     func mergeVariations() {
-        itemEdit.PATTERN.accept(arrPatternVariations.map(\.variation).unique().joined(separator: ","))
+        itemEdit.PATTERN.accept(arrPatternVariations.map(\.variation).unique.joined(separator: ","))
     }
     
     func reindexVariations(complete: (Int) -> ()) {

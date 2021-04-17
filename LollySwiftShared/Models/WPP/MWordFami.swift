@@ -32,7 +32,7 @@ class MWordFami: NSObject, Codable {
     private static func create(item: MWordFami) -> Observable<Int> {
         // SQL: INSERT INTO WORDSFAMI (USERID, WORDID) VALUES (?,?)
         let url = "\(CommonApi.urlAPI)WORDSFAMI"
-        return RestApi.create(url: url, body: try! item.toJSONString()!).map { $0.toInt()! }.do(onNext: { print($0) })
+        return RestApi.create(url: url, body: try! item.toJSONString()!).map { Int($0)! }.do(onNext: { print($0) })
     }
     
     static func delete(_ id: Int) -> Observable<()> {

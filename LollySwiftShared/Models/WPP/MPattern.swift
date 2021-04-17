@@ -44,7 +44,7 @@ class MPattern: NSObject, Codable {
     static func create(item: MPattern) -> Observable<Int> {
         // SQL: INSERT INTO PATTERNS (LANGID, PATTERN, NOTE, TAGS) VALUES (?,?,?,?)
         let url = "\(CommonApi.urlAPI)PATTERNS"
-        return RestApi.create(url: url, body: try! item.toJSONString()!).map { $0.toInt()! }.do(onNext: { print($0) })
+        return RestApi.create(url: url, body: try! item.toJSONString()!).map { Int($0)! }.do(onNext: { print($0) })
     }
     
     static func delete(_ id: Int) -> Observable<()> {
@@ -56,14 +56,14 @@ class MPattern: NSObject, Codable {
     static func mergePatterns(item: MPattern) -> Observable<()> {
         // SQL: PATTERNS_MERGE
         let url = "\(CommonApi.urlSP)PATTERNS_MERGE"
-        let parameters = try! item.toParameters()
+        let parameters = item.toParameters()
         return RestApi.callSP(url: url, parameters: parameters).map { print($0) }
     }
     
     static func splitPattern(item: MPattern) -> Observable<()> {
         // SQL: PATTERNS_SPLIT
         let url = "\(CommonApi.urlSP)PATTERNS_SPLIT"
-        let parameters = try! item.toParameters()
+        let parameters = item.toParameters()
         return RestApi.callSP(url: url, parameters: parameters).map { print($0) }
     }
 }
@@ -82,7 +82,7 @@ class MPatternEdit {
     }
 
     init(x: MPattern) {
-        ID = BehaviorRelay(value: x.ID.toString)
+        ID = BehaviorRelay(value: String(x.ID))
         PATTERN = BehaviorRelay(value: x.PATTERN)
         NOTE = BehaviorRelay(value: x.NOTE)
         TAGS = BehaviorRelay(value: x.TAGS)

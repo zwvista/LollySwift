@@ -52,7 +52,7 @@ class PhrasesUnitBatchEditViewController: UIViewController, UITableViewDelegate,
         var o = Observable.just(())
         let unit = vmSettings.arrUnits[ddUnit.indexForSelectedRow!].value
         let part = vmSettings.arrParts[ddPart.indexForSelectedRow!].value
-        let seqnum = tfSeqNum.text?.toInt() ?? 0
+        let seqnum = Int(tfSeqNum.text ?? "") ?? 0
         for i in 0..<vm.arrPhrases.count {
             let cell = tvPhrases.cellForRow(at: IndexPath(row: i, section: 0))!
             guard cell.accessoryType == .checkmark else {continue}

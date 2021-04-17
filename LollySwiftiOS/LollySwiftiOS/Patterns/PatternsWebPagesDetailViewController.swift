@@ -60,7 +60,7 @@ class PatternsWebPagesDetailViewController: UITableViewController {
 
     @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
         if let controller = segue.source as? WebPageSelectViewController, let item = controller.vmWebPage.selectedWebPage {
-            itemEdit.WEBPAGEID.accept(item.ID.toString)
+            itemEdit.WEBPAGEID.accept(String(item.ID))
             itemEdit.TITLE.accept(item.TITLE)
             itemEdit.URL.accept(item.URL)
         }

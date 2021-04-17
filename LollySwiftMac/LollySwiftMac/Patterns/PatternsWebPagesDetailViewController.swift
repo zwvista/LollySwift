@@ -66,7 +66,7 @@ class PatternsWebPagesDetailViewController: NSViewController {
         webPageVC.vm = vm
         webPageVC.complete = {
             let o = webPageVC.vmWebPage.selectedWebPage!
-            self.itemEdit.WEBPAGEID.accept(o.ID.toString)
+            self.itemEdit.WEBPAGEID.accept(String(o.ID))
             self.itemEdit.TITLE.accept(o.TITLE)
             self.itemEdit.URL.accept(o.URL)
         }

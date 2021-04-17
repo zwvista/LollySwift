@@ -37,7 +37,7 @@ class PhrasesUnitBatchEditViewModel: NSObject {
             if unitIsChecked.value || partIsChecked.value || seqnumIsChecked.value {
                 if unitIsChecked.value { item.UNIT = UNIT }
                 if partIsChecked.value { item.PART = PART }
-                if seqnumIsChecked.value { item.SEQNUM += SEQNUM.value.toInt()! }
+                if seqnumIsChecked.value { item.SEQNUM += Int(SEQNUM.value)! }
                 o = o.flatMap { [unowned self] _ in self.vm.update(item: item) }
             }
         }

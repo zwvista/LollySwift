@@ -61,7 +61,7 @@ class MPatternWebPage: NSObject, Codable {
     static func create(item: MPatternWebPage) -> Observable<Int> {
         // SQL: INSERT INTO PATTERNSWEBPAGES (PATTERNID, SEQNUM, WEBPAGE) VALUES (?,?,?)
         let url = "\(CommonApi.urlAPI)PATTERNSWEBPAGES"
-        return RestApi.create(url: url, body: try! item.toJSONString()!).map { $0.toInt()! }.do(onNext: { print($0) })
+        return RestApi.create(url: url, body: try! item.toJSONString()!).map { Int($0)! }.do(onNext: { print($0) })
     }
     
     static func delete(_ id: Int) -> Observable<()> {
@@ -91,18 +91,18 @@ class MPatternWebPageEdit {
     }
 
     init(x: MPatternWebPage) {
-        ID = BehaviorRelay(value: x.ID.toString)
-        PATTERNID = BehaviorRelay(value: x.PATTERNID.toString)
+        ID = BehaviorRelay(value: String(x.ID))
+        PATTERNID = BehaviorRelay(value: String(x.PATTERNID))
         PATTERN = BehaviorRelay(value: x.PATTERN)
-        SEQNUM = BehaviorRelay(value: x.SEQNUM.toString)
-        WEBPAGEID = BehaviorRelay(value: x.WEBPAGEID.toString)
+        SEQNUM = BehaviorRelay(value: String(x.SEQNUM))
+        WEBPAGEID = BehaviorRelay(value: String(x.WEBPAGEID))
         TITLE = BehaviorRelay(value: x.TITLE)
         URL = BehaviorRelay(value: x.URL)
     }
     
     func save(to x: MPatternWebPage) {
-        x.SEQNUM = SEQNUM.value.toInt()!
-        x.WEBPAGEID = WEBPAGEID.value.toInt()!
+        x.SEQNUM = Int(SEQNUM.value)!
+        x.WEBPAGEID = Int(WEBPAGEID.value)!
         x.TITLE = TITLE.value
         x.URL = URL.value
     }

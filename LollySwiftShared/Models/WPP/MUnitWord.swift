@@ -108,21 +108,21 @@ class MUnitWord: NSObject, Codable, MWordProtocol {
     static func update(item: MUnitWord) -> Observable<String> {
         // SQL: CALL UNITWORDS_UPDATE
         let url = "\(CommonApi.urlSP)UNITWORDS_UPDATE"
-        let parameters = try! item.toParameters()
+        let parameters = item.toParameters()
         return RestApi.callSP(url: url, parameters: parameters).map { print($0); return $0.result }
     }
 
     static func create(item: MUnitWord) -> Observable<Int> {
         // SQL: CALL UNITWORDS_CREATE
         let url = "\(CommonApi.urlSP)UNITWORDS_CREATE"
-        let parameters = try! item.toParameters()
-        return RestApi.callSP(url: url, parameters: parameters).map { print($0); return $0.NEW_ID!.toInt()! }
+        let parameters = item.toParameters()
+        return RestApi.callSP(url: url, parameters: parameters).map { print($0); return Int($0.NEW_ID!)! }
     }
     
     static func delete(item: MUnitWord) -> Observable<()> {
         // SQL: CALL UNITWORDS_DELETE
         let url = "\(CommonApi.urlSP)UNITWORDS_DELETE"
-        let parameters = try! item.toParameters()
+        let parameters = item.toParameters()
         return RestApi.callSP(url: url, parameters: parameters).map { print($0) }
     }
 }
@@ -143,17 +143,17 @@ class MUnitWordEdit {
     let WORDS = BehaviorRelay(value: "")
 
     init(x: MUnitWord) {
-        ID = BehaviorRelay(value: x.ID.toString)
+        ID = BehaviorRelay(value: String(x.ID))
         TEXTBOOKNAME = BehaviorRelay(value: x.TEXTBOOKNAME)
         UNITSTR = BehaviorRelay(value: x.UNITSTR)
         indexUNIT = BehaviorRelay(value: x.textbook.arrUnits.firstIndex { $0.value == x.UNIT } ?? -1)
         PARTSTR = BehaviorRelay(value: x.PARTSTR)
         indexPART = BehaviorRelay(value: x.textbook.arrParts.firstIndex { $0.value == x.PART } ?? -1)
-        SEQNUM = BehaviorRelay(value: x.SEQNUM.toString)
-        WORDID = BehaviorRelay(value: x.WORDID.toString)
+        SEQNUM = BehaviorRelay(value: String(x.SEQNUM))
+        WORDID = BehaviorRelay(value: String(x.WORDID))
         WORD = BehaviorRelay(value: x.WORD)
         NOTE = BehaviorRelay(value: x.NOTE)
-        FAMIID = BehaviorRelay(value: x.FAMIID.toString)
+        FAMIID = BehaviorRelay(value: String(x.FAMIID))
         ACCURACY = BehaviorRelay(value: x.ACCURACY)
     }
     
@@ -164,7 +164,7 @@ class MUnitWordEdit {
         if indexPART.value != -1 {
             x.PART = x.textbook.arrUnits[indexPART.value].value
         }
-        x.SEQNUM = SEQNUM.value.toInt()!
+        x.SEQNUM = Int(SEQNUM.value)!
         x.WORD = WORD.value
         x.NOTE = NOTE.value
     }

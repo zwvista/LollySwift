@@ -55,7 +55,7 @@ class MWebPage: NSObject, Codable {
         // SQL: INSERT INTO WEBPAGES (TITLE, URL) VALUES (?,?)
         let item2 = MWebPage(x: item)
         let url = "\(CommonApi.urlAPI)WEBPAGES"
-        return RestApi.create(url: url, body: try! item2.toJSONString()!).map { $0.toInt()! }.do(onNext: { print($0) })
+        return RestApi.create(url: url, body: try! item2.toJSONString()!).map { Int($0)! }.do(onNext: { print($0) })
     }
 
     static func update(item: MWebPage) -> Observable<()> {
@@ -67,7 +67,7 @@ class MWebPage: NSObject, Codable {
     static func create(item: MWebPage) -> Observable<Int> {
         // SQL: INSERT INTO WEBPAGES (TITLE, URL) VALUES (?,?)
         let url = "\(CommonApi.urlAPI)WEBPAGES"
-        return RestApi.create(url: url, body: try! item.toJSONString()!).map { $0.toInt()! }.do(onNext: { print($0) })
+        return RestApi.create(url: url, body: try! item.toJSONString()!).map { Int($0)! }.do(onNext: { print($0) })
     }
     
     static func delete(_ id: Int) -> Observable<()> {

@@ -25,7 +25,7 @@ class PhrasesUnitBatchAddViewModel: NSObject {
     func onOK() -> Observable<()> {
         itemEdit.save(to: item)
         var o = Observable.just(())
-        let phrases = itemEdit.PHRASES.value.split("\n")
+        let phrases = itemEdit.PHRASES.value.split(separator: "\n").map { String($0) }
         for i in stride(from: 0, to: phrases.count, by: 2) {
             let item2 = MUnitPhrase()
             copyProperties(from: item, to: item2)

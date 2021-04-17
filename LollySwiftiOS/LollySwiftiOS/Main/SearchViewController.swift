@@ -55,7 +55,7 @@ class SearchViewController: UIViewController, WKNavigationDelegate, UISearchBarD
 
     @IBAction func logout(_ sender: Any) {
         UserDefaults.standard.removeObject(forKey: "userid")
-        if let vc = self.storyboard?.instantiateVC(LoginViewController.self) {
+        if let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController {
             vc.completion = { self.setup() }
             self.present(vc, animated: true)
         }

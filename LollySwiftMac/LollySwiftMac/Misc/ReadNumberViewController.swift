@@ -34,7 +34,7 @@ class ReadNumberViewController: NSViewController, NSTextFieldDelegate {
         let code = (obj.userInfo!["NSTextMovement"] as! NSNumber).intValue
         guard code == NSReturnTextMovement else {return}
         guard textfield === tfNumber else {return}
-        guard let _ = tfNumber.stringValue.toInt() else {return}
+        guard let _ = Int(tfNumber.stringValue) else {return}
         vm.read()
     }
         

@@ -37,7 +37,7 @@ class PatternsWebPagesListViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "WebPageCell10", for: indexPath) as! WebPagesCell
         let item = vm.arrWebPages[indexPath.row]
-        cell.lblSeqNum!.text = item.SEQNUM.toString
+        cell.lblSeqNum!.text = String(item.SEQNUM)
         cell.lblTitle!.text = item.TITLE
         cell.lblURL!.text = item.URL
         return cell

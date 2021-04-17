@@ -22,7 +22,7 @@ class MLangWord: NSObject, Codable, MWordProtocol {
     dynamic var TOTAL = 0
 
     var WORDNOTE: String { WORD + (NOTE.isEmpty ? "" : "(\(NOTE))") }
-    var ACCURACY: String { TOTAL == 0 ? "N/A" : "\(floor(CORRECT.toDouble / TOTAL.toDouble * 1000) / 10)%" }
+    var ACCURACY: String { TOTAL == 0 ? "N/A" : "\(floor(Double(CORRECT) / Double(TOTAL) * 1000) / 10)%" }
 
     override init() {
     }
@@ -57,13 +57,13 @@ class MLangWord: NSObject, Codable, MWordProtocol {
     static func create(item: MLangWord) -> Observable<Int> {
         // SQL: INSERT INTO LANGWORDS (LANGID, WORD) VALUES (?,?)
         let url = "\(CommonApi.urlAPI)LANGWORDS"
-        return RestApi.create(url: url, body: try! item.toJSONString()!).map { $0.toInt()! }.do(onNext: { print($0) })
+        return RestApi.create(url: url, body: try! item.toJSONString()!).map { Int($0)! }.do(onNext: { print($0) })
     }
     
     static func delete(item: MLangWord) -> Observable<()> {
         // SQL: CALL LANGWORDS_DELETE
         let url = "\(CommonApi.urlSP)LANGWORDS_DELETE"
-        let parameters = try! item.toParameters()
+        let parameters = item.toParameters()
         return RestApi.callSP(url: url, parameters: parameters).map { print($0) }
     }
 }
@@ -76,10 +76,10 @@ class MLangWordEdit {
     let ACCURACY: BehaviorRelay<String>
 
     init(x: MLangWord) {
-        ID = BehaviorRelay(value: x.ID.toString)
+        ID = BehaviorRelay(value: String(x.ID))
         WORD = BehaviorRelay(value: x.WORD)
         NOTE = BehaviorRelay(value: x.NOTE)
-        FAMIID = BehaviorRelay(value: x.FAMIID.toString)
+        FAMIID = BehaviorRelay(value: String(x.FAMIID))
         ACCURACY = BehaviorRelay(value: x.ACCURACY)
     }
     

@@ -52,7 +52,7 @@ class MTextbook: NSObject, Codable {
                 let n = (n1 + n2 - 1) / n2
                 return (1...n).map { "\($0 * n2 - n2 + 1)~\($0 * n2)" }
             } else if let m = "CUSTOM,(.+)".r!.findFirst(in: units) {
-                return m.group(at: 1)!.split(",")
+                return m.group(at: 1)!.split(separator: ",").map { String($0) }
             } else {
                 return []
             }
@@ -60,7 +60,7 @@ class MTextbook: NSObject, Codable {
         return o.do(onNext: { arr in
             arr.forEach { row in
                 row.arrUnits = f(units: row.UNITS).enumerated().map { MSelectItem(value: $0.0 + 1, label: $0.1) }
-                row.arrParts = row.PARTS.split(",").enumerated().map { MSelectItem(value: $0.0 + 1, label: $0.1) }
+                row.arrParts = row.PARTS.split(separator: ",").enumerated().map { MSelectItem(value: $0.0 + 1, label: String($0.1)) }
             }
         })
     }
@@ -74,6 +74,6 @@ class MTextbook: NSObject, Codable {
     static func create(item: MTextbook) -> Observable<Int> {
         // SQL: INSERT INTO TEXTBOOKS (ID, LANGID, NAME, UNITS, PARTS) VALUES (?,?,?,?,?)
         let url = "\(CommonApi.urlAPI)TEXTBOOKS"
-        return RestApi.create(url: url, body: try! item.toJSONString()!).map { $0.toInt()! }.do(onNext: { print($0) })
+        return RestApi.create(url: url, body: try! item.toJSONString()!).map { Int($0)! }.do(onNext: { print($0) })
     }
 }

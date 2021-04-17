@@ -43,7 +43,7 @@ class CommonApi {
     static func toTransformItems(transform: String) -> [MTransformItem] {
         var arr = transform.components(separatedBy: "\r\n")
         if arr.count % 2 == 1 { arr.removeLast() }
-        let dic = Dictionary(grouping: arr.enumerated(), by: { $0.0 / 2 })
+        let dic = Dictionary(grouping: arr.enumerated()) { $0.0 / 2 }
         let items: [MTransformItem] = dic.map { i, a in
             let o = MTransformItem()
             o.index = i + 1
@@ -62,7 +62,7 @@ class CommonApi {
         let regex2 = try! NSRegularExpression(pattern: item.extractor)
         var replacement = item.replacement
         if replacement.starts(with: "<extract>") {
-            replacement = String(replacement.dropFirst("<extract>".length))
+            replacement = String(replacement.dropFirst("<extract>".count))
 //            let ms = regex.findAll(in: s)
             let ms = regex2.matches(in: s, range: NSRange(s.startIndex..., in: s))
             var i = 1
@@ -99,7 +99,7 @@ class CommonApi {
     }
     
     static func getAccuracy(CORRECT: Int, TOTAL: Int) -> String {
-        TOTAL == 0 ? "N/A" : "\(floor(CORRECT.toDouble / TOTAL.toDouble * 1000) / 10)%"
+        TOTAL == 0 ? "N/A" : "\(floor(Double(CORRECT) / Double(TOTAL) * 1000) / 10)%"
     }
     
     static func toHtml(text: String) -> String {
@@ -136,7 +136,7 @@ func copyProperties<T: Encodable & NSObject>(from a: T, to b: T) {
 
 extension Array where Element == String {
     public func splitUsingCommaAndMerge() -> String {
-        flatMap { $0.components(separatedBy: ",") }.filter { !$0.isEmpty }.unique().sorted().joined(separator: ",")
+        flatMap { $0.components(separatedBy: ",") }.filter { !$0.isEmpty }.unique.sorted().joined(separator: ",")
     }
 }
 
@@ -163,5 +163,14 @@ extension Array where Element : Equatable {
 extension String {
     func defaultIfEmpty(_ d: String) -> String {
         isEmpty ? d : self
+    }
+    public func urlEncoded() -> String {
+        self.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
+    }
+}
+
+extension NSObject {
+    public var className: String {
+        return String(describing: type(of: self))
     }
 }

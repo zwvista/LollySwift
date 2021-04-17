@@ -75,7 +75,7 @@ class BlogViewModel: NSObject {
     private var regHtmlI: Regex { htmlIWith("(.+?)").r! }
     private var regHtmlEntry: Regex {  "(<li>|<br>)\(htmlWordWith("(.*?)"))(?:\(htmlE1With("(.*?)")))?(?:\(htmlE2With("(.*?)")))?(?:</li>)?".r! }
     func htmlToMarked(text: String) -> String {
-        var arr = text.split("\n")
+        var arr = text.split(separator: "\n").map { String($0) }
         var i = 0
         while i < arr.count {
             var s = arr[i]
@@ -124,12 +124,11 @@ class BlogViewModel: NSObject {
         "* [\(patternText)　文法](https://www.google.com/search?q=\(patternText)　文法)\n* [\(patternText)　句型](https://www.google.com/search?q=\(patternText)　句型)"
     }
     
-    private let bigDigits = "０１２３４５６７８９"
     func addNotes(text: String, complete: @escaping (String) -> Void) {
         func f(_ s: String) -> String {
             var t = s
             for i in 0...9 {
-                t = t.replacingOccurrences(of: String(i), with: bigDigits[i...i])
+                t = t.replacingOccurrences(of: String(i), with: bigDigitsArray[i])
             }
             return t
         }
@@ -138,7 +137,7 @@ class BlogViewModel: NSObject {
             let m = self.regMarkedEntry.findFirst(in: arr[$0])
             if m == nil { return false }
             let word = m!.group(at: 2)!
-            return word.allSatisfy { $0 != "（" && !self.bigDigits.contains($0) }
+            return word.allSatisfy { $0 != "（" && !bigDigits.contains($0) }
         }, getOne: { i in
             let m = self.regMarkedEntry.findFirst(in: arr[i])!
             let (s1, word, s3, s4) = (m.group(at: 1)!, m.group(at: 2)!, m.group(at: 3)!, m.group(at: 4))
@@ -156,3 +155,6 @@ class BlogViewModel: NSObject {
         }) ~ rx.disposeBag
     }
 }
+
+let bigDigits = "０１２３４５６７８９"
+let bigDigitsArray = Array(arrayLiteral: bigDigits)

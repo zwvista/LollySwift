@@ -25,11 +25,11 @@ class WordsUnitBatchAddViewModel: NSObject {
     func onOK() -> Observable<()> {
         itemEdit.save(to: item)
         var o = Observable.just(())
-        let words = itemEdit.WORDS.value.split("\n")
+        let words = itemEdit.WORDS.value.split(separator: "\n")
         for s in words {
             let item2 = MUnitWord()
             copyProperties(from: item, to: item2)
-            item2.WORD = vm.vmSettings.autoCorrectInput(text: s)
+            item2.WORD = vm.vmSettings.autoCorrectInput(text: String(s))
             o = o.flatMap { [unowned self] _ in self.vm.create(item: item2) }
             item.SEQNUM += 1
         }

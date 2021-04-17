@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import EZSwiftExtensions
 import RxSwift
 
 class SettingsViewModel: NSObject {
@@ -22,32 +21,12 @@ class SettingsViewModel: NSObject {
     }
     private var INFO_USLANG = MUserSettingInfo()
     private var USLANG: Int {
-        get { getUSValue(info: INFO_USLANG)!.toInt()! }
+        get { Int(getUSValue(info: INFO_USLANG)!)! }
         set { setUSValue(info: INFO_USLANG, value: String(newValue)) }
-    }
-    private var INFO_USROWSPERPAGEOPTIONS = MUserSettingInfo()
-    var USROWSPERPAGEOPTIONS: [Int] {
-        get { getUSValue(info: INFO_USROWSPERPAGEOPTIONS)!.split(",").map { $0.toInt()! } }
-    }
-    private var INFO_USROWSPERPAGE = MUserSettingInfo()
-    var USROWSPERPAGE: Int {
-        get { getUSValue(info: INFO_USROWSPERPAGE)!.toInt()! }
-    }
-    private var INFO_USLEVELCOLORS = MUserSettingInfo()
-    var USLEVELCOLORS: [Int: [String]]!
-    private var INFO_USSCANINTERVAL = MUserSettingInfo()
-    var USSCANINTERVAL: Int {
-        get { getUSValue(info: INFO_USSCANINTERVAL)!.toInt()! }
-        set { setUSValue(info: INFO_USSCANINTERVAL, value: String(newValue)) }
-    }
-    private var INFO_USREVIEWINTERVAL = MUserSettingInfo()
-    var USREVIEWINTERVAL: Int {
-        get { getUSValue(info: INFO_USREVIEWINTERVAL)!.toInt()! }
-        set { setUSValue(info: INFO_USREVIEWINTERVAL, value: String(newValue)) }
     }
     private var INFO_USTEXTBOOK = MUserSettingInfo()
     var USTEXTBOOK: Int {
-        get { getUSValue(info: INFO_USTEXTBOOK)!.toInt()! }
+        get { Int(getUSValue(info: INFO_USTEXTBOOK)!)! }
         set { setUSValue(info: INFO_USTEXTBOOK, value: String(newValue)) }
     }
     private var INFO_USDICTREFERENCE = MUserSettingInfo()
@@ -57,7 +36,7 @@ class SettingsViewModel: NSObject {
     }
     private var INFO_USDICTNOTE = MUserSettingInfo()
     var USDICTNOTE: Int {
-        get { getUSValue(info: INFO_USDICTNOTE)?.toInt() ?? 0 }
+        get { Int(getUSValue(info: INFO_USDICTNOTE) ?? "") ?? 0 }
         set { setUSValue(info: INFO_USDICTNOTE, value: String(newValue) )}
     }
     private var INFO_USDICTSREFERENCE = MUserSettingInfo()
@@ -67,44 +46,44 @@ class SettingsViewModel: NSObject {
     }
     private var INFO_USDICTTRANSLATION = MUserSettingInfo()
     var USDICTTRANSLATION: Int {
-        get { getUSValue(info: INFO_USDICTTRANSLATION)?.toInt() ?? 0 }
+        get { Int(getUSValue(info: INFO_USDICTTRANSLATION) ?? "") ?? 0 }
         set { setUSValue(info: INFO_USDICTTRANSLATION, value: String(newValue)) }
     }
     private var INFO_USMACVOICE = MUserSettingInfo()
     var USMACVOICE: Int {
-        get { getUSValue(info: INFO_USMACVOICE)?.toInt() ?? 0 }
+        get { Int(getUSValue(info: INFO_USMACVOICE) ?? "") ?? 0 }
         set { setUSValue(info: INFO_USMACVOICE, value: String(newValue)) }
     }
     private var INFO_USIOSVOICE = MUserSettingInfo()
     var USIOSVOICE: Int {
-        get { getUSValue(info: INFO_USIOSVOICE)?.toInt() ?? 0 }
+        get { Int(getUSValue(info: INFO_USIOSVOICE) ?? "") ?? 0 }
         set { setUSValue(info: INFO_USIOSVOICE, value: String(newValue)) }
     }
     private var INFO_USUNITFROM = MUserSettingInfo()
     @objc
     var USUNITFROM: Int {
-        get { getUSValue(info: INFO_USUNITFROM)!.toInt()! }
+        get { Int(getUSValue(info: INFO_USUNITFROM)!)! }
         set { setUSValue(info: INFO_USUNITFROM, value: String(newValue)) }
     }
     var USUNITFROMSTR: String { selectedTextbook.UNITSTR(USUNITFROM) }
     private var INFO_USPARTFROM = MUserSettingInfo()
     @objc
     var USPARTFROM: Int {
-        get { getUSValue(info: INFO_USPARTFROM)!.toInt()! }
+        get { Int(getUSValue(info: INFO_USPARTFROM)!)! }
         set { setUSValue(info: INFO_USPARTFROM, value: String(newValue)) }
     }
     var USPARTFROMSTR: String { selectedTextbook.PARTSTR(USPARTFROM) }
     private var INFO_USUNITTO = MUserSettingInfo()
     @objc
     var USUNITTO: Int {
-        get { getUSValue(info: INFO_USUNITTO)!.toInt()! }
+        get { Int(getUSValue(info: INFO_USUNITTO)!)! }
         set { setUSValue(info: INFO_USUNITTO, value: String(newValue)) }
     }
     var USUNITTOSTR: String { selectedTextbook.UNITSTR(USUNITTO) }
     private var INFO_USPARTTO = MUserSettingInfo()
     @objc
     var USPARTTO: Int {
-        get { getUSValue(info: INFO_USPARTTO)!.toInt()! }
+        get { Int(getUSValue(info: INFO_USPARTTO)!)! }
         set { setUSValue(info: INFO_USPARTTO, value: String(newValue)) }
     }
     var USPARTTOSTR: String { selectedTextbook.PARTSTR(USPARTTO) }
@@ -142,7 +121,7 @@ class SettingsViewModel: NSObject {
     }
     var selectedDictsReference = [MDictionary]() {
         didSet {
-            USDICTSREFERENCE = selectedDictsReference.map(\.DICTID.toString).joined(separator: ",")
+            USDICTSREFERENCE = selectedDictsReference.map { String($0.DICTID) }.joined(separator: ",")
         }
     }
     var selectedDictReferenceIndex: Int { arrDictsReference.firstIndex { $0 == selectedDictReference } ?? 0 }
@@ -223,12 +202,6 @@ class SettingsViewModel: NSObject {
         arrUSMappings = x.arrUSMappings
         arrUserSettings = x.arrUserSettings
         INFO_USLANG = x.INFO_USLANG
-        INFO_USROWSPERPAGEOPTIONS = x.INFO_USROWSPERPAGEOPTIONS
-        INFO_USROWSPERPAGE = x.INFO_USROWSPERPAGE
-        INFO_USLEVELCOLORS = x.INFO_USLEVELCOLORS
-        USLEVELCOLORS = x.USLEVELCOLORS
-        INFO_USSCANINTERVAL = x.INFO_USSCANINTERVAL
-        INFO_USREVIEWINTERVAL = x.INFO_USREVIEWINTERVAL
         INFO_USTEXTBOOK = x.INFO_USTEXTBOOK
         INFO_USDICTREFERENCE = x.INFO_USDICTREFERENCE
         INFO_USDICTNOTE = x.INFO_USDICTNOTE
@@ -285,14 +258,6 @@ class SettingsViewModel: NSObject {
                 self.arrUserSettings = result.2
                 self.arrDictTypes = result.3
                 self.INFO_USLANG = self.getUSInfo(name: MUSMapping.NAME_USLANG)
-                self.INFO_USROWSPERPAGEOPTIONS = self.getUSInfo(name: MUSMapping.NAME_USROWSPERPAGEOPTIONS)
-                self.INFO_USROWSPERPAGE = self.getUSInfo(name: MUSMapping.NAME_USROWSPERPAGE)
-                self.INFO_USLEVELCOLORS = self.getUSInfo(name: MUSMapping.NAME_USLEVELCOLORS)
-                self.INFO_USSCANINTERVAL = self.getUSInfo(name: MUSMapping.NAME_USSCANINTERVAL)
-                self.INFO_USREVIEWINTERVAL = self.getUSInfo(name: MUSMapping.NAME_USREVIEWINTERVAL)
-                let arr = self.getUSValue(info: self.INFO_USLEVELCOLORS)!.split("\r\n").map { $0.split(",") }
-                // https://stackoverflow.com/questions/39791084/swift-3-array-to-dictionary
-                self.USLEVELCOLORS = Dictionary(uniqueKeysWithValues: arr.map { ($0[0].toInt()!, [$0[1], $0[2]]) })
                 self.delegate?.onGetData()
                 return self.setSelectedLang(self.arrLanguages.first { $0.ID == self.USLANG }!)
             }
@@ -318,7 +283,7 @@ class SettingsViewModel: NSObject {
             .flatMap { result -> Observable<()> in
                 self.arrDictsReference = result.0
                 self.selectedDictReference = self.arrDictsReference.first { String($0.DICTID) == self.USDICTREFERENCE }!
-                self.selectedDictsReference = self.USDICTSREFERENCE.split(",").flatMap { id in self.arrDictsReference.filter { String($0.DICTID) == id } }
+                self.selectedDictsReference = self.USDICTSREFERENCE.split(separator: ",").flatMap { id in self.arrDictsReference.filter { String($0.DICTID) == id } }
                 self.arrDictsNote = result.1
                 if self.arrDictsNote.isEmpty { self.arrDictsNote.append(MDictionary()) }
                 self.selectedDictNote = self.arrDictsNote.first { $0.DICTID == self.USDICTNOTE } ?? self.arrDictsNote[0]

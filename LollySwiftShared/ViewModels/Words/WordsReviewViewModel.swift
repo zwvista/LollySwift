@@ -60,8 +60,8 @@ class WordsReviewViewModel: NSObject {
                 var arr2 = [MUnitWord]()
                 for o in arr {
                     let s = o.ACCURACY
-                    let percentage = s.last != "%" ? 0 : s.replacingOccurrences(of: "%", with: "").toDouble()!
-                    let t = 6 - (percentage / 20).toInt
+                    let percentage = s.last != "%" ? 0 : Double(s.replacingOccurrences(of: "%", with: ""))!
+                    let t = 6 - Int(percentage / 20)
                     for _ in 0..<t {
                         arr2.append(o)
                     }
@@ -69,7 +69,7 @@ class WordsReviewViewModel: NSObject {
                 self.arrWords = []
                 let cnt = min(self.options.reviewCount, arr.count)
                 while self.arrWords.count < cnt {
-                    let o = arr2.random()!
+                    let o = arr2.randomElement()!
                     if !self.arrWords.contains(where: { $0.ID == o.ID }) {
                         self.arrWords.append(o)
                     }
@@ -163,7 +163,7 @@ class WordsReviewViewModel: NSObject {
         checkEnabled.accept(hasNext)
         wordTargetString.accept(currentWord)
         noteTargetString.accept(currentItem?.NOTE ?? "")
-        wordHintString.accept(currentItem?.WORD.length.toString ?? "")
+        wordHintString.accept(String(currentItem?.WORD.count ?? 0))
         wordTargetHidden.accept(isTestMode)
         noteTargetHidden.accept(isTestMode)
         wordHintHidden.accept(!isTestMode)

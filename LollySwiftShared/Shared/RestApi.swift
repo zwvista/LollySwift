@@ -42,10 +42,14 @@ extension Encodable {
     }
     
     // https://stackoverflow.com/questions/45209743/how-can-i-use-swift-s-codable-to-encode-into-a-dictionary
-    public func toParameters() throws -> Parameters {
+    public func toParameters() -> Parameters {
         let data = try! JSONEncoder().encode(self)
         let dictionary = try! JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String: Any]
-        return dictionary.map { (k, v) in ("P_" + k, v) }
+        var params = Parameters()
+        for (k, v) in dictionary {
+            params["P_" + k] = v
+        }
+        return params
     }
     
 }
