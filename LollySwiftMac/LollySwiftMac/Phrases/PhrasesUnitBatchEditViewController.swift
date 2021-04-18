@@ -39,12 +39,12 @@ class PhrasesUnitBatchEditViewController: NSViewController, NSTableViewDataSourc
         _ = vmEdit.indexUNIT <~> pubUnit.rx.selectedItemIndex
         _ = vmEdit.indexPART <~> pubPart.rx.selectedItemIndex
         _ = vmEdit.SEQNUM <~> tfSeqNum.rx.text.orEmpty
-        _ = vmEdit.unitIsChecked <~> chkUnit.rx.isOn
-        _ = vmEdit.partIsChecked <~> chkPart.rx.isOn
-        _ = vmEdit.seqnumIsChecked <~> chkSeqNum.rx.isOn
-        _ = vmEdit.unitIsChecked ~> pubUnit.rx.isEnabled
-        _ = vmEdit.partIsChecked ~> pubPart.rx.isEnabled
-        _ = vmEdit.seqnumIsChecked ~> tfSeqNum.rx.isEnabled
+        _ = vmEdit.unitChecked <~> chkUnit.rx.isOn
+        _ = vmEdit.partChecked <~> chkPart.rx.isOn
+        _ = vmEdit.seqnumChecked <~> chkSeqNum.rx.isOn
+        _ = vmEdit.unitChecked ~> pubUnit.rx.isEnabled
+        _ = vmEdit.partChecked ~> pubPart.rx.isEnabled
+        _ = vmEdit.seqnumChecked ~> tfSeqNum.rx.isEnabled
         btnOK.rx.tap.flatMap { [unowned self] _ -> Observable<()> in
             // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
             self.commitEditing()

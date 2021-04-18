@@ -19,9 +19,9 @@ class WordsUnitBatchEditViewModel: NSObject {
     let indexPART = BehaviorRelay(value: 0)
     var PART: Int { vm.vmSettings.arrParts[indexPART.value].value }
     let SEQNUM = BehaviorRelay(value: "")
-    let unitIsChecked = BehaviorRelay(value: false)
-    let partIsChecked = BehaviorRelay(value: false)
-    let seqnumIsChecked = BehaviorRelay(value: false)
+    let unitChecked = BehaviorRelay(value: false)
+    let partChecked = BehaviorRelay(value: false)
+    let seqnumChecked = BehaviorRelay(value: false)
 
     init(vm: WordsUnitViewModel, unit: Int, part: Int) {
         self.vm = vm
@@ -34,10 +34,10 @@ class WordsUnitBatchEditViewModel: NSObject {
         for (i, isChecked) in rows.enumerated() {
             guard isChecked else {continue}
             let item = vm.arrWords[i]
-            if unitIsChecked.value || partIsChecked.value || seqnumIsChecked.value {
-                if unitIsChecked.value { item.UNIT = UNIT }
-                if partIsChecked.value { item.PART = PART }
-                if seqnumIsChecked.value { item.SEQNUM += Int(SEQNUM.value)! }
+            if unitChecked.value || partChecked.value || seqnumChecked.value {
+                if unitChecked.value { item.UNIT = UNIT }
+                if partChecked.value { item.PART = PART }
+                if seqnumChecked.value { item.SEQNUM += Int(SEQNUM.value)! }
                 o = o.flatMap { [unowned self] _ in self.vm.update(item: item) }
             }
         }
