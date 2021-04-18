@@ -161,9 +161,6 @@ extension Array where Element : Equatable {
 }
 
 extension String {
-    func defaultIfEmpty(_ d: String) -> String {
-        isEmpty ? d : self
-    }
     public func urlEncoded() -> String {
         self.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
     }

@@ -1495,14 +1495,14 @@
                                     <action selector="speak:" destination="YNc-Wk-NlX" eventType="touchUpInside" id="nza-bV-81F"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Speak" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wgw-Lx-Trj">
-                                <rect key="frame" x="195" y="145.5" width="47.5" height="20.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Speak" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wgw-Lx-Trj">
+                                <rect key="frame" x="183.5" y="145.5" width="47.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="QL0-uc-kz6">
-                                <rect key="frame" x="195" y="176" width="51" height="31"/>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="QL0-uc-kz6">
+                                <rect key="frame" x="183.5" y="176" width="51" height="31"/>
                                 <connections>
                                     <action selector="isSpeakingChanged:" destination="YNc-Wk-NlX" eventType="valueChanged" id="Id9-rG-STC"/>
                                 </connections>
@@ -1528,6 +1528,7 @@
                             <constraint firstItem="Pjh-Df-B20" firstAttribute="leading" secondItem="zxm-JC-n6l" secondAttribute="leading" id="aUH-Pw-siy"/>
                             <constraint firstItem="QL0-uc-kz6" firstAttribute="leading" secondItem="wgw-Lx-Trj" secondAttribute="leading" id="gc9-t6-rLZ"/>
                             <constraint firstItem="BZ5-uV-j0V" firstAttribute="trailing" secondItem="4Fx-Tx-UT6" secondAttribute="trailing" constant="16" id="jf1-6I-ddc"/>
+                            <constraint firstItem="wgw-Lx-Trj" firstAttribute="centerX" secondItem="sxv-Ts-3ro" secondAttribute="centerX" id="mpE-O1-F0b"/>
                             <constraint firstItem="wgw-Lx-Trj" firstAttribute="centerY" secondItem="Pjh-Df-B20" secondAttribute="centerY" id="o73-Nv-tY6"/>
                             <constraint firstItem="4Fx-Tx-UT6" firstAttribute="leading" secondItem="BZ5-uV-j0V" secondAttribute="leading" constant="16" id="vWR-Ol-4Yc"/>
                             <constraint firstItem="eqT-am-6PI" firstAttribute="centerY" secondItem="zxm-JC-n6l" secondAttribute="centerY" id="vaQ-Fs-6TO"/>
