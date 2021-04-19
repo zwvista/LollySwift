@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17156"/>
-        <plugIn identifier="com.apple.WebKit2IBPlugin" version="17156"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
+        <plugIn identifier="com.apple.WebKit2IBPlugin" version="17701"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -21,8 +21,8 @@
                                 <toolbarItem implicitItemIdentifier="8773739D-6209-490F-9F3D-D5858B8C3C7D" label="Speak?" paletteLabel="Speak?" sizingBehavior="auto" id="m6z-fd-gBU" userLabel="Speak?">
                                     <nil key="toolTip"/>
                                     <segmentedControl key="view" verticalHuggingPriority="750" id="a2o-et-iJI">
-                                        <rect key="frame" x="0.0" y="14" width="95" height="23"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <rect key="frame" x="0.0" y="14" width="99" height="23"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="vLe-mL-U9g">
                                             <font key="font" metaFont="system"/>
                                             <segments>
@@ -116,32 +116,32 @@
                         <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
                         <toolbar key="toolbar" implicitIdentifier="5E8CD035-C695-44E4-A272-6840FDFE8C8E" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="5w7-h7-oHr">
                             <allowedToolbarItems>
-                                <toolbarItem implicitItemIdentifier="E0B72C73-5B52-41CA-986A-D202164AD7F8" label="Marked" paletteLabel="Marked" tag="-1" image="NSTouchBarGoUpTemplate" id="jjN-Ig-zo6">
+                                <toolbarItem implicitItemIdentifier="E0B72C73-5B52-41CA-986A-D202164AD7F8" label="Marked" paletteLabel="Marked" tag="-1" image="NSTouchBarGoUpTemplate" sizingBehavior="auto" id="jjN-Ig-zo6">
                                     <connections>
                                         <action selector="htmlToMarked:" target="vaE-wK-YYd" id="UFN-ov-tTL"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="0CC2346B-85EB-468B-9DB1-B37022A8325B" label="+B" paletteLabel="+B" tag="-1" image="NSAddTemplate" id="d08-Zj-N7R">
+                                <toolbarItem implicitItemIdentifier="0CC2346B-85EB-468B-9DB1-B37022A8325B" label="+B" paletteLabel="+B" tag="-1" image="NSAddTemplate" sizingBehavior="auto" id="d08-Zj-N7R">
                                     <connections>
                                         <action selector="addTagB:" target="vaE-wK-YYd" id="G2Y-7I-vlJ"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="E805D9D2-A95D-499E-9ABA-D38FB0D24ADC" label="+I" paletteLabel="+I" tag="-1" image="NSAddTemplate" id="bXD-JS-Ynf">
+                                <toolbarItem implicitItemIdentifier="E805D9D2-A95D-499E-9ABA-D38FB0D24ADC" label="+I" paletteLabel="+I" tag="-1" image="NSAddTemplate" sizingBehavior="auto" id="bXD-JS-Ynf">
                                     <connections>
                                         <action selector="addTagI:" target="vaE-wK-YYd" id="reT-Pd-R2d"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="DA30B0CE-D78F-4C3D-B9E3-41EC9FCBEC6C" label="-B-I" paletteLabel="-B-I" tag="-1" image="NSRemoveTemplate" id="Ro0-Sn-9C9">
+                                <toolbarItem implicitItemIdentifier="DA30B0CE-D78F-4C3D-B9E3-41EC9FCBEC6C" label="-B-I" paletteLabel="-B-I" tag="-1" image="NSRemoveTemplate" sizingBehavior="auto" id="Ro0-Sn-9C9">
                                     <connections>
                                         <action selector="removeTagBI:" target="vaE-wK-YYd" id="Nyl-tq-1bv"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="6C2D21BB-FFDD-4D15-9382-9584B6D9A698" label="B &lt;=&gt; I" paletteLabel="B &lt;=&gt; I" tag="-1" id="KSQ-NA-IaZ">
+                                <toolbarItem implicitItemIdentifier="6C2D21BB-FFDD-4D15-9382-9584B6D9A698" label="B &lt;=&gt; I" paletteLabel="B &lt;=&gt; I" tag="-1" sizingBehavior="auto" id="KSQ-NA-IaZ">
                                     <connections>
                                         <action selector="exchangeTagBI:" target="vaE-wK-YYd" id="3o9-TU-HqC"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="BCAF5EE7-64D9-4FC5-9982-9925EF400A1E" label="E::" paletteLabel="E::" tag="-1" image="NSTouchBarBookmarksTemplate" id="LYl-V1-QYj">
+                                <toolbarItem implicitItemIdentifier="BCAF5EE7-64D9-4FC5-9982-9925EF400A1E" label="E::" paletteLabel="E::" tag="-1" image="NSTouchBarBookmarksTemplate" sizingBehavior="auto" id="LYl-V1-QYj">
                                     <connections>
                                         <action selector="addExplanation:" target="vaE-wK-YYd" id="Q5D-Uc-Ig1"/>
                                     </connections>
@@ -149,8 +149,8 @@
                                 <toolbarItem implicitItemIdentifier="DB7CFED8-9106-44F3-A5EB-514473C925E0" label="Page Type" paletteLabel="Page Type" sizingBehavior="auto" id="8st-Ae-RAu">
                                     <nil key="toolTip"/>
                                     <segmentedControl key="view" verticalHuggingPriority="750" id="4b5-aV-cyn">
-                                        <rect key="frame" x="0.0" y="14" width="102" height="23"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <rect key="frame" x="0.0" y="14" width="106" height="23"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="CgK-wf-8U0">
                                             <font key="font" metaFont="system"/>
                                             <segments>
@@ -166,10 +166,8 @@
                                         <action selector="switchPage:" target="vaE-wK-YYd" id="hii-FT-NU8"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="7B9E1BE1-D8FF-4BC2-B3DE-17FBF9E018BB" label="Pattern No." paletteLabel="Pattern No." tag="-1" id="EDL-Iu-W2r">
+                                <toolbarItem implicitItemIdentifier="7B9E1BE1-D8FF-4BC2-B3DE-17FBF9E018BB" label="Pattern No." paletteLabel="Pattern No." tag="-1" sizingBehavior="auto" id="EDL-Iu-W2r">
                                     <nil key="toolTip"/>
-                                    <size key="minSize" width="40" height="22"/>
-                                    <size key="maxSize" width="40" height="22"/>
                                     <textField key="view" verticalHuggingPriority="750" tag="-1" id="Lbj-Ka-Wut">
                                         <rect key="frame" x="14" y="14" width="40" height="22"/>
                                         <autoresizingMask key="autoresizingMask"/>
@@ -187,17 +185,13 @@
                                         </connections>
                                     </textField>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="C8B0B4A0-A35C-4BBA-BE93-86A3EDB9BFE2" label="Open" paletteLabel="Open" tag="-1" id="Ln9-xz-fV3">
-                                    <size key="minSize" width="4" height="14"/>
-                                    <size key="maxSize" width="4" height="14"/>
+                                <toolbarItem implicitItemIdentifier="C8B0B4A0-A35C-4BBA-BE93-86A3EDB9BFE2" label="Open" paletteLabel="Open" tag="-1" sizingBehavior="auto" id="Ln9-xz-fV3">
                                     <connections>
                                         <action selector="openPattern:" target="vaE-wK-YYd" id="aZa-uq-6Dm"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="431E2A0E-F4CE-4A5F-B316-60FB25A76C58" label="Pattern Text" paletteLabel="Pattern Text" tag="-1" id="9KA-1d-XSR">
+                                <toolbarItem implicitItemIdentifier="431E2A0E-F4CE-4A5F-B316-60FB25A76C58" label="Pattern Text" paletteLabel="Pattern Text" tag="-1" sizingBehavior="auto" id="9KA-1d-XSR">
                                     <nil key="toolTip"/>
-                                    <size key="minSize" width="40" height="22"/>
-                                    <size key="maxSize" width="123" height="22"/>
                                     <textField key="view" verticalHuggingPriority="750" tag="-1" id="r3b-4B-iGP">
                                         <rect key="frame" x="0.0" y="14" width="119" height="22"/>
                                         <autoresizingMask key="autoresizingMask"/>
@@ -215,12 +209,12 @@
                                         </connections>
                                     </textField>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="92FE2A03-F4C7-46FE-BBF4-1BD67BE21961" label="Pattern MD" paletteLabel="Pattern MD" tag="-1" id="cwH-9b-MEC">
+                                <toolbarItem implicitItemIdentifier="92FE2A03-F4C7-46FE-BBF4-1BD67BE21961" label="Pattern MD" paletteLabel="Pattern MD" tag="-1" sizingBehavior="auto" id="cwH-9b-MEC">
                                     <connections>
                                         <action selector="copyPatternMarkDown:" target="vaE-wK-YYd" id="8yk-Fl-u31"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="4DE715D9-8F20-499D-A8E6-40FF7E6F9438" label="Add Notes" paletteLabel="Add Notes" tag="-1" id="PoU-Ac-WoH">
+                                <toolbarItem implicitItemIdentifier="4DE715D9-8F20-499D-A8E6-40FF7E6F9438" label="Add Notes" paletteLabel="Add Notes" tag="-1" sizingBehavior="auto" id="PoU-Ac-WoH">
                                     <connections>
                                         <action selector="addNotes:" target="vaE-wK-YYd" id="Juu-xy-k3d"/>
                                     </connections>
@@ -410,9 +404,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="NSAddTemplate" width="11" height="11"/>
-        <image name="NSRemoveTemplate" width="11" height="11"/>
-        <image name="NSTouchBarBookmarksTemplate" width="22" height="30"/>
-        <image name="NSTouchBarGoUpTemplate" width="16" height="30"/>
+        <image name="NSAddTemplate" width="14" height="13"/>
+        <image name="NSRemoveTemplate" width="14" height="4"/>
+        <image name="NSTouchBarBookmarksTemplate" width="18" height="15"/>
+        <image name="NSTouchBarGoUpTemplate" width="15" height="9"/>
     </resources>
 </document>
