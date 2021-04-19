@@ -59,7 +59,7 @@ class SettingsViewController: NSViewController, SettingsViewModelDelegate, NSTab
     }
     
     @IBAction func langSelected(_ sender: AnyObject) {
-        vm.setSelectedLang(vm.selectedLang).subscribe() ~ rx.disposeBag
+        vm.updateLang().subscribe() ~ rx.disposeBag
     }
     
     @IBAction func voiceSelected(_ sender: AnyObject) {

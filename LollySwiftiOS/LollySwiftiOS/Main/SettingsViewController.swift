@@ -55,7 +55,8 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
         ddLang.anchorView = langCell
         ddLang.selectionAction = { [unowned self] (index: Int, item: String) in
             guard index != self.vm.selectedLangIndex else {return}
-            self.vm.setSelectedLang(self.vm.arrLanguages[index]).subscribe() ~ self.rx.disposeBag
+            self.vm.selectedLang = self.vm.arrLanguages[index]
+            self.vm.updateLang().subscribe() ~ self.rx.disposeBag
         }
 
         ddVoice.anchorView = voiceCell

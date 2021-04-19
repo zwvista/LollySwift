@@ -103,64 +103,35 @@ class SettingsViewModel: NSObject {
     @objc
     var arriOSVoices: [MVoice]!
     @objc
-    var selectedMacVoice = MVoice() {
-        didSet {
-            USMACVOICE = selectedMacVoice.ID
-        }
-    }
+    var selectedMacVoice = MVoice()
     var macVoiceName: String { selectedMacVoice.VOICENAME }
     var selectediOSVoice = MVoice()
     var selectediOSVoiceIndex: Int { arriOSVoices.firstIndex { $0 == selectediOSVoice } ?? 0 }
 
     @objc
     var arrDictsReference = [MDictionary]()
-    var selectedDictReference: MDictionary! {
-        didSet {
-            USDICTREFERENCE = String(selectedDictReference.DICTID)
-        }
-    }
-    var selectedDictsReference = [MDictionary]() {
-        didSet {
-            USDICTSREFERENCE = selectedDictsReference.map { String($0.DICTID) }.joined(separator: ",")
-        }
-    }
+    var selectedDictReference: MDictionary!
+    var selectedDictsReference = [MDictionary]()
     var selectedDictReferenceIndex: Int { arrDictsReference.firstIndex { $0 == selectedDictReference } ?? 0 }
     
     @objc
     var arrDictsNote = [MDictionary]()
     @objc
-    var selectedDictNote = MDictionary() {
-        didSet {
-            USDICTNOTE = selectedDictNote.DICTID
-        }
-    }
+    var selectedDictNote = MDictionary()
     var selectedDictNoteIndex: Int { arrDictsNote.firstIndex { $0 == selectedDictNote } ?? 0 }
     var hasDictNote: Bool { arrDictsNote[0].ID != 0 }
     
     @objc
     var arrDictsTranslation = [MDictionary]()
     @objc
-    var selectedDictTranslation = MDictionary() {
-        didSet {
-            USDICTTRANSLATION = selectedDictTranslation.DICTID
-        }
-    }
+    var selectedDictTranslation = MDictionary()
     var selectedDictTranslationIndex: Int { arrDictsTranslation.firstIndex { $0 == selectedDictTranslation } ?? 0 }
     var hasDictTranslation: Bool { !arrDictsTranslation.isEmpty }
 
     @objc
     var arrTextbooks = [MTextbook]()
     @objc
-    var selectedTextbook: MTextbook! {
-        didSet {
-            USTEXTBOOK = selectedTextbook.ID
-            INFO_USUNITFROM = getUSInfo(name: MUSMapping.NAME_USUNITFROM)
-            INFO_USPARTFROM = getUSInfo(name: MUSMapping.NAME_USPARTFROM)
-            INFO_USUNITTO = getUSInfo(name: MUSMapping.NAME_USUNITTO)
-            INFO_USPARTTO = getUSInfo(name: MUSMapping.NAME_USPARTTO)
-            toType = isSingleUnit ? .unit : isSingleUnitPart ? .part : .to
-        }
-    }
+    var selectedTextbook: MTextbook!
     var selectedTextbookIndex: Int { arrTextbooks.firstIndex { $0 == selectedTextbook } ?? 0 }
     @objc
     var arrTextbookFilters = [MSelectItem]()
@@ -259,14 +230,15 @@ class SettingsViewModel: NSObject {
                 self.arrDictTypes = result.3
                 self.INFO_USLANG = self.getUSInfo(name: MUSMapping.NAME_USLANG)
                 self.delegate?.onGetData()
-                return self.setSelectedLang(self.arrLanguages.first { $0.ID == self.USLANG }!)
+                self.selectedLang = self.arrLanguages.first { $0.ID == self.USLANG }!
+                return self.updateLang()
             }
     }
 
-    func setSelectedLang(_ lang: MLanguage) -> Observable<()> {
-        let isinit = USLANG == lang.ID
-        USLANG = lang.ID
-        selectedLang = lang
+    func updateLang() -> Observable<()> {
+        let newVal = selectedLang.ID
+        let dirty = USLANG != newVal
+        USLANG = newVal
         INFO_USTEXTBOOK = getUSInfo(name: MUSMapping.NAME_USTEXTBOOK)
         INFO_USDICTREFERENCE = getUSInfo(name: MUSMapping.NAME_USDICTREFERENCE)
         INFO_USDICTNOTE = getUSInfo(name: MUSMapping.NAME_USDICTNOTE)
@@ -304,41 +276,55 @@ class SettingsViewModel: NSObject {
                 if self.arriOSVoices.isEmpty { self.arriOSVoices.append(MVoice()) }
                 self.selectedMacVoice = self.arrMacVoices.first { $0.ID == self.USMACVOICE } ?? self.arrMacVoices[0]
                 self.selectediOSVoice = self.arriOSVoices.first { $0.ID == self.USIOSVOICE } ?? self.arriOSVoices[0]
-                if isinit {
-                    self.delegate?.onUpdateLang()
-                    return Observable.just(())
-                } else {
-                    return self.updateLang()
-                }
+                return Observable.zip(self.updateTextbook(), self.updateDictReference(), self.updateDictsReference(), self.updateDictNote(), self.updateDictTranslation(), self.updateMacVoice(), self.updateiOSVoice(), (!dirty ? Observable.just(()) : MUserSetting.update(info: self.INFO_USLANG, intValue: self.USLANG)).do(onNext: { self.delegate?.onUpdateLang() })).map {_ in }
             }
-    }
-    
-    func updateLang() -> Observable<()> {
-        MUserSetting.update(info: INFO_USLANG, intValue: USLANG).do(onNext: { self.delegate?.onUpdateLang() })
     }
 
     func updateTextbook() -> Observable<()> {
-        MUserSetting.update(info: INFO_USTEXTBOOK, intValue: USTEXTBOOK).do(onNext: { self.delegate?.onUpdateTextbook() })
+        let newVal = selectedTextbook.ID
+        let dirty = USTEXTBOOK != newVal
+        USTEXTBOOK = newVal
+        INFO_USUNITFROM = getUSInfo(name: MUSMapping.NAME_USUNITFROM)
+        INFO_USPARTFROM = getUSInfo(name: MUSMapping.NAME_USPARTFROM)
+        INFO_USUNITTO = getUSInfo(name: MUSMapping.NAME_USUNITTO)
+        INFO_USPARTTO = getUSInfo(name: MUSMapping.NAME_USPARTTO)
+        toType = isSingleUnit ? .unit : isSingleUnitPart ? .part : .to
+        return (dirty ? Observable.just(()) : MUserSetting.update(info: INFO_USTEXTBOOK, intValue: USTEXTBOOK)).do(onNext: { self.delegate?.onUpdateTextbook() })
     }
 
     func updateDictReference() -> Observable<()> {
-        MUserSetting.update(info: INFO_USDICTREFERENCE, stringValue: USDICTREFERENCE).do(onNext: { self.delegate?.onUpdateDictReference() })
+        let newVal = String(selectedDictReference.DICTID)
+        let dirty = USDICTREFERENCE != newVal
+        USDICTREFERENCE = newVal
+        return (dirty ? Observable.just(()) : MUserSetting.update(info: INFO_USDICTREFERENCE, stringValue: USDICTREFERENCE)).do(onNext: { self.delegate?.onUpdateDictReference() })
     }
     
     func updateDictsReference() -> Observable<()> {
-        MUserSetting.update(info: INFO_USDICTSREFERENCE, stringValue: USDICTSREFERENCE).do(onNext: { self.delegate?.onUpdateDictsReference() })
+        let newVal = selectedDictsReference.map { String($0.DICTID) }.joined(separator: ",")
+        let dirty = USDICTSREFERENCE != newVal
+        USDICTSREFERENCE = newVal
+        return (dirty ? Observable.just(()) : MUserSetting.update(info: INFO_USDICTSREFERENCE, stringValue: USDICTSREFERENCE)).do(onNext: { self.delegate?.onUpdateDictsReference() })
     }
 
     func updateDictNote() -> Observable<()> {
-        MUserSetting.update(info: INFO_USDICTNOTE, intValue: USDICTNOTE).do(onNext: { self.delegate?.onUpdateDictNote() })
+        let newVal = selectedDictNote.DICTID
+        let dirty = USDICTNOTE != newVal
+        USDICTNOTE = newVal
+        return (dirty ? Observable.just(()) : MUserSetting.update(info: INFO_USDICTNOTE, intValue: USDICTNOTE)).do(onNext: { self.delegate?.onUpdateDictNote() })
     }
     
     func updateDictTranslation() -> Observable<()> {
-        MUserSetting.update(info: INFO_USDICTTRANSLATION, intValue: USDICTTRANSLATION).do(onNext: { self.delegate?.onUpdateDictTranslation() })
+        let newVal = selectedDictTranslation.DICTID
+        let dirty = USDICTTRANSLATION != newVal
+        USDICTTRANSLATION = newVal
+        return (dirty ? Observable.just(()) : MUserSetting.update(info: INFO_USDICTTRANSLATION, intValue: USDICTTRANSLATION)).do(onNext: { self.delegate?.onUpdateDictTranslation() })
     }
     
     func updateMacVoice() -> Observable<()> {
-        MUserSetting.update(info: INFO_USMACVOICE, intValue: USMACVOICE).do(onNext: { self.delegate?.onUpdateMacVoice() })
+        let newVal = selectedMacVoice.ID
+        let dirty = USMACVOICE != newVal
+        USMACVOICE = newVal
+        return (dirty ? Observable.just(()) : MUserSetting.update(info: INFO_USMACVOICE, intValue: USMACVOICE)).do(onNext: { self.delegate?.onUpdateMacVoice() })
     }
     
     func updateiOSVoice() -> Observable<()> {
@@ -350,7 +336,7 @@ class SettingsViewModel: NSObject {
     }
     
     func updateUnitFrom() -> Observable<()> {
-        doUpdateUnitFrom(v: USUNITFROM, check: false).concat(
+        doUpdateUnitFrom(v: USUNITFROM).concat(
             toType == .unit ? doUpdateSingleUnit() :
             toType == .part || isInvalidUnitPart ? doUpdateUnitPartTo() :
             Observable.empty()
@@ -358,19 +344,19 @@ class SettingsViewModel: NSObject {
     }
     
     func updatePartFrom() -> Observable<()> {
-        doUpdatePartFrom(v: USPARTFROM, check: false).concat(
+        doUpdatePartFrom(v: USPARTFROM).concat(
             toType == .part || isInvalidUnitPart ? doUpdateUnitPartTo() : Observable.empty()
         )
     }
     
     func updateUnitTo() -> Observable<()> {
-        doUpdateUnitTo(v: USUNITTO, check: false).concat(
+        doUpdateUnitTo(v: USUNITTO).concat(
             isInvalidUnitPart ? doUpdateUnitPartFrom() : Observable.empty()
         )
     }
     
     func updatePartTo() -> Observable<()> {
-        doUpdatePartTo(v: USPARTTO, check: false).concat(
+        doUpdatePartTo(v: USPARTTO).concat(
             isInvalidUnitPart ? doUpdateUnitPartFrom() : Observable.empty()
         )
     }
@@ -437,28 +423,28 @@ class SettingsViewModel: NSObject {
         Observable.zip(doUpdateUnitTo(v: USUNITFROM), doUpdatePartFrom(v: 1), doUpdatePartTo(v: partCount)).map{_ in }
     }
 
-    private func doUpdateUnitFrom(v: Int, check: Bool = true) -> Observable<()> {
-        guard !check || USUNITFROM != v else { return Observable.empty() }
+    private func doUpdateUnitFrom(v: Int) -> Observable<()> {
+        let dirty = USUNITFROM != v
         USUNITFROM = v
-        return MUserSetting.update(info: INFO_USUNITFROM, intValue: USUNITFROM).do(onNext: { self.delegate?.onUpdateUnitFrom() })
+        return !dirty ? Observable.empty() : MUserSetting.update(info: INFO_USUNITFROM, intValue: USUNITFROM).do(onNext: { self.delegate?.onUpdateUnitFrom() })
     }
     
-    private func doUpdatePartFrom(v: Int, check: Bool = true) -> Observable<()> {
-        guard !check || USPARTFROM != v else { return Observable.empty() }
+    private func doUpdatePartFrom(v: Int) -> Observable<()> {
+        let dirty = USPARTFROM != v
         USPARTFROM = v
-        return MUserSetting.update(info: INFO_USPARTFROM, intValue: USPARTFROM).do(onNext: { self.delegate?.onUpdatePartFrom()  })
+        return !dirty ? Observable.empty() : MUserSetting.update(info: INFO_USPARTFROM, intValue: USPARTFROM).do(onNext: { self.delegate?.onUpdatePartFrom() })
     }
     
-    private func doUpdateUnitTo(v: Int, check: Bool = true) -> Observable<()> {
-        guard !check || USUNITTO != v else { return Observable.empty() }
+    private func doUpdateUnitTo(v: Int) -> Observable<()> {
+        let dirty = USUNITTO != v
         USUNITTO = v
-        return MUserSetting.update(info: INFO_USUNITTO, intValue: USUNITTO).do(onNext: { self.delegate?.onUpdateUnitTo() })
+        return !dirty ? Observable.empty() : MUserSetting.update(info: INFO_USUNITTO, intValue: USUNITTO).do(onNext: { self.delegate?.onUpdateUnitTo() })
     }
     
-    private func doUpdatePartTo(v: Int, check: Bool = true) -> Observable<()> {
-        guard !check || USPARTTO != v else { return Observable.empty() }
+    private func doUpdatePartTo(v: Int) -> Observable<()> {
+        let dirty = USPARTTO != v
         USPARTTO = v
-        return MUserSetting.update(info: INFO_USPARTTO, intValue: USPARTTO).do(onNext: { self.delegate?.onUpdatePartTo() })
+        return !dirty ? Observable.empty() : MUserSetting.update(info: INFO_USPARTTO, intValue: USPARTTO).do(onNext: { self.delegate?.onUpdatePartTo() })
     }
     
     static let zeroNote = "O"

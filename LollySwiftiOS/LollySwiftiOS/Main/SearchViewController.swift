@@ -32,7 +32,8 @@ class SearchViewController: UIViewController, WKNavigationDelegate, UISearchBarD
             self.ddLang.anchorView = self.btnLang
             self.ddLang.selectionAction = { [unowned self] (index: Int, item: String) in
                 guard index != vmSettings.selectedLangIndex else {return}
-                vmSettings.setSelectedLang(vmSettings.arrLanguages[index]).subscribe() ~ self.rx.disposeBag
+                vmSettings.selectedLang = vmSettings.arrLanguages[index]
+                vmSettings.updateLang().subscribe() ~ self.rx.disposeBag
             }
             self.ddDictReference.anchorView = self.btnDict
             self.ddDictReference.selectionAction = { [unowned self] (index: Int, item: String) in
