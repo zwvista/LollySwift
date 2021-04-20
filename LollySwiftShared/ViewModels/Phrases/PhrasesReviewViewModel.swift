@@ -18,7 +18,7 @@ class PhrasesReviewViewModel: NSObject {
     var index = 0
     let options = MReviewOptions()
     var isTestMode: Bool { options.mode == .test || options.mode == .textbook }
-    var subscription: Disposable? = nil
+    var subscriptionTimer: Disposable? = nil
     let doTestAction: (() -> Void)?
 
     let indexString = BehaviorRelay(value: "")
@@ -46,7 +46,7 @@ class PhrasesReviewViewModel: NSObject {
             self.doTest()
             self.checkTitle.accept(self.isTestMode ? "Check" : "Next")
         }
-        self.subscription?.dispose()
+        subscriptionTimer?.dispose()
         if options.mode == .textbook {
             MUnitPhrase.getDataByTextbook(vmSettings.selectedTextbook).subscribe(onNext: { arr in
                 let cnt = min(self.options.reviewCount, arr.count)
@@ -63,10 +63,10 @@ class PhrasesReviewViewModel: NSObject {
                 if self.options.shuffled { self.arrPhrases = self.arrPhrases.shuffled() }
                 f()
                 if self.options.mode == .reviewAuto {
-                    self.subscription = Observable<Int>.interval(.seconds(self.options.interval), scheduler: MainScheduler.instance).subscribe { _ in
+                    self.subscriptionTimer = Observable<Int>.interval(.seconds(self.options.interval), scheduler: MainScheduler.instance).subscribe { _ in
                         self.check()
                     }
-                    self.subscription?.disposed(by: self.rx.disposeBag)
+                    self.subscriptionTimer?.disposed(by: self.rx.disposeBag)
                 }
             }) ~ self.rx.disposeBag
         }
@@ -128,7 +128,7 @@ class PhrasesReviewViewModel: NSObject {
         if hasNext {
             indexString.accept("\(index + 1)/\(arrPhrases.count)")
         } else {
-            subscription?.dispose()
+            subscriptionTimer?.dispose()
         }
     }
 }

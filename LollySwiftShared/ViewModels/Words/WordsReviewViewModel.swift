@@ -17,7 +17,7 @@ class WordsReviewViewModel: NSObject {
     var arrCorrectIDs = [Int]()
     var index = 0
     var isTestMode: Bool { options.mode == .test || options.mode == .textbook }
-    var subscription: Disposable? = nil
+    var subscriptionTimer: Disposable? = nil
     let options = MReviewOptions()
     let doTestAction: (() -> Void)?
 
@@ -53,7 +53,7 @@ class WordsReviewViewModel: NSObject {
             self.doTest()
             self.checkTitle.accept(self.isTestMode ? "Check" : "Next")
         }
-        subscription?.dispose()
+        subscriptionTimer?.dispose()
         isSpeaking.accept(options.speakingEnabled)
         if options.mode == .textbook {
             MUnitWord.getDataByTextbook(vmSettings.selectedTextbook).subscribe(onNext: { arr in
@@ -86,10 +86,10 @@ class WordsReviewViewModel: NSObject {
                 if self.options.shuffled { self.arrWords = self.arrWords.shuffled() }
                 f()
                 if self.options.mode == .reviewAuto {
-                    self.subscription = Observable<Int>.interval(.seconds( self.options.interval), scheduler: MainScheduler.instance).subscribe { _ in
+                    self.subscriptionTimer = Observable<Int>.interval(.seconds( self.options.interval), scheduler: MainScheduler.instance).subscribe { _ in
                         self.check()
                     }
-                    self.subscription?.disposed(by: self.rx.disposeBag)
+                    self.subscriptionTimer?.disposed(by: self.rx.disposeBag)
                 }
             }) ~ self.rx.disposeBag
         }
@@ -178,7 +178,7 @@ class WordsReviewViewModel: NSObject {
                 self.translationString.accept($0)
             }) ~ rx.disposeBag
         } else {
-            subscription?.dispose()
+            subscriptionTimer?.dispose()
         }
     }
 }

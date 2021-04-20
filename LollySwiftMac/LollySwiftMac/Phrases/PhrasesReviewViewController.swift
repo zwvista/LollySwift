@@ -68,7 +68,7 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
     override func viewWillDisappear() {
         super.viewWillDisappear()
         wc = nil
-        vm.subscription?.dispose()
+        vm.subscriptionTimer?.dispose()
     }
     
     @IBAction func newTest(_ sender: AnyObject) {
