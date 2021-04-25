@@ -47,6 +47,7 @@ class PhrasesReviewViewModel: NSObject {
             self.checkTitle.accept(self.isTestMode ? "Check" : "Next")
         }
         subscriptionTimer?.dispose()
+        isSpeaking.accept(options.speakingEnabled)
         if options.mode == .textbook {
             MUnitPhrase.getDataByTextbook(vmSettings.selectedTextbook).subscribe(onNext: { arr in
                 let cnt = min(self.options.reviewCount, arr.count)

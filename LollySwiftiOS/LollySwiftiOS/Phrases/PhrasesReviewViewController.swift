@@ -54,7 +54,7 @@ class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        vm.subscription?.dispose()
+        vm.subscriptionTimer?.dispose()
     }
 
     @IBAction func newTest(_ sender: AnyObject) {
