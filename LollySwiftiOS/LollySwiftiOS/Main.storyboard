@@ -299,8 +299,8 @@
                                                     <color key="textColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="4" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Sts-VQ-Hk5">
-                                                    <rect key="frame" x="384" y="13" width="10" height="19.5"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Sts-VQ-Hk5">
+                                                    <rect key="frame" x="352" y="13" width="42" height="19.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -324,8 +324,8 @@
                                                     <color key="textColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Text" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FeT-5f-mQ9">
-                                                    <rect key="frame" x="363.5" y="13" width="30.5" height="19.5"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="FeT-5f-mQ9">
+                                                    <rect key="frame" x="352" y="13" width="42" height="19.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -343,7 +343,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nhD-RQ-TC9">
-                                                    <rect key="frame" x="132" y="5" width="69" height="34"/>
+                                                    <rect key="frame" x="150" y="5" width="90" height="34"/>
                                                     <state key="normal" title="Previous">
                                                         <color key="titleColor" red="1" green="0.2527923882" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
@@ -355,7 +355,7 @@
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0oS-ST-GhX">
-                                                    <rect key="frame" x="2" y="0.0" width="76" height="44.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="90" height="44"/>
                                                     <color key="backgroundColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <state key="normal" title="Part">
                                                         <color key="titleColor" red="0.99942404029999998" green="0.98555368190000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -365,7 +365,7 @@
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qxR-1m-hkL">
-                                                    <rect key="frame" x="248.5" y="6.5" width="38" height="34"/>
+                                                    <rect key="frame" x="300" y="5" width="114" height="34"/>
                                                     <state key="normal" title="Next">
                                                         <color key="titleColor" red="1" green="0.2527923882" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
@@ -378,14 +378,16 @@
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="nhD-RQ-TC9" firstAttribute="leading" secondItem="0oS-ST-GhX" secondAttribute="trailing" constant="54" id="0Ca-8N-ucB"/>
-                                                <constraint firstItem="qxR-1m-hkL" firstAttribute="centerY" secondItem="igc-Jy-Ooc" secondAttribute="centerY" constant="1.25" id="Gwf-Qi-vJD"/>
-                                                <constraint firstItem="qxR-1m-hkL" firstAttribute="centerX" secondItem="igc-Jy-Ooc" secondAttribute="centerX" constant="60.5" id="bjD-O1-0Qz"/>
-                                                <constraint firstItem="nhD-RQ-TC9" firstAttribute="centerX" secondItem="igc-Jy-Ooc" secondAttribute="centerX" constant="-40.5" id="jlV-ee-uJG"/>
+                                                <constraint firstItem="nhD-RQ-TC9" firstAttribute="leading" secondItem="0oS-ST-GhX" secondAttribute="trailing" constant="60" id="0Ca-8N-ucB"/>
+                                                <constraint firstAttribute="trailing" secondItem="qxR-1m-hkL" secondAttribute="trailing" id="D6T-5c-kV9"/>
+                                                <constraint firstItem="qxR-1m-hkL" firstAttribute="centerY" secondItem="igc-Jy-Ooc" secondAttribute="centerY" id="Gwf-Qi-vJD"/>
+                                                <constraint firstItem="qxR-1m-hkL" firstAttribute="leading" secondItem="nhD-RQ-TC9" secondAttribute="trailing" constant="60" id="iX9-H6-r5J"/>
+                                                <constraint firstItem="nhD-RQ-TC9" firstAttribute="width" secondItem="0oS-ST-GhX" secondAttribute="width" id="ijh-eM-eYf"/>
                                                 <constraint firstItem="nhD-RQ-TC9" firstAttribute="centerY" secondItem="igc-Jy-Ooc" secondAttribute="centerY" id="kmt-mC-t3g"/>
-                                                <constraint firstAttribute="bottom" secondItem="0oS-ST-GhX" secondAttribute="bottom" constant="-0.5" id="qU9-QH-Y97"/>
-                                                <constraint firstItem="0oS-ST-GhX" firstAttribute="leading" secondItem="igc-Jy-Ooc" secondAttribute="leading" constant="2" id="rk9-j2-fWq"/>
+                                                <constraint firstAttribute="bottom" secondItem="0oS-ST-GhX" secondAttribute="bottom" id="qU9-QH-Y97"/>
+                                                <constraint firstItem="0oS-ST-GhX" firstAttribute="leading" secondItem="igc-Jy-Ooc" secondAttribute="leading" id="rk9-j2-fWq"/>
                                                 <constraint firstItem="0oS-ST-GhX" firstAttribute="top" secondItem="igc-Jy-Ooc" secondAttribute="top" id="rvQ-06-ZcH"/>
+                                                <constraint firstItem="qxR-1m-hkL" firstAttribute="width" secondItem="0oS-ST-GhX" secondAttribute="width" multiplier="1.26667" id="y4Q-N2-k78"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -403,8 +405,8 @@
                                                     <color key="textColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="4" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4P0-RL-QT8">
-                                                    <rect key="frame" x="384" y="13" width="10" height="19.5"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4P0-RL-QT8">
+                                                    <rect key="frame" x="352" y="13" width="42" height="19.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -428,8 +430,8 @@
                                                     <color key="textColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Text" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="JRs-ig-blb">
-                                                    <rect key="frame" x="363.5" y="13" width="30.5" height="19.5"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="JRs-ig-blb">
+                                                    <rect key="frame" x="352" y="13" width="42" height="19.5"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
