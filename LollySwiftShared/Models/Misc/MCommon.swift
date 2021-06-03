@@ -13,7 +13,11 @@ import RxSwift
 class MSelectItem: NSObject {
     var value = 0
     var label = ""
-    
+
+    override init() {
+        super.init()
+    }
+
     init(value: Int, label: String) {
         self.value = value
         self.label = label

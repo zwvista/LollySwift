@@ -151,7 +151,20 @@ class SettingsViewModel: NSObject {
     var LANGINFO: String { "\(selectedLang.LANGNAME)" }
     var TEXTBOOKINFO: String { "\(LANGINFO)/\(selectedTextbook.TEXTBOOKNAME)" }
     var UNITINFO: String { "\(TEXTBOOKINFO)/\(USUNITFROMSTR) \(USPARTFROMSTR) ~ \(USUNITTOSTR) \(USPARTTOSTR)" }
-    
+
+    @objc
+    var selectedUnitFromItem = MSelectItem()
+    var selectedUnitFrom: Int { selectedUnitFromItem.value }
+    @objc
+    var selectedUnitToItem = MSelectItem()
+    var selectedUnitTo: Int { selectedUnitToItem.value }
+    @objc
+    var selectedPartFromItem = MSelectItem()
+    var selectedPartFrom: Int { selectedPartFromItem.value }
+    @objc
+    var selectedPartToItem = MSelectItem()
+    var selectedPartTo: Int { selectedPartToItem.value }
+
     let arrToTypes = ["Unit", "Part", "To"]
     var toType: UnitPartToType = .unit
     
@@ -288,6 +301,10 @@ class SettingsViewModel: NSObject {
         INFO_USPARTFROM = getUSInfo(name: MUSMapping.NAME_USPARTFROM)
         INFO_USUNITTO = getUSInfo(name: MUSMapping.NAME_USUNITTO)
         INFO_USPARTTO = getUSInfo(name: MUSMapping.NAME_USPARTTO)
+        selectedUnitFromItem = arrUnits.first { $0.value == USUNITFROM }!
+        selectedPartFromItem = arrParts.first { $0.value == USPARTFROM }!
+        selectedUnitToItem = arrUnits.first { $0.value == USUNITTO }!
+        selectedPartToItem = arrParts.first { $0.value == USPARTTO }!
         toType = isSingleUnit ? .unit : isSingleUnitPart ? .part : .to
         return (!dirty ? Observable.just(()) : MUserSetting.update(info: INFO_USTEXTBOOK, intValue: USTEXTBOOK)).do(onNext: { self.delegate?.onUpdateTextbook() })
     }
@@ -339,7 +356,7 @@ class SettingsViewModel: NSObject {
     }
     
     func updateUnitFrom() -> Observable<()> {
-        doUpdateUnitFrom(v: USUNITFROM).concat(
+        doUpdateUnitFrom(v: selectedUnitFrom).concat(
             toType == .unit ? doUpdateSingleUnit() :
             toType == .part || isInvalidUnitPart ? doUpdateUnitPartTo() :
             Observable.empty()
@@ -347,19 +364,19 @@ class SettingsViewModel: NSObject {
     }
     
     func updatePartFrom() -> Observable<()> {
-        doUpdatePartFrom(v: USPARTFROM).concat(
+        doUpdatePartFrom(v: selectedPartTo).concat(
             toType == .part || isInvalidUnitPart ? doUpdateUnitPartTo() : Observable.empty()
         )
     }
     
     func updateUnitTo() -> Observable<()> {
-        doUpdateUnitTo(v: USUNITTO).concat(
+        doUpdateUnitTo(v: selectedUnitTo).concat(
             isInvalidUnitPart ? doUpdateUnitPartFrom() : Observable.empty()
         )
     }
     
     func updatePartTo() -> Observable<()> {
-        doUpdatePartTo(v: USPARTTO).concat(
+        doUpdatePartTo(v: selectedPartTo).concat(
             isInvalidUnitPart ? doUpdateUnitPartFrom() : Observable.empty()
         )
     }
@@ -384,15 +401,15 @@ class SettingsViewModel: NSObject {
 
     func previousUnitPart() -> Observable<()> {
         if toType == .unit {
-            if USUNITFROM > 1 {
-                return Observable.zip(doUpdateUnitFrom(v: USUNITFROM - 1), doUpdateUnitTo(v: USUNITFROM)).map{_ in }
+            if selectedUnitFrom > 1 {
+                return Observable.zip(doUpdateUnitFrom(v: selectedUnitFrom - 1), doUpdateUnitTo(v: selectedUnitFrom - 1)).map{_ in }
             } else {
                 return Observable.empty()
             }
-        } else if USPARTFROM > 1 {
-            return Observable.zip(doUpdatePartFrom(v: USPARTFROM - 1), doUpdateUnitPartTo()).map{_ in }
-        } else if USUNITFROM > 1 {
-            return Observable.zip(doUpdateUnitFrom(v: USUNITFROM - 1), doUpdatePartFrom(v: partCount), doUpdateUnitPartTo()).map{_ in }
+        } else if selectedPartFrom > 1 {
+            return Observable.zip(doUpdatePartFrom(v: selectedPartFrom - 1), doUpdateUnitPartTo()).map{_ in }
+        } else if selectedUnitFrom > 1 {
+            return Observable.zip(doUpdateUnitFrom(v: selectedUnitFrom - 1), doUpdatePartFrom(v: partCount), doUpdateUnitPartTo()).map{_ in }
         } else {
             return Observable.empty()
         }
@@ -400,15 +417,15 @@ class SettingsViewModel: NSObject {
     
     func nextUnitPart() -> Observable<()> {
         if toType == .unit {
-            if USUNITFROM < unitCount {
-                return Observable.zip(doUpdateUnitFrom(v: USUNITFROM + 1), doUpdateUnitTo(v: USUNITFROM)).map{_ in }
+            if selectedUnitFrom < unitCount {
+                return Observable.zip(doUpdateUnitFrom(v: selectedUnitFrom + 1), doUpdateUnitTo(v: selectedUnitFrom + 1)).map{_ in }
             } else {
                 return Observable.empty()
             }
-        } else if USPARTFROM < partCount {
-            return Observable.zip(doUpdatePartFrom(v: USPARTFROM + 1), doUpdateUnitPartTo()).map{_ in }
-        } else if USUNITFROM < unitCount {
-            return Observable.zip(doUpdateUnitFrom(v: USUNITFROM + 1), doUpdatePartFrom(v: 1), doUpdateUnitPartTo()).map{_ in }
+        } else if selectedPartFrom < partCount {
+            return Observable.zip(doUpdatePartFrom(v: selectedPartFrom + 1), doUpdateUnitPartTo()).map{_ in }
+        } else if selectedUnitFrom < unitCount {
+            return Observable.zip(doUpdateUnitFrom(v: selectedUnitFrom + 1), doUpdatePartFrom(v: 1), doUpdateUnitPartTo()).map{_ in }
         } else {
             return Observable.empty()
         }

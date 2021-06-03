@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="18122"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -1324,9 +1324,8 @@
                                 <connections>
                                     <action selector="unitFromSelected:" target="HfO-r7-QMx" id="Ii5-5G-DUg"/>
                                     <binding destination="7EM-l7-CJV" name="content" keyPath="arrangedObjects" id="7X3-Kn-N99"/>
-                                    <binding destination="7EM-l7-CJV" name="contentValues" keyPath="arrangedObjects.label" previousBinding="dcD-FR-M5D" id="yGm-Bg-n0g"/>
-                                    <binding destination="7EM-l7-CJV" name="contentObjects" keyPath="arrangedObjects.value" previousBinding="7X3-Kn-N99" id="dcD-FR-M5D"/>
-                                    <binding destination="HfO-r7-QMx" name="selectedObject" keyPath="vm.USUNITFROM" previousBinding="yGm-Bg-n0g" id="9pe-df-ynE"/>
+                                    <binding destination="7EM-l7-CJV" name="contentValues" keyPath="arrangedObjects.label" previousBinding="7X3-Kn-N99" id="OHo-bI-s5U"/>
+                                    <binding destination="HfO-r7-QMx" name="selectedObject" keyPath="vm.selectedUnitFromItem" previousBinding="OHo-bI-s5U" id="pub-TS-i1b"/>
                                 </connections>
                             </popUpButton>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NLa-HM-eg1">
@@ -1353,9 +1352,8 @@
                                 <connections>
                                     <action selector="partFromSelected:" target="HfO-r7-QMx" id="yZP-KK-VRp"/>
                                     <binding destination="IiA-XH-70P" name="content" keyPath="arrangedObjects" id="lZm-oS-u12"/>
-                                    <binding destination="IiA-XH-70P" name="contentValues" keyPath="arrangedObjects.label" previousBinding="Kt4-v2-EBO" id="Lez-tq-WuE"/>
-                                    <binding destination="IiA-XH-70P" name="contentObjects" keyPath="arrangedObjects.value" previousBinding="lZm-oS-u12" id="Kt4-v2-EBO"/>
-                                    <binding destination="HfO-r7-QMx" name="selectedObject" keyPath="vm.USPARTFROM" previousBinding="Lez-tq-WuE" id="B6O-DS-MFP"/>
+                                    <binding destination="IiA-XH-70P" name="contentValues" keyPath="arrangedObjects.label" previousBinding="lZm-oS-u12" id="ptN-L2-0ib"/>
+                                    <binding destination="HfO-r7-QMx" name="selectedObject" keyPath="vm.selectedPartFromItem" previousBinding="ptN-L2-0ib" id="Ry7-lg-8TC"/>
                                 </connections>
                             </popUpButton>
                             <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GYX-NJ-ZBj">
@@ -1391,9 +1389,8 @@
                                 <connections>
                                     <action selector="unitToSelected:" target="HfO-r7-QMx" id="EJw-RY-Aq8"/>
                                     <binding destination="7EM-l7-CJV" name="content" keyPath="arrangedObjects" id="DAv-s4-a2a"/>
-                                    <binding destination="7EM-l7-CJV" name="contentValues" keyPath="arrangedObjects.label" previousBinding="QX2-kp-3AF" id="Tkg-L8-b4f"/>
-                                    <binding destination="7EM-l7-CJV" name="contentObjects" keyPath="arrangedObjects.value" previousBinding="DAv-s4-a2a" id="QX2-kp-3AF"/>
-                                    <binding destination="HfO-r7-QMx" name="selectedObject" keyPath="vm.USUNITTO" previousBinding="Tkg-L8-b4f" id="qZE-zj-F3B"/>
+                                    <binding destination="7EM-l7-CJV" name="contentValues" keyPath="arrangedObjects.label" previousBinding="DAv-s4-a2a" id="Qxb-OP-Fpy"/>
+                                    <binding destination="HfO-r7-QMx" name="selectedObject" keyPath="vm.selectedUnitToItem" previousBinding="Qxb-OP-Fpy" id="wgV-Go-Nl7"/>
                                 </connections>
                             </popUpButton>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NHc-fW-dBl">
@@ -1423,13 +1420,12 @@
                                 <connections>
                                     <action selector="partToSelected:" target="HfO-r7-QMx" id="yNS-jD-weo"/>
                                     <binding destination="IiA-XH-70P" name="content" keyPath="arrangedObjects" id="Q5w-AJ-ptM"/>
-                                    <binding destination="IiA-XH-70P" name="contentValues" keyPath="arrangedObjects.label" previousBinding="p6v-mX-GMl" id="2tU-MQ-9Yb"/>
-                                    <binding destination="IiA-XH-70P" name="contentObjects" keyPath="arrangedObjects.value" previousBinding="Q5w-AJ-ptM" id="p6v-mX-GMl"/>
-                                    <binding destination="HfO-r7-QMx" name="selectedObject" keyPath="vm.USPARTTO" previousBinding="2tU-MQ-9Yb" id="0Av-gV-ROe"/>
+                                    <binding destination="IiA-XH-70P" name="contentValues" keyPath="arrangedObjects.label" previousBinding="Q5w-AJ-ptM" id="pLd-kS-2Ei"/>
+                                    <binding destination="HfO-r7-QMx" name="selectedObject" keyPath="vm.selectedPartToItem" previousBinding="pLd-kS-2Ei" id="Swa-IF-9BI"/>
                                 </connections>
                             </popUpButton>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iaA-UK-MEB">
-                                <rect key="frame" x="166" y="55" width="115" height="32"/>
+                                <rect key="frame" x="166" y="55" width="116" height="32"/>
                                 <buttonCell key="cell" type="push" title="Previous Part" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="JzB-uc-0yD">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -1439,7 +1435,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="amm-Ya-sSe">
-                                <rect key="frame" x="279" y="55" width="115" height="32"/>
+                                <rect key="frame" x="280" y="55" width="116" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="70" id="CqQ-5C-VoI"/>
                                 </constraints>
@@ -2026,7 +2022,7 @@ Gw
                                 </textFieldCell>
                             </textField>
                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tNk-Dh-7xO">
-                                <rect key="frame" x="78" y="201" width="136" height="25"/>
+                                <rect key="frame" x="78" y="201" width="132" height="25"/>
                                 <popUpButtonCell key="cell" type="roundTextured" title="Review(Auto)" bezelStyle="texturedRounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" selectedItem="GGe-dg-apO" id="apw-xs-M23">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="menu"/>
