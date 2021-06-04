@@ -402,7 +402,7 @@ class SettingsViewModel: NSObject {
     func previousUnitPart() -> Observable<()> {
         if toType == .unit {
             if selectedUnitFrom > 1 {
-                return Observable.zip(doUpdateUnitFrom(v: selectedUnitFrom - 1), doUpdateUnitTo(v: selectedUnitFrom - 1)).map{_ in }
+                return Observable.zip(doUpdateUnitFrom(v: selectedUnitFrom - 1), doUpdateUnitTo(v: selectedUnitFrom)).map{_ in }
             } else {
                 return Observable.empty()
             }
@@ -418,7 +418,7 @@ class SettingsViewModel: NSObject {
     func nextUnitPart() -> Observable<()> {
         if toType == .unit {
             if selectedUnitFrom < unitCount {
-                return Observable.zip(doUpdateUnitFrom(v: selectedUnitFrom + 1), doUpdateUnitTo(v: selectedUnitFrom + 1)).map{_ in }
+                return Observable.zip(doUpdateUnitFrom(v: selectedUnitFrom + 1), doUpdateUnitTo(v: selectedUnitFrom)).map{_ in }
             } else {
                 return Observable.empty()
             }
@@ -445,26 +445,34 @@ class SettingsViewModel: NSObject {
 
     private func doUpdateUnitFrom(v: Int) -> Observable<()> {
         let dirty = USUNITFROM != v
+        if !dirty { return Observable.empty() }
         USUNITFROM = v
-        return !dirty ? Observable.empty() : MUserSetting.update(info: INFO_USUNITFROM, intValue: USUNITFROM).do(onNext: { self.delegate?.onUpdateUnitFrom() })
+        selectedUnitFromItem = arrUnits.first { $0.value == v }!
+        return MUserSetting.update(info: INFO_USUNITFROM, intValue: USUNITFROM).do(onNext: { self.delegate?.onUpdateUnitFrom() })
     }
     
     private func doUpdatePartFrom(v: Int) -> Observable<()> {
         let dirty = USPARTFROM != v
+        if !dirty { return Observable.empty() }
         USPARTFROM = v
-        return !dirty ? Observable.empty() : MUserSetting.update(info: INFO_USPARTFROM, intValue: USPARTFROM).do(onNext: { self.delegate?.onUpdatePartFrom() })
+        selectedPartFromItem = arrParts.first { $0.value == v }!
+        return MUserSetting.update(info: INFO_USPARTFROM, intValue: USPARTFROM).do(onNext: { self.delegate?.onUpdatePartFrom() })
     }
     
     private func doUpdateUnitTo(v: Int) -> Observable<()> {
         let dirty = USUNITTO != v
+        if !dirty { return Observable.empty() }
         USUNITTO = v
-        return !dirty ? Observable.empty() : MUserSetting.update(info: INFO_USUNITTO, intValue: USUNITTO).do(onNext: { self.delegate?.onUpdateUnitTo() })
+        selectedUnitToItem = arrUnits.first { $0.value == v }!
+        return MUserSetting.update(info: INFO_USUNITTO, intValue: USUNITTO).do(onNext: { self.delegate?.onUpdateUnitTo() })
     }
     
     private func doUpdatePartTo(v: Int) -> Observable<()> {
         let dirty = USPARTTO != v
+        if !dirty { return Observable.empty() }
         USPARTTO = v
-        return !dirty ? Observable.empty() : MUserSetting.update(info: INFO_USPARTTO, intValue: USPARTTO).do(onNext: { self.delegate?.onUpdatePartTo() })
+        selectedPartToItem = arrParts.first { $0.value == v }!
+        return MUserSetting.update(info: INFO_USPARTTO, intValue: USPARTTO).do(onNext: { self.delegate?.onUpdatePartTo() })
     }
     
     static let zeroNote = "O"
