@@ -96,13 +96,13 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
 
         ddUnitFrom.anchorView = unitFromCell
         ddUnitFrom.selectionAction = { [unowned self] (index: Int, item: String) in
-            self.vm.USUNITFROM = self.vm.arrUnits[index].value
+            self.vm.selectedUnitFromItem = self.vm.arrUnits[index]
             self.vm.updateUnitFrom().subscribe() ~ self.rx.disposeBag
         }
 
         ddPartFrom.anchorView = partFromCell
         ddPartFrom.selectionAction = { [unowned self] (index: Int, item: String) in
-            self.vm.USPARTFROM = self.vm.arrParts[index].value
+            self.vm.selectedPartFromItem = self.vm.arrParts[index]
             self.vm.updatePartFrom().subscribe() ~ self.rx.disposeBag
         }
         
@@ -126,13 +126,13 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
 
         ddUnitTo.anchorView = unitToCell
         ddUnitTo.selectionAction = { [unowned self] (index: Int, item: String) in
-            self.vm.USUNITTO = self.vm.arrUnits[index].value
+            self.vm.selectedUnitToItem = self.vm.arrUnits[index]
             self.vm.updateUnitTo().subscribe() ~ self.rx.disposeBag
         }
 
         ddPartTo.anchorView = partToCell
         ddPartTo.selectionAction = { [unowned self] (index: Int, item: String) in
-            self.vm.USPARTTO = self.vm.arrParts[index].value
+            self.vm.selectedPartToItem = self.vm.arrParts[index]
             self.vm.updatePartTo().subscribe() ~ self.rx.disposeBag
         }
         
