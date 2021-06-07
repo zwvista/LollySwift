@@ -55,42 +55,42 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
         ddLang.anchorView = langCell
         ddLang.selectionAction = { [unowned self] (index: Int, item: String) in
             guard index != self.vm.selectedLangIndex else {return}
-            self.vm.selectedLang = self.vm.arrLanguages[index]
+            self.vm.selectedLangIndex = index
             self.vm.updateLang().subscribe() ~ self.rx.disposeBag
         }
 
         ddVoice.anchorView = voiceCell
         ddVoice.selectionAction = { [unowned self] (index: Int, item: String) in
             guard index != self.vm.selectediOSVoiceIndex else {return}
-            self.vm.selectediOSVoice = self.vm.arriOSVoices[index]
+            self.vm.selectediOSVoiceIndex = index
             self.vm.updateiOSVoice().subscribe() ~ self.rx.disposeBag
         }
 
         ddDictReference.anchorView = dictItemCell
         ddDictReference.selectionAction = { [unowned self] (index: Int, item: String) in
             guard index != self.vm.selectedDictReferenceIndex else {return}
-            self.vm.selectedDictReference = self.vm.arrDictsReference[index]
+            self.vm.selectedDictReferenceIndex = index
             self.vm.updateDictReference().subscribe() ~ self.rx.disposeBag
         }
 
         ddDictNote.anchorView = dictNoteCell
         ddDictNote.selectionAction = { [unowned self] (index: Int, item: String) in
             guard index != self.vm.selectedDictNoteIndex else {return}
-            self.vm.selectedDictNote = self.vm.arrDictsNote[index]
+            self.vm.selectedDictNoteIndex = index
             self.vm.updateDictNote().subscribe() ~ self.rx.disposeBag
         }
 
         ddDictTranslation.anchorView = dictTranslationCell
         ddDictTranslation.selectionAction = { [unowned self] (index: Int, item: String) in
             guard index != self.vm.selectedDictTranslationIndex else {return}
-            self.vm.selectedDictTranslation = self.vm.arrDictsTranslation[index]
+            self.vm.selectedDictTranslationIndex = index
             self.vm.updateDictTranslation().subscribe() ~ self.rx.disposeBag
         }
 
         ddTextbook.anchorView = textbookCell
         ddTextbook.selectionAction = { [unowned self] (index: Int, item: String) in
             guard index != self.vm.selectedTextbookIndex else {return}
-            self.vm.selectedTextbook = self.vm.arrTextbooks[index]
+            self.vm.selectedTextbookIndex = index
             self.vm.updateTextbook().subscribe() ~ self.rx.disposeBag
         }
 
@@ -182,7 +182,7 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
     }
     
     func onUpdateLang() {
-        let item = vm.selectedLang!
+        let item = vm.selectedLang
         langCell.textLabel!.text = item.LANGNAME
         ddLang.selectIndex(vm.selectedLangIndex)
 
@@ -210,7 +210,7 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
     }
     
     func onUpdateDictReference() {
-        let item = vm.selectedDictReference!
+        let item = vm.selectedDictReference
         dictItemCell.textLabel!.text = item.DICTNAME
         dictItemCell.detailTextLabel!.text = item.URL
         ddDictReference.selectIndex(vm.selectedDictReferenceIndex)
@@ -245,7 +245,7 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
     }
 
     func onUpdateTextbook() {
-        let item = vm.selectedTextbook!
+        let item = vm.selectedTextbook
         textbookCell.textLabel!.text = item.TEXTBOOKNAME
         textbookCell.detailTextLabel!.text = "\(vm.unitCount) Units"
         ddTextbook.selectIndex(vm.selectedTextbookIndex)

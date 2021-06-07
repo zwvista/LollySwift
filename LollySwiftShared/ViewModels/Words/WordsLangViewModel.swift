@@ -19,7 +19,7 @@ class WordsLangViewModel: WordsBaseViewModel {
     }
     
     func reload() -> Observable<()> {
-        MLangWord.getDataByLang(vmSettings.selectedTextbook!.LANGID).map {
+        MLangWord.getDataByLang(vmSettings.selectedTextbook.LANGID).map {
             self.arrWords = $0
         }
     }

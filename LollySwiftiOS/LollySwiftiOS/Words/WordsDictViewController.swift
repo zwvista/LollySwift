@@ -49,7 +49,7 @@ class WordsDictViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
         ddDictReference.dataSource = vmSettings.arrDictsReference.map(\.DICTNAME)
         ddDictReference.selectRow(vmSettings.selectedDictReferenceIndex)
         ddDictReference.selectionAction = { [unowned self] (index: Int, item: String) in
-            vmSettings.selectedDictReference = vmSettings.arrDictsReference[index]
+            vmSettings.selectedDictReferenceIndex = index
             vmSettings.updateDictReference().subscribe(onNext: {
                 self.selectDictChanged()
             }) ~ self.rx.disposeBag
@@ -66,7 +66,7 @@ class WordsDictViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
     }
     
     private func selectDictChanged() {
-        btnDict.setTitle(vmSettings.selectedDictReference!.DICTNAME, for: .normal)
+        btnDict.setTitle(vmSettings.selectedDictReference.DICTNAME, for: .normal)
         dictStore.dict = vmSettings.selectedDictReference
         dictStore.searchDict()
     }

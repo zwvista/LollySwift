@@ -19,7 +19,7 @@ class PhrasesLangViewModel: PhrasesBaseViewModel {
     }
     
     func reload() -> Observable<()> {
-        MLangPhrase.getDataByLang(vmSettings.selectedTextbook!.LANGID).map {
+        MLangPhrase.getDataByLang(vmSettings.selectedTextbook.LANGID).map {
             self.arrPhrases = $0
         }
     }

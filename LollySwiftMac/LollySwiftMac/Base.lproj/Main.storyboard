@@ -1072,7 +1072,7 @@
                                     <action selector="langSelected:" target="HfO-r7-QMx" id="5YY-rw-VJG"/>
                                     <binding destination="Jlp-Py-Ji5" name="content" keyPath="arrangedObjects" id="TlQ-Bg-Woj"/>
                                     <binding destination="Jlp-Py-Ji5" name="contentValues" keyPath="arrangedObjects.LANGNAME" previousBinding="TlQ-Bg-Woj" id="H1C-k8-O8E"/>
-                                    <binding destination="HfO-r7-QMx" name="selectedObject" keyPath="vm.selectedLang" previousBinding="H1C-k8-O8E" id="1sb-mK-qWd"/>
+                                    <binding destination="HfO-r7-QMx" name="selectedIndex" keyPath="vm.selectedLangIndex" previousBinding="H1C-k8-O8E" id="FWj-6o-Xkh"/>
                                 </connections>
                             </popUpButton>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Oq2-e8-m3D">
@@ -1100,7 +1100,7 @@
                                     <action selector="voiceSelected:" target="HfO-r7-QMx" id="D6w-oq-5iK"/>
                                     <binding destination="12V-SQ-el6" name="content" keyPath="arrangedObjects" id="tZe-Wp-WNh"/>
                                     <binding destination="12V-SQ-el6" name="contentValues" keyPath="arrangedObjects.VOICENAME" previousBinding="tZe-Wp-WNh" id="fWH-a2-bxK"/>
-                                    <binding destination="HfO-r7-QMx" name="selectedObject" keyPath="vm.selectedMacVoice" id="HIY-9d-AXK"/>
+                                    <binding destination="HfO-r7-QMx" name="selectedIndex" keyPath="vm.selectedMacVoiceIndex" previousBinding="fWH-a2-bxK" id="epr-iJ-6AT"/>
                                 </connections>
                             </popUpButton>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6If-OE-53N" userLabel="Dictionary(Word):">
@@ -1175,6 +1175,9 @@
                                         </tableView>
                                     </subviews>
                                 </clipView>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="269" id="CtA-rB-JtP"/>
+                                </constraints>
                                 <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="PYB-UJ-1hf">
                                     <rect key="frame" x="1" y="119" width="223" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
@@ -1227,7 +1230,7 @@
                                             <string key="NSValueTransformerName">NSIsNil</string>
                                         </dictionary>
                                     </binding>
-                                    <binding destination="HfO-r7-QMx" name="selectedObject" keyPath="vm.selectedDictNote" previousBinding="EO7-gA-Zii" id="Ylx-uw-zIf"/>
+                                    <binding destination="HfO-r7-QMx" name="selectedIndex" keyPath="vm.selectedDictNoteIndex" previousBinding="EO7-gA-Zii" id="Pzj-pO-ePz"/>
                                 </connections>
                             </popUpButton>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rwe-QA-vd1">
@@ -1263,7 +1266,7 @@
                                             <string key="NSValueTransformerName">NSIsNil</string>
                                         </dictionary>
                                     </binding>
-                                    <binding destination="HfO-r7-QMx" name="selectedObject" keyPath="vm.selectedDictTranslation" previousBinding="68d-S1-O5V" id="bF4-5P-07L"/>
+                                    <binding destination="HfO-r7-QMx" name="selectedIndex" keyPath="vm.selectedDictTranslationIndex" previousBinding="68d-S1-O5V" id="MZW-6K-rZt"/>
                                 </connections>
                             </popUpButton>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="749" verticalCompressionResistancePriority="751" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RQX-rZ-9Ej">
@@ -1294,7 +1297,7 @@
                                     <action selector="textbookSelected:" target="HfO-r7-QMx" id="Efv-sg-exe"/>
                                     <binding destination="PzR-zm-jg5" name="content" keyPath="arrangedObjects" id="pRT-Ce-e3V"/>
                                     <binding destination="PzR-zm-jg5" name="contentValues" keyPath="arrangedObjects.TEXTBOOKNAME" previousBinding="pRT-Ce-e3V" id="h1J-AW-kEe"/>
-                                    <binding destination="HfO-r7-QMx" name="selectedObject" keyPath="vm.selectedTextbook" previousBinding="h1J-AW-kEe" id="8tw-0E-8Qv"/>
+                                    <binding destination="HfO-r7-QMx" name="selectedIndex" keyPath="vm.selectedTextbookIndex" previousBinding="h1J-AW-kEe" id="EYe-Dr-GO9"/>
                                 </connections>
                             </popUpButton>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8FM-8h-XQF">

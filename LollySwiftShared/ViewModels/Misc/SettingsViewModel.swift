@@ -95,44 +95,46 @@ class SettingsViewModel: NSObject {
     @objc
     var arrLanguages = [MLanguage]()
     @objc
-    var selectedLang: MLanguage!
-    var selectedLangIndex: Int { arrLanguages.firstIndex { $0 == selectedLang } ?? 0 }
+    var selectedLangIndex = 0
+    var selectedLang: MLanguage { selectedLangIndex < arrLanguages.count ? arrLanguages[selectedLangIndex] : MLanguage() }
 
     @objc
     var arrMacVoices: [MVoice]!
     @objc
     var arriOSVoices: [MVoice]!
     @objc
-    var selectedMacVoice = MVoice()
+    var selectedMacVoiceIndex = 0
+    var selectedMacVoice: MVoice { selectedMacVoiceIndex < arrMacVoices.count ? arrMacVoices[selectedMacVoiceIndex] : MVoice() }
     var macVoiceName: String { selectedMacVoice.VOICENAME }
-    var selectediOSVoice = MVoice()
-    var selectediOSVoiceIndex: Int { arriOSVoices.firstIndex { $0 == selectediOSVoice } ?? 0 }
+    var selectediOSVoiceIndex = 0
+    var selectediOSVoice: MVoice { selectediOSVoiceIndex < arriOSVoices.count ? arriOSVoices[selectediOSVoiceIndex] : MVoice() }
 
     @objc
     var arrDictsReference = [MDictionary]()
-    var selectedDictReference: MDictionary!
-    var selectedDictsReference = [MDictionary]()
-    var selectedDictReferenceIndex: Int { arrDictsReference.firstIndex { $0 == selectedDictReference } ?? 0 }
+    var selectedDictReferenceIndex = 0
+    var selectedDictReference: MDictionary { selectedDictReferenceIndex < arrDictsReference.count ? arrDictsReference[selectedDictReferenceIndex] : MDictionary() }
+    var selectedDictsReferenceIndexes = [Int]()
+    var selectedDictsReference: [MDictionary] { selectedDictsReferenceIndexes.map { arrDictsReference[$0] } }
     
     @objc
     var arrDictsNote = [MDictionary]()
     @objc
-    var selectedDictNote = MDictionary()
-    var selectedDictNoteIndex: Int { arrDictsNote.firstIndex { $0 == selectedDictNote } ?? 0 }
-    var hasDictNote: Bool { arrDictsNote[0].ID != 0 }
+    var selectedDictNoteIndex = 0
+    var selectedDictNote: MDictionary { selectedDictNoteIndex < arrDictsNote.count ? arrDictsNote[selectedDictNoteIndex] : MDictionary() }
+    var hasDictNote: Bool { selectedDictNote.ID != 0 }
     
     @objc
     var arrDictsTranslation = [MDictionary]()
     @objc
-    var selectedDictTranslation = MDictionary()
-    var selectedDictTranslationIndex: Int { arrDictsTranslation.firstIndex { $0 == selectedDictTranslation } ?? 0 }
-    var hasDictTranslation: Bool { !arrDictsTranslation.isEmpty }
+    var selectedDictTranslationIndex = 0
+    var selectedDictTranslation: MDictionary { selectedDictTranslationIndex < arrDictsTranslation.count ? arrDictsTranslation[selectedDictTranslationIndex] : MDictionary() }
+    var hasDictTranslation: Bool { selectedDictTranslation.ID != 0 }
 
     @objc
     var arrTextbooks = [MTextbook]()
     @objc
-    var selectedTextbook: MTextbook!
-    var selectedTextbookIndex: Int { arrTextbooks.firstIndex { $0 == selectedTextbook } ?? 0 }
+    var selectedTextbookIndex = 0
+    var selectedTextbook: MTextbook { selectedTextbookIndex < arrTextbooks.count ? arrTextbooks[selectedTextbookIndex] : MTextbook() }
     @objc
     var arrTextbookFilters = [MSelectItem]()
     @objc
@@ -198,20 +200,20 @@ class SettingsViewModel: NSObject {
         INFO_USUNITTO = x.INFO_USUNITTO
         INFO_USPARTTO = x.INFO_USPARTTO
         arrLanguages = x.arrLanguages
-        selectedLang = x.selectedLang
+        selectedLangIndex = x.selectedLangIndex
         arrMacVoices = x.arrMacVoices
-        selectedMacVoice = x.selectedMacVoice
+        selectedMacVoiceIndex = x.selectedMacVoiceIndex
         arriOSVoices = x.arriOSVoices
-        selectediOSVoice = x.selectediOSVoice
+        selectediOSVoiceIndex = x.selectediOSVoiceIndex
         arrDictsReference = x.arrDictsReference
-        selectedDictReference = x.selectedDictReference
-        selectedDictsReference = x.selectedDictsReference
+        selectedDictReferenceIndex = x.selectedDictReferenceIndex
+        selectedDictsReferenceIndexes = x.selectedDictsReferenceIndexes
         arrDictsNote = x.arrDictsNote
-        selectedDictNote = x.selectedDictNote
+        selectedDictNoteIndex = x.selectedDictNoteIndex
         arrDictsTranslation = x.arrDictsTranslation
-        selectedDictTranslation = x.selectedDictTranslation
+        selectedDictTranslationIndex = x.selectedDictTranslationIndex
         arrTextbooks = x.arrTextbooks
-        selectedTextbook = x.selectedTextbook
+        selectedTextbookIndex = x.selectedTextbookIndex
         arrTextbookFilters = x.arrTextbookFilters
         arrWebTextbookFilters = x.arrWebTextbookFilters
         toType = x.toType
@@ -247,7 +249,7 @@ class SettingsViewModel: NSObject {
                 self.arrDictTypes = result.3
                 self.INFO_USLANG = self.getUSInfo(name: MUSMapping.NAME_USLANG)
                 self.delegate?.onGetData()
-                self.selectedLang = self.arrLanguages.first { $0.ID == self.USLANG }!
+                self.selectedLangIndex = self.arrLanguages.firstIndex { $0.ID == self.USLANG } ?? 0
                 return self.updateLang()
             }
     }
@@ -271,16 +273,16 @@ class SettingsViewModel: NSObject {
                               MVoice.getDataByLang(USLANG))
             .flatMap { result -> Observable<()> in
                 self.arrDictsReference = result.0
-                self.selectedDictReference = self.arrDictsReference.first { String($0.DICTID) == self.USDICTREFERENCE }!
-                self.selectedDictsReference = self.USDICTSREFERENCE.split(separator: ",").flatMap { id in self.arrDictsReference.filter { String($0.DICTID) == id } }
+                self.selectedDictReferenceIndex = self.arrDictsReference.firstIndex { String($0.DICTID) == self.USDICTREFERENCE } ?? 0
+                self.selectedDictsReferenceIndexes = self.USDICTSREFERENCE.split(separator: ",").compactMap { id in self.arrDictsReference.firstIndex { String($0.DICTID) == id } }
                 self.arrDictsNote = result.1
                 if self.arrDictsNote.isEmpty { self.arrDictsNote.append(MDictionary()) }
-                self.selectedDictNote = self.arrDictsNote.first { $0.DICTID == self.USDICTNOTE } ?? self.arrDictsNote[0]
+                self.selectedDictNoteIndex = self.arrDictsNote.firstIndex { $0.DICTID == self.USDICTNOTE } ?? 0
                 self.arrDictsTranslation = result.2
                 if self.arrDictsTranslation.isEmpty { self.arrDictsTranslation.append(MDictionary()) }
-                self.selectedDictTranslation = self.arrDictsTranslation.first { $0.DICTID == self.USDICTTRANSLATION } ?? self.arrDictsTranslation[0]
+                self.selectedDictTranslationIndex = self.arrDictsTranslation.firstIndex { $0.DICTID == self.USDICTTRANSLATION } ?? 0
                 self.arrTextbooks = result.3
-                self.selectedTextbook = self.arrTextbooks.first { $0.ID == self.USTEXTBOOK }!
+                self.selectedTextbookIndex = self.arrTextbooks.firstIndex { $0.ID == self.USTEXTBOOK } ?? 0
                 self.arrTextbookFilters = self.arrTextbooks.map { MSelectItem(value: $0.ID, label: $0.TEXTBOOKNAME) }
                 self.arrTextbookFilters.insert(MSelectItem(value: 0, label: "All Textbooks"), at: 0)
                 self.arrWebTextbookFilters = self.arrTextbooks.filter { $0.ISWEB == 1 }.map { MSelectItem(value: $0.ID, label: $0.TEXTBOOKNAME) }
@@ -291,8 +293,8 @@ class SettingsViewModel: NSObject {
                 if self.arrMacVoices.isEmpty { self.arrMacVoices.append(MVoice()) }
                 self.arriOSVoices = arrVoices.filter { $0.VOICETYPEID == 3 }
                 if self.arriOSVoices.isEmpty { self.arriOSVoices.append(MVoice()) }
-                self.selectedMacVoice = self.arrMacVoices.first { $0.ID == self.USMACVOICE } ?? self.arrMacVoices[0]
-                self.selectediOSVoice = self.arriOSVoices.first { $0.ID == self.USIOSVOICE } ?? self.arriOSVoices[0]
+                self.selectedMacVoiceIndex = self.arrMacVoices.firstIndex { $0.ID == self.USMACVOICE } ?? 0
+                self.selectediOSVoiceIndex = self.arriOSVoices.firstIndex { $0.ID == self.USIOSVOICE } ?? 0
                 return Observable.zip(self.updateTextbook(), self.updateDictReference(), self.updateDictsReference(), self.updateDictNote(), self.updateDictTranslation(), self.updateMacVoice(), self.updateiOSVoice(), (!dirty ? Observable.just(()) : MUserSetting.update(info: self.INFO_USLANG, intValue: self.USLANG)).do(onNext: { self.delegate?.onUpdateLang() })).map {_ in }
             }
     }

@@ -32,13 +32,13 @@ class SearchViewController: UIViewController, WKNavigationDelegate, UISearchBarD
             self.ddLang.anchorView = self.btnLang
             self.ddLang.selectionAction = { [unowned self] (index: Int, item: String) in
                 guard index != vmSettings.selectedLangIndex else {return}
-                vmSettings.selectedLang = vmSettings.arrLanguages[index]
+                vmSettings.selectedLangIndex = index
                 vmSettings.updateLang().subscribe() ~ self.rx.disposeBag
             }
             self.ddDictReference.anchorView = self.btnDict
             self.ddDictReference.selectionAction = { [unowned self] (index: Int, item: String) in
                 guard index != vmSettings.selectedDictReferenceIndex else {return}
-                vmSettings.selectedDictReference = vmSettings.arrDictsReference[index]
+                vmSettings.selectedDictReferenceIndex = index
                 vmSettings.updateDictReference().subscribe() ~ self.rx.disposeBag
             }
         }) ~ rx.disposeBag
@@ -81,7 +81,7 @@ class SearchViewController: UIViewController, WKNavigationDelegate, UISearchBarD
     }
     
     func onUpdateLang() {
-        let item = vmSettings.selectedLang!
+        let item = vmSettings.selectedLang
         btnLang.setTitle(item.LANGNAME, for: .normal)
         ddLang.selectIndex(vmSettings.selectedLangIndex)
         
@@ -90,7 +90,7 @@ class SearchViewController: UIViewController, WKNavigationDelegate, UISearchBarD
     }
     
     func onUpdateDictReference() {
-        btnDict.setTitle(vmSettings.selectedDictReference!.DICTNAME, for: .normal)
+        btnDict.setTitle(vmSettings.selectedDictReference.DICTNAME, for: .normal)
         ddDictReference.selectIndex(vmSettings.selectedDictReferenceIndex)
         dictStore.dict = vmSettings.selectedDictReference
         dictStore.searchDict()
