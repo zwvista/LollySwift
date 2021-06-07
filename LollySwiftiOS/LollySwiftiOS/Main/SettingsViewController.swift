@@ -96,13 +96,15 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
 
         ddUnitFrom.anchorView = unitFromCell
         ddUnitFrom.selectionAction = { [unowned self] (index: Int, item: String) in
-            self.vm.selectedUnitFromItem = self.vm.arrUnits[index]
+            guard index != self.vm.selectedUnitFromIndex else {return}
+            self.vm.selectedUnitFromIndex = index
             self.vm.updateUnitFrom().subscribe() ~ self.rx.disposeBag
         }
 
         ddPartFrom.anchorView = partFromCell
         ddPartFrom.selectionAction = { [unowned self] (index: Int, item: String) in
-            self.vm.selectedPartFromItem = self.vm.arrParts[index]
+            guard index != self.vm.selectedPartFromIndex else {return}
+            self.vm.selectedPartFromIndex = index
             self.vm.updatePartFrom().subscribe() ~ self.rx.disposeBag
         }
         
@@ -126,13 +128,15 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
 
         ddUnitTo.anchorView = unitToCell
         ddUnitTo.selectionAction = { [unowned self] (index: Int, item: String) in
-            self.vm.selectedUnitToItem = self.vm.arrUnits[index]
+            guard index != self.vm.selectedUnitToIndex else {return}
+            self.vm.selectedUnitToIndex = index
             self.vm.updateUnitTo().subscribe() ~ self.rx.disposeBag
         }
 
         ddPartTo.anchorView = partToCell
         ddPartTo.selectionAction = { [unowned self] (index: Int, item: String) in
-            self.vm.selectedPartToItem = self.vm.arrParts[index]
+            guard index != self.vm.selectedPartToIndex else {return}
+            self.vm.selectedPartToIndex = index
             self.vm.updatePartTo().subscribe() ~ self.rx.disposeBag
         }
         

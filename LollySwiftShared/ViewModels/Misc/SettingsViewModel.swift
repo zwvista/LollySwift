@@ -155,17 +155,17 @@ class SettingsViewModel: NSObject {
     var UNITINFO: String { "\(TEXTBOOKINFO)/\(USUNITFROMSTR) \(USPARTFROMSTR) ~ \(USUNITTOSTR) \(USPARTTOSTR)" }
 
     @objc
-    var selectedUnitFromItem = MSelectItem()
-    var selectedUnitFrom: Int { selectedUnitFromItem.value }
+    var selectedUnitFromIndex = 0
+    var selectedUnitFrom: Int { selectedUnitFromIndex < arrUnits.count ? arrUnits[selectedUnitFromIndex].value : 0 }
     @objc
-    var selectedUnitToItem = MSelectItem()
-    var selectedUnitTo: Int { selectedUnitToItem.value }
+    var selectedPartFromIndex = 0
+    var selectedPartFrom: Int { selectedPartFromIndex < arrParts.count ? arrParts[selectedPartFromIndex].value : 0 }
     @objc
-    var selectedPartFromItem = MSelectItem()
-    var selectedPartFrom: Int { selectedPartFromItem.value }
+    var selectedUnitToIndex = 0
+    var selectedUnitTo: Int { selectedUnitFromIndex < arrUnits.count ? arrUnits[selectedUnitFromIndex].value : 0 }
     @objc
-    var selectedPartToItem = MSelectItem()
-    var selectedPartTo: Int { selectedPartToItem.value }
+    var selectedPartToIndex = 0
+    var selectedPartTo: Int { selectedPartToIndex < arrParts.count ? arrParts[selectedPartToIndex].value : 0 }
 
     let arrToTypes = ["Unit", "Part", "To"]
     var toType: UnitPartToType = .unit
@@ -217,10 +217,10 @@ class SettingsViewModel: NSObject {
         arrTextbookFilters = x.arrTextbookFilters
         arrWebTextbookFilters = x.arrWebTextbookFilters
         toType = x.toType
-        selectedUnitFromItem = x.selectedUnitFromItem
-        selectedPartFromItem = x.selectedPartFromItem
-        selectedUnitToItem = x.selectedUnitToItem
-        selectedPartToItem = x.selectedPartToItem
+        selectedUnitFromIndex = x.selectedUnitFromIndex
+        selectedPartFromIndex = x.selectedPartFromIndex
+        selectedUnitToIndex = x.selectedUnitToIndex
+        selectedPartToIndex = x.selectedPartToIndex
         arrAutoCorrect = x.arrAutoCorrect
         arrDictTypes = x.arrDictTypes
         delegate = x.delegate
@@ -307,10 +307,10 @@ class SettingsViewModel: NSObject {
         INFO_USPARTFROM = getUSInfo(name: MUSMapping.NAME_USPARTFROM)
         INFO_USUNITTO = getUSInfo(name: MUSMapping.NAME_USUNITTO)
         INFO_USPARTTO = getUSInfo(name: MUSMapping.NAME_USPARTTO)
-        selectedUnitFromItem = arrUnits.first { $0.value == USUNITFROM }!
-        selectedPartFromItem = arrParts.first { $0.value == USPARTFROM }!
-        selectedUnitToItem = arrUnits.first { $0.value == USUNITTO }!
-        selectedPartToItem = arrParts.first { $0.value == USPARTTO }!
+        selectedUnitFromIndex = arrUnits.firstIndex { $0.value == USUNITFROM } ?? 0
+        selectedPartFromIndex = arrParts.firstIndex { $0.value == USPARTFROM } ?? 0
+        selectedUnitToIndex = arrUnits.firstIndex { $0.value == USUNITTO } ?? 0
+        selectedPartToIndex = arrParts.firstIndex { $0.value == USPARTTO } ?? 0
         toType = isSingleUnit ? .unit : isSingleUnitPart ? .part : .to
         return (!dirty ? Observable.just(()) : MUserSetting.update(info: INFO_USTEXTBOOK, intValue: USTEXTBOOK)).do(onNext: { self.delegate?.onUpdateTextbook() })
     }
@@ -455,7 +455,7 @@ class SettingsViewModel: NSObject {
         let dirty = USUNITFROM != v
         if !dirty { return Observable.empty() }
         USUNITFROM = v
-        selectedUnitFromItem = arrUnits.first { $0.value == v }!
+        selectedUnitFromIndex = arrUnits.firstIndex { $0.value == v } ?? 0
         return MUserSetting.update(info: INFO_USUNITFROM, intValue: USUNITFROM).do(onNext: { self.delegate?.onUpdateUnitFrom() })
     }
     
@@ -463,7 +463,8 @@ class SettingsViewModel: NSObject {
         let dirty = USPARTFROM != v
         if !dirty { return Observable.empty() }
         USPARTFROM = v
-        selectedPartFromItem = arrParts.first { $0.value == v }!
+        selectedPartFromIndex = arrParts.firstIndex { $0.value == v }
+            ?? 0
         return MUserSetting.update(info: INFO_USPARTFROM, intValue: USPARTFROM).do(onNext: { self.delegate?.onUpdatePartFrom() })
     }
     
@@ -471,7 +472,7 @@ class SettingsViewModel: NSObject {
         let dirty = USUNITTO != v
         if !dirty { return Observable.empty() }
         USUNITTO = v
-        selectedUnitToItem = arrUnits.first { $0.value == v }!
+        selectedUnitToIndex = arrUnits.firstIndex { $0.value == v } ?? 0
         return MUserSetting.update(info: INFO_USUNITTO, intValue: USUNITTO).do(onNext: { self.delegate?.onUpdateUnitTo() })
     }
     
@@ -479,7 +480,7 @@ class SettingsViewModel: NSObject {
         let dirty = USPARTTO != v
         if !dirty { return Observable.empty() }
         USPARTTO = v
-        selectedPartToItem = arrParts.first { $0.value == v }!
+        selectedPartToIndex = arrParts.firstIndex { $0.value == v } ?? 0
         return MUserSetting.update(info: INFO_USPARTTO, intValue: USPARTTO).do(onNext: { self.delegate?.onUpdatePartTo() })
     }
     

@@ -1328,7 +1328,7 @@
                                     <action selector="unitFromSelected:" target="HfO-r7-QMx" id="Ii5-5G-DUg"/>
                                     <binding destination="7EM-l7-CJV" name="content" keyPath="arrangedObjects" id="7X3-Kn-N99"/>
                                     <binding destination="7EM-l7-CJV" name="contentValues" keyPath="arrangedObjects.label" previousBinding="7X3-Kn-N99" id="OHo-bI-s5U"/>
-                                    <binding destination="HfO-r7-QMx" name="selectedObject" keyPath="vm.selectedUnitFromItem" previousBinding="OHo-bI-s5U" id="pub-TS-i1b"/>
+                                    <binding destination="HfO-r7-QMx" name="selectedIndex" keyPath="vm.selectedUnitFromIndex" previousBinding="OHo-bI-s5U" id="fL1-6w-vtI"/>
                                 </connections>
                             </popUpButton>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NLa-HM-eg1">
@@ -1356,7 +1356,7 @@
                                     <action selector="partFromSelected:" target="HfO-r7-QMx" id="yZP-KK-VRp"/>
                                     <binding destination="IiA-XH-70P" name="content" keyPath="arrangedObjects" id="lZm-oS-u12"/>
                                     <binding destination="IiA-XH-70P" name="contentValues" keyPath="arrangedObjects.label" previousBinding="lZm-oS-u12" id="ptN-L2-0ib"/>
-                                    <binding destination="HfO-r7-QMx" name="selectedObject" keyPath="vm.selectedPartFromItem" previousBinding="ptN-L2-0ib" id="Ry7-lg-8TC"/>
+                                    <binding destination="HfO-r7-QMx" name="selectedIndex" keyPath="vm.selectedPartFromIndex" previousBinding="ptN-L2-0ib" id="NgI-Mq-XSC"/>
                                 </connections>
                             </popUpButton>
                             <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GYX-NJ-ZBj">
@@ -1393,7 +1393,7 @@
                                     <action selector="unitToSelected:" target="HfO-r7-QMx" id="EJw-RY-Aq8"/>
                                     <binding destination="7EM-l7-CJV" name="content" keyPath="arrangedObjects" id="DAv-s4-a2a"/>
                                     <binding destination="7EM-l7-CJV" name="contentValues" keyPath="arrangedObjects.label" previousBinding="DAv-s4-a2a" id="Qxb-OP-Fpy"/>
-                                    <binding destination="HfO-r7-QMx" name="selectedObject" keyPath="vm.selectedUnitToItem" previousBinding="Qxb-OP-Fpy" id="wgV-Go-Nl7"/>
+                                    <binding destination="HfO-r7-QMx" name="selectedIndex" keyPath="vm.selectedUnitToIndex" previousBinding="Qxb-OP-Fpy" id="Lna-XN-7Kq"/>
                                 </connections>
                             </popUpButton>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NHc-fW-dBl">
@@ -1424,7 +1424,7 @@
                                     <action selector="partToSelected:" target="HfO-r7-QMx" id="yNS-jD-weo"/>
                                     <binding destination="IiA-XH-70P" name="content" keyPath="arrangedObjects" id="Q5w-AJ-ptM"/>
                                     <binding destination="IiA-XH-70P" name="contentValues" keyPath="arrangedObjects.label" previousBinding="Q5w-AJ-ptM" id="pLd-kS-2Ei"/>
-                                    <binding destination="HfO-r7-QMx" name="selectedObject" keyPath="vm.selectedPartToItem" previousBinding="pLd-kS-2Ei" id="Swa-IF-9BI"/>
+                                    <binding destination="HfO-r7-QMx" name="selectedIndex" keyPath="vm.selectedPartToIndex" previousBinding="pLd-kS-2Ei" id="9eK-uZ-ioU"/>
                                 </connections>
                             </popUpButton>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iaA-UK-MEB">
