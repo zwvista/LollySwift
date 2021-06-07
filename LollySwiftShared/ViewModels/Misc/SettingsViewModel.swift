@@ -405,8 +405,9 @@ class SettingsViewModel: NSObject {
 
     func previousUnitPart() -> Observable<()> {
         if toType == .unit {
-            if selectedUnitFrom > 1 {
-                return Observable.zip(doUpdateUnitFrom(v: selectedUnitFrom - 1), doUpdateUnitTo(v: selectedUnitFrom)).map {_ in }
+            let n = selectedUnitFrom
+            if n > 1 {
+                return Observable.zip(doUpdateUnitFrom(v: n - 1), doUpdateUnitTo(v: n - 1)).map {_ in }
             } else {
                 return Observable.empty()
             }
@@ -421,8 +422,9 @@ class SettingsViewModel: NSObject {
     
     func nextUnitPart() -> Observable<()> {
         if toType == .unit {
-            if selectedUnitFrom < unitCount {
-                return Observable.zip(doUpdateUnitFrom(v: selectedUnitFrom + 1), doUpdateUnitTo(v: selectedUnitFrom)).map {_ in }
+            let n = selectedUnitFrom
+            if n < unitCount {
+                return Observable.zip(doUpdateUnitFrom(v: n + 1), doUpdateUnitTo(v: n + 1)).map {_ in }
             } else {
                 return Observable.empty()
             }
