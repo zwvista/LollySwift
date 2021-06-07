@@ -215,6 +215,10 @@ class SettingsViewModel: NSObject {
         arrTextbookFilters = x.arrTextbookFilters
         arrWebTextbookFilters = x.arrWebTextbookFilters
         toType = x.toType
+        selectedUnitFromItem = x.selectedUnitFromItem
+        selectedPartFromItem = x.selectedPartFromItem
+        selectedUnitToItem = x.selectedUnitToItem
+        selectedPartToItem = x.selectedPartToItem
         arrAutoCorrect = x.arrAutoCorrect
         arrDictTypes = x.arrDictTypes
         delegate = x.delegate
@@ -364,7 +368,7 @@ class SettingsViewModel: NSObject {
     }
     
     func updatePartFrom() -> Observable<()> {
-        doUpdatePartFrom(v: selectedPartTo).concat(
+        doUpdatePartFrom(v: selectedPartFrom).concat(
             toType == .part || isInvalidUnitPart ? doUpdateUnitPartTo() : Observable.empty()
         )
     }
@@ -390,7 +394,7 @@ class SettingsViewModel: NSObject {
         switch toType {
         case .unit:
             toType = .part
-            return Observable.zip(doUpdatePartFrom(v: part), doUpdateUnitPartTo()).map{_ in }
+            return Observable.zip(doUpdatePartFrom(v: part), doUpdateUnitPartTo()).map {_ in }
         case .part:
             toType = .unit
             return doUpdateSingleUnit()
@@ -402,14 +406,14 @@ class SettingsViewModel: NSObject {
     func previousUnitPart() -> Observable<()> {
         if toType == .unit {
             if selectedUnitFrom > 1 {
-                return Observable.zip(doUpdateUnitFrom(v: selectedUnitFrom - 1), doUpdateUnitTo(v: selectedUnitFrom)).map{_ in }
+                return Observable.zip(doUpdateUnitFrom(v: selectedUnitFrom - 1), doUpdateUnitTo(v: selectedUnitFrom)).map {_ in }
             } else {
                 return Observable.empty()
             }
         } else if selectedPartFrom > 1 {
-            return Observable.zip(doUpdatePartFrom(v: selectedPartFrom - 1), doUpdateUnitPartTo()).map{_ in }
+            return Observable.zip(doUpdatePartFrom(v: selectedPartFrom - 1), doUpdateUnitPartTo()).map {_ in }
         } else if selectedUnitFrom > 1 {
-            return Observable.zip(doUpdateUnitFrom(v: selectedUnitFrom - 1), doUpdatePartFrom(v: partCount), doUpdateUnitPartTo()).map{_ in }
+            return Observable.zip(doUpdateUnitFrom(v: selectedUnitFrom - 1), doUpdatePartFrom(v: partCount), doUpdateUnitPartTo()).map {_ in }
         } else {
             return Observable.empty()
         }
@@ -418,29 +422,29 @@ class SettingsViewModel: NSObject {
     func nextUnitPart() -> Observable<()> {
         if toType == .unit {
             if selectedUnitFrom < unitCount {
-                return Observable.zip(doUpdateUnitFrom(v: selectedUnitFrom + 1), doUpdateUnitTo(v: selectedUnitFrom)).map{_ in }
+                return Observable.zip(doUpdateUnitFrom(v: selectedUnitFrom + 1), doUpdateUnitTo(v: selectedUnitFrom)).map {_ in }
             } else {
                 return Observable.empty()
             }
         } else if selectedPartFrom < partCount {
-            return Observable.zip(doUpdatePartFrom(v: selectedPartFrom + 1), doUpdateUnitPartTo()).map{_ in }
+            return Observable.zip(doUpdatePartFrom(v: selectedPartFrom + 1), doUpdateUnitPartTo()).map {_ in }
         } else if selectedUnitFrom < unitCount {
-            return Observable.zip(doUpdateUnitFrom(v: selectedUnitFrom + 1), doUpdatePartFrom(v: 1), doUpdateUnitPartTo()).map{_ in }
+            return Observable.zip(doUpdateUnitFrom(v: selectedUnitFrom + 1), doUpdatePartFrom(v: 1), doUpdateUnitPartTo()).map {_ in }
         } else {
             return Observable.empty()
         }
     }
     
     private func doUpdateUnitPartFrom() -> Observable<()> {
-        Observable.zip(doUpdateUnitFrom(v: USUNITTO), doUpdatePartFrom(v: USPARTTO)).map{_ in }
+        Observable.zip(doUpdateUnitFrom(v: USUNITTO), doUpdatePartFrom(v: USPARTTO)).map {_ in }
     }
     
     private func doUpdateUnitPartTo() -> Observable<()> {
-        Observable.zip(doUpdateUnitTo(v: USUNITFROM), doUpdatePartTo(v: USPARTFROM)).map{_ in }
+        Observable.zip(doUpdateUnitTo(v: USUNITFROM), doUpdatePartTo(v: USPARTFROM)).map {_ in }
     }
     
     private func doUpdateSingleUnit() -> Observable<()> {
-        Observable.zip(doUpdateUnitTo(v: USUNITFROM), doUpdatePartFrom(v: 1), doUpdatePartTo(v: partCount)).map{_ in }
+        Observable.zip(doUpdateUnitTo(v: USUNITFROM), doUpdatePartFrom(v: 1), doUpdatePartTo(v: partCount)).map {_ in }
     }
 
     private func doUpdateUnitFrom(v: Int) -> Observable<()> {
