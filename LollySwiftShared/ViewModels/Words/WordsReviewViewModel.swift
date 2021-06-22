@@ -37,7 +37,6 @@ class WordsReviewViewModel: WordsBaseViewModel {
     let wordInputString = BehaviorRelay(value: "")
     let checkTitle = BehaviorRelay(value: "Check")
     let isSpeaking = BehaviorRelay(value: true)
-    let searchEnabled = BehaviorRelay(value: false)
 
     init(settings: SettingsViewModel, needCopy: Bool, doTestAction: (() -> Void)? = nil) {
         self.doTestAction = doTestAction
@@ -136,7 +135,6 @@ class WordsReviewViewModel: WordsBaseViewModel {
                 incorrectHidden.accept(false)
             }
             wordHintHidden.accept(true)
-            searchEnabled.accept(true)
             checkTitle.accept("Next")
             guard hasNext else {return}
             let o = currentItem!
@@ -168,7 +166,6 @@ class WordsReviewViewModel: WordsBaseViewModel {
         wordHintHidden.accept(!isTestMode)
         translationString.accept("")
         wordInputString.accept("")
-        searchEnabled.accept(false)
         doTestAction?()
         if hasNext {
             indexString.accept("\(index + 1)/\(arrWords.count)")

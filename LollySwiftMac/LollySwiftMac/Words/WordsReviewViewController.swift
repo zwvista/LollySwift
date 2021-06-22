@@ -26,7 +26,6 @@ class WordsReviewViewController: WordsBaseViewController, NSTextFieldDelegate {
     @IBOutlet weak var tfTranslation: NSTextField!
     @IBOutlet weak var tfWordInput: NSTextField!
     @IBOutlet weak var btnCheck: NSButton!
-    @IBOutlet weak var btnSearch: NSButton!
 
     override func settingsChanged() {
         vm = WordsReviewViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) { [unowned self] in
@@ -53,7 +52,6 @@ class WordsReviewViewController: WordsBaseViewController, NSTextFieldDelegate {
         _ = vm.translationString ~> tfTranslation.rx.text.orEmpty
         _ = vm.wordInputString <~> tfWordInput.rx.text.orEmpty
         _ = vm.checkTitle ~> btnCheck.rx.title
-        _ = vm.searchEnabled ~> btnSearch.rx.isEnabled
 
         newTest(self)
     }
