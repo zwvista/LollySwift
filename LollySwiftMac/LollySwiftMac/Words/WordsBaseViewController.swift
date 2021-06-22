@@ -23,6 +23,7 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
     var vmSettings: SettingsViewModel! { nil }
     var vmWords: WordsBaseViewModel! { nil }
     var vmPhrases: PhrasesBaseViewModel! { nil }
+    var initSettingsInViewDidLoad: Bool { true }
 
     let synth = NSSpeechSynthesizer()
     var isSpeaking = true
@@ -33,7 +34,9 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        settingsChanged()
+        if (initSettingsInViewDidLoad) {
+            settingsChanged()
+        }
     }
     
     // Hold a reference to the window controller in order to prevent it from being released
