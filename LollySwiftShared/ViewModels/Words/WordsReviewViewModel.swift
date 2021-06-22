@@ -10,9 +10,8 @@ import Foundation
 import RxSwift
 import RxRelay
 
-class WordsReviewViewModel: NSObject {
+class WordsReviewViewModel: WordsBaseViewModel {
 
-    var vmSettings: SettingsViewModel
     var arrWords = [MUnitWord]()
     var arrCorrectIDs = [Int]()
     var index = 0
@@ -41,8 +40,8 @@ class WordsReviewViewModel: NSObject {
     let searchEnabled = BehaviorRelay(value: false)
 
     init(settings: SettingsViewModel, needCopy: Bool, doTestAction: (() -> Void)? = nil) {
-        self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
         self.doTestAction = doTestAction
+        super.init(settings: settings, needCopy: needCopy)
         options.shuffled = true
     }
 

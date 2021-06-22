@@ -10,8 +10,10 @@ import Cocoa
 import RxSwift
 import NSObject_Rx
 
-class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDelegate {
+class WordsReviewViewController: WordsBaseViewController, NSTextFieldDelegate {
     @objc dynamic var vm: WordsReviewViewModel!
+    override var vmWords: WordsBaseViewModel { vm }
+    override var vmSettings: SettingsViewModel! { vm.vmSettings }
 
     @IBOutlet weak var tfIndex: NSTextField!
     @IBOutlet weak var tfCorrect: NSTextField!
@@ -25,17 +27,15 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
     @IBOutlet weak var btnCheck: NSButton!
     @IBOutlet weak var btnSearch: NSButton!
 
-    let synth = NSSpeechSynthesizer()
-
-    func settingsChanged() {
+    override func settingsChanged() {
         vm = WordsReviewViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) { [unowned self] in
             self.tfWordInput.becomeFirstResponder()
             if self.vm.hasNext && self.vm.isSpeaking.value {
                 self.synth.startSpeaking(self.vm.currentWord)
             }
         }
-        synth.setVoice(NSSpeechSynthesizer.VoiceName(rawValue: vm.vmSettings.macVoiceName))
-        
+        super.settingsChanged()
+
         _ = vm.indexString ~> tfIndex.rx.text.orEmpty
         _ = vm.indexHidden ~> tfIndex.rx.isHidden
         _ = vm.correctHidden ~> tfCorrect.rx.isHidden
@@ -61,9 +61,6 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
         super.viewDidLoad()
     }
     
-    // Hold a reference to the window controller in order to prevent it from being released
-    // Without it, we would not be able to access its child controls afterwards
-    var wc: WordsReviewWindowController!
     override func viewDidAppear() {
         super.viewDidAppear()
         settingsChanged()
@@ -107,9 +104,7 @@ class WordsReviewViewController: NSViewController, LollyProtocol, NSTextFieldDel
     }
 }
 
-class WordsReviewWindowController: NSWindowController {
-    
-    @IBOutlet weak var scSpeak: NSSegmentedControl!
+class WordsReviewWindowController: WordsBaseWindowController {
     
     deinit {
         print("DEBUG: \(self.className) deinit")
