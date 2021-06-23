@@ -18,6 +18,7 @@ class MReviewOptions: NSObject {
     var groupSelected = 1
     var speakingEnabled = true
     var reviewCount = 10
+    var onRepeat = true
 
     init(isEmbedded: Bool = false) {
         self.isEmbedded = isEmbedded
@@ -34,6 +35,7 @@ class MReviewOptionsEdit {
     let groupSelected: BehaviorRelay<Int>
     let speakingEnabled: BehaviorRelay<Bool>
     let reviewCount: BehaviorRelay<Int>
+    let onRepeat: BehaviorRelay<Bool>
 
     init(x: MReviewOptions) {
         mode = BehaviorRelay(value: x.mode.rawValue)
@@ -44,6 +46,7 @@ class MReviewOptionsEdit {
         groupSelected = BehaviorRelay(value: x.groupSelected)
         speakingEnabled = BehaviorRelay(value: x.speakingEnabled)
         reviewCount = BehaviorRelay(value: x.reviewCount)
+        onRepeat = BehaviorRelay(value: x.onRepeat)
     }
     
     func save(to x: MReviewOptions) {
@@ -54,5 +57,6 @@ class MReviewOptionsEdit {
         x.groupSelected = groupSelected.value
         x.speakingEnabled = speakingEnabled.value
         x.reviewCount = reviewCount.value
+        x.onRepeat = onRepeat.value
     }
 }
