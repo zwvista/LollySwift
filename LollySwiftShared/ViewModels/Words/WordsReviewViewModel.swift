@@ -166,6 +166,7 @@ class WordsReviewViewModel: WordsBaseViewModel {
         wordHintHidden.accept(!isTestMode)
         translationString.accept("")
         wordInputString.accept("")
+        selectedWord = currentWord
         doTestAction?()
         if hasNext {
             indexString.accept("\(index + 1)/\(arrWords.count)")

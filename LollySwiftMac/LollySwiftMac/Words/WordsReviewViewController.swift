@@ -33,6 +33,7 @@ class WordsReviewViewController: WordsBaseViewController, NSTextFieldDelegate {
             if self.vm.hasNext && self.vm.isSpeaking.value {
                 self.synth.startSpeaking(self.vm.currentWord)
             }
+            searchDict(self)
         }
         super.settingsChanged()
 
