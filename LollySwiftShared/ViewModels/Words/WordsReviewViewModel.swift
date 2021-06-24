@@ -26,7 +26,10 @@ class WordsReviewViewModel: WordsBaseViewModel {
     let incorrectHidden = BehaviorRelay(value: true)
     let accuracyString = BehaviorRelay(value: "")
     let accuracyHidden = BehaviorRelay(value: false)
-    let checkEnabled = BehaviorRelay(value: false)
+    let checkNextEnabled = BehaviorRelay(value: false)
+    let checkNextTitle = BehaviorRelay(value: "Check Next")
+    let checkPrevEnabled = BehaviorRelay(value: false)
+    let checkPrevTitle = BehaviorRelay(value: "Check Prev")
     let wordTargetString = BehaviorRelay(value: "")
     let noteTargetString = BehaviorRelay(value: "")
     let wordHintString = BehaviorRelay(value: "")
@@ -35,8 +38,9 @@ class WordsReviewViewModel: WordsBaseViewModel {
     let wordHintHidden = BehaviorRelay(value: false)
     let translationString = BehaviorRelay(value: "")
     let wordInputString = BehaviorRelay(value: "")
-    let checkTitle = BehaviorRelay(value: "Check")
     let isSpeaking = BehaviorRelay(value: true)
+    let moveForward = BehaviorRelay(value: true)
+    let onRepeat = BehaviorRelay(value: true)
 
     init(settings: SettingsViewModel, needCopy: Bool, doTestAction: (() -> Void)? = nil) {
         self.doTestAction = doTestAction
@@ -49,7 +53,7 @@ class WordsReviewViewModel: WordsBaseViewModel {
             self.arrCorrectIDs = []
             self.index = 0
             self.doTest()
-            self.checkTitle.accept(self.isTestMode ? "Check" : "Next")
+            self.checkNextTitle.accept(self.isTestMode ? "Check" : "Next")
         }
         subscriptionTimer?.dispose()
         isSpeaking.accept(options.speakingEnabled)
@@ -135,7 +139,7 @@ class WordsReviewViewModel: WordsBaseViewModel {
                 incorrectHidden.accept(false)
             }
             wordHintHidden.accept(true)
-            checkTitle.accept("Next")
+            checkNextTitle.accept("Next")
             guard hasNext else {return}
             let o = currentItem!
             let isCorrect = o.WORD == wordInputString.value
@@ -148,7 +152,7 @@ class WordsReviewViewModel: WordsBaseViewModel {
         } else {
             next()
             doTest()
-            checkTitle.accept("Check")
+            checkNextTitle.accept("Check")
         }
     }
     
@@ -157,7 +161,7 @@ class WordsReviewViewModel: WordsBaseViewModel {
         correctHidden.accept(true)
         incorrectHidden.accept(true)
         accuracyHidden.accept(!isTestMode || !hasNext)
-        checkEnabled.accept(hasNext)
+        checkNextEnabled.accept(hasNext)
         wordTargetString.accept(currentWord)
         noteTargetString.accept(currentItem?.NOTE ?? "")
         wordHintString.accept(String(currentItem?.WORD.count ?? 0))

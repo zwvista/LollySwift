@@ -23,7 +23,7 @@ class WordsReviewViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var tvTranslation: UITextView!
     @IBOutlet weak var tfWordInput: UITextField!
     @IBOutlet weak var btnSpeak: UIButton!
-    @IBOutlet weak var btnCheck: UIButton!
+    @IBOutlet weak var btnCheckNext: UIButton!
     @IBOutlet weak var swSpeak: UISwitch!
 
     var isSpeaking = false
@@ -43,14 +43,14 @@ class WordsReviewViewController: UIViewController, UITextFieldDelegate {
         _ = vm.incorrectHidden ~> lblIncorrect.rx.isHidden
         _ = vm.accuracyString ~> lblAccuracy.rx.text
         _ = vm.accuracyHidden ~> lblAccuracy.rx.isHidden
-        _ = vm.checkEnabled ~> btnCheck.rx.isEnabled
+        _ = vm.checkNextEnabled ~> btnCheckNext.rx.isEnabled
+        _ = vm.checkNextTitle ~> btnCheckNext.rx.title(for: .normal)
         _ = vm.wordTargetString ~> lblWordTarget.rx.text
         _ = vm.noteTargetString ~> lblNoteTarget.rx.text
         _ = vm.wordTargetHidden ~> lblWordTarget.rx.isHidden
         _ = vm.noteTargetHidden ~> lblNoteTarget.rx.isHidden
         _ = vm.translationString ~> tvTranslation.rx.text
         _ = vm.wordInputString <~> tfWordInput.rx.text.orEmpty
-        _ = vm.checkTitle ~> btnCheck.rx.title(for: .normal)
         _ = vm.isSpeaking <~> swSpeak.rx.isOn
 
         newTest(self)

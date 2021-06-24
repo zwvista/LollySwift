@@ -20,7 +20,7 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
     @IBOutlet weak var tfPhraseTarget: NSTextField!
     @IBOutlet weak var tfTranslation: NSTextField!
     @IBOutlet weak var tfPhraseInput: NSTextField!
-    @IBOutlet weak var btnCheck: NSButton!
+    @IBOutlet weak var btnCheckNext: NSButton!
     
     let synth = NSSpeechSynthesizer()
 
@@ -37,12 +37,12 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
         _ = vm.indexHidden ~> tfIndex.rx.isHidden
         _ = vm.correctHidden ~> tfCorrect.rx.isHidden
         _ = vm.incorrectHidden ~> tfIncorrect.rx.isHidden
-        _ = vm.checkEnabled ~> btnCheck.rx.isEnabled
+        _ = vm.checkEnabled ~> btnCheckNext.rx.isEnabled
         _ = vm.phraseTargetString ~> tfPhraseTarget.rx.text.orEmpty
         _ = vm.phraseTargetHidden ~> tfPhraseTarget.rx.isHidden
         _ = vm.translationString ~> tfTranslation.rx.text.orEmpty
         _ = vm.phraseInputString <~> tfPhraseInput.rx.text.orEmpty
-        _ = vm.checkTitle ~> btnCheck.rx.title
+        _ = vm.checkTitle ~> btnCheckNext.rx.title
         
         newTest(self)
     }

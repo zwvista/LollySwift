@@ -25,7 +25,8 @@ class WordsReviewViewController: WordsBaseViewController, NSTextFieldDelegate {
     @IBOutlet weak var tfWordHint: NSTextField!
     @IBOutlet weak var tfTranslation: NSTextField!
     @IBOutlet weak var tfWordInput: NSTextField!
-    @IBOutlet weak var btnCheck: NSButton!
+    @IBOutlet weak var btnCheckNext: NSButton!
+    @IBOutlet weak var btnCheckPrev: NSButton!
 
     override func settingsChanged() {
         vm = WordsReviewViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) { [unowned self] in
@@ -43,7 +44,8 @@ class WordsReviewViewController: WordsBaseViewController, NSTextFieldDelegate {
         _ = vm.incorrectHidden ~> tfIncorrect.rx.isHidden
         _ = vm.accuracyString ~> tfAccuracy.rx.text.orEmpty
         _ = vm.accuracyHidden ~> tfAccuracy.rx.isHidden
-        _ = vm.checkEnabled ~> btnCheck.rx.isEnabled
+        _ = vm.checkNextEnabled ~> btnCheckNext.rx.isEnabled
+        _ = vm.checkNextTitle ~> btnCheckNext.rx.title
         _ = vm.wordTargetString ~> tfWordTarget.rx.text.orEmpty
         _ = vm.noteTargetString ~> tfNoteTarget.rx.text.orEmpty
         _ = vm.wordHintString ~> tfWordHint.rx.text.orEmpty
@@ -52,7 +54,6 @@ class WordsReviewViewController: WordsBaseViewController, NSTextFieldDelegate {
         _ = vm.wordHintHidden ~> tfWordHint.rx.isHidden
         _ = vm.translationString ~> tfTranslation.rx.text.orEmpty
         _ = vm.wordInputString <~> tfWordInput.rx.text.orEmpty
-        _ = vm.checkTitle ~> btnCheck.rx.title
 
         newTest(self)
     }

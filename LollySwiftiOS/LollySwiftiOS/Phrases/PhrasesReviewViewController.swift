@@ -21,7 +21,7 @@ class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var lblTranslation: UILabel!
     @IBOutlet weak var tfPhraseInput: UITextField!
     @IBOutlet weak var btnSpeak: UIButton!
-    @IBOutlet weak var btnCheck: UIButton!
+    @IBOutlet weak var btnCheckNext: UIButton!
     @IBOutlet weak var swSpeak: UISwitch!
 
     var isSpeaking = false
@@ -41,12 +41,12 @@ class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
         _ = vm.indexHidden ~> lblIndex.rx.isHidden
         _ = vm.correctHidden ~> lblCorrect.rx.isHidden
         _ = vm.incorrectHidden ~> lblIncorrect.rx.isHidden
-        _ = vm.checkEnabled ~> btnCheck.rx.isEnabled
+        _ = vm.checkEnabled ~> btnCheckNext.rx.isEnabled
         _ = vm.phraseTargetString ~> lblPhraseTarget.rx.text
         _ = vm.phraseTargetHidden ~> lblPhraseTarget.rx.isHidden
         _ = vm.translationString ~> lblTranslation.rx.text
         _ = vm.phraseInputString <~> tfPhraseInput.rx.text.orEmpty
-        _ = vm.checkTitle ~> btnCheck.rx.title(for: .normal)
+        _ = vm.checkTitle ~> btnCheckNext.rx.title(for: .normal)
         _ = vm.isSpeaking ~> swSpeak.rx.isOn
 
         newTest(self)
