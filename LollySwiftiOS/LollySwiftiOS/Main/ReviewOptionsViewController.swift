@@ -21,6 +21,8 @@ class ReviewOptionsViewController: UITableViewController {
     @IBOutlet weak var lblReviewMode: UILabel!
     @IBOutlet weak var swOrder: UISwitch!
     @IBOutlet weak var swSpeak: UISwitch!
+    @IBOutlet weak var swOnRepeat: UISwitch!
+    @IBOutlet weak var swMoveForward: UISwitch!
     @IBOutlet weak var tfInterval: UITextField!
     @IBOutlet weak var tfGroupSelected: UITextField!
     @IBOutlet weak var tfGroupCount: UITextField!
@@ -41,6 +43,8 @@ class ReviewOptionsViewController: UITableViewController {
         _ = vm.optionsEdit.modeString ~> lblReviewMode.rx.text
         _ = vm.optionsEdit.shuffled <~> swOrder.rx.isOn
         _ = vm.optionsEdit.speakingEnabled <~> swSpeak.rx.isOn
+        _ = vm.optionsEdit.onRepeat <~> swOnRepeat.rx.isOn
+        _ = vm.optionsEdit.moveForward <~> swMoveForward.rx.isOn
 //        _ = vm.optionsEdit.interval <~> stpInterval.rx.integerValue
         _ = vm.optionsEdit.interval.map { String($0) } ~> tfInterval.rx.text.orEmpty
 //        _ = vm.optionsEdit.groupSelected <~> stpGroupSelected.rx.integerValue
