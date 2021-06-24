@@ -14,6 +14,7 @@ class PhrasesReviewViewModel: NSObject {
 
     var vmSettings: SettingsViewModel
     var arrPhrases = [MUnitPhrase]()
+    var count: Int { arrPhrases.count }
     var arrCorrectIDs = [Int]()
     var index = 0
     let options = MReviewOptions()
@@ -47,7 +48,7 @@ class PhrasesReviewViewModel: NSObject {
 
     func newTest() {
         func f() {
-            index = options.moveForward ? 0 : arrPhrases.count - 1
+            index = options.moveForward ? 0 : count - 1
             doTest()
             checkNextTitle.accept(isTestMode ? "Check" : "Next")
             checkPrevTitle.accept(isTestMode ? "Check" : "Prev")
@@ -68,7 +69,7 @@ class PhrasesReviewViewModel: NSObject {
         } else {
             MUnitPhrase.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO).subscribe(onNext: {
                 self.arrPhrases = $0
-                let count = self.arrPhrases.count
+                let count = self.count
                 let from = count * (self.options.groupSelected - 1) / self.options.groupCount
                 let to = count * self.options.groupSelected / self.options.groupCount
                 self.arrPhrases = [MUnitPhrase](self.arrPhrases[from..<to])
@@ -84,11 +85,11 @@ class PhrasesReviewViewModel: NSObject {
         }
     }
 
-    var hasCurrent: Bool { !arrPhrases.isEmpty && (onRepeat.value || index >= 0 && index < arrPhrases.count) }
+    var hasCurrent: Bool { !arrPhrases.isEmpty && (onRepeat.value || 0..<count ~= index) }
     func move(toNext: Bool) {
         func checkOnRepeat() {
             if onRepeat.value {
-                index = (index + arrPhrases.count) % arrPhrases.count
+                index = (index + count) % count
             }
         }
         if moveForward.value == toNext {
@@ -152,7 +153,7 @@ class PhrasesReviewViewModel: NSObject {
         phraseInputString.accept("")
         doTestAction?()
         if hasCurrent {
-            indexString.accept("\(index + 1)/\(arrPhrases.count)")
+            indexString.accept("\(index + 1)/\(count)")
         } else {
             subscriptionTimer?.dispose()
         }

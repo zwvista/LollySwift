@@ -13,6 +13,7 @@ import RxRelay
 class WordsReviewViewModel: WordsBaseViewModel {
 
     var arrWords = [MUnitWord]()
+    var count: Int { arrWords.count }
     var arrCorrectIDs = [Int]()
     var index = 0
     var isTestMode: Bool { options.mode == .test || options.mode == .textbook }
@@ -52,7 +53,7 @@ class WordsReviewViewModel: WordsBaseViewModel {
 
     func newTest() {
         func f() {
-            index = options.moveForward ? 0 : arrWords.count - 1
+            index = options.moveForward ? 0 : count - 1
             doTest()
             checkNextTitle.accept(isTestMode ? "Check" : "Next")
             checkPrevTitle.accept(isTestMode ? "Check" : "Prev")
@@ -77,7 +78,7 @@ class WordsReviewViewModel: WordsBaseViewModel {
                 }
                 self.arrWords = []
                 let cnt = min(self.options.reviewCount, arr.count)
-                while self.arrWords.count < cnt {
+                while self.count < cnt {
                     let o = arr2.randomElement()!
                     if !self.arrWords.contains(where: { $0.ID == o.ID }) {
                         self.arrWords.append(o)
@@ -88,7 +89,7 @@ class WordsReviewViewModel: WordsBaseViewModel {
         } else {
             MUnitWord.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO).subscribe(onNext: {
                 self.arrWords = $0
-                let count = self.arrWords.count
+                let count = self.count
                 let from = count * (self.options.groupSelected - 1) / self.options.groupCount
                 let to = count * self.options.groupSelected / self.options.groupCount
                 self.arrWords = [MUnitWord](self.arrWords[from..<to])
@@ -104,11 +105,11 @@ class WordsReviewViewModel: WordsBaseViewModel {
         }
     }
 
-    var hasCurrent: Bool { !arrWords.isEmpty && (onRepeat.value || index >= 0 && index < arrWords.count) }
+    var hasCurrent: Bool { !arrWords.isEmpty && (onRepeat.value || 0..<count ~= index) }
     func move(toNext: Bool) {
         func checkOnRepeat() {
             if onRepeat.value {
-                index = (index + arrWords.count) % arrWords.count
+                index = (index + count) % count
             }
         }
         if moveForward.value == toNext {
@@ -194,7 +195,7 @@ class WordsReviewViewModel: WordsBaseViewModel {
         selectedWord = currentWord
         doTestAction?()
         if hasCurrent {
-            indexString.accept("\(index + 1)/\(arrWords.count)")
+            indexString.accept("\(index + 1)/\(count)")
             accuracyString.accept(currentItem!.ACCURACY)
             getTranslation().subscribe(onNext: {
                 self.translationString.accept($0)
