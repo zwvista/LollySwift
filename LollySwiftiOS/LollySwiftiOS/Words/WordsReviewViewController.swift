@@ -24,7 +24,10 @@ class WordsReviewViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var tfWordInput: UITextField!
     @IBOutlet weak var btnSpeak: UIButton!
     @IBOutlet weak var btnCheckNext: UIButton!
+    @IBOutlet weak var btnCheckPrev: UIButton!
     @IBOutlet weak var swSpeak: UISwitch!
+    @IBOutlet weak var swOnRepeat: UISwitch!
+    @IBOutlet weak var swMoveForward: UISwitch!
 
     var isSpeaking = false
 
@@ -32,7 +35,7 @@ class WordsReviewViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         vm = WordsReviewViewModel(settings: vmSettings, needCopy: false) { [unowned self] in
             self.tfWordInput.becomeFirstResponder()
-            if self.vm.hasNext && self.vm.isSpeaking.value {
+            if self.vm.hasCurrent && self.vm.isSpeaking.value {
                 AppDelegate.speak(string: self.vm.currentWord)
             }
         }
@@ -45,6 +48,8 @@ class WordsReviewViewController: UIViewController, UITextFieldDelegate {
         _ = vm.accuracyHidden ~> lblAccuracy.rx.isHidden
         _ = vm.checkNextEnabled ~> btnCheckNext.rx.isEnabled
         _ = vm.checkNextTitle ~> btnCheckNext.rx.title(for: .normal)
+        _ = vm.checkPrevEnabled ~> btnCheckPrev.rx.isEnabled
+        _ = vm.checkPrevTitle ~> btnCheckPrev.rx.title(for: .normal)
         _ = vm.wordTargetString ~> lblWordTarget.rx.text
         _ = vm.noteTargetString ~> lblNoteTarget.rx.text
         _ = vm.wordTargetHidden ~> lblWordTarget.rx.isHidden
@@ -52,6 +57,10 @@ class WordsReviewViewController: UIViewController, UITextFieldDelegate {
         _ = vm.translationString ~> tvTranslation.rx.text
         _ = vm.wordInputString <~> tfWordInput.rx.text.orEmpty
         _ = vm.isSpeaking <~> swSpeak.rx.isOn
+        _ = vm.onRepeat <~> swOnRepeat.rx.isOn
+        _ = vm.moveForward <~> swMoveForward.rx.isOn
+        _ = vm.onRepeatHidden ~> swOnRepeat.rx.isHidden
+        _ = vm.moveForwardHidden ~> swMoveForward.rx.isHidden
 
         newTest(self)
     }
@@ -65,8 +74,8 @@ class WordsReviewViewController: UIViewController, UITextFieldDelegate {
         performSegue(withIdentifier: "options", sender: sender)
     }
     
-    @IBAction func check(_ sender: AnyObject) {
-        vm.check()
+    @IBAction func check(_ sender: UIButton) {
+        vm.check(toNext: sender == btnCheckNext)
     }
     
     @IBAction func isSpeakingChanged(_ sender: AnyObject) {
@@ -80,7 +89,7 @@ class WordsReviewViewController: UIViewController, UITextFieldDelegate {
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        vm.check()
+        vm.check(toNext: true)
         return false
     }
     

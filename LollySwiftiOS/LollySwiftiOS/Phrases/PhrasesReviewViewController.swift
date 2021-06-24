@@ -22,7 +22,10 @@ class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var tfPhraseInput: UITextField!
     @IBOutlet weak var btnSpeak: UIButton!
     @IBOutlet weak var btnCheckNext: UIButton!
+    @IBOutlet weak var btnCheckPrev: UIButton!
     @IBOutlet weak var swSpeak: UISwitch!
+    @IBOutlet weak var swOnRepeat: UISwitch!
+    @IBOutlet weak var swMoveForward: UISwitch!
 
     var isSpeaking = false
     
@@ -32,7 +35,7 @@ class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         vm = PhrasesReviewViewModel(settings: vmSettings, needCopy: false) { [unowned self] in
             self.tfPhraseInput.becomeFirstResponder()
-            if self.vm.hasNext && self.vm.isSpeaking.value {
+            if self.vm.hasCurrent && self.vm.isSpeaking.value {
                 AppDelegate.speak(string: self.vm.currentPhrase)
             }
         }
@@ -41,13 +44,19 @@ class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
         _ = vm.indexHidden ~> lblIndex.rx.isHidden
         _ = vm.correctHidden ~> lblCorrect.rx.isHidden
         _ = vm.incorrectHidden ~> lblIncorrect.rx.isHidden
-        _ = vm.checkEnabled ~> btnCheckNext.rx.isEnabled
+        _ = vm.checkNextEnabled ~> btnCheckNext.rx.isEnabled
+        _ = vm.checkNextTitle ~> btnCheckNext.rx.title(for: .normal)
+        _ = vm.checkPrevEnabled ~> btnCheckPrev.rx.isEnabled
+        _ = vm.checkPrevTitle ~> btnCheckPrev.rx.title(for: .normal)
         _ = vm.phraseTargetString ~> lblPhraseTarget.rx.text
         _ = vm.phraseTargetHidden ~> lblPhraseTarget.rx.isHidden
         _ = vm.translationString ~> lblTranslation.rx.text
         _ = vm.phraseInputString <~> tfPhraseInput.rx.text.orEmpty
-        _ = vm.checkTitle ~> btnCheckNext.rx.title(for: .normal)
         _ = vm.isSpeaking ~> swSpeak.rx.isOn
+        _ = vm.onRepeat <~> swOnRepeat.rx.isOn
+        _ = vm.moveForward <~> swMoveForward.rx.isOn
+        _ = vm.onRepeatHidden ~> swOnRepeat.rx.isHidden
+        _ = vm.moveForwardHidden ~> swMoveForward.rx.isHidden
 
         newTest(self)
     }
@@ -61,8 +70,8 @@ class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
         performSegue(withIdentifier: "options", sender: sender)
     }
     
-    @IBAction func check(_ sender: AnyObject) {
-        vm.check()
+    @IBAction func check(_ sender: UIButton) {
+        vm.check(toNext: sender == btnCheckNext)
     }
 
     @IBAction func isSpeakingChanged(_ sender: AnyObject) {
@@ -76,7 +85,7 @@ class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        vm.check()
+        vm.check(toNext: true)
         return false
     }
     
