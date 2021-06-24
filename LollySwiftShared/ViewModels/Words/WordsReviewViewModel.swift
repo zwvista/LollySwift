@@ -52,15 +52,18 @@ class WordsReviewViewModel: WordsBaseViewModel {
 
     func newTest() {
         func f() {
+            index = options.moveForward ? 0 : arrWords.count - 1
             doTest()
             checkNextTitle.accept(isTestMode ? "Check" : "Next")
             checkPrevTitle.accept(isTestMode ? "Check" : "Prev")
         }
-        arrWords.removeAll()
         index = 0
+        arrWords.removeAll()
         arrCorrectIDs.removeAll()
         subscriptionTimer?.dispose()
         isSpeaking.accept(options.speakingEnabled)
+        moveForward.accept(options.moveForward)
+        onRepeat.accept(options.onRepeat)
         if options.mode == .textbook {
             MUnitWord.getDataByTextbook(vmSettings.selectedTextbook).subscribe(onNext: { arr in
                 var arr2 = [MUnitWord]()

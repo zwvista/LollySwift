@@ -18,6 +18,7 @@ class MReviewOptions: NSObject {
     var speakingEnabled = true
     var reviewCount = 10
     var onRepeat = true
+    var moveForward = true
 }
 
 class MReviewOptionsEdit {
@@ -30,6 +31,7 @@ class MReviewOptionsEdit {
     let speakingEnabled: BehaviorRelay<Bool>
     let reviewCount: BehaviorRelay<Int>
     let onRepeat: BehaviorRelay<Bool>
+    let moveForward: BehaviorRelay<Bool>
 
     init(x: MReviewOptions) {
         mode = BehaviorRelay(value: x.mode.rawValue)
@@ -41,6 +43,7 @@ class MReviewOptionsEdit {
         speakingEnabled = BehaviorRelay(value: x.speakingEnabled)
         reviewCount = BehaviorRelay(value: x.reviewCount)
         onRepeat = BehaviorRelay(value: x.onRepeat)
+        moveForward = BehaviorRelay(value: x.moveForward)
     }
     
     func save(to x: MReviewOptions) {
@@ -52,5 +55,6 @@ class MReviewOptionsEdit {
         x.speakingEnabled = speakingEnabled.value
         x.reviewCount = reviewCount.value
         x.onRepeat = onRepeat.value
+        x.moveForward = moveForward.value
     }
 }

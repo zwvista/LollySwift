@@ -47,15 +47,18 @@ class PhrasesReviewViewModel: NSObject {
 
     func newTest() {
         func f() {
+            index = options.moveForward ? 0 : arrPhrases.count - 1
             doTest()
             checkNextTitle.accept(isTestMode ? "Check" : "Next")
             checkPrevTitle.accept(isTestMode ? "Check" : "Prev")
         }
-        arrPhrases.removeAll()
         index = 0
+        arrPhrases.removeAll()
         arrCorrectIDs.removeAll()
         subscriptionTimer?.dispose()
         isSpeaking.accept(options.speakingEnabled)
+        moveForward.accept(options.moveForward)
+        onRepeat.accept(options.onRepeat)
         if options.mode == .textbook {
             MUnitPhrase.getDataByTextbook(vmSettings.selectedTextbook).subscribe(onNext: { arr in
                 let cnt = min(self.options.reviewCount, arr.count)
