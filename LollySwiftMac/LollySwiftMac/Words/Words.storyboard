@@ -5698,7 +5698,7 @@ Gw
                                                 </connections>
                                             </textField>
                                             <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9An-cD-pD2">
-                                                <rect key="frame" x="373" y="37" width="102" height="32"/>
+                                                <rect key="frame" x="376" y="37" width="102" height="32"/>
                                                 <buttonCell key="cell" type="push" title="Check" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="fbt-b8-JSa">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
@@ -5707,21 +5707,45 @@ Gw
                                                     <action selector="check:" target="ypg-jQ-ROv" id="dsf-1m-1TF"/>
                                                 </connections>
                                             </button>
+                                            <segmentedControl verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xRu-g6-Itv">
+                                                <rect key="frame" x="88" y="42" width="131" height="23"/>
+                                                <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="d94-tp-wUP">
+                                                    <font key="font" metaFont="system"/>
+                                                    <segments>
+                                                        <segment label="One Pass" width="56"/>
+                                                        <segment label="On Repeat" width="64" selected="YES" tag="1"/>
+                                                    </segments>
+                                                </segmentedCell>
+                                            </segmentedControl>
+                                            <segmentedControl verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iO2-qq-F3q">
+                                                <rect key="frame" x="237" y="42" width="127" height="23"/>
+                                                <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="sVo-wl-PjN">
+                                                    <font key="font" metaFont="system"/>
+                                                    <segments>
+                                                        <segment label="Backward" width="58"/>
+                                                        <segment label="Forward" width="58" selected="YES" tag="1"/>
+                                                    </segments>
+                                                </segmentedCell>
+                                            </segmentedControl>
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="sKV-9H-nac" secondAttribute="trailing" constant="20" id="2Fa-RI-Mjd"/>
+                                            <constraint firstItem="xRu-g6-Itv" firstAttribute="centerY" secondItem="f21-Ix-zj3" secondAttribute="centerY" id="2kA-VR-Wq4"/>
                                             <constraint firstItem="vOb-Pl-cYk" firstAttribute="leading" secondItem="ifE-nI-yN3" secondAttribute="trailing" constant="12" id="9oY-w8-cAf"/>
+                                            <constraint firstItem="iO2-qq-F3q" firstAttribute="leading" secondItem="xRu-g6-Itv" secondAttribute="trailing" constant="20" id="Ahh-nM-OpX"/>
                                             <constraint firstItem="ifE-nI-yN3" firstAttribute="top" secondItem="nAV-ZA-eQY" secondAttribute="top" constant="20" id="DNx-Z4-E9n"/>
                                             <constraint firstItem="tkR-zI-Crh" firstAttribute="top" secondItem="544-Sl-0Ct" secondAttribute="bottom" constant="20" id="G5f-PF-1Ug"/>
                                             <constraint firstItem="W4B-Jb-i8b" firstAttribute="top" secondItem="tkR-zI-Crh" secondAttribute="bottom" constant="20" id="Gw0-Wa-HC7"/>
                                             <constraint firstItem="P77-NG-qbH" firstAttribute="leading" secondItem="07i-yK-Tyc" secondAttribute="trailing" constant="10" id="IkZ-qE-NON"/>
                                             <constraint firstItem="vOb-Pl-cYk" firstAttribute="centerY" secondItem="ifE-nI-yN3" secondAttribute="centerY" id="JJh-vE-1Vz"/>
-                                            <constraint firstItem="f21-Ix-zj3" firstAttribute="leading" secondItem="9An-cD-pD2" secondAttribute="trailing" constant="23" id="Nzd-QL-4Ue"/>
+                                            <constraint firstItem="iO2-qq-F3q" firstAttribute="centerY" secondItem="f21-Ix-zj3" secondAttribute="centerY" id="LHH-M8-k3X"/>
+                                            <constraint firstItem="f21-Ix-zj3" firstAttribute="leading" secondItem="9An-cD-pD2" secondAttribute="trailing" constant="20" id="Nzd-QL-4Ue"/>
                                             <constraint firstItem="9An-cD-pD2" firstAttribute="centerY" secondItem="f21-Ix-zj3" secondAttribute="centerY" id="Qg3-Fc-VXE"/>
                                             <constraint firstItem="W4B-Jb-i8b" firstAttribute="trailing" secondItem="tkR-zI-Crh" secondAttribute="trailing" id="RHX-Pc-6Ha"/>
                                             <constraint firstItem="f21-Ix-zj3" firstAttribute="trailing" secondItem="W4B-Jb-i8b" secondAttribute="trailing" id="S3j-qE-6Wj"/>
                                             <constraint firstItem="P77-NG-qbH" firstAttribute="centerY" secondItem="544-Sl-0Ct" secondAttribute="centerY" id="X31-Jv-O93"/>
                                             <constraint firstItem="07i-yK-Tyc" firstAttribute="centerY" secondItem="544-Sl-0Ct" secondAttribute="centerY" id="X3P-MQ-zSR"/>
+                                            <constraint firstItem="9An-cD-pD2" firstAttribute="leading" secondItem="iO2-qq-F3q" secondAttribute="trailing" constant="20" id="XnQ-s4-jdQ"/>
                                             <constraint firstAttribute="bottom" secondItem="f21-Ix-zj3" secondAttribute="bottom" constant="44" id="YFf-po-usv"/>
                                             <constraint firstItem="0nW-V6-xz8" firstAttribute="leading" secondItem="vOb-Pl-cYk" secondAttribute="leading" id="jub-AH-EB6"/>
                                             <constraint firstItem="tkR-zI-Crh" firstAttribute="trailing" secondItem="sKV-9H-nac" secondAttribute="trailing" id="ogV-JQ-lva"/>
@@ -5782,6 +5806,8 @@ Gw
                     <connections>
                         <outlet property="btnCheckNext" destination="f21-Ix-zj3" id="Y9D-ys-1QI"/>
                         <outlet property="btnCheckPrev" destination="9An-cD-pD2" id="Aop-OM-kPX"/>
+                        <outlet property="scMoveForward" destination="iO2-qq-F3q" id="IPb-ky-VIf"/>
+                        <outlet property="scOnRepeat" destination="xRu-g6-Itv" id="2LS-Cw-K20"/>
                         <outlet property="tabView" destination="9hT-cb-91A" id="ft0-Sx-Kzo"/>
                         <outlet property="tfAccuracy" destination="sKV-9H-nac" id="weI-uh-mnQ"/>
                         <outlet property="tfCorrect" destination="vOb-Pl-cYk" id="MTb-JF-X4v"/>

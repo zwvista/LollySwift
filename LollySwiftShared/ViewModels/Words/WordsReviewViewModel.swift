@@ -27,9 +27,9 @@ class WordsReviewViewModel: WordsBaseViewModel {
     let accuracyString = BehaviorRelay(value: "")
     let accuracyHidden = BehaviorRelay(value: false)
     let checkNextEnabled = BehaviorRelay(value: false)
-    let checkNextTitle = BehaviorRelay(value: "Check Next")
+    let checkNextTitle = BehaviorRelay(value: "Check")
     let checkPrevEnabled = BehaviorRelay(value: false)
-    let checkPrevTitle = BehaviorRelay(value: "Check Prev")
+    let checkPrevTitle = BehaviorRelay(value: "Check")
     let wordTargetString = BehaviorRelay(value: "")
     let noteTargetString = BehaviorRelay(value: "")
     let wordHintString = BehaviorRelay(value: "")
@@ -41,6 +41,8 @@ class WordsReviewViewModel: WordsBaseViewModel {
     let isSpeaking = BehaviorRelay(value: true)
     let moveForward = BehaviorRelay(value: true)
     let onRepeat = BehaviorRelay(value: true)
+    let moveForwardHidden = BehaviorRelay(value: false)
+    let onRepeatHidden = BehaviorRelay(value: false)
 
     init(settings: SettingsViewModel, needCopy: Bool, doTestAction: (() -> Void)? = nil) {
         self.doTestAction = doTestAction
@@ -50,10 +52,11 @@ class WordsReviewViewModel: WordsBaseViewModel {
 
     func newTest() {
         func f() {
-            self.arrCorrectIDs = []
-            self.index = 0
-            self.doTest()
-            self.checkNextTitle.accept(self.isTestMode ? "Check" : "Next")
+            arrCorrectIDs = []
+            index = 0
+            doTest()
+            checkNextTitle.accept(isTestMode ? "Check" : "Next")
+            checkPrevTitle.accept(isTestMode ? "Check" : "Prev")
         }
         subscriptionTimer?.dispose()
         isSpeaking.accept(options.speakingEnabled)
@@ -89,7 +92,7 @@ class WordsReviewViewModel: WordsBaseViewModel {
                 f()
                 if self.options.mode == .reviewAuto {
                     self.subscriptionTimer = Observable<Int>.interval(.seconds( self.options.interval), scheduler: MainScheduler.instance).subscribe { _ in
-                        self.check()
+                        self.check(toNext: true)
                     }
                     self.subscriptionTimer?.disposed(by: self.rx.disposeBag)
                 }
@@ -97,17 +100,28 @@ class WordsReviewViewModel: WordsBaseViewModel {
         }
     }
 
-    var hasNext: Bool { index < arrWords.count }
-    func next() {
-        index += 1
-        if isTestMode && !hasNext {
-            index = 0
-            arrWords = arrWords.filter { !arrCorrectIDs.contains($0.ID) }
+    var hasCurrent: Bool { !arrWords.isEmpty && (onRepeat.value || index >= 0 && index < arrWords.count) }
+    func move(toNext: Bool) {
+        func checkOnRepeat() {
+            if onRepeat.value {
+                index = (index + arrWords.count) % arrWords.count
+            }
+        }
+        if moveForward.value == toNext {
+            index += 1
+            checkOnRepeat()
+            if isTestMode && !hasCurrent {
+                index = 0
+                arrWords = arrWords.filter { !arrCorrectIDs.contains($0.ID) }
+            }
+        } else {
+            index -= 1
+            checkOnRepeat()
         }
     }
     
-    var currentItem: MUnitWord? { hasNext ? arrWords[index] : nil }
-    var currentWord: String { hasNext ? arrWords[index].WORD : "" }
+    var currentItem: MUnitWord? { hasCurrent ? arrWords[index] : nil }
+    var currentWord: String { hasCurrent ? arrWords[index].WORD : "" }
     func getTranslation() -> Observable<String> {
         guard vmSettings.hasDictTranslation else { return Observable.empty() }
         let mDictTranslation = vmSettings.selectedDictTranslation
@@ -118,7 +132,7 @@ class WordsReviewViewModel: WordsBaseViewModel {
         }
     }
     
-    func check() {
+    func check(toNext: Bool) {
         if !isTestMode {
             var b = true
             if options.mode == .reviewManual && !wordInputString.value.isEmpty && wordInputString.value != currentWord {
@@ -126,7 +140,7 @@ class WordsReviewViewModel: WordsBaseViewModel {
                 incorrectHidden.accept(false)
             }
             if b {
-                next()
+                move(toNext: toNext)
                 doTest()
             }
         } else if correctHidden.value && incorrectHidden.value {
@@ -140,7 +154,7 @@ class WordsReviewViewModel: WordsBaseViewModel {
             }
             wordHintHidden.accept(true)
             checkNextTitle.accept("Next")
-            guard hasNext else {return}
+            guard hasCurrent else {return}
             let o = currentItem!
             let isCorrect = o.WORD == wordInputString.value
             if isCorrect { arrCorrectIDs.append(o.ID) }
@@ -150,18 +164,20 @@ class WordsReviewViewModel: WordsBaseViewModel {
                 self.accuracyString.accept(o.ACCURACY)
             }.subscribe() ~ rx.disposeBag
         } else {
-            next()
+            move(toNext: toNext)
             doTest()
             checkNextTitle.accept("Check")
+            checkPrevTitle.accept("Check")
         }
     }
     
     func doTest() {
-        indexHidden.accept(!hasNext)
+        indexHidden.accept(!hasCurrent)
         correctHidden.accept(true)
         incorrectHidden.accept(true)
-        accuracyHidden.accept(!isTestMode || !hasNext)
-        checkNextEnabled.accept(hasNext)
+        accuracyHidden.accept(!isTestMode || !hasCurrent)
+        checkNextEnabled.accept(hasCurrent)
+        checkPrevEnabled.accept(hasCurrent)
         wordTargetString.accept(currentWord)
         noteTargetString.accept(currentItem?.NOTE ?? "")
         wordHintString.accept(String(currentItem?.WORD.count ?? 0))
@@ -172,7 +188,7 @@ class WordsReviewViewModel: WordsBaseViewModel {
         wordInputString.accept("")
         selectedWord = currentWord
         doTestAction?()
-        if hasNext {
+        if hasCurrent {
             indexString.accept("\(index + 1)/\(arrWords.count)")
             accuracyString.accept(currentItem!.ACCURACY)
             getTranslation().subscribe(onNext: {
