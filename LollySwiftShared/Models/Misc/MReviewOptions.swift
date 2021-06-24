@@ -10,7 +10,6 @@ import Foundation
 import RxRelay
 
 class MReviewOptions: NSObject {
-    var isEmbedded = false
     var mode: ReviewMode = .reviewAuto
     var interval = 5
     var shuffled = false
@@ -19,11 +18,6 @@ class MReviewOptions: NSObject {
     var speakingEnabled = true
     var reviewCount = 10
     var onRepeat = true
-
-    init(isEmbedded: Bool = false) {
-        self.isEmbedded = isEmbedded
-        super.init()
-    }
 }
 
 class MReviewOptionsEdit {

@@ -686,8 +686,8 @@
                                             </menu>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="oGc-SM-0iH"/>
-                                        <menuItem title="Words Review" id="wsa-Tc-VyN">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                        <menuItem title="Words Review" keyEquivalent="r" id="wsa-Tc-VyN">
+                                            <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                             <connections>
                                                 <action selector="wordsReview:" target="Voe-Tx-rLC" id="T2G-N1-WgO"/>
                                             </connections>
@@ -1428,7 +1428,7 @@
                                 </connections>
                             </popUpButton>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iaA-UK-MEB">
-                                <rect key="frame" x="166" y="55" width="115" height="32"/>
+                                <rect key="frame" x="166" y="55" width="116" height="32"/>
                                 <buttonCell key="cell" type="push" title="Previous Part" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="JzB-uc-0yD">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -1438,7 +1438,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="amm-Ya-sSe">
-                                <rect key="frame" x="279" y="55" width="115" height="32"/>
+                                <rect key="frame" x="280" y="55" width="116" height="32"/>
                                 <buttonCell key="cell" type="push" title="Next Part" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="c4x-ru-377">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>

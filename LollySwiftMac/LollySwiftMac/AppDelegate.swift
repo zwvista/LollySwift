@@ -20,12 +20,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         AppDelegate.theSettingsViewModel.getData().subscribe(onNext: {
             //self.search(self)
             //self.editBlog(self)
-            //self.wordsInUnit(self)
+            self.wordsInUnit(self)
             //self.wordsInLanguage(self)
             //self.readNumber(self)
             //self.patternsInLanguage(self)
             //self.phrasesInUnit(self)
-            self.wordsReview(self)
+            //self.wordsReview(self)
         }) ~ rx.disposeBag
     }
 

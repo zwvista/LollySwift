@@ -15,7 +15,6 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     
     var vm: PhrasesUnitViewModel!
     override var vmPhrases: PhrasesBaseViewModel { vm }
-    var vmReview = EmbeddedReviewViewModel()
     override var vmSettings: SettingsViewModel! { vm.vmSettings }
     var arrPhrases: [MUnitPhrase] { vm.arrPhrasesFiltered ?? vm.arrPhrases }
 
@@ -198,25 +197,6 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
         tfStatusText.stringValue = "\(tvPhrases.numberOfRows) Phrases in \(vmSettings.UNITINFO)"
     }
     
-    @IBAction func reviewPhrases(_ sender: AnyObject) {
-        vmReview.stop()
-        let optionsVC = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: "ReviewOptionsViewController") as! ReviewOptionsViewController
-        optionsVC.options = vmReview.options
-        optionsVC.complete = { [unowned self] in
-            var arrPhrases = self.arrPhrases
-            if self.vmReview.options.shuffled {
-                arrPhrases = arrPhrases.shuffled()
-            }
-            let arrIDs = arrPhrases.map(\.ID)
-            self.vmReview.start(arrIDs: arrIDs, interval: self.vmReview.options.interval) { [unowned self] i in
-                if let row = self.arrPhrases.firstIndex(where: { $0.ID == arrIDs[i] }) {
-                    self.tvPhrases.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
-                }
-            }
-        }
-        self.presentAsSheet(optionsVC)
-    }
-
     @IBAction func associateNewWord(_ sender: AnyObject) {
         guard vm.selectedPhraseID != 0 else {return}
         (NSApplication.shared.delegate as! AppDelegate).addNewUnitWord(phraseid: vm.selectedPhraseID)

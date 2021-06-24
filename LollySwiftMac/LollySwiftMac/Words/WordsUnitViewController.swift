@@ -15,7 +15,6 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
 
     var vm: WordsUnitViewModel!
     override var vmWords: WordsBaseViewModel { vm }
-    var vmReview = EmbeddedReviewViewModel()
     override var vmSettings: SettingsViewModel! { vm.vmSettings }
     var arrWords: [MUnitWord] { vm.arrWordsFiltered ?? vm.arrWords }
 
@@ -256,25 +255,6 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
         tfStatusText.stringValue = "\(tvWords.numberOfRows) Words in \(vmSettings.UNITINFO)"
     }
     
-    @IBAction func reviewWords(_ sender: AnyObject) {
-        vmReview.stop()
-        let optionsVC = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: "ReviewOptionsViewController") as! ReviewOptionsViewController
-        optionsVC.options = vmReview.options
-        optionsVC.complete = { [unowned self] in
-            var arrWords = self.arrWords
-            if self.vmReview.options.shuffled {
-                arrWords = arrWords.shuffled()
-            }
-            let arrIDs = arrWords.map(\.ID)
-            self.vmReview.start(arrIDs: arrIDs, interval: self.vmReview.options.interval) { [unowned self] i in
-                if let row = self.arrWords.firstIndex(where: { $0.ID == arrIDs[i] }) {
-                    self.tvWords.selectRowIndexes(IndexSet(integer: row), byExtendingSelection: false)
-                }
-            }
-        }
-        self.presentAsSheet(optionsVC)
-    }
-
     @IBAction func associateNewPhrase(_ sender: AnyObject) {
         guard vm.selectedWordID != 0 else {return}
         (NSApplication.shared.delegate as! AppDelegate).addNewUnitPhrase(wordid: vm.selectedWordID)

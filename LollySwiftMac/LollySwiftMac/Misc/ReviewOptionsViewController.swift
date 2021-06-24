@@ -32,7 +32,6 @@ class ReviewOptionsViewController: NSViewController {
         super.viewDidLoad()
         vm = ReviewOptionsViewModel(options: options)
         
-        _ = vm.modeEnabled ~> pubMode.rx.isEnabled
         _ = vm.optionsEdit.mode <~> pubMode.rx.selectedItemIndex
         _ = vm.optionsEdit.shuffled <~> scOrder.rx.isOn
         _ = vm.optionsEdit.onRepeat <~> scOnRepeat.rx.isOn
