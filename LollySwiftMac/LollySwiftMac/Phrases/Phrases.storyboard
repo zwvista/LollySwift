@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
+        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="18122"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -277,7 +278,7 @@
                                                                 <rect key="frame" x="0.0" y="0.0" width="600" height="384"/>
                                                                 <clipView key="contentView" id="Zcq-Vh-TJP">
                                                                     <rect key="frame" x="1" y="1" width="598" height="382"/>
-                                                                    <autoresizingMask key="autoresizingMask"/>
+                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="ieV-Ib-SiL" viewBased="YES" id="8Zf-06-OzS">
                                                                             <rect key="frame" x="0.0" y="0.0" width="930" height="359"/>
@@ -584,7 +585,7 @@
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                 <clipView key="contentView" id="VDG-cs-guC">
                                                                     <rect key="frame" x="1" y="1" width="598" height="118"/>
-                                                                    <autoresizingMask key="autoresizingMask"/>
+                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="11P-YU-HJV" viewBased="YES" id="7N6-WE-Kfk">
                                                                             <rect key="frame" x="0.0" y="0.0" width="598" height="93"/>
@@ -1066,7 +1067,7 @@
                                 <rect key="frame" x="20" y="55" width="583" height="80"/>
                                 <clipView key="contentView" id="ScQ-9S-N9D">
                                     <rect key="frame" x="1" y="1" width="581" height="78"/>
-                                    <autoresizingMask key="autoresizingMask"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" autosaveColumns="NO" rowSizeStyle="automatic" headerView="lEM-fU-4sz" viewBased="YES" id="XwG-ip-sUv">
                                             <rect key="frame" x="0.0" y="0.0" width="1063" height="53"/>
@@ -1485,7 +1486,7 @@ Gw
                                 <rect key="frame" x="86" y="60" width="344" height="158"/>
                                 <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="hvA-LM-7t1">
                                     <rect key="frame" x="0.0" y="0.0" width="344" height="158"/>
-                                    <autoresizingMask key="autoresizingMask"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <textView importsGraphics="NO" richText="NO" verticallyResizable="YES" spellingCorrection="YES" smartInsertDelete="YES" id="Tes-vY-ZD0">
                                             <rect key="frame" x="0.0" y="-1" width="344" height="158"/>
@@ -1715,7 +1716,7 @@ DQ
                                 <rect key="frame" x="15" y="63" width="588" height="284"/>
                                 <clipView key="contentView" id="hyR-sz-3vx">
                                     <rect key="frame" x="1" y="1" width="586" height="282"/>
-                                    <autoresizingMask key="autoresizingMask"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" autosaveColumns="NO" rowSizeStyle="automatic" headerView="xGV-D1-Imv" viewBased="YES" id="gyW-8h-UjQ">
                                             <rect key="frame" x="0.0" y="0.0" width="953" height="257"/>
@@ -2032,7 +2033,7 @@ DQ
                                 </tableHeaderView>
                             </scrollView>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UfK-eq-5mD">
-                                <rect key="frame" x="464" y="14" width="54" height="32"/>
+                                <rect key="frame" x="424" y="14" width="54" height="32"/>
                                 <buttonCell key="cell" type="push" title="OK" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="QXG-Km-RSf">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -2042,7 +2043,7 @@ DQ
                                 </buttonCell>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Rqf-Xh-QBi">
-                                <rect key="frame" x="536" y="14" width="76" height="32"/>
+                                <rect key="frame" x="496" y="14" width="76" height="32"/>
                                 <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Wn5-3h-mBM">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -2396,7 +2397,7 @@ Gw
                                                                 <rect key="frame" x="0.0" y="0.0" width="614" height="395"/>
                                                                 <clipView key="contentView" id="jEc-SO-xYY">
                                                                     <rect key="frame" x="1" y="1" width="612" height="393"/>
-                                                                    <autoresizingMask key="autoresizingMask"/>
+                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="R8q-7P-bab" viewBased="YES" id="M2g-9p-UVx">
                                                                             <rect key="frame" x="0.0" y="0.0" width="612" height="368"/>
@@ -2563,7 +2564,7 @@ Gw
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                 <clipView key="contentView" id="QsO-RO-qob">
                                                                     <rect key="frame" x="1" y="1" width="612" height="118"/>
-                                                                    <autoresizingMask key="autoresizingMask"/>
+                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="54X-GR-1eM" viewBased="YES" id="Wpd-f7-GOr">
                                                                             <rect key="frame" x="0.0" y="0.0" width="612" height="93"/>
@@ -2979,7 +2980,7 @@ Gw
                                 <rect key="frame" x="20" y="61" width="588" height="100"/>
                                 <clipView key="contentView" id="4bV-li-2gb">
                                     <rect key="frame" x="1" y="1" width="586" height="98"/>
-                                    <autoresizingMask key="autoresizingMask"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" autosaveColumns="NO" rowSizeStyle="automatic" headerView="btb-BO-IVj" viewBased="YES" id="QpT-RC-McY">
                                             <rect key="frame" x="0.0" y="0.0" width="1063" height="73"/>
@@ -3605,7 +3606,7 @@ Gw
                                                                 <rect key="frame" x="0.0" y="0.0" width="606" height="391"/>
                                                                 <clipView key="contentView" id="Jxc-fy-ceq">
                                                                     <rect key="frame" x="1" y="1" width="604" height="389"/>
-                                                                    <autoresizingMask key="autoresizingMask"/>
+                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="cFy-BM-JCq" viewBased="YES" id="vdZ-uq-lvp">
                                                                             <rect key="frame" x="0.0" y="0.0" width="1033" height="364"/>
@@ -3948,7 +3949,7 @@ Gw
                                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                                 <clipView key="contentView" id="X8H-GN-vNP">
                                                                     <rect key="frame" x="1" y="1" width="598" height="118"/>
-                                                                    <autoresizingMask key="autoresizingMask"/>
+                                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="RV2-Qv-ECx" viewBased="YES" id="svn-Fw-kKy">
                                                                             <rect key="frame" x="0.0" y="0.0" width="598" height="93"/>
@@ -4446,7 +4447,7 @@ Gw
                                 <rect key="frame" x="20" y="57" width="585" height="100"/>
                                 <clipView key="contentView" id="3hD-Fm-yTc">
                                     <rect key="frame" x="1" y="1" width="583" height="98"/>
-                                    <autoresizingMask key="autoresizingMask"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" autosaveColumns="NO" rowSizeStyle="automatic" headerView="sZ3-WX-Re9" viewBased="YES" id="Dc7-bK-vgY">
                                             <rect key="frame" x="0.0" y="0.0" width="1063" height="73"/>
@@ -4980,8 +4981,8 @@ Gw
                                     <outlet property="delegate" destination="I1g-x1-rZK" id="Sur-hE-qSQ"/>
                                 </connections>
                             </textField>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tfQ-3Y-osT">
-                                <rect key="frame" x="476" y="13" width="74" height="32"/>
+                            <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tfQ-3Y-osT">
+                                <rect key="frame" x="448" y="13" width="102" height="32"/>
                                 <buttonCell key="cell" type="push" title="Check" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="x7r-80-SIu">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -4990,28 +4991,67 @@ Gw
                                     <action selector="check:" target="I1g-x1-rZK" id="g3L-Fa-rAT"/>
                                 </connections>
                             </button>
+                            <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hZW-ZX-inQ">
+                                <rect key="frame" x="340" y="13" width="102" height="32"/>
+                                <buttonCell key="cell" type="push" title="Check" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="zfY-rC-xan">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="check:" target="I1g-x1-rZK" id="rc3-gV-RjI"/>
+                                </connections>
+                            </button>
+                            <segmentedControl verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SyK-hA-mZ7">
+                                <rect key="frame" x="201" y="18" width="127" height="23"/>
+                                <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="cTV-Rf-W4K">
+                                    <font key="font" metaFont="system"/>
+                                    <segments>
+                                        <segment label="Backward" width="58"/>
+                                        <segment label="Forward" width="58" selected="YES" tag="1"/>
+                                    </segments>
+                                </segmentedCell>
+                            </segmentedControl>
+                            <segmentedControl verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tm1-HS-91q">
+                                <rect key="frame" x="52" y="18" width="131" height="23"/>
+                                <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="ltB-hW-mLQ">
+                                    <font key="font" metaFont="system"/>
+                                    <segments>
+                                        <segment label="One Pass" width="56"/>
+                                        <segment label="On Repeat" width="64" selected="YES" tag="1"/>
+                                    </segments>
+                                </segmentedCell>
+                            </segmentedControl>
                         </subviews>
                         <constraints>
                             <constraint firstItem="WC7-er-c2b" firstAttribute="leading" secondItem="Fhl-OE-S8U" secondAttribute="leading" id="19R-U7-G4I"/>
                             <constraint firstAttribute="bottom" secondItem="tfQ-3Y-osT" secondAttribute="bottom" constant="20" id="43C-CT-vwA"/>
+                            <constraint firstItem="tfQ-3Y-osT" firstAttribute="leading" secondItem="hZW-ZX-inQ" secondAttribute="trailing" constant="20" id="6fE-bD-ANP"/>
                             <constraint firstItem="3SA-ko-IAe" firstAttribute="leading" secondItem="5q9-Ad-ZAs" secondAttribute="leading" id="7kh-c9-3yy"/>
                             <constraint firstItem="lHa-Iq-qF8" firstAttribute="leading" secondItem="JA3-uv-wIc" secondAttribute="leading" constant="20" id="8Bd-uf-mPN"/>
+                            <constraint firstItem="hZW-ZX-inQ" firstAttribute="centerY" secondItem="tfQ-3Y-osT" secondAttribute="centerY" id="8D3-fX-7Tt"/>
                             <constraint firstItem="tfQ-3Y-osT" firstAttribute="top" secondItem="UT0-VP-Vmh" secondAttribute="bottom" constant="20" id="Bfj-zl-N5b"/>
                             <constraint firstItem="Fhl-OE-S8U" firstAttribute="leading" secondItem="lHa-Iq-qF8" secondAttribute="leading" id="Dry-Cz-qhe"/>
                             <constraint firstItem="UT0-VP-Vmh" firstAttribute="top" secondItem="WC7-er-c2b" secondAttribute="bottom" constant="20" id="ECK-cK-Swe"/>
                             <constraint firstItem="Fhl-OE-S8U" firstAttribute="top" secondItem="lHa-Iq-qF8" secondAttribute="bottom" constant="20" id="M99-eW-wmh"/>
+                            <constraint firstItem="hZW-ZX-inQ" firstAttribute="leading" secondItem="SyK-hA-mZ7" secondAttribute="trailing" constant="20" id="Q6k-PU-31N"/>
                             <constraint firstItem="tfQ-3Y-osT" firstAttribute="trailing" secondItem="UT0-VP-Vmh" secondAttribute="trailing" id="RRL-pm-CcY"/>
                             <constraint firstItem="lHa-Iq-qF8" firstAttribute="top" secondItem="JA3-uv-wIc" secondAttribute="top" constant="20" id="VqS-oB-cHX"/>
                             <constraint firstItem="WC7-er-c2b" firstAttribute="top" secondItem="Fhl-OE-S8U" secondAttribute="bottom" constant="20" id="ddh-i0-Hfd"/>
+                            <constraint firstItem="SyK-hA-mZ7" firstAttribute="leading" secondItem="tm1-HS-91q" secondAttribute="trailing" constant="20" id="fSG-vb-30G"/>
                             <constraint firstItem="5q9-Ad-ZAs" firstAttribute="leading" secondItem="lHa-Iq-qF8" secondAttribute="trailing" constant="14" id="i30-pN-0a8"/>
+                            <constraint firstItem="SyK-hA-mZ7" firstAttribute="centerY" secondItem="tfQ-3Y-osT" secondAttribute="centerY" id="kyM-7B-CL1"/>
                             <constraint firstItem="5q9-Ad-ZAs" firstAttribute="centerY" secondItem="lHa-Iq-qF8" secondAttribute="centerY" id="lgT-aX-pYg"/>
                             <constraint firstAttribute="trailing" secondItem="UT0-VP-Vmh" secondAttribute="trailing" constant="20" id="qrJ-x8-s3V"/>
                             <constraint firstItem="UT0-VP-Vmh" firstAttribute="leading" secondItem="lHa-Iq-qF8" secondAttribute="leading" id="wrw-jF-kgL"/>
+                            <constraint firstItem="tm1-HS-91q" firstAttribute="centerY" secondItem="tfQ-3Y-osT" secondAttribute="centerY" id="xaH-jC-JVi"/>
                             <constraint firstItem="3SA-ko-IAe" firstAttribute="centerY" secondItem="lHa-Iq-qF8" secondAttribute="centerY" id="zIM-Zh-mWZ"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="btnCheckNext" destination="tfQ-3Y-osT" id="ume-D0-LTy"/>
+                        <outlet property="btnCheckPrev" destination="hZW-ZX-inQ" id="x8h-yw-9jE"/>
+                        <outlet property="scMoveForward" destination="SyK-hA-mZ7" id="cVz-un-p5a"/>
+                        <outlet property="scOnRepeat" destination="tm1-HS-91q" id="zy9-gw-C3u"/>
                         <outlet property="tfCorrect" destination="5q9-Ad-ZAs" id="phw-vf-Foc"/>
                         <outlet property="tfIncorrect" destination="3SA-ko-IAe" id="M2w-e1-jJ5"/>
                         <outlet property="tfIndex" destination="lHa-Iq-qF8" id="03A-ct-hmU"/>
@@ -5123,7 +5163,7 @@ Gw
                                 <rect key="frame" x="20" y="63" width="583" height="316"/>
                                 <clipView key="contentView" id="tlG-Zj-wJz">
                                     <rect key="frame" x="1" y="1" width="581" height="314"/>
-                                    <autoresizingMask key="autoresizingMask"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" autosaveColumns="NO" rowSizeStyle="automatic" headerView="RtJ-fh-4z0" viewBased="YES" id="AZ1-Ac-2lq">
                                             <rect key="frame" x="0.0" y="0.0" width="721" height="289"/>
@@ -5296,7 +5336,7 @@ Gw
                                 </tableHeaderView>
                             </scrollView>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SgU-ui-6J7">
-                                <rect key="frame" x="464" y="14" width="54" height="32"/>
+                                <rect key="frame" x="424" y="14" width="54" height="32"/>
                                 <buttonCell key="cell" type="push" title="OK" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="U4Y-LC-zeN">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -5309,7 +5349,7 @@ DQ
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gfG-py-ekN">
-                                <rect key="frame" x="536" y="14" width="76" height="32"/>
+                                <rect key="frame" x="496" y="14" width="76" height="32"/>
                                 <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="l28-Na-g8O">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>

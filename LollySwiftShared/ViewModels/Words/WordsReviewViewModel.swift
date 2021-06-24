@@ -52,12 +52,13 @@ class WordsReviewViewModel: WordsBaseViewModel {
 
     func newTest() {
         func f() {
-            arrCorrectIDs = []
-            index = 0
             doTest()
             checkNextTitle.accept(isTestMode ? "Check" : "Next")
             checkPrevTitle.accept(isTestMode ? "Check" : "Prev")
         }
+        arrWords.removeAll()
+        index = 0
+        arrCorrectIDs.removeAll()
         subscriptionTimer?.dispose()
         isSpeaking.accept(options.speakingEnabled)
         if options.mode == .textbook {
@@ -154,6 +155,7 @@ class WordsReviewViewModel: WordsBaseViewModel {
             }
             wordHintHidden.accept(true)
             checkNextTitle.accept("Next")
+            checkPrevTitle.accept("Prev")
             guard hasCurrent else {return}
             let o = currentItem!
             let isCorrect = o.WORD == wordInputString.value

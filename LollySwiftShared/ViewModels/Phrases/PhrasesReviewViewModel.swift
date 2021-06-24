@@ -25,13 +25,19 @@ class PhrasesReviewViewModel: NSObject {
     let indexHidden = BehaviorRelay(value: false)
     let correctHidden = BehaviorRelay(value: true)
     let incorrectHidden = BehaviorRelay(value: true)
-    let checkEnabled = BehaviorRelay(value: false)
+    let checkNextEnabled = BehaviorRelay(value: false)
+    let checkNextTitle = BehaviorRelay(value: "Check")
+    let checkPrevEnabled = BehaviorRelay(value: false)
+    let checkPrevTitle = BehaviorRelay(value: "Check")
     let phraseTargetString = BehaviorRelay(value: "")
     let phraseTargetHidden = BehaviorRelay(value: false)
     let translationString = BehaviorRelay(value: "")
     let phraseInputString = BehaviorRelay(value: "")
-    let checkTitle = BehaviorRelay(value: "Check")
     let isSpeaking = BehaviorRelay(value: true)
+    let moveForward = BehaviorRelay(value: true)
+    let onRepeat = BehaviorRelay(value: true)
+    let moveForwardHidden = BehaviorRelay(value: false)
+    let onRepeatHidden = BehaviorRelay(value: false)
 
     init(settings: SettingsViewModel, needCopy: Bool, doTestAction: (() -> Void)? = nil) {
         self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
@@ -41,11 +47,13 @@ class PhrasesReviewViewModel: NSObject {
 
     func newTest() {
         func f() {
-            self.arrCorrectIDs = []
-            self.index = 0
-            self.doTest()
-            self.checkTitle.accept(self.isTestMode ? "Check" : "Next")
+            doTest()
+            checkNextTitle.accept(isTestMode ? "Check" : "Next")
+            checkPrevTitle.accept(isTestMode ? "Check" : "Prev")
         }
+        arrPhrases.removeAll()
+        index = 0
+        arrCorrectIDs.removeAll()
         subscriptionTimer?.dispose()
         isSpeaking.accept(options.speakingEnabled)
         if options.mode == .textbook {
@@ -65,7 +73,7 @@ class PhrasesReviewViewModel: NSObject {
                 f()
                 if self.options.mode == .reviewAuto {
                     self.subscriptionTimer = Observable<Int>.interval(.seconds(self.options.interval), scheduler: MainScheduler.instance).subscribe { _ in
-                        self.check()
+                        self.check(toNext: true)
                     }
                     self.subscriptionTimer?.disposed(by: self.rx.disposeBag)
                 }
@@ -73,19 +81,30 @@ class PhrasesReviewViewModel: NSObject {
         }
     }
 
-    var hasNext: Bool { index < arrPhrases.count }
-    func next() {
-        index += 1
-        if isTestMode && !hasNext {
-            index = 0
-            arrPhrases = arrPhrases.filter { !arrCorrectIDs.contains($0.ID) }
+    var hasCurrent: Bool { !arrPhrases.isEmpty && (onRepeat.value || index >= 0 && index < arrPhrases.count) }
+    func move(toNext: Bool) {
+        func checkOnRepeat() {
+            if onRepeat.value {
+                index = (index + arrPhrases.count) % arrPhrases.count
+            }
+        }
+        if moveForward.value == toNext {
+            index += 1
+            checkOnRepeat()
+            if isTestMode && !hasCurrent {
+                index = 0
+                arrPhrases = arrPhrases.filter { !arrCorrectIDs.contains($0.ID) }
+            }
+        } else {
+            index -= 1
+            checkOnRepeat()
         }
     }
     
-    var currentItem: MUnitPhrase? { hasNext ? arrPhrases[index] : nil }
-    var currentPhrase: String { hasNext ? arrPhrases[index].PHRASE : "" }
+    var currentItem: MUnitPhrase? { hasCurrent ? arrPhrases[index] : nil }
+    var currentPhrase: String { hasCurrent ? arrPhrases[index].PHRASE : "" }
     
-    func check() {
+    func check(toNext: Bool) {
         if !isTestMode {
             var b = true
             if options.mode == .reviewManual && !phraseInputString.value.isEmpty && phraseInputString.value != currentPhrase {
@@ -93,7 +112,7 @@ class PhrasesReviewViewModel: NSObject {
                 incorrectHidden.accept(false)
             }
             if b {
-                next()
+                move(toNext: toNext)
                 doTest()
             }
         } else if correctHidden.value && incorrectHidden.value {
@@ -104,29 +123,32 @@ class PhrasesReviewViewModel: NSObject {
             } else {
                 incorrectHidden.accept(false)
             }
-            checkTitle.accept("Next")
-            guard hasNext else {return}
+            checkNextTitle.accept("Next")
+            checkPrevTitle.accept("Prev")
+            guard hasCurrent else {return}
             let o = arrPhrases[index]
             let isCorrect = o.PHRASE == phraseInputString.value
             if isCorrect { arrCorrectIDs.append(o.ID) }
         } else {
-            next()
+            move(toNext: toNext)
             doTest()
-            checkTitle.accept("Check")
+            checkNextTitle.accept("Check")
+            checkPrevTitle.accept("Check")
         }
     }
     
     func doTest() {
-        indexHidden.accept(!hasNext)
+        indexHidden.accept(!hasCurrent)
         correctHidden.accept(true)
         incorrectHidden.accept(true)
-        checkEnabled.accept(hasNext)
+        checkNextEnabled.accept(hasCurrent)
+        checkPrevEnabled.accept(hasCurrent)
         phraseTargetString.accept(currentPhrase)
         translationString.accept(currentItem?.TRANSLATION ?? "")
         phraseTargetHidden.accept(isTestMode)
         phraseInputString.accept("")
         doTestAction?()
-        if hasNext {
+        if hasCurrent {
             indexString.accept("\(index + 1)/\(arrPhrases.count)")
         } else {
             subscriptionTimer?.dispose()

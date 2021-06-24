@@ -21,13 +21,16 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
     @IBOutlet weak var tfTranslation: NSTextField!
     @IBOutlet weak var tfPhraseInput: NSTextField!
     @IBOutlet weak var btnCheckNext: NSButton!
-    
+    @IBOutlet weak var btnCheckPrev: NSButton!
+    @IBOutlet weak var scOnRepeat: NSSegmentedControl!
+    @IBOutlet weak var scMoveForward: NSSegmentedControl!
+
     let synth = NSSpeechSynthesizer()
 
     func settingsChanged() {
         vm = PhrasesReviewViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) { [unowned self] in
             self.tfPhraseInput.becomeFirstResponder()
-            if self.vm.hasNext && self.vm.isSpeaking.value {
+            if self.vm.hasCurrent && self.vm.isSpeaking.value {
                self.synth.startSpeaking(self.vm.currentPhrase)
             }
         }
@@ -37,13 +40,19 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
         _ = vm.indexHidden ~> tfIndex.rx.isHidden
         _ = vm.correctHidden ~> tfCorrect.rx.isHidden
         _ = vm.incorrectHidden ~> tfIncorrect.rx.isHidden
-        _ = vm.checkEnabled ~> btnCheckNext.rx.isEnabled
+        _ = vm.checkNextEnabled ~> btnCheckNext.rx.isEnabled
+        _ = vm.checkNextTitle ~> btnCheckNext.rx.title
+        _ = vm.checkPrevEnabled ~> btnCheckPrev.rx.isEnabled
+        _ = vm.checkPrevTitle ~> btnCheckPrev.rx.title
         _ = vm.phraseTargetString ~> tfPhraseTarget.rx.text.orEmpty
         _ = vm.phraseTargetHidden ~> tfPhraseTarget.rx.isHidden
         _ = vm.translationString ~> tfTranslation.rx.text.orEmpty
         _ = vm.phraseInputString <~> tfPhraseInput.rx.text.orEmpty
-        _ = vm.checkTitle ~> btnCheckNext.rx.title
-        
+        _ = vm.onRepeat <~> scOnRepeat.rx.isOn
+        _ = vm.moveForward <~> scMoveForward.rx.isOn
+        _ = vm.onRepeatHidden ~> scOnRepeat.rx.isHidden
+        _ = vm.moveForwardHidden ~> scMoveForward.rx.isHidden
+
         newTest(self)
     }
 
@@ -85,11 +94,11 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
         let code = (obj.userInfo!["NSTextMovement"] as! NSNumber).intValue
         guard code == NSReturnTextMovement else {return}
         guard textfield === tfPhraseInput, !(vm.isTestMode && vm.phraseInputString.value.isEmpty) else {return}
-        vm.check()
+        vm.check(toNext: true)
     }
     
-    @IBAction func check(_ sender: AnyObject) {
-        vm.check()
+    @IBAction func check(_ sender: NSButton) {
+        vm.check(toNext: sender == btnCheckNext)
     }
 
     deinit {
