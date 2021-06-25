@@ -20,8 +20,8 @@ struct SearchView: View {
         VStack {
             SearchBar(text: $dictStore.word, placeholder: "Word") {_ in dictStore.searchDict() }
             HStack {
-                Picker(selection: $vm.selectedLangIndex, label: Text(verbatim: vm.selectedLang.LANGNAME.defaultIfEmpty("Language"))) {
-                    ForEach(0..<vm.arrLanguages.count) {
+                Picker(selection: $vm.selectedLangIndex, label: Text( vm.selectedLang.LANGNAME.defaultIfEmpty("Language"))) {
+                    ForEach(0..<vm.arrLanguages.count, id: \.self) {
                         Text(vm.arrLanguages[$0].LANGNAME)
                     }
                 }
@@ -30,8 +30,8 @@ struct SearchView: View {
                 .onReceive([vm.selectedLangIndex].publisher.first()) { _ in
 //                    vmSettings.updateLang().subscribe() ~ disposeBag
                 }
-                Picker(selection: $vm.selectedDictReferenceIndex, label: Text(verbatim: vm.selectedDictReference.DICTNAME.defaultIfEmpty("Dictionary"))) {
-                    ForEach(0..<vm.arrDictsReference.count) {
+                Picker(selection: $vm.selectedDictReferenceIndex, label: Text(vm.selectedDictReference.DICTNAME.defaultIfEmpty("Dictionary"))) {
+                    ForEach(0..<vm.arrDictsReference.count, id: \.self) {
                         Text(vm.arrDictsReference[$0].DICTNAME)
                     }
                 }
