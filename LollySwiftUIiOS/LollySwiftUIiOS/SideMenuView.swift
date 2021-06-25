@@ -12,8 +12,8 @@ let titleSearch = "Search"
 let titleSettings = "Settings"
 let titleWordsUnit = "Words in Unit"
 let titlePhrasesUnit = "Phrases in Unit"
-let titleWordsTitlebook = "Words in Titlebook"
-let titlePhrasesTitlebook = "Phrases in Titlebook"
+let titleWordsTextbook = "Words in Textbook"
+let titlePhrasesTextbook = "Phrases in Textbook"
 let titleWordsLang = "Words in Language"
 let titlePhrasesLang = "Phrases in Language"
 
@@ -42,8 +42,8 @@ struct SideMenuView: View {
                     SideMenuContentView(systemName: "gear", title: titleSettings, bindTitle: $bindTitle, isOpen: $isOpen)
                     SideMenuContentView(systemName: "person", title: titleWordsUnit, bindTitle: $bindTitle, isOpen: $isOpen)
                     SideMenuContentView(systemName: "bookmark", title: titlePhrasesUnit, bindTitle: $bindTitle, isOpen: $isOpen)
-                    SideMenuContentView(systemName: "gear", title: titleWordsTitlebook, bindTitle: $bindTitle, isOpen: $isOpen)
-                    SideMenuContentView(systemName: "person", title: titlePhrasesTitlebook, bindTitle: $bindTitle, isOpen: $isOpen)
+                    SideMenuContentView(systemName: "gear", title: titleWordsTextbook, bindTitle: $bindTitle, isOpen: $isOpen)
+                    SideMenuContentView(systemName: "person", title: titlePhrasesTextbook, bindTitle: $bindTitle, isOpen: $isOpen)
                     SideMenuContentView(systemName: "bookmark", title: titleWordsLang, bindTitle: $bindTitle, isOpen: $isOpen)
                     SideMenuContentView(systemName: "bookmark", title: titlePhrasesLang, bindTitle: $bindTitle, isOpen: $isOpen)
                     Spacer()
