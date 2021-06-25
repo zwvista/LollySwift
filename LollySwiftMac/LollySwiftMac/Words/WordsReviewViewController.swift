@@ -50,6 +50,7 @@ class WordsReviewViewController: WordsBaseViewController, NSTextFieldDelegate {
         _ = vm.checkNextTitle ~> btnCheckNext.rx.title
         _ = vm.checkPrevEnabled ~> btnCheckPrev.rx.isEnabled
         _ = vm.checkPrevTitle ~> btnCheckPrev.rx.title
+        _ = vm.checkPrevHidden ~> btnCheckPrev.rx.isHidden
         _ = vm.wordTargetString ~> tfWordTarget.rx.text.orEmpty
         _ = vm.noteTargetString ~> tfNoteTarget.rx.text.orEmpty
         _ = vm.wordHintString ~> tfWordHint.rx.text.orEmpty

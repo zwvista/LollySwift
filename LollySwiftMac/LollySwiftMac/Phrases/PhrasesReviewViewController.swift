@@ -44,6 +44,7 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
         _ = vm.checkNextTitle ~> btnCheckNext.rx.title
         _ = vm.checkPrevEnabled ~> btnCheckPrev.rx.isEnabled
         _ = vm.checkPrevTitle ~> btnCheckPrev.rx.title
+        _ = vm.checkPrevHidden ~> btnCheckPrev.rx.isHidden
         _ = vm.phraseTargetString ~> tfPhraseTarget.rx.text.orEmpty
         _ = vm.phraseTargetHidden ~> tfPhraseTarget.rx.isHidden
         _ = vm.translationString ~> tfTranslation.rx.text.orEmpty

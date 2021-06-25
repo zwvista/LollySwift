@@ -31,6 +31,7 @@ class WordsReviewViewModel: WordsBaseViewModel {
     let checkNextTitle = BehaviorRelay(value: "Check")
     let checkPrevEnabled = BehaviorRelay(value: false)
     let checkPrevTitle = BehaviorRelay(value: "Check")
+    let checkPrevHidden = BehaviorRelay(value: false)
     let wordTargetString = BehaviorRelay(value: "")
     let noteTargetString = BehaviorRelay(value: "")
     let wordHintString = BehaviorRelay(value: "")
@@ -64,7 +65,10 @@ class WordsReviewViewModel: WordsBaseViewModel {
         subscriptionTimer?.dispose()
         isSpeaking.accept(options.speakingEnabled)
         moveForward.accept(options.moveForward)
-        onRepeat.accept(options.onRepeat)
+        moveForwardHidden.accept(isTestMode)
+        onRepeat.accept(!isTestMode && options.onRepeat)
+        onRepeatHidden.accept(isTestMode)
+        checkPrevHidden.accept(isTestMode)
         if options.mode == .textbook {
             MUnitWord.getDataByTextbook(vmSettings.selectedTextbook).subscribe(onNext: { arr in
                 var arr2 = [MUnitWord]()

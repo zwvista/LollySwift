@@ -26,6 +26,9 @@ class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var swSpeak: UISwitch!
     @IBOutlet weak var swOnRepeat: UISwitch!
     @IBOutlet weak var swMoveForward: UISwitch!
+    @IBOutlet weak var svSpeak: UIStackView!
+    @IBOutlet weak var svOnRepeat: UIStackView!
+    @IBOutlet weak var svMoveForward: UIStackView!
 
     var isSpeaking = false
     
@@ -48,6 +51,7 @@ class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
         _ = vm.checkNextTitle ~> btnCheckNext.rx.title(for: .normal)
         _ = vm.checkPrevEnabled ~> btnCheckPrev.rx.isEnabled
         _ = vm.checkPrevTitle ~> btnCheckPrev.rx.title(for: .normal)
+        _ = vm.checkPrevHidden ~> btnCheckPrev.rx.isHidden
         _ = vm.phraseTargetString ~> lblPhraseTarget.rx.text
         _ = vm.phraseTargetHidden ~> lblPhraseTarget.rx.isHidden
         _ = vm.translationString ~> lblTranslation.rx.text
@@ -55,8 +59,8 @@ class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
         _ = vm.isSpeaking ~> swSpeak.rx.isOn
         _ = vm.onRepeat <~> swOnRepeat.rx.isOn
         _ = vm.moveForward <~> swMoveForward.rx.isOn
-        _ = vm.onRepeatHidden ~> swOnRepeat.rx.isHidden
-        _ = vm.moveForwardHidden ~> swMoveForward.rx.isHidden
+        _ = vm.onRepeatHidden ~> svOnRepeat.rx.isHidden
+        _ = vm.moveForwardHidden ~> svMoveForward.rx.isHidden
 
         newTest(self)
     }

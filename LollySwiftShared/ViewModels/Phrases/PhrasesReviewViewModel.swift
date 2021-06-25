@@ -30,6 +30,7 @@ class PhrasesReviewViewModel: NSObject {
     let checkNextTitle = BehaviorRelay(value: "Check")
     let checkPrevEnabled = BehaviorRelay(value: false)
     let checkPrevTitle = BehaviorRelay(value: "Check")
+    let checkPrevHidden = BehaviorRelay(value: false)
     let phraseTargetString = BehaviorRelay(value: "")
     let phraseTargetHidden = BehaviorRelay(value: false)
     let translationString = BehaviorRelay(value: "")
@@ -59,7 +60,10 @@ class PhrasesReviewViewModel: NSObject {
         subscriptionTimer?.dispose()
         isSpeaking.accept(options.speakingEnabled)
         moveForward.accept(options.moveForward)
-        onRepeat.accept(options.onRepeat)
+        moveForwardHidden.accept(isTestMode)
+        onRepeat.accept(!isTestMode && options.onRepeat)
+        onRepeatHidden.accept(isTestMode)
+        checkPrevHidden.accept(isTestMode)
         if options.mode == .textbook {
             MUnitPhrase.getDataByTextbook(vmSettings.selectedTextbook).subscribe(onNext: { arr in
                 let cnt = min(self.options.reviewCount, arr.count)

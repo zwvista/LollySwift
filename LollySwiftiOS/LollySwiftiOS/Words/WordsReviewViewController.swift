@@ -28,7 +28,10 @@ class WordsReviewViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var swSpeak: UISwitch!
     @IBOutlet weak var swOnRepeat: UISwitch!
     @IBOutlet weak var swMoveForward: UISwitch!
-
+    @IBOutlet weak var svSpeak: UIStackView!
+    @IBOutlet weak var svOnRepeat: UIStackView!
+    @IBOutlet weak var svMoveForward: UIStackView!
+    
     var isSpeaking = false
 
     override func viewDidLoad() {
@@ -50,6 +53,7 @@ class WordsReviewViewController: UIViewController, UITextFieldDelegate {
         _ = vm.checkNextTitle ~> btnCheckNext.rx.title(for: .normal)
         _ = vm.checkPrevEnabled ~> btnCheckPrev.rx.isEnabled
         _ = vm.checkPrevTitle ~> btnCheckPrev.rx.title(for: .normal)
+        _ = vm.checkPrevHidden ~> btnCheckPrev.rx.isHidden
         _ = vm.wordTargetString ~> lblWordTarget.rx.text
         _ = vm.noteTargetString ~> lblNoteTarget.rx.text
         _ = vm.wordTargetHidden ~> lblWordTarget.rx.isHidden
@@ -59,8 +63,8 @@ class WordsReviewViewController: UIViewController, UITextFieldDelegate {
         _ = vm.isSpeaking <~> swSpeak.rx.isOn
         _ = vm.onRepeat <~> swOnRepeat.rx.isOn
         _ = vm.moveForward <~> swMoveForward.rx.isOn
-        _ = vm.onRepeatHidden ~> swOnRepeat.rx.isHidden
-        _ = vm.moveForwardHidden ~> swMoveForward.rx.isHidden
+        _ = vm.onRepeatHidden ~> svOnRepeat.rx.isHidden
+        _ = vm.moveForwardHidden ~> svMoveForward.rx.isHidden
 
         newTest(self)
     }
