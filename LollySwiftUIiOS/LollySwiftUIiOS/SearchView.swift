@@ -27,9 +27,9 @@ struct SearchView: View {
                 }
                 .padding().background(Color.green)
                 .pickerStyle(MenuPickerStyle())
-//                .onChange(of: vm.selectedLangIndex) {
+                .onReceive([vm.selectedLangIndex].publisher.first()) { _ in
 //                    vmSettings.updateLang().subscribe() ~ disposeBag
-//                }
+                }
                 Picker(selection: $vm.selectedDictReferenceIndex, label: Text(verbatim: vm.selectedDictReference.DICTNAME.defaultIfEmpty("Dictionary"))) {
                     ForEach(0..<vm.arrDictsReference.count) {
                         Text(vm.arrDictsReference[$0].DICTNAME)
@@ -37,10 +37,10 @@ struct SearchView: View {
                 }
                 .padding().background(Color.orange)
                 .pickerStyle(MenuPickerStyle())
-//                .onChange(of: vm.selectedDictReferenceIndex) {
-//                    dictStore.dict = $0
+                .onReceive([vm.selectedDictReferenceIndex].publisher.first()) { _ in
+//                    dictStore.dict = vm.arrDictsReference[$0]
 //                    dictStore.searchDict()
-//                }
+                }
             }
             WebView(webView: wvDict) {
                 dictStore.onNavigationFinished()
