@@ -20,24 +20,24 @@ struct SearchView: View {
         VStack {
             SearchBar(text: $dictStore.word, placeholder: "Word") {_ in dictStore.searchDict() }
             HStack {
-                Picker(selection: $vm.selectedLang, label: Text(verbatim: vm.selectedLang.LANGNAME.defaultIfEmpty("Language"))) {
-                    ForEach(vm.arrLanguages, id: \.self) {
-                        Text($0.LANGNAME)
+                Picker(selection: $vm.selectedLangIndex, label: Text(verbatim: vm.selectedLang.LANGNAME.defaultIfEmpty("Language"))) {
+                    ForEach(0..<vm.arrLanguages.count) {
+                        Text(vm.arrLanguages[$0].LANGNAME)
                     }
                 }
                 .padding().background(Color.green)
                 .pickerStyle(MenuPickerStyle())
-//                .onChange(of: vm.selectedLang) {
+//                .onChange(of: vm.selectedLangIndex) {
 //                    vmSettings.updateLang().subscribe() ~ disposeBag
 //                }
-                Picker(selection: $vm.selectedDictReference, label: Text(verbatim: vm.selectedDictReference.DICTNAME.defaultIfEmpty("Dictionary"))) {
-                    ForEach(vm.arrDictsReference, id: \.self) {
-                        Text($0.DICTNAME)
+                Picker(selection: $vm.selectedDictReferenceIndex, label: Text(verbatim: vm.selectedDictReference.DICTNAME.defaultIfEmpty("Dictionary"))) {
+                    ForEach(0..<vm.arrDictsReference.count) {
+                        Text(vm.arrDictsReference[$0].DICTNAME)
                     }
                 }
                 .padding().background(Color.orange)
                 .pickerStyle(MenuPickerStyle())
-//                .onChange(of: vm.selectedDictReference) {
+//                .onChange(of: vm.selectedDictReferenceIndex) {
 //                    dictStore.dict = $0
 //                    dictStore.searchDict()
 //                }

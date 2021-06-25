@@ -94,13 +94,9 @@ class SettingsViewModel: NSObject, ObservableObject {
 
     @Published
     var arrLanguages = [MLanguage]()
-    var selectedLangIndex = 0 {
-        didSet {
-            selectedLang = selectedLangIndex < arrLanguages.count ? arrLanguages[selectedLangIndex] : MLanguage()
-        }
-    }
     @Published
-    var selectedLang = MLanguage()
+    var selectedLangIndex = 0
+    var selectedLang: MLanguage { selectedLangIndex < arrLanguages.count ? arrLanguages[selectedLangIndex] : MLanguage() }
 
     @objc
     var arrMacVoices: [MVoice]!
@@ -115,13 +111,9 @@ class SettingsViewModel: NSObject, ObservableObject {
 
     @Published
     var arrDictsReference = [MDictionary]()
-    var selectedDictReferenceIndex = 0 {
-        didSet {
-            selectedDictReference = selectedDictReferenceIndex < arrDictsReference.count ? arrDictsReference[selectedDictReferenceIndex] : MDictionary()
-        }
-    }
     @Published
-    var selectedDictReference = MDictionary()
+    var selectedDictReferenceIndex = 0
+    var selectedDictReference: MDictionary { selectedDictReferenceIndex < arrDictsReference.count ? arrDictsReference[selectedDictReferenceIndex] : MDictionary() }
     var selectedDictsReferenceIndexes = [Int]()
     var selectedDictsReference: [MDictionary] { selectedDictsReferenceIndexes.map { arrDictsReference[$0] } }
     
