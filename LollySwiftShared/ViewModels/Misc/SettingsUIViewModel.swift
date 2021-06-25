@@ -92,11 +92,15 @@ class SettingsViewModel: NSObject, ObservableObject {
     var isSingleUnitPart: Bool { USUNITPARTFROM == USUNITPARTTO }
     var isInvalidUnitPart: Bool { USUNITPARTFROM > USUNITPARTTO }
 
-    @objc
+    @Published
     var arrLanguages = [MLanguage]()
-    @objc
-    var selectedLangIndex = 0
-    var selectedLang: MLanguage { selectedLangIndex < arrLanguages.count ? arrLanguages[selectedLangIndex] : MLanguage() }
+    var selectedLangIndex = 0 {
+        didSet {
+            selectedLang = selectedLangIndex < arrLanguages.count ? arrLanguages[selectedLangIndex] : MLanguage()
+        }
+    }
+    @Published
+    var selectedLang = MLanguage()
 
     @objc
     var arrMacVoices: [MVoice]!
@@ -109,10 +113,15 @@ class SettingsViewModel: NSObject, ObservableObject {
     var selectediOSVoiceIndex = 0
     var selectediOSVoice: MVoice { selectediOSVoiceIndex < arriOSVoices.count ? arriOSVoices[selectediOSVoiceIndex] : MVoice() }
 
-    @objc
+    @Published
     var arrDictsReference = [MDictionary]()
-    var selectedDictReferenceIndex = 0
-    var selectedDictReference: MDictionary { selectedDictReferenceIndex < arrDictsReference.count ? arrDictsReference[selectedDictReferenceIndex] : MDictionary() }
+    var selectedDictReferenceIndex = 0 {
+        didSet {
+            selectedDictReference = selectedDictReferenceIndex < arrDictsReference.count ? arrDictsReference[selectedDictReferenceIndex] : MDictionary()
+        }
+    }
+    @Published
+    var selectedDictReference = MDictionary()
     var selectedDictsReferenceIndexes = [Int]()
     var selectedDictsReference: [MDictionary] { selectedDictsReferenceIndexes.map { arrDictsReference[$0] } }
     

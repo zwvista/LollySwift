@@ -20,27 +20,27 @@ struct SearchView: View {
         VStack {
             SearchBar(text: $dictStore.word, placeholder: "Word") {_ in dictStore.searchDict() }
             HStack {
-                Picker(selection: $vm.selectedLang, label: Text(vm.selectedLang.LANGNAME.defaultIfEmpty("Language"))) {
+                Picker(selection: $vm.selectedLang, label: Text(verbatim: vm.selectedLang.LANGNAME.defaultIfEmpty("Language"))) {
                     ForEach(vm.arrLanguages, id: \.self) {
                         Text($0.LANGNAME)
                     }
                 }
                 .padding().background(Color.green)
                 .pickerStyle(MenuPickerStyle())
-                .onChange(of: vm.selectedLang) {
-                    vmSettings.setSelectedLang($0).subscribe() ~ disposeBag
-                }
-                Picker(selection: $vm.selectedDictReference, label: Text(vm.selectedDictReference.DICTNAME.defaultIfEmpty( "Dictionary"))) {
+//                .onChange(of: vm.selectedLang) {
+//                    vmSettings.updateLang().subscribe() ~ disposeBag
+//                }
+                Picker(selection: $vm.selectedDictReference, label: Text(verbatim: vm.selectedDictReference.DICTNAME.defaultIfEmpty("Dictionary"))) {
                     ForEach(vm.arrDictsReference, id: \.self) {
                         Text($0.DICTNAME)
                     }
                 }
                 .padding().background(Color.orange)
                 .pickerStyle(MenuPickerStyle())
-                .onChange(of: vm.selectedDictReference) {
-                    dictStore.dict = $0
-                    dictStore.searchDict()
-                }
+//                .onChange(of: vm.selectedDictReference) {
+//                    dictStore.dict = $0
+//                    dictStore.searchDict()
+//                }
             }
             WebView(webView: wvDict) {
                 dictStore.onNavigationFinished()

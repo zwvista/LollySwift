@@ -164,6 +164,10 @@ extension String {
     public func urlEncoded() -> String {
         self.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!
     }
+    
+    public func defaultIfEmpty(_ s: String) -> String {
+        self.isEmpty ? s : self
+    }
 }
 
 extension NSObject {
