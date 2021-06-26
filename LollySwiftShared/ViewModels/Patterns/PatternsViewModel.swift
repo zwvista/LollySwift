@@ -9,6 +9,7 @@
 import Foundation
 import RxSwift
 import RxRelay
+import Then
 
 class PatternsViewModel: NSObject {
     var vmSettings: SettingsViewModel
@@ -58,8 +59,8 @@ class PatternsViewModel: NSObject {
     }
     
     func newPattern() -> MPattern {
-        let item = MPattern()
-        item.LANGID = vmSettings.selectedLang.ID
-        return item
+        MPattern().then {
+            $0.LANGID = vmSettings.selectedLang.ID
+        }
     }
 }

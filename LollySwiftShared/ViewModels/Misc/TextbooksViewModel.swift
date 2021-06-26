@@ -8,6 +8,7 @@
 
 import Foundation
 import RxSwift
+import Then
 
 class TextbooksViewModel: NSObject {
     var vmSettings: SettingsViewModel
@@ -31,8 +32,8 @@ class TextbooksViewModel: NSObject {
     }
 
     func newTextbook() -> MTextbook {
-        let item = MTextbook()
-        item.LANGID = vmSettings.selectedLang.ID
-        return item
+        MTextbook().then {
+            $0.LANGID = vmSettings.selectedLang.ID
+        }
     }
 }

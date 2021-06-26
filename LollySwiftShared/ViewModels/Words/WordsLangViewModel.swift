@@ -8,6 +8,7 @@
 
 import Foundation
 import RxSwift
+import Then
 
 class WordsLangViewModel: WordsBaseViewModel {
     var arrWords = [MLangWord]()
@@ -50,9 +51,9 @@ class WordsLangViewModel: WordsBaseViewModel {
     }
     
     func newLangWord() -> MLangWord {
-        let item = MLangWord()
-        item.LANGID = vmSettings.selectedLang.ID
-        return item
+        MLangWord().then {
+            $0.LANGID = vmSettings.selectedLang.ID
+        }
     }
 
     func getNote(index: Int) -> Observable<()> {

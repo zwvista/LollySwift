@@ -9,7 +9,7 @@
 import Foundation
 import RxSwift
 
-class SettingsViewModel: NSObject {
+class SettingsViewModel: NSObject, ObservableObject {
     
     var arrUSMappings = [MUSMapping]()
     var arrUserSettings = [MUserSetting]()
@@ -92,13 +92,13 @@ class SettingsViewModel: NSObject {
     var isSingleUnitPart: Bool { USUNITPARTFROM == USUNITPARTTO }
     var isInvalidUnitPart: Bool { USUNITPARTFROM > USUNITPARTTO }
 
-    @objc
+    @Published
     var arrLanguages = [MLanguage]()
+    @Published
     @objc
     var selectedLangIndex = 0
     var selectedLang: MLanguage { selectedLangIndex < arrLanguages.count ? arrLanguages[selectedLangIndex] : MLanguage() }
 
-    @objc
     var arrMacVoices: [MVoice]!
     @objc
     var arriOSVoices: [MVoice]!
@@ -109,43 +109,36 @@ class SettingsViewModel: NSObject {
     var selectediOSVoiceIndex = 0
     var selectediOSVoice: MVoice { selectediOSVoiceIndex < arriOSVoices.count ? arriOSVoices[selectediOSVoiceIndex] : MVoice() }
 
-    @objc
+    @Published
     var arrDictsReference = [MDictionary]()
+    @Published
     var selectedDictReferenceIndex = 0
     var selectedDictReference: MDictionary { selectedDictReferenceIndex < arrDictsReference.count ? arrDictsReference[selectedDictReferenceIndex] : MDictionary() }
     var selectedDictsReferenceIndexes = [Int]()
     var selectedDictsReference: [MDictionary] { selectedDictsReferenceIndexes.map { arrDictsReference[$0] } }
     
-    @objc
     var arrDictsNote = [MDictionary]()
     @objc
     var selectedDictNoteIndex = 0
     var selectedDictNote: MDictionary { selectedDictNoteIndex < arrDictsNote.count ? arrDictsNote[selectedDictNoteIndex] : MDictionary() }
     var hasDictNote: Bool { selectedDictNote.ID != 0 }
     
-    @objc
     var arrDictsTranslation = [MDictionary]()
     @objc
     var selectedDictTranslationIndex = 0
     var selectedDictTranslation: MDictionary { selectedDictTranslationIndex < arrDictsTranslation.count ? arrDictsTranslation[selectedDictTranslationIndex] : MDictionary() }
     var hasDictTranslation: Bool { selectedDictTranslation.ID != 0 }
 
-    @objc
     var arrTextbooks = [MTextbook]()
     @objc
     var selectedTextbookIndex = 0
     var selectedTextbook: MTextbook { selectedTextbookIndex < arrTextbooks.count ? arrTextbooks[selectedTextbookIndex] : MTextbook() }
-    @objc
     var arrTextbookFilters = [MSelectItem]()
-    @objc
     var arrWebTextbookFilters = [MSelectItem]()
 
-    @objc
     var arrUnits: [MSelectItem] { selectedTextbook.arrUnits }
     var unitCount: Int { arrUnits.count }
-    @objc
     var unitsInAll: String { "(\(unitCount) in all)" }
-    @objc
     var arrParts: [MSelectItem] { selectedTextbook.arrParts }
     var partCount: Int { arrParts.count }
     var isSingleUnit: Bool { USUNITFROM == USUNITTO && USPARTFROM == 1 && USPARTTO == partCount }

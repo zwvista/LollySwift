@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		8B93E2C58870C1F09F449E65 /* Pods_LollySwiftUIiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 881EFE4F8A213E4DC1BEF169 /* Pods_LollySwiftUIiOS.framework */; };
-		9501FBA12595C83F00C1B13B /* SettingsUIViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9501FBA02595C83F00C1B13B /* SettingsUIViewModel.swift */; };
 		953FCD0025745D3D00666503 /* LollySwiftUIiOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953FCCFF25745D3D00666503 /* LollySwiftUIiOSApp.swift */; };
 		953FCD0225745D3D00666503 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953FCD0125745D3D00666503 /* ContentView.swift */; };
 		953FCD0425745D4000666503 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 953FCD0325745D4000666503 /* Assets.xcassets */; };
@@ -49,6 +48,7 @@
 		953FCE6B25792A8800666503 /* iOSApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953FCE2925792A8800666503 /* iOSApi.swift */; };
 		953FCE6F25792A8800666503 /* CommonApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953FCE2D25792A8800666503 /* CommonApi.swift */; };
 		953FCE7125792A8800666503 /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953FCE2F25792A8800666503 /* UIExtensions.swift */; };
+		9546F06A268726DE00ADE420 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9546F069268726DE00ADE420 /* SettingsViewModel.swift */; };
 		957B535425A70F9800C18B06 /* WordsBaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957B535225A70F9700C18B06 /* WordsBaseViewModel.swift */; };
 		957B535525A70F9800C18B06 /* WordsUnitBatchAddViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957B535325A70F9700C18B06 /* WordsUnitBatchAddViewModel.swift */; };
 		957B535E25A70FB100C18B06 /* PhrasesBaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957B535C25A70FB000C18B06 /* PhrasesBaseViewModel.swift */; };
@@ -103,7 +103,6 @@
 		881E9DDDB41B6CF858729603 /* Pods_LollySwiftUIiOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LollySwiftUIiOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		881EFE4F8A213E4DC1BEF169 /* Pods_LollySwiftUIiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LollySwiftUIiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BCF05762F6BA4216D7B3155 /* Pods-LollySwiftUIiOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LollySwiftUIiOS.debug.xcconfig"; path = "Target Support Files/Pods-LollySwiftUIiOS/Pods-LollySwiftUIiOS.debug.xcconfig"; sourceTree = "<group>"; };
-		9501FBA02595C83F00C1B13B /* SettingsUIViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsUIViewModel.swift; sourceTree = "<group>"; };
 		953FCCFC25745D3D00666503 /* LollySwiftUIiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LollySwiftUIiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		953FCCFF25745D3D00666503 /* LollySwiftUIiOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LollySwiftUIiOSApp.swift; sourceTree = "<group>"; };
 		953FCD0125745D3D00666503 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -150,6 +149,7 @@
 		953FCE2925792A8800666503 /* iOSApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iOSApi.swift; sourceTree = "<group>"; };
 		953FCE2D25792A8800666503 /* CommonApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonApi.swift; sourceTree = "<group>"; };
 		953FCE2F25792A8800666503 /* UIExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIExtensions.swift; sourceTree = "<group>"; };
+		9546F069268726DE00ADE420 /* SettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		957B535225A70F9700C18B06 /* WordsBaseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsBaseViewModel.swift; sourceTree = "<group>"; };
 		957B535325A70F9700C18B06 /* WordsUnitBatchAddViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsUnitBatchAddViewModel.swift; sourceTree = "<group>"; };
 		957B535C25A70FB000C18B06 /* PhrasesBaseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesBaseViewModel.swift; sourceTree = "<group>"; };
@@ -300,9 +300,9 @@
 			isa = PBXGroup;
 			children = (
 				953FCDFF25792A8800666503 /* Misc */,
-				953FCE0925792A8800666503 /* Words */,
 				953FCE1225792A8800666503 /* Patterns */,
 				953FCE1825792A8800666503 /* Phrases */,
+				953FCE0925792A8800666503 /* Words */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -310,10 +310,10 @@
 		953FCDFF25792A8800666503 /* Misc */ = {
 			isa = PBXGroup;
 			children = (
-				953FCE0025792A8800666503 /* TextbooksViewModel.swift */,
-				9501FBA02595C83F00C1B13B /* SettingsUIViewModel.swift */,
 				953FCE0225792A8800666503 /* ReadNumberViewModel.swift */,
 				953FCE0325792A8800666503 /* ReviewOptionsViewModel.swift */,
+				9546F069268726DE00ADE420 /* SettingsViewModel.swift */,
+				953FCE0025792A8800666503 /* TextbooksViewModel.swift */,
 				953FCE0525792A8800666503 /* TransformDetailViewModel.swift */,
 				953FCE0725792A8800666503 /* WebTextbooksViewModel.swift */,
 			);
@@ -704,8 +704,8 @@
 				953FCE4A25792A8800666503 /* ReviewOptionsViewModel.swift in Sources */,
 				953FCE6525792A8800666503 /* OneWayBind.swift in Sources */,
 				953FCE6725792A8800666503 /* Emit.swift in Sources */,
+				9546F06A268726DE00ADE420 /* SettingsViewModel.swift in Sources */,
 				953FCE4E25792A8800666503 /* WebTextbooksViewModel.swift in Sources */,
-				9501FBA12595C83F00C1B13B /* SettingsUIViewModel.swift in Sources */,
 				957B538D25AD442500C18B06 /* SideMenuView.swift in Sources */,
 				95919221258D00190070DBFD /* MTextbook.swift in Sources */,
 				953FCE6425792A8800666503 /* TwoWayBind.swift in Sources */,

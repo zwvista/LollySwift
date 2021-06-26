@@ -8,7 +8,7 @@
 
 import Foundation
 import RxSwift
-import NSObject_Rx
+import Then
 
 class WordsUnitViewModel: WordsBaseViewModel {
     let inTextbook: Bool
@@ -95,15 +95,15 @@ class WordsUnitViewModel: WordsBaseViewModel {
     }
     
     func newUnitWord() -> MUnitWord {
-        let item = MUnitWord()
-        item.LANGID = vmSettings.selectedLang.ID
-        item.TEXTBOOKID = vmSettings.USTEXTBOOK
-        let maxElem = arrWords.max { ($0.UNIT, $0.PART, $0.SEQNUM) < ($1.UNIT, $1.PART, $1.SEQNUM) }
-        item.UNIT = maxElem?.UNIT ?? vmSettings.USUNITTO
-        item.PART = maxElem?.PART ?? vmSettings.USPARTTO
-        item.SEQNUM = (maxElem?.SEQNUM ?? 0) + 1
-        item.textbook = vmSettings.selectedTextbook
-        return item
+        MUnitWord().then {
+            $0.LANGID = vmSettings.selectedLang.ID
+            $0.TEXTBOOKID = vmSettings.USTEXTBOOK
+            let maxElem = arrWords.max { ($0.UNIT, $0.PART, $0.SEQNUM) < ($1.UNIT, $1.PART, $1.SEQNUM) }
+            $0.UNIT = maxElem?.UNIT ?? vmSettings.USUNITTO
+            $0.PART = maxElem?.PART ?? vmSettings.USPARTTO
+            $0.SEQNUM = (maxElem?.SEQNUM ?? 0) + 1
+            $0.textbook = vmSettings.selectedTextbook
+        }
     }
     
     func getNote(index: Int) -> Observable<()> {

@@ -8,6 +8,7 @@
 
 import Foundation
 import RxSwift
+import Then
 
 class PhrasesUnitViewModel: PhrasesBaseViewModel {
     let inTextbook: Bool
@@ -81,14 +82,14 @@ class PhrasesUnitViewModel: PhrasesBaseViewModel {
     }
 
     func newUnitPhrase() -> MUnitPhrase {
-        let item = MUnitPhrase()
-        item.LANGID = vmSettings.selectedLang.ID
-        item.TEXTBOOKID = vmSettings.USTEXTBOOK
-        let maxElem = arrPhrases.max{ ($0.UNIT, $0.PART, $0.SEQNUM) < ($1.UNIT, $1.PART, $1.SEQNUM) }
-        item.UNIT = maxElem?.UNIT ?? vmSettings.USUNITTO
-        item.PART = maxElem?.PART ?? vmSettings.USPARTTO
-        item.SEQNUM = (maxElem?.SEQNUM ?? 0) + 1
-        item.textbook = vmSettings.selectedTextbook
-        return item
+        MUnitPhrase().then {
+            $0.LANGID = vmSettings.selectedLang.ID
+            $0.TEXTBOOKID = vmSettings.USTEXTBOOK
+            let maxElem = arrPhrases.max{ ($0.UNIT, $0.PART, $0.SEQNUM) < ($1.UNIT, $1.PART, $1.SEQNUM) }
+            $0.UNIT = maxElem?.UNIT ?? vmSettings.USUNITTO
+            $0.PART = maxElem?.PART ?? vmSettings.USPARTTO
+            $0.SEQNUM = (maxElem?.SEQNUM ?? 0) + 1
+            $0.textbook = vmSettings.selectedTextbook
+        }
     }
 }

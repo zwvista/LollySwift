@@ -8,6 +8,7 @@
 
 import Foundation
 import RxSwift
+import Then
 
 class PhrasesLangViewModel: PhrasesBaseViewModel {
     var arrPhrases = [MLangPhrase]()
@@ -50,9 +51,9 @@ class PhrasesLangViewModel: PhrasesBaseViewModel {
     }
 
     func newLangPhrase() -> MLangPhrase {
-        let item = MLangPhrase()
-        item.LANGID = vmSettings.selectedLang.ID
-        return item
+        MLangPhrase().then {
+            $0.LANGID = vmSettings.selectedLang.ID
+        }
     }
     
     public init(settings: SettingsViewModel) {
