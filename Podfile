@@ -15,6 +15,7 @@ pod 'RxDataSources'
 pod 'DropDown'
 pod 'AKSideMenu'
 pod 'CrossroadRegex'
+pod 'Then'
 end
 
 target 'LollySwiftiOSTests' do
@@ -27,6 +28,7 @@ pod 'NSObject+Rx'
 pod 'RxSwiftExt', '~> 5'
 pod 'RxDataSources'
 pod 'CrossroadRegex'
+pod 'Then'
 end
 
 target 'LollySwiftMac' do
@@ -38,6 +40,7 @@ pod 'RxCocoa'
 pod 'NSObject+Rx'
 pod 'RxSwiftExt', '~> 5'
 pod 'CrossroadRegex'
+pod 'Then'
 end
 
 target 'LollySwiftMacTests' do
@@ -49,6 +52,7 @@ pod 'RxCocoa'
 pod 'NSObject+Rx'
 pod 'RxSwiftExt', '~> 5'
 pod 'CrossroadRegex'
+pod 'Then'
 end
 
 target 'LollySwiftUIiOS' do
@@ -63,6 +67,7 @@ pod 'RxDataSources'
 pod 'DropDown'
 pod 'AKSideMenu'
 pod 'CrossroadRegex'
+pod 'Then'
 end
 
 target 'LollySwiftUIiOSTests' do
@@ -77,6 +82,7 @@ pod 'RxDataSources'
 pod 'DropDown'
 pod 'AKSideMenu'
 pod 'CrossroadRegex'
+pod 'Then'
 end
 
 target 'LollySwiftUIMac' do
@@ -88,6 +94,7 @@ pod 'RxCocoa'
 pod 'NSObject+Rx'
 pod 'RxSwiftExt', '~> 5'
 pod 'CrossroadRegex'
+pod 'Then'
 end
 
 target 'LollySwiftUIMacTests' do
@@ -99,4 +106,5 @@ pod 'RxCocoa'
 pod 'NSObject+Rx'
 pod 'RxSwiftExt', '~> 5'
 pod 'CrossroadRegex'
+pod 'Then'
 end
