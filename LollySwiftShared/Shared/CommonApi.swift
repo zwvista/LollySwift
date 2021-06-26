@@ -30,8 +30,6 @@ enum UnitPartToType: Int {
 
 class CommonApi {
     
-    static public var userid = ""
-    static public var username = ""
     static let urlAPI = "https://zwvista.tk/lolly/api.php/records/"
     static let urlSP = "https://zwvista.tk/lolly/sp.php/"
     static let cssFolder = "https://zwvista.tk/lolly/css/"

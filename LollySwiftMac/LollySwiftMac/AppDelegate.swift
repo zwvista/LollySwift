@@ -31,8 +31,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
 
-        CommonApi.userid = UserDefaults.standard.string(forKey: "userid") ?? ""
-        if CommonApi.userid.isEmpty {
+        SettingsViewModel.userid = UserDefaults.standard.string(forKey: "userid") ?? ""
+        if SettingsViewModel.userid.isEmpty {
             login(self)
         } else {
             setup()

@@ -11,6 +11,7 @@ import AVFoundation
 
 @main
 struct LollySwiftUIiOSApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     private static let synth = AVSpeechSynthesizer()
     
     var body: some Scene {
@@ -27,3 +28,10 @@ struct LollySwiftUIiOSApp: App {
 }
 
 var vmSettings = SettingsViewModel()
+
+class AppDelegate: NSObject, UIApplicationDelegate {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        SettingsViewModel.userid = UserDefaults.standard.string(forKey: "userid") ?? ""
+        return true
+    }
+}
