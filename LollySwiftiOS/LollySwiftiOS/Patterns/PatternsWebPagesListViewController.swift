@@ -69,15 +69,15 @@ class PatternsWebPagesListViewController: UITableViewController {
         reindex()
     }
 
-    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let i = indexPath.row
         let item = vm.arrWebPages[i]
         func edit() {
             performSegue(withIdentifier: "edit", sender: item)
         }
-        let editAction = UITableViewRowAction(style: .normal, title: "Edit") { _,_ in edit() }
+        let editAction = UIContextualAction(style: .normal, title: "Edit") { _,_,_ in edit() }
         editAction.backgroundColor = .blue
-        return [editAction]
+        return UISwipeActionsConfiguration(actions: [editAction])
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

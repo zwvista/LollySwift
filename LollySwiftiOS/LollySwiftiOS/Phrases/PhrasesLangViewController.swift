@@ -37,7 +37,7 @@ class PhrasesLangViewController: PhrasesBaseViewController {
         arrPhrases[row]
     }
     
-    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let i = indexPath.row
         let item = self.vm.arrPhrases[i]
         func delete() {
@@ -52,10 +52,10 @@ class PhrasesLangViewController: PhrasesBaseViewController {
         func edit() {
             performSegue(withIdentifier: "edit", sender: item)
         }
-        let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { _,_ in delete() }
-        let editAction = UITableViewRowAction(style: .normal, title: "Edit") { _,_ in edit() }
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { _,_,_ in delete() }
+        let editAction = UIContextualAction(style: .normal, title: "Edit") { _,_,_ in edit() }
         editAction.backgroundColor = .blue
-        let moreAction = UITableViewRowAction(style: .normal, title: "More") { [unowned self] _,_ in
+        let moreAction = UIContextualAction(style: .normal, title: "More") { [unowned self] _,_,_ in
             let alertController = UIAlertController(title: "Word", message: item.PHRASE, preferredStyle: .alert)
             let deleteAction2 = UIAlertAction(title: "Delete", style: .destructive) { _ in delete() }
             alertController.addAction(deleteAction2)
@@ -70,7 +70,7 @@ class PhrasesLangViewController: PhrasesBaseViewController {
             self.present(alertController, animated: true) {}
         }
         
-        return [moreAction, deleteAction]
+        return UISwipeActionsConfiguration(actions: [moreAction, deleteAction])
     }
     
     override func applyFilters() {
