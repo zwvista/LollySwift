@@ -22,7 +22,9 @@ class SettingsViewController: NSViewController, SettingsViewModelDelegate, NSTab
     @IBOutlet weak var tfUnitsInAllFrom: NSTextField!
     @IBOutlet weak var tfUnitsInAllTo: NSTextField!
     @IBOutlet weak var pubLanguages: NSPopUpButton!
+    @IBOutlet weak var pubVoices: NSPopUpButton!
     @IBOutlet weak var tvDictsReference: NSTableView!
+    @IBOutlet weak var btnSelectDicts: NSButton!
     @IBOutlet weak var pubDictsNote: NSPopUpButton!
     @IBOutlet weak var pubDictsTranslation: NSPopUpButton!
     @IBOutlet weak var pubTextbookFilters: NSPopUpButton!

@@ -19,7 +19,7 @@ class MWordFami: NSObject, Codable {
 
     static func getDataByWord(wordid: Int) -> Observable<[MWordFami]> {
         // SQL: SELECT * FROM WORDSFAMI WHERE USERID=? AND WORDID=?
-        let url = "\(CommonApi.urlAPI)WORDSFAMI?filter=USERID,eq,\(SettingsViewModel.userid)&filter=WORDID,eq,\(wordid)"
+        let url = "\(CommonApi.urlAPI)WORDSFAMI?filter=USERID,eq,\(globalUser.userid)&filter=WORDID,eq,\(wordid)"
         return RestApi.getRecords(url: url)
     }
 
@@ -44,7 +44,7 @@ class MWordFami: NSObject, Codable {
     static func update(wordid: Int, isCorrect: Bool) -> Observable<MWordFami> {
         return getDataByWord(wordid: wordid).flatMap { arr -> Observable<MWordFami> in
             let item = MWordFami()
-            item.USERID = SettingsViewModel.userid
+            item.USERID = globalUser.userid
             item.WORDID = wordid
             if arr.isEmpty {
                 item.CORRECT = isCorrect ? 1 : 0

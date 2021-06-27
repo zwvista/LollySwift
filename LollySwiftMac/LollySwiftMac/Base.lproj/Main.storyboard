@@ -1188,8 +1188,8 @@
                                 </scroller>
                             </scrollView>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CB4-lQ-YHh">
-                                <rect key="frame" x="460" y="278" width="58" height="32"/>
-                                <buttonCell key="cell" type="push" title="Edit" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Wqf-Oy-cTW">
+                                <rect key="frame" x="460" y="278" width="73" height="32"/>
+                                <buttonCell key="cell" type="push" title="Select" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Wqf-Oy-cTW">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -1428,7 +1428,7 @@
                                 </connections>
                             </popUpButton>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iaA-UK-MEB">
-                                <rect key="frame" x="166" y="55" width="116" height="32"/>
+                                <rect key="frame" x="166" y="55" width="115" height="32"/>
                                 <buttonCell key="cell" type="push" title="Previous Part" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="JzB-uc-0yD">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -1438,7 +1438,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="amm-Ya-sSe">
-                                <rect key="frame" x="280" y="55" width="116" height="32"/>
+                                <rect key="frame" x="279" y="55" width="115" height="32"/>
                                 <buttonCell key="cell" type="push" title="Next Part" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="c4x-ru-377">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -1574,6 +1574,7 @@ Gw
                         <outlet property="btnApplyNone" destination="QMz-gd-sUW" id="9yE-3h-SII"/>
                         <outlet property="btnNext" destination="amm-Ya-sSe" id="nbe-8V-mIA"/>
                         <outlet property="btnPrevious" destination="iaA-UK-MEB" id="Hgm-rS-vte"/>
+                        <outlet property="btnSelectDicts" destination="CB4-lQ-YHh" id="fuv-yx-q2g"/>
                         <outlet property="pubDictsNote" destination="1oq-rW-MUb" id="X7g-Ef-zSj"/>
                         <outlet property="pubDictsTranslation" destination="Y1Q-Mm-m8t" id="OBs-zm-mjw"/>
                         <outlet property="pubLanguages" destination="Yra-vx-iUa" id="FyI-6e-Ins"/>
@@ -1582,6 +1583,7 @@ Gw
                         <outlet property="pubTextbookFilters" destination="GTc-kH-1Ux" id="51I-aI-Ilk"/>
                         <outlet property="pubUnitFrom" destination="b7U-Wa-ylD" id="I23-ak-1YP"/>
                         <outlet property="pubUnitTo" destination="fnN-We-eae" id="3ng-8B-wSe"/>
+                        <outlet property="pubVoices" destination="l5P-3b-jEL" id="WmX-QW-jKC"/>
                         <outlet property="scToType" destination="GYX-NJ-ZBj" id="ZZZ-gQ-dml"/>
                         <outlet property="tfUnitsInAllFrom" destination="NLa-HM-eg1" id="NGS-9K-eqz"/>
                         <outlet property="tfUnitsInAllTo" destination="NHc-fW-dBl" id="rFc-gc-gqi"/>

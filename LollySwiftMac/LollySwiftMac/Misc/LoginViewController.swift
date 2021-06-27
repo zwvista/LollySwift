@@ -24,8 +24,8 @@ class LoginViewController: NSViewController {
 
     @IBAction func login(_ sender: Any) {
         vm.login().subscribe(onNext: {
-            SettingsViewModel.userid = $0
-            if SettingsViewModel.userid.isEmpty {
+            globalUser.userid = $0
+            if globalUser.userid.isEmpty {
                 let alert = NSAlert()
                 alert.alertStyle = .critical
                 alert.messageText = "Login"
@@ -33,7 +33,7 @@ class LoginViewController: NSViewController {
                 alert.addButton(withTitle: "OK")
                 alert.runModal()
             } else {
-                UserDefaults.standard.set(SettingsViewModel.userid, forKey: "userid")
+                UserDefaults.standard.set(globalUser.userid, forKey: "userid")
                 NSApplication.shared.stopModal(withCode: .OK)
                 self.view.window?.close()
             }

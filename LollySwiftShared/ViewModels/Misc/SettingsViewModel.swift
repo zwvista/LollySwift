@@ -167,8 +167,6 @@ class SettingsViewModel: NSObject, ObservableObject {
     static let arrScopePhraseFilters = ["Phrase", "Translation"]
     static let arrScopePatternFilters = ["Pattern", "Note", "Tags"]
     static let reviewModes = ["Review(Auto)", "Review(Manual)", "Test", "Textbook"]
-    static var userid = ""
-    static var username = ""
 
     var arrAutoCorrect = [MAutoCorrect]()
     var arrDictTypes = [MCode]()

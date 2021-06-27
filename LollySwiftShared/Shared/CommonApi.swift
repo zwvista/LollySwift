@@ -28,6 +28,13 @@ enum UnitPartToType: Int {
     case to
 }
 
+class GlobalUser: ObservableObject {
+    @Published
+    var userid = ""
+    var username = ""
+}
+let globalUser = GlobalUser()
+
 class CommonApi {
     
     static let urlAPI = "https://zwvista.tk/lolly/api.php/records/"

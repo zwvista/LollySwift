@@ -22,7 +22,7 @@ class MUserSetting: NSObject, Codable {
 
     static func getData() -> Observable<[MUserSetting]> {
         // SQL: SELECT * FROM USERSETTINGS WHERE USERID=?
-        let url = "\(CommonApi.urlAPI)USERSETTINGS?filter=USERID,eq,\(SettingsViewModel.userid)"
+        let url = "\(CommonApi.urlAPI)USERSETTINGS?filter=USERID,eq,\(globalUser.userid)"
         return RestApi.getRecords(url: url)
     }
     

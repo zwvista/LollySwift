@@ -46,8 +46,8 @@ class SearchViewController: UIViewController, WKNavigationDelegate, UISearchBarD
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        SettingsViewModel.userid = UserDefaults.standard.string(forKey: "userid") ?? ""
-        if SettingsViewModel.userid.isEmpty {
+        globalUser.userid = UserDefaults.standard.string(forKey: "userid") ?? ""
+        if globalUser.userid.isEmpty {
             logout(self)
         } else {
             setup()

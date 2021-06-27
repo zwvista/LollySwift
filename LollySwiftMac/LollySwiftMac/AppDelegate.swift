@@ -31,8 +31,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
 
-        SettingsViewModel.userid = UserDefaults.standard.string(forKey: "userid") ?? ""
-        if SettingsViewModel.userid.isEmpty {
+        globalUser.userid = UserDefaults.standard.string(forKey: "userid") ?? ""
+        if globalUser.userid.isEmpty {
             login(self)
         } else {
             setup()

@@ -31,7 +31,7 @@ var vmSettings = SettingsViewModel()
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        SettingsViewModel.userid = UserDefaults.standard.string(forKey: "userid") ?? ""
+        globalUser.userid = UserDefaults.standard.string(forKey: "userid") ?? ""
         return true
     }
 }
