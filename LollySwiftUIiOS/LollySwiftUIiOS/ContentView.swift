@@ -8,24 +8,29 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var showLogin = globalUser.userid.isEmpty
     @State var isOpenSideMenu: Bool = false
     @State var bindTitle = titleWordsUnit
     var body: some View {
-        ZStack{
-            NavigationView {
-                SearchView()
-                    .navigationTitle(bindTitle)
-                    .navigationBarItems(leading: (
-                        Button(action: {
-                            self.isOpenSideMenu.toggle()
-                        }) {
-                            Image(systemName: "line.horizontal.3")
-                                .imageScale(.large)
-                    }))
-            }
+        if showLogin {
+            LoginView(showLogin: $showLogin)
+        } else {
+            ZStack{
+                NavigationView {
+                    SearchView()
+                        .navigationTitle(bindTitle)
+                        .navigationBarItems(leading: (
+                            Button(action: {
+                                self.isOpenSideMenu.toggle()
+                            }) {
+                                Image(systemName: "line.horizontal.3")
+                                    .imageScale(.large)
+                        }))
+                }
 
-            SideMenuView(isOpen: $isOpenSideMenu, bindTitle: $bindTitle)
-                .edgesIgnoringSafeArea(.all)
+                SideMenuView(isOpen: $isOpenSideMenu, bindTitle: $bindTitle)
+                    .edgesIgnoringSafeArea(.all)
+            }
         }
     }
 }

@@ -23,7 +23,7 @@ class LoginViewController: NSViewController {
     }
 
     @IBAction func login(_ sender: Any) {
-        vm.login().subscribe(onNext: {
+        vm.login(username: vm.username.value, password: vm.password.value).subscribe(onNext: {
             globalUser.userid = $0
             if globalUser.userid.isEmpty {
                 let alert = NSAlert()
