@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var showLogin = globalUser.userid.isEmpty
+    @ObservedObject var g = globalUser
     @State var isOpenSideMenu: Bool = false
     @State var bindTitle = titleWordsUnit
     var body: some View {
-        if showLogin {
-            LoginView(showLogin: $showLogin)
+        if g.userid.isEmpty {
+            LoginView()
         } else {
             ZStack{
                 NavigationView {
