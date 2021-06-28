@@ -28,7 +28,7 @@ struct SearchView: View {
                 .padding().background(Color.green)
                 .pickerStyle(MenuPickerStyle())
                 .onChange(of: vm.selectedLangIndex) {
-                    print($0)
+                    print("selectedLangIndex=\($0)")
                     vmSettings.updateLang().subscribe() ~ disposeBag
                 }
                 Picker(selection: $vm.selectedDictReferenceIndex, label: Text(vm.selectedDictReference.DICTNAME.defaultIfEmpty("Dictionary"))) {
@@ -39,6 +39,7 @@ struct SearchView: View {
                 .padding().background(Color.orange)
                 .pickerStyle(MenuPickerStyle())
                 .onChange(of: vm.selectedDictReferenceIndex) {
+                    print("selectedDictReferenceIndex=\($0)")
                     dictStore.dict = vm.arrDictsReference[$0]
                     dictStore.searchDict()
                 }

@@ -96,43 +96,43 @@ class SettingsViewModel: NSObject, ObservableObject {
     var arrLanguages = [MLanguage]()
     @Published
     @objc
-    var selectedLangIndex = 0
-    var selectedLang: MLanguage { selectedLangIndex < arrLanguages.count ? arrLanguages[selectedLangIndex] : MLanguage() }
+    var selectedLangIndex = -1
+    var selectedLang: MLanguage { arrLanguages.indices ~= selectedLangIndex ? arrLanguages[selectedLangIndex] : MLanguage() }
 
     var arrMacVoices: [MVoice]!
     @objc
     var arriOSVoices: [MVoice]!
     @objc
-    var selectedMacVoiceIndex = 0
-    var selectedMacVoice: MVoice { selectedMacVoiceIndex < arrMacVoices.count ? arrMacVoices[selectedMacVoiceIndex] : MVoice() }
+    var selectedMacVoiceIndex = -1
+    var selectedMacVoice: MVoice { arrMacVoices.indices ~= selectedMacVoiceIndex ? arrMacVoices[selectedMacVoiceIndex] : MVoice() }
     var macVoiceName: String { selectedMacVoice.VOICENAME }
-    var selectediOSVoiceIndex = 0
-    var selectediOSVoice: MVoice { selectediOSVoiceIndex < arriOSVoices.count ? arriOSVoices[selectediOSVoiceIndex] : MVoice() }
+    var selectediOSVoiceIndex = -1
+    var selectediOSVoice: MVoice { arriOSVoices.indices ~= selectediOSVoiceIndex ? arriOSVoices[selectediOSVoiceIndex] : MVoice() }
 
     @Published
     var arrDictsReference = [MDictionary]()
     @Published
-    var selectedDictReferenceIndex = 0
-    var selectedDictReference: MDictionary { selectedDictReferenceIndex < arrDictsReference.count ? arrDictsReference[selectedDictReferenceIndex] : MDictionary() }
+    var selectedDictReferenceIndex = -1
+    var selectedDictReference: MDictionary { arrDictsReference.indices ~= selectedDictReferenceIndex ? arrDictsReference[selectedDictReferenceIndex] : MDictionary() }
     var selectedDictsReferenceIndexes = [Int]()
     var selectedDictsReference: [MDictionary] { selectedDictsReferenceIndexes.map { arrDictsReference[$0] } }
     
     var arrDictsNote = [MDictionary]()
     @objc
-    var selectedDictNoteIndex = 0
-    var selectedDictNote: MDictionary { selectedDictNoteIndex < arrDictsNote.count ? arrDictsNote[selectedDictNoteIndex] : MDictionary() }
+    var selectedDictNoteIndex = -1
+    var selectedDictNote: MDictionary { arrDictsNote.indices ~= selectedDictNoteIndex ? arrDictsNote[selectedDictNoteIndex] : MDictionary() }
     var hasDictNote: Bool { selectedDictNote.ID != 0 }
     
     var arrDictsTranslation = [MDictionary]()
     @objc
-    var selectedDictTranslationIndex = 0
-    var selectedDictTranslation: MDictionary { selectedDictTranslationIndex < arrDictsTranslation.count ? arrDictsTranslation[selectedDictTranslationIndex] : MDictionary() }
+    var selectedDictTranslationIndex = -1
+    var selectedDictTranslation: MDictionary { arrDictsTranslation.indices ~= selectedDictTranslationIndex ? arrDictsTranslation[selectedDictTranslationIndex] : MDictionary() }
     var hasDictTranslation: Bool { selectedDictTranslation.ID != 0 }
 
     var arrTextbooks = [MTextbook]()
     @objc
-    var selectedTextbookIndex = 0
-    var selectedTextbook: MTextbook { selectedTextbookIndex < arrTextbooks.count ? arrTextbooks[selectedTextbookIndex] : MTextbook() }
+    var selectedTextbookIndex = -1
+    var selectedTextbook: MTextbook { arrTextbooks.indices ~= selectedTextbookIndex ? arrTextbooks[selectedTextbookIndex] : MTextbook() }
     var arrTextbookFilters = [MSelectItem]()
     var arrWebTextbookFilters = [MSelectItem]()
 
@@ -258,6 +258,12 @@ class SettingsViewModel: NSObject, ObservableObject {
         INFO_USDICTTRANSLATION = getUSInfo(name: MUSMapping.NAME_USDICTTRANSLATION)
         INFO_USMACVOICE = getUSInfo(name: MUSMapping.NAME_USMACVOICE)
         INFO_USIOSVOICE = getUSInfo(name: MUSMapping.NAME_USIOSVOICE)
+        selectedDictReferenceIndex = -1
+        selectedDictNoteIndex = -1
+        selectedDictTranslationIndex = -1
+        selectedTextbookIndex = -1
+        selectedMacVoiceIndex = -1
+        selectediOSVoiceIndex = -1
         return Observable.zip(MDictionary.getDictsReferenceByLang(USLANG),
                               MDictionary.getDictsNoteByLang(USLANG),
                               MDictionary.getDictsTranslationByLang(USLANG),
