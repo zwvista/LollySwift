@@ -10,14 +10,30 @@ import SwiftUI
 struct ContentView: View {
     @ObservedObject var g = globalUser
     @State var isOpenSideMenu: Bool = false
-    @State var bindTitle = titleWordsUnit
+    @State var bindTitle = titleSearch
     var body: some View {
         if g.userid.isEmpty {
             LoginView()
-        } else {
+        } else if bindTitle == titleSearch {
             ZStack{
                 NavigationView {
                     SearchView()
+                    .navigationTitle(bindTitle)
+                    .navigationBarItems(leading: (
+                        Button(action: {
+                            self.isOpenSideMenu.toggle()
+                        }) {
+                            Image(systemName: "line.horizontal.3")
+                                .imageScale(.large)
+                    }))
+                }
+                SideMenuView(isOpen: $isOpenSideMenu, bindTitle: $bindTitle)
+                    .edgesIgnoringSafeArea(.all)
+            }
+        } else {
+            ZStack{
+                NavigationView {
+                        SettingsView()
                         .navigationTitle(bindTitle)
                         .navigationBarItems(leading: (
                             Button(action: {
@@ -26,8 +42,7 @@ struct ContentView: View {
                                 Image(systemName: "line.horizontal.3")
                                     .imageScale(.large)
                         }))
-                }
-
+                    }
                 SideMenuView(isOpen: $isOpenSideMenu, bindTitle: $bindTitle)
                     .edgesIgnoringSafeArea(.all)
             }

@@ -29,7 +29,7 @@ struct SearchView: View {
                 .pickerStyle(MenuPickerStyle())
                 .onChange(of: vm.selectedLangIndex) {
                     print("selectedLangIndex=\($0)")
-                    vmSettings.updateLang().subscribe() ~ disposeBag
+                    vm.updateLang().subscribe() ~ disposeBag
                 }
                 Picker(selection: $vm.selectedDictReferenceIndex, label: Text(vm.selectedDictReference.DICTNAME.defaultIfEmpty("Dictionary"))) {
                     ForEach(0..<vm.arrDictsReference.count, id: \.self) {

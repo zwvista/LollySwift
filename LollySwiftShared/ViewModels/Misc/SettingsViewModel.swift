@@ -99,9 +99,10 @@ class SettingsViewModel: NSObject, ObservableObject {
     var selectedLangIndex = -1
     var selectedLang: MLanguage { arrLanguages.indices ~= selectedLangIndex ? arrLanguages[selectedLangIndex] : MLanguage() }
 
-    var arrMacVoices: [MVoice]!
-    @objc
-    var arriOSVoices: [MVoice]!
+    var arrMacVoices = [MVoice]()
+    @Published
+    var arriOSVoices = [MVoice]()
+    @Published
     @objc
     var selectedMacVoiceIndex = -1
     var selectedMacVoice: MVoice { arrMacVoices.indices ~= selectedMacVoiceIndex ? arrMacVoices[selectedMacVoiceIndex] : MVoice() }
