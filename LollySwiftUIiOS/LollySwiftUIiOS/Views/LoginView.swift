@@ -18,10 +18,10 @@ struct LoginView: View {
                 .font(.largeTitle)
             Form {
                 Section {
-                    TextField("USERNAME", text: $vm.usernameUI)
-                    SecureField("PASSWORD", text: $vm.passwordUI)
+                    TextField("USERNAME", text: $vm.username)
+                    SecureField("PASSWORD", text: $vm.password)
                     Button(action: {
-                        vm.login(username: vm.usernameUI, password: vm.passwordUI).subscribe(onNext: {
+                        vm.login(username: vm.username, password: vm.password).subscribe(onNext: {
                             globalUser.userid = $0
                             if globalUser.userid.isEmpty {
                                 showingAlert = true
