@@ -45,10 +45,7 @@ class SettingsViewController: NSViewController, SettingsViewModelDelegate, NSTab
         super.viewDidLoad()
         vm.delegate = self
 
-        _ = vm.selectedLangIndex <~> pubLanguages.rx.selectedItemIndex
-        vm.selectedLangIndex.filter { $0 != -1 }.flatMap { _ -> Observable<()> in
-            self.vm.updateLang()
-        }.subscribe() ~ rx.disposeBag
+        _ = vm.selectedLangIndex_ <~> pubLanguages.rx.selectedItemIndex
 
         vm.getData().subscribe() ~ rx.disposeBag
     }
@@ -64,10 +61,6 @@ class SettingsViewController: NSViewController, SettingsViewModelDelegate, NSTab
             if let l = w.windowController as? LollyProtocol { l.settingsChanged() }
             if sender === btnApplyCurrent { b.pointee = true }
         }
-    }
-    
-    @IBAction func langSelected(_ sender: AnyObject) {
-        vm.updateLang().subscribe() ~ rx.disposeBag
     }
     
     @IBAction func voiceSelected(_ sender: AnyObject) {

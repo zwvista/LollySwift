@@ -93,16 +93,14 @@ class SettingsViewModel: NSObject, ObservableObject {
     var isSingleUnitPart: Bool { USUNITPARTFROM == USUNITPARTTO }
     var isInvalidUnitPart: Bool { USUNITPARTFROM > USUNITPARTTO }
 
-    @Published
-    var arrLanguages = [MLanguage]()
+    @Published var arrLanguages = [MLanguage]()
 #if SWIFTUI
-    @Published
-    var selectedLangIndex = -1
-    var selectedLang: MLanguage { arrLanguages.indices ~= selectedLangIndex ? arrLanguages[selectedLangIndex] : MLanguage() }
+    @Published var selectedLangIndex = -1
 #else
-    var selectedLangIndex = BehaviorRelay(value: -1)
-    var selectedLang: MLanguage { arrLanguages.indices ~= selectedLangIndex.value ? arrLanguages[selectedLangIndex.value] : MLanguage() }
+    var selectedLangIndex_ = BehaviorRelay(value: -1)
+    var selectedLangIndex: Int { get { selectedLangIndex_.value } set { selectedLangIndex_.accept(newValue) } }
 #endif
+    var selectedLang: MLanguage { arrLanguages.indices ~= selectedLangIndex ? arrLanguages[selectedLangIndex] : MLanguage() }
 
     var arrMacVoices = [MVoice]()
     @Published
@@ -181,8 +179,11 @@ class SettingsViewModel: NSObject, ObservableObject {
     
     override init() {
         super.init()
+        selectedLangIndex_.filter { $0 != -1 }.flatMap { _ -> Observable<()> in
+            self.updateLang()
+        }.subscribe() ~ rx.disposeBag
     }
-    
+
     init(_ x: SettingsViewModel) {
         arrUSMappings = x.arrUSMappings
         arrUserSettings = x.arrUserSettings
@@ -199,7 +200,11 @@ class SettingsViewModel: NSObject, ObservableObject {
         INFO_USUNITTO = x.INFO_USUNITTO
         INFO_USPARTTO = x.INFO_USPARTTO
         arrLanguages = x.arrLanguages
+#if SWIFTUI
         selectedLangIndex = x.selectedLangIndex
+#else
+        selectedLangIndex_ = x.selectedLangIndex_
+#endif
         arrMacVoices = x.arrMacVoices
         selectedMacVoiceIndex = x.selectedMacVoiceIndex
         arriOSVoices = x.arriOSVoices
@@ -249,11 +254,7 @@ class SettingsViewModel: NSObject, ObservableObject {
                 self.INFO_USLANG = self.getUSInfo(name: MUSMapping.NAME_USLANG)
                 self.delegate?.onGetData()
                 var index = self.arrLanguages.firstIndex { $0.ID == self.USLANG } ?? 0
-#if SWIFTUI
                 self.selectedLangIndex = index
-#else
-                self.selectedLangIndex.accept(index)
-#endif
                 return self.updateLang()
             }
     }
