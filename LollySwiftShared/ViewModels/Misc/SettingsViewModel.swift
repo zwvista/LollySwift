@@ -8,6 +8,7 @@
 
 import Foundation
 import RxSwift
+import RxRelay
 
 class SettingsViewModel: NSObject, ObservableObject {
     
@@ -94,10 +95,14 @@ class SettingsViewModel: NSObject, ObservableObject {
 
     @Published
     var arrLanguages = [MLanguage]()
+#if SWIFTUI
     @Published
-    @objc
     var selectedLangIndex = -1
     var selectedLang: MLanguage { arrLanguages.indices ~= selectedLangIndex ? arrLanguages[selectedLangIndex] : MLanguage() }
+#else
+    var selectedLangIndex = BehaviorRelay(value: -1)
+    var selectedLang: MLanguage { arrLanguages.indices ~= selectedLangIndex.value ? arrLanguages[selectedLangIndex.value] : MLanguage() }
+#endif
 
     var arrMacVoices = [MVoice]()
     @Published
@@ -243,7 +248,12 @@ class SettingsViewModel: NSObject, ObservableObject {
                 self.arrDictTypes = result.3
                 self.INFO_USLANG = self.getUSInfo(name: MUSMapping.NAME_USLANG)
                 self.delegate?.onGetData()
-                self.selectedLangIndex = self.arrLanguages.firstIndex { $0.ID == self.USLANG } ?? 0
+                var index = self.arrLanguages.firstIndex { $0.ID == self.USLANG } ?? 0
+#if SWIFTUI
+                self.selectedLangIndex = index
+#else
+                self.selectedLangIndex.accept(index)
+#endif
                 return self.updateLang()
             }
     }

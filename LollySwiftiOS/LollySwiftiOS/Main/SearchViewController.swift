@@ -31,8 +31,8 @@ class SearchViewController: UIViewController, WKNavigationDelegate, UISearchBarD
         vmSettings.getData().subscribe(onNext: {
             self.ddLang.anchorView = self.btnLang
             self.ddLang.selectionAction = { [unowned self] (index: Int, item: String) in
-                guard index != vmSettings.selectedLangIndex else {return}
-                vmSettings.selectedLangIndex = index
+                guard index != vmSettings.selectedLangIndex.value else {return}
+                vmSettings.selectedLangIndex.accept(index)
                 vmSettings.updateLang().subscribe() ~ self.rx.disposeBag
             }
             self.ddDictReference.anchorView = self.btnDict
@@ -83,7 +83,7 @@ class SearchViewController: UIViewController, WKNavigationDelegate, UISearchBarD
     func onUpdateLang() {
         let item = vmSettings.selectedLang
         btnLang.setTitle(item.LANGNAME, for: .normal)
-        ddLang.selectIndex(vmSettings.selectedLangIndex)
+        ddLang.selectIndex(vmSettings.selectedLangIndex.value)
         
         ddDictReference.dataSource = vmSettings.arrDictsReference.map(\.DICTNAME)
         onUpdateDictReference()

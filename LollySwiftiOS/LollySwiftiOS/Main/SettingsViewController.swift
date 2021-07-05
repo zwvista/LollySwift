@@ -54,8 +54,8 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
 
         ddLang.anchorView = langCell
         ddLang.selectionAction = { [unowned self] (index: Int, item: String) in
-            guard index != self.vm.selectedLangIndex else {return}
-            self.vm.selectedLangIndex = index
+            guard index != self.vm.selectedLangIndex.value else {return}
+            self.vm.selectedLangIndex.accept(index)
             self.vm.updateLang().subscribe() ~ self.rx.disposeBag
         }
 
@@ -188,7 +188,7 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
     func onUpdateLang() {
         let item = vm.selectedLang
         langCell.textLabel!.text = item.LANGNAME
-        ddLang.selectIndex(vm.selectedLangIndex)
+        ddLang.selectIndex(vm.selectedLangIndex.value)
 
         ddVoice.dataSource = vm.arriOSVoices.map(\.VOICENAME)
         onUpdateiOSVoice()

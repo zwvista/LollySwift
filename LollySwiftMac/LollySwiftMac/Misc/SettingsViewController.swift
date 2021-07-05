@@ -44,6 +44,12 @@ class SettingsViewController: NSViewController, SettingsViewModelDelegate, NSTab
     override func viewDidLoad() {
         super.viewDidLoad()
         vm.delegate = self
+
+        _ = vm.selectedLangIndex <~> pubLanguages.rx.selectedItemIndex
+        vm.selectedLangIndex.filter { $0 != -1 }.flatMap { _ -> Observable<()> in
+            self.vm.updateLang()
+        }.subscribe() ~ rx.disposeBag
+
         vm.getData().subscribe() ~ rx.disposeBag
     }
     
