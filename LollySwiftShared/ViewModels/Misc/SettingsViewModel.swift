@@ -102,40 +102,62 @@ class SettingsViewModel: NSObject, ObservableObject {
 #endif
     var selectedLang: MLanguage { arrLanguages.indices ~= selectedLangIndex ? arrLanguages[selectedLangIndex] : MLanguage() }
 
-    var arrMacVoices = [MVoice]()
-    @Published
-    var arriOSVoices = [MVoice]()
-    @Published
-    @objc
-    var selectedMacVoiceIndex = -1
+    @Published var arrMacVoices = [MVoice]()
+    @Published var arriOSVoices = [MVoice]()
+#if SWIFTUI
+    @Published var selectedMacVoiceIndex = -1
+#else
+    var selectedMacVoiceIndex_ = BehaviorRelay(value: -1)
+    var selectedMacVoiceIndex: Int { get { selectedMacVoiceIndex_.value } set { selectedMacVoiceIndex_.accept(newValue) } }
+#endif
     var selectedMacVoice: MVoice { arrMacVoices.indices ~= selectedMacVoiceIndex ? arrMacVoices[selectedMacVoiceIndex] : MVoice() }
     var macVoiceName: String { selectedMacVoice.VOICENAME }
-    var selectediOSVoiceIndex = -1
+#if SWIFTUI
+    @Published var selectediOSVoiceIndex = -1
+#else
+    var selectediOSVoiceIndex_ = BehaviorRelay(value: -1)
+    var selectediOSVoiceIndex: Int { get { selectediOSVoiceIndex_.value } set { selectediOSVoiceIndex_.accept(newValue) } }
+#endif
     var selectediOSVoice: MVoice { arriOSVoices.indices ~= selectediOSVoiceIndex ? arriOSVoices[selectediOSVoiceIndex] : MVoice() }
 
-    @Published
-    var arrDictsReference = [MDictionary]()
-    @Published
-    var selectedDictReferenceIndex = -1
+    @Published var arrDictsReference = [MDictionary]()
+#if SWIFTUI
+    @Published var selectedDictReferenceIndex = -1
+#else
+    var selectedDictReferenceIndex_ = BehaviorRelay(value: -1)
+    var selectedDictReferenceIndex: Int { get { selectedDictReferenceIndex_.value } set { selectedDictReferenceIndex_.accept(newValue) } }
+#endif
     var selectedDictReference: MDictionary { arrDictsReference.indices ~= selectedDictReferenceIndex ? arrDictsReference[selectedDictReferenceIndex] : MDictionary() }
     var selectedDictsReferenceIndexes = [Int]()
     var selectedDictsReference: [MDictionary] { selectedDictsReferenceIndexes.map { arrDictsReference[$0] } }
     
-    var arrDictsNote = [MDictionary]()
-    @objc
-    var selectedDictNoteIndex = -1
+    @Published var arrDictsNote = [MDictionary]()
+#if SWIFTUI
+    @Published var selectedDictNoteIndex = -1
+#else
+    var selectedDictNoteIndex_ = BehaviorRelay(value: -1)
+    var selectedDictNoteIndex: Int { get { selectedDictNoteIndex_.value } set { selectedDictNoteIndex_.accept(newValue) } }
+#endif
     var selectedDictNote: MDictionary { arrDictsNote.indices ~= selectedDictNoteIndex ? arrDictsNote[selectedDictNoteIndex] : MDictionary() }
     var hasDictNote: Bool { selectedDictNote.ID != 0 }
     
-    var arrDictsTranslation = [MDictionary]()
-    @objc
-    var selectedDictTranslationIndex = -1
+    @Published var arrDictsTranslation = [MDictionary]()
+#if SWIFTUI
+    @Published var selectedDictTranslationIndex = -1
+#else
+    var selectedDictTranslationIndex_ = BehaviorRelay(value: -1)
+    var selectedDictTranslationIndex: Int { get { selectedDictTranslationIndex_.value } set { selectedDictTranslationIndex_.accept(newValue) } }
+#endif
     var selectedDictTranslation: MDictionary { arrDictsTranslation.indices ~= selectedDictTranslationIndex ? arrDictsTranslation[selectedDictTranslationIndex] : MDictionary() }
     var hasDictTranslation: Bool { selectedDictTranslation.ID != 0 }
 
-    var arrTextbooks = [MTextbook]()
-    @objc
-    var selectedTextbookIndex = -1
+    @Published var arrTextbooks = [MTextbook]()
+#if SWIFTUI
+    @Published var selectedTextbookIndex = -1
+#else
+    var selectedTextbookIndex_ = BehaviorRelay(value: -1)
+    var selectedTextbookIndex: Int { get { selectedTextbookIndex_.value } set { selectedTextbookIndex_.accept(newValue) } }
+#endif
     var selectedTextbook: MTextbook { arrTextbooks.indices ~= selectedTextbookIndex ? arrTextbooks[selectedTextbookIndex] : MTextbook() }
     var arrTextbookFilters = [MSelectItem]()
     var arrWebTextbookFilters = [MSelectItem]()
