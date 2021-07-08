@@ -27,7 +27,7 @@ class SettingsViewController: NSViewController, SettingsViewModelDelegate, NSTab
     @IBOutlet weak var btnSelectDicts: NSButton!
     @IBOutlet weak var pubDictsNote: NSPopUpButton!
     @IBOutlet weak var pubDictsTranslation: NSPopUpButton!
-    @IBOutlet weak var pubTextbookFilters: NSPopUpButton!
+    @IBOutlet weak var pubTextbooks: NSPopUpButton!
     @IBOutlet weak var pubUnitFrom: NSPopUpButton!
     @IBOutlet weak var pubUnitTo: NSPopUpButton!
     @IBOutlet weak var pubPartFrom: NSPopUpButton!
@@ -46,6 +46,10 @@ class SettingsViewController: NSViewController, SettingsViewModelDelegate, NSTab
         vm.delegate = self
 
         _ = vm.selectedLangIndex_ <~> pubLanguages.rx.selectedItemIndex
+        _ = vm.selectedMacVoiceIndex_ <~> pubVoices.rx.selectedItemIndex
+        _ = vm.selectedDictNoteIndex_ <~> pubDictsNote.rx.selectedItemIndex
+        _ = vm.selectedDictTranslationIndex_ <~> pubDictsTranslation.rx.selectedItemIndex
+        _ = vm.selectedTextbookIndex_ <~> pubTextbooks.rx.selectedItemIndex
 
         vm.getData().subscribe() ~ rx.disposeBag
     }
@@ -55,28 +59,12 @@ class SettingsViewController: NSViewController, SettingsViewModelDelegate, NSTab
         app.stopModal()
         // http://stackoverflow.com/questions/5711367/os-x-how-can-a-nsviewcontroller-find-its-window
         self.view.window?.close()
-        guard sender !== btnApplyNone else {return}
+        if sender === btnApplyNone {return}
         app.enumerateWindows(options: .orderedFrontToBack) { w, b in
-            if let l = w.contentViewController as? LollyProtocol { l.settingsChanged() }
-            if let l = w.windowController as? LollyProtocol { l.settingsChanged() }
+            if let vc = w.contentViewController as? LollyProtocol { vc.settingsChanged() }
+            if let wc = w.windowController as? LollyProtocol { wc.settingsChanged() }
             if sender === btnApplyCurrent { b.pointee = true }
         }
-    }
-    
-    @IBAction func voiceSelected(_ sender: AnyObject) {
-        vm.updateMacVoice().subscribe() ~ rx.disposeBag
-    }
-    
-    @IBAction func dictNoteSelected(_ sender: AnyObject) {
-        vm.updateDictNote().subscribe() ~ rx.disposeBag
-    }
-    
-    @IBAction func dictTranslationSelected(_ sender: AnyObject) {
-        vm.updateDictTranslation().subscribe() ~ rx.disposeBag
-    }
-
-    @IBAction func textbookSelected(_ sender: AnyObject) {
-        vm.updateTextbook().subscribe() ~ rx.disposeBag
     }
     
     @IBAction func unitFromSelected(_ sender: AnyObject) {

@@ -204,6 +204,24 @@ class SettingsViewModel: NSObject, ObservableObject {
         selectedLangIndex_.filter { $0 != -1 }.flatMap { _ -> Observable<()> in
             self.updateLang()
         }.subscribe() ~ rx.disposeBag
+        selectedMacVoiceIndex_.filter { $0 != -1 }.flatMap { _ -> Observable<()> in
+            self.updateMacVoice()
+        }.subscribe() ~ rx.disposeBag
+        selectediOSVoiceIndex_.filter { $0 != -1 }.flatMap { _ -> Observable<()> in
+            self.updateiOSVoice()
+        }.subscribe() ~ rx.disposeBag
+        selectedDictReferenceIndex_.filter { $0 != -1 }.flatMap { _ -> Observable<()> in
+            self.updateDictReference()
+        }.subscribe() ~ rx.disposeBag
+        selectedDictNoteIndex_.filter { $0 != -1 }.flatMap { _ -> Observable<()> in
+            self.updateDictNote()
+        }.subscribe() ~ rx.disposeBag
+        selectedDictTranslationIndex_.filter { $0 != -1 }.flatMap { _ -> Observable<()> in
+            self.updateDictTranslation()
+        }.subscribe() ~ rx.disposeBag
+        selectedTextbookIndex_.filter { $0 != -1 }.flatMap { _ -> Observable<()> in
+            self.updateTextbook()
+        }.subscribe() ~ rx.disposeBag
     }
 
     init(_ x: SettingsViewModel) {
@@ -222,24 +240,30 @@ class SettingsViewModel: NSObject, ObservableObject {
         INFO_USUNITTO = x.INFO_USUNITTO
         INFO_USPARTTO = x.INFO_USPARTTO
         arrLanguages = x.arrLanguages
-#if SWIFTUI
-        selectedLangIndex = x.selectedLangIndex
-#else
-        selectedLangIndex_ = x.selectedLangIndex_
-#endif
         arrMacVoices = x.arrMacVoices
-        selectedMacVoiceIndex = x.selectedMacVoiceIndex
         arriOSVoices = x.arriOSVoices
-        selectediOSVoiceIndex = x.selectediOSVoiceIndex
         arrDictsReference = x.arrDictsReference
-        selectedDictReferenceIndex = x.selectedDictReferenceIndex
         selectedDictsReferenceIndexes = x.selectedDictsReferenceIndexes
         arrDictsNote = x.arrDictsNote
-        selectedDictNoteIndex = x.selectedDictNoteIndex
         arrDictsTranslation = x.arrDictsTranslation
-        selectedDictTranslationIndex = x.selectedDictTranslationIndex
         arrTextbooks = x.arrTextbooks
+#if SWIFTUI
+        selectedLangIndex = x.selectedLangIndex
+        selectedMacVoiceIndex = x.selectedMacVoiceIndex
+        selectediOSVoiceIndex = x.selectediOSVoiceIndex
+        selectedDictReferenceIndex = x.selectedDictReferenceIndex
+        selectedDictNoteIndex = x.selectedDictNoteIndex
+        selectedDictTranslationIndex = x.selectedDictTranslationIndex
         selectedTextbookIndex = x.selectedTextbookIndex
+#else
+        selectedLangIndex_ = x.selectedLangIndex_
+        selectedMacVoiceIndex_ = x.selectedMacVoiceIndex_
+        selectediOSVoiceIndex_ = x.selectediOSVoiceIndex_
+        selectedDictReferenceIndex_ = x.selectedDictReferenceIndex_
+        selectedDictNoteIndex_ = x.selectedDictNoteIndex_
+        selectedDictTranslationIndex_ = x.selectedDictTranslationIndex_
+        selectedTextbookIndex_ = x.selectedTextbookIndex_
+#endif
         arrTextbookFilters = x.arrTextbookFilters
         arrWebTextbookFilters = x.arrWebTextbookFilters
         toType = x.toType
@@ -275,8 +299,7 @@ class SettingsViewModel: NSObject, ObservableObject {
                 self.arrDictTypes = result.3
                 self.INFO_USLANG = self.getUSInfo(name: MUSMapping.NAME_USLANG)
                 self.delegate?.onGetData()
-                var index = self.arrLanguages.firstIndex { $0.ID == self.USLANG } ?? 0
-                self.selectedLangIndex = index
+                self.selectedLangIndex = self.arrLanguages.firstIndex { $0.ID == self.USLANG } ?? 0
                 return self.updateLang()
             }
     }

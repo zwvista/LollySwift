@@ -1095,10 +1095,8 @@
                                     </menu>
                                 </popUpButtonCell>
                                 <connections>
-                                    <action selector="voiceSelected:" target="HfO-r7-QMx" id="D6w-oq-5iK"/>
                                     <binding destination="12V-SQ-el6" name="content" keyPath="arrangedObjects" id="tZe-Wp-WNh"/>
                                     <binding destination="12V-SQ-el6" name="contentValues" keyPath="arrangedObjects.VOICENAME" previousBinding="tZe-Wp-WNh" id="fWH-a2-bxK"/>
-                                    <binding destination="HfO-r7-QMx" name="selectedIndex" keyPath="vm.selectedMacVoiceIndex" previousBinding="fWH-a2-bxK" id="epr-iJ-6AT"/>
                                 </connections>
                             </popUpButton>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6If-OE-53N" userLabel="Dictionary(Word):">
@@ -1186,7 +1184,7 @@
                                 </scroller>
                             </scrollView>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CB4-lQ-YHh">
-                                <rect key="frame" x="460" y="278" width="74" height="32"/>
+                                <rect key="frame" x="460" y="278" width="73" height="32"/>
                                 <buttonCell key="cell" type="push" title="Select" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Wqf-Oy-cTW">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -1221,14 +1219,12 @@
                                     </menu>
                                 </popUpButtonCell>
                                 <connections>
-                                    <action selector="dictNoteSelected:" target="HfO-r7-QMx" id="Rps-re-Ciz"/>
                                     <binding destination="Jpc-QG-itq" name="content" keyPath="arrangedObjects" id="Rgv-JT-DQb"/>
                                     <binding destination="Jpc-QG-itq" name="contentValues" keyPath="arrangedObjects.DICTNAME" previousBinding="Rgv-JT-DQb" id="EO7-gA-Zii">
                                         <dictionary key="options">
                                             <string key="NSValueTransformerName">NSIsNil</string>
                                         </dictionary>
                                     </binding>
-                                    <binding destination="HfO-r7-QMx" name="selectedIndex" keyPath="vm.selectedDictNoteIndex" previousBinding="EO7-gA-Zii" id="Pzj-pO-ePz"/>
                                 </connections>
                             </popUpButton>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rwe-QA-vd1">
@@ -1257,14 +1253,12 @@
                                     </menu>
                                 </popUpButtonCell>
                                 <connections>
-                                    <action selector="dictTranslationSelected:" target="HfO-r7-QMx" id="3FY-ys-b5b"/>
                                     <binding destination="Mfi-Gz-JV5" name="content" keyPath="arrangedObjects" id="lpx-CO-THf"/>
                                     <binding destination="Mfi-Gz-JV5" name="contentValues" keyPath="arrangedObjects.DICTNAME" previousBinding="lpx-CO-THf" id="68d-S1-O5V">
                                         <dictionary key="options">
                                             <string key="NSValueTransformerName">NSIsNil</string>
                                         </dictionary>
                                     </binding>
-                                    <binding destination="HfO-r7-QMx" name="selectedIndex" keyPath="vm.selectedDictTranslationIndex" previousBinding="68d-S1-O5V" id="MZW-6K-rZt"/>
                                 </connections>
                             </popUpButton>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="749" verticalCompressionResistancePriority="751" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RQX-rZ-9Ej">
@@ -1292,10 +1286,8 @@
                                     </menu>
                                 </popUpButtonCell>
                                 <connections>
-                                    <action selector="textbookSelected:" target="HfO-r7-QMx" id="Efv-sg-exe"/>
                                     <binding destination="PzR-zm-jg5" name="content" keyPath="arrangedObjects" id="pRT-Ce-e3V"/>
                                     <binding destination="PzR-zm-jg5" name="contentValues" keyPath="arrangedObjects.TEXTBOOKNAME" previousBinding="pRT-Ce-e3V" id="h1J-AW-kEe"/>
-                                    <binding destination="HfO-r7-QMx" name="selectedIndex" keyPath="vm.selectedTextbookIndex" previousBinding="h1J-AW-kEe" id="EYe-Dr-GO9"/>
                                 </connections>
                             </popUpButton>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8FM-8h-XQF">
@@ -1426,7 +1418,7 @@
                                 </connections>
                             </popUpButton>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iaA-UK-MEB">
-                                <rect key="frame" x="166" y="55" width="116" height="32"/>
+                                <rect key="frame" x="166" y="55" width="115" height="32"/>
                                 <buttonCell key="cell" type="push" title="Previous Part" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="JzB-uc-0yD">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -1436,7 +1428,7 @@
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="amm-Ya-sSe">
-                                <rect key="frame" x="280" y="55" width="116" height="32"/>
+                                <rect key="frame" x="279" y="55" width="115" height="32"/>
                                 <buttonCell key="cell" type="push" title="Next Part" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="c4x-ru-377">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -1578,7 +1570,7 @@ Gw
                         <outlet property="pubLanguages" destination="Yra-vx-iUa" id="FyI-6e-Ins"/>
                         <outlet property="pubPartFrom" destination="PW2-rx-UfY" id="I3r-sr-VCj"/>
                         <outlet property="pubPartTo" destination="Xjt-G8-0bL" id="ZfJ-gt-8PI"/>
-                        <outlet property="pubTextbookFilters" destination="GTc-kH-1Ux" id="51I-aI-Ilk"/>
+                        <outlet property="pubTextbooks" destination="GTc-kH-1Ux" id="VOj-at-6Sz"/>
                         <outlet property="pubUnitFrom" destination="b7U-Wa-ylD" id="I23-ak-1YP"/>
                         <outlet property="pubUnitTo" destination="fnN-We-eae" id="3ng-8B-wSe"/>
                         <outlet property="pubVoices" destination="l5P-3b-jEL" id="WmX-QW-jKC"/>
