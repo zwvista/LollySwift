@@ -201,25 +201,25 @@ class SettingsViewModel: NSObject, ObservableObject {
     
     override init() {
         super.init()
-        selectedLangIndex_.filter { $0 != -1 }.flatMap { _ -> Observable<()> in
+        selectedLangIndex_.filter { $0 != -1 }.distinctUntilChanged().flatMap { _ -> Observable<()> in
             self.updateLang()
         }.subscribe() ~ rx.disposeBag
-        selectedMacVoiceIndex_.filter { $0 != -1 }.flatMap { _ -> Observable<()> in
+        selectedMacVoiceIndex_.filter { $0 != -1 }.distinctUntilChanged().flatMap { _ -> Observable<()> in
             self.updateMacVoice()
         }.subscribe() ~ rx.disposeBag
-        selectediOSVoiceIndex_.filter { $0 != -1 }.flatMap { _ -> Observable<()> in
+        selectediOSVoiceIndex_.filter { $0 != -1 }.distinctUntilChanged().flatMap { _ -> Observable<()> in
             self.updateiOSVoice()
         }.subscribe() ~ rx.disposeBag
-        selectedDictReferenceIndex_.filter { $0 != -1 }.flatMap { _ -> Observable<()> in
+        selectedDictReferenceIndex_.filter { $0 != -1 }.distinctUntilChanged().flatMap { _ -> Observable<()> in
             self.updateDictReference()
         }.subscribe() ~ rx.disposeBag
-        selectedDictNoteIndex_.filter { $0 != -1 }.flatMap { _ -> Observable<()> in
+        selectedDictNoteIndex_.filter { $0 != -1 }.distinctUntilChanged().flatMap { _ -> Observable<()> in
             self.updateDictNote()
         }.subscribe() ~ rx.disposeBag
-        selectedDictTranslationIndex_.filter { $0 != -1 }.flatMap { _ -> Observable<()> in
+        selectedDictTranslationIndex_.filter { $0 != -1 }.distinctUntilChanged().flatMap { _ -> Observable<()> in
             self.updateDictTranslation()
         }.subscribe() ~ rx.disposeBag
-        selectedTextbookIndex_.filter { $0 != -1 }.flatMap { _ -> Observable<()> in
+        selectedTextbookIndex_.filter { $0 != -1 }.distinctUntilChanged().flatMap { _ -> Observable<()> in
             self.updateTextbook()
         }.subscribe() ~ rx.disposeBag
     }
@@ -247,23 +247,6 @@ class SettingsViewModel: NSObject, ObservableObject {
         arrDictsNote = x.arrDictsNote
         arrDictsTranslation = x.arrDictsTranslation
         arrTextbooks = x.arrTextbooks
-#if SWIFTUI
-        selectedLangIndex = x.selectedLangIndex
-        selectedMacVoiceIndex = x.selectedMacVoiceIndex
-        selectediOSVoiceIndex = x.selectediOSVoiceIndex
-        selectedDictReferenceIndex = x.selectedDictReferenceIndex
-        selectedDictNoteIndex = x.selectedDictNoteIndex
-        selectedDictTranslationIndex = x.selectedDictTranslationIndex
-        selectedTextbookIndex = x.selectedTextbookIndex
-#else
-        selectedLangIndex_ = x.selectedLangIndex_
-        selectedMacVoiceIndex_ = x.selectedMacVoiceIndex_
-        selectediOSVoiceIndex_ = x.selectediOSVoiceIndex_
-        selectedDictReferenceIndex_ = x.selectedDictReferenceIndex_
-        selectedDictNoteIndex_ = x.selectedDictNoteIndex_
-        selectedDictTranslationIndex_ = x.selectedDictTranslationIndex_
-        selectedTextbookIndex_ = x.selectedTextbookIndex_
-#endif
         arrTextbookFilters = x.arrTextbookFilters
         arrWebTextbookFilters = x.arrWebTextbookFilters
         toType = x.toType
@@ -275,6 +258,13 @@ class SettingsViewModel: NSObject, ObservableObject {
         arrDictTypes = x.arrDictTypes
         delegate = x.delegate
         super.init()
+        selectedLangIndex = x.selectedLangIndex
+        selectedMacVoiceIndex = x.selectedMacVoiceIndex
+        selectediOSVoiceIndex = x.selectediOSVoiceIndex
+        selectedDictReferenceIndex = x.selectedDictReferenceIndex
+        selectedDictNoteIndex = x.selectedDictNoteIndex
+        selectedDictTranslationIndex = x.selectedDictTranslationIndex
+        selectedTextbookIndex = x.selectedTextbookIndex
     }
     
     private func getUSInfo(name: String) -> MUserSettingInfo {
@@ -368,7 +358,7 @@ class SettingsViewModel: NSObject, ObservableObject {
         selectedUnitToIndex = arrUnits.firstIndex { $0.value == USUNITTO } ?? 0
         selectedPartToIndex = arrParts.firstIndex { $0.value == USPARTTO } ?? 0
         toType = isSingleUnit ? .unit : isSingleUnitPart ? .part : .to
-        return (!dirty ? Observable.just(()) : MUserSetting.update(info: INFO_USTEXTBOOK, intValue: USTEXTBOOK)).do(onNext: { self.delegate?.onUpdateTextbook() })
+        return !dirty ? Observable.just(()) : MUserSetting.update(info: INFO_USTEXTBOOK, intValue: USTEXTBOOK).do(onNext: { self.delegate?.onUpdateTextbook() })
     }
 
     func updateDictReference() -> Observable<()> {
