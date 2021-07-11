@@ -173,21 +173,37 @@ class SettingsViewModel: NSObject, ObservableObject {
     var TEXTBOOKINFO: String { "\(LANGINFO)/\(selectedTextbook.TEXTBOOKNAME)" }
     var UNITINFO: String { "\(TEXTBOOKINFO)/\(USUNITFROMSTR) \(USPARTFROMSTR) ~ \(USUNITTOSTR) \(USPARTTOSTR)" }
 
-    @objc
-    var selectedUnitFromIndex = 0
-    var selectedUnitFrom: Int { selectedUnitFromIndex < arrUnits.count ? arrUnits[selectedUnitFromIndex].value : 0 }
-    @objc
-    var selectedPartFromIndex = 0
-    var selectedPartFrom: Int { selectedPartFromIndex < arrParts.count ? arrParts[selectedPartFromIndex].value : 0 }
-    @objc
-    var selectedUnitToIndex = 0
-    var selectedUnitTo: Int { selectedUnitFromIndex < arrUnits.count ? arrUnits[selectedUnitFromIndex].value : 0 }
-    @objc
-    var selectedPartToIndex = 0
-    var selectedPartTo: Int { selectedPartToIndex < arrParts.count ? arrParts[selectedPartToIndex].value : 0 }
+#if SWIFTUI
+    @Published var selectedUnitFromIndex = -1
+#else
+    var selectedUnitFromIndex_ = BehaviorRelay(value: -1)
+    var selectedUnitFromIndex: Int { get { selectedUnitFromIndex_.value } set { selectedUnitFromIndex_.accept(newValue) } }
+#endif
+    var selectedUnitFrom: Int { arrUnits.indices ~= selectedUnitFromIndex ? arrUnits[selectedUnitFromIndex].value : 0 }
+#if SWIFTUI
+    @Published var selectedPartFromIndex = -1
+#else
+    var selectedPartFromIndex_ = BehaviorRelay(value: -1)
+    var selectedPartFromIndex: Int { get { selectedPartFromIndex_.value } set { selectedPartFromIndex_.accept(newValue) } }
+#endif
+    var selectedPartFrom: Int { arrParts.indices ~= selectedPartFromIndex ? arrParts[selectedPartFromIndex].value : 0 }
+#if SWIFTUI
+    @Published var selectedUnitToIndex = -1
+#else
+    var selectedUnitToIndex_ = BehaviorRelay(value: -1)
+    var selectedUnitToIndex: Int { get { selectedUnitToIndex_.value } set { selectedUnitToIndex_.accept(newValue) } }
+#endif
+    var selectedUnitTo: Int { arrUnits.indices ~= selectedUnitToIndex ? arrUnits[selectedUnitToIndex].value : 0 }
+#if SWIFTUI
+    @Published var selectedPartToIndex = -1
+#else
+    var selectedPartToIndex_ = BehaviorRelay(value: -1)
+    var selectedPartToIndex: Int { get { selectedPartToIndex_.value } set { selectedPartToIndex_.accept(newValue) } }
+#endif
+    var selectedPartTo: Int { arrParts.indices ~= selectedPartToIndex ? arrParts[selectedPartToIndex].value : 0 }
 
     let arrToTypes = ["Unit", "Part", "To"]
-    var toType: UnitPartToType = .unit
+    var toType: UnitPartToType = .to
     
     static let arrScopeWordFilters = ["Word", "Note"]
     static let arrScopePhraseFilters = ["Phrase", "Translation"]
@@ -201,26 +217,42 @@ class SettingsViewModel: NSObject, ObservableObject {
     
     override init() {
         super.init()
-        selectedLangIndex_.filter { $0 != -1 }.distinctUntilChanged().flatMap { _ -> Observable<()> in
+        selectedLangIndex_.distinctUntilChanged().filter { $0 != -1 }.flatMap { _ -> Observable<()> in
             self.updateLang()
         }.subscribe() ~ rx.disposeBag
-        selectedMacVoiceIndex_.filter { $0 != -1 }.distinctUntilChanged().flatMap { _ -> Observable<()> in
+        selectedMacVoiceIndex_.distinctUntilChanged().filter { $0 != -1 }.flatMap { _ -> Observable<()> in
             self.updateMacVoice()
         }.subscribe() ~ rx.disposeBag
-        selectediOSVoiceIndex_.filter { $0 != -1 }.distinctUntilChanged().flatMap { _ -> Observable<()> in
+        selectediOSVoiceIndex_.distinctUntilChanged().filter { $0 != -1 }.flatMap { _ -> Observable<()> in
             self.updateiOSVoice()
         }.subscribe() ~ rx.disposeBag
-        selectedDictReferenceIndex_.filter { $0 != -1 }.distinctUntilChanged().flatMap { _ -> Observable<()> in
+        selectedDictReferenceIndex_.distinctUntilChanged().filter { $0 != -1 }.flatMap { _ -> Observable<()> in
             self.updateDictReference()
         }.subscribe() ~ rx.disposeBag
-        selectedDictNoteIndex_.filter { $0 != -1 }.distinctUntilChanged().flatMap { _ -> Observable<()> in
+        selectedDictNoteIndex_.distinctUntilChanged().filter { $0 != -1 }.flatMap { _ -> Observable<()> in
             self.updateDictNote()
         }.subscribe() ~ rx.disposeBag
-        selectedDictTranslationIndex_.filter { $0 != -1 }.distinctUntilChanged().flatMap { _ -> Observable<()> in
+        selectedDictTranslationIndex_.distinctUntilChanged().filter { $0 != -1 }.flatMap { _ -> Observable<()> in
             self.updateDictTranslation()
         }.subscribe() ~ rx.disposeBag
-        selectedTextbookIndex_.filter { $0 != -1 }.distinctUntilChanged().flatMap { _ -> Observable<()> in
+        selectedTextbookIndex_.distinctUntilChanged().filter { $0 != -1 }.flatMap { _ -> Observable<()> in
             self.updateTextbook()
+        }.subscribe() ~ rx.disposeBag
+        selectedUnitFromIndex_.distinctUntilChanged().filter { $0 != -1 }.flatMap { n -> Observable<()> in
+            print("selectedUnitFromIndex=\(n)")
+            return self.updateUnitFrom()
+        }.subscribe() ~ rx.disposeBag
+        selectedPartFromIndex_.distinctUntilChanged().filter { $0 != -1 }.flatMap { n -> Observable<()> in
+            print("selectedPartFromIndex=\(n)")
+            return self.updatePartFrom()
+        }.subscribe() ~ rx.disposeBag
+        selectedUnitToIndex_.distinctUntilChanged().filter { $0 != -1 }.flatMap { n -> Observable<()> in
+            print("selectedUnitToIndex=\(n)")
+            return self.updateUnitTo()
+        }.subscribe() ~ rx.disposeBag
+        selectedPartToIndex_.distinctUntilChanged().filter { $0 != -1 }.flatMap { n -> Observable<()> in
+            print("selectedPartToIndex=\(n)")
+            return self.updatePartTo()
         }.subscribe() ~ rx.disposeBag
     }
 
@@ -250,10 +282,6 @@ class SettingsViewModel: NSObject, ObservableObject {
         arrTextbookFilters = x.arrTextbookFilters
         arrWebTextbookFilters = x.arrWebTextbookFilters
         toType = x.toType
-        selectedUnitFromIndex = x.selectedUnitFromIndex
-        selectedPartFromIndex = x.selectedPartFromIndex
-        selectedUnitToIndex = x.selectedUnitToIndex
-        selectedPartToIndex = x.selectedPartToIndex
         arrAutoCorrect = x.arrAutoCorrect
         arrDictTypes = x.arrDictTypes
         delegate = x.delegate
@@ -265,6 +293,10 @@ class SettingsViewModel: NSObject, ObservableObject {
         selectedDictNoteIndex = x.selectedDictNoteIndex
         selectedDictTranslationIndex = x.selectedDictTranslationIndex
         selectedTextbookIndex = x.selectedTextbookIndex
+        selectedUnitFromIndex = x.selectedUnitFromIndex
+        selectedPartFromIndex = x.selectedPartFromIndex
+        selectedUnitToIndex = x.selectedUnitToIndex
+        selectedPartToIndex = x.selectedPartToIndex
     }
     
     private func getUSInfo(name: String) -> MUserSettingInfo {
@@ -298,6 +330,13 @@ class SettingsViewModel: NSObject, ObservableObject {
         let newVal = selectedLang.ID
         let dirty = USLANG != newVal
         USLANG = newVal
+        selectedDictReferenceIndex = -1
+        selectedDictNoteIndex = -1
+        selectedDictTranslationIndex = -1
+        selectedTextbookIndex = -1
+        selectedMacVoiceIndex = -1
+        selectediOSVoiceIndex = -1
+        delegate?.onUpdateLang()
         INFO_USTEXTBOOK = getUSInfo(name: MUSMapping.NAME_USTEXTBOOK)
         INFO_USDICTREFERENCE = getUSInfo(name: MUSMapping.NAME_USDICTREFERENCE)
         INFO_USDICTNOTE = getUSInfo(name: MUSMapping.NAME_USDICTNOTE)
@@ -305,12 +344,6 @@ class SettingsViewModel: NSObject, ObservableObject {
         INFO_USDICTTRANSLATION = getUSInfo(name: MUSMapping.NAME_USDICTTRANSLATION)
         INFO_USMACVOICE = getUSInfo(name: MUSMapping.NAME_USMACVOICE)
         INFO_USIOSVOICE = getUSInfo(name: MUSMapping.NAME_USIOSVOICE)
-        selectedDictReferenceIndex = -1
-        selectedDictNoteIndex = -1
-        selectedDictTranslationIndex = -1
-        selectedTextbookIndex = -1
-        selectedMacVoiceIndex = -1
-        selectediOSVoiceIndex = -1
         return Observable.zip(MDictionary.getDictsReferenceByLang(USLANG),
                               MDictionary.getDictsNoteByLang(USLANG),
                               MDictionary.getDictsTranslationByLang(USLANG),
@@ -341,7 +374,7 @@ class SettingsViewModel: NSObject, ObservableObject {
                 if self.arriOSVoices.isEmpty { self.arriOSVoices.append(MVoice()) }
                 self.selectedMacVoiceIndex = self.arrMacVoices.firstIndex { $0.ID == self.USMACVOICE } ?? 0
                 self.selectediOSVoiceIndex = self.arriOSVoices.firstIndex { $0.ID == self.USIOSVOICE } ?? 0
-                return Observable.zip(self.updateTextbook(), self.updateDictReference(), self.updateDictsReference(), self.updateDictNote(), self.updateDictTranslation(), self.updateMacVoice(), self.updateiOSVoice(), (!dirty ? Observable.just(()) : MUserSetting.update(info: self.INFO_USLANG, intValue: self.USLANG)).do(onNext: { self.delegate?.onUpdateLang() })).map {_ in }
+                return Observable.zip(self.updateTextbook(), self.updateDictReference(), self.updateDictsReference(), self.updateDictNote(), self.updateDictTranslation(), self.updateMacVoice(), self.updateiOSVoice(), (!dirty ? Observable.just(()) : MUserSetting.update(info: self.INFO_USLANG, intValue: self.USLANG))).map {_ in }
             }
     }
 
@@ -349,6 +382,11 @@ class SettingsViewModel: NSObject, ObservableObject {
         let newVal = selectedTextbook.ID
         let dirty = USTEXTBOOK != newVal
         USTEXTBOOK = newVal
+        selectedUnitToIndex = -1
+        selectedPartFromIndex = -1
+        selectedUnitToIndex = -1
+        selectedPartToIndex = -1
+        delegate?.onUpdateTextbook()
         INFO_USUNITFROM = getUSInfo(name: MUSMapping.NAME_USUNITFROM)
         INFO_USPARTFROM = getUSInfo(name: MUSMapping.NAME_USPARTFROM)
         INFO_USUNITTO = getUSInfo(name: MUSMapping.NAME_USUNITTO)
@@ -358,7 +396,7 @@ class SettingsViewModel: NSObject, ObservableObject {
         selectedUnitToIndex = arrUnits.firstIndex { $0.value == USUNITTO } ?? 0
         selectedPartToIndex = arrParts.firstIndex { $0.value == USPARTTO } ?? 0
         toType = isSingleUnit ? .unit : isSingleUnitPart ? .part : .to
-        return !dirty ? Observable.just(()) : MUserSetting.update(info: INFO_USTEXTBOOK, intValue: USTEXTBOOK).do(onNext: { self.delegate?.onUpdateTextbook() })
+        return !dirty ? Observable.just(()) : MUserSetting.update(info: INFO_USTEXTBOOK, intValue: USTEXTBOOK)
     }
 
     func updateDictReference() -> Observable<()> {

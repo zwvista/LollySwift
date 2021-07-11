@@ -50,6 +50,10 @@ class SettingsViewController: NSViewController, SettingsViewModelDelegate, NSTab
         _ = vm.selectedDictNoteIndex_ <~> pubDictsNote.rx.selectedItemIndex
         _ = vm.selectedDictTranslationIndex_ <~> pubDictsTranslation.rx.selectedItemIndex
         _ = vm.selectedTextbookIndex_ <~> pubTextbooks.rx.selectedItemIndex
+        _ = vm.selectedUnitFromIndex_ <~> pubUnitFrom.rx.selectedItemIndex
+        _ = vm.selectedPartFromIndex_ <~> pubPartFrom.rx.selectedItemIndex
+        _ = vm.selectedUnitToIndex_ <~> pubUnitTo.rx.selectedItemIndex
+        _ = vm.selectedPartToIndex_ <~> pubPartTo.rx.selectedItemIndex
 
         vm.getData().subscribe() ~ rx.disposeBag
     }
@@ -65,14 +69,6 @@ class SettingsViewController: NSViewController, SettingsViewModelDelegate, NSTab
             if let wc = w.windowController as? LollyProtocol { wc.settingsChanged() }
             if sender === btnApplyCurrent { b.pointee = true }
         }
-    }
-    
-    @IBAction func unitFromSelected(_ sender: AnyObject) {
-        vm.updateUnitFrom().subscribe() ~ rx.disposeBag
-    }
-    
-    @IBAction func partFromSelected(_ sender: AnyObject) {
-        vm.updatePartFrom().subscribe() ~ rx.disposeBag
     }
     
     @IBAction func scToTypeClicked(_ sender: AnyObject) {
@@ -96,14 +92,6 @@ class SettingsViewController: NSViewController, SettingsViewModelDelegate, NSTab
 
     @IBAction func nextUnitPart(_ sender: AnyObject) {
         vm.nextUnitPart().subscribe() ~ rx.disposeBag
-    }
-
-    @IBAction func unitToSelected(_ sender: AnyObject) {
-        vm.updateUnitTo().subscribe() ~ rx.disposeBag
-    }
-    
-    @IBAction func partToSelected(_ sender: AnyObject) {
-        vm.updatePartTo().subscribe() ~ rx.disposeBag
     }
     
     func onGetData() {
