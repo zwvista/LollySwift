@@ -134,22 +134,6 @@ class SettingsViewController: NSViewController, SettingsViewModelDelegate, NSTab
         scToType.selectedSegment = vm.toType.rawValue
         scToType.performClick(self)
     }
-    
-    func onUpdateUnitFrom() {
-        pubUnitFrom.selectItem(at: vm.arrUnits.firstIndex { $0.value == vm.USUNITFROM }!)
-    }
-    
-    func onUpdatePartFrom() {
-        pubPartFrom.selectItem(at: vm.arrParts.firstIndex { $0.value == vm.USPARTFROM }!)
-    }
-    
-    func onUpdateUnitTo() {
-        pubUnitTo.selectItem(at: vm.arrUnits.firstIndex { $0.value == vm.USUNITTO }!)
-    }
-    
-    func onUpdatePartTo() {
-        pubPartTo.selectItem(at: vm.arrParts.firstIndex { $0.value == vm.USPARTTO }!)
-    }
 
     deinit {
         print("DEBUG: \(self.className) deinit")

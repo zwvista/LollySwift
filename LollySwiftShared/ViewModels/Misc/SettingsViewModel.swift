@@ -310,6 +310,7 @@ class SettingsViewModel: NSObject, ObservableObject {
         selectedPartFromIndex = x.selectedPartFromIndex
         selectedUnitToIndex = x.selectedUnitToIndex
         selectedPartToIndex = x.selectedPartToIndex
+        initialized = x.initialized
     }
     
     private func getUSInfo(name: String) -> MUserSettingInfo {
