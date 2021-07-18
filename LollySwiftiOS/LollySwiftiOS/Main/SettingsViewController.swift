@@ -92,14 +92,12 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
         ddUnitFrom.selectionAction = { [unowned self] (index: Int, item: String) in
             guard index != self.vm.selectedUnitFromIndex else {return}
             self.vm.selectedUnitFromIndex = index
-            self.vm.updateUnitFrom().subscribe() ~ self.rx.disposeBag
         }
 
         ddPartFrom.anchorView = partFromCell
         ddPartFrom.selectionAction = { [unowned self] (index: Int, item: String) in
             guard index != self.vm.selectedPartFromIndex else {return}
             self.vm.selectedPartFromIndex = index
-            self.vm.updatePartFrom().subscribe() ~ self.rx.disposeBag
         }
         
         ddToType.dataSource = vm.arrToTypes
@@ -124,14 +122,12 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
         ddUnitTo.selectionAction = { [unowned self] (index: Int, item: String) in
             guard index != self.vm.selectedUnitToIndex else {return}
             self.vm.selectedUnitToIndex = index
-            self.vm.updateUnitTo().subscribe() ~ self.rx.disposeBag
         }
 
         ddPartTo.anchorView = partToCell
         ddPartTo.selectionAction = { [unowned self] (index: Int, item: String) in
             guard index != self.vm.selectedPartToIndex else {return}
             self.vm.selectedPartToIndex = index
-            self.vm.updatePartTo().subscribe() ~ self.rx.disposeBag
         }
         
         refreshControl = UIRefreshControl()

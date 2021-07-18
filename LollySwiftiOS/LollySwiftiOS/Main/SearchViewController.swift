@@ -85,7 +85,6 @@ class SearchViewController: UIViewController, WKNavigationDelegate, UISearchBarD
         ddLang.selectIndex(vmSettings.selectedLangIndex)
         
         ddDictReference.dataSource = vmSettings.arrDictsReference.map(\.DICTNAME)
-        onUpdateDictReference()
     }
     
     func onUpdateDictReference() {
