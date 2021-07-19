@@ -39,6 +39,7 @@ struct SearchView: View {
                 .padding().background(Color.orange)
                 .pickerStyle(MenuPickerStyle())
                 .onChange(of: vm.selectedDictReferenceIndex) {
+                    if $0 == -1 {return}
                     print("selectedDictReferenceIndex=\($0)")
                     dictStore.dict = vm.arrDictsReference[$0]
                     dictStore.searchDict()

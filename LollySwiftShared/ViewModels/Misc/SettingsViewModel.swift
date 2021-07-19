@@ -219,6 +219,7 @@ class SettingsViewModel: NSObject, ObservableObject {
     override init() {
         super.init()
 
+#if !SWIFTUI
         func onChange(_ source: BehaviorRelay<Int>, _ selector: @escaping (Int) throws -> Observable<()>) {
             source.distinctUntilChanged().filter { self.initialized && $0 != -1 }.flatMap(selector).subscribe() ~ rx.disposeBag
         }
@@ -267,6 +268,7 @@ class SettingsViewModel: NSObject, ObservableObject {
             print("selectedPartToIndex=\(n)")
             return self.updatePartTo()
         }
+#endif
     }
 
     init(_ x: SettingsViewModel) {
