@@ -204,6 +204,9 @@ class SettingsViewModel: NSObject, ObservableObject {
 
     var toType_ = BehaviorRelay(value: UnitPartToType.to.rawValue)
     var toType: UnitPartToType { get { UnitPartToType(rawValue: toType_.value)! } set { toType_.accept(newValue.rawValue) } }
+    var toTypeTitle: Observable<String> {
+        toType_.map { SettingsViewModel.arrToTypes[$0] }
+    }
 
     var toTypeMovable: Bool { toType == .to }
     var unitToEnabled = BehaviorRelay(value: false)
@@ -214,7 +217,7 @@ class SettingsViewModel: NSObject, ObservableObject {
     var nextTitle = BehaviorRelay(value: "")
     var partFromEnabled = BehaviorRelay(value: false)
 
-    let arrToTypes = ["Unit", "Part", "To"]
+    static let arrToTypes = ["Unit", "Part", "To"]
     static let arrScopeWordFilters = ["Word", "Note"]
     static let arrScopePhraseFilters = ["Phrase", "Translation"]
     static let arrScopePatternFilters = ["Pattern", "Note", "Tags"]
@@ -280,7 +283,6 @@ class SettingsViewModel: NSObject, ObservableObject {
         }
 
         toType_.distinctUntilChanged().flatMap { n -> Observable<()> in
-            print("toType=\(n)")
             return self.updateToType()
         }.subscribe() ~ rx.disposeBag
 #endif
@@ -509,7 +511,7 @@ class SettingsViewModel: NSObject, ObservableObject {
     }
 
     func updateToType() -> Observable<()> {
-        print("updateToType: toType=\(toType)")
+        print("toType=\(toType)")
         let b = toType == .to
         unitToEnabled.accept(b)
         partToEnabled.accept(b && !isSinglePart)
@@ -533,7 +535,7 @@ class SettingsViewModel: NSObject, ObservableObject {
             toType = .unit
             return doUpdateSingleUnit()
         default:
-            return Observable.empty()
+            return Observable.just(())
         }
     }
 
@@ -550,7 +552,7 @@ class SettingsViewModel: NSObject, ObservableObject {
         } else if selectedUnitFrom > 1 {
             return Observable.zip(doUpdateUnitFrom(v: selectedUnitFrom - 1), doUpdatePartFrom(v: partCount), doUpdateUnitPartTo()).map {_ in }
         } else {
-            return Observable.empty()
+            return Observable.just(())
         }
     }
 
@@ -560,14 +562,14 @@ class SettingsViewModel: NSObject, ObservableObject {
             if n < unitCount {
                 return Observable.zip(doUpdateUnitFrom(v: n + 1), doUpdateUnitTo(v: n + 1)).map {_ in }
             } else {
-                return Observable.empty()
+                return Observable.just(())
             }
         } else if selectedPartFrom < partCount {
             return Observable.zip(doUpdatePartFrom(v: selectedPartFrom + 1), doUpdateUnitPartTo()).map {_ in }
         } else if selectedUnitFrom < unitCount {
             return Observable.zip(doUpdateUnitFrom(v: selectedUnitFrom + 1), doUpdatePartFrom(v: 1), doUpdateUnitPartTo()).map {_ in }
         } else {
-            return Observable.empty()
+            return Observable.just(())
         }
     }
     

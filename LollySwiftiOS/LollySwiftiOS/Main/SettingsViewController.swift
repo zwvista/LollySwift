@@ -100,11 +100,10 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
             self.vm.selectedPartFromIndex = index
         }
         
-        ddToType.dataSource = vm.arrToTypes
+        ddToType.dataSource = SettingsViewModel.arrToTypes
         ddToType.anchorView = btnToType
         ddToType.selectionAction = { [unowned self] (index: Int, item: String) in
             self.vm.toType = UnitPartToType(rawValue: index)!
-            self.btnToType.setTitle(item, for: .normal)
         }
 
         ddUnitTo.anchorView = unitToCell
@@ -129,6 +128,7 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
         _ = vm.nextTitle ~> btnNext.rx.title(for: .normal)
         _ = vm.partFromEnabled ~> lblPartFrom.rx.isEnabled
         _ = vm.partFromEnabled ~> lblPartFromTitle.rx.isEnabled
+        _ = vm.toTypeTitle ~> btnToType.rx.title(for: .normal)
 
         refreshControl = UIRefreshControl()
         refreshControl!.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
