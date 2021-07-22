@@ -97,7 +97,6 @@ class SettingsViewController: NSViewController, SettingsViewModelDelegate, NSTab
         acDictsNote.content = vm.arrDictsNote
         acDictsTranslation.content = vm.arrDictsTranslation
         acTextbooks.content = vm.arrTextbooks
-        onUpdateTextbook()
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {

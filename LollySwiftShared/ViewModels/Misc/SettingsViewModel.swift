@@ -369,7 +369,6 @@ class SettingsViewModel: NSObject, ObservableObject {
         selectedTextbookIndex = -1
         selectedMacVoiceIndex = -1
         selectediOSVoiceIndex = -1
-        delegate?.onUpdateLang()
         INFO_USTEXTBOOK = getUSInfo(name: MUSMapping.NAME_USTEXTBOOK)
         INFO_USDICTREFERENCE = getUSInfo(name: MUSMapping.NAME_USDICTREFERENCE)
         INFO_USDICTNOTE = getUSInfo(name: MUSMapping.NAME_USDICTNOTE)
@@ -407,6 +406,7 @@ class SettingsViewModel: NSObject, ObservableObject {
                 if self.arriOSVoices.isEmpty { self.arriOSVoices.append(MVoice()) }
                 self.selectedMacVoiceIndex = self.arrMacVoices.firstIndex { $0.ID == self.USMACVOICE } ?? 0
                 self.selectediOSVoiceIndex = self.arriOSVoices.firstIndex { $0.ID == self.USIOSVOICE } ?? 0
+                self.delegate?.onUpdateLang()
                 return Observable.zip((self.initialized ? Observable.just(()) : Observable.zip(self.updateTextbook(), self.updateDictReference(), self.updateDictsReference(), self.updateDictNote(), self.updateDictTranslation(), self.updateMacVoice(), self.updateiOSVoice()).map {_ in }), (!dirty ? Observable.just(()) : MUserSetting.update(info: self.INFO_USLANG, intValue: self.USLANG))).map {_ in }
             }
     }
@@ -415,11 +415,11 @@ class SettingsViewModel: NSObject, ObservableObject {
         let newVal = selectedTextbook.ID
         let dirty = USTEXTBOOK != newVal
         USTEXTBOOK = newVal
+        delegate?.onUpdateTextbook()
         selectedUnitFromIndex = -1
         selectedPartFromIndex = -1
         selectedUnitToIndex = -1
         selectedPartToIndex = -1
-        delegate?.onUpdateTextbook()
         INFO_USUNITFROM = getUSInfo(name: MUSMapping.NAME_USUNITFROM)
         INFO_USPARTFROM = getUSInfo(name: MUSMapping.NAME_USPARTFROM)
         INFO_USUNITTO = getUSInfo(name: MUSMapping.NAME_USUNITTO)
