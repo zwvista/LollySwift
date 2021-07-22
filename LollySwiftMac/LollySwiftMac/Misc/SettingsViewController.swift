@@ -124,8 +124,6 @@ class SettingsViewController: NSViewController, SettingsViewModelDelegate, NSTab
         acParts.content = vm.arrParts
         tfUnitsInAllFrom.stringValue = vm.unitsInAll
         tfUnitsInAllTo.stringValue = vm.unitsInAll
-        scToType.selectedSegment = vm.toType.rawValue
-        scToType.performClick(self)
     }
 
     deinit {
