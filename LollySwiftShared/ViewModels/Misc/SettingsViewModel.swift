@@ -279,18 +279,8 @@ class SettingsViewModel: NSObject, ObservableObject {
             return self.updatePartTo()
         }
 
-        toType_.flatMap { n -> Observable<()> in
-            print("selectedPartToIndex=\(n)")
-            let b = self.toType == .to
-            self.unitToEnabled.accept(b)
-            self.partToEnabled.accept(b && !self.isSinglePart)
-            self.previousEnabled.accept(!b)
-            self.nextEnabled.accept(!b)
-            let b2 = self.toType != .unit
-            let t = !b2 ? "Unit" : "Part"
-            self.previousTitle.accept("Previous " + t)
-            self.nextTitle.accept("Next " + t)
-            self.partFromEnabled.accept(b2 && !self.isSinglePart)
+        toType_.distinctUntilChanged().flatMap { n -> Observable<()> in
+            print("toType=\(n)")
             return self.updateToType()
         }.subscribe() ~ rx.disposeBag
 #endif
@@ -372,6 +362,7 @@ class SettingsViewModel: NSObject, ObservableObject {
         let newVal = selectedLang.ID
         let dirty = USLANG != newVal
         USLANG = newVal
+        toType = .to
         selectedDictReferenceIndex = -1
         selectedDictNoteIndex = -1
         selectedDictTranslationIndex = -1
@@ -437,8 +428,12 @@ class SettingsViewModel: NSObject, ObservableObject {
         selectedPartFromIndex = arrParts.firstIndex { $0.value == USPARTFROM } ?? 0
         selectedUnitToIndex = arrUnits.firstIndex { $0.value == USUNITTO } ?? 0
         selectedPartToIndex = arrParts.firstIndex { $0.value == USPARTTO } ?? 0
-        toType = isSingleUnit ? .unit : isSingleUnitPart ? .part : .to
-        return !dirty ? Observable.just(()) : MUserSetting.update(info: INFO_USTEXTBOOK, intValue: USTEXTBOOK)
+        let newVal2: UnitPartToType = isSingleUnit ? .unit : isSingleUnitPart ? .part : .to
+        let dirty2 = newVal2 != toType
+        toType = newVal2
+        return (!dirty ? Observable.just(()) : MUserSetting.update(info: INFO_USTEXTBOOK, intValue: USTEXTBOOK)).flatMap {
+            dirty2 ? Observable.just(()) : self.updateToType()
+        }
     }
 
     func updateDictReference() -> Observable<()> {
@@ -488,34 +483,45 @@ class SettingsViewModel: NSObject, ObservableObject {
     }
 
     func updateUnitFrom() -> Observable<()> {
-        doUpdateUnitFrom(v: selectedUnitFrom).concat(
-            toType == .unit ? doUpdateSingleUnit() :
-            toType == .part || isInvalidUnitPart ? doUpdateUnitPartTo() :
-            Observable.empty()
-        )
+        doUpdateUnitFrom(v: selectedUnitFrom).flatMap { _ -> Observable<()> in
+            self.toType == .unit ? self.doUpdateSingleUnit() :
+            self.toType == .part || self.isInvalidUnitPart ? self.doUpdateUnitPartTo() :
+            Observable.just(())
+        }
     }
 
     func updatePartFrom() -> Observable<()> {
-        doUpdatePartFrom(v: selectedPartFrom).concat(
-            toType == .part || isInvalidUnitPart ? doUpdateUnitPartTo() : Observable.empty()
-        )
+        doUpdatePartFrom(v: selectedPartFrom).flatMap { _ -> Observable<()> in
+            self.toType == .part || self.isInvalidUnitPart ? self.doUpdateUnitPartTo() : Observable.just(())
+        }
     }
 
     func updateUnitTo() -> Observable<()> {
-        doUpdateUnitTo(v: selectedUnitTo).concat(
-            isInvalidUnitPart ? doUpdateUnitPartFrom() : Observable.empty()
-        )
+        doUpdateUnitTo(v: selectedUnitTo).flatMap { _ -> Observable<()> in
+            self.isInvalidUnitPart ? self.doUpdateUnitPartFrom() : Observable.just(())
+        }
     }
 
     func updatePartTo() -> Observable<()> {
-        doUpdatePartTo(v: selectedPartTo).concat(
-            isInvalidUnitPart ? doUpdateUnitPartFrom() : Observable.empty()
-        )
+        doUpdatePartTo(v: selectedPartTo).flatMap { _ -> Observable<()> in
+            self.isInvalidUnitPart ? self.doUpdateUnitPartFrom() : Observable.just(())
+        }
     }
 
     func updateToType() -> Observable<()> {
-        toType == .unit ? doUpdateSingleUnit() :
-            toType == .part ? doUpdateUnitPartTo() : Observable.empty()
+        print("updateToType: toType=\(toType)")
+        let b = toType == .to
+        unitToEnabled.accept(b)
+        partToEnabled.accept(b && !isSinglePart)
+        previousEnabled.accept(!b)
+        nextEnabled.accept(!b)
+        let b2 = toType != .unit
+        let t = !b2 ? "Unit" : "Part"
+        previousTitle.accept("Previous " + t)
+        nextTitle.accept("Next " + t)
+        partFromEnabled.accept(b2 && !isSinglePart)
+        return toType == .unit ? doUpdateSingleUnit() :
+        toType == .part ? doUpdateUnitPartTo() : Observable.just(())
     }
 
     func toggleToType(part: Int) -> Observable<()> {
@@ -579,7 +585,7 @@ class SettingsViewModel: NSObject, ObservableObject {
 
     private func doUpdateUnitFrom(v: Int) -> Observable<()> {
         let dirty = USUNITFROM != v
-        if !dirty { return Observable.empty() }
+        if !dirty { return Observable.just(()) }
         USUNITFROM = v
         selectedUnitFromIndex = arrUnits.firstIndex { $0.value == v } ?? 0
         return MUserSetting.update(info: INFO_USUNITFROM, intValue: USUNITFROM).do(onNext: { self.delegate?.onUpdateUnitFrom() })
@@ -587,7 +593,7 @@ class SettingsViewModel: NSObject, ObservableObject {
 
     private func doUpdatePartFrom(v: Int) -> Observable<()> {
         let dirty = USPARTFROM != v
-        if !dirty { return Observable.empty() }
+        if !dirty { return Observable.just(()) }
         USPARTFROM = v
         selectedPartFromIndex = arrParts.firstIndex { $0.value == v }
             ?? 0
@@ -596,7 +602,7 @@ class SettingsViewModel: NSObject, ObservableObject {
 
     private func doUpdateUnitTo(v: Int) -> Observable<()> {
         let dirty = USUNITTO != v
-        if !dirty { return Observable.empty() }
+        if !dirty { return Observable.just(()) }
         USUNITTO = v
         selectedUnitToIndex = arrUnits.firstIndex { $0.value == v } ?? 0
         return MUserSetting.update(info: INFO_USUNITTO, intValue: USUNITTO).do(onNext: { self.delegate?.onUpdateUnitTo() })
@@ -604,7 +610,7 @@ class SettingsViewModel: NSObject, ObservableObject {
 
     private func doUpdatePartTo(v: Int) -> Observable<()> {
         let dirty = USPARTTO != v
-        if !dirty { return Observable.empty() }
+        if !dirty { return Observable.just(()) }
         USPARTTO = v
         selectedPartToIndex = arrParts.firstIndex { $0.value == v } ?? 0
         return MUserSetting.update(info: INFO_USPARTTO, intValue: USPARTTO).do(onNext: { self.delegate?.onUpdatePartTo() })
