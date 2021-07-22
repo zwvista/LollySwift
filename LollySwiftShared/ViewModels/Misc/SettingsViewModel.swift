@@ -204,11 +204,9 @@ class SettingsViewModel: NSObject, ObservableObject {
 
     var toType_ = BehaviorRelay(value: UnitPartToType.to.rawValue)
     var toType: UnitPartToType { get { UnitPartToType(rawValue: toType_.value)! } set { toType_.accept(newValue.rawValue) } }
-    var toTypeTitle: Observable<String> {
-        toType_.map { SettingsViewModel.arrToTypes[$0] }
-    }
 
     var toTypeMovable: Bool { toType == .to }
+    var toTypeTitle = BehaviorRelay(value: "")
     var unitToEnabled = BehaviorRelay(value: false)
     var partToEnabled = BehaviorRelay(value: false)
     var previousEnabled = BehaviorRelay(value: false)
@@ -512,6 +510,7 @@ class SettingsViewModel: NSObject, ObservableObject {
 
     func updateToType() -> Observable<()> {
         print("toType=\(toType)")
+        toTypeTitle.accept(SettingsViewModel.arrToTypes[toType_.value])
         let b = toType == .to
         unitToEnabled.accept(b)
         partToEnabled.accept(b && !isSinglePart)
