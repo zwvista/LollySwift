@@ -105,17 +105,6 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
         ddToType.selectionAction = { [unowned self] (index: Int, item: String) in
             self.vm.toType = UnitPartToType(rawValue: index)!
             self.btnToType.setTitle(item, for: .normal)
-            let b = self.vm.toType == .to
-            self.lblUnitTo.isEnabled = b
-            self.lblUnitToTitle.isEnabled = self.lblUnitTo.isEnabled
-            self.lblPartTo.isEnabled = b && !self.vm.isSinglePart
-            self.lblPartToTitle.isEnabled = self.lblPartTo.isEnabled
-            self.btnPrevious.isEnabled = !b
-            self.btnNext.isEnabled = !b
-            let b2 = self.vm.toType != .unit
-            self.lblPartFrom.isEnabled = b2 && !self.vm.isSinglePart
-            self.lblPartFromTitle.isEnabled = self.lblPartFrom.isEnabled
-            self.vm.updateToType().subscribe() ~ self.rx.disposeBag
         }
 
         ddUnitTo.anchorView = unitToCell
@@ -129,7 +118,18 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
             guard index != self.vm.selectedPartToIndex else {return}
             self.vm.selectedPartToIndex = index
         }
-        
+
+        _ = vm.unitToEnabled ~> lblUnitTo.rx.isEnabled
+        _ = vm.unitToEnabled ~> lblUnitToTitle.rx.isEnabled
+        _ = vm.partToEnabled ~> lblPartTo.rx.isEnabled
+        _ = vm.partToEnabled ~> lblPartToTitle.rx.isEnabled
+        _ = vm.previousEnabled ~> btnPrevious.rx.isEnabled
+        _ = vm.nextEnabled ~> btnNext.rx.isEnabled
+        _ = vm.previousTitle ~> btnPrevious.rx.title(for: .normal)
+        _ = vm.nextTitle ~> btnNext.rx.title(for: .normal)
+        _ = vm.partFromEnabled ~> lblPartFrom.rx.isEnabled
+        _ = vm.partFromEnabled ~> lblPartFromTitle.rx.isEnabled
+
         refreshControl = UIRefreshControl()
         refreshControl!.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         refresh(refreshControl!)
@@ -159,11 +159,11 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
             switch indexPath.row {
             case 0:
                 ddUnitFrom.show()
-            case 1 where vm.toType != .unit:
+            case 1 where vm.unitToEnabled.value:
                 ddPartFrom.show()
-            case 3 where vm.toType == .to:
+            case 3 where vm.partFromEnabled.value:
                 ddUnitTo.show()
-            case 4 where vm.toType == .to:
+            case 4 where vm.partToEnabled.value:
                 ddPartTo.show()
             default:
                 break
