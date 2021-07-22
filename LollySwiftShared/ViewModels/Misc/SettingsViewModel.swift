@@ -202,9 +202,19 @@ class SettingsViewModel: NSObject, ObservableObject {
 #endif
     var selectedPartTo: Int { arrParts.indices ~= selectedPartToIndex ? arrParts[selectedPartToIndex].value : 0 }
 
+    var toType_ = BehaviorRelay(value: UnitPartToType.to.rawValue)
+    var toType: UnitPartToType { get { UnitPartToType(rawValue: toType_.value)! } set { toType_.accept(newValue.rawValue) } }
+
+    var toTypeMovable: Bool { toType == .to }
+    var unitToEnabled = BehaviorRelay(value: false)
+    var partToEnabled = BehaviorRelay(value: false)
+    var previousEnabled = BehaviorRelay(value: false)
+    var nextEnabled = BehaviorRelay(value: false)
+    var previousTitle = BehaviorRelay(value: "")
+    var nextTitle = BehaviorRelay(value: "")
+    var partFromEnabled = BehaviorRelay(value: false)
+
     let arrToTypes = ["Unit", "Part", "To"]
-    var toType: UnitPartToType = .to
-    
     static let arrScopeWordFilters = ["Word", "Note"]
     static let arrScopePhraseFilters = ["Phrase", "Translation"]
     static let arrScopePatternFilters = ["Pattern", "Note", "Tags"]
@@ -268,6 +278,19 @@ class SettingsViewModel: NSObject, ObservableObject {
             print("selectedPartToIndex=\(n)")
             return self.updatePartTo()
         }
+
+        toType_.map { n in
+            let b = n == UnitPartToType.to.rawValue
+            self.unitToEnabled.accept(b)
+            self.partToEnabled.accept(b && !self.isSinglePart)
+            self.previousEnabled.accept(!b)
+            self.nextEnabled.accept(!b)
+            let b2 = n != UnitPartToType.unit.rawValue
+            let t = !b2 ? "Unit" : "Part"
+            self.previousTitle.accept("Previous " + t)
+            self.nextTitle.accept("Next " + t)
+            self.partFromEnabled.accept(b2 && !self.isSinglePart)
+        }.subscribe() ~ rx.disposeBag
 #endif
     }
 
@@ -296,7 +319,6 @@ class SettingsViewModel: NSObject, ObservableObject {
         arrTextbooks = x.arrTextbooks
         arrTextbookFilters = x.arrTextbookFilters
         arrWebTextbookFilters = x.arrWebTextbookFilters
-        toType = x.toType
         arrAutoCorrect = x.arrAutoCorrect
         arrDictTypes = x.arrDictTypes
         delegate = x.delegate
@@ -312,6 +334,7 @@ class SettingsViewModel: NSObject, ObservableObject {
         selectedPartFromIndex = x.selectedPartFromIndex
         selectedUnitToIndex = x.selectedUnitToIndex
         selectedPartToIndex = x.selectedPartToIndex
+        toType = x.toType
         initialized = x.initialized
     }
     

@@ -54,6 +54,14 @@ class SettingsViewController: NSViewController, SettingsViewModelDelegate, NSTab
         _ = vm.selectedPartFromIndex_ <~> pubPartFrom.rx.selectedItemIndex
         _ = vm.selectedUnitToIndex_ <~> pubUnitTo.rx.selectedItemIndex
         _ = vm.selectedPartToIndex_ <~> pubPartTo.rx.selectedItemIndex
+        _ = vm.toType_ <~> scToType.rx.selectedSegment
+        _ = vm.unitToEnabled ~> pubUnitTo.rx.isEnabled
+        _ = vm.partToEnabled ~> pubPartTo.rx.isEnabled
+        _ = vm.previousEnabled ~> btnPrevious.rx.isEnabled
+        _ = vm.nextEnabled ~> btnNext.rx.isEnabled
+        _ = vm.previousTitle ~> btnPrevious.rx.title
+        _ = vm.nextTitle ~> btnNext.rx.title
+        _ = vm.partFromEnabled ~> pubPartFrom.rx.isEnabled
 
         vm.getData().subscribe() ~ rx.disposeBag
     }
@@ -69,21 +77,6 @@ class SettingsViewController: NSViewController, SettingsViewModelDelegate, NSTab
             if let wc = w.windowController as? LollyProtocol { wc.settingsChanged() }
             if sender === btnApplyCurrent { b.pointee = true }
         }
-    }
-    
-    @IBAction func scToTypeClicked(_ sender: AnyObject) {
-        vm.toType = UnitPartToType(rawValue: scToType.selectedSegment)!
-        let b = vm.toType == .to
-        pubUnitTo.isEnabled = b
-        pubPartTo.isEnabled = b && !vm.isSinglePart
-        btnPrevious.isEnabled = !b
-        btnNext.isEnabled = !b
-        let b2 = vm.toType != .unit
-        let t = !b2 ? "Unit" : "Part"
-        btnPrevious.title = "Previous " + t
-        btnNext.title = "Next " + t
-        pubPartFrom.isEnabled = b2 && !vm.isSinglePart
-        vm.updateToType().subscribe() ~ rx.disposeBag
     }
 
     @IBAction func previousUnitPart(_ sender: AnyObject) {
