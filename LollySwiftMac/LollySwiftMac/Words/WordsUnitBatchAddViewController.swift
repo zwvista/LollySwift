@@ -36,7 +36,7 @@ class WordsUnitBatchAddViewController: NSViewController {
         _ = itemEdit.WORDS <~> tvWords.rx.string
         btnOK.rx.tap.flatMap { [unowned self] _ in
             self.vmEdit.onOK()
-        }.subscribe(onNext: { [unowned self] in
+        }.subscribe(onCompleted: { [unowned self] in
             self.complete?()
             self.dismiss(self.btnOK)
         }) ~ rx.disposeBag

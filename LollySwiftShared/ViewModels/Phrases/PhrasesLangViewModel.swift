@@ -16,12 +16,13 @@ class PhrasesLangViewModel: PhrasesBaseViewModel {
 
     public init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> ()) {
         super.init(settings: settings, needCopy: needCopy)
-        reload().subscribe(onNext: { complete() }) ~ rx.disposeBag
+        reload().subscribe(onCompleted: { complete() }) ~ rx.disposeBag
     }
     
-    func reload() -> Observable<()> {
-        MLangPhrase.getDataByLang(vmSettings.selectedTextbook.LANGID).map {
+    func reload() -> Completable {
+        MLangPhrase.getDataByLang(vmSettings.selectedTextbook.LANGID).flatMapCompletable {
             self.arrPhrases = $0
+            return Completable.empty()
         }
     }
 
@@ -36,17 +37,18 @@ class PhrasesLangViewModel: PhrasesBaseViewModel {
         }
     }
     
-    static func update(item: MLangPhrase) -> Observable<()> {
+    static func update(item: MLangPhrase) -> Completable {
         MLangPhrase.update(item: item)
     }
 
-    static func create(item: MLangPhrase) -> Observable<()> {
-        MLangPhrase.create(item: item).map {
+    static func create(item: MLangPhrase) -> Completable {
+        MLangPhrase.create(item: item).flatMapCompletable {
             item.ID = $0
+            return Completable.empty()
         }
     }
     
-    static func delete(item: MLangPhrase) -> Observable<()> {
+    static func delete(item: MLangPhrase) -> Completable {
         MLangPhrase.delete(item: item)
     }
 
@@ -60,9 +62,10 @@ class PhrasesLangViewModel: PhrasesBaseViewModel {
         super.init(settings: settings, needCopy: false)
     }
     
-    func getPhrases(wordid: Int) -> Observable<()> {
-        MWordPhrase.getPhrasesByWordId(wordid).map {
+    func getPhrases(wordid: Int) -> Completable {
+        MWordPhrase.getPhrasesByWordId(wordid).flatMapCompletable {
             self.arrPhrases = $0
+            return Completable.empty()
         }
     }
 }

@@ -96,11 +96,11 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
         guard oldValue != newValue else {return}
         item.setValue(newValue, forKey: key)
         if tv === tvPatterns {
-            PatternsViewModel.update(item: item as! MPattern).subscribe(onNext: {
+            PatternsViewModel.update(item: item as! MPattern).subscribe(onCompleted: {
                 tv.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvPatterns.tableColumns.count))
             }) ~ rx.disposeBag
         } else if tv === tvWebPages {
-            PatternsWebPagesViewModel.updateWebPage(item: item as! MPatternWebPage).subscribe(onNext: {
+            PatternsWebPagesViewModel.updateWebPage(item: item as! MPatternWebPage).subscribe(onCompleted: {
                 tv.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvPatterns.tableColumns.count))
             }) ~ rx.disposeBag
         }
@@ -126,7 +126,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
             let row = tvPatterns.selectedRow
             vm.selectedPatternItem = row == -1 ? nil : arrPatterns[row]
             vmWP.selectedPatternItem = vm.selectedPatternItem
-            vmWP.getWebPages().subscribe(onNext: {
+            vmWP.getWebPages().subscribe(onCompleted: {
                 self.tvWebPages.reloadData()
                 if self.tvWebPages.numberOfRows > 0 {
                     self.tvWebPages.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
@@ -189,7 +189,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     }
     
     @IBAction func refreshTableView(_ sender: AnyObject) {
-        vm.reload().subscribe(onNext: {
+        vm.reload().subscribe(onCompleted: {
             self.doRefresh()
         }) ~ rx.disposeBag
     }

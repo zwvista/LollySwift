@@ -17,32 +17,32 @@ class MWordFami: NSObject, Codable {
     dynamic var CORRECT = 0
     dynamic var TOTAL = 0
 
-    static func getDataByWord(wordid: Int) -> Observable<[MWordFami]> {
+    static func getDataByWord(wordid: Int) -> Single<[MWordFami]> {
         // SQL: SELECT * FROM WORDSFAMI WHERE USERID=? AND WORDID=?
         let url = "\(CommonApi.urlAPI)WORDSFAMI?filter=USERID,eq,\(globalUser.userid)&filter=WORDID,eq,\(wordid)"
         return RestApi.getRecords(url: url)
     }
 
-    private static func update(item: MWordFami) -> Observable<()> {
+    private static func update(item: MWordFami) -> Completable {
         // SQL: UPDATE WORDSFAMI SET USERID=?, WORDID=?, WHERE ID=?
         let url = "\(CommonApi.urlAPI)WORDSFAMI/\(item.ID)"
-        return RestApi.update(url: url, body: try! item.toJSONString()!).map { print($0) }
+        return RestApi.update(url: url, body: try! item.toJSONString()!).flatMapCompletable { print($0); return Completable.empty() }
     }
     
-    private static func create(item: MWordFami) -> Observable<Int> {
+    private static func create(item: MWordFami) -> Single<Int> {
         // SQL: INSERT INTO WORDSFAMI (USERID, WORDID) VALUES (?,?)
         let url = "\(CommonApi.urlAPI)WORDSFAMI"
-        return RestApi.create(url: url, body: try! item.toJSONString()!).map { Int($0)! }.do(onNext: { print($0) })
+        return RestApi.create(url: url, body: try! item.toJSONString()!).map { Int($0)! }.do(onSuccess: { print($0) })
     }
     
-    static func delete(_ id: Int) -> Observable<()> {
+    static func delete(_ id: Int) -> Completable {
         // SQL: DELETE WORDSFAMI WHERE ID=?
         let url = "\(CommonApi.urlAPI)WORDSFAMI/\(id)"
-        return RestApi.delete(url: url).map { print($0) }
+        return RestApi.delete(url: url).flatMapCompletable { print($0); return Completable.empty() }
     }
     
-    static func update(wordid: Int, isCorrect: Bool) -> Observable<MWordFami> {
-        return getDataByWord(wordid: wordid).flatMap { arr -> Observable<MWordFami> in
+    static func update(wordid: Int, isCorrect: Bool) -> Single<MWordFami> {
+        return getDataByWord(wordid: wordid).flatMap { arr -> Single<MWordFami> in
             let item = MWordFami()
             item.USERID = globalUser.userid
             item.WORDID = wordid
@@ -54,7 +54,7 @@ class MWordFami: NSObject, Codable {
                 item.ID = arr[0].ID
                 item.CORRECT = arr[0].CORRECT + (isCorrect ? 1 : 0)
                 item.TOTAL = arr[0].TOTAL + 1
-                return update(item: item).map { item }
+                return update(item: item).andThen(Single.just(item))
             }
         }
     }

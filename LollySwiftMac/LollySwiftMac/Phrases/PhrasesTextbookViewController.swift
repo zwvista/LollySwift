@@ -48,20 +48,20 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
     
     override func endEditing(row: Int) {
         let item = arrPhrases[row]
-        vm.update(item: item).subscribe(onNext: {_ in 
+        vm.update(item: item).subscribe(onCompleted: {
             self.tvPhrases.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvPhrases.tableColumns.count))
         }) ~ rx.disposeBag
     }
 
     override func deletePhrase(row: Int) {
         let item = arrPhrases[row]
-        PhrasesUnitViewModel.delete(item: item).subscribe(onNext: {
+        PhrasesUnitViewModel.delete(item: item).subscribe(onCompleted: {
             self.doRefresh()
         }) ~ rx.disposeBag
     }
 
     @IBAction func refreshTableView(_ sender: AnyObject) {
-        vm.reload().subscribe(onNext: {
+        vm.reload().subscribe(onCompleted: {
             self.doRefresh()
         }) ~ rx.disposeBag
     }

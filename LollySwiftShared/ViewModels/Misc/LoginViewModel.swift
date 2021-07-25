@@ -20,7 +20,7 @@ class LoginViewModel: NSObject, ObservableObject {
     let password = BehaviorRelay(value: "")
 #endif
 
-    func login(username: String, password: String) -> Observable<String> {
+    func login(username: String, password: String) -> Single<String> {
         MUser.getData(username: username, password: password)
             .map {
                 $0.isEmpty ? "" : $0[0].USERID

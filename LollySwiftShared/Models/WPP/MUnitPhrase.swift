@@ -41,79 +41,79 @@ class MUnitPhrase: NSObject, Codable, MPhraseProtocol {
     var PARTSTR: String { textbook.PARTSTR(PART) }
     var UNITPARTSEQNUM: String { "\(UNITSTR)\n\(PARTSTR)\n\(SEQNUM)" }
 
-    static func getDataByTextbook(_ textbook: MTextbook, unitPartFrom: Int, unitPartTo: Int) -> Observable<[MUnitPhrase]> {
+    static func getDataByTextbook(_ textbook: MTextbook, unitPartFrom: Int, unitPartTo: Int) -> Single<[MUnitPhrase]> {
         // SQL: SELECT * FROM VUNITPHRASES WHERE TEXTBOOKID=? AND UNITPART BETWEEN ? AND ? ORDER BY UNITPART,SEQNUM
         let url = "\(CommonApi.urlAPI)VUNITPHRASES?filter=TEXTBOOKID,eq,\(textbook.ID)&filter=UNITPART,bt,\(unitPartFrom),\(unitPartTo)&order=UNITPART&order=SEQNUM"
-        let o: Observable<[MUnitPhrase]> = RestApi.getRecords(url: url)
-        return o.do(onNext: { arr in
+        let o: Single<[MUnitPhrase]> = RestApi.getRecords(url: url)
+        return o.do(onSuccess: { arr in
             arr.forEach { $0.textbook = textbook }
         })
     }
     
-    static func getDataByTextbook(_ textbook: MTextbook) -> Observable<[MUnitPhrase]> {
+    static func getDataByTextbook(_ textbook: MTextbook) -> Single<[MUnitPhrase]> {
         // SQL: SELECT * FROM VUNITPHRASES WHERE TEXTBOOKID=? ORDER BY PHRASEID
         let url = "\(CommonApi.urlAPI)VUNITPHRASES?filter=TEXTBOOKID,eq,\(textbook.ID)&order=PHRASEID"
-        let o: Observable<[MUnitPhrase]> = RestApi.getRecords(url: url)
-        return o.do(onNext: { arr in
+        let o: Single<[MUnitPhrase]> = RestApi.getRecords(url: url)
+        return o.do(onSuccess: { arr in
             arr.forEach { $0.textbook = textbook }
         })
     }
 
-    private static func setTextbook(_ o: Observable<[MUnitPhrase]>, arrTextbooks: [MTextbook]) -> Observable<[MUnitPhrase]> {
+    private static func setTextbook(_ o: Single<[MUnitPhrase]>, arrTextbooks: [MTextbook]) -> Single<[MUnitPhrase]> {
         return o.map { arr in
             Dictionary(grouping: arr, by: \.PHRASEID).values.compactMap { $0[0] }
-        }.do(onNext: { arr in
+        }.do(onSuccess: { arr in
             arr.forEach { row in
                 row.textbook = arrTextbooks.first { $0.ID == row.TEXTBOOKID }!
             }
         })
     }
 
-    static func getDataByLang(_ langid: Int, arrTextbooks: [MTextbook]) -> Observable<[MUnitPhrase]> {
+    static func getDataByLang(_ langid: Int, arrTextbooks: [MTextbook]) -> Single<[MUnitPhrase]> {
         // SQL: SELECT * FROM VTEXTBOOKPHRASES WHERE LANGID=?
         let url = "\(CommonApi.urlAPI)VUNITPHRASES?filter=LANGID,eq,\(langid)&order=TEXTBOOKID&order=UNIT&order=PART&order=SEQNUM"
         return setTextbook(RestApi.getRecords(url: url), arrTextbooks: arrTextbooks)
     }
     
-    static func getDataById(_ id: Int, arrTextbooks: [MTextbook]) -> Observable<MUnitPhrase?> {
+    static func getDataById(_ id: Int, arrTextbooks: [MTextbook]) -> Single<MUnitPhrase?> {
         // SQL: SELECT * FROM VUNITPHRASES WHERE ID=?
         let url = "\(CommonApi.urlAPI)VUNITPHRASES?filter=ID,eq,\(id)"
         return setTextbook(RestApi.getRecords(url: url), arrTextbooks: arrTextbooks).map { $0.isEmpty ? nil : $0[0] }
     }
 
-    static func getDataByLangPhrase(langid: Int, phrase: String, arrTextbooks: [MTextbook]) -> Observable<[MUnitPhrase]> {
+    static func getDataByLangPhrase(langid: Int, phrase: String, arrTextbooks: [MTextbook]) -> Single<[MUnitPhrase]> {
         // SQL: SELECT * FROM VUNITPHRASES WHERE LANGID=? AND PHRASE=?
         let url = "\(CommonApi.urlAPI)VUNITPHRASES?filter=LANGID,eq,\(langid)&filter=PHRASE,eq,\(phrase.urlEncoded())"
         // Api is case insensitive
         return setTextbook(RestApi.getRecords(url: url).map { $0.filter { $0.PHRASE == phrase } }, arrTextbooks: arrTextbooks)
     }
 
-    static func update(_ id: Int, seqnum: Int) -> Observable<()> {
+    static func update(_ id: Int, seqnum: Int) -> Completable {
         // SQL: UPDATE UNITPHRASES SET SEQNUM=? WHERE ID=?
         let url = "\(CommonApi.urlAPI)UNITPHRASES/\(id)"
         let body = "SEQNUM=\(seqnum)"
-        return RestApi.update(url: url, body: body).map { print($0) }
+        return RestApi.update(url: url, body: body).flatMapCompletable { print($0); return Completable.empty() }
     }
     
-    static func update(item: MUnitPhrase) -> Observable<()> {
+    static func update(item: MUnitPhrase) -> Completable {
         // SQL: CALL UNITPHRASES_UPDATE
         let url = "\(CommonApi.urlSP)UNITPHRASES_UPDATE"
         let parameters = item.toParameters()
-        return RestApi.callSP(url: url, parameters: parameters).map { print($0) }
+        return RestApi.callSP(url: url, parameters: parameters).flatMapCompletable { print($0); return Completable.empty() }
     }
 
-    static func create(item: MUnitPhrase) -> Observable<Int> {
+    static func create(item: MUnitPhrase) -> Single<Int> {
         // SQL: CALL UNITPHRASES_CREATE
         let url = "\(CommonApi.urlSP)UNITPHRASES_CREATE"
         let parameters = item.toParameters()
         return RestApi.callSP(url: url, parameters: parameters).map { print($0); return Int($0.NEW_ID!)! }
     }
     
-    static func delete(item: MUnitPhrase) -> Observable<()> {
+    static func delete(item: MUnitPhrase) -> Completable {
         // SQL: CALL UNITPHRASES_DELETE
         let url = "\(CommonApi.urlSP)UNITPHRASES_DELETE"
         let parameters = item.toParameters()
-        return RestApi.callSP(url: url, parameters: parameters).map { print($0) }
+        return RestApi.callSP(url: url, parameters: parameters).flatMapCompletable { print($0); return Completable.empty() }
     }
 }
 

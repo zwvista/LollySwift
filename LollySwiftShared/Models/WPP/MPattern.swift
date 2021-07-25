@@ -23,48 +23,48 @@ class MPattern: NSObject, Codable {
     override init() {
     }
 
-    static func getDataByLang(_ langid: Int) -> Observable<[MPattern]> {
+    static func getDataByLang(_ langid: Int) -> Single<[MPattern]> {
         // SQL: SELECT * FROM PATTERNS WHERE LANGID=?
         let url = "\(CommonApi.urlAPI)PATTERNS?filter=LANGID,eq,\(langid)&order=PATTERN"
         return RestApi.getRecords(url: url)
     }
     
-    static func getDataById(_ id: Int) -> Observable<[MPattern]> {
+    static func getDataById(_ id: Int) -> Single<[MPattern]> {
         // SQL: SELECT * FROM PATTERNS WHERE ID=?
         let url = "\(CommonApi.urlAPI)PATTERNS?filter=ID,eq,\(id)"
         return RestApi.getRecords(url: url)
     }
     
-    static func update(item: MPattern) -> Observable<()> {
+    static func update(item: MPattern) -> Completable {
         // SQL: UPDATE PATTERNS SET PATTERN=?, NOTE=?, TAGS=? WHERE ID=?
         let url = "\(CommonApi.urlAPI)PATTERNS/\(item.ID)"
-        return RestApi.update(url: url, body: try! item.toJSONString()!).map { print($0) }
+        return RestApi.update(url: url, body: try! item.toJSONString()!).flatMapCompletable { print($0); return Completable.empty() }
     }
 
-    static func create(item: MPattern) -> Observable<Int> {
+    static func create(item: MPattern) -> Single<Int> {
         // SQL: INSERT INTO PATTERNS (LANGID, PATTERN, NOTE, TAGS) VALUES (?,?,?,?)
         let url = "\(CommonApi.urlAPI)PATTERNS"
-        return RestApi.create(url: url, body: try! item.toJSONString()!).map { Int($0)! }.do(onNext: { print($0) })
+        return RestApi.create(url: url, body: try! item.toJSONString()!).map { Int($0)! }.do(onSuccess: { print($0) })
     }
     
-    static func delete(_ id: Int) -> Observable<()> {
+    static func delete(_ id: Int) -> Completable {
         // SQL: DELETE PATTERNS WHERE ID=?
         let url = "\(CommonApi.urlAPI)PATTERNS/\(id)"
-        return RestApi.delete(url: url).map { print($0) }
+        return RestApi.delete(url: url).flatMapCompletable { print($0); return Completable.empty() }
     }
     
-    static func mergePatterns(item: MPattern) -> Observable<()> {
+    static func mergePatterns(item: MPattern) -> Completable {
         // SQL: PATTERNS_MERGE
         let url = "\(CommonApi.urlSP)PATTERNS_MERGE"
         let parameters = item.toParameters()
-        return RestApi.callSP(url: url, parameters: parameters).map { print($0) }
+        return RestApi.callSP(url: url, parameters: parameters).flatMapCompletable { print($0); return Completable.empty() }
     }
     
-    static func splitPattern(item: MPattern) -> Observable<()> {
+    static func splitPattern(item: MPattern) -> Completable {
         // SQL: PATTERNS_SPLIT
         let url = "\(CommonApi.urlSP)PATTERNS_SPLIT"
         let parameters = item.toParameters()
-        return RestApi.callSP(url: url, parameters: parameters).map { print($0) }
+        return RestApi.callSP(url: url, parameters: parameters).flatMapCompletable { print($0); return Completable.empty() }
     }
 }
 

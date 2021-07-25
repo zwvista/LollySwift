@@ -17,7 +17,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let synth = NSSpeechSynthesizer()
 
     func setup() {
-        AppDelegate.theSettingsViewModel.getData().subscribe(onNext: {
+        AppDelegate.theSettingsViewModel.getData().subscribe(onCompleted: {
             //self.search(self)
             //self.editBlog(self)
             self.wordsInUnit(self)

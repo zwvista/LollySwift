@@ -65,13 +65,13 @@ class PhrasesReviewViewModel: NSObject {
         onRepeatHidden.accept(isTestMode)
         checkPrevHidden.accept(isTestMode)
         if options.mode == .textbook {
-            MUnitPhrase.getDataByTextbook(vmSettings.selectedTextbook).subscribe(onNext: { arr in
+            MUnitPhrase.getDataByTextbook(vmSettings.selectedTextbook).subscribe(onSuccess: { arr in
                 let cnt = min(self.options.reviewCount, arr.count)
                 self.arrPhrases = Array(arr.shuffled()[0..<cnt])
                 f()
             }) ~ self.rx.disposeBag
         } else {
-            MUnitPhrase.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO).subscribe(onNext: {
+            MUnitPhrase.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO).subscribe(onSuccess: {
                 self.arrPhrases = $0
                 let count = self.count
                 let from = count * (self.options.groupSelected - 1) / self.options.groupCount

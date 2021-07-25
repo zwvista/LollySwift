@@ -35,36 +35,36 @@ class MLangWord: NSObject, Codable, MWordProtocol {
         super.init()
     }
 
-    static func getDataByLang(_ langid: Int) -> Observable<[MLangWord]> {
+    static func getDataByLang(_ langid: Int) -> Single<[MLangWord]> {
         // SQL: SELECT * FROM LANGWORDS WHERE LANGID=?
         let url = "\(CommonApi.urlAPI)VLANGWORDS?filter=LANGID,eq,\(langid)&order=WORD"
         return RestApi.getRecords(url: url)
     }
     
-    static func update(_ id: Int, note: String) -> Observable<()> {
+    static func update(_ id: Int, note: String) -> Completable {
         // SQL: UPDATE LANGWORDS SET NOTE=? WHERE ID=?
         let url = "\(CommonApi.urlAPI)LANGWORDS/\(id)"
         let body = "NOTE=\(note)"
-        return RestApi.update(url: url, body: body).map { print($0) }
+        return RestApi.update(url: url, body: body).flatMapCompletable { print($0); return Completable.empty() }
     }
 
-    static func update(item: MLangWord) -> Observable<()> {
+    static func update(item: MLangWord) -> Completable {
         // SQL: UPDATE LANGWORDS SET WORD=?, NOTE=? WHERE ID=?
         let url = "\(CommonApi.urlAPI)LANGWORDS/\(item.ID)"
-        return RestApi.update(url: url, body: try! item.toJSONString(prettyPrint: false)!).map { print($0) }
+        return RestApi.update(url: url, body: try! item.toJSONString(prettyPrint: false)!).flatMapCompletable { print($0); return Completable.empty() }
     }
 
-    static func create(item: MLangWord) -> Observable<Int> {
+    static func create(item: MLangWord) -> Single<Int> {
         // SQL: INSERT INTO LANGWORDS (LANGID, WORD) VALUES (?,?)
         let url = "\(CommonApi.urlAPI)LANGWORDS"
-        return RestApi.create(url: url, body: try! item.toJSONString()!).map { Int($0)! }.do(onNext: { print($0) })
+        return RestApi.create(url: url, body: try! item.toJSONString()!).map { Int($0)! }.do(onSuccess: { print($0) })
     }
     
-    static func delete(item: MLangWord) -> Observable<()> {
+    static func delete(item: MLangWord) -> Completable {
         // SQL: CALL LANGWORDS_DELETE
         let url = "\(CommonApi.urlSP)LANGWORDS_DELETE"
         let parameters = item.toParameters()
-        return RestApi.callSP(url: url, parameters: parameters).map { print($0) }
+        return RestApi.callSP(url: url, parameters: parameters).flatMapCompletable { print($0); return Completable.empty() }
     }
 }
 

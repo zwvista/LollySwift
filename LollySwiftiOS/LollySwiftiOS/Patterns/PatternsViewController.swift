@@ -144,7 +144,7 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
     @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
         guard segue.identifier == "Done" else {return}
         if let controller = segue.source as? PatternsDetailViewController {
-            controller.vmEdit.onOK().subscribe(onNext: {
+            controller.vmEdit.onOK().subscribe(onCompleted: {
                 self.tableView.reloadData()
                 if controller.vmEdit.isAdd {
                     self.performSegue(withIdentifier: "add", sender: self)

@@ -16,17 +16,17 @@ class DictsViewModel: NSObject {
     init(settings: SettingsViewModel, complete: @escaping () -> ()) {
         vmSettings = settings
         super.init()
-        MDictionary.getDictsByLang(settings.selectedLang.ID).subscribe(onNext: {
+        MDictionary.getDictsByLang(settings.selectedLang.ID).subscribe(onSuccess: {
             self.arrDicts = $0
             complete()
         }) ~ rx.disposeBag
     }
     
-    static func update(item: MDictionary) -> Observable<()> {
+    static func update(item: MDictionary) -> Completable {
         MDictionary.update(item: item)
     }
 
-    static func create(item: MDictionary) -> Observable<Int> {
+    static func create(item: MDictionary) -> Single<Int> {
         MDictionary.create(item: item)
     }
 

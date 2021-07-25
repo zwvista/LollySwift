@@ -56,7 +56,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     
     override func endEditing(row: Int) {
         let item = arrPhrases[row]
-        vm.update(item: item).subscribe(onNext: {_ in
+        vm.update(item: item).subscribe(onCompleted: {
             self.tvPhrases.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvPhrases.tableColumns.count))
         }) ~ rx.disposeBag
     }
@@ -143,13 +143,13 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
 
     override func deletePhrase(row: Int) {
         let item = arrPhrases[row]
-        PhrasesUnitViewModel.delete(item: item).subscribe(onNext: {
+        PhrasesUnitViewModel.delete(item: item).subscribe(onCompleted: {
             self.doRefresh()
         }) ~ rx.disposeBag
     }
     
     @IBAction func refreshTableView(_ sender: AnyObject) {
-        vm.reload().subscribe(onNext: {
+        vm.reload().subscribe(onCompleted: {
             self.doRefresh()
         }) ~ rx.disposeBag
     }
@@ -174,13 +174,13 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     }
 
     @IBAction func previousUnitPart(_ sender: AnyObject) {
-        vmSettings.previousUnitPart().concat(vm.reload()).subscribe(onNext: {
+        vmSettings.previousUnitPart().andThen(vm.reload()).subscribe(onCompleted: {
             self.doRefresh()
         }) ~ rx.disposeBag
     }
     
     @IBAction func nextUnitPart(_ sender: AnyObject) {
-        vmSettings.nextUnitPart().concat(vm.reload()).subscribe(onNext: {
+        vmSettings.nextUnitPart().andThen(vm.reload()).subscribe(onCompleted: {
             self.doRefresh()
         }) ~ rx.disposeBag
     }
@@ -188,7 +188,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     @IBAction func toggleToType(_ sender: AnyObject) {
         let row = tvPhrases.selectedRow
         let part = row == -1 ? vmSettings.arrParts[0].value : arrPhrases[row].PART
-        vmSettings.toggleToType(part: part).concat(vm.reload()).subscribe(onNext: {
+        vmSettings.toggleToType(part: part).andThen(vm.reload()).subscribe(onCompleted: {
             self.doRefresh()
         }) ~ rx.disposeBag
     }

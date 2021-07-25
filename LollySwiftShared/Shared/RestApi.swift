@@ -56,35 +56,35 @@ extension Encodable {
 
 class RestApi {
 
-    static func getObject<T: Decodable>(url: String, keyPath: String? = nil) -> Observable<T> {
-        RxCodableAlamofire.object(.get, url, keyPath: keyPath)
+    static func getObject<T: Decodable>(url: String, keyPath: String? = nil) -> Single<T> {
+        RxCodableAlamofire.object(.get, url, keyPath: keyPath).asSingle()
     }
-    static func getArray<T: Decodable>(url: String, keyPath: String? = nil) -> Observable<[T]> {
+    static func getArray<T: Decodable>(url: String, keyPath: String? = nil) -> Single<[T]> {
         print("[RestApi]GET:\(url)")
-        return RxCodableAlamofire.object(.get, url, keyPath: keyPath)
+        return RxCodableAlamofire.object(.get, url, keyPath: keyPath).asSingle()
     }
-    static func getRecords<T: Decodable>(url: String) -> Observable<[T]> {
+    static func getRecords<T: Decodable>(url: String) -> Single<[T]> {
         getArray(url: url, keyPath: "records")
     }
-    static func update(url: String, body: String) -> Observable<String> {
+    static func update(url: String, body: String) -> Single<String> {
         print("[RestApi]PUT:\(url) BODY:\(body)")
-        return RxAlamofire.string(.put, url, encoding: StringEncoding(body: body))
+        return RxAlamofire.string(.put, url, encoding: StringEncoding(body: body)).asSingle()
     }
-    static func create(url: String, body: String) -> Observable<String> {
+    static func create(url: String, body: String) -> Single<String> {
         print("[RestApi]POST:\(url) BODY:\(body)")
-        return RxAlamofire.string(.post, url, encoding: StringEncoding(body: body))
+        return RxAlamofire.string(.post, url, encoding: StringEncoding(body: body)).asSingle()
     }
-    static func delete(url: String) -> Observable<String> {
+    static func delete(url: String) -> Single<String> {
         print("[RestApi]DELETE:\(url)")
-        return RxAlamofire.string(.delete, url)
+        return RxAlamofire.string(.delete, url).asSingle()
     }
-    static func getHtml(url: String) -> Observable<String> {
+    static func getHtml(url: String) -> Single<String> {
         print("[RestApi]GET:\(url)")
-        return RxAlamofire.string(.get, url)
+        return RxAlamofire.string(.get, url).asSingle()
     }
-    static func callSP(url: String, parameters: Parameters) -> Observable<MSPResult> {
+    static func callSP(url: String, parameters: Parameters) -> Single<MSPResult> {
         print("[RestApi]SP:\(url) BODY:\(parameters)")
         let o: Observable<[[MSPResult]]> = RxCodableAlamofire.object(.post, url, parameters: parameters)
-        return o.map { $0[0][0] }
+        return o.asSingle().map { $0[0][0] }
     }
 }

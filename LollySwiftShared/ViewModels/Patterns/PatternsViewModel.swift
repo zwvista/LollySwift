@@ -24,12 +24,13 @@ class PatternsViewModel: NSObject {
     public init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> ()) {
         self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
         super.init()
-        reload().subscribe(onNext: { complete() }) ~ rx.disposeBag
+        reload().subscribe(onCompleted: { complete() }) ~ rx.disposeBag
     }
     
-    func reload() -> Observable<()> {
-        MPattern.getDataByLang(vmSettings.selectedLang.ID).map {
+    func reload() -> Completable {
+        MPattern.getDataByLang(vmSettings.selectedLang.ID).flatMapCompletable {
             self.arrPatterns = $0
+            return Completable.empty()
         }
     }
     
@@ -44,17 +45,18 @@ class PatternsViewModel: NSObject {
         }
     }
     
-    static func update(item: MPattern) -> Observable<()> {
+    static func update(item: MPattern) -> Completable {
         MPattern.update(item: item)
     }
 
-    static func create(item: MPattern) -> Observable<()> {
-        MPattern.create(item: item).map {
+    static func create(item: MPattern) -> Completable {
+        MPattern.create(item: item).flatMapCompletable {
             item.ID = $0
+            return Completable.empty()
         }
     }
     
-    static func delete(_ id: Int) -> Observable<()> {
+    static func delete(_ id: Int) -> Completable {
         MPattern.delete(id)
     }
     

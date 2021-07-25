@@ -33,41 +33,41 @@ class MPatternWebPage: NSObject, Codable {
         URL = x.URL
     }
 
-    static func getDataByPattern(_ patternid: Int) -> Observable<[MPatternWebPage]> {
+    static func getDataByPattern(_ patternid: Int) -> Single<[MPatternWebPage]> {
         // SQL: SELECT * FROM VPATTERNSWEBPAGES WHERE PATTERNID=?
         let url = "\(CommonApi.urlAPI)VPATTERNSWEBPAGES?filter=PATTERNID,eq,\(patternid)&order=SEQNUM"
         return RestApi.getRecords(url: url)
     }
     
-    static func getDataById(_ id: Int) -> Observable<[MPatternWebPage]> {
+    static func getDataById(_ id: Int) -> Single<[MPatternWebPage]> {
         // SQL: SELECT * FROM VPATTERNSWEBPAGES WHERE ID=?
         let url = "\(CommonApi.urlAPI)VPATTERNSWEBPAGES?filter=ID,eq,\(id)"
         return RestApi.getRecords(url: url)
     }
     
-    static func update(_ id: Int, seqnum: Int) -> Observable<()> {
+    static func update(_ id: Int, seqnum: Int) -> Completable {
         // SQL: UPDATE PATTERNSWEBPAGES SET SEQNUM=? WHERE ID=?
         let url = "\(CommonApi.urlAPI)PATTERNSWEBPAGES/\(id)"
         let body = "SEQNUM=\(seqnum)"
-        return RestApi.update(url: url, body: body).map { print($0) }
+        return RestApi.update(url: url, body: body).flatMapCompletable { print($0); return Completable.empty() }
     }
 
-    static func update(item: MPatternWebPage) -> Observable<()> {
+    static func update(item: MPatternWebPage) -> Completable {
         // SQL: UPDATE PATTERNSWEBPAGES SET WEBPAGE=? WHERE ID=?
         let url = "\(CommonApi.urlAPI)PATTERNSWEBPAGES/\(item.ID)"
-        return RestApi.update(url: url, body: try! item.toJSONString()!).map { print($0) }
+        return RestApi.update(url: url, body: try! item.toJSONString()!).flatMapCompletable { print($0); return Completable.empty() }
     }
 
-    static func create(item: MPatternWebPage) -> Observable<Int> {
+    static func create(item: MPatternWebPage) -> Single<Int> {
         // SQL: INSERT INTO PATTERNSWEBPAGES (PATTERNID, SEQNUM, WEBPAGE) VALUES (?,?,?)
         let url = "\(CommonApi.urlAPI)PATTERNSWEBPAGES"
-        return RestApi.create(url: url, body: try! item.toJSONString()!).map { Int($0)! }.do(onNext: { print($0) })
+        return RestApi.create(url: url, body: try! item.toJSONString()!).map { Int($0)! }.do(onSuccess: { print($0) })
     }
     
-    static func delete(_ id: Int) -> Observable<()> {
+    static func delete(_ id: Int) -> Completable {
         // SQL: DELETE PATTERNSWEBPAGES WHERE ID=?
         let url = "\(CommonApi.urlAPI)PATTERNSWEBPAGES/\(id)"
-        return RestApi.delete(url: url).map { print($0) }
+        return RestApi.delete(url: url).flatMapCompletable { print($0); return Completable.empty() }
     }
 }
 

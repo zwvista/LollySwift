@@ -22,15 +22,15 @@ class WordsUnitBatchAddViewModel: NSObject {
         itemEdit = MUnitWordEdit(x: item)
     }
     
-    func onOK() -> Observable<()> {
+    func onOK() -> Completable {
         itemEdit.save(to: item)
-        var o = Observable.just(())
+        var o = Completable.empty()
         let words = itemEdit.WORDS.value.split(separator: "\n")
         for s in words {
             let item2 = MUnitWord()
             copyProperties(from: item, to: item2)
             item2.WORD = vm.vmSettings.autoCorrectInput(text: String(s))
-            o = o.flatMap { [unowned self] _ in self.vm.create(item: item2) }
+            o = o.andThen(vm.create(item: item2))
             item.SEQNUM += 1
         }
         return o

@@ -22,16 +22,16 @@ class PhrasesUnitBatchAddViewModel: NSObject {
         itemEdit = MUnitPhraseEdit(x: item)
     }
     
-    func onOK() -> Observable<()> {
+    func onOK() -> Completable {
         itemEdit.save(to: item)
-        var o = Observable.just(())
+        var o = Completable.empty()
         let phrases = itemEdit.PHRASES.value.split(separator: "\n").map { String($0) }
         for i in stride(from: 0, to: phrases.count, by: 2) {
             let item2 = MUnitPhrase()
             copyProperties(from: item, to: item2)
             item2.PHRASE = vm.vmSettings.autoCorrectInput(text: phrases[i])
             item2.TRANSLATION = phrases[i + 1]
-            o = o.flatMap { [unowned self] _ in self.vm.create(item: item2) }
+            o = o.andThen(vm.create(item: item2))
             item.SEQNUM += 1
         }
         return o

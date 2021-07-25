@@ -25,7 +25,7 @@ class PatternsDetailViewModel: NSObject {
         _ = itemEdit.PATTERN.map { !$0.isEmpty } ~> isOKEnabled
     }
     
-    func onOK() -> Observable<()> {
+    func onOK() -> Completable {
         itemEdit.save(to: item)
         item.PATTERN = vm.vmSettings.autoCorrectInput(text: item.PATTERN)
         if isAdd {

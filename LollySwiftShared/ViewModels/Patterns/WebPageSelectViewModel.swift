@@ -20,13 +20,14 @@ class WebPageSelectViewModel: NSObject {
     init(settings: SettingsViewModel, complete: @escaping () -> ()) {
         self.vmSettings = settings
         super.init()
-        reload(t: "", u: "").subscribe(onNext: { complete() }) ~ rx.disposeBag
-        Observable.combineLatest(title.debounce(.milliseconds(500), scheduler: MainScheduler.instance), url.debounce(.milliseconds(500), scheduler: MainScheduler.instance)).flatMap { (t, u) in self.reload(t: t, u: u) }.subscribe(onNext: { complete() }) ~ rx.disposeBag
+        reload(t: "", u: "").subscribe(onCompleted: { complete() }) ~ rx.disposeBag
+        Observable.combineLatest(title.debounce(.milliseconds(500), scheduler: MainScheduler.instance), url.debounce(.milliseconds(500), scheduler: MainScheduler.instance)).flatMap { (t, u) in self.reload(t: t, u: u) }.subscribe(onCompleted: { complete() }) ~ rx.disposeBag
     }
     
-    func reload(t: String, u: String) -> Observable<()> {
-        MWebPage.getDataBySearch(title: t, url: u).map {
+    func reload(t: String, u: String) -> Completable {
+        MWebPage.getDataBySearch(title: t, url: u).flatMapCompletable {
             self.arrWebPages = $0
+            return Completable.empty()
         }
     }
 }

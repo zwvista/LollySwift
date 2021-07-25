@@ -132,7 +132,7 @@ class PhrasesBaseViewController: WordsPhrasesBaseViewController {
     }
     
     func getWords() {
-        vmWordsLang.getWords(phraseid: vmPhrases.selectedPhraseID).subscribe(onNext: {
+        vmWordsLang.getWords(phraseid: vmPhrases.selectedPhraseID).subscribe(onCompleted: {
             self.tvWords.reloadData()
             if self.tvWords.numberOfRows > 0 {
                 self.tvWords.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)

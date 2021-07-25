@@ -231,7 +231,7 @@ class SettingsViewModel: NSObject, ObservableObject {
         super.init()
 
 #if !SWIFTUI
-        func onChange(_ source: BehaviorRelay<Int>, _ selector: @escaping (Int) throws -> Observable<()>) {
+        func onChange(_ source: BehaviorRelay<Int>, _ selector: @escaping (Int) throws -> Completable) {
             source.distinctUntilChanged().filter { self.initialized && $0 != -1 }.flatMap(selector).subscribe() ~ rx.disposeBag
         }
 
@@ -280,7 +280,7 @@ class SettingsViewModel: NSObject, ObservableObject {
             return self.updatePartTo()
         }
 
-        toType_.distinctUntilChanged().flatMap { n -> Observable<()> in
+        toType_.distinctUntilChanged().flatMap { n -> Completable in
             return self.updateToType()
         }.subscribe() ~ rx.disposeBag
 #endif
@@ -340,13 +340,13 @@ class SettingsViewModel: NSObject, ObservableObject {
         return MUserSettingInfo(USERSETTINGID: o2.ID, VALUEID: o.VALUEID)
     }
 
-    func getData() -> Observable<()> {
+    func getData() -> Completable {
         initialized = false
-        return Observable.zip(MLanguage.getData(),
+        return Single.zip(MLanguage.getData(),
                               MUSMapping.getData(),
                               MUserSetting.getData(),
                               MCode.getData())
-            .flatMap { result -> Observable<()> in
+            .flatMapCompletable { result in
                 self.arrLanguages = result.0
                 self.arrUSMappings = result.1
                 self.arrUserSettings = result.2
@@ -354,11 +354,11 @@ class SettingsViewModel: NSObject, ObservableObject {
                 self.INFO_USLANG = self.getUSInfo(name: MUSMapping.NAME_USLANG)
                 self.delegate?.onGetData()
                 self.selectedLangIndex = self.arrLanguages.firstIndex { $0.ID == self.USLANG } ?? 0
-                return self.initialized ? Observable.just(()) : self.updateLang().do(onNext: { self.initialized = true })
+                return self.initialized ? Completable.empty() : self.updateLang().do(onCompleted: { self.initialized = true })
             }
     }
 
-    func updateLang() -> Observable<()> {
+    func updateLang() -> Completable {
         let newVal = selectedLang.ID
         let dirty = USLANG != newVal
         USLANG = newVal
@@ -376,13 +376,13 @@ class SettingsViewModel: NSObject, ObservableObject {
         INFO_USDICTTRANSLATION = getUSInfo(name: MUSMapping.NAME_USDICTTRANSLATION)
         INFO_USMACVOICE = getUSInfo(name: MUSMapping.NAME_USMACVOICE)
         INFO_USIOSVOICE = getUSInfo(name: MUSMapping.NAME_USIOSVOICE)
-        return Observable.zip(MDictionary.getDictsReferenceByLang(USLANG),
+        return Single.zip(MDictionary.getDictsReferenceByLang(USLANG),
                               MDictionary.getDictsNoteByLang(USLANG),
                               MDictionary.getDictsTranslationByLang(USLANG),
                               MTextbook.getDataByLang(USLANG, arrUserSettings: arrUserSettings),
                               MAutoCorrect.getDataByLang(USLANG),
                               MVoice.getDataByLang(USLANG))
-            .flatMap { result -> Observable<()> in
+            .flatMapCompletable { result in
                 self.arrDictsReference = result.0
                 self.selectedDictReferenceIndex = self.arrDictsReference.firstIndex { String($0.DICTID) == self.USDICTREFERENCE } ?? 0
                 self.selectedDictsReferenceIndexes = self.USDICTSREFERENCE.split(separator: ",").compactMap { id in self.arrDictsReference.firstIndex { String($0.DICTID) == id } }
@@ -407,11 +407,11 @@ class SettingsViewModel: NSObject, ObservableObject {
                 self.selectedMacVoiceIndex = self.arrMacVoices.firstIndex { $0.ID == self.USMACVOICE } ?? 0
                 self.selectediOSVoiceIndex = self.arriOSVoices.firstIndex { $0.ID == self.USIOSVOICE } ?? 0
                 self.delegate?.onUpdateLang()
-                return Observable.zip((self.initialized ? Observable.just(()) : Observable.zip(self.updateTextbook(), self.updateDictReference(), self.updateDictsReference(), self.updateDictNote(), self.updateDictTranslation(), self.updateMacVoice(), self.updateiOSVoice()).map {_ in }), (!dirty ? Observable.just(()) : MUserSetting.update(info: self.INFO_USLANG, intValue: self.USLANG))).map {_ in }
+                return Completable.zip((self.initialized ? Completable.empty() : Completable.zip(self.updateTextbook(), self.updateDictReference(), self.updateDictsReference(), self.updateDictNote(), self.updateDictTranslation(), self.updateMacVoice(), self.updateiOSVoice())), (!dirty ? Completable.empty() : MUserSetting.update(info: self.INFO_USLANG, intValue: self.USLANG)))
             }
     }
 
-    func updateTextbook() -> Observable<()> {
+    func updateTextbook() -> Completable {
         let newVal = selectedTextbook.ID
         let dirty = USTEXTBOOK != newVal
         USTEXTBOOK = newVal
@@ -431,84 +431,82 @@ class SettingsViewModel: NSObject, ObservableObject {
         let newVal2: UnitPartToType = isSingleUnit ? .unit : isSingleUnitPart ? .part : .to
         let dirty2 = newVal2 != toType
         toType = newVal2
-        return (!dirty ? Observable.just(()) : MUserSetting.update(info: INFO_USTEXTBOOK, intValue: USTEXTBOOK)).flatMap {
-            dirty2 ? Observable.just(()) : self.updateToType()
-        }
+        return (!dirty ? Completable.empty() : MUserSetting.update(info: INFO_USTEXTBOOK, intValue: USTEXTBOOK)).andThen(dirty2 ? Completable.empty() : updateToType())
     }
 
-    func updateDictReference() -> Observable<()> {
+    func updateDictReference() -> Completable {
         let newVal = String(selectedDictReference.DICTID)
         let dirty = USDICTREFERENCE != newVal
         USDICTREFERENCE = newVal
-        return (!dirty ? Observable.just(()) : MUserSetting.update(info: INFO_USDICTREFERENCE, stringValue: USDICTREFERENCE)).do(onNext: { self.delegate?.onUpdateDictReference() })
+        return (!dirty ? Completable.empty() : MUserSetting.update(info: INFO_USDICTREFERENCE, stringValue: USDICTREFERENCE)).do(onCompleted: { self.delegate?.onUpdateDictReference() })
     }
 
-    func updateDictsReference() -> Observable<()> {
+    func updateDictsReference() -> Completable {
         let newVal = selectedDictsReference.map { String($0.DICTID) }.joined(separator: ",")
         let dirty = USDICTSREFERENCE != newVal
         USDICTSREFERENCE = newVal
-        return (!dirty ? Observable.just(()) : MUserSetting.update(info: INFO_USDICTSREFERENCE, stringValue: USDICTSREFERENCE)).do(onNext: { self.delegate?.onUpdateDictsReference() })
+        return (!dirty ? Completable.empty() : MUserSetting.update(info: INFO_USDICTSREFERENCE, stringValue: USDICTSREFERENCE)).do(onCompleted: { self.delegate?.onUpdateDictsReference() })
     }
 
-    func updateDictNote() -> Observable<()> {
+    func updateDictNote() -> Completable {
         let newVal = selectedDictNote.DICTID
         let dirty = USDICTNOTE != newVal
         USDICTNOTE = newVal
-        return (!dirty ? Observable.just(()) : MUserSetting.update(info: INFO_USDICTNOTE, intValue: USDICTNOTE)).do(onNext: { self.delegate?.onUpdateDictNote() })
+        return (!dirty ? Completable.empty() : MUserSetting.update(info: INFO_USDICTNOTE, intValue: USDICTNOTE)).do(onCompleted: { self.delegate?.onUpdateDictNote() })
     }
 
-    func updateDictTranslation() -> Observable<()> {
+    func updateDictTranslation() -> Completable {
         let newVal = selectedDictTranslation.DICTID
         let dirty = USDICTTRANSLATION != newVal
         USDICTTRANSLATION = newVal
-        return (!dirty ? Observable.just(()) : MUserSetting.update(info: INFO_USDICTTRANSLATION, intValue: USDICTTRANSLATION)).do(onNext: { self.delegate?.onUpdateDictTranslation() })
+        return (!dirty ? Completable.empty() : MUserSetting.update(info: INFO_USDICTTRANSLATION, intValue: USDICTTRANSLATION)).do(onCompleted: { self.delegate?.onUpdateDictTranslation() })
     }
 
-    func updateMacVoice() -> Observable<()> {
+    func updateMacVoice() -> Completable {
         let newVal = selectedMacVoice.ID
         let dirty = USMACVOICE != newVal
         USMACVOICE = newVal
-        return (!dirty ? Observable.just(()) : MUserSetting.update(info: INFO_USMACVOICE, intValue: USMACVOICE)).do(onNext: { self.delegate?.onUpdateMacVoice() })
+        return (!dirty ? Completable.empty() : MUserSetting.update(info: INFO_USMACVOICE, intValue: USMACVOICE)).do(onCompleted: { self.delegate?.onUpdateMacVoice() })
     }
 
-    func updateiOSVoice() -> Observable<()> {
+    func updateiOSVoice() -> Completable {
         let newVal = selectediOSVoice.ID
         let dirty = USIOSVOICE != newVal
         USIOSVOICE = newVal
-        return (!dirty ? Observable.just(()) : MUserSetting.update(info: INFO_USIOSVOICE, intValue: USIOSVOICE)).do(onNext: { self.delegate?.onUpdateiOSVoice() })
+        return (!dirty ? Completable.empty() : MUserSetting.update(info: INFO_USIOSVOICE, intValue: USIOSVOICE)).do(onCompleted: { self.delegate?.onUpdateiOSVoice() })
     }
 
     func autoCorrectInput(text: String) -> String {
         MAutoCorrect.autoCorrect(text: text, arrAutoCorrect: arrAutoCorrect, colFunc1: \.INPUT, colFunc2: \.EXTENDED)
     }
 
-    func updateUnitFrom() -> Observable<()> {
-        doUpdateUnitFrom(v: selectedUnitFrom).flatMap { _ -> Observable<()> in
-            self.toType == .unit ? self.doUpdateSingleUnit() :
-            self.toType == .part || self.isInvalidUnitPart ? self.doUpdateUnitPartTo() :
-            Observable.just(())
-        }
+    func updateUnitFrom() -> Completable {
+        doUpdateUnitFrom(v: selectedUnitFrom).andThen(
+            toType == .unit ? doUpdateSingleUnit() :
+            toType == .part || isInvalidUnitPart ? doUpdateUnitPartTo() :
+            Completable.empty()
+        )
     }
 
-    func updatePartFrom() -> Observable<()> {
-        doUpdatePartFrom(v: selectedPartFrom).flatMap { _ -> Observable<()> in
-            self.toType == .part || self.isInvalidUnitPart ? self.doUpdateUnitPartTo() : Observable.just(())
-        }
+    func updatePartFrom() -> Completable {
+        doUpdatePartFrom(v: selectedPartFrom).andThen(
+            toType == .part || isInvalidUnitPart ? doUpdateUnitPartTo() : Completable.empty()
+        )
     }
 
-    func updateUnitTo() -> Observable<()> {
-        doUpdateUnitTo(v: selectedUnitTo).flatMap { _ -> Observable<()> in
-            self.isInvalidUnitPart ? self.doUpdateUnitPartFrom() : Observable.just(())
-        }
+    func updateUnitTo() -> Completable {
+        doUpdateUnitTo(v: selectedUnitTo).andThen(
+            isInvalidUnitPart ? doUpdateUnitPartFrom() : Completable.empty()
+        )
     }
 
-    func updatePartTo() -> Observable<()> {
-        doUpdatePartTo(v: selectedPartTo).flatMap { _ -> Observable<()> in
-            self.isInvalidUnitPart ? self.doUpdateUnitPartFrom() : Observable.just(())
-        }
+    func updatePartTo() -> Completable {
+        doUpdatePartTo(v: selectedPartTo).andThen(
+            isInvalidUnitPart ? doUpdateUnitPartFrom() : Completable.empty()
+        )
     }
 
-    func updateToType() -> Observable<()> {
+    func updateToType() -> Completable {
         print("toType=\(toType)")
         toTypeTitle.accept(SettingsViewModel.arrToTypes[toType_.value])
         let b = toType == .to
@@ -522,104 +520,104 @@ class SettingsViewModel: NSObject, ObservableObject {
         nextTitle.accept("Next " + t)
         partFromEnabled.accept(b2 && !isSinglePart)
         return toType == .unit ? doUpdateSingleUnit() :
-        toType == .part ? doUpdateUnitPartTo() : Observable.just(())
+        toType == .part ? doUpdateUnitPartTo() : Completable.empty()
     }
 
-    func toggleToType(part: Int) -> Observable<()> {
+    func toggleToType(part: Int) -> Completable {
         switch toType {
         case .unit:
             toType = .part
-            return Observable.zip(doUpdatePartFrom(v: part), doUpdateUnitPartTo()).map {_ in }
+            return Completable.zip(doUpdatePartFrom(v: part), doUpdateUnitPartTo())
         case .part:
             toType = .unit
             return doUpdateSingleUnit()
         default:
-            return Observable.just(())
+            return Completable.empty()
         }
     }
 
-    func previousUnitPart() -> Observable<()> {
+    func previousUnitPart() -> Completable {
         if toType == .unit {
             let n = selectedUnitFrom
             if n > 1 {
-                return Observable.zip(doUpdateUnitFrom(v: n - 1), doUpdateUnitTo(v: n - 1)).map {_ in }
+                return Completable.zip(doUpdateUnitFrom(v: n - 1), doUpdateUnitTo(v: n - 1))
             } else {
-                return Observable.empty()
+                return Completable.empty()
             }
         } else if selectedPartFrom > 1 {
-            return Observable.zip(doUpdatePartFrom(v: selectedPartFrom - 1), doUpdateUnitPartTo()).map {_ in }
+            return Completable.zip(doUpdatePartFrom(v: selectedPartFrom - 1), doUpdateUnitPartTo())
         } else if selectedUnitFrom > 1 {
-            return Observable.zip(doUpdateUnitFrom(v: selectedUnitFrom - 1), doUpdatePartFrom(v: partCount), doUpdateUnitPartTo()).map {_ in }
+            return Completable.zip(doUpdateUnitFrom(v: selectedUnitFrom - 1), doUpdatePartFrom(v: partCount), doUpdateUnitPartTo())
         } else {
-            return Observable.just(())
+            return Completable.empty()
         }
     }
 
-    func nextUnitPart() -> Observable<()> {
+    func nextUnitPart() -> Completable {
         if toType == .unit {
             let n = selectedUnitFrom
             if n < unitCount {
-                return Observable.zip(doUpdateUnitFrom(v: n + 1), doUpdateUnitTo(v: n + 1)).map {_ in }
+                return Completable.zip(doUpdateUnitFrom(v: n + 1), doUpdateUnitTo(v: n + 1))
             } else {
-                return Observable.just(())
+                return Completable.empty()
             }
         } else if selectedPartFrom < partCount {
-            return Observable.zip(doUpdatePartFrom(v: selectedPartFrom + 1), doUpdateUnitPartTo()).map {_ in }
+            return Completable.zip(doUpdatePartFrom(v: selectedPartFrom + 1), doUpdateUnitPartTo())
         } else if selectedUnitFrom < unitCount {
-            return Observable.zip(doUpdateUnitFrom(v: selectedUnitFrom + 1), doUpdatePartFrom(v: 1), doUpdateUnitPartTo()).map {_ in }
+            return Completable.zip(doUpdateUnitFrom(v: selectedUnitFrom + 1), doUpdatePartFrom(v: 1), doUpdateUnitPartTo())
         } else {
-            return Observable.just(())
+            return Completable.empty()
         }
     }
     
-    private func doUpdateUnitPartFrom() -> Observable<()> {
-        Observable.zip(doUpdateUnitFrom(v: USUNITTO), doUpdatePartFrom(v: USPARTTO)).map {_ in }
+    private func doUpdateUnitPartFrom() -> Completable {
+        Completable.zip(doUpdateUnitFrom(v: USUNITTO), doUpdatePartFrom(v: USPARTTO))
     }
 
-    private func doUpdateUnitPartTo() -> Observable<()> {
-        Observable.zip(doUpdateUnitTo(v: USUNITFROM), doUpdatePartTo(v: USPARTFROM)).map {_ in }
+    private func doUpdateUnitPartTo() -> Completable {
+        Completable.zip(doUpdateUnitTo(v: USUNITFROM), doUpdatePartTo(v: USPARTFROM))
     }
 
-    private func doUpdateSingleUnit() -> Observable<()> {
-        Observable.zip(doUpdateUnitTo(v: USUNITFROM), doUpdatePartFrom(v: 1), doUpdatePartTo(v: partCount)).map {_ in }
+    private func doUpdateSingleUnit() -> Completable {
+        Completable.zip(doUpdateUnitTo(v: USUNITFROM), doUpdatePartFrom(v: 1), doUpdatePartTo(v: partCount))
     }
 
-    private func doUpdateUnitFrom(v: Int) -> Observable<()> {
+    private func doUpdateUnitFrom(v: Int) -> Completable {
         let dirty = USUNITFROM != v
-        if !dirty { return Observable.just(()) }
+        if !dirty { return Completable.empty() }
         USUNITFROM = v
         selectedUnitFromIndex = arrUnits.firstIndex { $0.value == v } ?? 0
-        return MUserSetting.update(info: INFO_USUNITFROM, intValue: USUNITFROM).do(onNext: { self.delegate?.onUpdateUnitFrom() })
+        return MUserSetting.update(info: INFO_USUNITFROM, intValue: USUNITFROM).do(onCompleted: { self.delegate?.onUpdateUnitFrom() })
     }
 
-    private func doUpdatePartFrom(v: Int) -> Observable<()> {
+    private func doUpdatePartFrom(v: Int) -> Completable {
         let dirty = USPARTFROM != v
-        if !dirty { return Observable.just(()) }
+        if !dirty { return Completable.empty() }
         USPARTFROM = v
         selectedPartFromIndex = arrParts.firstIndex { $0.value == v }
             ?? 0
-        return MUserSetting.update(info: INFO_USPARTFROM, intValue: USPARTFROM).do(onNext: { self.delegate?.onUpdatePartFrom() })
+        return MUserSetting.update(info: INFO_USPARTFROM, intValue: USPARTFROM).do(onCompleted: { self.delegate?.onUpdatePartFrom() })
     }
 
-    private func doUpdateUnitTo(v: Int) -> Observable<()> {
+    private func doUpdateUnitTo(v: Int) -> Completable {
         let dirty = USUNITTO != v
-        if !dirty { return Observable.just(()) }
+        if !dirty { return Completable.empty() }
         USUNITTO = v
         selectedUnitToIndex = arrUnits.firstIndex { $0.value == v } ?? 0
-        return MUserSetting.update(info: INFO_USUNITTO, intValue: USUNITTO).do(onNext: { self.delegate?.onUpdateUnitTo() })
+        return MUserSetting.update(info: INFO_USUNITTO, intValue: USUNITTO).do(onCompleted: { self.delegate?.onUpdateUnitTo() })
     }
 
-    private func doUpdatePartTo(v: Int) -> Observable<()> {
+    private func doUpdatePartTo(v: Int) -> Completable {
         let dirty = USPARTTO != v
-        if !dirty { return Observable.just(()) }
+        if !dirty { return Completable.empty() }
         USPARTTO = v
         selectedPartToIndex = arrParts.firstIndex { $0.value == v } ?? 0
-        return MUserSetting.update(info: INFO_USPARTTO, intValue: USPARTTO).do(onNext: { self.delegate?.onUpdatePartTo() })
+        return MUserSetting.update(info: INFO_USPARTTO, intValue: USPARTTO).do(onCompleted: { self.delegate?.onUpdatePartTo() })
     }
 
     static let zeroNote = "O"
-    func getNote(word: String) -> Observable<String> {
-        guard hasDictNote else { return Observable.empty() }
+    func getNote(word: String) -> Single<String> {
+        guard hasDictNote else { return Single.just("") }
         let url = selectedDictNote.urlString(word: word, arrAutoCorrect: arrAutoCorrect)
         return RestApi.getHtml(url: url).map { html in
             print(html)
@@ -649,15 +647,15 @@ class SettingsViewModel: NSObject, ObservableObject {
         return subscription!
     }
 
-    func clearNotes(wordCount: Int, isNoteEmpty: @escaping (Int) -> Bool, getOne: @escaping (Int) -> Observable<()>) -> Observable<()> {
+    func clearNotes(wordCount: Int, isNoteEmpty: @escaping (Int) -> Bool, getOne: @escaping (Int) -> Completable) -> Completable {
         var i = 0
-        var o = Observable.just(())
+        var o = Completable.empty()
         while i < wordCount {
             while i < wordCount && !isNoteEmpty(i) {
                 i += 1
             }
             if i < wordCount {
-                o = o.concat(getOne(i))
+                o = o.andThen(getOne(i))
             }
             i += 1
         }

@@ -27,7 +27,7 @@ class MVoice: NSObject, Codable {
     
     override var description: String { VOICENAME }
 
-    static func getDataByLang(_ langid: Int) -> Observable<[MVoice]> {
+    static func getDataByLang(_ langid: Int) -> Single<[MVoice]> {
         // SQL: SELECT * FROM VVOICES WHERE LANGID=?
         let url = "\(CommonApi.urlAPI)VVOICES?filter=LANGID,eq,\(langid)"
         return RestApi.getRecords(url: url)

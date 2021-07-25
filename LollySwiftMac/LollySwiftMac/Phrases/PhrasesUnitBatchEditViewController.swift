@@ -45,7 +45,7 @@ class PhrasesUnitBatchEditViewController: NSViewController, NSTableViewDataSourc
         _ = vmEdit.unitChecked ~> pubUnit.rx.isEnabled
         _ = vmEdit.partChecked ~> pubPart.rx.isEnabled
         _ = vmEdit.seqnumChecked ~> tfSeqNum.rx.isEnabled
-        btnOK.rx.tap.flatMap { [unowned self] _ -> Observable<()> in
+        btnOK.rx.tap.flatMap { [unowned self] _ -> Completable in
             // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
             self.commitEditing()
             var rows = [Bool]()
@@ -54,7 +54,7 @@ class PhrasesUnitBatchEditViewController: NSViewController, NSTableViewDataSourc
                 rows.append(chk.state == .on)
             }
             return self.vmEdit.onOK(rows: rows)
-        }.subscribe(onNext: { [unowned self] in
+        }.subscribe(onCompleted: { [unowned self] in
             self.complete?()
             self.dismiss(self.btnOK)
         }) ~ rx.disposeBag

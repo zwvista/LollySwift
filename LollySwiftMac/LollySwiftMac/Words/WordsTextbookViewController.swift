@@ -49,20 +49,20 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
 
     override func endEditing(row: Int) {
         let item = arrWords[row]
-        vm.update(item: item).subscribe(onNext: {_ in 
+        vm.update(item: item).subscribe(onCompleted: {
             self.tvWords.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvWords.tableColumns.count))
         }) ~ rx.disposeBag
     }
 
     override func deleteWord(row: Int) {
         let item = arrWords[row]
-        WordsUnitViewModel.delete(item: item).subscribe(onNext: {
+        WordsUnitViewModel.delete(item: item).subscribe(onCompleted: {
             self.doRefresh()
         }) ~ rx.disposeBag
     }
 
     @IBAction func refreshTableView(_ sender: AnyObject) {
-        vm.reload().subscribe(onNext: {
+        vm.reload().subscribe(onCompleted: {
             self.doRefresh()
         }) ~ rx.disposeBag
     }
@@ -88,14 +88,14 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
     
     @IBAction func getNote(_ sender: AnyObject) {
         let col = tvWords.tableColumns.firstIndex { $0.title == "NOTE" }!
-        vm.getNote(index: tvWords.selectedRow).subscribe(onNext: {
+        vm.getNote(index: tvWords.selectedRow).subscribe(onCompleted: {
             self.tvWords.reloadData(forRowIndexes: [self.tvWords.selectedRow], columnIndexes: [col])
         }) ~ rx.disposeBag
     }
     
     @IBAction func clearNote(_ sender: AnyObject) {
         let col = tvWords.tableColumns.firstIndex { $0.title == "NOTE" }!
-        vm.clearNote(index: tvWords.selectedRow).subscribe(onNext: {
+        vm.clearNote(index: tvWords.selectedRow).subscribe(onCompleted: {
             self.tvWords.reloadData(forRowIndexes: [self.tvWords.selectedRow], columnIndexes: [col])
         }) ~ rx.disposeBag
     }

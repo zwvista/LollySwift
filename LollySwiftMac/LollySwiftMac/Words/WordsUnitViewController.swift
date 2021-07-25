@@ -65,7 +65,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     
     override func endEditing(row: Int) {
         let item = arrWords[row]
-        vm.update(item: item).subscribe(onNext: {_ in 
+        vm.update(item: item).subscribe(onCompleted: {
             self.tvWords.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvWords.tableColumns.count))
         }) ~ rx.disposeBag
     }
@@ -128,7 +128,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
         item.WORD = vmSettings.autoCorrectInput(text: vm.newWord.value)
         tfNewWord.stringValue = ""
         vm.newWord.accept("")
-        vm.create(item: item).subscribe(onNext: {_ in
+        vm.create(item: item).subscribe(onCompleted: {
             self.tvWords.reloadData()
             self.tvWords.selectRowIndexes(IndexSet(integer: self.arrWords.count - 1), byExtendingSelection: false)
             self.responder = self.tfNewWord
@@ -149,13 +149,13 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     
     override func deleteWord(row: Int) {
         let item = arrWords[row]
-        WordsUnitViewModel.delete(item: item).subscribe(onNext: {
+        WordsUnitViewModel.delete(item: item).subscribe(onCompleted: {
             self.doRefresh()
         }) ~ rx.disposeBag
     }
     
     @IBAction func refreshTableView(_ sender: AnyObject) {
-        vm.reload().subscribe(onNext: {
+        vm.reload().subscribe(onCompleted: {
             self.doRefresh()
         }) ~ rx.disposeBag
     }
@@ -197,7 +197,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
 
     @IBAction func getNote(_ sender: AnyObject) {
         let col = tvWords.tableColumns.firstIndex { $0.title == "NOTE" }!
-        vm.getNote(index: tvWords.selectedRow).subscribe(onNext: {
+        vm.getNote(index: tvWords.selectedRow).subscribe(onCompleted: {
             self.tvWords.reloadData(forRowIndexes: [self.tvWords.selectedRow], columnIndexes: [col])
         }) ~ rx.disposeBag
     }
@@ -215,7 +215,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     
     @IBAction func clearNote(_ sender: AnyObject) {
         let col = tvWords.tableColumns.firstIndex { $0.title == "NOTE" }!
-        vm.clearNote(index: tvWords.selectedRow).subscribe(onNext: {
+        vm.clearNote(index: tvWords.selectedRow).subscribe(onCompleted: {
             self.tvWords.reloadData(forRowIndexes: [self.tvWords.selectedRow], columnIndexes: [col])
         }) ~ rx.disposeBag
     }
@@ -224,7 +224,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
         let ifEmpty = sender is NSToolbarItem || (sender as! NSMenuItem).tag == 0
         vm.clearNotes(ifEmpty: ifEmpty, oneComplete: {
             self.tvWords.reloadData(forRowIndexes: [$0], columnIndexes: IndexSet(0..<self.tvWords.tableColumns.count))
-        }).subscribe(onNext: {
+        }).subscribe(onCompleted: {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 // self.tableView.reloadData()
             }
@@ -232,13 +232,13 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     }
     
     @IBAction func previousUnitPart(_ sender: AnyObject) {
-        vmSettings.previousUnitPart().concat(vm.reload()).subscribe(onNext: {
+        vmSettings.previousUnitPart().andThen(vm.reload()).subscribe(onCompleted: {
             self.doRefresh()
         }) ~ rx.disposeBag
     }
     
     @IBAction func nextUnitPart(_ sender: AnyObject) {
-        vmSettings.nextUnitPart().concat(vm.reload()).subscribe(onNext: {
+        vmSettings.nextUnitPart().andThen(vm.reload()).subscribe(onCompleted: {
             self.doRefresh()
         }) ~ rx.disposeBag
     }
@@ -246,7 +246,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     @IBAction func toggleToType(_ sender: AnyObject) {
         let row = tvWords.selectedRow
         let part = row == -1 ? vmSettings.arrParts[0].value : arrWords[row].PART
-        vmSettings.toggleToType(part: part).concat(vm.reload()).subscribe(onNext: {
+        vmSettings.toggleToType(part: part).andThen(vm.reload()).subscribe(onCompleted: {
             self.doRefresh()
         }) ~ rx.disposeBag
     }

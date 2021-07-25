@@ -38,10 +38,10 @@ class MTextbook: NSObject, Codable {
 
     override var description: String { TEXTBOOKNAME }
 
-    static func getDataByLang(_ langid: Int, arrUserSettings: [MUserSetting]) -> Observable<[MTextbook]> {
+    static func getDataByLang(_ langid: Int, arrUserSettings: [MUserSetting]) -> Single<[MTextbook]> {
         // SQL: SELECT * FROM TEXTBOOKS WHERE LANGID=?
         let url = "\(CommonApi.urlAPI)TEXTBOOKS?filter=LANGID,eq,\(langid)"
-        var o: Observable<[MTextbook]> = RestApi.getRecords(url: url)
+        var o: Single<[MTextbook]> = RestApi.getRecords(url: url)
         o = o.map { $0.filter { row in arrUserSettings.contains { $0.KIND == 11 && $0.ENTITYID == row.ID } } }
         func f(units: String) -> [String] {
             if let m = #"UNITS,(\d+)"#.r!.findFirst(in: units) {
@@ -57,7 +57,7 @@ class MTextbook: NSObject, Codable {
                 return []
             }
         }
-        return o.do(onNext: { arr in
+        return o.do(onSuccess: { arr in
             arr.forEach { row in
                 row.arrUnits = f(units: row.UNITS).enumerated().map { MSelectItem(value: $0.0 + 1, label: $0.1) }
                 row.arrParts = row.PARTS.split(separator: ",").enumerated().map { MSelectItem(value: $0.0 + 1, label: String($0.1)) }
@@ -65,15 +65,15 @@ class MTextbook: NSObject, Codable {
         })
     }
 
-    static func update(item: MTextbook) -> Observable<()> {
+    static func update(item: MTextbook) -> Completable {
         // SQL: UPDATE TEXTBOOKS SET NAME=?, UNITS=?, PARTS=? WHERE ID=?
         let url = "\(CommonApi.urlAPI)TEXTBOOKS/\(item.ID)"
-        return RestApi.update(url: url, body: try! item.toJSONString()!).map { print($0) }
+        return RestApi.update(url: url, body: try! item.toJSONString()!).flatMapCompletable { print($0); return Completable.empty() }
     }
 
-    static func create(item: MTextbook) -> Observable<Int> {
+    static func create(item: MTextbook) -> Single<Int> {
         // SQL: INSERT INTO TEXTBOOKS (ID, LANGID, NAME, UNITS, PARTS) VALUES (?,?,?,?,?)
         let url = "\(CommonApi.urlAPI)TEXTBOOKS"
-        return RestApi.create(url: url, body: try! item.toJSONString()!).map { Int($0)! }.do(onNext: { print($0) })
+        return RestApi.create(url: url, body: try! item.toJSONString()!).map { Int($0)! }.do(onSuccess: { print($0) })
     }
 }

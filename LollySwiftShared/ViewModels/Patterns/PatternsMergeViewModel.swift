@@ -42,7 +42,7 @@ class PatternsMergeViewModel: NSObject {
         }
     }
 
-    func onOK() -> Observable<()> {
+    func onOK() -> Completable {
         let item = MPattern()
         itemEdit.save(to: item)
         item.IDS_MERGE = arrPatterns.sorted { $0.ID < $1.ID }.map { String($0.ID) }.joined(separator: ",")

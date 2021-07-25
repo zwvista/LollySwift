@@ -70,7 +70,7 @@ class WordsReviewViewModel: WordsBaseViewModel {
         onRepeatHidden.accept(isTestMode)
         checkPrevHidden.accept(isTestMode)
         if options.mode == .textbook {
-            MUnitWord.getDataByTextbook(vmSettings.selectedTextbook).subscribe(onNext: { arr in
+            MUnitWord.getDataByTextbook(vmSettings.selectedTextbook).subscribe(onSuccess: { arr in
                 var arr2 = [MUnitWord]()
                 for o in arr {
                     let s = o.ACCURACY
@@ -91,7 +91,7 @@ class WordsReviewViewModel: WordsBaseViewModel {
                 f()
             }) ~ self.rx.disposeBag
         } else {
-            MUnitWord.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO).subscribe(onNext: {
+            MUnitWord.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO).subscribe(onSuccess: {
                 self.arrWords = $0
                 let count = self.count
                 let from = count * (self.options.groupSelected - 1) / self.options.groupCount
@@ -131,8 +131,8 @@ class WordsReviewViewModel: WordsBaseViewModel {
     
     var currentItem: MUnitWord? { hasCurrent ? arrWords[index] : nil }
     var currentWord: String { hasCurrent ? arrWords[index].WORD : "" }
-    func getTranslation() -> Observable<String> {
-        guard vmSettings.hasDictTranslation else { return Observable.empty() }
+    func getTranslation() -> Single<String> {
+        guard vmSettings.hasDictTranslation else { return Single.just("") }
         let mDictTranslation = vmSettings.selectedDictTranslation
         let url = mDictTranslation.urlString(word: currentWord, arrAutoCorrect: vmSettings.arrAutoCorrect)
         return RestApi.getHtml(url: url).map { html in
@@ -201,7 +201,7 @@ class WordsReviewViewModel: WordsBaseViewModel {
         if hasCurrent {
             indexString.accept("\(index + 1)/\(count)")
             accuracyString.accept(currentItem!.ACCURACY)
-            getTranslation().subscribe(onNext: {
+            getTranslation().subscribe(onSuccess: {
                 self.translationString.accept($0)
             }) ~ rx.disposeBag
         } else {

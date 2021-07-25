@@ -141,7 +141,7 @@ class BlogViewModel: NSObject {
         }, getOne: { i in
             let m = self.regMarkedEntry.findFirst(in: arr[i])!
             let (s1, word, s3, s4) = (m.group(at: 1)!, m.group(at: 2)!, m.group(at: 3)!, m.group(at: 4))
-            self.vmSettings.getNote(word: word).subscribe(onNext: { note in
+            self.vmSettings.getNote(word: word).subscribe(onSuccess: { note in
                 let j = note.firstIndex { "0"..."9" ~= $0 }
                 // https://stackoverflow.com/questions/45562662/how-can-i-use-string-slicing-subscripts-in-swift-4
                 let s21 = j == nil ? note : String(note[..<j!])

@@ -78,7 +78,7 @@ class WordsAssociateViewController: NSViewController, NSTableViewDataSource, NST
         guard view.window?.firstResponder != sfTextFilter.window else {return}
         // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
         self.commitEditing()
-        var o = Observable.just(())
+        var o = Completable.empty()
         for i in 0..<tableView.numberOfRows {
             guard let col = tableView.view(atColumn: 0, row: i, makeIfNecessary: false) else {continue}
             guard (col as! LollyCheckCell).chk!.state == .on else {continue}
@@ -87,7 +87,7 @@ class WordsAssociateViewController: NSViewController, NSTableViewDataSource, NST
                 o = o.concat(MWordPhrase.associate(wordid: item.WORDID, phraseid: phraseid))
             }
         }
-        o.subscribe(onNext: {
+        o.subscribe(onCompleted: {
             self.complete?()
             self.dismiss(sender)
         }) ~ rx.disposeBag

@@ -28,7 +28,7 @@ class SearchViewController: UIViewController, WKNavigationDelegate, UISearchBarD
         dictStore.wvDict.navigationDelegate = self
         vmSettings.delegate = self
         
-        vmSettings.getData().subscribe(onNext: {
+        vmSettings.getData().subscribe(onCompleted: {
             self.ddLang.anchorView = self.btnLang
             self.ddLang.selectionAction = { (index: Int, item: String) in
                 guard index != vmSettings.selectedLangIndex else {return}

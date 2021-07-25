@@ -19,7 +19,7 @@ class SinglePhraseViewModel: NSObject {
         super.init()
         MUnitPhrase.getDataByLangPhrase(langid: vmSettings.selectedLang.ID, phrase: phrase, arrTextbooks: vmSettings.arrTextbooks).map {
             self.arrPhrases = $0
-        }.subscribe(onNext: {
+        }.subscribe(onSuccess: {
             complete()
         }) ~ rx.disposeBag
     }

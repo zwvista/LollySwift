@@ -29,7 +29,7 @@ class MSelectItem: NSObject {
 class MCode: NSObject, Codable {
     var CODE = 0
     var NAME = ""
-    static func getData() -> Observable<[MCode]> {
+    static func getData() -> Single<[MCode]> {
         // SQL: SELECT * FROM CODES WHERE KIND = 1
         let url = "\(CommonApi.urlAPI)CODES?filter=KIND,eq,1"
         return RestApi.getRecords(url: url)

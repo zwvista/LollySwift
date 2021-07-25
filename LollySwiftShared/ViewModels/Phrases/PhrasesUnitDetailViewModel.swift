@@ -30,9 +30,9 @@ class PhrasesUnitDetailViewModel: NSObject {
         vmSingle = SinglePhraseViewModel(phrase: item.PHRASE, settings: vm.vmSettings, complete: complete)
     }
     
-    func onOK() -> Observable<()> {
+    func onOK() -> Completable {
         itemEdit.save(to: item)
         item.PHRASE = vm.vmSettings.autoCorrectInput(text: item.PHRASE)
-        return !isAdd ? vm.update(item: item) : vm.create(item: item).flatMap { self.wordid == 0 ? Observable.just(()) : MWordPhrase.associate(wordid: self.wordid, phraseid: self.item.PHRASEID) }
+        return !isAdd ? vm.update(item: item) : vm.create(item: item).andThen(wordid == 0 ? Completable.empty() : MWordPhrase.associate(wordid: wordid, phraseid: item.PHRASEID) )
     }
 }
