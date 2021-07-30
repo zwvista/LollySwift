@@ -28,7 +28,7 @@ class DictStoreUI: NSObject, ObservableObject {
         dictStatus = .ready
         if dict.DICTTYPENAME == "OFFLINE" {
             wvDict.load(URLRequest(url: URL(string: "about:blank")!))
-            RestApi.getHtml(url: url).subscribe(onNext: { html in
+            RestApi.getHtml(url: url).subscribe(onSuccess: { html in
                 print(html)
                 let str = self.dict.htmlString(html, word: self.word)
                 self.wvDict.loadHTMLString(str, baseURL: nil)

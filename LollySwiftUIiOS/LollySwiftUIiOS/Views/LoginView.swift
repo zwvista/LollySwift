@@ -21,7 +21,7 @@ struct LoginView: View {
                     TextField("USERNAME", text: $vm.username)
                     SecureField("PASSWORD", text: $vm.password)
                     Button(action: {
-                        vm.login(username: vm.username, password: vm.password).subscribe(onNext: {
+                        vm.login(username: vm.username, password: vm.password).subscribe(onSuccess: {
                             globalUser.userid = $0
                             if globalUser.userid.isEmpty {
                                 showingAlert = true
