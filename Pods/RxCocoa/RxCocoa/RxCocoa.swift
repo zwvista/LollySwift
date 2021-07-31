@@ -6,7 +6,7 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
-import class Foundation.NSNull
+import Foundation
 
 // Importing RxCocoa also imports RxRelay
 @_exported import RxRelay
@@ -132,7 +132,7 @@ func castOrFatalError<T>(_ value: AnyObject!, message: String) -> T {
     return result
 }
 
-public func castOrFatalError<T>(_ value: Any!) -> T {
+func castOrFatalError<T>(_ value: Any!) -> T {
     let maybeResult: T? = value as? T
     guard let result = maybeResult else {
         rxFatalError("Failure converting from \(String(describing: value)) to \(T.self)")

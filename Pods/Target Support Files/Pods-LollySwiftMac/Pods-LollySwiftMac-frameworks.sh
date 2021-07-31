@@ -176,26 +176,22 @@ code_sign_if_enabled() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/Alamofire-macOS/Alamofire.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/CodableAlamofire-macOS/CodableAlamofire.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/CrossroadRegex-macOS/Regex.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/NSObject+Rx-macOS/NSObject_Rx.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RxAlamofire-macOS/RxAlamofire.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RxCocoa-macOS/RxCocoa.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RxRelay-macOS/RxRelay.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RxSwift-macOS/RxSwift.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/RxSwiftExt-macOS/RxSwiftExt.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Then-macOS/Then.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/Alamofire-macOS/Alamofire.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/CodableAlamofire-macOS/CodableAlamofire.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/CrossroadRegex-macOS/Regex.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/NSObject+Rx-macOS/NSObject_Rx.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RxAlamofire-macOS/RxAlamofire.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RxCocoa-macOS/RxCocoa.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RxRelay-macOS/RxRelay.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RxSwift-macOS/RxSwift.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/RxSwiftExt-macOS/RxSwiftExt.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Then-macOS/Then.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then

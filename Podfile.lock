@@ -1,55 +1,44 @@
 PODS:
-  - AKSideMenu (1.4.5)
-  - Alamofire (5.1.0)
-  - CodableAlamofire (1.2.1):
-    - Alamofire (~> 5.1.0)
+  - AKSideMenu (1.4.6)
+  - Alamofire (5.4.3)
   - CrossroadRegex (1.1.0)
-  - Differentiator (4.0.1)
+  - Differentiator (5.0.0)
   - DropDown (2.3.13)
-  - "NSObject+Rx (5.1.0)":
-    - RxSwift (~> 5.1)
-  - RxAlamofire (5.6.0):
-    - RxAlamofire/Core (= 5.6.0)
-  - RxAlamofire/Core (5.6.0):
-    - Alamofire (~> 5.1)
-    - RxSwift (~> 5.1)
-  - RxCocoa (5.1.1):
-    - RxRelay (~> 5)
-    - RxSwift (~> 5)
-  - RxDataSources (4.0.1):
-    - Differentiator (~> 4.0)
-    - RxCocoa (~> 5.0)
-    - RxSwift (~> 5.0)
-  - RxRelay (5.1.1):
-    - RxSwift (~> 5)
-  - RxSwift (5.1.1)
-  - RxSwiftExt (5.2.0):
-    - RxSwiftExt/Core (= 5.2.0)
-    - RxSwiftExt/RxCocoa (= 5.2.0)
-  - RxSwiftExt/Core (5.2.0):
-    - RxSwift (~> 5.0)
-  - RxSwiftExt/RxCocoa (5.2.0):
-    - RxCocoa (~> 5.0)
-    - RxSwiftExt/Core
+  - "NSObject+Rx (5.2.2)":
+    - RxSwift (~> 6.2)
+  - RxAlamofire (6.1.1):
+    - RxAlamofire/Core (= 6.1.1)
+  - RxAlamofire/Core (6.1.1):
+    - Alamofire (~> 5.4)
+    - RxSwift (~> 6.0)
+  - RxCocoa (6.2.0):
+    - RxRelay (= 6.2.0)
+    - RxSwift (= 6.2.0)
+  - RxDataSources (5.0.0):
+    - Differentiator (~> 5.0)
+    - RxCocoa (~> 6.0)
+    - RxSwift (~> 6.0)
+  - RxRelay (6.2.0):
+    - RxSwift (= 6.2.0)
+  - RxSwift (6.2.0)
   - Then (2.7.0)
 
 DEPENDENCIES:
   - AKSideMenu
-  - CodableAlamofire
+  - Alamofire (~> 5.4)
   - CrossroadRegex
   - DropDown
   - "NSObject+Rx"
-  - RxAlamofire
-  - RxCocoa
+  - RxAlamofire (~> 6)
+  - RxCocoa (~> 6)
   - RxDataSources
-  - RxSwiftExt (~> 5)
+  - RxSwift (~> 6)
   - Then
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - AKSideMenu
     - Alamofire
-    - CodableAlamofire
     - CrossroadRegex
     - Differentiator
     - DropDown
@@ -59,25 +48,22 @@ SPEC REPOS:
     - RxDataSources
     - RxRelay
     - RxSwift
-    - RxSwiftExt
     - Then
 
 SPEC CHECKSUMS:
-  AKSideMenu: 2880c44ee04a68f40be783c5cb997b2e0ee22401
-  Alamofire: 9d5c5f602928e512395b30950c5984eca840093c
-  CodableAlamofire: 3532ececac18593b300d775f2a51feca2f83a2f1
+  AKSideMenu: 1f2b261a82b89f980624dda4b3385544fbf178e0
+  Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
   CrossroadRegex: 5eaadb3f7b4014728f1cbd1014756b126c1dbd9a
-  Differentiator: 886080237d9f87f322641dedbc5be257061b0602
+  Differentiator: e8497ceab83c1b10ca233716d547b9af21b9344d
   DropDown: 8a2116376c1981888557f72ec2ffc9a5e0e456ec
-  "NSObject+Rx": fa6bbcc1ab1faa06b01466bc09b1e0692bbc5946
-  RxAlamofire: f34ddbab56fa2a36f99737f4d4ecc22288a1384f
-  RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
-  RxDataSources: efee07fa4de48477eca0a4611e6d11e2da9c1114
-  RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
-  RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
-  RxSwiftExt: 4ca80336f43c28f11a2825cdd2fc61dd6c044697
+  "NSObject+Rx": 61cf1f7306a73dcef8b36649198af0813ec18dfd
+  RxAlamofire: beb75a1c452d0de225651db4903f5d29d034a620
+  RxCocoa: 4baf94bb35f2c0ab31bc0cb9f1900155f646ba42
+  RxDataSources: aa47cc1ed6c500fa0dfecac5c979b723542d79cf
+  RxRelay: e72dbfd157807478401ef1982e1c61c945c94b2f
+  RxSwift: d356ab7bee873611322f134c5f9ef379fa183d8f
   Then: acfe0be7e98221c6204e12f8161459606d5d822d
 
-PODFILE CHECKSUM: 312394f629be03e67b22abfc2dcb1a6a44811e2f
+PODFILE CHECKSUM: ecd53f2722261fa0fec3230f3c34d853729abd62
 
 COCOAPODS: 1.10.0.beta.1

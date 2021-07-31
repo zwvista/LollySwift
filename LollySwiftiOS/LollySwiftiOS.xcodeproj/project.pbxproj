@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		29CFF3AA2D93455C46DA80F0 /* Pods_LollySwiftiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA5376BDE309080131C3F3FD /* Pods_LollySwiftiOS.framework */; };
 		5BA852CB29254BAE42951931 /* Pods_LollySwiftiOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2462FE0278FE5DE7FF9A4E2 /* Pods_LollySwiftiOSTests.framework */; };
-		8C0748E7209ED0DA0006BD1B /* RxCodableAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0748E6209ED0DA0006BD1B /* RxCodableAlamofire.swift */; };
 		8C0945691D122ACE003503ED /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0945681D122ACE003503ED /* SettingsViewController.swift */; };
 		8C1074322070A8C700CE91A0 /* Phrases.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C1074312070A8C700CE91A0 /* Phrases.storyboard */; };
 		8C1074342070A8CF00CE91A0 /* Words.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C1074332070A8CF00CE91A0 /* Words.storyboard */; };
@@ -65,8 +64,11 @@
 		95406BD3255B0B6000C87A0D /* WebTextbooksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95406BD1255B0B6000C87A0D /* WebTextbooksViewModel.swift */; };
 		954B8706218DC007007DC348 /* CommonApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954B8705218DC007007DC348 /* CommonApi.swift */; };
 		954D8B8D214389DB00651A80 /* RestApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C316579207676CF0015C247 /* RestApi.swift */; };
-		954D8B8E214389DB00651A80 /* RxCodableAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C0748E6209ED0DA0006BD1B /* RxCodableAlamofire.swift */; };
 		9557D6A826AA15EC00589196 /* UILabel+Rx2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9557D6A726AA15EC00589196 /* UILabel+Rx2.swift */; };
+		9562949526B5C3C9000C68B1 /* RxCodableAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9562949426B5C3C9000C68B1 /* RxCodableAlamofire.swift */; };
+		956294A726B5C67A000C68B1 /* DataRequest+Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956294A426B5C67A000C68B1 /* DataRequest+Decodable.swift */; };
+		956294A826B5C67A000C68B1 /* AlamofireDecodableError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956294A526B5C67A000C68B1 /* AlamofireDecodableError.swift */; };
+		956294A926B5C67A000C68B1 /* DataKeyPathSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956294A626B5C67A000C68B1 /* DataKeyPathSerializer.swift */; };
 		9568FF3325A567E4004598D8 /* PhrasesBaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9568FF3225A567E3004598D8 /* PhrasesBaseViewModel.swift */; };
 		9568FF3425A567E4004598D8 /* PhrasesBaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9568FF3225A567E3004598D8 /* PhrasesBaseViewModel.swift */; };
 		9568FF3825A567F2004598D8 /* WordsBaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9568FF3725A567F2004598D8 /* WordsBaseViewModel.swift */; };
@@ -196,7 +198,6 @@
 /* Begin PBXFileReference section */
 		3F6D181DCE907E3DD9932AC5 /* Pods-LollySwiftiOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LollySwiftiOSTests.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-LollySwiftiOSTests/Pods-LollySwiftiOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6C62147745E16D3870DB8D5F /* Pods-LollySwiftiOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LollySwiftiOS.release.xcconfig"; path = "../Pods/Target Support Files/Pods-LollySwiftiOS/Pods-LollySwiftiOS.release.xcconfig"; sourceTree = "<group>"; };
-		8C0748E6209ED0DA0006BD1B /* RxCodableAlamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxCodableAlamofire.swift; sourceTree = "<group>"; };
 		8C0945681D122ACE003503ED /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		8C1074312070A8C700CE91A0 /* Phrases.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Phrases.storyboard; sourceTree = "<group>"; };
 		8C1074332070A8CF00CE91A0 /* Words.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Words.storyboard; sourceTree = "<group>"; };
@@ -235,6 +236,10 @@
 		95406BD1255B0B6000C87A0D /* WebTextbooksViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebTextbooksViewModel.swift; sourceTree = "<group>"; };
 		954B8705218DC007007DC348 /* CommonApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonApi.swift; sourceTree = "<group>"; };
 		9557D6A726AA15EC00589196 /* UILabel+Rx2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+Rx2.swift"; sourceTree = "<group>"; };
+		9562949426B5C3C9000C68B1 /* RxCodableAlamofire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxCodableAlamofire.swift; sourceTree = "<group>"; };
+		956294A426B5C67A000C68B1 /* DataRequest+Decodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DataRequest+Decodable.swift"; sourceTree = "<group>"; };
+		956294A526B5C67A000C68B1 /* AlamofireDecodableError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlamofireDecodableError.swift; sourceTree = "<group>"; };
+		956294A626B5C67A000C68B1 /* DataKeyPathSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataKeyPathSerializer.swift; sourceTree = "<group>"; };
 		9568FF3225A567E3004598D8 /* PhrasesBaseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesBaseViewModel.swift; sourceTree = "<group>"; };
 		9568FF3725A567F2004598D8 /* WordsBaseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsBaseViewModel.swift; sourceTree = "<group>"; };
 		957B531E25A595FF00C18B06 /* WordsUnitBatchAddViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsUnitBatchAddViewModel.swift; sourceTree = "<group>"; };
@@ -346,6 +351,7 @@
 		8C316570207676CF0015C247 /* LollySwiftShared */ = {
 			isa = PBXGroup;
 			children = (
+				956294A326B5C67A000C68B1 /* CodableAlamofire */,
 				9591922F258D004F0070DBFD /* Models */,
 				95F1FA3724CB1FE7006CA15D /* RxBinding */,
 				8C316578207676CF0015C247 /* Shared */,
@@ -373,7 +379,7 @@
 				957B537325A8670D00C18B06 /* DictStore.swift */,
 				95CED3B3221170C20094622F /* iOSApi.swift */,
 				8C316579207676CF0015C247 /* RestApi.swift */,
-				8C0748E6209ED0DA0006BD1B /* RxCodableAlamofire.swift */,
+				9562949426B5C3C9000C68B1 /* RxCodableAlamofire.swift */,
 				8C1CF683206A2A4800714C33 /* UIExtensions.swift */,
 				9557D6A726AA15EC00589196 /* UILabel+Rx2.swift */,
 			);
@@ -506,6 +512,16 @@
 				953473EF1A0D16CF00FF2D56 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		956294A326B5C67A000C68B1 /* CodableAlamofire */ = {
+			isa = PBXGroup;
+			children = (
+				956294A426B5C67A000C68B1 /* DataRequest+Decodable.swift */,
+				956294A526B5C67A000C68B1 /* AlamofireDecodableError.swift */,
+				956294A626B5C67A000C68B1 /* DataKeyPathSerializer.swift */,
+			);
+			path = CodableAlamofire;
 			sourceTree = "<group>";
 		};
 		9591922F258D004F0070DBFD /* Models */ = {
@@ -830,6 +846,7 @@
 				95F632E525899A6A000CFD23 /* WebPageSelectViewController.swift in Sources */,
 				95F0FFF524C957AB00509DF3 /* DictsViewModel.swift in Sources */,
 				95919252258D004F0070DBFD /* MPattern.swift in Sources */,
+				956294A926B5C67A000C68B1 /* DataKeyPathSerializer.swift in Sources */,
 				95AA196822950834003620A2 /* WordsReviewViewController.swift in Sources */,
 				95FCBE5E25544A6E00859C1F /* WebPageSelectViewModel.swift in Sources */,
 				8C42B5B11D69A1D900DCB528 /* WordsLangViewController.swift in Sources */,
@@ -838,6 +855,7 @@
 				95F0FFEC24C957AB00509DF3 /* PhrasesLangViewModel.swift in Sources */,
 				95F0FFE724C957AB00509DF3 /* SingleWordViewModel.swift in Sources */,
 				951504D4261FB7F900F94A6E /* LoginViewController.swift in Sources */,
+				9562949526B5C3C9000C68B1 /* RxCodableAlamofire.swift in Sources */,
 				8CD16D201D69FE8F00F5F625 /* PhrasesLangDetailViewController.swift in Sources */,
 				95F1FA3E24CB1FE7006CA15D /* TwoWayBind.swift in Sources */,
 				95F1FA3F24CB1FE7006CA15D /* OneWayBind.swift in Sources */,
@@ -851,9 +869,9 @@
 				95CED3B4221170C20094622F /* iOSApi.swift in Sources */,
 				9591924D258D004F0070DBFD /* MLanguage.swift in Sources */,
 				95F0FFEE24C957AB00509DF3 /* TextbooksViewModel.swift in Sources */,
-				8C0748E7209ED0DA0006BD1B /* RxCodableAlamofire.swift in Sources */,
 				95837E9624DF35EB00B5D2AE /* WordsUnitDetailViewModel.swift in Sources */,
 				95919250258D004F0070DBFD /* MPatternWebPage.swift in Sources */,
+				956294A726B5C67A000C68B1 /* DataRequest+Decodable.swift in Sources */,
 				95F0FFE524C957AA00509DF3 /* WordsDictViewModel.swift in Sources */,
 				9589CACA258A086300F80499 /* PatternsWebPagesListViewController.swift in Sources */,
 				8CB025942096CB3E0087462E /* RootViewController.swift in Sources */,
@@ -869,6 +887,7 @@
 				9587EC212586FDE900777AEE /* PatternsWebPagesDetailViewModel.swift in Sources */,
 				9591924E258D004F0070DBFD /* MTextbook.swift in Sources */,
 				951F7F6825EEA2F90051E94E /* PhrasesUnitBatchEditViewModel.swift in Sources */,
+				956294A826B5C67A000C68B1 /* AlamofireDecodableError.swift in Sources */,
 				95F0FFEA24C957AB00509DF3 /* SinglePhraseViewModel.swift in Sources */,
 				95CED3CA2216C5B20094622F /* WordsTextbookDetailViewController.swift in Sources */,
 				95AA19662295081F003620A2 /* PhrasesReviewViewController.swift in Sources */,
@@ -978,7 +997,6 @@
 				95F0FFFE24C95B0D00509DF3 /* PhrasesReviewViewModel.swift in Sources */,
 				95F0FFFD24C95B0D00509DF3 /* SinglePhraseViewModel.swift in Sources */,
 				9501FB8C2593395900C1B13B /* MLanguage.swift in Sources */,
-				954D8B8E214389DB00651A80 /* RxCodableAlamofire.swift in Sources */,
 				95F1FA4824CB2A31006CA15D /* TwoWayBind.swift in Sources */,
 				9501FB9B2593395D00C1B13B /* MLangPhrase.swift in Sources */,
 				9501FB9A2593395D00C1B13B /* MUnitWord.swift in Sources */,

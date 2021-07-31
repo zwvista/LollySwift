@@ -11,7 +11,6 @@ import Foundation
 import RxSwift
 import Alamofire
 import RxAlamofire
-import CodableAlamofire
 
 class RxCodableAlamofire {
     public static func requestObject<T: Decodable>(_ method: Alamofire.HTTPMethod, _ url: URLConvertible, parameters: Parameters? = nil, encoding: ParameterEncoding = URLEncoding.default, headers: HTTPHeaders? = nil, queue: DispatchQueue = .main, keyPath: String? = nil, mapToObject object: T? = nil, decoder: JSONDecoder = JSONDecoder()) -> Observable<(HTTPURLResponse, T)> {
