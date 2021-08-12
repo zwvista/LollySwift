@@ -157,4 +157,4 @@ class BlogViewModel: NSObject {
 }
 
 let bigDigits = "０１２３４５６７８９"
-let bigDigitsArray = Array(arrayLiteral: bigDigits)
+let bigDigitsArray = bigDigits.map { String($0) }
