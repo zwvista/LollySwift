@@ -9,12 +9,11 @@
 #if os(iOS) || os(tvOS)
 
 import RxSwift
-import RxCocoa
 
 extension Reactive where Base: UILabel {
     
     /// Bindable sink for `enabled` property.
-    public var isEnabled: RxCocoa.Binder<Bool>  {
+    public var isEnabled: Binder<Bool>  {
         return Binder(self.base) { owner, value in
             owner.isEnabled = value
         }
