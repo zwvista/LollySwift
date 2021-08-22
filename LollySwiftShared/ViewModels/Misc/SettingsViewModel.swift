@@ -383,6 +383,7 @@ class SettingsViewModel: NSObject, ObservableObject {
                               MAutoCorrect.getDataByLang(USLANG),
                               MVoice.getDataByLang(USLANG))
             .flatMapCompletable { result in
+                self.delegate?.onUpdateLang()
                 self.arrDictsReference = result.0
                 self.selectedDictReferenceIndex = self.arrDictsReference.firstIndex { String($0.DICTID) == self.USDICTREFERENCE } ?? 0
                 self.selectedDictsReferenceIndexes = self.USDICTSREFERENCE.split(separator: ",").compactMap { id in self.arrDictsReference.firstIndex { String($0.DICTID) == id } }
@@ -406,7 +407,6 @@ class SettingsViewModel: NSObject, ObservableObject {
                 if self.arriOSVoices.isEmpty { self.arriOSVoices.append(MVoice()) }
                 self.selectedMacVoiceIndex = self.arrMacVoices.firstIndex { $0.ID == self.USMACVOICE } ?? 0
                 self.selectediOSVoiceIndex = self.arriOSVoices.firstIndex { $0.ID == self.USIOSVOICE } ?? 0
-                self.delegate?.onUpdateLang()
                 return Completable.zip((self.initialized ? Completable.empty() : Completable.zip(self.updateTextbook(), self.updateDictReference(), self.updateDictsReference(), self.updateDictNote(), self.updateDictTranslation(), self.updateMacVoice(), self.updateiOSVoice())), (!dirty ? Completable.empty() : MUserSetting.update(info: self.INFO_USLANG, intValue: self.USLANG)))
             }
     }
