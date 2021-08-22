@@ -8,7 +8,6 @@
 
 import Foundation
 import WebKit
-import NSObject_Rx
 
 class DictStore: NSObject {
     

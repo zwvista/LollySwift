@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import RxSwift
 
 class WordsUnitBatchAddViewController: NSViewController {
     
@@ -35,7 +36,7 @@ class WordsUnitBatchAddViewController: NSViewController {
         _ = itemEdit.indexPART <~> pubPart.rx.selectedItemIndex
         _ = itemEdit.WORDS <~> tvWords.rx.string
         btnOK.rx.tap.flatMap { [unowned self] _ in
-            self.vmEdit.onOK()
+            self.vmEdit.onOK().andThen(Single.just(()))
         }.subscribe(onCompleted: { [unowned self] in
             self.complete?()
             self.dismiss(self.btnOK)

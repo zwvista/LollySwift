@@ -8,7 +8,6 @@
 
 import Cocoa
 import RxSwift
-import NSObject_Rx
 
 @objcMembers
 class PatternsWebPagesDetailViewController: NSViewController {
@@ -43,7 +42,7 @@ class PatternsWebPagesDetailViewController: NSViewController {
         btnNew.isEnabled = vmEdit.isAddWebPage
         btnExisting.isEnabled = vmEdit.isAddWebPage
         btnOK.rx.tap.flatMap { [unowned self] _ in
-            self.vmEdit.onOK()
+            self.vmEdit.onOK().andThen(Single.just(()))
         }.subscribe { [unowned self] _ in
             self.complete?()
             self.dismiss(self.btnOK)

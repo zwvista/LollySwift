@@ -8,7 +8,6 @@
 
 import Cocoa
 import RxSwift
-import NSObject_Rx
 
 class PhrasesTextbookDetailViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 
@@ -51,7 +50,7 @@ class PhrasesTextbookDetailViewController: NSViewController, NSTableViewDataSour
         _ = itemEdit.TRANSLATION <~> tfTranslation.rx.text.orEmpty
         _ = vmEdit.isOKEnabled ~> btnOK.rx.isEnabled
         btnOK.rx.tap.flatMap { [unowned self] _ in
-            self.vmEdit.onOK()
+            self.vmEdit.onOK().andThen(Single.just(()))
         }.subscribe { [unowned self] _ in
             self.complete?()
             self.dismiss(self.btnOK)

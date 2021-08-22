@@ -9,7 +9,6 @@
 import Cocoa
 import WebKit
 import RxSwift
-import NSObject_Rx
 
 class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidation {
     

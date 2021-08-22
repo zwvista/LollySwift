@@ -8,7 +8,6 @@
 
 import Cocoa
 import RxSwift
-import NSObject_Rx
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
