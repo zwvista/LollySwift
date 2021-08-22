@@ -384,6 +384,7 @@ class SettingsViewModel: NSObject, ObservableObject {
                               MVoice.getDataByLang(USLANG))
             .flatMapCompletable { result in
                 self.arrDictsReference = result.0
+                self.selectedDictsReferenceIndexes = self.USDICTSREFERENCE.split(separator: ",").compactMap { id in self.arrDictsReference.firstIndex { String($0.DICTID) == id } }
                 self.arrDictsNote = result.1
                 self.arrDictsTranslation = result.2
                 self.arrTextbooks = result.3
@@ -395,7 +396,6 @@ class SettingsViewModel: NSObject, ObservableObject {
                 if self.arriOSVoices.isEmpty { self.arriOSVoices.append(MVoice()) }
                 self.delegate?.onUpdateLang()
                 self.selectedDictReferenceIndex = self.arrDictsReference.firstIndex { String($0.DICTID) == self.USDICTREFERENCE } ?? 0
-                self.selectedDictsReferenceIndexes = self.USDICTSREFERENCE.split(separator: ",").compactMap { id in self.arrDictsReference.firstIndex { String($0.DICTID) == id } }
                 if self.arrDictsNote.isEmpty { self.arrDictsNote.append(MDictionary()) }
                 self.selectedDictNoteIndex = self.arrDictsNote.firstIndex { $0.DICTID == self.USDICTNOTE } ?? 0
                 if self.arrDictsTranslation.isEmpty { self.arrDictsTranslation.append(MDictionary()) }
