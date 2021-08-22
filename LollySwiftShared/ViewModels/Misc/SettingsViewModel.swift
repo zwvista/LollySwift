@@ -383,28 +383,28 @@ class SettingsViewModel: NSObject, ObservableObject {
                               MAutoCorrect.getDataByLang(USLANG),
                               MVoice.getDataByLang(USLANG))
             .flatMapCompletable { result in
-                self.delegate?.onUpdateLang()
                 self.arrDictsReference = result.0
-                self.selectedDictReferenceIndex = self.arrDictsReference.firstIndex { String($0.DICTID) == self.USDICTREFERENCE } ?? 0
-                self.selectedDictsReferenceIndexes = self.USDICTSREFERENCE.split(separator: ",").compactMap { id in self.arrDictsReference.firstIndex { String($0.DICTID) == id } }
                 self.arrDictsNote = result.1
-                if self.arrDictsNote.isEmpty { self.arrDictsNote.append(MDictionary()) }
-                self.selectedDictNoteIndex = self.arrDictsNote.firstIndex { $0.DICTID == self.USDICTNOTE } ?? 0
                 self.arrDictsTranslation = result.2
-                if self.arrDictsTranslation.isEmpty { self.arrDictsTranslation.append(MDictionary()) }
-                self.selectedDictTranslationIndex = self.arrDictsTranslation.firstIndex { $0.DICTID == self.USDICTTRANSLATION } ?? 0
                 self.arrTextbooks = result.3
-                self.selectedTextbookIndex = self.arrTextbooks.firstIndex { $0.ID == self.USTEXTBOOK } ?? 0
-                self.arrTextbookFilters = self.arrTextbooks.map { MSelectItem(value: $0.ID, label: $0.TEXTBOOKNAME) }
-                self.arrTextbookFilters.insert(MSelectItem(value: 0, label: "All Textbooks"), at: 0)
-                self.arrWebTextbookFilters = self.arrTextbooks.filter { $0.ISWEB == 1 }.map { MSelectItem(value: $0.ID, label: $0.TEXTBOOKNAME) }
-                self.arrWebTextbookFilters.insert(MSelectItem(value: 0, label: "All Textbooks"), at: 0)
                 self.arrAutoCorrect = result.4
                 let arrVoices = result.5
                 self.arrMacVoices = arrVoices.filter { $0.VOICETYPEID == 2 }
                 if self.arrMacVoices.isEmpty { self.arrMacVoices.append(MVoice()) }
                 self.arriOSVoices = arrVoices.filter { $0.VOICETYPEID == 3 }
                 if self.arriOSVoices.isEmpty { self.arriOSVoices.append(MVoice()) }
+                self.delegate?.onUpdateLang()
+                self.selectedDictReferenceIndex = self.arrDictsReference.firstIndex { String($0.DICTID) == self.USDICTREFERENCE } ?? 0
+                self.selectedDictsReferenceIndexes = self.USDICTSREFERENCE.split(separator: ",").compactMap { id in self.arrDictsReference.firstIndex { String($0.DICTID) == id } }
+                if self.arrDictsNote.isEmpty { self.arrDictsNote.append(MDictionary()) }
+                self.selectedDictNoteIndex = self.arrDictsNote.firstIndex { $0.DICTID == self.USDICTNOTE } ?? 0
+                if self.arrDictsTranslation.isEmpty { self.arrDictsTranslation.append(MDictionary()) }
+                self.selectedDictTranslationIndex = self.arrDictsTranslation.firstIndex { $0.DICTID == self.USDICTTRANSLATION } ?? 0
+                self.selectedTextbookIndex = self.arrTextbooks.firstIndex { $0.ID == self.USTEXTBOOK } ?? 0
+                self.arrTextbookFilters = self.arrTextbooks.map { MSelectItem(value: $0.ID, label: $0.TEXTBOOKNAME) }
+                self.arrTextbookFilters.insert(MSelectItem(value: 0, label: "All Textbooks"), at: 0)
+                self.arrWebTextbookFilters = self.arrTextbooks.filter { $0.ISWEB == 1 }.map { MSelectItem(value: $0.ID, label: $0.TEXTBOOKNAME) }
+                self.arrWebTextbookFilters.insert(MSelectItem(value: 0, label: "All Textbooks"), at: 0)
                 self.selectedMacVoiceIndex = self.arrMacVoices.firstIndex { $0.ID == self.USMACVOICE } ?? 0
                 self.selectediOSVoiceIndex = self.arriOSVoices.firstIndex { $0.ID == self.USIOSVOICE } ?? 0
                 return Completable.zip((self.initialized ? Completable.empty() : Completable.zip(self.updateTextbook(), self.updateDictReference(), self.updateDictsReference(), self.updateDictNote(), self.updateDictTranslation(), self.updateMacVoice(), self.updateiOSVoice())), (!dirty ? Completable.empty() : MUserSetting.update(info: self.INFO_USLANG, intValue: self.USLANG)))
