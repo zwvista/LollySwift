@@ -37,10 +37,10 @@ class WordsUnitBatchAddViewController: NSViewController {
         _ = itemEdit.WORDS <~> tvWords.rx.string
         btnOK.rx.tap.flatMap { [unowned self] _ in
             self.vmEdit.onOK().andThen(Single.just(()))
-        }.subscribe(onCompleted: { [unowned self] in
+        }.subscribe { [unowned self] _ in
             self.complete?()
             self.dismiss(self.btnOK)
-        }) ~ rx.disposeBag
+        } ~ rx.disposeBag
     }
     
     override func viewDidAppear() {
