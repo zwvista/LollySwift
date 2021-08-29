@@ -158,6 +158,7 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
         if let tfNewWord = tfNewWord {
             _ = vmWords.newWord <~> tfNewWord.rx.text.orEmpty
             tfNewWord.rx.controlTextDidEndEditing.subscribe(onNext: { [unowned self] _ in
+                self.commitEditing()
                 if !self.vmWords.newWord.value.isEmpty {
                     self.addNewWord()
                 }
