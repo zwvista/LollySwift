@@ -31,12 +31,12 @@ class PatternsDetailViewController: NSViewController {
         _ = itemEdit.PATTERN <~> tfPattern.rx.text.orEmpty
         _ = itemEdit.NOTE <~> tfNote.rx.text.orEmpty
         _ = itemEdit.TAGS <~> tfTags.rx.text.orEmpty
-        btnOK.rx.tap.flatMap { [unowned self] _ in
+        btnOK.rx.tap.take(1).flatMap { [unowned self] _ in
             self.vmEdit.onOK()
-        }.subscribe { [unowned self] _ in
+        }.subscribe(onCompleted: { [unowned self] in
             self.complete?()
             self.dismiss(self.btnOK)
-        } ~ rx.disposeBag
+        }) ~ rx.disposeBag
     }
     
     override func viewDidAppear() {

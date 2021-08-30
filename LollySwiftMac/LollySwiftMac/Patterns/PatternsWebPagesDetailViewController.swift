@@ -41,12 +41,12 @@ class PatternsWebPagesDetailViewController: NSViewController {
         _ = itemEdit.URL <~> tfURL.rx.text.orEmpty
         btnNew.isEnabled = vmEdit.isAddWebPage
         btnExisting.isEnabled = vmEdit.isAddWebPage
-        btnOK.rx.tap.flatMap { [unowned self] _ in
-            self.vmEdit.onOK().andThen(Single.just(()))
-        }.subscribe { [unowned self] _ in
+        btnOK.rx.tap.take(1).flatMap { [unowned self] _ in
+            self.vmEdit.onOK()
+        }.subscribe(onCompleted: { [unowned self] in
             self.complete?()
             self.dismiss(self.btnOK)
-        } ~ rx.disposeBag
+        }) ~ rx.disposeBag
     }
     
     override func viewDidAppear() {
