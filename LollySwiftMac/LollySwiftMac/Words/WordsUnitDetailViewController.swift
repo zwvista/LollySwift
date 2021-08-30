@@ -71,9 +71,6 @@ class WordsUnitDetailViewController: NSViewController, NSTableViewDataSource, NS
         item.TOTAL = 0
         tfAccuracy.stringValue = item.ACCURACY
     }
-    
-    @IBAction func onOK(_ sender: Any) {
-    }
 
     func numberOfRows(in tableView: NSTableView) -> Int {
         arrWords.count
