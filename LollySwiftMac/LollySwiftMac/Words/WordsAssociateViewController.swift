@@ -83,7 +83,7 @@ class WordsAssociateViewController: NSViewController, NSTableViewDataSource, NST
             guard (col as! LollyCheckCell).chk!.state == .on else {continue}
             let item = arrWords[i]
             if phraseid != 0 {
-                o = o.concat(MWordPhrase.associate(wordid: item.WORDID, phraseid: phraseid))
+                o = o.andThen(MWordPhrase.associate(wordid: item.WORDID, phraseid: phraseid))
             }
         }
         o.subscribe(onCompleted: {
