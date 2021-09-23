@@ -45,17 +45,17 @@ class MPatternWebPage: NSObject, Codable {
         return RestApi.getRecords(url: url)
     }
     
-    static func update(_ id: Int, seqnum: Int) -> Completable {
+    static func update(_ id: Int, seqnum: Int) -> Single<()> {
         // SQL: UPDATE PATTERNSWEBPAGES SET SEQNUM=? WHERE ID=?
         let url = "\(CommonApi.urlAPI)PATTERNSWEBPAGES/\(id)"
         let body = "SEQNUM=\(seqnum)"
-        return RestApi.update(url: url, body: body).flatMapCompletable { print($0); return Completable.empty() }
+        return RestApi.update(url: url, body: body).map { print($0) }
     }
 
-    static func update(item: MPatternWebPage) -> Completable {
+    static func update(item: MPatternWebPage) -> Single<()> {
         // SQL: UPDATE PATTERNSWEBPAGES SET WEBPAGE=? WHERE ID=?
         let url = "\(CommonApi.urlAPI)PATTERNSWEBPAGES/\(item.ID)"
-        return RestApi.update(url: url, body: try! item.toJSONString()!).flatMapCompletable { print($0); return Completable.empty() }
+        return RestApi.update(url: url, body: try! item.toJSONString()!).map { print($0) }
     }
 
     static func create(item: MPatternWebPage) -> Single<Int> {
@@ -64,10 +64,10 @@ class MPatternWebPage: NSObject, Codable {
         return RestApi.create(url: url, body: try! item.toJSONString()!).map { Int($0)! }.do(onSuccess: { print($0) })
     }
     
-    static func delete(_ id: Int) -> Completable {
+    static func delete(_ id: Int) -> Single<()> {
         // SQL: DELETE PATTERNSWEBPAGES WHERE ID=?
         let url = "\(CommonApi.urlAPI)PATTERNSWEBPAGES/\(id)"
-        return RestApi.delete(url: url).flatMapCompletable { print($0); return Completable.empty() }
+        return RestApi.delete(url: url).map { print($0) }
     }
 }
 

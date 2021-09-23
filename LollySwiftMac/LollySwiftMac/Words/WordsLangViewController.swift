@@ -45,7 +45,7 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
 
     override func endEditing(row: Int) {
         let item = arrWords[row]
-        WordsLangViewModel.update(item: item).subscribe(onCompleted: {
+        WordsLangViewModel.update(item: item).subscribe(onSuccess: {
             self.tvWords.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvWords.tableColumns.count))
         }) ~ rx.disposeBag
     }
@@ -54,7 +54,7 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
         guard !vm.newWord.value.isEmpty else {return}
         let item = vm.newLangWord()
         item.WORD = vm.vmSettings.autoCorrectInput(text: vm.newWord.value)
-        WordsLangViewModel.create(item: item).subscribe(onCompleted: {
+        WordsLangViewModel.create(item: item).subscribe(onSuccess: {
             self.vm.arrWords.append(item)
             self.tvWords.reloadData()
             self.tfNewWord.stringValue = ""
@@ -73,13 +73,13 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
 
     override func deleteWord(row: Int) {
         let item = arrWords[row]
-        WordsLangViewModel.delete(item: item).subscribe(onCompleted: {
+        WordsLangViewModel.delete(item: item).subscribe(onSuccess: {
             self.doRefresh()
         }) ~ rx.disposeBag
     }
 
     @IBAction func refreshTableView(_ sender: AnyObject) {
-        vm.reload().subscribe(onCompleted: {
+        vm.reload().subscribe(onSuccess: {
             self.doRefresh()
         }) ~ rx.disposeBag
     }
@@ -105,14 +105,14 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
     
     @IBAction func getNote(_ sender: AnyObject) {
         let col = tvWords.tableColumns.firstIndex { $0.title == "NOTE" }!
-        vm.getNote(index: tvWords.selectedRow).subscribe(onCompleted: {
+        vm.getNote(index: tvWords.selectedRow).subscribe(onSuccess: {
             self.tvWords.reloadData(forRowIndexes: [self.tvWords.selectedRow], columnIndexes: [col])
         }) ~ rx.disposeBag
     }
     
     @IBAction func clearNote(_ sender: AnyObject) {
         let col = tvWords.tableColumns.firstIndex { $0.title == "NOTE" }!
-        vm.clearNote(index: tvWords.selectedRow).subscribe(onCompleted: {
+        vm.clearNote(index: tvWords.selectedRow).subscribe(onSuccess: {
             self.tvWords.reloadData(forRowIndexes: [self.tvWords.selectedRow], columnIndexes: [col])
         }) ~ rx.disposeBag
     }

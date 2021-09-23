@@ -16,13 +16,12 @@ class WordsLangViewModel: WordsBaseViewModel {
 
     public init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> ()) {
         super.init(settings: settings, needCopy: needCopy)
-        reload().subscribe(onCompleted: { complete() }) ~ rx.disposeBag
+        reload().subscribe(onSuccess: { complete() }) ~ rx.disposeBag
     }
     
-    func reload() -> Completable {
-        MLangWord.getDataByLang(vmSettings.selectedTextbook.LANGID).flatMapCompletable {
+    func reload() -> Single<()> {
+        MLangWord.getDataByLang(vmSettings.selectedTextbook.LANGID).map {
             self.arrWords = $0
-            return Completable.empty()
         }
     }
     
@@ -37,18 +36,17 @@ class WordsLangViewModel: WordsBaseViewModel {
         }
     }
     
-    static func update(item: MLangWord) -> Completable {
+    static func update(item: MLangWord) -> Single<()> {
         MLangWord.update(item: item)
     }
 
-    static func create(item: MLangWord) -> Completable {
-        MLangWord.create(item: item).flatMapCompletable {
+    static func create(item: MLangWord) -> Single<()> {
+        MLangWord.create(item: item).map {
             item.ID = $0
-            return Completable.empty()
         }
     }
     
-    static func delete(item: MLangWord) -> Completable {
+    static func delete(item: MLangWord) -> Single<()> {
         MLangWord.delete(item: item)
     }
     
@@ -58,15 +56,15 @@ class WordsLangViewModel: WordsBaseViewModel {
         }
     }
 
-    func getNote(index: Int) -> Completable {
+    func getNote(index: Int) -> Single<()> {
         let item = arrWords[index]
-        return vmSettings.getNote(word: item.WORD).flatMapCompletable { note in
+        return vmSettings.getNote(word: item.WORD).flatMap { note in
             item.NOTE = note
             return MLangWord.update(item.ID, note: note)
         }
     }
 
-    func clearNote(index: Int) -> Completable {
+    func clearNote(index: Int) -> Single<()> {
         let item = arrWords[index]
         item.NOTE = SettingsViewModel.zeroNote
         return WordsUnitViewModel.update(item.ID, note: item.NOTE)
@@ -76,10 +74,9 @@ class WordsLangViewModel: WordsBaseViewModel {
         super.init(settings: settings, needCopy: false)
     }
     
-    func getWords(phraseid: Int) -> Completable {
-        MWordPhrase.getWordsByPhraseId(phraseid).flatMapCompletable {
+    func getWords(phraseid: Int) -> Single<()> {
+        MWordPhrase.getWordsByPhraseId(phraseid).map {
             self.arrWords = $0
-            return Completable.empty()
         }
     }
 }

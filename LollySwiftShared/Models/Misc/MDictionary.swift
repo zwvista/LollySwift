@@ -88,10 +88,10 @@ class MDictionary: NSObject, Codable {
         return RestApi.getRecords(url: url)
     }
     
-    static func update(item: MDictionary) -> Completable {
+    static func update(item: MDictionary) -> Single<()> {
         // SQL: UPDATE DICTIONARIES SET DICTID=?, LANGIDFROM=?, LANGIDTO=?, NAME=?, SEQNUM=?, DICTTYPECODE=?, URL=?, CHCONV=?, AUTOMATION=?, AUTOJUMP=?, DICTTABLE=?, TRANSFORM=?, WAIT=?, TEMPLATE=?, TEMPLATE2=? WHERE ID=?
         let url = "\(CommonApi.urlAPI)DICTIONARIES/\(item.ID)"
-        return RestApi.update(url: url, body: try! item.toJSONString()!).flatMapCompletable { print($0); return Completable.empty() }
+        return RestApi.update(url: url, body: try! item.toJSONString()!).map { print($0) }
     }
     
     static func create(item: MDictionary) -> Single<Int> {

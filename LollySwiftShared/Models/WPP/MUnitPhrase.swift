@@ -88,18 +88,18 @@ class MUnitPhrase: NSObject, Codable, MPhraseProtocol {
         return setTextbook(RestApi.getRecords(url: url).map { $0.filter { $0.PHRASE == phrase } }, arrTextbooks: arrTextbooks)
     }
 
-    static func update(_ id: Int, seqnum: Int) -> Completable {
+    static func update(_ id: Int, seqnum: Int) -> Single<()> {
         // SQL: UPDATE UNITPHRASES SET SEQNUM=? WHERE ID=?
         let url = "\(CommonApi.urlAPI)UNITPHRASES/\(id)"
         let body = "SEQNUM=\(seqnum)"
-        return RestApi.update(url: url, body: body).flatMapCompletable { print($0); return Completable.empty() }
+        return RestApi.update(url: url, body: body).map { print($0) }
     }
     
-    static func update(item: MUnitPhrase) -> Completable {
+    static func update(item: MUnitPhrase) -> Single<()> {
         // SQL: CALL UNITPHRASES_UPDATE
         let url = "\(CommonApi.urlSP)UNITPHRASES_UPDATE"
         let parameters = item.toParameters()
-        return RestApi.callSP(url: url, parameters: parameters).flatMapCompletable { print($0); return Completable.empty() }
+        return RestApi.callSP(url: url, parameters: parameters).map { print($0) }
     }
 
     static func create(item: MUnitPhrase) -> Single<Int> {
@@ -109,11 +109,11 @@ class MUnitPhrase: NSObject, Codable, MPhraseProtocol {
         return RestApi.callSP(url: url, parameters: parameters).map { print($0); return Int($0.NEW_ID!)! }
     }
     
-    static func delete(item: MUnitPhrase) -> Completable {
+    static func delete(item: MUnitPhrase) -> Single<()> {
         // SQL: CALL UNITPHRASES_DELETE
         let url = "\(CommonApi.urlSP)UNITPHRASES_DELETE"
         let parameters = item.toParameters()
-        return RestApi.callSP(url: url, parameters: parameters).flatMapCompletable { print($0); return Completable.empty() }
+        return RestApi.callSP(url: url, parameters: parameters).map { print($0) }
     }
 }
 

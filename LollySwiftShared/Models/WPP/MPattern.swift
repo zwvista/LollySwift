@@ -35,10 +35,10 @@ class MPattern: NSObject, Codable {
         return RestApi.getRecords(url: url)
     }
     
-    static func update(item: MPattern) -> Completable {
+    static func update(item: MPattern) -> Single<()> {
         // SQL: UPDATE PATTERNS SET PATTERN=?, NOTE=?, TAGS=? WHERE ID=?
         let url = "\(CommonApi.urlAPI)PATTERNS/\(item.ID)"
-        return RestApi.update(url: url, body: try! item.toJSONString()!).flatMapCompletable { print($0); return Completable.empty() }
+        return RestApi.update(url: url, body: try! item.toJSONString()!).map { print($0) }
     }
 
     static func create(item: MPattern) -> Single<Int> {
@@ -47,24 +47,24 @@ class MPattern: NSObject, Codable {
         return RestApi.create(url: url, body: try! item.toJSONString()!).map { Int($0)! }.do(onSuccess: { print($0) })
     }
     
-    static func delete(_ id: Int) -> Completable {
+    static func delete(_ id: Int) -> Single<()> {
         // SQL: DELETE PATTERNS WHERE ID=?
         let url = "\(CommonApi.urlAPI)PATTERNS/\(id)"
-        return RestApi.delete(url: url).flatMapCompletable { print($0); return Completable.empty() }
+        return RestApi.delete(url: url).map { print($0) }
     }
     
-    static func mergePatterns(item: MPattern) -> Completable {
+    static func mergePatterns(item: MPattern) -> Single<()> {
         // SQL: PATTERNS_MERGE
         let url = "\(CommonApi.urlSP)PATTERNS_MERGE"
         let parameters = item.toParameters()
-        return RestApi.callSP(url: url, parameters: parameters).flatMapCompletable { print($0); return Completable.empty() }
+        return RestApi.callSP(url: url, parameters: parameters).map { print($0) }
     }
     
-    static func splitPattern(item: MPattern) -> Completable {
+    static func splitPattern(item: MPattern) -> Single<()> {
         // SQL: PATTERNS_SPLIT
         let url = "\(CommonApi.urlSP)PATTERNS_SPLIT"
         let parameters = item.toParameters()
-        return RestApi.callSP(url: url, parameters: parameters).flatMapCompletable { print($0); return Completable.empty() }
+        return RestApi.callSP(url: url, parameters: parameters).map { print($0) }
     }
 }
 

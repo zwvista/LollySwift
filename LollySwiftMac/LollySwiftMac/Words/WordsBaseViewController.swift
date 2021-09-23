@@ -296,7 +296,7 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
     }
     
     func getPhrases() {
-        vmPhrasesLang.getPhrases(wordid: vmWords.selectedWordID).subscribe(onCompleted: {
+        vmPhrasesLang.getPhrases(wordid: vmWords.selectedWordID).subscribe(onSuccess: {
             self.tvPhrases.reloadData()
         }) ~ rx.disposeBag
     }

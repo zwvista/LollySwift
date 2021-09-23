@@ -43,7 +43,7 @@ class TextbooksDetailViewController: NSViewController {
                 self.complete?()
             }) ~ rx.disposeBag
         } else {
-            TextbooksViewModel.update(item: item).subscribe(onCompleted: {
+            TextbooksViewModel.update(item: item).subscribe(onSuccess: {
                 self.complete?()
             }) ~ rx.disposeBag
         }

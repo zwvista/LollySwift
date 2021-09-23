@@ -23,7 +23,7 @@ class DictsViewModel: NSObject {
         }) ~ rx.disposeBag
     }
     
-    static func update(item: MDictionary) -> Completable {
+    static func update(item: MDictionary) -> Single<()> {
         MDictionary.update(item: item)
     }
 

@@ -44,11 +44,11 @@ class MWebPage: NSObject, Codable {
         return RestApi.getRecords(url: url)
     }
 
-    static func update(item: MPatternWebPage) -> Completable {
+    static func update(item: MPatternWebPage) -> Single<()> {
         // SQL: UPDATE WEBPAGES SET TITLE=?, URL=? WHERE ID=?
         let item2 = MWebPage(x: item)
         let url = "\(CommonApi.urlAPI)WEBPAGES/\(item.ID)"
-        return RestApi.update(url: url, body: try! item2.toJSONString()!).flatMapCompletable { print($0); return Completable.empty() }
+        return RestApi.update(url: url, body: try! item2.toJSONString()!).map { print($0) }
     }
 
     static func create(item: MPatternWebPage) -> Single<Int> {
@@ -58,10 +58,10 @@ class MWebPage: NSObject, Codable {
         return RestApi.create(url: url, body: try! item2.toJSONString()!).map { Int($0)! }.do(onSuccess: { print($0) })
     }
 
-    static func update(item: MWebPage) -> Completable {
+    static func update(item: MWebPage) -> Single<()> {
         // SQL: UPDATE WEBPAGES SET TITLE=?, URL=? WHERE ID=?
         let url = "\(CommonApi.urlAPI)WEBPAGES/\(item.ID)"
-        return RestApi.update(url: url, body: try! item.toJSONString()!).flatMapCompletable { print($0); return Completable.empty() }
+        return RestApi.update(url: url, body: try! item.toJSONString()!).map { print($0) }
     }
 
     static func create(item: MWebPage) -> Single<Int> {
@@ -70,9 +70,9 @@ class MWebPage: NSObject, Codable {
         return RestApi.create(url: url, body: try! item.toJSONString()!).map { Int($0)! }.do(onSuccess: { print($0) })
     }
     
-    static func delete(_ id: Int) -> Completable {
+    static func delete(_ id: Int) -> Single<()> {
         // SQL: DELETE WEBPAGES WHERE ID=?
         let url = "\(CommonApi.urlAPI)WEBPAGES/\(id)"
-        return RestApi.delete(url: url).flatMapCompletable { print($0); return Completable.empty() }
+        return RestApi.delete(url: url).map { print($0) }
     }
 }

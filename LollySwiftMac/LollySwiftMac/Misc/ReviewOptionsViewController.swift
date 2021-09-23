@@ -46,11 +46,11 @@ class ReviewOptionsViewController: NSViewController {
         _ = vm.optionsEdit.speakingEnabled <~> scSpeak.rx.isOn
         _ = vm.optionsEdit.reviewCount <~> stpReviewCount.rx.integerValue
         _ = vm.optionsEdit.reviewCount.map { String($0) } ~> tfReviewCount.rx.text.orEmpty
-        btnOK.rx.tap.take(1).subscribe(onCompleted: { [unowned self] in
+        btnOK.rx.tap.subscribe { [unowned self] _ in
             self.vm.onOK()
             self.complete?()
             self.dismiss(self.btnOK)
-        }) ~ rx.disposeBag
+        } ~ rx.disposeBag
     }
 
     deinit {

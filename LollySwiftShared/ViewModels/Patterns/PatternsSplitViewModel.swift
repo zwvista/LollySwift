@@ -41,7 +41,7 @@ class PatternsSplitViewModel: NSObject {
         }
     }
 
-    func onOK() -> Completable {
+    func onOK() -> Single<()> {
         let item = MPattern()
         itemEdit.save(to: item)
         item.PATTERNS_SPLIT = item.PATTERN

@@ -18,15 +18,14 @@ class WordsUnitViewModel: WordsBaseViewModel {
     init(settings: SettingsViewModel, inTextbook: Bool, needCopy: Bool, complete: @escaping () -> ()) {
         self.inTextbook = inTextbook
         super.init(settings: settings, needCopy: needCopy)
-        reload().subscribe(onCompleted: { complete() }) ~ rx.disposeBag
+        reload().subscribe(onSuccess: { complete() }) ~ rx.disposeBag
     }
     
-    func reload() -> Completable {
+    func reload() -> Single<()> {
         (inTextbook ? MUnitWord.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO) : MUnitWord.getDataByLang(vmSettings.selectedTextbook.LANGID, arrTextbooks: vmSettings.arrTextbooks))
-        .flatMapCompletable {
+        .map {
             self.arrWords = $0
             self.arrWordsFiltered = nil
-            return Completable.empty()
         }
     }
     
@@ -44,43 +43,43 @@ class WordsUnitViewModel: WordsBaseViewModel {
         }
     }
     
-    static func update(_ id: Int, seqnum: Int) -> Completable {
+    static func update(_ id: Int, seqnum: Int) -> Single<()> {
         MUnitWord.update(id, seqnum: seqnum)
     }
     
-    static func update(_ wordid: Int, note: String) -> Completable {
+    static func update(_ wordid: Int, note: String) -> Single<()> {
         MLangWord.update(wordid, note: note)
     }
 
-    func update(item: MUnitWord) -> Completable {
+    func update(item: MUnitWord) -> Single<()> {
         MUnitWord.update(item: item).flatMap { result in
             MUnitWord.getDataById(item.ID, arrTextbooks: self.vmSettings.arrTextbooks).map { ($0, result) }
-        }.flatMapCompletable { (o, result) in
+        }.flatMap { (o, result) in
             if let o = o {
                 let b = result == "2" || result == "4"
                 copyProperties(from: o, to: item)
-                return b || item.NOTE.isEmpty ? self.getNote(item: item) : Completable.empty()
+                return b || item.NOTE.isEmpty ? self.getNote(item: item) : Single.just(())
             } else {
-                return Completable.empty()
+                return Single.just(())
             }
         }
     }
     
-    func create(item: MUnitWord) -> Completable {
+    func create(item: MUnitWord) -> Single<()> {
         MUnitWord.create(item: item).flatMap {
             MUnitWord.getDataById($0, arrTextbooks: self.vmSettings.arrTextbooks)
-        }.flatMapCompletable { o in
+        }.flatMap { o in
             if let o = o {
                 self.arrWords.append(o)
                 copyProperties(from: o, to: item)
-                return item.NOTE.isEmpty ? self.getNote(item: item) : Completable.empty()
+                return item.NOTE.isEmpty ? self.getNote(item: item) : Single.just(())
             } else {
-                return Completable.empty()
+                return Single.just(())
             }
         }
     }
     
-    static func delete(item: MUnitWord) -> Completable {
+    static func delete(item: MUnitWord) -> Single<()> {
         MUnitWord.delete(item: item)
     }
 
@@ -89,7 +88,7 @@ class WordsUnitViewModel: WordsBaseViewModel {
             let item = arrWords[i - 1]
             guard item.SEQNUM != i else {continue}
             item.SEQNUM = i
-            WordsUnitViewModel.update(item.ID, seqnum: item.SEQNUM).subscribe(onCompleted: {
+            WordsUnitViewModel.update(item.ID, seqnum: item.SEQNUM).subscribe(onSuccess: {
                 complete(i - 1)
             }) ~ rx.disposeBag
         }
@@ -107,12 +106,12 @@ class WordsUnitViewModel: WordsBaseViewModel {
         }
     }
     
-    func getNote(index: Int) -> Completable {
+    func getNote(index: Int) -> Single<()> {
         getNote(item: arrWords[index])
     }
     
-    func getNote(item: MUnitWord) -> Completable {
-        vmSettings.getNote(word: item.WORD).flatMapCompletable { note in
+    func getNote(item: MUnitWord) -> Single<()> {
+        vmSettings.getNote(word: item.WORD).flatMap { note in
             item.NOTE = note
             return WordsUnitViewModel.update(item.WORDID, note: note)
         }
@@ -122,23 +121,23 @@ class WordsUnitViewModel: WordsBaseViewModel {
         vmSettings.getNotes(wordCount: arrWords.count, isNoteEmpty: {
             !ifEmpty || (self.arrWords[$0].NOTE).isEmpty
         }, getOne: { i in
-            self.getNote(index: i).subscribe(onCompleted: {
+            self.getNote(index: i).subscribe(onSuccess: {
                 oneComplete(i)
             }) ~ self.rx.disposeBag
         }, allComplete: allComplete) ~ self.rx.disposeBag
     }
 
-    func clearNote(index: Int) -> Completable {
+    func clearNote(index: Int) -> Single<()> {
         let item = arrWords[index]
         item.NOTE = SettingsViewModel.zeroNote
         return WordsUnitViewModel.update(item.WORDID, note: item.NOTE)
     }
     
-    func clearNotes(ifEmpty: Bool, oneComplete: @escaping (Int) -> Void) -> Completable {
+    func clearNotes(ifEmpty: Bool, oneComplete: @escaping (Int) -> Void) -> Single<()> {
         vmSettings.clearNotes(wordCount: arrWords.count, isNoteEmpty: {
             !ifEmpty || self.arrWords[$0].NOTE.isEmpty
         }, getOne: { i in
-            self.clearNote(index: i).do(onCompleted: { oneComplete(i) })
+            self.clearNote(index: i).do(onSuccess: { oneComplete(i) })
         })
     }
 }

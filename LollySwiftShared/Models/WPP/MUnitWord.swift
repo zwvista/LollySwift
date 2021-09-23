@@ -98,11 +98,11 @@ class MUnitWord: NSObject, Codable, MWordProtocol {
         return setTextbook(RestApi.getRecords(url: url).map { $0.filter { $0.WORD == word } }, arrTextbooks: arrTextbooks)
     }
 
-    static func update(_ id: Int, seqnum: Int) -> Completable {
+    static func update(_ id: Int, seqnum: Int) -> Single<()> {
         // SQL: UPDATE UNITWORDS SET SEQNUM=? WHERE ID=?
         let url = "\(CommonApi.urlAPI)UNITWORDS/\(id)"
         let body = "SEQNUM=\(seqnum)"
-        return RestApi.update(url: url, body: body).flatMapCompletable { print($0); return Completable.empty() }
+        return RestApi.update(url: url, body: body).map { print($0) }
     }
 
     static func update(item: MUnitWord) -> Single<String> {
@@ -119,11 +119,11 @@ class MUnitWord: NSObject, Codable, MWordProtocol {
         return RestApi.callSP(url: url, parameters: parameters).map { print($0); return Int($0.NEW_ID!)! }
     }
     
-    static func delete(item: MUnitWord) -> Completable {
+    static func delete(item: MUnitWord) -> Single<()> {
         // SQL: CALL UNITWORDS_DELETE
         let url = "\(CommonApi.urlSP)UNITWORDS_DELETE"
         let parameters = item.toParameters()
-        return RestApi.callSP(url: url, parameters: parameters).flatMapCompletable { print($0); return Completable.empty() }
+        return RestApi.callSP(url: url, parameters: parameters).map { print($0) }
     }
 }
 

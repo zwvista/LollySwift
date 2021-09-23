@@ -49,12 +49,12 @@ class PhrasesTextbookDetailViewController: NSViewController, NSTableViewDataSour
         _ = itemEdit.PHRASE <~> tfPhrase.rx.text.orEmpty
         _ = itemEdit.TRANSLATION <~> tfTranslation.rx.text.orEmpty
         _ = vmEdit.isOKEnabled ~> btnOK.rx.isEnabled
-        btnOK.rx.tap.take(1).flatMap { [unowned self] _ in
+        btnOK.rx.tap.flatMap { [unowned self] _ in
             self.vmEdit.onOK()
-        }.subscribe(onCompleted: { [unowned self] in
+        }.subscribe { [unowned self] _ in
             self.complete?()
             self.dismiss(self.btnOK)
-        }) ~ rx.disposeBag
+        } ~ rx.disposeBag
     }
     
     override func viewDidAppear() {

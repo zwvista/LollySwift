@@ -29,8 +29,8 @@ class WordsUnitBatchEditViewModel: NSObject {
         indexPART.accept(vm.vmSettings.arrParts.firstIndex { $0.value == part }!)
     }
     
-    func onOK(rows: [Bool]) -> Completable {
-        var o = Completable.empty()
+    func onOK(rows: [Bool]) -> Single<()> {
+        var o = Single.just(())
         for (i, isChecked) in rows.enumerated() {
             guard isChecked else {continue}
             let item = vm.arrWords[i]
@@ -38,7 +38,7 @@ class WordsUnitBatchEditViewModel: NSObject {
                 if unitChecked.value { item.UNIT = UNIT }
                 if partChecked.value { item.PART = PART }
                 if seqnumChecked.value { item.SEQNUM += Int(SEQNUM.value)! }
-                o = o.andThen(vm.update(item: item))
+                o = o.flatMap { self.vm.update(item: item) }
             }
         }
         return o

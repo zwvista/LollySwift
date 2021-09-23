@@ -18,15 +18,14 @@ class PhrasesUnitViewModel: PhrasesBaseViewModel {
     public init(settings: SettingsViewModel, inTextbook: Bool, needCopy: Bool, complete: @escaping () -> ()) {
         self.inTextbook = inTextbook
         super.init(settings: settings, needCopy: needCopy)
-        reload().subscribe(onCompleted: { complete() }) ~ rx.disposeBag
+        reload().subscribe(onSuccess: { complete() }) ~ rx.disposeBag
     }
     
-    func reload() -> Completable {
+    func reload() -> Single<()> {
         (inTextbook ? MUnitPhrase.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO) : MUnitPhrase.getDataByLang(vmSettings.selectedTextbook.LANGID, arrTextbooks: vmSettings.arrTextbooks))
-        .flatMapCompletable {
+        .map {
             self.arrPhrases = $0
             self.arrPhrasesFiltered = nil
-            return Completable.empty()
         }
     }
 
@@ -44,32 +43,30 @@ class PhrasesUnitViewModel: PhrasesBaseViewModel {
         }
     }
     
-    static func update(_ id: Int, seqnum: Int) -> Completable {
+    static func update(_ id: Int, seqnum: Int) -> Single<()> {
         MUnitPhrase.update(id, seqnum: seqnum)
     }
     
-    func update(item: MUnitPhrase) -> Completable {
-        MUnitPhrase.update(item: item).andThen(
+    func update(item: MUnitPhrase) -> Single<()> {
+        MUnitPhrase.update(item: item).flatMap {
             MUnitPhrase.getDataById(item.ID, arrTextbooks: self.vmSettings.arrTextbooks)
-        ).flatMapCompletable {
+        }.map {
             if let o = $0 { copyProperties(from: o, to: item) }
-            return Completable.empty()
         }
     }
     
-    func create(item: MUnitPhrase) -> Completable {
+    func create(item: MUnitPhrase) -> Single<()> {
         MUnitPhrase.create(item: item).flatMap {
             MUnitPhrase.getDataById($0, arrTextbooks: self.vmSettings.arrTextbooks)
-        }.flatMapCompletable {
+        }.map {
             if let o = $0 {
                 self.arrPhrases.append(o)
                 copyProperties(from: o, to: item)
             }
-            return Completable.empty()
         }
     }
     
-    static func delete(item: MUnitPhrase) -> Completable {
+    static func delete(item: MUnitPhrase) -> Single<()> {
         MUnitPhrase.delete(item: item)
     }
 
@@ -78,7 +75,7 @@ class PhrasesUnitViewModel: PhrasesBaseViewModel {
             let item = arrPhrases[i - 1]
             guard item.SEQNUM != i else {continue}
             item.SEQNUM = i
-            PhrasesUnitViewModel.update(item.ID, seqnum: item.SEQNUM).subscribe(onCompleted: {
+            PhrasesUnitViewModel.update(item.ID, seqnum: item.SEQNUM).subscribe(onSuccess: {
                 complete(i - 1)
             }) ~ rx.disposeBag
         }

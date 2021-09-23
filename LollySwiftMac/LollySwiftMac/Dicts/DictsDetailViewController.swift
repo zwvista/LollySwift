@@ -62,7 +62,7 @@ class DictsDetailViewController: NSViewController {
                 self.complete?()
             }) ~ rx.disposeBag
         } else {
-            DictsViewModel.update(item: item).subscribe(onCompleted: {
+            DictsViewModel.update(item: item).subscribe(onSuccess: {
                 self.complete?()
             }) ~ rx.disposeBag
         }

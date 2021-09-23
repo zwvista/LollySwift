@@ -23,7 +23,7 @@ class TextbooksViewModel: NSObject {
         }) ~ rx.disposeBag
     }
     
-    static func update(item: MTextbook) -> Completable {
+    static func update(item: MTextbook) -> Single<()> {
         MTextbook.update(item: item)
     }
     

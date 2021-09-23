@@ -56,13 +56,13 @@ class PhrasesLangViewController: PhrasesBaseViewController {
     }
 
     override func deletePhrase(row: Int) {
-        PhrasesLangViewModel.delete(item: arrPhrases[row]).subscribe(onCompleted: {
+        PhrasesLangViewModel.delete(item: arrPhrases[row]).subscribe(onSuccess: {
             self.doRefresh()
         }) ~ rx.disposeBag
     }
 
     @IBAction func refreshTableView(_ sender: AnyObject) {
-        vm.reload().subscribe(onCompleted: {
+        vm.reload().subscribe(onSuccess: {
             self.doRefresh()
         }) ~ rx.disposeBag
     }

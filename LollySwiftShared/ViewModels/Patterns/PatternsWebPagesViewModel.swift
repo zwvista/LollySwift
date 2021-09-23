@@ -24,41 +24,38 @@ class PatternsWebPagesViewModel: NSObject {
         super.init()
     }
     
-    func getWebPages() -> Completable {
+    func getWebPages() -> Single<()> {
         if selectedPatternItem == nil {
             arrWebPages.removeAll()
-            return Completable.empty()
+            return Single.just(())
         } else {
-            return MPatternWebPage.getDataByPattern(selectedPatternItem!.ID).flatMapCompletable {
+            return MPatternWebPage.getDataByPattern(selectedPatternItem!.ID).map {
                 self.arrWebPages = $0
-                return Completable.empty()
             }
         }
     }
 
-    static func updateWebPage(item: MPatternWebPage) -> Completable {
+    static func updateWebPage(item: MPatternWebPage) -> Single<()> {
         MWebPage.update(item: item)
     }
 
-    static func createWebPage(item: MPatternWebPage) -> Completable {
-        MWebPage.create(item: item).flatMapCompletable {
+    static func createWebPage(item: MPatternWebPage) -> Single<()> {
+        MWebPage.create(item: item).map {
             item.WEBPAGEID = $0
-            return Completable.empty()
         }
     }
 
-    static func updatePatternWebPage(item: MPatternWebPage) -> Completable {
+    static func updatePatternWebPage(item: MPatternWebPage) -> Single<()> {
         MPatternWebPage.update(item: item)
     }
 
-    static func createPatternWebPage(item: MPatternWebPage) -> Completable {
-        MPatternWebPage.create(item: item).flatMapCompletable {
+    static func createPatternWebPage(item: MPatternWebPage) -> Single<()> {
+        MPatternWebPage.create(item: item).map {
             item.ID = $0
-            return Completable.empty()
         }
     }
 
-    static func deleteWebPage(_ id: Int) -> Completable {
+    static func deleteWebPage(_ id: Int) -> Single<()> {
         MPatternWebPage.delete(id)
     }
 
@@ -75,7 +72,7 @@ class PatternsWebPagesViewModel: NSObject {
             let item = arrWebPages[i - 1]
             guard item.SEQNUM != i else {continue}
             item.SEQNUM = i
-            MPatternWebPage.update(item.ID, seqnum: item.SEQNUM).subscribe(onCompleted: {
+            MPatternWebPage.update(item.ID, seqnum: item.SEQNUM).subscribe(onSuccess: {
                 complete(i - 1)
             }) ~ rx.disposeBag
         }

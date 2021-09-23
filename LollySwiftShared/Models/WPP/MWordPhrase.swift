@@ -42,56 +42,56 @@ class MWordPhrase: NSObject, Codable {
         return RestApi.create(url: url, body: try! item.toJSONString()!).map { Int($0)! }.do(onSuccess: { print($0) })
     }
     
-    private static func delete(_ id: Int) -> Completable {
+    private static func delete(_ id: Int) -> Single<()> {
         // SQL: DELETE WORDSPHRASES WHERE ID=?
         let url = "\(CommonApi.urlAPI)WORDSPHRASES/\(id)"
-        return RestApi.delete(url: url).flatMapCompletable { print($0); return Completable.empty() }
+        return RestApi.delete(url: url).map { print($0) }
     }
     
-    static func deleteByWordId(_ wordid: Int) -> Completable {
+    static func deleteByWordId(_ wordid: Int) -> Single<()> {
         // SQL: DELETE WORDSPHRASES WHERE WORDID=?
-        return getPhrasesByWordId(wordid).flatMapCompletable { arr in
-            if arr.isEmpty {
-                return Completable.empty()
-            } else {
-                let ids = arr.map { String($0.ID) }.joined(separator: ",")
-                let url = "\(CommonApi.urlAPI)WORDSPHRASES/\(ids)"
-                return RestApi.delete(url: url).flatMapCompletable { print($0); return Completable.empty() }
-            }
-        }
-    }
-
-    static func deleteByPhraseId(_ phraseid: Int) -> Completable {
-        // SQL: DELETE WORDSPHRASES WHERE PHRASEID=?
-        getWordsByPhraseId(phraseid).flatMapCompletable { arr in
-            if arr.isEmpty {
-                return Completable.empty()
-            } else {
-                let ids = arr.map { String($0.ID) }.joined(separator: ",")
-                let url = "\(CommonApi.urlAPI)WORDSPHRASES/\(ids)"
-                return RestApi.delete(url: url).flatMapCompletable { print($0); return Completable.empty() }
-            }
-        }
-    }
-
-    static func associate(wordid: Int, phraseid: Int) -> Completable {
-        getDataByWordPhrase(wordid: wordid, phraseid: phraseid).flatMapCompletable { arr in
+        return getPhrasesByWordId(wordid).flatMap { arr in
             if !arr.isEmpty {
-                return Completable.empty()
+                return Single.just(())
+            } else {
+                let ids = arr.map { String($0.ID) }.joined(separator: ",")
+                let url = "\(CommonApi.urlAPI)WORDSPHRASES/\(ids)"
+                return RestApi.delete(url: url).map { print($0) }
+            }
+        }
+    }
+
+    static func deleteByPhraseId(_ phraseid: Int) -> Single<()> {
+        // SQL: DELETE WORDSPHRASES WHERE PHRASEID=?
+        getWordsByPhraseId(phraseid).flatMap { arr in
+            if arr.isEmpty {
+                return Single.just(())
+            } else {
+                let ids = arr.map { String($0.ID) }.joined(separator: ",")
+                let url = "\(CommonApi.urlAPI)WORDSPHRASES/\(ids)"
+                return RestApi.delete(url: url).map { print($0) }
+            }
+        }
+    }
+
+    static func associate(wordid: Int, phraseid: Int) -> Single<()> {
+        getDataByWordPhrase(wordid: wordid, phraseid: phraseid).flatMap { arr in
+            if !arr.isEmpty {
+                return Single.just(())
             } else {
                 let item = MWordPhrase()
                 item.WORDID = wordid
                 item.PHRASEID = phraseid
-                return create(item: item).flatMapCompletable { print($0); return Completable.empty() }
+                return create(item: item).map { print($0) }
             }
         }
     }
     
-    static func dissociate(wordid: Int, phraseid: Int) -> Completable {
-        getDataByWordPhrase(wordid: wordid, phraseid: phraseid).flatMapCompletable { arr in
-            var o = Completable.empty()
+    static func dissociate(wordid: Int, phraseid: Int) -> Single<()> {
+        getDataByWordPhrase(wordid: wordid, phraseid: phraseid).flatMap { arr in
+            var o = Single.just(())
             for v in arr {
-                o = o.andThen(delete(v.ID))
+                o = o.flatMap { delete(v.ID) }
             }
             return o
         }

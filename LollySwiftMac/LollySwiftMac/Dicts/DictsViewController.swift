@@ -69,7 +69,7 @@ class DictsViewController: NSViewController, LollyProtocol, NSTableViewDataSourc
         let newValue = sender.stringValue
         guard oldValue != newValue else {return}
         item.setValue(newValue, forKey: key)
-        DictsViewModel.update(item: item).subscribe(onCompleted: {
+        DictsViewModel.update(item: item).subscribe(onSuccess: {
             self.tableView.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count))
         }) ~ rx.disposeBag
     }

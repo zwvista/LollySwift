@@ -44,9 +44,9 @@ class TransformDetailViewModel: NSObject {
         }
     }
     
-    func getHtml() -> Completable {
+    func getHtml() -> Single<()> {
         sourceUrl = item.URL.replacingOccurrences(of: "{0}", with: sourceWord.urlEncoded())
-        return RestApi.getHtml(url: sourceUrl).flatMapCompletable { self.sourceText = $0; return Completable.empty() }
+        return RestApi.getHtml(url: sourceUrl).map { self.sourceText = $0 }
     }
     
     func executeTransform() {

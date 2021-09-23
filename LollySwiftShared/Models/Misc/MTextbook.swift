@@ -65,10 +65,10 @@ class MTextbook: NSObject, Codable {
         })
     }
 
-    static func update(item: MTextbook) -> Completable {
+    static func update(item: MTextbook) -> Single<()> {
         // SQL: UPDATE TEXTBOOKS SET NAME=?, UNITS=?, PARTS=? WHERE ID=?
         let url = "\(CommonApi.urlAPI)TEXTBOOKS/\(item.ID)"
-        return RestApi.update(url: url, body: try! item.toJSONString()!).flatMapCompletable { print($0); return Completable.empty() }
+        return RestApi.update(url: url, body: try! item.toJSONString()!).map { print($0) }
     }
 
     static func create(item: MTextbook) -> Single<Int> {

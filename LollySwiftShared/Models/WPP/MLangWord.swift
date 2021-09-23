@@ -41,17 +41,17 @@ class MLangWord: NSObject, Codable, MWordProtocol {
         return RestApi.getRecords(url: url)
     }
     
-    static func update(_ id: Int, note: String) -> Completable {
+    static func update(_ id: Int, note: String) -> Single<()> {
         // SQL: UPDATE LANGWORDS SET NOTE=? WHERE ID=?
         let url = "\(CommonApi.urlAPI)LANGWORDS/\(id)"
         let body = "NOTE=\(note)"
-        return RestApi.update(url: url, body: body).flatMapCompletable { print($0); return Completable.empty() }
+        return RestApi.update(url: url, body: body).map { print($0) }
     }
 
-    static func update(item: MLangWord) -> Completable {
+    static func update(item: MLangWord) -> Single<()> {
         // SQL: UPDATE LANGWORDS SET WORD=?, NOTE=? WHERE ID=?
         let url = "\(CommonApi.urlAPI)LANGWORDS/\(item.ID)"
-        return RestApi.update(url: url, body: try! item.toJSONString(prettyPrint: false)!).flatMapCompletable { print($0); return Completable.empty() }
+        return RestApi.update(url: url, body: try! item.toJSONString(prettyPrint: false)!).map { print($0) }
     }
 
     static func create(item: MLangWord) -> Single<Int> {
@@ -60,11 +60,11 @@ class MLangWord: NSObject, Codable, MWordProtocol {
         return RestApi.create(url: url, body: try! item.toJSONString()!).map { Int($0)! }.do(onSuccess: { print($0) })
     }
     
-    static func delete(item: MLangWord) -> Completable {
+    static func delete(item: MLangWord) -> Single<()> {
         // SQL: CALL LANGWORDS_DELETE
         let url = "\(CommonApi.urlSP)LANGWORDS_DELETE"
         let parameters = item.toParameters()
-        return RestApi.callSP(url: url, parameters: parameters).flatMapCompletable { print($0); return Completable.empty() }
+        return RestApi.callSP(url: url, parameters: parameters).map { print($0) }
     }
 }
 

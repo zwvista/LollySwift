@@ -23,10 +23,10 @@ class MWordFami: NSObject, Codable {
         return RestApi.getRecords(url: url)
     }
 
-    private static func update(item: MWordFami) -> Completable {
+    private static func update(item: MWordFami) -> Single<()> {
         // SQL: UPDATE WORDSFAMI SET USERID=?, WORDID=?, WHERE ID=?
         let url = "\(CommonApi.urlAPI)WORDSFAMI/\(item.ID)"
-        return RestApi.update(url: url, body: try! item.toJSONString()!).flatMapCompletable { print($0); return Completable.empty() }
+        return RestApi.update(url: url, body: try! item.toJSONString()!).map { print($0) }
     }
     
     private static func create(item: MWordFami) -> Single<Int> {
@@ -35,10 +35,10 @@ class MWordFami: NSObject, Codable {
         return RestApi.create(url: url, body: try! item.toJSONString()!).map { Int($0)! }.do(onSuccess: { print($0) })
     }
     
-    static func delete(_ id: Int) -> Completable {
+    static func delete(_ id: Int) -> Single<()> {
         // SQL: DELETE WORDSFAMI WHERE ID=?
         let url = "\(CommonApi.urlAPI)WORDSFAMI/\(id)"
-        return RestApi.delete(url: url).flatMapCompletable { print($0); return Completable.empty() }
+        return RestApi.delete(url: url).map { print($0) }
     }
     
     static func update(wordid: Int, isCorrect: Bool) -> Single<MWordFami> {
@@ -54,7 +54,7 @@ class MWordFami: NSObject, Codable {
                 item.ID = arr[0].ID
                 item.CORRECT = arr[0].CORRECT + (isCorrect ? 1 : 0)
                 item.TOTAL = arr[0].TOTAL + 1
-                return update(item: item).andThen(Single.just(item))
+                return update(item: item).map { item }
             }
         }
     }
