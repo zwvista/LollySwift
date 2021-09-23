@@ -21,7 +21,7 @@ class WebPageSelectViewModel: NSObject {
         self.vmSettings = settings
         super.init()
         reload(t: "", u: "").subscribe(onSuccess: { complete() }) ~ rx.disposeBag
-        Observable.combineLatest(title.debounce(.milliseconds(500), scheduler: MainScheduler.instance), url.debounce(.milliseconds(500), scheduler: MainScheduler.instance)).flatMap { (t, u) in self.reload(t: t, u: u) }.subscribe { complete() } ~ rx.disposeBag
+        Observable.combineLatest(title.debounce(.milliseconds(500), scheduler: MainScheduler.instance), url.debounce(.milliseconds(500), scheduler: MainScheduler.instance)).flatMap { (t, u) in self.reload(t: t, u: u) }.subscribe(onNext: { complete() }) ~ rx.disposeBag
     }
     
     func reload(t: String, u: String) -> Single<()> {

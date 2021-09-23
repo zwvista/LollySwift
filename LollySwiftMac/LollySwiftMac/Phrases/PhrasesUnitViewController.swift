@@ -175,17 +175,17 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     @IBAction func previousUnitPart(_ sender: AnyObject) {
         vmSettings.previousUnitPart().flatMap {
             self.vm.reload()
-        }.subscribe {
+        }.subscribe(onSuccess: {
             self.doRefresh()
-        } ~ rx.disposeBag
+        }) ~ rx.disposeBag
     }
     
     @IBAction func nextUnitPart(_ sender: AnyObject) {
         vmSettings.nextUnitPart().flatMap {
             self.vm.reload()
-        }.subscribe {
+        }.subscribe(onSuccess: {
             self.doRefresh()
-        } ~ rx.disposeBag
+        }) ~ rx.disposeBag
     }
     
     @IBAction func toggleToType(_ sender: AnyObject) {
@@ -193,9 +193,9 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
         let part = row == -1 ? vmSettings.arrParts[0].value : arrPhrases[row].PART
         vmSettings.toggleToType(part: part).flatMap {
             self.vm.reload()
-        }.subscribe {
+        }.subscribe(onSuccess: {
             self.doRefresh()
-        } ~ rx.disposeBag
+        }) ~ rx.disposeBag
     }
 
     override func updateStatusText() {
