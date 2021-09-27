@@ -136,7 +136,7 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
     }
     
     @objc func refresh(_ sender: UIRefreshControl) {
-        vm.getData().subscribe(onCompleted: {
+        vm.getData().subscribe(onSuccess: {
             sender.endRefreshing()
         }) ~ rx.disposeBag
     }

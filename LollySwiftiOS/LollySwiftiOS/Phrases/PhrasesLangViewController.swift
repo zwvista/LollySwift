@@ -89,7 +89,7 @@ class PhrasesLangViewController: PhrasesBaseViewController {
     @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
         guard segue.identifier == "Done" else {return}
         let controller = segue.source as! PhrasesLangDetailViewController
-        controller.vmEdit.onOK().subscribe(onCompleted: {
+        controller.vmEdit.onOK().subscribe(onSuccess: {
             self.tableView.reloadData()
         }) ~ rx.disposeBag
     }

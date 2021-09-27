@@ -50,7 +50,7 @@ class WordsUnitBatchEditViewController: UIViewController, UITableViewDelegate, U
     }
     
     func onDone() {
-        var o = Completable.empty()
+        var o = Single.just(())
         let unit = vmSettings.arrUnits[ddUnit.indexForSelectedRow!].value
         let part = vmSettings.arrParts[ddPart.indexForSelectedRow!].value
         let seqnum = Int(tfSeqNum.text ?? "") ?? 0
@@ -62,7 +62,7 @@ class WordsUnitBatchEditViewController: UIViewController, UITableViewDelegate, U
                 if swUnit.isOn { item.UNIT = unit }
                 if swPart.isOn { item.PART = part }
                 if swSeqNum.isOn { item.SEQNUM += seqnum }
-                o = o.andThen(vm.update(item: item))
+                o = o.flatMap { self.vm.update(item: item) }
             }
         }
         o.subscribe() ~ rx.disposeBag

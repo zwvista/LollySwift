@@ -68,7 +68,7 @@ extension BehaviorRelay where Element == String {
             if let nonMarkedTextValue = nonMarkedTextValue, nonMarkedTextValue != self.value {
                 self.accept(nonMarkedTextValue)
             }
-            }, onSuccess:  {
+            }, onCompleted:  {
                 bindToUIDisposable.dispose()
         })
         

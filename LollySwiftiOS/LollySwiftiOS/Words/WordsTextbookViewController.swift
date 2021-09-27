@@ -81,13 +81,13 @@ class WordsTextbookViewController: WordsBaseViewController {
             alertController.addAction(editAction2)
             if vmSettings.hasDictNote {
                 let getNoteAction = UIAlertAction(title: "Retrieve Note", style: .default) { _ in
-                    self.vm.getNote(index: indexPath.row).subscribe(onCompleted: {
+                    self.vm.getNote(index: indexPath.row).subscribe(onSuccess: {
                         self.tableView.reloadRows(at: [indexPath], with: .fade)
                     }) ~ self.rx.disposeBag
                 }
                 alertController.addAction(getNoteAction)
                 let clearNoteAction = UIAlertAction(title: "Clear Note", style: .default) { _ in
-                    self.vm.clearNote(index: indexPath.row).subscribe(onCompleted: {
+                    self.vm.clearNote(index: indexPath.row).subscribe(onSuccess: {
                         self.tableView.reloadRows(at: [indexPath], with: .fade)
                     }) ~ self.rx.disposeBag
                 }
@@ -124,7 +124,7 @@ class WordsTextbookViewController: WordsBaseViewController {
     @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
         guard segue.identifier == "Done" else {return}
         let controller = segue.source as! WordsTextbookDetailViewController
-        controller.vmEdit.onOK().subscribe(onCompleted: {
+        controller.vmEdit.onOK().subscribe(onSuccess: {
             self.tableView.reloadData()
         }) ~ rx.disposeBag
     }

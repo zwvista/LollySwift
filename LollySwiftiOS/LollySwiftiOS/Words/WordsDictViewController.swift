@@ -50,7 +50,7 @@ class WordsDictViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
         ddDictReference.selectRow(vmSettings.selectedDictReferenceIndex)
         ddDictReference.selectionAction = { [unowned self] (index: Int, item: String) in
             vmSettings.selectedDictReferenceIndex = index
-            vmSettings.updateDictReference().subscribe(onCompleted: {
+            vmSettings.updateDictReference().subscribe(onSuccess: {
                 self.selectDictChanged()
             }) ~ self.rx.disposeBag
         }
