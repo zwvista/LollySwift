@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="18122"/>
-        <plugIn identifier="com.apple.WebKit2IBPlugin" version="18122"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19162"/>
+        <plugIn identifier="com.apple.WebKit2IBPlugin" version="19162"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -1745,7 +1745,7 @@ Gw
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Krb-cH-ROB">
-                                <rect key="frame" x="161" y="13" width="54" height="32"/>
+                                <rect key="frame" x="162" y="13" width="53" height="32"/>
                                 <buttonCell key="cell" type="push" title="OK" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6gW-2H-EtG">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -2176,7 +2176,7 @@ DQ
                                 </tableHeaderView>
                             </scrollView>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="25w-P2-1xV">
-                                <rect key="frame" x="289" y="22" width="54" height="32"/>
+                                <rect key="frame" x="290" y="22" width="53" height="32"/>
                                 <buttonCell key="cell" type="push" title="OK" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="apz-Ir-tM5">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -3298,7 +3298,7 @@ Gw
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="h5X-MY-d5T">
-                                <rect key="frame" x="158" y="14" width="54" height="32"/>
+                                <rect key="frame" x="159" y="14" width="53" height="32"/>
                                 <buttonCell key="cell" type="push" title="OK" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="OWO-lg-gt4">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -5299,7 +5299,7 @@ Gw
                                 </tableHeaderView>
                             </scrollView>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JJ7-mW-EYz">
-                                <rect key="frame" x="158" y="14" width="54" height="32"/>
+                                <rect key="frame" x="159" y="14" width="53" height="32"/>
                                 <buttonCell key="cell" type="push" title="OK" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="FZD-T1-qLM">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -5706,8 +5706,8 @@ Gw
                                                 <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="d94-tp-wUP">
                                                     <font key="font" metaFont="system"/>
                                                     <segments>
-                                                        <segment label="One Pass" width="56"/>
-                                                        <segment label="On Repeat" width="64" selected="YES" tag="1"/>
+                                                        <segment image="arrow.forward" catalog="system" width="56"/>
+                                                        <segment image="repeat" catalog="system" width="64" selected="YES" tag="1"/>
                                                     </segments>
                                                 </segmentedCell>
                                             </segmentedControl>
@@ -5716,8 +5716,8 @@ Gw
                                                 <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="sVo-wl-PjN">
                                                     <font key="font" metaFont="system"/>
                                                     <segments>
-                                                        <segment label="Backward" width="58"/>
-                                                        <segment label="Forward" width="58" selected="YES" tag="1"/>
+                                                        <segment image="arrowtriangle.backward.fill" catalog="system" width="58"/>
+                                                        <segment image="arrowtriangle.forward.fill" catalog="system" width="58" selected="YES" tag="1"/>
                                                     </segments>
                                                 </segmentedCell>
                                             </segmentedControl>
@@ -6313,7 +6313,7 @@ Gw
                                 <rect key="frame" x="0.0" y="354" width="518" height="21"/>
                                 <subviews>
                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Pyw-im-LRM">
-                                        <rect key="frame" x="0.0" y="0.0" width="459" height="21"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="460" height="21"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="URL" drawsBackground="YES" id="Jzy-oR-ueg">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -6321,7 +6321,7 @@ Gw
                                         </textFieldCell>
                                     </textField>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LoD-Wg-rwg">
-                                        <rect key="frame" x="457" y="-6" width="68" height="32"/>
+                                        <rect key="frame" x="458" y="-6" width="67" height="32"/>
                                         <buttonCell key="cell" type="push" title="Open" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="vjP-sA-bOz">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -6682,7 +6682,7 @@ Gw
                                 </tableHeaderView>
                             </scrollView>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gR9-kf-Wan">
-                                <rect key="frame" x="463" y="14" width="54" height="32"/>
+                                <rect key="frame" x="464" y="14" width="53" height="32"/>
                                 <buttonCell key="cell" type="push" title="OK" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="hBl-pm-44t">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -6766,15 +6766,19 @@ Gw
         </scene>
     </scenes>
     <resources>
-        <image name="NSAddTemplate" width="15" height="13"/>
+        <image name="NSAddTemplate" width="14" height="13"/>
         <image name="NSAdvanced" width="32" height="32"/>
         <image name="NSBonjour" width="32" height="32"/>
         <image name="NSGoBackTemplate" width="10" height="14"/>
         <image name="NSGoForwardTemplate" width="10" height="14"/>
         <image name="NSInfo" width="32" height="32"/>
         <image name="NSRefreshTemplate" width="14" height="16"/>
-        <image name="NSRemoveTemplate" width="15" height="4"/>
+        <image name="NSRemoveTemplate" width="14" height="4"/>
         <image name="NSStatusNone" width="16" height="16"/>
         <image name="NSTrashEmpty" width="32" height="32"/>
+        <image name="arrow.forward" catalog="system" width="15" height="12"/>
+        <image name="arrowtriangle.backward.fill" catalog="system" width="14" height="13"/>
+        <image name="arrowtriangle.forward.fill" catalog="system" width="14" height="13"/>
+        <image name="repeat" catalog="system" width="17" height="14"/>
     </resources>
 </document>
