@@ -657,7 +657,8 @@ class SettingsViewModel: NSObject, ObservableObject {
                 i += 1
             }
             if i < wordCount {
-                o = o.flatMap { getOne(i) }
+                let j = i
+                o = o.flatMap { getOne(j) }
             }
             i += 1
         }
