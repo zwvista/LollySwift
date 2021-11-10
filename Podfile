@@ -1,11 +1,12 @@
 workspace 'LollySwift'
 
-source 'https://github.com/CocoaPods/Specs.git'
+source 'https://cdn.cocoapods.org/'
 use_frameworks!
 
 target 'LollySwiftiOS' do
 platform :ios, '13.6'
 project 'LollySwiftiOS/LollySwiftiOS'
+pod 'CodableAlamofire', :git => 'https://github.com/zwvista/CodableAlamofire'
 pod 'Alamofire', '~> 5.4'
 pod 'RxAlamofire', '~> 6'
 pod 'RxSwift', '~> 6'
@@ -21,6 +22,7 @@ end
 target 'LollySwiftiOSTests' do
 platform :ios, '13.6'
 project 'LollySwiftiOS/LollySwiftiOS'
+pod 'CodableAlamofire', :git => 'https://github.com/zwvista/CodableAlamofire'
 pod 'Alamofire', '~> 5.4'
 pod 'RxAlamofire', '~> 6'
 pod 'RxSwift', '~> 6'
@@ -34,6 +36,7 @@ end
 target 'LollySwiftMac' do
 platform :osx, '10.15'
 project 'LollySwiftMac/LollySwiftMac'
+pod 'CodableAlamofire', :git => 'https://github.com/zwvista/CodableAlamofire'
 pod 'Alamofire', '~> 5.4'
 pod 'RxAlamofire', '~> 6'
 pod 'RxSwift', '~> 6'
@@ -46,6 +49,7 @@ end
 target 'LollySwiftMacTests' do
 platform :osx, '10.15'
 project 'LollySwiftMac/LollySwiftMac'
+pod 'CodableAlamofire', :git => 'https://github.com/zwvista/CodableAlamofire'
 pod 'Alamofire', '~> 5.4'
 pod 'RxAlamofire', '~> 6'
 pod 'RxSwift', '~> 6'
@@ -58,6 +62,7 @@ end
 target 'LollySwiftUIiOS' do
 platform :ios, '13.6'
 project 'LollySwiftUIiOS/LollySwiftUIiOS'
+pod 'CodableAlamofire', :git => 'https://github.com/zwvista/CodableAlamofire'
 pod 'Alamofire', '~> 5.4'
 pod 'RxAlamofire', '~> 6'
 pod 'RxSwift', '~> 6'
@@ -73,6 +78,7 @@ end
 target 'LollySwiftUIiOSTests' do
 platform :ios, '13.6'
 project 'LollySwiftUIiOS/LollySwiftUIiOS'
+pod 'CodableAlamofire', :git => 'https://github.com/zwvista/CodableAlamofire'
 pod 'Alamofire', '~> 5.4'
 pod 'RxAlamofire', '~> 6'
 pod 'RxSwift', '~> 6'
@@ -88,6 +94,7 @@ end
 target 'LollySwiftUIMac' do
 platform :osx, '10.15'
 project 'LollySwiftUIMac/LollySwiftUIMac'
+pod 'CodableAlamofire', :git => 'https://github.com/zwvista/CodableAlamofire'
 pod 'Alamofire', '~> 5.4'
 pod 'RxAlamofire', '~> 6'
 pod 'RxSwift', '~> 6'
@@ -100,6 +107,7 @@ end
 target 'LollySwiftUIMacTests' do
 platform :osx, '10.15'
 project 'LollySwiftUIMac/LollySwiftUIMac'
+pod 'CodableAlamofire', :git => 'https://github.com/zwvista/CodableAlamofire'
 pod 'Alamofire', '~> 5.4'
 pod 'RxAlamofire', '~> 6'
 pod 'RxSwift', '~> 6'

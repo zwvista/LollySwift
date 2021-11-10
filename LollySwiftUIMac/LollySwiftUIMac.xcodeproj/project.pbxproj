@@ -54,9 +54,6 @@
 		953FCDE325792A7000666503 /* MacApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953FCDA125792A7000666503 /* MacApi.swift */; };
 		953FCDE425792A7000666503 /* CommonApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953FCDA225792A7000666503 /* CommonApi.swift */; };
 		953FCDE525792A7000666503 /* NSSegmentedControl+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953FCDA325792A7000666503 /* NSSegmentedControl+Rx.swift */; };
-		956294B526B5C6A1000C68B1 /* DataRequest+Decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956294B226B5C6A1000C68B1 /* DataRequest+Decodable.swift */; };
-		956294B626B5C6A1000C68B1 /* AlamofireDecodableError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956294B326B5C6A1000C68B1 /* AlamofireDecodableError.swift */; };
-		956294B726B5C6A1000C68B1 /* DataKeyPathSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956294B426B5C6A1000C68B1 /* DataKeyPathSerializer.swift */; };
 		958655B325A75EEB00B5039C /* WordsBaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958655B125A75EEB00B5039C /* WordsBaseViewModel.swift */; };
 		958655B425A75EEB00B5039C /* WordsUnitBatchAddViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958655B225A75EEB00B5039C /* WordsUnitBatchAddViewModel.swift */; };
 		958655BA25A75EFA00B5039C /* PhrasesUnitBatchAddViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958655B825A75EFA00B5039C /* PhrasesUnitBatchAddViewModel.swift */; };
@@ -160,9 +157,6 @@
 		953FCDA125792A7000666503 /* MacApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacApi.swift; sourceTree = "<group>"; };
 		953FCDA225792A7000666503 /* CommonApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonApi.swift; sourceTree = "<group>"; };
 		953FCDA325792A7000666503 /* NSSegmentedControl+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSSegmentedControl+Rx.swift"; sourceTree = "<group>"; };
-		956294B226B5C6A1000C68B1 /* DataRequest+Decodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DataRequest+Decodable.swift"; sourceTree = "<group>"; };
-		956294B326B5C6A1000C68B1 /* AlamofireDecodableError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlamofireDecodableError.swift; sourceTree = "<group>"; };
-		956294B426B5C6A1000C68B1 /* DataKeyPathSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataKeyPathSerializer.swift; sourceTree = "<group>"; };
 		958655B125A75EEB00B5039C /* WordsBaseViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsBaseViewModel.swift; sourceTree = "<group>"; };
 		958655B225A75EEB00B5039C /* WordsUnitBatchAddViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsUnitBatchAddViewModel.swift; sourceTree = "<group>"; };
 		958655B825A75EFA00B5039C /* PhrasesUnitBatchAddViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesUnitBatchAddViewModel.swift; sourceTree = "<group>"; };
@@ -304,7 +298,6 @@
 		953FCD7225792A6F00666503 /* LollySwiftShared */ = {
 			isa = PBXGroup;
 			children = (
-				956294B126B5C6A1000C68B1 /* CodableAlamofire */,
 				9591925C258D00720070DBFD /* Models */,
 				953FCD9425792A7000666503 /* RxBinding */,
 				953FCD9A25792A7000666503 /* Shared */,
@@ -409,16 +402,6 @@
 				953FCD9C25792A7000666503 /* RxCodableAlamofire.swift */,
 			);
 			path = Shared;
-			sourceTree = "<group>";
-		};
-		956294B126B5C6A1000C68B1 /* CodableAlamofire */ = {
-			isa = PBXGroup;
-			children = (
-				956294B226B5C6A1000C68B1 /* DataRequest+Decodable.swift */,
-				956294B326B5C6A1000C68B1 /* AlamofireDecodableError.swift */,
-				956294B426B5C6A1000C68B1 /* DataKeyPathSerializer.swift */,
-			);
-			path = CodableAlamofire;
 			sourceTree = "<group>";
 		};
 		9591925C258D00720070DBFD /* Models */ = {
@@ -694,7 +677,6 @@
 				953FCDD825792A7000666503 /* DisposedBy.swift in Sources */,
 				95919272258D00720070DBFD /* MCommon.swift in Sources */,
 				953FCDD725792A7000666503 /* PhrasesUnitDetailViewModel.swift in Sources */,
-				956294B626B5C6A1000C68B1 /* AlamofireDecodableError.swift in Sources */,
 				95919273258D00720070DBFD /* MDictionary.swift in Sources */,
 				953FCDDE25792A7000666503 /* RxCodableAlamofire.swift in Sources */,
 				953FCDC625792A7000666503 /* WordsLangViewModel.swift in Sources */,
@@ -706,7 +688,6 @@
 				953FCDD625792A7000666503 /* PhrasesUnitViewModel.swift in Sources */,
 				958655B425A75EEB00B5039C /* WordsUnitBatchAddViewModel.swift in Sources */,
 				953FCDDB25792A7000666503 /* Drive.swift in Sources */,
-				956294B726B5C6A1000C68B1 /* DataKeyPathSerializer.swift in Sources */,
 				953FCDC525792A7000666503 /* WordsLangDetailViewModel.swift in Sources */,
 				9591927F258D00720070DBFD /* MPattern.swift in Sources */,
 				95919283258D00720070DBFD /* MUnitPhrase.swift in Sources */,
@@ -720,7 +701,6 @@
 				953FCDDC25792A7000666503 /* Emit.swift in Sources */,
 				958655BA25A75EFA00B5039C /* PhrasesUnitBatchAddViewModel.swift in Sources */,
 				953FCDC325792A7000666503 /* WebTextbooksViewModel.swift in Sources */,
-				956294B526B5C6A1000C68B1 /* DataRequest+Decodable.swift in Sources */,
 				953FCDD925792A7000666503 /* TwoWayBind.swift in Sources */,
 				95919277258D00720070DBFD /* MUserSetting.swift in Sources */,
 				95919280258D00720070DBFD /* MWordFami.swift in Sources */,
