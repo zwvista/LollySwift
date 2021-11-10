@@ -9,6 +9,7 @@
 import Foundation
 import RxSwift
 import RxRelay
+import RxBinding
 
 class PhrasesLangDetailViewModel: NSObject {
     var vm: PhrasesLangViewModel!

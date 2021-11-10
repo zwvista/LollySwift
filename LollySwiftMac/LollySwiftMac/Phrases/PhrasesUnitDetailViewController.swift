@@ -8,6 +8,7 @@
 
 import Cocoa
 import RxSwift
+import RxBinding
 
 class PhrasesUnitDetailViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 

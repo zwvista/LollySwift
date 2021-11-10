@@ -8,6 +8,7 @@
 
 import Cocoa
 import RxSwift
+import RxBinding
 
 class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldDelegate {
     @objc dynamic var vm: PhrasesReviewViewModel!

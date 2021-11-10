@@ -13,6 +13,9 @@ PODS:
   - RxAlamofire/Core (6.1.1):
     - Alamofire (~> 5.4)
     - RxSwift (~> 6.0)
+  - RxBinding (0.51):
+    - RxCocoa (~> 6)
+    - RxSwift (~> 6)
   - RxCocoa (6.2.0):
     - RxRelay (= 6.2.0)
     - RxSwift (= 6.2.0)
@@ -27,15 +30,13 @@ PODS:
 
 DEPENDENCIES:
   - AKSideMenu
-  - Alamofire (~> 5.4)
   - CodableAlamofire (from `https://github.com/zwvista/CodableAlamofire`)
   - CrossroadRegex
   - DropDown
   - "NSObject+Rx"
   - RxAlamofire (~> 6)
-  - RxCocoa (~> 6)
+  - RxBinding (from `https://github.com/zwvista/RxBinding`)
   - RxDataSources
-  - RxSwift (~> 6)
   - Then
 
 SPEC REPOS:
@@ -56,11 +57,16 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   CodableAlamofire:
     :git: https://github.com/zwvista/CodableAlamofire
+  RxBinding:
+    :git: https://github.com/zwvista/RxBinding
 
 CHECKOUT OPTIONS:
   CodableAlamofire:
     :commit: cf9369fc18e1326fa8e042d53bb716db0c5d02c8
     :git: https://github.com/zwvista/CodableAlamofire
+  RxBinding:
+    :commit: 5176ecc93ae6eff8fa8b1932a145235a75b519d8
+    :git: https://github.com/zwvista/RxBinding
 
 SPEC CHECKSUMS:
   AKSideMenu: 1f2b261a82b89f980624dda4b3385544fbf178e0
@@ -71,12 +77,13 @@ SPEC CHECKSUMS:
   DropDown: 8a2116376c1981888557f72ec2ffc9a5e0e456ec
   "NSObject+Rx": 61cf1f7306a73dcef8b36649198af0813ec18dfd
   RxAlamofire: beb75a1c452d0de225651db4903f5d29d034a620
+  RxBinding: a09619842d943f157557541866f7ea832687e0ab
   RxCocoa: 4baf94bb35f2c0ab31bc0cb9f1900155f646ba42
   RxDataSources: aa47cc1ed6c500fa0dfecac5c979b723542d79cf
   RxRelay: e72dbfd157807478401ef1982e1c61c945c94b2f
   RxSwift: d356ab7bee873611322f134c5f9ef379fa183d8f
   Then: acfe0be7e98221c6204e12f8161459606d5d822d
 
-PODFILE CHECKSUM: a9c3ee25deabc017fd79290fe496f454f41fbc5a
+PODFILE CHECKSUM: cf271047e8974ff741cd8755365e1af0b109dac5
 
 COCOAPODS: 1.11.2

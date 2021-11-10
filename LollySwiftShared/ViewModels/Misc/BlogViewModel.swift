@@ -9,6 +9,7 @@
 import Foundation
 import Regex
 import RxSwift
+import RxBinding
 
 class BlogViewModel: NSObject {
     

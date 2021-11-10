@@ -8,6 +8,7 @@
 
 import Foundation
 import RxSwift
+import RxBinding
 
 class PatternsWebPagesViewModel: NSObject {
     var vmSettings: SettingsViewModel

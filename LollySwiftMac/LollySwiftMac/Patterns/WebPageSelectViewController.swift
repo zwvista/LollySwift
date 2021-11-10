@@ -8,6 +8,7 @@
 
 import Cocoa
 import RxSwift
+import RxBinding
 
 @objcMembers
 class WebPageSelectViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {

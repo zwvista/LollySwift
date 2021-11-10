@@ -9,6 +9,7 @@
 import Foundation
 import RxSwift
 import RxRelay
+import RxBinding
 
 class WebPageSelectViewModel: NSObject {
     let title = BehaviorRelay(value: "")

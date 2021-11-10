@@ -8,6 +8,7 @@
 
 import Foundation
 import RxSwift
+import RxBinding
 import NSObject_Rx
 
 class DictsViewModel: NSObject {

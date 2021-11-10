@@ -41,11 +41,6 @@
 		953FCDD525792A7000666503 /* PhrasesLangDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953FCD9125792A7000666503 /* PhrasesLangDetailViewModel.swift */; };
 		953FCDD625792A7000666503 /* PhrasesUnitViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953FCD9225792A7000666503 /* PhrasesUnitViewModel.swift */; };
 		953FCDD725792A7000666503 /* PhrasesUnitDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953FCD9325792A7000666503 /* PhrasesUnitDetailViewModel.swift */; };
-		953FCDD825792A7000666503 /* DisposedBy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953FCD9525792A7000666503 /* DisposedBy.swift */; };
-		953FCDD925792A7000666503 /* TwoWayBind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953FCD9625792A7000666503 /* TwoWayBind.swift */; };
-		953FCDDA25792A7000666503 /* OneWayBind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953FCD9725792A7000666503 /* OneWayBind.swift */; };
-		953FCDDB25792A7000666503 /* Drive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953FCD9825792A7000666503 /* Drive.swift */; };
-		953FCDDC25792A7000666503 /* Emit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953FCD9925792A7000666503 /* Emit.swift */; };
 		953FCDDD25792A7000666503 /* NSPopUpButton+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953FCD9B25792A7000666503 /* NSPopUpButton+Rx.swift */; };
 		953FCDDE25792A7000666503 /* RxCodableAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953FCD9C25792A7000666503 /* RxCodableAlamofire.swift */; };
 		953FCDDF25792A7000666503 /* RestApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953FCD9D25792A7000666503 /* RestApi.swift */; };
@@ -144,11 +139,6 @@
 		953FCD9125792A7000666503 /* PhrasesLangDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesLangDetailViewModel.swift; sourceTree = "<group>"; };
 		953FCD9225792A7000666503 /* PhrasesUnitViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesUnitViewModel.swift; sourceTree = "<group>"; };
 		953FCD9325792A7000666503 /* PhrasesUnitDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesUnitDetailViewModel.swift; sourceTree = "<group>"; };
-		953FCD9525792A7000666503 /* DisposedBy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisposedBy.swift; sourceTree = "<group>"; };
-		953FCD9625792A7000666503 /* TwoWayBind.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwoWayBind.swift; sourceTree = "<group>"; };
-		953FCD9725792A7000666503 /* OneWayBind.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OneWayBind.swift; sourceTree = "<group>"; };
-		953FCD9825792A7000666503 /* Drive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Drive.swift; sourceTree = "<group>"; };
-		953FCD9925792A7000666503 /* Emit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Emit.swift; sourceTree = "<group>"; };
 		953FCD9B25792A7000666503 /* NSPopUpButton+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSPopUpButton+Rx.swift"; sourceTree = "<group>"; };
 		953FCD9C25792A7000666503 /* RxCodableAlamofire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxCodableAlamofire.swift; sourceTree = "<group>"; };
 		953FCD9D25792A7000666503 /* RestApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestApi.swift; sourceTree = "<group>"; };
@@ -299,7 +289,6 @@
 			isa = PBXGroup;
 			children = (
 				9591925C258D00720070DBFD /* Models */,
-				953FCD9425792A7000666503 /* RxBinding */,
 				953FCD9A25792A7000666503 /* Shared */,
 				953FCD7325792A7000666503 /* ViewModels */,
 			);
@@ -375,18 +364,6 @@
 				953FCD8E25792A7000666503 /* SinglePhraseViewModel.swift */,
 			);
 			path = Phrases;
-			sourceTree = "<group>";
-		};
-		953FCD9425792A7000666503 /* RxBinding */ = {
-			isa = PBXGroup;
-			children = (
-				953FCD9525792A7000666503 /* DisposedBy.swift */,
-				953FCD9625792A7000666503 /* TwoWayBind.swift */,
-				953FCD9725792A7000666503 /* OneWayBind.swift */,
-				953FCD9825792A7000666503 /* Drive.swift */,
-				953FCD9925792A7000666503 /* Emit.swift */,
-			);
-			path = RxBinding;
 			sourceTree = "<group>";
 		};
 		953FCD9A25792A7000666503 /* Shared */ = {
@@ -674,7 +651,6 @@
 				95919276258D00720070DBFD /* MUSMapping.swift in Sources */,
 				953FCDE525792A7000666503 /* NSSegmentedControl+Rx.swift in Sources */,
 				953FCDE425792A7000666503 /* CommonApi.swift in Sources */,
-				953FCDD825792A7000666503 /* DisposedBy.swift in Sources */,
 				95919272258D00720070DBFD /* MCommon.swift in Sources */,
 				953FCDD725792A7000666503 /* PhrasesUnitDetailViewModel.swift in Sources */,
 				95919273258D00720070DBFD /* MDictionary.swift in Sources */,
@@ -687,7 +663,6 @@
 				953FCDBE25792A7000666503 /* ReadNumberViewModel.swift in Sources */,
 				953FCDD625792A7000666503 /* PhrasesUnitViewModel.swift in Sources */,
 				958655B425A75EEB00B5039C /* WordsUnitBatchAddViewModel.swift in Sources */,
-				953FCDDB25792A7000666503 /* Drive.swift in Sources */,
 				953FCDC525792A7000666503 /* WordsLangDetailViewModel.swift in Sources */,
 				9591927F258D00720070DBFD /* MPattern.swift in Sources */,
 				95919283258D00720070DBFD /* MUnitPhrase.swift in Sources */,
@@ -697,11 +672,8 @@
 				953FCDD525792A7000666503 /* PhrasesLangDetailViewModel.swift in Sources */,
 				953FCDCA25792A7000666503 /* WordsSearchViewModel.swift in Sources */,
 				953FCDBF25792A7000666503 /* ReviewOptionsViewModel.swift in Sources */,
-				953FCDDA25792A7000666503 /* OneWayBind.swift in Sources */,
-				953FCDDC25792A7000666503 /* Emit.swift in Sources */,
 				958655BA25A75EFA00B5039C /* PhrasesUnitBatchAddViewModel.swift in Sources */,
 				953FCDC325792A7000666503 /* WebTextbooksViewModel.swift in Sources */,
-				953FCDD925792A7000666503 /* TwoWayBind.swift in Sources */,
 				95919277258D00720070DBFD /* MUserSetting.swift in Sources */,
 				95919280258D00720070DBFD /* MWordFami.swift in Sources */,
 				95919274258D00720070DBFD /* MAutoCorrect.swift in Sources */,

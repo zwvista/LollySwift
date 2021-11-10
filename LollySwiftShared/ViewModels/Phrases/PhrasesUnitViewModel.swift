@@ -8,6 +8,7 @@
 
 import Foundation
 import RxSwift
+import RxBinding
 import Then
 
 class PhrasesUnitViewModel: PhrasesBaseViewModel {

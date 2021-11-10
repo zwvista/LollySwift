@@ -9,6 +9,7 @@
 import Cocoa
 import WebKit
 import RxSwift
+import RxBinding
 
 class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation {
 
