@@ -10,6 +10,7 @@ import UIKit
 import RxSwift
 import DropDown
 import NSObject_Rx
+import RxBinding
 
 class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
     var vm: PhrasesReviewViewModel!

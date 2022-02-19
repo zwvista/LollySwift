@@ -11,6 +11,7 @@ import WebKit
 import DropDown
 import RxSwift
 import NSObject_Rx
+import RxBinding
 
 class SearchViewController: UIViewController, WKNavigationDelegate, UISearchBarDelegate, SettingsViewModelDelegate {
     @IBOutlet weak var wvDictHolder: UIView!

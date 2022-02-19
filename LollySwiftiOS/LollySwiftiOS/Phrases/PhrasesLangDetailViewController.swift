@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RxBinding
 
 class PhrasesLangDetailViewController: UITableViewController {
     

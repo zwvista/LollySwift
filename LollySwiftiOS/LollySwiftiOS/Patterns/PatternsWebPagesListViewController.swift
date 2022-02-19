@@ -10,6 +10,7 @@ import UIKit
 import WebKit
 import RxSwift
 import NSObject_Rx
+import RxBinding
 
 class PatternsWebPagesListViewController: UITableViewController {
     

@@ -9,6 +9,7 @@
 import UIKit
 import DropDown
 import RxSwift
+import RxBinding
 
 class WordsUnitDetailViewController: UITableViewController, UITextFieldDelegate {
 

@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import NSObject_Rx
+import RxBinding
 
 class PhrasesLangViewController: PhrasesBaseViewController {
     

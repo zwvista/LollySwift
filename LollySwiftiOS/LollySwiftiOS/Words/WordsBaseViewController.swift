@@ -8,6 +8,7 @@
 
 import UIKit
 import DropDown
+import RxBinding
 
 class WordsBaseViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate {
 
