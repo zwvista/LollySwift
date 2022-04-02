@@ -194,7 +194,7 @@ class WordsReviewViewModel: WordsBaseViewModel {
         wordHintString.accept(String(currentItem?.WORD.count ?? 0))
         wordTargetHidden.accept(isTestMode)
         noteTargetHidden.accept(isTestMode)
-        wordHintHidden.accept(!isTestMode)
+        wordHintHidden.accept(!isTestMode || !hasCurrent)
         translationString.accept("")
         wordInputString.accept("")
         selectedWord = currentWord
