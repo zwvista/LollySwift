@@ -8,6 +8,7 @@
 import SwiftUI
 import RxSwift
 import WebKit
+import RxBinding
 
 struct SearchView: View {
     @ObservedObject var vm = vmSettings

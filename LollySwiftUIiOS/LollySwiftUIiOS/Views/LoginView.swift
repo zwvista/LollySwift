@@ -7,6 +7,7 @@
 
 import SwiftUI
 import RxSwift
+import RxBinding
 
 struct LoginView: View {
     @StateObject var vm = LoginViewModel()
