@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
-        <plugIn identifier="com.apple.WebKit2IBPlugin" version="17701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="20037"/>
+        <plugIn identifier="com.apple.WebKit2IBPlugin" version="20037"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -116,6 +116,13 @@
                         <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
                         <toolbar key="toolbar" implicitIdentifier="5E8CD035-C695-44E4-A272-6840FDFE8C8E" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="5w7-h7-oHr">
                             <allowedToolbarItems>
+                                <toolbarItem implicitItemIdentifier="E47C4EE9-D8FC-4B23-A39A-AC0F5A1C260E" label="Save" paletteLabel="Save" tag="-1" image="table.fill" catalog="system" bordered="YES" id="2RM-yB-nmM">
+                                    <size key="minSize" width="30" height="25"/>
+                                    <size key="maxSize" width="30" height="25"/>
+                                    <connections>
+                                        <action selector="saveMarked:" target="vaE-wK-YYd" id="YSL-Mx-K1G"/>
+                                    </connections>
+                                </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="E0B72C73-5B52-41CA-986A-D202164AD7F8" label="Marked" paletteLabel="Marked" tag="-1" image="NSTouchBarGoUpTemplate" sizingBehavior="auto" id="jjN-Ig-zo6">
                                     <connections>
                                         <action selector="htmlToMarked:" target="vaE-wK-YYd" id="UFN-ov-tTL"/>
@@ -169,7 +176,7 @@
                                 <toolbarItem implicitItemIdentifier="7B9E1BE1-D8FF-4BC2-B3DE-17FBF9E018BB" label="Pattern No." paletteLabel="Pattern No." tag="-1" sizingBehavior="auto" id="EDL-Iu-W2r">
                                     <nil key="toolTip"/>
                                     <textField key="view" verticalHuggingPriority="750" tag="-1" id="Lbj-Ka-Wut">
-                                        <rect key="frame" x="14" y="14" width="40" height="22"/>
+                                        <rect key="frame" x="14" y="14" width="40" height="21"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" title="001" drawsBackground="YES" id="piJ-Qn-4oJ">
                                             <font key="font" usesAppearanceFont="YES"/>
@@ -193,7 +200,7 @@
                                 <toolbarItem implicitItemIdentifier="431E2A0E-F4CE-4A5F-B316-60FB25A76C58" label="Pattern Text" paletteLabel="Pattern Text" tag="-1" sizingBehavior="auto" id="9KA-1d-XSR">
                                     <nil key="toolTip"/>
                                     <textField key="view" verticalHuggingPriority="750" tag="-1" id="r3b-4B-iGP">
-                                        <rect key="frame" x="0.0" y="14" width="119" height="22"/>
+                                        <rect key="frame" x="0.0" y="14" width="119" height="21"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="Nun-Gx-4Ar">
                                             <font key="font" usesAppearanceFont="YES"/>
@@ -221,6 +228,7 @@
                                 </toolbarItem>
                             </allowedToolbarItems>
                             <defaultToolbarItems>
+                                <toolbarItem reference="2RM-yB-nmM"/>
                                 <toolbarItem reference="jjN-Ig-zo6"/>
                                 <toolbarItem reference="d08-Zj-N7R"/>
                                 <toolbarItem reference="bXD-JS-Ynf"/>
@@ -270,21 +278,21 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="399" height="600"/>
                                                 <subviews>
                                                     <customView id="Tt5-Ts-och">
-                                                        <rect key="frame" x="0.0" y="0.0" width="399" height="422"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="399" height="393"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
                                                             <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WBa-PN-tyJ">
-                                                                <rect key="frame" x="0.0" y="-8" width="399" height="430"/>
+                                                                <rect key="frame" x="0.0" y="-8" width="399" height="401"/>
                                                                 <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="bxF-Ps-0gE">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="399" height="430"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="399" height="401"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <textView importsGraphics="NO" richText="NO" verticallyResizable="YES" allowsUndo="YES" spellingCorrection="YES" smartInsertDelete="YES" id="7Zx-Xa-ReP">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="399" height="430"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="399" height="401"/>
                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                                            <size key="minSize" width="399" height="430"/>
+                                                                            <size key="minSize" width="399" height="401"/>
                                                                             <size key="maxSize" width="399" height="10000000"/>
                                                                             <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                         </textView>
@@ -295,7 +303,7 @@
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                 </scroller>
                                                                 <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="v3b-EW-4wO">
-                                                                    <rect key="frame" x="383" y="0.0" width="16" height="430"/>
+                                                                    <rect key="frame" x="383" y="0.0" width="16" height="401"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                 </scroller>
                                                             </scrollView>
@@ -308,21 +316,21 @@
                                                         </constraints>
                                                     </customView>
                                                     <customView id="pbB-qP-03e">
-                                                        <rect key="frame" x="0.0" y="432" width="399" height="168"/>
+                                                        <rect key="frame" x="0.0" y="403" width="399" height="197"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
                                                             <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ipj-6P-Pco">
-                                                                <rect key="frame" x="0.0" y="0.0" width="399" height="168"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="399" height="197"/>
                                                                 <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="M0b-Kd-Veb">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="399" height="168"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="399" height="197"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <textView importsGraphics="NO" richText="NO" verticallyResizable="YES" allowsUndo="YES" spellingCorrection="YES" smartInsertDelete="YES" id="e8K-mx-I5l">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="399" height="168"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="399" height="197"/>
                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                                            <size key="minSize" width="399" height="168"/>
+                                                                            <size key="minSize" width="399" height="197"/>
                                                                             <size key="maxSize" width="399" height="10000000"/>
                                                                             <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                         </textView>
@@ -333,7 +341,7 @@
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                 </scroller>
                                                                 <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="8zx-jM-GOD">
-                                                                    <rect key="frame" x="383" y="0.0" width="16" height="168"/>
+                                                                    <rect key="frame" x="383" y="0.0" width="16" height="197"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                 </scroller>
                                                             </scrollView>
@@ -364,17 +372,27 @@
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
                                             <wkWebView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bwf-eO-MWp">
-                                                <rect key="frame" x="0.0" y="0.0" width="391" height="600"/>
+                                                <rect key="frame" x="0.0" y="16" width="391" height="584"/>
                                                 <wkWebViewConfiguration key="configuration">
                                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
                                                     <wkPreferences key="preferences"/>
                                                 </wkWebViewConfiguration>
                                             </wkWebView>
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tam-34-PTJ">
+                                                <rect key="frame" x="-2" y="0.0" width="4" height="16"/>
+                                                <textFieldCell key="cell" lineBreakMode="clipping" id="UT3-a0-Ilf">
+                                                    <font key="font" usesAppearanceFont="YES"/>
+                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="bwf-eO-MWp" secondAttribute="bottom" id="NhG-w6-aDL"/>
+                                            <constraint firstAttribute="bottom" secondItem="tam-34-PTJ" secondAttribute="bottom" id="AhM-3Q-XWD"/>
                                             <constraint firstItem="bwf-eO-MWp" firstAttribute="top" secondItem="zKf-9Y-oXB" secondAttribute="top" id="Oc7-4h-mgA"/>
+                                            <constraint firstItem="tam-34-PTJ" firstAttribute="top" secondItem="bwf-eO-MWp" secondAttribute="bottom" id="WS5-Co-eZZ"/>
                                             <constraint firstItem="bwf-eO-MWp" firstAttribute="leading" secondItem="zKf-9Y-oXB" secondAttribute="leading" id="eeE-Df-Ldp"/>
+                                            <constraint firstItem="tam-34-PTJ" firstAttribute="leading" secondItem="zKf-9Y-oXB" secondAttribute="leading" id="f21-Cp-3zF"/>
                                             <constraint firstAttribute="trailing" secondItem="bwf-eO-MWp" secondAttribute="trailing" id="hdv-4g-eup"/>
                                         </constraints>
                                     </customView>
@@ -393,6 +411,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="tfStatusText" destination="tam-34-PTJ" id="Mn3-Eb-GYv"/>
                         <outlet property="tvHtml" destination="e8K-mx-I5l" id="O9s-lW-yQC"/>
                         <outlet property="tvMarked" destination="7Zx-Xa-ReP" id="bLQ-No-yal"/>
                         <outlet property="wvBlog" destination="bwf-eO-MWp" id="iS4-Tg-8Ul"/>
@@ -406,7 +425,8 @@
     <resources>
         <image name="NSAddTemplate" width="14" height="13"/>
         <image name="NSRemoveTemplate" width="14" height="4"/>
-        <image name="NSTouchBarBookmarksTemplate" width="18" height="15"/>
+        <image name="NSTouchBarBookmarksTemplate" width="18" height="14"/>
         <image name="NSTouchBarGoUpTemplate" width="15" height="9"/>
+        <image name="table.fill" catalog="system" width="18" height="14"/>
     </resources>
 </document>

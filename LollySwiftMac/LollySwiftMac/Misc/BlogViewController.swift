@@ -9,6 +9,7 @@
 import Cocoa
 import WebKit
 import RxSwift
+import RxBinding
 
 class BlogViewController: NSViewController, NSMenuItemValidation  {
 
@@ -16,7 +17,8 @@ class BlogViewController: NSViewController, NSMenuItemValidation  {
     @IBOutlet weak var tvMarked: NSTextView!
     @IBOutlet weak var tvHtml: NSTextView!
     @IBOutlet weak var wvBlog: WKWebView!
-    
+    @IBOutlet weak var tfStatusText: NSTextField!
+
     var wc: BlogWindowController { view.window!.windowController as! BlogWindowController }
     var vmBlog: BlogViewModel!
 
@@ -24,6 +26,14 @@ class BlogViewController: NSViewController, NSMenuItemValidation  {
         super.viewDidLoad()
         vmBlog = BlogViewModel(settings: vm)
         tvMarked.font = NSFont.systemFont(ofSize: 15)
+        updateStatusText()
+        vm.getBlogContent().subscribe(onSuccess: {
+            self.tvMarked.string = $0
+        }) ~ rx.disposeBag
+    }
+
+    @IBAction func saveMarked(_ sender: AnyObject) {
+        vm.saveBlogContent(content: tvMarked.string).subscribe() ~ rx.disposeBag
     }
 
     @IBAction func htmlToMarked(_ sender: AnyObject) {
@@ -91,7 +101,11 @@ class BlogViewController: NSViewController, NSMenuItemValidation  {
         }
         return true
     }
-    
+
+    func updateStatusText() {
+        tfStatusText.stringValue = vm.UNITINFO
+    }
+
     deinit {
         print("DEBUG: \(self.className) deinit")
     }

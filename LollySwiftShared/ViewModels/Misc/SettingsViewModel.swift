@@ -665,6 +665,15 @@ class SettingsViewModel: NSObject, ObservableObject {
         }
         return o
     }
+
+    func getBlogContent() -> Single<String> {
+        MUnitBlog.getDataByTextbook(selectedTextbook.ID, unit: selectedUnitTo, part: selectedPartTo).map {
+            $0?.CONTENT ?? ""
+        }
+    }
+    func saveBlogContent(content: String) -> Single<()> {
+        MUnitBlog.update(selectedTextbook.ID, unit: selectedUnitTo, part: selectedPartTo, content: content)
+    }
 }
 
 protocol SettingsViewModelDelegate : NSObjectProtocol {
