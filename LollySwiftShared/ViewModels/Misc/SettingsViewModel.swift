@@ -667,12 +667,12 @@ class SettingsViewModel: NSObject, ObservableObject {
     }
 
     func getBlogContent() -> Single<String> {
-        MUnitBlog.getDataByTextbook(selectedTextbook.ID, unit: selectedUnitTo, part: selectedPartTo).map {
+        MUnitBlog.getDataByTextbook(selectedTextbook.ID, unit: selectedUnitTo).map {
             $0?.CONTENT ?? ""
         }
     }
     func saveBlogContent(content: String) -> Single<()> {
-        MUnitBlog.update(selectedTextbook.ID, unit: selectedUnitTo, part: selectedPartTo, content: content)
+        MUnitBlog.update(selectedTextbook.ID, unit: selectedUnitTo, content: content)
     }
 }
 

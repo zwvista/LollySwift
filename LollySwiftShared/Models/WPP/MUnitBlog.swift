@@ -15,12 +15,11 @@ class MUnitBlog: NSObject, Codable {
     dynamic var ID = 0
     dynamic var TEXTBOOKID = 0
     dynamic var UNIT = 0
-    dynamic var PART = 0
     dynamic var CONTENT = ""
     
-    static func getDataByTextbook(_ textbookid: Int, unit: Int, part: Int) -> Single<MUnitBlog?> {
-        // SQL: SELECT * FROM VUNITBLOGS WHERE TEXTBOOKID=? AND UNIT = ? AND PART = ?
-        let url = "\(CommonApi.urlAPI)UNITBLOGS?filter=TEXTBOOKID,eq,\(textbookid)&filter=UNIT,eq,\(unit)&filter=PART,eq,\(part)"
+    static func getDataByTextbook(_ textbookid: Int, unit: Int) -> Single<MUnitBlog?> {
+        // SQL: SELECT * FROM VUNITBLOGS WHERE TEXTBOOKID=? AND UNIT = ?
+        let url = "\(CommonApi.urlAPI)UNITBLOGS?filter=TEXTBOOKID,eq,\(textbookid)&filter=UNIT,eq,\(unit)"
         let o: Single<[MUnitBlog]> = RestApi.getRecords(url: url)
         return o.map { $0.isEmpty ? nil : $0[0] }
     }
@@ -35,13 +34,12 @@ class MUnitBlog: NSObject, Codable {
         return RestApi.update(url: url, body: try! item.toJSONString()!).map { print($0) }
      }
 
-    static func update(_ textbookid: Int, unit: Int, part: Int, content: String) -> Single<()> {
-        MUnitBlog.getDataByTextbook(textbookid, unit: unit, part: part).flatMap {
+    static func update(_ textbookid: Int, unit: Int, content: String) -> Single<()> {
+        MUnitBlog.getDataByTextbook(textbookid, unit: unit).flatMap {
             let item = $0 ?? MUnitBlog()
             if item.ID == 0 {
                 item.TEXTBOOKID = textbookid
                 item.UNIT = unit
-                item.PART = part
             }
             item.CONTENT = content
             return item.ID == 0 ? create(item: item) : update(item: item)
