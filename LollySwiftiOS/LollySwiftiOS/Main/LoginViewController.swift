@@ -20,8 +20,8 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        _ = vm.username <~> tfUsername.rx.text.orEmpty
-        _ = vm.password <~> tfPassword.rx.text.orEmpty
+        _ = vm.username <~> tfUsername.rx.textInput
+        _ = vm.password <~> tfPassword.rx.textInput
     }
 
     @IBAction func login(_ sender: Any) {

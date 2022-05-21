@@ -31,7 +31,7 @@ class WordsBaseViewController: UIViewController, UITableViewDelegate, UITableVie
         tableView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         refresh()
-        _ = vmBase.textFilter <~> sbTextFilter.rx.text.orEmpty
+        _ = vmBase.textFilter <~> sbTextFilter.searchTextField.rx.textInput
         _ = vmBase.scopeFilter ~> btnScopeFilter.rx.title(for: .normal)
         vmBase.textFilter.subscribe(onNext: { [unowned self] _ in
             self.applyFilters()

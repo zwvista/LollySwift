@@ -157,6 +157,8 @@
 		95FCBE5F25544A6E00859C1F /* PatternsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FCBE5A25544A6E00859C1F /* PatternsViewModel.swift */; };
 		95FCBE6025544A6E00859C1F /* PatternsDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FCBE5B25544A6E00859C1F /* PatternsDetailViewModel.swift */; };
 		95FDF62A228D5D6C003DFB1A /* WordsUnitBatchEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95FDF629228D5D6B003DFB1A /* WordsUnitBatchEditViewController.swift */; };
+		D5804A382838864B002DE992 /* MUnitBlog.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5804A372838864B002DE992 /* MUnitBlog.swift */; };
+		D5804A392838864B002DE992 /* MUnitBlog.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5804A372838864B002DE992 /* MUnitBlog.swift */; };
 		DE01394226C657C5009C7209 /* RxCodableAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9562949426B5C3C9000C68B1 /* RxCodableAlamofire.swift */; };
 /* End PBXBuildFile section */
 
@@ -294,6 +296,7 @@
 		A2462FE0278FE5DE7FF9A4E2 /* Pods_LollySwiftiOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LollySwiftiOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA5376BDE309080131C3F3FD /* Pods_LollySwiftiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LollySwiftiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB60F127B8C0928CBC031C6C /* Pods-LollySwiftiOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LollySwiftiOSTests.release.xcconfig"; path = "../Pods/Target Support Files/Pods-LollySwiftiOSTests/Pods-LollySwiftiOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		D5804A372838864B002DE992 /* MUnitBlog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MUnitBlog.swift; sourceTree = "<group>"; };
 		FDFF1BAAC359000B9ED6654F /* Pods-LollySwiftiOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LollySwiftiOS.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-LollySwiftiOS/Pods-LollySwiftiOS.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -522,15 +525,16 @@
 		9591923B258D004F0070DBFD /* WPP */ = {
 			isa = PBXGroup;
 			children = (
-				9591923C258D004F0070DBFD /* MUnitWord.swift */,
-				9591923D258D004F0070DBFD /* MPatternWebPage.swift */,
+				95919241258D004F0070DBFD /* MLangPhrase.swift */,
 				9591923E258D004F0070DBFD /* MLangWord.swift */,
 				9591923F258D004F0070DBFD /* MPattern.swift */,
-				95919240258D004F0070DBFD /* MWordFami.swift */,
-				95919241258D004F0070DBFD /* MLangPhrase.swift */,
-				95919242258D004F0070DBFD /* MWordPhrase.swift */,
+				9591923D258D004F0070DBFD /* MPatternWebPage.swift */,
+				D5804A372838864B002DE992 /* MUnitBlog.swift */,
 				95919243258D004F0070DBFD /* MUnitPhrase.swift */,
+				9591923C258D004F0070DBFD /* MUnitWord.swift */,
 				95919244258D004F0070DBFD /* MWebPage.swift */,
+				95919240258D004F0070DBFD /* MWordFami.swift */,
+				95919242258D004F0070DBFD /* MWordPhrase.swift */,
 			);
 			path = WPP;
 			sourceTree = "<group>";
@@ -810,6 +814,7 @@
 				95F0FFEC24C957AB00509DF3 /* PhrasesLangViewModel.swift in Sources */,
 				95F0FFE724C957AB00509DF3 /* SingleWordViewModel.swift in Sources */,
 				951504D4261FB7F900F94A6E /* LoginViewController.swift in Sources */,
+				D5804A382838864B002DE992 /* MUnitBlog.swift in Sources */,
 				9562949526B5C3C9000C68B1 /* RxCodableAlamofire.swift in Sources */,
 				8CD16D201D69FE8F00F5F625 /* PhrasesLangDetailViewController.swift in Sources */,
 				95919257258D004F0070DBFD /* MWebPage.swift in Sources */,
@@ -924,6 +929,7 @@
 				95F0000124C95B1000509DF3 /* WordsLangViewModel.swift in Sources */,
 				9501FB8E2593395900C1B13B /* MWebTextbook.swift in Sources */,
 				95837E9A24DF361600B5D2AE /* WordsLangDetailViewModel.swift in Sources */,
+				D5804A392838864B002DE992 /* MUnitBlog.swift in Sources */,
 				95F0000424C95B1000509DF3 /* WordsSearchViewModel.swift in Sources */,
 				957B532025A595FF00C18B06 /* WordsUnitBatchAddViewModel.swift in Sources */,
 				9501FB902593395900C1B13B /* MCommon.swift in Sources */,

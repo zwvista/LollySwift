@@ -38,10 +38,10 @@ class PatternsWebPagesDetailViewController: UITableViewController {
         _ = itemEdit.ID ~> tfID.rx.text.orEmpty
         _ = itemEdit.PATTERNID ~> tfPatternID.rx.text.orEmpty
         _ = itemEdit.PATTERN ~> tfPattern.rx.text.orEmpty
-        _ = itemEdit.SEQNUM <~> tfSeqNum.rx.text.orEmpty
+        _ = itemEdit.SEQNUM <~> tfSeqNum.rx.textInput
         _ = itemEdit.WEBPAGEID ~> tfWebPageID.rx.text.orEmpty
-        _ = itemEdit.TITLE <~> tfTitle.rx.text.orEmpty
-        _ = itemEdit.URL <~> tfURL.rx.text.orEmpty
+        _ = itemEdit.TITLE <~> tfTitle.rx.textInput
+        _ = itemEdit.URL <~> tfURL.rx.textInput
         btnNew.isEnabled = vmEdit.isAddWebPage
         btnExisting.isEnabled = vmEdit.isAddWebPage
         _ = vmEdit.isOKEnabled ~> btnDone.rx.isEnabled

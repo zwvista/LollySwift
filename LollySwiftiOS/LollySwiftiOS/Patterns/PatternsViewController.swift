@@ -41,7 +41,7 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         refresh(refreshControl)
-        _ = vm.textFilter <~> sbTextFilter.rx.text.orEmpty
+        _ = vm.textFilter <~> sbTextFilter.searchTextField.rx.textInput
         _ = vm.scopeFilter ~> btnScopeFilter.rx.title(for: .normal)
         vm.textFilter.subscribe(onNext: { [unowned self] _ in
             self.applyFilters()

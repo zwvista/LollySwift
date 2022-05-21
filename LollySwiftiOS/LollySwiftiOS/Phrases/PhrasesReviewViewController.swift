@@ -56,7 +56,7 @@ class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
         _ = vm.phraseTargetString ~> lblPhraseTarget.rx.text
         _ = vm.phraseTargetHidden ~> lblPhraseTarget.rx.isHidden
         _ = vm.translationString ~> lblTranslation.rx.text
-        _ = vm.phraseInputString <~> tfPhraseInput.rx.text.orEmpty
+        _ = vm.phraseInputString <~> tfPhraseInput.rx.textInput
         _ = vm.isSpeaking ~> swSpeak.rx.isOn
         _ = vm.onRepeat <~> swOnRepeat.rx.isOn
         _ = vm.moveForward <~> swMoveForward.rx.isOn

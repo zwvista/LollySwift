@@ -60,7 +60,7 @@ class WordsReviewViewController: UIViewController, UITextFieldDelegate {
         _ = vm.wordTargetHidden ~> lblWordTarget.rx.isHidden
         _ = vm.noteTargetHidden ~> lblNoteTarget.rx.isHidden
         _ = vm.translationString ~> tvTranslation.rx.text
-        _ = vm.wordInputString <~> tfWordInput.rx.text.orEmpty
+        _ = vm.wordInputString <~> tfWordInput.rx.textInput
         _ = vm.isSpeaking <~> swSpeak.rx.isOn
         _ = vm.onRepeat <~> swOnRepeat.rx.isOn
         _ = vm.moveForward <~> swMoveForward.rx.isOn

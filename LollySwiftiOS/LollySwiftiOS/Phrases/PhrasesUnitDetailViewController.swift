@@ -55,12 +55,12 @@ class PhrasesUnitDetailViewController: UITableViewController, UITextFieldDelegat
         }
         
         _ = itemEdit.ID ~> tfID.rx.text.orEmpty
-        _ = itemEdit.UNITSTR <~> tfUnit.rx.text.orEmpty
-        _ = itemEdit.PARTSTR <~> tfPart.rx.text.orEmpty
-        _ = itemEdit.SEQNUM <~> tfSeqNum.rx.text.orEmpty
+        _ = itemEdit.UNITSTR <~> tfUnit.rx.textInput
+        _ = itemEdit.PARTSTR <~> tfPart.rx.textInput
+        _ = itemEdit.SEQNUM <~> tfSeqNum.rx.textInput
         _ = itemEdit.PHRASEID ~> tfPhraseID.rx.text.orEmpty
-        _ = itemEdit.PHRASE <~> tfPhrase.rx.text.orEmpty
-        _ = itemEdit.TRANSLATION <~> tfTranslation.rx.text.orEmpty
+        _ = itemEdit.PHRASE <~> tfPhrase.rx.textInput
+        _ = itemEdit.TRANSLATION <~> tfTranslation.rx.textInput
         _ = vmEdit.isOKEnabled ~> btnDone.rx.isEnabled
     }
     
