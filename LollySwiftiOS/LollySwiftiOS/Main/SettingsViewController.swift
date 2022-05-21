@@ -160,9 +160,9 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
             switch indexPath.row {
             case 0:
                 ddUnitFrom.show()
-            case 1 where vm.unitToEnabled.value:
+            case 1 where vm.partFromEnabled.value:
                 ddPartFrom.show()
-            case 3 where vm.partFromEnabled.value:
+            case 3 where vm.unitToEnabled.value:
                 ddUnitTo.show()
             case 4 where vm.partToEnabled.value:
                 ddPartTo.show()
@@ -246,6 +246,7 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
         ddTextbook.selectIndex(vm.selectedTextbookIndex)
         ddToType.selectIndex(vm.toType.rawValue)
         ddToType.selectionAction!(vm.toType.rawValue, ddToType.selectedItem!)
+        guard !vm.arrUnits.isEmpty else {return}
         ddUnitFrom.dataSource = vm.arrUnits.map(\.label)
         onUpdateUnitFrom()
         ddPartFrom.dataSource = vm.arrParts.map(\.label)
@@ -269,18 +270,22 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
     }
 
     func onUpdateUnitFrom() {
+        ddUnitFrom.selectIndex(vm.selectedUnitFromIndex)
         lblUnitFrom.text = ddUnitFrom.selectedItem
     }
     
     func onUpdatePartFrom() {
+        ddPartFrom.selectIndex(vm.selectedPartFromIndex)
         lblPartFrom.text = ddPartFrom.selectedItem
     }
 
     func onUpdateUnitTo() {
+        ddUnitTo.selectIndex(vm.selectedUnitToIndex)
         lblUnitTo.text = ddUnitTo.selectedItem
     }
     
     func onUpdatePartTo() {
+        ddPartTo.selectIndex(vm.selectedPartToIndex)
         lblPartTo.text = ddPartTo.selectedItem
     }
 
