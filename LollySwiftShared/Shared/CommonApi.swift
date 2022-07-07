@@ -37,9 +37,9 @@ let globalUser = GlobalUser()
 
 class CommonApi {
     
-    static let urlAPI = "https://zwvista2.tk/lolly/api.php/records/"
-    static let urlSP = "https://zwvista2.tk/lolly/sp.php/"
-    static let cssFolder = "https://zwvista2.tk/lolly/css/"
+    static let urlAPI = "https://zwvista.com/lolly/api.php/records/"
+    static let urlSP = "https://zwvista.com/lolly/sp.php/"
+    static let cssFolder = "https://zwvista.com/lolly/css/"
     
     static func removeReturns(html: String) -> String {
         html.replacingOccurrences(of: "\r\n", with: "\n")
