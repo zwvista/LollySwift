@@ -173,10 +173,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         showWindow(storyBoardName: "Patterns", windowControllerName: "PatternsWindowController")
     }
 
-    @IBAction func editBlog(_ sender: AnyObject) {
+    @IBAction func editUnitBlog(_ sender: AnyObject) {
         showWindow(storyBoardName: "Misc", windowControllerName: "BlogWindowController")
     }
-    
+
+    @IBAction func editLangBlog(_ sender: AnyObject) {
+        showWindow(storyBoardName: "Misc", windowControllerName: "BlogWindowController")
+    }
+
     @IBAction func textbooks(_ sender: AnyObject) {
         showWindow(storyBoardName: "Textbooks", windowControllerName: "TextbooksWindowController")
     }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="20037"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21225"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -974,10 +974,16 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="Tools" id="JeG-Gt-ix8">
                                     <items>
-                                        <menuItem title="Blog" id="FKE-az-Kum">
+                                        <menuItem title="Unit Blog" id="FKE-az-Kum">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
-                                                <action selector="editBlog:" target="Voe-Tx-rLC" id="5Wk-81-Yuw"/>
+                                                <action selector="editUnitBlog:" target="Voe-Tx-rLC" id="l0W-IM-LlM"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Language Blog" id="FYo-sH-MTs">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="editLangBlog:" target="Voe-Tx-rLC" id="9XZ-gk-fJD"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Textbooks" id="LlE-b6-XJk">
