@@ -80,7 +80,7 @@ pod 'Then'
 end
 
 target 'LollySwiftUIMac' do
-platform :osx, '10.15'
+platform :osx, '13.0'
 project 'LollySwiftUIMac/LollySwiftUIMac'
 pod 'CodableAlamofire', :git => 'https://github.com/zwvista/CodableAlamofire'
 pod 'RxAlamofire', '~> 6'
@@ -91,7 +91,7 @@ pod 'Then'
 end
 
 target 'LollySwiftUIMacTests' do
-platform :osx, '10.15'
+platform :osx, '13.0'
 project 'LollySwiftUIMac/LollySwiftUIMac'
 pod 'CodableAlamofire', :git => 'https://github.com/zwvista/CodableAlamofire'
 pod 'RxAlamofire', '~> 6'
