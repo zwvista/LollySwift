@@ -39,41 +39,43 @@ class MPatternWebPage: NSObject, Codable {
         URL = x.URL
     }
 
-    static func getDataByPattern(_ patternid: Int) -> Single<[MPatternWebPage]> {
+    static func getDataByPattern(_ patternid: Int) async -> [MPatternWebPage] {
         // SQL: SELECT * FROM VPATTERNSWEBPAGES WHERE PATTERNID=?
         let url = "\(CommonApi.urlAPI)VPATTERNSWEBPAGES?filter=PATTERNID,eq,\(patternid)&order=SEQNUM"
-        return RestApi.getRecords(url: url)
+        return await RestApi.getRecords(MPatternWebPages.self, url: url)
     }
     
-    static func getDataById(_ id: Int) -> Single<[MPatternWebPage]> {
+    static func getDataById(_ id: Int) async -> [MPatternWebPage] {
         // SQL: SELECT * FROM VPATTERNSWEBPAGES WHERE ID=?
         let url = "\(CommonApi.urlAPI)VPATTERNSWEBPAGES?filter=ID,eq,\(id)"
-        return RestApi.getRecords(url: url)
+        return await RestApi.getRecords(MPatternWebPages.self, url: url)
     }
     
-    static func update(_ id: Int, seqnum: Int) -> Single<()> {
+    static func update(_ id: Int, seqnum: Int) async {
         // SQL: UPDATE PATTERNSWEBPAGES SET SEQNUM=? WHERE ID=?
         let url = "\(CommonApi.urlAPI)PATTERNSWEBPAGES/\(id)"
         let body = "SEQNUM=\(seqnum)"
-        return RestApi.update(url: url, body: body).map { print($0) }
+        print(await RestApi.update(url: url, body: body))
     }
 
-    static func update(item: MPatternWebPage) -> Single<()> {
+    static func update(item: MPatternWebPage) async {
         // SQL: UPDATE PATTERNSWEBPAGES SET WEBPAGE=? WHERE ID=?
         let url = "\(CommonApi.urlAPI)PATTERNSWEBPAGES/\(item.ID)"
-        return RestApi.update(url: url, body: try! item.toJSONString()!).map { print($0) }
+        print(await RestApi.update(url: url, body: try! item.toJSONString()!))
     }
 
-    static func create(item: MPatternWebPage) -> Single<Int> {
+    static func create(item: MPatternWebPage) async -> Int {
         // SQL: INSERT INTO PATTERNSWEBPAGES (PATTERNID, SEQNUM, WEBPAGE) VALUES (?,?,?)
         let url = "\(CommonApi.urlAPI)PATTERNSWEBPAGES"
-        return RestApi.create(url: url, body: try! item.toJSONString()!).map { Int($0)! }.do(onSuccess: { print($0) })
+        let id = Int(await RestApi.create(url: url, body: try! item.toJSONString()!))!
+        print(id)
+        return id
     }
     
-    static func delete(_ id: Int) -> Single<()> {
+    static func delete(_ id: Int) async {
         // SQL: DELETE PATTERNSWEBPAGES WHERE ID=?
         let url = "\(CommonApi.urlAPI)PATTERNSWEBPAGES/\(id)"
-        return RestApi.delete(url: url).map { print($0) }
+        print(await RestApi.delete(url: url))
     }
 }
 

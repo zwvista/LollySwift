@@ -35,36 +35,38 @@ class MLangPhrase: NSObject, Codable, MPhraseProtocol {
         super.init()
     }
 
-    static func getDataByLang(_ langid: Int) -> Single<[MLangPhrase]> {
+    static func getDataByLang(_ langid: Int) async -> [MLangPhrase] {
         // SQL: SELECT * FROM LANGPHRASES WHERE LANGID=?
         let url = "\(CommonApi.urlAPI)LANGPHRASES?filter=LANGID,eq,\(langid)&order=PHRASE"
-        return RestApi.getRecords(url: url)
+        return await RestApi.getRecords(MLangPhrases.self, url: url)
     }
 
-    static func update(_ id: Int, translation: String) -> Single<()> {
+    static func update(_ id: Int, translation: String) async {
         // SQL: UPDATE LANGPHRASES SET TRANSLATION=? WHERE ID=?
         let url = "\(CommonApi.urlAPI)LANGPHRASES/\(id)"
         let body = "TRANSLATION=\(translation)"
-        return RestApi.update(url: url, body: body).map { print($0) }
+        print(await RestApi.update(url: url, body: body))
     }
     
-    static func update(item: MLangPhrase) -> Single<()> {
+    static func update(item: MLangPhrase) async {
         // SQL: UPDATE LANGPHRASES SET PHRASE=?, TRANSLATION=? WHERE ID=?
         let url = "\(CommonApi.urlAPI)LANGPHRASES/\(item.ID)"
-        return RestApi.update(url: url, body: try! item.toJSONString()!).map { print($0) }
+        print(await RestApi.update(url: url, body: try! item.toJSONString()!))
     }
 
-    static func create(item: MLangPhrase) -> Single<Int> {
+    static func create(item: MLangPhrase) async -> Int {
         // SQL: INSERT INTO LANGPHRASES (LANGID, PHRASE, TRANSLATION) VALUES (?,?,?)
         let url = "\(CommonApi.urlAPI)LANGPHRASES"
-        return RestApi.create(url: url, body: try! item.toJSONString()!).map { Int($0)! }.do(onSuccess: { print($0) })
+        let id = Int(await RestApi.create(url: url, body: try! item.toJSONString()!))!
+        print(id)
+        return id
     }
     
-    static func delete(item: MLangPhrase) -> Single<()> {
+    static func delete(item: MLangPhrase) async {
         // SQL: CALL LANGPHRASES_DELETE
         let url = "\(CommonApi.urlSP)LANGPHRASES_DELETE"
         let parameters = item.toParameters()
-        return RestApi.callSP(url: url, parameters: parameters).map { print($0) }
+        print(await RestApi.callSP(url: url, parameters: parameters))
     }
 }
 

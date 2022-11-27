@@ -29,48 +29,50 @@ class MPattern: NSObject, Codable {
     override init() {
     }
 
-    static func getDataByLang(_ langid: Int) -> Single<[MPattern]> {
+    static func getDataByLang(_ langid: Int) async -> [MPattern] {
         // SQL: SELECT * FROM PATTERNS WHERE LANGID=?
         let url = "\(CommonApi.urlAPI)PATTERNS?filter=LANGID,eq,\(langid)&order=PATTERN"
-        return RestApi.getRecords(url: url)
+        return await RestApi.getRecords(MPatterns.self, url: url)
     }
     
-    static func getDataById(_ id: Int) -> Single<[MPattern]> {
+    static func getDataById(_ id: Int) async -> [MPattern] {
         // SQL: SELECT * FROM PATTERNS WHERE ID=?
         let url = "\(CommonApi.urlAPI)PATTERNS?filter=ID,eq,\(id)"
-        return RestApi.getRecords(url: url)
+        return await RestApi.getRecords(MPatterns.self, url: url)
     }
     
-    static func update(item: MPattern) -> Single<()> {
+    static func update(item: MPattern) async {
         // SQL: UPDATE PATTERNS SET PATTERN=?, NOTE=?, TAGS=? WHERE ID=?
         let url = "\(CommonApi.urlAPI)PATTERNS/\(item.ID)"
-        return RestApi.update(url: url, body: try! item.toJSONString()!).map { print($0) }
+        print(await RestApi.update(url: url, body: try! item.toJSONString()!))
     }
 
-    static func create(item: MPattern) -> Single<Int> {
+    static func create(item: MPattern) async -> Int {
         // SQL: INSERT INTO PATTERNS (LANGID, PATTERN, NOTE, TAGS) VALUES (?,?,?,?)
         let url = "\(CommonApi.urlAPI)PATTERNS"
-        return RestApi.create(url: url, body: try! item.toJSONString()!).map { Int($0)! }.do(onSuccess: { print($0) })
+        let id = Int(await RestApi.create(url: url, body: try! item.toJSONString()!))!
+        print(id)
+        return id
     }
     
-    static func delete(_ id: Int) -> Single<()> {
+    static func delete(_ id: Int) async {
         // SQL: DELETE PATTERNS WHERE ID=?
         let url = "\(CommonApi.urlAPI)PATTERNS/\(id)"
-        return RestApi.delete(url: url).map { print($0) }
+        print(await RestApi.delete(url: url))
     }
     
-    static func mergePatterns(item: MPattern) -> Single<()> {
+    static func mergePatterns(item: MPattern) async {
         // SQL: PATTERNS_MERGE
         let url = "\(CommonApi.urlSP)PATTERNS_MERGE"
         let parameters = item.toParameters()
-        return RestApi.callSP(url: url, parameters: parameters).map { print($0) }
+        print(await RestApi.callSP(url: url, parameters: parameters))
     }
     
-    static func splitPattern(item: MPattern) -> Single<()> {
+    static func splitPattern(item: MPattern) async {
         // SQL: PATTERNS_SPLIT
         let url = "\(CommonApi.urlSP)PATTERNS_SPLIT"
         let parameters = item.toParameters()
-        return RestApi.callSP(url: url, parameters: parameters).map { print($0) }
+        print(await RestApi.callSP(url: url, parameters: parameters))
     }
 }
 

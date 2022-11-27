@@ -23,32 +23,31 @@ class MUnitBlog: NSObject, Codable {
     dynamic var UNIT = 0
     dynamic var CONTENT = ""
     
-    static func getDataByTextbook(_ textbookid: Int, unit: Int) -> Single<MUnitBlog?> {
+    static func getDataByTextbook(_ textbookid: Int, unit: Int) async -> MUnitBlog? {
         // SQL: SELECT * FROM VUNITBLOGS WHERE TEXTBOOKID=? AND UNIT = ?
         let url = "\(CommonApi.urlAPI)UNITBLOGS?filter=TEXTBOOKID,eq,\(textbookid)&filter=UNIT,eq,\(unit)"
-        let o: Single<[MUnitBlog]> = RestApi.getRecords(url: url)
-        return o.map { $0.isEmpty ? nil : $0[0] }
+        let o = await RestApi.getRecords(MUnitBlogs.self, url: url)
+        return o.isEmpty ? nil : o[0]
     }
     
-    private static func create(item: MUnitBlog) -> Single<()> {
+    private static func create(item: MUnitBlog) async {
         let url = "\(CommonApi.urlAPI)UNITBLOGS"
-        return RestApi.create(url: url, body: try! item.toJSONString()!).map { print($0) }
+        print(await RestApi.create(url: url, body: try! item.toJSONString()!))
      }
     
-    private static func update(item: MUnitBlog) -> Single<()> {
+    private static func update(item: MUnitBlog) async {
         let url = "\(CommonApi.urlAPI)UNITBLOGS/\(item.ID)"
-        return RestApi.update(url: url, body: try! item.toJSONString()!).map { print($0) }
+        print(await RestApi.update(url: url, body: try! item.toJSONString()!))
      }
 
-    static func update(_ textbookid: Int, unit: Int, content: String) -> Single<()> {
-        MUnitBlog.getDataByTextbook(textbookid, unit: unit).flatMap {
-            let item = $0 ?? MUnitBlog()
-            if item.ID == 0 {
-                item.TEXTBOOKID = textbookid
-                item.UNIT = unit
-            }
-            item.CONTENT = content
-            return item.ID == 0 ? create(item: item) : update(item: item)
+    static func update(_ textbookid: Int, unit: Int, content: String) async {
+        let o = await MUnitBlog.getDataByTextbook(textbookid, unit: unit)
+        let item = o ?? MUnitBlog()
+        if item.ID == 0 {
+            item.TEXTBOOKID = textbookid
+            item.UNIT = unit
         }
+        item.CONTENT = content
+        item.ID == 0 ? await create(item: item) : await update(item: item)
     }
 }

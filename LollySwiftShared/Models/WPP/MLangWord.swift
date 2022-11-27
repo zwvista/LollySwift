@@ -41,36 +41,38 @@ class MLangWord: NSObject, Codable, MWordProtocol {
         super.init()
     }
 
-    static func getDataByLang(_ langid: Int) -> Single<[MLangWord]> {
+    static func getDataByLang(_ langid: Int) async -> [MLangWord] {
         // SQL: SELECT * FROM LANGWORDS WHERE LANGID=?
         let url = "\(CommonApi.urlAPI)VLANGWORDS?filter=LANGID,eq,\(langid)&order=WORD"
-        return RestApi.getRecords(url: url)
+        return await RestApi.getRecords(MLangWords.self, url: url)
     }
     
-    static func update(_ id: Int, note: String) -> Single<()> {
+    static func update(_ id: Int, note: String) async {
         // SQL: UPDATE LANGWORDS SET NOTE=? WHERE ID=?
         let url = "\(CommonApi.urlAPI)LANGWORDS/\(id)"
         let body = "NOTE=\(note)"
-        return RestApi.update(url: url, body: body).map { print($0) }
+        print(await RestApi.update(url: url, body: body))
     }
 
-    static func update(item: MLangWord) -> Single<()> {
+    static func update(item: MLangWord) async {
         // SQL: UPDATE LANGWORDS SET WORD=?, NOTE=? WHERE ID=?
         let url = "\(CommonApi.urlAPI)LANGWORDS/\(item.ID)"
-        return RestApi.update(url: url, body: try! item.toJSONString(prettyPrint: false)!).map { print($0) }
+        print(await RestApi.update(url: url, body: try! item.toJSONString()!))
     }
 
-    static func create(item: MLangWord) -> Single<Int> {
+    static func create(item: MLangWord) async -> Int {
         // SQL: INSERT INTO LANGWORDS (LANGID, WORD) VALUES (?,?)
         let url = "\(CommonApi.urlAPI)LANGWORDS"
-        return RestApi.create(url: url, body: try! item.toJSONString()!).map { Int($0)! }.do(onSuccess: { print($0) })
+        let id = Int(await RestApi.create(url: url, body: try! item.toJSONString()!))!
+        print(id)
+        return id
     }
     
-    static func delete(item: MLangWord) -> Single<()> {
+    static func delete(item: MLangWord) async {
         // SQL: CALL LANGWORDS_DELETE
         let url = "\(CommonApi.urlSP)LANGWORDS_DELETE"
         let parameters = item.toParameters()
-        return RestApi.callSP(url: url, parameters: parameters).map { print($0) }
+        print(await RestApi.callSP(url: url, parameters: parameters))
     }
 }
 
