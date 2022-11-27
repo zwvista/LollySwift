@@ -47,79 +47,78 @@ class MUnitPhrase: NSObject, Codable, MPhraseProtocol {
     var PARTSTR: String { textbook.PARTSTR(PART) }
     var UNITPARTSEQNUM: String { "\(UNITSTR)\n\(PARTSTR)\n\(SEQNUM)" }
 
-    static func getDataByTextbook(_ textbook: MTextbook, unitPartFrom: Int, unitPartTo: Int) -> Single<[MUnitPhrase]> {
+    static func getDataByTextbook(_ textbook: MTextbook, unitPartFrom: Int, unitPartTo: Int) async -> [MUnitPhrase] {
         // SQL: SELECT * FROM VUNITPHRASES WHERE TEXTBOOKID=? AND UNITPART BETWEEN ? AND ? ORDER BY UNITPART,SEQNUM
         let url = "\(CommonApi.urlAPI)VUNITPHRASES?filter=TEXTBOOKID,eq,\(textbook.ID)&filter=UNITPART,bt,\(unitPartFrom),\(unitPartTo)&order=UNITPART&order=SEQNUM"
-        let o: Single<[MUnitPhrase]> = RestApi.getRecords(url: url)
-        return o.do(onSuccess: { arr in
-            arr.forEach { $0.textbook = textbook }
-        })
+        let o = await RestApi.getRecords(MUnitPhrases.self, url: url)
+        o.forEach { $0.textbook = textbook }
+        return o
     }
     
-    static func getDataByTextbook(_ textbook: MTextbook) -> Single<[MUnitPhrase]> {
+    static func getDataByTextbook(_ textbook: MTextbook) async -> [MUnitPhrase] {
         // SQL: SELECT * FROM VUNITPHRASES WHERE TEXTBOOKID=? ORDER BY PHRASEID
         let url = "\(CommonApi.urlAPI)VUNITPHRASES?filter=TEXTBOOKID,eq,\(textbook.ID)&order=PHRASEID"
-        let o: Single<[MUnitPhrase]> = RestApi.getRecords(url: url)
-        return o.do(onSuccess: { arr in
-            arr.forEach { $0.textbook = textbook }
-        })
+        let o = await RestApi.getRecords(MUnitPhrases.self, url: url)
+        o.forEach { $0.textbook = textbook }
+        return o
     }
 
-    private static func setTextbook(_ o: Single<[MUnitPhrase]>, arrTextbooks: [MTextbook]) -> Single<[MUnitPhrase]> {
-        return o.map { arr in
-            Dictionary(grouping: arr, by: \.PHRASEID).values.compactMap { $0[0] }
-        }.do(onSuccess: { arr in
-            arr.forEach { row in
-                row.textbook = arrTextbooks.first { $0.ID == row.TEXTBOOKID }!
-            }
-        })
+    private static func setTextbook(_ o: [MUnitPhrase], arrTextbooks: [MTextbook]) -> [MUnitPhrase] {
+        let arr = Dictionary(grouping: o, by: \.PHRASEID).values.compactMap { $0[0] }
+        arr.forEach { row in
+            row.textbook = arrTextbooks.first { $0.ID == row.TEXTBOOKID }!
+        }
+        return arr
     }
 
-    static func getDataByLang(_ langid: Int, arrTextbooks: [MTextbook]) -> Single<[MUnitPhrase]> {
+    static func getDataByLang(_ langid: Int, arrTextbooks: [MTextbook]) async -> [MUnitPhrase] {
         // SQL: SELECT * FROM VTEXTBOOKPHRASES WHERE LANGID=?
         let url = "\(CommonApi.urlAPI)VUNITPHRASES?filter=LANGID,eq,\(langid)&order=TEXTBOOKID&order=UNIT&order=PART&order=SEQNUM"
-        return setTextbook(RestApi.getRecords(url: url), arrTextbooks: arrTextbooks)
+        return setTextbook(await RestApi.getRecords(MUnitPhrases.self, url: url), arrTextbooks: arrTextbooks)
     }
     
-    static func getDataById(_ id: Int, arrTextbooks: [MTextbook]) -> Single<MUnitPhrase?> {
+    static func getDataById(_ id: Int, arrTextbooks: [MTextbook]) async -> MUnitPhrase? {
         // SQL: SELECT * FROM VUNITPHRASES WHERE ID=?
         let url = "\(CommonApi.urlAPI)VUNITPHRASES?filter=ID,eq,\(id)"
-        return setTextbook(RestApi.getRecords(url: url), arrTextbooks: arrTextbooks).map { $0.isEmpty ? nil : $0[0] }
+        let arr = setTextbook(await RestApi.getRecords(MUnitPhrases.self, url: url), arrTextbooks: arrTextbooks)
+        return arr.isEmpty ? nil : arr[0]
     }
 
-    static func getDataByLangPhrase(langid: Int, phrase: String, arrTextbooks: [MTextbook]) -> Single<[MUnitPhrase]> {
+    static func getDataByLangPhrase(langid: Int, phrase: String, arrTextbooks: [MTextbook]) async -> [MUnitPhrase] {
         // SQL: SELECT * FROM VUNITPHRASES WHERE LANGID=? AND PHRASE=?
         let url = "\(CommonApi.urlAPI)VUNITPHRASES?filter=LANGID,eq,\(langid)&filter=PHRASE,eq,\(phrase.urlEncoded())"
         // Api is case insensitive
-        return setTextbook(RestApi.getRecords(url: url).map { $0.filter { $0.PHRASE == phrase } }, arrTextbooks: arrTextbooks)
+        return setTextbook((await RestApi.getRecords(MUnitPhrases.self, url: url)).filter { $0.PHRASE == phrase }, arrTextbooks: arrTextbooks)
     }
 
-    static func update(_ id: Int, seqnum: Int) -> Single<()> {
+    static func update(_ id: Int, seqnum: Int) async {
         // SQL: UPDATE UNITPHRASES SET SEQNUM=? WHERE ID=?
         let url = "\(CommonApi.urlAPI)UNITPHRASES/\(id)"
         let body = "SEQNUM=\(seqnum)"
-        return RestApi.update(url: url, body: body).map { print($0) }
+        print(await RestApi.update(url: url, body: body))
     }
     
-    static func update(item: MUnitPhrase) -> Single<()> {
+    static func update(item: MUnitPhrase) async {
         // SQL: CALL UNITPHRASES_UPDATE
         let url = "\(CommonApi.urlSP)UNITPHRASES_UPDATE"
         let parameters = item.toParameters()
-        return RestApi.callSP(url: url, parameters: parameters).map { print($0) }
+        print(await RestApi.callSP(url: url, parameters: parameters))
     }
 
-    static func create(item: MUnitPhrase) -> Single<Int> {
+    static func create(item: MUnitPhrase) async -> Int {
         // SQL: CALL UNITPHRASES_CREATE
         let url = "\(CommonApi.urlSP)UNITPHRASES_CREATE"
         let parameters = item.toParameters()
-        return RestApi.callSP(url: url, parameters: parameters).map { print($0); return Int($0.NEW_ID!)! }
+        let o = await RestApi.callSP(url: url, parameters: parameters)
+        print(o)
+        return Int(o.NEW_ID!)!
     }
     
-    static func delete(item: MUnitPhrase) -> Single<()> {
+    static func delete(item: MUnitPhrase) async {
         // SQL: CALL UNITPHRASES_DELETE
         let url = "\(CommonApi.urlSP)UNITPHRASES_DELETE"
         let parameters = item.toParameters()
-        return RestApi.callSP(url: url, parameters: parameters).map { print($0) }
+        print(await RestApi.callSP(url: url, parameters: parameters))
     }
 }
 

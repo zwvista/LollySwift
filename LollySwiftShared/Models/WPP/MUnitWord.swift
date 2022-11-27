@@ -57,79 +57,80 @@ class MUnitWord: NSObject, Codable, MWordProtocol {
 
     public override var description: String { "\(SEQNUM) \(WORD)" + (NOTE.isEmpty ? "" : "(\(NOTE))") }
 
-    static func getDataByTextbook(_ textbook: MTextbook, unitPartFrom: Int, unitPartTo: Int) -> Single<[MUnitWord]> {
+    static func getDataByTextbook(_ textbook: MTextbook, unitPartFrom: Int, unitPartTo: Int) async -> [MUnitWord] {
         // SQL: SELECT * FROM VUNITWORDS WHERE TEXTBOOKID=? AND UNITPART BETWEEN ? AND ? ORDER BY UNITPART,SEQNUM
         let url = "\(CommonApi.urlAPI)VUNITWORDS?filter=TEXTBOOKID,eq,\(textbook.ID)&filter=UNITPART,bt,\(unitPartFrom),\(unitPartTo)&order=UNITPART&order=SEQNUM"
-        let o: Single<[MUnitWord]> = RestApi.getRecords(url: url)
-        return o.do(onSuccess: { arr in
-            arr.forEach { $0.textbook = textbook }
-        })
+        let o = await RestApi.getRecords(MUnitWords.self, url: url)
+        o.forEach { $0.textbook = textbook }
+        return o
     }
     
-    static func getDataByTextbook(_ textbook: MTextbook) -> Single<[MUnitWord]> {
+    static func getDataByTextbook(_ textbook: MTextbook) async -> [MUnitWord] {
         // SQL: SELECT * FROM VUNITWORDS WHERE TEXTBOOKID=? ORDER BY WORDID
         let url = "\(CommonApi.urlAPI)VUNITWORDS?filter=TEXTBOOKID,eq,\(textbook.ID)&order=WORDID"
-        let o: Single<[MUnitWord]> = RestApi.getRecords(url: url)
-        return o.map { arr in
-            Dictionary(grouping: arr, by: \.WORDID).values.compactMap { $0[0] }
-        }.do(onSuccess: { arr in
-            arr.forEach { $0.textbook = textbook }
-        })
+        let o = await RestApi.getRecords(MUnitWords.self, url: url)
+        let arr = Dictionary(grouping: o, by: \.WORDID).values.compactMap { $0[0] }
+        arr.forEach { $0.textbook = textbook }
+        return arr
     }
     
-    private static func setTextbook(_ o: Single<[MUnitWord]>, arrTextbooks: [MTextbook]) -> Single<[MUnitWord]> {
-        return o.do(onSuccess: { arr in
-            arr.forEach { row in
-                row.textbook = arrTextbooks.first { $0.ID == row.TEXTBOOKID }!
-            }
-        })
+    private static func setTextbook(_ o: [MUnitWord], arrTextbooks: [MTextbook]) -> [MUnitWord] {
+        o.forEach { row in
+            row.textbook = arrTextbooks.first { $0.ID == row.TEXTBOOKID }!
+        }
+        return o
     }
 
-    static func getDataByLang(_ langid: Int, arrTextbooks: [MTextbook]) -> Single<[MUnitWord]> {
+    static func getDataByLang(_ langid: Int, arrTextbooks: [MTextbook]) async -> [MUnitWord] {
         // SQL: SELECT * FROM VTEXTBOOKWORDS WHERE LANGID=?
         let url = "\(CommonApi.urlAPI)VUNITWORDS?filter=LANGID,eq,\(langid)&order=TEXTBOOKID&order=UNIT&order=PART&order=SEQNUM"
-        return setTextbook(RestApi.getRecords(url: url), arrTextbooks: arrTextbooks)
+        return setTextbook(await RestApi.getRecords(MUnitWords.self, url: url), arrTextbooks: arrTextbooks)
     }
     
-    static func getDataById(_ id: Int, arrTextbooks: [MTextbook]) -> Single<MUnitWord?> {
+    static func getDataById(_ id: Int, arrTextbooks: [MTextbook]) async -> MUnitWord? {
         // SQL: SELECT * FROM VUNITWORDS WHERE ID=?
         let url = "\(CommonApi.urlAPI)VUNITWORDS?filter=ID,eq,\(id)"
-        return setTextbook(RestApi.getRecords(url: url), arrTextbooks: arrTextbooks).map { $0.isEmpty ? nil : $0[0] }
+        let arr = setTextbook(await RestApi.getRecords(MUnitWords.self, url: url), arrTextbooks: arrTextbooks)
+        return arr.isEmpty ? nil : arr[0]
     }
 
-    static func getDataByLangWord(langid: Int, word: String, arrTextbooks: [MTextbook]) -> Single<[MUnitWord]> {
+    static func getDataByLangWord(langid: Int, word: String, arrTextbooks: [MTextbook]) async -> [MUnitWord] {
         // SQL: SELECT * FROM VUNITWORDS WHERE LANGID=? AND WORD=?
         let url = "\(CommonApi.urlAPI)VUNITWORDS?filter=LANGID,eq,\(langid)&filter=WORD,eq,\(word.urlEncoded())"
         // Api is case insensitive
-        return setTextbook(RestApi.getRecords(url: url).map { $0.filter { $0.WORD == word } }, arrTextbooks: arrTextbooks)
+        return setTextbook((await RestApi.getRecords(url: url)).filter { $0.WORD == word }, arrTextbooks: arrTextbooks)
     }
 
-    static func update(_ id: Int, seqnum: Int) -> Single<()> {
+    static func update(_ id: Int, seqnum: Int) async {
         // SQL: UPDATE UNITWORDS SET SEQNUM=? WHERE ID=?
         let url = "\(CommonApi.urlAPI)UNITWORDS/\(id)"
         let body = "SEQNUM=\(seqnum)"
-        return RestApi.update(url: url, body: body).map { print($0) }
+        print(await RestApi.update(url: url, body: body))
     }
 
-    static func update(item: MUnitWord) -> Single<String> {
+    static func update(item: MUnitWord) async -> String {
         // SQL: CALL UNITWORDS_UPDATE
         let url = "\(CommonApi.urlSP)UNITWORDS_UPDATE"
         let parameters = item.toParameters()
-        return RestApi.callSP(url: url, parameters: parameters).map { print($0); return $0.result }
+        let o = await RestApi.callSP(url: url, parameters: parameters)
+        print(o)
+        return o.result
     }
 
-    static func create(item: MUnitWord) -> Single<Int> {
+    static func create(item: MUnitWord) async -> Int {
         // SQL: CALL UNITWORDS_CREATE
         let url = "\(CommonApi.urlSP)UNITWORDS_CREATE"
         let parameters = item.toParameters()
-        return RestApi.callSP(url: url, parameters: parameters).map { print($0); return Int($0.NEW_ID!)! }
+        let o = await RestApi.callSP(url: url, parameters: parameters)
+        print(o)
+        return Int(o.NEW_ID!)!
     }
     
-    static func delete(item: MUnitWord) -> Single<()> {
+    static func delete(item: MUnitWord) async -> Single<()> {
         // SQL: CALL UNITWORDS_DELETE
         let url = "\(CommonApi.urlSP)UNITWORDS_DELETE"
         let parameters = item.toParameters()
-        return RestApi.callSP(url: url, parameters: parameters).map { print($0) }
+        print(await RestApi.callSP(url: url, parameters: parameters))
     }
 }
 
