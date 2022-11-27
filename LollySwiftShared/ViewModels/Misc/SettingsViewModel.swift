@@ -11,7 +11,7 @@ import RxSwift
 import RxRelay
 import RxBinding
 
-class SettingsViewModel: NSObject, ObservableObject {
+class SettingsViewModel: NSObject {
     
     var arrUSMappings = [MUSMapping]()
     var arrUserSettings = [MUserSetting]()
@@ -94,71 +94,43 @@ class SettingsViewModel: NSObject, ObservableObject {
     var isSingleUnitPart: Bool { USUNITPARTFROM == USUNITPARTTO }
     var isInvalidUnitPart: Bool { USUNITPARTFROM > USUNITPARTTO }
 
-    @Published var arrLanguages = [MLanguage]()
-#if SWIFTUI
-    @Published var selectedLangIndex = -1
-#else
+    var arrLanguages = [MLanguage]()
     var selectedLangIndex_ = BehaviorRelay(value: -1)
     var selectedLangIndex: Int { get { selectedLangIndex_.value } set { selectedLangIndex_.accept(newValue) } }
-#endif
     var selectedLang: MLanguage { arrLanguages.indices ~= selectedLangIndex ? arrLanguages[selectedLangIndex] : MLanguage() }
 
-    @Published var arrMacVoices = [MVoice]()
-    @Published var arriOSVoices = [MVoice]()
-#if SWIFTUI
-    @Published var selectedMacVoiceIndex = -1
-#else
+    var arrMacVoices = [MVoice]()
+    var arriOSVoices = [MVoice]()
     var selectedMacVoiceIndex_ = BehaviorRelay(value: -1)
     var selectedMacVoiceIndex: Int { get { selectedMacVoiceIndex_.value } set { selectedMacVoiceIndex_.accept(newValue) } }
-#endif
     var selectedMacVoice: MVoice { arrMacVoices.indices ~= selectedMacVoiceIndex ? arrMacVoices[selectedMacVoiceIndex] : MVoice() }
     var macVoiceName: String { selectedMacVoice.VOICENAME }
-#if SWIFTUI
-    @Published var selectediOSVoiceIndex = -1
-#else
     var selectediOSVoiceIndex_ = BehaviorRelay(value: -1)
     var selectediOSVoiceIndex: Int { get { selectediOSVoiceIndex_.value } set { selectediOSVoiceIndex_.accept(newValue) } }
-#endif
     var selectediOSVoice: MVoice { arriOSVoices.indices ~= selectediOSVoiceIndex ? arriOSVoices[selectediOSVoiceIndex] : MVoice() }
 
-    @Published var arrDictsReference = [MDictionary]()
-#if SWIFTUI
-    @Published var selectedDictReferenceIndex = -1
-#else
+    var arrDictsReference = [MDictionary]()
     var selectedDictReferenceIndex_ = BehaviorRelay(value: -1)
     var selectedDictReferenceIndex: Int { get { selectedDictReferenceIndex_.value } set { selectedDictReferenceIndex_.accept(newValue) } }
-#endif
     var selectedDictReference: MDictionary { arrDictsReference.indices ~= selectedDictReferenceIndex ? arrDictsReference[selectedDictReferenceIndex] : MDictionary() }
     var selectedDictsReferenceIndexes = [Int]()
     var selectedDictsReference: [MDictionary] { selectedDictsReferenceIndexes.map { arrDictsReference[$0] } }
     
-    @Published var arrDictsNote = [MDictionary]()
-#if SWIFTUI
-    @Published var selectedDictNoteIndex = -1
-#else
+    var arrDictsNote = [MDictionary]()
     var selectedDictNoteIndex_ = BehaviorRelay(value: -1)
     var selectedDictNoteIndex: Int { get { selectedDictNoteIndex_.value } set { selectedDictNoteIndex_.accept(newValue) } }
-#endif
     var selectedDictNote: MDictionary { arrDictsNote.indices ~= selectedDictNoteIndex ? arrDictsNote[selectedDictNoteIndex] : MDictionary() }
     var hasDictNote: Bool { selectedDictNote.ID != 0 }
     
-    @Published var arrDictsTranslation = [MDictionary]()
-#if SWIFTUI
-    @Published var selectedDictTranslationIndex = -1
-#else
+    var arrDictsTranslation = [MDictionary]()
     var selectedDictTranslationIndex_ = BehaviorRelay(value: -1)
     var selectedDictTranslationIndex: Int { get { selectedDictTranslationIndex_.value } set { selectedDictTranslationIndex_.accept(newValue) } }
-#endif
     var selectedDictTranslation: MDictionary { arrDictsTranslation.indices ~= selectedDictTranslationIndex ? arrDictsTranslation[selectedDictTranslationIndex] : MDictionary() }
     var hasDictTranslation: Bool { selectedDictTranslation.ID != 0 }
 
-    @Published var arrTextbooks = [MTextbook]()
-#if SWIFTUI
-    @Published var selectedTextbookIndex = -1
-#else
+    var arrTextbooks = [MTextbook]()
     var selectedTextbookIndex_ = BehaviorRelay(value: -1)
     var selectedTextbookIndex: Int { get { selectedTextbookIndex_.value } set { selectedTextbookIndex_.accept(newValue) } }
-#endif
     var selectedTextbook: MTextbook { arrTextbooks.indices ~= selectedTextbookIndex ? arrTextbooks[selectedTextbookIndex] : MTextbook() }
     var arrTextbookFilters = [MSelectItem]()
     var arrWebTextbookFilters = [MSelectItem]()
@@ -174,33 +146,17 @@ class SettingsViewModel: NSObject, ObservableObject {
     var TEXTBOOKINFO: String { "\(LANGINFO)/\(selectedTextbook.TEXTBOOKNAME)" }
     var UNITINFO: String { "\(TEXTBOOKINFO)/\(USUNITFROMSTR) \(USPARTFROMSTR) ~ \(USUNITTOSTR) \(USPARTTOSTR)" }
 
-#if SWIFTUI
-    @Published var selectedUnitFromIndex = -1
-#else
     var selectedUnitFromIndex_ = BehaviorRelay(value: -1)
     var selectedUnitFromIndex: Int { get { selectedUnitFromIndex_.value } set { selectedUnitFromIndex_.accept(newValue) } }
-#endif
     var selectedUnitFrom: Int { arrUnits.indices ~= selectedUnitFromIndex ? arrUnits[selectedUnitFromIndex].value : 0 }
-#if SWIFTUI
-    @Published var selectedPartFromIndex = -1
-#else
     var selectedPartFromIndex_ = BehaviorRelay(value: -1)
     var selectedPartFromIndex: Int { get { selectedPartFromIndex_.value } set { selectedPartFromIndex_.accept(newValue) } }
-#endif
     var selectedPartFrom: Int { arrParts.indices ~= selectedPartFromIndex ? arrParts[selectedPartFromIndex].value : 0 }
-#if SWIFTUI
-    @Published var selectedUnitToIndex = -1
-#else
     var selectedUnitToIndex_ = BehaviorRelay(value: -1)
     var selectedUnitToIndex: Int { get { selectedUnitToIndex_.value } set { selectedUnitToIndex_.accept(newValue) } }
-#endif
     var selectedUnitTo: Int { arrUnits.indices ~= selectedUnitToIndex ? arrUnits[selectedUnitToIndex].value : 0 }
-#if SWIFTUI
-    @Published var selectedPartToIndex = -1
-#else
     var selectedPartToIndex_ = BehaviorRelay(value: -1)
     var selectedPartToIndex: Int { get { selectedPartToIndex_.value } set { selectedPartToIndex_.accept(newValue) } }
-#endif
     var selectedPartTo: Int { arrParts.indices ~= selectedPartToIndex ? arrParts[selectedPartToIndex].value : 0 }
 
     var toType_ = BehaviorRelay(value: UnitPartToType.to.rawValue)

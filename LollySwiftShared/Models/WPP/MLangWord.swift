@@ -51,7 +51,7 @@ class MLangWord: NSObject, Codable, MWordProtocol {
     static func update(item: MLangWord) -> Single<()> {
         // SQL: UPDATE LANGWORDS SET WORD=?, NOTE=? WHERE ID=?
         let url = "\(CommonApi.urlAPI)LANGWORDS/\(item.ID)"
-        return RestApi.update(url: url, body: try! item.toJSONString(prettyPrint: false)!).map { print($0) }
+        return RestApi.update(url: url, body: try! item.toJSONString()!).map { print($0) }
     }
 
     static func create(item: MLangWord) -> Single<Int> {

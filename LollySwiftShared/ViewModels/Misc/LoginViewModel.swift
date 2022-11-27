@@ -10,15 +10,10 @@ import Foundation
 import RxSwift
 import RxRelay
 
-class LoginViewModel: NSObject, ObservableObject {
+class LoginViewModel: NSObject {
 
-#if SWIFTUI
-    @Published var username = ""
-    @Published var password = ""
-#else
     let username = BehaviorRelay(value: "")
     let password = BehaviorRelay(value: "")
-#endif
 
     func login(username: String, password: String) -> Single<String> {
         MUser.getData(username: username, password: password)
