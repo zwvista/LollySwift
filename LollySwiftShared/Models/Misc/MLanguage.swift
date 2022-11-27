@@ -27,9 +27,9 @@ class MLanguage: NSObject, Codable {
         case LANGNAME = "NAME"
     }
 
-    static func getData() -> Single<[MLanguage]> {
+    static func getData() async -> [MLanguage] {
         // SQL: SELECT * FROM LANGUAGES WHERE ID<>0
         let url = "\(CommonApi.urlAPI)LANGUAGES?filter=ID,neq,0"
-        return RestApi.getRecords(url: url)
+        return await RestApi.getRecords(MLanguages.self, url: url)
     }
 }

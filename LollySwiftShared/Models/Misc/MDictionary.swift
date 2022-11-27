@@ -64,16 +64,16 @@ class MDictionary: NSObject, Codable {
         return url
     }
     
-    static func getDictsByLang(_ langid: Int) -> Single<[MDictionary]> {
+    static func getDictsByLang(_ langid: Int) async -> [MDictionary] {
         // SQL: SELECT * FROM VDICTIONARIES WHERE LANGIDFROM=?
         let url = "\(CommonApi.urlAPI)VDICTIONARIES?filter=LANGIDFROM,eq,\(langid)&order=SEQNUM&order=DICTNAME"
-        return RestApi.getRecords(url: url)
+        return await RestApi.getRecords(MDictionaries.self, url: url)
     }
 
-    static func getDictsReferenceByLang(_ langid: Int) -> Single<[MDictionary]> {
+    static func getDictsReferenceByLang(_ langid: Int) async -> [MDictionary] {
         // SQL: SELECT * FROM VDICTSREFERENCE WHERE LANGIDFROM=?
         let url = "\(CommonApi.urlAPI)VDICTSREFERENCE?filter=LANGIDFROM,eq,\(langid)&order=SEQNUM&order=DICTNAME"
-        return RestApi.getRecords(url: url)
+        return await RestApi.getRecords(MDictionaries.self, url: url)
     }
     
     func htmlString(_ html: String, word: String, useTemplate2: Bool = false) -> String {
@@ -82,27 +82,29 @@ class MDictionary: NSObject, Codable {
         }
     }
 
-    static func getDictsNoteByLang(_ langid: Int) -> Single<[MDictionary]> {
+    static func getDictsNoteByLang(_ langid: Int) async -> [MDictionary] {
         // SQL: SELECT * FROM VDICTSNOTE WHERE LANGIDFROM = ?
         let url = "\(CommonApi.urlAPI)VDICTSNOTE?filter=LANGIDFROM,eq,\(langid)"
-        return RestApi.getRecords(url: url)
+        return await RestApi.getRecords(MDictionaries.self, url: url)
     }
     
-    static func getDictsTranslationByLang(_ langid: Int) -> Single<[MDictionary]> {
+    static func getDictsTranslationByLang(_ langid: Int) async -> [MDictionary] {
         // SQL: SELECT * FROM VDICTSTRANSLATION WHERE LANGIDFROM = ?
         let url = "\(CommonApi.urlAPI)VDICTSTRANSLATION?filter=LANGIDFROM,eq,\(langid)"
-        return RestApi.getRecords(url: url)
+        return await RestApi.getRecords(MDictionaries.self, url: url)
     }
     
-    static func update(item: MDictionary) -> Single<()> {
+    static func update(item: MDictionary) async {
         // SQL: UPDATE DICTIONARIES SET DICTID=?, LANGIDFROM=?, LANGIDTO=?, NAME=?, SEQNUM=?, DICTTYPECODE=?, URL=?, CHCONV=?, AUTOMATION=?, AUTOJUMP=?, DICTTABLE=?, TRANSFORM=?, WAIT=?, TEMPLATE=?, TEMPLATE2=? WHERE ID=?
         let url = "\(CommonApi.urlAPI)DICTIONARIES/\(item.ID)"
-        return RestApi.update(url: url, body: try! item.toJSONString()!).map { print($0) }
+        print(await RestApi.update(url: url, body: try! item.toJSONString()!))
     }
     
-    static func create(item: MDictionary) -> Single<Int> {
+    static func create(item: MDictionary) async -> Int {
         // SQL: INSERT INTO DICTIONARIES (DICTID, LANGIDFROM, LANGIDTO, NAME, SEQNUM, DICTTYPECODE, URL, CHCONV, AUTOMATION, AUTOJUMP, DICTTABLE, TRANSFORM, WAIT, TEMPLATE, TEMPLATE2) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)
         let url = "\(CommonApi.urlAPI)DICTIONARIES"
-        return RestApi.create(url: url, body: try! item.toJSONString()!).map { Int($0)! }.do(onSuccess: { print($0) })
+        let id = Int(await RestApi.create(url: url, body: try! item.toJSONString()!))!
+        print(id)
+        return id
     }
 }

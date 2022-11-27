@@ -35,10 +35,10 @@ class MCodes: HasRecords {
 class MCode: NSObject, Codable {
     var CODE = 0
     var NAME = ""
-    static func getData() -> Single<[MCode]> {
+    static func getData() async -> [MCode] {
         // SQL: SELECT * FROM CODES WHERE KIND = 1
         let url = "\(CommonApi.urlAPI)CODES?filter=KIND,eq,1"
-        return RestApi.getRecords(url: url)
+        return await RestApi.getRecords(MCodes.self, url: url)
     }
 }
 

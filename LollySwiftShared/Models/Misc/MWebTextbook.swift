@@ -26,9 +26,9 @@ class MWebTextbook: NSObject, Codable {
     dynamic var TITLE = ""
     dynamic var URL = ""
 
-    static func getDataByLang(_ langid: Int) -> Single<[MWebTextbook]> {
+    static func getDataByLang(_ langid: Int) async -> [MWebTextbook] {
         // SQL: SELECT * FROM VWEBTEXTBOOKS WHERE LANGID=?
         let url = "\(CommonApi.urlAPI)VWEBTEXTBOOKS?filter=LANGID,eq,\(langid)"
-        return RestApi.getRecords(url: url)
+        return await RestApi.getRecords(MWebTextbooks.self, url: url)
     }
 }

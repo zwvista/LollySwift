@@ -46,9 +46,9 @@ class MUSMapping: NSObject, Codable {
     static let NAME_USUNITTO = "USUNITTO"
     static let NAME_USPARTTO = "USPARTTO"
 
-    static func getData() -> Single<[MUSMapping]> {
+    static func getData() async -> [MUSMapping] {
         // SQL: SELECT * FROM USMAPPINGS
         let url = "\(CommonApi.urlAPI)USMAPPINGS"
-        return RestApi.getRecords(url: url)
+        return await RestApi.getRecords(MUSMappings.self, url: url)
     }
 }

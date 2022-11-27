@@ -26,29 +26,29 @@ class MUserSetting: NSObject, Codable {
     dynamic var VALUE3: String?
     dynamic var VALUE4: String?
 
-    static func getData() -> Single<[MUserSetting]> {
+    static func getData() async -> [MUserSetting] {
         // SQL: SELECT * FROM USERSETTINGS WHERE USERID=?
         let url = "\(CommonApi.urlAPI)USERSETTINGS?filter=USERID,eq,\(globalUser.userid)"
-        return RestApi.getRecords(url: url)
+        return await RestApi.getRecords(MUserSettings.self, url: url)
     }
     
-    static func update(_ id: Int, body: String) -> Single<()> {
+    static func update(_ id: Int, body: String) async {
         let url = "\(CommonApi.urlAPI)USERSETTINGS/\(id)"
         // SQL: UPDATE USERSETTINGS SET VALUE1=? WHERE ID=?
         // SQL: UPDATE USERSETTINGS SET VALUE2=? WHERE ID=?
         // SQL: UPDATE USERSETTINGS SET VALUE3=? WHERE ID=?
         // SQL: UPDATE USERSETTINGS SET VALUE4=? WHERE ID=?
-        return RestApi.update(url: url, body: body).map { print($0) }
+        print(await RestApi.update(url: url, body: body))
     }
     
-    static func update(info: MUserSettingInfo, intValue: Int) -> Single<()> {
+    static func update(info: MUserSettingInfo, intValue: Int) async {
         let body = "VALUE\(info.VALUEID)=\(intValue)"
-        return update(info.USERSETTINGID, body: body)
+        await update(info.USERSETTINGID, body: body)
     }
     
-    static func update(info: MUserSettingInfo, stringValue: String) -> Single<()> {
+    static func update(info: MUserSettingInfo, stringValue: String) async {
         let body = "VALUE\(info.VALUEID)=\(stringValue)"
-        return update(info.USERSETTINGID, body: body)
+        await update(info.USERSETTINGID, body: body)
     }
 }
 

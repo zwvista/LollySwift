@@ -22,9 +22,9 @@ class MUser: NSObject, Codable {
     dynamic var USERNAME = ""
     dynamic var PASSWORD = ""
 
-    static func getData(username: String, password: String) -> Single<[MUser]> {
+    static func getData(username: String, password: String) async -> [MUser] {
         // SQL: SELECT * FROM USERSETTINGS WHERE USERNAME=? AND PASSWORD=?
         let url = "\(CommonApi.urlAPI)USERS?filter=USERNAME,eq,\(username)&filter=PASSWORD,eq,\(password)"
-        return RestApi.getRecords(url: url)
+        return await RestApi.getRecords(MUsers.self, url: url)
     }
 }
