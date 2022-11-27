@@ -12,18 +12,11 @@ import RxRelay
 
 class LoginViewModel: NSObject, ObservableObject {
 
-#if SWIFTUI
     @Published var username = ""
     @Published var password = ""
-#else
-    let username = BehaviorRelay(value: "")
-    let password = BehaviorRelay(value: "")
-#endif
 
-    func login(username: String, password: String) -> Single<String> {
-        MUser.getData(username: username, password: password)
-            .map {
-                $0.isEmpty ? "" : $0[0].USERID
-            }
+    func login(username: String, password: String) async -> String {
+        let arr = await MUser.getData(username: username, password: password)
+        return arr.isEmpty ? "" : arr[0].USERID
     }
 }

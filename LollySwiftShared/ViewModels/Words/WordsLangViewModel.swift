@@ -63,10 +63,10 @@ class WordsLangViewModel: WordsBaseViewModel {
         await MLangWord.update(item.ID, note: note)
     }
 
-    func clearNote(index: Int) -> Single<()> {
+    func clearNote(index: Int) async {
         let item = arrWords[index]
         item.NOTE = SettingsViewModel.zeroNote
-        return WordsUnitViewModel.update(item.ID, note: item.NOTE)
+        await WordsUnitViewModel.update(item.ID, note: item.NOTE)
     }
     
     public init(settings: SettingsViewModel) {
