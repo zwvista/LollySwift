@@ -177,13 +177,10 @@ code_sign_if_enabled() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/AKSideMenu/AKSideMenu.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/CodableAlamofire-iOS/CodableAlamofire.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/CrossroadRegex-iOS/Regex.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/DropDown/DropDown.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/NSObject+Rx-iOS/NSObject_Rx.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/RxAlamofire-iOS/RxAlamofire.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RxBinding-iOS/RxBinding.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RxCocoa-iOS/RxCocoa.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework"
@@ -193,13 +190,10 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/AKSideMenu/AKSideMenu.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/Alamofire-iOS/Alamofire.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/CodableAlamofire-iOS/CodableAlamofire.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/CrossroadRegex-iOS/Regex.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/DropDown/DropDown.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/NSObject+Rx-iOS/NSObject_Rx.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/RxAlamofire-iOS/RxAlamofire.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RxBinding-iOS/RxBinding.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RxCocoa-iOS/RxCocoa.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework"

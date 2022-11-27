@@ -6,8 +6,6 @@ use_frameworks!
 target 'LollySwiftiOS' do
 platform :ios, '16.0'
 project 'LollySwiftiOS/LollySwiftiOS'
-pod 'CodableAlamofire', :git => 'https://github.com/zwvista/CodableAlamofire'
-pod 'RxAlamofire', '~> 6'
 pod 'RxBinding', :git => 'https://github.com/zwvista/RxBinding'
 pod 'NSObject+Rx'
 pod 'RxDataSources'
@@ -20,8 +18,6 @@ end
 target 'LollySwiftiOSTests' do
 platform :ios, '16.0'
 project 'LollySwiftiOS/LollySwiftiOS'
-pod 'CodableAlamofire', :git => 'https://github.com/zwvista/CodableAlamofire'
-pod 'RxAlamofire', '~> 6'
 pod 'RxBinding', :git => 'https://github.com/zwvista/RxBinding'
 pod 'NSObject+Rx'
 pod 'RxDataSources'
@@ -32,8 +28,6 @@ end
 target 'LollySwiftMac' do
 platform :osx, '13.0'
 project 'LollySwiftMac/LollySwiftMac'
-pod 'CodableAlamofire', :git => 'https://github.com/zwvista/CodableAlamofire'
-pod 'RxAlamofire', '~> 6'
 pod 'RxBinding', :git => 'https://github.com/zwvista/RxBinding'
 pod 'NSObject+Rx'
 pod 'CrossroadRegex'
@@ -43,8 +37,6 @@ end
 target 'LollySwiftMacTests' do
 platform :osx, '13.0'
 project 'LollySwiftMac/LollySwiftMac'
-pod 'CodableAlamofire', :git => 'https://github.com/zwvista/CodableAlamofire'
-pod 'RxAlamofire', '~> 6'
 pod 'RxBinding', :git => 'https://github.com/zwvista/RxBinding'
 pod 'NSObject+Rx'
 pod 'CrossroadRegex'
@@ -54,8 +46,6 @@ end
 target 'LollySwiftUIiOS' do
 platform :ios, '16.0'
 project 'LollySwiftUIiOS/LollySwiftUIiOS'
-pod 'CodableAlamofire', :git => 'https://github.com/zwvista/CodableAlamofire'
-pod 'RxAlamofire', '~> 6'
 pod 'RxBinding', :git => 'https://github.com/zwvista/RxBinding'
 pod 'NSObject+Rx'
 pod 'RxDataSources'
@@ -68,8 +58,6 @@ end
 target 'LollySwiftUIiOSTests' do
 platform :ios, '16.0'
 project 'LollySwiftUIiOS/LollySwiftUIiOS'
-pod 'CodableAlamofire', :git => 'https://github.com/zwvista/CodableAlamofire'
-pod 'RxAlamofire', '~> 6'
 pod 'RxBinding', :git => 'https://github.com/zwvista/RxBinding'
 pod 'NSObject+Rx'
 pod 'RxDataSources'
@@ -82,8 +70,6 @@ end
 target 'LollySwiftUIMac' do
 platform :osx, '13.0'
 project 'LollySwiftUIMac/LollySwiftUIMac'
-pod 'CodableAlamofire', :git => 'https://github.com/zwvista/CodableAlamofire'
-pod 'RxAlamofire', '~> 6'
 pod 'RxBinding', :git => 'https://github.com/zwvista/RxBinding'
 pod 'NSObject+Rx'
 pod 'CrossroadRegex'
@@ -93,8 +79,6 @@ end
 target 'LollySwiftUIMacTests' do
 platform :osx, '13.0'
 project 'LollySwiftUIMac/LollySwiftUIMac'
-pod 'CodableAlamofire', :git => 'https://github.com/zwvista/CodableAlamofire'
-pod 'RxAlamofire', '~> 6'
 pod 'RxBinding', :git => 'https://github.com/zwvista/RxBinding'
 pod 'NSObject+Rx'
 pod 'CrossroadRegex'

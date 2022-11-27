@@ -9,8 +9,6 @@
 import Foundation
 
 import Alamofire
-import RxSwift
-import RxAlamofire
 
 // https://stackoverflow.com/questions/27855319/post-request-with-a-simple-string-in-body-with-alamofire
 class StringEncoding: ParameterEncoding {
@@ -54,37 +52,39 @@ extension Encodable {
     
 }
 
+protocol HasRecords: Decodable {
+    associatedtype RecordType
+    var records: [RecordType] { get set }
+}
+
 class RestApi {
 
-    static func getObject<T: Decodable>(url: String, keyPath: String? = nil) -> Single<T> {
-        RxCodableAlamofire.object(.get, url, keyPath: keyPath).asSingle()
+    static func getObject<T: Decodable>(url: String) async -> T {
+        try! await AF.request(url).serializingDecodable(T.self).value
     }
-    static func getArray<T: Decodable>(url: String, keyPath: String? = nil) -> Single<[T]> {
-        print("[RestApi]GET:\(url)")
-        return RxCodableAlamofire.object(.get, url, keyPath: keyPath).asSingle()
+    static func getRecords<T: HasRecords>(_ t: T.Type, url: String) async -> [T.RecordType] {
+        var o: T = await getObject(url: url)
+        return o.records
     }
-    static func getRecords<T: Decodable>(url: String) -> Single<[T]> {
-        getArray(url: url, keyPath: "records")
-    }
-    static func update(url: String, body: String) -> Single<String> {
+    static func update(url: String, body: String) async -> String {
         print("[RestApi]PUT:\(url) BODY:\(body)")
-        return RxAlamofire.string(.put, url, encoding: StringEncoding(body: body)).asSingle()
+        return try! await AF.request(url, method: .put, encoding: StringEncoding(body: body)).serializingString().value
     }
-    static func create(url: String, body: String) -> Single<String> {
+    static func create(url: String, body: String) async -> String {
         print("[RestApi]POST:\(url) BODY:\(body)")
-        return RxAlamofire.string(.post, url, encoding: StringEncoding(body: body)).asSingle()
+        return try! await AF.request(url, method: .post, encoding: StringEncoding(body: body)).serializingString().value
     }
-    static func delete(url: String) -> Single<String> {
+    static func delete(url: String) async -> String {
         print("[RestApi]DELETE:\(url)")
-        return RxAlamofire.string(.delete, url).asSingle()
+        return try! await AF.request(url, method: .delete).serializingString().value
     }
-    static func getHtml(url: String) -> Single<String> {
+    static func getHtml(url: String) async -> String {
         print("[RestApi]GET:\(url)")
-        return RxAlamofire.string(.get, url).asSingle()
+        return try! await AF.request(url).serializingString().value
     }
-    static func callSP(url: String, parameters: Parameters) -> Single<MSPResult> {
+    static func callSP(url: String, parameters: Parameters) async -> MSPResult {
         print("[RestApi]SP:\(url) BODY:\(parameters)")
-        let o: Observable<[[MSPResult]]> = RxCodableAlamofire.object(.post, url, parameters: parameters)
-        return o.asSingle().map { $0[0][0] }
+        let o = try! await AF.request(url, method: .post, parameters: parameters).serializingDecodable([[MSPResult]].self).value
+        return o[0][0]
     }
 }

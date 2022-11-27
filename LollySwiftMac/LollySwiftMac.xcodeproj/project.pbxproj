@@ -28,6 +28,7 @@
 		8C486DF41EBB88240023FBFC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C486DF31EBB88240023FBFC /* Cocoa.framework */; };
 		8C486DF61EBB882B0023FBFC /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C486DF51EBB882B0023FBFC /* WebKit.framework */; };
 		8CAF910A20833C4F00933837 /* WordsSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAF910920833C4F00933837 /* WordsSearchViewModel.swift */; };
+		8CD4F03D293301F4003AEC61 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 8CD4F03C293301F4003AEC61 /* Alamofire */; };
 		8CD8409D20AFD4DA00442133 /* PhrasesUnitDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8409A20AFD4D900442133 /* PhrasesUnitDetailViewController.swift */; };
 		8CD8409E20AFD4DA00442133 /* PhrasesUnitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8409B20AFD4D900442133 /* PhrasesUnitViewController.swift */; };
 		8CD8409F20AFD4DA00442133 /* Phrases.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8CD8409C20AFD4D900442133 /* Phrases.storyboard */; };
@@ -81,8 +82,6 @@
 		95548CDD2621CA9A00893AB8 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95548CDC2621CA9A00893AB8 /* LoginViewController.swift */; };
 		95548CE22621CD5B00893AB8 /* MUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95548CE12621CD5B00893AB8 /* MUser.swift */; };
 		95548CE72621CD7000893AB8 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95548CE62621CD6F00893AB8 /* LoginViewModel.swift */; };
-		9562949726B5C3DD000C68B1 /* RxCodableAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9562949626B5C3DC000C68B1 /* RxCodableAlamofire.swift */; };
-		9562949826B5C3DD000C68B1 /* RxCodableAlamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9562949626B5C3DC000C68B1 /* RxCodableAlamofire.swift */; };
 		9568FF2325A44A36004598D8 /* WordsBaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9568FF2225A44A36004598D8 /* WordsBaseViewModel.swift */; };
 		9568FF2B25A44C57004598D8 /* PhrasesBaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9568FF2A25A44C57004598D8 /* PhrasesBaseViewModel.swift */; };
 		957B532325A59BED00C18B06 /* WordsUnitBatchAddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957B532225A59BED00C18B06 /* WordsUnitBatchAddViewController.swift */; };
@@ -253,7 +252,6 @@
 		95548CDC2621CA9A00893AB8 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		95548CE12621CD5B00893AB8 /* MUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MUser.swift; sourceTree = "<group>"; };
 		95548CE62621CD6F00893AB8 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
-		9562949626B5C3DC000C68B1 /* RxCodableAlamofire.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxCodableAlamofire.swift; sourceTree = "<group>"; };
 		9568FF2225A44A36004598D8 /* WordsBaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsBaseViewModel.swift; sourceTree = "<group>"; };
 		9568FF2A25A44C57004598D8 /* PhrasesBaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhrasesBaseViewModel.swift; sourceTree = "<group>"; };
 		957B532225A59BED00C18B06 /* WordsUnitBatchAddViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsUnitBatchAddViewController.swift; sourceTree = "<group>"; };
@@ -337,6 +335,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C486DF61EBB882B0023FBFC /* WebKit.framework in Frameworks */,
+				8CD4F03D293301F4003AEC61 /* Alamofire in Frameworks */,
 				8C486DF41EBB88240023FBFC /* Cocoa.framework in Frameworks */,
 				41624B18047DBD62E1485CDE /* Pods_LollySwiftMac.framework in Frameworks */,
 			);
@@ -454,7 +453,6 @@
 				95837EA724E049FA00B5D2AE /* NSStepper+Rx.swift */,
 				9504766825E26C7D0027A2F7 /* NSTextField+Rx2.swift */,
 				8C2CB5A1207885140083DDE2 /* RestApi.swift */,
-				9562949626B5C3DC000C68B1 /* RxCodableAlamofire.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -701,6 +699,9 @@
 			dependencies = (
 			);
 			name = LollySwiftMac;
+			packageProductDependencies = (
+				8CD4F03C293301F4003AEC61 /* Alamofire */,
+			);
 			productName = LollySwiftMac;
 			productReference = 8C1C4F241D31F88800CF5D88 /* LollySwiftMac.app */;
 			productType = "com.apple.product-type.application";
@@ -783,6 +784,9 @@
 				Base,
 			);
 			mainGroup = 8C1C4F1B1D31F88800CF5D88;
+			packageReferences = (
+				8CD4F03B293301F3003AEC61 /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			productRefGroup = 8C1C4F251D31F88800CF5D88 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -980,7 +984,6 @@
 				95898458259F00B500DFE80A /* PatternsWebPagesDetailViewModel.swift in Sources */,
 				9568FF2325A44A36004598D8 /* WordsBaseViewModel.swift in Sources */,
 				95CED3B2221048B50094622F /* PhrasesBaseViewController.swift in Sources */,
-				9562949726B5C3DD000C68B1 /* RxCodableAlamofire.swift in Sources */,
 				95EFF47E21840FB60094EE3C /* MAutoCorrect.swift in Sources */,
 				957B537825A8692000C18B06 /* DictStore.swift in Sources */,
 				954CB5F423B7175500A03900 /* PatternsViewModel.swift in Sources */,
@@ -1048,7 +1051,6 @@
 				95940A95223389A300D35409 /* MVoice.swift in Sources */,
 				959191E8258CFFCA0070DBFD /* MPattern.swift in Sources */,
 				95E43F2F21E1E926001E650C /* MacApi.swift in Sources */,
-				9562949826B5C3DD000C68B1 /* RxCodableAlamofire.swift in Sources */,
 				959191F0258CFFCA0070DBFD /* MUnitPhrase.swift in Sources */,
 				954D8B982143907C00651A80 /* PhrasesLangViewModel.swift in Sources */,
 				954D8B9A2143907C00651A80 /* WordsSearchViewModel.swift in Sources */,
@@ -1383,6 +1385,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8CD4F03B293301F3003AEC61 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.6.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8CD4F03C293301F4003AEC61 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8CD4F03B293301F3003AEC61 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8C1C4F1C1D31F88800CF5D88 /* Project object */;
 }

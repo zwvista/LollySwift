@@ -10,6 +10,12 @@ import Foundation
 import RxSwift
 
 @objcMembers
+class MAutoCorrects: HasRecords {
+    typealias RecordType = MAutoCorrect
+    dynamic var records = [MAutoCorrect]()
+}
+
+@objcMembers
 class MAutoCorrect: Codable {
     dynamic var ID = 0
     dynamic var LANGID = 0
@@ -18,10 +24,10 @@ class MAutoCorrect: Codable {
     dynamic var EXTENDED = ""
     dynamic var BASIC = ""
     
-    static func getDataByLang(_ langid: Int) -> Single<[MAutoCorrect]> {
+    static func getDataByLang(_ langid: Int) async -> [MAutoCorrect] {
         // SQL: SELECT * FROM AUTOCORRECT WHERE LANGID=?
         let url = "\(CommonApi.urlAPI)AUTOCORRECT?filter=LANGID,eq,\(langid)"
-        return RestApi.getRecords(url: url)
+        return await RestApi.getRecords(MAutoCorrects.self, url: url)
     }
     
     static func autoCorrect(text: String, arrAutoCorrect: [MAutoCorrect], colFunc1: (MAutoCorrect) -> String, colFunc2: (MAutoCorrect) -> String) -> String {
