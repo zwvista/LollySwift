@@ -18,10 +18,9 @@ class SinglePhraseViewModel: NSObject {
     init(phrase: String, settings: SettingsViewModel, complete: @escaping () -> ()) {
         vmSettings = settings
         super.init()
-        MUnitPhrase.getDataByLangPhrase(langid: vmSettings.selectedLang.ID, phrase: phrase, arrTextbooks: vmSettings.arrTextbooks).map {
-            self.arrPhrases = $0
-        }.subscribe(onSuccess: {
+        Task {
+            arrPhrases = await MUnitPhrase.getDataByLangPhrase(langid: vmSettings.selectedLang.ID, phrase: phrase, arrTextbooks: vmSettings.arrTextbooks)
             complete()
-        }) ~ rx.disposeBag
+        }
     }
 }

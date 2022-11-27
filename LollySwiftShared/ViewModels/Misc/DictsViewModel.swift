@@ -7,29 +7,26 @@
 //
 
 import Foundation
-import RxSwift
-import RxBinding
-import NSObject_Rx
 
 class DictsViewModel: NSObject {
     var vmSettings: SettingsViewModel
     var arrDicts = [MDictionary]()
-    
+
     init(settings: SettingsViewModel, complete: @escaping () -> ()) {
         vmSettings = settings
         super.init()
-        MDictionary.getDictsByLang(settings.selectedLang.ID).subscribe(onSuccess: {
-            self.arrDicts = $0
+        Task {
+            arrDicts = await MDictionary.getDictsByLang(settings.selectedLang.ID)
             complete()
-        }) ~ rx.disposeBag
-    }
-    
-    static func update(item: MDictionary) -> Single<()> {
-        MDictionary.update(item: item)
+        }
     }
 
-    static func create(item: MDictionary) -> Single<Int> {
-        MDictionary.create(item: item)
+    static func update(item: MDictionary) async {
+        await MDictionary.update(item: item)
+    }
+
+    static func create(item: MDictionary) async -> Int {
+        await MDictionary.create(item: item)
     }
 
     func newDict() -> MDictionary {

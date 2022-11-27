@@ -7,8 +7,6 @@
 //
 
 import Foundation
-import RxSwift
-import RxBinding
 
 class SingleWordViewModel: NSObject {
 
@@ -18,10 +16,9 @@ class SingleWordViewModel: NSObject {
     init(word: String, settings: SettingsViewModel, complete: @escaping () -> ()) {
         vmSettings = settings
         super.init()
-        MUnitWord.getDataByLangWord(langid: vmSettings.selectedLang.ID, word: word, arrTextbooks: vmSettings.arrTextbooks).map {
-            self.arrWords = $0
-        }.subscribe(onSuccess: {
+        Task {
+            arrWords = await MUnitWord.getDataByLangWord(langid: vmSettings.selectedLang.ID, word: word, arrTextbooks: vmSettings.arrTextbooks)
             complete()
-        }) ~ rx.disposeBag
+        }
     }
 }

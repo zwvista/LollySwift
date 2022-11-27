@@ -37,18 +37,16 @@ class PhrasesLangViewModel: PhrasesBaseViewModel {
         }
     }
     
-    static func update(item: MLangPhrase) -> Single<()> {
-        MLangPhrase.update(item: item)
+    static func update(item: MLangPhrase) async {
+        await MLangPhrase.update(item: item)
     }
 
-    static func create(item: MLangPhrase) -> Single<()> {
-        MLangPhrase.create(item: item).map {
-            item.ID = $0
-        }
+    static func create(item: MLangPhrase) async {
+        item.ID = await MLangPhrase.create(item: item)
     }
     
-    static func delete(item: MLangPhrase) -> Single<()> {
-        MLangPhrase.delete(item: item)
+    static func delete(item: MLangPhrase) async {
+        await MLangPhrase.delete(item: item)
     }
 
     func newLangPhrase() -> MLangPhrase {
@@ -61,9 +59,7 @@ class PhrasesLangViewModel: PhrasesBaseViewModel {
         super.init(settings: settings, needCopy: false)
     }
     
-    func getPhrases(wordid: Int) -> Single<()> {
-        MWordPhrase.getPhrasesByWordId(wordid).map {
-            self.arrPhrases = $0
-        }
+    func getPhrases(wordid: Int) async {
+        arrPhrases = await MWordPhrase.getPhrasesByWordId(wordid)
     }
 }

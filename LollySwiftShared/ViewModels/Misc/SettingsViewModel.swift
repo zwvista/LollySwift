@@ -619,13 +619,12 @@ class SettingsViewModel: NSObject, ObservableObject {
     }
 
     static let zeroNote = "O"
-    func getNote(word: String) -> Single<String> {
-        guard hasDictNote else { return Single.just("") }
+    func getNote(word: String) async -> String {
+        guard hasDictNote else { return "" }
         let url = selectedDictNote.urlString(word: word, arrAutoCorrect: arrAutoCorrect)
-        return RestApi.getHtml(url: url).map { html in
-            print(html)
-            return CommonApi.extractText(from: html, transform: self.selectedDictNote.TRANSFORM, template: "") { text,_ in text }
-        }
+        let html = await RestApi.getHtml(url: url)
+        print(html)
+        return CommonApi.extractText(from: html, transform: selectedDictNote.TRANSFORM, template: "") { text,_ in text }
     }
 
     func getNotes(wordCount: Int, isNoteEmpty: @escaping (Int) -> Bool, getOne: @escaping (Int) -> Void, allComplete: @escaping () -> Void) -> Disposable {

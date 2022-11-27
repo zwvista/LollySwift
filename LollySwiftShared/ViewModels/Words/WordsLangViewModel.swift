@@ -17,13 +17,14 @@ class WordsLangViewModel: WordsBaseViewModel {
 
     public init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> ()) {
         super.init(settings: settings, needCopy: needCopy)
-        reload().subscribe(onSuccess: { complete() }) ~ rx.disposeBag
+        Task {
+            await reload()
+            complete()
+        }
     }
     
-    func reload() -> Single<()> {
-        MLangWord.getDataByLang(vmSettings.selectedTextbook.LANGID).map {
-            self.arrWords = $0
-        }
+    func reload() async {
+        arrWords = await MLangWord.getDataByLang(vmSettings.selectedTextbook.LANGID)
     }
     
     func applyFilters() {
@@ -37,18 +38,16 @@ class WordsLangViewModel: WordsBaseViewModel {
         }
     }
     
-    static func update(item: MLangWord) -> Single<()> {
-        MLangWord.update(item: item)
+    static func update(item: MLangWord) async {
+        await MLangWord.update(item: item)
     }
 
-    static func create(item: MLangWord) -> Single<()> {
-        MLangWord.create(item: item).map {
-            item.ID = $0
-        }
+    static func create(item: MLangWord) async {
+        item.ID = await MLangWord.create(item: item)
     }
     
-    static func delete(item: MLangWord) -> Single<()> {
-        MLangWord.delete(item: item)
+    static func delete(item: MLangWord) async {
+        await MLangWord.delete(item: item)
     }
     
     func newLangWord() -> MLangWord {
@@ -57,12 +56,11 @@ class WordsLangViewModel: WordsBaseViewModel {
         }
     }
 
-    func getNote(index: Int) -> Single<()> {
+    func getNote(index: Int) async {
         let item = arrWords[index]
-        return vmSettings.getNote(word: item.WORD).flatMap { note in
-            item.NOTE = note
-            return MLangWord.update(item.ID, note: note)
-        }
+        let note = await vmSettings.getNote(word: item.WORD)
+        item.NOTE = note
+        await MLangWord.update(item.ID, note: note)
     }
 
     func clearNote(index: Int) -> Single<()> {
@@ -75,9 +73,7 @@ class WordsLangViewModel: WordsBaseViewModel {
         super.init(settings: settings, needCopy: false)
     }
     
-    func getWords(phraseid: Int) -> Single<()> {
-        MWordPhrase.getWordsByPhraseId(phraseid).map {
-            self.arrWords = $0
-        }
+    func getWords(phraseid: Int) async {
+        arrWords = await MWordPhrase.getWordsByPhraseId(phraseid)
     }
 }

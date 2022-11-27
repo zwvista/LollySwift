@@ -25,18 +25,17 @@ class DictStore: NSObject {
         self.wvDict = wvDict
     }
     
-    func searchDict() {
+    func searchDict() async {
         url = dict.urlString(word: word, arrAutoCorrect: vmSettings.arrAutoCorrect)
         dictStatus = .ready
         if dict.DICTTYPENAME == "OFFLINE" {
-            wvDict.load(URLRequest(url: URL(string: "about:blank")!))
-            RestApi.getHtml(url: url).subscribe(onSuccess: { html in
-                print(html)
-                let str = self.dict.htmlString(html, word: self.word)
-                self.wvDict.loadHTMLString(str, baseURL: nil)
-            }) ~ rx.disposeBag
+            await wvDict.load(URLRequest(url: URL(string: "about:blank")!))
+            let html = await RestApi.getHtml(url: url)
+            print(html)
+            let str = dict.htmlString(html, word: word)
+            await wvDict.loadHTMLString(str, baseURL: nil)
         } else {
-            wvDict.load(URLRequest(url: URL(string: url)!))
+            await wvDict.load(URLRequest(url: URL(string: url)!))
             if !dict.AUTOMATION.isEmpty {
                 dictStatus = .automating
             } else if dict.DICTTYPENAME == "OFFLINE-ONLINE" {

@@ -29,14 +29,14 @@ class PhrasesLangDetailViewModel: NSObject {
         vmSingle = SinglePhraseViewModel(phrase: item.PHRASE, settings: vm.vmSettings, complete: complete)
     }
     
-    func onOK() -> Single<()> {
+    func onOK() async {
         itemEdit.save(to: item)
         item.PHRASE = vm.vmSettings.autoCorrectInput(text: item.PHRASE)
         if isAdd {
             vm.arrPhrases.append(item)
-            return PhrasesLangViewModel.create(item: item)
+            await PhrasesLangViewModel.create(item: item)
         } else {
-            return PhrasesLangViewModel.update(item: item)
+            await PhrasesLangViewModel.update(item: item)
         }
     }
 }
