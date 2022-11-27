@@ -98,7 +98,7 @@ class MUnitWord: NSObject, Codable, MWordProtocol {
         // SQL: SELECT * FROM VUNITWORDS WHERE LANGID=? AND WORD=?
         let url = "\(CommonApi.urlAPI)VUNITWORDS?filter=LANGID,eq,\(langid)&filter=WORD,eq,\(word.urlEncoded())"
         // Api is case insensitive
-        return setTextbook((await RestApi.getRecords(url: url)).filter { $0.WORD == word }, arrTextbooks: arrTextbooks)
+        return setTextbook((await RestApi.getRecords(MUnitWords.self, url: url)).filter { $0.WORD == word }, arrTextbooks: arrTextbooks)
     }
 
     static func update(_ id: Int, seqnum: Int) async {
@@ -126,7 +126,7 @@ class MUnitWord: NSObject, Codable, MWordProtocol {
         return Int(o.NEW_ID!)!
     }
     
-    static func delete(item: MUnitWord) async -> Single<()> {
+    static func delete(item: MUnitWord) async {
         // SQL: CALL UNITWORDS_DELETE
         let url = "\(CommonApi.urlSP)UNITWORDS_DELETE"
         let parameters = item.toParameters()
