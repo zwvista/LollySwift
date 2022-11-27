@@ -11,6 +11,12 @@ import RxSwift
 import RxRelay
 
 @objcMembers
+class MPatternWebPages: HasRecords {
+    typealias RecordType = MPatternWebPage
+    dynamic var records = [MPatternWebPage]()
+}
+
+@objcMembers
 class MPatternWebPage: NSObject, Codable {
     dynamic var ID = 0
     dynamic var PATTERNID = 0

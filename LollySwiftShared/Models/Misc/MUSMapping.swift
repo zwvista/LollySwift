@@ -9,6 +9,12 @@
 import Foundation
 import RxSwift
 
+@objcMembers
+class MUSMappings: HasRecords {
+    typealias RecordType = MUSMapping
+    dynamic var records = [MUSMapping]()
+}
+
 class MUSMapping: NSObject, Codable {
     dynamic var ID = 0
     dynamic var NAME = ""

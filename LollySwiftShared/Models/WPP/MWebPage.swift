@@ -10,6 +10,12 @@ import Foundation
 import RxSwift
 
 @objcMembers
+class MWebPages: HasRecords {
+    typealias RecordType = MWebPage
+    dynamic var records = [MWebPage]()
+}
+
+@objcMembers
 class MWebPage: NSObject, Codable {
     var ID = 0
     var TITLE = ""

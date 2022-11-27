@@ -11,6 +11,12 @@ import RxSwift
 import RxRelay
 
 @objcMembers
+class MLangPhrases: HasRecords {
+    typealias RecordType = MLangPhrase
+    dynamic var records = [MLangPhrase]()
+}
+
+@objcMembers
 class MLangPhrase: NSObject, Codable, MPhraseProtocol {
     dynamic var ID = 0
     dynamic var PHRASEID: Int { ID }

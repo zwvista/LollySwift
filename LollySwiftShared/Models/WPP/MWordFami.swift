@@ -10,6 +10,12 @@ import Foundation
 import RxSwift
 
 @objcMembers
+class MWordFamis: HasRecords {
+    typealias RecordType = MWordFami
+    dynamic var records = [MWordFami]()
+}
+
+@objcMembers
 class MWordFami: NSObject, Codable {
     dynamic var ID = 0
     dynamic var USERID = ""

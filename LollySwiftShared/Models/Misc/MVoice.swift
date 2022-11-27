@@ -10,6 +10,12 @@ import Foundation
 import RxSwift
 
 @objcMembers
+class MVoices: HasRecords {
+    typealias RecordType = MVoice
+    dynamic var records = [MVoice]()
+}
+
+@objcMembers
 class MVoice: NSObject, Codable {
     dynamic var ID = 0
     dynamic var LANGID = 0

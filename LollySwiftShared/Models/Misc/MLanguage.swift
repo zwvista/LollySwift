@@ -10,6 +10,12 @@ import Foundation
 import RxSwift
 
 @objcMembers
+class MLanguages: HasRecords {
+    typealias RecordType = MLanguage
+    dynamic var records = [MLanguage]()
+}
+
+@objcMembers
 class MLanguage: NSObject, Codable {
     dynamic var ID = 0
     dynamic var LANGNAME = ""

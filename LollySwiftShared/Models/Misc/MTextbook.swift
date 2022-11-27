@@ -10,6 +10,12 @@ import Foundation
 import RxSwift
 
 @objcMembers
+class MTextbooks: HasRecords {
+    typealias RecordType = MTextbook
+    dynamic var records = [MTextbook]()
+}
+
+@objcMembers
 class MTextbook: NSObject, Codable {
     dynamic var ID = 0
     dynamic var LANGID = 0

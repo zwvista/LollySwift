@@ -26,6 +26,12 @@ class MSelectItem: NSObject {
 }
 
 @objcMembers
+class MCodes: HasRecords {
+    typealias RecordType = MCode
+    dynamic var records = [MCode]()
+}
+
+@objcMembers
 class MCode: NSObject, Codable {
     var CODE = 0
     var NAME = ""

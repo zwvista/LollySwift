@@ -11,6 +11,12 @@ import RxSwift
 import RxRelay
 
 @objcMembers
+class MUnitBlogs: HasRecords {
+    typealias RecordType = MUnitBlog
+    dynamic var records = [MUnitBlog]()
+}
+
+@objcMembers
 class MUnitBlog: NSObject, Codable {
     dynamic var ID = 0
     dynamic var TEXTBOOKID = 0

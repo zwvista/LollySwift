@@ -25,6 +25,12 @@ protocol MPhraseProtocol {
 }
 
 @objcMembers
+class MWordPhrases: HasRecords {
+    typealias RecordType = MWordPhrase
+    dynamic var records = [MWordPhrase]()
+}
+
+@objcMembers
 class MWordPhrase: NSObject, Codable {
     dynamic var ID = 0
     dynamic var WORDID = 0

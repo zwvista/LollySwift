@@ -10,6 +10,12 @@ import Foundation
 import RxSwift
 
 @objcMembers
+class MDictionaries: HasRecords {
+    typealias RecordType = MDictionary
+    dynamic var records = [MDictionary]()
+}
+
+@objcMembers
 class MDictionary: NSObject, Codable {
     dynamic var ID = 0
     dynamic var DICTID = 0

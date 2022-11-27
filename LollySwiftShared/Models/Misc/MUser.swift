@@ -10,6 +10,12 @@ import Foundation
 import RxSwift
 
 @objcMembers
+class MUsers: HasRecords {
+    typealias RecordType = MUser
+    dynamic var records = [MUser]()
+}
+
+@objcMembers
 class MUser: NSObject, Codable {
     dynamic var ID = 0
     dynamic var USERID = ""

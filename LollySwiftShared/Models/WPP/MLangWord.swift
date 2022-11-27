@@ -11,6 +11,12 @@ import RxSwift
 import RxRelay
 
 @objcMembers
+class MLangWords: HasRecords {
+    typealias RecordType = MLangWord
+    dynamic var records = [MLangWord]()
+}
+
+@objcMembers
 class MLangWord: NSObject, Codable, MWordProtocol {
     dynamic var ID = 0
     dynamic var LANGID = 0

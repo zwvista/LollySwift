@@ -11,6 +11,12 @@ import RxSwift
 import RxRelay
 
 @objcMembers
+class MPatterns: HasRecords {
+    typealias RecordType = MPattern
+    dynamic var records = [MPattern]()
+}
+
+@objcMembers
 class MPattern: NSObject, Codable {
     dynamic var ID = 0
     dynamic var LANGID = 0
