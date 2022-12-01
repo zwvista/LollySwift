@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Combine
 
 class SettingsViewModel: NSObject, ObservableObject {
     
@@ -145,8 +146,7 @@ class SettingsViewModel: NSObject, ObservableObject {
     @Published var selectedPartToIndex = -1
     var selectedPartTo: Int { arrParts.indices ~= selectedPartToIndex ? arrParts[selectedPartToIndex].value : 0 }
 
-    @Published var toType = UnitPartToType.to.rawValue
-
+    @Published var toType = UnitPartToType.to
     var toTypeMovable: Bool { toType == .to }
     @Published var toTypeTitle = ""
     @Published var unitToEnabled = false
@@ -169,61 +169,67 @@ class SettingsViewModel: NSObject, ObservableObject {
     weak var delegate: SettingsViewModelDelegate?
 
     var initialized = false
+
+    var subscriptions = Set<AnyCancellable>()
+
     override init() {
         super.init()
 
-        func onChange(_ source: BehaviorRelay<Int>, _ selector: @escaping (Int) throws async) {
-            source.distinctUntilChanged().filter { self.initialized && $0 != -1 }.flatMap(selector).subscribe() ~ rx.disposeBag
+        func onChange(_ source: Published<Int>.Publisher, _ selector: @escaping (Int) async -> ()) {
+            source.removeDuplicates()
+                .filter { self.initialized && $0 != -1 }
+                .sink { n in Task { await selector(n) } }
+                .store(in: &subscriptions)
         }
 
-        onChange(selectedLangIndex_) { n in
-            print("selectedLangIndex=\(n)")
-            return self.updateLang()
+        onChange($selectedLangIndex) {
+            print("selectedLangIndex=\($0)")
+            await self.updateLang()
         }
-        onChange(selectedMacVoiceIndex_) {n in
-            print("selectedMacVoiceIndex=\(n)")
-            return self.updateMacVoice()
+        onChange($selectedMacVoiceIndex) {
+            print("selectedMacVoiceIndex=\($0)")
+            await self.updateMacVoice()
         }
-        onChange(selectediOSVoiceIndex_) {n in
-            print("selectediOSVoiceIndex=\(n)")
-            return self.updateiOSVoice()
+        onChange($selectediOSVoiceIndex) {
+            print("selectediOSVoiceIndex=\($0)")
+            await self.updateiOSVoice()
         }
-        onChange(selectedDictReferenceIndex_) {n in
-            print("selectedDictReferenceIndex=\(n)")
-            return self.updateDictReference()
+        onChange($selectedDictReferenceIndex) {
+            print("selectedDictReferenceIndex=\($0)")
+            await self.updateDictReference()
         }
-        onChange(selectedDictNoteIndex_) {n in
-            print("selectedDictNoteIndex=\(n)")
-            return self.updateDictNote()
+        onChange($selectedDictNoteIndex) {
+            print("selectedDictNoteIndex=\($0)")
+            await self.updateDictNote()
         }
-        onChange(selectedDictTranslationIndex_) {n in
-            print("selectedDictTranslationIndex=\(n)")
-            return self.updateDictTranslation()
+        onChange($selectedDictTranslationIndex) {
+            print("selectedDictTranslationIndex=\($0)")
+            await self.updateDictTranslation()
         }
-        onChange(selectedTextbookIndex_) {n in
-            print("selectedTextbookIndex=\(n)")
-            return self.updateTextbook()
+        onChange($selectedTextbookIndex) {
+            print("selectedTextbookIndex=\($0)")
+            await self.updateTextbook()
         }
-        onChange(selectedUnitFromIndex_) { n in
-            print("selectedUnitFromIndex=\(n)")
-            return self.updateUnitFrom()
+        onChange($selectedUnitFromIndex) {
+            print("selectedUnitFromIndex=\($0)")
+            await self.updateUnitFrom()
         }
-        onChange(selectedPartFromIndex_) { n in
-            print("selectedPartFromIndex=\(n)")
-            return self.updatePartFrom()
+        onChange($selectedPartFromIndex) {
+            print("selectedPartFromIndex=\($0)")
+            await self.updatePartFrom()
         }
-        onChange(selectedUnitToIndex_) { n in
-            print("selectedUnitToIndex=\(n)")
-            return self.updateUnitTo()
+        onChange($selectedUnitToIndex) {
+            print("selectedUnitToIndex=\($0)")
+            await self.updateUnitTo()
         }
-        onChange(selectedPartToIndex_) { n in
-            print("selectedPartToIndex=\(n)")
-            return self.updatePartTo()
+        onChange($selectedPartToIndex) {
+            print("selectedPartToIndex=\($0)")
+            await self.updatePartTo()
         }
 
-        toType_.distinctUntilChanged().flatMap { n async in
-            return self.updateToType()
-        }.subscribe() ~ rx.disposeBag
+        $toType.removeDuplicates()
+            .sink { _ in Task { await self.updateToType() } }
+            .store(in: &subscriptions)
     }
 
     init(_ x: SettingsViewModel) {
@@ -423,46 +429,53 @@ class SettingsViewModel: NSObject, ObservableObject {
     }
 
     func updateUnitFrom() async {
-        doUpdateUnitFrom(v: selectedUnitFrom).flatMap {
-            self.toType == .unit ? self.doUpdateSingleUnit() :
-            self.toType == .part || self.isInvalidUnitPart ? self.doUpdateUnitPartTo() :
-            Single.just(())
+        await doUpdateUnitFrom(v: selectedUnitFrom)
+        if toType == .unit {
+            await doUpdateSingleUnit()
+        } else if toType == .part || isInvalidUnitPart {
+            await doUpdateUnitPartTo()
         }
     }
 
     func updatePartFrom() async {
-        doUpdatePartFrom(v: selectedPartFrom).flatMap {
-            self.toType == .part || self.isInvalidUnitPart ? self.doUpdateUnitPartTo() : Single.just(())
+        await doUpdatePartFrom(v: selectedPartFrom)
+        if toType == .part || isInvalidUnitPart {
+            await doUpdateUnitPartTo()
         }
     }
 
     func updateUnitTo() async {
-        doUpdateUnitTo(v: selectedUnitTo).flatMap {
-            self.isInvalidUnitPart ? self.doUpdateUnitPartFrom() : Single.just(())
+        await doUpdateUnitTo(v: selectedUnitTo)
+        if isInvalidUnitPart {
+            await doUpdateUnitPartFrom()
         }
     }
 
     func updatePartTo() async {
-        doUpdatePartTo(v: selectedPartTo).flatMap {
-            self.isInvalidUnitPart ? self.doUpdateUnitPartFrom() : Single.just(())
+        await doUpdatePartTo(v: selectedPartTo)
+        if isInvalidUnitPart {
+            await doUpdateUnitPartFrom()
         }
     }
 
     func updateToType() async {
         print("toType=\(toType)")
-        toTypeTitle.accept(SettingsViewModel.arrToTypes[toType_.value])
+        toTypeTitle = SettingsViewModel.arrToTypes[toType.rawValue]
         let b = toType == .to
-        unitToEnabled.accept(b)
-        partToEnabled.accept(b && !isSinglePart)
-        previousEnabled.accept(!b)
-        nextEnabled.accept(!b)
+        unitToEnabled = b
+        partToEnabled = b && !isSinglePart
+        previousEnabled = !b
+        nextEnabled = !b
         let b2 = toType != .unit
         let t = !b2 ? "Unit" : "Part"
-        previousTitle.accept("Previous " + t)
-        nextTitle.accept("Next " + t)
-        partFromEnabled.accept(b2 && !isSinglePart)
-        return toType == .unit ? doUpdateSingleUnit() :
-        toType == .part ? doUpdateUnitPartTo() : Single.just(())
+        previousTitle = "Previous " + t
+        nextTitle = "Next " + t
+        partFromEnabled = b2 && !isSinglePart
+        if toType == .unit {
+            await doUpdateSingleUnit()
+        } else if toType == .part {
+            await doUpdateUnitPartTo()
+        }
     }
 
     func toggleToType(part: Int) async {
@@ -472,9 +485,9 @@ class SettingsViewModel: NSObject, ObservableObject {
             return Single.zip(doUpdatePartFrom(v: part), doUpdateUnitPartTo()).map { _ in }
         case .part:
             toType = .unit
-            return doUpdateSingleUnit()
+            await doUpdateSingleUnit()
         default:
-            return Single.just(())
+            break
         }
     }
 
@@ -483,8 +496,6 @@ class SettingsViewModel: NSObject, ObservableObject {
             let n = selectedUnitFrom
             if n > 1 {
                 return Single.zip(doUpdateUnitFrom(v: n - 1), doUpdateUnitTo(v: n - 1)).map { _ in }
-            } else {
-                return Single.just(())
             }
         } else if selectedPartFrom > 1 {
             return Single.zip(doUpdatePartFrom(v: selectedPartFrom - 1), doUpdateUnitPartTo()).map { _ in }
