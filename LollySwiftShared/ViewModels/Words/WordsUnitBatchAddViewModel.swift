@@ -22,7 +22,7 @@ class WordsUnitBatchAddViewModel: NSObject {
         itemEdit = MUnitWordEdit(x: item)
     }
     
-    func onOK() -> Single<()> {
+    func onOK() async {
         itemEdit.save(to: item)
         var o = Single.just(())
         let words = itemEdit.WORDS.value.split(separator: "\n")

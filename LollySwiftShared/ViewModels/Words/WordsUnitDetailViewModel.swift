@@ -31,7 +31,7 @@ class WordsUnitDetailViewModel: NSObject {
         vmSingle = SingleWordViewModel(word: item.WORD, settings: vm.vmSettings, complete: complete)
     }
     
-    func onOK() -> Single<()> {
+    func onOK() async {
         itemEdit.save(to: item)
         item.WORD = vm.vmSettings.autoCorrectInput(text: item.WORD)
         return !isAdd ? vm.update(item: item) : vm.create(item: item).flatMap {

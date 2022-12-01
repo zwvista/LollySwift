@@ -25,15 +25,15 @@ class PatternsDetailViewModel: NSObject {
         isAdd = item.ID == 0
         _ = itemEdit.PATTERN.map { !$0.isEmpty } ~> isOKEnabled
     }
-    
-    func onOK() -> Single<()> {
+
+    func onOK() async {
         itemEdit.save(to: item)
         item.PATTERN = vm.vmSettings.autoCorrectInput(text: item.PATTERN)
         if isAdd {
             vm.arrPatterns.append(item)
-            return PatternsViewModel.create(item: item)
+            await PatternsViewModel.create(item: item)
         } else {
-            return PatternsViewModel.update(item: item)
+            await PatternsViewModel.update(item: item)
         }
     }
 }

@@ -25,15 +25,16 @@ class PatternsViewModel: NSObject {
     public init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> ()) {
         self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
         super.init()
-        reload().subscribe(onSuccess: { complete() }) ~ rx.disposeBag
-    }
-    
-    func reload() -> Single<()> {
-        MPattern.getDataByLang(vmSettings.selectedLang.ID).map {
-            self.arrPatterns = $0
+        Task {
+            await reload()
+            complete()
         }
     }
-    
+
+    func reload() async {
+        arrPatterns = await MPattern.getDataByLang(vmSettings.selectedLang.ID)
+    }
+
     func applyFilters() {
         if textFilter.value.isEmpty {
             arrPatternsFiltered = nil
@@ -44,21 +45,19 @@ class PatternsViewModel: NSObject {
             }
         }
     }
-    
-    static func update(item: MPattern) -> Single<()> {
-        MPattern.update(item: item)
+
+    static func update(item: MPattern) async {
+        await MPattern.update(item: item)
     }
 
-    static func create(item: MPattern) -> Single<()> {
-        MPattern.create(item: item).map {
-            item.ID = $0
-        }
+    static func create(item: MPattern) async {
+        item.ID = await MPattern.create(item: item)
     }
-    
-    static func delete(_ id: Int) -> Single<()> {
-        MPattern.delete(id)
+
+    static func delete(_ id: Int) async {
+        await MPattern.delete(id)
     }
-    
+
     func newPattern() -> MPattern {
         MPattern().then {
             $0.LANGID = vmSettings.selectedLang.ID

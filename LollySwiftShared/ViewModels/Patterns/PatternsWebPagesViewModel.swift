@@ -24,40 +24,33 @@ class PatternsWebPagesViewModel: NSObject {
         self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
         super.init()
     }
-    
-    func getWebPages() -> Single<()> {
+
+    func getWebPages() async {
         if selectedPatternItem == nil {
             arrWebPages.removeAll()
-            return Single.just(())
         } else {
-            return MPatternWebPage.getDataByPattern(selectedPatternItem!.ID).map {
-                self.arrWebPages = $0
-            }
+            arrWebPages = await MPatternWebPage.getDataByPattern(selectedPatternItem!.ID)
         }
     }
 
-    static func updateWebPage(item: MPatternWebPage) -> Single<()> {
-        MWebPage.update(item: item)
+    static func updateWebPage(item: MPatternWebPage) async {
+        await MWebPage.updatePattern(item: item)
     }
 
-    static func createWebPage(item: MPatternWebPage) -> Single<()> {
-        MWebPage.create(item: item).map {
-            item.WEBPAGEID = $0
-        }
+    static func createWebPage(item: MPatternWebPage) async {
+        item.WEBPAGEID = await MWebPage.createPattern(item: item)
     }
 
-    static func updatePatternWebPage(item: MPatternWebPage) -> Single<()> {
-        MPatternWebPage.update(item: item)
+    static func updatePatternWebPage(item: MPatternWebPage) async {
+        await MPatternWebPage.update(item: item)
     }
 
-    static func createPatternWebPage(item: MPatternWebPage) -> Single<()> {
-        MPatternWebPage.create(item: item).map {
-            item.ID = $0
-        }
+    static func createPatternWebPage(item: MPatternWebPage) async {
+        item.ID = await MPatternWebPage.create(item: item)
     }
 
-    static func deleteWebPage(_ id: Int) -> Single<()> {
-        MPatternWebPage.delete(id)
+    static func deleteWebPage(_ id: Int) async {
+        await MPatternWebPage.delete(id)
     }
 
     func newPatternWebPage() -> MPatternWebPage {
@@ -68,14 +61,13 @@ class PatternsWebPagesViewModel: NSObject {
         return item
     }
 
-    func reindexWebPage(complete: @escaping (Int) -> ()) {
+    func reindexWebPage(complete: @escaping (Int) -> ()) async {
         for i in 1...arrWebPages.count {
             let item = arrWebPages[i - 1]
             guard item.SEQNUM != i else {continue}
             item.SEQNUM = i
-            MPatternWebPage.update(item.ID, seqnum: item.SEQNUM).subscribe(onSuccess: {
-                complete(i - 1)
-            }) ~ rx.disposeBag
+            await MPatternWebPage.update(item.ID, seqnum: item.SEQNUM)
+            complete(i - 1)
         }
     }
 }
