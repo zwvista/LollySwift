@@ -187,7 +187,6 @@ class SettingsViewModel: NSObject {
     override init() {
         super.init()
 
-#if !SWIFTUI
         func onChange(_ source: BehaviorRelay<Int>, _ selector: @escaping (Int) throws -> Single<()>) {
             source.distinctUntilChanged().filter { self.initialized && $0 != -1 }.flatMap(selector).subscribe() ~ rx.disposeBag
         }
@@ -240,7 +239,6 @@ class SettingsViewModel: NSObject {
         toType_.distinctUntilChanged().flatMap { n -> Single<()> in
             return self.updateToType()
         }.subscribe() ~ rx.disposeBag
-#endif
     }
 
     init(_ x: SettingsViewModel) {
@@ -395,44 +393,44 @@ class SettingsViewModel: NSObject {
 
     func updateDictReference() -> Single<()> {
         let newVal = String(selectedDictReference.DICTID)
-        let dirty = USDICTREFERENCE != newVal
+        guard USDICTREFERENCE != newVal else { return Single.just(()) }
         USDICTREFERENCE = newVal
-        return (!dirty ? Single.just(()) : MUserSetting.update(info: INFO_USDICTREFERENCE, stringValue: USDICTREFERENCE)).do(onSuccess: { self.delegate?.onUpdateDictReference() })
+        return MUserSetting.update(info: INFO_USDICTREFERENCE, stringValue: USDICTREFERENCE).do(onSuccess: { self.delegate?.onUpdateDictReference() })
     }
 
     func updateDictsReference() -> Single<()> {
         let newVal = selectedDictsReference.map { String($0.DICTID) }.joined(separator: ",")
-        let dirty = USDICTSREFERENCE != newVal
+        guard USDICTSREFERENCE != newVal else { return Single.just(()) }
         USDICTSREFERENCE = newVal
-        return (!dirty ? Single.just(()) : MUserSetting.update(info: INFO_USDICTSREFERENCE, stringValue: USDICTSREFERENCE)).do(onSuccess: { self.delegate?.onUpdateDictsReference() })
+        return MUserSetting.update(info: INFO_USDICTSREFERENCE, stringValue: USDICTSREFERENCE).do(onSuccess: { self.delegate?.onUpdateDictsReference() })
     }
 
     func updateDictNote() -> Single<()> {
         let newVal = selectedDictNote.DICTID
-        let dirty = USDICTNOTE != newVal
+        guard USDICTNOTE != newVal else { return Single.just(()) }
         USDICTNOTE = newVal
-        return (!dirty ? Single.just(()) : MUserSetting.update(info: INFO_USDICTNOTE, intValue: USDICTNOTE)).do(onSuccess: { self.delegate?.onUpdateDictNote() })
+        return MUserSetting.update(info: INFO_USDICTNOTE, intValue: USDICTNOTE).do(onSuccess: { self.delegate?.onUpdateDictNote() })
     }
 
     func updateDictTranslation() -> Single<()> {
         let newVal = selectedDictTranslation.DICTID
-        let dirty = USDICTTRANSLATION != newVal
+        guard USDICTTRANSLATION != newVal else { return Single.just(()) }
         USDICTTRANSLATION = newVal
-        return (!dirty ? Single.just(()) : MUserSetting.update(info: INFO_USDICTTRANSLATION, intValue: USDICTTRANSLATION)).do(onSuccess: { self.delegate?.onUpdateDictTranslation() })
+        return MUserSetting.update(info: INFO_USDICTTRANSLATION, intValue: USDICTTRANSLATION).do(onSuccess: { self.delegate?.onUpdateDictTranslation() })
     }
 
     func updateMacVoice() -> Single<()> {
         let newVal = selectedMacVoice.ID
-        let dirty = USMACVOICE != newVal
+        guard USMACVOICE != newVal else { return Single.just(()) }
         USMACVOICE = newVal
-        return (!dirty ? Single.just(()) : MUserSetting.update(info: INFO_USMACVOICE, intValue: USMACVOICE)).do(onSuccess: { self.delegate?.onUpdateMacVoice() })
+        return MUserSetting.update(info: INFO_USMACVOICE, intValue: USMACVOICE).do(onSuccess: { self.delegate?.onUpdateMacVoice() })
     }
 
     func updateiOSVoice() -> Single<()> {
         let newVal = selectediOSVoice.ID
-        let dirty = USIOSVOICE != newVal
+        guard USIOSVOICE != newVal else { return Single.just(()) }
         USIOSVOICE = newVal
-        return (!dirty ? Single.just(()) : MUserSetting.update(info: INFO_USIOSVOICE, intValue: USIOSVOICE)).do(onSuccess: { self.delegate?.onUpdateiOSVoice() })
+        return MUserSetting.update(info: INFO_USIOSVOICE, intValue: USIOSVOICE).do(onSuccess: { self.delegate?.onUpdateiOSVoice() })
     }
 
     func autoCorrectInput(text: String) -> String {
