@@ -7,29 +7,27 @@
 //
 
 import Foundation
-import RxSwift
-import RxBinding
 import Then
 
 class TextbooksViewModel: NSObject {
     var vmSettings: SettingsViewModel
     var arrTextbooks = [MTextbook]()
-    
+
     init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> ()) {
         self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
         super.init()
-        MTextbook.getDataByLang(settings.selectedLang.ID, arrUserSettings: settings.arrUserSettings).subscribe(onSuccess: {
-            self.arrTextbooks = $0
+        Task {
+            arrTextbooks = await MTextbook.getDataByLang(settings.selectedLang.ID, arrUserSettings: settings.arrUserSettings)
             complete()
-        }) ~ rx.disposeBag
+        }
     }
-    
-    static func update(item: MTextbook) -> Single<()> {
-        MTextbook.update(item: item)
+
+    static func update(item: MTextbook) async {
+        await MTextbook.update(item: item)
     }
-    
-    static func create(item: MTextbook) -> Single<Int> {
-        MTextbook.create(item: item)
+
+    static func create(item: MTextbook) async {
+        _ = await MTextbook.create(item: item)
     }
 
     func newTextbook() -> MTextbook {

@@ -19,15 +19,15 @@ class PhrasesUnitViewModel: PhrasesBaseViewModel {
     public init(settings: SettingsViewModel, inTextbook: Bool, needCopy: Bool, complete: @escaping () -> ()) {
         self.inTextbook = inTextbook
         super.init(settings: settings, needCopy: needCopy)
-        reload().subscribe(onSuccess: { complete() }) ~ rx.disposeBag
+        Task {
+            await reload()
+            complete()
+        }
     }
     
-    func reload() -> Single<()> {
-        (inTextbook ? MUnitPhrase.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO) : MUnitPhrase.getDataByLang(vmSettings.selectedTextbook.LANGID, arrTextbooks: vmSettings.arrTextbooks))
-        .map {
-            self.arrPhrases = $0
-            self.arrPhrasesFiltered = nil
-        }
+    func reload() async {
+        arrPhrases = inTextbook ? await MUnitPhrase.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO) : await MUnitPhrase.getDataByLang(vmSettings.selectedTextbook.LANGID, arrTextbooks: vmSettings.arrTextbooks)
+        arrPhrasesFiltered = nil
     }
 
     func applyFilters() {
@@ -44,41 +44,36 @@ class PhrasesUnitViewModel: PhrasesBaseViewModel {
         }
     }
     
-    static func update(_ id: Int, seqnum: Int) -> Single<()> {
-        MUnitPhrase.update(id, seqnum: seqnum)
+    static func update(_ id: Int, seqnum: Int) async {
+        await MUnitPhrase.update(id, seqnum: seqnum)
     }
     
-    func update(item: MUnitPhrase) -> Single<()> {
-        MUnitPhrase.update(item: item).flatMap {
-            MUnitPhrase.getDataById(item.ID, arrTextbooks: self.vmSettings.arrTextbooks)
-        }.map {
-            if let o = $0 { copyProperties(from: o, to: item) }
+    func update(item: MUnitPhrase) async {
+        await MUnitPhrase.update(item: item)
+        if let o = await MUnitPhrase.getDataById(item.ID, arrTextbooks: vmSettings.arrTextbooks) {
+            copyProperties(from: o, to: item)
         }
     }
     
-    func create(item: MUnitPhrase) -> Single<()> {
-        MUnitPhrase.create(item: item).flatMap {
-            MUnitPhrase.getDataById($0, arrTextbooks: self.vmSettings.arrTextbooks)
-        }.map {
-            if let o = $0 {
-                self.arrPhrases.append(o)
-                copyProperties(from: o, to: item)
-            }
+    func create(item: MUnitPhrase) async {
+        let id = await MUnitPhrase.create(item: item)
+        if let o = await MUnitPhrase.getDataById(id, arrTextbooks: vmSettings.arrTextbooks) {
+            self.arrPhrases.append(o)
+            copyProperties(from: o, to: item)
         }
     }
     
-    static func delete(item: MUnitPhrase) -> Single<()> {
-        MUnitPhrase.delete(item: item)
+    static func delete(item: MUnitPhrase) async {
+        await MUnitPhrase.delete(item: item)
     }
 
-    func reindex(complete: @escaping (Int) -> Void) {
+    func reindex(complete: @escaping (Int) -> Void) async {
         for i in 1...arrPhrases.count {
             let item = arrPhrases[i - 1]
             guard item.SEQNUM != i else {continue}
             item.SEQNUM = i
-            PhrasesUnitViewModel.update(item.ID, seqnum: item.SEQNUM).subscribe(onSuccess: {
-                complete(i - 1)
-            }) ~ rx.disposeBag
+            await PhrasesUnitViewModel.update(item.ID, seqnum: item.SEQNUM)
+            complete(i - 1)
         }
     }
 

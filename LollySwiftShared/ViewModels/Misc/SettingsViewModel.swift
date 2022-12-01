@@ -7,9 +7,6 @@
 //
 
 import Foundation
-import RxSwift
-import RxRelay
-import RxBinding
 
 class SettingsViewModel: NSObject, ObservableObject {
     
@@ -95,70 +92,35 @@ class SettingsViewModel: NSObject, ObservableObject {
     var isInvalidUnitPart: Bool { USUNITPARTFROM > USUNITPARTTO }
 
     @Published var arrLanguages = [MLanguage]()
-#if SWIFTUI
     @Published var selectedLangIndex = -1
-#else
-    var selectedLangIndex_ = BehaviorRelay(value: -1)
-    var selectedLangIndex: Int { get { selectedLangIndex_.value } set { selectedLangIndex_.accept(newValue) } }
-#endif
     var selectedLang: MLanguage { arrLanguages.indices ~= selectedLangIndex ? arrLanguages[selectedLangIndex] : MLanguage() }
 
     @Published var arrMacVoices = [MVoice]()
     @Published var arriOSVoices = [MVoice]()
-#if SWIFTUI
     @Published var selectedMacVoiceIndex = -1
-#else
-    var selectedMacVoiceIndex_ = BehaviorRelay(value: -1)
-    var selectedMacVoiceIndex: Int { get { selectedMacVoiceIndex_.value } set { selectedMacVoiceIndex_.accept(newValue) } }
-#endif
     var selectedMacVoice: MVoice { arrMacVoices.indices ~= selectedMacVoiceIndex ? arrMacVoices[selectedMacVoiceIndex] : MVoice() }
     var macVoiceName: String { selectedMacVoice.VOICENAME }
-#if SWIFTUI
     @Published var selectediOSVoiceIndex = -1
-#else
-    var selectediOSVoiceIndex_ = BehaviorRelay(value: -1)
-    var selectediOSVoiceIndex: Int { get { selectediOSVoiceIndex_.value } set { selectediOSVoiceIndex_.accept(newValue) } }
-#endif
     var selectediOSVoice: MVoice { arriOSVoices.indices ~= selectediOSVoiceIndex ? arriOSVoices[selectediOSVoiceIndex] : MVoice() }
 
     @Published var arrDictsReference = [MDictionary]()
-#if SWIFTUI
     @Published var selectedDictReferenceIndex = -1
-#else
-    var selectedDictReferenceIndex_ = BehaviorRelay(value: -1)
-    var selectedDictReferenceIndex: Int { get { selectedDictReferenceIndex_.value } set { selectedDictReferenceIndex_.accept(newValue) } }
-#endif
     var selectedDictReference: MDictionary { arrDictsReference.indices ~= selectedDictReferenceIndex ? arrDictsReference[selectedDictReferenceIndex] : MDictionary() }
     var selectedDictsReferenceIndexes = [Int]()
     var selectedDictsReference: [MDictionary] { selectedDictsReferenceIndexes.map { arrDictsReference[$0] } }
     
     @Published var arrDictsNote = [MDictionary]()
-#if SWIFTUI
     @Published var selectedDictNoteIndex = -1
-#else
-    var selectedDictNoteIndex_ = BehaviorRelay(value: -1)
-    var selectedDictNoteIndex: Int { get { selectedDictNoteIndex_.value } set { selectedDictNoteIndex_.accept(newValue) } }
-#endif
     var selectedDictNote: MDictionary { arrDictsNote.indices ~= selectedDictNoteIndex ? arrDictsNote[selectedDictNoteIndex] : MDictionary() }
     var hasDictNote: Bool { selectedDictNote.ID != 0 }
     
     @Published var arrDictsTranslation = [MDictionary]()
-#if SWIFTUI
     @Published var selectedDictTranslationIndex = -1
-#else
-    var selectedDictTranslationIndex_ = BehaviorRelay(value: -1)
-    var selectedDictTranslationIndex: Int { get { selectedDictTranslationIndex_.value } set { selectedDictTranslationIndex_.accept(newValue) } }
-#endif
     var selectedDictTranslation: MDictionary { arrDictsTranslation.indices ~= selectedDictTranslationIndex ? arrDictsTranslation[selectedDictTranslationIndex] : MDictionary() }
     var hasDictTranslation: Bool { selectedDictTranslation.ID != 0 }
 
     @Published var arrTextbooks = [MTextbook]()
-#if SWIFTUI
     @Published var selectedTextbookIndex = -1
-#else
-    var selectedTextbookIndex_ = BehaviorRelay(value: -1)
-    var selectedTextbookIndex: Int { get { selectedTextbookIndex_.value } set { selectedTextbookIndex_.accept(newValue) } }
-#endif
     var selectedTextbook: MTextbook { arrTextbooks.indices ~= selectedTextbookIndex ? arrTextbooks[selectedTextbookIndex] : MTextbook() }
     var arrTextbookFilters = [MSelectItem]()
     var arrWebTextbookFilters = [MSelectItem]()
@@ -174,47 +136,26 @@ class SettingsViewModel: NSObject, ObservableObject {
     var TEXTBOOKINFO: String { "\(LANGINFO)/\(selectedTextbook.TEXTBOOKNAME)" }
     var UNITINFO: String { "\(TEXTBOOKINFO)/\(USUNITFROMSTR) \(USPARTFROMSTR) ~ \(USUNITTOSTR) \(USPARTTOSTR)" }
 
-#if SWIFTUI
     @Published var selectedUnitFromIndex = -1
-#else
-    var selectedUnitFromIndex_ = BehaviorRelay(value: -1)
-    var selectedUnitFromIndex: Int { get { selectedUnitFromIndex_.value } set { selectedUnitFromIndex_.accept(newValue) } }
-#endif
     var selectedUnitFrom: Int { arrUnits.indices ~= selectedUnitFromIndex ? arrUnits[selectedUnitFromIndex].value : 0 }
-#if SWIFTUI
     @Published var selectedPartFromIndex = -1
-#else
-    var selectedPartFromIndex_ = BehaviorRelay(value: -1)
-    var selectedPartFromIndex: Int { get { selectedPartFromIndex_.value } set { selectedPartFromIndex_.accept(newValue) } }
-#endif
     var selectedPartFrom: Int { arrParts.indices ~= selectedPartFromIndex ? arrParts[selectedPartFromIndex].value : 0 }
-#if SWIFTUI
     @Published var selectedUnitToIndex = -1
-#else
-    var selectedUnitToIndex_ = BehaviorRelay(value: -1)
-    var selectedUnitToIndex: Int { get { selectedUnitToIndex_.value } set { selectedUnitToIndex_.accept(newValue) } }
-#endif
     var selectedUnitTo: Int { arrUnits.indices ~= selectedUnitToIndex ? arrUnits[selectedUnitToIndex].value : 0 }
-#if SWIFTUI
     @Published var selectedPartToIndex = -1
-#else
-    var selectedPartToIndex_ = BehaviorRelay(value: -1)
-    var selectedPartToIndex: Int { get { selectedPartToIndex_.value } set { selectedPartToIndex_.accept(newValue) } }
-#endif
     var selectedPartTo: Int { arrParts.indices ~= selectedPartToIndex ? arrParts[selectedPartToIndex].value : 0 }
 
-    var toType_ = BehaviorRelay(value: UnitPartToType.to.rawValue)
-    var toType: UnitPartToType { get { UnitPartToType(rawValue: toType_.value)! } set { toType_.accept(newValue.rawValue) } }
+    @Published var toType = UnitPartToType.to.rawValue
 
     var toTypeMovable: Bool { toType == .to }
-    var toTypeTitle = BehaviorRelay(value: "")
-    var unitToEnabled = BehaviorRelay(value: false)
-    var partToEnabled = BehaviorRelay(value: false)
-    var previousEnabled = BehaviorRelay(value: false)
-    var nextEnabled = BehaviorRelay(value: false)
-    var previousTitle = BehaviorRelay(value: "")
-    var nextTitle = BehaviorRelay(value: "")
-    var partFromEnabled = BehaviorRelay(value: false)
+    @Published var toTypeTitle = ""
+    @Published var unitToEnabled = false
+    @Published var partToEnabled = false
+    @Published var previousEnabled = false
+    @Published var nextEnabled = false
+    @Published var previousTitle = ""
+    @Published var nextTitle = ""
+    @Published var partFromEnabled = false
 
     static let arrToTypes = ["Unit", "Part", "To"]
     static let arrScopeWordFilters = ["Word", "Note"]
@@ -231,8 +172,7 @@ class SettingsViewModel: NSObject, ObservableObject {
     override init() {
         super.init()
 
-#if !SWIFTUI
-        func onChange(_ source: BehaviorRelay<Int>, _ selector: @escaping (Int) throws -> Single<()>) {
+        func onChange(_ source: BehaviorRelay<Int>, _ selector: @escaping (Int) throws async) {
             source.distinctUntilChanged().filter { self.initialized && $0 != -1 }.flatMap(selector).subscribe() ~ rx.disposeBag
         }
 
@@ -281,10 +221,9 @@ class SettingsViewModel: NSObject, ObservableObject {
             return self.updatePartTo()
         }
 
-        toType_.distinctUntilChanged().flatMap { n -> Single<()> in
+        toType_.distinctUntilChanged().flatMap { n async in
             return self.updateToType()
         }.subscribe() ~ rx.disposeBag
-#endif
     }
 
     init(_ x: SettingsViewModel) {
@@ -341,7 +280,7 @@ class SettingsViewModel: NSObject, ObservableObject {
         return MUserSettingInfo(USERSETTINGID: o2.ID, VALUEID: o.VALUEID)
     }
 
-    func getData() -> Single<()> {
+    func getData() async {
         initialized = false
         return Single.zip(MLanguage.getData(),
                               MUSMapping.getData(),
@@ -359,7 +298,7 @@ class SettingsViewModel: NSObject, ObservableObject {
             }
     }
 
-    func updateLang() -> Single<()> {
+    func updateLang() async {
         let newVal = selectedLang.ID
         let dirty = USLANG != newVal
         USLANG = newVal
@@ -412,7 +351,7 @@ class SettingsViewModel: NSObject, ObservableObject {
             }
     }
 
-    func updateTextbook() -> Single<()> {
+    func updateTextbook() async {
         let newVal = selectedTextbook.ID
         let dirty = USTEXTBOOK != newVal
         USTEXTBOOK = newVal
@@ -437,42 +376,42 @@ class SettingsViewModel: NSObject, ObservableObject {
         }
     }
 
-    func updateDictReference() -> Single<()> {
+    func updateDictReference() async {
         let newVal = String(selectedDictReference.DICTID)
         let dirty = USDICTREFERENCE != newVal
         USDICTREFERENCE = newVal
         return (!dirty ? Single.just(()) : MUserSetting.update(info: INFO_USDICTREFERENCE, stringValue: USDICTREFERENCE)).do(onSuccess: { self.delegate?.onUpdateDictReference() })
     }
 
-    func updateDictsReference() -> Single<()> {
+    func updateDictsReference() async {
         let newVal = selectedDictsReference.map { String($0.DICTID) }.joined(separator: ",")
         let dirty = USDICTSREFERENCE != newVal
         USDICTSREFERENCE = newVal
         return (!dirty ? Single.just(()) : MUserSetting.update(info: INFO_USDICTSREFERENCE, stringValue: USDICTSREFERENCE)).do(onSuccess: { self.delegate?.onUpdateDictsReference() })
     }
 
-    func updateDictNote() -> Single<()> {
+    func updateDictNote() async {
         let newVal = selectedDictNote.DICTID
         let dirty = USDICTNOTE != newVal
         USDICTNOTE = newVal
         return (!dirty ? Single.just(()) : MUserSetting.update(info: INFO_USDICTNOTE, intValue: USDICTNOTE)).do(onSuccess: { self.delegate?.onUpdateDictNote() })
     }
 
-    func updateDictTranslation() -> Single<()> {
+    func updateDictTranslation() async {
         let newVal = selectedDictTranslation.DICTID
         let dirty = USDICTTRANSLATION != newVal
         USDICTTRANSLATION = newVal
         return (!dirty ? Single.just(()) : MUserSetting.update(info: INFO_USDICTTRANSLATION, intValue: USDICTTRANSLATION)).do(onSuccess: { self.delegate?.onUpdateDictTranslation() })
     }
 
-    func updateMacVoice() -> Single<()> {
+    func updateMacVoice() async {
         let newVal = selectedMacVoice.ID
         let dirty = USMACVOICE != newVal
         USMACVOICE = newVal
         return (!dirty ? Single.just(()) : MUserSetting.update(info: INFO_USMACVOICE, intValue: USMACVOICE)).do(onSuccess: { self.delegate?.onUpdateMacVoice() })
     }
 
-    func updateiOSVoice() -> Single<()> {
+    func updateiOSVoice() async {
         let newVal = selectediOSVoice.ID
         let dirty = USIOSVOICE != newVal
         USIOSVOICE = newVal
@@ -483,7 +422,7 @@ class SettingsViewModel: NSObject, ObservableObject {
         MAutoCorrect.autoCorrect(text: text, arrAutoCorrect: arrAutoCorrect, colFunc1: \.INPUT, colFunc2: \.EXTENDED)
     }
 
-    func updateUnitFrom() -> Single<()> {
+    func updateUnitFrom() async {
         doUpdateUnitFrom(v: selectedUnitFrom).flatMap {
             self.toType == .unit ? self.doUpdateSingleUnit() :
             self.toType == .part || self.isInvalidUnitPart ? self.doUpdateUnitPartTo() :
@@ -491,25 +430,25 @@ class SettingsViewModel: NSObject, ObservableObject {
         }
     }
 
-    func updatePartFrom() -> Single<()> {
+    func updatePartFrom() async {
         doUpdatePartFrom(v: selectedPartFrom).flatMap {
             self.toType == .part || self.isInvalidUnitPart ? self.doUpdateUnitPartTo() : Single.just(())
         }
     }
 
-    func updateUnitTo() -> Single<()> {
+    func updateUnitTo() async {
         doUpdateUnitTo(v: selectedUnitTo).flatMap {
             self.isInvalidUnitPart ? self.doUpdateUnitPartFrom() : Single.just(())
         }
     }
 
-    func updatePartTo() -> Single<()> {
+    func updatePartTo() async {
         doUpdatePartTo(v: selectedPartTo).flatMap {
             self.isInvalidUnitPart ? self.doUpdateUnitPartFrom() : Single.just(())
         }
     }
 
-    func updateToType() -> Single<()> {
+    func updateToType() async {
         print("toType=\(toType)")
         toTypeTitle.accept(SettingsViewModel.arrToTypes[toType_.value])
         let b = toType == .to
@@ -526,7 +465,7 @@ class SettingsViewModel: NSObject, ObservableObject {
         toType == .part ? doUpdateUnitPartTo() : Single.just(())
     }
 
-    func toggleToType(part: Int) -> Single<()> {
+    func toggleToType(part: Int) async {
         switch toType {
         case .unit:
             toType = .part
@@ -539,7 +478,7 @@ class SettingsViewModel: NSObject, ObservableObject {
         }
     }
 
-    func previousUnitPart() -> Single<()> {
+    func previousUnitPart() async {
         if toType == .unit {
             let n = selectedUnitFrom
             if n > 1 {
@@ -556,7 +495,7 @@ class SettingsViewModel: NSObject, ObservableObject {
         }
     }
 
-    func nextUnitPart() -> Single<()> {
+    func nextUnitPart() async {
         if toType == .unit {
             let n = selectedUnitFrom
             if n < unitCount {
@@ -573,46 +512,46 @@ class SettingsViewModel: NSObject, ObservableObject {
         }
     }
     
-    private func doUpdateUnitPartFrom() -> Single<()> {
+    private func doUpdateUnitPartFrom() async {
         Single.zip(doUpdateUnitFrom(v: USUNITTO), doUpdatePartFrom(v: USPARTTO)).map { _ in }
     }
 
-    private func doUpdateUnitPartTo() -> Single<()> {
+    private func doUpdateUnitPartTo() async {
         Single.zip(doUpdateUnitTo(v: USUNITFROM), doUpdatePartTo(v: USPARTFROM)).map { _ in }
     }
 
-    private func doUpdateSingleUnit() -> Single<()> {
+    private func doUpdateSingleUnit() async {
         Single.zip(doUpdateUnitTo(v: USUNITFROM), doUpdatePartFrom(v: 1), doUpdatePartTo(v: partCount)).map { _ in }
     }
 
-    private func doUpdateUnitFrom(v: Int) -> Single<()> {
+    private func doUpdateUnitFrom(v: Int) async {
         let dirty = USUNITFROM != v
-        if !dirty { return Single.just(()) }
+        guard dirty else {return}
         USUNITFROM = v
         selectedUnitFromIndex = arrUnits.firstIndex { $0.value == v } ?? 0
         return MUserSetting.update(info: INFO_USUNITFROM, intValue: USUNITFROM).do(onSuccess: { self.delegate?.onUpdateUnitFrom() })
     }
 
-    private func doUpdatePartFrom(v: Int) -> Single<()> {
+    private func doUpdatePartFrom(v: Int) async {
         let dirty = USPARTFROM != v
-        if !dirty { return Single.just(()) }
+        guard dirty else {return}
         USPARTFROM = v
         selectedPartFromIndex = arrParts.firstIndex { $0.value == v }
             ?? 0
         return MUserSetting.update(info: INFO_USPARTFROM, intValue: USPARTFROM).do(onSuccess: { self.delegate?.onUpdatePartFrom() })
     }
 
-    private func doUpdateUnitTo(v: Int) -> Single<()> {
+    private func doUpdateUnitTo(v: Int) async {
         let dirty = USUNITTO != v
-        if !dirty { return Single.just(()) }
+        guard dirty else {return}
         USUNITTO = v
         selectedUnitToIndex = arrUnits.firstIndex { $0.value == v } ?? 0
         return MUserSetting.update(info: INFO_USUNITTO, intValue: USUNITTO).do(onSuccess: { self.delegate?.onUpdateUnitTo() })
     }
 
-    private func doUpdatePartTo(v: Int) -> Single<()> {
+    private func doUpdatePartTo(v: Int) async {
         let dirty = USPARTTO != v
-        if !dirty { return Single.just(()) }
+        guard dirty else {return}
         USPARTTO = v
         selectedPartToIndex = arrParts.firstIndex { $0.value == v } ?? 0
         return MUserSetting.update(info: INFO_USPARTTO, intValue: USPARTTO).do(onSuccess: { self.delegate?.onUpdatePartTo() })
@@ -649,7 +588,7 @@ class SettingsViewModel: NSObject, ObservableObject {
         return subscription!
     }
 
-    func clearNotes(wordCount: Int, isNoteEmpty: @escaping (Int) -> Bool, getOne: @escaping (Int) -> Single<()>) -> Single<()> {
+    func clearNotes(wordCount: Int, isNoteEmpty: @escaping (Int) -> Bool, getOne: @escaping (Int) -> async ()) async {
         var i = 0
         var o = Single.just(())
         while i < wordCount {
@@ -665,13 +604,11 @@ class SettingsViewModel: NSObject, ObservableObject {
         return o
     }
 
-    func getBlogContent() -> Single<String> {
-        MUnitBlog.getDataByTextbook(selectedTextbook.ID, unit: selectedUnitTo).map {
-            $0?.CONTENT ?? ""
-        }
+    func getBlogContent() async -> String {
+        (await MUnitBlog.getDataByTextbook(selectedTextbook.ID, unit: selectedUnitTo))?.CONTENT ?? ""
     }
-    func saveBlogContent(content: String) -> Single<()> {
-        MUnitBlog.update(selectedTextbook.ID, unit: selectedUnitTo, content: content)
+    func saveBlogContent(content: String) async {
+        await MUnitBlog.update(selectedTextbook.ID, unit: selectedUnitTo, content: content)
     }
 }
 

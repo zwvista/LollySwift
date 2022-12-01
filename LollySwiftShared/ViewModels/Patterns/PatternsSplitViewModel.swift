@@ -31,7 +31,7 @@ class PatternsSplitViewModel: NSObject {
     func mergeVariations() {
         itemEdit.PATTERN.accept(arrPatternVariations.map(\.variation).unique.joined(separator: ","))
     }
-    
+
     func reindexVariations(complete: (Int) -> ()) {
         for i in 1...arrPatternVariations.count {
             let item = arrPatternVariations[i - 1]
@@ -41,10 +41,10 @@ class PatternsSplitViewModel: NSObject {
         }
     }
 
-    func onOK() -> Single<()> {
+    func onOK() async {
         let item = MPattern()
         itemEdit.save(to: item)
         item.PATTERNS_SPLIT = item.PATTERN
-        return MPattern.mergePatterns(item: item)
+        await MPattern.mergePatterns(item: item)
     }
 }

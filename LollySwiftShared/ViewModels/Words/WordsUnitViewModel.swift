@@ -24,15 +24,12 @@ class WordsUnitViewModel: WordsBaseViewModel {
             complete()
         }
     }
-    
+
     func reload() async {
-        (inTextbook ? MUnitWord.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO) : MUnitWord.getDataByLang(vmSettings.selectedTextbook.LANGID, arrTextbooks: vmSettings.arrTextbooks))
-        .map {
-            self.arrWords = $0
-            self.arrWordsFiltered = nil
-        }
+        arrWords = inTextbook ? await MUnitWord.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO) : await MUnitWord.getDataByLang(vmSettings.selectedTextbook.LANGID, arrTextbooks: vmSettings.arrTextbooks)
+        arrWordsFiltered = nil
     }
-    
+
     func applyFilters() {
         if textFilter.value.isEmpty && textbookFilter == 0 {
             arrWordsFiltered = nil
@@ -46,55 +43,48 @@ class WordsUnitViewModel: WordsBaseViewModel {
             }
         }
     }
-    
-    static func update(_ id: Int, seqnum: Int) -> Single<()> {
-        MUnitWord.update(id, seqnum: seqnum)
-    }
-    
-    static func update(_ wordid: Int, note: String) -> Single<()> {
-        MLangWord.update(wordid, note: note)
+
+    static func update(_ id: Int, seqnum: Int) async {
+        await MUnitWord.update(id, seqnum: seqnum)
     }
 
-    func update(item: MUnitWord) -> Single<()> {
-        MUnitWord.update(item: item).flatMap { result in
-            MUnitWord.getDataById(item.ID, arrTextbooks: self.vmSettings.arrTextbooks).map { ($0, result) }
-        }.flatMap { (o, result) in
-            if let o = o {
-                let b = result == "2" || result == "4"
-                copyProperties(from: o, to: item)
-                return b || item.NOTE.isEmpty ? self.getNote(item: item) : Single.just(())
-            } else {
-                return Single.just(())
+    static func update(_ wordid: Int, note: String) async {
+        await MLangWord.update(wordid, note: note)
+    }
+
+    func update(item: MUnitWord) async {
+        let result = await MUnitWord.update(item: item)
+        if let o = await MUnitWord.getDataById(item.ID, arrTextbooks: vmSettings.arrTextbooks) {
+            let b = result == "2" || result == "4"
+            copyProperties(from: o, to: item)
+            if b || item.NOTE.isEmpty {
+                await getNote(item: item)
             }
         }
     }
     
-    func create(item: MUnitWord) -> Single<()> {
-        MUnitWord.create(item: item).flatMap {
-            MUnitWord.getDataById($0, arrTextbooks: self.vmSettings.arrTextbooks)
-        }.flatMap { o in
-            if let o = o {
-                self.arrWords.append(o)
-                copyProperties(from: o, to: item)
-                return item.NOTE.isEmpty ? self.getNote(item: item) : Single.just(())
-            } else {
-                return Single.just(())
+    func create(item: MUnitWord) async {
+        let id = await MUnitWord.create(item: item)
+        if let o = await MUnitWord.getDataById(id, arrTextbooks: vmSettings.arrTextbooks) {
+            self.arrWords.append(o)
+            copyProperties(from: o, to: item)
+            if item.NOTE.isEmpty {
+                await getNote(item: item)
             }
         }
     }
-    
-    static func delete(item: MUnitWord) -> Single<()> {
-        MUnitWord.delete(item: item)
+
+    static func delete(item: MUnitWord) async {
+        await MUnitWord.delete(item: item)
     }
 
-    func reindex(complete: @escaping (Int) -> ()) {
+    func reindex(complete: @escaping (Int) -> ()) async {
         for i in 1...arrWords.count {
             let item = arrWords[i - 1]
             guard item.SEQNUM != i else {continue}
             item.SEQNUM = i
-            WordsUnitViewModel.update(item.ID, seqnum: item.SEQNUM).subscribe(onSuccess: {
-                complete(i - 1)
-            }) ~ rx.disposeBag
+            await WordsUnitViewModel.update(item.ID, seqnum: item.SEQNUM)
+            complete(i - 1)
         }
     }
     
@@ -110,34 +100,32 @@ class WordsUnitViewModel: WordsBaseViewModel {
         }
     }
     
-    func getNote(index: Int) -> Single<()> {
-        getNote(item: arrWords[index])
+    func getNote(index: Int) async {
+        await getNote(item: arrWords[index])
     }
     
-    func getNote(item: MUnitWord) -> Single<()> {
-        vmSettings.getNote(word: item.WORD).flatMap { note in
-            item.NOTE = note
-            return WordsUnitViewModel.update(item.WORDID, note: note)
-        }
+    func getNote(item: MUnitWord) async {
+        let note = await vmSettings.getNote(word: item.WORD)
+        item.NOTE = note
+        await WordsUnitViewModel.update(item.WORDID, note: note)
     }
     
-    func getNotes(ifEmpty: Bool, oneComplete: @escaping (Int) -> Void, allComplete: @escaping () -> Void) {
+    func getNotes(ifEmpty: Bool, oneComplete: @escaping (Int) -> Void, allComplete: @escaping () -> Void) async {
         vmSettings.getNotes(wordCount: arrWords.count, isNoteEmpty: {
             !ifEmpty || (self.arrWords[$0].NOTE).isEmpty
         }, getOne: { i in
-            self.getNote(index: i).subscribe(onSuccess: {
-                oneComplete(i)
-            }) ~ self.rx.disposeBag
+            await self.getNote(index: i)
+            oneComplete(i)
         }, allComplete: allComplete) ~ self.rx.disposeBag
     }
 
-    func clearNote(index: Int) -> Single<()> {
+    func clearNote(index: Int) async {
         let item = arrWords[index]
         item.NOTE = SettingsViewModel.zeroNote
-        return WordsUnitViewModel.update(item.WORDID, note: item.NOTE)
+        await WordsUnitViewModel.update(item.WORDID, note: item.NOTE)
     }
     
-    func clearNotes(ifEmpty: Bool, oneComplete: @escaping (Int) -> Void) -> Single<()> {
+    func clearNotes(ifEmpty: Bool, oneComplete: @escaping (Int) -> Void) async {
         vmSettings.clearNotes(wordCount: arrWords.count, isNoteEmpty: {
             !ifEmpty || self.arrWords[$0].NOTE.isEmpty
         }, getOne: { i in
