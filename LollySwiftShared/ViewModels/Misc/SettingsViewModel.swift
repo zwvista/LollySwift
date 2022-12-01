@@ -146,7 +146,12 @@ class SettingsViewModel: NSObject, ObservableObject {
     @Published var selectedPartToIndex = -1
     var selectedPartTo: Int { arrParts.indices ~= selectedPartToIndex ? arrParts[selectedPartToIndex].value : 0 }
 
-    @Published var toType = UnitPartToType.to
+    @Published var toType_ = UnitPartToType.to.rawValue
+    var toType: UnitPartToType {
+        get { UnitPartToType(rawValue: toType_)! }
+        set { toType_ = newValue.rawValue }
+    }
+
     var toTypeMovable: Bool { toType == .to }
     @Published var toTypeTitle = ""
     @Published var unitToEnabled = false
@@ -227,7 +232,7 @@ class SettingsViewModel: NSObject, ObservableObject {
             await self.updatePartTo()
         }
 
-        $toType.removeDuplicates()
+        $toType_.removeDuplicates()
             .sink { _ in Task { await self.updateToType() } }
             .store(in: &subscriptions)
     }
@@ -384,44 +389,50 @@ class SettingsViewModel: NSObject, ObservableObject {
 
     func updateDictReference() async {
         let newVal = String(selectedDictReference.DICTID)
-        let dirty = USDICTREFERENCE != newVal
+        guard USDICTREFERENCE != newVal else {return}
         USDICTREFERENCE = newVal
-        return (!dirty ? Single.just(()) : MUserSetting.update(info: INFO_USDICTREFERENCE, stringValue: USDICTREFERENCE)).do(onSuccess: { self.delegate?.onUpdateDictReference() })
+        await MUserSetting.update(info: INFO_USDICTREFERENCE, stringValue: USDICTREFERENCE)
+        delegate?.onUpdateDictReference()
     }
 
     func updateDictsReference() async {
         let newVal = selectedDictsReference.map { String($0.DICTID) }.joined(separator: ",")
-        let dirty = USDICTSREFERENCE != newVal
+        guard USDICTSREFERENCE != newVal else {return}
         USDICTSREFERENCE = newVal
-        return (!dirty ? Single.just(()) : MUserSetting.update(info: INFO_USDICTSREFERENCE, stringValue: USDICTSREFERENCE)).do(onSuccess: { self.delegate?.onUpdateDictsReference() })
+        await MUserSetting.update(info: INFO_USDICTSREFERENCE, stringValue: USDICTSREFERENCE)
+        delegate?.onUpdateDictsReference()
     }
 
     func updateDictNote() async {
         let newVal = selectedDictNote.DICTID
-        let dirty = USDICTNOTE != newVal
+        guard USDICTNOTE != newVal else {return}
         USDICTNOTE = newVal
-        return (!dirty ? Single.just(()) : MUserSetting.update(info: INFO_USDICTNOTE, intValue: USDICTNOTE)).do(onSuccess: { self.delegate?.onUpdateDictNote() })
+        await MUserSetting.update(info: INFO_USDICTNOTE, intValue: USDICTNOTE)
+        delegate?.onUpdateDictNote()
     }
 
     func updateDictTranslation() async {
         let newVal = selectedDictTranslation.DICTID
-        let dirty = USDICTTRANSLATION != newVal
+        guard USDICTTRANSLATION != newVal else {return}
         USDICTTRANSLATION = newVal
-        return (!dirty ? Single.just(()) : MUserSetting.update(info: INFO_USDICTTRANSLATION, intValue: USDICTTRANSLATION)).do(onSuccess: { self.delegate?.onUpdateDictTranslation() })
+        await MUserSetting.update(info: INFO_USDICTTRANSLATION, intValue: USDICTTRANSLATION)
+        delegate?.onUpdateDictTranslation()
     }
 
     func updateMacVoice() async {
         let newVal = selectedMacVoice.ID
-        let dirty = USMACVOICE != newVal
+        guard USMACVOICE != newVal else {return}
         USMACVOICE = newVal
-        return (!dirty ? Single.just(()) : MUserSetting.update(info: INFO_USMACVOICE, intValue: USMACVOICE)).do(onSuccess: { self.delegate?.onUpdateMacVoice() })
+        await MUserSetting.update(info: INFO_USMACVOICE, intValue: USMACVOICE)
+        delegate?.onUpdateMacVoice()
     }
 
     func updateiOSVoice() async {
         let newVal = selectediOSVoice.ID
-        let dirty = USIOSVOICE != newVal
+        guard USIOSVOICE != newVal else {return}
         USIOSVOICE = newVal
-        return (!dirty ? Single.just(()) : MUserSetting.update(info: INFO_USIOSVOICE, intValue: USIOSVOICE)).do(onSuccess: { self.delegate?.onUpdateiOSVoice() })
+        await MUserSetting.update(info: INFO_USIOSVOICE, intValue: USIOSVOICE)
+        delegate?.onUpdateiOSVoice()
     }
 
     func autoCorrectInput(text: String) -> String {
@@ -536,36 +547,36 @@ class SettingsViewModel: NSObject, ObservableObject {
     }
 
     private func doUpdateUnitFrom(v: Int) async {
-        let dirty = USUNITFROM != v
-        guard dirty else {return}
+        guard USUNITFROM != v else {return}
         USUNITFROM = v
         selectedUnitFromIndex = arrUnits.firstIndex { $0.value == v } ?? 0
-        return MUserSetting.update(info: INFO_USUNITFROM, intValue: USUNITFROM).do(onSuccess: { self.delegate?.onUpdateUnitFrom() })
+        await MUserSetting.update(info: INFO_USUNITFROM, intValue: USUNITFROM)
+        delegate?.onUpdateUnitFrom()
     }
 
     private func doUpdatePartFrom(v: Int) async {
-        let dirty = USPARTFROM != v
-        guard dirty else {return}
+        guard USPARTFROM != v else {return}
         USPARTFROM = v
         selectedPartFromIndex = arrParts.firstIndex { $0.value == v }
             ?? 0
-        return MUserSetting.update(info: INFO_USPARTFROM, intValue: USPARTFROM).do(onSuccess: { self.delegate?.onUpdatePartFrom() })
+        await MUserSetting.update(info: INFO_USPARTFROM, intValue: USPARTFROM)
+        delegate?.onUpdatePartFrom()
     }
 
     private func doUpdateUnitTo(v: Int) async {
-        let dirty = USUNITTO != v
-        guard dirty else {return}
+        guard USUNITTO != v else {return}
         USUNITTO = v
         selectedUnitToIndex = arrUnits.firstIndex { $0.value == v } ?? 0
-        return MUserSetting.update(info: INFO_USUNITTO, intValue: USUNITTO).do(onSuccess: { self.delegate?.onUpdateUnitTo() })
+        await MUserSetting.update(info: INFO_USUNITTO, intValue: USUNITTO)
+        delegate?.onUpdateUnitTo()
     }
 
     private func doUpdatePartTo(v: Int) async {
-        let dirty = USPARTTO != v
-        guard dirty else {return}
+        guard USPARTTO != v else {return}
         USPARTTO = v
         selectedPartToIndex = arrParts.firstIndex { $0.value == v } ?? 0
-        return MUserSetting.update(info: INFO_USPARTTO, intValue: USPARTTO).do(onSuccess: { self.delegate?.onUpdatePartTo() })
+        await MUserSetting.update(info: INFO_USPARTTO, intValue: USPARTTO)
+        delegate?.onUpdatePartTo()
     }
 
     static let zeroNote = "O"
