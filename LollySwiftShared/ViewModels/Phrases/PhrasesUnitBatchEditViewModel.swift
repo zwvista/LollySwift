@@ -8,18 +8,18 @@
 
 import Foundation
 
-class PhrasesUnitBatchEditViewModel: NSObject {
+class PhrasesUnitBatchEditViewModel: NSObject, ObservableObject {
     var vm: PhrasesUnitViewModel!
-    let isOKEnabled = BehaviorRelay(value: false)
+    @Published var isOKEnabled = false
 
-    let indexUNIT = BehaviorRelay(value: 0)
-    var UNIT: Int { vm.vmSettings.arrUnits[indexUNIT.value].value }
-    let indexPART = BehaviorRelay(value: 0)
-    var PART: Int { vm.vmSettings.arrParts[indexPART.value].value }
-    let SEQNUM = BehaviorRelay(value: "")
-    let unitChecked = BehaviorRelay(value: false)
-    let partChecked = BehaviorRelay(value: false)
-    let seqnumChecked = BehaviorRelay(value: false)
+    @Published var indexUNIT = 0
+    var UNIT: Int { vm.vmSettings.arrUnits[indexUNIT].value }
+    @Published var indexPART = 0
+    var PART: Int { vm.vmSettings.arrParts[indexPART].value }
+    @Published var SEQNUM = ""
+    @Published var unitChecked = false
+    @Published var partChecked = false
+    @Published var seqnumChecked = false
 
     init(vm: PhrasesUnitViewModel, unit: Int, part: Int) {
         self.vm = vm

@@ -8,9 +8,9 @@
 
 import Foundation
 
-class WebPageSelectViewModel: NSObject {
-    let title = BehaviorRelay(value: "")
-    let url = BehaviorRelay(value: "")
+class WebPageSelectViewModel: NSObject, ObservableObject {
+    @Published var title = ""
+    @Published var url = ""
     var vmSettings: SettingsViewModel
     var arrWebPages = [MWebPage]()
     var selectedWebPage: MWebPage?

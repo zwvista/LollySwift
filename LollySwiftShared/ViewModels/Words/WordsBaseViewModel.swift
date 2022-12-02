@@ -7,29 +7,32 @@
 //
 
 import Foundation
+import Combine
 
-class WordsPhrasesBaseViewModel: NSObject {
+class WordsPhrasesBaseViewModel: NSObject, ObservableObject {
     var vmSettings: SettingsViewModel
-    let textFilter = BehaviorRelay(value: "")
-    let indexTextbookFilter = BehaviorRelay(value: 0)
-    let stringTextbookFilter = BehaviorRelay(value: "")
+    @Published var textFilter = ""
+    @Published var indexTextbookFilter = 0
+    @Published var stringTextbookFilter = ""
     var textbookFilter: Int {
         indexTextbookFilter.value == -1 ? 0 : vmSettings.arrTextbookFilters[indexTextbookFilter.value].value
     }
 
+    var subscriptions = Set<AnyCancellable>()
+
     init(settings: SettingsViewModel, needCopy: Bool) {
         vmSettings = !needCopy ? settings : SettingsViewModel(settings)
         super.init()
-        stringTextbookFilter.accept(vmSettings.arrTextbookFilters[0].label)
-        stringTextbookFilter.subscribe(onNext: { s in
-            self.indexTextbookFilter.accept(self.vmSettings.arrTextbookFilters.firstIndex { $0.label == s }!)
-        }) ~ rx.disposeBag
+        stringTextbookFilter = vmSettings.arrTextbookFilters[0].label
+        $stringTextbookFilter.sink { s in
+            self.indexTextbookFilter = self.vmSettings.arrTextbookFilters.firstIndex { $0.label == s }!
+        }.store(in: &subscriptions)
     }
 }
 
 class WordsBaseViewModel: WordsPhrasesBaseViewModel {
-    let scopeFilter = BehaviorRelay(value: SettingsViewModel.arrScopeWordFilters[0])
-    let newWord = BehaviorRelay(value: "")
+    @Published var scopeFilter = SettingsViewModel.arrScopeWordFilters[0]
+    @Published var newWord = ""
     var selectedWord = ""
     var selectedWordID = 0
 }

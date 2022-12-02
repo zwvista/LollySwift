@@ -13,10 +13,10 @@ class WordsSearchViewModel: WordsBaseViewModel {
     
     func addNewWord() {
         let item = MUnitWord()
-        item.WORD = newWord.value
+        item.WORD = newWord
         item.SEQNUM = arrWords.count + 1
         item.NOTE = ""
         arrWords.append(item)
-        newWord.accept("")
+        newWord = ""
     }
 }

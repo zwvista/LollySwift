@@ -13,7 +13,7 @@ class PatternsWebPagesDetailViewModel: NSObject {
     var itemEdit: MPatternWebPageEdit!
     var isAddPatternWebPage: Bool!
     var isAddWebPage: Bool!
-    let isOKEnabled = BehaviorRelay(value: false)
+    @Published var isOKEnabled = false
 
     init(item: MPatternWebPage) {
         self.item = item

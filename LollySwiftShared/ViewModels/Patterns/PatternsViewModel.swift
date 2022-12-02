@@ -9,15 +9,15 @@
 import Foundation
 import Then
 
-class PatternsViewModel: NSObject {
+class PatternsViewModel: NSObject, ObservableObject {
     var vmSettings: SettingsViewModel
     var arrPatterns = [MPattern]()
     var arrPatternsFiltered: [MPattern]?
     var selectedPatternItem: MPattern?
     var selectedPattern: String { selectedPatternItem?.PATTERN ?? "" }
     var selectedPatternID: Int { selectedPatternItem?.ID ?? 0 }
-    let textFilter = BehaviorRelay(value: "")
-    let scopeFilter = BehaviorRelay(value: SettingsViewModel.arrScopePatternFilters[0])
+    @Published var textFilter = ""
+    @Published var scopeFilter = SettingsViewModel.arrScopePatternFilters[0]
 
     public init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> Void) {
         self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)

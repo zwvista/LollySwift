@@ -8,13 +8,13 @@
 
 import Foundation
 
-class PhrasesLangDetailViewModel: NSObject {
+class PhrasesLangDetailViewModel: NSObject, ObservableObject {
     var vm: PhrasesLangViewModel!
     var item: MLangPhrase!
     var itemEdit: MLangPhraseEdit!
     var vmSingle: SinglePhraseViewModel!
     var isAdd: Bool!
-    let isOKEnabled = BehaviorRelay(value: false)
+    @Published var isOKEnabled = false
 
     init(vm: PhrasesLangViewModel, item: MLangPhrase, complete: @escaping () -> Void) {
         self.vm = vm

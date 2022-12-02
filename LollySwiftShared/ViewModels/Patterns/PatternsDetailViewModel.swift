@@ -8,12 +8,12 @@
 
 import Foundation
 
-class PatternsDetailViewModel: NSObject {
+class PatternsDetailViewModel: NSObject, ObservableObject {
     var vm: PatternsViewModel!
     var item: MPattern!
     var itemEdit: MPatternEdit!
     var isAdd: Bool!
-    let isOKEnabled = BehaviorRelay(value: false)
+    @Published var isOKEnabled = false
 
     init(vm: PatternsViewModel, item: MPattern) {
         self.vm = vm

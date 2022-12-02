@@ -8,11 +8,11 @@
 
 import Foundation
 
-class WordsUnitBatchAddViewModel: NSObject {
+class WordsUnitBatchAddViewModel: NSObject, ObservableObject {
     var vm: WordsUnitViewModel!
     var item: MUnitWord!
     var itemEdit: MUnitWordEdit!
-    let isOKEnabled = BehaviorRelay(value: false)
+    @Published var isOKEnabled = false
 
     init(vm: WordsUnitViewModel) {
         self.vm = vm

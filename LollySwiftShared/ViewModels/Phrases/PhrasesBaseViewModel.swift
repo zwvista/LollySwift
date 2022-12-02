@@ -9,7 +9,7 @@
 import Foundation
 
 class PhrasesBaseViewModel: WordsPhrasesBaseViewModel {
-    let scopeFilter = BehaviorRelay(value: SettingsViewModel.arrScopePhraseFilters[0])
+    @Published var scopeFilter = SettingsViewModel.arrScopePhraseFilters[0]
     var selectedPhrase = ""
     var selectedPhraseID = 0
 }

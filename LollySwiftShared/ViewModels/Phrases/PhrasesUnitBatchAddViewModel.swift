@@ -8,11 +8,11 @@
 
 import Foundation
 
-class PhrasesUnitBatchAddViewModel: NSObject {
+class PhrasesUnitBatchAddViewModel: NSObject, ObservableObject {
     var vm: PhrasesUnitViewModel!
     var item: MUnitPhrase!
     var itemEdit: MUnitPhraseEdit!
-    let isOKEnabled = BehaviorRelay(value: false)
+    @Published var isOKEnabled = false
 
     init(vm: PhrasesUnitViewModel) {
         self.vm = vm
@@ -20,7 +20,7 @@ class PhrasesUnitBatchAddViewModel: NSObject {
         itemEdit = MUnitPhraseEdit(x: item)
     }
     
-    func onOK() -> Single<()> {
+    func onOK() async {
         itemEdit.save(to: item)
         var o = Single.just(())
         let phrases = itemEdit.PHRASES.value.split(separator: "\n").map { String($0) }

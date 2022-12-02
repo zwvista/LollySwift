@@ -8,14 +8,14 @@
 
 import Foundation
 
-class WordsUnitDetailViewModel: NSObject {
+class WordsUnitDetailViewModel: NSObject, ObservableObject {
     var vm: WordsUnitViewModel!
     var item: MUnitWord!
     var phraseid: Int
     var itemEdit: MUnitWordEdit!
     var vmSingle: SingleWordViewModel!
     var isAdd: Bool!
-    let isOKEnabled = BehaviorRelay(value: false)
+    @Published var isOKEnabled = false
 
     init(vm: WordsUnitViewModel, item: MUnitWord, phraseid: Int, complete: @escaping () -> Void) {
         self.vm = vm
