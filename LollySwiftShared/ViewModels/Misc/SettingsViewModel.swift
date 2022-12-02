@@ -293,20 +293,16 @@ class SettingsViewModel: NSObject, ObservableObject {
 
     func getData() async {
         initialized = false
-        return Single.zip(MLanguage.getData(),
-                              MUSMapping.getData(),
-                              MUserSetting.getData(),
-                              MCode.getData())
-            .flatMap { result in
-                self.arrLanguages = result.0
-                self.arrUSMappings = result.1
-                self.arrUserSettings = result.2
-                self.arrDictTypes = result.3
-                self.INFO_USLANG = self.getUSInfo(name: MUSMapping.NAME_USLANG)
-                self.delegate?.onGetData()
-                self.selectedLangIndex = self.arrLanguages.firstIndex { $0.ID == self.USLANG } ?? 0
-                return self.initialized ? Single.just(()) : self.updateLang().do(onSuccess: { self.initialized = true })
-            }
+        async let task0 = MLanguage.getData()
+        async let task1 = MUSMapping.getData()
+        async let task2 = MUserSetting.getData()
+        async let task3 = MCode.getData()
+        (arrLanguages, arrUSMappings, arrUserSettings, arrDictTypes) = await (task0, task1, task2, task3)
+        INFO_USLANG = getUSInfo(name: MUSMapping.NAME_USLANG)
+        delegate?.onGetData()
+        selectedLangIndex = arrLanguages.firstIndex { $0.ID == self.USLANG } ?? 0
+        await updateLang()
+        initialized = true
     }
 
     func updateLang() async {
@@ -327,39 +323,44 @@ class SettingsViewModel: NSObject, ObservableObject {
         INFO_USDICTTRANSLATION = getUSInfo(name: MUSMapping.NAME_USDICTTRANSLATION)
         INFO_USMACVOICE = getUSInfo(name: MUSMapping.NAME_USMACVOICE)
         INFO_USIOSVOICE = getUSInfo(name: MUSMapping.NAME_USIOSVOICE)
-        return Single.zip(MDictionary.getDictsReferenceByLang(USLANG),
-                              MDictionary.getDictsNoteByLang(USLANG),
-                              MDictionary.getDictsTranslationByLang(USLANG),
-                              MTextbook.getDataByLang(USLANG, arrUserSettings: arrUserSettings),
-                              MAutoCorrect.getDataByLang(USLANG),
-                              MVoice.getDataByLang(USLANG))
-            .flatMap { result in
-                self.arrDictsReference = result.0
-                self.selectedDictsReferenceIndexes = self.USDICTSREFERENCE.split(separator: ",").compactMap { id in self.arrDictsReference.firstIndex { String($0.DICTID) == id } }
-                self.arrDictsNote = result.1
-                self.arrDictsTranslation = result.2
-                self.arrTextbooks = result.3
-                self.arrAutoCorrect = result.4
-                let arrVoices = result.5
-                self.arrMacVoices = arrVoices.filter { $0.VOICETYPEID == 2 }
-                if self.arrMacVoices.isEmpty { self.arrMacVoices.append(MVoice()) }
-                self.arriOSVoices = arrVoices.filter { $0.VOICETYPEID == 3 }
-                if self.arriOSVoices.isEmpty { self.arriOSVoices.append(MVoice()) }
-                self.delegate?.onUpdateLang()
-                self.selectedDictReferenceIndex = self.arrDictsReference.firstIndex { String($0.DICTID) == self.USDICTREFERENCE } ?? 0
-                if self.arrDictsNote.isEmpty { self.arrDictsNote.append(MDictionary()) }
-                self.selectedDictNoteIndex = self.arrDictsNote.firstIndex { $0.DICTID == self.USDICTNOTE } ?? 0
-                if self.arrDictsTranslation.isEmpty { self.arrDictsTranslation.append(MDictionary()) }
-                self.selectedDictTranslationIndex = self.arrDictsTranslation.firstIndex { $0.DICTID == self.USDICTTRANSLATION } ?? 0
-                self.selectedTextbookIndex = self.arrTextbooks.firstIndex { $0.ID == self.USTEXTBOOK } ?? 0
-                self.arrTextbookFilters = self.arrTextbooks.map { MSelectItem(value: $0.ID, label: $0.TEXTBOOKNAME) }
-                self.arrTextbookFilters.insert(MSelectItem(value: 0, label: "All Textbooks"), at: 0)
-                self.arrWebTextbookFilters = self.arrTextbooks.filter { $0.ISWEB == 1 }.map { MSelectItem(value: $0.ID, label: $0.TEXTBOOKNAME) }
-                self.arrWebTextbookFilters.insert(MSelectItem(value: 0, label: "All Textbooks"), at: 0)
-                self.selectedMacVoiceIndex = self.arrMacVoices.firstIndex { $0.ID == self.USMACVOICE } ?? 0
-                self.selectediOSVoiceIndex = self.arriOSVoices.firstIndex { $0.ID == self.USIOSVOICE } ?? 0
-                return Single.zip(self.initialized ? Single.just(()) : Single.zip(self.updateTextbook(), self.updateDictReference(), self.updateDictsReference(), self.updateDictNote(), self.updateDictTranslation(), self.updateMacVoice(), self.updateiOSVoice()).map { _ in }, (!dirty ? Single.just(()) : MUserSetting.update(info: self.INFO_USLANG, intValue: self.USLANG))).map { _ in }
-            }
+        async let task0 = MDictionary.getDictsReferenceByLang(USLANG)
+        async let task1 = MDictionary.getDictsNoteByLang(USLANG)
+        async let task2 = MDictionary.getDictsTranslationByLang(USLANG)
+        async let task3 = MTextbook.getDataByLang(USLANG, arrUserSettings: arrUserSettings)
+        async let task4 = MAutoCorrect.getDataByLang(USLANG)
+        async let task5 = MVoice.getDataByLang(USLANG)
+        let arrVoices: [MVoice]
+        (arrDictsReference, arrDictsNote, arrDictsTranslation, arrTextbooks, arrAutoCorrect, arrVoices) = await (task0, task1, task2, task3, task4, task5)
+        selectedDictsReferenceIndexes = USDICTSREFERENCE.split(separator: ",").compactMap { id in arrDictsReference.firstIndex { String($0.DICTID) == id } }
+        arrMacVoices = arrVoices.filter { $0.VOICETYPEID == 2 }
+        if arrMacVoices.isEmpty { arrMacVoices.append(MVoice()) }
+        arriOSVoices = arrVoices.filter { $0.VOICETYPEID == 3 }
+        if arriOSVoices.isEmpty { arriOSVoices.append(MVoice()) }
+        delegate?.onUpdateLang()
+        selectedDictReferenceIndex = arrDictsReference.firstIndex { String($0.DICTID) == self.USDICTREFERENCE } ?? 0
+        if arrDictsNote.isEmpty { arrDictsNote.append(MDictionary()) }
+        selectedDictNoteIndex = arrDictsNote.firstIndex { $0.DICTID == self.USDICTNOTE } ?? 0
+        if arrDictsTranslation.isEmpty { arrDictsTranslation.append(MDictionary()) }
+        selectedDictTranslationIndex = arrDictsTranslation.firstIndex { $0.DICTID == self.USDICTTRANSLATION } ?? 0
+        selectedTextbookIndex = arrTextbooks.firstIndex { $0.ID == self.USTEXTBOOK } ?? 0
+        arrTextbookFilters = arrTextbooks.map { MSelectItem(value: $0.ID, label: $0.TEXTBOOKNAME) }
+        arrTextbookFilters.insert(MSelectItem(value: 0, label: "All Textbooks"), at: 0)
+        arrWebTextbookFilters = arrTextbooks.filter { $0.ISWEB == 1 }.map { MSelectItem(value: $0.ID, label: $0.TEXTBOOKNAME) }
+        arrWebTextbookFilters.insert(MSelectItem(value: 0, label: "All Textbooks"), at: 0)
+        selectedMacVoiceIndex = arrMacVoices.firstIndex { $0.ID == self.USMACVOICE } ?? 0
+        selectediOSVoiceIndex = arriOSVoices.firstIndex { $0.ID == self.USIOSVOICE } ?? 0
+        guard !initialized else {return}
+        await withTaskGroup(of: Void.self) {
+            $0.addTask { await self.updateTextbook() }
+            $0.addTask { await self.updateDictReference() }
+            $0.addTask { await self.updateDictsReference() }
+            $0.addTask { await self.updateDictNote() }
+            $0.addTask { await self.updateDictTranslation() }
+            $0.addTask { await self.updateMacVoice() }
+            $0.addTask { await self.updateiOSVoice() }
+        }
+        guard dirty else {return}
+        await MUserSetting.update(info: INFO_USLANG, intValue: USLANG)
     }
 
     func updateTextbook() async {
@@ -382,9 +383,10 @@ class SettingsViewModel: NSObject, ObservableObject {
         let newVal2: UnitPartToType = isSingleUnit ? .unit : isSingleUnitPart ? .part : .to
         let dirty2 = newVal2 != toType
         toType = newVal2
-        return (!dirty ? Single.just(()) : MUserSetting.update(info: INFO_USTEXTBOOK, intValue: USTEXTBOOK)).flatMap {
-            dirty2 ? Single.just(()) : self.updateToType()
-        }
+        guard dirty else {return}
+        await MUserSetting.update(info: INFO_USTEXTBOOK, intValue: USTEXTBOOK)
+        guard dirty2 else {return}
+        await updateToType()
     }
 
     func updateDictReference() async {
@@ -493,7 +495,10 @@ class SettingsViewModel: NSObject, ObservableObject {
         switch toType {
         case .unit:
             toType = .part
-            return Single.zip(doUpdatePartFrom(v: part), doUpdateUnitPartTo()).map { _ in }
+            await withTaskGroup(of: Void.self) {
+                $0.addTask { await self.doUpdatePartFrom(v: part) }
+                $0.addTask { await self.doUpdateUnitPartTo() }
+            }
         case .part:
             toType = .unit
             await doUpdateSingleUnit()
@@ -506,14 +511,21 @@ class SettingsViewModel: NSObject, ObservableObject {
         if toType == .unit {
             let n = selectedUnitFrom
             if n > 1 {
-                return Single.zip(doUpdateUnitFrom(v: n - 1), doUpdateUnitTo(v: n - 1)).map { _ in }
+                await withTaskGroup(of: Void.self) {
+                    $0.addTask { await self.doUpdateUnitFrom(v: n - 1) }
+                    $0.addTask { await self.doUpdateUnitTo(v: n - 1) }
+                }
             }
         } else if selectedPartFrom > 1 {
-            return Single.zip(doUpdatePartFrom(v: selectedPartFrom - 1), doUpdateUnitPartTo()).map { _ in }
+            await withTaskGroup(of: Void.self) {
+                $0.addTask { await self.doUpdatePartFrom(v: self.selectedPartFrom - 1) }
+                $0.addTask { await self.doUpdateUnitPartTo() }
+            }
         } else if selectedUnitFrom > 1 {
-            return Single.zip(doUpdateUnitFrom(v: selectedUnitFrom - 1), doUpdatePartFrom(v: partCount), doUpdateUnitPartTo()).map { _ in }
-        } else {
-            return Single.just(())
+            await withTaskGroup(of: Void.self) {
+                $0.addTask { await self.doUpdateUnitFrom(v: self.selectedUnitFrom - 1) }
+                $0.addTask { await self.doUpdateUnitPartTo() }
+            }
         }
     }
 
@@ -521,29 +533,44 @@ class SettingsViewModel: NSObject, ObservableObject {
         if toType == .unit {
             let n = selectedUnitFrom
             if n < unitCount {
-                return Single.zip(doUpdateUnitFrom(v: n + 1), doUpdateUnitTo(v: n + 1)).map { _ in }
-            } else {
-                return Single.just(())
+                await withTaskGroup(of: Void.self) {
+                    $0.addTask { await self.doUpdateUnitFrom(v: n + 1) }
+                    $0.addTask { await self.doUpdateUnitTo(v: n + 1) }
+                }
             }
         } else if selectedPartFrom < partCount {
-            return Single.zip(doUpdatePartFrom(v: selectedPartFrom + 1), doUpdateUnitPartTo()).map { _ in }
+            await withTaskGroup(of: Void.self) {
+                $0.addTask { await self.doUpdatePartFrom(v: self.selectedPartFrom + 1) }
+                $0.addTask { await self.doUpdateUnitPartTo() }
+            }
         } else if selectedUnitFrom < unitCount {
-            return Single.zip(doUpdateUnitFrom(v: selectedUnitFrom + 1), doUpdatePartFrom(v: 1), doUpdateUnitPartTo()).map { _ in }
-        } else {
-            return Single.just(())
+            await withTaskGroup(of: Void.self) {
+                $0.addTask { await self.doUpdateUnitFrom(v: self.selectedUnitFrom + 1) }
+                $0.addTask { await self.doUpdateUnitPartTo() }
+            }
         }
     }
     
     private func doUpdateUnitPartFrom() async {
-        Single.zip(doUpdateUnitFrom(v: USUNITTO), doUpdatePartFrom(v: USPARTTO)).map { _ in }
+        await withTaskGroup(of: Void.self) {
+            $0.addTask { await self.doUpdateUnitFrom(v: self.USUNITTO) }
+            $0.addTask { await self.doUpdatePartFrom(v: self.USPARTTO) }
+        }
     }
 
     private func doUpdateUnitPartTo() async {
-        Single.zip(doUpdateUnitTo(v: USUNITFROM), doUpdatePartTo(v: USPARTFROM)).map { _ in }
+        await withTaskGroup(of: Void.self) {
+            $0.addTask { await self.doUpdateUnitTo(v: self.USUNITFROM) }
+            $0.addTask { await self.doUpdatePartTo(v: self.USPARTFROM) }
+        }
     }
 
     private func doUpdateSingleUnit() async {
-        Single.zip(doUpdateUnitTo(v: USUNITFROM), doUpdatePartFrom(v: 1), doUpdatePartTo(v: partCount)).map { _ in }
+        await withTaskGroup(of: Void.self) {
+            $0.addTask { await self.doUpdateUnitTo(v: self.USUNITFROM) }
+            $0.addTask { await self.doUpdatePartFrom(v: 1) }
+            $0.addTask { await self.doUpdatePartTo(v: self.partCount) }
+        }
     }
 
     private func doUpdateUnitFrom(v: Int) async {
