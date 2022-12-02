@@ -23,7 +23,7 @@ class PatternsWebPagesDetailViewModel: NSObject {
         _ = Observable.combineLatest(itemEdit.TITLE, itemEdit.URL).map { !$0.0.isEmpty && !$0.1.isEmpty } ~> isOKEnabled
     }
 
-    func onOK() -> Single<()> {
+    func onOK() async {
         itemEdit.save(to: item)
         return (isAddWebPage ? PatternsWebPagesViewModel.createWebPage(item: item) : PatternsWebPagesViewModel.updateWebPage(item: item)).flatMap {
             self.isAddPatternWebPage ? PatternsWebPagesViewModel.createPatternWebPage(item: self.item) : PatternsWebPagesViewModel.updatePatternWebPage(item: self.item)

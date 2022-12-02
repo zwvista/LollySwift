@@ -15,16 +15,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let synth = NSSpeechSynthesizer()
 
     func setup() {
-        AppDelegate.theSettingsViewModel.getData().subscribe(onSuccess: {
-            //self.search(self)
-            //self.editBlog(self)
-            self.wordsInUnit(self)
-            //self.wordsInLanguage(self)
-            //self.readNumber(self)
-            //self.patternsInLanguage(self)
-            //self.phrasesInUnit(self)
-            //self.wordsReview(self)
-        }) ~ rx.disposeBag
+        Task {
+            await AppDelegate.theSettingsViewModel.getData()
+            //search(self)
+            //editBlog(self)
+            await wordsInUnit(self)
+            //wordsInLanguage(self)
+            //readNumber(self)
+            //patternsInLanguage(self)
+            //phrasesInUnit(self)
+            //wordsReview(self)
+        }
     }
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {

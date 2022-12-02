@@ -33,12 +33,12 @@ class PatternsViewModel: NSObject, ObservableObject {
     }
 
     func applyFilters() {
-        if textFilter.value.isEmpty {
+        if textFilter.isEmpty {
             arrPatternsFiltered = nil
         } else {
             arrPatternsFiltered = arrPatterns
-            if !textFilter.value.isEmpty {
-                arrPatternsFiltered = arrPatternsFiltered!.filter { (scopeFilter.value == "Pattern" ? $0.PATTERN : scopeFilter.value == "Note" ? $0.NOTE : $0.TAGS).lowercased().contains(textFilter.value.lowercased()) }
+            if !textFilter.isEmpty {
+                arrPatternsFiltered = arrPatternsFiltered!.filter { (scopeFilter == "Pattern" ? $0.PATTERN : scopeFilter == "Note" ? $0.NOTE : $0.TAGS).lowercased().contains(textFilter.lowercased()) }
             }
         }
     }

@@ -20,7 +20,8 @@ class PatternsDetailViewModel: NSObject, ObservableObject {
         self.item = item
         itemEdit = MPatternEdit(x: item)
         isAdd = item.ID == 0
-        _ = itemEdit.PATTERN.map { !$0.isEmpty } ~> isOKEnabled
+        super.init()
+        itemEdit.$PATTERN.map { !$0.isEmpty }.assign(to: &$isOKEnabled)
     }
 
     func onOK() async {

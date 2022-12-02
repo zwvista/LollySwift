@@ -152,7 +152,7 @@ class MUnitWordEdit: ObservableObject {
         TEXTBOOKNAME = x.TEXTBOOKNAME
         UNITSTR = x.UNITSTR
         indexUNIT = x.textbook.arrUnits.firstIndex { $0.value == x.UNIT } ?? -1
-        PARTSTR = x.PARTSTR)
+        PARTSTR = x.PARTSTR
         indexPART = x.textbook.arrParts.firstIndex { $0.value == x.PART } ?? -1
         SEQNUM = String(x.SEQNUM)
         WORDID = String(x.WORDID)
@@ -163,11 +163,11 @@ class MUnitWordEdit: ObservableObject {
     }
     
     func save(to x: MUnitWord) {
-        if indexUNIT.value != -1 {
-            x.UNIT = x.textbook.arrUnits[indexUNIT]
+        if indexUNIT != -1 {
+            x.UNIT = x.textbook.arrUnits[indexUNIT].value
         }
-        if indexPART.value != -1 {
-            x.PART = x.textbook.arrUnits[indexPART]
+        if indexPART != -1 {
+            x.PART = x.textbook.arrUnits[indexPART].value
         }
         x.SEQNUM = Int(SEQNUM)!
         x.WORD = WORD

@@ -15,7 +15,7 @@ class WordsPhrasesBaseViewModel: NSObject, ObservableObject {
     @Published var indexTextbookFilter = 0
     @Published var stringTextbookFilter = ""
     var textbookFilter: Int {
-        indexTextbookFilter.value == -1 ? 0 : vmSettings.arrTextbookFilters[indexTextbookFilter.value].value
+        indexTextbookFilter == -1 ? 0 : vmSettings.arrTextbookFilters[indexTextbookFilter].value
     }
 
     var subscriptions = Set<AnyCancellable>()
@@ -26,7 +26,7 @@ class WordsPhrasesBaseViewModel: NSObject, ObservableObject {
         stringTextbookFilter = vmSettings.arrTextbookFilters[0].label
         $stringTextbookFilter.sink { s in
             self.indexTextbookFilter = self.vmSettings.arrTextbookFilters.firstIndex { $0.label == s }!
-        }.store(in: &subscriptions)
+        } ~ subscriptions
     }
 }
 

@@ -15,22 +15,23 @@ class PhrasesLangViewModel: PhrasesBaseViewModel {
 
     public init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> Void) {
         super.init(settings: settings, needCopy: needCopy)
-        reload().subscribe(onSuccess: { complete() }) ~ rx.disposeBag
+        Task {
+            await reload()
+            complete()
+        }
     }
     
-    func reload() -> Single<()> {
-        MLangPhrase.getDataByLang(vmSettings.selectedTextbook.LANGID).map {
-            self.arrPhrases = $0
-        }
+    func reload() async {
+        arrPhrases = await MLangPhrase.getDataByLang(vmSettings.selectedTextbook.LANGID)
     }
 
     func applyFilters() {
-        if textFilter.value.isEmpty {
+        if textFilter.isEmpty {
             arrPhrasesFiltered = nil
         } else {
             arrPhrasesFiltered = arrPhrases
-            if !textFilter.value.isEmpty {
-                arrPhrasesFiltered = arrPhrasesFiltered!.filter { (scopeFilter.value == "Phrase" ? $0.PHRASE : $0.TRANSLATION).lowercased().contains(textFilter.value.lowercased()) }
+            if !textFilter.isEmpty {
+                arrPhrasesFiltered = arrPhrasesFiltered!.filter { (scopeFilter == "Phrase" ? $0.PHRASE : $0.TRANSLATION).lowercased().contains(textFilter.lowercased()) }
             }
         }
     }

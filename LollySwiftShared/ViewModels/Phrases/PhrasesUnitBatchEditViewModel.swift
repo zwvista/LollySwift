@@ -27,7 +27,7 @@ class PhrasesUnitBatchEditViewModel: NSObject, ObservableObject {
         indexPART.accept(vm.vmSettings.arrParts.firstIndex { $0.value == part }!)
     }
     
-    func onOK(rows: [Bool]) -> Single<()> {
+    func onOK(rows: [Bool]) async {
         var o = Single.just(())
         for (i, isChecked) in rows.enumerated() {
             guard isChecked else {continue}

@@ -184,7 +184,7 @@ class SettingsViewModel: NSObject, ObservableObject {
             source.removeDuplicates()
                 .filter { self.initialized && $0 != -1 }
                 .sink { n in Task { await selector(n) } }
-                .store(in: &subscriptions)
+                ~ subscriptions
         }
 
         onChange($selectedLangIndex) {
@@ -234,7 +234,7 @@ class SettingsViewModel: NSObject, ObservableObject {
 
         $toType_.removeDuplicates()
             .sink { _ in Task { await self.updateToType() } }
-            .store(in: &subscriptions)
+            ~ subscriptions
     }
 
     init(_ x: SettingsViewModel) {

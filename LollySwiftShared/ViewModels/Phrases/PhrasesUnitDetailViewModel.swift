@@ -28,7 +28,7 @@ class PhrasesUnitDetailViewModel: NSObject, ObservableObject {
         vmSingle = SinglePhraseViewModel(phrase: item.PHRASE, settings: vm.vmSettings, complete: complete)
     }
     
-    func onOK() -> Single<()> {
+    func onOK() async {
         itemEdit.save(to: item)
         item.PHRASE = vm.vmSettings.autoCorrectInput(text: item.PHRASE)
         return !isAdd ? vm.update(item: item) : vm.create(item: item).flatMap {
