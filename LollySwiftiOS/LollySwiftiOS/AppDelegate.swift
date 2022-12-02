@@ -7,9 +7,7 @@
 //
 
 import UIKit
-import RxSwift
 import AVFoundation
-import NSObject_Rx
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

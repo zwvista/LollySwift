@@ -178,27 +178,13 @@ code_sign_if_enabled() {
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/AKSideMenu/AKSideMenu.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/CrossroadRegex-iOS/Regex.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/DropDown/DropDown.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/NSObject+Rx-iOS/NSObject_Rx.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/RxBinding-iOS/RxBinding.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/RxCocoa-iOS/RxCocoa.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/RxRelay-iOS/RxRelay.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/RxSwift-iOS/RxSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Then-iOS/Then.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/AKSideMenu/AKSideMenu.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/CrossroadRegex-iOS/Regex.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/DropDown/DropDown.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/NSObject+Rx-iOS/NSObject_Rx.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/RxBinding-iOS/RxBinding.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/RxCocoa-iOS/RxCocoa.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/RxRelay-iOS/RxRelay.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/RxSwift-iOS/RxSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Then-iOS/Then.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then

@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import RxSwift
 
 class WordsDictViewModel: NSObject {
     var vmSettings: SettingsViewModel

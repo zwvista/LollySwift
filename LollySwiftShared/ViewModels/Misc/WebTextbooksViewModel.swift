@@ -7,8 +7,6 @@
 //
 
 import Foundation
-import RxSwift
-import RxBinding
 
 class WebTextbooksViewModel: NSObject {
     var vmSettings: SettingsViewModel

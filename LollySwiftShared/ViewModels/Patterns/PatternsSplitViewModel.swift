@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import RxSwift
 
 class PatternsSplitViewModel: NSObject {
     var arrPatterns = [MPattern]()

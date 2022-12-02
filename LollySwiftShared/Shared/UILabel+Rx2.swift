@@ -8,7 +8,6 @@
 
 #if os(iOS) || os(tvOS)
 
-import RxSwift
 
 extension Reactive where Base: UILabel {
     

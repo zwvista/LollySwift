@@ -7,7 +7,6 @@
 //
 
 import Cocoa
-import RxBinding
 
 class ReviewOptionsViewController: NSViewController {
 

@@ -7,8 +7,6 @@
 //
 
 import Cocoa
-import RxSwift
-import RxBinding
 
 class DictsViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate {
     

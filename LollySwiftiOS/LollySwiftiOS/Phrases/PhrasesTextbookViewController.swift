@@ -8,9 +8,6 @@
 
 import UIKit
 import DropDown
-import RxSwift
-import NSObject_Rx
-import RxBinding
 
 class PhrasesTextbookViewController: PhrasesBaseViewController {
     

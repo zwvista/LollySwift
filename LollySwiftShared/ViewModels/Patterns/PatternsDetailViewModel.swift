@@ -7,9 +7,6 @@
 //
 
 import Foundation
-import RxSwift
-import RxRelay
-import RxBinding
 
 class PatternsDetailViewModel: NSObject {
     var vm: PatternsViewModel!

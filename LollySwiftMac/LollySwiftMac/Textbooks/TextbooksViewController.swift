@@ -7,9 +7,6 @@
 //
 
 import Cocoa
-import RxSwift
-import NSObject_Rx
-import RxBinding
 
 class TextbooksViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate {
     

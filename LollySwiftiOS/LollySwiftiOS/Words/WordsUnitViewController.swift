@@ -7,9 +7,6 @@
 //
 
 import UIKit
-import RxSwift
-import NSObject_Rx
-import RxBinding
 
 class WordsUnitViewController: WordsBaseViewController {
 

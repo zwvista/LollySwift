@@ -7,9 +7,6 @@
 //
 
 import Foundation
-import RxSwift
-import RxRelay
-import RxBinding
 
 class WordsPhrasesBaseViewModel: NSObject {
     var vmSettings: SettingsViewModel

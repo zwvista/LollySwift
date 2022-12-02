@@ -7,8 +7,6 @@
 //
 
 import Foundation
-import RxSwift
-import RxRelay
 
 class PhrasesBaseViewModel: WordsPhrasesBaseViewModel {
     let scopeFilter = BehaviorRelay(value: SettingsViewModel.arrScopePhraseFilters[0])

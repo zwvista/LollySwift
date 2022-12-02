@@ -6,8 +6,6 @@
 //
 
 import SwiftUI
-import RxSwift
-import RxBinding
 
 struct SettingsView: View {
     @ObservedObject var vm = vmSettings

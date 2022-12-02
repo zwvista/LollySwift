@@ -9,9 +9,6 @@
 import UIKit
 import WebKit
 import DropDown
-import RxSwift
-import NSObject_Rx
-import RxBinding
 
 class WordsDictViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, UIGestureRecognizerDelegate {
 

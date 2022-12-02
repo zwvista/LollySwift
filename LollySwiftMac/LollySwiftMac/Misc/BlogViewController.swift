@@ -8,8 +8,6 @@
 
 import Cocoa
 import WebKit
-import RxSwift
-import RxBinding
 
 class BlogViewController: NSViewController, NSMenuItemValidation  {
 

@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import RxSwift
 
 class PatternsMergeViewModel: NSObject {
     var arrPatterns: [MPattern]

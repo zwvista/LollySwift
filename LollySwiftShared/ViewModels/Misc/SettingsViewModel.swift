@@ -615,26 +615,25 @@ class SettingsViewModel: NSObject, ObservableObject {
         return CommonApi.extractText(from: html, transform: selectedDictNote.TRANSFORM, template: "") { text,_ in text }
     }
 
-    func getNotes(wordCount: Int, isNoteEmpty: @escaping (Int) -> Bool, getOne: @escaping (Int) -> Void, allComplete: @escaping () -> Void) -> Disposable {
-        guard hasDictNote else { return Observable<Any>.empty().subscribe() }
+    func getNotes(wordCount: Int, isNoteEmpty: @escaping (Int) -> Bool, getOne: @escaping (Int) async -> Void, allComplete: @escaping () -> Void) async {
+        guard hasDictNote else {return}
         var i = 0
-        var subscription: Disposable?
-        subscription = Observable<Int>.interval(.milliseconds(selectedDictNote.WAIT), scheduler: MainScheduler.instance).subscribe { _ in
-                while i < wordCount && !isNoteEmpty(i) {
-                    i += 1
-                }
-                if i > wordCount {
-                    allComplete()
-                    subscription?.dispose()
-                } else {
-                    if i < wordCount {
-                        getOne(i)
-                    }
-                    // wait for the last one to finish
-                    i += 1
-                }
+        while true {
+            while i < wordCount && !isNoteEmpty(i) {
+                i += 1
             }
-        return subscription!
+            if i > wordCount {
+                allComplete()
+                break
+            } else {
+                if i < wordCount {
+                    await getOne(i)
+                }
+                // wait for the last one to finish
+                i += 1
+            }
+            try! await Task.sleep(nanoseconds: UInt64(selectedDictNote.WAIT * 1_000_000))
+        }
     }
 
     func clearNotes(wordCount: Int, isNoteEmpty: @escaping (Int) -> Bool, getOne: @escaping (Int) async -> Void) async {

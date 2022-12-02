@@ -8,7 +8,6 @@
 
 import Cocoa
 import WebKit
-import RxBinding
 
 class TransformDetailViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 

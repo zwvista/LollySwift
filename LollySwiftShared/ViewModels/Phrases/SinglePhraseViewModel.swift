@@ -7,8 +7,6 @@
 //
 
 import Foundation
-import RxSwift
-import RxBinding
 
 class SinglePhraseViewModel: NSObject {
     

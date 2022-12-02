@@ -7,8 +7,6 @@
 //
 
 import Foundation
-import RxSwift
-import RxRelay
 
 class PhrasesUnitBatchEditViewModel: NSObject {
     var vm: PhrasesUnitViewModel!

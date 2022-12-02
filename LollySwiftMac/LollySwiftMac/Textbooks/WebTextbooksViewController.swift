@@ -8,7 +8,6 @@
 
 import Cocoa
 import WebKit
-import RxSwift
 
 class WebTextbooksViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate {
 

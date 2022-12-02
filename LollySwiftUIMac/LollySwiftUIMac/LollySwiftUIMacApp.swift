@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import RxSwift
 
 @main
 struct LollySwiftUIMacApp: App {

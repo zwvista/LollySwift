@@ -7,8 +7,6 @@
 //
 
 import Cocoa
-import RxSwift
-import RxBinding
 
 class WordsUnitBatchEditViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 

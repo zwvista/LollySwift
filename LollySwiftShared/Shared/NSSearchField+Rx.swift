@@ -5,8 +5,6 @@
 
 #if os(macOS)
 
-import RxSwift
-import RxCocoa
 
 extension Reactive where Base: NSSearchField {
 

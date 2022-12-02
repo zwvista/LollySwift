@@ -7,8 +7,6 @@
 //
 
 import Cocoa
-import RxSwift
-import RxBinding
 
 class PhrasesLangDetailViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 

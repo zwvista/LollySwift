@@ -7,8 +7,6 @@
 //
 
 import Foundation
-import RxSwift
-import RxRelay
 
 @objcMembers
 class MUnitPhrases: HasRecords {

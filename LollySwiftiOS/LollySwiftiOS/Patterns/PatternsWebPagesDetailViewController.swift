@@ -8,7 +8,6 @@
 
 import UIKit
 import WebKit
-import RxBinding
 
 class PatternsWebPagesDetailViewController: UITableViewController {
 

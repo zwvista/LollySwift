@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import RxRelay
 
 class ReviewOptionsViewModel: NSObject {
     var options: MReviewOptions!

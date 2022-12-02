@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import RxSwift
 
 @objcMembers
 class MUsers: HasRecords {

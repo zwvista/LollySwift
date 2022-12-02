@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import RxRelay
 
 class MReviewOptions: NSObject {
     var mode: ReviewMode = .reviewAuto

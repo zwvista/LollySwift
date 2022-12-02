@@ -8,8 +8,6 @@
 
 import SwiftUI
 import WebKit
-import NSObject_Rx
-import RxBinding
 
 class DictStoreUI: NSObject, ObservableObject {
     

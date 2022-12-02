@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import RxSwift
 
 class WordsSearchViewModel: WordsBaseViewModel {
     var arrWords = [MUnitWord]()

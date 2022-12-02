@@ -7,8 +7,6 @@
 //
 
 import Cocoa
-import RxSwift
-import RxBinding
 
 class WordsReviewViewController: WordsBaseViewController, NSTextFieldDelegate {
     @objc dynamic var vm: WordsReviewViewModel!

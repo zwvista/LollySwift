@@ -8,9 +8,6 @@
 
 import UIKit
 import DropDown
-import RxSwift
-import NSObject_Rx
-import RxBinding
 
 class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
     @IBOutlet weak var langCell: UITableViewCell!

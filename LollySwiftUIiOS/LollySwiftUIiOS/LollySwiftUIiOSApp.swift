@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import RxSwift
 import AVFoundation
 
 @main
