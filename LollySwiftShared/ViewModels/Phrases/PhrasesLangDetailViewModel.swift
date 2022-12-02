@@ -19,7 +19,7 @@ class PhrasesLangDetailViewModel: NSObject {
     var isAdd: Bool!
     let isOKEnabled = BehaviorRelay(value: false)
 
-    init(vm: PhrasesLangViewModel, item: MLangPhrase, complete: @escaping () -> ()) {
+    init(vm: PhrasesLangViewModel, item: MLangPhrase, complete: @escaping () -> Void) {
         self.vm = vm
         self.item = item
         itemEdit = MLangPhraseEdit(x: item)

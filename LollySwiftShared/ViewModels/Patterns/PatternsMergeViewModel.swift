@@ -33,7 +33,7 @@ class PatternsMergeViewModel: NSObject {
         itemEdit.PATTERN.accept(arrPatternVariations.map(\.variation).unique.joined(separator: "／"))
     }
 
-    func reindexVariations(complete: (Int) -> ()) {
+    func reindexVariations(complete: (Int) -> Void) {
         for i in 1...arrPatternVariations.count {
             let item = arrPatternVariations[i - 1]
             guard item.index != i else {continue}

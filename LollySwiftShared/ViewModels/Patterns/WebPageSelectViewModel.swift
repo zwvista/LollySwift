@@ -18,7 +18,7 @@ class WebPageSelectViewModel: NSObject {
     var arrWebPages = [MWebPage]()
     var selectedWebPage: MWebPage?
     
-    init(settings: SettingsViewModel, complete: @escaping () -> ()) {
+    init(settings: SettingsViewModel, complete: @escaping () -> Void) {
         self.vmSettings = settings
         super.init()
         Task {

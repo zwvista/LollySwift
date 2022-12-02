@@ -16,7 +16,7 @@ class WordsUnitViewModel: WordsBaseViewModel {
     var arrWords = [MUnitWord]()
     var arrWordsFiltered: [MUnitWord]?
 
-    init(settings: SettingsViewModel, inTextbook: Bool, needCopy: Bool, complete: @escaping () -> ()) {
+    init(settings: SettingsViewModel, inTextbook: Bool, needCopy: Bool, complete: @escaping () -> Void) {
         self.inTextbook = inTextbook
         super.init(settings: settings, needCopy: needCopy)
         Task {
@@ -78,7 +78,7 @@ class WordsUnitViewModel: WordsBaseViewModel {
         await MUnitWord.delete(item: item)
     }
 
-    func reindex(complete: @escaping (Int) -> ()) async {
+    func reindex(complete: @escaping (Int) -> Void) async {
         for i in 1...arrWords.count {
             let item = arrWords[i - 1]
             guard item.SEQNUM != i else {continue}

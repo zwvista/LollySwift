@@ -180,7 +180,7 @@ class SettingsViewModel: NSObject, ObservableObject {
     override init() {
         super.init()
 
-        func onChange(_ source: Published<Int>.Publisher, _ selector: @escaping (Int) async -> ()) {
+        func onChange(_ source: Published<Int>.Publisher, _ selector: @escaping (Int) async -> Void) {
             source.removeDuplicates()
                 .filter { self.initialized && $0 != -1 }
                 .sink { n in Task { await selector(n) } }
@@ -637,20 +637,20 @@ class SettingsViewModel: NSObject, ObservableObject {
         return subscription!
     }
 
-    func clearNotes(wordCount: Int, isNoteEmpty: @escaping (Int) -> Bool, getOne: @escaping (Int) -> async ()) async {
-        var i = 0
-        var o = Single.just(())
-        while i < wordCount {
-            while i < wordCount && !isNoteEmpty(i) {
+    func clearNotes(wordCount: Int, isNoteEmpty: @escaping (Int) -> Bool, getOne: @escaping (Int) async -> Void) async {
+        await withTaskGroup(of: Void.self) {
+            var i = 0
+            while i < wordCount {
+                while i < wordCount && !isNoteEmpty(i) {
+                    i += 1
+                }
+                if i < wordCount {
+                    let j = i
+                    $0.addTask { await getOne(j) }
+                }
                 i += 1
             }
-            if i < wordCount {
-                let j = i
-                o = o.flatMap { getOne(j) }
-            }
-            i += 1
         }
-        return o
     }
 
     func getBlogContent() async -> String {

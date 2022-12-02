@@ -13,7 +13,7 @@ class SingleWordViewModel: NSObject {
     var vmSettings: SettingsViewModel
     var arrWords = [MUnitWord]()
 
-    init(word: String, settings: SettingsViewModel, complete: @escaping () -> ()) {
+    init(word: String, settings: SettingsViewModel, complete: @escaping () -> Void) {
         vmSettings = settings
         super.init()
         Task {
