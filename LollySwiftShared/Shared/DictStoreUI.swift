@@ -10,18 +10,15 @@ import SwiftUI
 import WebKit
 
 class DictStoreUI: NSObject, ObservableObject {
-    
-    @Published
-    var dictStatus = DictWebViewStatus.ready
-    @Published
-    var word = ""
-    @Published
-    var dict: MDictionary!
+
+    @Published var dictStatus = DictWebViewStatus.ready
+    @Published var word = ""
+    @Published var dict: MDictionary!
     var url = ""
-    
+
     var vmSettings: SettingsViewModel!
     weak var wvDict: WKWebView!
-    
+
     func searchDict() {
         url = dict.urlString(word: word, arrAutoCorrect: vmSettings.arrAutoCorrect)
         dictStatus = .ready

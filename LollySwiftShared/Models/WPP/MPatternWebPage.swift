@@ -77,7 +77,7 @@ class MPatternWebPage: NSObject, Codable {
     }
 }
 
-class MPatternWebPageEdit {
+class MPatternWebPageEdit: ObservableObject {
     @Published var ID: String
     @Published var PATTERNID: String
     @Published var PATTERN: String

@@ -68,19 +68,19 @@ class MLangPhrase: NSObject, Codable, MPhraseProtocol {
     }
 }
 
-class MLangPhraseEdit {
-    let ID: BehaviorRelay<String>
-    let PHRASE: BehaviorRelay<String>
-    let TRANSLATION: BehaviorRelay<String>
+class MLangPhraseEdit: ObservableObject {
+    @Published var ID: String
+    @Published var PHRASE: String
+    @Published var TRANSLATION: String
 
     init(x: MLangPhrase) {
-        ID = BehaviorRelay(value: String(x.ID))
-        PHRASE = BehaviorRelay(value: x.PHRASE)
-        TRANSLATION = BehaviorRelay(value: x.TRANSLATION)
+        ID = String(x.ID)
+        PHRASE = x.PHRASE
+        TRANSLATION = x.TRANSLATION
     }
     
     func save(to x: MLangPhrase) {
-        x.PHRASE = PHRASE.value
-        x.TRANSLATION = TRANSLATION.value
+        x.PHRASE = PHRASE
+        x.TRANSLATION = TRANSLATION
     }
 }

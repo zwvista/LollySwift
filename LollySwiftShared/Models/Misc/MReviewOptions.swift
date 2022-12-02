@@ -20,40 +20,40 @@ class MReviewOptions: NSObject {
     var moveForward = true
 }
 
-class MReviewOptionsEdit {
-    let mode: BehaviorRelay<Int>
-    let modeString: BehaviorRelay<String>
-    let interval: BehaviorRelay<Int>
-    let shuffled: BehaviorRelay<Bool>
-    let groupCount: BehaviorRelay<Int>
-    let groupSelected: BehaviorRelay<Int>
-    let speakingEnabled: BehaviorRelay<Bool>
-    let reviewCount: BehaviorRelay<Int>
-    let onRepeat: BehaviorRelay<Bool>
-    let moveForward: BehaviorRelay<Bool>
+class MReviewOptionsEdit: ObservableObject {
+    @Published var mode: Int
+    @Published var modeString: String
+    @Published var interval: Int
+    @Published var shuffled: Bool
+    @Published var groupCount: Int
+    @Published var groupSelected: Int
+    @Published var speakingEnabled: Bool
+    @Published var reviewCount: Int
+    @Published var onRepeat: Bool
+    @Published var moveForward: Bool
 
     init(x: MReviewOptions) {
-        mode = BehaviorRelay(value: x.mode.rawValue)
-        modeString = BehaviorRelay(value: SettingsViewModel.reviewModes[x.mode.rawValue])
-        interval = BehaviorRelay(value: x.interval)
-        shuffled = BehaviorRelay(value: x.shuffled)
-        groupCount = BehaviorRelay(value: x.groupCount)
-        groupSelected = BehaviorRelay(value: x.groupSelected)
-        speakingEnabled = BehaviorRelay(value: x.speakingEnabled)
-        reviewCount = BehaviorRelay(value: x.reviewCount)
-        onRepeat = BehaviorRelay(value: x.onRepeat)
-        moveForward = BehaviorRelay(value: x.moveForward)
+        mode = x.mode.rawValue
+        modeString = SettingsViewModel.reviewModes[x.mode.rawValue]
+        interval = x.interval
+        shuffled = x.shuffled
+        groupCount = x.groupCount
+        groupSelected = x.groupSelected
+        speakingEnabled = x.speakingEnabled
+        reviewCount = x.reviewCount
+        onRepeat = x.onRepeat
+        moveForward = x.moveForward
     }
     
     func save(to x: MReviewOptions) {
-        x.mode = ReviewMode(rawValue: mode.value)!
-        x.interval = interval.value
-        x.shuffled = shuffled.value
-        x.groupCount = groupCount.value
-        x.groupSelected = groupSelected.value
-        x.speakingEnabled = speakingEnabled.value
-        x.reviewCount = reviewCount.value
-        x.onRepeat = onRepeat.value
-        x.moveForward = moveForward.value
+        x.mode = ReviewMode(rawValue: mode)!
+        x.interval = interval
+        x.shuffled = shuffled
+        x.groupCount = groupCount
+        x.groupSelected = groupSelected
+        x.speakingEnabled = speakingEnabled
+        x.reviewCount = reviewCount
+        x.onRepeat = onRepeat
+        x.moveForward = moveForward
     }
 }

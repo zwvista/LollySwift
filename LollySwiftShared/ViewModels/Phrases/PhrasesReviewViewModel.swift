@@ -8,7 +8,7 @@
 
 import Foundation
 
-class PhrasesReviewViewModel: NSObject {
+class PhrasesReviewViewModel: NSObject, ObservableObject {
 
     var vmSettings: SettingsViewModel
     var arrPhrases = [MUnitPhrase]()
@@ -20,24 +20,24 @@ class PhrasesReviewViewModel: NSObject {
     var subscriptionTimer: Disposable? = nil
     let doTestAction: (() -> Void)?
 
-    let indexString = BehaviorRelay(value: "")
-    let indexHidden = BehaviorRelay(value: false)
-    let correctHidden = BehaviorRelay(value: true)
-    let incorrectHidden = BehaviorRelay(value: true)
-    let checkNextEnabled = BehaviorRelay(value: false)
-    let checkNextTitle = BehaviorRelay(value: "Check")
-    let checkPrevEnabled = BehaviorRelay(value: false)
-    let checkPrevTitle = BehaviorRelay(value: "Check")
-    let checkPrevHidden = BehaviorRelay(value: false)
-    let phraseTargetString = BehaviorRelay(value: "")
-    let phraseTargetHidden = BehaviorRelay(value: false)
-    let translationString = BehaviorRelay(value: "")
-    let phraseInputString = BehaviorRelay(value: "")
-    let isSpeaking = BehaviorRelay(value: true)
-    let moveForward = BehaviorRelay(value: true)
-    let onRepeat = BehaviorRelay(value: true)
-    let moveForwardHidden = BehaviorRelay(value: false)
-    let onRepeatHidden = BehaviorRelay(value: false)
+    @Published var indexString = ""
+    @Published var indexHidden = false
+    @Published var correctHidden = true
+    @Published var incorrectHidden = true
+    @Published var checkNextEnabled = false
+    @Published var checkNextTitle = "Check"
+    @Published var checkPrevEnabled = false
+    @Published var checkPrevTitle = "Check"
+    @Published var checkPrevHidden = false
+    @Published var phraseTargetString = ""
+    @Published var phraseTargetHidden = false
+    @Published var translationString = ""
+    @Published var phraseInputString = ""
+    @Published var isSpeaking = true
+    @Published var moveForward = true
+    @Published var onRepeat = true
+    @Published var moveForwardHidden = false
+    @Published var onRepeatHidden = false
 
     init(settings: SettingsViewModel, needCopy: Bool, doTestAction: (() -> Void)? = nil) {
         self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)

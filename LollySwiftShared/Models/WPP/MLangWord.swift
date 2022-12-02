@@ -74,23 +74,23 @@ class MLangWord: NSObject, Codable, MWordProtocol {
     }
 }
 
-class MLangWordEdit {
-    let ID: BehaviorRelay<String>
-    let WORD: BehaviorRelay<String>
-    let NOTE: BehaviorRelay<String>
-    let FAMIID: BehaviorRelay<String>
-    let ACCURACY: BehaviorRelay<String>
+class MLangWordEdit: ObservableObject {
+    @Published var ID: String
+    @Published var WORD: String
+    @Published var NOTE: String
+    @Published var FAMIID: String
+    @Published var ACCURACY: String
 
     init(x: MLangWord) {
-        ID = BehaviorRelay(value: String(x.ID))
-        WORD = BehaviorRelay(value: x.WORD)
-        NOTE = BehaviorRelay(value: x.NOTE)
-        FAMIID = BehaviorRelay(value: String(x.FAMIID))
-        ACCURACY = BehaviorRelay(value: x.ACCURACY)
+        ID = String(x.ID)
+        WORD = x.WORD
+        NOTE = x.NOTE
+        FAMIID = String(x.FAMIID)
+        ACCURACY = x.ACCURACY
     }
     
     func save(to x: MLangWord) {
-        x.WORD = WORD.value
-        x.NOTE = NOTE.value
+        x.WORD = WORD
+        x.NOTE = NOTE
     }
 }

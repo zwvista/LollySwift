@@ -134,27 +134,27 @@ class MUnitPhraseEdit: ObservableObject {
     @Published var PHRASES = ""
 
     init(x: MUnitPhrase) {
-        ID = BehaviorRelay(value: String(x.ID))
-        TEXTBOOKNAME = BehaviorRelay(value: x.TEXTBOOKNAME)
-        UNITSTR = BehaviorRelay(value: x.UNITSTR)
-        indexUNIT = BehaviorRelay(value: x.textbook.arrUnits.firstIndex { $0.value == x.UNIT } ?? -1)
-        PARTSTR = BehaviorRelay(value: x.PARTSTR)
-        indexPART = BehaviorRelay(value: x.textbook.arrParts.firstIndex { $0.value == x.PART } ?? -1)
-        SEQNUM = BehaviorRelay(value: String(x.SEQNUM))
-        PHRASEID = BehaviorRelay(value: String(x.PHRASEID))
-        PHRASE = BehaviorRelay(value: x.PHRASE)
-        TRANSLATION = BehaviorRelay(value: x.TRANSLATION)
+        ID = String(x.ID)
+        TEXTBOOKNAME = x.TEXTBOOKNAME
+        UNITSTR = x.UNITSTR
+        indexUNIT = x.textbook.arrUnits.firstIndex { $0.value == x.UNIT } ?? -1
+        PARTSTR = x.PARTSTR
+        indexPART = x.textbook.arrParts.firstIndex { $0.value == x.PART } ?? -1
+        SEQNUM = String(x.SEQNUM)
+        PHRASEID = String(x.PHRASEID)
+        PHRASE = x.PHRASE
+        TRANSLATION = x.TRANSLATION
     }
     
     func save(to x: MUnitPhrase) {
         if indexUNIT.value != -1 {
-            x.UNIT = x.textbook.arrUnits[indexUNIT.value].value
+            x.UNIT = x.textbook.arrUnits[indexUNIT]
         }
         if indexPART.value != -1 {
-            x.PART = x.textbook.arrUnits[indexPART.value].value
+            x.PART = x.textbook.arrUnits[indexPART]
         }
-        x.SEQNUM = Int(SEQNUM.value)!
-        x.PHRASE = PHRASE.value
-        x.TRANSLATION = TRANSLATION.value
+        x.SEQNUM = Int(SEQNUM)!
+        x.PHRASE = PHRASE
+        x.TRANSLATION = TRANSLATION
     }
 }
