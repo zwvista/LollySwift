@@ -23,7 +23,8 @@ class PhrasesUnitDetailViewModel: NSObject, ObservableObject {
         self.wordid = wordid
         itemEdit = MUnitPhraseEdit(x: item)
         isAdd = item.ID == 0
-        _ = itemEdit.PHRASE.map { !$0.isEmpty } ~> isOKEnabled
+        super.init()
+        itemEdit.$PHRASE.map { !$0.isEmpty } ~> $isOKEnabled
         guard !isAdd else {return}
         vmSingle = SinglePhraseViewModel(phrase: item.PHRASE, settings: vm.vmSettings, complete: complete)
     }
@@ -31,8 +32,9 @@ class PhrasesUnitDetailViewModel: NSObject, ObservableObject {
     func onOK() async {
         itemEdit.save(to: item)
         item.PHRASE = vm.vmSettings.autoCorrectInput(text: item.PHRASE)
-        return !isAdd ? vm.update(item: item) : vm.create(item: item).flatMap {
-            self.wordid == 0 ? Single.just(()) : MWordPhrase.associate(wordid: self.wordid, phraseid: self.item.PHRASEID)
+        !isAdd ? await vm.update(item: item) : await vm.create(item: item)
+        if wordid != 0 {
+            await MWordPhrase.associate(wordid: wordid, phraseid: item.PHRASEID)
         }
     }
 }

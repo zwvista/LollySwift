@@ -29,12 +29,12 @@ class PhrasesUnitViewModel: PhrasesBaseViewModel {
     }
 
     func applyFilters() {
-        if textFilter.value.isEmpty && textbookFilter == 0 {
+        if textFilter.isEmpty && textbookFilter == 0 {
             arrPhrasesFiltered = nil
         } else {
             arrPhrasesFiltered = arrPhrases
-            if !textFilter.value.isEmpty {
-                arrPhrasesFiltered = arrPhrasesFiltered!.filter { (scopeFilter.value == "Phrase" ? $0.PHRASE : $0.TRANSLATION).lowercased().contains(textFilter.value.lowercased()) }
+            if !textFilter.isEmpty {
+                arrPhrasesFiltered = arrPhrasesFiltered!.filter { (scopeFilter == "Phrase" ? $0.PHRASE : $0.TRANSLATION).lowercased().contains(textFilter.lowercased()) }
             }
             if textbookFilter != 0 {
                 arrPhrasesFiltered = arrPhrasesFiltered!.filter { $0.TEXTBOOKID == textbookFilter }

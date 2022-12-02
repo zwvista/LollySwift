@@ -26,12 +26,12 @@ class WordsLangViewModel: WordsBaseViewModel {
     }
     
     func applyFilters() {
-        if textFilter.value.isEmpty {
+        if textFilter.isEmpty {
             arrWordsFiltered = nil
         } else {
             arrWordsFiltered = arrWords
-            if !textFilter.value.isEmpty {
-                arrWordsFiltered = arrWordsFiltered!.filter { (scopeFilter.value == "Word" ? $0.WORD : $0.NOTE).lowercased().contains(textFilter.value.lowercased()) }
+            if !textFilter.isEmpty {
+                arrWordsFiltered = arrWordsFiltered!.filter { (scopeFilter == "Word" ? $0.WORD : $0.NOTE).lowercased().contains(textFilter.lowercased()) }
             }
         }
     }

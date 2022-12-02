@@ -29,12 +29,12 @@ class WordsUnitViewModel: WordsBaseViewModel {
     }
 
     func applyFilters() {
-        if textFilter.value.isEmpty && textbookFilter == 0 {
+        if textFilter.isEmpty && textbookFilter == 0 {
             arrWordsFiltered = nil
         } else {
             arrWordsFiltered = arrWords
-            if !textFilter.value.isEmpty {
-                arrWordsFiltered = arrWordsFiltered!.filter { (scopeFilter.value == "Word" ? $0.WORD : $0.NOTE).lowercased().contains(textFilter.value.lowercased()) }
+            if !textFilter.isEmpty {
+                arrWordsFiltered = arrWordsFiltered!.filter { (scopeFilter == "Word" ? $0.WORD : $0.NOTE).lowercased().contains(textFilter.lowercased()) }
             }
             if textbookFilter != 0 {
                 arrWordsFiltered = arrWordsFiltered!.filter { $0.TEXTBOOKID == textbookFilter }
@@ -109,12 +109,12 @@ class WordsUnitViewModel: WordsBaseViewModel {
     }
     
     func getNotes(ifEmpty: Bool, oneComplete: @escaping (Int) -> Void, allComplete: @escaping () -> Void) async {
-        vmSettings.getNotes(wordCount: arrWords.count, isNoteEmpty: {
+        await vmSettings.getNotes(wordCount: arrWords.count, isNoteEmpty: {
             !ifEmpty || (self.arrWords[$0].NOTE).isEmpty
         }, getOne: { i in
             await self.getNote(index: i)
             oneComplete(i)
-        }, allComplete: allComplete) ~ self.rx.disposeBag
+        }, allComplete: allComplete)
     }
 
     func clearNote(index: Int) async {
@@ -124,10 +124,11 @@ class WordsUnitViewModel: WordsBaseViewModel {
     }
     
     func clearNotes(ifEmpty: Bool, oneComplete: @escaping (Int) -> Void) async {
-        vmSettings.clearNotes(wordCount: arrWords.count, isNoteEmpty: {
+        await vmSettings.clearNotes(wordCount: arrWords.count, isNoteEmpty: {
             !ifEmpty || self.arrWords[$0].NOTE.isEmpty
         }, getOne: { i in
-            self.clearNote(index: i).do(onSuccess: { oneComplete(i) })
+            await self.clearNote(index: i)
+            oneComplete(i)
         })
     }
 }

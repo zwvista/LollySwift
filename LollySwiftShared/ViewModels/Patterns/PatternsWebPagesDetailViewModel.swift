@@ -20,13 +20,13 @@ class PatternsWebPagesDetailViewModel: NSObject {
         itemEdit = MPatternWebPageEdit(x: item)
         isAddWebPage = item.WEBPAGEID == 0
         isAddPatternWebPage = item.ID == 0
-        _ = Observable.combineLatest(itemEdit.TITLE, itemEdit.URL).map { !$0.0.isEmpty && !$0.1.isEmpty } ~> isOKEnabled
+        super.init()
+        itemEdit.$TITLE.combineLatest(itemEdit.$URL).map { !$0.0.isEmpty && !$0.1.isEmpty } ~> $isOKEnabled
     }
 
     func onOK() async {
         itemEdit.save(to: item)
-        return (isAddWebPage ? PatternsWebPagesViewModel.createWebPage(item: item) : PatternsWebPagesViewModel.updateWebPage(item: item)).flatMap {
-            self.isAddPatternWebPage ? PatternsWebPagesViewModel.createPatternWebPage(item: self.item) : PatternsWebPagesViewModel.updatePatternWebPage(item: self.item)
-        }
+        isAddWebPage ? await PatternsWebPagesViewModel.createWebPage(item: item) : await PatternsWebPagesViewModel.updateWebPage(item: item)
+        isAddPatternWebPage ? await PatternsWebPagesViewModel.createPatternWebPage(item: item) : await PatternsWebPagesViewModel.updatePatternWebPage(item: item)
     }
 }

@@ -16,6 +16,9 @@ class WordsUnitBatchEditViewModel: NSObject, ObservableObject {
     var UNIT: Int { vm.vmSettings.arrUnits[indexUNIT].value }
     @Published var indexPART = 0
     var PART: Int { vm.vmSettings.arrParts[indexPART].value }
+    @Published var SEQNUM = ""
+    @Published var unitChecked = false
+    @Published var partChecked = false
     @Published var seqnumChecked = false
 
     init(vm: WordsUnitViewModel, unit: Int, part: Int) {
@@ -25,7 +28,6 @@ class WordsUnitBatchEditViewModel: NSObject, ObservableObject {
     }
     
     func onOK(rows: [Bool]) async {
-        var o = Single.just(())
         for (i, isChecked) in rows.enumerated() {
             guard isChecked else {continue}
             let item = vm.arrWords[i]
@@ -33,9 +35,8 @@ class WordsUnitBatchEditViewModel: NSObject, ObservableObject {
                 if unitChecked { item.UNIT = UNIT }
                 if partChecked { item.PART = PART }
                 if seqnumChecked { item.SEQNUM += Int(SEQNUM)! }
-                o = o.flatMap { self.vm.update(item: item) }
+                await vm.update(item: item)
             }
         }
-        return o
     }
 }

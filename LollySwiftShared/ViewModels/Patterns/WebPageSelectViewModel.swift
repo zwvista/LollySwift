@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Combine
 
 class WebPageSelectViewModel: NSObject, ObservableObject {
     @Published var title = ""
@@ -15,6 +16,8 @@ class WebPageSelectViewModel: NSObject, ObservableObject {
     var arrWebPages = [MWebPage]()
     var selectedWebPage: MWebPage?
     
+    var subscriptions = Set<AnyCancellable>()
+
     init(settings: SettingsViewModel, complete: @escaping () -> Void) {
         self.vmSettings = settings
         super.init()
@@ -22,7 +25,14 @@ class WebPageSelectViewModel: NSObject, ObservableObject {
             await reload(t: "", u: "")
             complete()
         }
-        Observable.combineLatest(title.debounce(.milliseconds(500), scheduler: MainScheduler.instance), url.debounce(.milliseconds(500), scheduler: MainScheduler.instance)).flatMap { (t, u) in self.reload(t: t, u: u) }.subscribe(onNext: { complete() }) ~ rx.disposeBag
+        $title.debounce(for: .milliseconds(500), scheduler: DispatchQueue.main)
+            .combineLatest($url.debounce(for: .milliseconds(500), scheduler: DispatchQueue.main))
+            .sink { (t, u) in
+                Task {
+                    await self.reload(t: t, u: u)
+                    complete()
+                }
+            } ~ subscriptions
     }
     
     func reload(t: String, u: String) async {

@@ -23,22 +23,20 @@ class PhrasesUnitBatchEditViewModel: NSObject, ObservableObject {
 
     init(vm: PhrasesUnitViewModel, unit: Int, part: Int) {
         self.vm = vm
-        indexUNIT.accept(vm.vmSettings.arrUnits.firstIndex { $0.value == unit }!)
-        indexPART.accept(vm.vmSettings.arrParts.firstIndex { $0.value == part }!)
+        indexUNIT = vm.vmSettings.arrUnits.firstIndex { $0.value == unit }!
+        indexPART = vm.vmSettings.arrParts.firstIndex { $0.value == part }!
     }
     
     func onOK(rows: [Bool]) async {
-        var o = Single.just(())
         for (i, isChecked) in rows.enumerated() {
             guard isChecked else {continue}
             let item = vm.arrPhrases[i]
-            if unitChecked.value || partChecked.value || seqnumChecked.value {
-                if unitChecked.value { item.UNIT = UNIT }
-                if partChecked.value { item.PART = PART }
-                if seqnumChecked.value { item.SEQNUM += Int(SEQNUM.value)! }
-                o = o.flatMap { self.vm.update(item: item) }
+            if unitChecked || partChecked || seqnumChecked {
+                if unitChecked { item.UNIT = UNIT }
+                if partChecked { item.PART = PART }
+                if seqnumChecked { item.SEQNUM += Int(SEQNUM)! }
+                await vm.update(item: item)
             }
         }
-        return o
     }
 }
