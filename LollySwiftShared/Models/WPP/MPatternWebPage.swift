@@ -78,38 +78,38 @@ class MPatternWebPage: NSObject, Codable {
 }
 
 class MPatternWebPageEdit {
-    let ID: BehaviorRelay<String>
-    let PATTERNID: BehaviorRelay<String>
-    let PATTERN: BehaviorRelay<String>
-    let SEQNUM: BehaviorRelay<String>
-    let WEBPAGEID: BehaviorRelay<String>
-    let TITLE: BehaviorRelay<String>
-    let URL: BehaviorRelay<String>
+    @Published var ID: String
+    @Published var PATTERNID: String
+    @Published var PATTERN: String
+    @Published var SEQNUM: String
+    @Published var WEBPAGEID: String
+    @Published var TITLE: String
+    @Published var URL: String
     
     init() {
-        ID = BehaviorRelay(value: "")
-        PATTERNID = BehaviorRelay(value: "")
-        PATTERN = BehaviorRelay(value: "")
-        SEQNUM = BehaviorRelay(value: "")
-        WEBPAGEID = BehaviorRelay(value: "")
-        TITLE = BehaviorRelay(value: "")
-        URL = BehaviorRelay(value: "")
+        ID = ""
+        PATTERNID = ""
+        PATTERN = ""
+        SEQNUM = ""
+        WEBPAGEID = ""
+        TITLE = ""
+        URL = ""
     }
 
     init(x: MPatternWebPage) {
-        ID = BehaviorRelay(value: String(x.ID))
-        PATTERNID = BehaviorRelay(value: String(x.PATTERNID))
-        PATTERN = BehaviorRelay(value: x.PATTERN)
-        SEQNUM = BehaviorRelay(value: String(x.SEQNUM))
-        WEBPAGEID = BehaviorRelay(value: String(x.WEBPAGEID))
-        TITLE = BehaviorRelay(value: x.TITLE)
-        URL = BehaviorRelay(value: x.URL)
+        ID = String(x.ID)
+        PATTERNID = String(x.PATTERNID)
+        PATTERN = x.PATTERN
+        SEQNUM = String(x.SEQNUM)
+        WEBPAGEID = String(x.WEBPAGEID)
+        TITLE = x.TITLE
+        URL = x.URL
     }
     
     func save(to x: MPatternWebPage) {
-        x.SEQNUM = Int(SEQNUM.value)!
-        x.WEBPAGEID = Int(WEBPAGEID.value)!
-        x.TITLE = TITLE.value
-        x.URL = URL.value
+        x.SEQNUM = Int(SEQNUM)!
+        x.WEBPAGEID = Int(WEBPAGEID)!
+        x.TITLE = TITLE
+        x.URL = URL
     }
 }

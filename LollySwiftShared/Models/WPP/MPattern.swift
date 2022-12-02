@@ -74,30 +74,30 @@ class MPattern: NSObject, Codable {
     }
 }
 
-class MPatternEdit {
-    let ID: BehaviorRelay<String>
-    let PATTERN: BehaviorRelay<String>
-    let NOTE: BehaviorRelay<String>
-    let TAGS: BehaviorRelay<String>
+class MPatternEdit: ObservableObject {
+    @Published let ID: String
+    @Published let PATTERN: String
+    @Published let NOTE: String
+    @Published let TAGS: String
     
     init() {
-        ID = BehaviorRelay(value: "")
-        PATTERN = BehaviorRelay(value: "")
-        NOTE = BehaviorRelay(value: "")
-        TAGS = BehaviorRelay(value: "")
+        ID = ""
+        PATTERN = ""
+        NOTE = ""
+        TAGS = ""
     }
 
     init(x: MPattern) {
-        ID = BehaviorRelay(value: String(x.ID))
-        PATTERN = BehaviorRelay(value: x.PATTERN)
-        NOTE = BehaviorRelay(value: x.NOTE)
-        TAGS = BehaviorRelay(value: x.TAGS)
+        ID = String(x.ID)
+        PATTERN = x.PATTERN
+        NOTE = x.NOTE
+        TAGS = x.TAGS
     }
     
     func save(to x: MPattern) {
-        x.PATTERN = PATTERN.value
-        x.NOTE = NOTE.value
-        x.TAGS = TAGS.value
+        x.PATTERN = PATTERN
+        x.NOTE = NOTE
+        x.TAGS = TAGS
     }
 }
 

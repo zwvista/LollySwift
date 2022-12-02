@@ -132,45 +132,45 @@ class MUnitWord: NSObject, Codable, MWordProtocol {
     }
 }
 
-class MUnitWordEdit {
-    let ID: BehaviorRelay<String>
-    let TEXTBOOKNAME: BehaviorRelay<String>
-    let UNITSTR: BehaviorRelay<String>
-    let indexUNIT: BehaviorRelay<Int>
-    let PARTSTR: BehaviorRelay<String>
-    let indexPART: BehaviorRelay<Int>
-    let SEQNUM: BehaviorRelay<String>
-    let WORDID: BehaviorRelay<String>
-    let WORD: BehaviorRelay<String>
-    let NOTE: BehaviorRelay<String>
-    let FAMIID: BehaviorRelay<String>
-    let ACCURACY: BehaviorRelay<String>
-    let WORDS = BehaviorRelay(value: "")
+class MUnitWordEdit: ObservableObject {
+    @Published let ID: String
+    @Published let TEXTBOOKNAME: String
+    @Published let UNITSTR: String
+    @Published let indexUNIT: Int
+    @Published let PARTSTR: String
+    @Published let indexPART: Int
+    @Published let SEQNUM: String
+    @Published let WORDID: String
+    @Published let WORD: String
+    @Published let NOTE: String
+    @Published let FAMIID: String
+    @Published let ACCURACY: String
+    @Published let WORDS = ""
 
     init(x: MUnitWord) {
-        ID = BehaviorRelay(value: String(x.ID))
-        TEXTBOOKNAME = BehaviorRelay(value: x.TEXTBOOKNAME)
-        UNITSTR = BehaviorRelay(value: x.UNITSTR)
-        indexUNIT = BehaviorRelay(value: x.textbook.arrUnits.firstIndex { $0.value == x.UNIT } ?? -1)
-        PARTSTR = BehaviorRelay(value: x.PARTSTR)
-        indexPART = BehaviorRelay(value: x.textbook.arrParts.firstIndex { $0.value == x.PART } ?? -1)
-        SEQNUM = BehaviorRelay(value: String(x.SEQNUM))
-        WORDID = BehaviorRelay(value: String(x.WORDID))
-        WORD = BehaviorRelay(value: x.WORD)
-        NOTE = BehaviorRelay(value: x.NOTE)
-        FAMIID = BehaviorRelay(value: String(x.FAMIID))
-        ACCURACY = BehaviorRelay(value: x.ACCURACY)
+        ID = String(x.ID)
+        TEXTBOOKNAME = x.TEXTBOOKNAME
+        UNITSTR = x.UNITSTR
+        indexUNIT = x.textbook.arrUnits.firstIndex { $0.value == x.UNIT } ?? -1
+        PARTSTR = x.PARTSTR)
+        indexPART = x.textbook.arrParts.firstIndex { $0.value == x.PART } ?? -1
+        SEQNUM = String(x.SEQNUM)
+        WORDID = String(x.WORDID)
+        WORD = x.WORD
+        NOTE = x.NOTE
+        FAMIID = String(x.FAMIID)
+        ACCURACY = x.ACCURACY
     }
     
     func save(to x: MUnitWord) {
         if indexUNIT.value != -1 {
-            x.UNIT = x.textbook.arrUnits[indexUNIT.value].value
+            x.UNIT = x.textbook.arrUnits[indexUNIT]
         }
         if indexPART.value != -1 {
-            x.PART = x.textbook.arrUnits[indexPART.value].value
+            x.PART = x.textbook.arrUnits[indexPART]
         }
-        x.SEQNUM = Int(SEQNUM.value)!
-        x.WORD = WORD.value
-        x.NOTE = NOTE.value
+        x.SEQNUM = Int(SEQNUM)!
+        x.WORD = WORD
+        x.NOTE = NOTE
     }
 }
