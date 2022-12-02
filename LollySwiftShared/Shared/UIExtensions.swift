@@ -11,7 +11,7 @@ import WebKit
 import DropDown
 
 extension UIViewController {
-    func yesNoAction(title: String?, message: String?, yesHandler: @escaping (UIAlertAction) -> (), noHandler: @escaping (UIAlertAction) -> ()) {
+    func yesNoAction(title: String?, message: String?, yesHandler: @escaping (UIAlertAction) -> Void, noHandler: @escaping (UIAlertAction) -> Void) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let noAction = UIAlertAction(title: "No", style: .cancel, handler: noHandler)
         alertController.addAction(noAction)

@@ -68,7 +68,7 @@ class PatternsWebPagesViewModel: NSObject {
         return item
     }
 
-    func reindexWebPage(complete: @escaping (Int) -> ()) {
+    func reindexWebPage(complete: @escaping (Int) -> Void) {
         for i in 1...arrWebPages.count {
             let item = arrWebPages[i - 1]
             guard item.SEQNUM != i else {continue}

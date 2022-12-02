@@ -15,7 +15,7 @@ class WebTextbooksViewModel: NSObject {
     var arrWebTextbooks = [MWebTextbook]()
     var arrWebTextbooksFiltered: [MWebTextbook]?
 
-    init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> ()) {
+    init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> Void) {
         self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
         super.init()
         MWebTextbook.getDataByLang(settings.selectedLang.ID).subscribe(onSuccess: {

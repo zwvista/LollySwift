@@ -160,7 +160,10 @@ class SettingsViewModel: NSObject {
     var selectedPartTo: Int { arrParts.indices ~= selectedPartToIndex ? arrParts[selectedPartToIndex].value : 0 }
 
     var toType_ = BehaviorRelay(value: UnitPartToType.to.rawValue)
-    var toType: UnitPartToType { get { UnitPartToType(rawValue: toType_.value)! } set { toType_.accept(newValue.rawValue) } }
+    var toType: UnitPartToType {
+        get { UnitPartToType(rawValue: toType_.value)! }
+        set { toType_.accept(newValue.rawValue) }
+    }
 
     var toTypeMovable: Bool { toType == .to }
     var toTypeTitle = BehaviorRelay(value: "")

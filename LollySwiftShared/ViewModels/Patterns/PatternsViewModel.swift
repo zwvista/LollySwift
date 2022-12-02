@@ -22,7 +22,7 @@ class PatternsViewModel: NSObject {
     let textFilter = BehaviorRelay(value: "")
     let scopeFilter = BehaviorRelay(value: SettingsViewModel.arrScopePatternFilters[0])
 
-    public init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> ()) {
+    public init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> Void) {
         self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
         super.init()
         reload().subscribe(onSuccess: { complete() }) ~ rx.disposeBag

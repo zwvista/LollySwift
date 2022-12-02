@@ -15,7 +15,7 @@ class TextbooksViewModel: NSObject {
     var vmSettings: SettingsViewModel
     var arrTextbooks = [MTextbook]()
     
-    init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> ()) {
+    init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> Void) {
         self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
         super.init()
         MTextbook.getDataByLang(settings.selectedLang.ID, arrUserSettings: settings.arrUserSettings).subscribe(onSuccess: {

@@ -15,7 +15,7 @@ class WordsLangViewModel: WordsBaseViewModel {
     var arrWords = [MLangWord]()
     var arrWordsFiltered: [MLangWord]?
 
-    public init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> ()) {
+    public init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> Void) {
         super.init(settings: settings, needCopy: needCopy)
         reload().subscribe(onSuccess: { complete() }) ~ rx.disposeBag
     }

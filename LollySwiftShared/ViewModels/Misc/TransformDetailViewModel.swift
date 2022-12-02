@@ -35,7 +35,7 @@ class TransformDetailViewModel: NSObject {
         return item
     }
 
-    func reindex(complete: @escaping (Int) -> ()) {
+    func reindex(complete: @escaping (Int) -> Void) {
         for i in 1...arrTranformItems.count {
             let item = arrTranformItems[i - 1]
             guard item.index != i else {continue}

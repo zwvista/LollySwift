@@ -15,7 +15,7 @@ class DictsViewModel: NSObject {
     var vmSettings: SettingsViewModel
     var arrDicts = [MDictionary]()
     
-    init(settings: SettingsViewModel, complete: @escaping () -> ()) {
+    init(settings: SettingsViewModel, complete: @escaping () -> Void) {
         vmSettings = settings
         super.init()
         MDictionary.getDictsByLang(settings.selectedLang.ID).subscribe(onSuccess: {
