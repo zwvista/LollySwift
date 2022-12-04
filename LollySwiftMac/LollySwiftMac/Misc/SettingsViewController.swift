@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import Combine
 
 @objcMembers
 class SettingsViewController: NSViewController, SettingsViewModelDelegate, NSTableViewDataSource, NSTableViewDelegate {
@@ -38,28 +39,29 @@ class SettingsViewController: NSViewController, SettingsViewModelDelegate, NSTab
     @IBOutlet weak var btnApplyNone: NSButton!
 
     var vm: SettingsViewModel { AppDelegate.theSettingsViewModel }
+    var subscriptions = Set<AnyCancellable>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         vm.delegate = self
 
-        _ = vm.selectedLangIndex_ <~> pubLanguages.rx.selectedItemIndex
-        _ = vm.selectedMacVoiceIndex_ <~> pubVoices.rx.selectedItemIndex
-        _ = vm.selectedDictNoteIndex_ <~> pubDictsNote.rx.selectedItemIndex
-        _ = vm.selectedDictTranslationIndex_ <~> pubDictsTranslation.rx.selectedItemIndex
-        _ = vm.selectedTextbookIndex_ <~> pubTextbooks.rx.selectedItemIndex
-        _ = vm.selectedUnitFromIndex_ <~> pubUnitFrom.rx.selectedItemIndex
-        _ = vm.selectedPartFromIndex_ <~> pubPartFrom.rx.selectedItemIndex
-        _ = vm.selectedUnitToIndex_ <~> pubUnitTo.rx.selectedItemIndex
-        _ = vm.selectedPartToIndex_ <~> pubPartTo.rx.selectedItemIndex
-        _ = vm.toType_ <~> scToType.rx.selectedSegment
-        _ = vm.unitToEnabled ~> pubUnitTo.rx.isEnabled
-        _ = vm.partToEnabled ~> pubPartTo.rx.isEnabled
-        _ = vm.previousEnabled ~> btnPrevious.rx.isEnabled
-        _ = vm.nextEnabled ~> btnNext.rx.isEnabled
-        _ = vm.previousTitle ~> btnPrevious.rx.title
-        _ = vm.nextTitle ~> btnNext.rx.title
-        _ = vm.partFromEnabled ~> pubPartFrom.rx.isEnabled
+        vm.$selectedLangIndex <~> pubLanguages.selectedItemIndexProperty ~ subscriptions
+        vm.$selectedMacVoiceIndex <~> pubVoices.selectedItemIndexProperty ~ subscriptions
+        vm.$selectedDictNoteIndex <~> pubDictsNote.selectedItemIndexProperty ~ subscriptions
+        vm.$selectedDictTranslationIndex <~> pubDictsTranslation.selectedItemIndexProperty ~ subscriptions
+        vm.$selectedTextbookIndex <~> pubTextbooks.selectedItemIndexProperty ~ subscriptions
+        vm.$selectedUnitFromIndex <~> pubUnitFrom.selectedItemIndexProperty ~ subscriptions
+        vm.$selectedPartFromIndex <~> pubPartFrom.selectedItemIndexProperty ~ subscriptions
+        vm.$selectedUnitToIndex <~> pubUnitTo.selectedItemIndexProperty ~ subscriptions
+        vm.$selectedPartToIndex <~> pubPartTo.selectedItemIndexProperty ~ subscriptions
+        vm.$toType_ <~> scToType.selectedSegmentProperty ~ subscriptions
+        vm.$unitToEnabled ~> (pubUnitTo, \.isEnabled) ~ subscriptions
+        vm.$partToEnabled ~> (pubPartTo, \.isEnabled) ~ subscriptions
+        vm.$previousEnabled ~> (btnPrevious, \.isEnabled) ~ subscriptions
+        vm.$nextEnabled ~> (btnNext, \.isEnabled) ~ subscriptions
+        vm.$previousTitle ~> (btnPrevious, \.title) ~ subscriptions
+        vm.$nextTitle ~> (btnNext, \.title) ~ subscriptions
+        vm.$partFromEnabled ~> (pubPartFrom, \.isEnabled) ~ subscriptions
 
         vm.getData().subscribe() ~ rx.disposeBag
     }
