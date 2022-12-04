@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import Combine
 
 @objcMembers
 class WebPageSelectViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
@@ -15,6 +16,7 @@ class WebPageSelectViewController: NSViewController, NSTableViewDataSource, NSTa
     var vmWebPage: WebPageSelectViewModel!
     var complete: (() -> Void)?
     var arrWebPages: [MWebPage] { vmWebPage.arrWebPages }
+    var subscriptions = Set<AnyCancellable>()
 
     @IBOutlet weak var tfTitle: NSTextField!
     @IBOutlet weak var tfURL: NSTextField!
@@ -29,8 +31,8 @@ class WebPageSelectViewController: NSViewController, NSTableViewDataSource, NSTa
         vmWebPage = WebPageSelectViewModel(settings: vm.vmSettings) {
             self.tvWebPages.reloadData()
         }
-        _ = vmWebPage.title <~> tfTitle.rx.text.orEmpty
-        _ = vmWebPage.url <~> tfURL.rx.text.orEmpty
+        vmWebPage.$title <~> tfTitle.textProperty ~ subscriptions
+        vmWebPage.$url <~> tfURL.textProperty ~ subscriptions
     }
     
     override func viewDidAppear() {

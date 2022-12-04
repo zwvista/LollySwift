@@ -17,6 +17,7 @@ class PatternsDetailViewController: NSViewController {
     var itemEdit: MPatternEdit { vmEdit.itemEdit }
     var complete: (() -> Void)?
     var item: MPattern!
+    var subscriptions = Set<AnyCancellable>()
 
     @IBOutlet weak var tfID: NSTextField!
     @IBOutlet weak var tfPattern: NSTextField!
@@ -24,8 +25,6 @@ class PatternsDetailViewController: NSViewController {
     @IBOutlet weak var tfTags: NSTextField!
     @IBOutlet weak var btnOK: NSButton!
     
-    var subscriptions = Set<AnyCancellable>()
-
     override func viewDidLoad() {
         super.viewDidLoad()
         vmEdit = PatternsDetailViewModel(vm: vm, item: item)

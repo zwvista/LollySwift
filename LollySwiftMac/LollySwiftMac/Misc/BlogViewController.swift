@@ -11,12 +11,12 @@ import WebKit
 
 class BlogViewController: NSViewController, NSMenuItemValidation  {
 
-    var vm: SettingsViewModel { AppDelegate.theSettingsViewModel }
     @IBOutlet weak var tvMarked: NSTextView!
     @IBOutlet weak var tvHtml: NSTextView!
     @IBOutlet weak var wvBlog: WKWebView!
     @IBOutlet weak var tfStatusText: NSTextField!
 
+    var vm: SettingsViewModel { AppDelegate.theSettingsViewModel }
     var wc: BlogWindowController { view.window!.windowController as! BlogWindowController }
     var vmBlog: BlogViewModel!
 
@@ -25,13 +25,15 @@ class BlogViewController: NSViewController, NSMenuItemValidation  {
         vmBlog = BlogViewModel(settings: vm)
         tvMarked.font = NSFont.systemFont(ofSize: 15)
         updateStatusText()
-        vm.getBlogContent().subscribe(onSuccess: {
-            self.tvMarked.string = $0
-        }) ~ rx.disposeBag
+        Task {
+            tvMarked.string = await vm.getBlogContent()
+        }
     }
 
     @IBAction func saveMarked(_ sender: AnyObject) {
-        vm.saveBlogContent(content: tvMarked.string).subscribe() ~ rx.disposeBag
+        Task {
+            await vm.saveBlogContent(content: tvMarked.string)
+        }
     }
 
     @IBAction func htmlToMarked(_ sender: AnyObject) {
@@ -89,8 +91,10 @@ class BlogViewController: NSViewController, NSMenuItemValidation  {
         MacApi.copyText(text)
     }
     @IBAction func addNotes(_ sender: AnyObject) {
-        vmBlog.addNotes(text: tvMarked.string) {
-            self.tvMarked.string = $0
+        Task {
+            await vmBlog.addNotes(text: tvMarked.string) {
+                self.tvMarked.string = $0
+            }
         }
     }
     func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {

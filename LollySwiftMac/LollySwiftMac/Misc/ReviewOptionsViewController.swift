@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import Combine
 
 class ReviewOptionsViewController: NSViewController {
 
@@ -33,19 +34,19 @@ class ReviewOptionsViewController: NSViewController {
         super.viewDidLoad()
         vm = ReviewOptionsViewModel(options: options)
         
-        _ = vm.optionsEdit.mode <~> pubMode.rx.selectedItemIndex
-        _ = vm.optionsEdit.shuffled <~> scOrder.rx.isOn
-        _ = vm.optionsEdit.onRepeat <~> scOnRepeat.rx.isOn
-        _ = vm.optionsEdit.moveForward <~> scMoveForward.rx.isOn
-        _ = vm.optionsEdit.interval <~> stpInterval.rx.integerValue
-        _ = vm.optionsEdit.interval.map { String($0) } ~> tfInterval.rx.text.orEmpty
-        _ = vm.optionsEdit.groupSelected <~> stpGroupSelected.rx.integerValue
-        _ = vm.optionsEdit.groupSelected.map { String($0) } ~> tfGroupSelected.rx.text.orEmpty
-        _ = vm.optionsEdit.groupCount <~> stpGroupCount.rx.integerValue
-        _ = vm.optionsEdit.groupCount.map { String($0) } ~> tfGroupCount.rx.text.orEmpty
-        _ = vm.optionsEdit.speakingEnabled <~> scSpeak.rx.isOn
-        _ = vm.optionsEdit.reviewCount <~> stpReviewCount.rx.integerValue
-        _ = vm.optionsEdit.reviewCount.map { String($0) } ~> tfReviewCount.rx.text.orEmpty
+        vm.optionsEdit.$mode <~> pubMode.rx.selectedItemIndex
+        vm.optionsEdit.$shuffled <~> scOrder.rx.isOn
+        vm.optionsEdit.$onRepeat <~> scOnRepeat.rx.isOn
+        vm.optionsEdit.$moveForward <~> scMoveForward.rx.isOn
+        vm.optionsEdit.$interval <~> stpInterval.rx.integerValue
+        vm.optionsEdit.$interval.map { String($0) } ~> tfInterval.rx.text.orEmpty
+        vm.optionsEdit.$groupSelected <~> stpGroupSelected.rx.integerValue
+        vm.optionsEdit.$groupSelected.map { String($0) } ~> tfGroupSelected.rx.text.orEmpty
+        vm.optionsEdit.$groupCount <~> stpGroupCount.rx.integerValue
+        vm.optionsEdit.$groupCount.map { String($0) } ~> tfGroupCount.rx.text.orEmpty
+        vm.optionsEdit.$speakingEnabled <~> scSpeak.rx.isOn
+        vm.optionsEdit.$reviewCount <~> stpReviewCount.rx.integerValue
+        vm.optionsEdit.$reviewCount.map { String($0) } ~> (tfReviewCount, \.stringValue)
         btnOK.rx.tap.subscribe { [unowned self] _ in
             self.vm.onOK()
             self.complete?()

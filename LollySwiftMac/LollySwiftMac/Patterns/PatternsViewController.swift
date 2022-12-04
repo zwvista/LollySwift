@@ -8,6 +8,7 @@
 
 import Cocoa
 import WebKit
+import Combine
 
 class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate, NSMenuItemValidation, NSToolbarItemValidation {
 

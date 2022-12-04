@@ -7,23 +7,26 @@
 //
 
 import Cocoa
+import Combine
 
 class LoginViewController: NSViewController {
 
-    let vm = LoginViewModel()
-
     @IBOutlet weak var tfUsername: NSTextField!
     @IBOutlet weak var tfPassword: NSSecureTextField!
+
+    let vm = LoginViewModel()
+    var subscriptions = Set<AnyCancellable>()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        _ = vm.username <~> tfUsername.rx.text.orEmpty
-        _ = vm.password <~> tfPassword.rx.text.orEmpty
+        vm.$username <~> tfUsername.textProperty ~ subscriptions
+        vm.$password <~> tfPassword.textProperty ~ subscriptions
     }
 
     @IBAction func login(_ sender: Any) {
-        vm.login(username: vm.username.value, password: vm.password.value).subscribe(onSuccess: {
-            globalUser.userid = $0
+        Task {
+            globalUser.userid = await vm.login(username: vm.username, password: vm.password)
             if globalUser.userid.isEmpty {
                 let alert = NSAlert()
                 alert.alertStyle = .critical
@@ -36,7 +39,7 @@ class LoginViewController: NSViewController {
                 NSApplication.shared.stopModal(withCode: .OK)
                 self.view.window?.close()
             }
-        }) ~ rx.disposeBag
+        }
     }
 
     @IBAction func exit(_ sender: Any) {

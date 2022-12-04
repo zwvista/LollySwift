@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import Combine
 
 @objcMembers
 class PatternsWebPagesDetailViewController: NSViewController {

@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import Combine
 
 class PatternsMergeViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 
@@ -18,6 +19,7 @@ class PatternsMergeViewController: NSViewController, NSTableViewDataSource, NSTa
 
     var vm: PatternsMergeViewModel!
     var itemEdit: MPatternEdit { vm.itemEdit }
+    var subscriptions = Set<AnyCancellable>()
 
     // https://developer.apple.com/videos/play/wwdc2011/120/
     // https://stackoverflow.com/questions/2121907/drag-drop-reorder-rows-on-nstableview
@@ -26,9 +28,9 @@ class PatternsMergeViewController: NSViewController, NSTableViewDataSource, NSTa
     override func viewDidLoad() {
         super.viewDidLoad()
         tvPatternVariations.registerForDraggedTypes([tableRowDragType])
-        _ = itemEdit.PATTERN ~> tfPattern.rx.text.orEmpty
-        _ = itemEdit.NOTE ~> tfNote.rx.text.orEmpty
-        _ = itemEdit.TAGS ~> tfTags.rx.text.orEmpty
+        itemEdit.$PATTERN ~> (tfPattern, \.stringValue) ~ subscriptions
+        itemEdit.$NOTE ~> (tfNote, \.stringValue) ~ subscriptions
+        itemEdit.$TAGS ~> (tfTags, \.stringValue) ~ subscriptions
     }
 
     func numberOfRows(in tableView: NSTableView) -> Int {

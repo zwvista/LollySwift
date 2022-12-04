@@ -18,7 +18,6 @@ class PatternsSplitViewController: NSViewController {
 
     var vm: PatternsSplitViewModel!
     var itemEdit: MPatternEdit { vm.itemEdit }
-
     var subscriptions = Set<AnyCancellable>()
 
     // https://developer.apple.com/videos/play/wwdc2011/120/
