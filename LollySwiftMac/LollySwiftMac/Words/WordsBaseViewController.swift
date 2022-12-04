@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import Combine
 
 class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, LollyProtocol {
     

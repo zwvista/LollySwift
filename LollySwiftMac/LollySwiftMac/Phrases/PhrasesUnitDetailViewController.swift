@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import Combine
 
 class PhrasesUnitDetailViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 

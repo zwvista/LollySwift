@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import Combine
 
 class TextbooksViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate {
     

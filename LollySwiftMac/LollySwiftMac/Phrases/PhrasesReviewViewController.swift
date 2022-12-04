@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import Combine
 
 class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldDelegate {
     @objc dynamic var vm: PhrasesReviewViewModel!

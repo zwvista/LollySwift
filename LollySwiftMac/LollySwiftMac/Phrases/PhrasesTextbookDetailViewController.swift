@@ -7,14 +7,9 @@
 //
 
 import Cocoa
+import Combine
 
 class PhrasesTextbookDetailViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
-
-    var complete: (() -> Void)?
-    var vmEdit: PhrasesUnitDetailViewModel!
-    var item: MUnitPhrase { vmEdit.item }
-    var itemEdit: MUnitPhraseEdit { vmEdit.itemEdit }
-    var arrPhrases: [MUnitPhrase] { vmEdit.vmSingle.arrPhrases }
 
     @IBOutlet weak var acUnits: NSArrayController!
     @IBOutlet weak var acParts: NSArrayController!
@@ -28,7 +23,14 @@ class PhrasesTextbookDetailViewController: NSViewController, NSTableViewDataSour
     @IBOutlet weak var tfTranslation: NSTextField!
     @IBOutlet weak var tableView: NSTableView!
     @IBOutlet weak var btnOK: NSButton!
-    
+
+    var complete: (() -> Void)?
+    var vmEdit: PhrasesUnitDetailViewModel!
+    var item: MUnitPhrase { vmEdit.item }
+    var itemEdit: MUnitPhraseEdit { vmEdit.itemEdit }
+    var arrPhrases: [MUnitPhrase] { vmEdit.vmSingle.arrPhrases }
+    var subscriptions = Set<AnyCancellable>()
+
     func startEdit(vm: PhrasesUnitViewModel, item: MUnitPhrase) {
         vmEdit = PhrasesUnitDetailViewModel(vm: vm, item: item, wordid: 0) {
             self.tableView.reloadData()
@@ -39,21 +41,22 @@ class PhrasesTextbookDetailViewController: NSViewController, NSTableViewDataSour
         super.viewDidLoad()
         acUnits.content = item.textbook.arrUnits
         acParts.content = item.textbook.arrParts
-        _ = itemEdit.ID ~> tfID.rx.text.orEmpty
-        _ = itemEdit.TEXTBOOKNAME ~> tfTextbookName.rx.text.orEmpty
-        _ = itemEdit.indexUNIT <~> pubUnit.rx.selectedItemIndex
-        _ = itemEdit.indexPART <~> pubPart.rx.selectedItemIndex
-        _ = itemEdit.SEQNUM <~> tfSeqNum.rx.text.orEmpty
-        _ = itemEdit.PHRASEID ~> tfPhraseID.rx.text.orEmpty
-        _ = itemEdit.PHRASE <~> tfPhrase.rx.text.orEmpty
-        _ = itemEdit.TRANSLATION <~> tfTranslation.rx.text.orEmpty
-        _ = vmEdit.isOKEnabled ~> btnOK.rx.isEnabled
-        btnOK.rx.tap.flatMap { [unowned self] _ in
-            self.vmEdit.onOK()
-        }.subscribe { [unowned self] _ in
-            self.complete?()
-            self.dismiss(self.btnOK)
-        } ~ rx.disposeBag
+        itemEdit.$ID ~> (tfID, \.stringValue) ~ subscriptions
+        itemEdit.$TEXTBOOKNAME ~> (tfTextbookName, \.stringValue) ~ subscriptions
+        itemEdit.$indexUNIT <~> pubUnit.selectedItemIndexProperty ~ subscriptions
+        itemEdit.$indexPART <~> pubPart.selectedItemIndexProperty ~ subscriptions
+        itemEdit.$SEQNUM <~> tfSeqNum.textProperty ~ subscriptions
+        itemEdit.$PHRASEID ~> (tfPhraseID, \.stringValue) ~ subscriptions
+        itemEdit.$PHRASE <~> tfPhrase.textProperty ~ subscriptions
+        itemEdit.$TRANSLATION <~> tfTranslation.textProperty ~ subscriptions
+        vmEdit.$isOKEnabled ~> (btnOK, \.isEnabled) ~ subscriptions
+        btnOK.tapPublisher.sink {
+            Task {
+                await self.vmEdit.onOK()
+                self.complete?()
+                self.dismiss(self.btnOK)
+            }
+        } ~ subscriptions
     }
     
     override func viewDidAppear() {

@@ -13,7 +13,6 @@ class PhrasesBaseViewController: WordsPhrasesBaseViewController {
     
     var vmWordsLang: WordsLangViewModel!
     override var vmWords: WordsBaseViewModel { vmWordsLang }
-
     var subscriptions = Set<AnyCancellable>()
 
     override func viewDidLoad() {

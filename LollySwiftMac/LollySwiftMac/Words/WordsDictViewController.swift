@@ -8,6 +8,7 @@
 
 import Cocoa
 import WebKit
+import Combine
 
 class WordsDictViewController: NSViewController, WKNavigationDelegate {
 

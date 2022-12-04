@@ -8,6 +8,7 @@
 
 import Cocoa
 import WebKit
+import Combine
 
 class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation {
 

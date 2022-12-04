@@ -7,15 +7,9 @@
 //
 
 import Cocoa
+import Combine
 
 class PhrasesLangDetailViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
-
-    var vm: PhrasesLangViewModel!
-    var complete: (() -> Void)?
-    var item: MLangPhrase!
-    var vmEdit: PhrasesLangDetailViewModel!
-    var itemEdit: MLangPhraseEdit { vmEdit.itemEdit }
-    var arrPhrases: [MUnitPhrase] { vmEdit.vmSingle?.arrPhrases ?? [MUnitPhrase]() }
 
     @IBOutlet weak var tfID: NSTextField!
     @IBOutlet weak var tfPhrase: NSTextField!
@@ -23,21 +17,30 @@ class PhrasesLangDetailViewController: NSViewController, NSTableViewDataSource, 
     @IBOutlet weak var tableView: NSTableView!
     @IBOutlet weak var btnOK: NSButton!
 
+    var vm: PhrasesLangViewModel!
+    var complete: (() -> Void)?
+    var item: MLangPhrase!
+    var vmEdit: PhrasesLangDetailViewModel!
+    var itemEdit: MLangPhraseEdit { vmEdit.itemEdit }
+    var arrPhrases: [MUnitPhrase] { vmEdit.vmSingle?.arrPhrases ?? [MUnitPhrase]() }
+    var subscriptions = Set<AnyCancellable>()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         vmEdit = PhrasesLangDetailViewModel(vm: vm, item: item) {
             self.tableView.reloadData()
         }
-        itemEdit.$ID ~> tfID
-        itemEdit.$PHRASE <~> tfPhrase
-        itemEdit.$TRANSLATION <~> tfTranslation
-        vmEdit.isOKEnabled ~> btnOK.rx.isEnabled
-        btnOK.rx.tap.flatMap { [unowned self] _ in
-            self.vmEdit.onOK()
-        }.subscribe{ [unowned self] _ in
-            self.complete?()
-            self.dismiss(self.btnOK)
-        } ~ rx.disposeBag
+        itemEdit.$ID ~> (tfID, \.stringValue) ~ subscriptions
+        itemEdit.$PHRASE <~> tfPhrase.textProperty ~ subscriptions
+        itemEdit.$TRANSLATION <~> tfTranslation.textProperty ~ subscriptions
+        vmEdit.$isOKEnabled ~> (btnOK, \.isEnabled) ~ subscriptions
+        btnOK.tapPublisher.sink {
+            Task {
+                await self.vmEdit.onOK()
+                self.complete?()
+                self.dismiss(self.btnOK)
+            }
+        } ~ subscriptions
     }
     
     override func viewDidAppear() {

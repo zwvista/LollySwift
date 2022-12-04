@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import Combine
 
 class WordsAssociateViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate {
 
