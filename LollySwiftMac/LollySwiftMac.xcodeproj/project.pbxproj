@@ -28,14 +28,14 @@
 		8C486DF41EBB88240023FBFC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C486DF31EBB88240023FBFC /* Cocoa.framework */; };
 		8C486DF61EBB882B0023FBFC /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C486DF51EBB882B0023FBFC /* WebKit.framework */; };
 		8CAF910A20833C4F00933837 /* WordsSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAF910920833C4F00933837 /* WordsSearchViewModel.swift */; };
-		8CBB5B802939EE7D00B8AEE0 /* StoreIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBB5B7B2939EE7D00B8AEE0 /* StoreIn.swift */; };
-		8CBB5B812939EE7D00B8AEE0 /* StoreIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBB5B7B2939EE7D00B8AEE0 /* StoreIn.swift */; };
-		8CBB5B862939EE7D00B8AEE0 /* NSTextField+Bind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBB5B7E2939EE7D00B8AEE0 /* NSTextField+Bind.swift */; };
-		8CBB5B872939EE7D00B8AEE0 /* NSTextField+Bind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBB5B7E2939EE7D00B8AEE0 /* NSTextField+Bind.swift */; };
-		8CBB5B882939EE7D00B8AEE0 /* NSTextField+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBB5B7F2939EE7D00B8AEE0 /* NSTextField+Combine.swift */; };
-		8CBB5B892939EE7D00B8AEE0 /* NSTextField+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBB5B7F2939EE7D00B8AEE0 /* NSTextField+Combine.swift */; };
-		8CBB5B8B293A453500B8AEE0 /* Publisher+Bind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBB5B8A293A453500B8AEE0 /* Publisher+Bind.swift */; };
-		8CBB5B8C293A453500B8AEE0 /* Publisher+Bind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBB5B8A293A453500B8AEE0 /* Publisher+Bind.swift */; };
+		8CBB5BCF293C9BE100B8AEE0 /* NSSegmentedControl+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBB5BC7293C9BE100B8AEE0 /* NSSegmentedControl+Combine.swift */; };
+		8CBB5BD0293C9BE100B8AEE0 /* CombineControlProperty2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBB5BC8293C9BE100B8AEE0 /* CombineControlProperty2.swift */; };
+		8CBB5BD1293C9BE100B8AEE0 /* CombineControlTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBB5BC9293C9BE100B8AEE0 /* CombineControlTarget.swift */; };
+		8CBB5BD2293C9BE100B8AEE0 /* StoreIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBB5BCA293C9BE100B8AEE0 /* StoreIn.swift */; };
+		8CBB5BD3293C9BE100B8AEE0 /* NSButton+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBB5BCB293C9BE100B8AEE0 /* NSButton+Combine.swift */; };
+		8CBB5BD4293C9BE100B8AEE0 /* NSControl+Bind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBB5BCC293C9BE100B8AEE0 /* NSControl+Bind.swift */; };
+		8CBB5BD5293C9BE100B8AEE0 /* NSTextField+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBB5BCD293C9BE100B8AEE0 /* NSTextField+Combine.swift */; };
+		8CBB5BD6293C9BE100B8AEE0 /* CombineControlProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBB5BCE293C9BE100B8AEE0 /* CombineControlProperty.swift */; };
 		8CD4F03D293301F4003AEC61 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 8CD4F03C293301F4003AEC61 /* Alamofire */; };
 		8CD8409D20AFD4DA00442133 /* PhrasesUnitDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8409A20AFD4D900442133 /* PhrasesUnitDetailViewController.swift */; };
 		8CD8409E20AFD4DA00442133 /* PhrasesUnitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8409B20AFD4D900442133 /* PhrasesUnitViewController.swift */; };
@@ -219,10 +219,14 @@
 		8C486DF51EBB882B0023FBFC /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		8C6E2EDC1EBB97CF00AC114F /* LollySwiftMac-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LollySwiftMac-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		8CAF910920833C4F00933837 /* WordsSearchViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsSearchViewModel.swift; sourceTree = "<group>"; };
-		8CBB5B7B2939EE7D00B8AEE0 /* StoreIn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreIn.swift; sourceTree = "<group>"; };
-		8CBB5B7E2939EE7D00B8AEE0 /* NSTextField+Bind.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSTextField+Bind.swift"; sourceTree = "<group>"; };
-		8CBB5B7F2939EE7D00B8AEE0 /* NSTextField+Combine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSTextField+Combine.swift"; sourceTree = "<group>"; };
-		8CBB5B8A293A453500B8AEE0 /* Publisher+Bind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+Bind.swift"; sourceTree = "<group>"; };
+		8CBB5BC7293C9BE100B8AEE0 /* NSSegmentedControl+Combine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSSegmentedControl+Combine.swift"; sourceTree = "<group>"; };
+		8CBB5BC8293C9BE100B8AEE0 /* CombineControlProperty2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CombineControlProperty2.swift; sourceTree = "<group>"; };
+		8CBB5BC9293C9BE100B8AEE0 /* CombineControlTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CombineControlTarget.swift; sourceTree = "<group>"; };
+		8CBB5BCA293C9BE100B8AEE0 /* StoreIn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreIn.swift; sourceTree = "<group>"; };
+		8CBB5BCB293C9BE100B8AEE0 /* NSButton+Combine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSButton+Combine.swift"; sourceTree = "<group>"; };
+		8CBB5BCC293C9BE100B8AEE0 /* NSControl+Bind.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSControl+Bind.swift"; sourceTree = "<group>"; };
+		8CBB5BCD293C9BE100B8AEE0 /* NSTextField+Combine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSTextField+Combine.swift"; sourceTree = "<group>"; };
+		8CBB5BCE293C9BE100B8AEE0 /* CombineControlProperty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CombineControlProperty.swift; sourceTree = "<group>"; };
 		8CD8409A20AFD4D900442133 /* PhrasesUnitDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesUnitDetailViewController.swift; sourceTree = "<group>"; };
 		8CD8409B20AFD4D900442133 /* PhrasesUnitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesUnitViewController.swift; sourceTree = "<group>"; };
 		8CD8409C20AFD4D900442133 /* Phrases.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Phrases.storyboard; sourceTree = "<group>"; };
@@ -419,6 +423,7 @@
 		8C2CB598207885140083DDE2 /* LollySwiftShared */ = {
 			isa = PBXGroup;
 			children = (
+				8CBB5BA6293A839200B8AEE0 /* CombineCommon */,
 				8C2CB5A3207885140083DDE2 /* Models */,
 				8C2CB5A0207885140083DDE2 /* Shared */,
 				8C2CB599207885140083DDE2 /* ViewModels */,
@@ -444,11 +449,7 @@
 				954B8707218DC04E007DC348 /* CommonApi.swift */,
 				957B537725A8691D00C18B06 /* DictStore.swift */,
 				95E43F2421E16D50001E650C /* MacApi.swift */,
-				8CBB5B7E2939EE7D00B8AEE0 /* NSTextField+Bind.swift */,
-				8CBB5B7F2939EE7D00B8AEE0 /* NSTextField+Combine.swift */,
-				8CBB5B8A293A453500B8AEE0 /* Publisher+Bind.swift */,
 				8C2CB5A1207885140083DDE2 /* RestApi.swift */,
-				8CBB5B7B2939EE7D00B8AEE0 /* StoreIn.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -493,6 +494,21 @@
 			);
 			name = Frameworks;
 			path = LollySwiftMac;
+			sourceTree = "<group>";
+		};
+		8CBB5BA6293A839200B8AEE0 /* CombineCommon */ = {
+			isa = PBXGroup;
+			children = (
+				8CBB5BCE293C9BE100B8AEE0 /* CombineControlProperty.swift */,
+				8CBB5BC8293C9BE100B8AEE0 /* CombineControlProperty2.swift */,
+				8CBB5BC9293C9BE100B8AEE0 /* CombineControlTarget.swift */,
+				8CBB5BCB293C9BE100B8AEE0 /* NSButton+Combine.swift */,
+				8CBB5BCC293C9BE100B8AEE0 /* NSControl+Bind.swift */,
+				8CBB5BC7293C9BE100B8AEE0 /* NSSegmentedControl+Combine.swift */,
+				8CBB5BCD293C9BE100B8AEE0 /* NSTextField+Combine.swift */,
+				8CBB5BCA293C9BE100B8AEE0 /* StoreIn.swift */,
+			);
+			path = CombineCommon;
 			sourceTree = "<group>";
 		};
 		8CD8409920AFD4D900442133 /* Phrases */ = {
@@ -911,7 +927,6 @@
 				8C2CB5B2207885140083DDE2 /* PhrasesUnitViewModel.swift in Sources */,
 				95406BEF255B73EE00C87A0D /* TextbooksViewController.swift in Sources */,
 				95DB142421CDEA7B00FBAF9A /* BlogViewModel.swift in Sources */,
-				8CBB5B862939EE7D00B8AEE0 /* NSTextField+Bind.swift in Sources */,
 				95837E8B24DF050100B5D2AE /* WordsUnitDetailViewModel.swift in Sources */,
 				95E6BFA624D041D300CB7380 /* TransformItemEditController.swift in Sources */,
 				95F0A8AA2293C64400D1B9A2 /* DictsViewController.swift in Sources */,
@@ -923,14 +938,17 @@
 				9593779922C4CE37009FFBD0 /* MUSMapping.swift in Sources */,
 				95AF43BD254BDAB000FD71CB /* PatternsSplitViewController.swift in Sources */,
 				958125C82190464A0001159E /* PhrasesLangDetailViewController.swift in Sources */,
-				8CBB5B802939EE7D00B8AEE0 /* StoreIn.swift in Sources */,
 				8C2CB5B3207885140083DDE2 /* WordsUnitViewModel.swift in Sources */,
 				959191E9258CFFCA0070DBFD /* MWordFami.swift in Sources */,
 				951F7F5225EE5C790051E94E /* WordsUnitBatchEditViewModel.swift in Sources */,
 				95F5400A22C1C3B700E3FD6A /* SingleWordViewModel.swift in Sources */,
 				95E43F2521E16D50001E650C /* MacApi.swift in Sources */,
+				8CBB5BD5293C9BE100B8AEE0 /* NSTextField+Combine.swift in Sources */,
+				8CBB5BD3293C9BE100B8AEE0 /* NSButton+Combine.swift in Sources */,
 				95837EA424E038EB00B5D2AE /* ReviewOptionsViewModel.swift in Sources */,
+				8CBB5BD0293C9BE100B8AEE0 /* CombineControlProperty2.swift in Sources */,
 				959191EB258CFFCA0070DBFD /* MLangPhrase.swift in Sources */,
+				8CBB5BD2293C9BE100B8AEE0 /* StoreIn.swift in Sources */,
 				95837E7824DEAD1300B5D2AE /* WordsLangDetailViewModel.swift in Sources */,
 				9534728E22BB68EE00517D71 /* AppDelegate.swift in Sources */,
 				8C2CB5BE207885140083DDE2 /* MLanguage.swift in Sources */,
@@ -947,7 +965,6 @@
 				95124F8724C48689008FE242 /* WebPageSelectViewController.swift in Sources */,
 				95406BFA255B740A00C87A0D /* WebTextbooksViewController.swift in Sources */,
 				D5D5429E2823CAE3004359F3 /* MUnitBlog.swift in Sources */,
-				8CBB5B8B293A453500B8AEE0 /* Publisher+Bind.swift in Sources */,
 				9568FF2B25A44C57004598D8 /* PhrasesBaseViewModel.swift in Sources */,
 				95F0A8A5229264EA00D1B9A2 /* TextbooksViewModel.swift in Sources */,
 				95E6BFA824D180F500CB7380 /* TransformDetailViewModel.swift in Sources */,
@@ -963,19 +980,21 @@
 				95AF43CA254E660700FD71CB /* PatternsMergeViewModel.swift in Sources */,
 				95F6CEBF2264A5ED00C15A1D /* WordsReviewViewModel.swift in Sources */,
 				95548CE22621CD5B00893AB8 /* MUser.swift in Sources */,
-				8CBB5B882939EE7D00B8AEE0 /* NSTextField+Combine.swift in Sources */,
 				95B658A72227D8060095B0D2 /* MCommon.swift in Sources */,
 				95E6BFB124D7182E00CB7380 /* PatternsDetailViewModel.swift in Sources */,
 				95DAEBCE22DF8B1100A3C361 /* MReviewOptions.swift in Sources */,
 				95B04C41253D7327009BF514 /* PhrasesAssociateViewController.swift in Sources */,
 				95406BCC255B0B1F00C87A0D /* WebTextbooksViewModel.swift in Sources */,
 				95406BBD255AECA500C87A0D /* MWebTextbook.swift in Sources */,
+				8CBB5BD1293C9BE100B8AEE0 /* CombineControlTarget.swift in Sources */,
 				959191F1258CFFCA0070DBFD /* MWebPage.swift in Sources */,
 				958125C62190463F0001159E /* PhrasesLangViewController.swift in Sources */,
 				8C2CB5B4207885140083DDE2 /* RestApi.swift in Sources */,
 				957B532B25A5A2AE00C18B06 /* WordsUnitBatchAddViewModel.swift in Sources */,
 				959191E7258CFFCA0070DBFD /* MPattern.swift in Sources */,
+				8CBB5BD6293C9BE100B8AEE0 /* CombineControlProperty.swift in Sources */,
 				8CAF910A20833C4F00933837 /* WordsSearchViewModel.swift in Sources */,
+				8CBB5BD4293C9BE100B8AEE0 /* NSControl+Bind.swift in Sources */,
 				95898458259F00B500DFE80A /* PatternsWebPagesDetailViewModel.swift in Sources */,
 				9568FF2325A44A36004598D8 /* WordsBaseViewModel.swift in Sources */,
 				95CED3B2221048B50094622F /* PhrasesBaseViewController.swift in Sources */,
@@ -1011,6 +1030,7 @@
 				8C2CB5C3207888260083DDE2 /* WordsUnitViewController.swift in Sources */,
 				958BAB1923518838007F50BB /* ReadNumberViewModel.swift in Sources */,
 				959D21EE23BCF73E005BED48 /* PatternsWebPagesDetailViewController.swift in Sources */,
+				8CBB5BCF293C9BE100B8AEE0 /* NSSegmentedControl+Combine.swift in Sources */,
 				95E6BFAD24D7117F00CB7380 /* PatternsDetailViewController.swift in Sources */,
 				957B534325A69D8600C18B06 /* PhrasesUnitBatchAddViewController.swift in Sources */,
 				954B8708218DC04E007DC348 /* CommonApi.swift in Sources */,
@@ -1036,15 +1056,11 @@
 				959191E4258CFFCA0070DBFD /* MPatternWebPage.swift in Sources */,
 				D5D5429F2823CAE3004359F3 /* MUnitBlog.swift in Sources */,
 				959191EE258CFFCA0070DBFD /* MWordPhrase.swift in Sources */,
-				8CBB5B8C293A453500B8AEE0 /* Publisher+Bind.swift in Sources */,
 				8C1C4F3A1D31F88800CF5D88 /* LollySwiftMacTests.swift in Sources */,
 				954D8BA62143907C00651A80 /* MTextbook.swift in Sources */,
 				959191E6258CFFCA0070DBFD /* MLangWord.swift in Sources */,
-				8CBB5B872939EE7D00B8AEE0 /* NSTextField+Bind.swift in Sources */,
-				8CBB5B812939EE7D00B8AEE0 /* StoreIn.swift in Sources */,
 				954D8BAA2143907C00651A80 /* MUserSetting.swift in Sources */,
 				959191F2258CFFCA0070DBFD /* MWebPage.swift in Sources */,
-				8CBB5B892939EE7D00B8AEE0 /* NSTextField+Combine.swift in Sources */,
 				95940A95223389A300D35409 /* MVoice.swift in Sources */,
 				959191E8258CFFCA0070DBFD /* MPattern.swift in Sources */,
 				95E43F2F21E1E926001E650C /* MacApi.swift in Sources */,

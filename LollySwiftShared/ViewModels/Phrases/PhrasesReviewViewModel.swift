@@ -45,49 +45,45 @@ class PhrasesReviewViewModel: NSObject, ObservableObject {
         options.shuffled = true
     }
 
-    func newTest() {
+    func newTest() async {
         func f() {
             index = options.moveForward ? 0 : count - 1
             doTest()
-            checkNextTitle.accept(isTestMode ? "Check" : "Next")
-            checkPrevTitle.accept(isTestMode ? "Check" : "Prev")
+            checkNextTitle = isTestMode ? "Check" : "Next"
+            checkPrevTitle = isTestMode ? "Check" : "Prev"
         }
         index = 0
         arrPhrases.removeAll()
         arrCorrectIDs.removeAll()
         subscriptionTimer?.dispose()
-        isSpeaking.accept(options.speakingEnabled)
-        moveForward.accept(options.moveForward)
-        moveForwardHidden.accept(isTestMode)
-        onRepeat.accept(!isTestMode && options.onRepeat)
-        onRepeatHidden.accept(isTestMode)
-        checkPrevHidden.accept(isTestMode)
+        isSpeaking = options.speakingEnabled
+        moveForward = options.moveForward
+        moveForwardHidden = isTestMode
+        onRepeat = !isTestMode && options.onRepeat
+        onRepeatHidden = isTestMode
+        checkPrevHidden = isTestMode
         if options.mode == .textbook {
-            MUnitPhrase.getDataByTextbook(vmSettings.selectedTextbook).subscribe(onSuccess: { arr in
-                let cnt = min(self.options.reviewCount, arr.count)
-                self.arrPhrases = Array(arr.shuffled()[0..<cnt])
-                f()
-            }) ~ self.rx.disposeBag
+            let arr = await MUnitPhrase.getDataByTextbook(vmSettings.selectedTextbook)
+            let cnt = min(options.reviewCount, arr.count)
+            arrPhrases = Array(arr.shuffled()[0..<cnt])
+            f()
         } else {
-            MUnitPhrase.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO).subscribe(onSuccess: {
-                self.arrPhrases = $0
-                let count = self.count
-                let from = count * (self.options.groupSelected - 1) / self.options.groupCount
-                let to = count * self.options.groupSelected / self.options.groupCount
-                self.arrPhrases = [MUnitPhrase](self.arrPhrases[from..<to])
-                if self.options.shuffled { self.arrPhrases = self.arrPhrases.shuffled() }
-                f()
-                if self.options.mode == .reviewAuto {
-                    self.subscriptionTimer = Observable<Int>.interval(.seconds(self.options.interval), scheduler: MainScheduler.instance).subscribe { _ in
-                        self.check(toNext: true)
-                    }
-                    self.subscriptionTimer?.disposed(by: self.rx.disposeBag)
+            arrPhrases = await MUnitPhrase.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO)
+            let from = count * (options.groupSelected - 1) / options.groupCount
+            let to = count * options.groupSelected / options.groupCount
+            arrPhrases = [MUnitPhrase](arrPhrases[from..<to])
+            if options.shuffled { arrPhrases = arrPhrases.shuffled() }
+            f()
+            if options.mode == .reviewAuto {
+                subscriptionTimer = Observable<Int>.interval(.seconds(self.options.interval), scheduler: MainScheduler.instance).subscribe { _ in
+                    self.check(toNext: true)
                 }
-            }) ~ self.rx.disposeBag
+                self.subscriptionTimer?.disposed(by: self.rx.disposeBag)
+            }
         }
     }
 
-    var hasCurrent: Bool { !arrPhrases.isEmpty && (onRepeat.value || 0..<count ~= index) }
+    var hasCurrent: Bool { !arrPhrases.isEmpty && (onRepeat || 0..<count ~= index) }
     func move(toNext: Bool) {
         func checkOnRepeat() {
             if onRepeat.value {

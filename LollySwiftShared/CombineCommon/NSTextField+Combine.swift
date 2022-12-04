@@ -14,4 +14,7 @@ extension NSTextField {
             .map { ($0.object as! NSTextField).stringValue }
             .eraseToAnyPublisher()
     }
+    var textProperty: Publishers.ControlProperty2<NSTextField, String> {
+        Publishers.ControlProperty2(control: self, getter: \.textPublisher, setter: \.stringValue)
+    }
 }

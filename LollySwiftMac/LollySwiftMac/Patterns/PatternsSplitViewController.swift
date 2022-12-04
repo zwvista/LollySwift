@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import Combine
 
 class PatternsSplitViewController: NSViewController {
 
@@ -18,6 +19,8 @@ class PatternsSplitViewController: NSViewController {
     var vm: PatternsSplitViewModel!
     var itemEdit: MPatternEdit { vm.itemEdit }
 
+    var subscriptions = Set<AnyCancellable>()
+
     // https://developer.apple.com/videos/play/wwdc2011/120/
     // https://stackoverflow.com/questions/2121907/drag-drop-reorder-rows-on-nstableview
     let tableRowDragType = NSPasteboard.PasteboardType(rawValue: "private.table-row")
@@ -25,8 +28,8 @@ class PatternsSplitViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tvPatternVariations.registerForDraggedTypes([tableRowDragType])
-        _ = itemEdit.PATTERN ~> tfPattern.rx.text.orEmpty
-        _ = itemEdit.ID ~> tfId.rx.text.orEmpty
+        itemEdit.$PATTERN ~> (tfPattern, \.stringValue) ~ subscriptions
+        itemEdit.$ID ~> (tfId, \.stringValue) ~ subscriptions
     }
 
     func numberOfRows(in tableView: NSTableView) -> Int {

@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import Combine
 
 @objcMembers
 class PatternsDetailViewController: NSViewController {
@@ -23,13 +24,15 @@ class PatternsDetailViewController: NSViewController {
     @IBOutlet weak var tfTags: NSTextField!
     @IBOutlet weak var btnOK: NSButton!
     
+    var subscriptions = Set<AnyCancellable>()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         vmEdit = PatternsDetailViewModel(vm: vm, item: item)
-        _ = itemEdit.ID ~> tfID.rx.text.orEmpty
-        _ = itemEdit.PATTERN <~> tfPattern.rx.text.orEmpty
-        _ = itemEdit.NOTE <~> tfNote.rx.text.orEmpty
-        _ = itemEdit.TAGS <~> tfTags.rx.text.orEmpty
+        itemEdit.$ID ~> (tfID, \.stringValue) ~ subscriptions
+        itemEdit.$PATTERN <~> tfPattern.textProperty ~ subscriptions
+        itemEdit.$NOTE <~> tfNote.textProperty ~ subscriptions
+        itemEdit.$TAGS <~> tfTags.textProperty ~ subscriptions
         btnOK.rx.tap.flatMap { [unowned self] _ in
             self.vmEdit.onOK()
         }.subscribe { [unowned self] _ in

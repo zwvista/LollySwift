@@ -28,10 +28,10 @@ class PhrasesLangDetailViewController: NSViewController, NSTableViewDataSource, 
         vmEdit = PhrasesLangDetailViewModel(vm: vm, item: item) {
             self.tableView.reloadData()
         }
-        _ = itemEdit.ID ~> tfID.rx.text.orEmpty
-        _ = itemEdit.PHRASE <~> tfPhrase.rx.text.orEmpty
-        _ = itemEdit.TRANSLATION <~> tfTranslation.rx.text.orEmpty
-        _ = vmEdit.isOKEnabled ~> btnOK.rx.isEnabled
+        itemEdit.$ID ~> tfID
+        itemEdit.$PHRASE <~> tfPhrase
+        itemEdit.$TRANSLATION <~> tfTranslation
+        vmEdit.isOKEnabled ~> btnOK.rx.isEnabled
         btnOK.rx.tap.flatMap { [unowned self] _ in
             self.vmEdit.onOK()
         }.subscribe{ [unowned self] _ in

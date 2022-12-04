@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import Combine
 
 class PhrasesAssociateViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate {
 
@@ -21,6 +22,8 @@ class PhrasesAssociateViewController: NSViewController, NSTableViewDataSource, N
     @IBOutlet weak var sfTextFilter: NSSearchField!
     @IBOutlet weak var tableView: NSTableView!
     
+    var subscriptions = Set<AnyCancellable>()
+
     func applyFilters() {
         vm.applyFilters()
         tableView.reloadData()
@@ -31,15 +34,15 @@ class PhrasesAssociateViewController: NSViewController, NSTableViewDataSource, N
         vm = PhrasesLangViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) {
             self.applyFilters()
         }
-        vm.textFilter.accept(textFilter)
-        _ = vm.textFilter <~> sfTextFilter.rx.text.orEmpty
-        _ = vm.scopeFilter <~> scScopeFilter.rx.selectedLabel
-        sfTextFilter.rx.text.subscribe(onNext: { [unowned self] _ in
+        vm.textFilter = textFilter
+        vm.$textFilter <~> (sfTextFilter, \.textPublisher) ~ subscriptions
+        vm.$scopeFilter <~> (scScopeFilter, \.labelPublisher) ~ subscriptions
+        sfTextFilter.textPublisher.sink { [unowned self] _ in
             self.applyFilters()
-        }) ~ rx.disposeBag
-        scScopeFilter.rx.selectedLabel.subscribe(onNext: { [unowned self] _ in
+        } ~ subscriptions
+        scScopeFilter.labelPublisher.sink { [unowned self] _ in
             self.applyFilters()
-        }) ~ rx.disposeBag
+        } ~ subscriptions
     }
     
     override func viewDidAppear() {

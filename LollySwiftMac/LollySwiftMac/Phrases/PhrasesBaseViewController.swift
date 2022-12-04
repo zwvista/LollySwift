@@ -7,28 +7,31 @@
 //
 
 import Cocoa
+import Combine
 
 class PhrasesBaseViewController: WordsPhrasesBaseViewController {
     
     var vmWordsLang: WordsLangViewModel!
     override var vmWords: WordsBaseViewModel { vmWordsLang }
 
+    var subscriptions = Set<AnyCancellable>()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        _ = vmPhrases.textFilter <~> sfTextFilter.rx.text.orEmpty
-        _ = vmPhrases.scopeFilter <~> scScopeFilter.rx.selectedLabel
+        vmPhrases.$textFilter <~> (sfTextFilter, \.textPublisher) ~ subscriptions
+        vmPhrases.$scopeFilter <~> scScopeFilter.rx.selectedLabel
         sfTextFilter.rx.searchFieldDidStartSearching.subscribe { _ in
             self.vmPhrases.textFilter.accept(self.vmSettings.autoCorrectInput(text: self.vmPhrases.textFilter.value))
-        } ~ rx.disposeBag
+        }
         sfTextFilter.rx.searchFieldDidEndSearching.subscribe { [unowned self] _ in
             self.applyFilters()
-        } ~ rx.disposeBag
+        }
         sfTextFilter.rx.text.subscribe(onNext: { [unowned self] _ in
             self.applyFilters()
-        }) ~ rx.disposeBag
+        })
         scScopeFilter.rx.selectedLabel.subscribe(onNext: { [unowned self] _ in
             self.applyFilters()
-        }) ~ rx.disposeBag
+        })
     }
 
     override func settingsChanged() {
@@ -59,7 +62,9 @@ class PhrasesBaseViewController: WordsPhrasesBaseViewController {
         if tv === tvPhrases {
             selectedPhraseChanged()
             updateStatusText()
-            getWords()
+            Task {
+                await getWords()
+            }
         } else {
             selectedWordChanged()
             searchDict(self)
@@ -129,13 +134,12 @@ class PhrasesBaseViewController: WordsPhrasesBaseViewController {
         }
     }
     
-    func getWords() {
-        vmWordsLang.getWords(phraseid: vmPhrases.selectedPhraseID).subscribe(onSuccess: {
-            self.tvWords.reloadData()
-            if self.tvWords.numberOfRows > 0 {
-                self.tvWords.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
-            }
-        }) ~ rx.disposeBag
+    func getWords() async {
+        await vmWordsLang.getWords(phraseid: vmPhrases.selectedPhraseID)
+        tvWords.reloadData()
+        if tvWords.numberOfRows > 0 {
+            tvWords.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
+        }
     }
 
     @IBAction func editWord(_ sender: AnyObject) {
