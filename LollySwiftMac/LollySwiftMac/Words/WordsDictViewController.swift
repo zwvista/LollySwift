@@ -14,6 +14,7 @@ class WordsDictViewController: NSViewController, WKNavigationDelegate {
 
     @IBOutlet weak var wvDict: WKWebView!
     @IBOutlet weak var tfURL: NSTextField!
+
     weak var vcWords: WordsPhrasesBaseViewController!
 
     var word = ""

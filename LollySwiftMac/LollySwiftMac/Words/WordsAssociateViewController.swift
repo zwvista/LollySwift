@@ -11,17 +11,18 @@ import Combine
 
 class WordsAssociateViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate {
 
+    @IBOutlet weak var scScopeFilter: NSSegmentedControl!
+    @IBOutlet weak var sfTextFilter: NSSearchField!
+    @IBOutlet weak var tableView: NSTableView!
+
     var vm: WordsLangViewModel!
     var vmSettings: SettingsViewModel! { vm.vmSettings }
     var phraseid = 0
     var textFilter = ""
     var complete: (() -> Void)?
     var arrWords: [MLangWord] { vm.arrWordsFiltered ?? vm.arrWords }
+    var subscriptions = Set<AnyCancellable>()
 
-    @IBOutlet weak var scScopeFilter: NSSegmentedControl!
-    @IBOutlet weak var sfTextFilter: NSSearchField!
-    @IBOutlet weak var tableView: NSTableView!
-    
     func applyFilters() {
         vm.applyFilters()
         tableView.reloadData()
@@ -32,15 +33,15 @@ class WordsAssociateViewController: NSViewController, NSTableViewDataSource, NST
         vm = WordsLangViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) {
             self.applyFilters()
         }
-        vm.textFilter.accept(textFilter)
-        _ = vm.textFilter <~> sfTextFilter.rx.text.orEmpty
-        _ = vm.scopeFilter <~> scScopeFilter.rx.selectedLabel
-        sfTextFilter.rx.text.subscribe(onNext: { [unowned self] _ in
+        vm.textFilter = textFilter
+        vm.$textFilter <~> sfTextFilter.textProperty ~ subscriptions
+        vm.$scopeFilter <~> scScopeFilter.selectedLabelProperty ~ subscriptions
+        sfTextFilter.textPublisher.sink { [unowned self] _ in
             self.applyFilters()
-        }) ~ rx.disposeBag
-        scScopeFilter.rx.selectedLabel.subscribe(onNext: { [unowned self] _ in
+        } ~ subscriptions
+        scScopeFilter.selectedLabelPublisher.sink { [unowned self] _ in
             self.applyFilters()
-        }) ~ rx.disposeBag
+        } ~ subscriptions
     }
     
     override func viewDidAppear() {

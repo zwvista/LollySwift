@@ -11,17 +11,16 @@ import Combine
 
 class PhrasesAssociateViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate {
 
+    @IBOutlet weak var scScopeFilter: NSSegmentedControl!
+    @IBOutlet weak var sfTextFilter: NSSearchField!
+    @IBOutlet weak var tableView: NSTableView!
+
     var vm: PhrasesLangViewModel!
     var vmSettings: SettingsViewModel! { vm.vmSettings }
     var wordid = 0
     var textFilter = ""
     var complete: (() -> Void)?
     var arrPhrases: [MLangPhrase] { vm.arrPhrasesFiltered ?? vm.arrPhrases }
-
-    @IBOutlet weak var scScopeFilter: NSSegmentedControl!
-    @IBOutlet weak var sfTextFilter: NSSearchField!
-    @IBOutlet weak var tableView: NSTableView!
-    
     var subscriptions = Set<AnyCancellable>()
 
     func applyFilters() {
@@ -35,12 +34,12 @@ class PhrasesAssociateViewController: NSViewController, NSTableViewDataSource, N
             self.applyFilters()
         }
         vm.textFilter = textFilter
-        vm.$textFilter <~> (sfTextFilter, \.textPublisher) ~ subscriptions
-        vm.$scopeFilter <~> (scScopeFilter, \.labelPublisher) ~ subscriptions
+        vm.$textFilter <~> sfTextFilter.textProperty ~ subscriptions
+        vm.$scopeFilter <~> scScopeFilter.selectedLabelProperty ~ subscriptions
         sfTextFilter.textPublisher.sink { [unowned self] _ in
             self.applyFilters()
         } ~ subscriptions
-        scScopeFilter.labelPublisher.sink { [unowned self] _ in
+        scScopeFilter.selectedLabelPublisher.sink { [unowned self] _ in
             self.applyFilters()
         } ~ subscriptions
     }

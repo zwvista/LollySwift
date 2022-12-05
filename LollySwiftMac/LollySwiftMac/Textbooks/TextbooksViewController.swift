@@ -10,11 +10,11 @@ import Cocoa
 import Combine
 
 class TextbooksViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate {
-    
+
     @IBOutlet weak var tableView: NSTableView!
 
     var vm: TextbooksViewModel!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         settingsChanged()
@@ -23,7 +23,7 @@ class TextbooksViewController: NSViewController, LollyProtocol, NSTableViewDataS
     func settingsChanged() {
         refreshTableView(self)
     }
-    
+
     @IBAction func refreshTableView(_ sender: AnyObject) {
         vm = TextbooksViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) {
             self.tableView.reloadData()
