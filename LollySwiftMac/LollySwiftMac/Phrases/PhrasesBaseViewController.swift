@@ -19,17 +19,17 @@ class PhrasesBaseViewController: WordsPhrasesBaseViewController {
         vmPhrases.$textFilter <~> sfTextFilter.textProperty ~ subscriptions
         vmPhrases.$scopeFilter <~> scScopeFilter.selectedLabelProperty ~ subscriptions
         sfTextFilter.rx.searchFieldDidStartSearching.subscribe { _ in
-            self.vmPhrases.textFilter.accept(self.vmSettings.autoCorrectInput(text: self.vmPhrases.textFilter.value))
+            self.vmPhrases.textFilter = self.vmSettings.autoCorrectInput(text: self.vmPhrases.textFilter)
         }
         sfTextFilter.rx.searchFieldDidEndSearching.subscribe { [unowned self] _ in
             self.applyFilters()
         }
-        sfTextFilter.rx.text.subscribe(onNext: { [unowned self] _ in
+        sfTextFilter.textPublisher.sink { [unowned self] _ in
             self.applyFilters()
-        })
-        scScopeFilter.rx.selectedLabel.subscribe(onNext: { [unowned self] _ in
+        } ~ subscriptions
+        scScopeFilter.selectedLabelPublisher.sink { [unowned self] _ in
             self.applyFilters()
-        })
+        } ~ subscriptions
     }
 
     override func settingsChanged() {

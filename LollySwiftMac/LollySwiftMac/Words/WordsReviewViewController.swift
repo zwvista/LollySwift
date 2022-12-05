@@ -77,7 +77,7 @@ class WordsReviewViewController: WordsBaseViewController, NSTextFieldDelegate {
         super.viewDidAppear()
         settingsChanged()
         wc = view.window!.windowController as? WordsReviewWindowController
-        _ = vm.isSpeaking <~> wc.scSpeak.isOnProperty ~ subscriptions
+        vm.$isSpeaking <~> wc.scSpeak.isOnProperty ~ subscriptions
         vm.isSpeaking.subscribe(onNext: { isSpeaking in
             if self.vm.hasCurrent && isSpeaking {
                 self.synth.startSpeaking(self.vm.currentWord)

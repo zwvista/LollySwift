@@ -24,7 +24,7 @@ class WordsUnitDetailViewModel: NSObject, ObservableObject {
         itemEdit = MUnitWordEdit(x: item)
         isAdd = item.ID == 0
         super.init()
-        itemEdit.$WORD.map { !$0.isEmpty } ~> $isOKEnabled
+        itemEdit.$WORD.map { !$0.isEmpty }.eraseToAnyPublisher() ~> $isOKEnabled
         guard !isAdd else {return}
         vmSingle = SingleWordViewModel(word: item.WORD, settings: vm.vmSettings, complete: complete)
     }

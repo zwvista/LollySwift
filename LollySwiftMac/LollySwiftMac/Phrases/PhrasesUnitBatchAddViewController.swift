@@ -33,9 +33,9 @@ class PhrasesUnitBatchAddViewController: NSViewController {
         super.viewDidLoad()
         acUnits.content = item.textbook.arrUnits
         acParts.content = item.textbook.arrParts
-        itemEdit.indexUNIT <~> pubUnit.selectedItemIndexProperty ~ subscriptions
-        itemEdit.indexPART <~> pubPart.selectedItemIndexProperty ~ subscriptions
-        itemEdit.PHRASES <~> tvPhrases.rx.string
+        itemEdit.$indexUNIT <~> pubUnit.selectedItemIndexProperty ~ subscriptions
+        itemEdit.$indexPART <~> pubPart.selectedItemIndexProperty ~ subscriptions
+        itemEdit.$PHRASES <~> tvPhrases.textProperty ~ subscriptions
         btnOK.rx.tap.flatMap { [unowned self] _ in
             self.vmEdit.onOK()
         }.subscribe { [unowned self] _ in
