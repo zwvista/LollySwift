@@ -78,11 +78,11 @@ class WordsReviewViewController: WordsBaseViewController, NSTextFieldDelegate {
         settingsChanged()
         wc = view.window!.windowController as? WordsReviewWindowController
         _ = vm.isSpeaking <~> wc.scSpeak.rx.isOn
-        vm.isSpeaking.subscribe(onNext: { isSpeaking in
+        vm.isSpeaking.subscribe { isSpeaking in
             if self.vm.hasCurrent && isSpeaking {
                 self.synth.startSpeaking(self.vm.currentWord)
             }
-        }) ~ rx.disposeBag
+        } ~ rx.disposeBag
     }
     override func viewWillDisappear() {
         super.viewWillDisappear()

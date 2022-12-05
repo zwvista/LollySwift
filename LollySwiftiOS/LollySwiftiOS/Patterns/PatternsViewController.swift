@@ -43,12 +43,12 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
         refresh(refreshControl)
         _ = vm.textFilter <~> sbTextFilter.searchTextField.rx.textInput
         _ = vm.scopeFilter ~> btnScopeFilter.rx.title(for: .normal)
-        vm.textFilter.subscribe(onNext: { [unowned self] _ in
+        vm.textFilter.subscribe { [unowned self] _ in
             self.applyFilters()
-        }) ~ rx.disposeBag
-        vm.scopeFilter.subscribe(onNext: { [unowned self] _ in
+        } ~ rx.disposeBag
+        vm.scopeFilter.subscribe { [unowned self] _ in
             self.applyFilters()
-        }) ~ rx.disposeBag
+        } ~ rx.disposeBag
     }
     
     @objc func refresh(_ sender: UIRefreshControl) {

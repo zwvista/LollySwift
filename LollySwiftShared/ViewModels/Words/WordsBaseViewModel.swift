@@ -24,9 +24,9 @@ class WordsPhrasesBaseViewModel: NSObject {
         vmSettings = !needCopy ? settings : SettingsViewModel(settings)
         super.init()
         stringTextbookFilter.accept(vmSettings.arrTextbookFilters[0].label)
-        stringTextbookFilter.subscribe(onNext: { s in
+        stringTextbookFilter.subscribe { s in
             self.indexTextbookFilter.accept(self.vmSettings.arrTextbookFilters.firstIndex { $0.label == s }!)
-        }) ~ rx.disposeBag
+        } ~ rx.disposeBag
     }
 }
 

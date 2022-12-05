@@ -30,9 +30,9 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
             self.vmBase.stringTextbookFilter.accept(item)
         }
         _ = vmBase.stringTextbookFilter ~> btnTextbookFilter.rx.title(for: .normal)
-        vmBase.stringTextbookFilter.subscribe(onNext: { [unowned self] _ in
+        vmBase.stringTextbookFilter.subscribe { [unowned self] _ in
             self.applyFilters()
-        }) ~ rx.disposeBag
+        } ~ rx.disposeBag
     }
     
     override func refresh() {

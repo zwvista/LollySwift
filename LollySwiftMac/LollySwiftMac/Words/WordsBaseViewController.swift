@@ -158,12 +158,12 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
         super.viewDidLoad()
         if let tfNewWord = tfNewWord {
             _ = vmWords.newWord <~> tfNewWord.rx.text.orEmpty
-            tfNewWord.rx.controlTextDidEndEditing.subscribe(onNext: { [unowned self] _ in
+            tfNewWord.rx.controlTextDidEndEditing.subscribe { [unowned self] _ in
                 self.commitEditing()
                 if !self.vmWords.newWord.value.isEmpty {
                     self.addNewWord()
                 }
-            }) ~ rx.disposeBag
+            } ~ rx.disposeBag
         }
         if let sfTextFilter = sfTextFilter {
             _ = vmWords.textFilter <~> sfTextFilter.rx.text.orEmpty
@@ -174,12 +174,12 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
             sfTextFilter.rx.searchFieldDidEndSearching.subscribe { [unowned self] _ in
                 self.applyFilters()
             } ~ rx.disposeBag
-            sfTextFilter.rx.text.subscribe(onNext: { [unowned self] _ in
+            sfTextFilter.rx.text.subscribe { [unowned self] _ in
                 self.applyFilters()
-            }) ~ rx.disposeBag
-            scScopeFilter.rx.selectedLabel.subscribe(onNext: { [unowned self] _ in
+            } ~ rx.disposeBag
+            scScopeFilter.rx.selectedLabel.subscribe { [unowned self] _ in
                 self.applyFilters()
-            }) ~ rx.disposeBag
+            } ~ rx.disposeBag
         }
     }
 

@@ -29,7 +29,7 @@ class SearchViewController: UIViewController, WKNavigationDelegate, UISearchBarD
         dictStore.wvDict.navigationDelegate = self
         vmSettings.delegate = self
         
-        vmSettings.getData().subscribe {
+        vmSettings.getData().subscribe { _ in
             self.ddLang.anchorView = self.btnLang
             self.ddLang.selectionAction = { (index: Int, item: String) in
                 guard index != vmSettings.selectedLangIndex else {return}
@@ -41,7 +41,7 @@ class SearchViewController: UIViewController, WKNavigationDelegate, UISearchBarD
                 vmSettings.selectedDictReferenceIndex = index
                 vmSettings.updateDictReference().subscribe() ~ self.rx.disposeBag
             }
-        }) ~ rx.disposeBag
+        } ~ rx.disposeBag
     }
 
     override func viewDidLoad() {

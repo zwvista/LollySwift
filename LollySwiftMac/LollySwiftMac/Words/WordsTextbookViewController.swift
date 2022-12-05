@@ -28,7 +28,9 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        pubTextbookFilter.rx.selectedItemIndex.subscribe(onNext: { [unowned self] _ in self.applyFilters() }) ~ rx.disposeBag
+        pubTextbookFilter.rx.selectedItemIndex.subscribe { [unowned self] _ in
+            self.applyFilters()
+        } ~ rx.disposeBag
     }
 
     override func settingsChanged() {

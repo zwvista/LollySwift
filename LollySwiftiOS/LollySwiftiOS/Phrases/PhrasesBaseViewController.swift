@@ -33,12 +33,12 @@ class PhrasesBaseViewController: UIViewController, UITableViewDelegate, UITableV
         refresh()
         _ = vmBase.textFilter <~> sbTextFilter.searchTextField.rx.textInput
         _ = vmBase.scopeFilter ~> btnScopeFilter.rx.title(for: .normal)
-        vmBase.textFilter.subscribe(onNext: { [unowned self] _ in
+        vmBase.textFilter.subscribe { [unowned self] _ in
             self.applyFilters()
-        }) ~ rx.disposeBag
-        vmBase.scopeFilter.subscribe(onNext: { [unowned self] _ in
+        } ~ rx.disposeBag
+        vmBase.scopeFilter.subscribe { [unowned self] _ in
             self.applyFilters()
-        }) ~ rx.disposeBag
+        } ~ rx.disposeBag
     }
     
     @objc func refresh(_ sender: UIRefreshControl) {

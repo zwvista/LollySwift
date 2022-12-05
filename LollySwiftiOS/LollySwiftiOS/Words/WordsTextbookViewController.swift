@@ -30,9 +30,9 @@ class WordsTextbookViewController: WordsBaseViewController {
             self.vmBase.stringTextbookFilter.accept(item)
         }
         _ = vmBase.stringTextbookFilter ~> btnTextbookFilter.rx.title(for: .normal)
-        vmBase.stringTextbookFilter.subscribe(onNext: { [unowned self] _ in
+        vmBase.stringTextbookFilter.subscribe { [unowned self] _ in
             self.applyFilters()
-        }) ~ rx.disposeBag
+        } ~ rx.disposeBag
     }
     
     override func refresh() {
@@ -82,15 +82,15 @@ class WordsTextbookViewController: WordsBaseViewController {
             alertController.addAction(editAction2)
             if vmSettings.hasDictNote {
                 let getNoteAction = UIAlertAction(title: "Retrieve Note", style: .default) { _ in
-                    self.vm.getNote(index: indexPath.row).subscribe {
+                    self.vm.getNote(index: indexPath.row).subscribe { _ in
                         self.tableView.reloadRows(at: [indexPath], with: .fade)
-                    }) ~ self.rx.disposeBag
+                    } ~ self.rx.disposeBag
                 }
                 alertController.addAction(getNoteAction)
                 let clearNoteAction = UIAlertAction(title: "Clear Note", style: .default) { _ in
-                    self.vm.clearNote(index: indexPath.row).subscribe {
+                    self.vm.clearNote(index: indexPath.row).subscribe { _ in
                         self.tableView.reloadRows(at: [indexPath], with: .fade)
-                    }) ~ self.rx.disposeBag
+                    } ~ self.rx.disposeBag
                 }
                 alertController.addAction(clearNoteAction)
             }
@@ -125,8 +125,8 @@ class WordsTextbookViewController: WordsBaseViewController {
     @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
         guard segue.identifier == "Done" else {return}
         let controller = segue.source as! WordsTextbookDetailViewController
-        controller.vmEdit.onOK().subscribe {
+        controller.vmEdit.onOK().subscribe { _ in
             self.tableView.reloadData()
-        }) ~ rx.disposeBag
+        } ~ rx.disposeBag
     }
 }

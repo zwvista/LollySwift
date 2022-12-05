@@ -36,12 +36,12 @@ class WordsAssociateViewController: NSViewController, NSTableViewDataSource, NST
         vm.textFilter.accept(textFilter)
         _ = vm.textFilter <~> sfTextFilter.rx.text.orEmpty
         _ = vm.scopeFilter <~> scScopeFilter.rx.selectedLabel
-        sfTextFilter.rx.text.subscribe(onNext: { [unowned self] _ in
+        sfTextFilter.rx.text.subscribe { [unowned self] _ in
             self.applyFilters()
-        }) ~ rx.disposeBag
-        scScopeFilter.rx.selectedLabel.subscribe(onNext: { [unowned self] _ in
+        } ~ rx.disposeBag
+        scScopeFilter.rx.selectedLabel.subscribe { [unowned self] _ in
             self.applyFilters()
-        }) ~ rx.disposeBag
+        } ~ rx.disposeBag
     }
     
     override func viewDidAppear() {

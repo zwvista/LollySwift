@@ -69,11 +69,11 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
         settingsChanged()
         wc = view.window!.windowController as? PhrasesReviewWindowController
         _ = vm.isSpeaking <~> wc.scSpeak.rx.isOn
-        vm.isSpeaking.subscribe(onNext: { isSpeaking in
+        vm.isSpeaking.subscribe { isSpeaking in
             if isSpeaking {
                 self.synth.startSpeaking(self.vm.currentPhrase)
             }
-        }) ~ rx.disposeBag
+        } ~ rx.disposeBag
     }
     override func viewWillDisappear() {
         super.viewWillDisappear()
