@@ -36,12 +36,13 @@ class PhrasesUnitBatchAddViewController: NSViewController {
         itemEdit.$indexUNIT <~> pubUnit.selectedItemIndexProperty ~ subscriptions
         itemEdit.$indexPART <~> pubPart.selectedItemIndexProperty ~ subscriptions
         itemEdit.$PHRASES <~> tvPhrases.textProperty ~ subscriptions
-        btnOK.rx.tap.flatMap { [unowned self] _ in
-            self.vmEdit.onOK()
-        }.subscribe { [unowned self] _ in
-            self.complete?()
-            self.dismiss(self.btnOK)
-        } ~ rx.disposeBag
+        btnOK.tapPublisher.sink { [unowned self] in
+            Task {
+                await self.vmEdit.onOK()
+                self.complete?()
+                self.dismiss(self.btnOK)
+            }
+        } ~ subscriptions
     }
     
     override func viewDidAppear() {

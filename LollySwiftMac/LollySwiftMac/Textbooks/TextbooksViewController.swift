@@ -69,8 +69,9 @@ class TextbooksViewController: NSViewController, LollyProtocol, NSTableViewDataS
         let newValue = sender.stringValue
         guard oldValue != newValue else {return}
         item.setValue(newValue, forKey: key)
-        TextbooksViewModel.update(item: item).subscribe(onSuccess: {
-            self.tableView.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count))
-        }) ~ rx.disposeBag
+        Task {
+            await TextbooksViewModel.update(item: item)
+            tableView.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<tableView.tableColumns.count))
+        }
     }
 }

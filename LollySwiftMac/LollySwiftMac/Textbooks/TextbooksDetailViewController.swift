@@ -39,16 +39,15 @@ class TextbooksDetailViewController: NSViewController {
     @IBAction func okClicked(_ sender: AnyObject) {
         // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
         self.commitEditing()
-        if isAdd {
-            TextbooksViewModel.create(item: item).subscribe(onSuccess: {_ in 
-                self.complete?()
-            }) ~ rx.disposeBag
-        } else {
-            TextbooksViewModel.update(item: item).subscribe(onSuccess: {
-                self.complete?()
-            }) ~ rx.disposeBag
+        Task {
+            if isAdd {
+                _ = await TextbooksViewModel.create(item: item)
+            } else {
+                await TextbooksViewModel.update(item: item)
+            }
+            complete?()
+            dismiss(sender)
         }
-        dismiss(sender)
     }
 
     deinit {

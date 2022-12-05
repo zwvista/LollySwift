@@ -78,11 +78,11 @@ class WordsReviewViewController: WordsBaseViewController, NSTextFieldDelegate {
         settingsChanged()
         wc = view.window!.windowController as? WordsReviewWindowController
         vm.$isSpeaking <~> wc.scSpeak.isOnProperty ~ subscriptions
-        vm.isSpeaking.subscribe(onNext: { isSpeaking in
+        vm.$isSpeaking.sink { isSpeaking in
             if self.vm.hasCurrent && isSpeaking {
                 self.synth.startSpeaking(self.vm.currentWord)
             }
-        }) ~ rx.disposeBag
+        } ~ subscriptions
     }
     override func viewWillDisappear() {
         super.viewWillDisappear()
@@ -103,7 +103,7 @@ class WordsReviewViewController: WordsBaseViewController, NSTextFieldDelegate {
         let textfield = obj.object as! NSControl
         let code = (obj.userInfo!["NSTextMovement"] as! NSNumber).intValue
         guard code == NSReturnTextMovement else {return}
-        guard textfield === tfWordInput, !(vm.isTestMode && vm.wordInputString.value.isEmpty) else {return}
+        guard textfield === tfWordInput, !(vm.isTestMode && vm.wordInputString.isEmpty) else {return}
         vm.check(toNext: true)
     }
     

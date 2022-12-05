@@ -258,13 +258,13 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     }
     
     @IBAction func toggleToType(_ sender: AnyObject) {
-        let row = tvWords.selectedRow
-        let part = row == -1 ? vmSettings.arrParts[0].value : arrWords[row].PART
-        vmSettings.toggleToType(part: part).flatMap {
-            self.vm.reload()
-        }.subscribe(onSuccess: {
-            self.doRefresh()
-        }) ~ rx.disposeBag
+        Task {
+            let row = tvWords.selectedRow
+            let part = row == -1 ? vmSettings.arrParts[0].value : arrWords[row].PART
+            await vmSettings.toggleToType(part: part)
+            await vm.reload()
+            doRefresh()
+        }
     }
 
     override func updateStatusText() {
