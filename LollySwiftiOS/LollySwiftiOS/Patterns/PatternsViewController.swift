@@ -145,12 +145,12 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
     @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
         guard segue.identifier == "Done" else {return}
         if let controller = segue.source as? PatternsDetailViewController {
-            controller.vmEdit.onOK().subscribe {
+            controller.vmEdit.onOK().subscribe { _ in
                 self.tableView.reloadData()
                 if controller.vmEdit.isAdd {
                     self.performSegue(withIdentifier: "add", sender: self)
                 }
-            }) ~ rx.disposeBag
+            } ~ rx.disposeBag
         }
     }
 

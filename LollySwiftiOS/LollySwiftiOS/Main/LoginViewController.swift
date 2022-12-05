@@ -36,6 +36,6 @@ class LoginViewController: UIViewController {
                 UserDefaults.standard.set(globalUser.userid, forKey: "userid")
                 self.dismiss(animated: true, completion: self.completion)
             }
-        }) ~ rx.disposeBag
+        } ~ rx.disposeBag
     }
 }

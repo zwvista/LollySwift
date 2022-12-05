@@ -57,13 +57,13 @@ class PhrasesLangViewController: PhrasesBaseViewController {
     }
 
     override func deletePhrase(row: Int) {
-        PhrasesLangViewModel.delete(item: arrPhrases[row]).subscribe {
+        PhrasesLangViewModel.delete(item: arrPhrases[row]).subscribe { _ in
             self.doRefresh()
         } ~ rx.disposeBag
     }
 
     @IBAction func refreshTableView(_ sender: AnyObject) {
-        vm.reload().subscribe {
+        vm.reload().subscribe { _ in
             self.doRefresh()
         } ~ rx.disposeBag
     }

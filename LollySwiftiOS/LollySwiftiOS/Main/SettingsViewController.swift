@@ -137,9 +137,9 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
     }
     
     @objc func refresh(_ sender: UIRefreshControl) {
-        vm.getData().subscribe {
+        vm.getData().subscribe { _ in
             sender.endRefreshing()
-        }) ~ rx.disposeBag
+        } ~ rx.disposeBag
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

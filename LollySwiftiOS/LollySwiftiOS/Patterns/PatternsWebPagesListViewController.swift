@@ -25,10 +25,10 @@ class PatternsWebPagesListViewController: UITableViewController {
     }
     
     @objc func refresh(_ sender: UIRefreshControl) {
-        vm.getWebPages().subscribe {
+        vm.getWebPages().subscribe { _ in
             sender.endRefreshing()
             self.tableView.reloadData()
-        }) ~ rx.disposeBag
+        } ~ rx.disposeBag
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -97,8 +97,7 @@ class PatternsWebPagesListViewController: UITableViewController {
     @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
         guard segue.identifier == "Done" else {return}
         if let controller = segue.source as? PatternsWebPagesDetailViewController {
-            controller.vmEdit.onOK().subscribe {
-            }) ~ rx.disposeBag
+            controller.vmEdit.onOK().subscribe() ~ rx.disposeBag
         }
     }
 
