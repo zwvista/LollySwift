@@ -11,12 +11,6 @@ import Combine
 
 class WordsTextbookDetailViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 
-    var complete: (() -> Void)?
-    var vmEdit: WordsUnitDetailViewModel!
-    var item: MUnitWord { vmEdit.item }
-    var itemEdit: MUnitWordEdit { vmEdit.itemEdit }
-    var arrWords: [MUnitWord] { vmEdit.vmSingle.arrWords }
-
     @IBOutlet weak var acUnits: NSArrayController!
     @IBOutlet weak var acParts: NSArrayController!
     @IBOutlet weak var tfID: NSTextField!
@@ -31,7 +25,14 @@ class WordsTextbookDetailViewController: NSViewController, NSTableViewDataSource
     @IBOutlet weak var tfAccuracy: NSTextField!
     @IBOutlet weak var tableView: NSTableView!
     @IBOutlet weak var btnOK: NSButton!
-    
+
+    var complete: (() -> Void)?
+    var vmEdit: WordsUnitDetailViewModel!
+    var item: MUnitWord { vmEdit.item }
+    var itemEdit: MUnitWordEdit { vmEdit.itemEdit }
+    var arrWords: [MUnitWord] { vmEdit.vmSingle.arrWords }
+    var subscriptions = Set<AnyCancellable>()
+
     func startEdit(vm: WordsUnitViewModel, item: MUnitWord) {
         vmEdit = WordsUnitDetailViewModel(vm: vm, item: item, phraseid: 0) {
             self.tableView.reloadData()
@@ -42,17 +43,17 @@ class WordsTextbookDetailViewController: NSViewController, NSTableViewDataSource
         super.viewDidLoad()
         acUnits.content = item.textbook.arrUnits
         acParts.content = item.textbook.arrParts
-        _ = itemEdit.ID ~> tfID.rx.text.orEmpty
-        _ = itemEdit.TEXTBOOKNAME ~> tfTextbookName.rx.text.orEmpty
-        _ = itemEdit.indexUNIT <~> pubUnit.rx.selectedItemIndex
-        _ = itemEdit.indexPART <~> pubPart.rx.selectedItemIndex
-        _ = itemEdit.SEQNUM <~> tfSeqNum.rx.text.orEmpty
-        _ = itemEdit.WORDID ~> tfWordID.rx.text.orEmpty
-        _ = itemEdit.WORD <~> tfWord.rx.text.orEmpty
-        _ = itemEdit.NOTE <~> tfNote.rx.text.orEmpty
-        _ = itemEdit.FAMIID ~> tfFamiID.rx.text.orEmpty
-        _ = itemEdit.ACCURACY ~> tfAccuracy.rx.text.orEmpty
-        _ = vmEdit.isOKEnabled ~> btnOK.rx.isEnabled
+        itemEdit.$ID ~> (tfID, \.stringValue) ~ subscriptions
+        itemEdit.$TEXTBOOKNAME ~> (tfTextbookName, \.stringValue) ~ subscriptions
+        itemEdit.$indexUNIT <~> pubUnit.selectedItemIndexProperty ~ subscriptions
+        itemEdit.$indexPART <~> pubPart.selectedItemIndexProperty ~ subscriptions
+        itemEdit.$SEQNUM <~> tfSeqNum.textProperty ~ subscriptions
+        itemEdit.$WORDID ~> (tfWordID, \.stringValue) ~ subscriptions
+        itemEdit.$WORD <~> tfWord.textProperty ~ subscriptions
+        itemEdit.$NOTE <~> tfNote.textProperty ~ subscriptions
+        itemEdit.$FAMIID ~> (tfFamiID, \.stringValue) ~ subscriptions
+        itemEdit.$ACCURACY ~> (tfAccuracy, \.stringValue) ~ subscriptions
+        vmEdit.$isOKEnabled ~> (btnOK, \.isEnabled) ~ subscriptions
         btnOK.rx.tap.flatMap { [unowned self] _ in
             self.vmEdit.onOK()
         }.subscribe { [unowned self] _ in

@@ -27,7 +27,8 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     var vmSettings: SettingsViewModel! { vm.vmSettings }
     var arrPatterns: [MPattern] { vm.arrPatternsFiltered ?? vm.arrPatterns }
     var arrWebPages: [MPatternWebPage] { vmWP.arrWebPages }
-    
+    var subscriptions = Set<AnyCancellable>()
+
     // https://developer.apple.com/videos/play/wwdc2011/120/
     // https://stackoverflow.com/questions/2121907/drag-drop-reorder-rows-on-nstableview
     let tableRowDragType = NSPasteboard.PasteboardType(rawValue: "private.table-row")
@@ -43,8 +44,8 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
         wvWebPage.allowsMagnification = true
         wvWebPage.allowsBackForwardNavigationGestures = true
         tvWebPages.registerForDraggedTypes([tableRowDragType])
-        _ = vm.textFilter <~> sfTextFilter.rx.text.orEmpty
-        _ = vm.scopeFilter <~> scScopeFilter.rx.selectedLabel
+        vm.$textFilter <~> sfTextFilter.textProperty ~ subscriptions
+        vm.$scopeFilter <~> scScopeFilter.selectedLabelProperty ~ subscriptions
         sfTextFilter.rx.searchFieldDidStartSearching.subscribe { [unowned self] _ in
             self.vm.textFilter.accept(self.vmSettings.autoCorrectInput(text: self.vm.textFilter.value))
         } ~ rx.disposeBag

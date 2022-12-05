@@ -11,11 +11,6 @@ import Combine
 
 class WordsUnitBatchEditViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 
-    var vmEdit: WordsUnitBatchEditViewModel!
-    var vmSettings: SettingsViewModel { vmEdit.vm.vmSettings }
-    var complete: (() -> Void)?
-    var arrWords: [MUnitWord] { vmEdit.vm.arrWords }
-
     @IBOutlet weak var acUnits: NSArrayController!
     @IBOutlet weak var acParts: NSArrayController!
     @IBOutlet weak var pubUnit: NSPopUpButton!
@@ -27,6 +22,12 @@ class WordsUnitBatchEditViewController: NSViewController, NSTableViewDataSource,
     @IBOutlet weak var chkSeqNum: NSButton!
     @IBOutlet weak var btnOK: NSButton!
 
+    var vmEdit: WordsUnitBatchEditViewModel!
+    var vmSettings: SettingsViewModel { vmEdit.vm.vmSettings }
+    var complete: (() -> Void)?
+    var arrWords: [MUnitWord] { vmEdit.vm.arrWords }
+    var subscriptions = Set<AnyCancellable>()
+
     func startEdit(vm: WordsUnitViewModel, unit: Int, part: Int) {
         vmEdit = WordsUnitBatchEditViewModel(vm: vm, unit: unit, part: part)
     }
@@ -35,15 +36,15 @@ class WordsUnitBatchEditViewController: NSViewController, NSTableViewDataSource,
         super.viewDidLoad()
         acUnits.content = vmSettings.arrUnits
         acParts.content = vmSettings.arrParts
-        _ = vmEdit.indexUNIT <~> pubUnit.rx.selectedItemIndex
-        _ = vmEdit.indexPART <~> pubPart.rx.selectedItemIndex
-        _ = vmEdit.SEQNUM <~> tfSeqNum.rx.text.orEmpty
-        _ = vmEdit.unitChecked <~> chkUnit.rx.isOn
-        _ = vmEdit.partChecked <~> chkPart.rx.isOn
-        _ = vmEdit.seqnumChecked <~> chkSeqNum.rx.isOn
-        _ = vmEdit.unitChecked ~> pubUnit.rx.isEnabled
-        _ = vmEdit.partChecked ~> pubPart.rx.isEnabled
-        _ = vmEdit.seqnumChecked ~> tfSeqNum.rx.isEnabled
+        vmEdit.$indexUNIT <~> pubUnit.selectedItemIndexProperty ~ subscriptions
+        vmEdit.$indexPART <~> pubPart.selectedItemIndexProperty ~ subscriptions
+        vmEdit.$SEQNUM <~> tfSeqNum.textProperty ~ subscriptions
+        vmEdit.$unitChecked <~> chkUnit.isOnProperty ~ subscriptions
+        vmEdit.$partChecked <~> chkPart.isOnProperty ~ subscriptions
+        vmEdit.$seqnumChecked <~> chkSeqNum.isOnProperty ~ subscriptions
+        vmEdit.$unitChecked ~> (pubUnit, \.isEnabled) ~ subscriptions
+        vmEdit.$partChecked ~> (pubPart, \.isEnabled) ~ subscriptions
+        vmEdit.$seqnumChecked ~> (tfSeqNum, \.isEnabled) ~ subscriptions
         btnOK.rx.tap.flatMap { [unowned self] _ -> Single<()> in
             // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
             self.commitEditing()

@@ -10,8 +10,6 @@ import Cocoa
 import Combine
 
 class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldDelegate {
-    @objc dynamic var vm: PhrasesReviewViewModel!
-    var vmSettings: SettingsViewModel { vm.vmSettings }
 
     @IBOutlet weak var tfIndex: NSTextField!
     @IBOutlet weak var tfCorrect: NSTextField!
@@ -24,7 +22,10 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
     @IBOutlet weak var scOnRepeat: NSSegmentedControl!
     @IBOutlet weak var scMoveForward: NSSegmentedControl!
 
+    @objc dynamic var vm: PhrasesReviewViewModel!
+    var vmSettings: SettingsViewModel { vm.vmSettings }
     let synth = NSSpeechSynthesizer()
+    var subscriptions = Set<AnyCancellable>()
 
     func settingsChanged() {
         vm = PhrasesReviewViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) { [unowned self] in
@@ -35,23 +36,23 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
         }
         synth.setVoice(NSSpeechSynthesizer.VoiceName(rawValue: vmSettings.macVoiceName))
         
-        _ = vm.indexString ~> tfIndex.rx.text.orEmpty
-        _ = vm.indexHidden ~> tfIndex.rx.isHidden
-        _ = vm.correctHidden ~> tfCorrect.rx.isHidden
-        _ = vm.incorrectHidden ~> tfIncorrect.rx.isHidden
-        _ = vm.checkNextEnabled ~> btnCheckNext.rx.isEnabled
-        _ = vm.checkNextTitle ~> btnCheckNext.rx.title
-        _ = vm.checkPrevEnabled ~> btnCheckPrev.rx.isEnabled
-        _ = vm.checkPrevTitle ~> btnCheckPrev.rx.title
-        _ = vm.checkPrevHidden ~> btnCheckPrev.rx.isHidden
-        _ = vm.phraseTargetString ~> tfPhraseTarget.rx.text.orEmpty
-        _ = vm.phraseTargetHidden ~> tfPhraseTarget.rx.isHidden
-        _ = vm.translationString ~> tfTranslation.rx.text.orEmpty
-        _ = vm.phraseInputString <~> tfPhraseInput.rx.text.orEmpty
-        _ = vm.onRepeat <~> scOnRepeat.rx.isOn
-        _ = vm.moveForward <~> scMoveForward.rx.isOn
-        _ = vm.onRepeatHidden ~> scOnRepeat.rx.isHidden
-        _ = vm.moveForwardHidden ~> scMoveForward.rx.isHidden
+        vm.$indexString ~> (tfIndex, \.stringValue) ~ subscriptions
+        vm.$indexHidden ~> (tfIndex, \.isHidden) ~ subscriptions
+        vm.$correctHidden ~> (tfCorrect, \.isHidden) ~ subscriptions
+        vm.$incorrectHidden ~> (tfIncorrect, \.isHidden) ~ subscriptions
+        vm.$checkNextEnabled ~> (btnCheckNext, \.isEnabled) ~ subscriptions
+        vm.$checkNextTitle ~> (btnCheckNext.rx.title
+        vm.$checkPrevEnabled ~> (btnCheckPrev, \.isEnabled) ~ subscriptions
+        vm.$checkPrevTitle ~> (btnCheckPrev.rx.title
+        vm.$checkPrevHidden ~> (btnCheckPrev.rx, \.isHidden) ~ subscriptions
+        vm.$phraseTargetString ~> (tfPhraseTarget, \.stringValue) ~ subscriptions
+        vm.$phraseTargetHidden ~> (tfPhraseTarget, \.isHidden) ~ subscriptions
+        vm.$translationString ~> (tfTranslation, \.stringValue) ~ subscriptions
+        vm.$phraseInputString <~> tfPhraseInput.rx.text.orEmpty
+        vm.$onRepeat <~> scOnRepeat.rx.isOn
+        vm.$moveForward <~> scMoveForward.rx.isOn
+        vm.$onRepeatHidden ~> (scOnRepeat, \.isHidden) ~ subscriptions
+        vm.$moveForwardHidden ~> (scMoveForward, \.isHidden) ~ subscriptions
 
         newTest(self)
     }

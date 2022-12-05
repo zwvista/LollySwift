@@ -21,4 +21,20 @@ extension NSButton {
         })
         .eraseToAnyPublisher()
     }
+    
+    @objc var isOn: Bool {
+        get {
+            state == .on
+        }
+        set {
+            state = newValue ? .on : .off
+        }
+    }
+    var isOnPublisher: AnyPublisher<Bool, Never> {
+        Publishers.ControlProperty(control: self, keyPath: \.isOn)
+            .eraseToAnyPublisher()
+    }
+    var isOnProperty: Publishers.ControlProperty2<NSButton, Bool> {
+        Publishers.ControlProperty2(control: self, getter: \.isOnPublisher, setter: \.isOn)
+    }
 }

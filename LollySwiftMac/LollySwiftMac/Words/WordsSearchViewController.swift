@@ -35,7 +35,7 @@ class WordsSearchViewController: WordsBaseViewController {
     }
 
     override func addNewWord() {
-        guard !vm.newWord.value.isEmpty else {return}
+        guard !vm.newWord.isEmpty else {return}
         vm.addNewWord()
         tvWords.reloadData()
         tvWords.selectRowIndexes(IndexSet(integer: vm.arrWords.count - 1), byExtendingSelection: false)
@@ -43,7 +43,7 @@ class WordsSearchViewController: WordsBaseViewController {
     }
     
     func addNewWord(word: String) {
-        vm.newWord.accept(word)
+        vm.newWord = word
         addNewWord()
     }
     

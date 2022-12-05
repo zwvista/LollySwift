@@ -30,6 +30,7 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
 
     let imageOff = NSImage(named: "NSStatusNone")
     let imageOn = NSImage(named: "NSStatusAvailable")
+    var subscriptions = Set<AnyCancellable>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -122,7 +123,7 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
         if responder == nil {
             responder = tvWords
         }
-        let word = vmWords.selectedWord.isEmpty ? vmWords.newWord.value : vmWords.selectedWord
+        let word = vmWords.selectedWord.isEmpty ? vmWords.newWord : vmWords.selectedWord
         for item in tabView.tabViewItems {
             (item.viewController as! WordsDictViewController).searchWord(word: word)
         }
@@ -156,7 +157,7 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         if let tfNewWord = tfNewWord {
-            _ = vmWords.newWord <~> tfNewWord.rx.text.orEmpty
+            vmWords.$newWord <~> tfNewWord.textProperty ~ subscriptions
             tfNewWord.rx.controlTextDidEndEditing.subscribe(onNext: { [unowned self] _ in
                 self.commitEditing()
                 if !self.vmWords.newWord.value.isEmpty {
@@ -165,8 +166,8 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
             }) ~ rx.disposeBag
         }
         if let sfTextFilter = sfTextFilter {
-            _ = vmWords.textFilter <~> sfTextFilter.rx.text.orEmpty
-            _ = vmWords.scopeFilter <~> scScopeFilter.rx.selectedLabel
+            vmWords.$textFilter <~> sfTextFilter.textProperty ~ subscriptions
+            vmWords.$scopeFilter <~> scScopeFilter.selectedLabelProperty ~ subscriptions
             sfTextFilter.rx.searchFieldDidStartSearching.subscribe { [unowned self] _ in
                 self.vmWords.textFilter.accept(self.vmSettings.autoCorrectInput(text: self.vmWords.textFilter.value))
             } ~ rx.disposeBag

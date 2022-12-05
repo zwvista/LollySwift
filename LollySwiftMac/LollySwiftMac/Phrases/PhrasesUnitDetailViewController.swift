@@ -11,12 +11,6 @@ import Combine
 
 class PhrasesUnitDetailViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 
-    var complete: (() -> Void)?
-    var vmEdit: PhrasesUnitDetailViewModel!
-    var item: MUnitPhrase { vmEdit.item }
-    var itemEdit: MUnitPhraseEdit { vmEdit.itemEdit }
-    var arrPhrases: [MUnitPhrase] { vmEdit.vmSingle?.arrPhrases ?? [MUnitPhrase]() }
-
     @IBOutlet weak var acUnits: NSArrayController!
     @IBOutlet weak var acParts: NSArrayController!
     @IBOutlet weak var tfID: NSTextField!
@@ -28,7 +22,14 @@ class PhrasesUnitDetailViewController: NSViewController, NSTableViewDataSource, 
     @IBOutlet weak var tfTranslation: NSTextField!
     @IBOutlet weak var tableView: NSTableView!
     @IBOutlet weak var btnOK: NSButton!
-    
+
+    var complete: (() -> Void)?
+    var vmEdit: PhrasesUnitDetailViewModel!
+    var item: MUnitPhrase { vmEdit.item }
+    var itemEdit: MUnitPhraseEdit { vmEdit.itemEdit }
+    var arrPhrases: [MUnitPhrase] { vmEdit.vmSingle?.arrPhrases ?? [MUnitPhrase]() }
+    var subscriptions = Set<AnyCancellable>()
+
     func startEdit(vm: PhrasesUnitViewModel, item: MUnitPhrase, wordid: Int) {
         vmEdit = PhrasesUnitDetailViewModel(vm: vm, item: item, wordid: wordid) {
             self.tableView.reloadData()
@@ -39,14 +40,14 @@ class PhrasesUnitDetailViewController: NSViewController, NSTableViewDataSource, 
         super.viewDidLoad()
         acUnits.content = item.textbook.arrUnits
         acParts.content = item.textbook.arrParts
-        _ = itemEdit.ID ~> tfID.rx.text.orEmpty
-        _ = itemEdit.indexUNIT <~> pubUnit.rx.selectedItemIndex
-        _ = itemEdit.indexPART <~> pubPart.rx.selectedItemIndex
-        _ = itemEdit.SEQNUM <~> tfSeqNum.rx.text.orEmpty
-        _ = itemEdit.PHRASEID ~> tfPhraseID.rx.text.orEmpty
-        _ = itemEdit.PHRASE <~> tfPhrase.rx.text.orEmpty
-        _ = itemEdit.TRANSLATION <~> tfTranslation.rx.text.orEmpty
-        _ = vmEdit.isOKEnabled ~> btnOK.rx.isEnabled
+        itemEdit.ID ~> (tfID, \.stringValue)
+        itemEdit.indexUNIT <~> pubUnit.rx.selectedItemIndex
+        itemEdit.indexPART <~> pubPart.rx.selectedItemIndex
+        itemEdit.SEQNUM <~> tfSeqNum.rx.text.orEmpty
+        itemEdit.PHRASEID ~> tfPhraseID.rx.text.orEmpty
+        itemEdit.PHRASE <~> tfPhrase.rx.text.orEmpty
+        itemEdit.TRANSLATION <~> tfTranslation.rx.text.orEmpty
+        vmEdit.isOKEnabled ~> btnOK.rx.isEnabled
         btnOK.rx.tap.flatMap { [unowned self] _ in
             self.vmEdit.onOK()
         }.subscribe { [unowned self] _ in

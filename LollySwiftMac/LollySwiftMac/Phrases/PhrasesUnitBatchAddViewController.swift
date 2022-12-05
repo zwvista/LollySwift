@@ -11,19 +11,20 @@ import Combine
 
 class PhrasesUnitBatchAddViewController: NSViewController {
     
-    var vm: PhrasesUnitViewModel!
-    var vmEdit: PhrasesUnitBatchAddViewModel!
-    var item: MUnitPhrase { vmEdit.item }
-    var itemEdit: MUnitPhraseEdit { vmEdit.itemEdit }
-    var complete: (() -> Void)?
-    
     @IBOutlet weak var acUnits: NSArrayController!
     @IBOutlet weak var acParts: NSArrayController!
     @IBOutlet weak var pubUnit: NSPopUpButton!
     @IBOutlet weak var pubPart: NSPopUpButton!
     @IBOutlet weak var tvPhrases: NSTextView!
     @IBOutlet weak var btnOK: NSButton!
-    
+
+    var vm: PhrasesUnitViewModel!
+    var vmEdit: PhrasesUnitBatchAddViewModel!
+    var item: MUnitPhrase { vmEdit.item }
+    var itemEdit: MUnitPhraseEdit { vmEdit.itemEdit }
+    var complete: (() -> Void)?
+    var subscriptions = Set<AnyCancellable>()
+
     func startEdit(vm: PhrasesUnitViewModel) {
         vmEdit = PhrasesUnitBatchAddViewModel(vm: vm)
     }
@@ -32,9 +33,9 @@ class PhrasesUnitBatchAddViewController: NSViewController {
         super.viewDidLoad()
         acUnits.content = item.textbook.arrUnits
         acParts.content = item.textbook.arrParts
-        _ = itemEdit.indexUNIT <~> pubUnit.rx.selectedItemIndex
-        _ = itemEdit.indexPART <~> pubPart.rx.selectedItemIndex
-        _ = itemEdit.PHRASES <~> tvPhrases.rx.string
+        itemEdit.indexUNIT <~> pubUnit.selectedItemIndexProperty ~ subscriptions
+        itemEdit.indexPART <~> pubPart.selectedItemIndexProperty ~ subscriptions
+        itemEdit.PHRASES <~> tvPhrases.rx.string
         btnOK.rx.tap.flatMap { [unowned self] _ in
             self.vmEdit.onOK()
         }.subscribe { [unowned self] _ in

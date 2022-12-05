@@ -17,7 +17,7 @@ extension NSSegmentedControl {
         Publishers.ControlProperty2(control: self, getter: \.selectedSegmentPublisher, setter: \.selectedSegment)
     }
 
-    @objc var selectLabel: String {
+    @objc var selectedLabel: String {
         get {
             label(forSegment: selectedSegment)!
         }
@@ -25,11 +25,11 @@ extension NSSegmentedControl {
             selectedSegment = (0..<segmentCount).first { label(forSegment: $0) == newValue } ?? 0
         }
     }
-    var selectLabelPublisher: AnyPublisher<String, Never> {
-        Publishers.ControlProperty(control: self, keyPath: \.selectLabel)
+    var selectedLabelPublisher: AnyPublisher<String, Never> {
+        Publishers.ControlProperty(control: self, keyPath: \.selectedLabel)
             .eraseToAnyPublisher()
     }
-    var selectLabelProperty: Publishers.ControlProperty2<NSSegmentedControl, String> {
-        Publishers.ControlProperty2(control: self, getter: \.selectLabelPublisher, setter: \.selectLabel)
+    var selectedLabelProperty: Publishers.ControlProperty2<NSSegmentedControl, String> {
+        Publishers.ControlProperty2(control: self, getter: \.selectedLabelPublisher, setter: \.selectedLabel)
     }
 }

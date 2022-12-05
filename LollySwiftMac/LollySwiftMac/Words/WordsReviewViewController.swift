@@ -10,10 +10,6 @@ import Cocoa
 import Combine
 
 class WordsReviewViewController: WordsBaseViewController, NSTextFieldDelegate {
-    @objc dynamic var vm: WordsReviewViewModel!
-    override var vmWords: WordsBaseViewModel { vm }
-    override var vmSettings: SettingsViewModel! { vm.vmSettings }
-    override var initSettingsInViewDidLoad: Bool { false }
 
     @IBOutlet weak var tfIndex: NSTextField!
     @IBOutlet weak var tfCorrect: NSTextField!
@@ -29,10 +25,16 @@ class WordsReviewViewController: WordsBaseViewController, NSTextFieldDelegate {
     @IBOutlet weak var scOnRepeat: NSSegmentedControl!
     @IBOutlet weak var scMoveForward: NSSegmentedControl!
 
+    @objc dynamic var vm: WordsReviewViewModel!
+    override var vmWords: WordsBaseViewModel { vm }
+    override var vmSettings: SettingsViewModel! { vm.vmSettings }
+    override var initSettingsInViewDidLoad: Bool { false }
+    var subscriptions = Set<AnyCancellable>()
+
     override func settingsChanged() {
         vm = WordsReviewViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) { [unowned self] in
             self.tfWordInput.becomeFirstResponder()
-            if self.vm.hasCurrent && self.vm.isSpeaking.value {
+            if self.vm.hasCurrent && self.vm.isSpeaking {
                 self.synth.startSpeaking(self.vm.currentWord)
             }
             if !self.vm.isTestMode {
@@ -41,29 +43,29 @@ class WordsReviewViewController: WordsBaseViewController, NSTextFieldDelegate {
         }
         super.settingsChanged()
 
-        _ = vm.indexString ~> tfIndex.rx.text.orEmpty
-        _ = vm.indexHidden ~> tfIndex.rx.isHidden
-        _ = vm.correctHidden ~> tfCorrect.rx.isHidden
-        _ = vm.incorrectHidden ~> tfIncorrect.rx.isHidden
-        _ = vm.accuracyString ~> tfAccuracy.rx.text.orEmpty
-        _ = vm.accuracyHidden ~> tfAccuracy.rx.isHidden
-        _ = vm.checkNextEnabled ~> btnCheckNext.rx.isEnabled
-        _ = vm.checkNextTitle ~> btnCheckNext.rx.title
-        _ = vm.checkPrevEnabled ~> btnCheckPrev.rx.isEnabled
-        _ = vm.checkPrevTitle ~> btnCheckPrev.rx.title
-        _ = vm.checkPrevHidden ~> btnCheckPrev.rx.isHidden
-        _ = vm.wordTargetString ~> tfWordTarget.rx.text.orEmpty
-        _ = vm.noteTargetString ~> tfNoteTarget.rx.text.orEmpty
-        _ = vm.wordHintString ~> tfWordHint.rx.text.orEmpty
-        _ = vm.wordTargetHidden ~> tfWordTarget.rx.isHidden
-        _ = vm.noteTargetHidden ~> tfNoteTarget.rx.isHidden
-        _ = vm.wordHintHidden ~> tfWordHint.rx.isHidden
-        _ = vm.translationString ~> tfTranslation.rx.text.orEmpty
-        _ = vm.wordInputString <~> tfWordInput.rx.text.orEmpty
-        _ = vm.onRepeat <~> scOnRepeat.rx.isOn
-        _ = vm.moveForward <~> scMoveForward.rx.isOn
-        _ = vm.onRepeatHidden ~> scOnRepeat.rx.isHidden
-        _ = vm.moveForwardHidden ~> scMoveForward.rx.isHidden
+        vm.$indexString ~> (tfIndex, \.stringValue) ~ subscriptions
+        vm.$indexHidden ~> (tfIndex, \.isHidden) ~ subscriptions
+        vm.$correctHidden ~> (tfCorrect, \.isHidden) ~ subscriptions
+        vm.$incorrectHidden ~> (tfIncorrect, \.isHidden) ~ subscriptions
+        vm.$accuracyString ~> (tfAccuracy, \.stringValue) ~ subscriptions
+        vm.$accuracyHidden ~> (tfAccuracy, \.isHidden) ~ subscriptions
+        vm.$checkNextEnabled ~> (btnCheckNext, \.isEnabled) ~ subscriptions
+        vm.$checkNextTitle ~> (btnCheckNext, \.title) ~ subscriptions
+        vm.$checkPrevEnabled ~> (btnCheckPrev, \.isEnabled) ~ subscriptions
+        vm.$checkPrevTitle ~> (btnCheckPrev, \.title) ~ subscriptions
+        vm.$checkPrevHidden ~> (btnCheckPrev, \.isHidden) ~ subscriptions
+        vm.$wordTargetString ~> (tfWordTarget, \.stringValue) ~ subscriptions
+        vm.$noteTargetString ~> (tfNoteTarget, \.stringValue) ~ subscriptions
+        vm.$wordHintString ~> (tfWordHint, \.stringValue) ~ subscriptions
+        vm.$wordTargetHidden ~> (tfWordTarget, \.isHidden) ~ subscriptions
+        vm.$noteTargetHidden ~> (tfNoteTarget, \.isHidden) ~ subscriptions
+        vm.$wordHintHidden ~> (tfWordHint, \.isHidden) ~ subscriptions
+        vm.$translationString ~> (tfTranslation, \.stringValue) ~ subscriptions
+        vm.$wordInputString <~> tfWordInput.textProperty ~ subscriptions
+        vm.$onRepeat <~> scOnRepeat.rx.isOn
+        vm.$moveForward <~> scMoveForward.rx.isOn
+        vm.$onRepeatHidden ~> (scOnRepeat, \.isHidden) ~ subscriptions
+        vm.$moveForwardHidden ~> (scMoveForward, \.isHidden) ~ subscriptions
 
         newTest(self)
     }

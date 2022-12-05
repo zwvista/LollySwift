@@ -11,13 +11,6 @@ import Combine
 
 class WordsLangDetailViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 
-    var vm: WordsLangViewModel!
-    var complete: (() -> Void)?
-    @objc var item: MLangWord!
-    var vmEdit: WordsLangDetailViewModel!
-    var itemEdit: MLangWordEdit { vmEdit.itemEdit }
-    var arrWords: [MUnitWord] { vmEdit.vmSingle?.arrWords ?? [MUnitWord]() }
-
     @IBOutlet weak var tfID: NSTextField!
     @IBOutlet weak var tfWord: NSTextField!
     @IBOutlet weak var tfNote: NSTextField!
@@ -26,17 +19,25 @@ class WordsLangDetailViewController: NSViewController, NSTableViewDataSource, NS
     @IBOutlet weak var tableView: NSTableView!
     @IBOutlet weak var btnOK: NSButton!
 
+    var vm: WordsLangViewModel!
+    var complete: (() -> Void)?
+    @objc var item: MLangWord!
+    var vmEdit: WordsLangDetailViewModel!
+    var itemEdit: MLangWordEdit { vmEdit.itemEdit }
+    var arrWords: [MUnitWord] { vmEdit.vmSingle?.arrWords ?? [MUnitWord]() }
+    var subscriptions = Set<AnyCancellable>()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         vmEdit = WordsLangDetailViewModel(vm: vm, item: item) {
             self.tableView.reloadData()
         }
-        _ = itemEdit.ID ~> tfID.rx.text.orEmpty
-        _ = itemEdit.WORD <~> tfWord.rx.text.orEmpty
-        _ = itemEdit.NOTE <~> tfNote.rx.text.orEmpty
-        _ = itemEdit.FAMIID ~> tfFamiID.rx.text.orEmpty
-        _ = itemEdit.ACCURACY ~> tfAccuracy.rx.text.orEmpty
-        _ = vmEdit.isOKEnabled ~> btnOK.rx.isEnabled
+        itemEdit.$ID ~> (tfID, \.stringValue) ~ subscriptions
+        itemEdit.$WORD <~> tfWord.textProperty ~ subscriptions
+        itemEdit.$NOTE <~> tfNote.textProperty ~ subscriptions
+        itemEdit.$FAMIID ~> (tfFamiID, \.stringValue) ~ subscriptions
+        itemEdit.$ACCURACY ~> (tfAccuracy, \.stringValue) ~ subscriptions
+        vmEdit.$isOKEnabled ~> (btnOK, \.isEnabled) ~ subscriptions
         btnOK.rx.tap.flatMap { [unowned self] _ in
             self.vmEdit.onOK()
         }.subscribe { [unowned self] _ in
