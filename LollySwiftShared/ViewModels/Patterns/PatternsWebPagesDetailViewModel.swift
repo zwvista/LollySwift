@@ -21,7 +21,7 @@ class PatternsWebPagesDetailViewModel: NSObject {
         isAddWebPage = item.WEBPAGEID == 0
         isAddPatternWebPage = item.ID == 0
         super.init()
-        itemEdit.$TITLE.combineLatest(itemEdit.$URL).map { !$0.0.isEmpty && !$0.1.isEmpty } ~> $isOKEnabled
+        itemEdit.$TITLE.combineLatest(itemEdit.$URL).map { !$0.0.isEmpty && !$0.1.isEmpty }.eraseToAnyPublisher() ~> $isOKEnabled
     }
 
     func onOK() async {

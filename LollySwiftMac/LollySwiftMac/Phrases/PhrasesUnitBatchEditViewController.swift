@@ -45,7 +45,7 @@ class PhrasesUnitBatchEditViewController: NSViewController, NSTableViewDataSourc
         vmEdit.$unitChecked ~> (pubUnit, \.isEnabled) ~ subscriptions
         vmEdit.$partChecked ~> (pubPart, \.isEnabled) ~ subscriptions
         vmEdit.$seqnumChecked ~> (tfSeqNum, \.isEnabled) ~ subscriptions
-        btnOK.rx.tap.flatMap { [unowned self] _ -> Single<()> in
+        btnOK.tapPublisher.sink { [unowned self] in
             // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
             self.commitEditing()
             var rows = [Bool]()
@@ -53,13 +53,14 @@ class PhrasesUnitBatchEditViewController: NSViewController, NSTableViewDataSourc
                 let chk = (tableView.view(atColumn: 0, row: i, makeIfNecessary: false)! as! LollyCheckCell).chk!
                 rows.append(chk.state == .on)
             }
-            return self.vmEdit.onOK(rows: rows)
-        }.subscribe { [unowned self] _ in
-            self.complete?()
-            self.dismiss(self.btnOK)
-        } ~ rx.disposeBag
+            Task {
+                await self.vmEdit.onOK(rows: rows)
+                self.complete?()
+                self.dismiss(self.btnOK)
+            }
+        } ~ subscriptions
     }
-    
+
     override func viewDidAppear() {
         super.viewDidAppear()
         // https://stackoverflow.com/questions/24235815/cocoa-how-to-set-window-title-from-within-view-controller-in-swift

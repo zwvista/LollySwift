@@ -118,10 +118,11 @@ class SelectDictsViewController: NSViewController, NSTableViewDataSource, NSTabl
 
     @IBAction func okClicked(_ sender: AnyObject) {
         vm.selectedDictsReferenceIndexes = dictsSelected.compactMap { o in vm.arrDictsReference.firstIndex { $0.DICTID == o.DICTID } }
-        vm.updateDictsReference().subscribe(onSuccess: {
+        Task {
+            await vm.updateDictsReference()
             self.complete?()
-        }) ~ rx.disposeBag
-        dismiss(sender)
+            dismiss(sender)
+        }
     }
     
     deinit {

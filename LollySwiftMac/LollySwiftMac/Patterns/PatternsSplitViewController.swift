@@ -115,8 +115,9 @@ class PatternsSplitViewController: NSViewController {
     @IBAction func okClicked(_ sender: AnyObject) {
         // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
         self.commitEditing()
-        vm.onOK().subscribe(onSuccess: {
+        Task {
+            await vm.onOK()
             self.dismiss(sender)
-        }) ~ rx.disposeBag
+        }
     }
 }

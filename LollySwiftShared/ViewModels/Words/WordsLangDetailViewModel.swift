@@ -21,7 +21,8 @@ class WordsLangDetailViewModel: NSObject, ObservableObject {
         self.item = item
         itemEdit = MLangWordEdit(x: item)
         isAdd = item.ID == 0
-        _ = itemEdit.WORD.map { !$0.isEmpty } ~> isOKEnabled
+        super.init()
+        itemEdit.$WORD.map { !$0.isEmpty }.eraseToAnyPublisher() ~> $isOKEnabled
         guard !isAdd else {return}
         vmSingle = SingleWordViewModel(word: item.WORD, settings: vm.vmSettings, complete: complete)
     }

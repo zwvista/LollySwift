@@ -49,23 +49,26 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
     }
 
     override func endEditing(row: Int) {
-        let item = arrWords[row]
-        vm.update(item: item).subscribe(onSuccess: {
-            self.tvWords.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvWords.tableColumns.count))
-        }) ~ rx.disposeBag
+        Task {
+            let item = arrWords[row]
+            await vm.update(item: item)
+            tvWords.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<tvWords.tableColumns.count))
+        }
     }
 
     override func deleteWord(row: Int) {
-        let item = arrWords[row]
-        WordsUnitViewModel.delete(item: item).subscribe(onSuccess: {
-            self.doRefresh()
-        }) ~ rx.disposeBag
+        Task {
+            let item = arrWords[row]
+            await WordsUnitViewModel.delete(item: item)
+            doRefresh()
+        }
     }
 
     @IBAction func refreshTableView(_ sender: AnyObject) {
-        vm.reload().subscribe(onSuccess: {
-            self.doRefresh()
-        }) ~ rx.disposeBag
+        Task {
+            await vm.reload()
+            doRefresh()
+        }
     }
     
     @IBAction func doubleAction(_ sender: AnyObject) {
@@ -88,17 +91,19 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
     }
     
     @IBAction func getNote(_ sender: AnyObject) {
-        let col = tvWords.tableColumns.firstIndex { $0.title == "NOTE" }!
-        vm.getNote(index: tvWords.selectedRow).subscribe(onSuccess: {
-            self.tvWords.reloadData(forRowIndexes: [self.tvWords.selectedRow], columnIndexes: [col])
-        }) ~ rx.disposeBag
+        Task {
+            let col = tvWords.tableColumns.firstIndex { $0.title == "NOTE" }!
+            await vm.getNote(index: tvWords.selectedRow)
+            tvWords.reloadData(forRowIndexes: [tvWords.selectedRow], columnIndexes: [col])
+        }
     }
     
     @IBAction func clearNote(_ sender: AnyObject) {
-        let col = tvWords.tableColumns.firstIndex { $0.title == "NOTE" }!
-        vm.clearNote(index: tvWords.selectedRow).subscribe(onSuccess: {
-            self.tvWords.reloadData(forRowIndexes: [self.tvWords.selectedRow], columnIndexes: [col])
-        }) ~ rx.disposeBag
+        Task {
+            let col = tvWords.tableColumns.firstIndex { $0.title == "NOTE" }!
+            await vm.clearNote(index: tvWords.selectedRow)
+            tvWords.reloadData(forRowIndexes: [tvWords.selectedRow], columnIndexes: [col])
+        }
     }
 
     // https://stackoverflow.com/questions/9368654/cannot-seem-to-setenabledno-on-nsmenuitem

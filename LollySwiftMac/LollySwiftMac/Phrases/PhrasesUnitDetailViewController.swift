@@ -48,12 +48,13 @@ class PhrasesUnitDetailViewController: NSViewController, NSTableViewDataSource, 
         itemEdit.$PHRASE <~> tfPhrase.textProperty ~ subscriptions
         itemEdit.$TRANSLATION <~> tfTranslation.textProperty ~ subscriptions
         vmEdit.$isOKEnabled ~> (btnOK, \.isEnabled) ~ subscriptions
-        btnOK.rx.tap.flatMap { [unowned self] _ in
-            self.vmEdit.onOK()
-        }.subscribe { [unowned self] _ in
-            self.complete?()
-            self.dismiss(self.btnOK)
-        } ~ rx.disposeBag
+        btnOK.tapPublisher.sink { [unowned self] in
+            Task {
+                await self.vmEdit.onOK()
+                self.complete?()
+                self.dismiss(self.btnOK)
+            }
+        } ~ subscriptions
     }
     
     override func viewDidAppear() {

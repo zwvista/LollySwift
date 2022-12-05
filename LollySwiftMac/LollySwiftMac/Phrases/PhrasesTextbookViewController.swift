@@ -49,23 +49,26 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
     }
     
     override func endEditing(row: Int) {
-        let item = arrPhrases[row]
-        vm.update(item: item).subscribe(onSuccess: {
-            self.tvPhrases.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvPhrases.tableColumns.count))
-        }) ~ rx.disposeBag
+        Task {
+            let item = arrPhrases[row]
+            await vm.update(item: item)
+            tvPhrases.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<tvPhrases.tableColumns.count))
+        }
     }
 
     override func deletePhrase(row: Int) {
-        let item = arrPhrases[row]
-        PhrasesUnitViewModel.delete(item: item).subscribe(onSuccess: {
-            self.doRefresh()
-        }) ~ rx.disposeBag
+        Task {
+            let item = arrPhrases[row]
+            await PhrasesUnitViewModel.delete(item: item)
+            doRefresh()
+        }
     }
 
     @IBAction func refreshTableView(_ sender: AnyObject) {
-        vm.reload().subscribe(onSuccess: {
-            self.doRefresh()
-        }) ~ rx.disposeBag
+        Task {
+            await vm.reload()
+            doRefresh()
+        }
     }
     
     @IBAction func doubleAction(_ sender: AnyObject) {
