@@ -27,7 +27,9 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        pubTextbookFilter.rx.selectedItemIndex.subscribe(onNext: { [unowned self] _ in self.applyFilters() }) ~ rx.disposeBag
+        pubTextbookFilter.selectedItemIndexPublisher.sink { [unowned self] _ in
+            self.applyFilters()
+        } ~ subscriptions
     }
 
     override func settingsChanged() {

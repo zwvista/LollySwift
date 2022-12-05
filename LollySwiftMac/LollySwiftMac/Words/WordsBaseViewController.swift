@@ -38,7 +38,7 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
             settingsChanged()
         }
     }
-    
+
     // Hold a reference to the window controller in order to prevent it from being released
     // Without it, we would not be able to access its child controls afterwards
     var wc: WordsPhrasesBaseWindowController!
@@ -59,25 +59,25 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
     func settingsChanged() {
         synth.setVoice(NSSpeechSynthesizer.VoiceName(rawValue: vmSettings.macVoiceName))
     }
-    
+
     func speak() {
     }
-    
+
     @IBAction func speak(_ sender: AnyObject) {
         speak()
     }
-    
+
     @IBAction func isSpeakingChanged(_ sender: AnyObject) {
         isSpeaking = (sender as! NSSegmentedControl).selectedSegment == 1
         speak()
     }
-    
+
     func removeAllTabs() {
         while !tabView.tabViewItems.isEmpty {
             tabView.removeTabViewItem(tabView.tabViewItems[0])
         }
     }
-    
+
     func selectedWordChanged() {
         let row = tvWords.selectedRow
         if row == -1 {
@@ -89,7 +89,7 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
             vmWords.selectedWordID = item.WORDID
         }
     }
-    
+
     func selectedPhraseChanged() {
         let row = tvPhrases.selectedRow
         if row == -1 {

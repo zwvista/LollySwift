@@ -69,11 +69,11 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
         settingsChanged()
         wc = view.window!.windowController as? PhrasesReviewWindowController
         vm.$isSpeaking <~> wc.scSpeak.isOnProperty ~ subscriptions
-        vm.isSpeaking.subscribe(onNext: { isSpeaking in
+        vm.$isSpeaking.sink { isSpeaking in
             if isSpeaking {
                 self.synth.startSpeaking(self.vm.currentPhrase)
             }
-        }) ~ rx.disposeBag
+        } ~ subscriptions
     }
     override func viewWillDisappear() {
         super.viewWillDisappear()
@@ -85,7 +85,9 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
         let optionsVC = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: "ReviewOptionsViewController") as! ReviewOptionsViewController
         optionsVC.options = vm.options
         optionsVC.complete = { [unowned self] in
-            self.vm.newTest()
+            Task {
+                await self.vm.newTest()
+            }
         }
         self.presentAsSheet(optionsVC)
     }
@@ -94,7 +96,7 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
         let textfield = obj.object as! NSControl
         let code = (obj.userInfo!["NSTextMovement"] as! NSNumber).intValue
         guard code == NSReturnTextMovement else {return}
-        guard textfield === tfPhraseInput, !(vm.isTestMode && vm.phraseInputString.value.isEmpty) else {return}
+        guard textfield === tfPhraseInput, !(vm.isTestMode && vm.phraseInputString.isEmpty) else {return}
         vm.check(toNext: true)
     }
     

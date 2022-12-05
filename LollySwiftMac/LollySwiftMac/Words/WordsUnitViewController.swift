@@ -130,11 +130,12 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
         item.WORD = vmSettings.autoCorrectInput(text: vm.newWord)
         tfNewWord.stringValue = ""
         vm.newWord = ""
-        vm.create(item: item).subscribe(onSuccess: {
-            self.tvWords.reloadData()
-            self.tvWords.selectRowIndexes(IndexSet(integer: self.arrWords.count - 1), byExtendingSelection: false)
-            self.responder = self.tfNewWord
-        }) ~ rx.disposeBag
+        Task {
+            await vm.create(item: item)
+            tvWords.reloadData()
+            tvWords.selectRowIndexes(IndexSet(integer: arrWords.count - 1), byExtendingSelection: false)
+            responder = tfNewWord
+        }
     }
     
     func addWord(phraseid: Int) {
@@ -200,55 +201,60 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     }
 
     @IBAction func getNote(_ sender: AnyObject) {
-        let col = tvWords.tableColumns.firstIndex { $0.title == "NOTE" }!
-        vm.getNote(index: tvWords.selectedRow).subscribe(onSuccess: {
-            self.tvWords.reloadData(forRowIndexes: [self.tvWords.selectedRow], columnIndexes: [col])
-        }) ~ rx.disposeBag
+        Task {
+            let col = tvWords.tableColumns.firstIndex { $0.title == "NOTE" }!
+            await vm.getNote(index: tvWords.selectedRow)
+            tvWords.reloadData(forRowIndexes: [tvWords.selectedRow], columnIndexes: [col])
+        }
     }
 
     @IBAction func getNotes(_ sender: AnyObject) {
-        let ifEmpty = sender is NSToolbarItem || (sender as! NSMenuItem).tag == 0
-        vm.getNotes(ifEmpty: ifEmpty, oneComplete: {
-            self.tvWords.reloadData(forRowIndexes: [$0], columnIndexes: IndexSet(0..<self.tvWords.tableColumns.count))
-        }, allComplete: {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                // self.tableView.reloadData()
-            }
-        })
+        Task {
+            let ifEmpty = sender is NSToolbarItem || (sender as! NSMenuItem).tag == 0
+            await vm.getNotes(ifEmpty: ifEmpty, oneComplete: {
+                self.tvWords.reloadData(forRowIndexes: [$0], columnIndexes: IndexSet(0..<self.tvWords.tableColumns.count))
+            }, allComplete: {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    // self.tableView.reloadData()
+                }
+            })
+        }
     }
     
     @IBAction func clearNote(_ sender: AnyObject) {
-        let col = tvWords.tableColumns.firstIndex { $0.title == "NOTE" }!
-        vm.clearNote(index: tvWords.selectedRow).subscribe(onSuccess: {
-            self.tvWords.reloadData(forRowIndexes: [self.tvWords.selectedRow], columnIndexes: [col])
-        }) ~ rx.disposeBag
+        Task {
+            let col = tvWords.tableColumns.firstIndex { $0.title == "NOTE" }!
+            await vm.clearNote(index: tvWords.selectedRow)
+            tvWords.reloadData(forRowIndexes: [tvWords.selectedRow], columnIndexes: [col])
+        }
     }
     
     @IBAction func clearNotes(_ sender: AnyObject) {
-        let ifEmpty = sender is NSToolbarItem || (sender as! NSMenuItem).tag == 0
-        vm.clearNotes(ifEmpty: ifEmpty, oneComplete: {
-            self.tvWords.reloadData(forRowIndexes: [$0], columnIndexes: IndexSet(0..<self.tvWords.tableColumns.count))
-        }).subscribe(onSuccess: {
+        Task {
+            let ifEmpty = sender is NSToolbarItem || (sender as! NSMenuItem).tag == 0
+            await vm.clearNotes(ifEmpty: ifEmpty, oneComplete: {
+                self.tvWords.reloadData(forRowIndexes: [$0], columnIndexes: IndexSet(0..<self.tvWords.tableColumns.count))
+            })
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 // self.tableView.reloadData()
             }
-        }) ~ rx.disposeBag
+        }
     }
     
     @IBAction func previousUnitPart(_ sender: AnyObject) {
-        vmSettings.previousUnitPart().flatMap {
-            self.vm.reload()
-        }.subscribe { _ in
-            self.doRefresh()
-        } ~ rx.disposeBag
+        Task {
+            await vmSettings.previousUnitPart()
+            await vm.reload()
+            doRefresh()
+        }
     }
     
     @IBAction func nextUnitPart(_ sender: AnyObject) {
-        vmSettings.nextUnitPart().flatMap {
-            self.vm.reload()
-        }.subscribe { _ in
-            self.doRefresh()
-        } ~ rx.disposeBag
+        Task {
+            await vmSettings.nextUnitPart()
+            await vm.reload()
+            doRefresh()
+        }
     }
     
     @IBAction func toggleToType(_ sender: AnyObject) {

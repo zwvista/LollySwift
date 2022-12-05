@@ -42,8 +42,10 @@ class PhrasesLangViewController: PhrasesBaseViewController {
     }
     
     override func endEditing(row: Int) {
-        let item = arrPhrases[row]
-        PhrasesLangViewModel.update(item: item).subscribe() ~ rx.disposeBag
+        Task {
+            let item = arrPhrases[row]
+            await PhrasesLangViewModel.update(item: item)
+        }
     }
 
     // https://stackoverflow.com/questions/24219441/how-to-use-nstoolbar-in-xcode-6-and-storyboard
@@ -56,15 +58,17 @@ class PhrasesLangViewController: PhrasesBaseViewController {
     }
 
     override func deletePhrase(row: Int) {
-        PhrasesLangViewModel.delete(item: arrPhrases[row]).subscribe(onSuccess: {
-            self.doRefresh()
-        }) ~ rx.disposeBag
+        Task {
+            await PhrasesLangViewModel.delete(item: arrPhrases[row])
+            doRefresh()
+        }
     }
 
     @IBAction func refreshTableView(_ sender: AnyObject) {
-        vm.reload().subscribe(onSuccess: {
-            self.doRefresh()
-        }) ~ rx.disposeBag
+        Task {
+            await vm.reload()
+            doRefresh()
+        }
     }
     
     @IBAction func doubleAction(_ sender: AnyObject) {
@@ -96,7 +100,9 @@ class PhrasesLangViewController: PhrasesBaseViewController {
         detailVC.textFilter = vm.selectedPhrase
         detailVC.phraseid = vm.selectedPhraseID
         detailVC.complete = {
-            self.getWords()
+            Task {
+                await self.getWords()
+            }
         }
         self.presentAsModalWindow(detailVC)
     }
