@@ -12,20 +12,23 @@ import RxBinding
 
 class LoginViewController: NSViewController {
 
-    let vm = LoginViewModel()
-
     @IBOutlet weak var tfUsername: NSTextField!
     @IBOutlet weak var tfPassword: NSSecureTextField!
+    @IBOutlet weak var btnLogin: NSButton!
+    @IBOutlet weak var btnExit: NSButton!
+
+    let vm = LoginViewModel()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         _ = vm.username <~> tfUsername.rx.text.orEmpty
         _ = vm.password <~> tfPassword.rx.text.orEmpty
-    }
 
-    @IBAction func login(_ sender: Any) {
-        vm.login(username: vm.username.value, password: vm.password.value).subscribe(onSuccess: {
-            globalUser.userid = $0
+        btnLogin.rx.tap.flatMap { [unowned self] _ in
+            vm.login(username: vm.username.value, password: vm.password.value)
+        }.subscribe { [unowned self] userid in
+            globalUser.userid = userid
             if globalUser.userid.isEmpty {
                 let alert = NSAlert()
                 alert.alertStyle = .critical
@@ -38,11 +41,15 @@ class LoginViewController: NSViewController {
                 NSApplication.shared.stopModal(withCode: .OK)
                 self.view.window?.close()
             }
+        } ~ rx.disposeBag
+
+        btnExit.rx.tap.subscribe(onNext: { [unowned self] _ in
+            NSApplication.shared.stopModal(withCode: .cancel)
+            self.view.window?.close()
         }) ~ rx.disposeBag
     }
 
-    @IBAction func exit(_ sender: Any) {
-        NSApplication.shared.stopModal(withCode: .cancel)
-        self.view.window?.close()
+    deinit {
+        print("DEBUG: \(self.className) deinit")
     }
 }
