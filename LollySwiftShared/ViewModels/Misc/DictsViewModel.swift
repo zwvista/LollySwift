@@ -18,10 +18,10 @@ class DictsViewModel: NSObject {
     init(settings: SettingsViewModel, complete: @escaping () -> Void) {
         vmSettings = settings
         super.init()
-        MDictionary.getDictsByLang(settings.selectedLang.ID).subscribe(onSuccess: {
+        MDictionary.getDictsByLang(settings.selectedLang.ID).subscribe {
             self.arrDicts = $0
             complete()
-        }) ~ rx.disposeBag
+        } ~ rx.disposeBag
     }
     
     static func update(item: MDictionary) -> Single<()> {

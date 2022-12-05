@@ -20,8 +20,8 @@ class SingleWordViewModel: NSObject {
         super.init()
         MUnitWord.getDataByLangWord(langid: vmSettings.selectedLang.ID, word: word, arrTextbooks: vmSettings.arrTextbooks).map {
             self.arrWords = $0
-        }.subscribe(onSuccess: {
+        }.subscribe { _ in
             complete()
-        }) ~ rx.disposeBag
+        } ~ rx.disposeBag
     }
 }

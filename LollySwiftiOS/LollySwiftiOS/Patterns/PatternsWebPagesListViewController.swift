@@ -25,7 +25,7 @@ class PatternsWebPagesListViewController: UITableViewController {
     }
     
     @objc func refresh(_ sender: UIRefreshControl) {
-        vm.getWebPages().subscribe(onSuccess: {
+        vm.getWebPages().subscribe {
             sender.endRefreshing()
             self.tableView.reloadData()
         }) ~ rx.disposeBag
@@ -97,7 +97,7 @@ class PatternsWebPagesListViewController: UITableViewController {
     @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
         guard segue.identifier == "Done" else {return}
         if let controller = segue.source as? PatternsWebPagesDetailViewController {
-            controller.vmEdit.onOK().subscribe(onSuccess: {
+            controller.vmEdit.onOK().subscribe {
             }) ~ rx.disposeBag
         }
     }

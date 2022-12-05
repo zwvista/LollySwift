@@ -65,9 +65,9 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     
     override func endEditing(row: Int) {
         let item = arrWords[row]
-        vm.update(item: item).subscribe(onSuccess: {
+        vm.update(item: item).subscribe { _ in
             self.tvWords.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvWords.tableColumns.count))
-        }) ~ rx.disposeBag
+        } ~ rx.disposeBag
     }
 
     func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
@@ -128,11 +128,11 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
         item.WORD = vmSettings.autoCorrectInput(text: vm.newWord.value)
         tfNewWord.stringValue = ""
         vm.newWord.accept("")
-        vm.create(item: item).subscribe(onSuccess: {
+        vm.create(item: item).subscribe { _ in
             self.tvWords.reloadData()
             self.tvWords.selectRowIndexes(IndexSet(integer: self.arrWords.count - 1), byExtendingSelection: false)
             self.responder = self.tfNewWord
-        }) ~ rx.disposeBag
+        } ~ rx.disposeBag
     }
     
     func addWord(phraseid: Int) {
@@ -149,15 +149,15 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     
     override func deleteWord(row: Int) {
         let item = arrWords[row]
-        WordsUnitViewModel.delete(item: item).subscribe(onSuccess: {
+        WordsUnitViewModel.delete(item: item).subscribe { _ in
             self.doRefresh()
-        }) ~ rx.disposeBag
+        } ~ rx.disposeBag
     }
     
     @IBAction func refreshTableView(_ sender: AnyObject) {
-        vm.reload().subscribe(onSuccess: {
+        vm.reload().subscribe { _ in
             self.doRefresh()
-        }) ~ rx.disposeBag
+        } ~ rx.disposeBag
     }
     
     @IBAction func doubleAction(_ sender: AnyObject) {
@@ -197,9 +197,9 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
 
     @IBAction func getNote(_ sender: AnyObject) {
         let col = tvWords.tableColumns.firstIndex { $0.title == "NOTE" }!
-        vm.getNote(index: tvWords.selectedRow).subscribe(onSuccess: {
+        vm.getNote(index: tvWords.selectedRow).subscribe { _ in
             self.tvWords.reloadData(forRowIndexes: [self.tvWords.selectedRow], columnIndexes: [col])
-        }) ~ rx.disposeBag
+        } ~ rx.disposeBag
     }
 
     @IBAction func getNotes(_ sender: AnyObject) {
@@ -215,20 +215,20 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     
     @IBAction func clearNote(_ sender: AnyObject) {
         let col = tvWords.tableColumns.firstIndex { $0.title == "NOTE" }!
-        vm.clearNote(index: tvWords.selectedRow).subscribe(onSuccess: {
+        vm.clearNote(index: tvWords.selectedRow).subscribe { _ in
             self.tvWords.reloadData(forRowIndexes: [self.tvWords.selectedRow], columnIndexes: [col])
-        }) ~ rx.disposeBag
+        } ~ rx.disposeBag
     }
     
     @IBAction func clearNotes(_ sender: AnyObject) {
         let ifEmpty = sender is NSToolbarItem || (sender as! NSMenuItem).tag == 0
         vm.clearNotes(ifEmpty: ifEmpty, oneComplete: {
             self.tvWords.reloadData(forRowIndexes: [$0], columnIndexes: IndexSet(0..<self.tvWords.tableColumns.count))
-        }).subscribe(onSuccess: {
+        }).subscribe { _ in
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 // self.tableView.reloadData()
             }
-        }) ~ rx.disposeBag
+        } ~ rx.disposeBag
     }
     
     @IBAction func previousUnitPart(_ sender: AnyObject) {
@@ -252,9 +252,9 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
         let part = row == -1 ? vmSettings.arrParts[0].value : arrWords[row].PART
         vmSettings.toggleToType(part: part).flatMap {
             self.vm.reload()
-        }.subscribe(onSuccess: {
+        }.subscribe { _ in
             self.doRefresh()
-        }) ~ rx.disposeBag
+        } ~ rx.disposeBag
     }
 
     override func updateStatusText() {

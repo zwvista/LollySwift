@@ -73,9 +73,9 @@ class PatternsWebPagesViewModel: NSObject {
             let item = arrWebPages[i - 1]
             guard item.SEQNUM != i else {continue}
             item.SEQNUM = i
-            MPatternWebPage.update(item.ID, seqnum: item.SEQNUM).subscribe(onSuccess: {
+            MPatternWebPage.update(item.ID, seqnum: item.SEQNUM).subscribe { _ in
                 complete(i - 1)
-            }) ~ rx.disposeBag
+            } ~ rx.disposeBag
         }
     }
 }

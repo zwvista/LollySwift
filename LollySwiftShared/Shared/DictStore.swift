@@ -30,11 +30,11 @@ class DictStore: NSObject {
         dictStatus = .ready
         if dict.DICTTYPENAME == "OFFLINE" {
             wvDict.load(URLRequest(url: URL(string: "about:blank")!))
-            RestApi.getHtml(url: url).subscribe(onSuccess: { html in
+            RestApi.getHtml(url: url).subscribe { html in
                 print(html)
                 let str = self.dict.htmlString(html, word: self.word)
                 self.wvDict.loadHTMLString(str, baseURL: nil)
-            }) ~ rx.disposeBag
+            } ~ rx.disposeBag
         } else {
             wvDict.load(URLRequest(url: URL(string: url)!))
             if !dict.AUTOMATION.isEmpty {

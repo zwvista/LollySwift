@@ -18,10 +18,10 @@ class TextbooksViewModel: NSObject {
     init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> Void) {
         self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
         super.init()
-        MTextbook.getDataByLang(settings.selectedLang.ID, arrUserSettings: settings.arrUserSettings).subscribe(onSuccess: {
+        MTextbook.getDataByLang(settings.selectedLang.ID, arrUserSettings: settings.arrUserSettings).subscribe {
             self.arrTextbooks = $0
             complete()
-        }) ~ rx.disposeBag
+        } ~ rx.disposeBag
     }
     
     static func update(item: MTextbook) -> Single<()> {

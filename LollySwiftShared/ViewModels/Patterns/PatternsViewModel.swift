@@ -25,7 +25,7 @@ class PatternsViewModel: NSObject {
     public init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> Void) {
         self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
         super.init()
-        reload().subscribe(onSuccess: { complete() }) ~ rx.disposeBag
+        reload().subscribe { _ in complete() } ~ rx.disposeBag
     }
     
     func reload() -> Single<()> {

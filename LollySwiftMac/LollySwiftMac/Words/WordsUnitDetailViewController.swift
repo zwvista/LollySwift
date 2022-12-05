@@ -52,7 +52,7 @@ class WordsUnitDetailViewController: NSViewController, NSTableViewDataSource, NS
         _ = itemEdit.FAMIID ~> tfFamiID.rx.text.orEmpty
         _ = itemEdit.ACCURACY ~> tfAccuracy.rx.text.orEmpty
         _ = vmEdit.isOKEnabled ~> btnOK.rx.isEnabled
-        btnOK.rx.tap.flatMap { [unowned self] _ in
+        btnOK.rx.tap.flatMap { [unowned self] in
             self.vmEdit.onOK()
         }.subscribe { [unowned self] _ in
             self.complete?()

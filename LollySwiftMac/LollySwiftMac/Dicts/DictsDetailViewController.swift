@@ -59,13 +59,13 @@ class DictsDetailViewController: NSViewController {
         // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
         self.commitEditing()
         if isAdd {
-            DictsViewModel.create(item: item).subscribe(onSuccess: {_ in
+            DictsViewModel.create(item: item).subscribe { _ in
                 self.complete?()
-            }) ~ rx.disposeBag
+            } ~ rx.disposeBag
         } else {
-            DictsViewModel.update(item: item).subscribe(onSuccess: {
+            DictsViewModel.update(item: item).subscribe { _ in
                 self.complete?()
-            }) ~ rx.disposeBag
+            } ~ rx.disposeBag
         }
         dismiss(sender)
     }

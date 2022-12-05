@@ -66,13 +66,13 @@ class PhrasesReviewViewModel: NSObject {
         onRepeatHidden.accept(isTestMode)
         checkPrevHidden.accept(isTestMode)
         if options.mode == .textbook {
-            MUnitPhrase.getDataByTextbook(vmSettings.selectedTextbook).subscribe(onSuccess: { arr in
+            MUnitPhrase.getDataByTextbook(vmSettings.selectedTextbook).subscribe { arr in
                 let cnt = min(self.options.reviewCount, arr.count)
                 self.arrPhrases = Array(arr.shuffled()[0..<cnt])
                 f()
-            }) ~ self.rx.disposeBag
+            } ~ self.rx.disposeBag
         } else {
-            MUnitPhrase.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO).subscribe(onSuccess: {
+            MUnitPhrase.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO).subscribe {
                 self.arrPhrases = $0
                 let count = self.count
                 let from = count * (self.options.groupSelected - 1) / self.options.groupCount
@@ -86,7 +86,7 @@ class PhrasesReviewViewModel: NSObject {
                     }
                     self.subscriptionTimer?.disposed(by: self.rx.disposeBag)
                 }
-            }) ~ self.rx.disposeBag
+            } ~ self.rx.disposeBag
         }
     }
 

@@ -49,22 +49,22 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
 
     override func endEditing(row: Int) {
         let item = arrWords[row]
-        vm.update(item: item).subscribe(onSuccess: {
+        vm.update(item: item).subscribe { _ in
             self.tvWords.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvWords.tableColumns.count))
-        }) ~ rx.disposeBag
+        } ~ rx.disposeBag
     }
 
     override func deleteWord(row: Int) {
         let item = arrWords[row]
-        WordsUnitViewModel.delete(item: item).subscribe(onSuccess: {
+        WordsUnitViewModel.delete(item: item).subscribe { _ in
             self.doRefresh()
-        }) ~ rx.disposeBag
+        } ~ rx.disposeBag
     }
 
     @IBAction func refreshTableView(_ sender: AnyObject) {
-        vm.reload().subscribe(onSuccess: {
+        vm.reload().subscribe { _ in
             self.doRefresh()
-        }) ~ rx.disposeBag
+        } ~ rx.disposeBag
     }
     
     @IBAction func doubleAction(_ sender: AnyObject) {
@@ -88,16 +88,16 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
     
     @IBAction func getNote(_ sender: AnyObject) {
         let col = tvWords.tableColumns.firstIndex { $0.title == "NOTE" }!
-        vm.getNote(index: tvWords.selectedRow).subscribe(onSuccess: {
+        vm.getNote(index: tvWords.selectedRow).subscribe { _ in
             self.tvWords.reloadData(forRowIndexes: [self.tvWords.selectedRow], columnIndexes: [col])
-        }) ~ rx.disposeBag
+        } ~ rx.disposeBag
     }
     
     @IBAction func clearNote(_ sender: AnyObject) {
         let col = tvWords.tableColumns.firstIndex { $0.title == "NOTE" }!
-        vm.clearNote(index: tvWords.selectedRow).subscribe(onSuccess: {
+        vm.clearNote(index: tvWords.selectedRow).subscribe { _ in
             self.tvWords.reloadData(forRowIndexes: [self.tvWords.selectedRow], columnIndexes: [col])
-        }) ~ rx.disposeBag
+        } ~ rx.disposeBag
     }
 
     // https://stackoverflow.com/questions/9368654/cannot-seem-to-setenabledno-on-nsmenuitem

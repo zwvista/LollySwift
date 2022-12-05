@@ -17,7 +17,7 @@ class WordsLangViewModel: WordsBaseViewModel {
 
     public init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> Void) {
         super.init(settings: settings, needCopy: needCopy)
-        reload().subscribe(onSuccess: { complete() }) ~ rx.disposeBag
+        reload().subscribe { _ in complete() } ~ rx.disposeBag
     }
     
     func reload() -> Single<()> {

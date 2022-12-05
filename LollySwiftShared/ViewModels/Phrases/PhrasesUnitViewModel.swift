@@ -19,7 +19,7 @@ class PhrasesUnitViewModel: PhrasesBaseViewModel {
     public init(settings: SettingsViewModel, inTextbook: Bool, needCopy: Bool, complete: @escaping () -> Void) {
         self.inTextbook = inTextbook
         super.init(settings: settings, needCopy: needCopy)
-        reload().subscribe(onSuccess: { complete() }) ~ rx.disposeBag
+        reload().subscribe { _ in complete() } ~ rx.disposeBag
     }
     
     func reload() -> Single<()> {
@@ -76,9 +76,9 @@ class PhrasesUnitViewModel: PhrasesBaseViewModel {
             let item = arrPhrases[i - 1]
             guard item.SEQNUM != i else {continue}
             item.SEQNUM = i
-            PhrasesUnitViewModel.update(item.ID, seqnum: item.SEQNUM).subscribe(onSuccess: {
+            PhrasesUnitViewModel.update(item.ID, seqnum: item.SEQNUM).subscribe { _ in
                 complete(i - 1)
-            }) ~ rx.disposeBag
+            } ~ rx.disposeBag
         }
     }
 

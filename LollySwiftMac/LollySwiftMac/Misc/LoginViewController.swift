@@ -25,7 +25,7 @@ class LoginViewController: NSViewController {
         _ = vm.username <~> tfUsername.rx.text.orEmpty
         _ = vm.password <~> tfPassword.rx.text.orEmpty
 
-        btnLogin.rx.tap.flatMap { [unowned self] _ in
+        btnLogin.rx.tap.flatMap { [unowned self] in
             vm.login(username: vm.username.value, password: vm.password.value)
         }.subscribe { [unowned self] userid in
             globalUser.userid = userid
@@ -43,10 +43,10 @@ class LoginViewController: NSViewController {
             }
         } ~ rx.disposeBag
 
-        btnExit.rx.tap.subscribe(onNext: { [unowned self] _ in
+        btnExit.rx.tap.subscribe { [unowned self] _ in
             NSApplication.shared.stopModal(withCode: .cancel)
             self.view.window?.close()
-        }) ~ rx.disposeBag
+        } ~ rx.disposeBag
     }
 
     deinit {

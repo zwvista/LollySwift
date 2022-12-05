@@ -130,7 +130,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
     @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
         guard segue.identifier == "Done" else {return}
         let controller = segue.source as! PhrasesUnitDetailViewController
-        controller.vmEdit.onOK().subscribe(onSuccess: {
+        controller.vmEdit.onOK().subscribe {
             self.tableView.reloadData()
             if controller.vmEdit.isAdd {
                 self.performSegue(withIdentifier: "add", sender: self)

@@ -96,13 +96,13 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
         guard oldValue != newValue else {return}
         item.setValue(newValue, forKey: key)
         if tv === tvPatterns {
-            PatternsViewModel.update(item: item as! MPattern).subscribe(onSuccess: {
+            PatternsViewModel.update(item: item as! MPattern).subscribe { _ in
                 tv.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvPatterns.tableColumns.count))
-            }) ~ rx.disposeBag
+            } ~ rx.disposeBag
         } else if tv === tvWebPages {
-            PatternsWebPagesViewModel.updateWebPage(item: item as! MPatternWebPage).subscribe(onSuccess: {
+            PatternsWebPagesViewModel.updateWebPage(item: item as! MPatternWebPage).subscribe { _ in
                 tv.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvPatterns.tableColumns.count))
-            }) ~ rx.disposeBag
+            } ~ rx.disposeBag
         }
     }
 
@@ -126,12 +126,12 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
             let row = tvPatterns.selectedRow
             vm.selectedPatternItem = row == -1 ? nil : arrPatterns[row]
             vmWP.selectedPatternItem = vm.selectedPatternItem
-            vmWP.getWebPages().subscribe(onSuccess: {
+            vmWP.getWebPages().subscribe { _ in
                 self.tvWebPages.reloadData()
                 if self.tvWebPages.numberOfRows > 0 {
                     self.tvWebPages.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
                 }
-            }) ~ rx.disposeBag
+            } ~ rx.disposeBag
             if isSpeaking {
                 speak(self)
             }
@@ -189,9 +189,9 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     }
     
     @IBAction func refreshTableView(_ sender: AnyObject) {
-        vm.reload().subscribe(onSuccess: {
+        vm.reload().subscribe { _ in
             self.doRefresh()
-        }) ~ rx.disposeBag
+        } ~ rx.disposeBag
     }
     
     // https://stackoverflow.com/questions/24219441/how-to-use-nstoolbar-in-xcode-6-and-storyboard

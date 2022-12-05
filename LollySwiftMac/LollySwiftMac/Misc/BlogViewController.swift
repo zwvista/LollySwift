@@ -27,9 +27,9 @@ class BlogViewController: NSViewController, NSMenuItemValidation  {
         vmBlog = BlogViewModel(settings: vm)
         tvMarked.font = NSFont.systemFont(ofSize: 15)
         updateStatusText()
-        vm.getBlogContent().subscribe(onSuccess: {
+        vm.getBlogContent().subscribe {
             self.tvMarked.string = $0
-        }) ~ rx.disposeBag
+        } ~ rx.disposeBag
     }
 
     @IBAction func saveMarked(_ sender: AnyObject) {

@@ -89,10 +89,10 @@ class PhrasesAssociateViewController: NSViewController, NSTableViewDataSource, N
                 }
             }
         }
-        o.subscribe(onSuccess: {
+        o.subscribe { _ in
             self.complete?()
             self.dismiss(sender)
-        }) ~ rx.disposeBag
+        } ~ rx.disposeBag
     }
     
     deinit {

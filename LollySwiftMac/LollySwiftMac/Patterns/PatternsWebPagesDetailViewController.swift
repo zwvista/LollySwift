@@ -42,7 +42,7 @@ class PatternsWebPagesDetailViewController: NSViewController {
         _ = itemEdit.URL <~> tfURL.rx.text.orEmpty
         btnNew.isEnabled = vmEdit.isAddWebPage
         btnExisting.isEnabled = vmEdit.isAddWebPage
-        btnOK.rx.tap.flatMap { [unowned self] _ in
+        btnOK.rx.tap.flatMap { [unowned self] in
             self.vmEdit.onOK()
         }.subscribe { [unowned self] _ in
             self.complete?()

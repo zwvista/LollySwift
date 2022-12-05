@@ -297,9 +297,9 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
     }
     
     func getPhrases() {
-        vmPhrasesLang.getPhrases(wordid: vmWords.selectedWordID).subscribe(onSuccess: {
+        vmPhrasesLang.getPhrases(wordid: vmWords.selectedWordID).subscribe { _ in
             self.tvPhrases.reloadData()
-        }) ~ rx.disposeBag
+        } ~ rx.disposeBag
     }
 
     @IBAction func editPhrase(_ sender: AnyObject) {

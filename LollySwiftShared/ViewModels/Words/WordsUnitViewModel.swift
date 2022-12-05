@@ -19,7 +19,7 @@ class WordsUnitViewModel: WordsBaseViewModel {
     init(settings: SettingsViewModel, inTextbook: Bool, needCopy: Bool, complete: @escaping () -> Void) {
         self.inTextbook = inTextbook
         super.init(settings: settings, needCopy: needCopy)
-        reload().subscribe(onSuccess: { complete() }) ~ rx.disposeBag
+        reload().subscribe { _ in complete() } ~ rx.disposeBag
     }
     
     func reload() -> Single<()> {
@@ -89,9 +89,9 @@ class WordsUnitViewModel: WordsBaseViewModel {
             let item = arrWords[i - 1]
             guard item.SEQNUM != i else {continue}
             item.SEQNUM = i
-            WordsUnitViewModel.update(item.ID, seqnum: item.SEQNUM).subscribe(onSuccess: {
+            WordsUnitViewModel.update(item.ID, seqnum: item.SEQNUM).subscribe { _ in
                 complete(i - 1)
-            }) ~ rx.disposeBag
+            } ~ rx.disposeBag
         }
     }
     
@@ -122,9 +122,9 @@ class WordsUnitViewModel: WordsBaseViewModel {
         vmSettings.getNotes(wordCount: arrWords.count, isNoteEmpty: {
             !ifEmpty || (self.arrWords[$0].NOTE).isEmpty
         }, getOne: { i in
-            self.getNote(index: i).subscribe(onSuccess: {
+            self.getNote(index: i).subscribe { _ in
                 oneComplete(i)
-            }) ~ self.rx.disposeBag
+            } ~ self.rx.disposeBag
         }, allComplete: allComplete) ~ self.rx.disposeBag
     }
 

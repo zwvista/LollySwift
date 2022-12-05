@@ -71,7 +71,7 @@ class WordsReviewViewModel: WordsBaseViewModel {
         onRepeatHidden.accept(isTestMode)
         checkPrevHidden.accept(isTestMode)
         if options.mode == .textbook {
-            MUnitWord.getDataByTextbook(vmSettings.selectedTextbook).subscribe(onSuccess: { arr in
+            MUnitWord.getDataByTextbook(vmSettings.selectedTextbook).subscribe { arr in
                 var arr2 = [MUnitWord]()
                 for o in arr {
                     let s = o.ACCURACY
@@ -90,9 +90,9 @@ class WordsReviewViewModel: WordsBaseViewModel {
                     }
                 }
                 f()
-            }) ~ self.rx.disposeBag
+            } ~ self.rx.disposeBag
         } else {
-            MUnitWord.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO).subscribe(onSuccess: {
+            MUnitWord.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO).subscribe {
                 self.arrWords = $0
                 let count = self.count
                 let from = count * (self.options.groupSelected - 1) / self.options.groupCount
@@ -106,7 +106,7 @@ class WordsReviewViewModel: WordsBaseViewModel {
                     }
                     self.subscriptionTimer?.disposed(by: self.rx.disposeBag)
                 }
-            }) ~ self.rx.disposeBag
+            } ~ self.rx.disposeBag
         }
     }
 
@@ -202,9 +202,9 @@ class WordsReviewViewModel: WordsBaseViewModel {
         if hasCurrent {
             indexString.accept("\(index + 1)/\(count)")
             accuracyString.accept(currentItem!.ACCURACY)
-            getTranslation().subscribe(onSuccess: {
+            getTranslation().subscribe {
                 self.translationString.accept($0)
-            }) ~ rx.disposeBag
+            } ~ rx.disposeBag
         } else {
             subscriptionTimer?.dispose()
         }

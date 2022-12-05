@@ -132,12 +132,12 @@ class PhrasesBaseViewController: WordsPhrasesBaseViewController {
     }
     
     func getWords() {
-        vmWordsLang.getWords(phraseid: vmPhrases.selectedPhraseID).subscribe(onSuccess: {
+        vmWordsLang.getWords(phraseid: vmPhrases.selectedPhraseID).subscribe { _ in
             self.tvWords.reloadData()
             if self.tvWords.numberOfRows > 0 {
                 self.tvWords.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
             }
-        }) ~ rx.disposeBag
+        } ~ rx.disposeBag
     }
 
     @IBAction func editWord(_ sender: AnyObject) {

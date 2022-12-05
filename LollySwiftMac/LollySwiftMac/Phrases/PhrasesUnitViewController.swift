@@ -56,9 +56,9 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     
     override func endEditing(row: Int) {
         let item = arrPhrases[row]
-        vm.update(item: item).subscribe(onSuccess: {
+        vm.update(item: item).subscribe { _ in
             self.tvPhrases.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvPhrases.tableColumns.count))
-        }) ~ rx.disposeBag
+        } ~ rx.disposeBag
     }
 
     func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
@@ -143,15 +143,15 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
 
     override func deletePhrase(row: Int) {
         let item = arrPhrases[row]
-        PhrasesUnitViewModel.delete(item: item).subscribe(onSuccess: {
+        PhrasesUnitViewModel.delete(item: item).subscribe { _ in
             self.doRefresh()
-        }) ~ rx.disposeBag
+        } ~ rx.disposeBag
     }
     
     @IBAction func refreshTableView(_ sender: AnyObject) {
-        vm.reload().subscribe(onSuccess: {
+        vm.reload().subscribe { _ in
             self.doRefresh()
-        }) ~ rx.disposeBag
+        } ~ rx.disposeBag
     }
     
     @IBAction func doubleAction(_ sender: AnyObject) {
@@ -176,17 +176,17 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     @IBAction func previousUnitPart(_ sender: AnyObject) {
         vmSettings.previousUnitPart().flatMap {
             self.vm.reload()
-        }.subscribe(onSuccess: {
+        }.subscribe { _ in
             self.doRefresh()
-        }) ~ rx.disposeBag
+        } ~ rx.disposeBag
     }
     
     @IBAction func nextUnitPart(_ sender: AnyObject) {
         vmSettings.nextUnitPart().flatMap {
             self.vm.reload()
-        }.subscribe(onSuccess: {
+        }.subscribe { _ in
             self.doRefresh()
-        }) ~ rx.disposeBag
+        } ~ rx.disposeBag
     }
     
     @IBAction func toggleToType(_ sender: AnyObject) {
@@ -194,9 +194,9 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
         let part = row == -1 ? vmSettings.arrParts[0].value : arrPhrases[row].PART
         vmSettings.toggleToType(part: part).flatMap {
             self.vm.reload()
-        }.subscribe(onSuccess: {
+        }.subscribe { _ in
             self.doRefresh()
-        }) ~ rx.disposeBag
+        } ~ rx.disposeBag
     }
 
     override func updateStatusText() {

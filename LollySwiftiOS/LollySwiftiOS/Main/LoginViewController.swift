@@ -25,7 +25,7 @@ class LoginViewController: UIViewController {
     }
 
     @IBAction func login(_ sender: Any) {
-        vm.login(username: vm.username.value, password: vm.password.value).subscribe(onSuccess: {
+        vm.login(username: vm.username.value, password: vm.password.value).subscribe {
             globalUser.userid = $0
             if globalUser.userid.isEmpty {
                 let alert = UIAlertController(title: "Login", message:  "Wrong username or password!", preferredStyle:  UIAlertController.Style.alert)
