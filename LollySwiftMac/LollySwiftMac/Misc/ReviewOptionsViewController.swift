@@ -39,20 +39,20 @@ class ReviewOptionsViewController: NSViewController {
         vm.optionsEdit.$shuffled <~> scOrder.isOnProperty ~ subscriptions
         vm.optionsEdit.$onRepeat <~> scOnRepeat.isOnProperty ~ subscriptions
         vm.optionsEdit.$moveForward <~> scMoveForward.isOnProperty ~ subscriptions
-        vm.optionsEdit.$interval <~> stpInterval.rx.integerValue
-        vm.optionsEdit.$interval.map { String($0) } ~> (tfInterval.rx.text.orEmpty
-        vm.optionsEdit.$groupSelected <~> stpGroupSelected.rx.integerValue
-        vm.optionsEdit.$groupSelected.map { String($0) } ~> (tfGroupSelected.rx.text.orEmpty
-        vm.optionsEdit.$groupCount <~> stpGroupCount.rx.integerValue
-        vm.optionsEdit.$groupCount.map { String($0) } ~> (tfGroupCount.rx.text.orEmpty
+        vm.optionsEdit.$interval <~> stpInterval.integerValueProperty ~ subscriptions
+        vm.optionsEdit.$interval.map { String($0) }.eraseToAnyPublisher() ~> (tfInterval, \.stringValue) ~ subscriptions
+        vm.optionsEdit.$groupSelected <~> stpGroupSelected.integerValueProperty ~ subscriptions
+        vm.optionsEdit.$groupSelected.map { String($0) }.eraseToAnyPublisher() ~> (tfGroupSelected, \.stringValue) ~ subscriptions
+        vm.optionsEdit.$groupCount <~> stpGroupCount.integerValueProperty ~ subscriptions
+        vm.optionsEdit.$groupCount.map { String($0) }.eraseToAnyPublisher() ~> (tfGroupCount, \.stringValue) ~ subscriptions
         vm.optionsEdit.$speakingEnabled <~> scSpeak.isOnProperty ~ subscriptions
-        vm.optionsEdit.$reviewCount <~> stpReviewCount.rx.integerValue
-        vm.optionsEdit.$reviewCount.map { String($0) } ~> (tfReviewCount, \.stringValue)
-        btnOK.rx.tap.subscribe { [unowned self] _ in
+        vm.optionsEdit.$reviewCount <~> stpReviewCount.integerValueProperty ~ subscriptions
+        vm.optionsEdit.$reviewCount.map { String($0) }.eraseToAnyPublisher() ~> (tfReviewCount, \.stringValue) ~ subscriptions
+        btnOK.tapPublisher.sink { [unowned self] in
             self.vm.onOK()
             self.complete?()
             self.dismiss(self.btnOK)
-        } ~ rx.disposeBag
+        } ~ subscriptions
     }
 
     deinit {

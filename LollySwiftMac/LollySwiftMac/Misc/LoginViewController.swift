@@ -13,6 +13,8 @@ class LoginViewController: NSViewController {
 
     @IBOutlet weak var tfUsername: NSTextField!
     @IBOutlet weak var tfPassword: NSSecureTextField!
+    @IBOutlet weak var btnLogin: NSButton!
+    @IBOutlet weak var btnExit: NSButton!
 
     let vm = LoginViewModel()
     var subscriptions = Set<AnyCancellable>()
@@ -22,28 +24,32 @@ class LoginViewController: NSViewController {
 
         vm.$username <~> tfUsername.textProperty ~ subscriptions
         vm.$password <~> tfPassword.textProperty ~ subscriptions
-    }
 
-    @IBAction func login(_ sender: Any) {
-        Task {
-            globalUser.userid = await vm.login(username: vm.username, password: vm.password)
-            if globalUser.userid.isEmpty {
-                let alert = NSAlert()
-                alert.alertStyle = .critical
-                alert.messageText = "Login"
-                alert.informativeText = "Wrong Username or Password!"
-                alert.addButton(withTitle: "OK")
-                alert.runModal()
-            } else {
-                UserDefaults.standard.set(globalUser.userid, forKey: "userid")
-                NSApplication.shared.stopModal(withCode: .OK)
-                self.view.window?.close()
+        btnLogin.tapPublisher.sink { [unowned self] in
+            Task {
+                globalUser.userid = await vm.login(username: vm.username, password: vm.password)
+                if globalUser.userid.isEmpty {
+                    let alert = NSAlert()
+                    alert.alertStyle = .critical
+                    alert.messageText = "Login"
+                    alert.informativeText = "Wrong Username or Password!"
+                    alert.addButton(withTitle: "OK")
+                    alert.runModal()
+                } else {
+                    UserDefaults.standard.set(globalUser.userid, forKey: "userid")
+                    NSApplication.shared.stopModal(withCode: .OK)
+                    self.view.window?.close()
+                }
             }
-        }
+        } ~ subscriptions
+
+        btnExit.tapPublisher.sink { [unowned self] in
+            NSApplication.shared.stopModal(withCode: .cancel)
+            self.view.window?.close()
+        } ~ subscriptions
     }
 
-    @IBAction func exit(_ sender: Any) {
-        NSApplication.shared.stopModal(withCode: .cancel)
-        self.view.window?.close()
+    deinit {
+        print("DEBUG: \(self.className) deinit")
     }
 }

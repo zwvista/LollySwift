@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21225"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -1669,9 +1668,6 @@ Gw
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system" size="30"/>
                                                 </buttonCell>
-                                                <connections>
-                                                    <action selector="login:" target="6YP-Hf-902" id="Od2-j4-q1f"/>
-                                                </connections>
                                             </button>
                                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sS3-SO-FXH">
                                                 <rect key="frame" x="166" y="-5" width="104" height="40"/>
@@ -1679,9 +1675,6 @@ Gw
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system" size="30"/>
                                                 </buttonCell>
-                                                <connections>
-                                                    <action selector="exit:" target="6YP-Hf-902" id="og2-lq-OWc"/>
-                                                </connections>
                                             </button>
                                         </subviews>
                                         <visibilityPriorities>
@@ -1722,6 +1715,8 @@ Gw
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btnExit" destination="sS3-SO-FXH" id="aqF-lZ-Qe1"/>
+                        <outlet property="btnLogin" destination="EgQ-bk-Wa7" id="ucp-hQ-obB"/>
                         <outlet property="tfPassword" destination="YOo-va-YaO" id="Dde-0N-bKe"/>
                         <outlet property="tfUsername" destination="g2P-Md-xs5" id="USu-TP-5lq"/>
                     </connections>

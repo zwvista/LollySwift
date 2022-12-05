@@ -63,7 +63,9 @@ class SettingsViewController: NSViewController, SettingsViewModelDelegate, NSTab
         vm.$nextTitle ~> (btnNext, \.title) ~ subscriptions
         vm.$partFromEnabled ~> (pubPartFrom, \.isEnabled) ~ subscriptions
 
-        vm.getData().subscribe() ~ rx.disposeBag
+        Task {
+            await vm.getData()
+        }
     }
     
     @IBAction func close(_ sender: AnyObject) {
@@ -80,11 +82,15 @@ class SettingsViewController: NSViewController, SettingsViewModelDelegate, NSTab
     }
 
     @IBAction func previousUnitPart(_ sender: AnyObject) {
-        vm.previousUnitPart().subscribe() ~ rx.disposeBag
+        Task {
+            await vm.previousUnitPart()
+        }
     }
 
     @IBAction func nextUnitPart(_ sender: AnyObject) {
-        vm.nextUnitPart().subscribe() ~ rx.disposeBag
+        Task {
+            await vm.nextUnitPart()
+        }
     }
     
     func onGetData() {
