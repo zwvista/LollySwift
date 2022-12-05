@@ -12,12 +12,6 @@ import RxBinding
 
 class WordsTextbookDetailViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 
-    var complete: (() -> Void)?
-    var vmEdit: WordsUnitDetailViewModel!
-    var item: MUnitWord { vmEdit.item }
-    var itemEdit: MUnitWordEdit { vmEdit.itemEdit }
-    var arrWords: [MUnitWord] { vmEdit.vmSingle.arrWords }
-
     @IBOutlet weak var acUnits: NSArrayController!
     @IBOutlet weak var acParts: NSArrayController!
     @IBOutlet weak var tfID: NSTextField!
@@ -32,7 +26,13 @@ class WordsTextbookDetailViewController: NSViewController, NSTableViewDataSource
     @IBOutlet weak var tfAccuracy: NSTextField!
     @IBOutlet weak var tableView: NSTableView!
     @IBOutlet weak var btnOK: NSButton!
-    
+
+    var complete: (() -> Void)?
+    var vmEdit: WordsUnitDetailViewModel!
+    var item: MUnitWord { vmEdit.item }
+    var itemEdit: MUnitWordEdit { vmEdit.itemEdit }
+    var arrWords: [MUnitWord] { vmEdit.vmSingle.arrWords }
+
     func startEdit(vm: WordsUnitViewModel, item: MUnitWord) {
         vmEdit = WordsUnitDetailViewModel(vm: vm, item: item, phraseid: 0) {
             self.tableView.reloadData()

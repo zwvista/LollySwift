@@ -12,9 +12,6 @@ import RxBinding
 
 class TransformDetailViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 
-    var complete: (() -> Void)?
-    @objc var vm = TransformDetailViewModel()
-
     @IBOutlet weak var tvTranformItems: NSTableView!
     @IBOutlet weak var tfSourceWord: NSTextField!
     @IBOutlet weak var tfURL: NSTextField!
@@ -25,7 +22,10 @@ class TransformDetailViewController: NSViewController, NSTableViewDataSource, NS
     @IBOutlet weak var tvInterim: NSTextView!
     @IBOutlet weak var tvTemplate: NSTextView!
     @IBOutlet weak var tvTransform: NSTabView!
-    
+
+    var complete: (() -> Void)?
+    @objc var vm = TransformDetailViewModel()
+
     let tableRowDragType = NSPasteboard.PasteboardType(rawValue: "private.table-row")
 
     override func viewDidLoad() {

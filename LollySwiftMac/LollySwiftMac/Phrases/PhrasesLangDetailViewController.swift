@@ -12,18 +12,18 @@ import RxBinding
 
 class PhrasesLangDetailViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 
+    @IBOutlet weak var tfID: NSTextField!
+    @IBOutlet weak var tfPhrase: NSTextField!
+    @IBOutlet weak var tfTranslation: NSTextField!
+    @IBOutlet weak var tableView: NSTableView!
+    @IBOutlet weak var btnOK: NSButton!
+
     var vm: PhrasesLangViewModel!
     var complete: (() -> Void)?
     var item: MLangPhrase!
     var vmEdit: PhrasesLangDetailViewModel!
     var itemEdit: MLangPhraseEdit { vmEdit.itemEdit }
     var arrPhrases: [MUnitPhrase] { vmEdit.vmSingle?.arrPhrases ?? [MUnitPhrase]() }
-
-    @IBOutlet weak var tfID: NSTextField!
-    @IBOutlet weak var tfPhrase: NSTextField!
-    @IBOutlet weak var tfTranslation: NSTextField!
-    @IBOutlet weak var tableView: NSTableView!
-    @IBOutlet weak var btnOK: NSButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()

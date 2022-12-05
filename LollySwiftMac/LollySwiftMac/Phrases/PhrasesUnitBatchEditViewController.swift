@@ -12,11 +12,6 @@ import RxBinding
 
 class PhrasesUnitBatchEditViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 
-    var vmEdit: PhrasesUnitBatchEditViewModel!
-    var vmSettings: SettingsViewModel { vmEdit.vm.vmSettings }
-    var complete: (() -> Void)?
-    var arrPhrases: [MUnitPhrase] { vmEdit.vm.arrPhrases }
-
     @IBOutlet weak var acUnits: NSArrayController!
     @IBOutlet weak var acParts: NSArrayController!
     @IBOutlet weak var pubUnit: NSPopUpButton!
@@ -27,6 +22,11 @@ class PhrasesUnitBatchEditViewController: NSViewController, NSTableViewDataSourc
     @IBOutlet weak var chkPart: NSButton!
     @IBOutlet weak var chkSeqNum: NSButton!
     @IBOutlet weak var btnOK: NSButton!
+
+    var vmEdit: PhrasesUnitBatchEditViewModel!
+    var vmSettings: SettingsViewModel { vmEdit.vm.vmSettings }
+    var complete: (() -> Void)?
+    var arrPhrases: [MUnitPhrase] { vmEdit.vm.arrPhrases }
 
     func startEdit(vm: PhrasesUnitViewModel, unit: Int, part: Int) {
         vmEdit = PhrasesUnitBatchEditViewModel(vm: vm, unit: unit, part: part)

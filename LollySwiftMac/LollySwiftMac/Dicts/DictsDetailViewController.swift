@@ -12,11 +12,6 @@ import RxBinding
 
 class DictsDetailViewController: NSViewController {
 
-    var vm: DictsViewModel!
-    var complete: (() -> Void)?
-    @objc var item: MDictionary!
-    var isAdd: Bool!
-
     @IBOutlet weak var acLanguages: NSArrayController!
     @IBOutlet weak var acDictTypes: NSArrayController!
     @IBOutlet weak var tfID: NSTextField!
@@ -32,6 +27,11 @@ class DictsDetailViewController: NSViewController {
     @IBOutlet weak var tvTransform: NSTextView!
     @IBOutlet weak var tvTemplate: NSTextView!
     @IBOutlet weak var tvTemplate2: NSTextView!
+
+    var vm: DictsViewModel!
+    var complete: (() -> Void)?
+    @objc var item: MDictionary!
+    var isAdd: Bool!
 
     override func viewDidLoad() {
         super.viewDidLoad()

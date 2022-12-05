@@ -12,16 +12,16 @@ import RxBinding
 
 @objcMembers
 class WebPageSelectViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
+
+    @IBOutlet weak var tfTitle: NSTextField!
+    @IBOutlet weak var tfURL: NSTextField!
+    @IBOutlet weak var tvWebPages: NSTableView!
     
     var vm: PatternsViewModel!
     var vmWebPage: WebPageSelectViewModel!
     var complete: (() -> Void)?
     var arrWebPages: [MWebPage] { vmWebPage.arrWebPages }
 
-    @IBOutlet weak var tfTitle: NSTextField!
-    @IBOutlet weak var tfURL: NSTextField!
-    @IBOutlet weak var tvWebPages: NSTableView!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         search(self)

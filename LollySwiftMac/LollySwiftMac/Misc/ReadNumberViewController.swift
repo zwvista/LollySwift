@@ -9,13 +9,13 @@
 import Cocoa
 
 class ReadNumberViewController: NSViewController, NSTextFieldDelegate {
-    
-    @objc dynamic var vm: ReadNumberViewModel!
-    private var _observers = [NSKeyValueObservation]()
 
     @IBOutlet weak var tfNumber: NSTextField!
     @IBOutlet weak var tfText: NSTextField!
     
+    @objc dynamic var vm: ReadNumberViewModel!
+    private var _observers = [NSKeyValueObservation]()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         vm = ReadNumberViewModel()

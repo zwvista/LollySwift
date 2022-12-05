@@ -12,16 +12,16 @@ import RxBinding
 
 class TextbooksDetailViewController: NSViewController {
 
-    var vm: TextbooksViewModel!
-    var complete: (() -> Void)?
-    @objc var item: MTextbook!
-    var isAdd: Bool!
-
     @IBOutlet weak var tfID: NSTextField!
     @IBOutlet weak var tfLang: NSTextField!
     @IBOutlet weak var tfTextbookName: NSTextField!
     @IBOutlet weak var tvUnits: NSTextView!
     @IBOutlet weak var tfParts: NSTextField!
+
+    var vm: TextbooksViewModel!
+    var complete: (() -> Void)?
+    @objc var item: MTextbook!
+    var isAdd: Bool!
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -12,12 +12,6 @@ import RxBinding
 
 class PhrasesTextbookDetailViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 
-    var complete: (() -> Void)?
-    var vmEdit: PhrasesUnitDetailViewModel!
-    var item: MUnitPhrase { vmEdit.item }
-    var itemEdit: MUnitPhraseEdit { vmEdit.itemEdit }
-    var arrPhrases: [MUnitPhrase] { vmEdit.vmSingle.arrPhrases }
-
     @IBOutlet weak var acUnits: NSArrayController!
     @IBOutlet weak var acParts: NSArrayController!
     @IBOutlet weak var tfID: NSTextField!
@@ -30,7 +24,13 @@ class PhrasesTextbookDetailViewController: NSViewController, NSTableViewDataSour
     @IBOutlet weak var tfTranslation: NSTextField!
     @IBOutlet weak var tableView: NSTableView!
     @IBOutlet weak var btnOK: NSButton!
-    
+
+    var complete: (() -> Void)?
+    var vmEdit: PhrasesUnitDetailViewModel!
+    var item: MUnitPhrase { vmEdit.item }
+    var itemEdit: MUnitPhraseEdit { vmEdit.itemEdit }
+    var arrPhrases: [MUnitPhrase] { vmEdit.vmSingle.arrPhrases }
+
     func startEdit(vm: PhrasesUnitViewModel, item: MUnitPhrase) {
         vmEdit = PhrasesUnitDetailViewModel(vm: vm, item: item, wordid: 0) {
             self.tableView.reloadData()

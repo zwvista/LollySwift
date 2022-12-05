@@ -12,13 +12,6 @@ import RxBinding
 
 class WordsLangDetailViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 
-    var vm: WordsLangViewModel!
-    var complete: (() -> Void)?
-    @objc var item: MLangWord!
-    var vmEdit: WordsLangDetailViewModel!
-    var itemEdit: MLangWordEdit { vmEdit.itemEdit }
-    var arrWords: [MUnitWord] { vmEdit.vmSingle?.arrWords ?? [MUnitWord]() }
-
     @IBOutlet weak var tfID: NSTextField!
     @IBOutlet weak var tfWord: NSTextField!
     @IBOutlet weak var tfNote: NSTextField!
@@ -26,6 +19,13 @@ class WordsLangDetailViewController: NSViewController, NSTableViewDataSource, NS
     @IBOutlet weak var tfAccuracy: NSTextField!
     @IBOutlet weak var tableView: NSTableView!
     @IBOutlet weak var btnOK: NSButton!
+
+    var vm: WordsLangViewModel!
+    var complete: (() -> Void)?
+    @objc var item: MLangWord!
+    var vmEdit: WordsLangDetailViewModel!
+    var itemEdit: MLangWordEdit { vmEdit.itemEdit }
+    var arrWords: [MUnitWord] { vmEdit.vmSingle?.arrWords ?? [MUnitWord]() }
 
     override func viewDidLoad() {
         super.viewDidLoad()

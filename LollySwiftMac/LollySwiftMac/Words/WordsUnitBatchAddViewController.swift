@@ -12,12 +12,6 @@ import RxBinding
 
 class WordsUnitBatchAddViewController: NSViewController {
     
-    var vm: WordsUnitViewModel!
-    var vmEdit: WordsUnitBatchAddViewModel!
-    var item: MUnitWord { vmEdit.item }
-    var itemEdit: MUnitWordEdit { vmEdit.itemEdit }
-    var complete: (() -> Void)?
-    
     @IBOutlet weak var acUnits: NSArrayController!
     @IBOutlet weak var acParts: NSArrayController!
     @IBOutlet weak var pubUnit: NSPopUpButton!
@@ -25,6 +19,12 @@ class WordsUnitBatchAddViewController: NSViewController {
     @IBOutlet weak var tvWords: NSTextView!
     @IBOutlet weak var btnOK: NSButton!
     
+    var vm: WordsUnitViewModel!
+    var vmEdit: WordsUnitBatchAddViewModel!
+    var item: MUnitWord { vmEdit.item }
+    var itemEdit: MUnitWordEdit { vmEdit.itemEdit }
+    var complete: (() -> Void)?
+
     func startEdit(vm: WordsUnitViewModel) {
         vmEdit = WordsUnitBatchAddViewModel(vm: vm)
     }

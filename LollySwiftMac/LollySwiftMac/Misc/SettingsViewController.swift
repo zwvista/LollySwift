@@ -12,6 +12,7 @@ import RxBinding
 
 @objcMembers
 class SettingsViewController: NSViewController, SettingsViewModelDelegate, NSTableViewDataSource, NSTableViewDelegate {
+
     @IBOutlet weak var acLanguages: NSArrayController!
     @IBOutlet weak var acVoices: NSArrayController!
     @IBOutlet weak var acDictsNote: NSArrayController!

@@ -11,10 +11,6 @@ import RxBinding
 
 class ReviewOptionsViewController: NSViewController {
 
-    var options: MReviewOptions!
-    var vm: ReviewOptionsViewModel!
-    var complete: (() -> Void)?
-
     @IBOutlet weak var pubMode: NSPopUpButton!
     @IBOutlet weak var scOrder: NSSegmentedControl!
     @IBOutlet weak var scOnRepeat: NSSegmentedControl!
@@ -29,6 +25,10 @@ class ReviewOptionsViewController: NSViewController {
     @IBOutlet weak var tfReviewCount: NSTextField!
     @IBOutlet weak var stpReviewCount: NSStepper!
     @IBOutlet weak var btnOK: NSButton!
+
+    var options: MReviewOptions!
+    var vm: ReviewOptionsViewModel!
+    var complete: (() -> Void)?
 
     override func viewDidLoad() {
         super.viewDidLoad()

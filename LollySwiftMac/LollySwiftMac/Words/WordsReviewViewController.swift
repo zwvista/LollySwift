@@ -11,10 +11,6 @@ import RxSwift
 import RxBinding
 
 class WordsReviewViewController: WordsBaseViewController, NSTextFieldDelegate {
-    @objc dynamic var vm: WordsReviewViewModel!
-    override var vmWords: WordsBaseViewModel { vm }
-    override var vmSettings: SettingsViewModel! { vm.vmSettings }
-    override var initSettingsInViewDidLoad: Bool { false }
 
     @IBOutlet weak var tfIndex: NSTextField!
     @IBOutlet weak var tfCorrect: NSTextField!
@@ -29,6 +25,11 @@ class WordsReviewViewController: WordsBaseViewController, NSTextFieldDelegate {
     @IBOutlet weak var btnCheckPrev: NSButton!
     @IBOutlet weak var scOnRepeat: NSSegmentedControl!
     @IBOutlet weak var scMoveForward: NSSegmentedControl!
+
+    @objc dynamic var vm: WordsReviewViewModel!
+    override var vmWords: WordsBaseViewModel { vm }
+    override var vmSettings: SettingsViewModel! { vm.vmSettings }
+    override var initSettingsInViewDidLoad: Bool { false }
 
     override func settingsChanged() {
         vm = WordsReviewViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) { [unowned self] in

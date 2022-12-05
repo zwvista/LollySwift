@@ -16,6 +16,7 @@ class WebTextbooksViewController: NSViewController, LollyProtocol, NSTableViewDa
     @IBOutlet weak var pubTextbookFilter: NSPopUpButton!
     @IBOutlet weak var acTextbooks: NSArrayController!
     @IBOutlet weak var wvWebPage: WKWebView!
+
     @objc var textbookFilter = 0
 
     var vm: WebTextbooksViewModel!

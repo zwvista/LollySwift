@@ -13,12 +13,12 @@ import RxBinding
 
 class BlogViewController: NSViewController, NSMenuItemValidation  {
 
-    var vm: SettingsViewModel { AppDelegate.theSettingsViewModel }
     @IBOutlet weak var tvMarked: NSTextView!
     @IBOutlet weak var tvHtml: NSTextView!
     @IBOutlet weak var wvBlog: WKWebView!
     @IBOutlet weak var tfStatusText: NSTextField!
 
+    var vm: SettingsViewModel { AppDelegate.theSettingsViewModel }
     var wc: BlogWindowController { view.window!.windowController as! BlogWindowController }
     var vmBlog: BlogViewModel!
 

@@ -12,6 +12,10 @@ import RxBinding
 
 class WordsAssociateViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate {
 
+    @IBOutlet weak var scScopeFilter: NSSegmentedControl!
+    @IBOutlet weak var sfTextFilter: NSSearchField!
+    @IBOutlet weak var tableView: NSTableView!
+
     var vm: WordsLangViewModel!
     var vmSettings: SettingsViewModel! { vm.vmSettings }
     var phraseid = 0
@@ -19,10 +23,6 @@ class WordsAssociateViewController: NSViewController, NSTableViewDataSource, NST
     var complete: (() -> Void)?
     var arrWords: [MLangWord] { vm.arrWordsFiltered ?? vm.arrWords }
 
-    @IBOutlet weak var scScopeFilter: NSSegmentedControl!
-    @IBOutlet weak var sfTextFilter: NSSearchField!
-    @IBOutlet weak var tableView: NSTableView!
-    
     func applyFilters() {
         vm.applyFilters()
         tableView.reloadData()

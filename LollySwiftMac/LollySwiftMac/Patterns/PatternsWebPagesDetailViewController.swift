@@ -12,12 +12,6 @@ import RxBinding
 
 @objcMembers
 class PatternsWebPagesDetailViewController: NSViewController {
-    
-    var vm: PatternsViewModel!
-    var vmEdit: PatternsWebPagesDetailViewModel!
-    var itemEdit: MPatternWebPageEdit { vmEdit.itemEdit }
-    var complete: (() -> Void)?
-    var item: MPatternWebPage!
 
     @IBOutlet weak var tfID: NSTextField!
     @IBOutlet weak var tfPatternID: NSTextField!
@@ -29,6 +23,12 @@ class PatternsWebPagesDetailViewController: NSViewController {
     @IBOutlet weak var btnNew: NSButton!
     @IBOutlet weak var btnExisting: NSButton!
     @IBOutlet weak var btnOK: NSButton!
+    
+    var vm: PatternsViewModel!
+    var vmEdit: PatternsWebPagesDetailViewModel!
+    var itemEdit: MPatternWebPageEdit { vmEdit.itemEdit }
+    var complete: (() -> Void)?
+    var item: MPatternWebPage!
 
     override func viewDidLoad() {
         super.viewDidLoad()
