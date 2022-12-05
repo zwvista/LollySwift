@@ -22,7 +22,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     let tableRowDragType = NSPasteboard.PasteboardType(rawValue: "private.table-row")
 
     override func applyFilters() {
-        print(vm.textFilter.value)
+        print(vm.textFilter)
         vm.applyFilters()
         tvWords.reloadData()
     }
@@ -64,9 +64,10 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     
     override func endEditing(row: Int) {
         let item = arrWords[row]
-        vm.update(item: item).subscribe(onSuccess: {
-            self.tvWords.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvWords.tableColumns.count))
-        }) ~ rx.disposeBag
+        Task {
+            await vm.update(item: item)
+            tvWords.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvWords.tableColumns.count))
+        }
     }
 
     func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
@@ -113,20 +114,22 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
             }
         }
         let col = tableView.tableColumns.firstIndex { $0.identifier.rawValue == "SEQNUM" }!
-        vm.reindex {
-            tableView.reloadData(forRowIndexes: [$0], columnIndexes: [col])
+        Task {
+            await vm.reindex {
+                tableView.reloadData(forRowIndexes: [$0], columnIndexes: [col])
+            }
+            tableView.endUpdates()
         }
-        tableView.endUpdates()
         
         return true
     }
     
     override func addNewWord() {
-        guard !vm.newWord.value.isEmpty else {return}
+        guard !vm.newWord.isEmpty else {return}
         let item = vm.newUnitWord()
-        item.WORD = vmSettings.autoCorrectInput(text: vm.newWord.value)
+        item.WORD = vmSettings.autoCorrectInput(text: vm.newWord)
         tfNewWord.stringValue = ""
-        vm.newWord.accept("")
+        vm.newWord = ""
         vm.create(item: item).subscribe(onSuccess: {
             self.tvWords.reloadData()
             self.tvWords.selectRowIndexes(IndexSet(integer: self.arrWords.count - 1), byExtendingSelection: false)
@@ -148,15 +151,17 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     
     override func deleteWord(row: Int) {
         let item = arrWords[row]
-        WordsUnitViewModel.delete(item: item).subscribe(onSuccess: {
-            self.doRefresh()
-        }) ~ rx.disposeBag
+        Task {
+            await WordsUnitViewModel.delete(item: item)
+            doRefresh()
+        }
     }
     
     @IBAction func refreshTableView(_ sender: AnyObject) {
-        vm.reload().subscribe(onSuccess: {
-            self.doRefresh()
-        }) ~ rx.disposeBag
+        Task {
+            await vm.reload()
+            doRefresh()
+        }
     }
     
     @IBAction func doubleAction(_ sender: AnyObject) {

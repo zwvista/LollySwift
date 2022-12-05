@@ -30,7 +30,7 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
     func settingsChanged() {
         vm = PhrasesReviewViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) { [unowned self] in
             self.tfPhraseInput.becomeFirstResponder()
-            if self.vm.hasCurrent && self.vm.isSpeaking.value {
+            if self.vm.hasCurrent && self.vm.isSpeaking {
                self.synth.startSpeaking(self.vm.currentPhrase)
             }
         }
@@ -41,16 +41,16 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
         vm.$correctHidden ~> (tfCorrect, \.isHidden) ~ subscriptions
         vm.$incorrectHidden ~> (tfIncorrect, \.isHidden) ~ subscriptions
         vm.$checkNextEnabled ~> (btnCheckNext, \.isEnabled) ~ subscriptions
-        vm.$checkNextTitle ~> (btnCheckNext.rx.title
+        vm.$checkNextTitle ~> (btnCheckNext, \.title) ~ subscriptions
         vm.$checkPrevEnabled ~> (btnCheckPrev, \.isEnabled) ~ subscriptions
-        vm.$checkPrevTitle ~> (btnCheckPrev.rx.title
-        vm.$checkPrevHidden ~> (btnCheckPrev.rx, \.isHidden) ~ subscriptions
+        vm.$checkPrevTitle ~> (btnCheckPrev, \.title) ~ subscriptions
+        vm.$checkPrevHidden ~> (btnCheckPrev, \.isHidden) ~ subscriptions
         vm.$phraseTargetString ~> (tfPhraseTarget, \.stringValue) ~ subscriptions
         vm.$phraseTargetHidden ~> (tfPhraseTarget, \.isHidden) ~ subscriptions
         vm.$translationString ~> (tfTranslation, \.stringValue) ~ subscriptions
-        vm.$phraseInputString <~> tfPhraseInput.rx.text.orEmpty
-        vm.$onRepeat <~> scOnRepeat.rx.isOn
-        vm.$moveForward <~> scMoveForward.rx.isOn
+        vm.$phraseInputString <~> tfPhraseInput.textProperty ~ subscriptions
+        vm.$onRepeat <~> scOnRepeat.isOnProperty ~ subscriptions
+        vm.$moveForward <~> scMoveForward.isOnProperty ~ subscriptions
         vm.$onRepeatHidden ~> (scOnRepeat, \.isHidden) ~ subscriptions
         vm.$moveForwardHidden ~> (scMoveForward, \.isHidden) ~ subscriptions
 
@@ -68,7 +68,7 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
         super.viewDidAppear()
         settingsChanged()
         wc = view.window!.windowController as? PhrasesReviewWindowController
-        _ = vm.isSpeaking <~> wc.scSpeak.rx.isOn
+        vm.$isSpeaking <~> wc.scSpeak.isOnProperty ~ subscriptions
         vm.isSpeaking.subscribe(onNext: { isSpeaking in
             if isSpeaking {
                 self.synth.startSpeaking(self.vm.currentPhrase)

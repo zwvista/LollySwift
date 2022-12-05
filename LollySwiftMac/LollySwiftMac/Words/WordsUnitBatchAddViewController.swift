@@ -35,7 +35,7 @@ class WordsUnitBatchAddViewController: NSViewController {
         acParts.content = item.textbook.arrParts
         itemEdit.$indexUNIT <~> pubUnit.selectedItemIndexProperty ~ subscriptions
         itemEdit.$indexPART <~> pubPart.selectedItemIndexProperty ~ subscriptions
-        itemEdit.$WORDS <~> tvWords.rx.string
+        itemEdit.$WORDS <~> tvWords.textProperty ~ subscriptions
         btnOK.rx.tap.flatMap { [unowned self] _ in
             self.vmEdit.onOK()
         }.subscribe { [unowned self] _ in

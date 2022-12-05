@@ -29,7 +29,6 @@ class WordsReviewViewController: WordsBaseViewController, NSTextFieldDelegate {
     override var vmWords: WordsBaseViewModel { vm }
     override var vmSettings: SettingsViewModel! { vm.vmSettings }
     override var initSettingsInViewDidLoad: Bool { false }
-    var subscriptions = Set<AnyCancellable>()
 
     override func settingsChanged() {
         vm = WordsReviewViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) { [unowned self] in
@@ -62,8 +61,8 @@ class WordsReviewViewController: WordsBaseViewController, NSTextFieldDelegate {
         vm.$wordHintHidden ~> (tfWordHint, \.isHidden) ~ subscriptions
         vm.$translationString ~> (tfTranslation, \.stringValue) ~ subscriptions
         vm.$wordInputString <~> tfWordInput.textProperty ~ subscriptions
-        vm.$onRepeat <~> scOnRepeat.rx.isOn
-        vm.$moveForward <~> scMoveForward.rx.isOn
+        vm.$onRepeat <~> scOnRepeat.isOnProperty ~ subscriptions
+        vm.$moveForward <~> scMoveForward.isOnProperty ~ subscriptions
         vm.$onRepeatHidden ~> (scOnRepeat, \.isHidden) ~ subscriptions
         vm.$moveForwardHidden ~> (scMoveForward, \.isHidden) ~ subscriptions
 
@@ -78,7 +77,7 @@ class WordsReviewViewController: WordsBaseViewController, NSTextFieldDelegate {
         super.viewDidAppear()
         settingsChanged()
         wc = view.window!.windowController as? WordsReviewWindowController
-        _ = vm.isSpeaking <~> wc.scSpeak.rx.isOn
+        _ = vm.isSpeaking <~> wc.scSpeak.isOnProperty ~ subscriptions
         vm.isSpeaking.subscribe(onNext: { isSpeaking in
             if self.vm.hasCurrent && isSpeaking {
                 self.synth.startSpeaking(self.vm.currentWord)

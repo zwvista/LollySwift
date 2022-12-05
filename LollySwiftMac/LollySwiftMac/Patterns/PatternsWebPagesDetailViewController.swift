@@ -11,12 +11,6 @@ import Combine
 
 @objcMembers
 class PatternsWebPagesDetailViewController: NSViewController {
-    
-    var vm: PatternsViewModel!
-    var vmEdit: PatternsWebPagesDetailViewModel!
-    var itemEdit: MPatternWebPageEdit { vmEdit.itemEdit }
-    var complete: (() -> Void)?
-    var item: MPatternWebPage!
 
     @IBOutlet weak var tfID: NSTextField!
     @IBOutlet weak var tfPatternID: NSTextField!
@@ -28,17 +22,24 @@ class PatternsWebPagesDetailViewController: NSViewController {
     @IBOutlet weak var btnNew: NSButton!
     @IBOutlet weak var btnExisting: NSButton!
     @IBOutlet weak var btnOK: NSButton!
+    
+    var vm: PatternsViewModel!
+    var vmEdit: PatternsWebPagesDetailViewModel!
+    var itemEdit: MPatternWebPageEdit { vmEdit.itemEdit }
+    var complete: (() -> Void)?
+    var item: MPatternWebPage!
+    var subscriptions = Set<AnyCancellable>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         vmEdit = PatternsWebPagesDetailViewModel(item: item)
-        _ = itemEdit.ID ~> tfID.rx.text.orEmpty
-        _ = itemEdit.PATTERNID ~> tfPatternID.rx.text.orEmpty
-        _ = itemEdit.PATTERN ~> tfPattern.rx.text.orEmpty
-        _ = itemEdit.SEQNUM <~> tfSeqNum.rx.text.orEmpty
-        _ = itemEdit.WEBPAGEID ~> tfWebPageID.rx.text.orEmpty
-        _ = itemEdit.TITLE <~> tfTitle.rx.text.orEmpty
-        _ = itemEdit.URL <~> tfURL.rx.text.orEmpty
+        itemEdit.$ID ~> (tfID, \.stringValue) ~ subscriptions
+        itemEdit.$PATTERNID ~> (tfPatternID, \.stringValue) ~ subscriptions
+        itemEdit.$PATTERN ~> (tfPattern, \.stringValue) ~ subscriptions
+        itemEdit.$SEQNUM <~> tfSeqNum.textProperty ~ subscriptions
+        itemEdit.$WEBPAGEID ~> (tfWebPageID, \.stringValue) ~ subscriptions
+        itemEdit.$TITLE <~> tfTitle.textProperty ~ subscriptions
+        itemEdit.$URL <~> tfURL.textProperty ~ subscriptions
         btnNew.isEnabled = vmEdit.isAddWebPage
         btnExisting.isEnabled = vmEdit.isAddWebPage
         btnOK.rx.tap.flatMap { [unowned self] _ in
@@ -57,7 +58,7 @@ class PatternsWebPagesDetailViewController: NSViewController {
     }
 
     @IBAction func newWebPageID(_ sender: Any) {
-        itemEdit.WEBPAGEID.accept("0")
+        itemEdit.WEBPAGEID = "0"
     }
     
     @IBAction func existingWebPageID(_ sender: Any) {
@@ -65,9 +66,9 @@ class PatternsWebPagesDetailViewController: NSViewController {
         webPageVC.vm = vm
         webPageVC.complete = {
             let o = webPageVC.vmWebPage.selectedWebPage!
-            self.itemEdit.WEBPAGEID.accept(String(o.ID))
-            self.itemEdit.TITLE.accept(o.TITLE)
-            self.itemEdit.URL.accept(o.URL)
+            self.itemEdit.WEBPAGEID = String(o.ID)
+            self.itemEdit.TITLE = o.TITLE
+            self.itemEdit.URL = o.URL
         }
         self.presentAsModalWindow(webPageVC)
     }

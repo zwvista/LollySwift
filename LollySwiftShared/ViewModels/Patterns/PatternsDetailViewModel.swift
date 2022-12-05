@@ -21,7 +21,7 @@ class PatternsDetailViewModel: NSObject, ObservableObject {
         itemEdit = MPatternEdit(x: item)
         isAdd = item.ID == 0
         super.init()
-        itemEdit.$PATTERN.map { !$0.isEmpty } ~> $isOKEnabled
+        itemEdit.$PATTERN.map { !$0.isEmpty }.eraseToAnyPublisher() ~> $isOKEnabled
     }
 
     func onOK() async {

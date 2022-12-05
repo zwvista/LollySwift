@@ -30,6 +30,7 @@ class WordsUnitDetailViewController: NSViewController, NSTableViewDataSource, NS
     var item: MUnitWord { vmEdit.item }
     var itemEdit: MUnitWordEdit { vmEdit.itemEdit }
     var arrWords: [MUnitWord] { vmEdit.vmSingle?.arrWords ?? [MUnitWord]() }
+    var subscriptions = Set<AnyCancellable>()
 
     func startEdit(vm: WordsUnitViewModel, item: MUnitWord, phraseid: Int) {
         vmEdit = WordsUnitDetailViewModel(vm: vm, item: item, phraseid: phraseid) {
@@ -41,16 +42,16 @@ class WordsUnitDetailViewController: NSViewController, NSTableViewDataSource, NS
         super.viewDidLoad()
         acUnits.content = item.textbook.arrUnits
         acParts.content = item.textbook.arrParts
-        itemEdit.$ID ~> tfID.rx.text.orEmpty
-        itemEdit.$indexUNIT <~> pubUnit.rx.selectedItemIndex
-        itemEdit.$indexPART <~> pubPart.rx.selectedItemIndex
-        itemEdit.$SEQNUM <~> tfSeqNum.rx.text.orEmpty
-        itemEdit.$WORDID ~> tfWordID.rx.text.orEmpty
-        itemEdit.$WORD <~> tfWord.rx.text.orEmpty
-        itemEdit.$NOTE <~> tfNote.rx.text.orEmpty
-        itemEdit.$FAMIID ~> tfFamiID.rx.text.orEmpty
-        itemEdit.$ACCURACY ~> tfAccuracy.rx.text.orEmpty
-        vmEdit.$isOKEnabled ~> btnOK.rx.isEnabled
+        itemEdit.$ID ~> (tfID, \.stringValue) ~ subscriptions
+        itemEdit.$indexUNIT <~> pubUnit.selectedItemIndexProperty ~ subscriptions
+        itemEdit.$indexPART <~> pubPart.selectedItemIndexProperty ~ subscriptions
+        itemEdit.$SEQNUM <~> tfSeqNum.textProperty ~ subscriptions
+        itemEdit.$WORDID ~> (tfWordID, \.stringValue) ~ subscriptions
+        itemEdit.$WORD <~> tfWord.textProperty ~ subscriptions
+        itemEdit.$NOTE <~> tfNote.textProperty ~ subscriptions
+        itemEdit.$FAMIID ~> (tfFamiID, \.stringValue) ~ subscriptions
+        itemEdit.$ACCURACY ~> (tfAccuracy, \.stringValue) ~ subscriptions
+        vmEdit.$isOKEnabled ~> (btnOK, \.isEnabled) ~ subscriptions
         btnOK.rx.tap.flatMap { [unowned self] _ in
             self.vmEdit.onOK()
         }.subscribe { [unowned self] _ in

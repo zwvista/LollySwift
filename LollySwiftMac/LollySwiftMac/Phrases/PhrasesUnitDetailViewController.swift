@@ -40,14 +40,14 @@ class PhrasesUnitDetailViewController: NSViewController, NSTableViewDataSource, 
         super.viewDidLoad()
         acUnits.content = item.textbook.arrUnits
         acParts.content = item.textbook.arrParts
-        itemEdit.ID ~> (tfID, \.stringValue)
-        itemEdit.indexUNIT <~> pubUnit.rx.selectedItemIndex
-        itemEdit.indexPART <~> pubPart.rx.selectedItemIndex
-        itemEdit.SEQNUM <~> tfSeqNum.rx.text.orEmpty
-        itemEdit.PHRASEID ~> tfPhraseID.rx.text.orEmpty
-        itemEdit.PHRASE <~> tfPhrase.rx.text.orEmpty
-        itemEdit.TRANSLATION <~> tfTranslation.rx.text.orEmpty
-        vmEdit.isOKEnabled ~> btnOK.rx.isEnabled
+        itemEdit.$ID ~> (tfID, \.stringValue) ~ subscriptions
+        itemEdit.$indexUNIT <~> pubUnit.selectedItemIndexProperty ~ subscriptions
+        itemEdit.$indexPART <~> pubPart.selectedItemIndexProperty ~ subscriptions
+        itemEdit.$SEQNUM <~> tfSeqNum.textProperty ~ subscriptions
+        itemEdit.$PHRASEID ~> (tfPhraseID, \.stringValue) ~ subscriptions
+        itemEdit.$PHRASE <~> tfPhrase.textProperty ~ subscriptions
+        itemEdit.$TRANSLATION <~> tfTranslation.textProperty ~ subscriptions
+        vmEdit.$isOKEnabled ~> (btnOK, \.isEnabled) ~ subscriptions
         btnOK.rx.tap.flatMap { [unowned self] _ in
             self.vmEdit.onOK()
         }.subscribe { [unowned self] _ in

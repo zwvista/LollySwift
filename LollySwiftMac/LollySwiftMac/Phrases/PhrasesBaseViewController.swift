@@ -13,12 +13,11 @@ class PhrasesBaseViewController: WordsPhrasesBaseViewController {
     
     var vmWordsLang: WordsLangViewModel!
     override var vmWords: WordsBaseViewModel { vmWordsLang }
-    var subscriptions = Set<AnyCancellable>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         vmPhrases.$textFilter <~> sfTextFilter.textProperty ~ subscriptions
-        vmPhrases.$scopeFilter <~> scScopeFilter.selectLabelProperty ~ subscriptions
+        vmPhrases.$scopeFilter <~> scScopeFilter.selectedLabelProperty ~ subscriptions
         sfTextFilter.rx.searchFieldDidStartSearching.subscribe { _ in
             self.vmPhrases.textFilter.accept(self.vmSettings.autoCorrectInput(text: self.vmPhrases.textFilter.value))
         }
