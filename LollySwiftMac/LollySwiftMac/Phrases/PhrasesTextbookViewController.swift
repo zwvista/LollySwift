@@ -100,7 +100,9 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
         detailVC.textFilter = vm.selectedPhrase
         detailVC.phraseid = vm.selectedPhraseID
         detailVC.complete = {
-            self.getWords()
+            Task {
+                await self.getWords()
+            }
         }
         self.presentAsModalWindow(detailVC)
     }

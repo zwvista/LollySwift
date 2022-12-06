@@ -87,14 +87,16 @@ class WordsReviewViewController: WordsBaseViewController, NSTextFieldDelegate {
     override func viewWillDisappear() {
         super.viewWillDisappear()
         wc = nil
-        vm.subscriptionTimer?.dispose()
+        vm.subscriptionTimer?.cancel()
     }
     
     @IBAction func newTest(_ sender: AnyObject) {
         let optionsVC = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: "ReviewOptionsViewController") as! ReviewOptionsViewController
         optionsVC.options = vm.options
         optionsVC.complete = { [unowned self] in
-            self.vm.newTest()
+            Task {
+                await self.vm.newTest()
+            }
         }
         self.presentAsSheet(optionsVC)
     }
@@ -104,11 +106,15 @@ class WordsReviewViewController: WordsBaseViewController, NSTextFieldDelegate {
         let code = (obj.userInfo!["NSTextMovement"] as! NSNumber).intValue
         guard code == NSReturnTextMovement else {return}
         guard textfield === tfWordInput, !(vm.isTestMode && vm.wordInputString.isEmpty) else {return}
-        vm.check(toNext: true)
+        Task {
+            await vm.check(toNext: true)
+        }
     }
     
     @IBAction func check(_ sender: NSButton) {
-        vm.check(toNext: sender == btnCheckNext)
+        Task {
+            await vm.check(toNext: sender == btnCheckNext)
+        }
     }
 
     deinit {

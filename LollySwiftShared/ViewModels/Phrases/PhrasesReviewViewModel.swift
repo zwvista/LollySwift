@@ -76,7 +76,9 @@ class PhrasesReviewViewModel: NSObject, ObservableObject {
             if options.shuffled { arrPhrases = arrPhrases.shuffled() }
             f()
             if options.mode == .reviewAuto {
-                subscriptionTimer = Observable<Int>.interval(.seconds(self.options.interval), scheduler: MainScheduler.instance).subscribe { _ in
+                subscriptionTimer = Timer.publish(every: TimeInterval(options.interval), on: .main, in: .default)
+                    .autoconnect()
+                    .receive(on: DispatchQueue.main).sink { _ in
                     self.check(toNext: true)
                 }
             }

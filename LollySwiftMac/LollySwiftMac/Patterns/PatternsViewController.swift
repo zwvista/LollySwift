@@ -46,10 +46,10 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
         tvWebPages.registerForDraggedTypes([tableRowDragType])
         vm.$textFilter <~> sfTextFilter.textProperty ~ subscriptions
         vm.$scopeFilter <~> scScopeFilter.selectedLabelProperty ~ subscriptions
-        sfTextFilter.didStartSearchingPublisher.sink { [unowned self] in
+        sfTextFilter.searchFieldDidStartSearchingPublisher.sink { [unowned self] in
             self.vm.textFilter = self.vmSettings.autoCorrectInput(text: self.vm.textFilter)
         } ~ subscriptions
-        sfTextFilter.didEndSearchingPublisher.sink { [unowned self] in
+        sfTextFilter.searchFieldDidEndSearchingPublisher.sink { [unowned self] in
             self.applyFilters()
         } ~ subscriptions
         sfTextFilter.textPublisher.sink { [unowned self] _ in

@@ -21,7 +21,8 @@ class PhrasesLangDetailViewModel: NSObject, ObservableObject {
         self.item = item
         itemEdit = MLangPhraseEdit(x: item)
         isAdd = item.ID == 0
-        _ = itemEdit.PHRASE.map { !$0.isEmpty } ~> isOKEnabled
+        super.init()
+        itemEdit.$PHRASE.map { !$0.isEmpty }.eraseToAnyPublisher() ~> $isOKEnabled
         guard !isAdd else {return}
         vmSingle = SinglePhraseViewModel(phrase: item.PHRASE, settings: vm.vmSettings, complete: complete)
     }

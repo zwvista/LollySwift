@@ -147,11 +147,11 @@ class MUnitPhraseEdit: ObservableObject {
     }
     
     func save(to x: MUnitPhrase) {
-        if indexUNIT.value != -1 {
-            x.UNIT = x.textbook.arrUnits[indexUNIT]
+        if indexUNIT != -1 {
+            x.UNIT = x.textbook.arrUnits[indexUNIT].value
         }
-        if indexPART.value != -1 {
-            x.PART = x.textbook.arrUnits[indexPART]
+        if indexPART != -1 {
+            x.PART = x.textbook.arrUnits[indexPART].value
         }
         x.SEQNUM = Int(SEQNUM)!
         x.PHRASE = PHRASE

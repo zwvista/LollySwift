@@ -212,7 +212,9 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
             selectedWordChanged()
             updateStatusText()
             searchDict(self)
-            getPhrases()
+            Task {
+                await getPhrases()
+            }
         } else {
             selectedPhraseChanged()
         }
