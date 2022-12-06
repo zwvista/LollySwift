@@ -141,7 +141,9 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
         detailVC.textFilter = vm.selectedWord
         detailVC.wordid = vm.selectedWordID
         detailVC.complete = {
-            self.getPhrases()
+            Task {
+                await self.getPhrases()
+            }
         }
         self.presentAsModalWindow(detailVC)
     }

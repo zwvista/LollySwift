@@ -105,10 +105,12 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
             }
         }
         let col = tableView.tableColumns.firstIndex { $0.identifier.rawValue == "SEQNUM" }!
-        vm.reindex {
-            tableView.reloadData(forRowIndexes: [$0], columnIndexes: [col])
+        Task {
+            await vm.reindex {
+                tableView.reloadData(forRowIndexes: [$0], columnIndexes: [col])
+            }
+            tableView.endUpdates()
         }
-        tableView.endUpdates()
         
         return true
     }
@@ -217,7 +219,9 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
         detailVC.textFilter = vm.selectedPhrase
         detailVC.phraseid = vm.selectedPhraseID
         detailVC.complete = {
-            self.getWords()
+            Task {
+                await self.getWords()
+            }
         }
         self.presentAsModalWindow(detailVC)
     }

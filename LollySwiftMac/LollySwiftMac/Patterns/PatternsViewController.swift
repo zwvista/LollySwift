@@ -289,10 +289,12 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
             }
         }
         let col = tableView.tableColumns.firstIndex { $0.identifier.rawValue == "SEQNUM" }!
-        vmWP.reindexWebPage {
-            tableView.reloadData(forRowIndexes: [$0], columnIndexes: [col])
+        Task {
+            await vmWP.reindexWebPage {
+                tableView.reloadData(forRowIndexes: [$0], columnIndexes: [col])
+            }
+            tableView.endUpdates()
         }
-        tableView.endUpdates()
         
         return true
     }
