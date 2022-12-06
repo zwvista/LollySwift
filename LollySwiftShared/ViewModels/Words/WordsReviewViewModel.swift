@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Combine
 
 class WordsReviewViewModel: WordsBaseViewModel {
 
@@ -15,7 +16,7 @@ class WordsReviewViewModel: WordsBaseViewModel {
     var arrCorrectIDs = [Int]()
     var index = 0
     var isTestMode: Bool { options.mode == .test || options.mode == .textbook }
-    var subscriptionTimer: Disposable? = nil
+    var subscriptionTimer: Cancellable? = nil
     let options = MReviewOptions()
     let doTestAction: (() -> Void)?
 
@@ -50,7 +51,7 @@ class WordsReviewViewModel: WordsBaseViewModel {
         options.shuffled = true
     }
 
-    func newTest() {
+    func newTest() async {
         func f() {
             index = options.moveForward ? 0 : count - 1
             doTest()
@@ -60,7 +61,7 @@ class WordsReviewViewModel: WordsBaseViewModel {
         index = 0
         arrWords.removeAll()
         arrCorrectIDs.removeAll()
-        subscriptionTimer?.dispose()
+        subscriptionTimer?.cancel()
         isSpeaking = options.speakingEnabled
         moveForward = options.moveForward
         moveForwardHidden = isTestMode
@@ -68,42 +69,38 @@ class WordsReviewViewModel: WordsBaseViewModel {
         onRepeatHidden = isTestMode
         checkPrevHidden = isTestMode
         if options.mode == .textbook {
-            MUnitWord.getDataByTextbook(vmSettings.selectedTextbook).subscribe(onSuccess: { arr in
-                var arr2 = [MUnitWord]()
-                for o in arr {
-                    let s = o.ACCURACY
-                    let percentage = s.last != "%" ? 0 : Double(s.replacingOccurrences(of: "%", with: ""))!
-                    let t = 6 - Int(percentage / 20)
-                    for _ in 0..<t {
-                        arr2.append(o)
-                    }
+            let arr = await MUnitWord.getDataByTextbook(vmSettings.selectedTextbook)
+            var arr2 = [MUnitWord]()
+            for o in arr {
+                let s = o.ACCURACY
+                let percentage = s.last != "%" ? 0 : Double(s.replacingOccurrences(of: "%", with: ""))!
+                let t = 6 - Int(percentage / 20)
+                for _ in 0..<t {
+                    arr2.append(o)
                 }
-                self.arrWords = []
-                let cnt = min(self.options.reviewCount, arr.count)
-                while self.count < cnt {
-                    let o = arr2.randomElement()!
-                    if !self.arrWords.contains(where: { $0.ID == o.ID }) {
-                        self.arrWords.append(o)
-                    }
+            }
+            self.arrWords = []
+            let cnt = min(self.options.reviewCount, arr.count)
+            while self.count < cnt {
+                let o = arr2.randomElement()!
+                if !self.arrWords.contains(where: { $0.ID == o.ID }) {
+                    self.arrWords.append(o)
                 }
-                f()
-            }) ~ self.rx.disposeBag
+            }
+            f()
         } else {
-            MUnitWord.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO).subscribe(onSuccess: {
-                self.arrWords = $0
-                let count = self.count
-                let from = count * (self.options.groupSelected - 1) / self.options.groupCount
-                let to = count * self.options.groupSelected / self.options.groupCount
-                self.arrWords = [MUnitWord](self.arrWords[from..<to])
-                if self.options.shuffled { self.arrWords = self.arrWords.shuffled() }
-                f()
-                if self.options.mode == .reviewAuto {
-                    self.subscriptionTimer = Observable<Int>.interval(.seconds( self.options.interval), scheduler: MainScheduler.instance).subscribe { _ in
-                        self.check(toNext: true)
-                    }
-                    self.subscriptionTimer?.disposed(by: self.rx.disposeBag)
+            arrWords = await MUnitWord.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO)
+            let count = self.count
+            let from = count * (self.options.groupSelected - 1) / self.options.groupCount
+            let to = count * self.options.groupSelected / self.options.groupCount
+            self.arrWords = [MUnitWord](self.arrWords[from..<to])
+            if self.options.shuffled { self.arrWords = self.arrWords.shuffled() }
+            f()
+            if self.options.mode == .reviewAuto {
+                self.subscriptionTimer = Observable<Int>.interval(.seconds( self.options.interval), scheduler: MainScheduler.instance).subscribe { _ in
+                    self.check(toNext: true)
                 }
-            }) ~ self.rx.disposeBag
+            }
         }
     }
 
@@ -138,7 +135,7 @@ class WordsReviewViewModel: WordsBaseViewModel {
         return CommonApi.extractText(from: html, transform: mDictTranslation.TRANSFORM, template: "") { text,_ in text }
     }
 
-    func check(toNext: Bool) {
+    func check(toNext: Bool) async {
         if !isTestMode {
             var b = true
             if options.mode == .reviewManual && !wordInputString.isEmpty && wordInputString != currentWord {
@@ -165,11 +162,10 @@ class WordsReviewViewModel: WordsBaseViewModel {
             let o = currentItem!
             let isCorrect = o.WORD == wordInputString
             if isCorrect { arrCorrectIDs.append(o.ID) }
-            MWordFami.update(wordid: o.WORDID, isCorrect: isCorrect).map {
-                o.CORRECT = $0.CORRECT
-                o.TOTAL = $0.TOTAL
-                self.accuracyString.accept(o.ACCURACY)
-            }.subscribe() ~ rx.disposeBag
+            let o2 = await MWordFami.update(wordid: o.WORDID, isCorrect: isCorrect)
+            o.CORRECT = o2.CORRECT
+            o.TOTAL = o2.TOTAL
+            self.accuracyString = o.ACCURACY
         } else {
             move(toNext: toNext)
             doTest()
@@ -198,11 +194,9 @@ class WordsReviewViewModel: WordsBaseViewModel {
         if hasCurrent {
             indexString = "\(index + 1)/\(count)"
             accuracyString = currentItem!.ACCURACY
-            getTranslation().subscribe(onSuccess: {
-                self.translationString.accept($0)
-            }) ~ rx.disposeBag
+            translationString = await getTranslation()
         } else {
-            subscriptionTimer?.dispose()
+            subscriptionTimer?.cancel()
         }
     }
 }

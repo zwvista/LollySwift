@@ -142,16 +142,18 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     }
 
     override func deletePhrase(row: Int) {
-        let item = arrPhrases[row]
-        PhrasesUnitViewModel.delete(item: item).subscribe(onSuccess: {
-            self.doRefresh()
-        }) ~ rx.disposeBag
+        Task {
+            let item = arrPhrases[row]
+            await PhrasesUnitViewModel.delete(item: item)
+            doRefresh()
+        }
     }
     
     @IBAction func refreshTableView(_ sender: AnyObject) {
-        vm.reload().subscribe(onSuccess: {
-            self.doRefresh()
-        }) ~ rx.disposeBag
+        Task {
+            await vm.reload()
+            doRefresh()
+        }
     }
     
     @IBAction func doubleAction(_ sender: AnyObject) {
@@ -174,29 +176,29 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     }
 
     @IBAction func previousUnitPart(_ sender: AnyObject) {
-        vmSettings.previousUnitPart().flatMap {
-            self.vm.reload()
-        }.subscribe(onSuccess: {
-            self.doRefresh()
-        }) ~ rx.disposeBag
+        Task {
+            await vmSettings.previousUnitPart()
+            await vm.reload()
+            doRefresh()
+        }
     }
     
     @IBAction func nextUnitPart(_ sender: AnyObject) {
-        vmSettings.nextUnitPart().flatMap {
-            self.vm.reload()
-        }.subscribe(onSuccess: {
-            self.doRefresh()
-        }) ~ rx.disposeBag
+        Task {
+            await vmSettings.nextUnitPart()
+            await vm.reload()
+            doRefresh()
+        }
     }
     
     @IBAction func toggleToType(_ sender: AnyObject) {
         let row = tvPhrases.selectedRow
         let part = row == -1 ? vmSettings.arrParts[0].value : arrPhrases[row].PART
-        vmSettings.toggleToType(part: part).flatMap {
-            self.vm.reload()
-        }.subscribe(onSuccess: {
-            self.doRefresh()
-        }) ~ rx.disposeBag
+        Task {
+            await vmSettings.toggleToType(part: part)
+            await vm.reload()
+            doRefresh()
+        }
     }
 
     override func updateStatusText() {

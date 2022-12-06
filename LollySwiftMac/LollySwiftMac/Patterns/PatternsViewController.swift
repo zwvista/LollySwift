@@ -95,14 +95,14 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
         }
         guard oldValue != newValue else {return}
         item.setValue(newValue, forKey: key)
-        if tv === tvPatterns {
-            PatternsViewModel.update(item: item as! MPattern).subscribe(onSuccess: {
-                tv.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvPatterns.tableColumns.count))
-            }) ~ rx.disposeBag
-        } else if tv === tvWebPages {
-            PatternsWebPagesViewModel.updateWebPage(item: item as! MPatternWebPage).subscribe(onSuccess: {
-                tv.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvPatterns.tableColumns.count))
-            }) ~ rx.disposeBag
+        Task {
+            if tv === tvPatterns {
+                await PatternsViewModel.update(item: item as! MPattern)
+                tv.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<tvPatterns.tableColumns.count))
+            } else if tv === tvWebPages {
+                await PatternsWebPagesViewModel.updateWebPage(item: item as! MPatternWebPage)
+                tv.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<tvPatterns.tableColumns.count))
+            }
         }
     }
 

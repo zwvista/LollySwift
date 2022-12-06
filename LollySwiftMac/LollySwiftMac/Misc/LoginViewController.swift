@@ -8,6 +8,7 @@
 
 import Cocoa
 import Combine
+import Then
 
 class LoginViewController: NSViewController {
 
@@ -29,12 +30,12 @@ class LoginViewController: NSViewController {
             Task {
                 globalUser.userid = await vm.login(username: vm.username, password: vm.password)
                 if globalUser.userid.isEmpty {
-                    let alert = NSAlert()
-                    alert.alertStyle = .critical
-                    alert.messageText = "Login"
-                    alert.informativeText = "Wrong Username or Password!"
-                    alert.addButton(withTitle: "OK")
-                    alert.runModal()
+                    NSAlert().then {
+                        $0.alertStyle = .critical
+                        $0.messageText = "Login"
+                        $0.informativeText = "Wrong Username or Password!"
+                        $0.addButton(withTitle: "OK")
+                    }.runModal()
                 } else {
                     UserDefaults.standard.set(globalUser.userid, forKey: "userid")
                     NSApplication.shared.stopModal(withCode: .OK)

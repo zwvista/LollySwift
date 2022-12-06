@@ -9,14 +9,14 @@
 import Cocoa
 
 class TransformItemEditController: NSViewController {
-    
-    @objc var item: MTransformItem!
-    var complete: (() -> Void)?
 
     @IBOutlet weak var tfIndex: NSTextField!
     @IBOutlet weak var tfExtractor: NSTextField!
     @IBOutlet weak var tfReplacement: NSTextField!
-    
+
+    @objc var item: MTransformItem!
+    var complete: (() -> Void)?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.

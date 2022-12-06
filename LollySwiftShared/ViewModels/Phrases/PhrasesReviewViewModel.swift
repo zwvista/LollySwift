@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Combine
 
 class PhrasesReviewViewModel: NSObject, ObservableObject {
 
@@ -17,7 +18,7 @@ class PhrasesReviewViewModel: NSObject, ObservableObject {
     var index = 0
     let options = MReviewOptions()
     var isTestMode: Bool { options.mode == .test || options.mode == .textbook }
-    var subscriptionTimer: Disposable? = nil
+    var subscriptionTimer: Cancellable? = nil
     let doTestAction: (() -> Void)?
 
     @Published var indexString = ""
@@ -55,7 +56,7 @@ class PhrasesReviewViewModel: NSObject, ObservableObject {
         index = 0
         arrPhrases.removeAll()
         arrCorrectIDs.removeAll()
-        subscriptionTimer?.dispose()
+        subscriptionTimer?.cancel()
         isSpeaking = options.speakingEnabled
         moveForward = options.moveForward
         moveForwardHidden = isTestMode
@@ -78,7 +79,6 @@ class PhrasesReviewViewModel: NSObject, ObservableObject {
                 subscriptionTimer = Observable<Int>.interval(.seconds(self.options.interval), scheduler: MainScheduler.instance).subscribe { _ in
                     self.check(toNext: true)
                 }
-                self.subscriptionTimer?.disposed(by: self.rx.disposeBag)
             }
         }
     }
@@ -153,7 +153,7 @@ class PhrasesReviewViewModel: NSObject, ObservableObject {
         if hasCurrent {
             indexString = "\(index + 1)/\(count)"
         } else {
-            subscriptionTimer?.dispose()
+            subscriptionTimer?.cancel()
         }
     }
 }

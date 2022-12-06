@@ -160,7 +160,7 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
             vmWords.$newWord <~> tfNewWord.textProperty ~ subscriptions
             tfNewWord.rx.controlTextDidEndEditing.subscribe(onNext: { [unowned self] _ in
                 self.commitEditing()
-                if !self.vmWords.newWord.value.isEmpty {
+                if !self.vmWords.newWord.isEmpty {
                     self.addNewWord()
                 }
             }) ~ rx.disposeBag
