@@ -168,12 +168,12 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
         if let sfTextFilter = sfTextFilter {
             vmWords.$textFilter <~> sfTextFilter.textProperty ~ subscriptions
             vmWords.$scopeFilter <~> scScopeFilter.selectedLabelProperty ~ subscriptions
-            sfTextFilter.rx.searchFieldDidStartSearching.subscribe { [unowned self] _ in
-                self.vmWords.textFilter.accept(self.vmSettings.autoCorrectInput(text: self.vmWords.textFilter.value))
-            } ~ rx.disposeBag
-            sfTextFilter.rx.searchFieldDidEndSearching.subscribe { [unowned self] _ in
+            sfTextFilter.didStartSearchingPublisher.sink { [unowned self] in
+                self.vmWords.textFilter = self.vmSettings.autoCorrectInput(text: self.vmWords.textFilter)
+            } ~ subscriptions
+            sfTextFilter.didEndSearchingPublisher.sink { [unowned self] in
                 self.applyFilters()
-            } ~ rx.disposeBag
+            } ~ subscriptions
             sfTextFilter.textPublisher.sink { [unowned self] _ in
                 self.applyFilters()
             } ~ subscriptions

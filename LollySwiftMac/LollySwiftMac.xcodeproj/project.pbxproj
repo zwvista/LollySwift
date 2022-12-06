@@ -28,6 +28,11 @@
 		8C486DF41EBB88240023FBFC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C486DF31EBB88240023FBFC /* Cocoa.framework */; };
 		8C486DF61EBB882B0023FBFC /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C486DF51EBB882B0023FBFC /* WebKit.framework */; };
 		8CAF910A20833C4F00933837 /* WordsSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAF910920833C4F00933837 /* WordsSearchViewModel.swift */; };
+		8CB025A7293F065D00401895 /* NSSearchField+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB025A6293F065D00401895 /* NSSearchField+Combine.swift */; };
+		8CB025B3293F09E400401895 /* DelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB025B0293F09E400401895 /* DelegateProxy.swift */; };
+		8CB025B4293F09E400401895 /* DelegateProxyPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB025B1293F09E400401895 /* DelegateProxyPublisher.swift */; };
+		8CB025B5293F09E400401895 /* DelegateProxyType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB025B2293F09E400401895 /* DelegateProxyType.swift */; };
+		8CB025BB293F09F000401895 /* ObjcDelegateProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CB025B7293F09F000401895 /* ObjcDelegateProxy.m */; };
 		8CBB5BD0293C9BE100B8AEE0 /* CombineControlProperty2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBB5BC8293C9BE100B8AEE0 /* CombineControlProperty2.swift */; };
 		8CBB5BD1293C9BE100B8AEE0 /* CombineControlTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBB5BC9293C9BE100B8AEE0 /* CombineControlTarget.swift */; };
 		8CBB5BD2293C9BE100B8AEE0 /* StoreIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CBB5BCA293C9BE100B8AEE0 /* StoreIn.swift */; };
@@ -222,6 +227,12 @@
 		8C486DF51EBB882B0023FBFC /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		8C6E2EDC1EBB97CF00AC114F /* LollySwiftMac-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LollySwiftMac-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		8CAF910920833C4F00933837 /* WordsSearchViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsSearchViewModel.swift; sourceTree = "<group>"; };
+		8CB025A6293F065D00401895 /* NSSearchField+Combine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSSearchField+Combine.swift"; sourceTree = "<group>"; };
+		8CB025B0293F09E400401895 /* DelegateProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelegateProxy.swift; sourceTree = "<group>"; };
+		8CB025B1293F09E400401895 /* DelegateProxyPublisher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelegateProxyPublisher.swift; sourceTree = "<group>"; };
+		8CB025B2293F09E400401895 /* DelegateProxyType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelegateProxyType.swift; sourceTree = "<group>"; };
+		8CB025B7293F09F000401895 /* ObjcDelegateProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjcDelegateProxy.m; sourceTree = "<group>"; };
+		8CB025B9293F09F000401895 /* ObjcDelegateProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjcDelegateProxy.h; sourceTree = "<group>"; };
 		8CBB5BC8293C9BE100B8AEE0 /* CombineControlProperty2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CombineControlProperty2.swift; sourceTree = "<group>"; };
 		8CBB5BC9293C9BE100B8AEE0 /* CombineControlTarget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CombineControlTarget.swift; sourceTree = "<group>"; };
 		8CBB5BCA293C9BE100B8AEE0 /* StoreIn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreIn.swift; sourceTree = "<group>"; };
@@ -502,6 +513,18 @@
 			path = LollySwiftMac;
 			sourceTree = "<group>";
 		};
+		8CB025AF293F09E400401895 /* DelegateProxy */ = {
+			isa = PBXGroup;
+			children = (
+				8CB025B0293F09E400401895 /* DelegateProxy.swift */,
+				8CB025B1293F09E400401895 /* DelegateProxyPublisher.swift */,
+				8CB025B2293F09E400401895 /* DelegateProxyType.swift */,
+				8CB025B7293F09F000401895 /* ObjcDelegateProxy.m */,
+				8CB025B9293F09F000401895 /* ObjcDelegateProxy.h */,
+			);
+			path = DelegateProxy;
+			sourceTree = "<group>";
+		};
 		8CBB5BA6293A839200B8AEE0 /* CombineCommon */ = {
 			isa = PBXGroup;
 			children = (
@@ -509,6 +532,7 @@
 				8CBB5BC8293C9BE100B8AEE0 /* CombineControlProperty2.swift */,
 				8CBB5BC9293C9BE100B8AEE0 /* CombineControlTarget.swift */,
 				8CBB5BDB293D36A700B8AEE0 /* Controls */,
+				8CB025AF293F09E400401895 /* DelegateProxy */,
 				8CBB5BCA293C9BE100B8AEE0 /* StoreIn.swift */,
 			);
 			path = CombineCommon;
@@ -520,6 +544,7 @@
 				8CBB5BDE293D36A700B8AEE0 /* Control+Bind.swift */,
 				8CBB5BDC293D36A700B8AEE0 /* NSButton+Combine.swift */,
 				8CBB5BDD293D36A700B8AEE0 /* NSPopUpButton+Combine.swift */,
+				8CB025A6293F065D00401895 /* NSSearchField+Combine.swift */,
 				8CBB5BDF293D36A700B8AEE0 /* NSSegmentedControl+Combine.swift */,
 				8CBB5BF7293E603000B8AEE0 /* NSStepper+Combine.swift */,
 				8CBB5BE0293D36A700B8AEE0 /* NSTextField+Combine.swift */,
@@ -953,9 +978,11 @@
 				95406BF1255B73EE00C87A0D /* TextbooksDetailViewController.swift in Sources */,
 				959191E5258CFFCA0070DBFD /* MLangWord.swift in Sources */,
 				9541890E2438FE6D00DB7230 /* BlogViewController.swift in Sources */,
+				8CB025B3293F09E400401895 /* DelegateProxy.swift in Sources */,
 				9589845D259F00CE00DFE80A /* PatternsWebPagesViewModel.swift in Sources */,
 				9593779922C4CE37009FFBD0 /* MUSMapping.swift in Sources */,
 				95AF43BD254BDAB000FD71CB /* PatternsSplitViewController.swift in Sources */,
+				8CB025B4293F09E400401895 /* DelegateProxyPublisher.swift in Sources */,
 				958125C82190464A0001159E /* PhrasesLangDetailViewController.swift in Sources */,
 				8C2CB5B3207885140083DDE2 /* WordsUnitViewModel.swift in Sources */,
 				959191E9258CFFCA0070DBFD /* MWordFami.swift in Sources */,
@@ -982,6 +1009,7 @@
 				95DB142A21DFE6E200FBAF9A /* WordsBaseViewController.swift in Sources */,
 				95B6589F2222E9E10095B0D2 /* WordsUnitBatchEditViewController.swift in Sources */,
 				95124F8724C48689008FE242 /* WebPageSelectViewController.swift in Sources */,
+				8CB025B5293F09E400401895 /* DelegateProxyType.swift in Sources */,
 				95406BFA255B740A00C87A0D /* WebTextbooksViewController.swift in Sources */,
 				D5D5429E2823CAE3004359F3 /* MUnitBlog.swift in Sources */,
 				9568FF2B25A44C57004598D8 /* PhrasesBaseViewModel.swift in Sources */,
@@ -1036,6 +1064,7 @@
 				8CD8409D20AFD4DA00442133 /* PhrasesUnitDetailViewController.swift in Sources */,
 				9534728F22BB68EE00517D71 /* SettingsViewController.swift in Sources */,
 				95B04C49253DF5C2009BF514 /* WordsAssociateViewController.swift in Sources */,
+				8CB025A7293F065D00401895 /* NSSearchField+Combine.swift in Sources */,
 				954B870E218FD274007DC348 /* WordsLangDetailViewController.swift in Sources */,
 				95837E8D24DF06ED00B5D2AE /* WordsUnitDetailViewController.swift in Sources */,
 				95940A922233865700D35409 /* MVoice.swift in Sources */,
@@ -1044,6 +1073,7 @@
 				95548CE72621CD7000893AB8 /* LoginViewModel.swift in Sources */,
 				959191EF258CFFCA0070DBFD /* MUnitPhrase.swift in Sources */,
 				8C2CB5AE207885140083DDE2 /* SettingsViewModel.swift in Sources */,
+				8CB025BB293F09F000401895 /* ObjcDelegateProxy.m in Sources */,
 				95B658A1222322960095B0D2 /* PhrasesUnitBatchEditViewController.swift in Sources */,
 				959191ED258CFFCA0070DBFD /* MWordPhrase.swift in Sources */,
 				8C2CB5C3207888260083DDE2 /* WordsUnitViewController.swift in Sources */,
