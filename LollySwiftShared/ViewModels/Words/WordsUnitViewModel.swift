@@ -19,7 +19,9 @@ class WordsUnitViewModel: WordsBaseViewModel {
         super.init(settings: settings, needCopy: needCopy)
         Task {
             await reload()
-            complete()
+            await MainActor.run {
+                complete()
+            }
         }
     }
 
