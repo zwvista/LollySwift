@@ -9,8 +9,7 @@ import Cocoa
 import Combine
 
 extension NSSearchField {
-    /// Combine wrapper for `NSSearchFieldDelegate.searchFieldDidStartSearching(_:)`
-    var didStartSearchingPublisher: AnyPublisher<Void, Never> {
+    var searchFieldDidStartSearchingPublisher: AnyPublisher<Void, Never> {
         let selector = #selector(NSSearchFieldDelegate.searchFieldDidStartSearching(_:))
         return delegateProxy
             .interceptSelectorPublisher(selector)
@@ -18,8 +17,7 @@ extension NSSearchField {
             .eraseToAnyPublisher()
     }
 
-    /// Combine wrapper for `NSSearchFieldDelegate.searchFieldDidStartSearching(_:)`
-    var didEndSearchingPublisher: AnyPublisher<Void, Never> {
+    var searchFieldDidEndSearchingPublisher: AnyPublisher<Void, Never> {
         let selector = #selector(NSSearchFieldDelegate.searchFieldDidEndSearching(_:))
         return delegateProxy
             .interceptSelectorPublisher(selector)

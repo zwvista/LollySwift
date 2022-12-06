@@ -158,20 +158,20 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
         super.viewDidLoad()
         if let tfNewWord = tfNewWord {
             vmWords.$newWord <~> tfNewWord.textProperty ~ subscriptions
-            tfNewWord.rx.controlTextDidEndEditing.subscribe(onNext: { [unowned self] _ in
+            tfNewWord.controlTextDidEndEditingPublisher.sink { [unowned self] in
                 self.commitEditing()
                 if !self.vmWords.newWord.isEmpty {
                     self.addNewWord()
                 }
-            }) ~ rx.disposeBag
+            } ~ subscriptions
         }
         if let sfTextFilter = sfTextFilter {
             vmWords.$textFilter <~> sfTextFilter.textProperty ~ subscriptions
             vmWords.$scopeFilter <~> scScopeFilter.selectedLabelProperty ~ subscriptions
-            sfTextFilter.didStartSearchingPublisher.sink { [unowned self] in
+            sfTextFilter.searchFieldDidStartSearchingPublisher.sink { [unowned self] in
                 self.vmWords.textFilter = self.vmSettings.autoCorrectInput(text: self.vmWords.textFilter)
             } ~ subscriptions
-            sfTextFilter.didEndSearchingPublisher.sink { [unowned self] in
+            sfTextFilter.searchFieldDidEndSearchingPublisher.sink { [unowned self] in
                 self.applyFilters()
             } ~ subscriptions
             sfTextFilter.textPublisher.sink { [unowned self] _ in

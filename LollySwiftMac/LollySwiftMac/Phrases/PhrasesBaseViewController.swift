@@ -18,10 +18,10 @@ class PhrasesBaseViewController: WordsPhrasesBaseViewController {
         super.viewDidLoad()
         vmPhrases.$textFilter <~> sfTextFilter.textProperty ~ subscriptions
         vmPhrases.$scopeFilter <~> scScopeFilter.selectedLabelProperty ~ subscriptions
-        sfTextFilter.didStartSearchingPublisher.sink { [unowned self] in
+        sfTextFilter.searchFieldDidStartSearchingPublisher.sink { [unowned self] in
             self.vmPhrases.textFilter = self.vmSettings.autoCorrectInput(text: self.vmPhrases.textFilter)
         } ~ subscriptions
-        sfTextFilter.didEndSearchingPublisher.sink { [unowned self] in
+        sfTextFilter.searchFieldDidEndSearchingPublisher.sink { [unowned self] in
             self.applyFilters()
         } ~ subscriptions
         sfTextFilter.textPublisher.sink { [unowned self] _ in
