@@ -52,9 +52,9 @@ class WordsReviewViewModel: WordsBaseViewModel {
     }
 
     func newTest() async {
-        func f() {
+        func f() async {
             index = options.moveForward ? 0 : count - 1
-            doTest()
+            await doTest()
             checkNextTitle = isTestMode ? "Check" : "Next"
             checkPrevTitle = isTestMode ? "Check" : "Prev"
         }
@@ -79,26 +79,29 @@ class WordsReviewViewModel: WordsBaseViewModel {
                     arr2.append(o)
                 }
             }
-            self.arrWords = []
-            let cnt = min(self.options.reviewCount, arr.count)
-            while self.count < cnt {
+            arrWords = []
+            let cnt = min(options.reviewCount, arr.count)
+            while count < cnt {
                 let o = arr2.randomElement()!
-                if !self.arrWords.contains(where: { $0.ID == o.ID }) {
-                    self.arrWords.append(o)
+                if !arrWords.contains(where: { $0.ID == o.ID }) {
+                    arrWords.append(o)
                 }
             }
-            f()
+            await f()
         } else {
             arrWords = await MUnitWord.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO)
-            let count = self.count
-            let from = count * (self.options.groupSelected - 1) / self.options.groupCount
-            let to = count * self.options.groupSelected / self.options.groupCount
-            self.arrWords = [MUnitWord](self.arrWords[from..<to])
-            if self.options.shuffled { self.arrWords = self.arrWords.shuffled() }
-            f()
-            if self.options.mode == .reviewAuto {
-                self.subscriptionTimer = Observable<Int>.interval(.seconds( self.options.interval), scheduler: MainScheduler.instance).subscribe { _ in
-                    self.check(toNext: true)
+            let from = count * (options.groupSelected - 1) / options.groupCount
+            let to = count * options.groupSelected / options.groupCount
+            arrWords = [MUnitWord](arrWords[from..<to])
+            if options.shuffled { arrWords = arrWords.shuffled() }
+            await f()
+            if options.mode == .reviewAuto {
+                subscriptionTimer = Timer.publish(every: TimeInterval(options.interval), on: .main, in: .default)
+                    .autoconnect()
+                    .receive(on: DispatchQueue.main).sink { _ in
+                    Task {
+                        await self.check(toNext: true)
+                    }
                 }
             }
         }
@@ -144,7 +147,7 @@ class WordsReviewViewModel: WordsBaseViewModel {
             }
             if b {
                 move(toNext: toNext)
-                doTest()
+                await doTest()
             }
         } else if correctHidden && incorrectHidden {
             wordInputString = vmSettings.autoCorrectInput(text: wordInputString)
@@ -168,13 +171,13 @@ class WordsReviewViewModel: WordsBaseViewModel {
             self.accuracyString = o.ACCURACY
         } else {
             move(toNext: toNext)
-            doTest()
+            await doTest()
             checkNextTitle = "Check"
             checkPrevTitle = "Check"
         }
     }
     
-    func doTest() {
+    func doTest() async {
         indexHidden = !hasCurrent
         correctHidden = true
         incorrectHidden = true

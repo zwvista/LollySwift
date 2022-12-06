@@ -126,12 +126,13 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
             let row = tvPatterns.selectedRow
             vm.selectedPatternItem = row == -1 ? nil : arrPatterns[row]
             vmWP.selectedPatternItem = vm.selectedPatternItem
-            vmWP.getWebPages().subscribe(onSuccess: {
-                self.tvWebPages.reloadData()
-                if self.tvWebPages.numberOfRows > 0 {
-                    self.tvWebPages.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
+            Task {
+                await vmWP.getWebPages()
+                tvWebPages.reloadData()
+                if tvWebPages.numberOfRows > 0 {
+                    tvWebPages.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
                 }
-            }) ~ rx.disposeBag
+            }
             if isSpeaking {
                 speak(self)
             }
@@ -189,9 +190,10 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     }
     
     @IBAction func refreshTableView(_ sender: AnyObject) {
-        vm.reload().subscribe(onSuccess: {
-            self.doRefresh()
-        }) ~ rx.disposeBag
+        Task {
+            await vm.reload()
+            doRefresh()
+        }
     }
     
     // https://stackoverflow.com/questions/24219441/how-to-use-nstoolbar-in-xcode-6-and-storyboard
