@@ -174,12 +174,12 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
             sfTextFilter.rx.searchFieldDidEndSearching.subscribe { [unowned self] _ in
                 self.applyFilters()
             } ~ rx.disposeBag
-            sfTextFilter.rx.text.subscribe(onNext: { [unowned self] _ in
+            sfTextFilter.textPublisher.sink { [unowned self] _ in
                 self.applyFilters()
-            }) ~ rx.disposeBag
-            scScopeFilter.rx.selectedLabel.subscribe(onNext: { [unowned self] _ in
+            } ~ subscriptions
+            scScopeFilter.selectedLabelPublisher.sink { [unowned self] _ in
                 self.applyFilters()
-            }) ~ rx.disposeBag
+            } ~ subscriptions
         }
     }
 
@@ -296,10 +296,9 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
         }
     }
     
-    func getPhrases() {
-        vmPhrasesLang.getPhrases(wordid: vmWords.selectedWordID).subscribe(onSuccess: {
-            self.tvPhrases.reloadData()
-        }) ~ rx.disposeBag
+    func getPhrases() async {
+        await vmPhrasesLang.getPhrases(wordid: vmWords.selectedWordID)
+        tvPhrases.reloadData()
     }
 
     @IBAction func editPhrase(_ sender: AnyObject) {

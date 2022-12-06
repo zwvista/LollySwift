@@ -54,10 +54,11 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     }
     
     override func endEditing(row: Int) {
-        let item = arrPhrases[row]
-        vm.update(item: item).subscribe(onSuccess: {
-            self.tvPhrases.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvPhrases.tableColumns.count))
-        }) ~ rx.disposeBag
+        Task {
+            let item = arrPhrases[row]
+            await vm.update(item: item)
+            tvPhrases.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<tvPhrases.tableColumns.count))
+        }
     }
 
     func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {

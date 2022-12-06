@@ -52,12 +52,12 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
         sfTextFilter.rx.searchFieldDidEndSearching.subscribe { [unowned self] _ in
             self.applyFilters()
         } ~ rx.disposeBag
-        sfTextFilter.rx.text.subscribe(onNext: { [unowned self] _ in
+        sfTextFilter.textPublisher.sink { [unowned self] _ in
             self.applyFilters()
-        }) ~ rx.disposeBag
-        scScopeFilter.rx.selectedLabel.subscribe(onNext: { [unowned self] _ in
+        } ~ subscriptions
+        scScopeFilter.selectedLabelPublisher.sink { [unowned self] _ in
             self.applyFilters()
-        }) ~ rx.disposeBag
+        } ~ subscriptions
     }
     
     // Hold a reference to the window controller in order to prevent it from being released

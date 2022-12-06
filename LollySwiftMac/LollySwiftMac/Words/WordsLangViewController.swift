@@ -44,22 +44,24 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
     }
 
     override func endEditing(row: Int) {
-        let item = arrWords[row]
-        WordsLangViewModel.update(item: item).subscribe(onSuccess: {
-            self.tvWords.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvWords.tableColumns.count))
-        }) ~ rx.disposeBag
+        Task {
+            let item = arrWords[row]
+            await WordsLangViewModel.update(item: item)
+            tvWords.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<tvWords.tableColumns.count))
+        }
     }
     
     override func addNewWord() {
         guard !vm.newWord.isEmpty else {return}
         let item = vm.newLangWord()
         item.WORD = vm.vmSettings.autoCorrectInput(text: vm.newWord)
-        WordsLangViewModel.create(item: item).subscribe(onSuccess: {
-            self.vm.arrWords.append(item)
-            self.tvWords.reloadData()
-            self.tfNewWord.stringValue = ""
-            self.vm.newWord.accept("")
-        }) ~ rx.disposeBag
+        Task {
+            await WordsLangViewModel.create(item: item)
+            vm.arrWords.append(item)
+            tvWords.reloadData()
+            tfNewWord.stringValue = ""
+            vm.newWord = ""
+        }
     }
 
     // https://stackoverflow.com/questions/24219441/how-to-use-nstoolbar-in-xcode-6-and-storyboard
@@ -72,16 +74,18 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
     }
 
     override func deleteWord(row: Int) {
-        let item = arrWords[row]
-        WordsLangViewModel.delete(item: item).subscribe(onSuccess: {
-            self.doRefresh()
-        }) ~ rx.disposeBag
+        Task {
+            let item = arrWords[row]
+            await WordsLangViewModel.delete(item: item)
+            doRefresh()
+        }
     }
 
     @IBAction func refreshTableView(_ sender: AnyObject) {
-        vm.reload().subscribe(onSuccess: {
-            self.doRefresh()
-        }) ~ rx.disposeBag
+        Task {
+            await vm.reload()
+            doRefresh()
+        }
     }
     
     @IBAction func doubleAction(_ sender: AnyObject) {
@@ -104,17 +108,19 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
     }
     
     @IBAction func getNote(_ sender: AnyObject) {
-        let col = tvWords.tableColumns.firstIndex { $0.title == "NOTE" }!
-        vm.getNote(index: tvWords.selectedRow).subscribe(onSuccess: {
-            self.tvWords.reloadData(forRowIndexes: [self.tvWords.selectedRow], columnIndexes: [col])
-        }) ~ rx.disposeBag
+        Task {
+            let col = tvWords.tableColumns.firstIndex { $0.title == "NOTE" }!
+            await vm.getNote(index: tvWords.selectedRow)
+            tvWords.reloadData(forRowIndexes: [tvWords.selectedRow], columnIndexes: [col])
+        }
     }
     
     @IBAction func clearNote(_ sender: AnyObject) {
-        let col = tvWords.tableColumns.firstIndex { $0.title == "NOTE" }!
-        vm.clearNote(index: tvWords.selectedRow).subscribe(onSuccess: {
-            self.tvWords.reloadData(forRowIndexes: [self.tvWords.selectedRow], columnIndexes: [col])
-        }) ~ rx.disposeBag
+        Task {
+            let col = tvWords.tableColumns.firstIndex { $0.title == "NOTE" }!
+            await vm.clearNote(index: tvWords.selectedRow)
+            tvWords.reloadData(forRowIndexes: [tvWords.selectedRow], columnIndexes: [col])
+        }
     }
 
     // https://stackoverflow.com/questions/9368654/cannot-seem-to-setenabledno-on-nsmenuitem
