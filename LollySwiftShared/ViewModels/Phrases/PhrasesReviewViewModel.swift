@@ -86,11 +86,11 @@ class PhrasesReviewViewModel: NSObject, ObservableObject {
     var hasCurrent: Bool { !arrPhrases.isEmpty && (onRepeat || 0..<count ~= index) }
     func move(toNext: Bool) {
         func checkOnRepeat() {
-            if onRepeat.value {
+            if onRepeat {
                 index = (index + count) % count
             }
         }
-        if moveForward.value == toNext {
+        if moveForward == toNext {
             index += 1
             checkOnRepeat()
             if isTestMode && !hasCurrent {
@@ -102,56 +102,56 @@ class PhrasesReviewViewModel: NSObject, ObservableObject {
             checkOnRepeat()
         }
     }
-    
+
     var currentItem: MUnitPhrase? { hasCurrent ? arrPhrases[index] : nil }
     var currentPhrase: String { hasCurrent ? arrPhrases[index].PHRASE : "" }
-    
+
     func check(toNext: Bool) {
         if !isTestMode {
             var b = true
-            if options.mode == .reviewManual && !phraseInputString.value.isEmpty && phraseInputString.value != currentPhrase {
+            if options.mode == .reviewManual && !phraseInputString.isEmpty && phraseInputString != currentPhrase {
                 b = false
-                incorrectHidden.accept(false)
+                incorrectHidden = false
             }
             if b {
                 move(toNext: toNext)
                 doTest()
             }
-        } else if correctHidden.value && incorrectHidden.value {
-            phraseInputString.accept(vmSettings.autoCorrectInput(text: phraseInputString.value))
-            phraseTargetHidden.accept(false)
-            if phraseInputString.value == currentPhrase {
-                correctHidden.accept(false)
+        } else if correctHidden && incorrectHidden {
+            phraseInputString = vmSettings.autoCorrectInput(text: phraseInputString)
+            phraseTargetHidden = false
+            if phraseInputString == currentPhrase {
+                correctHidden = false
             } else {
-                incorrectHidden.accept(false)
+                incorrectHidden = false
             }
-            checkNextTitle.accept("Next")
-            checkPrevTitle.accept("Prev")
+            checkNextTitle = "Next"
+            checkPrevTitle = "Prev"
             guard hasCurrent else {return}
             let o = arrPhrases[index]
-            let isCorrect = o.PHRASE == phraseInputString.value
+            let isCorrect = o.PHRASE == phraseInputString
             if isCorrect { arrCorrectIDs.append(o.ID) }
         } else {
             move(toNext: toNext)
             doTest()
-            checkNextTitle.accept("Check")
-            checkPrevTitle.accept("Check")
+            checkNextTitle = "Check"
+            checkPrevTitle = "Check"
         }
     }
     
     func doTest() {
-        indexHidden.accept(!hasCurrent)
-        correctHidden.accept(true)
-        incorrectHidden.accept(true)
-        checkNextEnabled.accept(hasCurrent)
-        checkPrevEnabled.accept(hasCurrent)
-        phraseTargetString.accept(currentPhrase)
-        translationString.accept(currentItem?.TRANSLATION ?? "")
-        phraseTargetHidden.accept(isTestMode)
-        phraseInputString.accept("")
+        indexHidden = !hasCurrent
+        correctHidden = true
+        incorrectHidden = true
+        checkNextEnabled = hasCurrent
+        checkPrevEnabled = hasCurrent
+        phraseTargetString = currentPhrase
+        translationString = currentItem?.TRANSLATION ?? ""
+        phraseTargetHidden = isTestMode
+        phraseInputString = ""
         doTestAction?()
         if hasCurrent {
-            indexString.accept("\(index + 1)/\(count)")
+            indexString = "\(index + 1)/\(count)"
         } else {
             subscriptionTimer?.dispose()
         }

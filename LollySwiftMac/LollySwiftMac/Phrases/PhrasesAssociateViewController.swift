@@ -78,23 +78,20 @@ class PhrasesAssociateViewController: NSViewController, NSTableViewDataSource, N
         guard view.window?.firstResponder != sfTextFilter.window else {return}
         // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
         self.commitEditing()
-        var o = Single.just(())
-        for i in 0..<tableView.numberOfRows {
-            guard let col = tableView.view(atColumn: 0, row: i, makeIfNecessary: false) else {continue}
-            guard (col as! LollyCheckCell).chk!.state == .on else {continue}
-            let item = arrPhrases[i]
-            if wordid != 0 {
-                o = o.flatMap {
-                    MWordPhrase.associate(wordid: self.wordid, phraseid: item.PHRASEID)
+        Task {
+            for i in 0..<tableView.numberOfRows {
+                guard let col = tableView.view(atColumn: 0, row: i, makeIfNecessary: false) else {continue}
+                guard (col as! LollyCheckCell).chk!.state == .on else {continue}
+                let item = arrPhrases[i]
+                if wordid != 0 {
+                    await MWordPhrase.associate(wordid: self.wordid, phraseid: item.PHRASEID)
                 }
             }
-        }
-        o.subscribe(onSuccess: {
             self.complete?()
             self.dismiss(sender)
-        }) ~ rx.disposeBag
+        }
     }
-    
+
     deinit {
         print("DEBUG: \(self.className) deinit")
     }

@@ -31,18 +31,20 @@ class WordsDictViewController: NSViewController, WKNavigationDelegate {
         wvDict.allowsMagnification = true
         wvDict.allowsBackForwardNavigationGestures = true
         webInitilized = true
-        load()
+        Task {
+            await load()
+        }
     }
     
-    private func load() {
+    private func load() async {
         guard webInitilized else {return}
         dictStore.word = word
-        dictStore.searchDict()
+        await dictStore.searchDict()
     }
     
-    func searchWord(word: String) {
+    func searchWord(word: String) async {
         self.word = word
-        load()
+        await load()
     }
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
