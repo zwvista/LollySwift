@@ -2610,14 +2610,6 @@ Gw
                                         </textFieldCell>
                                         <connections>
                                             <action selector="addNewWord:" target="UkS-Xi-ogF" id="Tx0-Hn-BrU"/>
-                                            <binding destination="UkS-Xi-ogF" name="value" keyPath="vm.newWord" id="SR0-v9-g7v">
-                                                <dictionary key="options">
-                                                    <string key="NSMultipleValuesPlaceholder">New Word</string>
-                                                    <string key="NSNoSelectionPlaceholder">New Word</string>
-                                                    <string key="NSNotApplicablePlaceholder">New Word</string>
-                                                    <string key="NSNullPlaceholder">New Word</string>
-                                                </dictionary>
-                                            </binding>
                                         </connections>
                                     </textField>
                                     <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6UI-Xq-Ybp">
@@ -2639,9 +2631,6 @@ Gw
                                             <font key="font" usesAppearanceFont="YES"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                            <connections>
-                                                <binding destination="UkS-Xi-ogF" name="value" keyPath="textFilter" id="Sgp-VU-e42"/>
-                                            </connections>
                                         </searchFieldCell>
                                     </searchField>
                                 </subviews>
