@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="20037"/>
-        <plugIn identifier="com.apple.WebKit2IBPlugin" version="20037"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
+        <plugIn identifier="com.apple.WebKit2IBPlugin" version="21507"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -2611,14 +2610,6 @@ Gw
                                         </textFieldCell>
                                         <connections>
                                             <action selector="addNewWord:" target="UkS-Xi-ogF" id="Tx0-Hn-BrU"/>
-                                            <binding destination="UkS-Xi-ogF" name="value" keyPath="vm.newWord" id="SR0-v9-g7v">
-                                                <dictionary key="options">
-                                                    <string key="NSMultipleValuesPlaceholder">New Word</string>
-                                                    <string key="NSNoSelectionPlaceholder">New Word</string>
-                                                    <string key="NSNotApplicablePlaceholder">New Word</string>
-                                                    <string key="NSNullPlaceholder">New Word</string>
-                                                </dictionary>
-                                            </binding>
                                         </connections>
                                     </textField>
                                     <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6UI-Xq-Ybp">
@@ -2640,9 +2631,6 @@ Gw
                                             <font key="font" usesAppearanceFont="YES"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                            <connections>
-                                                <binding destination="UkS-Xi-ogF" name="value" keyPath="textFilter" id="Sgp-VU-e42"/>
-                                            </connections>
                                         </searchFieldCell>
                                     </searchField>
                                 </subviews>
@@ -6766,14 +6754,14 @@ Gw
         </scene>
     </scenes>
     <resources>
-        <image name="NSAddTemplate" width="14" height="13"/>
+        <image name="NSAddTemplate" width="18" height="17"/>
         <image name="NSAdvanced" width="32" height="32"/>
         <image name="NSBonjour" width="32" height="32"/>
-        <image name="NSGoBackTemplate" width="10" height="14"/>
-        <image name="NSGoForwardTemplate" width="10" height="14"/>
+        <image name="NSGoBackTemplate" width="12" height="17"/>
+        <image name="NSGoForwardTemplate" width="12" height="17"/>
         <image name="NSInfo" width="32" height="32"/>
-        <image name="NSRefreshTemplate" width="14" height="16"/>
-        <image name="NSRemoveTemplate" width="14" height="4"/>
+        <image name="NSRefreshTemplate" width="18" height="21"/>
+        <image name="NSRemoveTemplate" width="18" height="5"/>
         <image name="NSStatusNone" width="16" height="16"/>
         <image name="NSTrashEmpty" width="32" height="32"/>
         <image name="arrow.forward" catalog="system" width="15" height="12"/>
