@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Regex
 
 enum DictWebViewStatus {
     case ready
