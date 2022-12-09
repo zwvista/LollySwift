@@ -62,17 +62,14 @@ class CommonApi {
         let dic = ["<delete>": "", "\\t": "\t", "\\n": "\n"]
         var s = text
         // https://github.com/crossroadlabs/Regex/issues/51
-//        let regex = try! Regex(pattern: item.extractor)
-        let regex2 = try! NSRegularExpression(pattern: item.extractor)
+        let regex = try! Regex(item.extractor)
         var replacement = item.replacement
         if replacement.starts(with: "<extract>") {
             replacement = String(replacement.dropFirst("<extract>".count))
-//            let ms = regex.findAll(in: s)
-            let ms = regex2.matches(in: s, range: NSRange(s.startIndex..., in: s))
+            let ms = s.matches(of: regex)
             var i = 1
             s = ms.reduce("", { (acc, m) -> String in
-//                let s2 = m.matched
-                let s2 = s[Range(m.range(at: 0), in: s)!]
+                let s2 = m.0
                 print("[TRANSFORM\(i)]\(s2)[/TRANSFORM\(i)]")
                 i += 1
                 return acc + s2
@@ -82,8 +79,7 @@ class CommonApi {
         for (key, value) in dic {
             replacement = replacement.replacingOccurrences(of: key, with: value)
         }
-//        s = regex.replaceAll(in: s, with: replacement)
-        s = regex2.stringByReplacingMatches(in: s, range: NSRange(s.startIndex..., in: s), withTemplate: replacement)
+        s = s.replacing(regex, with: replacement)
         return s
     }
     
