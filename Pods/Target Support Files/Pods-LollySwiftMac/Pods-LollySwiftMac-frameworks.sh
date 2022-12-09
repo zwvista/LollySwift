@@ -178,7 +178,6 @@ code_sign_if_enabled() {
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/Alamofire-macOS/Alamofire.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/CodableAlamofire-macOS/CodableAlamofire.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/CrossroadRegex-macOS/Regex.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/NSObject+Rx-macOS/NSObject_Rx.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RxAlamofire-macOS/RxAlamofire.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RxBinding-macOS/RxBinding.framework"
@@ -190,7 +189,6 @@ fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/Alamofire-macOS/Alamofire.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/CodableAlamofire-macOS/CodableAlamofire.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/CrossroadRegex-macOS/Regex.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/NSObject+Rx-macOS/NSObject_Rx.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RxAlamofire-macOS/RxAlamofire.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RxBinding-macOS/RxBinding.framework"

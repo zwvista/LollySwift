@@ -13,7 +13,6 @@ pod 'NSObject+Rx'
 pod 'RxDataSources'
 pod 'DropDown'
 pod 'AKSideMenu'
-pod 'CrossroadRegex'
 pod 'Then'
 end
 
@@ -25,7 +24,6 @@ pod 'RxAlamofire', '~> 6'
 pod 'RxBinding', :git => 'https://github.com/zwvista/RxBinding'
 pod 'NSObject+Rx'
 pod 'RxDataSources'
-pod 'CrossroadRegex'
 pod 'Then'
 end
 
@@ -36,7 +34,6 @@ pod 'CodableAlamofire', :git => 'https://github.com/zwvista/CodableAlamofire'
 pod 'RxAlamofire', '~> 6'
 pod 'RxBinding', :git => 'https://github.com/zwvista/RxBinding'
 pod 'NSObject+Rx'
-pod 'CrossroadRegex'
 pod 'Then'
 end
 
@@ -47,6 +44,5 @@ pod 'CodableAlamofire', :git => 'https://github.com/zwvista/CodableAlamofire'
 pod 'RxAlamofire', '~> 6'
 pod 'RxBinding', :git => 'https://github.com/zwvista/RxBinding'
 pod 'NSObject+Rx'
-pod 'CrossroadRegex'
 pod 'Then'
 end
