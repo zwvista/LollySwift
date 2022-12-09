@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Combine
 
 class WebPageSelectViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -16,6 +17,7 @@ class WebPageSelectViewController: UIViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var tfURL: UITextField!
 
     var vmWebPage: WebPageSelectViewModel!
+    var subscriptions = Set<AnyCancellable>()
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -8,6 +8,7 @@
 
 import UIKit
 import DropDown
+import Combine
 
 class PhrasesUnitBatchEditViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
 

@@ -7,31 +7,33 @@
 //
 
 import UIKit
+import Combine
 
 class PatternsDetailViewController: UITableViewController {
-    
-    var vm: PatternsViewModel!
-    var item: MPattern!
-    var vmEdit: PatternsDetailViewModel!
-    var itemEdit: MPatternEdit { vmEdit.itemEdit }
 
     @IBOutlet weak var tfID: UITextField!
     @IBOutlet weak var tfPattern: UITextField!
     @IBOutlet weak var tfNote: UITextField!
     @IBOutlet weak var tfTags: UITextField!
     @IBOutlet weak var btnDone: UIBarButtonItem!
-    
+
+    var vm: PatternsViewModel!
+    var item: MPattern!
+    var vmEdit: PatternsDetailViewModel!
+    var itemEdit: MPatternEdit { vmEdit.itemEdit }
+    var subscriptions = Set<AnyCancellable>()
+
     func startEdit(vm: PatternsViewModel, item: MPattern) {
         vmEdit = PatternsDetailViewModel(vm: vm, item: item)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        _ = itemEdit.ID ~> tfID.rx.text.orEmpty
-        _ = itemEdit.PATTERN <~> tfPattern.rx.textInput
-        _ = itemEdit.NOTE <~> tfNote.rx.textInput
-        _ = itemEdit.TAGS <~> tfTags.rx.textInput
-        _ = vmEdit.isOKEnabled ~> btnDone.rx.isEnabled
+        itemEdit.$ID ~> (tfID, \.text2) ~ subscriptions
+        itemEdit.$PATTERN <~> tfPattern.textProperty ~ subscriptions
+        itemEdit.$NOTE <~> tfNote.textProperty ~ subscriptions
+        itemEdit.$TAGS <~> tfTags.textProperty ~ subscriptions
+        vmEdit.$isOKEnabled ~> (btnDone, \.isEnabled) ~ subscriptions
     }
     
     override func viewDidAppear(_ animated: Bool) {

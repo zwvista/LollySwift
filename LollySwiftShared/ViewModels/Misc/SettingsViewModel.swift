@@ -392,49 +392,55 @@ class SettingsViewModel: NSObject, ObservableObject {
 
     func updateDictReference() async {
         let newVal = String(selectedDictReference.DICTID)
-        guard USDICTREFERENCE != newVal else {return}
-        USDICTREFERENCE = newVal
-        await MUserSetting.update(info: INFO_USDICTREFERENCE, stringValue: USDICTREFERENCE)
+        if USDICTREFERENCE != newVal {
+            USDICTREFERENCE = newVal
+            await MUserSetting.update(info: INFO_USDICTREFERENCE, stringValue: USDICTREFERENCE)
+        }
         delegate?.onUpdateDictReference()
     }
 
     func updateDictsReference() async {
         let newVal = selectedDictsReference.map { String($0.DICTID) }.joined(separator: ",")
-        guard USDICTSREFERENCE != newVal else {return}
-        USDICTSREFERENCE = newVal
-        await MUserSetting.update(info: INFO_USDICTSREFERENCE, stringValue: USDICTSREFERENCE)
+        if USDICTSREFERENCE != newVal {
+            USDICTSREFERENCE = newVal
+            await MUserSetting.update(info: INFO_USDICTSREFERENCE, stringValue: USDICTSREFERENCE)
+        }
         delegate?.onUpdateDictsReference()
     }
 
     func updateDictNote() async {
         let newVal = selectedDictNote.DICTID
-        guard USDICTNOTE != newVal else {return}
-        USDICTNOTE = newVal
-        await MUserSetting.update(info: INFO_USDICTNOTE, intValue: USDICTNOTE)
+        if USDICTNOTE != newVal {
+            USDICTNOTE = newVal
+            await MUserSetting.update(info: INFO_USDICTNOTE, intValue: USDICTNOTE)
+        }
         delegate?.onUpdateDictNote()
     }
 
     func updateDictTranslation() async {
         let newVal = selectedDictTranslation.DICTID
-        guard USDICTTRANSLATION != newVal else {return}
-        USDICTTRANSLATION = newVal
-        await MUserSetting.update(info: INFO_USDICTTRANSLATION, intValue: USDICTTRANSLATION)
+        if USDICTTRANSLATION != newVal {
+            USDICTTRANSLATION = newVal
+            await MUserSetting.update(info: INFO_USDICTTRANSLATION, intValue: USDICTTRANSLATION)
+        }
         delegate?.onUpdateDictTranslation()
     }
 
     func updateMacVoice() async {
         let newVal = selectedMacVoice.ID
-        guard USMACVOICE != newVal else {return}
-        USMACVOICE = newVal
-        await MUserSetting.update(info: INFO_USMACVOICE, intValue: USMACVOICE)
+        if USMACVOICE != newVal {
+            USMACVOICE = newVal
+            await MUserSetting.update(info: INFO_USMACVOICE, intValue: USMACVOICE)
+        }
         delegate?.onUpdateMacVoice()
     }
 
     func updateiOSVoice() async {
         let newVal = selectediOSVoice.ID
-        guard USIOSVOICE != newVal else {return}
-        USIOSVOICE = newVal
-        await MUserSetting.update(info: INFO_USIOSVOICE, intValue: USIOSVOICE)
+        if USIOSVOICE != newVal {
+            USIOSVOICE = newVal
+            await MUserSetting.update(info: INFO_USIOSVOICE, intValue: USIOSVOICE)
+        }
         delegate?.onUpdateiOSVoice()
     }
 

@@ -8,19 +8,20 @@
 
 import UIKit
 import DropDown
+import Combine
 
 class PatternsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
-    var vm: PatternsViewModel!
-    var arrPatterns: [MPattern] {  sbTextFilter.text != "" ? vm.arrPatternsFiltered! : vm.arrPatterns }
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var sbTextFilter: UISearchBar!
     @IBOutlet weak var btnScopeFilter: UIButton!
-    let refreshControl = UIRefreshControl()
 
+    var vm: PatternsViewModel!
+    var arrPatterns: [MPattern] {  sbTextFilter.text != "" ? vm.arrPatternsFiltered! : vm.arrPatterns }
+    let refreshControl = UIRefreshControl()
     let ddScopeFilter = DropDown()
-    
+    var subscriptions = Set<AnyCancellable>()
+
     func applyFilters() {
         vm.applyFilters()
         tableView.reloadData()
@@ -32,14 +33,14 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
         ddScopeFilter.dataSource = SettingsViewModel.arrScopePatternFilters
         ddScopeFilter.selectRow(0)
         ddScopeFilter.selectionAction = { [unowned self] (index: Int, item: String) in
-            vm.scopeFilter.accept(item)
+            vm.scopeFilter = item
         }
         btnScopeFilter.setTitle(SettingsViewModel.arrScopePatternFilters[0], for: .normal)
         tableView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         refresh(refreshControl)
-        _ = vm.textFilter <~> sbTextFilter.searchTextField.rx.textInput
-        _ = vm.scopeFilter ~> btnScopeFilter.rx.title(for: .normal)
+        vm.$textFilter <~> sbTextFilter.searchTextField.textProperty ~ subscriptions
+        vm.$scopeFilter ~> btnScopeFilter.rx.title(for: .normal)
         vm.textFilter.subscribe(onNext: { [unowned self] _ in
             self.applyFilters()
         }) ~ rx.disposeBag

@@ -8,6 +8,7 @@
 
 import UIKit
 import DropDown
+import Combine
 
 class PhrasesTextbookViewController: PhrasesBaseViewController {
     

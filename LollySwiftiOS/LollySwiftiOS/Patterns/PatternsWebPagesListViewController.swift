@@ -8,11 +8,14 @@
 
 import UIKit
 import WebKit
+import Combine
 
 class PatternsWebPagesListViewController: UITableViewController {
     
-    var vm: PatternsWebPagesViewModel!
     @IBOutlet weak var btnEdit: UIBarButtonItem!
+
+    var vm: PatternsWebPagesViewModel!
+    var subscriptions = Set<AnyCancellable>()
 
     override func viewDidLoad() {
         super.viewDidLoad()

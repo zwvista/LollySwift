@@ -9,6 +9,7 @@
 import UIKit
 import WebKit
 import DropDown
+import Combine
 
 class PatternsWebPagesBrowseViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, UIGestureRecognizerDelegate {
 
@@ -18,6 +19,7 @@ class PatternsWebPagesBrowseViewController: UIViewController, WKUIDelegate, WKNa
     
     var vm: PatternsWebPagesViewModel!
     let ddWebPage = DropDown()
+    var subscriptions = Set<AnyCancellable>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
