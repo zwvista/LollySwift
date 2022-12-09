@@ -25,6 +25,12 @@
 		8C42B5BC1D69A21E00DCB528 /* PhrasesUnitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C42B5B91D69A21E00DCB528 /* PhrasesUnitViewController.swift */; };
 		8CB025932096CB3E0087462E /* LeftMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB025912096CB3E0087462E /* LeftMenuViewController.swift */; };
 		8CB025942096CB3E0087462E /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB025922096CB3E0087462E /* RootViewController.swift */; };
+		8CC3CBD02943A04A005670CC /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC3CBCF2943A04A005670CC /* Alamofire */; };
+		8CC3CBE92943A07D005670CC /* StoreIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC3CBD32943A07D005670CC /* StoreIn.swift */; };
+		8CC3CBF12943A07D005670CC /* Control+Bind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC3CBDD2943A07D005670CC /* Control+Bind.swift */; };
+		8CC3CBF22943A07D005670CC /* UITextField+Combine2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC3CBDF2943A07D005670CC /* UITextField+Combine2.swift */; };
+		8CC3CBF32943A07D005670CC /* CombineControlProperty2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC3CBE02943A07D005670CC /* CombineControlProperty2.swift */; };
+		8CC3CBFB2943A0E4005670CC /* CombineCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC3CBFA2943A0E4005670CC /* CombineCocoa */; };
 		8CD16D121D69FD8A00F5F625 /* WordsLangDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD16D111D69FD8A00F5F625 /* WordsLangDetailViewController.swift */; };
 		8CD16D161D69FDDC00F5F625 /* PhrasesUnitDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD16D151D69FDDC00F5F625 /* PhrasesUnitDetailViewController.swift */; };
 		8CD16D201D69FE8F00F5F625 /* PhrasesLangDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD16D1F1D69FE8F00F5F625 /* PhrasesLangDetailViewController.swift */; };
@@ -201,6 +207,10 @@
 		8C42B5B91D69A21E00DCB528 /* PhrasesUnitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesUnitViewController.swift; sourceTree = "<group>"; };
 		8CB025912096CB3E0087462E /* LeftMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftMenuViewController.swift; sourceTree = "<group>"; };
 		8CB025922096CB3E0087462E /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		8CC3CBD32943A07D005670CC /* StoreIn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreIn.swift; sourceTree = "<group>"; };
+		8CC3CBDD2943A07D005670CC /* Control+Bind.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Control+Bind.swift"; sourceTree = "<group>"; };
+		8CC3CBDF2943A07D005670CC /* UITextField+Combine2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+Combine2.swift"; sourceTree = "<group>"; };
+		8CC3CBE02943A07D005670CC /* CombineControlProperty2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CombineControlProperty2.swift; sourceTree = "<group>"; };
 		8CD16D111D69FD8A00F5F625 /* WordsLangDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsLangDetailViewController.swift; sourceTree = "<group>"; };
 		8CD16D151D69FDDC00F5F625 /* PhrasesUnitDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesUnitDetailViewController.swift; sourceTree = "<group>"; };
 		8CD16D1F1D69FE8F00F5F625 /* PhrasesLangDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesLangDetailViewController.swift; sourceTree = "<group>"; };
@@ -301,6 +311,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				29CFF3AA2D93455C46DA80F0 /* Pods_LollySwiftiOS.framework in Frameworks */,
+				8CC3CBFB2943A0E4005670CC /* CombineCocoa in Frameworks */,
+				8CC3CBD02943A04A005670CC /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,6 +341,7 @@
 		8C316570207676CF0015C247 /* LollySwiftShared */ = {
 			isa = PBXGroup;
 			children = (
+				8CC3CBD12943A07D005670CC /* CombineCommon */,
 				9591922F258D004F0070DBFD /* Models */,
 				8C316578207676CF0015C247 /* Shared */,
 				8C316571207676CF0015C247 /* ViewModels */,
@@ -393,6 +406,33 @@
 				8C42B5B91D69A21E00DCB528 /* PhrasesUnitViewController.swift */,
 			);
 			path = Phrases;
+			sourceTree = "<group>";
+		};
+		8CC3CBD12943A07D005670CC /* CombineCommon */ = {
+			isa = PBXGroup;
+			children = (
+				8CC3CBE02943A07D005670CC /* CombineControlProperty2.swift */,
+				8CC3CBD42943A07D005670CC /* Controls */,
+				8CC3CBD32943A07D005670CC /* StoreIn.swift */,
+			);
+			path = CombineCommon;
+			sourceTree = "<group>";
+		};
+		8CC3CBD42943A07D005670CC /* Controls */ = {
+			isa = PBXGroup;
+			children = (
+				8CC3CBDD2943A07D005670CC /* Control+Bind.swift */,
+				8CC3CBDE2943A07D005670CC /* UIControl */,
+			);
+			path = Controls;
+			sourceTree = "<group>";
+		};
+		8CC3CBDE2943A07D005670CC /* UIControl */ = {
+			isa = PBXGroup;
+			children = (
+				8CC3CBDF2943A07D005670CC /* UITextField+Combine2.swift */,
+			);
+			path = UIControl;
 			sourceTree = "<group>";
 		};
 		951504D2261FB7C100F94A6E /* Main */ = {
@@ -627,6 +667,10 @@
 			dependencies = (
 			);
 			name = LollySwiftiOS;
+			packageProductDependencies = (
+				8CC3CBCF2943A04A005670CC /* Alamofire */,
+				8CC3CBFA2943A0E4005670CC /* CombineCocoa */,
+			);
 			productName = LollySwiftiOS;
 			productReference = 953473D51A0D16CF00FF2D56 /* LollySwiftiOS.app */;
 			productType = "com.apple.product-type.application";
@@ -683,6 +727,10 @@
 				Base,
 			);
 			mainGroup = 953473CC1A0D16CF00FF2D56;
+			packageReferences = (
+				8CC3CBCE2943A04A005670CC /* XCRemoteSwiftPackageReference "Alamofire" */,
+				8CC3CBF92943A0E4005670CC /* XCRemoteSwiftPackageReference "CombineCocoa" */,
+			);
 			productRefGroup = 953473D61A0D16CF00FF2D56 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -824,6 +872,7 @@
 				95F0FFE524C957AA00509DF3 /* WordsDictViewModel.swift in Sources */,
 				9589CACA258A086300F80499 /* PatternsWebPagesListViewController.swift in Sources */,
 				8CB025942096CB3E0087462E /* RootViewController.swift in Sources */,
+				8CC3CBF12943A07D005670CC /* Control+Bind.swift in Sources */,
 				95837EAA24E0A3D100B5D2AE /* ReviewOptionsViewModel.swift in Sources */,
 				8C42B5B51D69A1D900DCB528 /* WordsUnitViewController.swift in Sources */,
 				951504DC26206C1000F94A6E /* LoginViewModel.swift in Sources */,
@@ -837,6 +886,7 @@
 				951F7F6825EEA2F90051E94E /* PhrasesUnitBatchEditViewModel.swift in Sources */,
 				95F0FFEA24C957AB00509DF3 /* SinglePhraseViewModel.swift in Sources */,
 				95CED3CA2216C5B20094622F /* WordsTextbookDetailViewController.swift in Sources */,
+				8CC3CBF22943A07D005670CC /* UITextField+Combine2.swift in Sources */,
 				95AA19662295081F003620A2 /* PhrasesReviewViewController.swift in Sources */,
 				95CED3C32215A2270094622F /* PhrasesTextbookViewController.swift in Sources */,
 				9587EBF42583435B00777AEE /* PatternsDetailViewController.swift in Sources */,
@@ -844,6 +894,7 @@
 				95919256258D004F0070DBFD /* MUnitPhrase.swift in Sources */,
 				95F0A89A228EBCBA00D1B9A2 /* PhrasesUnitBatchEditViewController.swift in Sources */,
 				95919245258D004F0070DBFD /* MCommon.swift in Sources */,
+				8CC3CBE92943A07D005670CC /* StoreIn.swift in Sources */,
 				95FCBE5C25544A6E00859C1F /* PatternsSplitViewModel.swift in Sources */,
 				957B537425A8670D00C18B06 /* DictStore.swift in Sources */,
 				8CB025932096CB3E0087462E /* LeftMenuViewController.swift in Sources */,
@@ -869,6 +920,7 @@
 				95FCBE6025544A6E00859C1F /* PatternsDetailViewModel.swift in Sources */,
 				8C1CF684206A2A4800714C33 /* UIExtensions.swift in Sources */,
 				95FCBE54255449A000859C1F /* PatternsViewController.swift in Sources */,
+				8CC3CBF32943A07D005670CC /* CombineControlProperty2.swift in Sources */,
 				9591924B258D004F0070DBFD /* MWebTextbook.swift in Sources */,
 				8C42B5B31D69A1D900DCB528 /* WordsUnitDetailViewController.swift in Sources */,
 				8C42B5BA1D69A21E00DCB528 /* PhrasesBaseViewController.swift in Sources */,
@@ -1016,7 +1068,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1066,7 +1118,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -1212,6 +1264,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8CC3CBCE2943A04A005670CC /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		8CC3CBF92943A0E4005670CC /* XCRemoteSwiftPackageReference "CombineCocoa" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/CombineCommunity/CombineCocoa.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8CC3CBCF2943A04A005670CC /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8CC3CBCE2943A04A005670CC /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		8CC3CBFA2943A0E4005670CC /* CombineCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8CC3CBF92943A0E4005670CC /* XCRemoteSwiftPackageReference "CombineCocoa" */;
+			productName = CombineCocoa;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 953473CD1A0D16CF00FF2D56 /* Project object */;
 }
