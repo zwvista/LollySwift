@@ -27,6 +27,7 @@
 		8C2CB5C4207888260083DDE2 /* Words.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C2CB5C2207888260083DDE2 /* Words.storyboard */; };
 		8C486DF41EBB88240023FBFC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C486DF31EBB88240023FBFC /* Cocoa.framework */; };
 		8C486DF61EBB882B0023FBFC /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C486DF51EBB882B0023FBFC /* WebKit.framework */; };
+		8C5176C22943C5AD00719D42 /* Publisher+Bind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5176C12943C5AD00719D42 /* Publisher+Bind.swift */; };
 		8CAF910A20833C4F00933837 /* WordsSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAF910920833C4F00933837 /* WordsSearchViewModel.swift */; };
 		8CB025B3293F09E400401895 /* DelegateProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB025B0293F09E400401895 /* DelegateProxy.swift */; };
 		8CB025B4293F09E400401895 /* DelegateProxyPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB025B1293F09E400401895 /* DelegateProxyPublisher.swift */; };
@@ -225,6 +226,7 @@
 		8C2CB5C2207888260083DDE2 /* Words.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Words.storyboard; sourceTree = "<group>"; };
 		8C486DF31EBB88240023FBFC /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		8C486DF51EBB882B0023FBFC /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		8C5176C12943C5AD00719D42 /* Publisher+Bind.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Publisher+Bind.swift"; sourceTree = "<group>"; };
 		8C6E2EDC1EBB97CF00AC114F /* LollySwiftMac-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LollySwiftMac-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		8CAF910920833C4F00933837 /* WordsSearchViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsSearchViewModel.swift; sourceTree = "<group>"; };
 		8CB025B0293F09E400401895 /* DelegateProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DelegateProxy.swift; sourceTree = "<group>"; };
@@ -533,6 +535,7 @@
 				8CBB5BC9293C9BE100B8AEE0 /* CombineControlTarget.swift */,
 				8CBB5BDB293D36A700B8AEE0 /* Controls */,
 				8CB025AF293F09E400401895 /* DelegateProxy */,
+				8C5176C12943C5AD00719D42 /* Publisher+Bind.swift */,
 				8CBB5BCA293C9BE100B8AEE0 /* StoreIn.swift */,
 			);
 			path = CombineCommon;
@@ -1030,6 +1033,7 @@
 				959191E1258CFFCA0070DBFD /* MUnitWord.swift in Sources */,
 				8CC3CBCC294283CF005670CC /* NSTextView+Combine.swift in Sources */,
 				95AF43B7254BDA9E00FD71CB /* PatternsMergeViewController.swift in Sources */,
+				8C5176C22943C5AD00719D42 /* Publisher+Bind.swift in Sources */,
 				95837E7E24DEAFC500B5D2AE /* PhrasesLangDetailViewModel.swift in Sources */,
 				9534728B22BB68EE00517D71 /* LollyWindow.swift in Sources */,
 				95F5400C22C1FADD00E3FD6A /* SinglePhraseViewModel.swift in Sources */,

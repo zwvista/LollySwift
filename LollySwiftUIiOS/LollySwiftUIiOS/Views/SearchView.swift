@@ -13,7 +13,6 @@ struct SearchView: View {
     @ObservedObject var webViewStore = WebViewStore()
     @ObservedObject var dictStore = DictStoreUI()
     var wvDict: WKWebView { webViewStore.webView }
-    let disposeBag = DisposeBag()
 
     var body: some View {
         VStack {
@@ -28,7 +27,9 @@ struct SearchView: View {
                 .pickerStyle(MenuPickerStyle())
                 .onChange(of: vm.selectedLangIndex) {
                     print("selectedLangIndex=\($0)")
-                    vm.updateLang().subscribe() ~ disposeBag
+                    Task {
+                        await vm.updateLang()
+                    }
                 }
                 Picker(selection: $vm.selectedDictReferenceIndex, label: Text(vm.selectedDictReference.DICTNAME.defaultIfEmpty("Dictionary"))) {
                     ForEach(0..<vm.arrDictsReference.count, id: \.self) {
@@ -50,7 +51,9 @@ struct SearchView: View {
         }.onAppear {
             dictStore.vmSettings = vmSettings
             dictStore.wvDict = wvDict
-            vm.getData().subscribe() ~ disposeBag
+            Task {
+                await vm.getData()
+            }
         }
     }
 }

@@ -10,7 +10,6 @@ import SwiftUI
 struct LoginView: View {
     @StateObject var vm = LoginViewModel()
     @State var showingAlert = false
-    let disposeBag = DisposeBag()
     var body: some View {
         VStack {
             Text("Lolly")
@@ -20,14 +19,14 @@ struct LoginView: View {
                     TextField("USERNAME", text: $vm.username)
                     SecureField("PASSWORD", text: $vm.password)
                     Button(action: {
-                        vm.login(username: vm.username, password: vm.password).subscribe(onSuccess: {
-                            globalUser.userid = $0
+                        Task {
+                            globalUser.userid = await vm.login(username: vm.username, password: vm.password)
                             if globalUser.userid.isEmpty {
                                 showingAlert = true
                             } else {
                                 UserDefaults.standard.set(globalUser.userid, forKey: "userid")
                             }
-                        }) ~ disposeBag
+                        }
                     }) {
                         Text("Login")
                     }.frame(maxWidth: .infinity)

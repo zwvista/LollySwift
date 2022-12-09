@@ -337,7 +337,9 @@ class SettingsViewModel: NSObject, ObservableObject {
         if arrMacVoices.isEmpty { arrMacVoices.append(MVoice()) }
         arriOSVoices = arrVoices.filter { $0.VOICETYPEID == 3 }
         if arriOSVoices.isEmpty { arriOSVoices.append(MVoice()) }
-        delegate?.onUpdateLang()
+        await MainActor.run {
+            delegate?.onUpdateLang()
+        }
         selectedDictReferenceIndex = arrDictsReference.firstIndex { String($0.DICTID) == self.USDICTREFERENCE } ?? 0
         if arrDictsNote.isEmpty { arrDictsNote.append(MDictionary()) }
         selectedDictNoteIndex = arrDictsNote.firstIndex { $0.DICTID == self.USDICTNOTE } ?? 0

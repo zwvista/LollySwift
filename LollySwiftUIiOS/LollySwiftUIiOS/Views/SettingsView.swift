@@ -9,7 +9,6 @@ import SwiftUI
 
 struct SettingsView: View {
     @ObservedObject var vm = vmSettings
-    let disposeBag = DisposeBag()
     var body: some View {
         Form {
             Section(header: Text("Language:")) {
@@ -22,7 +21,9 @@ struct SettingsView: View {
                 .pickerStyle(MenuPickerStyle())
                 .onChange(of: vm.selectedLangIndex) {
                     print("selectedLangIndex=\($0)")
-                    vm.updateLang().subscribe() ~ disposeBag
+                    Task {
+                        await vm.updateLang()
+                    }
                 }
             }
             Section(header: Text("Voice:")) {
@@ -35,11 +36,15 @@ struct SettingsView: View {
                 .pickerStyle(MenuPickerStyle())
                 .onChange(of: vm.selectediOSVoiceIndex) {
                     print("selectediOSVoiceIndex=\($0)")
-                    vm.updateiOSVoice().subscribe() ~ disposeBag
+                    Task {
+                        await vm.updateiOSVoice()
+                    }
                 }
             }
         }.onAppear {
-            vm.getData().subscribe() ~ disposeBag
+            Task {
+                await vm.getData()
+            }
         }
     }
 }

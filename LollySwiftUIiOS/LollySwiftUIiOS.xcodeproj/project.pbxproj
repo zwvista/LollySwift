@@ -3,11 +3,15 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		8B93E2C58870C1F09F449E65 /* Pods_LollySwiftUIiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 881EFE4F8A213E4DC1BEF169 /* Pods_LollySwiftUIiOS.framework */; };
+		8C5176DB2943C66200719D42 /* Publisher+Bind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5176C42943C66200719D42 /* Publisher+Bind.swift */; };
+		8C5176DD2943C66200719D42 /* StoreIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5176C62943C66200719D42 /* StoreIn.swift */; };
+		8C5176EE2943C84B00719D42 /* MUnitBlog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5176ED2943C84B00719D42 /* MUnitBlog.swift */; };
+		8C5176F12943C89F00719D42 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 8C5176F02943C89F00719D42 /* Alamofire */; };
 		9513F4E5268B359B00493C0B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9513F4E4268B359B00493C0B /* SettingsView.swift */; };
 		953FCD0025745D3D00666503 /* LollySwiftUIiOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953FCCFF25745D3D00666503 /* LollySwiftUIiOSApp.swift */; };
 		953FCD0225745D3D00666503 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953FCD0125745D3D00666503 /* ContentView.swift */; };
@@ -101,6 +105,9 @@
 		881E9DDDB41B6CF858729603 /* Pods_LollySwiftUIiOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LollySwiftUIiOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		881EFE4F8A213E4DC1BEF169 /* Pods_LollySwiftUIiOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LollySwiftUIiOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BCF05762F6BA4216D7B3155 /* Pods-LollySwiftUIiOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LollySwiftUIiOS.debug.xcconfig"; path = "Target Support Files/Pods-LollySwiftUIiOS/Pods-LollySwiftUIiOS.debug.xcconfig"; sourceTree = "<group>"; };
+		8C5176C42943C66200719D42 /* Publisher+Bind.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Publisher+Bind.swift"; sourceTree = "<group>"; };
+		8C5176C62943C66200719D42 /* StoreIn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreIn.swift; sourceTree = "<group>"; };
+		8C5176ED2943C84B00719D42 /* MUnitBlog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MUnitBlog.swift; sourceTree = "<group>"; };
 		9513F4E4268B359B00493C0B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		953FCCFC25745D3D00666503 /* LollySwiftUIiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LollySwiftUIiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		953FCCFF25745D3D00666503 /* LollySwiftUIiOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LollySwiftUIiOSApp.swift; sourceTree = "<group>"; };
@@ -183,6 +190,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8B93E2C58870C1F09F449E65 /* Pods_LollySwiftUIiOS.framework in Frameworks */,
+				8C5176F12943C89F00719D42 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -226,6 +234,15 @@
 				957B538C25AD442500C18B06 /* SideMenuView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		8C5176C32943C66200719D42 /* CombineCommon */ = {
+			isa = PBXGroup;
+			children = (
+				8C5176C42943C66200719D42 /* Publisher+Bind.swift */,
+				8C5176C62943C66200719D42 /* StoreIn.swift */,
+			);
+			path = CombineCommon;
 			sourceTree = "<group>";
 		};
 		953FCCF325745D3D00666503 = {
@@ -293,6 +310,7 @@
 		953FCDFD25792A8800666503 /* LollySwiftShared */ = {
 			isa = PBXGroup;
 			children = (
+				8C5176C32943C66200719D42 /* CombineCommon */,
 				95919202258D00190070DBFD /* Models */,
 				953FCE2525792A8800666503 /* Shared */,
 				953FCDFE25792A8800666503 /* ViewModels */,
@@ -421,15 +439,16 @@
 		9591920E258D00190070DBFD /* WPP */ = {
 			isa = PBXGroup;
 			children = (
-				9591920F258D00190070DBFD /* MUnitWord.swift */,
-				95919210258D00190070DBFD /* MPatternWebPage.swift */,
+				95919214258D00190070DBFD /* MLangPhrase.swift */,
 				95919211258D00190070DBFD /* MLangWord.swift */,
 				95919212258D00190070DBFD /* MPattern.swift */,
-				95919213258D00190070DBFD /* MWordFami.swift */,
-				95919214258D00190070DBFD /* MLangPhrase.swift */,
-				95919215258D00190070DBFD /* MWordPhrase.swift */,
+				95919210258D00190070DBFD /* MPatternWebPage.swift */,
+				8C5176ED2943C84B00719D42 /* MUnitBlog.swift */,
 				95919216258D00190070DBFD /* MUnitPhrase.swift */,
+				9591920F258D00190070DBFD /* MUnitWord.swift */,
 				95919217258D00190070DBFD /* MWebPage.swift */,
+				95919213258D00190070DBFD /* MWordFami.swift */,
+				95919215258D00190070DBFD /* MWordPhrase.swift */,
 			);
 			path = WPP;
 			sourceTree = "<group>";
@@ -461,6 +480,9 @@
 			dependencies = (
 			);
 			name = LollySwiftUIiOS;
+			packageProductDependencies = (
+				8C5176F02943C89F00719D42 /* Alamofire */,
+			);
 			productName = LollySwiftUIiOS;
 			productReference = 953FCCFC25745D3D00666503 /* LollySwiftUIiOS.app */;
 			productType = "com.apple.product-type.application";
@@ -534,6 +556,9 @@
 				Base,
 			);
 			mainGroup = 953FCCF325745D3D00666503;
+			packageReferences = (
+				8C5176EF2943C89F00719D42 /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			productRefGroup = 953FCCFD25745D3D00666503 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -660,8 +685,10 @@
 				95919229258D00190070DBFD /* MUnitPhrase.swift in Sources */,
 				953FCE5D25792A8800666503 /* SinglePhraseViewModel.swift in Sources */,
 				953FCE7125792A8800666503 /* UIExtensions.swift in Sources */,
+				8C5176EE2943C84B00719D42 /* MUnitBlog.swift in Sources */,
 				953FCD0225745D3D00666503 /* ContentView.swift in Sources */,
 				9591921A258D00190070DBFD /* MAutoCorrect.swift in Sources */,
+				8C5176DB2943C66200719D42 /* Publisher+Bind.swift in Sources */,
 				95F632E02588C0B8000CFD23 /* WebView.swift in Sources */,
 				95919223258D00190070DBFD /* MPatternWebPage.swift in Sources */,
 				95919228258D00190070DBFD /* MWordPhrase.swift in Sources */,
@@ -672,6 +699,7 @@
 				9591922A258D00190070DBFD /* MWebPage.swift in Sources */,
 				95919222258D00190070DBFD /* MUnitWord.swift in Sources */,
 				95F632DB2588BC93000CFD23 /* SearchBar.swift in Sources */,
+				8C5176DD2943C66200719D42 /* StoreIn.swift in Sources */,
 				953FCE5125792A8800666503 /* WordsLangViewModel.swift in Sources */,
 				957B535E25A70FB100C18B06 /* PhrasesBaseViewModel.swift in Sources */,
 				953FCE5F25792A8800666503 /* PhrasesLangViewModel.swift in Sources */,
@@ -806,7 +834,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -861,7 +889,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -882,7 +910,7 @@
 				DEVELOPMENT_TEAM = U259NHMY78;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = LollySwiftUIiOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -907,7 +935,7 @@
 				DEVELOPMENT_TEAM = U259NHMY78;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = LollySwiftUIiOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -929,7 +957,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U259NHMY78;
 				INFOPLIST_FILE = LollySwiftUIiOSTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -951,7 +979,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U259NHMY78;
 				INFOPLIST_FILE = LollySwiftUIiOSTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1043,6 +1071,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8C5176EF2943C89F00719D42 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8C5176F02943C89F00719D42 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8C5176EF2943C89F00719D42 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 953FCCF425745D3D00666503 /* Project object */;
 }
