@@ -183,6 +183,7 @@ class SettingsViewModel: NSObject, ObservableObject {
         func onChange(_ source: Published<Int>.Publisher, _ selector: @escaping (Int) async -> Void) {
             source.removeDuplicates()
                 .filter { self.initialized && $0 != -1 }
+                .receive(on: RunLoop.main)
                 .sink { n in Task { await selector(n) } }
                 ~ subscriptions
         }
