@@ -8,28 +8,24 @@ platform :ios, '16.0'
 project 'LollySwiftiOS/LollySwiftiOS'
 pod 'DropDown'
 pod 'AKSideMenu'
-pod 'CrossroadRegex'
 pod 'Then'
 end
 
 target 'LollySwiftiOSTests' do
 platform :ios, '16.0'
 project 'LollySwiftiOS/LollySwiftiOS'
-pod 'CrossroadRegex'
 pod 'Then'
 end
 
 target 'LollySwiftMac' do
 platform :osx, '13.0'
 project 'LollySwiftMac/LollySwiftMac'
-pod 'CrossroadRegex'
 pod 'Then'
 end
 
 target 'LollySwiftMacTests' do
 platform :osx, '13.0'
 project 'LollySwiftMac/LollySwiftMac'
-pod 'CrossroadRegex'
 pod 'Then'
 end
 
@@ -38,7 +34,6 @@ platform :ios, '16.0'
 project 'LollySwiftUIiOS/LollySwiftUIiOS'
 pod 'DropDown'
 pod 'AKSideMenu'
-pod 'CrossroadRegex'
 pod 'Then'
 end
 
@@ -47,20 +42,17 @@ platform :ios, '16.0'
 project 'LollySwiftUIiOS/LollySwiftUIiOS'
 pod 'DropDown'
 pod 'AKSideMenu'
-pod 'CrossroadRegex'
 pod 'Then'
 end
 
 target 'LollySwiftUIMac' do
 platform :osx, '13.0'
 project 'LollySwiftUIMac/LollySwiftUIMac'
-pod 'CrossroadRegex'
 pod 'Then'
 end
 
 target 'LollySwiftUIMacTests' do
 platform :osx, '13.0'
 project 'LollySwiftUIMac/LollySwiftUIMac'
-pod 'CrossroadRegex'
 pod 'Then'
 end

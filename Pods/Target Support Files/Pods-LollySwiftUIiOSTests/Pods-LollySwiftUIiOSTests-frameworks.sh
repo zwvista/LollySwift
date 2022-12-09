@@ -177,13 +177,11 @@ code_sign_if_enabled() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/AKSideMenu/AKSideMenu.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/CrossroadRegex-iOS/Regex.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/DropDown/DropDown.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Then-iOS/Then.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/AKSideMenu/AKSideMenu.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/CrossroadRegex-iOS/Regex.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/DropDown/DropDown.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Then-iOS/Then.framework"
 fi
