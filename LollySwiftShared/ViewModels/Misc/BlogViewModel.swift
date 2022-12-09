@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Regex
 import RxSwift
 import RxBinding
 
@@ -34,25 +33,25 @@ class BlogViewModel: NSObject {
     private func htmlE2With(_ s: String) -> String { html2With(s) }
     private func htmlIWith(_ s: String) -> String { "<strong>\(html2With(s))</strong>" }
     private let htmlEmptyLine = "<div><br></div>"
-    private let regMarkedEntry = #"(\*\*?)\s*(.*?)：(.*?)：(.*)"#.r!
-    private let regMarkedB = "<B>(.+?)</B>".r!
-    private let regMarkedI = "<I>(.+?)</I>".r!
+    private let regMarkedEntry = /(\*\*?)\s*(.*?)：(.*?)：(.*)/
+    private let regMarkedB = #/<B>(.+?)</B>/#
+    private let regMarkedI = #/<I>(.+?)</I>/#
     func markedToHtml(text: String) -> String {
         var arr = text.components(separatedBy: "\n")
         var i = 0
         while i < arr.count {
             var s = arr[i]
-            if let m = regMarkedEntry.findFirst(in: s) {
-                let (s1, s2, s3, s4) = (m.group(at: 1)!, m.group(at: 2)!, m.group(at: 3)!, m.group(at: 4))
-                s = htmlWordWith(s2) + (s3.isEmpty ? "" : htmlE1With(s3)) + ((s4 ?? "").isEmpty ? "" : htmlE2With(s4!))
+            if let m = s.firstMatch(of: regMarkedEntry) {
+                let (s1, s2, s3, s4) = (String(m.1), String(m.2), String(m.3), String(m.4))
+                s = htmlWordWith(s2) + (s3.isEmpty ? "" : htmlE1With(s3)) + (s4.isEmpty ? "" : htmlE2With(s4))
                 arr[i] = (s1 == "*" ? "<li>" : "<br>") + s
                 if i == 0 || arr[i - 1].hasPrefix("<div>") {
                     arr.insert("<ul>", at: i)
                     i += 1
                 }
                 let isLast = i == arr.count - 1
-                let m2 = isLast ? nil : regMarkedEntry.findFirst(in: arr[i + 1])
-                if isLast || m2?.group(at: 1) != "**" {
+                let m2 = isLast ? nil : arr[i + 1].firstMatch(of: regMarkedEntry)
+                if isLast || m2?.1 != "**" {
                     arr[i] += "</li>"
                 }
                 if isLast || m2 == nil {
@@ -62,8 +61,8 @@ class BlogViewModel: NSObject {
             } else if s.isEmpty {
                 arr[i] = htmlEmptyLine
             } else {
-                s = regMarkedB.replaceAll(in: s, with: htmlBWith("$1"))
-                s = regMarkedI.replaceAll(in: s, with: htmlIWith("$1"))
+                s = s.replacing(regMarkedB) { m in htmlBWith(String(m.1)) }
+                s = s.replacing(regMarkedI) { m in htmlIWith(String(m.1)) }
                 arr[i] = "<div>\(s)</div>"
             }
             i += 1
@@ -71,10 +70,10 @@ class BlogViewModel: NSObject {
         return arr.joined(separator: "\n")
     }
     
-    private let regLine = "<div>(.*?)</div>".r!
-    private var regHtmlB: Regex { htmlBWith("(.+?)").r! }
-    private var regHtmlI: Regex { htmlIWith("(.+?)").r! }
-    private var regHtmlEntry: Regex {  "(<li>|<br>)\(htmlWordWith("(.*?)"))(?:\(htmlE1With("(.*?)")))?(?:\(htmlE2With("(.*?)")))?(?:</li>)?".r! }
+    private let regLine = #/<div>(.*?)</div>/#
+    private var regHtmlB: Regex<(Substring, Substring)> { try! Regex(htmlBWith("(.+?)")) }
+    private var regHtmlI: Regex<(Substring, Substring)> { try! Regex(htmlIWith("(.+?)")) }
+    private var regHtmlEntry: Regex<(Substring, Substring, Substring, Substring, Substring)> { try!  Regex("(<li>|<br>)\(htmlWordWith("(.*?)"))(?:\(htmlE1With("(.*?)")))?(?:\(htmlE2With("(.*?)")))?(?:</li>)?") }
     func htmlToMarked(text: String) -> String {
         var arr = text.split(separator: "\n").map { String($0) }
         var i = 0
@@ -85,14 +84,14 @@ class BlogViewModel: NSObject {
                 i -= 1
             } else if s == htmlEmptyLine {
                 arr[i] = ""
-            } else if let m = regLine.findFirst(in: s) {
-                s = m.group(at: 1)!
-                s = regHtmlB.replaceAll(in: s, with: "<B>$1</B>")
-                s = regHtmlI.replaceAll(in: s, with: "<I>$1</I>")
+            } else if let m = s.firstMatch(of: regLine) {
+                s = String(m.1)
+                s = s.replacing(regHtmlB) { m in "<B>\(m.1)</B>" }
+                s = s.replacing(regHtmlI) { m in "<I>\(m.1)</I>" }
                 arr[i] = s
-            } else if let m = regHtmlEntry.findFirst(in: s) {
-                let (s1, s2, s3, s4) = (m.group(at: 1), m.group(at: 2), m.group(at: 3), m.group(at: 4))
-                s = (s1 == "<li>" ? "*" : "**") + " \(s2 ?? "")：\(s3 ?? "")：\(s4 ?? "")"
+            } else if let m = s.firstMatch(of: regHtmlEntry) {
+                let (s1, s2, s3, s4) = (String(m.1), String(m.2), String(m.3), String(m.4))
+                s = (s1 == "<li>" ? "*" : "**") + " \(s2)：\(s3)：\(s4)"
                 arr[i] = s
             }
             i += 1
@@ -107,12 +106,12 @@ class BlogViewModel: NSObject {
         "<I>\(text)</I>"
     }
     func removeTagBI(text: String) -> String {
-        "</?[BI]>".r!.replaceAll(in: text, with: "")
+        text.replacing(#/</?[BI]>/#, with: "")
     }
     func exchangeTagBI(text: String) -> String {
-        var text = "<(/)?B>".r!.replaceAll(in: text, with: "<$1Temp>")
-        text = "<(/)?I>".r!.replaceAll(in: text, with: "<$1B>")
-        text = "<(/)?Temp>".r!.replaceAll(in: text, with: "<$1I>")
+        var text = text.replacing(#/<(/)?B>/#) { m in "<\(m.1 ?? "")Temp>" }
+        text = text.replacing(#/<(/)?I>/#) { m in "<\(m.1 ?? "")B>" }
+        text = text.replacing(#/<(/)?Temp>/#) { m in "<\(m.1 ?? "")I>" }
         return text
     }
     func getExplanation(text: String) -> String {
@@ -135,20 +134,20 @@ class BlogViewModel: NSObject {
         }
         var arr = text.components(separatedBy: "\n")
         vmSettings.getNotes(wordCount: arr.count, isNoteEmpty: {
-            let m = self.regMarkedEntry.findFirst(in: arr[$0])
+            let m = arr[$0].firstMatch(of: self.regMarkedEntry)
             if m == nil { return false }
-            let word = m!.group(at: 2)!
+            let word = String(m!.2)
             return word.allSatisfy { $0 != "（" && !bigDigits.contains($0) }
         }, getOne: { i in
-            let m = self.regMarkedEntry.findFirst(in: arr[i])!
-            let (s1, word, s3, s4) = (m.group(at: 1)!, m.group(at: 2)!, m.group(at: 3)!, m.group(at: 4))
+            let m = arr[i].firstMatch(of: self.regMarkedEntry)!
+            let (s1, word, s3, s4) = (String(m.1), String(m.2), String(m.3), String(m.4))
             self.vmSettings.getNote(word: word).subscribe { note in
                 let j = note.firstIndex { "0"..."9" ~= $0 }
                 // https://stackoverflow.com/questions/45562662/how-can-i-use-string-slicing-subscripts-in-swift-4
                 let s21 = j == nil ? note : String(note[..<j!])
                 let s22 = j == nil ? "" : f(String(note[j!...]))
                 let s2 = word + (s21 == word || s21.isEmpty ? "" : "（\(s21)）") + s22
-                arr[i] = "\(s1) \(s2)：\(s3)：\(s4 ?? "")"
+                arr[i] = "\(s1) \(s2)：\(s3)：\(s4)"
             } ~ self.rx.disposeBag
         }, allComplete: {
             let result = arr.joined(separator: "\n")

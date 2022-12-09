@@ -44,15 +44,15 @@ class MTextbook: NSObject, Codable {
         var o: Single<[MTextbook]> = RestApi.getRecords(url: url)
         o = o.map { $0.filter { row in arrUserSettings.contains { $0.KIND == 11 && $0.ENTITYID == row.ID } } }
         func f(units: String) -> [String] {
-            if let m = #"UNITS,(\d+)"#.r!.findFirst(in: units) {
-                let n = Int(m.group(at: 1)!)!
+            if let m = units.firstMatch(of: /UNITS,(\d+)/) {
+                let n = Int(m.1)!
                 return (1...n).map{ String($0) }
-            } else if let m = #"PAGES,(\d+),(\d+)"#.r!.findFirst(in: units) {
-                let (n1, n2) = (Int(m.group(at: 1)!)!, Int(m.group(at: 2)!)!)
+            } else if let m = units.firstMatch(of: /PAGES,(\d+),(\d+)/) {
+                let (n1, n2) = (Int(m.1)!, Int(m.2)!)
                 let n = (n1 + n2 - 1) / n2
                 return (1...n).map { "\($0 * n2 - n2 + 1)~\($0 * n2)" }
-            } else if let m = "CUSTOM,(.+)".r!.findFirst(in: units) {
-                return m.group(at: 1)!.split(separator: ",").map { String($0) }
+            } else if let m = units.firstMatch(of: /CUSTOM,(.+)/) {
+                return m.1.split(separator: ",").map { String($0) }
             } else {
                 return []
             }
