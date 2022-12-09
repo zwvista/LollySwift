@@ -27,8 +27,7 @@ enum UnitPartToType: Int {
     case to
 }
 
-class GlobalUser: ObservableObject {
-    @Published
+class GlobalUser {
     var userid = ""
     var username = ""
 }
@@ -61,7 +60,6 @@ class CommonApi {
     static func doTransform(text: String, item: MTransformItem) -> String {
         let dic = ["<delete>": "", "\\t": "\t", "\\n": "\n"]
         var s = text
-        // https://github.com/crossroadlabs/Regex/issues/51
         let regex = try! Regex(item.extractor)
         var replacement = item.replacement
         if replacement.starts(with: "<extract>") {
