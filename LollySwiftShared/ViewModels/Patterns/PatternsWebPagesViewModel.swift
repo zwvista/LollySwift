@@ -8,6 +8,7 @@
 
 import Foundation
 
+@MainActor
 class PatternsWebPagesViewModel: NSObject {
     var vmSettings: SettingsViewModel
     var selectedPatternItem: MPattern?

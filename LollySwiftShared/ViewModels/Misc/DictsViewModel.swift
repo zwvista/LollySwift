@@ -8,6 +8,7 @@
 
 import Foundation
 
+@MainActor
 class DictsViewModel: NSObject {
     var vmSettings: SettingsViewModel
     var arrDicts = [MDictionary]()

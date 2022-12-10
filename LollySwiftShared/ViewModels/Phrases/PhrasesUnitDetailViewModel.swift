@@ -8,6 +8,7 @@
 
 import Foundation
 
+@MainActor
 class PhrasesUnitDetailViewModel: NSObject, ObservableObject {
     var vm: PhrasesUnitViewModel!
     var item: MUnitPhrase!

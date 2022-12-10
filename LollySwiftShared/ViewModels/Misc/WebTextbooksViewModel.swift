@@ -8,6 +8,7 @@
 
 import Foundation
 
+@MainActor
 class WebTextbooksViewModel: NSObject {
     var vmSettings: SettingsViewModel
     var arrWebTextbooks = [MWebTextbook]()

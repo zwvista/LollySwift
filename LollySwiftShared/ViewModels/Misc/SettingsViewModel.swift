@@ -9,6 +9,7 @@
 import Foundation
 import Combine
 
+@MainActor
 class SettingsViewModel: NSObject, ObservableObject {
     
     var arrUSMappings = [MUSMapping]()

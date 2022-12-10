@@ -8,6 +8,7 @@
 
 import Foundation
 
+@MainActor
 class WordsUnitBatchEditViewModel: NSObject, ObservableObject {
     var vm: WordsUnitViewModel!
     @Published var isOKEnabled = false

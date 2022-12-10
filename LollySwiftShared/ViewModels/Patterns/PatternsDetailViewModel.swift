@@ -8,6 +8,7 @@
 
 import Foundation
 
+@MainActor
 class PatternsDetailViewModel: NSObject, ObservableObject {
     var vm: PatternsViewModel!
     var item: MPattern!

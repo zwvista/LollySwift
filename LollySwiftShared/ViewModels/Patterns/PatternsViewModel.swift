@@ -9,6 +9,7 @@
 import Foundation
 import Then
 
+@MainActor
 class PatternsViewModel: NSObject, ObservableObject {
     var vmSettings: SettingsViewModel
     var arrPatterns = [MPattern]()

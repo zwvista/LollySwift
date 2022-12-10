@@ -9,6 +9,7 @@
 import Foundation
 import Combine
 
+@MainActor
 class PhrasesReviewViewModel: NSObject, ObservableObject {
 
     var vmSettings: SettingsViewModel

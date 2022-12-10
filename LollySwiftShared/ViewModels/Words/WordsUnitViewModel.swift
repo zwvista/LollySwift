@@ -9,6 +9,7 @@
 import Foundation
 import Then
 
+@MainActor
 class WordsUnitViewModel: WordsBaseViewModel {
     let inTextbook: Bool
     var arrWords = [MUnitWord]()
@@ -101,7 +102,8 @@ class WordsUnitViewModel: WordsBaseViewModel {
     }
     
     func getNote(index: Int) async {
-        await getNote(item: arrWords[index])
+        let item = arrWords[index]
+        await getNote(item: item)
     }
     
     func getNote(item: MUnitWord) async {

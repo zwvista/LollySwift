@@ -8,6 +8,7 @@
 
 import Foundation
 
+@MainActor
 class PhrasesLangDetailViewModel: NSObject, ObservableObject {
     var vm: PhrasesLangViewModel!
     var item: MLangPhrase!

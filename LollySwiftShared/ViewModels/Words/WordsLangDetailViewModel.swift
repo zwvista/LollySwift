@@ -8,6 +8,7 @@
 
 import Foundation
 
+@MainActor
 class WordsLangDetailViewModel: NSObject, ObservableObject {
     var vm: WordsLangViewModel!
     var item: MLangWord!

@@ -11,7 +11,8 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
-    static let theSettingsViewModel = SettingsViewModel()
+    @MainActor
+    private(set) static var theSettingsViewModel = SettingsViewModel()
     let synth = NSSpeechSynthesizer()
 
     func setup() {

@@ -8,6 +8,7 @@
 
 import Foundation
 
+@MainActor
 class WordsUnitBatchAddViewModel: NSObject, ObservableObject {
     var vm: WordsUnitViewModel!
     var item: MUnitWord!

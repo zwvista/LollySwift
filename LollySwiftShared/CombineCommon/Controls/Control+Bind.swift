@@ -11,14 +11,14 @@ import Combine
 infix operator <~> : DefaultPrecedence
 
 func <~><Control: AnyObject, Value> (pub: inout Published<Value>.Publisher, controlProperty: Publishers.ControlProperty2<Control, Value>) -> AnyCancellable {
-    let cancellable = pub.receive(on: RunLoop.main).assign(to: controlProperty.setter, on: controlProperty.control)
+    let cancellable = pub.assign(to: controlProperty.setter, on: controlProperty.control)
     controlProperty.control[keyPath: controlProperty.getter].assign(to: &pub)
     return cancellable
 }
 
 func ~><Control: AnyObject, Value> (pub: Published<Value>.Publisher, controlAndKeyPath: (Control, ReferenceWritableKeyPath<Control, Value>)) -> AnyCancellable {
-    pub.receive(on: RunLoop.main).assign(to: controlAndKeyPath.1, on: controlAndKeyPath.0)
+    pub.assign(to: controlAndKeyPath.1, on: controlAndKeyPath.0)
 }
 func ~><Control: AnyObject, Value> (pub: AnyPublisher<Value, Never>, controlAndKeyPath: (Control, ReferenceWritableKeyPath<Control, Value>)) -> AnyCancellable {
-    pub.receive(on: RunLoop.main).assign(to: controlAndKeyPath.1, on: controlAndKeyPath.0)
+    pub.assign(to: controlAndKeyPath.1, on: controlAndKeyPath.0)
 }

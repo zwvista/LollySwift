@@ -9,6 +9,7 @@
 import Foundation
 import WebKit
 
+@MainActor
 class DictStore: NSObject {
     
     var dictStatus = DictWebViewStatus.ready

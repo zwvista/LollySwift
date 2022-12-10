@@ -9,6 +9,7 @@
 import Foundation
 import Then
 
+@MainActor
 class TextbooksViewModel: NSObject {
     var vmSettings: SettingsViewModel
     var arrTextbooks = [MTextbook]()
