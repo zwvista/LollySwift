@@ -184,7 +184,6 @@ class SettingsViewModel: NSObject, ObservableObject {
         func onChange(_ source: Published<Int>.Publisher, _ selector: @escaping (Int) async -> Void) {
             source.removeDuplicates()
                 .filter { self.initialized && $0 != -1 }
-                .receive(on: RunLoop.main)
                 .sink { n in Task { await selector(n) } }
                 ~ subscriptions
         }
@@ -338,9 +337,7 @@ class SettingsViewModel: NSObject, ObservableObject {
         if arrMacVoices.isEmpty { arrMacVoices.append(MVoice()) }
         arriOSVoices = arrVoices.filter { $0.VOICETYPEID == 3 }
         if arriOSVoices.isEmpty { arriOSVoices.append(MVoice()) }
-        await MainActor.run {
-            delegate?.onUpdateLang()
-        }
+        delegate?.onUpdateLang()
         selectedDictReferenceIndex = arrDictsReference.firstIndex { String($0.DICTID) == self.USDICTREFERENCE } ?? 0
         if arrDictsNote.isEmpty { arrDictsNote.append(MDictionary()) }
         selectedDictNoteIndex = arrDictsNote.firstIndex { $0.DICTID == self.USDICTNOTE } ?? 0
