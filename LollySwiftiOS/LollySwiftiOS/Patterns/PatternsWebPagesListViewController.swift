@@ -25,10 +25,11 @@ class PatternsWebPagesListViewController: UITableViewController {
     }
     
     @objc func refresh(_ sender: UIRefreshControl) {
-        vm.getWebPages().subscribe(onSuccess: {
+        Task {
+            await vm.getWebPages()
             sender.endRefreshing()
             self.tableView.reloadData()
-        }) ~ rx.disposeBag
+        }
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -59,10 +60,12 @@ class PatternsWebPagesListViewController: UITableViewController {
     
     private func reindex() {
         tableView.beginUpdates()
-        vm.reindexWebPage {
-            self.tableView.reloadRows(at: [IndexPath(row: $0, section: 0)], with: .fade)
+        Task {
+            await vm.reindexWebPage {
+                self.tableView.reloadRows(at: [IndexPath(row: $0, section: 0)], with: .fade)
+            }
+            tableView.endUpdates()
         }
-        tableView.endUpdates()
     }
 
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
@@ -97,8 +100,9 @@ class PatternsWebPagesListViewController: UITableViewController {
     @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
         guard segue.identifier == "Done" else {return}
         if let controller = segue.source as? PatternsWebPagesDetailViewController {
-            controller.vmEdit.onOK().subscribe(onSuccess: {
-            }) ~ rx.disposeBag
+            Task {
+                await controller.vmEdit.onOK()
+            }
         }
     }
 

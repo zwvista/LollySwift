@@ -8,6 +8,7 @@
 
 import UIKit
 import DropDown
+import Combine
 
 class WordsBaseViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate {
 
@@ -18,6 +19,7 @@ class WordsBaseViewController: UIViewController, UITableViewDelegate, UITableVie
     
     let ddScopeFilter = DropDown()
     var vmBase: WordsBaseViewModel! { nil }
+    var subscriptions = Set<AnyCancellable>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,19 +27,19 @@ class WordsBaseViewController: UIViewController, UITableViewDelegate, UITableVie
         ddScopeFilter.dataSource = SettingsViewModel.arrScopeWordFilters
         ddScopeFilter.selectRow(0)
         ddScopeFilter.selectionAction = { [unowned self] (index: Int, item: String) in
-            vmBase.scopeFilter.accept(item)
+            vmBase.scopeFilter = item
         }
         tableView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         refresh()
-        _ = vmBase.textFilter <~> sbTextFilter.searchTextField.rx.textInput
-        _ = vmBase.scopeFilter ~> btnScopeFilter.rx.title(for: .normal)
-        vmBase.textFilter.subscribe(onNext: { [unowned self] _ in
+        vmBase.$textFilter <~> sbTextFilter.searchTextField.textProperty ~ subscriptions
+        vmBase.$scopeFilter ~> (btnScopeFilter, \.titleNormal) ~ subscriptions
+        vmBase.$textFilter.sink { [unowned self] _ in
             self.applyFilters()
-        }) ~ rx.disposeBag
-        vmBase.scopeFilter.subscribe(onNext: { [unowned self] _ in
+        } ~ subscriptions
+        vmBase.$scopeFilter.sink { [unowned self] _ in
             self.applyFilters()
-        }) ~ rx.disposeBag
+        } ~ subscriptions
     }
     
     @objc func refresh(_ sender: UIRefreshControl) {

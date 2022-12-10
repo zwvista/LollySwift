@@ -40,7 +40,9 @@ class WordsLangViewController: WordsBaseViewController {
         let item = self.vm.arrWords[i]
         func delete() {
             self.yesNoAction(title: "delete", message: "Do you really want to delete the word \"\(item.WORD)\"?", yesHandler: { (action) in
-                WordsLangViewModel.delete(item: item).subscribe() ~ self.rx.disposeBag
+                Task {
+                    await WordsLangViewModel.delete(item: item)
+                }
                 self.vm.arrWords.remove(at: i)
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }, noHandler: { (action) in
@@ -61,15 +63,17 @@ class WordsLangViewController: WordsBaseViewController {
             alertController.addAction(editAction2)
             if vmSettings.hasDictNote {
                 let getNoteAction = UIAlertAction(title: "Retrieve Note", style: .default) { _ in
-                    self.vm.getNote(index: indexPath.row).subscribe(onSuccess: {
+                    Task {
+                        await self.vm.getNote(index: indexPath.row)
                         self.tableView.reloadRows(at: [indexPath], with: .fade)
-                    }) ~ self.rx.disposeBag
+                    }
                 }
                 alertController.addAction(getNoteAction)
                 let clearNoteAction = UIAlertAction(title: "Clear Note", style: .default) { _ in
-                    self.vm.clearNote(index: indexPath.row).subscribe(onSuccess: {
+                    Task {
+                        await self.vm.clearNote(index: indexPath.row)
                         self.tableView.reloadRows(at: [indexPath], with: .fade)
-                    }) ~ self.rx.disposeBag
+                    }
                 }
                 alertController.addAction(clearNoteAction)
             }
@@ -104,8 +108,9 @@ class WordsLangViewController: WordsBaseViewController {
     @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
         guard segue.identifier == "Done" else {return}
         let controller = segue.source as! WordsLangDetailViewController
-        controller.vmEdit.onOK().subscribe(onSuccess: {
+        Task {
+            await controller.vmEdit.onOK()
             self.tableView.reloadData()
-        }) ~ rx.disposeBag
+        }
     }
 }

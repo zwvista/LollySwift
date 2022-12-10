@@ -8,6 +8,7 @@
 
 import UIKit
 import DropDown
+import Combine
 
 class WordsTextbookDetailViewController: UITableViewController, UITextFieldDelegate {
     
@@ -28,7 +29,8 @@ class WordsTextbookDetailViewController: UITableViewController, UITextFieldDeleg
     var itemEdit: MUnitWordEdit { vmEdit.itemEdit }
     let ddUnit = DropDown()
     let ddPart = DropDown()
-    
+    var subscriptions = Set<AnyCancellable>()
+
     func startEdit(vm: WordsUnitViewModel, item: MUnitWord, phraseid: Int) {
         vmEdit = WordsUnitDetailViewModel(vm: vm, item: item, phraseid: phraseid) {
             self.tableView.reloadData()
@@ -40,31 +42,31 @@ class WordsTextbookDetailViewController: UITableViewController, UITextFieldDeleg
 
         ddUnit.anchorView = tfUnit
         ddUnit.dataSource = item.textbook.arrUnits.map(\.label)
-        ddUnit.selectRow(itemEdit.indexUNIT.value)
+        ddUnit.selectRow(itemEdit.indexUNIT)
         ddUnit.selectionAction = { [unowned self] (index: Int, item: String) in
-            self.itemEdit.indexUNIT.accept(index)
-            self.itemEdit.UNITSTR.accept(item)
+            self.itemEdit.indexUNIT = index
+            self.itemEdit.UNITSTR = item
         }
         
         ddPart.anchorView = tfPart
         ddPart.dataSource = item.textbook.arrParts.map(\.label)
-        ddPart.selectRow(itemEdit.indexPART.value)
+        ddPart.selectRow(itemEdit.indexPART)
         ddPart.selectionAction = { [unowned self] (index: Int, item: String) in
-            self.itemEdit.indexPART.accept(index)
-            self.itemEdit.PARTSTR.accept(item)
+            self.itemEdit.indexPART = index
+            self.itemEdit.PARTSTR = item
         }
         
-        _ = itemEdit.ID ~> tfID.rx.text.orEmpty
-        _ = itemEdit.TEXTBOOKNAME ~> tfTextbookName.rx.text.orEmpty
-        _ = itemEdit.UNITSTR <~> tfUnit.rx.textInput
-        _ = itemEdit.PARTSTR <~> tfPart.rx.textInput
-        _ = itemEdit.SEQNUM <~> tfSeqNum.rx.textInput
-        _ = itemEdit.WORDID ~> tfWordID.rx.text
-        _ = itemEdit.WORD <~> tfWord.rx.textInput
-        _ = itemEdit.NOTE <~> tfNote.rx.textInput
-        _ = itemEdit.FAMIID ~> tfFamiID.rx.text
-        _ = itemEdit.ACCURACY ~> tfAccuracy.rx.text
-        _ = vmEdit.isOKEnabled ~> btnDone.rx.isEnabled
+        itemEdit.$ID ~> (tfID, \.text2) ~ subscriptions
+        itemEdit.$TEXTBOOKNAME ~> (tfTextbookName, \.text2) ~ subscriptions
+        itemEdit.$UNITSTR <~> tfUnit.textProperty ~ subscriptions
+        itemEdit.$PARTSTR <~> tfPart.textProperty ~ subscriptions
+        itemEdit.$SEQNUM <~> tfSeqNum.textProperty ~ subscriptions
+        itemEdit.$WORDID ~> (tfWordID, \.text2) ~ subscriptions
+        itemEdit.$WORD <~> tfWord.textProperty ~ subscriptions
+        itemEdit.$NOTE <~> tfNote.textProperty ~ subscriptions
+        itemEdit.$FAMIID ~> (tfFamiID, \.text2) ~ subscriptions
+        itemEdit.$ACCURACY ~> (tfAccuracy, \.text2) ~ subscriptions
+        vmEdit.$isOKEnabled ~> (btnDone, \.isEnabled) ~ subscriptions
     }
     
     override func viewDidAppear(_ animated: Bool) {

@@ -8,6 +8,8 @@
 
 import UIKit
 import DropDown
+import Combine
+import CombineCocoa
 
 class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
     @IBOutlet weak var langCell: UITableViewCell!
@@ -43,9 +45,10 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
     let ddUnitTo = DropDown()
     let ddPartTo = DropDown()
     let ddToType = DropDown()
-    
+
     var vm: SettingsViewModel { vmSettings }
-    
+    var subscriptions = Set<AnyCancellable>()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         vm.delegate = self
@@ -116,17 +119,17 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
             self.vm.selectedPartToIndex = index
         }
 
-        _ = vm.unitToEnabled ~> lblUnitTo.rx.isEnabled
-        _ = vm.unitToEnabled ~> lblUnitToTitle.rx.isEnabled
-        _ = vm.partToEnabled ~> lblPartTo.rx.isEnabled
-        _ = vm.partToEnabled ~> lblPartToTitle.rx.isEnabled
-        _ = vm.previousEnabled ~> btnPrevious.rx.isEnabled
-        _ = vm.nextEnabled ~> btnNext.rx.isEnabled
-        _ = vm.previousTitle ~> btnPrevious.rx.title(for: .normal)
-        _ = vm.nextTitle ~> btnNext.rx.title(for: .normal)
-        _ = vm.partFromEnabled ~> lblPartFrom.rx.isEnabled
-        _ = vm.partFromEnabled ~> lblPartFromTitle.rx.isEnabled
-        _ = vm.toTypeTitle ~> btnToType.rx.title(for: .normal)
+        vm.$unitToEnabled ~> (lblUnitTo, \.isEnabled) ~ subscriptions
+        vm.$unitToEnabled ~> (lblUnitToTitle, \.isEnabled) ~ subscriptions
+        vm.$partToEnabled ~> (lblPartTo, \.isEnabled) ~ subscriptions
+        vm.$partToEnabled ~> (lblPartToTitle, \.isEnabled) ~ subscriptions
+        vm.$previousEnabled ~> (btnPrevious, \.isEnabled) ~ subscriptions
+        vm.$nextEnabled ~> (btnNext, \.isEnabled) ~ subscriptions
+        vm.$previousTitle ~> (btnPrevious, \.titleNormal) ~ subscriptions
+        vm.$nextTitle ~> (btnNext, \.titleNormal) ~ subscriptions
+        vm.$partFromEnabled ~> (lblPartFrom, \.isEnabled) ~ subscriptions
+        vm.$partFromEnabled ~> (lblPartFromTitle, \.isEnabled) ~ subscriptions
+        vm.$toTypeTitle ~> (btnToType, \.titleNormal) ~ subscriptions
 
         refreshControl = UIRefreshControl()
         refreshControl!.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
@@ -134,9 +137,10 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
     }
     
     @objc func refresh(_ sender: UIRefreshControl) {
-        vm.getData().subscribe(onSuccess: {
+        Task {
+            await vm.getData()
             sender.endRefreshing()
-        }) ~ rx.disposeBag
+        }
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -157,11 +161,11 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
             switch indexPath.row {
             case 0:
                 ddUnitFrom.show()
-            case 1 where vm.partFromEnabled.value:
+            case 1 where vm.partFromEnabled:
                 ddPartFrom.show()
-            case 3 where vm.unitToEnabled.value:
+            case 3 where vm.unitToEnabled:
                 ddUnitTo.show()
-            case 4 where vm.partToEnabled.value:
+            case 4 where vm.partToEnabled:
                 ddPartTo.show()
             default:
                 break
@@ -259,11 +263,15 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
     }
 
     @IBAction func previousUnitPart(_ sender: AnyObject) {
-        vm.previousUnitPart().subscribe() ~ rx.disposeBag
+        Task {
+            await vm.previousUnitPart()
+        }
     }
     
     @IBAction func nextUnitPart(_ sender: AnyObject) {
-        vm.nextUnitPart().subscribe() ~ rx.disposeBag
+        Task {
+            await vm.nextUnitPart()
+        }
     }
 
     func onUpdateUnitFrom() {

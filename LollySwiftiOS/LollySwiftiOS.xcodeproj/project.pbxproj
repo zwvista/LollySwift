@@ -23,6 +23,11 @@
 		8C42B5BA1D69A21E00DCB528 /* PhrasesBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C42B5B71D69A21E00DCB528 /* PhrasesBaseViewController.swift */; };
 		8C42B5BB1D69A21E00DCB528 /* PhrasesLangViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C42B5B81D69A21E00DCB528 /* PhrasesLangViewController.swift */; };
 		8C42B5BC1D69A21E00DCB528 /* PhrasesUnitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C42B5B91D69A21E00DCB528 /* PhrasesUnitViewController.swift */; };
+		8C5176F3294476CD00719D42 /* Publisher+Bind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5176F2294476CD00719D42 /* Publisher+Bind.swift */; };
+		8C5176F5294486B100719D42 /* UIButton+Combine2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5176F4294486B100719D42 /* UIButton+Combine2.swift */; };
+		8C5176F7294487D100719D42 /* UISwitch+Combine2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5176F6294487D100719D42 /* UISwitch+Combine2.swift */; };
+		8C5176F82944BB5700719D42 /* Publisher+Bind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5176F2294476CD00719D42 /* Publisher+Bind.swift */; };
+		8C5176F92944BB6800719D42 /* StoreIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC3CBD32943A07D005670CC /* StoreIn.swift */; };
 		8CB025932096CB3E0087462E /* LeftMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB025912096CB3E0087462E /* LeftMenuViewController.swift */; };
 		8CB025942096CB3E0087462E /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB025922096CB3E0087462E /* RootViewController.swift */; };
 		8CC3CBD02943A04A005670CC /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC3CBCF2943A04A005670CC /* Alamofire */; };
@@ -205,6 +210,9 @@
 		8C42B5B71D69A21E00DCB528 /* PhrasesBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesBaseViewController.swift; sourceTree = "<group>"; };
 		8C42B5B81D69A21E00DCB528 /* PhrasesLangViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesLangViewController.swift; sourceTree = "<group>"; };
 		8C42B5B91D69A21E00DCB528 /* PhrasesUnitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesUnitViewController.swift; sourceTree = "<group>"; };
+		8C5176F2294476CD00719D42 /* Publisher+Bind.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Publisher+Bind.swift"; sourceTree = "<group>"; };
+		8C5176F4294486B100719D42 /* UIButton+Combine2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Combine2.swift"; sourceTree = "<group>"; };
+		8C5176F6294487D100719D42 /* UISwitch+Combine2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UISwitch+Combine2.swift"; sourceTree = "<group>"; };
 		8CB025912096CB3E0087462E /* LeftMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftMenuViewController.swift; sourceTree = "<group>"; };
 		8CB025922096CB3E0087462E /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		8CC3CBD32943A07D005670CC /* StoreIn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreIn.swift; sourceTree = "<group>"; };
@@ -413,6 +421,7 @@
 			children = (
 				8CC3CBE02943A07D005670CC /* CombineControlProperty2.swift */,
 				8CC3CBD42943A07D005670CC /* Controls */,
+				8C5176F2294476CD00719D42 /* Publisher+Bind.swift */,
 				8CC3CBD32943A07D005670CC /* StoreIn.swift */,
 			);
 			path = CombineCommon;
@@ -430,6 +439,8 @@
 		8CC3CBDE2943A07D005670CC /* UIControl */ = {
 			isa = PBXGroup;
 			children = (
+				8C5176F4294486B100719D42 /* UIButton+Combine2.swift */,
+				8C5176F6294487D100719D42 /* UISwitch+Combine2.swift */,
 				8CC3CBDF2943A07D005670CC /* UITextField+Combine2.swift */,
 			);
 			path = UIControl;
@@ -842,6 +853,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C5176F7294487D100719D42 /* UISwitch+Combine2.swift in Sources */,
 				957B531F25A595FF00C18B06 /* WordsUnitBatchAddViewModel.swift in Sources */,
 				951F7F5A25EE5CDF0051E94E /* WordsUnitBatchEditViewModel.swift in Sources */,
 				95F632E525899A6A000CFD23 /* WebPageSelectViewController.swift in Sources */,
@@ -864,6 +876,7 @@
 				954B8706218DC007007DC348 /* CommonApi.swift in Sources */,
 				95F0FFEB24C957AB00509DF3 /* PhrasesReviewViewModel.swift in Sources */,
 				9591924F258D004F0070DBFD /* MUnitWord.swift in Sources */,
+				8C5176F5294486B100719D42 /* UIButton+Combine2.swift in Sources */,
 				95CED3B4221170C20094622F /* iOSApi.swift in Sources */,
 				9591924D258D004F0070DBFD /* MLanguage.swift in Sources */,
 				95F0FFEE24C957AB00509DF3 /* TextbooksViewModel.swift in Sources */,
@@ -914,6 +927,7 @@
 				95898453259EFEA200DFE80A /* PatternsWebPagesViewModel.swift in Sources */,
 				8CD16D121D69FD8A00F5F625 /* WordsLangDetailViewController.swift in Sources */,
 				8C42B5B21D69A1D900DCB528 /* WordsTextbookViewController.swift in Sources */,
+				8C5176F3294476CD00719D42 /* Publisher+Bind.swift in Sources */,
 				95F0FFE324C957AA00509DF3 /* WordsLangViewModel.swift in Sources */,
 				95837E9324DF35E300B5D2AE /* PhrasesUnitDetailViewModel.swift in Sources */,
 				8C31658C207676CF0015C247 /* RestApi.swift in Sources */,
@@ -989,11 +1003,13 @@
 				9501FB922593395900C1B13B /* MReviewOptions.swift in Sources */,
 				95F0FFFF24C95B0D00509DF3 /* PhrasesLangViewModel.swift in Sources */,
 				95F0FFFE24C95B0D00509DF3 /* PhrasesReviewViewModel.swift in Sources */,
+				8C5176F92944BB6800719D42 /* StoreIn.swift in Sources */,
 				95F0FFFD24C95B0D00509DF3 /* SinglePhraseViewModel.swift in Sources */,
 				9501FB8C2593395900C1B13B /* MLanguage.swift in Sources */,
 				9501FB9B2593395D00C1B13B /* MLangPhrase.swift in Sources */,
 				9501FB9A2593395D00C1B13B /* MUnitWord.swift in Sources */,
 				95F0FFF724C95B0300509DF3 /* SettingsViewModel.swift in Sources */,
+				8C5176F82944BB5700719D42 /* Publisher+Bind.swift in Sources */,
 				9501FB9E2593395D00C1B13B /* MPattern.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -41,7 +41,9 @@ class PhrasesLangViewController: PhrasesBaseViewController {
         let item = self.vm.arrPhrases[i]
         func delete() {
             self.yesNoAction(title: "delete", message: "Do you really want to delete the phrase \"\(item.PHRASE)\"?", yesHandler: { (action) in
-                PhrasesLangViewModel.delete(item: item).subscribe() ~ self.rx.disposeBag
+                Task {
+                    await PhrasesLangViewModel.delete(item: item)
+                }
                 self.vm.arrPhrases.remove(at: i)
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }, noHandler: { (action) in
@@ -88,8 +90,9 @@ class PhrasesLangViewController: PhrasesBaseViewController {
     @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
         guard segue.identifier == "Done" else {return}
         let controller = segue.source as! PhrasesLangDetailViewController
-        controller.vmEdit.onOK().subscribe(onSuccess: {
+        Task {
+            await controller.vmEdit.onOK()
             self.tableView.reloadData()
-        }) ~ rx.disposeBag
+        }
     }
 }

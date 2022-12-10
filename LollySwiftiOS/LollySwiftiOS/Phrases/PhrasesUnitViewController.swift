@@ -43,10 +43,12 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
     
     private func reindex() {
         tableView.beginUpdates()
-        vm.reindex {
-            self.tableView.reloadRows(at: [IndexPath(row: $0, section: 0)], with: .fade)
+        Task {
+            await vm.reindex {
+                self.tableView.reloadRows(at: [IndexPath(row: $0, section: 0)], with: .fade)
+            }
+            tableView.endUpdates()
         }
-        tableView.endUpdates()
     }
 
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
@@ -59,7 +61,9 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
         let item = self.vm.arrPhrases[i]
         func delete() {
             self.yesNoAction(title: "delete", message: "Do you really want to delete the phrase \"\(item.PHRASE)\"?", yesHandler: { (action) in
-                PhrasesUnitViewModel.delete(item: item).subscribe() ~ self.rx.disposeBag
+                Task {
+                    await PhrasesUnitViewModel.delete(item: item)
+                }
                 self.vm.arrPhrases.remove(at: i)
                 tableView.deleteRows(at: [indexPath], with: .fade)
                 self.reindex()
@@ -128,11 +132,12 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
     @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
         guard segue.identifier == "Done" else {return}
         let controller = segue.source as! PhrasesUnitDetailViewController
-        controller.vmEdit.onOK().subscribe(onSuccess: {
+        Task {
+            await controller.vmEdit.onOK()
             self.tableView.reloadData()
             if controller.vmEdit.isAdd {
                 self.performSegue(withIdentifier: "add", sender: self)
             }
-        }) ~ rx.disposeBag
+        }
     }
 }

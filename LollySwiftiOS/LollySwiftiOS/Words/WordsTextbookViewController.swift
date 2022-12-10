@@ -24,12 +24,12 @@ class WordsTextbookViewController: WordsBaseViewController {
         ddTextbookFilter.dataSource = vmSettings.arrTextbookFilters.map(\.label)
         ddTextbookFilter.selectRow(0)
         ddTextbookFilter.selectionAction = { [unowned self] (index: Int, item: String) in
-            self.vmBase.stringTextbookFilter.accept(item)
+            self.vmBase.stringTextbookFilter = item
         }
-        _ = vmBase.stringTextbookFilter ~> btnTextbookFilter.rx.title(for: .normal)
-        vmBase.stringTextbookFilter.subscribe(onNext: { [unowned self] _ in
+        vmBase.$stringTextbookFilter ~> (btnTextbookFilter, \.titleNormal) ~ subscriptions
+        vmBase.$stringTextbookFilter.sink { [unowned self] _ in
             self.applyFilters()
-        }) ~ rx.disposeBag
+        } ~ subscriptions
     }
     
     override func refresh() {
@@ -58,7 +58,9 @@ class WordsTextbookViewController: WordsBaseViewController {
         let item = self.vm.arrWords[i]
         func delete() {
             self.yesNoAction(title: "delete", message: "Do you really want to delete the word \"\(item.WORD)\"?", yesHandler: { (action) in
-                WordsUnitViewModel.delete(item: item).subscribe() ~ self.rx.disposeBag
+                Task {
+                    await WordsUnitViewModel.delete(item: item)
+                }
                 self.vm.arrWords.remove(at: i)
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }, noHandler: { (action) in
@@ -79,15 +81,17 @@ class WordsTextbookViewController: WordsBaseViewController {
             alertController.addAction(editAction2)
             if vmSettings.hasDictNote {
                 let getNoteAction = UIAlertAction(title: "Retrieve Note", style: .default) { _ in
-                    self.vm.getNote(index: indexPath.row).subscribe(onSuccess: {
+                    Task {
+                        await self.vm.getNote(index: indexPath.row)
                         self.tableView.reloadRows(at: [indexPath], with: .fade)
-                    }) ~ self.rx.disposeBag
+                    }
                 }
                 alertController.addAction(getNoteAction)
                 let clearNoteAction = UIAlertAction(title: "Clear Note", style: .default) { _ in
-                    self.vm.clearNote(index: indexPath.row).subscribe(onSuccess: {
+                    Task {
+                        await self.vm.clearNote(index: indexPath.row)
                         self.tableView.reloadRows(at: [indexPath], with: .fade)
-                    }) ~ self.rx.disposeBag
+                    }
                 }
                 alertController.addAction(clearNoteAction)
             }
@@ -122,8 +126,9 @@ class WordsTextbookViewController: WordsBaseViewController {
     @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
         guard segue.identifier == "Done" else {return}
         let controller = segue.source as! WordsTextbookDetailViewController
-        controller.vmEdit.onOK().subscribe(onSuccess: {
+        Task {
+            await controller.vmEdit.onOK()
             self.tableView.reloadData()
-        }) ~ rx.disposeBag
+        }
     }
 }

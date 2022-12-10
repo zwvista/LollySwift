@@ -8,13 +8,10 @@
 
 import UIKit
 import DropDown
+import Combine
 
 class ReviewOptionsViewController: UITableViewController {
-    
-    var options: MReviewOptions!
-    var vm: ReviewOptionsViewModel!
-    var complete: (() -> Void)?
-    
+
     @IBOutlet weak var reviewModeCell: UITableViewCell!
     @IBOutlet weak var lblReviewMode: UILabel!
     @IBOutlet weak var swOrder: UISwitch!
@@ -25,39 +22,41 @@ class ReviewOptionsViewController: UITableViewController {
     @IBOutlet weak var tfGroupSelected: UITextField!
     @IBOutlet weak var tfGroupCount: UITextField!
     @IBOutlet weak var tfReviewCount: UITextField!
+
+    var options: MReviewOptions!
+    var vm: ReviewOptionsViewModel!
+    var complete: (() -> Void)?
     let ddReviewMode = DropDown()
+    var subscriptions = Set<AnyCancellable>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         vm = ReviewOptionsViewModel(options: options)
-        
+
         ddReviewMode.anchorView = reviewModeCell
         ddReviewMode.dataSource = SettingsViewModel.reviewModes
         ddReviewMode.selectionAction = { [unowned self] (index: Int, item: String) in
-            self.vm.optionsEdit.mode.accept(index)
-            self.vm.optionsEdit.modeString.accept(item)
+            self.vm.optionsEdit.mode = index
+            self.vm.optionsEdit.modeString = item
         }
 
-        _ = vm.optionsEdit.modeString ~> lblReviewMode.rx.text
-        _ = vm.optionsEdit.shuffled <~> swOrder.rx.isOn
-        _ = vm.optionsEdit.speakingEnabled <~> swSpeak.rx.isOn
-        _ = vm.optionsEdit.onRepeat <~> swOnRepeat.rx.isOn
-        _ = vm.optionsEdit.moveForward <~> swMoveForward.rx.isOn
-//        _ = vm.optionsEdit.interval <~> stpInterval.rx.integerValue
-        _ = vm.optionsEdit.interval.map { String($0) } ~> tfInterval.rx.text.orEmpty
-//        _ = vm.optionsEdit.groupSelected <~> stpGroupSelected.rx.integerValue
-        _ = vm.optionsEdit.groupSelected.map { String($0) } ~> tfGroupSelected.rx.text.orEmpty
-//        _ = vm.optionsEdit.groupCount <~> stpGroupCount.rx.integerValue
-        _ = vm.optionsEdit.groupCount.map { String($0) } ~> tfGroupCount.rx.text.orEmpty
-        _ = vm.optionsEdit.reviewCount.map { String($0) } ~> tfReviewCount.rx.text.orEmpty
+        vm.optionsEdit.$modeString ~> (lblReviewMode, \.text!) ~ subscriptions
+        vm.optionsEdit.$shuffled <~> swOrder.isOnProperty ~ subscriptions
+        vm.optionsEdit.$speakingEnabled <~> swSpeak.isOnProperty ~ subscriptions
+        vm.optionsEdit.$onRepeat <~> swOnRepeat.isOnProperty ~ subscriptions
+        vm.optionsEdit.$moveForward <~> swMoveForward.isOnProperty ~ subscriptions
+        vm.optionsEdit.$interval.map { String($0) }.eraseToAnyPublisher() ~> (tfInterval, \.text2) ~ subscriptions
+        vm.optionsEdit.$groupSelected.map { String($0) }.eraseToAnyPublisher() ~> (tfGroupSelected, \.text2) ~ subscriptions
+        vm.optionsEdit.$groupCount.map { String($0) }.eraseToAnyPublisher() ~> (tfGroupCount, \.text2) ~ subscriptions
+        vm.optionsEdit.$reviewCount.map { String($0) }.eraseToAnyPublisher() ~> (tfReviewCount, \.text2) ~ subscriptions
     }
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
             ddReviewMode.show()
         }
     }
-    
+
     deinit {
         print("DEBUG: \(self.className) deinit")
     }

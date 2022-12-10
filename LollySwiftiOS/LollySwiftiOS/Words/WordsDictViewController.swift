@@ -48,9 +48,10 @@ class WordsDictViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
         ddDictReference.selectRow(vmSettings.selectedDictReferenceIndex)
         ddDictReference.selectionAction = { [unowned self] (index: Int, item: String) in
             vmSettings.selectedDictReferenceIndex = index
-            vmSettings.updateDictReference().subscribe(onSuccess: {
+            Task {
+                await vmSettings.updateDictReference()
                 self.selectDictChanged()
-            }) ~ self.rx.disposeBag
+            }
         }
         
         currentWordChanged()
@@ -66,7 +67,9 @@ class WordsDictViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
     private func selectDictChanged() {
         btnDict.setTitle(vmSettings.selectedDictReference.DICTNAME, for: .normal)
         dictStore.dict = vmSettings.selectedDictReference
-        dictStore.searchDict()
+        Task {
+            await dictStore.searchDict()
+        }
     }
     
     @IBAction func showWordDropDown(_ sender: AnyObject) {

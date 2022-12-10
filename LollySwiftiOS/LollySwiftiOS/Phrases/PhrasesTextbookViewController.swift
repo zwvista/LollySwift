@@ -25,12 +25,12 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
         ddTextbookFilter.dataSource = vmSettings.arrTextbookFilters.map(\.label)
         ddTextbookFilter.selectRow(0)
         ddTextbookFilter.selectionAction = { [unowned self] (index: Int, item: String) in
-            self.vmBase.stringTextbookFilter.accept(item)
+            self.vmBase.stringTextbookFilter = item
         }
-        _ = vmBase.stringTextbookFilter ~> btnTextbookFilter.rx.title(for: .normal)
-        vmBase.stringTextbookFilter.subscribe(onNext: { [unowned self] _ in
+        vmBase.$stringTextbookFilter ~> (btnTextbookFilter, \.titleNormal) ~ subscriptions
+        vmBase.$stringTextbookFilter.sink { [unowned self] _ in
             self.applyFilters()
-        }) ~ rx.disposeBag
+        } ~ subscriptions
     }
     
     override func refresh() {
@@ -74,7 +74,9 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
         let item = self.vm.arrPhrases[i]
         func delete() {
             self.yesNoAction(title: "delete", message: "Do you really want to delete the phrase \"\(item.PHRASE)\"?", yesHandler: { (action) in
-                PhrasesUnitViewModel.delete(item: item).subscribe() ~ self.rx.disposeBag
+                Task {
+                     await PhrasesUnitViewModel.delete(item: item)
+                }
                 self.vm.arrPhrases.remove(at: i)
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }, noHandler: { (action) in
@@ -120,8 +122,9 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
     @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
         guard segue.identifier == "Done" else {return}
         let controller = segue.source as! PhrasesTextbookDetailViewController
-        controller.vmEdit.onOK().subscribe(onSuccess: {
+        Task {
+            await controller.vmEdit.onOK()
             self.tableView.reloadData()
-        }) ~ rx.disposeBag
+        }
     }
 }

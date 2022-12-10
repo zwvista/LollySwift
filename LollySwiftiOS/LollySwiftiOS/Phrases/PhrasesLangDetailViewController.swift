@@ -10,23 +10,24 @@ import UIKit
 import Combine
 
 class PhrasesLangDetailViewController: UITableViewController {
-    
-    var vm: PhrasesLangViewModel!
-    var item: MLangPhrase!
-    var vmEdit: PhrasesLangDetailViewModel!
-    var itemEdit: MLangPhraseEdit { vmEdit.itemEdit }
 
     @IBOutlet weak var tfID: UITextField!
     @IBOutlet weak var tfPhrase: UITextField!
     @IBOutlet weak var tfTranslation: UITextField!
     @IBOutlet weak var btnDone: UIBarButtonItem!
+    
+    var vm: PhrasesLangViewModel!
+    var item: MLangPhrase!
+    var vmEdit: PhrasesLangDetailViewModel!
+    var itemEdit: MLangPhraseEdit { vmEdit.itemEdit }
+    var subscriptions = Set<AnyCancellable>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        _ = itemEdit.ID ~> tfID.rx.text.orEmpty
-        _ = itemEdit.PHRASE <~> tfPhrase.rx.textInput
-        _ = itemEdit.TRANSLATION <~> tfTranslation.rx.textInput
-        _ = vmEdit.isOKEnabled ~> btnDone.rx.isEnabled
+        itemEdit.$ID ~> (tfID, \.text2) ~ subscriptions
+        itemEdit.$PHRASE <~> tfPhrase.textProperty ~ subscriptions
+        itemEdit.$TRANSLATION <~> tfTranslation.textProperty ~ subscriptions
+        vmEdit.$isOKEnabled ~> (btnDone, \.isEnabled) ~ subscriptions
     }
     
     override func viewDidAppear(_ animated: Bool) {

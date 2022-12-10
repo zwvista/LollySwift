@@ -36,18 +36,18 @@ class PatternsWebPagesDetailViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        _ = itemEdit.ID ~> tfID.rx.text.orEmpty
-        _ = itemEdit.PATTERNID ~> tfPatternID.rx.text.orEmpty
-        _ = itemEdit.PATTERN ~> tfPattern.rx.text.orEmpty
-        _ = itemEdit.SEQNUM <~> tfSeqNum.rx.textInput
-        _ = itemEdit.WEBPAGEID ~> tfWebPageID.rx.text.orEmpty
-        _ = itemEdit.TITLE <~> tfTitle.rx.textInput
-        _ = itemEdit.URL <~> tfURL.rx.textInput
+        itemEdit.$ID ~> (tfID, \.text2) ~ subscriptions
+        itemEdit.$PATTERNID ~> (tfPatternID, \.text2) ~ subscriptions
+        itemEdit.$PATTERN ~> (tfPattern, \.text2) ~ subscriptions
+        itemEdit.$SEQNUM <~> tfSeqNum.textProperty ~ subscriptions
+        itemEdit.$WEBPAGEID ~> (tfWebPageID, \.text2) ~ subscriptions
+        itemEdit.$TITLE <~> tfTitle.textProperty ~ subscriptions
+        itemEdit.$URL <~> tfURL.textProperty ~ subscriptions
         btnNew.isEnabled = vmEdit.isAddWebPage
         btnExisting.isEnabled = vmEdit.isAddWebPage
-        _ = vmEdit.isOKEnabled ~> btnDone.rx.isEnabled
+        vmEdit.$isOKEnabled ~> (btnDone, \.isEnabled) ~ subscriptions
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         // https://stackoverflow.com/questions/7525437/how-to-set-focus-to-a-textfield-in-iphone
@@ -55,16 +55,16 @@ class PatternsWebPagesDetailViewController: UITableViewController {
     }
     
     @IBAction func newWebPage(_ sender: AnyObject) {
-        itemEdit.WEBPAGEID.accept("0")
-        itemEdit.TITLE.accept("")
-        itemEdit.URL.accept("")
+        itemEdit.WEBPAGEID = "0"
+        itemEdit.TITLE = ""
+        itemEdit.URL = ""
     }
 
     @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
         if let controller = segue.source as? WebPageSelectViewController, let item = controller.vmWebPage.selectedWebPage {
-            itemEdit.WEBPAGEID.accept(String(item.ID))
-            itemEdit.TITLE.accept(item.TITLE)
-            itemEdit.URL.accept(item.URL)
+            itemEdit.WEBPAGEID = String(item.ID)
+            itemEdit.TITLE = item.TITLE
+            itemEdit.URL = item.URL
         }
     }
 

@@ -11,34 +11,37 @@ import WebKit
 import DropDown
 
 class SearchViewController: UIViewController, WKNavigationDelegate, UISearchBarDelegate, SettingsViewModelDelegate {
-    @IBOutlet weak var wvDictHolder: UIView!
-    var dictStore: DictStore!
 
+    @IBOutlet weak var wvDictHolder: UIView!
     @IBOutlet weak var sbword: UISearchBar!
     @IBOutlet weak var btnLang: UIButton!
     @IBOutlet weak var btnDict: UIButton!
 
+    var dictStore: DictStore!
     let ddLang = DropDown()
     let ddDictReference = DropDown()
-    
+
     func setup() {
         dictStore = DictStore(settings: vmSettings, wvDict: addWKWebView(webViewHolder: wvDictHolder))
         dictStore.wvDict.navigationDelegate = self
         vmSettings.delegate = self
-        
-        vmSettings.getData().subscribe(onSuccess: {
-            self.ddLang.anchorView = self.btnLang
-            self.ddLang.selectionAction = { (index: Int, item: String) in
+
+        Task {
+            await vmSettings.getData()
+            ddLang.anchorView = btnLang
+            ddLang.selectionAction = { (index: Int, item: String) in
                 guard index != vmSettings.selectedLangIndex else {return}
                 vmSettings.selectedLangIndex = index
             }
-            self.ddDictReference.anchorView = self.btnDict
-            self.ddDictReference.selectionAction = { [unowned self] (index: Int, item: String) in
+            ddDictReference.anchorView = btnDict
+            ddDictReference.selectionAction = { (index: Int, item: String) in
                 guard index != vmSettings.selectedDictReferenceIndex else {return}
                 vmSettings.selectedDictReferenceIndex = index
-                vmSettings.updateDictReference().subscribe() ~ self.rx.disposeBag
+                Task {
+                    await vmSettings.updateDictReference()
+                }
             }
-        }) ~ rx.disposeBag
+        }
     }
 
     override func viewDidLoad() {
@@ -62,7 +65,9 @@ class SearchViewController: UIViewController, WKNavigationDelegate, UISearchBarD
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         sbword.endEditing(true)
         dictStore.word = sbword.text!
-        dictStore.searchDict()
+        Task {
+            await dictStore.searchDict()
+        }
     }
     
     @IBAction func showLangDropDown(_ sender: AnyObject) {
@@ -89,7 +94,9 @@ class SearchViewController: UIViewController, WKNavigationDelegate, UISearchBarD
         btnDict.setTitle(vmSettings.selectedDictReference.DICTNAME, for: .normal)
         ddDictReference.selectIndex(vmSettings.selectedDictReferenceIndex)
         dictStore.dict = vmSettings.selectedDictReference
-        dictStore.searchDict()
+        Task {
+            await dictStore.searchDict()
+        }
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {

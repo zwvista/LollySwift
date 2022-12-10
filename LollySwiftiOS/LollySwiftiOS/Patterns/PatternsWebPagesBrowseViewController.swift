@@ -34,16 +34,17 @@ class PatternsWebPagesBrowseViewController: UIViewController, WKUIDelegate, WKNa
         swipeGesture2.delegate = self
         wvWebPage.addGestureRecognizer(swipeGesture2)
 
-        vm.getWebPages().subscribe(onSuccess: {
-            self.ddWebPage.anchorView = self.btnWebPage
-            self.ddWebPage.dataSource = self.vm.arrWebPages.map(\.TITLE)
-            self.ddWebPage.selectRow(self.vm.currentWebPageIndex)
-            self.ddWebPage.selectionAction = { [unowned self] (index: Int, item: String) in
+        Task {
+            await vm.getWebPages()
+            ddWebPage.anchorView = btnWebPage
+            ddWebPage.dataSource = vm.arrWebPages.map(\.TITLE)
+            ddWebPage.selectRow(vm.currentWebPageIndex)
+            ddWebPage.selectionAction = { [unowned self] (index: Int, item: String) in
                 self.vm.currentWebPageIndex = index
                 self.currentWebPageChanged()
             }
-            self.currentWebPageChanged()
-        }) ~ rx.disposeBag
+            currentWebPageChanged()
+        }
     }
     
     private func currentWebPageChanged() {
@@ -84,8 +85,9 @@ class PatternsWebPagesBrowseViewController: UIViewController, WKUIDelegate, WKNa
     @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
         guard segue.identifier == "Done" else {return}
         if let controller = segue.source as? PatternsWebPagesDetailViewController {
-            controller.vmEdit.onOK().subscribe(onSuccess: {
-            }) ~ rx.disposeBag
+            Task {
+                await controller.vmEdit.onOK()
+            }
         }
     }
 

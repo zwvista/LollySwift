@@ -42,10 +42,12 @@ class WordsUnitViewController: WordsBaseViewController {
     
     private func reindex() {
         tableView.beginUpdates()
-        vm.reindex {
-            self.tableView.reloadRows(at: [IndexPath(row: $0, section: 0)], with: .fade)
+        Task {
+            await vm.reindex {
+                self.tableView.reloadRows(at: [IndexPath(row: $0, section: 0)], with: .fade)
+            }
+            tableView.endUpdates()
         }
-        tableView.endUpdates()
     }
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
@@ -58,7 +60,9 @@ class WordsUnitViewController: WordsBaseViewController {
         let item = vm.arrWords[i]
         func delete() {
             yesNoAction(title: "delete", message: "Do you really want to delete the word \"\(item.WORD)\"?", yesHandler: { (action) in
-                WordsUnitViewModel.delete(item: item).subscribe() ~ self.rx.disposeBag
+                Task {
+                    await WordsUnitViewModel.delete(item: item)
+                }
                 self.vm.arrWords.remove(at: i)
                 tableView.deleteRows(at: [indexPath], with: .fade)
                 self.reindex()
@@ -80,15 +84,17 @@ class WordsUnitViewController: WordsBaseViewController {
             alertController.addAction(editAction2)
             if vmSettings.hasDictNote {
                 let getNoteAction = UIAlertAction(title: "Retrieve Note", style: .default) { _ in
-                    self.vm.getNote(index: indexPath.row).subscribe(onSuccess: {
+                    Task {
+                        await self.vm.getNote(index: indexPath.row)
                         self.tableView.reloadRows(at: [indexPath], with: .fade)
-                    }) ~ self.rx.disposeBag
+                    }
                 }
                 alertController.addAction(getNoteAction)
                 let clearNoteAction = UIAlertAction(title: "Clear Note", style: .default) { _ in
-                    self.vm.clearNote(index: indexPath.row).subscribe(onSuccess: {
+                    Task {
+                        await self.vm.clearNote(index: indexPath.row)
                         self.tableView.reloadRows(at: [indexPath], with: .fade)
-                    }) ~ self.rx.disposeBag
+                    }
                 }
                 alertController.addAction(clearNoteAction)
             }
@@ -140,13 +146,15 @@ class WordsUnitViewController: WordsBaseViewController {
         
         func startTimer(ifEmpty: Bool) {
             self.view.showBlurLoader()
-            vm.getNotes(ifEmpty: ifEmpty, oneComplete: { _ in }, allComplete: {
-                // https://stackoverflow.com/questions/28302019/getting-a-this-application-is-modifying-the-autolayout-engine-from-a-background
-                DispatchQueue.main.async {
-                    self.view.removeBlurLoader()
-                    self.tableView.reloadData()
-                }
-            })
+            Task {
+                await vm.getNotes(ifEmpty: ifEmpty, oneComplete: { _ in }, allComplete: {
+                    // https://stackoverflow.com/questions/28302019/getting-a-this-application-is-modifying-the-autolayout-engine-from-a-background
+                    DispatchQueue.main.async {
+                        self.view.removeBlurLoader()
+                        self.tableView.reloadData()
+                    }
+                })
+            }
         }
 
         if vmSettings.hasDictNote {
@@ -159,15 +167,19 @@ class WordsUnitViewController: WordsBaseViewController {
             }
             alertController.addAction(getNotesEmptyAction)
             let clearNotesAllAction = UIAlertAction(title: "Clear All Notes", style: .default) { _ in
-                self.vm.clearNotes(ifEmpty: false) { i in
-                    self.tableView.reloadRows(at: [IndexPath(row: i, section: 0)], with: .fade)
-                }.subscribe() ~ self.rx.disposeBag
+                Task {
+                    await self.vm.clearNotes(ifEmpty: false) { i in
+                        self.tableView.reloadRows(at: [IndexPath(row: i, section: 0)], with: .fade)
+                    }
+                }
             }
             alertController.addAction(clearNotesAllAction)
             let clearNotesEmptyAction = UIAlertAction(title: "Clear Notes If Empty", style: .default) { _ in
-                self.vm.clearNotes(ifEmpty: true) { i in
-                    self.tableView.reloadRows(at: [IndexPath(row: i, section: 0)], with: .fade)
-                }.subscribe() ~ self.rx.disposeBag
+                Task {
+                    await self.vm.clearNotes(ifEmpty: true) { i in
+                        self.tableView.reloadRows(at: [IndexPath(row: i, section: 0)], with: .fade)
+                    }
+                }
             }
             alertController.addAction(clearNotesEmptyAction)
         }
@@ -183,15 +195,18 @@ class WordsUnitViewController: WordsBaseViewController {
     @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
         guard segue.identifier == "Done" else {return}
         if let controller = segue.source as? WordsUnitDetailViewController {
-            controller.vmEdit.onOK().subscribe(onSuccess: {
+            Task {
+                await controller.vmEdit.onOK()
                 self.tableView.reloadData()
                 if controller.vmEdit.isAdd {
                     self.performSegue(withIdentifier: "add", sender: self)
                 }
-            }) ~ rx.disposeBag
+            }
         } else if let controller = segue.source as? WordsUnitBatchEditViewController {
-            controller.onDone()
-            tableView.reloadData()
+            Task {
+                await controller.onDone()
+                tableView.reloadData()
+            }
         }
     }
 }

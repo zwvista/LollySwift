@@ -40,13 +40,13 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         refresh(refreshControl)
         vm.$textFilter <~> sbTextFilter.searchTextField.textProperty ~ subscriptions
-        vm.$scopeFilter ~> btnScopeFilter.rx.title(for: .normal)
-        vm.textFilter.subscribe(onNext: { [unowned self] _ in
+        vm.$scopeFilter ~> (btnScopeFilter, \.titleNormal) ~ subscriptions
+        vm.$textFilter.sink { [unowned self] _ in
             self.applyFilters()
-        }) ~ rx.disposeBag
-        vm.scopeFilter.subscribe(onNext: { [unowned self] _ in
+        } ~ subscriptions
+        vm.$scopeFilter.sink { [unowned self] _ in
             self.applyFilters()
-        }) ~ rx.disposeBag
+        } ~ subscriptions
     }
     
     @objc func refresh(_ sender: UIRefreshControl) {
@@ -84,7 +84,9 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
         let item = vm.arrPatterns[i]
         func delete() {
             yesNoAction(title: "delete", message: "Do you really want to delete the pattern \"\(item.PATTERN)\"?", yesHandler: { (action) in
-                PatternsViewModel.delete(item.ID).subscribe() ~ self.rx.disposeBag
+                Task {
+                    await PatternsViewModel.delete(item.ID)
+                }
                 self.vm.arrPatterns.remove(at: i)
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }, noHandler: { (action) in
@@ -103,9 +105,9 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
             alertController.addAction(deleteAction2)
             let editAction2 = UIAlertAction(title: "Edit", style: .default) { _ in edit() }
             alertController.addAction(editAction2)
-            let browseWebPagesAction = UIAlertAction(title: "Browse Web Pages", style: .default) { _ in performSegue(withIdentifier: "browse pages", sender: item) }
+            let browseWebPagesAction = UIAlertAction(title: "Browse Web Pages", style: .default) { _ in self.performSegue(withIdentifier: "browse pages", sender: item) }
             alertController.addAction(browseWebPagesAction)
-            let editWebPagesAction = UIAlertAction(title: "Edit Web Pages", style: .default) { _ in performSegue(withIdentifier: "edit pages", sender: item) }
+            let editWebPagesAction = UIAlertAction(title: "Edit Web Pages", style: .default) { _ in self.performSegue(withIdentifier: "edit pages", sender: item) }
             alertController.addAction(editWebPagesAction)
             let copyPatternAction = UIAlertAction(title: "Copy Pattern", style: .default) { _ in iOSApi.copyText(item.PATTERN) }
             alertController.addAction(copyPatternAction)
@@ -143,12 +145,13 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
     @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
         guard segue.identifier == "Done" else {return}
         if let controller = segue.source as? PatternsDetailViewController {
-            controller.vmEdit.onOK().subscribe(onSuccess: {
+            Task {
+                await controller.vmEdit.onOK()
                 self.tableView.reloadData()
                 if controller.vmEdit.isAdd {
                     self.performSegue(withIdentifier: "add", sender: self)
                 }
-            }) ~ rx.disposeBag
+            }
         }
     }
 

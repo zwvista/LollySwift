@@ -7,13 +7,9 @@
 //
 
 import UIKit
+import Combine
 
 class WordsLangDetailViewController: UITableViewController {
-    
-    var vm: WordsLangViewModel!
-    var item: MLangWord!
-    var vmEdit: WordsLangDetailViewModel!
-    var itemEdit: MLangWordEdit { vmEdit.itemEdit }
 
     @IBOutlet weak var tfID: UITextField!
     @IBOutlet weak var tfWord: UITextField!
@@ -21,18 +17,24 @@ class WordsLangDetailViewController: UITableViewController {
     @IBOutlet weak var tfFamiID: UITextField!
     @IBOutlet weak var tfAccuracy: UITextField!
     @IBOutlet weak var btnDone: UIBarButtonItem!
+    
+    var vm: WordsLangViewModel!
+    var item: MLangWord!
+    var vmEdit: WordsLangDetailViewModel!
+    var itemEdit: MLangWordEdit { vmEdit.itemEdit }
+    var subscriptions = Set<AnyCancellable>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         vmEdit = WordsLangDetailViewModel(vm: vm, item: item) {
             self.tableView.reloadData()
         }
-        _ = itemEdit.ID ~> tfID.rx.text.orEmpty
-        _ = itemEdit.WORD <~> tfWord.rx.textInput
-        _ = itemEdit.NOTE <~> tfNote.rx.textInput
-        _ = itemEdit.FAMIID ~> tfFamiID.rx.text.orEmpty
-        _ = itemEdit.ACCURACY ~> tfAccuracy.rx.text.orEmpty
-        _ = vmEdit.isOKEnabled ~> btnDone.rx.isEnabled
+        itemEdit.$ID ~> (tfID, \.text2) ~ subscriptions
+        itemEdit.$WORD <~> tfWord.textProperty ~ subscriptions
+        itemEdit.$NOTE <~> tfNote.textProperty ~ subscriptions
+        itemEdit.$FAMIID ~> (tfFamiID, \.text2) ~ subscriptions
+        itemEdit.$ACCURACY ~> (tfAccuracy, \.text2) ~ subscriptions
+        vmEdit.$isOKEnabled ~> (btnDone, \.isEnabled) ~ subscriptions
     }
     
     override func viewDidAppear(_ animated: Bool) {

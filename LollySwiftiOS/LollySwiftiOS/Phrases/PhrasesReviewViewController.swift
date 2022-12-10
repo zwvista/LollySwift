@@ -11,7 +11,6 @@ import DropDown
 import Combine
 
 class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
-    var vm: PhrasesReviewViewModel!
     
     @IBOutlet weak var lblIndex: UILabel!
     @IBOutlet weak var lblCorrect: UILabel!
@@ -29,44 +28,45 @@ class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var svOnRepeat: UIStackView!
     @IBOutlet weak var svMoveForward: UIStackView!
 
+    var vm: PhrasesReviewViewModel!
     var isSpeaking = false
-    
     let ddReviewMode = DropDown()
+    var subscriptions = Set<AnyCancellable>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         vm = PhrasesReviewViewModel(settings: vmSettings, needCopy: false) { [unowned self] in
             self.tfPhraseInput.becomeFirstResponder()
-            if self.vm.hasCurrent && self.vm.isSpeaking.value {
+            if self.vm.hasCurrent && self.vm.isSpeaking {
                 AppDelegate.speak(string: self.vm.currentPhrase)
             }
         }
         
-        _ = vm.indexString ~> lblIndex.rx.text
-        _ = vm.indexHidden ~> lblIndex.rx.isHidden
-        _ = vm.correctHidden ~> lblCorrect.rx.isHidden
-        _ = vm.incorrectHidden ~> lblIncorrect.rx.isHidden
-        _ = vm.checkNextEnabled ~> btnCheckNext.rx.isEnabled
-        _ = vm.checkNextTitle ~> btnCheckNext.rx.title(for: .normal)
-        _ = vm.checkPrevEnabled ~> btnCheckPrev.rx.isEnabled
-        _ = vm.checkPrevTitle ~> btnCheckPrev.rx.title(for: .normal)
-        _ = vm.checkPrevHidden ~> btnCheckPrev.rx.isHidden
-        _ = vm.phraseTargetString ~> lblPhraseTarget.rx.text
-        _ = vm.phraseTargetHidden ~> lblPhraseTarget.rx.isHidden
-        _ = vm.translationString ~> lblTranslation.rx.text
-        _ = vm.phraseInputString <~> tfPhraseInput.rx.textInput
-        _ = vm.isSpeaking ~> swSpeak.rx.isOn
-        _ = vm.onRepeat <~> swOnRepeat.rx.isOn
-        _ = vm.moveForward <~> swMoveForward.rx.isOn
-        _ = vm.onRepeatHidden ~> svOnRepeat.rx.isHidden
-        _ = vm.moveForwardHidden ~> svMoveForward.rx.isHidden
+        vm.$indexString ~> (lblIndex, \.text!) ~ subscriptions
+        vm.$indexHidden ~> (lblIndex, \.isHidden) ~ subscriptions
+        vm.$correctHidden ~> (lblCorrect, \.isHidden) ~ subscriptions
+        vm.$incorrectHidden ~> (lblIncorrect, \.isHidden) ~ subscriptions
+        vm.$checkNextEnabled ~> (btnCheckNext, \.isEnabled) ~ subscriptions
+        vm.$checkNextTitle ~> (btnCheckNext, \.titleNormal) ~ subscriptions
+        vm.$checkPrevEnabled ~> (btnCheckPrev, \.isEnabled) ~ subscriptions
+        vm.$checkPrevTitle ~> (btnCheckPrev, \.titleNormal) ~ subscriptions
+        vm.$checkPrevHidden ~> (btnCheckPrev, \.isHidden) ~ subscriptions
+        vm.$phraseTargetString ~> (lblPhraseTarget, \.text!) ~ subscriptions
+        vm.$phraseTargetHidden ~> (lblPhraseTarget, \.isHidden) ~ subscriptions
+        vm.$translationString ~> (lblTranslation, \.text!) ~ subscriptions
+        vm.$phraseInputString <~> tfPhraseInput.textProperty ~ subscriptions
+        vm.$isSpeaking <~> swSpeak.isOnProperty ~ subscriptions
+        vm.$onRepeat <~> swOnRepeat.isOnProperty ~ subscriptions
+        vm.$moveForward <~> swMoveForward.isOnProperty ~ subscriptions
+        vm.$onRepeatHidden ~> (svOnRepeat, \.isHidden) ~ subscriptions
+        vm.$moveForwardHidden ~> (svMoveForward, \.isHidden) ~ subscriptions
 
         newTest(self)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        vm.subscriptionTimer?.dispose()
+        vm.subscriptionTimer?.cancel()
     }
 
     @IBAction func newTest(_ sender: AnyObject) {
@@ -108,7 +108,9 @@ class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
         guard segue.identifier == "Done" else {return}
         if let controller = segue.source as? ReviewOptionsViewController {
             controller.vm.onOK()
-            vm.newTest()
+            Task {
+                await vm.newTest()
+            }
         }
     }
 
