@@ -51,4 +51,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+@MainActor
 let vmSettings = SettingsViewModel()

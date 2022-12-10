@@ -8,6 +8,7 @@
 
 import Foundation
 
+@MainActor
 class WordsDictViewModel: NSObject {
     var vmSettings: SettingsViewModel
     var arrWords = [String]()

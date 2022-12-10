@@ -11,6 +11,7 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
+    // https://stackoverflow.com/questions/70748073/actor-isolated-property-cannot-be-passed-inout-to-async-function-call
     @MainActor
     private(set) static var theSettingsViewModel = SettingsViewModel()
     let synth = NSSpeechSynthesizer()

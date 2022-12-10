@@ -21,6 +21,7 @@ class LollySwiftiOSTests: XCTestCase {
         super.tearDown()
     }
     
+    @MainActor
     func testExample() {
         let vm = SettingsViewModel()
         Task {
