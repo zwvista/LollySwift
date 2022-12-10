@@ -7,19 +7,22 @@
 //
 
 import Cocoa
+import Combine
 
 class SelectDictsViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 
     @IBOutlet weak var tvAvailable: NSTableView!
     @IBOutlet weak var tvSelected: NSTableView!
+    @IBOutlet weak var btnOK: NSButton!
     @IBOutlet weak var btnAdd: NSButton!
     @IBOutlet weak var btnRemove: NSButton!
     @IBOutlet weak var btnRemoveAll: NSButton!
-    
+
     var vm: SettingsViewModel { AppDelegate.theSettingsViewModel }
     var dictsAvailable: [MDictionary]!
     var dictsSelected: [MDictionary]!
     var complete: (() -> Void)?
+    var subscriptions = Set<AnyCancellable>()
 
     // https://developer.apple.com/videos/play/wwdc2011/120/
     // https://stackoverflow.com/questions/2121907/drag-drop-reorder-rows-on-nstableview
@@ -30,14 +33,46 @@ class SelectDictsViewController: NSViewController, NSTableViewDataSource, NSTabl
         tvSelected.registerForDraggedTypes([tableRowDragType])
         dictsSelected = vm.selectedDictsReference
         updateDictsAvailable()
+
+        func updateDictsAvailable() {
+            dictsAvailable = vm.arrDictsReference.filter { d in !dictsSelected.contains { $0.DICTNAME == d.DICTNAME } }
+        }
+        func updateDictsAvailableAndUI() {
+            updateDictsAvailable()
+            tvAvailable.reloadData()
+            tvSelected.reloadData()
+        }
+
+        btnAdd.tapPublisher.sink { [unowned self] in
+            for i in tvAvailable.selectedRowIndexes {
+                dictsSelected.append(dictsAvailable[i])
+            }
+            updateDictsAvailableAndUI()
+        } ~ subscriptions
+        btnRemove.tapPublisher.sink { [unowned self] in
+            for i in tvSelected.selectedRowIndexes.reversed() {
+                dictsSelected.remove(at: i)
+            }
+            updateDictsAvailableAndUI()
+        } ~ subscriptions
+        btnRemoveAll.tapPublisher.sink { [unowned self] in
+            dictsSelected.removeAll()
+            updateDictsAvailableAndUI()
+        } ~ subscriptions
+
+        btnOK.tapPublisher.sink { [unowned self] in
+            vm.selectedDictsReferenceIndexes = dictsSelected.compactMap { o in vm.arrDictsReference.firstIndex { $0.DICTID == o.DICTID } }
+            Task {
+                await vm.updateDictsReference()
+                self.complete?()
+                dismiss(btnOK)
+            }
+        } ~ subscriptions
     }
+
     override func viewDidAppear() {
         super.viewDidAppear()
         view.window?.title = "Select Dictionaries"
-    }
-    
-    private func updateDictsAvailable() {
-        dictsAvailable = vm.arrDictsReference.filter { d in !dictsSelected.contains { $0.DICTNAME == d.DICTNAME } }
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
@@ -97,32 +132,6 @@ class SelectDictsViewController: NSViewController, NSTableViewDataSource, NSTabl
         tableView.endUpdates()
 
         return true
-    }
-    
-    @IBAction func addRemoveItems(_ sender: AnyObject) {
-        if sender === btnAdd {
-            for i in tvAvailable.selectedRowIndexes {
-                dictsSelected.append(dictsAvailable[i])
-            }
-        } else if sender === btnRemove {
-            for i in tvSelected.selectedRowIndexes.reversed() {
-                dictsSelected.remove(at: i)
-            }
-        } else {
-            dictsSelected.removeAll()
-        }
-        updateDictsAvailable()
-        tvAvailable.reloadData()
-        tvSelected.reloadData()
-    }
-
-    @IBAction func okClicked(_ sender: AnyObject) {
-        vm.selectedDictsReferenceIndexes = dictsSelected.compactMap { o in vm.arrDictsReference.firstIndex { $0.DICTID == o.DICTID } }
-        Task {
-            await vm.updateDictsReference()
-            self.complete?()
-            dismiss(sender)
-        }
     }
     
     deinit {
