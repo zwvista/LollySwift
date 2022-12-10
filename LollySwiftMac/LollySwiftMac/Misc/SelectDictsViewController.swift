@@ -14,6 +14,7 @@ class SelectDictsViewController: NSViewController, NSTableViewDataSource, NSTabl
 
     @IBOutlet weak var tvAvailable: NSTableView!
     @IBOutlet weak var tvSelected: NSTableView!
+    @IBOutlet weak var btnOK: NSButton!
     @IBOutlet weak var btnAdd: NSButton!
     @IBOutlet weak var btnRemove: NSButton!
     @IBOutlet weak var btnRemoveAll: NSButton!
@@ -32,14 +33,45 @@ class SelectDictsViewController: NSViewController, NSTableViewDataSource, NSTabl
         tvSelected.registerForDraggedTypes([tableRowDragType])
         dictsSelected = vm.selectedDictsReference
         updateDictsAvailable()
+
+        func updateDictsAvailable() {
+            dictsAvailable = vm.arrDictsReference.filter { d in !dictsSelected.contains { $0.DICTNAME == d.DICTNAME } }
+        }
+        func updateDictsAvailableAndUI() {
+            updateDictsAvailable()
+            tvAvailable.reloadData()
+            tvSelected.reloadData()
+        }
+
+        btnAdd.rx.tap.subscribe { [unowned self] _ in
+            for i in tvAvailable.selectedRowIndexes {
+                dictsSelected.append(dictsAvailable[i])
+            }
+            updateDictsAvailableAndUI()
+        } ~ rx.disposeBag
+        btnRemove.rx.tap.subscribe { [unowned self] _ in
+            for i in tvSelected.selectedRowIndexes.reversed() {
+                dictsSelected.remove(at: i)
+            }
+            updateDictsAvailableAndUI()
+        } ~ rx.disposeBag
+        btnRemoveAll.rx.tap.subscribe { [unowned self] _ in
+            dictsSelected.removeAll()
+            updateDictsAvailableAndUI()
+        } ~ rx.disposeBag
+
+        btnOK.rx.tap.flatMap { [unowned self] in
+            vm.selectedDictsReferenceIndexes = dictsSelected.compactMap { o in vm.arrDictsReference.firstIndex { $0.DICTID == o.DICTID } }
+            return vm.updateDictsReference()
+        }.subscribe { [unowned self] _ in
+            self.complete?()
+            dismiss(btnOK)
+        } ~ rx.disposeBag
     }
+
     override func viewDidAppear() {
         super.viewDidAppear()
         view.window?.title = "Select Dictionaries"
-    }
-    
-    private func updateDictsAvailable() {
-        dictsAvailable = vm.arrDictsReference.filter { d in !dictsSelected.contains { $0.DICTNAME == d.DICTNAME } }
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
@@ -99,31 +131,6 @@ class SelectDictsViewController: NSViewController, NSTableViewDataSource, NSTabl
         tableView.endUpdates()
 
         return true
-    }
-    
-    @IBAction func addRemoveItems(_ sender: AnyObject) {
-        if sender === btnAdd {
-            for i in tvAvailable.selectedRowIndexes {
-                dictsSelected.append(dictsAvailable[i])
-            }
-        } else if sender === btnRemove {
-            for i in tvSelected.selectedRowIndexes.reversed() {
-                dictsSelected.remove(at: i)
-            }
-        } else {
-            dictsSelected.removeAll()
-        }
-        updateDictsAvailable()
-        tvAvailable.reloadData()
-        tvSelected.reloadData()
-    }
-
-    @IBAction func okClicked(_ sender: AnyObject) {
-        vm.selectedDictsReferenceIndexes = dictsSelected.compactMap { o in vm.arrDictsReference.firstIndex { $0.DICTID == o.DICTID } }
-        vm.updateDictsReference().subscribe { _ in
-            self.complete?()
-        } ~ rx.disposeBag
-        dismiss(sender)
     }
     
     deinit {
