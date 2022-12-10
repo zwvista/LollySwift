@@ -66,7 +66,7 @@ class CommonApi {
             replacement = String(replacement.dropFirst("<extract>".count))
             let ms = s.matches(of: regex)
             var i = 1
-            s = ms.reduce("", { (acc, m) -> String in
+            s = ms.reduce("", { (acc, m) in
                 let s2 = m.0
                 print("[TRANSFORM\(i)]\(s2)[/TRANSFORM\(i)]")
                 i += 1

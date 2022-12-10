@@ -42,7 +42,7 @@ class MWordFami: NSObject, Codable {
     }
     
     static func update(wordid: Int, isCorrect: Bool) -> Single<MWordFami> {
-        return getDataByWord(wordid: wordid).flatMap { arr -> Single<MWordFami> in
+        return getDataByWord(wordid: wordid).flatMap { arr in
             let item = MWordFami()
             item.USERID = globalUser.userid
             item.WORDID = wordid

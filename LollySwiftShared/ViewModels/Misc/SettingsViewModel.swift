@@ -239,8 +239,8 @@ class SettingsViewModel: NSObject {
             return self.updatePartTo()
         }
 
-        toType_.distinctUntilChanged().flatMap { n -> Single<()> in
-            return self.updateToType()
+        toType_.distinctUntilChanged().flatMap { n in
+            self.updateToType()
         }.subscribe() ~ rx.disposeBag
     }
 
