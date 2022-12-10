@@ -118,9 +118,6 @@ class BlogViewModel: NSObject {
     func getPatternUrl(patternNo: String) -> String {
         "http://viethuong.web.fc2.com/MONDAI/\(patternNo).html"
     }
-    func getPatternMarkDown(patternText: String) -> String {
-        "* [\(patternText)　文法](https://www.google.com/search?q=\(patternText)　文法)\n* [\(patternText)　句型](https://www.google.com/search?q=\(patternText)　句型)"
-    }
     
     func addNotes(text: String, complete: @escaping (String) -> Void) async {
         func f(_ s: String) -> String {
