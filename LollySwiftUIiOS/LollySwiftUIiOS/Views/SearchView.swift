@@ -18,12 +18,13 @@ struct SearchView: View {
         VStack {
             SearchBar(text: $dictStore.word, placeholder: "Word") {_ in dictStore.searchDict() }
             HStack {
-                Picker(selection: $vm.selectedLangIndex, label: Text( vm.selectedLang.LANGNAME.defaultIfEmpty("Language"))) {
+                Picker("", selection: $vm.selectedLangIndex) {
                     ForEach(0..<vm.arrLanguages.count, id: \.self) {
                         Text(vm.arrLanguages[$0].LANGNAME)
                     }
                 }
-                .padding().background(Color.green)
+                .background(Color.pink)
+                .tint(.white)
                 .pickerStyle(MenuPickerStyle())
                 .onChange(of: vm.selectedLangIndex) {
                     print("selectedLangIndex=\($0)")
@@ -31,12 +32,13 @@ struct SearchView: View {
                         await vm.updateLang()
                     }
                 }
-                Picker(selection: $vm.selectedDictReferenceIndex, label: Text(vm.selectedDictReference.DICTNAME.defaultIfEmpty("Dictionary"))) {
+                Picker("", selection: $vm.selectedDictReferenceIndex) {
                     ForEach(0..<vm.arrDictsReference.count, id: \.self) {
                         Text(vm.arrDictsReference[$0].DICTNAME)
                     }
                 }
-                .padding().background(Color.orange)
+                .background(Color.orange)
+                .tint(.white)
                 .pickerStyle(MenuPickerStyle())
                 .onChange(of: vm.selectedDictReferenceIndex) {
                     if $0 == -1 {return}
