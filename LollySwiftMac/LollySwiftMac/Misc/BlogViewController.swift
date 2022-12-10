@@ -86,10 +86,6 @@ class BlogViewController: NSViewController, NSMenuItemValidation  {
         let url = vmBlog.getPatternUrl(patternNo: wc.patternNo)
         MacApi.openURL(url)
     }
-    @IBAction func copyPatternMarkDown(_ sender: AnyObject) {
-        let text = vmBlog.getPatternMarkDown(patternText: wc.patternText)
-        MacApi.copyText(text)
-    }
     @IBAction func addNotes(_ sender: AnyObject) {
         vmBlog.addNotes(text: tvMarked.string) {
             self.tvMarked.string = $0
@@ -114,10 +110,8 @@ class BlogViewController: NSViewController, NSMenuItemValidation  {
 class BlogWindowController: NSWindowController, NSWindowDelegate {
     @IBOutlet weak var scPage: NSSegmentedControl!
     @IBOutlet weak var tfPatternNo: NSTextField!
-    @IBOutlet weak var tfPatternText: NSTextField!
     
     @objc var patternNo = "001"
-    @objc var patternText = ""
 
     override func windowDidLoad() {
         super.windowDidLoad()
@@ -125,7 +119,6 @@ class BlogWindowController: NSWindowController, NSWindowDelegate {
     
     func windowWillClose(_ notification: Notification) {
         tfPatternNo.unbindAll()
-        tfPatternText.unbindAll()
     }
     
     deinit {

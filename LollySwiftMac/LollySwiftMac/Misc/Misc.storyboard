@@ -196,30 +196,6 @@
                                         <action selector="openPattern:" target="vaE-wK-YYd" id="aZa-uq-6Dm"/>
                                     </connections>
                                 </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="431E2A0E-F4CE-4A5F-B316-60FB25A76C58" label="Pattern Text" paletteLabel="Pattern Text" tag="-1" sizingBehavior="auto" id="9KA-1d-XSR">
-                                    <nil key="toolTip"/>
-                                    <textField key="view" verticalHuggingPriority="750" tag="-1" id="r3b-4B-iGP">
-                                        <rect key="frame" x="0.0" y="14" width="119" height="21"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="Nun-Gx-4Ar">
-                                            <font key="font" usesAppearanceFont="YES"/>
-                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                        </textFieldCell>
-                                        <connections>
-                                            <binding destination="cCU-1Q-LWr" name="value" keyPath="patternText" id="6Tl-az-3Qc">
-                                                <dictionary key="options">
-                                                    <bool key="NSContinuouslyUpdatesValue" value="YES"/>
-                                                </dictionary>
-                                            </binding>
-                                        </connections>
-                                    </textField>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="92FE2A03-F4C7-46FE-BBF4-1BD67BE21961" label="Pattern MD" paletteLabel="Pattern MD" tag="-1" sizingBehavior="auto" id="cwH-9b-MEC">
-                                    <connections>
-                                        <action selector="copyPatternMarkDown:" target="vaE-wK-YYd" id="8yk-Fl-u31"/>
-                                    </connections>
-                                </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="4DE715D9-8F20-499D-A8E6-40FF7E6F9438" label="Add Notes" paletteLabel="Add Notes" tag="-1" sizingBehavior="auto" id="PoU-Ac-WoH">
                                     <connections>
                                         <action selector="addNotes:" target="vaE-wK-YYd" id="Juu-xy-k3d"/>
@@ -237,8 +213,6 @@
                                 <toolbarItem reference="8st-Ae-RAu"/>
                                 <toolbarItem reference="EDL-Iu-W2r"/>
                                 <toolbarItem reference="Ln9-xz-fV3"/>
-                                <toolbarItem reference="9KA-1d-XSR"/>
-                                <toolbarItem reference="cwH-9b-MEC"/>
                                 <toolbarItem reference="PoU-Ac-WoH"/>
                             </defaultToolbarItems>
                         </toolbar>
@@ -249,7 +223,6 @@
                     <connections>
                         <outlet property="scPage" destination="4b5-aV-cyn" id="yFg-JV-cUV"/>
                         <outlet property="tfPatternNo" destination="Lbj-Ka-Wut" id="vOf-X7-ekL"/>
-                        <outlet property="tfPatternText" destination="r3b-4B-iGP" id="SlT-Am-1eg"/>
                         <segue destination="PME-9l-TOe" kind="relationship" relationship="window.shadowedContentViewController" id="gWQ-3V-mE1"/>
                     </connections>
                 </windowController>
