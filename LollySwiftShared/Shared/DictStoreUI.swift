@@ -9,6 +9,7 @@
 import SwiftUI
 import WebKit
 
+@MainActor
 class DictStoreUI: NSObject, ObservableObject {
 
     @Published var dictStatus = DictWebViewStatus.ready

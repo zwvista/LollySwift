@@ -13,66 +13,65 @@ struct SettingsView: View {
         Form {
             Section(header: Text("Language:")) {
                 Picker("", selection: $vm.selectedLangIndex) {
-                    ForEach(0..<vm.arrLanguages.count, id: \.self) {
+                    ForEach(vm.arrLanguages.indices, id: \.self) {
                         Text(vm.arrLanguages[$0].LANGNAME)
-                    }
-                }
-                .onChange(of: vm.selectedLangIndex) {
-                    print("selectedLangIndex=\($0)")
-                    Task {
-                        await vm.updateLang()
                     }
                 }
             }
             Section(header: Text("Voice:")) {
                 Picker("", selection: $vm.selectediOSVoiceIndex) {
-                    ForEach(0..<vm.arriOSVoices.count, id: \.self) {
+                    ForEach(vm.arriOSVoices.indices, id: \.self) {
                         Text(vm.arriOSVoices[$0].VOICENAME)
-                    }
-                }
-                .onChange(of: vm.selectediOSVoiceIndex) {
-                    print("selectediOSVoiceIndex=\($0)")
-                    Task {
-                        await vm.updateiOSVoice()
                     }
                 }
             }
             Section(header: Text("Dictionary(Reference):")) {
                 Picker("", selection: $vm.selectedDictReferenceIndex) {
-                    ForEach(0..<vm.arrDictsReference.count, id: \.self) {
+                    ForEach(vm.arrDictsReference.indices, id: \.self) {
                         Text(vm.arrDictsReference[$0].DICTNAME)
-                    }
-                }
-                .onChange(of: vm.selectedDictReferenceIndex) {
-                    print("selectedDictReferenceIndex=\($0)")
-                    Task {
-                        await vm.updateDictReference()
                     }
                 }
             }
             Section(header: Text("Dictionary(Note):")) {
                 Picker("", selection: $vm.selectedDictNoteIndex) {
-                    ForEach(0..<vm.arrDictsNote.count, id: \.self) {
+                    ForEach(vm.arrDictsNote.indices, id: \.self) {
                         Text(vm.arrDictsNote[$0].DICTNAME)
-                    }
-                }
-                .onChange(of: vm.selectedDictNoteIndex) {
-                    print("selectedDictNoteIndex=\($0)")
-                    Task {
-                        await vm.updateDictNote()
                     }
                 }
             }
             Section(header: Text("Dictionary(Translation):")) {
                 Picker("", selection: $vm.selectedDictTranslationIndex) {
-                    ForEach(0..<vm.arrDictsTranslation.count, id: \.self) {
+                    ForEach(vm.arrDictsTranslation.indices, id: \.self) {
                         Text(vm.arrDictsTranslation[$0].DICTNAME)
                     }
                 }
-                .onChange(of: vm.selectedDictTranslationIndex) {
-                    print("selectedDictTranslationIndex=\($0)")
-                    Task {
-                        await vm.updateDictTranslation()
+            }
+            Section(header: Text("Textbook:")) {
+                Picker("", selection: $vm.selectedTextbookIndex) {
+                    ForEach(vm.arrTextbooks.indices, id: \.self) {
+                        Text(vm.arrTextbooks[$0].TEXTBOOKNAME)
+                    }
+                }
+            }
+            Section(header: Text("Units & Parts:")) {
+                Picker("Unit", selection: $vm.selectedUnitFromIndex) {
+                    ForEach(vm.arrUnits.indices, id: \.self) {
+                        Text(vm.arrUnits[$0].label)
+                    }
+                }
+                Picker("Part", selection: $vm.selectedPartFromIndex) {
+                    ForEach(vm.arrParts.indices, id: \.self) {
+                        Text(vm.arrParts[$0].label)
+                    }
+                }
+                Picker("Unit", selection: $vm.selectedUnitToIndex) {
+                    ForEach(vm.arrUnits.indices, id: \.self) {
+                        Text(vm.arrUnits[$0].label)
+                    }
+                }
+                Picker("Part", selection: $vm.selectedPartToIndex) {
+                    ForEach(vm.arrParts.indices, id: \.self) {
+                        Text(vm.arrParts[$0].label)
                     }
                 }
             }
