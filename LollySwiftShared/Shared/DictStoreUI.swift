@@ -29,7 +29,7 @@ class DictStoreUI: NSObject, ObservableObject {
                 let html = await RestApi.getHtml(url: url)
                 print(html)
                 let str = self.dict.htmlString(html, word: self.word)
-                await self.wvDict.loadHTMLString(str, baseURL: nil)
+                self.wvDict.loadHTMLString(str, baseURL: nil)
             }
         } else {
             wvDict.load(URLRequest(url: URL(string: url)!))

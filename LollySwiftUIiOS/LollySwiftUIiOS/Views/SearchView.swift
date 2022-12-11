@@ -12,6 +12,7 @@ struct SearchView: View {
     @ObservedObject var vm = vmSettings
     @ObservedObject var webViewStore = WebViewStore()
     @ObservedObject var dictStore = DictStoreUI()
+    @ObservedObject var listener = SearchViewListener()
     var wvDict: WKWebView { webViewStore.webView }
 
     var body: some View {
@@ -19,33 +20,21 @@ struct SearchView: View {
             SearchBar(text: $dictStore.word, placeholder: "Word") {_ in dictStore.searchDict() }
             HStack {
                 Picker("", selection: $vm.selectedLangIndex) {
-                    ForEach(0..<vm.arrLanguages.count, id: \.self) {
+                    ForEach(vm.arrLanguages.indices, id: \.self) {
                         Text(vm.arrLanguages[$0].LANGNAME)
                     }
                 }
                 .background(Color.pink)
                 .tint(.white)
                 .pickerStyle(MenuPickerStyle())
-                .onChange(of: vm.selectedLangIndex) {
-                    print("selectedLangIndex=\($0)")
-                    Task {
-                        await vm.updateLang()
-                    }
-                }
                 Picker("", selection: $vm.selectedDictReferenceIndex) {
-                    ForEach(0..<vm.arrDictsReference.count, id: \.self) {
+                    ForEach(vm.arrDictsReference.indices, id: \.self) {
                         Text(vm.arrDictsReference[$0].DICTNAME)
                     }
                 }
                 .background(Color.orange)
                 .tint(.white)
                 .pickerStyle(MenuPickerStyle())
-                .onChange(of: vm.selectedDictReferenceIndex) {
-                    if $0 == -1 {return}
-                    print("selectedDictReferenceIndex=\($0)")
-                    dictStore.dict = vm.arrDictsReference[$0]
-                    dictStore.searchDict()
-                }
             }
             WebView(webView: wvDict) {
                 dictStore.onNavigationFinished()
@@ -53,11 +42,23 @@ struct SearchView: View {
         }.onAppear {
             dictStore.vmSettings = vmSettings
             dictStore.wvDict = wvDict
+            vmSettings.delegate = listener
+            listener.dictStore = dictStore
             Task {
                 await vm.getData()
             }
         }
     }
+}
+
+@MainActor
+class SearchViewListener: NSObject, ObservableObject, SettingsViewModelDelegate {
+    weak var dictStore: DictStoreUI!
+    func onUpdateDictReference() {
+        dictStore.dict = vmSettings.selectedDictReference
+        dictStore.searchDict()
+    }
+
 }
 
 struct SearchView_Previews: PreviewProvider {

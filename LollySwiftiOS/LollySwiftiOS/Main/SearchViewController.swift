@@ -37,9 +37,6 @@ class SearchViewController: UIViewController, WKNavigationDelegate, UISearchBarD
             ddDictReference.selectionAction = { (index: Int, item: String) in
                 guard index != vmSettings.selectedDictReferenceIndex else {return}
                 vmSettings.selectedDictReferenceIndex = index
-                Task {
-                    await vmSettings.updateDictReference()
-                }
             }
         }
     }
@@ -65,9 +62,7 @@ class SearchViewController: UIViewController, WKNavigationDelegate, UISearchBarD
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         sbword.endEditing(true)
         dictStore.word = sbword.text!
-        Task {
-            await dictStore.searchDict()
-        }
+        dictStore.searchDict()
     }
     
     @IBAction func showLangDropDown(_ sender: AnyObject) {
@@ -94,9 +89,7 @@ class SearchViewController: UIViewController, WKNavigationDelegate, UISearchBarD
         btnDict.setTitle(vmSettings.selectedDictReference.DICTNAME, for: .normal)
         ddDictReference.selectIndex(vmSettings.selectedDictReferenceIndex)
         dictStore.dict = vmSettings.selectedDictReference
-        Task {
-            await dictStore.searchDict()
-        }
+        dictStore.searchDict()
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {

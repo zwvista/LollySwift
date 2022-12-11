@@ -667,6 +667,7 @@ class SettingsViewModel: NSObject, ObservableObject {
     }
 }
 
+@MainActor
 protocol SettingsViewModelDelegate : NSObjectProtocol {
     func onGetData()
     func onUpdateLang()
