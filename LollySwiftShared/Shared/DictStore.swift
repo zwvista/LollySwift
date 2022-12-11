@@ -20,8 +20,8 @@ class DictStore: NSObject {
     var vmSettings: SettingsViewModel
     weak var wvDict: WKWebView!
     
-    init(settings: SettingsViewModel, wvDict: WKWebView) {
-        vmSettings = settings
+    init(vmSettings: SettingsViewModel, wvDict: WKWebView) {
+        self.vmSettings = vmSettings
         self.wvDict = wvDict
     }
     

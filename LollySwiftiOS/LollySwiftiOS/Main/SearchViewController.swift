@@ -25,7 +25,7 @@ class SearchViewController: UIViewController, WKNavigationDelegate, UISearchBarD
     let ddDictReference = DropDown()
     
     func setup() {
-        dictStore = DictStore(settings: vmSettings, wvDict: addWKWebView(webViewHolder: wvDictHolder))
+        dictStore = DictStore(vmSettings: vmSettings, wvDict: addWKWebView(webViewHolder: wvDictHolder))
         dictStore.wvDict.navigationDelegate = self
         vmSettings.delegate = self
         
