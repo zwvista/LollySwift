@@ -200,41 +200,41 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
 
     func onUpdateiOSVoice() {
         let item = vm.selectediOSVoice
-        guard !item.VOICENAME.isEmpty else { return }
+        let b = item.VOICENAME.isEmpty
         // if the label text is set to an empty string,
         // it will remain to be empty and can no longer be changed. (why ?)
-        voiceCell.textLabel!.text = item.VOICENAME
-        voiceCell.detailTextLabel!.text = item.VOICELANG
+        voiceCell.textLabel!.text = b ? " " : item.VOICENAME
+        voiceCell.detailTextLabel!.text = b ? " " : item.VOICELANG
         ddVoice.selectIndex(vm.selectediOSVoiceIndex)
     }
 
     func onUpdateDictReference() {
         let item = vm.selectedDictReference
-        guard !item.DICTNAME.isEmpty else { return }
+        let b = item.DICTNAME.isEmpty
         // if the label text is set to an empty string,
         // it will remain to be empty and can no longer be changed. (why ?)
-        dictItemCell.textLabel!.text = item.DICTNAME
-        dictItemCell.detailTextLabel!.text = item.URL
+        dictItemCell.textLabel!.text = b ? " " : item.DICTNAME
+        dictItemCell.detailTextLabel!.text = b ? " " : item.URL
         ddDictReference.selectIndex(vm.selectedDictReferenceIndex)
     }
 
     func onUpdateDictNote() {
         let item = vm.selectedDictNote
-        guard !item.DICTNAME.isEmpty else { return }
+        let b = item.DICTNAME.isEmpty
         // if the label text is set to an empty string,
         // it will remain to be empty and can no longer be changed. (why ?)
-        dictNoteCell.textLabel!.text = item.DICTNAME
-        dictNoteCell.detailTextLabel!.text = item.URL
+        dictNoteCell.textLabel!.text = b ? " " : item.DICTNAME
+        dictNoteCell.detailTextLabel!.text = b ? " " : item.URL
         ddDictNote.selectIndex(vm.selectedDictNoteIndex)
     }
 
     func onUpdateDictTranslation() {
         let item = vm.selectedDictTranslation
-        guard !item.DICTNAME.isEmpty else { return }
+        let b = item.DICTNAME.isEmpty
         // if the label text is set to an empty string,
         // it will remain to be empty and can no longer be changed. (why ?)
-        dictTranslationCell.textLabel!.text = item.DICTNAME
-        dictTranslationCell.detailTextLabel!.text = item.URL
+        dictTranslationCell.textLabel!.text = b ? " " : item.DICTNAME
+        dictTranslationCell.detailTextLabel!.text = b ? " " : item.URL
         ddDictTranslation.selectIndex(vm.selectedDictTranslationIndex)
     }
 
