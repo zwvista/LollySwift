@@ -15,16 +15,16 @@ class WordsDictViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
     @IBOutlet weak var wvDictHolder: UIView!
     @IBOutlet weak var btnWord: UIButton!
     @IBOutlet weak var btnDict: UIButton!
-    var dictStore: DictStore!
 
+    var dictStore = DictStore()
     let vm = WordsDictViewModel(settings: vmSettings, needCopy: false) {}
     let ddWord = DropDown(), ddDictReference = DropDown()
-    
     var dictStatus = DictWebViewStatus.ready
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        dictStore = DictStore(settings: vmSettings, wvDict: addWKWebView(webViewHolder: wvDictHolder))
+        dictStore.vmSettings = vmSettings
+        dictStore.wvDict = addWKWebView(webViewHolder: wvDictHolder)
         dictStore.wvDict.navigationDelegate = self
         let swipeGesture1 = UISwipeGestureRecognizer(target: self, action: #selector(swipeLeft(_:)))
         swipeGesture1.direction = .left

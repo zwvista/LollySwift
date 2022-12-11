@@ -10,21 +10,16 @@ import Foundation
 import WebKit
 
 @MainActor
-class DictStore: NSObject {
-    
-    var dictStatus = DictWebViewStatus.ready
-    var word = ""
-    var dict: MDictionary!
+class DictStore: NSObject, ObservableObject {
+
+    @Published var dictStatus = DictWebViewStatus.ready
+    @Published var word = ""
+    @Published var dict: MDictionary!
     var url = ""
-    
-    var vmSettings: SettingsViewModel
+
+    var vmSettings: SettingsViewModel!
     weak var wvDict: WKWebView!
-    
-    init(settings: SettingsViewModel, wvDict: WKWebView) {
-        vmSettings = settings
-        self.wvDict = wvDict
-    }
-    
+
     func searchDict() {
         url = dict.urlString(word: word, arrAutoCorrect: vmSettings.arrAutoCorrect)
         dictStatus = .ready

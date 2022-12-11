@@ -17,12 +17,13 @@ class SearchViewController: UIViewController, WKNavigationDelegate, UISearchBarD
     @IBOutlet weak var btnLang: UIButton!
     @IBOutlet weak var btnDict: UIButton!
 
-    var dictStore: DictStore!
+    var dictStore = DictStore()
     let ddLang = DropDown()
     let ddDictReference = DropDown()
 
     func setup() {
-        dictStore = DictStore(settings: vmSettings, wvDict: addWKWebView(webViewHolder: wvDictHolder))
+        dictStore.vmSettings = vmSettings
+        dictStore.wvDict = addWKWebView(webViewHolder: wvDictHolder)
         dictStore.wvDict.navigationDelegate = self
         vmSettings.delegate = self
 
