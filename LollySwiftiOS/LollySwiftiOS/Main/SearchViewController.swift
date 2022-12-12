@@ -17,7 +17,7 @@ class SearchViewController: UIViewController, WKNavigationDelegate, UISearchBarD
     @IBOutlet weak var btnLang: UIButton!
     @IBOutlet weak var btnDict: UIButton!
 
-    var dictStore = DictStore()
+    let dictStore = DictStore()
     let ddLang = DropDown()
     let ddDictReference = DropDown()
 

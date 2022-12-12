@@ -63,7 +63,7 @@ class RestApi {
         try! await AF.request(url).serializingDecodable(T.self).value
     }
     static func getRecords<T: HasRecords>(_ t: T.Type, url: String) async -> [T.RecordType] {
-        var o: T = await getObject(url: url)
+        let o: T = await getObject(url: url)
         return o.records
     }
     static func update(url: String, body: String) async -> String {

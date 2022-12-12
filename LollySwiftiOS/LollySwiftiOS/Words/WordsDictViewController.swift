@@ -16,7 +16,7 @@ class WordsDictViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
     @IBOutlet weak var btnWord: UIButton!
     @IBOutlet weak var btnDict: UIButton!
 
-    var dictStore = DictStore()
+    let dictStore = DictStore()
     let vm = WordsDictViewModel(settings: vmSettings, needCopy: false) {}
     let ddWord = DropDown(), ddDictReference = DropDown()
     var dictStatus = DictWebViewStatus.ready

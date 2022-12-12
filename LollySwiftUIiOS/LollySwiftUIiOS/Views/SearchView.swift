@@ -11,7 +11,7 @@ import WebKit
 struct SearchView: View {
     @ObservedObject var vm = vmSettings
     @ObservedObject var webViewStore = WebViewStore()
-    @ObservedObject var dictStore = DictStoreUI()
+    @ObservedObject var dictStore = DictStore()
     @ObservedObject var listener = SearchViewListener()
     var wvDict: WKWebView { webViewStore.webView }
 
@@ -53,7 +53,7 @@ struct SearchView: View {
 
 @MainActor
 class SearchViewListener: NSObject, ObservableObject, SettingsViewModelDelegate {
-    weak var dictStore: DictStoreUI!
+    weak var dictStore: DictStore!
     func onUpdateDictReference() {
         dictStore.dict = vmSettings.selectedDictReference
         dictStore.searchDict()
