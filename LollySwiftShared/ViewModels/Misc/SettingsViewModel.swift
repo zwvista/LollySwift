@@ -62,28 +62,24 @@ class SettingsViewModel: NSObject {
         set { setUSValue(info: INFO_USIOSVOICE, value: String(newValue)) }
     }
     private var INFO_USUNITFROM = MUserSettingInfo()
-    @objc
     var USUNITFROM: Int {
         get { Int(getUSValue(info: INFO_USUNITFROM)!)! }
         set { setUSValue(info: INFO_USUNITFROM, value: String(newValue)) }
     }
     var USUNITFROMSTR: String { selectedTextbook.UNITSTR(USUNITFROM) }
     private var INFO_USPARTFROM = MUserSettingInfo()
-    @objc
     var USPARTFROM: Int {
         get { Int(getUSValue(info: INFO_USPARTFROM)!)! }
         set { setUSValue(info: INFO_USPARTFROM, value: String(newValue)) }
     }
     var USPARTFROMSTR: String { selectedTextbook.PARTSTR(USPARTFROM) }
     private var INFO_USUNITTO = MUserSettingInfo()
-    @objc
     var USUNITTO: Int {
         get { Int(getUSValue(info: INFO_USUNITTO)!)! }
         set { setUSValue(info: INFO_USUNITTO, value: String(newValue)) }
     }
     var USUNITTOSTR: String { selectedTextbook.UNITSTR(USUNITTO) }
     private var INFO_USPARTTO = MUserSettingInfo()
-    @objc
     var USPARTTO: Int {
         get { Int(getUSValue(info: INFO_USPARTTO)!)! }
         set { setUSValue(info: INFO_USPARTTO, value: String(newValue)) }
