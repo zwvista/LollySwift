@@ -34,15 +34,15 @@ class GlobalUser {
 let globalUser = GlobalUser()
 
 class CommonApi {
-    
+
     static let urlAPI = "https://zwvista.com/lolly/api.php/records/"
     static let urlSP = "https://zwvista.com/lolly/sp.php/"
     static let cssFolder = "https://zwvista.com/lolly/css/"
-    
+
     static func removeReturns(html: String) -> String {
         html.replacingOccurrences(of: "\r\n", with: "\n")
     }
-    
+
     static func toTransformItems(transform: String) -> [MTransformItem] {
         var arr = transform.components(separatedBy: "\r\n")
         if arr.count % 2 == 1 { arr.removeLast() }
@@ -56,7 +56,7 @@ class CommonApi {
         }.sorted { $0.index < $1.index }
         return items
     }
-    
+
     static func doTransform(text: String, item: MTransformItem) -> String {
         let dic = ["<delete>": "", "\\t": "\t", "\\n": "\n"]
         var s = text
@@ -77,10 +77,22 @@ class CommonApi {
         for (key, value) in dic {
             replacement = replacement.replacingOccurrences(of: key, with: value)
         }
-        s = s.replacing(regex, with: replacement)
+        s = s.replacing(regex, with: replacementToFunc(replacement))
         return s
     }
-    
+
+    static func replacementToFunc(_ replacement: String) -> (Regex<AnyRegexOutput>.Match) -> String {
+        { m in
+            var s = replacement
+            for i in 1..<10 {
+                if s.contains("$\(i)") {
+                    s = s.replacing("$\(i)", with: m[i].substring ?? "")
+                }
+            }
+            return s
+        }
+    }
+
     static func extractText(from html: String, transform: String, template: String, templateHandler: (String, String) -> String) -> String {
         // NSRegularExpression cannot handle "\r"
         var text = removeReturns(html: html)
@@ -95,15 +107,15 @@ class CommonApi {
         } while false
         return text
     }
-    
+
     static func getAccuracy(CORRECT: Int, TOTAL: Int) -> String {
         TOTAL == 0 ? "N/A" : "\(floor(Double(CORRECT) / Double(TOTAL) * 1000) / 10)%"
     }
-    
+
     static func toHtml(text: String) -> String {
         "<html><body>\(text)</body></html>"
     }
-    
+
     static func applyTemplate(template: String, word: String, text: String) -> String {
         template.replacingOccurrences(of: "{0}", with: word)
         .replacingOccurrences(of: "{1}", with: CommonApi.cssFolder)
