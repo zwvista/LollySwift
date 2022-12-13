@@ -350,18 +350,20 @@ class SettingsViewModel: NSObject, ObservableObject {
         arrWebTextbookFilters.insert(MSelectItem(value: 0, label: "All Textbooks"), at: 0)
         selectedMacVoiceIndex = arrMacVoices.firstIndex { $0.ID == self.USMACVOICE } ?? 0
         selectediOSVoiceIndex = arriOSVoices.firstIndex { $0.ID == self.USIOSVOICE } ?? 0
-        guard !initialized else {return}
         await withTaskGroup(of: Void.self) {
-            $0.addTask { await self.updateTextbook() }
-            $0.addTask { await self.updateDictReference() }
-            $0.addTask { await self.updateDictsReference() }
-            $0.addTask { await self.updateDictNote() }
-            $0.addTask { await self.updateDictTranslation() }
-            $0.addTask { await self.updateMacVoice() }
-            $0.addTask { await self.updateiOSVoice() }
+            if (!initialized) {
+                $0.addTask { await self.updateTextbook() }
+                $0.addTask { await self.updateDictReference() }
+                $0.addTask { await self.updateDictsReference() }
+                $0.addTask { await self.updateDictNote() }
+                $0.addTask { await self.updateDictTranslation() }
+                $0.addTask { await self.updateMacVoice() }
+                $0.addTask { await self.updateiOSVoice() }
+            }
+            if dirty {
+                $0.addTask { await MUserSetting.update(info: self.INFO_USLANG, intValue: self.USLANG) }
+            }
         }
-        guard dirty else {return}
-        await MUserSetting.update(info: INFO_USLANG, intValue: USLANG)
     }
 
     func updateTextbook() async {
