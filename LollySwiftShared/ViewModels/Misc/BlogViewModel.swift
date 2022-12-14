@@ -18,16 +18,16 @@ class BlogViewModel: NSObject {
     }
     
     private func html1With(_ s: String) -> String {
-        "<strong><span style=\"color:#0000ff;\">\(s)</span></strong>"
+        "<strong><span style=\"color:#0000ff\">\(s)</span></strong>"
     }
     private func htmlWordWith(_ s: String) -> String { html1With(s + "：") }
     private func htmlBWith(_ s: String) -> String { html1With(s) }
     // tag for explantion 1
     private func htmlE1With(_ s: String) -> String {
-        "<span style=\"color:#006600;\">\(s)</span>"
+        "<span style=\"color:#006600\">\(s)</span>"
     }
     private func html2With(_ s: String) -> String {
-        "<span style=\"color:#cc00cc;\">\(s)</span>"
+        "<span style=\"color:#cc00cc\">\(s)</span>"
     }
     // tag for explantion 2
     private func htmlE2With(_ s: String) -> String { html2With(s) }
@@ -73,7 +73,7 @@ class BlogViewModel: NSObject {
     private let regLine = #/<div>(.*?)</div>/#
     private var regHtmlB: Regex<(Substring, Substring)> { try! Regex(htmlBWith("(.+?)")) }
     private var regHtmlI: Regex<(Substring, Substring)> { try! Regex(htmlIWith("(.+?)")) }
-    private var regHtmlEntry: Regex<(Substring, Substring, Substring, Substring, Substring)> { try!  Regex("(<li>|<br>)\(htmlWordWith("(.*?)"))(?:\(htmlE1With("(.*?)")))?(?:\(htmlE2With("(.*?)")))?(?:</li>)?") }
+    private var regHtmlEntry: Regex<(Substring, Substring, Substring, Optional<Substring>, Optional<Substring>)> { try!  Regex("(<li>|<br>)\(htmlWordWith("(.*?)"))(?:\(htmlE1With("(.*?)")))?(?:\(htmlE2With("(.*?)")))?(?:</li>)?") }
     func htmlToMarked(text: String) -> String {
         var arr = text.split(separator: "\n").map { String($0) }
         var i = 0
@@ -90,7 +90,7 @@ class BlogViewModel: NSObject {
                 s = s.replacing(regHtmlI) { m in "<I>\(m.1)</I>" }
                 arr[i] = s
             } else if let m = s.firstMatch(of: regHtmlEntry) {
-                let (s1, s2, s3, s4) = (String(m.1), String(m.2), String(m.3), String(m.4))
+                let (s1, s2, s3, s4) = (String(m.1), String(m.2), String(m.3 ?? ""), String(m.4 ?? ""))
                 s = (s1 == "<li>" ? "*" : "**") + " \(s2)：\(s3)：\(s4)"
                 arr[i] = s
             }
