@@ -16,6 +16,7 @@ let titleWordsTextbook = "Words in Textbook"
 let titlePhrasesTextbook = "Phrases in Textbook"
 let titleWordsLang = "Words in Language"
 let titlePhrasesLang = "Phrases in Language"
+let titlePatternsLang = "Patterns in Language"
 
 // https://dev.classmethod.jp/articles/swiftui_overlay_sidemenu/
 struct SideMenuView: View {
@@ -37,14 +38,15 @@ struct SideMenuView: View {
 
             HStack {
                 VStack() {
-                    SideMenuContentView(topPadding: 100, systemName: "gear", title: titleSearch, bindTitle: $bindTitle, isOpen: $isOpen)
+                    SideMenuContentView(topPadding: 100, systemName: "globe", title: titleSearch, bindTitle: $bindTitle, isOpen: $isOpen)
                     SideMenuContentView(systemName: "gear", title: titleSettings, bindTitle: $bindTitle, isOpen: $isOpen)
                     SideMenuContentView(systemName: "car", title: titleWordsUnit, bindTitle: $bindTitle, isOpen: $isOpen)
                     SideMenuContentView(systemName: "bus", title: titlePhrasesUnit, bindTitle: $bindTitle, isOpen: $isOpen)
-                    SideMenuContentView(systemName: "gear", title: titleWordsTextbook, bindTitle: $bindTitle, isOpen: $isOpen)
-                    SideMenuContentView(systemName: "person", title: titlePhrasesTextbook, bindTitle: $bindTitle, isOpen: $isOpen)
-                    SideMenuContentView(systemName: "bookmark", title: titleWordsLang, bindTitle: $bindTitle, isOpen: $isOpen)
-                    SideMenuContentView(systemName: "bookmark", title: titlePhrasesLang, bindTitle: $bindTitle, isOpen: $isOpen)
+                    SideMenuContentView(systemName: "tram", title: titleWordsTextbook, bindTitle: $bindTitle, isOpen: $isOpen)
+                    SideMenuContentView(systemName: "bicycle", title: titlePhrasesTextbook, bindTitle: $bindTitle, isOpen: $isOpen)
+                    SideMenuContentView(systemName: "airplane", title: titleWordsLang, bindTitle: $bindTitle, isOpen: $isOpen)
+                    SideMenuContentView(systemName: "ferry", title: titlePhrasesLang, bindTitle: $bindTitle, isOpen: $isOpen)
+                    SideMenuContentView(systemName: "cablecar", title: titlePatternsLang, bindTitle: $bindTitle, isOpen: $isOpen)
                     Spacer()
                 }
                 .frame(width: width)

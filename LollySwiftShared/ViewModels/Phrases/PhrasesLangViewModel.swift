@@ -10,8 +10,8 @@ import Foundation
 import Then
 
 class PhrasesLangViewModel: PhrasesBaseViewModel {
-    var arrPhrases = [MLangPhrase]()
-    var arrPhrasesFiltered: [MLangPhrase]?
+    @Published var arrPhrases = [MLangPhrase]()
+    @Published var arrPhrasesFiltered: [MLangPhrase]?
 
     public init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> Void) {
         super.init(settings: settings, needCopy: needCopy)

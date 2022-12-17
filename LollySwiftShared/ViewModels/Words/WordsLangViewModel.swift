@@ -10,8 +10,8 @@ import Foundation
 import Then
 
 class WordsLangViewModel: WordsBaseViewModel {
-    var arrWords = [MLangWord]()
-    var arrWordsFiltered: [MLangWord]?
+    @Published var arrWords = [MLangWord]()
+    @Published var arrWordsFiltered: [MLangWord]?
 
     public init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> Void) {
         super.init(settings: settings, needCopy: needCopy)

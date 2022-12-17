@@ -35,3 +35,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         return true
     }
 }
+
+extension Color {
+    static let color1 = Color("Color1")
+    static let color2 = Color("Color2")
+    static let color3 = Color("Color3")
+}

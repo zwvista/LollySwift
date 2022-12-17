@@ -41,6 +41,12 @@ struct ContentView: View {
             getContentView(WordsUnitView())
         } else if bindTitle == titlePhrasesUnit {
             getContentView(PhrasesUnitView())
+        } else if bindTitle == titleWordsLang {
+            getContentView(WordsLangView())
+        } else if bindTitle == titlePhrasesLang {
+            getContentView(PhrasesLangView())
+        } else if bindTitle == titlePatternsLang {
+            getContentView(PatternsView())
         }
     }
 }

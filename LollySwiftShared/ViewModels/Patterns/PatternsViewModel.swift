@@ -12,8 +12,8 @@ import Then
 @MainActor
 class PatternsViewModel: NSObject, ObservableObject {
     var vmSettings: SettingsViewModel
-    var arrPatterns = [MPattern]()
-    var arrPatternsFiltered: [MPattern]?
+    @Published var arrPatterns = [MPattern]()
+    @Published var arrPatternsFiltered: [MPattern]?
     var selectedPatternItem: MPattern?
     var selectedPattern: String { selectedPatternItem?.PATTERN ?? "" }
     var selectedPatternID: Int { selectedPatternItem?.ID ?? 0 }
