@@ -11,8 +11,8 @@ import Then
 
 class PhrasesUnitViewModel: PhrasesBaseViewModel {
     let inTextbook: Bool
-    var arrPhrases = [MUnitPhrase]()
-    var arrPhrasesFiltered: [MUnitPhrase]?
+    @Published var arrPhrases = [MUnitPhrase]()
+    @Published var arrPhrasesFiltered: [MUnitPhrase]?
 
     public init(settings: SettingsViewModel, inTextbook: Bool, needCopy: Bool, complete: @escaping () -> Void) {
         self.inTextbook = inTextbook

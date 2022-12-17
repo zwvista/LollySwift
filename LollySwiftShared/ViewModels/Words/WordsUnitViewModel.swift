@@ -12,8 +12,8 @@ import Then
 @MainActor
 class WordsUnitViewModel: WordsBaseViewModel {
     let inTextbook: Bool
-    var arrWords = [MUnitWord]()
-    var arrWordsFiltered: [MUnitWord]?
+    @Published var arrWords = [MUnitWord]()
+    @Published var arrWordsFiltered: [MUnitWord]?
 
     init(settings: SettingsViewModel, inTextbook: Bool, needCopy: Bool, complete: @escaping () -> Void) {
         self.inTextbook = inTextbook

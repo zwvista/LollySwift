@@ -11,13 +11,11 @@ struct ContentView: View {
     @ObservedObject var g = globalUser
     @State var isOpenSideMenu: Bool = false
     @State var bindTitle = titleSearch
-    var body: some View {
-        if g.userid.isEmpty {
-            LoginView()
-        } else if bindTitle == titleSearch {
-            ZStack{
-                NavigationView {
-                    SearchView()
+    
+    func getContentView(_ view: some View) -> some View {
+        ZStack{
+            NavigationView {
+                view
                     .navigationTitle(bindTitle)
                     .navigationBarItems(leading: (
                         Button(action: {
@@ -25,27 +23,24 @@ struct ContentView: View {
                         }) {
                             Image(systemName: "line.horizontal.3")
                                 .imageScale(.large)
-                    }))
-                }
-                SideMenuView(isOpen: $isOpenSideMenu, bindTitle: $bindTitle)
-                    .edgesIgnoringSafeArea(.all)
-            }
-        } else {
-            ZStack{
-                NavigationView {
-                        SettingsView()
-                        .navigationTitle(bindTitle)
-                        .navigationBarItems(leading: (
-                            Button(action: {
-                                self.isOpenSideMenu.toggle()
-                            }) {
-                                Image(systemName: "line.horizontal.3")
-                                    .imageScale(.large)
                         }))
-                    }
-                SideMenuView(isOpen: $isOpenSideMenu, bindTitle: $bindTitle)
-                    .edgesIgnoringSafeArea(.all)
             }
+            SideMenuView(isOpen: $isOpenSideMenu, bindTitle: $bindTitle)
+                .edgesIgnoringSafeArea(.all)
+        }
+    }
+
+    var body: some View {
+        if g.userid.isEmpty {
+            LoginView()
+        } else if bindTitle == titleSearch {
+            getContentView(SearchView())
+        } else if bindTitle == titleSettings {
+            getContentView(SettingsView())
+        } else if bindTitle == titleWordsUnit {
+            getContentView(WordsUnitView())
+        } else if bindTitle == titlePhrasesUnit {
+            getContentView(PhrasesUnitView())
         }
     }
 }
