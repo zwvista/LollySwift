@@ -13,7 +13,26 @@ struct WordsUnitView: View {
     var body: some View {
         VStack {
             List(vm.arrWords, id: \.ID) { row in
-                Text(row.WORD)
+                HStack {
+                    VStack {
+                        Text(row.UNITSTR)
+                            .font(.caption)
+                            .foregroundColor(Color("Color1"))
+                        Text(row.PARTSTR)
+                            .font(.caption)
+                            .foregroundColor(Color("Color1"))
+                        Text(row.SEQNUM.description)
+                            .font(.caption)
+                            .foregroundColor(Color("Color1"))
+                    }
+                    VStack(alignment: .leading) {
+                        Text(row.WORD)
+                            .font(.title)
+                            .foregroundColor(Color("Color2"))
+                        Text(row.NOTE)
+                            .foregroundColor(Color("Color3"))
+                    }
+                }
             }
         }
     }

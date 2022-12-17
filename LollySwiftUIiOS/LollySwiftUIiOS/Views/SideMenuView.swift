@@ -30,8 +30,7 @@ struct SideMenuView: View {
             }
             .background(Color.gray.opacity(0.3))
             .opacity(self.isOpen ? 1.0 : 0.0)
-            .opacity(1.0)
-            .animation(.easeIn(duration: 0.25))
+            .animation(.easeIn(duration: 0.25), value: isOpen)
             .onTapGesture {
                 self.isOpen = false
             }
@@ -40,8 +39,8 @@ struct SideMenuView: View {
                 VStack() {
                     SideMenuContentView(topPadding: 100, systemName: "gear", title: titleSearch, bindTitle: $bindTitle, isOpen: $isOpen)
                     SideMenuContentView(systemName: "gear", title: titleSettings, bindTitle: $bindTitle, isOpen: $isOpen)
-                    SideMenuContentView(systemName: "person", title: titleWordsUnit, bindTitle: $bindTitle, isOpen: $isOpen)
-                    SideMenuContentView(systemName: "bookmark", title: titlePhrasesUnit, bindTitle: $bindTitle, isOpen: $isOpen)
+                    SideMenuContentView(systemName: "car", title: titleWordsUnit, bindTitle: $bindTitle, isOpen: $isOpen)
+                    SideMenuContentView(systemName: "bus", title: titlePhrasesUnit, bindTitle: $bindTitle, isOpen: $isOpen)
                     SideMenuContentView(systemName: "gear", title: titleWordsTextbook, bindTitle: $bindTitle, isOpen: $isOpen)
                     SideMenuContentView(systemName: "person", title: titlePhrasesTextbook, bindTitle: $bindTitle, isOpen: $isOpen)
                     SideMenuContentView(systemName: "bookmark", title: titleWordsLang, bindTitle: $bindTitle, isOpen: $isOpen)
@@ -51,7 +50,7 @@ struct SideMenuView: View {
                 .frame(width: width)
                 .background(Color(UIColor.systemGray6))
                 .offset(x: self.isOpen ? 0 : -self.width)
-                .animation(.easeIn(duration: 0.25))
+                .animation(.easeIn(duration: 0.25), value: isOpen)
                 Spacer()
             }
         }

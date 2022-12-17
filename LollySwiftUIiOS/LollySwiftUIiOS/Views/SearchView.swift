@@ -24,7 +24,7 @@ struct SearchView: View {
                         Text(vm.arrLanguages[$0].LANGNAME)
                     }
                 }
-                .background(Color.pink)
+                .background(Color("Color3"))
                 .tint(.white)
                 .pickerStyle(MenuPickerStyle())
                 Picker("", selection: $vm.selectedDictReferenceIndex) {
@@ -32,7 +32,7 @@ struct SearchView: View {
                         Text(vm.arrDictsReference[$0].DICTNAME)
                     }
                 }
-                .background(Color.orange)
+                .background(Color("Color2"))
                 .tint(.white)
                 .pickerStyle(MenuPickerStyle())
             }
