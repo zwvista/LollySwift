@@ -16,14 +16,16 @@ struct SearchView: View {
     var wvDict: WKWebView { webViewStore.webView }
 
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             SearchBar(text: $dictStore.word, placeholder: "Word") {_ in dictStore.searchDict() }
-            HStack {
+            HStack(spacing: 0) {
                 Picker("", selection: $vm.selectedLangIndex) {
                     ForEach(vm.arrLanguages.indices, id: \.self) {
                         Text(vm.arrLanguages[$0].LANGNAME)
                     }
                 }
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 4)
                 .background(Color.color3)
                 .tint(.white)
                 .pickerStyle(MenuPickerStyle())
@@ -32,6 +34,8 @@ struct SearchView: View {
                         Text(vm.arrDictsReference[$0].DICTNAME)
                     }
                 }
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 4)
                 .background(Color.color2)
                 .tint(.white)
                 .pickerStyle(MenuPickerStyle())
