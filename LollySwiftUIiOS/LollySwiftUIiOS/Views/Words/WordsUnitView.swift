@@ -8,31 +8,32 @@
 import SwiftUI
 
 struct WordsUnitView: View {
-    @StateObject var vm = WordsUnitViewModel(settings: vmSettings, inTextbook: true, needCopy: false) {
-    }
+    @StateObject var vm = WordsUnitViewModel(settings: vmSettings, inTextbook: true, needCopy: false) {}
     var body: some View {
         VStack {
-            List(vm.arrWords, id: \.ID) { row in
-                HStack {
-                    VStack {
-                        Text(row.UNITSTR)
-                            .font(.caption)
-                            .foregroundColor(Color.color1)
-                        Text(row.PARTSTR)
-                            .font(.caption)
-                            .foregroundColor(Color.color1)
-                        Text(row.SEQNUM.description)
-                            .font(.caption)
-                            .foregroundColor(Color.color1)
+            List {
+                ForEach(vm.arrWords, id: \.ID) { row in
+                    HStack {
+                        VStack {
+                            Text(row.UNITSTR)
+                            Text(row.PARTSTR)
+                            Text("\(row.SEQNUM)")
+                        }
+                        .font(.caption)
+                        .foregroundColor(Color.color1)
+                        VStack(alignment: .leading) {
+                            Text(row.WORD)
+                                .font(.title)
+                                .foregroundColor(Color.color2)
+                            Text(row.NOTE)
+                                .foregroundColor(Color.color3)
+                        }
                     }
-                    VStack(alignment: .leading) {
-                        Text(row.WORD)
-                            .font(.title)
-                            .foregroundColor(Color.color2)
-                        Text(row.NOTE)
-                            .foregroundColor(Color.color3)
-                    }
+                }.onDelete { IndexSet in
+                    
                 }
+            }.toolbar {
+                EditButton()
             }
         }
     }

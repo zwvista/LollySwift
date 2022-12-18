@@ -8,18 +8,19 @@
 import SwiftUI
 
 struct PatternsView: View {
-    @StateObject var vm = PatternsViewModel(settings: vmSettings, needCopy: false) {
-    }
+    @StateObject var vm = PatternsViewModel(settings: vmSettings, needCopy: false) {}
     var body: some View {
         VStack {
-            List(vm.arrPatterns, id: \.ID) { row in
-                HStack {
-                    VStack(alignment: .leading) {
-                        Text(row.PATTERN)
-                            .font(.title)
-                            .foregroundColor(Color.color2)
-                        Text(row.TAGS)
-                            .foregroundColor(Color.color3)
+            List {
+                ForEach(vm.arrPatterns, id: \.ID) { row in
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text(row.PATTERN)
+                                .font(.title)
+                                .foregroundColor(Color.color2)
+                            Text(row.TAGS)
+                                .foregroundColor(Color.color3)
+                        }
                     }
                 }
             }

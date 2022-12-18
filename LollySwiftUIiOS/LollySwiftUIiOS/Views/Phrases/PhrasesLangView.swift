@@ -8,18 +8,19 @@
 import SwiftUI
 
 struct PhrasesLangView: View {
-    @StateObject var vm = PhrasesLangViewModel(settings: vmSettings, needCopy: false) {
-    }
+    @StateObject var vm = PhrasesLangViewModel(settings: vmSettings, needCopy: false) {}
     var body: some View {
         VStack {
-            List(vm.arrPhrases, id: \.ID) { row in
-                HStack {
-                    VStack(alignment: .leading) {
-                        Text(row.PHRASE)
-                            .font(.title)
-                            .foregroundColor(Color.color2)
-                        Text(row.TRANSLATION)
-                            .foregroundColor(Color.color3)
+            List {
+                ForEach(vm.arrPhrases, id: \.ID) { row in
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text(row.PHRASE)
+                                .font(.title)
+                                .foregroundColor(Color.color2)
+                            Text(row.TRANSLATION)
+                                .foregroundColor(Color.color3)
+                        }
                     }
                 }
             }
