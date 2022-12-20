@@ -17,7 +17,9 @@ struct SearchView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            SearchBar(text: $dictStore.word, placeholder: "Word") {_ in dictStore.searchDict() }
+            SearchBar(text: $dictStore.word, placeholder: "Word") { _ in
+                dictStore.searchDict()
+            }
             HStack(spacing: 0) {
                 Picker("", selection: $vm.selectedLangIndex) {
                     ForEach(vm.arrLanguages.indices, id: \.self) {

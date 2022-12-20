@@ -11,6 +11,18 @@ struct WordsUnitView: View {
     @StateObject var vm = WordsUnitViewModel(settings: vmSettings, inTextbook: true, needCopy: false) {}
     var body: some View {
         VStack {
+            HStack(spacing: 0) {
+                SearchBar(text: $vm.textFilter, placeholder: "Filter") { _ in
+                    vm.applyFilters()
+                }
+                Picker("", selection: $vm.scopeFilter) {
+                    ForEach(SettingsViewModel.arrScopeWordFilters, id: \.self) { s in
+                        Text(s)
+                    }
+                }
+                .background(Color.color2)
+                .tint(.white)
+            }
             List {
                 ForEach(vm.arrWords, id: \.ID) { row in
                     HStack {
