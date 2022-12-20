@@ -72,10 +72,10 @@ class TransformDetailViewController: NSViewController, NSTableViewDataSource, NS
                 oldIndexes.append(index)
             }
         }
-        
+
         var oldIndexOffset = 0
         var newIndexOffset = 0
-        
+
         func moveRow(at oldIndex: Int, to newIndex: Int) {
             vm.arrTranformItems.moveElement(at: oldIndex, to: newIndex)
             tableView.moveRow(at: oldIndex, to: newIndex)
@@ -96,7 +96,7 @@ class TransformDetailViewController: NSViewController, NSTableViewDataSource, NS
             tableView.reloadData(forRowIndexes: [$0], columnIndexes: [col])
         }
         tableView.endUpdates()
-        
+
         return true
     }
 

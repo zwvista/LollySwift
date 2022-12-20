@@ -47,7 +47,7 @@ class WordsTextbookDetailViewController: UITableViewController, UITextFieldDeleg
             self.itemEdit.indexUNIT.accept(index)
             self.itemEdit.UNITSTR.accept(item)
         }
-        
+
         ddPart.anchorView = tfPart
         ddPart.dataSource = item.textbook.arrParts.map(\.label)
         ddPart.selectRow(itemEdit.indexPART.value)
@@ -55,7 +55,7 @@ class WordsTextbookDetailViewController: UITableViewController, UITextFieldDeleg
             self.itemEdit.indexPART.accept(index)
             self.itemEdit.PARTSTR.accept(item)
         }
-        
+
         _ = itemEdit.ID ~> tfID.rx.text.orEmpty
         _ = itemEdit.TEXTBOOKNAME ~> tfTextbookName.rx.text.orEmpty
         _ = itemEdit.UNITSTR <~> tfUnit.rx.textInput

@@ -12,7 +12,7 @@ import RxSwift
 import RxCocoa
 
 extension Reactive where Base: NSStepper {
-        
+
     /// Reactive wrapper for `integerValue` property`.
     public var integerValue: ControlProperty<Int> {
         return self.base.rx.controlProperty(

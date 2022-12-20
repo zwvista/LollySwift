@@ -70,7 +70,7 @@ class PhrasesLangViewController: PhrasesBaseViewController {
             alertController.addAction(cancelAction)
             self.present(alertController, animated: true) {}
         }
-        
+
         return UISwipeActionsConfiguration(actions: [moreAction, deleteAction])
     }
 

@@ -33,7 +33,7 @@ class ReviewOptionsViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         vm = ReviewOptionsViewModel(options: options)
-        
+
         _ = vm.optionsEdit.mode <~> pubMode.rx.selectedItemIndex
         _ = vm.optionsEdit.shuffled <~> scOrder.rx.isOn
         _ = vm.optionsEdit.onRepeat <~> scOnRepeat.rx.isOn

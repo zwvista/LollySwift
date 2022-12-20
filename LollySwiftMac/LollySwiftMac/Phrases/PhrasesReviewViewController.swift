@@ -35,7 +35,7 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
             }
         }
         synth.setVoice(NSSpeechSynthesizer.VoiceName(rawValue: vmSettings.macVoiceName))
-        
+
         _ = vm.indexString ~> tfIndex.rx.text.orEmpty
         _ = vm.indexHidden ~> tfIndex.rx.isHidden
         _ = vm.correctHidden ~> tfCorrect.rx.isHidden

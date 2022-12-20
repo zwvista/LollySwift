@@ -12,7 +12,7 @@ import RxSwift
 import RxCocoa
 
 extension Reactive where Base: NSSegmentedControl {
-        
+
     /// Reactive wrapper for `isOn` property`.
     public var isOn: ControlProperty<Bool> {
         return self.base.rx.controlProperty(

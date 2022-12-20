@@ -43,7 +43,7 @@ class WordsReviewViewController: UIViewController, UITextFieldDelegate {
                 AppDelegate.speak(string: self.vm.currentWord)
             }
         }
-        
+
         _ = vm.indexString ~> lblIndex.rx.text
         _ = vm.indexHidden ~> lblIndex.rx.isHidden
         _ = vm.correctHidden ~> lblCorrect.rx.isHidden

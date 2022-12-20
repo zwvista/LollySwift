@@ -13,7 +13,7 @@ class PatternsMergeViewModel: NSObject {
     var arrPatterns: [MPattern]
     var arrPatternVariations: [MPatternVariation]
     var itemEdit = MPatternEdit()
-        
+
     init(items: [MPattern]) {
         arrPatterns = items
         let strs = Array(Set(items.flatMap { $0.PATTERN.split(separator: "／") }))

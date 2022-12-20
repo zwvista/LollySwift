@@ -37,7 +37,7 @@ class PhrasesTextbookDetailViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         ddUnit.anchorView = tfUnit
         ddUnit.dataSource = item.textbook.arrUnits.map(\.label)
         ddUnit.selectRow(itemEdit.indexUNIT.value)
@@ -45,7 +45,7 @@ class PhrasesTextbookDetailViewController: UITableViewController {
             self.itemEdit.indexUNIT.accept(index)
             self.itemEdit.UNITSTR.accept(item)
         }
-        
+
         ddPart.anchorView = tfPart
         ddPart.dataSource = item.textbook.arrParts.map(\.label)
         ddPart.selectRow(itemEdit.indexPART.value)
@@ -53,7 +53,7 @@ class PhrasesTextbookDetailViewController: UITableViewController {
             self.itemEdit.indexPART.accept(index)
             self.itemEdit.PARTSTR.accept(item)
         }
-        
+
         _ = itemEdit.ID ~> tfID.rx.text.orEmpty
         _ = itemEdit.TEXTBOOKNAME ~> tfTextbookName.rx.text.orEmpty
         _ = itemEdit.UNITSTR <~> tfUnit.rx.textInput

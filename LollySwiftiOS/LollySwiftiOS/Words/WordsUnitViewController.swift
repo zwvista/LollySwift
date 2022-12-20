@@ -140,7 +140,7 @@ class WordsUnitViewController: WordsBaseViewController {
         let alertController = UIAlertController(title: "Words", message: "More", preferredStyle: .alert)
         let addAction = UIAlertAction(title: "Add", style: .default) { _ in self.performSegue(withIdentifier: "add", sender: self) }
         alertController.addAction(addAction)
-        
+
         func startTimer(ifEmpty: Bool) {
             self.view.showBlurLoader()
             vm.getNotes(ifEmpty: ifEmpty, oneComplete: { _ in }, allComplete: {

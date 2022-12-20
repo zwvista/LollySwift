@@ -100,7 +100,7 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
             guard index != self.vm.selectedPartFromIndex else {return}
             self.vm.selectedPartFromIndex = index
         }
-        
+
         ddToType.dataSource = SettingsViewModel.arrToTypes
         ddToType.anchorView = btnToType
         ddToType.selectionAction = { [unowned self] (index: Int, item: String) in
@@ -183,7 +183,7 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
 
         ddVoice.dataSource = vm.arriOSVoices.map(\.VOICENAME)
         onUpdateiOSVoice()
-        
+
         ddDictReference.dataSource = vm.arrDictsReference.map(\.DICTNAME)
         onUpdateDictReference()
 

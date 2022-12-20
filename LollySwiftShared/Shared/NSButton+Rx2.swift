@@ -12,7 +12,7 @@ import RxSwift
 import RxCocoa
 
 extension Reactive where Base: NSButton {
-        
+
     /// Reactive wrapper for `title` property`.
     public var title: ControlProperty<String> {
         return self.base.rx.controlProperty(

@@ -46,7 +46,7 @@ class WordsUnitDetailViewController: UITableViewController, UITextFieldDelegate 
             self.itemEdit.indexUNIT.accept(index)
             self.itemEdit.UNITSTR.accept(item)
         }
-        
+
         ddPart.anchorView = tfPart
         ddPart.dataSource = vmSettings.arrParts.map(\.label)
         ddPart.selectRow(itemEdit.indexPART.value)

@@ -28,7 +28,7 @@ class SearchViewController: UIViewController, WKNavigationDelegate, UISearchBarD
         dictStore = DictStore(vmSettings: vmSettings, wvDict: addWKWebView(webViewHolder: wvDictHolder))
         dictStore.wvDict.navigationDelegate = self
         vmSettings.delegate = self
-        
+
         vmSettings.getData().subscribe { _ in
             self.ddLang.anchorView = self.btnLang
             self.ddLang.selectionAction = { (index: Int, item: String) in
@@ -84,7 +84,7 @@ class SearchViewController: UIViewController, WKNavigationDelegate, UISearchBarD
         let item = vmSettings.selectedLang
         btnLang.setTitle(item.LANGNAME, for: .normal)
         ddLang.selectIndex(vmSettings.selectedLangIndex)
-        
+
         ddDictReference.dataSource = vmSettings.arrDictsReference.map(\.DICTNAME)
     }
 

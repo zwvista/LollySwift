@@ -29,7 +29,7 @@ extension UIViewController {
         }()
         // add the WKWebView to the "holder" UIView
         webViewHolder.addSubview(wkWebView)
-        
+
         // pin to all 4 edges
         wkWebView.topAnchor.constraint(equalTo: webViewHolder.topAnchor, constant: 0.0).isActive = true
         wkWebView.bottomAnchor.constraint(equalTo: webViewHolder.bottomAnchor, constant: 0.0).isActive = true
@@ -54,14 +54,14 @@ extension UIView{
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         blurEffectView.frame = self.bounds
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        
+
         let activityIndicator = UIActivityIndicatorView(style: .large)
         activityIndicator.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
         activityIndicator.startAnimating()
-        
+
         blurEffectView.contentView.addSubview(activityIndicator)
         activityIndicator.center = blurEffectView.contentView.center
-        
+
         self.addSubview(blurEffectView)
         isUserInteractionEnabled = false
     }

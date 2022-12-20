@@ -37,7 +37,7 @@ class PhrasesUnitDetailViewController: UITableViewController, UITextFieldDelegat
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         ddUnit.anchorView = tfUnit
         ddUnit.dataSource = vmSettings.arrUnits.map(\.label)
         ddUnit.selectRow(itemEdit.indexUNIT.value)
@@ -45,7 +45,7 @@ class PhrasesUnitDetailViewController: UITableViewController, UITextFieldDelegat
             self.itemEdit.indexUNIT.accept(index)
             self.itemEdit.UNITSTR.accept(item)
         }
-        
+
         ddPart.anchorView = tfPart
         ddPart.dataSource = vmSettings.arrParts.map(\.label)
         ddPart.selectRow(itemEdit.indexPART.value)
@@ -53,7 +53,7 @@ class PhrasesUnitDetailViewController: UITableViewController, UITextFieldDelegat
             self.itemEdit.indexPART.accept(index)
             self.itemEdit.PARTSTR.accept(item)
         }
-        
+
         _ = itemEdit.ID ~> tfID.rx.text.orEmpty
         _ = itemEdit.UNITSTR <~> tfUnit.rx.textInput
         _ = itemEdit.PARTSTR <~> tfPart.rx.textInput

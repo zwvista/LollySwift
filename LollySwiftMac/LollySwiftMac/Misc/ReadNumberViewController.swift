@@ -37,7 +37,7 @@ class ReadNumberViewController: NSViewController, NSTextFieldDelegate {
         guard let _ = Int(tfNumber.stringValue) else {return}
         vm.read()
     }
-        
+
     deinit {
         print("DEBUG: \(self.className) deinit")
     }
@@ -49,7 +49,7 @@ class ReadNumberWindowController: NSWindowController {
     override func windowDidLoad() {
         super.windowDidLoad()
     }
-        
+
     deinit {
         print("DEBUG: \(self.className) deinit")
     }

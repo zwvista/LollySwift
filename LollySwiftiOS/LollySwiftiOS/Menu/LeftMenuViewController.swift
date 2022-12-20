@@ -35,7 +35,7 @@ public class LeftMenuViewController: UIViewController, UITableViewDelegate, UITa
         self.view.addSubview(self.tableView!)
         // https://stackoverflow.com/questions/13733354/uitableview-doesnt-scroll
         self.view.bringSubviewToFront(self.tableView!)
-        
+
         storyboardMain = UIStoryboard(name: "Main", bundle: nil)
         storyboardWords = UIStoryboard(name: "Words", bundle: nil)
         storyboardPhrases = UIStoryboard(name: "Phrases", bundle: nil)

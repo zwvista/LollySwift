@@ -33,7 +33,7 @@ class ReviewOptionsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         vm = ReviewOptionsViewModel(options: options)
-        
+
         ddReviewMode.anchorView = reviewModeCell
         ddReviewMode.dataSource = SettingsViewModel.reviewModes
         ddReviewMode.selectionAction = { [unowned self] (index: Int, item: String) in

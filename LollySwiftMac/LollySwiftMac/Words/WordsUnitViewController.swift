@@ -94,15 +94,15 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
                 oldIndexes.append(index)
             }
         }
-        
+
         var oldIndexOffset = 0
         var newIndexOffset = 0
-        
+
         func moveRow(at oldIndex: Int, to newIndex: Int) {
             vm.arrWords.moveElement(at: oldIndex, to: newIndex)
             tableView.moveRow(at: oldIndex, to: newIndex)
         }
-        
+
         tableView.beginUpdates()
         for oldIndex in oldIndexes {
             if oldIndex < row {
@@ -118,7 +118,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
             tableView.reloadData(forRowIndexes: [$0], columnIndexes: [col])
         }
         tableView.endUpdates()
-        
+
         return true
     }
 

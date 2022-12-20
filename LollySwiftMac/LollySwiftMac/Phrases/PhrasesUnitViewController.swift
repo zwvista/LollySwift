@@ -85,15 +85,15 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
                 oldIndexes.append(index)
             }
         }
-        
+
         var oldIndexOffset = 0
         var newIndexOffset = 0
-        
+
         func moveRow(at oldIndex: Int, to newIndex: Int) {
             vm.arrPhrases.moveElement(at: oldIndex, to: newIndex)
             tableView.moveRow(at: oldIndex, to: newIndex)
         }
-        
+
         tableView.beginUpdates()
         for oldIndex in oldIndexes {
             if oldIndex < row {
@@ -109,7 +109,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
             tableView.reloadData(forRowIndexes: [$0], columnIndexes: [col])
         }
         tableView.endUpdates()
-        
+
         return true
     }
 
