@@ -12,7 +12,7 @@ import DropDown
 class WordsTextbookViewController: WordsBaseViewController {
 
     var vm: WordsUnitViewModel!
-    var arrWords: [MUnitWord] { vm.arrWordsFiltered ?? vm.arrWords }
+    var arrWords: [MUnitWord] { vm.arrWordsFiltered }
     
     @IBOutlet weak var btnTextbookFilter: UIButton!
     let ddTextbookFilter = DropDown()
@@ -27,9 +27,6 @@ class WordsTextbookViewController: WordsBaseViewController {
             self.vmBase.stringTextbookFilter = item
         }
         vmBase.$stringTextbookFilter ~> (btnTextbookFilter, \.titleNormal) ~ subscriptions
-        vmBase.$stringTextbookFilter.sink { [unowned self] _ in
-            self.applyFilters()
-        } ~ subscriptions
     }
     
     override func refresh() {
@@ -105,11 +102,6 @@ class WordsTextbookViewController: WordsBaseViewController {
         }
         
         return UISwipeActionsConfiguration(actions: [moreAction, deleteAction])
-    }
-    
-    override func applyFilters() {
-        vm.applyFilters()
-        tableView.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

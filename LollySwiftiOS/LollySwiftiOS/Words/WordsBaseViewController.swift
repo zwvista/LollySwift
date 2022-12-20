@@ -34,12 +34,6 @@ class WordsBaseViewController: UIViewController, UITableViewDelegate, UITableVie
         refresh()
         vmBase.$textFilter <~> sbTextFilter.searchTextField.textProperty ~ subscriptions
         vmBase.$scopeFilter ~> (btnScopeFilter, \.titleNormal) ~ subscriptions
-        vmBase.$textFilter.didSet.sink { [unowned self] _ in
-            self.applyFilters()
-        } ~ subscriptions
-        vmBase.$scopeFilter.didSet.sink { [unowned self] _ in
-            self.applyFilters()
-        } ~ subscriptions
     }
     
     @objc func refresh(_ sender: UIRefreshControl) {

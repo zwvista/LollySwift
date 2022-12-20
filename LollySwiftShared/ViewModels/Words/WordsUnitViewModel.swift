@@ -18,6 +18,17 @@ class WordsUnitViewModel: WordsBaseViewModel {
     init(settings: SettingsViewModel, inTextbook: Bool, needCopy: Bool, complete: @escaping () -> Void) {
         self.inTextbook = inTextbook
         super.init(settings: settings, needCopy: needCopy)
+
+        $arrWords.didSet.combineLatest($indexTextbookFilter.didSet, $textFilter.didSet, $scopeFilter.didSet).sink { [unowned self] _ in
+            arrWordsFiltered = arrWords
+            if !textFilter.isEmpty {
+                arrWordsFiltered = arrWordsFiltered.filter { (scopeFilter == "Word" ? $0.WORD : $0.NOTE).lowercased().contains(textFilter.lowercased()) }
+            }
+            if textbookFilter != 0 {
+                arrWordsFiltered = arrWordsFiltered.filter { $0.TEXTBOOKID == textbookFilter }
+            }
+        } ~ subscriptions
+
         Task {
             await reload()
             complete()
@@ -26,17 +37,6 @@ class WordsUnitViewModel: WordsBaseViewModel {
 
     func reload() async {
         arrWords = inTextbook ? await MUnitWord.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO) : await MUnitWord.getDataByLang(vmSettings.selectedTextbook.LANGID, arrTextbooks: vmSettings.arrTextbooks)
-        arrWordsFiltered = arrWords
-    }
-
-    func applyFilters() {
-        arrWordsFiltered = arrWords
-        if !textFilter.isEmpty {
-            arrWordsFiltered = arrWordsFiltered.filter { (scopeFilter == "Word" ? $0.WORD : $0.NOTE).lowercased().contains(textFilter.lowercased()) }
-        }
-        if textbookFilter != 0 {
-            arrWordsFiltered = arrWordsFiltered.filter { $0.TEXTBOOKID == textbookFilter }
-        }
     }
 
     static func update(_ id: Int, seqnum: Int) async {

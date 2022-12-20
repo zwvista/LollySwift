@@ -11,19 +11,21 @@ import UIKit
 class WordsUnitViewController: WordsBaseViewController {
 
     var vm: WordsUnitViewModel!
-    var arrWords: [MUnitWord] { vm.arrWordsFiltered ?? vm.arrWords }
+    var arrWords: [MUnitWord] { vm.arrWordsFiltered }
     @IBOutlet weak var btnEdit: UIBarButtonItem!
     override var vmBase: WordsBaseViewModel! { vm }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        vm.$arrWordsFiltered.didSet.sink { [unowned self] _ in
+            tableView.reloadData()
+        } ~ subscriptions
     }
     
     override func refresh() {
         view.showBlurLoader()
         vm = WordsUnitViewModel(settings: vmSettings, inTextbook: true, needCopy: false) {
             self.refreshControl.endRefreshing()
-            self.tableView.reloadData()
             self.view.removeBlurLoader()
         }
     }
@@ -114,11 +116,6 @@ class WordsUnitViewController: WordsBaseViewController {
         }
 
         return UISwipeActionsConfiguration(actions: [moreAction, deleteAction])
-    }
-    
-    override func applyFilters() {
-        vm.applyFilters()
-        tableView.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
