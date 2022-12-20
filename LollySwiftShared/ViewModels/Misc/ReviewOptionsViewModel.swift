@@ -11,12 +11,12 @@ import Foundation
 class ReviewOptionsViewModel: NSObject {
     var options: MReviewOptions!
     var optionsEdit: MReviewOptionsEdit!
-    
+
     init(options: MReviewOptions) {
         self.options = options
         optionsEdit = MReviewOptionsEdit(x: options)
     }
-    
+
     func onOK() {
         optionsEdit.save(to: options)
     }

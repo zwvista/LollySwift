@@ -35,13 +35,13 @@ class PatternsDetailViewController: UITableViewController {
         itemEdit.$TAGS <~> tfTags.textProperty ~ subscriptions
         vmEdit.$isOKEnabled ~> (btnDone, \.isEnabled) ~ subscriptions
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         // https://stackoverflow.com/questions/7525437/how-to-set-focus-to-a-textfield-in-iphone
         (vmEdit.isAdd ? tfPattern : tfNote).becomeFirstResponder()
     }
-    
+
     deinit {
         print("DEBUG: \(self.className) deinit")
     }

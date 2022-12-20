@@ -9,7 +9,7 @@
 import Foundation
 
 class TransformDetailViewModel: NSObject {
-    
+
     @objc var item: MDictionary!
     @objc dynamic var TEMPLATE = ""
     @objc dynamic var sourceWord = ""
@@ -22,12 +22,12 @@ class TransformDetailViewModel: NSObject {
     @objc dynamic var interimIndex = 0
     var arrTranformItems = [MTransformItem]()
     var InterimResults = [String]()
-    
+
     func initItems() {
         TEMPLATE = item.TEMPLATE
         arrTranformItems = CommonApi.toTransformItems(transform: item.TRANSFORM)
     }
-    
+
     func newTransformItem() -> MTransformItem {
         let item = MTransformItem()
         item.index = arrTranformItems.count + 1
@@ -42,12 +42,12 @@ class TransformDetailViewModel: NSObject {
             complete(i - 1)
         }
     }
-    
+
     func getHtml() async {
         sourceUrl = item.URL.replacingOccurrences(of: "{0}", with: sourceWord.urlEncoded())
         sourceText = await RestApi.getHtml(url: sourceUrl)
     }
-    
+
     func executeTransform() {
         var text = CommonApi.removeReturns(html: sourceText)
         InterimResults = [text]
@@ -61,11 +61,11 @@ class TransformDetailViewModel: NSObject {
         resultText = text
         resultHtml = TEMPLATE.isEmpty ? CommonApi.toHtml(text: text) : CommonApi.applyTemplate(template: TEMPLATE, word: sourceWord, text: text)
     }
-    
+
     func updateInterimText() {
         interimText = InterimResults[interimIndex]
     }
-    
+
     func onOK() {
         item.TRANSFORM = arrTranformItems.flatMap { [$0.extractor, $0.replacement] }.joined(separator: "\r\n")
         item.TEMPLATE = TEMPLATE

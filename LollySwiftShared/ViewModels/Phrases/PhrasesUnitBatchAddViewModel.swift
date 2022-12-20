@@ -20,7 +20,7 @@ class PhrasesUnitBatchAddViewModel: NSObject, ObservableObject {
         item = vm.newUnitPhrase()
         itemEdit = MUnitPhraseEdit(x: item)
     }
-    
+
     func onOK() async {
         itemEdit.save(to: item)
         let phrases = itemEdit.PHRASES.split(separator: "\n").map { String($0) }

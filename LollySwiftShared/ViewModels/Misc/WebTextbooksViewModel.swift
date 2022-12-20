@@ -23,7 +23,7 @@ class WebTextbooksViewModel: NSObject {
             complete()
         }
     }
-    
+
     func applyFilters(textbookFilter: Int) {
         arrWebTextbooksFiltered = textbookFilter == 0 ? nil : arrWebTextbooks.filter { $0.TEXTBOOKID == textbookFilter }
     }

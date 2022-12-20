@@ -15,7 +15,7 @@ class WebPageSelectViewModel: NSObject, ObservableObject {
     var vmSettings: SettingsViewModel
     var arrWebPages = [MWebPage]()
     var selectedWebPage: MWebPage?
-    
+
     var subscriptions = Set<AnyCancellable>()
 
     init(settings: SettingsViewModel, complete: @escaping () -> Void) {
@@ -34,7 +34,7 @@ class WebPageSelectViewModel: NSObject, ObservableObject {
                 }
             } ~ subscriptions
     }
-    
+
     func reload(t: String, u: String) async {
         arrWebPages = await MWebPage.getDataBySearch(title: t, url: u)
     }

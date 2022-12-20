@@ -22,7 +22,7 @@ class PhrasesUnitViewModel: PhrasesBaseViewModel {
             complete()
         }
     }
-    
+
     func reload() async {
         arrPhrases = inTextbook ? await MUnitPhrase.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO) : await MUnitPhrase.getDataByLang(vmSettings.selectedTextbook.LANGID, arrTextbooks: vmSettings.arrTextbooks)
         arrPhrasesFiltered = nil
@@ -41,18 +41,18 @@ class PhrasesUnitViewModel: PhrasesBaseViewModel {
             }
         }
     }
-    
+
     static func update(_ id: Int, seqnum: Int) async {
         await MUnitPhrase.update(id, seqnum: seqnum)
     }
-    
+
     func update(item: MUnitPhrase) async {
         await MUnitPhrase.update(item: item)
         if let o = await MUnitPhrase.getDataById(item.ID, arrTextbooks: vmSettings.arrTextbooks) {
             copyProperties(from: o, to: item)
         }
     }
-    
+
     func create(item: MUnitPhrase) async {
         let id = await MUnitPhrase.create(item: item)
         if let o = await MUnitPhrase.getDataById(id, arrTextbooks: vmSettings.arrTextbooks) {
@@ -60,7 +60,7 @@ class PhrasesUnitViewModel: PhrasesBaseViewModel {
             copyProperties(from: o, to: item)
         }
     }
-    
+
     static func delete(item: MUnitPhrase) async {
         await MUnitPhrase.delete(item: item)
     }

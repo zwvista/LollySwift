@@ -43,17 +43,17 @@ class PhrasesAssociateViewController: NSViewController, NSTableViewDataSource, N
             self.applyFilters()
         } ~ subscriptions
     }
-    
+
     override func viewDidAppear() {
         super.viewDidAppear()
         // https://stackoverflow.com/questions/24235815/cocoa-how-to-set-window-title-from-within-view-controller-in-swift
         view.window?.title = "Associate Phrase"
     }
-    
+
     func numberOfRows(in tableView: NSTableView) -> Int {
         arrPhrases.count
     }
-    
+
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! NSTableCellView
         let item = arrPhrases[row]

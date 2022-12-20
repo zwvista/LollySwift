@@ -22,7 +22,7 @@ class WordsUnitDetailViewController: UITableViewController, UITextFieldDelegate 
     @IBOutlet weak var tfFamiID: UITextField!
     @IBOutlet weak var tfAccuracy: UITextField!
     @IBOutlet weak var btnDone: UIBarButtonItem!
-    
+
     var vmEdit: WordsUnitDetailViewModel!
     var item: MUnitWord { vmEdit.item }
     var itemEdit: MUnitWordEdit { vmEdit.itemEdit }
@@ -66,13 +66,13 @@ class WordsUnitDetailViewController: UITableViewController, UITextFieldDelegate 
         itemEdit.$ACCURACY ~> (tfAccuracy, \.text2) ~ subscriptions
         vmEdit.$isOKEnabled ~> (btnDone, \.isEnabled) ~ subscriptions
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         // https://stackoverflow.com/questions/7525437/how-to-set-focus-to-a-textfield-in-iphone
         (vmEdit.isAdd ? tfWord : tfNote).becomeFirstResponder()
     }
-    
+
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if textField === tfUnit {
             self.view.endEditing(true)
@@ -86,7 +86,7 @@ class WordsUnitDetailViewController: UITableViewController, UITextFieldDelegate 
             return true
         }
     }
-    
+
     deinit {
         print("DEBUG: \(self.className) deinit")
     }

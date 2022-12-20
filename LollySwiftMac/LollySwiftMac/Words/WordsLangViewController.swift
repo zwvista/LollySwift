@@ -50,7 +50,7 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
             tvWords.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<tvWords.tableColumns.count))
         }
     }
-    
+
     override func addNewWord() {
         guard !vm.newWord.isEmpty else {return}
         let item = vm.newLangWord()
@@ -87,7 +87,7 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
             doRefresh()
         }
     }
-    
+
     @IBAction func doubleAction(_ sender: AnyObject) {
         if NSApp.currentEvent!.modifierFlags.contains(.option) {
             associatePhrases(sender)
@@ -106,7 +106,7 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
         }
         self.presentAsModalWindow(editVC)
     }
-    
+
     @IBAction func getNote(_ sender: AnyObject) {
         Task {
             let col = tvWords.tableColumns.firstIndex { $0.title == "NOTE" }!
@@ -114,7 +114,7 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
             tvWords.reloadData(forRowIndexes: [tvWords.selectedRow], columnIndexes: [col])
         }
     }
-    
+
     @IBAction func clearNote(_ sender: AnyObject) {
         Task {
             let col = tvWords.tableColumns.firstIndex { $0.title == "NOTE" }!

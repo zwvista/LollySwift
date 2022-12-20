@@ -67,7 +67,7 @@ class SettingsViewController: NSViewController, SettingsViewModelDelegate, NSTab
             await vm.getData()
         }
     }
-    
+
     @IBAction func close(_ sender: AnyObject) {
         let app = NSApplication.shared
         app.stopModal()
@@ -92,7 +92,7 @@ class SettingsViewController: NSViewController, SettingsViewModelDelegate, NSTab
             await vm.nextUnitPart()
         }
     }
-    
+
     func onGetData() {
         acLanguages.content = vm.arrLanguages
     }
@@ -104,11 +104,11 @@ class SettingsViewController: NSViewController, SettingsViewModelDelegate, NSTab
         acDictsTranslation.content = vm.arrDictsTranslation
         acTextbooks.content = vm.arrTextbooks
     }
-    
+
     func numberOfRows(in tableView: NSTableView) -> Int {
         vm.selectedDictsReference.count
     }
-    
+
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! NSTableCellView
         let columnName = tableColumn!.identifier.rawValue
@@ -123,7 +123,7 @@ class SettingsViewController: NSViewController, SettingsViewModelDelegate, NSTab
         }
         self.presentAsModalWindow(dictVC)
     }
-    
+
     func onUpdateTextbook() {
         acUnits.content = vm.arrUnits
         acParts.content = vm.arrParts

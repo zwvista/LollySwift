@@ -72,7 +72,7 @@ class WordsReviewViewController: WordsBaseViewController, NSTextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
+
     override func viewDidAppear() {
         super.viewDidAppear()
         settingsChanged()
@@ -89,7 +89,7 @@ class WordsReviewViewController: WordsBaseViewController, NSTextFieldDelegate {
         wc = nil
         vm.subscriptionTimer?.cancel()
     }
-    
+
     @IBAction func newTest(_ sender: AnyObject) {
         let optionsVC = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: "ReviewOptionsViewController") as! ReviewOptionsViewController
         optionsVC.options = vm.options
@@ -100,7 +100,7 @@ class WordsReviewViewController: WordsBaseViewController, NSTextFieldDelegate {
         }
         self.presentAsSheet(optionsVC)
     }
-    
+
     func controlTextDidEndEditing(_ obj: Notification) {
         let textfield = obj.object as! NSControl
         let code = (obj.userInfo!["NSTextMovement"] as! NSNumber).intValue
@@ -110,7 +110,7 @@ class WordsReviewViewController: WordsBaseViewController, NSTextFieldDelegate {
             await vm.check(toNext: true)
         }
     }
-    
+
     @IBAction func check(_ sender: NSButton) {
         Task {
             await vm.check(toNext: sender == btnCheckNext)
@@ -123,7 +123,7 @@ class WordsReviewViewController: WordsBaseViewController, NSTextFieldDelegate {
 }
 
 class WordsReviewWindowController: WordsBaseWindowController {
-    
+
     deinit {
         print("DEBUG: \(self.className) deinit")
     }

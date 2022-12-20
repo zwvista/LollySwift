@@ -22,7 +22,7 @@ class PatternsWebPagesDetailViewController: NSViewController {
     @IBOutlet weak var btnNew: NSButton!
     @IBOutlet weak var btnExisting: NSButton!
     @IBOutlet weak var btnOK: NSButton!
-    
+
     var vm: PatternsViewModel!
     var vmEdit: PatternsWebPagesDetailViewModel!
     var itemEdit: MPatternWebPageEdit { vmEdit.itemEdit }
@@ -50,7 +50,7 @@ class PatternsWebPagesDetailViewController: NSViewController {
             }
         } ~ subscriptions
     }
-    
+
     override func viewDidAppear() {
         super.viewDidAppear()
         // https://stackoverflow.com/questions/24235815/cocoa-how-to-set-window-title-from-within-view-controller-in-swift
@@ -61,7 +61,7 @@ class PatternsWebPagesDetailViewController: NSViewController {
     @IBAction func newWebPageID(_ sender: Any) {
         itemEdit.WEBPAGEID = "0"
     }
-    
+
     @IBAction func existingWebPageID(_ sender: Any) {
         let webPageVC = self.storyboard!.instantiateController(withIdentifier: "WebPageSelectViewController") as! WebPageSelectViewController
         webPageVC.vm = vm
@@ -73,7 +73,7 @@ class PatternsWebPagesDetailViewController: NSViewController {
         }
         self.presentAsModalWindow(webPageVC)
     }
-    
+
     deinit {
         print("DEBUG: \(self.className) deinit")
     }

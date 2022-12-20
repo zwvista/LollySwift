@@ -12,7 +12,7 @@ class PatternsSplitViewModel: NSObject {
     var arrPatterns = [MPattern]()
     var arrPatternVariations = [MPatternVariation]()
     var itemEdit: MPatternEdit
-    
+
     init(item: MPattern) {
         arrPatterns = [item]
         let strs = item.PATTERN.split(separator: "／")

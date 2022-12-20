@@ -16,7 +16,7 @@ extension NSSegmentedControl {
     var selectedSegmentProperty: Publishers.ControlProperty2<NSSegmentedControl, Int> {
         Publishers.ControlProperty2(control: self, getter: \.selectedSegmentPublisher, setter: \.selectedSegment)
     }
-    
+
     @objc var selectedLabel: String {
         get {
             label(forSegment: selectedSegment)!
@@ -32,7 +32,7 @@ extension NSSegmentedControl {
     var selectedLabelProperty: Publishers.ControlProperty2<NSSegmentedControl, String> {
         Publishers.ControlProperty2(control: self, getter: \.selectedLabelPublisher, setter: \.selectedLabel)
     }
-    
+
     @objc var isOn: Bool {
         get {
             selectedSegment == 1

@@ -11,7 +11,7 @@ import WebKit
 import Combine
 
 class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidation {
-    
+
     var vm: PhrasesUnitViewModel!
     override var vmPhrases: PhrasesBaseViewModel { vm }
     override var vmSettings: SettingsViewModel! { vm.vmSettings }
@@ -20,7 +20,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     // https://developer.apple.com/videos/play/wwdc2011/120/
     // https://stackoverflow.com/questions/2121907/drag-drop-reorder-rows-on-nstableview
     let tableRowDragType = NSPasteboard.PasteboardType(rawValue: "private.table-row")
-    
+
     override func applyFilters() {
         vm.applyFilters()
         tvPhrases.reloadData()
@@ -30,7 +30,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
         super.viewDidLoad()
         tvPhrases.registerForDraggedTypes([tableRowDragType])
     }
-    
+
     // https://stackoverflow.com/questions/8017822/how-to-enable-disable-nstoolbaritem
     func validateToolbarItem(_ item: NSToolbarItem) -> Bool {
         let s = item.paletteLabel
@@ -44,15 +44,15 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
         }
         super.settingsChanged()
     }
-    
+
     func numberOfRows(in tableView: NSTableView) -> Int {
         tableView === tvPhrases ? arrPhrases.count : vmWordsLang.arrWords.count
     }
-    
+
     override func phraseItemForRow(row: Int) -> (MPhraseProtocol & NSObject)? {
         arrPhrases[row]
     }
-    
+
     override func endEditing(row: Int) {
         Task {
             let item = arrPhrases[row]
@@ -70,14 +70,14 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
             return nil
         }
     }
-    
+
     func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int, proposedDropOperation dropOperation: NSTableView.DropOperation) -> NSDragOperation {
         if dropOperation == .above {
             return .move
         }
         return []
     }
-    
+
     func tableView(_ tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int, dropOperation: NSTableView.DropOperation) -> Bool {
         var oldIndexes = [Int]()
         info.enumerateDraggingItems(options: [], for: tableView, classes: [NSPasteboardItem.self], searchOptions: [:]) { (draggingItem, _, _) in
@@ -114,7 +114,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
         
         return true
     }
-    
+
     func addPhrase(wordid: Int) {
         let editVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesUnitDetailViewController") as! PhrasesUnitDetailViewController
         editVC.startEdit(vm: vm, item: vm.newUnitPhrase(), wordid: wordid)
@@ -126,7 +126,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     @IBAction func addPhrase(_ sender: AnyObject) {
         addPhrase(wordid: 0)
     }
-    
+
     @IBAction func batchAdd(_ sender: AnyObject) {
         let batchVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesUnitBatchAddViewController") as! PhrasesUnitBatchAddViewController
         batchVC.startEdit(vm: vm)
@@ -150,14 +150,14 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
             doRefresh()
         }
     }
-    
+
     @IBAction func refreshTableView(_ sender: AnyObject) {
         Task {
             await vm.reload()
             doRefresh()
         }
     }
-    
+
     @IBAction func doubleAction(_ sender: AnyObject) {
         if NSApp.currentEvent!.modifierFlags.contains(.option) {
             associateExistingWords(sender)
@@ -184,7 +184,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
             doRefresh()
         }
     }
-    
+
     @IBAction func nextUnitPart(_ sender: AnyObject) {
         Task {
             await vmSettings.nextUnitPart()
@@ -192,7 +192,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
             doRefresh()
         }
     }
-    
+
     @IBAction func toggleToType(_ sender: AnyObject) {
         let row = tvPhrases.selectedRow
         let part = row == -1 ? vmSettings.arrParts[0].value : arrPhrases[row].PART
@@ -206,7 +206,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     override func updateStatusText() {
         tfStatusText.stringValue = "\(tvPhrases.numberOfRows) Phrases in \(vmSettings.UNITINFO)"
     }
-    
+
     @IBAction func associateNewWord(_ sender: AnyObject) {
         guard vm.selectedPhraseID != 0 else {return}
         (NSApplication.shared.delegate as! AppDelegate).addNewUnitWord(phraseid: vm.selectedPhraseID)

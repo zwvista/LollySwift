@@ -11,12 +11,12 @@ import WebKit
 import Combine
 
 class PhrasesLangViewController: PhrasesBaseViewController {
-    
+
     var vm: PhrasesLangViewModel!
     override var vmPhrases: PhrasesBaseViewModel { vm }
     override var vmSettings: SettingsViewModel! { vm.vmSettings }
     var arrPhrases: [MLangPhrase] { vm.arrPhrasesFiltered ?? vm.arrPhrases }
-    
+
     override func applyFilters() {
         vm.applyFilters()
         tvPhrases.reloadData()
@@ -25,22 +25,22 @@ class PhrasesLangViewController: PhrasesBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
+
     override func settingsChanged() {
         vm = PhrasesLangViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) {
             self.doRefresh()
         }
         super.settingsChanged()
     }
-    
+
     func numberOfRows(in tableView: NSTableView) -> Int {
         tableView === tvPhrases ? arrPhrases.count : vmWordsLang.arrWords.count
     }
-    
+
     override func phraseItemForRow(row: Int) -> (MPhraseProtocol & NSObject)? {
         arrPhrases[row]
     }
-    
+
     override func endEditing(row: Int) {
         Task {
             let item = arrPhrases[row]
@@ -70,7 +70,7 @@ class PhrasesLangViewController: PhrasesBaseViewController {
             doRefresh()
         }
     }
-    
+
     @IBAction func doubleAction(_ sender: AnyObject) {
         if NSApp.currentEvent!.modifierFlags.contains(.option) {
             associateWords(sender)

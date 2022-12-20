@@ -68,7 +68,7 @@ class WordsReviewViewController: UIViewController, UITextFieldDelegate {
 
         newTest(self)
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         vm.subscriptionTimer?.cancel()
@@ -77,19 +77,19 @@ class WordsReviewViewController: UIViewController, UITextFieldDelegate {
     @IBAction func newTest(_ sender: AnyObject) {
         performSegue(withIdentifier: "options", sender: sender)
     }
-    
+
     @IBAction func check(_ sender: UIButton) {
         Task {
             await vm.check(toNext: sender == btnCheckNext)
         }
     }
-    
+
     @IBAction func isSpeakingChanged(_ sender: AnyObject) {
         if isSpeaking {
             speak(sender)
         }
     }
-    
+
     @IBAction func speak(_ sender: AnyObject) {
         AppDelegate.speak(string: vm.currentWord)
     }
@@ -100,19 +100,19 @@ class WordsReviewViewController: UIViewController, UITextFieldDelegate {
         }
         return false
     }
-    
+
     // https://stackoverflow.com/questions/18755410/how-to-dismiss-keyboard-ios-programmatically-when-pressing-return
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         if let controller = (segue.destination as? UINavigationController)?.topViewController as? ReviewOptionsViewController {
             controller.options = vm.options
         }
     }
-    
+
     @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
         guard segue.identifier == "Done" else {return}
         if let controller = segue.source as? ReviewOptionsViewController {

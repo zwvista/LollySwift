@@ -11,7 +11,7 @@ import DropDown
 import Combine
 
 class PhrasesBaseViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate {
-    
+
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var sbTextFilter: UISearchBar!
     @IBOutlet weak var btnScopeFilter: UIButton!
@@ -41,11 +41,11 @@ class PhrasesBaseViewController: UIViewController, UITableViewDelegate, UITableV
             self.applyFilters()
         } ~ subscriptions
     }
-    
+
     @objc func refresh(_ sender: UIRefreshControl) {
         refresh()
     }
-    
+
     func refresh() {
     }
 
@@ -56,7 +56,7 @@ class PhrasesBaseViewController: UIViewController, UITableViewDelegate, UITableV
     func itemForRow(row: Int) -> (MPhraseProtocol & NSObject)? {
         nil
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PhraseCell", for: indexPath) as! PhrasesCommonCell
         let item = itemForRow(row: indexPath.row)!
@@ -67,11 +67,11 @@ class PhrasesBaseViewController: UIViewController, UITableViewDelegate, UITableV
         cell.lblTranslation!.text = item.TRANSLATION
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         true
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let item = itemForRow(row: indexPath.row)!
         if tableView.isEditing {
@@ -80,11 +80,11 @@ class PhrasesBaseViewController: UIViewController, UITableViewDelegate, UITableV
             AppDelegate.speak(string: item.PHRASE)
         }
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         0
     }
-    
+
     func applyFilters() {
     }
 

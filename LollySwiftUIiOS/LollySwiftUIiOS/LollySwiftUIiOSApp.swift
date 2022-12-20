@@ -12,13 +12,13 @@ import AVFoundation
 struct LollySwiftUIiOSApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     private static let synth = AVSpeechSynthesizer()
-    
+
     var body: some Scene {
         WindowGroup {
             ContentView()
         }
     }
-    
+
     static func speak(string: String) {
         let utterance = AVSpeechUtterance(string: string)
         utterance.voice = AVSpeechSynthesisVoice(identifier: vmSettings.selectediOSVoice.VOICENAME)

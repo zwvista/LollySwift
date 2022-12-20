@@ -11,7 +11,7 @@ import Combine
 
 @MainActor
 class SettingsViewModel: NSObject, ObservableObject {
-    
+
     var arrUSMappings = [MUSMapping]()
     var arrUserSettings = [MUserSetting]()
     private func getUSValue(info: MUserSettingInfo) -> String? {
@@ -106,12 +106,12 @@ class SettingsViewModel: NSObject, ObservableObject {
     var selectedDictReference: MDictionary { arrDictsReference.indices ~= selectedDictReferenceIndex ? arrDictsReference[selectedDictReferenceIndex] : MDictionary() }
     var selectedDictsReferenceIndexes = [Int]()
     var selectedDictsReference: [MDictionary] { selectedDictsReferenceIndexes.map { arrDictsReference[$0] } }
-    
+
     @Published var arrDictsNote = [MDictionary]()
     @Published var selectedDictNoteIndex = -1
     var selectedDictNote: MDictionary { arrDictsNote.indices ~= selectedDictNoteIndex ? arrDictsNote[selectedDictNoteIndex] : MDictionary() }
     var hasDictNote: Bool { selectedDictNote.ID != 0 }
-    
+
     @Published var arrDictsTranslation = [MDictionary]()
     @Published var selectedDictTranslationIndex = -1
     var selectedDictTranslation: MDictionary { arrDictsTranslation.indices ~= selectedDictTranslationIndex ? arrDictsTranslation[selectedDictTranslationIndex] : MDictionary() }
@@ -167,7 +167,7 @@ class SettingsViewModel: NSObject, ObservableObject {
 
     var arrAutoCorrect = [MAutoCorrect]()
     var arrDictTypes = [MCode]()
-    
+
     weak var delegate: SettingsViewModelDelegate?
 
     var initialized = false
@@ -555,7 +555,7 @@ class SettingsViewModel: NSObject, ObservableObject {
             }
         }
     }
-    
+
     private func doUpdateUnitPartFrom() async {
         await withTaskGroup(of: Void.self) {
             $0.addTask { await self.doUpdateUnitFrom(v: self.USUNITTO) }

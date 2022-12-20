@@ -9,13 +9,13 @@
 import Cocoa
 
 class ReadNumberViewController: NSViewController, NSTextFieldDelegate {
-    
+
     @objc dynamic var vm: ReadNumberViewModel!
     private var _observers = [NSKeyValueObservation]()
 
     @IBOutlet weak var tfNumber: NSTextField!
     @IBOutlet weak var tfText: NSTextField!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         vm = ReadNumberViewModel()
@@ -23,12 +23,12 @@ class ReadNumberViewController: NSViewController, NSTextFieldDelegate {
             self.tfText.stringValue = change.newValue!
         })
     }
-    
+
     override func viewWillDisappear() {
         super.viewWillDisappear()
         _observers.removeAll()
     }
-    
+
     func controlTextDidEndEditing(_ obj: Notification) {
         let textfield = obj.object as! NSControl
         let code = (obj.userInfo!["NSTextMovement"] as! NSNumber).intValue
@@ -45,7 +45,7 @@ class ReadNumberViewController: NSViewController, NSTextFieldDelegate {
 }
 
 class ReadNumberWindowController: NSWindowController {
-    
+
     override func windowDidLoad() {
         super.windowDidLoad()
     }

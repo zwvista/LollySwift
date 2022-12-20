@@ -44,7 +44,7 @@ class MReviewOptionsEdit: ObservableObject {
         onRepeat = x.onRepeat
         moveForward = x.moveForward
     }
-    
+
     func save(to x: MReviewOptions) {
         x.mode = ReviewMode(rawValue: mode)!
         x.interval = interval

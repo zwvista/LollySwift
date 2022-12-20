@@ -11,11 +11,11 @@ import Combine
 import CombineCocoa
 
 class LoginViewController: UIViewController {
-    
+
     @IBOutlet weak var tfUsername: UITextField!
     @IBOutlet weak var tfPassword: UITextField!
     @IBOutlet weak var btnLogin: UIButton!
-    
+
     let vm = LoginViewModel()
     var completion: (() -> Void)?
     var subscriptions = Set<AnyCancellable>()

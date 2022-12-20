@@ -52,17 +52,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationShouldTerminateAfterLastWindowClosed() -> Bool {
         true
     }
-    
+
     func showWindow(storyBoardName: String, windowControllerName: String) {
         let storyboard = NSStoryboard(name: storyBoardName, bundle: nil)
         let wc = storyboard.instantiateController(withIdentifier: windowControllerName) as! NSWindowController
         wc.showWindow(self)
     }
-    
+
     func findWindow(windowControllerName: String) -> NSWindow? {
         NSApplication.shared.windows.first(where: { $0.windowController?.className.contains( windowControllerName) ?? false })
     }
-    
+
     func findOrShowWindow(storyBoardName: String, windowControllerName: String) -> NSWindow {
         if let w = findWindow(windowControllerName: windowControllerName) {
             // https://stackoverflow.com/questions/29328281/os-x-menubar-application-how-to-bring-window-to-front
@@ -73,7 +73,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             return findWindow(windowControllerName: windowControllerName)!
         }
     }
-    
+
     func runModal(storyBoardName: String, windowControllerName: String) -> NSApplication.ModalResponse {
         let storyboard = NSStoryboard(name: storyBoardName, bundle: nil)
         let wc = storyboard.instantiateController(withIdentifier: windowControllerName) as! NSWindowController
@@ -100,11 +100,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBAction func settings(_ sender: AnyObject) {
         _ = runModal(storyBoardName: "Main", windowControllerName: "SettingsWindowController")
     }
-    
+
     @IBAction func wordsInUnit(_ sender: AnyObject) {
         _ = findOrShowWindow(storyBoardName: "Words", windowControllerName: "WordsUnitWindowController")
     }
-    
+
     @IBAction func wordsInUnitNew(_ sender: AnyObject) {
         showWindow(storyBoardName: "Words", windowControllerName: "WordsUnitWindowController")
     }
@@ -116,11 +116,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBAction func phrasesInUnitNew(_ sender: AnyObject) {
         showWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesUnitWindowController")
     }
-    
+
     @IBAction func wordsReview(_ sender: AnyObject) {
         _ = findOrShowWindow(storyBoardName: "Words", windowControllerName: "WordsReviewWindowController")
     }
-    
+
     @IBAction func wordsReviewNew(_ sender: AnyObject) {
         showWindow(storyBoardName: "Words", windowControllerName: "WordsReviewWindowController")
     }
@@ -136,15 +136,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBAction func wordsInTextbook(_ sender: AnyObject) {
         _ = findOrShowWindow(storyBoardName: "Words", windowControllerName: "WordsTextbookWindowController")
     }
-    
+
     @IBAction func wordsInTextbookNew(_ sender: AnyObject) {
         showWindow(storyBoardName: "Words", windowControllerName: "WordsTextbookWindowController")
     }
-    
+
     @IBAction func phrasesInTextbook(_ sender: AnyObject) {
         showWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesTextbookWindowController")
     }
-    
+
     @IBAction func phrasesInTextbookNew(_ sender: AnyObject) {
         showWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesTextbookWindowController")
     }
@@ -164,11 +164,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBAction func phrasesInLanguageNew(_ sender: AnyObject) {
         showWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesLangWindowController")
     }
-    
+
     @IBAction func patternsInLanguage(_ sender: AnyObject) {
         _ = findOrShowWindow(storyBoardName: "Patterns", windowControllerName: "PatternsWindowController")
     }
-    
+
     @IBAction func patternsInLanguageNew(_ sender: AnyObject) {
         showWindow(storyBoardName: "Patterns", windowControllerName: "PatternsWindowController")
     }
@@ -184,7 +184,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBAction func textbooks(_ sender: AnyObject) {
         showWindow(storyBoardName: "Textbooks", windowControllerName: "TextbooksWindowController")
     }
-    
+
     @IBAction func webtextbooks(_ sender: AnyObject) {
         showWindow(storyBoardName: "Textbooks", windowControllerName: "WebTextbooksWindowController")
     }
@@ -192,11 +192,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBAction func dictionaries(_ sender: AnyObject) {
         showWindow(storyBoardName: "Dicts", windowControllerName: "DictsWindowController")
     }
-    
+
     @IBAction func readNumber(_ sender: AnyObject) {
         showWindow(storyBoardName: "Misc", windowControllerName: "ReadNumberWindowController")
     }
-    
+
     @IBAction func speak(_ sender: AnyObject) {
         synth.setVoice(NSSpeechSynthesizer.VoiceName(rawValue: AppDelegate.theSettingsViewModel.macVoiceName))
         let s = NSPasteboard.general.string(forType: .string) ?? ""
@@ -209,14 +209,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         v.addNewWord(word: word)
         w.makeKeyAndOrderFront(nil)
     }
-    
+
     func addNewUnitPhrase(wordid: Int) {
         let w = NSApplication.shared.windows.last!
         let v = findOrShowWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesUnitWindowController").contentViewController as! PhrasesUnitViewController
         v.addPhrase(wordid: wordid)
         w.makeKeyAndOrderFront(nil)
     }
-    
+
     func addNewUnitWord(phraseid: Int) {
         let w = NSApplication.shared.windows.last!
         wordsInUnit(self)

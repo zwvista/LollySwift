@@ -53,7 +53,7 @@ class PatternsWebPagesDetailViewController: UITableViewController {
         // https://stackoverflow.com/questions/7525437/how-to-set-focus-to-a-textfield-in-iphone
         tfTitle.becomeFirstResponder()
     }
-    
+
     @IBAction func newWebPage(_ sender: AnyObject) {
         itemEdit.WEBPAGEID = "0"
         itemEdit.TITLE = ""

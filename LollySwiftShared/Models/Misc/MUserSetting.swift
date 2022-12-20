@@ -30,7 +30,7 @@ class MUserSetting: NSObject, Codable {
         let url = "\(CommonApi.urlAPI)USERSETTINGS?filter=USERID,eq,\(globalUser.userid)"
         return await RestApi.getRecords(MUserSettings.self, url: url)
     }
-    
+
     static func update(_ id: Int, body: String) async {
         let url = "\(CommonApi.urlAPI)USERSETTINGS/\(id)"
         // SQL: UPDATE USERSETTINGS SET VALUE1=? WHERE ID=?
@@ -39,12 +39,12 @@ class MUserSetting: NSObject, Codable {
         // SQL: UPDATE USERSETTINGS SET VALUE4=? WHERE ID=?
         print(await RestApi.update(url: url, body: body))
     }
-    
+
     static func update(info: MUserSettingInfo, intValue: Int) async {
         let body = "VALUE\(info.VALUEID)=\(intValue)"
         await update(info.USERSETTINGID, body: body)
     }
-    
+
     static func update(info: MUserSettingInfo, stringValue: String) async {
         let body = "VALUE\(info.VALUEID)=\(stringValue)"
         await update(info.USERSETTINGID, body: body)

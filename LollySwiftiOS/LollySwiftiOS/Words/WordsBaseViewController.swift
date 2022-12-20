@@ -16,7 +16,7 @@ class WordsBaseViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var sbTextFilter: UISearchBar!
     @IBOutlet weak var btnScopeFilter: UIButton!
     let refreshControl = UIRefreshControl()
-    
+
     let ddScopeFilter = DropDown()
     var vmBase: WordsBaseViewModel! { nil }
     var subscriptions = Set<AnyCancellable>()
@@ -35,11 +35,11 @@ class WordsBaseViewController: UIViewController, UITableViewDelegate, UITableVie
         vmBase.$textFilter <~> sbTextFilter.searchTextField.textProperty ~ subscriptions
         vmBase.$scopeFilter ~> (btnScopeFilter, \.titleNormal) ~ subscriptions
     }
-    
+
     @objc func refresh(_ sender: UIRefreshControl) {
         refresh()
     }
-    
+
     func refresh() {
     }
 
@@ -61,16 +61,16 @@ class WordsBaseViewController: UIViewController, UITableViewDelegate, UITableVie
         cell.lblNote.text = item.NOTE
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         true
     }
-    
+
     func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
         let item = itemForRow(row: indexPath.row)!
         performSegue(withIdentifier: "dict", sender: item)
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let item = itemForRow(row: indexPath.row)!
         if tableView.isEditing {
@@ -79,11 +79,11 @@ class WordsBaseViewController: UIViewController, UITableViewDelegate, UITableVie
             AppDelegate.speak(string: item.WORD)
         }
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         0
     }
-    
+
     func applyFilters() {
     }
 

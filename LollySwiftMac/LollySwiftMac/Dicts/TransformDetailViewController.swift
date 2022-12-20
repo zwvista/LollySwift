@@ -33,7 +33,7 @@ class TransformDetailViewController: NSViewController, NSTableViewDataSource, NS
         tvTranformItems.reloadData()
         tvTranformItems.registerForDraggedTypes([tableRowDragType])
     }
-    
+
     override func viewDidAppear() {
         super.viewDidAppear()
         view.window?.title = "Transform Edit"
@@ -42,7 +42,7 @@ class TransformDetailViewController: NSViewController, NSTableViewDataSource, NS
     func numberOfRows(in tableView: NSTableView) -> Int {
         vm.arrTranformItems.count
     }
-    
+
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! NSTableCellView
         let columnName = tableColumn!.identifier.rawValue
@@ -50,20 +50,20 @@ class TransformDetailViewController: NSViewController, NSTableViewDataSource, NS
         cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
         return cell
     }
-    
+
     func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
         let item = NSPasteboardItem()
         item.setString(String(row), forType: tableRowDragType)
         return item
     }
-    
+
     func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int, proposedDropOperation dropOperation: NSTableView.DropOperation) -> NSDragOperation {
         if dropOperation == .above {
             return .move
         }
         return []
     }
-    
+
     func tableView(_ tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int, dropOperation: NSTableView.DropOperation) -> Bool {
         var oldIndexes = [Int]()
         info.enumerateDraggingItems(options: [], for: tableView, classes: [NSPasteboardItem.self], searchOptions: [:]) { (draggingItem, _, _) in
@@ -98,7 +98,7 @@ class TransformDetailViewController: NSViewController, NSTableViewDataSource, NS
         
         return true
     }
-    
+
     @IBAction func addTransformItem(_ sender: AnyObject) {
         let itemEditVC = self.storyboard!.instantiateController(withIdentifier: "TransformItemEditController") as! TransformItemEditController
         itemEditVC.item = vm.newTransformItem()
@@ -127,13 +127,13 @@ class TransformDetailViewController: NSViewController, NSTableViewDataSource, NS
             wvSource.load(URLRequest(url: URL(string: vm.sourceUrl)!))
         }
     }
-    
+
     @IBAction func executeTransform(_ sender: Any) {
         vm.executeTransform()
         wvResult.loadHTMLString(vm.resultHtml, baseURL: nil)
         tvTransform.selectTabViewItem(at: 1)
     }
-    
+
     @IBAction func getHtmlAndTransform(_ sender: Any) {
         Task {
             await vm.getHtml()
@@ -145,7 +145,7 @@ class TransformDetailViewController: NSViewController, NSTableViewDataSource, NS
     @IBAction func interimIndexChanged(_ sender: Any) {
         vm.updateInterimText()
     }
-    
+
     @IBAction func okClicked(_ sender: Any) {
         // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
         self.commitEditing()

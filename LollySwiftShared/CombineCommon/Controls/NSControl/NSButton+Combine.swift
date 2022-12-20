@@ -21,7 +21,7 @@ extension NSButton {
         })
         .eraseToAnyPublisher()
     }
-    
+
     @objc var isOn: Bool {
         get {
             state == .on

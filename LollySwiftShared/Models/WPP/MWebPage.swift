@@ -34,7 +34,7 @@ class MWebPage: NSObject, Codable {
         let url = "\(CommonApi.urlAPI)WEBPAGES?filter=ID,eq,\(id)"
         return await RestApi.getRecords(MWebPages.self, url: url)
     }
-    
+
     static func getDataBySearch(title t: String, url u: String) async -> [MWebPage] {
         // SQL: SELECT * FROM WEBPAGES WHERE LOCATE(?, TITLE) <> 0 AND LOCATE(?, URL) <> 0
         var filter = ""
@@ -78,7 +78,7 @@ class MWebPage: NSObject, Codable {
         print(id)
         return id
     }
-    
+
     static func delete(_ id: Int) async {
         // SQL: DELETE WEBPAGES WHERE ID=?
         let url = "\(CommonApi.urlAPI)WEBPAGES/\(id)"

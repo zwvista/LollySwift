@@ -126,7 +126,7 @@ class WordsReviewViewModel: WordsBaseViewModel {
             checkOnRepeat()
         }
     }
-    
+
     var currentItem: MUnitWord? { hasCurrent ? arrWords[index] : nil }
     var currentWord: String { hasCurrent ? arrWords[index].WORD : "" }
     func getTranslation() async -> String {
@@ -176,7 +176,7 @@ class WordsReviewViewModel: WordsBaseViewModel {
             checkPrevTitle = "Check"
         }
     }
-    
+
     func doTest() async {
         indexHidden = !hasCurrent
         correctHidden = true

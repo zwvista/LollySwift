@@ -58,18 +58,18 @@ class PhrasesTextbookDetailViewController: NSViewController, NSTableViewDataSour
             }
         } ~ subscriptions
     }
-    
+
     override func viewDidAppear() {
         super.viewDidAppear()
         // https://stackoverflow.com/questions/24235815/cocoa-how-to-set-window-title-from-within-view-controller-in-swift
         (vmEdit.isAdd ? tfPhrase : tfTranslation).becomeFirstResponder()
         view.window?.title = item.PHRASE
     }
-    
+
     func numberOfRows(in tableView: NSTableView) -> Int {
         arrPhrases.count
     }
-    
+
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! NSTableCellView
         let item = arrPhrases[row]
@@ -77,7 +77,7 @@ class PhrasesTextbookDetailViewController: NSViewController, NSTableViewDataSour
         cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
         return cell
     }
-    
+
     deinit {
         print("DEBUG: \(self.className) deinit")
     }

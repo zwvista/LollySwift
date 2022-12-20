@@ -21,7 +21,7 @@ class TransformItemEditController: NSViewController {
         super.viewDidLoad()
         // Do view setup here.
     }
-    
+
     override func viewDidAppear() {
         super.viewDidAppear()
         view.window?.title = "Transform Item Edit"

@@ -21,10 +21,10 @@ class MLangPhrase: NSObject, Codable, MPhraseProtocol {
     dynamic var LANGID = 0
     dynamic var PHRASE = ""
     dynamic var TRANSLATION = ""
-    
+
     override init() {
     }
-    
+
     init(unititem: MUnitPhrase) {
         ID = unititem.PHRASEID
         LANGID = unititem.LANGID
@@ -45,7 +45,7 @@ class MLangPhrase: NSObject, Codable, MPhraseProtocol {
         let body = "TRANSLATION=\(translation)"
         print(await RestApi.update(url: url, body: body))
     }
-    
+
     static func update(item: MLangPhrase) async {
         // SQL: UPDATE LANGPHRASES SET PHRASE=?, TRANSLATION=? WHERE ID=?
         let url = "\(CommonApi.urlAPI)LANGPHRASES/\(item.ID)"
@@ -59,7 +59,7 @@ class MLangPhrase: NSObject, Codable, MPhraseProtocol {
         print(id)
         return id
     }
-    
+
     static func delete(item: MLangPhrase) async {
         // SQL: CALL LANGPHRASES_DELETE
         let url = "\(CommonApi.urlSP)LANGPHRASES_DELETE"
@@ -78,7 +78,7 @@ class MLangPhraseEdit: ObservableObject {
         PHRASE = x.PHRASE
         TRANSLATION = x.TRANSLATION
     }
-    
+
     func save(to x: MLangPhrase) {
         x.PHRASE = PHRASE
         x.TRANSLATION = TRANSLATION

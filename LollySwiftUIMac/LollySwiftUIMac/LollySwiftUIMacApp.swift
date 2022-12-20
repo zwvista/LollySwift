@@ -13,7 +13,7 @@ struct LollySwiftUIMacApp: App {
     static let theSettingsViewModel = SettingsViewModel()
     let synth = NSSpeechSynthesizer()
     let disposeBag = DisposeBag()
-    
+
     init() {
         LollySwiftUIMacApp.theSettingsViewModel.getData().subscribe(onNext: {
         }) ~ disposeBag

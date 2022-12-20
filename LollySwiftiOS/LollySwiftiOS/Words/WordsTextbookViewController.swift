@@ -13,7 +13,7 @@ class WordsTextbookViewController: WordsBaseViewController {
 
     var vm: WordsUnitViewModel!
     var arrWords: [MUnitWord] { vm.arrWordsFiltered }
-    
+
     @IBOutlet weak var btnTextbookFilter: UIButton!
     let ddTextbookFilter = DropDown()
     override var vmBase: WordsBaseViewModel! { vm }
@@ -28,7 +28,7 @@ class WordsTextbookViewController: WordsBaseViewController {
         }
         vmBase.$stringTextbookFilter ~> (btnTextbookFilter, \.titleNormal) ~ subscriptions
     }
-    
+
     override func refresh() {
         view.showBlurLoader()
         vm = WordsUnitViewModel(settings: vmSettings, inTextbook: false, needCopy: false) {
@@ -37,7 +37,7 @@ class WordsTextbookViewController: WordsBaseViewController {
             self.view.removeBlurLoader()
         }
     }
-    
+
     @IBAction func showTextbookFilterDropDown(_ sender: AnyObject) {
         ddTextbookFilter.show()
     }
@@ -45,7 +45,7 @@ class WordsTextbookViewController: WordsBaseViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         arrWords.count
     }
-    
+
     override func itemForRow(row: Int) -> (MWordProtocol & NSObject)? {
         arrWords[row]
     }
@@ -103,7 +103,7 @@ class WordsTextbookViewController: WordsBaseViewController {
         
         return UISwipeActionsConfiguration(actions: [moreAction, deleteAction])
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         if let controller = (segue.destination as? UINavigationController)?.topViewController as? WordsTextbookDetailViewController {

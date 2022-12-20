@@ -24,11 +24,11 @@ class PhrasesUnitBatchEditViewController: UIViewController, UITableViewDelegate,
     var vm: PhrasesUnitViewModel!
     let ddUnit = DropDown()
     let ddPart = DropDown()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
+
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if textField === tfUnit {
             if swUnit.isOn {
@@ -46,7 +46,7 @@ class PhrasesUnitBatchEditViewController: UIViewController, UITableViewDelegate,
             return textField === tfSeqNum ? swSeqNum.isOn : true
         }
     }
-    
+
     func onDone() async {
         let unit = vmSettings.arrUnits[ddUnit.indexForSelectedRow!].value
         let part = vmSettings.arrParts[ddPart.indexForSelectedRow!].value
@@ -63,11 +63,11 @@ class PhrasesUnitBatchEditViewController: UIViewController, UITableViewDelegate,
             }
         }
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         tableView === tvActions ? 3 : vm.arrPhrases.count
     }
-    
+
 //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 //        tableView === tvActions ? UITableView.automaticDimension : 88
 //    }
@@ -110,7 +110,7 @@ class PhrasesUnitBatchEditViewController: UIViewController, UITableViewDelegate,
         }
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard tableView === tvPhrases else {return}
         let cell = tableView.cellForRow(at: indexPath)!

@@ -34,7 +34,7 @@ class MWordPhrase: NSObject, Codable {
     dynamic var ID = 0
     dynamic var WORDID = 0
     dynamic var PHRASEID = 0
-    
+
     private static func getDataByWordPhrase(wordid: Int, phraseid: Int) async -> [MWordPhrase] {
         // SQL: SELECT * FROM WORDSPHRASES WHERE WORDID=? AND PHRASEID=?
         let url = "\(CommonApi.urlAPI)WORDSPHRASES?filter=WORDID,eq,\(wordid)&filter=PHRASEID,eq,\(phraseid)"
@@ -48,13 +48,13 @@ class MWordPhrase: NSObject, Codable {
         print(id)
         return id
     }
-    
+
     private static func delete(_ id: Int) async {
         // SQL: DELETE WORDSPHRASES WHERE ID=?
         let url = "\(CommonApi.urlAPI)WORDSPHRASES/\(id)"
         print(await RestApi.delete(url: url))
     }
-    
+
     static func deleteByWordId(_ wordid: Int) async {
         // SQL: DELETE WORDSPHRASES WHERE WORDID=?
         let arr = await getPhrasesByWordId(wordid)
@@ -84,14 +84,14 @@ class MWordPhrase: NSObject, Codable {
             print(await create(item: item))
         }
     }
-    
+
     static func dissociate(wordid: Int, phraseid: Int) async {
         let arr = await getDataByWordPhrase(wordid: wordid, phraseid: phraseid)
         for v in arr {
             await delete(v.ID)
         }
     }
-    
+
     static func getPhrasesByWordId(_ wordid: Int) async -> [MLangPhrase] {
         // SQL: SELECT * FROM VPHRASESWORD WHERE WORDID=?
         let url = "\(CommonApi.urlAPI)VPHRASESWORD?filter=WORDID,eq,\(wordid)"

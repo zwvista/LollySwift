@@ -141,7 +141,7 @@ class PhrasesReviewViewModel: NSObject, ObservableObject {
             checkPrevTitle = "Check"
         }
     }
-    
+
     func doTest() {
         indexHidden = !hasCurrent
         correctHidden = true

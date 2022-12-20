@@ -26,7 +26,7 @@ class MPatternWebPage: NSObject, Codable {
 
     override init() {
     }
-    
+
     func copy(from x: MPatternWebPage) {
         ID = x.ID
         PATTERNID = x.PATTERNID
@@ -42,13 +42,13 @@ class MPatternWebPage: NSObject, Codable {
         let url = "\(CommonApi.urlAPI)VPATTERNSWEBPAGES?filter=PATTERNID,eq,\(patternid)&order=SEQNUM"
         return await RestApi.getRecords(MPatternWebPages.self, url: url)
     }
-    
+
     static func getDataById(_ id: Int) async -> [MPatternWebPage] {
         // SQL: SELECT * FROM VPATTERNSWEBPAGES WHERE ID=?
         let url = "\(CommonApi.urlAPI)VPATTERNSWEBPAGES?filter=ID,eq,\(id)"
         return await RestApi.getRecords(MPatternWebPages.self, url: url)
     }
-    
+
     static func update(_ id: Int, seqnum: Int) async {
         // SQL: UPDATE PATTERNSWEBPAGES SET SEQNUM=? WHERE ID=?
         let url = "\(CommonApi.urlAPI)PATTERNSWEBPAGES/\(id)"
@@ -69,7 +69,7 @@ class MPatternWebPage: NSObject, Codable {
         print(id)
         return id
     }
-    
+
     static func delete(_ id: Int) async {
         // SQL: DELETE PATTERNSWEBPAGES WHERE ID=?
         let url = "\(CommonApi.urlAPI)PATTERNSWEBPAGES/\(id)"
@@ -85,7 +85,7 @@ class MPatternWebPageEdit: ObservableObject {
     @Published var WEBPAGEID: String
     @Published var TITLE: String
     @Published var URL: String
-    
+
     init() {
         ID = ""
         PATTERNID = ""
@@ -105,7 +105,7 @@ class MPatternWebPageEdit: ObservableObject {
         TITLE = x.TITLE
         URL = x.URL
     }
-    
+
     func save(to x: MPatternWebPage) {
         x.SEQNUM = Int(SEQNUM)!
         x.WEBPAGEID = Int(WEBPAGEID)!

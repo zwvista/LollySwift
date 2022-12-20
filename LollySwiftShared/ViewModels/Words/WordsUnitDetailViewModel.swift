@@ -29,7 +29,7 @@ class WordsUnitDetailViewModel: NSObject, ObservableObject {
         guard !isAdd else {return}
         vmSingle = SingleWordViewModel(word: item.WORD, settings: vm.vmSettings, complete: complete)
     }
-    
+
     func onOK() async {
         itemEdit.save(to: item)
         item.WORD = vm.vmSettings.autoCorrectInput(text: item.WORD)

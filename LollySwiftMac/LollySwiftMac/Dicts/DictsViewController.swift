@@ -13,7 +13,7 @@ class DictsViewController: NSViewController, LollyProtocol, NSTableViewDataSourc
     @IBOutlet weak var tableView: NSTableView!
 
     var vm: DictsViewModel!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         settingsChanged()

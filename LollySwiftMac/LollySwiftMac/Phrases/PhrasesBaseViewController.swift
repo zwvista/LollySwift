@@ -10,7 +10,7 @@ import Cocoa
 import Combine
 
 class PhrasesBaseViewController: WordsPhrasesBaseViewController {
-    
+
     var vmWordsLang: WordsLangViewModel!
     override var vmWords: WordsBaseViewModel { vmWordsLang }
 
@@ -89,7 +89,7 @@ class PhrasesBaseViewController: WordsPhrasesBaseViewController {
         item.setValue(newValue, forKey: key)
         endEditing(row: row)
     }
-    
+
     @IBAction func deletePhrase(_ sender: AnyObject) {
         let row = tvPhrases.selectedRow
         guard row != -1 else {return}
@@ -102,7 +102,7 @@ class PhrasesBaseViewController: WordsPhrasesBaseViewController {
         guard alert.runModal() == .alertFirstButtonReturn else {return}
         deletePhrase(row: row)
     }
-    
+
     func deletePhrase(row: Int) {
     }
         
@@ -113,15 +113,15 @@ class PhrasesBaseViewController: WordsPhrasesBaseViewController {
     @IBAction func copyPhrase(_ sender: AnyObject) {
         MacApi.copyText(vmPhrases.selectedPhrase)
     }
-    
+
     @IBAction func googlePhrase(_ sender: AnyObject) {
         MacApi.googleString(vmPhrases.selectedPhrase)
     }
-    
+
     func updateStatusText() {
         tfStatusText.stringValue = "\(tvPhrases.numberOfRows) Phrases"
     }
-    
+
     override func speak() {
         guard isSpeaking else {return}
         let responder = view.window!.firstResponder
@@ -131,7 +131,7 @@ class PhrasesBaseViewController: WordsPhrasesBaseViewController {
             synth.startSpeaking(vmPhrases.selectedPhrase)
         }
     }
-    
+
     func getWords() async {
         await vmWordsLang.getWords(phraseid: vmPhrases.selectedPhraseID)
         tvWords.reloadData()

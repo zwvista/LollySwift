@@ -56,45 +56,45 @@ class WordsDictViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
         
         currentWordChanged()
     }
-    
+
     private func currentWordChanged() {
         AppDelegate.speak(string: vm.currentWord)
         btnWord.setTitle(vm.currentWord, for: .normal)
         dictStore.word = vm.currentWord
         selectDictChanged()
     }
-    
+
     private func selectDictChanged() {
         btnDict.setTitle(vmSettings.selectedDictReference.DICTNAME, for: .normal)
         dictStore.dict = vmSettings.selectedDictReference
         dictStore.searchDict()
     }
-    
+
     @IBAction func showWordDropDown(_ sender: AnyObject) {
         ddWord.show()
     }
-    
+
     @IBAction func showDictDropDown(_ sender: AnyObject) {
         ddDictReference.show()
     }
-    
+
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         true
     }
-    
+
     private func swipe(_ delta: Int) {
         vm.next(delta)
         ddWord.selectionAction!(vm.currentWordIndex, vm.currentWord)
     }
-    
+
     @IBAction func swipeLeft(_ sender: UISwipeGestureRecognizer){
         swipe(-1)
     }
-    
+
     @IBAction func swipeRight(_ sender: UISwipeGestureRecognizer){
         swipe(1)
     }
-    
+
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         dictStore.onNavigationFinished()
     }

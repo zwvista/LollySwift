@@ -44,7 +44,7 @@ class WordsUnitBatchAddViewController: NSViewController {
             }
         } ~ subscriptions
     }
-    
+
     override func viewDidAppear() {
         super.viewDidAppear()
         view.window?.title = "Batch Add"

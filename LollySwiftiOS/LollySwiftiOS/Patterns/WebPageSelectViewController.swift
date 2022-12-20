@@ -10,7 +10,7 @@ import UIKit
 import Combine
 
 class WebPageSelectViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
+
     @IBOutlet weak var tvSearch: UITableView!
     @IBOutlet weak var tvWebPages: UITableView!
     @IBOutlet weak var tfTitle: UITextField!
@@ -29,7 +29,7 @@ class WebPageSelectViewController: UIViewController, UITableViewDelegate, UITabl
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         tableView === tvSearch ? 2 : vmWebPage.arrWebPages.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let identifier = "WebPageCell" + (tableView === tvSearch ? "0\(indexPath.row)" : "10")
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! WebPagesCell
@@ -50,7 +50,7 @@ class WebPageSelectViewController: UIViewController, UITableViewDelegate, UITabl
          }
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         vmWebPage.selectedWebPage = vmWebPage.arrWebPages[indexPath.row]
         performSegue(withIdentifier: "close", sender: self)

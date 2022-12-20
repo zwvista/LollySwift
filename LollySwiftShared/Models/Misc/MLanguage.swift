@@ -18,9 +18,9 @@ class MLanguages: HasRecords {
 class MLanguage: NSObject, Codable {
     dynamic var ID = 0
     dynamic var LANGNAME = ""
-    
+
     override var description: String { LANGNAME }
-    
+
     enum CodingKeys : String, CodingKey {
         case ID
         case LANGNAME = "NAME"

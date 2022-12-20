@@ -36,7 +36,7 @@ class PatternsMergeViewController: NSViewController, NSTableViewDataSource, NSTa
     func numberOfRows(in tableView: NSTableView) -> Int {
         tableView === tvPatterns ? vm.arrPatterns.count : vm.arrPatternVariations.count
     }
-    
+
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! NSTableCellView
         let columnName = tableColumn!.identifier.rawValue
@@ -49,7 +49,7 @@ class PatternsMergeViewController: NSViewController, NSTableViewDataSource, NSTa
         }
         return cell
     }
-    
+
     @IBAction func endEditing(_ sender: NSTextField) {
         let row = tvPatternVariations.row(for: sender)
         guard row != -1 else {return}
@@ -62,14 +62,14 @@ class PatternsMergeViewController: NSViewController, NSTableViewDataSource, NSTa
         item.setString(String(row), forType: tableRowDragType)
         return item
     }
-    
+
     func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int, proposedDropOperation dropOperation: NSTableView.DropOperation) -> NSDragOperation {
         if dropOperation == .above {
             return .move
         }
         return []
     }
-    
+
     func tableView(_ tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int, dropOperation: NSTableView.DropOperation) -> Bool {
         var oldIndexes = [Int]()
         info.enumerateDraggingItems(options: [], for: tableView, classes: [NSPasteboardItem.self], searchOptions: [:]) { (draggingItem, _, _) in
@@ -106,14 +106,14 @@ class PatternsMergeViewController: NSViewController, NSTableViewDataSource, NSTa
         
         return true
     }
-    
+
     @IBAction func deleteVariation(_ sender: Any) {
         let row = tvPatternVariations.selectedRow
         guard row != -1 else {return}
         vm.arrPatternVariations.remove(at: row)
         tvPatternVariations.reloadData()
     }
-    
+
     @IBAction func okClicked(_ sender: AnyObject) {
         // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
         self.commitEditing()

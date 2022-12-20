@@ -20,7 +20,7 @@ class WordsUnitBatchAddViewModel: NSObject, ObservableObject {
         item = vm.newUnitWord()
         itemEdit = MUnitWordEdit(x: item)
     }
-    
+
     func onOK() async {
         itemEdit.save(to: item)
         let words = itemEdit.WORDS.split(separator: "\n")

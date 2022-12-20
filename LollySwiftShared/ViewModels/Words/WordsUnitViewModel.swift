@@ -57,7 +57,7 @@ class WordsUnitViewModel: WordsBaseViewModel {
             }
         }
     }
-    
+
     func create(item: MUnitWord) async {
         let id = await MUnitWord.create(item: item)
         if let o = await MUnitWord.getDataById(id, arrTextbooks: vmSettings.arrTextbooks) {
@@ -82,7 +82,7 @@ class WordsUnitViewModel: WordsBaseViewModel {
             complete(i - 1)
         }
     }
-    
+
     func newUnitWord() -> MUnitWord {
         MUnitWord().then {
             $0.LANGID = vmSettings.selectedLang.ID
@@ -94,18 +94,18 @@ class WordsUnitViewModel: WordsBaseViewModel {
             $0.textbook = vmSettings.selectedTextbook
         }
     }
-    
+
     func getNote(index: Int) async {
         let item = arrWords[index]
         await getNote(item: item)
     }
-    
+
     func getNote(item: MUnitWord) async {
         let note = await vmSettings.getNote(word: item.WORD)
         item.NOTE = note
         await WordsUnitViewModel.update(item.WORDID, note: note)
     }
-    
+
     func getNotes(ifEmpty: Bool, oneComplete: @escaping (Int) -> Void, allComplete: @escaping () -> Void) async {
         await vmSettings.getNotes(wordCount: arrWords.count, isNoteEmpty: {
             !ifEmpty || (self.arrWords[$0].NOTE).isEmpty
@@ -120,7 +120,7 @@ class WordsUnitViewModel: WordsBaseViewModel {
         item.NOTE = SettingsViewModel.zeroNote
         await WordsUnitViewModel.update(item.WORDID, note: item.NOTE)
     }
-    
+
     func clearNotes(ifEmpty: Bool, oneComplete: @escaping (Int) -> Void) async {
         await vmSettings.clearNotes(wordCount: arrWords.count, isNoteEmpty: {
             !ifEmpty || self.arrWords[$0].NOTE.isEmpty

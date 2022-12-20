@@ -11,7 +11,7 @@ import DropDown
 import Combine
 
 class WordsTextbookDetailViewController: UITableViewController, UITextFieldDelegate {
-    
+
     @IBOutlet weak var tfID: UITextField!
     @IBOutlet weak var tfTextbookName: UITextField!
     @IBOutlet weak var tfUnit: UITextField!
@@ -68,7 +68,7 @@ class WordsTextbookDetailViewController: UITableViewController, UITextFieldDeleg
         itemEdit.$ACCURACY ~> (tfAccuracy, \.text2) ~ subscriptions
         vmEdit.$isOKEnabled ~> (btnDone, \.isEnabled) ~ subscriptions
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         // https://stackoverflow.com/questions/7525437/how-to-set-focus-to-a-textfield-in-iphone
@@ -88,7 +88,7 @@ class WordsTextbookDetailViewController: UITableViewController, UITextFieldDeleg
             return true
         }
     }
-    
+
     deinit {
         print("DEBUG: \(self.className) deinit")
     }

@@ -29,14 +29,14 @@ class WebTextbooksViewController: NSViewController, LollyProtocol, NSTableViewDa
     func settingsChanged() {
         refreshTableView(self)
     }
-    
+
     @IBAction func refreshTableView(_ sender: AnyObject) {
         vm = WebTextbooksViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) {
             self.acTextbooks.content = self.vm.vmSettings.arrWebTextbookFilters
             self.tableView.reloadData()
         }
     }
-    
+
     func numberOfRows(in tableView: NSTableView) -> Int {
         arrWebTextbooks.count
     }
@@ -53,7 +53,7 @@ class WebTextbooksViewController: NSViewController, LollyProtocol, NSTableViewDa
         vm.applyFilters(textbookFilter: textbookFilter)
         tableView.reloadData()
     }
-    
+
     func tableViewSelectionDidChange(_ notification: Notification) {
         let row = tableView.selectedRow
         if row == -1 {

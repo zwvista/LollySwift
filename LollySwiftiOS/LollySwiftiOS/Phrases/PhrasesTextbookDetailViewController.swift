@@ -64,7 +64,7 @@ class PhrasesTextbookDetailViewController: UITableViewController {
         itemEdit.$TRANSLATION <~> tfTranslation.textProperty ~ subscriptions
         vmEdit.$isOKEnabled ~> (btnDone, \.isEnabled) ~ subscriptions
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         // https://stackoverflow.com/questions/7525437/how-to-set-focus-to-a-textfield-in-iphone
@@ -84,7 +84,7 @@ class PhrasesTextbookDetailViewController: UITableViewController {
             return true
         }
     }
-    
+
     deinit {
         print("DEBUG: \(self.className) deinit")
     }

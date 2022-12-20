@@ -11,7 +11,7 @@ import WebKit
 import Combine
 
 class PhrasesTextbookViewController: PhrasesBaseViewController {
-    
+
     var vm: PhrasesUnitViewModel!
     override var vmPhrases: PhrasesBaseViewModel { vm }
     override var vmSettings: SettingsViewModel! { vm.vmSettings }
@@ -19,7 +19,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
 
     @IBOutlet weak var pubTextbookFilter: NSPopUpButton!
     @IBOutlet weak var acTextbooks: NSArrayController!
-    
+
     override func applyFilters() {
         vm.applyFilters()
         tvPhrases.reloadData()
@@ -39,15 +39,15 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
         }
         super.settingsChanged()
     }
-    
+
     func numberOfRows(in tableView: NSTableView) -> Int {
         tableView === tvPhrases ? arrPhrases.count : vmWordsLang.arrWords.count
     }
-    
+
     override func phraseItemForRow(row: Int) -> (MPhraseProtocol & NSObject)? {
         arrPhrases[row]
     }
-    
+
     override func endEditing(row: Int) {
         Task {
             let item = arrPhrases[row]
@@ -70,7 +70,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
             doRefresh()
         }
     }
-    
+
     @IBAction func doubleAction(_ sender: AnyObject) {
         if NSApp.currentEvent!.modifierFlags.contains(.option) {
             associateWords(sender)

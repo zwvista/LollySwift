@@ -10,12 +10,12 @@ import Foundation
 
 @MainActor
 class BlogViewModel: NSObject {
-    
+
     var vmSettings: SettingsViewModel
     init(settings: SettingsViewModel) {
         self.vmSettings = SettingsViewModel(settings)
     }
-    
+
     private func html1With(_ s: String) -> String {
         "<strong><span style=\"color:#0000ff\">\(s)</span></strong>"
     }
@@ -68,7 +68,7 @@ class BlogViewModel: NSObject {
         }
         return arr.joined(separator: "\n")
     }
-    
+
     private let regLine = #/<div>(.*?)</div>/#
     private var regHtmlB: Regex<(Substring, Substring)> { try! Regex(htmlBWith("(.+?)")) }
     private var regHtmlI: Regex<(Substring, Substring)> { try! Regex(htmlIWith("(.+?)")) }
@@ -97,7 +97,7 @@ class BlogViewModel: NSObject {
         }
         return arr.joined(separator: "\n")
     }
-    
+
     func addTagB(text: String) -> String {
         "<B>\(text)</B>"
     }
@@ -119,7 +119,7 @@ class BlogViewModel: NSObject {
     func getPatternUrl(patternNo: String) -> String {
         "http://viethuong.web.fc2.com/MONDAI/\(patternNo).html"
     }
-    
+
     func addNotes(text: String, complete: @escaping (String) -> Void) async {
         func f(_ s: String) -> String {
             var t = s

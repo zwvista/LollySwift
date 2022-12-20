@@ -35,13 +35,13 @@ class WordsDictViewController: NSViewController, WKNavigationDelegate {
             await load()
         }
     }
-    
+
     private func load() async {
         guard webInitilized else {return}
         dictStore.word = word
         await dictStore.searchDict()
     }
-    
+
     func searchWord(word: String) async {
         self.word = word
         await load()
@@ -59,11 +59,11 @@ class WordsDictViewController: NSViewController, WKNavigationDelegate {
         tfURL.stringValue = webView.url!.absoluteString
         dictStore.onNavigationFinished()
     }
-    
+
     @IBAction func openURL(_ sender: AnyObject) {
         MacApi.openURL(tfURL.stringValue)
     }
-    
+
     deinit {
         print("DEBUG: \(self.className) deinit")
     }

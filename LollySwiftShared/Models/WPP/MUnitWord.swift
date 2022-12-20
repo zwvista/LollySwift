@@ -62,7 +62,7 @@ class MUnitWord: NSObject, Codable, MWordProtocol {
         o.forEach { $0.textbook = textbook }
         return o
     }
-    
+
     static func getDataByTextbook(_ textbook: MTextbook) async -> [MUnitWord] {
         // SQL: SELECT * FROM VUNITWORDS WHERE TEXTBOOKID=? ORDER BY WORDID
         let url = "\(CommonApi.urlAPI)VUNITWORDS?filter=TEXTBOOKID,eq,\(textbook.ID)&order=WORDID"
@@ -71,7 +71,7 @@ class MUnitWord: NSObject, Codable, MWordProtocol {
         arr.forEach { $0.textbook = textbook }
         return arr
     }
-    
+
     private static func setTextbook(_ o: [MUnitWord], arrTextbooks: [MTextbook]) -> [MUnitWord] {
         o.forEach { row in
             row.textbook = arrTextbooks.first { $0.ID == row.TEXTBOOKID }!
@@ -84,7 +84,7 @@ class MUnitWord: NSObject, Codable, MWordProtocol {
         let url = "\(CommonApi.urlAPI)VUNITWORDS?filter=LANGID,eq,\(langid)&order=TEXTBOOKID&order=UNIT&order=PART&order=SEQNUM"
         return setTextbook(await RestApi.getRecords(MUnitWords.self, url: url), arrTextbooks: arrTextbooks)
     }
-    
+
     static func getDataById(_ id: Int, arrTextbooks: [MTextbook]) async -> MUnitWord? {
         // SQL: SELECT * FROM VUNITWORDS WHERE ID=?
         let url = "\(CommonApi.urlAPI)VUNITWORDS?filter=ID,eq,\(id)"
@@ -123,7 +123,7 @@ class MUnitWord: NSObject, Codable, MWordProtocol {
         print(o)
         return Int(o.NEW_ID!)!
     }
-    
+
     static func delete(item: MUnitWord) async {
         // SQL: CALL UNITWORDS_DELETE
         let url = "\(CommonApi.urlSP)UNITWORDS_DELETE"
@@ -161,7 +161,7 @@ class MUnitWordEdit: ObservableObject {
         FAMIID = String(x.FAMIID)
         ACCURACY = x.ACCURACY
     }
-    
+
     func save(to x: MUnitWord) {
         if indexUNIT != -1 {
             x.UNIT = x.textbook.arrUnits[indexUNIT].value

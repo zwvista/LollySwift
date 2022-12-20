@@ -20,7 +20,7 @@ class PhrasesLangViewModel: PhrasesBaseViewModel {
             complete()
         }
     }
-    
+
     func reload() async {
         arrPhrases = await MLangPhrase.getDataByLang(vmSettings.selectedTextbook.LANGID)
     }
@@ -35,7 +35,7 @@ class PhrasesLangViewModel: PhrasesBaseViewModel {
             }
         }
     }
-    
+
     static func update(item: MLangPhrase) async {
         await MLangPhrase.update(item: item)
     }
@@ -43,7 +43,7 @@ class PhrasesLangViewModel: PhrasesBaseViewModel {
     static func create(item: MLangPhrase) async {
         item.ID = await MLangPhrase.create(item: item)
     }
-    
+
     static func delete(item: MLangPhrase) async {
         await MLangPhrase.delete(item: item)
     }
@@ -53,11 +53,11 @@ class PhrasesLangViewModel: PhrasesBaseViewModel {
             $0.LANGID = vmSettings.selectedLang.ID
         }
     }
-    
+
     public init(settings: SettingsViewModel) {
         super.init(settings: settings, needCopy: false)
     }
-    
+
     func getPhrases(wordid: Int) async {
         arrPhrases = await MWordPhrase.getPhrasesByWordId(wordid)
     }

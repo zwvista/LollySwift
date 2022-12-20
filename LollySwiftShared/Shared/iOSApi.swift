@@ -12,7 +12,7 @@ class iOSApi {
     static func copyText(_ text: String) {
         UIPasteboard.general.string = text
     }
-    
+
     static func googleString(_ str: String) {
         UIApplication.shared.open(URL(string: "https://www.google.com/search?q=\(str.urlEncoded())")!)
     }

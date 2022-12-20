@@ -29,7 +29,7 @@ class TextbooksViewController: NSViewController, LollyProtocol, NSTableViewDataS
             self.tableView.reloadData()
         }
     }
-    
+
     func numberOfRows(in tableView: NSTableView) -> Int {
         vm.arrTextbooks.count
     }
@@ -50,7 +50,7 @@ class TextbooksViewController: NSViewController, LollyProtocol, NSTableViewDataS
         detailVC.complete = { self.tableView.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count)) }
         self.presentAsModalWindow(detailVC)
     }
-    
+
     @IBAction func addTextbook(_ sender: AnyObject) {
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "TextbooksDetailViewController") as! TextbooksDetailViewController
         detailVC.vm = vm

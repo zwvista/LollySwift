@@ -10,7 +10,7 @@ import Cocoa
 import Combine
 
 class PhrasesUnitBatchAddViewController: NSViewController {
-    
+
     @IBOutlet weak var acUnits: NSArrayController!
     @IBOutlet weak var acParts: NSArrayController!
     @IBOutlet weak var pubUnit: NSPopUpButton!
@@ -44,7 +44,7 @@ class PhrasesUnitBatchAddViewController: NSViewController {
             }
         } ~ subscriptions
     }
-    
+
     override func viewDidAppear() {
         super.viewDidAppear()
         view.window?.title = "Batch Add"

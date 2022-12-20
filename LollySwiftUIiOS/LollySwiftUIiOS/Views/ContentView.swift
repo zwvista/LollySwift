@@ -11,7 +11,7 @@ struct ContentView: View {
     @ObservedObject var g = globalUser
     @State var isOpenSideMenu: Bool = false
     @State var bindTitle = titleSearch
-    
+
     func getContentView(_ view: some View) -> some View {
         ZStack{
             NavigationView {

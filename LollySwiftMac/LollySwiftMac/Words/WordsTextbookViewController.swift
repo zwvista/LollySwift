@@ -15,15 +15,10 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
     var vm: WordsUnitViewModel!
     override var vmWords: WordsBaseViewModel { vm }
     override var vmSettings: SettingsViewModel! { vm.vmSettings }
-    var arrWords: [MUnitWord] { vm.arrWordsFiltered == nil ? vm.arrWords : vm.arrWordsFiltered! }
-    
+    var arrWords: [MUnitWord] { vm.arrWordsFiltered }
+
     @IBOutlet weak var pubTextbookFilter: NSPopUpButton!
     @IBOutlet weak var acTextbooks: NSArrayController!
-
-    override func applyFilters() {
-        vm.applyFilters()
-        tvWords.reloadData()
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,11 +34,11 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
         }
         super.settingsChanged()
     }
-    
+
     func numberOfRows(in tableView: NSTableView) -> Int {
         tableView === tvWords ? arrWords.count : vmPhrasesLang.arrPhrases.count
     }
-    
+
     override func wordItemForRow(row: Int) -> (MWordProtocol & NSObject)? {
         arrWords[row]
     }
@@ -70,7 +65,7 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
             doRefresh()
         }
     }
-    
+
     @IBAction func doubleAction(_ sender: AnyObject) {
         if NSApp.currentEvent!.modifierFlags.contains(.option) {
             associatePhrases(sender)
@@ -89,7 +84,7 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
         }
         self.presentAsModalWindow(editVC)
     }
-    
+
     @IBAction func getNote(_ sender: AnyObject) {
         Task {
             let col = tvWords.tableColumns.firstIndex { $0.title == "NOTE" }!
@@ -97,7 +92,7 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
             tvWords.reloadData(forRowIndexes: [tvWords.selectedRow], columnIndexes: [col])
         }
     }
-    
+
     @IBAction func clearNote(_ sender: AnyObject) {
         Task {
             let col = tvWords.tableColumns.firstIndex { $0.title == "NOTE" }!

@@ -11,7 +11,7 @@ import WebKit
 import Combine
 
 class WordsSearchViewController: WordsBaseViewController {
-    
+
     var vm: WordsSearchViewModel!
     override var vmWords: WordsBaseViewModel { vm }
     override var vmSettings: SettingsViewModel! { vm.vmSettings }
@@ -29,7 +29,7 @@ class WordsSearchViewController: WordsBaseViewController {
     func numberOfRows(in tableView: NSTableView) -> Int {
         vm.arrWords.count
     }
-    
+
     override func wordItemForRow(row: Int) -> (MWordProtocol & NSObject)? {
         vm.arrWords[row]
     }
@@ -41,12 +41,12 @@ class WordsSearchViewController: WordsBaseViewController {
         tvWords.selectRowIndexes(IndexSet(integer: vm.arrWords.count - 1), byExtendingSelection: false)
         responder = tfNewWord
     }
-    
+
     func addNewWord(word: String) {
         vm.newWord = word
         addNewWord()
     }
-    
+
     @IBAction func refreshTableView(_ sender: AnyObject) {
         vm.arrWords.removeAll()
         tvWords.reloadData()
@@ -54,7 +54,7 @@ class WordsSearchViewController: WordsBaseViewController {
 
     @IBAction func editWord(_ sender: AnyObject) {
     }
-    
+
     override func confirmDelete() -> Bool {
         false
     }
@@ -66,11 +66,11 @@ class WordsSearchViewController: WordsBaseViewController {
 
     @IBAction func getNote(_ sender: AnyObject) {
     }
-    
+
     override func needRegainFocus() -> Bool {
         false
     }
-    
+
     override func getPhrases() async {
     }
 }

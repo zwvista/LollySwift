@@ -80,7 +80,7 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
         wc = nil
         vm.subscriptionTimer?.cancel()
     }
-    
+
     @IBAction func newTest(_ sender: AnyObject) {
         let optionsVC = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: "ReviewOptionsViewController") as! ReviewOptionsViewController
         optionsVC.options = vm.options
@@ -91,7 +91,7 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
         }
         self.presentAsSheet(optionsVC)
     }
-    
+
     func controlTextDidEndEditing(_ obj: Notification) {
         let textfield = obj.object as! NSControl
         let code = (obj.userInfo!["NSTextMovement"] as! NSNumber).intValue
@@ -99,7 +99,7 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
         guard textfield === tfPhraseInput, !(vm.isTestMode && vm.phraseInputString.isEmpty) else {return}
         vm.check(toNext: true)
     }
-    
+
     @IBAction func check(_ sender: NSButton) {
         vm.check(toNext: sender == btnCheckNext)
     }
@@ -110,7 +110,7 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
 }
 
 class PhrasesReviewWindowController: NSWindowController {
-    
+
     @IBOutlet weak var scSpeak: NSSegmentedControl!
 
     deinit {

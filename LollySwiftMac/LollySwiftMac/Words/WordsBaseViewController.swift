@@ -10,7 +10,7 @@ import Cocoa
 import Combine
 
 class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, LollyProtocol {
-    
+
     @IBOutlet weak var tfNewWord: NSTextField!
     @IBOutlet weak var scScopeFilter: NSSegmentedControl!
     @IBOutlet weak var sfTextFilter: NSSearchField!
@@ -18,7 +18,7 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
     @IBOutlet weak var tfStatusText: NSTextField!
     @IBOutlet weak var tvPhrases: NSTableView!
     @IBOutlet weak var tabView: NSTabView!
-    
+
     var vmSettings: SettingsViewModel! { nil }
     var vmWords: WordsBaseViewModel! { nil }
     var vmPhrases: PhrasesBaseViewModel! { nil }
@@ -142,7 +142,7 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
     func needRegainFocus() -> Bool {
         true
     }
-    
+
     func applyFilters() {
     }
 
@@ -152,7 +152,7 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
 }
 
 class WordsBaseViewController: WordsPhrasesBaseViewController {
-    
+
     var vmPhrasesLang: PhrasesLangViewModel!
     override var vmPhrases: PhrasesBaseViewModel { vmPhrasesLang }
 
@@ -207,7 +207,7 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
         }
         return cell
     }
-    
+
     func tableViewSelectionDidChange(_ notification: Notification) {
         let tv = notification.object as! NSTableView
         if tv === tvWords {
@@ -222,7 +222,7 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
         }
         speak()
     }
-    
+
     func endEditing(row: Int) {
     }
 
@@ -244,7 +244,7 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
 
     func addNewWord() {
     }
-    
+
     func confirmDelete() -> Bool {
         true
     }
@@ -261,10 +261,10 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
         guard !confirmDelete() || alert.runModal() == .alertFirstButtonReturn else {return}
         deleteWord(row: row)
     }
-    
+
     func deleteWord(row: Int) {
     }
-    
+
     override func phraseItemForRow(row: Int) -> (MPhraseProtocol & NSObject)? {
         vmPhrasesLang.arrPhrases[row]
     }
@@ -272,7 +272,7 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
     @IBAction func copyWord(_ sender: AnyObject) {
         MacApi.copyText(vmWords.selectedWord)
     }
-    
+
     @IBAction func googleWord(_ sender: AnyObject) {
         MacApi.googleString(vmWords.selectedWord)
     }
@@ -289,7 +289,7 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
     func updateStatusText() {
         tfStatusText.stringValue = "\(tvWords.numberOfRows) Words"
     }
-    
+
     override func speak() {
         guard isSpeaking else {return}
         let responder = view.window!.firstResponder
@@ -299,7 +299,7 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
             synth.startSpeaking(vmWords.selectedWord)
         }
     }
-    
+
     func getPhrases() async {
         await vmPhrasesLang.getPhrases(wordid: vmWords.selectedWordID)
         tvPhrases.reloadData()
@@ -318,7 +318,7 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
 }
 
 class WordsPhrasesBaseWindowController: NSWindowController, LollyProtocol, NSWindowDelegate, NSTextFieldDelegate {
-    
+
     @IBOutlet weak var toolbar: NSToolbar!
     @IBOutlet weak var scSpeak: NSSegmentedControl!
     // Outlet collections have been implemented for iOS, but not in Cocoa
@@ -367,9 +367,9 @@ class WordsPhrasesBaseWindowController: NSWindowController, LollyProtocol, NSWin
     var vc: WordsPhrasesBaseViewController { contentViewController as! WordsPhrasesBaseViewController }
     @objc var vm: SettingsViewModel! { vc.vmSettings }
     private var defaultToolbarItemCount = 0
-    
+
     var identifiers: [NSToolbarItem.Identifier]!
-    
+
     override func windowDidLoad() {
         super.windowDidLoad()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -377,7 +377,7 @@ class WordsPhrasesBaseWindowController: NSWindowController, LollyProtocol, NSWin
             self.settingsChanged()
         }
     }
-    
+
     func settingsChanged() {
         vc.tvWords?.selectRowIndexes(IndexSet(), byExtendingSelection: false)
         vc.removeAllTabs()

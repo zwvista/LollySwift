@@ -20,11 +20,11 @@ class WordsLangViewModel: WordsBaseViewModel {
             complete()
         }
     }
-    
+
     func reload() async {
         arrWords = await MLangWord.getDataByLang(vmSettings.selectedTextbook.LANGID)
     }
-    
+
     func applyFilters() {
         if textFilter.isEmpty {
             arrWordsFiltered = nil
@@ -35,7 +35,7 @@ class WordsLangViewModel: WordsBaseViewModel {
             }
         }
     }
-    
+
     static func update(item: MLangWord) async {
         await MLangWord.update(item: item)
     }
@@ -43,11 +43,11 @@ class WordsLangViewModel: WordsBaseViewModel {
     static func create(item: MLangWord) async {
         item.ID = await MLangWord.create(item: item)
     }
-    
+
     static func delete(item: MLangWord) async {
         await MLangWord.delete(item: item)
     }
-    
+
     func newLangWord() -> MLangWord {
         MLangWord().then {
             $0.LANGID = vmSettings.selectedLang.ID
@@ -66,11 +66,11 @@ class WordsLangViewModel: WordsBaseViewModel {
         item.NOTE = SettingsViewModel.zeroNote
         await WordsUnitViewModel.update(item.ID, note: item.NOTE)
     }
-    
+
     public init(settings: SettingsViewModel) {
         super.init(settings: settings, needCopy: false)
     }
-    
+
     func getWords(phraseid: Int) async {
         arrWords = await MWordPhrase.getWordsByPhraseId(phraseid)
     }

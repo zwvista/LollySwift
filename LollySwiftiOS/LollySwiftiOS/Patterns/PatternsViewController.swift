@@ -48,7 +48,7 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
             self.applyFilters()
         } ~ subscriptions
     }
-    
+
     @objc func refresh(_ sender: UIRefreshControl) {
         view.showBlurLoader()
         vm = PatternsViewModel(settings: vmSettings, needCopy: false) {
@@ -57,7 +57,7 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
             self.view.removeBlurLoader()
         }
     }
-    
+
     @IBAction func showScopeFilterDropDown(_ sender: AnyObject) {
         ddScopeFilter.show()
     }
@@ -65,7 +65,7 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         arrPatterns.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PatternCell", for: indexPath) as! PatternsCell
         let item = arrPatterns[indexPath.row]
@@ -73,7 +73,7 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
         cell.lblTags.text = item.TAGS
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         vm.selectedPatternItem = arrPatterns[indexPath.row]
         AppDelegate.speak(string: vm.selectedPatternItem!.PATTERN)
@@ -120,12 +120,12 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
 
         return UISwipeActionsConfiguration(actions: [moreAction, deleteAction])
     }
-    
+
     func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
         let item = arrPatterns[indexPath.row]
         performSegue(withIdentifier: "browse pages", sender: item)
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         if let controller = (segue.destination as? UINavigationController)?.topViewController as? PatternsDetailViewController {

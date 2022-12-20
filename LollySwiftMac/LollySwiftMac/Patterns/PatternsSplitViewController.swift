@@ -34,7 +34,7 @@ class PatternsSplitViewController: NSViewController {
     func numberOfRows(in tableView: NSTableView) -> Int {
         tableView === tvPatterns ? vm.arrPatterns.count : vm.arrPatternVariations.count
     }
-    
+
     @IBAction func endEditing(_ sender: NSTextField) {
         let row = tvPatternVariations.row(for: sender)
         guard row != -1 else {return}
@@ -54,20 +54,20 @@ class PatternsSplitViewController: NSViewController {
         }
         return cell
     }
-    
+
     func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
         let item = NSPasteboardItem()
         item.setString(String(row), forType: tableRowDragType)
         return item
     }
-    
+
     func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int, proposedDropOperation dropOperation: NSTableView.DropOperation) -> NSDragOperation {
         if dropOperation == .above {
             return .move
         }
         return []
     }
-    
+
     func tableView(_ tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int, dropOperation: NSTableView.DropOperation) -> Bool {
         var oldIndexes = [Int]()
         info.enumerateDraggingItems(options: [], for: tableView, classes: [NSPasteboardItem.self], searchOptions: [:]) { (draggingItem, _, _) in
@@ -104,7 +104,7 @@ class PatternsSplitViewController: NSViewController {
         
         return true
     }
-    
+
     @IBAction func deleteVariation(_ sender: Any) {
         let row = tvPatternVariations.selectedRow
         guard row != -1 else {return}

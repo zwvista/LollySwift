@@ -52,7 +52,7 @@ class MUnitPhrase: NSObject, Codable, MPhraseProtocol {
         o.forEach { $0.textbook = textbook }
         return o
     }
-    
+
     static func getDataByTextbook(_ textbook: MTextbook) async -> [MUnitPhrase] {
         // SQL: SELECT * FROM VUNITPHRASES WHERE TEXTBOOKID=? ORDER BY PHRASEID
         let url = "\(CommonApi.urlAPI)VUNITPHRASES?filter=TEXTBOOKID,eq,\(textbook.ID)&order=PHRASEID"
@@ -74,7 +74,7 @@ class MUnitPhrase: NSObject, Codable, MPhraseProtocol {
         let url = "\(CommonApi.urlAPI)VUNITPHRASES?filter=LANGID,eq,\(langid)&order=TEXTBOOKID&order=UNIT&order=PART&order=SEQNUM"
         return setTextbook(await RestApi.getRecords(MUnitPhrases.self, url: url), arrTextbooks: arrTextbooks)
     }
-    
+
     static func getDataById(_ id: Int, arrTextbooks: [MTextbook]) async -> MUnitPhrase? {
         // SQL: SELECT * FROM VUNITPHRASES WHERE ID=?
         let url = "\(CommonApi.urlAPI)VUNITPHRASES?filter=ID,eq,\(id)"
@@ -95,7 +95,7 @@ class MUnitPhrase: NSObject, Codable, MPhraseProtocol {
         let body = "SEQNUM=\(seqnum)"
         print(await RestApi.update(url: url, body: body))
     }
-    
+
     static func update(item: MUnitPhrase) async {
         // SQL: CALL UNITPHRASES_UPDATE
         let url = "\(CommonApi.urlSP)UNITPHRASES_UPDATE"
@@ -111,7 +111,7 @@ class MUnitPhrase: NSObject, Codable, MPhraseProtocol {
         print(o)
         return Int(o.NEW_ID!)!
     }
-    
+
     static func delete(item: MUnitPhrase) async {
         // SQL: CALL UNITPHRASES_DELETE
         let url = "\(CommonApi.urlSP)UNITPHRASES_DELETE"
@@ -145,7 +145,7 @@ class MUnitPhraseEdit: ObservableObject {
         PHRASE = x.PHRASE
         TRANSLATION = x.TRANSLATION
     }
-    
+
     func save(to x: MUnitPhrase) {
         if indexUNIT != -1 {
             x.UNIT = x.textbook.arrUnits[indexUNIT].value

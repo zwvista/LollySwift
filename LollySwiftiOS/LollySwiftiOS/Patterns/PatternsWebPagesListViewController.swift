@@ -11,7 +11,7 @@ import WebKit
 import Combine
 
 class PatternsWebPagesListViewController: UITableViewController {
-    
+
     @IBOutlet weak var btnEdit: UIBarButtonItem!
 
     var vm: PatternsWebPagesViewModel!
@@ -23,7 +23,7 @@ class PatternsWebPagesListViewController: UITableViewController {
         refreshControl!.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         refresh(refreshControl!)
     }
-    
+
     @objc func refresh(_ sender: UIRefreshControl) {
         Task {
             await vm.getWebPages()
@@ -35,7 +35,7 @@ class PatternsWebPagesListViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         vm.arrWebPages.count
     }
-    
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "WebPageCell10", for: indexPath) as! WebPagesCell
         let item = vm.arrWebPages[indexPath.row]
@@ -44,7 +44,7 @@ class PatternsWebPagesListViewController: UITableViewController {
         cell.lblURL!.text = item.URL
         return cell
     }
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         vm.currentWebPageIndex = indexPath.row
         if tableView.isEditing {
@@ -57,7 +57,7 @@ class PatternsWebPagesListViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         true
     }
-    
+
     private func reindex() {
         tableView.beginUpdates()
         Task {
@@ -91,7 +91,7 @@ class PatternsWebPagesListViewController: UITableViewController {
             controller.startEdit(item: item)
         }
     }
-    
+
     @IBAction func btnEditClicked(_ sender: AnyObject) {
         tableView.isEditing = !tableView.isEditing
         btnEdit.title = tableView.isEditing ? "Done" : "Edit"

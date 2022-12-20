@@ -33,7 +33,7 @@ class MWordFami: NSObject, Codable {
         let url = "\(CommonApi.urlAPI)WORDSFAMI/\(item.ID)"
         print(await RestApi.update(url: url, body: try! item.toJSONString()!))
     }
-    
+
     private static func create(item: MWordFami) async -> Int {
         // SQL: INSERT INTO WORDSFAMI (USERID, WORDID) VALUES (?,?)
         let url = "\(CommonApi.urlAPI)WORDSFAMI"
@@ -41,13 +41,13 @@ class MWordFami: NSObject, Codable {
         print(id)
         return id
     }
-    
+
     static func delete(_ id: Int) async {
         // SQL: DELETE WORDSFAMI WHERE ID=?
         let url = "\(CommonApi.urlAPI)WORDSFAMI/\(id)"
         print(await RestApi.delete(url: url))
     }
-    
+
     static func update(wordid: Int, isCorrect: Bool) async -> MWordFami {
         let arr = await getDataByWord(wordid: wordid)
         let item = MWordFami()

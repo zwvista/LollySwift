@@ -10,7 +10,7 @@ import UIKit
 import Combine
 
 class PhrasesUnitViewController: PhrasesBaseViewController {
-    
+
     var vm: PhrasesUnitViewModel!
     var arrPhrases: [MUnitPhrase] { vm.arrPhrasesFiltered ?? vm.arrPhrases }
     @IBOutlet weak var btnEdit: UIBarButtonItem!
@@ -19,7 +19,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
+
     override func refresh() {
         view.showBlurLoader()
         vm = PhrasesUnitViewModel(settings: vmSettings, inTextbook: true, needCopy: false) {
@@ -32,7 +32,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         arrPhrases.count
     }
-    
+
     override func itemForRow(row: Int) -> (MPhraseProtocol & NSObject)? {
         arrPhrases[row]
     }
@@ -40,7 +40,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         vmSettings.isSingleUnitPart
     }
-    
+
     private func reindex() {
         tableView.beginUpdates()
         Task {
@@ -94,12 +94,12 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
 
         return UISwipeActionsConfiguration(actions: [moreAction, deleteAction])
     }
-    
+
     override func applyFilters() {
         vm.applyFilters()
         tableView.reloadData()
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         if let controller = (segue.destination as? UINavigationController)?.topViewController as? PhrasesUnitDetailViewController {
@@ -109,7 +109,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
             controller.vm = vm
         }
     }
-    
+
     @IBAction func btnMoreClicked(_ sender: AnyObject) {
         let alertController = UIAlertController(title: "Phrases", message: "More", preferredStyle: .alert)
         let addAction = UIAlertAction(title: "Add", style: .default) { _ in self.performSegue(withIdentifier: "add", sender: self) }
@@ -128,7 +128,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
         tableView.isEditing = !tableView.isEditing
         btnEdit.title = tableView.isEditing ? "Done" : "Edit"
     }
-    
+
     @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
         guard segue.identifier == "Done" else {return}
         let controller = segue.source as! PhrasesUnitDetailViewController

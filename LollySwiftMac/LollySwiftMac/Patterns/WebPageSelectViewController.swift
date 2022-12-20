@@ -11,7 +11,7 @@ import Combine
 
 @objcMembers
 class WebPageSelectViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
-    
+
     var vm: PatternsViewModel!
     var vmWebPage: WebPageSelectViewModel!
     var complete: (() -> Void)?
@@ -21,12 +21,12 @@ class WebPageSelectViewController: NSViewController, NSTableViewDataSource, NSTa
     @IBOutlet weak var tfTitle: NSTextField!
     @IBOutlet weak var tfURL: NSTextField!
     @IBOutlet weak var tvWebPages: NSTableView!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         search(self)
     }
-    
+
     @IBAction func search(_ sender: Any) {
         vmWebPage = WebPageSelectViewModel(settings: vm.vmSettings) {
             self.tvWebPages.reloadData()
@@ -34,16 +34,16 @@ class WebPageSelectViewController: NSViewController, NSTableViewDataSource, NSTa
         vmWebPage.$title <~> tfTitle.textProperty ~ subscriptions
         vmWebPage.$url <~> tfURL.textProperty ~ subscriptions
     }
-    
+
     override func viewDidAppear() {
         super.viewDidAppear()
         view.window?.title = "Existing Page"
     }
-    
+
     func numberOfRows(in tableView: NSTableView) -> Int {
         arrWebPages.count
     }
-    
+
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! NSTableCellView
         let columnName = tableColumn!.identifier.rawValue
@@ -51,7 +51,7 @@ class WebPageSelectViewController: NSViewController, NSTableViewDataSource, NSTa
         cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
         return cell
     }
-    
+
     func tableViewSelectionDidChange(_ notification: Notification) {
         let row = tvWebPages.selectedRow
         vmWebPage.selectedWebPage = row == -1 ? nil : arrWebPages[row]
@@ -63,7 +63,7 @@ class WebPageSelectViewController: NSViewController, NSTableViewDataSource, NSTa
         self.complete?()
         dismiss(sender)
     }
-    
+
     deinit {
         print("DEBUG: \(self.className) deinit")
     }

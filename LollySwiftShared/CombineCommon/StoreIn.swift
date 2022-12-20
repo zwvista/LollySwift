@@ -10,14 +10,14 @@ import Combine
 
 precedencegroup DisposePrecedence {
     associativity: left
-    
+
     lowerThan: DefaultPrecedence
 }
 
 infix operator ~ : DisposePrecedence
 
 extension AnyCancellable {
-    
+
     public static func ~ (anyCancellable: AnyCancellable, subscriptions: inout Set<AnyCancellable>) {
         anyCancellable.store(in: &subscriptions)
     }

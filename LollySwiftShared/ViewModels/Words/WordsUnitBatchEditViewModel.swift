@@ -27,7 +27,7 @@ class WordsUnitBatchEditViewModel: NSObject, ObservableObject {
         indexUNIT = vm.vmSettings.arrUnits.firstIndex { $0.value == unit }!
         indexPART = vm.vmSettings.arrParts.firstIndex { $0.value == part }!
     }
-    
+
     func onOK(rows: [Bool]) async {
         for (i, isChecked) in rows.enumerated() {
             guard isChecked else {continue}

@@ -126,7 +126,7 @@ class UIViewContainerView<ContentView: UIView>: UIView {
 
 struct WebView_Previews: PreviewProvider {
     static var webViewStore = WebViewStore()
-    
+
     static var previews: some View {
         VStack{
             WebView(webView: webViewStore.webView, onNavigationFinished: {})

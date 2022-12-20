@@ -10,7 +10,7 @@ import Foundation
 
 class WordsSearchViewModel: WordsBaseViewModel {
     var arrWords = [MUnitWord]()
-    
+
     func addNewWord() {
         let item = MUnitWord()
         item.WORD = newWord

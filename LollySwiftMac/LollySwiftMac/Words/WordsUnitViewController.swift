@@ -15,23 +15,20 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     var vm: WordsUnitViewModel!
     override var vmWords: WordsBaseViewModel { vm }
     override var vmSettings: SettingsViewModel! { vm.vmSettings }
-    var arrWords: [MUnitWord] { vm.arrWordsFiltered ?? vm.arrWords }
+    var arrWords: [MUnitWord] { vm.arrWordsFiltered }
 
     // https://developer.apple.com/videos/play/wwdc2011/120/
     // https://stackoverflow.com/questions/2121907/drag-drop-reorder-rows-on-nstableview
     let tableRowDragType = NSPasteboard.PasteboardType(rawValue: "private.table-row")
 
-    override func applyFilters() {
-        print(vm.textFilter)
-        vm.applyFilters()
-        tvWords.reloadData()
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         tvWords.registerForDraggedTypes([tableRowDragType])
+        vm.$arrWordsFiltered.didSet.sink { [unowned self] _ in
+            tvWords.reloadData()
+        } ~ subscriptions
     }
-    
+
     // https://stackoverflow.com/questions/9368654/cannot-seem-to-setenabledno-on-nsmenuitem
     func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
         if menuItem.action == #selector(getNote(_:)) || menuItem.action == #selector(getNotes(_:)) {
@@ -53,15 +50,15 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
         }
         super.settingsChanged()
     }
-    
+
     func numberOfRows(in tableView: NSTableView) -> Int {
         tableView === tvWords ? arrWords.count : vmPhrasesLang.arrPhrases.count
     }
-    
+
     override func wordItemForRow(row: Int) -> (MWordProtocol & NSObject)? {
         arrWords[row]
     }
-    
+
     override func endEditing(row: Int) {
         let item = arrWords[row]
         Task {
@@ -79,14 +76,14 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
             return nil
         }
     }
-    
+
     func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int, proposedDropOperation dropOperation: NSTableView.DropOperation) -> NSDragOperation {
         if dropOperation == .above {
             return .move
         }
         return []
     }
-    
+
     func tableView(_ tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int, dropOperation: NSTableView.DropOperation) -> Bool {
         var oldIndexes = [Int]()
         info.enumerateDraggingItems(options: [], for: tableView, classes: [NSPasteboardItem.self], searchOptions: [:]) { (draggingItem, _, _) in
@@ -123,7 +120,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
         
         return true
     }
-    
+
     override func addNewWord() {
         guard !vm.newWord.isEmpty else {return}
         let item = vm.newUnitWord()
@@ -137,7 +134,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
             responder = tfNewWord
         }
     }
-    
+
     func addWord(phraseid: Int) {
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "WordsUnitDetailViewController") as! WordsUnitDetailViewController
         detailVC.startEdit(vm: vm, item: vm.newUnitWord(), phraseid: phraseid)
@@ -149,7 +146,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     @IBAction func addWord(_ sender: AnyObject) {
         addWord(phraseid: 0)
     }
-    
+
     override func deleteWord(row: Int) {
         let item = arrWords[row]
         Task {
@@ -157,14 +154,14 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
             doRefresh()
         }
     }
-    
+
     @IBAction func refreshTableView(_ sender: AnyObject) {
         Task {
             await vm.reload()
             doRefresh()
         }
     }
-    
+
     @IBAction func doubleAction(_ sender: AnyObject) {
         if NSApp.currentEvent!.modifierFlags.contains(.option) {
             associateExistingPhrases(sender)
@@ -172,7 +169,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
             editWord(sender)
         }
     }
-    
+
     @IBAction func editWord(_ sender: AnyObject) {
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "WordsUnitDetailViewController") as! WordsUnitDetailViewController
         let i = tvWords.selectedRow
@@ -183,7 +180,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
         }
         self.presentAsModalWindow(detailVC)
     }
-    
+
     @IBAction func batchAdd(_ sender: AnyObject) {
         let batchVC = self.storyboard!.instantiateController(withIdentifier: "WordsUnitBatchAddViewController") as! WordsUnitBatchAddViewController
         batchVC.startEdit(vm: vm)
@@ -220,7 +217,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
             })
         }
     }
-    
+
     @IBAction func clearNote(_ sender: AnyObject) {
         Task {
             let col = tvWords.tableColumns.firstIndex { $0.title == "NOTE" }!
@@ -228,7 +225,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
             tvWords.reloadData(forRowIndexes: [tvWords.selectedRow], columnIndexes: [col])
         }
     }
-    
+
     @IBAction func clearNotes(_ sender: AnyObject) {
         Task {
             let ifEmpty = sender is NSToolbarItem || (sender as! NSMenuItem).tag == 0
@@ -240,7 +237,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
             }
         }
     }
-    
+
     @IBAction func previousUnitPart(_ sender: AnyObject) {
         Task {
             await vmSettings.previousUnitPart()
@@ -248,7 +245,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
             doRefresh()
         }
     }
-    
+
     @IBAction func nextUnitPart(_ sender: AnyObject) {
         Task {
             await vmSettings.nextUnitPart()
@@ -256,7 +253,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
             doRefresh()
         }
     }
-    
+
     @IBAction func toggleToType(_ sender: AnyObject) {
         Task {
             let row = tvWords.selectedRow
@@ -270,7 +267,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     override func updateStatusText() {
         tfStatusText.stringValue = "\(tvWords.numberOfRows) Words in \(vmSettings.UNITINFO)"
     }
-    
+
     @IBAction func associateNewPhrase(_ sender: AnyObject) {
         guard vm.selectedWordID != 0 else {return}
         (NSApplication.shared.delegate as! AppDelegate).addNewUnitPhrase(wordid: vm.selectedWordID)

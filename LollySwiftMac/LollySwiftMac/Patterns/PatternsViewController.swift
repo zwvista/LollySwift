@@ -32,7 +32,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     // https://developer.apple.com/videos/play/wwdc2011/120/
     // https://stackoverflow.com/questions/2121907/drag-drop-reorder-rows-on-nstableview
     let tableRowDragType = NSPasteboard.PasteboardType(rawValue: "private.table-row")
-    
+
     func applyFilters() {
         vm.applyFilters()
         self.tvPatterns.reloadData()
@@ -59,7 +59,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
             self.applyFilters()
         } ~ subscriptions
     }
-    
+
     // Hold a reference to the window controller in order to prevent it from being released
     // Without it, we would not be able to access its child controls afterwards
     var wc: PatternsWindowController!
@@ -80,7 +80,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     func numberOfRows(in tableView: NSTableView) -> Int {
         tableView === tvPatterns ? arrPatterns.count : arrWebPages.count
     }
-    
+
     @IBAction func endEditing(_ sender: NSTextField) {
         let tv = sender.superview!.superview!.superview as! NSTableView
         let row = tv.row(for: sender)
@@ -118,7 +118,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
         }
         return cell
     }
-    
+
     func tableViewSelectionDidChange(_ notification: Notification) {
         let tv = notification.object as! NSTableView
         if tv === tvPatterns {
@@ -145,7 +145,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
             }
         }
     }
-    
+
     // https://stackoverflow.com/questions/9368654/cannot-seem-to-setenabledno-on-nsmenuitem
     func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
         return true
@@ -161,15 +161,15 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     @IBAction func copyPattern(_ sender: AnyObject) {
         MacApi.copyText(vm.selectedPattern)
     }
-    
+
     @IBAction func googlePattern(_ sender: AnyObject) {
         MacApi.googleString(vm.selectedPattern)
     }
-    
+
     @IBAction func speak(_ sender: AnyObject) {
         synth.startSpeaking(vm.selectedPattern)
     }
-    
+
     @IBAction func isSpeakingChanged(_ sender: AnyObject) {
         isSpeaking = (sender as! NSSegmentedControl).selectedSegment == 1
         if isSpeaking {
@@ -188,14 +188,14 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
         tvPatterns.reloadData()
         updateStatusText()
     }
-    
+
     @IBAction func refreshTableView(_ sender: AnyObject) {
         Task {
             await vm.reload()
             doRefresh()
         }
     }
-    
+
     // https://stackoverflow.com/questions/24219441/how-to-use-nstoolbar-in-xcode-6-and-storyboard
     @IBAction func addPattern(_ sender: AnyObject) {
         let editVC = self.storyboard!.instantiateController(withIdentifier: "PatternsDetailViewController") as! PatternsDetailViewController
@@ -240,11 +240,11 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     func updateStatusText() {
         tfStatusText.stringValue = "\(tvPatterns.numberOfRows) Patterns"
     }
-    
+
     @IBAction func doubleAction(_ sender: AnyObject) {
         editPattern(sender)
     }
-    
+
     func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
         if tableView === tvWebPages {
             let item = NSPasteboardItem()
@@ -254,14 +254,14 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
             return nil
         }
     }
-    
+
     func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int, proposedDropOperation dropOperation: NSTableView.DropOperation) -> NSDragOperation {
         if dropOperation == .above {
             return .move
         }
         return []
     }
-    
+
     func tableView(_ tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int, dropOperation: NSTableView.DropOperation) -> Bool {
         var oldIndexes = [Int]()
         info.enumerateDraggingItems(options: [], for: tableView, classes: [NSPasteboardItem.self], searchOptions: [:]) { (draggingItem, _, _) in
@@ -298,14 +298,14 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
         
         return true
     }
-    
+
     @IBAction func mergePatterns(_ sender: AnyObject) {
         let mergeVC = self.storyboard!.instantiateController(withIdentifier: "PatternsMergeViewController") as! PatternsMergeViewController
         let items = tvPatterns.selectedRowIndexes.map { arrPatterns[$0] }
         mergeVC.vm = PatternsMergeViewModel(items: items)
         self.presentAsModalWindow(mergeVC)
     }
-    
+
     @IBAction func splitPattern(_ sender: AnyObject) {
         let splitVC = self.storyboard!.instantiateController(withIdentifier: "PatternsSplitViewController") as! PatternsSplitViewController
         self.presentAsModalWindow(splitVC)
@@ -317,12 +317,12 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
 }
 
 class PatternsWindowController: NSWindowController, LollyProtocol, NSWindowDelegate, NSTextFieldDelegate {
-    
+
     @IBOutlet weak var toolbar: NSToolbar!
     @IBOutlet weak var scSpeak: NSSegmentedControl!
     func settingsChanged() {
     }
-    
+
     deinit {
         print("DEBUG: \(self.className) deinit")
     }
