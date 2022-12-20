@@ -34,10 +34,10 @@ class WordsBaseViewController: UIViewController, UITableViewDelegate, UITableVie
         refresh()
         vmBase.$textFilter <~> sbTextFilter.searchTextField.textProperty ~ subscriptions
         vmBase.$scopeFilter ~> (btnScopeFilter, \.titleNormal) ~ subscriptions
-        vmBase.$textFilter.sink { [unowned self] _ in
+        vmBase.$textFilter.didSet.sink { [unowned self] _ in
             self.applyFilters()
         } ~ subscriptions
-        vmBase.$scopeFilter.sink { [unowned self] _ in
+        vmBase.$scopeFilter.didSet.sink { [unowned self] _ in
             self.applyFilters()
         } ~ subscriptions
     }

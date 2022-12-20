@@ -13,35 +13,29 @@ import Then
 class WordsUnitViewModel: WordsBaseViewModel {
     let inTextbook: Bool
     @Published var arrWords = [MUnitWord]()
-    @Published var arrWordsFiltered: [MUnitWord]?
+    @Published var arrWordsFiltered = [MUnitWord]()
 
     init(settings: SettingsViewModel, inTextbook: Bool, needCopy: Bool, complete: @escaping () -> Void) {
         self.inTextbook = inTextbook
         super.init(settings: settings, needCopy: needCopy)
         Task {
             await reload()
-            await MainActor.run {
-                complete()
-            }
+            complete()
         }
     }
 
     func reload() async {
         arrWords = inTextbook ? await MUnitWord.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO) : await MUnitWord.getDataByLang(vmSettings.selectedTextbook.LANGID, arrTextbooks: vmSettings.arrTextbooks)
-        arrWordsFiltered = nil
+        arrWordsFiltered = arrWords
     }
 
     func applyFilters() {
-        if textFilter.isEmpty && textbookFilter == 0 {
-            arrWordsFiltered = nil
-        } else {
-            arrWordsFiltered = arrWords
-            if !textFilter.isEmpty {
-                arrWordsFiltered = arrWordsFiltered!.filter { (scopeFilter == "Word" ? $0.WORD : $0.NOTE).lowercased().contains(textFilter.lowercased()) }
-            }
-            if textbookFilter != 0 {
-                arrWordsFiltered = arrWordsFiltered!.filter { $0.TEXTBOOKID == textbookFilter }
-            }
+        arrWordsFiltered = arrWords
+        if !textFilter.isEmpty {
+            arrWordsFiltered = arrWordsFiltered.filter { (scopeFilter == "Word" ? $0.WORD : $0.NOTE).lowercased().contains(textFilter.lowercased()) }
+        }
+        if textbookFilter != 0 {
+            arrWordsFiltered = arrWordsFiltered.filter { $0.TEXTBOOKID == textbookFilter }
         }
     }
 
