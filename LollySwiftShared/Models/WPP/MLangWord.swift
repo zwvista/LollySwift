@@ -26,7 +26,7 @@ class MLangWord: NSObject, Codable, MWordProtocol {
 
     override init() {
     }
-    
+
     init(unititem: MUnitWord) {
         ID = unititem.WORDID
         LANGID = unititem.LANGID
@@ -40,7 +40,7 @@ class MLangWord: NSObject, Codable, MWordProtocol {
         let url = "\(CommonApi.urlAPI)VLANGWORDS?filter=LANGID,eq,\(langid)&order=WORD"
         return RestApi.getRecords(url: url)
     }
-    
+
     static func update(_ id: Int, note: String) -> Single<()> {
         // SQL: UPDATE LANGWORDS SET NOTE=? WHERE ID=?
         let url = "\(CommonApi.urlAPI)LANGWORDS/\(id)"
@@ -59,7 +59,7 @@ class MLangWord: NSObject, Codable, MWordProtocol {
         let url = "\(CommonApi.urlAPI)LANGWORDS"
         return RestApi.create(url: url, body: try! item.toJSONString()!).map { Int($0)! }.do(onSuccess: { print($0) })
     }
-    
+
     static func delete(item: MLangWord) -> Single<()> {
         // SQL: CALL LANGWORDS_DELETE
         let url = "\(CommonApi.urlSP)LANGWORDS_DELETE"
@@ -82,7 +82,7 @@ class MLangWordEdit {
         FAMIID = BehaviorRelay(value: String(x.FAMIID))
         ACCURACY = BehaviorRelay(value: x.ACCURACY)
     }
-    
+
     func save(to x: MLangWord) {
         x.WORD = WORD.value
         x.NOTE = NOTE.value

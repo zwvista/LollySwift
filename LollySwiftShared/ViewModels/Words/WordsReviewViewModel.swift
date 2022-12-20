@@ -129,7 +129,7 @@ class WordsReviewViewModel: WordsBaseViewModel {
             checkOnRepeat()
         }
     }
-    
+
     var currentItem: MUnitWord? { hasCurrent ? arrWords[index] : nil }
     var currentWord: String { hasCurrent ? arrWords[index].WORD : "" }
     func getTranslation() -> Single<String> {
@@ -141,7 +141,7 @@ class WordsReviewViewModel: WordsBaseViewModel {
             return CommonApi.extractText(from: html, transform: mDictTranslation.TRANSFORM, template: "") { text,_ in text }
         }
     }
-    
+
     func check(toNext: Bool) {
         if !isTestMode {
             var b = true
@@ -181,7 +181,7 @@ class WordsReviewViewModel: WordsBaseViewModel {
             checkPrevTitle.accept("Check")
         }
     }
-    
+
     func doTest() {
         indexHidden.accept(!hasCurrent)
         correctHidden.accept(true)

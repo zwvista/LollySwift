@@ -109,10 +109,10 @@ class PhrasesReviewViewModel: NSObject {
             checkOnRepeat()
         }
     }
-    
+
     var currentItem: MUnitPhrase? { hasCurrent ? arrPhrases[index] : nil }
     var currentPhrase: String { hasCurrent ? arrPhrases[index].PHRASE : "" }
-    
+
     func check(toNext: Bool) {
         if !isTestMode {
             var b = true
@@ -145,7 +145,7 @@ class PhrasesReviewViewModel: NSObject {
             checkPrevTitle.accept("Check")
         }
     }
-    
+
     func doTest() {
         indexHidden.accept(!hasCurrent)
         correctHidden.accept(true)

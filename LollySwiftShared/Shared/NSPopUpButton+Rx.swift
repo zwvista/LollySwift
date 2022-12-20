@@ -13,7 +13,7 @@ import RxSwift
 import RxCocoa
 
 extension Reactive where Base: NSPopUpButton {
-    
+
     /// Bidirectional reactive wrapper for `indexOfSelectedItem` property.
     public var selectedItemIndex: ControlProperty<Int> {
         return controlProperty(
@@ -25,7 +25,7 @@ extension Reactive where Base: NSPopUpButton {
             }
         )
     }
-    
+
     /// Bidirectional reactive wrapper for `selectedItem` property.
     public var selectedItem: ControlProperty<NSMenuItem?> {
         return controlProperty(
@@ -69,7 +69,7 @@ extension Reactive where Base: NSPopUpButton {
             }
         )
     }
-    
+
     /// Bindable sink for simple menu items property.
     ///
     public func menuItems() -> Binder<[String]> {

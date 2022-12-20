@@ -28,7 +28,7 @@ class PhrasesUnitDetailViewController: UITableViewController, UITextFieldDelegat
     var itemEdit: MUnitPhraseEdit { vmEdit.itemEdit }
     let ddUnit = DropDown()
     let ddPart = DropDown()
-    
+
     func startEdit(vm: PhrasesUnitViewModel, item: MUnitPhrase, wordid: Int) {
         vmEdit = PhrasesUnitDetailViewModel(vm: vm, item: item, wordid: wordid) {
             self.tableView.reloadData()
@@ -63,7 +63,7 @@ class PhrasesUnitDetailViewController: UITableViewController, UITextFieldDelegat
         _ = itemEdit.TRANSLATION <~> tfTranslation.rx.textInput
         _ = vmEdit.isOKEnabled ~> btnDone.rx.isEnabled
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         // https://stackoverflow.com/questions/7525437/how-to-set-focus-to-a-textfield-in-iphone
@@ -83,7 +83,7 @@ class PhrasesUnitDetailViewController: UITableViewController, UITextFieldDelegat
             return true
         }
     }
-    
+
     deinit {
         print("DEBUG: \(self.className) deinit")
     }

@@ -10,7 +10,7 @@ import UIKit
 import RxBinding
 
 class WordsLangDetailViewController: UITableViewController {
-    
+
     var vm: WordsLangViewModel!
     var item: MLangWord!
     var vmEdit: WordsLangDetailViewModel!
@@ -35,13 +35,13 @@ class WordsLangDetailViewController: UITableViewController {
         _ = itemEdit.ACCURACY ~> tfAccuracy.rx.text.orEmpty
         _ = vmEdit.isOKEnabled ~> btnDone.rx.isEnabled
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         // https://stackoverflow.com/questions/7525437/how-to-set-focus-to-a-textfield-in-iphone
         (item.WORD.isEmpty ? tfWord : tfNote).becomeFirstResponder()
     }
-    
+
     deinit {
         print("DEBUG: \(self.className) deinit")
     }

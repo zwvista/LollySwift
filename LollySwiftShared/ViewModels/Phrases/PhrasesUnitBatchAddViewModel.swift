@@ -21,7 +21,7 @@ class PhrasesUnitBatchAddViewModel: NSObject {
         item = vm.newUnitPhrase()
         itemEdit = MUnitPhraseEdit(x: item)
     }
-    
+
     func onOK() -> Single<()> {
         itemEdit.save(to: item)
         var o = Single.just(())

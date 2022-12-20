@@ -28,19 +28,19 @@ class MWordFami: NSObject, Codable {
         let url = "\(CommonApi.urlAPI)WORDSFAMI/\(item.ID)"
         return RestApi.update(url: url, body: try! item.toJSONString()!).map { print($0) }
     }
-    
+
     private static func create(item: MWordFami) -> Single<Int> {
         // SQL: INSERT INTO WORDSFAMI (USERID, WORDID) VALUES (?,?)
         let url = "\(CommonApi.urlAPI)WORDSFAMI"
         return RestApi.create(url: url, body: try! item.toJSONString()!).map { Int($0)! }.do(onSuccess: { print($0) })
     }
-    
+
     static func delete(_ id: Int) -> Single<()> {
         // SQL: DELETE WORDSFAMI WHERE ID=?
         let url = "\(CommonApi.urlAPI)WORDSFAMI/\(id)"
         return RestApi.delete(url: url).map { print($0) }
     }
-    
+
     static func update(wordid: Int, isCorrect: Bool) -> Single<MWordFami> {
         return getDataByWord(wordid: wordid).flatMap { arr in
             let item = MWordFami()

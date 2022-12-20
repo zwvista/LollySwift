@@ -16,7 +16,7 @@ class MVoice: NSObject, Codable {
     dynamic var VOICETYPEID = 0
     dynamic var VOICELANG: String? = nil
     dynamic var VOICENAME = ""
-    
+
     enum CodingKeys : String, CodingKey {
         case ID
         case LANGID
@@ -24,7 +24,7 @@ class MVoice: NSObject, Codable {
         case VOICELANG
         case VOICENAME
     }
-    
+
     override var description: String { VOICENAME }
 
     static func getDataByLang(_ langid: Int) -> Single<[MVoice]> {

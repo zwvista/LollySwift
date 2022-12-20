@@ -21,7 +21,7 @@ class WordsUnitViewController: WordsBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
+
     override func refresh() {
         view.showBlurLoader()
         vm = WordsUnitViewModel(settings: vmSettings, inTextbook: true, needCopy: false) {
@@ -34,15 +34,15 @@ class WordsUnitViewController: WordsBaseViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         arrWords.count
     }
-    
+
     override func itemForRow(row: Int) -> (MWordProtocol & NSObject)? {
         arrWords[row]
     }
-    
+
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         vmSettings.isSingleUnitPart
     }
-    
+
     private func reindex() {
         tableView.beginUpdates()
         vm.reindex {
@@ -50,7 +50,7 @@ class WordsUnitViewController: WordsBaseViewController {
         }
         tableView.endUpdates()
     }
-    
+
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         vm.arrWords.moveElement(at: sourceIndexPath.row, to: destinationIndexPath.row)
         reindex()
@@ -112,12 +112,12 @@ class WordsUnitViewController: WordsBaseViewController {
 
         return UISwipeActionsConfiguration(actions: [moreAction, deleteAction])
     }
-    
+
     override func applyFilters() {
         vm.applyFilters()
         tableView.reloadData()
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         if let controller = (segue.destination as? UINavigationController)?.topViewController as? WordsUnitDetailViewController {
@@ -130,12 +130,12 @@ class WordsUnitViewController: WordsBaseViewController {
             controller.vm = vm
         }
     }
-    
+
     @IBAction func btnEditClicked(_ sender: AnyObject) {
         tableView.isEditing = !tableView.isEditing
         btnEdit.title = tableView.isEditing ? "Done" : "Edit"
     }
-    
+
     @IBAction func btnMoreClicked(_ sender: AnyObject) {
         let alertController = UIAlertController(title: "Words", message: "More", preferredStyle: .alert)
         let addAction = UIAlertAction(title: "Add", style: .default) { _ in self.performSegue(withIdentifier: "add", sender: self) }

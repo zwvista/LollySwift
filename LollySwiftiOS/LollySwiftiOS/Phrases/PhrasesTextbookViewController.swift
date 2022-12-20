@@ -13,7 +13,7 @@ import NSObject_Rx
 import RxBinding
 
 class PhrasesTextbookViewController: PhrasesBaseViewController {
-    
+
     var vm: PhrasesUnitViewModel!
     var arrPhrases: [MUnitPhrase] { vm.arrPhrasesFiltered ?? vm.arrPhrases }
 
@@ -34,7 +34,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
             self.applyFilters()
         } ~ rx.disposeBag
     }
-    
+
     override func refresh() {
         view.showBlurLoader()
         vm = PhrasesUnitViewModel(settings: vmSettings, inTextbook: false, needCopy: false) {
@@ -43,7 +43,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
             self.view.removeBlurLoader()
         }
     }
-    
+
     @IBAction func showTextbookFilterDropDown(_ sender: AnyObject) {
         ddTextbookFilter.show()
     }
@@ -51,15 +51,15 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         arrPhrases.count
     }
-    
+
     override func itemForRow(row: Int) -> (MPhraseProtocol & NSObject)? {
         arrPhrases[row]
     }
-    
+
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         vmSettings.isSingleUnitPart
     }
-    
+
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         let item = vm.arrPhrases[(sourceIndexPath as NSIndexPath).row]
         vm.arrPhrases.remove(at: (sourceIndexPath as NSIndexPath).row)
@@ -106,19 +106,19 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
 
         return UISwipeActionsConfiguration(actions: [moreAction, deleteAction])
     }
-    
+
     override func applyFilters() {
         vm.applyFilters()
         tableView.reloadData()
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         guard let controller = (segue.destination as? UINavigationController)?.topViewController as? PhrasesTextbookDetailViewController else {return}
         let item = sender as! MUnitPhrase
         controller.startEdit(vm: vm, item: item, wordid: 0)
     }
-    
+
     @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
         guard segue.identifier == "Done" else {return}
         let controller = segue.source as! PhrasesTextbookDetailViewController

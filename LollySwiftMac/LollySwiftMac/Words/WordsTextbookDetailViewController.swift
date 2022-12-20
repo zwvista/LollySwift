@@ -61,24 +61,24 @@ class WordsTextbookDetailViewController: NSViewController, NSTableViewDataSource
             self.dismiss(self.btnOK)
         } ~ rx.disposeBag
     }
-    
+
     override func viewDidAppear() {
         super.viewDidAppear()
         // https://stackoverflow.com/questions/24235815/cocoa-how-to-set-window-title-from-within-view-controller-in-swift
         (vmEdit.isAdd ? tfWord : tfNote).becomeFirstResponder()
         view.window?.title = item.WORD
     }
-    
+
     @IBAction func clearAccuracy(_ sender: AnyObject) {
         item.CORRECT = 0
         item.TOTAL = 0
         tfAccuracy.stringValue = item.ACCURACY
     }
-    
+
     func numberOfRows(in tableView: NSTableView) -> Int {
         arrWords.count
     }
-    
+
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! NSTableCellView
         let item = arrWords[row]

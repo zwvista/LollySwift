@@ -39,7 +39,7 @@ class BlogViewController: NSViewController, NSMenuItemValidation  {
     @IBAction func htmlToMarked(_ sender: AnyObject) {
         tvMarked.string = vmBlog.htmlToMarked(text: tvHtml.string)
     }
-    
+
     func replaceSelection(f: (String) -> String) {
         var s = tvMarked.string
         let range = Range(tvMarked.selectedRange(), in: s)!
@@ -110,17 +110,17 @@ class BlogViewController: NSViewController, NSMenuItemValidation  {
 class BlogWindowController: NSWindowController, NSWindowDelegate {
     @IBOutlet weak var scPage: NSSegmentedControl!
     @IBOutlet weak var tfPatternNo: NSTextField!
-    
+
     @objc var patternNo = "001"
 
     override func windowDidLoad() {
         super.windowDidLoad()
     }
-    
+
     func windowWillClose(_ notification: Notification) {
         tfPatternNo.unbindAll()
     }
-    
+
     deinit {
         print("DEBUG: \(self.className) deinit")
     }

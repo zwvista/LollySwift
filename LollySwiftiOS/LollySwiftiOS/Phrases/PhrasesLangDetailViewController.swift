@@ -10,7 +10,7 @@ import UIKit
 import RxBinding
 
 class PhrasesLangDetailViewController: UITableViewController {
-    
+
     var vm: PhrasesLangViewModel!
     var item: MLangPhrase!
     var vmEdit: PhrasesLangDetailViewModel!
@@ -28,13 +28,13 @@ class PhrasesLangDetailViewController: UITableViewController {
         _ = itemEdit.TRANSLATION <~> tfTranslation.rx.textInput
         _ = vmEdit.isOKEnabled ~> btnDone.rx.isEnabled
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         // https://stackoverflow.com/questions/7525437/how-to-set-focus-to-a-textfield-in-iphone
         (vmEdit.isAdd ? tfPhrase : tfTranslation).becomeFirstResponder()
     }
-    
+
     deinit {
         print("DEBUG: \(self.className) deinit")
     }

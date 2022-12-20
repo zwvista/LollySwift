@@ -28,7 +28,7 @@ class PatternsWebPagesDetailViewController: UITableViewController {
     @IBOutlet weak var btnNew: UIButton!
     @IBOutlet weak var btnExisting: UIButton!
     @IBOutlet weak var btnDone: UIBarButtonItem!
-    
+
     func startEdit(item: MPatternWebPage) {
         vmEdit = PatternsWebPagesDetailViewModel(item: item)
     }
@@ -46,13 +46,13 @@ class PatternsWebPagesDetailViewController: UITableViewController {
         btnExisting.isEnabled = vmEdit.isAddWebPage
         _ = vmEdit.isOKEnabled ~> btnDone.rx.isEnabled
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         // https://stackoverflow.com/questions/7525437/how-to-set-focus-to-a-textfield-in-iphone
         tfTitle.becomeFirstResponder()
     }
-    
+
     @IBAction func newWebPage(_ sender: AnyObject) {
         itemEdit.WEBPAGEID.accept("0")
         itemEdit.TITLE.accept("")

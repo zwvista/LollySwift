@@ -24,7 +24,7 @@ class WebTextbooksViewModel: NSObject {
             complete()
         } ~ rx.disposeBag
     }
-    
+
     func applyFilters(textbookFilter: Int) {
         arrWebTextbooksFiltered = textbookFilter == 0 ? nil : arrWebTextbooks.filter { $0.TEXTBOOKID == textbookFilter }
     }

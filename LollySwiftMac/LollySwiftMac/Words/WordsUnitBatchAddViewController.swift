@@ -11,14 +11,14 @@ import RxSwift
 import RxBinding
 
 class WordsUnitBatchAddViewController: NSViewController {
-    
+
     @IBOutlet weak var acUnits: NSArrayController!
     @IBOutlet weak var acParts: NSArrayController!
     @IBOutlet weak var pubUnit: NSPopUpButton!
     @IBOutlet weak var pubPart: NSPopUpButton!
     @IBOutlet weak var tvWords: NSTextView!
     @IBOutlet weak var btnOK: NSButton!
-    
+
     var vm: WordsUnitViewModel!
     var vmEdit: WordsUnitBatchAddViewModel!
     var item: MUnitWord { vmEdit.item }
@@ -43,7 +43,7 @@ class WordsUnitBatchAddViewController: NSViewController {
             self.dismiss(self.btnOK)
         } ~ rx.disposeBag
     }
-    
+
     override func viewDidAppear() {
         super.viewDidAppear()
         view.window?.title = "Batch Add"

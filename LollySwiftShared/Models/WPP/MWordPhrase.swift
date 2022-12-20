@@ -29,7 +29,7 @@ class MWordPhrase: NSObject, Codable {
     dynamic var ID = 0
     dynamic var WORDID = 0
     dynamic var PHRASEID = 0
-    
+
     private static func getDataByWordPhrase(wordid: Int, phraseid: Int) -> Single<[MWordPhrase]> {
         // SQL: SELECT * FROM WORDSPHRASES WHERE WORDID=? AND PHRASEID=?
         let url = "\(CommonApi.urlAPI)WORDSPHRASES?filter=WORDID,eq,\(wordid)&filter=PHRASEID,eq,\(phraseid)"
@@ -41,13 +41,13 @@ class MWordPhrase: NSObject, Codable {
         let url = "\(CommonApi.urlAPI)WORDSPHRASES"
         return RestApi.create(url: url, body: try! item.toJSONString()!).map { Int($0)! }.do(onSuccess: { print($0) })
     }
-    
+
     private static func delete(_ id: Int) -> Single<()> {
         // SQL: DELETE WORDSPHRASES WHERE ID=?
         let url = "\(CommonApi.urlAPI)WORDSPHRASES/\(id)"
         return RestApi.delete(url: url).map { print($0) }
     }
-    
+
     static func deleteByWordId(_ wordid: Int) -> Single<()> {
         // SQL: DELETE WORDSPHRASES WHERE WORDID=?
         return getPhrasesByWordId(wordid).flatMap { arr in
@@ -86,7 +86,7 @@ class MWordPhrase: NSObject, Codable {
             }
         }
     }
-    
+
     static func dissociate(wordid: Int, phraseid: Int) -> Single<()> {
         getDataByWordPhrase(wordid: wordid, phraseid: phraseid).flatMap { arr in
             var o = Single.just(())
@@ -96,7 +96,7 @@ class MWordPhrase: NSObject, Codable {
             return o
         }
     }
-    
+
     static func getPhrasesByWordId(_ wordid: Int) -> Single<[MLangPhrase]> {
         // SQL: SELECT * FROM VPHRASESWORD WHERE WORDID=?
         let url = "\(CommonApi.urlAPI)VPHRASESWORD?filter=WORDID,eq,\(wordid)"

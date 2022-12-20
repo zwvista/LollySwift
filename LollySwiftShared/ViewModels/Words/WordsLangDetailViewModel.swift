@@ -28,7 +28,7 @@ class WordsLangDetailViewModel: NSObject {
         guard !isAdd else {return}
         vmSingle = SingleWordViewModel(word: item.WORD, settings: vm.vmSettings, complete: complete)
     }
-    
+
     func onOK() -> Single<()> {
         itemEdit.save(to: item)
         item.WORD = vm.vmSettings.autoCorrectInput(text: item.WORD)

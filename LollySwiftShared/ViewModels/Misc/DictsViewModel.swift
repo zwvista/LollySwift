@@ -14,7 +14,7 @@ import NSObject_Rx
 class DictsViewModel: NSObject {
     var vmSettings: SettingsViewModel
     var arrDicts = [MDictionary]()
-    
+
     init(settings: SettingsViewModel, complete: @escaping () -> Void) {
         vmSettings = settings
         super.init()
@@ -23,7 +23,7 @@ class DictsViewModel: NSObject {
             complete()
         } ~ rx.disposeBag
     }
-    
+
     static func update(item: MDictionary) -> Single<()> {
         MDictionary.update(item: item)
     }

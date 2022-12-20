@@ -29,7 +29,7 @@ class MWebPage: NSObject, Codable {
         let url = "\(CommonApi.urlAPI)WEBPAGES?filter=ID,eq,\(id)"
         return RestApi.getRecords(url: url)
     }
-    
+
     static func getDataBySearch(title t: String, url u: String) -> Single<[MWebPage]> {
         // SQL: SELECT * FROM WEBPAGES WHERE LOCATE(?, TITLE) <> 0 AND LOCATE(?, URL) <> 0
         var filter = ""
@@ -69,7 +69,7 @@ class MWebPage: NSObject, Codable {
         let url = "\(CommonApi.urlAPI)WEBPAGES"
         return RestApi.create(url: url, body: try! item.toJSONString()!).map { Int($0)! }.do(onSuccess: { print($0) })
     }
-    
+
     static func delete(_ id: Int) -> Single<()> {
         // SQL: DELETE WEBPAGES WHERE ID=?
         let url = "\(CommonApi.urlAPI)WEBPAGES/\(id)"

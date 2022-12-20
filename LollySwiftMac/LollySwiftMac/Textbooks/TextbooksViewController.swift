@@ -12,11 +12,11 @@ import NSObject_Rx
 import RxBinding
 
 class TextbooksViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate {
-    
+
     @IBOutlet weak var tableView: NSTableView!
 
     var vm: TextbooksViewModel!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         settingsChanged()
@@ -25,13 +25,13 @@ class TextbooksViewController: NSViewController, LollyProtocol, NSTableViewDataS
     func settingsChanged() {
         refreshTableView(self)
     }
-    
+
     @IBAction func refreshTableView(_ sender: AnyObject) {
         vm = TextbooksViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) {
             self.tableView.reloadData()
         }
     }
-    
+
     func numberOfRows(in tableView: NSTableView) -> Int {
         vm.arrTextbooks.count
     }
@@ -52,7 +52,7 @@ class TextbooksViewController: NSViewController, LollyProtocol, NSTableViewDataS
         detailVC.complete = { self.tableView.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count)) }
         self.presentAsModalWindow(detailVC)
     }
-    
+
     @IBAction func addTextbook(_ sender: AnyObject) {
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "TextbooksDetailViewController") as! TextbooksDetailViewController
         detailVC.vm = vm

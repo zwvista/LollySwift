@@ -11,11 +11,11 @@ import RxSwift
 import RxBinding
 
 class DictsViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate, NSTextFieldDelegate {
-    
+
     @IBOutlet weak var tableView: NSTableView!
 
     var vm: DictsViewModel!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         settingsChanged()
@@ -24,13 +24,13 @@ class DictsViewController: NSViewController, LollyProtocol, NSTableViewDataSourc
     func settingsChanged() {
         refreshTableView(self)
     }
-    
+
     @IBAction func refreshTableView(_ sender: Any) {
         vm = DictsViewModel(settings: AppDelegate.theSettingsViewModel) {
             self.tableView.reloadData()
         }
     }
-    
+
     func numberOfRows(in tableView: NSTableView) -> Int {
         vm.arrDicts.count
     }
@@ -51,7 +51,7 @@ class DictsViewController: NSViewController, LollyProtocol, NSTableViewDataSourc
         detailVC.complete = { self.tableView.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count)) }
         self.presentAsModalWindow(detailVC)
     }
-    
+
     @IBAction func addDict(_ sender: Any) {
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "DictsDetailViewController") as! DictsDetailViewController
         detailVC.vm = vm

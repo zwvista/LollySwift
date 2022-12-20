@@ -27,7 +27,7 @@ class TextbooksDetailViewController: NSViewController {
         super.viewDidLoad()
         isAdd = item.ID == 0
     }
-    
+
     override func viewDidAppear() {
         super.viewDidAppear()
         view.window?.title = item.TEXTBOOKNAME

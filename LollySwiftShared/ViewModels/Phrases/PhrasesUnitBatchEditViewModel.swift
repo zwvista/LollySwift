@@ -28,7 +28,7 @@ class PhrasesUnitBatchEditViewModel: NSObject {
         indexUNIT.accept(vm.vmSettings.arrUnits.firstIndex { $0.value == unit }!)
         indexPART.accept(vm.vmSettings.arrParts.firstIndex { $0.value == part }!)
     }
-    
+
     func onOK(rows: [Bool]) -> Single<()> {
         var o = Single.just(())
         for (i, isChecked) in rows.enumerated() {

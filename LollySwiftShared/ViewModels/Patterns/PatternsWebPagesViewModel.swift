@@ -24,7 +24,7 @@ class PatternsWebPagesViewModel: NSObject {
         self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
         super.init()
     }
-    
+
     func getWebPages() -> Single<()> {
         if selectedPatternItem == nil {
             arrWebPages.removeAll()

@@ -19,13 +19,13 @@ class WordsLangViewModel: WordsBaseViewModel {
         super.init(settings: settings, needCopy: needCopy)
         reload().subscribe { _ in complete() } ~ rx.disposeBag
     }
-    
+
     func reload() -> Single<()> {
         MLangWord.getDataByLang(vmSettings.selectedTextbook.LANGID).map {
             self.arrWords = $0
         }
     }
-    
+
     func applyFilters() {
         if textFilter.value.isEmpty {
             arrWordsFiltered = nil
@@ -36,7 +36,7 @@ class WordsLangViewModel: WordsBaseViewModel {
             }
         }
     }
-    
+
     static func update(item: MLangWord) -> Single<()> {
         MLangWord.update(item: item)
     }
@@ -46,11 +46,11 @@ class WordsLangViewModel: WordsBaseViewModel {
             item.ID = $0
         }
     }
-    
+
     static func delete(item: MLangWord) -> Single<()> {
         MLangWord.delete(item: item)
     }
-    
+
     func newLangWord() -> MLangWord {
         MLangWord().then {
             $0.LANGID = vmSettings.selectedLang.ID
@@ -70,11 +70,11 @@ class WordsLangViewModel: WordsBaseViewModel {
         item.NOTE = SettingsViewModel.zeroNote
         return WordsUnitViewModel.update(item.ID, note: item.NOTE)
     }
-    
+
     public init(settings: SettingsViewModel) {
         super.init(settings: settings, needCopy: false)
     }
-    
+
     func getWords(phraseid: Int) -> Single<()> {
         MWordPhrase.getWordsByPhraseId(phraseid).map {
             self.arrWords = $0

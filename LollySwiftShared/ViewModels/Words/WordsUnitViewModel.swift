@@ -14,14 +14,14 @@ import Then
 class WordsUnitViewModel: WordsBaseViewModel {
     let inTextbook: Bool
     var arrWords = [MUnitWord]()
-    var arrWordsFiltered: [MUnitWord]?
+    var arrWordsFiltered = [MUnitWord]()
 
     init(settings: SettingsViewModel, inTextbook: Bool, needCopy: Bool, complete: @escaping () -> Void) {
         self.inTextbook = inTextbook
         super.init(settings: settings, needCopy: needCopy)
         reload().subscribe { _ in complete() } ~ rx.disposeBag
     }
-    
+
     func reload() -> Single<()> {
         (inTextbook ? MUnitWord.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO) : MUnitWord.getDataByLang(vmSettings.selectedTextbook.LANGID, arrTextbooks: vmSettings.arrTextbooks))
         .map {
@@ -29,7 +29,7 @@ class WordsUnitViewModel: WordsBaseViewModel {
             self.arrWordsFiltered = nil
         }
     }
-    
+
     func applyFilters() {
         if textFilter.value.isEmpty && textbookFilter == 0 {
             arrWordsFiltered = nil
@@ -43,11 +43,11 @@ class WordsUnitViewModel: WordsBaseViewModel {
             }
         }
     }
-    
+
     static func update(_ id: Int, seqnum: Int) -> Single<()> {
         MUnitWord.update(id, seqnum: seqnum)
     }
-    
+
     static func update(_ wordid: Int, note: String) -> Single<()> {
         MLangWord.update(wordid, note: note)
     }
@@ -65,7 +65,7 @@ class WordsUnitViewModel: WordsBaseViewModel {
             }
         }
     }
-    
+
     func create(item: MUnitWord) -> Single<()> {
         MUnitWord.create(item: item).flatMap {
             MUnitWord.getDataById($0, arrTextbooks: self.vmSettings.arrTextbooks)
@@ -79,7 +79,7 @@ class WordsUnitViewModel: WordsBaseViewModel {
             }
         }
     }
-    
+
     static func delete(item: MUnitWord) -> Single<()> {
         MUnitWord.delete(item: item)
     }
@@ -94,7 +94,7 @@ class WordsUnitViewModel: WordsBaseViewModel {
             } ~ rx.disposeBag
         }
     }
-    
+
     func newUnitWord() -> MUnitWord {
         MUnitWord().then {
             $0.LANGID = vmSettings.selectedLang.ID
@@ -106,18 +106,18 @@ class WordsUnitViewModel: WordsBaseViewModel {
             $0.textbook = vmSettings.selectedTextbook
         }
     }
-    
+
     func getNote(index: Int) -> Single<()> {
         getNote(item: arrWords[index])
     }
-    
+
     func getNote(item: MUnitWord) -> Single<()> {
         vmSettings.getNote(word: item.WORD).flatMap { note in
             item.NOTE = note
             return WordsUnitViewModel.update(item.WORDID, note: note)
         }
     }
-    
+
     func getNotes(ifEmpty: Bool, oneComplete: @escaping (Int) -> Void, allComplete: @escaping () -> Void) {
         vmSettings.getNotes(wordCount: arrWords.count, isNoteEmpty: {
             !ifEmpty || (self.arrWords[$0].NOTE).isEmpty
@@ -133,7 +133,7 @@ class WordsUnitViewModel: WordsBaseViewModel {
         item.NOTE = SettingsViewModel.zeroNote
         return WordsUnitViewModel.update(item.WORDID, note: item.NOTE)
     }
-    
+
     func clearNotes(ifEmpty: Bool, oneComplete: @escaping (Int) -> Void) -> Single<()> {
         vmSettings.clearNotes(wordCount: arrWords.count, isNoteEmpty: {
             !ifEmpty || self.arrWords[$0].NOTE.isEmpty

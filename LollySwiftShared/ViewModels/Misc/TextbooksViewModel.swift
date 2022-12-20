@@ -14,7 +14,7 @@ import Then
 class TextbooksViewModel: NSObject {
     var vmSettings: SettingsViewModel
     var arrTextbooks = [MTextbook]()
-    
+
     init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> Void) {
         self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
         super.init()
@@ -23,11 +23,11 @@ class TextbooksViewModel: NSObject {
             complete()
         } ~ rx.disposeBag
     }
-    
+
     static func update(item: MTextbook) -> Single<()> {
         MTextbook.update(item: item)
     }
-    
+
     static func create(item: MTextbook) -> Single<Int> {
         MTextbook.create(item: item)
     }

@@ -13,7 +13,7 @@ class TransformItemEditController: NSViewController {
     @IBOutlet weak var tfIndex: NSTextField!
     @IBOutlet weak var tfExtractor: NSTextField!
     @IBOutlet weak var tfReplacement: NSTextField!
-    
+
     @objc var item: MTransformItem!
     var complete: (() -> Void)?
 
@@ -21,7 +21,7 @@ class TransformItemEditController: NSViewController {
         super.viewDidLoad()
         // Do view setup here.
     }
-    
+
     override func viewDidAppear() {
         super.viewDidAppear()
         view.window?.title = "Transform Item Edit"

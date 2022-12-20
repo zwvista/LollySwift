@@ -27,11 +27,11 @@ class WordsUnitBatchEditViewController: UIViewController, UITableViewDelegate, U
     var vm: WordsUnitViewModel!
     let ddUnit = DropDown()
     let ddPart = DropDown()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
+
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if textField === tfUnit {
             if swUnit.isOn {
@@ -49,7 +49,7 @@ class WordsUnitBatchEditViewController: UIViewController, UITableViewDelegate, U
             return textField === tfSeqNum ? swSeqNum.isOn : true
         }
     }
-    
+
     func onDone() {
         var o = Single.just(())
         let unit = vmSettings.arrUnits[ddUnit.indexForSelectedRow!].value
@@ -68,11 +68,11 @@ class WordsUnitBatchEditViewController: UIViewController, UITableViewDelegate, U
         }
         o.subscribe() ~ rx.disposeBag
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         tableView === tvActions ? 4 : vm.arrWords.count
     }
-    
+
 //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 //        tableView === tvActions ? UITableView.automaticDimension : 88
 //    }
@@ -115,7 +115,7 @@ class WordsUnitBatchEditViewController: UIViewController, UITableViewDelegate, U
         }
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard tableView === tvWords else {return}
         let cell = tableView.cellForRow(at: indexPath)!

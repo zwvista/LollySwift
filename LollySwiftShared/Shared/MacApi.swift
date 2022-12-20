@@ -14,11 +14,11 @@ class MacApi {
         pasteboard.declareTypes([.string], owner: nil)
         pasteboard.setString(text, forType: .string)
     }
-    
+
     static func openURL(_ url: String) {
         NSWorkspace.shared.open(URL(string: url)!)
     }
-    
+
     static func googleString(_ str: String) {
         openURL("https://www.google.com/search?q=\(str.urlEncoded())")
     }
@@ -29,7 +29,7 @@ class MacApi {
  * A NSColor extension
  **/
 public extension NSColor {
-    
+
     /**
      Returns an NSColor instance from the given hex value
      
@@ -43,7 +43,7 @@ public extension NSColor {
         NSColor(red: ((CGFloat)((rgbValue & 0xFF0000) >> 16))/255.0, green:((CGFloat)((rgbValue & 0xFF00) >> 8))/255.0, blue:((CGFloat)(rgbValue & 0xFF))/255.0, alpha:alpha)
         
     }
-    
+
 }
 
 public extension NSControl {

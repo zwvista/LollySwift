@@ -11,20 +11,20 @@ import WebKit
 import RxBinding
 
 class DictStore: NSObject {
-    
+
     var dictStatus = DictWebViewStatus.ready
     var word = ""
     var dict: MDictionary!
     var url = ""
-    
+
     var vmSettings: SettingsViewModel
     weak var wvDict: WKWebView!
-    
+
     init(vmSettings: SettingsViewModel, wvDict: WKWebView) {
         self.vmSettings = vmSettings
         self.wvDict = wvDict
     }
-    
+
     func searchDict() {
         url = dict.urlString(word: word, arrAutoCorrect: vmSettings.arrAutoCorrect)
         dictStatus = .ready

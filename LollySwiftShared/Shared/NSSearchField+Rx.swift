@@ -14,7 +14,7 @@ extension Reactive where Base: NSSearchField {
         let source = delegate.methodInvoked(#selector(NSSearchFieldDelegate.searchFieldDidStartSearching(_:))).map {_ in }
         return ControlEvent(events: source)
     }
-    
+
     public var searchFieldDidEndSearching: ControlEvent<()> {
         let source = delegate.methodInvoked(#selector(NSSearchFieldDelegate.searchFieldDidEndSearching(_:))).map {_ in }
         return ControlEvent(events: source)

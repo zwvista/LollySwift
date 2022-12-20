@@ -10,7 +10,7 @@ import UIKit
 import RxBinding
 
 class PatternsDetailViewController: UITableViewController {
-    
+
     var vm: PatternsViewModel!
     var item: MPattern!
     var vmEdit: PatternsDetailViewModel!
@@ -21,7 +21,7 @@ class PatternsDetailViewController: UITableViewController {
     @IBOutlet weak var tfNote: UITextField!
     @IBOutlet weak var tfTags: UITextField!
     @IBOutlet weak var btnDone: UIBarButtonItem!
-    
+
     func startEdit(vm: PatternsViewModel, item: MPattern) {
         vmEdit = PatternsDetailViewModel(vm: vm, item: item)
     }
@@ -34,13 +34,13 @@ class PatternsDetailViewController: UITableViewController {
         _ = itemEdit.TAGS <~> tfTags.rx.textInput
         _ = vmEdit.isOKEnabled ~> btnDone.rx.isEnabled
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         // https://stackoverflow.com/questions/7525437/how-to-set-focus-to-a-textfield-in-iphone
         (vmEdit.isAdd ? tfPattern : tfNote).becomeFirstResponder()
     }
-    
+
     deinit {
         print("DEBUG: \(self.className) deinit")
     }

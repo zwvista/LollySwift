@@ -45,7 +45,7 @@ class MReviewOptionsEdit {
         onRepeat = BehaviorRelay(value: x.onRepeat)
         moveForward = BehaviorRelay(value: x.moveForward)
     }
-    
+
     func save(to x: MReviewOptions) {
         x.mode = ReviewMode(rawValue: mode.value)!
         x.interval = interval.value

@@ -59,17 +59,17 @@ class WordsUnitBatchEditViewController: NSViewController, NSTableViewDataSource,
             self.dismiss(self.btnOK)
         } ~ rx.disposeBag
     }
-    
+
     override func viewDidAppear() {
         super.viewDidAppear()
         // https://stackoverflow.com/questions/24235815/cocoa-how-to-set-window-title-from-within-view-controller-in-swift
         view.window?.title = "Batch Edit"
     }
-    
+
     func numberOfRows(in tableView: NSTableView) -> Int {
         arrWords.count
     }
-    
+
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! NSTableCellView
         let item = arrWords[row]
@@ -77,7 +77,7 @@ class WordsUnitBatchEditViewController: NSViewController, NSTableViewDataSource,
         cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
         return cell
     }
-    
+
     @IBAction func checkItems(_ sender: AnyObject) {
         let n = (sender as! NSButton).tag
         for i in 0..<tableView.numberOfRows {

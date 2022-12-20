@@ -17,7 +17,7 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
     override var vmWords: WordsBaseViewModel { vm }
     override var vmSettings: SettingsViewModel! { vm.vmSettings }
     var arrWords: [MUnitWord] { vm.arrWordsFiltered == nil ? vm.arrWords : vm.arrWordsFiltered! }
-    
+
     @IBOutlet weak var pubTextbookFilter: NSPopUpButton!
     @IBOutlet weak var acTextbooks: NSArrayController!
 
@@ -40,11 +40,11 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
         }
         super.settingsChanged()
     }
-    
+
     func numberOfRows(in tableView: NSTableView) -> Int {
         tableView === tvWords ? arrWords.count : vmPhrasesLang.arrPhrases.count
     }
-    
+
     override func wordItemForRow(row: Int) -> (MWordProtocol & NSObject)? {
         arrWords[row]
     }
@@ -68,7 +68,7 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
             self.doRefresh()
         } ~ rx.disposeBag
     }
-    
+
     @IBAction func doubleAction(_ sender: AnyObject) {
         if NSApp.currentEvent!.modifierFlags.contains(.option) {
             associatePhrases(sender)
@@ -87,14 +87,14 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
         }
         self.presentAsModalWindow(editVC)
     }
-    
+
     @IBAction func getNote(_ sender: AnyObject) {
         let col = tvWords.tableColumns.firstIndex { $0.title == "NOTE" }!
         vm.getNote(index: tvWords.selectedRow).subscribe { _ in
             self.tvWords.reloadData(forRowIndexes: [self.tvWords.selectedRow], columnIndexes: [col])
         } ~ rx.disposeBag
     }
-    
+
     @IBAction func clearNote(_ sender: AnyObject) {
         let col = tvWords.tableColumns.firstIndex { $0.title == "NOTE" }!
         vm.clearNote(index: tvWords.selectedRow).subscribe { _ in

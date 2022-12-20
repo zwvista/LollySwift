@@ -21,7 +21,7 @@ class WordsUnitBatchAddViewModel: NSObject {
         item = vm.newUnitWord()
         itemEdit = MUnitWordEdit(x: item)
     }
-    
+
     func onOK() -> Single<()> {
         itemEdit.save(to: item)
         var o = Single.just(())

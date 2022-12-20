@@ -13,7 +13,7 @@ import NSObject_Rx
 import RxBinding
 
 class PatternsWebPagesListViewController: UITableViewController {
-    
+
     var vm: PatternsWebPagesViewModel!
     @IBOutlet weak var btnEdit: UIBarButtonItem!
 
@@ -23,7 +23,7 @@ class PatternsWebPagesListViewController: UITableViewController {
         refreshControl!.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         refresh(refreshControl!)
     }
-    
+
     @objc func refresh(_ sender: UIRefreshControl) {
         vm.getWebPages().subscribe { _ in
             sender.endRefreshing()
@@ -34,7 +34,7 @@ class PatternsWebPagesListViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         vm.arrWebPages.count
     }
-    
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "WebPageCell10", for: indexPath) as! WebPagesCell
         let item = vm.arrWebPages[indexPath.row]
@@ -43,7 +43,7 @@ class PatternsWebPagesListViewController: UITableViewController {
         cell.lblURL!.text = item.URL
         return cell
     }
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         vm.currentWebPageIndex = indexPath.row
         if tableView.isEditing {
@@ -56,7 +56,7 @@ class PatternsWebPagesListViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         true
     }
-    
+
     private func reindex() {
         tableView.beginUpdates()
         vm.reindexWebPage {
@@ -88,7 +88,7 @@ class PatternsWebPagesListViewController: UITableViewController {
             controller.startEdit(item: item)
         }
     }
-    
+
     @IBAction func btnEditClicked(_ sender: AnyObject) {
         tableView.isEditing = !tableView.isEditing
         btnEdit.title = tableView.isEditing ? "Done" : "Edit"

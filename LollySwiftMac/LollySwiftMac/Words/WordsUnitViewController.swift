@@ -32,7 +32,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
         super.viewDidLoad()
         tvWords.registerForDraggedTypes([tableRowDragType])
     }
-    
+
     // https://stackoverflow.com/questions/9368654/cannot-seem-to-setenabledno-on-nsmenuitem
     func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
         if menuItem.action == #selector(getNote(_:)) || menuItem.action == #selector(getNotes(_:)) {
@@ -54,15 +54,15 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
         }
         super.settingsChanged()
     }
-    
+
     func numberOfRows(in tableView: NSTableView) -> Int {
         tableView === tvWords ? arrWords.count : vmPhrasesLang.arrPhrases.count
     }
-    
+
     override func wordItemForRow(row: Int) -> (MWordProtocol & NSObject)? {
         arrWords[row]
     }
-    
+
     override func endEditing(row: Int) {
         let item = arrWords[row]
         vm.update(item: item).subscribe { _ in
@@ -79,14 +79,14 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
             return nil
         }
     }
-    
+
     func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int, proposedDropOperation dropOperation: NSTableView.DropOperation) -> NSDragOperation {
         if dropOperation == .above {
             return .move
         }
         return []
     }
-    
+
     func tableView(_ tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int, dropOperation: NSTableView.DropOperation) -> Bool {
         var oldIndexes = [Int]()
         info.enumerateDraggingItems(options: [], for: tableView, classes: [NSPasteboardItem.self], searchOptions: [:]) { (draggingItem, _, _) in
@@ -121,7 +121,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
         
         return true
     }
-    
+
     override func addNewWord() {
         guard !vm.newWord.value.isEmpty else {return}
         let item = vm.newUnitWord()
@@ -134,7 +134,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
             self.responder = self.tfNewWord
         } ~ rx.disposeBag
     }
-    
+
     func addWord(phraseid: Int) {
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "WordsUnitDetailViewController") as! WordsUnitDetailViewController
         detailVC.startEdit(vm: vm, item: vm.newUnitWord(), phraseid: phraseid)
@@ -146,20 +146,20 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     @IBAction func addWord(_ sender: AnyObject) {
         addWord(phraseid: 0)
     }
-    
+
     override func deleteWord(row: Int) {
         let item = arrWords[row]
         WordsUnitViewModel.delete(item: item).subscribe { _ in
             self.doRefresh()
         } ~ rx.disposeBag
     }
-    
+
     @IBAction func refreshTableView(_ sender: AnyObject) {
         vm.reload().subscribe { _ in
             self.doRefresh()
         } ~ rx.disposeBag
     }
-    
+
     @IBAction func doubleAction(_ sender: AnyObject) {
         if NSApp.currentEvent!.modifierFlags.contains(.option) {
             associateExistingPhrases(sender)
@@ -167,7 +167,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
             editWord(sender)
         }
     }
-    
+
     @IBAction func editWord(_ sender: AnyObject) {
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "WordsUnitDetailViewController") as! WordsUnitDetailViewController
         let i = tvWords.selectedRow
@@ -178,7 +178,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
         }
         self.presentAsModalWindow(detailVC)
     }
-    
+
     @IBAction func batchAdd(_ sender: AnyObject) {
         let batchVC = self.storyboard!.instantiateController(withIdentifier: "WordsUnitBatchAddViewController") as! WordsUnitBatchAddViewController
         batchVC.startEdit(vm: vm)
@@ -212,14 +212,14 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
             }
         })
     }
-    
+
     @IBAction func clearNote(_ sender: AnyObject) {
         let col = tvWords.tableColumns.firstIndex { $0.title == "NOTE" }!
         vm.clearNote(index: tvWords.selectedRow).subscribe { _ in
             self.tvWords.reloadData(forRowIndexes: [self.tvWords.selectedRow], columnIndexes: [col])
         } ~ rx.disposeBag
     }
-    
+
     @IBAction func clearNotes(_ sender: AnyObject) {
         let ifEmpty = sender is NSToolbarItem || (sender as! NSMenuItem).tag == 0
         vm.clearNotes(ifEmpty: ifEmpty, oneComplete: {
@@ -230,7 +230,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
             }
         } ~ rx.disposeBag
     }
-    
+
     @IBAction func previousUnitPart(_ sender: AnyObject) {
         vmSettings.previousUnitPart().flatMap {
             self.vm.reload()
@@ -238,7 +238,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
             self.doRefresh()
         } ~ rx.disposeBag
     }
-    
+
     @IBAction func nextUnitPart(_ sender: AnyObject) {
         vmSettings.nextUnitPart().flatMap {
             self.vm.reload()
@@ -246,7 +246,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
             self.doRefresh()
         } ~ rx.disposeBag
     }
-    
+
     @IBAction func toggleToType(_ sender: AnyObject) {
         let row = tvWords.selectedRow
         let part = row == -1 ? vmSettings.arrParts[0].value : arrWords[row].PART
@@ -260,7 +260,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     override func updateStatusText() {
         tfStatusText.stringValue = "\(tvWords.numberOfRows) Words in \(vmSettings.UNITINFO)"
     }
-    
+
     @IBAction func associateNewPhrase(_ sender: AnyObject) {
         guard vm.selectedWordID != 0 else {return}
         (NSApplication.shared.delegate as! AppDelegate).addNewUnitPhrase(wordid: vm.selectedWordID)

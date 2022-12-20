@@ -21,7 +21,7 @@ class PhrasesUnitViewModel: PhrasesBaseViewModel {
         super.init(settings: settings, needCopy: needCopy)
         reload().subscribe { _ in complete() } ~ rx.disposeBag
     }
-    
+
     func reload() -> Single<()> {
         (inTextbook ? MUnitPhrase.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO) : MUnitPhrase.getDataByLang(vmSettings.selectedTextbook.LANGID, arrTextbooks: vmSettings.arrTextbooks))
         .map {
@@ -43,11 +43,11 @@ class PhrasesUnitViewModel: PhrasesBaseViewModel {
             }
         }
     }
-    
+
     static func update(_ id: Int, seqnum: Int) -> Single<()> {
         MUnitPhrase.update(id, seqnum: seqnum)
     }
-    
+
     func update(item: MUnitPhrase) -> Single<()> {
         MUnitPhrase.update(item: item).flatMap {
             MUnitPhrase.getDataById(item.ID, arrTextbooks: self.vmSettings.arrTextbooks)
@@ -55,7 +55,7 @@ class PhrasesUnitViewModel: PhrasesBaseViewModel {
             if let o = $0 { copyProperties(from: o, to: item) }
         }
     }
-    
+
     func create(item: MUnitPhrase) -> Single<()> {
         MUnitPhrase.create(item: item).flatMap {
             MUnitPhrase.getDataById($0, arrTextbooks: self.vmSettings.arrTextbooks)
@@ -66,7 +66,7 @@ class PhrasesUnitViewModel: PhrasesBaseViewModel {
             }
         }
     }
-    
+
     static func delete(item: MUnitPhrase) -> Single<()> {
         MUnitPhrase.delete(item: item)
     }

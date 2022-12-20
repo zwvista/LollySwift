@@ -46,9 +46,9 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
     let ddUnitTo = DropDown()
     let ddPartTo = DropDown()
     let ddToType = DropDown()
-    
+
     var vm: SettingsViewModel { vmSettings }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         vm.delegate = self
@@ -135,7 +135,7 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
         refreshControl!.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         refresh(refreshControl!)
     }
-    
+
     @objc func refresh(_ sender: UIRefreshControl) {
         vm.getData().subscribe { _ in
             sender.endRefreshing()
@@ -171,11 +171,11 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
             }
         }
     }
-    
+
     func onGetData() {
         ddLang.dataSource = vm.arrLanguages.map(\.LANGNAME)
     }
-    
+
     func onUpdateLang() {
         let item = vm.selectedLang
         langCell.textLabel!.text = item.LANGNAME
@@ -254,7 +254,7 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
         ddPartTo.dataSource = vm.arrParts.map(\.label)
         onUpdatePartTo()
     }
-    
+
     @IBAction func showToTypeDropDown(_ sender: AnyObject) {
         ddToType.show()
     }
@@ -262,7 +262,7 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
     @IBAction func previousUnitPart(_ sender: AnyObject) {
         vm.previousUnitPart().subscribe() ~ rx.disposeBag
     }
-    
+
     @IBAction func nextUnitPart(_ sender: AnyObject) {
         vm.nextUnitPart().subscribe() ~ rx.disposeBag
     }
@@ -271,7 +271,7 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
         ddUnitFrom.selectIndex(vm.selectedUnitFromIndex)
         lblUnitFrom.text = ddUnitFrom.selectedItem
     }
-    
+
     func onUpdatePartFrom() {
         ddPartFrom.selectIndex(vm.selectedPartFromIndex)
         lblPartFrom.text = ddPartFrom.selectedItem
@@ -281,7 +281,7 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
         ddUnitTo.selectIndex(vm.selectedUnitToIndex)
         lblUnitTo.text = ddUnitTo.selectedItem
     }
-    
+
     func onUpdatePartTo() {
         ddPartTo.selectIndex(vm.selectedPartToIndex)
         lblPartTo.text = ddPartTo.selectedItem

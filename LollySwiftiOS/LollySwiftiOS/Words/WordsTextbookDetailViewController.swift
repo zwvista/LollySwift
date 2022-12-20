@@ -12,7 +12,7 @@ import RxSwift
 import RxBinding
 
 class WordsTextbookDetailViewController: UITableViewController, UITextFieldDelegate {
-    
+
     @IBOutlet weak var tfID: UITextField!
     @IBOutlet weak var tfTextbookName: UITextField!
     @IBOutlet weak var tfUnit: UITextField!
@@ -30,7 +30,7 @@ class WordsTextbookDetailViewController: UITableViewController, UITextFieldDeleg
     var itemEdit: MUnitWordEdit { vmEdit.itemEdit }
     let ddUnit = DropDown()
     let ddPart = DropDown()
-    
+
     func startEdit(vm: WordsUnitViewModel, item: MUnitWord, phraseid: Int) {
         vmEdit = WordsUnitDetailViewModel(vm: vm, item: item, phraseid: phraseid) {
             self.tableView.reloadData()
@@ -68,7 +68,7 @@ class WordsTextbookDetailViewController: UITableViewController, UITextFieldDeleg
         _ = itemEdit.ACCURACY ~> tfAccuracy.rx.text
         _ = vmEdit.isOKEnabled ~> btnDone.rx.isEnabled
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         // https://stackoverflow.com/questions/7525437/how-to-set-focus-to-a-textfield-in-iphone
@@ -88,7 +88,7 @@ class WordsTextbookDetailViewController: UITableViewController, UITextFieldDeleg
             return true
         }
     }
-    
+
     deinit {
         print("DEBUG: \(self.className) deinit")
     }

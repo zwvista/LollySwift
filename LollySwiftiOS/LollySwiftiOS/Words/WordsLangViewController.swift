@@ -20,7 +20,7 @@ class WordsLangViewController: WordsBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
+
     override func refresh() {
         view.showBlurLoader()
         vm = WordsLangViewModel(settings: vmSettings, needCopy: false) {
@@ -33,11 +33,11 @@ class WordsLangViewController: WordsBaseViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         arrWords.count
     }
-    
+
     override func itemForRow(row: Int) -> (MWordProtocol & NSObject)? {
         arrWords[row]
     }
-    
+
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let i = indexPath.row
         let item = self.vm.arrWords[i]
@@ -87,12 +87,12 @@ class WordsLangViewController: WordsBaseViewController {
 
         return UISwipeActionsConfiguration(actions: [moreAction, deleteAction])
     }
-    
+
     override func applyFilters() {
         vm.applyFilters()
         tableView.reloadData()
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         if let controller = (segue.destination as? UINavigationController)?.topViewController as? WordsLangDetailViewController {
@@ -103,7 +103,7 @@ class WordsLangViewController: WordsBaseViewController {
             controller.vm.currentWordIndex = vm.arrWords.firstIndex(of: sender as! MLangWord)!
         }
     }
-    
+
     @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
         guard segue.identifier == "Done" else {return}
         let controller = segue.source as! WordsLangDetailViewController

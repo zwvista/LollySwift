@@ -16,7 +16,7 @@ class WordsBaseViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var sbTextFilter: UISearchBar!
     @IBOutlet weak var btnScopeFilter: UIButton!
     let refreshControl = UIRefreshControl()
-    
+
     let ddScopeFilter = DropDown()
     var vmBase: WordsBaseViewModel! { nil }
 
@@ -33,18 +33,12 @@ class WordsBaseViewController: UIViewController, UITableViewDelegate, UITableVie
         refresh()
         _ = vmBase.textFilter <~> sbTextFilter.searchTextField.rx.textInput
         _ = vmBase.scopeFilter ~> btnScopeFilter.rx.title(for: .normal)
-        vmBase.textFilter.subscribe { [unowned self] _ in
-            self.applyFilters()
-        } ~ rx.disposeBag
-        vmBase.scopeFilter.subscribe { [unowned self] _ in
-            self.applyFilters()
-        } ~ rx.disposeBag
     }
-    
+
     @objc func refresh(_ sender: UIRefreshControl) {
         refresh()
     }
-    
+
     func refresh() {
     }
 
@@ -66,16 +60,16 @@ class WordsBaseViewController: UIViewController, UITableViewDelegate, UITableVie
         cell.lblNote.text = item.NOTE
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         true
     }
-    
+
     func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
         let item = itemForRow(row: indexPath.row)!
         performSegue(withIdentifier: "dict", sender: item)
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let item = itemForRow(row: indexPath.row)!
         if tableView.isEditing {
@@ -84,11 +78,11 @@ class WordsBaseViewController: UIViewController, UITableViewDelegate, UITableVie
             AppDelegate.speak(string: item.WORD)
         }
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         0
     }
-    
+
     func applyFilters() {
     }
 

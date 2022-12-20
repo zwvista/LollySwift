@@ -22,7 +22,7 @@ class MPatternWebPage: NSObject, Codable {
 
     override init() {
     }
-    
+
     func copy(from x: MPatternWebPage) {
         ID = x.ID
         PATTERNID = x.PATTERNID
@@ -38,13 +38,13 @@ class MPatternWebPage: NSObject, Codable {
         let url = "\(CommonApi.urlAPI)VPATTERNSWEBPAGES?filter=PATTERNID,eq,\(patternid)&order=SEQNUM"
         return RestApi.getRecords(url: url)
     }
-    
+
     static func getDataById(_ id: Int) -> Single<[MPatternWebPage]> {
         // SQL: SELECT * FROM VPATTERNSWEBPAGES WHERE ID=?
         let url = "\(CommonApi.urlAPI)VPATTERNSWEBPAGES?filter=ID,eq,\(id)"
         return RestApi.getRecords(url: url)
     }
-    
+
     static func update(_ id: Int, seqnum: Int) -> Single<()> {
         // SQL: UPDATE PATTERNSWEBPAGES SET SEQNUM=? WHERE ID=?
         let url = "\(CommonApi.urlAPI)PATTERNSWEBPAGES/\(id)"
@@ -63,7 +63,7 @@ class MPatternWebPage: NSObject, Codable {
         let url = "\(CommonApi.urlAPI)PATTERNSWEBPAGES"
         return RestApi.create(url: url, body: try! item.toJSONString()!).map { Int($0)! }.do(onSuccess: { print($0) })
     }
-    
+
     static func delete(_ id: Int) -> Single<()> {
         // SQL: DELETE PATTERNSWEBPAGES WHERE ID=?
         let url = "\(CommonApi.urlAPI)PATTERNSWEBPAGES/\(id)"
@@ -79,7 +79,7 @@ class MPatternWebPageEdit {
     let WEBPAGEID: BehaviorRelay<String>
     let TITLE: BehaviorRelay<String>
     let URL: BehaviorRelay<String>
-    
+
     init() {
         ID = BehaviorRelay(value: "")
         PATTERNID = BehaviorRelay(value: "")
@@ -99,7 +99,7 @@ class MPatternWebPageEdit {
         TITLE = BehaviorRelay(value: x.TITLE)
         URL = BehaviorRelay(value: x.URL)
     }
-    
+
     func save(to x: MPatternWebPage) {
         x.SEQNUM = Int(SEQNUM.value)!
         x.WEBPAGEID = Int(WEBPAGEID.value)!

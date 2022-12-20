@@ -59,7 +59,7 @@ class MUnitWord: NSObject, Codable, MWordProtocol {
             arr.forEach { $0.textbook = textbook }
         })
     }
-    
+
     static func getDataByTextbook(_ textbook: MTextbook) -> Single<[MUnitWord]> {
         // SQL: SELECT * FROM VUNITWORDS WHERE TEXTBOOKID=? ORDER BY WORDID
         let url = "\(CommonApi.urlAPI)VUNITWORDS?filter=TEXTBOOKID,eq,\(textbook.ID)&order=WORDID"
@@ -70,7 +70,7 @@ class MUnitWord: NSObject, Codable, MWordProtocol {
             arr.forEach { $0.textbook = textbook }
         })
     }
-    
+
     private static func setTextbook(_ o: Single<[MUnitWord]>, arrTextbooks: [MTextbook]) -> Single<[MUnitWord]> {
         return o.do(onSuccess: { arr in
             arr.forEach { row in
@@ -84,7 +84,7 @@ class MUnitWord: NSObject, Codable, MWordProtocol {
         let url = "\(CommonApi.urlAPI)VUNITWORDS?filter=LANGID,eq,\(langid)&order=TEXTBOOKID&order=UNIT&order=PART&order=SEQNUM"
         return setTextbook(RestApi.getRecords(url: url), arrTextbooks: arrTextbooks)
     }
-    
+
     static func getDataById(_ id: Int, arrTextbooks: [MTextbook]) -> Single<MUnitWord?> {
         // SQL: SELECT * FROM VUNITWORDS WHERE ID=?
         let url = "\(CommonApi.urlAPI)VUNITWORDS?filter=ID,eq,\(id)"
@@ -118,7 +118,7 @@ class MUnitWord: NSObject, Codable, MWordProtocol {
         let parameters = item.toParameters()
         return RestApi.callSP(url: url, parameters: parameters).map { print($0); return Int($0.NEW_ID!)! }
     }
-    
+
     static func delete(item: MUnitWord) -> Single<()> {
         // SQL: CALL UNITWORDS_DELETE
         let url = "\(CommonApi.urlSP)UNITWORDS_DELETE"
@@ -156,7 +156,7 @@ class MUnitWordEdit {
         FAMIID = BehaviorRelay(value: String(x.FAMIID))
         ACCURACY = BehaviorRelay(value: x.ACCURACY)
     }
-    
+
     func save(to x: MUnitWord) {
         if indexUNIT.value != -1 {
             x.UNIT = x.textbook.arrUnits[indexUNIT.value].value

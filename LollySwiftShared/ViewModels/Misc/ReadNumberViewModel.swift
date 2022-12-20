@@ -70,7 +70,7 @@ class ReadNumber {
 class ReadNumberViewModel : NSObject {
     @objc dynamic var num = 0
     @objc dynamic var text = ""
-    
+
     func read() {
         text = ReadNumber.readInSinoKorean(num: num)
         //text = ReadNumber.readInNativeKorean(num: num)

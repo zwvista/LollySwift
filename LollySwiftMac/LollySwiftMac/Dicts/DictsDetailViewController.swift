@@ -37,7 +37,7 @@ class DictsDetailViewController: NSViewController {
         super.viewDidLoad()
         isAdd = item.ID == 0
     }
-    
+
     override func viewDidAppear() {
         super.viewDidAppear()
         view.window?.title = item.DICTNAME
@@ -54,7 +54,7 @@ class DictsDetailViewController: NSViewController {
         tranformVC.complete = {  }
         self.presentAsModalWindow(tranformVC)
     }
-    
+
     @IBAction func okClicked(_ sender: Any) {
         // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
         self.commitEditing()

@@ -11,7 +11,7 @@
 import RxSwift
 
 extension Reactive where Base: UILabel {
-    
+
     /// Bindable sink for `enabled` property.
     public var isEnabled: Binder<Bool>  {
         return Binder(self.base) { owner, value in

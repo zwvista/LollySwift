@@ -14,7 +14,7 @@ import RxBinding
 
 class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
     var vm: PhrasesReviewViewModel!
-    
+
     @IBOutlet weak var lblIndex: UILabel!
     @IBOutlet weak var lblCorrect: UILabel!
     @IBOutlet weak var lblIncorrect: UILabel!
@@ -32,7 +32,7 @@ class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var svMoveForward: UIStackView!
 
     var isSpeaking = false
-    
+
     let ddReviewMode = DropDown()
 
     override func viewDidLoad() {
@@ -65,7 +65,7 @@ class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
 
         newTest(self)
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         vm.subscriptionTimer?.dispose()
@@ -74,7 +74,7 @@ class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
     @IBAction func newTest(_ sender: AnyObject) {
         performSegue(withIdentifier: "options", sender: sender)
     }
-    
+
     @IBAction func check(_ sender: UIButton) {
         vm.check(toNext: sender == btnCheckNext)
     }
@@ -84,7 +84,7 @@ class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
             speak(sender)
         }
     }
-    
+
     @IBAction func speak(_ sender: AnyObject) {
         AppDelegate.speak(string: vm.currentPhrase)
     }
@@ -93,12 +93,12 @@ class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
         vm.check(toNext: true)
         return false
     }
-    
+
     // https://stackoverflow.com/questions/18755410/how-to-dismiss-keyboard-ios-programmatically-when-pressing-return
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         if let controller = (segue.destination as? UINavigationController)?.topViewController as? ReviewOptionsViewController {

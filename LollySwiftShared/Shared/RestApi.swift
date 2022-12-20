@@ -15,11 +15,11 @@ import RxAlamofire
 // https://stackoverflow.com/questions/27855319/post-request-with-a-simple-string-in-body-with-alamofire
 class StringEncoding: ParameterEncoding {
     let body: String
-    
+
     public init(body: String) {
         self.body = body
     }
-    
+
     public func encode(_ urlRequest: URLRequestConvertible, with parameters: Parameters?) throws -> URLRequest {
         var request = try urlRequest.asURLRequest()
         request.httpBody = body.data(using: .utf8, allowLossyConversion: false)
@@ -28,7 +28,7 @@ class StringEncoding: ParameterEncoding {
 }
 
 extension Encodable {
-    
+
     public func toJSONString(prettyPrint: Bool = false) throws -> String? {
         let encoder = JSONEncoder()
         if prettyPrint { encoder.outputFormatting = .prettyPrinted }
@@ -40,7 +40,7 @@ extension Encodable {
             .replacingOccurrences(of: #","ID":0"#, with: "")
         return jsonString
     }
-    
+
     // https://stackoverflow.com/questions/45209743/how-can-i-use-swift-s-codable-to-encode-into-a-dictionary
     public func toParameters() -> Parameters {
         let data = try! JSONEncoder().encode(self)
@@ -51,7 +51,7 @@ extension Encodable {
         }
         return params
     }
-    
+
 }
 
 class RestApi {

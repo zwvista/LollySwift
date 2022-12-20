@@ -12,7 +12,7 @@ import NSObject_Rx
 import RxBinding
 
 class PhrasesLangViewController: PhrasesBaseViewController {
-    
+
     var vm: PhrasesLangViewModel!
     var arrPhrases: [MLangPhrase] { vm.arrPhrasesFiltered ?? vm.arrPhrases }
     override var vmBase: PhrasesBaseViewModel! { vm }
@@ -33,11 +33,11 @@ class PhrasesLangViewController: PhrasesBaseViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         arrPhrases.count
     }
-    
+
     override func itemForRow(row: Int) -> (MPhraseProtocol & NSObject)? {
         arrPhrases[row]
     }
-    
+
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let i = indexPath.row
         let item = self.vm.arrPhrases[i]
@@ -73,12 +73,12 @@ class PhrasesLangViewController: PhrasesBaseViewController {
         
         return UISwipeActionsConfiguration(actions: [moreAction, deleteAction])
     }
-    
+
     override func applyFilters() {
         vm.applyFilters()
         tableView.reloadData()
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         if let controller = (segue.destination as? UINavigationController)?.topViewController as? PhrasesLangDetailViewController {
@@ -86,7 +86,7 @@ class PhrasesLangViewController: PhrasesBaseViewController {
             controller.item = sender as? MLangPhrase ?? MLangPhrase()
         }
     }
-    
+
     @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
         guard segue.identifier == "Done" else {return}
         let controller = segue.source as! PhrasesLangDetailViewController

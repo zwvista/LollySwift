@@ -17,13 +17,13 @@ class MAutoCorrect: Codable {
     dynamic var INPUT = ""
     dynamic var EXTENDED = ""
     dynamic var BASIC = ""
-    
+
     static func getDataByLang(_ langid: Int) -> Single<[MAutoCorrect]> {
         // SQL: SELECT * FROM AUTOCORRECT WHERE LANGID=?
         let url = "\(CommonApi.urlAPI)AUTOCORRECT?filter=LANGID,eq,\(langid)"
         return RestApi.getRecords(url: url)
     }
-    
+
     static func autoCorrect(text: String, arrAutoCorrect: [MAutoCorrect], colFunc1: (MAutoCorrect) -> String, colFunc2: (MAutoCorrect) -> String) -> String {
         arrAutoCorrect.reduce(text) { (str, row) in
             str.replacingOccurrences(of: colFunc1(row), with: colFunc2(row))

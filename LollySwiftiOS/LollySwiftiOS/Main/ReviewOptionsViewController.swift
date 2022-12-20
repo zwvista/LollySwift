@@ -13,11 +13,11 @@ import NSObject_Rx
 import RxBinding
 
 class ReviewOptionsViewController: UITableViewController {
-    
+
     var options: MReviewOptions!
     var vm: ReviewOptionsViewModel!
     var complete: (() -> Void)?
-    
+
     @IBOutlet weak var reviewModeCell: UITableViewCell!
     @IBOutlet weak var lblReviewMode: UILabel!
     @IBOutlet weak var swOrder: UISwitch!
@@ -54,13 +54,13 @@ class ReviewOptionsViewController: UITableViewController {
         _ = vm.optionsEdit.groupCount.map { String($0) } ~> tfGroupCount.rx.text.orEmpty
         _ = vm.optionsEdit.reviewCount.map { String($0) } ~> tfReviewCount.rx.text.orEmpty
     }
-    
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
             ddReviewMode.show()
         }
     }
-    
+
     deinit {
         print("DEBUG: \(self.className) deinit")
     }

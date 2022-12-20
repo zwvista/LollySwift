@@ -19,7 +19,7 @@ class PhrasesLangViewModel: PhrasesBaseViewModel {
         super.init(settings: settings, needCopy: needCopy)
         reload().subscribe { complete() } ~ rx.disposeBag
     }
-    
+
     func reload() -> Single<()> {
         MLangPhrase.getDataByLang(vmSettings.selectedTextbook.LANGID).map {
             self.arrPhrases = $0
@@ -36,7 +36,7 @@ class PhrasesLangViewModel: PhrasesBaseViewModel {
             }
         }
     }
-    
+
     static func update(item: MLangPhrase) -> Single<()> {
         MLangPhrase.update(item: item)
     }
@@ -46,7 +46,7 @@ class PhrasesLangViewModel: PhrasesBaseViewModel {
             item.ID = $0
         }
     }
-    
+
     static func delete(item: MLangPhrase) -> Single<()> {
         MLangPhrase.delete(item: item)
     }
@@ -56,11 +56,11 @@ class PhrasesLangViewModel: PhrasesBaseViewModel {
             $0.LANGID = vmSettings.selectedLang.ID
         }
     }
-    
+
     public init(settings: SettingsViewModel) {
         super.init(settings: settings, needCopy: false)
     }
-    
+
     func getPhrases(wordid: Int) -> Single<()> {
         MWordPhrase.getPhrasesByWordId(wordid).map {
             self.arrPhrases = $0

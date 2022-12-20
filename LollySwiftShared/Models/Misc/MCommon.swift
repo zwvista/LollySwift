@@ -39,7 +39,7 @@ class MCode: NSObject, Codable {
 class MSPResult: NSObject, Codable {
     var NEW_ID: String?
     var result = ""
-    
+
     override var description: String { try! toJSONString() ?? "" }
 }
 
@@ -48,7 +48,7 @@ class MTransformItem: NSObject {
     dynamic var index = 0
     dynamic var extractor = ""
     dynamic var replacement = ""
-    
+
     func copy(from x: MTransformItem) {
         index = x.index
         extractor = x.extractor

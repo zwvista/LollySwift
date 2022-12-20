@@ -49,7 +49,7 @@ class MUnitPhrase: NSObject, Codable, MPhraseProtocol {
             arr.forEach { $0.textbook = textbook }
         })
     }
-    
+
     static func getDataByTextbook(_ textbook: MTextbook) -> Single<[MUnitPhrase]> {
         // SQL: SELECT * FROM VUNITPHRASES WHERE TEXTBOOKID=? ORDER BY PHRASEID
         let url = "\(CommonApi.urlAPI)VUNITPHRASES?filter=TEXTBOOKID,eq,\(textbook.ID)&order=PHRASEID"
@@ -74,7 +74,7 @@ class MUnitPhrase: NSObject, Codable, MPhraseProtocol {
         let url = "\(CommonApi.urlAPI)VUNITPHRASES?filter=LANGID,eq,\(langid)&order=TEXTBOOKID&order=UNIT&order=PART&order=SEQNUM"
         return setTextbook(RestApi.getRecords(url: url), arrTextbooks: arrTextbooks)
     }
-    
+
     static func getDataById(_ id: Int, arrTextbooks: [MTextbook]) -> Single<MUnitPhrase?> {
         // SQL: SELECT * FROM VUNITPHRASES WHERE ID=?
         let url = "\(CommonApi.urlAPI)VUNITPHRASES?filter=ID,eq,\(id)"
@@ -94,7 +94,7 @@ class MUnitPhrase: NSObject, Codable, MPhraseProtocol {
         let body = "SEQNUM=\(seqnum)"
         return RestApi.update(url: url, body: body).map { print($0) }
     }
-    
+
     static func update(item: MUnitPhrase) -> Single<()> {
         // SQL: CALL UNITPHRASES_UPDATE
         let url = "\(CommonApi.urlSP)UNITPHRASES_UPDATE"
@@ -108,7 +108,7 @@ class MUnitPhrase: NSObject, Codable, MPhraseProtocol {
         let parameters = item.toParameters()
         return RestApi.callSP(url: url, parameters: parameters).map { print($0); return Int($0.NEW_ID!)! }
     }
-    
+
     static func delete(item: MUnitPhrase) -> Single<()> {
         // SQL: CALL UNITPHRASES_DELETE
         let url = "\(CommonApi.urlSP)UNITPHRASES_DELETE"
@@ -142,7 +142,7 @@ class MUnitPhraseEdit {
         PHRASE = BehaviorRelay(value: x.PHRASE)
         TRANSLATION = BehaviorRelay(value: x.TRANSLATION)
     }
-    
+
     func save(to x: MUnitPhrase) {
         if indexUNIT.value != -1 {
             x.UNIT = x.textbook.arrUnits[indexUNIT.value].value

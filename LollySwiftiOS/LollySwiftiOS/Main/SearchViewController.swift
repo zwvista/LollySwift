@@ -23,7 +23,7 @@ class SearchViewController: UIViewController, WKNavigationDelegate, UISearchBarD
 
     let ddLang = DropDown()
     let ddDictReference = DropDown()
-    
+
     func setup() {
         dictStore = DictStore(vmSettings: vmSettings, wvDict: addWKWebView(webViewHolder: wvDictHolder))
         dictStore.wvDict.navigationDelegate = self
@@ -67,7 +67,7 @@ class SearchViewController: UIViewController, WKNavigationDelegate, UISearchBarD
         dictStore.word = sbword.text!
         dictStore.searchDict()
     }
-    
+
     @IBAction func showLangDropDown(_ sender: AnyObject) {
         ddLang.show()
     }
@@ -75,11 +75,11 @@ class SearchViewController: UIViewController, WKNavigationDelegate, UISearchBarD
     @IBAction func showDictDropDown(_ sender: AnyObject) {
         ddDictReference.show()
     }
-    
+
     func onGetData() {
         ddLang.dataSource = vmSettings.arrLanguages.map(\.LANGNAME)
     }
-    
+
     func onUpdateLang() {
         let item = vmSettings.selectedLang
         btnLang.setTitle(item.LANGNAME, for: .normal)
@@ -87,18 +87,18 @@ class SearchViewController: UIViewController, WKNavigationDelegate, UISearchBarD
         
         ddDictReference.dataSource = vmSettings.arrDictsReference.map(\.DICTNAME)
     }
-    
+
     func onUpdateDictReference() {
         btnDict.setTitle(vmSettings.selectedDictReference.DICTNAME, for: .normal)
         ddDictReference.selectIndex(vmSettings.selectedDictReferenceIndex)
         dictStore.dict = vmSettings.selectedDictReference
         dictStore.searchDict()
     }
-    
+
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         dictStore.onNavigationFinished()
     }
-    
+
     deinit {
         print("DEBUG: \(self.className) deinit")
     }

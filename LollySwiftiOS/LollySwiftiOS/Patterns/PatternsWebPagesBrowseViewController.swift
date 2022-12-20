@@ -18,7 +18,7 @@ class PatternsWebPagesBrowseViewController: UIViewController, WKUIDelegate, WKNa
     @IBOutlet weak var wvWebPageHolder: UIView!
     @IBOutlet weak var btnWebPage: UIButton!
     weak var wvWebPage: WKWebView!
-    
+
     var vm: PatternsWebPagesViewModel!
     let ddWebPage = DropDown()
 
@@ -46,34 +46,34 @@ class PatternsWebPagesBrowseViewController: UIViewController, WKUIDelegate, WKNa
             self.currentWebPageChanged()
         } ~ rx.disposeBag
     }
-    
+
     private func currentWebPageChanged() {
         AppDelegate.speak(string: vm.currentWebPage.TITLE)
         btnWebPage.setTitle(vm.currentWebPage.TITLE, for: .normal)
         wvWebPage.load(URLRequest(url: URL(string: vm.currentWebPage.URL)!))
     }
-    
+
     @IBAction func showWebPageDropDown(_ sender: AnyObject) {
         ddWebPage.show()
     }
-    
+
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         true
     }
-    
+
     private func swipe(_ delta: Int) {
         vm.next(delta)
         ddWebPage.selectionAction!(vm.currentWebPageIndex, vm.currentWebPage.TITLE)
     }
-    
+
     @IBAction func swipeLeft(_ sender: UISwipeGestureRecognizer){
         swipe(-1)
     }
-    
+
     @IBAction func swipeRight(_ sender: UISwipeGestureRecognizer){
         swipe(1)
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         if let controller = (segue.destination as? UINavigationController)?.topViewController as? PatternsWebPagesDetailViewController {

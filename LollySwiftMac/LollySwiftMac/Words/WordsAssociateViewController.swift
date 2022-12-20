@@ -43,17 +43,17 @@ class WordsAssociateViewController: NSViewController, NSTableViewDataSource, NST
             self.applyFilters()
         } ~ rx.disposeBag
     }
-    
+
     override func viewDidAppear() {
         super.viewDidAppear()
         // https://stackoverflow.com/questions/24235815/cocoa-how-to-set-window-title-from-within-view-controller-in-swift
         view.window?.title = "Associate Word"
     }
-    
+
     func numberOfRows(in tableView: NSTableView) -> Int {
         arrWords.count
     }
-    
+
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! NSTableCellView
         let item = arrWords[row]
@@ -94,7 +94,7 @@ class WordsAssociateViewController: NSViewController, NSTableViewDataSource, NST
             self.dismiss(sender)
         } ~ rx.disposeBag
     }
-    
+
     deinit {
         print("DEBUG: \(self.className) deinit")
     }

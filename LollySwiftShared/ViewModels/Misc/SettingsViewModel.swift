@@ -12,7 +12,7 @@ import RxRelay
 import RxBinding
 
 class SettingsViewModel: NSObject {
-    
+
     var arrUSMappings = [MUSMapping]()
     var arrUserSettings = [MUserSetting]()
     private func getUSValue(info: MUserSettingInfo) -> String? {
@@ -111,13 +111,13 @@ class SettingsViewModel: NSObject {
     var selectedDictReference: MDictionary { arrDictsReference.indices ~= selectedDictReferenceIndex ? arrDictsReference[selectedDictReferenceIndex] : MDictionary() }
     var selectedDictsReferenceIndexes = [Int]()
     var selectedDictsReference: [MDictionary] { selectedDictsReferenceIndexes.map { arrDictsReference[$0] } }
-    
+
     var arrDictsNote = [MDictionary]()
     var selectedDictNoteIndex_ = BehaviorRelay(value: -1)
     var selectedDictNoteIndex: Int { get { selectedDictNoteIndex_.value } set { selectedDictNoteIndex_.accept(newValue) } }
     var selectedDictNote: MDictionary { arrDictsNote.indices ~= selectedDictNoteIndex ? arrDictsNote[selectedDictNoteIndex] : MDictionary() }
     var hasDictNote: Bool { selectedDictNote.ID != 0 }
-    
+
     var arrDictsTranslation = [MDictionary]()
     var selectedDictTranslationIndex_ = BehaviorRelay(value: -1)
     var selectedDictTranslationIndex: Int { get { selectedDictTranslationIndex_.value } set { selectedDictTranslationIndex_.accept(newValue) } }
@@ -179,7 +179,7 @@ class SettingsViewModel: NSObject {
 
     var arrAutoCorrect = [MAutoCorrect]()
     var arrDictTypes = [MCode]()
-    
+
     weak var delegate: SettingsViewModelDelegate?
 
     var initialized = false
@@ -525,7 +525,7 @@ class SettingsViewModel: NSObject {
             return Single.just(())
         }
     }
-    
+
     private func doUpdateUnitPartFrom() -> Single<()> {
         Single.zip(doUpdateUnitFrom(v: USUNITTO), doUpdatePartFrom(v: USPARTTO)).map { _ in }
     }

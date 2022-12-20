@@ -28,11 +28,11 @@ class PatternsMergeViewModel: NSObject {
         itemEdit.NOTE.accept(items.map(\.NOTE).splitUsingCommaAndMerge())
         itemEdit.TAGS.accept(items.map(\.TAGS).splitUsingCommaAndMerge())
     }
-    
+
     func mergeVariations() {
         itemEdit.PATTERN.accept(arrPatternVariations.map(\.variation).unique.joined(separator: "／"))
     }
-    
+
     func reindexVariations(complete: (Int) -> Void) {
         for i in 1...arrPatternVariations.count {
             let item = arrPatternVariations[i - 1]

@@ -17,7 +17,7 @@ class WebPageSelectViewModel: NSObject {
     var vmSettings: SettingsViewModel
     var arrWebPages = [MWebPage]()
     var selectedWebPage: MWebPage?
-    
+
     init(settings: SettingsViewModel, complete: @escaping () -> Void) {
         self.vmSettings = settings
         super.init()
@@ -26,7 +26,7 @@ class WebPageSelectViewModel: NSObject {
             self.reload(t: t, u: u)
         }.subscribe { _ in complete() } ~ rx.disposeBag
     }
-    
+
     func reload(t: String, u: String) -> Single<()> {
         MWebPage.getDataBySearch(title: t, url: u).map {
             self.arrWebPages = $0

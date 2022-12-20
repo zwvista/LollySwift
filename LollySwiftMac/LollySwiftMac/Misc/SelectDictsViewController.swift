@@ -18,7 +18,7 @@ class SelectDictsViewController: NSViewController, NSTableViewDataSource, NSTabl
     @IBOutlet weak var btnAdd: NSButton!
     @IBOutlet weak var btnRemove: NSButton!
     @IBOutlet weak var btnRemoveAll: NSButton!
-    
+
     var vm: SettingsViewModel { AppDelegate.theSettingsViewModel }
     var dictsAvailable: [MDictionary]!
     var dictsSelected: [MDictionary]!
@@ -73,11 +73,11 @@ class SelectDictsViewController: NSViewController, NSTableViewDataSource, NSTabl
         super.viewDidAppear()
         view.window?.title = "Select Dictionaries"
     }
-    
+
     func numberOfRows(in tableView: NSTableView) -> Int {
         tableView === tvAvailable ? dictsAvailable.count : dictsSelected.count
     }
-    
+
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! NSTableCellView
         let columnName = tableColumn!.identifier.rawValue
@@ -132,7 +132,7 @@ class SelectDictsViewController: NSViewController, NSTableViewDataSource, NSTabl
 
         return true
     }
-    
+
     deinit {
         print("DEBUG: \(self.className) deinit")
     }

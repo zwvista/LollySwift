@@ -30,7 +30,7 @@ class PhrasesUnitDetailViewModel: NSObject {
         guard !isAdd else {return}
         vmSingle = SinglePhraseViewModel(phrase: item.PHRASE, settings: vm.vmSettings, complete: complete)
     }
-    
+
     func onOK() -> Single<()> {
         itemEdit.save(to: item)
         item.PHRASE = vm.vmSettings.autoCorrectInput(text: item.PHRASE)

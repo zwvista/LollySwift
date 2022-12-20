@@ -19,7 +19,7 @@ extension UIViewController {
         alertController.addAction(yesAction)
         present(alertController, animated: true, completion: nil)
     }
-    
+
     // https://stackoverflow.com/questions/46793618/ios-wkwebview-vs-uiwebview?rq=1
     func addWKWebView(webViewHolder: UIView) -> WKWebView {
         let wkWebView: WKWebView = {
@@ -65,7 +65,7 @@ extension UIView{
         self.addSubview(blurEffectView)
         isUserInteractionEnabled = false
     }
-    
+
     func removeBlurLoader(){
         self.subviews.compactMap {  $0 as? UIVisualEffectView }.forEach {
             $0.removeFromSuperview()

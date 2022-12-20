@@ -11,10 +11,10 @@ import RxSwift
 import RxBinding
 
 class SinglePhraseViewModel: NSObject {
-    
+
     var vmSettings: SettingsViewModel
     var arrPhrases = [MUnitPhrase]()
-    
+
     init(phrase: String, settings: SettingsViewModel, complete: @escaping () -> Void) {
         vmSettings = settings
         super.init()

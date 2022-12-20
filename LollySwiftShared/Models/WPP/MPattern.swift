@@ -28,13 +28,13 @@ class MPattern: NSObject, Codable {
         let url = "\(CommonApi.urlAPI)PATTERNS?filter=LANGID,eq,\(langid)&order=PATTERN"
         return RestApi.getRecords(url: url)
     }
-    
+
     static func getDataById(_ id: Int) -> Single<[MPattern]> {
         // SQL: SELECT * FROM PATTERNS WHERE ID=?
         let url = "\(CommonApi.urlAPI)PATTERNS?filter=ID,eq,\(id)"
         return RestApi.getRecords(url: url)
     }
-    
+
     static func update(item: MPattern) -> Single<()> {
         // SQL: UPDATE PATTERNS SET PATTERN=?, NOTE=?, TAGS=? WHERE ID=?
         let url = "\(CommonApi.urlAPI)PATTERNS/\(item.ID)"
@@ -46,20 +46,20 @@ class MPattern: NSObject, Codable {
         let url = "\(CommonApi.urlAPI)PATTERNS"
         return RestApi.create(url: url, body: try! item.toJSONString()!).map { Int($0)! }.do(onSuccess: { print($0) })
     }
-    
+
     static func delete(_ id: Int) -> Single<()> {
         // SQL: DELETE PATTERNS WHERE ID=?
         let url = "\(CommonApi.urlAPI)PATTERNS/\(id)"
         return RestApi.delete(url: url).map { print($0) }
     }
-    
+
     static func mergePatterns(item: MPattern) -> Single<()> {
         // SQL: PATTERNS_MERGE
         let url = "\(CommonApi.urlSP)PATTERNS_MERGE"
         let parameters = item.toParameters()
         return RestApi.callSP(url: url, parameters: parameters).map { print($0) }
     }
-    
+
     static func splitPattern(item: MPattern) -> Single<()> {
         // SQL: PATTERNS_SPLIT
         let url = "\(CommonApi.urlSP)PATTERNS_SPLIT"
@@ -73,7 +73,7 @@ class MPatternEdit {
     let PATTERN: BehaviorRelay<String>
     let NOTE: BehaviorRelay<String>
     let TAGS: BehaviorRelay<String>
-    
+
     init() {
         ID = BehaviorRelay(value: "")
         PATTERN = BehaviorRelay(value: "")
@@ -87,7 +87,7 @@ class MPatternEdit {
         NOTE = BehaviorRelay(value: x.NOTE)
         TAGS = BehaviorRelay(value: x.TAGS)
     }
-    
+
     func save(to x: MPattern) {
         x.PATTERN = PATTERN.value
         x.NOTE = NOTE.value

@@ -27,13 +27,13 @@ class PatternsViewModel: NSObject {
         super.init()
         reload().subscribe { _ in complete() } ~ rx.disposeBag
     }
-    
+
     func reload() -> Single<()> {
         MPattern.getDataByLang(vmSettings.selectedLang.ID).map {
             self.arrPatterns = $0
         }
     }
-    
+
     func applyFilters() {
         if textFilter.value.isEmpty {
             arrPatternsFiltered = nil
@@ -44,7 +44,7 @@ class PatternsViewModel: NSObject {
             }
         }
     }
-    
+
     static func update(item: MPattern) -> Single<()> {
         MPattern.update(item: item)
     }
@@ -54,11 +54,11 @@ class PatternsViewModel: NSObject {
             item.ID = $0
         }
     }
-    
+
     static func delete(_ id: Int) -> Single<()> {
         MPattern.delete(id)
     }
-    
+
     func newPattern() -> MPattern {
         MPattern().then {
             $0.LANGID = vmSettings.selectedLang.ID
