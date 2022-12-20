@@ -47,7 +47,7 @@ class WordsTextbookDetailViewController: UITableViewController, UITextFieldDeleg
             self.itemEdit.indexUNIT = index
             self.itemEdit.UNITSTR = item
         }
-        
+
         ddPart.anchorView = tfPart
         ddPart.dataSource = item.textbook.arrParts.map(\.label)
         ddPart.selectRow(itemEdit.indexPART)
@@ -55,7 +55,7 @@ class WordsTextbookDetailViewController: UITableViewController, UITextFieldDeleg
             self.itemEdit.indexPART = index
             self.itemEdit.PARTSTR = item
         }
-        
+
         itemEdit.$ID ~> (tfID, \.text2) ~ subscriptions
         itemEdit.$TEXTBOOKNAME ~> (tfTextbookName, \.text2) ~ subscriptions
         itemEdit.$UNITSTR <~> tfUnit.textProperty ~ subscriptions

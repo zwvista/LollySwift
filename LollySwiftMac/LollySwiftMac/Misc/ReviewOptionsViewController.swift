@@ -34,7 +34,7 @@ class ReviewOptionsViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         vm = ReviewOptionsViewModel(options: options)
-        
+
         vm.optionsEdit.$mode <~> pubMode.selectedItemIndexProperty ~ subscriptions
         vm.optionsEdit.$shuffled <~> scOrder.isOnProperty ~ subscriptions
         vm.optionsEdit.$onRepeat <~> scOnRepeat.isOnProperty ~ subscriptions

@@ -105,7 +105,7 @@ class PhrasesBaseViewController: WordsPhrasesBaseViewController {
 
     func deletePhrase(row: Int) {
     }
-        
+
     override func wordItemForRow(row: Int) -> (MWordProtocol & NSObject)? {
         vmWordsLang.arrWords[row]
     }

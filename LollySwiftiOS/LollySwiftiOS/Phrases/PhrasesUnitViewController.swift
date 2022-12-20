@@ -114,7 +114,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
         let alertController = UIAlertController(title: "Phrases", message: "More", preferredStyle: .alert)
         let addAction = UIAlertAction(title: "Add", style: .default) { _ in self.performSegue(withIdentifier: "add", sender: self) }
         alertController.addAction(addAction)
-        
+
         let batchAction = UIAlertAction(title: "Batch Edit", style: .default) { _ in
             self.performSegue(withIdentifier: "batch", sender: nil)
         }

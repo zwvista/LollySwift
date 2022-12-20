@@ -13,7 +13,7 @@ struct WordsUnitView: View {
 
     init() {
         vm = WordsUnitViewModel(settings: LollySwiftUIMacApp.theSettingsViewModel, inTextbook: true, needCopy: true) {
-            
+
         }
     }
     var body: some View {
@@ -24,7 +24,7 @@ struct WordsUnitView: View {
             }
             HSplitView {
                 List(arrWords, id: \.ID) {_ in
-                    
+
                 }
             }
         }

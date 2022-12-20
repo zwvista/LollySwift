@@ -75,10 +75,10 @@ class PatternsSplitViewController: NSViewController {
                 oldIndexes.append(index)
             }
         }
-        
+
         var oldIndexOffset = 0
         var newIndexOffset = 0
-        
+
         func moveRow(at oldIndex: Int, to newIndex: Int) {
             vm.arrPatternVariations.moveElement(at: oldIndex, to: newIndex)
             tableView.moveRow(at: oldIndex, to: newIndex)
@@ -99,9 +99,9 @@ class PatternsSplitViewController: NSViewController {
             tableView.reloadData(forRowIndexes: [$0], columnIndexes: [col])
         }
         tableView.endUpdates()
-        
+
         vm.mergeVariations()
-        
+
         return true
     }
 

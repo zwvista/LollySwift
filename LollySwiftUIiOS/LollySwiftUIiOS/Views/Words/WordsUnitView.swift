@@ -42,7 +42,7 @@ struct WordsUnitView: View {
                         }
                     }
                 }.onDelete { IndexSet in
-                    
+
                 }
             }.toolbar {
                 EditButton()

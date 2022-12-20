@@ -17,12 +17,12 @@ class WebViewStore: ObservableObject {
       setupObservers()
     }
   }
-  
+
   init(webView: WKWebView = WKWebView()) {
     self.webView = webView
     setupObservers()
   }
-  
+
   private func setupObservers() {
     func subscriber<Value>(for keyPath: KeyPath<WKWebView, Value>) -> NSKeyValueObservation {
       return webView.observe(keyPath, options: [.prior]) { _, change in
@@ -43,9 +43,9 @@ class WebViewStore: ObservableObject {
       subscriber(for: \.canGoForward)
     ]
   }
-  
+
   private var observers: [NSKeyValueObservation] = []
-  
+
   deinit {
     observers.forEach {
       // Not even sure if this is required?
@@ -60,9 +60,9 @@ struct WebView: View, UIViewRepresentable {
   /// The WKWebView to display
   let webView: WKWebView
     let onNavigationFinished: () -> Void
-  
+
   typealias UIViewType = UIViewContainerView<WKWebView>
-  
+
     class Coodinator: NSObject, WKNavigationDelegate, WKUIDelegate {
         let parent : WebView
         let onNavigationFinished: () -> Void
@@ -93,7 +93,7 @@ struct WebView: View, UIViewRepresentable {
   func makeUIView(context: UIViewRepresentableContext<WebView>) -> WebView.UIViewType {
     return UIViewContainerView()
   }
-  
+
   func updateUIView(_ uiView: WebView.UIViewType, context: UIViewRepresentableContext<WebView>) {
     // If its the same content view we don't need to update.
     if uiView.contentView !== webView {

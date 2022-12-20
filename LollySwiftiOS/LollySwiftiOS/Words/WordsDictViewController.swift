@@ -42,7 +42,7 @@ class WordsDictViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
             self.vm.currentWordIndex = index
             self.currentWordChanged()
         }
-        
+
         ddDictReference.anchorView = btnDict
         ddDictReference.dataSource = vmSettings.arrDictsReference.map(\.DICTNAME)
         ddDictReference.selectRow(vmSettings.selectedDictReferenceIndex)
@@ -53,7 +53,7 @@ class WordsDictViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
                 self.selectDictChanged()
             }
         }
-        
+
         currentWordChanged()
     }
 

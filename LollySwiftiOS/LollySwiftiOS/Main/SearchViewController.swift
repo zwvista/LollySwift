@@ -82,7 +82,7 @@ class SearchViewController: UIViewController, WKNavigationDelegate, UISearchBarD
         let item = vmSettings.selectedLang
         btnLang.setTitle(item.LANGNAME, for: .normal)
         ddLang.selectIndex(vmSettings.selectedLangIndex)
-        
+
         ddDictReference.dataSource = vmSettings.arrDictsReference.map(\.DICTNAME)
     }
 

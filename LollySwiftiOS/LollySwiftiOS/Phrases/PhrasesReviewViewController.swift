@@ -41,7 +41,7 @@ class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
                 AppDelegate.speak(string: self.vm.currentPhrase)
             }
         }
-        
+
         vm.$indexString ~> (lblIndex, \.text!) ~ subscriptions
         vm.$indexHidden ~> (lblIndex, \.isHidden) ~ subscriptions
         vm.$correctHidden ~> (lblCorrect, \.isHidden) ~ subscriptions
