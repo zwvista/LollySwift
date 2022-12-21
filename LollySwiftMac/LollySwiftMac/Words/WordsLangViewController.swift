@@ -19,12 +19,13 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        vm.$arrWordsFiltered.didSet.sink { [unowned self] _ in
+            self.doRefresh()
+        } ~ subscriptions
     }
 
     override func settingsChanged() {
-        vm = WordsLangViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) {
-            self.doRefresh()
-        }
+        vm = WordsLangViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) {}
         super.settingsChanged()
     }
 

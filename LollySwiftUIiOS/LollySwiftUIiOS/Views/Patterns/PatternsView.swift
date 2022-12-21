@@ -11,6 +11,16 @@ struct PatternsView: View {
     @StateObject var vm = PatternsViewModel(settings: vmSettings, needCopy: false) {}
     var body: some View {
         VStack {
+            HStack(spacing: 0) {
+                SearchBar(text: $vm.textFilter, placeholder: "Filter") { _ in }
+                Picker("", selection: $vm.scopeFilter) {
+                    ForEach(SettingsViewModel.arrScopeWordFilters, id: \.self) { s in
+                        Text(s)
+                    }
+                }
+                .background(Color.color2)
+                .tint(.white)
+            }
             List {
                 ForEach(vm.arrPatterns, id: \.ID) { row in
                     HStack {

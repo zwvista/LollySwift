@@ -44,6 +44,9 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
         sfTextFilter.searchFieldDidStartSearchingPublisher.sink { [unowned self] in
             self.vm.textFilter = self.vmSettings.autoCorrectInput(text: self.vm.textFilter)
         } ~ subscriptions
+        vm.$arrPatternsFiltered.didSet.sink { [unowned self] _ in
+            self.doRefresh()
+        } ~ subscriptions
     }
 
     // Hold a reference to the window controller in order to prevent it from being released
@@ -164,9 +167,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     }
 
     func settingsChanged() {
-        vm = PatternsViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) {
-            self.doRefresh()
-        }
+        vm = PatternsViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) {}
         vmWP = PatternsWebPagesViewModel(settings: vm.vmSettings, needCopy: false)
         synth.setVoice(NSSpeechSynthesizer.VoiceName(rawValue: vmSettings.macVoiceName))
     }

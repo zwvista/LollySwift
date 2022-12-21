@@ -18,13 +18,15 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        vm.$arrPhrasesFiltered.didSet.sink { [unowned self] _ in
+            tableView.reloadData()
+        } ~ subscriptions
     }
 
     override func refresh() {
         view.showBlurLoader()
         vm = PhrasesUnitViewModel(settings: vmSettings, inTextbook: true, needCopy: false) {
             self.refreshControl.endRefreshing()
-            self.tableView.reloadData()
             self.view.removeBlurLoader()
         }
     }

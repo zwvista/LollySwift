@@ -25,7 +25,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
         super.viewDidLoad()
         tvWords.registerForDraggedTypes([tableRowDragType])
         vm.$arrWordsFiltered.didSet.sink { [unowned self] _ in
-            tvWords.reloadData()
+            self.doRefresh()
         } ~ subscriptions
     }
 
@@ -45,9 +45,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     }
 
     override func settingsChanged() {
-        vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: true, needCopy: true) {
-            self.doRefresh()
-        }
+        vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: true, needCopy: true) {}
         super.settingsChanged()
     }
 
@@ -158,7 +156,6 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     @IBAction func refreshTableView(_ sender: AnyObject) {
         Task {
             await vm.reload()
-            doRefresh()
         }
     }
 
@@ -242,7 +239,6 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
         Task {
             await vmSettings.previousUnitPart()
             await vm.reload()
-            doRefresh()
         }
     }
 
@@ -250,7 +246,6 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
         Task {
             await vmSettings.nextUnitPart()
             await vm.reload()
-            doRefresh()
         }
     }
 
@@ -260,7 +255,6 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
             let part = row == -1 ? vmSettings.arrParts[0].value : arrWords[row].PART
             await vmSettings.toggleToType(part: part)
             await vm.reload()
-            doRefresh()
         }
     }
 

@@ -15,7 +15,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     var vm: PhrasesUnitViewModel!
     override var vmPhrases: PhrasesBaseViewModel { vm }
     override var vmSettings: SettingsViewModel! { vm.vmSettings }
-    var arrPhrases: [MUnitPhrase] { vm.arrPhrasesFiltered ?? vm.arrPhrases }
+    var arrPhrases: [MUnitPhrase] { vm.arrPhrasesFiltered }
 
     // https://developer.apple.com/videos/play/wwdc2011/120/
     // https://stackoverflow.com/questions/2121907/drag-drop-reorder-rows-on-nstableview
@@ -24,6 +24,9 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     override func viewDidLoad() {
         super.viewDidLoad()
         tvPhrases.registerForDraggedTypes([tableRowDragType])
+        vm.$arrPhrasesFiltered.didSet.sink { [unowned self] _ in
+            self.doRefresh()
+        } ~ subscriptions
     }
 
     // https://stackoverflow.com/questions/8017822/how-to-enable-disable-nstoolbaritem
@@ -34,9 +37,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     }
 
     override func settingsChanged() {
-        vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: true, needCopy: true) {
-            self.doRefresh()
-        }
+        vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: true, needCopy: true) {}
         super.settingsChanged()
     }
 
@@ -149,7 +150,6 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     @IBAction func refreshTableView(_ sender: AnyObject) {
         Task {
             await vm.reload()
-            doRefresh()
         }
     }
 
@@ -176,7 +176,6 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
         Task {
             await vmSettings.previousUnitPart()
             await vm.reload()
-            doRefresh()
         }
     }
 
@@ -184,7 +183,6 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
         Task {
             await vmSettings.nextUnitPart()
             await vm.reload()
-            doRefresh()
         }
     }
 
@@ -194,7 +192,6 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
         Task {
             await vmSettings.toggleToType(part: part)
             await vm.reload()
-            doRefresh()
         }
     }
 
