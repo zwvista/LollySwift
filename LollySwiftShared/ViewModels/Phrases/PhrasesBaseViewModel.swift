@@ -11,7 +11,8 @@ import RxSwift
 import RxRelay
 
 class PhrasesBaseViewModel: WordsPhrasesBaseViewModel {
-    let scopeFilter = BehaviorRelay(value: SettingsViewModel.arrScopePhraseFilters[0])
+    let scopeFilter_ = BehaviorRelay(value: SettingsViewModel.arrScopePhraseFilters[0])
+    var scopeFilter: String { get { scopeFilter_.value } set { scopeFilter_.accept(newValue) } }
     var selectedPhrase = ""
     var selectedPhraseID = 0
 }

@@ -8,32 +8,32 @@
 
 import Foundation
 import RxSwift
+import RxRelay
 import RxBinding
 import Then
 
 class WordsLangViewModel: WordsBaseViewModel {
-    var arrWords = [MLangWord]()
-    var arrWordsFiltered: [MLangWord]?
+    var arrWords_ = BehaviorRelay(value: [MLangWord]())
+    var arrWords: [MLangWord] { get { arrWords_.value } set { arrWords_.accept(newValue) } }
+    var arrWordsFiltered_ = BehaviorRelay(value: [MLangWord]())
+    var arrWordsFiltered: [MLangWord] { get { arrWordsFiltered_.value } set { arrWordsFiltered_.accept(newValue) } }
 
     public init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> Void) {
         super.init(settings: settings, needCopy: needCopy)
+
+        Observable.combineLatest(arrWords_, textFilter_, scopeFilter_).subscribe { [unowned self] _ in
+            arrWordsFiltered = arrWords
+            if !textFilter.isEmpty {
+                arrWordsFiltered = arrWordsFiltered.filter { (scopeFilter == "Word" ? $0.WORD : $0.NOTE).lowercased().contains(textFilter.lowercased()) }
+            }
+        } ~ rx.disposeBag
+
         reload().subscribe { _ in complete() } ~ rx.disposeBag
     }
 
     func reload() -> Single<()> {
         MLangWord.getDataByLang(vmSettings.selectedTextbook.LANGID).map {
             self.arrWords = $0
-        }
-    }
-
-    func applyFilters() {
-        if textFilter.isEmpty {
-            arrWordsFiltered = nil
-        } else {
-            arrWordsFiltered = arrWords
-            if !textFilter.isEmpty {
-                arrWordsFiltered = arrWordsFiltered!.filter { (scopeFilter == "Word" ? $0.WORD : $0.NOTE).lowercased().contains(textFilter.lowercased()) }
-            }
         }
     }
 

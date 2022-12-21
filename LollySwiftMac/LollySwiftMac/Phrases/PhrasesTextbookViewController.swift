@@ -19,12 +19,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
     var vm: PhrasesUnitViewModel!
     override var vmPhrases: PhrasesBaseViewModel { vm }
     override var vmSettings: SettingsViewModel! { vm.vmSettings }
-    var arrPhrases: [MUnitPhrase] { vm.arrPhrasesFiltered ?? vm.arrPhrases }
-
-    override func applyFilters() {
-        vm.applyFilters()
-        tvPhrases.reloadData()
-    }
+    var arrPhrases: [MUnitPhrase] { vm.arrPhrasesFiltered }
 
     override func viewDidLoad() {
         super.viewDidLoad()

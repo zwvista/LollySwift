@@ -16,12 +16,7 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
     var vm: WordsLangViewModel!
     override var vmWords: WordsBaseViewModel { vm }
     override var vmSettings: SettingsViewModel! { vm.vmSettings }
-    var arrWords: [MLangWord] { vm.arrWordsFiltered ?? vm.arrWords }
-
-    override func applyFilters() {
-        vm.applyFilters()
-        tvWords.reloadData()
-    }
+    var arrWords: [MLangWord] { vm.arrWordsFiltered }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +26,9 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
         vm = WordsLangViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) {
             self.doRefresh()
         }
+        vm.arrWordsFiltered_.subscribe { [unowned self] _ in
+            self.doRefresh()
+        } ~ rx.disposeBag
         super.settingsChanged()
     }
 

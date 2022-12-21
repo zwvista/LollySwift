@@ -16,12 +16,7 @@ class PhrasesLangViewController: PhrasesBaseViewController {
     var vm: PhrasesLangViewModel!
     override var vmPhrases: PhrasesBaseViewModel { vm }
     override var vmSettings: SettingsViewModel! { vm.vmSettings }
-    var arrPhrases: [MLangPhrase] { vm.arrPhrasesFiltered ?? vm.arrPhrases }
-
-    override func applyFilters() {
-        vm.applyFilters()
-        tvPhrases.reloadData()
-    }
+    var arrPhrases: [MLangPhrase] { vm.arrPhrasesFiltered }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +26,9 @@ class PhrasesLangViewController: PhrasesBaseViewController {
         vm = PhrasesLangViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) {
             self.doRefresh()
         }
+        vm.arrPhrasesFiltered_.subscribe { [unowned self] _ in
+            self.doRefresh()
+        } ~ rx.disposeBag
         super.settingsChanged()
     }
 

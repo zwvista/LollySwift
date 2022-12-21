@@ -8,17 +8,31 @@
 
 import Foundation
 import RxSwift
+import RxRelay
 import RxBinding
 import Then
 
 class PhrasesUnitViewModel: PhrasesBaseViewModel {
     let inTextbook: Bool
-    var arrPhrases = [MUnitPhrase]()
-    var arrPhrasesFiltered: [MUnitPhrase]?
+    var arrPhrases_ = BehaviorRelay(value: [MUnitPhrase]())
+    var arrPhrases: [MUnitPhrase] { get { arrPhrases_.value } set { arrPhrases_.accept(newValue) } }
+    var arrPhrasesFiltered_ = BehaviorRelay(value: [MUnitPhrase]())
+    var arrPhrasesFiltered: [MUnitPhrase] { get { arrPhrasesFiltered_.value } set { arrPhrasesFiltered_.accept(newValue) } }
 
     public init(settings: SettingsViewModel, inTextbook: Bool, needCopy: Bool, complete: @escaping () -> Void) {
         self.inTextbook = inTextbook
         super.init(settings: settings, needCopy: needCopy)
+
+        Observable.combineLatest(arrPhrases_, indexTextbookFilter_, textFilter_, scopeFilter_).subscribe { [unowned self] _ in
+            arrPhrasesFiltered = arrPhrases
+            if !textFilter.isEmpty {
+                arrPhrasesFiltered = arrPhrasesFiltered.filter { (scopeFilter == "Phrase" ? $0.PHRASE : $0.TRANSLATION).lowercased().contains(textFilter.lowercased()) }
+            }
+            if textbookFilter != 0 {
+                arrPhrasesFiltered = arrPhrasesFiltered.filter { $0.TEXTBOOKID == textbookFilter }
+            }
+        } ~ rx.disposeBag
+
         reload().subscribe { _ in complete() } ~ rx.disposeBag
     }
 
@@ -26,21 +40,6 @@ class PhrasesUnitViewModel: PhrasesBaseViewModel {
         (inTextbook ? MUnitPhrase.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO) : MUnitPhrase.getDataByLang(vmSettings.selectedTextbook.LANGID, arrTextbooks: vmSettings.arrTextbooks))
         .map {
             self.arrPhrases = $0
-            self.arrPhrasesFiltered = nil
-        }
-    }
-
-    func applyFilters() {
-        if textFilter.isEmpty && textbookFilter == 0 {
-            arrPhrasesFiltered = nil
-        } else {
-            arrPhrasesFiltered = arrPhrases
-            if !textFilter.isEmpty {
-                arrPhrasesFiltered = arrPhrasesFiltered!.filter { (scopeFilter.value == "Phrase" ? $0.PHRASE : $0.TRANSLATION).lowercased().contains(textFilter.lowercased()) }
-            }
-            if textbookFilter != 0 {
-                arrPhrasesFiltered = arrPhrasesFiltered!.filter { $0.TEXTBOOKID == textbookFilter }
-            }
         }
     }
 

@@ -16,16 +16,11 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     var vm: PhrasesUnitViewModel!
     override var vmPhrases: PhrasesBaseViewModel { vm }
     override var vmSettings: SettingsViewModel! { vm.vmSettings }
-    var arrPhrases: [MUnitPhrase] { vm.arrPhrasesFiltered ?? vm.arrPhrases }
+    var arrPhrases: [MUnitPhrase] { vm.arrPhrasesFiltered }
 
     // https://developer.apple.com/videos/play/wwdc2011/120/
     // https://stackoverflow.com/questions/2121907/drag-drop-reorder-rows-on-nstableview
     let tableRowDragType = NSPasteboard.PasteboardType(rawValue: "private.table-row")
-
-    override func applyFilters() {
-        vm.applyFilters()
-        tvPhrases.reloadData()
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,9 +35,10 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     }
 
     override func settingsChanged() {
-        vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: true, needCopy: true) {
+        vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: true, needCopy: true) {}
+        vm.arrPhrasesFiltered_.subscribe { [unowned self] _ in
             self.doRefresh()
-        }
+        } ~ rx.disposeBag
         super.settingsChanged()
     }
 

@@ -21,26 +21,16 @@ class PhrasesAssociateViewController: NSViewController, NSTableViewDataSource, N
     var wordid = 0
     var textFilter = ""
     var complete: (() -> Void)?
-    var arrPhrases: [MLangPhrase] { vm.arrPhrasesFiltered ?? vm.arrPhrases }
-
-    func applyFilters() {
-        vm.applyFilters()
-        tableView.reloadData()
-    }
+    var arrPhrases: [MLangPhrase] { vm.arrPhrasesFiltered }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        vm = PhrasesLangViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) {
-            self.applyFilters()
-        }
+        vm = PhrasesLangViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) {}
         vm.textFilter = textFilter
         _ = vm.textFilter_ <~> sfTextFilter.rx.text.orEmpty
-        _ = vm.scopeFilter <~> scScopeFilter.rx.selectedLabel
-        sfTextFilter.rx.text.subscribe { [unowned self] _ in
-            self.applyFilters()
-        } ~ rx.disposeBag
-        scScopeFilter.rx.selectedLabel.subscribe { [unowned self] _ in
-            self.applyFilters()
+        _ = vm.scopeFilter_ <~> scScopeFilter.rx.selectedLabel
+        vm.arrPhrasesFiltered_.subscribe { [unowned self] _ in
+            tableView.reloadData()
         } ~ rx.disposeBag
     }
 

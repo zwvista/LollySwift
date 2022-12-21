@@ -8,32 +8,32 @@
 
 import Foundation
 import RxSwift
+import RxRelay
 import RxBinding
 import Then
 
 class PhrasesLangViewModel: PhrasesBaseViewModel {
-    var arrPhrases = [MLangPhrase]()
-    var arrPhrasesFiltered: [MLangPhrase]?
+    var arrPhrases_ = BehaviorRelay(value: [MLangPhrase]())
+    var arrPhrases: [MLangPhrase] { get { arrPhrases_.value } set { arrPhrases_.accept(newValue) } }
+    var arrPhrasesFiltered_ = BehaviorRelay(value: [MLangPhrase]())
+    var arrPhrasesFiltered: [MLangPhrase] { get { arrPhrasesFiltered_.value } set { arrPhrasesFiltered_.accept(newValue) } }
 
     public init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> Void) {
         super.init(settings: settings, needCopy: needCopy)
+
+        Observable.combineLatest(arrPhrases_, textFilter_, scopeFilter_).subscribe { [unowned self] _ in
+            arrPhrasesFiltered = arrPhrases
+            if !textFilter.isEmpty {
+                arrPhrasesFiltered = arrPhrasesFiltered.filter { (scopeFilter == "Phrase" ? $0.PHRASE : $0.TRANSLATION).lowercased().contains(textFilter.lowercased()) }
+            }
+        } ~ rx.disposeBag
+
         reload().subscribe { complete() } ~ rx.disposeBag
     }
 
     func reload() -> Single<()> {
         MLangPhrase.getDataByLang(vmSettings.selectedTextbook.LANGID).map {
             self.arrPhrases = $0
-        }
-    }
-
-    func applyFilters() {
-        if textFilter.isEmpty {
-            arrPhrasesFiltered = nil
-        } else {
-            arrPhrasesFiltered = arrPhrases
-            if !textFilter.isEmpty {
-                arrPhrasesFiltered = arrPhrasesFiltered!.filter { (scopeFilter.value == "Phrase" ? $0.PHRASE : $0.TRANSLATION).lowercased().contains(textFilter.lowercased()) }
-            }
         }
     }
 

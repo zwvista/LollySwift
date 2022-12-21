@@ -17,8 +17,11 @@ class PhrasesBaseViewController: WordsPhrasesBaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+
+    override func settingsChanged() {
         _ = vmPhrases.textFilter_ <~> sfTextFilter.rx.text.orEmpty
-        _ = vmPhrases.scopeFilter <~> scScopeFilter.rx.selectedLabel
+        _ = vmPhrases.scopeFilter_ <~> scScopeFilter.rx.selectedLabel
         sfTextFilter.rx.searchFieldDidStartSearching.subscribe { _ in
             self.vmPhrases.textFilter = self.vmSettings.autoCorrectInput(text: self.vmPhrases.textFilter)
         } ~ rx.disposeBag
@@ -31,9 +34,6 @@ class PhrasesBaseViewController: WordsPhrasesBaseViewController {
         scScopeFilter.rx.selectedLabel.subscribe { [unowned self] _ in
             self.applyFilters()
         } ~ rx.disposeBag
-    }
-
-    override func settingsChanged() {
         super.settingsChanged()
         vmWordsLang = WordsLangViewModel(settings: vmSettings)
     }
