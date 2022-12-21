@@ -158,6 +158,9 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+
+    override func settingsChanged() {
         if let tfNewWord = tfNewWord {
             vmWords.$newWord <~> tfNewWord.textProperty ~ subscriptions
             tfNewWord.controlTextDidEndEditingPublisher.sink { [unowned self] in
@@ -173,19 +176,7 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
             sfTextFilter.searchFieldDidStartSearchingPublisher.sink { [unowned self] in
                 self.vmWords.textFilter = self.vmSettings.autoCorrectInput(text: self.vmWords.textFilter)
             } ~ subscriptions
-            sfTextFilter.searchFieldDidEndSearchingPublisher.sink { [unowned self] in
-                self.applyFilters()
-            } ~ subscriptions
-            sfTextFilter.textPublisher.sink { [unowned self] _ in
-                self.applyFilters()
-            } ~ subscriptions
-            scScopeFilter.selectedLabelPublisher.sink { [unowned self] _ in
-                self.applyFilters()
-            } ~ subscriptions
         }
-    }
-
-    override func settingsChanged() {
         super.settingsChanged()
         vmPhrasesLang = PhrasesLangViewModel(settings: vmSettings)
     }

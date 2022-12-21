@@ -39,13 +39,8 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
         wvWebPage.allowsMagnification = true
         wvWebPage.allowsBackForwardNavigationGestures = true
         tvWebPages.registerForDraggedTypes([tableRowDragType])
-        vm.$textFilter <~> sfTextFilter.textProperty ~ subscriptions
-        vm.$scopeFilter <~> scScopeFilter.selectedLabelProperty ~ subscriptions
         sfTextFilter.searchFieldDidStartSearchingPublisher.sink { [unowned self] in
             self.vm.textFilter = self.vmSettings.autoCorrectInput(text: self.vm.textFilter)
-        } ~ subscriptions
-        vm.$arrPatternsFiltered.didSet.sink { [unowned self] _ in
-            self.doRefresh()
         } ~ subscriptions
     }
 
@@ -170,6 +165,11 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
         vm = PatternsViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) {}
         vmWP = PatternsWebPagesViewModel(settings: vm.vmSettings, needCopy: false)
         synth.setVoice(NSSpeechSynthesizer.VoiceName(rawValue: vmSettings.macVoiceName))
+        vm.$textFilter <~> sfTextFilter.textProperty ~ subscriptions
+        vm.$scopeFilter <~> scScopeFilter.selectedLabelProperty ~ subscriptions
+        vm.$arrPatternsFiltered.didSet.sink { [unowned self] _ in
+            self.doRefresh()
+        } ~ subscriptions
     }
     func doRefresh() {
         tvPatterns.reloadData()
