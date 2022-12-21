@@ -141,9 +141,6 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
         true
     }
 
-    func applyFilters() {
-    }
-
     deinit {
         print("DEBUG: \(self.className) deinit")
     }

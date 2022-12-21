@@ -25,15 +25,6 @@ class PhrasesBaseViewController: WordsPhrasesBaseViewController {
         sfTextFilter.rx.searchFieldDidStartSearching.subscribe { _ in
             self.vmPhrases.textFilter = self.vmSettings.autoCorrectInput(text: self.vmPhrases.textFilter)
         } ~ rx.disposeBag
-        sfTextFilter.rx.searchFieldDidEndSearching.subscribe { [unowned self] _ in
-            self.applyFilters()
-        } ~ rx.disposeBag
-        sfTextFilter.rx.text.subscribe { [unowned self] _ in
-            self.applyFilters()
-        } ~ rx.disposeBag
-        scScopeFilter.rx.selectedLabel.subscribe { [unowned self] _ in
-            self.applyFilters()
-        } ~ rx.disposeBag
         super.settingsChanged()
         vmWordsLang = WordsLangViewModel(settings: vmSettings)
     }

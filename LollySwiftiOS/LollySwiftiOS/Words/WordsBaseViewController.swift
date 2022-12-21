@@ -26,13 +26,13 @@ class WordsBaseViewController: UIViewController, UITableViewDelegate, UITableVie
         ddScopeFilter.dataSource = SettingsViewModel.arrScopeWordFilters
         ddScopeFilter.selectRow(0)
         ddScopeFilter.selectionAction = { [unowned self] (index: Int, item: String) in
-            vmBase.scopeFilter.accept(item)
+            vmBase.scopeFilter = item
         }
         tableView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         refresh()
-        _ = vmBase.textFilter <~> sbTextFilter.searchTextField.rx.textInput
-        _ = vmBase.scopeFilter ~> btnScopeFilter.rx.title(for: .normal)
+        _ = vmBase.textFilter_ <~> sbTextFilter.searchTextField.rx.textInput
+        _ = vmBase.scopeFilter_ ~> btnScopeFilter.rx.title(for: .normal)
     }
 
     @objc func refresh(_ sender: UIRefreshControl) {

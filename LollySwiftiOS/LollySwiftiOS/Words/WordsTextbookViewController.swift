@@ -27,12 +27,9 @@ class WordsTextbookViewController: WordsBaseViewController {
         ddTextbookFilter.dataSource = vmSettings.arrTextbookFilters.map(\.label)
         ddTextbookFilter.selectRow(0)
         ddTextbookFilter.selectionAction = { [unowned self] (index: Int, item: String) in
-            self.vmBase.stringTextbookFilter.accept(item)
+            self.vmBase.stringTextbookFilter = item
         }
-        _ = vmBase.stringTextbookFilter ~> btnTextbookFilter.rx.title(for: .normal)
-        vmBase.stringTextbookFilter.subscribe { [unowned self] _ in
-            self.applyFilters()
-        } ~ rx.disposeBag
+        _ = vmBase.stringTextbookFilter_ ~> btnTextbookFilter.rx.title(for: .normal)
     }
 
     override func refresh() {
@@ -104,11 +101,6 @@ class WordsTextbookViewController: WordsBaseViewController {
         }
 
         return UISwipeActionsConfiguration(actions: [moreAction, deleteAction])
-    }
-
-    override func applyFilters() {
-        vm.applyFilters()
-        tableView.reloadData()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

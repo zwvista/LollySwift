@@ -113,11 +113,6 @@ class WordsUnitViewController: WordsBaseViewController {
         return UISwipeActionsConfiguration(actions: [moreAction, deleteAction])
     }
 
-    override func applyFilters() {
-        vm.applyFilters()
-        tableView.reloadData()
-    }
-
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         if let controller = (segue.destination as? UINavigationController)?.topViewController as? WordsUnitDetailViewController {
