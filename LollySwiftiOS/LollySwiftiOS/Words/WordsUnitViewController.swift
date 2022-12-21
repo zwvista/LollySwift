@@ -14,7 +14,7 @@ import RxBinding
 class WordsUnitViewController: WordsBaseViewController {
 
     var vm: WordsUnitViewModel!
-    var arrWords: [MUnitWord] { vm.arrWordsFiltered ?? vm.arrWords }
+    var arrWords: [MUnitWord] { vm.arrWordsFiltered }
     @IBOutlet weak var btnEdit: UIBarButtonItem!
     override var vmBase: WordsBaseViewModel! { vm }
 

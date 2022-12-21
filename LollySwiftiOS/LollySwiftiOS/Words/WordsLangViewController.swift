@@ -14,7 +14,7 @@ import RxBinding
 class WordsLangViewController: WordsBaseViewController {
 
     var vm: WordsLangViewModel!
-    var arrWords: [MLangWord] { vm.arrWordsFiltered ?? vm.arrWords }
+    var arrWords: [MLangWord] { vm.arrWordsFiltered }
     override var vmBase: WordsBaseViewModel! { vm }
 
     override func viewDidLoad() {

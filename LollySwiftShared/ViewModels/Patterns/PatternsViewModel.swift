@@ -14,34 +14,35 @@ import Then
 
 class PatternsViewModel: NSObject {
     var vmSettings: SettingsViewModel
-    var arrPatterns = [MPattern]()
-    var arrPatternsFiltered: [MPattern]?
+    var arrPatterns_ = BehaviorRelay(value: [MPattern]())
+    var arrPatterns: [MPattern] { get { arrPatterns_.value } set { arrPatterns_.accept(newValue) } }
+    var arrPatternsFiltered_ = BehaviorRelay(value: [MPattern]())
+    var arrPatternsFiltered: [MPattern] { get { arrPatternsFiltered_.value } set { arrPatternsFiltered_.accept(newValue) } }
     var selectedPatternItem: MPattern?
     var selectedPattern: String { selectedPatternItem?.PATTERN ?? "" }
     var selectedPatternID: Int { selectedPatternItem?.ID ?? 0 }
-    let textFilter = BehaviorRelay(value: "")
-    let scopeFilter = BehaviorRelay(value: SettingsViewModel.arrScopePatternFilters[0])
+    let textFilter_ = BehaviorRelay(value: "")
+    var textFilter: String { get { textFilter_.value } set { textFilter_.accept(newValue) } }
+    let scopeFilter_ = BehaviorRelay(value: SettingsViewModel.arrScopePatternFilters[0])
+    var scopeFilter: String { get { scopeFilter_.value } set { scopeFilter_.accept(newValue) } }
 
     public init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> Void) {
         self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
         super.init()
+
+        Observable.combineLatest(arrPatterns_, textFilter_, scopeFilter_).subscribe { [unowned self] _ in
+            arrPatternsFiltered = arrPatterns
+            if !textFilter.isEmpty {
+                arrPatternsFiltered = arrPatternsFiltered.filter { (scopeFilter == "Pattern" ? $0.PATTERN : scopeFilter == "Note" ? $0.NOTE : $0.TAGS).lowercased().contains(textFilter.lowercased()) }
+            }
+        } ~ rx.disposeBag
+
         reload().subscribe { _ in complete() } ~ rx.disposeBag
     }
 
     func reload() -> Single<()> {
         MPattern.getDataByLang(vmSettings.selectedLang.ID).map {
             self.arrPatterns = $0
-        }
-    }
-
-    func applyFilters() {
-        if textFilter.value.isEmpty {
-            arrPatternsFiltered = nil
-        } else {
-            arrPatternsFiltered = arrPatterns
-            if !textFilter.value.isEmpty {
-                arrPatternsFiltered = arrPatternsFiltered!.filter { (scopeFilter.value == "Pattern" ? $0.PATTERN : scopeFilter.value == "Note" ? $0.NOTE : $0.TAGS).lowercased().contains(textFilter.value.lowercased()) }
-            }
         }
     }
 

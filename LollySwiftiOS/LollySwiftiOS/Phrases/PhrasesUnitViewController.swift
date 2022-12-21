@@ -14,7 +14,7 @@ import RxBinding
 class PhrasesUnitViewController: PhrasesBaseViewController {
 
     var vm: PhrasesUnitViewModel!
-    var arrPhrases: [MUnitPhrase] { vm.arrPhrasesFiltered ?? vm.arrPhrases }
+    var arrPhrases: [MUnitPhrase] { vm.arrPhrasesFiltered }
     @IBOutlet weak var btnEdit: UIBarButtonItem!
     override var vmBase: PhrasesBaseViewModel! { vm }
 

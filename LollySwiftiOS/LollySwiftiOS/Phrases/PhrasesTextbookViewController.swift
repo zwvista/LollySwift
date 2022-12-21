@@ -15,7 +15,7 @@ import RxBinding
 class PhrasesTextbookViewController: PhrasesBaseViewController {
 
     var vm: PhrasesUnitViewModel!
-    var arrPhrases: [MUnitPhrase] { vm.arrPhrasesFiltered ?? vm.arrPhrases }
+    var arrPhrases: [MUnitPhrase] { vm.arrPhrasesFiltered }
 
     @IBOutlet weak var btnTextbookFilter: UIButton!
     let ddTextbookFilter = DropDown()

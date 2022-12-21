@@ -14,7 +14,7 @@ import RxBinding
 class PhrasesLangViewController: PhrasesBaseViewController {
 
     var vm: PhrasesLangViewModel!
-    var arrPhrases: [MLangPhrase] { vm.arrPhrasesFiltered ?? vm.arrPhrases }
+    var arrPhrases: [MLangPhrase] { vm.arrPhrasesFiltered }
     override var vmBase: PhrasesBaseViewModel! { vm }
 
     override func viewDidLoad() {

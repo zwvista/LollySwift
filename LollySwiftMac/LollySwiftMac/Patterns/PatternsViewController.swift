@@ -26,17 +26,12 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     let synth = NSSpeechSynthesizer()
     var isSpeaking = true
     var vmSettings: SettingsViewModel! { vm.vmSettings }
-    var arrPatterns: [MPattern] { vm.arrPatternsFiltered ?? vm.arrPatterns }
+    var arrPatterns: [MPattern] { vm.arrPatternsFiltered }
     var arrWebPages: [MPatternWebPage] { vmWP.arrWebPages }
 
     // https://developer.apple.com/videos/play/wwdc2011/120/
     // https://stackoverflow.com/questions/2121907/drag-drop-reorder-rows-on-nstableview
     let tableRowDragType = NSPasteboard.PasteboardType(rawValue: "private.table-row")
-
-    func applyFilters() {
-        vm.applyFilters()
-        self.tvPatterns.reloadData()
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,19 +39,8 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
         wvWebPage.allowsMagnification = true
         wvWebPage.allowsBackForwardNavigationGestures = true
         tvWebPages.registerForDraggedTypes([tableRowDragType])
-        _ = vm.textFilter <~> sfTextFilter.rx.text.orEmpty
-        _ = vm.scopeFilter <~> scScopeFilter.rx.selectedLabel
         sfTextFilter.rx.searchFieldDidStartSearching.subscribe { [unowned self] _ in
-            self.vm.textFilter.accept(self.vmSettings.autoCorrectInput(text: self.vm.textFilter.value))
-        } ~ rx.disposeBag
-        sfTextFilter.rx.searchFieldDidEndSearching.subscribe { [unowned self] _ in
-            self.applyFilters()
-        } ~ rx.disposeBag
-        sfTextFilter.rx.text.subscribe { [unowned self] _ in
-            self.applyFilters()
-        } ~ rx.disposeBag
-        scScopeFilter.rx.selectedLabel.subscribe { [unowned self] _ in
-            self.applyFilters()
+            vm.textFilter = vmSettings.autoCorrectInput(text: vm.textFilter)
         } ~ rx.disposeBag
     }
 
@@ -182,6 +166,11 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
         }
         vmWP = PatternsWebPagesViewModel(settings: vm.vmSettings, needCopy: false)
         synth.setVoice(NSSpeechSynthesizer.VoiceName(rawValue: vmSettings.macVoiceName))
+        _ = vm.textFilter_ <~> sfTextFilter.rx.text.orEmpty
+        _ = vm.scopeFilter_ <~> scScopeFilter.rx.selectedLabel
+        vm.arrPatternsFiltered_.subscribe { [unowned self] _ in
+            self.doRefresh()
+        } ~ rx.disposeBag
     }
     func doRefresh() {
         tvPatterns.reloadData()

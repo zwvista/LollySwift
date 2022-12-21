@@ -15,7 +15,7 @@ import RxBinding
 class PatternsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var vm: PatternsViewModel!
-    var arrPatterns: [MPattern] {  sbTextFilter.text != "" ? vm.arrPatternsFiltered! : vm.arrPatterns }
+    var arrPatterns: [MPattern] { vm.arrPatternsFiltered }
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var sbTextFilter: UISearchBar!
@@ -24,31 +24,20 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
 
     let ddScopeFilter = DropDown()
 
-    func applyFilters() {
-        vm.applyFilters()
-        tableView.reloadData()
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         ddScopeFilter.anchorView = btnScopeFilter
         ddScopeFilter.dataSource = SettingsViewModel.arrScopePatternFilters
         ddScopeFilter.selectRow(0)
         ddScopeFilter.selectionAction = { [unowned self] (index: Int, item: String) in
-            vm.scopeFilter.accept(item)
+            vm.scopeFilter = item
         }
         btnScopeFilter.setTitle(SettingsViewModel.arrScopePatternFilters[0], for: .normal)
         tableView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         refresh(refreshControl)
-        _ = vm.textFilter <~> sbTextFilter.searchTextField.rx.textInput
-        _ = vm.scopeFilter ~> btnScopeFilter.rx.title(for: .normal)
-        vm.textFilter.subscribe { [unowned self] _ in
-            self.applyFilters()
-        } ~ rx.disposeBag
-        vm.scopeFilter.subscribe { [unowned self] _ in
-            self.applyFilters()
-        } ~ rx.disposeBag
+        _ = vm.textFilter_ <~> sbTextFilter.searchTextField.rx.textInput
+        _ = vm.scopeFilter_ ~> btnScopeFilter.rx.title(for: .normal)
     }
 
     @objc func refresh(_ sender: UIRefreshControl) {

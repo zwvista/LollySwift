@@ -15,7 +15,7 @@ import RxBinding
 class WordsTextbookViewController: WordsBaseViewController {
 
     var vm: WordsUnitViewModel!
-    var arrWords: [MUnitWord] { vm.arrWordsFiltered ?? vm.arrWords }
+    var arrWords: [MUnitWord] { vm.arrWordsFiltered }
 
     @IBOutlet weak var btnTextbookFilter: UIButton!
     let ddTextbookFilter = DropDown()
