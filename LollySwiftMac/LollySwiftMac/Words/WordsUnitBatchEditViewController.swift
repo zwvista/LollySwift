@@ -26,7 +26,7 @@ class WordsUnitBatchEditViewController: NSViewController, NSTableViewDataSource,
     var vmEdit: WordsUnitBatchEditViewModel!
     var vmSettings: SettingsViewModel { vmEdit.vm.vmSettings }
     var complete: (() -> Void)?
-    var arrWords: [MUnitWord] { vmEdit.vm.arrWords }
+    var arrWords: [MUnitWord] { vmEdit.vm.arrWords.value }
 
     func startEdit(vm: WordsUnitViewModel, unit: Int, part: Int) {
         vmEdit = WordsUnitBatchEditViewModel(vm: vm, unit: unit, part: part)

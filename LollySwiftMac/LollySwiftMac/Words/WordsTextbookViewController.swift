@@ -16,15 +16,10 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
     var vm: WordsUnitViewModel!
     override var vmWords: WordsBaseViewModel { vm }
     override var vmSettings: SettingsViewModel! { vm.vmSettings }
-    var arrWords: [MUnitWord] { vm.arrWordsFiltered == nil ? vm.arrWords : vm.arrWordsFiltered! }
+    var arrWords: [MUnitWord] { vm.arrWordsFiltered.value }
 
     @IBOutlet weak var pubTextbookFilter: NSPopUpButton!
     @IBOutlet weak var acTextbooks: NSArrayController!
-
-    override func applyFilters() {
-        vm.applyFilters()
-        tvWords.reloadData()
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -16,17 +16,11 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     var vm: WordsUnitViewModel!
     override var vmWords: WordsBaseViewModel { vm }
     override var vmSettings: SettingsViewModel! { vm.vmSettings }
-    var arrWords: [MUnitWord] { vm.arrWordsFiltered ?? vm.arrWords }
+    var arrWords: [MUnitWord] { vm.arrWordsFiltered.value }
 
     // https://developer.apple.com/videos/play/wwdc2011/120/
     // https://stackoverflow.com/questions/2121907/drag-drop-reorder-rows-on-nstableview
     let tableRowDragType = NSPasteboard.PasteboardType(rawValue: "private.table-row")
-
-    override func applyFilters() {
-        print(vm.textFilter.value)
-        vm.applyFilters()
-        tvWords.reloadData()
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,9 +43,10 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     }
 
     override func settingsChanged() {
-        vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: true, needCopy: true) {
+        vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: true, needCopy: true) {}
+        vm.arrWordsFiltered.subscribe { [unowned self] _ in
             self.doRefresh()
-        }
+        } ~ rx.disposeBag
         super.settingsChanged()
     }
 
@@ -99,7 +94,9 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
         var newIndexOffset = 0
 
         func moveRow(at oldIndex: Int, to newIndex: Int) {
-            vm.arrWords.moveElement(at: oldIndex, to: newIndex)
+            var arr = vm.arrWords.value
+            arr.moveElement(at: oldIndex, to: newIndex)
+            vm.arrWords.accept(arr)
             tableView.moveRow(at: oldIndex, to: newIndex)
         }
 
@@ -155,9 +152,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     }
 
     @IBAction func refreshTableView(_ sender: AnyObject) {
-        vm.reload().subscribe { _ in
-            self.doRefresh()
-        } ~ rx.disposeBag
+        vm.reload().subscribe() ~ rx.disposeBag
     }
 
     @IBAction func doubleAction(_ sender: AnyObject) {
@@ -234,17 +229,13 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     @IBAction func previousUnitPart(_ sender: AnyObject) {
         vmSettings.previousUnitPart().flatMap {
             self.vm.reload()
-        }.subscribe { _ in
-            self.doRefresh()
-        } ~ rx.disposeBag
+        }.subscribe() ~ rx.disposeBag
     }
 
     @IBAction func nextUnitPart(_ sender: AnyObject) {
         vmSettings.nextUnitPart().flatMap {
             self.vm.reload()
-        }.subscribe { _ in
-            self.doRefresh()
-        } ~ rx.disposeBag
+        }.subscribe() ~ rx.disposeBag
     }
 
     @IBAction func toggleToType(_ sender: AnyObject) {
@@ -252,9 +243,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
         let part = row == -1 ? vmSettings.arrParts[0].value : arrWords[row].PART
         vmSettings.toggleToType(part: part).flatMap {
             self.vm.reload()
-        }.subscribe { _ in
-            self.doRefresh()
-        } ~ rx.disposeBag
+        }.subscribe() ~ rx.disposeBag
     }
 
     override func updateStatusText() {
