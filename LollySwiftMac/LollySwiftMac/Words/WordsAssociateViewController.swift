@@ -29,6 +29,9 @@ class WordsAssociateViewController: NSViewController, NSTableViewDataSource, NST
         vm.textFilter = textFilter
         vm.$textFilter <~> sfTextFilter.textProperty ~ subscriptions
         vm.$scopeFilter <~> scScopeFilter.selectedLabelProperty ~ subscriptions
+        vm.$arrWordsFiltered.didSet.sink { [unowned self] _ in
+            tableView.reloadData()
+        } ~ subscriptions
     }
 
     override func viewDidAppear() {

@@ -9,6 +9,7 @@
 import Foundation
 import Then
 
+@MainActor
 class WordsLangViewModel: WordsBaseViewModel {
     @Published var arrWords = [MLangWord]()
     @Published var arrWordsFiltered = [MLangWord]()
@@ -16,7 +17,7 @@ class WordsLangViewModel: WordsBaseViewModel {
     public init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> Void) {
         super.init(settings: settings, needCopy: needCopy)
 
-        $arrWords.didSet.combineLatest($indexTextbookFilter.didSet, $scopeFilter.didSet).sink { [unowned self] _ in
+        $arrWords.didSet.combineLatest($textFilter.didSet, $scopeFilter.didSet).sink { [unowned self] _ in
             arrWordsFiltered = arrWords
             if !textFilter.isEmpty {
                 arrWordsFiltered = arrWordsFiltered.filter { (scopeFilter == "Word" ? $0.WORD : $0.NOTE).lowercased().contains(textFilter.lowercased()) }

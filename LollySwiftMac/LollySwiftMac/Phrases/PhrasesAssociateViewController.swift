@@ -29,6 +29,9 @@ class PhrasesAssociateViewController: NSViewController, NSTableViewDataSource, N
         vm.textFilter = textFilter
         vm.$textFilter <~> sfTextFilter.textProperty ~ subscriptions
         vm.$scopeFilter <~> scScopeFilter.selectedLabelProperty ~ subscriptions
+        vm.$arrPhrasesFiltered.didSet.sink { [unowned self] _ in
+            tableView.reloadData()
+        } ~ subscriptions
     }
 
     override func viewDidAppear() {

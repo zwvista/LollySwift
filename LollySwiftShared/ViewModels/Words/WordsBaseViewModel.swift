@@ -31,6 +31,7 @@ class WordsPhrasesBaseViewModel: NSObject, ObservableObject {
     }
 }
 
+@MainActor
 class WordsBaseViewModel: WordsPhrasesBaseViewModel {
     @Published var scopeFilter = SettingsViewModel.arrScopeWordFilters[0]
     @Published var newWord = ""

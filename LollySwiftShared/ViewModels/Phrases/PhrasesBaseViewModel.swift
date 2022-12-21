@@ -8,6 +8,7 @@
 
 import Foundation
 
+@MainActor
 class PhrasesBaseViewModel: WordsPhrasesBaseViewModel {
     @Published var scopeFilter = SettingsViewModel.arrScopePhraseFilters[0]
     var selectedPhrase = ""

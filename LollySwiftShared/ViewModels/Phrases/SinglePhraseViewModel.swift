@@ -8,6 +8,7 @@
 
 import Foundation
 
+@MainActor
 class SinglePhraseViewModel: NSObject {
 
     var vmSettings: SettingsViewModel

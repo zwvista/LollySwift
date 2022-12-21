@@ -9,6 +9,7 @@
 import Foundation
 import Then
 
+@MainActor
 class PhrasesUnitViewModel: PhrasesBaseViewModel {
     let inTextbook: Bool
     @Published var arrPhrases = [MUnitPhrase]()

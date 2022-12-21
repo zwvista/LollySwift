@@ -9,6 +9,7 @@
 import Foundation
 import Then
 
+@MainActor
 class PhrasesLangViewModel: PhrasesBaseViewModel {
     @Published var arrPhrases = [MLangPhrase]()
     @Published var arrPhrasesFiltered = [MLangPhrase]()
@@ -16,7 +17,7 @@ class PhrasesLangViewModel: PhrasesBaseViewModel {
     public init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> Void) {
         super.init(settings: settings, needCopy: needCopy)
 
-        $arrPhrases.didSet.combineLatest($indexTextbookFilter.didSet, $scopeFilter.didSet).sink { [unowned self] _ in
+        $arrPhrases.didSet.combineLatest($textFilter.didSet, $scopeFilter.didSet).sink { [unowned self] _ in
             arrPhrasesFiltered = arrPhrases
             if !textFilter.isEmpty {
                 arrPhrasesFiltered = arrPhrasesFiltered.filter { (scopeFilter == "Phrase" ? $0.PHRASE : $0.TRANSLATION).lowercased().contains(textFilter.lowercased()) }
