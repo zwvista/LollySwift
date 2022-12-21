@@ -12,9 +12,7 @@ struct WordsUnitView: View {
     var body: some View {
         VStack {
             HStack(spacing: 0) {
-                SearchBar(text: $vm.textFilter, placeholder: "Filter") { _ in
-                    vm.applyFilters()
-                }
+                SearchBar(text: $vm.textFilter, placeholder: "Filter") { _ in }
                 Picker("", selection: $vm.scopeFilter) {
                     ForEach(SettingsViewModel.arrScopeWordFilters, id: \.self) { s in
                         Text(s)
@@ -24,7 +22,7 @@ struct WordsUnitView: View {
                 .tint(.white)
             }
             List {
-                ForEach(vm.arrWords, id: \.ID) { row in
+                ForEach(vm.arrWordsFiltered, id: \.ID) { row in
                     HStack {
                         VStack {
                             Text(row.UNITSTR)
