@@ -12,11 +12,22 @@ import Then
 class PhrasesUnitViewModel: PhrasesBaseViewModel {
     let inTextbook: Bool
     @Published var arrPhrases = [MUnitPhrase]()
-    @Published var arrPhrasesFiltered: [MUnitPhrase]?
+    @Published var arrPhrasesFiltered = [MUnitPhrase]()
 
     public init(settings: SettingsViewModel, inTextbook: Bool, needCopy: Bool, complete: @escaping () -> Void) {
         self.inTextbook = inTextbook
         super.init(settings: settings, needCopy: needCopy)
+
+        $arrPhrases.didSet.combineLatest($indexTextbookFilter.didSet, $textFilter.didSet, $scopeFilter.didSet).sink { [unowned self] _ in
+            arrPhrasesFiltered = arrPhrases
+            if !textFilter.isEmpty {
+                arrPhrasesFiltered = arrPhrasesFiltered.filter { (scopeFilter == "Phrase" ? $0.PHRASE : $0.TRANSLATION).lowercased().contains(textFilter.lowercased()) }
+            }
+            if textbookFilter != 0 {
+                arrPhrasesFiltered = arrPhrasesFiltered.filter { $0.TEXTBOOKID == textbookFilter }
+            }
+        } ~ subscriptions
+
         Task {
             await reload()
             complete()
@@ -25,21 +36,6 @@ class PhrasesUnitViewModel: PhrasesBaseViewModel {
 
     func reload() async {
         arrPhrases = inTextbook ? await MUnitPhrase.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO) : await MUnitPhrase.getDataByLang(vmSettings.selectedTextbook.LANGID, arrTextbooks: vmSettings.arrTextbooks)
-        arrPhrasesFiltered = nil
-    }
-
-    func applyFilters() {
-        if textFilter.isEmpty && textbookFilter == 0 {
-            arrPhrasesFiltered = nil
-        } else {
-            arrPhrasesFiltered = arrPhrases
-            if !textFilter.isEmpty {
-                arrPhrasesFiltered = arrPhrasesFiltered!.filter { (scopeFilter == "Phrase" ? $0.PHRASE : $0.TRANSLATION).lowercased().contains(textFilter.lowercased()) }
-            }
-            if textbookFilter != 0 {
-                arrPhrasesFiltered = arrPhrasesFiltered!.filter { $0.TEXTBOOKID == textbookFilter }
-            }
-        }
     }
 
     static func update(_ id: Int, seqnum: Int) async {

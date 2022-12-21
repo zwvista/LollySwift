@@ -20,28 +20,15 @@ class WordsAssociateViewController: NSViewController, NSTableViewDataSource, NST
     var phraseid = 0
     var textFilter = ""
     var complete: (() -> Void)?
-    var arrWords: [MLangWord] { vm.arrWordsFiltered ?? vm.arrWords }
+    var arrWords: [MLangWord] { vm.arrWordsFiltered }
     var subscriptions = Set<AnyCancellable>()
-
-    func applyFilters() {
-        vm.applyFilters()
-        tableView.reloadData()
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        vm = WordsLangViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) {
-            self.applyFilters()
-        }
+        vm = WordsLangViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) {}
         vm.textFilter = textFilter
         vm.$textFilter <~> sfTextFilter.textProperty ~ subscriptions
         vm.$scopeFilter <~> scScopeFilter.selectedLabelProperty ~ subscriptions
-        sfTextFilter.textPublisher.sink { [unowned self] _ in
-            self.applyFilters()
-        } ~ subscriptions
-        scScopeFilter.selectedLabelPublisher.sink { [unowned self] _ in
-            self.applyFilters()
-        } ~ subscriptions
     }
 
     override func viewDidAppear() {

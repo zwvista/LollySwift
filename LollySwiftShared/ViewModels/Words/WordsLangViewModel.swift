@@ -11,10 +11,18 @@ import Then
 
 class WordsLangViewModel: WordsBaseViewModel {
     @Published var arrWords = [MLangWord]()
-    @Published var arrWordsFiltered: [MLangWord]?
+    @Published var arrWordsFiltered = [MLangWord]()
 
     public init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> Void) {
         super.init(settings: settings, needCopy: needCopy)
+
+        $arrWords.didSet.combineLatest($indexTextbookFilter.didSet, $scopeFilter.didSet).sink { [unowned self] _ in
+            arrWordsFiltered = arrWords
+            if !textFilter.isEmpty {
+                arrWordsFiltered = arrWordsFiltered.filter { (scopeFilter == "Word" ? $0.WORD : $0.NOTE).lowercased().contains(textFilter.lowercased()) }
+            }
+        } ~ subscriptions
+
         Task {
             await reload()
             complete()
@@ -23,17 +31,6 @@ class WordsLangViewModel: WordsBaseViewModel {
 
     func reload() async {
         arrWords = await MLangWord.getDataByLang(vmSettings.selectedTextbook.LANGID)
-    }
-
-    func applyFilters() {
-        if textFilter.isEmpty {
-            arrWordsFiltered = nil
-        } else {
-            arrWordsFiltered = arrWords
-            if !textFilter.isEmpty {
-                arrWordsFiltered = arrWordsFiltered!.filter { (scopeFilter == "Word" ? $0.WORD : $0.NOTE).lowercased().contains(textFilter.lowercased()) }
-            }
-        }
     }
 
     static func update(item: MLangWord) async {

@@ -11,10 +11,18 @@ import Then
 
 class PhrasesLangViewModel: PhrasesBaseViewModel {
     @Published var arrPhrases = [MLangPhrase]()
-    @Published var arrPhrasesFiltered: [MLangPhrase]?
+    @Published var arrPhrasesFiltered = [MLangPhrase]()
 
     public init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> Void) {
         super.init(settings: settings, needCopy: needCopy)
+
+        $arrPhrases.didSet.combineLatest($indexTextbookFilter.didSet, $scopeFilter.didSet).sink { [unowned self] _ in
+            arrPhrasesFiltered = arrPhrases
+            if !textFilter.isEmpty {
+                arrPhrasesFiltered = arrPhrasesFiltered.filter { (scopeFilter == "Phrase" ? $0.PHRASE : $0.TRANSLATION).lowercased().contains(textFilter.lowercased()) }
+            }
+        } ~ subscriptions
+
         Task {
             await reload()
             complete()
@@ -23,17 +31,6 @@ class PhrasesLangViewModel: PhrasesBaseViewModel {
 
     func reload() async {
         arrPhrases = await MLangPhrase.getDataByLang(vmSettings.selectedTextbook.LANGID)
-    }
-
-    func applyFilters() {
-        if textFilter.isEmpty {
-            arrPhrasesFiltered = nil
-        } else {
-            arrPhrasesFiltered = arrPhrases
-            if !textFilter.isEmpty {
-                arrPhrasesFiltered = arrPhrasesFiltered!.filter { (scopeFilter == "Phrase" ? $0.PHRASE : $0.TRANSLATION).lowercased().contains(textFilter.lowercased()) }
-            }
-        }
     }
 
     static func update(item: MLangPhrase) async {

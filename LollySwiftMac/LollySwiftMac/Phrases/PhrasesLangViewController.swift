@@ -15,12 +15,7 @@ class PhrasesLangViewController: PhrasesBaseViewController {
     var vm: PhrasesLangViewModel!
     override var vmPhrases: PhrasesBaseViewModel { vm }
     override var vmSettings: SettingsViewModel! { vm.vmSettings }
-    var arrPhrases: [MLangPhrase] { vm.arrPhrasesFiltered ?? vm.arrPhrases }
-
-    override func applyFilters() {
-        vm.applyFilters()
-        tvPhrases.reloadData()
-    }
+    var arrPhrases: [MLangPhrase] { vm.arrPhrasesFiltered }
 
     override func viewDidLoad() {
         super.viewDidLoad()

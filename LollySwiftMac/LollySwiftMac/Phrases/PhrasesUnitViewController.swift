@@ -21,11 +21,6 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     // https://stackoverflow.com/questions/2121907/drag-drop-reorder-rows-on-nstableview
     let tableRowDragType = NSPasteboard.PasteboardType(rawValue: "private.table-row")
 
-    override func applyFilters() {
-        vm.applyFilters()
-        tvPhrases.reloadData()
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         tvPhrases.registerForDraggedTypes([tableRowDragType])

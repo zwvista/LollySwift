@@ -17,15 +17,10 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var btnScopeFilter: UIButton!
 
     var vm: PatternsViewModel!
-    var arrPatterns: [MPattern] {  sbTextFilter.text != "" ? vm.arrPatternsFiltered! : vm.arrPatterns }
+    var arrPatterns: [MPattern] { vm.arrPatternsFiltered }
     let refreshControl = UIRefreshControl()
     let ddScopeFilter = DropDown()
     var subscriptions = Set<AnyCancellable>()
-
-    func applyFilters() {
-        vm.applyFilters()
-        tableView.reloadData()
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,11 +36,8 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
         refresh(refreshControl)
         vm.$textFilter <~> sbTextFilter.searchTextField.textProperty ~ subscriptions
         vm.$scopeFilter ~> (btnScopeFilter, \.titleNormal) ~ subscriptions
-        vm.$textFilter.sink { [unowned self] _ in
-            self.applyFilters()
-        } ~ subscriptions
-        vm.$scopeFilter.sink { [unowned self] _ in
-            self.applyFilters()
+        vm.$arrPatternsFiltered.didSet.sink { [unowned self] _ in
+            tableView.reloadData()
         } ~ subscriptions
     }
 

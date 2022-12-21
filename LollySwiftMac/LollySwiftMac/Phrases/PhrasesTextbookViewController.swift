@@ -15,15 +15,10 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
     var vm: PhrasesUnitViewModel!
     override var vmPhrases: PhrasesBaseViewModel { vm }
     override var vmSettings: SettingsViewModel! { vm.vmSettings }
-    var arrPhrases: [MUnitPhrase] { vm.arrPhrasesFiltered ?? vm.arrPhrases }
+    var arrPhrases: [MUnitPhrase] { vm.arrPhrasesFiltered }
 
     @IBOutlet weak var pubTextbookFilter: NSPopUpButton!
     @IBOutlet weak var acTextbooks: NSArrayController!
-
-    override func applyFilters() {
-        vm.applyFilters()
-        tvPhrases.reloadData()
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

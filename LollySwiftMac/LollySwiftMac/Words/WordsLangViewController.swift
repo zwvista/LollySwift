@@ -17,11 +17,6 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
     override var vmSettings: SettingsViewModel! { vm.vmSettings }
     var arrWords: [MLangWord] { vm.arrWordsFiltered ?? vm.arrWords }
 
-    override func applyFilters() {
-        vm.applyFilters()
-        tvWords.reloadData()
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
     }

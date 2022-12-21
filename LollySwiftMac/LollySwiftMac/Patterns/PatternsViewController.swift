@@ -25,18 +25,13 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     let synth = NSSpeechSynthesizer()
     var isSpeaking = true
     var vmSettings: SettingsViewModel! { vm.vmSettings }
-    var arrPatterns: [MPattern] { vm.arrPatternsFiltered ?? vm.arrPatterns }
+    var arrPatterns: [MPattern] { vm.arrPatternsFiltered }
     var arrWebPages: [MPatternWebPage] { vmWP.arrWebPages }
     var subscriptions = Set<AnyCancellable>()
 
     // https://developer.apple.com/videos/play/wwdc2011/120/
     // https://stackoverflow.com/questions/2121907/drag-drop-reorder-rows-on-nstableview
     let tableRowDragType = NSPasteboard.PasteboardType(rawValue: "private.table-row")
-
-    func applyFilters() {
-        vm.applyFilters()
-        self.tvPatterns.reloadData()
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,15 +43,6 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
         vm.$scopeFilter <~> scScopeFilter.selectedLabelProperty ~ subscriptions
         sfTextFilter.searchFieldDidStartSearchingPublisher.sink { [unowned self] in
             self.vm.textFilter = self.vmSettings.autoCorrectInput(text: self.vm.textFilter)
-        } ~ subscriptions
-        sfTextFilter.searchFieldDidEndSearchingPublisher.sink { [unowned self] in
-            self.applyFilters()
-        } ~ subscriptions
-        sfTextFilter.textPublisher.sink { [unowned self] _ in
-            self.applyFilters()
-        } ~ subscriptions
-        scScopeFilter.selectedLabelPublisher.sink { [unowned self] _ in
-            self.applyFilters()
         } ~ subscriptions
     }
 
