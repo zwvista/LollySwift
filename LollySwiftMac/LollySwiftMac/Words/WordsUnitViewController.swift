@@ -24,9 +24,6 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     override func viewDidLoad() {
         super.viewDidLoad()
         tvWords.registerForDraggedTypes([tableRowDragType])
-        vm.$arrWordsFiltered.didSet.sink { [unowned self] _ in
-            self.doRefresh()
-        } ~ subscriptions
     }
 
     // https://stackoverflow.com/questions/9368654/cannot-seem-to-setenabledno-on-nsmenuitem
@@ -46,6 +43,9 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
 
     override func settingsChanged() {
         vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: true, needCopy: true) {}
+        vm.$arrWordsFiltered.didSet.sink { [unowned self] _ in
+            self.doRefresh()
+        } ~ subscriptions
         super.settingsChanged()
     }
 
