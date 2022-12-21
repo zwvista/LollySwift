@@ -27,12 +27,12 @@ class PhrasesLangViewModel: PhrasesBaseViewModel {
     }
 
     func applyFilters() {
-        if textFilter.value.isEmpty {
+        if textFilter.isEmpty {
             arrPhrasesFiltered = nil
         } else {
             arrPhrasesFiltered = arrPhrases
-            if !textFilter.value.isEmpty {
-                arrPhrasesFiltered = arrPhrasesFiltered!.filter { (scopeFilter.value == "Phrase" ? $0.PHRASE : $0.TRANSLATION).lowercased().contains(textFilter.value.lowercased()) }
+            if !textFilter.isEmpty {
+                arrPhrasesFiltered = arrPhrasesFiltered!.filter { (scopeFilter.value == "Phrase" ? $0.PHRASE : $0.TRANSLATION).lowercased().contains(textFilter.lowercased()) }
             }
         }
     }

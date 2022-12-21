@@ -16,7 +16,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     var vm: WordsUnitViewModel!
     override var vmWords: WordsBaseViewModel { vm }
     override var vmSettings: SettingsViewModel! { vm.vmSettings }
-    var arrWords: [MUnitWord] { vm.arrWordsFiltered.value }
+    var arrWords: [MUnitWord] { vm.arrWordsFiltered }
 
     // https://developer.apple.com/videos/play/wwdc2011/120/
     // https://stackoverflow.com/questions/2121907/drag-drop-reorder-rows-on-nstableview
@@ -44,7 +44,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
 
     override func settingsChanged() {
         vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: true, needCopy: true) {}
-        vm.arrWordsFiltered.subscribe { [unowned self] _ in
+        vm.arrWordsFiltered_.subscribe { [unowned self] _ in
             self.doRefresh()
         } ~ rx.disposeBag
         super.settingsChanged()
@@ -94,9 +94,9 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
         var newIndexOffset = 0
 
         func moveRow(at oldIndex: Int, to newIndex: Int) {
-            var arr = vm.arrWords.value
+            var arr = vm.arrWords
             arr.moveElement(at: oldIndex, to: newIndex)
-            vm.arrWords.accept(arr)
+            vm.arrWords = arr
             tableView.moveRow(at: oldIndex, to: newIndex)
         }
 

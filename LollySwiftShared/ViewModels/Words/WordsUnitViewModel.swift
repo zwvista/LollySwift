@@ -14,20 +14,22 @@ import Then
 
 class WordsUnitViewModel: WordsBaseViewModel {
     let inTextbook: Bool
-    var arrWords = BehaviorRelay(value: [MUnitWord]())
-    var arrWordsFiltered = BehaviorRelay(value: [MUnitWord]())
+    var arrWords_ = BehaviorRelay(value: [MUnitWord]())
+    var arrWords: [MUnitWord] { get { arrWords_.value } set { arrWords_.accept(newValue) } }
+    var arrWordsFiltered_ = BehaviorRelay(value: [MUnitWord]())
+    var arrWordsFiltered: [MUnitWord] { get { arrWordsFiltered_.value } set { arrWordsFiltered_.accept(newValue) } }
 
     init(settings: SettingsViewModel, inTextbook: Bool, needCopy: Bool, complete: @escaping () -> Void) {
         self.inTextbook = inTextbook
         super.init(settings: settings, needCopy: needCopy)
 
-        Observable.combineLatest(arrWords, indexTextbookFilter, textFilter, scopeFilter).subscribe { [unowned self] _ in
-            arrWordsFiltered.accept(arrWords.value)
-            if !textFilter.value.isEmpty {
-                arrWordsFiltered.accept(arrWordsFiltered.value.filter { (scopeFilter.value == "Word" ? $0.WORD : $0.NOTE).lowercased().contains(textFilter.value.lowercased()) })
+        Observable.combineLatest(arrWords_, indexTextbookFilter_, textFilter_, scopeFilter_).subscribe { [unowned self] _ in
+            arrWordsFiltered = arrWords
+            if !textFilter.isEmpty {
+                arrWordsFiltered = arrWordsFiltered.filter { (scopeFilter == "Word" ? $0.WORD : $0.NOTE).lowercased().contains(textFilter.lowercased()) }
             }
             if textbookFilter != 0 {
-                arrWordsFiltered.accept(arrWordsFiltered.value.filter { $0.TEXTBOOKID == textbookFilter })
+                arrWordsFiltered = arrWordsFiltered.filter { $0.TEXTBOOKID == textbookFilter }
             }
         } ~ rx.disposeBag
 
@@ -37,7 +39,7 @@ class WordsUnitViewModel: WordsBaseViewModel {
     func reload() -> Single<()> {
         (inTextbook ? MUnitWord.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO) : MUnitWord.getDataByLang(vmSettings.selectedTextbook.LANGID, arrTextbooks: vmSettings.arrTextbooks))
         .map {
-            self.arrWords.accept($0)
+            self.arrWords = $0
         }
     }
 
@@ -68,9 +70,9 @@ class WordsUnitViewModel: WordsBaseViewModel {
             MUnitWord.getDataById($0, arrTextbooks: self.vmSettings.arrTextbooks)
         }.flatMap { o in
             if let o = o {
-                var arr = self.arrWords.value
+                var arr = self.arrWords
                 arr.append(o)
-                self.arrWords.accept(arr)
+                self.arrWords = arr
                 copyProperties(from: o, to: item)
                 return item.NOTE.isEmpty ? self.getNote(item: item) : Single.just(())
             } else {
@@ -84,8 +86,8 @@ class WordsUnitViewModel: WordsBaseViewModel {
     }
 
     func reindex(complete: @escaping (Int) -> Void) {
-        for i in 1...arrWords.value.count {
-            let item = arrWords.value[i - 1]
+        for i in 1...arrWords.count {
+            let item = arrWords[i - 1]
             guard item.SEQNUM != i else {continue}
             item.SEQNUM = i
             WordsUnitViewModel.update(item.ID, seqnum: item.SEQNUM).subscribe { _ in
@@ -98,7 +100,7 @@ class WordsUnitViewModel: WordsBaseViewModel {
         MUnitWord().then {
             $0.LANGID = vmSettings.selectedLang.ID
             $0.TEXTBOOKID = vmSettings.USTEXTBOOK
-            let maxElem = arrWords.value.max { ($0.UNIT, $0.PART, $0.SEQNUM) < ($1.UNIT, $1.PART, $1.SEQNUM) }
+            let maxElem = arrWords.max { ($0.UNIT, $0.PART, $0.SEQNUM) < ($1.UNIT, $1.PART, $1.SEQNUM) }
             $0.UNIT = maxElem?.UNIT ?? vmSettings.USUNITTO
             $0.PART = maxElem?.PART ?? vmSettings.USPARTTO
             $0.SEQNUM = (maxElem?.SEQNUM ?? 0) + 1
@@ -107,7 +109,7 @@ class WordsUnitViewModel: WordsBaseViewModel {
     }
 
     func getNote(index: Int) -> Single<()> {
-        getNote(item: arrWords.value[index])
+        getNote(item: arrWords[index])
     }
 
     func getNote(item: MUnitWord) -> Single<()> {
@@ -118,8 +120,8 @@ class WordsUnitViewModel: WordsBaseViewModel {
     }
 
     func getNotes(ifEmpty: Bool, oneComplete: @escaping (Int) -> Void, allComplete: @escaping () -> Void) {
-        vmSettings.getNotes(wordCount: arrWords.value.count, isNoteEmpty: {
-            !ifEmpty || (self.arrWords.value[$0].NOTE).isEmpty
+        vmSettings.getNotes(wordCount: arrWords.count, isNoteEmpty: {
+            !ifEmpty || (self.arrWords[$0].NOTE).isEmpty
         }, getOne: { i in
             self.getNote(index: i).subscribe { _ in
                 oneComplete(i)
@@ -128,14 +130,14 @@ class WordsUnitViewModel: WordsBaseViewModel {
     }
 
     func clearNote(index: Int) -> Single<()> {
-        let item = arrWords.value[index]
+        let item = arrWords[index]
         item.NOTE = SettingsViewModel.zeroNote
         return WordsUnitViewModel.update(item.WORDID, note: item.NOTE)
     }
 
     func clearNotes(ifEmpty: Bool, oneComplete: @escaping (Int) -> Void) -> Single<()> {
-        vmSettings.clearNotes(wordCount: arrWords.value.count, isNoteEmpty: {
-            !ifEmpty || self.arrWords.value[$0].NOTE.isEmpty
+        vmSettings.clearNotes(wordCount: arrWords.count, isNoteEmpty: {
+            !ifEmpty || self.arrWords[$0].NOTE.isEmpty
         }, getOne: { i in
             self.clearNote(index: i).do(onSuccess: { oneComplete(i) })
         })

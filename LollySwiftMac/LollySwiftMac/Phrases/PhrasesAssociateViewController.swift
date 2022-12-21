@@ -33,8 +33,8 @@ class PhrasesAssociateViewController: NSViewController, NSTableViewDataSource, N
         vm = PhrasesLangViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) {
             self.applyFilters()
         }
-        vm.textFilter.accept(textFilter)
-        _ = vm.textFilter <~> sfTextFilter.rx.text.orEmpty
+        vm.textFilter = textFilter
+        _ = vm.textFilter_ <~> sfTextFilter.rx.text.orEmpty
         _ = vm.scopeFilter <~> scScopeFilter.rx.selectedLabel
         sfTextFilter.rx.text.subscribe { [unowned self] _ in
             self.applyFilters()

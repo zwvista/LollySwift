@@ -156,6 +156,9 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+
+    override func settingsChanged() {
         if let tfNewWord = tfNewWord {
             _ = vmWords.newWord <~> tfNewWord.rx.text.orEmpty
             tfNewWord.rx.controlTextDidEndEditing.subscribe { [unowned self] _ in
@@ -166,24 +169,12 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
             } ~ rx.disposeBag
         }
         if let sfTextFilter = sfTextFilter {
-            _ = vmWords.textFilter <~> sfTextFilter.rx.text.orEmpty
-            _ = vmWords.scopeFilter <~> scScopeFilter.rx.selectedLabel
+            _ = vmWords.textFilter_ <~> sfTextFilter.rx.text.orEmpty
+            _ = vmWords.scopeFilter_ <~> scScopeFilter.rx.selectedLabel
             sfTextFilter.rx.searchFieldDidStartSearching.subscribe { [unowned self] _ in
-                self.vmWords.textFilter.accept(self.vmSettings.autoCorrectInput(text: self.vmWords.textFilter.value))
-            } ~ rx.disposeBag
-            sfTextFilter.rx.searchFieldDidEndSearching.subscribe { [unowned self] _ in
-                self.applyFilters()
-            } ~ rx.disposeBag
-            sfTextFilter.rx.text.subscribe { [unowned self] _ in
-                self.applyFilters()
-            } ~ rx.disposeBag
-            scScopeFilter.rx.selectedLabel.subscribe { [unowned self] _ in
-                self.applyFilters()
+                self.vmWords.textFilter = self.vmSettings.autoCorrectInput(text: self.vmWords.textFilter)
             } ~ rx.disposeBag
         }
-    }
-
-    override func settingsChanged() {
         super.settingsChanged()
         vmPhrasesLang = PhrasesLangViewModel(settings: vmSettings)
     }

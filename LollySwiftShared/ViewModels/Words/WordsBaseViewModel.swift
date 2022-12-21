@@ -13,25 +13,29 @@ import RxBinding
 
 class WordsPhrasesBaseViewModel: NSObject {
     var vmSettings: SettingsViewModel
-    let textFilter = BehaviorRelay(value: "")
-    let indexTextbookFilter = BehaviorRelay(value: 0)
-    let stringTextbookFilter = BehaviorRelay(value: "")
+    let textFilter_ = BehaviorRelay(value: "")
+    var textFilter: String { get { textFilter_.value } set { textFilter_.accept(newValue) } }
+    let indexTextbookFilter_ = BehaviorRelay(value: 0)
+    var indexTextbookFilter: Int { get { indexTextbookFilter_.value } set { indexTextbookFilter_.accept(newValue) } }
+    let stringTextbookFilter_ = BehaviorRelay(value: "")
+    var stringTextbookFilter: String { get { stringTextbookFilter_.value } set { stringTextbookFilter_.accept(newValue) } }
     var textbookFilter: Int {
-        indexTextbookFilter.value == -1 ? 0 : vmSettings.arrTextbookFilters[indexTextbookFilter.value].value
+        indexTextbookFilter == -1 ? 0 : vmSettings.arrTextbookFilters[indexTextbookFilter].value
     }
 
     init(settings: SettingsViewModel, needCopy: Bool) {
         vmSettings = !needCopy ? settings : SettingsViewModel(settings)
         super.init()
-        stringTextbookFilter.accept(vmSettings.arrTextbookFilters[0].label)
-        stringTextbookFilter.subscribe { s in
-            self.indexTextbookFilter.accept(self.vmSettings.arrTextbookFilters.firstIndex { $0.label == s }!)
+        stringTextbookFilter = vmSettings.arrTextbookFilters[0].label
+        stringTextbookFilter_.subscribe { s in
+            self.indexTextbookFilter = self.vmSettings.arrTextbookFilters.firstIndex { $0.label == s }!
         } ~ rx.disposeBag
     }
 }
 
 class WordsBaseViewModel: WordsPhrasesBaseViewModel {
-    let scopeFilter = BehaviorRelay(value: SettingsViewModel.arrScopeWordFilters[0])
+    let scopeFilter_ = BehaviorRelay(value: SettingsViewModel.arrScopeWordFilters[0])
+    var scopeFilter: String { get { scopeFilter_.value } set { scopeFilter_.accept(newValue) } }
     let newWord = BehaviorRelay(value: "")
     var selectedWord = ""
     var selectedWordID = 0

@@ -33,9 +33,9 @@ class WordsAssociateViewController: NSViewController, NSTableViewDataSource, NST
         vm = WordsLangViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) {
             self.applyFilters()
         }
-        vm.textFilter.accept(textFilter)
-        _ = vm.textFilter <~> sfTextFilter.rx.text.orEmpty
-        _ = vm.scopeFilter <~> scScopeFilter.rx.selectedLabel
+        vm.textFilter = textFilter
+        _ = vm.textFilter_ <~> sfTextFilter.rx.text.orEmpty
+        _ = vm.scopeFilter_ <~> scScopeFilter.rx.selectedLabel
         sfTextFilter.rx.text.subscribe { [unowned self] _ in
             self.applyFilters()
         } ~ rx.disposeBag

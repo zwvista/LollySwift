@@ -17,10 +17,10 @@ class PhrasesBaseViewController: WordsPhrasesBaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        _ = vmPhrases.textFilter <~> sfTextFilter.rx.text.orEmpty
+        _ = vmPhrases.textFilter_ <~> sfTextFilter.rx.text.orEmpty
         _ = vmPhrases.scopeFilter <~> scScopeFilter.rx.selectedLabel
         sfTextFilter.rx.searchFieldDidStartSearching.subscribe { _ in
-            self.vmPhrases.textFilter.accept(self.vmSettings.autoCorrectInput(text: self.vmPhrases.textFilter.value))
+            self.vmPhrases.textFilter = self.vmSettings.autoCorrectInput(text: self.vmPhrases.textFilter)
         } ~ rx.disposeBag
         sfTextFilter.rx.searchFieldDidEndSearching.subscribe { [unowned self] _ in
             self.applyFilters()

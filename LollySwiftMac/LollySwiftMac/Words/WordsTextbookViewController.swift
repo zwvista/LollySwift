@@ -16,7 +16,7 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
     var vm: WordsUnitViewModel!
     override var vmWords: WordsBaseViewModel { vm }
     override var vmSettings: SettingsViewModel! { vm.vmSettings }
-    var arrWords: [MUnitWord] { vm.arrWordsFiltered.value }
+    var arrWords: [MUnitWord] { vm.arrWordsFiltered }
 
     @IBOutlet weak var pubTextbookFilter: NSPopUpButton!
     @IBOutlet weak var acTextbooks: NSArrayController!
