@@ -17,6 +17,7 @@ class PhrasesLangViewModel: PhrasesBaseViewModel {
     var arrPhrases: [MLangPhrase] { get { arrPhrases_.value } set { arrPhrases_.accept(newValue) } }
     var arrPhrasesFiltered_ = BehaviorRelay(value: [MLangPhrase]())
     var arrPhrasesFiltered: [MLangPhrase] { get { arrPhrasesFiltered_.value } set { arrPhrasesFiltered_.accept(newValue) } }
+    var hasFilter: Bool { !textFilter.isEmpty }
 
     public init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> Void) {
         super.init(settings: settings, needCopy: needCopy)

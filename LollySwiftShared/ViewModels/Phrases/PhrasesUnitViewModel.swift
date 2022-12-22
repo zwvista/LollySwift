@@ -18,6 +18,7 @@ class PhrasesUnitViewModel: PhrasesBaseViewModel {
     var arrPhrases: [MUnitPhrase] { get { arrPhrases_.value } set { arrPhrases_.accept(newValue) } }
     var arrPhrasesFiltered_ = BehaviorRelay(value: [MUnitPhrase]())
     var arrPhrasesFiltered: [MUnitPhrase] { get { arrPhrasesFiltered_.value } set { arrPhrasesFiltered_.accept(newValue) } }
+    var hasFilter: Bool { !(textFilter.isEmpty && textbookFilter == 0) }
 
     public init(settings: SettingsViewModel, inTextbook: Bool, needCopy: Bool, complete: @escaping () -> Void) {
         self.inTextbook = inTextbook

@@ -18,6 +18,7 @@ class WordsUnitViewModel: WordsBaseViewModel {
     var arrWords: [MUnitWord] { get { arrWords_.value } set { arrWords_.accept(newValue) } }
     var arrWordsFiltered_ = BehaviorRelay(value: [MUnitWord]())
     var arrWordsFiltered: [MUnitWord] { get { arrWordsFiltered_.value } set { arrWordsFiltered_.accept(newValue) } }
+    var hasFilter: Bool { !(textFilter.isEmpty && textbookFilter == 0) }
 
     init(settings: SettingsViewModel, inTextbook: Bool, needCopy: Bool, complete: @escaping () -> Void) {
         self.inTextbook = inTextbook

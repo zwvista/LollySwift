@@ -25,6 +25,7 @@ class PatternsViewModel: NSObject {
     var textFilter: String { get { textFilter_.value } set { textFilter_.accept(newValue) } }
     let scopeFilter_ = BehaviorRelay(value: SettingsViewModel.arrScopePatternFilters[0])
     var scopeFilter: String { get { scopeFilter_.value } set { scopeFilter_.accept(newValue) } }
+    var hasFilter: Bool { !textFilter.isEmpty }
 
     public init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> Void) {
         self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)

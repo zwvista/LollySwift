@@ -17,6 +17,7 @@ class WordsLangViewModel: WordsBaseViewModel {
     var arrWords: [MLangWord] { get { arrWords_.value } set { arrWords_.accept(newValue) } }
     var arrWordsFiltered_ = BehaviorRelay(value: [MLangWord]())
     var arrWordsFiltered: [MLangWord] { get { arrWordsFiltered_.value } set { arrWordsFiltered_.accept(newValue) } }
+    var hasFilter: Bool { !textFilter.isEmpty }
 
     public init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> Void) {
         super.init(settings: settings, needCopy: needCopy)
