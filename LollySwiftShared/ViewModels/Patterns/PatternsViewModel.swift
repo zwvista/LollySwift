@@ -20,6 +20,7 @@ class PatternsViewModel: NSObject, ObservableObject {
     var selectedPatternID: Int { selectedPatternItem?.ID ?? 0 }
     @Published var textFilter = ""
     @Published var scopeFilter = SettingsViewModel.arrScopePatternFilters[0]
+    var hasFilter: Bool { !textFilter.isEmpty }
     var subscriptions = Set<AnyCancellable>()
 
     public init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> Void) {

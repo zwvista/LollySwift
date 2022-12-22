@@ -14,6 +14,7 @@ class PhrasesUnitViewModel: PhrasesBaseViewModel {
     let inTextbook: Bool
     @Published var arrPhrases = [MUnitPhrase]()
     @Published var arrPhrasesFiltered = [MUnitPhrase]()
+    var hasFilter: Bool { !(textFilter.isEmpty && textbookFilter == 0) }
 
     public init(settings: SettingsViewModel, inTextbook: Bool, needCopy: Bool, complete: @escaping () -> Void) {
         self.inTextbook = inTextbook

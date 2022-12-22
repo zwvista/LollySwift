@@ -14,6 +14,7 @@ class WordsUnitViewModel: WordsBaseViewModel {
     let inTextbook: Bool
     @Published var arrWords = [MUnitWord]()
     @Published var arrWordsFiltered = [MUnitWord]()
+    var hasFilter: Bool { !(textFilter.isEmpty && textbookFilter == 0) }
 
     init(settings: SettingsViewModel, inTextbook: Bool, needCopy: Bool, complete: @escaping () -> Void) {
         self.inTextbook = inTextbook

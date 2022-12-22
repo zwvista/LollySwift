@@ -13,6 +13,7 @@ import Then
 class WordsLangViewModel: WordsBaseViewModel {
     @Published var arrWords = [MLangWord]()
     @Published var arrWordsFiltered = [MLangWord]()
+    var hasFilter: Bool { !textFilter.isEmpty }
 
     public init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> Void) {
         super.init(settings: settings, needCopy: needCopy)
