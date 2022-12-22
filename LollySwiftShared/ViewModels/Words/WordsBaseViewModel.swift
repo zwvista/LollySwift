@@ -36,7 +36,8 @@ class WordsPhrasesBaseViewModel: NSObject {
 class WordsBaseViewModel: WordsPhrasesBaseViewModel {
     let scopeFilter_ = BehaviorRelay(value: SettingsViewModel.arrScopeWordFilters[0])
     var scopeFilter: String { get { scopeFilter_.value } set { scopeFilter_.accept(newValue) } }
-    let newWord = BehaviorRelay(value: "")
+    let newWord_ = BehaviorRelay(value: "")
+    var newWord: String { get { newWord_.value } set { newWord_.accept(newValue) } }
     var selectedWord = ""
     var selectedWordID = 0
 }

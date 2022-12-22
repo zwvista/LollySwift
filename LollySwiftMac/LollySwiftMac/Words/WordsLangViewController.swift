@@ -50,14 +50,13 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
     }
 
     override func addNewWord() {
-        guard !vm.newWord.value.isEmpty else {return}
+        guard !vm.newWord.isEmpty else {return}
         let item = vm.newLangWord()
-        item.WORD = vm.vmSettings.autoCorrectInput(text: vm.newWord.value)
-        WordsLangViewModel.create(item: item).subscribe { _ in
-            self.vm.arrWords.append(item)
-            self.tvWords.reloadData()
-            self.tfNewWord.stringValue = ""
-            self.vm.newWord.accept("")
+        item.WORD = vm.vmSettings.autoCorrectInput(text: vm.newWord)
+        WordsLangViewModel.create(item: item).subscribe { [unowned self] _ in
+            vm.arrWords.append(item)
+            tvWords.reloadData()
+            vm.newWord = ""
         } ~ rx.disposeBag
     }
 

@@ -45,7 +45,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     override func settingsChanged() {
         vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: true, needCopy: true) {}
         vm.arrWordsFiltered_.subscribe { [unowned self] _ in
-            self.doRefresh()
+            doRefresh()
         } ~ rx.disposeBag
         super.settingsChanged()
     }
@@ -60,8 +60,8 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
 
     override func endEditing(row: Int) {
         let item = arrWords[row]
-        vm.update(item: item).subscribe { _ in
-            self.tvWords.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvWords.tableColumns.count))
+        vm.update(item: item).subscribe { [unowned self] _ in
+            tvWords.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<tvWords.tableColumns.count))
         } ~ rx.disposeBag
     }
 
@@ -120,15 +120,14 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     }
 
     override func addNewWord() {
-        guard !vm.newWord.value.isEmpty else {return}
+        guard !vm.newWord.isEmpty else {return}
         let item = vm.newUnitWord()
-        item.WORD = vmSettings.autoCorrectInput(text: vm.newWord.value)
-        tfNewWord.stringValue = ""
-        vm.newWord.accept("")
-        vm.create(item: item).subscribe { _ in
-            self.tvWords.reloadData()
-            self.tvWords.selectRowIndexes(IndexSet(integer: self.arrWords.count - 1), byExtendingSelection: false)
-            self.responder = self.tfNewWord
+        item.WORD = vmSettings.autoCorrectInput(text: vm.newWord)
+        vm.newWord = ""
+        vm.create(item: item).subscribe { [unowned self] _ in
+            tvWords.reloadData()
+            tvWords.selectRowIndexes(IndexSet(integer: arrWords.count - 1), byExtendingSelection: false)
+            responder = tfNewWord
         } ~ rx.disposeBag
     }
 
@@ -146,8 +145,8 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
 
     override func deleteWord(row: Int) {
         let item = arrWords[row]
-        WordsUnitViewModel.delete(item: item).subscribe { _ in
-            self.doRefresh()
+        WordsUnitViewModel.delete(item: item).subscribe { [unowned self] _ in
+            doRefresh()
         } ~ rx.disposeBag
     }
 
@@ -192,8 +191,8 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
 
     @IBAction func getNote(_ sender: AnyObject) {
         let col = tvWords.tableColumns.firstIndex { $0.title == "NOTE" }!
-        vm.getNote(index: tvWords.selectedRow).subscribe { _ in
-            self.tvWords.reloadData(forRowIndexes: [self.tvWords.selectedRow], columnIndexes: [col])
+        vm.getNote(index: tvWords.selectedRow).subscribe { [unowned self] _ in
+            tvWords.reloadData(forRowIndexes: [tvWords.selectedRow], columnIndexes: [col])
         } ~ rx.disposeBag
     }
 
@@ -210,20 +209,16 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
 
     @IBAction func clearNote(_ sender: AnyObject) {
         let col = tvWords.tableColumns.firstIndex { $0.title == "NOTE" }!
-        vm.clearNote(index: tvWords.selectedRow).subscribe { _ in
-            self.tvWords.reloadData(forRowIndexes: [self.tvWords.selectedRow], columnIndexes: [col])
+        vm.clearNote(index: tvWords.selectedRow).subscribe { [unowned self] _ in
+            tvWords.reloadData(forRowIndexes: [tvWords.selectedRow], columnIndexes: [col])
         } ~ rx.disposeBag
     }
 
     @IBAction func clearNotes(_ sender: AnyObject) {
         let ifEmpty = sender is NSToolbarItem || (sender as! NSMenuItem).tag == 0
-        vm.clearNotes(ifEmpty: ifEmpty, oneComplete: {
-            self.tvWords.reloadData(forRowIndexes: [$0], columnIndexes: IndexSet(0..<self.tvWords.tableColumns.count))
-        }).subscribe { _ in
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                // self.tableView.reloadData()
-            }
-        } ~ rx.disposeBag
+        vm.clearNotes(ifEmpty: ifEmpty, oneComplete: { [unowned self] in
+            tvWords.reloadData(forRowIndexes: [$0], columnIndexes: IndexSet(0..<tvWords.tableColumns.count))
+        }).subscribe() ~ rx.disposeBag
     }
 
     @IBAction func previousUnitPart(_ sender: AnyObject) {

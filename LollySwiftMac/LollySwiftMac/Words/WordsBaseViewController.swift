@@ -123,7 +123,7 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
         if responder == nil {
             responder = tvWords
         }
-        let word = vmWords.selectedWord.isEmpty ? vmWords.newWord.value : vmWords.selectedWord
+        let word = vmWords.selectedWord.isEmpty ? vmWords.newWord : vmWords.selectedWord
         for item in tabView.tabViewItems {
             (item.viewController as! WordsDictViewController).searchWord(word: word)
         }
@@ -157,10 +157,10 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
 
     override func settingsChanged() {
         if let tfNewWord = tfNewWord {
-            _ = vmWords.newWord <~> tfNewWord.rx.text.orEmpty
+            _ = vmWords.newWord_ <~> tfNewWord.rx.text.orEmpty
             tfNewWord.rx.controlTextDidEndEditing.subscribe { [unowned self] _ in
                 self.commitEditing()
-                if !self.vmWords.newWord.value.isEmpty {
+                if !self.vmWords.newWord.isEmpty {
                     self.addNewWord()
                 }
             } ~ rx.disposeBag
@@ -169,7 +169,7 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
             _ = vmWords.textFilter_ <~> sfTextFilter.rx.text.orEmpty
             _ = vmWords.scopeFilter_ <~> scScopeFilter.rx.selectedLabel
             sfTextFilter.rx.searchFieldDidStartSearching.subscribe { [unowned self] _ in
-                self.vmWords.textFilter = self.vmSettings.autoCorrectInput(text: self.vmWords.textFilter)
+                vmWords.textFilter = vmSettings.autoCorrectInput(text: vmWords.textFilter)
             } ~ rx.disposeBag
         }
         super.settingsChanged()
