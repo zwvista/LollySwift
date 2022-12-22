@@ -58,7 +58,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     }
 
     func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
-        if vmSettings.isSingleUnitPart && vm.arrPhrasesFiltered == nil {
+        if vmSettings.isSingleUnitPart && !vm.hasFilter {
             let item = NSPasteboardItem()
             item.setString(String(row), forType: tableRowDragType)
             return item
