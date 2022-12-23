@@ -9,6 +9,8 @@ import SwiftUI
 
 struct PatternsView: View {
     @StateObject var vm = PatternsViewModel(settings: vmSettings, needCopy: false) {}
+    @Environment(\.editMode) var editMode
+    @State var showDetail = false
     var body: some View {
         VStack {
             HStack(spacing: 0) {
@@ -31,6 +33,17 @@ struct PatternsView: View {
                             Text(row.TAGS)
                                 .foregroundColor(Color.color3)
                         }
+                    }
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        if editMode?.wrappedValue.isEditing == true {
+                            showDetail = true
+                        } else {
+                            LollySwiftUIiOSApp.speak(string: row.PATTERN)
+                        }
+                    }
+                    .sheet(isPresented: $showDetail) {
+                        PatternsDetailView()
                     }
                 }
             }

@@ -9,6 +9,8 @@ import SwiftUI
 
 struct PhrasesLangView: View {
     @StateObject var vm = PhrasesLangViewModel(settings: vmSettings, needCopy: false) {}
+    @Environment(\.editMode) var editMode
+    @State var showDetail = false
     var body: some View {
         VStack {
             HStack(spacing: 0) {
@@ -31,6 +33,17 @@ struct PhrasesLangView: View {
                             Text(row.TRANSLATION)
                                 .foregroundColor(Color.color3)
                         }
+                    }
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        if editMode?.wrappedValue.isEditing == true {
+                            showDetail = true
+                        } else {
+                            LollySwiftUIiOSApp.speak(string: row.PHRASE)
+                        }
+                    }
+                    .sheet(isPresented: $showDetail) {
+                        PhrasesLangDetailView()
                     }
                 }
             }

@@ -9,6 +9,8 @@ import SwiftUI
 
 struct WordsUnitView: View {
     @StateObject var vm = WordsUnitViewModel(settings: vmSettings, inTextbook: true, needCopy: false) {}
+    @Environment(\.editMode) var editMode
+    @State var showDetail = false
     var body: some View {
         VStack {
             HStack(spacing: 0) {
@@ -38,11 +40,31 @@ struct WordsUnitView: View {
                             Text(row.NOTE)
                                 .foregroundColor(Color.color3)
                         }
+                        Spacer()
+                        Image(systemName: "info.circle")
+                            .foregroundColor(.blue)
+                            .onTapGesture {
+                                
+                            }
                     }
-                }.onDelete { IndexSet in
+                    // https://stackoverflow.com/questions/65100077/swiftui-how-can-you-use-on-tap-gesture-for-entire-row-in-a-foreach-loop
+                    .contentShape(Rectangle())
+                    .onTapGesture {
+                        if editMode?.wrappedValue.isEditing == true {
+                            showDetail = true
+                        } else {
+                            LollySwiftUIiOSApp.speak(string: row.WORD)
+                        }
+                    }
+                    .sheet(isPresented: $showDetail) {
+                        WordsUnitDetailView()
+                    }
+                }
+                .onDelete { IndexSet in
 
                 }
-            }.toolbar {
+            }
+            .toolbar {
                 EditButton()
             }
         }

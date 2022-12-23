@@ -12,6 +12,10 @@
 		8C5176DD2943C66200719D42 /* StoreIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5176C62943C66200719D42 /* StoreIn.swift */; };
 		8C5176EE2943C84B00719D42 /* MUnitBlog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5176ED2943C84B00719D42 /* MUnitBlog.swift */; };
 		8C5176F12943C89F00719D42 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 8C5176F02943C89F00719D42 /* Alamofire */; };
+		8C58548729560EB900AD05CC /* WordsLangDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C58548629560EB900AD05CC /* WordsLangDetailView.swift */; };
+		8C58548929560ED200AD05CC /* PhrasesUnitDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C58548829560ED200AD05CC /* PhrasesUnitDetailView.swift */; };
+		8C58548B29560EE100AD05CC /* PhrasesLangDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C58548A29560EE100AD05CC /* PhrasesLangDetailView.swift */; };
+		8C58548D29560EF000AD05CC /* PatternsDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C58548C29560EF000AD05CC /* PatternsDetailView.swift */; };
 		8C7F008E294E100F009D6A90 /* WordsLangView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7F0087294E100F009D6A90 /* WordsLangView.swift */; };
 		8C7F008F294E100F009D6A90 /* WordsUnitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7F0088294E100F009D6A90 /* WordsUnitView.swift */; };
 		8C7F0090294E100F009D6A90 /* PhrasesLangView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7F008A294E100F009D6A90 /* PhrasesLangView.swift */; };
@@ -115,6 +119,10 @@
 		8C5176C42943C66200719D42 /* Publisher+Bind.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Publisher+Bind.swift"; sourceTree = "<group>"; };
 		8C5176C62943C66200719D42 /* StoreIn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreIn.swift; sourceTree = "<group>"; };
 		8C5176ED2943C84B00719D42 /* MUnitBlog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MUnitBlog.swift; sourceTree = "<group>"; };
+		8C58548629560EB900AD05CC /* WordsLangDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsLangDetailView.swift; sourceTree = "<group>"; };
+		8C58548829560ED200AD05CC /* PhrasesUnitDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhrasesUnitDetailView.swift; sourceTree = "<group>"; };
+		8C58548A29560EE100AD05CC /* PhrasesLangDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhrasesLangDetailView.swift; sourceTree = "<group>"; };
+		8C58548C29560EF000AD05CC /* PatternsDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternsDetailView.swift; sourceTree = "<group>"; };
 		8C7F0087294E100F009D6A90 /* WordsLangView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsLangView.swift; sourceTree = "<group>"; };
 		8C7F0088294E100F009D6A90 /* WordsUnitView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsUnitView.swift; sourceTree = "<group>"; };
 		8C7F008A294E100F009D6A90 /* PhrasesLangView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesLangView.swift; sourceTree = "<group>"; };
@@ -263,9 +271,10 @@
 		8C7F0086294E100F009D6A90 /* Words */ = {
 			isa = PBXGroup;
 			children = (
+				8C58548629560EB900AD05CC /* WordsLangDetailView.swift */,
 				8C7F0087294E100F009D6A90 /* WordsLangView.swift */,
-				8C7F0088294E100F009D6A90 /* WordsUnitView.swift */,
 				8C7F0094294EE8A3009D6A90 /* WordsUnitDetailView.swift */,
+				8C7F0088294E100F009D6A90 /* WordsUnitView.swift */,
 			);
 			path = Words;
 			sourceTree = "<group>";
@@ -273,7 +282,9 @@
 		8C7F0089294E100F009D6A90 /* Phrases */ = {
 			isa = PBXGroup;
 			children = (
+				8C58548A29560EE100AD05CC /* PhrasesLangDetailView.swift */,
 				8C7F008A294E100F009D6A90 /* PhrasesLangView.swift */,
+				8C58548829560ED200AD05CC /* PhrasesUnitDetailView.swift */,
 				8C7F008B294E100F009D6A90 /* PhrasesUnitView.swift */,
 			);
 			path = Phrases;
@@ -282,6 +293,7 @@
 		8C7F008C294E100F009D6A90 /* Patterns */ = {
 			isa = PBXGroup;
 			children = (
+				8C58548C29560EF000AD05CC /* PatternsDetailView.swift */,
 				8C7F008D294E100F009D6A90 /* PatternsView.swift */,
 			);
 			path = Patterns;
@@ -746,6 +758,7 @@
 				95F632E02588C0B8000CFD23 /* WebView.swift in Sources */,
 				95919223258D00190070DBFD /* MPatternWebPage.swift in Sources */,
 				95919228258D00190070DBFD /* MWordPhrase.swift in Sources */,
+				8C58548729560EB900AD05CC /* WordsLangDetailView.swift in Sources */,
 				8C7F0090294E100F009D6A90 /* PhrasesLangView.swift in Sources */,
 				953FCE5425792A8800666503 /* WordsDictViewModel.swift in Sources */,
 				953FCE6F25792A8800666503 /* CommonApi.swift in Sources */,
@@ -762,6 +775,7 @@
 				953FCD0025745D3D00666503 /* LollySwiftUIiOSApp.swift in Sources */,
 				957B535525A70F9800C18B06 /* WordsUnitBatchAddViewModel.swift in Sources */,
 				953FCE4925792A8800666503 /* ReadNumberViewModel.swift in Sources */,
+				8C58548B29560EE100AD05CC /* PhrasesLangDetailView.swift in Sources */,
 				953FCE6125792A8800666503 /* PhrasesUnitViewModel.swift in Sources */,
 				9513F4E5268B359B00493C0B /* SettingsView.swift in Sources */,
 				95919227258D00190070DBFD /* MLangPhrase.swift in Sources */,
@@ -785,6 +799,7 @@
 				953FCE4A25792A8800666503 /* ReviewOptionsViewModel.swift in Sources */,
 				9546F06A268726DE00ADE420 /* SettingsViewModel.swift in Sources */,
 				8C7F0095294EE8A3009D6A90 /* WordsUnitDetailView.swift in Sources */,
+				8C58548D29560EF000AD05CC /* PatternsDetailView.swift in Sources */,
 				8C7F009E295306D8009D6A90 /* Publisher+DidSet.swift in Sources */,
 				953FCE4E25792A8800666503 /* WebTextbooksViewModel.swift in Sources */,
 				957B538D25AD442500C18B06 /* SideMenuView.swift in Sources */,
@@ -796,6 +811,7 @@
 				953FCE5825792A8800666503 /* PatternsSplitViewModel.swift in Sources */,
 				953FCE5A25792A8800666503 /* WebPageSelectViewModel.swift in Sources */,
 				9591921B258D00190070DBFD /* MVoice.swift in Sources */,
+				8C58548929560ED200AD05CC /* PhrasesUnitDetailView.swift in Sources */,
 				953FCE5625792A8800666503 /* SingleWordViewModel.swift in Sources */,
 				9591921D258D00190070DBFD /* MUserSetting.swift in Sources */,
 				9591921F258D00190070DBFD /* MReviewOptions.swift in Sources */,
