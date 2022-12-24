@@ -11,6 +11,7 @@ struct WordsUnitView: View {
     @StateObject var vm = WordsUnitViewModel(settings: vmSettings, inTextbook: true, needCopy: false) {}
     @Environment(\.editMode) var editMode
     @State var showDetail = false
+    @State var showAlert = false
     var body: some View {
         VStack {
             HStack(spacing: 0) {
@@ -24,20 +25,20 @@ struct WordsUnitView: View {
                 .tint(.white)
             }
             List {
-                ForEach(vm.arrWordsFiltered, id: \.ID) { row in
+                ForEach(vm.arrWordsFiltered, id: \.ID) { item in
                     HStack {
                         VStack {
-                            Text(row.UNITSTR)
-                            Text(row.PARTSTR)
-                            Text("\(row.SEQNUM)")
+                            Text(item.UNITSTR)
+                            Text(item.PARTSTR)
+                            Text("\(item.SEQNUM)")
                         }
                         .font(.caption)
                         .foregroundColor(Color.color1)
                         VStack(alignment: .leading) {
-                            Text(row.WORD)
+                            Text(item.WORD)
                                 .font(.title)
                                 .foregroundColor(Color.color2)
-                            Text(row.NOTE)
+                            Text(item.NOTE)
                                 .foregroundColor(Color.color3)
                         }
                         Spacer()
@@ -47,13 +48,13 @@ struct WordsUnitView: View {
                                 
                             }
                     }
-                    // https://stackoverflow.com/questions/65100077/swiftui-how-can-you-use-on-tap-gesture-for-entire-row-in-a-foreach-loop
+                    // https://stackoverflow.com/questions/65100077/swiftui-how-can-you-use-on-tap-gesture-for-entire-item-in-a-foreach-loop
                     .contentShape(Rectangle())
                     .onTapGesture {
                         if editMode?.wrappedValue.isEditing == true {
                             showDetail = true
                         } else {
-                            LollySwiftUIiOSApp.speak(string: row.WORD)
+                            LollySwiftUIiOSApp.speak(string: item.WORD)
                         }
                     }
                     .sheet(isPresented: $showDetail) {
@@ -65,7 +66,15 @@ struct WordsUnitView: View {
                 }
             }
             .toolbar {
-                EditButton()
+                ToolbarItemGroup {
+                    EditButton()
+                    Button("More") {
+                        showAlert = true
+                    }
+                }
+            }
+            .alert(isPresented: $showAlert) {
+                Alert(title: Text("Word"), message: Text("More"))
             }
         }
     }

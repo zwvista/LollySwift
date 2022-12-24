@@ -24,13 +24,13 @@ struct PatternsView: View {
                 .tint(.white)
             }
             List {
-                ForEach(vm.arrPatterns, id: \.ID) { row in
+                ForEach(vm.arrPatterns, id: \.ID) { item in
                     HStack {
                         VStack(alignment: .leading) {
-                            Text(row.PATTERN)
+                            Text(item.PATTERN)
                                 .font(.title)
                                 .foregroundColor(Color.color2)
-                            Text(row.TAGS)
+                            Text(item.TAGS)
                                 .foregroundColor(Color.color3)
                         }
                     }
@@ -39,7 +39,7 @@ struct PatternsView: View {
                         if editMode?.wrappedValue.isEditing == true {
                             showDetail = true
                         } else {
-                            LollySwiftUIiOSApp.speak(string: row.PATTERN)
+                            LollySwiftUIiOSApp.speak(string: item.PATTERN)
                         }
                     }
                     .sheet(isPresented: $showDetail) {

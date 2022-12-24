@@ -24,13 +24,13 @@ struct WordsLangView: View {
                 .tint(.white)
             }
             List {
-                ForEach(vm.arrWordsFiltered, id: \.ID) { row in
+                ForEach(vm.arrWordsFiltered, id: \.ID) { item in
                     HStack {
                         VStack(alignment: .leading) {
-                            Text(row.WORD)
+                            Text(item.WORD)
                                 .font(.title)
                                 .foregroundColor(Color.color2)
-                            Text(row.NOTE)
+                            Text(item.NOTE)
                                 .foregroundColor(Color.color3)
                         }
                     }
@@ -39,7 +39,7 @@ struct WordsLangView: View {
                         if editMode?.wrappedValue.isEditing == true {
                             showDetail = true
                         } else {
-                            LollySwiftUIiOSApp.speak(string: row.WORD)
+                            LollySwiftUIiOSApp.speak(string: item.WORD)
                         }
                     }
                     .sheet(isPresented: $showDetail) {
