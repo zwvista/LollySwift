@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import DropDown
 import Combine
 
 class PatternsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -19,21 +18,25 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
     var vm: PatternsViewModel!
     var arrPatterns: [MPattern] { vm.arrPatternsFiltered }
     let refreshControl = UIRefreshControl()
-    let ddScopeFilter = DropDown()
     var subscriptions = Set<AnyCancellable>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        ddScopeFilter.anchorView = btnScopeFilter
-        ddScopeFilter.dataSource = SettingsViewModel.arrScopePatternFilters
-        ddScopeFilter.selectRow(0)
-        ddScopeFilter.selectionAction = { [unowned self] (index: Int, item: String) in
-            vm.scopeFilter = item
-        }
-        btnScopeFilter.setTitle(SettingsViewModel.arrScopePatternFilters[0], for: .normal)
         tableView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         refresh(refreshControl)
+
+        func configMenu() {
+            btnScopeFilter.menu = UIMenu(title: "", options: .displayInline, children: SettingsViewModel.arrScopePatternFilters.enumerated().map { index, item in
+                UIAction(title: item, state: item == vm.scopeFilter ? .on : .off) { [unowned self] _ in
+                    vm.scopeFilter = item
+                    configMenu()
+                }
+            })
+            btnScopeFilter.showsMenuAsPrimaryAction = true
+        }
+        configMenu()
+
         vm.$textFilter <~> sbTextFilter.searchTextField.textProperty ~ subscriptions
         vm.$scopeFilter ~> (btnScopeFilter, \.titleNormal) ~ subscriptions
         vm.$arrPatternsFiltered.didSet.sink { [unowned self] _ in
@@ -48,10 +51,6 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
             self.tableView.reloadData()
             self.view.removeBlurLoader()
         }
-    }
-
-    @IBAction func showScopeFilterDropDown(_ sender: AnyObject) {
-        ddScopeFilter.show()
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
