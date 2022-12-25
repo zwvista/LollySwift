@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import DropDown
 import RxBinding
 
 class PhrasesBaseViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate {
@@ -17,33 +16,33 @@ class PhrasesBaseViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var btnScopeFilter: UIButton!
     let refreshControl = UIRefreshControl()
 
-    let ddScopeFilter = DropDown()
     var vmBase: PhrasesBaseViewModel! { nil }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        ddScopeFilter.anchorView = btnScopeFilter
-        ddScopeFilter.dataSource = SettingsViewModel.arrScopePhraseFilters
-        ddScopeFilter.selectRow(0)
-        ddScopeFilter.selectionAction = { [unowned self] (index: Int, item: String) in
-            vmBase.scopeFilter = item
-        }
         tableView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
+        refresh(refreshControl)
+
+        func configMenu() {
+            btnScopeFilter.menu = UIMenu(title: "", options: .displayInline, children: SettingsViewModel.arrScopePhraseFilters.enumerated().map { index, item in
+                UIAction(title: item, state: item == vmBase.scopeFilter ? .on : .off) { [unowned self] _ in
+                    vmBase.scopeFilter = item
+                    configMenu()
+                }
+            })
+            btnScopeFilter.showsMenuAsPrimaryAction = true
+        }
+        configMenu()
+    }
+
+    @objc func refresh(_ sender: UIRefreshControl) {
         refresh()
         _ = vmBase.textFilter_ <~> sbTextFilter.searchTextField.rx.textInput
         _ = vmBase.scopeFilter_ ~> btnScopeFilter.rx.title(for: .normal)
     }
 
-    @objc func refresh(_ sender: UIRefreshControl) {
-        refresh()
-    }
-
     func refresh() {
-    }
-
-    @IBAction func showScopeFilterDropDown(_ sender: AnyObject) {
-        ddScopeFilter.show()
     }
 
     func itemForRow(row: Int) -> (MPhraseProtocol & NSObject)? {
