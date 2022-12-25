@@ -7,13 +7,12 @@
 //
 
 import UIKit
-import DropDown
 import Combine
 
 class ReviewOptionsViewController: UITableViewController {
 
     @IBOutlet weak var reviewModeCell: UITableViewCell!
-    @IBOutlet weak var lblReviewMode: UILabel!
+    @IBOutlet weak var btnReviewMode: UIButton!
     @IBOutlet weak var swOrder: UISwitch!
     @IBOutlet weak var swSpeak: UISwitch!
     @IBOutlet weak var swOnRepeat: UISwitch!
@@ -26,21 +25,25 @@ class ReviewOptionsViewController: UITableViewController {
     var options: MReviewOptions!
     var vm: ReviewOptionsViewModel!
     var complete: (() -> Void)?
-    let ddReviewMode = DropDown()
     var subscriptions = Set<AnyCancellable>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         vm = ReviewOptionsViewModel(options: options)
 
-        ddReviewMode.anchorView = reviewModeCell
-        ddReviewMode.dataSource = SettingsViewModel.reviewModes
-        ddReviewMode.selectionAction = { [unowned self] (index: Int, item: String) in
-            self.vm.optionsEdit.mode = index
-            self.vm.optionsEdit.modeString = item
+        func configMenu() {
+            btnReviewMode.menu = UIMenu(title: "", options: .displayInline, children: SettingsViewModel.reviewModes.enumerated().map { index, item in
+                UIAction(title: item, state: index == vm.optionsEdit.mode ? .on : .off) { [unowned self] _ in
+                    vm.optionsEdit.mode = index
+                    vm.optionsEdit.modeString = item
+                    configMenu()
+                }
+            })
+            btnReviewMode.showsMenuAsPrimaryAction = true
         }
+        configMenu()
 
-        vm.optionsEdit.$modeString ~> (lblReviewMode, \.text!) ~ subscriptions
+        vm.optionsEdit.$modeString ~> (btnReviewMode, \.titleNormal) ~ subscriptions
         vm.optionsEdit.$shuffled <~> swOrder.isOnProperty ~ subscriptions
         vm.optionsEdit.$speakingEnabled <~> swSpeak.isOnProperty ~ subscriptions
         vm.optionsEdit.$onRepeat <~> swOnRepeat.isOnProperty ~ subscriptions
@@ -49,12 +52,6 @@ class ReviewOptionsViewController: UITableViewController {
         vm.optionsEdit.$groupSelected.map { String($0) }.eraseToAnyPublisher() ~> (tfGroupSelected, \.text2) ~ subscriptions
         vm.optionsEdit.$groupCount.map { String($0) }.eraseToAnyPublisher() ~> (tfGroupCount, \.text2) ~ subscriptions
         vm.optionsEdit.$reviewCount.map { String($0) }.eraseToAnyPublisher() ~> (tfReviewCount, \.text2) ~ subscriptions
-    }
-
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 0 {
-            ddReviewMode.show()
-        }
     }
 
     deinit {

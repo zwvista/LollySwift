@@ -729,18 +729,17 @@
                                                     <color key="textColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Review(Auto)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M7I-ky-V51">
-                                                    <rect key="frame" x="292" y="11.5" width="102" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rxo-XX-BM9">
+                                                    <rect key="frame" x="278" y="4.5" width="126" height="35"/>
+                                                    <state key="normal" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="plain" title="Review(Auto)"/>
+                                                </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="M7I-ky-V51" firstAttribute="centerY" secondItem="j6F-e7-U8j" secondAttribute="centerY" id="Qn1-lL-mrN"/>
+                                                <constraint firstItem="Rxo-XX-BM9" firstAttribute="centerY" secondItem="j6F-e7-U8j" secondAttribute="centerY" id="H2i-yR-52y"/>
                                                 <constraint firstItem="yLb-bF-jaF" firstAttribute="centerY" secondItem="j6F-e7-U8j" secondAttribute="centerY" id="SBp-nU-C7g"/>
                                                 <constraint firstItem="yLb-bF-jaF" firstAttribute="leading" secondItem="j6F-e7-U8j" secondAttribute="leadingMargin" id="X6a-ju-Od6"/>
-                                                <constraint firstAttribute="trailing" secondItem="M7I-ky-V51" secondAttribute="trailing" constant="20" id="giq-Sk-vbO"/>
+                                                <constraint firstAttribute="trailing" secondItem="Rxo-XX-BM9" secondAttribute="trailing" constant="10" id="ZZF-ce-vgU"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -987,7 +986,7 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="lblReviewMode" destination="M7I-ky-V51" id="ra1-w2-HXR"/>
+                        <outlet property="btnReviewMode" destination="Rxo-XX-BM9" id="XvX-5T-dgp"/>
                         <outlet property="reviewModeCell" destination="pi7-3O-CBE" id="2ae-Jh-MN6"/>
                         <outlet property="swMoveForward" destination="pkP-oH-Msn" id="OCt-f9-gAb"/>
                         <outlet property="swOnRepeat" destination="9td-jn-LK0" id="qgD-bu-Gw7"/>
