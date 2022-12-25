@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import DropDown
 import Combine
 
 class PhrasesBaseViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate {
@@ -17,20 +16,28 @@ class PhrasesBaseViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var btnScopeFilter: UIButton!
     let refreshControl = UIRefreshControl()
 
-    let ddScopeFilter = DropDown()
     var vmBase: PhrasesBaseViewModel! { nil }
     var subscriptions = Set<AnyCancellable>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        ddScopeFilter.anchorView = btnScopeFilter
-        ddScopeFilter.dataSource = SettingsViewModel.arrScopePhraseFilters
-        ddScopeFilter.selectRow(0)
-        ddScopeFilter.selectionAction = { [unowned self] (index: Int, item: String) in
-            vmBase.scopeFilter = item
-        }
         tableView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
+        refresh(refreshControl)
+
+        func configMenu() {
+            btnScopeFilter.menu = UIMenu(title: "", options: .displayInline, children: SettingsViewModel.arrScopePhraseFilters.enumerated().map { index, item in
+                UIAction(title: item, state: item == vmBase.scopeFilter ? .on : .off) { [unowned self] _ in
+                    vmBase.scopeFilter = item
+                    configMenu()
+                }
+            })
+            btnScopeFilter.showsMenuAsPrimaryAction = true
+        }
+        configMenu()
+    }
+
+    @objc func refresh(_ sender: UIRefreshControl) {
         refresh()
         vmBase.$textFilter <~> sbTextFilter.searchTextField.textProperty ~ subscriptions
         vmBase.$scopeFilter ~> (btnScopeFilter, \.titleNormal) ~ subscriptions
@@ -42,15 +49,7 @@ class PhrasesBaseViewController: UIViewController, UITableViewDelegate, UITableV
         } ~ subscriptions
     }
 
-    @objc func refresh(_ sender: UIRefreshControl) {
-        refresh()
-    }
-
     func refresh() {
-    }
-
-    @IBAction func showScopeFilterDropDown(_ sender: AnyObject) {
-        ddScopeFilter.show()
     }
 
     func itemForRow(row: Int) -> (MPhraseProtocol & NSObject)? {
