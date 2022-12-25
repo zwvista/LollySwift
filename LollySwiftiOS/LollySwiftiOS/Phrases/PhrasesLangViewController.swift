@@ -17,10 +17,6 @@ class PhrasesLangViewController: PhrasesBaseViewController {
     var arrPhrases: [MLangPhrase] { vm.arrPhrasesFiltered }
     override var vmBase: PhrasesBaseViewModel! { vm }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-
     override func refresh() {
         view.showBlurLoader()
         vm = PhrasesLangViewModel(settings: vmSettings, needCopy: false) {
@@ -28,6 +24,9 @@ class PhrasesLangViewController: PhrasesBaseViewController {
             self.tableView.reloadData()
             self.view.removeBlurLoader()
         }
+        vm.arrPhrasesFiltered_.subscribe { [unowned self] _ in
+            tableView.reloadData()
+        } ~ rx.disposeBag
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

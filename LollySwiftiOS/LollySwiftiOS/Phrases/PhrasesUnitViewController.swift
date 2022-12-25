@@ -13,22 +13,21 @@ import RxBinding
 
 class PhrasesUnitViewController: PhrasesBaseViewController {
 
+    @IBOutlet weak var btnEdit: UIBarButtonItem!
+
     var vm: PhrasesUnitViewModel!
     var arrPhrases: [MUnitPhrase] { vm.arrPhrasesFiltered }
-    @IBOutlet weak var btnEdit: UIBarButtonItem!
     override var vmBase: PhrasesBaseViewModel! { vm }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
 
     override func refresh() {
         view.showBlurLoader()
         vm = PhrasesUnitViewModel(settings: vmSettings, inTextbook: true, needCopy: false) {
             self.refreshControl.endRefreshing()
-            self.tableView.reloadData()
             self.view.removeBlurLoader()
         }
+        vm.arrPhrasesFiltered_.subscribe { [unowned self] _ in
+            tableView.reloadData()
+        } ~ rx.disposeBag
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

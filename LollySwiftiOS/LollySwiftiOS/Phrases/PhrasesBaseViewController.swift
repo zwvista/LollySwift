@@ -77,9 +77,6 @@ class PhrasesBaseViewController: UIViewController, UITableViewDelegate, UITableV
         0
     }
 
-    func applyFilters() {
-    }
-
     deinit {
         print("DEBUG: \(self.className) deinit")
     }

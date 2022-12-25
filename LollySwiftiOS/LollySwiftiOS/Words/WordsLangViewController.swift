@@ -17,17 +17,15 @@ class WordsLangViewController: WordsBaseViewController {
     var arrWords: [MLangWord] { vm.arrWordsFiltered }
     override var vmBase: WordsBaseViewModel! { vm }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-
     override func refresh() {
         view.showBlurLoader()
         vm = WordsLangViewModel(settings: vmSettings, needCopy: false) {
             self.refreshControl.endRefreshing()
-            self.tableView.reloadData()
             self.view.removeBlurLoader()
         }
+        vm.arrWordsFiltered_.subscribe { [unowned self] _ in
+            tableView.reloadData()
+        } ~ rx.disposeBag
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

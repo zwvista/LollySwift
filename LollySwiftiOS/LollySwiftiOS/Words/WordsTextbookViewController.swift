@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import DropDown
 import RxSwift
 import NSObject_Rx
 import RxBinding
@@ -18,31 +17,29 @@ class WordsTextbookViewController: WordsBaseViewController {
     var arrWords: [MUnitWord] { vm.arrWordsFiltered }
 
     @IBOutlet weak var btnTextbookFilter: UIButton!
-    let ddTextbookFilter = DropDown()
     override var vmBase: WordsBaseViewModel! { vm }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        ddTextbookFilter.anchorView = btnTextbookFilter
-        ddTextbookFilter.dataSource = vmSettings.arrTextbookFilters.map(\.label)
-        ddTextbookFilter.selectRow(0)
-        ddTextbookFilter.selectionAction = { [unowned self] (index: Int, item: String) in
-            self.vmBase.stringTextbookFilter = item
-        }
-        _ = vmBase.stringTextbookFilter_ ~> btnTextbookFilter.rx.title(for: .normal)
-    }
 
     override func refresh() {
         view.showBlurLoader()
         vm = WordsUnitViewModel(settings: vmSettings, inTextbook: false, needCopy: false) {
             self.refreshControl.endRefreshing()
-            self.tableView.reloadData()
             self.view.removeBlurLoader()
         }
-    }
+        _ = vmBase.stringTextbookFilter_ ~> btnTextbookFilter.rx.title(for: .normal)
+        vm.arrWordsFiltered_.subscribe { [unowned self] _ in
+            tableView.reloadData()
+        } ~ rx.disposeBag
 
-    @IBAction func showTextbookFilterDropDown(_ sender: AnyObject) {
-        ddTextbookFilter.show()
+        func configMenu() {
+            btnTextbookFilter.menu = UIMenu(title: "", options: .displayInline, children: vmSettings.arrTextbookFilters.map(\.label).enumerated().map { index, item in
+                UIAction(title: item, state: item == vmBase.stringTextbookFilter ? .on : .off) { [unowned self] _ in
+                    self.vmBase.stringTextbookFilter = item
+                    configMenu()
+                }
+            })
+            btnTextbookFilter.showsMenuAsPrimaryAction = true
+        }
+        configMenu()
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

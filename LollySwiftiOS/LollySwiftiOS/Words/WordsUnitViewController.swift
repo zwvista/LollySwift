@@ -13,22 +13,21 @@ import RxBinding
 
 class WordsUnitViewController: WordsBaseViewController {
 
+    @IBOutlet weak var btnEdit: UIBarButtonItem!
+
     var vm: WordsUnitViewModel!
     var arrWords: [MUnitWord] { vm.arrWordsFiltered }
-    @IBOutlet weak var btnEdit: UIBarButtonItem!
     override var vmBase: WordsBaseViewModel! { vm }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
 
     override func refresh() {
         view.showBlurLoader()
         vm = WordsUnitViewModel(settings: vmSettings, inTextbook: true, needCopy: false) {
             self.refreshControl.endRefreshing()
-            self.tableView.reloadData()
             self.view.removeBlurLoader()
         }
+        vm.arrWordsFiltered_.subscribe { [unowned self] _ in
+            tableView.reloadData()
+        } ~ rx.disposeBag
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
