@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import DropDown
 import Combine
 
 class PhrasesUnitBatchEditViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
@@ -16,40 +15,26 @@ class PhrasesUnitBatchEditViewController: UIViewController, UITableViewDelegate,
     @IBOutlet weak var tvPhrases: UITableView!
     @IBOutlet weak var swUnit: UISwitch!
     @IBOutlet weak var tfUnit: UITextField!
+    @IBOutlet weak var btnUnit: UIButton!
     @IBOutlet weak var swPart: UISwitch!
     @IBOutlet weak var tfPart: UITextField!
+    @IBOutlet weak var btnPart: UIButton!
     @IBOutlet weak var swSeqNum: UISwitch!
     @IBOutlet weak var tfSeqNum: UITextField!
 
     var vm: PhrasesUnitViewModel!
-    let ddUnit = DropDown()
-    let ddPart = DropDown()
 
     override func viewDidLoad() {
         super.viewDidLoad()
     }
 
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        if textField === tfUnit {
-            if swUnit.isOn {
-                self.view.endEditing(true)
-                ddUnit.show()
-            }
-            return false
-        } else if textField === tfPart {
-            if swPart.isOn {
-                self.view.endEditing(true)
-                ddPart.show()
-            }
-            return false
-        } else {
-            return textField === tfSeqNum ? swSeqNum.isOn : true
-        }
+        return textField === tfSeqNum ? swSeqNum.isOn : true
     }
 
     func onDone() async {
-        let unit = vmSettings.arrUnits[ddUnit.indexForSelectedRow!].value
-        let part = vmSettings.arrParts[ddPart.indexForSelectedRow!].value
+        let unit = vmSettings.arrUnits.first { $0.label == tfUnit.text }!.value
+        let part = vmSettings.arrParts.first { $0.label == tfPart.text }!.value
         let seqnum = Int(tfSeqNum.text ?? "") ?? 0
         for i in 0..<vm.arrPhrases.count {
             let cell = tvPhrases.cellForRow(at: IndexPath(row: i, section: 0))!
@@ -80,23 +65,35 @@ class PhrasesUnitBatchEditViewController: UIViewController, UITableViewDelegate,
             case 0:
                 tfUnit = cell.tf
                 tfUnit.text = vmSettings.arrUnits.first { $0.value == vmSettings.USUNITTO }!.label
-                ddUnit.anchorView = tfUnit
-                ddUnit.dataSource = vmSettings.arrUnits.map(\.label)
-                ddUnit.selectRow(vmSettings.arrUnits.firstIndex { $0.value == vmSettings.USUNITTO }!)
-                ddUnit.selectionAction = { [unowned self] (index: Int, item: String) in
-                    self.tfUnit.text = item
-                }
+                btnUnit = cell.btn
                 swUnit = cell.sw
+
+                func configMenuUnit() {
+                    btnUnit.menu = UIMenu(title: "", options: .displayInline, children: vmSettings.arrUnits.map(\.label).enumerated().map { index, item in
+                        UIAction(title: item, state: item == tfUnit.text ? .on : .off) { [unowned self] _ in
+                            tfUnit.text = item
+                            configMenuUnit()
+                        }
+                    })
+                    btnUnit.showsMenuAsPrimaryAction = true
+                }
+                configMenuUnit()
             case 1:
                 tfPart = cell.tf
                 tfPart.text = vmSettings.arrParts.first { $0.value == vmSettings.USPARTTO }!.label
-                ddPart.anchorView = tfPart
-                ddPart.dataSource = vmSettings.arrParts.map(\.label)
-                ddPart.selectRow(vmSettings.arrParts.firstIndex { $0.value == vmSettings.USPARTTO }!)
-                ddPart.selectionAction = { [unowned self] (index: Int, item: String) in
-                    self.tfPart.text = item
-                }
+                btnPart = cell.btn
                 swPart = cell.sw
+
+                func configMenuPart() {
+                    btnPart.menu = UIMenu(title: "", options: .displayInline, children: vmSettings.arrParts.map(\.label).enumerated().map { index, item in
+                        UIAction(title: item, state: item == tfPart.text ? .on : .off) { [unowned self] _ in
+                            tfPart.text = item
+                            configMenuPart()
+                        }
+                    })
+                    btnPart.showsMenuAsPrimaryAction = true
+                }
+                configMenuPart()
             case 2:
                 tfSeqNum = cell.tf
                 swSeqNum = cell.sw
@@ -120,5 +117,6 @@ class PhrasesUnitBatchEditViewController: UIViewController, UITableViewDelegate,
 
 class PhrasesUnitBatchEditCell: PhrasesCommonCell {
     @IBOutlet weak var tf: UITextField!
+    @IBOutlet weak var btn: UIButton!
     @IBOutlet weak var sw: UISwitch!
 }

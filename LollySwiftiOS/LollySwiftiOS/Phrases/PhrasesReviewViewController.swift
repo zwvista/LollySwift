@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import DropDown
 import Combine
 
 class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
@@ -30,7 +29,6 @@ class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
 
     var vm: PhrasesReviewViewModel!
     var isSpeaking = false
-    let ddReviewMode = DropDown()
     var subscriptions = Set<AnyCancellable>()
 
     override func viewDidLoad() {
