@@ -36,12 +36,6 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
             btnScopeFilter.showsMenuAsPrimaryAction = true
         }
         configMenu()
-
-        vm.$textFilter <~> sbTextFilter.searchTextField.textProperty ~ subscriptions
-        vm.$scopeFilter ~> (btnScopeFilter, \.titleNormal) ~ subscriptions
-        vm.$arrPatternsFiltered.didSet.sink { [unowned self] _ in
-            tableView.reloadData()
-        } ~ subscriptions
     }
 
     @objc func refresh(_ sender: UIRefreshControl) {
@@ -51,6 +45,11 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
             self.tableView.reloadData()
             self.view.removeBlurLoader()
         }
+        vm.$textFilter <~> sbTextFilter.searchTextField.textProperty ~ subscriptions
+        vm.$scopeFilter ~> (btnScopeFilter, \.titleNormal) ~ subscriptions
+        vm.$arrPatternsFiltered.didSet.sink { [unowned self] _ in
+            tableView.reloadData()
+        } ~ subscriptions
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
