@@ -195,20 +195,32 @@
                                                     <color key="textColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JJO-ae-nMl">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JJO-ae-nMl">
                                                     <rect key="frame" x="120" y="10" width="203" height="34.5"/>
                                                     <color key="textColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="S00-gr-wxz" id="foC-K8-pmo"/>
+                                                    </connections>
                                                 </textField>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aes-T7-Ril">
+                                                    <rect key="frame" x="120" y="10" width="203" height="34.5"/>
+                                                    <state key="normal" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="plain"/>
+                                                </button>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Gy4-JK-a8U">
                                                     <rect key="frame" x="345" y="12" width="51" height="31"/>
                                                 </switch>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="bottomMargin" secondItem="JJO-ae-nMl" secondAttribute="bottom" constant="-1" id="6Zf-U0-m7J"/>
+                                                <constraint firstItem="aes-T7-Ril" firstAttribute="leading" secondItem="JJO-ae-nMl" secondAttribute="leading" id="EHp-nM-x75"/>
                                                 <constraint firstItem="Gy4-JK-a8U" firstAttribute="centerY" secondItem="7ck-NA-5qt" secondAttribute="centerY" id="QP8-3S-pdg"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="Gy4-JK-a8U" secondAttribute="trailing" id="Sg3-QM-gCL"/>
+                                                <constraint firstItem="aes-T7-Ril" firstAttribute="trailing" secondItem="JJO-ae-nMl" secondAttribute="trailing" id="UdG-sU-q6u"/>
+                                                <constraint firstItem="aes-T7-Ril" firstAttribute="bottom" secondItem="JJO-ae-nMl" secondAttribute="bottom" id="X5b-eb-GXc"/>
+                                                <constraint firstItem="aes-T7-Ril" firstAttribute="top" secondItem="JJO-ae-nMl" secondAttribute="top" id="fp7-JJ-6uf"/>
                                                 <constraint firstItem="Gy4-JK-a8U" firstAttribute="leading" secondItem="JJO-ae-nMl" secondAttribute="trailing" constant="22" id="kCe-EF-O5O"/>
                                                 <constraint firstItem="rGt-a6-bEn" firstAttribute="top" secondItem="7ck-NA-5qt" secondAttribute="topMargin" constant="3" id="pe2-pB-RCp"/>
                                                 <constraint firstItem="JJO-ae-nMl" firstAttribute="top" secondItem="7ck-NA-5qt" secondAttribute="topMargin" constant="-1" id="qJ1-Iv-KDm"/>
@@ -217,6 +229,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="btn" destination="aes-T7-Ril" id="n1S-Go-Gjd"/>
                                             <outlet property="sw" destination="Gy4-JK-a8U" id="23P-RQ-p5e"/>
                                             <outlet property="tf" destination="JJO-ae-nMl" id="Gp4-Gj-fM8"/>
                                         </connections>
@@ -234,28 +247,41 @@
                                                     <color key="textColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wif-Vc-ppE">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wif-Vc-ppE">
                                                     <rect key="frame" x="120" y="10" width="203" height="34.5"/>
                                                     <color key="textColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="S00-gr-wxz" id="0nA-0T-oMd"/>
+                                                    </connections>
                                                 </textField>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6xL-ml-Ea0">
+                                                    <rect key="frame" x="120" y="10" width="203" height="34.5"/>
+                                                    <state key="normal" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="plain"/>
+                                                </button>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Cwx-8H-Wdo">
                                                     <rect key="frame" x="345" y="12" width="51" height="31"/>
                                                 </switch>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailingMargin" secondItem="Cwx-8H-Wdo" secondAttribute="trailing" id="1fH-C3-uxO"/>
+                                                <constraint firstItem="6xL-ml-Ea0" firstAttribute="top" secondItem="Wif-Vc-ppE" secondAttribute="top" id="5m5-t6-VPD"/>
+                                                <constraint firstItem="6xL-ml-Ea0" firstAttribute="bottom" secondItem="Wif-Vc-ppE" secondAttribute="bottom" id="7u3-Xa-LyI"/>
+                                                <constraint firstItem="6xL-ml-Ea0" firstAttribute="leading" secondItem="Wif-Vc-ppE" secondAttribute="leading" id="87i-YV-f51"/>
                                                 <constraint firstItem="Wif-Vc-ppE" firstAttribute="top" secondItem="agX-Vz-8em" secondAttribute="topMargin" constant="-1" id="8cN-cP-bRy"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="Wif-Vc-ppE" secondAttribute="bottom" constant="-1" id="8jw-bk-XsR"/>
                                                 <constraint firstItem="18O-m8-rgJ" firstAttribute="top" secondItem="agX-Vz-8em" secondAttribute="topMargin" constant="3" id="DFB-sH-LTG"/>
                                                 <constraint firstItem="Cwx-8H-Wdo" firstAttribute="leading" secondItem="Wif-Vc-ppE" secondAttribute="trailing" constant="22" id="VNN-3i-Dq5"/>
                                                 <constraint firstItem="Cwx-8H-Wdo" firstAttribute="centerY" secondItem="agX-Vz-8em" secondAttribute="centerY" id="mRI-1O-uvI"/>
+                                                <constraint firstItem="6xL-ml-Ea0" firstAttribute="trailing" secondItem="Wif-Vc-ppE" secondAttribute="trailing" id="miC-JQ-7Kg"/>
                                                 <constraint firstItem="Wif-Vc-ppE" firstAttribute="leading" secondItem="agX-Vz-8em" secondAttribute="leadingMargin" constant="100" id="v3L-Z1-0yq"/>
                                                 <constraint firstItem="18O-m8-rgJ" firstAttribute="leading" secondItem="agX-Vz-8em" secondAttribute="leadingMargin" id="zWI-Ij-LWh"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="btn" destination="6xL-ml-Ea0" id="kQw-48-ncV"/>
                                             <outlet property="sw" destination="Cwx-8H-Wdo" id="wEE-g0-2Um"/>
                                             <outlet property="tf" destination="Wif-Vc-ppE" id="RLR-Um-GBg"/>
                                         </connections>
@@ -278,6 +304,9 @@
                                                     <color key="textColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="S00-gr-wxz" id="QWo-sC-jMV"/>
+                                                    </connections>
                                                 </textField>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="i1T-tK-tEn">
                                                     <rect key="frame" x="345" y="12" width="51" height="31"/>

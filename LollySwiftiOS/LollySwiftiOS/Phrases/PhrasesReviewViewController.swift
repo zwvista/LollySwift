@@ -8,7 +8,6 @@
 
 import UIKit
 import RxSwift
-import DropDown
 import NSObject_Rx
 import RxBinding
 
@@ -32,8 +31,6 @@ class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var svMoveForward: UIStackView!
 
     var isSpeaking = false
-
-    let ddReviewMode = DropDown()
 
     override func viewDidLoad() {
         super.viewDidLoad()
