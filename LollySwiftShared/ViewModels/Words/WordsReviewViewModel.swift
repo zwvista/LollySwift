@@ -205,6 +205,6 @@ class WordsReviewViewModel: WordsBaseViewModel {
 
     deinit {
         print("DEBUG: \(self.className) deinit")
-        subscriptionTimer?.dispose()
+        subscriptionTimer?.cancel()
     }
 }
