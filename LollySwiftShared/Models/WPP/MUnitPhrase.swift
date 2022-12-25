@@ -120,10 +120,14 @@ class MUnitPhrase: NSObject, Codable, MPhraseProtocol {
 class MUnitPhraseEdit {
     let ID: BehaviorRelay<String>
     let TEXTBOOKNAME: BehaviorRelay<String>
-    let UNITSTR: BehaviorRelay<String>
-    let indexUNIT: BehaviorRelay<Int>
-    let PARTSTR: BehaviorRelay<String>
-    let indexPART: BehaviorRelay<Int>
+    let UNITSTR_: BehaviorRelay<String>
+    var UNITSTR: String { get { UNITSTR_.value } set { UNITSTR_.accept(newValue) } }
+    let indexUNIT_: BehaviorRelay<Int>
+    var indexUNIT: Int { get { indexUNIT_.value } set { indexUNIT_.accept(newValue) } }
+    let PARTSTR_: BehaviorRelay<String>
+    var PARTSTR: String { get { PARTSTR_.value } set { PARTSTR_.accept(newValue) } }
+    let indexPART_: BehaviorRelay<Int>
+    var indexPART: Int { get { indexPART_.value } set { indexPART_.accept(newValue) } }
     let SEQNUM: BehaviorRelay<String>
     let PHRASEID: BehaviorRelay<String>
     let PHRASE: BehaviorRelay<String>
@@ -133,10 +137,10 @@ class MUnitPhraseEdit {
     init(x: MUnitPhrase) {
         ID = BehaviorRelay(value: String(x.ID))
         TEXTBOOKNAME = BehaviorRelay(value: x.TEXTBOOKNAME)
-        UNITSTR = BehaviorRelay(value: x.UNITSTR)
-        indexUNIT = BehaviorRelay(value: x.textbook.arrUnits.firstIndex { $0.value == x.UNIT } ?? -1)
-        PARTSTR = BehaviorRelay(value: x.PARTSTR)
-        indexPART = BehaviorRelay(value: x.textbook.arrParts.firstIndex { $0.value == x.PART } ?? -1)
+        UNITSTR_ = BehaviorRelay(value: x.UNITSTR)
+        indexUNIT_ = BehaviorRelay(value: x.textbook.arrUnits.firstIndex { $0.value == x.UNIT } ?? -1)
+        PARTSTR_ = BehaviorRelay(value: x.PARTSTR)
+        indexPART_ = BehaviorRelay(value: x.textbook.arrParts.firstIndex { $0.value == x.PART } ?? -1)
         SEQNUM = BehaviorRelay(value: String(x.SEQNUM))
         PHRASEID = BehaviorRelay(value: String(x.PHRASEID))
         PHRASE = BehaviorRelay(value: x.PHRASE)
@@ -144,11 +148,11 @@ class MUnitPhraseEdit {
     }
 
     func save(to x: MUnitPhrase) {
-        if indexUNIT.value != -1 {
-            x.UNIT = x.textbook.arrUnits[indexUNIT.value].value
+        if indexUNIT != -1 {
+            x.UNIT = x.textbook.arrUnits[indexUNIT].value
         }
-        if indexPART.value != -1 {
-            x.PART = x.textbook.arrUnits[indexPART.value].value
+        if indexPART != -1 {
+            x.PART = x.textbook.arrUnits[indexPART].value
         }
         x.SEQNUM = Int(SEQNUM.value)!
         x.PHRASE = PHRASE.value

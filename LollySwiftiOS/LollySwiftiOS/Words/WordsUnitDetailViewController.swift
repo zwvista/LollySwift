@@ -7,15 +7,16 @@
 //
 
 import UIKit
-import DropDown
 import RxSwift
 import RxBinding
 
-class WordsUnitDetailViewController: UITableViewController, UITextFieldDelegate {
+class WordsUnitDetailViewController: UITableViewController {
 
     @IBOutlet weak var tfID: UITextField!
     @IBOutlet weak var tfUnit: UITextField!
+    @IBOutlet weak var btnUnit: UIButton!
     @IBOutlet weak var tfPart: UITextField!
+    @IBOutlet weak var btnPart: UIButton!
     @IBOutlet weak var tfSeqNum: UITextField!
     @IBOutlet weak var tfWordID: UITextField!
     @IBOutlet weak var tfWord: UITextField!
@@ -27,8 +28,6 @@ class WordsUnitDetailViewController: UITableViewController, UITextFieldDelegate 
     var vmEdit: WordsUnitDetailViewModel!
     var item: MUnitWord { vmEdit.item }
     var itemEdit: MUnitWordEdit { vmEdit.itemEdit }
-    let ddUnit = DropDown()
-    let ddPart = DropDown()
 
     func startEdit(vm: WordsUnitViewModel, item: MUnitWord, phraseid: Int) {
         vmEdit = WordsUnitDetailViewModel(vm: vm, item: item, phraseid: phraseid) {
@@ -39,25 +38,33 @@ class WordsUnitDetailViewController: UITableViewController, UITextFieldDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        ddUnit.anchorView = tfUnit
-        ddUnit.dataSource = vmSettings.arrUnits.map(\.label)
-        ddUnit.selectRow(itemEdit.indexUNIT.value)
-        ddUnit.selectionAction = { [unowned self] (index: Int, item: String) in
-            self.itemEdit.indexUNIT.accept(index)
-            self.itemEdit.UNITSTR.accept(item)
+        func configMenuUnit() {
+            btnUnit.menu = UIMenu(title: "", options: .displayInline, children: vmSettings.arrUnits.map(\.label).enumerated().map { index, item in
+                UIAction(title: item, state: index == itemEdit.indexUNIT ? .on : .off) { [unowned self] _ in
+                    itemEdit.indexUNIT = index
+                    itemEdit.UNITSTR = item
+                    configMenuUnit()
+                }
+            })
+            btnUnit.showsMenuAsPrimaryAction = true
         }
+        configMenuUnit()
 
-        ddPart.anchorView = tfPart
-        ddPart.dataSource = vmSettings.arrParts.map(\.label)
-        ddPart.selectRow(itemEdit.indexPART.value)
-        ddPart.selectionAction = { [unowned self] (index: Int, item: String) in
-            self.itemEdit.indexPART.accept(index)
-            self.itemEdit.PARTSTR.accept(item)
+        func configMenuPart() {
+            btnPart.menu = UIMenu(title: "", options: .displayInline, children: vmSettings.arrParts.map(\.label).enumerated().map { index, item in
+                UIAction(title: item, state: index == itemEdit.indexPART ? .on : .off) { [unowned self] _ in
+                    itemEdit.indexPART = index
+                    itemEdit.PARTSTR = item
+                    configMenuPart()
+                }
+            })
+            btnPart.showsMenuAsPrimaryAction = true
         }
+        configMenuPart()
 
         _ = itemEdit.ID ~> tfID.rx.text.orEmpty
-        _ = itemEdit.UNITSTR <~> tfUnit.rx.textInput
-        _ = itemEdit.PARTSTR <~> tfPart.rx.textInput
+        _ = itemEdit.UNITSTR_ <~> tfUnit.rx.textInput
+        _ = itemEdit.PARTSTR_ <~> tfPart.rx.textInput
         _ = itemEdit.SEQNUM <~> tfSeqNum.rx.textInput
         _ = itemEdit.WORDID ~> tfWordID.rx.text
         _ = itemEdit.WORD <~> tfWord.rx.textInput
@@ -71,20 +78,6 @@ class WordsUnitDetailViewController: UITableViewController, UITextFieldDelegate 
         super.viewDidAppear(animated)
         // https://stackoverflow.com/questions/7525437/how-to-set-focus-to-a-textfield-in-iphone
         (vmEdit.isAdd ? tfWord : tfNote).becomeFirstResponder()
-    }
-
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        if textField === tfUnit {
-            self.view.endEditing(true)
-            ddUnit.show()
-            return false
-        } else if textField === tfPart {
-            self.view.endEditing(true)
-            ddPart.show()
-            return false
-        } else {
-            return true
-        }
     }
 
     deinit {

@@ -492,23 +492,29 @@
                                                     <color key="textColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wgk-3h-Eh0">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wgk-3h-Eh0">
                                                     <rect key="frame" x="120" y="10" width="274" height="24"/>
                                                     <color key="textColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
-                                                    <connections>
-                                                        <outlet property="delegate" destination="QN4-GC-g9m" id="Qs6-lk-SYn"/>
-                                                    </connections>
                                                 </textField>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bpk-kc-eg7">
+                                                    <rect key="frame" x="120" y="10" width="274" height="24"/>
+                                                    <state key="normal" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="plain"/>
+                                                </button>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="Bpk-kc-eg7" firstAttribute="trailing" secondItem="Wgk-3h-Eh0" secondAttribute="trailing" id="0VZ-1I-dlZ"/>
+                                                <constraint firstItem="Bpk-kc-eg7" firstAttribute="top" secondItem="Wgk-3h-Eh0" secondAttribute="top" id="3nH-KQ-VIj"/>
                                                 <constraint firstItem="Wgk-3h-Eh0" firstAttribute="trailing" secondItem="kW5-lZ-5OF" secondAttribute="trailingMargin" id="4QB-3i-At6"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="Wgk-3h-Eh0" secondAttribute="bottom" constant="-1" id="DSR-en-Aoe"/>
                                                 <constraint firstItem="jFt-Ts-C2L" firstAttribute="top" secondItem="kW5-lZ-5OF" secondAttribute="topMargin" constant="3" id="hoO-4k-Ask"/>
+                                                <constraint firstItem="Bpk-kc-eg7" firstAttribute="leading" secondItem="Wgk-3h-Eh0" secondAttribute="leading" id="o13-vu-UE8"/>
                                                 <constraint firstItem="Wgk-3h-Eh0" firstAttribute="top" secondItem="kW5-lZ-5OF" secondAttribute="topMargin" constant="-1" id="oEl-Wg-505"/>
                                                 <constraint firstItem="Wgk-3h-Eh0" firstAttribute="leading" secondItem="kW5-lZ-5OF" secondAttribute="leadingMargin" constant="100" id="vdB-3f-8in"/>
                                                 <constraint firstItem="jFt-Ts-C2L" firstAttribute="leading" secondItem="kW5-lZ-5OF" secondAttribute="leadingMargin" id="yix-B3-kS9"/>
+                                                <constraint firstItem="Bpk-kc-eg7" firstAttribute="bottom" secondItem="Wgk-3h-Eh0" secondAttribute="bottom" id="za2-g0-y0a"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -525,23 +531,29 @@
                                                     <color key="textColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zxu-Z1-5BJ">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zxu-Z1-5BJ">
                                                     <rect key="frame" x="120" y="10" width="274" height="24"/>
                                                     <color key="textColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
-                                                    <connections>
-                                                        <outlet property="delegate" destination="QN4-GC-g9m" id="pBK-Ag-kex"/>
-                                                    </connections>
                                                 </textField>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0sQ-Rg-P1N">
+                                                    <rect key="frame" x="120" y="10" width="274" height="24"/>
+                                                    <state key="normal" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="plain"/>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="9Pz-Yy-tDS" firstAttribute="leading" secondItem="Tlw-RU-h37" secondAttribute="leadingMargin" id="6Vr-Zg-qxA"/>
+                                                <constraint firstItem="0sQ-Rg-P1N" firstAttribute="bottom" secondItem="Zxu-Z1-5BJ" secondAttribute="bottom" id="8YS-kg-5Cp"/>
+                                                <constraint firstItem="0sQ-Rg-P1N" firstAttribute="trailing" secondItem="Zxu-Z1-5BJ" secondAttribute="trailing" id="WFq-Jp-Hnb"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="Zxu-Z1-5BJ" secondAttribute="bottom" constant="-1" id="cKM-sp-lmJ"/>
                                                 <constraint firstItem="Zxu-Z1-5BJ" firstAttribute="trailing" secondItem="Tlw-RU-h37" secondAttribute="trailingMargin" id="dnM-up-p75"/>
                                                 <constraint firstItem="Zxu-Z1-5BJ" firstAttribute="top" secondItem="Tlw-RU-h37" secondAttribute="topMargin" constant="-1" id="jbw-fY-jhE"/>
                                                 <constraint firstItem="Zxu-Z1-5BJ" firstAttribute="leading" secondItem="Tlw-RU-h37" secondAttribute="leadingMargin" constant="100" id="pVv-2a-PI2"/>
+                                                <constraint firstItem="0sQ-Rg-P1N" firstAttribute="leading" secondItem="Zxu-Z1-5BJ" secondAttribute="leading" id="vYZ-UQ-lo4"/>
                                                 <constraint firstItem="9Pz-Yy-tDS" firstAttribute="top" secondItem="Tlw-RU-h37" secondAttribute="topMargin" constant="3" id="zCw-xG-eCB"/>
+                                                <constraint firstItem="0sQ-Rg-P1N" firstAttribute="top" secondItem="Zxu-Z1-5BJ" secondAttribute="top" id="zVY-Pi-bFx"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -754,6 +766,8 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="btnDone" destination="ccC-Vc-uTM" id="of0-GV-zzN"/>
+                        <outlet property="btnPart" destination="0sQ-Rg-P1N" id="e3v-Ni-j1s"/>
+                        <outlet property="btnUnit" destination="Bpk-kc-eg7" id="yHR-SS-gDB"/>
                         <outlet property="tfAccuracy" destination="Ge3-Uw-JSS" id="XSn-1A-BAJ"/>
                         <outlet property="tfFamiID" destination="hwV-4a-wRQ" id="fb6-jE-Wl0"/>
                         <outlet property="tfID" destination="htQ-El-cf2" id="2J2-js-VjY"/>
@@ -1427,22 +1441,28 @@
                                                     <color key="textColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Qhd-b2-Pc7">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Qhd-b2-Pc7">
                                                     <rect key="frame" x="120" y="10" width="274" height="24"/>
                                                     <color key="textColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
-                                                    <connections>
-                                                        <outlet property="delegate" destination="UlR-6Y-73o" id="WXw-fh-SLS"/>
-                                                    </connections>
                                                 </textField>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OYM-Rx-CZ0">
+                                                    <rect key="frame" x="120" y="10" width="274" height="24"/>
+                                                    <state key="normal" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="plain"/>
+                                                </button>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="OYM-Rx-CZ0" firstAttribute="leading" secondItem="Qhd-b2-Pc7" secondAttribute="leading" id="HSm-jb-c9O"/>
+                                                <constraint firstItem="OYM-Rx-CZ0" firstAttribute="bottom" secondItem="Qhd-b2-Pc7" secondAttribute="bottom" id="K6P-z8-GrE"/>
                                                 <constraint firstItem="Qhd-b2-Pc7" firstAttribute="top" secondItem="IzD-Vg-vd8" secondAttribute="topMargin" constant="-1" id="O5i-Jd-edn"/>
+                                                <constraint firstItem="OYM-Rx-CZ0" firstAttribute="top" secondItem="Qhd-b2-Pc7" secondAttribute="top" id="cyp-bX-Rj4"/>
                                                 <constraint firstItem="Qhd-b2-Pc7" firstAttribute="leading" secondItem="IzD-Vg-vd8" secondAttribute="leadingMargin" constant="100" id="gDC-YQ-hdf"/>
                                                 <constraint firstItem="WIQ-wg-60u" firstAttribute="leading" secondItem="IzD-Vg-vd8" secondAttribute="leadingMargin" id="hFc-qa-eFz"/>
                                                 <constraint firstItem="WIQ-wg-60u" firstAttribute="top" secondItem="IzD-Vg-vd8" secondAttribute="topMargin" constant="3" id="mUP-u2-vXW"/>
                                                 <constraint firstItem="Qhd-b2-Pc7" firstAttribute="trailing" secondItem="IzD-Vg-vd8" secondAttribute="trailingMargin" id="mmj-5p-08k"/>
+                                                <constraint firstItem="OYM-Rx-CZ0" firstAttribute="trailing" secondItem="Qhd-b2-Pc7" secondAttribute="trailing" id="phN-Rw-2uq"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="Qhd-b2-Pc7" secondAttribute="bottom" constant="-1" id="vrh-Jo-BcH"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -1460,23 +1480,29 @@
                                                     <color key="textColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="afe-ie-GmQ">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="afe-ie-GmQ">
                                                     <rect key="frame" x="120" y="10" width="274" height="24"/>
                                                     <color key="textColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
-                                                    <connections>
-                                                        <outlet property="delegate" destination="UlR-6Y-73o" id="KEq-F1-LgB"/>
-                                                    </connections>
                                                 </textField>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SJP-29-t0b">
+                                                    <rect key="frame" x="120" y="10" width="274" height="24"/>
+                                                    <state key="normal" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="plain"/>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="afe-ie-GmQ" firstAttribute="trailing" secondItem="DXv-7m-tSG" secondAttribute="trailingMargin" id="0M7-Pd-p0Q"/>
                                                 <constraint firstItem="toR-RB-skf" firstAttribute="top" secondItem="DXv-7m-tSG" secondAttribute="topMargin" constant="3" id="1oW-Q7-Qos"/>
                                                 <constraint firstItem="afe-ie-GmQ" firstAttribute="leading" secondItem="DXv-7m-tSG" secondAttribute="leadingMargin" constant="100" id="QwU-OX-pWp"/>
                                                 <constraint firstItem="toR-RB-skf" firstAttribute="leading" secondItem="DXv-7m-tSG" secondAttribute="leadingMargin" id="SwE-tf-DiJ"/>
+                                                <constraint firstItem="SJP-29-t0b" firstAttribute="bottom" secondItem="afe-ie-GmQ" secondAttribute="bottom" id="hRK-9q-hIf"/>
+                                                <constraint firstItem="SJP-29-t0b" firstAttribute="trailing" secondItem="afe-ie-GmQ" secondAttribute="trailing" id="koS-hN-IQ0"/>
                                                 <constraint firstItem="afe-ie-GmQ" firstAttribute="top" secondItem="DXv-7m-tSG" secondAttribute="topMargin" constant="-1" id="lTH-xu-Jxc"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="afe-ie-GmQ" secondAttribute="bottom" constant="-1" id="mjB-cH-tgm"/>
+                                                <constraint firstItem="SJP-29-t0b" firstAttribute="leading" secondItem="afe-ie-GmQ" secondAttribute="leading" id="oGP-D8-b7G"/>
+                                                <constraint firstItem="SJP-29-t0b" firstAttribute="top" secondItem="afe-ie-GmQ" secondAttribute="top" id="q8J-P2-zTN"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -1689,6 +1715,8 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="btnDone" destination="gTk-sv-5iO" id="BEX-XY-MQO"/>
+                        <outlet property="btnPart" destination="SJP-29-t0b" id="Wu6-OT-9tN"/>
+                        <outlet property="btnUnit" destination="OYM-Rx-CZ0" id="PvE-pr-MVc"/>
                         <outlet property="tfAccuracy" destination="xfA-0N-aLD" id="UEt-k9-ZlZ"/>
                         <outlet property="tfFamiID" destination="rhb-Xi-w4r" id="ZPh-WT-ttp"/>
                         <outlet property="tfID" destination="DSZ-QE-iAH" id="sB0-S5-oFH"/>
