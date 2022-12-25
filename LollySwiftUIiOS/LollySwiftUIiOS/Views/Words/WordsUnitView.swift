@@ -73,9 +73,26 @@ struct WordsUnitView: View {
                     }
                 }
             }
-            .alert(isPresented: $showAlert) {
-                Alert(title: Text("Word"), message: Text("More"))
-            }
+            .alert(Text("Word"), isPresented: $showAlert, actions: {
+                Button("Retrieve All Notes") {
+                    
+                }
+                Button("Retrieve Notes If Empty") {
+                    
+                }
+                Button("Clear All Notes") {
+                    
+                }
+                Button("Clear Notes If Empty") {
+                    
+                }
+                Button("Batch Edit") {
+                    
+                }
+                Button("Cancel") {}
+            }, message: {
+                Text("More")
+            })
         }
     }
 }
