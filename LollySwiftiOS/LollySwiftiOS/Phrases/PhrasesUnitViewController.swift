@@ -12,16 +12,9 @@ import Combine
 class PhrasesUnitViewController: PhrasesBaseViewController {
 
     var vm: PhrasesUnitViewModel!
-    var arrPhrases: [MUnitPhrase] { vm.arrPhrasesFiltered ?? vm.arrPhrases }
+    var arrPhrases: [MUnitPhrase] { vm.arrPhrasesFiltered }
     @IBOutlet weak var btnEdit: UIBarButtonItem!
     override var vmBase: PhrasesBaseViewModel! { vm }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        vm.$arrPhrasesFiltered.didSet.sink { [unowned self] _ in
-            tableView.reloadData()
-        } ~ subscriptions
-    }
 
     override func refresh() {
         view.showBlurLoader()
@@ -29,6 +22,9 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
             self.refreshControl.endRefreshing()
             self.view.removeBlurLoader()
         }
+        vm.$arrPhrasesFiltered.didSet.sink { [unowned self] _ in
+            tableView.reloadData()
+        } ~ subscriptions
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -7,43 +7,37 @@
 //
 
 import UIKit
-import DropDown
 import Combine
 
 class PhrasesTextbookViewController: PhrasesBaseViewController {
 
     var vm: PhrasesUnitViewModel!
-    var arrPhrases: [MUnitPhrase] { vm.arrPhrasesFiltered ?? vm.arrPhrases }
+    var arrPhrases: [MUnitPhrase] { vm.arrPhrasesFiltered }
 
     @IBOutlet weak var btnTextbookFilter: UIButton!
-    let ddTextbookFilter = DropDown()
     override var vmBase: PhrasesBaseViewModel! { vm }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        ddTextbookFilter.anchorView = btnTextbookFilter
-        ddTextbookFilter.dataSource = vmSettings.arrTextbookFilters.map(\.label)
-        ddTextbookFilter.selectRow(0)
-        ddTextbookFilter.selectionAction = { [unowned self] (index: Int, item: String) in
-            self.vmBase.stringTextbookFilter = item
-        }
-        vmBase.$stringTextbookFilter ~> (btnTextbookFilter, \.titleNormal) ~ subscriptions
-        vmBase.$stringTextbookFilter.sink { [unowned self] _ in
-            self.applyFilters()
-        } ~ subscriptions
-    }
 
     override func refresh() {
         view.showBlurLoader()
         vm = PhrasesUnitViewModel(settings: vmSettings, inTextbook: false, needCopy: false) {
             self.refreshControl.endRefreshing()
-            self.tableView.reloadData()
             self.view.removeBlurLoader()
         }
-    }
+        vmBase.$stringTextbookFilter ~> (btnTextbookFilter, \.titleNormal) ~ subscriptions
+        vm.$arrPhrasesFiltered.didSet.sink { [unowned self] _ in
+            tableView.reloadData()
+        } ~ subscriptions
 
-    @IBAction func showTextbookFilterDropDown(_ sender: AnyObject) {
-        ddTextbookFilter.show()
+        func configMenu() {
+            btnTextbookFilter.menu = UIMenu(title: "", options: .displayInline, children: vmSettings.arrTextbookFilters.map(\.label).enumerated().map { index, item in
+                UIAction(title: item, state: item == vmBase.stringTextbookFilter ? .on : .off) { [unowned self] _ in
+                    self.vmBase.stringTextbookFilter = item
+                    configMenu()
+                }
+            })
+            btnTextbookFilter.showsMenuAsPrimaryAction = true
+        }
+        configMenu()
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

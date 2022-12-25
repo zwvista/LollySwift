@@ -41,12 +41,6 @@ class PhrasesBaseViewController: UIViewController, UITableViewDelegate, UITableV
         refresh()
         vmBase.$textFilter <~> sbTextFilter.searchTextField.textProperty ~ subscriptions
         vmBase.$scopeFilter ~> (btnScopeFilter, \.titleNormal) ~ subscriptions
-        vmBase.$textFilter.sink { [unowned self] _ in
-            self.applyFilters()
-        } ~ subscriptions
-        vmBase.$scopeFilter.sink { [unowned self] _ in
-            self.applyFilters()
-        } ~ subscriptions
     }
 
     func refresh() {
@@ -82,9 +76,6 @@ class PhrasesBaseViewController: UIViewController, UITableViewDelegate, UITableV
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         0
-    }
-
-    func applyFilters() {
     }
 
     deinit {

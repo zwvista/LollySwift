@@ -15,19 +15,15 @@ class WordsUnitViewController: WordsBaseViewController {
     @IBOutlet weak var btnEdit: UIBarButtonItem!
     override var vmBase: WordsBaseViewModel! { vm }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        vm.$arrWordsFiltered.didSet.sink { [unowned self] _ in
-            tableView.reloadData()
-        } ~ subscriptions
-    }
-
     override func refresh() {
         view.showBlurLoader()
         vm = WordsUnitViewModel(settings: vmSettings, inTextbook: true, needCopy: false) {
             self.refreshControl.endRefreshing()
             self.view.removeBlurLoader()
         }
+        vm.$arrWordsFiltered.didSet.sink { [unowned self] _ in
+            tableView.reloadData()
+        } ~ subscriptions
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
