@@ -8,40 +8,24 @@
 
 import UIKit
 import WebKit
-import DropDown
 import RxSwift
 import NSObject_Rx
 import RxBinding
 
 class SearchViewController: UIViewController, WKNavigationDelegate, UISearchBarDelegate, SettingsViewModelDelegate {
-    @IBOutlet weak var wvDictHolder: UIView!
-    var dictStore: DictStore!
 
+    @IBOutlet weak var wvDictHolder: UIView!
     @IBOutlet weak var sbword: UISearchBar!
     @IBOutlet weak var btnLang: UIButton!
     @IBOutlet weak var btnDict: UIButton!
 
-    let ddLang = DropDown()
-    let ddDictReference = DropDown()
+    var dictStore: DictStore!
 
     func setup() {
         dictStore = DictStore(vmSettings: vmSettings, wvDict: addWKWebView(webViewHolder: wvDictHolder))
         dictStore.wvDict.navigationDelegate = self
         vmSettings.delegate = self
-
-        vmSettings.getData().subscribe { _ in
-            self.ddLang.anchorView = self.btnLang
-            self.ddLang.selectionAction = { (index: Int, item: String) in
-                guard index != vmSettings.selectedLangIndex else {return}
-                vmSettings.selectedLangIndex = index
-            }
-            self.ddDictReference.anchorView = self.btnDict
-            self.ddDictReference.selectionAction = { [unowned self] (index: Int, item: String) in
-                guard index != vmSettings.selectedDictReferenceIndex else {return}
-                vmSettings.selectedDictReferenceIndex = index
-                vmSettings.updateDictReference().subscribe() ~ self.rx.disposeBag
-            }
-        } ~ rx.disposeBag
+        vmSettings.getData().subscribe () ~ rx.disposeBag
     }
 
     override func viewDidLoad() {
@@ -68,29 +52,40 @@ class SearchViewController: UIViewController, WKNavigationDelegate, UISearchBarD
         dictStore.searchDict()
     }
 
-    @IBAction func showLangDropDown(_ sender: AnyObject) {
-        ddLang.show()
-    }
-
-    @IBAction func showDictDropDown(_ sender: AnyObject) {
-        ddDictReference.show()
-    }
-
     func onGetData() {
-        ddLang.dataSource = vmSettings.arrLanguages.map(\.LANGNAME)
+        func configMenuLang() {
+            btnLang.menu = UIMenu(title: "", options: .displayInline, children: vmSettings.arrLanguages.map(\.LANGNAME).enumerated().map { index, item in
+                UIAction(title: item, state: index == vmSettings.selectedLangIndex ? .on : .off) { _ in
+                    guard index != vmSettings.selectedLangIndex else {return}
+                    vmSettings.selectedLangIndex = index
+                    configMenuLang()
+                }
+            })
+            btnLang.showsMenuAsPrimaryAction = true
+        }
+        configMenuLang()
     }
 
     func onUpdateLang() {
         let item = vmSettings.selectedLang
         btnLang.setTitle(item.LANGNAME, for: .normal)
-        ddLang.selectIndex(vmSettings.selectedLangIndex)
-
-        ddDictReference.dataSource = vmSettings.arrDictsReference.map(\.DICTNAME)
     }
 
     func onUpdateDictReference() {
         btnDict.setTitle(vmSettings.selectedDictReference.DICTNAME, for: .normal)
-        ddDictReference.selectIndex(vmSettings.selectedDictReferenceIndex)
+
+        func configMenuDict() {
+            btnDict.menu = UIMenu(title: "", options: .displayInline, children: vmSettings.arrDictsReference.map(\.DICTNAME).enumerated().map { index, item in
+                UIAction(title: item, state: index == vmSettings.selectedDictReferenceIndex ? .on : .off) { _ in
+                    guard index != vmSettings.selectedDictReferenceIndex else {return}
+                    vmSettings.selectedDictReferenceIndex = index
+                    configMenuDict()
+                }
+            })
+            btnDict.showsMenuAsPrimaryAction = true
+        }
+        configMenuDict()
+
         dictStore.dict = vmSettings.selectedDictReference
         dictStore.searchDict()
     }
