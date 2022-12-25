@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import DropDown
 import RxSwift
 import NSObject_Rx
 import RxBinding
@@ -22,22 +21,22 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var btnScopeFilter: UIButton!
     let refreshControl = UIRefreshControl()
 
-    let ddScopeFilter = DropDown()
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        ddScopeFilter.anchorView = btnScopeFilter
-        ddScopeFilter.dataSource = SettingsViewModel.arrScopePatternFilters
-        ddScopeFilter.selectRow(0)
-        ddScopeFilter.selectionAction = { [unowned self] (index: Int, item: String) in
-            vm.scopeFilter = item
-        }
-        btnScopeFilter.setTitle(SettingsViewModel.arrScopePatternFilters[0], for: .normal)
         tableView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         refresh(refreshControl)
-        _ = vm.textFilter_ <~> sbTextFilter.searchTextField.rx.textInput
-        _ = vm.scopeFilter_ ~> btnScopeFilter.rx.title(for: .normal)
+
+        func configMenu() {
+            btnScopeFilter.menu = UIMenu(title: "", options: .displayInline, children: SettingsViewModel.arrScopePatternFilters.enumerated().map { index, item in
+                UIAction(title: item, state: item == vm.scopeFilter ? .on : .off) { [unowned self] _ in
+                    vm.scopeFilter = item
+                    configMenu()
+                }
+            })
+            btnScopeFilter.showsMenuAsPrimaryAction = true
+        }
+        configMenu()
     }
 
     @objc func refresh(_ sender: UIRefreshControl) {
@@ -47,10 +46,11 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
             self.tableView.reloadData()
             self.view.removeBlurLoader()
         }
-    }
-
-    @IBAction func showScopeFilterDropDown(_ sender: AnyObject) {
-        ddScopeFilter.show()
+        _ = vm.textFilter_ <~> sbTextFilter.searchTextField.rx.textInput
+        _ = vm.scopeFilter_ ~> btnScopeFilter.rx.title(for: .normal)
+        vm.arrPatternsFiltered_.subscribe { [unowned self] _ in
+            tableView.reloadData()
+        } ~ rx.disposeBag
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
