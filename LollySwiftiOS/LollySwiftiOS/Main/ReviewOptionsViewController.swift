@@ -12,6 +12,7 @@ import Combine
 class ReviewOptionsViewController: UITableViewController {
 
     @IBOutlet weak var reviewModeCell: UITableViewCell!
+    @IBOutlet weak var lblReviewMode: UILabel!
     @IBOutlet weak var btnReviewMode: UIButton!
     @IBOutlet weak var swOrder: UISwitch!
     @IBOutlet weak var swSpeak: UISwitch!
@@ -43,7 +44,7 @@ class ReviewOptionsViewController: UITableViewController {
         }
         configMenu()
 
-        vm.optionsEdit.$modeString ~> (btnReviewMode, \.titleNormal) ~ subscriptions
+        vm.optionsEdit.$modeString ~> (lblReviewMode, \.text!) ~ subscriptions
         vm.optionsEdit.$shuffled <~> swOrder.isOnProperty ~ subscriptions
         vm.optionsEdit.$speakingEnabled <~> swSpeak.isOnProperty ~ subscriptions
         vm.optionsEdit.$onRepeat <~> swOnRepeat.isOnProperty ~ subscriptions
