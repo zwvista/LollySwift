@@ -14,6 +14,7 @@ import RxBinding
 class ReviewOptionsViewController: UITableViewController {
 
     @IBOutlet weak var reviewModeCell: UITableViewCell!
+    @IBOutlet weak var lblReviewMode: UILabel!
     @IBOutlet weak var btnReviewMode: UIButton!
     @IBOutlet weak var swOrder: UISwitch!
     @IBOutlet weak var swSpeak: UISwitch!
@@ -44,7 +45,7 @@ class ReviewOptionsViewController: UITableViewController {
         }
         configMenu()
 
-        _ = vm.optionsEdit.modeString_ ~> btnReviewMode.rx.title(for: .normal)
+        _ = vm.optionsEdit.modeString_ ~> lblReviewMode.rx.text
         _ = vm.optionsEdit.shuffled <~> swOrder.rx.isOn
         _ = vm.optionsEdit.speakingEnabled <~> swSpeak.rx.isOn
         _ = vm.optionsEdit.onRepeat <~> swOnRepeat.rx.isOn
