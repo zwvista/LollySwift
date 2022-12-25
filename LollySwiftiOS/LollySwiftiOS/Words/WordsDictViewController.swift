@@ -8,7 +8,6 @@
 
 import UIKit
 import WebKit
-import DropDown
 
 class WordsDictViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, UIGestureRecognizerDelegate {
 
@@ -18,7 +17,6 @@ class WordsDictViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
 
     let dictStore = DictStore()
     let vm = WordsDictViewModel(settings: vmSettings, needCopy: false) {}
-    let ddWord = DropDown(), ddDictReference = DropDown()
     var dictStatus = DictWebViewStatus.ready
 
     override func viewDidLoad() {
@@ -35,24 +33,32 @@ class WordsDictViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
         swipeGesture2.delegate = self
         dictStore.wvDict.addGestureRecognizer(swipeGesture2)
 
-        ddWord.anchorView = btnWord
-        ddWord.dataSource = vm.arrWords
-        ddWord.selectRow(vm.currentWordIndex)
-        ddWord.selectionAction = { [unowned self] (index: Int, item: String) in
-            self.vm.currentWordIndex = index
-            self.currentWordChanged()
+        func configMenuWord() {
+            btnWord.menu = UIMenu(title: "", options: .displayInline, children: vm.arrWords.enumerated().map { index, item in
+                UIAction(title: item, state: index == vm.currentWordIndex ? .on : .off) { [unowned self] _ in
+                    vm.currentWordIndex = index
+                    currentWordChanged()
+                    configMenuWord()
+                }
+            })
+            btnWord.showsMenuAsPrimaryAction = true
         }
+        configMenuWord()
 
-        ddDictReference.anchorView = btnDict
-        ddDictReference.dataSource = vmSettings.arrDictsReference.map(\.DICTNAME)
-        ddDictReference.selectRow(vmSettings.selectedDictReferenceIndex)
-        ddDictReference.selectionAction = { [unowned self] (index: Int, item: String) in
-            vmSettings.selectedDictReferenceIndex = index
-            Task {
-                await vmSettings.updateDictReference()
-                self.selectDictChanged()
-            }
+        func configMenuDict() {
+            btnDict.menu = UIMenu(title: "", options: .displayInline, children: vmSettings.arrDictsReference.map(\.DICTNAME).enumerated().map { index, item in
+                UIAction(title: item, state: index == vm.currentWordIndex ? .on : .off) { [unowned self] _ in
+                    vmSettings.selectedDictReferenceIndex = index
+                    Task {
+                        await vmSettings.updateDictReference()
+                        self.selectDictChanged()
+                    }
+                    configMenuDict()
+                }
+            })
+            btnDict.showsMenuAsPrimaryAction = true
         }
+        configMenuDict()
 
         currentWordChanged()
     }
@@ -70,21 +76,13 @@ class WordsDictViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
         dictStore.searchDict()
     }
 
-    @IBAction func showWordDropDown(_ sender: AnyObject) {
-        ddWord.show()
-    }
-
-    @IBAction func showDictDropDown(_ sender: AnyObject) {
-        ddDictReference.show()
-    }
-
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         true
     }
 
     private func swipe(_ delta: Int) {
         vm.next(delta)
-        ddWord.selectionAction!(vm.currentWordIndex, vm.currentWord)
+        currentWordChanged()
     }
 
     @IBAction func swipeLeft(_ sender: UISwipeGestureRecognizer){
