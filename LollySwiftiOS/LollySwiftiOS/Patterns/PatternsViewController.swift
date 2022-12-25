@@ -42,7 +42,6 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
         view.showBlurLoader()
         vm = PatternsViewModel(settings: vmSettings, needCopy: false) {
             sender.endRefreshing()
-            self.tableView.reloadData()
             self.view.removeBlurLoader()
         }
         vm.$textFilter <~> sbTextFilter.searchTextField.textProperty ~ subscriptions
