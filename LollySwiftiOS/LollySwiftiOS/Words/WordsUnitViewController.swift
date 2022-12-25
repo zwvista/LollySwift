@@ -10,9 +10,10 @@ import UIKit
 
 class WordsUnitViewController: WordsBaseViewController {
 
+    @IBOutlet weak var btnEdit: UIBarButtonItem!
+
     var vm: WordsUnitViewModel!
     var arrWords: [MUnitWord] { vm.arrWordsFiltered }
-    @IBOutlet weak var btnEdit: UIBarButtonItem!
     override var vmBase: WordsBaseViewModel! { vm }
 
     override func refresh() {

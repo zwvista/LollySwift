@@ -11,9 +11,10 @@ import Combine
 
 class PhrasesUnitViewController: PhrasesBaseViewController {
 
+    @IBOutlet weak var btnEdit: UIBarButtonItem!
+
     var vm: PhrasesUnitViewModel!
     var arrPhrases: [MUnitPhrase] { vm.arrPhrasesFiltered }
-    @IBOutlet weak var btnEdit: UIBarButtonItem!
     override var vmBase: PhrasesBaseViewModel! { vm }
 
     override func refresh() {
