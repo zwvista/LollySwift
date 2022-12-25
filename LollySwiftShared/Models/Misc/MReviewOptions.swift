@@ -22,8 +22,10 @@ class MReviewOptions: NSObject {
 }
 
 class MReviewOptionsEdit {
-    let mode: BehaviorRelay<Int>
-    let modeString: BehaviorRelay<String>
+    let mode_: BehaviorRelay<Int>
+    var mode: Int { get { mode_.value } set { mode_.accept(newValue) } }
+    let modeString_: BehaviorRelay<String>
+    var modeString: String { get { modeString_.value } set { modeString_.accept(newValue) } }
     let interval: BehaviorRelay<Int>
     let shuffled: BehaviorRelay<Bool>
     let groupCount: BehaviorRelay<Int>
@@ -34,8 +36,8 @@ class MReviewOptionsEdit {
     let moveForward: BehaviorRelay<Bool>
 
     init(x: MReviewOptions) {
-        mode = BehaviorRelay(value: x.mode.rawValue)
-        modeString = BehaviorRelay(value: SettingsViewModel.reviewModes[x.mode.rawValue])
+        mode_ = BehaviorRelay(value: x.mode.rawValue)
+        modeString_ = BehaviorRelay(value: SettingsViewModel.reviewModes[x.mode.rawValue])
         interval = BehaviorRelay(value: x.interval)
         shuffled = BehaviorRelay(value: x.shuffled)
         groupCount = BehaviorRelay(value: x.groupCount)
@@ -47,7 +49,7 @@ class MReviewOptionsEdit {
     }
 
     func save(to x: MReviewOptions) {
-        x.mode = ReviewMode(rawValue: mode.value)!
+        x.mode = ReviewMode(rawValue: mode)!
         x.interval = interval.value
         x.shuffled = shuffled.value
         x.groupCount = groupCount.value
