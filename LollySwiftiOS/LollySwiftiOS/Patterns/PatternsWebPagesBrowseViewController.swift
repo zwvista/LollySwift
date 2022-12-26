@@ -8,7 +8,6 @@
 
 import UIKit
 import WebKit
-import DropDown
 import Combine
 
 class PatternsWebPagesBrowseViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, UIGestureRecognizerDelegate {
@@ -18,7 +17,6 @@ class PatternsWebPagesBrowseViewController: UIViewController, WKUIDelegate, WKNa
     weak var wvWebPage: WKWebView!
 
     var vm: PatternsWebPagesViewModel!
-    let ddWebPage = DropDown()
     var subscriptions = Set<AnyCancellable>()
 
     override func viewDidLoad() {
@@ -36,13 +34,19 @@ class PatternsWebPagesBrowseViewController: UIViewController, WKUIDelegate, WKNa
 
         Task {
             await vm.getWebPages()
-            ddWebPage.anchorView = btnWebPage
-            ddWebPage.dataSource = vm.arrWebPages.map(\.TITLE)
-            ddWebPage.selectRow(vm.currentWebPageIndex)
-            ddWebPage.selectionAction = { [unowned self] (index: Int, item: String) in
-                self.vm.currentWebPageIndex = index
-                self.currentWebPageChanged()
+
+            @MainActor
+            func configMenu() {
+                btnWebPage.menu = UIMenu(title: "", options: .displayInline, children: vm.arrWebPages.map(\.TITLE).enumerated().map { index, item in
+                    UIAction(title: item, state: index == vm.currentWebPageIndex ? .on : .off) { [unowned self] _ in
+                        vm.currentWebPageIndex = index
+                        currentWebPageChanged()
+                        configMenu()
+                    }
+                })
+                btnWebPage.showsMenuAsPrimaryAction = true
             }
+            configMenu()
             currentWebPageChanged()
         }
     }
@@ -53,17 +57,13 @@ class PatternsWebPagesBrowseViewController: UIViewController, WKUIDelegate, WKNa
         wvWebPage.load(URLRequest(url: URL(string: vm.currentWebPage.URL)!))
     }
 
-    @IBAction func showWebPageDropDown(_ sender: AnyObject) {
-        ddWebPage.show()
-    }
-
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         true
     }
 
     private func swipe(_ delta: Int) {
         vm.next(delta)
-        ddWebPage.selectionAction!(vm.currentWebPageIndex, vm.currentWebPage.TITLE)
+        currentWebPageChanged()
     }
 
     @IBAction func swipeLeft(_ sender: UISwipeGestureRecognizer){
