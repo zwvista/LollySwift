@@ -8,7 +8,6 @@
 
 import UIKit
 import WebKit
-import DropDown
 import RxSwift
 import NSObject_Rx
 import RxBinding
@@ -20,7 +19,6 @@ class PatternsWebPagesBrowseViewController: UIViewController, WKUIDelegate, WKNa
     weak var wvWebPage: WKWebView!
 
     var vm: PatternsWebPagesViewModel!
-    let ddWebPage = DropDown()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,15 +33,20 @@ class PatternsWebPagesBrowseViewController: UIViewController, WKUIDelegate, WKNa
         swipeGesture2.delegate = self
         wvWebPage.addGestureRecognizer(swipeGesture2)
 
-        vm.getWebPages().subscribe { _ in
-            self.ddWebPage.anchorView = self.btnWebPage
-            self.ddWebPage.dataSource = self.vm.arrWebPages.map(\.TITLE)
-            self.ddWebPage.selectRow(self.vm.currentWebPageIndex)
-            self.ddWebPage.selectionAction = { [unowned self] (index: Int, item: String) in
-                self.vm.currentWebPageIndex = index
-                self.currentWebPageChanged()
+        vm.getWebPages().subscribe { [unowned self] _ in
+            @MainActor
+            func configMenu() {
+                btnWebPage.menu = UIMenu(title: "", options: .displayInline, children: vm.arrWebPages.map(\.TITLE).enumerated().map { index, item in
+                    UIAction(title: item, state: index == vm.currentWebPageIndex ? .on : .off) { [unowned self] _ in
+                        vm.currentWebPageIndex = index
+                        currentWebPageChanged()
+                        configMenu()
+                    }
+                })
+                btnWebPage.showsMenuAsPrimaryAction = true
             }
-            self.currentWebPageChanged()
+            configMenu()
+            currentWebPageChanged()
         } ~ rx.disposeBag
     }
 
@@ -53,17 +56,13 @@ class PatternsWebPagesBrowseViewController: UIViewController, WKUIDelegate, WKNa
         wvWebPage.load(URLRequest(url: URL(string: vm.currentWebPage.URL)!))
     }
 
-    @IBAction func showWebPageDropDown(_ sender: AnyObject) {
-        ddWebPage.show()
-    }
-
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         true
     }
 
     private func swipe(_ delta: Int) {
         vm.next(delta)
-        ddWebPage.selectionAction!(vm.currentWebPageIndex, vm.currentWebPage.TITLE)
+        currentWebPageChanged()
     }
 
     @IBAction func swipeLeft(_ sender: UISwipeGestureRecognizer){
