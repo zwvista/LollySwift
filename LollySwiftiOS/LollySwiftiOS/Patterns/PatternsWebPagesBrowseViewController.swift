@@ -38,7 +38,7 @@ class PatternsWebPagesBrowseViewController: UIViewController, WKUIDelegate, WKNa
             @MainActor
             func configMenu() {
                 btnWebPage.menu = UIMenu(title: "", options: .displayInline, children: vm.arrWebPages.map(\.TITLE).enumerated().map { index, item in
-                    UIAction(title: item, state: index == vm.currentWebPageIndex ? .on : .off) { [unowned self] _ in
+                    UIAction(title: "\(index + 1) \(item)", state: index == vm.currentWebPageIndex ? .on : .off) { [unowned self] _ in
                         vm.currentWebPageIndex = index
                         currentWebPageChanged()
                         configMenu()
@@ -53,7 +53,7 @@ class PatternsWebPagesBrowseViewController: UIViewController, WKUIDelegate, WKNa
 
     private func currentWebPageChanged() {
         AppDelegate.speak(string: vm.currentWebPage.TITLE)
-        btnWebPage.setTitle(vm.currentWebPage.TITLE, for: .normal)
+        btnWebPage.setTitle(vm.currentWebPageText, for: .normal)
         wvWebPage.load(URLRequest(url: URL(string: vm.currentWebPage.URL)!))
     }
 
