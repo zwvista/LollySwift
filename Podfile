@@ -11,7 +11,6 @@ pod 'RxAlamofire', '~> 6'
 pod 'RxBinding', :git => 'https://github.com/zwvista/RxBinding'
 pod 'NSObject+Rx'
 pod 'RxDataSources'
-pod 'DropDown'
 pod 'AKSideMenu'
 pod 'Then'
 end
