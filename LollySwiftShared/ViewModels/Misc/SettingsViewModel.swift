@@ -145,15 +145,19 @@ class SettingsViewModel: NSObject {
     var selectedUnitFromIndex_ = BehaviorRelay(value: -1)
     var selectedUnitFromIndex: Int { get { selectedUnitFromIndex_.value } set { selectedUnitFromIndex_.accept(newValue) } }
     var selectedUnitFrom: Int { arrUnits.indices ~= selectedUnitFromIndex ? arrUnits[selectedUnitFromIndex].value : 0 }
+    var selectedUnitFromText: String { arrUnits[selectedUnitFromIndex].label }
     var selectedPartFromIndex_ = BehaviorRelay(value: -1)
     var selectedPartFromIndex: Int { get { selectedPartFromIndex_.value } set { selectedPartFromIndex_.accept(newValue) } }
     var selectedPartFrom: Int { arrParts.indices ~= selectedPartFromIndex ? arrParts[selectedPartFromIndex].value : 0 }
+    var selectedPartFromText: String { arrParts[selectedPartFromIndex].label }
     var selectedUnitToIndex_ = BehaviorRelay(value: -1)
     var selectedUnitToIndex: Int { get { selectedUnitToIndex_.value } set { selectedUnitToIndex_.accept(newValue) } }
     var selectedUnitTo: Int { arrUnits.indices ~= selectedUnitToIndex ? arrUnits[selectedUnitToIndex].value : 0 }
+    var selectedUnitToText: String { arrUnits[selectedUnitToIndex].label }
     var selectedPartToIndex_ = BehaviorRelay(value: -1)
     var selectedPartToIndex: Int { get { selectedPartToIndex_.value } set { selectedPartToIndex_.accept(newValue) } }
     var selectedPartTo: Int { arrParts.indices ~= selectedPartToIndex ? arrParts[selectedPartToIndex].value : 0 }
+    var selectedPartToText: String { arrParts[selectedPartToIndex].label }
 
     var toType_ = BehaviorRelay(value: UnitPartToType.to.rawValue)
     var toType: UnitPartToType {

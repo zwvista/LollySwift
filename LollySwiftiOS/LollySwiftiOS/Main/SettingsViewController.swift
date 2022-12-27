@@ -7,45 +7,44 @@
 //
 
 import UIKit
-import DropDown
 import RxSwift
 import NSObject_Rx
 import RxBinding
 
 class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
-    @IBOutlet weak var langCell: UITableViewCell!
-    @IBOutlet weak var voiceCell: UITableViewCell!
-    @IBOutlet weak var dictItemCell: UITableViewCell!
-    @IBOutlet weak var dictNoteCell: UITableViewCell!
-    @IBOutlet weak var dictTranslationCell: UITableViewCell!
-    @IBOutlet weak var textbookCell: UITableViewCell!
-    @IBOutlet weak var unitFromCell: UITableViewCell!
-    @IBOutlet weak var partFromCell: UITableViewCell!
-    @IBOutlet weak var unitToCell: UITableViewCell!
-    @IBOutlet weak var partToCell: UITableViewCell!
-    @IBOutlet weak var lblUnitFrom: UILabel!
-    @IBOutlet weak var lblUnitTo: UILabel!
-    @IBOutlet weak var btnToType: UIButton!
-    @IBOutlet weak var lblPartFrom: UILabel!
-    @IBOutlet weak var lblPartTo: UILabel!
+
+    @IBOutlet weak var lblLang: UILabel!
+    @IBOutlet weak var btnLang: UIButton!
+    @IBOutlet weak var lblVoice: UILabel!
+    @IBOutlet weak var lblVoiceSub: UILabel!
+    @IBOutlet weak var btnVoice: UIButton!
+    @IBOutlet weak var lblDictReference: UILabel!
+    @IBOutlet weak var lblDictReferenceSub: UILabel!
+    @IBOutlet weak var btnDictReference: UIButton!
+    @IBOutlet weak var lblDictNote: UILabel!
+    @IBOutlet weak var lblDictNoteSub: UILabel!
+    @IBOutlet weak var btnDictNote: UIButton!
+    @IBOutlet weak var lblDictTranslation: UILabel!
+    @IBOutlet weak var lblDictTranslationSub: UILabel!
+    @IBOutlet weak var btnDictTranslation: UIButton!
+    @IBOutlet weak var lblTextbook: UILabel!
+    @IBOutlet weak var lblTextbookSub: UILabel!
+    @IBOutlet weak var btnTextbook: UIButton!
     @IBOutlet weak var lblUnitFromTitle: UILabel!
+    @IBOutlet weak var lblUnitFrom: UILabel!
+    @IBOutlet weak var btnUnitFrom: UIButton!
     @IBOutlet weak var lblPartFromTitle: UILabel!
+    @IBOutlet weak var lblPartFrom: UILabel!
+    @IBOutlet weak var btnPartFrom: UIButton!
+    @IBOutlet weak var btnToType: UIButton!
     @IBOutlet weak var lblUnitToTitle: UILabel!
+    @IBOutlet weak var lblUnitTo: UILabel!
+    @IBOutlet weak var btnUnitTo: UIButton!
     @IBOutlet weak var lblPartToTitle: UILabel!
+    @IBOutlet weak var lblPartTo: UILabel!
+    @IBOutlet weak var btnPartTo: UIButton!
     @IBOutlet weak var btnPrevious: UIButton!
     @IBOutlet weak var btnNext: UIButton!
-
-    let ddLang = DropDown()
-    let ddVoice = DropDown()
-    let ddDictReference = DropDown()
-    let ddDictNote = DropDown()
-    let ddDictTranslation = DropDown()
-    let ddTextbook = DropDown()
-    let ddUnitFrom = DropDown()
-    let ddPartFrom = DropDown()
-    let ddUnitTo = DropDown()
-    let ddPartTo = DropDown()
-    let ddToType = DropDown()
 
     var vm: SettingsViewModel { vmSettings }
 
@@ -53,82 +52,19 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
         super.viewDidLoad()
         vm.delegate = self
 
-        ddLang.anchorView = langCell
-        ddLang.selectionAction = { [unowned self] (index: Int, item: String) in
-            guard index != self.vm.selectedLangIndex else {return}
-            self.vm.selectedLangIndex = index
-        }
-
-        ddVoice.anchorView = voiceCell
-        ddVoice.selectionAction = { [unowned self] (index: Int, item: String) in
-            guard index != self.vm.selectediOSVoiceIndex else {return}
-            self.vm.selectediOSVoiceIndex = index
-        }
-
-        ddDictReference.anchorView = dictItemCell
-        ddDictReference.selectionAction = { [unowned self] (index: Int, item: String) in
-            guard index != self.vm.selectedDictReferenceIndex else {return}
-            self.vm.selectedDictReferenceIndex = index
-        }
-
-        ddDictNote.anchorView = dictNoteCell
-        ddDictNote.selectionAction = { [unowned self] (index: Int, item: String) in
-            guard index != self.vm.selectedDictNoteIndex else {return}
-            self.vm.selectedDictNoteIndex = index
-        }
-
-        ddDictTranslation.anchorView = dictTranslationCell
-        ddDictTranslation.selectionAction = { [unowned self] (index: Int, item: String) in
-            guard index != self.vm.selectedDictTranslationIndex else {return}
-            self.vm.selectedDictTranslationIndex = index
-        }
-
-        ddTextbook.anchorView = textbookCell
-        ddTextbook.selectionAction = { [unowned self] (index: Int, item: String) in
-            guard index != self.vm.selectedTextbookIndex else {return}
-            self.vm.selectedTextbookIndex = index
-        }
-
-        ddUnitFrom.anchorView = unitFromCell
-        ddUnitFrom.selectionAction = { [unowned self] (index: Int, item: String) in
-            guard index != self.vm.selectedUnitFromIndex else {return}
-            self.vm.selectedUnitFromIndex = index
-        }
-
-        ddPartFrom.anchorView = partFromCell
-        ddPartFrom.selectionAction = { [unowned self] (index: Int, item: String) in
-            guard index != self.vm.selectedPartFromIndex else {return}
-            self.vm.selectedPartFromIndex = index
-        }
-
-        ddToType.dataSource = SettingsViewModel.arrToTypes
-        ddToType.anchorView = btnToType
-        ddToType.selectionAction = { [unowned self] (index: Int, item: String) in
-            self.vm.toType = UnitPartToType(rawValue: index)!
-        }
-
-        ddUnitTo.anchorView = unitToCell
-        ddUnitTo.selectionAction = { [unowned self] (index: Int, item: String) in
-            guard index != self.vm.selectedUnitToIndex else {return}
-            self.vm.selectedUnitToIndex = index
-        }
-
-        ddPartTo.anchorView = partToCell
-        ddPartTo.selectionAction = { [unowned self] (index: Int, item: String) in
-            guard index != self.vm.selectedPartToIndex else {return}
-            self.vm.selectedPartToIndex = index
-        }
-
         _ = vm.unitToEnabled ~> lblUnitTo.rx.isEnabled
         _ = vm.unitToEnabled ~> lblUnitToTitle.rx.isEnabled
+        _ = vm.unitToEnabled ~> btnUnitTo.rx.isEnabled
         _ = vm.partToEnabled ~> lblPartTo.rx.isEnabled
         _ = vm.partToEnabled ~> lblPartToTitle.rx.isEnabled
+        _ = vm.partToEnabled ~> btnPartTo.rx.isEnabled
         _ = vm.previousEnabled ~> btnPrevious.rx.isEnabled
         _ = vm.nextEnabled ~> btnNext.rx.isEnabled
         _ = vm.previousTitle ~> btnPrevious.rx.title(for: .normal)
         _ = vm.nextTitle ~> btnNext.rx.title(for: .normal)
         _ = vm.partFromEnabled ~> lblPartFrom.rx.isEnabled
         _ = vm.partFromEnabled ~> lblPartFromTitle.rx.isEnabled
+        _ = vm.partFromEnabled ~> btnPartFrom.rx.isEnabled
         _ = vm.toTypeTitle ~> btnToType.rx.title(for: .normal)
 
         refreshControl = UIRefreshControl()
@@ -142,121 +78,122 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
         } ~ rx.disposeBag
     }
 
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch indexPath.section {
-        case 0:
-            ddLang.show()
-        case 1:
-            ddVoice.show()
-        case 2:
-            ddDictReference.show()
-        case 3:
-            ddDictNote.show()
-        case 4:
-            ddDictTranslation.show()
-        case 5:
-            ddTextbook.show()
-        default:
-            switch indexPath.row {
-            case 0:
-                ddUnitFrom.show()
-            case 1 where vm.partFromEnabled.value:
-                ddPartFrom.show()
-            case 3 where vm.unitToEnabled.value:
-                ddUnitTo.show()
-            case 4 where vm.partToEnabled.value:
-                ddPartTo.show()
-            default:
-                break
-            }
-        }
-    }
-
-    func onGetData() {
-        ddLang.dataSource = vm.arrLanguages.map(\.LANGNAME)
-    }
-
     func onUpdateLang() {
-        let item = vm.selectedLang
-        langCell.textLabel!.text = item.LANGNAME
-        ddLang.selectIndex(vm.selectedLangIndex)
+        func configMenuLang() {
+            btnLang.menu = UIMenu(title: "", options: .displayInline, children: vm.arrLanguages.map(\.LANGNAME).enumerated().map { index, item in
+                UIAction(title: item, state: index == vm.selectedLangIndex ? .on : .off) { [unowned self] _ in
+                    guard index != vm.selectedLangIndex else {return}
+                    vm.selectedLangIndex = index
+                    configMenuLang()
+                }
+            })
+            btnLang.showsMenuAsPrimaryAction = true
+        }
+        configMenuLang()
+        lblLang.text = vm.selectedLang.LANGNAME
 
-        ddVoice.dataSource = vm.arriOSVoices.map(\.VOICENAME)
         onUpdateiOSVoice()
-
-        ddDictReference.dataSource = vm.arrDictsReference.map(\.DICTNAME)
         onUpdateDictReference()
-
-        ddDictNote.dataSource = vm.arrDictsNote.isEmpty ? [] : vm.arrDictsNote.map(\.DICTNAME)
         onUpdateDictNote()
-
-        ddDictTranslation.dataSource = vm.arrDictsTranslation.isEmpty ? [] : vm.arrDictsTranslation.map(\.DICTNAME)
         onUpdateDictTranslation()
-
-        ddTextbook.dataSource = vm.arrTextbooks.map(\.TEXTBOOKNAME)
         onUpdateTextbook()
-    }
+     }
 
     func onUpdateiOSVoice() {
-        let item = vm.selectediOSVoice
-        let b = item.VOICENAME.isEmpty
-        // if the label text is set to an empty string,
-        // it will remain to be empty and can no longer be changed. (why ?)
-        voiceCell.textLabel!.text = b ? " " : item.VOICENAME
-        voiceCell.detailTextLabel!.text = b ? " " : item.VOICELANG
-        ddVoice.selectIndex(vm.selectediOSVoiceIndex)
+        func configMenuVoice() {
+            btnVoice.menu = UIMenu(title: "", options: .displayInline, children: vm.arriOSVoices.map(\.VOICENAME).enumerated().map { index, item in
+                UIAction(title: item, state: index == vm.selectediOSVoiceIndex ? .on : .off) { [unowned self] _ in
+                    guard index != vm.selectediOSVoiceIndex else {return}
+                    vm.selectediOSVoiceIndex = index
+                    configMenuVoice()
+                }
+            })
+            btnVoice.showsMenuAsPrimaryAction = true
+        }
+        configMenuVoice()
+        lblVoice.text = vm.selectediOSVoice.VOICENAME
+        lblVoiceSub.text = vm.selectediOSVoice.VOICELANG
     }
 
     func onUpdateDictReference() {
-        let item = vm.selectedDictReference
-        let b = item.DICTNAME.isEmpty
-        // if the label text is set to an empty string,
-        // it will remain to be empty and can no longer be changed. (why ?)
-        dictItemCell.textLabel!.text = b ? " " : item.DICTNAME
-        dictItemCell.detailTextLabel!.text = b ? " " : item.URL
-        ddDictReference.selectIndex(vm.selectedDictReferenceIndex)
+        func configMenuDictReference() {
+            btnVoice.menu = UIMenu(title: "", options: .displayInline, children: vm.arrDictsReference.map(\.DICTNAME).enumerated().map { index, item in
+                UIAction(title: item, state: index == vm.selectedDictReferenceIndex ? .on : .off) { [unowned self] _ in
+                    guard index != vm.selectedDictReferenceIndex else {return}
+                    vm.selectedDictReferenceIndex = index
+                    configMenuDictReference()
+                }
+            })
+            btnVoice.showsMenuAsPrimaryAction = true
+        }
+        configMenuDictReference()
+        lblDictReference.text = vm.selectedDictReference.DICTNAME
+        lblDictReferenceSub.text = vm.selectedDictReference.URL
     }
 
     func onUpdateDictNote() {
-        let item = vm.selectedDictNote
-        let b = item.DICTNAME.isEmpty
-        // if the label text is set to an empty string,
-        // it will remain to be empty and can no longer be changed. (why ?)
-        dictNoteCell.textLabel!.text = b ? " " : item.DICTNAME
-        dictNoteCell.detailTextLabel!.text = b ? " " : item.URL
-        ddDictNote.selectIndex(vm.selectedDictNoteIndex)
+        func configMenuDictNote() {
+            btnDictNote.menu = UIMenu(title: "", options: .displayInline, children: vm.arrDictsNote.isEmpty ? [] : vm.arrDictsNote.map(\.DICTNAME).enumerated().map { index, item in
+                UIAction(title: item, state: index == vm.selectedDictNoteIndex ? .on : .off) { [unowned self] _ in
+                    guard index != vm.selectedDictNoteIndex else {return}
+                    vm.selectedDictNoteIndex = index
+                    configMenuDictNote()
+                }
+            })
+            btnDictNote.showsMenuAsPrimaryAction = true
+        }
+        configMenuDictNote()
+        lblDictNote.text = vm.selectedDictNote.DICTNAME
+        lblDictNoteSub.text = vm.selectedDictNote.URL
     }
 
     func onUpdateDictTranslation() {
-        let item = vm.selectedDictTranslation
-        let b = item.DICTNAME.isEmpty
-        // if the label text is set to an empty string,
-        // it will remain to be empty and can no longer be changed. (why ?)
-        dictTranslationCell.textLabel!.text = b ? " " : item.DICTNAME
-        dictTranslationCell.detailTextLabel!.text = b ? " " : item.URL
-        ddDictTranslation.selectIndex(vm.selectedDictTranslationIndex)
+        func configMenuDictTranslation() {
+            btnDictTranslation.menu = UIMenu(title: "", options: .displayInline, children: vm.arrDictsTranslation.isEmpty ? [] : vm.arrDictsTranslation.map(\.DICTNAME).enumerated().map { index, item in
+                UIAction(title: item, state: index == vm.selectedDictTranslationIndex ? .on : .off) { [unowned self] _ in
+                    guard index != vm.selectedDictTranslationIndex else {return}
+                    vm.selectedDictTranslationIndex = index
+                    configMenuDictTranslation()
+                }
+            })
+            btnDictTranslation.showsMenuAsPrimaryAction = true
+        }
+        configMenuDictTranslation()
+        lblDictTranslation.text = vm.selectedDictTranslation.DICTNAME
+        lblDictTranslationSub.text = vm.selectedDictTranslation.URL
     }
 
     func onUpdateTextbook() {
-        let item = vm.selectedTextbook
-        textbookCell.textLabel!.text = item.TEXTBOOKNAME
-        textbookCell.detailTextLabel!.text = "\(vm.unitCount) Units"
-        ddTextbook.selectIndex(vm.selectedTextbookIndex)
-        ddToType.selectIndex(vm.toType.rawValue)
-        ddToType.selectionAction!(vm.toType.rawValue, ddToType.selectedItem!)
-        guard !vm.arrUnits.isEmpty else {return}
-        ddUnitFrom.dataSource = vm.arrUnits.map(\.label)
-        onUpdateUnitFrom()
-        ddPartFrom.dataSource = vm.arrParts.map(\.label)
-        onUpdatePartFrom()
-        ddUnitTo.dataSource = vm.arrUnits.map(\.label)
-        onUpdateUnitTo()
-        ddPartTo.dataSource = vm.arrParts.map(\.label)
-        onUpdatePartTo()
-    }
+        func configMenuTextbook() {
+            btnTextbook.menu = UIMenu(title: "", options: .displayInline, children: vm.arrTextbooks.map(\.TEXTBOOKNAME).enumerated().map { index, item in
+                UIAction(title: item, state: index == vm.selectedTextbookIndex ? .on : .off) { [unowned self] _ in
+                    guard index != vm.selectedTextbookIndex else {return}
+                    vm.selectedTextbookIndex = index
+                    configMenuTextbook()
+                }
+            })
+            btnTextbook.showsMenuAsPrimaryAction = true
+        }
+        configMenuTextbook()
+        lblTextbook.text = vm.selectedTextbook.TEXTBOOKNAME
+        lblTextbookSub.text = "\(vm.unitCount) Units"
 
-    @IBAction func showToTypeDropDown(_ sender: AnyObject) {
-        ddToType.show()
+        func configMenuToType() {
+            btnToType.menu = UIMenu(title: "", options: .displayInline, children: SettingsViewModel.arrToTypes.enumerated().map { index, item in
+                UIAction(title: item, state: index == vm.toType_.value ? .on : .off) { [unowned self] _ in
+                    vm.toType_.accept(index)
+                    configMenuToType()
+                }
+            })
+            btnToType.showsMenuAsPrimaryAction = true
+        }
+        configMenuToType()
+
+        guard !vm.arrUnits.isEmpty else {return}
+        onUpdateUnitFrom()
+        onUpdatePartFrom()
+        onUpdateUnitTo()
+        onUpdatePartTo()
     }
 
     @IBAction func previousUnitPart(_ sender: AnyObject) {
@@ -268,23 +205,59 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
     }
 
     func onUpdateUnitFrom() {
-        ddUnitFrom.selectIndex(vm.selectedUnitFromIndex)
-        lblUnitFrom.text = ddUnitFrom.selectedItem
+        func configMenuUnitFrom() {
+            btnUnitFrom.menu = UIMenu(title: "", options: .displayInline, children: vm.arrUnits.map(\.label).enumerated().map { index, item in
+                UIAction(title: item, state: index == vm.selectedUnitFromIndex ? .on : .off) { [unowned self] _ in
+                    guard index != vm.selectedUnitFromIndex else {return}
+                    vm.selectedUnitFromIndex = index
+                }
+            })
+            btnUnitFrom.showsMenuAsPrimaryAction = true
+        }
+        configMenuUnitFrom()
+        lblUnitFrom.text = vm.selectedUnitFromText
     }
 
     func onUpdatePartFrom() {
-        ddPartFrom.selectIndex(vm.selectedPartFromIndex)
-        lblPartFrom.text = ddPartFrom.selectedItem
+        func configMenuPartFrom() {
+            btnPartFrom.menu = UIMenu(title: "", options: .displayInline, children: vm.arrParts.map(\.label).enumerated().map { index, item in
+                UIAction(title: item, state: index == vm.selectedPartFromIndex ? .on : .off) { [unowned self] _ in
+                    guard index != vm.selectedPartFromIndex else {return}
+                    vm.selectedPartFromIndex = index
+                }
+            })
+            btnPartFrom.showsMenuAsPrimaryAction = true
+        }
+        configMenuPartFrom()
+        lblPartFrom.text = vm.selectedPartFromText
     }
 
     func onUpdateUnitTo() {
-        ddUnitTo.selectIndex(vm.selectedUnitToIndex)
-        lblUnitTo.text = ddUnitTo.selectedItem
+        func configMenuToType() {
+            btnUnitTo.menu = UIMenu(title: "", options: .displayInline, children: vm.arrUnits.map(\.label).enumerated().map { index, item in
+                UIAction(title: item, state: index == vm.selectedUnitToIndex ? .on : .off) { [unowned self] _ in
+                    guard index != vm.selectedUnitToIndex else {return}
+                    vm.selectedUnitToIndex = index
+                }
+            })
+            btnUnitTo.showsMenuAsPrimaryAction = true
+        }
+        configMenuToType()
+        lblUnitTo.text = vm.selectedUnitToText
     }
 
     func onUpdatePartTo() {
-        ddPartTo.selectIndex(vm.selectedPartToIndex)
-        lblPartTo.text = ddPartTo.selectedItem
+        func configMenuToType() {
+            btnPartTo.menu = UIMenu(title: "", options: .displayInline, children: vm.arrParts.map(\.label).enumerated().map { index, item in
+                UIAction(title: item, state: index == vm.selectedPartToIndex ? .on : .off) { [unowned self] _ in
+                    guard index != vm.selectedPartToIndex else {return}
+                    vm.selectedPartToIndex = index
+                }
+            })
+            btnPartTo.showsMenuAsPrimaryAction = true
+        }
+        configMenuToType()
+        lblPartTo.text = vm.selectedPartToText
     }
 
     deinit {
