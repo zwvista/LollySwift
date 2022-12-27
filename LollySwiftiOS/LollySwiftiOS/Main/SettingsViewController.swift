@@ -117,14 +117,14 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
 
     func onUpdateDictReference() {
         func configMenuDictReference() {
-            btnVoice.menu = UIMenu(title: "", options: .displayInline, children: vm.arrDictsReference.map(\.DICTNAME).enumerated().map { index, item in
+            btnDictReference.menu = UIMenu(title: "", options: .displayInline, children: vm.arrDictsReference.map(\.DICTNAME).enumerated().map { index, item in
                 UIAction(title: item, state: index == vm.selectedDictReferenceIndex ? .on : .off) { [unowned self] _ in
                     guard index != vm.selectedDictReferenceIndex else {return}
                     vm.selectedDictReferenceIndex = index
                     configMenuDictReference()
                 }
             })
-            btnVoice.showsMenuAsPrimaryAction = true
+            btnDictReference.showsMenuAsPrimaryAction = true
         }
         configMenuDictReference()
         lblDictReference.text = vm.selectedDictReference.DICTNAME
