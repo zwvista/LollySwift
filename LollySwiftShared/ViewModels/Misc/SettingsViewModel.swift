@@ -373,7 +373,6 @@ class SettingsViewModel: NSObject {
         let newVal = selectedTextbook.ID
         let dirty = USTEXTBOOK != newVal
         USTEXTBOOK = newVal
-        delegate?.onUpdateTextbook()
         selectedUnitFromIndex = -1
         selectedPartFromIndex = -1
         selectedUnitToIndex = -1
@@ -391,7 +390,7 @@ class SettingsViewModel: NSObject {
         toType = newVal2
         return (!dirty ? Single.just(()) : MUserSetting.update(info: INFO_USTEXTBOOK, intValue: USTEXTBOOK)).flatMap {
             dirty2 ? Single.just(()) : self.updateToType()
-        }
+        }.map { self.delegate?.onUpdateTextbook() }
     }
 
     func updateDictReference() -> Single<()> {
