@@ -294,11 +294,11 @@ class SettingsViewModel: NSObject, ObservableObject {
 
     func getData() async {
         initialized = false
-        async let task0 = MLanguage.getData()
-        async let task1 = MUSMapping.getData()
-        async let task2 = MUserSetting.getData()
-        async let task3 = MCode.getData()
-        (arrLanguages, arrUSMappings, arrUserSettings, arrDictTypes) = await (task0, task1, task2, task3)
+        async let res1 = MLanguage.getData()
+        async let res2 = MUSMapping.getData()
+        async let res3 = MUserSetting.getData()
+        async let res4 = MCode.getData()
+        (arrLanguages, arrUSMappings, arrUserSettings, arrDictTypes) = await (res1, res2, res3, res4)
         INFO_USLANG = getUSInfo(name: MUSMapping.NAME_USLANG)
         delegate?.onGetData()
         selectedLangIndex = arrLanguages.firstIndex { $0.ID == self.USLANG } ?? 0
@@ -324,14 +324,14 @@ class SettingsViewModel: NSObject, ObservableObject {
         INFO_USDICTTRANSLATION = getUSInfo(name: MUSMapping.NAME_USDICTTRANSLATION)
         INFO_USMACVOICE = getUSInfo(name: MUSMapping.NAME_USMACVOICE)
         INFO_USIOSVOICE = getUSInfo(name: MUSMapping.NAME_USIOSVOICE)
-        async let task0 = MDictionary.getDictsReferenceByLang(USLANG)
-        async let task1 = MDictionary.getDictsNoteByLang(USLANG)
-        async let task2 = MDictionary.getDictsTranslationByLang(USLANG)
-        async let task3 = MTextbook.getDataByLang(USLANG, arrUserSettings: arrUserSettings)
-        async let task4 = MAutoCorrect.getDataByLang(USLANG)
-        async let task5 = MVoice.getDataByLang(USLANG)
+        async let res1 = MDictionary.getDictsReferenceByLang(USLANG)
+        async let res2 = MDictionary.getDictsNoteByLang(USLANG)
+        async let res3 = MDictionary.getDictsTranslationByLang(USLANG)
+        async let res4 = MTextbook.getDataByLang(USLANG, arrUserSettings: arrUserSettings)
+        async let res5 = MAutoCorrect.getDataByLang(USLANG)
+        async let res6 = MVoice.getDataByLang(USLANG)
         let arrVoices: [MVoice]
-        (arrDictsReference, arrDictsNote, arrDictsTranslation, arrTextbooks, arrAutoCorrect, arrVoices) = await (task0, task1, task2, task3, task4, task5)
+        (arrDictsReference, arrDictsNote, arrDictsTranslation, arrTextbooks, arrAutoCorrect, arrVoices) = await (res1, res2, res3, res4, res5, res6)
         selectedDictsReferenceIndexes = USDICTSREFERENCE.split(separator: ",").compactMap { id in arrDictsReference.firstIndex { String($0.DICTID) == id } }
         arrMacVoices = arrVoices.filter { $0.VOICETYPEID == 2 }
         if arrMacVoices.isEmpty { arrMacVoices.append(MVoice()) }
@@ -370,7 +370,6 @@ class SettingsViewModel: NSObject, ObservableObject {
         let newVal = selectedTextbook.ID
         let dirty = USTEXTBOOK != newVal
         USTEXTBOOK = newVal
-        delegate?.onUpdateTextbook()
         selectedUnitFromIndex = -1
         selectedPartFromIndex = -1
         selectedUnitToIndex = -1
@@ -386,10 +385,13 @@ class SettingsViewModel: NSObject, ObservableObject {
         let newVal2: UnitPartToType = isSingleUnit ? .unit : isSingleUnitPart ? .part : .to
         let dirty2 = newVal2 != toType
         toType = newVal2
-        guard dirty else {return}
-        await MUserSetting.update(info: INFO_USTEXTBOOK, intValue: USTEXTBOOK)
-        guard dirty2 else {return}
-        await updateToType()
+        if dirty {
+            await MUserSetting.update(info: INFO_USTEXTBOOK, intValue: USTEXTBOOK)
+        }
+        if dirty2 {
+            await updateToType()
+        }
+        delegate?.onUpdateTextbook()
     }
 
     func updateDictReference() async {
