@@ -6,7 +6,6 @@ use_frameworks!
 target 'LollySwiftiOS' do
 platform :ios, '16.0'
 project 'LollySwiftiOS/LollySwiftiOS'
-pod 'DropDown'
 pod 'AKSideMenu'
 pod 'Then'
 end
@@ -32,16 +31,12 @@ end
 target 'LollySwiftUIiOS' do
 platform :ios, '16.0'
 project 'LollySwiftUIiOS/LollySwiftUIiOS'
-pod 'DropDown'
-pod 'AKSideMenu'
 pod 'Then'
 end
 
 target 'LollySwiftUIiOSTests' do
 platform :ios, '16.0'
 project 'LollySwiftUIiOS/LollySwiftUIiOS'
-pod 'DropDown'
-pod 'AKSideMenu'
 pod 'Then'
 end
 
