@@ -136,12 +136,16 @@ class SettingsViewModel: NSObject, ObservableObject {
 
     @Published var selectedUnitFromIndex = -1
     var selectedUnitFrom: Int { arrUnits.indices ~= selectedUnitFromIndex ? arrUnits[selectedUnitFromIndex].value : 0 }
+    var selectedUnitFromText: String { arrUnits[selectedUnitFromIndex].label }
     @Published var selectedPartFromIndex = -1
     var selectedPartFrom: Int { arrParts.indices ~= selectedPartFromIndex ? arrParts[selectedPartFromIndex].value : 0 }
+    var selectedPartFromText: String { arrParts[selectedPartFromIndex].label }
     @Published var selectedUnitToIndex = -1
     var selectedUnitTo: Int { arrUnits.indices ~= selectedUnitToIndex ? arrUnits[selectedUnitToIndex].value : 0 }
+    var selectedUnitToText: String { arrUnits[selectedUnitToIndex].label }
     @Published var selectedPartToIndex = -1
     var selectedPartTo: Int { arrParts.indices ~= selectedPartToIndex ? arrParts[selectedPartToIndex].value : 0 }
+    var selectedPartToText: String { arrParts[selectedPartToIndex].label }
 
     @Published var toType_ = UnitPartToType.to.rawValue
     var toType: UnitPartToType {
