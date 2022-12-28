@@ -36,9 +36,9 @@ class PatternsWebPagesDetailViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        itemEdit.$ID ~> (tfID, \.text2) ~ subscriptions
-        itemEdit.$PATTERNID ~> (tfPatternID, \.text2) ~ subscriptions
-        itemEdit.$PATTERN ~> (tfPattern, \.text2) ~ subscriptions
+        tfID.text = itemEdit.ID
+        tfPatternID.text = itemEdit.PATTERNID
+        tfPattern.text = itemEdit.PATTERN
         itemEdit.$SEQNUM <~> tfSeqNum.textProperty ~ subscriptions
         itemEdit.$WEBPAGEID ~> (tfWebPageID, \.text2) ~ subscriptions
         itemEdit.$TITLE <~> tfTitle.textProperty ~ subscriptions

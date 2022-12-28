@@ -24,7 +24,7 @@ class PhrasesLangDetailViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        itemEdit.$ID ~> (tfID, \.text2) ~ subscriptions
+        tfID.text = itemEdit.ID
         itemEdit.$PHRASE <~> tfPhrase.textProperty ~ subscriptions
         itemEdit.$TRANSLATION <~> tfTranslation.textProperty ~ subscriptions
         vmEdit.$isOKEnabled ~> (btnDone, \.isEnabled) ~ subscriptions

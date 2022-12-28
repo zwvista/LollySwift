@@ -138,7 +138,7 @@ class WordsUnitViewController: WordsBaseViewController {
         let addAction = UIAlertAction(title: "Add", style: .default) { _ in self.performSegue(withIdentifier: "add", sender: self) }
         alertController.addAction(addAction)
 
-        func startTimer(ifEmpty: Bool) {
+        func getNotes(ifEmpty: Bool) {
             self.view.showBlurLoader()
             Task {
                 await vm.getNotes(ifEmpty: ifEmpty, oneComplete: { _ in }, allComplete: {
@@ -153,11 +153,11 @@ class WordsUnitViewController: WordsBaseViewController {
 
         if vmSettings.hasDictNote {
             let getNotesAllAction = UIAlertAction(title: "Retrieve All Notes", style: .default) { _ in
-                startTimer(ifEmpty: false)
+                getNotes(ifEmpty: false)
             }
             alertController.addAction(getNotesAllAction)
             let getNotesEmptyAction = UIAlertAction(title: "Retrieve Notes If Empty", style: .default) { _ in
-                startTimer(ifEmpty: true)
+                getNotes(ifEmpty: true)
             }
             alertController.addAction(getNotesEmptyAction)
             let clearNotesAllAction = UIAlertAction(title: "Clear All Notes", style: .default) { _ in

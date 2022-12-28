@@ -29,7 +29,7 @@ class PatternsDetailViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        itemEdit.$ID ~> (tfID, \.text2) ~ subscriptions
+        tfID.text = itemEdit.ID
         itemEdit.$PATTERN <~> tfPattern.textProperty ~ subscriptions
         itemEdit.$NOTE <~> tfNote.textProperty ~ subscriptions
         itemEdit.$TAGS <~> tfTags.textProperty ~ subscriptions

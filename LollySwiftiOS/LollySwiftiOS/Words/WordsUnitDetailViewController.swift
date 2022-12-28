@@ -62,14 +62,14 @@ class WordsUnitDetailViewController: UITableViewController {
         }
         configMenuPart()
 
-        itemEdit.$ID ~> (tfID, \.text2) ~ subscriptions
+        tfID.text = itemEdit.ID
         itemEdit.$UNITSTR <~> tfUnit.textProperty ~ subscriptions
         itemEdit.$PARTSTR <~> tfPart.textProperty ~ subscriptions
         itemEdit.$SEQNUM <~> tfSeqNum.textProperty ~ subscriptions
-        itemEdit.$WORDID ~> (tfWordID, \.text2) ~ subscriptions
+        tfWordID.text = itemEdit.WORDID
         itemEdit.$WORD <~> tfWord.textProperty ~ subscriptions
         itemEdit.$NOTE <~> tfNote.textProperty ~ subscriptions
-        itemEdit.$FAMIID ~> (tfFamiID, \.text2) ~ subscriptions
+        tfFamiID.text = itemEdit.FAMIID
         itemEdit.$ACCURACY ~> (tfAccuracy, \.text2) ~ subscriptions
         vmEdit.$isOKEnabled ~> (btnDone, \.isEnabled) ~ subscriptions
     }

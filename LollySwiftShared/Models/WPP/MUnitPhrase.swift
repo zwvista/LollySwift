@@ -121,27 +121,27 @@ class MUnitPhrase: NSObject, Codable, MPhraseProtocol {
 }
 
 class MUnitPhraseEdit: ObservableObject {
-    @Published var ID: String
+    let ID: String
     @Published var TEXTBOOKNAME: String
     @Published var UNITSTR: String
     @Published var indexUNIT: Int
     @Published var PARTSTR: String
     @Published var indexPART: Int
     @Published var SEQNUM: String
-    @Published var PHRASEID: String
+    let PHRASEID: String
     @Published var PHRASE: String
     @Published var TRANSLATION: String
     @Published var PHRASES = ""
 
     init(x: MUnitPhrase) {
-        ID = String(x.ID)
+        ID = "\(x.ID)"
         TEXTBOOKNAME = x.TEXTBOOKNAME
         UNITSTR = x.UNITSTR
         indexUNIT = x.textbook.arrUnits.firstIndex { $0.value == x.UNIT } ?? -1
         PARTSTR = x.PARTSTR
         indexPART = x.textbook.arrParts.firstIndex { $0.value == x.PART } ?? -1
         SEQNUM = String(x.SEQNUM)
-        PHRASEID = String(x.PHRASEID)
+        PHRASEID = "\(x.PHRASEID)"
         PHRASE = x.PHRASE
         TRANSLATION = x.TRANSLATION
     }

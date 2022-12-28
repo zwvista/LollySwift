@@ -75,7 +75,7 @@ class MPattern: NSObject, Codable {
 }
 
 class MPatternEdit: ObservableObject {
-    @Published var ID: String
+    let ID: String
     @Published var PATTERN: String
     @Published var NOTE: String
     @Published var TAGS: String
@@ -88,7 +88,7 @@ class MPatternEdit: ObservableObject {
     }
 
     init(x: MPattern) {
-        ID = String(x.ID)
+        ID = "\(x.ID)"
         PATTERN = x.PATTERN
         NOTE = x.NOTE
         TAGS = x.TAGS

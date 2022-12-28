@@ -30,7 +30,7 @@ class PatternsDetailViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         vmEdit = PatternsDetailViewModel(vm: vm, item: item)
-        itemEdit.$ID ~> (tfID, \.stringValue) ~ subscriptions
+        tfID.stringValue = itemEdit.ID
         itemEdit.$PATTERN <~> tfPattern.textProperty ~ subscriptions
         itemEdit.$NOTE <~> tfNote.textProperty ~ subscriptions
         itemEdit.$TAGS <~> tfTags.textProperty ~ subscriptions

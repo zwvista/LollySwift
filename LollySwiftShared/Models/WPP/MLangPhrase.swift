@@ -69,12 +69,12 @@ class MLangPhrase: NSObject, Codable, MPhraseProtocol {
 }
 
 class MLangPhraseEdit: ObservableObject {
-    @Published var ID: String
+    let ID: String
     @Published var PHRASE: String
     @Published var TRANSLATION: String
 
     init(x: MLangPhrase) {
-        ID = String(x.ID)
+        ID = "\(x.ID)"
         PHRASE = x.PHRASE
         TRANSLATION = x.TRANSLATION
     }

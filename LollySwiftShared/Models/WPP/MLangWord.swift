@@ -75,17 +75,17 @@ class MLangWord: NSObject, Codable, MWordProtocol {
 }
 
 class MLangWordEdit: ObservableObject {
-    @Published var ID: String
+    let ID: String
     @Published var WORD: String
     @Published var NOTE: String
-    @Published var FAMIID: String
+    let FAMIID: String
     @Published var ACCURACY: String
 
     init(x: MLangWord) {
-        ID = String(x.ID)
+        ID = "\"(x.ID)"
         WORD = x.WORD
         NOTE = x.NOTE
-        FAMIID = String(x.FAMIID)
+        FAMIID = "\(x.FAMIID)"
         ACCURACY = x.ACCURACY
     }
 

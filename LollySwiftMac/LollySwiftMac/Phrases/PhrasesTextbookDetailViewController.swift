@@ -41,12 +41,12 @@ class PhrasesTextbookDetailViewController: NSViewController, NSTableViewDataSour
         super.viewDidLoad()
         acUnits.content = item.textbook.arrUnits
         acParts.content = item.textbook.arrParts
-        itemEdit.$ID ~> (tfID, \.stringValue) ~ subscriptions
+        tfID.stringValue = itemEdit.ID
         itemEdit.$TEXTBOOKNAME ~> (tfTextbookName, \.stringValue) ~ subscriptions
         itemEdit.$indexUNIT <~> pubUnit.selectedItemIndexProperty ~ subscriptions
         itemEdit.$indexPART <~> pubPart.selectedItemIndexProperty ~ subscriptions
         itemEdit.$SEQNUM <~> tfSeqNum.textProperty ~ subscriptions
-        itemEdit.$PHRASEID ~> (tfPhraseID, \.stringValue) ~ subscriptions
+        tfPhraseID.stringValue = itemEdit.PHRASEID
         itemEdit.$PHRASE <~> tfPhrase.textProperty ~ subscriptions
         itemEdit.$TRANSLATION <~> tfTranslation.textProperty ~ subscriptions
         vmEdit.$isOKEnabled ~> (btnOK, \.isEnabled) ~ subscriptions

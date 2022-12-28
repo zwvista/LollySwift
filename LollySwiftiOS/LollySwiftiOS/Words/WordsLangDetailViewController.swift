@@ -29,10 +29,10 @@ class WordsLangDetailViewController: UITableViewController {
         vmEdit = WordsLangDetailViewModel(vm: vm, item: item) {
             self.tableView.reloadData()
         }
-        itemEdit.$ID ~> (tfID, \.text2) ~ subscriptions
+        tfID.text = itemEdit.ID
         itemEdit.$WORD <~> tfWord.textProperty ~ subscriptions
         itemEdit.$NOTE <~> tfNote.textProperty ~ subscriptions
-        itemEdit.$FAMIID ~> (tfFamiID, \.text2) ~ subscriptions
+        tfFamiID.text = itemEdit.FAMIID
         itemEdit.$ACCURACY ~> (tfAccuracy, \.text2) ~ subscriptions
         vmEdit.$isOKEnabled ~> (btnDone, \.isEnabled) ~ subscriptions
     }

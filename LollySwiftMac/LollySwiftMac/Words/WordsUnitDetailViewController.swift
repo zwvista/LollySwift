@@ -42,14 +42,14 @@ class WordsUnitDetailViewController: NSViewController, NSTableViewDataSource, NS
         super.viewDidLoad()
         acUnits.content = item.textbook.arrUnits
         acParts.content = item.textbook.arrParts
-        itemEdit.$ID ~> (tfID, \.stringValue) ~ subscriptions
+        tfID.stringValue = itemEdit.ID
         itemEdit.$indexUNIT <~> pubUnit.selectedItemIndexProperty ~ subscriptions
         itemEdit.$indexPART <~> pubPart.selectedItemIndexProperty ~ subscriptions
         itemEdit.$SEQNUM <~> tfSeqNum.textProperty ~ subscriptions
-        itemEdit.$WORDID ~> (tfWordID, \.stringValue) ~ subscriptions
+        tfWordID.stringValue = itemEdit.WORDID
         itemEdit.$WORD <~> tfWord.textProperty ~ subscriptions
         itemEdit.$NOTE <~> tfNote.textProperty ~ subscriptions
-        itemEdit.$FAMIID ~> (tfFamiID, \.stringValue) ~ subscriptions
+        tfFamiID.stringValue = itemEdit.FAMIID
         itemEdit.$ACCURACY ~> (tfAccuracy, \.stringValue) ~ subscriptions
         vmEdit.$isOKEnabled ~> (btnOK, \.isEnabled) ~ subscriptions
         btnOK.tapPublisher.sink { [unowned self] in

@@ -133,32 +133,32 @@ class MUnitWord: NSObject, Codable, MWordProtocol {
 }
 
 class MUnitWordEdit: ObservableObject {
-    @Published var ID: String
+    let ID: String
     @Published var TEXTBOOKNAME: String
     @Published var UNITSTR: String
     @Published var indexUNIT: Int
     @Published var PARTSTR: String
     @Published var indexPART: Int
     @Published var SEQNUM: String
-    @Published var WORDID: String
+    let WORDID: String
     @Published var WORD: String
     @Published var NOTE: String
-    @Published var FAMIID: String
+    let FAMIID: String
     @Published var ACCURACY: String
     @Published var WORDS = ""
 
     init(x: MUnitWord) {
-        ID = String(x.ID)
+        ID = "\(x.ID)"
         TEXTBOOKNAME = x.TEXTBOOKNAME
         UNITSTR = x.UNITSTR
         indexUNIT = x.textbook.arrUnits.firstIndex { $0.value == x.UNIT } ?? -1
         PARTSTR = x.PARTSTR
         indexPART = x.textbook.arrParts.firstIndex { $0.value == x.PART } ?? -1
         SEQNUM = String(x.SEQNUM)
-        WORDID = String(x.WORDID)
+        WORDID = "\(x.WORDID)"
         WORD = x.WORD
         NOTE = x.NOTE
-        FAMIID = String(x.FAMIID)
+        FAMIID = "\(x.FAMIID)"
         ACCURACY = x.ACCURACY
     }
 

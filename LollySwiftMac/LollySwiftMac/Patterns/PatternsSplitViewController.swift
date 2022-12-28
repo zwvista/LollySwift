@@ -28,7 +28,7 @@ class PatternsSplitViewController: NSViewController {
         super.viewDidLoad()
         tvPatternVariations.registerForDraggedTypes([tableRowDragType])
         itemEdit.$PATTERN ~> (tfPattern, \.stringValue) ~ subscriptions
-        itemEdit.$ID ~> (tfId, \.stringValue) ~ subscriptions
+        tfId.stringValue = itemEdit.ID
     }
 
     func numberOfRows(in tableView: NSTableView) -> Int {

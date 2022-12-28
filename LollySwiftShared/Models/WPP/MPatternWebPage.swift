@@ -78,9 +78,9 @@ class MPatternWebPage: NSObject, Codable {
 }
 
 class MPatternWebPageEdit: ObservableObject {
-    @Published var ID: String
-    @Published var PATTERNID: String
-    @Published var PATTERN: String
+    let ID: String
+    let PATTERNID: String
+    let PATTERN: String
     @Published var SEQNUM: String
     @Published var WEBPAGEID: String
     @Published var TITLE: String
@@ -97,8 +97,8 @@ class MPatternWebPageEdit: ObservableObject {
     }
 
     init(x: MPatternWebPage) {
-        ID = String(x.ID)
-        PATTERNID = String(x.PATTERNID)
+        ID = "\(x.ID)"
+        PATTERNID = "\(x.PATTERNID)"
         PATTERN = x.PATTERN
         SEQNUM = String(x.SEQNUM)
         WEBPAGEID = String(x.WEBPAGEID)

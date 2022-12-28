@@ -61,12 +61,12 @@ class PhrasesTextbookDetailViewController: UITableViewController {
         }
         configMenuPart()
 
-        itemEdit.$ID ~> (tfID, \.text2) ~ subscriptions
+        tfID.text = itemEdit.ID
         itemEdit.$TEXTBOOKNAME ~> (tfTextbookName, \.text2) ~ subscriptions
         itemEdit.$UNITSTR <~> tfUnit.textProperty ~ subscriptions
         itemEdit.$PARTSTR <~> tfPart.textProperty ~ subscriptions
         itemEdit.$SEQNUM <~> tfSeqNum.textProperty ~ subscriptions
-        itemEdit.$PHRASEID ~> (tfPhraseID, \.text2) ~ subscriptions
+        tfPhraseID.text = itemEdit.PHRASEID
         itemEdit.$PHRASE <~> tfPhrase.textProperty ~ subscriptions
         itemEdit.$TRANSLATION <~> tfTranslation.textProperty ~ subscriptions
         vmEdit.$isOKEnabled ~> (btnDone, \.isEnabled) ~ subscriptions

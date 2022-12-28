@@ -32,10 +32,10 @@ class WordsLangDetailViewController: NSViewController, NSTableViewDataSource, NS
         vmEdit = WordsLangDetailViewModel(vm: vm, item: item) {
             self.tableView.reloadData()
         }
-        itemEdit.$ID ~> (tfID, \.stringValue) ~ subscriptions
+        tfID.stringValue = itemEdit.ID
         itemEdit.$WORD <~> tfWord.textProperty ~ subscriptions
         itemEdit.$NOTE <~> tfNote.textProperty ~ subscriptions
-        itemEdit.$FAMIID ~> (tfFamiID, \.stringValue) ~ subscriptions
+        tfFamiID.stringValue = itemEdit.FAMIID
         itemEdit.$ACCURACY ~> (tfAccuracy, \.stringValue) ~ subscriptions
         vmEdit.$isOKEnabled ~> (btnOK, \.isEnabled) ~ subscriptions
         btnOK.tapPublisher.sink { [unowned self] in
