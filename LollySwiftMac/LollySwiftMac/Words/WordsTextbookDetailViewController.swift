@@ -44,7 +44,7 @@ class WordsTextbookDetailViewController: NSViewController, NSTableViewDataSource
         acUnits.content = item.textbook.arrUnits
         acParts.content = item.textbook.arrParts
         tfID.stringValue = itemEdit.ID
-        _ = itemEdit.TEXTBOOKNAME ~> tfTextbookName.rx.text.orEmpty
+        tfTextbookName.stringValue = itemEdit.TEXTBOOKNAME
         _ = itemEdit.indexUNIT_ <~> pubUnit.rx.selectedItemIndex
         _ = itemEdit.indexPART_ <~> pubPart.rx.selectedItemIndex
         _ = itemEdit.SEQNUM <~> tfSeqNum.rx.text.orEmpty

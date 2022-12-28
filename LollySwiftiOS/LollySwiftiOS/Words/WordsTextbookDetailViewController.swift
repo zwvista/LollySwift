@@ -64,7 +64,7 @@ class WordsTextbookDetailViewController: UITableViewController {
         configMenuPart()
 
         tfID.text = itemEdit.ID
-        _ = itemEdit.TEXTBOOKNAME ~> tfTextbookName.rx.text.orEmpty
+        tfTextbookName.text = itemEdit.TEXTBOOKNAME
         _ = itemEdit.UNITSTR_ <~> tfUnit.rx.textInput
         _ = itemEdit.PARTSTR_ <~> tfPart.rx.textInput
         _ = itemEdit.SEQNUM <~> tfSeqNum.rx.textInput
