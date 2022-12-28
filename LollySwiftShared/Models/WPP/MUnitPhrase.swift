@@ -122,7 +122,7 @@ class MUnitPhrase: NSObject, Codable, MPhraseProtocol {
 
 class MUnitPhraseEdit: ObservableObject {
     let ID: String
-    @Published var TEXTBOOKNAME: String
+    let TEXTBOOKNAME: String
     @Published var UNITSTR: String
     @Published var indexUNIT: Int
     @Published var PARTSTR: String

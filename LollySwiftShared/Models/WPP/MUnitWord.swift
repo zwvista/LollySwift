@@ -134,7 +134,7 @@ class MUnitWord: NSObject, Codable, MWordProtocol {
 
 class MUnitWordEdit: ObservableObject {
     let ID: String
-    @Published var TEXTBOOKNAME: String
+    let TEXTBOOKNAME: String
     @Published var UNITSTR: String
     @Published var indexUNIT: Int
     @Published var PARTSTR: String

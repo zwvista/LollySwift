@@ -62,7 +62,7 @@ class PhrasesTextbookDetailViewController: UITableViewController {
         configMenuPart()
 
         tfID.text = itemEdit.ID
-        itemEdit.$TEXTBOOKNAME ~> (tfTextbookName, \.text2) ~ subscriptions
+        tfTextbookName.text = itemEdit.TEXTBOOKNAME
         itemEdit.$UNITSTR <~> tfUnit.textProperty ~ subscriptions
         itemEdit.$PARTSTR <~> tfPart.textProperty ~ subscriptions
         itemEdit.$SEQNUM <~> tfSeqNum.textProperty ~ subscriptions

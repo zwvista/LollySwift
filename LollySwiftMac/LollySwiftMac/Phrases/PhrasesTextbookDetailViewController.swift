@@ -42,7 +42,7 @@ class PhrasesTextbookDetailViewController: NSViewController, NSTableViewDataSour
         acUnits.content = item.textbook.arrUnits
         acParts.content = item.textbook.arrParts
         tfID.stringValue = itemEdit.ID
-        itemEdit.$TEXTBOOKNAME ~> (tfTextbookName, \.stringValue) ~ subscriptions
+        tfTextbookName.stringValue = itemEdit.TEXTBOOKNAME
         itemEdit.$indexUNIT <~> pubUnit.selectedItemIndexProperty ~ subscriptions
         itemEdit.$indexPART <~> pubPart.selectedItemIndexProperty ~ subscriptions
         itemEdit.$SEQNUM <~> tfSeqNum.textProperty ~ subscriptions
