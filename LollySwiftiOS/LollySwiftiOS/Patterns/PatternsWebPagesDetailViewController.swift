@@ -35,9 +35,9 @@ class PatternsWebPagesDetailViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        _ = itemEdit.ID ~> tfID.rx.text.orEmpty
-        _ = itemEdit.PATTERNID ~> tfPatternID.rx.text.orEmpty
-        _ = itemEdit.PATTERN ~> tfPattern.rx.text.orEmpty
+        tfID.text = itemEdit.ID
+        tfPatternID.text = itemEdit.PATTERNID
+        tfPattern.text = itemEdit.PATTERN
         _ = itemEdit.SEQNUM <~> tfSeqNum.rx.textInput
         _ = itemEdit.WEBPAGEID ~> tfWebPageID.rx.text.orEmpty
         _ = itemEdit.TITLE <~> tfTitle.rx.textInput

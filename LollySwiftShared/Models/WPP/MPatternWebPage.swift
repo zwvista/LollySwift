@@ -72,18 +72,18 @@ class MPatternWebPage: NSObject, Codable {
 }
 
 class MPatternWebPageEdit {
-    let ID: BehaviorRelay<String>
-    let PATTERNID: BehaviorRelay<String>
-    let PATTERN: BehaviorRelay<String>
+    let ID: String
+    let PATTERNID: String
+    let PATTERN: String
     let SEQNUM: BehaviorRelay<String>
     let WEBPAGEID: BehaviorRelay<String>
     let TITLE: BehaviorRelay<String>
     let URL: BehaviorRelay<String>
 
     init() {
-        ID = BehaviorRelay(value: "")
-        PATTERNID = BehaviorRelay(value: "")
-        PATTERN = BehaviorRelay(value: "")
+        ID = ""
+        PATTERNID = ""
+        PATTERN = ""
         SEQNUM = BehaviorRelay(value: "")
         WEBPAGEID = BehaviorRelay(value: "")
         TITLE = BehaviorRelay(value: "")
@@ -91,9 +91,9 @@ class MPatternWebPageEdit {
     }
 
     init(x: MPatternWebPage) {
-        ID = BehaviorRelay(value: String(x.ID))
-        PATTERNID = BehaviorRelay(value: String(x.PATTERNID))
-        PATTERN = BehaviorRelay(value: x.PATTERN)
+        ID = "\(x.ID)"
+        PATTERNID = "\(x.PATTERNID)"
+        PATTERN = x.PATTERN
         SEQNUM = BehaviorRelay(value: String(x.SEQNUM))
         WEBPAGEID = BehaviorRelay(value: String(x.WEBPAGEID))
         TITLE = BehaviorRelay(value: x.TITLE)

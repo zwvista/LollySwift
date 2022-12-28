@@ -42,14 +42,14 @@ class WordsUnitDetailViewController: NSViewController, NSTableViewDataSource, NS
         super.viewDidLoad()
         acUnits.content = item.textbook.arrUnits
         acParts.content = item.textbook.arrParts
-        _ = itemEdit.ID ~> tfID.rx.text.orEmpty
-        _ = itemEdit.indexUNIT <~> pubUnit.rx.selectedItemIndex
-        _ = itemEdit.indexPART <~> pubPart.rx.selectedItemIndex
+        tfID.stringValue = itemEdit.ID
+        _ = itemEdit.indexUNIT_ <~> pubUnit.rx.selectedItemIndex
+        _ = itemEdit.indexPART_ <~> pubPart.rx.selectedItemIndex
         _ = itemEdit.SEQNUM <~> tfSeqNum.rx.text.orEmpty
-        _ = itemEdit.WORDID ~> tfWordID.rx.text.orEmpty
+        tfWordID.stringValue = itemEdit.WORDID
         _ = itemEdit.WORD <~> tfWord.rx.text.orEmpty
         _ = itemEdit.NOTE <~> tfNote.rx.text.orEmpty
-        _ = itemEdit.FAMIID ~> tfFamiID.rx.text.orEmpty
+        tfFamiID.stringValue = itemEdit.FAMIID
         _ = itemEdit.ACCURACY ~> tfAccuracy.rx.text.orEmpty
         _ = vmEdit.isOKEnabled ~> btnOK.rx.isEnabled
         btnOK.rx.tap.flatMap { [unowned self] in

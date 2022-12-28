@@ -69,20 +69,20 @@ class MPattern: NSObject, Codable {
 }
 
 class MPatternEdit {
-    let ID: BehaviorRelay<String>
+    let ID: String
     let PATTERN: BehaviorRelay<String>
     let NOTE: BehaviorRelay<String>
     let TAGS: BehaviorRelay<String>
 
     init() {
-        ID = BehaviorRelay(value: "")
+        ID = ""
         PATTERN = BehaviorRelay(value: "")
         NOTE = BehaviorRelay(value: "")
         TAGS = BehaviorRelay(value: "")
     }
 
     init(x: MPattern) {
-        ID = BehaviorRelay(value: String(x.ID))
+        ID = "\(x.ID)"
         PATTERN = BehaviorRelay(value: x.PATTERN)
         NOTE = BehaviorRelay(value: x.NOTE)
         TAGS = BehaviorRelay(value: x.TAGS)

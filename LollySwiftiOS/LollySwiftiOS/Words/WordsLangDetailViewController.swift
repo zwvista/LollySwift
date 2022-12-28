@@ -28,10 +28,10 @@ class WordsLangDetailViewController: UITableViewController {
         vmEdit = WordsLangDetailViewModel(vm: vm, item: item) {
             self.tableView.reloadData()
         }
-        _ = itemEdit.ID ~> tfID.rx.text.orEmpty
+        tfID.text = itemEdit.ID
         _ = itemEdit.WORD <~> tfWord.rx.textInput
         _ = itemEdit.NOTE <~> tfNote.rx.textInput
-        _ = itemEdit.FAMIID ~> tfFamiID.rx.text.orEmpty
+        tfFamiID.text = itemEdit.FAMIID
         _ = itemEdit.ACCURACY ~> tfAccuracy.rx.text.orEmpty
         _ = vmEdit.isOKEnabled ~> btnDone.rx.isEnabled
     }

@@ -128,7 +128,7 @@ class MUnitWord: NSObject, Codable, MWordProtocol {
 }
 
 class MUnitWordEdit {
-    let ID: BehaviorRelay<String>
+    let ID: String
     let TEXTBOOKNAME: BehaviorRelay<String>
     let UNITSTR_: BehaviorRelay<String>
     var UNITSTR: String { get { UNITSTR_.value } set { UNITSTR_.accept(newValue) } }
@@ -139,25 +139,25 @@ class MUnitWordEdit {
     let indexPART_: BehaviorRelay<Int>
     var indexPART: Int { get { indexPART_.value } set { indexPART_.accept(newValue) } }
     let SEQNUM: BehaviorRelay<String>
-    let WORDID: BehaviorRelay<String>
+    let WORDID: String
     let WORD: BehaviorRelay<String>
     let NOTE: BehaviorRelay<String>
-    let FAMIID: BehaviorRelay<String>
+    let FAMIID: String
     let ACCURACY: BehaviorRelay<String>
     let WORDS = BehaviorRelay(value: "")
 
     init(x: MUnitWord) {
-        ID = BehaviorRelay(value: String(x.ID))
+        ID = "\(x.ID)"
         TEXTBOOKNAME = BehaviorRelay(value: x.TEXTBOOKNAME)
         UNITSTR_ = BehaviorRelay(value: x.UNITSTR)
         indexUNIT_ = BehaviorRelay(value: x.textbook.arrUnits.firstIndex { $0.value == x.UNIT } ?? -1)
         PARTSTR_ = BehaviorRelay(value: x.PARTSTR)
         indexPART_ = BehaviorRelay(value: x.textbook.arrParts.firstIndex { $0.value == x.PART } ?? -1)
         SEQNUM = BehaviorRelay(value: String(x.SEQNUM))
-        WORDID = BehaviorRelay(value: String(x.WORDID))
+        WORDID = "\(x.WORDID)"
         WORD = BehaviorRelay(value: x.WORD)
         NOTE = BehaviorRelay(value: x.NOTE)
-        FAMIID = BehaviorRelay(value: String(x.FAMIID))
+        FAMIID = "\(x.FAMIID)"
         ACCURACY = BehaviorRelay(value: x.ACCURACY)
     }
 

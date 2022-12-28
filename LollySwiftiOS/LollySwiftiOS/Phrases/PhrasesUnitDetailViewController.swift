@@ -61,11 +61,11 @@ class PhrasesUnitDetailViewController: UITableViewController {
         }
         configMenuPart()
 
-        _ = itemEdit.ID ~> tfID.rx.text.orEmpty
+        tfID.text = itemEdit.ID
         _ = itemEdit.UNITSTR_ <~> tfUnit.rx.textInput
         _ = itemEdit.PARTSTR_ <~> tfPart.rx.textInput
         _ = itemEdit.SEQNUM <~> tfSeqNum.rx.textInput
-        _ = itemEdit.PHRASEID ~> tfPhraseID.rx.text.orEmpty
+        tfPhraseID.text = itemEdit.PHRASEID
         _ = itemEdit.PHRASE <~> tfPhrase.rx.textInput
         _ = itemEdit.TRANSLATION <~> tfTranslation.rx.textInput
         _ = vmEdit.isOKEnabled ~> btnDone.rx.isEnabled

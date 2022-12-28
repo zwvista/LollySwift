@@ -33,8 +33,8 @@ class WordsUnitBatchAddViewController: NSViewController {
         super.viewDidLoad()
         acUnits.content = item.textbook.arrUnits
         acParts.content = item.textbook.arrParts
-        _ = itemEdit.indexUNIT <~> pubUnit.rx.selectedItemIndex
-        _ = itemEdit.indexPART <~> pubPart.rx.selectedItemIndex
+        _ = itemEdit.indexUNIT_ <~> pubUnit.rx.selectedItemIndex
+        _ = itemEdit.indexPART_ <~> pubPart.rx.selectedItemIndex
         _ = itemEdit.WORDS <~> tvWords.rx.string
         btnOK.rx.tap.flatMap { [unowned self] in
             self.vmEdit.onOK()

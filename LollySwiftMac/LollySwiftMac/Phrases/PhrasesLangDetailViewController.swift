@@ -30,7 +30,7 @@ class PhrasesLangDetailViewController: NSViewController, NSTableViewDataSource, 
         vmEdit = PhrasesLangDetailViewModel(vm: vm, item: item) {
             self.tableView.reloadData()
         }
-        _ = itemEdit.ID ~> tfID.rx.text.orEmpty
+        tfID.stringValue = itemEdit.ID
         _ = itemEdit.PHRASE <~> tfPhrase.rx.text.orEmpty
         _ = itemEdit.TRANSLATION <~> tfTranslation.rx.text.orEmpty
         _ = vmEdit.isOKEnabled ~> btnOK.rx.isEnabled

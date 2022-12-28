@@ -118,7 +118,7 @@ class MUnitPhrase: NSObject, Codable, MPhraseProtocol {
 }
 
 class MUnitPhraseEdit {
-    let ID: BehaviorRelay<String>
+    let ID: String
     let TEXTBOOKNAME: BehaviorRelay<String>
     let UNITSTR_: BehaviorRelay<String>
     var UNITSTR: String { get { UNITSTR_.value } set { UNITSTR_.accept(newValue) } }
@@ -129,20 +129,20 @@ class MUnitPhraseEdit {
     let indexPART_: BehaviorRelay<Int>
     var indexPART: Int { get { indexPART_.value } set { indexPART_.accept(newValue) } }
     let SEQNUM: BehaviorRelay<String>
-    let PHRASEID: BehaviorRelay<String>
+    let PHRASEID: String
     let PHRASE: BehaviorRelay<String>
     let TRANSLATION: BehaviorRelay<String>
     let PHRASES = BehaviorRelay(value: "")
 
     init(x: MUnitPhrase) {
-        ID = BehaviorRelay(value: String(x.ID))
+        ID = "\(x.ID)"
         TEXTBOOKNAME = BehaviorRelay(value: x.TEXTBOOKNAME)
         UNITSTR_ = BehaviorRelay(value: x.UNITSTR)
         indexUNIT_ = BehaviorRelay(value: x.textbook.arrUnits.firstIndex { $0.value == x.UNIT } ?? -1)
         PARTSTR_ = BehaviorRelay(value: x.PARTSTR)
         indexPART_ = BehaviorRelay(value: x.textbook.arrParts.firstIndex { $0.value == x.PART } ?? -1)
         SEQNUM = BehaviorRelay(value: String(x.SEQNUM))
-        PHRASEID = BehaviorRelay(value: String(x.PHRASEID))
+        PHRASEID = "\(x.PHRASEID)"
         PHRASE = BehaviorRelay(value: x.PHRASE)
         TRANSLATION = BehaviorRelay(value: x.TRANSLATION)
     }

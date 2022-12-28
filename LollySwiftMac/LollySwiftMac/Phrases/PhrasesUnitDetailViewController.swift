@@ -40,11 +40,11 @@ class PhrasesUnitDetailViewController: NSViewController, NSTableViewDataSource, 
         super.viewDidLoad()
         acUnits.content = item.textbook.arrUnits
         acParts.content = item.textbook.arrParts
-        _ = itemEdit.ID ~> tfID.rx.text.orEmpty
-        _ = itemEdit.indexUNIT <~> pubUnit.rx.selectedItemIndex
-        _ = itemEdit.indexPART <~> pubPart.rx.selectedItemIndex
+        tfID.stringValue = itemEdit.ID
+        _ = itemEdit.indexUNIT_ <~> pubUnit.rx.selectedItemIndex
+        _ = itemEdit.indexPART_ <~> pubPart.rx.selectedItemIndex
         _ = itemEdit.SEQNUM <~> tfSeqNum.rx.text.orEmpty
-        _ = itemEdit.PHRASEID ~> tfPhraseID.rx.text.orEmpty
+        tfPhraseID.stringValue = itemEdit.PHRASEID
         _ = itemEdit.PHRASE <~> tfPhrase.rx.text.orEmpty
         _ = itemEdit.TRANSLATION <~> tfTranslation.rx.text.orEmpty
         _ = vmEdit.isOKEnabled ~> btnOK.rx.isEnabled

@@ -32,10 +32,10 @@ class WordsLangDetailViewController: NSViewController, NSTableViewDataSource, NS
         vmEdit = WordsLangDetailViewModel(vm: vm, item: item) {
             self.tableView.reloadData()
         }
-        _ = itemEdit.ID ~> tfID.rx.text.orEmpty
+        tfID.stringValue = itemEdit.ID
         _ = itemEdit.WORD <~> tfWord.rx.text.orEmpty
         _ = itemEdit.NOTE <~> tfNote.rx.text.orEmpty
-        _ = itemEdit.FAMIID ~> tfFamiID.rx.text.orEmpty
+        tfFamiID.stringValue = itemEdit.FAMIID
         _ = itemEdit.ACCURACY ~> tfAccuracy.rx.text.orEmpty
         _ = vmEdit.isOKEnabled ~> btnOK.rx.isEnabled
         btnOK.rx.tap.flatMap { [unowned self] in

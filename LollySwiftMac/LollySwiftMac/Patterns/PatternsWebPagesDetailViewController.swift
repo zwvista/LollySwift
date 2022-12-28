@@ -33,9 +33,9 @@ class PatternsWebPagesDetailViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         vmEdit = PatternsWebPagesDetailViewModel(item: item)
-        _ = itemEdit.ID ~> tfID.rx.text.orEmpty
-        _ = itemEdit.PATTERNID ~> tfPatternID.rx.text.orEmpty
-        _ = itemEdit.PATTERN ~> tfPattern.rx.text.orEmpty
+        tfID.stringValue = itemEdit.ID
+        tfPatternID.stringValue = itemEdit.PATTERNID
+        tfPattern.stringValue = itemEdit.PATTERN
         _ = itemEdit.SEQNUM <~> tfSeqNum.rx.text.orEmpty
         _ = itemEdit.WEBPAGEID ~> tfWebPageID.rx.text.orEmpty
         _ = itemEdit.TITLE <~> tfTitle.rx.text.orEmpty

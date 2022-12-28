@@ -62,14 +62,14 @@ class WordsUnitDetailViewController: UITableViewController {
         }
         configMenuPart()
 
-        _ = itemEdit.ID ~> tfID.rx.text.orEmpty
+        tfID.text = itemEdit.ID
         _ = itemEdit.UNITSTR_ <~> tfUnit.rx.textInput
         _ = itemEdit.PARTSTR_ <~> tfPart.rx.textInput
         _ = itemEdit.SEQNUM <~> tfSeqNum.rx.textInput
-        _ = itemEdit.WORDID ~> tfWordID.rx.text
+        tfWordID.text = itemEdit.WORDID
         _ = itemEdit.WORD <~> tfWord.rx.textInput
         _ = itemEdit.NOTE <~> tfNote.rx.textInput
-        _ = itemEdit.FAMIID ~> tfFamiID.rx.text
+        tfFamiID.text = itemEdit.FAMIID
         _ = itemEdit.ACCURACY ~> tfAccuracy.rx.text
         _ = vmEdit.isOKEnabled ~> btnDone.rx.isEnabled
     }

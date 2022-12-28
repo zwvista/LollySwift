@@ -69,17 +69,17 @@ class MLangWord: NSObject, Codable, MWordProtocol {
 }
 
 class MLangWordEdit {
-    let ID: BehaviorRelay<String>
+    let ID: String
     let WORD: BehaviorRelay<String>
     let NOTE: BehaviorRelay<String>
-    let FAMIID: BehaviorRelay<String>
+    let FAMIID: String
     let ACCURACY: BehaviorRelay<String>
 
     init(x: MLangWord) {
-        ID = BehaviorRelay(value: String(x.ID))
+        ID = "\"(x.ID)"
         WORD = BehaviorRelay(value: x.WORD)
         NOTE = BehaviorRelay(value: x.NOTE)
-        FAMIID = BehaviorRelay(value: String(x.FAMIID))
+        FAMIID = "\(x.FAMIID)"
         ACCURACY = BehaviorRelay(value: x.ACCURACY)
     }
 

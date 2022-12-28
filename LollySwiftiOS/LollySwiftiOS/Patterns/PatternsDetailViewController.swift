@@ -28,7 +28,7 @@ class PatternsDetailViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        _ = itemEdit.ID ~> tfID.rx.text.orEmpty
+        tfID.text = itemEdit.ID
         _ = itemEdit.PATTERN <~> tfPattern.rx.textInput
         _ = itemEdit.NOTE <~> tfNote.rx.textInput
         _ = itemEdit.TAGS <~> tfTags.rx.textInput
