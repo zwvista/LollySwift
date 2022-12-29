@@ -40,7 +40,7 @@
                                     <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="88" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="QsG-w8-IST">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="88" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="QsG-w8-IST">
                                 <rect key="frame" x="0.0" y="148" width="414" height="714"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
@@ -111,13 +111,21 @@
                                 <action selector="presentLeftMenuViewController:" destination="0f6-eh-sBq" id="6OF-Px-Hxg"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="7oO-l3-tjY">
-                            <connections>
-                                <segue destination="jxH-Re-jyk" kind="presentation" identifier="add" id="XXt-Pm-Ua7"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="7oO-l3-tjY">
+                                <connections>
+                                    <segue destination="jxH-Re-jyk" kind="presentation" identifier="add" id="XXt-Pm-Ua7"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Edit" id="nnm-Do-nOk">
+                                <connections>
+                                    <action selector="btnEditClicked:" destination="Kja-H8-0Ak" id="xap-Hc-1VI"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="btnEdit" destination="nnm-Do-nOk" id="vss-sC-5WA"/>
                         <outlet property="btnScopeFilter" destination="r5t-kG-eRF" id="o7q-z1-dkP"/>
                         <outlet property="sbTextFilter" destination="1D0-3n-VX2" id="cQw-q4-073"/>
                         <outlet property="tableView" destination="QsG-w8-IST" id="raC-sW-gQU"/>
