@@ -11,8 +11,10 @@ struct PhrasesUnitView: View {
     @StateObject var vm = PhrasesUnitViewModel(settings: vmSettings, inTextbook: true, needCopy: false) {}
     @Environment(\.editMode) var editMode
     var isEditing: Bool { editMode?.wrappedValue.isEditing == true }
-    @State var showDetail = false
+    @State var showDetailEdit = false
+    @State var showDetailAdd = false
     @State var showBatchEdit = false
+    @State var showItemMore = false
     @State var showListMore = false
     var body: some View {
         VStack {
@@ -49,14 +51,39 @@ struct PhrasesUnitView: View {
                     .frame(maxWidth: .infinity)
                     .onTapGesture {
                         if isEditing {
-                            showDetail = true
+                            showDetailEdit = true
                         } else {
                             LollySwiftUIiOSApp.speak(string: item.PHRASE)
                         }
                     }
-                    .sheet(isPresented: $showDetail) {
-                        PhrasesUnitDetailView(vmEdit: getVmEdit(vm: vm, item: item, wordid: 0), showDetail: $showDetail)
+                    .sheet(isPresented: $showDetailEdit) {
+                        PhrasesUnitDetailView(vmEdit: getVmEdit(vm: vm, item: item, wordid: 0), showDetail: $showDetailEdit)
                     }
+                    .swipeActions(allowsFullSwipe: false) {
+                        Button("More") {
+                            showItemMore.toggle()
+                        }
+                        Button("Delete") {
+                            
+                        }
+                        .tint(Color.red)
+                    }
+                    .alert(Text("Word"), isPresented: $showItemMore, actions: {
+                        Button("Delete") {
+                        }
+                        Button("Edit") {
+                            showDetailEdit.toggle()
+                        }
+                        Button("Copy Phrase") {
+                            iOSApi.copyText(item.PHRASE)
+                        }
+                        Button("Google Phrase") {
+                            iOSApi.googleString(item.PHRASE)
+                        }
+                        Button("Cancel") {}
+                    }, message: {
+                        Text(item.PHRASE)
+                    })
                 }
                 .onDelete { IndexSet in
 
@@ -70,7 +97,10 @@ struct PhrasesUnitView: View {
                     }
                 }
             }
-            .alert(Text("Word"), isPresented: $showListMore, actions: {
+            .alert(Text("Phrases"), isPresented: $showListMore, actions: {
+                Button("Add") {
+                    showDetailAdd.toggle()
+                }
                 Button("Batch Edit") {
                     showBatchEdit = true
                 }
@@ -78,6 +108,9 @@ struct PhrasesUnitView: View {
             }, message: {
                 Text("More")
             })
+            .sheet(isPresented: $showDetailAdd) {
+                PhrasesUnitDetailView(vmEdit: getVmEdit(vm: vm, item: vm.newUnitPhrase(), wordid: 0), showDetail: $showDetailAdd)
+            }
             .sheet(isPresented: $showBatchEdit) {
                 PhrasesUnitBatchEditView()
             }
