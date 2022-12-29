@@ -118,6 +118,10 @@ class WordsUnitViewModel: WordsBaseViewModel {
 
     func clearNote(index: Int) async {
         let item = arrWords[index]
+        await clearNote(item: item)
+    }
+
+    func clearNote(item: MUnitWord) async {
         item.NOTE = SettingsViewModel.zeroNote
         await WordsUnitViewModel.update(item.WORDID, note: item.NOTE)
     }

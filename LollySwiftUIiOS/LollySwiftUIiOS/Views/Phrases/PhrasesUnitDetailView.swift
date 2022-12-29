@@ -8,13 +8,69 @@
 import SwiftUI
 
 struct PhrasesUnitDetailView: View {
+    @ObservedObject var vmEdit: PhrasesUnitDetailViewModel
+    @Binding var showDetail: Bool
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView {
+            Form {
+                HStack {
+                    Text("ID:")
+                    Spacer()
+                    Text(vmEdit.itemEdit.ID)
+                }
+                HStack {
+                    Text("UNIT:")
+                    Spacer()
+                    Picker("", selection: $vmEdit.itemEdit.indexUNIT) {
+                        ForEach(vmSettings.arrUnits.indices, id: \.self) {
+                            Text(vmSettings.arrUnits[$0].label)
+                        }
+                    }
+                }
+                HStack {
+                    Text("PART:")
+                    Spacer()
+                    Picker("", selection: $vmEdit.itemEdit.indexPART) {
+                        ForEach(vmSettings.arrParts.indices, id: \.self) {
+                            Text(vmSettings.arrParts[$0].label)
+                        }
+                    }
+                }
+                HStack {
+                    Text("SEQNUM:")
+                    Spacer()
+                    TextField("SEQNUM", text: $vmEdit.itemEdit.SEQNUM)
+                }
+                HStack{
+                    Text("PHRASEID:")
+                    Spacer()
+                    Text(vmEdit.itemEdit.PHRASEID)
+                }
+                HStack {
+                    Text("PHRASE:")
+                    Spacer()
+                    TextField("", text: $vmEdit.itemEdit.PHRASE)
+                }
+                HStack {
+                    Text("TRANSLATION:")
+                    Spacer()
+                    TextField("", text: $vmEdit.itemEdit.TRANSLATION)
+                }
+            }
+            .navigationBarItems(leading: Button("Cancel") {
+                showDetail.toggle()
+            }, trailing: Button("Done") {
+                Task{
+                    await vmEdit.onOK()
+                    showDetail.toggle()
+                }
+            })
+        }
     }
 }
 
-struct PhrasesUnitDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        PhrasesUnitDetailView()
-    }
-}
+//struct PhrasesUnitDetailView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        PhrasesUnitDetailView()
+//    }
+//}

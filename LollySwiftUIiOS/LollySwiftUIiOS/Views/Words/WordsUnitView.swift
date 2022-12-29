@@ -11,9 +11,11 @@ struct WordsUnitView: View {
     @StateObject var vm = WordsUnitViewModel(settings: vmSettings, inTextbook: true, needCopy: false) {}
     @Environment(\.editMode) var editMode
     var isEditing: Bool { editMode?.wrappedValue.isEditing == true }
-    @State var showDetail = false
+    @State var showDetailEdit = false
+    @State var showDetailAdd = false
     @State var showBatchEdit = false
     @State var showDict = false
+    @State var showItemMore = false
     @State var showListMore = false
     var body: some View {
         VStack {
@@ -58,17 +60,57 @@ struct WordsUnitView: View {
                     .frame(maxWidth: .infinity)
                     .onTapGesture {
                         if isEditing {
-                            showDetail.toggle()
+                            showDetailEdit.toggle()
                         } else {
                             LollySwiftUIiOSApp.speak(string: item.WORD)
                         }
                     }
-                    .sheet(isPresented: $showDetail) {
-                        WordsUnitDetailView(vmEdit: getVmEdit(vm: vm, item: item, phraseid: 0), showDetail: $showDetail)
+                    .sheet(isPresented: $showDetailEdit) {
+                        WordsUnitDetailView(vmEdit: getVmEdit(vm: vm, item: item, phraseid: 0), showDetail: $showDetailEdit)
                     }
                     .sheet(isPresented: $showDict) {
                         WordsDictView()
                     }
+                    .swipeActions(allowsFullSwipe: false) {
+                        Button("More") {
+                            showItemMore.toggle()
+                        }
+                        Button("Delete") {
+                            
+                        }
+                        .tint(Color.red)
+                    }
+                    .alert(Text("Word"), isPresented: $showItemMore, actions: {
+                        Button("Delete") {
+                        }
+                        Button("Edit") {
+                            showDetailEdit.toggle()
+                        }
+                        Button("Retrieve Note") {
+                            Task {
+                                await self.vm.getNote(item: item)
+                            }
+                        }
+                        Button("Clear Note") {
+                            Task {
+                                await self.vm.clearNote(item: item)
+                            }
+                        }
+                        Button("Copy Word") {
+                            iOSApi.copyText(item.WORD)
+                        }
+                        Button("Google Word") {
+                            iOSApi.googleString(item.WORD)
+                        }
+                        Button("Online Dictionary") {
+                            let itemDict = vmSettings.arrDictsReference.first { $0.DICTNAME == vmSettings.selectedDictReference.DICTNAME }!
+                            let url = itemDict.urlString(word: item.WORD, arrAutoCorrect: vmSettings.arrAutoCorrect)
+                            UIApplication.shared.open(URL(string: url)!)
+                        }
+                        Button("Cancel") {}
+                    }, message: {
+                        Text(item.WORDNOTE)
+                    })
                 }
                 .onDelete { IndexSet in
 
@@ -82,7 +124,10 @@ struct WordsUnitView: View {
                     }
                 }
             }
-            .alert(Text("Word"), isPresented: $showListMore, actions: {
+            .alert(Text("Words"), isPresented: $showListMore, actions: {
+                Button("Add") {
+                    showDetailAdd.toggle()
+                }
                 Button("Retrieve All Notes") {
                     getNotes(ifEmpty: false)
                 }
@@ -106,6 +151,9 @@ struct WordsUnitView: View {
             }, message: {
                 Text("More")
             })
+            .sheet(isPresented: $showDetailAdd) {
+                WordsUnitDetailView(vmEdit: getVmEdit(vm: vm, item: vm.newUnitWord(), phraseid: 0), showDetail: $showDetailAdd)
+            }
             .sheet(isPresented: $showBatchEdit) {
                 WordsUnitBatchEditView()
             }

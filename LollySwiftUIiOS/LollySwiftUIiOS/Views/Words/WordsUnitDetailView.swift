@@ -58,6 +58,16 @@ struct WordsUnitDetailView: View {
                     Spacer()
                     TextField("", text: $vmEdit.itemEdit.NOTE)
                 }
+                HStack{
+                    Text("FAMIID:")
+                    Spacer()
+                    Text(vmEdit.itemEdit.FAMIID)
+                }
+                HStack{
+                    Text("ACCURACY:")
+                    Spacer()
+                    Text(vmEdit.itemEdit.ACCURACY)
+                }
             }
             .navigationBarItems(leading: Button("Cancel") {
                 showDetail.toggle()
