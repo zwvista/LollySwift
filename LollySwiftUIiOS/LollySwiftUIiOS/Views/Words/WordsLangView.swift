@@ -12,6 +12,11 @@ struct WordsLangView: View {
     @Environment(\.editMode) var editMode
     var isEditing: Bool { editMode?.wrappedValue.isEditing == true }
     @State var showDetail = false
+    @State var showDetailEdit = false
+    @State var showDetailAdd = false
+    @State var showBatchEdit = false
+    @State var showDict = false
+    @State var showItemMore = false
     var body: some View {
         VStack {
             HStack(spacing: 0) {
@@ -34,19 +39,75 @@ struct WordsLangView: View {
                             Text(item.NOTE)
                                 .foregroundColor(Color.color3)
                         }
+                        Spacer()
+                        if !isEditing {
+                            Image(systemName: "info.circle")
+                                .foregroundColor(.blue)
+                                .onTapGesture {
+                                    showDict.toggle()
+                                }
+                        }
                     }
                     .contentShape(Rectangle())
+                    .frame(maxWidth: .infinity)
                     .onTapGesture {
-                        if editMode?.wrappedValue.isEditing == true {
-                            showDetail = true
+                        if isEditing {
+                            showDetailEdit.toggle()
                         } else {
                             LollySwiftUIiOSApp.speak(string: item.WORD)
                         }
                     }
-                    .sheet(isPresented: $showDetail) {
-                        WordsLangDetailView()
+                    .sheet(isPresented: $showDetailEdit) {
+                        WordsLangDetailView(vmEdit: WordsLangDetailViewModel(vm: vm, item: item, complete: {}), showDetail: $showDetailEdit)
+                    }
+                    .sheet(isPresented: $showDict) {
+                        WordsDictView()
+                    }
+                    .swipeActions(allowsFullSwipe: false) {
+                        Button("More") {
+                            showItemMore.toggle()
+                        }
+                        Button("Delete") {
+                            
+                        }
+                        .tint(Color.red)
+                    }
+                    .alert(Text("Word"), isPresented: $showItemMore, actions: {
+                        Button("Delete") {
+                        }
+                        Button("Edit") {
+                            showDetailEdit.toggle()
+                        }
+                        Button("Copy Word") {
+                            iOSApi.copyText(item.WORD)
+                        }
+                        Button("Google Word") {
+                            iOSApi.googleString(item.WORD)
+                        }
+                        Button("Online Dictionary") {
+                            let itemDict = vmSettings.arrDictsReference.first { $0.DICTNAME == vmSettings.selectedDictReference.DICTNAME }!
+                            let url = itemDict.urlString(word: item.WORD, arrAutoCorrect: vmSettings.arrAutoCorrect)
+                            UIApplication.shared.open(URL(string: url)!)
+                        }
+                        Button("Cancel") {}
+                    }, message: {
+                        Text(item.WORDNOTE)
+                    })
+                }
+                .onDelete { IndexSet in
+
+                }
+            }
+            .toolbar {
+                ToolbarItemGroup {
+                    EditButton()
+                    Button("Add") {
+                        showDetailAdd.toggle()
                     }
                 }
+            }
+            .sheet(isPresented: $showDetailAdd) {
+                WordsLangDetailView(vmEdit: WordsLangDetailViewModel(vm: vm, item: vm.newLangWord(), complete: {}), showDetail: $showDetailAdd)
             }
         }
     }

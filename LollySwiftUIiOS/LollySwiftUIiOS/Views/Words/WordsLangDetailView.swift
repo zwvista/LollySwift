@@ -8,13 +8,51 @@
 import SwiftUI
 
 struct WordsLangDetailView: View {
+    @ObservedObject var vmEdit: WordsLangDetailViewModel
+    @Binding var showDetail: Bool
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView {
+            Form {
+                HStack {
+                    Text("ID:")
+                    Spacer()
+                    Text(vmEdit.itemEdit.ID)
+                }
+                HStack {
+                    Text("WORD:")
+                    Spacer()
+                    TextField("", text: $vmEdit.itemEdit.WORD)
+                }
+                HStack {
+                    Text("NOTE:")
+                    Spacer()
+                    TextField("", text: $vmEdit.itemEdit.NOTE)
+                }
+                HStack{
+                    Text("FAMIID:")
+                    Spacer()
+                    Text(vmEdit.itemEdit.FAMIID)
+                }
+                HStack{
+                    Text("ACCURACY:")
+                    Spacer()
+                    Text(vmEdit.itemEdit.ACCURACY)
+                }
+            }
+            .navigationBarItems(leading: Button("Cancel") {
+                showDetail.toggle()
+            }, trailing: Button("Done") {
+                Task{
+                    await vmEdit.onOK()
+                    showDetail.toggle()
+                }
+            }.disabled(!vmEdit.isOKEnabled))
+        }
     }
 }
 
-struct WordsLangDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        WordsLangDetailView()
-    }
-}
+//struct WordsLangDetailView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        WordsLangDetailView()
+//    }
+//}

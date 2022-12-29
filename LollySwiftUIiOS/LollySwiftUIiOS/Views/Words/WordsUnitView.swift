@@ -66,7 +66,7 @@ struct WordsUnitView: View {
                         }
                     }
                     .sheet(isPresented: $showDetailEdit) {
-                        WordsUnitDetailView(vmEdit: getVmEdit(vm: vm, item: item, phraseid: 0), showDetail: $showDetailEdit)
+                        WordsUnitDetailView(vmEdit: WordsUnitDetailViewModel(vm: vm, item: item, phraseid: 0, complete: {}), showDetail: $showDetailEdit)
                     }
                     .sheet(isPresented: $showDict) {
                         WordsDictView()
@@ -145,14 +145,14 @@ struct WordsUnitView: View {
                     }
                 }
                 Button("Batch Edit") {
-                    showBatchEdit = true
+                    showBatchEdit.toggle()
                 }
                 Button("Cancel") {}
             }, message: {
                 Text("More")
             })
             .sheet(isPresented: $showDetailAdd) {
-                WordsUnitDetailView(vmEdit: getVmEdit(vm: vm, item: vm.newUnitWord(), phraseid: 0), showDetail: $showDetailAdd)
+                WordsUnitDetailView(vmEdit: WordsUnitDetailViewModel(vm: vm, item: vm.newUnitWord(), phraseid: 0, complete: {}), showDetail: $showDetailAdd)
             }
             .sheet(isPresented: $showBatchEdit) {
                 WordsUnitBatchEditView()
@@ -165,10 +165,6 @@ struct WordsUnitView: View {
             await vm.getNotes(ifEmpty: ifEmpty, oneComplete: { _ in }, allComplete: {
             })
         }
-    }
-
-    func getVmEdit(vm: WordsUnitViewModel, item: MUnitWord, phraseid: Int) -> WordsUnitDetailViewModel {
-        WordsUnitDetailViewModel(vm: vm, item: item, phraseid: phraseid) {}
     }
 }
 

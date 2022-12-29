@@ -57,7 +57,7 @@ struct PhrasesUnitView: View {
                         }
                     }
                     .sheet(isPresented: $showDetailEdit) {
-                        PhrasesUnitDetailView(vmEdit: getVmEdit(vm: vm, item: item, wordid: 0), showDetail: $showDetailEdit)
+                        PhrasesUnitDetailView(vmEdit: PhrasesUnitDetailViewModel(vm: vm, item: item, wordid: 0, complete: {}), showDetail: $showDetailEdit)
                     }
                     .swipeActions(allowsFullSwipe: false) {
                         Button("More") {
@@ -109,16 +109,12 @@ struct PhrasesUnitView: View {
                 Text("More")
             })
             .sheet(isPresented: $showDetailAdd) {
-                PhrasesUnitDetailView(vmEdit: getVmEdit(vm: vm, item: vm.newUnitPhrase(), wordid: 0), showDetail: $showDetailAdd)
+                PhrasesUnitDetailView(vmEdit: PhrasesUnitDetailViewModel(vm: vm, item: vm.newUnitPhrase(), wordid: 0, complete: {}), showDetail: $showDetailAdd)
             }
             .sheet(isPresented: $showBatchEdit) {
                 PhrasesUnitBatchEditView()
             }
         }
-    }
-
-    func getVmEdit(vm: PhrasesUnitViewModel, item: MUnitPhrase, wordid: Int) -> PhrasesUnitDetailViewModel {
-        PhrasesUnitDetailViewModel(vm: vm, item: item, wordid: wordid) {}
     }
 }
 

@@ -25,7 +25,7 @@ struct PhrasesLangView: View {
                 .tint(.white)
             }
             List {
-                ForEach(vm.arrPhrases, id: \.ID) { item in
+                ForEach(vm.arrPhrasesFiltered, id: \.ID) { item in
                     HStack {
                         VStack(alignment: .leading) {
                             Text(item.PHRASE)
