@@ -9,6 +9,12 @@
 import Foundation
 import WebKit
 
+enum DictWebViewStatus {
+    case ready
+    case navigating
+    case automating
+}
+
 @MainActor
 class DictStore: NSObject, ObservableObject {
 

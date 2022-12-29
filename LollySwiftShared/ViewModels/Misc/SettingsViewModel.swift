@@ -9,6 +9,12 @@
 import Foundation
 import Combine
 
+enum UnitPartToType: Int {
+    case unit
+    case part
+    case to
+}
+
 @MainActor
 class SettingsViewModel: NSObject, ObservableObject {
 

@@ -8,25 +8,6 @@
 
 import Foundation
 
-enum DictWebViewStatus {
-    case ready
-    case navigating
-    case automating
-}
-
-enum ReviewMode: Int {
-    case reviewAuto
-    case reviewManual
-    case test
-    case textbook
-}
-
-enum UnitPartToType: Int {
-    case unit
-    case part
-    case to
-}
-
 class GlobalUser: ObservableObject {
     @Published
     var userid = ""

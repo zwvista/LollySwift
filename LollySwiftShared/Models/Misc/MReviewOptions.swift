@@ -8,6 +8,13 @@
 
 import Foundation
 
+enum ReviewMode: Int {
+    case reviewAuto
+    case reviewManual
+    case test
+    case textbook
+}
+
 class MReviewOptions: NSObject {
     var mode: ReviewMode = .reviewAuto
     var interval = 5
