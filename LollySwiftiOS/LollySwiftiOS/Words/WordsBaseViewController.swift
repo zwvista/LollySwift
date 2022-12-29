@@ -83,9 +83,6 @@ class WordsBaseViewController: UIViewController, UITableViewDelegate, UITableVie
         0
     }
 
-    func applyFilters() {
-    }
-
     deinit {
         print("DEBUG: \(self.className) deinit")
     }

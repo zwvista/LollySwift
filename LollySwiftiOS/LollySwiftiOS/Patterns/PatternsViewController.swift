@@ -14,6 +14,7 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var sbTextFilter: UISearchBar!
     @IBOutlet weak var btnScopeFilter: UIButton!
+    @IBOutlet weak var btnEdit: UIBarButtonItem!
 
     var vm: PatternsViewModel!
     var arrPatterns: [MPattern] { vm.arrPatternsFiltered }
@@ -64,8 +65,12 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        vm.selectedPatternItem = arrPatterns[indexPath.row]
-        AppDelegate.speak(string: vm.selectedPatternItem!.PATTERN)
+        let item = arrPatterns[indexPath.row]
+        if tableView.isEditing {
+            performSegue(withIdentifier: "edit", sender: item)
+        } else {
+            AppDelegate.speak(string: item.PATTERN)
+        }
     }
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -129,6 +134,11 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
             controller.vm = PatternsWebPagesViewModel(settings: vmSettings, needCopy: false)
             controller.vm.selectedPatternItem = vm.selectedPatternItem
         }
+    }
+
+    @IBAction func btnEditClicked(_ sender: AnyObject) {
+        tableView.isEditing = !tableView.isEditing
+        btnEdit.title = tableView.isEditing ? "Done" : "Edit"
     }
 
     @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
