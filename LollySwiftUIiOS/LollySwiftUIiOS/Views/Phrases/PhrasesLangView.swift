@@ -10,6 +10,7 @@ import SwiftUI
 struct PhrasesLangView: View {
     @StateObject var vm = PhrasesLangViewModel(settings: vmSettings, needCopy: false) {}
     @Environment(\.editMode) var editMode
+    var isEditing: Bool { editMode?.wrappedValue.isEditing == true }
     @State var showDetail = false
     var body: some View {
         VStack {

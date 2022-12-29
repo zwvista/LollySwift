@@ -41,7 +41,7 @@ struct PatternsDetailView: View {
                     await vmEdit.onOK()
                     showDetail.toggle()
                 }
-            })
+            }.disabled(!vmEdit.isOKEnabled))
         }
     }
 }

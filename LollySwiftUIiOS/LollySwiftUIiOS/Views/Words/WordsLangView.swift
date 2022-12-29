@@ -10,6 +10,7 @@ import SwiftUI
 struct WordsLangView: View {
     @StateObject var vm = WordsLangViewModel(settings: vmSettings, needCopy: false) {}
     @Environment(\.editMode) var editMode
+    var isEditing: Bool { editMode?.wrappedValue.isEditing == true }
     @State var showDetail = false
     var body: some View {
         VStack {

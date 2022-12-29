@@ -76,7 +76,7 @@ struct WordsUnitDetailView: View {
                     await vmEdit.onOK()
                     showDetail.toggle()
                 }
-            })
+            }.disabled(!vmEdit.isOKEnabled))
         }
     }
 }
