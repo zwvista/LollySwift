@@ -16,7 +16,7 @@ struct PhrasesLangView: View {
             HStack(spacing: 0) {
                 SearchBar(text: $vm.textFilter, placeholder: "Filter") { _ in }
                 Picker("", selection: $vm.scopeFilter) {
-                    ForEach(SettingsViewModel.arrScopeWordFilters, id: \.self) { s in
+                    ForEach(SettingsViewModel.arrScopePhraseFilters, id: \.self) { s in
                         Text(s)
                     }
                 }

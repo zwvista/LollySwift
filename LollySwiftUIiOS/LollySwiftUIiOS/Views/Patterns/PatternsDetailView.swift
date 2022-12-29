@@ -8,13 +8,46 @@
 import SwiftUI
 
 struct PatternsDetailView: View {
+    @ObservedObject var vmEdit: PatternsDetailViewModel
+    @Binding var showDetail: Bool
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView {
+            Form {
+                HStack {
+                    Text("ID:")
+                    Spacer()
+                    Text(vmEdit.itemEdit.ID)
+                }
+                HStack {
+                    Text("PATTERN:")
+                    Spacer()
+                    TextField("PATTERN", text: $vmEdit.itemEdit.PATTERN)
+                }
+                HStack {
+                    Text("NOTE:")
+                    Spacer()
+                    TextField("NOTE", text: $vmEdit.itemEdit.NOTE)
+                }
+                HStack {
+                    Text("TAGS:")
+                    Spacer()
+                    TextField("TAGS", text: $vmEdit.itemEdit.TAGS)
+                }
+            }
+            .navigationBarItems(leading: Button("Cancel") {
+                showDetail.toggle()
+            }, trailing: Button("Done") {
+                Task{
+                    await vmEdit.onOK()
+                    showDetail.toggle()
+                }
+            })
+        }
     }
 }
 
-struct PatternsDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        PatternsDetailView()
-    }
-}
+//struct PatternsDetailView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        PatternsDetailView()
+//    }
+//}
