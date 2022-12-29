@@ -11,6 +11,12 @@ import RxSwift
 import RxRelay
 import RxBinding
 
+enum UnitPartToType: Int {
+    case unit
+    case part
+    case to
+}
+
 class SettingsViewModel: NSObject {
 
     var arrUSMappings = [MUSMapping]()

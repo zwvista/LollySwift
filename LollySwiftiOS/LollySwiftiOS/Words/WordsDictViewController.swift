@@ -20,7 +20,6 @@ class WordsDictViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
     var dictStore: DictStore!
 
     let vm = WordsDictViewModel(settings: vmSettings, needCopy: false) {}
-    var dictStatus = DictWebViewStatus.ready
 
     override func viewDidLoad() {
         super.viewDidLoad()

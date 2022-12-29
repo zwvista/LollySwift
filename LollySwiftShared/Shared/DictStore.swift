@@ -10,6 +10,12 @@ import Foundation
 import WebKit
 import RxBinding
 
+enum DictWebViewStatus {
+    case ready
+    case navigating
+    case automating
+}
+
 class DictStore: NSObject {
 
     var dictStatus = DictWebViewStatus.ready
