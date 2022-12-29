@@ -75,7 +75,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
         let editAction = UIContextualAction(style: .normal, title: "Edit") { _,_,_ in edit() }
         editAction.backgroundColor = .blue
         let moreAction = UIContextualAction(style: .normal, title: "More") { [unowned self] _,_,_ in
-            let alertController = UIAlertController(title: "Word", message: item.PHRASE, preferredStyle: .alert)
+            let alertController = UIAlertController(title: "Phrase", message: item.PHRASE, preferredStyle: .alert)
             let deleteAction2 = UIAlertAction(title: "Delete", style: .destructive) { _ in delete() }
             alertController.addAction(deleteAction2)
             let editAction2 = UIAlertAction(title: "Edit", style: .default) { _ in edit() }
