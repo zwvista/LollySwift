@@ -114,7 +114,7 @@ struct WordsUnitView: View {
                 }
             }
             .navigationDestination(for: MUnitWord.self) { item in
-                WordsDictView()
+                WordsDictView(vm: WordsDictViewModel(settings: vmSettings, needCopy: false, arrWords: vm.arrWordsFiltered.map(\.WORD), currentWordIndex: vm.arrWordsFiltered.firstIndex(of: item)!) {})
             }
             .toolbar {
                 ToolbarItemGroup {

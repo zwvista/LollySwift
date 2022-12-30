@@ -60,9 +60,6 @@ struct WordsLangView: View {
                     .sheet(isPresented: $showDetailEdit) {
                         WordsLangDetailView(vmEdit: WordsLangDetailViewModel(vm: vm, item: item, complete: {}), showDetail: $showDetailEdit)
                     }
-                    .sheet(isPresented: $showDict) {
-                        WordsDictView()
-                    }
                     .swipeActions(allowsFullSwipe: false) {
                         Button("More") {
                             showItemMore.toggle()

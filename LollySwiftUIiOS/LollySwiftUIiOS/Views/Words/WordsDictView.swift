@@ -9,7 +9,7 @@ import SwiftUI
 import WebKit
 
 struct WordsDictView: View {
-    @StateObject var vm = WordsDictViewModel(settings: vmSettings, needCopy: false) {}
+    @ObservedObject var vm: WordsDictViewModel
     @ObservedObject var vmS = vmSettings
     @ObservedObject var webViewStore = WebViewStore()
     @ObservedObject var dictStore = DictStore()
@@ -18,6 +18,7 @@ struct WordsDictView: View {
 
     var body: some View {
         VStack(spacing: 0) {
+            Spacer()
             HStack(spacing: 0) {
                 Picker("", selection: $vm.currentWordIndex) {
                     ForEach(vm.arrWords.indices, id: \.self) {
@@ -25,6 +26,9 @@ struct WordsDictView: View {
                     }
                 }
                 .modifier(PickerModifier(backgroundColor: Color.color3))
+                .onChange(of: vm.currentWordIndex) { _ in
+                    currentWordChanged()
+                }
                 Picker("", selection: $vmS.selectedDictReferenceIndex) {
                     ForEach(vmS.arrDictsReference.indices, id: \.self) {
                         Text(vmS.arrDictsReference[$0].DICTNAME)
@@ -48,7 +52,8 @@ struct WordsDictView: View {
                         }
                     }
             )
-        }.onAppear {
+        }
+        .onAppear {
             dictStore.vmSettings = vmSettings
             dictStore.wvDict = wvDict
             vmSettings.delegate = listener
