@@ -99,13 +99,21 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
             alertController.addAction(deleteAction2)
             let editAction2 = UIAlertAction(title: "Edit", style: .default) { _ in edit() }
             alertController.addAction(editAction2)
-            let browseWebPagesAction = UIAlertAction(title: "Browse Web Pages", style: .default) { _ in self.performSegue(withIdentifier: "browse pages", sender: item) }
+            let browseWebPagesAction = UIAlertAction(title: "Browse Web Pages", style: .default) { [unowned self] _ in
+                performSegue(withIdentifier: "browse pages", sender: item)
+            }
             alertController.addAction(browseWebPagesAction)
-            let editWebPagesAction = UIAlertAction(title: "Edit Web Pages", style: .default) { _ in self.performSegue(withIdentifier: "edit pages", sender: item) }
+            let editWebPagesAction = UIAlertAction(title: "Edit Web Pages", style: .default) { [unowned self] _ in
+                performSegue(withIdentifier: "edit pages", sender: item)
+            }
             alertController.addAction(editWebPagesAction)
-            let copyPatternAction = UIAlertAction(title: "Copy Pattern", style: .default) { _ in iOSApi.copyText(item.PATTERN) }
+            let copyPatternAction = UIAlertAction(title: "Copy Pattern", style: .default) { _ in
+                iOSApi.copyText(item.PATTERN)
+            }
             alertController.addAction(copyPatternAction)
-            let googlePatternAction = UIAlertAction(title: "Google Pattern", style: .default) { _ in iOSApi.googleString(item.PATTERN) }
+            let googlePatternAction = UIAlertAction(title: "Google Pattern", style: .default) { _ in
+                iOSApi.googleString(item.PATTERN)
+            }
             alertController.addAction(googlePatternAction)
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
             alertController.addAction(cancelAction)
@@ -126,11 +134,9 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
             let item = segue.identifier == "add" ? vm.newPattern() : sender as! MPattern
             controller.startEdit(vm: vm, item: item)
         } else if let controller = segue.destination as? PatternsWebPagesBrowseViewController {
-            vm.selectedPatternItem = sender as? MPattern
-            controller.vm = PatternsWebPagesViewModel(settings: vmSettings, needCopy: false, item: vm.selectedPatternItem)
+            controller.vm = PatternsWebPagesViewModel(settings: vmSettings, needCopy: false, item: sender as? MPattern)
         } else if let controller = segue.destination as? PatternsWebPagesListViewController {
-            vm.selectedPatternItem = sender as? MPattern
-            controller.vm = PatternsWebPagesViewModel(settings: vmSettings, needCopy: false, item: vm.selectedPatternItem)
+            controller.vm = PatternsWebPagesViewModel(settings: vmSettings, needCopy: false, item: sender as? MPattern)
         }
     }
 
