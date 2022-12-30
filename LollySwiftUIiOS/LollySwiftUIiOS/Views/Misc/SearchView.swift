@@ -26,21 +26,13 @@ struct SearchView: View {
                         Text(vm.arrLanguages[$0].LANGNAME)
                     }
                 }
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 4)
-                .background(Color.color3)
-                .tint(.white)
-                .pickerStyle(MenuPickerStyle())
+                .modifier(PickerModifier(backgroundColor: Color.color3))
                 Picker("", selection: $vm.selectedDictReferenceIndex) {
                     ForEach(vm.arrDictsReference.indices, id: \.self) {
                         Text(vm.arrDictsReference[$0].DICTNAME)
                     }
                 }
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 4)
-                .background(Color.color2)
-                .tint(.white)
-                .pickerStyle(MenuPickerStyle())
+                .modifier(PickerModifier(backgroundColor: Color.color2))
             }
             WebView(webView: wvDict) {
                 dictStore.onNavigationFinished()
