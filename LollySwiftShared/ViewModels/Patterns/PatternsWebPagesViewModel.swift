@@ -20,8 +20,9 @@ class PatternsWebPagesViewModel: NSObject, ObservableObject {
         currentWebPageIndex = (currentWebPageIndex + delta + arrWebPages.count) % arrWebPages.count
     }
 
-    public init(settings: SettingsViewModel, needCopy: Bool) {
+    public init(settings: SettingsViewModel, needCopy: Bool, item: MPattern?) {
         self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
+        self.selectedPatternItem = item
         super.init()
     }
 

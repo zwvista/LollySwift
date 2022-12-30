@@ -163,7 +163,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
 
     func settingsChanged() {
         vm = PatternsViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) {}
-        vmWP = PatternsWebPagesViewModel(settings: vm.vmSettings, needCopy: false)
+        vmWP = PatternsWebPagesViewModel(settings: vm.vmSettings, needCopy: false, item: nil)
         synth.setVoice(NSSpeechSynthesizer.VoiceName(rawValue: vmSettings.macVoiceName))
         vm.$textFilter <~> sfTextFilter.textProperty ~ subscriptions
         vm.$scopeFilter <~> scScopeFilter.selectedLabelProperty ~ subscriptions
