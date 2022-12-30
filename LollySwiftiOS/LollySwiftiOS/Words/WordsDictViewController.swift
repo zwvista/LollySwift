@@ -19,7 +19,7 @@ class WordsDictViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
     @IBOutlet weak var btnDict: UIButton!
     var dictStore: DictStore!
 
-    let vm = WordsDictViewModel(settings: vmSettings, needCopy: false) {}
+    var vm: WordsDictViewModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
