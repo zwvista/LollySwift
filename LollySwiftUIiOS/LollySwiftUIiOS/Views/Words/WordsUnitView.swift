@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct WordsUnitView: View {
+    @Binding var navPath: NavigationPath
     @StateObject var vm = WordsUnitViewModel(settings: vmSettings, inTextbook: true, needCopy: false) {}
     @Environment(\.editMode) var editMode
     var isEditing: Bool { editMode?.wrappedValue.isEditing == true }
     @State var showDetailEdit = false
     @State var showDetailAdd = false
     @State var showBatchEdit = false
-    @State var showDict = false
     @State var showItemMore = false
     @State var showListMore = false
     var body: some View {
@@ -51,7 +51,7 @@ struct WordsUnitView: View {
                             Image(systemName: "info.circle")
                                 .foregroundColor(.blue)
                                 .onTapGesture {
-                                    showDict.toggle()
+                                    navPath.append(item)
                                 }
                         }
                     }
@@ -67,9 +67,6 @@ struct WordsUnitView: View {
                     }
                     .sheet(isPresented: $showDetailEdit) {
                         WordsUnitDetailView(vmEdit: WordsUnitDetailViewModel(vm: vm, item: item, phraseid: 0, complete: {}), showDetail: $showDetailEdit)
-                    }
-                    .sheet(isPresented: $showDict) {
-                        WordsDictView()
                     }
                     .swipeActions(allowsFullSwipe: false) {
                         Button("More") {
@@ -115,6 +112,9 @@ struct WordsUnitView: View {
                 .onDelete { IndexSet in
 
                 }
+            }
+            .navigationDestination(for: MUnitWord.self) { item in
+                WordsDictView()
             }
             .toolbar {
                 ToolbarItemGroup {
@@ -164,11 +164,5 @@ struct WordsUnitView: View {
         Task {
             await vm.getNotes(ifEmpty: ifEmpty, oneComplete: { _ in }, allComplete: {})
         }
-    }
-}
-
-struct WordsUnitView_Previews: PreviewProvider {
-    static var previews: some View {
-        WordsUnitView()
     }
 }

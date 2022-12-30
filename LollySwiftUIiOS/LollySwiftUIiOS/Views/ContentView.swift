@@ -11,12 +11,14 @@ struct ContentView: View {
     @ObservedObject var g = globalUser
     @State var isOpenSideMenu: Bool = false
     @State var bindTitle = titleSearch
+    @State var navPath = NavigationPath()
 
     func getContentView(_ view: some View) -> some View {
         ZStack{
-            NavigationStack {
+            NavigationStack(path: $navPath) {
                 view
                     .navigationTitle(bindTitle)
+                    .navigationBarTitleDisplayMode(.inline)
                     .navigationBarItems(leading: (
                         Button(action: {
                             self.isOpenSideMenu.toggle()
@@ -38,7 +40,7 @@ struct ContentView: View {
         } else if bindTitle == titleSettings {
             getContentView(SettingsView())
         } else if bindTitle == titleWordsUnit {
-            getContentView(WordsUnitView())
+            getContentView(WordsUnitView(navPath: $navPath))
         } else if bindTitle == titlePhrasesUnit {
             getContentView(PhrasesUnitView())
         } else if bindTitle == titleWordsLang {
@@ -46,7 +48,7 @@ struct ContentView: View {
         } else if bindTitle == titlePhrasesLang {
             getContentView(PhrasesLangView())
         } else if bindTitle == titlePatternsLang {
-            getContentView(PatternsView())
+            getContentView(PatternsView(navPath: $navPath))
         }
     }
 }

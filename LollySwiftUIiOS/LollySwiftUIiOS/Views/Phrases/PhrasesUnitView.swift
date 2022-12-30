@@ -117,9 +117,3 @@ struct PhrasesUnitView: View {
         }
     }
 }
-
-struct PhrasesUnitView_Previews: PreviewProvider {
-    static var previews: some View {
-        WordsUnitView()
-    }
-}

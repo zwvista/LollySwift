@@ -59,9 +59,3 @@ class SearchViewListener: NSObject, ObservableObject, SettingsViewModelDelegate 
     }
 
 }
-
-struct SearchView_Previews: PreviewProvider {
-    static var previews: some View {
-        SearchView()
-    }
-}

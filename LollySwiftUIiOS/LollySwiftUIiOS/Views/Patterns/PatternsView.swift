@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct PatternsView: View {
+    @Binding var navPath: NavigationPath
     @StateObject var vm = PatternsViewModel(settings: vmSettings, needCopy: false) {}
     @Environment(\.editMode) var editMode
     var isEditing: Bool { editMode?.wrappedValue.isEditing == true }
     @State var showDetailEdit = false
     @State var showDetailAdd = false
     @State var showItemMore = false
-    @State var showBrowse = false
     var body: some View {
         VStack {
             HStack(spacing: 0) {
@@ -42,7 +42,7 @@ struct PatternsView: View {
                             Image(systemName: "info.circle")
                                 .foregroundColor(.blue)
                                 .onTapGesture {
-                                    showBrowse.toggle()
+                                    navPath.append(item)
                                 }
                         }
                     }
@@ -57,9 +57,6 @@ struct PatternsView: View {
                     }
                     .sheet(isPresented: $showDetailEdit) {
                         PatternsDetailView(vmEdit: PatternsDetailViewModel(vm: vm, item: item), showDetail: $showDetailEdit)
-                    }
-                    .navigationDestination(isPresented: $showBrowse) {
-                        PatternWebPagesBrowseView(vm: PatternsWebPagesViewModel(settings: vmSettings, needCopy: false, item: item), showBrowse: $showBrowse)
                     }
                     .swipeActions(allowsFullSwipe: false) {
                         Button("More") {
@@ -95,6 +92,9 @@ struct PatternsView: View {
 
                 }
             }
+            .navigationDestination(for: MPattern.self) { item in
+                PatternWebPagesBrowseView(vm: PatternsWebPagesViewModel(settings: vmSettings, needCopy: false, item: item))
+            }
             .toolbar {
                 ToolbarItemGroup {
                     EditButton()
@@ -107,11 +107,5 @@ struct PatternsView: View {
                 PatternsDetailView(vmEdit: PatternsDetailViewModel(vm: vm, item: vm.newPattern()), showDetail: $showDetailAdd)
             }
         }
-    }
-}
-
-struct PatternsView_Previews: PreviewProvider {
-    static var previews: some View {
-        PatternsView()
     }
 }

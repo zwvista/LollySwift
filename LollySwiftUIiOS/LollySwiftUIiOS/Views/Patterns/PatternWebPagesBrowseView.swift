@@ -9,7 +9,6 @@ import SwiftUI
 
 struct PatternWebPagesBrowseView: View {
     @ObservedObject var vm: PatternsWebPagesViewModel
-    @Binding var showBrowse: Bool
     @State var webViewStore = WebViewStore()
     var body: some View {
         VStack(spacing: 0) {
@@ -55,9 +54,3 @@ struct PatternWebPagesBrowseView: View {
         currentWebPageChanged()
     }
 }
-
-//struct PatternWebPagesBrowseView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        PatternWebPagesBrowseView()
-//    }
-//}

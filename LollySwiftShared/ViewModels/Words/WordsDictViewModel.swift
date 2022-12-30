@@ -9,10 +9,10 @@
 import Foundation
 
 @MainActor
-class WordsDictViewModel: NSObject {
+class WordsDictViewModel: NSObject, ObservableObject {
     var vmSettings: SettingsViewModel
-    var arrWords = [String]()
-    var currentWordIndex = 0
+    @Published var arrWords = [String]()
+    @Published var currentWordIndex = 0
     var currentWord: String { arrWords[currentWordIndex] }
     func next(_ delta: Int) {
         currentWordIndex = (currentWordIndex + delta + arrWords.count) % arrWords.count

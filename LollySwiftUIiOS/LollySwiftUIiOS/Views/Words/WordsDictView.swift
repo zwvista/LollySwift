@@ -9,7 +9,8 @@ import SwiftUI
 import WebKit
 
 struct WordsDictView: View {
-    @ObservedObject var vm = vmSettings
+    @StateObject var vm = WordsDictViewModel(settings: vmSettings, needCopy: false) {}
+    @ObservedObject var vmS = vmSettings
     @ObservedObject var webViewStore = WebViewStore()
     @ObservedObject var dictStore = DictStore()
     @ObservedObject var listener = WordsDictViewListener()
@@ -17,43 +18,59 @@ struct WordsDictView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            SearchBar(text: $dictStore.word, placeholder: "Word") { _ in
-                dictStore.searchDict()
-            }
             HStack(spacing: 0) {
-                Picker("", selection: $vm.selectedLangIndex) {
-                    ForEach(vm.arrLanguages.indices, id: \.self) {
-                        Text(vm.arrLanguages[$0].LANGNAME)
+                Picker("", selection: $vm.currentWordIndex) {
+                    ForEach(vm.arrWords.indices, id: \.self) {
+                        Text(vm.arrWords[$0])
                     }
                 }
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 4)
-                .background(Color.color3)
-                .tint(.white)
-                .pickerStyle(MenuPickerStyle())
-                Picker("", selection: $vm.selectedDictReferenceIndex) {
-                    ForEach(vm.arrDictsReference.indices, id: \.self) {
-                        Text(vm.arrDictsReference[$0].DICTNAME)
+                .modifier(PickerModifier(backgroundColor: Color.color3))
+                Picker("", selection: $vmS.selectedDictReferenceIndex) {
+                    ForEach(vmS.arrDictsReference.indices, id: \.self) {
+                        Text(vmS.arrDictsReference[$0].DICTNAME)
                     }
                 }
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 4)
-                .background(Color.color2)
-                .tint(.white)
-                .pickerStyle(MenuPickerStyle())
+                .modifier(PickerModifier(backgroundColor: Color.color2))
             }
             WebView(webView: wvDict) {
                 dictStore.onNavigationFinished()
             }
+            .gesture(
+                DragGesture(minimumDistance: 0, coordinateSpace: .local)
+                    .onEnded { value in
+                        if value.translation.width < 0 {
+                            // left
+                            swipe(-1)
+                        }
+                        if value.translation.width > 0 {
+                            // right
+                            swipe(1)
+                        }
+                    }
+            )
         }.onAppear {
             dictStore.vmSettings = vmSettings
             dictStore.wvDict = wvDict
             vmSettings.delegate = listener
             listener.dictStore = dictStore
-            Task {
-                await vm.getData()
-            }
+            currentWordChanged()
         }
+    }
+
+    private func currentWordChanged() {
+        AppDelegate.speak(string: vm.currentWord)
+        dictStore.word = vm.currentWord
+        selectDictChanged()
+    }
+
+    private func selectDictChanged() {
+        dictStore.dict = vmSettings.selectedDictReference
+        dictStore.searchDict()
+    }
+
+    private func swipe(_ delta: Int) {
+        vm.next(delta)
+        currentWordChanged()
     }
 }
 
@@ -65,10 +82,4 @@ class WordsDictViewListener: NSObject, ObservableObject, SettingsViewModelDelega
         dictStore.searchDict()
     }
 
-}
-
-struct WordsDictView_Previews: PreviewProvider {
-    static var previews: some View {
-        WordsDictView()
-    }
 }
