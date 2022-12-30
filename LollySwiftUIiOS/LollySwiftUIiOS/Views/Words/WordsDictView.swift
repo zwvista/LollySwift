@@ -11,9 +11,8 @@ import WebKit
 struct WordsDictView: View {
     @ObservedObject var vm: WordsDictViewModel
     @ObservedObject var vmS = vmSettings
-    @ObservedObject var webViewStore = WebViewStore()
-    @ObservedObject var dictStore = DictStore()
-    @ObservedObject var listener = WordsDictViewListener()
+    @StateObject var webViewStore = WebViewStore()
+    @StateObject var dictStore = DictStore()
     var wvDict: WKWebView { webViewStore.webView }
 
     var body: some View {
@@ -35,6 +34,9 @@ struct WordsDictView: View {
                     }
                 }
                 .modifier(PickerModifier(backgroundColor: Color.color2))
+                .onChange(of: vmS.selectedDictReferenceIndex) { _ in
+                    selectDictChanged()
+                }
             }
             WebView(webView: wvDict) {
                 dictStore.onNavigationFinished()
@@ -56,8 +58,6 @@ struct WordsDictView: View {
         .onAppear {
             dictStore.vmSettings = vmSettings
             dictStore.wvDict = wvDict
-            vmSettings.delegate = listener
-            listener.dictStore = dictStore
             currentWordChanged()
         }
     }
@@ -75,16 +75,5 @@ struct WordsDictView: View {
 
     private func swipe(_ delta: Int) {
         vm.next(delta)
-        currentWordChanged()
     }
-}
-
-@MainActor
-class WordsDictViewListener: NSObject, ObservableObject, SettingsViewModelDelegate {
-    weak var dictStore: DictStore!
-    func onUpdateDictReference() {
-        dictStore.dict = vmSettings.selectedDictReference
-        dictStore.searchDict()
-    }
-
 }

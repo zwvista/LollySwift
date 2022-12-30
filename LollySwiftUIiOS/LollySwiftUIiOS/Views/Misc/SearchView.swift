@@ -10,9 +10,8 @@ import WebKit
 
 struct SearchView: View {
     @ObservedObject var vm = vmSettings
-    @ObservedObject var webViewStore = WebViewStore()
-    @ObservedObject var dictStore = DictStore()
-    @ObservedObject var listener = SearchViewListener()
+    @StateObject var webViewStore = WebViewStore()
+    @StateObject var dictStore = DictStore()
     var wvDict: WKWebView { webViewStore.webView }
 
     var body: some View {
@@ -33,6 +32,10 @@ struct SearchView: View {
                     }
                 }
                 .modifier(PickerModifier(backgroundColor: Color.color2))
+                .onChange(of: vm.selectedDictReferenceIndex) { _ in
+                    dictStore.dict = vmSettings.selectedDictReference
+                    dictStore.searchDict()
+                }
             }
             WebView(webView: wvDict) {
                 dictStore.onNavigationFinished()
@@ -41,21 +44,9 @@ struct SearchView: View {
         .onAppear {
             dictStore.vmSettings = vmSettings
             dictStore.wvDict = wvDict
-            vmSettings.delegate = listener
-            listener.dictStore = dictStore
             Task {
                 await vm.getData()
             }
         }
     }
-}
-
-@MainActor
-class SearchViewListener: NSObject, ObservableObject, SettingsViewModelDelegate {
-    weak var dictStore: DictStore!
-    func onUpdateDictReference() {
-        dictStore.dict = vmSettings.selectedDictReference
-        dictStore.searchDict()
-    }
-
 }
