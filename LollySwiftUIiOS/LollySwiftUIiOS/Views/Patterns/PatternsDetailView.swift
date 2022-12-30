@@ -45,9 +45,3 @@ struct PatternsDetailView: View {
         }
     }
 }
-
-//struct PatternsDetailView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        PatternsDetailView()
-//    }
-//}

@@ -68,9 +68,3 @@ struct PhrasesUnitDetailView: View {
         }
     }
 }
-
-//struct PhrasesUnitDetailView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        PhrasesUnitDetailView()
-//    }
-//}

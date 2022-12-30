@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct PhrasesLangView: View {
+    @Binding var navPath: NavigationPath
     @StateObject var vm = PhrasesLangViewModel(settings: vmSettings, needCopy: false) {}
     @Environment(\.editMode) var editMode
     var isEditing: Bool { editMode?.wrappedValue.isEditing == true }
@@ -49,11 +50,5 @@ struct PhrasesLangView: View {
                 }
             }
         }
-    }
-}
-
-struct PhrasesLangView_Previews: PreviewProvider {
-    static var previews: some View {
-        PhrasesLangView()
     }
 }

@@ -50,9 +50,3 @@ struct WordsLangDetailView: View {
         }
     }
 }
-
-//struct WordsLangDetailView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        WordsLangDetailView()
-//    }
-//}

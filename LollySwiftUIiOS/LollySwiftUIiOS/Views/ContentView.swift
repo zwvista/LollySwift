@@ -42,11 +42,11 @@ struct ContentView: View {
         } else if bindTitle == titleWordsUnit {
             getContentView(WordsUnitView(navPath: $navPath))
         } else if bindTitle == titlePhrasesUnit {
-            getContentView(PhrasesUnitView())
+            getContentView(PhrasesUnitView(navPath: $navPath))
         } else if bindTitle == titleWordsLang {
-            getContentView(WordsLangView())
+            getContentView(WordsLangView(navPath: $navPath))
         } else if bindTitle == titlePhrasesLang {
-            getContentView(PhrasesLangView())
+            getContentView(PhrasesLangView(navPath: $navPath))
         } else if bindTitle == titlePatternsLang {
             getContentView(PatternsView(navPath: $navPath))
         }

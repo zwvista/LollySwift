@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct WordsLangView: View {
+    @Binding var navPath: NavigationPath
     @StateObject var vm = WordsLangViewModel(settings: vmSettings, needCopy: false) {}
     @Environment(\.editMode) var editMode
     var isEditing: Bool { editMode?.wrappedValue.isEditing == true }
@@ -107,11 +108,5 @@ struct WordsLangView: View {
                 WordsLangDetailView(vmEdit: WordsLangDetailViewModel(vm: vm, item: vm.newLangWord(), complete: {}), showDetail: $showDetailAdd)
             }
         }
-    }
-}
-
-struct WordsLangView_Previews: PreviewProvider {
-    static var previews: some View {
-        WordsLangView()
     }
 }

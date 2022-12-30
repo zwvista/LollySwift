@@ -80,9 +80,3 @@ struct WordsUnitDetailView: View {
         }
     }
 }
-
-//struct WordsUnitDetailView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        WordsUnitDetailView()
-//    }
-//}
