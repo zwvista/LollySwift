@@ -10,19 +10,30 @@ import SwiftUI
 struct PatternWebPagesBrowseView: View {
     @ObservedObject var vm: PatternsWebPagesViewModel
     @Binding var showBrowse: Bool
+    @State var webViewStore = WebViewStore()
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
+            Spacer()
             Picker("", selection: $vm.currentWebPageIndex) {
                 ForEach(vm.arrWebPages.indices, id: \.self) {
                     Text(vm.arrWebPages[$0].TITLE)
                 }
             }
-            .frame(maxWidth: .infinity)
-            .padding(.vertical, 4)
-            .background(Color.color3)
-            .tint(.white)
-            .pickerStyle(MenuPickerStyle())
+            .modifier(PickerModifier(backgroundColor: Color.color2))
+            WebView(webView: webViewStore.webView) {}
         }
+        .navigationTitle("Pattern Web Pages (Browse)")
+        .onAppear {
+            Task{
+                await vm.getWebPages()
+                currentWebPageChanged()
+            }
+        }
+    }
+
+    func currentWebPageChanged() {
+        AppDelegate.speak(string: vm.currentWebPage.TITLE)
+        webViewStore.webView.load(URLRequest(url: URL(string: vm.currentWebPage.URL)!))
     }
 }
 

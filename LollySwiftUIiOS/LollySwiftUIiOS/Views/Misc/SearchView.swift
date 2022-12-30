@@ -45,7 +45,8 @@ struct SearchView: View {
             WebView(webView: wvDict) {
                 dictStore.onNavigationFinished()
             }
-        }.onAppear {
+        }
+        .onAppear {
             dictStore.vmSettings = vmSettings
             dictStore.wvDict = wvDict
             vmSettings.delegate = listener

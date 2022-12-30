@@ -12,7 +12,7 @@ import Foundation
 class PatternsWebPagesViewModel: NSObject, ObservableObject {
     var vmSettings: SettingsViewModel
     var selectedPatternItem: MPattern?
-    var arrWebPages = [MPatternWebPage]()
+    @Published var arrWebPages = [MPatternWebPage]()
     @Published var currentWebPageIndex = 0
     var currentWebPage: MPatternWebPage { arrWebPages[currentWebPageIndex] }
     var currentWebPageText: String { "\(currentWebPageIndex + 1)/\(arrWebPages.count) \(currentWebPage.TITLE)" }

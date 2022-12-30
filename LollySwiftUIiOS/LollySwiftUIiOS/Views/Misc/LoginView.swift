@@ -29,7 +29,8 @@ struct LoginView: View {
                         }
                     }) {
                         Text("Login")
-                    }.frame(maxWidth: .infinity)
+                    }
+                    .frame(maxWidth: .infinity)
                 }
             }
         }

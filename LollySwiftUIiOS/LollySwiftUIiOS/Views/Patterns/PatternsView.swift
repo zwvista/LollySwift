@@ -52,14 +52,14 @@ struct PatternsView: View {
                         if isEditing {
                             showDetailEdit.toggle()
                         } else {
-                            LollySwiftUIiOSApp.speak(string: item.PATTERN)
+                            AppDelegate.speak(string: item.PATTERN)
                         }
                     }
                     .sheet(isPresented: $showDetailEdit) {
                         PatternsDetailView(vmEdit: PatternsDetailViewModel(vm: vm, item: item), showDetail: $showDetailEdit)
                     }
-                    .sheet(isPresented: $showBrowse) {
-                        PatternWebPagesBrowseView(vm: PatternsWebPagesViewModel(settings: vmSettings, needCopy: false), showBrowse: $showBrowse)
+                    .navigationDestination(isPresented: $showBrowse) {
+                        PatternWebPagesBrowseView(vm: PatternsWebPagesViewModel(settings: vmSettings, needCopy: false, item: item), showBrowse: $showBrowse)
                     }
                     .swipeActions(allowsFullSwipe: false) {
                         Button("More") {

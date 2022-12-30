@@ -11,18 +11,11 @@ import AVFoundation
 @main
 struct LollySwiftUIiOSApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    private static let synth = AVSpeechSynthesizer()
 
     var body: some Scene {
         WindowGroup {
             ContentView()
         }
-    }
-
-    static func speak(string: String) {
-        let utterance = AVSpeechUtterance(string: string)
-        utterance.voice = AVSpeechSynthesisVoice(identifier: vmSettings.selectediOSVoice.VOICENAME)
-        LollySwiftUIiOSApp.synth.speak(utterance)
     }
 }
 
@@ -33,6 +26,13 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         globalUser.userid = UserDefaults.standard.string(forKey: "userid") ?? ""
         return true
+    }
+
+    private static let synth = AVSpeechSynthesizer()
+    static func speak(string: String) {
+        let utterance = AVSpeechUtterance(string: string)
+        utterance.voice = AVSpeechSynthesisVoice(identifier: vmSettings.selectediOSVoice.VOICENAME)
+        synth.speak(utterance)
     }
 }
 

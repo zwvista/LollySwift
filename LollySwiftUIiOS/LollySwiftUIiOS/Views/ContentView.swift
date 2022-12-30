@@ -14,7 +14,7 @@ struct ContentView: View {
 
     func getContentView(_ view: some View) -> some View {
         ZStack{
-            NavigationView {
+            NavigationStack {
                 view
                     .navigationTitle(bindTitle)
                     .navigationBarItems(leading: (

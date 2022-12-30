@@ -54,7 +54,7 @@ struct WordsLangView: View {
                         if isEditing {
                             showDetailEdit.toggle()
                         } else {
-                            LollySwiftUIiOSApp.speak(string: item.WORD)
+                            AppDelegate.speak(string: item.WORD)
                         }
                     }
                     .sheet(isPresented: $showDetailEdit) {

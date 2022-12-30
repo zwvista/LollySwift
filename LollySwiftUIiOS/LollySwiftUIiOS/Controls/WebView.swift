@@ -130,7 +130,8 @@ struct WebView_Previews: PreviewProvider {
     static var previews: some View {
         VStack{
             WebView(webView: webViewStore.webView, onNavigationFinished: {})
-        }.onAppear {
+        }
+        .onAppear {
             webViewStore.webView.load(URLRequest(url: URL(string: "https://apple.com")!))
         }
     }

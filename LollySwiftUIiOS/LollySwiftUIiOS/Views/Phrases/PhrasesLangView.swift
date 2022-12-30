@@ -40,7 +40,7 @@ struct PhrasesLangView: View {
                         if editMode?.wrappedValue.isEditing == true {
                             showDetail = true
                         } else {
-                            LollySwiftUIiOSApp.speak(string: item.PHRASE)
+                            AppDelegate.speak(string: item.PHRASE)
                         }
                     }
                     .sheet(isPresented: $showDetail) {
