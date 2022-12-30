@@ -14,6 +14,7 @@ struct PatternsView: View {
     @State var showDetailEdit = false
     @State var showDetailAdd = false
     @State var showItemMore = false
+    @State var showBrowse = false
     var body: some View {
         VStack {
             HStack(spacing: 0) {
@@ -41,6 +42,7 @@ struct PatternsView: View {
                             Image(systemName: "info.circle")
                                 .foregroundColor(.blue)
                                 .onTapGesture {
+                                    showBrowse.toggle()
                                 }
                         }
                     }
@@ -54,7 +56,10 @@ struct PatternsView: View {
                         }
                     }
                     .sheet(isPresented: $showDetailEdit) {
-                        PatternsDetailView(vmEdit: getVmEdit(vm: vm, item: item), showDetail: $showDetailEdit)
+                        PatternsDetailView(vmEdit: PatternsDetailViewModel(vm: vm, item: item), showDetail: $showDetailEdit)
+                    }
+                    .sheet(isPresented: $showBrowse) {
+                        PatternWebPagesBrowseView(vm: PatternsWebPagesViewModel(settings: vmSettings, needCopy: false), showBrowse: $showBrowse)
                     }
                     .swipeActions(allowsFullSwipe: false) {
                         Button("More") {
@@ -99,13 +104,9 @@ struct PatternsView: View {
                 }
             }
             .sheet(isPresented: $showDetailAdd) {
-                PatternsDetailView(vmEdit: getVmEdit(vm: vm, item: vm.newPattern()), showDetail: $showDetailAdd)
+                PatternsDetailView(vmEdit: PatternsDetailViewModel(vm: vm, item: vm.newPattern()), showDetail: $showDetailAdd)
             }
         }
-    }
-
-    func getVmEdit(vm: PatternsViewModel, item: MPattern) -> PatternsDetailViewModel {
-        PatternsDetailViewModel(vm: vm, item: item)
     }
 }
 

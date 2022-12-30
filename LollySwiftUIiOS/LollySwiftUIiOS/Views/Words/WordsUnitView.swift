@@ -162,8 +162,7 @@ struct WordsUnitView: View {
 
     func getNotes(ifEmpty: Bool) {
         Task {
-            await vm.getNotes(ifEmpty: ifEmpty, oneComplete: { _ in }, allComplete: {
-            })
+            await vm.getNotes(ifEmpty: ifEmpty, oneComplete: { _ in }, allComplete: {})
         }
     }
 }

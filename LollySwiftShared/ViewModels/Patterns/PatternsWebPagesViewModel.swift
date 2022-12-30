@@ -9,11 +9,11 @@
 import Foundation
 
 @MainActor
-class PatternsWebPagesViewModel: NSObject {
+class PatternsWebPagesViewModel: NSObject, ObservableObject {
     var vmSettings: SettingsViewModel
     var selectedPatternItem: MPattern?
     var arrWebPages = [MPatternWebPage]()
-    var currentWebPageIndex = 0
+    @Published var currentWebPageIndex = 0
     var currentWebPage: MPatternWebPage { arrWebPages[currentWebPageIndex] }
     var currentWebPageText: String { "\(currentWebPageIndex + 1)/\(arrWebPages.count) \(currentWebPage.TITLE)" }
     func next(_ delta: Int) {

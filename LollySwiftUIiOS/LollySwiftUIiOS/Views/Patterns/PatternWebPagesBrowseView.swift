@@ -8,13 +8,26 @@
 import SwiftUI
 
 struct PatternWebPagesBrowseView: View {
+    @ObservedObject var vm: PatternsWebPagesViewModel
+    @Binding var showBrowse: Bool
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Picker("", selection: $vm.currentWebPageIndex) {
+                ForEach(vm.arrWebPages.indices, id: \.self) {
+                    Text(vm.arrWebPages[$0].TITLE)
+                }
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 4)
+            .background(Color.color3)
+            .tint(.white)
+            .pickerStyle(MenuPickerStyle())
+        }
     }
 }
 
-struct PatternWebPagesBrowseView_Previews: PreviewProvider {
-    static var previews: some View {
-        PatternWebPagesBrowseView()
-    }
-}
+//struct PatternWebPagesBrowseView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        PatternWebPagesBrowseView()
+//    }
+//}
