@@ -11,10 +11,10 @@ import Combine
 
 class WordsTextbookViewController: WordsBaseViewController {
 
+    @IBOutlet weak var btnTextbookFilter: UIButton!
+
     var vm: WordsUnitViewModel!
     var arrWords: [MUnitWord] { vm.arrWordsFiltered }
-
-    @IBOutlet weak var btnTextbookFilter: UIButton!
     override var vmBase: WordsBaseViewModel! { vm }
 
     override func refresh() {

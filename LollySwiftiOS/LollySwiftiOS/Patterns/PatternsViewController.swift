@@ -14,11 +14,10 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var sbTextFilter: UISearchBar!
     @IBOutlet weak var btnScopeFilter: UIButton!
-    @IBOutlet weak var btnEdit: UIBarButtonItem!
+    let refreshControl = UIRefreshControl()
 
     var vm: PatternsViewModel!
     var arrPatterns: [MPattern] { vm.arrPatternsFiltered }
-    let refreshControl = UIRefreshControl()
     var subscriptions = Set<AnyCancellable>()
 
     override func viewDidLoad() {
@@ -138,11 +137,6 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
         } else if let controller = segue.destination as? PatternsWebPagesListViewController {
             controller.vm = PatternsWebPagesViewModel(settings: vmSettings, needCopy: false, item: sender as? MPattern)
         }
-    }
-
-    @IBAction func btnEditClicked(_ sender: AnyObject) {
-        tableView.isEditing = !tableView.isEditing
-        btnEdit.title = tableView.isEditing ? "Done" : "Edit"
     }
 
     @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
