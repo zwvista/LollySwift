@@ -17,6 +17,7 @@ struct PhrasesUnitView: View {
     @State var showBatchEdit = false
     @State var showItemMore = false
     @State var showListMore = false
+    @State var showDelete = false
     var body: some View {
         VStack {
             HStack(spacing: 0) {
@@ -65,11 +66,20 @@ struct PhrasesUnitView: View {
                             showItemMore.toggle()
                         }
                         Button("Delete", role: .destructive) {
-                            
+                            showDelete.toggle()
                         }
                     }
+                    .alert(Text("delete"), isPresented: $showDelete, actions: {
+                        Button("No", role: .cancel) {}
+                        Button("Yes", role: .destructive) {
+                            
+                        }
+                    }, message: {
+                        Text(item.PHRASE)
+                    })
                     .alert(Text("Word"), isPresented: $showItemMore, actions: {
                         Button("Delete", role: .destructive) {
+                            showDelete.toggle()
                         }
                         Button("Edit") {
                             showDetailEdit.toggle()

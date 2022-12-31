@@ -15,6 +15,7 @@ struct PatternsView: View {
     @State var showDetailEdit = false
     @State var showDetailAdd = false
     @State var showItemMore = false
+    @State var showDelete = false
     var body: some View {
         VStack {
             HStack(spacing: 0) {
@@ -63,9 +64,17 @@ struct PatternsView: View {
                             showItemMore.toggle()
                         }
                         Button("Delete", role: .destructive) {
-                            
+                            showDelete.toggle()
                         }
                     }
+                    .alert(Text("delete"), isPresented: $showDelete, actions: {
+                        Button("No", role: .cancel) {}
+                        Button("Yes", role: .destructive) {
+                            
+                        }
+                    }, message: {
+                        Text(item.PATTERN)
+                    })
                     .alert(Text("Pattern"), isPresented: $showItemMore, actions: {
                         Button("Delete", role: .destructive) {
                         }

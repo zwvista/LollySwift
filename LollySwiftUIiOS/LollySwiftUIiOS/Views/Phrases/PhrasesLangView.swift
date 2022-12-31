@@ -13,6 +13,7 @@ struct PhrasesLangView: View {
     @Environment(\.editMode) var editMode
     var isEditing: Bool { editMode?.wrappedValue.isEditing == true }
     @State var showDetail = false
+    @State var showDelete = false
     var body: some View {
         VStack {
             HStack(spacing: 0) {
@@ -47,6 +48,14 @@ struct PhrasesLangView: View {
                     .sheet(isPresented: $showDetail) {
                         PhrasesLangDetailView()
                     }
+                    .alert(Text("delete"), isPresented: $showDelete, actions: {
+                        Button("No", role: .cancel) {}
+                        Button("Yes", role: .destructive) {
+                            
+                        }
+                    }, message: {
+                        Text(item.PHRASE)
+                    })
                 }
             }
         }
