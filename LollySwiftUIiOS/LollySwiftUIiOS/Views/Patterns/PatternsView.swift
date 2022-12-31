@@ -62,13 +62,12 @@ struct PatternsView: View {
                         Button("More") {
                             showItemMore.toggle()
                         }
-                        Button("Delete") {
+                        Button("Delete", role: .destructive) {
                             
                         }
-                        .tint(Color.red)
                     }
                     .alert(Text("Pattern"), isPresented: $showItemMore, actions: {
-                        Button("Delete") {
+                        Button("Delete", role: .destructive) {
                         }
                         Button("Edit") {
                             showDetailEdit.toggle()
@@ -83,7 +82,6 @@ struct PatternsView: View {
                         Button("Google Pattern") {
                             iOSApi.googleString(item.PATTERN)
                         }
-                        Button("Cancel") {}
                     }, message: {
                         Text(item.PATTERN)
                     })

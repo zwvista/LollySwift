@@ -72,13 +72,12 @@ struct WordsUnitView: View {
                         Button("More") {
                             showItemMore.toggle()
                         }
-                        Button("Delete") {
+                        Button("Delete", role: .destructive) {
                             
                         }
-                        .tint(Color.red)
                     }
                     .alert(Text("Word"), isPresented: $showItemMore, actions: {
-                        Button("Delete") {
+                        Button("Delete", role: .destructive) {
                         }
                         Button("Edit") {
                             showDetailEdit.toggle()
@@ -104,7 +103,6 @@ struct WordsUnitView: View {
                             let url = itemDict.urlString(word: item.WORD, arrAutoCorrect: vmSettings.arrAutoCorrect)
                             UIApplication.shared.open(URL(string: url)!)
                         }
-                        Button("Cancel") {}
                     }, message: {
                         Text(item.WORDNOTE)
                     })

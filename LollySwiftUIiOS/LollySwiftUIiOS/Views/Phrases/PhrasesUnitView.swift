@@ -64,13 +64,12 @@ struct PhrasesUnitView: View {
                         Button("More") {
                             showItemMore.toggle()
                         }
-                        Button("Delete") {
+                        Button("Delete", role: .destructive) {
                             
                         }
-                        .tint(Color.red)
                     }
                     .alert(Text("Word"), isPresented: $showItemMore, actions: {
-                        Button("Delete") {
+                        Button("Delete", role: .destructive) {
                         }
                         Button("Edit") {
                             showDetailEdit.toggle()
@@ -81,7 +80,6 @@ struct PhrasesUnitView: View {
                         Button("Google Phrase") {
                             iOSApi.googleString(item.PHRASE)
                         }
-                        Button("Cancel") {}
                     }, message: {
                         Text(item.PHRASE)
                     })
