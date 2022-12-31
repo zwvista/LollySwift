@@ -57,7 +57,7 @@ struct PhrasesUnitDetailView: View {
                     TextField("", text: $vmEdit.itemEdit.TRANSLATION)
                 }
             }
-            .navigationBarItems(leading: Button("Cancel") {
+            .navigationBarItems(leading: Button("Cancel", role: .cancel) {
                 showDetail.toggle()
             }, trailing: Button("Done") {
                 Task{

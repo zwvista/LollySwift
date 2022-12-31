@@ -12,7 +12,9 @@ struct PhrasesLangView: View {
     @StateObject var vm = PhrasesLangViewModel(settings: vmSettings, needCopy: false) {}
     @Environment(\.editMode) var editMode
     var isEditing: Bool { editMode?.wrappedValue.isEditing == true }
-    @State var showDetail = false
+    @State var showDetailEdit = false
+    @State var showDetailAdd = false
+    @State var showItemMore = false
     @State var showDelete = false
     var body: some View {
         VStack {
@@ -36,17 +38,27 @@ struct PhrasesLangView: View {
                             Text(item.TRANSLATION)
                                 .foregroundColor(Color.color3)
                         }
+                        Spacer()
                     }
                     .contentShape(Rectangle())
+                    .frame(maxWidth: .infinity)
                     .onTapGesture {
-                        if editMode?.wrappedValue.isEditing == true {
-                            showDetail = true
+                        if isEditing {
+                            showDetailEdit.toggle()
                         } else {
                             AppDelegate.speak(string: item.PHRASE)
                         }
                     }
-                    .sheet(isPresented: $showDetail) {
-                        PhrasesLangDetailView()
+                    .sheet(isPresented: $showDetailEdit) {
+                        PhrasesLangDetailView(vmEdit: PhrasesLangDetailViewModel(vm: vm, item: item, complete: {}), showDetail: $showDetailEdit)
+                    }
+                    .swipeActions(allowsFullSwipe: false) {
+                        Button("More") {
+                            showItemMore.toggle()
+                        }
+                        Button("Delete", role: .destructive) {
+                            showDelete.toggle()
+                        }
                     }
                     .alert(Text("delete"), isPresented: $showDelete, actions: {
                         Button("No", role: .cancel) {}
@@ -56,7 +68,37 @@ struct PhrasesLangView: View {
                     }, message: {
                         Text(item.PHRASE)
                     })
+                    .alert(Text("Phrase"), isPresented: $showItemMore, actions: {
+                        Button("Delete", role: .destructive) {
+                            showDelete.toggle()
+                        }
+                        Button("Edit") {
+                            showDetailEdit.toggle()
+                        }
+                        Button("Copy Phrase") {
+                            iOSApi.copyText(item.PHRASE)
+                        }
+                        Button("Google Phrase") {
+                            iOSApi.googleString(item.PHRASE)
+                        }
+                    }, message: {
+                        Text(item.PHRASE)
+                    })
                 }
+                .onDelete { IndexSet in
+
+                }
+            }
+            .toolbar {
+                ToolbarItemGroup {
+                    EditButton()
+                    Button("Add") {
+                        showDetailAdd.toggle()
+                    }
+                }
+            }
+            .sheet(isPresented: $showDetailAdd) {
+                PhrasesLangDetailView(vmEdit: PhrasesLangDetailViewModel(vm: vm, item: vm.newLangPhrase(), complete: {}), showDetail: $showDetailAdd)
             }
         }
     }

@@ -77,7 +77,7 @@ struct PhrasesUnitView: View {
                     }, message: {
                         Text(item.PHRASE)
                     })
-                    .alert(Text("Word"), isPresented: $showItemMore, actions: {
+                    .alert(Text("Phrase"), isPresented: $showItemMore, actions: {
                         Button("Delete", role: .destructive) {
                             showDelete.toggle()
                         }
@@ -113,7 +113,7 @@ struct PhrasesUnitView: View {
                 Button("Batch Edit") {
                     showBatchEdit = true
                 }
-                Button("Cancel") {}
+                Button("Cancel", role: .cancel) {}
             }, message: {
                 Text("More")
             })

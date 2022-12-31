@@ -39,7 +39,7 @@ struct WordsLangDetailView: View {
                     Text(vmEdit.itemEdit.ACCURACY)
                 }
             }
-            .navigationBarItems(leading: Button("Cancel") {
+            .navigationBarItems(leading: Button("Cancel", role: .cancel) {
                 showDetail.toggle()
             }, trailing: Button("Done") {
                 Task{

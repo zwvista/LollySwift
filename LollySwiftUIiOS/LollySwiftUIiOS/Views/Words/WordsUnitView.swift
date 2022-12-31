@@ -155,7 +155,7 @@ struct WordsUnitView: View {
                 Button("Batch Edit") {
                     showBatchEdit.toggle()
                 }
-                Button("Cancel") {}
+                Button("Cancel", role: .cancel) {}
             }, message: {
                 Text("More")
             })

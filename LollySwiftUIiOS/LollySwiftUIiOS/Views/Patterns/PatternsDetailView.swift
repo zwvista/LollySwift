@@ -34,7 +34,7 @@ struct PatternsDetailView: View {
                     TextField("TAGS", text: $vmEdit.itemEdit.TAGS)
                 }
             }
-            .navigationBarItems(leading: Button("Cancel") {
+            .navigationBarItems(leading: Button("Cancel", role: .cancel) {
                 showDetail.toggle()
             }, trailing: Button("Done") {
                 Task{
