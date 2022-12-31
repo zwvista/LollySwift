@@ -12,12 +12,6 @@ import RxBinding
 
 class PatternsWebPagesDetailViewController: UITableViewController {
 
-    var vm: PatternsViewModel!
-    var vmEdit: PatternsWebPagesDetailViewModel!
-    var itemEdit: MPatternWebPageEdit { vmEdit.itemEdit }
-    var complete: (() -> Void)?
-    var item: MPatternWebPage!
-
     @IBOutlet weak var tfID: UITextField!
     @IBOutlet weak var tfPatternID: UITextField!
     @IBOutlet weak var tfPattern: UITextField!
@@ -28,6 +22,12 @@ class PatternsWebPagesDetailViewController: UITableViewController {
     @IBOutlet weak var btnNew: UIButton!
     @IBOutlet weak var btnExisting: UIButton!
     @IBOutlet weak var btnDone: UIBarButtonItem!
+
+    var vm: PatternsViewModel!
+    var vmEdit: PatternsWebPagesDetailViewModel!
+    var itemEdit: MPatternWebPageEdit { vmEdit.itemEdit }
+    var complete: (() -> Void)?
+    var item: MPatternWebPage!
 
     func startEdit(item: MPatternWebPage) {
         vmEdit = PatternsWebPagesDetailViewModel(item: item)

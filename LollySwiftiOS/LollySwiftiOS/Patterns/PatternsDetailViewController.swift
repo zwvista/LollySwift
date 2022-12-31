@@ -11,16 +11,16 @@ import RxBinding
 
 class PatternsDetailViewController: UITableViewController {
 
-    var vm: PatternsViewModel!
-    var item: MPattern!
-    var vmEdit: PatternsDetailViewModel!
-    var itemEdit: MPatternEdit { vmEdit.itemEdit }
-
     @IBOutlet weak var tfID: UITextField!
     @IBOutlet weak var tfPattern: UITextField!
     @IBOutlet weak var tfNote: UITextField!
     @IBOutlet weak var tfTags: UITextField!
     @IBOutlet weak var btnDone: UIBarButtonItem!
+
+    var vm: PatternsViewModel!
+    var item: MPattern!
+    var vmEdit: PatternsDetailViewModel!
+    var itemEdit: MPatternEdit { vmEdit.itemEdit }
 
     func startEdit(vm: PatternsViewModel, item: MPattern) {
         vmEdit = PatternsDetailViewModel(vm: vm, item: item)

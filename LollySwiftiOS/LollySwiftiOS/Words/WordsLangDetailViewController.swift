@@ -11,17 +11,17 @@ import RxBinding
 
 class WordsLangDetailViewController: UITableViewController {
 
-    var vm: WordsLangViewModel!
-    var item: MLangWord!
-    var vmEdit: WordsLangDetailViewModel!
-    var itemEdit: MLangWordEdit { vmEdit.itemEdit }
-
     @IBOutlet weak var tfID: UITextField!
     @IBOutlet weak var tfWord: UITextField!
     @IBOutlet weak var tfNote: UITextField!
     @IBOutlet weak var tfFamiID: UITextField!
     @IBOutlet weak var tfAccuracy: UITextField!
     @IBOutlet weak var btnDone: UIBarButtonItem!
+
+    var vm: WordsLangViewModel!
+    var item: MLangWord!
+    var vmEdit: WordsLangDetailViewModel!
+    var itemEdit: MLangWordEdit { vmEdit.itemEdit }
 
     override func viewDidLoad() {
         super.viewDidLoad()

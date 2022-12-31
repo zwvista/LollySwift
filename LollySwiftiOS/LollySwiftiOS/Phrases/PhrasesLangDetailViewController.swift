@@ -11,15 +11,15 @@ import RxBinding
 
 class PhrasesLangDetailViewController: UITableViewController {
 
-    var vm: PhrasesLangViewModel!
-    var item: MLangPhrase!
-    var vmEdit: PhrasesLangDetailViewModel!
-    var itemEdit: MLangPhraseEdit { vmEdit.itemEdit }
-
     @IBOutlet weak var tfID: UITextField!
     @IBOutlet weak var tfPhrase: UITextField!
     @IBOutlet weak var tfTranslation: UITextField!
     @IBOutlet weak var btnDone: UIBarButtonItem!
+
+    var vm: PhrasesLangViewModel!
+    var item: MLangPhrase!
+    var vmEdit: PhrasesLangDetailViewModel!
+    var itemEdit: MLangPhraseEdit { vmEdit.itemEdit }
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -11,11 +11,11 @@ import RxBinding
 
 class LoginViewController: UIViewController {
 
-    let vm = LoginViewModel()
-    var completion: (() -> Void)?
-
     @IBOutlet weak var tfUsername: UITextField!
     @IBOutlet weak var tfPassword: UITextField!
+
+    let vm = LoginViewModel()
+    var completion: (() -> Void)?
 
     override func viewDidLoad() {
         super.viewDidLoad()

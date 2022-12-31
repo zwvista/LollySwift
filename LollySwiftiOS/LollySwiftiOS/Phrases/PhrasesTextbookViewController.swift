@@ -13,10 +13,10 @@ import RxBinding
 
 class PhrasesTextbookViewController: PhrasesBaseViewController {
 
+    @IBOutlet weak var btnTextbookFilter: UIButton!
+
     var vm: PhrasesUnitViewModel!
     var arrPhrases: [MUnitPhrase] { vm.arrPhrasesFiltered }
-
-    @IBOutlet weak var btnTextbookFilter: UIButton!
     override var vmBase: PhrasesBaseViewModel! { vm }
 
     override func refresh() {

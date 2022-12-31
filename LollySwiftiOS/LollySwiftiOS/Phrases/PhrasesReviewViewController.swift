@@ -12,7 +12,6 @@ import NSObject_Rx
 import RxBinding
 
 class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
-    var vm: PhrasesReviewViewModel!
 
     @IBOutlet weak var lblIndex: UILabel!
     @IBOutlet weak var lblCorrect: UILabel!
@@ -30,6 +29,7 @@ class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var svOnRepeat: UIStackView!
     @IBOutlet weak var svMoveForward: UIStackView!
 
+    var vm: PhrasesReviewViewModel!
     var isSpeaking = false
 
     override func viewDidLoad() {

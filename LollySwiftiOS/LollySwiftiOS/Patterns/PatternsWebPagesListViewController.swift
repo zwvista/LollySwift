@@ -14,8 +14,9 @@ import RxBinding
 
 class PatternsWebPagesListViewController: UITableViewController {
 
-    var vm: PatternsWebPagesViewModel!
     @IBOutlet weak var btnEdit: UIBarButtonItem!
+
+    var vm: PatternsWebPagesViewModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()

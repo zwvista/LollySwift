@@ -36,7 +36,7 @@ class PatternsWebPagesBrowseViewController: UIViewController, WKUIDelegate, WKNa
         vm.getWebPages().subscribe { [unowned self] _ in
             @MainActor
             func configMenu() {
-                var arr = vm.arrWebPages.map(\.TITLE)
+                let arr = vm.arrWebPages.map(\.TITLE)
                 btnWebPage.menu = UIMenu(title: "", options: .displayInline, children: arr.enumerated().map { index, item in
                     UIAction(title: "\(index + 1)/\(arr.count) \(item)", state: index == vm.currentWebPageIndex ? .on : .off) { [unowned self] _ in
                         vm.currentWebPageIndex = index
