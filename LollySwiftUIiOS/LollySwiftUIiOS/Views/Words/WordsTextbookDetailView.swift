@@ -19,6 +19,11 @@ struct WordsTextbookDetailView: View {
                     Text(vmEdit.itemEdit.ID)
                 }
                 HStack {
+                    Text("TEXTBOOK:")
+                    Spacer()
+                    Text(vmEdit.itemEdit.TEXTBOOKNAME)
+                }
+                HStack {
                     Text("UNIT:")
                     Spacer()
                     Picker("", selection: $vmEdit.itemEdit.indexUNIT) {

@@ -14,16 +14,21 @@ struct WordsTextbookView: View {
     @State var showItemMore = false
     @State var showDelete = false
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
+            SearchBar(text: $vm.textFilter, placeholder: "Filter") { _ in }
             HStack(spacing: 0) {
-                SearchBar(text: $vm.textFilter, placeholder: "Filter") { _ in }
+                Picker("", selection: $vm.stringTextbookFilter) {
+                    ForEach(vmSettings.arrTextbookFilters.map(\.label), id: \.self) { s in
+                        Text(s)
+                    }
+                }
+                .modifier(PickerModifier(backgroundColor: Color.color3))
                 Picker("", selection: $vm.scopeFilter) {
                     ForEach(SettingsViewModel.arrScopeWordFilters, id: \.self) { s in
                         Text(s)
                     }
                 }
-                .background(Color.color2)
-                .tint(.white)
+                .modifier(PickerModifier(backgroundColor: Color.color2))
             }
             List {
                 ForEach(vm.arrWordsFiltered, id: \.ID) { item in
@@ -105,9 +110,6 @@ struct WordsTextbookView: View {
                     }, message: {
                         Text(item.WORDNOTE)
                     })
-                }
-                .onDelete { IndexSet in
-
                 }
             }
             .navigationDestination(for: MUnitWord.self) { item in

@@ -15,7 +15,7 @@ struct PhrasesLangView: View {
     @State var showItemMore = false
     @State var showDelete = false
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             HStack(spacing: 0) {
                 SearchBar(text: $vm.textFilter, placeholder: "Filter") { _ in }
                 Picker("", selection: $vm.scopeFilter) {
