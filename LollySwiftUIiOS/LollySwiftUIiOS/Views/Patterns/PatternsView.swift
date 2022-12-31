@@ -10,8 +10,6 @@ import SwiftUI
 struct PatternsView: View {
     @Binding var navPath: NavigationPath
     @StateObject var vm = PatternsViewModel(settings: vmSettings, needCopy: false) {}
-    @Environment(\.editMode) var editMode
-    var isEditing: Bool { editMode?.wrappedValue.isEditing == true }
     @State var showDetailEdit = false
     @State var showDetailAdd = false
     @State var showItemMore = false
@@ -39,22 +37,16 @@ struct PatternsView: View {
                                 .foregroundColor(Color.color3)
                         }
                         Spacer()
-                        if !isEditing {
-                            Image(systemName: "info.circle")
-                                .foregroundColor(.blue)
-                                .onTapGesture {
-                                    navPath.append(item)
-                                }
-                        }
+                        Image(systemName: "info.circle")
+                            .foregroundColor(.blue)
+                            .onTapGesture {
+                                navPath.append(item)
+                            }
                     }
                     .contentShape(Rectangle())
                     .frame(maxWidth: .infinity)
                     .onTapGesture {
-                        if isEditing {
-                            showDetailEdit.toggle()
-                        } else {
-                            AppDelegate.speak(string: item.PATTERN)
-                        }
+                        AppDelegate.speak(string: item.PATTERN)
                     }
                     .sheet(isPresented: $showDetailEdit) {
                         PatternsDetailView(vmEdit: PatternsDetailViewModel(vm: vm, item: item), showDetail: $showDetailEdit)
@@ -95,16 +87,12 @@ struct PatternsView: View {
                         Text(item.PATTERN)
                     })
                 }
-                .onDelete { IndexSet in
-
-                }
             }
             .navigationDestination(for: MPattern.self) { item in
                 PatternWebPagesBrowseView(vm: PatternsWebPagesViewModel(settings: vmSettings, needCopy: false, item: item))
             }
             .toolbar {
                 ToolbarItemGroup {
-                    EditButton()
                     Button("Add") {
                         showDetailAdd.toggle()
                     }

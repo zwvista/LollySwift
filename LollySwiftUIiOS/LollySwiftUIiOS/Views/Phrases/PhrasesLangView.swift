@@ -10,8 +10,6 @@ import SwiftUI
 struct PhrasesLangView: View {
     @Binding var navPath: NavigationPath
     @StateObject var vm = PhrasesLangViewModel(settings: vmSettings, needCopy: false) {}
-    @Environment(\.editMode) var editMode
-    var isEditing: Bool { editMode?.wrappedValue.isEditing == true }
     @State var showDetailEdit = false
     @State var showDetailAdd = false
     @State var showItemMore = false
@@ -43,11 +41,7 @@ struct PhrasesLangView: View {
                     .contentShape(Rectangle())
                     .frame(maxWidth: .infinity)
                     .onTapGesture {
-                        if isEditing {
-                            showDetailEdit.toggle()
-                        } else {
-                            AppDelegate.speak(string: item.PHRASE)
-                        }
+                        AppDelegate.speak(string: item.PHRASE)
                     }
                     .sheet(isPresented: $showDetailEdit) {
                         PhrasesLangDetailView(vmEdit: PhrasesLangDetailViewModel(vm: vm, item: item, complete: {}), showDetail: $showDetailEdit)
@@ -85,13 +79,9 @@ struct PhrasesLangView: View {
                         Text(item.PHRASE)
                     })
                 }
-                .onDelete { IndexSet in
-
-                }
             }
             .toolbar {
                 ToolbarItemGroup {
-                    EditButton()
                     Button("Add") {
                         showDetailAdd.toggle()
                     }

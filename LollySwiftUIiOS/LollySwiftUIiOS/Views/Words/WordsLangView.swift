@@ -10,12 +10,9 @@ import SwiftUI
 struct WordsLangView: View {
     @Binding var navPath: NavigationPath
     @StateObject var vm = WordsLangViewModel(settings: vmSettings, needCopy: false) {}
-    @Environment(\.editMode) var editMode
-    var isEditing: Bool { editMode?.wrappedValue.isEditing == true }
     @State var showDetail = false
     @State var showDetailEdit = false
     @State var showDetailAdd = false
-    @State var showBatchEdit = false
     @State var showDict = false
     @State var showItemMore = false
     @State var showDelete = false
@@ -42,22 +39,16 @@ struct WordsLangView: View {
                                 .foregroundColor(Color.color3)
                         }
                         Spacer()
-                        if !isEditing {
-                            Image(systemName: "info.circle")
-                                .foregroundColor(.blue)
-                                .onTapGesture {
-                                    showDict.toggle()
-                                }
-                        }
+                        Image(systemName: "info.circle")
+                            .foregroundColor(.blue)
+                            .onTapGesture {
+                                showDict.toggle()
+                            }
                     }
                     .contentShape(Rectangle())
                     .frame(maxWidth: .infinity)
                     .onTapGesture {
-                        if isEditing {
-                            showDetailEdit.toggle()
-                        } else {
-                            AppDelegate.speak(string: item.WORD)
-                        }
+                        AppDelegate.speak(string: item.WORD)
                     }
                     .sheet(isPresented: $showDetailEdit) {
                         WordsLangDetailView(vmEdit: WordsLangDetailViewModel(vm: vm, item: item, complete: {}), showDetail: $showDetailEdit)
@@ -100,13 +91,9 @@ struct WordsLangView: View {
                         Text(item.WORDNOTE)
                     })
                 }
-                .onDelete { IndexSet in
-
-                }
             }
             .toolbar {
                 ToolbarItemGroup {
-                    EditButton()
                     Button("Add") {
                         showDetailAdd.toggle()
                     }
