@@ -10,8 +10,6 @@ import SwiftUI
 struct WordsTextbookView: View {
     @Binding var navPath: NavigationPath
     @StateObject var vm = WordsUnitViewModel(settings: vmSettings, inTextbook: false, needCopy: false) {}
-    @Environment(\.editMode) var editMode
-    var isEditing: Bool { editMode?.wrappedValue.isEditing == true }
     @State var showDetailEdit = false
     @State var showItemMore = false
     @State var showDelete = false
@@ -45,23 +43,17 @@ struct WordsTextbookView: View {
                                 .foregroundColor(Color.color3)
                         }
                         Spacer()
-                        if !isEditing {
-                            Image(systemName: "info.circle")
-                                .foregroundColor(.blue)
-                                .onTapGesture {
-                                    navPath.append(item)
-                                }
-                        }
+                        Image(systemName: "info.circle")
+                            .foregroundColor(.blue)
+                            .onTapGesture {
+                                navPath.append(item)
+                            }
                     }
                     // https://stackoverflow.com/questions/65100077/swiftui-how-can-you-use-on-tap-gesture-for-entire-item-in-a-foreach-loop
                     .contentShape(Rectangle())
                     .frame(maxWidth: .infinity)
                     .onTapGesture {
-                        if isEditing {
-                            showDetailEdit.toggle()
-                        } else {
-                            AppDelegate.speak(string: item.WORD)
-                        }
+                        AppDelegate.speak(string: item.WORD)
                     }
                     .sheet(isPresented: $showDetailEdit) {
                         WordsTextbookDetailView(vmEdit: WordsUnitDetailViewModel(vm: vm, item: item, phraseid: 0, complete: {}), showDetail: $showDetailEdit)

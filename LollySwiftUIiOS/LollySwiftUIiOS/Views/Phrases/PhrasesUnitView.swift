@@ -53,7 +53,7 @@ struct PhrasesUnitView: View {
                     .frame(maxWidth: .infinity)
                     .onTapGesture {
                         if isEditing {
-                            showDetailEdit = true
+                            showDetailEdit.toggle()
                         } else {
                             AppDelegate.speak(string: item.PHRASE)
                         }
@@ -111,7 +111,7 @@ struct PhrasesUnitView: View {
                     showDetailAdd.toggle()
                 }
                 Button("Batch Edit") {
-                    showBatchEdit = true
+                    showBatchEdit.toggle()
                 }
                 Button("Cancel", role: .cancel) {}
             }, message: {

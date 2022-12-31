@@ -10,8 +10,6 @@ import SwiftUI
 struct PhrasesTextbookView: View {
     @Binding var navPath: NavigationPath
     @StateObject var vm = PhrasesUnitViewModel(settings: vmSettings, inTextbook: false, needCopy: false) {}
-    @Environment(\.editMode) var editMode
-    var isEditing: Bool { editMode?.wrappedValue.isEditing == true }
     @State var showDetailEdit = false
     @State var showItemMore = false
     @State var showDelete = false
@@ -49,11 +47,7 @@ struct PhrasesTextbookView: View {
                     .contentShape(Rectangle())
                     .frame(maxWidth: .infinity)
                     .onTapGesture {
-                        if isEditing {
-                            showDetailEdit = true
-                        } else {
-                            AppDelegate.speak(string: item.PHRASE)
-                        }
+                        AppDelegate.speak(string: item.PHRASE)
                     }
                     .sheet(isPresented: $showDetailEdit) {
                         PhrasesTextbookDetailView(vmEdit: PhrasesUnitDetailViewModel(vm: vm, item: item, wordid: 0, complete: {}), showDetail: $showDetailEdit)
