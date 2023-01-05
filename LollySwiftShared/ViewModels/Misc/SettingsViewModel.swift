@@ -141,7 +141,8 @@ class SettingsViewModel: NSObject {
     var selectedTextbookIndex_ = BehaviorRelay(value: -1)
     var selectedTextbookIndex: Int { get { selectedTextbookIndex_.value } set { selectedTextbookIndex_.accept(newValue) } }
     var selectedTextbook: MTextbook { arrTextbooks.indices ~= selectedTextbookIndex ? arrTextbooks[selectedTextbookIndex] : MTextbook() }
-    var arrTextbookFilters = [MSelectItem]()
+    static let allBooksTextbookFilter = MSelectItem(value: 0, label: "All Textbooks")
+    var arrTextbookFilters = [allBooksTextbookFilter]
     var arrWebTextbookFilters = [MSelectItem]()
 
     var arrUnits: [MSelectItem] { selectedTextbook.arrUnits }
@@ -196,62 +197,175 @@ class SettingsViewModel: NSObject {
 
     var arrAutoCorrect = [MAutoCorrect]()
     var arrDictTypes = [MCode]()
+    var initialized = AsyncSubject<()>()
 
-    var initialized = false
     override init() {
         super.init()
 
         func onChange(_ source: BehaviorRelay<Int>, _ selector: @escaping (Int) throws -> Single<()>) {
-            source.distinctUntilChanged().filter { self.initialized && $0 != -1 }.flatMap(selector).subscribe() ~ rx.disposeBag
+            source.distinctUntilChanged().filter { $0 != -1 }.flatMap(selector).subscribe() ~ rx.disposeBag
         }
 
-        onChange(selectedLangIndex_) { n in
+        onChange(selectedLangIndex_) { [unowned self] n in
             print("selectedLangIndex=\(n)")
-            return self.updateLang()
-        }
-        onChange(selectedMacVoiceIndex_) {n in
-            print("selectedMacVoiceIndex=\(n)")
-            return self.updateMacVoice()
-        }
-        onChange(selectediOSVoiceIndex_) {n in
-            print("selectediOSVoiceIndex=\(n)")
-            return self.updateiOSVoice()
-        }
-        onChange(selectedDictReferenceIndex_) {n in
-            print("selectedDictReferenceIndex=\(n)")
-            return self.updateDictReference()
-        }
-        onChange(selectedDictNoteIndex_) {n in
-            print("selectedDictNoteIndex=\(n)")
-            return self.updateDictNote()
-        }
-        onChange(selectedDictTranslationIndex_) {n in
-            print("selectedDictTranslationIndex=\(n)")
-            return self.updateDictTranslation()
-        }
-        onChange(selectedTextbookIndex_) {n in
-            print("selectedTextbookIndex=\(n)")
-            return self.updateTextbook()
-        }
-        onChange(selectedUnitFromIndex_) { n in
-            print("selectedUnitFromIndex=\(n)")
-            return self.updateUnitFrom()
-        }
-        onChange(selectedPartFromIndex_) { n in
-            print("selectedPartFromIndex=\(n)")
-            return self.updatePartFrom()
-        }
-        onChange(selectedUnitToIndex_) { n in
-            print("selectedUnitToIndex=\(n)")
-            return self.updateUnitTo()
-        }
-        onChange(selectedPartToIndex_) { n in
-            print("selectedPartToIndex=\(n)")
-            return self.updatePartTo()
+            let newVal = selectedLang.ID
+            let dirty = USLANG != newVal
+            USLANG = newVal
+            toType = .to
+            selectedDictReferenceIndex = -1
+            selectedDictNoteIndex = -1
+            selectedDictTranslationIndex = -1
+            selectedTextbookIndex = -1
+            selectedMacVoiceIndex = -1
+            selectediOSVoiceIndex = -1
+            INFO_USTEXTBOOK = getUSInfo(name: MUSMapping.NAME_USTEXTBOOK)
+            INFO_USDICTREFERENCE = getUSInfo(name: MUSMapping.NAME_USDICTREFERENCE)
+            INFO_USDICTNOTE = getUSInfo(name: MUSMapping.NAME_USDICTNOTE)
+            INFO_USDICTSREFERENCE = getUSInfo(name: MUSMapping.NAME_USDICTSREFERENCE)
+            INFO_USDICTTRANSLATION = getUSInfo(name: MUSMapping.NAME_USDICTTRANSLATION)
+            INFO_USMACVOICE = getUSInfo(name: MUSMapping.NAME_USMACVOICE)
+            INFO_USIOSVOICE = getUSInfo(name: MUSMapping.NAME_USIOSVOICE)
+            arrTextbookFilters = [SettingsViewModel.allBooksTextbookFilter]
+            arrWebTextbookFilters = [SettingsViewModel.allBooksTextbookFilter]
+            return Single.zip(MDictionary.getDictsReferenceByLang(USLANG),
+                              MDictionary.getDictsNoteByLang(USLANG),
+                              MDictionary.getDictsTranslationByLang(USLANG),
+                              MTextbook.getDataByLang(USLANG, arrUserSettings: arrUserSettings),
+                              MAutoCorrect.getDataByLang(USLANG),
+                              MVoice.getDataByLang(USLANG))
+                .flatMap { [unowned self] result in
+                    arrDictsReference = result.0
+                    selectedDictsReferenceIndexes = USDICTSREFERENCE.split(separator: ",").compactMap { id in arrDictsReference.firstIndex { String($0.DICTID) == id } }
+                    arrDictsNote = result.1
+                    arrDictsTranslation = result.2
+                    arrTextbooks = result.3
+                    arrAutoCorrect = result.4
+                    let arrVoices = result.5
+                    arrMacVoices = arrVoices.filter { $0.VOICETYPEID == 2 }
+                    if arrMacVoices.isEmpty { arrMacVoices.append(MVoice()) }
+                    arriOSVoices = arrVoices.filter { $0.VOICETYPEID == 3 }
+                    if arriOSVoices.isEmpty { arriOSVoices.append(MVoice()) }
+                    selectedDictReferenceIndex = arrDictsReference.firstIndex { String($0.DICTID) == USDICTREFERENCE } ?? 0
+                    if arrDictsNote.isEmpty { arrDictsNote.append(MDictionary()) }
+                    selectedDictNoteIndex = arrDictsNote.firstIndex { $0.DICTID == USDICTNOTE } ?? 0
+                    if arrDictsTranslation.isEmpty { arrDictsTranslation.append(MDictionary()) }
+                    selectedDictTranslationIndex = arrDictsTranslation.firstIndex { $0.DICTID == USDICTTRANSLATION } ?? 0
+                    selectedTextbookIndex = arrTextbooks.firstIndex { $0.ID == USTEXTBOOK } ?? 0
+                    arrTextbookFilters.append(contentsOf: arrTextbooks.map { MSelectItem(value: $0.ID, label: $0.TEXTBOOKNAME) })
+                    arrWebTextbookFilters.append(contentsOf: arrTextbooks.filter { $0.ISWEB == 1 }.map { MSelectItem(value: $0.ID, label: $0.TEXTBOOKNAME) })
+                    selectedMacVoiceIndex = arrMacVoices.firstIndex { $0.ID == USMACVOICE } ?? 0
+                    selectediOSVoiceIndex = arriOSVoices.firstIndex { $0.ID == USIOSVOICE } ?? 0
+                    return !dirty ? Single.just(()) : MUserSetting.update(info: INFO_USLANG, intValue: USLANG)
+                }
         }
 
-        toType_.distinctUntilChanged().flatMap { n in
-            self.updateToType()
+        onChange(selectedMacVoiceIndex_) { [unowned self] n in
+            print("selectedMacVoiceIndex=\(n)")
+            let newVal = selectedMacVoice.ID
+            let dirty = USMACVOICE != newVal
+            USMACVOICE = newVal
+            return !dirty ? Single.just(()) : MUserSetting.update(info: INFO_USMACVOICE, intValue: USMACVOICE)
+        }
+
+        onChange(selectediOSVoiceIndex_) { [unowned self] n in
+            print("selectediOSVoiceIndex=\(n)")
+            let newVal = selectediOSVoice.ID
+            let dirty = USIOSVOICE != newVal
+            USIOSVOICE = newVal
+            return !dirty ? Single.just(()) : MUserSetting.update(info: INFO_USIOSVOICE, intValue: USIOSVOICE)
+        }
+
+        onChange(selectedDictReferenceIndex_) { [unowned self] n in
+            print("selectedDictReferenceIndex=\(n)")
+            let newVal = String(selectedDictReference.DICTID)
+            let dirty = USDICTREFERENCE != newVal
+            USDICTREFERENCE = newVal
+            return !dirty ? Single.just(()) : MUserSetting.update(info: INFO_USDICTREFERENCE, stringValue: USDICTREFERENCE)
+        }
+
+        onChange(selectedDictNoteIndex_) { [unowned self] n in
+            print("selectedDictNoteIndex=\(n)")
+            let newVal = selectedDictNote.DICTID
+            let dirty = USDICTNOTE != newVal
+            USDICTNOTE = newVal
+            return !dirty ? Single.just(()) : MUserSetting.update(info: INFO_USDICTNOTE, intValue: USDICTNOTE)
+        }
+
+        onChange(selectedDictTranslationIndex_) { [unowned self] n in
+            print("selectedDictTranslationIndex=\(n)")
+            let newVal = selectedDictTranslation.DICTID
+            let dirty = USDICTTRANSLATION != newVal
+            USDICTTRANSLATION = newVal
+            return !dirty ? Single.just(()) : MUserSetting.update(info: INFO_USDICTTRANSLATION, intValue: USDICTTRANSLATION)
+        }
+
+        onChange(selectedTextbookIndex_) { [unowned self] n in
+            print("selectedTextbookIndex=\(n)")
+            let newVal = selectedTextbook.ID
+            let dirty = USTEXTBOOK != newVal
+            USTEXTBOOK = newVal
+            selectedUnitFromIndex = -1
+            selectedPartFromIndex = -1
+            selectedUnitToIndex = -1
+            selectedPartToIndex = -1
+            INFO_USUNITFROM = getUSInfo(name: MUSMapping.NAME_USUNITFROM)
+            INFO_USPARTFROM = getUSInfo(name: MUSMapping.NAME_USPARTFROM)
+            INFO_USUNITTO = getUSInfo(name: MUSMapping.NAME_USUNITTO)
+            INFO_USPARTTO = getUSInfo(name: MUSMapping.NAME_USPARTTO)
+            selectedUnitFromIndex = arrUnits.firstIndex { $0.value == USUNITFROM } ?? 0
+            selectedPartFromIndex = arrParts.firstIndex { $0.value == USPARTFROM } ?? 0
+            selectedUnitToIndex = arrUnits.firstIndex { $0.value == USUNITTO } ?? 0
+            selectedPartToIndex = arrParts.firstIndex { $0.value == USPARTTO } ?? 0
+            toType = isSingleUnit ? .unit : isSingleUnitPart ? .part : .to
+            initialized.onCompleted()
+            return !dirty ? Single.just(()) : MUserSetting.update(info: INFO_USTEXTBOOK, intValue: USTEXTBOOK)
+        }
+
+        onChange(selectedUnitFromIndex_) { [unowned self] n in
+            print("selectedUnitFromIndex=\(n)")
+            return doUpdateUnitFrom(v: selectedUnitFrom).flatMap { [unowned self] in
+                toType == .unit ? doUpdateSingleUnit() :
+                toType == .part || isInvalidUnitPart ? doUpdateUnitPartTo() :
+                Single.just(())
+            }
+        }
+
+        onChange(selectedPartFromIndex_) { [unowned self] n in
+            print("selectedPartFromIndex=\(n)")
+            return doUpdatePartFrom(v: selectedPartFrom).flatMap { [unowned self] in
+                toType == .part || isInvalidUnitPart ? doUpdateUnitPartTo() : Single.just(())
+            }
+        }
+
+        onChange(selectedUnitToIndex_) { [unowned self] n in
+            print("selectedUnitToIndex=\(n)")
+            return doUpdateUnitTo(v: selectedUnitTo).flatMap { [unowned self] in
+                isInvalidUnitPart ? doUpdateUnitPartFrom() : Single.just(())
+            }
+        }
+
+        onChange(selectedPartToIndex_) { [unowned self] n in
+            print("selectedPartToIndex=\(n)")
+            return doUpdatePartTo(v: selectedPartTo).flatMap { [unowned self] in
+                isInvalidUnitPart ? doUpdateUnitPartFrom() : Single.just(())
+            }
+        }
+
+        toType_.distinctUntilChanged().flatMap { [unowned self] n in
+            print("toType=\(toType)")
+            toTypeTitle.accept(SettingsViewModel.arrToTypes[toType_.value])
+            let b = toType == .to
+            unitToEnabled.accept(b)
+            partToEnabled.accept(b && !isSinglePart)
+            previousEnabled.accept(!b)
+            nextEnabled.accept(!b)
+            let b2 = toType != .unit
+            let t = !b2 ? "Unit" : "Part"
+            previousTitle.accept("Previous " + t)
+            nextTitle.accept("Next " + t)
+            partFromEnabled.accept(b2 && !isSinglePart)
+            return toType == .unit ? doUpdateSingleUnit() :
+            toType == .part ? doUpdateUnitPartTo() : Single.just(())
         }.subscribe() ~ rx.disposeBag
     }
 
@@ -295,7 +409,6 @@ class SettingsViewModel: NSObject {
         selectedUnitToIndex = x.selectedUnitToIndex
         selectedPartToIndex = x.selectedPartToIndex
         toType = x.toType
-        initialized = x.initialized
     }
 
     private func getUSInfo(name: String) -> MUserSettingInfo {
@@ -309,103 +422,18 @@ class SettingsViewModel: NSObject {
     }
 
     func getData() -> Single<()> {
-        initialized = false
-        return Single.zip(MLanguage.getData(),
+        Single.zip(MLanguage.getData(),
                               MUSMapping.getData(),
                               MUserSetting.getData(),
                               MCode.getData())
-            .flatMap { result in
-                self.arrLanguages = result.0
-                self.arrUSMappings = result.1
-                self.arrUserSettings = result.2
-                self.arrDictTypes = result.3
-                self.INFO_USLANG = self.getUSInfo(name: MUSMapping.NAME_USLANG)
-                self.selectedLangIndex = self.arrLanguages.firstIndex { $0.ID == self.USLANG } ?? 0
-                return self.initialized ? Single.just(()) : self.updateLang().do(onSuccess: { self.initialized = true })
+            .map { [unowned self] result in
+                arrLanguages = result.0
+                arrUSMappings = result.1
+                arrUserSettings = result.2
+                arrDictTypes = result.3
+                INFO_USLANG = getUSInfo(name: MUSMapping.NAME_USLANG)
+                selectedLangIndex = arrLanguages.firstIndex { $0.ID == USLANG } ?? 0
             }
-    }
-
-    func updateLang() -> Single<()> {
-        let newVal = selectedLang.ID
-        let dirty = USLANG != newVal
-        USLANG = newVal
-        toType = .to
-        selectedDictReferenceIndex = -1
-        selectedDictNoteIndex = -1
-        selectedDictTranslationIndex = -1
-        selectedTextbookIndex = -1
-        selectedMacVoiceIndex = -1
-        selectediOSVoiceIndex = -1
-        INFO_USTEXTBOOK = getUSInfo(name: MUSMapping.NAME_USTEXTBOOK)
-        INFO_USDICTREFERENCE = getUSInfo(name: MUSMapping.NAME_USDICTREFERENCE)
-        INFO_USDICTNOTE = getUSInfo(name: MUSMapping.NAME_USDICTNOTE)
-        INFO_USDICTSREFERENCE = getUSInfo(name: MUSMapping.NAME_USDICTSREFERENCE)
-        INFO_USDICTTRANSLATION = getUSInfo(name: MUSMapping.NAME_USDICTTRANSLATION)
-        INFO_USMACVOICE = getUSInfo(name: MUSMapping.NAME_USMACVOICE)
-        INFO_USIOSVOICE = getUSInfo(name: MUSMapping.NAME_USIOSVOICE)
-        return Single.zip(MDictionary.getDictsReferenceByLang(USLANG),
-                              MDictionary.getDictsNoteByLang(USLANG),
-                              MDictionary.getDictsTranslationByLang(USLANG),
-                              MTextbook.getDataByLang(USLANG, arrUserSettings: arrUserSettings),
-                              MAutoCorrect.getDataByLang(USLANG),
-                              MVoice.getDataByLang(USLANG))
-            .flatMap { result in
-                self.arrDictsReference = result.0
-                self.selectedDictsReferenceIndexes = self.USDICTSREFERENCE.split(separator: ",").compactMap { id in self.arrDictsReference.firstIndex { String($0.DICTID) == id } }
-                self.arrDictsNote = result.1
-                self.arrDictsTranslation = result.2
-                self.arrTextbooks = result.3
-                self.arrAutoCorrect = result.4
-                let arrVoices = result.5
-                self.arrMacVoices = arrVoices.filter { $0.VOICETYPEID == 2 }
-                if self.arrMacVoices.isEmpty { self.arrMacVoices.append(MVoice()) }
-                self.arriOSVoices = arrVoices.filter { $0.VOICETYPEID == 3 }
-                if self.arriOSVoices.isEmpty { self.arriOSVoices.append(MVoice()) }
-                self.selectedDictReferenceIndex = self.arrDictsReference.firstIndex { String($0.DICTID) == self.USDICTREFERENCE } ?? 0
-                if self.arrDictsNote.isEmpty { self.arrDictsNote.append(MDictionary()) }
-                self.selectedDictNoteIndex = self.arrDictsNote.firstIndex { $0.DICTID == self.USDICTNOTE } ?? 0
-                if self.arrDictsTranslation.isEmpty { self.arrDictsTranslation.append(MDictionary()) }
-                self.selectedDictTranslationIndex = self.arrDictsTranslation.firstIndex { $0.DICTID == self.USDICTTRANSLATION } ?? 0
-                self.selectedTextbookIndex = self.arrTextbooks.firstIndex { $0.ID == self.USTEXTBOOK } ?? 0
-                self.arrTextbookFilters = self.arrTextbooks.map { MSelectItem(value: $0.ID, label: $0.TEXTBOOKNAME) }
-                self.arrTextbookFilters.insert(MSelectItem(value: 0, label: "All Textbooks"), at: 0)
-                self.arrWebTextbookFilters = self.arrTextbooks.filter { $0.ISWEB == 1 }.map { MSelectItem(value: $0.ID, label: $0.TEXTBOOKNAME) }
-                self.arrWebTextbookFilters.insert(MSelectItem(value: 0, label: "All Textbooks"), at: 0)
-                self.selectedMacVoiceIndex = self.arrMacVoices.firstIndex { $0.ID == self.USMACVOICE } ?? 0
-                self.selectediOSVoiceIndex = self.arriOSVoices.firstIndex { $0.ID == self.USIOSVOICE } ?? 0
-                return Single.zip(self.initialized ? Single.just(()) : Single.zip(self.updateTextbook(), self.updateDictReference(), self.updateDictsReference(), self.updateDictNote(), self.updateDictTranslation(), self.updateMacVoice(), self.updateiOSVoice()).map { _ in }, (!dirty ? Single.just(()) : MUserSetting.update(info: self.INFO_USLANG, intValue: self.USLANG))).map { _ in }
-            }
-    }
-
-    func updateTextbook() -> Single<()> {
-        let newVal = selectedTextbook.ID
-        let dirty = USTEXTBOOK != newVal
-        USTEXTBOOK = newVal
-        selectedUnitFromIndex = -1
-        selectedPartFromIndex = -1
-        selectedUnitToIndex = -1
-        selectedPartToIndex = -1
-        INFO_USUNITFROM = getUSInfo(name: MUSMapping.NAME_USUNITFROM)
-        INFO_USPARTFROM = getUSInfo(name: MUSMapping.NAME_USPARTFROM)
-        INFO_USUNITTO = getUSInfo(name: MUSMapping.NAME_USUNITTO)
-        INFO_USPARTTO = getUSInfo(name: MUSMapping.NAME_USPARTTO)
-        selectedUnitFromIndex = arrUnits.firstIndex { $0.value == USUNITFROM } ?? 0
-        selectedPartFromIndex = arrParts.firstIndex { $0.value == USPARTFROM } ?? 0
-        selectedUnitToIndex = arrUnits.firstIndex { $0.value == USUNITTO } ?? 0
-        selectedPartToIndex = arrParts.firstIndex { $0.value == USPARTTO } ?? 0
-        let newVal2: UnitPartToType = isSingleUnit ? .unit : isSingleUnitPart ? .part : .to
-        let dirty2 = newVal2 != toType
-        toType = newVal2
-        return (!dirty ? Single.just(()) : MUserSetting.update(info: INFO_USTEXTBOOK, intValue: USTEXTBOOK)).flatMap {
-            dirty2 ? Single.just(()) : self.updateToType()
-        }
-    }
-
-    func updateDictReference() -> Single<()> {
-        let newVal = String(selectedDictReference.DICTID)
-        let dirty = USDICTREFERENCE != newVal
-        USDICTREFERENCE = newVal
-        return !dirty ? Single.just(()) : MUserSetting.update(info: INFO_USDICTREFERENCE, stringValue: USDICTREFERENCE)
     }
 
     func updateDictsReference() -> Single<()> {
@@ -415,79 +443,8 @@ class SettingsViewModel: NSObject {
         return !dirty ? Single.just(()) : MUserSetting.update(info: INFO_USDICTSREFERENCE, stringValue: USDICTSREFERENCE)
     }
 
-    func updateDictNote() -> Single<()> {
-        let newVal = selectedDictNote.DICTID
-        let dirty = USDICTNOTE != newVal
-        USDICTNOTE = newVal
-        return !dirty ? Single.just(()) : MUserSetting.update(info: INFO_USDICTNOTE, intValue: USDICTNOTE)
-    }
-
-    func updateDictTranslation() -> Single<()> {
-        let newVal = selectedDictTranslation.DICTID
-        let dirty = USDICTTRANSLATION != newVal
-        USDICTTRANSLATION = newVal
-        return !dirty ? Single.just(()) : MUserSetting.update(info: INFO_USDICTTRANSLATION, intValue: USDICTTRANSLATION)
-    }
-
-    func updateMacVoice() -> Single<()> {
-        let newVal = selectedMacVoice.ID
-        let dirty = USMACVOICE != newVal
-        USMACVOICE = newVal
-        return !dirty ? Single.just(()) : MUserSetting.update(info: INFO_USMACVOICE, intValue: USMACVOICE)
-    }
-
-    func updateiOSVoice() -> Single<()> {
-        let newVal = selectediOSVoice.ID
-        let dirty = USIOSVOICE != newVal
-        USIOSVOICE = newVal
-        return !dirty ? Single.just(()) : MUserSetting.update(info: INFO_USIOSVOICE, intValue: USIOSVOICE)
-    }
-
     func autoCorrectInput(text: String) -> String {
         MAutoCorrect.autoCorrect(text: text, arrAutoCorrect: arrAutoCorrect, colFunc1: \.INPUT, colFunc2: \.EXTENDED)
-    }
-
-    func updateUnitFrom() -> Single<()> {
-        doUpdateUnitFrom(v: selectedUnitFrom).flatMap {
-            self.toType == .unit ? self.doUpdateSingleUnit() :
-            self.toType == .part || self.isInvalidUnitPart ? self.doUpdateUnitPartTo() :
-            Single.just(())
-        }
-    }
-
-    func updatePartFrom() -> Single<()> {
-        doUpdatePartFrom(v: selectedPartFrom).flatMap {
-            self.toType == .part || self.isInvalidUnitPart ? self.doUpdateUnitPartTo() : Single.just(())
-        }
-    }
-
-    func updateUnitTo() -> Single<()> {
-        doUpdateUnitTo(v: selectedUnitTo).flatMap {
-            self.isInvalidUnitPart ? self.doUpdateUnitPartFrom() : Single.just(())
-        }
-    }
-
-    func updatePartTo() -> Single<()> {
-        doUpdatePartTo(v: selectedPartTo).flatMap {
-            self.isInvalidUnitPart ? self.doUpdateUnitPartFrom() : Single.just(())
-        }
-    }
-
-    func updateToType() -> Single<()> {
-        print("toType=\(toType)")
-        toTypeTitle.accept(SettingsViewModel.arrToTypes[toType_.value])
-        let b = toType == .to
-        unitToEnabled.accept(b)
-        partToEnabled.accept(b && !isSinglePart)
-        previousEnabled.accept(!b)
-        nextEnabled.accept(!b)
-        let b2 = toType != .unit
-        let t = !b2 ? "Unit" : "Part"
-        previousTitle.accept("Previous " + t)
-        nextTitle.accept("Next " + t)
-        partFromEnabled.accept(b2 && !isSinglePart)
-        return toType == .unit ? doUpdateSingleUnit() :
-        toType == .part ? doUpdateUnitPartTo() : Single.just(())
     }
 
     func toggleToType(part: Int) -> Single<()> {
@@ -561,8 +518,7 @@ class SettingsViewModel: NSObject {
         let dirty = USPARTFROM != v
         if !dirty { return Single.just(()) }
         USPARTFROM = v
-        selectedPartFromIndex = arrParts.firstIndex { $0.value == v }
-            ?? 0
+        selectedPartFromIndex = arrParts.firstIndex { $0.value == v } ?? 0
         return MUserSetting.update(info: INFO_USPARTFROM, intValue: USPARTFROM)
     }
 
