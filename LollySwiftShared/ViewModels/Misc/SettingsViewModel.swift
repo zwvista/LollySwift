@@ -178,8 +178,6 @@ class SettingsViewModel: NSObject, ObservableObject {
     var arrAutoCorrect = [MAutoCorrect]()
     var arrDictTypes = [MCode]()
 
-    weak var delegate: SettingsViewModelDelegate?
-
     var initialized = false
 
     var subscriptions = Set<AnyCancellable>()
@@ -259,6 +257,7 @@ class SettingsViewModel: NSObject, ObservableObject {
         INFO_USPARTFROM = x.INFO_USPARTFROM
         INFO_USUNITTO = x.INFO_USUNITTO
         INFO_USPARTTO = x.INFO_USPARTTO
+        super.init()
         arrLanguages = x.arrLanguages
         arrMacVoices = x.arrMacVoices
         arriOSVoices = x.arriOSVoices
@@ -271,8 +270,6 @@ class SettingsViewModel: NSObject, ObservableObject {
         arrWebTextbookFilters = x.arrWebTextbookFilters
         arrAutoCorrect = x.arrAutoCorrect
         arrDictTypes = x.arrDictTypes
-        delegate = x.delegate
-        super.init()
         selectedLangIndex = x.selectedLangIndex
         selectedMacVoiceIndex = x.selectedMacVoiceIndex
         selectediOSVoiceIndex = x.selectediOSVoiceIndex
@@ -306,7 +303,6 @@ class SettingsViewModel: NSObject, ObservableObject {
         async let res4 = MCode.getData()
         (arrLanguages, arrUSMappings, arrUserSettings, arrDictTypes) = await (res1, res2, res3, res4)
         INFO_USLANG = getUSInfo(name: MUSMapping.NAME_USLANG)
-        delegate?.onGetData()
         selectedLangIndex = arrLanguages.firstIndex { $0.ID == self.USLANG } ?? 0
         await updateLang()
         initialized = true
@@ -343,7 +339,6 @@ class SettingsViewModel: NSObject, ObservableObject {
         if arrMacVoices.isEmpty { arrMacVoices.append(MVoice()) }
         arriOSVoices = arrVoices.filter { $0.VOICETYPEID == 3 }
         if arriOSVoices.isEmpty { arriOSVoices.append(MVoice()) }
-        delegate?.onUpdateLang()
         selectedDictReferenceIndex = arrDictsReference.firstIndex { String($0.DICTID) == self.USDICTREFERENCE } ?? 0
         if arrDictsNote.isEmpty { arrDictsNote.append(MDictionary()) }
         selectedDictNoteIndex = arrDictsNote.firstIndex { $0.DICTID == self.USDICTNOTE } ?? 0
@@ -397,7 +392,6 @@ class SettingsViewModel: NSObject, ObservableObject {
         if dirty2 {
             await updateToType()
         }
-        delegate?.onUpdateTextbook()
     }
 
     func updateDictReference() async {
@@ -406,7 +400,6 @@ class SettingsViewModel: NSObject, ObservableObject {
             USDICTREFERENCE = newVal
             await MUserSetting.update(info: INFO_USDICTREFERENCE, stringValue: USDICTREFERENCE)
         }
-        delegate?.onUpdateDictReference()
     }
 
     func updateDictsReference() async {
@@ -415,7 +408,6 @@ class SettingsViewModel: NSObject, ObservableObject {
             USDICTSREFERENCE = newVal
             await MUserSetting.update(info: INFO_USDICTSREFERENCE, stringValue: USDICTSREFERENCE)
         }
-        delegate?.onUpdateDictsReference()
     }
 
     func updateDictNote() async {
@@ -424,7 +416,6 @@ class SettingsViewModel: NSObject, ObservableObject {
             USDICTNOTE = newVal
             await MUserSetting.update(info: INFO_USDICTNOTE, intValue: USDICTNOTE)
         }
-        delegate?.onUpdateDictNote()
     }
 
     func updateDictTranslation() async {
@@ -433,7 +424,6 @@ class SettingsViewModel: NSObject, ObservableObject {
             USDICTTRANSLATION = newVal
             await MUserSetting.update(info: INFO_USDICTTRANSLATION, intValue: USDICTTRANSLATION)
         }
-        delegate?.onUpdateDictTranslation()
     }
 
     func updateMacVoice() async {
@@ -442,7 +432,6 @@ class SettingsViewModel: NSObject, ObservableObject {
             USMACVOICE = newVal
             await MUserSetting.update(info: INFO_USMACVOICE, intValue: USMACVOICE)
         }
-        delegate?.onUpdateMacVoice()
     }
 
     func updateiOSVoice() async {
@@ -451,7 +440,6 @@ class SettingsViewModel: NSObject, ObservableObject {
             USIOSVOICE = newVal
             await MUserSetting.update(info: INFO_USIOSVOICE, intValue: USIOSVOICE)
         }
-        delegate?.onUpdateiOSVoice()
     }
 
     func autoCorrectInput(text: String) -> String {
@@ -595,7 +583,6 @@ class SettingsViewModel: NSObject, ObservableObject {
         USUNITFROM = v
         selectedUnitFromIndex = arrUnits.firstIndex { $0.value == v } ?? 0
         await MUserSetting.update(info: INFO_USUNITFROM, intValue: USUNITFROM)
-        delegate?.onUpdateUnitFrom()
     }
 
     private func doUpdatePartFrom(v: Int) async {
@@ -604,7 +591,6 @@ class SettingsViewModel: NSObject, ObservableObject {
         selectedPartFromIndex = arrParts.firstIndex { $0.value == v }
             ?? 0
         await MUserSetting.update(info: INFO_USPARTFROM, intValue: USPARTFROM)
-        delegate?.onUpdatePartFrom()
     }
 
     private func doUpdateUnitTo(v: Int) async {
@@ -612,7 +598,6 @@ class SettingsViewModel: NSObject, ObservableObject {
         USUNITTO = v
         selectedUnitToIndex = arrUnits.firstIndex { $0.value == v } ?? 0
         await MUserSetting.update(info: INFO_USUNITTO, intValue: USUNITTO)
-        delegate?.onUpdateUnitTo()
     }
 
     private func doUpdatePartTo(v: Int) async {
@@ -620,7 +605,6 @@ class SettingsViewModel: NSObject, ObservableObject {
         USPARTTO = v
         selectedPartToIndex = arrParts.firstIndex { $0.value == v } ?? 0
         await MUserSetting.update(info: INFO_USPARTTO, intValue: USPARTTO)
-        delegate?.onUpdatePartTo()
     }
 
     static let zeroNote = "O"
@@ -675,36 +659,4 @@ class SettingsViewModel: NSObject, ObservableObject {
     func saveBlogContent(content: String) async {
         await MUnitBlog.update(selectedTextbook.ID, unit: selectedUnitTo, content: content)
     }
-}
-
-@MainActor
-protocol SettingsViewModelDelegate : NSObjectProtocol {
-    func onGetData()
-    func onUpdateLang()
-    func onUpdateDictReference()
-    func onUpdateDictsReference()
-    func onUpdateDictNote()
-    func onUpdateDictTranslation()
-    func onUpdateTextbook()
-    func onUpdateUnitFrom()
-    func onUpdatePartFrom()
-    func onUpdateUnitTo()
-    func onUpdatePartTo()
-    func onUpdateMacVoice()
-    func onUpdateiOSVoice()
-}
-extension SettingsViewModelDelegate {
-    func onGetData(){}
-    func onUpdateLang(){}
-    func onUpdateDictReference(){}
-    func onUpdateDictsReference(){}
-    func onUpdateDictNote(){}
-    func onUpdateDictTranslation(){}
-    func onUpdateTextbook(){}
-    func onUpdateUnitFrom(){}
-    func onUpdatePartFrom(){}
-    func onUpdateUnitTo(){}
-    func onUpdatePartTo(){}
-    func onUpdateMacVoice(){}
-    func onUpdateiOSVoice(){}
 }

@@ -8,8 +8,9 @@
 
 import UIKit
 import WebKit
+import Combine
 
-class SearchViewController: UIViewController, WKNavigationDelegate, UISearchBarDelegate, SettingsViewModelDelegate {
+class SearchViewController: UIViewController, WKNavigationDelegate, UISearchBarDelegate {
 
     @IBOutlet weak var wvDictHolder: UIView!
     @IBOutlet weak var sbword: UISearchBar!
@@ -17,12 +18,12 @@ class SearchViewController: UIViewController, WKNavigationDelegate, UISearchBarD
     @IBOutlet weak var btnDict: UIButton!
 
     let dictStore = DictStore()
+    var subscriptions = Set<AnyCancellable>()
 
     func setup() {
         dictStore.vmSettings = vmSettings
         dictStore.wvDict = addWKWebView(webViewHolder: wvDictHolder)
         dictStore.wvDict.navigationDelegate = self
-        vmSettings.delegate = self
 
         Task {
             await vmSettings.getData()
@@ -31,6 +32,31 @@ class SearchViewController: UIViewController, WKNavigationDelegate, UISearchBarD
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        vmSettings.$selectedLangIndex.didSet.filter { $0 != -1 }.sink { [unowned self] _ in
+            btnLang.menu = UIMenu(title: "", options: .displayInline, children: vmSettings.arrLanguages.map(\.LANGNAME).enumerated().map { index, item in
+                UIAction(title: item, state: index == vmSettings.selectedLangIndex ? .on : .off) { _ in
+                    guard index != vmSettings.selectedLangIndex else {return}
+                    vmSettings.selectedLangIndex = index
+                }
+            })
+            btnLang.showsMenuAsPrimaryAction = true
+            btnLang.setTitle(vmSettings.selectedLang.LANGNAME, for: .normal)
+        } ~ subscriptions
+
+        vmSettings.$selectedDictReferenceIndex.didSet.filter { $0 != -1 }.sink { [unowned self] _ in
+            btnDict.menu = UIMenu(title: "", options: .displayInline, children: vmSettings.arrDictsReference.map(\.DICTNAME).enumerated().map { index, item in
+                UIAction(title: item, state: index == vmSettings.selectedDictReferenceIndex ? .on : .off) { _ in
+                    guard index != vmSettings.selectedDictReferenceIndex else {return}
+                    vmSettings.selectedDictReferenceIndex = index
+                }
+            })
+            btnDict.showsMenuAsPrimaryAction = true
+            btnDict.setTitle(vmSettings.selectedDictReference.DICTNAME, for: .normal)
+            dictStore.dict = vmSettings.selectedDictReference
+            dictStore.searchDict()
+        } ~ subscriptions
+
         globalUser.userid = UserDefaults.standard.string(forKey: "userid") ?? ""
         if globalUser.userid.isEmpty {
             logout(self)
@@ -50,44 +76,6 @@ class SearchViewController: UIViewController, WKNavigationDelegate, UISearchBarD
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         sbword.endEditing(true)
         dictStore.word = sbword.text!
-        dictStore.searchDict()
-    }
-
-    func onGetData() {
-        func configMenuLang() {
-            btnLang.menu = UIMenu(title: "", options: .displayInline, children: vmSettings.arrLanguages.map(\.LANGNAME).enumerated().map { index, item in
-                UIAction(title: item, state: index == vmSettings.selectedLangIndex ? .on : .off) { _ in
-                    guard index != vmSettings.selectedLangIndex else {return}
-                    vmSettings.selectedLangIndex = index
-                    configMenuLang()
-                }
-            })
-            btnLang.showsMenuAsPrimaryAction = true
-        }
-        configMenuLang()
-    }
-
-    func onUpdateLang() {
-        let item = vmSettings.selectedLang
-        btnLang.setTitle(item.LANGNAME, for: .normal)
-    }
-
-    func onUpdateDictReference() {
-        btnDict.setTitle(vmSettings.selectedDictReference.DICTNAME, for: .normal)
-
-        func configMenuDict() {
-            btnDict.menu = UIMenu(title: "", options: .displayInline, children: vmSettings.arrDictsReference.map(\.DICTNAME).enumerated().map { index, item in
-                UIAction(title: item, state: index == vmSettings.selectedDictReferenceIndex ? .on : .off) { _ in
-                    guard index != vmSettings.selectedDictReferenceIndex else {return}
-                    vmSettings.selectedDictReferenceIndex = index
-                    configMenuDict()
-                }
-            })
-            btnDict.showsMenuAsPrimaryAction = true
-        }
-        configMenuDict()
-
-        dictStore.dict = vmSettings.selectedDictReference
         dictStore.searchDict()
     }
 
