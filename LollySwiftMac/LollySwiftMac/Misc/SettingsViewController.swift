@@ -10,7 +10,8 @@ import Cocoa
 import Combine
 
 @objcMembers
-class SettingsViewController: NSViewController, SettingsViewModelDelegate, NSTableViewDataSource, NSTableViewDelegate {
+class SettingsViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
+
     @IBOutlet weak var acLanguages: NSArrayController!
     @IBOutlet weak var acVoices: NSArrayController!
     @IBOutlet weak var acDictsNote: NSArrayController!
@@ -43,7 +44,25 @@ class SettingsViewController: NSViewController, SettingsViewModelDelegate, NSTab
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        vm.delegate = self
+
+        vm.$arrLanguages.didSet.sink { [unowned self] _ in
+            acLanguages.content = vm.arrLanguages
+        } ~ subscriptions
+
+        vm.$selectedLangIndex.didSet.sink { [unowned self] _ in
+            acVoices.content = vm.arrMacVoices
+            tvDictsReference.reloadData()
+            acDictsNote.content = vm.arrDictsNote
+            acDictsTranslation.content = vm.arrDictsTranslation
+            acTextbooks.content = vm.arrTextbooks
+        } ~ subscriptions
+
+        vm.$selectedTextbookIndex.didSet.sink { [unowned self] _ in
+            acUnits.content = vm.arrUnits
+            acParts.content = vm.arrParts
+            tfUnitsInAllFrom.stringValue = vm.unitsInAll
+            tfUnitsInAllTo.stringValue = vm.unitsInAll
+        } ~ subscriptions
 
         vm.$selectedLangIndex <~> pubLanguages.selectedItemIndexProperty ~ subscriptions
         vm.$selectedMacVoiceIndex <~> pubVoices.selectedItemIndexProperty ~ subscriptions
@@ -93,18 +112,6 @@ class SettingsViewController: NSViewController, SettingsViewModelDelegate, NSTab
         }
     }
 
-    func onGetData() {
-        acLanguages.content = vm.arrLanguages
-    }
-
-    func onUpdateLang() {
-        acVoices.content = vm.arrMacVoices
-        tvDictsReference.reloadData()
-        acDictsNote.content = vm.arrDictsNote
-        acDictsTranslation.content = vm.arrDictsTranslation
-        acTextbooks.content = vm.arrTextbooks
-    }
-
     func numberOfRows(in tableView: NSTableView) -> Int {
         vm.selectedDictsReference.count
     }
@@ -122,13 +129,6 @@ class SettingsViewController: NSViewController, SettingsViewModelDelegate, NSTab
             self.tvDictsReference.reloadData()
         }
         self.presentAsModalWindow(dictVC)
-    }
-
-    func onUpdateTextbook() {
-        acUnits.content = vm.arrUnits
-        acParts.content = vm.arrParts
-        tfUnitsInAllFrom.stringValue = vm.unitsInAll
-        tfUnitsInAllTo.stringValue = vm.unitsInAll
     }
 
     deinit {
