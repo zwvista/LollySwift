@@ -11,7 +11,7 @@ import RxSwift
 import NSObject_Rx
 import RxBinding
 
-class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
+class SettingsViewController: UITableViewController {
 
     @IBOutlet weak var lblLang: UILabel!
     @IBOutlet weak var btnLang: UIButton!
@@ -50,7 +50,129 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        vm.delegate = self
+        vm.selectedLangIndex_.filter { $0 != -1 }.subscribe { [unowned self] _ in
+            btnLang.menu = UIMenu(title: "", options: .displayInline, children: vm.arrLanguages.map(\.LANGNAME).enumerated().map { index, item in
+                UIAction(title: item, state: index == vm.selectedLangIndex ? .on : .off) { [unowned self] _ in
+                    guard index != vm.selectedLangIndex else {return}
+                    vm.selectedLangIndex = index
+                }
+            })
+            btnLang.showsMenuAsPrimaryAction = true
+            lblLang.text = vm.selectedLang.LANGNAME
+        } ~ rx.disposeBag
+
+        vm.selectediOSVoiceIndex_.filter { $0 != -1 }.subscribe { [unowned self] _ in
+            btnVoice.menu = UIMenu(title: "", options: .displayInline, children: vm.arriOSVoices.map(\.VOICENAME).enumerated().map { index, item in
+                UIAction(title: item, state: index == vm.selectediOSVoiceIndex ? .on : .off) { [unowned self] _ in
+                    guard index != vm.selectediOSVoiceIndex else {return}
+                    vm.selectediOSVoiceIndex = index
+                }
+            })
+            btnVoice.showsMenuAsPrimaryAction = true
+            lblVoice.text = vm.selectediOSVoice.VOICENAME
+            lblVoiceSub.text = vm.selectediOSVoice.VOICELANG
+        } ~ rx.disposeBag
+
+        vm.selectedDictReferenceIndex_.filter { $0 != -1 }.subscribe { [unowned self] _ in
+            btnDictReference.menu = UIMenu(title: "", options: .displayInline, children: vm.arrDictsReference.map(\.DICTNAME).enumerated().map { index, item in
+                UIAction(title: item, state: index == vm.selectedDictReferenceIndex ? .on : .off) { [unowned self] _ in
+                    guard index != vm.selectedDictReferenceIndex else {return}
+                    vm.selectedDictReferenceIndex = index
+                }
+            })
+            btnDictReference.showsMenuAsPrimaryAction = true
+            lblDictReference.text = vm.selectedDictReference.DICTNAME
+            lblDictReferenceSub.text = vm.selectedDictReference.URL
+        } ~ rx.disposeBag
+
+        vm.selectedDictNoteIndex_.filter { $0 != -1 }.subscribe { [unowned self] _ in
+            btnDictNote.menu = UIMenu(title: "", options: .displayInline, children: vm.arrDictsNote.isEmpty ? [] : vm.arrDictsNote.map(\.DICTNAME).enumerated().map { index, item in
+                UIAction(title: item, state: index == vm.selectedDictNoteIndex ? .on : .off) { [unowned self] _ in
+                    guard index != vm.selectedDictNoteIndex else {return}
+                    vm.selectedDictNoteIndex = index
+                }
+            })
+            btnDictNote.showsMenuAsPrimaryAction = true
+            lblDictNote.text = vm.selectedDictNote.DICTNAME
+            lblDictNoteSub.text = vm.selectedDictNote.URL
+        } ~ rx.disposeBag
+
+        vm.selectedDictTranslationIndex_.filter { $0 != -1 }.subscribe { [unowned self] _ in
+            btnDictTranslation.menu = UIMenu(title: "", options: .displayInline, children: vm.arrDictsTranslation.isEmpty ? [] : vm.arrDictsTranslation.map(\.DICTNAME).enumerated().map { index, item in
+                UIAction(title: item, state: index == vm.selectedDictTranslationIndex ? .on : .off) { [unowned self] _ in
+                    guard index != vm.selectedDictTranslationIndex else {return}
+                    vm.selectedDictTranslationIndex = index
+                }
+            })
+            btnDictTranslation.showsMenuAsPrimaryAction = true
+            lblDictTranslation.text = vm.selectedDictTranslation.DICTNAME
+            lblDictTranslationSub.text = vm.selectedDictTranslation.URL
+        } ~ rx.disposeBag
+
+        vm.selectedTextbookIndex_.filter { $0 != -1 }.subscribe { [unowned self] _ in
+            btnTextbook.menu = UIMenu(title: "", options: .displayInline, children: vm.arrTextbooks.map(\.TEXTBOOKNAME).enumerated().map { index, item in
+                UIAction(title: item, state: index == vm.selectedTextbookIndex ? .on : .off) { [unowned self] _ in
+                    guard index != vm.selectedTextbookIndex else {return}
+                    vm.selectedTextbookIndex = index
+                }
+            })
+            btnTextbook.showsMenuAsPrimaryAction = true
+            lblTextbook.text = vm.selectedTextbook.TEXTBOOKNAME
+            lblTextbookSub.text = "\(vm.unitCount) Units"
+        } ~ rx.disposeBag
+
+        vm.toType_.subscribe { [unowned self] _ in
+            btnToType.menu = UIMenu(title: "", options: .displayInline, children: SettingsViewModel.arrToTypes.enumerated().map { index, item in
+                UIAction(title: item, state: index == vm.toType_.value ? .on : .off) { [unowned self] _ in
+                    vm.toType_.accept(index)
+                }
+            })
+            btnToType.showsMenuAsPrimaryAction = true
+        } ~ rx.disposeBag
+
+        vm.selectedUnitFromIndex_.filter { $0 != -1 }.subscribe { [unowned self] _ in
+            btnUnitFrom.menu = UIMenu(title: "", options: .displayInline, children: vm.arrUnits.map(\.label).enumerated().map { index, item in
+                UIAction(title: item, state: index == vm.selectedUnitFromIndex ? .on : .off) { [unowned self] _ in
+                    guard index != vm.selectedUnitFromIndex else {return}
+                    vm.selectedUnitFromIndex = index
+                }
+            })
+            btnUnitFrom.showsMenuAsPrimaryAction = true
+            lblUnitFrom.text = vm.selectedUnitFromText
+        } ~ rx.disposeBag
+
+        vm.selectedPartFromIndex_.filter { $0 != -1 }.subscribe { [unowned self] _ in
+            btnPartFrom.menu = UIMenu(title: "", options: .displayInline, children: vm.arrParts.map(\.label).enumerated().map { index, item in
+                UIAction(title: item, state: index == vm.selectedPartFromIndex ? .on : .off) { [unowned self] _ in
+                    guard index != vm.selectedPartFromIndex else {return}
+                    vm.selectedPartFromIndex = index
+                }
+            })
+            btnPartFrom.showsMenuAsPrimaryAction = true
+            lblPartFrom.text = vm.selectedPartFromText
+        } ~ rx.disposeBag
+
+        vm.selectedUnitToIndex_.filter { $0 != -1 }.subscribe { [unowned self] _ in
+            btnUnitTo.menu = UIMenu(title: "", options: .displayInline, children: vm.arrUnits.map(\.label).enumerated().map { index, item in
+                UIAction(title: item, state: index == vm.selectedUnitToIndex ? .on : .off) { [unowned self] _ in
+                    guard index != vm.selectedUnitToIndex else {return}
+                    vm.selectedUnitToIndex = index
+                }
+            })
+            btnUnitTo.showsMenuAsPrimaryAction = true
+            lblUnitTo.text = vm.selectedUnitToText
+        } ~ rx.disposeBag
+
+        vm.selectedPartToIndex_.filter { $0 != -1 }.subscribe { [unowned self] _ in
+            btnPartTo.menu = UIMenu(title: "", options: .displayInline, children: vm.arrParts.map(\.label).enumerated().map { index, item in
+                UIAction(title: item, state: index == vm.selectedPartToIndex ? .on : .off) { [unowned self] _ in
+                    guard index != vm.selectedPartToIndex else {return}
+                    vm.selectedPartToIndex = index
+                }
+            })
+            btnPartTo.showsMenuAsPrimaryAction = true
+            lblPartTo.text = vm.selectedPartToText
+        } ~ rx.disposeBag
 
         _ = vm.unitToEnabled ~> lblUnitTo.rx.isEnabled
         _ = vm.unitToEnabled ~> lblUnitToTitle.rx.isEnabled
@@ -78,186 +200,12 @@ class SettingsViewController: UITableViewController, SettingsViewModelDelegate {
         } ~ rx.disposeBag
     }
 
-    func onUpdateLang() {
-        func configMenuLang() {
-            btnLang.menu = UIMenu(title: "", options: .displayInline, children: vm.arrLanguages.map(\.LANGNAME).enumerated().map { index, item in
-                UIAction(title: item, state: index == vm.selectedLangIndex ? .on : .off) { [unowned self] _ in
-                    guard index != vm.selectedLangIndex else {return}
-                    vm.selectedLangIndex = index
-                    configMenuLang()
-                }
-            })
-            btnLang.showsMenuAsPrimaryAction = true
-        }
-        configMenuLang()
-        lblLang.text = vm.selectedLang.LANGNAME
-
-        onUpdateiOSVoice()
-        onUpdateDictReference()
-        onUpdateDictNote()
-        onUpdateDictTranslation()
-        onUpdateTextbook()
-     }
-
-    func onUpdateiOSVoice() {
-        func configMenuVoice() {
-            btnVoice.menu = UIMenu(title: "", options: .displayInline, children: vm.arriOSVoices.map(\.VOICENAME).enumerated().map { index, item in
-                UIAction(title: item, state: index == vm.selectediOSVoiceIndex ? .on : .off) { [unowned self] _ in
-                    guard index != vm.selectediOSVoiceIndex else {return}
-                    vm.selectediOSVoiceIndex = index
-                    configMenuVoice()
-                }
-            })
-            btnVoice.showsMenuAsPrimaryAction = true
-        }
-        configMenuVoice()
-        lblVoice.text = vm.selectediOSVoice.VOICENAME
-        lblVoiceSub.text = vm.selectediOSVoice.VOICELANG
-    }
-
-    func onUpdateDictReference() {
-        func configMenuDictReference() {
-            btnDictReference.menu = UIMenu(title: "", options: .displayInline, children: vm.arrDictsReference.map(\.DICTNAME).enumerated().map { index, item in
-                UIAction(title: item, state: index == vm.selectedDictReferenceIndex ? .on : .off) { [unowned self] _ in
-                    guard index != vm.selectedDictReferenceIndex else {return}
-                    vm.selectedDictReferenceIndex = index
-                    configMenuDictReference()
-                }
-            })
-            btnDictReference.showsMenuAsPrimaryAction = true
-        }
-        configMenuDictReference()
-        lblDictReference.text = vm.selectedDictReference.DICTNAME
-        lblDictReferenceSub.text = vm.selectedDictReference.URL
-    }
-
-    func onUpdateDictNote() {
-        func configMenuDictNote() {
-            btnDictNote.menu = UIMenu(title: "", options: .displayInline, children: vm.arrDictsNote.isEmpty ? [] : vm.arrDictsNote.map(\.DICTNAME).enumerated().map { index, item in
-                UIAction(title: item, state: index == vm.selectedDictNoteIndex ? .on : .off) { [unowned self] _ in
-                    guard index != vm.selectedDictNoteIndex else {return}
-                    vm.selectedDictNoteIndex = index
-                    configMenuDictNote()
-                }
-            })
-            btnDictNote.showsMenuAsPrimaryAction = true
-        }
-        configMenuDictNote()
-        lblDictNote.text = vm.selectedDictNote.DICTNAME
-        lblDictNoteSub.text = vm.selectedDictNote.URL
-    }
-
-    func onUpdateDictTranslation() {
-        func configMenuDictTranslation() {
-            btnDictTranslation.menu = UIMenu(title: "", options: .displayInline, children: vm.arrDictsTranslation.isEmpty ? [] : vm.arrDictsTranslation.map(\.DICTNAME).enumerated().map { index, item in
-                UIAction(title: item, state: index == vm.selectedDictTranslationIndex ? .on : .off) { [unowned self] _ in
-                    guard index != vm.selectedDictTranslationIndex else {return}
-                    vm.selectedDictTranslationIndex = index
-                    configMenuDictTranslation()
-                }
-            })
-            btnDictTranslation.showsMenuAsPrimaryAction = true
-        }
-        configMenuDictTranslation()
-        lblDictTranslation.text = vm.selectedDictTranslation.DICTNAME
-        lblDictTranslationSub.text = vm.selectedDictTranslation.URL
-    }
-
-    func onUpdateTextbook() {
-        func configMenuTextbook() {
-            btnTextbook.menu = UIMenu(title: "", options: .displayInline, children: vm.arrTextbooks.map(\.TEXTBOOKNAME).enumerated().map { index, item in
-                UIAction(title: item, state: index == vm.selectedTextbookIndex ? .on : .off) { [unowned self] _ in
-                    guard index != vm.selectedTextbookIndex else {return}
-                    vm.selectedTextbookIndex = index
-                    configMenuTextbook()
-                }
-            })
-            btnTextbook.showsMenuAsPrimaryAction = true
-        }
-        configMenuTextbook()
-        lblTextbook.text = vm.selectedTextbook.TEXTBOOKNAME
-        lblTextbookSub.text = "\(vm.unitCount) Units"
-
-        func configMenuToType() {
-            btnToType.menu = UIMenu(title: "", options: .displayInline, children: SettingsViewModel.arrToTypes.enumerated().map { index, item in
-                UIAction(title: item, state: index == vm.toType_.value ? .on : .off) { [unowned self] _ in
-                    vm.toType_.accept(index)
-                    configMenuToType()
-                }
-            })
-            btnToType.showsMenuAsPrimaryAction = true
-        }
-        configMenuToType()
-
-        guard !vm.arrUnits.isEmpty else {return}
-        onUpdateUnitFrom()
-        onUpdatePartFrom()
-        onUpdateUnitTo()
-        onUpdatePartTo()
-    }
-
     @IBAction func previousUnitPart(_ sender: AnyObject) {
         vm.previousUnitPart().subscribe() ~ rx.disposeBag
     }
 
     @IBAction func nextUnitPart(_ sender: AnyObject) {
         vm.nextUnitPart().subscribe() ~ rx.disposeBag
-    }
-
-    func onUpdateUnitFrom() {
-        func configMenuUnitFrom() {
-            btnUnitFrom.menu = UIMenu(title: "", options: .displayInline, children: vm.arrUnits.map(\.label).enumerated().map { index, item in
-                UIAction(title: item, state: index == vm.selectedUnitFromIndex ? .on : .off) { [unowned self] _ in
-                    guard index != vm.selectedUnitFromIndex else {return}
-                    vm.selectedUnitFromIndex = index
-                }
-            })
-            btnUnitFrom.showsMenuAsPrimaryAction = true
-        }
-        configMenuUnitFrom()
-        lblUnitFrom.text = vm.selectedUnitFromText
-    }
-
-    func onUpdatePartFrom() {
-        func configMenuPartFrom() {
-            btnPartFrom.menu = UIMenu(title: "", options: .displayInline, children: vm.arrParts.map(\.label).enumerated().map { index, item in
-                UIAction(title: item, state: index == vm.selectedPartFromIndex ? .on : .off) { [unowned self] _ in
-                    guard index != vm.selectedPartFromIndex else {return}
-                    vm.selectedPartFromIndex = index
-                }
-            })
-            btnPartFrom.showsMenuAsPrimaryAction = true
-        }
-        configMenuPartFrom()
-        lblPartFrom.text = vm.selectedPartFromText
-    }
-
-    func onUpdateUnitTo() {
-        func configMenuToType() {
-            btnUnitTo.menu = UIMenu(title: "", options: .displayInline, children: vm.arrUnits.map(\.label).enumerated().map { index, item in
-                UIAction(title: item, state: index == vm.selectedUnitToIndex ? .on : .off) { [unowned self] _ in
-                    guard index != vm.selectedUnitToIndex else {return}
-                    vm.selectedUnitToIndex = index
-                }
-            })
-            btnUnitTo.showsMenuAsPrimaryAction = true
-        }
-        configMenuToType()
-        lblUnitTo.text = vm.selectedUnitToText
-    }
-
-    func onUpdatePartTo() {
-        func configMenuToType() {
-            btnPartTo.menu = UIMenu(title: "", options: .displayInline, children: vm.arrParts.map(\.label).enumerated().map { index, item in
-                UIAction(title: item, state: index == vm.selectedPartToIndex ? .on : .off) { [unowned self] _ in
-                    guard index != vm.selectedPartToIndex else {return}
-                    vm.selectedPartToIndex = index
-                }
-            })
-            btnPartTo.showsMenuAsPrimaryAction = true
-        }
-        configMenuToType()
-        lblPartTo.text = vm.selectedPartToText
     }
 
     deinit {
