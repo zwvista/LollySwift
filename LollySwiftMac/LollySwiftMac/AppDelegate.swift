@@ -24,7 +24,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        AppDelegate.theSettingsViewModel.$initialized.filter { $0 }.sink { [unowned self] v in
+        AppDelegate.theSettingsViewModel.$initialized.didSet.removeDuplicates().filter { $0 }.sink { [unowned self] v in
             //search(self)
             //editBlog(self)
             wordsInUnit(self)

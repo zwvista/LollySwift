@@ -185,7 +185,7 @@ class SettingsViewModel: NSObject, ObservableObject {
         super.init()
 
         func onChange(_ source: Published<Int>.Publisher, _ selector: @escaping (Int) async -> Void) {
-            source.removeDuplicates()
+            source.didSet.removeDuplicates()
                 .filter { $0 != -1 }
                 .sink { n in Task { await selector(n) } }
                 ~ subscriptions
