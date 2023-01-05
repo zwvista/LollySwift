@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import Combine
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -14,19 +15,23 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @MainActor
     static let theSettingsViewModel = SettingsViewModel()
     let synth = NSSpeechSynthesizer()
+    var subscriptions = Set<AnyCancellable>()
 
+    @MainActor
     func setup() {
         Task {
             await AppDelegate.theSettingsViewModel.getData()
+        }
+        AppDelegate.theSettingsViewModel.initialized.sink(receiveCompletion: { [unowned self] _ in
             //search(self)
             //editBlog(self)
-            await wordsInUnit(self)
+            wordsInUnit(self)
             //wordsInLanguage(self)
             //readNumber(self)
             //patternsInLanguage(self)
             //phrasesInUnit(self)
             //wordsReview(self)
-        }
+        }, receiveValue: {}) ~ subscriptions
     }
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
