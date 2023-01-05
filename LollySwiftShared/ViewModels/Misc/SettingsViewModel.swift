@@ -197,7 +197,7 @@ class SettingsViewModel: NSObject {
 
     var arrAutoCorrect = [MAutoCorrect]()
     var arrDictTypes = [MCode]()
-    var initialized = AsyncSubject<()>()
+    var initialized = BehaviorRelay(value: false)
 
     override init() {
         super.init()
@@ -317,7 +317,7 @@ class SettingsViewModel: NSObject {
             selectedUnitToIndex = arrUnits.firstIndex { $0.value == USUNITTO } ?? 0
             selectedPartToIndex = arrParts.firstIndex { $0.value == USPARTTO } ?? 0
             toType = isSingleUnit ? .unit : isSingleUnitPart ? .part : .to
-            initialized.onCompleted()
+            initialized.accept(true)
             return !dirty ? Single.just(()) : MUserSetting.update(info: INFO_USTEXTBOOK, intValue: USTEXTBOOK)
         }
 
@@ -422,7 +422,8 @@ class SettingsViewModel: NSObject {
     }
 
     func getData() -> Single<()> {
-        Single.zip(MLanguage.getData(),
+        selectedLangIndex = -1
+        return Single.zip(MLanguage.getData(),
                               MUSMapping.getData(),
                               MUserSetting.getData(),
                               MCode.getData())

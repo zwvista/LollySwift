@@ -18,7 +18,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func setup() {
         AppDelegate.theSettingsViewModel.getData().subscribe() ~ rx.disposeBag
-        AppDelegate.theSettingsViewModel.initialized.subscribe(onCompleted: { [unowned self] in
+    }
+
+    func applicationDidFinishLaunching(_ aNotification: Notification) {
+        AppDelegate.theSettingsViewModel.initialized.distinctUntilChanged().filter { $0 }.subscribe { [unowned self] v in
             //search(self)
             //editBlog(self)
             wordsInUnit(self)
@@ -27,10 +30,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             //patternsInLanguage(self)
             //phrasesInUnit(self)
             //wordsReview(self)
-        }) ~ rx.disposeBag
-    }
-
-    func applicationDidFinishLaunching(_ aNotification: Notification) {
+        } ~ rx.disposeBag
 
         globalUser.userid = UserDefaults.standard.string(forKey: "userid") ?? ""
         if globalUser.userid.isEmpty {
@@ -86,6 +86,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             window.close()
         }
         UserDefaults.standard.removeObject(forKey: "userid")
+        AppDelegate.theSettingsViewModel.initialized.accept(false)
         let r = runModal(storyBoardName: "Main", windowControllerName: "LoginWindowController")
         if r == .OK {
             setup()
