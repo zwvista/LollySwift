@@ -11,7 +11,7 @@ import RxSwift
 import RxBinding
 
 @objcMembers
-class SettingsViewController: NSViewController, SettingsViewModelDelegate, NSTableViewDataSource, NSTableViewDelegate {
+class SettingsViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
 
     @IBOutlet weak var acLanguages: NSArrayController!
     @IBOutlet weak var acVoices: NSArrayController!
@@ -44,7 +44,25 @@ class SettingsViewController: NSViewController, SettingsViewModelDelegate, NSTab
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        vm.delegate = self
+
+        vm.arrLanguages_.subscribe { [unowned self] _ in
+            acLanguages.content = vm.arrLanguages
+        } ~ rx.disposeBag
+
+        vm.selectedLangIndex_.subscribe { [unowned self] _ in
+            acVoices.content = vm.arrMacVoices
+            tvDictsReference.reloadData()
+            acDictsNote.content = vm.arrDictsNote
+            acDictsTranslation.content = vm.arrDictsTranslation
+            acTextbooks.content = vm.arrTextbooks
+        } ~ rx.disposeBag
+
+        vm.selectedTextbookIndex_.subscribe { [unowned self] _ in
+            acUnits.content = vm.arrUnits
+            acParts.content = vm.arrParts
+            tfUnitsInAllFrom.stringValue = vm.unitsInAll
+            tfUnitsInAllTo.stringValue = vm.unitsInAll
+        } ~ rx.disposeBag
 
         _ = vm.selectedLangIndex_ <~> pubLanguages.rx.selectedItemIndex
         _ = vm.selectedMacVoiceIndex_ <~> pubVoices.rx.selectedItemIndex
@@ -88,18 +106,6 @@ class SettingsViewController: NSViewController, SettingsViewModelDelegate, NSTab
         vm.nextUnitPart().subscribe() ~ rx.disposeBag
     }
 
-    func onGetData() {
-        acLanguages.content = vm.arrLanguages
-    }
-
-    func onUpdateLang() {
-        acVoices.content = vm.arrMacVoices
-        tvDictsReference.reloadData()
-        acDictsNote.content = vm.arrDictsNote
-        acDictsTranslation.content = vm.arrDictsTranslation
-        acTextbooks.content = vm.arrTextbooks
-    }
-
     func numberOfRows(in tableView: NSTableView) -> Int {
         vm.selectedDictsReference.count
     }
@@ -117,13 +123,6 @@ class SettingsViewController: NSViewController, SettingsViewModelDelegate, NSTab
             self.tvDictsReference.reloadData()
         }
         self.presentAsModalWindow(dictVC)
-    }
-
-    func onUpdateTextbook() {
-        acUnits.content = vm.arrUnits
-        acParts.content = vm.arrParts
-        tfUnitsInAllFrom.stringValue = vm.unitsInAll
-        tfUnitsInAllTo.stringValue = vm.unitsInAll
     }
 
     deinit {
