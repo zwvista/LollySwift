@@ -17,12 +17,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     let synth = NSSpeechSynthesizer()
     var subscriptions = Set<AnyCancellable>()
 
-    @MainActor
     func setup() {
         Task {
             await AppDelegate.theSettingsViewModel.getData()
         }
-        AppDelegate.theSettingsViewModel.initialized.sink(receiveCompletion: { [unowned self] _ in
+    }
+
+    func applicationDidFinishLaunching(_ aNotification: Notification) {
+        AppDelegate.theSettingsViewModel.initialized.removeDuplicates().filter { $0 }.sink { [unowned self] v in
             //search(self)
             //editBlog(self)
             wordsInUnit(self)
@@ -31,10 +33,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             //patternsInLanguage(self)
             //phrasesInUnit(self)
             //wordsReview(self)
-        }, receiveValue: {}) ~ subscriptions
-    }
-
-    func applicationDidFinishLaunching(_ aNotification: Notification) {
+        } ~ subscriptions
 
         globalUser.userid = UserDefaults.standard.string(forKey: "userid") ?? ""
         if globalUser.userid.isEmpty {
@@ -90,6 +89,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             window.close()
         }
         UserDefaults.standard.removeObject(forKey: "userid")
+        AppDelegate.theSettingsViewModel.initialized.send(false)
         let r = runModal(storyBoardName: "Main", windowControllerName: "LoginWindowController")
         if r == .OK {
             setup()

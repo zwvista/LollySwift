@@ -178,7 +178,7 @@ class SettingsViewModel: NSObject, ObservableObject {
 
     var arrAutoCorrect = [MAutoCorrect]()
     var arrDictTypes = [MCode]()
-    var initialized = PassthroughSubject<(), Never>()
+    var initialized = CurrentValueSubject<Bool, Never>(false)
     var subscriptions = Set<AnyCancellable>()
 
     override init() {
@@ -303,7 +303,7 @@ class SettingsViewModel: NSObject, ObservableObject {
             selectedUnitToIndex = arrUnits.firstIndex { $0.value == USUNITTO } ?? 0
             selectedPartToIndex = arrParts.firstIndex { $0.value == USPARTTO } ?? 0
             toType = isSingleUnit ? .unit : isSingleUnitPart ? .part : .to
-            initialized.send(completion: .finished)
+            initialized.send(true)
             if dirty {
                 await MUserSetting.update(info: INFO_USTEXTBOOK, intValue: USTEXTBOOK)
             }
@@ -420,6 +420,7 @@ class SettingsViewModel: NSObject, ObservableObject {
     }
 
     func getData() async {
+        selectedLangIndex = -1
         async let res1 = MLanguage.getData()
         async let res2 = MUSMapping.getData()
         async let res3 = MUserSetting.getData()
