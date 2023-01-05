@@ -178,7 +178,7 @@ class SettingsViewModel: NSObject, ObservableObject {
 
     var arrAutoCorrect = [MAutoCorrect]()
     var arrDictTypes = [MCode]()
-    var initialized = CurrentValueSubject<Bool, Never>(false)
+    @Published var initialized = false
     var subscriptions = Set<AnyCancellable>()
 
     override init() {
@@ -303,7 +303,7 @@ class SettingsViewModel: NSObject, ObservableObject {
             selectedUnitToIndex = arrUnits.firstIndex { $0.value == USUNITTO } ?? 0
             selectedPartToIndex = arrParts.firstIndex { $0.value == USPARTTO } ?? 0
             toType = isSingleUnit ? .unit : isSingleUnitPart ? .part : .to
-            initialized.send(true)
+            initialized = true
             if dirty {
                 await MUserSetting.update(info: INFO_USTEXTBOOK, intValue: USTEXTBOOK)
             }

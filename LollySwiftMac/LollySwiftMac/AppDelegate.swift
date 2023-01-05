@@ -24,7 +24,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        AppDelegate.theSettingsViewModel.initialized.removeDuplicates().filter { $0 }.sink { [unowned self] v in
+        AppDelegate.theSettingsViewModel.$initialized.filter { $0 }.sink { [unowned self] v in
             //search(self)
             //editBlog(self)
             wordsInUnit(self)
@@ -89,7 +89,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             window.close()
         }
         UserDefaults.standard.removeObject(forKey: "userid")
-        AppDelegate.theSettingsViewModel.initialized.send(false)
+        AppDelegate.theSettingsViewModel.initialized = false
         let r = runModal(storyBoardName: "Main", windowControllerName: "LoginWindowController")
         if r == .OK {
             setup()
