@@ -8,11 +8,13 @@
 
 import Foundation
 import RxSwift
+import RxRelay
 
 class WordsDictViewModel: NSObject {
     var vmSettings: SettingsViewModel
     var arrWords = [String]()
-    var currentWordIndex = 0
+    var currentWordIndex_ = BehaviorRelay(value: 0)
+    var currentWordIndex: Int { get { currentWordIndex_.value } set { currentWordIndex_.accept(newValue) } }
     var currentWord: String { arrWords[currentWordIndex] }
     func next(_ delta: Int) {
         currentWordIndex = (currentWordIndex + delta + arrWords.count) % arrWords.count
@@ -21,7 +23,7 @@ class WordsDictViewModel: NSObject {
     init(settings: SettingsViewModel, needCopy: Bool, arrWords: [String], currentWordIndex: Int, complete: @escaping () -> Void) {
         vmSettings = !needCopy ? settings : SettingsViewModel(settings)
         self.arrWords = arrWords
-        self.currentWordIndex = currentWordIndex
         super.init()
+        self.currentWordIndex = currentWordIndex
     }
 }
