@@ -475,6 +475,7 @@ class SettingsViewModel: NSObject, ObservableObject {
         } else if selectedUnitFrom > 1 {
             await withTaskGroup(of: Void.self) {
                 $0.addTask { await self.doUpdateUnitFrom(v: self.selectedUnitFrom - 1) }
+                $0.addTask { await self.doUpdatePartFrom(v: self.partCount) }
                 $0.addTask { await self.doUpdateUnitPartTo() }
             }
         }
@@ -497,6 +498,7 @@ class SettingsViewModel: NSObject, ObservableObject {
         } else if selectedUnitFrom < unitCount {
             await withTaskGroup(of: Void.self) {
                 $0.addTask { await self.doUpdateUnitFrom(v: self.selectedUnitFrom + 1) }
+                $0.addTask { await self.doUpdatePartFrom(v: 1) }
                 $0.addTask { await self.doUpdateUnitPartTo() }
             }
         }
