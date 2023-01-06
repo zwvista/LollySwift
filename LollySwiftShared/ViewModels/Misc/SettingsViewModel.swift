@@ -420,7 +420,7 @@ class SettingsViewModel: NSObject, ObservableObject {
     }
 
     func getData() async {
-//        selectedLangIndex = -1
+        selectedLangIndex = -1
         async let res1 = MLanguage.getData()
         async let res2 = MUSMapping.getData()
         async let res3 = MUserSetting.getData()
