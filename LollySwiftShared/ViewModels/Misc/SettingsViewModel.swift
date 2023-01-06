@@ -207,7 +207,7 @@ class SettingsViewModel: NSObject {
         }
 
         onChange(selectedLangIndex_) { [unowned self] n in
-            print("selectedLangIndex=\(n)")
+//            print("selectedLangIndex=\(n)")
             let newVal = selectedLang.ID
             let dirty = USLANG != newVal
             USLANG = newVal
@@ -260,7 +260,7 @@ class SettingsViewModel: NSObject {
         }
 
         onChange(selectedMacVoiceIndex_) { [unowned self] n in
-            print("selectedMacVoiceIndex=\(n)")
+//            print("selectedMacVoiceIndex=\(n)")
             let newVal = selectedMacVoice.ID
             let dirty = USMACVOICE != newVal
             USMACVOICE = newVal
@@ -268,7 +268,7 @@ class SettingsViewModel: NSObject {
         }
 
         onChange(selectediOSVoiceIndex_) { [unowned self] n in
-            print("selectediOSVoiceIndex=\(n)")
+//            print("selectediOSVoiceIndex=\(n)")
             let newVal = selectediOSVoice.ID
             let dirty = USIOSVOICE != newVal
             USIOSVOICE = newVal
@@ -276,7 +276,7 @@ class SettingsViewModel: NSObject {
         }
 
         onChange(selectedDictReferenceIndex_) { [unowned self] n in
-            print("selectedDictReferenceIndex=\(n)")
+//            print("selectedDictReferenceIndex=\(n)")
             let newVal = String(selectedDictReference.DICTID)
             let dirty = USDICTREFERENCE != newVal
             USDICTREFERENCE = newVal
@@ -284,7 +284,7 @@ class SettingsViewModel: NSObject {
         }
 
         onChange(selectedDictNoteIndex_) { [unowned self] n in
-            print("selectedDictNoteIndex=\(n)")
+//            print("selectedDictNoteIndex=\(n)")
             let newVal = selectedDictNote.DICTID
             let dirty = USDICTNOTE != newVal
             USDICTNOTE = newVal
@@ -292,7 +292,7 @@ class SettingsViewModel: NSObject {
         }
 
         onChange(selectedDictTranslationIndex_) { [unowned self] n in
-            print("selectedDictTranslationIndex=\(n)")
+//            print("selectedDictTranslationIndex=\(n)")
             let newVal = selectedDictTranslation.DICTID
             let dirty = USDICTTRANSLATION != newVal
             USDICTTRANSLATION = newVal
@@ -300,7 +300,7 @@ class SettingsViewModel: NSObject {
         }
 
         onChange(selectedTextbookIndex_) { [unowned self] n in
-            print("selectedTextbookIndex=\(n)")
+//            print("selectedTextbookIndex=\(n)")
             let newVal = selectedTextbook.ID
             let dirty = USTEXTBOOK != newVal
             USTEXTBOOK = newVal
@@ -322,7 +322,7 @@ class SettingsViewModel: NSObject {
         }
 
         onChange(selectedUnitFromIndex_) { [unowned self] n in
-            print("selectedUnitFromIndex=\(n)")
+//            print("selectedUnitFromIndex=\(n)")
             return doUpdateUnitFrom(v: selectedUnitFrom).flatMap { [unowned self] in
                 toType == .unit ? doUpdateSingleUnit() :
                 toType == .part || isInvalidUnitPart ? doUpdateUnitPartTo() :
@@ -331,28 +331,28 @@ class SettingsViewModel: NSObject {
         }
 
         onChange(selectedPartFromIndex_) { [unowned self] n in
-            print("selectedPartFromIndex=\(n)")
+//            print("selectedPartFromIndex=\(n)")
             return doUpdatePartFrom(v: selectedPartFrom).flatMap { [unowned self] in
                 toType == .part || isInvalidUnitPart ? doUpdateUnitPartTo() : Single.just(())
             }
         }
 
         onChange(selectedUnitToIndex_) { [unowned self] n in
-            print("selectedUnitToIndex=\(n)")
+//            print("selectedUnitToIndex=\(n)")
             return doUpdateUnitTo(v: selectedUnitTo).flatMap { [unowned self] in
                 isInvalidUnitPart ? doUpdateUnitPartFrom() : Single.just(())
             }
         }
 
         onChange(selectedPartToIndex_) { [unowned self] n in
-            print("selectedPartToIndex=\(n)")
+//            print("selectedPartToIndex=\(n)")
             return doUpdatePartTo(v: selectedPartTo).flatMap { [unowned self] in
                 isInvalidUnitPart ? doUpdateUnitPartFrom() : Single.just(())
             }
         }
 
         toType_.distinctUntilChanged().flatMap { [unowned self] n in
-            print("toType=\(toType)")
+//            print("toType=\(toType)")
             toTypeTitle.accept(SettingsViewModel.arrToTypes[toType_.value])
             let b = toType == .to
             unitToEnabled.accept(b)
@@ -424,9 +424,9 @@ class SettingsViewModel: NSObject {
     func getData() -> Single<()> {
         selectedLangIndex = -1
         return Single.zip(MLanguage.getData(),
-                              MUSMapping.getData(),
-                              MUserSetting.getData(),
-                              MCode.getData())
+                          MUSMapping.getData(),
+                          MUserSetting.getData(),
+                          MCode.getData())
             .map { [unowned self] result in
                 arrLanguages = result.0
                 arrUSMappings = result.1
