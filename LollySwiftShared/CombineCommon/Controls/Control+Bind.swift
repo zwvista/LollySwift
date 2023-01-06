@@ -11,14 +11,20 @@ import Combine
 infix operator <~> : DefaultPrecedence
 
 func <~><Control: AnyObject, Value> (pub: inout Published<Value>.Publisher, controlProperty: Publishers.ControlProperty2<Control, Value>) -> AnyCancellable {
-    let cancellable = pub.assign(to: controlProperty.setter, on: controlProperty.control)
-    controlProperty.control[keyPath: controlProperty.getter].assign(to: &pub)
+    let (control, setter, getter) = (controlProperty.control, controlProperty.setter, controlProperty.getter)
+    let _ = pub.first().sink { control[keyPath: setter] = $0 }
+    let cancellable = pub.didSet.assign(to: setter, on: control)
+    control[keyPath: getter].assign(to: &pub)
     return cancellable
 }
 
 func ~><Control: AnyObject, Value> (pub: Published<Value>.Publisher, controlAndKeyPath: (Control, ReferenceWritableKeyPath<Control, Value>)) -> AnyCancellable {
-    pub.assign(to: controlAndKeyPath.1, on: controlAndKeyPath.0)
+    let (control, setter) = (controlAndKeyPath.0, controlAndKeyPath.1)
+    let _ = pub.first().sink { control[keyPath: setter] = $0 }
+    return pub.didSet.assign(to: setter, on: control)
 }
 func ~><Control: AnyObject, Value> (pub: AnyPublisher<Value, Never>, controlAndKeyPath: (Control, ReferenceWritableKeyPath<Control, Value>)) -> AnyCancellable {
-    pub.assign(to: controlAndKeyPath.1, on: controlAndKeyPath.0)
+    let (control, setter) = (controlAndKeyPath.0, controlAndKeyPath.1)
+    let _ = pub.first().sink { control[keyPath: setter] = $0 }
+    return pub.receive(on: DispatchQueue.main).assign(to: setter, on: control)
 }

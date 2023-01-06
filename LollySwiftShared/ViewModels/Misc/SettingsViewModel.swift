@@ -110,7 +110,7 @@ class SettingsViewModel: NSObject, ObservableObject {
     @Published var arrDictsReference = [MDictionary]()
     @Published var selectedDictReferenceIndex = -1
     var selectedDictReference: MDictionary { arrDictsReference.indices ~= selectedDictReferenceIndex ? arrDictsReference[selectedDictReferenceIndex] : MDictionary() }
-    var selectedDictsReferenceIndexes = [Int]()
+    @Published var selectedDictsReferenceIndexes = [Int]()
     var selectedDictsReference: [MDictionary] { selectedDictsReferenceIndexes.map { arrDictsReference[$0] } }
 
     @Published var arrDictsNote = [MDictionary]()
@@ -192,7 +192,7 @@ class SettingsViewModel: NSObject, ObservableObject {
         }
 
         onChange($selectedLangIndex) { [unowned self] n in
-            print("selectedLangIndex=\(n)")
+//            print("selectedLangIndex=\(n)")
             let newVal = selectedLang.ID
             let dirty = USLANG != newVal
             USLANG = newVal
@@ -241,7 +241,7 @@ class SettingsViewModel: NSObject, ObservableObject {
         }
 
         onChange($selectedMacVoiceIndex) { [unowned self] n in
-            print("selectedMacVoiceIndex=\(n)")
+//            print("selectedMacVoiceIndex=\(n)")
             let newVal = selectedMacVoice.ID
             if USMACVOICE != newVal {
                 USMACVOICE = newVal
@@ -250,7 +250,7 @@ class SettingsViewModel: NSObject, ObservableObject {
         }
 
         onChange($selectediOSVoiceIndex) { [unowned self] n in
-            print("selectediOSVoiceIndex=\(n)")
+//            print("selectediOSVoiceIndex=\(n)")
             let newVal = selectediOSVoice.ID
             if USIOSVOICE != newVal {
                 USIOSVOICE = newVal
@@ -259,7 +259,7 @@ class SettingsViewModel: NSObject, ObservableObject {
         }
 
         onChange($selectedDictReferenceIndex) { [unowned self] n in
-            print("selectedDictReferenceIndex=\(n)")
+//            print("selectedDictReferenceIndex=\(n)")
             let newVal = String(selectedDictReference.DICTID)
             if USDICTREFERENCE != newVal {
                 USDICTREFERENCE = newVal
@@ -268,7 +268,7 @@ class SettingsViewModel: NSObject, ObservableObject {
         }
 
         onChange($selectedDictNoteIndex) { [unowned self] n in
-            print("selectedDictNoteIndex=\(n)")
+//            print("selectedDictNoteIndex=\(n)")
             let newVal = selectedDictNote.DICTID
             if USDICTNOTE != newVal {
                 USDICTNOTE = newVal
@@ -277,7 +277,7 @@ class SettingsViewModel: NSObject, ObservableObject {
         }
 
         onChange($selectedDictTranslationIndex) { [unowned self] n in
-            print("selectedDictTranslationIndex=\(n)")
+//            print("selectedDictTranslationIndex=\(n)")
             let newVal = selectedDictTranslation.DICTID
             if USDICTTRANSLATION != newVal {
                 USDICTTRANSLATION = newVal
@@ -286,7 +286,7 @@ class SettingsViewModel: NSObject, ObservableObject {
         }
 
         onChange($selectedTextbookIndex) { [unowned self] n in
-            print("selectedTextbookIndex=\(n)")
+//            print("selectedTextbookIndex=\(n)")
             let newVal = selectedTextbook.ID
             let dirty = USTEXTBOOK != newVal
             USTEXTBOOK = newVal
@@ -310,7 +310,7 @@ class SettingsViewModel: NSObject, ObservableObject {
         }
 
         onChange($selectedUnitFromIndex) { [unowned self] n in
-            print("selectedUnitFromIndex=\(n)")
+//            print("selectedUnitFromIndex=\(n)")
             await doUpdateUnitFrom(v: selectedUnitFrom)
             if toType == .unit {
                 await doUpdateSingleUnit()
@@ -320,7 +320,7 @@ class SettingsViewModel: NSObject, ObservableObject {
         }
 
         onChange($selectedPartFromIndex) { [unowned self] n in
-            print("selectedPartFromIndex=\(n)")
+//            print("selectedPartFromIndex=\(n)")
             await doUpdatePartFrom(v: selectedPartFrom)
             if toType == .part || isInvalidUnitPart {
                 await doUpdateUnitPartTo()
@@ -328,7 +328,7 @@ class SettingsViewModel: NSObject, ObservableObject {
         }
 
         onChange($selectedUnitToIndex) { [unowned self] n in
-            print("selectedUnitToIndex=\(n)")
+//            print("selectedUnitToIndex=\(n)")
             await doUpdateUnitTo(v: selectedUnitTo)
             if isInvalidUnitPart {
                 await doUpdateUnitPartFrom()
@@ -336,7 +336,7 @@ class SettingsViewModel: NSObject, ObservableObject {
         }
 
         onChange($selectedPartToIndex) { [unowned self] n in
-            print("selectedPartToIndex=\(n)")
+//            print("selectedPartToIndex=\(n)")
             await doUpdatePartTo(v: selectedPartTo)
             if isInvalidUnitPart {
                 await doUpdateUnitPartFrom()
@@ -346,7 +346,7 @@ class SettingsViewModel: NSObject, ObservableObject {
         $toType_.removeDuplicates()
             .sink { [unowned self] _ in
                 Task {
-                    print("toType=\(toType)")
+//                    print("toType=\(toType)")
                     toTypeTitle = SettingsViewModel.arrToTypes[toType.rawValue]
                     let b = toType == .to
                     unitToEnabled = b
@@ -420,7 +420,7 @@ class SettingsViewModel: NSObject, ObservableObject {
     }
 
     func getData() async {
-        selectedLangIndex = -1
+//        selectedLangIndex = -1
         async let res1 = MLanguage.getData()
         async let res2 = MUSMapping.getData()
         async let res3 = MUserSetting.getData()

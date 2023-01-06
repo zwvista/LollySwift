@@ -14,6 +14,7 @@ extension NSPopUpButton {
             indexOfSelectedItem
         }
         set {
+            guard itemArray.indices ~= newValue else {return}
             selectItem(at: newValue)
         }
     }
