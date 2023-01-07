@@ -41,6 +41,11 @@ struct SearchView: View {
                 dictStore.onNavigationFinished()
             }
         }
+        .toolbar {
+            Button("LOGOUT") {
+                globalUser.remove()
+            }
+        }
         .onAppear {
             dictStore.vmSettings = vmSettings
             dictStore.wvDict = wvDict
