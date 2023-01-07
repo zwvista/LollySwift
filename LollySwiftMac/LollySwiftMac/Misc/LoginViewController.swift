@@ -29,17 +29,17 @@ class LoginViewController: NSViewController {
         btnLogin.tapPublisher.sink { [unowned self] in
             Task {
                 globalUser.userid = await vm.login(username: vm.username, password: vm.password)
-                if globalUser.userid.isEmpty {
-                    NSAlert().then {
-                        $0.alertStyle = .critical
-                        $0.messageText = "Login"
-                        $0.informativeText = "Wrong Username or Password!"
-                        $0.addButton(withTitle: "OK")
-                    }.runModal()
-                } else {
-                    UserDefaults.standard.set(globalUser.userid, forKey: "userid")
+                if globalUser.isLoggedIn {
+                    globalUser.save()
                     NSApplication.shared.stopModal(withCode: .OK)
                     self.view.window?.close()
+                } else {
+                    let alert = NSAlert()
+                    alert.alertStyle = .critical
+                    alert.messageText = "Login"
+                    alert.informativeText = "Wrong Username or Password!"
+                    alert.addButton(withTitle: "OK")
+                    alert.runModal()
                 }
             }
         } ~ subscriptions

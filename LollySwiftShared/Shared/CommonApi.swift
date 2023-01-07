@@ -8,13 +8,6 @@
 
 import Foundation
 
-class GlobalUser: ObservableObject {
-    @Published
-    var userid = ""
-    var username = ""
-}
-let globalUser = GlobalUser()
-
 class CommonApi {
 
     static let urlAPI = "https://zwvista.com/lolly/api.php/records/"

@@ -163,7 +163,7 @@ struct WordsUnitView: View {
                 WordsUnitDetailView(vmEdit: WordsUnitDetailViewModel(vm: vm, item: vm.newUnitWord(), phraseid: 0, complete: {}), showDetail: $showDetailAdd)
             }
             .sheet(isPresented: $showBatchEdit) {
-                WordsUnitBatchEditView()
+                WordsUnitBatchEditView(vm: vm, showBatch: $showBatchEdit)
             }
         }
     }

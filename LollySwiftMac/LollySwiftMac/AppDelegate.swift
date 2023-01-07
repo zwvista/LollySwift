@@ -35,11 +35,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             //wordsReview(self)
         } ~ subscriptions
 
-        globalUser.userid = UserDefaults.standard.string(forKey: "userid") ?? ""
-        if globalUser.userid.isEmpty {
-            login(self)
-        } else {
+        globalUser.load()
+        if globalUser.isLoggedIn {
             setup()
+        } else {
+            login(self)
         }
 
         // https://forums.developer.apple.com/thread/69484
@@ -88,7 +88,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         NSApplication.shared.enumerateWindows(options: .orderedFrontToBack) { window, stop in
             window.close()
         }
-        UserDefaults.standard.removeObject(forKey: "userid")
+        globalUser.remove()
         AppDelegate.theSettingsViewModel.initialized = false
         let r = runModal(storyBoardName: "Main", windowControllerName: "LoginWindowController")
         if r == .OK {

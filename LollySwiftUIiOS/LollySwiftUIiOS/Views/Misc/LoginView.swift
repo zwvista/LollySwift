@@ -21,10 +21,10 @@ struct LoginView: View {
                     Button(action: {
                         Task {
                             globalUser.userid = await vm.login(username: vm.username, password: vm.password)
-                            if globalUser.userid.isEmpty {
-                                showingAlert = true
+                            if globalUser.isLoggedIn {
+                                globalUser.save()
                             } else {
-                                UserDefaults.standard.set(globalUser.userid, forKey: "userid")
+                                showingAlert = true
                             }
                         }
                     }) {
