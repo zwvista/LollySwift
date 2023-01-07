@@ -27,6 +27,8 @@
 		8C2CB5C4207888260083DDE2 /* Words.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C2CB5C2207888260083DDE2 /* Words.storyboard */; };
 		8C486DF41EBB88240023FBFC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C486DF31EBB88240023FBFC /* Cocoa.framework */; };
 		8C486DF61EBB882B0023FBFC /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C486DF51EBB882B0023FBFC /* WebKit.framework */; };
+		8CA47F222968EF88006CF4A2 /* GlobalUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA47F212968EF88006CF4A2 /* GlobalUser.swift */; };
+		8CA47F232968EF88006CF4A2 /* GlobalUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA47F212968EF88006CF4A2 /* GlobalUser.swift */; };
 		8CAF910A20833C4F00933837 /* WordsSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAF910920833C4F00933837 /* WordsSearchViewModel.swift */; };
 		8CD8409D20AFD4DA00442133 /* PhrasesUnitDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8409A20AFD4D900442133 /* PhrasesUnitDetailViewController.swift */; };
 		8CD8409E20AFD4DA00442133 /* PhrasesUnitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8409B20AFD4D900442133 /* PhrasesUnitViewController.swift */; };
@@ -219,6 +221,7 @@
 		8C486DF31EBB88240023FBFC /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		8C486DF51EBB882B0023FBFC /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		8C6E2EDC1EBB97CF00AC114F /* LollySwiftMac-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LollySwiftMac-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
+		8CA47F212968EF88006CF4A2 /* GlobalUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalUser.swift; sourceTree = "<group>"; };
 		8CAF910920833C4F00933837 /* WordsSearchViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsSearchViewModel.swift; sourceTree = "<group>"; };
 		8CD8409A20AFD4D900442133 /* PhrasesUnitDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesUnitDetailViewController.swift; sourceTree = "<group>"; };
 		8CD8409B20AFD4D900442133 /* PhrasesUnitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesUnitViewController.swift; sourceTree = "<group>"; };
@@ -446,6 +449,7 @@
 			children = (
 				954B8707218DC04E007DC348 /* CommonApi.swift */,
 				957B537725A8691D00C18B06 /* DictStore.swift */,
+				8CA47F212968EF88006CF4A2 /* GlobalUser.swift */,
 				95E43F2421E16D50001E650C /* MacApi.swift */,
 				95837EA124DFFC6300B5D2AE /* NSButton+Rx2.swift */,
 				95837E8824DEE95D00B5D2AE /* NSPopUpButton+Rx.swift */,
@@ -911,6 +915,7 @@
 				95837EA224DFFC6400B5D2AE /* NSButton+Rx2.swift in Sources */,
 				8C2CB5B2207885140083DDE2 /* PhrasesUnitViewModel.swift in Sources */,
 				95406BEF255B73EE00C87A0D /* TextbooksViewController.swift in Sources */,
+				8CA47F222968EF88006CF4A2 /* GlobalUser.swift in Sources */,
 				95DB142421CDEA7B00FBAF9A /* BlogViewModel.swift in Sources */,
 				95837E8B24DF050100B5D2AE /* WordsUnitDetailViewModel.swift in Sources */,
 				95837EA824E049FB00B5D2AE /* NSStepper+Rx.swift in Sources */,
@@ -1049,6 +1054,7 @@
 				959191E8258CFFCA0070DBFD /* MPattern.swift in Sources */,
 				95E43F2F21E1E926001E650C /* MacApi.swift in Sources */,
 				9562949826B5C3DD000C68B1 /* RxCodableAlamofire.swift in Sources */,
+				8CA47F232968EF88006CF4A2 /* GlobalUser.swift in Sources */,
 				959191F0258CFFCA0070DBFD /* MUnitPhrase.swift in Sources */,
 				954D8B982143907C00651A80 /* PhrasesLangViewModel.swift in Sources */,
 				954D8B9A2143907C00651A80 /* WordsSearchViewModel.swift in Sources */,

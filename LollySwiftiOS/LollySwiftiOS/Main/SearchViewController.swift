@@ -54,16 +54,16 @@ class SearchViewController: UIViewController, WKNavigationDelegate, UISearchBarD
             dictStore.searchDict()
         } ~ rx.disposeBag
 
-        globalUser.userid = UserDefaults.standard.string(forKey: "userid") ?? ""
-        if globalUser.userid.isEmpty {
-            logout(self)
-        } else {
+        globalUser.load()
+        if globalUser.isLoggedIn {
             setup()
+        } else {
+            logout(self)
         }
     }
 
     @IBAction func logout(_ sender: Any) {
-        UserDefaults.standard.removeObject(forKey: "userid")
+        globalUser.remove()
         if let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController {
             vc.completion = { self.setup() }
             self.present(vc, animated: true)

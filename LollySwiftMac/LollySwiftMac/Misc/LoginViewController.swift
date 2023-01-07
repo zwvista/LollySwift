@@ -29,17 +29,17 @@ class LoginViewController: NSViewController {
             vm.login(username: vm.username.value, password: vm.password.value)
         }.subscribe { [unowned self] userid in
             globalUser.userid = userid
-            if globalUser.userid.isEmpty {
+            if globalUser.isLoggedIn {
+                globalUser.save()
+                NSApplication.shared.stopModal(withCode: .OK)
+                self.view.window?.close()
+            } else {
                 let alert = NSAlert()
                 alert.alertStyle = .critical
                 alert.messageText = "Login"
                 alert.informativeText = "Wrong Username or Password!"
                 alert.addButton(withTitle: "OK")
                 alert.runModal()
-            } else {
-                UserDefaults.standard.set(globalUser.userid, forKey: "userid")
-                NSApplication.shared.stopModal(withCode: .OK)
-                self.view.window?.close()
             }
         } ~ rx.disposeBag
 
