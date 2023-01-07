@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ReviewOptionsViewModel: NSObject {
+class ReviewOptionsViewModel: NSObject, ObservableObject {
     var options: MReviewOptions!
     var optionsEdit: MReviewOptionsEdit!
 
