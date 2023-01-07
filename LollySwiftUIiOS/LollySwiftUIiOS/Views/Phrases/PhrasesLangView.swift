@@ -14,6 +14,7 @@ struct PhrasesLangView: View {
     @State var showDetailAdd = false
     @State var showItemMore = false
     @State var showDelete = false
+    @State var currentItem = MLangPhrase()
     var body: some View {
         VStack(spacing: 0) {
             HStack(spacing: 0) {
@@ -48,38 +49,40 @@ struct PhrasesLangView: View {
                     }
                     .swipeActions(allowsFullSwipe: false) {
                         Button("More") {
+                            currentItem = item
                             showItemMore.toggle()
                         }
                         Button("Delete", role: .destructive) {
+                            currentItem = item
                             showDelete.toggle()
                         }
                     }
-                    .alert(Text("delete"), isPresented: $showDelete, actions: {
-                        Button("No", role: .cancel) {}
-                        Button("Yes", role: .destructive) {
-                            
-                        }
-                    }, message: {
-                        Text(item.PHRASE)
-                    })
-                    .alert(Text("Phrase"), isPresented: $showItemMore, actions: {
-                        Button("Delete", role: .destructive) {
-                            showDelete.toggle()
-                        }
-                        Button("Edit") {
-                            showDetailEdit.toggle()
-                        }
-                        Button("Copy Phrase") {
-                            iOSApi.copyText(item.PHRASE)
-                        }
-                        Button("Google Phrase") {
-                            iOSApi.googleString(item.PHRASE)
-                        }
-                    }, message: {
-                        Text(item.PHRASE)
-                    })
                 }
             }
+            .alert(Text("delete"), isPresented: $showDelete, actions: {
+                Button("No", role: .cancel) {}
+                Button("Yes", role: .destructive) {
+                    
+                }
+            }, message: {
+                Text(currentItem.PHRASE)
+            })
+            .alert(Text("Phrase"), isPresented: $showItemMore, actions: {
+                Button("Delete", role: .destructive) {
+                    showDelete.toggle()
+                }
+                Button("Edit") {
+                    showDetailEdit.toggle()
+                }
+                Button("Copy Phrase") {
+                    iOSApi.copyText(currentItem.PHRASE)
+                }
+                Button("Google Phrase") {
+                    iOSApi.googleString(currentItem.PHRASE)
+                }
+            }, message: {
+                Text(currentItem.PHRASE)
+            })
             .toolbar {
                 ToolbarItemGroup {
                     Button("Add") {

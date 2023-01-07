@@ -14,6 +14,9 @@ struct PatternsView: View {
     @State var showDetailAdd = false
     @State var showItemMore = false
     @State var showDelete = false
+    @State var showBrowse = false
+    // https://stackoverflow.com/questions/59235879/how-to-show-an-alert-when-the-user-taps-on-the-list-row-in-swiftui
+    @State var currentItem = MPattern()
     var body: some View {
         VStack {
             HStack(spacing: 0) {
@@ -40,6 +43,7 @@ struct PatternsView: View {
                         Image(systemName: "info.circle")
                             .foregroundColor(.blue)
                             .onTapGesture {
+                                showBrowse = true
                                 navPath.append(item)
                             }
                     }
@@ -53,43 +57,53 @@ struct PatternsView: View {
                     }
                     .swipeActions(allowsFullSwipe: false) {
                         Button("More") {
+                            currentItem = item
                             showItemMore.toggle()
                         }
                         Button("Delete", role: .destructive) {
+                            currentItem = item
                             showDelete.toggle()
                         }
                     }
-                    .alert(Text("delete"), isPresented: $showDelete, actions: {
-                        Button("No", role: .cancel) {}
-                        Button("Yes", role: .destructive) {
-                            
-                        }
-                    }, message: {
-                        Text(item.PATTERN)
-                    })
-                    .alert(Text("Pattern"), isPresented: $showItemMore, actions: {
-                        Button("Delete", role: .destructive) {
-                        }
-                        Button("Edit") {
-                            showDetailEdit.toggle()
-                        }
-                        Button("Browse Web Pages") {
-                        }
-                        Button("Edit Web Pages") {
-                        }
-                        Button("Copy Pattern") {
-                            iOSApi.copyText(item.PATTERN)
-                        }
-                        Button("Google Pattern") {
-                            iOSApi.googleString(item.PATTERN)
-                        }
-                    }, message: {
-                        Text(item.PATTERN)
-                    })
                 }
             }
+            .alert(Text("delete"), isPresented: $showDelete, actions: {
+                Button("No", role: .cancel) {}
+                Button("Yes", role: .destructive) {
+
+                }
+            }, message: {
+                Text(currentItem.PATTERN)
+            })
+            .alert(Text("Pattern"), isPresented: $showItemMore, actions: {
+                Button("Delete", role: .destructive) {
+                }
+                Button("Edit") {
+                    showDetailEdit.toggle()
+                }
+                Button("Browse Web Pages") {
+                    showBrowse = true
+                    navPath.append(currentItem)
+                }
+                Button("Edit Web Pages") {
+                    showBrowse = false
+                    navPath.append(currentItem)
+                }
+                Button("Copy Pattern") {
+                    iOSApi.copyText(currentItem.PATTERN)
+                }
+                Button("Google Pattern") {
+                    iOSApi.googleString(currentItem.PATTERN)
+                }
+            }, message: {
+                Text(currentItem.PATTERN)
+            })
             .navigationDestination(for: MPattern.self) { item in
-                PatternWebPagesBrowseView(vm: PatternsWebPagesViewModel(settings: vmSettings, needCopy: false, item: item))
+                if showBrowse {
+                    PatternsWebPagesBrowseView(vm: PatternsWebPagesViewModel(settings: vmSettings, needCopy: false, item: item))
+                } else {
+                    PatternsWebPagesDetailView()
+                }
             }
             .toolbar {
                 ToolbarItemGroup {

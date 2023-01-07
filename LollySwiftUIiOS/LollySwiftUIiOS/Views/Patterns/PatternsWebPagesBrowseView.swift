@@ -1,5 +1,5 @@
 //
-//  PatternWebPagesBrowseView.swift
+//  PatternsWebPagesBrowseView.swift
 //  LollySwiftUIiOS
 //
 //  Created by 趙偉 on 2022/12/30.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PatternWebPagesBrowseView: View {
+struct PatternsWebPagesBrowseView: View {
     @ObservedObject var vm: PatternsWebPagesViewModel
     @State var webViewStore = WebViewStore()
     var body: some View {

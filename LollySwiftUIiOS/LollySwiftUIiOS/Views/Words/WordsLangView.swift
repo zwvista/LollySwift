@@ -16,6 +16,7 @@ struct WordsLangView: View {
     @State var showDict = false
     @State var showItemMore = false
     @State var showDelete = false
+    @State var currentItem = MLangWord()
     var body: some View {
         VStack(spacing: 0) {
             HStack(spacing: 0) {
@@ -55,43 +56,45 @@ struct WordsLangView: View {
                     }
                     .swipeActions(allowsFullSwipe: false) {
                         Button("More") {
+                            currentItem = item
                             showItemMore.toggle()
                         }
                         Button("Delete", role: .destructive) {
+                            currentItem = item
                             showDelete.toggle()
                         }
                     }
-                    .alert(Text("delete"), isPresented: $showDelete, actions: {
-                        Button("No", role: .cancel) {}
-                        Button("Yes", role: .destructive) {
-                            
-                        }
-                    }, message: {
-                        Text(item.WORDNOTE)
-                    })
-                    .alert(Text("Word"), isPresented: $showItemMore, actions: {
-                        Button("Delete", role: .destructive) {
-                            showDelete.toggle()
-                        }
-                        Button("Edit") {
-                            showDetailEdit.toggle()
-                        }
-                        Button("Copy Word") {
-                            iOSApi.copyText(item.WORD)
-                        }
-                        Button("Google Word") {
-                            iOSApi.googleString(item.WORD)
-                        }
-                        Button("Online Dictionary") {
-                            let itemDict = vmSettings.arrDictsReference.first { $0.DICTNAME == vmSettings.selectedDictReference.DICTNAME }!
-                            let url = itemDict.urlString(word: item.WORD, arrAutoCorrect: vmSettings.arrAutoCorrect)
-                            UIApplication.shared.open(URL(string: url)!)
-                        }
-                    }, message: {
-                        Text(item.WORDNOTE)
-                    })
                 }
             }
+            .alert(Text("delete"), isPresented: $showDelete, actions: {
+                Button("No", role: .cancel) {}
+                Button("Yes", role: .destructive) {
+                    
+                }
+            }, message: {
+                Text(currentItem.WORDNOTE)
+            })
+            .alert(Text("Word"), isPresented: $showItemMore, actions: {
+                Button("Delete", role: .destructive) {
+                    showDelete.toggle()
+                }
+                Button("Edit") {
+                    showDetailEdit.toggle()
+                }
+                Button("Copy Word") {
+                    iOSApi.copyText(currentItem.WORD)
+                }
+                Button("Google Word") {
+                    iOSApi.googleString(currentItem.WORD)
+                }
+                Button("Online Dictionary") {
+                    let itemDict = vmSettings.arrDictsReference.first { $0.DICTNAME == vmSettings.selectedDictReference.DICTNAME }!
+                    let url = itemDict.urlString(word: currentItem.WORD, arrAutoCorrect: vmSettings.arrAutoCorrect)
+                    UIApplication.shared.open(URL(string: url)!)
+                }
+            }, message: {
+                Text(currentItem.WORDNOTE)
+            })
             .toolbar {
                 ToolbarItemGroup {
                     Button("Add") {

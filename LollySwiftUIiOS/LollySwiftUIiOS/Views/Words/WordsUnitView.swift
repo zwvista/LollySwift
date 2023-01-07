@@ -18,6 +18,7 @@ struct WordsUnitView: View {
     @State var showItemMore = false
     @State var showListMore = false
     @State var showDelete = false
+    @State var currentItem = MUnitWord()
     var body: some View {
         VStack(spacing: 0) {
             HStack(spacing: 0) {
@@ -71,56 +72,58 @@ struct WordsUnitView: View {
                     }
                     .swipeActions(allowsFullSwipe: false) {
                         Button("More") {
+                            currentItem = item
                             showItemMore.toggle()
                         }
                         Button("Delete", role: .destructive) {
+                            currentItem = item
                             showDelete.toggle()
                         }
                     }
-                    .alert(Text("delete"), isPresented: $showDelete, actions: {
-                        Button("No", role: .cancel) {}
-                        Button("Yes", role: .destructive) {
-                            
-                        }
-                    }, message: {
-                        Text(item.WORDNOTE)
-                    })
-                    .alert(Text("Word"), isPresented: $showItemMore, actions: {
-                        Button("Delete", role: .destructive) {
-                            showDelete.toggle()
-                        }
-                        Button("Edit") {
-                            showDetailEdit.toggle()
-                        }
-                        Button("Retrieve Note") {
-                            Task {
-                                await self.vm.getNote(item: item)
-                            }
-                        }
-                        Button("Clear Note") {
-                            Task {
-                                await self.vm.clearNote(item: item)
-                            }
-                        }
-                        Button("Copy Word") {
-                            iOSApi.copyText(item.WORD)
-                        }
-                        Button("Google Word") {
-                            iOSApi.googleString(item.WORD)
-                        }
-                        Button("Online Dictionary") {
-                            let itemDict = vmSettings.arrDictsReference.first { $0.DICTNAME == vmSettings.selectedDictReference.DICTNAME }!
-                            let url = itemDict.urlString(word: item.WORD, arrAutoCorrect: vmSettings.arrAutoCorrect)
-                            UIApplication.shared.open(URL(string: url)!)
-                        }
-                    }, message: {
-                        Text(item.WORDNOTE)
-                    })
                 }
                 .onDelete { IndexSet in
 
                 }
             }
+            .alert(Text("delete"), isPresented: $showDelete, actions: {
+                Button("No", role: .cancel) {}
+                Button("Yes", role: .destructive) {
+                    
+                }
+            }, message: {
+                Text(currentItem.WORDNOTE)
+            })
+            .alert(Text("Word"), isPresented: $showItemMore, actions: {
+                Button("Delete", role: .destructive) {
+                    showDelete.toggle()
+                }
+                Button("Edit") {
+                    showDetailEdit.toggle()
+                }
+                Button("Retrieve Note") {
+                    Task {
+                        await self.vm.getNote(item: currentItem)
+                    }
+                }
+                Button("Clear Note") {
+                    Task {
+                        await self.vm.clearNote(item: currentItem)
+                    }
+                }
+                Button("Copy Word") {
+                    iOSApi.copyText(currentItem.WORD)
+                }
+                Button("Google Word") {
+                    iOSApi.googleString(currentItem.WORD)
+                }
+                Button("Online Dictionary") {
+                    let itemDict = vmSettings.arrDictsReference.first { $0.DICTNAME == vmSettings.selectedDictReference.DICTNAME }!
+                    let url = itemDict.urlString(word: currentItem.WORD, arrAutoCorrect: vmSettings.arrAutoCorrect)
+                    UIApplication.shared.open(URL(string: url)!)
+                }
+            }, message: {
+                Text(currentItem.WORDNOTE)
+            })
             .navigationDestination(for: MUnitWord.self) { item in
                 WordsDictView(vm: WordsDictViewModel(settings: vmSettings, needCopy: false, arrWords: vm.arrWordsFiltered.map(\.WORD), currentWordIndex: vm.arrWordsFiltered.firstIndex(of: item)!) {})
             }
