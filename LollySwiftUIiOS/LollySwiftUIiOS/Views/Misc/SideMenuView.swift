@@ -40,6 +40,7 @@ struct SideMenuView: View {
 
             HStack {
                 VStack() {
+                    // https://stackoverflow.com/questions/58470268/cant-add-more-than-10-items-to-view-swiftui
                     Group {
                         SideMenuContentView(topPadding: 100, systemName: "globe", title: titleSearch, bindTitle: $bindTitle, isOpen: $isOpen)
                         SideMenuContentView(systemName: "gear", title: titleSettings, bindTitle: $bindTitle, isOpen: $isOpen)
@@ -55,6 +56,7 @@ struct SideMenuView: View {
                         SideMenuContentView(systemName: "ferry", title: titlePhrasesLang, bindTitle: $bindTitle, isOpen: $isOpen)
                         SideMenuContentView(systemName: "cablecar", title: titlePatternsLang, bindTitle: $bindTitle, isOpen: $isOpen)
                     }
+                    Spacer()
                 }
                 .frame(width: width)
                 .background(Color(UIColor.systemGray6))
