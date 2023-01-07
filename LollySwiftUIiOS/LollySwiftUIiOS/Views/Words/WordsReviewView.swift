@@ -53,6 +53,13 @@ struct WordsReviewView: View {
                 }
             }
             Spacer()
+            Text(vm.wordTargetString)
+                .isHidden(vm.wordTargetHidden)
+            Text(vm.noteTargetString)
+                .isHidden(vm.noteTargetHidden)
+            Text(vm.translationString)
+            TextField("", text: $vm.wordInputString)
+            Spacer()
         }
         .padding()
         .sheet(isPresented: $showOptons) {

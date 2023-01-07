@@ -50,6 +50,11 @@ struct PhrasesReviewView: View {
                 }
             }
             Spacer()
+            Text(vm.phraseTargetString)
+                .isHidden(vm.phraseTargetHidden)
+            Text(vm.translationString)
+            TextField("", text: $vm.phraseInputString)
+            Spacer()
         }
         .padding()
         .sheet(isPresented: $showOptons) {
