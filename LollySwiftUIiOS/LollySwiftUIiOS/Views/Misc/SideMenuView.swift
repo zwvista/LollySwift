@@ -12,6 +12,8 @@ let titleSearch = "Search"
 let titleSettings = "Settings"
 let titleWordsUnit = "Words in Unit"
 let titlePhrasesUnit = "Phrases in Unit"
+let titleWordsReview = "Words Review"
+let titlePhrasesReview = "Phrases Review"
 let titleWordsTextbook = "Words in Textbook"
 let titlePhrasesTextbook = "Phrases in Textbook"
 let titleWordsLang = "Words in Language"
@@ -38,16 +40,21 @@ struct SideMenuView: View {
 
             HStack {
                 VStack() {
-                    SideMenuContentView(topPadding: 100, systemName: "globe", title: titleSearch, bindTitle: $bindTitle, isOpen: $isOpen)
-                    SideMenuContentView(systemName: "gear", title: titleSettings, bindTitle: $bindTitle, isOpen: $isOpen)
-                    SideMenuContentView(systemName: "car", title: titleWordsUnit, bindTitle: $bindTitle, isOpen: $isOpen)
-                    SideMenuContentView(systemName: "bus", title: titlePhrasesUnit, bindTitle: $bindTitle, isOpen: $isOpen)
-                    SideMenuContentView(systemName: "tram", title: titleWordsTextbook, bindTitle: $bindTitle, isOpen: $isOpen)
-                    SideMenuContentView(systemName: "bicycle", title: titlePhrasesTextbook, bindTitle: $bindTitle, isOpen: $isOpen)
-                    SideMenuContentView(systemName: "airplane", title: titleWordsLang, bindTitle: $bindTitle, isOpen: $isOpen)
-                    SideMenuContentView(systemName: "ferry", title: titlePhrasesLang, bindTitle: $bindTitle, isOpen: $isOpen)
-                    SideMenuContentView(systemName: "cablecar", title: titlePatternsLang, bindTitle: $bindTitle, isOpen: $isOpen)
-                    Spacer()
+                    Group {
+                        SideMenuContentView(topPadding: 100, systemName: "globe", title: titleSearch, bindTitle: $bindTitle, isOpen: $isOpen)
+                        SideMenuContentView(systemName: "gear", title: titleSettings, bindTitle: $bindTitle, isOpen: $isOpen)
+                        SideMenuContentView(systemName: "car", title: titleWordsUnit, bindTitle: $bindTitle, isOpen: $isOpen)
+                        SideMenuContentView(systemName: "bus", title: titlePhrasesUnit, bindTitle: $bindTitle, isOpen: $isOpen)
+                        SideMenuContentView(systemName: "car.fill", title: titleWordsReview, bindTitle: $bindTitle, isOpen: $isOpen)
+                        SideMenuContentView(systemName: "bus.fill", title: titlePhrasesReview, bindTitle: $bindTitle, isOpen: $isOpen)
+                    }
+                    Group {
+                        SideMenuContentView(systemName: "tram", title: titleWordsTextbook, bindTitle: $bindTitle, isOpen: $isOpen)
+                        SideMenuContentView(systemName: "bicycle", title: titlePhrasesTextbook, bindTitle: $bindTitle, isOpen: $isOpen)
+                        SideMenuContentView(systemName: "airplane", title: titleWordsLang, bindTitle: $bindTitle, isOpen: $isOpen)
+                        SideMenuContentView(systemName: "ferry", title: titlePhrasesLang, bindTitle: $bindTitle, isOpen: $isOpen)
+                        SideMenuContentView(systemName: "cablecar", title: titlePatternsLang, bindTitle: $bindTitle, isOpen: $isOpen)
+                    }
                 }
                 .frame(width: width)
                 .background(Color(UIColor.systemGray6))

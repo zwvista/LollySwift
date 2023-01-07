@@ -42,26 +42,39 @@ struct ReviewOptionsView: View {
                     Spacer()
                     Toggle("", isOn: $vm.optionsEdit.moveForward)
                 }
-//                HStack {
-//                    Text("Interval:")
-//                    Spacer()
-//                    TextField("Interval", text: $vm.optionsEdit.interval)
-//                }
-//                HStack {
-//                    Text("Group:")
-//                    Spacer()
-//                    TextField("Group", text: $vm.optionsEdit.groupSelected)
-//                }
-//                HStack {
-//                    Text("Groups:")
-//                    Spacer()
-//                    TextField("Groups", text: $vm.optionsEdit.groupCount)
-//                }
-//                HStack {
-//                    Text("Review:")
-//                    Spacer()
-//                    TextField("Review", text: $vm.optionsEdit.reviewCount)
-//                }
+                // https://stackoverflow.com/questions/58733003/how-to-create-textfield-that-only-accepts-numbers
+                HStack {
+                    Text("Interval:")
+                    Spacer()
+                    TextField("Interval", text: Binding(
+                        get: { String(vm.optionsEdit.interval) },
+                        set: { vm.optionsEdit.interval = Int($0) ?? 0 }
+                    ))
+                }
+                HStack {
+                    Text("Group:")
+                    Spacer()
+                    TextField("Group", text: Binding(
+                        get: { String(vm.optionsEdit.groupSelected) },
+                        set: { vm.optionsEdit.groupSelected = Int($0) ?? 0 }
+                    ))
+                }
+                HStack {
+                    Text("Groups:")
+                    Spacer()
+                    TextField("Groups", text: Binding(
+                        get: { String(vm.optionsEdit.groupCount) },
+                        set: { vm.optionsEdit.groupCount = Int($0) ?? 0 }
+                    ))
+                }
+                HStack {
+                    Text("Review:")
+                    Spacer()
+                    TextField("Review", text: Binding(
+                        get: { String(vm.optionsEdit.reviewCount) },
+                        set: { vm.optionsEdit.reviewCount = Int($0) ?? 0 }
+                    ))
+                }
             }
             .navigationBarItems(leading: Button("Cancel", role: .cancel) {
                 showOptions.toggle()

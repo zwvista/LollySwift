@@ -8,8 +8,15 @@
 import SwiftUI
 
 struct PhrasesReviewView: View {
+    @StateObject var vm = PhrasesReviewViewModel(settings: vmSettings, needCopy: false) {}
+    @State var showOptons = true
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            
+        }
+        .sheet(isPresented: $showOptons) {
+            ReviewOptionsView(vm: ReviewOptionsViewModel(options: vm.options), showOptions: $showOptons)
+        }
     }
 }
 

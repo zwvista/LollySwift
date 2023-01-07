@@ -43,6 +43,10 @@ struct ContentView: View {
             getContentView(WordsUnitView(navPath: $navPath))
         } else if bindTitle == titlePhrasesUnit {
             getContentView(PhrasesUnitView(navPath: $navPath))
+        } else if bindTitle == titleWordsReview {
+            getContentView(WordsReviewView())
+        } else if bindTitle == titlePhrasesReview {
+            getContentView(PhrasesReviewView())
         } else if bindTitle == titleWordsTextbook {
             getContentView(WordsTextbookView(navPath: $navPath))
         } else if bindTitle == titlePhrasesTextbook {
