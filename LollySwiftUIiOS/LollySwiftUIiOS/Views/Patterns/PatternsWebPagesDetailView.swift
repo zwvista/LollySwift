@@ -8,7 +8,55 @@
 import SwiftUI
 
 struct PatternsWebPagesDetailView: View {
+    @ObservedObject var vmEdit: PatternsWebPagesDetailViewModel
+    @Binding var showDetail: Bool
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView {
+            Form {
+                HStack {
+                    Text("ID:")
+                    Spacer()
+                    Text(vmEdit.itemEdit.ID)
+                }
+                HStack {
+                    Text("PATTERNID:")
+                    Spacer()
+                    Text(vmEdit.itemEdit.PATTERN)
+                }
+                HStack {
+                    Text("PATTERN:")
+                    Spacer()
+                    Text(vmEdit.itemEdit.PATTERN)
+                }
+                HStack {
+                    Text("SEQNUM:")
+                    Spacer()
+                    TextField("SEQNUM", text: $vmEdit.itemEdit.SEQNUM)
+                }
+                HStack{
+                    Text("WEBPAGEID:")
+                    Spacer()
+                    Text(vmEdit.itemEdit.WEBPAGEID)
+                }
+                HStack {
+                    Text("WORD:")
+                    Spacer()
+                    TextField("", text: $vmEdit.itemEdit.TITLE)
+                }
+                HStack {
+                    Text("NOTE:")
+                    Spacer()
+                    TextField("", text: $vmEdit.itemEdit.URL)
+                }
+            }
+            .navigationBarItems(leading: Button("Cancel", role: .cancel) {
+                showDetail.toggle()
+            }, trailing: Button("Done") {
+                Task{
+                    await vmEdit.onOK()
+                    showDetail.toggle()
+                }
+            }.disabled(!vmEdit.isOKEnabled))
+        }
     }
 }

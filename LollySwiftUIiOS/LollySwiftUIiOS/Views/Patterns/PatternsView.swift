@@ -99,7 +99,7 @@ struct PatternsView: View {
                 if showBrowse {
                     PatternsWebPagesBrowseView(vm: PatternsWebPagesViewModel(settings: vmSettings, needCopy: false, item: item))
                 } else {
-                    PatternsWebPagesDetailView()
+                    PatternsWebPagesListView(vm: PatternsWebPagesViewModel(settings: vmSettings, needCopy: false, item: item))
                 }
             }
             .toolbar {

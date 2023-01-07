@@ -8,7 +8,7 @@
 
 import Foundation
 
-class PatternsWebPagesDetailViewModel: NSObject {
+class PatternsWebPagesDetailViewModel: NSObject, ObservableObject {
     var item: MPatternWebPage!
     var itemEdit: MPatternWebPageEdit!
     var isAddPatternWebPage: Bool!
