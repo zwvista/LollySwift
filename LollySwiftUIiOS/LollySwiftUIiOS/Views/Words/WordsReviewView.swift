@@ -13,23 +13,19 @@ struct WordsReviewView: View {
     var body: some View {
         VStack {
             HStack {
-                if !vm.indexHidden {
-                    Text(vm.indexString)
-                }
+                Text(vm.indexString)
+                    .isHidden(vm.indexHidden)
                 Spacer()
-                if !vm.accuracyHidden {
-                    Text(vm.accuracyString)
-                }
+                Text(vm.accuracyString)
+                    .isHidden(vm.accuracyHidden)
                 Spacer()
                 ZStack {
-                    if !vm.correctHidden {
-                        Text("Correct")
-                            .foregroundColor(Color.green)
-                    }
-                    if !vm.incorrectHidden {
-                        Text("Incorrect")
-                            .foregroundColor(Color.red)
-                    }
+                    Text("Correct")
+                        .isHidden(vm.correctHidden)
+                        .foregroundColor(Color.green)
+                    Text("Incorrect")
+                        .isHidden(vm.incorrectHidden)
+                        .foregroundColor(Color.red)
                 }
             }
             HStack {

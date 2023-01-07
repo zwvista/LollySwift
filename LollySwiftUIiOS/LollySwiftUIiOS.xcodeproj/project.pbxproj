@@ -41,6 +41,7 @@
 		8C7F009E295306D8009D6A90 /* Publisher+DidSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7F009D295306D8009D6A90 /* Publisher+DidSet.swift */; };
 		8CA47F262968F37D006CF4A2 /* GlobalUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA47F252968F37D006CF4A2 /* GlobalUser.swift */; };
 		8CA47F282969347E006CF4A2 /* ReviewOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA47F272969347E006CF4A2 /* ReviewOptionsView.swift */; };
+		8CA47F2A29694D57006CF4A2 /* IsHIdden.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA47F2929694D57006CF4A2 /* IsHIdden.swift */; };
 		8CB0BFB429466618001D0071 /* DictStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB0BFB329466618001D0071 /* DictStore.swift */; };
 		9513F4E5268B359B00493C0B /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9513F4E4268B359B00493C0B /* SettingsView.swift */; };
 		953FCD0025745D3D00666503 /* LollySwiftUIiOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953FCCFF25745D3D00666503 /* LollySwiftUIiOSApp.swift */; };
@@ -166,6 +167,7 @@
 		8C7F009D295306D8009D6A90 /* Publisher+DidSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Publisher+DidSet.swift"; sourceTree = "<group>"; };
 		8CA47F252968F37D006CF4A2 /* GlobalUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalUser.swift; sourceTree = "<group>"; };
 		8CA47F272969347E006CF4A2 /* ReviewOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewOptionsView.swift; sourceTree = "<group>"; };
+		8CA47F2929694D57006CF4A2 /* IsHIdden.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsHIdden.swift; sourceTree = "<group>"; };
 		8CB0BFB329466618001D0071 /* DictStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictStore.swift; sourceTree = "<group>"; };
 		9513F4E4268B359B00493C0B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		953FCCFC25745D3D00666503 /* LollySwiftUIiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LollySwiftUIiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -285,8 +287,9 @@
 		50B3A0C926896D8700B65E74 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				8C7F0093294E329D009D6A90 /* Misc */,
+				957B539925AD69C100C18B06 /* Common */,
 				953FCD0125745D3D00666503 /* ContentView.swift */,
+				8C7F0093294E329D009D6A90 /* Misc */,
 				8C7F008C294E100F009D6A90 /* Patterns */,
 				8C7F0089294E100F009D6A90 /* Phrases */,
 				8C7F0086294E100F009D6A90 /* Words */,
@@ -352,7 +355,6 @@
 			isa = PBXGroup;
 			children = (
 				9546F06B26881AFA00ADE420 /* LoginView.swift */,
-				8C60AB47295F61E500D5CAE7 /* PickerModifier.swift */,
 				8CA47F272969347E006CF4A2 /* ReviewOptionsView.swift */,
 				957B539425AD686500C18B06 /* SearchView.swift */,
 				9513F4E4268B359B00493C0B /* SettingsView.swift */,
@@ -388,7 +390,6 @@
 			isa = PBXGroup;
 			children = (
 				953FCD0325745D4000666503 /* Assets.xcassets */,
-				957B539925AD69C100C18B06 /* Controls */,
 				953FCD0825745D4000666503 /* Info.plist */,
 				953FCCFF25745D3D00666503 /* LollySwiftUIiOSApp.swift */,
 				953FCD0525745D4000666503 /* Preview Content */,
@@ -519,13 +520,15 @@
 			path = Shared;
 			sourceTree = "<group>";
 		};
-		957B539925AD69C100C18B06 /* Controls */ = {
+		957B539925AD69C100C18B06 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				8C60AB47295F61E500D5CAE7 /* PickerModifier.swift */,
 				95F632DA2588BC93000CFD23 /* SearchBar.swift */,
 				95F632DF2588C0B8000CFD23 /* WebView.swift */,
+				8CA47F2929694D57006CF4A2 /* IsHIdden.swift */,
 			);
-			path = Controls;
+			path = Common;
 			sourceTree = "<group>";
 		};
 		95919202258D00190070DBFD /* Models */ = {
@@ -850,6 +853,7 @@
 				953FCE5025792A8800666503 /* WordsLangDetailViewModel.swift in Sources */,
 				953FCE5C25792A8800666503 /* PatternsDetailViewModel.swift in Sources */,
 				953FCE6B25792A8800666503 /* iOSApi.swift in Sources */,
+				8CA47F2A29694D57006CF4A2 /* IsHIdden.swift in Sources */,
 				8C7F008E294E100F009D6A90 /* WordsLangView.swift in Sources */,
 				953FCE5925792A8800666503 /* PatternsMergeViewModel.swift in Sources */,
 				9546F06E2688204500ADE420 /* LoginViewModel.swift in Sources */,
