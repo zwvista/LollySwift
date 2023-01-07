@@ -21,7 +21,7 @@ struct PatternsWebPagesDetailView: View {
                 HStack {
                     Text("PATTERNID:")
                     Spacer()
-                    Text(vmEdit.itemEdit.PATTERN)
+                    Text(vmEdit.itemEdit.PATTERNID)
                 }
                 HStack {
                     Text("PATTERN:")
@@ -39,12 +39,12 @@ struct PatternsWebPagesDetailView: View {
                     Text(vmEdit.itemEdit.WEBPAGEID)
                 }
                 HStack {
-                    Text("WORD:")
+                    Text("TITLE:")
                     Spacer()
                     TextField("", text: $vmEdit.itemEdit.TITLE)
                 }
                 HStack {
-                    Text("NOTE:")
+                    Text("URL:")
                     Spacer()
                     TextField("", text: $vmEdit.itemEdit.URL)
                 }

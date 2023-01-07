@@ -39,6 +39,12 @@ struct PatternsWebPagesListView: View {
                     }
                 }
             }
+            .onDelete { IndexSet in
+
+            }
+            .onMove { source, destination in
+                
+            }
         }
         .navigationTitle("Pattern Web Pages (Edit)")
         .onAppear {

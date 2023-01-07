@@ -74,6 +74,9 @@ struct PhrasesUnitView: View {
                 .onDelete { IndexSet in
 
                 }
+                .onMove { source, destination in
+                    
+                }
             }
             .alert(Text("delete"), isPresented: $showDelete, actions: {
                 Button("No", role: .cancel) {}
