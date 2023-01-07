@@ -61,9 +61,6 @@ struct WordsTextbookView: View {
                     .onTapGesture {
                         AppDelegate.speak(string: item.WORD)
                     }
-                    .sheet(isPresented: $showDetailEdit) {
-                        WordsTextbookDetailView(vmEdit: WordsUnitDetailViewModel(vm: vm, item: item, phraseid: 0, complete: {}), showDetail: $showDetailEdit)
-                    }
                     .swipeActions(allowsFullSwipe: false) {
                         Button("More") {
                             currentItem = item
@@ -117,6 +114,9 @@ struct WordsTextbookView: View {
             })
             .navigationDestination(for: MUnitWord.self) { item in
                 WordsDictView(vm: WordsDictViewModel(settings: vmSettings, needCopy: false, arrWords: vm.arrWordsFiltered.map(\.WORD), currentWordIndex: vm.arrWordsFiltered.firstIndex(of: item)!) {})
+            }
+            .sheet(isPresented: $showDetailEdit) {
+                WordsTextbookDetailView(vmEdit: WordsUnitDetailViewModel(vm: vm, item: currentItem, phraseid: 0, complete: {}), showDetail: $showDetailEdit)
             }
         }
     }

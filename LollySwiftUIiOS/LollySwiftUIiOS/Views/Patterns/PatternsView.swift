@@ -52,9 +52,6 @@ struct PatternsView: View {
                     .onTapGesture {
                         AppDelegate.speak(string: item.PATTERN)
                     }
-                    .sheet(isPresented: $showDetailEdit) {
-                        PatternsDetailView(vmEdit: PatternsDetailViewModel(vm: vm, item: item), showDetail: $showDetailEdit)
-                    }
                     .swipeActions(allowsFullSwipe: false) {
                         Button("More") {
                             currentItem = item
@@ -111,6 +108,9 @@ struct PatternsView: View {
                         showDetailAdd.toggle()
                     }
                 }
+            }
+            .sheet(isPresented: $showDetailEdit) {
+                PatternsDetailView(vmEdit: PatternsDetailViewModel(vm: vm, item: currentItem), showDetail: $showDetailEdit)
             }
             .sheet(isPresented: $showDetailAdd) {
                 PatternsDetailView(vmEdit: PatternsDetailViewModel(vm: vm, item: vm.newPattern()), showDetail: $showDetailAdd)

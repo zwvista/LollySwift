@@ -51,9 +51,6 @@ struct WordsLangView: View {
                     .onTapGesture {
                         AppDelegate.speak(string: item.WORD)
                     }
-                    .sheet(isPresented: $showDetailEdit) {
-                        WordsLangDetailView(vmEdit: WordsLangDetailViewModel(vm: vm, item: item, complete: {}), showDetail: $showDetailEdit)
-                    }
                     .swipeActions(allowsFullSwipe: false) {
                         Button("More") {
                             currentItem = item
@@ -101,6 +98,9 @@ struct WordsLangView: View {
                         showDetailAdd.toggle()
                     }
                 }
+            }
+            .sheet(isPresented: $showDetailEdit) {
+                WordsLangDetailView(vmEdit: WordsLangDetailViewModel(vm: vm, item: currentItem, complete: {}), showDetail: $showDetailEdit)
             }
             .sheet(isPresented: $showDetailAdd) {
                 WordsLangDetailView(vmEdit: WordsLangDetailViewModel(vm: vm, item: vm.newLangWord(), complete: {}), showDetail: $showDetailAdd)

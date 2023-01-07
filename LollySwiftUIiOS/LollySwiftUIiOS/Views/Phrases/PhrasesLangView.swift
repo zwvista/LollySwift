@@ -44,9 +44,6 @@ struct PhrasesLangView: View {
                     .onTapGesture {
                         AppDelegate.speak(string: item.PHRASE)
                     }
-                    .sheet(isPresented: $showDetailEdit) {
-                        PhrasesLangDetailView(vmEdit: PhrasesLangDetailViewModel(vm: vm, item: item, complete: {}), showDetail: $showDetailEdit)
-                    }
                     .swipeActions(allowsFullSwipe: false) {
                         Button("More") {
                             currentItem = item
@@ -89,6 +86,9 @@ struct PhrasesLangView: View {
                         showDetailAdd.toggle()
                     }
                 }
+            }
+            .sheet(isPresented: $showDetailEdit) {
+                PhrasesLangDetailView(vmEdit: PhrasesLangDetailViewModel(vm: vm, item: currentItem, complete: {}), showDetail: $showDetailEdit)
             }
             .sheet(isPresented: $showDetailAdd) {
                 PhrasesLangDetailView(vmEdit: PhrasesLangDetailViewModel(vm: vm, item: vm.newLangPhrase(), complete: {}), showDetail: $showDetailAdd)

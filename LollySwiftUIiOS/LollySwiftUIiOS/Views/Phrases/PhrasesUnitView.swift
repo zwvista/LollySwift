@@ -54,13 +54,11 @@ struct PhrasesUnitView: View {
                     .frame(maxWidth: .infinity)
                     .onTapGesture {
                         if isEditing {
+                            currentItem = item
                             showDetailEdit.toggle()
                         } else {
                             AppDelegate.speak(string: item.PHRASE)
                         }
-                    }
-                    .sheet(isPresented: $showDetailEdit) {
-                        PhrasesUnitDetailView(vmEdit: PhrasesUnitDetailViewModel(vm: vm, item: item, wordid: 0, complete: {}), showDetail: $showDetailEdit)
                     }
                     .swipeActions(allowsFullSwipe: false) {
                         Button("More") {
@@ -120,6 +118,9 @@ struct PhrasesUnitView: View {
             }, message: {
                 Text("More")
             })
+            .sheet(isPresented: $showDetailEdit) {
+                PhrasesUnitDetailView(vmEdit: PhrasesUnitDetailViewModel(vm: vm, item: currentItem, wordid: 0, complete: {}), showDetail: $showDetailEdit)
+            }
             .sheet(isPresented: $showDetailAdd) {
                 PhrasesUnitDetailView(vmEdit: PhrasesUnitDetailViewModel(vm: vm, item: vm.newUnitPhrase(), wordid: 0, complete: {}), showDetail: $showDetailAdd)
             }

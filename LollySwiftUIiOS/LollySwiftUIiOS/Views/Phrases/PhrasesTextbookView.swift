@@ -55,9 +55,6 @@ struct PhrasesTextbookView: View {
                     .onTapGesture {
                         AppDelegate.speak(string: item.PHRASE)
                     }
-                    .sheet(isPresented: $showDetailEdit) {
-                        PhrasesTextbookDetailView(vmEdit: PhrasesUnitDetailViewModel(vm: vm, item: item, wordid: 0, complete: {}), showDetail: $showDetailEdit)
-                    }
                     .swipeActions(allowsFullSwipe: false) {
                         Button("More") {
                             currentItem = item
@@ -94,6 +91,9 @@ struct PhrasesTextbookView: View {
             }, message: {
                 Text(currentItem.PHRASE)
             })
+            .sheet(isPresented: $showDetailEdit) {
+                PhrasesTextbookDetailView(vmEdit: PhrasesUnitDetailViewModel(vm: vm, item: currentItem, wordid: 0, complete: {}), showDetail: $showDetailEdit)
+            }
         }
     }
 }
