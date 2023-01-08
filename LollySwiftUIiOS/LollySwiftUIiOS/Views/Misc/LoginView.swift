@@ -34,8 +34,9 @@ struct LoginView: View {
                 }
             }
         }
-        .alert(isPresented: $showingAlert) {
-            Alert(title: Text("Login"), message: Text("Wrong Username or Password!"))
+        .alert("Login", isPresented: $showingAlert) {
+        } message: {
+            Text("Wrong Username or Password!")
         }
     }
 }
