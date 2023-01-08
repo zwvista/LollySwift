@@ -64,6 +64,9 @@ struct PatternsView: View {
                     }
                 }
             }
+            .refreshable {
+                await vm.reload()
+            }
             .alert(Text("delete"), isPresented: $showDelete, actions: {
                 Button("No", role: .cancel) {}
                 Button("Yes", role: .destructive) {
@@ -102,7 +105,7 @@ struct PatternsView: View {
                     PatternsWebPagesListView(vm: PatternsWebPagesViewModel(settings: vmSettings, needCopy: false, item: item))
                 }
             }
-            .toolbar {
+           .toolbar {
                 ToolbarItemGroup {
                     Button("Add") {
                         showDetailAdd.toggle()

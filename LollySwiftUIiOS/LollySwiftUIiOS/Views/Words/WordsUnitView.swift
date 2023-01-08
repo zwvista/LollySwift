@@ -86,6 +86,9 @@ struct WordsUnitView: View {
                     
                 }
             }
+            .refreshable {
+                await vm.reload()
+            }
             .alert(Text("delete"), isPresented: $showDelete, actions: {
                 Button("No", role: .cancel) {}
                 Button("Yes", role: .destructive) {
