@@ -61,11 +61,7 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
         let item = arrPatterns[indexPath.row]
         cell.lblPattern.text = item.PATTERN
         cell.lblTags.text = item.TAGS
-        cell.cardView.layer.shadowColor = UIColor.gray.cgColor
-        cell.cardView.layer.shadowOffset = CGSize(width: 1.0, height: 1.0)
-        cell.cardView.layer.shadowOpacity = 1.0
-        cell.cardView.layer.masksToBounds = false
-        cell.cardView.layer.cornerRadius = 2.0
+        cell.cardView.createCardEffect()
         return cell
     }
 
