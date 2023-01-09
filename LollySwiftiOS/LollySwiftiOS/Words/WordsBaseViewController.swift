@@ -58,11 +58,7 @@ class WordsBaseViewController: UIViewController, UITableViewDelegate, UITableVie
         }
         cell.lblWord.text = item.WORD
         cell.lblNote.text = item.NOTE
-        cell.cardView.layer.shadowColor = UIColor.gray.cgColor
-        cell.cardView.layer.shadowOffset = CGSize(width: 1.0, height: 1.0)
-        cell.cardView.layer.shadowOpacity = 1.0
-        cell.cardView.layer.masksToBounds = false
-        cell.cardView.layer.cornerRadius = 2.0
+        cell.cardView.createCardEffect()
         return cell
     }
 

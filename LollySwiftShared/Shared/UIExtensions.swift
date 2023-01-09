@@ -64,4 +64,12 @@ extension UIView{
         }
         isUserInteractionEnabled = true
     }
+
+    func createCardEffect() {
+        layer.shadowColor = UIColor.gray.cgColor
+        layer.shadowOffset = CGSize(width: 1.0, height: 1.0)
+        layer.shadowOpacity = 1.0
+        layer.masksToBounds = false
+        layer.cornerRadius = 2.0
+    }
 }
