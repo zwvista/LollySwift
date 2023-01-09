@@ -58,6 +58,11 @@ class PhrasesBaseViewController: UIViewController, UITableViewDelegate, UITableV
         }
         cell.lblPhrase!.text = item.PHRASE
         cell.lblTranslation!.text = item.TRANSLATION
+        cell.cardView.layer.shadowColor = UIColor.gray.cgColor
+        cell.cardView.layer.shadowOffset = CGSize(width: 1.0, height: 1.0)
+        cell.cardView.layer.shadowOpacity = 1.0
+        cell.cardView.layer.masksToBounds = false
+        cell.cardView.layer.cornerRadius = 2.0
         return cell
     }
 
@@ -84,6 +89,7 @@ class PhrasesBaseViewController: UIViewController, UITableViewDelegate, UITableV
 }
 
 class PhrasesCommonCell: UITableViewCell {
+    @IBOutlet weak var cardView: UIView!
     @IBOutlet weak var lblUnitPartSeqNum: UILabel!
     @IBOutlet weak var lblPhrase: UILabel!
     @IBOutlet weak var lblTranslation: UILabel!
