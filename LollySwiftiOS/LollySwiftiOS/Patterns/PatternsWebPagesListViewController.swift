@@ -42,6 +42,11 @@ class PatternsWebPagesListViewController: UITableViewController {
         cell.lblSeqNum!.text = String(item.SEQNUM)
         cell.lblTitle!.text = item.TITLE
         cell.lblURL!.text = item.URL
+        cell.cardView.layer.shadowColor = UIColor.gray.cgColor
+        cell.cardView.layer.shadowOffset = CGSize(width: 1.0, height: 1.0)
+        cell.cardView.layer.shadowOpacity = 1.0
+        cell.cardView.layer.masksToBounds = false
+        cell.cardView.layer.cornerRadius = 2.0
         return cell
     }
 
