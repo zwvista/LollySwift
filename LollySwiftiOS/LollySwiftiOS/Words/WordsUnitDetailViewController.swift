@@ -29,12 +29,6 @@ class WordsUnitDetailViewController: UITableViewController {
     var itemEdit: MUnitWordEdit { vmEdit.itemEdit }
     var subscriptions = Set<AnyCancellable>()
 
-    func startEdit(vm: WordsUnitViewModel, item: MUnitWord, phraseid: Int) {
-        vmEdit = WordsUnitDetailViewModel(vm: vm, item: item, phraseid: phraseid) {
-            self.tableView.reloadData()
-        }
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
