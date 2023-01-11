@@ -12,11 +12,11 @@ import RxRelay
 import RxBinding
 
 class PhrasesLangDetailViewModel: NSObject {
-    var vm: PhrasesLangViewModel!
-    var item: MLangPhrase!
-    var itemEdit: MLangPhraseEdit!
+    var vm: PhrasesLangViewModel
+    var item: MLangPhrase
+    var itemEdit: MLangPhraseEdit
     var vmSingle: SinglePhraseViewModel
-    var isAdd: Bool!
+    var isAdd: Bool
     let isOKEnabled = BehaviorRelay(value: false)
 
     init(vm: PhrasesLangViewModel, item: MLangPhrase) {

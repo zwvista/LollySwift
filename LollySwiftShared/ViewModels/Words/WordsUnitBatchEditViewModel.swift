@@ -11,7 +11,7 @@ import RxSwift
 import RxRelay
 
 class WordsUnitBatchEditViewModel: NSObject {
-    var vm: WordsUnitViewModel!
+    var vm: WordsUnitViewModel
     let isOKEnabled = BehaviorRelay(value: false)
 
     let indexUNIT = BehaviorRelay(value: 0)

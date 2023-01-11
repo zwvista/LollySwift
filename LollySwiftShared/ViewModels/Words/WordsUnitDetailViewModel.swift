@@ -12,12 +12,12 @@ import RxRelay
 import RxBinding
 
 class WordsUnitDetailViewModel: NSObject {
-    var vm: WordsUnitViewModel!
-    var item: MUnitWord!
+    var vm: WordsUnitViewModel
+    var item: MUnitWord
     var phraseid: Int
-    var itemEdit: MUnitWordEdit!
+    var itemEdit: MUnitWordEdit
     var vmSingle: SingleWordViewModel
-    var isAdd: Bool!
+    var isAdd: Bool
     let isOKEnabled = BehaviorRelay(value: false)
 
     init(vm: WordsUnitViewModel, item: MUnitWord, phraseid: Int) {

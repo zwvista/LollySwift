@@ -11,9 +11,9 @@ import RxSwift
 import RxRelay
 
 class PhrasesUnitBatchAddViewModel: NSObject {
-    var vm: PhrasesUnitViewModel!
-    var item: MUnitPhrase!
-    var itemEdit: MUnitPhraseEdit!
+    var vm: PhrasesUnitViewModel
+    var item: MUnitPhrase
+    var itemEdit: MUnitPhraseEdit
     let isOKEnabled = BehaviorRelay(value: false)
 
     init(vm: PhrasesUnitViewModel) {
