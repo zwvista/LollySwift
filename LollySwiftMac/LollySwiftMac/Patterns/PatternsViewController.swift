@@ -185,22 +185,20 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
 
     // https://stackoverflow.com/questions/24219441/how-to-use-nstoolbar-in-xcode-6-and-storyboard
     @IBAction func addPattern(_ sender: AnyObject) {
-        let editVC = self.storyboard!.instantiateController(withIdentifier: "PatternsDetailViewController") as! PatternsDetailViewController
-        editVC.vm = vm
-        editVC.item = vm.newPattern()
-        editVC.complete = { self.tvPatterns.reloadData(); self.addPattern(self) }
-        self.presentAsSheet(editVC)
+        let detailVC = self.storyboard!.instantiateController(withIdentifier: "PatternsDetailViewController") as! PatternsDetailViewController
+        detailVC.vmEdit = PatternsDetailViewModel(vm: vm, item: vm.newPattern())
+        detailVC.complete = { self.tvPatterns.reloadData(); self.addPattern(self) }
+        self.presentAsSheet(detailVC)
     }
 
     @IBAction func editPattern(_ sender: AnyObject) {
-        let editVC = self.storyboard!.instantiateController(withIdentifier: "PatternsDetailViewController") as! PatternsDetailViewController
-        editVC.vm = vm
+        let detailVC = self.storyboard!.instantiateController(withIdentifier: "PatternsDetailViewController") as! PatternsDetailViewController
         let i = tvPatterns.selectedRow
-        editVC.item = arrPatterns[i]
-        editVC.complete = {
+        detailVC.vmEdit = PatternsDetailViewModel(vm: vm, item: arrPatterns[i])
+        detailVC.complete = {
             self.tvPatterns.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tvPatterns.tableColumns.count))
         }
-        self.presentAsModalWindow(editVC)
+        self.presentAsModalWindow(detailVC)
     }
 
     @IBAction func addWebPage(_ sender: AnyObject) {

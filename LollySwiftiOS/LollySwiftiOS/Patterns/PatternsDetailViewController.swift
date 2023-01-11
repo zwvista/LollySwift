@@ -17,9 +17,8 @@ class PatternsDetailViewController: UITableViewController {
     @IBOutlet weak var tfTags: UITextField!
     @IBOutlet weak var btnDone: UIBarButtonItem!
 
-    var vm: PatternsViewModel!
-    var item: MPattern!
     var vmEdit: PatternsDetailViewModel!
+    var item: MPattern { vmEdit.item }
     var itemEdit: MPatternEdit { vmEdit.itemEdit }
     var subscriptions = Set<AnyCancellable>()
 

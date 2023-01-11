@@ -18,18 +18,14 @@ class PatternsDetailViewController: NSViewController {
     @IBOutlet weak var tfTags: NSTextField!
     @IBOutlet weak var btnOK: NSButton!
 
-    // input
-    var vm: PatternsViewModel!
-    var item: MPattern!
     var complete: (() -> Void)?
-
     var vmEdit: PatternsDetailViewModel!
+    var item: MPattern { vmEdit.item }
     var itemEdit: MPatternEdit { vmEdit.itemEdit }
     var subscriptions = Set<AnyCancellable>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        vmEdit = PatternsDetailViewModel(vm: vm, item: item)
         tfID.stringValue = itemEdit.ID
         itemEdit.$PATTERN <~> tfPattern.textProperty ~ subscriptions
         itemEdit.$NOTE <~> tfNote.textProperty ~ subscriptions
