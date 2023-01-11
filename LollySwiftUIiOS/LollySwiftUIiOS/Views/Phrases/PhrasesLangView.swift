@@ -91,10 +91,10 @@ struct PhrasesLangView: View {
                 }
             }
             .sheet(isPresented: $showDetailEdit) {
-                PhrasesLangDetailView(vmEdit: PhrasesLangDetailViewModel(vm: vm, item: currentItem, complete: {}), showDetail: $showDetailEdit)
+                PhrasesLangDetailView(vmEdit: PhrasesLangDetailViewModel(vm: vm, item: currentItem), showDetail: $showDetailEdit)
             }
             .sheet(isPresented: $showDetailAdd) {
-                PhrasesLangDetailView(vmEdit: PhrasesLangDetailViewModel(vm: vm, item: vm.newLangPhrase(), complete: {}), showDetail: $showDetailAdd)
+                PhrasesLangDetailView(vmEdit: PhrasesLangDetailViewModel(vm: vm, item: vm.newLangPhrase()), showDetail: $showDetailAdd)
             }
         }
     }

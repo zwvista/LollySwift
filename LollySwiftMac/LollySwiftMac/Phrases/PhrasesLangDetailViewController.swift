@@ -17,23 +17,24 @@ class PhrasesLangDetailViewController: NSViewController, NSTableViewDataSource, 
     @IBOutlet weak var tableView: NSTableView!
     @IBOutlet weak var btnOK: NSButton!
 
-    var vm: PhrasesLangViewModel!
     var complete: (() -> Void)?
-    var item: MLangPhrase!
     var vmEdit: PhrasesLangDetailViewModel!
+    var item: MLangPhrase { vmEdit.item }
     var itemEdit: MLangPhraseEdit { vmEdit.itemEdit }
     var arrPhrases: [MUnitPhrase] { vmEdit.vmSingle?.arrPhrases ?? [MUnitPhrase]() }
     var subscriptions = Set<AnyCancellable>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        vmEdit = PhrasesLangDetailViewModel(vm: vm, item: item) {
-            self.tableView.reloadData()
-        }
         tfID.stringValue = itemEdit.ID
         itemEdit.$PHRASE <~> tfPhrase.textProperty ~ subscriptions
         itemEdit.$TRANSLATION <~> tfTranslation.textProperty ~ subscriptions
         vmEdit.$isOKEnabled ~> (btnOK, \.isEnabled) ~ subscriptions
+
+        vmEdit.vmSingle.$arrPhrases.sink { [unowned self] _ in
+            tableView.reloadData()
+        } ~ subscriptions
+
         btnOK.tapPublisher.sink {
             Task {
                 await self.vmEdit.onOK()

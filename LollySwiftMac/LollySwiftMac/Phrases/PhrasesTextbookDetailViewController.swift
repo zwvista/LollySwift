@@ -31,12 +31,6 @@ class PhrasesTextbookDetailViewController: NSViewController, NSTableViewDataSour
     var arrPhrases: [MUnitPhrase] { vmEdit.vmSingle.arrPhrases }
     var subscriptions = Set<AnyCancellable>()
 
-    func startEdit(vm: PhrasesUnitViewModel, item: MUnitPhrase) {
-        vmEdit = PhrasesUnitDetailViewModel(vm: vm, item: item, wordid: 0) {
-            self.tableView.reloadData()
-        }
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         acUnits.content = item.textbook.arrUnits
@@ -50,6 +44,11 @@ class PhrasesTextbookDetailViewController: NSViewController, NSTableViewDataSour
         itemEdit.$PHRASE <~> tfPhrase.textProperty ~ subscriptions
         itemEdit.$TRANSLATION <~> tfTranslation.textProperty ~ subscriptions
         vmEdit.$isOKEnabled ~> (btnOK, \.isEnabled) ~ subscriptions
+
+        vmEdit.vmSingle.$arrPhrases.sink { [unowned self] _ in
+            tableView.reloadData()
+        } ~ subscriptions
+
         btnOK.tapPublisher.sink {
             Task {
                 await self.vmEdit.onOK()

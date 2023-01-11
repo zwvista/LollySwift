@@ -18,16 +18,15 @@ class PhrasesUnitDetailViewModel: NSObject, ObservableObject {
     var isAdd: Bool!
     @Published var isOKEnabled = false
 
-    init(vm: PhrasesUnitViewModel, item: MUnitPhrase, wordid: Int, complete: @escaping () -> Void) {
+    init(vm: PhrasesUnitViewModel, item: MUnitPhrase, wordid: Int) {
         self.vm = vm
         self.item = item
         self.wordid = wordid
         itemEdit = MUnitPhraseEdit(x: item)
         isAdd = item.ID == 0
+        vmSingle = SinglePhraseViewModel(phrase: isAdd ? "" : item.PHRASE, settings: vm.vmSettings)
         super.init()
         itemEdit.$PHRASE.map { !$0.isEmpty }.eraseToAnyPublisher() ~> $isOKEnabled
-        guard !isAdd else {return}
-        vmSingle = SinglePhraseViewModel(phrase: item.PHRASE, settings: vm.vmSettings, complete: complete)
     }
 
     func onOK() async {

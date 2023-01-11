@@ -25,10 +25,6 @@ class PhrasesUnitBatchAddViewController: NSViewController {
     var complete: (() -> Void)?
     var subscriptions = Set<AnyCancellable>()
 
-    func startEdit(vm: PhrasesUnitViewModel) {
-        vmEdit = PhrasesUnitBatchAddViewModel(vm: vm)
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         acUnits.content = item.textbook.arrUnits

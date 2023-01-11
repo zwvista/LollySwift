@@ -105,7 +105,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
         super.prepare(for: segue, sender: sender)
         guard let controller = (segue.destination as? UINavigationController)?.topViewController as? PhrasesTextbookDetailViewController else {return}
         let item = sender as! MUnitPhrase
-        controller.startEdit(vm: vm, item: item, wordid: 0)
+        controller.vmEdit = PhrasesUnitDetailViewModel(vm: vm, item: item, wordid: 0)
     }
 
     @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {

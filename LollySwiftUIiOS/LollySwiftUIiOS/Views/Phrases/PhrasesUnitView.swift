@@ -125,10 +125,10 @@ struct PhrasesUnitView: View {
                 Text("More")
             })
             .sheet(isPresented: $showDetailEdit) {
-                PhrasesUnitDetailView(vmEdit: PhrasesUnitDetailViewModel(vm: vm, item: currentItem, wordid: 0, complete: {}), showDetail: $showDetailEdit)
+                PhrasesUnitDetailView(vmEdit: PhrasesUnitDetailViewModel(vm: vm, item: currentItem, wordid: 0), showDetail: $showDetailEdit)
             }
             .sheet(isPresented: $showDetailAdd) {
-                PhrasesUnitDetailView(vmEdit: PhrasesUnitDetailViewModel(vm: vm, item: vm.newUnitPhrase(), wordid: 0, complete: {}), showDetail: $showDetailAdd)
+                PhrasesUnitDetailView(vmEdit: PhrasesUnitDetailViewModel(vm: vm, item: vm.newUnitPhrase(), wordid: 0), showDetail: $showDetailAdd)
             }
             .sheet(isPresented: $showBatchEdit) {
                 PhrasesUnitBatchEditView()

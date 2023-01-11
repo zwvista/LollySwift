@@ -48,6 +48,11 @@ class WordsTextbookDetailViewController: NSViewController, NSTableViewDataSource
         tfFamiID.stringValue = itemEdit.FAMIID
         itemEdit.$ACCURACY ~> (tfAccuracy, \.stringValue) ~ subscriptions
         vmEdit.$isOKEnabled ~> (btnOK, \.isEnabled) ~ subscriptions
+
+        vmEdit.vmSingle.$arrWords.didSet.sink { [unowned self] _ in
+            tableView.reloadData()
+        } ~ subscriptions
+
         btnOK.tapPublisher.sink { [unowned self] in
             Task {
                 await self.vmEdit.onOK()

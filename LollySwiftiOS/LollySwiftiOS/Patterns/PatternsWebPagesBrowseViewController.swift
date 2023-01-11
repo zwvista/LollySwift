@@ -79,7 +79,7 @@ class PatternsWebPagesBrowseViewController: UIViewController, WKUIDelegate, WKNa
         super.prepare(for: segue, sender: sender)
         if let controller = (segue.destination as? UINavigationController)?.topViewController as? PatternsWebPagesDetailViewController {
             let item = segue.identifier == "add" ? vm.newPatternWebPage() : vm.currentWebPage
-            controller.startEdit(item: item)
+            controller.vmEdit = PatternsWebPagesDetailViewModel(item: item)
         }
     }
 

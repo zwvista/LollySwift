@@ -78,7 +78,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
         let editVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesTextbookDetailViewController") as! PhrasesTextbookDetailViewController
         let i = tvPhrases.selectedRow
         if i == -1 {return}
-        editVC.startEdit(vm: vm, item: arrPhrases[i])
+        editVC.vmEdit = PhrasesUnitDetailViewModel(vm: vm, item: arrPhrases[i], wordid: 0)
         editVC.complete = {
             self.tvPhrases.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tvPhrases.tableColumns.count))
         }

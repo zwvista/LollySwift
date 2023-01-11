@@ -95,7 +95,7 @@ struct PhrasesTextbookView: View {
                 Text(currentItem.PHRASE)
             })
             .sheet(isPresented: $showDetailEdit) {
-                PhrasesTextbookDetailView(vmEdit: PhrasesUnitDetailViewModel(vm: vm, item: currentItem, wordid: 0, complete: {}), showDetail: $showDetailEdit)
+                PhrasesTextbookDetailView(vmEdit: PhrasesUnitDetailViewModel(vm: vm, item: currentItem, wordid: 0), showDetail: $showDetailEdit)
             }
         }
     }

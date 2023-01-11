@@ -30,10 +30,6 @@ class PatternsWebPagesDetailViewController: UITableViewController {
     var item: MPatternWebPage!
     var subscriptions = Set<AnyCancellable>()
 
-    func startEdit(item: MPatternWebPage) {
-        vmEdit = PatternsWebPagesDetailViewModel(item: item)
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         tfID.text = itemEdit.ID
