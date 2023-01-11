@@ -26,8 +26,9 @@ class WordsUnitDetailViewModel: NSObject {
         self.phraseid = phraseid
         itemEdit = MUnitWordEdit(x: item)
         isAdd = item.ID == 0
-        _ = itemEdit.WORD.map { !$0.isEmpty } ~> isOKEnabled
         vmSingle = SingleWordViewModel(word: isAdd ? "" : item.WORD, settings: vm.vmSettings)
+        super.init()
+        _ = itemEdit.WORD.map { !$0.isEmpty } ~> isOKEnabled
     }
 
     func onOK() -> Single<()> {
