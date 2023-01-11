@@ -24,9 +24,9 @@ class WordsLangDetailViewModel: NSObject {
         self.item = item
         itemEdit = MLangWordEdit(x: item)
         isAdd = item.ID == 0
+        vmSingle = SingleWordViewModel(word: isAdd ? "" : item.WORD, settings: vm.vmSettings)
+        super.init()
         _ = itemEdit.WORD.map { !$0.isEmpty } ~> isOKEnabled
-        guard !isAdd else {return}
-        vmSingle = SingleWordViewModel(word: item.WORD, settings: vm.vmSettings)
     }
 
     func onOK() -> Single<()> {

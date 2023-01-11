@@ -47,11 +47,10 @@ class PhrasesLangViewController: PhrasesBaseViewController {
 
     // https://stackoverflow.com/questions/24219441/how-to-use-nstoolbar-in-xcode-6-and-storyboard
     @IBAction func addPhrase(_ sender: AnyObject) {
-        let editVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesLangDetailViewController") as! PhrasesLangDetailViewController
-        editVC.vm = vm
-        editVC.item = vm.newLangPhrase()
-        editVC.complete = { self.tvPhrases.reloadData(); self.addPhrase(self) }
-        self.presentAsSheet(editVC)
+        let detailVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesLangDetailViewController") as! PhrasesLangDetailViewController
+        detailVC.vmEdit = PhrasesLangDetailViewModel(vm: vm, item: vm.newLangPhrase())
+        detailVC.complete = { self.tvPhrases.reloadData(); self.addPhrase(self) }
+        self.presentAsSheet(detailVC)
     }
 
     override func deletePhrase(row: Int) {
@@ -75,14 +74,13 @@ class PhrasesLangViewController: PhrasesBaseViewController {
     }
 
     @IBAction func editPhrase(_ sender: AnyObject) {
-        let editVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesLangDetailViewController") as! PhrasesLangDetailViewController
-        editVC.vm = vm
+        let detailVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesLangDetailViewController") as! PhrasesLangDetailViewController
         let i = tvPhrases.selectedRow
-        editVC.item = arrPhrases[i]
-        editVC.complete = {
+        detailVC.vmEdit = PhrasesLangDetailViewModel(vm: vm, item: arrPhrases[i])
+        detailVC.complete = {
             self.tvPhrases.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tvPhrases.tableColumns.count))
         }
-        self.presentAsModalWindow(editVC)
+        self.presentAsModalWindow(detailVC)
     }
 
     override func updateStatusText() {

@@ -31,12 +31,6 @@ class PhrasesTextbookDetailViewController: NSViewController, NSTableViewDataSour
     var itemEdit: MUnitPhraseEdit { vmEdit.itemEdit }
     var arrPhrases: [MUnitPhrase] { vmEdit.vmSingle.arrPhrases }
 
-    func startEdit(vm: PhrasesUnitViewModel, item: MUnitPhrase) {
-        vmEdit = PhrasesUnitDetailViewModel(vm: vm, item: item, wordid: 0) {
-            self.tableView.reloadData()
-        }
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         acUnits.content = item.textbook.arrUnits
@@ -50,6 +44,11 @@ class PhrasesTextbookDetailViewController: NSViewController, NSTableViewDataSour
         _ = itemEdit.PHRASE <~> tfPhrase.rx.text.orEmpty
         _ = itemEdit.TRANSLATION <~> tfTranslation.rx.text.orEmpty
         _ = vmEdit.isOKEnabled ~> btnOK.rx.isEnabled
+
+        vmEdit.vmSingle.arrPhrases_.subscribe { [unowned self] _ in
+            tableView.reloadData()
+        } ~ rx.disposeBag
+
         btnOK.rx.tap.flatMap { [unowned self] in
             self.vmEdit.onOK()
         }.subscribe { [unowned self] _ in

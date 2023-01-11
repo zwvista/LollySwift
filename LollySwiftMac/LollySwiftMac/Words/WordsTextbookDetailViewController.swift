@@ -48,6 +48,11 @@ class WordsTextbookDetailViewController: NSViewController, NSTableViewDataSource
         tfFamiID.stringValue = itemEdit.FAMIID
         _ = itemEdit.ACCURACY ~> tfAccuracy.rx.text.orEmpty
         _ = vmEdit.isOKEnabled ~> btnOK.rx.isEnabled
+
+        vmEdit.vmSingle.arrWords_.subscribe { [unowned self] _ in
+            tableView.reloadData()
+        } ~ rx.disposeBag
+
         btnOK.rx.tap.flatMap { [unowned self] in
             self.vmEdit.onOK()
         }.subscribe { [unowned self] _ in

@@ -28,10 +28,6 @@ class PhrasesUnitBatchEditViewController: NSViewController, NSTableViewDataSourc
     var complete: (() -> Void)?
     var arrPhrases: [MUnitPhrase] { vmEdit.vm.arrPhrases }
 
-    func startEdit(vm: PhrasesUnitViewModel, unit: Int, part: Int) {
-        vmEdit = PhrasesUnitBatchEditViewModel(vm: vm, unit: unit, part: part)
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         acUnits.content = vmSettings.arrUnits

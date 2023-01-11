@@ -28,12 +28,6 @@ class PhrasesUnitDetailViewController: UITableViewController {
     var item: MUnitPhrase { vmEdit.item }
     var itemEdit: MUnitPhraseEdit { vmEdit.itemEdit }
 
-    func startEdit(vm: PhrasesUnitViewModel, item: MUnitPhrase, wordid: Int) {
-        vmEdit = PhrasesUnitDetailViewModel(vm: vm, item: item, wordid: wordid) {
-            self.tableView.reloadData()
-        }
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
 

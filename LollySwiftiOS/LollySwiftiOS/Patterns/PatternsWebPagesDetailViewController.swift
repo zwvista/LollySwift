@@ -29,10 +29,6 @@ class PatternsWebPagesDetailViewController: UITableViewController {
     var complete: (() -> Void)?
     var item: MPatternWebPage!
 
-    func startEdit(item: MPatternWebPage) {
-        vmEdit = PatternsWebPagesDetailViewModel(item: item)
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         tfID.text = itemEdit.ID

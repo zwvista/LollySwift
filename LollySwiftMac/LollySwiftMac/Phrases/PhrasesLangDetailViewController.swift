@@ -18,22 +18,23 @@ class PhrasesLangDetailViewController: NSViewController, NSTableViewDataSource, 
     @IBOutlet weak var tableView: NSTableView!
     @IBOutlet weak var btnOK: NSButton!
 
-    var vm: PhrasesLangViewModel!
     var complete: (() -> Void)?
-    var item: MLangPhrase!
     var vmEdit: PhrasesLangDetailViewModel!
+    var item: MLangPhrase { vmEdit.item }
     var itemEdit: MLangPhraseEdit { vmEdit.itemEdit }
     var arrPhrases: [MUnitPhrase] { vmEdit.vmSingle?.arrPhrases ?? [MUnitPhrase]() }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        vmEdit = PhrasesLangDetailViewModel(vm: vm, item: item) {
-            self.tableView.reloadData()
-        }
         tfID.stringValue = itemEdit.ID
         _ = itemEdit.PHRASE <~> tfPhrase.rx.text.orEmpty
         _ = itemEdit.TRANSLATION <~> tfTranslation.rx.text.orEmpty
         _ = vmEdit.isOKEnabled ~> btnOK.rx.isEnabled
+
+        vmEdit.vmSingle.arrPhrases_.subscribe { [unowned self] _ in
+            tableView.reloadData()
+        } ~ rx.disposeBag
+
         btnOK.rx.tap.flatMap { [unowned self] in
             self.vmEdit.onOK()
         }.subscribe{ [unowned self] _ in

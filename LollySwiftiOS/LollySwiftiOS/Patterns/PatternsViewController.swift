@@ -131,7 +131,7 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
         super.prepare(for: segue, sender: sender)
         if let controller = (segue.destination as? UINavigationController)?.topViewController as? PatternsDetailViewController {
             let item = segue.identifier == "add" ? vm.newPattern() : sender as! MPattern
-            controller.startEdit(vm: vm, item: item)
+            controller.vmEdit = PatternsDetailViewModel(vm: vm, item: item)
         } else if let controller = segue.destination as? PatternsWebPagesBrowseViewController {
             controller.vm = PatternsWebPagesViewModel(settings: vmSettings, needCopy: false, item: sender as? MPattern)
         } else if let controller = segue.destination as? PatternsWebPagesListViewController {

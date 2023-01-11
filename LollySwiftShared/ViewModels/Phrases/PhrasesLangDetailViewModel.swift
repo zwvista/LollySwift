@@ -19,14 +19,14 @@ class PhrasesLangDetailViewModel: NSObject {
     var isAdd: Bool!
     let isOKEnabled = BehaviorRelay(value: false)
 
-    init(vm: PhrasesLangViewModel, item: MLangPhrase, complete: @escaping () -> Void) {
+    init(vm: PhrasesLangViewModel, item: MLangPhrase) {
         self.vm = vm
         self.item = item
         itemEdit = MLangPhraseEdit(x: item)
         isAdd = item.ID == 0
+        vmSingle = SinglePhraseViewModel(phrase: isAdd ? "" : item.PHRASE, settings: vm.vmSettings)
+        super.init()
         _ = itemEdit.PHRASE.map { !$0.isEmpty } ~> isOKEnabled
-        guard !isAdd else {return}
-        vmSingle = SinglePhraseViewModel(phrase: item.PHRASE, settings: vm.vmSettings, complete: complete)
     }
 
     func onOK() -> Single<()> {

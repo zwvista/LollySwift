@@ -22,10 +22,6 @@ class PatternsDetailViewController: UITableViewController {
     var vmEdit: PatternsDetailViewModel!
     var itemEdit: MPatternEdit { vmEdit.itemEdit }
 
-    func startEdit(vm: PatternsViewModel, item: MPattern) {
-        vmEdit = PatternsDetailViewModel(vm: vm, item: item)
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         tfID.text = itemEdit.ID
