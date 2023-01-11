@@ -63,8 +63,7 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
     // https://stackoverflow.com/questions/24219441/how-to-use-nstoolbar-in-xcode-6-and-storyboard
     @IBAction func addWord(_ sender: AnyObject) {
         let editVC = self.storyboard!.instantiateController(withIdentifier: "WordsLangDetailViewController") as! WordsLangDetailViewController
-        editVC.vm = vm
-        editVC.item = vm.newLangWord()
+        editVC.vmEdit = WordsLangDetailViewModel(vm: vm, item: vm.newLangWord())
         editVC.complete = { self.tvWords.reloadData(); self.addWord(self) }
         self.presentAsSheet(editVC)
     }
@@ -92,9 +91,8 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
 
     @IBAction func editWord(_ sender: AnyObject) {
         let editVC = self.storyboard!.instantiateController(withIdentifier: "WordsLangDetailViewController") as! WordsLangDetailViewController
-        editVC.vm = vm
         let i = tvWords.selectedRow
-        editVC.item = arrWords[i]
+        editVC.vmEdit = WordsLangDetailViewModel(vm: vm, item: arrWords[i])
         editVC.complete = {
             self.tvWords.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tvWords.tableColumns.count))
         }

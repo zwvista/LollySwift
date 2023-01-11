@@ -30,13 +30,7 @@ class WordsUnitDetailViewController: NSViewController, NSTableViewDataSource, NS
     var vmEdit: WordsUnitDetailViewModel!
     var item: MUnitWord { vmEdit.item }
     var itemEdit: MUnitWordEdit { vmEdit.itemEdit }
-    var arrWords: [MUnitWord] { vmEdit.vmSingle?.arrWords ?? [MUnitWord]() }
-
-    func startEdit(vm: WordsUnitViewModel, item: MUnitWord, phraseid: Int) {
-        vmEdit = WordsUnitDetailViewModel(vm: vm, item: item, phraseid: phraseid) {
-            self.tableView.reloadData()
-        }
-    }
+    var arrWords: [MUnitWord] { vmEdit.vmSingle.arrWords }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,6 +46,11 @@ class WordsUnitDetailViewController: NSViewController, NSTableViewDataSource, NS
         tfFamiID.stringValue = itemEdit.FAMIID
         _ = itemEdit.ACCURACY ~> tfAccuracy.rx.text.orEmpty
         _ = vmEdit.isOKEnabled ~> btnOK.rx.isEnabled
+
+        vmEdit.vmSingle.arrWords_.subscribe { [unowned self] _ in
+            tableView.reloadData()
+        } ~ rx.disposeBag
+
         btnOK.rx.tap.flatMap { [unowned self] in
             self.vmEdit.onOK()
         }.subscribe { [unowned self] _ in

@@ -19,14 +19,14 @@ class WordsLangDetailViewModel: NSObject {
     var isAdd: Bool!
     let isOKEnabled = BehaviorRelay(value: false)
 
-    init(vm: WordsLangViewModel, item: MLangWord, complete: @escaping () -> Void) {
+    init(vm: WordsLangViewModel, item: MLangWord) {
         self.vm = vm
         self.item = item
         itemEdit = MLangWordEdit(x: item)
         isAdd = item.ID == 0
         _ = itemEdit.WORD.map { !$0.isEmpty } ~> isOKEnabled
         guard !isAdd else {return}
-        vmSingle = SingleWordViewModel(word: item.WORD, settings: vm.vmSettings, complete: complete)
+        vmSingle = SingleWordViewModel(word: item.WORD, settings: vm.vmSettings)
     }
 
     func onOK() -> Single<()> {

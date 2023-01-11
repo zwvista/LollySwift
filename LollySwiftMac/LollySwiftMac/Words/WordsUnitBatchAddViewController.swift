@@ -25,10 +25,6 @@ class WordsUnitBatchAddViewController: NSViewController {
     var itemEdit: MUnitWordEdit { vmEdit.itemEdit }
     var complete: (() -> Void)?
 
-    func startEdit(vm: WordsUnitViewModel) {
-        vmEdit = WordsUnitBatchAddViewModel(vm: vm)
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         acUnits.content = item.textbook.arrUnits

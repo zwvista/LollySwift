@@ -20,15 +20,14 @@ class WordsUnitDetailViewModel: NSObject {
     var isAdd: Bool!
     let isOKEnabled = BehaviorRelay(value: false)
 
-    init(vm: WordsUnitViewModel, item: MUnitWord, phraseid: Int, complete: @escaping () -> Void) {
+    init(vm: WordsUnitViewModel, item: MUnitWord, phraseid: Int) {
         self.vm = vm
         self.item = item
         self.phraseid = phraseid
         itemEdit = MUnitWordEdit(x: item)
         isAdd = item.ID == 0
         _ = itemEdit.WORD.map { !$0.isEmpty } ~> isOKEnabled
-        guard !isAdd else {return}
-        vmSingle = SingleWordViewModel(word: item.WORD, settings: vm.vmSettings, complete: complete)
+        vmSingle = SingleWordViewModel(word: isAdd ? "" : item.WORD, settings: vm.vmSettings)
     }
 
     func onOK() -> Single<()> {

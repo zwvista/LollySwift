@@ -20,18 +20,14 @@ class WordsLangDetailViewController: NSViewController, NSTableViewDataSource, NS
     @IBOutlet weak var tableView: NSTableView!
     @IBOutlet weak var btnOK: NSButton!
 
-    var vm: WordsLangViewModel!
     var complete: (() -> Void)?
-    @objc var item: MLangWord!
     var vmEdit: WordsLangDetailViewModel!
+    var item: MLangWord { vmEdit.item }
     var itemEdit: MLangWordEdit { vmEdit.itemEdit }
     var arrWords: [MUnitWord] { vmEdit.vmSingle?.arrWords ?? [MUnitWord]() }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        vmEdit = WordsLangDetailViewModel(vm: vm, item: item) {
-            self.tableView.reloadData()
-        }
         tfID.stringValue = itemEdit.ID
         _ = itemEdit.WORD <~> tfWord.rx.text.orEmpty
         _ = itemEdit.NOTE <~> tfNote.rx.text.orEmpty

@@ -8,20 +8,20 @@
 
 import Foundation
 import RxSwift
+import RxRelay
 import RxBinding
 
 class SingleWordViewModel: NSObject {
 
     var vmSettings: SettingsViewModel
-    var arrWords = [MUnitWord]()
+    var arrWords_ = BehaviorRelay(value: [MUnitWord]())
+    var arrWords: [MUnitWord] { get { arrWords_.value } set { arrWords_.accept(newValue) } }
 
-    init(word: String, settings: SettingsViewModel, complete: @escaping () -> Void) {
+    init(word: String, settings: SettingsViewModel) {
         vmSettings = settings
         super.init()
-        MUnitWord.getDataByLangWord(langid: vmSettings.selectedLang.ID, word: word, arrTextbooks: vmSettings.arrTextbooks).map {
-            self.arrWords = $0
-        }.subscribe { _ in
-            complete()
-        } ~ rx.disposeBag
+        MUnitWord.getDataByLangWord(langid: vmSettings.selectedLang.ID, word: word, arrTextbooks: vmSettings.arrTextbooks).map { [unowned self] in
+            arrWords = $0
+        }.subscribe() ~ rx.disposeBag
     }
 }
