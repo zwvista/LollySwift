@@ -25,9 +25,7 @@ class WordsLangDetailViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        vmEdit = WordsLangDetailViewModel(vm: vm, item: item) {
-            self.tableView.reloadData()
-        }
+        vmEdit = WordsLangDetailViewModel(vm: vm, item: item)
         tfID.text = itemEdit.ID
         _ = itemEdit.WORD <~> tfWord.rx.textInput
         _ = itemEdit.NOTE <~> tfNote.rx.textInput

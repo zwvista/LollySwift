@@ -30,19 +30,13 @@ class WordsTextbookDetailViewController: UITableViewController {
     var item: MUnitWord { vmEdit.item }
     var itemEdit: MUnitWordEdit { vmEdit.itemEdit }
 
-    func startEdit(vm: WordsUnitViewModel, item: MUnitWord, phraseid: Int) {
-        vmEdit = WordsUnitDetailViewModel(vm: vm, item: item, phraseid: phraseid) {
-            self.tableView.reloadData()
-        }
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
         func configMenuUnit() {
             btnUnit.menu = UIMenu(title: "", options: .displayInline, children: vmSettings.arrUnits.map(\.label).enumerated().map { index, item in
                 UIAction(title: item, state: index == itemEdit.indexUNIT ? .on : .off) { [unowned self] _ in
-                    itemEdit.indexUNIT = index ?? -1
+                    itemEdit.indexUNIT = index
                     itemEdit.UNITSTR = item
                     configMenuUnit()
                 }
@@ -54,7 +48,7 @@ class WordsTextbookDetailViewController: UITableViewController {
         func configMenuPart() {
             btnPart.menu = UIMenu(title: "", options: .displayInline, children: vmSettings.arrParts.map(\.label).enumerated().map { index, item in
                 UIAction(title: item, state: index == itemEdit.indexPART ? .on : .off) { [unowned self] _ in
-                    itemEdit.indexPART = index ?? -1
+                    itemEdit.indexPART = index
                     itemEdit.PARTSTR = item
                     configMenuPart()
                 }

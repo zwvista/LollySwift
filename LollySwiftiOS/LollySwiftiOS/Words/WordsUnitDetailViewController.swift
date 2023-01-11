@@ -29,12 +29,6 @@ class WordsUnitDetailViewController: UITableViewController {
     var item: MUnitWord { vmEdit.item }
     var itemEdit: MUnitWordEdit { vmEdit.itemEdit }
 
-    func startEdit(vm: WordsUnitViewModel, item: MUnitWord, phraseid: Int) {
-        vmEdit = WordsUnitDetailViewModel(vm: vm, item: item, phraseid: phraseid) {
-            self.tableView.reloadData()
-        }
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
