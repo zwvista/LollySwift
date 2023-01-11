@@ -14,7 +14,7 @@ class WordsUnitDetailViewModel: NSObject, ObservableObject {
     var item: MUnitWord!
     var phraseid: Int
     var itemEdit: MUnitWordEdit!
-    var vmSingle: SingleWordViewModel!
+    var vmSingle: SingleWordViewModel
     var isAdd: Bool!
     @Published var isOKEnabled = false
 

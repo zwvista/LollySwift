@@ -14,7 +14,7 @@ class PhrasesUnitDetailViewModel: NSObject, ObservableObject {
     var item: MUnitPhrase!
     var wordid: Int
     var itemEdit: MUnitPhraseEdit!
-    var vmSingle: SinglePhraseViewModel!
+    var vmSingle: SinglePhraseViewModel
     var isAdd: Bool!
     @Published var isOKEnabled = false
 

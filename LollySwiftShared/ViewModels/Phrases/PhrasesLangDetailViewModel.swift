@@ -13,7 +13,7 @@ class PhrasesLangDetailViewModel: NSObject, ObservableObject {
     var vm: PhrasesLangViewModel!
     var item: MLangPhrase!
     var itemEdit: MLangPhraseEdit!
-    var vmSingle: SinglePhraseViewModel!
+    var vmSingle: SinglePhraseViewModel
     var isAdd: Bool!
     @Published var isOKEnabled = false
 

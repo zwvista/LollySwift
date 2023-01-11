@@ -13,7 +13,7 @@ class WordsLangDetailViewModel: NSObject, ObservableObject {
     var vm: WordsLangViewModel!
     var item: MLangWord!
     var itemEdit: MLangWordEdit!
-    var vmSingle: SingleWordViewModel!
+    var vmSingle: SingleWordViewModel
     var isAdd: Bool!
     @Published var isOKEnabled = false
 
