@@ -103,10 +103,10 @@ struct WordsLangView: View {
                 }
             }
             .sheet(isPresented: $showDetailEdit) {
-                WordsLangDetailView(vmEdit: WordsLangDetailViewModel(vm: vm, item: currentItem, complete: {}), showDetail: $showDetailEdit)
+                WordsLangDetailView(vmEdit: WordsLangDetailViewModel(vm: vm, item: currentItem), showDetail: $showDetailEdit)
             }
             .sheet(isPresented: $showDetailAdd) {
-                WordsLangDetailView(vmEdit: WordsLangDetailViewModel(vm: vm, item: vm.newLangWord(), complete: {}), showDetail: $showDetailAdd)
+                WordsLangDetailView(vmEdit: WordsLangDetailViewModel(vm: vm, item: vm.newLangWord()), showDetail: $showDetailAdd)
             }
         }
     }

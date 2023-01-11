@@ -18,16 +18,15 @@ class WordsUnitDetailViewModel: NSObject, ObservableObject {
     var isAdd: Bool!
     @Published var isOKEnabled = false
 
-    init(vm: WordsUnitViewModel, item: MUnitWord, phraseid: Int, complete: @escaping () -> Void) {
+    init(vm: WordsUnitViewModel, item: MUnitWord, phraseid: Int) {
         self.vm = vm
         self.item = item
         self.phraseid = phraseid
         itemEdit = MUnitWordEdit(x: item)
         isAdd = item.ID == 0
+        vmSingle = SingleWordViewModel(word: isAdd ? "" : item.WORD, settings: vm.vmSettings)
         super.init()
         itemEdit.$WORD.map { !$0.isEmpty }.eraseToAnyPublisher() ~> $isOKEnabled
-        guard !isAdd else {return}
-        vmSingle = SingleWordViewModel(word: item.WORD, settings: vm.vmSettings, complete: complete)
     }
 
     func onOK() async {

@@ -135,7 +135,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
 
     func addWord(phraseid: Int) {
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "WordsUnitDetailViewController") as! WordsUnitDetailViewController
-        detailVC.startEdit(vm: vm, item: vm.newUnitWord(), phraseid: phraseid)
+        detailVC.vmEdit = WordsUnitDetailViewModel(vm: vm, item: vm.newUnitWord(), phraseid: phraseid)
         detailVC.complete = { self.tvWords.reloadData(); self.addWord(self) }
         self.presentAsSheet(detailVC)
     }
@@ -171,7 +171,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "WordsUnitDetailViewController") as! WordsUnitDetailViewController
         let i = tvWords.selectedRow
         if i == -1 {return}
-        detailVC.startEdit(vm: vm, item: arrWords[tvWords.selectedRow], phraseid: 0)
+        detailVC.vmEdit = WordsUnitDetailViewModel(vm: vm, item: arrWords[tvWords.selectedRow], phraseid: 0)
         detailVC.complete = {
             self.tvWords.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tvWords.tableColumns.count))
         }
@@ -180,7 +180,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
 
     @IBAction func batchAdd(_ sender: AnyObject) {
         let batchVC = self.storyboard!.instantiateController(withIdentifier: "WordsUnitBatchAddViewController") as! WordsUnitBatchAddViewController
-        batchVC.startEdit(vm: vm)
+        batchVC.vmEdit = WordsUnitBatchAddViewModel(vm: vm)
         batchVC.complete = { self.doRefresh() }
         self.presentAsModalWindow(batchVC)
     }
@@ -189,7 +189,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
         let batchVC = self.storyboard!.instantiateController(withIdentifier: "WordsUnitBatchEditViewController") as! WordsUnitBatchEditViewController
         let i = tvWords.selectedRow
         let item = i == -1 ? nil : arrWords[i]
-        batchVC.startEdit(vm: vm, unit: item?.UNIT ?? vmSettings.USUNITTO, part: item?.PART ?? vmSettings.USPARTTO)
+        batchVC.vmEdit = WordsUnitBatchEditViewModel(vm: vm, unit: item?.UNIT ?? vmSettings.USUNITTO, part: item?.PART ?? vmSettings.USPARTTO)
         batchVC.complete = { self.doRefresh() }
         self.presentAsModalWindow(batchVC)
     }

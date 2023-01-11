@@ -119,7 +119,7 @@ struct WordsTextbookView: View {
                 WordsDictView(vm: WordsDictViewModel(settings: vmSettings, needCopy: false, arrWords: vm.arrWordsFiltered.map(\.WORD), currentWordIndex: vm.arrWordsFiltered.firstIndex(of: item)!) {})
             }
             .sheet(isPresented: $showDetailEdit) {
-                WordsTextbookDetailView(vmEdit: WordsUnitDetailViewModel(vm: vm, item: currentItem, phraseid: 0, complete: {}), showDetail: $showDetailEdit)
+                WordsTextbookDetailView(vmEdit: WordsUnitDetailViewModel(vm: vm, item: currentItem, phraseid: 0), showDetail: $showDetailEdit)
             }
         }
     }

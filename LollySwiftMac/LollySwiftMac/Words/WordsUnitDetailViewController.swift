@@ -29,14 +29,8 @@ class WordsUnitDetailViewController: NSViewController, NSTableViewDataSource, NS
     var vmEdit: WordsUnitDetailViewModel!
     var item: MUnitWord { vmEdit.item }
     var itemEdit: MUnitWordEdit { vmEdit.itemEdit }
-    var arrWords: [MUnitWord] { vmEdit.vmSingle?.arrWords ?? [MUnitWord]() }
+    var arrWords: [MUnitWord] { vmEdit.vmSingle.arrWords }
     var subscriptions = Set<AnyCancellable>()
-
-    func startEdit(vm: WordsUnitViewModel, item: MUnitWord, phraseid: Int) {
-        vmEdit = WordsUnitDetailViewModel(vm: vm, item: item, phraseid: phraseid) {
-            self.tableView.reloadData()
-        }
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,6 +45,11 @@ class WordsUnitDetailViewController: NSViewController, NSTableViewDataSource, NS
         itemEdit.$NOTE <~> tfNote.textProperty ~ subscriptions
         tfFamiID.stringValue = itemEdit.FAMIID
         itemEdit.$ACCURACY ~> (tfAccuracy, \.stringValue) ~ subscriptions
+
+        vmEdit.vmSingle.$arrWords.didSet.sink { [unowned self] _ in
+            tableView.reloadData()
+        } ~ subscriptions
+
         vmEdit.$isOKEnabled ~> (btnOK, \.isEnabled) ~ subscriptions
         btnOK.tapPublisher.sink { [unowned self] in
             Task {

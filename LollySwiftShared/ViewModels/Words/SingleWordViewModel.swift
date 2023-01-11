@@ -12,14 +12,13 @@ import Foundation
 class SingleWordViewModel: NSObject {
 
     var vmSettings: SettingsViewModel
-    var arrWords = [MUnitWord]()
+    @Published var arrWords = [MUnitWord]()
 
-    init(word: String, settings: SettingsViewModel, complete: @escaping () -> Void) {
+    init(word: String, settings: SettingsViewModel) {
         vmSettings = settings
         super.init()
         Task {
             arrWords = await MUnitWord.getDataByLangWord(langid: vmSettings.selectedLang.ID, word: word, arrTextbooks: vmSettings.arrTextbooks)
-            complete()
         }
     }
 }

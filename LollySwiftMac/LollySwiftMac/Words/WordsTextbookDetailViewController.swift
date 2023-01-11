@@ -33,12 +33,6 @@ class WordsTextbookDetailViewController: NSViewController, NSTableViewDataSource
     var arrWords: [MUnitWord] { vmEdit.vmSingle.arrWords }
     var subscriptions = Set<AnyCancellable>()
 
-    func startEdit(vm: WordsUnitViewModel, item: MUnitWord) {
-        vmEdit = WordsUnitDetailViewModel(vm: vm, item: item, phraseid: 0) {
-            self.tableView.reloadData()
-        }
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         acUnits.content = item.textbook.arrUnits

@@ -167,10 +167,10 @@ struct WordsUnitView: View {
                 Text("More")
             })
             .sheet(isPresented: $showDetailEdit) {
-                WordsUnitDetailView(vmEdit: WordsUnitDetailViewModel(vm: vm, item: currentItem, phraseid: 0, complete: {}), showDetail: $showDetailEdit)
+                WordsUnitDetailView(vmEdit: WordsUnitDetailViewModel(vm: vm, item: currentItem, phraseid: 0), showDetail: $showDetailEdit)
             }
             .sheet(isPresented: $showDetailAdd) {
-                WordsUnitDetailView(vmEdit: WordsUnitDetailViewModel(vm: vm, item: vm.newUnitWord(), phraseid: 0, complete: {}), showDetail: $showDetailAdd)
+                WordsUnitDetailView(vmEdit: WordsUnitDetailViewModel(vm: vm, item: vm.newUnitWord(), phraseid: 0), showDetail: $showDetailAdd)
             }
             .sheet(isPresented: $showBatchEdit) {
                 WordsUnitBatchEditView(vm: vm, showBatch: $showBatchEdit)

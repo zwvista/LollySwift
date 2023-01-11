@@ -28,10 +28,6 @@ class WordsUnitBatchEditViewController: NSViewController, NSTableViewDataSource,
     var arrWords: [MUnitWord] { vmEdit.vm.arrWords }
     var subscriptions = Set<AnyCancellable>()
 
-    func startEdit(vm: WordsUnitViewModel, unit: Int, part: Int) {
-        vmEdit = WordsUnitBatchEditViewModel(vm: vm, unit: unit, part: part)
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         acUnits.content = vmSettings.arrUnits
