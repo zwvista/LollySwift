@@ -10,11 +10,11 @@ import Foundation
 
 @MainActor
 class WordsLangDetailViewModel: NSObject, ObservableObject {
-    var vm: WordsLangViewModel!
-    var item: MLangWord!
-    var itemEdit: MLangWordEdit!
+    var vm: WordsLangViewModel
+    var item: MLangWord
+    var itemEdit: MLangWordEdit
     var vmSingle: SingleWordViewModel
-    var isAdd: Bool!
+    var isAdd: Bool
     @Published var isOKEnabled = false
 
     init(vm: WordsLangViewModel, item: MLangWord) {

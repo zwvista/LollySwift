@@ -10,11 +10,11 @@ import Foundation
 
 @MainActor
 class PhrasesLangDetailViewModel: NSObject, ObservableObject {
-    var vm: PhrasesLangViewModel!
-    var item: MLangPhrase!
-    var itemEdit: MLangPhraseEdit!
+    var vm: PhrasesLangViewModel
+    var item: MLangPhrase
+    var itemEdit: MLangPhraseEdit
     var vmSingle: SinglePhraseViewModel
-    var isAdd: Bool!
+    var isAdd: Bool
     @Published var isOKEnabled = false
 
     init(vm: PhrasesLangViewModel, item: MLangPhrase) {

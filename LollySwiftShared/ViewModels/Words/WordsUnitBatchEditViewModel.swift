@@ -10,7 +10,7 @@ import Foundation
 
 @MainActor
 class WordsUnitBatchEditViewModel: NSObject, ObservableObject {
-    var vm: WordsUnitViewModel!
+    var vm: WordsUnitViewModel
     @Published var isOKEnabled = false
 
     @Published var indexUNIT = 0

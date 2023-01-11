@@ -10,7 +10,7 @@ import Foundation
 
 @MainActor
 class PhrasesUnitBatchEditViewModel: NSObject, ObservableObject {
-    var vm: PhrasesUnitViewModel!
+    var vm: PhrasesUnitViewModel
     @Published var isOKEnabled = false
 
     @Published var indexUNIT = 0

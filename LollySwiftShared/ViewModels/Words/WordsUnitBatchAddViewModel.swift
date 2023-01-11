@@ -10,9 +10,9 @@ import Foundation
 
 @MainActor
 class WordsUnitBatchAddViewModel: NSObject, ObservableObject {
-    var vm: WordsUnitViewModel!
+    var vm: WordsUnitViewModel
     var item: MUnitWord!
-    var itemEdit: MUnitWordEdit!
+    var itemEdit: MUnitWordEdit
     @Published var isOKEnabled = false
 
     init(vm: WordsUnitViewModel) {

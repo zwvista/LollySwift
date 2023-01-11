@@ -10,12 +10,12 @@ import Foundation
 
 @MainActor
 class WordsUnitDetailViewModel: NSObject, ObservableObject {
-    var vm: WordsUnitViewModel!
-    var item: MUnitWord!
+    var vm: WordsUnitViewModel
+    var item: MUnitWord
     var phraseid: Int
-    var itemEdit: MUnitWordEdit!
+    var itemEdit: MUnitWordEdit
     var vmSingle: SingleWordViewModel
-    var isAdd: Bool!
+    var isAdd: Bool
     @Published var isOKEnabled = false
 
     init(vm: WordsUnitViewModel, item: MUnitWord, phraseid: Int) {

@@ -10,9 +10,9 @@ import Foundation
 
 @MainActor
 class PhrasesUnitBatchAddViewModel: NSObject, ObservableObject {
-    var vm: PhrasesUnitViewModel!
-    var item: MUnitPhrase!
-    var itemEdit: MUnitPhraseEdit!
+    var vm: PhrasesUnitViewModel
+    var item: MUnitPhrase
+    var itemEdit: MUnitPhraseEdit
     @Published var isOKEnabled = false
 
     init(vm: PhrasesUnitViewModel) {
