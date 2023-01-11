@@ -28,7 +28,7 @@ class PhrasesUnitDetailViewController: NSViewController, NSTableViewDataSource, 
     var vmEdit: PhrasesUnitDetailViewModel!
     var item: MUnitPhrase { vmEdit.item }
     var itemEdit: MUnitPhraseEdit { vmEdit.itemEdit }
-    var arrPhrases: [MUnitPhrase] { vmEdit.vmSingle?.arrPhrases ?? [MUnitPhrase]() }
+    var arrPhrases: [MUnitPhrase] { vmEdit.vmSingle.arrPhrases }
 
     override func viewDidLoad() {
         super.viewDidLoad()

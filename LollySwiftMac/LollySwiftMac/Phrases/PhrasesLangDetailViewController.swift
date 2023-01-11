@@ -22,7 +22,7 @@ class PhrasesLangDetailViewController: NSViewController, NSTableViewDataSource, 
     var vmEdit: PhrasesLangDetailViewModel!
     var item: MLangPhrase { vmEdit.item }
     var itemEdit: MLangPhraseEdit { vmEdit.itemEdit }
-    var arrPhrases: [MUnitPhrase] { vmEdit.vmSingle?.arrPhrases ?? [MUnitPhrase]() }
+    var arrPhrases: [MUnitPhrase] { vmEdit.vmSingle.arrPhrases }
 
     override func viewDidLoad() {
         super.viewDidLoad()

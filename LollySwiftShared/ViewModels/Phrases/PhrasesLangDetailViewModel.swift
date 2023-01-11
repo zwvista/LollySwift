@@ -15,7 +15,7 @@ class PhrasesLangDetailViewModel: NSObject {
     var vm: PhrasesLangViewModel!
     var item: MLangPhrase!
     var itemEdit: MLangPhraseEdit!
-    var vmSingle: SinglePhraseViewModel!
+    var vmSingle: SinglePhraseViewModel
     var isAdd: Bool!
     let isOKEnabled = BehaviorRelay(value: false)
 

@@ -16,7 +16,7 @@ class PhrasesUnitDetailViewModel: NSObject {
     var item: MUnitPhrase!
     var wordid: Int
     var itemEdit: MUnitPhraseEdit!
-    var vmSingle: SinglePhraseViewModel!
+    var vmSingle: SinglePhraseViewModel
     var isAdd: Bool!
     let isOKEnabled = BehaviorRelay(value: false)
 

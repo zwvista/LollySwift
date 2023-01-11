@@ -24,7 +24,7 @@ class WordsLangDetailViewController: NSViewController, NSTableViewDataSource, NS
     var vmEdit: WordsLangDetailViewModel!
     var item: MLangWord { vmEdit.item }
     var itemEdit: MLangWordEdit { vmEdit.itemEdit }
-    var arrWords: [MUnitWord] { vmEdit.vmSingle?.arrWords ?? [MUnitWord]() }
+    var arrWords: [MUnitWord] { vmEdit.vmSingle.arrWords }
 
     override func viewDidLoad() {
         super.viewDidLoad()
