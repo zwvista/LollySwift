@@ -291,14 +291,13 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
     }
 
     @IBAction func editPhrase(_ sender: AnyObject) {
-        let editVC = NSStoryboard(name: "Phrases", bundle: nil).instantiateController(withIdentifier: "PhrasesLangDetailViewController") as! PhrasesLangDetailViewController
-        editVC.vm = vmPhrasesLang
+        let detailVC = NSStoryboard(name: "Phrases", bundle: nil).instantiateController(withIdentifier: "PhrasesLangDetailViewController") as! PhrasesLangDetailViewController
         let i = tvPhrases.selectedRow
-        editVC.item = vmPhrasesLang.arrPhrases[i]
-        editVC.complete = {
+        detailVC.vmEdit = PhrasesLangDetailViewModel(vm: vmPhrasesLang, item: vmPhrasesLang.arrPhrases[i])
+        detailVC.complete = {
             self.tvPhrases.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tvPhrases.tableColumns.count))
         }
-        self.presentAsModalWindow(editVC)
+        self.presentAsModalWindow(detailVC)
     }
 }
 
