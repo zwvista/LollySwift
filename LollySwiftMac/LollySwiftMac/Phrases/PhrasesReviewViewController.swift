@@ -83,7 +83,7 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
 
     @IBAction func newTest(_ sender: AnyObject) {
         let optionsVC = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: "ReviewOptionsViewController") as! ReviewOptionsViewController
-        optionsVC.options = vm.options
+        optionsVC.vm = ReviewOptionsViewModel(options: vm.options)
         optionsVC.complete = { [unowned self] in
             Task {
                 await self.vm.newTest()

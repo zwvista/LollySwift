@@ -26,14 +26,12 @@ class ReviewOptionsViewController: NSViewController {
     @IBOutlet weak var stpReviewCount: NSStepper!
     @IBOutlet weak var btnOK: NSButton!
 
-    var options: MReviewOptions!
     var vm: ReviewOptionsViewModel!
     var complete: (() -> Void)?
     var subscriptions = Set<AnyCancellable>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        vm = ReviewOptionsViewModel(options: options)
 
         vm.optionsEdit.$mode <~> pubMode.selectedItemIndexProperty ~ subscriptions
         vm.optionsEdit.$shuffled <~> scOrder.isOnProperty ~ subscriptions
