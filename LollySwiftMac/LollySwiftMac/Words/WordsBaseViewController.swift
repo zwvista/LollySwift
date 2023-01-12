@@ -124,10 +124,8 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
             responder = tvWords
         }
         let word = vmWords.selectedWord.isEmpty ? vmWords.newWord : vmWords.selectedWord
-        Task {
-            for item in tabView.tabViewItems {
-                await (item.viewController as! WordsDictViewController).searchWord(word: word)
-            }
+        for item in tabView.tabViewItems {
+            (item.viewController as! WordsDictViewController).searchWord(word: word)
         }
     }
 
