@@ -1164,9 +1164,6 @@
 Gw
 </string>
                                 </buttonCell>
-                                <connections>
-                                    <action selector="clearAccuracy:" target="SKC-Ir-5Pa" id="L9g-6j-iIW"/>
-                                </connections>
                             </button>
                             <scrollView misplaced="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hUh-y8-kfm">
                                 <rect key="frame" x="20" y="56" width="449" height="100"/>
@@ -1627,6 +1624,7 @@ DQ
                     <connections>
                         <outlet property="acParts" destination="4rx-4t-GCT" id="10s-rQ-nlp"/>
                         <outlet property="acUnits" destination="4jg-QS-IHc" id="aXB-cf-fxk"/>
+                        <outlet property="btnClear" destination="rAh-F9-HhB" id="91t-IW-LS9"/>
                         <outlet property="btnOK" destination="GcE-DT-8Uw" id="cJ9-1B-nIR"/>
                         <outlet property="pubPart" destination="n2V-hM-5x9" id="JUC-ah-FXL"/>
                         <outlet property="pubUnit" destination="psf-65-rXr" id="yfV-bo-RH7"/>
@@ -3705,6 +3703,7 @@ Gw
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btnClear" destination="ktw-ai-5ph" id="lQF-rg-7ZH"/>
                         <outlet property="btnOK" destination="h5X-MY-d5T" id="KXu-CB-mDY"/>
                         <outlet property="tableView" destination="CXs-wG-WW3" id="CZq-5B-zhz"/>
                         <outlet property="tfAccuracy" destination="SVN-GQ-Yzj" id="5yt-Jd-XTu"/>
@@ -4921,9 +4920,6 @@ Gw
 Gw
 </string>
                                 </buttonCell>
-                                <connections>
-                                    <action selector="clearAccuracy:" target="diU-bf-I8H" id="H4E-BK-roX"/>
-                                </connections>
                             </button>
                             <scrollView misplaced="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QZG-nW-2Oe">
                                 <rect key="frame" x="20" y="51" width="449" height="100"/>
@@ -5369,6 +5365,7 @@ Gw
                     <connections>
                         <outlet property="acParts" destination="tp4-Da-a0Y" id="zkr-38-d3h"/>
                         <outlet property="acUnits" destination="Hij-Qg-D1e" id="d3v-S8-7aQ"/>
+                        <outlet property="btnClear" destination="Brp-7d-deA" id="xA2-ho-8HI"/>
                         <outlet property="btnOK" destination="JJ7-mW-EYz" id="vYe-aC-hbM"/>
                         <outlet property="pubPart" destination="cJc-1h-FqM" id="H99-YT-4El"/>
                         <outlet property="pubUnit" destination="rCm-AR-hfx" id="TdV-7T-Qmj"/>

@@ -23,6 +23,7 @@ class WordsUnitDetailViewController: NSViewController, NSTableViewDataSource, NS
     @IBOutlet weak var tfFamiID: NSTextField!
     @IBOutlet weak var tfAccuracy: NSTextField!
     @IBOutlet weak var tableView: NSTableView!
+    @IBOutlet weak var btnClear: NSButton!
     @IBOutlet weak var btnOK: NSButton!
 
     var complete: (() -> Void)?
@@ -45,17 +46,21 @@ class WordsUnitDetailViewController: NSViewController, NSTableViewDataSource, NS
         itemEdit.$NOTE <~> tfNote.textProperty ~ subscriptions
         tfFamiID.stringValue = itemEdit.FAMIID
         itemEdit.$ACCURACY ~> (tfAccuracy, \.stringValue) ~ subscriptions
+        vmEdit.$isOKEnabled ~> (btnOK, \.isEnabled) ~ subscriptions
 
         vmEdit.vmSingle.$arrWords.didSet.sink { [unowned self] _ in
             tableView.reloadData()
         } ~ subscriptions
 
-        vmEdit.$isOKEnabled ~> (btnOK, \.isEnabled) ~ subscriptions
+        btnClear.tapPublisher.sink { [unowned self] _ in
+            vmEdit.itemEdit.clearAccuracy()
+        } ~ subscriptions
+
         btnOK.tapPublisher.sink { [unowned self] in
             Task {
-                await self.vmEdit.onOK()
-                self.complete?()
-                self.dismiss(self.btnOK)
+                await vmEdit.onOK()
+                complete?()
+                dismiss(btnOK)
             }
         } ~ subscriptions
     }
@@ -65,12 +70,6 @@ class WordsUnitDetailViewController: NSViewController, NSTableViewDataSource, NS
         // https://stackoverflow.com/questions/24235815/cocoa-how-to-set-window-title-from-within-view-controller-in-swift
         (vmEdit.isAdd ? tfWord : tfNote).becomeFirstResponder()
         view.window?.title = vmEdit.isAdd ? "New Word" : item.WORD
-    }
-
-    @IBAction func clearAccuracy(_ sender: AnyObject) {
-        item.CORRECT = 0
-        item.TOTAL = 0
-        tfAccuracy.stringValue = item.ACCURACY
     }
 
     func numberOfRows(in tableView: NSTableView) -> Int {

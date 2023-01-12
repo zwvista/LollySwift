@@ -144,6 +144,8 @@ class MUnitWordEdit: ObservableObject {
     @Published var WORD: String
     @Published var NOTE: String
     let FAMIID: String
+    var CORRECT: Int
+    var TOTAL: Int
     @Published var ACCURACY: String
     @Published var WORDS = ""
 
@@ -159,7 +161,15 @@ class MUnitWordEdit: ObservableObject {
         WORD = x.WORD
         NOTE = x.NOTE
         FAMIID = "\(x.FAMIID)"
+        CORRECT = x.CORRECT
+        TOTAL = x.TOTAL
         ACCURACY = x.ACCURACY
+    }
+
+    func clearAccuracy() {
+        CORRECT = 0
+        TOTAL = 0
+        ACCURACY = CommonApi.getAccuracy(CORRECT: CORRECT, TOTAL: TOTAL)
     }
 
     func save(to x: MUnitWord) {
@@ -172,5 +182,7 @@ class MUnitWordEdit: ObservableObject {
         x.SEQNUM = Int(SEQNUM)!
         x.WORD = WORD
         x.NOTE = NOTE
+        x.CORRECT = CORRECT
+        x.TOTAL = TOTAL
     }
 }
