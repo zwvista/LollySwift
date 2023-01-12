@@ -62,7 +62,7 @@ class WordsTextbookDetailViewController: NSViewController, NSTableViewDataSource
             vmEdit.onOK()
         }.subscribe { [unowned self] _ in
             complete?()
-            dismiss(self.btnOK)
+            dismiss(btnOK)
         } ~ rx.disposeBag
     }
 

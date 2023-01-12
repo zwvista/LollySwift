@@ -48,7 +48,7 @@ class WordsLangDetailViewController: NSViewController, NSTableViewDataSource, NS
             vmEdit.onOK()
         }.subscribe { [unowned self] _ in
             complete?()
-            dismiss(self.btnOK)
+            dismiss(btnOK)
         } ~ rx.disposeBag
     }
 
