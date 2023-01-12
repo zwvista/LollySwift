@@ -34,9 +34,9 @@ class WordsUnitBatchAddViewController: NSViewController {
         itemEdit.$WORDS <~> tvWords.textProperty ~ subscriptions
         btnOK.tapPublisher.sink { [unowned self] in
             Task {
-                await self.vmEdit.onOK()
-                self.complete?()
-                self.dismiss(self.btnOK)
+                await vmEdit.onOK()
+                complete?()
+                dismiss(btnOK)
             }
         } ~ subscriptions
     }

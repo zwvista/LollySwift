@@ -2266,14 +2266,11 @@ Gw
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oxl-ww-6Dx">
-                                <rect key="frame" x="14" y="356" width="56" height="32"/>
+                                <rect key="frame" x="14" y="357" width="56" height="32"/>
                                 <buttonCell key="cell" type="push" title="All" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="8eh-xF-lc4">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
-                                <connections>
-                                    <action selector="checkItems:" target="eyu-wA-IBh" id="Q0p-3i-0E4"/>
-                                </connections>
                             </button>
                             <button verticalHuggingPriority="750" misplaced="YES" tag="1" translatesAutoresizingMaskIntoConstraints="NO" id="xKg-U6-UO5">
                                 <rect key="frame" x="70" y="356" width="73" height="32"/>
@@ -2281,9 +2278,6 @@ Gw
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
-                                <connections>
-                                    <action selector="checkItems:" target="eyu-wA-IBh" id="WQr-WR-6X6"/>
-                                </connections>
                             </button>
                             <button verticalHuggingPriority="750" misplaced="YES" tag="2" translatesAutoresizingMaskIntoConstraints="NO" id="Zkj-GP-kyf">
                                 <rect key="frame" x="143" y="356" width="136" height="32"/>
@@ -2291,9 +2285,6 @@ Gw
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
-                                <connections>
-                                    <action selector="checkItems:" target="eyu-wA-IBh" id="4kg-ZE-k1e"/>
-                                </connections>
                             </button>
                             <button verticalHuggingPriority="750" misplaced="YES" tag="3" translatesAutoresizingMaskIntoConstraints="NO" id="9Nd-hO-z08">
                                 <rect key="frame" x="279" y="356" width="151" height="32"/>
@@ -2301,9 +2292,6 @@ Gw
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
-                                <connections>
-                                    <action selector="checkItems:" target="eyu-wA-IBh" id="Uie-O1-wpe"/>
-                                </connections>
                             </button>
                         </subviews>
                         <constraints>
@@ -2341,7 +2329,11 @@ Gw
                     <connections>
                         <outlet property="acParts" destination="fVu-Eu-8la" id="Nvd-9F-6cn"/>
                         <outlet property="acUnits" destination="AZ5-BW-U8S" id="m3k-jW-RTb"/>
+                        <outlet property="btnCheckAll" destination="oxl-ww-6Dx" id="j6f-f4-jxH"/>
+                        <outlet property="btnCheckSelected" destination="Zkj-GP-kyf" id="pRG-m1-qMK"/>
                         <outlet property="btnOK" destination="25w-P2-1xV" id="MJu-hw-GeG"/>
+                        <outlet property="btnUncheckAll" destination="xKg-U6-UO5" id="EJa-D8-51G"/>
+                        <outlet property="btnUncheckSelected" destination="9Nd-hO-z08" id="kGF-b1-9cI"/>
                         <outlet property="chkPart" destination="d9b-6J-0IQ" id="2JU-97-fjI"/>
                         <outlet property="chkSeqNum" destination="giE-1J-gQm" id="x6M-ie-MYH"/>
                         <outlet property="chkUnit" destination="V1h-DM-a3d" id="G0g-yY-6Bk"/>
