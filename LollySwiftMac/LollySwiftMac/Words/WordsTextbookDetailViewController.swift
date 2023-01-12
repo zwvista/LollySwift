@@ -25,6 +25,7 @@ class WordsTextbookDetailViewController: NSViewController, NSTableViewDataSource
     @IBOutlet weak var tfFamiID: NSTextField!
     @IBOutlet weak var tfAccuracy: NSTextField!
     @IBOutlet weak var tableView: NSTableView!
+    @IBOutlet weak var btnClear: NSButton!
     @IBOutlet weak var btnOK: NSButton!
 
     var complete: (() -> Void)?
@@ -53,11 +54,15 @@ class WordsTextbookDetailViewController: NSViewController, NSTableViewDataSource
             tableView.reloadData()
         } ~ rx.disposeBag
 
+        btnClear.rx.tap.subscribe { [unowned self] _ in
+            vmEdit.itemEdit.clearAccuracy()
+        } ~ rx.disposeBag
+
         btnOK.rx.tap.flatMap { [unowned self] in
-            self.vmEdit.onOK()
+            vmEdit.onOK()
         }.subscribe { [unowned self] _ in
-            self.complete?()
-            self.dismiss(self.btnOK)
+            complete?()
+            dismiss(self.btnOK)
         } ~ rx.disposeBag
     }
 
@@ -66,12 +71,6 @@ class WordsTextbookDetailViewController: NSViewController, NSTableViewDataSource
         // https://stackoverflow.com/questions/24235815/cocoa-how-to-set-window-title-from-within-view-controller-in-swift
         (vmEdit.isAdd ? tfWord : tfNote).becomeFirstResponder()
         view.window?.title = item.WORD
-    }
-
-    @IBAction func clearAccuracy(_ sender: AnyObject) {
-        item.CORRECT = 0
-        item.TOTAL = 0
-        tfAccuracy.stringValue = item.ACCURACY
     }
 
     func numberOfRows(in tableView: NSTableView) -> Int {

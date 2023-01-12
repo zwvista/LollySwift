@@ -143,6 +143,8 @@ class MUnitWordEdit {
     let WORD: BehaviorRelay<String>
     let NOTE: BehaviorRelay<String>
     let FAMIID: String
+    var CORRECT: Int
+    var TOTAL: Int
     let ACCURACY: BehaviorRelay<String>
     let WORDS = BehaviorRelay(value: "")
 
@@ -158,7 +160,15 @@ class MUnitWordEdit {
         WORD = BehaviorRelay(value: x.WORD)
         NOTE = BehaviorRelay(value: x.NOTE)
         FAMIID = "\(x.FAMIID)"
+        CORRECT = x.CORRECT
+        TOTAL = x.TOTAL
         ACCURACY = BehaviorRelay(value: x.ACCURACY)
+    }
+
+    func clearAccuracy() {
+        CORRECT = 0
+        TOTAL = 0
+        ACCURACY.accept(CommonApi.getAccuracy(CORRECT: CORRECT, TOTAL: TOTAL))
     }
 
     func save(to x: MUnitWord) {
@@ -171,5 +181,7 @@ class MUnitWordEdit {
         x.SEQNUM = Int(SEQNUM.value)!
         x.WORD = WORD.value
         x.NOTE = NOTE.value
+        x.CORRECT = CORRECT
+        x.TOTAL = TOTAL
     }
 }
