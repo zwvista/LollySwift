@@ -32,7 +32,8 @@ struct SearchView: View {
                     }
                 }
                 .modifier(PickerModifier(backgroundColor: Color.color2))
-                .onChange(of: vm.selectedDictReferenceIndex) { _ in
+                .onChange(of: vm.selectedDictReferenceIndex) { n in
+                    guard n != -1 else {return}
                     dictStore.dict = vmSettings.selectedDictReference
                     dictStore.searchDict()
                 }

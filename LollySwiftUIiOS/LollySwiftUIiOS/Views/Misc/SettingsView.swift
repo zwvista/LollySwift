@@ -64,16 +64,41 @@ struct SettingsView: View {
                         Text(vm.arrParts[$0].label)
                     }
                 }
+                .disabled(!vm.partFromEnabled)
+                HStack {
+                    Picker("", selection: $vm.toType) {
+                        ForEach(SettingsViewModel.arrToTypes.indices, id: \.self) {
+                            Text(SettingsViewModel.arrToTypes[$0])
+                        }
+                    }
+                    .labelsHidden()
+                    Spacer()
+                    Button("Previous") {
+                        Task {
+                            await vm.previousUnitPart()
+                        }
+                    }
+                    .disabled(!vm.previousEnabled)
+                    Spacer()
+                    Button("Next") {
+                        Task {
+                            await vm.nextUnitPart()
+                        }
+                    }
+                    .disabled(!vm.nextEnabled)
+                }
                 Picker("Unit", selection: $vm.selectedUnitToIndex) {
                     ForEach(vm.arrUnits.indices, id: \.self) {
                         Text(vm.arrUnits[$0].label)
                     }
                 }
+                .disabled(!vm.unitToEnabled)
                 Picker("Part", selection: $vm.selectedPartToIndex) {
                     ForEach(vm.arrParts.indices, id: \.self) {
                         Text(vm.arrParts[$0].label)
                     }
                 }
+                .disabled(!vm.partToEnabled)
             }
         }.onAppear {
             Task {
