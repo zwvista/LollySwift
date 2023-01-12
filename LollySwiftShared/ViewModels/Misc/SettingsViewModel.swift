@@ -119,7 +119,8 @@ class SettingsViewModel: NSObject {
     var selectedDictReferenceIndex_ = BehaviorRelay(value: -1)
     var selectedDictReferenceIndex: Int { get { selectedDictReferenceIndex_.value } set { selectedDictReferenceIndex_.accept(newValue) } }
     var selectedDictReference: MDictionary { arrDictsReference.indices ~= selectedDictReferenceIndex ? arrDictsReference[selectedDictReferenceIndex] : MDictionary() }
-    var selectedDictsReferenceIndexes = [Int]()
+    var selectedDictsReferenceIndexes_ = BehaviorRelay(value: [Int]())
+    var selectedDictsReferenceIndexes: [Int] { get { selectedDictsReferenceIndexes_.value } set { selectedDictsReferenceIndexes_.accept(newValue) } }
     var selectedDictsReference: [MDictionary] { selectedDictsReferenceIndexes.map { arrDictsReference[$0] } }
 
     var arrDictsNote_ = BehaviorRelay(value: [MDictionary]())

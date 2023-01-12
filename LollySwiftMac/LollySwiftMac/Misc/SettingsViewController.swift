@@ -49,11 +49,23 @@ class SettingsViewController: NSViewController, NSTableViewDataSource, NSTableVi
             acLanguages.content = vm.arrLanguages
         } ~ rx.disposeBag
 
-        vm.selectedLangIndex_.subscribe { [unowned self] _ in
-            acVoices.content = vm.arrMacVoices
+        vm.selectedDictsReferenceIndexes_.subscribe { [unowned self] _ in
             tvDictsReference.reloadData()
+        } ~ rx.disposeBag
+
+        vm.arrMacVoices_.subscribe { [unowned self] _ in
+            acVoices.content = vm.arrMacVoices
+        } ~ rx.disposeBag
+
+        vm.arrDictsNote_.subscribe { [unowned self] _ in
             acDictsNote.content = vm.arrDictsNote
+        } ~ rx.disposeBag
+
+        vm.arrDictsTranslation_.subscribe { [unowned self] _ in
             acDictsTranslation.content = vm.arrDictsTranslation
+        } ~ rx.disposeBag
+
+        vm.arrTextbooks_.subscribe { [unowned self] _ in
             acTextbooks.content = vm.arrTextbooks
         } ~ rx.disposeBag
 
