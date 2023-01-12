@@ -26,13 +26,11 @@ class ReviewOptionsViewController: NSViewController {
     @IBOutlet weak var stpReviewCount: NSStepper!
     @IBOutlet weak var btnOK: NSButton!
 
-    var options: MReviewOptions!
     var vm: ReviewOptionsViewModel!
     var complete: (() -> Void)?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        vm = ReviewOptionsViewModel(options: options)
 
         _ = vm.optionsEdit.mode_ <~> pubMode.rx.selectedItemIndex
         _ = vm.optionsEdit.shuffled <~> scOrder.rx.isOn

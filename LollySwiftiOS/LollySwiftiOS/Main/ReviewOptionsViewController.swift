@@ -25,13 +25,11 @@ class ReviewOptionsViewController: UITableViewController {
     @IBOutlet weak var tfGroupCount: UITextField!
     @IBOutlet weak var tfReviewCount: UITextField!
 
-    var options: MReviewOptions!
     var vm: ReviewOptionsViewModel!
     var complete: (() -> Void)?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        vm = ReviewOptionsViewModel(options: options)
 
         func configMenu() {
             btnReviewMode.menu = UIMenu(title: "", options: .displayInline, children: SettingsViewModel.reviewModes.enumerated().map { index, item in
