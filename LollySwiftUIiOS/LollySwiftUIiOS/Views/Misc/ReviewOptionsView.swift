@@ -10,6 +10,7 @@ import SwiftUI
 struct ReviewOptionsView: View {
     @ObservedObject var vm: ReviewOptionsViewModel
     @Binding var showOptions: Bool
+    @Binding var showOptionsDone: Bool
     var body: some View {
         NavigationView {
             Form {
@@ -81,6 +82,7 @@ struct ReviewOptionsView: View {
             }, trailing: Button("Done") {
                 vm.onOK()
                 showOptions.toggle()
+                showOptionsDone.toggle()
             })
         }
     }
@@ -88,6 +90,6 @@ struct ReviewOptionsView: View {
 
 struct ReviewOptionsView_Previews: PreviewProvider {
     static var previews: some View {
-        ReviewOptionsView(vm: ReviewOptionsViewModel(options: MReviewOptions()), showOptions: .constant(true))
+        ReviewOptionsView(vm: ReviewOptionsViewModel(options: MReviewOptions()), showOptions: .constant(true), showOptionsDone: .constant(false))
     }
 }

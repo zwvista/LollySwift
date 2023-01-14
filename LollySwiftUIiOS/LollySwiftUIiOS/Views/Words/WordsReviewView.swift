@@ -9,7 +9,8 @@ import SwiftUI
 
 struct WordsReviewView: View {
     @StateObject var vm = WordsReviewViewModel(settings: vmSettings, needCopy: false) {}
-    @State var showOptons = true
+    @State var showOptions = true
+    @State var showOptionsDone = false
     var body: some View {
         VStack {
             HStack {
@@ -62,14 +63,21 @@ struct WordsReviewView: View {
             Spacer()
         }
         .padding()
-        .sheet(isPresented: $showOptons) {
-            ReviewOptionsView(vm: ReviewOptionsViewModel(options: vm.options), showOptions: $showOptons)
+        .onAppear {
+            if showOptionsDone {
+                showOptionsDone.toggle()
+                Task {
+                    await vm.newTest()
+                }
+            }
         }
-    }
-}
-
-struct WordsReviewView_Previews: PreviewProvider {
-    static var previews: some View {
-        WordsReviewView()
+        .toolbar {
+            Button("New Test") {
+                showOptions.toggle()
+            }
+        }
+        .sheet(isPresented: $showOptions) {
+            ReviewOptionsView(vm: ReviewOptionsViewModel(options: vm.options), showOptions: $showOptions, showOptionsDone: $showOptionsDone)
+        }
     }
 }
