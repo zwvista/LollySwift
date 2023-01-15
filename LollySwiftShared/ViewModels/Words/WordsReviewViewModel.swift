@@ -9,6 +9,7 @@
 import Foundation
 import Combine
 
+@MainActor
 class WordsReviewViewModel: WordsBaseViewModel {
 
     var arrWords = [MUnitWord]()
@@ -61,7 +62,7 @@ class WordsReviewViewModel: WordsBaseViewModel {
         index = 0
         arrWords.removeAll()
         arrCorrectIDs.removeAll()
-        subscriptionTimer?.cancel()
+        stopTimer()
         isSpeaking = options.speakingEnabled
         moveForward = options.moveForward
         moveForwardHidden = isTestMode
@@ -199,8 +200,12 @@ class WordsReviewViewModel: WordsBaseViewModel {
             accuracyString = currentItem!.ACCURACY
             translationString = await getTranslation()
         } else {
-            subscriptionTimer?.cancel()
+            stopTimer()
         }
+    }
+
+    func stopTimer() {
+        subscriptionTimer?.cancel()
     }
 
     deinit {

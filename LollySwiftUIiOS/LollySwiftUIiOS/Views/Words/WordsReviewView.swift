@@ -12,6 +12,17 @@ struct WordsReviewView: View {
     @State var showOptions = true
     @State var showOptionsDone = false
     var body: some View {
+        // https://stackoverflow.com/questions/62103788/swift-didset-for-var-that-gets-changed-in-child-with-binding
+        let showOptionsDoneBinding = Binding(
+            get: { showOptionsDone },
+            set: { v in
+                guard v else {return}
+                Task {
+                    await vm.newTest()
+                }
+                showOptionsDone = false
+            }
+        )
         VStack {
             HStack {
                 Text(vm.indexString)
@@ -39,7 +50,9 @@ struct WordsReviewView: View {
                 Toggle("", isOn: $vm.isSpeaking).labelsHidden()
                 Spacer()
                 Button(vm.checkNextTitle) {
-                    
+                    Task {
+                        await vm.check(toNext: true)
+                    }
                 }
             }
             HStack {
@@ -50,26 +63,31 @@ struct WordsReviewView: View {
                 Toggle("", isOn: $vm.moveForward).labelsHidden()
                 Spacer()
                 Button(vm.checkPrevTitle) {
-                    
+                    Task {
+                        await vm.check(toNext: false)
+                    }
                 }
             }
             Spacer()
+                .frame(height: 50)
             Text(vm.wordTargetString)
                 .isHidden(vm.wordTargetHidden)
+                .font(.system(size: 50))
+                .foregroundColor(Color.color2)
             Text(vm.noteTargetString)
                 .isHidden(vm.noteTargetHidden)
-            Text(vm.translationString)
+                .font(.system(size: 40))
+                .foregroundColor(Color.color3)
+            TextField("", text: $vm.translationString, axis: .vertical)
+                .lineLimit(10)
             TextField("", text: $vm.wordInputString)
+                .font(.system(size: 60))
+                .textFieldStyle(.roundedBorder)
             Spacer()
         }
         .padding()
-        .onAppear {
-            if showOptionsDone {
-                showOptionsDone.toggle()
-                Task {
-                    await vm.newTest()
-                }
-            }
+        .onDisappear {
+            vm.stopTimer()
         }
         .toolbar {
             Button("New Test") {
@@ -77,7 +95,7 @@ struct WordsReviewView: View {
             }
         }
         .sheet(isPresented: $showOptions) {
-            ReviewOptionsView(vm: ReviewOptionsViewModel(options: vm.options), showOptions: $showOptions, showOptionsDone: $showOptionsDone)
+            ReviewOptionsView(vm: ReviewOptionsViewModel(options: vm.options), showOptions: $showOptions, showOptionsDone: showOptionsDoneBinding)
         }
     }
 }

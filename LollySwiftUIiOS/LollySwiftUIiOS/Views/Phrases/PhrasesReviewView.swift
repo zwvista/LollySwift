@@ -12,6 +12,16 @@ struct PhrasesReviewView: View {
     @State var showOptions = true
     @State var showOptionsDone = false
     var body: some View {
+        let showOptionsDoneBinding = Binding(
+            get: { showOptionsDone },
+            set: { v in
+                guard v else {return}
+                Task {
+                    await vm.newTest()
+                }
+                showOptionsDone = false
+            }
+        )
         VStack {
             HStack {
                 Text(vm.indexString)
@@ -36,7 +46,7 @@ struct PhrasesReviewView: View {
                 Toggle("", isOn: $vm.isSpeaking).labelsHidden()
                 Spacer()
                 Button(vm.checkNextTitle) {
-                    
+                    vm.check(toNext: true)
                 }
             }
             HStack {
@@ -47,24 +57,24 @@ struct PhrasesReviewView: View {
                 Toggle("", isOn: $vm.moveForward).labelsHidden()
                 Spacer()
                 Button(vm.checkPrevTitle) {
-                    
+                    vm.check(toNext: false)
                 }
             }
             Spacer()
+                .frame(height: 50)
             Text(vm.phraseTargetString)
                 .isHidden(vm.phraseTargetHidden)
+                .font(.system(size: 50))
+                .foregroundColor(Color.color2)
             Text(vm.translationString)
+                .font(.system(size: 50))
+                .foregroundColor(Color.color3)
             TextField("", text: $vm.phraseInputString)
             Spacer()
         }
         .padding()
-        .onAppear {
-            if showOptionsDone {
-                showOptionsDone.toggle()
-                Task {
-                    await vm.newTest()
-                }
-            }
+        .onDisappear {
+            vm.stopTimer()
         }
         .toolbar {
             Button("New Test") {
