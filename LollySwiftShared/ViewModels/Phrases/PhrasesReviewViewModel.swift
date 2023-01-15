@@ -58,7 +58,7 @@ class PhrasesReviewViewModel: NSObject {
         index = 0
         arrPhrases.removeAll()
         arrCorrectIDs.removeAll()
-        subscriptionTimer?.dispose()
+        stopTimer()
         isSpeaking.accept(options.speakingEnabled)
         moveForward.accept(options.moveForward)
         moveForwardHidden.accept(isTestMode)
@@ -160,12 +160,16 @@ class PhrasesReviewViewModel: NSObject {
         if hasCurrent {
             indexString.accept("\(index + 1)/\(count)")
         } else {
-            subscriptionTimer?.dispose()
+            stopTimer()
         }
+    }
+
+    func stopTimer() {
+        subscriptionTimer?.dispose()
     }
 
     deinit {
         print("DEBUG: \(self.className) deinit")
-        subscriptionTimer?.dispose()
+        stopTimer()
     }
 }

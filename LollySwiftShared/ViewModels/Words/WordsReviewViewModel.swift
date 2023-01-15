@@ -63,7 +63,7 @@ class WordsReviewViewModel: WordsBaseViewModel {
         index = 0
         arrWords.removeAll()
         arrCorrectIDs.removeAll()
-        subscriptionTimer?.dispose()
+        stopTimer()
         isSpeaking.accept(options.speakingEnabled)
         moveForward.accept(options.moveForward)
         moveForwardHidden.accept(isTestMode)
@@ -206,12 +206,16 @@ class WordsReviewViewModel: WordsBaseViewModel {
                 self.translationString.accept($0)
             } ~ rx.disposeBag
         } else {
-            subscriptionTimer?.dispose()
+            stopTimer()
         }
+    }
+
+    func stopTimer() {
+        subscriptionTimer?.dispose()
     }
 
     deinit {
         print("DEBUG: \(self.className) deinit")
-        subscriptionTimer?.dispose()
+        stopTimer()
     }
 }

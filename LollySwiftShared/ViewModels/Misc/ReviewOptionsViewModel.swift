@@ -12,7 +12,6 @@ import RxRelay
 class ReviewOptionsViewModel: NSObject {
     var options: MReviewOptions!
     var optionsEdit: MReviewOptionsEdit!
-    let showOptionsDone = BehaviorRelay(value: false)
 
     init(options: MReviewOptions) {
         self.options = options
@@ -21,6 +20,5 @@ class ReviewOptionsViewModel: NSObject {
 
     func onOK() {
         optionsEdit.save(to: options)
-        showOptionsDone.accept(true)
     }
 }

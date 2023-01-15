@@ -88,7 +88,7 @@ class WordsReviewViewController: WordsBaseViewController, NSTextFieldDelegate {
     override func viewWillDisappear() {
         super.viewWillDisappear()
         wc = nil
-        vm.subscriptionTimer?.dispose()
+        vm.stopTimer()
     }
 
     @IBAction func newTest(_ sender: AnyObject) {
