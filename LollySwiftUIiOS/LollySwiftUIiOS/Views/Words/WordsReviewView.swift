@@ -79,10 +79,11 @@ struct WordsReviewView: View {
                 .font(.system(size: 40))
                 .foregroundColor(Color.color3)
             TextField("", text: $vm.translationString, axis: .vertical)
-                .lineLimit(10)
+                .frame(height: 150)
             TextField("", text: $vm.wordInputString)
                 .font(.system(size: 60))
                 .textFieldStyle(.roundedBorder)
+                .border(Color.blue)
             Spacer()
         }
         .padding()

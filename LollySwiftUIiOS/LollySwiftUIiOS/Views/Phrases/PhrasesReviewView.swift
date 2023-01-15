@@ -70,6 +70,9 @@ struct PhrasesReviewView: View {
                 .font(.system(size: 50))
                 .foregroundColor(Color.color3)
             TextField("", text: $vm.phraseInputString)
+                .font(.system(size: 60))
+                .textFieldStyle(.roundedBorder)
+                .border(Color.blue)
             Spacer()
         }
         .padding()
@@ -82,7 +85,7 @@ struct PhrasesReviewView: View {
             }
         }
         .sheet(isPresented: $showOptions) {
-            ReviewOptionsView(vm: ReviewOptionsViewModel(options: vm.options), showOptions: $showOptions, showOptionsDone: $showOptionsDone)
+            ReviewOptionsView(vm: ReviewOptionsViewModel(options: vm.options), showOptions: $showOptions, showOptionsDone: showOptionsDoneBinding)
         }
     }
 }
