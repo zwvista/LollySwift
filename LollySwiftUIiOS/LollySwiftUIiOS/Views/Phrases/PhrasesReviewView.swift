@@ -38,7 +38,7 @@ struct PhrasesReviewView: View {
             }
             HStack {
                 Button("Speak") {
-                    
+                    AppDelegate.speak(string: vm.currentPhrase)
                 }
                 Spacer()
                 // https://stackoverflow.com/questions/62698587/swiftui-how-to-change-text-alignment-of-label-in-toggle
