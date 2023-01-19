@@ -37,7 +37,7 @@ struct PatternsDetailView: View {
             .navigationBarItems(leading: Button("Cancel", role: .cancel) {
                 showDetail.toggle()
             }, trailing: Button("Done") {
-                Task{
+                Task {
                     await vmEdit.onOK()
                     showDetail.toggle()
                 }

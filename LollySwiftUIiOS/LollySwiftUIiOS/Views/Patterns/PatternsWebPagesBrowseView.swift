@@ -37,7 +37,7 @@ struct PatternsWebPagesBrowseView: View {
         }
         .navigationTitle("Pattern Web Pages (Browse)")
         .onAppear {
-            Task{
+            Task {
                 await vm.getWebPages()
                 currentWebPageChanged()
             }

@@ -48,7 +48,7 @@ struct PatternsWebPagesListView: View {
         }
         .navigationTitle("Pattern Web Pages (Edit)")
         .onAppear {
-            Task{
+            Task {
                 await vm.getWebPages()
             }
         }

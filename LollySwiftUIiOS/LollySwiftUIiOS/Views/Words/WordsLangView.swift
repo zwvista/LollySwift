@@ -13,7 +13,6 @@ struct WordsLangView: View {
     @State var showDetail = false
     @State var showDetailEdit = false
     @State var showDetailAdd = false
-    @State var showDict = false
     @State var showItemMore = false
     @State var showDelete = false
     @State var currentItem = MLangWord()
@@ -43,7 +42,7 @@ struct WordsLangView: View {
                         Image(systemName: "info.circle")
                             .foregroundColor(.blue)
                             .onTapGesture {
-                                showDict.toggle()
+                                navPath.append(item)
                             }
                     }
                     .contentShape(Rectangle())
@@ -101,6 +100,9 @@ struct WordsLangView: View {
                         showDetailAdd.toggle()
                     }
                 }
+            }
+            .navigationDestination(for: MLangWord.self) { item in
+                WordsDictView(vm: WordsDictViewModel(settings: vmSettings, needCopy: false, arrWords: vm.arrWordsFiltered.map(\.WORD), currentWordIndex: vm.arrWordsFiltered.firstIndex(of: item)!) {})
             }
             .sheet(isPresented: $showDetailEdit) {
                 WordsLangDetailView(vmEdit: WordsLangDetailViewModel(vm: vm, item: currentItem), showDetail: $showDetailEdit)
