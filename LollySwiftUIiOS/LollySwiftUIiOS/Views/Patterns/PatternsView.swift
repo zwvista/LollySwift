@@ -43,7 +43,7 @@ struct PatternsView: View {
                             .foregroundColor(.blue)
                             .onTapGesture {
                                 currentItem = item
-                                navPath.append(0)
+                                navPath.append(BrowseViewTag())
                             }
                     }
                     .contentShape(Rectangle())
@@ -81,10 +81,10 @@ struct PatternsView: View {
                     showDetailEdit.toggle()
                 }
                 Button("Browse Web Pages") {
-                    navPath.append(0)
+                    navPath.append(BrowseViewTag())
                 }
                 Button("Edit Web Pages") {
-                    navPath.append("")
+                    navPath.append(ListViewTag())
                 }
                 Button("Copy Pattern") {
                     iOSApi.copyText(currentItem.PATTERN)
@@ -95,13 +95,13 @@ struct PatternsView: View {
             }, message: {
                 Text(currentItem.PATTERN)
             })
-            .navigationDestination(for: Int.self) { item in
+            .navigationDestination(for: BrowseViewTag.self) { _ in
                 PatternsWebPagesBrowseView(vm: PatternsWebPagesViewModel(settings: vmSettings, needCopy: false, item: currentItem))
             }
-            .navigationDestination(for: String.self) { item in
+            .navigationDestination(for: ListViewTag.self) { _ in
                 PatternsWebPagesListView(vm: PatternsWebPagesViewModel(settings: vmSettings, needCopy: false, item: currentItem))
             }
-           .toolbar {
+            .toolbar {
                 ToolbarItemGroup {
                     Button("Add") {
                         showDetailAdd.toggle()
@@ -116,4 +116,7 @@ struct PatternsView: View {
             }
         }
     }
+
+    struct BrowseViewTag: Hashable {}
+    struct ListViewTag: Hashable {}
 }
