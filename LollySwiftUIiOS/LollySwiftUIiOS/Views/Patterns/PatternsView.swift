@@ -14,7 +14,6 @@ struct PatternsView: View {
     @State var showDetailAdd = false
     @State var showItemMore = false
     @State var showDelete = false
-    @State var showBrowse = false
     // https://stackoverflow.com/questions/59235879/how-to-show-an-alert-when-the-user-taps-on-the-list-row-in-swiftui
     @State var currentItem = MPattern()
     var body: some View {
@@ -43,7 +42,7 @@ struct PatternsView: View {
                         Image(systemName: "info.circle")
                             .foregroundColor(.blue)
                             .onTapGesture {
-                                showBrowse = true
+                                vm.showBrowse = true
                                 navPath.append(item)
                             }
                     }
@@ -82,11 +81,11 @@ struct PatternsView: View {
                     showDetailEdit.toggle()
                 }
                 Button("Browse Web Pages") {
-                    showBrowse = true
+                    vm.showBrowse = true
                     navPath.append(currentItem)
                 }
                 Button("Edit Web Pages") {
-                    showBrowse = false
+                    vm.showBrowse = false
                     navPath.append(currentItem)
                 }
                 Button("Copy Pattern") {
@@ -99,7 +98,7 @@ struct PatternsView: View {
                 Text(currentItem.PATTERN)
             })
             .navigationDestination(for: MPattern.self) { item in
-                if showBrowse {
+                if vm.showBrowse {
                     PatternsWebPagesBrowseView(vm: PatternsWebPagesViewModel(settings: vmSettings, needCopy: false, item: item))
                 } else {
                     PatternsWebPagesListView(vm: PatternsWebPagesViewModel(settings: vmSettings, needCopy: false, item: item))
