@@ -43,6 +43,7 @@ struct PatternsView: View {
                             .foregroundColor(.blue)
                             .onTapGesture {
                                 vm.showWebPagesBrowse = true
+                                vm.showWebPagesList = false
                                 navPath.append(item)
                             }
                     }
@@ -82,9 +83,11 @@ struct PatternsView: View {
                 }
                 Button("Browse Web Pages") {
                     vm.showWebPagesBrowse = true
+                    vm.showWebPagesList = false
                     navPath.append(currentItem)
                 }
                 Button("Edit Web Pages") {
+                    vm.showWebPagesBrowse = false
                     vm.showWebPagesList = true
                     navPath.append(currentItem)
                 }
