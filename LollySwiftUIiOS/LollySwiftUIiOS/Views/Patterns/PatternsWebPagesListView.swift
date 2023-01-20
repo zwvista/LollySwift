@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PatternsWebPagesListView: View {
-    @ObservedObject var vm: PatternsWebPagesViewModel
+    @StateObject var vm: PatternsWebPagesViewModel
     @Environment(\.editMode) var editMode
     var isEditing: Bool { editMode?.wrappedValue.isEditing == true }
     @State var showDetailEdit = false

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PatternsWebPagesBrowseView: View {
-    @ObservedObject var vm: PatternsWebPagesViewModel
+    @StateObject var vm: PatternsWebPagesViewModel
     @State var webViewStore = WebViewStore()
     var body: some View {
         VStack(spacing: 0) {

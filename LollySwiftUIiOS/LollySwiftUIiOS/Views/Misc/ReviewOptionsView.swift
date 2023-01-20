@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ReviewOptionsView: View {
-    @ObservedObject var vm: ReviewOptionsViewModel
+    @StateObject var vm: ReviewOptionsViewModel
     @Binding var showOptions: Bool
     @Binding var showOptionsDone: Bool
     var body: some View {

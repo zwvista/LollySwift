@@ -9,7 +9,7 @@ import SwiftUI
 import WebKit
 
 struct WordsDictView: View {
-    @ObservedObject var vm: WordsDictViewModel
+    @StateObject var vm: WordsDictViewModel
     @ObservedObject var vmS = vmSettings
     @StateObject var webViewStore = WebViewStore()
     @StateObject var dictStore = DictStore()

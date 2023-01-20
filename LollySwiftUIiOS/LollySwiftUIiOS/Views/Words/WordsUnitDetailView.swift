@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct WordsUnitDetailView: View {
-    @ObservedObject var vmEdit: WordsUnitDetailViewModel
+    @StateObject var vmEdit: WordsUnitDetailViewModel
     // https://stackoverflow.com/questions/56517400/swiftui-dismiss-modal
     @Binding var showDetail: Bool
     var body: some View {

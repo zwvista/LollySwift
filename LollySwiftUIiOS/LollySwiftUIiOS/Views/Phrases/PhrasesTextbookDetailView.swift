@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PhrasesTextbookDetailView: View {
-    @ObservedObject var vmEdit: PhrasesUnitDetailViewModel
+    @StateObject var vmEdit: PhrasesUnitDetailViewModel
     @Binding var showDetail: Bool
     var body: some View {
         NavigationView {
