@@ -42,9 +42,8 @@ struct PatternsView: View {
                         Image(systemName: "info.circle")
                             .foregroundColor(.blue)
                             .onTapGesture {
-                                vm.showWebPagesBrowse = true
-                                vm.showWebPagesList = false
-                                navPath.append(item)
+                                currentItem = item
+                                navPath.append(0)
                             }
                     }
                     .contentShape(Rectangle())
@@ -82,14 +81,10 @@ struct PatternsView: View {
                     showDetailEdit.toggle()
                 }
                 Button("Browse Web Pages") {
-                    vm.showWebPagesBrowse = true
-                    vm.showWebPagesList = false
-                    navPath.append(currentItem)
+                    navPath.append(0)
                 }
                 Button("Edit Web Pages") {
-                    vm.showWebPagesBrowse = false
-                    vm.showWebPagesList = true
-                    navPath.append(currentItem)
+                    navPath.append("")
                 }
                 Button("Copy Pattern") {
                     iOSApi.copyText(currentItem.PATTERN)
@@ -100,13 +95,11 @@ struct PatternsView: View {
             }, message: {
                 Text(currentItem.PATTERN)
             })
-            .navigationDestination(for: MPattern.self) { item in
-                if vm.showWebPagesBrowse {
-                    PatternsWebPagesBrowseView(vm: PatternsWebPagesViewModel(settings: vmSettings, needCopy: false, item: item))
-                }
-                if vm.showWebPagesList {
-                    PatternsWebPagesListView(vm: PatternsWebPagesViewModel(settings: vmSettings, needCopy: false, item: item))
-                }
+            .navigationDestination(for: Int.self) { item in
+                PatternsWebPagesBrowseView(vm: PatternsWebPagesViewModel(settings: vmSettings, needCopy: false, item: currentItem))
+            }
+            .navigationDestination(for: String.self) { item in
+                PatternsWebPagesListView(vm: PatternsWebPagesViewModel(settings: vmSettings, needCopy: false, item: currentItem))
             }
            .toolbar {
                 ToolbarItemGroup {
