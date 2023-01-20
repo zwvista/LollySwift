@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct WordsUnitBatchEditView: View {
-    @ObservedObject var vm: WordsUnitViewModel
+    @StateObject var vm: WordsUnitViewModel
     @Binding var showBatch: Bool
     var body: some View {
         Form {

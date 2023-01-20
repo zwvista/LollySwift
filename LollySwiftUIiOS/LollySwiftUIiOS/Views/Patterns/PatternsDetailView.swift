@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PatternsDetailView: View {
-    @ObservedObject var vmEdit: PatternsDetailViewModel
+    @StateObject var vmEdit: PatternsDetailViewModel
     @Binding var showDetail: Bool
     var body: some View {
         NavigationView {
