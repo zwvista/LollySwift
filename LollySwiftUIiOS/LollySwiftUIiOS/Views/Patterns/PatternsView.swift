@@ -42,7 +42,7 @@ struct PatternsView: View {
                         Image(systemName: "info.circle")
                             .foregroundColor(.blue)
                             .onTapGesture {
-                                vm.showBrowse = true
+                                vm.showWebPagesBrowse = true
                                 navPath.append(item)
                             }
                     }
@@ -81,11 +81,11 @@ struct PatternsView: View {
                     showDetailEdit.toggle()
                 }
                 Button("Browse Web Pages") {
-                    vm.showBrowse = true
+                    vm.showWebPagesBrowse = true
                     navPath.append(currentItem)
                 }
                 Button("Edit Web Pages") {
-                    vm.showBrowse = false
+                    vm.showWebPagesList = true
                     navPath.append(currentItem)
                 }
                 Button("Copy Pattern") {
@@ -98,9 +98,10 @@ struct PatternsView: View {
                 Text(currentItem.PATTERN)
             })
             .navigationDestination(for: MPattern.self) { item in
-                if vm.showBrowse {
+                if vm.showWebPagesBrowse {
                     PatternsWebPagesBrowseView(vm: PatternsWebPagesViewModel(settings: vmSettings, needCopy: false, item: item))
-                } else {
+                }
+                if vm.showWebPagesList {
                     PatternsWebPagesListView(vm: PatternsWebPagesViewModel(settings: vmSettings, needCopy: false, item: item))
                 }
             }

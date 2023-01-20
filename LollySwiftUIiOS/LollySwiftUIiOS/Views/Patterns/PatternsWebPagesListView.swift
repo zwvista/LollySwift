@@ -27,6 +27,7 @@ struct PatternsWebPagesListView: View {
                             .font(.caption)
                             .foregroundColor(Color.color3)
                     }
+                    Spacer()
                 }
                 .contentShape(Rectangle())
                 .frame(maxWidth: .infinity)
