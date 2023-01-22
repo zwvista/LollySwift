@@ -36,9 +36,9 @@ class WordsReviewViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         vm = WordsReviewViewModel(settings: vmSettings, needCopy: false) { [unowned self] in
-            self.tfWordInput.becomeFirstResponder()
-            if self.vm.hasCurrent && self.vm.isSpeaking {
-                AppDelegate.speak(string: self.vm.currentWord)
+            tfWordInput.becomeFirstResponder()
+            if vm.hasCurrent && vm.isSpeaking {
+                AppDelegate.speak(string: vm.currentWord)
             }
         }
 

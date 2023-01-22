@@ -32,11 +32,11 @@ class WordsReviewViewController: WordsBaseViewController, NSTextFieldDelegate {
 
     override func settingsChanged() {
         vm = WordsReviewViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) { [unowned self] in
-            self.tfWordInput.becomeFirstResponder()
-            if self.vm.hasCurrent && self.vm.isSpeaking {
-                self.synth.startSpeaking(self.vm.currentWord)
+            tfWordInput.becomeFirstResponder()
+            if vm.hasCurrent && vm.isSpeaking {
+                self.synth.startSpeaking(vm.currentWord)
             }
-            if !self.vm.isTestMode {
+            if !vm.isTestMode {
                 searchDict(self)
             }
         }
