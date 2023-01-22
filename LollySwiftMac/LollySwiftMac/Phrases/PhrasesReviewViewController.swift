@@ -28,10 +28,10 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
     let synth = NSSpeechSynthesizer()
 
     func settingsChanged() {
-        vm = PhrasesReviewViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) { [unowned self] in
+        vm = PhrasesReviewViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) { [unowned self] vm2 in
             tfPhraseInput.becomeFirstResponder()
-            if vm.hasCurrent && vm.isSpeaking.value {
-               synth.startSpeaking(vm.currentPhrase)
+            if vm2.hasCurrent && vm2.isSpeaking.value {
+               synth.startSpeaking(vm2.currentPhrase)
             }
         }
         synth.setVoice(NSSpeechSynthesizer.VoiceName(rawValue: vmSettings.macVoiceName))

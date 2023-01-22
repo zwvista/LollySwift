@@ -21,7 +21,7 @@ class PhrasesReviewViewModel: NSObject {
     let options = MReviewOptions()
     var isTestMode: Bool { options.mode == .test || options.mode == .textbook }
     var subscriptionTimer: Disposable? = nil
-    let doTestAction: (() -> Void)?
+    let doTestAction: ((PhrasesReviewViewModel) -> Void)?
 
     let indexString = BehaviorRelay(value: "")
     let indexHidden = BehaviorRelay(value: false)
@@ -42,7 +42,7 @@ class PhrasesReviewViewModel: NSObject {
     let moveForwardHidden = BehaviorRelay(value: false)
     let onRepeatHidden = BehaviorRelay(value: false)
 
-    init(settings: SettingsViewModel, needCopy: Bool, doTestAction: (() -> Void)? = nil) {
+    init(settings: SettingsViewModel, needCopy: Bool, doTestAction: ((PhrasesReviewViewModel) -> Void)? = nil) {
         self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
         self.doTestAction = doTestAction
         options.shuffled = true
@@ -156,7 +156,7 @@ class PhrasesReviewViewModel: NSObject {
         translationString.accept(currentItem?.TRANSLATION ?? "")
         phraseTargetHidden.accept(isTestMode)
         phraseInputString.accept("")
-        doTestAction?()
+        doTestAction?(self)
         if hasCurrent {
             indexString.accept("\(index + 1)/\(count)")
         } else {

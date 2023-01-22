@@ -34,10 +34,10 @@ class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        vm = PhrasesReviewViewModel(settings: vmSettings, needCopy: false) { [unowned self] in
+        vm = PhrasesReviewViewModel(settings: vmSettings, needCopy: false) { [unowned self] vm2 in
             tfPhraseInput.becomeFirstResponder()
-            if vm.hasCurrent && vm.isSpeaking.value {
-                AppDelegate.speak(string: vm.currentPhrase)
+            if vm2.hasCurrent && vm2.isSpeaking.value {
+                AppDelegate.speak(string: vm2.currentPhrase)
             }
         }
 

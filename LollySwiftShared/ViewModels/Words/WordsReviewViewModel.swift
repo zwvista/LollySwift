@@ -20,7 +20,7 @@ class WordsReviewViewModel: WordsBaseViewModel {
     var isTestMode: Bool { options.mode == .test || options.mode == .textbook }
     var subscriptionTimer: Disposable? = nil
     let options = MReviewOptions()
-    let doTestAction: (() -> Void)?
+    let doTestAction: ((WordsReviewViewModel) -> Void)?
 
     let indexString = BehaviorRelay(value: "")
     let indexHidden = BehaviorRelay(value: false)
@@ -47,7 +47,7 @@ class WordsReviewViewModel: WordsBaseViewModel {
     let moveForwardHidden = BehaviorRelay(value: false)
     let onRepeatHidden = BehaviorRelay(value: false)
 
-    init(settings: SettingsViewModel, needCopy: Bool, doTestAction: (() -> Void)? = nil) {
+    init(settings: SettingsViewModel, needCopy: Bool, doTestAction: ((WordsReviewViewModel) -> Void)? = nil) {
         self.doTestAction = doTestAction
         super.init(settings: settings, needCopy: needCopy)
         options.shuffled = true
@@ -198,7 +198,7 @@ class WordsReviewViewModel: WordsBaseViewModel {
         translationString.accept("")
         wordInputString.accept("")
         selectedWord = currentWord
-        doTestAction?()
+        doTestAction?(self)
         if hasCurrent {
             indexString.accept("\(index + 1)/\(count)")
             accuracyString.accept(currentItem!.ACCURACY)
