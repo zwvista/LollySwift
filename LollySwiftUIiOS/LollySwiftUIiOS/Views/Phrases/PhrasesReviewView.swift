@@ -8,9 +8,15 @@
 import SwiftUI
 
 struct PhrasesReviewView: View {
-    @StateObject var vm = PhrasesReviewViewModel(settings: vmSettings, needCopy: false) {}
+    @StateObject var vm = PhrasesReviewViewModel(settings: vmSettings, needCopy: false) { vm2 in
+        vm2.inputFocused = true
+        if vm2.hasCurrent && vm2.isSpeaking {
+            AppDelegate.speak(string: vm2.currentPhrase)
+        }
+    }
     @State var showOptions = true
     @State var showOptionsDone = false
+    @FocusState var inputFocused: Bool
     var body: some View {
         let showOptionsDoneBinding = Binding(
             get: { showOptionsDone },
@@ -70,9 +76,17 @@ struct PhrasesReviewView: View {
                 .font(.system(size: 50))
                 .foregroundColor(Color.color3)
             TextField("", text: $vm.phraseInputString)
+                .focused($inputFocused)
                 .font(.system(size: 60))
                 .textFieldStyle(.roundedBorder)
                 .border(Color.blue)
+                // https://stackoverflow.com/questions/70568987/it-is-possible-to-accessing-focusstates-value-outside-of-the-body-of-a-view
+                .onChange(of: vm.inputFocused) {
+                    inputFocused = $0
+                }
+                .onChange(of: inputFocused) {
+                    vm.inputFocused = $0
+                }
             Spacer()
         }
         .padding()

@@ -8,9 +8,15 @@
 import SwiftUI
 
 struct WordsReviewView: View {
-    @StateObject var vm = WordsReviewViewModel(settings: vmSettings, needCopy: false) {}
+    @StateObject var vm = WordsReviewViewModel(settings: vmSettings, needCopy: false) { vm2 in
+        vm2.inputFocused = true
+        if vm2.hasCurrent && vm2.isSpeaking {
+            AppDelegate.speak(string: vm2.currentWord)
+        }
+    }
     @State var showOptions = true
     @State var showOptionsDone = false
+    @FocusState var inputFocused: Bool
     var body: some View {
         // https://stackoverflow.com/questions/62103788/swift-didset-for-var-that-gets-changed-in-child-with-binding
         let showOptionsDoneBinding = Binding(
@@ -81,9 +87,17 @@ struct WordsReviewView: View {
             TextField("", text: $vm.translationString, axis: .vertical)
                 .frame(height: 150)
             TextField("", text: $vm.wordInputString)
+                .focused($inputFocused)
                 .font(.system(size: 60))
                 .textFieldStyle(.roundedBorder)
                 .border(Color.blue)
+                // https://stackoverflow.com/questions/70568987/it-is-possible-to-accessing-focusstates-value-outside-of-the-body-of-a-view
+                .onChange(of: vm.inputFocused) {
+                    inputFocused = $0
+                }
+                .onChange(of: inputFocused) {
+                    vm.inputFocused = $0
+                }
             Spacer()
         }
         .padding()
