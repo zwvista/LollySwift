@@ -32,6 +32,7 @@ class WordsReviewViewController: WordsBaseViewController, NSTextFieldDelegate {
     override var initSettingsInViewDidLoad: Bool { false }
 
     override func settingsChanged() {
+        vm?.stopTimer()
         vm = WordsReviewViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) { [unowned self] vm2 in
             tfWordInput.becomeFirstResponder()
             if vm2.hasCurrent && vm2.isSpeaking.value {
