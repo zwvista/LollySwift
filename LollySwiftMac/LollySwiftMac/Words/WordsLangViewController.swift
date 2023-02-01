@@ -20,7 +20,7 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
     override func viewDidLoad() {
         super.viewDidLoad()
         vm.$arrWordsFiltered.didSet.sink { [unowned self] _ in
-            self.doRefresh()
+            doRefresh()
         } ~ subscriptions
     }
 
@@ -64,7 +64,7 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
     @IBAction func addWord(_ sender: AnyObject) {
         let detailVC = storyboard!.instantiateController(withIdentifier: "WordsLangDetailViewController") as! WordsLangDetailViewController
         detailVC.vmEdit = WordsLangDetailViewModel(vm: vm, item: vm.newLangWord())
-        detailVC.complete = { self.tvWords.reloadData(); self.addWord(self) }
+        detailVC.complete = { [unowned self] in tvWords.reloadData(); addWord(self) }
         presentAsSheet(detailVC)
     }
 
@@ -95,8 +95,8 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
         let detailVC = storyboard!.instantiateController(withIdentifier: "WordsLangDetailViewController") as! WordsLangDetailViewController
         let i = tvWords.selectedRow
         detailVC.vmEdit = WordsLangDetailViewModel(vm: vm, item: arrWords[i])
-        detailVC.complete = {
-            self.tvWords.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tvWords.tableColumns.count))
+        detailVC.complete = { [unowned self] in
+            tvWords.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<tvWords.tableColumns.count))
         }
         presentAsModalWindow(detailVC)
     }
@@ -134,9 +134,9 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
         let detailVC = NSStoryboard(name: "Phrases", bundle: nil).instantiateController(withIdentifier: "PhrasesAssociateViewController") as! PhrasesAssociateViewController
         detailVC.textFilter = vm.selectedWord
         detailVC.wordid = vm.selectedWordID
-        detailVC.complete = {
+        detailVC.complete = { [unowned self] in
             Task {
-                await self.getPhrases()
+                await getPhrases()
             }
         }
         presentAsModalWindow(detailVC)

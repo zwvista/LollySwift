@@ -23,14 +23,14 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
     override func viewDidLoad() {
         super.viewDidLoad()
         pubTextbookFilter.selectedItemIndexPublisher.sink { [unowned self] _ in
-            self.applyFilters()
+            applyFilters()
         } ~ subscriptions
     }
 
     override func settingsChanged() {
-        vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: false, needCopy: true) {
-            self.acTextbooks.content = self.vmSettings.arrTextbookFilters
-            self.doRefresh()
+        vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: false, needCopy: true) { [unowned self] in
+            acTextbooks.content = vmSettings.arrTextbookFilters
+            doRefresh()
         }
         super.settingsChanged()
     }
@@ -79,8 +79,8 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
         let i = tvWords.selectedRow
         if i == -1 {return}
         detailVC.vmEdit = WordsUnitDetailViewModel(vm: vm, item: arrWords[i], phraseid: 0)
-        detailVC.complete = {
-            self.tvWords.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tvWords.tableColumns.count))
+        detailVC.complete = { [unowned self] in
+            tvWords.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<tvWords.tableColumns.count))
         }
         presentAsModalWindow(detailVC)
     }
@@ -118,9 +118,9 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
         let detailVC = NSStoryboard(name: "Phrases", bundle: nil).instantiateController(withIdentifier: "PhrasesAssociateViewController") as! PhrasesAssociateViewController
         detailVC.textFilter = vm.selectedWord
         detailVC.wordid = vm.selectedWordID
-        detailVC.complete = {
+        detailVC.complete = { [unowned self] in
             Task {
-                await self.getPhrases()
+                await getPhrases()
             }
         }
         presentAsModalWindow(detailVC)

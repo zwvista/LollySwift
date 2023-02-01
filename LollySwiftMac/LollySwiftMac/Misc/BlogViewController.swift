@@ -105,7 +105,7 @@ class BlogViewController: NSViewController, NSMenuItemValidation  {
     }
 
     deinit {
-        print("DEBUG: \(self.className) deinit")
+        print("DEBUG: \(className) deinit")
     }
 }
 
@@ -124,6 +124,6 @@ class BlogWindowController: NSWindowController, NSWindowDelegate {
     }
 
     deinit {
-        print("DEBUG: \(self.className) deinit")
+        print("DEBUG: \(className) deinit")
     }
 }

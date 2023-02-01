@@ -297,7 +297,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     }
 
     deinit {
-        print("DEBUG: \(self.className) deinit")
+        print("DEBUG: \(className) deinit")
     }
 }
 
@@ -309,6 +309,6 @@ class PatternsWindowController: NSWindowController, LollyProtocol, NSWindowDeleg
     }
 
     deinit {
-        print("DEBUG: \(self.className) deinit")
+        print("DEBUG: \(className) deinit")
     }
 }

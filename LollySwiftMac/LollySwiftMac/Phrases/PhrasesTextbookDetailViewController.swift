@@ -78,6 +78,6 @@ class PhrasesTextbookDetailViewController: NSViewController, NSTableViewDataSour
     }
 
     deinit {
-        print("DEBUG: \(self.className) deinit")
+        print("DEBUG: \(className) deinit")
     }
 }

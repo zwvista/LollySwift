@@ -43,7 +43,7 @@ class PhrasesUnitBatchEditViewController: NSViewController, NSTableViewDataSourc
         vmEdit.$seqnumChecked ~> (tfSeqNum, \.isEnabled) ~ subscriptions
         btnOK.tapPublisher.sink { [unowned self] in
             // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
-            self.commitEditing()
+            commitEditing()
             var rows = [Bool]()
             for i in 0..<tableView.numberOfRows {
                 let chk = (tableView.view(atColumn: 0, row: i, makeIfNecessary: false)! as! LollyCheckCell).chk!
@@ -88,6 +88,6 @@ class PhrasesUnitBatchEditViewController: NSViewController, NSTableViewDataSourc
     }
 
     deinit {
-        print("DEBUG: \(self.className) deinit")
+        print("DEBUG: \(className) deinit")
     }
 }

@@ -85,6 +85,6 @@ class WordsUnitDetailViewController: NSViewController, NSTableViewDataSource, NS
     }
 
     deinit {
-        print("DEBUG: \(self.className) deinit")
+        print("DEBUG: \(className) deinit")
     }
 }

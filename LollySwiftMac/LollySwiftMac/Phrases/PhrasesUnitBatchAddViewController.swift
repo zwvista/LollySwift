@@ -47,6 +47,6 @@ class PhrasesUnitBatchAddViewController: NSViewController {
     }
 
     deinit {
-        print("DEBUG: \(self.className) deinit")
+        print("DEBUG: \(className) deinit")
     }
 }

@@ -106,7 +106,7 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
     }
 
     deinit {
-        print("DEBUG: \(self.className) deinit")
+        print("DEBUG: \(className) deinit")
     }
 }
 
@@ -115,6 +115,6 @@ class PhrasesReviewWindowController: NSWindowController {
     @IBOutlet weak var scSpeak: NSSegmentedControl!
 
     deinit {
-        print("DEBUG: \(self.className) deinit")
+        print("DEBUG: \(className) deinit")
     }
 }

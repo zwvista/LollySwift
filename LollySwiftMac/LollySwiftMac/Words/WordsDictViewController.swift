@@ -63,6 +63,6 @@ class WordsDictViewController: NSViewController, WKNavigationDelegate {
     }
 
     deinit {
-        print("DEBUG: \(self.className) deinit")
+        print("DEBUG: \(className) deinit")
     }
 }

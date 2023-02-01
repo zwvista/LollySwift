@@ -75,7 +75,7 @@ class PatternsWebPagesDetailViewController: NSViewController {
     }
 
     deinit {
-        print("DEBUG: \(self.className) deinit")
+        print("DEBUG: \(className) deinit")
     }
 
 }

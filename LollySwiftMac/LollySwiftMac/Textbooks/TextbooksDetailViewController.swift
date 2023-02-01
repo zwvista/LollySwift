@@ -38,7 +38,7 @@ class TextbooksDetailViewController: NSViewController {
 
     @IBAction func okClicked(_ sender: AnyObject) {
         // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
-        self.commitEditing()
+        commitEditing()
         Task {
             if isAdd {
                 _ = await TextbooksViewModel.create(item: item)
@@ -51,6 +51,6 @@ class TextbooksDetailViewController: NSViewController {
     }
 
     deinit {
-        print("DEBUG: \(self.className) deinit")
+        print("DEBUG: \(className) deinit")
     }
 }

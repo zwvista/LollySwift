@@ -67,7 +67,7 @@ class WordsAssociateViewController: NSViewController, NSTableViewDataSource, NST
     @IBAction func okClicked(_ sender: AnyObject) {
         guard view.window?.firstResponder != sfTextFilter.window else {return}
         // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
-        self.commitEditing()
+        commitEditing()
         Task {
             for i in 0..<tableView.numberOfRows {
                 guard let col = tableView.view(atColumn: 0, row: i, makeIfNecessary: false) else {continue}
@@ -83,6 +83,6 @@ class WordsAssociateViewController: NSViewController, NSTableViewDataSource, NST
     }
 
     deinit {
-        print("DEBUG: \(self.className) deinit")
+        print("DEBUG: \(className) deinit")
     }
 }

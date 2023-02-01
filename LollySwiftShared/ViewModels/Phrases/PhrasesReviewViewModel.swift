@@ -167,7 +167,7 @@ class PhrasesReviewViewModel: NSObject, ObservableObject {
     }
 
     deinit {
-        print("DEBUG: \(self.className) deinit")
+        print("DEBUG: \(className) deinit")
         subscriptionTimer?.cancel()
     }
 }

@@ -55,7 +55,7 @@ class DictsDetailViewController: NSViewController {
 
     @IBAction func okClicked(_ sender: Any) {
         // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
-        self.commitEditing()
+        commitEditing()
         Task {
             if isAdd {
                 _ = await DictsViewModel.create(item: item)
@@ -68,6 +68,6 @@ class DictsDetailViewController: NSViewController {
     }
 
     deinit {
-        print("DEBUG: \(self.className) deinit")
+        print("DEBUG: \(className) deinit")
     }
 }

@@ -148,12 +148,12 @@ class TransformDetailViewController: NSViewController, NSTableViewDataSource, NS
 
     @IBAction func okClicked(_ sender: Any) {
         // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
-        self.commitEditing()
+        commitEditing()
         vm.onOK()
         dismiss(sender)
     }
 
     deinit {
-        print("DEBUG: \(self.className) deinit")
+        print("DEBUG: \(className) deinit")
     }
 }

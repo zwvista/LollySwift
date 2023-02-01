@@ -272,9 +272,9 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
         let detailVC = NSStoryboard(name: "Phrases", bundle: nil).instantiateController(withIdentifier: "PhrasesAssociateViewController") as! PhrasesAssociateViewController
         detailVC.textFilter = vm.selectedWord
         detailVC.wordid = vm.selectedWordID
-        detailVC.complete = {
+        detailVC.complete = { [unowned self] in
             Task {
-                await self.getPhrases()
+                await getPhrases()
             }
         }
         presentAsModalWindow(detailVC)

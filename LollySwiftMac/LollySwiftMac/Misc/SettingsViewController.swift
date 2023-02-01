@@ -103,7 +103,7 @@ class SettingsViewController: NSViewController, NSTableViewDataSource, NSTableVi
         let app = NSApplication.shared
         app.stopModal()
         // http://stackoverflow.com/questions/5711367/os-x-how-can-a-nsviewcontroller-find-its-window
-        self.view.window?.close()
+        view.window?.close()
         if sender === btnApplyNone {return}
         app.enumerateWindows(options: .orderedFrontToBack) { w, b in
             if let vc = w.contentViewController as? LollyProtocol { vc.settingsChanged() }
@@ -144,7 +144,7 @@ class SettingsViewController: NSViewController, NSTableViewDataSource, NSTableVi
     }
 
     deinit {
-        print("DEBUG: \(self.className) deinit")
+        print("DEBUG: \(className) deinit")
     }
 
 }

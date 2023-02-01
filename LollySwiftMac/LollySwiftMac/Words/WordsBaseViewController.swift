@@ -145,7 +145,7 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
     }
 
     deinit {
-        print("DEBUG: \(self.className) deinit")
+        print("DEBUG: \(className) deinit")
     }
 }
 
@@ -394,7 +394,7 @@ class WordsPhrasesBaseWindowController: NSWindowController, LollyProtocol, NSWin
     }
 
     deinit {
-        print("DEBUG: \(self.className) deinit")
+        print("DEBUG: \(className) deinit")
     }
 }
 

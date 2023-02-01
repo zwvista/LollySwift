@@ -79,9 +79,9 @@ class WordsReviewViewController: WordsBaseViewController, NSTextFieldDelegate {
         settingsChanged()
         wc = view.window!.windowController as? WordsReviewWindowController
         vm.$isSpeaking <~> wc.scSpeak.isOnProperty ~ subscriptions
-        vm.$isSpeaking.sink { isSpeaking in
-            if self.vm.hasCurrent && isSpeaking {
-                self.synth.startSpeaking(self.vm.currentWord)
+        vm.$isSpeaking.sink { [unowned self] isSpeaking in
+            if vm.hasCurrent && isSpeaking {
+                synth.startSpeaking(vm.currentWord)
             }
         } ~ subscriptions
     }
@@ -96,7 +96,7 @@ class WordsReviewViewController: WordsBaseViewController, NSTextFieldDelegate {
         optionsVC.vm = ReviewOptionsViewModel(options: vm.options)
         optionsVC.complete = { [unowned self] in
             Task {
-                await self.vm.newTest()
+                await vm.newTest()
             }
         }
         presentAsSheet(optionsVC)
@@ -119,13 +119,13 @@ class WordsReviewViewController: WordsBaseViewController, NSTextFieldDelegate {
     }
 
     deinit {
-        print("DEBUG: \(self.className) deinit")
+        print("DEBUG: \(className) deinit")
     }
 }
 
 class WordsReviewWindowController: WordsBaseWindowController {
 
     deinit {
-        print("DEBUG: \(self.className) deinit")
+        print("DEBUG: \(className) deinit")
     }
 }
