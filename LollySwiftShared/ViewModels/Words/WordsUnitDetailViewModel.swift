@@ -34,8 +34,8 @@ class WordsUnitDetailViewModel: NSObject {
     func onOK() -> Single<()> {
         itemEdit.save(to: item)
         item.WORD = vm.vmSettings.autoCorrectInput(text: item.WORD)
-        return !isAdd ? vm.update(item: item) : vm.create(item: item).flatMap {
-            self.phraseid == 0 ? Single.just(()) : MWordPhrase.associate(wordid: self.item.WORDID, phraseid: self.phraseid)
+        return !isAdd ? vm.update(item: item) : vm.create(item: item).flatMap { [unowned self] in
+            phraseid == 0 ? Single.just(()) : MWordPhrase.associate(wordid: item.WORDID, phraseid: phraseid)
         }
     }
 }

@@ -41,9 +41,9 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
 
     @objc func refresh(_ sender: UIRefreshControl) {
         view.showBlurLoader()
-        vm = PatternsViewModel(settings: vmSettings, needCopy: false) {
+        vm = PatternsViewModel(settings: vmSettings, needCopy: false) { [unowned self] in
             sender.endRefreshing()
-            self.view.removeBlurLoader()
+            view.removeBlurLoader()
         }
         _ = vm.textFilter_ <~> sbTextFilter.searchTextField.rx.textInput
         _ = vm.scopeFilter_ ~> btnScopeFilter.rx.title(for: .normal)
@@ -78,9 +78,9 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
         let i = indexPath.row
         let item = vm.arrPatterns[i]
         func delete() {
-            yesNoAction(title: "delete", message: "Do you really want to delete the pattern \"\(item.PATTERN)\"?", yesHandler: { (action) in
-                PatternsViewModel.delete(item.ID).subscribe() ~ self.rx.disposeBag
-                self.vm.arrPatterns.remove(at: i)
+            yesNoAction(title: "delete", message: "Do you really want to delete the pattern \"\(item.PATTERN)\"?", yesHandler: { [unowned self] (action) in
+                PatternsViewModel.delete(item.ID).subscribe() ~ rx.disposeBag
+                vm.arrPatterns.remove(at: i)
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }, noHandler: { (action) in
                 tableView.reloadRows(at: [indexPath], with: .fade)
@@ -142,10 +142,10 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
     @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
         guard segue.identifier == "Done" else {return}
         if let controller = segue.source as? PatternsDetailViewController {
-            controller.vmEdit.onOK().subscribe { _ in
-                self.tableView.reloadData()
+            controller.vmEdit.onOK().subscribe { [unowned self] _ in
+                tableView.reloadData()
                 if controller.vmEdit.isAdd {
-                    self.performSegue(withIdentifier: "add", sender: self)
+                    performSegue(withIdentifier: "add", sender: self)
                 }
             } ~ rx.disposeBag
         }

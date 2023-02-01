@@ -21,9 +21,9 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
 
     override func refresh() {
         view.showBlurLoader()
-        vm = PhrasesUnitViewModel(settings: vmSettings, inTextbook: true, needCopy: false) {
-            self.refreshControl.endRefreshing()
-            self.view.removeBlurLoader()
+        vm = PhrasesUnitViewModel(settings: vmSettings, inTextbook: true, needCopy: false) { [unowned self] in
+            refreshControl.endRefreshing()
+            view.removeBlurLoader()
         }
         vm.arrPhrasesFiltered_.subscribe { [unowned self] _ in
             tableView.reloadData()
@@ -44,8 +44,8 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
 
     private func reindex() {
         tableView.beginUpdates()
-        vm.reindex {
-            self.tableView.reloadRows(at: [IndexPath(row: $0, section: 0)], with: .fade)
+        vm.reindex { [unowned self] in
+            tableView.reloadRows(at: [IndexPath(row: $0, section: 0)], with: .fade)
         }
         tableView.endUpdates()
     }
@@ -57,13 +57,13 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let i = indexPath.row
-        let item = self.vm.arrPhrases[i]
+        let item = vm.arrPhrases[i]
         func delete() {
-            self.yesNoAction(title: "delete", message: "Do you really want to delete the phrase \"\(item.PHRASE)\"?", yesHandler: { (action) in
-                PhrasesUnitViewModel.delete(item: item).subscribe() ~ self.rx.disposeBag
-                self.vm.arrPhrases.remove(at: i)
+            yesNoAction(title: "delete", message: "Do you really want to delete the phrase \"\(item.PHRASE)\"?", yesHandler: { [unowned self] (action) in
+                PhrasesUnitViewModel.delete(item: item).subscribe() ~ rx.disposeBag
+                vm.arrPhrases.remove(at: i)
                 tableView.deleteRows(at: [indexPath], with: .fade)
-                self.reindex()
+                reindex()
             }, noHandler: { (action) in
                 tableView.reloadRows(at: [indexPath], with: .fade)
             })
@@ -104,11 +104,11 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
 
     @IBAction func btnMoreClicked(_ sender: AnyObject) {
         let alertController = UIAlertController(title: "Phrases", message: "More", preferredStyle: .alert)
-        let addAction = UIAlertAction(title: "Add", style: .default) { _ in self.performSegue(withIdentifier: "add", sender: self) }
+        let addAction = UIAlertAction(title: "Add", style: .default) { [unowned self] _ in performSegue(withIdentifier: "add", sender: self) }
         alertController.addAction(addAction)
 
-        let batchAction = UIAlertAction(title: "Batch Edit", style: .default) { _ in
-            self.performSegue(withIdentifier: "batch", sender: nil)
+        let batchAction = UIAlertAction(title: "Batch Edit", style: .default) { [unowned self] _ in
+            performSegue(withIdentifier: "batch", sender: nil)
         }
         alertController.addAction(batchAction)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
@@ -124,10 +124,10 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
     @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
         guard segue.identifier == "Done" else {return}
         let controller = segue.source as! PhrasesUnitDetailViewController
-        controller.vmEdit.onOK().subscribe { _ in
-            self.tableView.reloadData()
+        controller.vmEdit.onOK().subscribe { [unowned self] _ in
+            tableView.reloadData()
             if controller.vmEdit.isAdd {
-                self.performSegue(withIdentifier: "add", sender: self)
+                performSegue(withIdentifier: "add", sender: self)
             }
         } ~ rx.disposeBag
     }

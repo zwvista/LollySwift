@@ -16,11 +16,11 @@ class WebTextbooksViewModel: NSObject {
     var arrWebTextbooksFiltered: [MWebTextbook]?
 
     init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> Void) {
-        self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
+        vmSettings = !needCopy ? settings : SettingsViewModel(settings)
         super.init()
-        MWebTextbook.getDataByLang(settings.selectedLang.ID).subscribe {
-            self.arrWebTextbooks = $0
-            self.arrWebTextbooksFiltered = nil
+        MWebTextbook.getDataByLang(settings.selectedLang.ID).subscribe { [unowned self] in
+            arrWebTextbooks = $0
+            arrWebTextbooksFiltered = nil
             complete()
         } ~ rx.disposeBag
     }

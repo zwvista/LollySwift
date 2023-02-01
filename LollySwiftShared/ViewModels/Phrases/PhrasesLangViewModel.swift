@@ -33,8 +33,8 @@ class PhrasesLangViewModel: PhrasesBaseViewModel {
     }
 
     func reload() -> Single<()> {
-        MLangPhrase.getDataByLang(vmSettings.selectedTextbook.LANGID).map {
-            self.arrPhrases = $0
+        MLangPhrase.getDataByLang(vmSettings.selectedTextbook.LANGID).map { [unowned self] in
+            arrPhrases = $0
         }
     }
 
@@ -63,8 +63,8 @@ class PhrasesLangViewModel: PhrasesBaseViewModel {
     }
 
     func getPhrases(wordid: Int) -> Single<()> {
-        MWordPhrase.getPhrasesByWordId(wordid).map {
-            self.arrPhrases = $0
+        MWordPhrase.getPhrasesByWordId(wordid).map { [unowned self] in
+            arrPhrases = $0
         }
     }
 }

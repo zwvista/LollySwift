@@ -39,8 +39,8 @@ class WordsUnitViewModel: WordsBaseViewModel {
 
     func reload() -> Single<()> {
         (inTextbook ? MUnitWord.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO) : MUnitWord.getDataByLang(vmSettings.selectedTextbook.LANGID, arrTextbooks: vmSettings.arrTextbooks))
-        .map {
-            self.arrWords = $0
+        .map { [unowned self] in
+            arrWords = $0
         }
     }
 
@@ -53,13 +53,13 @@ class WordsUnitViewModel: WordsBaseViewModel {
     }
 
     func update(item: MUnitWord) -> Single<()> {
-        MUnitWord.update(item: item).flatMap { result in
-            MUnitWord.getDataById(item.ID, arrTextbooks: self.vmSettings.arrTextbooks).map { ($0, result) }
-        }.flatMap { (o, result) in
+        MUnitWord.update(item: item).flatMap { [unowned self] result in
+            MUnitWord.getDataById(item.ID, arrTextbooks: vmSettings.arrTextbooks).map { ($0, result) }
+        }.flatMap { [unowned self] (o, result) in
             if let o = o {
                 let b = result == "2" || result == "4"
                 copyProperties(from: o, to: item)
-                return b || item.NOTE.isEmpty ? self.getNote(item: item) : Single.just(())
+                return b || item.NOTE.isEmpty ? getNote(item: item) : Single.just(())
             } else {
                 return Single.just(())
             }
@@ -67,15 +67,15 @@ class WordsUnitViewModel: WordsBaseViewModel {
     }
 
     func create(item: MUnitWord) -> Single<()> {
-        MUnitWord.create(item: item).flatMap {
-            MUnitWord.getDataById($0, arrTextbooks: self.vmSettings.arrTextbooks)
-        }.flatMap { o in
+        MUnitWord.create(item: item).flatMap { [unowned self] in
+            MUnitWord.getDataById($0, arrTextbooks: vmSettings.arrTextbooks)
+        }.flatMap { [unowned self] o in
             if let o = o {
-                var arr = self.arrWords
+                var arr = arrWords
                 arr.append(o)
-                self.arrWords = arr
+                arrWords = arr
                 copyProperties(from: o, to: item)
-                return item.NOTE.isEmpty ? self.getNote(item: item) : Single.just(())
+                return item.NOTE.isEmpty ? getNote(item: item) : Single.just(())
             } else {
                 return Single.just(())
             }
@@ -121,13 +121,13 @@ class WordsUnitViewModel: WordsBaseViewModel {
     }
 
     func getNotes(ifEmpty: Bool, oneComplete: @escaping (Int) -> Void, allComplete: @escaping () -> Void) {
-        vmSettings.getNotes(wordCount: arrWords.count, isNoteEmpty: {
-            !ifEmpty || (self.arrWords[$0].NOTE).isEmpty
-        }, getOne: { i in
-            self.getNote(index: i).subscribe { _ in
+        vmSettings.getNotes(wordCount: arrWords.count, isNoteEmpty: { [unowned self] in
+            !ifEmpty || (arrWords[$0].NOTE).isEmpty
+        }, getOne: { [unowned self] i in
+            getNote(index: i).subscribe { _ in
                 oneComplete(i)
-            } ~ self.rx.disposeBag
-        }, allComplete: allComplete) ~ self.rx.disposeBag
+            } ~ rx.disposeBag
+        }, allComplete: allComplete) ~ rx.disposeBag
     }
 
     func clearNote(index: Int) -> Single<()> {
@@ -137,10 +137,10 @@ class WordsUnitViewModel: WordsBaseViewModel {
     }
 
     func clearNotes(ifEmpty: Bool, oneComplete: @escaping (Int) -> Void) -> Single<()> {
-        vmSettings.clearNotes(wordCount: arrWords.count, isNoteEmpty: {
-            !ifEmpty || self.arrWords[$0].NOTE.isEmpty
-        }, getOne: { i in
-            self.clearNote(index: i).do(onSuccess: { oneComplete(i) })
+        vmSettings.clearNotes(wordCount: arrWords.count, isNoteEmpty: { [unowned self] in
+            !ifEmpty || arrWords[$0].NOTE.isEmpty
+        }, getOne: { [unowned self] i in
+            clearNote(index: i).do(onSuccess: { oneComplete(i) })
         })
     }
 }

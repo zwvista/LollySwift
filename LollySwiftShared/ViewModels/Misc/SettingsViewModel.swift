@@ -544,9 +544,9 @@ class SettingsViewModel: NSObject {
     func getNote(word: String) -> Single<String> {
         guard hasDictNote else { return Single.just("") }
         let url = selectedDictNote.urlString(word: word, arrAutoCorrect: arrAutoCorrect)
-        return RestApi.getHtml(url: url).map { html in
+        return RestApi.getHtml(url: url).map { [unowned self] html in
             print(html)
-            return CommonApi.extractText(from: html, transform: self.selectedDictNote.TRANSFORM, template: "") { text,_ in text }
+            return CommonApi.extractText(from: html, transform: selectedDictNote.TRANSFORM, template: "") { text,_ in text }
         }
     }
 

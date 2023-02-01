@@ -19,10 +19,10 @@ class PhrasesLangViewController: PhrasesBaseViewController {
 
     override func refresh() {
         view.showBlurLoader()
-        vm = PhrasesLangViewModel(settings: vmSettings, needCopy: false) {
-            self.refreshControl.endRefreshing()
-            self.tableView.reloadData()
-            self.view.removeBlurLoader()
+        vm = PhrasesLangViewModel(settings: vmSettings, needCopy: false) { [unowned self] in
+            refreshControl.endRefreshing()
+            tableView.reloadData()
+            view.removeBlurLoader()
         }
         vm.arrPhrasesFiltered_.subscribe { [unowned self] _ in
             tableView.reloadData()
@@ -39,11 +39,11 @@ class PhrasesLangViewController: PhrasesBaseViewController {
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let i = indexPath.row
-        let item = self.vm.arrPhrases[i]
+        let item = vm.arrPhrases[i]
         func delete() {
-            self.yesNoAction(title: "delete", message: "Do you really want to delete the phrase \"\(item.PHRASE)\"?", yesHandler: { (action) in
-                PhrasesLangViewModel.delete(item: item).subscribe() ~ self.rx.disposeBag
-                self.vm.arrPhrases.remove(at: i)
+            yesNoAction(title: "delete", message: "Do you really want to delete the phrase \"\(item.PHRASE)\"?", yesHandler: { [unowned self] (action) in
+                PhrasesLangViewModel.delete(item: item).subscribe() ~ rx.disposeBag
+                vm.arrPhrases.remove(at: i)
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }, noHandler: { (action) in
                 tableView.reloadRows(at: [indexPath], with: .fade)
@@ -84,8 +84,8 @@ class PhrasesLangViewController: PhrasesBaseViewController {
     @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
         guard segue.identifier == "Done" else {return}
         let controller = segue.source as! PhrasesLangDetailViewController
-        controller.vmEdit.onOK().subscribe { _ in
-            self.tableView.reloadData()
+        controller.vmEdit.onOK().subscribe { [unowned self] _ in
+            tableView.reloadData()
         } ~ rx.disposeBag
     }
 }

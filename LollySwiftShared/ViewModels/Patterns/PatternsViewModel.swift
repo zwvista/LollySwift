@@ -28,7 +28,7 @@ class PatternsViewModel: NSObject {
     var hasFilter: Bool { !textFilter.isEmpty }
 
     public init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> Void) {
-        self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
+        vmSettings = !needCopy ? settings : SettingsViewModel(settings)
         super.init()
 
         Observable.combineLatest(arrPatterns_, textFilter_, scopeFilter_).subscribe { [unowned self] _ in
@@ -42,8 +42,8 @@ class PatternsViewModel: NSObject {
     }
 
     func reload() -> Single<()> {
-        MPattern.getDataByLang(vmSettings.selectedLang.ID).map {
-            self.arrPatterns = $0
+        MPattern.getDataByLang(vmSettings.selectedLang.ID).map { [unowned self] in
+            arrPatterns = $0
         }
     }
 

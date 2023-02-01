@@ -25,16 +25,16 @@ class LoginViewController: UIViewController {
     }
 
     @IBAction func login(_ sender: Any) {
-        vm.login(username: vm.username.value, password: vm.password.value).subscribe {
+        vm.login(username: vm.username.value, password: vm.password.value).subscribe { [unowned self] in
             globalUser.userid = $0
             if globalUser.isLoggedIn {
                 globalUser.save()
-                self.dismiss(animated: true, completion: self.completion)
+                dismiss(animated: true, completion: completion)
             } else {
                 let alert = UIAlertController(title: "Login", message:  "Wrong username or password!", preferredStyle:  UIAlertController.Style.alert)
                 let defaultAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) {_ in }
                 alert.addAction(defaultAction)
-                self.present(alert, animated: true)
+                present(alert, animated: true)
             }
         } ~ rx.disposeBag
     }

@@ -19,9 +19,9 @@ class WordsLangViewController: WordsBaseViewController {
 
     override func refresh() {
         view.showBlurLoader()
-        vm = WordsLangViewModel(settings: vmSettings, needCopy: false) {
-            self.refreshControl.endRefreshing()
-            self.view.removeBlurLoader()
+        vm = WordsLangViewModel(settings: vmSettings, needCopy: false) { [unowned self] in
+            refreshControl.endRefreshing()
+            view.removeBlurLoader()
         }
         vm.arrWordsFiltered_.subscribe { [unowned self] _ in
             tableView.reloadData()
@@ -38,11 +38,11 @@ class WordsLangViewController: WordsBaseViewController {
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let i = indexPath.row
-        let item = self.vm.arrWords[i]
+        let item = vm.arrWords[i]
         func delete() {
-            self.yesNoAction(title: "delete", message: "Do you really want to delete the word \"\(item.WORD)\"?", yesHandler: { (action) in
-                WordsLangViewModel.delete(item: item).subscribe() ~ self.rx.disposeBag
-                self.vm.arrWords.remove(at: i)
+            yesNoAction(title: "delete", message: "Do you really want to delete the word \"\(item.WORD)\"?", yesHandler: { [unowned self] (action) in
+                WordsLangViewModel.delete(item: item).subscribe() ~ rx.disposeBag
+                vm.arrWords.remove(at: i)
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }, noHandler: { (action) in
                 tableView.reloadRows(at: [indexPath], with: .fade)
@@ -61,16 +61,16 @@ class WordsLangViewController: WordsBaseViewController {
             let editAction2 = UIAlertAction(title: "Edit", style: .default) { _ in edit() }
             alertController.addAction(editAction2)
             if vmSettings.hasDictNote {
-                let getNoteAction = UIAlertAction(title: "Retrieve Note", style: .default) { _ in
-                    self.vm.getNote(index: indexPath.row).subscribe { _ in
-                        self.tableView.reloadRows(at: [indexPath], with: .fade)
-                    } ~ self.rx.disposeBag
+                let getNoteAction = UIAlertAction(title: "Retrieve Note", style: .default) { [unowned self] _ in
+                    vm.getNote(index: indexPath.row).subscribe { [unowned self] _ in
+                        tableView.reloadRows(at: [indexPath], with: .fade)
+                    } ~ rx.disposeBag
                 }
                 alertController.addAction(getNoteAction)
-                let clearNoteAction = UIAlertAction(title: "Clear Note", style: .default) { _ in
-                    self.vm.clearNote(index: indexPath.row).subscribe { _ in
-                        self.tableView.reloadRows(at: [indexPath], with: .fade)
-                    } ~ self.rx.disposeBag
+                let clearNoteAction = UIAlertAction(title: "Clear Note", style: .default) { [unowned self] _ in
+                    vm.clearNote(index: indexPath.row).subscribe { [unowned self] _ in
+                        tableView.reloadRows(at: [indexPath], with: .fade)
+                    } ~ rx.disposeBag
                 }
                 alertController.addAction(clearNoteAction)
             }
@@ -99,8 +99,8 @@ class WordsLangViewController: WordsBaseViewController {
     @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
         guard segue.identifier == "Done" else {return}
         let controller = segue.source as! WordsLangDetailViewController
-        controller.vmEdit.onOK().subscribe { _ in
-            self.tableView.reloadData()
+        controller.vmEdit.onOK().subscribe { [unowned self] _ in
+            tableView.reloadData()
         } ~ rx.disposeBag
     }
 }

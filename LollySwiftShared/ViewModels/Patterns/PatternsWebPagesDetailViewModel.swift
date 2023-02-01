@@ -28,8 +28,8 @@ class PatternsWebPagesDetailViewModel: NSObject {
 
     func onOK() -> Single<()> {
         itemEdit.save(to: item)
-        return (isAddWebPage ? PatternsWebPagesViewModel.createWebPage(item: item) : PatternsWebPagesViewModel.updateWebPage(item: item)).flatMap {
-            self.isAddPatternWebPage ? PatternsWebPagesViewModel.createPatternWebPage(item: self.item) : PatternsWebPagesViewModel.updatePatternWebPage(item: self.item)
+        return (isAddWebPage ? PatternsWebPagesViewModel.createWebPage(item: item) : PatternsWebPagesViewModel.updateWebPage(item: item)).flatMap { [unowned self] in
+            isAddPatternWebPage ? PatternsWebPagesViewModel.createPatternWebPage(item: item) : PatternsWebPagesViewModel.updatePatternWebPage(item: item)
         }
     }
 }

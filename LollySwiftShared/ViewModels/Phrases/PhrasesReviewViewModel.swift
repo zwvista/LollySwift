@@ -43,7 +43,7 @@ class PhrasesReviewViewModel: NSObject {
     let onRepeatHidden = BehaviorRelay(value: false)
 
     init(settings: SettingsViewModel, needCopy: Bool, doTestAction: ((PhrasesReviewViewModel) -> Void)? = nil) {
-        self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
+        vmSettings = !needCopy ? settings : SettingsViewModel(settings)
         self.doTestAction = doTestAction
         options.shuffled = true
     }
@@ -66,27 +66,26 @@ class PhrasesReviewViewModel: NSObject {
         onRepeatHidden.accept(isTestMode)
         checkPrevHidden.accept(isTestMode)
         if options.mode == .textbook {
-            MUnitPhrase.getDataByTextbook(vmSettings.selectedTextbook).subscribe { arr in
-                let cnt = min(self.options.reviewCount, arr.count)
-                self.arrPhrases = Array(arr.shuffled()[0..<cnt])
+            MUnitPhrase.getDataByTextbook(vmSettings.selectedTextbook).subscribe { [unowned self] arr in
+                let cnt = min(options.reviewCount, arr.count)
+                arrPhrases = Array(arr.shuffled()[0..<cnt])
                 f()
-            } ~ self.rx.disposeBag
+            } ~ rx.disposeBag
         } else {
-            MUnitPhrase.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO).subscribe {
-                self.arrPhrases = $0
-                let count = self.count
-                let from = count * (self.options.groupSelected - 1) / self.options.groupCount
-                let to = count * self.options.groupSelected / self.options.groupCount
-                self.arrPhrases = [MUnitPhrase](self.arrPhrases[from..<to])
-                if self.options.shuffled { self.arrPhrases = self.arrPhrases.shuffled() }
+            MUnitPhrase.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO).subscribe { [unowned self] in
+                arrPhrases = $0
+                let from = count * (options.groupSelected - 1) / options.groupCount
+                let to = count * options.groupSelected / options.groupCount
+                arrPhrases = [MUnitPhrase](arrPhrases[from..<to])
+                if options.shuffled { arrPhrases = arrPhrases.shuffled() }
                 f()
-                if self.options.mode == .reviewAuto {
-                    self.subscriptionTimer = Observable<Int>.interval(.seconds(self.options.interval), scheduler: MainScheduler.instance).subscribe { _ in
-                        self.check(toNext: true)
+                if options.mode == .reviewAuto {
+                    subscriptionTimer = Observable<Int>.interval(.seconds(options.interval), scheduler: MainScheduler.instance).subscribe { [unowned self] _ in
+                        check(toNext: true)
                     }
-                    self.subscriptionTimer?.disposed(by: self.rx.disposeBag)
+                    subscriptionTimer?.disposed(by: rx.disposeBag)
                 }
-            } ~ self.rx.disposeBag
+            } ~ rx.disposeBag
         }
     }
 

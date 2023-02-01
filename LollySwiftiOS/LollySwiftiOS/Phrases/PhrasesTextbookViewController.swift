@@ -21,9 +21,9 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
 
     override func refresh() {
         view.showBlurLoader()
-        vm = PhrasesUnitViewModel(settings: vmSettings, inTextbook: false, needCopy: false) {
-            self.refreshControl.endRefreshing()
-            self.view.removeBlurLoader()
+        vm = PhrasesUnitViewModel(settings: vmSettings, inTextbook: false, needCopy: false) { [unowned self] in
+            refreshControl.endRefreshing()
+            view.removeBlurLoader()
         }
         _ = vmBase.stringTextbookFilter_ ~> btnTextbookFilter.rx.title(for: .normal)
         vm.arrPhrasesFiltered_.subscribe { [unowned self] _ in
@@ -33,7 +33,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
         func configMenu() {
             btnTextbookFilter.menu = UIMenu(title: "", options: .displayInline, children: vmSettings.arrTextbookFilters.map(\.label).enumerated().map { index, item in
                 UIAction(title: item, state: item == vmBase.stringTextbookFilter ? .on : .off) { [unowned self] _ in
-                    self.vmBase.stringTextbookFilter = item
+                    vmBase.stringTextbookFilter = item
                     configMenu()
                 }
             })
@@ -67,11 +67,11 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let i = indexPath.row
-        let item = self.vm.arrPhrases[i]
+        let item = vm.arrPhrases[i]
         func delete() {
-            self.yesNoAction(title: "delete", message: "Do you really want to delete the phrase \"\(item.PHRASE)\"?", yesHandler: { (action) in
-                PhrasesUnitViewModel.delete(item: item).subscribe() ~ self.rx.disposeBag
-                self.vm.arrPhrases.remove(at: i)
+            yesNoAction(title: "delete", message: "Do you really want to delete the phrase \"\(item.PHRASE)\"?", yesHandler: { [unowned self] (action) in
+                PhrasesUnitViewModel.delete(item: item).subscribe() ~ rx.disposeBag
+                vm.arrPhrases.remove(at: i)
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }, noHandler: { (action) in
                 tableView.reloadRows(at: [indexPath], with: .fade)

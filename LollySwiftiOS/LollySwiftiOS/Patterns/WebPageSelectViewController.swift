@@ -20,8 +20,8 @@ class WebPageSelectViewController: UIViewController, UITableViewDelegate, UITabl
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        vmWebPage = WebPageSelectViewModel(settings: vmSettings) {
-            self.tvWebPages.reloadData()
+        vmWebPage = WebPageSelectViewModel(settings: vmSettings) { [unowned self] in
+            tvWebPages.reloadData()
         }
     }
 

@@ -26,9 +26,9 @@ class PatternsWebPagesListViewController: UITableViewController {
     }
 
     @objc func refresh(_ sender: UIRefreshControl) {
-        vm.getWebPages().subscribe { _ in
+        vm.getWebPages().subscribe { [unowned self] _ in
             sender.endRefreshing()
-            self.tableView.reloadData()
+            tableView.reloadData()
         } ~ rx.disposeBag
     }
 
@@ -61,8 +61,8 @@ class PatternsWebPagesListViewController: UITableViewController {
 
     private func reindex() {
         tableView.beginUpdates()
-        vm.reindexWebPage {
-            self.tableView.reloadRows(at: [IndexPath(row: $0, section: 0)], with: .fade)
+        vm.reindexWebPage { [unowned self] in
+            tableView.reloadRows(at: [IndexPath(row: $0, section: 0)], with: .fade)
         }
         tableView.endUpdates()
     }

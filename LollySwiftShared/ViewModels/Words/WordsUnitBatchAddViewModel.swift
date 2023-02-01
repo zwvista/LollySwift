@@ -30,8 +30,8 @@ class WordsUnitBatchAddViewModel: NSObject {
             let item2 = MUnitWord()
             copyProperties(from: item, to: item2)
             item2.WORD = vm.vmSettings.autoCorrectInput(text: String(s))
-            o = o.flatMap {
-                self.vm.create(item: item2)
+            o = o.flatMap { [unowned self] in
+                vm.create(item: item2)
             }
             item.SEQNUM += 1
         }

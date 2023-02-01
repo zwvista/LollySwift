@@ -38,7 +38,7 @@ class WordsUnitBatchEditViewModel: NSObject {
                 if unitChecked.value { item.UNIT = UNIT }
                 if partChecked.value { item.PART = PART }
                 if seqnumChecked.value { item.SEQNUM += Int(SEQNUM.value)! }
-                o = o.flatMap { self.vm.update(item: item) }
+                o = o.flatMap { [unowned self] in vm.update(item: item) }
             }
         }
         return o

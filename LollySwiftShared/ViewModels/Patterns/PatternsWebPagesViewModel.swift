@@ -22,7 +22,7 @@ class PatternsWebPagesViewModel: NSObject {
     }
 
     public init(settings: SettingsViewModel, needCopy: Bool, item: MPattern?) {
-        self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
+        vmSettings = !needCopy ? settings : SettingsViewModel(settings)
         self.selectedPatternItem = item
         super.init()
     }
@@ -32,8 +32,8 @@ class PatternsWebPagesViewModel: NSObject {
             arrWebPages.removeAll()
             return Single.just(())
         } else {
-            return MPatternWebPage.getDataByPattern(selectedPatternItem!.ID).map {
-                self.arrWebPages = $0
+            return MPatternWebPage.getDataByPattern(selectedPatternItem!.ID).map { [unowned self] in
+                arrWebPages = $0
             }
         }
     }

@@ -39,8 +39,8 @@ class PhrasesUnitViewModel: PhrasesBaseViewModel {
 
     func reload() -> Single<()> {
         (inTextbook ? MUnitPhrase.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO) : MUnitPhrase.getDataByLang(vmSettings.selectedTextbook.LANGID, arrTextbooks: vmSettings.arrTextbooks))
-        .map {
-            self.arrPhrases = $0
+        .map { [unowned self] in
+            arrPhrases = $0
         }
     }
 
@@ -49,19 +49,19 @@ class PhrasesUnitViewModel: PhrasesBaseViewModel {
     }
 
     func update(item: MUnitPhrase) -> Single<()> {
-        MUnitPhrase.update(item: item).flatMap {
-            MUnitPhrase.getDataById(item.ID, arrTextbooks: self.vmSettings.arrTextbooks)
+        MUnitPhrase.update(item: item).flatMap { [unowned self] in
+            MUnitPhrase.getDataById(item.ID, arrTextbooks: vmSettings.arrTextbooks)
         }.map {
             if let o = $0 { copyProperties(from: o, to: item) }
         }
     }
 
     func create(item: MUnitPhrase) -> Single<()> {
-        MUnitPhrase.create(item: item).flatMap {
-            MUnitPhrase.getDataById($0, arrTextbooks: self.vmSettings.arrTextbooks)
-        }.map {
+        MUnitPhrase.create(item: item).flatMap { [unowned self] in
+            MUnitPhrase.getDataById($0, arrTextbooks: vmSettings.arrTextbooks)
+        }.map { [unowned self] in
             if let o = $0 {
-                self.arrPhrases.append(o)
+                arrPhrases.append(o)
                 copyProperties(from: o, to: item)
             }
         }
