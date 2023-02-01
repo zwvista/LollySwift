@@ -70,9 +70,9 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
         settingsChanged()
         wc = view.window!.windowController as? PhrasesReviewWindowController
         _ = vm.isSpeaking <~> wc.scSpeak.rx.isOn
-        vm.isSpeaking.subscribe { isSpeaking in
+        vm.isSpeaking.subscribe { [unowned self] isSpeaking in
             if isSpeaking {
-                self.synth.startSpeaking(self.vm.currentPhrase)
+                synth.startSpeaking(vm.currentPhrase)
             }
         } ~ rx.disposeBag
     }
@@ -86,7 +86,7 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
         let optionsVC = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: "ReviewOptionsViewController") as! ReviewOptionsViewController
         optionsVC.vm = ReviewOptionsViewModel(options: vm.options)
         optionsVC.complete = { [unowned self] in
-            self.vm.newTest()
+            vm.newTest()
         }
         self.presentAsSheet(optionsVC)
     }

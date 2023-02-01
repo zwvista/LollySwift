@@ -27,8 +27,8 @@ class BlogViewController: NSViewController, NSMenuItemValidation  {
         vmBlog = BlogViewModel(settings: vm)
         tvMarked.font = NSFont.systemFont(ofSize: 15)
         updateStatusText()
-        vm.getBlogContent().subscribe {
-            self.tvMarked.string = $0
+        vm.getBlogContent().subscribe { [unowned self] in
+            tvMarked.string = $0
         } ~ rx.disposeBag
     }
 
@@ -87,8 +87,8 @@ class BlogViewController: NSViewController, NSMenuItemValidation  {
         MacApi.openURL(url)
     }
     @IBAction func addNotes(_ sender: AnyObject) {
-        vmBlog.addNotes(text: tvMarked.string) {
-            self.tvMarked.string = $0
+        vmBlog.addNotes(text: tvMarked.string) { [unowned self] in
+            tvMarked.string = $0
         }
     }
     func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {

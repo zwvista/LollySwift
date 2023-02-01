@@ -23,7 +23,7 @@ class PatternsWebPagesViewModel: NSObject {
 
     public init(settings: SettingsViewModel, needCopy: Bool, item: MPattern?) {
         vmSettings = !needCopy ? settings : SettingsViewModel(settings)
-        self.selectedPatternItem = item
+        selectedPatternItem = item
         super.init()
     }
 

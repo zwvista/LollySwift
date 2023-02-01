@@ -31,7 +31,7 @@ class PhrasesUnitBatchAddViewModel: NSObject {
             copyProperties(from: item, to: item2)
             item2.PHRASE = vm.vmSettings.autoCorrectInput(text: phrases[i])
             item2.TRANSLATION = phrases[i + 1]
-            o = o.flatMap { self.vm.create(item: item2) }
+            o = o.flatMap { [unowned self] in vm.create(item: item2) }
             item.SEQNUM += 1
         }
         return o

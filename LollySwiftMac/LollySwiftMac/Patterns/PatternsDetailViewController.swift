@@ -31,10 +31,10 @@ class PatternsDetailViewController: NSViewController {
         _ = itemEdit.NOTE <~> tfNote.rx.text.orEmpty
         _ = itemEdit.TAGS <~> tfTags.rx.text.orEmpty
         btnOK.rx.tap.flatMap { [unowned self] in
-            self.vmEdit.onOK()
+            vmEdit.onOK()
         }.subscribe { [unowned self] _ in
-            self.complete?()
-            self.dismiss(self.btnOK)
+            complete?()
+            dismiss(btnOK)
         } ~ rx.disposeBag
     }
 

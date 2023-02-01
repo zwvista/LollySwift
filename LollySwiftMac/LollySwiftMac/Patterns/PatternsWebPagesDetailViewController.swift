@@ -43,10 +43,10 @@ class PatternsWebPagesDetailViewController: NSViewController {
         btnNew.isEnabled = vmEdit.isAddWebPage
         btnExisting.isEnabled = vmEdit.isAddWebPage
         btnOK.rx.tap.flatMap { [unowned self] in
-            self.vmEdit.onOK()
+            vmEdit.onOK()
         }.subscribe { [unowned self] _ in
-            self.complete?()
-            self.dismiss(self.btnOK)
+            complete?()
+            dismiss(btnOK)
         } ~ rx.disposeBag
     }
 
@@ -64,11 +64,11 @@ class PatternsWebPagesDetailViewController: NSViewController {
     @IBAction func existingWebPageID(_ sender: Any) {
         let webPageVC = self.storyboard!.instantiateController(withIdentifier: "WebPageSelectViewController") as! WebPageSelectViewController
         webPageVC.vm = vm
-        webPageVC.complete = {
+        webPageVC.complete = { [unowned self] in
             let o = webPageVC.vmWebPage.selectedWebPage!
-            self.itemEdit.WEBPAGEID.accept(String(o.ID))
-            self.itemEdit.TITLE.accept(o.TITLE)
-            self.itemEdit.URL.accept(o.URL)
+            itemEdit.WEBPAGEID.accept(String(o.ID))
+            itemEdit.TITLE.accept(o.TITLE)
+            itemEdit.URL.accept(o.URL)
         }
         self.presentAsModalWindow(webPageVC)
     }

@@ -48,7 +48,7 @@ class DictsViewController: NSViewController, LollyProtocol, NSTableViewDataSourc
         detailVC.vm = vm
         let i = tableView.selectedRow
         detailVC.item = vm.arrDicts[i]
-        detailVC.complete = { self.tableView.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count)) }
+        detailVC.complete = { [unowned self] in tableView.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<tableView.tableColumns.count)) }
         self.presentAsModalWindow(detailVC)
     }
 
@@ -56,7 +56,7 @@ class DictsViewController: NSViewController, LollyProtocol, NSTableViewDataSourc
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "DictsDetailViewController") as! DictsDetailViewController
         detailVC.vm = vm
         detailVC.item = vm.newDict()
-        detailVC.complete = { self.tableView.reloadData() }
+        detailVC.complete = { [unowned self] in tableView.reloadData() }
         self.presentAsSheet(detailVC)
     }
 
@@ -70,8 +70,8 @@ class DictsViewController: NSViewController, LollyProtocol, NSTableViewDataSourc
         let newValue = sender.stringValue
         guard oldValue != newValue else {return}
         item.setValue(newValue, forKey: key)
-        DictsViewModel.update(item: item).subscribe { _ in
-            self.tableView.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count))
+        DictsViewModel.update(item: item).subscribe { [unowned self] _ in
+            tableView.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<tableView.tableColumns.count))
         } ~ rx.disposeBag
     }
 }

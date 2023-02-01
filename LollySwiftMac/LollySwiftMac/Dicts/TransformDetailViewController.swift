@@ -67,8 +67,8 @@ class TransformDetailViewController: NSViewController, NSTableViewDataSource, NS
 
     func tableView(_ tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int, dropOperation: NSTableView.DropOperation) -> Bool {
         var oldIndexes = [Int]()
-        info.enumerateDraggingItems(options: [], for: tableView, classes: [NSPasteboardItem.self], searchOptions: [:]) { (draggingItem, _, _) in
-            if let str = (draggingItem.item as! NSPasteboardItem).string(forType: self.tableRowDragType), let index = Int(str) {
+        info.enumerateDraggingItems(options: [], for: tableView, classes: [NSPasteboardItem.self], searchOptions: [:]) { [unowned self] (draggingItem, _, _) in
+            if let str = (draggingItem.item as! NSPasteboardItem).string(forType: tableRowDragType), let index = Int(str) {
                 oldIndexes.append(index)
             }
         }
@@ -103,9 +103,9 @@ class TransformDetailViewController: NSViewController, NSTableViewDataSource, NS
     @IBAction func addTransformItem(_ sender: AnyObject) {
         let itemEditVC = self.storyboard!.instantiateController(withIdentifier: "TransformItemEditController") as! TransformItemEditController
         itemEditVC.item = vm.newTransformItem()
-        itemEditVC.complete = {
-            self.vm.arrTranformItems.append(itemEditVC.item)
-            self.tvTranformItems.reloadData()
+        itemEditVC.complete = { [unowned self] in
+            vm.arrTranformItems.append(itemEditVC.item)
+            tvTranformItems.reloadData()
         }
         self.presentAsSheet(itemEditVC)
     }
@@ -115,9 +115,9 @@ class TransformDetailViewController: NSViewController, NSTableViewDataSource, NS
         let i = tvTranformItems.selectedRow
         itemEditVC.item = MTransformItem()
         itemEditVC.item.copy(from: vm.arrTranformItems[i])
-        itemEditVC.complete = {
-            self.vm.arrTranformItems[i].copy(from: itemEditVC.item)
-            self.tvTranformItems.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tvTranformItems.tableColumns.count))
+        itemEditVC.complete = { [unowned self] in
+            vm.arrTranformItems[i].copy(from: itemEditVC.item)
+            tvTranformItems.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<tvTranformItems.tableColumns.count))
         }
         self.presentAsModalWindow(itemEditVC)
     }
@@ -134,8 +134,8 @@ class TransformDetailViewController: NSViewController, NSTableViewDataSource, NS
     }
 
     @IBAction func getHtmlAndTransform(_ sender: Any) {
-        vm.getHtml().subscribe { _ in
-            self.executeTransform(sender)
+        vm.getHtml().subscribe { [unowned self] _ in
+            executeTransform(sender)
         } ~ rx.disposeBag
         wvSource.load(URLRequest(url: URL(string: vm.sourceUrl)!))
     }

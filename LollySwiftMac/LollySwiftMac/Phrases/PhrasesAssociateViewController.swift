@@ -74,14 +74,14 @@ class PhrasesAssociateViewController: NSViewController, NSTableViewDataSource, N
             guard (col as! LollyCheckCell).chk!.state == .on else {continue}
             let item = arrPhrases[i]
             if wordid != 0 {
-                o = o.flatMap {
-                    MWordPhrase.associate(wordid: self.wordid, phraseid: item.PHRASEID)
+                o = o.flatMap { [unowned self] in
+                    MWordPhrase.associate(wordid: wordid, phraseid: item.PHRASEID)
                 }
             }
         }
-        o.subscribe { _ in
-            self.complete?()
-            self.dismiss(sender)
+        o.subscribe { [unowned self] _ in
+            complete?()
+            dismiss(sender)
         } ~ rx.disposeBag
     }
 

@@ -14,7 +14,7 @@ class BlogViewModel: NSObject {
 
     var vmSettings: SettingsViewModel
     init(settings: SettingsViewModel) {
-        self.vmSettings = SettingsViewModel(settings)
+        vmSettings = SettingsViewModel(settings)
     }
 
     private func html1With(_ s: String) -> String {
@@ -130,22 +130,22 @@ class BlogViewModel: NSObject {
             return t
         }
         var arr = text.components(separatedBy: "\n")
-        vmSettings.getNotes(wordCount: arr.count, isNoteEmpty: {
-            let m = arr[$0].firstMatch(of: self.regMarkedEntry)
+        vmSettings.getNotes(wordCount: arr.count, isNoteEmpty: { [unowned self] in
+            let m = arr[$0].firstMatch(of: regMarkedEntry)
             if m == nil { return false }
             let word = String(m!.2)
             return word.allSatisfy { $0 != "（" && !bigDigits.contains($0) }
-        }, getOne: { i in
-            let m = arr[i].firstMatch(of: self.regMarkedEntry)!
+        }, getOne: { [unowned self] i in
+            let m = arr[i].firstMatch(of: regMarkedEntry)!
             let (s1, word, s3, s4) = (String(m.1), String(m.2), String(m.3), String(m.4))
-            self.vmSettings.getNote(word: word).subscribe { note in
+            vmSettings.getNote(word: word).subscribe { note in
                 let j = note.firstIndex { "0"..."9" ~= $0 }
                 // https://stackoverflow.com/questions/45562662/how-can-i-use-string-slicing-subscripts-in-swift-4
                 let s21 = j == nil ? note : String(note[..<j!])
                 let s22 = j == nil ? "" : f(String(note[j!...]))
                 let s2 = word + (s21 == word || s21.isEmpty ? "" : "（\(s21)）") + s22
                 arr[i] = "\(s1) \(s2)：\(s3)：\(s4)"
-            } ~ self.rx.disposeBag
+            } ~ rx.disposeBag
         }, allComplete: {
             let result = arr.joined(separator: "\n")
             complete(result)

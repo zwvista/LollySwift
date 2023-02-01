@@ -22,8 +22,8 @@ class PhrasesBaseViewController: WordsPhrasesBaseViewController {
     override func settingsChanged() {
         _ = vmPhrases.textFilter_ <~> sfTextFilter.rx.text.orEmpty
         _ = vmPhrases.scopeFilter_ <~> scScopeFilter.rx.selectedLabel
-        sfTextFilter.rx.searchFieldDidStartSearching.subscribe { _ in
-            self.vmPhrases.textFilter = self.vmSettings.autoCorrectInput(text: self.vmPhrases.textFilter)
+        sfTextFilter.rx.searchFieldDidStartSearching.subscribe { [unowned self] _ in
+            vmPhrases.textFilter = vmSettings.autoCorrectInput(text: vmPhrases.textFilter)
         } ~ rx.disposeBag
         super.settingsChanged()
         vmWordsLang = WordsLangViewModel(settings: vmSettings)
@@ -123,10 +123,10 @@ class PhrasesBaseViewController: WordsPhrasesBaseViewController {
     }
 
     func getWords() {
-        vmWordsLang.getWords(phraseid: vmPhrases.selectedPhraseID).subscribe { _ in
-            self.tvWords.reloadData()
-            if self.tvWords.numberOfRows > 0 {
-                self.tvWords.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
+        vmWordsLang.getWords(phraseid: vmPhrases.selectedPhraseID).subscribe { [unowned self] _ in
+            tvWords.reloadData()
+            if tvWords.numberOfRows > 0 {
+                tvWords.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
             }
         } ~ rx.disposeBag
     }
@@ -135,8 +135,8 @@ class PhrasesBaseViewController: WordsPhrasesBaseViewController {
         let detailVC = NSStoryboard(name: "Words", bundle: nil).instantiateController(withIdentifier: "WordsLangDetailViewController") as! WordsLangDetailViewController
         let i = tvWords.selectedRow
         detailVC.vmEdit = WordsLangDetailViewModel(vm: vmWordsLang, item: vmWordsLang.arrWords[i])
-        detailVC.complete = {
-            self.tvWords.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tvWords.tableColumns.count))
+        detailVC.complete = { [unowned self] in
+            tvWords.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<tvWords.tableColumns.count))
         }
         self.presentAsModalWindow(detailVC)
     }

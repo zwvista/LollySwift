@@ -32,7 +32,7 @@ class LoginViewController: NSViewController {
             if globalUser.isLoggedIn {
                 globalUser.save()
                 NSApplication.shared.stopModal(withCode: .OK)
-                self.view.window?.close()
+                view.window?.close()
             } else {
                 let alert = NSAlert()
                 alert.alertStyle = .critical
@@ -45,7 +45,7 @@ class LoginViewController: NSViewController {
 
         btnExit.rx.tap.subscribe { [unowned self] _ in
             NSApplication.shared.stopModal(withCode: .cancel)
-            self.view.window?.close()
+            view.window?.close()
         } ~ rx.disposeBag
     }
 

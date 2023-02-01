@@ -36,10 +36,10 @@ class PhrasesLangDetailViewController: NSViewController, NSTableViewDataSource, 
         } ~ rx.disposeBag
 
         btnOK.rx.tap.flatMap { [unowned self] in
-            self.vmEdit.onOK()
+            vmEdit.onOK()
         }.subscribe{ [unowned self] _ in
-            self.complete?()
-            self.dismiss(self.btnOK)
+            complete?()
+            dismiss(btnOK)
         } ~ rx.disposeBag
     }
 

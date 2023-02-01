@@ -46,9 +46,9 @@ class ReviewOptionsViewController: NSViewController {
         _ = vm.optionsEdit.reviewCount <~> stpReviewCount.rx.integerValue
         _ = vm.optionsEdit.reviewCount.map { String($0) } ~> tfReviewCount.rx.text.orEmpty
         btnOK.rx.tap.subscribe { [unowned self] _ in
-            self.vm.onOK()
-            self.complete?()
-            self.dismiss(self.btnOK)
+            vm.onOK()
+            complete?()
+            dismiss(btnOK)
         } ~ rx.disposeBag
     }
 

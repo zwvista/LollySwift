@@ -19,8 +19,8 @@ class ReadNumberViewController: NSViewController, NSTextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         vm = ReadNumberViewModel()
-        _observers.append(observe(\.vm.text, options: .new){_,change in
-            self.tfText.stringValue = change.newValue!
+        _observers.append(observe(\.vm.text, options: .new){ [unowned self] _,change in
+            tfText.stringValue = change.newValue!
         })
     }
 

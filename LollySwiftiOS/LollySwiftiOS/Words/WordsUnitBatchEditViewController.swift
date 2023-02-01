@@ -48,7 +48,7 @@ class WordsUnitBatchEditViewController: UIViewController, UITableViewDelegate, U
                 if swUnit.isOn { item.UNIT = unit }
                 if swPart.isOn { item.PART = part }
                 if swSeqNum.isOn { item.SEQNUM += seqnum }
-                o = o.flatMap { self.vm.update(item: item) }
+                o = o.flatMap { [unowned self] in vm.update(item: item) }
             }
         }
         o.subscribe() ~ rx.disposeBag

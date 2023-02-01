@@ -64,7 +64,7 @@ class SelectDictsViewController: NSViewController, NSTableViewDataSource, NSTabl
             vm.selectedDictsReferenceIndexes = dictsSelected.compactMap { o in vm.arrDictsReference.firstIndex { $0.DICTID == o.DICTID } }
             return vm.updateDictsReference()
         }.subscribe { [unowned self] _ in
-            self.complete?()
+            complete?()
             dismiss(btnOK)
         } ~ rx.disposeBag
     }
@@ -104,8 +104,8 @@ class SelectDictsViewController: NSViewController, NSTableViewDataSource, NSTabl
     }
     func tableView(_ tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int, dropOperation: NSTableView.DropOperation) -> Bool {
         var oldIndexes = [Int]()
-        info.enumerateDraggingItems(options: [], for: tableView, classes: [NSPasteboardItem.self], searchOptions: [:]) { (draggingItem, _, _) in
-            if let str = (draggingItem.item as! NSPasteboardItem).string(forType: self.tableRowDragType), let index = Int(str) {
+        info.enumerateDraggingItems(options: [], for: tableView, classes: [NSPasteboardItem.self], searchOptions: [:]) { [unowned self] (draggingItem, _, _) in
+            if let str = (draggingItem.item as! NSPasteboardItem).string(forType: tableRowDragType), let index = Int(str) {
                 oldIndexes.append(index)
             }
         }

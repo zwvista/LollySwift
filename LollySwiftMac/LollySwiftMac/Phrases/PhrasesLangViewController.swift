@@ -23,11 +23,11 @@ class PhrasesLangViewController: PhrasesBaseViewController {
     }
 
     override func settingsChanged() {
-        vm = PhrasesLangViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) {
-            self.doRefresh()
+        vm = PhrasesLangViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) { [unowned self] in
+            doRefresh()
         }
         vm.arrPhrasesFiltered_.subscribe { [unowned self] _ in
-            self.doRefresh()
+            doRefresh()
         } ~ rx.disposeBag
         super.settingsChanged()
     }
@@ -49,19 +49,19 @@ class PhrasesLangViewController: PhrasesBaseViewController {
     @IBAction func addPhrase(_ sender: AnyObject) {
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesLangDetailViewController") as! PhrasesLangDetailViewController
         detailVC.vmEdit = PhrasesLangDetailViewModel(vm: vm, item: vm.newLangPhrase())
-        detailVC.complete = { self.tvPhrases.reloadData(); self.addPhrase(self) }
+        detailVC.complete = { [unowned self] in tvPhrases.reloadData(); addPhrase(self) }
         self.presentAsSheet(detailVC)
     }
 
     override func deletePhrase(row: Int) {
-        PhrasesLangViewModel.delete(item: arrPhrases[row]).subscribe { _ in
-            self.doRefresh()
+        PhrasesLangViewModel.delete(item: arrPhrases[row]).subscribe { [unowned self] _ in
+            doRefresh()
         } ~ rx.disposeBag
     }
 
     @IBAction func refreshTableView(_ sender: AnyObject) {
-        vm.reload().subscribe { _ in
-            self.doRefresh()
+        vm.reload().subscribe { [unowned self] _ in
+            doRefresh()
         } ~ rx.disposeBag
     }
 
@@ -77,8 +77,8 @@ class PhrasesLangViewController: PhrasesBaseViewController {
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesLangDetailViewController") as! PhrasesLangDetailViewController
         let i = tvPhrases.selectedRow
         detailVC.vmEdit = PhrasesLangDetailViewModel(vm: vm, item: arrPhrases[i])
-        detailVC.complete = {
-            self.tvPhrases.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tvPhrases.tableColumns.count))
+        detailVC.complete = { [unowned self] in
+            tvPhrases.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<tvPhrases.tableColumns.count))
         }
         self.presentAsModalWindow(detailVC)
     }
@@ -92,8 +92,8 @@ class PhrasesLangViewController: PhrasesBaseViewController {
         let detailVC = NSStoryboard(name: "Words", bundle: nil).instantiateController(withIdentifier: "WordsAssociateViewController") as! WordsAssociateViewController
         detailVC.textFilter = vm.selectedPhrase
         detailVC.phraseid = vm.selectedPhraseID
-        detailVC.complete = {
-            self.getWords()
+        detailVC.complete = { [unowned self] in
+            getWords()
         }
         self.presentAsModalWindow(detailVC)
     }

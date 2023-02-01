@@ -181,7 +181,7 @@ class WordsUnitViewController: WordsBaseViewController {
         if let controller = segue.source as? WordsUnitDetailViewController {
             controller.vmEdit.onOK().subscribe { [unowned self] _ in
                 tableView.reloadData()
-                if controller.vmEdit.isAdd { [unowned self] in
+                if controller.vmEdit.isAdd {
                     performSegue(withIdentifier: "add", sender: self)
                 }
             } ~ rx.disposeBag
