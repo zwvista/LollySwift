@@ -140,7 +140,7 @@ class SettingsViewController: NSViewController, NSTableViewDataSource, NSTableVi
         dictVC.complete = { [unowned self] in
             tvDictsReference.reloadData()
         }
-        self.presentAsModalWindow(dictVC)
+        presentAsModalWindow(dictVC)
     }
 
     deinit {

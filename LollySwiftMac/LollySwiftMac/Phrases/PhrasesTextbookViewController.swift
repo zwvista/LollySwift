@@ -75,14 +75,14 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
     }
 
     @IBAction func editPhrase(_ sender: AnyObject) {
-        let detailVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesTextbookDetailViewController") as! PhrasesTextbookDetailViewController
+        let detailVC = storyboard!.instantiateController(withIdentifier: "PhrasesTextbookDetailViewController") as! PhrasesTextbookDetailViewController
         let i = tvPhrases.selectedRow
         if i == -1 {return}
         detailVC.vmEdit = PhrasesUnitDetailViewModel(vm: vm, item: arrPhrases[i], wordid: 0)
         detailVC.complete = { [unowned self] in
             tvPhrases.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<tvPhrases.tableColumns.count))
         }
-        self.presentAsModalWindow(detailVC)
+        presentAsModalWindow(detailVC)
     }
 
     override func updateStatusText() {
@@ -99,7 +99,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
                 await getWords()
             }
         }
-        self.presentAsModalWindow(detailVC)
+        presentAsModalWindow(detailVC)
     }
 }
 

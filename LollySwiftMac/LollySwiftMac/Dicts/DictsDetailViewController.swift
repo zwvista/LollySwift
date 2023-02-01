@@ -47,10 +47,10 @@ class DictsDetailViewController: NSViewController {
     }
 
     @IBAction func editTransform(_ sender: Any) {
-        let tranformVC = self.storyboard!.instantiateController(withIdentifier: "TransformDetailViewController") as! TransformDetailViewController
+        let tranformVC = storyboard!.instantiateController(withIdentifier: "TransformDetailViewController") as! TransformDetailViewController
         tranformVC.vm.item = item
         tranformVC.complete = {  }
-        self.presentAsModalWindow(tranformVC)
+        presentAsModalWindow(tranformVC)
     }
 
     @IBAction func okClicked(_ sender: Any) {

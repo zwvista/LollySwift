@@ -301,7 +301,7 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
         detailVC.complete = { [unowned self] in
             tvPhrases.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<tvPhrases.tableColumns.count))
         }
-        self.presentAsModalWindow(detailVC)
+        presentAsModalWindow(detailVC)
     }
 }
 

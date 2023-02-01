@@ -90,7 +90,7 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
                 await vm.newTest()
             }
         }
-        self.presentAsSheet(optionsVC)
+        presentAsSheet(optionsVC)
     }
 
     func controlTextDidEndEditing(_ obj: Notification) {

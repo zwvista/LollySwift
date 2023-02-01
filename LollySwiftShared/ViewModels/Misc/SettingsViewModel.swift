@@ -427,7 +427,7 @@ class SettingsViewModel: NSObject, ObservableObject {
         async let res4 = MCode.getData()
         (arrLanguages, arrUSMappings, arrUserSettings, arrDictTypes) = await (res1, res2, res3, res4)
         INFO_USLANG = getUSInfo(name: MUSMapping.NAME_USLANG)
-        selectedLangIndex = arrLanguages.firstIndex { $0.ID == self.USLANG } ?? 0
+        selectedLangIndex = arrLanguages.firstIndex { [unowned self] in $0.ID == USLANG } ?? 0
     }
 
     func updateDictsReference() async {
@@ -447,8 +447,8 @@ class SettingsViewModel: NSObject, ObservableObject {
         case .unit:
             toType = .part
             await withTaskGroup(of: Void.self) {
-                $0.addTask { await self.doUpdatePartFrom(v: part) }
-                $0.addTask { await self.doUpdateUnitPartTo() }
+                $0.addTask { [unowned self] in await doUpdatePartFrom(v: part) }
+                $0.addTask { [unowned self] in await doUpdateUnitPartTo() }
             }
         case .part:
             toType = .unit
@@ -463,20 +463,20 @@ class SettingsViewModel: NSObject, ObservableObject {
             let n = selectedUnitFrom
             if n > 1 {
                 await withTaskGroup(of: Void.self) {
-                    $0.addTask { await self.doUpdateUnitFrom(v: n - 1) }
-                    $0.addTask { await self.doUpdateUnitTo(v: n - 1) }
+                    $0.addTask { [unowned self] in await doUpdateUnitFrom(v: n - 1) }
+                    $0.addTask { [unowned self] in await doUpdateUnitTo(v: n - 1) }
                 }
             }
         } else if selectedPartFrom > 1 {
             await withTaskGroup(of: Void.self) {
-                $0.addTask { await self.doUpdatePartFrom(v: self.selectedPartFrom - 1) }
-                $0.addTask { await self.doUpdateUnitPartTo() }
+                $0.addTask { [unowned self] in await doUpdatePartFrom(v: selectedPartFrom - 1) }
+                $0.addTask { [unowned self] in await doUpdateUnitPartTo() }
             }
         } else if selectedUnitFrom > 1 {
             await withTaskGroup(of: Void.self) {
-                $0.addTask { await self.doUpdateUnitFrom(v: self.selectedUnitFrom - 1) }
-                $0.addTask { await self.doUpdatePartFrom(v: self.partCount) }
-                $0.addTask { await self.doUpdateUnitPartTo() }
+                $0.addTask { [unowned self] in await doUpdateUnitFrom(v: selectedUnitFrom - 1) }
+                $0.addTask { [unowned self] in await doUpdatePartFrom(v: partCount) }
+                $0.addTask { [unowned self] in await doUpdateUnitPartTo() }
             }
         }
     }
@@ -486,43 +486,43 @@ class SettingsViewModel: NSObject, ObservableObject {
             let n = selectedUnitFrom
             if n < unitCount {
                 await withTaskGroup(of: Void.self) {
-                    $0.addTask { await self.doUpdateUnitFrom(v: n + 1) }
-                    $0.addTask { await self.doUpdateUnitTo(v: n + 1) }
+                    $0.addTask { [unowned self] in await doUpdateUnitFrom(v: n + 1) }
+                    $0.addTask { [unowned self] in await doUpdateUnitTo(v: n + 1) }
                 }
             }
         } else if selectedPartFrom < partCount {
             await withTaskGroup(of: Void.self) {
-                $0.addTask { await self.doUpdatePartFrom(v: self.selectedPartFrom + 1) }
-                $0.addTask { await self.doUpdateUnitPartTo() }
+                $0.addTask { [unowned self] in await doUpdatePartFrom(v: selectedPartFrom + 1) }
+                $0.addTask { [unowned self] in await doUpdateUnitPartTo() }
             }
         } else if selectedUnitFrom < unitCount {
             await withTaskGroup(of: Void.self) {
-                $0.addTask { await self.doUpdateUnitFrom(v: self.selectedUnitFrom + 1) }
-                $0.addTask { await self.doUpdatePartFrom(v: 1) }
-                $0.addTask { await self.doUpdateUnitPartTo() }
+                $0.addTask { [unowned self] in await doUpdateUnitFrom(v: selectedUnitFrom + 1) }
+                $0.addTask { [unowned self] in await doUpdatePartFrom(v: 1) }
+                $0.addTask { [unowned self] in await doUpdateUnitPartTo() }
             }
         }
     }
 
     private func doUpdateUnitPartFrom() async {
         await withTaskGroup(of: Void.self) {
-            $0.addTask { await self.doUpdateUnitFrom(v: self.USUNITTO) }
-            $0.addTask { await self.doUpdatePartFrom(v: self.USPARTTO) }
+            $0.addTask { [unowned self] in await doUpdateUnitFrom(v: USUNITTO) }
+            $0.addTask { [unowned self] in await doUpdatePartFrom(v: USPARTTO) }
         }
     }
 
     private func doUpdateUnitPartTo() async {
         await withTaskGroup(of: Void.self) {
-            $0.addTask { await self.doUpdateUnitTo(v: self.USUNITFROM) }
-            $0.addTask { await self.doUpdatePartTo(v: self.USPARTFROM) }
+            $0.addTask { [unowned self] in await doUpdateUnitTo(v: USUNITFROM) }
+            $0.addTask { [unowned self] in await doUpdatePartTo(v: USPARTFROM) }
         }
     }
 
     private func doUpdateSingleUnit() async {
         await withTaskGroup(of: Void.self) {
-            $0.addTask { await self.doUpdateUnitTo(v: self.USUNITFROM) }
-            $0.addTask { await self.doUpdatePartFrom(v: 1) }
-            $0.addTask { await self.doUpdatePartTo(v: self.partCount) }
+            $0.addTask { [unowned self] in await doUpdateUnitTo(v: USUNITFROM) }
+            $0.addTask { [unowned self] in await doUpdatePartFrom(v: 1) }
+            $0.addTask { [unowned self] in await doUpdatePartTo(v: partCount) }
         }
     }
 

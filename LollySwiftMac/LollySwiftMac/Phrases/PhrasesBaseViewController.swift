@@ -138,7 +138,7 @@ class PhrasesBaseViewController: WordsPhrasesBaseViewController {
         detailVC.complete = { [unowned self] in
             tvWords.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<tvWords.tableColumns.count))
         }
-        self.presentAsModalWindow(detailVC)
+        presentAsModalWindow(detailVC)
     }
 }
 

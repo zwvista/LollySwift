@@ -112,10 +112,10 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     }
 
     func addPhrase(wordid: Int) {
-        let detailVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesUnitDetailViewController") as! PhrasesUnitDetailViewController
+        let detailVC = storyboard!.instantiateController(withIdentifier: "PhrasesUnitDetailViewController") as! PhrasesUnitDetailViewController
         detailVC.vmEdit = PhrasesUnitDetailViewModel(vm: vm, item: vm.newUnitPhrase(), wordid: wordid)
         detailVC.complete = { [unowned self] in tvPhrases.reloadData(); addPhrase(self) }
-        self.presentAsSheet(detailVC)
+        presentAsSheet(detailVC)
     }
 
     // https://stackoverflow.com/questions/24219441/how-to-use-nstoolbar-in-xcode-6-and-storyboard
@@ -124,19 +124,19 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     }
 
     @IBAction func batchAdd(_ sender: AnyObject) {
-        let batchVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesUnitBatchAddViewController") as! PhrasesUnitBatchAddViewController
+        let batchVC = storyboard!.instantiateController(withIdentifier: "PhrasesUnitBatchAddViewController") as! PhrasesUnitBatchAddViewController
         batchVC.vmEdit = PhrasesUnitBatchAddViewModel(vm: vm)
         batchVC.complete = { [unowned self] in doRefresh() }
-        self.presentAsModalWindow(batchVC)
+        presentAsModalWindow(batchVC)
     }
 
     @IBAction func batchEdit(_ sender: AnyObject) {
-        let batchVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesUnitBatchEditViewController") as! PhrasesUnitBatchEditViewController
+        let batchVC = storyboard!.instantiateController(withIdentifier: "PhrasesUnitBatchEditViewController") as! PhrasesUnitBatchEditViewController
         let i = tvPhrases.selectedRow
         let item = i == -1 ? nil : arrPhrases[tvPhrases.selectedRow]
         batchVC.vmEdit = PhrasesUnitBatchEditViewModel(vm: vm, unit: item?.UNIT ?? vmSettings.USUNITTO, part: item?.PART ?? vmSettings.USPARTTO)
         batchVC.complete = { [unowned self] in doRefresh() }
-        self.presentAsModalWindow(batchVC)
+        presentAsModalWindow(batchVC)
     }
 
     override func deletePhrase(row: Int) {
@@ -162,14 +162,14 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     }
 
     @IBAction func editPhrase(_ sender: AnyObject) {
-        let detailVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesUnitDetailViewController") as! PhrasesUnitDetailViewController
+        let detailVC = storyboard!.instantiateController(withIdentifier: "PhrasesUnitDetailViewController") as! PhrasesUnitDetailViewController
         let i = tvPhrases.selectedRow
         if i == -1 {return}
         detailVC.vmEdit = PhrasesUnitDetailViewModel(vm: vm, item: arrPhrases[i], wordid: 0)
         detailVC.complete = { [unowned self] in
             tvPhrases.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<tvPhrases.tableColumns.count))
         }
-        self.presentAsModalWindow(detailVC)
+        presentAsModalWindow(detailVC)
     }
 
     @IBAction func previousUnitPart(_ sender: AnyObject) {
@@ -215,7 +215,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
                 await getWords()
             }
         }
-        self.presentAsModalWindow(detailVC)
+        presentAsModalWindow(detailVC)
     }
 
     @IBAction func generateBlogContent(_ sender: AnyObject) {

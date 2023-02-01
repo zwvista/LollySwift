@@ -134,10 +134,10 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     }
 
     func addWord(phraseid: Int) {
-        let detailVC = self.storyboard!.instantiateController(withIdentifier: "WordsUnitDetailViewController") as! WordsUnitDetailViewController
+        let detailVC = storyboard!.instantiateController(withIdentifier: "WordsUnitDetailViewController") as! WordsUnitDetailViewController
         detailVC.vmEdit = WordsUnitDetailViewModel(vm: vm, item: vm.newUnitWord(), phraseid: phraseid)
         detailVC.complete = { [unowned self] in tvWords.reloadData(); addWord(self) }
-        self.presentAsSheet(detailVC)
+        presentAsSheet(detailVC)
     }
 
     // https://stackoverflow.com/questions/24219441/how-to-use-nstoolbar-in-xcode-6-and-storyboard
@@ -168,30 +168,30 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     }
 
     @IBAction func editWord(_ sender: AnyObject) {
-        let detailVC = self.storyboard!.instantiateController(withIdentifier: "WordsUnitDetailViewController") as! WordsUnitDetailViewController
+        let detailVC = storyboard!.instantiateController(withIdentifier: "WordsUnitDetailViewController") as! WordsUnitDetailViewController
         let i = tvWords.selectedRow
         if i == -1 {return}
         detailVC.vmEdit = WordsUnitDetailViewModel(vm: vm, item: arrWords[tvWords.selectedRow], phraseid: 0)
         detailVC.complete = { [unowned self] in
             tvWords.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<tvWords.tableColumns.count))
         }
-        self.presentAsModalWindow(detailVC)
+        presentAsModalWindow(detailVC)
     }
 
     @IBAction func batchAdd(_ sender: AnyObject) {
-        let batchVC = self.storyboard!.instantiateController(withIdentifier: "WordsUnitBatchAddViewController") as! WordsUnitBatchAddViewController
+        let batchVC = storyboard!.instantiateController(withIdentifier: "WordsUnitBatchAddViewController") as! WordsUnitBatchAddViewController
         batchVC.vmEdit = WordsUnitBatchAddViewModel(vm: vm)
         batchVC.complete = { [unowned self] in doRefresh() }
-        self.presentAsModalWindow(batchVC)
+        presentAsModalWindow(batchVC)
     }
 
     @IBAction func batchEdit(_ sender: AnyObject) {
-        let batchVC = self.storyboard!.instantiateController(withIdentifier: "WordsUnitBatchEditViewController") as! WordsUnitBatchEditViewController
+        let batchVC = storyboard!.instantiateController(withIdentifier: "WordsUnitBatchEditViewController") as! WordsUnitBatchEditViewController
         let i = tvWords.selectedRow
         let item = i == -1 ? nil : arrWords[i]
         batchVC.vmEdit = WordsUnitBatchEditViewModel(vm: vm, unit: item?.UNIT ?? vmSettings.USUNITTO, part: item?.PART ?? vmSettings.USPARTTO)
         batchVC.complete = { [unowned self] in doRefresh() }
-        self.presentAsModalWindow(batchVC)
+        presentAsModalWindow(batchVC)
     }
 
     @IBAction func getNote(_ sender: AnyObject) {
@@ -277,7 +277,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
                 await self.getPhrases()
             }
         }
-        self.presentAsModalWindow(detailVC)
+        presentAsModalWindow(detailVC)
     }
 }
 

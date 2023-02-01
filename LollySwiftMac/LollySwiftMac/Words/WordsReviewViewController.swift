@@ -99,7 +99,7 @@ class WordsReviewViewController: WordsBaseViewController, NSTextFieldDelegate {
                 await self.vm.newTest()
             }
         }
-        self.presentAsSheet(optionsVC)
+        presentAsSheet(optionsVC)
     }
 
     func controlTextDidEndEditing(_ obj: Notification) {
