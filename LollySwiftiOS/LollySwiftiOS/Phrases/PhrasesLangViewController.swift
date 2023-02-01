@@ -17,9 +17,9 @@ class PhrasesLangViewController: PhrasesBaseViewController {
 
     override func refresh() {
         view.showBlurLoader()
-        vm = PhrasesLangViewModel(settings: vmSettings, needCopy: false) {
-            self.refreshControl.endRefreshing()
-            self.view.removeBlurLoader()
+        vm = PhrasesLangViewModel(settings: vmSettings, needCopy: false) { [unowned self] in
+            refreshControl.endRefreshing()
+            view.removeBlurLoader()
         }
         vm.$arrPhrasesFiltered.didSet.sink { [unowned self] _ in
             tableView.reloadData()
@@ -36,13 +36,13 @@ class PhrasesLangViewController: PhrasesBaseViewController {
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let i = indexPath.row
-        let item = self.vm.arrPhrases[i]
+        let item = vm.arrPhrases[i]
         func delete() {
-            self.yesNoAction(title: "delete", message: "Do you really want to delete the phrase \"\(item.PHRASE)\"?", yesHandler: { (action) in
+            yesNoAction(title: "delete", message: "Do you really want to delete the phrase \"\(item.PHRASE)\"?", yesHandler: { [unowned self] (action) in
                 Task {
                     await PhrasesLangViewModel.delete(item: item)
                 }
-                self.vm.arrPhrases.remove(at: i)
+                vm.arrPhrases.remove(at: i)
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }, noHandler: { (action) in
                 tableView.reloadRows(at: [indexPath], with: .fade)

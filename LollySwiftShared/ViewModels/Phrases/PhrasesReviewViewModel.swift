@@ -44,7 +44,7 @@ class PhrasesReviewViewModel: NSObject, ObservableObject {
     @Published var inputFocused = false
 
     init(settings: SettingsViewModel, needCopy: Bool, doTestAction: ((PhrasesReviewViewModel) -> Void)? = nil) {
-        self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
+        vmSettings = !needCopy ? settings : SettingsViewModel(settings)
         self.doTestAction = doTestAction
         options.shuffled = true
     }
@@ -81,8 +81,8 @@ class PhrasesReviewViewModel: NSObject, ObservableObject {
             if options.mode == .reviewAuto {
                 subscriptionTimer = Timer.publish(every: TimeInterval(options.interval), on: .main, in: .default)
                     .autoconnect()
-                    .receive(on: DispatchQueue.main).sink { _ in
-                    self.check(toNext: true)
+                    .receive(on: DispatchQueue.main).sink { [unowned self] _ in
+                    check(toNext: true)
                 }
             }
         }

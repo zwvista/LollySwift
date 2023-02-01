@@ -40,7 +40,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
         wvWebPage.allowsBackForwardNavigationGestures = true
         tvWebPages.registerForDraggedTypes([tableRowDragType])
         sfTextFilter.searchFieldDidStartSearchingPublisher.sink { [unowned self] in
-            self.vm.textFilter = self.vmSettings.autoCorrectInput(text: self.vm.textFilter)
+            vm.textFilter = vmSettings.autoCorrectInput(text: vm.textFilter)
         } ~ subscriptions
     }
 
@@ -168,7 +168,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
         vm.$textFilter <~> sfTextFilter.textProperty ~ subscriptions
         vm.$scopeFilter <~> scScopeFilter.selectedLabelProperty ~ subscriptions
         vm.$arrPatternsFiltered.didSet.sink { [unowned self] _ in
-            self.doRefresh()
+            doRefresh()
         } ~ subscriptions
     }
     func doRefresh() {
@@ -187,7 +187,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     @IBAction func addPattern(_ sender: AnyObject) {
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "PatternsDetailViewController") as! PatternsDetailViewController
         detailVC.vmEdit = PatternsDetailViewModel(vm: vm, item: vm.newPattern())
-        detailVC.complete = { self.tvPatterns.reloadData(); self.addPattern(self) }
+        detailVC.complete = { [unowned self] in tvPatterns.reloadData(); addPattern(self) }
         self.presentAsSheet(detailVC)
     }
 
@@ -195,8 +195,8 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "PatternsDetailViewController") as! PatternsDetailViewController
         let i = tvPatterns.selectedRow
         detailVC.vmEdit = PatternsDetailViewModel(vm: vm, item: arrPatterns[i])
-        detailVC.complete = {
-            self.tvPatterns.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tvPatterns.tableColumns.count))
+        detailVC.complete = { [unowned self] in
+            tvPatterns.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<tvPatterns.tableColumns.count))
         }
         self.presentAsModalWindow(detailVC)
     }
@@ -205,7 +205,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "PatternsWebPagesDetailViewController") as! PatternsWebPagesDetailViewController
         detailVC.vm = vm
         detailVC.item = vmWP.newPatternWebPage()
-        detailVC.complete = { self.tvWebPages.reloadData(); self.addWebPage(self) }
+        detailVC.complete = { [unowned self] in tvWebPages.reloadData(); addWebPage(self) }
         self.presentAsSheet(detailVC)
     }
 
@@ -215,9 +215,9 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
         let i = tvWebPages.selectedRow
         detailVC.item = MPatternWebPage()
         detailVC.item.copy(from: arrWebPages[i])
-        detailVC.complete = {
-            self.arrWebPages[i].copy(from: detailVC.item)
-            self.tvWebPages.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tvWebPages.tableColumns.count))
+        detailVC.complete = { [unowned self] in
+            arrWebPages[i].copy(from: detailVC.item)
+            tvWebPages.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<tvWebPages.tableColumns.count))
         }
         self.presentAsModalWindow(detailVC)
     }
@@ -249,8 +249,8 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
 
     func tableView(_ tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int, dropOperation: NSTableView.DropOperation) -> Bool {
         var oldIndexes = [Int]()
-        info.enumerateDraggingItems(options: [], for: tableView, classes: [NSPasteboardItem.self], searchOptions: [:]) { (draggingItem, _, _) in
-            if let str = (draggingItem.item as! NSPasteboardItem).string(forType: self.tableRowDragType), let index = Int(str) {
+        info.enumerateDraggingItems(options: [], for: tableView, classes: [NSPasteboardItem.self], searchOptions: [:]) { [unowned self] (draggingItem, _, _) in
+            if let str = (draggingItem.item as! NSPasteboardItem).string(forType: tableRowDragType), let index = Int(str) {
                 oldIndexes.append(index)
             }
         }

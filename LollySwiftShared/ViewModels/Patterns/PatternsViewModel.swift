@@ -24,7 +24,7 @@ class PatternsViewModel: NSObject, ObservableObject {
     var subscriptions = Set<AnyCancellable>()
 
     public init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> Void) {
-        self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
+        vmSettings = !needCopy ? settings : SettingsViewModel(settings)
         super.init()
 
         $arrPatterns.didSet.combineLatest($textFilter.didSet, $scopeFilter.didSet).sink { [unowned self] _ in

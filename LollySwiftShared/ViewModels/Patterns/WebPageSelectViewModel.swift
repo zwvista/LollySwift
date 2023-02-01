@@ -19,7 +19,7 @@ class WebPageSelectViewModel: NSObject, ObservableObject {
     var subscriptions = Set<AnyCancellable>()
 
     init(settings: SettingsViewModel, complete: @escaping () -> Void) {
-        self.vmSettings = settings
+        vmSettings = settings
         super.init()
         Task {
             await reload(t: "", u: "")
@@ -27,9 +27,9 @@ class WebPageSelectViewModel: NSObject, ObservableObject {
         }
         $title.debounce(for: .milliseconds(500), scheduler: DispatchQueue.main)
             .combineLatest($url.debounce(for: .milliseconds(500), scheduler: DispatchQueue.main))
-            .sink { (t, u) in
+            .sink { [unowned self] (t, u) in
                 Task {
-                    await self.reload(t: t, u: u)
+                    await reload(t: t, u: u)
                     complete()
                 }
             } ~ subscriptions

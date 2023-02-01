@@ -19,9 +19,9 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
 
     override func refresh() {
         view.showBlurLoader()
-        vm = PhrasesUnitViewModel(settings: vmSettings, inTextbook: false, needCopy: false) {
-            self.refreshControl.endRefreshing()
-            self.view.removeBlurLoader()
+        vm = PhrasesUnitViewModel(settings: vmSettings, inTextbook: false, needCopy: false) { [unowned self] in
+            refreshControl.endRefreshing()
+            view.removeBlurLoader()
         }
         vmBase.$stringTextbookFilter ~> (btnTextbookFilter, \.titleNormal) ~ subscriptions
         vm.$arrPhrasesFiltered.didSet.sink { [unowned self] _ in
@@ -31,7 +31,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
         func configMenu() {
             btnTextbookFilter.menu = UIMenu(title: "", options: .displayInline, children: vmSettings.arrTextbookFilters.map(\.label).enumerated().map { index, item in
                 UIAction(title: item, state: item == vmBase.stringTextbookFilter ? .on : .off) { [unowned self] _ in
-                    self.vmBase.stringTextbookFilter = item
+                    vmBase.stringTextbookFilter = item
                     configMenu()
                 }
             })
@@ -65,13 +65,13 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let i = indexPath.row
-        let item = self.vm.arrPhrases[i]
+        let item = vm.arrPhrases[i]
         func delete() {
-            self.yesNoAction(title: "delete", message: "Do you really want to delete the phrase \"\(item.PHRASE)\"?", yesHandler: { (action) in
+            yesNoAction(title: "delete", message: "Do you really want to delete the phrase \"\(item.PHRASE)\"?", yesHandler: { [unowned self] (action) in
                 Task {
                      await PhrasesUnitViewModel.delete(item: item)
                 }
-                self.vm.arrPhrases.remove(at: i)
+                vm.arrPhrases.remove(at: i)
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }, noHandler: { (action) in
                 tableView.reloadRows(at: [indexPath], with: .fade)
@@ -113,7 +113,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
         let controller = segue.source as! PhrasesTextbookDetailViewController
         Task {
             await controller.vmEdit.onOK()
-            self.tableView.reloadData()
+            tableView.reloadData()
         }
     }
 }

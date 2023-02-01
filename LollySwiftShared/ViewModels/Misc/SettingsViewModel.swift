@@ -225,18 +225,18 @@ class SettingsViewModel: NSObject, ObservableObject {
             if arrMacVoices.isEmpty { arrMacVoices.append(MVoice()) }
             arriOSVoices = arrVoices.filter { $0.VOICETYPEID == 3 }
             if arriOSVoices.isEmpty { arriOSVoices.append(MVoice()) }
-            selectedDictReferenceIndex = arrDictsReference.firstIndex { String($0.DICTID) == self.USDICTREFERENCE } ?? 0
+            selectedDictReferenceIndex = arrDictsReference.firstIndex { String($0.DICTID) == USDICTREFERENCE } ?? 0
             if arrDictsNote.isEmpty { arrDictsNote.append(MDictionary()) }
-            selectedDictNoteIndex = arrDictsNote.firstIndex { $0.DICTID == self.USDICTNOTE } ?? 0
+            selectedDictNoteIndex = arrDictsNote.firstIndex { $0.DICTID == USDICTNOTE } ?? 0
             if arrDictsTranslation.isEmpty { arrDictsTranslation.append(MDictionary()) }
-            selectedDictTranslationIndex = arrDictsTranslation.firstIndex { $0.DICTID == self.USDICTTRANSLATION } ?? 0
-            selectedTextbookIndex = arrTextbooks.firstIndex { $0.ID == self.USTEXTBOOK } ?? 0
+            selectedDictTranslationIndex = arrDictsTranslation.firstIndex { $0.DICTID == USDICTTRANSLATION } ?? 0
+            selectedTextbookIndex = arrTextbooks.firstIndex { $0.ID == USTEXTBOOK } ?? 0
             arrTextbookFilters.append(contentsOf: arrTextbooks.map { MSelectItem(value: $0.ID, label: $0.TEXTBOOKNAME) })
             arrWebTextbookFilters.append(contentsOf: arrTextbooks.filter { $0.ISWEB == 1 }.map { MSelectItem(value: $0.ID, label: $0.TEXTBOOKNAME) })
-            selectedMacVoiceIndex = arrMacVoices.firstIndex { $0.ID == self.USMACVOICE } ?? 0
-            selectediOSVoiceIndex = arriOSVoices.firstIndex { $0.ID == self.USIOSVOICE } ?? 0
+            selectedMacVoiceIndex = arrMacVoices.firstIndex { $0.ID == USMACVOICE } ?? 0
+            selectediOSVoiceIndex = arriOSVoices.firstIndex { $0.ID == USIOSVOICE } ?? 0
             if dirty {
-                await MUserSetting.update(info: self.INFO_USLANG, intValue: self.USLANG)
+                await MUserSetting.update(info: INFO_USLANG, intValue: USLANG)
             }
         }
 

@@ -28,7 +28,7 @@ class PatternsWebPagesListViewController: UITableViewController {
         Task {
             await vm.getWebPages()
             sender.endRefreshing()
-            self.tableView.reloadData()
+            tableView.reloadData()
         }
     }
 
@@ -62,8 +62,8 @@ class PatternsWebPagesListViewController: UITableViewController {
     private func reindex() {
         tableView.beginUpdates()
         Task {
-            await vm.reindexWebPage {
-                self.tableView.reloadRows(at: [IndexPath(row: $0, section: 0)], with: .fade)
+            await vm.reindexWebPage { [unowned self] in
+                tableView.reloadRows(at: [IndexPath(row: $0, section: 0)], with: .fade)
             }
             tableView.endUpdates()
         }

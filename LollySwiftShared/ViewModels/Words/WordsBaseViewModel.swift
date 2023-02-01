@@ -25,8 +25,8 @@ class WordsPhrasesBaseViewModel: NSObject, ObservableObject {
         vmSettings = !needCopy ? settings : SettingsViewModel(settings)
         super.init()
         stringTextbookFilter = vmSettings.arrTextbookFilters[0].label
-        $stringTextbookFilter.sink { s in
-            self.indexTextbookFilter = self.vmSettings.arrTextbookFilters.firstIndex { $0.label == s }!
+        $stringTextbookFilter.sink { [unowned self] s in
+            indexTextbookFilter = vmSettings.arrTextbookFilters.firstIndex { $0.label == s }!
         } ~ subscriptions
     }
 }

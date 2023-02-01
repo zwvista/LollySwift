@@ -21,8 +21,8 @@ class PatternsWebPagesViewModel: NSObject, ObservableObject {
     }
 
     public init(settings: SettingsViewModel, needCopy: Bool, item: MPattern?) {
-        self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
-        self.selectedPatternItem = item
+        vmSettings = !needCopy ? settings : SettingsViewModel(settings)
+        selectedPatternItem = item
         super.init()
     }
 

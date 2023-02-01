@@ -44,7 +44,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     override func settingsChanged() {
         vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: true, needCopy: true) {}
         vm.$arrWordsFiltered.didSet.sink { [unowned self] _ in
-            self.doRefresh()
+            doRefresh()
         } ~ subscriptions
         super.settingsChanged()
     }
@@ -59,9 +59,9 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
 
     override func endEditing(row: Int) {
         let item = arrWords[row]
-        Task {
+        Task { [unowned self] in
             await vm.update(item: item)
-            tvWords.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvWords.tableColumns.count))
+            tvWords.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<tvWords.tableColumns.count))
         }
     }
 
@@ -84,8 +84,8 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
 
     func tableView(_ tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int, dropOperation: NSTableView.DropOperation) -> Bool {
         var oldIndexes = [Int]()
-        info.enumerateDraggingItems(options: [], for: tableView, classes: [NSPasteboardItem.self], searchOptions: [:]) { (draggingItem, _, _) in
-            if let str = (draggingItem.item as! NSPasteboardItem).string(forType: self.tableRowDragType), let index = Int(str) {
+        info.enumerateDraggingItems(options: [], for: tableView, classes: [NSPasteboardItem.self], searchOptions: [:]) { [unowned self] (draggingItem, _, _) in
+            if let str = (draggingItem.item as! NSPasteboardItem).string(forType: tableRowDragType), let index = Int(str) {
                 oldIndexes.append(index)
             }
         }
@@ -136,7 +136,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     func addWord(phraseid: Int) {
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "WordsUnitDetailViewController") as! WordsUnitDetailViewController
         detailVC.vmEdit = WordsUnitDetailViewModel(vm: vm, item: vm.newUnitWord(), phraseid: phraseid)
-        detailVC.complete = { self.tvWords.reloadData(); self.addWord(self) }
+        detailVC.complete = { [unowned self] in tvWords.reloadData(); addWord(self) }
         self.presentAsSheet(detailVC)
     }
 
@@ -172,8 +172,8 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
         let i = tvWords.selectedRow
         if i == -1 {return}
         detailVC.vmEdit = WordsUnitDetailViewModel(vm: vm, item: arrWords[tvWords.selectedRow], phraseid: 0)
-        detailVC.complete = {
-            self.tvWords.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tvWords.tableColumns.count))
+        detailVC.complete = { [unowned self] in
+            tvWords.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<tvWords.tableColumns.count))
         }
         self.presentAsModalWindow(detailVC)
     }
@@ -181,7 +181,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     @IBAction func batchAdd(_ sender: AnyObject) {
         let batchVC = self.storyboard!.instantiateController(withIdentifier: "WordsUnitBatchAddViewController") as! WordsUnitBatchAddViewController
         batchVC.vmEdit = WordsUnitBatchAddViewModel(vm: vm)
-        batchVC.complete = { self.doRefresh() }
+        batchVC.complete = { [unowned self] in doRefresh() }
         self.presentAsModalWindow(batchVC)
     }
 
@@ -190,7 +190,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
         let i = tvWords.selectedRow
         let item = i == -1 ? nil : arrWords[i]
         batchVC.vmEdit = WordsUnitBatchEditViewModel(vm: vm, unit: item?.UNIT ?? vmSettings.USUNITTO, part: item?.PART ?? vmSettings.USPARTTO)
-        batchVC.complete = { self.doRefresh() }
+        batchVC.complete = { [unowned self] in doRefresh() }
         self.presentAsModalWindow(batchVC)
     }
 
@@ -205,11 +205,11 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     @IBAction func getNotes(_ sender: AnyObject) {
         Task {
             let ifEmpty = sender is NSToolbarItem || (sender as! NSMenuItem).tag == 0
-            await vm.getNotes(ifEmpty: ifEmpty, oneComplete: {
-                self.tvWords.reloadData(forRowIndexes: [$0], columnIndexes: IndexSet(0..<self.tvWords.tableColumns.count))
-            }, allComplete: {
+            await vm.getNotes(ifEmpty: ifEmpty, oneComplete: { [unowned self] in
+                tvWords.reloadData(forRowIndexes: [$0], columnIndexes: IndexSet(0..<tvWords.tableColumns.count))
+            }, allComplete: { [unowned self] in
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    // self.tableView.reloadData()
+                    // tableView.reloadData()
                 }
             })
         }
@@ -226,11 +226,11 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     @IBAction func clearNotes(_ sender: AnyObject) {
         Task {
             let ifEmpty = sender is NSToolbarItem || (sender as! NSMenuItem).tag == 0
-            await vm.clearNotes(ifEmpty: ifEmpty, oneComplete: {
-                self.tvWords.reloadData(forRowIndexes: [$0], columnIndexes: IndexSet(0..<self.tvWords.tableColumns.count))
+            await vm.clearNotes(ifEmpty: ifEmpty, oneComplete: { [unowned self] in
+                tvWords.reloadData(forRowIndexes: [$0], columnIndexes: IndexSet(0..<tvWords.tableColumns.count))
             })
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                // self.tableView.reloadData()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [unowned self] in
+                // tableView.reloadData()
             }
         }
     }

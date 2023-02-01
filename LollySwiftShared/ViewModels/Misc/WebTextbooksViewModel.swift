@@ -15,7 +15,7 @@ class WebTextbooksViewModel: NSObject {
     var arrWebTextbooksFiltered: [MWebTextbook]?
 
     init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> Void) {
-        self.vmSettings = !needCopy ? settings : SettingsViewModel(settings)
+        vmSettings = !needCopy ? settings : SettingsViewModel(settings)
         super.init()
         Task {
             arrWebTextbooks = await MWebTextbook.getDataByLang(settings.selectedLang.ID)

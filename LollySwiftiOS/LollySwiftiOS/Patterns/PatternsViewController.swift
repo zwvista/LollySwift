@@ -40,9 +40,9 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
 
     @objc func refresh(_ sender: UIRefreshControl) {
         view.showBlurLoader()
-        vm = PatternsViewModel(settings: vmSettings, needCopy: false) {
+        vm = PatternsViewModel(settings: vmSettings, needCopy: false) { [unowned self] in
             sender.endRefreshing()
-            self.view.removeBlurLoader()
+            view.removeBlurLoader()
         }
         vm.$textFilter <~> sbTextFilter.searchTextField.textProperty ~ subscriptions
         vm.$scopeFilter ~> (btnScopeFilter, \.titleNormal) ~ subscriptions
@@ -81,7 +81,7 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
                 Task {
                     await PatternsViewModel.delete(item.ID)
                 }
-                self.vm.arrPatterns.remove(at: i)
+                vm.arrPatterns.remove(at: i)
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }, noHandler: { (action) in
                 tableView.reloadRows(at: [indexPath], with: .fade)
@@ -145,9 +145,9 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
         if let controller = segue.source as? PatternsDetailViewController {
             Task {
                 await controller.vmEdit.onOK()
-                self.tableView.reloadData()
+                tableView.reloadData()
                 if controller.vmEdit.isAdd {
-                    self.performSegue(withIdentifier: "add", sender: self)
+                    performSegue(withIdentifier: "add", sender: self)
                 }
             }
         }

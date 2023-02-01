@@ -22,7 +22,7 @@ class PhrasesBaseViewController: WordsPhrasesBaseViewController {
         vmPhrases.$textFilter <~> sfTextFilter.textProperty ~ subscriptions
         vmPhrases.$scopeFilter <~> scScopeFilter.selectedLabelProperty ~ subscriptions
         sfTextFilter.searchFieldDidStartSearchingPublisher.sink { [unowned self] in
-            self.vmPhrases.textFilter = self.vmSettings.autoCorrectInput(text: self.vmPhrases.textFilter)
+            vmPhrases.textFilter = vmSettings.autoCorrectInput(text: vmPhrases.textFilter)
         } ~ subscriptions
         super.settingsChanged()
         vmWordsLang = WordsLangViewModel(settings: vmSettings)
@@ -135,8 +135,8 @@ class PhrasesBaseViewController: WordsPhrasesBaseViewController {
         let detailVC = NSStoryboard(name: "Words", bundle: nil).instantiateController(withIdentifier: "WordsLangDetailViewController") as! WordsLangDetailViewController
         let i = tvWords.selectedRow
         detailVC.vmEdit = WordsLangDetailViewModel(vm: vmWordsLang, item: vmWordsLang.arrWords[i])
-        detailVC.complete = {
-            self.tvWords.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tvWords.tableColumns.count))
+        detailVC.complete = { [unowned self] in
+            tvWords.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<tvWords.tableColumns.count))
         }
         self.presentAsModalWindow(detailVC)
     }

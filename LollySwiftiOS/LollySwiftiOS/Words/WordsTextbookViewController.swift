@@ -19,9 +19,9 @@ class WordsTextbookViewController: WordsBaseViewController {
 
     override func refresh() {
         view.showBlurLoader()
-        vm = WordsUnitViewModel(settings: vmSettings, inTextbook: false, needCopy: false) {
-            self.refreshControl.endRefreshing()
-            self.view.removeBlurLoader()
+        vm = WordsUnitViewModel(settings: vmSettings, inTextbook: false, needCopy: false) { [unowned self] in
+            refreshControl.endRefreshing()
+            view.removeBlurLoader()
         }
         vmBase.$stringTextbookFilter ~> (btnTextbookFilter, \.titleNormal) ~ subscriptions
         vm.$arrWordsFiltered.didSet.sink { [unowned self] _ in
@@ -31,7 +31,7 @@ class WordsTextbookViewController: WordsBaseViewController {
         func configMenu() {
             btnTextbookFilter.menu = UIMenu(title: "", options: .displayInline, children: vmSettings.arrTextbookFilters.map(\.label).enumerated().map { index, item in
                 UIAction(title: item, state: item == vmBase.stringTextbookFilter ? .on : .off) { [unowned self] _ in
-                    self.vmBase.stringTextbookFilter = item
+                    vmBase.stringTextbookFilter = item
                     configMenu()
                 }
             })
@@ -50,13 +50,13 @@ class WordsTextbookViewController: WordsBaseViewController {
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let i = indexPath.row
-        let item = self.vm.arrWords[i]
+        let item = vm.arrWords[i]
         func delete() {
-            self.yesNoAction(title: "delete", message: "Do you really want to delete the word \"\(item.WORD)\"?", yesHandler: { (action) in
+            yesNoAction(title: "delete", message: "Do you really want to delete the word \"\(item.WORD)\"?", yesHandler: { [unowned self] (action) in
                 Task {
                     await WordsUnitViewModel.delete(item: item)
                 }
-                self.vm.arrWords.remove(at: i)
+                vm.arrWords.remove(at: i)
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }, noHandler: { (action) in
                 tableView.reloadRows(at: [indexPath], with: .fade)
@@ -75,17 +75,17 @@ class WordsTextbookViewController: WordsBaseViewController {
             let editAction2 = UIAlertAction(title: "Edit", style: .default) { _ in edit() }
             alertController.addAction(editAction2)
             if vmSettings.hasDictNote {
-                let getNoteAction = UIAlertAction(title: "Retrieve Note", style: .default) { _ in
+                let getNoteAction = UIAlertAction(title: "Retrieve Note", style: .default) { [unowned self] _ in
                     Task {
-                        await self.vm.getNote(index: indexPath.row)
-                        self.tableView.reloadRows(at: [indexPath], with: .fade)
+                        await vm.getNote(index: indexPath.row)
+                        tableView.reloadRows(at: [indexPath], with: .fade)
                     }
                 }
                 alertController.addAction(getNoteAction)
-                let clearNoteAction = UIAlertAction(title: "Clear Note", style: .default) { _ in
+                let clearNoteAction = UIAlertAction(title: "Clear Note", style: .default) { [unowned self] _ in
                     Task {
-                        await self.vm.clearNote(index: indexPath.row)
-                        self.tableView.reloadRows(at: [indexPath], with: .fade)
+                        await vm.clearNote(index: indexPath.row)
+                        tableView.reloadRows(at: [indexPath], with: .fade)
                     }
                 }
                 alertController.addAction(clearNoteAction)

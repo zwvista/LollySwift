@@ -23,14 +23,14 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         pubTextbookFilter.selectedItemIndexPublisher.sink { [unowned self] _ in
-            self.applyFilters()
+            applyFilters()
         } ~ subscriptions
     }
 
     override func settingsChanged() {
-        vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: false, needCopy: true) {
-            self.acTextbooks.content = self.vmSettings.arrTextbookFilters
-            self.doRefresh()
+        vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: false, needCopy: true) { [unowned self] in
+            acTextbooks.content = vmSettings.arrTextbookFilters
+            doRefresh()
         }
         super.settingsChanged()
     }
@@ -79,8 +79,8 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
         let i = tvPhrases.selectedRow
         if i == -1 {return}
         detailVC.vmEdit = PhrasesUnitDetailViewModel(vm: vm, item: arrPhrases[i], wordid: 0)
-        detailVC.complete = {
-            self.tvPhrases.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tvPhrases.tableColumns.count))
+        detailVC.complete = { [unowned self] in
+            tvPhrases.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<tvPhrases.tableColumns.count))
         }
         self.presentAsModalWindow(detailVC)
     }

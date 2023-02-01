@@ -101,9 +101,9 @@ class WordsReviewViewModel: WordsBaseViewModel {
             if options.mode == .reviewAuto {
                 subscriptionTimer = Timer.publish(every: TimeInterval(options.interval), on: .main, in: .default)
                     .autoconnect()
-                    .receive(on: DispatchQueue.main).sink { _ in
+                    .receive(on: DispatchQueue.main).sink { [unowned self] _ in
                     Task {
-                        await self.check(toNext: true)
+                        await check(toNext: true)
                     }
                 }
             }
@@ -171,7 +171,7 @@ class WordsReviewViewModel: WordsBaseViewModel {
             let o2 = await MWordFami.update(wordid: o.WORDID, isCorrect: isCorrect)
             o.CORRECT = o2.CORRECT
             o.TOTAL = o2.TOTAL
-            self.accuracyString = o.ACCURACY
+            accuracyString = o.ACCURACY
         } else {
             move(toNext: toNext)
             await doTest()

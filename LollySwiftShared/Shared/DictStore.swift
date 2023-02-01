@@ -53,20 +53,20 @@ class DictStore: NSObject, ObservableObject {
         switch dictStatus {
         case .automating:
             let s = dict.AUTOMATION.replacingOccurrences(of: "{0}", with: word)
-            wvDict.evaluateJavaScript(s) { (html: Any?, error: Error?) in
-                self.dictStatus = .ready
-                if self.dict.DICTTYPENAME == "OFFLINE-ONLINE" {
-                    self.dictStatus = .navigating
+            wvDict.evaluateJavaScript(s) { [unowned self] (html: Any?, error: Error?) in
+                dictStatus = .ready
+                if dict.DICTTYPENAME == "OFFLINE-ONLINE" {
+                    dictStatus = .navigating
                 }
             }
         case .navigating:
             // https://stackoverflow.com/questions/34751860/get-html-from-wkwebview-in-swift
-            wvDict.evaluateJavaScript("document.documentElement.outerHTML.toString()") { (html: Any?, error: Error?) in
+            wvDict.evaluateJavaScript("document.documentElement.outerHTML.toString()") { [unowned self] (html: Any?, error: Error?) in
                 let html = html as! String
                 print(html)
-                let str = self.dict.htmlString(html, word: self.word)
-                self.wvDict.loadHTMLString(str, baseURL: nil)
-                self.dictStatus = .ready
+                let str = dict.htmlString(html, word: word)
+                wvDict.loadHTMLString(str, baseURL: nil)
+                dictStatus = .ready
             }
         default: break
         }

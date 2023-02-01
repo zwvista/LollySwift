@@ -61,8 +61,8 @@ class WordsUnitViewModel: WordsBaseViewModel {
 
     func create(item: MUnitWord) async {
         let id = await MUnitWord.create(item: item)
-        if let o = await MUnitWord.getDataById(id, arrTextbooks: vmSettings.arrTextbooks) {
-            self.arrWords.append(o)
+        if let o = await MUnitWord.getDataById(id, arrTextbooks: vmSettings.arrTextbooks) { [unowned self] in
+            arrWords.append(o)
             copyProperties(from: o, to: item)
             if item.NOTE.isEmpty {
                 await getNote(item: item)
@@ -108,10 +108,10 @@ class WordsUnitViewModel: WordsBaseViewModel {
     }
 
     func getNotes(ifEmpty: Bool, oneComplete: @escaping (Int) -> Void, allComplete: @escaping () -> Void) async {
-        await vmSettings.getNotes(wordCount: arrWords.count, isNoteEmpty: {
-            !ifEmpty || (self.arrWords[$0].NOTE).isEmpty
-        }, getOne: { i in
-            await self.getNote(index: i)
+        await vmSettings.getNotes(wordCount: arrWords.count, isNoteEmpty: { [unowned self] in
+            !ifEmpty || (arrWords[$0].NOTE).isEmpty
+        }, getOne: { [unowned self] i in
+            await getNote(index: i)
             oneComplete(i)
         }, allComplete: allComplete)
     }
@@ -127,10 +127,10 @@ class WordsUnitViewModel: WordsBaseViewModel {
     }
 
     func clearNotes(ifEmpty: Bool, oneComplete: @escaping (Int) -> Void) async {
-        await vmSettings.clearNotes(wordCount: arrWords.count, isNoteEmpty: {
-            !ifEmpty || self.arrWords[$0].NOTE.isEmpty
-        }, getOne: { i in
-            await self.clearNote(index: i)
+        await vmSettings.clearNotes(wordCount: arrWords.count, isNoteEmpty: { [unowned self] in
+            !ifEmpty || arrWords[$0].NOTE.isEmpty
+        }, getOne: { [unowned self] i in
+            await clearNote(index: i)
             oneComplete(i)
         })
     }
