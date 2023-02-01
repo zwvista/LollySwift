@@ -94,9 +94,9 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
         let detailVC = NSStoryboard(name: "Words", bundle: nil).instantiateController(withIdentifier: "WordsAssociateViewController") as! WordsAssociateViewController
         detailVC.textFilter = vm.selectedPhrase
         detailVC.phraseid = vm.selectedPhraseID
-        detailVC.complete = {
+        detailVC.complete = { [unowned self] in
             Task {
-                await self.getWords()
+                await getWords()
             }
         }
         self.presentAsModalWindow(detailVC)

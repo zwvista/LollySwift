@@ -45,7 +45,7 @@ class WordsUnitBatchEditViewController: UIViewController, UITableViewDelegate, U
                 if swUnit.isOn { item.UNIT = unit }
                 if swPart.isOn { item.PART = part }
                 if swSeqNum.isOn { item.SEQNUM += seqnum }
-                await self.vm.update(item: item)
+                await vm.update(item: item)
             }
         }
     }

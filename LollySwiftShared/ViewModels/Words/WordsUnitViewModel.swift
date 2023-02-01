@@ -61,7 +61,7 @@ class WordsUnitViewModel: WordsBaseViewModel {
 
     func create(item: MUnitWord) async {
         let id = await MUnitWord.create(item: item)
-        if let o = await MUnitWord.getDataById(id, arrTextbooks: vmSettings.arrTextbooks) { [unowned self] in
+        if let o = await MUnitWord.getDataById(id, arrTextbooks: vmSettings.arrTextbooks) {
             arrWords.append(o)
             copyProperties(from: o, to: item)
             if item.NOTE.isEmpty {

@@ -35,11 +35,11 @@ class PhrasesLangDetailViewController: NSViewController, NSTableViewDataSource, 
             tableView.reloadData()
         } ~ subscriptions
 
-        btnOK.tapPublisher.sink {
+        btnOK.tapPublisher.sink { [unowned self] in
             Task {
-                await self.vmEdit.onOK()
-                self.complete?()
-                self.dismiss(self.btnOK)
+                await vmEdit.onOK()
+                complete?()
+                dismiss(btnOK)
             }
         } ~ subscriptions
     }

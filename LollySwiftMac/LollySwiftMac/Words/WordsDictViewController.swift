@@ -50,8 +50,8 @@ class WordsDictViewController: NSViewController, WKNavigationDelegate {
         if vcWords.responder != nil && vcWords.needRegainFocus() {
             Task {
                 try await Task.sleep(nanoseconds: 1_000_000_000)
-                self.vcWords?.responder?.window?.makeFirstResponder(self.vcWords.responder)
-                self.vcWords?.responder = nil
+                vcWords?.responder?.window?.makeFirstResponder(vcWords.responder)
+                vcWords?.responder = nil
             }
         }
         tfURL.stringValue = webView.url!.absoluteString

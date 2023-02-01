@@ -77,8 +77,8 @@ class WordsAssociateViewController: NSViewController, NSTableViewDataSource, NST
                     await MWordPhrase.associate(wordid: item.WORDID, phraseid: phraseid)
                 }
             }
-            self.complete?()
-            self.dismiss(sender)
+            complete?()
+            dismiss(sender)
         }
     }
 

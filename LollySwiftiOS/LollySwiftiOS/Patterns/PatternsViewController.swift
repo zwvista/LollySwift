@@ -77,7 +77,7 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
         let i = indexPath.row
         let item = vm.arrPatterns[i]
         func delete() {
-            yesNoAction(title: "delete", message: "Do you really want to delete the pattern \"\(item.PATTERN)\"?", yesHandler: { (action) in
+            yesNoAction(title: "delete", message: "Do you really want to delete the pattern \"\(item.PATTERN)\"?", yesHandler: { [unowned self] (action) in
                 Task {
                     await PatternsViewModel.delete(item.ID)
                 }

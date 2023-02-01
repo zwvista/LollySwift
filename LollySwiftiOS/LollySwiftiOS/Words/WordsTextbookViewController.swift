@@ -117,7 +117,7 @@ class WordsTextbookViewController: WordsBaseViewController {
         let controller = segue.source as! WordsTextbookDetailViewController
         Task {
             await controller.vmEdit.onOK()
-            self.tableView.reloadData()
+            tableView.reloadData()
         }
     }
 }

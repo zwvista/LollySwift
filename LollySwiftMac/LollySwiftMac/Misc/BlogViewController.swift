@@ -88,8 +88,8 @@ class BlogViewController: NSViewController, NSMenuItemValidation  {
     }
     @IBAction func addNotes(_ sender: AnyObject) {
         Task {
-            await vmBlog.addNotes(text: tvMarked.string) {
-                self.tvMarked.string = $0
+            await vmBlog.addNotes(text: tvMarked.string) { [unowned self] in
+                tvMarked.string = $0
             }
         }
     }

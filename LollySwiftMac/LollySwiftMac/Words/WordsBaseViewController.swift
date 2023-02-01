@@ -162,9 +162,9 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
         if let tfNewWord = tfNewWord {
             vmWords.$newWord <~> tfNewWord.textProperty ~ subscriptions
             tfNewWord.controlTextDidEndEditingPublisher.sink { [unowned self] in
-                self.commitEditing()
-                if !self.vmWords.newWord.isEmpty {
-                    self.addNewWord()
+                commitEditing()
+                if !vmWords.newWord.isEmpty {
+                    addNewWord()
                 }
             } ~ subscriptions
         }
@@ -172,7 +172,7 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
             vmWords.$textFilter <~> sfTextFilter.textProperty ~ subscriptions
             vmWords.$scopeFilter <~> scScopeFilter.selectedLabelProperty ~ subscriptions
             sfTextFilter.searchFieldDidStartSearchingPublisher.sink { [unowned self] in
-                self.vmWords.textFilter = self.vmSettings.autoCorrectInput(text: self.vmWords.textFilter)
+                vmWords.textFilter = vmSettings.autoCorrectInput(text: vmWords.textFilter)
             } ~ subscriptions
         }
         super.settingsChanged()
@@ -298,8 +298,8 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
         let detailVC = NSStoryboard(name: "Phrases", bundle: nil).instantiateController(withIdentifier: "PhrasesLangDetailViewController") as! PhrasesLangDetailViewController
         let i = tvPhrases.selectedRow
         detailVC.vmEdit = PhrasesLangDetailViewModel(vm: vmPhrasesLang, item: vmPhrasesLang.arrPhrases[i])
-        detailVC.complete = {
-            self.tvPhrases.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tvPhrases.tableColumns.count))
+        detailVC.complete = { [unowned self] in
+            tvPhrases.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<tvPhrases.tableColumns.count))
         }
         self.presentAsModalWindow(detailVC)
     }
@@ -360,9 +360,9 @@ class WordsPhrasesBaseWindowController: NSWindowController, LollyProtocol, NSWin
 
     override func windowDidLoad() {
         super.windowDidLoad()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.defaultToolbarItemCount = self.toolbar.items.count - 40
-            self.settingsChanged()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [unowned self] in
+            defaultToolbarItemCount = toolbar.items.count - 40
+            settingsChanged()
         }
     }
 

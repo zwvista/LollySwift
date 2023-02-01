@@ -50,9 +50,9 @@ class PhrasesUnitBatchEditViewController: NSViewController, NSTableViewDataSourc
                 rows.append(chk.state == .on)
             }
             Task {
-                await self.vmEdit.onOK(rows: rows)
-                self.complete?()
-                self.dismiss(self.btnOK)
+                await vmEdit.onOK(rows: rows)
+                complete?()
+                dismiss(btnOK)
             }
         } ~ subscriptions
     }

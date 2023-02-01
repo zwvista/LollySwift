@@ -42,11 +42,11 @@ class PatternsWebPagesDetailViewController: NSViewController {
         itemEdit.$URL <~> tfURL.textProperty ~ subscriptions
         btnNew.isEnabled = vmEdit.isAddWebPage
         btnExisting.isEnabled = vmEdit.isAddWebPage
-        btnOK.tapPublisher.sink {
+        btnOK.tapPublisher.sink { [unowned self] in
             Task {
-                await self.vmEdit.onOK()
-                self.complete?()
-                self.dismiss(self.btnOK)
+                await vmEdit.onOK()
+                complete?()
+                dismiss(btnOK)
             }
         } ~ subscriptions
     }
@@ -65,11 +65,11 @@ class PatternsWebPagesDetailViewController: NSViewController {
     @IBAction func existingWebPageID(_ sender: Any) {
         let webPageVC = self.storyboard!.instantiateController(withIdentifier: "WebPageSelectViewController") as! WebPageSelectViewController
         webPageVC.vm = vm
-        webPageVC.complete = {
+        webPageVC.complete = { [unowned self] in
             let o = webPageVC.vmWebPage.selectedWebPage!
-            self.itemEdit.WEBPAGEID = String(o.ID)
-            self.itemEdit.TITLE = o.TITLE
-            self.itemEdit.URL = o.URL
+            itemEdit.WEBPAGEID = String(o.ID)
+            itemEdit.TITLE = o.TITLE
+            itemEdit.URL = o.URL
         }
         self.presentAsModalWindow(webPageVC)
     }

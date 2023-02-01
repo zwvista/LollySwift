@@ -85,7 +85,7 @@ class PhrasesLangViewController: PhrasesBaseViewController {
         let controller = segue.source as! PhrasesLangDetailViewController
         Task {
             await controller.vmEdit.onOK()
-            self.tableView.reloadData()
+            tableView.reloadData()
         }
     }
 }

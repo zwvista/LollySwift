@@ -47,9 +47,9 @@ class ReviewOptionsViewController: NSViewController {
         vm.optionsEdit.$reviewCount <~> stpReviewCount.integerValueProperty ~ subscriptions
         vm.optionsEdit.$reviewCount.map { String($0) }.eraseToAnyPublisher() ~> (tfReviewCount, \.stringValue) ~ subscriptions
         btnOK.tapPublisher.sink { [unowned self] in
-            self.vm.onOK()
-            self.complete?()
-            self.dismiss(self.btnOK)
+            vm.onOK()
+            complete?()
+            dismiss(btnOK)
         } ~ subscriptions
     }
 

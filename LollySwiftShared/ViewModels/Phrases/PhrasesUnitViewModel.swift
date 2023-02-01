@@ -54,7 +54,7 @@ class PhrasesUnitViewModel: PhrasesBaseViewModel {
     func create(item: MUnitPhrase) async {
         let id = await MUnitPhrase.create(item: item)
         if let o = await MUnitPhrase.getDataById(id, arrTextbooks: vmSettings.arrTextbooks) {
-            self.arrPhrases.append(o)
+            arrPhrases.append(o)
             copyProperties(from: o, to: item)
         }
     }

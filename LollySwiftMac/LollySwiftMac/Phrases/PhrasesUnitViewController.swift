@@ -25,7 +25,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
         super.viewDidLoad()
         tvPhrases.registerForDraggedTypes([tableRowDragType])
         vm.$arrPhrasesFiltered.didSet.sink { [unowned self] _ in
-            self.doRefresh()
+            doRefresh()
         } ~ subscriptions
     }
 
@@ -76,8 +76,8 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
 
     func tableView(_ tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int, dropOperation: NSTableView.DropOperation) -> Bool {
         var oldIndexes = [Int]()
-        info.enumerateDraggingItems(options: [], for: tableView, classes: [NSPasteboardItem.self], searchOptions: [:]) { (draggingItem, _, _) in
-            if let str = (draggingItem.item as! NSPasteboardItem).string(forType: self.tableRowDragType), let index = Int(str) {
+        info.enumerateDraggingItems(options: [], for: tableView, classes: [NSPasteboardItem.self], searchOptions: [:]) { [unowned self] (draggingItem, _, _) in
+            if let str = (draggingItem.item as! NSPasteboardItem).string(forType: tableRowDragType), let index = Int(str) {
                 oldIndexes.append(index)
             }
         }
@@ -114,7 +114,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     func addPhrase(wordid: Int) {
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesUnitDetailViewController") as! PhrasesUnitDetailViewController
         detailVC.vmEdit = PhrasesUnitDetailViewModel(vm: vm, item: vm.newUnitPhrase(), wordid: wordid)
-        detailVC.complete = { self.tvPhrases.reloadData(); self.addPhrase(self) }
+        detailVC.complete = { [unowned self] in tvPhrases.reloadData(); addPhrase(self) }
         self.presentAsSheet(detailVC)
     }
 
@@ -126,7 +126,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     @IBAction func batchAdd(_ sender: AnyObject) {
         let batchVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesUnitBatchAddViewController") as! PhrasesUnitBatchAddViewController
         batchVC.vmEdit = PhrasesUnitBatchAddViewModel(vm: vm)
-        batchVC.complete = { self.doRefresh() }
+        batchVC.complete = { [unowned self] in doRefresh() }
         self.presentAsModalWindow(batchVC)
     }
 
@@ -135,7 +135,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
         let i = tvPhrases.selectedRow
         let item = i == -1 ? nil : arrPhrases[tvPhrases.selectedRow]
         batchVC.vmEdit = PhrasesUnitBatchEditViewModel(vm: vm, unit: item?.UNIT ?? vmSettings.USUNITTO, part: item?.PART ?? vmSettings.USPARTTO)
-        batchVC.complete = { self.doRefresh() }
+        batchVC.complete = { [unowned self] in doRefresh() }
         self.presentAsModalWindow(batchVC)
     }
 
@@ -166,8 +166,8 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
         let i = tvPhrases.selectedRow
         if i == -1 {return}
         detailVC.vmEdit = PhrasesUnitDetailViewModel(vm: vm, item: arrPhrases[i], wordid: 0)
-        detailVC.complete = {
-            self.tvPhrases.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tvPhrases.tableColumns.count))
+        detailVC.complete = { [unowned self] in
+            tvPhrases.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<tvPhrases.tableColumns.count))
         }
         self.presentAsModalWindow(detailVC)
     }
@@ -210,9 +210,9 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
         let detailVC = NSStoryboard(name: "Words", bundle: nil).instantiateController(withIdentifier: "WordsAssociateViewController") as! WordsAssociateViewController
         detailVC.textFilter = vm.selectedPhrase
         detailVC.phraseid = vm.selectedPhraseID
-        detailVC.complete = {
+        detailVC.complete = { [unowned self] in
             Task {
-                await self.getWords()
+                await getWords()
             }
         }
         self.presentAsModalWindow(detailVC)

@@ -24,8 +24,8 @@ class DictsViewController: NSViewController, LollyProtocol, NSTableViewDataSourc
     }
 
     @IBAction func refreshTableView(_ sender: Any) {
-        vm = DictsViewModel(settings: AppDelegate.theSettingsViewModel) {
-            self.tableView.reloadData()
+        vm = DictsViewModel(settings: AppDelegate.theSettingsViewModel) { [unowned self] in
+            tableView.reloadData()
         }
     }
 
@@ -46,7 +46,7 @@ class DictsViewController: NSViewController, LollyProtocol, NSTableViewDataSourc
         detailVC.vm = vm
         let i = tableView.selectedRow
         detailVC.item = vm.arrDicts[i]
-        detailVC.complete = { self.tableView.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count)) }
+        detailVC.complete = { [unowned self] in tableView.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<tableView.tableColumns.count)) }
         self.presentAsModalWindow(detailVC)
     }
 
@@ -54,7 +54,7 @@ class DictsViewController: NSViewController, LollyProtocol, NSTableViewDataSourc
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "DictsDetailViewController") as! DictsDetailViewController
         detailVC.vm = vm
         detailVC.item = vm.newDict()
-        detailVC.complete = { self.tableView.reloadData() }
+        detailVC.complete = { [unowned self] in tableView.reloadData() }
         self.presentAsSheet(detailVC)
     }
 
@@ -70,7 +70,7 @@ class DictsViewController: NSViewController, LollyProtocol, NSTableViewDataSourc
         item.setValue(newValue, forKey: key)
         Task {
             await DictsViewModel.update(item: item)
-            tableView.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count))
+            tableView.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<tableView.tableColumns.count))
         }
     }
 }

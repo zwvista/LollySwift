@@ -137,8 +137,8 @@ class SettingsViewController: NSViewController, NSTableViewDataSource, NSTableVi
 
     @IBAction func selectDicts(_ sender: Any) {
         let dictVC = storyboard!.instantiateController(withIdentifier: "SelectDictsViewController") as! SelectDictsViewController
-        dictVC.complete = {
-            self.tvDictsReference.reloadData()
+        dictVC.complete = { [unowned self] in
+            tvDictsReference.reloadData()
         }
         self.presentAsModalWindow(dictVC)
     }

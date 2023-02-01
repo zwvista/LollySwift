@@ -28,8 +28,8 @@ class WebPageSelectViewController: NSViewController, NSTableViewDataSource, NSTa
     }
 
     @IBAction func search(_ sender: Any) {
-        vmWebPage = WebPageSelectViewModel(settings: vm.vmSettings) {
-            self.tvWebPages.reloadData()
+        vmWebPage = WebPageSelectViewModel(settings: vm.vmSettings) { [unowned self] in
+            tvWebPages.reloadData()
         }
         vmWebPage.$title <~> tfTitle.textProperty ~ subscriptions
         vmWebPage.$url <~> tfURL.textProperty ~ subscriptions
@@ -60,7 +60,7 @@ class WebPageSelectViewController: NSViewController, NSTableViewDataSource, NSTa
     @IBAction func okClicked(_ sender: AnyObject) {
         // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
         self.commitEditing()
-        self.complete?()
+        complete?()
         dismiss(sender)
     }
 

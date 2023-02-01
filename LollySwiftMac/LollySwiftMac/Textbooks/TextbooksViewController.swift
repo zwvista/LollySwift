@@ -25,8 +25,8 @@ class TextbooksViewController: NSViewController, LollyProtocol, NSTableViewDataS
     }
 
     @IBAction func refreshTableView(_ sender: AnyObject) {
-        vm = TextbooksViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) {
-            self.tableView.reloadData()
+        vm = TextbooksViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) { [unowned self] in
+            tableView.reloadData()
         }
     }
 
@@ -47,7 +47,7 @@ class TextbooksViewController: NSViewController, LollyProtocol, NSTableViewDataS
         detailVC.vm = vm
         let i = tableView.selectedRow
         detailVC.item = vm.arrTextbooks[i]
-        detailVC.complete = { self.tableView.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count)) }
+        detailVC.complete = { [unowned self] in tableView.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<tableView.tableColumns.count)) }
         self.presentAsModalWindow(detailVC)
     }
 
@@ -55,7 +55,7 @@ class TextbooksViewController: NSViewController, LollyProtocol, NSTableViewDataS
         let detailVC = self.storyboard!.instantiateController(withIdentifier: "TextbooksDetailViewController") as! TextbooksDetailViewController
         detailVC.vm = vm
         detailVC.item = vm.newTextbook()
-        detailVC.complete = { self.tableView.reloadData() }
+        detailVC.complete = { [unowned self] in tableView.reloadData() }
         self.presentAsSheet(detailVC)
     }
 
