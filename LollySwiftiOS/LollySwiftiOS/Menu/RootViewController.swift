@@ -20,9 +20,9 @@ public class RootViewController: AKSideMenu, AKSideMenuDelegate {
         self.contentViewShadowRadius = 12
         self.contentViewShadowEnabled = true
 
-        self.contentViewController = self.storyboard!.instantiateViewController(withIdentifier: "contentViewController")
-        self.leftMenuViewController = self.storyboard!.instantiateViewController(withIdentifier: "leftMenuViewController")
-//        self.rightMenuViewController = self.storyboard!.instantiateViewController(withIdentifier: "rightMenuViewController")
+        self.contentViewController = storyboard!.instantiateViewController(withIdentifier: "contentViewController")
+        self.leftMenuViewController = storyboard!.instantiateViewController(withIdentifier: "leftMenuViewController")
+//        self.rightMenuViewController = storyboard!.instantiateViewController(withIdentifier: "rightMenuViewController")
         self.backgroundImage = UIImage(named: "Stars")
         self.delegate = self
     }

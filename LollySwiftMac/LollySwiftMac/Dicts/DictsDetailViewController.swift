@@ -49,15 +49,15 @@ class DictsDetailViewController: NSViewController {
     }
 
     @IBAction func editTransform(_ sender: Any) {
-        let tranformVC = self.storyboard!.instantiateController(withIdentifier: "TransformDetailViewController") as! TransformDetailViewController
+        let tranformVC = storyboard!.instantiateController(withIdentifier: "TransformDetailViewController") as! TransformDetailViewController
         tranformVC.vm.item = item
         tranformVC.complete = {  }
-        self.presentAsModalWindow(tranformVC)
+        presentAsModalWindow(tranformVC)
     }
 
     @IBAction func okClicked(_ sender: Any) {
         // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
-        self.commitEditing()
+        commitEditing()
         if isAdd {
             DictsViewModel.create(item: item).subscribe { [unowned self] _ in
                 complete?()
@@ -71,6 +71,6 @@ class DictsDetailViewController: NSViewController {
     }
 
     deinit {
-        print("DEBUG: \(self.className) deinit")
+        print("DEBUG: \(className) deinit")
     }
 }

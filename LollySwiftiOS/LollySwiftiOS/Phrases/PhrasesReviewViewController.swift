@@ -112,6 +112,6 @@ class PhrasesReviewViewController: UIViewController, UITextFieldDelegate {
     }
 
     deinit {
-        print("DEBUG: \(self.className) deinit")
+        print("DEBUG: \(className) deinit")
     }
 }

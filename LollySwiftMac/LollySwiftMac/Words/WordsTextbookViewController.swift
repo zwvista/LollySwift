@@ -26,9 +26,9 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
     }
 
     override func settingsChanged() {
-        vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: false, needCopy: true) {
-            self.acTextbooks.content = self.vmSettings.arrTextbookFilters
-            self.doRefresh()
+        vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: false, needCopy: true) { [unowned self] in
+            acTextbooks.content = vmSettings.arrTextbookFilters
+            doRefresh()
         }
         super.settingsChanged()
     }
@@ -43,21 +43,21 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
 
     override func endEditing(row: Int) {
         let item = arrWords[row]
-        vm.update(item: item).subscribe { _ in
-            self.tvWords.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvWords.tableColumns.count))
+        vm.update(item: item).subscribe { [unowned self] _ in
+            tvWords.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<tvWords.tableColumns.count))
         } ~ rx.disposeBag
     }
 
     override func deleteWord(row: Int) {
         let item = arrWords[row]
-        WordsUnitViewModel.delete(item: item).subscribe { _ in
-            self.doRefresh()
+        WordsUnitViewModel.delete(item: item).subscribe { [unowned self] _ in
+            doRefresh()
         } ~ rx.disposeBag
     }
 
     @IBAction func refreshTableView(_ sender: AnyObject) {
-        vm.reload().subscribe { _ in
-            self.doRefresh()
+        vm.reload().subscribe { [unowned self] _ in
+            doRefresh()
         } ~ rx.disposeBag
     }
 
@@ -70,27 +70,27 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
     }
 
     @IBAction func editWord(_ sender: AnyObject) {
-        let detailVC = self.storyboard!.instantiateController(withIdentifier: "WordsTextbookDetailViewController") as! WordsTextbookDetailViewController
+        let detailVC = storyboard!.instantiateController(withIdentifier: "WordsTextbookDetailViewController") as! WordsTextbookDetailViewController
         let i = tvWords.selectedRow
         if i == -1 {return}
         detailVC.vmEdit = WordsUnitDetailViewModel(vm: vm, item: arrWords[i], phraseid: 0)
-        detailVC.complete = {
-            self.tvWords.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tvWords.tableColumns.count))
+        detailVC.complete = { [unowned self] in
+            tvWords.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<tvWords.tableColumns.count))
         }
-        self.presentAsModalWindow(detailVC)
+        presentAsModalWindow(detailVC)
     }
 
     @IBAction func getNote(_ sender: AnyObject) {
         let col = tvWords.tableColumns.firstIndex { $0.title == "NOTE" }!
-        vm.getNote(index: tvWords.selectedRow).subscribe { _ in
-            self.tvWords.reloadData(forRowIndexes: [self.tvWords.selectedRow], columnIndexes: [col])
+        vm.getNote(index: tvWords.selectedRow).subscribe { [unowned self] _ in
+            tvWords.reloadData(forRowIndexes: [tvWords.selectedRow], columnIndexes: [col])
         } ~ rx.disposeBag
     }
 
     @IBAction func clearNote(_ sender: AnyObject) {
         let col = tvWords.tableColumns.firstIndex { $0.title == "NOTE" }!
-        vm.clearNote(index: tvWords.selectedRow).subscribe { _ in
-            self.tvWords.reloadData(forRowIndexes: [self.tvWords.selectedRow], columnIndexes: [col])
+        vm.clearNote(index: tvWords.selectedRow).subscribe { [unowned self] _ in
+            tvWords.reloadData(forRowIndexes: [tvWords.selectedRow], columnIndexes: [col])
         } ~ rx.disposeBag
     }
 
@@ -111,10 +111,10 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
         let detailVC = NSStoryboard(name: "Phrases", bundle: nil).instantiateController(withIdentifier: "PhrasesAssociateViewController") as! PhrasesAssociateViewController
         detailVC.textFilter = vm.selectedWord
         detailVC.wordid = vm.selectedWordID
-        detailVC.complete = {
-            self.getPhrases()
+        detailVC.complete = { [unowned self] in
+            getPhrases()
         }
-        self.presentAsModalWindow(detailVC)
+        presentAsModalWindow(detailVC)
     }
 }
 

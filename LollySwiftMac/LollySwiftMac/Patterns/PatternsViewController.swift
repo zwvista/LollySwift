@@ -110,7 +110,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
             let row = tvPatterns.selectedRow
             vm.selectedPatternItem = row == -1 ? nil : arrPatterns[row]
             vmWP.selectedPatternItem = vm.selectedPatternItem
-            vmWP.getWebPages().subscribe { _ in
+            vmWP.getWebPages().subscribe { [unowned self] _ in
                 tvWebPages.reloadData()
                 if tvWebPages.numberOfRows > 0 {
                     tvWebPages.selectRowIndexes(IndexSet(integer: 0), byExtendingSelection: false)
@@ -185,32 +185,32 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
 
     // https://stackoverflow.com/questions/24219441/how-to-use-nstoolbar-in-xcode-6-and-storyboard
     @IBAction func addPattern(_ sender: AnyObject) {
-        let detailVC = self.storyboard!.instantiateController(withIdentifier: "PatternsDetailViewController") as! PatternsDetailViewController
+        let detailVC = storyboard!.instantiateController(withIdentifier: "PatternsDetailViewController") as! PatternsDetailViewController
         detailVC.vmEdit = PatternsDetailViewModel(vm: vm, item: vm.newPattern())
         detailVC.complete = { [unowned self] in tvPatterns.reloadData(); addPattern(self) }
-        self.presentAsSheet(detailVC)
+        presentAsSheet(detailVC)
     }
 
     @IBAction func editPattern(_ sender: AnyObject) {
-        let detailVC = self.storyboard!.instantiateController(withIdentifier: "PatternsDetailViewController") as! PatternsDetailViewController
+        let detailVC = storyboard!.instantiateController(withIdentifier: "PatternsDetailViewController") as! PatternsDetailViewController
         let i = tvPatterns.selectedRow
         detailVC.vmEdit = PatternsDetailViewModel(vm: vm, item: arrPatterns[i])
         detailVC.complete = { [unowned self] in
             tvPatterns.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<tvPatterns.tableColumns.count))
         }
-        self.presentAsModalWindow(detailVC)
+        presentAsModalWindow(detailVC)
     }
 
     @IBAction func addWebPage(_ sender: AnyObject) {
-        let detailVC = self.storyboard!.instantiateController(withIdentifier: "PatternsWebPagesDetailViewController") as! PatternsWebPagesDetailViewController
+        let detailVC = storyboard!.instantiateController(withIdentifier: "PatternsWebPagesDetailViewController") as! PatternsWebPagesDetailViewController
         detailVC.vm = vm
         detailVC.item = vmWP.newPatternWebPage()
         detailVC.complete = { [unowned self] in tvWebPages.reloadData(); addWebPage(self) }
-        self.presentAsSheet(detailVC)
+        presentAsSheet(detailVC)
     }
 
     @IBAction func editWebPage(_ sender: AnyObject) {
-        let detailVC = self.storyboard!.instantiateController(withIdentifier: "PatternsWebPagesDetailViewController") as! PatternsWebPagesDetailViewController
+        let detailVC = storyboard!.instantiateController(withIdentifier: "PatternsWebPagesDetailViewController") as! PatternsWebPagesDetailViewController
         detailVC.vm = vm
         let i = tvWebPages.selectedRow
         detailVC.item = MPatternWebPage()
@@ -219,7 +219,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
             arrWebPages[i].copy(from: detailVC.item)
             tvWebPages.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<tvWebPages.tableColumns.count))
         }
-        self.presentAsModalWindow(detailVC)
+        presentAsModalWindow(detailVC)
     }
 
     func updateStatusText() {
@@ -283,19 +283,19 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     }
 
     @IBAction func mergePatterns(_ sender: AnyObject) {
-        let mergeVC = self.storyboard!.instantiateController(withIdentifier: "PatternsMergeViewController") as! PatternsMergeViewController
+        let mergeVC = storyboard!.instantiateController(withIdentifier: "PatternsMergeViewController") as! PatternsMergeViewController
         let items = tvPatterns.selectedRowIndexes.map { arrPatterns[$0] }
         mergeVC.vm = PatternsMergeViewModel(items: items)
-        self.presentAsModalWindow(mergeVC)
+        presentAsModalWindow(mergeVC)
     }
 
     @IBAction func splitPattern(_ sender: AnyObject) {
-        let splitVC = self.storyboard!.instantiateController(withIdentifier: "PatternsSplitViewController") as! PatternsSplitViewController
-        self.presentAsModalWindow(splitVC)
+        let splitVC = storyboard!.instantiateController(withIdentifier: "PatternsSplitViewController") as! PatternsSplitViewController
+        presentAsModalWindow(splitVC)
     }
 
     deinit {
-        print("DEBUG: \(self.className) deinit")
+        print("DEBUG: \(className) deinit")
     }
 }
 
@@ -307,6 +307,6 @@ class PatternsWindowController: NSWindowController, LollyProtocol, NSWindowDeleg
     }
 
     deinit {
-        print("DEBUG: \(self.className) deinit")
+        print("DEBUG: \(className) deinit")
     }
 }

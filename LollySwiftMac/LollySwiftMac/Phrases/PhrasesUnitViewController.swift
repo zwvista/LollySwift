@@ -37,7 +37,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     override func settingsChanged() {
         vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: true, needCopy: true) {}
         vm.arrPhrasesFiltered_.subscribe { [unowned self] _ in
-            self.doRefresh()
+            doRefresh()
         } ~ rx.disposeBag
         super.settingsChanged()
     }
@@ -52,8 +52,8 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
 
     override func endEditing(row: Int) {
         let item = arrPhrases[row]
-        vm.update(item: item).subscribe { _ in
-            self.tvPhrases.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvPhrases.tableColumns.count))
+        vm.update(item: item).subscribe { [unowned self] _ in
+            tvPhrases.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<tvPhrases.tableColumns.count))
         } ~ rx.disposeBag
     }
 
@@ -76,8 +76,8 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
 
     func tableView(_ tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int, dropOperation: NSTableView.DropOperation) -> Bool {
         var oldIndexes = [Int]()
-        info.enumerateDraggingItems(options: [], for: tableView, classes: [NSPasteboardItem.self], searchOptions: [:]) { (draggingItem, _, _) in
-            if let str = (draggingItem.item as! NSPasteboardItem).string(forType: self.tableRowDragType), let index = Int(str) {
+        info.enumerateDraggingItems(options: [], for: tableView, classes: [NSPasteboardItem.self], searchOptions: [:]) { [unowned self] (draggingItem, _, _) in
+            if let str = (draggingItem.item as! NSPasteboardItem).string(forType: tableRowDragType), let index = Int(str) {
                 oldIndexes.append(index)
             }
         }
@@ -110,10 +110,10 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     }
 
     func addPhrase(wordid: Int) {
-        let detailVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesUnitDetailViewController") as! PhrasesUnitDetailViewController
+        let detailVC = storyboard!.instantiateController(withIdentifier: "PhrasesUnitDetailViewController") as! PhrasesUnitDetailViewController
         detailVC.vmEdit = PhrasesUnitDetailViewModel(vm: vm, item: vm.newUnitPhrase(), wordid: wordid)
-        detailVC.complete = { self.tvPhrases.reloadData(); self.addPhrase(self) }
-        self.presentAsSheet(detailVC)
+        detailVC.complete = { [unowned self] in tvPhrases.reloadData(); addPhrase(self) }
+        presentAsSheet(detailVC)
     }
 
     // https://stackoverflow.com/questions/24219441/how-to-use-nstoolbar-in-xcode-6-and-storyboard
@@ -122,31 +122,31 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     }
 
     @IBAction func batchAdd(_ sender: AnyObject) {
-        let batchVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesUnitBatchAddViewController") as! PhrasesUnitBatchAddViewController
+        let batchVC = storyboard!.instantiateController(withIdentifier: "PhrasesUnitBatchAddViewController") as! PhrasesUnitBatchAddViewController
         batchVC.vmEdit = PhrasesUnitBatchAddViewModel(vm: vm)
-        batchVC.complete = { self.doRefresh() }
-        self.presentAsModalWindow(batchVC)
+        batchVC.complete = { [unowned self] in doRefresh() }
+        presentAsModalWindow(batchVC)
     }
 
     @IBAction func batchEdit(_ sender: AnyObject) {
-        let batchVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesUnitBatchEditViewController") as! PhrasesUnitBatchEditViewController
+        let batchVC = storyboard!.instantiateController(withIdentifier: "PhrasesUnitBatchEditViewController") as! PhrasesUnitBatchEditViewController
         let i = tvPhrases.selectedRow
         let item = i == -1 ? nil : arrPhrases[tvPhrases.selectedRow]
         batchVC.vmEdit = PhrasesUnitBatchEditViewModel(vm: vm, unit: item?.UNIT ?? vmSettings.USUNITTO, part: item?.PART ?? vmSettings.USPARTTO)
-        batchVC.complete = { self.doRefresh() }
-        self.presentAsModalWindow(batchVC)
+        batchVC.complete = { [unowned self] in doRefresh() }
+        presentAsModalWindow(batchVC)
     }
 
     override func deletePhrase(row: Int) {
         let item = arrPhrases[row]
-        PhrasesUnitViewModel.delete(item: item).subscribe { _ in
-            self.doRefresh()
+        PhrasesUnitViewModel.delete(item: item).subscribe { [unowned self] _ in
+            doRefresh()
         } ~ rx.disposeBag
     }
 
     @IBAction func refreshTableView(_ sender: AnyObject) {
-        vm.reload().subscribe { _ in
-            self.doRefresh()
+        vm.reload().subscribe { [unowned self] _ in
+            doRefresh()
         } ~ rx.disposeBag
     }
 
@@ -159,39 +159,39 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     }
 
     @IBAction func editPhrase(_ sender: AnyObject) {
-        let detailVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesUnitDetailViewController") as! PhrasesUnitDetailViewController
+        let detailVC = storyboard!.instantiateController(withIdentifier: "PhrasesUnitDetailViewController") as! PhrasesUnitDetailViewController
         let i = tvPhrases.selectedRow
         if i == -1 {return}
         detailVC.vmEdit = PhrasesUnitDetailViewModel(vm: vm, item: arrPhrases[i], wordid: 0)
-        detailVC.complete = {
-            self.tvPhrases.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tvPhrases.tableColumns.count))
+        detailVC.complete = { [unowned self] in
+            tvPhrases.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<tvPhrases.tableColumns.count))
         }
-        self.presentAsModalWindow(detailVC)
+        presentAsModalWindow(detailVC)
     }
 
     @IBAction func previousUnitPart(_ sender: AnyObject) {
-        vmSettings.previousUnitPart().flatMap {
-            self.vm.reload()
-        }.subscribe { _ in
-            self.doRefresh()
+        vmSettings.previousUnitPart().flatMap { [unowned self] in
+            vm.reload()
+        }.subscribe { [unowned self] _ in
+            doRefresh()
         } ~ rx.disposeBag
     }
 
     @IBAction func nextUnitPart(_ sender: AnyObject) {
-        vmSettings.nextUnitPart().flatMap {
-            self.vm.reload()
-        }.subscribe { _ in
-            self.doRefresh()
+        vmSettings.nextUnitPart().flatMap { [unowned self] in
+            vm.reload()
+        }.subscribe { [unowned self] _ in
+            doRefresh()
         } ~ rx.disposeBag
     }
 
     @IBAction func toggleToType(_ sender: AnyObject) {
         let row = tvPhrases.selectedRow
         let part = row == -1 ? vmSettings.arrParts[0].value : arrPhrases[row].PART
-        vmSettings.toggleToType(part: part).flatMap {
-            self.vm.reload()
-        }.subscribe { _ in
-            self.doRefresh()
+        vmSettings.toggleToType(part: part).flatMap { [unowned self] in
+            vm.reload()
+        }.subscribe { [unowned self] _ in
+            doRefresh()
         } ~ rx.disposeBag
     }
 
@@ -210,10 +210,10 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
         let detailVC = NSStoryboard(name: "Words", bundle: nil).instantiateController(withIdentifier: "WordsAssociateViewController") as! WordsAssociateViewController
         detailVC.textFilter = vm.selectedPhrase
         detailVC.phraseid = vm.selectedPhraseID
-        detailVC.complete = {
-            self.getWords()
+        detailVC.complete = { [unowned self] in
+            getWords()
         }
-        self.presentAsModalWindow(detailVC)
+        presentAsModalWindow(detailVC)
     }
 
     @IBAction func generateBlogContent(_ sender: AnyObject) {

@@ -56,7 +56,7 @@ class WebPageSelectViewController: UIViewController, UITableViewDelegate, UITabl
     }
 
     deinit {
-        print("DEBUG: \(self.className) deinit")
+        print("DEBUG: \(className) deinit")
     }
 }
 

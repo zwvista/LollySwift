@@ -84,8 +84,8 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
 
     func tableView(_ tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int, dropOperation: NSTableView.DropOperation) -> Bool {
         var oldIndexes = [Int]()
-        info.enumerateDraggingItems(options: [], for: tableView, classes: [NSPasteboardItem.self], searchOptions: [:]) { (draggingItem, _, _) in
-            if let str = (draggingItem.item as! NSPasteboardItem).string(forType: self.tableRowDragType), let index = Int(str) {
+        info.enumerateDraggingItems(options: [], for: tableView, classes: [NSPasteboardItem.self], searchOptions: [:]) { [unowned self] (draggingItem, _, _) in
+            if let str = (draggingItem.item as! NSPasteboardItem).string(forType: tableRowDragType), let index = Int(str) {
                 oldIndexes.append(index)
             }
         }
@@ -132,10 +132,10 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     }
 
     func addWord(phraseid: Int) {
-        let detailVC = self.storyboard!.instantiateController(withIdentifier: "WordsUnitDetailViewController") as! WordsUnitDetailViewController
+        let detailVC = storyboard!.instantiateController(withIdentifier: "WordsUnitDetailViewController") as! WordsUnitDetailViewController
         detailVC.vmEdit = WordsUnitDetailViewModel(vm: vm, item: vm.newUnitWord(), phraseid: phraseid)
-        detailVC.complete = { self.tvWords.reloadData(); self.addWord(self) }
-        self.presentAsSheet(detailVC)
+        detailVC.complete = { [unowned self] in tvWords.reloadData(); addWord(self) }
+        presentAsSheet(detailVC)
     }
 
     // https://stackoverflow.com/questions/24219441/how-to-use-nstoolbar-in-xcode-6-and-storyboard
@@ -163,30 +163,30 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     }
 
     @IBAction func editWord(_ sender: AnyObject) {
-        let detailVC = self.storyboard!.instantiateController(withIdentifier: "WordsUnitDetailViewController") as! WordsUnitDetailViewController
+        let detailVC = storyboard!.instantiateController(withIdentifier: "WordsUnitDetailViewController") as! WordsUnitDetailViewController
         let i = tvWords.selectedRow
         if i == -1 {return}
         detailVC.vmEdit = WordsUnitDetailViewModel(vm: vm, item: arrWords[tvWords.selectedRow], phraseid: 0)
-        detailVC.complete = {
-            self.tvWords.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tvWords.tableColumns.count))
+        detailVC.complete = { [unowned self] in
+            tvWords.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<tvWords.tableColumns.count))
         }
-        self.presentAsModalWindow(detailVC)
+        presentAsModalWindow(detailVC)
     }
 
     @IBAction func batchAdd(_ sender: AnyObject) {
-        let batchVC = self.storyboard!.instantiateController(withIdentifier: "WordsUnitBatchAddViewController") as! WordsUnitBatchAddViewController
+        let batchVC = storyboard!.instantiateController(withIdentifier: "WordsUnitBatchAddViewController") as! WordsUnitBatchAddViewController
         batchVC.vmEdit = WordsUnitBatchAddViewModel(vm: vm)
-        batchVC.complete = { self.doRefresh() }
-        self.presentAsModalWindow(batchVC)
+        batchVC.complete = { [unowned self] in doRefresh() }
+        presentAsModalWindow(batchVC)
     }
 
     @IBAction func batchEdit(_ sender: AnyObject) {
-        let batchVC = self.storyboard!.instantiateController(withIdentifier: "WordsUnitBatchEditViewController") as! WordsUnitBatchEditViewController
+        let batchVC = storyboard!.instantiateController(withIdentifier: "WordsUnitBatchEditViewController") as! WordsUnitBatchEditViewController
         let i = tvWords.selectedRow
         let item = i == -1 ? nil : arrWords[i]
         batchVC.vmEdit = WordsUnitBatchEditViewModel(vm: vm, unit: item?.UNIT ?? vmSettings.USUNITTO, part: item?.PART ?? vmSettings.USPARTTO)
-        batchVC.complete = { self.doRefresh() }
-        self.presentAsModalWindow(batchVC)
+        batchVC.complete = { [unowned self] in doRefresh() }
+        presentAsModalWindow(batchVC)
     }
 
     @IBAction func getNote(_ sender: AnyObject) {
@@ -198,11 +198,11 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
 
     @IBAction func getNotes(_ sender: AnyObject) {
         let ifEmpty = sender is NSToolbarItem || (sender as! NSMenuItem).tag == 0
-        vm.getNotes(ifEmpty: ifEmpty, oneComplete: {
-            self.tvWords.reloadData(forRowIndexes: [$0], columnIndexes: IndexSet(0..<self.tvWords.tableColumns.count))
+        vm.getNotes(ifEmpty: ifEmpty, oneComplete: { [unowned self] in
+            tvWords.reloadData(forRowIndexes: [$0], columnIndexes: IndexSet(0..<tvWords.tableColumns.count))
         }, allComplete: {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                // self.tableView.reloadData()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [unowned self] in
+                // tableView.reloadData()
             }
         })
     }
@@ -222,22 +222,22 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     }
 
     @IBAction func previousUnitPart(_ sender: AnyObject) {
-        vmSettings.previousUnitPart().flatMap {
-            self.vm.reload()
+        vmSettings.previousUnitPart().flatMap { [unowned self] in
+            vm.reload()
         }.subscribe() ~ rx.disposeBag
     }
 
     @IBAction func nextUnitPart(_ sender: AnyObject) {
-        vmSettings.nextUnitPart().flatMap {
-            self.vm.reload()
+        vmSettings.nextUnitPart().flatMap { [unowned self] in
+            vm.reload()
         }.subscribe() ~ rx.disposeBag
     }
 
     @IBAction func toggleToType(_ sender: AnyObject) {
         let row = tvWords.selectedRow
         let part = row == -1 ? vmSettings.arrParts[0].value : arrWords[row].PART
-        vmSettings.toggleToType(part: part).flatMap {
-            self.vm.reload()
+        vmSettings.toggleToType(part: part).flatMap { [unowned self] in
+            vm.reload()
         }.subscribe() ~ rx.disposeBag
     }
 
@@ -255,10 +255,10 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
         let detailVC = NSStoryboard(name: "Phrases", bundle: nil).instantiateController(withIdentifier: "PhrasesAssociateViewController") as! PhrasesAssociateViewController
         detailVC.textFilter = vm.selectedWord
         detailVC.wordid = vm.selectedWordID
-        detailVC.complete = {
-            self.getPhrases()
+        detailVC.complete = { [unowned self] in
+            getPhrases()
         }
-        self.presentAsModalWindow(detailVC)
+        presentAsModalWindow(detailVC)
     }
 }
 

@@ -23,11 +23,11 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
     }
 
     override func settingsChanged() {
-        vm = WordsLangViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) {
-            self.doRefresh()
+        vm = WordsLangViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) { [unowned self] in
+            doRefresh()
         }
         vm.arrWordsFiltered_.subscribe { [unowned self] _ in
-            self.doRefresh()
+            doRefresh()
         } ~ rx.disposeBag
         super.settingsChanged()
     }
@@ -44,8 +44,8 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
 
     override func endEditing(row: Int) {
         let item = arrWords[row]
-        WordsLangViewModel.update(item: item).subscribe { _ in
-            self.tvWords.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvWords.tableColumns.count))
+        WordsLangViewModel.update(item: item).subscribe { [unowned self] _ in
+            tvWords.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<tvWords.tableColumns.count))
         } ~ rx.disposeBag
     }
 
@@ -62,22 +62,22 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
 
     // https://stackoverflow.com/questions/24219441/how-to-use-nstoolbar-in-xcode-6-and-storyboard
     @IBAction func addWord(_ sender: AnyObject) {
-        let detailVC = self.storyboard!.instantiateController(withIdentifier: "WordsLangDetailViewController") as! WordsLangDetailViewController
+        let detailVC = storyboard!.instantiateController(withIdentifier: "WordsLangDetailViewController") as! WordsLangDetailViewController
         detailVC.vmEdit = WordsLangDetailViewModel(vm: vm, item: vm.newLangWord())
-        detailVC.complete = { self.tvWords.reloadData(); self.addWord(self) }
-        self.presentAsSheet(detailVC)
+        detailVC.complete = { [unowned self] in tvWords.reloadData(); addWord(self) }
+        presentAsSheet(detailVC)
     }
 
     override func deleteWord(row: Int) {
         let item = arrWords[row]
-        WordsLangViewModel.delete(item: item).subscribe { _ in
-            self.doRefresh()
+        WordsLangViewModel.delete(item: item).subscribe { [unowned self] _ in
+            doRefresh()
         } ~ rx.disposeBag
     }
 
     @IBAction func refreshTableView(_ sender: AnyObject) {
-        vm.reload().subscribe { _ in
-            self.doRefresh()
+        vm.reload().subscribe { [unowned self] _ in
+            doRefresh()
         } ~ rx.disposeBag
     }
 
@@ -90,26 +90,26 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
     }
 
     @IBAction func editWord(_ sender: AnyObject) {
-        let detailVC = self.storyboard!.instantiateController(withIdentifier: "WordsLangDetailViewController") as! WordsLangDetailViewController
+        let detailVC = storyboard!.instantiateController(withIdentifier: "WordsLangDetailViewController") as! WordsLangDetailViewController
         let i = tvWords.selectedRow
         detailVC.vmEdit = WordsLangDetailViewModel(vm: vm, item: arrWords[i])
-        detailVC.complete = {
-            self.tvWords.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tvWords.tableColumns.count))
+        detailVC.complete = { [unowned self] in
+            tvWords.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<tvWords.tableColumns.count))
         }
-        self.presentAsModalWindow(detailVC)
+        presentAsModalWindow(detailVC)
     }
 
     @IBAction func getNote(_ sender: AnyObject) {
         let col = tvWords.tableColumns.firstIndex { $0.title == "NOTE" }!
-        vm.getNote(index: tvWords.selectedRow).subscribe { _ in
-            self.tvWords.reloadData(forRowIndexes: [self.tvWords.selectedRow], columnIndexes: [col])
+        vm.getNote(index: tvWords.selectedRow).subscribe { [unowned self] _ in
+            tvWords.reloadData(forRowIndexes: [tvWords.selectedRow], columnIndexes: [col])
         } ~ rx.disposeBag
     }
 
     @IBAction func clearNote(_ sender: AnyObject) {
         let col = tvWords.tableColumns.firstIndex { $0.title == "NOTE" }!
-        vm.clearNote(index: tvWords.selectedRow).subscribe { _ in
-            self.tvWords.reloadData(forRowIndexes: [self.tvWords.selectedRow], columnIndexes: [col])
+        vm.clearNote(index: tvWords.selectedRow).subscribe { [unowned self] _ in
+            tvWords.reloadData(forRowIndexes: [tvWords.selectedRow], columnIndexes: [col])
         } ~ rx.disposeBag
     }
 
@@ -130,10 +130,10 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
         let detailVC = NSStoryboard(name: "Phrases", bundle: nil).instantiateController(withIdentifier: "PhrasesAssociateViewController") as! PhrasesAssociateViewController
         detailVC.textFilter = vm.selectedWord
         detailVC.wordid = vm.selectedWordID
-        detailVC.complete = {
-            self.getPhrases()
+        detailVC.complete = { [unowned self] in
+            getPhrases()
         }
-        self.presentAsModalWindow(detailVC)
+        presentAsModalWindow(detailVC)
     }
 }
 

@@ -142,7 +142,7 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
     }
 
     deinit {
-        print("DEBUG: \(self.className) deinit")
+        print("DEBUG: \(className) deinit")
     }
 }
 
@@ -159,9 +159,9 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
         if let tfNewWord = tfNewWord {
             _ = vmWords.newWord_ <~> tfNewWord.rx.text.orEmpty
             tfNewWord.rx.controlTextDidEndEditing.subscribe { [unowned self] _ in
-                self.commitEditing()
-                if !self.vmWords.newWord.isEmpty {
-                    self.addNewWord()
+                commitEditing()
+                if !vmWords.newWord.isEmpty {
+                    addNewWord()
                 }
             } ~ rx.disposeBag
         }
@@ -285,8 +285,8 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
     }
 
     func getPhrases() {
-        vmPhrasesLang.getPhrases(wordid: vmWords.selectedWordID).subscribe { _ in
-            self.tvPhrases.reloadData()
+        vmPhrasesLang.getPhrases(wordid: vmWords.selectedWordID).subscribe { [unowned self] _ in
+            tvPhrases.reloadData()
         } ~ rx.disposeBag
     }
 
@@ -294,10 +294,10 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
         let detailVC = NSStoryboard(name: "Phrases", bundle: nil).instantiateController(withIdentifier: "PhrasesLangDetailViewController") as! PhrasesLangDetailViewController
         let i = tvPhrases.selectedRow
         detailVC.vmEdit = PhrasesLangDetailViewModel(vm: vmPhrasesLang, item: vmPhrasesLang.arrPhrases[i])
-        detailVC.complete = {
-            self.tvPhrases.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tvPhrases.tableColumns.count))
+        detailVC.complete = { [unowned self] in
+            tvPhrases.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<tvPhrases.tableColumns.count))
         }
-        self.presentAsModalWindow(detailVC)
+        presentAsModalWindow(detailVC)
     }
 }
 
@@ -356,9 +356,9 @@ class WordsPhrasesBaseWindowController: NSWindowController, LollyProtocol, NSWin
 
     override func windowDidLoad() {
         super.windowDidLoad()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.defaultToolbarItemCount = self.toolbar.items.count - 40
-            self.settingsChanged()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [unowned self] in
+            defaultToolbarItemCount = toolbar.items.count - 40
+            settingsChanged()
         }
     }
 
@@ -390,7 +390,7 @@ class WordsPhrasesBaseWindowController: NSWindowController, LollyProtocol, NSWin
     }
 
     deinit {
-        print("DEBUG: \(self.className) deinit")
+        print("DEBUG: \(className) deinit")
     }
 }
 

@@ -26,9 +26,9 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
     }
 
     override func settingsChanged() {
-        vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: false, needCopy: true) {
-            self.acTextbooks.content = self.vmSettings.arrTextbookFilters
-            self.doRefresh()
+        vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: false, needCopy: true) { [unowned self] in
+            acTextbooks.content = vmSettings.arrTextbookFilters
+            doRefresh()
         }
         super.settingsChanged()
     }
@@ -43,21 +43,21 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
 
     override func endEditing(row: Int) {
         let item = arrPhrases[row]
-        vm.update(item: item).subscribe { _ in
-            self.tvPhrases.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tvPhrases.tableColumns.count))
+        vm.update(item: item).subscribe { [unowned self] _ in
+            tvPhrases.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<tvPhrases.tableColumns.count))
         } ~ rx.disposeBag
     }
 
     override func deletePhrase(row: Int) {
         let item = arrPhrases[row]
-        PhrasesUnitViewModel.delete(item: item).subscribe { _ in
-            self.doRefresh()
+        PhrasesUnitViewModel.delete(item: item).subscribe { [unowned self] _ in
+            doRefresh()
         } ~ rx.disposeBag
     }
 
     @IBAction func refreshTableView(_ sender: AnyObject) {
-        vm.reload().subscribe { _ in
-            self.doRefresh()
+        vm.reload().subscribe { [unowned self] _ in
+            doRefresh()
         } ~ rx.disposeBag
     }
 
@@ -70,14 +70,14 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
     }
 
     @IBAction func editPhrase(_ sender: AnyObject) {
-        let detailVC = self.storyboard!.instantiateController(withIdentifier: "PhrasesTextbookDetailViewController") as! PhrasesTextbookDetailViewController
+        let detailVC = storyboard!.instantiateController(withIdentifier: "PhrasesTextbookDetailViewController") as! PhrasesTextbookDetailViewController
         let i = tvPhrases.selectedRow
         if i == -1 {return}
         detailVC.vmEdit = PhrasesUnitDetailViewModel(vm: vm, item: arrPhrases[i], wordid: 0)
-        detailVC.complete = {
-            self.tvPhrases.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tvPhrases.tableColumns.count))
+        detailVC.complete = { [unowned self] in
+            tvPhrases.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<tvPhrases.tableColumns.count))
         }
-        self.presentAsModalWindow(detailVC)
+        presentAsModalWindow(detailVC)
     }
 
     override func updateStatusText() {
@@ -89,10 +89,10 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
         let detailVC = NSStoryboard(name: "Words", bundle: nil).instantiateController(withIdentifier: "WordsAssociateViewController") as! WordsAssociateViewController
         detailVC.textFilter = vm.selectedPhrase
         detailVC.phraseid = vm.selectedPhraseID
-        detailVC.complete = {
-            self.getWords()
+        detailVC.complete = { [unowned self] in
+            getWords()
         }
-        self.presentAsModalWindow(detailVC)
+        presentAsModalWindow(detailVC)
     }
 }
 

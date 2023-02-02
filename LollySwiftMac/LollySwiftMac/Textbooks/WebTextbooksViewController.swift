@@ -32,9 +32,9 @@ class WebTextbooksViewController: NSViewController, LollyProtocol, NSTableViewDa
     }
 
     @IBAction func refreshTableView(_ sender: AnyObject) {
-        vm = WebTextbooksViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) {
-            self.acTextbooks.content = self.vm.vmSettings.arrWebTextbookFilters
-            self.tableView.reloadData()
+        vm = WebTextbooksViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) { [unowned self] in
+            acTextbooks.content = vm.vmSettings.arrWebTextbookFilters
+            tableView.reloadData()
         }
     }
 

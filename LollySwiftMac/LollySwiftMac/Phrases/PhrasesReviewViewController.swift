@@ -88,7 +88,7 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
         optionsVC.complete = { [unowned self] in
             vm.newTest()
         }
-        self.presentAsSheet(optionsVC)
+        presentAsSheet(optionsVC)
     }
 
     func controlTextDidEndEditing(_ obj: Notification) {
@@ -104,7 +104,7 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
     }
 
     deinit {
-        print("DEBUG: \(self.className) deinit")
+        print("DEBUG: \(className) deinit")
     }
 }
 
@@ -113,6 +113,6 @@ class PhrasesReviewWindowController: NSWindowController {
     @IBOutlet weak var scSpeak: NSSegmentedControl!
 
     deinit {
-        print("DEBUG: \(self.className) deinit")
+        print("DEBUG: \(className) deinit")
     }
 }

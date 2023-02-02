@@ -59,13 +59,13 @@ class WebPageSelectViewController: NSViewController, NSTableViewDataSource, NSTa
 
     @IBAction func okClicked(_ sender: AnyObject) {
         // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
-        self.commitEditing()
+        commitEditing()
         complete?()
         dismiss(sender)
     }
 
     deinit {
-        print("DEBUG: \(self.className) deinit")
+        print("DEBUG: \(className) deinit")
     }
 
 }

@@ -26,8 +26,8 @@ class DictsViewController: NSViewController, LollyProtocol, NSTableViewDataSourc
     }
 
     @IBAction func refreshTableView(_ sender: Any) {
-        vm = DictsViewModel(settings: AppDelegate.theSettingsViewModel) {
-            self.tableView.reloadData()
+        vm = DictsViewModel(settings: AppDelegate.theSettingsViewModel) { [unowned self] in
+            tableView.reloadData()
         }
     }
 
@@ -44,20 +44,20 @@ class DictsViewController: NSViewController, LollyProtocol, NSTableViewDataSourc
     }
 
     @IBAction func editDict(_ sender: Any) {
-        let detailVC = self.storyboard!.instantiateController(withIdentifier: "DictsDetailViewController") as! DictsDetailViewController
+        let detailVC = storyboard!.instantiateController(withIdentifier: "DictsDetailViewController") as! DictsDetailViewController
         detailVC.vm = vm
         let i = tableView.selectedRow
         detailVC.item = vm.arrDicts[i]
         detailVC.complete = { [unowned self] in tableView.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<tableView.tableColumns.count)) }
-        self.presentAsModalWindow(detailVC)
+        presentAsModalWindow(detailVC)
     }
 
     @IBAction func addDict(_ sender: Any) {
-        let detailVC = self.storyboard!.instantiateController(withIdentifier: "DictsDetailViewController") as! DictsDetailViewController
+        let detailVC = storyboard!.instantiateController(withIdentifier: "DictsDetailViewController") as! DictsDetailViewController
         detailVC.vm = vm
         detailVC.item = vm.newDict()
         detailVC.complete = { [unowned self] in tableView.reloadData() }
-        self.presentAsSheet(detailVC)
+        presentAsSheet(detailVC)
     }
 
     @IBAction func endEditing(_ sender: NSTextField) {

@@ -84,7 +84,7 @@ class WordsBaseViewController: UIViewController, UITableViewDelegate, UITableVie
     }
 
     deinit {
-        print("DEBUG: \(self.className) deinit")
+        print("DEBUG: \(className) deinit")
     }
 }
 

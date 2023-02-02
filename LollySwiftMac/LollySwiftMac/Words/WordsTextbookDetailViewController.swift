@@ -86,6 +86,6 @@ class WordsTextbookDetailViewController: NSViewController, NSTableViewDataSource
     }
 
     deinit {
-        print("DEBUG: \(self.className) deinit")
+        print("DEBUG: \(className) deinit")
     }
 }

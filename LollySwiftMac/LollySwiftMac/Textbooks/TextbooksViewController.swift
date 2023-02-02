@@ -27,8 +27,8 @@ class TextbooksViewController: NSViewController, LollyProtocol, NSTableViewDataS
     }
 
     @IBAction func refreshTableView(_ sender: AnyObject) {
-        vm = TextbooksViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) {
-            self.tableView.reloadData()
+        vm = TextbooksViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) { [unowned self] in
+            tableView.reloadData()
         }
     }
 
@@ -45,20 +45,20 @@ class TextbooksViewController: NSViewController, LollyProtocol, NSTableViewDataS
     }
 
     @IBAction func editTextbook(_ sender: AnyObject) {
-        let detailVC = self.storyboard!.instantiateController(withIdentifier: "TextbooksDetailViewController") as! TextbooksDetailViewController
+        let detailVC = storyboard!.instantiateController(withIdentifier: "TextbooksDetailViewController") as! TextbooksDetailViewController
         detailVC.vm = vm
         let i = tableView.selectedRow
         detailVC.item = vm.arrTextbooks[i]
-        detailVC.complete = { self.tableView.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count)) }
-        self.presentAsModalWindow(detailVC)
+        detailVC.complete = { [unowned self] in tableView.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<tableView.tableColumns.count)) }
+        presentAsModalWindow(detailVC)
     }
 
     @IBAction func addTextbook(_ sender: AnyObject) {
-        let detailVC = self.storyboard!.instantiateController(withIdentifier: "TextbooksDetailViewController") as! TextbooksDetailViewController
+        let detailVC = storyboard!.instantiateController(withIdentifier: "TextbooksDetailViewController") as! TextbooksDetailViewController
         detailVC.vm = vm
         detailVC.item = vm.newTextbook()
-        detailVC.complete = { self.tableView.reloadData() }
-        self.presentAsSheet(detailVC)
+        detailVC.complete = { [unowned self] in tableView.reloadData() }
+        presentAsSheet(detailVC)
     }
 
     @IBAction func endEditing(_ sender: NSTextField) {
@@ -71,8 +71,8 @@ class TextbooksViewController: NSViewController, LollyProtocol, NSTableViewDataS
         let newValue = sender.stringValue
         guard oldValue != newValue else {return}
         item.setValue(newValue, forKey: key)
-        TextbooksViewModel.update(item: item).subscribe { _ in
-            self.tableView.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<self.tableView.tableColumns.count))
+        TextbooksViewModel.update(item: item).subscribe { [unowned self] _ in
+            tableView.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<tableView.tableColumns.count))
         } ~ rx.disposeBag
     }
 }

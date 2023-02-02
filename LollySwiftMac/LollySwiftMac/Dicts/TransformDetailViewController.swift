@@ -101,17 +101,17 @@ class TransformDetailViewController: NSViewController, NSTableViewDataSource, NS
     }
 
     @IBAction func addTransformItem(_ sender: AnyObject) {
-        let itemEditVC = self.storyboard!.instantiateController(withIdentifier: "TransformItemEditController") as! TransformItemEditController
+        let itemEditVC = storyboard!.instantiateController(withIdentifier: "TransformItemEditController") as! TransformItemEditController
         itemEditVC.item = vm.newTransformItem()
         itemEditVC.complete = { [unowned self] in
             vm.arrTranformItems.append(itemEditVC.item)
             tvTranformItems.reloadData()
         }
-        self.presentAsSheet(itemEditVC)
+        presentAsSheet(itemEditVC)
     }
 
     @IBAction func editTransformItem(_ sender: AnyObject) {
-        let itemEditVC = self.storyboard!.instantiateController(withIdentifier: "TransformItemEditController") as! TransformItemEditController
+        let itemEditVC = storyboard!.instantiateController(withIdentifier: "TransformItemEditController") as! TransformItemEditController
         let i = tvTranformItems.selectedRow
         itemEditVC.item = MTransformItem()
         itemEditVC.item.copy(from: vm.arrTranformItems[i])
@@ -119,7 +119,7 @@ class TransformDetailViewController: NSViewController, NSTableViewDataSource, NS
             vm.arrTranformItems[i].copy(from: itemEditVC.item)
             tvTranformItems.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<tvTranformItems.tableColumns.count))
         }
-        self.presentAsModalWindow(itemEditVC)
+        presentAsModalWindow(itemEditVC)
     }
 
     @IBAction func getHtml(_ sender: Any) {
@@ -146,12 +146,12 @@ class TransformDetailViewController: NSViewController, NSTableViewDataSource, NS
 
     @IBAction func okClicked(_ sender: Any) {
         // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
-        self.commitEditing()
+        commitEditing()
         vm.onOK()
         dismiss(sender)
     }
 
     deinit {
-        print("DEBUG: \(self.className) deinit")
+        print("DEBUG: \(className) deinit")
     }
 }

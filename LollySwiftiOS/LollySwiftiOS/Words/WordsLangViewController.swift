@@ -80,7 +80,7 @@ class WordsLangViewController: WordsBaseViewController {
             alertController.addAction(googleWordAction)
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
             alertController.addAction(cancelAction)
-            self.present(alertController, animated: true) {}
+            present(alertController, animated: true) {}
         }
 
         return UISwipeActionsConfiguration(actions: [moreAction, deleteAction])

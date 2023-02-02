@@ -115,7 +115,7 @@ class PatternsMergeViewController: NSViewController, NSTableViewDataSource, NSTa
 
     @IBAction func okClicked(_ sender: AnyObject) {
         // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
-        self.commitEditing()
+        commitEditing()
         vm.onOK().subscribe { [unowned self] _ in
             dismiss(sender)
         } ~ rx.disposeBag

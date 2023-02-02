@@ -48,12 +48,12 @@ class WordsDictViewController: NSViewController, WKNavigationDelegate {
         // Regain focus if it's stolen by the webView
         if vcWords.responder != nil && vcWords.needRegainFocus() {
             subscription?.dispose()
-            subscription = Observable<Int>.timer(DispatchTimeInterval.milliseconds(500), period: DispatchTimeInterval.milliseconds(1000), scheduler: MainScheduler.instance).subscribe { _ in
-                self.subscription?.dispose()
-                self.vcWords?.responder?.window?.makeFirstResponder(self.vcWords.responder)
-                self.vcWords?.responder = nil
+            subscription = Observable<Int>.timer(DispatchTimeInterval.milliseconds(500), period: DispatchTimeInterval.milliseconds(1000), scheduler: MainScheduler.instance).subscribe { [unowned self] _ in
+                subscription?.dispose()
+                vcWords?.responder?.window?.makeFirstResponder(vcWords.responder)
+                vcWords?.responder = nil
             }
-            subscription?.disposed(by: self.rx.disposeBag)
+            subscription?.disposed(by: rx.disposeBag)
         }
         tfURL.stringValue = webView.url!.absoluteString
         dictStore.onNavigationFinished()
@@ -64,6 +64,6 @@ class WordsDictViewController: NSViewController, WKNavigationDelegate {
     }
 
     deinit {
-        print("DEBUG: \(self.className) deinit")
+        print("DEBUG: \(className) deinit")
     }
 }

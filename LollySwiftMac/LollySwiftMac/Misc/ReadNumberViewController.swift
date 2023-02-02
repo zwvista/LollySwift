@@ -39,7 +39,7 @@ class ReadNumberViewController: NSViewController, NSTextFieldDelegate {
     }
 
     deinit {
-        print("DEBUG: \(self.className) deinit")
+        print("DEBUG: \(className) deinit")
     }
 
 }
@@ -51,6 +51,6 @@ class ReadNumberWindowController: NSWindowController {
     }
 
     deinit {
-        print("DEBUG: \(self.className) deinit")
+        print("DEBUG: \(className) deinit")
     }
 }

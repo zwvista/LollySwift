@@ -62,7 +62,7 @@ class PatternsWebPagesDetailViewController: NSViewController {
     }
 
     @IBAction func existingWebPageID(_ sender: Any) {
-        let webPageVC = self.storyboard!.instantiateController(withIdentifier: "WebPageSelectViewController") as! WebPageSelectViewController
+        let webPageVC = storyboard!.instantiateController(withIdentifier: "WebPageSelectViewController") as! WebPageSelectViewController
         webPageVC.vm = vm
         webPageVC.complete = { [unowned self] in
             let o = webPageVC.vmWebPage.selectedWebPage!
@@ -70,11 +70,11 @@ class PatternsWebPagesDetailViewController: NSViewController {
             itemEdit.TITLE.accept(o.TITLE)
             itemEdit.URL.accept(o.URL)
         }
-        self.presentAsModalWindow(webPageVC)
+        presentAsModalWindow(webPageVC)
     }
 
     deinit {
-        print("DEBUG: \(self.className) deinit")
+        print("DEBUG: \(className) deinit")
     }
 
 }

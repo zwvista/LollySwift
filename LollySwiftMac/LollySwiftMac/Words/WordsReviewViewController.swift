@@ -80,9 +80,9 @@ class WordsReviewViewController: WordsBaseViewController, NSTextFieldDelegate {
         settingsChanged()
         wc = view.window!.windowController as? WordsReviewWindowController
         _ = vm.isSpeaking <~> wc.scSpeak.rx.isOn
-        vm.isSpeaking.subscribe { isSpeaking in
-            if self.vm.hasCurrent && isSpeaking {
-                self.synth.startSpeaking(self.vm.currentWord)
+        vm.isSpeaking.subscribe { [unowned self] isSpeaking in
+            if vm.hasCurrent && isSpeaking {
+                synth.startSpeaking(vm.currentWord)
             }
         } ~ rx.disposeBag
     }
@@ -96,9 +96,9 @@ class WordsReviewViewController: WordsBaseViewController, NSTextFieldDelegate {
         let optionsVC = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: "ReviewOptionsViewController") as! ReviewOptionsViewController
         optionsVC.vm = ReviewOptionsViewModel(options: vm.options)
         optionsVC.complete = { [unowned self] in
-            self.vm.newTest()
+            vm.newTest()
         }
-        self.presentAsSheet(optionsVC)
+        presentAsSheet(optionsVC)
     }
 
     func controlTextDidEndEditing(_ obj: Notification) {
@@ -114,13 +114,13 @@ class WordsReviewViewController: WordsBaseViewController, NSTextFieldDelegate {
     }
 
     deinit {
-        print("DEBUG: \(self.className) deinit")
+        print("DEBUG: \(className) deinit")
     }
 }
 
 class WordsReviewWindowController: WordsBaseWindowController {
 
     deinit {
-        print("DEBUG: \(self.className) deinit")
+        print("DEBUG: \(className) deinit")
     }
 }
