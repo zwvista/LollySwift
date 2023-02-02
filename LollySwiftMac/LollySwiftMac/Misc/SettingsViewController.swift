@@ -74,6 +74,10 @@ class SettingsViewController: NSViewController, NSTableViewDataSource, NSTableVi
             acParts.content = vm.arrParts
             tfUnitsInAllFrom.stringValue = vm.unitsInAll
             tfUnitsInAllTo.stringValue = vm.unitsInAll
+            _ = vm.selectedUnitFromIndex_ <~> pubUnitFrom.rx.selectedItemIndex
+            _ = vm.selectedPartFromIndex_ <~> pubPartFrom.rx.selectedItemIndex
+            _ = vm.selectedUnitToIndex_ <~> pubUnitTo.rx.selectedItemIndex
+            _ = vm.selectedPartToIndex_ <~> pubPartTo.rx.selectedItemIndex
         } ~ rx.disposeBag
 
         _ = vm.selectedLangIndex_ <~> pubLanguages.rx.selectedItemIndex
@@ -81,10 +85,6 @@ class SettingsViewController: NSViewController, NSTableViewDataSource, NSTableVi
         _ = vm.selectedDictNoteIndex_ <~> pubDictsNote.rx.selectedItemIndex
         _ = vm.selectedDictTranslationIndex_ <~> pubDictsTranslation.rx.selectedItemIndex
         _ = vm.selectedTextbookIndex_ <~> pubTextbooks.rx.selectedItemIndex
-        _ = vm.selectedUnitFromIndex_ <~> pubUnitFrom.rx.selectedItemIndex
-        _ = vm.selectedPartFromIndex_ <~> pubPartFrom.rx.selectedItemIndex
-        _ = vm.selectedUnitToIndex_ <~> pubUnitTo.rx.selectedItemIndex
-        _ = vm.selectedPartToIndex_ <~> pubPartTo.rx.selectedItemIndex
         _ = vm.toType_ <~> scToType.rx.selectedSegment
         _ = vm.unitToEnabled ~> pubUnitTo.rx.isEnabled
         _ = vm.partToEnabled ~> pubPartTo.rx.isEnabled
