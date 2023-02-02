@@ -117,7 +117,7 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
             alertController.addAction(googlePatternAction)
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
             alertController.addAction(cancelAction)
-            self.present(alertController, animated: true) {}
+            present(alertController, animated: true) {}
         }
 
         return UISwipeActionsConfiguration(actions: [moreAction, deleteAction])
@@ -154,7 +154,7 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
     }
 
     deinit {
-        print("DEBUG: \(self.className) deinit")
+        print("DEBUG: \(className) deinit")
     }
 }
 

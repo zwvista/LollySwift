@@ -21,7 +21,7 @@ struct ContentView: View {
                     .navigationBarTitleDisplayMode(.inline)
                     .navigationBarItems(leading: (
                         Button(action: {
-                            self.isOpenSideMenu.toggle()
+                            isOpenSideMenu.toggle()
                         }) {
                             Image(systemName: "line.horizontal.3")
                                 .imageScale(.large)

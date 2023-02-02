@@ -123,6 +123,6 @@ class WordsReviewViewController: UIViewController, UITextFieldDelegate {
     }
 
     deinit {
-        print("DEBUG: \(self.className) deinit")
+        print("DEBUG: \(className) deinit")
     }
 }

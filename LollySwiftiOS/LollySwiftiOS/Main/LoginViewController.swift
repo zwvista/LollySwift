@@ -36,13 +36,13 @@ class LoginViewController: UIViewController {
                     let alert = UIAlertController(title: "Login", message:  "Wrong username or password!", preferredStyle:  UIAlertController.Style.alert)
                     let defaultAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) {_ in }
                     alert.addAction(defaultAction)
-                    self.present(alert, animated: true)
+                    present(alert, animated: true)
                 }
             }
         } ~ subscriptions
     }
 
     deinit {
-        print("DEBUG: \(self.className) deinit")
+        print("DEBUG: \(className) deinit")
     }
 }

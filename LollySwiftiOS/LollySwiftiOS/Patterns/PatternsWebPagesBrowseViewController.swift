@@ -93,6 +93,6 @@ class PatternsWebPagesBrowseViewController: UIViewController, WKUIDelegate, WKNa
     }
 
     deinit {
-        print("DEBUG: \(self.className) deinit")
+        print("DEBUG: \(className) deinit")
     }
 }

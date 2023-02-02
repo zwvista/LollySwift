@@ -93,12 +93,12 @@ struct WordsTextbookView: View {
                 }
                 Button("Retrieve Note") {
                     Task {
-                        await self.vm.getNote(item: currentItem)
+                        await vm.getNote(item: currentItem)
                     }
                 }
                 Button("Clear Note") {
                     Task {
-                        await self.vm.clearNote(item: currentItem)
+                        await vm.clearNote(item: currentItem)
                     }
                 }
                 Button("Copy Word") {

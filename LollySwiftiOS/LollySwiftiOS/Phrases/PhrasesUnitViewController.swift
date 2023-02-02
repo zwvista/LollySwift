@@ -88,7 +88,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
             alertController.addAction(googlePhraseAction)
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
             alertController.addAction(cancelAction)
-            self.present(alertController, animated: true) {}
+            present(alertController, animated: true) {}
         }
 
         return UISwipeActionsConfiguration(actions: [moreAction, deleteAction])
@@ -115,7 +115,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
         alertController.addAction(batchAction)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
         alertController.addAction(cancelAction)
-        self.present(alertController, animated: true) {}
+        present(alertController, animated: true) {}
     }
 
     @IBAction func btnEditClicked(_ sender: AnyObject) {

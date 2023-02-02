@@ -80,7 +80,7 @@ class PhrasesBaseViewController: UIViewController, UITableViewDelegate, UITableV
     }
 
     deinit {
-        print("DEBUG: \(self.className) deinit")
+        print("DEBUG: \(className) deinit")
     }
 }
 

@@ -65,6 +65,6 @@ class PatternsWebPagesDetailViewController: UITableViewController {
     }
 
     deinit {
-        print("DEBUG: \(self.className) deinit")
+        print("DEBUG: \(className) deinit")
     }
 }

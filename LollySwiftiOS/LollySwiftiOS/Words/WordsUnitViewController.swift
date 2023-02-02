@@ -109,7 +109,7 @@ class WordsUnitViewController: WordsBaseViewController {
             alertController.addAction(openOnlineDictAction)
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
             alertController.addAction(cancelAction)
-            self.present(alertController, animated: true) {}
+            present(alertController, animated: true) {}
         }
 
         return UISwipeActionsConfiguration(actions: [moreAction, deleteAction])
@@ -182,7 +182,7 @@ class WordsUnitViewController: WordsBaseViewController {
         alertController.addAction(batchAction)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
         alertController.addAction(cancelAction)
-        self.present(alertController, animated: true) {}
+        present(alertController, animated: true) {}
     }
 
     @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {

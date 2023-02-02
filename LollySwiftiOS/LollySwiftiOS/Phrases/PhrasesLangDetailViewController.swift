@@ -37,6 +37,6 @@ class PhrasesLangDetailViewController: UITableViewController {
     }
 
     deinit {
-        print("DEBUG: \(self.className) deinit")
+        print("DEBUG: \(className) deinit")
     }
 }

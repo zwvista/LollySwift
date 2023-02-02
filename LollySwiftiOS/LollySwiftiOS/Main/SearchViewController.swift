@@ -67,9 +67,9 @@ class SearchViewController: UIViewController, WKNavigationDelegate, UISearchBarD
 
     @IBAction func logout(_ sender: Any) {
         globalUser.remove()
-        if let vc = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController {
             vc.completion = { [unowned self] in setup() }
-            self.present(vc, animated: true)
+            present(vc, animated: true)
         }
     }
 
@@ -84,6 +84,6 @@ class SearchViewController: UIViewController, WKNavigationDelegate, UISearchBarD
     }
 
     deinit {
-        print("DEBUG: \(self.className) deinit")
+        print("DEBUG: \(className) deinit")
     }
 }
