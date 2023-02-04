@@ -5698,6 +5698,14 @@ Gw
                                                     </segments>
                                                 </segmentedCell>
                                             </segmentedControl>
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2UG-2i-AUN">
+                                                <rect key="frame" x="-2" y="0.0" width="4" height="16"/>
+                                                <textFieldCell key="cell" lineBreakMode="clipping" id="Uuo-VG-Qu9">
+                                                    <font key="font" metaFont="system"/>
+                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="sKV-9H-nac" secondAttribute="trailing" constant="20" id="2Fa-RI-Mjd"/>
@@ -5710,6 +5718,7 @@ Gw
                                             <constraint firstItem="P77-NG-qbH" firstAttribute="leading" secondItem="07i-yK-Tyc" secondAttribute="trailing" constant="10" id="IkZ-qE-NON"/>
                                             <constraint firstItem="vOb-Pl-cYk" firstAttribute="centerY" secondItem="ifE-nI-yN3" secondAttribute="centerY" id="JJh-vE-1Vz"/>
                                             <constraint firstItem="iO2-qq-F3q" firstAttribute="centerY" secondItem="f21-Ix-zj3" secondAttribute="centerY" id="LHH-M8-k3X"/>
+                                            <constraint firstItem="2UG-2i-AUN" firstAttribute="leading" secondItem="nAV-ZA-eQY" secondAttribute="leading" id="MOj-fC-Mfh"/>
                                             <constraint firstItem="f21-Ix-zj3" firstAttribute="leading" secondItem="9An-cD-pD2" secondAttribute="trailing" constant="20" id="Nzd-QL-4Ue"/>
                                             <constraint firstItem="9An-cD-pD2" firstAttribute="centerY" secondItem="f21-Ix-zj3" secondAttribute="centerY" id="Qg3-Fc-VXE"/>
                                             <constraint firstItem="W4B-Jb-i8b" firstAttribute="trailing" secondItem="tkR-zI-Crh" secondAttribute="trailing" id="RHX-Pc-6Ha"/>
@@ -5718,6 +5727,7 @@ Gw
                                             <constraint firstItem="07i-yK-Tyc" firstAttribute="centerY" secondItem="544-Sl-0Ct" secondAttribute="centerY" id="X3P-MQ-zSR"/>
                                             <constraint firstItem="9An-cD-pD2" firstAttribute="leading" secondItem="iO2-qq-F3q" secondAttribute="trailing" constant="20" id="XnQ-s4-jdQ"/>
                                             <constraint firstAttribute="bottom" secondItem="f21-Ix-zj3" secondAttribute="bottom" constant="44" id="YFf-po-usv"/>
+                                            <constraint firstAttribute="bottom" secondItem="2UG-2i-AUN" secondAttribute="bottom" id="do2-kt-F3h"/>
                                             <constraint firstItem="0nW-V6-xz8" firstAttribute="leading" secondItem="vOb-Pl-cYk" secondAttribute="leading" id="jub-AH-EB6"/>
                                             <constraint firstItem="tkR-zI-Crh" firstAttribute="trailing" secondItem="sKV-9H-nac" secondAttribute="trailing" id="ogV-JQ-lva"/>
                                             <constraint firstItem="sKV-9H-nac" firstAttribute="centerY" secondItem="ifE-nI-yN3" secondAttribute="centerY" id="p9a-sf-PKn"/>
@@ -5785,6 +5795,7 @@ Gw
                         <outlet property="tfIncorrect" destination="0nW-V6-xz8" id="fT5-xe-fzx"/>
                         <outlet property="tfIndex" destination="ifE-nI-yN3" id="hgm-a5-qro"/>
                         <outlet property="tfNoteTarget" destination="07i-yK-Tyc" id="AZK-Sd-f8h"/>
+                        <outlet property="tfStatusText" destination="2UG-2i-AUN" id="ML1-52-4iv"/>
                         <outlet property="tfTranslation" destination="tkR-zI-Crh" id="SZ0-ew-7Cn"/>
                         <outlet property="tfWordHint" destination="P77-NG-qbH" id="JNj-4B-ok9"/>
                         <outlet property="tfWordInput" destination="W4B-Jb-i8b" id="FaB-u8-UkS"/>

@@ -4997,8 +4997,8 @@ Gw
                                 <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="cTV-Rf-W4K">
                                     <font key="font" metaFont="system"/>
                                     <segments>
-                                        <segment label="Backward" width="58"/>
-                                        <segment label="Forward" width="58" selected="YES" tag="1"/>
+                                        <segment image="arrowtriangle.backward.fill" catalog="system" width="58"/>
+                                        <segment image="arrowtriangle.forward.fill" catalog="system" width="58" selected="YES" tag="1"/>
                                     </segments>
                                 </segmentedCell>
                             </segmentedControl>
@@ -5007,11 +5007,19 @@ Gw
                                 <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="ltB-hW-mLQ">
                                     <font key="font" metaFont="system"/>
                                     <segments>
-                                        <segment label="One Pass" width="56"/>
-                                        <segment label="On Repeat" width="64" selected="YES" tag="1"/>
+                                        <segment image="arrow.forward" catalog="system" width="56"/>
+                                        <segment image="repeat" catalog="system" width="64" selected="YES" tag="1"/>
                                     </segments>
                                 </segmentedCell>
                             </segmentedControl>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="If1-ZZ-S9R">
+                                <rect key="frame" x="279" y="136" width="4" height="16"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" id="W7Q-58-twK">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                         <constraints>
                             <constraint firstItem="WC7-er-c2b" firstAttribute="leading" secondItem="Fhl-OE-S8U" secondAttribute="leading" id="19R-U7-G4I"/>
@@ -5023,7 +5031,9 @@ Gw
                             <constraint firstItem="tfQ-3Y-osT" firstAttribute="top" secondItem="UT0-VP-Vmh" secondAttribute="bottom" constant="20" id="Bfj-zl-N5b"/>
                             <constraint firstItem="Fhl-OE-S8U" firstAttribute="leading" secondItem="lHa-Iq-qF8" secondAttribute="leading" id="Dry-Cz-qhe"/>
                             <constraint firstItem="UT0-VP-Vmh" firstAttribute="top" secondItem="WC7-er-c2b" secondAttribute="bottom" constant="20" id="ECK-cK-Swe"/>
+                            <constraint firstItem="If1-ZZ-S9R" firstAttribute="leading" secondItem="JA3-uv-wIc" secondAttribute="leading" constant="281" id="JJ1-Vx-5ez"/>
                             <constraint firstItem="Fhl-OE-S8U" firstAttribute="top" secondItem="lHa-Iq-qF8" secondAttribute="bottom" constant="20" id="M99-eW-wmh"/>
+                            <constraint firstAttribute="bottom" secondItem="If1-ZZ-S9R" secondAttribute="bottom" constant="136" id="Mbe-sA-vJe"/>
                             <constraint firstItem="hZW-ZX-inQ" firstAttribute="leading" secondItem="SyK-hA-mZ7" secondAttribute="trailing" constant="20" id="Q6k-PU-31N"/>
                             <constraint firstItem="tfQ-3Y-osT" firstAttribute="trailing" secondItem="UT0-VP-Vmh" secondAttribute="trailing" id="RRL-pm-CcY"/>
                             <constraint firstItem="lHa-Iq-qF8" firstAttribute="top" secondItem="JA3-uv-wIc" secondAttribute="top" constant="20" id="VqS-oB-cHX"/>
@@ -5048,6 +5058,7 @@ Gw
                         <outlet property="tfIndex" destination="lHa-Iq-qF8" id="03A-ct-hmU"/>
                         <outlet property="tfPhraseInput" destination="UT0-VP-Vmh" id="T7N-V9-UiK"/>
                         <outlet property="tfPhraseTarget" destination="Fhl-OE-S8U" id="EUu-PW-UcI"/>
+                        <outlet property="tfStatusText" destination="If1-ZZ-S9R" id="oy0-oO-bAL"/>
                         <outlet property="tfTranslation" destination="WC7-er-c2b" id="ce3-x6-cEd"/>
                     </connections>
                 </viewController>
@@ -5418,5 +5429,9 @@ Gw
         <image name="NSRefreshTemplate" width="18" height="21"/>
         <image name="NSRemoveTemplate" width="18" height="5"/>
         <image name="NSStatusNone" width="16" height="16"/>
+        <image name="arrow.forward" catalog="system" width="15" height="12"/>
+        <image name="arrowtriangle.backward.fill" catalog="system" width="14" height="13"/>
+        <image name="arrowtriangle.forward.fill" catalog="system" width="14" height="13"/>
+        <image name="repeat" catalog="system" width="17" height="14"/>
     </resources>
 </document>
