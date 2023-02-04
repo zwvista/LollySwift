@@ -106,7 +106,6 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     func tableViewSelectionDidChange(_ notification: Notification) {
         let tv = notification.object as! NSTableView
         if tv === tvPatterns {
-            updateStatusText()
             let row = tvPatterns.selectedRow
             vm.selectedPatternItem = row == -1 ? nil : arrPatterns[row]
             vmWP.selectedPatternItem = vm.selectedPatternItem

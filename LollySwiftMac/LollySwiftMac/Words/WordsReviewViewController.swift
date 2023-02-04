@@ -40,6 +40,7 @@ class WordsReviewViewController: WordsBaseViewController, NSTextFieldDelegate {
             if !vm2.isTestMode {
                 searchDict(self)
             }
+            updateStatusText()
         }
         super.settingsChanged()
 
@@ -116,6 +117,10 @@ class WordsReviewViewController: WordsBaseViewController, NSTextFieldDelegate {
         Task {
             await vm.check(toNext: sender == btnCheckNext)
         }
+    }
+
+    override func updateStatusText() {
+        tfStatusText.stringValue = "\(vm.arrWords.count) Words in \(vmSettings.UNITINFO)"
     }
 
     deinit {

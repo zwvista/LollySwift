@@ -201,7 +201,6 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
         let tv = notification.object as! NSTableView
         if tv === tvWords {
             selectedWordChanged()
-            updateStatusText()
             searchDict(self)
             Task {
                 await getPhrases()

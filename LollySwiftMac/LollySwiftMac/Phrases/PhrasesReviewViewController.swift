@@ -21,6 +21,7 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
     @IBOutlet weak var btnCheckPrev: NSButton!
     @IBOutlet weak var scOnRepeat: NSSegmentedControl!
     @IBOutlet weak var scMoveForward: NSSegmentedControl!
+    @IBOutlet weak var tfStatusText: NSTextField!
 
     @objc dynamic var vm: PhrasesReviewViewModel!
     var vmSettings: SettingsViewModel { vm.vmSettings }
@@ -34,6 +35,7 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
             if vm2.hasCurrent && vm2.isSpeaking {
                synth.startSpeaking(vm2.currentPhrase)
             }
+            tfStatusText.stringValue = "\(vm.arrPhrases.count) Phrases in \(vmSettings.UNITINFO)"
         }
         synth.setVoice(NSSpeechSynthesizer.VoiceName(rawValue: vmSettings.macVoiceName))
 
