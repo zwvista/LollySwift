@@ -137,7 +137,7 @@ class WordsReviewViewModel: WordsBaseViewModel {
         let mDictTranslation = vmSettings.selectedDictTranslation
         let url = mDictTranslation.urlString(word: currentWord, arrAutoCorrect: vmSettings.arrAutoCorrect)
         return RestApi.getHtml(url: url).map { html in
-            print(html)
+//            print(html)
             return CommonApi.extractText(from: html, transform: mDictTranslation.TRANSFORM, template: "") { text,_ in text }
         }
     }
