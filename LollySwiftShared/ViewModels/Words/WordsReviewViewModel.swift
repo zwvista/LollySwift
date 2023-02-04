@@ -137,7 +137,7 @@ class WordsReviewViewModel: WordsBaseViewModel {
         let mDictTranslation = vmSettings.selectedDictTranslation
         let url = mDictTranslation.urlString(word: currentWord, arrAutoCorrect: vmSettings.arrAutoCorrect)
         let html = await RestApi.getHtml(url: url)
-        print(html)
+        // print(html)
         return CommonApi.extractText(from: html, transform: mDictTranslation.TRANSFORM, template: "") { text,_ in text }
     }
 
@@ -200,7 +200,9 @@ class WordsReviewViewModel: WordsBaseViewModel {
         if hasCurrent {
             indexString = "\(index + 1)/\(count)"
             accuracyString = currentItem!.ACCURACY
-            translationString = await getTranslation()
+            Task {
+                translationString = await getTranslation()
+            }
         } else {
             stopTimer()
         }
