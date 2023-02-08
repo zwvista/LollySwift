@@ -43,7 +43,7 @@ class CommonApi {
             var i = 1
             s = ms.reduce("", { (acc, m) in
                 let s2 = m.0
-                print("[TRANSFORM\(i)]\(s2)[/TRANSFORM\(i)]")
+//                print("[TRANSFORM\(i)]\(s2)[/TRANSFORM\(i)]")
                 i += 1
                 return acc + s2
             })
