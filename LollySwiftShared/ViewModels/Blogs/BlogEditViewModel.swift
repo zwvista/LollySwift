@@ -1,5 +1,5 @@
 //
-//  BlogViewModel.swift
+//  BlogEditViewModel.swift
 //  LollySwiftMac
 //
 //  Created by 趙偉 on 2018/12/22.
@@ -9,7 +9,7 @@
 import Foundation
 
 @MainActor
-class BlogViewModel: NSObject {
+class BlogEditViewModel: NSObject {
 
     var vmSettings: SettingsViewModel
     init(settings: SettingsViewModel) {
