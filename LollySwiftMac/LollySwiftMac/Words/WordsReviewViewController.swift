@@ -25,7 +25,7 @@ class WordsReviewViewController: WordsBaseViewController, NSTextFieldDelegate {
     @IBOutlet weak var scOnRepeat: NSSegmentedControl!
     @IBOutlet weak var scMoveForward: NSSegmentedControl!
 
-    @objc dynamic var vm: WordsReviewViewModel!
+    var vm: WordsReviewViewModel!
     override var vmWords: WordsBaseViewModel { vm }
     override var vmSettings: SettingsViewModel! { vm.vmSettings }
     override var initSettingsInViewDidLoad: Bool { false }

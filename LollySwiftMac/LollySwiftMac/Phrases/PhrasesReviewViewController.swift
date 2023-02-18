@@ -23,7 +23,7 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
     @IBOutlet weak var scMoveForward: NSSegmentedControl!
     @IBOutlet weak var tfStatusText: NSTextField!
 
-    @objc dynamic var vm: PhrasesReviewViewModel!
+    var vm: PhrasesReviewViewModel!
     var vmSettings: SettingsViewModel { vm.vmSettings }
     let synth = NSSpeechSynthesizer()
     var subscriptions = Set<AnyCancellable>()
