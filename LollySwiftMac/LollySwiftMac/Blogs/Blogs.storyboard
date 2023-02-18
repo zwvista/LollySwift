@@ -612,8 +612,8 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="tvBlog" destination="9rv-gn-VfO" id="fz0-gn-XE5"/>
-                        <outlet property="tvGroup" destination="Two-Cm-jaa" id="hQ0-6D-N0e"/>
+                        <outlet property="tvBlogs" destination="9rv-gn-VfO" id="OBB-op-cPB"/>
+                        <outlet property="tvGroups" destination="Two-Cm-jaa" id="Cc8-5A-UN8"/>
                     </connections>
                 </viewController>
                 <customObject id="qe5-re-3a3" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -652,10 +652,10 @@
             </objects>
             <point key="canvasLocation" x="2937" y="451"/>
         </scene>
-        <!--Blog Groups Detail View Controller-->
+        <!--Lang Blog Groups Detail View Controller-->
         <scene sceneID="cb4-Yg-fzt">
             <objects>
-                <viewController storyboardIdentifier="BlogGroupsDetailViewController" id="sei-pj-CIT" customClass="BlogGroupsDetailViewController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LangBlogGroupsDetailViewController" id="sei-pj-CIT" customClass="LangBlogGroupsDetailViewController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="Jxm-FF-edR">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -670,7 +670,7 @@
                             </textField>
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="otd-BA-xY1" userLabel="Tf ID">
                                 <rect key="frame" x="120" y="262" width="310" height="21"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="IaC-wr-YAb">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" enabled="NO" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="IaC-wr-YAb">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -754,23 +754,16 @@ Gw
                             <constraint firstItem="qoE-7p-rnY" firstAttribute="centerY" secondItem="otd-BA-xY1" secondAttribute="centerY" id="zVk-vk-Ag7"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="btnOK" destination="aWz-ha-c9Y" id="htU-Hf-4DS"/>
+                        <outlet property="tfGroupName" destination="dpA-Yp-wRd" id="aGe-2O-Ms2"/>
+                        <outlet property="tfID" destination="otd-BA-xY1" id="okQ-nN-cCT"/>
+                        <outlet property="tfLang" destination="mPI-zt-VgG" id="sT2-Pt-I7f"/>
+                    </connections>
                 </viewController>
                 <customObject id="eEg-gg-tSM" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3447" y="-60"/>
-        </scene>
-        <!--Lang Blogs Detail View Controller-->
-        <scene sceneID="6uv-uE-ewE">
-            <objects>
-                <viewController storyboardIdentifier="LangBlogsDetailViewController" id="iMW-VG-2rL" customClass="LangBlogsDetailViewController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="aOs-vK-oPQ">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="300"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </view>
-                </viewController>
-                <customObject id="OAk-bc-TDO" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3445" y="322"/>
         </scene>
     </scenes>
     <resources>
