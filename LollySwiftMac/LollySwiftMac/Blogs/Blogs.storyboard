@@ -355,7 +355,7 @@
                                                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                                             <tableColumns>
-                                                                                <tableColumn identifier="AutomaticTableColumnIdentifier.0" width="60" minWidth="60" maxWidth="1000" id="B47-Zq-GB1">
+                                                                                <tableColumn identifier="ID" width="60" minWidth="60" maxWidth="1000" id="B47-Zq-GB1">
                                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="ID">
                                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -387,8 +387,8 @@
                                                                                         </tableCellView>
                                                                                     </prototypeCellViews>
                                                                                 </tableColumn>
-                                                                                <tableColumn identifier="AutomaticTableColumnIdentifier.1" width="146" minWidth="40" maxWidth="1000" id="a1O-ao-cKh">
-                                                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="GROUPNAME">
+                                                                                <tableColumn identifier="LANGBLOGGROUPNAME" width="146" minWidth="40" maxWidth="1000" id="a1O-ao-cKh">
+                                                                                    <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="GROUP">
                                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                                                     </tableHeaderCell>
@@ -421,6 +421,7 @@
                                                                                 </tableColumn>
                                                                             </tableColumns>
                                                                             <connections>
+                                                                                <action trigger="doubleAction" selector="doubleAction:" target="LXF-pA-LqT" id="Vwx-co-AZM"/>
                                                                                 <outlet property="dataSource" destination="LXF-pA-LqT" id="D5c-d3-jBS"/>
                                                                                 <outlet property="delegate" destination="LXF-pA-LqT" id="LaA-hC-nhw"/>
                                                                             </connections>
@@ -468,7 +469,7 @@
                                                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                                                             <tableColumns>
-                                                                                <tableColumn identifier="AutomaticTableColumnIdentifier.0" width="60" minWidth="60" maxWidth="1000" id="LT2-nb-ysI">
+                                                                                <tableColumn identifier="ID" width="60" minWidth="60" maxWidth="1000" id="LT2-nb-ysI">
                                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="ID">
                                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -500,7 +501,7 @@
                                                                                         </tableCellView>
                                                                                     </prototypeCellViews>
                                                                                 </tableColumn>
-                                                                                <tableColumn identifier="AutomaticTableColumnIdentifier.1" width="146" minWidth="40" maxWidth="1000" id="hX3-vX-7AN">
+                                                                                <tableColumn identifier="TITLE" width="146" minWidth="40" maxWidth="1000" id="hX3-vX-7AN">
                                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="TITLE">
                                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -627,6 +628,9 @@
                         </menuItem>
                         <menuItem title="Edit" id="0SJ-O8-rlf">
                             <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="editGroup:" target="LXF-pA-LqT" id="YjN-z6-Yi0"/>
+                            </connections>
                         </menuItem>
                         <menuItem title="Delete" id="Z2b-x2-Zgw">
                             <modifierMask key="keyEquivalentModifierMask"/>
