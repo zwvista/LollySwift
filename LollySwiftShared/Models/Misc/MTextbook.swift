@@ -8,6 +8,7 @@
 
 import Foundation
 import RxSwift
+import RxRelay
 
 @objcMembers
 class MTextbook: NSObject, Codable {
@@ -75,5 +76,25 @@ class MTextbook: NSObject, Codable {
         // SQL: INSERT INTO TEXTBOOKS (ID, LANGID, NAME, UNITS, PARTS) VALUES (?,?,?,?,?)
         let url = "\(CommonApi.urlAPI)TEXTBOOKS"
         return RestApi.create(url: url, body: try! item.toJSONString()!).map { Int($0)! }.do(onSuccess: { print($0) })
+    }
+}
+
+class MTextbookEdit {
+    let ID: String
+    let TEXTBOOKNAME: BehaviorRelay<String>
+    let UNITS: BehaviorRelay<String>
+    var PARTS: BehaviorRelay<String>
+
+    init(x: MTextbook) {
+        ID = "\(x.ID)"
+        TEXTBOOKNAME = BehaviorRelay(value: x.TEXTBOOKNAME)
+        UNITS = BehaviorRelay(value: x.UNITS)
+        PARTS = BehaviorRelay(value: x.PARTS)
+    }
+
+    func save(to x: MTextbook) {
+        x.TEXTBOOKNAME = TEXTBOOKNAME.value
+        x.UNITS = UNITS.value
+        x.PARTS = PARTS.value
     }
 }

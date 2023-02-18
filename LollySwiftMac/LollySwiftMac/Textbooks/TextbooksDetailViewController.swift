@@ -17,38 +17,34 @@ class TextbooksDetailViewController: NSViewController {
     @IBOutlet weak var tfTextbookName: NSTextField!
     @IBOutlet weak var tvUnits: NSTextView!
     @IBOutlet weak var tfParts: NSTextField!
+    @IBOutlet weak var btnOK: NSButton!
 
-    var vm: TextbooksViewModel!
     var complete: (() -> Void)?
-    @objc var item: MTextbook!
-    var isAdd: Bool!
+    var vmEdit: TextbooksDetailViewModel!
+    var itemEdit: MTextbookEdit { vmEdit.itemEdit }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        isAdd = item.ID == 0
+        tfID.stringValue = itemEdit.ID
+        tfLang.stringValue = vmEdit.vm.vmSettings.selectedLang.LANGNAME
+        _ = itemEdit.TEXTBOOKNAME ~> tfTextbookName.rx.text.orEmpty
+        _ = itemEdit.UNITS <~> tvUnits.rx.string
+        _ = itemEdit.PARTS ~> tfParts.rx.text.orEmpty
+        _ = vmEdit.isOKEnabled ~> btnOK.rx.isEnabled
+
+        btnOK.rx.tap.flatMap { [unowned self] in
+            commitEditing()
+            return vmEdit.onOK()
+        }.subscribe{ [unowned self] _ in
+            complete?()
+            dismiss(btnOK)
+        } ~ rx.disposeBag
     }
 
     override func viewDidAppear() {
         super.viewDidAppear()
-        view.window?.title = item.TEXTBOOKNAME
-        tfID.isEnabled = isAdd
-        tfLang.stringValue = vm.vmSettings.selectedLang.LANGNAME
-        (isAdd ? tfID : tfTextbookName).becomeFirstResponder()
-    }
-
-    @IBAction func okClicked(_ sender: AnyObject) {
-        // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
-        commitEditing()
-        if isAdd {
-            TextbooksViewModel.create(item: item).subscribe { [unowned self] _ in
-                complete?()
-            } ~ rx.disposeBag
-        } else {
-            TextbooksViewModel.update(item: item).subscribe { [unowned self] _ in
-                complete?()
-            } ~ rx.disposeBag
-        }
-        dismiss(sender)
+        (vmEdit.isAdd ? tfID : tfTextbookName).becomeFirstResponder()
+        view.window?.title = vmEdit.isAdd ? "New Textbook" : vmEdit.item.TEXTBOOKNAME
     }
 
     deinit {

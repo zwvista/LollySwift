@@ -78,7 +78,7 @@ class MLangWordEdit {
     let ACCURACY: BehaviorRelay<String>
 
     init(x: MLangWord) {
-        ID = "\"(x.ID)"
+        ID = "\(x.ID)"
         WORD = BehaviorRelay(value: x.WORD)
         NOTE = BehaviorRelay(value: x.NOTE)
         FAMIID = "\(x.FAMIID)"

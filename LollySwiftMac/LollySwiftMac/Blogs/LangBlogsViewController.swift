@@ -31,6 +31,16 @@ class LangBlogsViewController: NSViewController, NSTableViewDataSource, NSTableV
         vmGroup.arrBlogGroups.count
     }
 
+    @IBAction func addGroup(_ sender: Any) {
+        let detailVC = storyboard!.instantiateController(withIdentifier: "BlogGroupsDetailViewController") as! BlogGroupsDetailViewController
+        detailVC.vm = vmGroup
+        detailVC.item = vmGroup.newBlogGroup()
+        detailVC.complete = { [unowned self] in tvGroup.reloadData() }
+        presentAsSheet(detailVC)
+    }
+
+    @IBAction func addBlog(_ sender: Any) {
+    }
 }
 
 class LangBlogsWindowController: NSWindowController, NSWindowDelegate {

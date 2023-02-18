@@ -28,8 +28,8 @@ class TextbooksViewModel: NSObject {
         MTextbook.update(item: item)
     }
 
-    static func create(item: MTextbook) -> Single<Int> {
-        MTextbook.create(item: item)
+    static func create(item: MTextbook) -> Single<()> {
+        MTextbook.create(item: item).map { _ in }
     }
 
     func newTextbook() -> MTextbook {

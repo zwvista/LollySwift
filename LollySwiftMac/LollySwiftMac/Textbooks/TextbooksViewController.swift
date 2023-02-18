@@ -46,17 +46,15 @@ class TextbooksViewController: NSViewController, LollyProtocol, NSTableViewDataS
 
     @IBAction func editTextbook(_ sender: AnyObject) {
         let detailVC = storyboard!.instantiateController(withIdentifier: "TextbooksDetailViewController") as! TextbooksDetailViewController
-        detailVC.vm = vm
         let i = tableView.selectedRow
-        detailVC.item = vm.arrTextbooks[i]
+        detailVC.vmEdit = TextbooksDetailViewModel(vm: vm, item: vm.arrTextbooks[i])
         detailVC.complete = { [unowned self] in tableView.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<tableView.tableColumns.count)) }
         presentAsModalWindow(detailVC)
     }
 
     @IBAction func addTextbook(_ sender: AnyObject) {
         let detailVC = storyboard!.instantiateController(withIdentifier: "TextbooksDetailViewController") as! TextbooksDetailViewController
-        detailVC.vm = vm
-        detailVC.item = vm.newTextbook()
+        detailVC.vmEdit = TextbooksDetailViewModel(vm: vm, item: vm.newTextbook())
         detailVC.complete = { [unowned self] in tableView.reloadData() }
         presentAsSheet(detailVC)
     }
