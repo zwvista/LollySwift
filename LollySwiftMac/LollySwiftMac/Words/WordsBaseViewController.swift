@@ -348,7 +348,7 @@ class WordsPhrasesBaseWindowController: NSWindowController, LollyProtocol, NSWin
     @IBOutlet weak var tbiDict38: NSToolbarItem!
     @IBOutlet weak var tbiDict39: NSToolbarItem!
     var vc: WordsPhrasesBaseViewController { contentViewController as! WordsPhrasesBaseViewController }
-    @objc var vm: SettingsViewModel! { vc.vmSettings }
+    var vm: SettingsViewModel! { vc.vmSettings }
     private var defaultToolbarItemCount = 0
 
     var identifiers: [NSToolbarItem.Identifier]!

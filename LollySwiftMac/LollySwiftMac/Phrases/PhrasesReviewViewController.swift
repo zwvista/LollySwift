@@ -11,7 +11,6 @@ import RxSwift
 import RxBinding
 
 class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldDelegate {
-    @objc dynamic var vm: PhrasesReviewViewModel!
 
     @IBOutlet weak var tfIndex: NSTextField!
     @IBOutlet weak var tfCorrect: NSTextField!
@@ -25,6 +24,7 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
     @IBOutlet weak var scMoveForward: NSSegmentedControl!
     @IBOutlet weak var tfStatusText: NSTextField!
 
+    var vm: PhrasesReviewViewModel!
     var vmSettings: SettingsViewModel { vm.vmSettings }
     let synth = NSSpeechSynthesizer()
 
