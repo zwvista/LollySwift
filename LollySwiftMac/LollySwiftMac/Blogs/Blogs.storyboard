@@ -9,7 +9,7 @@
         <!--Window Controller-->
         <scene sceneID="g2V-cg-wb8">
             <objects>
-                <windowController storyboardIdentifier="BlogWindowController" id="cCU-1Q-LWr" customClass="BlogWindowController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
+                <windowController storyboardIdentifier="BlogEditWindowController" id="cCU-1Q-LWr" customClass="BlogEditWindowController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
                     <window key="window" title="Edit Blog" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="bSi-tT-scO">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
@@ -298,7 +298,7 @@
         <!--Window Controller-->
         <scene sceneID="qpV-Qt-Pac">
             <objects>
-                <windowController id="2W1-qq-pUa" sceneMemberID="viewController">
+                <windowController storyboardIdentifier="LangBlogsWindowController" id="2W1-qq-pUa" customClass="LangBlogsWindowController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
                     <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="jRl-Y7-B5z">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
@@ -320,10 +320,10 @@
             </objects>
             <point key="canvasLocation" x="2944" y="-45"/>
         </scene>
-        <!--View Controller-->
+        <!--Lang Blogs View Controller-->
         <scene sceneID="nv2-AP-BFB">
             <objects>
-                <viewController id="LXF-pA-LqT" sceneMemberID="viewController">
+                <viewController id="LXF-pA-LqT" customClass="LangBlogsViewController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="Aft-WT-ORz">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="394"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -420,11 +420,15 @@
                                                                                     </prototypeCellViews>
                                                                                 </tableColumn>
                                                                             </tableColumns>
+                                                                            <connections>
+                                                                                <outlet property="dataSource" destination="LXF-pA-LqT" id="D5c-d3-jBS"/>
+                                                                                <outlet property="delegate" destination="LXF-pA-LqT" id="LaA-hC-nhw"/>
+                                                                            </connections>
                                                                         </tableView>
                                                                     </subviews>
                                                                 </clipView>
                                                                 <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="1Ik-02-QPQ">
-                                                                    <rect key="frame" x="1" y="253" width="235" height="16"/>
+                                                                    <rect key="frame" x="1" y="171" width="235" height="16"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                 </scroller>
                                                                 <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="hL4-qR-0D7">
@@ -526,11 +530,15 @@
                                                                                     </prototypeCellViews>
                                                                                 </tableColumn>
                                                                             </tableColumns>
+                                                                            <connections>
+                                                                                <outlet property="dataSource" destination="LXF-pA-LqT" id="apa-IM-zcA"/>
+                                                                                <outlet property="delegate" destination="LXF-pA-LqT" id="OHE-1o-ojb"/>
+                                                                            </connections>
                                                                         </tableView>
                                                                     </subviews>
                                                                 </clipView>
                                                                 <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="fc7-Iw-OhF">
-                                                                    <rect key="frame" x="1" y="253" width="231" height="16"/>
+                                                                    <rect key="frame" x="1" y="179" width="235" height="16"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                 </scroller>
                                                                 <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="is0-AT-QMl">
@@ -597,6 +605,10 @@
                             <constraint firstAttribute="bottom" secondItem="KAf-f3-jv9" secondAttribute="bottom" id="esV-dK-jK0"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tvBlog" destination="9rv-gn-VfO" id="fz0-gn-XE5"/>
+                        <outlet property="tvGroup" destination="Two-Cm-jaa" id="hQ0-6D-N0e"/>
+                    </connections>
                 </viewController>
                 <customObject id="qe5-re-3a3" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>

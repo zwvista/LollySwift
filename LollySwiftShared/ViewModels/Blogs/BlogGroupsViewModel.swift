@@ -1,5 +1,5 @@
 //
-//  BlogGroupViewModel.swift
+//  BlogGroupsViewModel.swift
 //  LollySwiftMac
 //
 //  Created by 趙偉 on 2019/05/20.
@@ -11,7 +11,7 @@ import RxSwift
 import RxBinding
 import Then
 
-class BlogGroupViewModel: NSObject {
+class BlogGroupsViewModel: NSObject {
     var vmSettings: SettingsViewModel
     var arrBlogGroups = [MBlogGroup]()
 

@@ -34,7 +34,7 @@ class MBlogGroup: NSObject, Codable {
     }
 
     static func create(item: MBlogGroup) -> Single<Int> {
-        // SQL: INSERT INTO BLOGGROUPS (ID, LANGID, NAME) VALUES (?,?,?)
+        // SQL: INSERT INTO BLOGGROUPS (LANGID, NAME) VALUES (?,?)
         let url = "\(CommonApi.urlAPI)BLOGGROUPS"
         return RestApi.create(url: url, body: try! item.toJSONString()!).map { Int($0)! }.do(onSuccess: { print($0) })
     }
