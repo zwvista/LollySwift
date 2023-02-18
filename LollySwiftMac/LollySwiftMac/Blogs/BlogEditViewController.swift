@@ -1,5 +1,5 @@
 //
-//  BlogViewController.swift
+//  BlogEditViewController.swift
 //  LollySwiftMac
 //
 //  Created by 趙偉 on 2018/12/16.
@@ -11,33 +11,33 @@ import WebKit
 import RxSwift
 import RxBinding
 
-class BlogViewController: NSViewController, NSMenuItemValidation  {
+class BlogEditViewController: NSViewController, NSMenuItemValidation  {
 
     @IBOutlet weak var tvMarked: NSTextView!
     @IBOutlet weak var tvHtml: NSTextView!
     @IBOutlet weak var wvBlog: WKWebView!
     @IBOutlet weak var tfStatusText: NSTextField!
 
-    var vm: SettingsViewModel { AppDelegate.theSettingsViewModel }
+    var vmSettings: SettingsViewModel { AppDelegate.theSettingsViewModel }
     var wc: BlogWindowController { view.window!.windowController as! BlogWindowController }
-    var vmBlog: BlogViewModel!
+    var vm: BlogEditViewModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        vmBlog = BlogViewModel(settings: vm)
+        vm = BlogEditViewModel(settings: vmSettings)
         tvMarked.font = NSFont.systemFont(ofSize: 15)
         updateStatusText()
-        vm.getBlogContent().subscribe { [unowned self] in
+        vmSettings.getBlogContent().subscribe { [unowned self] in
             tvMarked.string = $0
         } ~ rx.disposeBag
     }
 
     @IBAction func saveMarked(_ sender: AnyObject) {
-        vm.saveBlogContent(content: tvMarked.string).subscribe() ~ rx.disposeBag
+        vmSettings.saveBlogContent(content: tvMarked.string).subscribe() ~ rx.disposeBag
     }
 
     @IBAction func htmlToMarked(_ sender: AnyObject) {
-        tvMarked.string = vmBlog.htmlToMarked(text: tvHtml.string)
+        tvMarked.string = vm.htmlToMarked(text: tvHtml.string)
     }
 
     func replaceSelection(f: (String) -> String) {
@@ -48,20 +48,20 @@ class BlogViewController: NSViewController, NSMenuItemValidation  {
     }
 
     @IBAction func addTagB(_ sender: AnyObject) {
-        replaceSelection(f: vmBlog.addTagB)
+        replaceSelection(f: vm.addTagB)
     }
     @IBAction func addTagI(_ sender: AnyObject) {
-        replaceSelection(f: vmBlog.addTagI)
+        replaceSelection(f: vm.addTagI)
     }
     @IBAction func removeTagBI(_ sender: AnyObject) {
-        replaceSelection(f: vmBlog.removeTagBI)
+        replaceSelection(f: vm.removeTagBI)
     }
     @IBAction func exchangeTagBI(_ sender: AnyObject) {
-        replaceSelection(f: vmBlog.exchangeTagBI)
+        replaceSelection(f: vm.exchangeTagBI)
     }
     @IBAction func addExplanation(_ sender: AnyObject) {
         let s = NSPasteboard.general.string(forType: .string) ?? ""
-        replaceSelection { _ in vmBlog.getExplanation(text: s) }
+        replaceSelection { _ in vm.getExplanation(text: s) }
         (NSApplication.shared.delegate as! AppDelegate).searchWord(word: s)
     }
     @IBAction func switchPage(_ sender: AnyObject) {
@@ -73,21 +73,21 @@ class BlogViewController: NSViewController, NSMenuItemValidation  {
             n = (sender as! NSSegmentedControl).selectedSegment
         }
         if n == 0 {
-            tvHtml.string = vmBlog.markedToHtml(text: tvMarked.string)
+            tvHtml.string = vm.markedToHtml(text: tvMarked.string)
             let str = CommonApi.toHtml(text: tvHtml.string)
             wvBlog.loadHTMLString(str, baseURL: nil)
             MacApi.copyText(tvHtml.string)
         } else {
-            let url = vmBlog.getPatternUrl(patternNo: wc.patternNo)
+            let url = vm.getPatternUrl(patternNo: wc.patternNo)
             wvBlog.load(URLRequest(url: URL(string: url)!))
         }
     }
     @IBAction func openPattern(_ sender: AnyObject) {
-        let url = vmBlog.getPatternUrl(patternNo: wc.patternNo)
+        let url = vm.getPatternUrl(patternNo: wc.patternNo)
         MacApi.openURL(url)
     }
     @IBAction func addNotes(_ sender: AnyObject) {
-        vmBlog.addNotes(text: tvMarked.string) { [unowned self] in
+        vm.addNotes(text: tvMarked.string) { [unowned self] in
             tvMarked.string = $0
         }
     }
@@ -99,7 +99,7 @@ class BlogViewController: NSViewController, NSMenuItemValidation  {
     }
 
     func updateStatusText() {
-        tfStatusText.stringValue = vm.UNITINFO
+        tfStatusText.stringValue = vmSettings.UNITINFO
     }
 
     deinit {
