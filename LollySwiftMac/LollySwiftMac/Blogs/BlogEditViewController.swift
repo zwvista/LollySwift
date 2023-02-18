@@ -17,7 +17,7 @@ class BlogEditViewController: NSViewController, NSMenuItemValidation  {
     @IBOutlet weak var tfStatusText: NSTextField!
 
     var vmSettings: SettingsViewModel { AppDelegate.theSettingsViewModel }
-    var wc: BlogWindowController { view.window!.windowController as! BlogWindowController }
+    var wc: BlogEditWindowController { view.window!.windowController as! BlogEditWindowController }
     var vm: BlogEditViewModel!
 
     override func viewDidLoad() {
@@ -109,7 +109,7 @@ class BlogEditViewController: NSViewController, NSMenuItemValidation  {
     }
 }
 
-class BlogWindowController: NSWindowController, NSWindowDelegate {
+class BlogEditWindowController: NSWindowController, NSWindowDelegate {
     @IBOutlet weak var scPage: NSSegmentedControl!
     @IBOutlet weak var tfPatternNo: NSTextField!
 

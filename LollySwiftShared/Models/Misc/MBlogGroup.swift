@@ -39,7 +39,7 @@ class MBlogGroup: NSObject, Codable {
     }
 
     static func create(item: MBlogGroup) async -> Int {
-        // SQL: INSERT INTO BLOGGROUPS (ID, LANGID, NAME) VALUES (?,?,?)
+        // SQL: INSERT INTO BLOGGROUPS (LANGID, NAME) VALUES (?,?)
         let url = "\(CommonApi.urlAPI)BLOGGROUPS"
         let id = Int(await RestApi.create(url: url, body: try! item.toJSONString()!))!
         print(id)

@@ -9,11 +9,13 @@
 /* Begin PBXBuildFile section */
 		41624B18047DBD62E1485CDE /* Pods_LollySwiftMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F369FEA5447EADCC97C83AE1 /* Pods_LollySwiftMac.framework */; };
 		8C087DD6299D2715003D528F /* MBlogGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C087DD4299D2715003D528F /* MBlogGroup.swift */; };
-		8C087DD9299D9581003D528F /* BlogGroupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C087DD8299D9581003D528F /* BlogGroupViewModel.swift */; };
-		8C087DDA299D9581003D528F /* BlogGroupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C087DD8299D9581003D528F /* BlogGroupViewModel.swift */; };
+		8C087DD9299D9581003D528F /* BlogGroupsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C087DD8299D9581003D528F /* BlogGroupsViewModel.swift */; };
+		8C087DDA299D9581003D528F /* BlogGroupsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C087DD8299D9581003D528F /* BlogGroupsViewModel.swift */; };
 		8C087DDD299EAAB6003D528F /* Blogs.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C087DDC299EAAB6003D528F /* Blogs.storyboard */; };
 		8C087DDE299EAAB6003D528F /* Blogs.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C087DDC299EAAB6003D528F /* Blogs.storyboard */; };
-		8C087DDF29A0668A003D528F /* MBlogGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C087DD4299D2715003D528F /* MBlogGroup.swift */; };
+		8C087DE129A06CE3003D528F /* LangBlogsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C087DE029A06CE3003D528F /* LangBlogsViewController.swift */; };
+		8C087DE329A06DD5003D528F /* LangBlogsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C087DE229A06DD5003D528F /* LangBlogsViewModel.swift */; };
+		8C087DE529A06EBC003D528F /* MLangBlog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C087DE429A06EBC003D528F /* MLangBlog.swift */; };
 		8C1C4F2A1D31F88800CF5D88 /* WordsSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1C4F291D31F88800CF5D88 /* WordsSearchViewController.swift */; };
 		8C1C4F2C1D31F88800CF5D88 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C1C4F2B1D31F88800CF5D88 /* Assets.xcassets */; };
 		8C1C4F2F1D31F88800CF5D88 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C1C4F2D1D31F88800CF5D88 /* Main.storyboard */; };
@@ -211,8 +213,11 @@
 		2E1BF0DCEA87BC09BC596957 /* Pods-LollySwiftMacTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LollySwiftMacTests.debug.xcconfig"; path = "../Pods/Target Support Files/Pods-LollySwiftMacTests/Pods-LollySwiftMacTests.debug.xcconfig"; sourceTree = "<group>"; };
 		3996B18C180865D53970989E /* Pods-LollySwiftMacTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LollySwiftMacTests.release.xcconfig"; path = "../Pods/Target Support Files/Pods-LollySwiftMacTests/Pods-LollySwiftMacTests.release.xcconfig"; sourceTree = "<group>"; };
 		8C087DD4299D2715003D528F /* MBlogGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBlogGroup.swift; sourceTree = "<group>"; };
-		8C087DD8299D9581003D528F /* BlogGroupViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlogGroupViewModel.swift; sourceTree = "<group>"; };
+		8C087DD8299D9581003D528F /* BlogGroupsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlogGroupsViewModel.swift; sourceTree = "<group>"; };
 		8C087DDC299EAAB6003D528F /* Blogs.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Blogs.storyboard; sourceTree = "<group>"; };
+		8C087DE029A06CE3003D528F /* LangBlogsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LangBlogsViewController.swift; sourceTree = "<group>"; };
+		8C087DE229A06DD5003D528F /* LangBlogsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LangBlogsViewModel.swift; sourceTree = "<group>"; };
+		8C087DE429A06EBC003D528F /* MLangBlog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLangBlog.swift; sourceTree = "<group>"; };
 		8C1C4F241D31F88800CF5D88 /* LollySwiftMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LollySwiftMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C1C4F291D31F88800CF5D88 /* WordsSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsSearchViewController.swift; sourceTree = "<group>"; };
 		8C1C4F2B1D31F88800CF5D88 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -397,8 +402,9 @@
 		8C087DD7299D3105003D528F /* Blogs */ = {
 			isa = PBXGroup;
 			children = (
-				8C087DD8299D9581003D528F /* BlogGroupViewModel.swift */,
 				95DB142321CDEA7B00FBAF9A /* BlogEditViewModel.swift */,
+				8C087DD8299D9581003D528F /* BlogGroupsViewModel.swift */,
+				8C087DE229A06DD5003D528F /* LangBlogsViewModel.swift */,
 			);
 			path = Blogs;
 			sourceTree = "<group>";
@@ -408,6 +414,7 @@
 			children = (
 				8C087DDC299EAAB6003D528F /* Blogs.storyboard */,
 				9541890C2438FE6D00DB7230 /* BlogEditViewController.swift */,
+				8C087DE029A06CE3003D528F /* LangBlogsViewController.swift */,
 			);
 			path = Blogs;
 			sourceTree = "<group>";
@@ -758,6 +765,7 @@
 				8C087DD4299D2715003D528F /* MBlogGroup.swift */,
 				95B658A62227D8060095B0D2 /* MCommon.swift */,
 				8C2CB5A4207885140083DDE2 /* MDictionary.swift */,
+				8C087DE429A06EBC003D528F /* MLangBlog.swift */,
 				8C2CB5AC207885140083DDE2 /* MLanguage.swift */,
 				95DAEBCD22DF8B1100A3C361 /* MReviewOptions.swift */,
 				8C2CB5AD207885140083DDE2 /* MTextbook.swift */,
@@ -1047,6 +1055,7 @@
 				8C2CB5BE207885140083DDE2 /* MLanguage.swift in Sources */,
 				9508C767243605D0004A0D73 /* WordsDictViewController.swift in Sources */,
 				95AF43CF254E661600FD71CB /* PatternsSplitViewModel.swift in Sources */,
+				8C087DE329A06DD5003D528F /* LangBlogsViewModel.swift in Sources */,
 				95837E7F24DEAFC500B5D2AE /* PhrasesUnitDetailViewModel.swift in Sources */,
 				95CED3B62211C8300094622F /* WordsTextbookViewController.swift in Sources */,
 				954CB5F223B714C500A03900 /* PatternsViewController.swift in Sources */,
@@ -1054,6 +1063,7 @@
 				95CED3BD22159B0B0094622F /* PhrasesTextbookViewController.swift in Sources */,
 				8CC3CBC7294283CF005670CC /* NSButton+Combine.swift in Sources */,
 				8CD8409E20AFD4DA00442133 /* PhrasesUnitViewController.swift in Sources */,
+				8C087DE129A06CE3003D528F /* LangBlogsViewController.swift in Sources */,
 				95DB142A21DFE6E200FBAF9A /* WordsBaseViewController.swift in Sources */,
 				95B6589F2222E9E10095B0D2 /* WordsUnitBatchEditViewController.swift in Sources */,
 				95124F8724C48689008FE242 /* WebPageSelectViewController.swift in Sources */,
@@ -1113,7 +1123,7 @@
 				95F6CEBD2263F8CE00C15A1D /* WordsReviewViewController.swift in Sources */,
 				8C2CB5B1207885140083DDE2 /* PhrasesLangViewModel.swift in Sources */,
 				957B532325A59BED00C18B06 /* WordsUnitBatchAddViewController.swift in Sources */,
-				8C087DD9299D9581003D528F /* BlogGroupViewModel.swift in Sources */,
+				8C087DD9299D9581003D528F /* BlogGroupsViewModel.swift in Sources */,
 				95548CDD2621CA9A00893AB8 /* LoginViewController.swift in Sources */,
 				8CD8409D20AFD4DA00442133 /* PhrasesUnitDetailViewController.swift in Sources */,
 				9534728F22BB68EE00517D71 /* SettingsViewController.swift in Sources */,
@@ -1130,6 +1140,7 @@
 				8C2CB5AE207885140083DDE2 /* SettingsViewModel.swift in Sources */,
 				8CB025BB293F09F000401895 /* ObjcDelegateProxy.m in Sources */,
 				95B658A1222322960095B0D2 /* PhrasesUnitBatchEditViewController.swift in Sources */,
+				8C087DE529A06EBC003D528F /* MLangBlog.swift in Sources */,
 				959191ED258CFFCA0070DBFD /* MWordPhrase.swift in Sources */,
 				8C2CB5C3207888260083DDE2 /* WordsUnitViewController.swift in Sources */,
 				958BAB1923518838007F50BB /* ReadNumberViewModel.swift in Sources */,
@@ -1175,7 +1186,7 @@
 				954D8B9E2143907C00651A80 /* WordsUnitViewModel.swift in Sources */,
 				959191EC258CFFCA0070DBFD /* MLangPhrase.swift in Sources */,
 				8C087DD6299D2715003D528F /* MBlogGroup.swift in Sources */,
-				8C087DDA299D9581003D528F /* BlogGroupViewModel.swift in Sources */,
+				8C087DDA299D9581003D528F /* BlogGroupsViewModel.swift in Sources */,
 				954D8B992143907C00651A80 /* PhrasesUnitViewModel.swift in Sources */,
 				95042355224AD4AC0038997A /* CommonApi.swift in Sources */,
 				95EFF47F218412DD0094EE3C /* MAutoCorrect.swift in Sources */,
