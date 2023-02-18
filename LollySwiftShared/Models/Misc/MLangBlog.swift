@@ -7,7 +7,12 @@
 //
 
 import Foundation
-import RxSwift
+
+@objcMembers
+class MLangBlogs: HasRecords {
+    typealias RecordType = MLangBlog
+    dynamic var records = [MLangBlog]()
+}
 
 @objcMembers
 class MLangBlog: NSObject, Codable {
@@ -18,21 +23,23 @@ class MLangBlog: NSObject, Codable {
     dynamic var TITLE = ""
     dynamic var CONTENT = ""
 
-    static func getDataByLang(_ langid: Int) -> Single<[MLangBlog]> {
+    static func getDataByLang(_ langid: Int) async -> [MLangBlog] {
         // SQL: SELECT * FROM VLANGBLOGS WHERE LANGID=?
         let url = "\(CommonApi.urlAPI)VLANGBLOGS?filter=LANGID,eq,\(langid)"
-        return RestApi.getRecords(url: url)
+        return await RestApi.getRecords(MLangBlogs.self, url: url)
     }
 
-    static func update(item: MLangBlog) -> Single<()> {
+    static func update(item: MLangBlog) async {
         // SQL: UPDATE LANGBLOGS SET BLOGGROUPID=?, TITLE=?, CONTENT=? WHERE ID=?
         let url = "\(CommonApi.urlAPI)LANGBLOGS/\(item.ID)"
-        return RestApi.update(url: url, body: try! item.toJSONString()!).map { print($0) }
+        print(await RestApi.update(url: url, body: try! item.toJSONString()!))
     }
 
-    static func create(item: MLangBlog) -> Single<Int> {
+    static func create(item: MLangBlog) async -> Int {
         // SQL: INSERT INTO BLOGGROUPS (BLOGGROUPID, TITLE, CONTENT) VALUES (?,?,?)
         let url = "\(CommonApi.urlAPI)LANGBLOGS"
-        return RestApi.create(url: url, body: try! item.toJSONString()!).map { Int($0)! }.do(onSuccess: { print($0) })
+        let id = Int(await RestApi.create(url: url, body: try! item.toJSONString()!))!
+        print(id)
+        return id
     }
 }

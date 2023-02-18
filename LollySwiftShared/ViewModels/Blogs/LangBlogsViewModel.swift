@@ -7,10 +7,9 @@
 //
 
 import Foundation
-import RxSwift
-import RxBinding
 import Then
 
+@MainActor
 class LangBlogsViewModel: NSObject {
     var vmSettings: SettingsViewModel
     var arrLangBlogs = [MLangBlog]()
@@ -18,18 +17,18 @@ class LangBlogsViewModel: NSObject {
     init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> Void) {
         vmSettings = !needCopy ? settings : SettingsViewModel(settings)
         super.init()
-        MLangBlog.getDataByLang(settings.selectedLang.ID).subscribe { [unowned self] in
-            arrLangBlogs = $0
+        Task {
+            arrLangBlogs = await MLangBlog.getDataByLang(settings.selectedLang.ID)
             complete()
-        } ~ rx.disposeBag
+        }
     }
 
-    static func update(item: MLangBlog) -> Single<()> {
-        MLangBlog.update(item: item)
+    static func update(item: MLangBlog) async {
+        await MLangBlog.update(item: item)
     }
 
-    static func create(item: MLangBlog) -> Single<Int> {
-        MLangBlog.create(item: item)
+    static func create(item: MLangBlog) async {
+        _ = await MLangBlog.create(item: item)
     }
 
     func newLangBlog() -> MLangBlog {
