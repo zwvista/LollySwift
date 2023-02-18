@@ -16,8 +16,10 @@
 		8C087DE129A06CE3003D528F /* LangBlogsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C087DE029A06CE3003D528F /* LangBlogsViewController.swift */; };
 		8C087DE329A06DD5003D528F /* LangBlogsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C087DE229A06DD5003D528F /* LangBlogsViewModel.swift */; };
 		8C087DE529A06EBC003D528F /* MLangBlog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C087DE429A06EBC003D528F /* MLangBlog.swift */; };
-		8C087DE629A07B61003D528F /* MLangBlog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C087DE429A06EBC003D528F /* MLangBlog.swift */; };
-		8C087DE729A07B72003D528F /* MBlogGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C087DD4299D2715003D528F /* MBlogGroup.swift */; };
+		8C087DEA29A082A4003D528F /* BlogGroupsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C087DE829A082A4003D528F /* BlogGroupsDetailViewController.swift */; };
+		8C087DEE29A082BE003D528F /* LangBlogsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C087DEC29A082BE003D528F /* LangBlogsDetailViewController.swift */; };
+		8C087DF129A093E8003D528F /* TextbooksDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C087DF029A093E8003D528F /* TextbooksDetailViewModel.swift */; };
+		8C087DF229A0FE89003D528F /* MBlogGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C087DD4299D2715003D528F /* MBlogGroup.swift */; };
 		8C1C4F2A1D31F88800CF5D88 /* WordsSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1C4F291D31F88800CF5D88 /* WordsSearchViewController.swift */; };
 		8C1C4F2C1D31F88800CF5D88 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C1C4F2B1D31F88800CF5D88 /* Assets.xcassets */; };
 		8C1C4F2F1D31F88800CF5D88 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C1C4F2D1D31F88800CF5D88 /* Main.storyboard */; };
@@ -220,6 +222,9 @@
 		8C087DE029A06CE3003D528F /* LangBlogsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LangBlogsViewController.swift; sourceTree = "<group>"; };
 		8C087DE229A06DD5003D528F /* LangBlogsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LangBlogsViewModel.swift; sourceTree = "<group>"; };
 		8C087DE429A06EBC003D528F /* MLangBlog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MLangBlog.swift; sourceTree = "<group>"; };
+		8C087DE829A082A4003D528F /* BlogGroupsDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlogGroupsDetailViewController.swift; sourceTree = "<group>"; };
+		8C087DEC29A082BE003D528F /* LangBlogsDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LangBlogsDetailViewController.swift; sourceTree = "<group>"; };
+		8C087DF029A093E8003D528F /* TextbooksDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextbooksDetailViewModel.swift; sourceTree = "<group>"; };
 		8C1C4F241D31F88800CF5D88 /* LollySwiftMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LollySwiftMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C1C4F291D31F88800CF5D88 /* WordsSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsSearchViewController.swift; sourceTree = "<group>"; };
 		8C1C4F2B1D31F88800CF5D88 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -414,8 +419,10 @@
 		8C087DDB299EAA5C003D528F /* Blogs */ = {
 			isa = PBXGroup;
 			children = (
-				8C087DDC299EAAB6003D528F /* Blogs.storyboard */,
 				9541890C2438FE6D00DB7230 /* BlogEditViewController.swift */,
+				8C087DE829A082A4003D528F /* BlogGroupsDetailViewController.swift */,
+				8C087DDC299EAAB6003D528F /* Blogs.storyboard */,
+				8C087DEC29A082BE003D528F /* LangBlogsDetailViewController.swift */,
 				8C087DE029A06CE3003D528F /* LangBlogsViewController.swift */,
 			);
 			path = Blogs;
@@ -753,6 +760,7 @@
 				958BAB1823518838007F50BB /* ReadNumberViewModel.swift */,
 				95837EA324E038EB00B5D2AE /* ReviewOptionsViewModel.swift */,
 				8C2CB59A207885140083DDE2 /* SettingsViewModel.swift */,
+				8C087DF029A093E8003D528F /* TextbooksDetailViewModel.swift */,
 				95F0A8A4229264EA00D1B9A2 /* TextbooksViewModel.swift */,
 				95E6BFA724D180F500CB7380 /* TransformDetailViewModel.swift */,
 				95406BCB255B0B1F00C87A0D /* WebTextbooksViewModel.swift */,
@@ -1058,6 +1066,7 @@
 				9508C767243605D0004A0D73 /* WordsDictViewController.swift in Sources */,
 				95AF43CF254E661600FD71CB /* PatternsSplitViewModel.swift in Sources */,
 				8C087DE329A06DD5003D528F /* LangBlogsViewModel.swift in Sources */,
+				8C087DEA29A082A4003D528F /* BlogGroupsDetailViewController.swift in Sources */,
 				95837E7F24DEAFC500B5D2AE /* PhrasesUnitDetailViewModel.swift in Sources */,
 				95CED3B62211C8300094622F /* WordsTextbookViewController.swift in Sources */,
 				954CB5F223B714C500A03900 /* PatternsViewController.swift in Sources */,
@@ -1082,6 +1091,7 @@
 				8C1C4F2A1D31F88800CF5D88 /* WordsSearchViewController.swift in Sources */,
 				959191E1258CFFCA0070DBFD /* MUnitWord.swift in Sources */,
 				8CC3CBCC294283CF005670CC /* NSTextView+Combine.swift in Sources */,
+				8C087DEE29A082BE003D528F /* LangBlogsDetailViewController.swift in Sources */,
 				95AF43B7254BDA9E00FD71CB /* PatternsMergeViewController.swift in Sources */,
 				8C5176C22943C5AD00719D42 /* Publisher+Bind.swift in Sources */,
 				95837E7E24DEAFC500B5D2AE /* PhrasesLangDetailViewModel.swift in Sources */,
@@ -1101,6 +1111,7 @@
 				8CC3CBCD294283CF005670CC /* NSTextField+Combine.swift in Sources */,
 				958125C62190463F0001159E /* PhrasesLangViewController.swift in Sources */,
 				8C2CB5B4207885140083DDE2 /* RestApi.swift in Sources */,
+				8C087DF229A0FE89003D528F /* MBlogGroup.swift in Sources */,
 				957B532B25A5A2AE00C18B06 /* WordsUnitBatchAddViewModel.swift in Sources */,
 				959191E7258CFFCA0070DBFD /* MPattern.swift in Sources */,
 				8CBB5BD6293C9BE100B8AEE0 /* CombineControlProperty.swift in Sources */,
@@ -1129,6 +1140,7 @@
 				8CD8409D20AFD4DA00442133 /* PhrasesUnitDetailViewController.swift in Sources */,
 				9534728F22BB68EE00517D71 /* SettingsViewController.swift in Sources */,
 				95B04C49253DF5C2009BF514 /* WordsAssociateViewController.swift in Sources */,
+				8C087DF129A093E8003D528F /* TextbooksDetailViewModel.swift in Sources */,
 				954B870E218FD274007DC348 /* WordsLangDetailViewController.swift in Sources */,
 				95837E8D24DF06ED00B5D2AE /* WordsUnitDetailViewController.swift in Sources */,
 				95940A922233865700D35409 /* MVoice.swift in Sources */,
@@ -1145,7 +1157,6 @@
 				959191ED258CFFCA0070DBFD /* MWordPhrase.swift in Sources */,
 				8C2CB5C3207888260083DDE2 /* WordsUnitViewController.swift in Sources */,
 				958BAB1923518838007F50BB /* ReadNumberViewModel.swift in Sources */,
-				8C087DE729A07B72003D528F /* MBlogGroup.swift in Sources */,
 				959D21EE23BCF73E005BED48 /* PatternsWebPagesDetailViewController.swift in Sources */,
 				95E6BFAD24D7117F00CB7380 /* PatternsDetailViewController.swift in Sources */,
 				957B534325A69D8600C18B06 /* PhrasesUnitBatchAddViewController.swift in Sources */,
@@ -1180,7 +1191,6 @@
 				95940A95223389A300D35409 /* MVoice.swift in Sources */,
 				959191E8258CFFCA0070DBFD /* MPattern.swift in Sources */,
 				95E43F2F21E1E926001E650C /* MacApi.swift in Sources */,
-				8C087DE629A07B61003D528F /* MLangBlog.swift in Sources */,
 				8CA47F232968EF88006CF4A2 /* GlobalUser.swift in Sources */,
 				959191F0258CFFCA0070DBFD /* MUnitPhrase.swift in Sources */,
 				954D8B982143907C00651A80 /* PhrasesLangViewModel.swift in Sources */,

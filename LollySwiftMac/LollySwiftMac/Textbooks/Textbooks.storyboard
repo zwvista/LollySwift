@@ -278,9 +278,6 @@
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
-                                <connections>
-                                    <binding destination="QGu-A6-cDM" name="value" keyPath="item.ID" id="P2v-Xf-FZx"/>
-                                </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Uh7-57-vk0">
                                 <rect key="frame" x="18" y="227" width="68" height="16"/>
@@ -313,9 +310,6 @@
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
-                                <connections>
-                                    <binding destination="QGu-A6-cDM" name="value" keyPath="item.TEXTBOOKNAME" id="FBn-LU-Ihp"/>
-                                </connections>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="fUe-x3-38v">
                                 <rect key="frame" x="18" y="74" width="49" height="16"/>
@@ -340,9 +334,6 @@
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
-                                <connections>
-                                    <binding destination="QGu-A6-cDM" name="value" keyPath="item.PARTS" id="xLK-3P-CXt"/>
-                                </connections>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9xV-9Q-lbU">
                                 <rect key="frame" x="277" y="13" width="53" height="32"/>
@@ -353,9 +344,6 @@
 DQ
 </string>
                                 </buttonCell>
-                                <connections>
-                                    <action selector="okClicked:" target="QGu-A6-cDM" id="XM5-Im-Njw"/>
-                                </connections>
                             </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ilq-J8-jj6">
                                 <rect key="frame" x="351" y="13" width="76" height="32"/>
@@ -384,9 +372,6 @@ Gw
                                             <size key="minSize" width="300" height="69"/>
                                             <size key="maxSize" width="318" height="10000000"/>
                                             <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
-                                            <connections>
-                                                <binding destination="QGu-A6-cDM" name="value" keyPath="item.UNITS" id="AQ8-wd-A3p"/>
-                                            </connections>
                                         </textView>
                                     </subviews>
                                 </clipView>
@@ -438,6 +423,7 @@ Gw
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btnOK" destination="9xV-9Q-lbU" id="KRS-g2-yh1"/>
                         <outlet property="tfID" destination="fnp-ds-sVA" id="2QP-3F-3oE"/>
                         <outlet property="tfLang" destination="8ef-k9-QXS" id="mOP-xI-OE6"/>
                         <outlet property="tfParts" destination="zFW-Ac-oBj" id="nYP-Da-aCt"/>

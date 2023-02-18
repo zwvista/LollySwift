@@ -16,38 +16,36 @@ class TextbooksDetailViewController: NSViewController {
     @IBOutlet weak var tfTextbookName: NSTextField!
     @IBOutlet weak var tvUnits: NSTextView!
     @IBOutlet weak var tfParts: NSTextField!
+    @IBOutlet weak var btnOK: NSButton!
 
-    var vm: TextbooksViewModel!
     var complete: (() -> Void)?
-    @objc var item: MTextbook!
-    var isAdd: Bool!
+    var vmEdit: TextbooksDetailViewModel!
+    var itemEdit: MTextbookEdit { vmEdit.itemEdit }
     var subscriptions = Set<AnyCancellable>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        isAdd = item.ID == 0
+        tfID.stringValue = itemEdit.ID
+        tfLang.stringValue = vmEdit.vm.vmSettings.selectedLang.LANGNAME
+        _ = itemEdit.$TEXTBOOKNAME ~> (tfTextbookName, \.stringValue) ~ subscriptions
+        _ = itemEdit.$UNITS <~> tvUnits.textProperty ~ subscriptions
+        _ = itemEdit.$PARTS ~> (tfParts, \.stringValue) ~ subscriptions
+        _ = vmEdit.$isOKEnabled ~> (btnOK, \.isEnabled) ~ subscriptions
+
+        btnOK.tapPublisher.sink { [unowned self] in
+            commitEditing()
+            Task {
+                await vmEdit.onOK()
+                complete?()
+                dismiss(btnOK)
+            }
+        } ~ subscriptions
     }
 
     override func viewDidAppear() {
         super.viewDidAppear()
-        view.window?.title = item.TEXTBOOKNAME
-        tfID.isEnabled = isAdd
-        tfLang.stringValue = vm.vmSettings.selectedLang.LANGNAME
-        (isAdd ? tfID : tfTextbookName).becomeFirstResponder()
-    }
-
-    @IBAction func okClicked(_ sender: AnyObject) {
-        // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
-        commitEditing()
-        Task {
-            if isAdd {
-                _ = await TextbooksViewModel.create(item: item)
-            } else {
-                await TextbooksViewModel.update(item: item)
-            }
-            complete?()
-            dismiss(sender)
-        }
+        (vmEdit.isAdd ? tfID : tfTextbookName).becomeFirstResponder()
+        view.window?.title = vmEdit.isAdd ? "New Textbook" : vmEdit.item.TEXTBOOKNAME
     }
 
     deinit {

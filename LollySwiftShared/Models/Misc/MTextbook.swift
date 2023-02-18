@@ -83,3 +83,23 @@ class MTextbook: NSObject, Codable {
         return id
     }
 }
+
+class MTextbookEdit {
+    let ID: String
+    @Published var TEXTBOOKNAME: String
+    @Published var UNITS: String
+    @Published var PARTS: String
+
+    init(x: MTextbook) {
+        ID = "\(x.ID)"
+        TEXTBOOKNAME = x.TEXTBOOKNAME
+        UNITS = x.UNITS
+        PARTS = x.PARTS
+    }
+
+    func save(to x: MTextbook) {
+        x.TEXTBOOKNAME = TEXTBOOKNAME
+        x.UNITS = UNITS
+        x.PARTS = PARTS
+    }
+}

@@ -19,7 +19,6 @@ class PhrasesLangDetailViewController: NSViewController, NSTableViewDataSource, 
 
     var complete: (() -> Void)?
     var vmEdit: PhrasesLangDetailViewModel!
-    var item: MLangPhrase { vmEdit.item }
     var itemEdit: MLangPhraseEdit { vmEdit.itemEdit }
     var arrPhrases: [MUnitPhrase] { vmEdit.vmSingle.arrPhrases }
     var subscriptions = Set<AnyCancellable>()
@@ -48,7 +47,7 @@ class PhrasesLangDetailViewController: NSViewController, NSTableViewDataSource, 
         super.viewDidAppear()
         // https://stackoverflow.com/questions/24235815/cocoa-how-to-set-window-title-from-within-view-controller-in-swift
         (vmEdit.isAdd ? tfPhrase : tfTranslation).becomeFirstResponder()
-        view.window?.title = vmEdit.isAdd ? "New Phrase" : item.PHRASE
+        view.window?.title = vmEdit.isAdd ? "New Phrase" : vmEdit.item.PHRASE
     }
 
     func numberOfRows(in tableView: NSTableView) -> Int {
