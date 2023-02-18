@@ -8,13 +8,14 @@
 
 import Foundation
 import RxSwift
+import RxRelay
 
 @objcMembers
 class MLangBlog: NSObject, Codable {
     dynamic var ID = 0
     dynamic var LANGID = 0
-    dynamic var BLOGGROUPID = 0
-    dynamic var BLOGGROUPNAME = ""
+    dynamic var LANGBLOGGROUPID = 0
+    dynamic var LANGBLOGGROUPNAME = ""
     dynamic var TITLE = ""
     dynamic var CONTENT = ""
 
@@ -25,14 +26,34 @@ class MLangBlog: NSObject, Codable {
     }
 
     static func update(item: MLangBlog) -> Single<()> {
-        // SQL: UPDATE LANGBLOGS SET BLOGGROUPID=?, TITLE=?, CONTENT=? WHERE ID=?
+        // SQL: UPDATE LANGBLOGS SET LANGBLOGGROUPID=?, TITLE=?, CONTENT=? WHERE ID=?
         let url = "\(CommonApi.urlAPI)LANGBLOGS/\(item.ID)"
         return RestApi.update(url: url, body: try! item.toJSONString()!).map { print($0) }
     }
 
     static func create(item: MLangBlog) -> Single<Int> {
-        // SQL: INSERT INTO BLOGGROUPS (BLOGGROUPID, TITLE, CONTENT) VALUES (?,?,?)
+        // SQL: INSERT INTO LANGBLOGGROUPS (LANGBLOGGROUPID, TITLE, CONTENT) VALUES (?,?,?)
         let url = "\(CommonApi.urlAPI)LANGBLOGS"
         return RestApi.create(url: url, body: try! item.toJSONString()!).map { Int($0)! }.do(onSuccess: { print($0) })
+    }
+}
+
+class MLangBlogEdit {
+    let ID: String
+    let LANGBLOGGROUPNAME: BehaviorRelay<String>
+    let TITLE: BehaviorRelay<String>
+    let CONTENT: BehaviorRelay<String>
+
+    init(x: MLangBlog) {
+        ID = "\(x.ID)"
+        LANGBLOGGROUPNAME = BehaviorRelay(value: x.LANGBLOGGROUPNAME)
+        TITLE = BehaviorRelay(value: x.TITLE)
+        CONTENT = BehaviorRelay(value: x.CONTENT)
+    }
+
+    func save(to x: MLangBlog) {
+        x.LANGBLOGGROUPNAME = LANGBLOGGROUPNAME.value
+        x.TITLE = TITLE.value
+        x.CONTENT = CONTENT.value
     }
 }

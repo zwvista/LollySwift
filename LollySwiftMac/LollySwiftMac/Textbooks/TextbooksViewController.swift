@@ -56,7 +56,7 @@ class TextbooksViewController: NSViewController, LollyProtocol, NSTableViewDataS
         let detailVC = storyboard!.instantiateController(withIdentifier: "TextbooksDetailViewController") as! TextbooksDetailViewController
         detailVC.vmEdit = TextbooksDetailViewModel(vm: vm, item: vm.newTextbook())
         detailVC.complete = { [unowned self] in tableView.reloadData() }
-        presentAsSheet(detailVC)
+        presentAsModalWindow(detailVC)
     }
 
     @IBAction func endEditing(_ sender: NSTextField) {

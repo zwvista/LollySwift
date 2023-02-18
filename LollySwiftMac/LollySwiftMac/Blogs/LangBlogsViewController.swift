@@ -10,10 +10,10 @@ import Cocoa
 
 class LangBlogsViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, LollyProtocol {
 
-    @IBOutlet weak var tvGroup: NSTableView!
-    @IBOutlet weak var tvBlog: NSTableView!
+    @IBOutlet weak var tvGroups: NSTableView!
+    @IBOutlet weak var tvBlogs: NSTableView!
 
-    var vmGroup: BlogGroupsViewModel!
+    var vmGroup: LangBlogGroupsViewModel!
     var vmBlog: LangBlogsViewModel!
 
     override func viewDidLoad() {
@@ -22,21 +22,31 @@ class LangBlogsViewController: NSViewController, NSTableViewDataSource, NSTableV
     }
 
     func settingsChanged() {
-        vmGroup = BlogGroupsViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) { [unowned self] in
-            tvGroup.reloadData()
+        vmGroup = LangBlogGroupsViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) { [unowned self] in
+            tvGroups.reloadData()
         }
     }
 
     func numberOfRows(in tableView: NSTableView) -> Int {
-        vmGroup.arrBlogGroups.count
+        vmGroup.arrLangBlogGroups.count
     }
 
     @IBAction func addGroup(_ sender: Any) {
-        let detailVC = storyboard!.instantiateController(withIdentifier: "BlogGroupsDetailViewController") as! BlogGroupsDetailViewController
-        detailVC.vm = vmGroup
-        detailVC.item = vmGroup.newBlogGroup()
-        detailVC.complete = { [unowned self] in tvGroup.reloadData() }
-        presentAsSheet(detailVC)
+        let detailVC = storyboard!.instantiateController(withIdentifier: "LangBlogGroupsDetailViewController") as! LangBlogGroupsDetailViewController
+        detailVC.vmEdit = LangBlogGroupsDetailViewModel(vm: vmGroup, item: vmGroup.newLangBlogGroup())
+        detailVC.complete = { [unowned self] in tvGroups.reloadData() }
+        presentAsModalWindow(detailVC)
+    }
+
+    @IBAction func editGroup(_ sender: Any) {
+        let i = tvGroups.selectedRow
+        if i == -1 {return}
+        let detailVC = storyboard!.instantiateController(withIdentifier: "LangBlogGroupsDetailViewController") as! LangBlogGroupsDetailViewController
+        detailVC.vmEdit = LangBlogGroupsDetailViewModel(vm: vmGroup, item: vmGroup.arrLangBlogGroups[i])
+        detailVC.complete = { [unowned self] in
+            tvGroups.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<tvGroups.tableColumns.count))
+        }
+        presentAsModalWindow(detailVC)
     }
 
     @IBAction func addBlog(_ sender: Any) {

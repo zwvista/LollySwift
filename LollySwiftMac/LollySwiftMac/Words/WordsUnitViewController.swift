@@ -163,10 +163,10 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     }
 
     @IBAction func editWord(_ sender: AnyObject) {
-        let detailVC = storyboard!.instantiateController(withIdentifier: "WordsUnitDetailViewController") as! WordsUnitDetailViewController
         let i = tvWords.selectedRow
         if i == -1 {return}
-        detailVC.vmEdit = WordsUnitDetailViewModel(vm: vm, item: arrWords[tvWords.selectedRow], phraseid: 0)
+        let detailVC = storyboard!.instantiateController(withIdentifier: "WordsUnitDetailViewController") as! WordsUnitDetailViewController
+        detailVC.vmEdit = WordsUnitDetailViewModel(vm: vm, item: arrWords[i], phraseid: 0)
         detailVC.complete = { [unowned self] in
             tvWords.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<tvWords.tableColumns.count))
         }

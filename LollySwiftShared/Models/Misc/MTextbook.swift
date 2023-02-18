@@ -83,7 +83,7 @@ class MTextbookEdit {
     let ID: String
     let TEXTBOOKNAME: BehaviorRelay<String>
     let UNITS: BehaviorRelay<String>
-    var PARTS: BehaviorRelay<String>
+    let PARTS: BehaviorRelay<String>
 
     init(x: MTextbook) {
         ID = "\(x.ID)"

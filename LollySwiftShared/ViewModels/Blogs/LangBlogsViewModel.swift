@@ -28,8 +28,8 @@ class LangBlogsViewModel: NSObject {
         MLangBlog.update(item: item)
     }
 
-    static func create(item: MLangBlog) -> Single<Int> {
-        MLangBlog.create(item: item)
+    static func create(item: MLangBlog) -> Single<()> {
+        MLangBlog.create(item: item).map { _ in }
     }
 
     func newLangBlog() -> MLangBlog {
