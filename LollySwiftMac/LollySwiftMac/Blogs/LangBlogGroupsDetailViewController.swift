@@ -25,7 +25,7 @@ class LangBlogGroupsDetailViewController: NSViewController {
         super.viewDidLoad()
         tfID.stringValue = itemEdit.ID
         tfLang.stringValue = vmEdit.vm.vmSettings.selectedLang.LANGNAME
-        _ = itemEdit.GROUPNAME ~> tfGroupName.rx.text.orEmpty
+        _ = itemEdit.LANGBLOGGROUPNAME <~> tfGroupName.rx.text.orEmpty
         _ = vmEdit.isOKEnabled ~> btnOK.rx.isEnabled
 
         btnOK.rx.tap.flatMap { [unowned self] in
@@ -40,7 +40,7 @@ class LangBlogGroupsDetailViewController: NSViewController {
     override func viewDidAppear() {
         super.viewDidAppear()
         (vmEdit.isAdd ? tfID : tfGroupName).becomeFirstResponder()
-        view.window?.title = vmEdit.isAdd ? "New Blog Group" : vmEdit.item.GROUPNAME
+        view.window?.title = vmEdit.isAdd ? "New Language Blog Group" : vmEdit.item.LANGBLOGGROUPNAME
     }
 
     deinit {

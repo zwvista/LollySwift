@@ -24,7 +24,7 @@ class LangBlogGroupsDetailViewModel: NSObject {
         itemEdit = MLangBlogGroupEdit(x: item)
         isAdd = item.ID == 0
         super.init()
-        _ = itemEdit.GROUPNAME.map { !$0.isEmpty } ~> isOKEnabled
+        _ = itemEdit.LANGBLOGGROUPNAME.map { !$0.isEmpty } ~> isOKEnabled
     }
 
     func onOK() -> Single<()> {

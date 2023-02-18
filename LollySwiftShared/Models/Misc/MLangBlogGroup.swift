@@ -14,12 +14,12 @@ import RxRelay
 class MLangBlogGroup: NSObject, Codable {
     dynamic var ID = 0
     dynamic var LANGID = 0
-    dynamic var GROUPNAME = ""
+    dynamic var LANGBLOGGROUPNAME = ""
 
     enum CodingKeys : String, CodingKey {
         case ID
         case LANGID
-        case GROUPNAME = "NAME"
+        case LANGBLOGGROUPNAME = "NAME"
     }
 
     static func getDataByLang(_ langid: Int) -> Single<[MLangBlogGroup]> {
@@ -43,14 +43,14 @@ class MLangBlogGroup: NSObject, Codable {
 
 class MLangBlogGroupEdit {
     let ID: String
-    let GROUPNAME: BehaviorRelay<String>
+    let LANGBLOGGROUPNAME: BehaviorRelay<String>
 
     init(x: MLangBlogGroup) {
         ID = "\(x.ID)"
-        GROUPNAME = BehaviorRelay(value: x.GROUPNAME)
+        LANGBLOGGROUPNAME = BehaviorRelay(value: x.LANGBLOGGROUPNAME)
     }
 
     func save(to x: MLangBlogGroup) {
-        x.GROUPNAME = GROUPNAME.value
+        x.LANGBLOGGROUPNAME = LANGBLOGGROUPNAME.value
     }
 }

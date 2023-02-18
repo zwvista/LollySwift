@@ -27,7 +27,7 @@ class TextbooksDetailViewController: NSViewController {
         super.viewDidLoad()
         tfID.stringValue = itemEdit.ID
         tfLang.stringValue = vmEdit.vm.vmSettings.selectedLang.LANGNAME
-        _ = itemEdit.TEXTBOOKNAME ~> tfTextbookName.rx.text.orEmpty
+        _ = itemEdit.TEXTBOOKNAME <~> tfTextbookName.rx.text.orEmpty
         _ = itemEdit.UNITS <~> tvUnits.rx.string
         _ = itemEdit.PARTS ~> tfParts.rx.text.orEmpty
         _ = vmEdit.isOKEnabled ~> btnOK.rx.isEnabled

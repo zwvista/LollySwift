@@ -32,7 +32,7 @@ class MLangBlog: NSObject, Codable {
     }
 
     static func create(item: MLangBlog) -> Single<Int> {
-        // SQL: INSERT INTO LANGBLOGGROUPS (LANGBLOGGROUPID, TITLE, CONTENT) VALUES (?,?,?)
+        // SQL: INSERT INTO LANGBLOGS (LANGBLOGGROUPID, TITLE, CONTENT) VALUES (?,?,?)
         let url = "\(CommonApi.urlAPI)LANGBLOGS"
         return RestApi.create(url: url, body: try! item.toJSONString()!).map { Int($0)! }.do(onSuccess: { print($0) })
     }
