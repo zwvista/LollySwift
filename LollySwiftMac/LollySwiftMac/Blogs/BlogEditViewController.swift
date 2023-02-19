@@ -16,23 +16,22 @@ class BlogEditViewController: NSViewController, NSMenuItemValidation  {
     @IBOutlet weak var wvBlog: WKWebView!
     @IBOutlet weak var tfStatusText: NSTextField!
 
-    var vmSettings: SettingsViewModel { AppDelegate.theSettingsViewModel }
     var wc: BlogEditWindowController { view.window!.windowController as! BlogEditWindowController }
     var vm: BlogEditViewModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        vm = BlogEditViewModel(settings: vmSettings)
+        vm = BlogEditViewModel(settings: AppDelegate.theSettingsViewModel)
         tvMarked.font = NSFont.systemFont(ofSize: 15)
         updateStatusText()
         Task {
-            tvMarked.string = await vmSettings.getBlogContent()
+            tvMarked.string = await vm.vmSettings.getBlogContent()
         }
     }
 
     @IBAction func saveMarked(_ sender: AnyObject) {
         Task {
-            await vmSettings.saveBlogContent(content: tvMarked.string)
+            await vm.vmSettings.saveBlogContent(content: tvMarked.string)
         }
     }
 
@@ -101,7 +100,7 @@ class BlogEditViewController: NSViewController, NSMenuItemValidation  {
     }
 
     func updateStatusText() {
-        tfStatusText.stringValue = vmSettings.UNITINFO
+        tfStatusText.stringValue = vm.vmSettings.UNITINFO
     }
 
     deinit {

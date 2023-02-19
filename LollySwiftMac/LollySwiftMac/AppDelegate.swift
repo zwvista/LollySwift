@@ -57,23 +57,26 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         true
     }
 
-    func showWindow(storyBoardName: String, windowControllerName: String) {
+    @discardableResult
+    func showWindow(storyBoardName: String, windowControllerName: String) -> NSWindowController {
         let storyboard = NSStoryboard(name: storyBoardName, bundle: nil)
         let wc = storyboard.instantiateController(withIdentifier: windowControllerName) as! NSWindowController
         wc.showWindow(self)
+        return wc
     }
 
     func findWindow(windowControllerName: String) -> NSWindow? {
         NSApplication.shared.windows.first(where: { $0.windowController?.className.contains( windowControllerName) ?? false })
     }
 
+    @discardableResult
     func findOrShowWindow(storyBoardName: String, windowControllerName: String) -> NSWindow {
         if let w = findWindow(windowControllerName: windowControllerName) {
             // https://stackoverflow.com/questions/29328281/os-x-menubar-application-how-to-bring-window-to-front
             w.makeKeyAndOrderFront(nil)
             return w
         } else {
-            showWindow(storyBoardName: storyBoardName, windowControllerName: windowControllerName)
+            _ = showWindow(storyBoardName: storyBoardName, windowControllerName: windowControllerName)
             return findWindow(windowControllerName: windowControllerName)!
         }
     }
@@ -99,7 +102,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @IBAction func search(_ sender: AnyObject) {
-        _ = findOrShowWindow(storyBoardName: "Words", windowControllerName: "WordsSearchWindowController")
+        findOrShowWindow(storyBoardName: "Words", windowControllerName: "WordsSearchWindowController")
     }
 
     @IBAction func settings(_ sender: AnyObject) {
@@ -107,7 +110,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @IBAction func wordsInUnit(_ sender: AnyObject) {
-        _ = findOrShowWindow(storyBoardName: "Words", windowControllerName: "WordsUnitWindowController")
+        findOrShowWindow(storyBoardName: "Words", windowControllerName: "WordsUnitWindowController")
     }
 
     @IBAction func wordsInUnitNew(_ sender: AnyObject) {
@@ -115,7 +118,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @IBAction func phrasesInUnit(_ sender: AnyObject) {
-        _ = findOrShowWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesUnitWindowController")
+        findOrShowWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesUnitWindowController")
     }
 
     @IBAction func phrasesInUnitNew(_ sender: AnyObject) {
@@ -123,7 +126,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @IBAction func wordsReview(_ sender: AnyObject) {
-        _ = findOrShowWindow(storyBoardName: "Words", windowControllerName: "WordsReviewWindowController")
+        findOrShowWindow(storyBoardName: "Words", windowControllerName: "WordsReviewWindowController")
     }
 
     @IBAction func wordsReviewNew(_ sender: AnyObject) {
@@ -131,7 +134,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @IBAction func phrasesReview(_ sender: AnyObject) {
-        _ = findOrShowWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesReviewWindowController")
+        findOrShowWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesReviewWindowController")
     }
 
     @IBAction func phrasesReviewNew(_ sender: AnyObject) {
@@ -139,7 +142,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @IBAction func wordsInTextbook(_ sender: AnyObject) {
-        _ = findOrShowWindow(storyBoardName: "Words", windowControllerName: "WordsTextbookWindowController")
+        findOrShowWindow(storyBoardName: "Words", windowControllerName: "WordsTextbookWindowController")
     }
 
     @IBAction func wordsInTextbookNew(_ sender: AnyObject) {
@@ -155,7 +158,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @IBAction func wordsInLanguage(_ sender: AnyObject) {
-        _ = findOrShowWindow(storyBoardName: "Words", windowControllerName: "WordsLangWindowController")
+        findOrShowWindow(storyBoardName: "Words", windowControllerName: "WordsLangWindowController")
     }
 
     @IBAction func wordsInLanguageNew(_ sender: AnyObject) {
@@ -163,7 +166,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @IBAction func phrasesInLanguage(_ sender: AnyObject) {
-        _ = findOrShowWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesLangWindowController")
+        findOrShowWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesLangWindowController")
     }
 
     @IBAction func phrasesInLanguageNew(_ sender: AnyObject) {
@@ -171,7 +174,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @IBAction func patternsInLanguage(_ sender: AnyObject) {
-        _ = findOrShowWindow(storyBoardName: "Patterns", windowControllerName: "PatternsWindowController")
+        findOrShowWindow(storyBoardName: "Patterns", windowControllerName: "PatternsWindowController")
     }
 
     @IBAction func patternsInLanguageNew(_ sender: AnyObject) {
