@@ -1,35 +1,33 @@
 //
-//  TextbooksDetailViewController.swift
+//  LangBlogsDetailViewController.swift
 //  LollySwiftMac
 //
-//  Created by 趙偉 on 2018/04/07.
-//  Copyright © 2018年 趙偉. All rights reserved.
+//  Created by 趙偉 on 2023/02/19.
+//  Copyright © 2023 趙偉. All rights reserved.
 //
 
 import Cocoa
 import RxSwift
 import RxBinding
 
-class TextbooksDetailViewController: NSViewController {
+class LangBlogsDetailViewController: NSViewController {
 
     @IBOutlet weak var tfID: NSTextField!
     @IBOutlet weak var tfLang: NSTextField!
-    @IBOutlet weak var tfTextbookName: NSTextField!
-    @IBOutlet weak var tvUnits: NSTextView!
-    @IBOutlet weak var tfParts: NSTextField!
+    @IBOutlet weak var tfGroupName: NSTextField!
+    @IBOutlet weak var tfTitle: NSTextField!
     @IBOutlet weak var btnOK: NSButton!
 
     var complete: (() -> Void)?
-    var vmEdit: TextbooksDetailViewModel!
-    var itemEdit: MTextbookEdit { vmEdit.itemEdit }
+    var vmEdit: LangBlogsDetailViewModel!
+    var itemEdit: MLangBlogEdit { vmEdit.itemEdit }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         tfID.stringValue = itemEdit.ID
         tfLang.stringValue = vmEdit.vm.vmSettings.selectedLang.LANGNAME
-        _ = itemEdit.TEXTBOOKNAME <~> tfTextbookName.rx.text.orEmpty
-        _ = itemEdit.UNITS <~> tvUnits.rx.string
-        _ = itemEdit.PARTS <~> tfParts.rx.text.orEmpty
+        tfGroupName.stringValue = itemEdit.GROUPNAME
+        _ = itemEdit.TITLE <~> tfTitle.rx.text.orEmpty
         _ = vmEdit.isOKEnabled ~> btnOK.rx.isEnabled
 
         btnOK.rx.tap.flatMap { [unowned self] in
@@ -43,8 +41,8 @@ class TextbooksDetailViewController: NSViewController {
 
     override func viewDidAppear() {
         super.viewDidAppear()
-        (vmEdit.isAdd ? tfID : tfTextbookName).becomeFirstResponder()
-        view.window?.title = vmEdit.isAdd ? "New Textbook" : vmEdit.item.TEXTBOOKNAME
+        (vmEdit.isAdd ? tfID : tfGroupName).becomeFirstResponder()
+        view.window?.title = vmEdit.isAdd ? "New Language Blog" : vmEdit.item.TITLE
     }
 
     deinit {

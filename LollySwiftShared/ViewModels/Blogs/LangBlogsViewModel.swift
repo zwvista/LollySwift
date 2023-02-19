@@ -15,10 +15,10 @@ class LangBlogsViewModel: NSObject {
     var vmSettings: SettingsViewModel
     var arrLangBlogs = [MLangBlog]()
 
-    init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> Void) {
+    init(settings: SettingsViewModel, needCopy: Bool, groupId: Int, complete: @escaping () -> Void) {
         vmSettings = !needCopy ? settings : SettingsViewModel(settings)
         super.init()
-        MLangBlog.getDataByLang(settings.selectedLang.ID).subscribe { [unowned self] in
+        MLangBlog.getDataByLangGroup(langid: settings.selectedLang.ID, groupId: groupId).subscribe { [unowned self] in
             arrLangBlogs = $0
             complete()
         } ~ rx.disposeBag
