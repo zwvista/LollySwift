@@ -37,7 +37,12 @@ class BlogEditViewController: NSViewController, NSMenuItemValidation  {
     }
 
     @IBAction func saveMarked(_ sender: AnyObject) {
-        vm.vmSettings.saveBlogContent(content: tvMarked.string).subscribe() ~ rx.disposeBag
+        if vm.isUnitBlog {
+            vm.vmSettings.saveBlogContent(content: tvMarked.string).subscribe() ~ rx.disposeBag
+        } else {
+            vm.itemBlog!.CONTENT = tvMarked.string
+            MLangBlogContent.update(item: vm.itemBlog!).subscribe() ~ rx.disposeBag
+        }
     }
 
     @IBAction func htmlToMarked(_ sender: AnyObject) {
@@ -103,7 +108,7 @@ class BlogEditViewController: NSViewController, NSMenuItemValidation  {
     }
 
     func updateStatusText() {
-        tfStatusText.stringValue = vm.vmSettings.UNITINFO
+        tfStatusText.stringValue = vm.isUnitBlog ? vm.vmSettings.UNITINFO : vm.itemBlog!.TITLE
     }
 
     deinit {

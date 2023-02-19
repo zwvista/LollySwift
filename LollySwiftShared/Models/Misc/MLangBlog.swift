@@ -46,7 +46,8 @@ class MLangBlog: NSObject, Codable {
 @objcMembers
 class MLangBlogContent: NSObject, Codable {
     dynamic var ID = 0
-    dynamic var CONTENT = ""
+    dynamic var TITLE = ""
+    dynamic var CONTENT: String? = ""
 
     static func getDataById(_ id: Int) -> Single<MLangBlogContent?> {
         // SQL: SELECT * FROM LANGBLOGS WHERE ID=?
