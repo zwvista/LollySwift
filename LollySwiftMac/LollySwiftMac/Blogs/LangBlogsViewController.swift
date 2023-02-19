@@ -103,6 +103,9 @@ class LangBlogsViewController: NSViewController, NSTableViewDataSource, NSTableV
         }
         presentAsModalWindow(detailVC)
     }
+
+    @IBAction func editBlogContent(_ sender: Any) {
+    }
 }
 
 class LangBlogsWindowController: NSWindowController, NSWindowDelegate {

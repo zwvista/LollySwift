@@ -12,9 +12,13 @@ import RxBinding
 
 class BlogEditViewModel: NSObject {
 
+    var isUnitBlog: Bool
     var vmSettings: SettingsViewModel
-    init(settings: SettingsViewModel) {
+    var itemBlog: MLangBlogContent? = nil
+    init(settings: SettingsViewModel, item: MLangBlogContent?) {
         vmSettings = SettingsViewModel(settings)
+        itemBlog = item
+        isUnitBlog = item == nil
     }
 
     private func html1With(_ s: String) -> String {
