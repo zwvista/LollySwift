@@ -34,7 +34,12 @@ class BlogEditViewController: NSViewController, NSMenuItemValidation  {
 
     @IBAction func saveMarked(_ sender: AnyObject) {
         Task {
-            await vm.vmSettings.saveBlogContent(content: tvMarked.string)
+            if vm.isUnitBlog {
+                await vm.vmSettings.saveBlogContent(content: tvMarked.string)
+            } else {
+                vm.itemBlog!.CONTENT = tvMarked.string
+                await MLangBlogContent.update(item: vm.itemBlog!)
+            }
         }
     }
 
@@ -103,7 +108,7 @@ class BlogEditViewController: NSViewController, NSMenuItemValidation  {
     }
 
     func updateStatusText() {
-        tfStatusText.stringValue = vm.vmSettings.UNITINFO
+        tfStatusText.stringValue = vm.isUnitBlog ? vm.vmSettings.UNITINFO : vm.itemBlog!.TITLE
     }
 
     deinit {

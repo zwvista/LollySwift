@@ -58,7 +58,8 @@ class MLangBlogsContent: HasRecords {
 @objcMembers
 class MLangBlogContent: NSObject, Codable {
     dynamic var ID = 0
-    dynamic var CONTENT = ""
+    dynamic var TITLE = ""
+    dynamic var CONTENT: String? = ""
 
     static func getDataById(_ id: Int) async -> MLangBlogContent? {
         // SQL: SELECT * FROM LANGBLOGS WHERE ID=?
