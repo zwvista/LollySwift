@@ -21,9 +21,8 @@ class BlogEditViewController: NSViewController, NSMenuItemValidation  {
     var wc: BlogEditWindowController { view.window!.windowController as! BlogEditWindowController }
     var vm: BlogEditViewModel!
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        vm = BlogEditViewModel(settings: AppDelegate.theSettingsViewModel)
+    override func viewWillAppear() {
+        super.viewWillAppear()
         tvMarked.font = NSFont.systemFont(ofSize: 15)
         updateStatusText()
         vm.vmSettings.getBlogContent().subscribe { [unowned self] in

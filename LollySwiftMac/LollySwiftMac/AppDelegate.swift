@@ -55,29 +55,26 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @discardableResult
-    func showWindow(storyBoardName: String, windowControllerName: String) -> NSWindowController {
+    func showWindow(storyBoardName: String, windowControllerName: String, didLoad: ((NSWindowController) -> Void)? = nil) -> NSWindow {
         let storyboard = NSStoryboard(name: storyBoardName, bundle: nil)
         let wc = storyboard.instantiateController(withIdentifier: windowControllerName) as! NSWindowController
+        didLoad?(wc)
         wc.showWindow(self)
-        return wc
-    }
-
-    func findWindow(windowControllerName: String) -> NSWindow? {
-        NSApplication.shared.windows.first(where: { $0.windowController?.className.contains( windowControllerName) ?? false })
+        return wc.window!
     }
 
     @discardableResult
     func findOrShowWindow(storyBoardName: String, windowControllerName: String) -> NSWindow {
-        if let w = findWindow(windowControllerName: windowControllerName) {
+        if let w = NSApplication.shared.windows.first(where: { $0.windowController?.className.contains( windowControllerName) ?? false }) {
             // https://stackoverflow.com/questions/29328281/os-x-menubar-application-how-to-bring-window-to-front
             w.makeKeyAndOrderFront(nil)
             return w
         } else {
-            _ = showWindow(storyBoardName: storyBoardName, windowControllerName: windowControllerName)
-            return findWindow(windowControllerName: windowControllerName)!
+            return showWindow(storyBoardName: storyBoardName, windowControllerName: windowControllerName)
         }
     }
 
+    @discardableResult
     func runModal(storyBoardName: String, windowControllerName: String) -> NSApplication.ModalResponse {
         let storyboard = NSStoryboard(name: storyBoardName, bundle: nil)
         let wc = storyboard.instantiateController(withIdentifier: windowControllerName) as! NSWindowController
@@ -103,7 +100,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @IBAction func settings(_ sender: AnyObject) {
-        _ = runModal(storyBoardName: "Main", windowControllerName: "SettingsWindowController")
+        runModal(storyBoardName: "Main", windowControllerName: "SettingsWindowController")
     }
 
     @IBAction func wordsInUnit(_ sender: AnyObject) {
@@ -179,7 +176,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @IBAction func editUnitBlog(_ sender: AnyObject) {
-        showWindow(storyBoardName: "Blogs", windowControllerName: "BlogEditWindowController")
+        showWindow(storyBoardName: "Blogs", windowControllerName: "BlogEditWindowController") { wc in
+            let v = wc.contentViewController as! BlogEditViewController
+            v.vm = BlogEditViewModel(settings: AppDelegate.theSettingsViewModel)
+        }
     }
 
     @IBAction func editLangBlog(_ sender: AnyObject) {
