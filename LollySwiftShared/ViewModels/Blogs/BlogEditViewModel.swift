@@ -14,7 +14,7 @@ class BlogEditViewModel: NSObject {
     var isUnitBlog: Bool
     var vmSettings: SettingsViewModel
     var itemBlog: MLangBlogContent? = nil
-    init(settings: SettingsViewModel, item: MLangBlogContent? = nil) {
+    init(settings: SettingsViewModel, item: MLangBlogContent?) {
         vmSettings = SettingsViewModel(settings)
         itemBlog = item
         isUnitBlog = item == nil

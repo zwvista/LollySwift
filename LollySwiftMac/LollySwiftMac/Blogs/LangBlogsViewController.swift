@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import Combine
 
 class LangBlogsViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, LollyProtocol {
 
@@ -28,7 +29,7 @@ class LangBlogsViewController: NSViewController, NSTableViewDataSource, NSTableV
     }
 
     func numberOfRows(in tableView: NSTableView) -> Int {
-        tableView === tvGroups ? vmGroups.arrLangBlogGroups.count : 0
+        tableView === tvGroups ? vmGroups.arrLangBlogGroups.count : vmBlogs?.arrLangBlogs.count ?? 0
     }
 
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
@@ -76,7 +77,11 @@ class LangBlogsViewController: NSViewController, NSTableViewDataSource, NSTableV
     }
 
     @IBAction func doubleAction(_ sender: AnyObject) {
-        editGroup(sender)
+        if sender === tvGroups {
+            editGroup(sender)
+        } else {
+            editBlog(sender)
+        }
     }
 
     @IBAction func addBlog(_ sender: Any) {
@@ -105,6 +110,13 @@ class LangBlogsViewController: NSViewController, NSTableViewDataSource, NSTableV
     }
 
     @IBAction func editBlogContent(_ sender: Any) {
+        let i = tvBlogs.selectedRow
+        if i == -1 {return}
+        let itemBlog = vmBlogs.arrLangBlogs[i]
+        Task {
+            let item = await MLangBlogContent.getDataById(itemBlog.ID)
+            (NSApplication.shared.delegate as! AppDelegate).editBlog(settings: vmBlogs.vmSettings, item: item)
+        }
     }
 }
 

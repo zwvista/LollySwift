@@ -24,7 +24,11 @@ class BlogEditViewController: NSViewController, NSMenuItemValidation  {
         tvMarked.font = NSFont.systemFont(ofSize: 15)
         updateStatusText()
         Task {
-            tvMarked.string = await vm.vmSettings.getBlogContent()
+            if vm.isUnitBlog {
+                tvMarked.string = await vm.vmSettings.getBlogContent()
+            } else {
+                tvMarked.string = (await MLangBlogContent.getDataById(vm.itemBlog!.ID))?.CONTENT ?? ""
+            }
         }
     }
 
