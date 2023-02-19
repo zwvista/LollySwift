@@ -12,7 +12,7 @@ import NSObject_Rx
 import RxBinding
 
 class PhrasesUnitDetailViewController: UITableViewController {
- 
+
     @IBOutlet weak var tfID: UITextField!
     @IBOutlet weak var tfUnit: UITextField!
     @IBOutlet weak var btnUnit: UIButton!

@@ -25,9 +25,15 @@ class BlogEditViewController: NSViewController, NSMenuItemValidation  {
         super.viewWillAppear()
         tvMarked.font = NSFont.systemFont(ofSize: 15)
         updateStatusText()
-        vm.vmSettings.getBlogContent().subscribe { [unowned self] in
-            tvMarked.string = $0
-        } ~ rx.disposeBag
+        if vm.isUnitBlog {
+            vm.vmSettings.getBlogContent().subscribe { [unowned self] in
+                tvMarked.string = $0
+            } ~ rx.disposeBag
+        } else {
+            MLangBlogContent.getDataById(vm.itemBlog!.ID).subscribe { [unowned self] in
+                tvMarked.string = $0?.CONTENT ?? ""
+            } ~ rx.disposeBag
+        }
     }
 
     @IBAction func saveMarked(_ sender: AnyObject) {

@@ -204,7 +204,6 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
         (NSApplication.shared.delegate as! AppDelegate).addNewUnitWord(phraseid: vm.selectedPhraseID)
     }
 
-
     @IBAction func associateExistingWords(_ sender: AnyObject) {
         guard vm.selectedPhraseID != 0 else {return}
         let detailVC = NSStoryboard(name: "Words", bundle: nil).instantiateController(withIdentifier: "WordsAssociateViewController") as! WordsAssociateViewController

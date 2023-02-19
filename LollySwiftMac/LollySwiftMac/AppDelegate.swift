@@ -87,8 +87,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         globalUser.remove()
         AppDelegate.theSettingsViewModel.initialized.accept(false)
-        let r = runModal(storyBoardName: "Main", windowControllerName: "LoginWindowController")
-        if r == .OK {
+        if runModal(storyBoardName: "Main", windowControllerName: "LoginWindowController") == .OK {
             setup()
         } else {
             NSApplication.shared.terminate(self)
@@ -176,13 +175,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @IBAction func editUnitBlog(_ sender: AnyObject) {
-        showWindow(storyBoardName: "Blogs", windowControllerName: "BlogEditWindowController") { wc in
-            let v = wc.contentViewController as! BlogEditViewController
-            v.vm = BlogEditViewModel(settings: AppDelegate.theSettingsViewModel)
-        }
+        editBlog(settings: AppDelegate.theSettingsViewModel, item: nil)
     }
 
-    @IBAction func editLangBlog(_ sender: AnyObject) {
+    @IBAction func showLangBlogs(_ sender: AnyObject) {
         showWindow(storyBoardName: "Blogs", windowControllerName: "LangBlogsWindowController")
     }
 
@@ -228,5 +224,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let v = findOrShowWindow(storyBoardName: "Words", windowControllerName: "WordsUnitWindowController").contentViewController as! WordsUnitViewController
         v.addWord(phraseid: phraseid)
         w.makeKeyAndOrderFront(nil)
+    }
+
+    func editBlog(settings: SettingsViewModel, item: MLangBlogContent?) {
+        showWindow(storyBoardName: "Blogs", windowControllerName: "BlogEditWindowController") { wc in
+            let v = wc.contentViewController as! BlogEditViewController
+            v.vm = BlogEditViewModel(settings: settings, item: item)
+        }
     }
 }
