@@ -33,10 +33,28 @@ class LangBlogsViewController: NSViewController, NSTableViewDataSource, NSTableV
 
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! NSTableCellView
-        let item = vmGroups.arrLangBlogGroups[row]
         let columnName = tableColumn!.identifier.rawValue
-        cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
+        if tableView == tvGroups {
+            let item = vmGroups.arrLangBlogGroups[row]
+            cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
+        } else {
+            let item = vmBlogs.arrLangBlogs[row]
+            cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
+        }
         return cell
+    }
+
+    func tableViewSelectionDidChange(_ notification: Notification) {
+        let tv = notification.object as! NSTableView
+        if tv === tvGroups {
+            let i = tvGroups.selectedRow
+            if i == -1 {return}
+            let o = vmGroups.arrLangBlogGroups[i]
+            vmBlogs = LangBlogsViewModel(settings: vmGroups.vmSettings, needCopy: false, groupId: o.ID) { [unowned self] in
+                tvBlogs.reloadData()
+            }
+        } else {
+        }
     }
 
     @IBAction func addGroup(_ sender: Any) {
@@ -62,6 +80,28 @@ class LangBlogsViewController: NSViewController, NSTableViewDataSource, NSTableV
     }
 
     @IBAction func addBlog(_ sender: Any) {
+        let i = tvGroups.selectedRow
+        if i == -1 {return}
+        let itemGroup = vmGroups.arrLangBlogGroups[i]
+        let detailVC = storyboard!.instantiateController(withIdentifier: "LangBlogsDetailViewController") as! LangBlogsDetailViewController
+        let item = vmBlogs.newLangBlog().then {
+            $0.GROUPID = itemGroup.ID
+            $0.GROUPNAME = itemGroup.GROUPNAME
+        }
+        detailVC.vmEdit = LangBlogsDetailViewModel(vm: vmBlogs, item: item)
+        detailVC.complete = { [unowned self] in tvGroups.reloadData() }
+        presentAsModalWindow(detailVC)
+    }
+
+    @IBAction func editBlog(_ sender: Any) {
+        let i = tvGroups.selectedRow
+        if i == -1 {return}
+        let detailVC = storyboard!.instantiateController(withIdentifier: "LangBlogsDetailViewController") as! LangBlogsDetailViewController
+        detailVC.vmEdit = LangBlogsDetailViewModel(vm: vmBlogs, item: vmBlogs.arrLangBlogs[i])
+        detailVC.complete = { [unowned self] in
+            tvBlogs.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<tvBlogs.tableColumns.count))
+        }
+        presentAsModalWindow(detailVC)
     }
 }
 

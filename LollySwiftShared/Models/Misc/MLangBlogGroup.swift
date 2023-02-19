@@ -18,12 +18,12 @@ class MLangBlogGroups: HasRecords {
 class MLangBlogGroup: NSObject, Codable {
     dynamic var ID = 0
     dynamic var LANGID = 0
-    dynamic var LANGBLOGGROUPNAME = ""
+    dynamic var GROUPNAME = ""
 
     enum CodingKeys : String, CodingKey {
         case ID
         case LANGID
-        case LANGBLOGGROUPNAME = "NAME"
+        case GROUPNAME = "NAME"
     }
 
     static func getDataByLang(_ langid: Int) async -> [MLangBlogGroup] {
@@ -49,14 +49,14 @@ class MLangBlogGroup: NSObject, Codable {
 
 class MLangBlogGroupEdit {
     let ID: String
-    @Published var LANGBLOGGROUPNAME: String
+    @Published var GROUPNAME: String
 
     init(x: MLangBlogGroup) {
         ID = "\(x.ID)"
-        LANGBLOGGROUPNAME = x.LANGBLOGGROUPNAME
+        GROUPNAME = x.GROUPNAME
     }
 
     func save(to x: MLangBlogGroup) {
-        x.LANGBLOGGROUPNAME = LANGBLOGGROUPNAME
+        x.GROUPNAME = GROUPNAME
     }
 }

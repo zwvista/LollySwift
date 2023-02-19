@@ -18,8 +18,8 @@ class MLangBlogs: HasRecords {
 class MLangBlog: NSObject, Codable {
     dynamic var ID = 0
     dynamic var LANGID = 0
-    dynamic var LANGBLOGGROUPID = 0
-    dynamic var LANGBLOGGROUPNAME = ""
+    dynamic var GROUPID = 0
+    dynamic var GROUPNAME = ""
     dynamic var TITLE = ""
     dynamic var CONTENT = ""
 
@@ -29,14 +29,20 @@ class MLangBlog: NSObject, Codable {
         return await RestApi.getRecords(MLangBlogs.self, url: url)
     }
 
+    static func getDataByLangGroup(langid: Int, groupId: Int) async -> [MLangBlog] {
+        // SQL: SELECT * FROM VLANGBLOGS WHERE LANGID=?
+        let url = "\(CommonApi.urlAPI)VLANGBLOGS?filter=LANGID,eq,\(langid)&GROUPID,eq,\(groupId)"
+        return await RestApi.getRecords(MLangBlogs.self, url: url)
+    }
+
     static func update(item: MLangBlog) async {
-        // SQL: UPDATE LANGBLOGS SET LANGBLOGGROUPID=?, TITLE=?, CONTENT=? WHERE ID=?
+        // SQL: UPDATE LANGBLOGS SET GROUPID=?, TITLE=?, CONTENT=? WHERE ID=?
         let url = "\(CommonApi.urlAPI)LANGBLOGS/\(item.ID)"
         print(await RestApi.update(url: url, body: try! item.toJSONString()!))
     }
 
     static func create(item: MLangBlog) async -> Int {
-        // SQL: INSERT INTO LANGBLOGS (LANGBLOGGROUPID, TITLE, CONTENT) VALUES (?,?,?)
+        // SQL: INSERT INTO LANGBLOGS (GROUPID, TITLE, CONTENT) VALUES (?,?,?)
         let url = "\(CommonApi.urlAPI)LANGBLOGS"
         let id = Int(await RestApi.create(url: url, body: try! item.toJSONString()!))!
         print(id)
@@ -46,19 +52,19 @@ class MLangBlog: NSObject, Codable {
 
 class MLangBlogEdit {
     let ID: String
-    @Published var LANGBLOGGROUPNAME: String
+    @Published var GROUPNAME: String
     @Published var TITLE: String
     @Published var CONTENT: String
 
     init(x: MLangBlog) {
         ID = "\(x.ID)"
-        LANGBLOGGROUPNAME = x.LANGBLOGGROUPNAME
+        GROUPNAME = x.GROUPNAME
         TITLE = x.TITLE
         CONTENT = x.CONTENT
     }
 
     func save(to x: MLangBlog) {
-        x.LANGBLOGGROUPNAME = LANGBLOGGROUPNAME
+        x.GROUPNAME = GROUPNAME
         x.TITLE = TITLE
         x.CONTENT = CONTENT
     }

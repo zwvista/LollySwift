@@ -25,7 +25,7 @@ class LangBlogGroupsDetailViewController: NSViewController {
         super.viewDidLoad()
         tfID.stringValue = itemEdit.ID
         tfLang.stringValue = vmEdit.vm.vmSettings.selectedLang.LANGNAME
-        _ = itemEdit.$LANGBLOGGROUPNAME ~> (tfGroupName, \.stringValue) ~ subscriptions
+        _ = itemEdit.$GROUPNAME ~> (tfGroupName, \.stringValue) ~ subscriptions
         _ = vmEdit.$isOKEnabled ~> (btnOK, \.isEnabled) ~ subscriptions
 
         btnOK.tapPublisher.sink { [unowned self] in
@@ -41,7 +41,7 @@ class LangBlogGroupsDetailViewController: NSViewController {
     override func viewDidAppear() {
         super.viewDidAppear()
         (vmEdit.isAdd ? tfID : tfGroupName).becomeFirstResponder()
-        view.window?.title = vmEdit.isAdd ? "New Language Blog Group" : vmEdit.item.LANGBLOGGROUPNAME
+        view.window?.title = vmEdit.isAdd ? "New Language Blog Group" : vmEdit.item.GROUPNAME
     }
 
     deinit {

@@ -22,7 +22,7 @@ class LangBlogGroupsDetailViewModel: NSObject {
         itemEdit = MLangBlogGroupEdit(x: item)
         isAdd = item.ID == 0
         super.init()
-        _ = itemEdit.$LANGBLOGGROUPNAME.map { !$0.isEmpty }.eraseToAnyPublisher() ~> $isOKEnabled
+        _ = itemEdit.$GROUPNAME.map { !$0.isEmpty }.eraseToAnyPublisher() ~> $isOKEnabled
     }
 
     func onOK() async {

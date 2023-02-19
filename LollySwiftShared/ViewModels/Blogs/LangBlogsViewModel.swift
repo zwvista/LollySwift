@@ -14,11 +14,11 @@ class LangBlogsViewModel: NSObject {
     var vmSettings: SettingsViewModel
     var arrLangBlogs = [MLangBlog]()
 
-    init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> Void) {
+    init(settings: SettingsViewModel, needCopy: Bool, groupId: Int, complete: @escaping () -> Void) {
         vmSettings = !needCopy ? settings : SettingsViewModel(settings)
         super.init()
         Task {
-            arrLangBlogs = await MLangBlog.getDataByLang(settings.selectedLang.ID)
+            arrLangBlogs = await MLangBlog.getDataByLangGroup(langid: settings.selectedLang.ID, groupId: groupId)
             complete()
         }
     }
