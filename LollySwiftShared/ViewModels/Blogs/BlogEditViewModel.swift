@@ -11,16 +11,18 @@ import RxSwift
 import RxBinding
 
 class BlogEditViewModel: NSObject {
-
+    
     var isUnitBlog: Bool
     var vmSettings: SettingsViewModel
     var itemBlog: MLangBlogContent? = nil
+    let title: String
     init(settings: SettingsViewModel, item: MLangBlogContent?) {
         vmSettings = SettingsViewModel(settings)
         itemBlog = item
         isUnitBlog = item == nil
+        title = isUnitBlog ? vmSettings.UNITINFO : itemBlog!.TITLE
     }
-
+    
     private func html1With(_ s: String) -> String {
         "<strong><span style=\"color:#0000ff\">\(s)</span></strong>"
     }
@@ -73,7 +75,7 @@ class BlogEditViewModel: NSObject {
         }
         return arr.joined(separator: "\n")
     }
-
+    
     private let regLine = #/<div>(.*?)</div>/#
     private var regHtmlB: Regex<(Substring, Substring)> { try! Regex(htmlBWith("(.+?)")) }
     private var regHtmlI: Regex<(Substring, Substring)> { try! Regex(htmlIWith("(.+?)")) }
@@ -102,7 +104,7 @@ class BlogEditViewModel: NSObject {
         }
         return arr.joined(separator: "\n")
     }
-
+    
     func addTagB(text: String) -> String {
         "<B>\(text)</B>"
     }
@@ -124,7 +126,7 @@ class BlogEditViewModel: NSObject {
     func getPatternUrl(patternNo: String) -> String {
         "http://viethuong.web.fc2.com/MONDAI/\(patternNo).html"
     }
-
+    
     func addNotes(text: String, complete: @escaping (String) -> Void) {
         func f(_ s: String) -> String {
             var t = s
@@ -154,6 +156,27 @@ class BlogEditViewModel: NSObject {
             let result = arr.joined(separator: "\n")
             complete(result)
         }) ~ rx.disposeBag
+    }
+
+    func loadBlog(onLoaded: @escaping (String) -> ()) {
+        if isUnitBlog {
+            vmSettings.getBlogContent().subscribe {
+                onLoaded($0)
+            } ~ rx.disposeBag
+        } else {
+            MLangBlogContent.getDataById(itemBlog!.ID).subscribe {
+                onLoaded($0?.CONTENT ?? "")
+            } ~ rx.disposeBag
+        }
+    }
+
+    func saveBlog(content: String) {
+        if isUnitBlog {
+            vmSettings.saveBlogContent(content: content).subscribe() ~ rx.disposeBag
+        } else {
+            itemBlog!.CONTENT = content
+            MLangBlogContent.update(item: itemBlog!).subscribe() ~ rx.disposeBag
+        }
     }
 }
 
