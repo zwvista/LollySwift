@@ -25,7 +25,7 @@ class LangBlogGroupsDetailViewController: NSViewController {
         super.viewDidLoad()
         tfID.stringValue = itemEdit.ID
         tfLang.stringValue = vmEdit.vm.vmSettings.selectedLang.LANGNAME
-        _ = itemEdit.$GROUPNAME ~> (tfGroupName, \.stringValue) ~ subscriptions
+        _ = itemEdit.$GROUPNAME <~> tfGroupName.textProperty ~ subscriptions
         _ = vmEdit.$isOKEnabled ~> (btnOK, \.isEnabled) ~ subscriptions
 
         btnOK.tapPublisher.sink { [unowned self] in

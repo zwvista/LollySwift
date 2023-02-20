@@ -245,29 +245,29 @@
                                         <rect key="frame" x="409" y="0.0" width="391" height="600"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
-                                            <wkWebView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bwf-eO-MWp">
-                                                <rect key="frame" x="0.0" y="16" width="391" height="584"/>
-                                                <wkWebViewConfiguration key="configuration">
-                                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
-                                                    <wkPreferences key="preferences"/>
-                                                </wkWebViewConfiguration>
-                                            </wkWebView>
                                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tam-34-PTJ">
-                                                <rect key="frame" x="-2" y="0.0" width="4" height="16"/>
+                                                <rect key="frame" x="-2" y="584" width="4" height="16"/>
                                                 <textFieldCell key="cell" lineBreakMode="clipping" id="UT3-a0-Ilf">
                                                     <font key="font" usesAppearanceFont="YES"/>
                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
                                             </textField>
+                                            <wkWebView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bwf-eO-MWp">
+                                                <rect key="frame" x="0.0" y="0.0" width="391" height="584"/>
+                                                <wkWebViewConfiguration key="configuration">
+                                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                                    <wkPreferences key="preferences"/>
+                                                </wkWebViewConfiguration>
+                                            </wkWebView>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="tam-34-PTJ" secondAttribute="bottom" id="AhM-3Q-XWD"/>
-                                            <constraint firstItem="bwf-eO-MWp" firstAttribute="top" secondItem="zKf-9Y-oXB" secondAttribute="top" id="Oc7-4h-mgA"/>
-                                            <constraint firstItem="tam-34-PTJ" firstAttribute="top" secondItem="bwf-eO-MWp" secondAttribute="bottom" id="WS5-Co-eZZ"/>
-                                            <constraint firstItem="bwf-eO-MWp" firstAttribute="leading" secondItem="zKf-9Y-oXB" secondAttribute="leading" id="eeE-Df-Ldp"/>
-                                            <constraint firstItem="tam-34-PTJ" firstAttribute="leading" secondItem="zKf-9Y-oXB" secondAttribute="leading" id="f21-Cp-3zF"/>
-                                            <constraint firstAttribute="trailing" secondItem="bwf-eO-MWp" secondAttribute="trailing" id="hdv-4g-eup"/>
+                                            <constraint firstItem="tam-34-PTJ" firstAttribute="leading" secondItem="zKf-9Y-oXB" secondAttribute="leading" id="4Gv-aP-x3T"/>
+                                            <constraint firstAttribute="trailing" secondItem="bwf-eO-MWp" secondAttribute="trailing" id="Mu1-uf-1m5"/>
+                                            <constraint firstItem="bwf-eO-MWp" firstAttribute="top" secondItem="tam-34-PTJ" secondAttribute="bottom" id="hT1-gN-SQe"/>
+                                            <constraint firstAttribute="bottom" secondItem="bwf-eO-MWp" secondAttribute="bottom" id="hqt-6i-umm"/>
+                                            <constraint firstItem="bwf-eO-MWp" firstAttribute="leading" secondItem="zKf-9Y-oXB" secondAttribute="leading" id="rgv-dY-ygu"/>
+                                            <constraint firstItem="tam-34-PTJ" firstAttribute="top" secondItem="zKf-9Y-oXB" secondAttribute="top" id="x8x-P6-dcs"/>
                                         </constraints>
                                     </customView>
                                 </subviews>
@@ -285,7 +285,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="tfStatusText" destination="tam-34-PTJ" id="Mn3-Eb-GYv"/>
+                        <outlet property="tfTitle" destination="tam-34-PTJ" id="rv1-XL-fGP"/>
                         <outlet property="tvHtml" destination="e8K-mx-I5l" id="O9s-lW-yQC"/>
                         <outlet property="tvMarked" destination="7Zx-Xa-ReP" id="bLQ-No-yal"/>
                         <outlet property="wvBlog" destination="bwf-eO-MWp" id="iS4-Tg-8Ul"/>

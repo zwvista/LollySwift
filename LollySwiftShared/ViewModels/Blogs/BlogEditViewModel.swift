@@ -10,16 +10,18 @@ import Foundation
 
 @MainActor
 class BlogEditViewModel: NSObject {
-
+    
     var isUnitBlog: Bool
     var vmSettings: SettingsViewModel
     var itemBlog: MLangBlogContent? = nil
+    let title: String
     init(settings: SettingsViewModel, item: MLangBlogContent?) {
         vmSettings = SettingsViewModel(settings)
         itemBlog = item
         isUnitBlog = item == nil
+        title = isUnitBlog ? vmSettings.UNITINFO : itemBlog!.TITLE
     }
-
+    
     private func html1With(_ s: String) -> String {
         "<strong><span style=\"color:#0000ff\">\(s)</span></strong>"
     }
@@ -72,7 +74,7 @@ class BlogEditViewModel: NSObject {
         }
         return arr.joined(separator: "\n")
     }
-
+    
     private let regLine = #/<div>(.*?)</div>/#
     private var regHtmlB: Regex<(Substring, Substring)> { try! Regex(htmlBWith("(.+?)")) }
     private var regHtmlI: Regex<(Substring, Substring)> { try! Regex(htmlIWith("(.+?)")) }
@@ -101,7 +103,7 @@ class BlogEditViewModel: NSObject {
         }
         return arr.joined(separator: "\n")
     }
-
+    
     func addTagB(text: String) -> String {
         "<B>\(text)</B>"
     }
@@ -152,6 +154,24 @@ class BlogEditViewModel: NSObject {
             let result = arr.joined(separator: "\n")
             complete(result)
         })
+    }
+
+    func loadBlog() async -> String {
+        if isUnitBlog {
+            return await vmSettings.getBlogContent()
+        } else {
+            let o = await MLangBlogContent.getDataById(itemBlog!.ID)
+            return o?.CONTENT ?? ""
+        }
+    }
+
+    func saveBlog(content: String) async {
+        if isUnitBlog {
+            await vmSettings.saveBlogContent(content: content)
+        } else {
+            itemBlog!.CONTENT = content
+            await MLangBlogContent.update(item: itemBlog!)
+        }
     }
 }
 

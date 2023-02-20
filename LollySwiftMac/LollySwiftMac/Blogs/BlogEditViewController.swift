@@ -14,7 +14,7 @@ class BlogEditViewController: NSViewController, NSMenuItemValidation  {
     @IBOutlet weak var tvMarked: NSTextView!
     @IBOutlet weak var tvHtml: NSTextView!
     @IBOutlet weak var wvBlog: WKWebView!
-    @IBOutlet weak var tfStatusText: NSTextField!
+    @IBOutlet weak var tfTitle: NSTextField!
 
     var wc: BlogEditWindowController { view.window!.windowController as! BlogEditWindowController }
     var vm: BlogEditViewModel!
@@ -22,24 +22,15 @@ class BlogEditViewController: NSViewController, NSMenuItemValidation  {
     override func viewWillAppear() {
         super.viewWillAppear()
         tvMarked.font = NSFont.systemFont(ofSize: 15)
-        updateStatusText()
+        tfTitle.stringValue = vm.title
         Task {
-            if vm.isUnitBlog {
-                tvMarked.string = await vm.vmSettings.getBlogContent()
-            } else {
-                tvMarked.string = (await MLangBlogContent.getDataById(vm.itemBlog!.ID))?.CONTENT ?? ""
-            }
+            tvMarked.string = await vm.loadBlog()
         }
     }
 
     @IBAction func saveMarked(_ sender: AnyObject) {
         Task {
-            if vm.isUnitBlog {
-                await vm.vmSettings.saveBlogContent(content: tvMarked.string)
-            } else {
-                vm.itemBlog!.CONTENT = tvMarked.string
-                await MLangBlogContent.update(item: vm.itemBlog!)
-            }
+            await vm.saveBlog(content: tvMarked.string)
         }
     }
 
@@ -105,10 +96,6 @@ class BlogEditViewController: NSViewController, NSMenuItemValidation  {
             menuItem.state = menuItem.tag == wc.scPage.selectedSegment ? .on : .off
         }
         return true
-    }
-
-    func updateStatusText() {
-        tfStatusText.stringValue = vm.isUnitBlog ? vm.vmSettings.UNITINFO : vm.itemBlog!.TITLE
     }
 
     deinit {
