@@ -11,7 +11,7 @@ import RxSwift
 import RxBinding
 
 class BlogEditViewModel: NSObject {
-    
+
     var isUnitBlog: Bool
     var vmSettings: SettingsViewModel
     var itemBlog: MLangBlogContent? = nil
@@ -22,7 +22,7 @@ class BlogEditViewModel: NSObject {
         isUnitBlog = item == nil
         title = isUnitBlog ? vmSettings.UNITINFO : itemBlog!.TITLE
     }
-    
+
     private func html1With(_ s: String) -> String {
         "<strong><span style=\"color:#0000ff\">\(s)</span></strong>"
     }
@@ -75,7 +75,7 @@ class BlogEditViewModel: NSObject {
         }
         return arr.joined(separator: "\n")
     }
-    
+
     private let regLine = #/<div>(.*?)</div>/#
     private var regHtmlB: Regex<(Substring, Substring)> { try! Regex(htmlBWith("(.+?)")) }
     private var regHtmlI: Regex<(Substring, Substring)> { try! Regex(htmlIWith("(.+?)")) }
@@ -104,7 +104,7 @@ class BlogEditViewModel: NSObject {
         }
         return arr.joined(separator: "\n")
     }
-    
+
     func addTagB(text: String) -> String {
         "<B>\(text)</B>"
     }
