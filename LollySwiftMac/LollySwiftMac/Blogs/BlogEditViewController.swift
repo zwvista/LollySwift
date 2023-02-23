@@ -21,7 +21,7 @@ class BlogEditViewController: NSViewController, NSMenuItemValidation  {
 
     override func viewWillAppear() {
         super.viewWillAppear()
-        tvMarked.font = NSFont.systemFont(ofSize: 15)
+        tvMarked.font = NSFont.systemFont(ofSize: 16)
         tfTitle.stringValue = vm.title
         Task {
             tvMarked.string = await vm.loadBlog()
