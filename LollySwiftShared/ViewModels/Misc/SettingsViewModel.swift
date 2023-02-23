@@ -154,8 +154,8 @@ class SettingsViewModel: NSObject {
     var isSingleUnit: Bool { USUNITFROM == USUNITTO && USPARTFROM == 1 && USPARTTO == partCount }
     var isSinglePart: Bool { partCount == 1 }
     var LANGINFO: String { "\(selectedLang.LANGNAME)" }
-    var TEXTBOOKINFO: String { "\(LANGINFO)/\(selectedTextbook.TEXTBOOKNAME)" }
-    var UNITINFO: String { "\(TEXTBOOKINFO)/\(USUNITFROMSTR) \(USPARTFROMSTR) ~ \(USUNITTOSTR) \(USPARTTOSTR)" }
+    var TEXTBOOKINFO: String { "\(LANGINFO) | \(selectedTextbook.TEXTBOOKNAME)" }
+    var UNITINFO: String { "\(TEXTBOOKINFO) | \(USUNITFROMSTR) \(USPARTFROMSTR) ~ \(USUNITTOSTR) \(USPARTTOSTR)" }
 
     var selectedUnitFromIndex_ = BehaviorRelay(value: -1)
     var selectedUnitFromIndex: Int { get { selectedUnitFromIndex_.value } set { selectedUnitFromIndex_.accept(newValue) } }
