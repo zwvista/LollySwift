@@ -30,10 +30,10 @@ class LangBlogsDetailViewModel: NSObject {
     func onOK() -> Single<()> {
         itemEdit.save(to: item)
         if isAdd {
-            vm.arrLangBlogs.append(item)
-            return LangBlogsViewModel.create(item: item)
+            vm.arrBlogs.append(item)
+            return LangBlogsViewModel.createBlog(item: item)
         } else {
-            return LangBlogsViewModel.update(item: item)
+            return LangBlogsViewModel.updateBlog(item: item)
         }
     }
 }

@@ -15,8 +15,7 @@ class LangBlogsViewController: NSViewController, NSTableViewDataSource, NSTableV
     @IBOutlet weak var tvGroups: NSTableView!
     @IBOutlet weak var tvBlogs: NSTableView!
 
-    var vmGroups: LangBlogGroupsViewModel!
-    var vmBlogs: LangBlogsViewModel!
+    var vm: LangBlogsViewModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,23 +23,23 @@ class LangBlogsViewController: NSViewController, NSTableViewDataSource, NSTableV
     }
 
     func settingsChanged() {
-        vmGroups = LangBlogGroupsViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) { [unowned self] in
+        vm = LangBlogsViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) { [unowned self] in
             tvGroups.reloadData()
         }
     }
 
     func numberOfRows(in tableView: NSTableView) -> Int {
-        tableView === tvGroups ? vmGroups.arrLangBlogGroups.count : vmBlogs?.arrLangBlogs.count ?? 0
+        tableView === tvGroups ? vm.arrGroups.count : vm.arrBlogs.count
     }
 
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! NSTableCellView
         let columnName = tableColumn!.identifier.rawValue
         if tableView == tvGroups {
-            let item = vmGroups.arrLangBlogGroups[row]
+            let item = vm.arrGroups[row]
             cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
         } else {
-            let item = vmBlogs.arrLangBlogs[row]
+            let item = vm.arrBlogs[row]
             cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
         }
         return cell
@@ -51,8 +50,8 @@ class LangBlogsViewController: NSViewController, NSTableViewDataSource, NSTableV
         if tv === tvGroups {
             let i = tvGroups.selectedRow
             if i == -1 {return}
-            let o = vmGroups.arrLangBlogGroups[i]
-            vmBlogs = LangBlogsViewModel(settings: vmGroups.vmSettings, needCopy: false, groupId: o.ID) { [unowned self] in
+            let o = vm.arrGroups[i]
+            vm.selectGroup(o) { [unowned self] in
                 tvBlogs.reloadData()
             }
         } else {
@@ -61,7 +60,7 @@ class LangBlogsViewController: NSViewController, NSTableViewDataSource, NSTableV
 
     @IBAction func addGroup(_ sender: Any) {
         let detailVC = storyboard!.instantiateController(withIdentifier: "LangBlogGroupsDetailViewController") as! LangBlogGroupsDetailViewController
-        detailVC.vmEdit = LangBlogGroupsDetailViewModel(vm: vmGroups, item: vmGroups.newLangBlogGroup())
+        detailVC.vmEdit = LangBlogGroupsDetailViewModel(vm: vm, item: vm.newGroup())
         detailVC.complete = { [unowned self] in tvGroups.reloadData() }
         presentAsModalWindow(detailVC)
     }
@@ -70,7 +69,7 @@ class LangBlogsViewController: NSViewController, NSTableViewDataSource, NSTableV
         let i = tvGroups.selectedRow
         if i == -1 {return}
         let detailVC = storyboard!.instantiateController(withIdentifier: "LangBlogGroupsDetailViewController") as! LangBlogGroupsDetailViewController
-        detailVC.vmEdit = LangBlogGroupsDetailViewModel(vm: vmGroups, item: vmGroups.arrLangBlogGroups[i])
+        detailVC.vmEdit = LangBlogGroupsDetailViewModel(vm: vm, item: vm.arrGroups[i])
         detailVC.complete = { [unowned self] in
             tvGroups.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<tvGroups.tableColumns.count))
         }
@@ -88,13 +87,13 @@ class LangBlogsViewController: NSViewController, NSTableViewDataSource, NSTableV
     @IBAction func addBlog(_ sender: Any) {
         let i = tvGroups.selectedRow
         if i == -1 {return}
-        let itemGroup = vmGroups.arrLangBlogGroups[i]
+        let itemGroup = vm.arrGroups[i]
         let detailVC = storyboard!.instantiateController(withIdentifier: "LangBlogsDetailViewController") as! LangBlogsDetailViewController
-        let item = vmBlogs.newLangBlog().then {
+        let item = vm.newBlog().then {
             $0.GROUPID = itemGroup.ID
             $0.GROUPNAME = itemGroup.GROUPNAME
         }
-        detailVC.vmEdit = LangBlogsDetailViewModel(vm: vmBlogs, item: item)
+        detailVC.vmEdit = LangBlogsDetailViewModel(vm: vm, item: item)
         detailVC.complete = { [unowned self] in tvGroups.reloadData() }
         presentAsModalWindow(detailVC)
     }
@@ -103,7 +102,7 @@ class LangBlogsViewController: NSViewController, NSTableViewDataSource, NSTableV
         let i = tvGroups.selectedRow
         if i == -1 {return}
         let detailVC = storyboard!.instantiateController(withIdentifier: "LangBlogsDetailViewController") as! LangBlogsDetailViewController
-        detailVC.vmEdit = LangBlogsDetailViewModel(vm: vmBlogs, item: vmBlogs.arrLangBlogs[i])
+        detailVC.vmEdit = LangBlogsDetailViewModel(vm: vm, item: vm.arrBlogs[i])
         detailVC.complete = { [unowned self] in
             tvBlogs.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<tvBlogs.tableColumns.count))
         }
@@ -113,9 +112,9 @@ class LangBlogsViewController: NSViewController, NSTableViewDataSource, NSTableV
     @IBAction func editBlogContent(_ sender: Any) {
         let i = tvBlogs.selectedRow
         if i == -1 {return}
-        let itemBlog = vmBlogs.arrLangBlogs[i]
+        let itemBlog = vm.arrBlogs[i]
         MLangBlogContent.getDataById(itemBlog.ID).subscribe { [unowned self] in
-            (NSApplication.shared.delegate as! AppDelegate).editBlog(settings: vmBlogs.vmSettings, item: $0)
+            (NSApplication.shared.delegate as! AppDelegate).editBlog(settings: vm.vmSettings, item: $0)
         } ~ rx.disposeBag
     }
 }

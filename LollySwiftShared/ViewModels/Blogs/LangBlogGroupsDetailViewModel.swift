@@ -12,13 +12,13 @@ import RxRelay
 import RxBinding
 
 class LangBlogGroupsDetailViewModel: NSObject {
-    var vm: LangBlogGroupsViewModel
+    var vm: LangBlogsViewModel
     var item: MLangBlogGroup
     var itemEdit: MLangBlogGroupEdit
     var isAdd: Bool
     let isOKEnabled = BehaviorRelay(value: false)
 
-    init(vm: LangBlogGroupsViewModel, item: MLangBlogGroup) {
+    init(vm: LangBlogsViewModel, item: MLangBlogGroup) {
         self.vm = vm
         self.item = item
         itemEdit = MLangBlogGroupEdit(x: item)
@@ -30,10 +30,10 @@ class LangBlogGroupsDetailViewModel: NSObject {
     func onOK() -> Single<()> {
         itemEdit.save(to: item)
         if isAdd {
-            vm.arrLangBlogGroups.append(item)
-            return LangBlogGroupsViewModel.create(item: item)
+            vm.arrGroups.append(item)
+            return LangBlogsViewModel.createGroup(item: item)
         } else {
-            return LangBlogGroupsViewModel.update(item: item)
+            return LangBlogsViewModel.updateGroup(item: item)
         }
     }
 }
