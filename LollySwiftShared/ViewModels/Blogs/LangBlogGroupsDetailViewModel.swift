@@ -10,13 +10,13 @@ import Foundation
 
 @MainActor
 class LangBlogGroupsDetailViewModel: NSObject {
-    var vm: LangBlogGroupsViewModel
+    var vm: LangBlogsViewModel
     var item: MLangBlogGroup
     var itemEdit: MLangBlogGroupEdit
     var isAdd: Bool
     @Published var isOKEnabled = false
 
-    init(vm: LangBlogGroupsViewModel, item: MLangBlogGroup) {
+    init(vm: LangBlogsViewModel, item: MLangBlogGroup) {
         self.vm = vm
         self.item = item
         itemEdit = MLangBlogGroupEdit(x: item)
@@ -28,10 +28,10 @@ class LangBlogGroupsDetailViewModel: NSObject {
     func onOK() async {
         itemEdit.save(to: item)
         if isAdd {
-            vm.arrLangBlogGroups.append(item)
-            await LangBlogGroupsViewModel.create(item: item)
+            vm.arrGroups.append(item)
+            await LangBlogsViewModel.createGroup(item: item)
         } else {
-            await LangBlogGroupsViewModel.update(item: item)
+            await LangBlogsViewModel.updateGroup(item: item)
         }
     }
 }

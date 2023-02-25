@@ -12,26 +12,50 @@ import Then
 @MainActor
 class LangBlogsViewModel: NSObject {
     var vmSettings: SettingsViewModel
-    var arrLangBlogs = [MLangBlog]()
+    var arrGroups = [MLangBlogGroup]()
+    var currentGroup: MLangBlogGroup? = nil
+    var arrBlogs = [MLangBlog]()
 
-    init(settings: SettingsViewModel, needCopy: Bool, groupId: Int, complete: @escaping () -> Void) {
+    init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> Void) {
         vmSettings = !needCopy ? settings : SettingsViewModel(settings)
         super.init()
         Task {
-            arrLangBlogs = await MLangBlog.getDataByLangGroup(langid: settings.selectedLang.ID, groupId: groupId)
+            arrGroups = await MLangBlogGroup.getDataByLang(settings.selectedLang.ID)
             complete()
         }
     }
 
-    static func update(item: MLangBlog) async {
+    func selectGroup(_ group: MLangBlogGroup, complete: @escaping () -> Void) {
+        currentGroup = group
+        Task {
+            arrBlogs = await MLangBlog.getDataByLangGroup(langid: vmSettings.selectedLang.ID, groupid: group.ID)
+            complete()
+        }
+    }
+
+    static func updateGroup(item: MLangBlogGroup) async {
+        await MLangBlogGroup.update(item: item)
+    }
+
+    static func createGroup(item: MLangBlogGroup) async {
+        _ = await MLangBlogGroup.create(item: item)
+    }
+
+    func newGroup() -> MLangBlogGroup {
+        MLangBlogGroup().then {
+            $0.LANGID = vmSettings.selectedLang.ID
+        }
+    }
+
+    static func updateBlog(item: MLangBlog) async {
         await MLangBlog.update(item: item)
     }
 
-    static func create(item: MLangBlog) async {
+    static func createBlog(item: MLangBlog) async {
         _ = await MLangBlog.create(item: item)
     }
 
-    func newLangBlog() -> MLangBlog {
+    func newBlog() -> MLangBlog {
         MLangBlog().then {
             $0.LANGID = vmSettings.selectedLang.ID
         }

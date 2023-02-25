@@ -28,9 +28,9 @@ class MLangBlog: NSObject, Codable {
         return await RestApi.getRecords(MLangBlogs.self, url: url)
     }
 
-    static func getDataByLangGroup(langid: Int, groupId: Int) async -> [MLangBlog] {
+    static func getDataByLangGroup(langid: Int, groupid: Int) async -> [MLangBlog] {
         // SQL: SELECT * FROM VLANGBLOGS WHERE LANGID=? AND GROUPID=?
-        let url = "\(CommonApi.urlAPI)VLANGBLOGS?filter=LANGID,eq,\(langid)&GROUPID,eq,\(groupId)"
+        let url = "\(CommonApi.urlAPI)VLANGBLOGS?filter=LANGID,eq,\(langid)&GROUPID,eq,\(groupid)"
         return await RestApi.getRecords(MLangBlogs.self, url: url)
     }
 

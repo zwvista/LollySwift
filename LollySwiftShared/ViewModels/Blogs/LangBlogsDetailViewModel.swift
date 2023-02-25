@@ -28,10 +28,10 @@ class LangBlogsDetailViewModel: NSObject {
     func onOK() async {
         itemEdit.save(to: item)
         if isAdd {
-            vm.arrLangBlogs.append(item)
-            await LangBlogsViewModel.create(item: item)
+            vm.arrBlogs.append(item)
+            await LangBlogsViewModel.createBlog(item: item)
         } else {
-            await LangBlogsViewModel.update(item: item)
+            await LangBlogsViewModel.updateBlog(item: item)
         }
     }
 }
