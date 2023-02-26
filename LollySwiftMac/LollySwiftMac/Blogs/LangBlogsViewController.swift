@@ -121,6 +121,10 @@ class LangBlogsViewController: NSViewController, NSTableViewDataSource, NSTableV
             (NSApplication.shared.delegate as! AppDelegate).editBlog(settings: vm.vmSettings, item: $0)
         } ~ rx.disposeBag
     }
+
+    deinit {
+        print("DEBUG: \(className) deinit")
+    }
 }
 
 class LangBlogsWindowController: NSWindowController, NSWindowDelegate {
