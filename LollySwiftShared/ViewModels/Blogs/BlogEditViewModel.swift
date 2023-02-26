@@ -23,26 +23,26 @@ class BlogEditViewModel: NSObject {
         title = isUnitBlog ? vmSettings.UNITINFO : itemBlog!.TITLE
     }
 
-    private func html1With(_ s: String) -> String {
+    private static func html1With(_ s: String) -> String {
         "<strong><span style=\"color:#0000ff\">\(s)</span></strong>"
     }
-    private func htmlWordWith(_ s: String) -> String { html1With(s + "：") }
-    private func htmlBWith(_ s: String) -> String { html1With(s) }
+    private static func htmlWordWith(_ s: String) -> String { html1With(s + "：") }
+    private static func htmlBWith(_ s: String) -> String { html1With(s) }
     // tag for explantion 1
-    private func htmlE1With(_ s: String) -> String {
+    private static func htmlE1With(_ s: String) -> String {
         "<span style=\"color:#006600\">\(s)</span>"
     }
-    private func html2With(_ s: String) -> String {
+    private static func html2With(_ s: String) -> String {
         "<span style=\"color:#cc00cc\">\(s)</span>"
     }
     // tag for explantion 2
-    private func htmlE2With(_ s: String) -> String { html2With(s) }
-    private func htmlIWith(_ s: String) -> String { "<strong>\(html2With(s))</strong>" }
-    private let htmlEmptyLine = "<div><br></div>"
-    private let regMarkedEntry = /(\*\*?)\s*(.*?)：(.*?)：(.*)/
-    private let regMarkedB = #/<B>(.+?)</B>/#
-    private let regMarkedI = #/<I>(.+?)</I>/#
-    func markedToHtml(text: String) -> String {
+    private static func htmlE2With(_ s: String) -> String { html2With(s) }
+    private static func htmlIWith(_ s: String) -> String { "<strong>\(html2With(s))</strong>" }
+    private static let htmlEmptyLine = "<div><br></div>"
+    private static let regMarkedEntry = /(\*\*?)\s*(.*?)：(.*?)：(.*)/
+    private static let regMarkedB = #/<B>(.+?)</B>/#
+    private static let regMarkedI = #/<I>(.+?)</I>/#
+    static func markedToHtml(text: String) -> String {
         var arr = text.components(separatedBy: "\n")
         var i = 0
         while i < arr.count {
@@ -76,11 +76,11 @@ class BlogEditViewModel: NSObject {
         return arr.joined(separator: "\n")
     }
 
-    private let regLine = #/<div>(.*?)</div>/#
-    private var regHtmlB: Regex<(Substring, Substring)> { try! Regex(htmlBWith("(.+?)")) }
-    private var regHtmlI: Regex<(Substring, Substring)> { try! Regex(htmlIWith("(.+?)")) }
-    private var regHtmlEntry: Regex<(Substring, Substring, Substring, Optional<Substring>, Optional<Substring>)> { try!  Regex("(<li>|<br>)\(htmlWordWith("(.*?)"))(?:\(htmlE1With("(.*?)")))?(?:\(htmlE2With("(.*?)")))?(?:</li>)?") }
-    func htmlToMarked(text: String) -> String {
+    private static let regLine = #/<div>(.*?)</div>/#
+    private static var regHtmlB: Regex<(Substring, Substring)> { try! Regex(htmlBWith("(.+?)")) }
+    private static var regHtmlI: Regex<(Substring, Substring)> { try! Regex(htmlIWith("(.+?)")) }
+    private static var regHtmlEntry: Regex<(Substring, Substring, Substring, Optional<Substring>, Optional<Substring>)> { try!  Regex("(<li>|<br>)\(htmlWordWith("(.*?)"))(?:\(htmlE1With("(.*?)")))?(?:\(htmlE2With("(.*?)")))?(?:</li>)?") }
+    static func htmlToMarked(text: String) -> String {
         var arr = text.split(separator: "\n").map { String($0) }
         var i = 0
         while i < arr.count {
@@ -105,25 +105,25 @@ class BlogEditViewModel: NSObject {
         return arr.joined(separator: "\n")
     }
 
-    func addTagB(text: String) -> String {
+    static func addTagB(text: String) -> String {
         "<B>\(text)</B>"
     }
-    func addTagI(text: String) -> String {
+    static func addTagI(text: String) -> String {
         "<I>\(text)</I>"
     }
-    func removeTagBI(text: String) -> String {
+    static func removeTagBI(text: String) -> String {
         text.replacing(#/</?[BI]>/#, with: "")
     }
-    func exchangeTagBI(text: String) -> String {
+    static func exchangeTagBI(text: String) -> String {
         var text = text.replacing(#/<(/)?B>/#) { m in "<\(m.1 ?? "")Temp>" }
         text = text.replacing(#/<(/)?I>/#) { m in "<\(m.1 ?? "")B>" }
         text = text.replacing(#/<(/)?Temp>/#) { m in "<\(m.1 ?? "")I>" }
         return text
     }
-    func getExplanation(text: String) -> String {
+    static func getExplanation(text: String) -> String {
         "* \(text)：：\n"
     }
-    func getPatternUrl(patternNo: String) -> String {
+    static func getPatternUrl(patternNo: String) -> String {
         "http://viethuong.web.fc2.com/MONDAI/\(patternNo).html"
     }
     
@@ -136,13 +136,13 @@ class BlogEditViewModel: NSObject {
             return t
         }
         var arr = text.components(separatedBy: "\n")
-        vmSettings.getNotes(wordCount: arr.count, isNoteEmpty: { [unowned self] in
-            let m = arr[$0].firstMatch(of: regMarkedEntry)
+        vmSettings.getNotes(wordCount: arr.count, isNoteEmpty: {
+            let m = arr[$0].firstMatch(of: BlogEditViewModel.regMarkedEntry)
             if m == nil { return false }
             let word = String(m!.2)
             return word.allSatisfy { $0 != "（" && !bigDigits.contains($0) }
         }, getOne: { [unowned self] i in
-            let m = arr[i].firstMatch(of: regMarkedEntry)!
+            let m = arr[i].firstMatch(of: BlogEditViewModel.regMarkedEntry)!
             let (s1, word, s3, s4) = (String(m.1), String(m.2), String(m.3), String(m.4))
             vmSettings.getNote(word: word).subscribe { note in
                 let j = note.firstIndex { "0"..."9" ~= $0 }

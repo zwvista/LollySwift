@@ -16,6 +16,8 @@ class LangBlogsViewModel: NSObject {
     var arrGroups = [MLangBlogGroup]()
     var currentGroup: MLangBlogGroup? = nil
     var arrBlogs = [MLangBlog]()
+    var currentBlog: MLangBlog? = nil
+    var blogContent = ""
 
     init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> Void) {
         vmSettings = !needCopy ? settings : SettingsViewModel(settings)
@@ -26,9 +28,9 @@ class LangBlogsViewModel: NSObject {
         } ~ rx.disposeBag
     }
 
-    func selectGroup(_ group: MLangBlogGroup, complete: @escaping () -> Void) {
+    func selectGroup(_ group: MLangBlogGroup?, complete: @escaping () -> Void) {
         currentGroup = group
-        MLangBlog.getDataByLangGroup(langid: vmSettings.selectedLang.ID, groupid: group.ID).subscribe { [unowned self] in
+        MLangBlog.getDataByLangGroup(langid: vmSettings.selectedLang.ID, groupid: group?.ID ?? 0).subscribe { [unowned self] in
             arrBlogs = $0
             complete()
         } ~ rx.disposeBag
@@ -46,6 +48,14 @@ class LangBlogsViewModel: NSObject {
         MLangBlogGroup().then {
             $0.LANGID = vmSettings.selectedLang.ID
         }
+    }
+
+    func selectBlog(_ blog: MLangBlog?, complete: @escaping () -> Void) {
+        currentBlog = blog
+        MLangBlogContent.getDataById(blog?.ID ?? 0).subscribe { [unowned self] in
+            blogContent = $0?.CONTENT ?? ""
+            complete()
+        } ~ rx.disposeBag
     }
 
     static func updateBlog(item: MLangBlog) -> Single<()> {

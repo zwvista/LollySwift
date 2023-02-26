@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import WebKit
 import RxSwift
 import RxBinding
 
@@ -14,6 +15,7 @@ class LangBlogsViewController: NSViewController, NSTableViewDataSource, NSTableV
 
     @IBOutlet weak var tvGroups: NSTableView!
     @IBOutlet weak var tvBlogs: NSTableView!
+    @IBOutlet weak var wvBlog: WKWebView!
 
     var vm: LangBlogsViewModel!
 
@@ -49,12 +51,14 @@ class LangBlogsViewController: NSViewController, NSTableViewDataSource, NSTableV
         let tv = notification.object as! NSTableView
         if tv === tvGroups {
             let i = tvGroups.selectedRow
-            if i == -1 {return}
-            let o = vm.arrGroups[i]
-            vm.selectGroup(o) { [unowned self] in
+            vm.selectGroup(i == -1 ? nil : vm.arrGroups[i]) { [unowned self] in
                 tvBlogs.reloadData()
             }
         } else {
+            let i = tvBlogs.selectedRow
+            vm.selectBlog(i == -1 ? nil : vm.arrBlogs[i]) { [unowned self] in
+                wvBlog.loadHTMLString(BlogEditViewModel.markedToHtml(text: vm.blogContent), baseURL: nil)
+            }
         }
     }
 
