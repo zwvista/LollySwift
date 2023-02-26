@@ -35,7 +35,7 @@ class BlogEditViewController: NSViewController, NSMenuItemValidation  {
     }
 
     @IBAction func htmlToMarked(_ sender: AnyObject) {
-        tvMarked.string = vm.htmlToMarked(text: tvHtml.string)
+        tvMarked.string = BlogEditViewModel.htmlToMarked(text: tvHtml.string)
     }
 
     func replaceSelection(f: (String) -> String) {
@@ -46,20 +46,20 @@ class BlogEditViewController: NSViewController, NSMenuItemValidation  {
     }
 
     @IBAction func addTagB(_ sender: AnyObject) {
-        replaceSelection(f: vm.addTagB)
+        replaceSelection(f: BlogEditViewModel.addTagB)
     }
     @IBAction func addTagI(_ sender: AnyObject) {
-        replaceSelection(f: vm.addTagI)
+        replaceSelection(f: BlogEditViewModel.addTagI)
     }
     @IBAction func removeTagBI(_ sender: AnyObject) {
-        replaceSelection(f: vm.removeTagBI)
+        replaceSelection(f: BlogEditViewModel.removeTagBI)
     }
     @IBAction func exchangeTagBI(_ sender: AnyObject) {
-        replaceSelection(f: vm.exchangeTagBI)
+        replaceSelection(f: BlogEditViewModel.exchangeTagBI)
     }
     @IBAction func addExplanation(_ sender: AnyObject) {
         let s = NSPasteboard.general.string(forType: .string) ?? ""
-        replaceSelection { _ in vm.getExplanation(text: s) }
+        replaceSelection { _ in BlogEditViewModel.getExplanation(text: s) }
         (NSApplication.shared.delegate as! AppDelegate).searchWord(word: s)
     }
     @IBAction func switchPage(_ sender: AnyObject) {
@@ -71,17 +71,17 @@ class BlogEditViewController: NSViewController, NSMenuItemValidation  {
             n = (sender as! NSSegmentedControl).selectedSegment
         }
         if n == 0 {
-            tvHtml.string = vm.markedToHtml(text: tvMarked.string)
+            tvHtml.string = BlogEditViewModel.markedToHtml(text: tvMarked.string)
             let str = CommonApi.toHtml(text: tvHtml.string)
             wvBlog.loadHTMLString(str, baseURL: nil)
             MacApi.copyText(tvHtml.string)
         } else {
-            let url = vm.getPatternUrl(patternNo: wc.patternNo)
+            let url = BlogEditViewModel.getPatternUrl(patternNo: wc.patternNo)
             wvBlog.load(URLRequest(url: URL(string: url)!))
         }
     }
     @IBAction func openPattern(_ sender: AnyObject) {
-        let url = vm.getPatternUrl(patternNo: wc.patternNo)
+        let url = BlogEditViewModel.getPatternUrl(patternNo: wc.patternNo)
         MacApi.openURL(url)
     }
     @IBAction func addNotes(_ sender: AnyObject) {
