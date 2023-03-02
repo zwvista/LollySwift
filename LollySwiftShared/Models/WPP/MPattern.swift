@@ -19,10 +19,9 @@ class MPattern: NSObject, Codable {
     dynamic var ID = 0
     dynamic var LANGID = 0
     dynamic var PATTERN = ""
-    dynamic var NOTE = ""
     dynamic var TAGS = ""
-    dynamic var IDS_MERGE: String?
-    dynamic var PATTERNS_SPLIT: String?
+    dynamic var TITLE = ""
+    dynamic var URL = ""
 
     override init() {
     }
@@ -77,32 +76,30 @@ class MPattern: NSObject, Codable {
 class MPatternEdit: ObservableObject {
     let ID: String
     @Published var PATTERN: String
-    @Published var NOTE: String
     @Published var TAGS: String
+    @Published var TITLE: String
+    @Published var URL: String
 
     init() {
         ID = ""
         PATTERN = ""
-        NOTE = ""
         TAGS = ""
+        TITLE = ""
+        URL = ""
     }
 
     init(x: MPattern) {
         ID = "\(x.ID)"
         PATTERN = x.PATTERN
-        NOTE = x.NOTE
         TAGS = x.TAGS
+        TITLE = x.TITLE
+        URL = x.URL
     }
 
     func save(to x: MPattern) {
         x.PATTERN = PATTERN
-        x.NOTE = NOTE
         x.TAGS = TAGS
+        x.TITLE = TITLE
+        x.URL = URL
     }
-}
-
-@objcMembers
-class MPatternVariation: NSObject {
-    dynamic var index = 0
-    dynamic var variation = ""
 }

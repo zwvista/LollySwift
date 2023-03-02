@@ -14,8 +14,9 @@ class PatternsDetailViewController: NSViewController {
 
     @IBOutlet weak var tfID: NSTextField!
     @IBOutlet weak var tfPattern: NSTextField!
-    @IBOutlet weak var tfNote: NSTextField!
     @IBOutlet weak var tfTags: NSTextField!
+    @IBOutlet weak var tfTitle: NSTextField!
+    @IBOutlet weak var tfURL: NSTextField!
     @IBOutlet weak var btnOK: NSButton!
 
     var complete: (() -> Void)?
@@ -28,8 +29,9 @@ class PatternsDetailViewController: NSViewController {
         super.viewDidLoad()
         tfID.stringValue = itemEdit.ID
         itemEdit.$PATTERN <~> tfPattern.textProperty ~ subscriptions
-        itemEdit.$NOTE <~> tfNote.textProperty ~ subscriptions
         itemEdit.$TAGS <~> tfTags.textProperty ~ subscriptions
+        itemEdit.$TITLE <~> tfTitle.textProperty ~ subscriptions
+        itemEdit.$URL <~> tfURL.textProperty ~ subscriptions
         btnOK.tapPublisher.sink { [unowned self] in
             Task {
                 await vmEdit.onOK()
@@ -42,7 +44,7 @@ class PatternsDetailViewController: NSViewController {
     override func viewDidAppear() {
         super.viewDidAppear()
         // https://stackoverflow.com/questions/24235815/cocoa-how-to-set-window-title-from-within-view-controller-in-swift
-        (!vmEdit.isAdd ? tfPattern : tfNote).becomeFirstResponder()
+        (!vmEdit.isAdd ? tfPattern : tfTags).becomeFirstResponder()
         view.window?.title = vmEdit.isAdd ? "New Pattern" : item.PATTERN
     }
 
