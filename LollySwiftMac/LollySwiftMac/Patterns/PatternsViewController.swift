@@ -10,7 +10,7 @@ import Cocoa
 import WebKit
 import Combine
 
-class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate, NSMenuItemValidation, NSToolbarItemValidation {
+class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate, NSMenuItemValidation {
 
     @IBOutlet weak var wvWebPage: WKWebView!
     @IBOutlet weak var scScopeFilter: NSSegmentedControl!
@@ -25,10 +25,6 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     var vmSettings: SettingsViewModel! { vm.vmSettings }
     var arrPatterns: [MPattern] { vm.arrPatternsFiltered }
     var subscriptions = Set<AnyCancellable>()
-
-    // https://developer.apple.com/videos/play/wwdc2011/120/
-    // https://stackoverflow.com/questions/2121907/drag-drop-reorder-rows-on-nstableview
-    let tableRowDragType = NSPasteboard.PasteboardType(rawValue: "private.table-row")
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,13 +98,6 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
         return true
     }
 
-    // https://stackoverflow.com/questions/8017822/how-to-enable-disable-nstoolbaritem
-    func validateToolbarItem(_ item: NSToolbarItem) -> Bool {
-        let s = item.paletteLabel
-        let enabled = !(s == "Add WebPage" && vm.selectedPatternID == 0)
-        return enabled
-    }
-
     @IBAction func copyPattern(_ sender: AnyObject) {
         MacApi.copyText(vm.selectedPattern)
     }
@@ -168,7 +157,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     }
 
     func updateStatusText() {
-        tfStatusText.stringValue = "\(tableView.numberOfRows) Patterns"
+        tfStatusText.stringValue = "\(tableView.numberOfRows) Patterns in \(vmSettings.UNITINFO)"
     }
 
     @IBAction func doubleAction(_ sender: AnyObject) {

@@ -80,7 +80,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H5k-Cg-pWu">
-                                <rect key="frame" x="0.0" y="384" width="464" height="32"/>
+                                <rect key="frame" x="0.0" y="410" width="464" height="32"/>
                                 <subviews>
                                     <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hoJ-Fy-vSX">
                                         <rect key="frame" x="6" y="4" width="195" height="22"/>
@@ -162,22 +162,14 @@
                                 </customSpacing>
                             </stackView>
                             <splitView arrangesAllSubviews="NO" dividerStyle="paneSplitter" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4YO-rW-bau">
-                                <rect key="frame" x="0.0" y="0.0" width="1200" height="384"/>
+                                <rect key="frame" x="0.0" y="0.0" width="1200" height="410"/>
                                 <subviews>
                                     <customView misplaced="YES" id="6iF-vC-aM1">
-                                        <rect key="frame" x="0.0" y="0.0" width="429" height="384"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="429" height="410"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
-                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2Jf-4e-nAu">
-                                                <rect key="frame" x="-2" y="0.0" width="4" height="16"/>
-                                                <textFieldCell key="cell" lineBreakMode="clipping" id="CgC-hG-o1W">
-                                                    <font key="font" metaFont="system"/>
-                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                </textFieldCell>
-                                            </textField>
                                             <scrollView misplaced="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dB7-6k-Kcz">
-                                                <rect key="frame" x="0.0" y="-36" width="423" height="420"/>
+                                                <rect key="frame" x="0.0" y="-10" width="423" height="420"/>
                                                 <clipView key="contentView" id="yYf-IS-emK">
                                                     <rect key="frame" x="1" y="1" width="421" height="418"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -406,6 +398,14 @@
                                                     <outlet property="menu" destination="lQY-c3-QUZ" id="oE2-A9-PuI"/>
                                                 </connections>
                                             </scrollView>
+                                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2Jf-4e-nAu">
+                                                <rect key="frame" x="-2" y="26" width="4" height="16"/>
+                                                <textFieldCell key="cell" lineBreakMode="clipping" id="CgC-hG-o1W">
+                                                    <font key="font" metaFont="system"/>
+                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                </textFieldCell>
+                                            </textField>
                                         </subviews>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="dB7-6k-Kcz" secondAttribute="trailing" id="JTm-5n-aU0"/>
@@ -413,15 +413,15 @@
                                             <constraint firstItem="dB7-6k-Kcz" firstAttribute="leading" secondItem="6iF-vC-aM1" secondAttribute="leading" id="WJW-rv-p4C"/>
                                             <constraint firstItem="2Jf-4e-nAu" firstAttribute="leading" secondItem="6iF-vC-aM1" secondAttribute="leading" id="ifa-zr-0zO"/>
                                             <constraint firstItem="dB7-6k-Kcz" firstAttribute="top" secondItem="6iF-vC-aM1" secondAttribute="top" id="pCQ-63-FSK"/>
-                                            <constraint firstItem="2Jf-4e-nAu" firstAttribute="top" secondItem="dB7-6k-Kcz" secondAttribute="bottom" constant="-26" id="qfi-Af-f5U"/>
+                                            <constraint firstItem="2Jf-4e-nAu" firstAttribute="top" secondItem="dB7-6k-Kcz" secondAttribute="bottom" id="qfi-Af-f5U"/>
                                         </constraints>
                                     </customView>
                                     <customView misplaced="YES" id="kaA-3e-4Ty">
-                                        <rect key="frame" x="439" y="0.0" width="761" height="384"/>
+                                        <rect key="frame" x="439" y="0.0" width="761" height="410"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
                                             <wkWebView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w1A-W0-K33">
-                                                <rect key="frame" x="0.0" y="0.0" width="807" height="384"/>
+                                                <rect key="frame" x="0.0" y="26" width="807" height="410"/>
                                                 <wkWebViewConfiguration key="configuration">
                                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
                                                     <wkPreferences key="preferences"/>
