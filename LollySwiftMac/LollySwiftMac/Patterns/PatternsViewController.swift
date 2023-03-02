@@ -17,7 +17,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     @IBOutlet weak var scScopeFilter: NSSegmentedControl!
     @IBOutlet weak var sfTextFilter: NSSearchField!
     @IBOutlet weak var tfURL: NSTextField!
-    @IBOutlet weak var tvPatterns: NSTableView!
+    @IBOutlet weak var tableView: NSTableView!
     @IBOutlet weak var tfStatusText: NSTextField!
 
     var vm: PatternsViewModel!
@@ -76,7 +76,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
         guard oldValue != newValue else {return}
         item.setValue(newValue, forKey: key)
         PatternsViewModel.update(item: item).subscribe { [unowned self] _ in
-            tv.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<tvPatterns.tableColumns.count))
+            tv.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<tableView.tableColumns.count))
         } ~ rx.disposeBag
     }
 
@@ -89,8 +89,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     }
 
     func tableViewSelectionDidChange(_ notification: Notification) {
-        let tv = notification.object as! NSTableView
-        let row = tvPatterns.selectedRow
+        let row = tableView.selectedRow
         vm.selectedPatternItem = row == -1 ? nil : arrPatterns[row]
         wvWebPage.load(URLRequest(url: URL(string: vm.selectedPatternItem?.URL ?? "")!))
         if isSpeaking {
@@ -141,7 +140,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
         } ~ rx.disposeBag
     }
     func doRefresh() {
-        tvPatterns.reloadData()
+        tableView.reloadData()
         updateStatusText()
     }
 
@@ -155,22 +154,22 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     @IBAction func addPattern(_ sender: AnyObject) {
         let detailVC = storyboard!.instantiateController(withIdentifier: "PatternsDetailViewController") as! PatternsDetailViewController
         detailVC.vmEdit = PatternsDetailViewModel(vm: vm, item: vm.newPattern())
-        detailVC.complete = { [unowned self] in tvPatterns.reloadData(); addPattern(self) }
+        detailVC.complete = { [unowned self] in tableView.reloadData(); addPattern(self) }
         presentAsSheet(detailVC)
     }
 
     @IBAction func editPattern(_ sender: AnyObject) {
         let detailVC = storyboard!.instantiateController(withIdentifier: "PatternsDetailViewController") as! PatternsDetailViewController
-        let i = tvPatterns.selectedRow
+        let i = tableView.selectedRow
         detailVC.vmEdit = PatternsDetailViewModel(vm: vm, item: arrPatterns[i])
         detailVC.complete = { [unowned self] in
-            tvPatterns.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<tvPatterns.tableColumns.count))
+            tableView.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<tableView.tableColumns.count))
         }
         presentAsModalWindow(detailVC)
     }
 
     func updateStatusText() {
-        tfStatusText.stringValue = "\(tvPatterns.numberOfRows) Patterns"
+        tfStatusText.stringValue = "\(tableView.numberOfRows) Patterns"
     }
 
     @IBAction func doubleAction(_ sender: AnyObject) {

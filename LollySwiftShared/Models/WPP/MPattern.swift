@@ -19,9 +19,6 @@ class MPattern: NSObject, Codable {
     dynamic var TITLE = ""
     dynamic var URL = ""
 
-    override init() {
-    }
-
     static func getDataByLang(_ langid: Int) -> Single<[MPattern]> {
         // SQL: SELECT * FROM PATTERNS WHERE LANGID=?
         let url = "\(CommonApi.urlAPI)VPATTERNS?filter=LANGID,eq,\(langid)&order=PATTERN"
