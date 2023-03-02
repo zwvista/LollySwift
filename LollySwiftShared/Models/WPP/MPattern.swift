@@ -15,17 +15,16 @@ class MPattern: NSObject, Codable {
     dynamic var ID = 0
     dynamic var LANGID = 0
     dynamic var PATTERN = ""
-    dynamic var NOTE = ""
     dynamic var TAGS = ""
-    dynamic var IDS_MERGE: String?
-    dynamic var PATTERNS_SPLIT: String?
+    dynamic var TITLE = ""
+    dynamic var URL = ""
 
     override init() {
     }
 
     static func getDataByLang(_ langid: Int) -> Single<[MPattern]> {
         // SQL: SELECT * FROM PATTERNS WHERE LANGID=?
-        let url = "\(CommonApi.urlAPI)PATTERNS?filter=LANGID,eq,\(langid)&order=PATTERN"
+        let url = "\(CommonApi.urlAPI)VPATTERNS?filter=LANGID,eq,\(langid)&order=PATTERN"
         return RestApi.getRecords(url: url)
     }
 
@@ -71,32 +70,30 @@ class MPattern: NSObject, Codable {
 class MPatternEdit {
     let ID: String
     let PATTERN: BehaviorRelay<String>
-    let NOTE: BehaviorRelay<String>
     let TAGS: BehaviorRelay<String>
+    let TITLE: BehaviorRelay<String>
+    let URL: BehaviorRelay<String>
 
     init() {
         ID = ""
         PATTERN = BehaviorRelay(value: "")
-        NOTE = BehaviorRelay(value: "")
         TAGS = BehaviorRelay(value: "")
+        TITLE = BehaviorRelay(value: "")
+        URL = BehaviorRelay(value: "")
     }
 
     init(x: MPattern) {
         ID = "\(x.ID)"
         PATTERN = BehaviorRelay(value: x.PATTERN)
-        NOTE = BehaviorRelay(value: x.NOTE)
         TAGS = BehaviorRelay(value: x.TAGS)
+        TITLE = BehaviorRelay(value: x.TITLE)
+        URL = BehaviorRelay(value: x.URL)
     }
 
     func save(to x: MPattern) {
         x.PATTERN = PATTERN.value
-        x.NOTE = NOTE.value
         x.TAGS = TAGS.value
+        x.TITLE = TITLE.value
+        x.URL = URL.value
     }
-}
-
-@objcMembers
-class MPatternVariation: NSObject {
-    dynamic var index = 0
-    dynamic var variation = ""
 }

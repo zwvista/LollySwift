@@ -34,7 +34,7 @@ class PatternsViewModel: NSObject {
         Observable.combineLatest(arrPatterns_, textFilter_, scopeFilter_).subscribe { [unowned self] _ in
             arrPatternsFiltered = arrPatterns
             if !textFilter.isEmpty {
-                arrPatternsFiltered = arrPatternsFiltered.filter { (scopeFilter == "Pattern" ? $0.PATTERN : scopeFilter == "Note" ? $0.NOTE : $0.TAGS).lowercased().contains(textFilter.lowercased()) }
+                arrPatternsFiltered = arrPatternsFiltered.filter { (scopeFilter == "Pattern" ? $0.PATTERN : $0.TAGS).lowercased().contains(textFilter.lowercased()) }
             }
         } ~ rx.disposeBag
 
