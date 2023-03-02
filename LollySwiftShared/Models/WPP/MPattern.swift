@@ -21,7 +21,7 @@ class MPattern: NSObject, Codable {
 
     static func getDataByLang(_ langid: Int) -> Single<[MPattern]> {
         // SQL: SELECT * FROM PATTERNS WHERE LANGID=?
-        let url = "\(CommonApi.urlAPI)VPATTERNS?filter=LANGID,eq,\(langid)&order=PATTERN"
+        let url = "\(CommonApi.urlAPI)PATTERNS?filter=LANGID,eq,\(langid)&order=PATTERN"
         return RestApi.getRecords(url: url)
     }
 

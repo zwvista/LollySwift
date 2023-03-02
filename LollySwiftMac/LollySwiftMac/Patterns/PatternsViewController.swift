@@ -62,11 +62,10 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     }
 
     @IBAction func endEditing(_ sender: NSTextField) {
-        let tv = sender.superview!.superview!.superview as! NSTableView
-        let row = tv.row(for: sender)
+        let row = tableView.row(for: sender)
         guard row != -1 else {return}
-        let col = tv.column(for: sender)
-        let key = tv.tableColumns[col].identifier.rawValue
+        let col = tableView.column(for: sender)
+        let key = tableView.tableColumns[col].identifier.rawValue
         let item = arrPatterns[row]
         let oldValue = String(describing: item.value(forKey: key) ?? "")
         var newValue = sender.stringValue
@@ -76,7 +75,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
         guard oldValue != newValue else {return}
         item.setValue(newValue, forKey: key)
         PatternsViewModel.update(item: item).subscribe { [unowned self] _ in
-            tv.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<tableView.tableColumns.count))
+            tableView.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<tableView.tableColumns.count))
         } ~ rx.disposeBag
     }
 
@@ -129,9 +128,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     }
 
     func settingsChanged() {
-        vm = PatternsViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) { [unowned self] in
-            doRefresh()
-        }
+        vm = PatternsViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) {}
         synth.setVoice(NSSpeechSynthesizer.VoiceName(rawValue: vmSettings.macVoiceName))
         _ = vm.textFilter_ <~> sfTextFilter.rx.text.orEmpty
         _ = vm.scopeFilter_ <~> scScopeFilter.rx.selectedLabel

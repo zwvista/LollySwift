@@ -16,7 +16,6 @@ class MWebTextbook: NSObject, Codable {
     dynamic var TEXTBOOKID = 0
     dynamic var TEXTBOOKNAME = ""
     dynamic var UNIT = 0
-    dynamic var WEBPAGEID = 0
     dynamic var TITLE = ""
     dynamic var URL = ""
 

@@ -193,7 +193,7 @@ class SettingsViewModel: NSObject {
     static let arrToTypes = ["Unit", "Part", "To"]
     static let arrScopeWordFilters = ["Word", "Note"]
     static let arrScopePhraseFilters = ["Phrase", "Translation"]
-    static let arrScopePatternFilters = ["Pattern", "Note", "Tags"]
+    static let arrScopePatternFilters = ["Pattern", "Tags"]
     static let reviewModes = ["Review(Auto)", "Review(Manual)", "Test", "Textbook"]
 
     var arrAutoCorrect = [MAutoCorrect]()
