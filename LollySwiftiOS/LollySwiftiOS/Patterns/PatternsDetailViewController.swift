@@ -13,8 +13,9 @@ class PatternsDetailViewController: UITableViewController {
 
     @IBOutlet weak var tfID: UITextField!
     @IBOutlet weak var tfPattern: UITextField!
-    @IBOutlet weak var tfNote: UITextField!
     @IBOutlet weak var tfTags: UITextField!
+    @IBOutlet weak var tfTitle: UITextField!
+    @IBOutlet weak var tfURL: UITextField!
     @IBOutlet weak var btnDone: UIBarButtonItem!
 
     var vmEdit: PatternsDetailViewModel!
@@ -25,15 +26,16 @@ class PatternsDetailViewController: UITableViewController {
         super.viewDidLoad()
         tfID.text = itemEdit.ID
         _ = itemEdit.PATTERN <~> tfPattern.rx.textInput
-        _ = itemEdit.NOTE <~> tfNote.rx.textInput
         _ = itemEdit.TAGS <~> tfTags.rx.textInput
+        _ = itemEdit.TITLE <~> tfTags.rx.textInput
+        _ = itemEdit.URL <~> tfTags.rx.textInput
         _ = vmEdit.isOKEnabled ~> btnDone.rx.isEnabled
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         // https://stackoverflow.com/questions/7525437/how-to-set-focus-to-a-textfield-in-iphone
-        (vmEdit.isAdd ? tfPattern : tfNote).becomeFirstResponder()
+        (vmEdit.isAdd ? tfPattern : tfTags).becomeFirstResponder()
     }
 
     deinit {
