@@ -27,8 +27,8 @@ class PatternsDetailViewController: UITableViewController {
         tfID.text = itemEdit.ID
         _ = itemEdit.PATTERN <~> tfPattern.rx.textInput
         _ = itemEdit.TAGS <~> tfTags.rx.textInput
-        _ = itemEdit.TITLE <~> tfTags.rx.textInput
-        _ = itemEdit.URL <~> tfTags.rx.textInput
+        _ = itemEdit.TITLE <~> tfTitle.rx.textInput
+        _ = itemEdit.URL <~> tfURL.rx.textInput
         _ = vmEdit.isOKEnabled ~> btnDone.rx.isEnabled
     }
 
