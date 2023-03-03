@@ -99,14 +99,6 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
             alertController.addAction(deleteAction2)
             let editAction2 = UIAlertAction(title: "Edit", style: .default) { _ in edit() }
             alertController.addAction(editAction2)
-            let browseWebPagesAction = UIAlertAction(title: "Browse Web Pages", style: .default) { [unowned self] _ in
-                performSegue(withIdentifier: "browse pages", sender: item)
-            }
-            alertController.addAction(browseWebPagesAction)
-            let editWebPagesAction = UIAlertAction(title: "Edit Web Pages", style: .default) { [unowned self] _ in
-                performSegue(withIdentifier: "edit pages", sender: item)
-            }
-            alertController.addAction(editWebPagesAction)
             let copyPatternAction = UIAlertAction(title: "Copy Pattern", style: .default) { _ in
                 iOSApi.copyText(item.PATTERN)
             }
@@ -133,10 +125,8 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
         if let controller = (segue.destination as? UINavigationController)?.topViewController as? PatternsDetailViewController {
             let item = segue.identifier == "add" ? vm.newPattern() : sender as! MPattern
             controller.vmEdit = PatternsDetailViewModel(vm: vm, item: item)
-        } else if let controller = segue.destination as? PatternsWebPagesBrowseViewController {
-            controller.vm = PatternsWebPagesViewModel(settings: vmSettings, needCopy: false, item: sender as? MPattern)
-        } else if let controller = segue.destination as? PatternsWebPagesListViewController {
-            controller.vm = PatternsWebPagesViewModel(settings: vmSettings, needCopy: false, item: sender as? MPattern)
+        } else if let controller = segue.destination as? PatternsWebPageViewController {
+            controller.item = sender as? MPattern
         }
     }
 
