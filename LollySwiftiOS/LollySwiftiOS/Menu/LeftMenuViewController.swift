@@ -11,7 +11,7 @@ import UIKit
 public class LeftMenuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var tableView: UITableView?
-    var storyboardMain, storyboardWords, storyboardPhrases, storyboardPatterns: UIStoryboard!
+    var storyboardMisc, storyboardWords, storyboardPhrases, storyboardPatterns: UIStoryboard!
 
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -36,7 +36,7 @@ public class LeftMenuViewController: UIViewController, UITableViewDelegate, UITa
         // https://stackoverflow.com/questions/13733354/uitableview-doesnt-scroll
         self.view.bringSubviewToFront(self.tableView!)
 
-        storyboardMain = UIStoryboard(name: "Main", bundle: nil)
+        storyboardMisc = UIStoryboard(name: "Misc", bundle: nil)
         storyboardWords = UIStoryboard(name: "Words", bundle: nil)
         storyboardPhrases = UIStoryboard(name: "Phrases", bundle: nil)
         storyboardPatterns = UIStoryboard(name: "Patterns", bundle: nil)
@@ -48,10 +48,10 @@ public class LeftMenuViewController: UIViewController, UITableViewDelegate, UITa
         tableView.deselectRow(at: indexPath, animated: true)
         switch indexPath.row {
         case 0:
-            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboardMain.instantiateViewController(withIdentifier: "SearchViewController")), animated: true)
+            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboardMisc.instantiateViewController(withIdentifier: "SearchViewController")), animated: true)
             self.sideMenuViewController!.hideMenuViewController()
         case 1:
-            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboardMain.instantiateViewController(withIdentifier: "SettingsViewController")), animated: true)
+            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboardMisc.instantiateViewController(withIdentifier: "SettingsViewController")), animated: true)
             self.sideMenuViewController!.hideMenuViewController()
         case 2:
             self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboardWords.instantiateViewController(withIdentifier: "WordsUnitViewController")), animated: true)
