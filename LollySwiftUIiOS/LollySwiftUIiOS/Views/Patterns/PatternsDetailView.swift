@@ -24,14 +24,19 @@ struct PatternsDetailView: View {
                     TextField("PATTERN", text: $vmEdit.itemEdit.PATTERN)
                 }
                 HStack {
-                    Text("NOTE:")
-                    Spacer()
-                    TextField("NOTE", text: $vmEdit.itemEdit.NOTE)
-                }
-                HStack {
                     Text("TAGS:")
                     Spacer()
                     TextField("TAGS", text: $vmEdit.itemEdit.TAGS)
+                }
+                HStack {
+                    Text("TITLE:")
+                    Spacer()
+                    TextField("NOTE", text: $vmEdit.itemEdit.TITLE)
+                }
+                HStack {
+                    Text("URL:")
+                    Spacer()
+                    TextField("NOTE", text: $vmEdit.itemEdit.URL)
                 }
             }
             .navigationBarItems(leading: Button("Cancel", role: .cancel) {
