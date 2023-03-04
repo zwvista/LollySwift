@@ -137,14 +137,14 @@
                         <outlet property="sbTextFilter" destination="1D0-3n-VX2" id="cQw-q4-073"/>
                         <outlet property="tableView" destination="QsG-w8-IST" id="raC-sW-gQU"/>
                         <segue destination="jxH-Re-jyk" kind="presentation" identifier="edit" id="AWN-1D-kqT"/>
-                        <segue destination="cXB-gx-cf6" kind="show" identifier="browse pages" id="bJI-Er-aEr"/>
+                        <segue destination="cXB-gx-cf6" kind="show" identifier="browse page" id="bJI-Er-aEr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0f6-eh-sBq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-167" y="-233"/>
         </scene>
-        <!--Pattern Web Pages (Browse)-->
+        <!--Patterns Web Page-->
         <scene sceneID="glL-wo-Ytn">
             <objects>
                 <viewController id="cXB-gx-cf6" customClass="PatternsWebPageViewController" customModule="LollySwiftiOS" customModuleProvider="target" sceneMemberID="viewController">
@@ -180,7 +180,7 @@
                         </constraints>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Pattern Web Pages (Browse)" id="rlz-6y-dYZ"/>
+                    <navigationItem key="navigationItem" title="Patterns Web Page" id="rlz-6y-dYZ"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="btnWebPage" destination="mHp-X4-uv4" id="I3z-L0-Xjq"/>
@@ -412,7 +412,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="XXt-Pm-Ua7"/>
+        <segue reference="AWN-1D-kqT"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="MenuButton" width="25" height="13"/>

@@ -98,6 +98,10 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
             alertController.addAction(deleteAction2)
             let editAction2 = UIAlertAction(title: "Edit", style: .default) { _ in edit() }
             alertController.addAction(editAction2)
+            let browseWebPageAction = UIAlertAction(title: "Browse Web Page", style: .default) { [unowned self] _ in
+                performSegue(withIdentifier: "browse page", sender: item)
+            }
+            alertController.addAction(browseWebPageAction)
             let copyPatternAction = UIAlertAction(title: "Copy Pattern", style: .default) { _ in
                 iOSApi.copyText(item.PATTERN)
             }
@@ -116,7 +120,7 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
 
     func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
         let item = arrPatterns[indexPath.row]
-        performSegue(withIdentifier: "browse pages", sender: item)
+        performSegue(withIdentifier: "browse page", sender: item)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
