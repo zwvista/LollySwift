@@ -40,6 +40,7 @@
 		8CC3CBF22943A07D005670CC /* UITextField+Combine2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC3CBDF2943A07D005670CC /* UITextField+Combine2.swift */; };
 		8CC3CBF32943A07D005670CC /* CombineControlProperty2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC3CBE02943A07D005670CC /* CombineControlProperty2.swift */; };
 		8CC3CBFB2943A0E4005670CC /* CombineCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 8CC3CBFA2943A0E4005670CC /* CombineCocoa */; };
+		8CCFA65029B31F32004748B8 /* Misc.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8CCFA64F29B31E70004748B8 /* Misc.storyboard */; };
 		8CD16D121D69FD8A00F5F625 /* WordsLangDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD16D111D69FD8A00F5F625 /* WordsLangDetailViewController.swift */; };
 		8CD16D161D69FDDC00F5F625 /* PhrasesUnitDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD16D151D69FDDC00F5F625 /* PhrasesUnitDetailViewController.swift */; };
 		8CD16D201D69FE8F00F5F625 /* PhrasesLangDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD16D1F1D69FE8F00F5F625 /* PhrasesLangDetailViewController.swift */; };
@@ -213,6 +214,7 @@
 		8CC3CBDD2943A07D005670CC /* Control+Bind.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Control+Bind.swift"; sourceTree = "<group>"; };
 		8CC3CBDF2943A07D005670CC /* UITextField+Combine2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+Combine2.swift"; sourceTree = "<group>"; };
 		8CC3CBE02943A07D005670CC /* CombineControlProperty2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CombineControlProperty2.swift; sourceTree = "<group>"; };
+		8CCFA64F29B31E70004748B8 /* Misc.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Misc.storyboard; sourceTree = "<group>"; };
 		8CD16D111D69FD8A00F5F625 /* WordsLangDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsLangDetailViewController.swift; sourceTree = "<group>"; };
 		8CD16D151D69FDDC00F5F625 /* PhrasesUnitDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesUnitDetailViewController.swift; sourceTree = "<group>"; };
 		8CD16D1F1D69FE8F00F5F625 /* PhrasesLangDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesLangDetailViewController.swift; sourceTree = "<group>"; };
@@ -432,15 +434,16 @@
 			path = UIControl;
 			sourceTree = "<group>";
 		};
-		951504D2261FB7C100F94A6E /* Main */ = {
+		951504D2261FB7C100F94A6E /* Misc */ = {
 			isa = PBXGroup;
 			children = (
+				8CCFA64F29B31E70004748B8 /* Misc.storyboard */,
 				951504D3261FB7F900F94A6E /* LoginViewController.swift */,
 				95F5846122C653A500268DAA /* ReviewOptionsViewController.swift */,
 				95267BD61A1E26D000CC2A4B /* SearchViewController.swift */,
 				8C0945681D122ACE003503ED /* SettingsViewController.swift */,
 			);
-			path = Main;
+			path = Misc;
 			sourceTree = "<group>";
 		};
 		951BB9961A1B8FD50087DB94 /* Menu */ = {
@@ -489,7 +492,7 @@
 				953473E11A0D16CF00FF2D56 /* Images.xcassets */,
 				953473E31A0D16CF00FF2D56 /* LaunchScreen.xib */,
 				951BB9951A1B8D6C0087DB94 /* LollySwiftiOS-Bridging-Header.h */,
-				951504D2261FB7C100F94A6E /* Main */,
+				951504D2261FB7C100F94A6E /* Misc */,
 				951BB9931A1B803B0087DB94 /* Main.storyboard */,
 				951BB9961A1B8FD50087DB94 /* Menu */,
 				95FCBE4F2554470900859C1F /* Patterns */,
@@ -733,6 +736,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CCFA65029B31F32004748B8 /* Misc.storyboard in Resources */,
 				951BB9941A1B803B0087DB94 /* Main.storyboard in Resources */,
 				953473E51A0D16CF00FF2D56 /* LaunchScreen.xib in Resources */,
 				8C1074322070A8C700CE91A0 /* Phrases.storyboard in Resources */,
