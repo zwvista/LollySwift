@@ -9,7 +9,7 @@
 import Foundation
 
 @MainActor
-class TextbooksDetailViewModel: NSObject {
+class TextbooksDetailViewModel: NSObject, ObservableObject {
     var vm: TextbooksViewModel
     var item: MTextbook
     var itemEdit: MTextbookEdit

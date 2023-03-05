@@ -9,7 +9,7 @@
 import Foundation
 
 @MainActor
-class WebTextbooksViewModel: NSObject {
+class WebTextbooksViewModel: NSObject, ObservableObject {
     var vmSettings: SettingsViewModel
     var arrWebTextbooks = [MWebTextbook]()
     var arrWebTextbooksFiltered: [MWebTextbook]?
@@ -26,5 +26,19 @@ class WebTextbooksViewModel: NSObject {
 
     func applyFilters(textbookFilter: Int) {
         arrWebTextbooksFiltered = textbookFilter == 0 ? nil : arrWebTextbooks.filter { $0.TEXTBOOKID == textbookFilter }
+    }
+
+    static func update(item: MWebTextbook) async {
+        await MWebTextbook.update(item: item)
+    }
+
+    static func create(item: MWebTextbook) async {
+        _ = await MWebTextbook.create(item: item)
+    }
+
+    func newWebTextbook() -> MWebTextbook {
+        MWebTextbook().then {
+            $0.LANGID = vmSettings.selectedLang.ID
+        }
     }
 }

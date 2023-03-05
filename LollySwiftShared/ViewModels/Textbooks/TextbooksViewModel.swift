@@ -10,7 +10,7 @@ import Foundation
 import Then
 
 @MainActor
-class TextbooksViewModel: NSObject {
+class TextbooksViewModel: NSObject, ObservableObject {
     var vmSettings: SettingsViewModel
     var arrTextbooks = [MTextbook]()
 
