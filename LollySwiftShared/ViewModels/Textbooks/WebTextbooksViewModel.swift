@@ -28,4 +28,18 @@ class WebTextbooksViewModel: NSObject {
     func applyFilters(textbookFilter: Int) {
         arrWebTextbooksFiltered = textbookFilter == 0 ? nil : arrWebTextbooks.filter { $0.TEXTBOOKID == textbookFilter }
     }
+
+    static func update(item: MWebTextbook) -> Single<()> {
+        MWebTextbook.update(item: item)
+    }
+
+    static func create(item: MWebTextbook) -> Single<()> {
+        MWebTextbook.create(item: item).map { _ in }
+    }
+
+    func newWebTextbook() -> MWebTextbook {
+        MWebTextbook().then {
+            $0.LANGID = vmSettings.selectedLang.ID
+        }
+    }
 }
