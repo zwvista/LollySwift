@@ -121,6 +121,9 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
 
+    @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
+    }
+
     deinit {
         print("DEBUG: \(className) deinit")
     }
