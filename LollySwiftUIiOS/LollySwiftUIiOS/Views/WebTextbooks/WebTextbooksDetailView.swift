@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct WebTextbooksDetailView: View {
-    @StateObject var vmEdit: WebTextbooksDetailViewModel
+    @State var item: MWebTextbook
     @Binding var showDetail: Bool
     var body: some View {
         NavigationView {
@@ -16,37 +16,32 @@ struct WebTextbooksDetailView: View {
                 HStack {
                     Text("ID:")
                     Spacer()
-                    Text(vmEdit.itemEdit.ID)
+                    Text("\(item.ID)")
                 }
 //                HStack {
 //                    Text("TEXTBOOKNAME:")
 //                    Spacer()
-//                    Text(vmEdit.itemEdit.TEXTBOOKNAME)
+//                    Text(item.TEXTBOOKNAME)
 //                }
 //                HStack {
 //                    Text("UNIT:")
 //                    Spacer()
-//                    TextField("UNIT", text: $vmEdit.itemEdit.TAGS)
+//                    TextField("UNIT", text: $item.TAGS)
 //                }
 //                HStack {
 //                    Text("TITLE:")
 //                    Spacer()
-//                    TextField("NOTE", text: $vmEdit.itemEdit.TITLE)
+//                    TextField("NOTE", text: $item.TITLE)
 //                }
 //                HStack {
 //                    Text("URL:")
 //                    Spacer()
-//                    TextField("NOTE", text: $vmEdit.itemEdit.URL)
+//                    TextField("NOTE", text: $item.URL)
 //                }
             }
             .navigationBarItems(leading: Button("Cancel", role: .cancel) {
                 showDetail.toggle()
-            }, trailing: Button("Done") {
-                Task {
-                    await vmEdit.onOK()
-                    showDetail.toggle()
-                }
-            }.disabled(!vmEdit.isOKEnabled))
+            })
         }
     }
 }

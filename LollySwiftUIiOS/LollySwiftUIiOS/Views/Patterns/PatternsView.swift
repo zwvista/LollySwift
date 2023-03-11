@@ -103,10 +103,7 @@ struct PatternsView: View {
                 }
             }
             .sheet(isPresented: $showDetailEdit) {
-                PatternsDetailView(vmEdit: PatternsDetailViewModel(vm: vm, item: currentItem), showDetail: $showDetailEdit)
-            }
-            .sheet(isPresented: $showDetailAdd) {
-                PatternsDetailView(vmEdit: PatternsDetailViewModel(vm: vm, item: vm.newPattern()), showDetail: $showDetailAdd)
+                PatternsDetailView(item: currentItem, showDetail: $showDetailEdit)
             }
         }
     }
