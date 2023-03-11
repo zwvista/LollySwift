@@ -76,13 +76,13 @@ class WordsTextbookViewController: WordsBaseViewController {
             alertController.addAction(editAction2)
             if vmSettings.hasDictNote {
                 let getNoteAction = UIAlertAction(title: "Retrieve Note", style: .default) { [unowned self] _ in
-                    vm.getNote(index: indexPath.row).subscribe { [unowned self] _ in
+                    vm.getNote(index: indexPath.row).subscribe { _ in
                         tableView.reloadRows(at: [indexPath], with: .fade)
                     } ~ rx.disposeBag
                 }
                 alertController.addAction(getNoteAction)
-                let clearNoteAction = UIAlertAction(title: "Clear Note", style: .default) { _ in
-                    vm.clearNote(index: indexPath.row).subscribe { [unowned self] _ in
+                let clearNoteAction = UIAlertAction(title: "Clear Note", style: .default) { [unowned self] _ in
+                    vm.clearNote(index: indexPath.row).subscribe { _ in
                         tableView.reloadRows(at: [indexPath], with: .fade)
                     } ~ rx.disposeBag
                 }

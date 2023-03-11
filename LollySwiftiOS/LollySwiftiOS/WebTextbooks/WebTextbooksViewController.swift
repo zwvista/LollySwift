@@ -25,17 +25,6 @@ class WebTextbooksViewController: UIViewController, UITableViewDelegate, UITable
         tableView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         refresh(refreshControl)
-
-        func configMenu() {
-            btnWebTextbookFilter.menu = UIMenu(title: "", options: .displayInline, children: vmSettings.arrWebTextbookFilters.map(\.label).enumerated().map { index, item in
-                UIAction(title: item, state: item == vm.stringWebTextbookFilter ? .on : .off) { [unowned self] _ in
-                    vm.stringWebTextbookFilter = item
-                    configMenu()
-                }
-            })
-            btnWebTextbookFilter.showsMenuAsPrimaryAction = true
-        }
-        configMenu()
     }
 
     @objc func refresh(_ sender: UIRefreshControl) {
@@ -48,6 +37,17 @@ class WebTextbooksViewController: UIViewController, UITableViewDelegate, UITable
         vm.arrWebTextbooksFiltered_.subscribe { [unowned self] _ in
             tableView.reloadData()
         } ~ rx.disposeBag
+
+        func configMenu() {
+            btnWebTextbookFilter.menu = UIMenu(title: "", options: .displayInline, children: vmSettings.arrWebTextbookFilters.map(\.label).enumerated().map { index, item in
+                UIAction(title: item, state: item == vm.stringWebTextbookFilter ? .on : .off) { [unowned self] _ in
+                    vm.stringWebTextbookFilter = item
+                    configMenu()
+                }
+            })
+            btnWebTextbookFilter.showsMenuAsPrimaryAction = true
+        }
+        configMenu()
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
