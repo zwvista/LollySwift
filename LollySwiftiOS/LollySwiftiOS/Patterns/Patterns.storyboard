@@ -295,6 +295,9 @@
                                                     <color key="textColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="Wrl-nU-5ka" id="iAu-JQ-Jdv"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -325,6 +328,9 @@
                                                     <color key="textColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="Wrl-nU-5ka" id="CNa-2r-ZKR"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -380,20 +386,14 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Patterns in Language (Edit)" id="qaB-eu-uI3">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="wpX-mw-HGt">
+                        <barButtonItem key="leftBarButtonItem" image="xmark.circle.fill" catalog="system" id="wpX-mw-HGt">
                             <connections>
                                 <segue destination="lru-2d-WIP" kind="unwind" unwindAction="prepareForUnwind:" id="6ke-A6-fdT"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="iCF-Wo-FGO">
-                            <connections>
-                                <segue destination="lru-2d-WIP" kind="unwind" unwindAction="prepareForUnwind:" id="gxH-hd-Iak"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="btnDone" destination="iCF-Wo-FGO" id="iGg-Rt-C8p"/>
                         <outlet property="tfID" destination="718-30-x0a" id="wMo-2E-cPc"/>
                         <outlet property="tfPattern" destination="Mgt-zs-aVC" id="LKd-mS-fa7"/>
                         <outlet property="tfTags" destination="goV-z4-IVW" id="cY7-ic-6Wc"/>
@@ -409,6 +409,7 @@
     </scenes>
     <resources>
         <image name="MenuButton" width="25" height="13"/>
+        <image name="xmark.circle.fill" catalog="system" width="128" height="123"/>
         <namedColor name="Color2">
             <color red="1" green="0.57599997520446777" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

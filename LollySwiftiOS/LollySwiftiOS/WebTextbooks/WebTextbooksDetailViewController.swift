@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WebTextbooksDetailViewController: UITableViewController {
+class WebTextbooksDetailViewController: UITableViewController, UITextFieldDelegate {
 
     @IBOutlet weak var tfID: UITextField!
     @IBOutlet weak var tfWebTextbook: UITextField!
@@ -26,6 +26,11 @@ class WebTextbooksDetailViewController: UITableViewController {
         tfUnit.text = "\(item.UNIT)"
         tfTitle.text = item.TITLE
         tfURL.text = item.URL
+    }
+
+    // https://stackoverflow.com/questions/21893649/how-to-make-a-uitextfield-selectable-but-not-editable
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        false
     }
 
     deinit {

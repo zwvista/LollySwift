@@ -9,7 +9,7 @@
 import UIKit
 import Combine
 
-class PatternsDetailViewController: UITableViewController {
+class PatternsDetailViewController: UITableViewController, UITextFieldDelegate {
 
     @IBOutlet weak var tfID: UITextField!
     @IBOutlet weak var tfPattern: UITextField!
@@ -27,6 +27,11 @@ class PatternsDetailViewController: UITableViewController {
         tfTags.text = item.TAGS
         tfTitle.text = item.TITLE
         tfURL.text = item.URL
+    }
+
+    // https://stackoverflow.com/questions/21893649/how-to-make-a-uitextfield-selectable-but-not-editable
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        false
     }
 
     deinit {
