@@ -19,7 +19,8 @@ class WebTextbooksViewController: NSViewController, LollyProtocol, NSTableViewDa
     @objc var textbookFilter = 0
 
     var vm: WebTextbooksViewModel!
-    var arrWebTextbooks: [MWebTextbook] { vm.arrWebTextbooksFiltered ?? vm.arrWebTextbooks }
+    var arrWebTextbooks: [MWebTextbook] { vm.arrWebTextbooksFiltered }
+    var subscriptions = Set<AnyCancellable>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,13 +28,21 @@ class WebTextbooksViewController: NSViewController, LollyProtocol, NSTableViewDa
     }
 
     func settingsChanged() {
-        refreshTableView(self)
+        vm = WebTextbooksViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) { [unowned self] in
+            acTextbooks.content = vm.vmSettings.arrWebTextbookFilters
+        }
+        vm.$arrWebTextbooksFiltered.sink { [unowned self] _ in
+            doRefresh()
+        } ~ subscriptions
+    }
+    func doRefresh() {
+        tableView.reloadData()
     }
 
     @IBAction func refreshTableView(_ sender: AnyObject) {
-        vm = WebTextbooksViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) { [unowned self] in
-            acTextbooks.content = vm.vmSettings.arrWebTextbookFilters
-            tableView.reloadData()
+        Task {
+            await vm.reload()
+            doRefresh()
         }
     }
 
