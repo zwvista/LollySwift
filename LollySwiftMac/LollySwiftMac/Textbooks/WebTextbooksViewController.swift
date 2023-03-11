@@ -25,6 +25,8 @@ class WebTextbooksViewController: NSViewController, LollyProtocol, NSTableViewDa
     override func viewDidLoad() {
         super.viewDidLoad()
         settingsChanged()
+        wvWebPage.allowsMagnification = true
+        wvWebPage.allowsBackForwardNavigationGestures = true
     }
 
     func settingsChanged() {

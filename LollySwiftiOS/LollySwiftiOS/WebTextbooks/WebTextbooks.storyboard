@@ -47,7 +47,7 @@
                                 <rect key="frame" x="0.0" y="136" width="414" height="726"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="detailButton" indentationWidth="10" reuseIdentifier="PatternCell" rowHeight="88" id="xs4-Ig-sDC" customClass="PatternsCell" customModule="LollySwiftiOS" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="detailButton" indentationWidth="10" reuseIdentifier="WebTextbooksCell" rowHeight="88" id="xs4-Ig-sDC" customClass="WebTextbooksCell" customModule="LollySwiftiOS" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="414" height="88"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xs4-Ig-sDC" id="aS8-z1-aQ5">
@@ -92,8 +92,8 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="cardView" destination="5qY-kr-wFp" id="hnu-Se-hg6"/>
-                                            <outlet property="lblPattern" destination="KRY-Hb-cCO" id="4Bq-Fy-WQ5"/>
-                                            <outlet property="lblTags" destination="uCP-hh-jfu" id="fu6-og-NXf"/>
+                                            <outlet property="lblTitle" destination="uCP-hh-jfu" id="GFT-R5-ySP"/>
+                                            <outlet property="lblWebTextbook" destination="KRY-Hb-cCO" id="bNp-8I-AIK"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -121,11 +121,7 @@
                                 <action selector="presentLeftMenuViewController:" destination="0f6-eh-sBq" id="6OF-Px-Hxg"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="7oO-l3-tjY">
-                            <connections>
-                                <segue destination="jxH-Re-jyk" kind="presentation" identifier="add" id="XXt-Pm-Ua7"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="7oO-l3-tjY"/>
                     </navigationItem>
                     <connections>
                         <outlet property="btnWebTextbookFilter" destination="coj-gJ-bFA" id="VYq-AU-uM8"/>
@@ -405,9 +401,6 @@
             <point key="canvasLocation" x="1632" y="729"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="AWN-1D-kqT"/>
-    </inferredMetricsTieBreakers>
     <resources>
         <image name="MenuButton" width="25" height="13"/>
         <namedColor name="Color3">

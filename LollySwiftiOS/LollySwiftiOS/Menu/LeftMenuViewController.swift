@@ -11,7 +11,7 @@ import UIKit
 public class LeftMenuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var tableView: UITableView?
-    var storyboardMisc, storyboardWords, storyboardPhrases, storyboardPatterns: UIStoryboard!
+    var storyboardMisc, storyboardWords, storyboardPhrases, storyboardPatterns, storyboardWebTextbooks: UIStoryboard!
 
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -20,7 +20,7 @@ public class LeftMenuViewController: UIViewController, UITableViewDelegate, UITa
     override public func viewDidLoad() {
         super.viewDidLoad()
 
-        let frameht = self.view.frame.size.height, tvht = CGFloat(54 * 11)
+        let frameht = self.view.frame.size.height, tvht = CGFloat(54 * 12)
         let tableView = UITableView(frame: CGRect(x: 0, y: max(0, (frameht - tvht) / 2.0), width: self.view.frame.size.width, height: min(frameht, tvht)), style: .plain)
         tableView.autoresizingMask = [.flexibleTopMargin, .flexibleBottomMargin, .flexibleWidth]
         tableView.delegate = self
@@ -40,6 +40,7 @@ public class LeftMenuViewController: UIViewController, UITableViewDelegate, UITa
         storyboardWords = UIStoryboard(name: "Words", bundle: nil)
         storyboardPhrases = UIStoryboard(name: "Phrases", bundle: nil)
         storyboardPatterns = UIStoryboard(name: "Patterns", bundle: nil)
+        storyboardWebTextbooks = UIStoryboard(name: "WebTextbooks", bundle: nil)
     }
 
     // MARK: - <UITableViewDelegate>
@@ -80,6 +81,9 @@ public class LeftMenuViewController: UIViewController, UITableViewDelegate, UITa
         case 10:
             self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboardPatterns.instantiateViewController(withIdentifier: "PatternsViewController")), animated: true)
             self.sideMenuViewController!.hideMenuViewController()
+        case 11:
+            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboardWebTextbooks.instantiateViewController(withIdentifier: "WebTextbooksViewController")), animated: true)
+            self.sideMenuViewController!.hideMenuViewController()
         default:
             break
         }
@@ -96,7 +100,7 @@ public class LeftMenuViewController: UIViewController, UITableViewDelegate, UITa
     }
 
     public func tableView(_ tableView: UITableView, numberOfRowsInSection sectionIndex: Int) -> Int {
-        11
+        12
     }
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -113,8 +117,8 @@ public class LeftMenuViewController: UIViewController, UITableViewDelegate, UITa
             cell!.selectedBackgroundView = UIView()
         }
 
-        let titles = ["Search", "Settings", "Words in Unit", "Phrases in Unit", "Words Review", "Phrases Review", "Words in Textbook", "Phrases in Textbook", "Words in Language", "Phrases in Language", "Patterns in Language"]
-        let images = ["IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty"]
+        let titles = ["Search", "Settings", "Words in Unit", "Phrases in Unit", "Words Review", "Phrases Review", "Words in Textbook", "Phrases in Textbook", "Words in Language", "Phrases in Language", "Patterns in Language", "WebTextbooks"]
+        let images = ["IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty"]
         cell!.textLabel?.text = titles[indexPath.row]
         cell!.imageView?.image = UIImage(named: images[indexPath.row])
 
