@@ -16,7 +16,6 @@ class WebTextbooksDetailViewController: NSViewController {
     @IBOutlet weak var tfUnit: NSTextField!
     @IBOutlet weak var tfTitle: NSTextField!
     @IBOutlet weak var tfURL: NSTextField!
-    @IBOutlet weak var btnOK: NSButton!
 
     var complete: (() -> Void)?
     var item: MWebTextbook!

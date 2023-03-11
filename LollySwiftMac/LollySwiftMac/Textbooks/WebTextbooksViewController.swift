@@ -10,7 +10,7 @@ import Cocoa
 import WebKit
 import Combine
 
-class WebTextbooksViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate {
+class WebTextbooksViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate, NSMenuItemValidation {
 
     @IBOutlet weak var tableView: NSTableView!
     @IBOutlet weak var pubTextbookFilter: NSPopUpButton!
@@ -62,11 +62,25 @@ class WebTextbooksViewController: NSViewController, LollyProtocol, NSTableViewDa
 
     func tableViewSelectionDidChange(_ notification: Notification) {
         let row = tableView.selectedRow
-        if row == -1 {
-        } else {
-            let item = arrWebTextbooks[row]
-            wvWebPage.load(URLRequest(url: URL(string: item.URL)!))
-        }
+        vm.selectedWebTextbookItem = row == -1 ? nil : arrWebTextbooks[row]
+        wvWebPage.load(URLRequest(url: URL(string: vm.selectedWebTextbookItem?.URL ?? "")!))
     }
 
+    // https://stackoverflow.com/questions/9368654/cannot-seem-to-setenabledno-on-nsmenuitem
+    func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+        if menuItem.action == #selector(editWebTextbook(_:)) {
+            return vm.selectedWebTextbookItem != nil
+        }
+        return true
+    }
+
+    @IBAction func editWebTextbook(_ sender: AnyObject) {
+        let detailVC = storyboard!.instantiateController(withIdentifier: "WebTextbooksDetailViewController") as! WebTextbooksDetailViewController
+        detailVC.item = arrWebTextbooks[tableView.selectedRow]
+        presentAsModalWindow(detailVC)
+    }
+
+    @IBAction func doubleAction(_ sender: AnyObject) {
+        editWebTextbook(sender)
+    }
 }

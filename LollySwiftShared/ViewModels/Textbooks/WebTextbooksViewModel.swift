@@ -14,6 +14,7 @@ class WebTextbooksViewModel: NSObject, ObservableObject {
     var vmSettings: SettingsViewModel
     @Published var arrWebTextbooks = [MWebTextbook]()
     @Published var arrWebTextbooksFiltered = [MWebTextbook]()
+    var selectedWebTextbookItem: MWebTextbook?
     @Published var indexWebTextbookFilter = 0
     @Published var stringWebTextbookFilter = ""
     var webTextbookFilter: Int {
