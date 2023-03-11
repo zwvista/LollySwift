@@ -57,25 +57,6 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
         arrPatterns.count
     }
 
-    @IBAction func endEditing(_ sender: NSTextField) {
-        let row = tableView.row(for: sender)
-        guard row != -1 else {return}
-        let col = tableView.column(for: sender)
-        let key = tableView.tableColumns[col].identifier.rawValue
-        let item = arrPatterns[row]
-        let oldValue = String(describing: item.value(forKey: key) ?? "")
-        var newValue = sender.stringValue
-        if key == "PATTERN" {
-            newValue = vmSettings.autoCorrectInput(text: newValue)
-        }
-        guard oldValue != newValue else {return}
-        item.setValue(newValue, forKey: key)
-        Task {
-            await PatternsViewModel.update(item: item)
-            tableView.reloadData(forRowIndexes: [row], columnIndexes: IndexSet(0..<tableView.tableColumns.count))
-        }
-    }
-
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! NSTableCellView
         let columnName = tableColumn!.identifier.rawValue
@@ -138,21 +119,9 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
         }
     }
 
-    // https://stackoverflow.com/questions/24219441/how-to-use-nstoolbar-in-xcode-6-and-storyboard
-    @IBAction func addPattern(_ sender: AnyObject) {
-        let detailVC = storyboard!.instantiateController(withIdentifier: "PatternsDetailViewController") as! PatternsDetailViewController
-        detailVC.vmEdit = PatternsDetailViewModel(vm: vm, item: vm.newPattern())
-        detailVC.complete = { [unowned self] in tableView.reloadData(); addPattern(self) }
-        presentAsSheet(detailVC)
-    }
-
     @IBAction func editPattern(_ sender: AnyObject) {
         let detailVC = storyboard!.instantiateController(withIdentifier: "PatternsDetailViewController") as! PatternsDetailViewController
-        let i = tableView.selectedRow
-        detailVC.vmEdit = PatternsDetailViewModel(vm: vm, item: arrPatterns[i])
-        detailVC.complete = { [unowned self] in
-            tableView.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<tableView.tableColumns.count))
-        }
+        detailVC.item = arrPatterns[tableView.selectedRow]
         presentAsModalWindow(detailVC)
     }
 

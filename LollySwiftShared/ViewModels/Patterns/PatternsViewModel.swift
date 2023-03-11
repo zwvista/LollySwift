@@ -43,22 +43,4 @@ class PatternsViewModel: NSObject, ObservableObject {
     func reload() async {
         arrPatterns = await MPattern.getDataByLang(vmSettings.selectedLang.ID)
     }
-
-    static func update(item: MPattern) async {
-        await MPattern.update(item: item)
-    }
-
-    static func create(item: MPattern) async {
-        item.ID = await MPattern.create(item: item)
-    }
-
-    static func delete(_ id: Int) async {
-        await MPattern.delete(id)
-    }
-
-    func newPattern() -> MPattern {
-        MPattern().then {
-            $0.LANGID = vmSettings.selectedLang.ID
-        }
-    }
 }

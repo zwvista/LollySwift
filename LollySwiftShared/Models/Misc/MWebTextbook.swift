@@ -29,40 +29,4 @@ class MWebTextbook: NSObject, Codable {
         let url = "\(CommonApi.urlAPI)VWEBTEXTBOOKS?filter=LANGID,eq,\(langid)"
         return await RestApi.getRecords(MWebTextbooks.self, url: url)
     }
-
-    static func update(item: MWebTextbook) async {
-        // SQL: UPDATE WEBTEXTBOOKS SET TEXTBOOKID=?, UNIT=?, TITLE=?, URL=? WHERE ID=?
-        let url = "\(CommonApi.urlAPI)WEBTEXTBOOKS/\(item.ID)"
-        print(await RestApi.update(url: url, body: try! item.toJSONString()!))
-    }
-
-    static func create(item: MWebTextbook) async -> Int {
-        // SQL: INSERT INTO TEXTBOOKS (TEXTBOOKID, UNIT, TITLE, URL) VALUES (?,?,?,?)
-        let url = "\(CommonApi.urlAPI)WEBTEXTBOOKS"
-        let id = Int(await RestApi.create(url: url, body: try! item.toJSONString()!))!
-        print(id)
-        return id
-    }
-}
-
-class MWebTextbookEdit {
-    let ID: String
-    let TEXTBOOKNAME: String
-    @Published var UNIT: String
-    @Published var TITLE: String
-    @Published var URL: String
-
-    init(x: MWebTextbook) {
-        ID = "\(x.ID)"
-        TEXTBOOKNAME = x.TEXTBOOKNAME
-        UNIT = "\(x.UNIT)"
-        TITLE = x.TITLE
-        URL = x.URL
-    }
-
-    func save(to x: MWebTextbook) {
-        x.UNIT = Int(UNIT)!
-        x.TITLE = TITLE
-        x.URL = URL
-    }
 }

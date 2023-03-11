@@ -49,11 +49,6 @@ class WebTextbooksViewController: NSViewController, LollyProtocol, NSTableViewDa
         return cell
     }
 
-    @IBAction func filterTextbook(_ sender: AnyObject) {
-        vm.applyFilters(textbookFilter: textbookFilter)
-        tableView.reloadData()
-    }
-
     func tableViewSelectionDidChange(_ notification: Notification) {
         let row = tableView.selectedRow
         if row == -1 {

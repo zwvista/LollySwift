@@ -7,38 +7,36 @@
 //
 
 import Foundation
+import Combine
 
 @MainActor
 class WebTextbooksViewModel: NSObject, ObservableObject {
     var vmSettings: SettingsViewModel
-    var arrWebTextbooks = [MWebTextbook]()
-    var arrWebTextbooksFiltered: [MWebTextbook]?
+    @Published var arrWebTextbooks = [MWebTextbook]()
+    @Published var arrWebTextbooksFiltered = [MWebTextbook]()
+    @Published var indexWebTextbookFilter = 0
+    @Published var stringWebTextbookFilter = ""
+    var webTextbookFilter: Int {
+        indexWebTextbookFilter == -1 ? 0 : vmSettings.arrWebTextbookFilters[indexWebTextbookFilter].value
+    }
+
+    var subscriptions = Set<AnyCancellable>()
 
     init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> Void) {
         vmSettings = !needCopy ? settings : SettingsViewModel(settings)
         super.init()
+
+        $indexWebTextbookFilter.sink { [unowned self] _ in
+            arrWebTextbooksFiltered = webTextbookFilter == 0 ? arrWebTextbooks : arrWebTextbooks.filter { $0.TEXTBOOKID == webTextbookFilter }
+        } ~ subscriptions
+
         Task {
-            arrWebTextbooks = await MWebTextbook.getDataByLang(settings.selectedLang.ID)
-            arrWebTextbooksFiltered = nil
+            await reload()
             complete()
         }
     }
 
-    func applyFilters(textbookFilter: Int) {
-        arrWebTextbooksFiltered = textbookFilter == 0 ? nil : arrWebTextbooks.filter { $0.TEXTBOOKID == textbookFilter }
-    }
-
-    static func update(item: MWebTextbook) async {
-        await MWebTextbook.update(item: item)
-    }
-
-    static func create(item: MWebTextbook) async {
-        _ = await MWebTextbook.create(item: item)
-    }
-
-    func newWebTextbook() -> MWebTextbook {
-        MWebTextbook().then {
-            $0.LANGID = vmSettings.selectedLang.ID
-        }
+    func reload() async {
+        arrWebTextbooks = await MWebTextbook.getDataByLang(vmSettings.selectedLang.ID)
     }
 }
