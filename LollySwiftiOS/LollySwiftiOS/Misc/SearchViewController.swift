@@ -41,6 +41,13 @@ class SearchViewController: UIViewController, WKNavigationDelegate, UISearchBarD
             btnLang.setTitle(vmSettings.selectedLang.LANGNAME, for: .normal)
         } ~ rx.disposeBag
 
+        globalUser.load()
+        if globalUser.isLoggedIn {
+            setup()
+        } else {
+            logout(self)
+        }
+
         vmSettings.selectedDictReferenceIndex_.filter { $0 != -1 }.subscribe { [unowned self] _ in
             btnDict.menu = UIMenu(title: "", options: .displayInline, children: vmSettings.arrDictsReference.map(\.DICTNAME).enumerated().map { index, item in
                 UIAction(title: item, state: index == vmSettings.selectedDictReferenceIndex ? .on : .off) { _ in
@@ -53,13 +60,6 @@ class SearchViewController: UIViewController, WKNavigationDelegate, UISearchBarD
             dictStore.dict = vmSettings.selectedDictReference
             dictStore.searchDict()
         } ~ rx.disposeBag
-
-        globalUser.load()
-        if globalUser.isLoggedIn {
-            setup()
-        } else {
-            logout(self)
-        }
     }
 
     @IBAction func logout(_ sender: Any) {

@@ -1,5 +1,5 @@
 //
-//  PatternsDetailViewController.swift
+//  WebTextbooksDetailViewController.swift
 //  LollySwiftiOS
 //
 //  Created by 趙偉 on 2016/06/23.
@@ -9,22 +9,22 @@
 import UIKit
 import RxBinding
 
-class PatternsDetailViewController: UITableViewController {
+class WebTextbooksDetailViewController: UITableViewController {
 
     @IBOutlet weak var tfID: UITextField!
-    @IBOutlet weak var tfPattern: UITextField!
-    @IBOutlet weak var tfTags: UITextField!
+    @IBOutlet weak var tfWebTextbook: UITextField!
+    @IBOutlet weak var tfUnit: UITextField!
     @IBOutlet weak var tfTitle: UITextField!
     @IBOutlet weak var tfURL: UITextField!
     @IBOutlet weak var btnDone: UIBarButtonItem!
 
-    var item: MPattern!
+    var item: MWebTextbook!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         tfID.text = "\(item.ID)"
-        tfPattern.text = item.PATTERN
-        tfTags.text = item.TAGS
+        tfWebTextbook.text = item.TEXTBOOKNAME
+        tfUnit.text = "\(item.UNIT)"
         tfTitle.text = item.TITLE
         tfURL.text = item.URL
     }

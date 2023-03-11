@@ -46,24 +46,4 @@ class PatternsViewModel: NSObject {
             arrPatterns = $0
         }
     }
-
-    static func update(item: MPattern) -> Single<()> {
-        MPattern.update(item: item)
-    }
-
-    static func create(item: MPattern) -> Single<()> {
-        MPattern.create(item: item).map {
-            item.ID = $0
-        }
-    }
-
-    static func delete(_ id: Int) -> Single<()> {
-        MPattern.delete(id)
-    }
-
-    func newPattern() -> MPattern {
-        MPattern().then {
-            $0.LANGID = vmSettings.selectedLang.ID
-        }
-    }
 }
