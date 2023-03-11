@@ -31,7 +31,7 @@ class WebTextbooksViewController: NSViewController, LollyProtocol, NSTableViewDa
         vm = WebTextbooksViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) { [unowned self] in
             acTextbooks.content = vm.vmSettings.arrWebTextbookFilters
         }
-        vm.$arrWebTextbooksFiltered.sink { [unowned self] _ in
+        vm.$arrWebTextbooksFiltered.didSet.sink { [unowned self] _ in
             doRefresh()
         } ~ subscriptions
     }
