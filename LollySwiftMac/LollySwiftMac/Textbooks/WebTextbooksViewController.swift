@@ -20,7 +20,7 @@ class WebTextbooksViewController: NSViewController, LollyProtocol, NSTableViewDa
     @objc var textbookFilter = 0
 
     var vm: WebTextbooksViewModel!
-    var arrWebTextbooks: [MWebTextbook] { vm.arrWebTextbooksFiltered ?? vm.arrWebTextbooks }
+    var arrWebTextbooks: [MWebTextbook] { vm.arrWebTextbooksFiltered }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,11 +48,6 @@ class WebTextbooksViewController: NSViewController, LollyProtocol, NSTableViewDa
         let columnName = tableColumn!.identifier.rawValue
         cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
         return cell
-    }
-
-    @IBAction func filterTextbook(_ sender: AnyObject) {
-        vm.applyFilters(textbookFilter: textbookFilter)
-        tableView.reloadData()
     }
 
     func tableViewSelectionDidChange(_ notification: Notification) {
