@@ -55,10 +55,10 @@ class WebTextbooksViewController: UIViewController, UITableViewDelegate, UITable
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "WebTextbookCell", for: indexPath) as! WebTextbooksCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "WebTextbooksCell", for: indexPath) as! WebTextbooksCell
         let item = arrWebTextbooks[indexPath.row]
         cell.lblWebTextbook.text = item.TEXTBOOKNAME
-        cell.lblTags.text = item.TITLE
+        cell.lblTitle.text = item.TITLE
         cell.cardView.createCardEffect()
         return cell
     }
@@ -118,5 +118,5 @@ class WebTextbooksViewController: UIViewController, UITableViewDelegate, UITable
 class WebTextbooksCell: UITableViewCell {
     @IBOutlet weak var cardView: UIView!
     @IBOutlet weak var lblWebTextbook: UILabel!
-    @IBOutlet weak var lblTags: UILabel!
+    @IBOutlet weak var lblTitle: UILabel!
 }

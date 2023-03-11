@@ -57,7 +57,7 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PatternCell", for: indexPath) as! PatternsCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PatternsCell", for: indexPath) as! PatternsCell
         let item = arrPatterns[indexPath.row]
         cell.lblPattern.text = item.PATTERN
         cell.lblTags.text = item.TAGS
