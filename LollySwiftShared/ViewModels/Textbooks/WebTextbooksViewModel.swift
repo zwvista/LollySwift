@@ -17,6 +17,7 @@ class WebTextbooksViewModel: NSObject {
     var arrWebTextbooks: [MWebTextbook] { get { arrWebTextbooks_.value } set { arrWebTextbooks_.accept(newValue) } }
     var arrWebTextbooksFiltered_ = BehaviorRelay(value: [MWebTextbook]())
     var arrWebTextbooksFiltered: [MWebTextbook] { get { arrWebTextbooksFiltered_.value } set { arrWebTextbooksFiltered_.accept(newValue) } }
+    var selectedWebTextbookItem: MWebTextbook?
     let indexWebTextbookFilter_ = BehaviorRelay(value: 0)
     var indexWebTextbookFilter: Int { get { indexWebTextbookFilter_.value } set { indexWebTextbookFilter_.accept(newValue) } }
     let stringWebTextbookFilter_ = BehaviorRelay(value: "")

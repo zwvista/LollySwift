@@ -558,7 +558,7 @@ Gw
                                                                             <subviews>
                                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="t3K-S9-Sgm">
                                                                                     <rect key="frame" x="0.0" y="1" width="205" height="16"/>
-                                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Table View Cell" id="WV3-xq-OEM">
+                                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" sendsActionOnEndEditing="YES" title="Table View Cell" id="WV3-xq-OEM">
                                                                                         <font key="font" metaFont="system"/>
                                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -633,7 +633,7 @@ Gw
                                                                             <subviews>
                                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="EZA-kZ-T6T">
                                                                                     <rect key="frame" x="0.0" y="1" width="100" height="16"/>
-                                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Table View Cell" id="icj-A8-Z0A">
+                                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" sendsActionOnEndEditing="YES" title="Table View Cell" id="icj-A8-Z0A">
                                                                                         <font key="font" metaFont="system"/>
                                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -669,7 +669,7 @@ Gw
                                                                             <subviews>
                                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="CBT-F1-UgG">
                                                                                     <rect key="frame" x="0.0" y="1" width="312" height="16"/>
-                                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Table View Cell" id="rQy-jH-Q8Z">
+                                                                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" sendsActionOnEndEditing="YES" title="Table View Cell" id="rQy-jH-Q8Z">
                                                                                         <font key="font" metaFont="system"/>
                                                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -725,6 +725,7 @@ Gw
                                                                 </tableColumn>
                                                             </tableColumns>
                                                             <connections>
+                                                                <action trigger="doubleAction" selector="doubleAction:" target="3Cf-sR-kY7" id="lSe-5M-w7j"/>
                                                                 <outlet property="dataSource" destination="3Cf-sR-kY7" id="vpT-Rn-vK3"/>
                                                                 <outlet property="delegate" destination="3Cf-sR-kY7" id="PkE-YJ-tJq"/>
                                                             </connections>
@@ -743,6 +744,9 @@ Gw
                                                     <rect key="frame" x="0.0" y="0.0" width="736" height="25"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </tableHeaderView>
+                                                <connections>
+                                                    <outlet property="menu" destination="65X-4j-zqQ" id="qC8-TA-w9F"/>
+                                                </connections>
                                             </scrollView>
                                         </subviews>
                                         <constraints>
@@ -795,6 +799,16 @@ Gw
                     </connections>
                 </viewController>
                 <arrayController id="vWy-xu-GvI"/>
+                <menu id="65X-4j-zqQ" userLabel="MenuWebTextbooks">
+                    <items>
+                        <menuItem title="Edit" id="sQY-Ib-67z">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="editWebTextbook:" target="3Cf-sR-kY7" id="gHf-hj-Yb0"/>
+                            </connections>
+                        </menuItem>
+                    </items>
+                </menu>
                 <customObject id="M44-Gy-bUQ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="372" y="392.5"/>
@@ -855,17 +869,9 @@ Gw
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="de5-bN-ivI">
-                                <rect key="frame" x="100" y="80" width="330" height="21"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="GdE-G1-Vot">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yex-3g-X6Y">
-                                <rect key="frame" x="18" y="115" width="34" height="16"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="URL:" id="Ykn-gs-Ohw">
+                                <rect key="frame" x="18" y="115" width="43" height="16"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="TITLE:" id="Ykn-gs-Ohw">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -874,6 +880,22 @@ Gw
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Vwh-Et-ada">
                                 <rect key="frame" x="100" y="113" width="330" height="21"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="MIQ-Cb-WnM">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CEP-OO-O8r">
+                                <rect key="frame" x="18" y="82" width="34" height="16"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="URL:" id="Z90-vk-Kyz">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="de5-bN-ivI">
+                                <rect key="frame" x="100" y="80" width="330" height="21"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="GdE-G1-Vot">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -892,14 +914,6 @@ DQ
                                     <action selector="dismissController:" target="mbN-jk-I6i" id="QOp-9w-1l8"/>
                                 </connections>
                             </button>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CEP-OO-O8r">
-                                <rect key="frame" x="18" y="82" width="43" height="16"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="TITLE:" id="Z90-vk-Kyz">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                         </subviews>
                         <constraints>
                             <constraint firstItem="yex-3g-X6Y" firstAttribute="centerY" secondItem="Vwh-Et-ada" secondAttribute="centerY" id="999-iP-VJo"/>
@@ -933,10 +947,10 @@ DQ
                     </view>
                     <connections>
                         <outlet property="tfID" destination="erp-2h-p3D" id="pAJ-yF-3gw"/>
-                        <outlet property="tfPattern" destination="pXN-yF-azp" id="CLf-Nj-QDX"/>
-                        <outlet property="tfTitle" destination="de5-bN-ivI" id="JKn-6e-IlF"/>
-                        <outlet property="tfURL" destination="Vwh-Et-ada" id="S1p-fe-acW"/>
+                        <outlet property="tfTitle" destination="Vwh-Et-ada" id="C6Y-ou-KV4"/>
+                        <outlet property="tfURL" destination="de5-bN-ivI" id="Jx1-5q-esQ"/>
                         <outlet property="tfUnit" destination="6ts-j1-Mzg" id="pyD-IS-7we"/>
+                        <outlet property="tfWebTextbook" destination="pXN-yF-azp" id="cRl-XH-RNO"/>
                     </connections>
                 </viewController>
                 <customObject id="mbN-jk-I6i" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
