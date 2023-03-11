@@ -18,7 +18,6 @@ class PatternsDetailViewController: NSViewController {
     @IBOutlet weak var tfTags: NSTextField!
     @IBOutlet weak var tfTitle: NSTextField!
     @IBOutlet weak var tfURL: NSTextField!
-    @IBOutlet weak var btnOK: NSButton!
 
     var complete: (() -> Void)?
     var item: MPattern!

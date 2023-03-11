@@ -29,7 +29,7 @@ class WebTextbooksViewModel: NSObject {
         vmSettings = !needCopy ? settings : SettingsViewModel(settings)
         super.init()
 
-        indexWebTextbookFilter_.subscribe { [unowned self] _ in
+        Observable.combineLatest(arrWebTextbooks_, indexWebTextbookFilter_).subscribe { [unowned self] _ in
             arrWebTextbooksFiltered = webTextbookFilter == 0 ? arrWebTextbooks : arrWebTextbooks.filter { $0.TEXTBOOKID == webTextbookFilter }
         } ~ rx.disposeBag
 

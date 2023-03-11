@@ -9,6 +9,7 @@
 import Cocoa
 import WebKit
 import RxSwift
+import RxBinding
 
 class WebTextbooksViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate {
 
@@ -28,14 +29,21 @@ class WebTextbooksViewController: NSViewController, LollyProtocol, NSTableViewDa
     }
 
     func settingsChanged() {
-        refreshTableView(self)
+        vm = WebTextbooksViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) { [unowned self] in
+            acTextbooks.content = vm.vmSettings.arrWebTextbookFilters
+        }
+        vm.arrWebTextbooksFiltered_.subscribe { [unowned self] _ in
+            doRefresh()
+        } ~ rx.disposeBag
+    }
+    func doRefresh() {
+        tableView.reloadData()
     }
 
     @IBAction func refreshTableView(_ sender: AnyObject) {
-        vm = WebTextbooksViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) { [unowned self] in
-            acTextbooks.content = vm.vmSettings.arrWebTextbookFilters
-            tableView.reloadData()
-        }
+        vm.reload().subscribe { [unowned self] _ in
+            doRefresh()
+        } ~ rx.disposeBag
     }
 
     func numberOfRows(in tableView: NSTableView) -> Int {
