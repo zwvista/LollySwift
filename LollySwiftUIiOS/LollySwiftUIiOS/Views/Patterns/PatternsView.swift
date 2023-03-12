@@ -10,10 +10,8 @@ import SwiftUI
 struct PatternsView: View {
     @Binding var navPath: NavigationPath
     @StateObject var vm = PatternsViewModel(settings: vmSettings, needCopy: false) {}
-    @State var showDetailEdit = false
-    @State var showDetailAdd = false
+    @State var showDetail = false
     @State var showItemMore = false
-    @State var showDelete = false
     // https://stackoverflow.com/questions/59235879/how-to-show-an-alert-when-the-user-taps-on-the-list-row-in-swiftui
     @State var currentItem = MPattern()
     var body: some View {
@@ -56,29 +54,15 @@ struct PatternsView: View {
                             currentItem = item
                             showItemMore.toggle()
                         }
-                        Button("Delete", role: .destructive) {
-                            currentItem = item
-                            showDelete.toggle()
-                        }
                     }
                 }
             }
             .refreshable {
                 await vm.reload()
             }
-            .alert(Text("delete"), isPresented: $showDelete, actions: {
-                Button("No", role: .cancel) {}
-                Button("Yes", role: .destructive) {
-
-                }
-            }, message: {
-                Text(currentItem.PATTERN)
-            })
             .alert(Text("Pattern"), isPresented: $showItemMore, actions: {
-                Button("Delete", role: .destructive) {
-                }
                 Button("Edit") {
-                    showDetailEdit.toggle()
+                    showDetail.toggle()
                 }
                 Button("Browse Web Page") {
                     navPath.append(BrowseViewTag())
@@ -95,15 +79,8 @@ struct PatternsView: View {
             .navigationDestination(for: BrowseViewTag.self) { _ in
                 PatternsWebPageView(item: currentItem)
             }
-            .toolbar {
-                ToolbarItemGroup {
-                    Button("Add") {
-                        showDetailAdd.toggle()
-                    }
-                }
-            }
-            .sheet(isPresented: $showDetailEdit) {
-                PatternsDetailView(item: currentItem, showDetail: $showDetailEdit)
+            .sheet(isPresented: $showDetail) {
+                PatternsDetailView(item: currentItem, showDetail: $showDetail)
             }
         }
     }

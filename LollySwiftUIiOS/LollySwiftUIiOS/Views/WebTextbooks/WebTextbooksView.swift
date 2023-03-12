@@ -10,10 +10,8 @@ import SwiftUI
 struct WebTextbooksView: View {
     @Binding var navPath: NavigationPath
     @StateObject var vm = WebTextbooksViewModel(settings: vmSettings, needCopy: false) {}
-    @State var showDetailEdit = false
-    @State var showDetailAdd = false
+    @State var showDetail = false
     @State var showItemMore = false
-    @State var showDelete = false
     // https://stackoverflow.com/questions/59235879/how-to-show-an-alert-when-the-user-taps-on-the-list-row-in-swiftui
     @State var currentItem = MWebTextbook()
     var body: some View {
@@ -53,10 +51,6 @@ struct WebTextbooksView: View {
                             currentItem = item
                             showItemMore.toggle()
                         }
-                        Button("Delete", role: .destructive) {
-                            currentItem = item
-                            showDelete.toggle()
-                        }
                     }
                 }
             }
@@ -64,10 +58,8 @@ struct WebTextbooksView: View {
                 await vm.reload()
             }
             .alert(Text("WebTextbook"), isPresented: $showItemMore, actions: {
-                Button("Delete", role: .destructive) {
-                }
                 Button("Edit") {
-                    showDetailEdit.toggle()
+                    showDetail.toggle()
                 }
                 Button("Browse Web Page") {
                     navPath.append(BrowseViewTag())
@@ -78,8 +70,8 @@ struct WebTextbooksView: View {
             .navigationDestination(for: BrowseViewTag.self) { _ in
                 WebTextbooksWebPageView(item: currentItem)
             }
-            .sheet(isPresented: $showDetailEdit) {
-                WebTextbooksDetailView(item: currentItem, showDetail: $showDetailEdit)
+            .sheet(isPresented: $showDetail) {
+                WebTextbooksDetailView(item: currentItem, showDetail: $showDetail)
             }
         }
     }
