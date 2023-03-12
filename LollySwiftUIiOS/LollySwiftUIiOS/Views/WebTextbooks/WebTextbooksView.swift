@@ -18,90 +18,69 @@ struct WebTextbooksView: View {
     @State var currentItem = MWebTextbook()
     var body: some View {
         VStack {
-//            HStack(spacing: 0) {
-//                SearchBar(text: $vm.textFilter, placeholder: "Filter") { _ in }
-//                Picker("", selection: $vm.scopeFilter) {
-//                    ForEach(SettingsViewModel.arrScopeWebTextbookFilters, id: \.self) { s in
-//                        Text(s)
-//                    }
-//                }
-//                .background(Color.color2)
-//                .tint(.white)
-//            }
-//            List {
-//                ForEach(vm.arrWebTextbooksFiltered, id: \.ID) { item in
-//                    HStack {
-//                        VStack(alignment: .leading) {
-//                            Text(item.PATTERN)
-//                                .font(.title)
-//                                .foregroundColor(Color.color2)
-//                            Text(item.TAGS)
-//                                .foregroundColor(Color.color3)
-//                        }
-//                        Spacer()
-//                        Image(systemName: "info.circle")
-//                            .foregroundColor(.blue)
-//                            .onTapGesture {
-//                                currentItem = item
-//                                navPath.append(BrowseViewTag())
-//                            }
-//                    }
-//                    .contentShape(Rectangle())
-//                    .frame(maxWidth: .infinity)
-//                    .onTapGesture {
-//                        AppDelegate.speak(string: item.PATTERN)
-//                    }
-//                    .swipeActions(allowsFullSwipe: false) {
-//                        Button("More") {
-//                            currentItem = item
-//                            showItemMore.toggle()
-//                        }
-//                        Button("Delete", role: .destructive) {
-//                            currentItem = item
-//                            showDelete.toggle()
-//                        }
-//                    }
-//                }
-//            }
-//            .refreshable {
-//                await vm.reload()
-//            }
-//            .alert(Text("delete"), isPresented: $showDelete, actions: {
-//                Button("No", role: .cancel) {}
-//                Button("Yes", role: .destructive) {
-//
-//                }
-//            }, message: {
-//                Text(currentItem.PATTERN)
-//            })
-//            .alert(Text("WebTextbook"), isPresented: $showItemMore, actions: {
-//                Button("Delete", role: .destructive) {
-//                }
-//                Button("Edit") {
-//                    showDetailEdit.toggle()
-//                }
-//                Button("Browse Web Page") {
-//                    navPath.append(BrowseViewTag())
-//                }
-//            }, message: {
-//                Text(currentItem.PATTERN)
-//            })
-//            .navigationDestination(for: BrowseViewTag.self) { _ in
-//                WebTextbooksWebPageView(item: currentItem)
-//            }
-//            .toolbar {
-//                ToolbarItemGroup {
-//                    Button("Add") {
-//                        showDetailAdd.toggle()
-//                    }
-//                }
-//            }
-//            .sheet(isPresented: $showDetailEdit) {
-//                WebTextbooksDetailView(vmEdit: WebTextbooksDetailViewModel(vm: vm, item: currentItem), showDetail: $showDetailEdit)
-//            }
-//            .sheet(isPresented: $showDetailAdd) {
-//                WebTextbooksDetailView(vmEdit: WebTextbooksDetailViewModel(vm: vm, item: vm.newWebTextbook()), showDetail: $showDetailAdd)
-//            }
+            Spacer()
+            Picker("", selection: $vm.stringWebTextbookFilter) {
+                ForEach(vmSettings.arrWebTextbookFilters.map(\.label), id: \.self) { s in
+                    Text(s)
+                }
+            }
+            .modifier(PickerModifier(backgroundColor: Color.color3))
+            List {
+                ForEach(vm.arrWebTextbooksFiltered, id: \.ID) { item in
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text(item.TEXTBOOKNAME)
+                                .font(.title)
+                                .foregroundColor(Color.color2)
+                            Text(item.TITLE)
+                                .foregroundColor(Color.color3)
+                        }
+                        Spacer()
+                        Image(systemName: "info.circle")
+                            .foregroundColor(.blue)
+                            .onTapGesture {
+                                currentItem = item
+                                navPath.append(BrowseViewTag())
+                            }
+                    }
+                    .contentShape(Rectangle())
+                    .frame(maxWidth: .infinity)
+                    .onTapGesture {
+                        AppDelegate.speak(string: item.TITLE)
+                    }
+                    .swipeActions(allowsFullSwipe: false) {
+                        Button("More") {
+                            currentItem = item
+                            showItemMore.toggle()
+                        }
+                        Button("Delete", role: .destructive) {
+                            currentItem = item
+                            showDelete.toggle()
+                        }
+                    }
+                }
+            }
+            .refreshable {
+                await vm.reload()
+            }
+            .alert(Text("WebTextbook"), isPresented: $showItemMore, actions: {
+                Button("Delete", role: .destructive) {
+                }
+                Button("Edit") {
+                    showDetailEdit.toggle()
+                }
+                Button("Browse Web Page") {
+                    navPath.append(BrowseViewTag())
+                }
+            }, message: {
+                Text(currentItem.TITLE)
+            })
+            .navigationDestination(for: BrowseViewTag.self) { _ in
+                WebTextbooksWebPageView(item: currentItem)
+            }
+            .sheet(isPresented: $showDetailEdit) {
+                WebTextbooksDetailView(item: currentItem, showDetail: $showDetailEdit)
+            }
         }
     }
 

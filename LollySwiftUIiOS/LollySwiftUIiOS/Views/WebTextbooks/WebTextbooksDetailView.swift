@@ -18,26 +18,26 @@ struct WebTextbooksDetailView: View {
                     Spacer()
                     Text("\(item.ID)")
                 }
-//                HStack {
-//                    Text("TEXTBOOKNAME:")
-//                    Spacer()
-//                    Text(item.TEXTBOOKNAME)
-//                }
-//                HStack {
-//                    Text("UNIT:")
-//                    Spacer()
-//                    TextField("UNIT", text: $item.TAGS)
-//                }
-//                HStack {
-//                    Text("TITLE:")
-//                    Spacer()
-//                    TextField("NOTE", text: $item.TITLE)
-//                }
-//                HStack {
-//                    Text("URL:")
-//                    Spacer()
-//                    TextField("NOTE", text: $item.URL)
-//                }
+                HStack {
+                    Text("TEXTBOOKNAME:")
+                    Spacer()
+                    Text(item.TEXTBOOKNAME)
+                }
+                HStack {
+                    Text("UNIT:")
+                    Spacer()
+//                    TextField("UNIT", text: $item.UNIT, formatter: NumberFormatter())
+                }
+                HStack {
+                    Text("TITLE:")
+                    Spacer()
+                    TextField("NOTE", text: $item.TITLE)
+                }
+                HStack {
+                    Text("URL:")
+                    Spacer()
+                    TextField("NOTE", text: $item.URL)
+                }
             }
             .navigationBarItems(leading: Button("Cancel", role: .cancel) {
                 showDetail.toggle()
