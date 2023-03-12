@@ -246,6 +246,8 @@ class SettingsViewModel: NSObject {
                     if arrMacVoices.isEmpty { arrMacVoices.append(MVoice()) }
                     arriOSVoices = arrVoices.filter { $0.VOICETYPEID == 3 }
                     if arriOSVoices.isEmpty { arriOSVoices.append(MVoice()) }
+                    selectedMacVoiceIndex = arrMacVoices.firstIndex { $0.ID == USMACVOICE } ?? 0
+                    selectediOSVoiceIndex = arriOSVoices.firstIndex { $0.ID == USIOSVOICE } ?? 0
                     selectedDictReferenceIndex = arrDictsReference.firstIndex { String($0.DICTID) == USDICTREFERENCE } ?? 0
                     if arrDictsNote.isEmpty { arrDictsNote.append(MDictionary()) }
                     selectedDictNoteIndex = arrDictsNote.firstIndex { $0.DICTID == USDICTNOTE } ?? 0
@@ -254,8 +256,6 @@ class SettingsViewModel: NSObject {
                     selectedTextbookIndex = arrTextbooks.firstIndex { $0.ID == USTEXTBOOK } ?? 0
                     arrTextbookFilters.append(contentsOf: arrTextbooks.map { MSelectItem(value: $0.ID, label: $0.TEXTBOOKNAME) })
                     arrWebTextbookFilters.append(contentsOf: arrTextbooks.filter { $0.ISWEB == 1 }.map { MSelectItem(value: $0.ID, label: $0.TEXTBOOKNAME) })
-                    selectedMacVoiceIndex = arrMacVoices.firstIndex { $0.ID == USMACVOICE } ?? 0
-                    selectediOSVoiceIndex = arriOSVoices.firstIndex { $0.ID == USIOSVOICE } ?? 0
                     return !dirty ? Single.just(()) : MUserSetting.update(info: INFO_USLANG, intValue: USLANG)
                 }
         }
