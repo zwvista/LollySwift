@@ -128,7 +128,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     }
 
     func updateStatusText() {
-        tfStatusText.stringValue = "\(tableView.numberOfRows) Patterns in \(vmSettings.UNITINFO)"
+        tfStatusText.stringValue = "\(tableView.numberOfRows) Patterns in \(vmSettings.LANGINFO)"
     }
 
     @IBAction func doubleAction(_ sender: AnyObject) {

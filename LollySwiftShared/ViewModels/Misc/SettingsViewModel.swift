@@ -155,7 +155,8 @@ class SettingsViewModel: NSObject {
     var isSinglePart: Bool { partCount == 1 }
     var LANGINFO: String { "\(selectedLang.LANGNAME)" }
     var TEXTBOOKINFO: String { "\(LANGINFO) | \(selectedTextbook.TEXTBOOKNAME)" }
-    var UNITINFO: String { "\(TEXTBOOKINFO) | \(USUNITFROMSTR) \(USPARTFROMSTR) ~ \(USUNITTOSTR) \(USPARTTOSTR)" }
+    var UNITPARTINFO: String { "\(TEXTBOOKINFO) | \(USUNITFROMSTR) \(USPARTFROMSTR) ~ \(USUNITTOSTR) \(USPARTTOSTR)" }
+    var BLOGUNITINFO: String { "\(TEXTBOOKINFO) | \(USUNITTOSTR) \(selectedTextbook.arrParts.first!.label) ~ \(USUNITTOSTR) \(selectedTextbook.arrParts.last!.label)" }
 
     var selectedUnitFromIndex_ = BehaviorRelay(value: -1)
     var selectedUnitFromIndex: Int { get { selectedUnitFromIndex_.value } set { selectedUnitFromIndex_.accept(newValue) } }

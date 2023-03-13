@@ -35,7 +35,7 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
             if vm2.hasCurrent && vm2.isSpeaking.value {
                synth.startSpeaking(vm2.currentPhrase)
             }
-            tfStatusText.stringValue = "\(vm.arrPhrases.count) Phrases in \(vmSettings.UNITINFO)"
+            tfStatusText.stringValue = "\(vm.arrPhrases.count) Phrases in \(vmSettings.UNITPARTINFO)"
         }
         synth.setVoice(NSSpeechSynthesizer.VoiceName(rawValue: vmSettings.macVoiceName))
 

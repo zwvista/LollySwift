@@ -42,7 +42,10 @@ class DictStore: NSObject {
                 wvDict.loadHTMLString(str, baseURL: nil)
             } ~ rx.disposeBag
         } else {
-            wvDict.load(URLRequest(url: URL(string: url)!))
+            // https://stackoverflow.com/questions/74120763/in-webview-leads-to-crash-and-ui-unresponsiveness
+            DispatchQueue.main.async { [unowned self] in
+                wvDict.load(URLRequest(url: URL(string: url)!))
+            }
             if !dict.AUTOMATION.isEmpty {
                 dictStatus = .automating
             } else if dict.DICTTYPENAME == "OFFLINE-ONLINE" {

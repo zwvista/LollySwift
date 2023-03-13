@@ -331,19 +331,19 @@
                             <splitView arrangesAllSubviews="NO" dividerStyle="paneSplitter" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KAf-f3-jv9">
                                 <rect key="frame" x="0.0" y="0.0" width="1000" height="600"/>
                                 <subviews>
-                                    <customView misplaced="YES" id="gpu-WQ-leA">
+                                    <customView id="gpu-WQ-leA">
                                         <rect key="frame" x="0.0" y="0.0" width="499" height="600"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
                                             <splitView arrangesAllSubviews="NO" dividerStyle="paneSplitter" translatesAutoresizingMaskIntoConstraints="NO" id="pia-wi-Rnb">
-                                                <rect key="frame" x="0.0" y="206" width="499" height="600"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="499" height="600"/>
                                                 <subviews>
-                                                    <customView misplaced="YES" id="LTt-bR-cI0">
+                                                    <customView id="LTt-bR-cI0">
                                                         <rect key="frame" x="0.0" y="0.0" width="499" height="289"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
                                                             <scrollView autohidesScrollers="YES" horizontalLineScroll="24" horizontalPageScroll="10" verticalLineScroll="24" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cRJ-hS-PC6">
-                                                                <rect key="frame" x="0.0" y="101" width="499" height="289"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="499" height="289"/>
                                                                 <clipView key="contentView" id="Kon-qh-uVb">
                                                                     <rect key="frame" x="1" y="1" width="497" height="287"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -429,7 +429,7 @@
                                                                     </subviews>
                                                                 </clipView>
                                                                 <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="1Ik-02-QPQ">
-                                                                    <rect key="frame" x="1" y="171" width="235" height="16"/>
+                                                                    <rect key="frame" x="1" y="272" width="497" height="16"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                 </scroller>
                                                                 <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="hL4-qR-0D7">
@@ -452,12 +452,12 @@
                                                             <constraint firstAttribute="bottom" secondItem="cRJ-hS-PC6" secondAttribute="bottom" id="c4L-j1-pOs"/>
                                                         </constraints>
                                                     </customView>
-                                                    <customView misplaced="YES" id="Cfk-Jx-Gj6">
+                                                    <customView id="Cfk-Jx-Gj6">
                                                         <rect key="frame" x="0.0" y="299" width="499" height="301"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
                                                             <scrollView autohidesScrollers="YES" horizontalLineScroll="24" horizontalPageScroll="10" verticalLineScroll="24" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oNj-Cn-KAN">
-                                                                <rect key="frame" x="0.0" y="105" width="499" height="301"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="499" height="301"/>
                                                                 <clipView key="contentView" id="A7c-xo-w5i">
                                                                     <rect key="frame" x="1" y="1" width="497" height="299"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -543,7 +543,7 @@
                                                                     </subviews>
                                                                 </clipView>
                                                                 <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="fc7-Iw-OhF">
-                                                                    <rect key="frame" x="1" y="179" width="235" height="16"/>
+                                                                    <rect key="frame" x="1" y="284" width="497" height="16"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                 </scroller>
                                                                 <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="is0-AT-QMl">
@@ -580,12 +580,12 @@
                                             <constraint firstAttribute="trailing" secondItem="pia-wi-Rnb" secondAttribute="trailing" id="jhF-gI-Ygi"/>
                                         </constraints>
                                     </customView>
-                                    <customView misplaced="YES" id="gAC-9L-1MU">
+                                    <customView id="gAC-9L-1MU">
                                         <rect key="frame" x="509" y="0.0" width="491" height="600"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
                                             <wkWebView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9dB-m0-aIn">
-                                                <rect key="frame" x="0.0" y="206" width="491" height="600"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="491" height="600"/>
                                                 <wkWebViewConfiguration key="configuration">
                                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
                                                     <wkPreferences key="preferences"/>

@@ -19,7 +19,7 @@ class BlogEditViewModel: NSObject {
     init(settings: SettingsViewModel, item: MLangBlogContent?) {
         vmSettings = SettingsViewModel(settings)
         itemBlog = item
-        title = item == nil ? vmSettings.UNITINFO : itemBlog!.TITLE
+        title = item == nil ? vmSettings.BLOGUNITINFO : itemBlog!.TITLE
     }
 
     private static func html1With(_ s: String) -> String {
