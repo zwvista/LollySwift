@@ -120,7 +120,7 @@ class WordsReviewViewController: WordsBaseViewController, NSTextFieldDelegate {
     }
 
     override func updateStatusText() {
-        tfStatusText.stringValue = "\(vm.arrWords.count) Words in \(vmSettings.UNITINFO)"
+        tfStatusText.stringValue = "\(vm.arrWords.count) Words in \(vmSettings.UNITPARTINFO)"
     }
 }
 

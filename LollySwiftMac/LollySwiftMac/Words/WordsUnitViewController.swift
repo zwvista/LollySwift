@@ -259,7 +259,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     }
 
     override func updateStatusText() {
-        tfStatusText.stringValue = "\(tvWords.numberOfRows) Words in \(vmSettings.UNITINFO)"
+        tfStatusText.stringValue = "\(tvWords.numberOfRows) Words in \(vmSettings.UNITPARTINFO)"
     }
 
     @IBAction func associateNewPhrase(_ sender: AnyObject) {

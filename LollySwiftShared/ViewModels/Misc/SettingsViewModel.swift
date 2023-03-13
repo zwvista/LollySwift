@@ -139,7 +139,8 @@ class SettingsViewModel: NSObject, ObservableObject {
     var isSinglePart: Bool { partCount == 1 }
     var LANGINFO: String { "\(selectedLang.LANGNAME)" }
     var TEXTBOOKINFO: String { "\(LANGINFO) | \(selectedTextbook.TEXTBOOKNAME)" }
-    var UNITINFO: String { "\(TEXTBOOKINFO) | \(USUNITFROMSTR) \(USPARTFROMSTR) ~ \(USUNITTOSTR) \(USPARTTOSTR)" }
+    var UNITPARTINFO: String { "\(TEXTBOOKINFO) | \(USUNITFROMSTR) \(USPARTFROMSTR) ~ \(USUNITTOSTR) \(USPARTTOSTR)" }
+    var BLOGUNITINFO: String { "\(TEXTBOOKINFO) | \(USUNITTOSTR) \(selectedTextbook.arrParts.first!.label) ~ \(USUNITTOSTR) \(selectedTextbook.arrParts.last!.label)" }
 
     @Published var selectedUnitFromIndex = -1
     var selectedUnitFrom: Int { arrUnits.indices ~= selectedUnitFromIndex ? arrUnits[selectedUnitFromIndex].value : 0 }
