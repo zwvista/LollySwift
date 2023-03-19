@@ -99,14 +99,6 @@ class PhrasesBaseViewController: WordsPhrasesBaseViewController {
         vmWordsLang.arrWords[row]
     }
 
-    @IBAction func copyPhrase(_ sender: AnyObject) {
-        MacApi.copyText(vmPhrases.selectedPhrase)
-    }
-
-    @IBAction func googlePhrase(_ sender: AnyObject) {
-        MacApi.googleString(vmPhrases.selectedPhrase)
-    }
-
     func updateStatusText() {
         tfStatusText.stringValue = "\(tvPhrases.numberOfRows) Phrases"
     }
@@ -138,6 +130,13 @@ class PhrasesBaseViewController: WordsPhrasesBaseViewController {
             tvWords.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<tvWords.tableColumns.count))
         }
         presentAsModalWindow(detailVC)
+    }
+
+    @IBAction func dissociateWord(_ sender: AnyObject) {
+        guard vmWords.selectedWordID != 0 else {return}
+        MWordPhrase.dissociate(wordid: vmWords.selectedWordID, phraseid: vmPhrases.selectedPhraseID).subscribe { [unowned self] _ in
+            tvWords.reloadData()
+        } ~ rx.disposeBag
     }
 }
 

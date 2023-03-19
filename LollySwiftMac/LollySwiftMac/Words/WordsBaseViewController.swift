@@ -141,6 +141,22 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
         true
     }
 
+    @IBAction func copyWord(_ sender: AnyObject) {
+        MacApi.copyText(vmWords.selectedWord)
+    }
+
+    @IBAction func googleWord(_ sender: AnyObject) {
+        MacApi.googleString(vmWords.selectedWord)
+    }
+
+    @IBAction func copyPhrase(_ sender: AnyObject) {
+        MacApi.copyText(vmPhrases.selectedPhrase)
+    }
+
+    @IBAction func googlePhrase(_ sender: AnyObject) {
+        MacApi.googleString(vmPhrases.selectedPhrase)
+    }
+
     deinit {
         print("DEBUG: \(className) deinit")
     }
@@ -252,14 +268,6 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
         vmPhrasesLang.arrPhrases[row]
     }
 
-    @IBAction func copyWord(_ sender: AnyObject) {
-        MacApi.copyText(vmWords.selectedWord)
-    }
-
-    @IBAction func googleWord(_ sender: AnyObject) {
-        MacApi.googleString(vmWords.selectedWord)
-    }
-
     @IBAction func openOnlineDict(_ sender: AnyObject) {
         let row = tvWords.selectedRow
         guard row != -1 else {return}
@@ -297,6 +305,13 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
             tvPhrases.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<tvPhrases.tableColumns.count))
         }
         presentAsModalWindow(detailVC)
+    }
+
+    @IBAction func dissociatePhrase(_ sender: AnyObject) {
+        guard vmPhrases.selectedPhraseID != 0 else {return}
+        MWordPhrase.dissociate(wordid: vmWords.selectedWordID, phraseid: vmPhrases.selectedPhraseID).subscribe { [unowned self] _ in
+            tvPhrases.reloadData()
+        } ~ rx.disposeBag
     }
 }
 

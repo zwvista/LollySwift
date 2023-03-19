@@ -78,4 +78,8 @@ class DictStore: NSObject {
         default: break
         }
     }
+
+    deinit {
+        print("DEBUG: \(className) deinit")
+    }
 }
