@@ -84,4 +84,15 @@ class PhrasesUnitViewModel: PhrasesBaseViewModel {
             $0.textbook = vmSettings.selectedTextbook
         }
     }
+
+    func generateBlogContent() -> String {
+        Array(Dictionary(grouping: arrPhrases) {
+            $0.PART
+        }.values).sorted {
+            $0[0].PART < $1[0].PART
+        }.map { arr in
+            let s = arr.map { "* \($0.PHRASE)：\($0.TRANSLATION)：\n"}.joined(separator: "")
+            return "\(arr[0].PARTSTR)\n\(s)"
+        }.joined(separator: "")
+    }
 }
