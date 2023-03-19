@@ -74,4 +74,8 @@ class DictStore: NSObject, ObservableObject {
         default: break
         }
     }
+
+    deinit {
+        print("DEBUG: \(className) deinit")
+    }
 }
