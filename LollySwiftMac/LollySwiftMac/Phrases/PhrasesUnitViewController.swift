@@ -216,7 +216,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     }
 
     @IBAction func generateBlogContent(_ sender: AnyObject) {
-        let s = vm.arrPhrases.map { "* \($0.PHRASE)：\($0.TRANSLATION)：\n"}.joined(separator: "")
+        let s = vm.generateBlogContent()
         MacApi.copyText(s)
     }
 }
