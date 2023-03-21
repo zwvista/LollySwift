@@ -95,6 +95,7 @@ class PhrasesUnitViewModel: PhrasesBaseViewModel {
     }
 
     func generateBlogContent() -> String {
+        arrPhrases.map { $0.UNIT }.unique.count > 1 ? "Error: Multiple Units" :
         Array(Dictionary(grouping: arrPhrases) {
             $0.PART
         }.values).sorted {

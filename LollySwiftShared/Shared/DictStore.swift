@@ -20,10 +20,10 @@ class DictStore: NSObject {
 
     var dictStatus = DictWebViewStatus.ready
     var word = ""
-    var dict: MDictionary!
+    weak var dict: MDictionary!
     var url = ""
 
-    var vmSettings: SettingsViewModel
+    weak var vmSettings: SettingsViewModel!
     weak var wvDict: WKWebView!
 
     init(vmSettings: SettingsViewModel, wvDict: WKWebView) {
@@ -43,8 +43,10 @@ class DictStore: NSObject {
             } ~ rx.disposeBag
         } else {
             // https://stackoverflow.com/questions/74120763/in-webview-leads-to-crash-and-ui-unresponsiveness
-            DispatchQueue.main.async { [unowned self] in
-                wvDict.load(URLRequest(url: URL(string: url)!))
+            DispatchQueue.global(qos: .userInitiated).async {
+                DispatchQueue.main.async { [unowned self] in
+                    wvDict.load(URLRequest(url: URL(string: url)!))
+                }
             }
             if !dict.AUTOMATION.isEmpty {
                 dictStatus = .automating
