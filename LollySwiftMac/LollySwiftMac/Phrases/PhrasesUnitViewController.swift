@@ -145,9 +145,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     }
 
     @IBAction func refreshTableView(_ sender: AnyObject) {
-        vm.reload().subscribe { [unowned self] _ in
-            doRefresh()
-        } ~ rx.disposeBag
+        vm.reload().subscribe() ~ rx.disposeBag
     }
 
     @IBAction func doubleAction(_ sender: AnyObject) {
@@ -172,17 +170,13 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     @IBAction func previousUnitPart(_ sender: AnyObject) {
         vmSettings.previousUnitPart().flatMap { [unowned self] in
             vm.reload()
-        }.subscribe { [unowned self] _ in
-            doRefresh()
-        } ~ rx.disposeBag
+        }.subscribe() ~ rx.disposeBag
     }
 
     @IBAction func nextUnitPart(_ sender: AnyObject) {
         vmSettings.nextUnitPart().flatMap { [unowned self] in
             vm.reload()
-        }.subscribe { [unowned self] _ in
-            doRefresh()
-        } ~ rx.disposeBag
+        }.subscribe() ~ rx.disposeBag
     }
 
     @IBAction func toggleToType(_ sender: AnyObject) {
@@ -190,9 +184,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
         let part = row == -1 ? vmSettings.arrParts[0].value : arrPhrases[row].PART
         vmSettings.toggleToType(part: part).flatMap { [unowned self] in
             vm.reload()
-        }.subscribe { [unowned self] _ in
-            doRefresh()
-        } ~ rx.disposeBag
+        }.subscribe() ~ rx.disposeBag
     }
 
     override func updateStatusText() {
