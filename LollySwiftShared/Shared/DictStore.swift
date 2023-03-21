@@ -43,10 +43,9 @@ class DictStore: NSObject {
             } ~ rx.disposeBag
         } else {
             // https://stackoverflow.com/questions/74120763/in-webview-leads-to-crash-and-ui-unresponsiveness
-            DispatchQueue.global(qos: .userInitiated).async {
-                DispatchQueue.main.async { [unowned self] in
-                    wvDict.load(URLRequest(url: URL(string: url)!))
-                }
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else {return}
+                self.wvDict.load(URLRequest(url: URL(string: self.url)!))
             }
             if !dict.AUTOMATION.isEmpty {
                 dictStatus = .automating
