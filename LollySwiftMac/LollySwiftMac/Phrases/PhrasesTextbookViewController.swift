@@ -28,8 +28,10 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
     override func settingsChanged() {
         vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: false, needCopy: true) { [unowned self] in
             acTextbooks.content = vmSettings.arrTextbookFilters
-            doRefresh()
         }
+        vm.arrPhrasesFiltered_.subscribe { [unowned self] _ in
+            doRefresh()
+        } ~ rx.disposeBag
         super.settingsChanged()
     }
 

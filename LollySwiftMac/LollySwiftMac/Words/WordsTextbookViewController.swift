@@ -28,8 +28,10 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
     override func settingsChanged() {
         vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: false, needCopy: true) { [unowned self] in
             acTextbooks.content = vmSettings.arrTextbookFilters
-            doRefresh()
         }
+        vm.arrWordsFiltered_.subscribe { [unowned self] _ in
+            doRefresh()
+        } ~ rx.disposeBag
         super.settingsChanged()
     }
 

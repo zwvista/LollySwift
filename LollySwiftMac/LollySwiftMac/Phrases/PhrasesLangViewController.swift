@@ -23,9 +23,7 @@ class PhrasesLangViewController: PhrasesBaseViewController {
     }
 
     override func settingsChanged() {
-        vm = PhrasesLangViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) { [unowned self] in
-            doRefresh()
-        }
+        vm = PhrasesLangViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) {}
         vm.arrPhrasesFiltered_.subscribe { [unowned self] _ in
             doRefresh()
         } ~ rx.disposeBag
