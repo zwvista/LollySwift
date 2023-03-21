@@ -74,9 +74,7 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
     }
 
     @IBAction func refreshTableView(_ sender: AnyObject) {
-        vm.reload().subscribe { [unowned self] _ in
-            doRefresh()
-        } ~ rx.disposeBag
+        vm.reload().subscribe() ~ rx.disposeBag
     }
 
     @IBAction func doubleAction(_ sender: AnyObject) {
