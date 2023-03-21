@@ -22,16 +22,15 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        pubTextbookFilter.selectedItemIndexPublisher.sink { [unowned self] _ in
-            applyFilters()
-        } ~ subscriptions
     }
 
     override func settingsChanged() {
         vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: false, needCopy: true) { [unowned self] in
             acTextbooks.content = vmSettings.arrTextbookFilters
-            doRefresh()
         }
+        vm.$arrPhrasesFiltered.didSet.sink { [unowned self] _ in
+            doRefresh()
+        } ~ subscriptions
         super.settingsChanged()
     }
 

@@ -310,9 +310,10 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
 
     @IBAction func dissociatePhrase(_ sender: AnyObject) {
         guard vmPhrases.selectedPhraseID != 0 else {return}
-        MWordPhrase.dissociate(wordid: vmWords.selectedWordID, phraseid: vmPhrases.selectedPhraseID).subscribe { [unowned self] _ in
+        Task {
+            await MWordPhrase.dissociate(wordid: vmWords.selectedWordID, phraseid: vmPhrases.selectedPhraseID)
             tvPhrases.reloadData()
-        } ~ rx.disposeBag
+        }
     }
 }
 

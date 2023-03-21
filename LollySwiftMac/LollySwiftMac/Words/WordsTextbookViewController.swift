@@ -22,16 +22,15 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        pubTextbookFilter.selectedItemIndexPublisher.sink { [unowned self] _ in
-            applyFilters()
-        } ~ subscriptions
     }
 
     override func settingsChanged() {
         vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: false, needCopy: true) { [unowned self] in
             acTextbooks.content = vmSettings.arrTextbookFilters
-            doRefresh()
         }
+        vm.$arrWordsFiltered.didSet.sink { [unowned self] _ in
+            doRefresh()
+        } ~ subscriptions
         super.settingsChanged()
     }
 

@@ -24,9 +24,6 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     override func viewDidLoad() {
         super.viewDidLoad()
         tvPhrases.registerForDraggedTypes([tableRowDragType])
-        vm.$arrPhrasesFiltered.didSet.sink { [unowned self] _ in
-            doRefresh()
-        } ~ subscriptions
     }
 
     // https://stackoverflow.com/questions/8017822/how-to-enable-disable-nstoolbaritem
@@ -38,6 +35,9 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
 
     override func settingsChanged() {
         vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: true, needCopy: true) {}
+        vm.$arrPhrasesFiltered.didSet.sink { [unowned self] _ in
+            doRefresh()
+        } ~ subscriptions
         super.settingsChanged()
     }
 

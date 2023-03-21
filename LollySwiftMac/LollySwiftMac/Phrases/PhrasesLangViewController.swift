@@ -19,13 +19,13 @@ class PhrasesLangViewController: PhrasesBaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        vm.$arrPhrasesFiltered.didSet.sink { [unowned self] _ in
-            doRefresh()
-        } ~ subscriptions
     }
 
     override func settingsChanged() {
         vm = PhrasesLangViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) {}
+        vm.$arrPhrasesFiltered.didSet.sink { [unowned self] _ in
+            doRefresh()
+        } ~ subscriptions
         super.settingsChanged()
     }
 
