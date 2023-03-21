@@ -79,7 +79,6 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
     @IBAction func refreshTableView(_ sender: AnyObject) {
         Task {
             await vm.reload()
-            doRefresh()
         }
     }
 
