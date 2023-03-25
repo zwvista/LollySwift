@@ -21,6 +21,10 @@ class PhrasesUnitBatchEditViewController: NSViewController, NSTableViewDataSourc
     @IBOutlet weak var chkUnit: NSButton!
     @IBOutlet weak var chkPart: NSButton!
     @IBOutlet weak var chkSeqNum: NSButton!
+    @IBOutlet weak var btnCheckAll: NSButton!
+    @IBOutlet weak var btnUncheckAll: NSButton!
+    @IBOutlet weak var btnCheckSelected: NSButton!
+    @IBOutlet weak var btnUncheckSelected: NSButton!
     @IBOutlet weak var btnOK: NSButton!
 
     var vmEdit: PhrasesUnitBatchEditViewModel!
@@ -41,12 +45,27 @@ class PhrasesUnitBatchEditViewController: NSViewController, NSTableViewDataSourc
         _ = vmEdit.unitChecked ~> pubUnit.rx.isEnabled
         _ = vmEdit.partChecked ~> pubPart.rx.isEnabled
         _ = vmEdit.seqnumChecked ~> tfSeqNum.rx.isEnabled
+
+        func checkItems(_ btn: NSButton) {
+            for i in 0..<tableView.numberOfRows {
+                let chk = (tableView.view(atColumn: 0, row: i, makeIfNecessary: true)! as! LollyCheckCell).chk!
+                chk.state =
+                    btn === btnCheckAll ? .on :
+                    btn === btnUncheckAll ? .off :
+                    !tableView.selectedRowIndexes.contains(i) ? chk.state :
+                    btn === btnCheckSelected ? .on : .off
+            }
+        }
+        for btn in [btnCheckAll, btnUncheckAll, btnCheckSelected, btnUncheckSelected] {
+            btn!.rx.tap.subscribe { _ in checkItems(btn!) } ~ rx.disposeBag
+        }
+
         btnOK.rx.tap.flatMap { [unowned self] _ -> Single<()> in
             // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
             commitEditing()
             var rows = [Bool]()
             for i in 0..<tableView.numberOfRows {
-                let chk = (tableView.view(atColumn: 0, row: i, makeIfNecessary: false)! as! LollyCheckCell).chk!
+                let chk = (tableView.view(atColumn: 0, row: i, makeIfNecessary: true)! as! LollyCheckCell).chk!
                 rows.append(chk.state == .on)
             }
             return vmEdit.onOK(rows: rows)
@@ -72,18 +91,6 @@ class PhrasesUnitBatchEditViewController: NSViewController, NSTableViewDataSourc
         let columnName = tableColumn!.identifier.rawValue
         cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
         return cell
-    }
-
-    @IBAction func checkItems(_ sender: AnyObject) {
-        let n = (sender as! NSButton).tag
-        for i in 0..<tableView.numberOfRows {
-            let chk = (tableView.view(atColumn: 0, row: i, makeIfNecessary: false)! as! LollyCheckCell).chk!
-            chk.state =
-                n == 0 ? .on :
-                n == 1 ? .off :
-                !tableView.selectedRowIndexes.contains(i) ? chk.state :
-                n == 2 ? .on : .off
-        }
     }
 
     deinit {

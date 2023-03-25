@@ -48,7 +48,7 @@ class WordsUnitBatchEditViewController: NSViewController, NSTableViewDataSource,
 
         func checkItems(_ btn: NSButton) {
             for i in 0..<tableView.numberOfRows {
-                let chk = (tableView.view(atColumn: 0, row: i, makeIfNecessary: false)! as! LollyCheckCell).chk!
+                let chk = (tableView.view(atColumn: 0, row: i, makeIfNecessary: true)! as! LollyCheckCell).chk!
                 chk.state =
                     btn === btnCheckAll ? .on :
                     btn === btnUncheckAll ? .off :
@@ -64,7 +64,7 @@ class WordsUnitBatchEditViewController: NSViewController, NSTableViewDataSource,
             // https://stackoverflow.com/questions/1590204/cocoa-bindings-update-nsobjectcontroller-manually
             commitEditing()
             let rows = [Int](0..<tableView.numberOfRows).map { i in
-                let chk = (tableView.view(atColumn: 0, row: i, makeIfNecessary: false)! as! LollyCheckCell).chk!
+                let chk = (tableView.view(atColumn: 0, row: i, makeIfNecessary: true)! as! LollyCheckCell).chk!
                 return chk.state == .on
             }
             return vmEdit.onOK(rows: rows)
