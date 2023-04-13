@@ -21,6 +21,8 @@ class LangBlogsViewController: NSViewController, NSTableViewDataSource, NSTableV
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        wvBlog.allowsMagnification = true
+        wvBlog.allowsBackForwardNavigationGestures = true
         settingsChanged()
     }
 

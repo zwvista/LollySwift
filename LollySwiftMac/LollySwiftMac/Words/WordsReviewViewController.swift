@@ -39,7 +39,7 @@ class WordsReviewViewController: WordsBaseViewController, NSTextFieldDelegate {
                 synth.startSpeaking(vm2.currentWord)
             }
             if !vm2.isTestMode {
-//                searchDict(self)
+                searchDict(self)
             }
             updateStatusText()
         }
