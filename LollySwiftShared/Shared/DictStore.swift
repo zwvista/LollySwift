@@ -38,11 +38,7 @@ class DictStore: NSObject, ObservableObject {
                 wvDict.loadHTMLString(str, baseURL: nil)
             }
         } else {
-            // https://stackoverflow.com/questions/74120763/in-webview-leads-to-crash-and-ui-unresponsiveness
-            DispatchQueue.main.async { [weak self] in
-                guard let self = self else {return}
-                self.wvDict.load(URLRequest(url: URL(string: self.url)!))
-            }
+            wvDict.load(URLRequest(url: URL(string: url)!))
             if !dict.AUTOMATION.isEmpty {
                 dictStatus = .automating
             } else if dict.DICTTYPENAME == "OFFLINE-ONLINE" {

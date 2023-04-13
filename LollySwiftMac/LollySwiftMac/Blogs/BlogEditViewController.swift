@@ -21,6 +21,8 @@ class BlogEditViewController: NSViewController, NSMenuItemValidation  {
 
     override func viewWillAppear() {
         super.viewWillAppear()
+        wvBlog.allowsMagnification = true
+        wvBlog.allowsBackForwardNavigationGestures = true
         tvMarked.font = NSFont.systemFont(ofSize: 16)
         tfTitle.stringValue = vm.title
         Task {
