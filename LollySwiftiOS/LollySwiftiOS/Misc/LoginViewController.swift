@@ -13,6 +13,7 @@ class LoginViewController: UIViewController {
 
     @IBOutlet weak var tfUsername: UITextField!
     @IBOutlet weak var tfPassword: UITextField!
+    @IBOutlet weak var btnLogin: UIButton!
 
     let vm = LoginViewModel()
     var completion: (() -> Void)?
@@ -22,11 +23,11 @@ class LoginViewController: UIViewController {
 
         _ = vm.username <~> tfUsername.rx.textInput
         _ = vm.password <~> tfPassword.rx.textInput
-    }
 
-    @IBAction func login(_ sender: Any) {
-        vm.login(username: vm.username.value, password: vm.password.value).subscribe { [unowned self] in
-            globalUser.userid = $0
+        btnLogin.rx.tap.flatMap { [unowned self] in
+            vm.login(username: vm.username.value, password: vm.password.value)
+        }.subscribe { [unowned self] userid in
+            globalUser.userid = userid
             if globalUser.isLoggedIn {
                 globalUser.save()
                 dismiss(animated: true, completion: completion)
