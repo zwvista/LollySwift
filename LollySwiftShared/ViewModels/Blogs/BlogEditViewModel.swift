@@ -22,16 +22,16 @@ class BlogEditViewModel: NSObject {
     }
 
     private static func html1With(_ s: String) -> String {
-        "<strong><span style=\"color:#0000ff\">\(s)</span></strong>"
+        "<strong><span style=\"color:#0000ff;\">\(s)</span></strong>"
     }
     private static func htmlWordWith(_ s: String) -> String { html1With(s + "：") }
     private static func htmlBWith(_ s: String) -> String { html1With(s) }
     // tag for explantion 1
     private static func htmlE1With(_ s: String) -> String {
-        "<span style=\"color:#006600\">\(s)</span>"
+        "<span style=\"color:#006600;\">\(s)</span>"
     }
     private static func html2With(_ s: String) -> String {
-        "<span style=\"color:#cc00cc\">\(s)</span>"
+        "<span style=\"color:#cc00cc;\">\(s)</span>"
     }
     // tag for explantion 2
     private static func htmlE2With(_ s: String) -> String { html2With(s) }
