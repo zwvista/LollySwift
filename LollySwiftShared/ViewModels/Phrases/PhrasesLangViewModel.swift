@@ -29,7 +29,7 @@ class PhrasesLangViewModel: PhrasesBaseViewModel {
             }
         } ~ rx.disposeBag
 
-        reload().subscribe { complete() } ~ rx.disposeBag
+        reload().subscribe { _ in complete() } ~ rx.disposeBag
     }
 
     func reload() -> Single<()> {

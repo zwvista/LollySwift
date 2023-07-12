@@ -8,6 +8,7 @@
 
 import UIKit
 import XCTest
+import RxBinding
 
 class LollySwiftiOSTests: XCTestCase {
 
@@ -25,7 +26,7 @@ class LollySwiftiOSTests: XCTestCase {
         let vm = SettingsViewModel()
         vm.getData().subscribe { _ in
             XCTAssertEqual(vm.arrLanguages.count, 11)
-        }
+        } ~ rx.disposeBag
     }
 
     func testPerformanceExample() {
