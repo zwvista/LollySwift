@@ -90,7 +90,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
             tableView.moveRow(at: oldIndex, to: newIndex)
         }
 
-        tableView.beginUpdates()
+//        tableView.beginUpdates()
         for oldIndex in oldIndexes {
             if oldIndex < row {
                 moveRow(at: oldIndex + oldIndexOffset, to: row - 1)
@@ -105,8 +105,8 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
             await vm.reindex {
                 tableView.reloadData(forRowIndexes: [$0], columnIndexes: [col])
             }
-            tableView.endUpdates()
         }
+//        tableView.endUpdates()
 
         return true
     }

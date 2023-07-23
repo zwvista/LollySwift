@@ -80,7 +80,7 @@ class TransformDetailViewController: NSViewController, NSTableViewDataSource, NS
             tableView.moveRow(at: oldIndex, to: newIndex)
         }
 
-        tableView.beginUpdates()
+//        tableView.beginUpdates()
         for oldIndex in oldIndexes {
             if oldIndex < row {
                 moveRow(at: oldIndex + oldIndexOffset, to: row - 1)
@@ -94,7 +94,7 @@ class TransformDetailViewController: NSViewController, NSTableViewDataSource, NS
         vm.reindex {
             tableView.reloadData(forRowIndexes: [$0], columnIndexes: [col])
         }
-        tableView.endUpdates()
+//        tableView.endUpdates()
 
         return true
     }
