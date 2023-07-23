@@ -104,7 +104,7 @@ class LangBlogsViewController: NSViewController, NSTableViewDataSource, NSTableV
     }
 
     @IBAction func editBlog(_ sender: Any) {
-        let i = tvGroups.selectedRow
+        let i = tvBlogs.selectedRow
         if i == -1 {return}
         let detailVC = storyboard!.instantiateController(withIdentifier: "LangBlogsDetailViewController") as! LangBlogsDetailViewController
         detailVC.vmEdit = LangBlogsDetailViewModel(vm: vm, item: vm.arrBlogs[i])
