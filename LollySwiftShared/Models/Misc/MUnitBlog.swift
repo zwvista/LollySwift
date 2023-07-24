@@ -1,5 +1,5 @@
 //
-//  MUnitBlog.swift
+//  MUnitBlogPost.swift
 //  LollySwiftMac
 //
 //  Created by cho.i on 2022/05/05.
@@ -9,38 +9,38 @@
 import Foundation
 
 @objcMembers
-class MUnitBlogs: HasRecords {
-    typealias RecordType = MUnitBlog
-    dynamic var records = [MUnitBlog]()
+class MUnitBlogPosts: HasRecords {
+    typealias RecordType = MUnitBlogPost
+    dynamic var records = [MUnitBlogPost]()
 }
 
 @objcMembers
-class MUnitBlog: NSObject, Codable {
+class MUnitBlogPost: NSObject, Codable {
     dynamic var ID = 0
     dynamic var TEXTBOOKID = 0
     dynamic var UNIT = 0
     dynamic var CONTENT = ""
 
-    static func getDataByTextbook(_ textbookid: Int, unit: Int) async -> MUnitBlog? {
-        // SQL: SELECT * FROM VUNITBLOGS WHERE TEXTBOOKID=? AND UNIT = ?
-        let url = "\(CommonApi.urlAPI)UNITBLOGS?filter=TEXTBOOKID,eq,\(textbookid)&filter=UNIT,eq,\(unit)"
-        let o = await RestApi.getRecords(MUnitBlogs.self, url: url)
+    static func getDataByTextbook(_ textbookid: Int, unit: Int) async -> MUnitBlogPost? {
+        // SQL: SELECT * FROM UNITBLOGPOSTS WHERE TEXTBOOKID=? AND UNIT = ?
+        let url = "\(CommonApi.urlAPI)UNITBLOGPOSTS?filter=TEXTBOOKID,eq,\(textbookid)&filter=UNIT,eq,\(unit)"
+        let o = await RestApi.getRecords(MUnitBlogPosts.self, url: url)
         return o.isEmpty ? nil : o[0]
     }
 
-    private static func create(item: MUnitBlog) async {
-        let url = "\(CommonApi.urlAPI)UNITBLOGS"
+    private static func create(item: MUnitBlogPost) async {
+        let url = "\(CommonApi.urlAPI)UNITBLOGPOSTS"
         print(await RestApi.create(url: url, body: try! item.toJSONString()!))
      }
 
-    private static func update(item: MUnitBlog) async {
-        let url = "\(CommonApi.urlAPI)UNITBLOGS/\(item.ID)"
+    private static func update(item: MUnitBlogPost) async {
+        let url = "\(CommonApi.urlAPI)UNITBLOGPOSTS/\(item.ID)"
         print(await RestApi.update(url: url, body: try! item.toJSONString()!))
      }
 
     static func update(_ textbookid: Int, unit: Int, content: String) async {
-        let o = await MUnitBlog.getDataByTextbook(textbookid, unit: unit)
-        let item = o ?? MUnitBlog()
+        let o = await MUnitBlogPost.getDataByTextbook(textbookid, unit: unit)
+        let item = o ?? MUnitBlogPost()
         if item.ID == 0 {
             item.TEXTBOOKID = textbookid
             item.UNIT = unit

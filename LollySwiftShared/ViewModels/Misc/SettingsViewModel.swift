@@ -602,9 +602,9 @@ class SettingsViewModel: NSObject, ObservableObject {
     }
 
     func getBlogContent() async -> String {
-        (await MUnitBlog.getDataByTextbook(selectedTextbook.ID, unit: selectedUnitTo))?.CONTENT ?? ""
+        (await MUnitBlogPost.getDataByTextbook(selectedTextbook.ID, unit: selectedUnitTo))?.CONTENT ?? ""
     }
     func saveBlogContent(content: String) async {
-        await MUnitBlog.update(selectedTextbook.ID, unit: selectedUnitTo, content: content)
+        await MUnitBlogPost.update(selectedTextbook.ID, unit: selectedUnitTo, content: content)
     }
 }
