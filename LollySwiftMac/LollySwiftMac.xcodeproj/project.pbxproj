@@ -41,8 +41,8 @@
 		8CA47F222968EF88006CF4A2 /* GlobalUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA47F212968EF88006CF4A2 /* GlobalUser.swift */; };
 		8CA47F232968EF88006CF4A2 /* GlobalUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA47F212968EF88006CF4A2 /* GlobalUser.swift */; };
 		8CAF910A20833C4F00933837 /* WordsSearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAF910920833C4F00933837 /* WordsSearchViewModel.swift */; };
-		8CCFA65229B35C68004748B8 /* MUnitBlog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCFA65129B35C68004748B8 /* MUnitBlog.swift */; };
-		8CCFA65329B35C68004748B8 /* MUnitBlog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCFA65129B35C68004748B8 /* MUnitBlog.swift */; };
+		8CCFA65229B35C68004748B8 /* MUnitBlogPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCFA65129B35C68004748B8 /* MUnitBlogPost.swift */; };
+		8CCFA65329B35C68004748B8 /* MUnitBlogPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCFA65129B35C68004748B8 /* MUnitBlogPost.swift */; };
 		8CCFA66229B3A824004748B8 /* TextbooksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCFA65E29B3A824004748B8 /* TextbooksViewModel.swift */; };
 		8CCFA66329B3A824004748B8 /* TextbooksDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCFA65F29B3A824004748B8 /* TextbooksDetailViewModel.swift */; };
 		8CCFA66529B3A824004748B8 /* WebTextbooksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCFA66129B3A824004748B8 /* WebTextbooksViewModel.swift */; };
@@ -230,7 +230,7 @@
 		8C6E2EDC1EBB97CF00AC114F /* LollySwiftMac-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LollySwiftMac-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		8CA47F212968EF88006CF4A2 /* GlobalUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalUser.swift; sourceTree = "<group>"; };
 		8CAF910920833C4F00933837 /* WordsSearchViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsSearchViewModel.swift; sourceTree = "<group>"; };
-		8CCFA65129B35C68004748B8 /* MUnitBlog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MUnitBlog.swift; sourceTree = "<group>"; };
+		8CCFA65129B35C68004748B8 /* MUnitBlogPost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MUnitBlogPost.swift; sourceTree = "<group>"; };
 		8CCFA65E29B3A824004748B8 /* TextbooksViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextbooksViewModel.swift; sourceTree = "<group>"; };
 		8CCFA65F29B3A824004748B8 /* TextbooksDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextbooksDetailViewModel.swift; sourceTree = "<group>"; };
 		8CCFA66129B3A824004748B8 /* WebTextbooksViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebTextbooksViewModel.swift; sourceTree = "<group>"; };
@@ -686,7 +686,7 @@
 				8C2CB5AC207885140083DDE2 /* MLanguage.swift */,
 				95DAEBCD22DF8B1100A3C361 /* MReviewOptions.swift */,
 				8C2CB5AD207885140083DDE2 /* MTextbook.swift */,
-				8CCFA65129B35C68004748B8 /* MUnitBlog.swift */,
+				8CCFA65129B35C68004748B8 /* MUnitBlogPost.swift */,
 				95548CE12621CD5B00893AB8 /* MUser.swift */,
 				8C2CB5A8207885140083DDE2 /* MUserSetting.swift */,
 				95F5401122C38F8F00E3FD6A /* MUSMapping.swift */,
@@ -1005,7 +1005,7 @@
 				9562949726B5C3DD000C68B1 /* RxCodableAlamofire.swift in Sources */,
 				95EFF47E21840FB60094EE3C /* MAutoCorrect.swift in Sources */,
 				957B537825A8692000C18B06 /* DictStore.swift in Sources */,
-				8CCFA65229B35C68004748B8 /* MUnitBlog.swift in Sources */,
+				8CCFA65229B35C68004748B8 /* MUnitBlogPost.swift in Sources */,
 				954CB5F423B7175500A03900 /* PatternsViewModel.swift in Sources */,
 				954189132438FF1F00DB7230 /* ReviewOptionsViewController.swift in Sources */,
 				95837E8F24DF246400B5D2AE /* WordsTextbookDetailViewController.swift in Sources */,
@@ -1062,7 +1062,7 @@
 				954D8BA42143907C00651A80 /* MLanguage.swift in Sources */,
 				95B658A82227D89A0095B0D2 /* MCommon.swift in Sources */,
 				959191EE258CFFCA0070DBFD /* MWordPhrase.swift in Sources */,
-				8CCFA65329B35C68004748B8 /* MUnitBlog.swift in Sources */,
+				8CCFA65329B35C68004748B8 /* MUnitBlogPost.swift in Sources */,
 				8C1C4F3A1D31F88800CF5D88 /* LollySwiftMacTests.swift in Sources */,
 				954D8BA62143907C00651A80 /* MTextbook.swift in Sources */,
 				959191E6258CFFCA0070DBFD /* MLangWord.swift in Sources */,
