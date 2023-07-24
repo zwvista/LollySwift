@@ -59,14 +59,15 @@
 		8CC3CBCB294283CF005670CC /* NSSegmentedControl+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC3CBC4294283CF005670CC /* NSSegmentedControl+Combine.swift */; };
 		8CC3CBCC294283CF005670CC /* NSTextView+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC3CBC5294283CF005670CC /* NSTextView+Combine.swift */; };
 		8CC3CBCD294283CF005670CC /* NSTextField+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC3CBC6294283CF005670CC /* NSTextField+Combine.swift */; };
-		8CCFA65229B35C68004748B8 /* MUnitBlog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCFA65129B35C68004748B8 /* MUnitBlog.swift */; };
-		8CCFA65329B35C68004748B8 /* MUnitBlog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCFA65129B35C68004748B8 /* MUnitBlog.swift */; };
+		8CCFA65229B35C68004748B8 /* MUnitBlogPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCFA65129B35C68004748B8 /* MUnitBlogPost.swift */; };
+		8CCFA65329B35C68004748B8 /* MUnitBlogPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCFA65129B35C68004748B8 /* MUnitBlogPost.swift */; };
 		8CCFA66229B3A824004748B8 /* TextbooksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCFA65E29B3A824004748B8 /* TextbooksViewModel.swift */; };
 		8CCFA66329B3A824004748B8 /* TextbooksDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCFA65F29B3A824004748B8 /* TextbooksDetailViewModel.swift */; };
 		8CCFA66529B3A824004748B8 /* WebTextbooksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCFA66129B3A824004748B8 /* WebTextbooksViewModel.swift */; };
 		8CD8409D20AFD4DA00442133 /* PhrasesUnitDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8409A20AFD4D900442133 /* PhrasesUnitDetailViewController.swift */; };
 		8CD8409E20AFD4DA00442133 /* PhrasesUnitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8409B20AFD4D900442133 /* PhrasesUnitViewController.swift */; };
 		8CD8409F20AFD4DA00442133 /* Phrases.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8CD8409C20AFD4D900442133 /* Phrases.storyboard */; };
+		8CF294912A6D360800E8D195 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 8CD4F03C293301F4003AEC61 /* Alamofire */; };
 		8CFE458A29BC360500DE595E /* WebTextbooksDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFE458929BC360500DE595E /* WebTextbooksDetailViewController.swift */; };
 		95042355224AD4AC0038997A /* CommonApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954B8707218DC04E007DC348 /* CommonApi.swift */; };
 		9508C767243605D0004A0D73 /* WordsDictViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9508C766243605D0004A0D73 /* WordsDictViewController.swift */; };
@@ -257,7 +258,7 @@
 		8CC3CBC4294283CF005670CC /* NSSegmentedControl+Combine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSSegmentedControl+Combine.swift"; sourceTree = "<group>"; };
 		8CC3CBC5294283CF005670CC /* NSTextView+Combine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSTextView+Combine.swift"; sourceTree = "<group>"; };
 		8CC3CBC6294283CF005670CC /* NSTextField+Combine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSTextField+Combine.swift"; sourceTree = "<group>"; };
-		8CCFA65129B35C68004748B8 /* MUnitBlog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MUnitBlog.swift; sourceTree = "<group>"; };
+		8CCFA65129B35C68004748B8 /* MUnitBlogPost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MUnitBlogPost.swift; sourceTree = "<group>"; };
 		8CCFA65E29B3A824004748B8 /* TextbooksViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextbooksViewModel.swift; sourceTree = "<group>"; };
 		8CCFA65F29B3A824004748B8 /* TextbooksDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextbooksDetailViewModel.swift; sourceTree = "<group>"; };
 		8CCFA66129B3A824004748B8 /* WebTextbooksViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebTextbooksViewModel.swift; sourceTree = "<group>"; };
@@ -356,8 +357,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CF294912A6D360800E8D195 /* Alamofire in Frameworks */,
 				8C486DF61EBB882B0023FBFC /* WebKit.framework in Frameworks */,
-				8CD4F03D293301F4003AEC61 /* Alamofire in Frameworks */,
 				8C486DF41EBB88240023FBFC /* Cocoa.framework in Frameworks */,
 				41624B18047DBD62E1485CDE /* Pods_LollySwiftMac.framework in Frameworks */,
 			);
@@ -751,7 +752,7 @@
 				8C2CB5AC207885140083DDE2 /* MLanguage.swift */,
 				95DAEBCD22DF8B1100A3C361 /* MReviewOptions.swift */,
 				8C2CB5AD207885140083DDE2 /* MTextbook.swift */,
-				8CCFA65129B35C68004748B8 /* MUnitBlog.swift */,
+				8CCFA65129B35C68004748B8 /* MUnitBlogPost.swift */,
 				95548CE12621CD5B00893AB8 /* MUser.swift */,
 				8C2CB5A8207885140083DDE2 /* MUserSetting.swift */,
 				95F5401122C38F8F00E3FD6A /* MUSMapping.swift */,
@@ -1085,7 +1086,7 @@
 				95CED3B2221048B50094622F /* PhrasesBaseViewController.swift in Sources */,
 				95EFF47E21840FB60094EE3C /* MAutoCorrect.swift in Sources */,
 				957B537825A8692000C18B06 /* DictStore.swift in Sources */,
-				8CCFA65229B35C68004748B8 /* MUnitBlog.swift in Sources */,
+				8CCFA65229B35C68004748B8 /* MUnitBlogPost.swift in Sources */,
 				954CB5F423B7175500A03900 /* PatternsViewModel.swift in Sources */,
 				954189132438FF1F00DB7230 /* ReviewOptionsViewController.swift in Sources */,
 				95837E8F24DF246400B5D2AE /* WordsTextbookDetailViewController.swift in Sources */,
@@ -1143,7 +1144,7 @@
 				954D8BA42143907C00651A80 /* MLanguage.swift in Sources */,
 				95B658A82227D89A0095B0D2 /* MCommon.swift in Sources */,
 				959191EE258CFFCA0070DBFD /* MWordPhrase.swift in Sources */,
-				8CCFA65329B35C68004748B8 /* MUnitBlog.swift in Sources */,
+				8CCFA65329B35C68004748B8 /* MUnitBlogPost.swift in Sources */,
 				8C1C4F3A1D31F88800CF5D88 /* LollySwiftMacTests.swift in Sources */,
 				954D8BA62143907C00651A80 /* MTextbook.swift in Sources */,
 				959191E6258CFFCA0070DBFD /* MLangWord.swift in Sources */,
