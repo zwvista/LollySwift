@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21507"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21701"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -979,10 +979,16 @@
                                                 <action selector="editUnitBlog:" target="Voe-Tx-rLC" id="l0W-IM-LlM"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Language Blogs" id="FYo-sH-MTs">
+                                        <menuItem title="Language Blog Groups" id="FYo-sH-MTs">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="showLangBlogs:" target="Voe-Tx-rLC" id="xoc-xk-Nfz"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Language Blog Posts" id="Sfc-Kk-Tli">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="showLangBlogs:" target="Voe-Tx-rLC" id="V8c-dB-oeR"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Textbooks" id="LlE-b6-XJk">

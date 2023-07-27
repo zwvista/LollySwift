@@ -1,5 +1,5 @@
 //
-//  LangBlogsViewModel.swift
+//  LangBlogGroupsViewModel.swift
 //  LollySwiftMac
 //
 //  Created by 趙偉 on 2023/02/18.
@@ -11,12 +11,12 @@ import RxSwift
 import RxBinding
 import Then
 
-class LangBlogsViewModel: NSObject {
+class LangBlogGroupsViewModel: NSObject {
     var vmSettings: SettingsViewModel
     var arrGroups = [MLangBlogGroup]()
     var currentGroup: MLangBlogGroup? = nil
-    var arrBlogs = [MLangBlogPost]()
-    var currentBlog: MLangBlogPost? = nil
+    var arrPosts = [MLangBlogPost]()
+    var currentPost: MLangBlogPost? = nil
     var blogContent = ""
 
     init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> Void) {
@@ -31,7 +31,7 @@ class LangBlogsViewModel: NSObject {
     func selectGroup(_ group: MLangBlogGroup?, complete: @escaping () -> Void) {
         currentGroup = group
         MLangBlogPost.getDataByLangGroup(langid: vmSettings.selectedLang.ID, groupid: group?.ID ?? 0).subscribe { [unowned self] in
-            arrBlogs = $0
+            arrPosts = $0
             complete()
         } ~ rx.disposeBag
     }
@@ -51,7 +51,7 @@ class LangBlogsViewModel: NSObject {
     }
 
     func selectBlog(_ blog: MLangBlogPost?, complete: @escaping () -> Void) {
-        currentBlog = blog
+        currentPost = blog
         MLangBlogPostContent.getDataById(blog?.ID ?? 0).subscribe { [unowned self] in
             blogContent = $0?.CONTENT ?? ""
             complete()

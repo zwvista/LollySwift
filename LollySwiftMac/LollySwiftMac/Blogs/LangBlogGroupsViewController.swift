@@ -1,5 +1,5 @@
 //
-//  LangBlogsViewController.swift
+//  LangBlogGroupsViewController.swift
 //  LollySwiftMac
 //
 //  Created by 趙偉 on 2023/02/18.
@@ -11,13 +11,13 @@ import WebKit
 import RxSwift
 import RxBinding
 
-class LangBlogsViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, LollyProtocol {
+class LangBlogGroupsViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, LollyProtocol {
 
     @IBOutlet weak var tvGroups: NSTableView!
-    @IBOutlet weak var tvBlogs: NSTableView!
+    @IBOutlet weak var tvPosts: NSTableView!
     @IBOutlet weak var wvBlog: WKWebView!
 
-    var vm: LangBlogsViewModel!
+    var vm: LangBlogGroupsViewModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,13 +27,13 @@ class LangBlogsViewController: NSViewController, NSTableViewDataSource, NSTableV
     }
 
     func settingsChanged() {
-        vm = LangBlogsViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) { [unowned self] in
+        vm = LangBlogGroupsViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) { [unowned self] in
             tvGroups.reloadData()
         }
     }
 
     func numberOfRows(in tableView: NSTableView) -> Int {
-        tableView === tvGroups ? vm.arrGroups.count : vm.arrBlogs.count
+        tableView === tvGroups ? vm.arrGroups.count : vm.arrPosts.count
     }
 
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
@@ -43,7 +43,7 @@ class LangBlogsViewController: NSViewController, NSTableViewDataSource, NSTableV
             let item = vm.arrGroups[row]
             cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
         } else {
-            let item = vm.arrBlogs[row]
+            let item = vm.arrPosts[row]
             cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
         }
         return cell
@@ -54,11 +54,11 @@ class LangBlogsViewController: NSViewController, NSTableViewDataSource, NSTableV
         if tv === tvGroups {
             let i = tvGroups.selectedRow
             vm.selectGroup(i == -1 ? nil : vm.arrGroups[i]) { [unowned self] in
-                tvBlogs.reloadData()
+                tvPosts.reloadData()
             }
         } else {
-            let i = tvBlogs.selectedRow
-            vm.selectBlog(i == -1 ? nil : vm.arrBlogs[i]) { [unowned self] in
+            let i = tvPosts.selectedRow
+            vm.selectBlog(i == -1 ? nil : vm.arrPosts[i]) { [unowned self] in
                 wvBlog.loadHTMLString(BlogEditViewModel.markedToHtml(text: vm.blogContent), baseURL: nil)
             }
         }
@@ -105,20 +105,20 @@ class LangBlogsViewController: NSViewController, NSTableViewDataSource, NSTableV
     }
 
     @IBAction func editBlog(_ sender: Any) {
-        let i = tvBlogs.selectedRow
+        let i = tvPosts.selectedRow
         if i == -1 {return}
         let detailVC = storyboard!.instantiateController(withIdentifier: "LangBlogsDetailViewController") as! LangBlogsDetailViewController
-        detailVC.vmEdit = LangBlogsDetailViewModel(vm: vm, item: vm.arrBlogs[i])
+        detailVC.vmEdit = LangBlogsDetailViewModel(vm: vm, item: vm.arrPosts[i])
         detailVC.complete = { [unowned self] in
-            tvBlogs.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<tvBlogs.tableColumns.count))
+            tvPosts.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<tvPosts.tableColumns.count))
         }
         presentAsModalWindow(detailVC)
     }
 
     @IBAction func editBlogContent(_ sender: Any) {
-        let i = tvBlogs.selectedRow
+        let i = tvPosts.selectedRow
         if i == -1 {return}
-        let itemBlog = vm.arrBlogs[i]
+        let itemBlog = vm.arrPosts[i]
         MLangBlogPostContent.getDataById(itemBlog.ID).subscribe { [unowned self] in
             (NSApplication.shared.delegate as! AppDelegate).editBlog(settings: vm.vmSettings, item: $0)
         } ~ rx.disposeBag

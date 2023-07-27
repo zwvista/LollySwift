@@ -320,10 +320,10 @@
             </objects>
             <point key="canvasLocation" x="2944" y="-45"/>
         </scene>
-        <!--Lang Blogs View Controller-->
+        <!--Lang Blog Groups View Controller-->
         <scene sceneID="nv2-AP-BFB">
             <objects>
-                <viewController id="LXF-pA-LqT" customClass="LangBlogsViewController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="LXF-pA-LqT" customClass="LangBlogGroupsViewController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="Aft-WT-ORz">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="600"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -614,8 +614,8 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="tvBlogs" destination="9rv-gn-VfO" id="OBB-op-cPB"/>
                         <outlet property="tvGroups" destination="Two-Cm-jaa" id="Cc8-5A-UN8"/>
+                        <outlet property="tvPosts" destination="9rv-gn-VfO" id="OBB-op-cPB"/>
                         <outlet property="wvBlog" destination="9dB-m0-aIn" id="oz4-6k-sIn"/>
                     </connections>
                 </viewController>
