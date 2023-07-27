@@ -1,5 +1,5 @@
 //
-//  LangBlogsViewModel.swift
+//  LangBlogGroupsViewModel.swift
 //  LollySwiftMac
 //
 //  Created by 趙偉 on 2023/02/18.
@@ -10,12 +10,12 @@ import Foundation
 import Then
 
 @MainActor
-class LangBlogsViewModel: NSObject {
+class LangBlogGroupsViewModel: NSObject {
     var vmSettings: SettingsViewModel
     var arrGroups = [MLangBlogGroup]()
     var currentGroup: MLangBlogGroup? = nil
-    var arrBlogs = [MLangBlogPost]()
-    var currentBlog: MLangBlogPost? = nil
+    var arrPosts = [MLangBlogPost]()
+    var currentPost: MLangBlogPost? = nil
     var blogContent = ""
 
     init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> Void) {
@@ -30,7 +30,7 @@ class LangBlogsViewModel: NSObject {
     func selectGroup(_ group: MLangBlogGroup?, complete: @escaping () -> Void) {
         currentGroup = group
         Task {
-            arrBlogs = await MLangBlogPost.getDataByLangGroup(langid: vmSettings.selectedLang.ID, groupid: group?.ID ?? 0)
+            arrPosts = await MLangBlogPost.getDataByLangGroup(langid: vmSettings.selectedLang.ID, groupid: group?.ID ?? 0)
             complete()
         }
     }
@@ -50,7 +50,7 @@ class LangBlogsViewModel: NSObject {
     }
 
     func selectBlog(_ blog: MLangBlogPost?, complete: @escaping () -> Void) {
-        currentBlog = blog
+        currentPost = blog
         Task {
             blogContent = (await MLangBlogPostContent.getDataById(blog?.ID ?? 0))?.CONTENT ?? ""
             complete()
