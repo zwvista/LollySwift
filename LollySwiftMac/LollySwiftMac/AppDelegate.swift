@@ -178,8 +178,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         editBlog(settings: AppDelegate.theSettingsViewModel, item: nil)
     }
 
-    @IBAction func showLangBlogs(_ sender: AnyObject) {
-        showWindow(storyBoardName: "Blogs", windowControllerName: "LangBlogsWindowController")
+    @IBAction func showLangBlogGroups(_ sender: AnyObject) {
+        showWindow(storyBoardName: "Blogs", windowControllerName: "LangBlogGroupsWindowController")
+    }
+
+    @IBAction func showLangBlogPosts(_ sender: AnyObject) {
+        showWindow(storyBoardName: "Blogs", windowControllerName: "LangBlogPostsWindowController")
     }
 
     @IBAction func textbooks(_ sender: AnyObject) {

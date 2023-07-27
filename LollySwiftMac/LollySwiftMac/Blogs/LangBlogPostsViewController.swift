@@ -1,5 +1,5 @@
 //
-//  LangBlogGroupsViewController.swift
+//  LangBlogPostsViewController.swift
 //  LollySwiftMac
 //
 //  Created by 趙偉 on 2023/02/18.
@@ -7,11 +7,10 @@
 //
 
 import Cocoa
+import Combine
 import WebKit
-import RxSwift
-import RxBinding
 
-class LangBlogGroupsViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, LollyProtocol {
+class LangBlogPostsViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, LollyProtocol {
 
     @IBOutlet weak var tvGroups: NSTableView!
     @IBOutlet weak var tvPosts: NSTableView!
@@ -119,9 +118,10 @@ class LangBlogGroupsViewController: NSViewController, NSTableViewDataSource, NST
         let i = tvPosts.selectedRow
         if i == -1 {return}
         let itemBlog = vm.arrPosts[i]
-        MLangBlogPostContent.getDataById(itemBlog.ID).subscribe { [unowned self] in
-            (NSApplication.shared.delegate as! AppDelegate).editBlog(settings: vm.vmSettings, item: $0)
-        } ~ rx.disposeBag
+        Task {
+            let item = await MLangBlogPostContent.getDataById(itemBlog.ID)
+            (NSApplication.shared.delegate as! AppDelegate).editBlog(settings: vm.vmSettings, item: item)
+        }
     }
 
     deinit {
@@ -129,7 +129,7 @@ class LangBlogGroupsViewController: NSViewController, NSTableViewDataSource, NST
     }
 }
 
-class LangBlogGroupsWindowController: NSWindowController, NSWindowDelegate {
+class LangBlogPostsWindowController: NSWindowController, NSWindowDelegate {
 
     override func windowDidLoad() {
         super.windowDidLoad()
