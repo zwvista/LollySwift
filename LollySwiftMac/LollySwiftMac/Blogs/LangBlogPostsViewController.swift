@@ -1,5 +1,5 @@
 //
-//  LangBlogGroupsViewController.swift
+//  LangBlogPostsViewController.swift
 //  LollySwiftMac
 //
 //  Created by 趙偉 on 2023/02/18.
@@ -10,7 +10,7 @@ import Cocoa
 import Combine
 import WebKit
 
-class LangBlogGroupsViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, LollyProtocol {
+class LangBlogPostsViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, LollyProtocol {
 
     @IBOutlet weak var tvGroups: NSTableView!
     @IBOutlet weak var tvPosts: NSTableView!
@@ -129,7 +129,7 @@ class LangBlogGroupsViewController: NSViewController, NSTableViewDataSource, NST
     }
 }
 
-class LangBlogGroupsWindowController: NSWindowController, NSWindowDelegate {
+class LangBlogPostsWindowController: NSWindowController, NSWindowDelegate {
 
     override func windowDidLoad() {
         super.windowDidLoad()
