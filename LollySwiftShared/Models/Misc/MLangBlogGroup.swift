@@ -32,6 +32,19 @@ class MLangBlogGroup: NSObject, Codable {
         return await RestApi.getRecords(MLangBlogGroups.self, url: url)
     }
 
+    static func getDataByLangPost(langid: Int, postid: Int) async -> [MLangBlogGroup] {
+        // SQL: SELECT * FROM VLANGBLOGGP WHERE LANGID=? AND POSTID=?
+        let url = "\(CommonApi.urlAPI)VLANGBLOGGP?filter=LANGID,eq,\(langid)&filter=POSTID,eq,\(postid)"
+        let gps = await RestApi.getRecords(MLangBlogGPs.self, url: url)
+        return gps.map { o in
+            MLangBlogGroup().then {
+                $0.ID = o.GROUPID
+                $0.LANGID = langid
+                $0.GROUPNAME = o.GROUPNAME
+            }
+        }
+    }
+
     static func update(item: MLangBlogGroup) async {
         // SQL: UPDATE LANGBLOGGROUPS SET LANGID=?, NAME=? WHERE ID=?
         let url = "\(CommonApi.urlAPI)LANGBLOGGROUPS/\(item.ID)"

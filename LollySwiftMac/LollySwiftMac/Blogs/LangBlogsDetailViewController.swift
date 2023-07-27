@@ -13,7 +13,6 @@ class LangBlogsDetailViewController: NSViewController {
 
     @IBOutlet weak var tfID: NSTextField!
     @IBOutlet weak var tfLang: NSTextField!
-    @IBOutlet weak var tfGroupName: NSTextField!
     @IBOutlet weak var tfTitle: NSTextField!
     @IBOutlet weak var btnOK: NSButton!
 
@@ -26,7 +25,6 @@ class LangBlogsDetailViewController: NSViewController {
         super.viewDidLoad()
         tfID.stringValue = itemEdit.ID
         tfLang.stringValue = vmEdit.vm.vmSettings.selectedLang.LANGNAME
-        tfGroupName.stringValue = itemEdit.GROUPNAME
         _ = itemEdit.$TITLE <~> tfTitle.textProperty ~ subscriptions
         _ = vmEdit.$isOKEnabled ~> (btnOK, \.isEnabled) ~ subscriptions
 
@@ -42,7 +40,6 @@ class LangBlogsDetailViewController: NSViewController {
 
     override func viewDidAppear() {
         super.viewDidAppear()
-        (vmEdit.isAdd ? tfID : tfGroupName).becomeFirstResponder()
         view.window?.title = vmEdit.isAdd ? "New Language Blog" : vmEdit.item.TITLE
     }
 
