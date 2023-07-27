@@ -20,7 +20,7 @@ class LangBlogsDetailViewController: NSViewController {
 
     var complete: (() -> Void)?
     var vmEdit: LangBlogsDetailViewModel!
-    var itemEdit: MLangBlogEdit { vmEdit.itemEdit }
+    var itemEdit: MLangBlogPostEdit { vmEdit.itemEdit }
 
     override func viewDidLoad() {
         super.viewDidLoad()

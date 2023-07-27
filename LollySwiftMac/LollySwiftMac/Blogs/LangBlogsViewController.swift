@@ -119,7 +119,7 @@ class LangBlogsViewController: NSViewController, NSTableViewDataSource, NSTableV
         let i = tvBlogs.selectedRow
         if i == -1 {return}
         let itemBlog = vm.arrBlogs[i]
-        MLangBlogContent.getDataById(itemBlog.ID).subscribe { [unowned self] in
+        MLangBlogPostContent.getDataById(itemBlog.ID).subscribe { [unowned self] in
             (NSApplication.shared.delegate as! AppDelegate).editBlog(settings: vm.vmSettings, item: $0)
         } ~ rx.disposeBag
     }
