@@ -95,13 +95,13 @@ class LangBlogGroupsViewController: NSViewController, NSTableViewDataSource, NST
         if i == -1 {return}
         let itemGroup = vm.arrGroups[i]
         let detailVC = storyboard!.instantiateController(withIdentifier: "LangBlogsDetailViewController") as! LangBlogsDetailViewController
-        let item = vm.newBlog().then {
-            $0.GROUPID = itemGroup.ID
-            $0.GROUPNAME = itemGroup.GROUPNAME
-        }
-        detailVC.vmEdit = LangBlogsDetailViewModel(vm: vm, item: item)
-        detailVC.complete = { [unowned self] in tvGroups.reloadData() }
-        presentAsModalWindow(detailVC)
+//        let item = vm.newBlog().then {
+//            $0.GROUPID = itemGroup.ID
+//            $0.GROUPNAME = itemGroup.GROUPNAME
+//        }
+//        detailVC.vmEdit = LangBlogsDetailViewModel(vm: vm, item: item)
+//        detailVC.complete = { [unowned self] in tvGroups.reloadData() }
+//        presentAsModalWindow(detailVC)
     }
 
     @IBAction func editBlog(_ sender: Any) {
