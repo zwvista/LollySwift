@@ -12,10 +12,10 @@ import Foundation
 class BlogEditViewModel: NSObject {
 
     var vmSettings: SettingsViewModel
-    var itemBlog: MLangBlogContent? = nil
+    var itemBlog: MLangBlogPostContent? = nil
     var isUnitBlog: Bool { itemBlog == nil }
     let title: String
-    init(settings: SettingsViewModel, item: MLangBlogContent?) {
+    init(settings: SettingsViewModel, item: MLangBlogPostContent?) {
         vmSettings = SettingsViewModel(settings)
         itemBlog = item
         title = item == nil ? vmSettings.BLOGUNITINFO : itemBlog!.TITLE
@@ -157,7 +157,7 @@ class BlogEditViewModel: NSObject {
 
     func loadBlog() async -> String {
         isUnitBlog ? await vmSettings.getBlogContent() :
-        (await MLangBlogContent.getDataById(itemBlog!.ID))?.CONTENT ?? ""
+        (await MLangBlogPostContent.getDataById(itemBlog!.ID))?.CONTENT ?? ""
     }
 
     func saveBlog(content: String) async {
@@ -165,7 +165,7 @@ class BlogEditViewModel: NSObject {
             await vmSettings.saveBlogContent(content: content)
         } else {
             itemBlog!.CONTENT = content
-            await MLangBlogContent.update(item: itemBlog!)
+            await MLangBlogPostContent.update(item: itemBlog!)
         }
     }
 }

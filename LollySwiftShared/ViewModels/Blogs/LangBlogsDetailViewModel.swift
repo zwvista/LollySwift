@@ -11,15 +11,15 @@ import Foundation
 @MainActor
 class LangBlogsDetailViewModel: NSObject {
     var vm: LangBlogsViewModel
-    var item: MLangBlog
-    var itemEdit: MLangBlogEdit
+    var item: MLangBlogPost
+    var itemEdit: MLangBlogPostEdit
     var isAdd: Bool
     @Published var isOKEnabled = false
 
-    init(vm: LangBlogsViewModel, item: MLangBlog) {
+    init(vm: LangBlogsViewModel, item: MLangBlogPost) {
         self.vm = vm
         self.item = item
-        itemEdit = MLangBlogEdit(x: item)
+        itemEdit = MLangBlogPostEdit(x: item)
         isAdd = item.ID == 0
         super.init()
         _ = itemEdit.$TITLE.map { !$0.isEmpty }.eraseToAnyPublisher() ~> $isOKEnabled

@@ -229,7 +229,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         w.makeKeyAndOrderFront(nil)
     }
 
-    func editBlog(settings: SettingsViewModel, item: MLangBlogContent?) {
+    func editBlog(settings: SettingsViewModel, item: MLangBlogPostContent?) {
         showWindow(storyBoardName: "Blogs", windowControllerName: "BlogEditWindowController") { @MainActor wc in
             let v = wc.contentViewController as! BlogEditViewController
             v.vm = BlogEditViewModel(settings: settings, item: item)

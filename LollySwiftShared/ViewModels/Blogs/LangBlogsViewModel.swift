@@ -14,8 +14,8 @@ class LangBlogsViewModel: NSObject {
     var vmSettings: SettingsViewModel
     var arrGroups = [MLangBlogGroup]()
     var currentGroup: MLangBlogGroup? = nil
-    var arrBlogs = [MLangBlog]()
-    var currentBlog: MLangBlog? = nil
+    var arrBlogs = [MLangBlogPost]()
+    var currentBlog: MLangBlogPost? = nil
     var blogContent = ""
 
     init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> Void) {
@@ -30,7 +30,7 @@ class LangBlogsViewModel: NSObject {
     func selectGroup(_ group: MLangBlogGroup?, complete: @escaping () -> Void) {
         currentGroup = group
         Task {
-            arrBlogs = await MLangBlog.getDataByLangGroup(langid: vmSettings.selectedLang.ID, groupid: group?.ID ?? 0)
+            arrBlogs = await MLangBlogPost.getDataByLangGroup(langid: vmSettings.selectedLang.ID, groupid: group?.ID ?? 0)
             complete()
         }
     }
@@ -49,24 +49,24 @@ class LangBlogsViewModel: NSObject {
         }
     }
 
-    func selectBlog(_ blog: MLangBlog?, complete: @escaping () -> Void) {
+    func selectBlog(_ blog: MLangBlogPost?, complete: @escaping () -> Void) {
         currentBlog = blog
         Task {
-            blogContent = (await MLangBlogContent.getDataById(blog?.ID ?? 0))?.CONTENT ?? ""
+            blogContent = (await MLangBlogPostContent.getDataById(blog?.ID ?? 0))?.CONTENT ?? ""
             complete()
         }
     }
 
-    static func updateBlog(item: MLangBlog) async {
-        await MLangBlog.update(item: item)
+    static func updateBlog(item: MLangBlogPost) async {
+        await MLangBlogPost.update(item: item)
     }
 
-    static func createBlog(item: MLangBlog) async {
-        _ = await MLangBlog.create(item: item)
+    static func createBlog(item: MLangBlogPost) async {
+        _ = await MLangBlogPost.create(item: item)
     }
 
-    func newBlog() -> MLangBlog {
-        MLangBlog().then {
+    func newBlog() -> MLangBlogPost {
+        MLangBlogPost().then {
             $0.LANGID = vmSettings.selectedLang.ID
         }
     }

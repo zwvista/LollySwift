@@ -119,7 +119,7 @@ class LangBlogsViewController: NSViewController, NSTableViewDataSource, NSTableV
         if i == -1 {return}
         let itemBlog = vm.arrBlogs[i]
         Task {
-            let item = await MLangBlogContent.getDataById(itemBlog.ID)
+            let item = await MLangBlogPostContent.getDataById(itemBlog.ID)
             (NSApplication.shared.delegate as! AppDelegate).editBlog(settings: vm.vmSettings, item: item)
         }
     }
