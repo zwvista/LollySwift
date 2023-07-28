@@ -93,7 +93,7 @@ class LangBlogPostsViewController: NSViewController, NSTableViewDataSource, NSTa
 //        let i = tvGroups.selectedRow
 //        if i == -1 {return}
 //        let itemGroup = vm.arrGroups[i]
-//        let detailVC = storyboard!.instantiateController(withIdentifier: "LangBlogsDetailViewController") as! LangBlogsDetailViewController
+//        let detailVC = storyboard!.instantiateController(withIdentifier: "LangBlogPostsDetailViewController") as! LangBlogPostsDetailViewController
 //        let item = vm.newBlog().then {
 //            $0.GROUPID = itemGroup.ID
 //            $0.GROUPNAME = itemGroup.GROUPNAME
@@ -106,7 +106,7 @@ class LangBlogPostsViewController: NSViewController, NSTableViewDataSource, NSTa
     @IBAction func editBlog(_ sender: Any) {
 //        let i = tvPosts.selectedRow
 //        if i == -1 {return}
-//        let detailVC = storyboard!.instantiateController(withIdentifier: "LangBlogsDetailViewController") as! LangBlogsDetailViewController
+//        let detailVC = storyboard!.instantiateController(withIdentifier: "LangBlogPostsDetailViewController") as! LangBlogPostsDetailViewController
 //        detailVC.vmEdit = LangBlogsDetailViewModel(vm: vm, item: vm.arrPosts[i])
 //        detailVC.complete = { [unowned self] in
 //            tvPosts.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<tvPosts.tableColumns.count))
