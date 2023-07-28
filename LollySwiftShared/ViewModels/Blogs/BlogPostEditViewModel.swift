@@ -1,5 +1,5 @@
 //
-//  BlogEditViewModel.swift
+//  BlogPostEditViewModel.swift
 //  LollySwiftMac
 //
 //  Created by 趙偉 on 2018/12/22.
@@ -9,7 +9,7 @@
 import Foundation
 
 @MainActor
-class BlogEditViewModel: NSObject {
+class BlogPostEditViewModel: NSObject {
 
     var vmSettings: SettingsViewModel
     var itemBlog: MLangBlogPostContent? = nil
@@ -135,12 +135,12 @@ class BlogEditViewModel: NSObject {
         }
         var arr = text.components(separatedBy: "\n")
         await vmSettings.getNotes(wordCount: arr.count, isNoteEmpty: {
-            let m = arr[$0].firstMatch(of: BlogEditViewModel.regMarkedEntry)
+            let m = arr[$0].firstMatch(of: BlogPostEditViewModel.regMarkedEntry)
             if m == nil { return false }
             let word = String(m!.2)
             return word.allSatisfy { $0 != "（" && !bigDigits.contains($0) }
         }, getOne: { [unowned self] i in
-            let m = arr[i].firstMatch(of: BlogEditViewModel.regMarkedEntry)!
+            let m = arr[i].firstMatch(of: BlogPostEditViewModel.regMarkedEntry)!
             let (s1, word, s3, s4) = (String(m.1), String(m.2), String(m.3), String(m.4))
             let note = await vmSettings.getNote(word: word)
             let j = note.firstIndex { "0"..."9" ~= $0 }

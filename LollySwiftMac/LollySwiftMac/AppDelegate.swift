@@ -234,9 +234,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func editBlog(settings: SettingsViewModel, item: MLangBlogPostContent?) {
-        showWindow(storyBoardName: "Blogs", windowControllerName: "BlogEditWindowController") { @MainActor wc in
-            let v = wc.contentViewController as! BlogEditViewController
-            v.vm = BlogEditViewModel(settings: settings, item: item)
+        showWindow(storyBoardName: "Blogs", windowControllerName: "BlogPostEditWindowController") { @MainActor wc in
+            let v = wc.contentViewController as! BlogPostEditViewController
+            v.vm = BlogPostEditViewModel(settings: settings, item: item)
         }
     }
 }

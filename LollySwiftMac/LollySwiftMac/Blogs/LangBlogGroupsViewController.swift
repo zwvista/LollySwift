@@ -58,7 +58,7 @@ class LangBlogGroupsViewController: NSViewController, NSTableViewDataSource, NST
         } else {
             let i = tvPosts.selectedRow
             vm.selectPost(i == -1 ? nil : vm.arrPosts[i]) { [unowned self] in
-                wvPost.loadHTMLString(BlogEditViewModel.markedToHtml(text: vm.postContent), baseURL: nil)
+                wvPost.loadHTMLString(BlogPostEditViewModel.markedToHtml(text: vm.postContent), baseURL: nil)
             }
         }
     }
