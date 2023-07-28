@@ -15,14 +15,14 @@ class LangBlogGroupsViewController: NSViewController, NSTableViewDataSource, NST
 
     @IBOutlet weak var tvGroups: NSTableView!
     @IBOutlet weak var tvPosts: NSTableView!
-    @IBOutlet weak var wvBlog: WKWebView!
+    @IBOutlet weak var wvPost: WKWebView!
 
     var vm: LangBlogGroupsViewModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        wvBlog.allowsMagnification = true
-        wvBlog.allowsBackForwardNavigationGestures = true
+        wvPost.allowsMagnification = true
+        wvPost.allowsBackForwardNavigationGestures = true
         settingsChanged()
     }
 
@@ -58,8 +58,8 @@ class LangBlogGroupsViewController: NSViewController, NSTableViewDataSource, NST
             }
         } else {
             let i = tvPosts.selectedRow
-            vm.selectBlog(i == -1 ? nil : vm.arrPosts[i]) { [unowned self] in
-                wvBlog.loadHTMLString(BlogEditViewModel.markedToHtml(text: vm.blogContent), baseURL: nil)
+            vm.selectPost(i == -1 ? nil : vm.arrPosts[i]) { [unowned self] in
+                wvPost.loadHTMLString(BlogEditViewModel.markedToHtml(text: vm.postContent), baseURL: nil)
             }
         }
     }

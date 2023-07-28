@@ -1,5 +1,5 @@
 //
-//  LangBlogGroupsViewModel.swift
+//  LangBlogPostsViewModel.swift
 //  LollySwiftMac
 //
 //  Created by 趙偉 on 2023/02/18.
@@ -11,27 +11,31 @@ import RxSwift
 import RxBinding
 import Then
 
-class LangBlogGroupsViewModel: NSObject {
+@MainActor
+class LangBlogPostsViewModel: NSObject {
     var vmSettings: SettingsViewModel
-    var arrGroups = [MLangBlogGroup]()
-    var currentGroup: MLangBlogGroup? = nil
     var arrPosts = [MLangBlogPost]()
     var currentPost: MLangBlogPost? = nil
     var postContent = ""
+    var arrGroups = [MLangBlogGroup]()
+    var currentGroup: MLangBlogGroup? = nil
 
     init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> Void) {
         vmSettings = !needCopy ? settings : SettingsViewModel(settings)
         super.init()
-        MLangBlogGroup.getDataByLang(settings.selectedLang.ID).subscribe { [unowned self] in
-            arrGroups = $0
+        MLangBlogPost.getDataByLang(vmSettings.selectedLang.ID).subscribe { [unowned self] in
+            arrPosts = $0
             complete()
         } ~ rx.disposeBag
     }
 
-    func selectGroup(_ group: MLangBlogGroup?, complete: @escaping () -> Void) {
-        currentGroup = group
-        MLangBlogPost.getDataByLangGroup(langid: vmSettings.selectedLang.ID, groupid: group?.ID ?? 0).subscribe { [unowned self] in
-            arrPosts = $0
+    func selectPost(_ post: MLangBlogPost?, complete: @escaping () -> Void) {
+        currentPost = post
+        MLangBlogPostContent.getDataById(post?.ID ?? 0).subscribe { [unowned self] in
+            postContent = $0?.CONTENT ?? ""
+        } ~ rx.disposeBag
+        MLangBlogGroup.getDataByLangPost(langid: vmSettings.selectedLang.ID, postid: post?.ID ?? 0).subscribe { [unowned self] in
+            arrGroups = $0
             complete()
         } ~ rx.disposeBag
     }
@@ -50,12 +54,9 @@ class LangBlogGroupsViewModel: NSObject {
         }
     }
 
-    func selectPost(_ post: MLangBlogPost?, complete: @escaping () -> Void) {
-        currentPost = post
-        MLangBlogPostContent.getDataById(post?.ID ?? 0).subscribe { [unowned self] in
-            postContent = $0?.CONTENT ?? ""
-            complete()
-        } ~ rx.disposeBag
+    func selectGroup(_ group: MLangBlogGroup?, complete: @escaping () -> Void) {
+        currentGroup = group
+        complete()
     }
 
     static func updateBlog(item: MLangBlogPost) -> Single<()> {

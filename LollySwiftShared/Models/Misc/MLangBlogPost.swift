@@ -29,7 +29,7 @@ class MLangBlogPost: NSObject, Codable {
         let gps: Single<[MLangBlogGP]> = RestApi.getRecords(url: url)
         return gps.map { $0.map { o in
             MLangBlogPost().then {
-                $0.ID = o.GROUPID
+                $0.ID = o.POSTID
                 $0.LANGID = langid
                 $0.TITLE = o.TITLE
                 $0.URL = o.URL

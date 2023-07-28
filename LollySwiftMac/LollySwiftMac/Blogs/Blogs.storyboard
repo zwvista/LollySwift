@@ -288,7 +288,7 @@
                         <outlet property="tfTitle" destination="J3Q-4Y-mrR" id="4CR-pK-0S6"/>
                         <outlet property="tvHtml" destination="e8K-mx-I5l" id="O9s-lW-yQC"/>
                         <outlet property="tvMarked" destination="7Zx-Xa-ReP" id="bLQ-No-yal"/>
-                        <outlet property="wvBlog" destination="bwf-eO-MWp" id="iS4-Tg-8Ul"/>
+                        <outlet property="wvPost" destination="bwf-eO-MWp" id="iS4-Tg-8Ul"/>
                     </connections>
                 </viewController>
                 <customObject id="N2Y-3u-9ID" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -648,7 +648,7 @@
                     <connections>
                         <outlet property="tvGroups" destination="Two-Cm-jaa" id="Cc8-5A-UN8"/>
                         <outlet property="tvPosts" destination="9rv-gn-VfO" id="OBB-op-cPB"/>
-                        <outlet property="wvBlog" destination="9dB-m0-aIn" id="oz4-6k-sIn"/>
+                        <outlet property="wvPost" destination="9dB-m0-aIn" id="oz4-6k-sIn"/>
                     </connections>
                 </viewController>
                 <customObject id="qe5-re-3a3" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -1014,7 +1014,7 @@ Gw
                                                                                         </tableCellView>
                                                                                     </prototypeCellViews>
                                                                                 </tableColumn>
-                                                                                <tableColumn identifier="GROUPNAME" width="408" minWidth="40" maxWidth="1000" id="weC-b7-jVm">
+                                                                                <tableColumn identifier="TITLE" width="408" minWidth="40" maxWidth="1000" id="weC-b7-jVm">
                                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="TITLE">
                                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -1160,7 +1160,7 @@ Gw
                                                                                         </tableCellView>
                                                                                     </prototypeCellViews>
                                                                                 </tableColumn>
-                                                                                <tableColumn identifier="TITLE" width="408" minWidth="40" maxWidth="1000" id="hzx-TA-ack">
+                                                                                <tableColumn identifier="GROUPNAME" width="408" minWidth="40" maxWidth="1000" id="hzx-TA-ack">
                                                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" title="GROUP">
                                                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
@@ -1273,9 +1273,9 @@ Gw
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="tvGroups" destination="Vhg-3W-JoQ" id="5lF-U9-OrT"/>
-                        <outlet property="tvPosts" destination="Ouj-79-6cC" id="PE1-vj-ckn"/>
-                        <outlet property="wvBlog" destination="zO0-gc-ERQ" id="e41-BK-obF"/>
+                        <outlet property="tvGroups" destination="Ouj-79-6cC" id="c7F-9m-6ca"/>
+                        <outlet property="tvPosts" destination="Vhg-3W-JoQ" id="zL3-lq-QzP"/>
+                        <outlet property="wvPost" destination="zO0-gc-ERQ" id="e41-BK-obF"/>
                     </connections>
                 </viewController>
                 <customObject id="6LG-SZ-rlp" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

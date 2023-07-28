@@ -15,7 +15,7 @@ class BlogEditViewController: NSViewController, NSMenuItemValidation  {
 
     @IBOutlet weak var tvMarked: NSTextView!
     @IBOutlet weak var tvHtml: NSTextView!
-    @IBOutlet weak var wvBlog: WKWebView!
+    @IBOutlet weak var wvPost: WKWebView!
     @IBOutlet weak var tfTitle: NSTextField!
 
     var wc: BlogEditWindowController { view.window!.windowController as! BlogEditWindowController }
@@ -23,8 +23,8 @@ class BlogEditViewController: NSViewController, NSMenuItemValidation  {
 
     override func viewWillAppear() {
         super.viewWillAppear()
-        wvBlog.allowsMagnification = true
-        wvBlog.allowsBackForwardNavigationGestures = true
+        wvPost.allowsMagnification = true
+        wvPost.allowsBackForwardNavigationGestures = true
         tvMarked.font = NSFont.systemFont(ofSize: 16)
         tfTitle.stringValue = vm.title
         vm.loadBlog { [unowned self] in
@@ -75,11 +75,11 @@ class BlogEditViewController: NSViewController, NSMenuItemValidation  {
         if n == 0 {
             tvHtml.string = BlogEditViewModel.markedToHtml(text: tvMarked.string)
             let str = CommonApi.toHtml(text: tvHtml.string)
-            wvBlog.loadHTMLString(str, baseURL: nil)
+            wvPost.loadHTMLString(str, baseURL: nil)
             MacApi.copyText(tvHtml.string)
         } else {
             let url = BlogEditViewModel.getPatternUrl(patternNo: wc.patternNo)
-            wvBlog.load(URLRequest(url: URL(string: url)!))
+            wvPost.load(URLRequest(url: URL(string: url)!))
         }
     }
     @IBAction func openPattern(_ sender: AnyObject) {
