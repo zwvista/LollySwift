@@ -1,5 +1,5 @@
 //
-//  LangBlogGroupsViewModel.swift
+//  LangBlogPostsViewModel.swift
 //  LollySwiftMac
 //
 //  Created by 趙偉 on 2023/02/18.
@@ -10,27 +10,28 @@ import Foundation
 import Then
 
 @MainActor
-class LangBlogGroupsViewModel: NSObject {
+class LangBlogPostsViewModel: NSObject {
     var vmSettings: SettingsViewModel
-    var arrGroups = [MLangBlogGroup]()
-    var currentGroup: MLangBlogGroup? = nil
     var arrPosts = [MLangBlogPost]()
     var currentPost: MLangBlogPost? = nil
     var postContent = ""
+    var arrGroups = [MLangBlogGroup]()
+    var currentGroup: MLangBlogGroup? = nil
 
     init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> Void) {
         vmSettings = !needCopy ? settings : SettingsViewModel(settings)
         super.init()
         Task {
-            arrGroups = await MLangBlogGroup.getDataByLang(settings.selectedLang.ID)
+            arrPosts = await MLangBlogPost.getDataByLang(settings.selectedLang.ID)
             complete()
         }
     }
 
-    func selectGroup(_ group: MLangBlogGroup?, complete: @escaping () -> Void) {
-        currentGroup = group
+    func selectPost(_ post: MLangBlogPost?, complete: @escaping () -> Void) {
+        currentPost = post
         Task {
-            arrPosts = await MLangBlogPost.getDataByLangGroup(langid: vmSettings.selectedLang.ID, groupid: group?.ID ?? 0)
+            postContent = (await MLangBlogPostContent.getDataById(post?.ID ?? 0))?.CONTENT ?? ""
+            arrGroups = await MLangBlogGroup.getDataByLangPost(langid: vmSettings.selectedLang.ID, postid: post?.ID ?? 0)
             complete()
         }
     }
@@ -49,10 +50,9 @@ class LangBlogGroupsViewModel: NSObject {
         }
     }
 
-    func selectPost(_ blog: MLangBlogPost?, complete: @escaping () -> Void) {
-        currentPost = blog
+    func selectGroup(_ group: MLangBlogGroup?, complete: @escaping () -> Void) {
+        currentGroup = group
         Task {
-            postContent = (await MLangBlogPostContent.getDataById(blog?.ID ?? 0))?.CONTENT ?? ""
             complete()
         }
     }
