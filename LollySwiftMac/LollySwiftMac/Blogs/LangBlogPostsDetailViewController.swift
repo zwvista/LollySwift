@@ -1,5 +1,5 @@
 //
-//  LangBlogsDetailViewController.swift
+//  LangBlogPostsDetailViewController.swift
 //  LollySwiftMac
 //
 //  Created by 趙偉 on 2023/02/19.
@@ -10,7 +10,7 @@ import Cocoa
 import RxSwift
 import RxBinding
 
-class LangBlogsDetailViewController: NSViewController {
+class LangBlogPostsDetailViewController: NSViewController {
 
     @IBOutlet weak var tfID: NSTextField!
     @IBOutlet weak var tfLang: NSTextField!
