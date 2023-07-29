@@ -63,17 +63,10 @@ class LangBlogPostsViewController: NSViewController, NSTableViewDataSource, NSTa
         }
     }
 
-    @IBAction func addGroup(_ sender: Any) {
-//        let detailVC = storyboard!.instantiateController(withIdentifier: "LangBlogGroupsDetailViewController") as! LangBlogGroupsDetailViewController
-//        detailVC.vmEdit = LangBlogGroupsDetailViewModel(vm: vm, item: vm.newGroup())
-//        detailVC.complete = { [unowned self] in tvGroups.reloadData() }
-//        presentAsModalWindow(detailVC)
-    }
-
     @IBAction func editGroup(_ sender: Any) {
-//        let i = tvGroups.selectedRow
-//        if i == -1 {return}
-//        let detailVC = storyboard!.instantiateController(withIdentifier: "LangBlogGroupsDetailViewController") as! LangBlogGroupsDetailViewController
+        let i = tvGroups.selectedRow
+        if i == -1 {return}
+        let detailVC = storyboard!.instantiateController(withIdentifier: "LangBlogGroupsDetailViewController") as! LangBlogGroupsDetailViewController
 //        detailVC.vmEdit = LangBlogGroupsDetailViewModel(vm: vm, item: vm.arrGroups[i])
 //        detailVC.complete = { [unowned self] in
 //            tvGroups.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<tvGroups.tableColumns.count))
@@ -90,23 +83,20 @@ class LangBlogPostsViewController: NSViewController, NSTableViewDataSource, NSTa
     }
 
     @IBAction func addPost(_ sender: Any) {
-//        let i = tvGroups.selectedRow
-//        if i == -1 {return}
-//        let itemGroup = vm.arrGroups[i]
-//        let detailVC = storyboard!.instantiateController(withIdentifier: "LangBlogPostsDetailViewController") as! LangBlogPostsDetailViewController
-//        let item = vm.newBlog().then {
-//            $0.GROUPID = itemGroup.ID
-//            $0.GROUPNAME = itemGroup.GROUPNAME
-//        }
+        let i = tvGroups.selectedRow
+        if i == -1 {return}
+        let itemPost = vm.arrPosts[i]
+        let detailVC = storyboard!.instantiateController(withIdentifier: "LangBlogPostsDetailViewController") as! LangBlogPostsDetailViewController
+        let item = vm.newPost()
 //        detailVC.vmEdit = LangBlogsDetailViewModel(vm: vm, item: item)
 //        detailVC.complete = { [unowned self] in tvGroups.reloadData() }
 //        presentAsModalWindow(detailVC)
     }
 
     @IBAction func editPost(_ sender: Any) {
-//        let i = tvPosts.selectedRow
-//        if i == -1 {return}
-//        let detailVC = storyboard!.instantiateController(withIdentifier: "LangBlogPostsDetailViewController") as! LangBlogPostsDetailViewController
+        let i = tvPosts.selectedRow
+        if i == -1 {return}
+        let detailVC = storyboard!.instantiateController(withIdentifier: "LangBlogPostsDetailViewController") as! LangBlogPostsDetailViewController
 //        detailVC.vmEdit = LangBlogsDetailViewModel(vm: vm, item: vm.arrPosts[i])
 //        detailVC.complete = { [unowned self] in
 //            tvPosts.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<tvPosts.tableColumns.count))
@@ -117,9 +107,9 @@ class LangBlogPostsViewController: NSViewController, NSTableViewDataSource, NSTa
     @IBAction func editPostContent(_ sender: Any) {
         let i = tvPosts.selectedRow
         if i == -1 {return}
-        let itemBlog = vm.arrPosts[i]
+        let itemPost = vm.arrPosts[i]
         Task {
-            let item = await MLangBlogPostContent.getDataById(itemBlog.ID)
+            let item = await MLangBlogPostContent.getDataById(itemPost.ID)
             (NSApplication.shared.delegate as! AppDelegate).editPost(settings: vm.vmSettings, item: item)
         }
     }

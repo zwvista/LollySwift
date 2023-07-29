@@ -65,7 +65,7 @@ class LangBlogGroupsViewModel: NSObject {
         _ = await MLangBlogPost.create(item: item)
     }
 
-    func newBlog() -> MLangBlogPost {
+    func newPost() -> MLangBlogPost {
         MLangBlogPost().then {
             $0.LANGID = vmSettings.selectedLang.ID
         }

@@ -12,13 +12,13 @@ import Foundation
 class BlogPostEditViewModel: NSObject {
 
     var vmSettings: SettingsViewModel
-    var itemBlog: MLangBlogPostContent? = nil
-    var isUnitBlog: Bool { itemBlog == nil }
+    var itemPost: MLangBlogPostContent? = nil
+    var isUnitBlog: Bool { itemPost == nil }
     let title: String
     init(settings: SettingsViewModel, item: MLangBlogPostContent?) {
         vmSettings = SettingsViewModel(settings)
-        itemBlog = item
-        title = item == nil ? vmSettings.BLOGUNITINFO : itemBlog!.TITLE
+        itemPost = item
+        title = item == nil ? vmSettings.BLOGUNITINFO : itemPost!.TITLE
     }
 
     private static func html1With(_ s: String) -> String {
@@ -157,15 +157,15 @@ class BlogPostEditViewModel: NSObject {
 
     func loadBlog() async -> String {
         isUnitBlog ? await vmSettings.getBlogContent() :
-        (await MLangBlogPostContent.getDataById(itemBlog!.ID))?.CONTENT ?? ""
+        (await MLangBlogPostContent.getDataById(itemPost!.ID))?.CONTENT ?? ""
     }
 
     func saveBlog(content: String) async {
         if isUnitBlog {
             await vmSettings.saveBlogContent(content: content)
         } else {
-            itemBlog!.CONTENT = content
-            await MLangBlogPostContent.update(item: itemBlog!)
+            itemPost!.CONTENT = content
+            await MLangBlogPostContent.update(item: itemPost!)
         }
     }
 }
