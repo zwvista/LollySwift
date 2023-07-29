@@ -15,6 +15,7 @@ class MLangBlogGroup: NSObject, Codable {
     dynamic var ID = 0
     dynamic var LANGID = 0
     dynamic var GROUPNAME = ""
+    dynamic var GPID = 0
 
     enum CodingKeys : String, CodingKey {
         case ID
@@ -37,6 +38,7 @@ class MLangBlogGroup: NSObject, Codable {
                 $0.ID = o.GROUPID
                 $0.LANGID = langid
                 $0.GROUPNAME = o.GROUPNAME
+                $0.GPID = o.ID
             }
         }}
     }
