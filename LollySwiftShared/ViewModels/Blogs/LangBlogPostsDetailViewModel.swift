@@ -1,5 +1,5 @@
 //
-//  LangBlogsDetailViewModel.swift
+//  LangBlogPostsDetailViewModel.swift
 //  LollySwiftMac
 //
 //  Created by 趙偉 on 2023/02/19.
@@ -9,7 +9,7 @@
 import Foundation
 
 @MainActor
-class LangBlogsDetailViewModel: NSObject {
+class LangBlogPostsDetailViewModel: NSObject {
     var vm: LangBlogGroupsViewModel
     var item: MLangBlogPost
     var itemEdit: MLangBlogPostEdit

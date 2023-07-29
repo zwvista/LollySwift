@@ -88,7 +88,7 @@ class LangBlogPostsViewController: NSViewController, NSTableViewDataSource, NSTa
         let itemPost = vm.arrPosts[i]
         let detailVC = storyboard!.instantiateController(withIdentifier: "LangBlogPostsDetailViewController") as! LangBlogPostsDetailViewController
         let item = vm.newPost()
-//        detailVC.vmEdit = LangBlogsDetailViewModel(vm: vm, item: item)
+//        detailVC.vmEdit = LangBlogPostsDetailViewModel(vm: vm, item: item)
 //        detailVC.complete = { [unowned self] in tvGroups.reloadData() }
 //        presentAsModalWindow(detailVC)
     }
@@ -97,7 +97,7 @@ class LangBlogPostsViewController: NSViewController, NSTableViewDataSource, NSTa
         let i = tvPosts.selectedRow
         if i == -1 {return}
         let detailVC = storyboard!.instantiateController(withIdentifier: "LangBlogPostsDetailViewController") as! LangBlogPostsDetailViewController
-//        detailVC.vmEdit = LangBlogsDetailViewModel(vm: vm, item: vm.arrPosts[i])
+//        detailVC.vmEdit = LangBlogPostsDetailViewModel(vm: vm, item: vm.arrPosts[i])
 //        detailVC.complete = { [unowned self] in
 //            tvPosts.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<tvPosts.tableColumns.count))
 //        }

@@ -23,13 +23,13 @@ class MLangBlogPost: NSObject, Codable {
 
     static func getDataByLang(_ langid: Int) async -> [MLangBlogPost] {
         // SQL: SELECT * FROM LANGBLOGPOSTS WHERE LANGID=?
-        let url = "\(CommonApi.urlAPI)LANGBLOGPOSTS?filter=LANGID,eq,\(langid)"
+        let url = "\(CommonApi.urlAPI)LANGBLOGPOSTS?filter=LANGID,eq,\(langid)&order=TITLE"
         return await RestApi.getRecords(MLangBlogPosts.self, url: url)
     }
 
     static func getDataByLangGroup(langid: Int, groupid: Int) async -> [MLangBlogPost] {
         // SQL: SELECT * FROM VLANGBLOGGP WHERE LANGID=? AND GROUPID=?
-        let url = "\(CommonApi.urlAPI)VLANGBLOGGP?filter=LANGID,eq,\(langid)&filter=GROUPID,eq,\(groupid)"
+        let url = "\(CommonApi.urlAPI)VLANGBLOGGP?filter=LANGID,eq,\(langid)&filter=GROUPID,eq,\(groupid)&order=TITLE"
         let gps = await RestApi.getRecords(MLangBlogGPs.self, url: url)
         return gps.map { o in
             MLangBlogPost().then {

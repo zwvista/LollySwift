@@ -18,7 +18,7 @@ class LangBlogPostsDetailViewController: NSViewController {
     @IBOutlet weak var btnOK: NSButton!
 
     var complete: (() -> Void)?
-    var vmEdit: LangBlogsDetailViewModel!
+    var vmEdit: LangBlogPostsDetailViewModel!
     var itemEdit: MLangBlogPostEdit { vmEdit.itemEdit }
     var subscriptions = Set<AnyCancellable>()
 
