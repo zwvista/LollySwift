@@ -13,13 +13,13 @@ import RxBinding
 class BlogPostEditViewModel: NSObject {
 
     var vmSettings: SettingsViewModel
-    var itemBlog: MLangBlogPostContent? = nil
-    var isUnitBlog: Bool { itemBlog == nil }
+    var itemPost: MLangBlogPostContent? = nil
+    var isUnitBlog: Bool { itemPost == nil }
     let title: String
     init(settings: SettingsViewModel, item: MLangBlogPostContent?) {
         vmSettings = SettingsViewModel(settings)
-        itemBlog = item
-        title = item == nil ? vmSettings.BLOGUNITINFO : itemBlog!.TITLE
+        itemPost = item
+        title = item == nil ? vmSettings.BLOGUNITINFO : itemPost!.TITLE
     }
 
     private static func html1With(_ s: String) -> String {
@@ -163,7 +163,7 @@ class BlogPostEditViewModel: NSObject {
                 onLoaded($0)
             } ~ rx.disposeBag
         } else {
-            MLangBlogPostContent.getDataById(itemBlog!.ID).subscribe {
+            MLangBlogPostContent.getDataById(itemPost!.ID).subscribe {
                 onLoaded($0?.CONTENT ?? "")
             } ~ rx.disposeBag
         }
@@ -173,8 +173,8 @@ class BlogPostEditViewModel: NSObject {
         if isUnitBlog {
             vmSettings.saveBlogContent(content: content).subscribe() ~ rx.disposeBag
         } else {
-            itemBlog!.CONTENT = content
-            MLangBlogPostContent.update(item: itemBlog!).subscribe() ~ rx.disposeBag
+            itemPost!.CONTENT = content
+            MLangBlogPostContent.update(item: itemPost!).subscribe() ~ rx.disposeBag
         }
     }
 }
