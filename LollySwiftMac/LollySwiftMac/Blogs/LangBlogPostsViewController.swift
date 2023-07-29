@@ -67,11 +67,11 @@ class LangBlogPostsViewController: NSViewController, NSTableViewDataSource, NSTa
         let i = tvGroups.selectedRow
         if i == -1 {return}
         let detailVC = storyboard!.instantiateController(withIdentifier: "LangBlogGroupsDetailViewController") as! LangBlogGroupsDetailViewController
-//        detailVC.vmEdit = LangBlogGroupsDetailViewModel(vm: vm, item: vm.arrGroups[i])
-//        detailVC.complete = { [unowned self] in
-//            tvGroups.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<tvGroups.tableColumns.count))
-//        }
-//        presentAsModalWindow(detailVC)
+        detailVC.vmEdit = LangBlogGroupsDetailViewModel(vm: vm, item: vm.arrGroups[i])
+        detailVC.complete = { [unowned self] in
+            tvGroups.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<tvGroups.tableColumns.count))
+        }
+        presentAsModalWindow(detailVC)
     }
 
     @IBAction func doubleAction(_ sender: AnyObject) {
@@ -83,25 +83,21 @@ class LangBlogPostsViewController: NSViewController, NSTableViewDataSource, NSTa
     }
 
     @IBAction func addPost(_ sender: Any) {
-        let i = tvGroups.selectedRow
-        if i == -1 {return}
-        let itemPost = vm.arrPosts[i]
         let detailVC = storyboard!.instantiateController(withIdentifier: "LangBlogPostsDetailViewController") as! LangBlogPostsDetailViewController
-        let item = vm.newPost()
-//        detailVC.vmEdit = LangBlogPostsDetailViewModel(vm: vm, item: item)
-//        detailVC.complete = { [unowned self] in tvGroups.reloadData() }
-//        presentAsModalWindow(detailVC)
+        detailVC.vmEdit = LangBlogPostsDetailViewModel(vm: vm, item: vm.newPost())
+        detailVC.complete = { [unowned self] in tvGroups.reloadData() }
+        presentAsModalWindow(detailVC)
     }
 
     @IBAction func editPost(_ sender: Any) {
         let i = tvPosts.selectedRow
         if i == -1 {return}
         let detailVC = storyboard!.instantiateController(withIdentifier: "LangBlogPostsDetailViewController") as! LangBlogPostsDetailViewController
-//        detailVC.vmEdit = LangBlogPostsDetailViewModel(vm: vm, item: vm.arrPosts[i])
-//        detailVC.complete = { [unowned self] in
-//            tvPosts.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<tvPosts.tableColumns.count))
-//        }
-//        presentAsModalWindow(detailVC)
+        detailVC.vmEdit = LangBlogPostsDetailViewModel(vm: vm, item: vm.arrPosts[i])
+        detailVC.complete = { [unowned self] in
+            tvPosts.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<tvPosts.tableColumns.count))
+        }
+        presentAsModalWindow(detailVC)
     }
 
     @IBAction func editPostContent(_ sender: Any) {
