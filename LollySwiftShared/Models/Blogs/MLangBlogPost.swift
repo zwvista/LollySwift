@@ -20,6 +20,14 @@ class MLangBlogPost: NSObject, Codable {
     dynamic var LANGID = 0
     dynamic var TITLE = ""
     dynamic var URL = ""
+    dynamic var GPID = 0
+
+    enum CodingKeys : String, CodingKey {
+        case ID
+        case LANGID
+        case TITLE
+        case URL
+    }
 
     static func getDataByLang(_ langid: Int) async -> [MLangBlogPost] {
         // SQL: SELECT * FROM LANGBLOGPOSTS WHERE LANGID=?
@@ -37,6 +45,7 @@ class MLangBlogPost: NSObject, Codable {
                 $0.LANGID = langid
                 $0.TITLE = o.TITLE
                 $0.URL = o.URL
+                $0.GPID = o.ID
             }
         }
     }

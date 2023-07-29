@@ -110,6 +110,17 @@ class LangBlogPostsViewController: NSViewController, NSTableViewDataSource, NSTa
         }
     }
 
+    @IBAction func selectGroups(_ sender: Any) {
+        let i = tvGroups.selectedRow
+        if i == -1 {return}
+        let detailVC = storyboard!.instantiateController(withIdentifier: "LangBlogGroupsDetailViewController") as! LangBlogGroupsDetailViewController
+        detailVC.vmEdit = LangBlogGroupsDetailViewModel(vm: vm, item: vm.arrGroups[i])
+        detailVC.complete = { [unowned self] in
+            tvGroups.reloadData()
+        }
+        presentAsModalWindow(detailVC)
+    }
+
     deinit {
         print("DEBUG: \(className) deinit")
     }
