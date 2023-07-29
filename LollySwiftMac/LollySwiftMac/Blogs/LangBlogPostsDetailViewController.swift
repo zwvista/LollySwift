@@ -15,6 +15,7 @@ class LangBlogPostsDetailViewController: NSViewController {
     @IBOutlet weak var tfID: NSTextField!
     @IBOutlet weak var tfLang: NSTextField!
     @IBOutlet weak var tfTitle: NSTextField!
+    @IBOutlet weak var tfUrl: NSTextField!
     @IBOutlet weak var btnOK: NSButton!
 
     var complete: (() -> Void)?
@@ -26,6 +27,7 @@ class LangBlogPostsDetailViewController: NSViewController {
         tfID.stringValue = itemEdit.ID
         tfLang.stringValue = vmEdit.vm.vmSettings.selectedLang.LANGNAME
         _ = itemEdit.TITLE <~> tfTitle.rx.text.orEmpty
+        _ = itemEdit.URL <~> tfUrl.rx.text.orEmpty
         _ = vmEdit.isOKEnabled ~> btnOK.rx.isEnabled
 
         btnOK.rx.tap.flatMap { [unowned self] in
@@ -39,7 +41,7 @@ class LangBlogPostsDetailViewController: NSViewController {
 
     override func viewDidAppear() {
         super.viewDidAppear()
-        view.window?.title = vmEdit.isAdd ? "New Language Blog" : vmEdit.item.TITLE
+        view.window?.title = vmEdit.isAdd ? "New Language Blog Post" : vmEdit.item.TITLE
     }
 
     deinit {

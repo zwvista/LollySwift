@@ -86,11 +86,11 @@ class LangBlogPostsViewController: NSViewController, NSTableViewDataSource, NSTa
         if sender === tvGroups {
             editGroup(sender)
         } else {
-            editBlog(sender)
+            editPost(sender)
         }
     }
 
-    @IBAction func addBlog(_ sender: Any) {
+    @IBAction func addPost(_ sender: Any) {
 //        let i = tvGroups.selectedRow
 //        if i == -1 {return}
 //        let itemGroup = vm.arrGroups[i]
@@ -104,7 +104,7 @@ class LangBlogPostsViewController: NSViewController, NSTableViewDataSource, NSTa
 //        presentAsModalWindow(detailVC)
     }
 
-    @IBAction func editBlog(_ sender: Any) {
+    @IBAction func editPost(_ sender: Any) {
 //        let i = tvPosts.selectedRow
 //        if i == -1 {return}
 //        let detailVC = storyboard!.instantiateController(withIdentifier: "LangBlogPostsDetailViewController") as! LangBlogPostsDetailViewController
@@ -115,13 +115,13 @@ class LangBlogPostsViewController: NSViewController, NSTableViewDataSource, NSTa
 //        presentAsModalWindow(detailVC)
     }
 
-    @IBAction func editBlogContent(_ sender: Any) {
+    @IBAction func editPostContent(_ sender: Any) {
         let i = tvPosts.selectedRow
         if i == -1 {return}
         let itemBlog = vm.arrPosts[i]
         MLangBlogPostContent.getDataById(itemBlog.ID).subscribe { [unowned self] in
             let item = $0
-            (NSApplication.shared.delegate as! AppDelegate).editBlog(settings: vm.vmSettings, item: item)
+            (NSApplication.shared.delegate as! AppDelegate).editPost(settings: vm.vmSettings, item: item)
         } ~ rx.disposeBag
     }
 
