@@ -29,9 +29,9 @@ class LangBlogPostsDetailViewModel: NSObject {
         itemEdit.save(to: item)
         if isAdd {
             vm.arrPosts.append(item)
-            await LangBlogGroupsViewModel.createBlog(item: item)
+            await LangBlogGroupsViewModel.createPost(item: item)
         } else {
-            await LangBlogGroupsViewModel.updateBlog(item: item)
+            await LangBlogGroupsViewModel.updatePost(item: item)
         }
     }
 }
