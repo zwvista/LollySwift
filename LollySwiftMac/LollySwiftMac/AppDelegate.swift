@@ -26,7 +26,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         AppDelegate.theSettingsViewModel.$initialized.didSet.removeDuplicates().filter { $0 }.sink { [unowned self] v in
             //search(self)
-            //editBlog(self)
+            //editPost(self)
             wordsInUnit(self)
             //wordsInLanguage(self)
             //readNumber(self)
@@ -178,7 +178,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @IBAction func editUnitBlog(_ sender: AnyObject) {
-        editBlog(settings: AppDelegate.theSettingsViewModel, item: nil)
+        editPost(settings: AppDelegate.theSettingsViewModel, item: nil)
     }
 
     @IBAction func showLangBlogGroups(_ sender: AnyObject) {
@@ -233,7 +233,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         w.makeKeyAndOrderFront(nil)
     }
 
-    func editBlog(settings: SettingsViewModel, item: MLangBlogPostContent?) {
+    func editPost(settings: SettingsViewModel, item: MLangBlogPostContent?) {
         showWindow(storyBoardName: "Blogs", windowControllerName: "BlogPostEditWindowController") { @MainActor wc in
             let v = wc.contentViewController as! BlogPostEditViewController
             v.vm = BlogPostEditViewModel(settings: settings, item: item)
