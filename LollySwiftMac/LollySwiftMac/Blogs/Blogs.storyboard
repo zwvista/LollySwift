@@ -308,6 +308,18 @@
                             <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </view>
+                        <toolbar key="toolbar" implicitIdentifier="B2FDACA9-5B0F-49A2-82D5-76D7A4127D2D" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="f2X-ly-vjo">
+                            <allowedToolbarItems>
+                                <toolbarItem implicitItemIdentifier="1D7A616E-9AA4-4373-8D61-005CF5B14E8A" label="Refresh" paletteLabel="Refresh" tag="-1" image="NSRefreshTemplate" sizingBehavior="auto" id="dcJ-Do-xZb">
+                                    <connections>
+                                        <action selector="refreshTableView:" target="W7e-6l-7hH" id="QVj-up-152"/>
+                                    </connections>
+                                </toolbarItem>
+                            </allowedToolbarItems>
+                            <defaultToolbarItems>
+                                <toolbarItem reference="dcJ-Do-xZb"/>
+                            </defaultToolbarItems>
+                        </toolbar>
                         <connections>
                             <outlet property="delegate" destination="2W1-qq-pUa" id="xhG-dy-AUl"/>
                         </connections>
@@ -1327,6 +1339,18 @@ Gw
                             <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </view>
+                        <toolbar key="toolbar" implicitIdentifier="E9DF3817-30F0-48F6-A7C1-95104D770980" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="8TC-Cs-0am">
+                            <allowedToolbarItems>
+                                <toolbarItem implicitItemIdentifier="1D7A616E-9AA4-4373-8D61-005CF5B14E8A" label="Refresh" paletteLabel="Refresh" tag="-1" image="NSRefreshTemplate" sizingBehavior="auto" id="4TU-QS-cCF">
+                                    <connections>
+                                        <action selector="refreshTableView:" target="f0d-Wn-VSJ" id="s5e-3j-aEO"/>
+                                    </connections>
+                                </toolbarItem>
+                            </allowedToolbarItems>
+                            <defaultToolbarItems>
+                                <toolbarItem reference="4TU-QS-cCF"/>
+                            </defaultToolbarItems>
+                        </toolbar>
                         <connections>
                             <outlet property="delegate" destination="FK3-Er-DWg" id="XOq-P6-NMq"/>
                         </connections>
@@ -1587,6 +1611,7 @@ Gw
     </scenes>
     <resources>
         <image name="NSAddTemplate" width="18" height="17"/>
+        <image name="NSRefreshTemplate" width="18" height="21"/>
         <image name="NSRemoveTemplate" width="18" height="5"/>
         <image name="NSTouchBarBookmarksTemplate" width="22" height="18"/>
         <image name="NSTouchBarGoUpTemplate" width="18" height="11"/>

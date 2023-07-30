@@ -48,10 +48,10 @@ class LangBlogSelectGroupsViewModel: NSObject {
         updateGroups()
     }
     func onOK() async {
-        var groupsRemove = groupsSelectedOriginal.filter { o in
+        let groupsRemove = groupsSelectedOriginal.filter { o in
             groupsSelected.allSatisfy { $0.ID != o.ID }
         }
-        var groupsAdd = groupsSelected.filter { o in
+        let groupsAdd = groupsSelected.filter { o in
             groupsSelectedOriginal.allSatisfy { $0.ID != o.ID }
         }
         for o in groupsRemove {
