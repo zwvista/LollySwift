@@ -111,14 +111,14 @@ class LangBlogPostsViewController: NSViewController, NSTableViewDataSource, NSTa
     }
 
     @IBAction func selectGroups(_ sender: Any) {
-        let i = tvGroups.selectedRow
+        let i = tvPosts.selectedRow
         if i == -1 {return}
-        let detailVC = storyboard!.instantiateController(withIdentifier: "LangBlogGroupsDetailViewController") as! LangBlogGroupsDetailViewController
-        detailVC.vmEdit = LangBlogGroupsDetailViewModel(vm: vm, item: vm.arrGroups[i])
-        detailVC.complete = { [unowned self] in
+        let selectVC = storyboard!.instantiateController(withIdentifier: "LangBlogSelectGroupsViewController") as! LangBlogSelectGroupsViewController
+        selectVC.item = vm.arrPosts[i]
+        selectVC.complete = { [unowned self] in
             tvGroups.reloadData()
         }
-        presentAsModalWindow(detailVC)
+        presentAsModalWindow(selectVC)
     }
 
     deinit {

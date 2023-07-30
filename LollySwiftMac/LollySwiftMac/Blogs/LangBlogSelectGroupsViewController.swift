@@ -18,15 +18,17 @@ class LangBlogSelectGroupsViewController: NSViewController, NSTableViewDataSourc
     @IBOutlet weak var btnRemove: NSButton!
     @IBOutlet weak var btnRemoveAll: NSButton!
 
+    var item: MLangBlogPost!
     var vm: LangBlogSelectGroupsViewModel!
     var complete: (() -> Void)?
     var subscriptions = Set<AnyCancellable>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        dictsSelected = vm.selectedDictsReference
-//        updateDictsAvailable()
-//
+        vm = LangBlogSelectGroupsViewModel(item: item) { [unowned self] in
+            tvAvailable.reloadData()
+            tvSelected.reloadData()
+        }
 //        func updateDictsAvailable() {
 //            dictsAvailable = vm.arrDictsReference.filter { d in !dictsSelected.contains { $0.DICTNAME == d.DICTNAME } }
 //        }
