@@ -13,8 +13,8 @@ import RxBinding
 
 class LangBlogSelectGroupsViewModel: NSObject {
     var item: MLangBlogPost
-    var groupsAvailable: [MLangBlogGroup]!
-    var groupsSelected: [MLangBlogGroup]!
+    var groupsAvailable = [MLangBlogGroup]()
+    var groupsSelected = [MLangBlogGroup]()
 
     init(item: MLangBlogPost, complete: @escaping () -> Void) {
         self.item = item
