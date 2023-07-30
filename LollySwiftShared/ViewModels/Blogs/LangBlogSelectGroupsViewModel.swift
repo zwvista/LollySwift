@@ -50,10 +50,10 @@ class LangBlogSelectGroupsViewModel: NSObject {
         updateGroups()
     }
     func onOK() -> Single<()> {
-        var groupsRemove = groupsSelectedOriginal.filter { o in
+        let groupsRemove = groupsSelectedOriginal.filter { o in
             groupsSelected.allSatisfy { $0.ID != o.ID }
         }
-        var groupsAdd = groupsSelected.filter { o in
+        let groupsAdd = groupsSelected.filter { o in
             groupsSelectedOriginal.allSatisfy { $0.ID != o.ID }
         }
         var o2 = Single.just(())

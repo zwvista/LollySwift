@@ -52,7 +52,7 @@ class LangBlogSelectGroupsViewController: NSViewController, NSTableViewDataSourc
         } ~ rx.disposeBag
 
         btnOK.rx.tap.flatMap { [unowned self] in
-            return vm.onOK()
+            vm.onOK()
         }.subscribe { [unowned self] _ in
             complete?()
             dismiss(btnOK)
