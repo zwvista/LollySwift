@@ -66,7 +66,7 @@ class LangBlogSelectGroupsViewController: NSViewController, NSTableViewDataSourc
 
     override func viewDidAppear() {
         super.viewDidAppear()
-        view.window?.title = "Select Dictionaries"
+        view.window?.title = "Select Groups"
     }
 
     func numberOfRows(in tableView: NSTableView) -> Int {

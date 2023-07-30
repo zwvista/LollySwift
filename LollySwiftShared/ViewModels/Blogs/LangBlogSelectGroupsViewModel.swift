@@ -27,7 +27,7 @@ class LangBlogSelectGroupsViewModel: NSObject {
                     groupsSelected.allSatisfy { $0.ID != o.ID }
                 }
                 complete()
-            }
+            }.subscribe() ~ rx.disposeBag
         }
     }
 
