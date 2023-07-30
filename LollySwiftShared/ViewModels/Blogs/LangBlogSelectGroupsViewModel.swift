@@ -21,13 +21,13 @@ class LangBlogSelectGroupsViewModel: NSObject {
         super.init()
         Task {
             Single.zip(MLangBlogGroup.getDataByLangPost(langid: item.LANGID, postid: item.ID),
-                       MLangBlogGroup.getDataByLang(item.LANGID)).map{ [unowned self] result in
+                       MLangBlogGroup.getDataByLang(item.LANGID)).subscribe { [unowned self] result in
                 groupsSelected = result.0
                 groupsAvailable = result.1.filter { o in
                     groupsSelected.allSatisfy { $0.ID != o.ID }
                 }
                 complete()
-            }.subscribe() ~ rx.disposeBag
+            } ~ rx.disposeBag
         }
     }
 
