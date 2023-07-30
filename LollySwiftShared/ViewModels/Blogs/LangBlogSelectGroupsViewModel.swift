@@ -12,28 +12,25 @@ import RxRelay
 import RxBinding
 
 class LangBlogSelectGroupsViewModel: NSObject {
-    var vm: LangBlogViewModel
     var item: MLangBlogPost
-    var itemEdit: MLangBlogPostEdit
-    var isAdd: Bool
-    let isOKEnabled = BehaviorRelay(value: false)
+    var groupsAvailable: [MLangBlogGroup]!
+    var groupsSelected: [MLangBlogGroup]!
 
-    init(vm: LangBlogViewModel, item: MLangBlogPost) {
-        self.vm = vm
+    init(item: MLangBlogPost, complete: @escaping () -> Void) {
         self.item = item
-        itemEdit = MLangBlogPostEdit(x: item)
-        isAdd = item.ID == 0
         super.init()
-        _ = itemEdit.TITLE.map { !$0.isEmpty } ~> isOKEnabled
+        Task {
+            Single.zip(MLangBlogGroup.getDataByLangPost(langid: item.LANGID, postid: item.ID),
+                       MLangBlogGroup.getDataByLang(item.LANGID)).map{ [unowned self] result in
+                groupsSelected = result.0
+                groupsAvailable = result.1.filter { o in
+                    groupsSelected.allSatisfy { $0.ID != o.ID }
+                }
+                complete()
+            }
+        }
     }
 
-    func onOK() -> Single<()> {
-        itemEdit.save(to: item)
-        if isAdd {
-            vm.arrPosts.append(item)
-            return LangBlogViewModel.createPost(item: item)
-        } else {
-            return LangBlogViewModel.updatePost(item: item)
-        }
+    func onOK() async {
     }
 }
