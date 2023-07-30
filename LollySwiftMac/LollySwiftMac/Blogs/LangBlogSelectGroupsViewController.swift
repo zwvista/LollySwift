@@ -29,39 +29,34 @@ class LangBlogSelectGroupsViewController: NSViewController, NSTableViewDataSourc
             tvAvailable.reloadData()
             tvSelected.reloadData()
         }
-//        func updateDictsAvailable() {
-//            dictsAvailable = vm.arrDictsReference.filter { d in !dictsSelected.contains { $0.DICTNAME == d.DICTNAME } }
-//        }
-//        func updateDictsAvailableAndUI() {
-//            updateDictsAvailable()
-//            tvAvailable.reloadData()
-//            tvSelected.reloadData()
-//        }
-//
-//        btnAdd.rx.tap.subscribe { [unowned self] _ in
-//            for i in tvAvailable.selectedRowIndexes {
-//                dictsSelected.append(dictsAvailable[i])
-//            }
-//            updateDictsAvailableAndUI()
-//        } ~ rx.disposeBag
-//        btnRemove.rx.tap.subscribe { [unowned self] _ in
-//            for i in tvSelected.selectedRowIndexes.reversed() {
-//                dictsSelected.remove(at: i)
-//            }
-//            updateDictsAvailableAndUI()
-//        } ~ rx.disposeBag
-//        btnRemoveAll.rx.tap.subscribe { [unowned self] _ in
-//            dictsSelected.removeAll()
-//            updateDictsAvailableAndUI()
-//        } ~ rx.disposeBag
-//
-//        btnOK.rx.tap.flatMap { [unowned self] in
-//            vm.selectedDictsReferenceIndexes = dictsSelected.compactMap { o in vm.arrDictsReference.firstIndex { $0.DICTID == o.DICTID } }
-//            return vm.updateDictsReference()
-//        }.subscribe { [unowned self] _ in
-//            complete?()
-//            dismiss(btnOK)
-//        } ~ rx.disposeBag
+        func updateUI() {
+            tvAvailable.reloadData()
+            tvSelected.reloadData()
+        }
+
+        btnAdd.rx.tap.subscribe { [unowned self] _ in
+            var arr = tvAvailable.selectedRowIndexes.map { vm.groupsAvailable[$0] }
+            guard !arr.isEmpty else {return}
+            vm.addGroups(arr: arr)
+            updateUI()
+        } ~ rx.disposeBag
+        btnRemove.rx.tap.subscribe { [unowned self] _ in
+            var arr = tvSelected.selectedRowIndexes.map { vm.groupsSelected[$0] }
+            guard !arr.isEmpty else {return}
+            vm.removeGroups(arr: arr)
+            updateUI()
+        } ~ rx.disposeBag
+        btnRemoveAll.rx.tap.subscribe { [unowned self] _ in
+            vm.removeAllGroups()
+            updateUI()
+        } ~ rx.disposeBag
+
+        btnOK.rx.tap.flatMap { [unowned self] in
+            return vm.onOK()
+        }.subscribe { [unowned self] _ in
+            complete?()
+            dismiss(btnOK)
+        } ~ rx.disposeBag
     }
 
     override func viewDidAppear() {

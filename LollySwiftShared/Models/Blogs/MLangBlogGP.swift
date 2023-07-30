@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import RxSwift
+import RxRelay
 
 @objcMembers
 class MLangBlogGP: NSObject, Codable {
@@ -17,4 +19,16 @@ class MLangBlogGP: NSObject, Codable {
     dynamic var GROUPNAME = ""
     dynamic var TITLE = ""
     dynamic var URL = ""
+
+    static func create(item: MLangBlogGP) -> Single<Int> {
+        // SQL: INSERT INTO LANGBLOGGP (GROUPID, POSTID) VALUES (?,?)
+        let url = "\(CommonApi.urlAPI)LANGBLOGGP"
+        return RestApi.create(url: url, body: try! item.toJSONString()!).map { Int($0)! }.do(onSuccess: { print($0) })
+    }
+
+    static func delete(_ id: Int) -> Single<()> {
+        // SQL: DELETE LANGBLOGGP WHERE ID=?
+        let url = "\(CommonApi.urlAPI)LANGBLOGGP/\(id)"
+        return RestApi.delete(url: url).map { print($0) }
+    }
 }
