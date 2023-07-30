@@ -23,4 +23,18 @@ class MLangBlogGP: NSObject, Codable {
     dynamic var GROUPNAME = ""
     dynamic var TITLE = ""
     dynamic var URL = ""
+
+    static func create(item: MLangBlogGP) async -> Int {
+        // SQL: INSERT INTO LANGBLOGGP (GROUPID, POSTID) VALUES (?,?)
+        let url = "\(CommonApi.urlAPI)LANGBLOGGP"
+        let id = Int(await RestApi.create(url: url, body: try! item.toJSONString()!))!
+        print(id)
+        return id
+    }
+
+    static func delete(_ id: Int) async {
+        // SQL: DELETE LANGBLOGGP WHERE ID=?
+        let url = "\(CommonApi.urlAPI)LANGBLOGGP/\(id)"
+        print(await RestApi.delete(url: url))
+    }
 }
