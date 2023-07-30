@@ -18,51 +18,49 @@ class LangBlogSelectGroupsViewController: NSViewController, NSTableViewDataSourc
     @IBOutlet weak var btnRemove: NSButton!
     @IBOutlet weak var btnRemoveAll: NSButton!
 
-    var vm: SettingsViewModel { AppDelegate.theSettingsViewModel }
-    var dictsAvailable: [MDictionary]!
-    var dictsSelected: [MDictionary]!
+    var vm: LangBlogSelectGroupsViewModel!
     var complete: (() -> Void)?
     var subscriptions = Set<AnyCancellable>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        dictsSelected = vm.selectedDictsReference
-        updateDictsAvailable()
-
-        func updateDictsAvailable() {
-            dictsAvailable = vm.arrDictsReference.filter { d in !dictsSelected.contains { $0.DICTNAME == d.DICTNAME } }
-        }
-        func updateDictsAvailableAndUI() {
-            updateDictsAvailable()
-            tvAvailable.reloadData()
-            tvSelected.reloadData()
-        }
-
-        btnAdd.tapPublisher.sink { [unowned self] in
-            for i in tvAvailable.selectedRowIndexes {
-                dictsSelected.append(dictsAvailable[i])
-            }
-            updateDictsAvailableAndUI()
-        } ~ subscriptions
-        btnRemove.tapPublisher.sink { [unowned self] in
-            for i in tvSelected.selectedRowIndexes.reversed() {
-                dictsSelected.remove(at: i)
-            }
-            updateDictsAvailableAndUI()
-        } ~ subscriptions
-        btnRemoveAll.tapPublisher.sink { [unowned self] in
-            dictsSelected.removeAll()
-            updateDictsAvailableAndUI()
-        } ~ subscriptions
-
-        btnOK.tapPublisher.sink { [unowned self] in
-            vm.selectedDictsReferenceIndexes = dictsSelected.compactMap { o in vm.arrDictsReference.firstIndex { $0.DICTID == o.DICTID } }
-            Task {
-                await vm.updateDictsReference()
-                complete?()
-                dismiss(btnOK)
-            }
-        } ~ subscriptions
+//        dictsSelected = vm.selectedDictsReference
+//        updateDictsAvailable()
+//
+//        func updateDictsAvailable() {
+//            dictsAvailable = vm.arrDictsReference.filter { d in !dictsSelected.contains { $0.DICTNAME == d.DICTNAME } }
+//        }
+//        func updateDictsAvailableAndUI() {
+//            updateDictsAvailable()
+//            tvAvailable.reloadData()
+//            tvSelected.reloadData()
+//        }
+//
+//        btnAdd.tapPublisher.sink { [unowned self] in
+//            for i in tvAvailable.selectedRowIndexes {
+//                dictsSelected.append(dictsAvailable[i])
+//            }
+//            updateDictsAvailableAndUI()
+//        } ~ subscriptions
+//        btnRemove.tapPublisher.sink { [unowned self] in
+//            for i in tvSelected.selectedRowIndexes.reversed() {
+//                dictsSelected.remove(at: i)
+//            }
+//            updateDictsAvailableAndUI()
+//        } ~ subscriptions
+//        btnRemoveAll.tapPublisher.sink { [unowned self] in
+//            dictsSelected.removeAll()
+//            updateDictsAvailableAndUI()
+//        } ~ subscriptions
+//
+//        btnOK.tapPublisher.sink { [unowned self] in
+//            vm.selectedDictsReferenceIndexes = dictsSelected.compactMap { o in vm.arrDictsReference.firstIndex { $0.DICTID == o.DICTID } }
+//            Task {
+//                await vm.updateDictsReference()
+//                complete?()
+//                dismiss(btnOK)
+//            }
+//        } ~ subscriptions
     }
 
     override func viewDidAppear() {
@@ -71,17 +69,17 @@ class LangBlogSelectGroupsViewController: NSViewController, NSTableViewDataSourc
     }
 
     func numberOfRows(in tableView: NSTableView) -> Int {
-        tableView === tvAvailable ? dictsAvailable.count : dictsSelected.count
+        tableView === tvAvailable ? vm.groupsAvailable.count : vm.groupsSelected.count
     }
 
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! NSTableCellView
         let columnName = tableColumn!.identifier.rawValue
         if tableView === tvAvailable {
-            let item = dictsAvailable[row]
+            let item = vm.groupsAvailable[row]
             cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
         } else {
-            let item = dictsSelected[row]
+            let item = vm.groupsSelected[row]
             cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
         }
         return cell
