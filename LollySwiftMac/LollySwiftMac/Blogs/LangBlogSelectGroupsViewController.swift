@@ -35,13 +35,13 @@ class LangBlogSelectGroupsViewController: NSViewController, NSTableViewDataSourc
         }
 
         btnAdd.rx.tap.subscribe { [unowned self] _ in
-            var arr = tvAvailable.selectedRowIndexes.map { vm.groupsAvailable[$0] }
+            let arr = tvAvailable.selectedRowIndexes.map { vm.groupsAvailable[$0] }
             guard !arr.isEmpty else {return}
             vm.addGroups(arr: arr)
             updateUI()
         } ~ rx.disposeBag
         btnRemove.rx.tap.subscribe { [unowned self] _ in
-            var arr = tvSelected.selectedRowIndexes.map { vm.groupsSelected[$0] }
+            let arr = tvSelected.selectedRowIndexes.map { vm.groupsSelected[$0] }
             guard !arr.isEmpty else {return}
             vm.removeGroups(arr: arr)
             updateUI()
