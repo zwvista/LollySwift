@@ -29,11 +29,14 @@ class BlogPostEditViewController: NSViewController, NSMenuItemValidation  {
         tfTitle.stringValue = vm.title
         vm.loadBlog { [unowned self] in
             tvMarked.string = $0
+            markedToHtml()
         }
     }
 
     @IBAction func saveMarked(_ sender: AnyObject) {
         vm.saveBlog(content: tvMarked.string)
+        markedToHtml()
+        MacApi.copyText(tvHtml.string)
     }
 
     @IBAction func htmlToMarked(_ sender: AnyObject) {
@@ -73,14 +76,17 @@ class BlogPostEditViewController: NSViewController, NSMenuItemValidation  {
             n = (sender as! NSSegmentedControl).selectedSegment
         }
         if n == 0 {
-            tvHtml.string = BlogPostEditViewModel.markedToHtml(text: tvMarked.string)
-            let str = CommonApi.toHtml(text: tvHtml.string)
-            wvPost.loadHTMLString(str, baseURL: nil)
+            markedToHtml()
             MacApi.copyText(tvHtml.string)
         } else {
             let url = BlogPostEditViewModel.getPatternUrl(patternNo: wc.patternNo)
             wvPost.load(URLRequest(url: URL(string: url)!))
         }
+    }
+    func markedToHtml() {
+        tvHtml.string = BlogPostEditViewModel.markedToHtml(text: tvMarked.string)
+        let str = CommonApi.toHtml(text: tvHtml.string)
+        wvPost.loadHTMLString(str, baseURL: nil)
     }
     @IBAction func openPattern(_ sender: AnyObject) {
         let url = BlogPostEditViewModel.getPatternUrl(patternNo: wc.patternNo)
