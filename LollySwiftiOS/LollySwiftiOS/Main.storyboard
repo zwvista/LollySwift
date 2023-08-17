@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="4oo-5C-FmD">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="4oo-5C-FmD">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -118,17 +119,17 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </toolbar>
                     <connections>
-                        <segue destination="ksV-eR-AU7" kind="show" id="hQH-0H-KCm"/>
-                        <segue destination="Dvd-la-PZ4" kind="show" id="2H0-JV-Xg4"/>
-                        <segue destination="kMG-SD-qKh" kind="show" id="TB1-NV-JJZ"/>
-                        <segue destination="UzB-if-4Lc" kind="show" id="uPU-lX-f7D"/>
-                        <segue destination="KW9-ed-k2G" kind="show" id="Kb0-LS-FhL"/>
-                        <segue destination="FNy-Po-4Kj" kind="show" id="yjl-4i-y95"/>
-                        <segue destination="dPf-2g-ycm" kind="show" id="Ig2-pf-U6p"/>
-                        <segue destination="T2A-6G-Dnh" kind="show" id="9rV-tP-16X"/>
-                        <segue destination="D21-9j-1Zx" kind="show" id="Ew2-jt-a1u"/>
+                        <segue destination="ksV-eR-AU7" kind="show" identifier="WordsUnitViewController" id="hQH-0H-KCm"/>
+                        <segue destination="Dvd-la-PZ4" kind="show" identifier="WordsTextbookViewController" id="2H0-JV-Xg4"/>
+                        <segue destination="kMG-SD-qKh" kind="show" identifier="WordsLangViewController" id="TB1-NV-JJZ"/>
+                        <segue destination="UzB-if-4Lc" kind="show" identifier="PhrasesUnitViewController" id="uPU-lX-f7D"/>
+                        <segue destination="KW9-ed-k2G" kind="show" identifier="PhrasesLangViewController" id="Kb0-LS-FhL"/>
+                        <segue destination="FNy-Po-4Kj" kind="show" identifier="PhrasesTextbookViewController" id="yjl-4i-y95"/>
+                        <segue destination="dPf-2g-ycm" kind="show" identifier="WordsReviewViewController" id="Ig2-pf-U6p"/>
+                        <segue destination="T2A-6G-Dnh" kind="show" identifier="PhrasesReviewViewController" id="9rV-tP-16X"/>
+                        <segue destination="D21-9j-1Zx" kind="show" identifier="PatternsViewController" id="Ew2-jt-a1u"/>
                         <segue destination="Qfu-2o-Il7" kind="relationship" relationship="rootViewController" id="fqp-cW-hEO"/>
-                        <segue destination="Jfk-AM-MDC" kind="show" id="5Bu-zB-6gv"/>
+                        <segue destination="Jfk-AM-MDC" kind="show" identifier="SettingsViewController" id="5Bu-zB-6gv"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Bd-jG-Nll" userLabel="First Responder" sceneMemberID="firstResponder"/>
