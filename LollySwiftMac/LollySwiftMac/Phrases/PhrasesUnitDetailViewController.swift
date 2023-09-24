@@ -43,7 +43,7 @@ class PhrasesUnitDetailViewController: NSViewController, NSTableViewDataSource, 
         itemEdit.$TRANSLATION <~> tfTranslation.textProperty ~ subscriptions
         vmEdit.$isOKEnabled ~> (btnOK, \.isEnabled) ~ subscriptions
 
-        vmEdit.vmSingle.$arrPhrases.sink { [unowned self] _ in
+        vmEdit.vmSingle.$arrPhrases.didSet.sink { [unowned self] _ in
             tableView.reloadData()
         } ~ subscriptions
 
