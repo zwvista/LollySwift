@@ -27,7 +27,7 @@ class TextbooksDetailViewController: NSViewController {
         super.viewDidLoad()
         tfID.stringValue = itemEdit.ID
         tfLang.stringValue = vmEdit.vm.vmSettings.selectedLang.LANGNAME
-        _ = itemEdit.$TEXTBOOKNAME ~> (tfTextbookName, \.stringValue) ~ subscriptions
+        _ = itemEdit.$TEXTBOOKNAME <~> tfTextbookName.textProperty ~ subscriptions
         _ = itemEdit.$UNITS <~> tvUnits.textProperty ~ subscriptions
         _ = itemEdit.$PARTS <~> tfParts.textProperty ~ subscriptions
         _ = vmEdit.$isOKEnabled ~> (btnOK, \.isEnabled) ~ subscriptions
