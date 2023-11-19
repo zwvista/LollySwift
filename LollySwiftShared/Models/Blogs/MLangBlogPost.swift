@@ -47,14 +47,14 @@ class MLangBlogPost: NSObject, Codable {
     }
 
     static func update(item: MLangBlogPost) -> Single<()> {
-        // SQL: UPDATE LANGBLOGS SET GROUPID=?, TITLE=? WHERE ID=?
-        let url = "\(CommonApi.urlAPI)LANGBLOGS/\(item.ID)"
+        // SQL: UPDATE LANGBLOGPOSTS SET LANGID=?, TITLE=?, URL=? WHERE ID=?
+        let url = "\(CommonApi.urlAPI)LANGBLOGPOSTS/\(item.ID)"
         return RestApi.update(url: url, body: try! item.toJSONString()!).map { print($0) }
     }
 
     static func create(item: MLangBlogPost) -> Single<Int> {
-        // SQL: INSERT INTO LANGBLOGS (GROUPID, TITLE) VALUES (?,?)
-        let url = "\(CommonApi.urlAPI)LANGBLOGS"
+        // SQL: INSERT INTO LANGBLOGPOSTS (LANGID, TITLE, URL) VALUES (?,?,?)
+        let url = "\(CommonApi.urlAPI)LANGBLOGPOSTS"
         return RestApi.create(url: url, body: try! item.toJSONString()!).map { Int($0)! }.do(onSuccess: { print($0) })
     }
 }
