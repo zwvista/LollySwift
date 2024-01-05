@@ -44,26 +44,26 @@ class MLangWord: NSObject, Codable, MWordProtocol {
     static func update(_ id: Int, note: String) -> Single<()> {
         // SQL: UPDATE LANGWORDS SET NOTE=? WHERE ID=?
         let url = "\(CommonApi.urlAPI)LANGWORDS/\(id)"
-        let body = "NOTE=\(note)"
+        let body = ["NOTE": note]
         return RestApi.update(url: url, body: body).map { print($0) }
     }
 
     static func update(item: MLangWord) -> Single<()> {
         // SQL: UPDATE LANGWORDS SET WORD=?, NOTE=? WHERE ID=?
         let url = "\(CommonApi.urlAPI)LANGWORDS/\(item.ID)"
-        return RestApi.update(url: url, body: try! item.toJSONString()!).map { print($0) }
+        return RestApi.update(url: url, body: item.toParameters(isSP: false)).map { print($0) }
     }
 
     static func create(item: MLangWord) -> Single<Int> {
         // SQL: INSERT INTO LANGWORDS (LANGID, WORD) VALUES (?,?)
         let url = "\(CommonApi.urlAPI)LANGWORDS"
-        return RestApi.create(url: url, body: try! item.toJSONString()!).map { Int($0)! }.do(onSuccess: { print($0) })
+        return RestApi.create(url: url, body: item.toParameters(isSP: false)).map { Int($0)! }.do(onSuccess: { print($0) })
     }
 
     static func delete(item: MLangWord) -> Single<()> {
         // SQL: CALL LANGWORDS_DELETE
         let url = "\(CommonApi.urlSP)LANGWORDS_DELETE"
-        let parameters = item.toParameters()
+        let parameters = item.toParameters(isSP: true)
         return RestApi.callSP(url: url, parameters: parameters).map { print($0) }
     }
 }

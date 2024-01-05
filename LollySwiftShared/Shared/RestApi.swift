@@ -12,44 +12,31 @@ import Alamofire
 import RxSwift
 import RxAlamofire
 
-// https://stackoverflow.com/questions/27855319/post-request-with-a-simple-string-in-body-with-alamofire
-class StringEncoding: ParameterEncoding {
-    let body: String
-
-    public init(body: String) {
-        self.body = body
-    }
-
-    public func encode(_ urlRequest: URLRequestConvertible, with parameters: Parameters?) throws -> URLRequest {
-        var request = try urlRequest.asURLRequest()
-        request.httpBody = body.data(using: .utf8, allowLossyConversion: false)
-        return request
-    }
-}
-
 extension Encodable {
 
     public func toJSONString(prettyPrint: Bool = false) throws -> String? {
         let encoder = JSONEncoder()
         if prettyPrint { encoder.outputFormatting = .prettyPrinted }
         let data = try! encoder.encode(self)
-        let jsonString = String(data: data, encoding: .utf8)?
-            // When posting(creating) a new record, its id must be null.
-            // Otherwise the generated id will not be returned.
-            .replacingOccurrences(of: #""ID":0,"#, with: "")
-            .replacingOccurrences(of: #","ID":0"#, with: "")
+        let jsonString = String(data: data, encoding: .utf8)
         return jsonString
     }
 
     // https://stackoverflow.com/questions/45209743/how-can-i-use-swift-s-codable-to-encode-into-a-dictionary
-    public func toParameters() -> Parameters {
+    public func toParameters(isSP: Bool) -> Parameters {
         let data = try! JSONEncoder().encode(self)
-        let dictionary = try! JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String: Any]
-        var params = Parameters()
-        for (k, v) in dictionary {
-            params["P_" + k] = v
+        let dictionary = try! JSONSerialization.jsonObject(with: data, options: .allowFragments) as! Parameters
+        if isSP {
+            var params = Parameters()
+            for (k, v) in dictionary {
+                params["P_" + k] = v
+            }
+            return params
+        } else {
+            // When posting(creating) a new record, its id must be null.
+            // Otherwise the generated id will not be returned.
+            return dictionary.filter { !($0.key == "ID" && $0.value as! Int == 0) }
         }
-        return params
     }
 
 }
@@ -66,13 +53,13 @@ class RestApi {
     static func getRecords<T: Decodable>(url: String) -> Single<[T]> {
         getArray(url: url, keyPath: "records")
     }
-    static func update(url: String, body: String) -> Single<String> {
+    static func update(url: String, body: Parameters) -> Single<String> {
         print("[RestApi]PUT:\(url) BODY:\(body)")
-        return RxAlamofire.string(.put, url, encoding: StringEncoding(body: body)).asSingle()
+        return RxAlamofire.string(.put, url, parameters: body).asSingle()
     }
-    static func create(url: String, body: String) -> Single<String> {
+    static func create(url: String, body: Parameters) -> Single<String> {
         print("[RestApi]POST:\(url) BODY:\(body)")
-        return RxAlamofire.string(.post, url, encoding: StringEncoding(body: body)).asSingle()
+        return RxAlamofire.string(.post, url, parameters: body).asSingle()
     }
     static func delete(url: String) -> Single<String> {
         print("[RestApi]DELETE:\(url)")

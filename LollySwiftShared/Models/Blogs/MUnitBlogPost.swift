@@ -26,12 +26,12 @@ class MUnitBlogPost: NSObject, Codable {
 
     private static func create(item: MUnitBlogPost) -> Single<()> {
         let url = "\(CommonApi.urlAPI)UNITBLOGPOSTS"
-        return RestApi.create(url: url, body: try! item.toJSONString()!).map { print($0) }
+        return RestApi.create(url: url, body: item.toParameters(isSP: false)).map { print($0) }
      }
 
     private static func update(item: MUnitBlogPost) -> Single<()> {
         let url = "\(CommonApi.urlAPI)UNITBLOGPOSTS/\(item.ID)"
-        return RestApi.update(url: url, body: try! item.toJSONString()!).map { print($0) }
+        return RestApi.update(url: url, body: item.toParameters(isSP: false)).map { print($0) }
      }
 
     static func update(_ textbookid: Int, unit: Int, content: String) -> Single<()> {

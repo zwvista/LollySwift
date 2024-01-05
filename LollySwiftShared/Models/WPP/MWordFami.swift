@@ -26,13 +26,13 @@ class MWordFami: NSObject, Codable {
     private static func update(item: MWordFami) -> Single<()> {
         // SQL: UPDATE WORDSFAMI SET USERID=?, WORDID=?, WHERE ID=?
         let url = "\(CommonApi.urlAPI)WORDSFAMI/\(item.ID)"
-        return RestApi.update(url: url, body: try! item.toJSONString()!).map { print($0) }
+        return RestApi.update(url: url, body: item.toParameters(isSP: false)).map { print($0) }
     }
 
     private static func create(item: MWordFami) -> Single<Int> {
         // SQL: INSERT INTO WORDSFAMI (USERID, WORDID) VALUES (?,?)
         let url = "\(CommonApi.urlAPI)WORDSFAMI"
-        return RestApi.create(url: url, body: try! item.toJSONString()!).map { Int($0)! }.do(onSuccess: { print($0) })
+        return RestApi.create(url: url, body: item.toParameters(isSP: false)).map { Int($0)! }.do(onSuccess: { print($0) })
     }
 
     static func delete(_ id: Int) -> Single<()> {

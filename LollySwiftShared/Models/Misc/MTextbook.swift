@@ -69,13 +69,13 @@ class MTextbook: NSObject, Codable {
     static func update(item: MTextbook) -> Single<()> {
         // SQL: UPDATE TEXTBOOKS SET NAME=?, UNITS=?, PARTS=? WHERE ID=?
         let url = "\(CommonApi.urlAPI)TEXTBOOKS/\(item.ID)"
-        return RestApi.update(url: url, body: try! item.toJSONString()!).map { print($0) }
+        return RestApi.update(url: url, body: item.toParameters(isSP: false)).map { print($0) }
     }
 
     static func create(item: MTextbook) -> Single<Int> {
         // SQL: INSERT INTO TEXTBOOKS (ID, LANGID, NAME, UNITS, PARTS) VALUES (?,?,?,?,?)
         let url = "\(CommonApi.urlAPI)TEXTBOOKS"
-        return RestApi.create(url: url, body: try! item.toJSONString()!).map { Int($0)! }.do(onSuccess: { print($0) })
+        return RestApi.create(url: url, body: item.toParameters(isSP: false)).map { Int($0)! }.do(onSuccess: { print($0) })
     }
 }
 

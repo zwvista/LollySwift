@@ -8,6 +8,7 @@
 
 import Foundation
 import RxSwift
+import Alamofire
 
 @objcMembers
 class MUserSetting: NSObject, Codable {
@@ -26,7 +27,7 @@ class MUserSetting: NSObject, Codable {
         return RestApi.getRecords(url: url)
     }
 
-    static func update(_ id: Int, body: String) -> Single<()> {
+    static func update(_ id: Int, body: Parameters) -> Single<()> {
         let url = "\(CommonApi.urlAPI)USERSETTINGS/\(id)"
         // SQL: UPDATE USERSETTINGS SET VALUE1=? WHERE ID=?
         // SQL: UPDATE USERSETTINGS SET VALUE2=? WHERE ID=?
@@ -36,12 +37,12 @@ class MUserSetting: NSObject, Codable {
     }
 
     static func update(info: MUserSettingInfo, intValue: Int) -> Single<()> {
-        let body = "VALUE\(info.VALUEID)=\(intValue)"
+        let body = ["VALUE\(info.VALUEID)": intValue]
         return update(info.USERSETTINGID, body: body)
     }
 
     static func update(info: MUserSettingInfo, stringValue: String) -> Single<()> {
-        let body = "VALUE\(info.VALUEID)=\(stringValue)"
+        let body = ["VALUE\(info.VALUEID)": stringValue]
         return update(info.USERSETTINGID, body: body)
     }
 }

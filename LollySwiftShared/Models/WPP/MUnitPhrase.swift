@@ -91,28 +91,28 @@ class MUnitPhrase: NSObject, Codable, MPhraseProtocol {
     static func update(_ id: Int, seqnum: Int) -> Single<()> {
         // SQL: UPDATE UNITPHRASES SET SEQNUM=? WHERE ID=?
         let url = "\(CommonApi.urlAPI)UNITPHRASES/\(id)"
-        let body = "SEQNUM=\(seqnum)"
+        let body = ["SEQNUM": seqnum]
         return RestApi.update(url: url, body: body).map { print($0) }
     }
 
     static func update(item: MUnitPhrase) -> Single<()> {
         // SQL: CALL UNITPHRASES_UPDATE
         let url = "\(CommonApi.urlSP)UNITPHRASES_UPDATE"
-        let parameters = item.toParameters()
+        let parameters = item.toParameters(isSP: true)
         return RestApi.callSP(url: url, parameters: parameters).map { print($0) }
     }
 
     static func create(item: MUnitPhrase) -> Single<Int> {
         // SQL: CALL UNITPHRASES_CREATE
         let url = "\(CommonApi.urlSP)UNITPHRASES_CREATE"
-        let parameters = item.toParameters()
+        let parameters = item.toParameters(isSP: true)
         return RestApi.callSP(url: url, parameters: parameters).map { print($0); return Int($0.NEW_ID!)! }
     }
 
     static func delete(item: MUnitPhrase) -> Single<()> {
         // SQL: CALL UNITPHRASES_DELETE
         let url = "\(CommonApi.urlSP)UNITPHRASES_DELETE"
-        let parameters = item.toParameters()
+        let parameters = item.toParameters(isSP: true)
         return RestApi.callSP(url: url, parameters: parameters).map { print($0) }
     }
 }

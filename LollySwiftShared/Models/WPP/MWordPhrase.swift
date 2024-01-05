@@ -39,7 +39,7 @@ class MWordPhrase: NSObject, Codable {
     private static func create(item: MWordPhrase) -> Single<Int> {
         // SQL: INSERT INTO WORDSPHRASES (WORDID, PHRASEID) VALUES (?,?)
         let url = "\(CommonApi.urlAPI)WORDSPHRASES"
-        return RestApi.create(url: url, body: try! item.toJSONString()!).map { Int($0)! }.do(onSuccess: { print($0) })
+        return RestApi.create(url: url, body: item.toParameters(isSP: false)).map { Int($0)! }.do(onSuccess: { print($0) })
     }
 
     private static func delete(_ id: Int) -> Single<()> {

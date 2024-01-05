@@ -101,28 +101,28 @@ class MUnitWord: NSObject, Codable, MWordProtocol {
     static func update(_ id: Int, seqnum: Int) -> Single<()> {
         // SQL: UPDATE UNITWORDS SET SEQNUM=? WHERE ID=?
         let url = "\(CommonApi.urlAPI)UNITWORDS/\(id)"
-        let body = "SEQNUM=\(seqnum)"
+        let body = ["SEQNUM": seqnum]
         return RestApi.update(url: url, body: body).map { print($0) }
     }
 
     static func update(item: MUnitWord) -> Single<String> {
         // SQL: CALL UNITWORDS_UPDATE
         let url = "\(CommonApi.urlSP)UNITWORDS_UPDATE"
-        let parameters = item.toParameters()
+        let parameters = item.toParameters(isSP: true)
         return RestApi.callSP(url: url, parameters: parameters).map { print($0); return $0.result }
     }
 
     static func create(item: MUnitWord) -> Single<Int> {
         // SQL: CALL UNITWORDS_CREATE
         let url = "\(CommonApi.urlSP)UNITWORDS_CREATE"
-        let parameters = item.toParameters()
+        let parameters = item.toParameters(isSP: true)
         return RestApi.callSP(url: url, parameters: parameters).map { print($0); return Int($0.NEW_ID!)! }
     }
 
     static func delete(item: MUnitWord) -> Single<()> {
         // SQL: CALL UNITWORDS_DELETE
         let url = "\(CommonApi.urlSP)UNITWORDS_DELETE"
-        let parameters = item.toParameters()
+        let parameters = item.toParameters(isSP: true)
         return RestApi.callSP(url: url, parameters: parameters).map { print($0) }
     }
 }
