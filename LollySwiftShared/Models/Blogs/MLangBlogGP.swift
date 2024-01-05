@@ -27,7 +27,7 @@ class MLangBlogGP: NSObject, Codable {
     static func create(item: MLangBlogGP) async -> Int {
         // SQL: INSERT INTO LANGBLOGGP (GROUPID, POSTID) VALUES (?,?)
         let url = "\(CommonApi.urlAPI)LANGBLOGGP"
-        let id = Int(await RestApi.create(url: url, body: try! item.toJSONString()!))!
+        let id = Int(await RestApi.create(url: url, body: item.toParameters(isSP: false)))!
         print(id)
         return id
     }

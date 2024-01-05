@@ -30,12 +30,12 @@ class MUnitBlogPost: NSObject, Codable {
 
     private static func create(item: MUnitBlogPost) async {
         let url = "\(CommonApi.urlAPI)UNITBLOGPOSTS"
-        print(await RestApi.create(url: url, body: try! item.toJSONString()!))
+        print(await RestApi.create(url: url, body: item.toParameters(isSP: false)))
      }
 
     private static func update(item: MUnitBlogPost) async {
         let url = "\(CommonApi.urlAPI)UNITBLOGPOSTS/\(item.ID)"
-        print(await RestApi.update(url: url, body: try! item.toJSONString()!))
+        print(await RestApi.update(url: url, body: item.toParameters(isSP: false)))
      }
 
     static func update(_ textbookid: Int, unit: Int, content: String) async {

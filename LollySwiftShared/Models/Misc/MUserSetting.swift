@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Alamofire
 
 @objcMembers
 class MUserSettings: HasRecords {
@@ -31,7 +32,7 @@ class MUserSetting: NSObject, Codable {
         return await RestApi.getRecords(MUserSettings.self, url: url)
     }
 
-    static func update(_ id: Int, body: String) async {
+    static func update(_ id: Int, body: Parameters) async {
         let url = "\(CommonApi.urlAPI)USERSETTINGS/\(id)"
         // SQL: UPDATE USERSETTINGS SET VALUE1=? WHERE ID=?
         // SQL: UPDATE USERSETTINGS SET VALUE2=? WHERE ID=?
@@ -41,12 +42,12 @@ class MUserSetting: NSObject, Codable {
     }
 
     static func update(info: MUserSettingInfo, intValue: Int) async {
-        let body = "VALUE\(info.VALUEID)=\(intValue)"
+        let body = ["VALUE\(info.VALUEID)": intValue]
         await update(info.USERSETTINGID, body: body)
     }
 
     static func update(info: MUserSettingInfo, stringValue: String) async {
-        let body = "VALUE\(info.VALUEID)=\(stringValue)"
+        let body = ["VALUE\(info.VALUEID)": stringValue]
         await update(info.USERSETTINGID, body: body)
     }
 }

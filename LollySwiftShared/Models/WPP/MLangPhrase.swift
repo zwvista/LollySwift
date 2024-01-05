@@ -42,20 +42,20 @@ class MLangPhrase: NSObject, Codable, MPhraseProtocol {
     static func update(_ id: Int, translation: String) async {
         // SQL: UPDATE LANGPHRASES SET TRANSLATION=? WHERE ID=?
         let url = "\(CommonApi.urlAPI)LANGPHRASES/\(id)"
-        let body = "TRANSLATION=\(translation)"
+        let body = ["TRANSLATION": translation]
         print(await RestApi.update(url: url, body: body))
     }
 
     static func update(item: MLangPhrase) async {
         // SQL: UPDATE LANGPHRASES SET PHRASE=?, TRANSLATION=? WHERE ID=?
         let url = "\(CommonApi.urlAPI)LANGPHRASES/\(item.ID)"
-        print(await RestApi.update(url: url, body: try! item.toJSONString()!))
+        print(await RestApi.update(url: url, body: item.toParameters(isSP: false)))
     }
 
     static func create(item: MLangPhrase) async -> Int {
         // SQL: INSERT INTO LANGPHRASES (LANGID, PHRASE, TRANSLATION) VALUES (?,?,?)
         let url = "\(CommonApi.urlAPI)LANGPHRASES"
-        let id = Int(await RestApi.create(url: url, body: try! item.toJSONString()!))!
+        let id = Int(await RestApi.create(url: url, body: item.toParameters(isSP: false)))!
         print(id)
         return id
     }
@@ -63,7 +63,7 @@ class MLangPhrase: NSObject, Codable, MPhraseProtocol {
     static func delete(item: MLangPhrase) async {
         // SQL: CALL LANGPHRASES_DELETE
         let url = "\(CommonApi.urlSP)LANGPHRASES_DELETE"
-        let parameters = item.toParameters()
+        let parameters = item.toParameters(isSP: true)
         print(await RestApi.callSP(url: url, parameters: parameters))
     }
 }

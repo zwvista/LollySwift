@@ -31,13 +31,13 @@ class MWordFami: NSObject, Codable {
     private static func update(item: MWordFami) async {
         // SQL: UPDATE WORDSFAMI SET USERID=?, WORDID=?, WHERE ID=?
         let url = "\(CommonApi.urlAPI)WORDSFAMI/\(item.ID)"
-        print(await RestApi.update(url: url, body: try! item.toJSONString()!))
+        print(await RestApi.update(url: url, body: item.toParameters(isSP: false)))
     }
 
     private static func create(item: MWordFami) async -> Int {
         // SQL: INSERT INTO WORDSFAMI (USERID, WORDID) VALUES (?,?)
         let url = "\(CommonApi.urlAPI)WORDSFAMI"
-        let id = Int(await RestApi.create(url: url, body: try! item.toJSONString()!))!
+        let id = Int(await RestApi.create(url: url, body: item.toParameters(isSP: false)))!
         print(id)
         return id
     }

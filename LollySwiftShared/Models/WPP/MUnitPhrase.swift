@@ -92,21 +92,21 @@ class MUnitPhrase: NSObject, Codable, MPhraseProtocol {
     static func update(_ id: Int, seqnum: Int) async {
         // SQL: UPDATE UNITPHRASES SET SEQNUM=? WHERE ID=?
         let url = "\(CommonApi.urlAPI)UNITPHRASES/\(id)"
-        let body = "SEQNUM=\(seqnum)"
+        let body = ["SEQNUM": seqnum]
         print(await RestApi.update(url: url, body: body))
     }
 
     static func update(item: MUnitPhrase) async {
         // SQL: CALL UNITPHRASES_UPDATE
         let url = "\(CommonApi.urlSP)UNITPHRASES_UPDATE"
-        let parameters = item.toParameters()
+        let parameters = item.toParameters(isSP: true)
         print(await RestApi.callSP(url: url, parameters: parameters))
     }
 
     static func create(item: MUnitPhrase) async -> Int {
         // SQL: CALL UNITPHRASES_CREATE
         let url = "\(CommonApi.urlSP)UNITPHRASES_CREATE"
-        let parameters = item.toParameters()
+        let parameters = item.toParameters(isSP: true)
         let o = await RestApi.callSP(url: url, parameters: parameters)
         print(o)
         return Int(o.NEW_ID!)!
@@ -115,7 +115,7 @@ class MUnitPhrase: NSObject, Codable, MPhraseProtocol {
     static func delete(item: MUnitPhrase) async {
         // SQL: CALL UNITPHRASES_DELETE
         let url = "\(CommonApi.urlSP)UNITPHRASES_DELETE"
-        let parameters = item.toParameters()
+        let parameters = item.toParameters(isSP: true)
         print(await RestApi.callSP(url: url, parameters: parameters))
     }
 }

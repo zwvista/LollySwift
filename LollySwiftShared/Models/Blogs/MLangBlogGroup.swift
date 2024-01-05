@@ -50,13 +50,13 @@ class MLangBlogGroup: NSObject, Codable {
     static func update(item: MLangBlogGroup) async {
         // SQL: UPDATE LANGBLOGGROUPS SET LANGID=?, NAME=? WHERE ID=?
         let url = "\(CommonApi.urlAPI)LANGBLOGGROUPS/\(item.ID)"
-        print(await RestApi.update(url: url, body: try! item.toJSONString()!))
+        print(await RestApi.update(url: url, body: item.toParameters(isSP: false)))
     }
 
     static func create(item: MLangBlogGroup) async -> Int {
         // SQL: INSERT INTO LANGBLOGGROUPS (LANGID, NAME) VALUES (?,?)
         let url = "\(CommonApi.urlAPI)LANGBLOGGROUPS"
-        let id = Int(await RestApi.create(url: url, body: try! item.toJSONString()!))!
+        let id = Int(await RestApi.create(url: url, body: item.toParameters(isSP: false)))!
         print(id)
         return id
     }

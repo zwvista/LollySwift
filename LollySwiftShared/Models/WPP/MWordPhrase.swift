@@ -44,7 +44,7 @@ class MWordPhrase: NSObject, Codable {
     private static func create(item: MWordPhrase) async -> Int {
         // SQL: INSERT INTO WORDSPHRASES (WORDID, PHRASEID) VALUES (?,?)
         let url = "\(CommonApi.urlAPI)WORDSPHRASES"
-        let id = Int(await RestApi.create(url: url, body: try! item.toJSONString()!))!
+        let id = Int(await RestApi.create(url: url, body: item.toParameters(isSP: false)))!
         print(id)
         return id
     }

@@ -96,13 +96,13 @@ class MDictionary: NSObject, Codable {
     static func update(item: MDictionary) async {
         // SQL: UPDATE DICTIONARIES SET DICTID=?, LANGIDFROM=?, LANGIDTO=?, NAME=?, SEQNUM=?, DICTTYPECODE=?, URL=?, CHCONV=?, AUTOMATION=?, AUTOJUMP=?, DICTTABLE=?, TRANSFORM=?, WAIT=?, TEMPLATE=?, TEMPLATE2=? WHERE ID=?
         let url = "\(CommonApi.urlAPI)DICTIONARIES/\(item.ID)"
-        print(await RestApi.update(url: url, body: try! item.toJSONString()!))
+        print(await RestApi.update(url: url, body: item.toParameters(isSP: false)))
     }
 
     static func create(item: MDictionary) async -> Int {
         // SQL: INSERT INTO DICTIONARIES (DICTID, LANGIDFROM, LANGIDTO, NAME, SEQNUM, DICTTYPECODE, URL, CHCONV, AUTOMATION, AUTOJUMP, DICTTABLE, TRANSFORM, WAIT, TEMPLATE, TEMPLATE2) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)
         let url = "\(CommonApi.urlAPI)DICTIONARIES"
-        let id = Int(await RestApi.create(url: url, body: try! item.toJSONString()!))!
+        let id = Int(await RestApi.create(url: url, body: item.toParameters(isSP: false)))!
         print(id)
         return id
     }

@@ -102,14 +102,14 @@ class MUnitWord: NSObject, Codable, MWordProtocol {
     static func update(_ id: Int, seqnum: Int) async {
         // SQL: UPDATE UNITWORDS SET SEQNUM=? WHERE ID=?
         let url = "\(CommonApi.urlAPI)UNITWORDS/\(id)"
-        let body = "SEQNUM=\(seqnum)"
+        let body = ["SEQNUM": seqnum]
         print(await RestApi.update(url: url, body: body))
     }
 
     static func update(item: MUnitWord) async -> String {
         // SQL: CALL UNITWORDS_UPDATE
         let url = "\(CommonApi.urlSP)UNITWORDS_UPDATE"
-        let parameters = item.toParameters()
+        let parameters = item.toParameters(isSP: true)
         let o = await RestApi.callSP(url: url, parameters: parameters)
         print(o)
         return o.result
@@ -118,7 +118,7 @@ class MUnitWord: NSObject, Codable, MWordProtocol {
     static func create(item: MUnitWord) async -> Int {
         // SQL: CALL UNITWORDS_CREATE
         let url = "\(CommonApi.urlSP)UNITWORDS_CREATE"
-        let parameters = item.toParameters()
+        let parameters = item.toParameters(isSP: true)
         let o = await RestApi.callSP(url: url, parameters: parameters)
         print(o)
         return Int(o.NEW_ID!)!
@@ -127,7 +127,7 @@ class MUnitWord: NSObject, Codable, MWordProtocol {
     static func delete(item: MUnitWord) async {
         // SQL: CALL UNITWORDS_DELETE
         let url = "\(CommonApi.urlSP)UNITWORDS_DELETE"
-        let parameters = item.toParameters()
+        let parameters = item.toParameters(isSP: true)
         print(await RestApi.callSP(url: url, parameters: parameters))
     }
 }

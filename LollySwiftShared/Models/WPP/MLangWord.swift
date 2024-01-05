@@ -48,20 +48,20 @@ class MLangWord: NSObject, Codable, MWordProtocol {
     static func update(_ id: Int, note: String) async {
         // SQL: UPDATE LANGWORDS SET NOTE=? WHERE ID=?
         let url = "\(CommonApi.urlAPI)LANGWORDS/\(id)"
-        let body = "NOTE=\(note)"
+        let body = ["NOTE": note]
         print(await RestApi.update(url: url, body: body))
     }
 
     static func update(item: MLangWord) async {
         // SQL: UPDATE LANGWORDS SET WORD=?, NOTE=? WHERE ID=?
         let url = "\(CommonApi.urlAPI)LANGWORDS/\(item.ID)"
-        print(await RestApi.update(url: url, body: try! item.toJSONString()!))
+        print(await RestApi.update(url: url, body: item.toParameters(isSP: false)))
     }
 
     static func create(item: MLangWord) async -> Int {
         // SQL: INSERT INTO LANGWORDS (LANGID, WORD) VALUES (?,?)
         let url = "\(CommonApi.urlAPI)LANGWORDS"
-        let id = Int(await RestApi.create(url: url, body: try! item.toJSONString()!))!
+        let id = Int(await RestApi.create(url: url, body: item.toParameters(isSP: false)))!
         print(id)
         return id
     }
@@ -69,7 +69,7 @@ class MLangWord: NSObject, Codable, MWordProtocol {
     static func delete(item: MLangWord) async {
         // SQL: CALL LANGWORDS_DELETE
         let url = "\(CommonApi.urlSP)LANGWORDS_DELETE"
-        let parameters = item.toParameters()
+        let parameters = item.toParameters(isSP: true)
         print(await RestApi.callSP(url: url, parameters: parameters))
     }
 }
