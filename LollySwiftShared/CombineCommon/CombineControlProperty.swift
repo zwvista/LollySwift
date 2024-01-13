@@ -46,13 +46,13 @@ public extension Combine.Publishers {
 
 // MARK: - Subscription
 extension Combine.Publishers.ControlProperty {
-    private final class Subscription<S: Subscriber, Control: NSControl, Value>: Combine.Subscription where S.Input == Value {
+    private final class Subscription<S: Subscriber, SControl: NSControl, SValue>: Combine.Subscription where S.Input == SValue {
         private var subscriber: S?
-        weak private var control: Control?
-        let keyPath: KeyPath<Control, Value>
+        weak private var control: SControl?
+        let keyPath: KeyPath<SControl, SValue>
         private var didEmitInitial = false
 
-        init(subscriber: S, control: Control, keyPath: KeyPath<Control, Value>) {
+        init(subscriber: S, control: SControl, keyPath: KeyPath<SControl, SValue>) {
             self.subscriber = subscriber
             self.control = control
             self.keyPath = keyPath

@@ -57,17 +57,17 @@ public extension Combine.Publishers {
 // MARK: - Subscription
 @available(iOS 13.0, *)
 private extension Combine.Publishers.ControlTarget {
-    private final class Subscription<S: Subscriber, Control: AnyObject>: Combine.Subscription where S.Input == Void {
+    private final class Subscription<S: Subscriber, SControl: AnyObject>: Combine.Subscription where S.Input == Void {
         private var subscriber: S?
-        weak private var control: Control?
+        weak private var control: SControl?
 
-        private let removeTargetAction: (Control?, AnyObject, Selector) -> Void
+        private let removeTargetAction: (SControl?, AnyObject, Selector) -> Void
         private let action = #selector(handleAction)
 
         init(subscriber: S,
-             control: Control,
-             addTargetAction: @escaping (Control, AnyObject, Selector) -> Void,
-             removeTargetAction: @escaping (Control?, AnyObject, Selector) -> Void) {
+             control: SControl,
+             addTargetAction: @escaping (SControl, AnyObject, Selector) -> Void,
+             removeTargetAction: @escaping (SControl?, AnyObject, Selector) -> Void) {
             self.subscriber = subscriber
             self.control = control
             self.removeTargetAction = removeTargetAction
