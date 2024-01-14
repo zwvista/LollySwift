@@ -200,11 +200,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
         let ifEmpty = sender is NSToolbarItem || (sender as! NSMenuItem).tag == 0
         vm.getNotes(ifEmpty: ifEmpty, oneComplete: { [unowned self] in
             tvWords.reloadData(forRowIndexes: [$0], columnIndexes: IndexSet(0..<tvWords.tableColumns.count))
-        }, allComplete: {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [unowned self] in
-                // tableView.reloadData()
-            }
-        })
+        }, allComplete: {})
     }
 
     @IBAction func clearNote(_ sender: AnyObject) {
