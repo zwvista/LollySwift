@@ -91,11 +91,11 @@ class TransformDetailViewController: NSViewController, NSTableViewDataSource, NS
                 newIndexOffset += 1
             }
         }
+        tableView.endUpdates()
         let col = tableView.tableColumns.firstIndex { $0.identifier.rawValue == "index" }!
         vm.reindex {
             tableView.reloadData(forRowIndexes: [$0], columnIndexes: [col])
         }
-        tableView.endUpdates()
 
         return true
     }

@@ -110,11 +110,11 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
                 newIndexOffset += 1
             }
         }
+        tableView.endUpdates()
         let col = tableView.tableColumns.firstIndex { $0.identifier.rawValue == "SEQNUM" }!
         vm.reindex {
             tableView.reloadData(forRowIndexes: [$0], columnIndexes: [col])
         }
-        tableView.endUpdates()
 
         return true
     }
