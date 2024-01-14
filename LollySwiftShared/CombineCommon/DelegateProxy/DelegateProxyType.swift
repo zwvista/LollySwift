@@ -25,11 +25,11 @@ public extension DelegateProxyType where Self: DelegateProxy {
 
         let delegateProxy: Self
 
-        if let associatedObject = objc_getAssociatedObject(object, &associatedKey) as? Self {
+        if let associatedObject = objc_getAssociatedObject(object, associatedKey) as? Self {
             delegateProxy = associatedObject
         } else {
             delegateProxy = .init()
-            objc_setAssociatedObject(object, &associatedKey, delegateProxy, .OBJC_ASSOCIATION_RETAIN)
+            objc_setAssociatedObject(object, associatedKey, delegateProxy, .OBJC_ASSOCIATION_RETAIN)
         }
 
         delegateProxy.setDelegate(to: object)
