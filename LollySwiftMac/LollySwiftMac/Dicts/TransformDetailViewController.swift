@@ -122,9 +122,10 @@ class TransformDetailViewController: NSViewController, NSTableViewDataSource, NS
     }
 
     @IBAction func getHtml(_ sender: Any) {
+        vm.updateSourceUrl()
+        wvSource.load(URLRequest(url: URL(string: vm.sourceUrl)!))
         Task {
             await vm.getHtml()
-            wvSource.load(URLRequest(url: URL(string: vm.sourceUrl)!))
         }
     }
 
