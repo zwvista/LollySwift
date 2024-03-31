@@ -123,8 +123,9 @@ class TransformDetailViewController: NSViewController, NSTableViewDataSource, NS
     }
 
     @IBAction func getHtml(_ sender: Any) {
-        vm.getHtml().subscribe() ~ rx.disposeBag
+        vm.updateSourceUrl()
         wvSource.load(URLRequest(url: URL(string: vm.sourceUrl)!))
+        vm.getHtml().subscribe() ~ rx.disposeBag
     }
 
     @IBAction func executeTransform(_ sender: Any) {

@@ -44,8 +44,11 @@ class TransformDetailViewModel: NSObject {
         }
     }
 
-    func getHtml() -> Single<()> {
+    func updateSourceUrl() {
         sourceUrl = item.URL.replacingOccurrences(of: "{0}", with: sourceWord.urlEncoded())
+    }
+
+    func getHtml() -> Single<()> {
         return RestApi.getHtml(url: sourceUrl).map { [unowned self] in sourceText = $0 }
     }
 
