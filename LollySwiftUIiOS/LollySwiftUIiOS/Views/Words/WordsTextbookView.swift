@@ -91,7 +91,7 @@ struct WordsTextbookView: View {
                 Button("Edit") {
                     showDetailEdit.toggle()
                 }
-                Button("Retrieve Note") {
+                Button("Get Note") {
                     Task {
                         await vm.getNote(item: currentItem)
                     }

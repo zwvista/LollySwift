@@ -60,7 +60,7 @@ class WordsLangViewController: WordsBaseViewController {
             let editAction2 = UIAlertAction(title: "Edit", style: .default) { _ in edit() }
             alertController.addAction(editAction2)
             if vmSettings.hasDictNote {
-                let getNoteAction = UIAlertAction(title: "Retrieve Note", style: .default) { [unowned self] _ in
+                let getNoteAction = UIAlertAction(title: "Get Note", style: .default) { [unowned self] _ in
                     Task {
                         await vm.getNote(index: indexPath.row)
                         tableView.reloadRows(at: [indexPath], with: .fade)

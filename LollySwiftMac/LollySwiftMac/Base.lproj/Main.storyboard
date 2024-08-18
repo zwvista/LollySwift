@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22689"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22690"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -825,7 +824,7 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="q7A-3p-FMB"/>
-                                        <menuItem title="Retrieve Notes(Empty Only)" id="3Jw-1N-Qp2">
+                                        <menuItem title="Get Notes(Empty Only)" id="3Jw-1N-Qp2">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="getNotes:" target="Ady-hI-5gd" id="KMc-oL-Gek"/>
@@ -838,7 +837,7 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="EOF-lU-szg"/>
-                                        <menuItem title="Retrieve Notes(All)" tag="1" id="1l1-aq-4gI">
+                                        <menuItem title="Get Notes(All)" tag="1" id="1l1-aq-4gI">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="getNotes:" target="Ady-hI-5gd" id="fOR-SC-C5C"/>
@@ -1138,7 +1137,7 @@
                                 <rect key="frame" x="173" y="241" width="269" height="64"/>
                                 <clipView key="contentView" id="qLU-EZ-hnH">
                                     <rect key="frame" x="1" y="1" width="267" height="62"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" viewBased="YES" id="gxl-xi-Hzi">
                                             <rect key="frame" x="0.0" y="0.0" width="267" height="62"/>
@@ -1160,7 +1159,7 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView identifier="DICTNAME" id="byG-nJ-UPQ">
-                                                            <rect key="frame" x="1" y="1" width="206" height="17"/>
+                                                            <rect key="frame" x="11" y="1" width="206" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="exa-cn-5lo">
@@ -1745,7 +1744,7 @@ Gw
                                 <rect key="frame" x="330" y="58" width="170" height="224"/>
                                 <clipView key="contentView" id="sVa-e7-Qq0">
                                     <rect key="frame" x="1" y="1" width="168" height="222"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <tableView identifier="DICTNAME" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" autosaveColumns="NO" rowHeight="42" rowSizeStyle="automatic" headerView="pO3-zf-l6m" viewBased="YES" id="dtN-eb-eIX">
                                             <rect key="frame" x="0.0" y="0.0" width="168" height="197"/>
@@ -1767,7 +1766,7 @@ Gw
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView id="5A1-eI-14w">
-                                                            <rect key="frame" x="1" y="1" width="107" height="42"/>
+                                                            <rect key="frame" x="11" y="1" width="107" height="42"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="e7C-yR-LIs">
@@ -1845,7 +1844,7 @@ Gw
                                 <rect key="frame" x="20" y="58" width="170" height="224"/>
                                 <clipView key="contentView" ambiguous="YES" id="Rry-p5-Dw0">
                                     <rect key="frame" x="1" y="1" width="168" height="222"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <tableView verticalHuggingPriority="750" ambiguous="YES" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" autosaveColumns="NO" rowSizeStyle="automatic" headerView="mVR-y4-53b" viewBased="YES" id="CpO-cN-pLE">
                                             <rect key="frame" x="0.0" y="0.0" width="168" height="197"/>
@@ -1867,7 +1866,7 @@ Gw
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView id="WMB-yE-G8M">
-                                                            <rect key="frame" x="1" y="1" width="107" height="17"/>
+                                                            <rect key="frame" x="11" y="1" width="107" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="XeP-66-MM1">

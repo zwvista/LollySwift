@@ -104,7 +104,7 @@ struct WordsUnitView: View {
                 Button("Edit") {
                     showDetailEdit.toggle()
                 }
-                Button("Retrieve Note") {
+                Button("Get Note") {
                     Task {
                         await vm.getNote(item: currentItem)
                     }
@@ -143,10 +143,10 @@ struct WordsUnitView: View {
                 Button("Add") {
                     showDetailAdd.toggle()
                 }
-                Button("Retrieve All Notes") {
+                Button("Get All Notes") {
                     getNotes(ifEmpty: false)
                 }
-                Button("Retrieve Notes If Empty") {
+                Button("Get Notes If Empty") {
                     getNotes(ifEmpty: true)
                 }
                 Button("Clear All Notes") {

@@ -82,7 +82,7 @@ class WordsUnitViewController: WordsBaseViewController {
             let editAction2 = UIAlertAction(title: "Edit", style: .default) { _ in edit() }
             alertController.addAction(editAction2)
             if vmSettings.hasDictNote {
-                let getNoteAction = UIAlertAction(title: "Retrieve Note", style: .default) { [unowned self] _ in
+                let getNoteAction = UIAlertAction(title: "Get Note", style: .default) { [unowned self] _ in
                     Task {
                         await vm.getNote(index: indexPath.row)
                         tableView.reloadRows(at: [indexPath], with: .fade)
@@ -151,11 +151,11 @@ class WordsUnitViewController: WordsBaseViewController {
         }
 
         if vmSettings.hasDictNote {
-            let getNotesAllAction = UIAlertAction(title: "Retrieve All Notes", style: .default) { _ in
+            let getNotesAllAction = UIAlertAction(title: "Get All Notes", style: .default) { _ in
                 getNotes(ifEmpty: false)
             }
             alertController.addAction(getNotesAllAction)
-            let getNotesEmptyAction = UIAlertAction(title: "Retrieve Notes If Empty", style: .default) { _ in
+            let getNotesEmptyAction = UIAlertAction(title: "Get Notes If Empty", style: .default) { _ in
                 getNotes(ifEmpty: true)
             }
             alertController.addAction(getNotesEmptyAction)
