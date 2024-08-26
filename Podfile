@@ -28,27 +28,15 @@ project 'LollySwiftMac/LollySwiftMac'
 pod 'Then'
 end
 
-target 'LollySwiftUIiOS' do
+target 'LollySwiftUI' do
 platform :ios, '16.0'
-project 'LollySwiftUIiOS/LollySwiftUIiOS'
+project 'LollySwiftUI/LollySwiftUI'
 pod 'Then'
 end
 
-target 'LollySwiftUIiOSTests' do
+target 'LollySwiftUITests' do
 platform :ios, '16.0'
-project 'LollySwiftUIiOS/LollySwiftUIiOS'
-pod 'Then'
-end
-
-target 'LollySwiftUIMac' do
-platform :osx, '13.0'
-project 'LollySwiftUIMac/LollySwiftUIMac'
-pod 'Then'
-end
-
-target 'LollySwiftUIMacTests' do
-platform :osx, '13.0'
-project 'LollySwiftUIMac/LollySwiftUIMac'
+project 'LollySwiftUI/LollySwiftUI'
 pod 'Then'
 end
 
