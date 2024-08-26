@@ -6,6 +6,7 @@
 //  Copyright © 2017年 趙 偉. All rights reserved.
 //
 
+import Foundation
 import Alamofire
 import RxSwift
 import RxAlamofire
