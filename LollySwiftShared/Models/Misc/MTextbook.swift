@@ -17,7 +17,7 @@ class MTextbook: NSObject, Codable {
     dynamic var TEXTBOOKNAME = ""
     dynamic var UNITS = ""
     dynamic var PARTS = ""
-    dynamic var ISWEB = 0
+    dynamic var ONLINE = 0
 
     enum CodingKeys : String, CodingKey {
         case ID
@@ -25,7 +25,7 @@ class MTextbook: NSObject, Codable {
         case TEXTBOOKNAME = "NAME"
         case UNITS
         case PARTS
-        case ISWEB
+        case ONLINE
     }
 
     var arrUnits = [MSelectItem]()

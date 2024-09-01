@@ -144,7 +144,7 @@ class SettingsViewModel: NSObject {
     var selectedTextbook: MTextbook { arrTextbooks.indices ~= selectedTextbookIndex ? arrTextbooks[selectedTextbookIndex] : MTextbook() }
     static let allBooksTextbookFilter = MSelectItem(value: 0, label: "All Textbooks")
     var arrTextbookFilters = [allBooksTextbookFilter]
-    var arrWebTextbookFilters = [MSelectItem]()
+    var arrOnlineTextbookFilters = [MSelectItem]()
 
     var arrUnits: [MSelectItem] { selectedTextbook.arrUnits }
     var unitCount: Int { arrUnits.count }
@@ -228,7 +228,7 @@ class SettingsViewModel: NSObject {
             INFO_USMACVOICE = getUSInfo(name: MUSMapping.NAME_USMACVOICE)
             INFO_USIOSVOICE = getUSInfo(name: MUSMapping.NAME_USIOSVOICE)
             arrTextbookFilters = [SettingsViewModel.allBooksTextbookFilter]
-            arrWebTextbookFilters = [SettingsViewModel.allBooksTextbookFilter]
+            arrOnlineTextbookFilters = [SettingsViewModel.allBooksTextbookFilter]
             return Single.zip(MDictionary.getDictsReferenceByLang(USLANG),
                               MDictionary.getDictsNoteByLang(USLANG),
                               MDictionary.getDictsTranslationByLang(USLANG),
@@ -256,7 +256,7 @@ class SettingsViewModel: NSObject {
                     selectedDictTranslationIndex = arrDictsTranslation.firstIndex { $0.DICTID == USDICTTRANSLATION } ?? 0
                     selectedTextbookIndex = arrTextbooks.firstIndex { $0.ID == USTEXTBOOK } ?? 0
                     arrTextbookFilters.append(contentsOf: arrTextbooks.map { MSelectItem(value: $0.ID, label: $0.TEXTBOOKNAME) })
-                    arrWebTextbookFilters.append(contentsOf: arrTextbooks.filter { $0.ISWEB == 1 }.map { MSelectItem(value: $0.ID, label: $0.TEXTBOOKNAME) })
+                    arrOnlineTextbookFilters.append(contentsOf: arrTextbooks.filter { $0.ONLINE == 1 }.map { MSelectItem(value: $0.ID, label: $0.TEXTBOOKNAME) })
                     return !dirty ? Single.just(()) : MUserSetting.update(info: INFO_USLANG, intValue: USLANG)
                 }
         }
@@ -396,7 +396,7 @@ class SettingsViewModel: NSObject {
         arrDictsTranslation = x.arrDictsTranslation
         arrTextbooks = x.arrTextbooks
         arrTextbookFilters = x.arrTextbookFilters
-        arrWebTextbookFilters = x.arrWebTextbookFilters
+        arrOnlineTextbookFilters = x.arrOnlineTextbookFilters
         arrAutoCorrect = x.arrAutoCorrect
         arrDictTypes = x.arrDictTypes
         selectedLangIndex = x.selectedLangIndex

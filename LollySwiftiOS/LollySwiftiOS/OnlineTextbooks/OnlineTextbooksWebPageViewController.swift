@@ -1,5 +1,5 @@
 //
-//  WebTextbooksWebPageViewController.swift
+//  OnlineTextbooksWebPageViewController.swift
 //  LollySwiftiOS
 //
 //  Created by 趙偉 on 2016/06/23.
@@ -12,13 +12,13 @@ import RxSwift
 import NSObject_Rx
 import RxBinding
 
-class WebTextbooksWebPageViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
+class OnlineTextbooksWebPageViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
 
     @IBOutlet weak var wvWebPageHolder: UIView!
     @IBOutlet weak var btnWebPage: UIButton!
     weak var wvWebPage: WKWebView!
 
-    var item: MWebTextbook!
+    var item: MOnlineTextbook!
 
     override func viewDidLoad() {
         super.viewDidLoad()

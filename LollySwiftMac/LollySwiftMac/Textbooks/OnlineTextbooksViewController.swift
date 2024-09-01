@@ -1,5 +1,5 @@
 //
-//  WebTextbooksViewController.swift
+//  OnlineTextbooksViewController.swift
 //  LollySwiftMac
 //
 //  Created by 趙偉 on 2020/11/11.
@@ -11,7 +11,7 @@ import WebKit
 import RxSwift
 import RxBinding
 
-class WebTextbooksViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate, NSMenuItemValidation {
+class OnlineTextbooksViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate, NSMenuItemValidation {
 
     @IBOutlet weak var tableView: NSTableView!
     @IBOutlet weak var pubTextbookFilter: NSPopUpButton!
@@ -20,8 +20,8 @@ class WebTextbooksViewController: NSViewController, LollyProtocol, NSTableViewDa
 
     @objc var textbookFilter = 0
 
-    var vm: WebTextbooksViewModel!
-    var arrWebTextbooks: [MWebTextbook] { vm.arrWebTextbooksFiltered }
+    var vm: OnlineTextbooksViewModel!
+    var arrOnlineTextbooks: [MOnlineTextbook] { vm.arrOnlineTextbooksFiltered }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,10 +31,10 @@ class WebTextbooksViewController: NSViewController, LollyProtocol, NSTableViewDa
     }
 
     func settingsChanged() {
-        vm = WebTextbooksViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) { [unowned self] in
-            acTextbooks.content = vm.vmSettings.arrWebTextbookFilters
+        vm = OnlineTextbooksViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) { [unowned self] in
+            acTextbooks.content = vm.vmSettings.arrOnlineTextbookFilters
         }
-        vm.arrWebTextbooksFiltered_.subscribe { [unowned self] _ in
+        vm.arrOnlineTextbooksFiltered_.subscribe { [unowned self] _ in
             doRefresh()
         } ~ rx.disposeBag
     }
@@ -49,12 +49,12 @@ class WebTextbooksViewController: NSViewController, LollyProtocol, NSTableViewDa
     }
 
     func numberOfRows(in tableView: NSTableView) -> Int {
-        arrWebTextbooks.count
+        arrOnlineTextbooks.count
     }
 
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! NSTableCellView
-        let item = arrWebTextbooks[row]
+        let item = arrOnlineTextbooks[row]
         let columnName = tableColumn!.identifier.rawValue
         cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
         return cell
@@ -62,25 +62,25 @@ class WebTextbooksViewController: NSViewController, LollyProtocol, NSTableViewDa
 
     func tableViewSelectionDidChange(_ notification: Notification) {
         let row = tableView.selectedRow
-        vm.selectedWebTextbookItem = row == -1 ? nil : arrWebTextbooks[row]
-        wvWebPage.load(URLRequest(url: URL(string: vm.selectedWebTextbookItem?.URL ?? "")!))
+        vm.selectedOnlineTextbookItem = row == -1 ? nil : arrOnlineTextbooks[row]
+        wvWebPage.load(URLRequest(url: URL(string: vm.selectedOnlineTextbookItem?.URL ?? "")!))
     }
 
     // https://stackoverflow.com/questions/9368654/cannot-seem-to-setenabledno-on-nsmenuitem
     func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
-        if menuItem.action == #selector(editWebTextbook(_:)) {
-            return vm.selectedWebTextbookItem != nil
+        if menuItem.action == #selector(editOnlineTextbook(_:)) {
+            return vm.selectedOnlineTextbookItem != nil
         }
         return true
     }
 
-    @IBAction func editWebTextbook(_ sender: AnyObject) {
-        let detailVC = storyboard!.instantiateController(withIdentifier: "WebTextbooksDetailViewController") as! WebTextbooksDetailViewController
-        detailVC.item = arrWebTextbooks[tableView.selectedRow]
+    @IBAction func editOnlineTextbook(_ sender: AnyObject) {
+        let detailVC = storyboard!.instantiateController(withIdentifier: "OnlineTextbooksDetailViewController") as! OnlineTextbooksDetailViewController
+        detailVC.item = arrOnlineTextbooks[tableView.selectedRow]
         presentAsModalWindow(detailVC)
     }
 
     @IBAction func doubleAction(_ sender: AnyObject) {
-        editWebTextbook(sender)
+        editOnlineTextbook(sender)
     }
 }
