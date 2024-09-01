@@ -190,7 +190,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         showWindow(storyBoardName: "Textbooks", windowControllerName: "TextbooksWindowController")
     }
 
-    @IBAction func webtextbooks(_ sender: AnyObject) {
+    @IBAction func onlineTextbooks(_ sender: AnyObject) {
         showWindow(storyBoardName: "Textbooks", windowControllerName: "OnlineTextbooksWindowController")
     }
 

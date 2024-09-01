@@ -81,7 +81,7 @@ class OnlineTextbooksViewController: UIViewController, UITableViewDelegate, UITa
         let editAction = UIContextualAction(style: .normal, title: "Edit") { _,_,_ in edit() }
         editAction.backgroundColor = .blue
         let moreAction = UIContextualAction(style: .normal, title: "More") { [unowned self] _,_,_ in
-            let alertController = UIAlertController(title: "OnlineTextbook", message: item.TEXTBOOKNAME, preferredStyle: .alert)
+            let alertController = UIAlertController(title: "Online Textbooks", message: item.TEXTBOOKNAME, preferredStyle: .alert)
             let editAction2 = UIAlertAction(title: "Edit", style: .default) { _ in edit() }
             alertController.addAction(editAction2)
             let browseWebPageAction = UIAlertAction(title: "Browse Web Page", style: .default) { [unowned self] _ in

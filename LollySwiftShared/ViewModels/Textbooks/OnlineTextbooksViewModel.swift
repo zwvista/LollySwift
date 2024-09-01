@@ -22,7 +22,7 @@ class OnlineTextbooksViewModel: NSObject {
     var indexOnlineTextbookFilter: Int { get { indexOnlineTextbookFilter_.value } set { indexOnlineTextbookFilter_.accept(newValue) } }
     let stringOnlineTextbookFilter_ = BehaviorRelay(value: "")
     var stringOnlineTextbookFilter: String { get { stringOnlineTextbookFilter_.value } set { stringOnlineTextbookFilter_.accept(newValue) } }
-    var webTextbookFilter: Int {
+    var onlineTextbookFilter: Int {
         indexOnlineTextbookFilter == -1 ? 0 : vmSettings.arrOnlineTextbookFilters[indexOnlineTextbookFilter].value
     }
 
@@ -35,7 +35,7 @@ class OnlineTextbooksViewModel: NSObject {
             indexOnlineTextbookFilter = vmSettings.arrOnlineTextbookFilters.firstIndex { $0.label == s }!
         } ~ rx.disposeBag
         Observable.combineLatest(arrOnlineTextbooks_, indexOnlineTextbookFilter_).subscribe { [unowned self] _ in
-            arrOnlineTextbooksFiltered = webTextbookFilter == 0 ? arrOnlineTextbooks : arrOnlineTextbooks.filter { $0.TEXTBOOKID == webTextbookFilter }
+            arrOnlineTextbooksFiltered = onlineTextbookFilter == 0 ? arrOnlineTextbooks : arrOnlineTextbooks.filter { $0.TEXTBOOKID == onlineTextbookFilter }
         } ~ rx.disposeBag
 
         reload().subscribe { _ in complete() } ~ rx.disposeBag

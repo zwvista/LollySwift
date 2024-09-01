@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22690"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -998,10 +997,10 @@
                                                 <action selector="textbooks:" target="Voe-Tx-rLC" id="bHa-tE-X7x"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="OnlineTextbooks" id="nBh-NO-M69">
+                                        <menuItem title="Online Textbooks" id="nBh-NO-M69" userLabel="Online Textbooks">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
-                                                <action selector="webtextbooks:" target="Voe-Tx-rLC" id="CK4-W0-t3a"/>
+                                                <action selector="onlineTextbooks:" target="Voe-Tx-rLC" id="CK4-W0-t3a"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem title="Dictionaries" id="gnK-K5-vJf">
