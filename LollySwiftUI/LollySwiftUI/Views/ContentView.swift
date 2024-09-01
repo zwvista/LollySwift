@@ -57,8 +57,8 @@ struct ContentView: View {
             getContentView(PhrasesLangView(navPath: $navPath))
         } else if bindTitle == titlePatternsLang {
             getContentView(PatternsView(navPath: $navPath))
-        } else if bindTitle == titleWebTextbooks {
-            getContentView(WebTextbooksView(navPath: $navPath))
+        } else if bindTitle == titleOnlineTextbooks {
+            getContentView(OnlineTextbooksView(navPath: $navPath))
         }
     }
 }

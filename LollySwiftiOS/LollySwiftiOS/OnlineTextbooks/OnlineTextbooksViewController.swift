@@ -1,5 +1,5 @@
 //
-//  WebTextbooksViewController.swift
+//  OnlineTextbooksViewController.swift
 //  LollySwiftiOS
 //
 //  Created by 趙偉 on 2020/11/05.
@@ -9,14 +9,14 @@
 import UIKit
 import Combine
 
-class WebTextbooksViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class OnlineTextbooksViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var btnWebTextbookFilter: UIButton!
+    @IBOutlet weak var btnOnlineTextbookFilter: UIButton!
     let refreshControl = UIRefreshControl()
 
-    var vm: WebTextbooksViewModel!
-    var arrWebTextbooks: [MWebTextbook] { vm.arrWebTextbooksFiltered }
+    var vm: OnlineTextbooksViewModel!
+    var arrOnlineTextbooks: [MOnlineTextbook] { vm.arrOnlineTextbooksFiltered }
     var subscriptions = Set<AnyCancellable>()
 
     override func viewDidLoad() {
@@ -28,42 +28,42 @@ class WebTextbooksViewController: UIViewController, UITableViewDelegate, UITable
 
     @objc func refresh(_ sender: UIRefreshControl) {
         view.showBlurLoader()
-        vm = WebTextbooksViewModel(settings: vmSettings, needCopy: false) { [unowned self] in
+        vm = OnlineTextbooksViewModel(settings: vmSettings, needCopy: false) { [unowned self] in
             sender.endRefreshing()
             view.removeBlurLoader()
         }
-        vm.$stringWebTextbookFilter ~> (btnWebTextbookFilter, \.titleNormal) ~ subscriptions
-        vm.$arrWebTextbooksFiltered.didSet.sink { [unowned self] _ in
+        vm.$stringOnlineTextbookFilter ~> (btnOnlineTextbookFilter, \.titleNormal) ~ subscriptions
+        vm.$arrOnlineTextbooksFiltered.didSet.sink { [unowned self] _ in
             tableView.reloadData()
         } ~ subscriptions
 
         func configMenu() {
-            btnWebTextbookFilter.menu = UIMenu(title: "", options: .displayInline, children: vmSettings.arrWebTextbookFilters.map(\.label).enumerated().map { index, item in
-                UIAction(title: item, state: item == vm.stringWebTextbookFilter ? .on : .off) { [unowned self] _ in
-                    vm.stringWebTextbookFilter = item
+            btnOnlineTextbookFilter.menu = UIMenu(title: "", options: .displayInline, children: vmSettings.arrOnlineTextbookFilters.map(\.label).enumerated().map { index, item in
+                UIAction(title: item, state: item == vm.stringOnlineTextbookFilter ? .on : .off) { [unowned self] _ in
+                    vm.stringOnlineTextbookFilter = item
                     configMenu()
                 }
             })
-            btnWebTextbookFilter.showsMenuAsPrimaryAction = true
+            btnOnlineTextbookFilter.showsMenuAsPrimaryAction = true
         }
         configMenu()
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        arrWebTextbooks.count
+        arrOnlineTextbooks.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "WebTextbooksCell", for: indexPath) as! WebTextbooksCell
-        let item = arrWebTextbooks[indexPath.row]
-        cell.lblWebTextbook.text = item.TEXTBOOKNAME
+        let cell = tableView.dequeueReusableCell(withIdentifier: "OnlineTextbooksCell", for: indexPath) as! OnlineTextbooksCell
+        let item = arrOnlineTextbooks[indexPath.row]
+        cell.lblOnlineTextbook.text = item.TEXTBOOKNAME
         cell.lblTitle.text = item.TITLE
         cell.cardView.createCardEffect()
         return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let item = arrWebTextbooks[indexPath.row]
+        let item = arrOnlineTextbooks[indexPath.row]
         if tableView.isEditing {
             performSegue(withIdentifier: "edit", sender: item)
         } else {
@@ -73,14 +73,14 @@ class WebTextbooksViewController: UIViewController, UITableViewDelegate, UITable
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let i = indexPath.row
-        let item = vm.arrWebTextbooks[i]
+        let item = vm.arrOnlineTextbooks[i]
         func edit() {
             performSegue(withIdentifier: "edit", sender: item)
         }
         let editAction = UIContextualAction(style: .normal, title: "Edit") { _,_,_ in edit() }
         editAction.backgroundColor = .blue
         let moreAction = UIContextualAction(style: .normal, title: "More") { [unowned self] _,_,_ in
-            let alertController = UIAlertController(title: "WebTextbook", message: item.TEXTBOOKNAME, preferredStyle: .alert)
+            let alertController = UIAlertController(title: "OnlineTextbook", message: item.TEXTBOOKNAME, preferredStyle: .alert)
             let editAction2 = UIAlertAction(title: "Edit", style: .default) { _ in edit() }
             alertController.addAction(editAction2)
             let browseWebPageAction = UIAlertAction(title: "Browse Web Page", style: .default) { [unowned self] _ in
@@ -96,16 +96,16 @@ class WebTextbooksViewController: UIViewController, UITableViewDelegate, UITable
     }
 
     func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        let item = arrWebTextbooks[indexPath.row]
+        let item = arrOnlineTextbooks[indexPath.row]
         performSegue(withIdentifier: "browse page", sender: item)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
-        if let controller = (segue.destination as? UINavigationController)?.topViewController as? WebTextbooksDetailViewController {
-            controller.item = sender as? MWebTextbook
-        } else if let controller = segue.destination as? WebTextbooksWebPageViewController {
-            controller.item = sender as? MWebTextbook
+        if let controller = (segue.destination as? UINavigationController)?.topViewController as? OnlineTextbooksDetailViewController {
+            controller.item = sender as? MOnlineTextbook
+        } else if let controller = segue.destination as? OnlineTextbooksWebPageViewController {
+            controller.item = sender as? MOnlineTextbook
         }
     }
 
@@ -117,8 +117,8 @@ class WebTextbooksViewController: UIViewController, UITableViewDelegate, UITable
     }
 }
 
-class WebTextbooksCell: UITableViewCell {
+class OnlineTextbooksCell: UITableViewCell {
     @IBOutlet weak var cardView: UIView!
-    @IBOutlet weak var lblWebTextbook: UILabel!
+    @IBOutlet weak var lblOnlineTextbook: UILabel!
     @IBOutlet weak var lblTitle: UILabel!
 }

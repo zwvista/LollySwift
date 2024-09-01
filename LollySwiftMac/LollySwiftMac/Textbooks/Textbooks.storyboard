@@ -2,8 +2,8 @@
 <document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22689"/>
-        <plugIn identifier="com.apple.WebKit2IBPlugin" version="22689"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22690"/>
+        <plugIn identifier="com.apple.WebKit2IBPlugin" version="22690"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -89,7 +89,7 @@
                                                             <rect key="frame" x="1" y="1" width="65" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="ixu-Tj-INj">
+                                                                <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="ixu-Tj-INj">
                                                                     <rect key="frame" x="0.0" y="1" width="65" height="16"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" sendsActionOnEndEditing="YES" title="Table View Cell" id="lSg-sV-mDK">
                                                                         <font key="font" metaFont="system"/>
@@ -125,7 +125,7 @@
                                                             <rect key="frame" x="69" y="1" width="500" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RN2-8B-dAM">
+                                                                <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RN2-8B-dAM">
                                                                     <rect key="frame" x="0.0" y="0.0" width="500" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Table View Cell" id="4I0-wT-8pA">
@@ -160,7 +160,7 @@
                                                             <rect key="frame" x="572" y="1" width="116" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cju-5x-kLH">
+                                                                <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cju-5x-kLH">
                                                                     <rect key="frame" x="0.0" y="0.0" width="116" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Table View Cell" id="pFA-d6-Axg">
@@ -195,7 +195,7 @@
                                                             <rect key="frame" x="691" y="1" width="204" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Klt-jt-QMb">
+                                                                <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Klt-jt-QMb">
                                                                     <rect key="frame" x="0.0" y="1" width="204" height="16"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" title="Table View Cell" id="RR0-Kp-Fr2">
                                                                         <font key="font" metaFont="system"/>
@@ -264,7 +264,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="450" height="296"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mGL-Yu-R23">
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mGL-Yu-R23">
                                 <rect key="frame" x="18" y="260" width="21" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="ID:" id="Xa0-v4-nut">
                                     <font key="font" metaFont="system"/>
@@ -272,7 +272,7 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fnp-ds-sVA" userLabel="Tf ID">
+                            <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fnp-ds-sVA" userLabel="Tf ID">
                                 <rect key="frame" x="120" y="258" width="300" height="21"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="irU-sn-exz">
                                     <font key="font" metaFont="system"/>
@@ -280,7 +280,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Uh7-57-vk0">
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Uh7-57-vk0">
                                 <rect key="frame" x="18" y="227" width="68" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Language:" id="kTm-bp-yAD">
                                     <font key="font" metaFont="system"/>
@@ -288,7 +288,7 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8ef-k9-QXS">
+                            <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8ef-k9-QXS">
                                 <rect key="frame" x="120" y="225" width="300" height="21"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" enabled="NO" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="QV9-3G-tfl">
                                     <font key="font" metaFont="system"/>
@@ -296,7 +296,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bzB-Bm-RNt">
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bzB-Bm-RNt">
                                 <rect key="frame" x="18" y="194" width="78" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="TEXTBOOK:" id="I64-h8-m5X">
                                     <font key="font" metaFont="system"/>
@@ -304,7 +304,7 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bS5-uA-Mfn">
+                            <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bS5-uA-Mfn">
                                 <rect key="frame" x="120" y="192" width="300" height="21"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="2Ys-w0-Hyn">
                                     <font key="font" metaFont="system"/>
@@ -312,7 +312,7 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="fUe-x3-38v">
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="fUe-x3-38v">
                                 <rect key="frame" x="18" y="74" width="49" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="PARTS:" id="1zM-24-KnI">
                                     <font key="font" metaFont="system"/>
@@ -320,7 +320,7 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="H5p-KJ-D0R">
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="H5p-KJ-D0R">
                                 <rect key="frame" x="18" y="161" width="47" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="UNITS:" id="ZYj-gf-VJv">
                                     <font key="font" metaFont="system"/>
@@ -328,7 +328,7 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zFW-Ac-oBj">
+                            <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zFW-Ac-oBj">
                                 <rect key="frame" x="120" y="71" width="300" height="21"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="F2i-Dt-5V2">
                                     <font key="font" metaFont="system"/>
@@ -440,8 +440,8 @@ Gw
         <!--Window Controller-->
         <scene sceneID="Kzn-nA-925">
             <objects>
-                <windowController storyboardIdentifier="WebTextbooksWindowController" id="bde-ki-gEb" sceneMemberID="viewController">
-                    <window key="window" title="WebTextbooks" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="PDc-ba-iju">
+                <windowController storyboardIdentifier="OnlineTextbooksWindowController" id="bde-ki-gEb" sceneMemberID="viewController">
+                    <window key="window" title="OnlineTextbooks" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="PDc-ba-iju">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
@@ -478,10 +478,10 @@ Gw
             </objects>
             <point key="canvasLocation" x="156" y="-23"/>
         </scene>
-        <!--Web Textbooks View Controller-->
+        <!--Online Textbooks View Controller-->
         <scene sceneID="A2l-Iv-JC5">
             <objects>
-                <viewController id="3Cf-sR-kY7" customClass="WebTextbooksViewController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="3Cf-sR-kY7" customClass="OnlineTextbooksViewController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="L5X-8u-oN0">
                         <rect key="frame" x="0.0" y="0.0" width="1200" height="581"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -557,7 +557,7 @@ Gw
                                                                             <rect key="frame" x="1" y="1" width="205" height="17"/>
                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                             <subviews>
-                                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="t3K-S9-Sgm">
+                                                                                <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="t3K-S9-Sgm">
                                                                                     <rect key="frame" x="0.0" y="1" width="205" height="16"/>
                                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" sendsActionOnEndEditing="YES" title="Table View Cell" id="WV3-xq-OEM">
                                                                                         <font key="font" metaFont="system"/>
@@ -596,7 +596,7 @@ Gw
                                                                             <rect key="frame" x="209" y="1" width="40" height="17"/>
                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                             <subviews>
-                                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="2QO-Xc-XOv">
+                                                                                <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="2QO-Xc-XOv">
                                                                                     <rect key="frame" x="0.0" y="1" width="40" height="16"/>
                                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" sendsActionOnEndEditing="YES" title="Table View Cell" id="Pa3-yR-3ct">
                                                                                         <font key="font" metaFont="system"/>
@@ -632,7 +632,7 @@ Gw
                                                                             <rect key="frame" x="252" y="1" width="100" height="17"/>
                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                             <subviews>
-                                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="EZA-kZ-T6T">
+                                                                                <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="EZA-kZ-T6T">
                                                                                     <rect key="frame" x="0.0" y="1" width="100" height="16"/>
                                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" sendsActionOnEndEditing="YES" title="Table View Cell" id="icj-A8-Z0A">
                                                                                         <font key="font" metaFont="system"/>
@@ -668,7 +668,7 @@ Gw
                                                                             <rect key="frame" x="355" y="1" width="312" height="17"/>
                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                             <subviews>
-                                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="CBT-F1-UgG">
+                                                                                <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="CBT-F1-UgG">
                                                                                     <rect key="frame" x="0.0" y="1" width="312" height="16"/>
                                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" sendsActionOnEndEditing="YES" title="Table View Cell" id="rQy-jH-Q8Z">
                                                                                         <font key="font" metaFont="system"/>
@@ -704,7 +704,7 @@ Gw
                                                                             <rect key="frame" x="670" y="1" width="64" height="17"/>
                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                             <subviews>
-                                                                                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Nng-e2-Vw1">
+                                                                                <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Nng-e2-Vw1">
                                                                                     <rect key="frame" x="0.0" y="1" width="64" height="16"/>
                                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" sendsActionOnEndEditing="YES" title="Table View Cell" id="6U5-6F-RPz">
                                                                                         <font key="font" metaFont="system"/>
@@ -800,12 +800,12 @@ Gw
                     </connections>
                 </viewController>
                 <arrayController id="vWy-xu-GvI"/>
-                <menu id="65X-4j-zqQ" userLabel="MenuWebTextbooks">
+                <menu id="65X-4j-zqQ" userLabel="MenuOnlineTextbooks">
                     <items>
                         <menuItem title="Edit" id="sQY-Ib-67z">
                             <modifierMask key="keyEquivalentModifierMask"/>
                             <connections>
-                                <action selector="editWebTextbook:" target="3Cf-sR-kY7" id="gHf-hj-Yb0"/>
+                                <action selector="editOnlineTextbook:" target="3Cf-sR-kY7" id="gHf-hj-Yb0"/>
                             </connections>
                         </menuItem>
                     </items>
@@ -814,15 +814,15 @@ Gw
             </objects>
             <point key="canvasLocation" x="372" y="392.5"/>
         </scene>
-        <!--Web Textbooks Detail View Controller-->
+        <!--Online Textbooks Detail View Controller-->
         <scene sceneID="Cl6-0I-g6r">
             <objects>
-                <viewController storyboardIdentifier="WebTextbooksDetailViewController" id="NKu-hV-bdb" customClass="WebTextbooksDetailViewController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OnlineTextbooksDetailViewController" id="NKu-hV-bdb" customClass="OnlineTextbooksDetailViewController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="4oB-xL-HGQ">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="250"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="05e-vY-3ft">
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="05e-vY-3ft">
                                 <rect key="frame" x="18" y="214" width="21" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="ID:" id="TD9-hS-knL">
                                     <font key="font" metaFont="system"/>
@@ -830,7 +830,7 @@ Gw
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="erp-2h-p3D" userLabel="Tf ID">
+                            <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="erp-2h-p3D" userLabel="Tf ID">
                                 <rect key="frame" x="100" y="212" width="330" height="21"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" enabled="NO" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="L9h-aZ-upo">
                                     <font key="font" metaFont="system"/>
@@ -838,7 +838,7 @@ Gw
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jGF-kh-3qc">
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jGF-kh-3qc">
                                 <rect key="frame" x="18" y="181" width="78" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="TEXTBOOK:" id="2QF-Mn-RZB">
                                     <font key="font" metaFont="system"/>
@@ -846,7 +846,7 @@ Gw
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pXN-yF-azp">
+                            <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pXN-yF-azp">
                                 <rect key="frame" x="100" y="179" width="330" height="21"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="5HX-qP-6sh">
                                     <font key="font" metaFont="system"/>
@@ -854,7 +854,7 @@ Gw
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Xtf-Oa-Ej9">
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Xtf-Oa-Ej9">
                                 <rect key="frame" x="18" y="148" width="38" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="UNIT:" id="7b6-Dz-khc">
                                     <font key="font" metaFont="system"/>
@@ -862,7 +862,7 @@ Gw
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6ts-j1-Mzg">
+                            <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6ts-j1-Mzg">
                                 <rect key="frame" x="100" y="146" width="330" height="21"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="XIV-E2-H6K">
                                     <font key="font" metaFont="system"/>
@@ -870,7 +870,7 @@ Gw
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yex-3g-X6Y">
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="yex-3g-X6Y">
                                 <rect key="frame" x="18" y="115" width="43" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="TITLE:" id="Ykn-gs-Ohw">
                                     <font key="font" metaFont="system"/>
@@ -878,7 +878,7 @@ Gw
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Vwh-Et-ada">
+                            <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Vwh-Et-ada">
                                 <rect key="frame" x="100" y="113" width="330" height="21"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="MIQ-Cb-WnM">
                                     <font key="font" metaFont="system"/>
@@ -886,7 +886,7 @@ Gw
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CEP-OO-O8r">
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CEP-OO-O8r">
                                 <rect key="frame" x="18" y="82" width="34" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="URL:" id="Z90-vk-Kyz">
                                     <font key="font" metaFont="system"/>
@@ -894,7 +894,7 @@ Gw
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="de5-bN-ivI">
+                            <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="de5-bN-ivI">
                                 <rect key="frame" x="100" y="80" width="330" height="21"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="GdE-G1-Vot">
                                     <font key="font" metaFont="system"/>
@@ -948,10 +948,10 @@ DQ
                     </view>
                     <connections>
                         <outlet property="tfID" destination="erp-2h-p3D" id="pAJ-yF-3gw"/>
+                        <outlet property="tfOnlineTextbook" destination="pXN-yF-azp" id="cRl-XH-RNO"/>
                         <outlet property="tfTitle" destination="Vwh-Et-ada" id="C6Y-ou-KV4"/>
                         <outlet property="tfURL" destination="de5-bN-ivI" id="Jx1-5q-esQ"/>
                         <outlet property="tfUnit" destination="6ts-j1-Mzg" id="pyD-IS-7we"/>
-                        <outlet property="tfWebTextbook" destination="pXN-yF-azp" id="cRl-XH-RNO"/>
                     </connections>
                 </viewController>
                 <customObject id="mbN-jk-I6i" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

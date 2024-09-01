@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -13,7 +13,7 @@
         <!--Navigation Controller-->
         <scene sceneID="QJD-4x-Q79">
             <objects>
-                <navigationController storyboardIdentifier="WebTextbooksNC1" id="fSA-2w-D3d" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="OnlineTextbooksNC1" id="fSA-2w-D3d" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="o8P-ga-kyh">
                         <rect key="frame" x="0.0" y="48" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -26,10 +26,10 @@
             </objects>
             <point key="canvasLocation" x="-1047" y="-233"/>
         </scene>
-        <!--WebTextbooks-->
+        <!--Online Textbooks-->
         <scene sceneID="C7C-d3-sKn">
             <objects>
-                <viewController storyboardIdentifier="WebTextbooksViewController" id="Kja-H8-0Ak" customClass="WebTextbooksViewController" customModule="LollySwiftiOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OnlineTextbooksViewController" id="Kja-H8-0Ak" customClass="OnlineTextbooksViewController" customModule="LollySwiftiOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0lJ-GX-C7f">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -48,7 +48,7 @@
                                 <rect key="frame" x="0.0" y="136" width="414" height="726"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="detailButton" indentationWidth="10" reuseIdentifier="WebTextbooksCell" rowHeight="88" id="xs4-Ig-sDC" customClass="WebTextbooksCell" customModule="LollySwiftiOS" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="detailButton" indentationWidth="10" reuseIdentifier="OnlineTextbooksCell" rowHeight="88" id="xs4-Ig-sDC" customClass="OnlineTextbooksCell" customModule="LollySwiftiOS" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="414" height="88"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xs4-Ig-sDC" id="aS8-z1-aQ5">
@@ -93,8 +93,8 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="cardView" destination="5qY-kr-wFp" id="hnu-Se-hg6"/>
+                                            <outlet property="lblOnlineTextbook" destination="KRY-Hb-cCO" id="bNp-8I-AIK"/>
                                             <outlet property="lblTitle" destination="uCP-hh-jfu" id="GFT-R5-ySP"/>
-                                            <outlet property="lblWebTextbook" destination="KRY-Hb-cCO" id="bNp-8I-AIK"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -116,7 +116,7 @@
                             <constraint firstItem="EW5-lo-bde" firstAttribute="trailing" secondItem="QsG-w8-IST" secondAttribute="trailing" id="zc0-Fj-10A"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="WebTextbooks" id="lrv-ye-cIs">
+                    <navigationItem key="navigationItem" title="Online Textbooks" id="lrv-ye-cIs">
                         <barButtonItem key="leftBarButtonItem" title="Left" image="MenuButton" id="RcL-ku-T1h">
                             <connections>
                                 <action selector="presentLeftMenuViewController:" destination="0f6-eh-sBq" id="6OF-Px-Hxg"/>
@@ -125,7 +125,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="7oO-l3-tjY"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="btnWebTextbookFilter" destination="coj-gJ-bFA" id="VYq-AU-uM8"/>
+                        <outlet property="btnOnlineTextbookFilter" destination="coj-gJ-bFA" id="VYq-AU-uM8"/>
                         <outlet property="tableView" destination="QsG-w8-IST" id="raC-sW-gQU"/>
                         <segue destination="jxH-Re-jyk" kind="presentation" identifier="edit" id="AWN-1D-kqT"/>
                         <segue destination="cXB-gx-cf6" kind="show" identifier="browse page" id="bJI-Er-aEr"/>
@@ -135,10 +135,10 @@
             </objects>
             <point key="canvasLocation" x="-167" y="-233"/>
         </scene>
-        <!--WebTextbooks Web Page-->
+        <!--Online Textbooks (Web Page)-->
         <scene sceneID="glL-wo-Ytn">
             <objects>
-                <viewController storyboardIdentifier="WebTextbooksWebPageViewController" id="cXB-gx-cf6" customClass="WebTextbooksWebPageViewController" customModule="LollySwiftiOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OnlineTextbooksWebPageViewController" id="cXB-gx-cf6" customClass="OnlineTextbooksWebPageViewController" customModule="LollySwiftiOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Acn-mT-ao0">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -171,7 +171,7 @@
                         </constraints>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="WebTextbooks Web Page" id="rlz-6y-dYZ"/>
+                    <navigationItem key="navigationItem" title="Online Textbooks (Web Page)" id="rlz-6y-dYZ"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="btnWebPage" destination="mHp-X4-uv4" id="I3z-L0-Xjq"/>
@@ -198,10 +198,10 @@
             </objects>
             <point key="canvasLocation" x="796" y="729"/>
         </scene>
-        <!--WebTextbooks (Detail)-->
+        <!--Online Textbooks (Detail)-->
         <scene sceneID="xUX-t2-jdX">
             <objects>
-                <tableViewController storyboardIdentifier="WebTextbooksDetailViewController" id="Wrl-nU-5ka" customClass="WebTextbooksDetailViewController" customModule="LollySwiftiOS" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="OnlineTextbooksDetailViewController" id="Wrl-nU-5ka" customClass="OnlineTextbooksDetailViewController" customModule="LollySwiftiOS" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="bST-Pp-GBn">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="886"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -380,7 +380,7 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="WebTextbooks (Detail)" id="qaB-eu-uI3">
+                    <navigationItem key="navigationItem" title="Online Textbooks (Detail)" id="qaB-eu-uI3">
                         <barButtonItem key="leftBarButtonItem" image="xmark.circle.fill" catalog="system" id="wpX-mw-HGt">
                             <connections>
                                 <segue destination="lru-2d-WIP" kind="unwind" unwindAction="prepareForUnwind:" id="6ke-A6-fdT"/>
@@ -390,10 +390,10 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="tfID" destination="718-30-x0a" id="wMo-2E-cPc"/>
+                        <outlet property="tfOnlineTextbook" destination="Mgt-zs-aVC" id="Gv4-lw-ga0"/>
                         <outlet property="tfTitle" destination="S1G-lE-SAI" id="ScZ-pt-CrB"/>
                         <outlet property="tfURL" destination="u1E-zT-Sov" id="csC-OZ-9KP"/>
                         <outlet property="tfUnit" destination="goV-z4-IVW" id="xiF-ZA-79J"/>
-                        <outlet property="tfWebTextbook" destination="Mgt-zs-aVC" id="Gv4-lw-ga0"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JKf-M6-U7X" userLabel="First Responder" sceneMemberID="firstResponder"/>

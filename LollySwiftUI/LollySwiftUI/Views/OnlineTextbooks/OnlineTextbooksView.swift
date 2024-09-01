@@ -1,5 +1,5 @@
 //
-//  WebTextbooksView.swift
+//  OnlineTextbooksView.swift
 //  LollySwiftUI
 //
 //  Created by 趙偉 on 2022/12/15.
@@ -7,24 +7,24 @@
 
 import SwiftUI
 
-struct WebTextbooksView: View {
+struct OnlineTextbooksView: View {
     @Binding var navPath: NavigationPath
-    @StateObject var vm = WebTextbooksViewModel(settings: vmSettings, needCopy: false) {}
+    @StateObject var vm = OnlineTextbooksViewModel(settings: vmSettings, needCopy: false) {}
     @State var showDetail = false
     @State var showItemMore = false
     // https://stackoverflow.com/questions/59235879/how-to-show-an-alert-when-the-user-taps-on-the-list-row-in-swiftui
-    @State var currentItem = MWebTextbook()
+    @State var currentItem = MOnlineTextbook()
     var body: some View {
         VStack {
             Spacer()
-            Picker("", selection: $vm.stringWebTextbookFilter) {
-                ForEach(vmSettings.arrWebTextbookFilters.map(\.label), id: \.self) { s in
+            Picker("", selection: $vm.stringOnlineTextbookFilter) {
+                ForEach(vmSettings.arrOnlineTextbookFilters.map(\.label), id: \.self) { s in
                     Text(s)
                 }
             }
             .modifier(PickerModifier(backgroundColor: Color.color3))
             List {
-                ForEach(vm.arrWebTextbooksFiltered, id: \.ID) { item in
+                ForEach(vm.arrOnlineTextbooksFiltered, id: \.ID) { item in
                     HStack {
                         VStack(alignment: .leading) {
                             Text(item.TEXTBOOKNAME)
@@ -57,7 +57,7 @@ struct WebTextbooksView: View {
             .refreshable {
                 await vm.reload()
             }
-            .alert(Text("WebTextbook"), isPresented: $showItemMore, actions: {
+            .alert(Text("OnlineTextbook"), isPresented: $showItemMore, actions: {
                 Button("Edit") {
                     showDetail.toggle()
                 }
@@ -68,10 +68,10 @@ struct WebTextbooksView: View {
                 Text(currentItem.TITLE)
             })
             .navigationDestination(for: BrowseViewTag.self) { _ in
-                WebTextbooksWebPageView(item: currentItem)
+                OnlineTextbooksWebPageView(item: currentItem)
             }
             .sheet(isPresented: $showDetail) {
-                WebTextbooksDetailView(item: currentItem, showDetail: $showDetail)
+                OnlineTextbooksDetailView(item: currentItem, showDetail: $showDetail)
             }
         }
     }

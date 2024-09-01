@@ -1,5 +1,5 @@
 //
-//  WebTextbooksDetailView.swift
+//  OnlineTextbooksDetailView.swift
 //  LollySwiftUI
 //
 //  Created by 趙偉 on 2022/12/24.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct WebTextbooksDetailView: View {
-    @State var item: MWebTextbook
+struct OnlineTextbooksDetailView: View {
+    @State var item: MOnlineTextbook
     @Binding var showDetail: Bool
     var body: some View {
         NavigationView {
@@ -19,7 +19,7 @@ struct WebTextbooksDetailView: View {
                     Text("\(item.ID)")
                 }
                 HStack {
-                    Text("TEXTBOOKNAME:")
+                    Text("TEXTBOOK:")
                     Spacer()
                     Text(item.TEXTBOOKNAME)
                 }

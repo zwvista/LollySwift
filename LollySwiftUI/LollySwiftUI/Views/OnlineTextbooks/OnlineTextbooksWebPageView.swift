@@ -1,5 +1,5 @@
 //
-//  WebTextbooksWebPageView.swift
+//  OnlineTextbooksWebPageView.swift
 //  LollySwiftUI
 //
 //  Created by 趙偉 on 2022/12/30.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct WebTextbooksWebPageView: View {
-    @State var item: MWebTextbook
+struct OnlineTextbooksWebPageView: View {
+    @State var item: MOnlineTextbook
     @State var webViewStore = WebViewStore()
     var body: some View {
         VStack(spacing: 0) {
@@ -17,7 +17,7 @@ struct WebTextbooksWebPageView: View {
             .modifier(PickerModifier(backgroundColor: Color.color2))
             WebView(webView: webViewStore.webView) {}
         }
-        .navigationTitle("WebTextbooks Web Page")
+        .navigationTitle("Online Textbooks(Web Page)")
         .onAppear {
             AppDelegate.speak(string: item.TITLE)
             webViewStore.webView.load(URLRequest(url: URL(string: item.URL)!))
