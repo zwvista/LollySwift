@@ -17,7 +17,7 @@ class OnlineTextbooksViewModel: NSObject, ObservableObject {
     var selectedOnlineTextbookItem: MOnlineTextbook?
     @Published var indexOnlineTextbookFilter = 0
     @Published var stringOnlineTextbookFilter = ""
-    var webTextbookFilter: Int {
+    var onlineTextbookFilter: Int {
         indexOnlineTextbookFilter == -1 ? 0 : vmSettings.arrOnlineTextbookFilters[indexOnlineTextbookFilter].value
     }
 
@@ -32,7 +32,7 @@ class OnlineTextbooksViewModel: NSObject, ObservableObject {
             indexOnlineTextbookFilter = vmSettings.arrOnlineTextbookFilters.firstIndex { $0.label == s }!
         } ~ subscriptions
         $arrOnlineTextbooks.didSet.combineLatest($indexOnlineTextbookFilter.didSet).sink { [unowned self] _ in
-            arrOnlineTextbooksFiltered = webTextbookFilter == 0 ? arrOnlineTextbooks : arrOnlineTextbooks.filter { $0.TEXTBOOKID == webTextbookFilter }
+            arrOnlineTextbooksFiltered = onlineTextbookFilter == 0 ? arrOnlineTextbooks : arrOnlineTextbooks.filter { $0.TEXTBOOKID == onlineTextbookFilter }
         } ~ subscriptions
 
         Task {

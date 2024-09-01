@@ -57,7 +57,7 @@ struct OnlineTextbooksView: View {
             .refreshable {
                 await vm.reload()
             }
-            .alert(Text("OnlineTextbook"), isPresented: $showItemMore, actions: {
+            .alert(Text("Online Textbooks"), isPresented: $showItemMore, actions: {
                 Button("Edit") {
                     showDetail.toggle()
                 }
