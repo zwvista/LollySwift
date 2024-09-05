@@ -16,7 +16,6 @@ class OnlineTextbooksDetailViewController: UITableViewController, UITextFieldDel
     @IBOutlet weak var tfUnit: UITextField!
     @IBOutlet weak var tfTitle: UITextField!
     @IBOutlet weak var tfURL: UITextField!
-    @IBOutlet weak var btnDone: UIBarButtonItem!
 
     var item: MOnlineTextbook!
 
