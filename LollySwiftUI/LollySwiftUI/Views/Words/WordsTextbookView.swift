@@ -116,7 +116,9 @@ struct WordsTextbookView: View {
                 Text(currentItem.WORDNOTE)
             })
             .navigationDestination(for: MUnitWord.self) { item in
-                WordsDictView(vm: WordsDictViewModel(settings: vmSettings, needCopy: false, arrWords: vm.arrWordsFiltered.map(\.WORD), currentWordIndex: vm.arrWordsFiltered.firstIndex(of: item)!) {})
+                let index = vm.arrWordsFiltered.firstIndex(of: item)!
+                let (start, end) = getPreferredRangeFromArray(index: index, length: vm.arrWordsFiltered.count, preferredLength: 50)
+                WordsDictView(vm: WordsDictViewModel(settings: vmSettings, needCopy: false, arrWords: vm.arrWordsFiltered[start ..< end].map(\.WORD), currentWordIndex: index) {})
             }
             .sheet(isPresented: $showDetailEdit) {
                 WordsTextbookDetailView(vmEdit: WordsUnitDetailViewModel(vm: vm, item: currentItem, phraseid: 0), showDetail: $showDetailEdit)

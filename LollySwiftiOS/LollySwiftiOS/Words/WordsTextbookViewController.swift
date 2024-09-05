@@ -108,7 +108,9 @@ class WordsTextbookViewController: WordsBaseViewController {
             let item = sender as! MUnitWord
             controller.vmEdit = WordsUnitDetailViewModel(vm: vm, item: item, phraseid: 0)
         } else if let controller = segue.destination as? WordsDictViewController {
-            controller.vm = WordsDictViewModel(settings: vmSettings, needCopy: false, arrWords: arrWords.map(\.WORD), currentWordIndex: arrWords.firstIndex(of: sender as! MUnitWord)!) {}
+            let index = arrWords.firstIndex(of: sender as! MUnitWord)!
+            let (start, end) = getPreferredRangeFromArray(index: index, length: arrWords.count, preferredLength: 50)
+            controller.vm = WordsDictViewModel(settings: vmSettings, needCopy: false, arrWords: arrWords[start ..< end].map(\.WORD), currentWordIndex: index) {}
         }
     }
 
