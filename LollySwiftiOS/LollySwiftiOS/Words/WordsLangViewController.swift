@@ -92,7 +92,9 @@ class WordsLangViewController: WordsBaseViewController {
             controller.vm = vm
             controller.item = sender as? MLangWord ?? MLangWord()
         } else if let controller = segue.destination as? WordsDictViewController {
-            controller.vm = WordsDictViewModel(settings: vmSettings, needCopy: false, arrWords: arrWords.map(\.WORD), currentWordIndex: arrWords.firstIndex(of: sender as! MLangWord)!) {}
+            let index = arrWords.firstIndex(of: sender as! MLangWord)!
+            let (start, end) = getPreferredRangeFromArray(index: index, length: arrWords.count, preferredLength: 50)
+            controller.vm = WordsDictViewModel(settings: vmSettings, needCopy: false, arrWords: arrWords[start ..< end].map(\.WORD), currentWordIndex: index) {}
         }
     }
 
