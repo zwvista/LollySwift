@@ -11,14 +11,14 @@ import Foundation
 @MainActor
 class PatternsWebPageViewModel: NSObject, ObservableObject {
     var vmSettings: SettingsViewModel
-    @Published var arrPatterns = [String]()
+    @Published var arrPatterns = [MPattern]()
     @Published var currentPatternIndex = 0
-    var currentPattern: String { arrPatterns[currentPatternIndex] }
+    var currentPattern: MPattern { arrPatterns[currentPatternIndex] }
     func next(_ delta: Int) {
         currentPatternIndex = (currentPatternIndex + delta + arrPatterns.count) % arrPatterns.count
     }
 
-    init(settings: SettingsViewModel, needCopy: Bool, arrPatterns: [String], currentPatternIndex: Int, complete: @escaping () -> Void) {
+    init(settings: SettingsViewModel, needCopy: Bool, arrPatterns: [MPattern], currentPatternIndex: Int, complete: @escaping () -> Void) {
         vmSettings = !needCopy ? settings : SettingsViewModel(settings)
         self.arrPatterns = arrPatterns
         self.currentPatternIndex = currentPatternIndex
