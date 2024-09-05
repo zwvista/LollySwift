@@ -41,7 +41,7 @@ struct PatternsView: View {
                             .foregroundColor(.blue)
                             .onTapGesture {
                                 currentItem = item
-                                navPath.append(BrowseViewTag())
+                                navPath.append(currentItem)
                             }
                     }
                     .contentShape(Rectangle())
@@ -65,7 +65,7 @@ struct PatternsView: View {
                     showDetail.toggle()
                 }
                 Button("Browse Web Page") {
-                    navPath.append(BrowseViewTag())
+                    navPath.append(currentItem)
                 }
                 Button("Copy Pattern") {
                     iOSApi.copyText(currentItem.PATTERN)
@@ -76,14 +76,14 @@ struct PatternsView: View {
             }, message: {
                 Text(currentItem.PATTERN)
             })
-            .navigationDestination(for: BrowseViewTag.self) { _ in
-                PatternsWebPageView(item: currentItem)
+            .navigationDestination(for: MPattern.self) { item in
+                let index = vm.arrPatternsFiltered.firstIndex(of: item)!
+                let (start, end) = getPreferredRangeFromArray(index: index, length: vm.arrPatternsFiltered.count, preferredLength: 50)
+                PatternsWebPageView(vm: PatternsWebPageViewModel(settings: vmSettings, needCopy: false, arrPatterns: Array(vm.arrPatternsFiltered[start ..< end]), currentPatternIndex: index) {})
             }
             .sheet(isPresented: $showDetail) {
                 PatternsDetailView(item: currentItem, showDetail: $showDetail)
             }
         }
     }
-
-    struct BrowseViewTag: Hashable {}
 }

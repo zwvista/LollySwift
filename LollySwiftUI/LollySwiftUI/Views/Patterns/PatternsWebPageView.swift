@@ -8,19 +8,47 @@
 import SwiftUI
 
 struct PatternsWebPageView: View {
-    @State var item: MPattern
+    @StateObject var vm: PatternsWebPageViewModel
     @State var webViewStore = WebViewStore()
     var body: some View {
         VStack(spacing: 0) {
             Spacer()
-            Button(item.TITLE) {}
-            .modifier(PickerModifier(backgroundColor: Color.color2))
+            Picker("", selection: $vm.currentPatternIndex) {
+                ForEach(vm.arrPatterns.indices, id: \.self) {
+                    Text(vm.arrPatterns[$0].PATTERN)
+                }
+            }
+            .modifier(PickerModifier(backgroundColor: Color.color3))
+            .onChange(of: vm.currentPatternIndex) {
+                currentPatternChanged()
+            }
             WebView(webView: webViewStore.webView) {}
+            .gesture(
+                DragGesture(minimumDistance: 0, coordinateSpace: .local)
+                    .onEnded { value in
+                        if value.translation.width < 0 {
+                            // left
+                            swipe(-1)
+                        }
+                        if value.translation.width > 0 {
+                            // right
+                            swipe(1)
+                        }
+                    }
+            )
         }
         .navigationTitle("Patterns Web Page")
         .onAppear {
-            AppDelegate.speak(string: item.TITLE)
-            webViewStore.webView.load(URLRequest(url: URL(string: item.URL)!))
+            currentPatternChanged()
         }
+    }
+
+    private func currentPatternChanged() {
+        AppDelegate.speak(string: vm.currentPattern.TITLE)
+        webViewStore.webView.load(URLRequest(url: URL(string: vm.currentPattern.URL)!))
+    }
+
+    private func swipe(_ delta: Int) {
+        vm.next(delta)
     }
 }

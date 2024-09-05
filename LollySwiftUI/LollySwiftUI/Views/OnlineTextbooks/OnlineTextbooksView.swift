@@ -38,7 +38,7 @@ struct OnlineTextbooksView: View {
                             .foregroundColor(.blue)
                             .onTapGesture {
                                 currentItem = item
-                                navPath.append(BrowseViewTag())
+                                navPath.append(currentItem)
                             }
                     }
                     .contentShape(Rectangle())
@@ -62,19 +62,19 @@ struct OnlineTextbooksView: View {
                     showDetail.toggle()
                 }
                 Button("Browse Web Page") {
-                    navPath.append(BrowseViewTag())
+                    navPath.append(currentItem)
                 }
             }, message: {
                 Text(currentItem.TITLE)
             })
-            .navigationDestination(for: BrowseViewTag.self) { _ in
-                OnlineTextbooksWebPageView(item: currentItem)
+            .navigationDestination(for: MOnlineTextbook.self) { item in
+                let index = vm.arrOnlineTextbooksFiltered.firstIndex(of: item)!
+                let (start, end) = getPreferredRangeFromArray(index: index, length: vm.arrOnlineTextbooksFiltered.count, preferredLength: 50)
+                OnlineTextbooksWebPageView(vm: OnlineTextbooksWebPageViewModel(settings: vmSettings, needCopy: false, arrOnlineTextbooks: Array(vm.arrOnlineTextbooksFiltered[start ..< end]), currentOnlineTextbookIndex: index) {})
             }
             .sheet(isPresented: $showDetail) {
                 OnlineTextbooksDetailView(item: currentItem, showDetail: $showDetail)
             }
         }
     }
-
-    struct BrowseViewTag: Hashable {}
 }
