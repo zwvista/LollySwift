@@ -12,15 +12,15 @@ import RxRelay
 
 class PatternsWebPageViewModel: NSObject {
     var vmSettings: SettingsViewModel
-    var arrPatterns = [String]()
+    var arrPatterns = [MPattern]()
     var currentPatternIndex_ = BehaviorRelay(value: 0)
     var currentPatternIndex: Int { get { currentPatternIndex_.value } set { currentPatternIndex_.accept(newValue) } }
-    var currentPattern: String { arrPatterns[currentPatternIndex] }
+    var currentPattern: MPattern { arrPatterns[currentPatternIndex] }
     func next(_ delta: Int) {
         currentPatternIndex = (currentPatternIndex + delta + arrPatterns.count) % arrPatterns.count
     }
 
-    init(settings: SettingsViewModel, needCopy: Bool, arrPatterns: [String], currentPatternIndex: Int, complete: @escaping () -> Void) {
+    init(settings: SettingsViewModel, needCopy: Bool, arrPatterns: [MPattern], currentPatternIndex: Int, complete: @escaping () -> Void) {
         vmSettings = !needCopy ? settings : SettingsViewModel(settings)
         self.arrPatterns = arrPatterns
         super.init()
