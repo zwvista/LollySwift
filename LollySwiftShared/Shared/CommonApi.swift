@@ -160,3 +160,24 @@ extension NSObject {
         return String(describing: type(of: self))
     }
 }
+
+func getPreferredRangeFromArray(
+    index: Int,
+    length: Int,
+    preferredLength: Int
+) -> (Int, Int) {
+    var start: Int
+    var end: Int
+    if (length < preferredLength) {
+        start = 0; end = length
+    } else {
+        start = index - preferredLength / 2; end = index + preferredLength / 2
+        if (start < 0) {
+            end -= start; start = 0
+        }
+        if (end > length) {
+            start -= end - length; end = length
+        }
+    }
+    return (start, end)
+}
