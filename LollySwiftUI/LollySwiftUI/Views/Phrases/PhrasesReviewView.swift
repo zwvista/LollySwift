@@ -82,10 +82,10 @@ struct PhrasesReviewView: View {
                 .border(Color.blue)
                 // https://stackoverflow.com/questions/70568987/it-is-possible-to-accessing-focusstates-value-outside-of-the-body-of-a-view
                 .onChange(of: vm.inputFocused) {
-                    inputFocused = $0
+                    inputFocused = $1
                 }
                 .onChange(of: inputFocused) {
-                    vm.inputFocused = $0
+                    vm.inputFocused = $1
                 }
             Spacer()
         }

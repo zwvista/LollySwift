@@ -25,7 +25,7 @@ struct WordsDictView: View {
                     }
                 }
                 .modifier(PickerModifier(backgroundColor: Color.color3))
-                .onChange(of: vm.currentWordIndex) { _ in
+                .onChange(of: vm.currentWordIndex) {
                     currentWordChanged()
                 }
                 Picker("", selection: $vmS.selectedDictReferenceIndex) {
@@ -34,7 +34,7 @@ struct WordsDictView: View {
                     }
                 }
                 .modifier(PickerModifier(backgroundColor: Color.color2))
-                .onChange(of: vmS.selectedDictReferenceIndex) { _ in
+                .onChange(of: vmS.selectedDictReferenceIndex) {
                     selectDictChanged()
                 }
             }
