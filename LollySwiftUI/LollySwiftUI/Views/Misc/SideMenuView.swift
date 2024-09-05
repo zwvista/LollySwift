@@ -20,6 +20,7 @@ let titleWordsLang = "Words in Language"
 let titlePhrasesLang = "Phrases in Language"
 let titlePatternsLang = "Patterns in Language"
 let titleOnlineTextbooks = "Online Textbooks"
+let titleUnitBlog = "Unit Blog"
 
 // https://dev.classmethod.jp/articles/swiftui_overlay_sidemenu/
 struct SideMenuView: View {
@@ -40,10 +41,10 @@ struct SideMenuView: View {
             }
 
             HStack {
-                VStack() {
+                ScrollView {
                     // https://stackoverflow.com/questions/58470268/cant-add-more-than-10-items-to-view-swiftui
                     Group {
-                        SideMenuContentView(topPadding: 100, systemName: "globe", title: titleSearch, bindTitle: $bindTitle, isOpen: $isOpen)
+                        SideMenuContentView(systemName: "globe", title: titleSearch, bindTitle: $bindTitle, isOpen: $isOpen)
                         SideMenuContentView(systemName: "gear", title: titleSettings, bindTitle: $bindTitle, isOpen: $isOpen)
                         SideMenuContentView(systemName: "car", title: titleWordsUnit, bindTitle: $bindTitle, isOpen: $isOpen)
                         SideMenuContentView(systemName: "bus", title: titlePhrasesUnit, bindTitle: $bindTitle, isOpen: $isOpen)
@@ -57,6 +58,7 @@ struct SideMenuView: View {
                         SideMenuContentView(systemName: "ferry", title: titlePhrasesLang, bindTitle: $bindTitle, isOpen: $isOpen)
                         SideMenuContentView(systemName: "cablecar", title: titlePatternsLang, bindTitle: $bindTitle, isOpen: $isOpen)
                         SideMenuContentView(systemName: "box.truck.fill", title: titleOnlineTextbooks, bindTitle: $bindTitle, isOpen: $isOpen)
+                        SideMenuContentView(systemName: "sailboat.fill", title: titleUnitBlog, bindTitle: $bindTitle, isOpen: $isOpen)
                     }
                     Spacer()
                 }
@@ -64,6 +66,7 @@ struct SideMenuView: View {
                 .background(Color(UIColor.systemGray6))
                 .offset(x: self.isOpen ? 0 : -self.width)
                 .animation(.easeIn(duration: 0.25), value: isOpen)
+                .safeAreaPadding(.top, 50)
                 Spacer()
             }
         }
