@@ -25,6 +25,10 @@
 		8C42B5BC1D69A21E00DCB528 /* PhrasesUnitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C42B5B91D69A21E00DCB528 /* PhrasesUnitViewController.swift */; };
 		8C5F93FF2C8A5F8800FC3D1C /* PatternsWebPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5F93FE2C8A5F8800FC3D1C /* PatternsWebPageViewModel.swift */; };
 		8C6BFCB02C8A6DD00094F927 /* OnlineTextbooksWebPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6BFCAF2C8A6DD00094F927 /* OnlineTextbooksWebPageViewModel.swift */; };
+		8C6BFCE82C9852290094F927 /* BlogPostEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6BFCDF2C9852290094F927 /* BlogPostEditViewModel.swift */; };
+		8C6BFCEF2C9852290094F927 /* UnitBlogPostsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6BFCE62C9852290094F927 /* UnitBlogPostsViewModel.swift */; };
+		8C6BFCF32C9852470094F927 /* Blogs.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C6BFCF02C9852470094F927 /* Blogs.storyboard */; };
+		8C6BFCF42C9852470094F927 /* UnitBlogPostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6BFCF12C9852470094F927 /* UnitBlogPostsViewController.swift */; };
 		8CA47F202968EDC4006CF4A2 /* GlobalUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA47F1F2968EDC4006CF4A2 /* GlobalUser.swift */; };
 		8CA47F242968F001006CF4A2 /* GlobalUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA47F1F2968EDC4006CF4A2 /* GlobalUser.swift */; };
 		8CB025932096CB3E0087462E /* LeftMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB025912096CB3E0087462E /* LeftMenuViewController.swift */; };
@@ -205,6 +209,10 @@
 		8C42B5B91D69A21E00DCB528 /* PhrasesUnitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesUnitViewController.swift; sourceTree = "<group>"; };
 		8C5F93FE2C8A5F8800FC3D1C /* PatternsWebPageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatternsWebPageViewModel.swift; sourceTree = "<group>"; };
 		8C6BFCAF2C8A6DD00094F927 /* OnlineTextbooksWebPageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnlineTextbooksWebPageViewModel.swift; sourceTree = "<group>"; };
+		8C6BFCDF2C9852290094F927 /* BlogPostEditViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlogPostEditViewModel.swift; sourceTree = "<group>"; };
+		8C6BFCE62C9852290094F927 /* UnitBlogPostsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitBlogPostsViewModel.swift; sourceTree = "<group>"; };
+		8C6BFCF02C9852470094F927 /* Blogs.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Blogs.storyboard; sourceTree = "<group>"; };
+		8C6BFCF12C9852470094F927 /* UnitBlogPostsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitBlogPostsViewController.swift; sourceTree = "<group>"; };
 		8CA47F1F2968EDC4006CF4A2 /* GlobalUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalUser.swift; sourceTree = "<group>"; };
 		8CB025912096CB3E0087462E /* LeftMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftMenuViewController.swift; sourceTree = "<group>"; };
 		8CB025922096CB3E0087462E /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
@@ -347,6 +355,7 @@
 		8C316571207676CF0015C247 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				8C6BFCE72C9852290094F927 /* Blogs */,
 				95F0FFDA24C957AA00509DF3 /* Misc */,
 				95FCBE5625544A6E00859C1F /* Patterns */,
 				95F0FFD524C957AA00509DF3 /* Phrases */,
@@ -404,6 +413,24 @@
 				8C42B5B91D69A21E00DCB528 /* PhrasesUnitViewController.swift */,
 			);
 			path = Phrases;
+			sourceTree = "<group>";
+		};
+		8C6BFCE72C9852290094F927 /* Blogs */ = {
+			isa = PBXGroup;
+			children = (
+				8C6BFCDF2C9852290094F927 /* BlogPostEditViewModel.swift */,
+				8C6BFCE62C9852290094F927 /* UnitBlogPostsViewModel.swift */,
+			);
+			path = Blogs;
+			sourceTree = "<group>";
+		};
+		8C6BFCF22C9852470094F927 /* Blogs */ = {
+			isa = PBXGroup;
+			children = (
+				8C6BFCF02C9852470094F927 /* Blogs.storyboard */,
+				8C6BFCF12C9852470094F927 /* UnitBlogPostsViewController.swift */,
+			);
+			path = Blogs;
 			sourceTree = "<group>";
 		};
 		8CCFA67829B4C5EC004748B8 /* Textbooks */ = {
@@ -494,6 +521,7 @@
 			isa = PBXGroup;
 			children = (
 				953473DA1A0D16CF00FF2D56 /* AppDelegate.swift */,
+				8C6BFCF22C9852470094F927 /* Blogs */,
 				953473E11A0D16CF00FF2D56 /* Images.xcassets */,
 				953473E31A0D16CF00FF2D56 /* LaunchScreen.xib */,
 				951BB9951A1B8D6C0087DB94 /* LollySwiftiOS-Bridging-Header.h */,
@@ -693,7 +721,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 1540;
 				ORGANIZATIONNAME = "趙 偉";
 				TargetAttributes = {
 					953473D41A0D16CF00FF2D56 = {
@@ -733,6 +761,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C6BFCF32C9852470094F927 /* Blogs.storyboard in Resources */,
 				8CCFA65029B31F32004748B8 /* Misc.storyboard in Resources */,
 				951BB9941A1B803B0087DB94 /* Main.storyboard in Resources */,
 				953473E51A0D16CF00FF2D56 /* LaunchScreen.xib in Resources */,
@@ -869,7 +898,9 @@
 				9568FF3325A567E4004598D8 /* PhrasesBaseViewModel.swift in Sources */,
 				951504D82620613F00F94A6E /* MUser.swift in Sources */,
 				9591924A258D004F0070DBFD /* MUserSetting.swift in Sources */,
+				8C6BFCE82C9852290094F927 /* BlogPostEditViewModel.swift in Sources */,
 				95FDF62A228D5D6C003DFB1A /* WordsUnitBatchEditViewController.swift in Sources */,
+				8C6BFCF42C9852470094F927 /* UnitBlogPostsViewController.swift in Sources */,
 				9591924E258D004F0070DBFD /* MTextbook.swift in Sources */,
 				951F7F6825EEA2F90051E94E /* PhrasesUnitBatchEditViewModel.swift in Sources */,
 				95F0FFEA24C957AB00509DF3 /* SinglePhraseViewModel.swift in Sources */,
@@ -917,6 +948,7 @@
 				9591924C258D004F0070DBFD /* MReviewOptions.swift in Sources */,
 				95919247258D004F0070DBFD /* MAutoCorrect.swift in Sources */,
 				95919248258D004F0070DBFD /* MVoice.swift in Sources */,
+				8C6BFCEF2C9852290094F927 /* UnitBlogPostsViewModel.swift in Sources */,
 				9568FF3825A567F2004598D8 /* WordsBaseViewModel.swift in Sources */,
 				953473DB1A0D16CF00FF2D56 /* AppDelegate.swift in Sources */,
 				95919249258D004F0070DBFD /* MUSMapping.swift in Sources */,
@@ -1040,6 +1072,7 @@
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1097,6 +1130,7 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

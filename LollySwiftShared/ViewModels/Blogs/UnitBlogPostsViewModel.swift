@@ -1,20 +1,20 @@
 //
-//  UnitBlogViewModel.swift
+//  UnitBlogPostsViewModel.swift
 //  LollySwiftUI
 //
 //  Created by 趙偉 on 2024/09/14.
 //
 
 import Foundation
+import RxSwift
+import RxRelay
 
-@MainActor
-class UnitBlogViewModel: NSObject, ObservableObject {
+class UnitBlogPostsViewModel: NSObject {
     var vmSettings: SettingsViewModel
-    @Published var arrUnits = [MSelectItem]()
-    @Published var currentUnitIndex = 0
-    var selectedUnit: Int {
-        return arrUnits[currentUnitIndex].value
-    }
+    var arrUnits = [MSelectItem]()
+    var currentUnitIndex_ = BehaviorRelay(value: 0)
+    var currentUnitIndex: Int { get { currentUnitIndex_.value } set { currentUnitIndex_.accept(newValue) } }
+    var currentUnit: Int { arrUnits[currentUnitIndex].value }
     func next(_ delta: Int) {
         currentUnitIndex = (currentUnitIndex + delta + arrUnits.count) % arrUnits.count
     }
@@ -22,7 +22,7 @@ class UnitBlogViewModel: NSObject, ObservableObject {
     init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> Void) {
         vmSettings = !needCopy ? settings : SettingsViewModel(settings)
         arrUnits = vmSettings.arrUnits
-        currentUnitIndex = vmSettings.selectedUnitToIndex
         super.init()
+        currentUnitIndex = vmSettings.selectedUnitToIndex
     }
 }

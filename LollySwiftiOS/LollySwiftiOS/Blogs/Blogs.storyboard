@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Unit Blog Posts-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="UnitBlogPostsViewController" id="Y6W-OH-hqX" customClass="UnitBlogPostsViewController" customModule="LollySwiftiOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" id="udP-93-b6e">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kRi-e5-KqY">
+                                <rect key="frame" x="0.0" y="103" width="393" height="56"/>
+                                <color key="backgroundColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="UjF-RF-diG"/>
+                                </constraints>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                            </button>
+                            <view multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yuC-5I-2Z2">
+                                <rect key="frame" x="0.0" y="159" width="393" height="659"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ZVk-Cx-QyY"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="yuC-5I-2Z2" firstAttribute="trailing" secondItem="ZVk-Cx-QyY" secondAttribute="trailing" id="75J-Mv-4Wf"/>
+                            <constraint firstItem="kRi-e5-KqY" firstAttribute="top" secondItem="ZVk-Cx-QyY" secondAttribute="top" id="BnG-ov-yKm"/>
+                            <constraint firstItem="ZVk-Cx-QyY" firstAttribute="leading" secondItem="kRi-e5-KqY" secondAttribute="leading" id="Ens-J3-2dL"/>
+                            <constraint firstItem="ZVk-Cx-QyY" firstAttribute="leading" secondItem="yuC-5I-2Z2" secondAttribute="leading" id="Moc-u2-TiE"/>
+                            <constraint firstItem="ZVk-Cx-QyY" firstAttribute="bottom" secondItem="yuC-5I-2Z2" secondAttribute="bottom" id="RR4-xJ-jGd"/>
+                            <constraint firstItem="ZVk-Cx-QyY" firstAttribute="trailing" secondItem="kRi-e5-KqY" secondAttribute="trailing" id="jAi-8o-PbA"/>
+                            <constraint firstItem="yuC-5I-2Z2" firstAttribute="top" secondItem="kRi-e5-KqY" secondAttribute="bottom" id="mqe-2Z-71F"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Unit Blog Posts" id="qRt-a0-hC6">
+                        <barButtonItem key="leftBarButtonItem" title="Left" image="MenuButton" id="AeI-2g-ZQ2">
+                            <connections>
+                                <action selector="presentLeftMenuViewController:" destination="Ief-a0-LHa" id="LHB-JL-5yy"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="btnUnit" destination="kRi-e5-KqY" id="bB7-eD-nEN"/>
+                        <outlet property="wvBlogPostHolder" destination="yuC-5I-2Z2" id="EeH-vX-6Yj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-163" y="-233"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="J7e-F9-c9M">
+            <objects>
+                <navigationController storyboardIdentifier="BlogsNC1" id="Odn-0H-KCy" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="67U-fB-wx4">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="Cmd-g1-LSm"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Nfs-NT-eqb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1047" y="-233"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="MenuButton" width="25" height="13"/>
+    </resources>
+</document>

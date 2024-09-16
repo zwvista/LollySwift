@@ -11,7 +11,7 @@ import UIKit
 public class LeftMenuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var tableView: UITableView?
-    var storyboardMisc, storyboardWords, storyboardPhrases, storyboardPatterns, storyboardOnlineTextbooks: UIStoryboard!
+    var storyboardMisc, storyboardWords, storyboardPhrases, storyboardPatterns, storyboardOnlineTextbooks, storyboardBlogs: UIStoryboard!
 
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -20,7 +20,7 @@ public class LeftMenuViewController: UIViewController, UITableViewDelegate, UITa
     override public func viewDidLoad() {
         super.viewDidLoad()
 
-        let frameht = self.view.frame.size.height, tvht = CGFloat(54 * 12)
+        let frameht = self.view.frame.size.height, tvht = CGFloat(54 * 13)
         let tableView = UITableView(frame: CGRect(x: 0, y: max(0, (frameht - tvht) / 2.0), width: self.view.frame.size.width, height: min(frameht, tvht)), style: .plain)
         tableView.autoresizingMask = [.flexibleTopMargin, .flexibleBottomMargin, .flexibleWidth]
         tableView.delegate = self
@@ -41,6 +41,7 @@ public class LeftMenuViewController: UIViewController, UITableViewDelegate, UITa
         storyboardPhrases = UIStoryboard(name: "Phrases", bundle: nil)
         storyboardPatterns = UIStoryboard(name: "Patterns", bundle: nil)
         storyboardOnlineTextbooks = UIStoryboard(name: "OnlineTextbooks", bundle: nil)
+        storyboardBlogs = UIStoryboard(name: "Blogs", bundle: nil)
     }
 
     // MARK: - <UITableViewDelegate>
@@ -67,7 +68,7 @@ public class LeftMenuViewController: UIViewController, UITableViewDelegate, UITa
             self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboardPhrases.instantiateViewController(withIdentifier: "PhrasesReviewViewController")), animated: true)
             self.sideMenuViewController!.hideMenuViewController()
         case 6:
-        self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboardWords.instantiateViewController(withIdentifier: "WordsTextbookViewController")), animated: true)
+            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboardWords.instantiateViewController(withIdentifier: "WordsTextbookViewController")), animated: true)
             self.sideMenuViewController!.hideMenuViewController()
         case 7:
             self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboardPhrases.instantiateViewController(withIdentifier: "PhrasesTextbookViewController")), animated: true)
@@ -83,6 +84,9 @@ public class LeftMenuViewController: UIViewController, UITableViewDelegate, UITa
             self.sideMenuViewController!.hideMenuViewController()
         case 11:
             self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboardOnlineTextbooks.instantiateViewController(withIdentifier: "OnlineTextbooksViewController")), animated: true)
+            self.sideMenuViewController!.hideMenuViewController()
+        case 12:
+            self.sideMenuViewController!.setContentViewController(UINavigationController(rootViewController: storyboardBlogs.instantiateViewController(withIdentifier: "UnitBlogPostsViewController")), animated: true)
             self.sideMenuViewController!.hideMenuViewController()
         default:
             break
@@ -100,7 +104,7 @@ public class LeftMenuViewController: UIViewController, UITableViewDelegate, UITa
     }
 
     public func tableView(_ tableView: UITableView, numberOfRowsInSection sectionIndex: Int) -> Int {
-        12
+        13
     }
 
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -117,8 +121,8 @@ public class LeftMenuViewController: UIViewController, UITableViewDelegate, UITa
             cell!.selectedBackgroundView = UIView()
         }
 
-        let titles = ["Search", "Settings", "Words in Unit", "Phrases in Unit", "Words Review", "Phrases Review", "Words in Textbook", "Phrases in Textbook", "Words in Language", "Phrases in Language", "Patterns in Language", "Online Textbooks"]
-        let images = ["IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty"]
+        let titles = ["Search", "Settings", "Words in Unit", "Phrases in Unit", "Words Review", "Phrases Review", "Words in Textbook", "Phrases in Textbook", "Words in Language", "Phrases in Language", "Patterns in Language", "Online Textbooks", "Unit Blog Posts"]
+        let images = ["IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty", "IconEmpty"]
         cell!.textLabel?.text = titles[indexPath.row]
         cell!.imageView?.image = UIImage(named: images[indexPath.row])
 
