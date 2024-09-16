@@ -20,7 +20,7 @@ let titleWordsLang = "Words in Language"
 let titlePhrasesLang = "Phrases in Language"
 let titlePatternsLang = "Patterns in Language"
 let titleOnlineTextbooks = "Online Textbooks"
-let titleUnitBlog = "Unit Blog"
+let titleUnitBlogPosts = "Unit Blog Posts"
 
 // https://dev.classmethod.jp/articles/swiftui_overlay_sidemenu/
 struct SideMenuView: View {
@@ -58,7 +58,7 @@ struct SideMenuView: View {
                         SideMenuContentView(systemName: "ferry", title: titlePhrasesLang, bindTitle: $bindTitle, isOpen: $isOpen)
                         SideMenuContentView(systemName: "cablecar", title: titlePatternsLang, bindTitle: $bindTitle, isOpen: $isOpen)
                         SideMenuContentView(systemName: "box.truck.fill", title: titleOnlineTextbooks, bindTitle: $bindTitle, isOpen: $isOpen)
-                        SideMenuContentView(systemName: "sailboat.fill", title: titleUnitBlog, bindTitle: $bindTitle, isOpen: $isOpen)
+                        SideMenuContentView(systemName: "sailboat.fill", title: titleUnitBlogPosts, bindTitle: $bindTitle, isOpen: $isOpen)
                     }
                     Spacer()
                 }

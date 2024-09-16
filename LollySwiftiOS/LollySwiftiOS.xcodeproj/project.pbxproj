@@ -32,6 +32,10 @@
 		8C5F93F02C84853A00FC3D1C /* MOnlineTextbook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5F93EE2C84853A00FC3D1C /* MOnlineTextbook.swift */; };
 		8C5F93FD2C8A5DE300FC3D1C /* PatternsWebPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5F93FC2C8A5DE300FC3D1C /* PatternsWebPageViewModel.swift */; };
 		8C5F94012C8A6A8C00FC3D1C /* OnlineTextbooksWebPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C5F94002C8A6A8C00FC3D1C /* OnlineTextbooksWebPageViewModel.swift */; };
+		8C6BFCD22C97E2060094F927 /* BlogPostEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6BFCC92C97E2060094F927 /* BlogPostEditViewModel.swift */; };
+		8C6BFCD92C97E2060094F927 /* UnitBlogPostsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6BFCD02C97E2060094F927 /* UnitBlogPostsViewModel.swift */; };
+		8C6BFCDC2C9838000094F927 /* Blogs.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C6BFCDB2C9838000094F927 /* Blogs.storyboard */; };
+		8C6BFCDE2C983A4F0094F927 /* UnitBlogPostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6BFCDD2C983A4F0094F927 /* UnitBlogPostsViewController.swift */; };
 		8C7F009929525BA7009D6A90 /* Publisher+DidSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7F009629524EFC009D6A90 /* Publisher+DidSet.swift */; };
 		8C7F009A29525BA8009D6A90 /* Publisher+DidSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7F009629524EFC009D6A90 /* Publisher+DidSet.swift */; };
 		8CA47F202968EDC4006CF4A2 /* GlobalUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA47F1F2968EDC4006CF4A2 /* GlobalUser.swift */; };
@@ -219,6 +223,10 @@
 		8C5F93EE2C84853A00FC3D1C /* MOnlineTextbook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MOnlineTextbook.swift; sourceTree = "<group>"; };
 		8C5F93FC2C8A5DE300FC3D1C /* PatternsWebPageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatternsWebPageViewModel.swift; sourceTree = "<group>"; };
 		8C5F94002C8A6A8C00FC3D1C /* OnlineTextbooksWebPageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnlineTextbooksWebPageViewModel.swift; sourceTree = "<group>"; };
+		8C6BFCC92C97E2060094F927 /* BlogPostEditViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlogPostEditViewModel.swift; sourceTree = "<group>"; };
+		8C6BFCD02C97E2060094F927 /* UnitBlogPostsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitBlogPostsViewModel.swift; sourceTree = "<group>"; };
+		8C6BFCDB2C9838000094F927 /* Blogs.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Blogs.storyboard; sourceTree = "<group>"; };
+		8C6BFCDD2C983A4F0094F927 /* UnitBlogPostsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitBlogPostsViewController.swift; sourceTree = "<group>"; };
 		8C7F009629524EFC009D6A90 /* Publisher+DidSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+DidSet.swift"; sourceTree = "<group>"; };
 		8CA47F1F2968EDC4006CF4A2 /* GlobalUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalUser.swift; sourceTree = "<group>"; };
 		8CB025912096CB3E0087462E /* LeftMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftMenuViewController.swift; sourceTree = "<group>"; };
@@ -366,6 +374,7 @@
 		8C316571207676CF0015C247 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				8C6BFCD12C97E2060094F927 /* Blogs */,
 				95F0FFDA24C957AA00509DF3 /* Misc */,
 				95FCBE5625544A6E00859C1F /* Patterns */,
 				95F0FFD524C957AA00509DF3 /* Phrases */,
@@ -421,6 +430,24 @@
 				8C42B5B91D69A21E00DCB528 /* PhrasesUnitViewController.swift */,
 			);
 			path = Phrases;
+			sourceTree = "<group>";
+		};
+		8C6BFCD12C97E2060094F927 /* Blogs */ = {
+			isa = PBXGroup;
+			children = (
+				8C6BFCC92C97E2060094F927 /* BlogPostEditViewModel.swift */,
+				8C6BFCD02C97E2060094F927 /* UnitBlogPostsViewModel.swift */,
+			);
+			path = Blogs;
+			sourceTree = "<group>";
+		};
+		8C6BFCDA2C9837C90094F927 /* Blogs */ = {
+			isa = PBXGroup;
+			children = (
+				8C6BFCDB2C9838000094F927 /* Blogs.storyboard */,
+				8C6BFCDD2C983A4F0094F927 /* UnitBlogPostsViewController.swift */,
+			);
+			path = Blogs;
 			sourceTree = "<group>";
 		};
 		8CC3CBD12943A07D005670CC /* CombineCommon */ = {
@@ -542,6 +569,7 @@
 			isa = PBXGroup;
 			children = (
 				953473DA1A0D16CF00FF2D56 /* AppDelegate.swift */,
+				8C6BFCDA2C9837C90094F927 /* Blogs */,
 				953473E11A0D16CF00FF2D56 /* Images.xcassets */,
 				953473E31A0D16CF00FF2D56 /* LaunchScreen.xib */,
 				951BB9951A1B8D6C0087DB94 /* LollySwiftiOS-Bridging-Header.h */,
@@ -789,6 +817,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C6BFCDC2C9838000094F927 /* Blogs.storyboard in Resources */,
 				8CCFA65029B31F32004748B8 /* Misc.storyboard in Resources */,
 				951BB9941A1B803B0087DB94 /* Main.storyboard in Resources */,
 				953473E51A0D16CF00FF2D56 /* LaunchScreen.xib in Resources */,
@@ -898,6 +927,7 @@
 				95F0FFEC24C957AB00509DF3 /* PhrasesLangViewModel.swift in Sources */,
 				95F0FFE724C957AB00509DF3 /* SingleWordViewModel.swift in Sources */,
 				951504D4261FB7F900F94A6E /* LoginViewController.swift in Sources */,
+				8C6BFCD92C97E2060094F927 /* UnitBlogPostsViewModel.swift in Sources */,
 				8CD16D201D69FE8F00F5F625 /* PhrasesLangDetailViewController.swift in Sources */,
 				95F0FFEF24C957AB00509DF3 /* SettingsViewModel.swift in Sources */,
 				95919254258D004F0070DBFD /* MLangPhrase.swift in Sources */,
@@ -926,6 +956,7 @@
 				9591924A258D004F0070DBFD /* MUserSetting.swift in Sources */,
 				95FDF62A228D5D6C003DFB1A /* WordsUnitBatchEditViewController.swift in Sources */,
 				9591924E258D004F0070DBFD /* MTextbook.swift in Sources */,
+				8C6BFCDE2C983A4F0094F927 /* UnitBlogPostsViewController.swift in Sources */,
 				951F7F6825EEA2F90051E94E /* PhrasesUnitBatchEditViewModel.swift in Sources */,
 				95F0FFEA24C957AB00509DF3 /* SinglePhraseViewModel.swift in Sources */,
 				95CED3CA2216C5B20094622F /* WordsTextbookDetailViewController.swift in Sources */,
@@ -933,6 +964,7 @@
 				95AA19662295081F003620A2 /* PhrasesReviewViewController.swift in Sources */,
 				95CED3C32215A2270094622F /* PhrasesTextbookViewController.swift in Sources */,
 				9587EBF42583435B00777AEE /* PatternsDetailViewController.swift in Sources */,
+				8C6BFCD22C97E2060094F927 /* BlogPostEditViewModel.swift in Sources */,
 				8CF294AB2A8ECDAF00E8D195 /* MLangBlogGP.swift in Sources */,
 				8C42B5BC1D69A21E00DCB528 /* PhrasesUnitViewController.swift in Sources */,
 				95919256258D004F0070DBFD /* MUnitPhrase.swift in Sources */,

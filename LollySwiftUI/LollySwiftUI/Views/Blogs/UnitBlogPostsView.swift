@@ -1,5 +1,5 @@
 //
-//  UnitBlogView.swift
+//  UnitBlogPostsView.swift
 //  LollySwiftUI
 //
 //  Created by 趙偉 on 2024/09/06.
@@ -7,12 +7,13 @@
 
 import SwiftUI
 
-struct UnitBlogView: View {
+struct UnitBlogPostsView: View {
     @Binding var navPath: NavigationPath
-    @ObservedObject var vm = UnitBlogViewModel(settings: vmSettings, needCopy: false) {}
+    @ObservedObject var vm = UnitBlogPostsViewModel(settings: vmSettings, needCopy: false) {}
     @State var webViewStore = WebViewStore()
     var body: some View {
         VStack(spacing: 0) {
+            Spacer()
             Picker("Unit", selection: $vm.currentUnitIndex) {
                 ForEach(vm.arrUnits.indices, id: \.self) {
                     Text(vm.arrUnits[$0].label)
