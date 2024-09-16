@@ -589,10 +589,13 @@ class SettingsViewModel: NSObject {
         return o
     }
 
-    func getBlogContent() -> Single<String> {
-        MUnitBlogPost.getDataByTextbook(selectedTextbook.ID, unit: selectedUnitTo).map {
+    func getBlogContent(unit: Int) -> Single<String> {
+        MUnitBlogPost.getDataByTextbook(selectedTextbook.ID, unit: unit).map {
             $0?.CONTENT ?? ""
         }
+    }
+    func getBlogContent() -> Single<String> {
+        getBlogContent(unit: selectedUnitTo)
     }
     func saveBlogContent(content: String) -> Single<()> {
         MUnitBlogPost.update(selectedTextbook.ID, unit: selectedUnitTo, content: content)

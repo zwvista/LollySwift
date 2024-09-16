@@ -72,7 +72,7 @@ class BlogPostEditViewModel: NSObject {
             }
             i += 1
         }
-        return arr.joined(separator: "\n")
+        return CommonApi.toHtml(text: arr.joined(separator: "\n"))
     }
 
     private static let regLine = #/<div>(.*?)</div>/#
