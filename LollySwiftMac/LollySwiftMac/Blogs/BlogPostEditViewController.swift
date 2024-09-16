@@ -85,8 +85,7 @@ class BlogPostEditViewController: NSViewController, NSMenuItemValidation  {
     }
     func markedToHtml() {
         tvHtml.string = BlogPostEditViewModel.markedToHtml(text: tvMarked.string)
-        let str = CommonApi.toHtml(text: tvHtml.string)
-        wvPost.loadHTMLString(str, baseURL: nil)
+        wvPost.loadHTMLString(tvHtml.string, baseURL: nil)
     }
     @IBAction func openPattern(_ sender: AnyObject) {
         let url = BlogPostEditViewModel.getPatternUrl(patternNo: wc.patternNo)

@@ -601,8 +601,11 @@ class SettingsViewModel: NSObject, ObservableObject {
         }
     }
 
+    func getBlogContent(unit: Int) async -> String {
+        (await MUnitBlogPost.getDataByTextbook(selectedTextbook.ID, unit: unit))?.CONTENT ?? ""
+    }
     func getBlogContent() async -> String {
-        (await MUnitBlogPost.getDataByTextbook(selectedTextbook.ID, unit: selectedUnitTo))?.CONTENT ?? ""
+        await getBlogContent(unit: selectedUnitTo)
     }
     func saveBlogContent(content: String) async {
         await MUnitBlogPost.update(selectedTextbook.ID, unit: selectedUnitTo, content: content)
