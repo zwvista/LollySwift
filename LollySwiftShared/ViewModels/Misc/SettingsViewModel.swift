@@ -171,11 +171,11 @@ class SettingsViewModel: NSObject, ObservableObject {
     @Published var nextTitle = ""
     @Published var partFromEnabled = false
 
-    static let arrToTypes = ["Unit", "Part", "To"]
-    static let arrScopeWordFilters = ["Word", "Note"]
-    static let arrScopePhraseFilters = ["Phrase", "Translation"]
-    static let arrScopePatternFilters = ["Pattern", "Tags"]
-    static let reviewModes = ["Review(Auto)", "Review(Manual)", "Test", "Textbook"]
+    nonisolated static let arrToTypes = ["Unit", "Part", "To"]
+    nonisolated static let arrScopeWordFilters = ["Word", "Note"]
+    nonisolated static let arrScopePhraseFilters = ["Phrase", "Translation"]
+    nonisolated static let arrScopePatternFilters = ["Pattern", "Tags"]
+    nonisolated static let reviewModes = ["Review(Auto)", "Review(Manual)", "Test", "Textbook"]
 
     var arrAutoCorrect = [MAutoCorrect]()
     var arrDictTypes = [MCode]()
