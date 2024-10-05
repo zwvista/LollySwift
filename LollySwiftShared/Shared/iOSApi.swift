@@ -13,7 +13,7 @@ class iOSApi {
         UIPasteboard.general.string = text
     }
 
-    static func googleString(_ str: String) {
+    @MainActor static func googleString(_ str: String) {
         UIApplication.shared.open(URL(string: "https://www.google.com/search?q=\(str.urlEncoded())")!)
     }
 }

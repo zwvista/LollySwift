@@ -37,19 +37,19 @@ public class RootViewController: AKSideMenu, AKSideMenuDelegate {
 
     // MARK: - <AKSideMenuDelegate>
 
-    public func sideMenu(_ sideMenu: AKSideMenu, willShowMenuViewController menuViewController: UIViewController) {
+    nonisolated public func sideMenu(_ sideMenu: AKSideMenu, willShowMenuViewController menuViewController: UIViewController) {
 //        print("willShowMenuViewController")
     }
 
-    public func sideMenu(_ sideMenu: AKSideMenu, didShowMenuViewController menuViewController: UIViewController) {
+    nonisolated public func sideMenu(_ sideMenu: AKSideMenu, didShowMenuViewController menuViewController: UIViewController) {
 //        print("didShowMenuViewController")
     }
 
-    public func sideMenu(_ sideMenu: AKSideMenu, willHideMenuViewController menuViewController: UIViewController) {
+    nonisolated public func sideMenu(_ sideMenu: AKSideMenu, willHideMenuViewController menuViewController: UIViewController) {
 //        print("willHideMenuViewController")
     }
 
-    public func sideMenu(_ sideMenu: AKSideMenu, didHideMenuViewController menuViewController: UIViewController) {
+    nonisolated public func sideMenu(_ sideMenu: AKSideMenu, didHideMenuViewController menuViewController: UIViewController) {
 //        print("didHideMenuViewController")
     }
 }

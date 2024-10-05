@@ -31,7 +31,7 @@ class DictStore: NSObject {
         self.wvDict = wvDict
     }
 
-    func searchDict() {
+    @MainActor func searchDict() {
         guard vmSettings != nil else {return}
         url = dict.urlString(word: word, arrAutoCorrect: vmSettings.arrAutoCorrect)
         dictStatus = .ready
@@ -52,7 +52,7 @@ class DictStore: NSObject {
         }
     }
 
-    func onNavigationFinished() {
+    @MainActor func onNavigationFinished() {
         //        guard webView.stringByEvaluatingJavaScript(from: "document.readyState") == "complete" && status == .navigating else {return}
         guard dictStatus != .ready else {return}
         switch dictStatus {

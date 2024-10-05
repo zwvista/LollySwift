@@ -423,7 +423,7 @@ class SettingsViewModel: NSObject {
         return MUserSettingInfo(USERSETTINGID: o2.ID, VALUEID: o.VALUEID)
     }
 
-    func getData() -> Single<()> {
+    @MainActor func getData() -> Single<()> {
         selectedLangIndex = -1
         return Single.zip(MLanguage.getData(),
                           MUSMapping.getData(),

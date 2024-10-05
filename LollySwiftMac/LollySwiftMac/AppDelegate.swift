@@ -16,7 +16,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     static let theSettingsViewModel = SettingsViewModel()
     let synth = NSSpeechSynthesizer()
 
-    func setup() {
+    @MainActor func setup() {
         AppDelegate.theSettingsViewModel.getData().subscribe() ~ rx.disposeBag
     }
 

@@ -6,16 +6,19 @@
 //  Copyright © 2015 Krunoslav Zaher. All rights reserved.
 //
 
-#if os(iOS) || os(tvOS)
+#if os(iOS) || os(tvOS) || os(visionOS)
 
 import RxSwift
+import UIKit
 
 extension Reactive where Base: UILabel {
 
     /// Bindable sink for `enabled` property.
     public var isEnabled: Binder<Bool>  {
-        return Binder(self.base) { owner, value in
-            owner.isEnabled = value
+        Binder(self.base) { owner, value in
+            Task { @MainActor in
+                owner.isEnabled = value
+            }
         }
     }
 }

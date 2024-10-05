@@ -38,10 +38,10 @@ class BlogPostEditViewModel: NSObject {
     private static func htmlE2With(_ s: String) -> String { html2With(s) }
     private static func htmlIWith(_ s: String) -> String { "<strong>\(html2With(s))</strong>" }
     private static let htmlEmptyLine = "<div><br></div>"
-    private static let regMarkedEntry = /(\*\*?)\s*(.*?)：(.*?)：(.*)/
-    private static let regMarkedB = #/<B>(.+?)</B>/#
-    private static let regMarkedI = #/<I>(.+?)</I>/#
-    static func markedToHtml(text: String) -> String {
+    @MainActor private static let regMarkedEntry = /(\*\*?)\s*(.*?)：(.*?)：(.*)/
+    @MainActor private static let regMarkedB = #/<B>(.+?)</B>/#
+    @MainActor private static let regMarkedI = #/<I>(.+?)</I>/#
+    @MainActor static func markedToHtml(text: String) -> String {
         var arr = text.components(separatedBy: "\n")
         var i = 0
         while i < arr.count {
@@ -75,11 +75,11 @@ class BlogPostEditViewModel: NSObject {
         return CommonApi.toHtml(text: arr.joined(separator: "\n"))
     }
 
-    private static let regLine = #/<div>(.*?)</div>/#
+    @MainActor private static let regLine = #/<div>(.*?)</div>/#
     private static var regHtmlB: Regex<(Substring, Substring)> { try! Regex(htmlBWith("(.+?)")) }
     private static var regHtmlI: Regex<(Substring, Substring)> { try! Regex(htmlIWith("(.+?)")) }
     private static var regHtmlEntry: Regex<(Substring, Substring, Substring, Optional<Substring>, Optional<Substring>)> { try!  Regex("(<li>|<br>)\(htmlWordWith("(.*?)"))(?:\(htmlE1With("(.*?)")))?(?:\(htmlE2With("(.*?)")))?(?:</li>)?") }
-    static func htmlToMarked(text: String) -> String {
+    @MainActor static func htmlToMarked(text: String) -> String {
         var arr = text.split(separator: "\n").map { String($0) }
         var i = 0
         while i < arr.count {
@@ -126,7 +126,7 @@ class BlogPostEditViewModel: NSObject {
         "http://viethuong.web.fc2.com/MONDAI/\(patternNo).html"
     }
     
-    func addNotes(text: String, complete: @escaping (String) -> Void) {
+    @MainActor func addNotes(text: String, complete: @escaping (String) -> Void) {
         func f(_ s: String) -> String {
             var t = s
             for i in 0...9 {

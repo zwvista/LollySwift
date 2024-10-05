@@ -88,7 +88,9 @@ extension NSObject: Then {}
 extension Array: Then {}
 extension Dictionary: Then {}
 extension Set: Then {}
+@available(macOS 10.10, *)
 extension JSONDecoder: Then {}
+@available(macOS 10.10, *)
 extension JSONEncoder: Then {}
 
 #if os(iOS) || os(tvOS)

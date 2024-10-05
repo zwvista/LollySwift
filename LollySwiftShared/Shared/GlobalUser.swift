@@ -24,4 +24,4 @@ class GlobalUser {
         userid = ""
     }
 }
-let globalUser = GlobalUser()
+@MainActor let globalUser = GlobalUser()

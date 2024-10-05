@@ -11,7 +11,7 @@ import RxSwift
 import AVFoundation
 import NSObject_Rx
 
-@UIApplicationMain
+@main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
@@ -53,4 +53,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
-let vmSettings = SettingsViewModel()
+@MainActor let vmSettings = SettingsViewModel()

@@ -10,11 +10,13 @@ import Foundation
 import RxSwift
 
 @objcMembers
-class MSelectItem: NSObject {
-    var value = 0
-    var label = ""
+final class MSelectItem: NSObject, Sendable {
+    let value: Int
+    let label: String
 
     override init() {
+        value = 0
+        label = ""
         super.init()
     }
 

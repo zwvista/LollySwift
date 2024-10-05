@@ -4,7 +4,7 @@ source 'https://cdn.cocoapods.org/'
 use_frameworks!
 
 target 'LollySwiftiOS' do
-platform :ios, '16.0'
+platform :ios, '18.0'
 project 'LollySwiftiOS/LollySwiftiOS'
 pod 'CodableAlamofire', :git => 'https://github.com/zwvista/CodableAlamofire'
 pod 'RxAlamofire', '~> 6'
@@ -16,7 +16,7 @@ pod 'Then'
 end
 
 target 'LollySwiftiOSTests' do
-platform :ios, '16.0'
+platform :ios, '18.0'
 project 'LollySwiftiOS/LollySwiftiOS'
 pod 'CodableAlamofire', :git => 'https://github.com/zwvista/CodableAlamofire'
 pod 'RxAlamofire', '~> 6'
@@ -27,7 +27,7 @@ pod 'Then'
 end
 
 target 'LollySwiftMac' do
-platform :osx, '13.0'
+platform :osx, '15.0'
 project 'LollySwiftMac/LollySwiftMac'
 pod 'CodableAlamofire', :git => 'https://github.com/zwvista/CodableAlamofire'
 pod 'RxAlamofire', '~> 6'
@@ -37,7 +37,7 @@ pod 'Then'
 end
 
 target 'LollySwiftMacTests' do
-platform :osx, '13.0'
+platform :osx, '15.0'
 project 'LollySwiftMac/LollySwiftMac'
 pod 'CodableAlamofire', :git => 'https://github.com/zwvista/CodableAlamofire'
 pod 'RxAlamofire', '~> 6'
