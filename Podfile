@@ -39,18 +39,3 @@ platform :ios, '16.0'
 project 'LollySwiftUI/LollySwiftUI'
 pod 'Then'
 end
-
-post_install do |installer|
-  xcode_version = `xcodebuild -version | grep 'Xcode' | awk '{print $2}'`
-
-  installer.pods_project.targets.each do |target|
-    target.build_configurations.each do |config|
-      if xcode_version.strip == '15.0'
-        xcconfig_path = config.base_configuration_reference.real_path
-        xcconfig = File.read(xcconfig_path)
-        xcconfig_mod = xcconfig.gsub(/DT_TOOLCHAIN_DIR/, "TOOLCHAIN_DIR")
-        File.open(xcconfig_path, "w") { |file| file << xcconfig_mod }
-      end
-    end
-  end
-end
