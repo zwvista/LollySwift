@@ -9,7 +9,7 @@
 import Foundation
 
 @objcMembers
-class MLangBlogGroups: HasRecords {
+class MLangBlogGroups: HasRecords, @unchecked Sendable {
     typealias RecordType = MLangBlogGroup
     dynamic var records = [MLangBlogGroup]()
 }

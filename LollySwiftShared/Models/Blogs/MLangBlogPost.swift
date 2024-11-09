@@ -9,7 +9,7 @@
 import Foundation
 
 @objcMembers
-class MLangBlogPosts: HasRecords {
+class MLangBlogPosts: HasRecords, @unchecked Sendable {
     typealias RecordType = MLangBlogPost
     dynamic var records = [MLangBlogPost]()
 }
@@ -66,7 +66,7 @@ class MLangBlogPost: NSObject, Codable, @unchecked Sendable {
 }
 
 @objcMembers
-class MLangBlogPostsContent: HasRecords {
+class MLangBlogPostsContent: HasRecords, @unchecked Sendable {
     typealias RecordType = MLangBlogPostContent
     dynamic var records = [MLangBlogPostContent]()
 }

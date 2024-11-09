@@ -9,7 +9,7 @@
 import Foundation
 
 @objcMembers
-class MVoices: HasRecords {
+class MVoices: HasRecords, @unchecked Sendable {
     typealias RecordType = MVoice
     dynamic var records = [MVoice]()
 }

@@ -9,7 +9,7 @@
 import Foundation
 
 @objcMembers
-class MDictionaries: HasRecords {
+class MDictionaries: HasRecords, @unchecked Sendable {
     typealias RecordType = MDictionary
     dynamic var records = [MDictionary]()
 }

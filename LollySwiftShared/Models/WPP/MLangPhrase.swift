@@ -9,7 +9,7 @@
 import Foundation
 
 @objcMembers
-class MLangPhrases: HasRecords {
+class MLangPhrases: HasRecords, @unchecked Sendable {
     typealias RecordType = MLangPhrase
     dynamic var records = [MLangPhrase]()
 }

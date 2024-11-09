@@ -38,14 +38,14 @@ extension Encodable {
 
 }
 
-protocol HasRecords: Decodable {
+protocol HasRecords: Decodable, Sendable {
     associatedtype RecordType
     var records: [RecordType] { get set }
 }
 
 class RestApi {
 
-    static func getObject<T: Decodable>(url: String) async -> T {
+    static func getObject<T: Decodable & Sendable>(url: String) async -> T {
         try! await AF.request(url).serializingDecodable(T.self).value
     }
     static func getRecords<T: HasRecords>(_ t: T.Type, url: String) async -> [T.RecordType] {

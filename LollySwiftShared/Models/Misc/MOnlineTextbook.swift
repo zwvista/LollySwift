@@ -9,7 +9,7 @@
 import Foundation
 
 @objcMembers
-class MOnlineTextbooks: HasRecords {
+class MOnlineTextbooks: HasRecords, @unchecked Sendable {
     typealias RecordType = MOnlineTextbook
     dynamic var records = [MOnlineTextbook]()
 }

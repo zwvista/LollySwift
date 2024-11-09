@@ -9,7 +9,7 @@
 import Foundation
 
 @objcMembers
-class MUSMappings: HasRecords {
+class MUSMappings: HasRecords, @unchecked Sendable {
     typealias RecordType = MUSMapping
     dynamic var records = [MUSMapping]()
 }

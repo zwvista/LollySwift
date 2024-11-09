@@ -25,7 +25,7 @@ class MSelectItem: NSObject {
 }
 
 @objcMembers
-class MCodes: HasRecords {
+class MCodes: HasRecords, @unchecked Sendable {
     typealias RecordType = MCode
     dynamic var records = [MCode]()
 }
@@ -41,7 +41,7 @@ class MCode: NSObject, Codable, @unchecked Sendable {
     }
 }
 
-class MSPResult: NSObject, Codable {
+class MSPResult: NSObject, Codable, @unchecked Sendable {
     var NEW_ID: String?
     var result = ""
 

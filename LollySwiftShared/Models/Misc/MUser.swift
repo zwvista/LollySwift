@@ -9,7 +9,7 @@
 import Foundation
 
 @objcMembers
-class MUsers: HasRecords {
+class MUsers: HasRecords, @unchecked Sendable {
     typealias RecordType = MUser
     dynamic var records = [MUser]()
 }

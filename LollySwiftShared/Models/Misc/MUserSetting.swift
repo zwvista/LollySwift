@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 @objcMembers
-class MUserSettings: HasRecords {
+class MUserSettings: HasRecords, @unchecked Sendable {
     typealias RecordType = MUserSetting
     dynamic var records = [MUserSetting]()
 }

@@ -9,7 +9,7 @@
 import Foundation
 
 @objcMembers
-class MUnitPhrases: HasRecords {
+class MUnitPhrases: HasRecords, @unchecked Sendable {
     typealias RecordType = MUnitPhrase
     dynamic var records = [MUnitPhrase]()
 }

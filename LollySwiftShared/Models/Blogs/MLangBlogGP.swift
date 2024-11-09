@@ -9,7 +9,7 @@
 import Foundation
 
 @objcMembers
-class MLangBlogGPs: HasRecords {
+class MLangBlogGPs: HasRecords, @unchecked Sendable {
     typealias RecordType = MLangBlogGP
     dynamic var records = [MLangBlogGP]()
 }

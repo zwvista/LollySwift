@@ -24,7 +24,7 @@ protocol MPhraseProtocol {
 }
 
 @objcMembers
-class MWordPhrases: HasRecords {
+class MWordPhrases: HasRecords, @unchecked Sendable {
     typealias RecordType = MWordPhrase
     dynamic var records = [MWordPhrase]()
 }

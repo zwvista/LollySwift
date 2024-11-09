@@ -9,7 +9,7 @@
 import Foundation
 
 @objcMembers
-class MPatterns: HasRecords {
+class MPatterns: HasRecords, @unchecked Sendable {
     typealias RecordType = MPattern
     dynamic var records = [MPattern]()
 }

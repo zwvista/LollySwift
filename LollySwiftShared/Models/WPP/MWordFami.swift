@@ -9,7 +9,7 @@
 import Foundation
 
 @objcMembers
-class MWordFamis: HasRecords {
+class MWordFamis: HasRecords, @unchecked Sendable {
     typealias RecordType = MWordFami
     dynamic var records = [MWordFami]()
 }

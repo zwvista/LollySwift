@@ -9,7 +9,7 @@
 import Foundation
 
 @objcMembers
-class MAutoCorrects: HasRecords {
+class MAutoCorrects: HasRecords, @unchecked Sendable {
     typealias RecordType = MAutoCorrect
     dynamic var records = [MAutoCorrect]()
 }
