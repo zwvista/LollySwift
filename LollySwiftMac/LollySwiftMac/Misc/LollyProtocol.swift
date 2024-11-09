@@ -8,6 +8,7 @@
 
 import Foundation
 
+@MainActor
 protocol LollyProtocol {
     func settingsChanged()
 }

@@ -16,7 +16,8 @@ public extension Combine.Publishers {
     /// A Control Property is a publisher that emits the value at the provided keypath
     /// whenever the specific control events are triggered. It also emits the keypath's
     /// initial value upon subscription.
-    struct ControlProperty<Control: NSControl, Value>: Publisher {
+    @MainActor
+    struct ControlProperty<Control: NSControl, Value>: @preconcurrency Publisher {
         public typealias Output = Value
         public typealias Failure = Never
 
@@ -46,7 +47,8 @@ public extension Combine.Publishers {
 
 // MARK: - Subscription
 extension Combine.Publishers.ControlProperty {
-    private final class Subscription<S: Subscriber, SControl: NSControl, SValue>: Combine.Subscription where S.Input == SValue {
+    @MainActor
+    private final class Subscription<S: Subscriber, SControl: NSControl, SValue>: @preconcurrency Combine.Subscription where S.Input == SValue {
         private var subscriber: S?
         weak private var control: SControl?
         let keyPath: KeyPath<SControl, SValue>

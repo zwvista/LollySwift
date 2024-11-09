@@ -9,7 +9,8 @@
 import Cocoa
 import Combine
 
-@NSApplicationMain
+@main
+@MainActor
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     @MainActor

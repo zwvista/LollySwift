@@ -15,7 +15,7 @@ class MLangBlogPosts: HasRecords {
 }
 
 @objcMembers
-class MLangBlogPost: NSObject, Codable {
+class MLangBlogPost: NSObject, Codable, @unchecked Sendable {
     dynamic var ID = 0
     dynamic var LANGID = 0
     dynamic var TITLE = ""

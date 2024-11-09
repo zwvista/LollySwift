@@ -9,8 +9,9 @@
 #if !(os(iOS) && (arch(i386) || arch(arm)))
 import Foundation
 
-private var associatedKey = "delegateProxy"
+@MainActor private var associatedKey = "delegateProxy"
 
+@MainActor
 public protocol DelegateProxyType {
     associatedtype Object
 
@@ -18,6 +19,7 @@ public protocol DelegateProxyType {
 }
 
 @available(OSX 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
+@MainActor
 public extension DelegateProxyType where Self: DelegateProxy {
     static func createDelegateProxy(for object: Object) -> Self {
         objc_sync_enter(self)

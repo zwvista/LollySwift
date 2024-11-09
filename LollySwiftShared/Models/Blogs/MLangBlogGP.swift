@@ -15,7 +15,7 @@ class MLangBlogGPs: HasRecords {
 }
 
 @objcMembers
-class MLangBlogGP: NSObject, Codable {
+class MLangBlogGP: NSObject, Codable, @unchecked Sendable {
     dynamic var ID = 0
     dynamic var LANGID = 0
     dynamic var GROUPID = 0

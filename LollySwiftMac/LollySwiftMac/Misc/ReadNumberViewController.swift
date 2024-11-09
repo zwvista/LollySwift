@@ -20,7 +20,9 @@ class ReadNumberViewController: NSViewController, NSTextFieldDelegate {
         super.viewDidLoad()
         vm = ReadNumberViewModel()
         _observers.append(observe(\.vm.text, options: .new){ [unowned self] _,change in
-            tfText.stringValue = change.newValue!
+            Task { @MainActor in
+                tfText.stringValue = change.newValue!
+            }
         })
     }
 
