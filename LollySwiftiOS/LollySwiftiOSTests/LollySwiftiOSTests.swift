@@ -10,6 +10,7 @@ import UIKit
 import XCTest
 import RxBinding
 
+@MainActor
 class LollySwiftiOSTests: XCTestCase {
 
     override func setUp() {

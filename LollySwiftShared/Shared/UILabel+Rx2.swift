@@ -11,14 +11,13 @@
 import RxSwift
 import UIKit
 
+@MainActor
 extension Reactive where Base: UILabel {
 
     /// Bindable sink for `enabled` property.
     public var isEnabled: Binder<Bool>  {
         Binder(self.base) { owner, value in
-            Task { @MainActor in
-                owner.isEnabled = value
-            }
+            owner.isEnabled = value
         }
     }
 }
