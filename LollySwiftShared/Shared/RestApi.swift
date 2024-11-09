@@ -39,7 +39,7 @@ extension Encodable {
 }
 
 protocol HasRecords: Decodable, Sendable {
-    associatedtype RecordType
+    associatedtype RecordType: Sendable
     var records: [RecordType] { get set }
 }
 

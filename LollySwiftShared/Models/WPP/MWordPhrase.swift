@@ -30,7 +30,7 @@ class MWordPhrases: HasRecords, @unchecked Sendable {
 }
 
 @objcMembers
-class MWordPhrase: NSObject, Codable {
+class MWordPhrase: NSObject, Codable, @unchecked Sendable {
     dynamic var ID = 0
     dynamic var WORDID = 0
     dynamic var PHRASEID = 0
