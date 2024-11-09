@@ -15,7 +15,7 @@ class MWordFamis: HasRecords {
 }
 
 @objcMembers
-class MWordFami: NSObject, Codable {
+class MWordFami: NSObject, Codable, @unchecked Sendable {
     dynamic var ID = 0
     dynamic var USERID = ""
     dynamic var WORDID = 0

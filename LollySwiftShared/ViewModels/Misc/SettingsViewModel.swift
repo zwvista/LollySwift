@@ -213,12 +213,14 @@ class SettingsViewModel: NSObject, ObservableObject {
             INFO_USIOSVOICE = getUSInfo(name: MUSMapping.NAME_USIOSVOICE)
             arrTextbookFilters = [SettingsViewModel.allBooksTextbookFilter]
             arrOnlineTextbookFilters = [SettingsViewModel.allBooksTextbookFilter]
-            async let res1 = MDictionary.getDictsReferenceByLang(USLANG)
-            async let res2 = MDictionary.getDictsNoteByLang(USLANG)
-            async let res3 = MDictionary.getDictsTranslationByLang(USLANG)
-            async let res4 = MTextbook.getDataByLang(USLANG, arrUserSettings: arrUserSettings)
-            async let res5 = MAutoCorrect.getDataByLang(USLANG)
-            async let res6 = MVoice.getDataByLang(USLANG)
+            let uslang = USLANG
+            let arrUserSettings = arrUserSettings
+            async let res1 = MDictionary.getDictsReferenceByLang(uslang)
+            async let res2 = MDictionary.getDictsNoteByLang(uslang)
+            async let res3 = MDictionary.getDictsTranslationByLang(uslang)
+            async let res4 = MTextbook.getDataByLang(uslang, arrUserSettings: arrUserSettings)
+            async let res5 = MAutoCorrect.getDataByLang(uslang)
+            async let res6 = MVoice.getDataByLang(uslang)
             let arrVoices: [MVoice]
             (arrDictsReference, arrDictsNote, arrDictsTranslation, arrTextbooks, arrAutoCorrect, arrVoices) = await (res1, res2, res3, res4, res5, res6)
             selectedDictsReferenceIndexes = USDICTSREFERENCE.split(separator: ",").compactMap { id in arrDictsReference.firstIndex { String($0.DICTID) == id } }
@@ -585,7 +587,7 @@ class SettingsViewModel: NSObject, ObservableObject {
         }
     }
 
-    func clearNotes(wordCount: Int, isNoteEmpty: @escaping (Int) -> Bool, getOne: @escaping (Int) async -> Void) async {
+    func clearNotes(wordCount: Int, isNoteEmpty: @escaping (Int) -> Bool, getOne: @MainActor @escaping (Int) async -> Void) async {
         await withTaskGroup(of: Void.self) {
             var i = 0
             while i < wordCount {

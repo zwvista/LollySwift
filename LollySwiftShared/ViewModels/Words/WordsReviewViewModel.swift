@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Combine
+@preconcurrency import Combine
 
 @MainActor
 class WordsReviewViewModel: WordsBaseViewModel {
@@ -214,6 +214,6 @@ class WordsReviewViewModel: WordsBaseViewModel {
 
     deinit {
         print("DEBUG: \(className) deinit")
-        subscriptionTimer?.cancel()
+//        subscriptionTimer?.cancel()
     }
 }

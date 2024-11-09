@@ -15,7 +15,7 @@ class MLangPhrases: HasRecords {
 }
 
 @objcMembers
-class MLangPhrase: NSObject, Codable, MPhraseProtocol {
+class MLangPhrase: NSObject, Codable, MPhraseProtocol, @unchecked Sendable {
     dynamic var ID = 0
     dynamic var PHRASEID: Int { ID }
     dynamic var LANGID = 0

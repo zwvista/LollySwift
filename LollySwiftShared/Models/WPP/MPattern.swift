@@ -15,7 +15,7 @@ class MPatterns: HasRecords {
 }
 
 @objcMembers
-class MPattern: NSObject, Codable {
+class MPattern: NSObject, Codable, @unchecked Sendable {
     dynamic var ID = 0
     dynamic var LANGID = 0
     dynamic var PATTERN = ""

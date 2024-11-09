@@ -15,7 +15,7 @@ class MUnitBlogPosts: HasRecords {
 }
 
 @objcMembers
-class MUnitBlogPost: NSObject, Codable {
+class MUnitBlogPost: NSObject, Codable, @unchecked Sendable {
     dynamic var ID = 0
     dynamic var TEXTBOOKID = 0
     dynamic var UNIT = 0

@@ -16,7 +16,7 @@ class MUserSettings: HasRecords {
 }
 
 @objcMembers
-class MUserSetting: NSObject, Codable {
+class MUserSetting: NSObject, Codable, @unchecked Sendable {
     dynamic var ID = 0
     dynamic var USERID = ""
     dynamic var KIND = 0

@@ -15,7 +15,7 @@ class MAutoCorrects: HasRecords {
 }
 
 @objcMembers
-class MAutoCorrect: Codable {
+class MAutoCorrect: Codable, @unchecked Sendable {
     dynamic var ID = 0
     dynamic var LANGID = 0
     dynamic var SEQNUM = 0

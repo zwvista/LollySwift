@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Combine
+@preconcurrency import Combine
 
 @MainActor
 class PhrasesReviewViewModel: NSObject, ObservableObject {
@@ -168,6 +168,6 @@ class PhrasesReviewViewModel: NSObject, ObservableObject {
 
     deinit {
         print("DEBUG: \(className) deinit")
-        subscriptionTimer?.cancel()
+//        subscriptionTimer?.cancel()
     }
 }

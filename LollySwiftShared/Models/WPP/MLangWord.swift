@@ -15,7 +15,7 @@ class MLangWords: HasRecords {
 }
 
 @objcMembers
-class MLangWord: NSObject, Codable, MWordProtocol {
+class MLangWord: NSObject, Codable, MWordProtocol, @unchecked Sendable {
     dynamic var ID = 0
     dynamic var LANGID = 0
     dynamic var WORDID: Int { ID }

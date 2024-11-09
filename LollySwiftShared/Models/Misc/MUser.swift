@@ -15,7 +15,7 @@ class MUsers: HasRecords {
 }
 
 @objcMembers
-class MUser: NSObject, Codable {
+class MUser: NSObject, Codable, @unchecked Sendable {
     dynamic var ID = 0
     dynamic var USERID = ""
     dynamic var USERNAME = ""

@@ -15,7 +15,7 @@ class MVoices: HasRecords {
 }
 
 @objcMembers
-class MVoice: NSObject, Codable {
+class MVoice: NSObject, Codable, @unchecked Sendable {
     dynamic var ID = 0
     dynamic var LANGID = 0
     dynamic var VOICETYPEID = 0

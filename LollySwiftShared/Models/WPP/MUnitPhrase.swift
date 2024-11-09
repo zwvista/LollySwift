@@ -15,7 +15,7 @@ class MUnitPhrases: HasRecords {
 }
 
 @objcMembers
-class MUnitPhrase: NSObject, Codable, MPhraseProtocol {
+class MUnitPhrase: NSObject, Codable, MPhraseProtocol, @unchecked Sendable {
     dynamic var ID = 0
     dynamic var LANGID = 0
     dynamic var TEXTBOOKID = 0

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class GlobalUser: ObservableObject {
+class GlobalUser: ObservableObject, @unchecked Sendable {
     @Published var userid = ""
     var username = ""
 

@@ -72,7 +72,7 @@ class MLangBlogPostsContent: HasRecords {
 }
 
 @objcMembers
-class MLangBlogPostContent: NSObject, Codable {
+class MLangBlogPostContent: NSObject, Codable, @unchecked Sendable {
     dynamic var ID = 0
     dynamic var TITLE = ""
     dynamic var CONTENT: String? = ""

@@ -15,7 +15,7 @@ class MLanguages: HasRecords {
 }
 
 @objcMembers
-class MLanguage: NSObject, Codable {
+class MLanguage: NSObject, Codable, @unchecked Sendable {
     dynamic var ID = 0
     dynamic var LANGNAME = ""
 

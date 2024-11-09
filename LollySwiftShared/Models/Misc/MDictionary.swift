@@ -15,7 +15,7 @@ class MDictionaries: HasRecords {
 }
 
 @objcMembers
-class MDictionary: NSObject, Codable {
+class MDictionary: NSObject, Codable, @unchecked Sendable {
     dynamic var ID = 0
     dynamic var DICTID = 0
     dynamic var LANGIDFROM = 0

@@ -15,7 +15,7 @@ class MUnitWords: HasRecords {
 }
 
 @objcMembers
-class MUnitWord: NSObject, Codable, MWordProtocol {
+class MUnitWord: NSObject, Codable, MWordProtocol, @unchecked Sendable {
     dynamic var ID = 0
     dynamic var LANGID = 0
     dynamic var TEXTBOOKID = 0

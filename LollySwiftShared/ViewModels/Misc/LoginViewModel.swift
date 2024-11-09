@@ -8,6 +8,7 @@
 
 import Foundation
 
+@MainActor
 class LoginViewModel: NSObject, ObservableObject {
 
     @Published var username = ""

@@ -15,7 +15,7 @@ class MTextbooks: HasRecords {
 }
 
 @objcMembers
-class MTextbook: NSObject, Codable {
+class MTextbook: NSObject, Codable, @unchecked Sendable {
     dynamic var ID = 0
     dynamic var LANGID = 0
     dynamic var TEXTBOOKNAME = ""

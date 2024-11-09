@@ -14,7 +14,7 @@ class MUSMappings: HasRecords {
     dynamic var records = [MUSMapping]()
 }
 
-class MUSMapping: NSObject, Codable {
+class MUSMapping: NSObject, Codable, @unchecked Sendable {
     dynamic var ID = 0
     dynamic var NAME = ""
     dynamic var KIND = 0

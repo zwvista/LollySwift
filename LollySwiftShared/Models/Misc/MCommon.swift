@@ -31,7 +31,7 @@ class MCodes: HasRecords {
 }
 
 @objcMembers
-class MCode: NSObject, Codable {
+class MCode: NSObject, Codable, @unchecked Sendable {
     var CODE = 0
     var NAME = ""
     static func getData() async -> [MCode] {

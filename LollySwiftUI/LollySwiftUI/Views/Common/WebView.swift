@@ -11,6 +11,7 @@ import WebKit
 
 // https://github.com/kylehickinson/SwiftUI-WebView/blob/master/Sources/WebView/WebView.swift
 // https://qiita.com/noby111/items/2830d9f9c76c83df79a1
+@MainActor
 class WebViewStore: ObservableObject {
   @Published var webView: WKWebView {
     didSet {
