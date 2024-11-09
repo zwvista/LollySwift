@@ -11,6 +11,7 @@
 import RxSwift
 import RxCocoa
 
+@MainActor
 extension Reactive where Base: NSButton {
 
     /// Reactive wrapper for `title` property`.

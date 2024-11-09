@@ -10,7 +10,7 @@
 #endif
 #endif
 
-#import <CodableAlamofire/CodableAlamofire.h>
+#import "CodableAlamofire.h"
 
 FOUNDATION_EXPORT double CodableAlamofireVersionNumber;
 FOUNDATION_EXPORT const unsigned char CodableAlamofireVersionString[];

@@ -11,6 +11,7 @@
 import RxSwift
 import RxCocoa
 
+@MainActor
 extension Reactive where Base: NSSegmentedControl {
 
     /// Reactive wrapper for `isOn` property`.

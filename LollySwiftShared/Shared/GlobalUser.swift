@@ -8,7 +8,7 @@
 
 import Foundation
 
-class GlobalUser {
+class GlobalUser: @unchecked Sendable {
     var userid = ""
     var username = ""
 
@@ -24,4 +24,4 @@ class GlobalUser {
         userid = ""
     }
 }
-@MainActor let globalUser = GlobalUser()
+let globalUser = GlobalUser()

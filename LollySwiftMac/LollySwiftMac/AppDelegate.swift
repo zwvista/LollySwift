@@ -10,13 +10,14 @@ import Cocoa
 import RxSwift
 import RxBinding
 
-@NSApplicationMain
+@main
+@MainActor
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     static let theSettingsViewModel = SettingsViewModel()
     let synth = NSSpeechSynthesizer()
 
-    @MainActor func setup() {
+    func setup() {
         AppDelegate.theSettingsViewModel.getData().subscribe() ~ rx.disposeBag
     }
 

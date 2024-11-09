@@ -16,6 +16,7 @@ enum DictWebViewStatus {
     case automating
 }
 
+@MainActor
 class DictStore: NSObject {
 
     var dictStatus = DictWebViewStatus.ready
@@ -31,7 +32,7 @@ class DictStore: NSObject {
         self.wvDict = wvDict
     }
 
-    @MainActor func searchDict() {
+    func searchDict() {
         guard vmSettings != nil else {return}
         url = dict.urlString(word: word, arrAutoCorrect: vmSettings.arrAutoCorrect)
         dictStatus = .ready
@@ -52,7 +53,7 @@ class DictStore: NSObject {
         }
     }
 
-    @MainActor func onNavigationFinished() {
+    func onNavigationFinished() {
         //        guard webView.stringByEvaluatingJavaScript(from: "document.readyState") == "complete" && status == .navigating else {return}
         guard dictStatus != .ready else {return}
         switch dictStatus {

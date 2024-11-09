@@ -11,6 +11,7 @@
 import RxSwift
 import RxCocoa
 
+@MainActor
 extension Reactive where Base: NSStepper {
 
     /// Reactive wrapper for `integerValue` property`.

@@ -12,6 +12,7 @@
 import RxSwift
 import RxCocoa
 
+@MainActor
 extension Reactive where Base: NSPopUpButton {
 
     /// Bidirectional reactive wrapper for `indexOfSelectedItem` property.
