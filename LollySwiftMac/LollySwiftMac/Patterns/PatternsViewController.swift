@@ -10,6 +10,7 @@ import Cocoa
 import WebKit
 import RxSwift
 import RxBinding
+import AVFAudio
 
 class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate, NSMenuItemValidation {
 
@@ -21,7 +22,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     @IBOutlet weak var tfStatusText: NSTextField!
 
     var vm: PatternsViewModel!
-    let synth = NSSpeechSynthesizer()
+    let synth = AVSpeechSynthesizer()
     var isSpeaking = true
     var vmSettings: SettingsViewModel! { vm.vmSettings }
     var arrPatterns: [MPattern] { vm.arrPatternsFiltered }
@@ -91,7 +92,9 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     }
 
     @IBAction func speak(_ sender: AnyObject) {
-        synth.startSpeaking(vm.selectedPattern)
+        let dialogue = AVSpeechUtterance(string: vm.selectedPattern)
+        dialogue.voice = AVSpeechSynthesisVoice(identifier: vmSettings.macVoiceName)
+        synth.speak(dialogue)
     }
 
     @IBAction func isSpeakingChanged(_ sender: AnyObject) {
@@ -103,7 +106,6 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
 
     func settingsChanged() {
         vm = PatternsViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) {}
-        synth.setVoice(NSSpeechSynthesizer.VoiceName(rawValue: vmSettings.macVoiceName))
         _ = vm.textFilter_ <~> sfTextFilter.rx.text.orEmpty
         _ = vm.scopeFilter_ <~> scScopeFilter.rx.selectedLabel
         vm.arrPatternsFiltered_.subscribe { [unowned self] _ in

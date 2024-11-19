@@ -9,6 +9,7 @@
 import Cocoa
 import RxSwift
 import RxBinding
+import AVFAudio
 
 class WordsReviewViewController: WordsBaseViewController, NSTextFieldDelegate {
 
@@ -36,7 +37,9 @@ class WordsReviewViewController: WordsBaseViewController, NSTextFieldDelegate {
         vm = WordsReviewViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) { [unowned self] vm2 in
             tfWordInput.becomeFirstResponder()
             if vm2.hasCurrent && vm2.isSpeaking.value {
-                synth.startSpeaking(vm2.currentWord)
+                let dialogue = AVSpeechUtterance(string: vm2.currentWord)
+                dialogue.voice = AVSpeechSynthesisVoice(identifier: vmSettings.macVoiceName)
+                synth.speak(dialogue)
             }
             if vm2.needSearchDict {
                 searchDict(self)
@@ -83,7 +86,9 @@ class WordsReviewViewController: WordsBaseViewController, NSTextFieldDelegate {
         _ = vm.isSpeaking <~> wc.scSpeak.rx.isOn
         vm.isSpeaking.subscribe { [unowned self] isSpeaking in
             if vm.hasCurrent && isSpeaking {
-                synth.startSpeaking(vm.currentWord)
+                let dialogue = AVSpeechUtterance(string: vm.currentWord)
+                dialogue.voice = AVSpeechSynthesisVoice(identifier: vmSettings.macVoiceName)
+                synth.speak(dialogue)
             }
         } ~ rx.disposeBag
     }

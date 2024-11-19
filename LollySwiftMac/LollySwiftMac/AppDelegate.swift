@@ -9,13 +9,14 @@
 import Cocoa
 import RxSwift
 import RxBinding
+import AVFAudio
 
 @main
 @MainActor
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     static let theSettingsViewModel = SettingsViewModel()
-    let synth = NSSpeechSynthesizer()
+    let synth = AVSpeechSynthesizer()
 
     func setup() {
         AppDelegate.theSettingsViewModel.getData().subscribe() ~ rx.disposeBag
@@ -204,9 +205,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @IBAction func speak(_ sender: AnyObject) {
-        synth.setVoice(NSSpeechSynthesizer.VoiceName(rawValue: AppDelegate.theSettingsViewModel.macVoiceName))
-        let s = NSPasteboard.general.string(forType: .string) ?? ""
-        synth.startSpeaking(s)
+        let dialogue = AVSpeechUtterance(string: NSPasteboard.general.string(forType: .string) ?? "")
+        dialogue.voice = AVSpeechSynthesisVoice(identifier: AppDelegate.theSettingsViewModel.macVoiceName)
+        synth.speak(dialogue)
     }
 
     func searchWord(word: String) {

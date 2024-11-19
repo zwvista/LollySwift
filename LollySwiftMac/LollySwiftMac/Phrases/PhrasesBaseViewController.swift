@@ -9,6 +9,7 @@
 import Cocoa
 import RxSwift
 import RxBinding
+import AVFAudio
 
 class PhrasesBaseViewController: WordsPhrasesBaseViewController {
 
@@ -106,11 +107,9 @@ class PhrasesBaseViewController: WordsPhrasesBaseViewController {
     override func speak() {
         guard isSpeaking else {return}
         let responder = view.window!.firstResponder
-        if responder == tvWords {
-            synth.startSpeaking(vmWords.selectedWord)
-        } else {
-            synth.startSpeaking(vmPhrases.selectedPhrase)
-        }
+        let dialogue = AVSpeechUtterance(string: responder == tvWords ? vmWords.selectedWord : vmPhrases.selectedPhrase)
+        dialogue.voice = AVSpeechSynthesisVoice(identifier: vmSettings.macVoiceName)
+        synth.speak(dialogue)
     }
 
     func getWords() {

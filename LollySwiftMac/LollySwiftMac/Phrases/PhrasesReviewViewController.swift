@@ -9,6 +9,7 @@
 import Cocoa
 import RxSwift
 import RxBinding
+import AVFAudio
 
 class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldDelegate {
 
@@ -26,18 +27,19 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
 
     var vm: PhrasesReviewViewModel!
     var vmSettings: SettingsViewModel { vm.vmSettings }
-    let synth = NSSpeechSynthesizer()
+    let synth = AVSpeechSynthesizer()
 
     func settingsChanged() {
         vm?.stopTimer()
         vm = PhrasesReviewViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) { [unowned self] vm2 in
             tfPhraseInput.becomeFirstResponder()
             if vm2.hasCurrent && vm2.isSpeaking.value {
-               synth.startSpeaking(vm2.currentPhrase)
+                let dialogue = AVSpeechUtterance(string: vm2.currentPhrase)
+                dialogue.voice = AVSpeechSynthesisVoice(identifier: vmSettings.macVoiceName)
+                synth.speak(dialogue)
             }
             tfStatusText.stringValue = "\(vm.arrPhrases.count) Phrases in \(vmSettings.UNITPARTINFO)"
         }
-        synth.setVoice(NSSpeechSynthesizer.VoiceName(rawValue: vmSettings.macVoiceName))
 
         _ = vm.indexString ~> tfIndex.rx.text.orEmpty
         _ = vm.indexHidden ~> tfIndex.rx.isHidden
@@ -74,7 +76,9 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
         _ = vm.isSpeaking <~> wc.scSpeak.rx.isOn
         vm.isSpeaking.subscribe { [unowned self] isSpeaking in
             if isSpeaking {
-                synth.startSpeaking(vm.currentPhrase)
+                let dialogue = AVSpeechUtterance(string: vm.currentPhrase)
+                dialogue.voice = AVSpeechSynthesisVoice(identifier: vmSettings.macVoiceName)
+                synth.speak(dialogue)
             }
         } ~ rx.disposeBag
     }
