@@ -8,6 +8,7 @@
 
 import Cocoa
 import Combine
+import AVFAudio
 
 class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldDelegate {
 
@@ -25,7 +26,7 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
 
     var vm: PhrasesReviewViewModel!
     var vmSettings: SettingsViewModel { vm.vmSettings }
-    let synth = NSSpeechSynthesizer()
+    let synth = AVSpeechSynthesizer()
     var subscriptions = Set<AnyCancellable>()
 
     func settingsChanged() {
@@ -33,11 +34,12 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
         vm = PhrasesReviewViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) { [unowned self] vm2 in
             tfPhraseInput.becomeFirstResponder()
             if vm2.hasCurrent && vm2.isSpeaking {
-               synth.startSpeaking(vm2.currentPhrase)
+                let dialogue = AVSpeechUtterance(string: vm2.currentPhrase)
+                dialogue.voice = AVSpeechSynthesisVoice(identifier: vmSettings.macVoiceName)
+                synth.speak(dialogue)
             }
             tfStatusText.stringValue = "\(vm.arrPhrases.count) Phrases in \(vmSettings.UNITPARTINFO)"
         }
-        synth.setVoice(NSSpeechSynthesizer.VoiceName(rawValue: vmSettings.macVoiceName))
 
         vm.$indexString ~> (tfIndex, \.stringValue) ~ subscriptions
         vm.$indexHidden ~> (tfIndex, \.isHidden) ~ subscriptions
@@ -74,7 +76,9 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
         vm.$isSpeaking <~> wc.scSpeak.isOnProperty ~ subscriptions
         vm.$isSpeaking.sink { [unowned self] isSpeaking in
             if isSpeaking {
-                synth.startSpeaking(vm.currentPhrase)
+                let dialogue = AVSpeechUtterance(string: vm.currentPhrase)
+                dialogue.voice = AVSpeechSynthesisVoice(identifier: vmSettings.macVoiceName)
+                synth.speak(dialogue)
             }
         } ~ subscriptions
     }

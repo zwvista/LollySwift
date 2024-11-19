@@ -8,6 +8,7 @@
 
 import Cocoa
 import Combine
+import AVFAudio
 
 class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, LollyProtocol {
 
@@ -24,7 +25,7 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
     var vmPhrases: PhrasesBaseViewModel! { nil }
     var initSettingsInViewDidLoad: Bool { true }
 
-    let synth = NSSpeechSynthesizer()
+    let synth = AVSpeechSynthesizer()
     var isSpeaking = true
     weak var responder: NSView? = nil
 
@@ -57,7 +58,6 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
     }
 
     func settingsChanged() {
-        synth.setVoice(NSSpeechSynthesizer.VoiceName(rawValue: vmSettings.macVoiceName))
     }
 
     func speak() {
@@ -286,11 +286,9 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
     override func speak() {
         guard isSpeaking else {return}
         let responder = view.window!.firstResponder
-        if responder == tvPhrases {
-            synth.startSpeaking(vmPhrases.selectedPhrase)
-        } else {
-            synth.startSpeaking(vmWords.selectedWord)
-        }
+        let dialogue = AVSpeechUtterance(string: responder == tvPhrases ? vmPhrases.selectedPhrase : vmWords.selectedWord)
+        dialogue.voice = AVSpeechSynthesisVoice(identifier: vmSettings.macVoiceName)
+        synth.speak(dialogue)
     }
 
     func getPhrases() async {

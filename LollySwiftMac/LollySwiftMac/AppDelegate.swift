@@ -8,6 +8,7 @@
 
 import Cocoa
 import Combine
+import AVFAudio
 
 @main
 @MainActor
@@ -15,7 +16,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @MainActor
     static let theSettingsViewModel = SettingsViewModel()
-    let synth = NSSpeechSynthesizer()
+    let synth = AVSpeechSynthesizer()
     var subscriptions = Set<AnyCancellable>()
 
     func setup() {
@@ -207,9 +208,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @IBAction func speak(_ sender: AnyObject) {
-        synth.setVoice(NSSpeechSynthesizer.VoiceName(rawValue: AppDelegate.theSettingsViewModel.macVoiceName))
-        let s = NSPasteboard.general.string(forType: .string) ?? ""
-        synth.startSpeaking(s)
+        let dialogue = AVSpeechUtterance(string: NSPasteboard.general.string(forType: .string) ?? "")
+        dialogue.voice = AVSpeechSynthesisVoice(identifier: AppDelegate.theSettingsViewModel.macVoiceName)
+        synth.speak(dialogue)
     }
 
     func searchWord(word: String) {
