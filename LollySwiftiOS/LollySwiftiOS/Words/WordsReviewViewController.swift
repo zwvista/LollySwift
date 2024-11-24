@@ -17,6 +17,7 @@ class WordsReviewViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var lblAccuracy: UILabel!
     @IBOutlet weak var lblWordTarget: UILabel!
     @IBOutlet weak var lblNoteTarget: UILabel!
+    @IBOutlet weak var lblWordHint: UILabel!
     @IBOutlet weak var tvTranslation: UITextView!
     @IBOutlet weak var tfWordInput: UITextField!
     @IBOutlet weak var btnSpeak: UIButton!
@@ -55,8 +56,10 @@ class WordsReviewViewController: UIViewController, UITextFieldDelegate {
         vm.$checkPrevHidden ~> (btnCheckPrev, \.isHidden) ~ subscriptions
         vm.$wordTargetString ~> (lblWordTarget, \.text!) ~ subscriptions
         vm.$noteTargetString ~> (lblNoteTarget, \.text!) ~ subscriptions
+        vm.$wordHintString ~> (lblWordHint, \.text!) ~ subscriptions
         vm.$wordTargetHidden ~> (lblWordTarget, \.isHidden) ~ subscriptions
         vm.$noteTargetHidden ~> (lblNoteTarget, \.isHidden) ~ subscriptions
+        vm.$wordHintHidden ~> (lblWordHint, \.isHidden) ~ subscriptions
         vm.$translationString ~> (tvTranslation, \.text) ~ subscriptions
         vm.$wordInputString <~> tfWordInput.textProperty ~ subscriptions
         vm.$isSpeaking <~> swSpeak.isOnProperty ~ subscriptions
