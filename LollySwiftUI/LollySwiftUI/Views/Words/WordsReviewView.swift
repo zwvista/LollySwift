@@ -84,12 +84,16 @@ struct WordsReviewView: View {
                 .isHidden(vm.noteTargetHidden)
                 .font(.system(size: 40))
                 .foregroundColor(Color.color3)
+            Text(vm.wordHintString)
+                .isHidden(vm.wordHintHidden)
+                .font(.system(size: 40))
             TextField("", text: $vm.translationString, axis: .vertical)
                 .frame(height: 150)
             TextField("", text: $vm.wordInputString)
                 .focused($inputFocused)
                 .font(.system(size: 60))
                 .textFieldStyle(.roundedBorder)
+                .multilineTextAlignment(.center)
                 .border(Color.blue)
                 // https://stackoverflow.com/questions/70568987/it-is-possible-to-accessing-focusstates-value-outside-of-the-body-of-a-view
                 .onChange(of: vm.inputFocused) {
