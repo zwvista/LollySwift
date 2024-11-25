@@ -11,10 +11,12 @@ import RxSwift
 import RxRelay
 import RxBinding
 
-enum UnitPartToType: Int {
+enum UnitPartToType: Int, CaseIterable, Identifiable {
     case unit
     case part
     case to
+
+    var id: Int { self.rawValue }
 }
 
 class SettingsViewModel: NSObject {
