@@ -67,8 +67,8 @@ struct SettingsView: View {
                 .disabled(!vm.partFromEnabled)
                 HStack {
                     Picker("", selection: $vm.toType) {
-                        ForEach(SettingsViewModel.arrToTypes.indices, id: \.self) {
-                            Text(SettingsViewModel.arrToTypes[$0])
+                        ForEach(UnitPartToType.allCases) {
+                            Text(SettingsViewModel.arrToTypes[$0.rawValue]).tag($0)
                         }
                     }
                     .labelsHidden()
