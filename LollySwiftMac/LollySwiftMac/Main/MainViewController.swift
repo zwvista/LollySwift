@@ -9,10 +9,14 @@
 import Cocoa
 
 class MainViewController: NSViewController {
+    @IBOutlet weak var tabView: NSTabView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do view setup here.
+        let vc = NSStoryboard(name: "Words", bundle: nil).instantiateController(withIdentifier: "WordsUnitViewController") as! WordsUnitViewController
+        let tvi = NSTabViewItem(viewController: vc)
+        tvi.label = "Words"
+        tabView.addTabViewItem(tvi)
     }
     
 }
