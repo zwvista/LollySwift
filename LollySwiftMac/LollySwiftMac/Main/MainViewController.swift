@@ -16,3 +16,7 @@ class MainViewController: NSViewController {
     }
     
 }
+
+class MainWindowController: NSWindowController {
+    
+}
