@@ -19,9 +19,10 @@
 		8C087DF429A1215E003D528F /* LangBlogGroupsDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C087DF329A1215E003D528F /* LangBlogGroupsDetailViewModel.swift */; };
 		8C087DF629A1224F003D528F /* LangBlogPostsDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C087DF529A1224F003D528F /* LangBlogPostsDetailViewModel.swift */; };
 		8C087DF829A17AD3003D528F /* LangBlogPostsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C087DF729A17AD3003D528F /* LangBlogPostsDetailViewController.swift */; };
+		8C15A9AB2D1696B700739B4D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C15A9AA2D1696B700739B4D /* MainViewController.swift */; };
+		8C15A9AD2D169BC100739B4D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C15A9AC2D169BC100739B4D /* Main.storyboard */; };
 		8C1C4F2A1D31F88800CF5D88 /* WordsSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1C4F291D31F88800CF5D88 /* WordsSearchViewController.swift */; };
 		8C1C4F2C1D31F88800CF5D88 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C1C4F2B1D31F88800CF5D88 /* Assets.xcassets */; };
-		8C1C4F2F1D31F88800CF5D88 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C1C4F2D1D31F88800CF5D88 /* Main.storyboard */; };
 		8C1C4F3A1D31F88800CF5D88 /* LollySwiftMacTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1C4F391D31F88800CF5D88 /* LollySwiftMacTests.swift */; };
 		8C1C4F451D31F88800CF5D88 /* LollySwiftMacUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1C4F441D31F88800CF5D88 /* LollySwiftMacUITests.swift */; };
 		8C2CB5AE207885140083DDE2 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2CB59A207885140083DDE2 /* SettingsViewModel.swift */; };
@@ -215,10 +216,11 @@
 		8C087DF329A1215E003D528F /* LangBlogGroupsDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LangBlogGroupsDetailViewModel.swift; sourceTree = "<group>"; };
 		8C087DF529A1224F003D528F /* LangBlogPostsDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LangBlogPostsDetailViewModel.swift; sourceTree = "<group>"; };
 		8C087DF729A17AD3003D528F /* LangBlogPostsDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LangBlogPostsDetailViewController.swift; sourceTree = "<group>"; };
+		8C15A9AA2D1696B700739B4D /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		8C15A9AC2D169BC100739B4D /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		8C1C4F241D31F88800CF5D88 /* LollySwiftMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LollySwiftMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C1C4F291D31F88800CF5D88 /* WordsSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsSearchViewController.swift; sourceTree = "<group>"; };
 		8C1C4F2B1D31F88800CF5D88 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		8C1C4F2E1D31F88800CF5D88 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8C1C4F301D31F88800CF5D88 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C1C4F351D31F88800CF5D88 /* LollySwiftMacTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LollySwiftMacTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C1C4F391D31F88800CF5D88 /* LollySwiftMacTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LollySwiftMacTests.swift; sourceTree = "<group>"; };
@@ -407,6 +409,16 @@
 			path = Blogs;
 			sourceTree = "<group>";
 		};
+		8C15A9A92D16964D00739B4D /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				9534728822BB68EE00517D71 /* AppDelegate.swift */,
+				8C15A9AC2D169BC100739B4D /* Main.storyboard */,
+				8C15A9AA2D1696B700739B4D /* MainViewController.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
 		8C1C4F1B1D31F88800CF5D88 = {
 			isa = PBXGroup;
 			children = (
@@ -433,13 +445,12 @@
 		8C1C4F261D31F88800CF5D88 /* LollySwiftMac */ = {
 			isa = PBXGroup;
 			children = (
-				9534728822BB68EE00517D71 /* AppDelegate.swift */,
 				8C1C4F2B1D31F88800CF5D88 /* Assets.xcassets */,
 				8C087DDB299EAA5C003D528F /* Blogs */,
 				95804A402547FB8A0022AF35 /* Dicts */,
 				8C1C4F301D31F88800CF5D88 /* Info.plist */,
 				8C6E2EDC1EBB97CF00AC114F /* LollySwiftMac-Bridging-Header.h */,
-				8C1C4F2D1D31F88800CF5D88 /* Main.storyboard */,
+				8C15A9A92D16964D00739B4D /* Main */,
 				95F0A89B22913B7000D1B9A2 /* Misc */,
 				954CB5EE23B7139800A03900 /* Patterns */,
 				8CD8409920AFD4D900442133 /* Phrases */,
@@ -858,8 +869,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C087DDD299EAAB6003D528F /* Blogs.storyboard in Resources */,
+				8C15A9AD2D169BC100739B4D /* Main.storyboard in Resources */,
 				8C1C4F2C1D31F88800CF5D88 /* Assets.xcassets in Resources */,
-				8C1C4F2F1D31F88800CF5D88 /* Main.storyboard in Resources */,
 				8C2CB5C4207888260083DDE2 /* Words.storyboard in Resources */,
 				95F0A89D22913B8300D1B9A2 /* Misc.storyboard in Resources */,
 				954CB5F023B713DA00A03900 /* Patterns.storyboard in Resources */,
@@ -1036,6 +1047,7 @@
 				8C2CB5B4207885140083DDE2 /* RestApi.swift in Sources */,
 				957B532B25A5A2AE00C18B06 /* WordsUnitBatchAddViewModel.swift in Sources */,
 				959191E7258CFFCA0070DBFD /* MPattern.swift in Sources */,
+				8C15A9AB2D1696B700739B4D /* MainViewController.swift in Sources */,
 				8CF2949C2A75616200E8D195 /* LangBlogSelectGroupsViewController.swift in Sources */,
 				8CAF910A20833C4F00933837 /* WordsSearchViewModel.swift in Sources */,
 				9568FF2325A44A36004598D8 /* WordsBaseViewModel.swift in Sources */,
@@ -1157,17 +1169,6 @@
 			targetProxy = 8C1C4F411D31F88800CF5D88 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		8C1C4F2D1D31F88800CF5D88 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8C1C4F2E1D31F88800CF5D88 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		8C1C4F471D31F88800CF5D88 /* Debug */ = {
