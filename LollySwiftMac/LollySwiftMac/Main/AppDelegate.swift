@@ -24,14 +24,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         AppDelegate.theSettingsViewModel.initialized.distinctUntilChanged().filter { $0 }.subscribe { [unowned self] v in
-            //search(self)
-            //editPost(self)
-            wordsInUnit(self)
-            //wordsInLanguage(self)
-            //readNumber(self)
-            //patternsInLanguage(self)
-            //phrasesInUnit(self)
-            //wordsReview(self)
+            let storyboard = NSStoryboard(name: "Main", bundle: nil)
+            let wc = storyboard.instantiateController(withIdentifier: "MainWindowController") as! NSWindowController
+            wc.showWindow(self)
         } ~ rx.disposeBag
 
         globalUser.load()
