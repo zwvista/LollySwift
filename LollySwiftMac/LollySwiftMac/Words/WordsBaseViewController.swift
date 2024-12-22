@@ -45,8 +45,8 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
     var wc: WordsPhrasesBaseWindowController!
     override func viewDidAppear() {
         super.viewDidAppear()
-        wc = view.window!.windowController as? WordsPhrasesBaseWindowController
-        wc.scSpeak.selectedSegment = isSpeaking ? 1 : 0
+//        wc = view.window!.windowController as? WordsPhrasesBaseWindowController
+//        wc.scSpeak.selectedSegment = isSpeaking ? 1 : 0
         // For some unknown reason, the placeholder string of the filter text field
         // cannot be set in the storyboard
         // https://stackoverflow.com/questions/5519512/nstextfield-placeholder-text-doesnt-show-unless-editing
