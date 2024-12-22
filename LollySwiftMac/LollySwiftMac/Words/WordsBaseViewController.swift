@@ -58,6 +58,16 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
     }
 
     func settingsChanged() {
+        tvWords?.selectRowIndexes(IndexSet(), byExtendingSelection: false)
+        removeAllTabs()
+        for item in vmSettings.selectedDictsReference {
+            let vc = NSStoryboard(name: "Words", bundle: nil).instantiateController(withIdentifier: "WordsDictViewController") as! WordsDictViewController
+            vc.vcWords = self
+            vc.dict = item
+            let tvi = NSTabViewItem(viewController: vc)
+            tvi.label = item.DICTNAME
+            tabView.addTabViewItem(tvi)
+        }
     }
 
     func speak() {
