@@ -15,7 +15,7 @@ class MainViewController: NSViewController {
         super.viewDidLoad()
         let vc = NSStoryboard(name: "Words", bundle: nil).instantiateController(withIdentifier: "WordsUnitViewController") as! WordsUnitViewController
         let tvi = NSTabViewItem(viewController: vc)
-        tvi.label = "Words"
+        tvi.label = "Words in Unit"
         tabView.addTabViewItem(tvi)
     }
     
