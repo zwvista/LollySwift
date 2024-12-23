@@ -12,6 +12,7 @@ import AVFAudio
 
 class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate, LollyProtocol {
 
+    @IBOutlet weak var scSpeak: NSSegmentedControl!
     @IBOutlet weak var tfNewWord: NSTextField!
     @IBOutlet weak var scScopeFilter: NSSegmentedControl!
     @IBOutlet weak var sfTextFilter: NSSearchField!
@@ -47,6 +48,7 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
         super.viewDidAppear()
 //        wc = view.window!.windowController as? WordsPhrasesBaseWindowController
 //        wc.scSpeak.selectedSegment = isSpeaking ? 1 : 0
+        scSpeak.selectedSegment = isSpeaking ? 1 : 0
         // For some unknown reason, the placeholder string of the filter text field
         // cannot be set in the storyboard
         // https://stackoverflow.com/questions/5519512/nstextfield-placeholder-text-doesnt-show-unless-editing

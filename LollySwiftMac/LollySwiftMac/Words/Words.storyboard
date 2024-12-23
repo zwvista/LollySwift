@@ -220,7 +220,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" misplaced="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2hs-X4-l5R">
-                                <rect key="frame" x="0.0" y="541" width="585" height="32"/>
+                                <rect key="frame" x="0.0" y="541" width="589" height="32"/>
                                 <subviews>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Eoz-Rb-gdZ">
                                         <rect key="frame" x="-1" y="-1" width="44" height="32"/>
@@ -263,12 +263,12 @@
                                         </connections>
                                     </button>
                                     <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bOP-dz-sV6">
-                                        <rect key="frame" x="194" y="3" width="89" height="24"/>
+                                        <rect key="frame" x="194" y="3" width="97" height="24"/>
                                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="NqX-fO-LbK">
                                             <font key="font" metaFont="system"/>
                                             <segments>
-                                                <segment label="Silent" width="40"/>
-                                                <segment label="Speak" width="40" selected="YES" tag="1"/>
+                                                <segment label="Silent" width="44"/>
+                                                <segment label="Speak" width="44" selected="YES" tag="1"/>
                                             </segments>
                                         </segmentedCell>
                                         <connections>
@@ -276,7 +276,7 @@
                                         </connections>
                                     </segmentedControl>
                                     <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="E8d-BH-EMc">
-                                        <rect key="frame" x="286" y="5" width="96" height="21"/>
+                                        <rect key="frame" x="294" y="5" width="96" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="96" id="9nE-RB-Ak4"/>
                                         </constraints>
@@ -287,17 +287,17 @@
                                         </textFieldCell>
                                     </textField>
                                     <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RtU-w4-rmU">
-                                        <rect key="frame" x="385" y="3" width="101" height="24"/>
+                                        <rect key="frame" x="393" y="3" width="97" height="24"/>
                                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="gmR-VQ-F1T">
                                             <font key="font" metaFont="system"/>
                                             <segments>
-                                                <segment label="Word" width="40" selected="YES"/>
-                                                <segment label="Note" width="52" tag="1"/>
+                                                <segment label="Word" width="44" selected="YES"/>
+                                                <segment label="Note" width="44" tag="1"/>
                                             </segments>
                                         </segmentedCell>
                                     </segmentedControl>
                                     <searchField focusRingType="none" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ntb-I3-XGS">
-                                        <rect key="frame" x="489" y="4" width="96" height="22"/>
+                                        <rect key="frame" x="493" y="4" width="96" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="96" id="tuA-jr-exd"/>
                                         </constraints>
@@ -938,6 +938,7 @@
                     </view>
                     <connections>
                         <outlet property="scScopeFilter" destination="RtU-w4-rmU" id="5fZ-jf-cIo"/>
+                        <outlet property="scSpeak" destination="bOP-dz-sV6" id="KHv-x1-EKr"/>
                         <outlet property="sfTextFilter" destination="Ntb-I3-XGS" id="Wl9-kJ-Nnx"/>
                         <outlet property="tabView" destination="KCG-rY-0wH" id="Oqe-os-Tey"/>
                         <outlet property="tfNewWord" destination="E8d-BH-EMc" id="sKW-6f-XqV"/>
