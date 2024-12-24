@@ -13,12 +13,16 @@ class MainViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let vc = NSStoryboard(name: "Words", bundle: nil).instantiateController(withIdentifier: "WordsUnitViewController") as! WordsUnitViewController
+//        showTab(storyBoardName: "Words", viewControllerID: "WordsUnitViewController", label: "Words in Unit")
+        showTab(storyBoardName: "Phrases", viewControllerID: "PhrasesUnitViewController", label: "Phrases in Unit")
+    }
+
+    func showTab(storyBoardName: String, viewControllerID: String, label: String) {
+        let vc = NSStoryboard(name: storyBoardName, bundle: nil).instantiateController(withIdentifier: viewControllerID) as! NSViewController
         let tvi = NSTabViewItem(viewController: vc)
-        tvi.label = "Words in Unit"
+        tvi.label = label
         tabView.addTabViewItem(tvi)
     }
-    
 }
 
 class MainWindowController: NSWindowController {
