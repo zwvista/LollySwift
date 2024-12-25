@@ -20,8 +20,8 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
     @IBOutlet weak var tfStatusText: NSTextField!
     @IBOutlet weak var tvPhrases: NSTableView!
     @IBOutlet weak var tabView: NSTabView!
-    @IBOutlet weak var menuWords: NSMenu!
-    @IBOutlet weak var menuPhrases: NSMenu!
+    @IBOutlet var menuWords: NSMenu!
+    @IBOutlet var menuPhrases: NSMenu!
 
     var vmSettings: SettingsViewModel! { nil }
     var vmWords: WordsBaseViewModel! { nil }
@@ -41,8 +41,6 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
         if (initSettingsInViewDidLoad) {
             settingsChanged()
         }
-        tvWords.menu = menuWords
-        tvPhrases.menu = menuPhrases
     }
 
     // Hold a reference to the window controller in order to prevent it from being released

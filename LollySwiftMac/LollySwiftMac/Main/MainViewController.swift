@@ -13,8 +13,8 @@ class MainViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        showTab(storyBoardName: "Words", viewControllerID: "WordsUnitViewController", label: "Words in Unit")
-//        showTab(storyBoardName: "Phrases", viewControllerID: "PhrasesUnitViewController", label: "Phrases in Unit")
+        showTab(storyBoardName: "Words", viewControllerID: "WordsUnitViewController", label: "Words in Unit")
+        showTab(storyBoardName: "Phrases", viewControllerID: "PhrasesUnitViewController", label: "Phrases in Unit")
         showTab(storyBoardName: "Words", viewControllerID: "WordsTextbookViewController", label: "Words in Textbook")
         showTab(storyBoardName: "Phrases", viewControllerID: "PhrasesTextbookViewController", label: "Phrases in Textbook")
     }

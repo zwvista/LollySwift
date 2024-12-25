@@ -615,6 +615,7 @@
                                                                                 <action trigger="doubleAction" selector="doubleAction:" target="F8i-pe-Ate" id="klw-Qu-ABm"/>
                                                                                 <outlet property="dataSource" destination="F8i-pe-Ate" id="WTk-VO-k4I"/>
                                                                                 <outlet property="delegate" destination="F8i-pe-Ate" id="EHv-ob-M8C"/>
+                                                                                <outlet property="menu" destination="UPB-Wi-4rN" id="Mau-6f-aGA"/>
                                                                             </connections>
                                                                         </tableView>
                                                                     </subviews>
@@ -814,6 +815,7 @@
                                                                                 <action trigger="doubleAction" selector="editWord:" target="F8i-pe-Ate" id="nPU-cs-kh1"/>
                                                                                 <outlet property="dataSource" destination="F8i-pe-Ate" id="7Uc-co-DKD"/>
                                                                                 <outlet property="delegate" destination="F8i-pe-Ate" id="fX3-ox-4AL"/>
+                                                                                <outlet property="menu" destination="8bc-jT-Z9y" id="KBg-CS-dGe"/>
                                                                             </connections>
                                                                         </tableView>
                                                                     </subviews>
@@ -3602,12 +3604,12 @@ Gw
             <objects>
                 <customObject id="ax5-Aw-fpV" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="PhrasesTextbookViewController" id="dNa-67-Lx3" customClass="PhrasesTextbookViewController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="BSi-qb-EzZ">
-                        <rect key="frame" x="0.0" y="0.0" width="1230" height="498"/>
+                    <view key="view" misplaced="YES" id="BSi-qb-EzZ">
+                        <rect key="frame" x="0.0" y="0.0" width="1230" height="472"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dkf-Zg-i4Y">
-                                <rect key="frame" x="0.0" y="466" width="451" height="32"/>
+                                <rect key="frame" x="0.0" y="440" width="451" height="32"/>
                                 <subviews>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UTA-gd-Xj2">
                                         <rect key="frame" x="-1" y="-1" width="44" height="32"/>
@@ -3690,21 +3692,21 @@ Gw
                                 </customSpacing>
                             </stackView>
                             <splitView misplaced="YES" arrangesAllSubviews="NO" dividerStyle="paneSplitter" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hr7-EQ-Krj">
-                                <rect key="frame" x="0.0" y="-75" width="1200" height="544"/>
+                                <rect key="frame" x="0.0" y="-101" width="1200" height="544"/>
                                 <subviews>
                                     <customView misplaced="YES" id="4Au-Cp-8gl">
                                         <rect key="frame" x="0.0" y="0.0" width="598" height="544"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <splitView arrangesAllSubviews="NO" dividerStyle="paneSplitter" translatesAutoresizingMaskIntoConstraints="NO" id="xfv-gh-F9r">
-                                                <rect key="frame" x="0.0" y="0.0" width="566" height="466"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="566" height="440"/>
                                                 <subviews>
                                                     <customView misplaced="YES" id="8bI-bs-Oga">
-                                                        <rect key="frame" x="0.0" y="0.0" width="566" height="334"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="566" height="315"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
                                                             <scrollView misplaced="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f1F-FW-l8V">
-                                                                <rect key="frame" x="0.0" y="-57" width="606" height="391"/>
+                                                                <rect key="frame" x="0.0" y="-76" width="606" height="391"/>
                                                                 <clipView key="contentView" id="Jxc-fy-ceq">
                                                                     <rect key="frame" x="1" y="1" width="604" height="389"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -4015,6 +4017,7 @@ Gw
                                                                                 <action trigger="doubleAction" selector="doubleAction:" target="dNa-67-Lx3" id="oDQ-Mj-okC"/>
                                                                                 <outlet property="dataSource" destination="dNa-67-Lx3" id="CXk-IL-g3N"/>
                                                                                 <outlet property="delegate" destination="dNa-67-Lx3" id="D8E-Cb-iqh"/>
+                                                                                <outlet property="menu" destination="w8F-Rg-pAb" id="Ag4-SV-i2Z"/>
                                                                             </connections>
                                                                         </tableView>
                                                                     </subviews>
@@ -4041,17 +4044,17 @@ Gw
                                                         </constraints>
                                                     </customView>
                                                     <customView misplaced="YES" id="qLK-Zg-kv6">
-                                                        <rect key="frame" x="0.0" y="344" width="566" height="122"/>
+                                                        <rect key="frame" x="0.0" y="325" width="566" height="115"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
                                                             <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nmN-Co-DQG">
-                                                                <rect key="frame" x="0.0" y="23" width="600" height="75"/>
+                                                                <rect key="frame" x="0.0" y="9" width="600" height="49"/>
                                                                 <clipView key="contentView" id="X8H-GN-vNP">
-                                                                    <rect key="frame" x="1" y="1" width="598" height="73"/>
+                                                                    <rect key="frame" x="1" y="1" width="598" height="47"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="RV2-Qv-ECx" viewBased="YES" id="svn-Fw-kKy">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="598" height="48"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="598" height="22"/>
                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                             <size key="intercellSpacing" width="3" height="2"/>
                                                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -4206,6 +4209,7 @@ Gw
                                                                                 <action trigger="doubleAction" selector="editWord:" target="dNa-67-Lx3" id="4rp-EO-Thw"/>
                                                                                 <outlet property="dataSource" destination="dNa-67-Lx3" id="GBr-fh-0Az"/>
                                                                                 <outlet property="delegate" destination="dNa-67-Lx3" id="0gG-Tm-UHO"/>
+                                                                                <outlet property="menu" destination="paV-m3-arV" id="Lii-bg-TWx"/>
                                                                             </connections>
                                                                         </tableView>
                                                                     </subviews>
@@ -4224,7 +4228,7 @@ Gw
                                                                 </tableHeaderView>
                                                             </scrollView>
                                                             <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rYM-h5-opd">
-                                                                <rect key="frame" x="-2" y="7" width="4" height="16"/>
+                                                                <rect key="frame" x="-2" y="-7" width="4" height="16"/>
                                                                 <textFieldCell key="cell" lineBreakMode="clipping" id="dgr-jP-jmI">
                                                                     <font key="font" metaFont="system"/>
                                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -4260,7 +4264,7 @@ Gw
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <tabView translatesAutoresizingMaskIntoConstraints="NO" id="tDX-Dg-PDJ">
-                                                <rect key="frame" x="-7" y="-10" width="668" height="482"/>
+                                                <rect key="frame" x="-7" y="-10" width="668" height="456"/>
                                                 <font key="font" metaFont="system"/>
                                             </tabView>
                                         </subviews>
