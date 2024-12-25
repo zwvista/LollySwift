@@ -13,7 +13,7 @@ class MainViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        showTab(storyBoardName: "Words", viewControllerID: "WordsUnitViewController", label: "Words in Unit")
+        showTab(storyBoardName: "Words", viewControllerID: "WordsUnitViewController", label: "Words in Unit")
         showTab(storyBoardName: "Phrases", viewControllerID: "PhrasesUnitViewController", label: "Phrases in Unit")
     }
 
