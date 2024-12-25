@@ -2656,10 +2656,33 @@ Gw
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" misplaced="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BlQ-ed-2z2">
-                                <rect key="frame" x="0.0" y="540" width="305" height="32"/>
+                                <rect key="frame" x="0.0" y="540" width="438" height="32"/>
                                 <subviews>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KQ0-h2-mhn">
+                                        <rect key="frame" x="-1" y="-1" width="44" height="32"/>
+                                        <buttonCell key="cell" type="push" title="Refresh" bezelStyle="rounded" image="NSRefreshTemplate" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="biF-i6-uxD">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="refreshTableView:" target="UkS-Xi-ogF" id="md5-3l-J8O"/>
+                                        </connections>
+                                    </button>
+                                    <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="052-aM-rws">
+                                        <rect key="frame" x="39" y="3" width="97" height="24"/>
+                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="jHj-Oz-v1y">
+                                            <font key="font" metaFont="system"/>
+                                            <segments>
+                                                <segment label="Silent" width="44"/>
+                                                <segment label="Speak" width="44" selected="YES" tag="1"/>
+                                            </segments>
+                                        </segmentedCell>
+                                        <connections>
+                                            <action selector="isSpeakingChanged:" target="UkS-Xi-ogF" id="KZK-cc-LkB"/>
+                                        </connections>
+                                    </segmentedControl>
                                     <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jNk-si-JUF">
-                                        <rect key="frame" x="6" y="5" width="96" height="21"/>
+                                        <rect key="frame" x="139" y="5" width="96" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="96" id="zw3-98-elI"/>
                                         </constraints>
@@ -2673,7 +2696,7 @@ Gw
                                         </connections>
                                     </textField>
                                     <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6UI-Xq-Ybp">
-                                        <rect key="frame" x="105" y="3" width="101" height="24"/>
+                                        <rect key="frame" x="238" y="3" width="101" height="24"/>
                                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="eAy-V0-MAi">
                                             <font key="font" metaFont="system"/>
                                             <segments>
@@ -2683,7 +2706,7 @@ Gw
                                         </segmentedCell>
                                     </segmentedControl>
                                     <searchField focusRingType="none" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lHN-YD-8mt">
-                                        <rect key="frame" x="209" y="4" width="96" height="22"/>
+                                        <rect key="frame" x="342" y="4" width="96" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="96" id="A1r-OT-h3N"/>
                                         </constraints>
@@ -2702,8 +2725,12 @@ Gw
                                     <integer value="1000"/>
                                     <integer value="1000"/>
                                     <integer value="1000"/>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
                                 </visibilityPriorities>
                                 <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
@@ -2891,6 +2918,7 @@ Gw
                                                                                 <action trigger="doubleAction" selector="doubleAction:" target="UkS-Xi-ogF" id="mGe-bt-WDp"/>
                                                                                 <outlet property="dataSource" destination="UkS-Xi-ogF" id="ueH-6N-lcO"/>
                                                                                 <outlet property="delegate" destination="UkS-Xi-ogF" id="qPd-DW-X2U"/>
+                                                                                <outlet property="menu" destination="Byk-np-WoB" id="KZ5-YT-SU9"/>
                                                                             </connections>
                                                                         </tableView>
                                                                     </subviews>
@@ -2907,9 +2935,6 @@ Gw
                                                                     <rect key="frame" x="0.0" y="0.0" width="430" height="25"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                 </tableHeaderView>
-                                                                <connections>
-                                                                    <outlet property="menu" destination="Byk-np-WoB" id="lLT-gF-B42"/>
-                                                                </connections>
                                                             </scrollView>
                                                         </subviews>
                                                         <constraints>
@@ -3132,7 +3157,10 @@ Gw
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="menuPhrases" destination="8qA-aK-PK5" id="46Y-Lg-0rq"/>
+                        <outlet property="menuWords" destination="Byk-np-WoB" id="FHx-6C-kDx"/>
                         <outlet property="scScopeFilter" destination="6UI-Xq-Ybp" id="kEF-HB-cSG"/>
+                        <outlet property="scSpeak" destination="052-aM-rws" id="sPV-VB-wcg"/>
                         <outlet property="sfTextFilter" destination="lHN-YD-8mt" id="IbK-XI-ePK"/>
                         <outlet property="tabView" destination="lL7-i9-c4V" id="YeQ-Gx-JKa"/>
                         <outlet property="tfNewWord" destination="jNk-si-JUF" id="NN0-cI-2Sf"/>
