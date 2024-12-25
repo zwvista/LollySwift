@@ -6151,10 +6151,43 @@ Gw
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" misplaced="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e2v-T6-xFM">
-                                <rect key="frame" x="0.0" y="516" width="102" height="32"/>
+                                <rect key="frame" x="0.0" y="516" width="285" height="32"/>
                                 <subviews>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CFM-LO-isr">
+                                        <rect key="frame" x="-1" y="-1" width="74" height="32"/>
+                                        <buttonCell key="cell" type="push" title="Delete" bezelStyle="rounded" image="NSRemoveTemplate" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="r2Z-9O-wXD">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="deleteWord:" target="ECR-Tq-pby" id="E5X-d0-ZMB"/>
+                                        </connections>
+                                    </button>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5l2-R7-72A">
+                                        <rect key="frame" x="59" y="-1" width="44" height="32"/>
+                                        <buttonCell key="cell" type="push" title="Refresh" bezelStyle="rounded" image="NSRefreshTemplate" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="UGN-15-iRV">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="refreshTableView:" target="ECR-Tq-pby" id="M3N-v0-wsC"/>
+                                        </connections>
+                                    </button>
+                                    <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vmX-M2-nVX">
+                                        <rect key="frame" x="94" y="3" width="97" height="24"/>
+                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="qr9-Fe-X0i">
+                                            <font key="font" metaFont="system"/>
+                                            <segments>
+                                                <segment label="Silent" width="44"/>
+                                                <segment label="Speak" width="44" selected="YES" tag="1"/>
+                                            </segments>
+                                        </segmentedCell>
+                                        <connections>
+                                            <action selector="isSpeakingChanged:" target="ECR-Tq-pby" id="Cvw-oj-9z8"/>
+                                        </connections>
+                                    </segmentedControl>
                                     <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Rrd-iU-HLe">
-                                        <rect key="frame" x="6" y="5" width="96" height="21"/>
+                                        <rect key="frame" x="189" y="5" width="96" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="96" id="G9G-ht-G8M"/>
                                         </constraints>
@@ -6168,11 +6201,18 @@ Gw
                                 <edgeInsets key="edgeInsets" left="6" right="0.0" top="6" bottom="6"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="DNJ-0Z-sbo"/>
+                                    <constraint firstItem="CFM-LO-isr" firstAttribute="leading" secondItem="e2v-T6-xFM" secondAttribute="leading" constant="6" id="oz6-fk-BAq"/>
                                 </constraints>
                                 <visibilityPriorities>
                                     <integer value="1000"/>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
                                 </visibilityPriorities>
                                 <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                 </customSpacing>
                             </stackView>
@@ -6386,6 +6426,8 @@ Gw
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="menuWords" destination="f1c-ry-pxi" id="0yE-wc-QPv"/>
+                        <outlet property="scSpeak" destination="vmX-M2-nVX" id="unf-kR-q3z"/>
                         <outlet property="tabView" destination="NiY-eW-PeE" id="0TX-gK-IEL"/>
                         <outlet property="tfNewWord" destination="Rrd-iU-HLe" id="vkj-KH-344"/>
                         <outlet property="tfStatusText" destination="sF8-z5-7nv" id="3vU-p6-ScG"/>
