@@ -615,7 +615,6 @@
                                                                                 <action trigger="doubleAction" selector="doubleAction:" target="F8i-pe-Ate" id="klw-Qu-ABm"/>
                                                                                 <outlet property="dataSource" destination="F8i-pe-Ate" id="WTk-VO-k4I"/>
                                                                                 <outlet property="delegate" destination="F8i-pe-Ate" id="EHv-ob-M8C"/>
-                                                                                <outlet property="menu" destination="UPB-Wi-4rN" id="Ix2-Hb-AVO"/>
                                                                             </connections>
                                                                         </tableView>
                                                                     </subviews>
@@ -815,7 +814,6 @@
                                                                                 <action trigger="doubleAction" selector="editWord:" target="F8i-pe-Ate" id="nPU-cs-kh1"/>
                                                                                 <outlet property="dataSource" destination="F8i-pe-Ate" id="7Uc-co-DKD"/>
                                                                                 <outlet property="delegate" destination="F8i-pe-Ate" id="fX3-ox-4AL"/>
-                                                                                <outlet property="menu" destination="8bc-jT-Z9y" id="pyM-fF-Xei"/>
                                                                             </connections>
                                                                         </tableView>
                                                                     </subviews>
@@ -890,6 +888,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="menuPhrases" destination="UPB-Wi-4rN" id="NbH-RL-Yuh"/>
+                        <outlet property="menuWords" destination="8bc-jT-Z9y" id="om8-OR-Lyu"/>
                         <outlet property="scScopeFilter" destination="rZa-Gg-ptM" id="WA2-sX-Jxo"/>
                         <outlet property="scSpeak" destination="xrS-Rk-qUM" id="g9l-Vg-05d"/>
                         <outlet property="sfTextFilter" destination="l7q-XL-RKU" id="8L9-h5-B5i"/>
