@@ -18,7 +18,7 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
     var arrWords: [MUnitWord] { vm.arrWordsFiltered }
 
     @IBOutlet weak var pubTextbookFilter: NSPopUpButton!
-    @IBOutlet weak var acTextbooks: NSArrayController!
+    @IBOutlet var acTextbooks: NSArrayController!
 
     override func viewDidLoad() {
         super.viewDidLoad()

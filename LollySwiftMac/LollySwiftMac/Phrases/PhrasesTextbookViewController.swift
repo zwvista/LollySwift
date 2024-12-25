@@ -18,7 +18,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
     var arrPhrases: [MUnitPhrase] { vm.arrPhrasesFiltered }
 
     @IBOutlet weak var pubTextbookFilter: NSPopUpButton!
-    @IBOutlet weak var acTextbooks: NSArrayController!
+    @IBOutlet var acTextbooks: NSArrayController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
