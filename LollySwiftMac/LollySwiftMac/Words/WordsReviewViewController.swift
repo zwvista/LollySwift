@@ -82,7 +82,7 @@ class WordsReviewViewController: WordsBaseViewController, NSTextFieldDelegate {
         super.viewDidAppear()
         settingsChanged()
         wc = view.window!.windowController as? WordsReviewWindowController
-        vm.$isSpeaking <~> wc.scSpeak.isOnProperty ~ subscriptions
+        vm.$isSpeaking <~> scSpeak.isOnProperty ~ subscriptions
         vm.$isSpeaking.sink { [unowned self] isSpeaking in
             if vm.hasCurrent && isSpeaking {
                 let dialogue = AVSpeechUtterance(string: vm.currentWord)

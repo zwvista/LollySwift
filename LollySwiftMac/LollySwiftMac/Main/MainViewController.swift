@@ -19,7 +19,8 @@ class MainViewController: NSViewController {
 //        showTab(storyBoardName: "Phrases", viewControllerID: "PhrasesTextbookViewController", label: "Phrases in Textbook")
 //        showTab(storyBoardName: "Words", viewControllerID: "WordsLangViewController", label: "Words in Language")
 //        showTab(storyBoardName: "Phrases", viewControllerID: "PhrasesLangViewController", label: "Phrases in Language")
-        showTab(storyBoardName: "Words", viewControllerID: "WordsSearchViewController", label: "Search")
+//        showTab(storyBoardName: "Words", viewControllerID: "WordsSearchViewController", label: "Search")
+        showTab(storyBoardName: "Words", viewControllerID: "WordsReviewViewController", label: "Words Review")
 //        showTab(storyBoardName: "Patterns", viewControllerID: "PatternsViewController", label: "Patterns In Language")
     }
 
