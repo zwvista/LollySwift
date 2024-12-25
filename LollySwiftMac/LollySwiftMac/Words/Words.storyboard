@@ -5702,15 +5702,55 @@ Gw
                         <rect key="frame" x="0.0" y="0.0" width="1200" height="572"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
+                            <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s2y-7R-U1Z">
+                                <rect key="frame" x="0.0" y="540" width="201" height="32"/>
+                                <subviews>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vIj-CX-hP3">
+                                        <rect key="frame" x="-1" y="-1" width="111" height="32"/>
+                                        <buttonCell key="cell" type="push" title="New Test" bezelStyle="rounded" image="NSAdvanced" imagePosition="leading" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="tjW-ce-YLA">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="newTest:" target="ypg-jQ-ROv" id="Il1-Nx-4GK"/>
+                                        </connections>
+                                    </button>
+                                    <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iKj-22-OP9">
+                                        <rect key="frame" x="106" y="3" width="97" height="24"/>
+                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="ckv-ON-nij">
+                                            <font key="font" metaFont="system"/>
+                                            <segments>
+                                                <segment label="Silent" width="44"/>
+                                                <segment label="Speak" width="44" selected="YES" tag="1"/>
+                                            </segments>
+                                        </segmentedCell>
+                                        <connections>
+                                            <action selector="isSpeakingChanged:" target="ypg-jQ-ROv" id="ImS-w4-CTW"/>
+                                        </connections>
+                                    </segmentedControl>
+                                </subviews>
+                                <edgeInsets key="edgeInsets" left="6" right="0.0" top="6" bottom="6"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="Cwb-fJ-7oc"/>
+                                </constraints>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
                             <splitView arrangesAllSubviews="NO" dividerStyle="paneSplitter" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5xe-Ll-ALc">
-                                <rect key="frame" x="0.0" y="0.0" width="1200" height="572"/>
+                                <rect key="frame" x="0.0" y="0.0" width="1200" height="540"/>
                                 <subviews>
                                     <customView id="nAV-ZA-eQY">
-                                        <rect key="frame" x="0.0" y="0.0" width="599" height="572"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="599" height="540"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
                                             <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ifE-nI-yN3">
-                                                <rect key="frame" x="18" y="523" width="63" height="29"/>
+                                                <rect key="frame" x="18" y="491" width="63" height="29"/>
                                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="WwL-fE-Vce">
                                                     <font key="font" metaFont="system" size="25"/>
                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -5718,7 +5758,7 @@ Gw
                                                 </textFieldCell>
                                             </textField>
                                             <textField focusRingType="none" horizontalHuggingPriority="253" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="sKV-9H-nac">
-                                                <rect key="frame" x="517" y="523" width="64" height="29"/>
+                                                <rect key="frame" x="517" y="491" width="64" height="29"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="SEh-bP-SMj"/>
                                                 </constraints>
@@ -5729,7 +5769,7 @@ Gw
                                                 </textFieldCell>
                                             </textField>
                                             <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="i1z-Mx-9R6">
-                                                <rect key="frame" x="188" y="460" width="224" height="43"/>
+                                                <rect key="frame" x="188" y="428" width="224" height="43"/>
                                                 <subviews>
                                                     <textField focusRingType="none" horizontalHuggingPriority="253" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="544-Sl-0Ct">
                                                         <rect key="frame" x="-2" y="0.0" width="89" height="43"/>
@@ -5774,7 +5814,7 @@ Gw
                                                 </customSpacing>
                                             </stackView>
                                             <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="tkR-zI-Crh">
-                                                <rect key="frame" x="20" y="380" width="559" height="60"/>
+                                                <rect key="frame" x="20" y="348" width="559" height="60"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="TF7-Yo-kld"/>
                                                 </constraints>
@@ -5785,7 +5825,7 @@ Gw
                                                 </textFieldCell>
                                             </textField>
                                             <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f21-Ix-zj3">
-                                                <rect key="frame" x="484" y="37" width="102" height="32"/>
+                                                <rect key="frame" x="484" y="5" width="102" height="32"/>
                                                 <buttonCell key="cell" type="push" title="Check" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="q7p-3s-eoa">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
@@ -5795,7 +5835,7 @@ Gw
                                                 </connections>
                                             </button>
                                             <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vOb-Pl-cYk">
-                                                <rect key="frame" x="89" y="523" width="85" height="29"/>
+                                                <rect key="frame" x="89" y="491" width="85" height="29"/>
                                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Correct" id="aa7-lR-qIB">
                                                     <font key="font" metaFont="system" size="25"/>
                                                     <color key="textColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
@@ -5803,7 +5843,7 @@ Gw
                                                 </textFieldCell>
                                             </textField>
                                             <textField focusRingType="none" horizontalHuggingPriority="252" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0nW-V6-xz8">
-                                                <rect key="frame" x="89" y="523" width="110" height="29"/>
+                                                <rect key="frame" x="89" y="491" width="110" height="29"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="106" id="udy-uU-l5c"/>
                                                 </constraints>
@@ -5814,7 +5854,7 @@ Gw
                                                 </textFieldCell>
                                             </textField>
                                             <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="W4B-Jb-i8b">
-                                                <rect key="frame" x="20" y="300" width="559" height="60"/>
+                                                <rect key="frame" x="20" y="268" width="559" height="60"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="60" id="k14-dc-XBc"/>
                                                 </constraints>
@@ -5828,7 +5868,7 @@ Gw
                                                 </connections>
                                             </textField>
                                             <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9An-cD-pD2">
-                                                <rect key="frame" x="376" y="37" width="102" height="32"/>
+                                                <rect key="frame" x="376" y="5" width="102" height="32"/>
                                                 <buttonCell key="cell" type="push" title="Check" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="fbt-b8-JSa">
                                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                     <font key="font" metaFont="system"/>
@@ -5838,7 +5878,7 @@ Gw
                                                 </connections>
                                             </button>
                                             <segmentedControl verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xRu-g6-Itv">
-                                                <rect key="frame" x="88" y="42" width="131" height="23"/>
+                                                <rect key="frame" x="88" y="10" width="131" height="23"/>
                                                 <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="d94-tp-wUP">
                                                     <font key="font" metaFont="system"/>
                                                     <segments>
@@ -5848,7 +5888,7 @@ Gw
                                                 </segmentedCell>
                                             </segmentedControl>
                                             <segmentedControl verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iO2-qq-F3q">
-                                                <rect key="frame" x="237" y="42" width="127" height="23"/>
+                                                <rect key="frame" x="237" y="10" width="127" height="23"/>
                                                 <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="sVo-wl-PjN">
                                                     <font key="font" metaFont="system"/>
                                                     <segments>
@@ -5896,16 +5936,16 @@ Gw
                                         </constraints>
                                     </customView>
                                     <customView id="oeF-9S-kgV">
-                                        <rect key="frame" x="609" y="0.0" width="591" height="572"/>
+                                        <rect key="frame" x="609" y="0.0" width="591" height="540"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
                                             <tabView translatesAutoresizingMaskIntoConstraints="NO" id="9hT-cb-91A">
-                                                <rect key="frame" x="-7" y="-10" width="605" height="588"/>
+                                                <rect key="frame" x="-7" y="-10" width="605" height="556"/>
                                                 <font key="font" metaFont="system"/>
                                                 <tabViewItems>
                                                     <tabViewItem label="Tab" identifier="" id="NPH-R3-f0C">
                                                         <view key="view" id="gsg-V6-Ock">
-                                                            <rect key="frame" x="10" y="33" width="585" height="542"/>
+                                                            <rect key="frame" x="10" y="33" width="585" height="510"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         </view>
                                                     </tabViewItem>
@@ -5933,8 +5973,10 @@ Gw
                             </splitView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="5xe-Ll-ALc" firstAttribute="top" secondItem="cC6-V3-CmG" secondAttribute="top" id="B3O-52-sJu"/>
+                            <constraint firstItem="5xe-Ll-ALc" firstAttribute="top" secondItem="s2y-7R-U1Z" secondAttribute="bottom" id="B3O-52-sJu"/>
+                            <constraint firstItem="s2y-7R-U1Z" firstAttribute="top" secondItem="cC6-V3-CmG" secondAttribute="top" id="ENB-ly-chm"/>
                             <constraint firstItem="5xe-Ll-ALc" firstAttribute="leading" secondItem="cC6-V3-CmG" secondAttribute="leading" id="Sd5-7v-crQ"/>
+                            <constraint firstItem="s2y-7R-U1Z" firstAttribute="leading" secondItem="cC6-V3-CmG" secondAttribute="leading" id="c1v-vN-97f"/>
                             <constraint firstAttribute="bottom" secondItem="5xe-Ll-ALc" secondAttribute="bottom" id="kDg-Zy-AhO"/>
                             <constraint firstAttribute="trailing" secondItem="5xe-Ll-ALc" secondAttribute="trailing" id="u0d-vo-Kbj"/>
                         </constraints>
@@ -5944,6 +5986,7 @@ Gw
                         <outlet property="btnCheckPrev" destination="9An-cD-pD2" id="Aop-OM-kPX"/>
                         <outlet property="scMoveForward" destination="iO2-qq-F3q" id="IPb-ky-VIf"/>
                         <outlet property="scOnRepeat" destination="xRu-g6-Itv" id="2LS-Cw-K20"/>
+                        <outlet property="scSpeak" destination="iKj-22-OP9" id="Hqe-iq-Cov"/>
                         <outlet property="tabView" destination="9hT-cb-91A" id="ft0-Sx-Kzo"/>
                         <outlet property="tfAccuracy" destination="sKV-9H-nac" id="weI-uh-mnQ"/>
                         <outlet property="tfCorrect" destination="vOb-Pl-cYk" id="MTb-JF-X4v"/>
@@ -6151,11 +6194,11 @@ Gw
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" misplaced="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e2v-T6-xFM">
-                                <rect key="frame" x="0.0" y="516" width="285" height="32"/>
+                                <rect key="frame" x="0.0" y="516" width="301" height="32"/>
                                 <subviews>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="CFM-LO-isr">
-                                        <rect key="frame" x="-1" y="-1" width="74" height="32"/>
-                                        <buttonCell key="cell" type="push" title="Delete" bezelStyle="rounded" image="NSRemoveTemplate" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="r2Z-9O-wXD">
+                                        <rect key="frame" x="-1" y="-1" width="90" height="32"/>
+                                        <buttonCell key="cell" type="push" title="Delete" bezelStyle="rounded" image="NSRemoveTemplate" imagePosition="leading" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="r2Z-9O-wXD">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
@@ -6164,7 +6207,7 @@ Gw
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5l2-R7-72A">
-                                        <rect key="frame" x="59" y="-1" width="44" height="32"/>
+                                        <rect key="frame" x="75" y="-1" width="44" height="32"/>
                                         <buttonCell key="cell" type="push" title="Refresh" bezelStyle="rounded" image="NSRefreshTemplate" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="UGN-15-iRV">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -6174,7 +6217,7 @@ Gw
                                         </connections>
                                     </button>
                                     <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vmX-M2-nVX">
-                                        <rect key="frame" x="94" y="3" width="97" height="24"/>
+                                        <rect key="frame" x="110" y="3" width="97" height="24"/>
                                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="qr9-Fe-X0i">
                                             <font key="font" metaFont="system"/>
                                             <segments>
@@ -6187,7 +6230,7 @@ Gw
                                         </connections>
                                     </segmentedControl>
                                     <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Rrd-iU-HLe">
-                                        <rect key="frame" x="189" y="5" width="96" height="21"/>
+                                        <rect key="frame" x="205" y="5" width="96" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="96" id="G9G-ht-G8M"/>
                                         </constraints>
