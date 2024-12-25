@@ -12,13 +12,13 @@ import Combine
 
 class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation {
 
+    @IBOutlet weak var pubTextbookFilter: NSPopUpButton!
+    @IBOutlet var acTextbooks: NSArrayController!
+
     var vm: WordsUnitViewModel!
     override var vmWords: WordsBaseViewModel { vm }
     override var vmSettings: SettingsViewModel! { vm.vmSettings }
     var arrWords: [MUnitWord] { vm.arrWordsFiltered }
-
-    @IBOutlet weak var pubTextbookFilter: NSPopUpButton!
-    @IBOutlet var acTextbooks: NSArrayController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
