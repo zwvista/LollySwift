@@ -14,7 +14,7 @@ import RxBinding
 class PhrasesTextbookViewController: PhrasesBaseViewController {
 
     @IBOutlet weak var pubTextbookFilter: NSPopUpButton!
-    @IBOutlet weak var acTextbooks: NSArrayController!
+    @IBOutlet var acTextbooks: NSArrayController!
 
     var vm: PhrasesUnitViewModel!
     override var vmPhrases: PhrasesBaseViewModel { vm }

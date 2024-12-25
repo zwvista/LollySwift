@@ -21,8 +21,8 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
     @IBOutlet weak var tfStatusText: NSTextField!
     @IBOutlet weak var tvPhrases: NSTableView!
     @IBOutlet weak var tabView: NSTabView!
-    @IBOutlet var menuWords: NSMenu!
-    @IBOutlet var menuPhrases: NSMenu!
+    @IBOutlet weak var menuWords: NSMenu!
+    @IBOutlet weak var menuPhrases: NSMenu!
 
     var vmSettings: SettingsViewModel! { nil }
     var vmWords: WordsBaseViewModel! { nil }
