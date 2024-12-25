@@ -5059,10 +5059,50 @@ Gw
         <scene sceneID="dnU-59-p3g">
             <objects>
                 <viewController storyboardIdentifier="PhrasesReviewViewController" id="I1g-x1-rZK" customClass="PhrasesReviewViewController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" misplaced="YES" id="JA3-uv-wIc">
-                        <rect key="frame" x="0.0" y="0.0" width="563" height="288"/>
+                    <view key="view" id="JA3-uv-wIc">
+                        <rect key="frame" x="0.0" y="0.0" width="563" height="287"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
+                            <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kLD-in-D3W">
+                                <rect key="frame" x="0.0" y="255" width="201" height="32"/>
+                                <subviews>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Bia-8L-RF2">
+                                        <rect key="frame" x="-1" y="-1" width="111" height="32"/>
+                                        <buttonCell key="cell" type="push" title="New Test" bezelStyle="rounded" image="NSAdvanced" imagePosition="left" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="H20-Ca-fzG">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="newTest:" target="I1g-x1-rZK" id="QjJ-N7-C8r"/>
+                                        </connections>
+                                    </button>
+                                    <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OdW-EG-XjR">
+                                        <rect key="frame" x="106" y="3" width="97" height="24"/>
+                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="1u7-sV-0Wc">
+                                            <font key="font" metaFont="system"/>
+                                            <segments>
+                                                <segment label="Silent" width="44"/>
+                                                <segment label="Speak" width="44" selected="YES" tag="1"/>
+                                            </segments>
+                                        </segmentedCell>
+                                        <connections>
+                                            <action selector="isSpeakingChanged:" target="I1g-x1-rZK" id="xju-XT-MFs"/>
+                                        </connections>
+                                    </segmentedControl>
+                                </subviews>
+                                <edgeInsets key="edgeInsets" left="6" right="0.0" top="6" bottom="6"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="6WJ-Od-baf"/>
+                                </constraints>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
                             <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lHa-Iq-qF8">
                                 <rect key="frame" x="18" y="238" width="63" height="29"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="Label" id="mKw-DR-nId">
@@ -5127,7 +5167,7 @@ Gw
                                 </connections>
                             </textField>
                             <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tfQ-3Y-osT">
-                                <rect key="frame" x="448" y="13" width="102" height="32"/>
+                                <rect key="frame" x="448" y="12" width="102" height="32"/>
                                 <buttonCell key="cell" type="push" title="Check" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="x7r-80-SIu">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -5137,7 +5177,7 @@ Gw
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hZW-ZX-inQ">
-                                <rect key="frame" x="340" y="13" width="102" height="32"/>
+                                <rect key="frame" x="340" y="12" width="102" height="32"/>
                                 <buttonCell key="cell" type="push" title="Check" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="zfY-rC-xan">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -5147,7 +5187,7 @@ Gw
                                 </connections>
                             </button>
                             <segmentedControl verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SyK-hA-mZ7">
-                                <rect key="frame" x="201" y="18" width="127" height="23"/>
+                                <rect key="frame" x="201" y="17" width="127" height="23"/>
                                 <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="cTV-Rf-W4K">
                                     <font key="font" metaFont="system"/>
                                     <segments>
@@ -5157,7 +5197,7 @@ Gw
                                 </segmentedCell>
                             </segmentedControl>
                             <segmentedControl verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tm1-HS-91q">
-                                <rect key="frame" x="52" y="18" width="131" height="23"/>
+                                <rect key="frame" x="52" y="17" width="131" height="23"/>
                                 <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="ltB-hW-mLQ">
                                     <font key="font" metaFont="system"/>
                                     <segments>
@@ -5188,6 +5228,7 @@ Gw
                             <constraint firstItem="If1-ZZ-S9R" firstAttribute="leading" secondItem="JA3-uv-wIc" secondAttribute="leading" constant="281" id="JJ1-Vx-5ez"/>
                             <constraint firstItem="Fhl-OE-S8U" firstAttribute="top" secondItem="lHa-Iq-qF8" secondAttribute="bottom" constant="20" id="M99-eW-wmh"/>
                             <constraint firstAttribute="bottom" secondItem="If1-ZZ-S9R" secondAttribute="bottom" constant="136" id="Mbe-sA-vJe"/>
+                            <constraint firstItem="kLD-in-D3W" firstAttribute="top" secondItem="JA3-uv-wIc" secondAttribute="top" id="OYs-IE-L7V"/>
                             <constraint firstItem="hZW-ZX-inQ" firstAttribute="leading" secondItem="SyK-hA-mZ7" secondAttribute="trailing" constant="20" id="Q6k-PU-31N"/>
                             <constraint firstItem="tfQ-3Y-osT" firstAttribute="trailing" secondItem="UT0-VP-Vmh" secondAttribute="trailing" id="RRL-pm-CcY"/>
                             <constraint firstItem="lHa-Iq-qF8" firstAttribute="top" secondItem="JA3-uv-wIc" secondAttribute="top" constant="20" id="VqS-oB-cHX"/>
@@ -5198,6 +5239,7 @@ Gw
                             <constraint firstItem="5q9-Ad-ZAs" firstAttribute="centerY" secondItem="lHa-Iq-qF8" secondAttribute="centerY" id="lgT-aX-pYg"/>
                             <constraint firstAttribute="trailing" secondItem="UT0-VP-Vmh" secondAttribute="trailing" constant="20" id="qrJ-x8-s3V"/>
                             <constraint firstItem="UT0-VP-Vmh" firstAttribute="leading" secondItem="lHa-Iq-qF8" secondAttribute="leading" id="wrw-jF-kgL"/>
+                            <constraint firstItem="kLD-in-D3W" firstAttribute="leading" secondItem="JA3-uv-wIc" secondAttribute="leading" id="wsF-lq-WJj"/>
                             <constraint firstItem="tm1-HS-91q" firstAttribute="centerY" secondItem="tfQ-3Y-osT" secondAttribute="centerY" id="xaH-jC-JVi"/>
                             <constraint firstItem="3SA-ko-IAe" firstAttribute="centerY" secondItem="lHa-Iq-qF8" secondAttribute="centerY" id="zIM-Zh-mWZ"/>
                         </constraints>
@@ -5207,6 +5249,7 @@ Gw
                         <outlet property="btnCheckPrev" destination="hZW-ZX-inQ" id="x8h-yw-9jE"/>
                         <outlet property="scMoveForward" destination="SyK-hA-mZ7" id="cVz-un-p5a"/>
                         <outlet property="scOnRepeat" destination="tm1-HS-91q" id="zy9-gw-C3u"/>
+                        <outlet property="scSpeak" destination="OdW-EG-XjR" id="vkq-Dy-FbK"/>
                         <outlet property="tfCorrect" destination="5q9-Ad-ZAs" id="phw-vf-Foc"/>
                         <outlet property="tfIncorrect" destination="3SA-ko-IAe" id="M2w-e1-jJ5"/>
                         <outlet property="tfIndex" destination="lHa-Iq-qF8" id="03A-ct-hmU"/>
