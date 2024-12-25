@@ -12,6 +12,7 @@ import AVFAudio
 
 class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldDelegate {
 
+    @IBOutlet weak var scSpeak: NSSegmentedControl!
     @IBOutlet weak var tfIndex: NSTextField!
     @IBOutlet weak var tfCorrect: NSTextField!
     @IBOutlet weak var tfIncorrect: NSTextField!
@@ -73,7 +74,7 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
         super.viewDidAppear()
         settingsChanged()
         wc = view.window!.windowController as? PhrasesReviewWindowController
-        vm.$isSpeaking <~> wc.scSpeak.isOnProperty ~ subscriptions
+        vm.$isSpeaking <~> scSpeak.isOnProperty ~ subscriptions
         vm.$isSpeaking.sink { [unowned self] isSpeaking in
             if isSpeaking {
                 let dialogue = AVSpeechUtterance(string: vm.currentPhrase)
