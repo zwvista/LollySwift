@@ -74,19 +74,57 @@
         <scene sceneID="Lrf-5d-pN3">
             <objects>
                 <customObject id="JnV-nh-oBL" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <viewController id="JiS-vG-Xmg" customClass="PatternsViewController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PatternsViewController" id="JiS-vG-Xmg" customClass="PatternsViewController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" misplaced="YES" id="KpS-F7-nJh">
                         <rect key="frame" x="0.0" y="0.0" width="1200" height="575"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H5k-Cg-pWu">
-                                <rect key="frame" x="0.0" y="410" width="464" height="32"/>
+                                <rect key="frame" x="0.0" y="410" width="893" height="32"/>
                                 <subviews>
                                     <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hoJ-Fy-vSX">
-                                        <rect key="frame" x="6" y="4" width="195" height="22"/>
+                                        <rect key="frame" x="6" y="4" width="624" height="22"/>
                                         <subviews>
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8mo-GY-wMz">
+                                                <rect key="frame" x="-7" y="-5" width="122" height="32"/>
+                                                <buttonCell key="cell" type="push" title="Add Pattern" bezelStyle="rounded" image="NSAddTemplate" imagePosition="leading" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="1aH-Ea-OWI">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                            </button>
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="b3Z-nU-L3t">
+                                                <rect key="frame" x="101" y="-5" width="136" height="32"/>
+                                                <buttonCell key="cell" type="push" title="Add WebPage" bezelStyle="rounded" image="NSAddTemplate" imagePosition="leading" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="dTa-W9-K5r">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                            </button>
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4Ef-Ct-DmS">
+                                                <rect key="frame" x="223" y="-5" width="90" height="32"/>
+                                                <buttonCell key="cell" type="push" title="Delete" bezelStyle="rounded" image="NSRemoveTemplate" imagePosition="leading" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6pp-Nj-ils">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                            </button>
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Fe4-C5-mHA">
+                                                <rect key="frame" x="299" y="-5" width="44" height="32"/>
+                                                <buttonCell key="cell" type="push" title="Refresh" bezelStyle="rounded" image="NSRefreshTemplate" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ltc-AP-JuZ">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                            </button>
+                                            <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="djc-Bc-mH2">
+                                                <rect key="frame" x="334" y="-1" width="97" height="24"/>
+                                                <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="Dsq-iZ-afh">
+                                                    <font key="font" metaFont="system"/>
+                                                    <segments>
+                                                        <segment label="Silent" width="44"/>
+                                                        <segment label="Speak" width="44" selected="YES" tag="1"/>
+                                                    </segments>
+                                                </segmentedCell>
+                                            </segmentedControl>
                                             <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lax-hb-G91">
-                                                <rect key="frame" x="-2" y="-1" width="103" height="24"/>
+                                                <rect key="frame" x="427" y="-1" width="103" height="24"/>
                                                 <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="Cfk-Fp-bHo">
                                                     <font key="font" metaFont="system"/>
                                                     <segments>
@@ -96,7 +134,7 @@
                                                 </segmentedCell>
                                             </segmentedControl>
                                             <searchField focusRingType="none" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JOv-46-g8J">
-                                                <rect key="frame" x="99" y="0.0" width="96" height="22"/>
+                                                <rect key="frame" x="528" y="0.0" width="96" height="22"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="96" id="Vbt-0T-9Ss"/>
                                                 </constraints>
@@ -110,14 +148,24 @@
                                         <visibilityPriorities>
                                             <integer value="1000"/>
                                             <integer value="1000"/>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
                                         </visibilityPriorities>
                                         <customSpacing>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
                                             <real value="3.4028234663852886e+38"/>
                                             <real value="3.4028234663852886e+38"/>
                                         </customSpacing>
                                     </stackView>
                                     <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3zY-Jh-US8">
-                                        <rect key="frame" x="206" y="5" width="258" height="21"/>
+                                        <rect key="frame" x="635" y="5" width="258" height="21"/>
                                         <subviews>
                                             <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SGa-Ua-VHQ">
                                                 <rect key="frame" x="0.0" y="0.0" width="200" height="21"/>
@@ -455,7 +503,9 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="menuPatterns" destination="lQY-c3-QUZ" id="5C2-Jo-Os0"/>
                         <outlet property="scScopeFilter" destination="lax-hb-G91" id="fFD-Nv-Mvi"/>
+                        <outlet property="scSpeak" destination="djc-Bc-mH2" id="NJC-Fb-7kA"/>
                         <outlet property="sfTextFilter" destination="JOv-46-g8J" id="JkA-jb-eVV"/>
                         <outlet property="tableView" destination="z73-cL-LaQ" id="7iR-Tq-sAX"/>
                         <outlet property="tfStatusText" destination="2Jf-4e-nAu" id="Ty5-o3-DbE"/>
@@ -463,7 +513,7 @@
                         <outlet property="wvWebPage" destination="w1A-W0-K33" id="0gd-aR-61J"/>
                     </connections>
                 </viewController>
-                <menu id="lQY-c3-QUZ" userLabel="MenuPatterns">
+                <menu id="lQY-c3-QUZ" userLabel="Patterns Menu">
                     <items>
                         <menuItem title="Edit" id="Emo-RX-m7b">
                             <modifierMask key="keyEquivalentModifierMask"/>

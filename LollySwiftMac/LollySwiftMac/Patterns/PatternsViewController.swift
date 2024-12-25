@@ -13,13 +13,15 @@ import AVFAudio
 
 class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSource, NSTableViewDelegate, NSMenuItemValidation {
 
+    @IBOutlet weak var scSpeak: NSSegmentedControl!
     @IBOutlet weak var wvWebPage: WKWebView!
     @IBOutlet weak var scScopeFilter: NSSegmentedControl!
     @IBOutlet weak var sfTextFilter: NSSearchField!
     @IBOutlet weak var tfURL: NSTextField!
     @IBOutlet weak var tableView: NSTableView!
     @IBOutlet weak var tfStatusText: NSTextField!
-
+    @IBOutlet var menuPatterns: NSMenu!
+    
     var vm: PatternsViewModel!
     let synth = AVSpeechSynthesizer()
     var isSpeaking = true
@@ -42,8 +44,9 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     var wc: PatternsWindowController!
     override func viewDidAppear() {
         super.viewDidAppear()
-        wc = view.window!.windowController as? PatternsWindowController
-        wc.scSpeak.selectedSegment = isSpeaking ? 1 : 0
+//        wc = view.window!.windowController as? PatternsWindowController
+//        wc.scSpeak.selectedSegment = isSpeaking ? 1 : 0
+        scSpeak.selectedSegment = isSpeaking ? 1 : 0
         // For some unknown reason, the placeholder string of the filter text field
         // cannot be set in the storyboard
         // https://stackoverflow.com/questions/5519512/nstextfield-placeholder-text-doesnt-show-unless-editing

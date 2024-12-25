@@ -13,12 +13,13 @@ class MainViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        showTab(storyBoardName: "Words", viewControllerID: "WordsUnitViewController", label: "Words in Unit")
-//        showTab(storyBoardName: "Phrases", viewControllerID: "PhrasesUnitViewController", label: "Phrases in Unit")
+        showTab(storyBoardName: "Words", viewControllerID: "WordsUnitViewController", label: "Words in Unit")
+        showTab(storyBoardName: "Phrases", viewControllerID: "PhrasesUnitViewController", label: "Phrases in Unit")
 //        showTab(storyBoardName: "Words", viewControllerID: "WordsTextbookViewController", label: "Words in Textbook")
 //        showTab(storyBoardName: "Phrases", viewControllerID: "PhrasesTextbookViewController", label: "Phrases in Textbook")
-        showTab(storyBoardName: "Words", viewControllerID: "WordsLangViewController", label: "Words in Language")
-        showTab(storyBoardName: "Phrases", viewControllerID: "PhrasesLangViewController", label: "Phrases in Language")
+//        showTab(storyBoardName: "Words", viewControllerID: "WordsLangViewController", label: "Words in Language")
+//        showTab(storyBoardName: "Phrases", viewControllerID: "PhrasesLangViewController", label: "Phrases in Language")
+        showTab(storyBoardName: "Patterns", viewControllerID: "PatternsViewController", label: "Patterns In Language")
     }
 
     func showTab(storyBoardName: String, viewControllerID: String, label: String) {
