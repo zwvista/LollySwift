@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22689"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23504"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -15,7 +14,7 @@
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
-                        <toolbar key="toolbar" implicitIdentifier="55E5566E-F48C-43DE-814A-1A373DD057EE" autosavesConfiguration="NO" displayMode="iconAndLabel" sizeMode="regular" id="w0g-9v-EGJ">
+                        <toolbar key="toolbar" implicitIdentifier="55E5566E-F48C-43DE-814A-1A373DD057EE" autosavesConfiguration="NO" showsBaselineSeparator="NO" displayMode="iconAndLabel" sizeMode="regular" id="w0g-9v-EGJ">
                             <allowedToolbarItems>
                                 <toolbarItem implicitItemIdentifier="8773739D-6209-490F-9F3D-D5858B8C3C7D" label="Speak?" paletteLabel="Speak?" sizingBehavior="auto" id="m6z-fd-gBU" userLabel="Speak?">
                                     <nil key="toolTip"/>
@@ -59,7 +58,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="554" height="300"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="xfX-XA-ulZ">
+                            <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="xfX-XA-ulZ">
                                 <rect key="frame" x="11" y="160" width="523" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="8cW-CC-h3b"/>
@@ -74,7 +73,7 @@
                                     <outlet property="delegate" destination="loC-Uj-4zm" id="IJm-I9-rSm"/>
                                 </connections>
                             </textField>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="s6y-li-pNW">
+                            <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="s6y-li-pNW">
                                 <rect key="frame" x="11" y="80" width="523" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="Ew5-ai-pVP"/>
