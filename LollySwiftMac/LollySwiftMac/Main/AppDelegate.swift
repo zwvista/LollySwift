@@ -103,47 +103,23 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         findOrShowWindow(storyBoardName: "Words", windowControllerName: "WordsUnitWindowController")
     }
 
-    @IBAction func wordsInUnitNew(_ sender: AnyObject) {
-        showWindow(storyBoardName: "Words", windowControllerName: "WordsUnitWindowController")
-    }
-
     @IBAction func phrasesInUnit(_ sender: AnyObject) {
         findOrShowWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesUnitWindowController")
-    }
-
-    @IBAction func phrasesInUnitNew(_ sender: AnyObject) {
-        showWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesUnitWindowController")
     }
 
     @IBAction func wordsReview(_ sender: AnyObject) {
         findOrShowWindow(storyBoardName: "Words", windowControllerName: "WordsReviewWindowController")
     }
 
-    @IBAction func wordsReviewNew(_ sender: AnyObject) {
-        showWindow(storyBoardName: "Words", windowControllerName: "WordsReviewWindowController")
-    }
-
     @IBAction func phrasesReview(_ sender: AnyObject) {
         findOrShowWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesReviewWindowController")
-    }
-
-    @IBAction func phrasesReviewNew(_ sender: AnyObject) {
-        showWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesReviewWindowController")
     }
 
     @IBAction func wordsInTextbook(_ sender: AnyObject) {
         findOrShowWindow(storyBoardName: "Words", windowControllerName: "WordsTextbookWindowController")
     }
 
-    @IBAction func wordsInTextbookNew(_ sender: AnyObject) {
-        showWindow(storyBoardName: "Words", windowControllerName: "WordsTextbookWindowController")
-    }
-
     @IBAction func phrasesInTextbook(_ sender: AnyObject) {
-        showWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesTextbookWindowController")
-    }
-
-    @IBAction func phrasesInTextbookNew(_ sender: AnyObject) {
         showWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesTextbookWindowController")
     }
 
@@ -151,24 +127,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         findOrShowWindow(storyBoardName: "Words", windowControllerName: "WordsLangWindowController")
     }
 
-    @IBAction func wordsInLanguageNew(_ sender: AnyObject) {
-        showWindow(storyBoardName: "Words", windowControllerName: "WordsLangWindowController")
-    }
-
     @IBAction func phrasesInLanguage(_ sender: AnyObject) {
         findOrShowWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesLangWindowController")
     }
 
-    @IBAction func phrasesInLanguageNew(_ sender: AnyObject) {
-        showWindow(storyBoardName: "Phrases", windowControllerName: "PhrasesLangWindowController")
-    }
-
     @IBAction func patternsInLanguage(_ sender: AnyObject) {
         findOrShowWindow(storyBoardName: "Patterns", windowControllerName: "PatternsWindowController")
-    }
-
-    @IBAction func patternsInLanguageNew(_ sender: AnyObject) {
-        showWindow(storyBoardName: "Patterns", windowControllerName: "PatternsWindowController")
     }
 
     @IBAction func editUnitBlog(_ sender: AnyObject) {
