@@ -1328,29 +1328,9 @@
                                     <action selector="nextUnitPart:" target="HfO-r7-QMx" id="Kgl-8O-UH9"/>
                                 </connections>
                             </button>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="QbB-2Z-aY5">
-                                <rect key="frame" x="6" y="13" width="190" height="32"/>
-                                <buttonCell key="cell" type="push" title="Apply to All Windows" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="r5j-MF-S9U">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="close:" target="HfO-r7-QMx" id="3Oq-tU-3zJ"/>
-                                </connections>
-                            </button>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="r2J-Vm-54f">
-                                <rect key="frame" x="200" y="13" width="190" height="32"/>
-                                <buttonCell key="cell" type="push" title="Apply to Current Window" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="gWn-Lr-VTf">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="close:" target="HfO-r7-QMx" id="uo7-qr-78H"/>
-                                </connections>
-                            </button>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="QMz-gd-sUW">
-                                <rect key="frame" x="397" y="13" width="190" height="32"/>
-                                <buttonCell key="cell" type="push" title="Apply to None" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="KI0-0w-mkA">
+                                <rect key="frame" x="467" y="13" width="120" height="32"/>
+                                <buttonCell key="cell" type="push" title="Close &amp; Apply" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="KI0-0w-mkA">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                     <string key="keyEquivalent" base64-UTF8="YES">
@@ -1358,12 +1338,11 @@ Gw
 </string>
                                 </buttonCell>
                                 <connections>
-                                    <action selector="close:" target="HfO-r7-QMx" id="Ov5-nf-qzl"/>
+                                    <action selector="dismissController:" target="HfO-r7-QMx" id="7iA-eD-seV"/>
                                 </connections>
                             </button>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="QMz-gd-sUW" firstAttribute="leading" secondItem="r2J-Vm-54f" secondAttribute="trailing" constant="21" id="0yo-va-WPs"/>
                             <constraint firstItem="NHc-fW-dBl" firstAttribute="leading" secondItem="fnN-We-eae" secondAttribute="trailing" constant="12" id="34e-2y-gcV"/>
                             <constraint firstItem="iaA-UK-MEB" firstAttribute="centerY" secondItem="amm-Ya-sSe" secondAttribute="centerY" id="3qi-SR-ot1"/>
                             <constraint firstItem="iaA-UK-MEB" firstAttribute="leading" secondItem="fnN-We-eae" secondAttribute="leading" id="41J-qr-PX0"/>
@@ -1372,7 +1351,6 @@ Gw
                             <constraint firstItem="l5P-3b-jEL" firstAttribute="width" secondItem="Yra-vx-iUa" secondAttribute="width" id="6N2-n9-rK2"/>
                             <constraint firstItem="MSM-uH-33R" firstAttribute="top" secondItem="CB4-lQ-YHh" secondAttribute="top" id="8I8-Sj-Xvw"/>
                             <constraint firstItem="l5P-3b-jEL" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Oq2-e8-m3D" secondAttribute="trailing" constant="8" symbolic="YES" id="8qB-C2-8Un"/>
-                            <constraint firstItem="r2J-Vm-54f" firstAttribute="leading" secondItem="QbB-2Z-aY5" secondAttribute="trailing" constant="18" id="8tu-OF-3e3"/>
                             <constraint firstItem="8FM-8h-XQF" firstAttribute="leading" secondItem="Kfo-kM-SO0" secondAttribute="leading" id="AzB-oo-KCc"/>
                             <constraint firstItem="NLa-HM-eg1" firstAttribute="top" secondItem="GTc-kH-1Ux" secondAttribute="bottom" constant="11" id="AzF-Zp-UMu"/>
                             <constraint firstItem="amm-Ya-sSe" firstAttribute="leading" secondItem="iaA-UK-MEB" secondAttribute="trailing" constant="12" symbolic="YES" id="BRf-t9-RBw"/>
@@ -1389,19 +1367,16 @@ Gw
                             <constraint firstItem="Xjt-G8-0bL" firstAttribute="leading" secondItem="NHc-fW-dBl" secondAttribute="trailing" constant="12" id="LAm-hq-uhH"/>
                             <constraint firstItem="Y1Q-Mm-m8t" firstAttribute="leading" secondItem="rwe-QA-vd1" secondAttribute="trailing" constant="8" symbolic="YES" id="MQb-75-goV"/>
                             <constraint firstItem="1oq-rW-MUb" firstAttribute="centerY" secondItem="sxf-h3-GJC" secondAttribute="centerY" id="Mr9-J8-dxN"/>
-                            <constraint firstItem="QbB-2Z-aY5" firstAttribute="width" secondItem="r2J-Vm-54f" secondAttribute="width" id="NwV-ap-hN3"/>
                             <constraint firstItem="iaA-UK-MEB" firstAttribute="top" secondItem="fnN-We-eae" secondAttribute="bottom" constant="12" id="Nxn-7R-gTW"/>
                             <constraint firstItem="GTc-kH-1Ux" firstAttribute="width" secondItem="Yra-vx-iUa" secondAttribute="width" id="OT2-Tv-uXq"/>
                             <constraint firstItem="MSM-uH-33R" firstAttribute="top" secondItem="6If-OE-53N" secondAttribute="top" id="PZa-GV-yx9"/>
                             <constraint firstItem="b7U-Wa-ylD" firstAttribute="top" secondItem="GTc-kH-1Ux" secondAttribute="bottom" constant="8" id="PgC-zR-tVC"/>
-                            <constraint firstItem="QbB-2Z-aY5" firstAttribute="centerY" secondItem="QMz-gd-sUW" secondAttribute="centerY" id="QUq-Kv-Ie6"/>
                             <constraint firstItem="l5P-3b-jEL" firstAttribute="centerY" secondItem="Oq2-e8-m3D" secondAttribute="centerY" id="VoS-v0-3mS"/>
                             <constraint firstItem="MSM-uH-33R" firstAttribute="leading" secondItem="l5P-3b-jEL" secondAttribute="leading" id="WUj-wL-JqQ"/>
                             <constraint firstItem="Y1Q-Mm-m8t" firstAttribute="width" secondItem="1oq-rW-MUb" secondAttribute="width" id="WVN-en-64W"/>
                             <constraint firstItem="sxf-h3-GJC" firstAttribute="leading" secondItem="Kfo-kM-SO0" secondAttribute="leading" id="XDJ-Va-jOt"/>
                             <constraint firstItem="sxf-h3-GJC" firstAttribute="top" secondItem="6If-OE-53N" secondAttribute="bottom" constant="54" id="Y5p-MW-KRJ"/>
                             <constraint firstItem="GYX-NJ-ZBj" firstAttribute="leading" secondItem="Kfo-kM-SO0" secondAttribute="leading" id="YBK-GZ-yBS"/>
-                            <constraint firstItem="QMz-gd-sUW" firstAttribute="width" secondItem="r2J-Vm-54f" secondAttribute="width" id="YIO-4k-NOw"/>
                             <constraint firstItem="Yra-vx-iUa" firstAttribute="centerY" secondItem="Kfo-kM-SO0" secondAttribute="centerY" id="YKG-0m-Pbk"/>
                             <constraint firstItem="1oq-rW-MUb" firstAttribute="leading" secondItem="sxf-h3-GJC" secondAttribute="trailing" constant="8" symbolic="YES" id="Yy9-vQ-AQd"/>
                             <constraint firstItem="6If-OE-53N" firstAttribute="leading" secondItem="Kfo-kM-SO0" secondAttribute="leading" id="Yye-U6-XRV"/>
@@ -1415,7 +1390,6 @@ Gw
                             <constraint firstItem="Yra-vx-iUa" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Kfo-kM-SO0" secondAttribute="trailing" constant="8" symbolic="YES" id="dyM-Vj-cwd"/>
                             <constraint firstItem="Kfo-kM-SO0" firstAttribute="leading" secondItem="UlA-4i-lOC" secondAttribute="leading" constant="20" id="eAU-SG-4a9"/>
                             <constraint firstItem="NLa-HM-eg1" firstAttribute="leading" secondItem="b7U-Wa-ylD" secondAttribute="trailing" constant="12" id="fEv-K6-l8E"/>
-                            <constraint firstAttribute="width" secondItem="r2J-Vm-54f" secondAttribute="width" multiplier="3.40909" id="fkz-Lf-EbG"/>
                             <constraint firstItem="NHc-fW-dBl" firstAttribute="top" secondItem="NLa-HM-eg1" secondAttribute="bottom" constant="13" id="g14-Jx-CEM"/>
                             <constraint firstItem="MSM-uH-33R" firstAttribute="top" secondItem="l5P-3b-jEL" secondAttribute="bottom" constant="14" id="h4L-oy-UWE"/>
                             <constraint firstItem="rwe-QA-vd1" firstAttribute="trailing" secondItem="sxf-h3-GJC" secondAttribute="trailing" id="izO-PB-QHV"/>
@@ -1429,7 +1403,6 @@ Gw
                             <constraint firstItem="Xjt-G8-0bL" firstAttribute="width" secondItem="PW2-rx-UfY" secondAttribute="width" id="pzc-tc-SY8"/>
                             <constraint firstItem="RQX-rZ-9Ej" firstAttribute="top" secondItem="rwe-QA-vd1" secondAttribute="bottom" constant="8" id="rer-L4-Oih"/>
                             <constraint firstItem="MSM-uH-33R" firstAttribute="top" secondItem="UlA-4i-lOC" secondAttribute="top" constant="81" id="tGY-ey-Jmf"/>
-                            <constraint firstItem="r2J-Vm-54f" firstAttribute="centerY" secondItem="QMz-gd-sUW" secondAttribute="centerY" id="uy2-FO-JuL"/>
                             <constraint firstItem="Y1Q-Mm-m8t" firstAttribute="top" secondItem="1oq-rW-MUb" secondAttribute="bottom" constant="8" id="v2X-Gx-mO7"/>
                             <constraint firstItem="Yra-vx-iUa" firstAttribute="leading" secondItem="UlA-4i-lOC" secondAttribute="leading" constant="173" id="vME-Ip-ySc"/>
                             <constraint firstItem="b7U-Wa-ylD" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8FM-8h-XQF" secondAttribute="trailing" constant="8" symbolic="YES" id="w3K-NS-Ek8"/>
@@ -1450,9 +1423,6 @@ Gw
                         <outlet property="acTextbooks" destination="PzR-zm-jg5" id="i56-1N-obp"/>
                         <outlet property="acUnits" destination="7EM-l7-CJV" id="MQX-BO-OYy"/>
                         <outlet property="acVoices" destination="12V-SQ-el6" id="DnG-ok-0ap"/>
-                        <outlet property="btnApplyAll" destination="QbB-2Z-aY5" id="STv-Ac-aY1"/>
-                        <outlet property="btnApplyCurrent" destination="r2J-Vm-54f" id="5jq-mp-eLU"/>
-                        <outlet property="btnApplyNone" destination="QMz-gd-sUW" id="9yE-3h-SII"/>
                         <outlet property="btnNext" destination="amm-Ya-sSe" id="nbe-8V-mIA"/>
                         <outlet property="btnPrevious" destination="iaA-UK-MEB" id="Hgm-rS-vte"/>
                         <outlet property="btnSelectDicts" destination="CB4-lQ-YHh" id="fuv-yx-q2g"/>

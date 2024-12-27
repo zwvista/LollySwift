@@ -15,7 +15,6 @@ class MainViewController: NSViewController {
         super.viewDidLoad()
         wordsInUnit(self)
         phrasesInUnit(self)
-        wordsReview(self)
     }
 
     func showTab(storyBoardName: String, viewControllerID: String, label: String) {
@@ -40,6 +39,11 @@ class MainViewController: NSViewController {
 
     @IBAction func settings(_ sender: AnyObject) {
         let vc = storyboard!.instantiateController(withIdentifier: "SettingsViewController") as! SettingsViewController
+        vc.complete = { [unowned self] in
+            for item in tabView.tabViewItems {
+                (item.viewController as? LollyProtocol)?.settingsChanged()
+            }
+        }
         presentAsModalWindow(vc)
     }
 
