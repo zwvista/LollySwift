@@ -16,9 +16,9 @@ class PhrasesUnitViewModel: PhrasesBaseViewModel {
     @Published var arrPhrasesFiltered = [MUnitPhrase]()
     var hasFilter: Bool { !(textFilter.isEmpty && textbookFilter == 0) }
 
-    public init(settings: SettingsViewModel, inTextbook: Bool, needCopy: Bool, complete: @escaping () -> Void) {
+    public init(settings: SettingsViewModel, inTextbook: Bool, complete: @escaping () -> Void) {
         self.inTextbook = inTextbook
-        super.init(settings: settings, needCopy: needCopy)
+        super.init(settings: settings)
 
         $arrPhrases.didSet.combineLatest($indexTextbookFilter.didSet, $textFilter.didSet, $scopeFilter.didSet).sink { [unowned self] _ in
             arrPhrasesFiltered = arrPhrases

@@ -30,7 +30,7 @@ class LangBlogPostsViewController: NSViewController, NSTableViewDataSource, NSTa
     }
 
     @IBAction func refreshTableView(_ sender: Any) {
-        vm = LangBlogPostsViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) { [unowned self] in
+        vm = LangBlogPostsViewModel(settings: AppDelegate.theSettingsViewModel) { [unowned self] in
             tvPosts.reloadData()
         }
     }

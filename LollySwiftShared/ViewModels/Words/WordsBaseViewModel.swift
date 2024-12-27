@@ -21,8 +21,8 @@ class WordsPhrasesBaseViewModel: NSObject, ObservableObject {
 
     var subscriptions = Set<AnyCancellable>()
 
-    init(settings: SettingsViewModel, needCopy: Bool) {
-        vmSettings = !needCopy ? settings : SettingsViewModel(settings)
+    init(settings: SettingsViewModel) {
+        vmSettings = settings
         super.init()
         stringTextbookFilter = vmSettings.arrTextbookFilters[0].label
         $stringTextbookFilter.sink { [unowned self] s in

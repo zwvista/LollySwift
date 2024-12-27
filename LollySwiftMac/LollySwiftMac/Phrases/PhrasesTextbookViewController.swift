@@ -25,7 +25,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
     }
 
     override func settingsChanged() {
-        vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: false, needCopy: true) { [unowned self] in
+        vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: false) { [unowned self] in
             acTextbooks.content = vmSettings.arrTextbookFilters
         }
         vm.$arrPhrasesFiltered.didSet.sink { [unowned self] _ in

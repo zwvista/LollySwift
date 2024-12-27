@@ -22,7 +22,7 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
     }
 
     override func settingsChanged() {
-        vm = WordsLangViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) {}
+        vm = WordsLangViewModel(settings: AppDelegate.theSettingsViewModel) {}
         vm.$arrWordsFiltered.didSet.sink { [unowned self] _ in
             doRefresh()
         } ~ subscriptions

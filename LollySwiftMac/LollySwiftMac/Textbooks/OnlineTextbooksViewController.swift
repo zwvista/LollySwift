@@ -30,7 +30,7 @@ class OnlineTextbooksViewController: NSViewController, LollyProtocol, NSTableVie
     }
 
     func settingsChanged() {
-        vm = OnlineTextbooksViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) { [unowned self] in
+        vm = OnlineTextbooksViewModel(settings: AppDelegate.theSettingsViewModel) { [unowned self] in
             acTextbooks.content = vm.vmSettings.arrOnlineTextbookFilters
         }
         vm.$arrOnlineTextbooksFiltered.didSet.sink { [unowned self] _ in

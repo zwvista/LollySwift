@@ -43,8 +43,8 @@ class PhrasesReviewViewModel: NSObject, ObservableObject {
     // https://stackoverflow.com/questions/70568987/it-is-possible-to-accessing-focusstates-value-outside-of-the-body-of-a-view
     @Published var inputFocused = false
 
-    init(settings: SettingsViewModel, needCopy: Bool, doTestAction: ((PhrasesReviewViewModel) -> Void)? = nil) {
-        vmSettings = !needCopy ? settings : SettingsViewModel(settings)
+    init(settings: SettingsViewModel, doTestAction: ((PhrasesReviewViewModel) -> Void)? = nil) {
+        vmSettings = settings
         self.doTestAction = doTestAction
         options.shuffled = true
     }

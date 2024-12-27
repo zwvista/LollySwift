@@ -23,8 +23,8 @@ class OnlineTextbooksViewModel: NSObject, ObservableObject {
 
     var subscriptions = Set<AnyCancellable>()
 
-    init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> Void) {
-        vmSettings = !needCopy ? settings : SettingsViewModel(settings)
+    init(settings: SettingsViewModel, complete: @escaping () -> Void) {
+        vmSettings = settings
         super.init()
 
         stringOnlineTextbookFilter = vmSettings.arrOnlineTextbookFilters[0].label

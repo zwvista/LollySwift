@@ -18,8 +18,8 @@ class LangBlogViewModel: NSObject {
     var currentPost: MLangBlogPost? = nil
     var postContent = ""
 
-    init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> Void) {
-        vmSettings = !needCopy ? settings : SettingsViewModel(settings)
+    init(settings: SettingsViewModel, complete: @escaping () -> Void) {
+        vmSettings = settings
         super.init()
     }
 

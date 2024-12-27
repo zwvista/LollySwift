@@ -15,8 +15,8 @@ class WordsLangViewModel: WordsBaseViewModel {
     @Published var arrWordsFiltered = [MLangWord]()
     var hasFilter: Bool { !textFilter.isEmpty }
 
-    public init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> Void) {
-        super.init(settings: settings, needCopy: needCopy)
+    public init(settings: SettingsViewModel, complete: @escaping () -> Void) {
+        super.init(settings: settings)
 
         $arrWords.didSet.combineLatest($textFilter.didSet, $scopeFilter.didSet).sink { [unowned self] _ in
             arrWordsFiltered = arrWords
@@ -64,10 +64,6 @@ class WordsLangViewModel: WordsBaseViewModel {
         let item = arrWords[index]
         item.NOTE = SettingsViewModel.zeroNote
         await WordsUnitViewModel.update(item.ID, note: item.NOTE)
-    }
-
-    public init(settings: SettingsViewModel) {
-        super.init(settings: settings, needCopy: false)
     }
 
     func getWords(phraseid: Int) async {

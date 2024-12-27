@@ -25,7 +25,7 @@ class TextbooksViewController: NSViewController, LollyProtocol, NSTableViewDataS
     }
 
     @IBAction func refreshTableView(_ sender: AnyObject) {
-        vm = TextbooksViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) { [unowned self] in
+        vm = TextbooksViewModel(settings: AppDelegate.theSettingsViewModel) { [unowned self] in
             tableView.reloadData()
         }
     }

@@ -108,7 +108,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     }
 
     func settingsChanged() {
-        vm = PatternsViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) {}
+        vm = PatternsViewModel(settings: AppDelegate.theSettingsViewModel) {}
         vm.$textFilter <~> sfTextFilter.textProperty ~ subscriptions
         vm.$scopeFilter <~> scScopeFilter.selectedLabelProperty ~ subscriptions
         vm.$arrPatternsFiltered.didSet.sink { [unowned self] _ in

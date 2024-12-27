@@ -12,8 +12,8 @@ import Then
 @MainActor
 class LangBlogGroupsViewModel: LangBlogViewModel {
 
-    override init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> Void) {
-        super.init(settings: settings, needCopy: needCopy, complete: complete)
+    override init(settings: SettingsViewModel, complete: @escaping () -> Void) {
+        super.init(settings: settings, complete: complete)
         Task {
             arrGroups = await MLangBlogGroup.getDataByLang(settings.selectedLang.ID)
             complete()
