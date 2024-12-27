@@ -16,7 +16,7 @@ class WordsLangViewController: WordsBaseViewController {
 
     override func refresh() {
         view.showBlurLoader()
-        vm = WordsLangViewModel(settings: vmSettings, needCopy: false) { [unowned self] in
+        vm = WordsLangViewModel(settings: vmSettings) { [unowned self] in
             refreshControl.endRefreshing()
             view.removeBlurLoader()
         }
@@ -95,7 +95,7 @@ class WordsLangViewController: WordsBaseViewController {
         } else if let controller = segue.destination as? WordsDictViewController {
             let index = arrWords.firstIndex(of: sender as! MLangWord)!
             let (start, end) = getPreferredRangeFromArray(index: index, length: arrWords.count, preferredLength: 50)
-            controller.vm = WordsDictViewModel(settings: vmSettings, needCopy: false, arrWords: arrWords[start ..< end].map(\.WORD), currentWordIndex: index) {}
+            controller.vm = WordsDictViewModel(settings: vmSettings, arrWords: arrWords[start ..< end].map(\.WORD), currentWordIndex: index) {}
         }
     }
 

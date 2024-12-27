@@ -9,7 +9,7 @@ import SwiftUI
 
 struct UnitBlogPostsView: View {
     @Binding var navPath: NavigationPath
-    @ObservedObject var vm = UnitBlogPostsViewModel(settings: vmSettings, needCopy: false) {}
+    @ObservedObject var vm = UnitBlogPostsViewModel(settings: vmSettings) {}
     @State var webViewStore = WebViewStore()
     var body: some View {
         VStack(spacing: 0) {

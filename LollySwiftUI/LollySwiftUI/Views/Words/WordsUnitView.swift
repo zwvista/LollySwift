@@ -9,7 +9,7 @@ import SwiftUI
 
 struct WordsUnitView: View {
     @Binding var navPath: NavigationPath
-    @StateObject var vm = WordsUnitViewModel(settings: vmSettings, inTextbook: true, needCopy: false) {}
+    @StateObject var vm = WordsUnitViewModel(settings: vmSettings, inTextbook: true) {}
     @Environment(\.editMode) var editMode
     var isEditing: Bool { editMode?.wrappedValue.isEditing == true }
     @State var showDetailEdit = false
@@ -129,7 +129,7 @@ struct WordsUnitView: View {
                 Text(currentItem.WORDNOTE)
             })
             .navigationDestination(for: MUnitWord.self) { item in
-                WordsDictView(vm: WordsDictViewModel(settings: vmSettings, needCopy: false, arrWords: vm.arrWordsFiltered.map(\.WORD), currentWordIndex: vm.arrWordsFiltered.firstIndex(of: item)!) {})
+                WordsDictView(vm: WordsDictViewModel(settings: vmSettings, arrWords: vm.arrWordsFiltered.map(\.WORD), currentWordIndex: vm.arrWordsFiltered.firstIndex(of: item)!) {})
             }
             .toolbar {
                 ToolbarItemGroup {

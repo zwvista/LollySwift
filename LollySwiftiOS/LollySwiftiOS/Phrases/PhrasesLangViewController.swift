@@ -17,7 +17,7 @@ class PhrasesLangViewController: PhrasesBaseViewController {
 
     override func refresh() {
         view.showBlurLoader()
-        vm = PhrasesLangViewModel(settings: vmSettings, needCopy: false) { [unowned self] in
+        vm = PhrasesLangViewModel(settings: vmSettings) { [unowned self] in
             refreshControl.endRefreshing()
             view.removeBlurLoader()
         }

@@ -18,8 +18,8 @@ class OnlineTextbooksWebPageViewModel: NSObject, ObservableObject {
         currentOnlineTextbookIndex = (currentOnlineTextbookIndex + delta + arrOnlineTextbooks.count) % arrOnlineTextbooks.count
     }
 
-    init(settings: SettingsViewModel, needCopy: Bool, arrOnlineTextbooks: [MOnlineTextbook], currentOnlineTextbookIndex: Int, complete: @escaping () -> Void) {
-        vmSettings = !needCopy ? settings : SettingsViewModel(settings)
+    init(settings: SettingsViewModel, arrOnlineTextbooks: [MOnlineTextbook], currentOnlineTextbookIndex: Int, complete: @escaping () -> Void) {
+        vmSettings = settings
         self.arrOnlineTextbooks = arrOnlineTextbooks
         self.currentOnlineTextbookIndex = currentOnlineTextbookIndex
         super.init()

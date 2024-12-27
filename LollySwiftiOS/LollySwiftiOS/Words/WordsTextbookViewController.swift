@@ -19,7 +19,7 @@ class WordsTextbookViewController: WordsBaseViewController {
 
     override func refresh() {
         view.showBlurLoader()
-        vm = WordsUnitViewModel(settings: vmSettings, inTextbook: false, needCopy: false) { [unowned self] in
+        vm = WordsUnitViewModel(settings: vmSettings, inTextbook: false) { [unowned self] in
             refreshControl.endRefreshing()
             view.removeBlurLoader()
         }
@@ -110,7 +110,7 @@ class WordsTextbookViewController: WordsBaseViewController {
         } else if let controller = segue.destination as? WordsDictViewController {
             let index = arrWords.firstIndex(of: sender as! MUnitWord)!
             let (start, end) = getPreferredRangeFromArray(index: index, length: arrWords.count, preferredLength: 50)
-            controller.vm = WordsDictViewModel(settings: vmSettings, needCopy: false, arrWords: arrWords[start ..< end].map(\.WORD), currentWordIndex: index) {}
+            controller.vm = WordsDictViewModel(settings: vmSettings, arrWords: arrWords[start ..< end].map(\.WORD), currentWordIndex: index) {}
         }
     }
 

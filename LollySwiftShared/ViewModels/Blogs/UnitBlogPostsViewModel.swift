@@ -17,8 +17,8 @@ class UnitBlogPostsViewModel: NSObject, ObservableObject {
         currentUnitIndex = (currentUnitIndex + delta + arrUnits.count) % arrUnits.count
     }
 
-    init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> Void) {
-        vmSettings = !needCopy ? settings : SettingsViewModel(settings)
+    init(settings: SettingsViewModel, complete: @escaping () -> Void) {
+        vmSettings = settings
         arrUnits = vmSettings.arrUnits
         currentUnitIndex = vmSettings.selectedUnitToIndex
         super.init()

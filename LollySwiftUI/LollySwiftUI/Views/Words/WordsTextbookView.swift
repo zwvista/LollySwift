@@ -9,7 +9,7 @@ import SwiftUI
 
 struct WordsTextbookView: View {
     @Binding var navPath: NavigationPath
-    @StateObject var vm = WordsUnitViewModel(settings: vmSettings, inTextbook: false, needCopy: false) {}
+    @StateObject var vm = WordsUnitViewModel(settings: vmSettings, inTextbook: false) {}
     @State var showDetailEdit = false
     @State var showItemMore = false
     @State var showDelete = false
@@ -118,7 +118,7 @@ struct WordsTextbookView: View {
             .navigationDestination(for: MUnitWord.self) { item in
                 let index = vm.arrWordsFiltered.firstIndex(of: item)!
                 let (start, end) = getPreferredRangeFromArray(index: index, length: vm.arrWordsFiltered.count, preferredLength: 50)
-                WordsDictView(vm: WordsDictViewModel(settings: vmSettings, needCopy: false, arrWords: vm.arrWordsFiltered[start ..< end].map(\.WORD), currentWordIndex: index) {})
+                WordsDictView(vm: WordsDictViewModel(settings: vmSettings, arrWords: vm.arrWordsFiltered[start ..< end].map(\.WORD), currentWordIndex: index) {})
             }
             .sheet(isPresented: $showDetailEdit) {
                 WordsTextbookDetailView(vmEdit: WordsUnitDetailViewModel(vm: vm, item: currentItem, phraseid: 0), showDetail: $showDetailEdit)

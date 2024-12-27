@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PatternsView: View {
     @Binding var navPath: NavigationPath
-    @StateObject var vm = PatternsViewModel(settings: vmSettings, needCopy: false) {}
+    @StateObject var vm = PatternsViewModel(settings: vmSettings) {}
     @State var showDetail = false
     @State var showItemMore = false
     // https://stackoverflow.com/questions/59235879/how-to-show-an-alert-when-the-user-taps-on-the-list-row-in-swiftui
@@ -79,7 +79,7 @@ struct PatternsView: View {
             .navigationDestination(for: MPattern.self) { item in
                 let index = vm.arrPatternsFiltered.firstIndex(of: item)!
                 let (start, end) = getPreferredRangeFromArray(index: index, length: vm.arrPatternsFiltered.count, preferredLength: 50)
-                PatternsWebPageView(vm: PatternsWebPageViewModel(settings: vmSettings, needCopy: false, arrPatterns: Array(vm.arrPatternsFiltered[start ..< end]), currentPatternIndex: index) {})
+                PatternsWebPageView(vm: PatternsWebPageViewModel(settings: vmSettings, arrPatterns: Array(vm.arrPatternsFiltered[start ..< end]), currentPatternIndex: index) {})
             }
             .sheet(isPresented: $showDetail) {
                 PatternsDetailView(item: currentItem, showDetail: $showDetail)

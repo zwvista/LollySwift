@@ -18,8 +18,8 @@ class PatternsWebPageViewModel: NSObject, ObservableObject {
         currentPatternIndex = (currentPatternIndex + delta + arrPatterns.count) % arrPatterns.count
     }
 
-    init(settings: SettingsViewModel, needCopy: Bool, arrPatterns: [MPattern], currentPatternIndex: Int, complete: @escaping () -> Void) {
-        vmSettings = !needCopy ? settings : SettingsViewModel(settings)
+    init(settings: SettingsViewModel, arrPatterns: [MPattern], currentPatternIndex: Int, complete: @escaping () -> Void) {
+        vmSettings = settings
         self.arrPatterns = arrPatterns
         self.currentPatternIndex = currentPatternIndex
         super.init()

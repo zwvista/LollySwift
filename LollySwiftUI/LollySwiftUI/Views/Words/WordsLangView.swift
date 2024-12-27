@@ -9,7 +9,7 @@ import SwiftUI
 
 struct WordsLangView: View {
     @Binding var navPath: NavigationPath
-    @StateObject var vm = WordsLangViewModel(settings: vmSettings, needCopy: false) {}
+    @StateObject var vm = WordsLangViewModel(settings: vmSettings) {}
     @State var showDetail = false
     @State var showDetailEdit = false
     @State var showDetailAdd = false
@@ -104,7 +104,7 @@ struct WordsLangView: View {
             .navigationDestination(for: MLangWord.self) { item in
                 let index = vm.arrWordsFiltered.firstIndex(of: item)!
                 let (start, end) = getPreferredRangeFromArray(index: index, length: vm.arrWordsFiltered.count, preferredLength: 50)
-                WordsDictView(vm: WordsDictViewModel(settings: vmSettings, needCopy: false, arrWords: vm.arrWordsFiltered[start ..< end].map(\.WORD), currentWordIndex: index) {})
+                WordsDictView(vm: WordsDictViewModel(settings: vmSettings, arrWords: vm.arrWordsFiltered[start ..< end].map(\.WORD), currentWordIndex: index) {})
             }
             .sheet(isPresented: $showDetailEdit) {
                 WordsLangDetailView(vmEdit: WordsLangDetailViewModel(vm: vm, item: currentItem), showDetail: $showDetailEdit)
