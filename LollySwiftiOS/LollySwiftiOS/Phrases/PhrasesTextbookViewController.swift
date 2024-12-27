@@ -21,7 +21,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
 
     override func refresh() {
         view.showBlurLoader()
-        vm = PhrasesUnitViewModel(settings: vmSettings, inTextbook: false, needCopy: false) { [unowned self] in
+        vm = PhrasesUnitViewModel(settings: vmSettings, inTextbook: false) { [unowned self] in
             refreshControl.endRefreshing()
             view.removeBlurLoader()
         }

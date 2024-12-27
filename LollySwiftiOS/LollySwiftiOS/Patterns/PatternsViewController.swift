@@ -41,7 +41,7 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
 
     @objc func refresh(_ sender: UIRefreshControl) {
         view.showBlurLoader()
-        vm = PatternsViewModel(settings: vmSettings, needCopy: false) { [unowned self] in
+        vm = PatternsViewModel(settings: vmSettings) { [unowned self] in
             sender.endRefreshing()
             view.removeBlurLoader()
         }
@@ -119,7 +119,7 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
         } else if let controller = segue.destination as? PatternsWebPageViewController {
             let index = arrPatterns.firstIndex(of: sender as! MPattern)!
             let (start, end) = getPreferredRangeFromArray(index: index, length: arrPatterns.count, preferredLength: 50)
-            controller.vm = PatternsWebPageViewModel(settings: vmSettings, needCopy: false, arrPatterns:  Array(arrPatterns[start ..< end]), currentPatternIndex: index) {}
+            controller.vm = PatternsWebPageViewModel(settings: vmSettings, arrPatterns:  Array(arrPatterns[start ..< end]), currentPatternIndex: index) {}
         }
     }
 
