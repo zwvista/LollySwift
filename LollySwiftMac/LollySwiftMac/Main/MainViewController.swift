@@ -13,9 +13,8 @@ class MainViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        wordsInUnit(self)
-//        phrasesInUnit(self)
-//        wordsReview(self)
+        wordsInUnit(self)
+        phrasesInUnit(self)
     }
 
     func showTab(storyBoardName: String, viewControllerID: String, label: String) {
@@ -36,6 +35,16 @@ class MainViewController: NSViewController {
 
     @IBAction func search(_ sender: AnyObject) {
         findOrShowTab(storyBoardName: "Words", viewControllerID: "WordsSearchViewController", label: "Search")
+    }
+
+    @IBAction func settings(_ sender: AnyObject) {
+        let vc = storyboard!.instantiateController(withIdentifier: "SettingsViewController") as! SettingsViewController
+        vc.complete = { [unowned self] in
+            for item in tabView.tabViewItems {
+                (item.viewController as? LollyProtocol)?.settingsChanged()
+            }
+        }
+        presentAsModalWindow(vc)
     }
 
     @IBAction func wordsInUnit(_ sender: AnyObject) {

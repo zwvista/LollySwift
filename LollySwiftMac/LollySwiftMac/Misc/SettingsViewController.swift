@@ -36,11 +36,9 @@ class SettingsViewController: NSViewController, NSTableViewDataSource, NSTableVi
     @IBOutlet weak var scToType: NSSegmentedControl!
     @IBOutlet weak var btnPrevious: NSButton!
     @IBOutlet weak var btnNext: NSButton!
-    @IBOutlet weak var btnApplyAll: NSButton!
-    @IBOutlet weak var btnApplyCurrent: NSButton!
-    @IBOutlet weak var btnApplyNone: NSButton!
 
     var vm: SettingsViewModel { AppDelegate.theSettingsViewModel }
+    var complete: (() -> Void)?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -96,18 +94,9 @@ class SettingsViewController: NSViewController, NSTableViewDataSource, NSTableVi
 
         vm.getData().subscribe() ~ rx.disposeBag
     }
-
-    @IBAction func close(_ sender: AnyObject) {
-        let app = NSApplication.shared
-        app.stopModal()
-        // http://stackoverflow.com/questions/5711367/os-x-how-can-a-nsviewcontroller-find-its-window
-        view.window?.close()
-        if sender === btnApplyNone {return}
-        app.enumerateWindows(options: .orderedFrontToBack) { w, b in
-            if let vc = w.contentViewController as? LollyProtocol { vc.settingsChanged() }
-            if let wc = w.windowController as? LollyProtocol { wc.settingsChanged() }
-            if sender === btnApplyCurrent { b.pointee = true }
-        }
+    
+    override func viewDidDisappear() {
+        complete?()
     }
 
     @IBAction func previousUnitPart(_ sender: AnyObject) {
