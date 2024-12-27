@@ -649,7 +649,7 @@
                                         <menuItem title="Settings" keyEquivalent="s" id="ivp-hr-tVn">
                                             <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
                                             <connections>
-                                                <action selector="settings:" target="Voe-Tx-rLC" id="e86-g0-PpW"/>
+                                                <action selector="settings:" target="Ady-hI-5gd" id="g8T-CA-LBE"/>
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="M0E-D5-Zbj"/>
@@ -941,31 +941,10 @@
             </objects>
             <point key="canvasLocation" x="38" y="-38"/>
         </scene>
-        <!--Window Controller-->
-        <scene sceneID="Nfa-zT-uvr">
-            <objects>
-                <windowController storyboardIdentifier="SettingsWindowController" id="opr-34-kgl" sceneMemberID="viewController">
-                    <window key="window" title="Settings" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="gPA-8o-xiX" customClass="LollyWindow" customModule="LollySwiftMac" customModuleProvider="target">
-                        <windowStyleMask key="styleMask" titled="YES"/>
-                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="196" y="240" width="480" height="270"/>
-                        <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
-                        <connections>
-                            <outlet property="delegate" destination="opr-34-kgl" id="x7X-Ma-pm0"/>
-                        </connections>
-                    </window>
-                    <connections>
-                        <segue destination="HfO-r7-QMx" kind="relationship" relationship="window.shadowedContentViewController" id="eKi-3D-A9a"/>
-                    </connections>
-                </windowController>
-                <customObject id="gmc-6W-gTB" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="294" y="215"/>
-        </scene>
         <!--Settings View Controller-->
         <scene sceneID="nZc-fZ-RBG">
             <objects>
-                <viewController id="HfO-r7-QMx" customClass="SettingsViewController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SettingsViewController" id="HfO-r7-QMx" customClass="SettingsViewController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="UlA-4i-lOC">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="386"/>
                         <autoresizingMask key="autoresizingMask"/>

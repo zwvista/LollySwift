@@ -94,10 +94,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
-    @IBAction func settings(_ sender: AnyObject) {
-        runModal(storyBoardName: "Main", windowControllerName: "SettingsWindowController")
-    }
-
     @IBAction func editUnitBlog(_ sender: AnyObject) {
         editPost(settings: AppDelegate.theSettingsViewModel, item: nil)
     }

@@ -99,6 +99,11 @@ class SettingsViewController: NSViewController, NSTableViewDataSource, NSTableVi
         }
     }
 
+    override func viewDidAppear() {
+        super.viewDidAppear()
+        self.view.window?.title = "Settings"
+    }
+
     @IBAction func close(_ sender: AnyObject) {
         let app = NSApplication.shared
         app.stopModal()
