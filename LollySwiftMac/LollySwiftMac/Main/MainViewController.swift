@@ -13,16 +13,9 @@ class MainViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        showTab(storyBoardName: "Words", viewControllerID: "WordsUnitViewController", label: "Words in Unit")
-        showTab(storyBoardName: "Phrases", viewControllerID: "PhrasesUnitViewController", label: "Phrases in Unit")
-//        showTab(storyBoardName: "Words", viewControllerID: "WordsTextbookViewController", label: "Words in Textbook")
-//        showTab(storyBoardName: "Phrases", viewControllerID: "PhrasesTextbookViewController", label: "Phrases in Textbook")
-//        showTab(storyBoardName: "Words", viewControllerID: "WordsLangViewController", label: "Words in Language")
-//        showTab(storyBoardName: "Phrases", viewControllerID: "PhrasesLangViewController", label: "Phrases in Language")
-//        showTab(storyBoardName: "Words", viewControllerID: "WordsSearchViewController", label: "Search")
-        showTab(storyBoardName: "Words", viewControllerID: "WordsReviewViewController", label: "Words Review")
-//        showTab(storyBoardName: "Phrases", viewControllerID: "PhrasesReviewViewController", label: "Phrases Review")
-//        showTab(storyBoardName: "Patterns", viewControllerID: "PatternsViewController", label: "Patterns In Language")
+//        wordsInUnit(self)
+//        phrasesInUnit(self)
+//        wordsReview(self)
     }
 
     func showTab(storyBoardName: String, viewControllerID: String, label: String) {
@@ -30,9 +23,55 @@ class MainViewController: NSViewController {
         let tvi = NSTabViewItem(viewController: vc)
         tvi.label = label
         tabView.addTabViewItem(tvi)
+        tabView.selectTabViewItem(tvi)
     }
     
     func findOrShowTab(storyBoardName: String, viewControllerID: String, label: String) {
+        if let tvi = tabView.tabViewItems.first(where: { $0.viewController?.identifier?.rawValue == viewControllerID }) {
+            tabView.selectTabViewItem(tvi)
+        } else {
+            showTab(storyBoardName: storyBoardName, viewControllerID: viewControllerID, label: label)
+        }
+    }
+
+    @IBAction func search(_ sender: AnyObject) {
+        findOrShowTab(storyBoardName: "Words", viewControllerID: "WordsSearchViewController", label: "Search")
+    }
+
+    @IBAction func wordsInUnit(_ sender: AnyObject) {
+        findOrShowTab(storyBoardName: "Words", viewControllerID: "WordsUnitViewController", label: "Words in Unit")
+    }
+
+    @IBAction func phrasesInUnit(_ sender: AnyObject) {
+        findOrShowTab(storyBoardName: "Phrases", viewControllerID: "PhrasesUnitViewController", label: "Phrases in Unit")
+    }
+
+    @IBAction func wordsReview(_ sender: AnyObject) {
+        findOrShowTab(storyBoardName: "Words", viewControllerID: "WordsReviewViewController", label: "Words Review")
+    }
+
+    @IBAction func phrasesReview(_ sender: AnyObject) {
+        findOrShowTab(storyBoardName: "Phrases", viewControllerID: "PhrasesReviewViewController", label: "Phrases Review")
+    }
+
+    @IBAction func wordsInTextbook(_ sender: AnyObject) {
+        findOrShowTab(storyBoardName: "Words", viewControllerID: "WordsTextbookViewController", label: "Words in Textbook")
+    }
+
+    @IBAction func phrasesInTextbook(_ sender: AnyObject) {
+        findOrShowTab(storyBoardName: "Phrases", viewControllerID: "PhrasesTextbookViewController", label: "Phrases in Textbook")
+    }
+
+    @IBAction func wordsInLanguage(_ sender: AnyObject) {
+        findOrShowTab(storyBoardName: "Words", viewControllerID: "WordsLangViewController", label: "Words in Language")
+    }
+
+    @IBAction func phrasesInLanguage(_ sender: AnyObject) {
+        findOrShowTab(storyBoardName: "Phrases", viewControllerID: "PhrasesLangViewController", label: "Phrases in Language")
+    }
+
+    @IBAction func patternsInLanguage(_ sender: AnyObject) {
+        findOrShowTab(storyBoardName: "Patterns", viewControllerID: "PatternsViewController", label: "Patterns In Language")
     }
 }
 
