@@ -43,7 +43,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     }
 
     override func settingsChanged() {
-        vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: true, needCopy: true) {}
+        vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: true) {}
         vm.arrWordsFiltered_.subscribe { [unowned self] _ in
             doRefresh()
         } ~ rx.disposeBag

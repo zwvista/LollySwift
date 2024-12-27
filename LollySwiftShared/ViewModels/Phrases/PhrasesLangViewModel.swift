@@ -19,8 +19,8 @@ class PhrasesLangViewModel: PhrasesBaseViewModel {
     var arrPhrasesFiltered: [MLangPhrase] { get { arrPhrasesFiltered_.value } set { arrPhrasesFiltered_.accept(newValue) } }
     var hasFilter: Bool { !textFilter.isEmpty }
 
-    public init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> Void) {
-        super.init(settings: settings, needCopy: needCopy)
+    public init(settings: SettingsViewModel, complete: @escaping () -> Void) {
+        super.init(settings: settings)
 
         Observable.combineLatest(arrPhrases_, textFilter_, scopeFilter_).subscribe { [unowned self] _ in
             arrPhrasesFiltered = arrPhrases
@@ -56,10 +56,6 @@ class PhrasesLangViewModel: PhrasesBaseViewModel {
         MLangPhrase().then {
             $0.LANGID = vmSettings.selectedLang.ID
         }
-    }
-
-    public init(settings: SettingsViewModel) {
-        super.init(settings: settings, needCopy: false)
     }
 
     func getPhrases(wordid: Int) -> Single<()> {

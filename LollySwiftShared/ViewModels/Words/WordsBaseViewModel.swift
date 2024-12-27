@@ -23,8 +23,8 @@ class WordsPhrasesBaseViewModel: NSObject {
         indexTextbookFilter == -1 ? 0 : vmSettings.arrTextbookFilters[indexTextbookFilter].value
     }
 
-    init(settings: SettingsViewModel, needCopy: Bool) {
-        vmSettings = !needCopy ? settings : SettingsViewModel(settings)
+    init(settings: SettingsViewModel) {
+        vmSettings = settings
         super.init()
         stringTextbookFilter = vmSettings.arrTextbookFilters[0].label
         stringTextbookFilter_.subscribe { [unowned self] s in

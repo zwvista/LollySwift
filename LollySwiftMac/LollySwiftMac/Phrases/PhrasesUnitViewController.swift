@@ -35,7 +35,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     }
 
     override func settingsChanged() {
-        vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: true, needCopy: true) {}
+        vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: true) {}
         vm.arrPhrasesFiltered_.subscribe { [unowned self] _ in
             doRefresh()
         } ~ rx.disposeBag

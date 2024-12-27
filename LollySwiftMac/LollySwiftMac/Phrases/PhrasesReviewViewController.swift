@@ -32,7 +32,7 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
 
     func settingsChanged() {
         vm?.stopTimer()
-        vm = PhrasesReviewViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) { [unowned self] vm2 in
+        vm = PhrasesReviewViewModel(settings: AppDelegate.theSettingsViewModel) { [unowned self] vm2 in
             tfPhraseInput.becomeFirstResponder()
             if vm2.hasCurrent && vm2.isSpeaking.value {
                 let dialogue = AVSpeechUtterance(string: vm2.currentPhrase)

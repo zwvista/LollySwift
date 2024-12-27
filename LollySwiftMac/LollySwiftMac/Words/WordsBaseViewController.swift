@@ -203,7 +203,7 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
             } ~ rx.disposeBag
         }
         super.settingsChanged()
-        vmPhrasesLang = PhrasesLangViewModel(settings: vmSettings)
+        vmPhrasesLang = PhrasesLangViewModel(settings: vmSettings) {}
     }
 
     func doRefresh() {

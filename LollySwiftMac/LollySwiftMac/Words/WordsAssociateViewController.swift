@@ -25,7 +25,7 @@ class WordsAssociateViewController: NSViewController, NSTableViewDataSource, NST
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        vm = WordsLangViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) {}
+        vm = WordsLangViewModel(settings: AppDelegate.theSettingsViewModel) {}
         vm.textFilter = textFilter
         _ = vm.textFilter_ <~> sfTextFilter.rx.text.orEmpty
         _ = vm.scopeFilter_ <~> scScopeFilter.rx.selectedLabel

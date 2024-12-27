@@ -34,7 +34,7 @@ class WordsReviewViewController: WordsBaseViewController, NSTextFieldDelegate {
 
     override func settingsChanged() {
         vm?.stopTimer()
-        vm = WordsReviewViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true) { [unowned self] vm2 in
+        vm = WordsReviewViewModel(settings: AppDelegate.theSettingsViewModel) { [unowned self] vm2 in
             tfWordInput.becomeFirstResponder()
             if vm2.hasCurrent && vm2.isSpeaking.value {
                 let dialogue = AVSpeechUtterance(string: vm2.currentWord)

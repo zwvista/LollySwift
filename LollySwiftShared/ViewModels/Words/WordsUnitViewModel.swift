@@ -20,9 +20,9 @@ class WordsUnitViewModel: WordsBaseViewModel {
     var arrWordsFiltered: [MUnitWord] { get { arrWordsFiltered_.value } set { arrWordsFiltered_.accept(newValue) } }
     var hasFilter: Bool { !(textFilter.isEmpty && textbookFilter == 0) }
 
-    init(settings: SettingsViewModel, inTextbook: Bool, needCopy: Bool, complete: @escaping () -> Void) {
+    init(settings: SettingsViewModel, inTextbook: Bool, complete: @escaping () -> Void) {
         self.inTextbook = inTextbook
-        super.init(settings: settings, needCopy: needCopy)
+        super.init(settings: settings)
 
         Observable.combineLatest(arrWords_, indexTextbookFilter_, textFilter_, scopeFilter_).subscribe { [unowned self] _ in
             arrWordsFiltered = arrWords

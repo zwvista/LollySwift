@@ -20,9 +20,9 @@ class PhrasesUnitViewModel: PhrasesBaseViewModel {
     var arrPhrasesFiltered: [MUnitPhrase] { get { arrPhrasesFiltered_.value } set { arrPhrasesFiltered_.accept(newValue) } }
     var hasFilter: Bool { !(textFilter.isEmpty && textbookFilter == 0) }
 
-    public init(settings: SettingsViewModel, inTextbook: Bool, needCopy: Bool, complete: @escaping () -> Void) {
+    public init(settings: SettingsViewModel, inTextbook: Bool, complete: @escaping () -> Void) {
         self.inTextbook = inTextbook
-        super.init(settings: settings, needCopy: needCopy)
+        super.init(settings: settings)
 
         Observable.combineLatest(arrPhrases_, indexTextbookFilter_, textFilter_, scopeFilter_).subscribe { [unowned self] _ in
             arrPhrasesFiltered = arrPhrases

@@ -15,6 +15,7 @@ class MainViewController: NSViewController {
         super.viewDidLoad()
         wordsInUnit(self)
         phrasesInUnit(self)
+        wordsInUnit(self)
     }
 
     func showTab(storyBoardName: String, viewControllerID: String, label: String) {
@@ -26,7 +27,7 @@ class MainViewController: NSViewController {
     }
     
     func findOrShowTab(storyBoardName: String, viewControllerID: String, label: String) {
-        if let tvi = tabView.tabViewItems.first(where: { $0.viewController?.identifier?.rawValue == viewControllerID }) {
+        if let tvi = tabView.tabViewItems.first(where: { $0.label == label }) {
             tabView.selectTabViewItem(tvi)
         } else {
             showTab(storyBoardName: storyBoardName, viewControllerID: viewControllerID, label: label)

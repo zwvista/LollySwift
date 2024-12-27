@@ -19,8 +19,8 @@ class WordsLangViewModel: WordsBaseViewModel {
     var arrWordsFiltered: [MLangWord] { get { arrWordsFiltered_.value } set { arrWordsFiltered_.accept(newValue) } }
     var hasFilter: Bool { !textFilter.isEmpty }
 
-    public init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> Void) {
-        super.init(settings: settings, needCopy: needCopy)
+    public init(settings: SettingsViewModel, complete: @escaping () -> Void) {
+        super.init(settings: settings)
 
         Observable.combineLatest(arrWords_, textFilter_, scopeFilter_).subscribe { [unowned self] _ in
             arrWordsFiltered = arrWords
@@ -70,10 +70,6 @@ class WordsLangViewModel: WordsBaseViewModel {
         let item = arrWords[index]
         item.NOTE = SettingsViewModel.zeroNote
         return WordsUnitViewModel.update(item.ID, note: item.NOTE)
-    }
-
-    public init(settings: SettingsViewModel) {
-        super.init(settings: settings, needCopy: false)
     }
 
     func getWords(phraseid: Int) -> Single<()> {

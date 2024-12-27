@@ -42,8 +42,8 @@ class PhrasesReviewViewModel: NSObject {
     let moveForwardHidden = BehaviorRelay(value: false)
     let onRepeatHidden = BehaviorRelay(value: false)
 
-    init(settings: SettingsViewModel, needCopy: Bool, doTestAction: ((PhrasesReviewViewModel) -> Void)? = nil) {
-        vmSettings = !needCopy ? settings : SettingsViewModel(settings)
+    init(settings: SettingsViewModel, doTestAction: ((PhrasesReviewViewModel) -> Void)? = nil) {
+        vmSettings = settings
         self.doTestAction = doTestAction
         options.shuffled = true
     }

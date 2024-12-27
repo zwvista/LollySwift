@@ -48,9 +48,9 @@ class WordsReviewViewModel: WordsBaseViewModel {
     let moveForwardHidden = BehaviorRelay(value: false)
     let onRepeatHidden = BehaviorRelay(value: false)
 
-    init(settings: SettingsViewModel, needCopy: Bool, doTestAction: ((WordsReviewViewModel) -> Void)? = nil) {
+    init(settings: SettingsViewModel, doTestAction: ((WordsReviewViewModel) -> Void)? = nil) {
         self.doTestAction = doTestAction
-        super.init(settings: settings, needCopy: needCopy)
+        super.init(settings: settings)
         options.shuffled = true
     }
 

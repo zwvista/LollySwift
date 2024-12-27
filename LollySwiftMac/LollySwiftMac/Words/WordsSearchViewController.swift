@@ -21,7 +21,7 @@ class WordsSearchViewController: WordsBaseViewController {
     }
 
     override func settingsChanged() {
-        vm = WordsSearchViewModel(settings: AppDelegate.theSettingsViewModel, needCopy: true)
+        vm = WordsSearchViewModel(settings: AppDelegate.theSettingsViewModel)
         tvWords.reloadData()
         super.settingsChanged()
     }

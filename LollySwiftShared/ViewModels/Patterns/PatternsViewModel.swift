@@ -27,8 +27,8 @@ class PatternsViewModel: NSObject {
     var scopeFilter: String { get { scopeFilter_.value } set { scopeFilter_.accept(newValue) } }
     var hasFilter: Bool { !textFilter.isEmpty }
 
-    public init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> Void) {
-        vmSettings = !needCopy ? settings : SettingsViewModel(settings)
+    public init(settings: SettingsViewModel, complete: @escaping () -> Void) {
+        vmSettings = settings
         super.init()
 
         Observable.combineLatest(arrPatterns_, textFilter_, scopeFilter_).subscribe { [unowned self] _ in

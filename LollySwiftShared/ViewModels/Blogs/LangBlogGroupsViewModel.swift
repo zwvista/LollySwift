@@ -13,8 +13,8 @@ import Then
 
 class LangBlogGroupsViewModel: LangBlogViewModel {
 
-    override init(settings: SettingsViewModel, needCopy: Bool, complete: @escaping () -> Void) {
-        super.init(settings: settings, needCopy: needCopy, complete: complete)
+    override init(settings: SettingsViewModel, complete: @escaping () -> Void) {
+        super.init(settings: settings, complete: complete)
         MLangBlogGroup.getDataByLang(settings.selectedLang.ID).subscribe { [unowned self] in
             arrGroups = $0
             complete()

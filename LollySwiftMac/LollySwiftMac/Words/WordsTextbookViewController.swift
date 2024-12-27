@@ -26,7 +26,7 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
     }
 
     override func settingsChanged() {
-        vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: false, needCopy: true) { [unowned self] in
+        vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: false) { [unowned self] in
             acTextbooks.content = vmSettings.arrTextbookFilters
         }
         vm.arrWordsFiltered_.subscribe { [unowned self] _ in
