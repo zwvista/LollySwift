@@ -273,6 +273,3 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
         presentAsModalWindow(detailVC)
     }
 }
-
-class WordsUnitWindowController: WordsBaseWindowController {
-}

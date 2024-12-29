@@ -100,7 +100,3 @@ class PhrasesLangViewController: PhrasesBaseViewController {
         presentAsModalWindow(detailVC)
     }
 }
-
-class PhrasesLangWindowController: PhrasesBaseWindowController {
-}
-

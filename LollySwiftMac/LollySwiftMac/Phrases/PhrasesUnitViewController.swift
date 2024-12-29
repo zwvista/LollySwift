@@ -222,6 +222,3 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
         MacApi.copyText(s)
     }
 }
-
-class PhrasesUnitWindowController: PhrasesBaseWindowController {
-}

@@ -124,6 +124,3 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
         presentAsModalWindow(detailVC)
     }
 }
-
-class WordsTextbookWindowController: WordsBaseWindowController {
-}

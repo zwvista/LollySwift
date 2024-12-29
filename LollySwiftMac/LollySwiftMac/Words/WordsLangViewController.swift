@@ -142,6 +142,3 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
     }
 }
 
-class WordsLangWindowController: WordsBaseWindowController {
-}
-

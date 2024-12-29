@@ -43,22 +43,13 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
         }
     }
 
-    // Hold a reference to the window controller in order to prevent it from being released
-    // Without it, we would not be able to access its child controls afterwards
-    var wc: WordsPhrasesBaseWindowController!
     override func viewDidAppear() {
         super.viewDidAppear()
-//        wc = view.window!.windowController as? WordsPhrasesBaseWindowController
-//        wc.scSpeak.selectedSegment = isSpeaking ? 1 : 0
         scSpeak.selectedSegment = isSpeaking ? 1 : 0
         // For some unknown reason, the placeholder string of the filter text field
         // cannot be set in the storyboard
         // https://stackoverflow.com/questions/5519512/nstextfield-placeholder-text-doesnt-show-unless-editing
         sfTextFilter?.placeholderString = "Filter"
-    }
-    override func viewWillDisappear() {
-        super.viewWillDisappear()
-        wc = nil
     }
 
     func settingsChanged() {
@@ -327,100 +318,4 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
             tvPhrases.reloadData()
         }
     }
-}
-
-class WordsPhrasesBaseWindowController: NSWindowController, LollyProtocol, NSWindowDelegate, NSTextFieldDelegate {
-
-    @IBOutlet weak var toolbar: NSToolbar!
-    @IBOutlet weak var scSpeak: NSSegmentedControl!
-    // Outlet collections have been implemented for iOS, but not in Cocoa
-    // https://stackoverflow.com/questions/24805180/swift-put-multiple-iboutlets-in-an-array
-    // @IBOutlet var tbiDicts: [NSToolbarItem]!
-    @IBOutlet weak var tbiDict0: NSToolbarItem!
-    @IBOutlet weak var tbiDict1: NSToolbarItem!
-    @IBOutlet weak var tbiDict2: NSToolbarItem!
-    @IBOutlet weak var tbiDict3: NSToolbarItem!
-    @IBOutlet weak var tbiDict4: NSToolbarItem!
-    @IBOutlet weak var tbiDict5: NSToolbarItem!
-    @IBOutlet weak var tbiDict6: NSToolbarItem!
-    @IBOutlet weak var tbiDict7: NSToolbarItem!
-    @IBOutlet weak var tbiDict8: NSToolbarItem!
-    @IBOutlet weak var tbiDict9: NSToolbarItem!
-    @IBOutlet weak var tbiDict10: NSToolbarItem!
-    @IBOutlet weak var tbiDict11: NSToolbarItem!
-    @IBOutlet weak var tbiDict12: NSToolbarItem!
-    @IBOutlet weak var tbiDict13: NSToolbarItem!
-    @IBOutlet weak var tbiDict14: NSToolbarItem!
-    @IBOutlet weak var tbiDict15: NSToolbarItem!
-    @IBOutlet weak var tbiDict16: NSToolbarItem!
-    @IBOutlet weak var tbiDict17: NSToolbarItem!
-    @IBOutlet weak var tbiDict18: NSToolbarItem!
-    @IBOutlet weak var tbiDict19: NSToolbarItem!
-    @IBOutlet weak var tbiDict20: NSToolbarItem!
-    @IBOutlet weak var tbiDict21: NSToolbarItem!
-    @IBOutlet weak var tbiDict22: NSToolbarItem!
-    @IBOutlet weak var tbiDict23: NSToolbarItem!
-    @IBOutlet weak var tbiDict24: NSToolbarItem!
-    @IBOutlet weak var tbiDict25: NSToolbarItem!
-    @IBOutlet weak var tbiDict26: NSToolbarItem!
-    @IBOutlet weak var tbiDict27: NSToolbarItem!
-    @IBOutlet weak var tbiDict28: NSToolbarItem!
-    @IBOutlet weak var tbiDict29: NSToolbarItem!
-    @IBOutlet weak var tbiDict30: NSToolbarItem!
-    @IBOutlet weak var tbiDict31: NSToolbarItem!
-    @IBOutlet weak var tbiDict32: NSToolbarItem!
-    @IBOutlet weak var tbiDict33: NSToolbarItem!
-    @IBOutlet weak var tbiDict34: NSToolbarItem!
-    @IBOutlet weak var tbiDict35: NSToolbarItem!
-    @IBOutlet weak var tbiDict36: NSToolbarItem!
-    @IBOutlet weak var tbiDict37: NSToolbarItem!
-    @IBOutlet weak var tbiDict38: NSToolbarItem!
-    @IBOutlet weak var tbiDict39: NSToolbarItem!
-    var vc: WordsPhrasesBaseViewController { contentViewController as! WordsPhrasesBaseViewController }
-    var vm: SettingsViewModel! { vc.vmSettings }
-    private var defaultToolbarItemCount = 0
-
-    var identifiers: [NSToolbarItem.Identifier]!
-
-    override func windowDidLoad() {
-        super.windowDidLoad()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [unowned self] in
-            defaultToolbarItemCount = toolbar.items.count - 40
-            settingsChanged()
-        }
-    }
-
-    func settingsChanged() {
-        vc.tvWords?.selectRowIndexes(IndexSet(), byExtendingSelection: false)
-        vc.removeAllTabs()
-        for i in 0..<40 {
-            let item = toolbar.items[defaultToolbarItemCount + i]
-            if i < vm.arrDictsReference.count {
-                item.label = vm.arrDictsReference[i].DICTNAME
-                item.tag = i
-                item.target = contentViewController
-                item.action = #selector(WordsBaseViewController.searchDict(_:))
-                item.image = vc.imageOff
-                item.isEnabled = true
-            } else {
-                item.label = ""
-                item.tag = -1
-                item.image = nil
-                item.target = nil
-                item.action = nil
-                item.isEnabled = false
-            }
-        }
-        for o in vm.selectedDictsReference {
-            let item = toolbar.items.first { $0.label == o.DICTNAME }!
-            vc.searchDict(item)
-        }
-    }
-
-    deinit {
-        print("DEBUG: \(className) deinit")
-    }
-}
-
-class WordsBaseWindowController: WordsPhrasesBaseWindowController {
 }
