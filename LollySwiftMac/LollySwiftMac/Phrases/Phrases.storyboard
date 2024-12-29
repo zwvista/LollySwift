@@ -5,216 +5,17 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Window Controller-->
-        <scene sceneID="NSb-uY-gqB">
-            <objects>
-                <windowController storyboardIdentifier="PhrasesUnitWindowController" id="P6D-Dv-O3U" customClass="PhrasesUnitWindowController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
-                    <window key="window" title="Phrases In Unit" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="X99-WO-AfR" customClass="LollyWindow" customModule="LollySwiftMac" customModuleProvider="target">
-                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="196" y="240" width="480" height="270"/>
-                        <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
-                        <toolbar key="toolbar" implicitIdentifier="5A96789F-9D14-4263-88A1-CCF5911A7169" autosavesConfiguration="NO" showsBaselineSeparator="NO" displayMode="iconAndLabel" sizeMode="regular" id="IpQ-OR-gOP">
-                            <allowedToolbarItems>
-                                <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="kff-N0-rxS"/>
-                                <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="Piz-ml-MS5"/>
-                                <toolbarItem implicitItemIdentifier="360CEF89-3610-451A-B939-34F9335730CF" label="Add" paletteLabel="Add" tag="-1" image="NSAddTemplate" sizingBehavior="auto" autovalidates="NO" id="aIp-9q-khf">
-                                    <connections>
-                                        <action selector="addPhrase:" target="qEo-JS-MYZ" id="0gi-c4-49e"/>
-                                    </connections>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="0FE47FD6-6CD6-4F13-92D4-43D61D94CAF8" label="Refresh" paletteLabel="Refresh" tag="-1" image="NSRefreshTemplate" sizingBehavior="auto" id="1c8-U5-Ymh">
-                                    <connections>
-                                        <action selector="refreshTableView:" target="qEo-JS-MYZ" id="cMO-nw-rHU"/>
-                                    </connections>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="89E1364F-14A9-4F83-95CD-248B2FD1A34F" label="U &lt;-&gt; P" paletteLabel="U &lt;-&gt; P" tag="-1" image="NSBonjour" sizingBehavior="auto" id="x8h-4u-rAh">
-                                    <connections>
-                                        <action selector="toggleToType:" target="qEo-JS-MYZ" id="kJl-Lv-fXP"/>
-                                    </connections>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="26AB7070-624B-4566-B412-AF238E95FCC4" label="Previous" paletteLabel="Previous" tag="-1" image="NSGoBackTemplate" sizingBehavior="auto" id="k6U-bs-3i4">
-                                    <connections>
-                                        <action selector="previousUnitPart:" target="qEo-JS-MYZ" id="nmr-nW-K8s"/>
-                                    </connections>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="E9B0843A-FF37-41CF-921B-C322E674C6AF" label="Next" paletteLabel="Next" tag="-1" image="NSGoForwardTemplate" sizingBehavior="auto" id="rwC-ba-HN6">
-                                    <connections>
-                                        <action selector="nextUnitPart:" target="qEo-JS-MYZ" id="VLk-B5-Hm2"/>
-                                    </connections>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="B7D0159E-C7DD-4119-9E00-29DF2353D602" label="Speak?" paletteLabel="Speak?" sizingBehavior="auto" id="ap0-qD-kxT" userLabel="Speak?">
-                                    <nil key="toolTip"/>
-                                    <segmentedControl key="view" verticalHuggingPriority="750" id="AEn-9N-szO">
-                                        <rect key="frame" x="0.0" y="14" width="99" height="23"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="Ehk-ih-LX7">
-                                            <font key="font" metaFont="system"/>
-                                            <segments>
-                                                <segment label="Silent" width="42" selected="YES"/>
-                                                <segment label="Speak" width="46" tag="1"/>
-                                            </segments>
-                                        </segmentedCell>
-                                        <connections>
-                                            <action selector="isSpeakingChanged:" target="qEo-JS-MYZ" id="WJt-2s-NFU"/>
-                                        </connections>
-                                    </segmentedControl>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="61362FB7-9611-4676-A4CB-FC051938C2B2" label="Dict0" paletteLabel="Dict0" image="NSStatusNone" sizingBehavior="auto" id="Jjm-r9-Cl4"/>
-                                <toolbarItem implicitItemIdentifier="ABFFF1B4-55F3-42EC-A03C-ED127B2EB970" label="Dict1" paletteLabel="Dict1" tag="1" image="NSStatusNone" sizingBehavior="auto" id="Ujj-lX-z7U"/>
-                                <toolbarItem implicitItemIdentifier="9DCDB3D1-97E5-40C9-9090-A6C227241AAA" label="Dict2" paletteLabel="Dict2" tag="2" image="NSStatusNone" sizingBehavior="auto" id="gQ7-X9-J2K"/>
-                                <toolbarItem implicitItemIdentifier="70D0C508-10DA-4360-B132-41D672B68EFE" label="Dict3" paletteLabel="Dict3" tag="3" image="NSStatusNone" sizingBehavior="auto" id="3C1-HO-nlO"/>
-                                <toolbarItem implicitItemIdentifier="808707CC-10A9-40D0-AC1E-E67114C21A33" label="Dict4" paletteLabel="Dict4" tag="4" image="NSStatusNone" sizingBehavior="auto" id="6DX-O9-gI8"/>
-                                <toolbarItem implicitItemIdentifier="4DD1EB86-560C-4F9B-94BC-88665BEFC2BE" label="Dict5" paletteLabel="Dict5" tag="5" image="NSStatusNone" sizingBehavior="auto" id="Gqp-si-imc"/>
-                                <toolbarItem implicitItemIdentifier="9B4B453A-950E-4539-B736-6314B81112FB" label="Dict6" paletteLabel="Dict6" tag="6" image="NSStatusNone" sizingBehavior="auto" id="SYz-1r-x3h"/>
-                                <toolbarItem implicitItemIdentifier="9ACC5690-1256-4E2C-8C59-9FA6B1DD7899" label="Dict7" paletteLabel="Dict7" tag="7" image="NSStatusNone" sizingBehavior="auto" id="Lgg-aL-DEa"/>
-                                <toolbarItem implicitItemIdentifier="FB2EE0F5-9280-4B83-94A5-22E96572C564" label="Dict8" paletteLabel="Dict8" tag="8" image="NSStatusNone" sizingBehavior="auto" id="Fra-Kg-ubs"/>
-                                <toolbarItem implicitItemIdentifier="C9316C83-0515-4D82-A2E4-6A9671EE1DD9" label="Dict9" paletteLabel="Dict9" tag="9" image="NSStatusNone" sizingBehavior="auto" id="mIi-Vx-rty"/>
-                                <toolbarItem implicitItemIdentifier="DBE6B550-1BBA-4A4B-ACB9-560F7416E9FC" label="Dict10" paletteLabel="Dict10" tag="10" image="NSStatusNone" sizingBehavior="auto" id="paB-vP-rdh"/>
-                                <toolbarItem implicitItemIdentifier="9457ED76-335E-4859-AC27-D8EEE4EF241E" label="Dict11" paletteLabel="Dict11" tag="11" image="NSStatusNone" sizingBehavior="auto" id="16V-Bi-PEb"/>
-                                <toolbarItem implicitItemIdentifier="697FFBA1-D42D-443A-8EAE-1A3DB2679E33" label="Dict12" paletteLabel="Dict12" tag="12" image="NSStatusNone" sizingBehavior="auto" id="jLG-sC-Yev"/>
-                                <toolbarItem implicitItemIdentifier="F70C8B13-A7CD-492A-B040-918D5995EEC6" label="Dict13" paletteLabel="Dict13" tag="13" image="NSStatusNone" sizingBehavior="auto" id="nu1-TN-h6d"/>
-                                <toolbarItem implicitItemIdentifier="0D903E7B-9D20-4724-893D-7D7DC06A2D23" label="Dict14" paletteLabel="Dict14" tag="14" image="NSStatusNone" sizingBehavior="auto" id="zvO-EG-UOx"/>
-                                <toolbarItem implicitItemIdentifier="7D9E5217-5C0B-4D9F-BD15-921A553DE3A3" label="Dict15" paletteLabel="Dict15" tag="15" image="NSStatusNone" sizingBehavior="auto" id="eYL-ba-GU8"/>
-                                <toolbarItem implicitItemIdentifier="88FD1DA9-430D-42B1-AFA1-67E77468393D" label="Dict16" paletteLabel="Dict16" tag="16" image="NSStatusNone" sizingBehavior="auto" id="MUk-Xd-jOs"/>
-                                <toolbarItem implicitItemIdentifier="009CEBA4-CAA7-4646-89CF-3B5F0E63B52D" label="Dict17" paletteLabel="Dict17" tag="17" image="NSStatusNone" sizingBehavior="auto" id="tmS-xv-yV4"/>
-                                <toolbarItem implicitItemIdentifier="6ABD1611-6334-4F8F-AE6B-7BF6267821A2" label="Dict18" paletteLabel="Dict18" tag="18" image="NSStatusNone" sizingBehavior="auto" id="y44-EM-6KA"/>
-                                <toolbarItem implicitItemIdentifier="FAAD1F90-36C8-4B9C-B154-1877244631B3" label="Dict19" paletteLabel="Dict19" tag="19" image="NSStatusNone" sizingBehavior="auto" id="SdR-8c-r96"/>
-                                <toolbarItem implicitItemIdentifier="83970BC8-27DC-4D50-9652-844091A3E8C9" label="Dict20" paletteLabel="Dict20" tag="20" image="NSStatusNone" sizingBehavior="auto" id="Ri0-av-VO8"/>
-                                <toolbarItem implicitItemIdentifier="11EF2E2F-0249-46B9-A720-969796716EE4" label="Dict21" paletteLabel="Dict21" tag="21" image="NSStatusNone" sizingBehavior="auto" id="X3w-qh-dVp"/>
-                                <toolbarItem implicitItemIdentifier="EFB98D03-990E-45E3-9184-B108A69B52A0" label="Dict22" paletteLabel="Dict22" tag="22" image="NSStatusNone" sizingBehavior="auto" id="Y8J-cM-veD"/>
-                                <toolbarItem implicitItemIdentifier="5F022A7B-BB75-4686-901D-5BE8C768BD19" label="Dict23" paletteLabel="Dict23" tag="23" image="NSStatusNone" sizingBehavior="auto" id="PzD-Wp-OY1"/>
-                                <toolbarItem implicitItemIdentifier="9CCDF5F1-AB33-433A-840C-DA3B7C799087" label="Dict24" paletteLabel="Dict24" tag="24" image="NSStatusNone" sizingBehavior="auto" id="LNp-tA-hA7"/>
-                                <toolbarItem implicitItemIdentifier="245860C4-E0B8-46B9-88A7-E911E42ED92A" label="Dict25" paletteLabel="Dict25" tag="25" image="NSStatusNone" sizingBehavior="auto" id="29T-wC-VkQ"/>
-                                <toolbarItem implicitItemIdentifier="88C009F5-9D40-47D2-99A6-4FFE68CDC45E" label="Dict26" paletteLabel="Dict26" tag="26" image="NSStatusNone" sizingBehavior="auto" id="yIl-lT-2qF"/>
-                                <toolbarItem implicitItemIdentifier="43A4E92C-7BA8-4D24-92D9-CFF9BCD659D7" label="Dict27" paletteLabel="Dict27" tag="27" image="NSStatusNone" sizingBehavior="auto" id="Xrw-P5-EZG"/>
-                                <toolbarItem implicitItemIdentifier="B701A994-E7BD-478B-AFF5-AC5642EAFDC7" label="Dict28" paletteLabel="Dict28" tag="28" image="NSStatusNone" sizingBehavior="auto" id="3Ld-he-fNT"/>
-                                <toolbarItem implicitItemIdentifier="299D96BA-A2E2-4FC7-A08B-D61AF316DC1C" label="Dict29" paletteLabel="Dict29" tag="29" image="NSStatusNone" sizingBehavior="auto" id="aSx-mL-oNM"/>
-                                <toolbarItem implicitItemIdentifier="4D9AEC6D-06BF-4B2F-9447-3015D95F31DF" label="Dict30" paletteLabel="Dict30" tag="30" image="NSStatusNone" sizingBehavior="auto" id="ZUw-Ii-AZl"/>
-                                <toolbarItem implicitItemIdentifier="575550D7-0BA4-4BA8-8754-52BDA6778BE2" label="Dict31" paletteLabel="Dict31" tag="31" image="NSStatusNone" sizingBehavior="auto" id="Bg6-Tf-CNu"/>
-                                <toolbarItem implicitItemIdentifier="A787C9E4-C4B0-4A86-832E-1FFA16570274" label="Dict32" paletteLabel="Dict32" tag="32" image="NSStatusNone" sizingBehavior="auto" id="bIr-N8-AkR"/>
-                                <toolbarItem implicitItemIdentifier="EE9CC064-1E66-40F5-AF60-83B99B156EBB" label="Dict33" paletteLabel="Dict33" tag="33" image="NSStatusNone" sizingBehavior="auto" id="3cV-uu-zhr"/>
-                                <toolbarItem implicitItemIdentifier="C4435C4A-DAE7-492D-BCA1-7F072486F050" label="Dict34" paletteLabel="Dict34" tag="34" image="NSStatusNone" sizingBehavior="auto" id="qBI-bg-q5P"/>
-                                <toolbarItem implicitItemIdentifier="025472AD-E794-4088-91A3-3D4105ADE920" label="Dict35" paletteLabel="Dict35" tag="35" image="NSStatusNone" sizingBehavior="auto" id="Dfo-sH-Dhr"/>
-                                <toolbarItem implicitItemIdentifier="8D79193B-BBD9-4DC4-9460-B14515696E0B" label="Dict36" paletteLabel="Dict36" tag="36" image="NSStatusNone" sizingBehavior="auto" id="FzO-30-yo3"/>
-                                <toolbarItem implicitItemIdentifier="64056A96-104C-42B4-9FD6-69D6E45A5090" label="Dict37" paletteLabel="Dict37" tag="37" image="NSStatusNone" sizingBehavior="auto" id="ZaD-ck-oM2"/>
-                                <toolbarItem implicitItemIdentifier="31ED2222-BD05-46D9-A227-30DE39BAE362" label="Dict38" paletteLabel="Dict38" tag="38" image="NSStatusNone" sizingBehavior="auto" id="aHY-Mg-sFI"/>
-                                <toolbarItem implicitItemIdentifier="62C2048F-1562-4C24-A95A-E85070E5F9A8" label="Dict39" paletteLabel="Dict39" tag="39" image="NSStatusNone" sizingBehavior="auto" id="6af-Tx-NGn"/>
-                            </allowedToolbarItems>
-                            <defaultToolbarItems>
-                                <toolbarItem reference="aIp-9q-khf"/>
-                                <toolbarItem reference="1c8-U5-Ymh"/>
-                                <toolbarItem reference="x8h-4u-rAh"/>
-                                <toolbarItem reference="k6U-bs-3i4"/>
-                                <toolbarItem reference="rwC-ba-HN6"/>
-                                <toolbarItem reference="ap0-qD-kxT"/>
-                                <toolbarItem reference="Jjm-r9-Cl4"/>
-                                <toolbarItem reference="Ujj-lX-z7U"/>
-                                <toolbarItem reference="gQ7-X9-J2K"/>
-                                <toolbarItem reference="3C1-HO-nlO"/>
-                                <toolbarItem reference="6DX-O9-gI8"/>
-                                <toolbarItem reference="Gqp-si-imc"/>
-                                <toolbarItem reference="SYz-1r-x3h"/>
-                                <toolbarItem reference="Lgg-aL-DEa"/>
-                                <toolbarItem reference="Fra-Kg-ubs"/>
-                                <toolbarItem reference="mIi-Vx-rty"/>
-                                <toolbarItem reference="paB-vP-rdh"/>
-                                <toolbarItem reference="16V-Bi-PEb"/>
-                                <toolbarItem reference="jLG-sC-Yev"/>
-                                <toolbarItem reference="nu1-TN-h6d"/>
-                                <toolbarItem reference="zvO-EG-UOx"/>
-                                <toolbarItem reference="eYL-ba-GU8"/>
-                                <toolbarItem reference="MUk-Xd-jOs"/>
-                                <toolbarItem reference="tmS-xv-yV4"/>
-                                <toolbarItem reference="y44-EM-6KA"/>
-                                <toolbarItem reference="SdR-8c-r96"/>
-                                <toolbarItem reference="Ri0-av-VO8"/>
-                                <toolbarItem reference="X3w-qh-dVp"/>
-                                <toolbarItem reference="Y8J-cM-veD"/>
-                                <toolbarItem reference="PzD-Wp-OY1"/>
-                                <toolbarItem reference="LNp-tA-hA7"/>
-                                <toolbarItem reference="29T-wC-VkQ"/>
-                                <toolbarItem reference="yIl-lT-2qF"/>
-                                <toolbarItem reference="Xrw-P5-EZG"/>
-                                <toolbarItem reference="3Ld-he-fNT"/>
-                                <toolbarItem reference="aSx-mL-oNM"/>
-                                <toolbarItem reference="ZUw-Ii-AZl"/>
-                                <toolbarItem reference="Bg6-Tf-CNu"/>
-                                <toolbarItem reference="bIr-N8-AkR"/>
-                                <toolbarItem reference="3cV-uu-zhr"/>
-                                <toolbarItem reference="qBI-bg-q5P"/>
-                                <toolbarItem reference="Dfo-sH-Dhr"/>
-                                <toolbarItem reference="FzO-30-yo3"/>
-                                <toolbarItem reference="ZaD-ck-oM2"/>
-                                <toolbarItem reference="aHY-Mg-sFI"/>
-                                <toolbarItem reference="6af-Tx-NGn"/>
-                            </defaultToolbarItems>
-                        </toolbar>
-                        <connections>
-                            <outlet property="delegate" destination="P6D-Dv-O3U" id="aPQ-3N-cnk"/>
-                        </connections>
-                    </window>
-                    <connections>
-                        <outlet property="scSpeak" destination="AEn-9N-szO" id="t6E-Zy-kdc"/>
-                        <outlet property="tbiDict0" destination="Jjm-r9-Cl4" id="oDD-dV-ExZ"/>
-                        <outlet property="tbiDict1" destination="Ujj-lX-z7U" id="gZV-Zi-7Cy"/>
-                        <outlet property="tbiDict10" destination="paB-vP-rdh" id="nS5-jl-jnz"/>
-                        <outlet property="tbiDict11" destination="16V-Bi-PEb" id="0dV-Qt-9af"/>
-                        <outlet property="tbiDict12" destination="jLG-sC-Yev" id="U0a-2n-ftY"/>
-                        <outlet property="tbiDict13" destination="nu1-TN-h6d" id="e1R-kN-CE9"/>
-                        <outlet property="tbiDict14" destination="zvO-EG-UOx" id="XNd-da-B0f"/>
-                        <outlet property="tbiDict15" destination="eYL-ba-GU8" id="Qkg-jR-nfg"/>
-                        <outlet property="tbiDict16" destination="MUk-Xd-jOs" id="gi3-EQ-nAX"/>
-                        <outlet property="tbiDict17" destination="tmS-xv-yV4" id="Ubt-ZG-R1n"/>
-                        <outlet property="tbiDict18" destination="y44-EM-6KA" id="8Uk-nH-KfA"/>
-                        <outlet property="tbiDict19" destination="SdR-8c-r96" id="ey7-9o-j71"/>
-                        <outlet property="tbiDict2" destination="gQ7-X9-J2K" id="Bzi-fM-QXh"/>
-                        <outlet property="tbiDict20" destination="Ri0-av-VO8" id="ee8-mf-4u4"/>
-                        <outlet property="tbiDict21" destination="X3w-qh-dVp" id="Gdw-wc-yjY"/>
-                        <outlet property="tbiDict22" destination="Y8J-cM-veD" id="9AR-Dw-RAN"/>
-                        <outlet property="tbiDict23" destination="PzD-Wp-OY1" id="WyK-1d-3OA"/>
-                        <outlet property="tbiDict24" destination="LNp-tA-hA7" id="LT4-TM-1wv"/>
-                        <outlet property="tbiDict25" destination="29T-wC-VkQ" id="Zwf-em-P9d"/>
-                        <outlet property="tbiDict26" destination="yIl-lT-2qF" id="noZ-eL-GGg"/>
-                        <outlet property="tbiDict27" destination="Xrw-P5-EZG" id="qxn-4v-HJK"/>
-                        <outlet property="tbiDict28" destination="3Ld-he-fNT" id="dgs-d3-tCI"/>
-                        <outlet property="tbiDict29" destination="aSx-mL-oNM" id="B6f-4l-Ibe"/>
-                        <outlet property="tbiDict3" destination="3C1-HO-nlO" id="767-tF-t3x"/>
-                        <outlet property="tbiDict30" destination="ZUw-Ii-AZl" id="qNZ-MY-36z"/>
-                        <outlet property="tbiDict31" destination="Bg6-Tf-CNu" id="a8Z-9a-XFG"/>
-                        <outlet property="tbiDict32" destination="bIr-N8-AkR" id="9NH-XI-0Rr"/>
-                        <outlet property="tbiDict33" destination="3cV-uu-zhr" id="vj0-go-20O"/>
-                        <outlet property="tbiDict34" destination="qBI-bg-q5P" id="D7u-g2-n1x"/>
-                        <outlet property="tbiDict35" destination="Dfo-sH-Dhr" id="bbu-89-v91"/>
-                        <outlet property="tbiDict36" destination="FzO-30-yo3" id="34c-ta-moW"/>
-                        <outlet property="tbiDict37" destination="ZaD-ck-oM2" id="zWv-p5-9mZ"/>
-                        <outlet property="tbiDict38" destination="aHY-Mg-sFI" id="JwH-vw-vEB"/>
-                        <outlet property="tbiDict39" destination="6af-Tx-NGn" id="5mv-Hu-p1L"/>
-                        <outlet property="tbiDict4" destination="6DX-O9-gI8" id="azd-lm-ShF"/>
-                        <outlet property="tbiDict5" destination="Gqp-si-imc" id="Oj3-jZ-Uby"/>
-                        <outlet property="tbiDict6" destination="SYz-1r-x3h" id="VE8-r3-TKs"/>
-                        <outlet property="tbiDict7" destination="Lgg-aL-DEa" id="myo-cE-3E2"/>
-                        <outlet property="tbiDict8" destination="Fra-Kg-ubs" id="5A7-Kk-VnV"/>
-                        <outlet property="tbiDict9" destination="mIi-Vx-rty" id="Xb1-Ti-3hj"/>
-                        <outlet property="toolbar" destination="IpQ-OR-gOP" id="E0s-sM-pSe"/>
-                        <segue destination="F8i-pe-Ate" kind="relationship" relationship="window.shadowedContentViewController" id="oJj-lN-fK3"/>
-                    </connections>
-                </windowController>
-                <customObject id="qEo-JS-MYZ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-524" y="327"/>
-        </scene>
         <!--Phrases Unit View Controller-->
         <scene sceneID="tUF-FR-igR">
             <objects>
                 <customObject id="HDX-Px-tzN" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="PhrasesUnitViewController" id="F8i-pe-Ate" customClass="PhrasesUnitViewController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" misplaced="YES" id="SJ8-yp-Qms">
-                        <rect key="frame" x="0.0" y="0.0" width="1200" height="800"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1200" height="750"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PaT-Vd-atn">
-                                <rect key="frame" x="0.0" y="294" width="581" height="32"/>
+                                <rect key="frame" x="0.0" y="718" width="581" height="32"/>
                                 <subviews>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="TIu-Me-trF">
                                         <rect key="frame" x="-1" y="-1" width="75" height="32"/>
@@ -275,6 +76,9 @@
                                                 <segment label="Speak" width="44" selected="YES" tag="1"/>
                                             </segments>
                                         </segmentedCell>
+                                        <connections>
+                                            <action selector="isSpeakingChanged:" target="F8i-pe-Ate" id="LBS-gd-O7X"/>
+                                        </connections>
                                     </segmentedControl>
                                     <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rZa-Gg-ptM">
                                         <rect key="frame" x="328" y="3" width="135" height="24"/>
@@ -326,27 +130,27 @@
                                 </customSpacing>
                             </stackView>
                             <splitView arrangesAllSubviews="NO" dividerStyle="paneSplitter" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pjz-FY-pWo">
-                                <rect key="frame" x="0.0" y="0.0" width="1200" height="294"/>
+                                <rect key="frame" x="0.0" y="0.0" width="1200" height="718"/>
                                 <subviews>
                                     <customView misplaced="YES" id="YT5-6x-qZn">
-                                        <rect key="frame" x="0.0" y="0.0" width="598" height="294"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="598" height="718"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <splitView arrangesAllSubviews="NO" dividerStyle="paneSplitter" translatesAutoresizingMaskIntoConstraints="NO" id="SPr-UV-Rhk">
-                                                <rect key="frame" x="0.0" y="-50" width="80" height="294"/>
+                                                <rect key="frame" x="0.0" y="-50" width="40" height="718"/>
                                                 <subviews>
                                                     <customView misplaced="YES" id="bFi-CQ-hZK">
-                                                        <rect key="frame" x="0.0" y="0.0" width="80" height="207"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="40" height="516"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
                                                             <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JGz-Z7-9aY">
-                                                                <rect key="frame" x="0.0" y="-37" width="100" height="34"/>
+                                                                <rect key="frame" x="0.0" y="-36" width="60" height="510"/>
                                                                 <clipView key="contentView" id="Zcq-Vh-TJP">
-                                                                    <rect key="frame" x="1" y="1" width="98" height="32"/>
+                                                                    <rect key="frame" x="1" y="1" width="58" height="508"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="ieV-Ib-SiL" viewBased="YES" id="8Zf-06-OzS">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="930" height="19"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="930" height="485"/>
                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                             <size key="intercellSpacing" width="3" height="2"/>
                                                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -621,11 +425,11 @@
                                                                     </subviews>
                                                                 </clipView>
                                                                 <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="MWh-UR-fIZ">
-                                                                    <rect key="frame" x="1" y="17" width="98" height="16"/>
+                                                                    <rect key="frame" x="1" y="493" width="58" height="16"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                 </scroller>
-                                                                <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="N2m-s2-Gap">
-                                                                    <rect key="frame" x="224" y="17" width="15" height="102"/>
+                                                                <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="N2m-s2-Gap">
+                                                                    <rect key="frame" x="83" y="24" width="16" height="9"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                 </scroller>
                                                                 <tableHeaderView key="headerView" wantsLayer="YES" id="ieV-Ib-SiL">
@@ -642,11 +446,11 @@
                                                         </constraints>
                                                     </customView>
                                                     <customView misplaced="YES" id="MBG-2p-MXh">
-                                                        <rect key="frame" x="0.0" y="217" width="80" height="77"/>
+                                                        <rect key="frame" x="0.0" y="526" width="40" height="192"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
                                                             <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="263-Ni-i4x">
-                                                                <rect key="frame" x="-2" y="-13" width="4" height="16"/>
+                                                                <rect key="frame" x="-2" y="-14" width="4" height="16"/>
                                                                 <textFieldCell key="cell" lineBreakMode="clipping" id="BgQ-Jn-wSR">
                                                                     <font key="font" metaFont="system"/>
                                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -654,13 +458,13 @@
                                                                 </textFieldCell>
                                                             </textField>
                                                             <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sdq-d7-p2n">
-                                                                <rect key="frame" x="0.0" y="3" width="600" height="234"/>
+                                                                <rect key="frame" x="0.0" y="2" width="600" height="182"/>
                                                                 <clipView key="contentView" id="VDG-cs-guC">
-                                                                    <rect key="frame" x="1" y="1" width="598" height="232"/>
+                                                                    <rect key="frame" x="1" y="1" width="598" height="180"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="11P-YU-HJV" viewBased="YES" id="7N6-WE-Kfk">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="598" height="207"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="598" height="155"/>
                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                             <size key="intercellSpacing" width="3" height="2"/>
                                                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -858,11 +662,11 @@
                                         </constraints>
                                     </customView>
                                     <customView misplaced="YES" id="CAY-TU-wY8">
-                                        <rect key="frame" x="608" y="0.0" width="592" height="294"/>
+                                        <rect key="frame" x="608" y="0.0" width="592" height="718"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <tabView translatesAutoresizingMaskIntoConstraints="NO" id="1DY-Fa-gzG">
-                                                <rect key="frame" x="-7" y="-60" width="1124" height="310"/>
+                                                <rect key="frame" x="-7" y="-60" width="1164" height="734"/>
                                                 <font key="font" metaFont="system"/>
                                             </tabView>
                                         </subviews>
@@ -2220,199 +2024,17 @@ Gw
             </objects>
             <point key="canvasLocation" x="-298.5" y="2535"/>
         </scene>
-        <!--Window Controller-->
-        <scene sceneID="TQp-9W-r9K">
-            <objects>
-                <windowController storyboardIdentifier="PhrasesLangWindowController" id="t1w-66-vYI" customClass="PhrasesLangWindowController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
-                    <window key="window" title="Phrases In Language" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="aJJ-qP-aqm" customClass="LollyWindow" customModule="LollySwiftMac" customModuleProvider="target">
-                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="196" y="240" width="480" height="270"/>
-                        <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
-                        <toolbar key="toolbar" implicitIdentifier="99476795-252C-48E8-9851-21369EE8577D" autosavesConfiguration="NO" showsBaselineSeparator="NO" displayMode="iconAndLabel" sizeMode="regular" id="I8C-Mh-LCH">
-                            <allowedToolbarItems>
-                                <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="l1Q-mq-x31"/>
-                                <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="1up-Vl-Wwc"/>
-                                <toolbarItem implicitItemIdentifier="360CEF89-3610-451A-B939-34F9335730CF" label="Add" paletteLabel="Add" tag="-1" image="NSAddTemplate" sizingBehavior="auto" autovalidates="NO" id="viz-co-4v0">
-                                    <connections>
-                                        <action selector="addPhrase:" target="maH-dw-yMa" id="uYP-u5-cIl"/>
-                                    </connections>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="0FE47FD6-6CD6-4F13-92D4-43D61D94CAF8" label="Refresh" paletteLabel="Refresh" tag="-1" image="NSRefreshTemplate" sizingBehavior="auto" id="MnR-91-5r0">
-                                    <connections>
-                                        <action selector="refreshTableView:" target="maH-dw-yMa" id="hfy-Hy-I9Y"/>
-                                    </connections>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="2C54255B-555E-4015-9364-1B3ADB88D9E6" label="Speak?" paletteLabel="Speak?" sizingBehavior="auto" id="G08-Sc-Q2L" userLabel="Speak?">
-                                    <nil key="toolTip"/>
-                                    <segmentedControl key="view" verticalHuggingPriority="750" id="4s3-xV-8Zh">
-                                        <rect key="frame" x="0.0" y="14" width="99" height="23"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="Ayj-vy-V4e">
-                                            <font key="font" metaFont="system"/>
-                                            <segments>
-                                                <segment label="Silent" width="42" selected="YES"/>
-                                                <segment label="Speak" width="46" tag="1"/>
-                                            </segments>
-                                        </segmentedCell>
-                                        <connections>
-                                            <action selector="isSpeakingChanged:" target="maH-dw-yMa" id="IbN-1Y-iCt"/>
-                                        </connections>
-                                    </segmentedControl>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="48672D26-32EC-438E-B580-5C23940683E2" label="Dict0" paletteLabel="Dict0" image="NSStatusNone" sizingBehavior="auto" id="8Wc-ck-zMh"/>
-                                <toolbarItem implicitItemIdentifier="3C1068D6-4C96-42EC-8E1D-B36474BD2E07" label="Dict1" paletteLabel="Dict1" tag="1" image="NSStatusNone" sizingBehavior="auto" id="0Ei-Ch-XXK"/>
-                                <toolbarItem implicitItemIdentifier="3F3381FC-F179-4019-8AEA-781D0038B440" label="Dict2" paletteLabel="Dict2" tag="2" image="NSStatusNone" sizingBehavior="auto" id="LSq-mm-R7n"/>
-                                <toolbarItem implicitItemIdentifier="B117A325-5484-410E-9F4E-CA2E97492E9F" label="Dict3" paletteLabel="Dict3" tag="3" image="NSStatusNone" sizingBehavior="auto" id="tvj-BG-tb1"/>
-                                <toolbarItem implicitItemIdentifier="3BD7F8D4-910D-492A-B542-C335210E2E29" label="Dict4" paletteLabel="Dict4" tag="4" image="NSStatusNone" sizingBehavior="auto" id="mRM-yh-R0J"/>
-                                <toolbarItem implicitItemIdentifier="C8779ADA-FD2F-4F44-AD7D-5D7E625796EF" label="Dict5" paletteLabel="Dict5" tag="5" image="NSStatusNone" sizingBehavior="auto" id="U9G-Zs-wBs"/>
-                                <toolbarItem implicitItemIdentifier="4C1DFC23-B799-4C5F-9EA0-4B569B9A1578" label="Dict6" paletteLabel="Dict6" tag="6" image="NSStatusNone" sizingBehavior="auto" id="zh4-9i-dcr"/>
-                                <toolbarItem implicitItemIdentifier="7A013389-1296-42AC-B561-1A5B5AA4CCDC" label="Dict7" paletteLabel="Dict7" tag="7" image="NSStatusNone" sizingBehavior="auto" id="vNV-1K-cuM"/>
-                                <toolbarItem implicitItemIdentifier="4DC3F1F8-84D5-4718-80F4-3F4F80282378" label="Dict8" paletteLabel="Dict8" tag="8" image="NSStatusNone" sizingBehavior="auto" id="Ija-OC-4pE"/>
-                                <toolbarItem implicitItemIdentifier="D0484F18-B9C0-48BC-8A23-A46603716881" label="Dict9" paletteLabel="Dict9" tag="9" image="NSStatusNone" sizingBehavior="auto" id="hOg-ly-VE9"/>
-                                <toolbarItem implicitItemIdentifier="8CA20FBB-1D7A-47A3-8DB3-4A4460166E4C" label="Dict10" paletteLabel="Dict10" tag="10" image="NSStatusNone" sizingBehavior="auto" id="a53-Be-pwD"/>
-                                <toolbarItem implicitItemIdentifier="45870B97-FEA4-4B61-A247-93280DE56A4B" label="Dict11" paletteLabel="Dict11" tag="11" image="NSStatusNone" sizingBehavior="auto" id="yU2-u1-gK8"/>
-                                <toolbarItem implicitItemIdentifier="AD1F70BB-2D63-4AC2-B594-3087EC5B3EB9" label="Dict12" paletteLabel="Dict12" tag="12" image="NSStatusNone" sizingBehavior="auto" id="Ubr-Ek-gU0"/>
-                                <toolbarItem implicitItemIdentifier="6A1A643E-4EDE-48A7-9C24-47441876EFC5" label="Dict13" paletteLabel="Dict13" tag="13" image="NSStatusNone" sizingBehavior="auto" id="lQn-Tb-oPt"/>
-                                <toolbarItem implicitItemIdentifier="41188F62-9A29-41C2-8688-24D1ADDE632E" label="Dict14" paletteLabel="Dict14" tag="14" image="NSStatusNone" sizingBehavior="auto" id="lP2-AJ-Oab"/>
-                                <toolbarItem implicitItemIdentifier="85F87443-6DF7-41B7-920D-25C535989B41" label="Dict15" paletteLabel="Dict15" tag="15" image="NSStatusNone" sizingBehavior="auto" id="5Vp-7u-oz2"/>
-                                <toolbarItem implicitItemIdentifier="731B34A8-18F9-4BD4-9D2F-0C2691E8ADCD" label="Dict16" paletteLabel="Dict16" tag="16" image="NSStatusNone" sizingBehavior="auto" id="8JA-El-zWk"/>
-                                <toolbarItem implicitItemIdentifier="5D0C37ED-8307-4EE9-9C9E-11CD9B97966F" label="Dict17" paletteLabel="Dict17" tag="17" image="NSStatusNone" sizingBehavior="auto" id="5Zl-eH-zJV"/>
-                                <toolbarItem implicitItemIdentifier="1D47D42B-F567-4764-97E0-E1BD6CAB88D1" label="Dict18" paletteLabel="Dict18" tag="18" image="NSStatusNone" sizingBehavior="auto" id="NvG-Ad-3PH"/>
-                                <toolbarItem implicitItemIdentifier="799FA6CA-E14D-41D7-B265-3874E8EF0379" label="Dict19" paletteLabel="Dict19" tag="19" image="NSStatusNone" sizingBehavior="auto" id="pZe-L6-6ar"/>
-                                <toolbarItem implicitItemIdentifier="C20BCC43-D843-432D-B4C5-5B9D0AF7F958" label="Dict20" paletteLabel="Dict20" tag="20" image="NSStatusNone" sizingBehavior="auto" id="Lqr-TU-NA5"/>
-                                <toolbarItem implicitItemIdentifier="07C07718-7F81-4A8E-BA47-F4DDCAFDF804" label="Dict21" paletteLabel="Dict21" tag="21" image="NSStatusNone" sizingBehavior="auto" id="B0W-J3-fDP"/>
-                                <toolbarItem implicitItemIdentifier="23E213B5-270A-4330-A95E-9C1B116FDBFB" label="Dict22" paletteLabel="Dict22" tag="22" image="NSStatusNone" sizingBehavior="auto" id="XXO-Ev-12D"/>
-                                <toolbarItem implicitItemIdentifier="6E51C6A2-A307-4104-9C9F-9B2326C00205" label="Dict23" paletteLabel="Dict23" tag="23" image="NSStatusNone" sizingBehavior="auto" id="AEP-5B-dBG"/>
-                                <toolbarItem implicitItemIdentifier="94A9B49A-53DF-4F1E-AC63-0D5AD51646BC" label="Dict24" paletteLabel="Dict24" tag="24" image="NSStatusNone" sizingBehavior="auto" id="cjM-bz-Daz"/>
-                                <toolbarItem implicitItemIdentifier="D633E036-3C44-4B5C-BF8B-4D45C1AC7F90" label="Dict25" paletteLabel="Dict25" tag="25" image="NSStatusNone" sizingBehavior="auto" id="HSV-uA-WRL"/>
-                                <toolbarItem implicitItemIdentifier="484658BC-615C-4442-B02B-438BE010497E" label="Dict26" paletteLabel="Dict26" tag="26" image="NSStatusNone" sizingBehavior="auto" id="cTt-jn-pvm"/>
-                                <toolbarItem implicitItemIdentifier="69337DFC-9AD5-4EF9-B88E-071D7932313B" label="Dict27" paletteLabel="Dict27" tag="27" image="NSStatusNone" sizingBehavior="auto" id="KhO-li-GMG"/>
-                                <toolbarItem implicitItemIdentifier="FAD815ED-2126-41F6-9EA9-2E0F4DDC436F" label="Dict28" paletteLabel="Dict28" tag="28" image="NSStatusNone" sizingBehavior="auto" id="e3l-ZE-F9x"/>
-                                <toolbarItem implicitItemIdentifier="26E50F5A-4C46-4097-BC8F-BCD9F7BA6E3E" label="Dict29" paletteLabel="Dict29" tag="29" image="NSStatusNone" sizingBehavior="auto" id="SIE-AX-LmY"/>
-                                <toolbarItem implicitItemIdentifier="01FC1C0A-2103-4524-92AB-2E99AB85A922" label="Dict30" paletteLabel="Dict30" tag="30" image="NSStatusNone" sizingBehavior="auto" id="qKP-Qu-hq3"/>
-                                <toolbarItem implicitItemIdentifier="34B313E1-D7FC-4B98-9567-37730663AB62" label="Dict31" paletteLabel="Dict31" tag="31" image="NSStatusNone" sizingBehavior="auto" id="uAb-e6-57Q"/>
-                                <toolbarItem implicitItemIdentifier="BB2BF1D4-E6C4-4EED-B137-D3792FDD7908" label="Dict32" paletteLabel="Dict32" tag="32" image="NSStatusNone" sizingBehavior="auto" id="d4j-gj-uyR"/>
-                                <toolbarItem implicitItemIdentifier="E0BC3187-5D1C-4E2C-8284-46DB27F1D035" label="Dict33" paletteLabel="Dict33" tag="33" image="NSStatusNone" sizingBehavior="auto" id="wqI-MR-rpY"/>
-                                <toolbarItem implicitItemIdentifier="54D24ABA-7013-4AB6-943D-44F84DAE70B3" label="Dict34" paletteLabel="Dict34" tag="34" image="NSStatusNone" sizingBehavior="auto" id="TJf-8b-V3E"/>
-                                <toolbarItem implicitItemIdentifier="494FE92C-F758-4853-85C0-E245205B354D" label="Dict35" paletteLabel="Dict35" tag="35" image="NSStatusNone" sizingBehavior="auto" id="jo1-4X-MtU"/>
-                                <toolbarItem implicitItemIdentifier="D3FADC80-571E-47DB-975D-289F63F5EBD0" label="Dict36" paletteLabel="Dict36" tag="36" image="NSStatusNone" sizingBehavior="auto" id="Fgb-GD-0xL"/>
-                                <toolbarItem implicitItemIdentifier="6EF9B20B-2683-4240-B1A4-94D7522BDB68" label="Dict37" paletteLabel="Dict37" tag="37" image="NSStatusNone" sizingBehavior="auto" id="SZT-0H-va5"/>
-                                <toolbarItem implicitItemIdentifier="B98AB977-C955-44B9-BF03-DEED96F11B41" label="Dict38" paletteLabel="Dict38" tag="38" image="NSStatusNone" sizingBehavior="auto" id="XfF-LV-PRV"/>
-                                <toolbarItem implicitItemIdentifier="0F2B7572-6847-4D7A-BFFB-F5EC55CF70AB" label="Dict39" paletteLabel="Dict39" tag="39" image="NSStatusNone" sizingBehavior="auto" id="odv-Th-9If"/>
-                            </allowedToolbarItems>
-                            <defaultToolbarItems>
-                                <toolbarItem reference="viz-co-4v0"/>
-                                <toolbarItem reference="MnR-91-5r0"/>
-                                <toolbarItem reference="G08-Sc-Q2L"/>
-                                <toolbarItem reference="8Wc-ck-zMh"/>
-                                <toolbarItem reference="0Ei-Ch-XXK"/>
-                                <toolbarItem reference="LSq-mm-R7n"/>
-                                <toolbarItem reference="tvj-BG-tb1"/>
-                                <toolbarItem reference="mRM-yh-R0J"/>
-                                <toolbarItem reference="U9G-Zs-wBs"/>
-                                <toolbarItem reference="zh4-9i-dcr"/>
-                                <toolbarItem reference="vNV-1K-cuM"/>
-                                <toolbarItem reference="Ija-OC-4pE"/>
-                                <toolbarItem reference="hOg-ly-VE9"/>
-                                <toolbarItem reference="a53-Be-pwD"/>
-                                <toolbarItem reference="yU2-u1-gK8"/>
-                                <toolbarItem reference="Ubr-Ek-gU0"/>
-                                <toolbarItem reference="lQn-Tb-oPt"/>
-                                <toolbarItem reference="lP2-AJ-Oab"/>
-                                <toolbarItem reference="5Vp-7u-oz2"/>
-                                <toolbarItem reference="8JA-El-zWk"/>
-                                <toolbarItem reference="5Zl-eH-zJV"/>
-                                <toolbarItem reference="NvG-Ad-3PH"/>
-                                <toolbarItem reference="pZe-L6-6ar"/>
-                                <toolbarItem reference="Lqr-TU-NA5"/>
-                                <toolbarItem reference="B0W-J3-fDP"/>
-                                <toolbarItem reference="XXO-Ev-12D"/>
-                                <toolbarItem reference="AEP-5B-dBG"/>
-                                <toolbarItem reference="cjM-bz-Daz"/>
-                                <toolbarItem reference="HSV-uA-WRL"/>
-                                <toolbarItem reference="cTt-jn-pvm"/>
-                                <toolbarItem reference="KhO-li-GMG"/>
-                                <toolbarItem reference="e3l-ZE-F9x"/>
-                                <toolbarItem reference="SIE-AX-LmY"/>
-                                <toolbarItem reference="qKP-Qu-hq3"/>
-                                <toolbarItem reference="uAb-e6-57Q"/>
-                                <toolbarItem reference="d4j-gj-uyR"/>
-                                <toolbarItem reference="wqI-MR-rpY"/>
-                                <toolbarItem reference="TJf-8b-V3E"/>
-                                <toolbarItem reference="jo1-4X-MtU"/>
-                                <toolbarItem reference="Fgb-GD-0xL"/>
-                                <toolbarItem reference="SZT-0H-va5"/>
-                                <toolbarItem reference="XfF-LV-PRV"/>
-                                <toolbarItem reference="odv-Th-9If"/>
-                            </defaultToolbarItems>
-                        </toolbar>
-                        <connections>
-                            <outlet property="delegate" destination="t1w-66-vYI" id="Kek-rM-6bi"/>
-                        </connections>
-                    </window>
-                    <connections>
-                        <outlet property="scSpeak" destination="4s3-xV-8Zh" id="eRB-SF-pln"/>
-                        <outlet property="tbiDict0" destination="8Wc-ck-zMh" id="FPv-24-By3"/>
-                        <outlet property="tbiDict1" destination="0Ei-Ch-XXK" id="3Q4-z6-0S8"/>
-                        <outlet property="tbiDict10" destination="a53-Be-pwD" id="0qw-Lc-uNV"/>
-                        <outlet property="tbiDict11" destination="yU2-u1-gK8" id="qcU-ub-hiC"/>
-                        <outlet property="tbiDict12" destination="Ubr-Ek-gU0" id="k9P-X2-87F"/>
-                        <outlet property="tbiDict13" destination="lQn-Tb-oPt" id="SYB-nH-q7O"/>
-                        <outlet property="tbiDict14" destination="lP2-AJ-Oab" id="T1r-uA-md1"/>
-                        <outlet property="tbiDict15" destination="5Vp-7u-oz2" id="kg8-97-GFx"/>
-                        <outlet property="tbiDict16" destination="8JA-El-zWk" id="dHr-Fh-FPN"/>
-                        <outlet property="tbiDict17" destination="5Zl-eH-zJV" id="rtL-VD-yjq"/>
-                        <outlet property="tbiDict18" destination="NvG-Ad-3PH" id="qMb-lB-MRQ"/>
-                        <outlet property="tbiDict19" destination="pZe-L6-6ar" id="T5x-rF-N8D"/>
-                        <outlet property="tbiDict2" destination="LSq-mm-R7n" id="MST-gK-8kh"/>
-                        <outlet property="tbiDict20" destination="Lqr-TU-NA5" id="Fss-Xx-OOg"/>
-                        <outlet property="tbiDict21" destination="B0W-J3-fDP" id="Zi1-aa-dJI"/>
-                        <outlet property="tbiDict22" destination="XXO-Ev-12D" id="bvx-aL-IBO"/>
-                        <outlet property="tbiDict23" destination="AEP-5B-dBG" id="Ble-bS-mYb"/>
-                        <outlet property="tbiDict24" destination="cjM-bz-Daz" id="NoM-wU-2Ct"/>
-                        <outlet property="tbiDict25" destination="HSV-uA-WRL" id="Gn1-6r-YJk"/>
-                        <outlet property="tbiDict26" destination="cTt-jn-pvm" id="87S-c4-6dF"/>
-                        <outlet property="tbiDict27" destination="KhO-li-GMG" id="FQg-YI-6N5"/>
-                        <outlet property="tbiDict28" destination="e3l-ZE-F9x" id="79Q-Uf-gWQ"/>
-                        <outlet property="tbiDict29" destination="SIE-AX-LmY" id="Ok0-VT-EOT"/>
-                        <outlet property="tbiDict3" destination="tvj-BG-tb1" id="tf5-7k-iiX"/>
-                        <outlet property="tbiDict30" destination="qKP-Qu-hq3" id="etJ-gQ-cIl"/>
-                        <outlet property="tbiDict31" destination="uAb-e6-57Q" id="Hlv-pg-0I2"/>
-                        <outlet property="tbiDict32" destination="d4j-gj-uyR" id="T6c-DZ-iZK"/>
-                        <outlet property="tbiDict33" destination="wqI-MR-rpY" id="vKP-uQ-Pfb"/>
-                        <outlet property="tbiDict34" destination="TJf-8b-V3E" id="3cJ-jr-K7e"/>
-                        <outlet property="tbiDict35" destination="jo1-4X-MtU" id="aT3-TP-5cs"/>
-                        <outlet property="tbiDict36" destination="Fgb-GD-0xL" id="pCA-vN-Fph"/>
-                        <outlet property="tbiDict37" destination="SZT-0H-va5" id="xlA-fA-tHa"/>
-                        <outlet property="tbiDict38" destination="XfF-LV-PRV" id="PQV-yt-Gkw"/>
-                        <outlet property="tbiDict39" destination="odv-Th-9If" id="sDY-Vu-kTH"/>
-                        <outlet property="tbiDict4" destination="mRM-yh-R0J" id="HyH-sU-WHc"/>
-                        <outlet property="tbiDict5" destination="U9G-Zs-wBs" id="Y4t-Aw-UdY"/>
-                        <outlet property="tbiDict6" destination="zh4-9i-dcr" id="J6v-RI-JAQ"/>
-                        <outlet property="tbiDict7" destination="vNV-1K-cuM" id="176-zP-lLb"/>
-                        <outlet property="tbiDict8" destination="Ija-OC-4pE" id="lrF-Dv-i2Y"/>
-                        <outlet property="tbiDict9" destination="hOg-ly-VE9" id="aMq-bO-2iJ"/>
-                        <outlet property="toolbar" destination="I8C-Mh-LCH" id="eN7-oW-BjB"/>
-                        <segue destination="CET-Kl-kcd" kind="relationship" relationship="window.shadowedContentViewController" id="ucx-Xf-ffo"/>
-                    </connections>
-                </windowController>
-                <customObject id="maH-dw-yMa" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-                <userDefaultsController id="KEJ-aw-1eb"/>
-            </objects>
-            <point key="canvasLocation" x="-24" y="381"/>
-        </scene>
         <!--Phrases Lang View Controller-->
         <scene sceneID="fOB-er-LBM">
             <objects>
                 <customObject id="XZV-rT-KcG" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="PhrasesLangViewController" id="CET-Kl-kcd" customClass="PhrasesLangViewController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="ujF-ih-yWP">
-                        <rect key="frame" x="0.0" y="0.0" width="1200" height="800"/>
+                    <view key="view" misplaced="YES" id="ujF-ih-yWP">
+                        <rect key="frame" x="0.0" y="0.0" width="1200" height="774"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9Sd-Qi-v3e">
-                                <rect key="frame" x="0.0" y="768" width="380" height="32"/>
+                                <rect key="frame" x="0.0" y="716" width="380" height="32"/>
                                 <subviews>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OjA-vo-xhr">
                                         <rect key="frame" x="-1" y="-1" width="44" height="32"/>
@@ -2479,21 +2101,21 @@ Gw
                                 </customSpacing>
                             </stackView>
                             <splitView arrangesAllSubviews="NO" dividerStyle="paneSplitter" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ih1-7N-0hy">
-                                <rect key="frame" x="0.0" y="0.0" width="1200" height="768"/>
+                                <rect key="frame" x="0.0" y="0.0" width="1200" height="716"/>
                                 <subviews>
                                     <customView misplaced="YES" id="0SA-9G-4z7">
-                                        <rect key="frame" x="0.0" y="0.0" width="598" height="768"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="598" height="716"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <splitView arrangesAllSubviews="NO" dividerStyle="paneSplitter" translatesAutoresizingMaskIntoConstraints="NO" id="ZbZ-qW-hfW">
-                                                <rect key="frame" x="0.0" y="276" width="614" height="768"/>
+                                                <rect key="frame" x="0.0" y="-26" width="614" height="716"/>
                                                 <subviews>
                                                     <customView misplaced="YES" id="In9-rV-H5g">
-                                                        <rect key="frame" x="0.0" y="0.0" width="614" height="561"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="614" height="523"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
                                                             <scrollView misplaced="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l6c-aw-cLk">
-                                                                <rect key="frame" x="0.0" y="166" width="614" height="395"/>
+                                                                <rect key="frame" x="0.0" y="128" width="614" height="395"/>
                                                                 <clipView key="contentView" id="jEc-SO-xYY">
                                                                     <rect key="frame" x="1" y="1" width="612" height="393"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2655,17 +2277,17 @@ Gw
                                                         </constraints>
                                                     </customView>
                                                     <customView misplaced="YES" id="02l-vl-rJL">
-                                                        <rect key="frame" x="0.0" y="571" width="614" height="197"/>
+                                                        <rect key="frame" x="0.0" y="533" width="614" height="183"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
                                                             <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ELB-sA-Dqo">
-                                                                <rect key="frame" x="0.0" y="143" width="614" height="318"/>
+                                                                <rect key="frame" x="0.0" y="64" width="614" height="266"/>
                                                                 <clipView key="contentView" id="QsO-RO-qob">
-                                                                    <rect key="frame" x="1" y="1" width="612" height="316"/>
+                                                                    <rect key="frame" x="1" y="1" width="612" height="264"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="54X-GR-1eM" viewBased="YES" id="Wpd-f7-GOr">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="612" height="291"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="612" height="239"/>
                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                             <size key="intercellSpacing" width="3" height="2"/>
                                                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -2839,7 +2461,7 @@ Gw
                                                                 </tableHeaderView>
                                                             </scrollView>
                                                             <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pNy-UZ-1pw">
-                                                                <rect key="frame" x="-2" y="72" width="4" height="16"/>
+                                                                <rect key="frame" x="-2" y="-7" width="4" height="16"/>
                                                                 <textFieldCell key="cell" lineBreakMode="clipping" id="F4i-fR-Pzo">
                                                                     <font key="font" metaFont="system"/>
                                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -2871,11 +2493,11 @@ Gw
                                         </constraints>
                                     </customView>
                                     <customView misplaced="YES" id="lV2-fF-Ect">
-                                        <rect key="frame" x="608" y="0.0" width="592" height="768"/>
+                                        <rect key="frame" x="608" y="0.0" width="592" height="716"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <tabView translatesAutoresizingMaskIntoConstraints="NO" id="esO-lV-J9f">
-                                                <rect key="frame" x="-7" y="266" width="590" height="784"/>
+                                                <rect key="frame" x="-7" y="-36" width="590" height="732"/>
                                                 <font key="font" metaFont="system"/>
                                             </tabView>
                                         </subviews>
@@ -3446,200 +3068,17 @@ Gw
             </objects>
             <point key="canvasLocation" x="-959.5" y="2516.5"/>
         </scene>
-        <!--Window Controller-->
-        <scene sceneID="dKH-nJ-Zjl">
-            <objects>
-                <windowController storyboardIdentifier="PhrasesTextbookWindowController" id="Ngy-o1-fVc" customClass="PhrasesTextbookWindowController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
-                    <window key="window" title="Phrases In Textbook" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="oEN-mp-uzm" customClass="LollyWindow" customModule="LollySwiftMac" customModuleProvider="target">
-                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="196" y="240" width="480" height="270"/>
-                        <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
-                        <toolbar key="toolbar" implicitIdentifier="5A96789F-9D14-4263-88A1-CCF5911A7169" autosavesConfiguration="NO" showsBaselineSeparator="NO" displayMode="iconAndLabel" sizeMode="regular" id="Uwx-Ut-JBy">
-                            <allowedToolbarItems>
-                                <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="mWe-Lr-j64"/>
-                                <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="qf0-0Q-opR"/>
-                                <toolbarItem implicitItemIdentifier="0496D4C0-BC04-4507-91F2-83C4E069B901" label="Delete" paletteLabel="Delete" tag="-1" image="NSRemoveTemplate" sizingBehavior="auto" id="j5l-RK-ED6">
-                                    <connections>
-                                        <action selector="deletePhrase:" target="2fr-uc-31Q" id="MPj-sK-MQH"/>
-                                    </connections>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="D0C95DF9-7372-4B9D-9A44-79E43C577986" label="Refresh" paletteLabel="Refresh" tag="-1" image="NSRefreshTemplate" sizingBehavior="auto" id="h2r-td-4Tz">
-                                    <connections>
-                                        <action selector="refreshTableView:" target="2fr-uc-31Q" id="znl-ny-yHq"/>
-                                    </connections>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="740EF344-D25A-4313-95AF-052CA6AD5AAA" label="Speak?" paletteLabel="Speak?" sizingBehavior="auto" id="804-ZN-kkM" userLabel="Speak?">
-                                    <nil key="toolTip"/>
-                                    <segmentedControl key="view" verticalHuggingPriority="750" id="B9p-kU-Vrg">
-                                        <rect key="frame" x="0.0" y="14" width="99" height="23"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="80n-DU-n4X">
-                                            <font key="font" metaFont="system"/>
-                                            <segments>
-                                                <segment label="Silent" width="42" selected="YES"/>
-                                                <segment label="Speak" width="46" tag="1"/>
-                                            </segments>
-                                        </segmentedCell>
-                                        <connections>
-                                            <action selector="isSpeakingChanged:" target="2fr-uc-31Q" id="Pyq-zv-2PT"/>
-                                        </connections>
-                                    </segmentedControl>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="FEDD5BE5-928E-4B40-A486-2F79323EA5B1" label="Dict0" paletteLabel="Dict0" image="NSStatusNone" sizingBehavior="auto" id="Z4W-BH-O2c"/>
-                                <toolbarItem implicitItemIdentifier="C766FBB0-9348-4EA9-8E1A-6D8D7C056089" label="Dict1" paletteLabel="Dict1" tag="1" image="NSStatusNone" sizingBehavior="auto" id="cyd-PE-uch"/>
-                                <toolbarItem implicitItemIdentifier="08307838-2013-4B9A-B243-7A1733A059E3" label="Dict2" paletteLabel="Dict2" tag="2" image="NSStatusNone" sizingBehavior="auto" id="s53-Dg-Lza"/>
-                                <toolbarItem implicitItemIdentifier="80D5AD46-BA56-4578-A4E8-B97AD2959103" label="Dict3" paletteLabel="Dict3" tag="3" image="NSStatusNone" sizingBehavior="auto" id="zNs-QT-01t"/>
-                                <toolbarItem implicitItemIdentifier="291911DF-8719-4B86-973B-4CDF4659A449" label="Dict4" paletteLabel="Dict4" tag="4" image="NSStatusNone" sizingBehavior="auto" id="XPA-79-xjf"/>
-                                <toolbarItem implicitItemIdentifier="22348F5A-B77A-43E4-B7BE-49063E118A26" label="Dict5" paletteLabel="Dict5" tag="5" image="NSStatusNone" sizingBehavior="auto" id="nah-Ii-ciC"/>
-                                <toolbarItem implicitItemIdentifier="318E572A-2311-47EB-AD53-CF6879B62449" label="Dict6" paletteLabel="Dict6" tag="6" image="NSStatusNone" sizingBehavior="auto" id="Wag-BT-yB4"/>
-                                <toolbarItem implicitItemIdentifier="26EADD72-BA27-4FE3-A910-5BBC67DC0F5D" label="Dict7" paletteLabel="Dict7" tag="7" image="NSStatusNone" sizingBehavior="auto" id="GSh-vF-L2h"/>
-                                <toolbarItem implicitItemIdentifier="35B9A06D-AAC2-40BA-9BD8-86E65D346344" label="Dict8" paletteLabel="Dict8" tag="8" image="NSStatusNone" sizingBehavior="auto" id="t8N-FL-VsO"/>
-                                <toolbarItem implicitItemIdentifier="B1B7B206-96FC-448F-91C7-F1C86BA975DF" label="Dict9" paletteLabel="Dict9" tag="9" image="NSStatusNone" sizingBehavior="auto" id="FmR-rP-E8K"/>
-                                <toolbarItem implicitItemIdentifier="0A6C32D2-C2B5-4BDB-8A1A-86FF65375751" label="Dict10" paletteLabel="Dict10" tag="10" image="NSStatusNone" sizingBehavior="auto" id="Rz1-Q8-wRg"/>
-                                <toolbarItem implicitItemIdentifier="664E1EAB-188D-4945-BE05-5EB38A45E97D" label="Dict11" paletteLabel="Dict11" tag="11" image="NSStatusNone" sizingBehavior="auto" id="6FU-vi-USg"/>
-                                <toolbarItem implicitItemIdentifier="0DE4C61C-600B-46D2-9DD6-AC9BCB78F84A" label="Dict12" paletteLabel="Dict12" tag="12" image="NSStatusNone" sizingBehavior="auto" id="Lah-04-7Ve"/>
-                                <toolbarItem implicitItemIdentifier="5933AC90-188C-44D4-ADFD-34AE88722810" label="Dict13" paletteLabel="Dict13" tag="13" image="NSStatusNone" sizingBehavior="auto" id="nTO-jI-ioL"/>
-                                <toolbarItem implicitItemIdentifier="4CCCA49D-10BC-48D8-AB50-848E0D6EDD2C" label="Dict14" paletteLabel="Dict14" tag="14" image="NSStatusNone" sizingBehavior="auto" id="GBQ-se-dbm"/>
-                                <toolbarItem implicitItemIdentifier="CB8F29B9-24BE-429E-AB64-62275BCA1F48" label="Dict15" paletteLabel="Dict15" tag="15" image="NSStatusNone" sizingBehavior="auto" id="W3J-GW-A1y"/>
-                                <toolbarItem implicitItemIdentifier="B84FB431-B795-490C-BFE4-A2FBFE2A305D" label="Dict16" paletteLabel="Dict16" tag="16" image="NSStatusNone" sizingBehavior="auto" id="dpx-0n-W0P"/>
-                                <toolbarItem implicitItemIdentifier="BAD58B8B-8EA3-47BE-AE91-0F9F8A1506B6" label="Dict17" paletteLabel="Dict17" tag="17" image="NSStatusNone" sizingBehavior="auto" id="a9v-Rb-SyQ"/>
-                                <toolbarItem implicitItemIdentifier="A737F4B7-381A-4F24-9ACC-3B82BF5EA45D" label="Dict18" paletteLabel="Dict18" tag="18" image="NSStatusNone" sizingBehavior="auto" id="n6S-sx-bDx"/>
-                                <toolbarItem implicitItemIdentifier="9D9A2AA8-D450-48E0-A2F7-316CD5950B6A" label="Dict19" paletteLabel="Dict19" tag="19" image="NSStatusNone" sizingBehavior="auto" id="uHn-ih-ce3"/>
-                                <toolbarItem implicitItemIdentifier="1063FB5A-E02B-4792-8C0F-D0F40F9A880D" label="Dict20" paletteLabel="Dict20" tag="20" image="NSStatusNone" sizingBehavior="auto" id="dEB-1Y-Rtv"/>
-                                <toolbarItem implicitItemIdentifier="028B4309-B9F8-4978-A654-77551012C350" label="Dict21" paletteLabel="Dict21" tag="21" image="NSStatusNone" sizingBehavior="auto" id="gUj-Rv-dgf"/>
-                                <toolbarItem implicitItemIdentifier="3ECA51CE-A7B2-4BA9-BEAA-41C762F9EA50" label="Dict22" paletteLabel="Dict22" tag="22" image="NSStatusNone" sizingBehavior="auto" id="n30-qO-8gc"/>
-                                <toolbarItem implicitItemIdentifier="2CB7BA57-7B82-4444-9A3C-733655813CC2" label="Dict23" paletteLabel="Dict23" tag="23" image="NSStatusNone" sizingBehavior="auto" id="Ool-ZI-rhP"/>
-                                <toolbarItem implicitItemIdentifier="8351DAAD-B962-49F7-A4EF-AB0BA755B8C0" label="Dict24" paletteLabel="Dict24" tag="24" image="NSStatusNone" sizingBehavior="auto" id="rvI-Wr-In6"/>
-                                <toolbarItem implicitItemIdentifier="9992D584-2724-48F4-B045-215690F1F3CF" label="Dict25" paletteLabel="Dict25" tag="25" image="NSStatusNone" sizingBehavior="auto" id="e2Z-Zi-do7"/>
-                                <toolbarItem implicitItemIdentifier="4E101A9A-53EC-4A69-8547-6D24BB454814" label="Dict26" paletteLabel="Dict26" tag="26" image="NSStatusNone" sizingBehavior="auto" id="ugo-gZ-9eY"/>
-                                <toolbarItem implicitItemIdentifier="424B1693-475A-4187-AB8C-8D2DE28B8ACF" label="Dict27" paletteLabel="Dict27" tag="27" image="NSStatusNone" sizingBehavior="auto" id="tpG-DG-BqC"/>
-                                <toolbarItem implicitItemIdentifier="20AD6C63-D0DD-4378-8214-8EB62303C922" label="Dict28" paletteLabel="Dict28" tag="28" image="NSStatusNone" sizingBehavior="auto" id="Gio-dt-oRg"/>
-                                <toolbarItem implicitItemIdentifier="6D0123B5-4240-4A68-AE84-8E5E13D5CA95" label="Dict29" paletteLabel="Dict29" tag="29" image="NSStatusNone" sizingBehavior="auto" id="d0H-9j-gc8"/>
-                                <toolbarItem implicitItemIdentifier="D465C815-2421-4CEF-A6AC-61A52BC0F18E" label="Dict30" paletteLabel="Dict30" tag="30" image="NSStatusNone" sizingBehavior="auto" id="yk2-SQ-x9O"/>
-                                <toolbarItem implicitItemIdentifier="73618CCD-84D0-4DE5-B8A4-76B1EFAF8BD3" label="Dict31" paletteLabel="Dict31" tag="31" image="NSStatusNone" sizingBehavior="auto" id="kzL-8p-Hbc"/>
-                                <toolbarItem implicitItemIdentifier="BE9D5EAC-7E36-47A3-B422-76019181FAF5" label="Dict32" paletteLabel="Dict32" tag="32" image="NSStatusNone" sizingBehavior="auto" id="BHq-HA-BJv"/>
-                                <toolbarItem implicitItemIdentifier="18245023-0068-4CEC-9597-98C0A1E13607" label="Dict33" paletteLabel="Dict33" tag="33" image="NSStatusNone" sizingBehavior="auto" id="Knv-0A-QdJ"/>
-                                <toolbarItem implicitItemIdentifier="D4024FC1-CB75-425F-A8E0-ABF9E6376988" label="Dict34" paletteLabel="Dict34" tag="34" image="NSStatusNone" sizingBehavior="auto" id="oUG-bQ-JI5"/>
-                                <toolbarItem implicitItemIdentifier="911C121C-9970-4700-A98F-E544A9C18824" label="Dict35" paletteLabel="Dict35" tag="35" image="NSStatusNone" sizingBehavior="auto" id="aOp-K1-YW6"/>
-                                <toolbarItem implicitItemIdentifier="0462A0F6-1155-428D-853C-BAF1D6E7C2BB" label="Dict36" paletteLabel="Dict36" tag="36" image="NSStatusNone" sizingBehavior="auto" id="8fk-cz-dzg"/>
-                                <toolbarItem implicitItemIdentifier="B3FC0D19-3311-4B51-AF5A-3A2F34FC18C3" label="Dict37" paletteLabel="Dict37" tag="37" image="NSStatusNone" sizingBehavior="auto" id="2Oa-Al-prk"/>
-                                <toolbarItem implicitItemIdentifier="D4BF9F28-30B3-4398-8C74-24B42ABF21E2" label="Dict38" paletteLabel="Dict38" tag="38" image="NSStatusNone" sizingBehavior="auto" id="Jbe-XI-gIc"/>
-                                <toolbarItem implicitItemIdentifier="69ED74E8-DC06-4770-8436-FA0EEE02BB77" label="Dict39" paletteLabel="Dict39" tag="39" image="NSStatusNone" sizingBehavior="auto" id="9qB-EP-Sot"/>
-                            </allowedToolbarItems>
-                            <defaultToolbarItems>
-                                <toolbarItem reference="j5l-RK-ED6"/>
-                                <toolbarItem reference="h2r-td-4Tz"/>
-                                <toolbarItem reference="804-ZN-kkM"/>
-                                <toolbarItem reference="Z4W-BH-O2c"/>
-                                <toolbarItem reference="cyd-PE-uch"/>
-                                <toolbarItem reference="s53-Dg-Lza"/>
-                                <toolbarItem reference="zNs-QT-01t"/>
-                                <toolbarItem reference="XPA-79-xjf"/>
-                                <toolbarItem reference="nah-Ii-ciC"/>
-                                <toolbarItem reference="Wag-BT-yB4"/>
-                                <toolbarItem reference="GSh-vF-L2h"/>
-                                <toolbarItem reference="t8N-FL-VsO"/>
-                                <toolbarItem reference="FmR-rP-E8K"/>
-                                <toolbarItem reference="Rz1-Q8-wRg"/>
-                                <toolbarItem reference="6FU-vi-USg"/>
-                                <toolbarItem reference="Lah-04-7Ve"/>
-                                <toolbarItem reference="nTO-jI-ioL"/>
-                                <toolbarItem reference="GBQ-se-dbm"/>
-                                <toolbarItem reference="W3J-GW-A1y"/>
-                                <toolbarItem reference="dpx-0n-W0P"/>
-                                <toolbarItem reference="a9v-Rb-SyQ"/>
-                                <toolbarItem reference="n6S-sx-bDx"/>
-                                <toolbarItem reference="uHn-ih-ce3"/>
-                                <toolbarItem reference="dEB-1Y-Rtv"/>
-                                <toolbarItem reference="gUj-Rv-dgf"/>
-                                <toolbarItem reference="n30-qO-8gc"/>
-                                <toolbarItem reference="Ool-ZI-rhP"/>
-                                <toolbarItem reference="rvI-Wr-In6"/>
-                                <toolbarItem reference="e2Z-Zi-do7"/>
-                                <toolbarItem reference="ugo-gZ-9eY"/>
-                                <toolbarItem reference="tpG-DG-BqC"/>
-                                <toolbarItem reference="Gio-dt-oRg"/>
-                                <toolbarItem reference="d0H-9j-gc8"/>
-                                <toolbarItem reference="yk2-SQ-x9O"/>
-                                <toolbarItem reference="kzL-8p-Hbc"/>
-                                <toolbarItem reference="BHq-HA-BJv"/>
-                                <toolbarItem reference="Knv-0A-QdJ"/>
-                                <toolbarItem reference="oUG-bQ-JI5"/>
-                                <toolbarItem reference="aOp-K1-YW6"/>
-                                <toolbarItem reference="8fk-cz-dzg"/>
-                                <toolbarItem reference="2Oa-Al-prk"/>
-                                <toolbarItem reference="Jbe-XI-gIc"/>
-                                <toolbarItem reference="9qB-EP-Sot"/>
-                            </defaultToolbarItems>
-                        </toolbar>
-                        <connections>
-                            <outlet property="delegate" destination="Ngy-o1-fVc" id="T1H-M1-UNU"/>
-                        </connections>
-                    </window>
-                    <connections>
-                        <outlet property="acTextbooks" destination="SeE-SI-0yJ" id="szG-6N-K8L"/>
-                        <outlet property="scSpeak" destination="B9p-kU-Vrg" id="c7j-as-JK4"/>
-                        <outlet property="tbiDict0" destination="Z4W-BH-O2c" id="ZZo-ln-d3s"/>
-                        <outlet property="tbiDict1" destination="cyd-PE-uch" id="nU3-Ta-EIG"/>
-                        <outlet property="tbiDict10" destination="Rz1-Q8-wRg" id="Sdh-2o-Rp4"/>
-                        <outlet property="tbiDict11" destination="6FU-vi-USg" id="z0U-oU-F4g"/>
-                        <outlet property="tbiDict12" destination="Lah-04-7Ve" id="tde-Rc-ucN"/>
-                        <outlet property="tbiDict13" destination="nTO-jI-ioL" id="ue8-1H-Ngv"/>
-                        <outlet property="tbiDict14" destination="GBQ-se-dbm" id="xik-iY-jO9"/>
-                        <outlet property="tbiDict15" destination="W3J-GW-A1y" id="JUN-bD-F9i"/>
-                        <outlet property="tbiDict16" destination="dpx-0n-W0P" id="GvZ-x4-wfd"/>
-                        <outlet property="tbiDict17" destination="a9v-Rb-SyQ" id="M3q-RC-wRL"/>
-                        <outlet property="tbiDict18" destination="n6S-sx-bDx" id="SHe-NX-vUU"/>
-                        <outlet property="tbiDict19" destination="uHn-ih-ce3" id="pw6-hg-IFL"/>
-                        <outlet property="tbiDict2" destination="s53-Dg-Lza" id="VMS-LF-dYE"/>
-                        <outlet property="tbiDict20" destination="dEB-1Y-Rtv" id="Yn7-4b-K6E"/>
-                        <outlet property="tbiDict21" destination="gUj-Rv-dgf" id="Ll8-Iy-5pn"/>
-                        <outlet property="tbiDict22" destination="n30-qO-8gc" id="Lho-fU-CYd"/>
-                        <outlet property="tbiDict23" destination="Ool-ZI-rhP" id="C8S-W5-cCC"/>
-                        <outlet property="tbiDict24" destination="rvI-Wr-In6" id="wHP-Fw-xcz"/>
-                        <outlet property="tbiDict25" destination="e2Z-Zi-do7" id="rd9-FH-u5p"/>
-                        <outlet property="tbiDict26" destination="ugo-gZ-9eY" id="gC2-83-aIW"/>
-                        <outlet property="tbiDict27" destination="tpG-DG-BqC" id="IL2-CQ-52E"/>
-                        <outlet property="tbiDict28" destination="Gio-dt-oRg" id="Nhg-vm-RTe"/>
-                        <outlet property="tbiDict29" destination="d0H-9j-gc8" id="J8N-J2-Ge5"/>
-                        <outlet property="tbiDict3" destination="zNs-QT-01t" id="sgA-XW-nzN"/>
-                        <outlet property="tbiDict30" destination="yk2-SQ-x9O" id="LOI-QI-sfK"/>
-                        <outlet property="tbiDict31" destination="kzL-8p-Hbc" id="cjl-Kt-xbw"/>
-                        <outlet property="tbiDict32" destination="BHq-HA-BJv" id="33t-dG-VyO"/>
-                        <outlet property="tbiDict33" destination="Knv-0A-QdJ" id="Cm0-Qw-hrv"/>
-                        <outlet property="tbiDict34" destination="oUG-bQ-JI5" id="GZD-xY-JaI"/>
-                        <outlet property="tbiDict35" destination="aOp-K1-YW6" id="UfN-Hf-ubi"/>
-                        <outlet property="tbiDict36" destination="8fk-cz-dzg" id="i43-2W-W6l"/>
-                        <outlet property="tbiDict37" destination="2Oa-Al-prk" id="Ea7-ph-jor"/>
-                        <outlet property="tbiDict38" destination="Jbe-XI-gIc" id="i9n-nC-rPD"/>
-                        <outlet property="tbiDict39" destination="9qB-EP-Sot" id="iHX-SR-8Nc"/>
-                        <outlet property="tbiDict4" destination="XPA-79-xjf" id="ObB-i6-hu6"/>
-                        <outlet property="tbiDict5" destination="nah-Ii-ciC" id="3rc-Az-sTl"/>
-                        <outlet property="tbiDict6" destination="Wag-BT-yB4" id="Kor-O2-T9m"/>
-                        <outlet property="tbiDict7" destination="GSh-vF-L2h" id="254-rn-tAu"/>
-                        <outlet property="tbiDict8" destination="t8N-FL-VsO" id="HB8-xN-b1g"/>
-                        <outlet property="tbiDict9" destination="FmR-rP-E8K" id="O4k-Ms-w6p"/>
-                        <outlet property="toolbar" destination="Uwx-Ut-JBy" id="ePe-ys-UDQ"/>
-                        <segue destination="dNa-67-Lx3" kind="relationship" relationship="window.shadowedContentViewController" id="Dgh-ov-anC"/>
-                    </connections>
-                </windowController>
-                <arrayController id="SeE-SI-0yJ"/>
-                <customObject id="2fr-uc-31Q" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="554" y="381"/>
-        </scene>
         <!--Phrases Textbook View Controller-->
         <scene sceneID="MLt-ZI-Dbp">
             <objects>
                 <customObject id="ax5-Aw-fpV" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="PhrasesTextbookViewController" id="dNa-67-Lx3" customClass="PhrasesTextbookViewController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="BSi-qb-EzZ">
-                        <rect key="frame" x="0.0" y="0.0" width="1200" height="800"/>
+                    <view key="view" misplaced="YES" id="BSi-qb-EzZ">
+                        <rect key="frame" x="0.0" y="0.0" width="1200" height="774"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="0.0" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dkf-Zg-i4Y">
-                                <rect key="frame" x="0.0" y="768" width="451" height="32"/>
+                                <rect key="frame" x="0.0" y="716" width="451" height="32"/>
                                 <subviews>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UTA-gd-Xj2">
                                         <rect key="frame" x="-1" y="-1" width="44" height="32"/>
@@ -3660,6 +3099,9 @@ Gw
                                                 <segment label="Speak" width="44" selected="YES" tag="1"/>
                                             </segments>
                                         </segmentedCell>
+                                        <connections>
+                                            <action selector="isSpeakingChanged:" target="dNa-67-Lx3" id="jmJ-6d-ATf"/>
+                                        </connections>
                                     </segmentedControl>
                                     <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Z2E-Vs-GJu">
                                         <rect key="frame" x="127" y="3" width="135" height="24"/>
@@ -3722,21 +3164,21 @@ Gw
                                 </customSpacing>
                             </stackView>
                             <splitView misplaced="YES" arrangesAllSubviews="NO" dividerStyle="paneSplitter" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hr7-EQ-Krj">
-                                <rect key="frame" x="0.0" y="227" width="1200" height="544"/>
+                                <rect key="frame" x="0.0" y="201" width="1200" height="544"/>
                                 <subviews>
                                     <customView misplaced="YES" id="4Au-Cp-8gl">
                                         <rect key="frame" x="0.0" y="0.0" width="598" height="544"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <splitView arrangesAllSubviews="NO" dividerStyle="paneSplitter" translatesAutoresizingMaskIntoConstraints="NO" id="xfv-gh-F9r">
-                                                <rect key="frame" x="0.0" y="0.0" width="566" height="768"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="566" height="716"/>
                                                 <subviews>
                                                     <customView misplaced="YES" id="8bI-bs-Oga">
-                                                        <rect key="frame" x="0.0" y="0.0" width="566" height="555"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="566" height="517"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
                                                             <scrollView misplaced="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f1F-FW-l8V">
-                                                                <rect key="frame" x="0.0" y="164" width="606" height="391"/>
+                                                                <rect key="frame" x="0.0" y="126" width="606" height="391"/>
                                                                 <clipView key="contentView" id="Jxc-fy-ceq">
                                                                     <rect key="frame" x="1" y="1" width="604" height="389"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -4074,17 +3516,17 @@ Gw
                                                         </constraints>
                                                     </customView>
                                                     <customView misplaced="YES" id="qLK-Zg-kv6">
-                                                        <rect key="frame" x="0.0" y="565" width="566" height="203"/>
+                                                        <rect key="frame" x="0.0" y="527" width="566" height="189"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
                                                             <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nmN-Co-DQG">
-                                                                <rect key="frame" x="0.0" y="104" width="600" height="377"/>
+                                                                <rect key="frame" x="0.0" y="9" width="600" height="325"/>
                                                                 <clipView key="contentView" id="X8H-GN-vNP">
-                                                                    <rect key="frame" x="1" y="1" width="598" height="375"/>
+                                                                    <rect key="frame" x="1" y="1" width="598" height="323"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="RV2-Qv-ECx" viewBased="YES" id="svn-Fw-kKy">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="598" height="350"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="598" height="298"/>
                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                             <size key="intercellSpacing" width="3" height="2"/>
                                                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -4258,7 +3700,7 @@ Gw
                                                                 </tableHeaderView>
                                                             </scrollView>
                                                             <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="rYM-h5-opd">
-                                                                <rect key="frame" x="-2" y="88" width="4" height="16"/>
+                                                                <rect key="frame" x="-2" y="-7" width="4" height="16"/>
                                                                 <textFieldCell key="cell" lineBreakMode="clipping" id="dgr-jP-jmI">
                                                                     <font key="font" metaFont="system"/>
                                                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -4294,7 +3736,7 @@ Gw
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <tabView translatesAutoresizingMaskIntoConstraints="NO" id="tDX-Dg-PDJ">
-                                                <rect key="frame" x="-7" y="-10" width="638" height="784"/>
+                                                <rect key="frame" x="-7" y="-10" width="638" height="732"/>
                                                 <font key="font" metaFont="system"/>
                                             </tabView>
                                         </subviews>
@@ -5006,55 +4448,6 @@ Gw
             </objects>
             <point key="canvasLocation" x="-250.5" y="1930.5"/>
         </scene>
-        <!--Window Controller-->
-        <scene sceneID="2Bu-kn-J8J">
-            <objects>
-                <windowController storyboardIdentifier="PhrasesReviewWindowController" id="Odf-C9-YYr" customClass="PhrasesReviewWindowController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
-                    <window key="window" title="Phrases Review" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="nRo-92-YZw">
-                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="196" y="240" width="480" height="270"/>
-                        <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
-                        <toolbar key="toolbar" implicitIdentifier="188DCEDA-C8A3-44EC-B951-529BDEE543EA" autosavesConfiguration="NO" showsBaselineSeparator="NO" displayMode="iconAndLabel" sizeMode="regular" id="lny-Cc-9NE">
-                            <allowedToolbarItems>
-                                <toolbarItem implicitItemIdentifier="D7BFDFBE-7FB3-4D82-9239-C47A158CE4C5" label="New Test" paletteLabel="New Test" tag="-1" image="NSAdvanced" sizingBehavior="auto" id="wMG-or-oAQ">
-                                    <connections>
-                                        <action selector="newTest:" target="CXB-3h-H4F" id="WGN-bE-I77"/>
-                                    </connections>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="5C13EDF6-ECEE-4551-A595-50711F7FE881" label="Speak?" paletteLabel="Speak?" sizingBehavior="auto" id="uLb-lb-OJM">
-                                    <nil key="toolTip"/>
-                                    <segmentedControl key="view" verticalHuggingPriority="750" id="Lr1-Ub-Ecw">
-                                        <rect key="frame" x="0.0" y="14" width="99" height="23"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="Xca-vt-b22">
-                                            <font key="font" metaFont="system"/>
-                                            <segments>
-                                                <segment label="Silent" width="42" selected="YES"/>
-                                                <segment label="Speak" width="46" tag="1"/>
-                                            </segments>
-                                        </segmentedCell>
-                                    </segmentedControl>
-                                </toolbarItem>
-                            </allowedToolbarItems>
-                            <defaultToolbarItems>
-                                <toolbarItem reference="wMG-or-oAQ"/>
-                                <toolbarItem reference="uLb-lb-OJM"/>
-                            </defaultToolbarItems>
-                        </toolbar>
-                        <connections>
-                            <outlet property="delegate" destination="Odf-C9-YYr" id="aJJ-oK-Dpf"/>
-                        </connections>
-                    </window>
-                    <connections>
-                        <outlet property="scSpeak" destination="Lr1-Ub-Ecw" id="SmO-ZD-0Ir"/>
-                        <segue destination="I1g-x1-rZK" kind="relationship" relationship="window.shadowedContentViewController" id="lNL-HZ-8Hu"/>
-                    </connections>
-                </windowController>
-                <customObject id="CXB-3h-H4F" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="338" y="1617"/>
-        </scene>
         <!--Phrases Review View Controller-->
         <scene sceneID="dnU-59-p3g">
             <objects>
@@ -5624,8 +5017,6 @@ Gw
         <image name="NSGoBackTemplate" width="12" height="17"/>
         <image name="NSGoForwardTemplate" width="12" height="17"/>
         <image name="NSRefreshTemplate" width="18" height="21"/>
-        <image name="NSRemoveTemplate" width="18" height="5"/>
-        <image name="NSStatusNone" width="16" height="16"/>
         <image name="arrow.forward" catalog="system" width="15" height="12"/>
         <image name="arrowtriangle.backward.fill" catalog="system" width="14" height="13"/>
         <image name="arrowtriangle.forward.fill" catalog="system" width="14" height="13"/>
