@@ -74,6 +74,3 @@ class WordsSearchViewController: WordsBaseViewController {
     override func getPhrases() {
     }
 }
-
-class WordsSearchWindowController: WordsBaseWindowController {
-}

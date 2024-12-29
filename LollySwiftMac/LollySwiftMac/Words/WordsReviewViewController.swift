@@ -82,7 +82,6 @@ class WordsReviewViewController: WordsBaseViewController, NSTextFieldDelegate {
     override func viewDidAppear() {
         super.viewDidAppear()
         settingsChanged()
-        wc = view.window!.windowController as? WordsReviewWindowController
         _ = vm.isSpeaking <~> scSpeak.rx.isOn
         vm.isSpeaking.subscribe { [unowned self] isSpeaking in
             if vm.hasCurrent && isSpeaking {
@@ -91,11 +90,6 @@ class WordsReviewViewController: WordsBaseViewController, NSTextFieldDelegate {
                 synth.speak(dialogue)
             }
         } ~ rx.disposeBag
-    }
-    override func viewWillDisappear() {
-        super.viewWillDisappear()
-        wc = nil
-        vm.stopTimer()
     }
 
     @IBAction func newTest(_ sender: AnyObject) {
@@ -122,7 +116,4 @@ class WordsReviewViewController: WordsBaseViewController, NSTextFieldDelegate {
     override func updateStatusText() {
         tfStatusText.stringValue = "\(vm.arrWords.count) Words in \(vmSettings.UNITPARTINFO)"
     }
-}
-
-class WordsReviewWindowController: WordsBaseWindowController {
 }

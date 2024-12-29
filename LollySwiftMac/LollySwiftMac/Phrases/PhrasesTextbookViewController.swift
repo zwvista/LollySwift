@@ -95,6 +95,3 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
         presentAsModalWindow(detailVC)
     }
 }
-
-class PhrasesTextbookWindowController: PhrasesBaseWindowController {
-}

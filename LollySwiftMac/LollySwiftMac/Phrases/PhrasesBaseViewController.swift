@@ -139,6 +139,3 @@ class PhrasesBaseViewController: WordsPhrasesBaseViewController {
     }
 }
 
-class PhrasesBaseWindowController: WordsPhrasesBaseWindowController {
-}
-
