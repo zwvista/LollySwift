@@ -83,6 +83,10 @@ class MainViewController: NSViewController {
     @IBAction func patternsInLanguage(_ sender: AnyObject) {
         findOrShowTab(storyBoardName: "Patterns", viewControllerID: "PatternsViewController", label: "Patterns In Language")
     }
+
+    @IBAction func closeTab(_ sender: AnyObject) {
+        tabView.removeTabViewItem(tabView.selectedTabViewItem!)
+    }
 }
 
 class MainWindowController: NSWindowController {
