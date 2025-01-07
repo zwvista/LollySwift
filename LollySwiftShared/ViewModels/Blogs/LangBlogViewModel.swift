@@ -41,8 +41,8 @@ class LangBlogViewModel: NSObject {
         await MLangBlogPost.update(item: item)
     }
 
-    static func createPost(item: MLangBlogPost) async {
-        _ = await MLangBlogPost.create(item: item)
+    static func createPost(item: MLangBlogPost) async -> Int {
+        await MLangBlogPost.create(item: item)
     }
 
     func newPost() -> MLangBlogPost {

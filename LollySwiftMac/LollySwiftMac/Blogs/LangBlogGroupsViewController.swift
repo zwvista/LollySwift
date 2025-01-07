@@ -93,36 +93,30 @@ class LangBlogGroupsViewController: NSViewController, NSTableViewDataSource, NST
         }
     }
 
-    @IBAction func editPost(_ sender: Any) {
-        let i = tvPosts.selectedRow
-        if i == -1 {return}
+    @IBAction func addPost(_ sender: Any) {
+        guard let itemGroup = vm.currentGroup else {return}
         let detailVC = storyboard!.instantiateController(withIdentifier: "LangBlogPostsDetailViewController") as! LangBlogPostsDetailViewController
-        detailVC.vmEdit = LangBlogPostsDetailViewModel(vm: vm, item: vm.arrPosts[i])
+        detailVC.vmEdit = LangBlogPostsDetailViewModel(vm: vm, itemPost: vm.newPost(), itemGroup: itemGroup)
+        detailVC.complete = { [unowned self] in tvGroups.reloadData() }
+        presentAsModalWindow(detailVC)
+    }
+
+    @IBAction func editPost(_ sender: Any) {
+        guard let itemPost = vm.currentPost else {return}
+        let detailVC = storyboard!.instantiateController(withIdentifier: "LangBlogPostsDetailViewController") as! LangBlogPostsDetailViewController
+        detailVC.vmEdit = LangBlogPostsDetailViewModel(vm: vm, itemPost: itemPost, itemGroup: vm.currentGroup)
         detailVC.complete = { [unowned self] in
-            tvPosts.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<tvPosts.tableColumns.count))
+            tvPosts.reloadData(forRowIndexes: [tvPosts.selectedRow], columnIndexes: IndexSet(0..<tvPosts.tableColumns.count))
         }
         presentAsModalWindow(detailVC)
     }
 
     @IBAction func editPostContent(_ sender: Any) {
-        let i = tvPosts.selectedRow
-        if i == -1 {return}
-        let itemPost = vm.arrPosts[i]
+        guard let itemPost = vm.currentPost else {return}
         Task {
             let item = await MLangBlogPostContent.getDataById(itemPost.ID)
             (NSApplication.shared.delegate as! AppDelegate).editPost(settings: vm.vmSettings, item: item)
         }
-    }
-
-    deinit {
-        print("DEBUG: \(className) deinit")
-    }
-}
-
-class LangBlogGroupsWindowController: NSWindowController, NSWindowDelegate {
-
-    override func windowDidLoad() {
-        super.windowDidLoad()
     }
 
     deinit {

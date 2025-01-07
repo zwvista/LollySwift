@@ -11,27 +11,32 @@ import Foundation
 @MainActor
 class LangBlogPostsDetailViewModel: NSObject {
     var vm: LangBlogViewModel
-    var item: MLangBlogPost
+    var itemPost: MLangBlogPost
     var itemEdit: MLangBlogPostEdit
     var isAdd: Bool
+    var itemGroup: MLangBlogGroup?
     @Published var isOKEnabled = false
 
-    init(vm: LangBlogViewModel, item: MLangBlogPost) {
+    init(vm: LangBlogViewModel, itemPost: MLangBlogPost, itemGroup: MLangBlogGroup? = nil) {
         self.vm = vm
-        self.item = item
-        itemEdit = MLangBlogPostEdit(x: item)
-        isAdd = item.ID == 0
+        self.itemPost = itemPost
+        self.itemGroup = itemGroup
+        itemEdit = MLangBlogPostEdit(x: itemPost)
+        isAdd = itemPost.ID == 0
         super.init()
         _ = itemEdit.$TITLE.map { !$0.isEmpty }.eraseToAnyPublisher() ~> $isOKEnabled
     }
 
     func onOK() async {
-        itemEdit.save(to: item)
+        itemEdit.save(to: itemPost)
         if isAdd {
-            vm.arrPosts.append(item)
-            await LangBlogViewModel.createPost(item: item)
+            vm.arrPosts.append(itemPost)
+            let itemGP = MLangBlogGP()
+            itemGP.GROUPID = itemGroup!.ID
+            itemGP.POSTID = await LangBlogViewModel.createPost(item: itemPost)
+            _ = await MLangBlogGP.create(item: itemGP)
         } else {
-            await LangBlogViewModel.updatePost(item: item)
+            await LangBlogViewModel.updatePost(item: itemPost)
         }
     }
 }
