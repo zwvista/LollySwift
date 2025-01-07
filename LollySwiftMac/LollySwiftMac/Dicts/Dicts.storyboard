@@ -6,52 +6,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Window Controller-->
-        <scene sceneID="R6O-nh-3It">
-            <objects>
-                <windowController storyboardIdentifier="DictsWindowController" id="rf8-8K-9TJ" sceneMemberID="viewController">
-                    <window key="window" title="Dictionaries" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="MZ8-Pv-yN7">
-                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="196" y="240" width="480" height="270"/>
-                        <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
-                        <toolbar key="toolbar" implicitIdentifier="67101DCA-1136-478E-9DF6-99ECD4D771EF" autosavesConfiguration="NO" showsBaselineSeparator="NO" displayMode="iconAndLabel" sizeMode="regular" id="h3W-b0-o8T">
-                            <allowedToolbarItems>
-                                <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="1pH-E2-NYx"/>
-                                <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="yy8-CR-PiQ"/>
-                                <toolbarItem implicitItemIdentifier="360CEF89-3610-451A-B939-34F9335730CF" label="Add" paletteLabel="Add" tag="-1" image="NSAddTemplate" autovalidates="NO" id="d9G-V6-Avq">
-                                    <size key="minSize" width="33.5" height="26"/>
-                                    <size key="maxSize" width="33.5" height="26"/>
-                                    <connections>
-                                        <action selector="addDict:" target="opR-1q-qPd" id="Q3b-Pw-AET"/>
-                                    </connections>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="0FE47FD6-6CD6-4F13-92D4-43D61D94CAF8" label="Refresh" paletteLabel="Refresh" tag="-1" image="NSRefreshTemplate" id="XcJ-hY-hqa">
-                                    <size key="minSize" width="33.5" height="29"/>
-                                    <size key="maxSize" width="33.5" height="29"/>
-                                </toolbarItem>
-                            </allowedToolbarItems>
-                            <defaultToolbarItems>
-                                <toolbarItem reference="d9G-V6-Avq"/>
-                                <toolbarItem reference="XcJ-hY-hqa"/>
-                            </defaultToolbarItems>
-                        </toolbar>
-                        <connections>
-                            <outlet property="delegate" destination="rf8-8K-9TJ" id="C15-pU-axh"/>
-                        </connections>
-                    </window>
-                    <connections>
-                        <segue destination="nVb-ND-0qd" kind="relationship" relationship="window.shadowedContentViewController" id="JVN-1U-Tjt"/>
-                    </connections>
-                </windowController>
-                <customObject id="opR-1q-qPd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="201" y="-23"/>
-        </scene>
         <!--Dicts View Controller-->
         <scene sceneID="6cw-kP-4nt">
             <objects>
-                <viewController id="nVb-ND-0qd" customClass="DictsViewController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DictsViewController" id="nVb-ND-0qd" customClass="DictsViewController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="WEi-Ui-cBr">
                         <rect key="frame" x="0.0" y="0.0" width="1200" height="600"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1813,8 +1771,4 @@ Gw
             <point key="canvasLocation" x="-680" y="1347"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="NSAddTemplate" width="18" height="17"/>
-        <image name="NSRefreshTemplate" width="18" height="21"/>
-    </resources>
 </document>

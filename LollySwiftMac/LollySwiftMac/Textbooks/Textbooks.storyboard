@@ -6,55 +6,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Window Controller-->
-        <scene sceneID="wBk-6A-HFO">
-            <objects>
-                <windowController storyboardIdentifier="TextbooksWindowController" id="yH3-pM-bGf" sceneMemberID="viewController">
-                    <window key="window" title="Textbooks" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="XBw-QU-jux">
-                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="196" y="240" width="480" height="270"/>
-                        <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
-                        <toolbar key="toolbar" implicitIdentifier="67101DCA-1136-478E-9DF6-99ECD4D771EF" autosavesConfiguration="NO" showsBaselineSeparator="NO" displayMode="iconAndLabel" sizeMode="regular" id="tRc-Aa-OJn">
-                            <allowedToolbarItems>
-                                <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="5Ia-mY-elR"/>
-                                <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="EYo-5l-Gl8"/>
-                                <toolbarItem implicitItemIdentifier="360CEF89-3610-451A-B939-34F9335730CF" label="Add" paletteLabel="Add" tag="-1" image="NSAddTemplate" autovalidates="NO" id="pEe-YK-UUw">
-                                    <size key="minSize" width="33.5" height="26"/>
-                                    <size key="maxSize" width="33.5" height="26"/>
-                                    <connections>
-                                        <action selector="addTextbook:" target="Fyy-Ft-yuD" id="Qoc-Nj-X6S"/>
-                                    </connections>
-                                </toolbarItem>
-                                <toolbarItem implicitItemIdentifier="0FE47FD6-6CD6-4F13-92D4-43D61D94CAF8" label="Refresh" paletteLabel="Refresh" tag="-1" image="NSRefreshTemplate" id="o5o-Zn-a9E">
-                                    <size key="minSize" width="33.5" height="29"/>
-                                    <size key="maxSize" width="33.5" height="29"/>
-                                    <connections>
-                                        <action selector="refreshTableView:" target="Fyy-Ft-yuD" id="482-bk-luk"/>
-                                    </connections>
-                                </toolbarItem>
-                            </allowedToolbarItems>
-                            <defaultToolbarItems>
-                                <toolbarItem reference="pEe-YK-UUw"/>
-                                <toolbarItem reference="o5o-Zn-a9E"/>
-                            </defaultToolbarItems>
-                        </toolbar>
-                        <connections>
-                            <outlet property="delegate" destination="yH3-pM-bGf" id="fA8-M8-f9Y"/>
-                        </connections>
-                    </window>
-                    <connections>
-                        <segue destination="82i-hm-Ibc" kind="relationship" relationship="window.shadowedContentViewController" id="Qzd-hx-fSa"/>
-                    </connections>
-                </windowController>
-                <customObject id="Fyy-Ft-yuD" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-562" y="-13"/>
-        </scene>
         <!--Textbooks View Controller-->
         <scene sceneID="ndh-pc-68a">
             <objects>
-                <viewController id="82i-hm-Ibc" customClass="TextbooksViewController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TextbooksViewController" id="82i-hm-Ibc" customClass="TextbooksViewController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" misplaced="YES" id="MqJ-1l-ar5">
                         <rect key="frame" x="0.0" y="0.0" width="1200" height="575"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -436,51 +391,10 @@ Gw
             </objects>
             <point key="canvasLocation" x="-680" y="1101"/>
         </scene>
-        <!--Window Controller-->
-        <scene sceneID="Kzn-nA-925">
-            <objects>
-                <windowController storyboardIdentifier="OnlineTextbooksWindowController" id="bde-ki-gEb" sceneMemberID="viewController">
-                    <window key="window" title="Online Textbooks" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="PDc-ba-iju">
-                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="196" y="240" width="480" height="270"/>
-                        <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
-                        <view key="contentView" id="vaz-o6-KxG">
-                            <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
-                            <autoresizingMask key="autoresizingMask"/>
-                        </view>
-                        <toolbar key="toolbar" implicitIdentifier="5C770D70-8806-4DCB-A33C-21A87DA42856" autosavesConfiguration="NO" showsBaselineSeparator="NO" displayMode="iconAndLabel" sizeMode="regular" id="SJB-LO-0zs">
-                            <allowedToolbarItems>
-                                <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="NfT-2K-2Fk"/>
-                                <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="86F-zI-dd4"/>
-                                <toolbarItem implicitItemIdentifier="0FE47FD6-6CD6-4F13-92D4-43D61D94CAF8" label="Refresh" paletteLabel="Refresh" tag="-1" image="NSRefreshTemplate" id="45e-XQ-c1L">
-                                    <size key="minSize" width="33.5" height="29"/>
-                                    <size key="maxSize" width="33.5" height="29"/>
-                                    <connections>
-                                        <action selector="refreshTableView:" target="tsC-By-KMy" id="boh-Da-qAP"/>
-                                    </connections>
-                                </toolbarItem>
-                            </allowedToolbarItems>
-                            <defaultToolbarItems>
-                                <toolbarItem reference="45e-XQ-c1L"/>
-                            </defaultToolbarItems>
-                        </toolbar>
-                        <connections>
-                            <outlet property="delegate" destination="bde-ki-gEb" id="nOB-jc-D1L"/>
-                        </connections>
-                    </window>
-                    <connections>
-                        <segue destination="3Cf-sR-kY7" kind="relationship" relationship="window.shadowedContentViewController" id="hPL-hM-jjd"/>
-                    </connections>
-                </windowController>
-                <customObject id="tsC-By-KMy" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="156" y="-23"/>
-        </scene>
         <!--Online Textbooks View Controller-->
         <scene sceneID="A2l-Iv-JC5">
             <objects>
-                <viewController id="3Cf-sR-kY7" customClass="OnlineTextbooksViewController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OnlineTextbooksViewController" id="3Cf-sR-kY7" customClass="OnlineTextbooksViewController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="L5X-8u-oN0">
                         <rect key="frame" x="0.0" y="0.0" width="1200" height="581"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -959,8 +873,4 @@ DQ
             <point key="canvasLocation" x="-590.5" y="920"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="NSAddTemplate" width="18" height="17"/>
-        <image name="NSRefreshTemplate" width="18" height="21"/>
-    </resources>
 </document>

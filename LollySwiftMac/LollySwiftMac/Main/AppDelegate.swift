@@ -99,26 +99,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         editPost(settings: AppDelegate.theSettingsViewModel, item: nil)
     }
 
-    @IBAction func showLangBlogGroups(_ sender: AnyObject) {
-        showWindow(storyBoardName: "Blogs", windowControllerName: "LangBlogGroupsWindowController")
-    }
-
-    @IBAction func showLangBlogPosts(_ sender: AnyObject) {
-        showWindow(storyBoardName: "Blogs", windowControllerName: "LangBlogPostsWindowController")
-    }
-
-    @IBAction func textbooks(_ sender: AnyObject) {
-        showWindow(storyBoardName: "Textbooks", windowControllerName: "TextbooksWindowController")
-    }
-
-    @IBAction func onlineTextbooks(_ sender: AnyObject) {
-        showWindow(storyBoardName: "Textbooks", windowControllerName: "OnlineTextbooksWindowController")
-    }
-
-    @IBAction func dictionaries(_ sender: AnyObject) {
-        showWindow(storyBoardName: "Dicts", windowControllerName: "DictsWindowController")
-    }
-
     @IBAction func readNumber(_ sender: AnyObject) {
         showWindow(storyBoardName: "Misc", windowControllerName: "ReadNumberWindowController")
     }
