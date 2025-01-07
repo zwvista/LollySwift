@@ -62,18 +62,16 @@ class LangBlogPostsViewController: NSViewController, NSTableViewDataSource, NSTa
             }
         } else {
             let i = tvGroups.selectedRow
-            vm.selectGroup(i == -1 ? nil : vm.arrGroups[i]) { [unowned self] in
-            }
+            vm.selectGroup(i == -1 ? nil : vm.arrGroups[i]) {}
         }
     }
 
     @IBAction func editGroup(_ sender: Any) {
-        let i = tvGroups.selectedRow
-        if i == -1 {return}
+        guard let itemGroup = vm.currentGroup else {return}
         let detailVC = storyboard!.instantiateController(withIdentifier: "LangBlogGroupsDetailViewController") as! LangBlogGroupsDetailViewController
-        detailVC.vmEdit = LangBlogGroupsDetailViewModel(vm: vm, item: vm.arrGroups[i])
+        detailVC.vmEdit = LangBlogGroupsDetailViewModel(vm: vm, item: itemGroup)
         detailVC.complete = { [unowned self] in
-            tvGroups.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<tvGroups.tableColumns.count))
+            tvGroups.reloadData(forRowIndexes: [tvGroups.selectedRow], columnIndexes: IndexSet(0..<tvGroups.tableColumns.count))
         }
         presentAsModalWindow(detailVC)
     }
