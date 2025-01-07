@@ -13,27 +13,34 @@ import RxBinding
 
 class LangBlogPostsDetailViewModel: NSObject {
     var vm: LangBlogViewModel
-    var item: MLangBlogPost
+    var itemPost: MLangBlogPost
     var itemEdit: MLangBlogPostEdit
     var isAdd: Bool
+    var itemGroup: MLangBlogGroup?
     let isOKEnabled = BehaviorRelay(value: false)
 
-    init(vm: LangBlogViewModel, item: MLangBlogPost) {
+    init(vm: LangBlogViewModel, itemPost: MLangBlogPost, itemGroup: MLangBlogGroup? = nil) {
         self.vm = vm
-        self.item = item
-        itemEdit = MLangBlogPostEdit(x: item)
-        isAdd = item.ID == 0
+        self.itemPost = itemPost
+        self.itemGroup = itemGroup
+        itemEdit = MLangBlogPostEdit(x: itemPost)
+        isAdd = itemPost.ID == 0
         super.init()
         _ = itemEdit.TITLE.map { !$0.isEmpty } ~> isOKEnabled
     }
 
     func onOK() -> Single<()> {
-        itemEdit.save(to: item)
+        itemEdit.save(to: itemPost)
         if isAdd {
-            vm.arrPosts.append(item)
-            return LangBlogViewModel.createPost(item: item)
+            vm.arrPosts.append(itemPost)
+            let itemGP = MLangBlogGP()
+            itemGP.GROUPID = itemGroup!.ID
+            return LangBlogViewModel.createPost(item: itemPost).map {
+                itemGP.POSTID = $0
+                _ = MLangBlogGP.create(item: itemGP)
+            }
         } else {
-            return LangBlogViewModel.updatePost(item: item)
+            return LangBlogViewModel.updatePost(item: itemPost)
         }
     }
 }

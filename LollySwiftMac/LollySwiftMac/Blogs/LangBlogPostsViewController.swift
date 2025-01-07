@@ -89,26 +89,23 @@ class LangBlogPostsViewController: NSViewController, NSTableViewDataSource, NSTa
 
     @IBAction func addPost(_ sender: Any) {
         let detailVC = storyboard!.instantiateController(withIdentifier: "LangBlogPostsDetailViewController") as! LangBlogPostsDetailViewController
-        detailVC.vmEdit = LangBlogPostsDetailViewModel(vm: vm, item: vm.newPost())
+        detailVC.vmEdit = LangBlogPostsDetailViewModel(vm: vm, itemPost: vm.newPost())
         detailVC.complete = { [unowned self] in tvGroups.reloadData() }
         presentAsModalWindow(detailVC)
     }
 
     @IBAction func editPost(_ sender: Any) {
-        let i = tvPosts.selectedRow
-        if i == -1 {return}
+        guard let itemPost = vm.currentPost else {return}
         let detailVC = storyboard!.instantiateController(withIdentifier: "LangBlogPostsDetailViewController") as! LangBlogPostsDetailViewController
-        detailVC.vmEdit = LangBlogPostsDetailViewModel(vm: vm, item: vm.arrPosts[i])
+        detailVC.vmEdit = LangBlogPostsDetailViewModel(vm: vm, itemPost: itemPost)
         detailVC.complete = { [unowned self] in
-            tvPosts.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<tvPosts.tableColumns.count))
+            tvPosts.reloadData(forRowIndexes: [tvPosts.selectedRow], columnIndexes: IndexSet(0..<tvPosts.tableColumns.count))
         }
         presentAsModalWindow(detailVC)
     }
 
     @IBAction func editPostContent(_ sender: Any) {
-        let i = tvPosts.selectedRow
-        if i == -1 {return}
-        let itemPost = vm.arrPosts[i]
+        guard let itemPost = vm.currentPost else {return}
         MLangBlogPostContent.getDataById(itemPost.ID).subscribe { [unowned self] in
             let item = $0
             (NSApplication.shared.delegate as! AppDelegate).editPost(settings: vm.vmSettings, item: item)
@@ -124,17 +121,6 @@ class LangBlogPostsViewController: NSViewController, NSTableViewDataSource, NSTa
             tvGroups.reloadData()
         }
         presentAsModalWindow(selectVC)
-    }
-
-    deinit {
-        print("DEBUG: \(className) deinit")
-    }
-}
-
-class LangBlogPostsWindowController: NSWindowController, NSWindowDelegate {
-
-    override func windowDidLoad() {
-        super.windowDidLoad()
     }
 
     deinit {

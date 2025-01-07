@@ -42,8 +42,8 @@ class LangBlogViewModel: NSObject {
         MLangBlogPost.update(item: item)
     }
 
-    static func createPost(item: MLangBlogPost) -> Single<()> {
-        MLangBlogPost.create(item: item).map { _ in }
+    static func createPost(item: MLangBlogPost) -> Single<Int> {
+        MLangBlogPost.create(item: item)
     }
 
     func newPost() -> MLangBlogPost {
