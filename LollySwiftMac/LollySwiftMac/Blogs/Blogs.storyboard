@@ -295,47 +295,10 @@
             </objects>
             <point key="canvasLocation" x="2266" y="685"/>
         </scene>
-        <!--Window Controller-->
-        <scene sceneID="qpV-Qt-Pac">
-            <objects>
-                <windowController storyboardIdentifier="LangBlogGroupsWindowController" id="2W1-qq-pUa" customClass="LangBlogGroupsWindowController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
-                    <window key="window" title="Language Blog Groups" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="jRl-Y7-B5z">
-                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="211" y="267" width="480" height="270"/>
-                        <rect key="screenRect" x="0.0" y="0.0" width="1512" height="944"/>
-                        <view key="contentView" id="dZF-UD-IM8">
-                            <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
-                            <autoresizingMask key="autoresizingMask"/>
-                        </view>
-                        <toolbar key="toolbar" implicitIdentifier="B2FDACA9-5B0F-49A2-82D5-76D7A4127D2D" autosavesConfiguration="NO" showsBaselineSeparator="NO" displayMode="iconAndLabel" sizeMode="regular" id="f2X-ly-vjo">
-                            <allowedToolbarItems>
-                                <toolbarItem implicitItemIdentifier="1D7A616E-9AA4-4373-8D61-005CF5B14E8A" label="Refresh" paletteLabel="Refresh" tag="-1" image="NSRefreshTemplate" sizingBehavior="auto" id="dcJ-Do-xZb">
-                                    <connections>
-                                        <action selector="refreshTableView:" target="W7e-6l-7hH" id="QVj-up-152"/>
-                                    </connections>
-                                </toolbarItem>
-                            </allowedToolbarItems>
-                            <defaultToolbarItems>
-                                <toolbarItem reference="dcJ-Do-xZb"/>
-                            </defaultToolbarItems>
-                        </toolbar>
-                        <connections>
-                            <outlet property="delegate" destination="2W1-qq-pUa" id="xhG-dy-AUl"/>
-                        </connections>
-                    </window>
-                    <connections>
-                        <segue destination="LXF-pA-LqT" kind="relationship" relationship="window.shadowedContentViewController" id="Tx0-zO-2Hk"/>
-                    </connections>
-                </windowController>
-                <customObject id="W7e-6l-7hH" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2944" y="-45"/>
-        </scene>
         <!--Lang Blog Groups View Controller-->
         <scene sceneID="nv2-AP-BFB">
             <objects>
-                <viewController id="LXF-pA-LqT" customClass="LangBlogGroupsViewController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LangBlogGroupsViewController" id="LXF-pA-LqT" customClass="LangBlogGroupsViewController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="Aft-WT-ORz">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="600"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -953,7 +916,7 @@ Gw
         <!--Lang Blog Posts View Controller-->
         <scene sceneID="GXh-6y-IBS">
             <objects>
-                <viewController id="bbT-or-3IJ" customClass="LangBlogPostsViewController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LangBlogPostsViewController" id="bbT-or-3IJ" customClass="LangBlogPostsViewController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="ZGt-Bw-RSa">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="600"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1326,43 +1289,6 @@ Gw
             </objects>
             <point key="canvasLocation" x="2832" y="1662"/>
         </scene>
-        <!--Window Controller-->
-        <scene sceneID="Ejk-7i-oXx">
-            <objects>
-                <windowController storyboardIdentifier="LangBlogPostsWindowController" id="FK3-Er-DWg" customClass="LangBlogPostsWindowController" customModule="LollySwiftMac" customModuleProvider="target" sceneMemberID="viewController">
-                    <window key="window" title="Language Blog Posts" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="Y5j-BZ-rjD">
-                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="211" y="267" width="480" height="270"/>
-                        <rect key="screenRect" x="0.0" y="0.0" width="1512" height="944"/>
-                        <view key="contentView" id="dQt-Av-1gh">
-                            <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
-                            <autoresizingMask key="autoresizingMask"/>
-                        </view>
-                        <toolbar key="toolbar" implicitIdentifier="E9DF3817-30F0-48F6-A7C1-95104D770980" autosavesConfiguration="NO" showsBaselineSeparator="NO" displayMode="iconAndLabel" sizeMode="regular" id="8TC-Cs-0am">
-                            <allowedToolbarItems>
-                                <toolbarItem implicitItemIdentifier="1D7A616E-9AA4-4373-8D61-005CF5B14E8A" label="Refresh" paletteLabel="Refresh" tag="-1" image="NSRefreshTemplate" sizingBehavior="auto" id="4TU-QS-cCF">
-                                    <connections>
-                                        <action selector="refreshTableView:" target="f0d-Wn-VSJ" id="s5e-3j-aEO"/>
-                                    </connections>
-                                </toolbarItem>
-                            </allowedToolbarItems>
-                            <defaultToolbarItems>
-                                <toolbarItem reference="4TU-QS-cCF"/>
-                            </defaultToolbarItems>
-                        </toolbar>
-                        <connections>
-                            <outlet property="delegate" destination="FK3-Er-DWg" id="XOq-P6-NMq"/>
-                        </connections>
-                    </window>
-                    <connections>
-                        <segue destination="bbT-or-3IJ" kind="relationship" relationship="window.shadowedContentViewController" id="OG4-r6-lla"/>
-                    </connections>
-                </windowController>
-                <customObject id="f0d-Wn-VSJ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3105" y="1049"/>
-        </scene>
         <!--Lang Blog Select Groups View Controller-->
         <scene sceneID="Rbm-MS-gOF">
             <objects>
@@ -1611,7 +1537,6 @@ Gw
     </scenes>
     <resources>
         <image name="NSAddTemplate" width="18" height="17"/>
-        <image name="NSRefreshTemplate" width="18" height="21"/>
         <image name="NSRemoveTemplate" width="18" height="5"/>
         <image name="NSTouchBarBookmarksTemplate" width="22" height="18"/>
         <image name="NSTouchBarGoUpTemplate" width="18" height="11"/>

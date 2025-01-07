@@ -87,6 +87,26 @@ class MainViewController: NSViewController {
     @IBAction func closeTab(_ sender: AnyObject) {
         tabView.removeTabViewItem(tabView.selectedTabViewItem!)
     }
+
+    @IBAction func showLangBlogGroups(_ sender: AnyObject) {
+        findOrShowTab(storyBoardName: "Blogs", viewControllerID: "LangBlogGroupsViewController", label: "Language Blog Groups")
+    }
+
+    @IBAction func showLangBlogPosts(_ sender: AnyObject) {
+        findOrShowTab(storyBoardName: "Blogs", viewControllerID: "LangBlogPostsViewController", label: "Language Blog Posts")
+    }
+
+    @IBAction func textbooks(_ sender: AnyObject) {
+        findOrShowTab(storyBoardName: "Textbooks", viewControllerID: "TextbooksViewController", label: "Textbooks")
+    }
+
+    @IBAction func onlineTextbooks(_ sender: AnyObject) {
+        findOrShowTab(storyBoardName: "Textbooks", viewControllerID: "OnlineTextbooksViewController", label: "Online Textbooks")
+    }
+
+    @IBAction func dictionaries(_ sender: AnyObject) {
+        findOrShowTab(storyBoardName: "Dicts", viewControllerID: "DictsViewController", label: "Dictionaries")
+    }
 }
 
 class MainWindowController: NSWindowController {
