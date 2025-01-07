@@ -35,10 +35,10 @@ class LangBlogPostsDetailViewModel: NSObject {
             vm.arrPosts.append(itemPost)
             let itemGP = MLangBlogGP()
             itemGP.GROUPID = itemGroup!.ID
-            return LangBlogViewModel.createPost(item: itemPost).map {
+            return LangBlogViewModel.createPost(item: itemPost).flatMap {
                 itemGP.POSTID = $0
-                _ = MLangBlogGP.create(item: itemGP)
-            }
+                return MLangBlogGP.create(item: itemGP)
+            }.map {_ in }
         } else {
             return LangBlogViewModel.updatePost(item: itemPost)
         }
