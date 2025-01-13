@@ -80,6 +80,8 @@ class LangBlogPostsViewController: NSViewController, NSTableViewDataSource, NSTa
     @IBAction func doubleAction(_ sender: AnyObject) {
         if sender === tvGroups {
             editGroup(sender)
+        } else if NSApp.currentEvent!.modifierFlags.contains(.option) {
+            editPostContent(sender)
         } else {
             editPost(sender)
         }
