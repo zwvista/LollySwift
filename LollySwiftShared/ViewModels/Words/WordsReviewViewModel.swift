@@ -17,7 +17,7 @@ class WordsReviewViewModel: WordsBaseViewModel {
     var arrCorrectIDs = [Int]()
     var index = 0
     var isTestMode: Bool { options.mode == .test || options.mode == .textbook }
-    var needSearchDict: Bool { options.mode == .reviewManual }
+    var needSearchDict: Bool { options.mode == .reviewAuto || options.mode == .reviewManual }
     var subscriptionTimer: Cancellable? = nil
     let options = MReviewOptions()
     let doTestAction: ((WordsReviewViewModel) -> Void)?
