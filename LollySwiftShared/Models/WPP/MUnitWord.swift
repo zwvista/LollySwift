@@ -96,7 +96,8 @@ class MUnitWord: NSObject, Codable, MWordProtocol, @unchecked Sendable {
         // SQL: SELECT * FROM VUNITWORDS WHERE LANGID=? AND WORD=?
         let url = "\(CommonApi.urlAPI)VUNITWORDS?filter=LANGID,eq,\(langid)&filter=WORD,eq,\(word.urlEncoded())"
         // Api is case insensitive
-        return setTextbook((await RestApi.getRecords(MUnitWords.self, url: url)).filter { $0.WORD == word }, arrTextbooks: arrTextbooks)
+        let records = await RestApi.getRecords(MUnitWords.self, url: url)
+        return setTextbook(records.filter { $0.WORD == word }, arrTextbooks: arrTextbooks)
     }
 
     static func update(_ id: Int, seqnum: Int) async {

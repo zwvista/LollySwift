@@ -86,7 +86,8 @@ class MUnitPhrase: NSObject, Codable, MPhraseProtocol, @unchecked Sendable {
         // SQL: SELECT * FROM VUNITPHRASES WHERE LANGID=? AND PHRASE=?
         let url = "\(CommonApi.urlAPI)VUNITPHRASES?filter=LANGID,eq,\(langid)&filter=PHRASE,eq,\(phrase.urlEncoded())"
         // Api is case insensitive
-        return setTextbook((await RestApi.getRecords(MUnitPhrases.self, url: url)).filter { $0.PHRASE == phrase }, arrTextbooks: arrTextbooks)
+        let records = await RestApi.getRecords(MUnitPhrases.self, url: url)
+        return setTextbook(records.filter { $0.PHRASE == phrase }, arrTextbooks: arrTextbooks)
     }
 
     static func update(_ id: Int, seqnum: Int) async {
