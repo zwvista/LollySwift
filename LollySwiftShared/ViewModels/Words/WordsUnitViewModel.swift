@@ -14,9 +14,9 @@ import Then
 
 class WordsUnitViewModel: WordsBaseViewModel {
     let inTextbook: Bool
-    var arrWords_ = BehaviorRelay(value: [MUnitWord]())
+    let arrWords_ = BehaviorRelay(value: [MUnitWord]())
     var arrWords: [MUnitWord] { get { arrWords_.value } set { arrWords_.accept(newValue) } }
-    var arrWordsFiltered_ = BehaviorRelay(value: [MUnitWord]())
+    let arrWordsFiltered_ = BehaviorRelay(value: [MUnitWord]())
     var arrWordsFiltered: [MUnitWord] { get { arrWordsFiltered_.value } set { arrWordsFiltered_.accept(newValue) } }
     var hasFilter: Bool { !(textFilter.isEmpty && textbookFilter == 0) }
 

@@ -14,9 +14,9 @@ import Then
 
 class PhrasesUnitViewModel: PhrasesBaseViewModel {
     let inTextbook: Bool
-    var arrPhrases_ = BehaviorRelay(value: [MUnitPhrase]())
+    let arrPhrases_ = BehaviorRelay(value: [MUnitPhrase]())
     var arrPhrases: [MUnitPhrase] { get { arrPhrases_.value } set { arrPhrases_.accept(newValue) } }
-    var arrPhrasesFiltered_ = BehaviorRelay(value: [MUnitPhrase]())
+    let arrPhrasesFiltered_ = BehaviorRelay(value: [MUnitPhrase]())
     var arrPhrasesFiltered: [MUnitPhrase] { get { arrPhrasesFiltered_.value } set { arrPhrasesFiltered_.accept(newValue) } }
     var hasFilter: Bool { !(textFilter.isEmpty && textbookFilter == 0) }
 
