@@ -17,6 +17,9 @@ class LangBlogPostsViewController: NSViewController, NSTableViewDataSource, NSTa
     @IBOutlet weak var wvPost: WKWebView!
 
     var vm: LangBlogPostsViewModel!
+    var arrPosts: [MLangBlogPost] { vm.arrPostsFiltered }
+
+    var subscriptions = Set<AnyCancellable>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,20 +33,24 @@ class LangBlogPostsViewController: NSViewController, NSTableViewDataSource, NSTa
     }
 
     @IBAction func refreshTableView(_ sender: Any) {
-        vm = LangBlogPostsViewModel(settings: AppDelegate.theSettingsViewModel) { [unowned self] in
+        vm = LangBlogPostsViewModel(settings: AppDelegate.theSettingsViewModel) {}
+        vm.$arrGroups.didSet.sink { [unowned self] _ in
+            tvGroups.reloadData()
+        } ~ subscriptions
+        vm.$arrPostsFiltered.didSet.sink { [unowned self] _ in
             tvPosts.reloadData()
-        }
+        } ~ subscriptions
     }
 
     func numberOfRows(in tableView: NSTableView) -> Int {
-        tableView === tvPosts ? vm.arrPosts.count : vm.arrGroups.count
+        tableView === tvPosts ? arrPosts.count : vm.arrGroups.count
     }
 
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         let cell = tableView.makeView(withIdentifier: tableColumn!.identifier, owner: self) as! NSTableCellView
         let columnName = tableColumn!.identifier.rawValue
         if tableView == tvPosts {
-            let item = vm.arrPosts[row]
+            let item = arrPosts[row]
             cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
         } else {
             let item = vm.arrGroups[row]
@@ -56,9 +63,8 @@ class LangBlogPostsViewController: NSViewController, NSTableViewDataSource, NSTa
         let tv = notification.object as! NSTableView
         if tv === tvPosts {
             let i = tvPosts.selectedRow
-            vm.selectPost(i == -1 ? nil : vm.arrPosts[i]) { [unowned self] in
+            vm.selectPost(i == -1 ? nil : arrPosts[i]) { [unowned self] in
                 wvPost.loadHTMLString(BlogPostEditViewModel.markedToHtml(text: vm.postContent), baseURL: nil)
-                tvGroups.reloadData()
             }
         } else {
             let i = tvGroups.selectedRow
@@ -89,7 +95,7 @@ class LangBlogPostsViewController: NSViewController, NSTableViewDataSource, NSTa
     @IBAction func addPost(_ sender: Any) {
         let detailVC = storyboard!.instantiateController(withIdentifier: "LangBlogPostsDetailViewController") as! LangBlogPostsDetailViewController
         detailVC.vmEdit = LangBlogPostsDetailViewModel(vm: vm, itemPost: vm.newPost())
-        detailVC.complete = { [unowned self] in tvGroups.reloadData() }
+        detailVC.complete = { [unowned self] in tvPosts.reloadData() }
         presentAsModalWindow(detailVC)
     }
 
@@ -115,10 +121,8 @@ class LangBlogPostsViewController: NSViewController, NSTableViewDataSource, NSTa
         let i = tvPosts.selectedRow
         if i == -1 {return}
         let selectVC = storyboard!.instantiateController(withIdentifier: "LangBlogSelectGroupsViewController") as! LangBlogSelectGroupsViewController
-        selectVC.item = vm.arrPosts[i]
-        selectVC.complete = { [unowned self] in
-            tvGroups.reloadData()
-        }
+        selectVC.item = arrPosts[i]
+        selectVC.complete = { [unowned self] in tvPosts.reloadData() }
         presentAsModalWindow(selectVC)
     }
 

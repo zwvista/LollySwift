@@ -7,20 +7,31 @@
 //
 
 import Foundation
+import Combine
 import Then
 
 @MainActor
-class LangBlogViewModel: NSObject {
+class LangBlogViewModel: NSObject, ObservableObject {
     var vmSettings: SettingsViewModel
-    var arrGroups = [MLangBlogGroup]()
+    @Published var arrGroups = [MLangBlogGroup]()
     var currentGroup: MLangBlogGroup? = nil
-    var arrPosts = [MLangBlogPost]()
+
+    @Published var arrPosts = [MLangBlogPost]()
     var currentPost: MLangBlogPost? = nil
+    @Published var postFilter = ""
+    @Published var arrPostsFiltered = [MLangBlogPost]()
+    var hasPostFilter: Bool { !postFilter.isEmpty }
     var postContent = ""
+
+    var subscriptions = Set<AnyCancellable>()
 
     init(settings: SettingsViewModel, complete: @escaping () -> Void) {
         vmSettings = settings
         super.init()
+
+        $arrPosts.didSet.combineLatest($postFilter.didSet).sink { [unowned self] _ in
+            arrPostsFiltered = !hasPostFilter ? arrPosts : arrPosts.filter { $0.TITLE.lowercased().contains(postFilter.lowercased()) }
+        } ~ subscriptions
     }
 
     static func updateGroup(item: MLangBlogGroup) async {
