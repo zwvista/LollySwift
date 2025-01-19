@@ -15,6 +15,7 @@ class LangBlogPostsViewController: NSViewController, NSTableViewDataSource, NSTa
     @IBOutlet weak var tvPosts: NSTableView!
     @IBOutlet weak var tvGroups: NSTableView!
     @IBOutlet weak var wvPost: WKWebView!
+    @IBOutlet weak var sfPostFilter: NSSearchField!
 
     var vm: LangBlogPostsViewModel!
     var arrPosts: [MLangBlogPost] { vm.arrPostsFiltered }
@@ -40,6 +41,7 @@ class LangBlogPostsViewController: NSViewController, NSTableViewDataSource, NSTa
         vm.$arrPostsFiltered.didSet.sink { [unowned self] _ in
             tvPosts.reloadData()
         } ~ subscriptions
+        vm.$postFilter <~> sfPostFilter.textProperty ~ subscriptions
     }
 
     func numberOfRows(in tableView: NSTableView) -> Int {
