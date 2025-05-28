@@ -290,7 +290,7 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
 
     override func speak() {
         guard isSpeaking else {return}
-        let responder = view.window!.firstResponder
+        let responder = view.window?.firstResponder
         let dialogue = AVSpeechUtterance(string: responder == tvPhrases ? vmPhrases.selectedPhrase : vmWords.selectedWord)
         dialogue.voice = AVSpeechSynthesisVoice(identifier: vmSettings.macVoiceName)
         synth.speak(dialogue)
