@@ -15,6 +15,9 @@ class LangBlogViewModel: NSObject, ObservableObject {
     var vmSettings: SettingsViewModel
     @Published var arrGroups = [MLangBlogGroup]()
     var selectedGroup: MLangBlogGroup? = nil
+    @Published var groupFilter = ""
+    @Published var arrGroupsFiltered = [MLangBlogGroup]()
+    var hasGroupFilter: Bool { !groupFilter.isEmpty }
 
     @Published var arrPosts = [MLangBlogPost]()
     var selectedPost: MLangBlogPost? = nil
@@ -29,6 +32,9 @@ class LangBlogViewModel: NSObject, ObservableObject {
         vmSettings = settings
         super.init()
 
+        $arrGroups.didSet.combineLatest($groupFilter.didSet).sink { [unowned self] _ in
+            arrGroupsFiltered = !hasGroupFilter ? arrGroups : arrGroups.filter { $0.GROUPNAME.lowercased().contains(groupFilter.lowercased()) }
+        } ~ subscriptions
         $arrPosts.didSet.combineLatest($postFilter.didSet).sink { [unowned self] _ in
             arrPostsFiltered = !hasPostFilter ? arrPosts : arrPosts.filter { $0.TITLE.lowercased().contains(postFilter.lowercased()) }
         } ~ subscriptions
