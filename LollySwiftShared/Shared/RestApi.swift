@@ -30,8 +30,8 @@ extension Encodable {
             }
             return params
         } else {
-            // When posting(creating) a new record, its id must be null.
-            // Otherwise the generated id will not be returned.
+            // When creating (posting) a new record, its ID field must be set to null.
+            // Otherwise, the back-end will not return the auto-generated ID.
             return dictionary.filter { !($0.key == "ID" && $0.value as! Int == 0) }
         }
     }
