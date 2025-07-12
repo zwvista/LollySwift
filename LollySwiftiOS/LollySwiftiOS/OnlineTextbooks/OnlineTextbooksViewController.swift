@@ -108,7 +108,7 @@ class OnlineTextbooksViewController: UIViewController, UITableViewDelegate, UITa
         } else if let controller = segue.destination as? OnlineTextbooksWebPageViewController {
             let index = arrOnlineTextbooks.firstIndex(of: sender as! MOnlineTextbook)!
             let (start, end) = getPreferredRangeFromArray(index: index, length: arrOnlineTextbooks.count, preferredLength: 50)
-            controller.vm = OnlineTextbooksWebPageViewModel(settings: vmSettings, arrOnlineTextbooks:  Array(arrOnlineTextbooks[start ..< end]), currentOnlineTextbookIndex: index) {}
+            controller.vm = OnlineTextbooksWebPageViewModel(settings: vmSettings, arrOnlineTextbooks:  Array(arrOnlineTextbooks[start ..< end]), selectedOnlineTextbookIndex: index) {}
         }
     }
 

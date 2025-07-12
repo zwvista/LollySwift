@@ -14,17 +14,17 @@ import RxRelay
 class LangBlogPostsContentViewModel: NSObject, ObservableObject {
     var vmSettings: SettingsViewModel
     var arrLangBlogPosts = [MLangBlogPost]()
-    var currentLangBlogPostIndex_ = BehaviorRelay(value: 0)
-    var currentLangBlogPostIndex: Int { get { currentLangBlogPostIndex_.value } set { currentLangBlogPostIndex_.accept(newValue) } }
-    var currentLangBlogPost: MLangBlogPost { arrLangBlogPosts[currentLangBlogPostIndex] }
+    var selectedLangBlogPostIndex_ = BehaviorRelay(value: 0)
+    var selectedLangBlogPostIndex: Int { get { selectedLangBlogPostIndex_.value } set { selectedLangBlogPostIndex_.accept(newValue) } }
+    var selectedLangBlogPost: MLangBlogPost { arrLangBlogPosts[selectedLangBlogPostIndex] }
     func next(_ delta: Int) {
-        currentLangBlogPostIndex = (currentLangBlogPostIndex + delta + arrLangBlogPosts.count) % arrLangBlogPosts.count
+        selectedLangBlogPostIndex = (selectedLangBlogPostIndex + delta + arrLangBlogPosts.count) % arrLangBlogPosts.count
     }
 
-    init(settings: SettingsViewModel, arrLangBlogPosts: [MLangBlogPost], currentLangBlogPostIndex: Int, complete: @escaping () -> Void) {
+    init(settings: SettingsViewModel, arrLangBlogPosts: [MLangBlogPost], selectedLangBlogPostIndex: Int, complete: @escaping () -> Void) {
         vmSettings = settings
         self.arrLangBlogPosts = arrLangBlogPosts
         super.init()
-        self.currentLangBlogPostIndex = currentLangBlogPostIndex
+        self.selectedLangBlogPostIndex = selectedLangBlogPostIndex
     }
 }

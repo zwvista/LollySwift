@@ -16,11 +16,11 @@ class LangBlogViewModel: NSObject {
     var vmSettings: SettingsViewModel
     let arrGroups_ = BehaviorRelay(value: [MLangBlogGroup]())
     var arrGroups: [MLangBlogGroup] { get { arrGroups_.value } set { arrGroups_.accept(newValue) } }
-    var currentGroup: MLangBlogGroup? = nil
+    var selectedGroup: MLangBlogGroup? = nil
 
     let arrPosts_ = BehaviorRelay(value: [MLangBlogPost]())
     var arrPosts: [MLangBlogPost] { get { arrPosts_.value } set { arrPosts_.accept(newValue) } }
-    var currentPost: MLangBlogPost? = nil
+    var selectedPost: MLangBlogPost? = nil
     let postFilter_ = BehaviorRelay(value: "")
     var postFilter: String { get { postFilter_.value } set { postFilter_.accept(newValue) } }
     let arrPostsFiltered_ = BehaviorRelay(value: [MLangBlogPost]())

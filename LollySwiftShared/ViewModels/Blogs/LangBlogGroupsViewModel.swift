@@ -22,7 +22,7 @@ class LangBlogGroupsViewModel: LangBlogViewModel {
     }
 
     func selectGroup(_ group: MLangBlogGroup?, complete: @escaping () -> Void) {
-        currentGroup = group
+        selectedGroup = group
         MLangBlogPost.getDataByLangGroup(langid: vmSettings.selectedLang.ID, groupid: group?.ID ?? 0).subscribe { [unowned self] in
             arrPosts = $0
             complete()
@@ -30,7 +30,7 @@ class LangBlogGroupsViewModel: LangBlogViewModel {
     }
 
     func selectPost(_ post: MLangBlogPost?, complete: @escaping () -> Void) {
-        currentPost = post
+        selectedPost = post
         MLangBlogPostContent.getDataById(post?.ID ?? 0).subscribe { [unowned self] in
             postContent = $0?.CONTENT ?? ""
             complete()

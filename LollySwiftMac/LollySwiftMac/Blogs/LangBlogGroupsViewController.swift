@@ -102,7 +102,7 @@ class LangBlogGroupsViewController: NSViewController, NSTableViewDataSource, NST
     }
 
     @IBAction func addPost(_ sender: Any) {
-        guard let itemGroup = vm.currentGroup else {return}
+        guard let itemGroup = vm.selectedGroup else {return}
         let detailVC = storyboard!.instantiateController(withIdentifier: "LangBlogPostsDetailViewController") as! LangBlogPostsDetailViewController
         detailVC.vmEdit = LangBlogPostsDetailViewModel(vm: vm, itemPost: vm.newPost(), itemGroup: itemGroup)
         detailVC.complete = { [unowned self] in tvGroups.reloadData() }
@@ -110,9 +110,9 @@ class LangBlogGroupsViewController: NSViewController, NSTableViewDataSource, NST
     }
 
     @IBAction func editPost(_ sender: Any) {
-        guard let itemPost = vm.currentPost else {return}
+        guard let itemPost = vm.selectedPost else {return}
         let detailVC = storyboard!.instantiateController(withIdentifier: "LangBlogPostsDetailViewController") as! LangBlogPostsDetailViewController
-        detailVC.vmEdit = LangBlogPostsDetailViewModel(vm: vm, itemPost: itemPost, itemGroup: vm.currentGroup)
+        detailVC.vmEdit = LangBlogPostsDetailViewModel(vm: vm, itemPost: itemPost, itemGroup: vm.selectedGroup)
         detailVC.complete = { [unowned self] in
             tvPosts.reloadData(forRowIndexes: [tvPosts.selectedRow], columnIndexes: IndexSet(0..<tvPosts.tableColumns.count))
         }
@@ -120,7 +120,7 @@ class LangBlogGroupsViewController: NSViewController, NSTableViewDataSource, NST
     }
 
     @IBAction func editPostContent(_ sender: Any) {
-        guard let itemPost = vm.currentPost else {return}
+        guard let itemPost = vm.selectedPost else {return}
         MLangBlogPostContent.getDataById(itemPost.ID).subscribe { [unowned self] in
             (NSApplication.shared.delegate as! AppDelegate).editPost(settings: vm.vmSettings, item: $0)
         } ~ rx.disposeBag

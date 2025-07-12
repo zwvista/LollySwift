@@ -34,20 +34,20 @@ class UnitBlogPostsViewController: UIViewController, WKUIDelegate, WKNavigationD
         swipeGesture2.delegate = self
         wvBlogPost.addGestureRecognizer(swipeGesture2)
 
-        vm.currentUnitIndex_.subscribe { [unowned self] _ in
+        vm.selectedUnitIndex_.subscribe { [unowned self] _ in
             btnUnit.menu = UIMenu(title: "", options: .displayInline, children: vm.arrUnits.enumerated().map { index, item in
-                UIAction(title: item.label, state: index == vm.currentUnitIndex ? .on : .off) { [unowned self] _ in
-                    vm.currentUnitIndex = index
+                UIAction(title: item.label, state: index == vm.selectedUnitIndex ? .on : .off) { [unowned self] _ in
+                    vm.selectedUnitIndex = index
                 }
             })
             btnUnit.showsMenuAsPrimaryAction = true
-            currentUnitIndexChanged()
+            selectedUnitIndexChanged()
         } ~ rx.disposeBag
     }
 
-    private func currentUnitIndexChanged() {
-        btnUnit.setTitle(String(vm.currentUnit), for: .normal)
-        vmSettings.getBlogContent(unit: vm.currentUnit).subscribe { [unowned self] content in
+    private func selectedUnitIndexChanged() {
+        btnUnit.setTitle(String(vm.selectedUnit), for: .normal)
+        vmSettings.getBlogContent(unit: vm.selectedUnit).subscribe { [unowned self] content in
             let str = BlogPostEditViewModel.markedToHtml(text: content)
             self.wvBlogPost.loadHTMLString(str, baseURL: nil)
         } ~ rx.disposeBag
@@ -59,7 +59,7 @@ class UnitBlogPostsViewController: UIViewController, WKUIDelegate, WKNavigationD
 
     private func swipe(_ delta: Int) {
         vm.next(delta)
-        currentUnitIndexChanged()
+        selectedUnitIndexChanged()
     }
 
     @IBAction func swipeLeft(_ sender: UISwipeGestureRecognizer){

@@ -12,17 +12,17 @@ import RxRelay
 class UnitBlogPostsViewModel: NSObject {
     var vmSettings: SettingsViewModel
     var arrUnits = [MSelectItem]()
-    var currentUnitIndex_ = BehaviorRelay(value: 0)
-    var currentUnitIndex: Int { get { currentUnitIndex_.value } set { currentUnitIndex_.accept(newValue) } }
-    var currentUnit: Int { arrUnits[currentUnitIndex].value }
+    var selectedUnitIndex_ = BehaviorRelay(value: 0)
+    var selectedUnitIndex: Int { get { selectedUnitIndex_.value } set { selectedUnitIndex_.accept(newValue) } }
+    var selectedUnit: Int { arrUnits[selectedUnitIndex].value }
     func next(_ delta: Int) {
-        currentUnitIndex = (currentUnitIndex + delta + arrUnits.count) % arrUnits.count
+        selectedUnitIndex = (selectedUnitIndex + delta + arrUnits.count) % arrUnits.count
     }
 
     init(settings: SettingsViewModel, complete: @escaping () -> Void) {
         vmSettings = settings
         arrUnits = vmSettings.arrUnits
         super.init()
-        currentUnitIndex = vmSettings.selectedUnitToIndex
+        selectedUnitIndex = vmSettings.selectedUnitToIndex
     }
 }
