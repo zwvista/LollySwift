@@ -1,5 +1,5 @@
 //
-//  OnlineTextbooksWebPageViewModel.swift
+//  LangBlogPostsContentViewModel.swift
 //  LollySwiftiOS
 //
 //  Created by 趙偉 on 2018/04/14.
@@ -9,19 +9,19 @@
 import Foundation
 
 @MainActor
-class OnlineTextbooksWebPageViewModel: NSObject, ObservableObject {
+class LangBlogPostsContentViewModel: NSObject, ObservableObject {
     var vmSettings: SettingsViewModel
-    @Published var arrOnlineTextbooks = [MOnlineTextbook]()
-    @Published var currentOnlineTextbookIndex = 0
-    var currentOnlineTextbook: MOnlineTextbook { arrOnlineTextbooks[currentOnlineTextbookIndex] }
+    @Published var arrLangBlogPosts = [MLangBlogPost]()
+    @Published var currentLangBlogPostIndex = 0
+    var currentLangBlogPost: MLangBlogPost { arrLangBlogPosts[currentLangBlogPostIndex] }
     func next(_ delta: Int) {
-        currentOnlineTextbookIndex = (currentOnlineTextbookIndex + delta + arrOnlineTextbooks.count) % arrOnlineTextbooks.count
+        currentLangBlogPostIndex = (currentLangBlogPostIndex + delta + arrLangBlogPosts.count) % arrLangBlogPosts.count
     }
 
-    init(settings: SettingsViewModel, arrOnlineTextbooks: [MOnlineTextbook], currentOnlineTextbookIndex: Int, complete: @escaping () -> Void) {
+    init(settings: SettingsViewModel, arrLangBlogPosts: [MLangBlogPost], currentLangBlogPostIndex: Int, complete: @escaping () -> Void) {
         vmSettings = settings
-        self.arrOnlineTextbooks = arrOnlineTextbooks
-        self.currentOnlineTextbookIndex = currentOnlineTextbookIndex
+        self.arrLangBlogPosts = arrLangBlogPosts
+        self.currentLangBlogPostIndex = currentLangBlogPostIndex
         super.init()
     }
 }

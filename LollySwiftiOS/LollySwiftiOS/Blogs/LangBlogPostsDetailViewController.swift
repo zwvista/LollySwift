@@ -1,5 +1,5 @@
 //
-//  LangBlogGroupsDetailViewController.swift
+//  LangBlogPostsDetailViewController.swift
 //  LollySwiftiOS
 //
 //  Created by 趙偉 on 2016/06/23.
@@ -8,17 +8,17 @@
 
 import UIKit
 
-class LangBlogGroupsDetailViewController: UITableViewController, UITextFieldDelegate {
+class LangBlogPostsDetailViewController: UITableViewController, UITextFieldDelegate {
 
     @IBOutlet weak var tfID: UITextField!
-    @IBOutlet weak var tfGroupName: UITextField!
+    @IBOutlet weak var tfTitle: UITextField!
 
-    var item: MLangBlogGroup!
+    var item: MLangBlogPost!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         tfID.text = "\(item.ID)"
-        tfGroupName.text = item.GROUPNAME
+        tfTitle.text = item.TITLE
     }
 
     // https://stackoverflow.com/questions/21893649/how-to-make-a-uitextfield-selectable-but-not-editable

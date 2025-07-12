@@ -1,5 +1,5 @@
 //
-//  LangBlogPostsViewController.swift
+//  LangBlogPostsListViewController.swift
 //  LollySwiftiOS
 //
 //  Created by 趙偉 on 2020/11/05.
@@ -9,13 +9,13 @@
 import UIKit
 import Combine
 
-class LangBlogPostsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class LangBlogPostsListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
     let refreshControl = UIRefreshControl()
 
     var vm: LangBlogGroupsViewModel!
-    var arrGroups: [MLangBlogGroup] { vm.arrGroups }
+    var arrPosts: [MLangBlogPost] { vm.arrPosts }
     var subscriptions = Set<AnyCancellable>()
 
     override func viewDidLoad() {
@@ -27,52 +27,52 @@ class LangBlogPostsViewController: UIViewController, UITableViewDelegate, UITabl
 
     @objc func refresh(_ sender: UIRefreshControl) {
         view.showBlurLoader()
-        vm = LangBlogGroupsViewModel(settings: vmSettings) { [unowned self] in
+        vm.selectGroup(vm.currentGroup) { [unowned self] in
             sender.endRefreshing()
             view.removeBlurLoader()
         }
-        vm.$arrGroups.didSet.sink { [unowned self] _ in
+        vm.$arrPosts.didSet.sink { [unowned self] _ in
             tableView.reloadData()
         } ~ subscriptions
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        arrGroups.count
+        arrPosts.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "LangBlogPostsCell", for: indexPath) as! LangBlogPostsCell
-        let item = arrGroups[indexPath.row]
-        cell.lblTitle.text = item.GROUPNAME
+        let cell = tableView.dequeueReusableCell(withIdentifier: "LangBlogPostsListCell", for: indexPath) as! LangBlogPostsListCell
+        let item = arrPosts[indexPath.row]
+        cell.lblTitle.text = item.TITLE
         cell.cardView.createCardEffect()
         return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let item = arrGroups[indexPath.row]
+        let item = arrPosts[indexPath.row]
         if tableView.isEditing {
             performSegue(withIdentifier: "edit", sender: item)
         } else {
-            AppDelegate.speak(string: item.GROUPNAME)
+            AppDelegate.speak(string: item.TITLE)
         }
     }
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let i = indexPath.row
-        let item = vm.arrGroups[i]
+        let item = vm.arrPosts[i]
         func edit() {
             performSegue(withIdentifier: "edit", sender: item)
         }
         let editAction = UIContextualAction(style: .normal, title: "Edit") { _,_,_ in edit() }
         editAction.backgroundColor = .blue
         let moreAction = UIContextualAction(style: .normal, title: "More") { [unowned self] _,_,_ in
-            let alertController = UIAlertController(title: "Language Blog Groups", message: item.GROUPNAME, preferredStyle: .alert)
+            let alertController = UIAlertController(title: "Language Blog Posts", message: item.TITLE, preferredStyle: .alert)
             let editAction2 = UIAlertAction(title: "Edit", style: .default) { _ in edit() }
             alertController.addAction(editAction2)
-            let browseWebPageAction = UIAlertAction(title: "Browse Web Page", style: .default) { [unowned self] _ in
-                performSegue(withIdentifier: "browse page", sender: item)
+            let browseContentAction = UIAlertAction(title: "Content", style: .default) { [unowned self] _ in
+                performSegue(withIdentifier: "content", sender: item)
             }
-            alertController.addAction(browseWebPageAction)
+            alertController.addAction(browseContentAction)
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
             alertController.addAction(cancelAction)
             present(alertController, animated: true) {}
@@ -82,20 +82,20 @@ class LangBlogPostsViewController: UIViewController, UITableViewDelegate, UITabl
     }
 
     func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        let item = arrGroups[indexPath.row]
-        performSegue(withIdentifier: "browse page", sender: item)
+        let item = arrPosts[indexPath.row]
+        performSegue(withIdentifier: "content", sender: item)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         if let controller = (segue.destination as? UINavigationController)?.topViewController as? LangBlogPostsDetailViewController {
-            controller.item = sender as? MLangBlogGroup
+            controller.item = sender as? MLangBlogPost
+        } else if let controller = segue.destination as? LangBlogPostsContentViewController {
+            let index = arrPosts.firstIndex(of: sender as! MLangBlogPost)!
+            let (start, end) = getPreferredRangeFromArray(index: index, length: arrPosts.count, preferredLength: 50)
+            controller.vm = LangBlogPostsContentViewModel(settings: vmSettings, arrLangBlogPosts: Array(arrPosts[start ..< end]), currentLangBlogPostIndex: index) {}
+            controller.vmGroup = vm
         }
-//        else if let controller = segue.destination as? LangBlogGroupsWebPageViewController {
-//            let index = arrGroups.firstIndex(of: sender as! MLangBlogGroup)!
-//            let (start, end) = getPreferredRangeFromArray(index: index, length: arrGroups.count, preferredLength: 50)
-//            controller.vm = LangBlogGroupsWebPageViewModel(settings: vmSettings, arrGroups:  Array(arrGroups[start ..< end]), currentLangBlogGroupIndex: index) {}
-//        }
     }
 
     @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {
@@ -106,7 +106,7 @@ class LangBlogPostsViewController: UIViewController, UITableViewDelegate, UITabl
     }
 }
 
-class LangBlogPostsCell: UITableViewCell {
+class LangBlogPostsListCell: UITableViewCell {
     @IBOutlet weak var cardView: UIView!
     @IBOutlet weak var lblTitle: UILabel!
 }

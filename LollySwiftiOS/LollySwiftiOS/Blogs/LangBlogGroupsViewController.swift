@@ -69,10 +69,10 @@ class LangBlogGroupsViewController: UIViewController, UITableViewDelegate, UITab
             let alertController = UIAlertController(title: "Language Blog Groups", message: item.GROUPNAME, preferredStyle: .alert)
             let editAction2 = UIAlertAction(title: "Edit", style: .default) { _ in edit() }
             alertController.addAction(editAction2)
-            let browseWebPageAction = UIAlertAction(title: "Browse Web Page", style: .default) { [unowned self] _ in
-                performSegue(withIdentifier: "browse page", sender: item)
+            let postsAction = UIAlertAction(title: "Posts", style: .default) { [unowned self] _ in
+                performSegue(withIdentifier: "posts", sender: item)
             }
-            alertController.addAction(browseWebPageAction)
+            alertController.addAction(postsAction)
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in }
             alertController.addAction(cancelAction)
             present(alertController, animated: true) {}
@@ -83,18 +83,17 @@ class LangBlogGroupsViewController: UIViewController, UITableViewDelegate, UITab
 
     func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
         let item = arrGroups[indexPath.row]
-        performSegue(withIdentifier: "browse page", sender: item)
+        performSegue(withIdentifier: "posts", sender: item)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
-//        if let controller = (segue.destination as? UINavigationController)?.topViewController as? LangBlogGroupsDetailViewController {
-//            controller.item = sender as? MLangBlogGroup
-//        } else if let controller = segue.destination as? LangBlogGroupsWebPageViewController {
-//            let index = arrGroups.firstIndex(of: sender as! MLangBlogGroup)!
-//            let (start, end) = getPreferredRangeFromArray(index: index, length: arrGroups.count, preferredLength: 50)
-//            controller.vm = LangBlogGroupsWebPageViewModel(settings: vmSettings, arrGroups:  Array(arrGroups[start ..< end]), currentLangBlogGroupIndex: index) {}
-//        }
+        if let controller = (segue.destination as? UINavigationController)?.topViewController as? LangBlogGroupsDetailViewController {
+            controller.item = sender as? MLangBlogGroup
+        } else if let controller = segue.destination as? LangBlogPostsListViewController {
+            vm.selectGroup(sender as? MLangBlogGroup) {}
+            controller.vm = vm
+        }
     }
 
     @IBAction func prepareForUnwind(_ segue: UIStoryboardSegue) {

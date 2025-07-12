@@ -1,5 +1,5 @@
 //
-//  UnitBlogPostsViewController.swift
+//  LangBlogPostsContentViewController.swift
 //  LollySwiftiOS
 //
 //  Created by 趙偉 on 2016/06/23.
@@ -10,13 +10,14 @@ import UIKit
 import WebKit
 import Combine
 
-class UnitBlogPostsViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, UIGestureRecognizerDelegate {
+class LangBlogPostsContentViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, UIGestureRecognizerDelegate {
 
     @IBOutlet weak var wvBlogPostHolder: UIView!
-    @IBOutlet weak var btnUnit: UIButton!
+    @IBOutlet weak var btnLangBlogPost: UIButton!
     weak var wvBlogPost: WKWebView!
 
-    var vm = UnitBlogPostsViewModel(settings: vmSettings) {}
+    var vmGroup: LangBlogGroupsViewModel!
+    var vm: LangBlogPostsContentViewModel!
     var subscriptions = Set<AnyCancellable>()
     
     override func viewDidLoad() {
@@ -33,24 +34,24 @@ class UnitBlogPostsViewController: UIViewController, WKUIDelegate, WKNavigationD
         swipeGesture2.delegate = self
         wvBlogPost.addGestureRecognizer(swipeGesture2)
 
-        vm.$currentUnitIndex.didSet.sink { [unowned self] _ in
-            btnUnit.menu = UIMenu(title: "", options: .displayInline, children: vm.arrUnits.enumerated().map { index, item in
-                UIAction(title: item.label, state: index == vm.currentUnitIndex ? .on : .off) { [unowned self] _ in
-                    vm.currentUnitIndex = index
+        vm.$currentLangBlogPostIndex.didSet.sink { [unowned self] _ in
+            btnLangBlogPost.menu = UIMenu(title: "", options: .displayInline, children: vm.arrLangBlogPosts.enumerated().map { index, item in
+                UIAction(title: item.TITLE, state: index == vm.currentLangBlogPostIndex ? .on : .off) { [unowned self] _ in
+                    vm.currentLangBlogPostIndex = index
                 }
             })
-            btnUnit.showsMenuAsPrimaryAction = true
+            btnLangBlogPost.showsMenuAsPrimaryAction = true
             Task {
-                await currentUnitIndexChanged()
+                await currentLangBlogPostIndexChanged()
             }
         } ~ subscriptions
     }
 
-    private func currentUnitIndexChanged() async {
-        btnUnit.setTitle(String(vm.selectedUnit), for: .normal)
-        let content = await vmSettings.getBlogContent(unit: vm.selectedUnit)
-        let str = BlogPostEditViewModel.markedToHtml(text: content)
-        wvBlogPost.loadHTMLString(str, baseURL: nil)
+    private func currentLangBlogPostIndexChanged() async {
+        btnLangBlogPost.setTitle(String(vm.currentLangBlogPost.TITLE), for: .normal)
+        vmGroup.selectPost(vm.currentLangBlogPost) { [unowned self] in
+            wvBlogPost.loadHTMLString(BlogPostEditViewModel.markedToHtml(text: vmGroup.postContent), baseURL: nil)
+        }
     }
 
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
@@ -60,7 +61,7 @@ class UnitBlogPostsViewController: UIViewController, WKUIDelegate, WKNavigationD
     private func swipe(_ delta: Int) {
         vm.next(delta)
         Task {
-            await currentUnitIndexChanged()
+            await currentLangBlogPostIndexChanged()
         }
     }
 
