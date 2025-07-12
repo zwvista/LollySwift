@@ -14,15 +14,15 @@ struct UnitBlogPostsView: View {
     var body: some View {
         VStack(spacing: 0) {
             Spacer()
-            Picker("Unit", selection: $vm.currentUnitIndex) {
+            Picker("Unit", selection: $vm.selectedUnitIndex) {
                 ForEach(vm.arrUnits.indices, id: \.self) {
                     Text(vm.arrUnits[$0].label)
                 }
             }
             .modifier(PickerModifier(backgroundColor: Color.color3))
-            .onChange(of: vm.currentUnitIndex) {
+            .onChange(of: vm.selectedUnitIndex) {
                 Task {
-                    await currentUnitIndexChanged()
+                    await selectedUnitIndexChanged()
                 }
             }
             WebView(webView: webViewStore.webView) {}
@@ -42,12 +42,12 @@ struct UnitBlogPostsView: View {
         }
         .onAppear {
             Task {
-                await currentUnitIndexChanged()
+                await selectedUnitIndexChanged()
             }
         }
     }
 
-    private func currentUnitIndexChanged() async {
+    private func selectedUnitIndexChanged() async {
         let content = await vmSettings.getBlogContent(unit: vm.selectedUnit)
         let str = BlogPostEditViewModel.markedToHtml(text: content)
         webViewStore.webView.loadHTMLString(str, baseURL: nil)

@@ -12,16 +12,16 @@ import Foundation
 class LangBlogPostsContentViewModel: NSObject, ObservableObject {
     var vmSettings: SettingsViewModel
     @Published var arrLangBlogPosts = [MLangBlogPost]()
-    @Published var currentLangBlogPostIndex = 0
-    var currentLangBlogPost: MLangBlogPost { arrLangBlogPosts[currentLangBlogPostIndex] }
+    @Published var selectedLangBlogPostIndex = 0
+    var selectedLangBlogPost: MLangBlogPost { arrLangBlogPosts[selectedLangBlogPostIndex] }
     func next(_ delta: Int) {
-        currentLangBlogPostIndex = (currentLangBlogPostIndex + delta + arrLangBlogPosts.count) % arrLangBlogPosts.count
+        selectedLangBlogPostIndex = (selectedLangBlogPostIndex + delta + arrLangBlogPosts.count) % arrLangBlogPosts.count
     }
 
-    init(settings: SettingsViewModel, arrLangBlogPosts: [MLangBlogPost], currentLangBlogPostIndex: Int, complete: @escaping () -> Void) {
+    init(settings: SettingsViewModel, arrLangBlogPosts: [MLangBlogPost], selectedLangBlogPostIndex: Int, complete: @escaping () -> Void) {
         vmSettings = settings
         self.arrLangBlogPosts = arrLangBlogPosts
-        self.currentLangBlogPostIndex = currentLangBlogPostIndex
+        self.selectedLangBlogPostIndex = selectedLangBlogPostIndex
         super.init()
     }
 }

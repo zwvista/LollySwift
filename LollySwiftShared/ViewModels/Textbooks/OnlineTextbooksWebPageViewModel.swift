@@ -12,16 +12,16 @@ import Foundation
 class OnlineTextbooksWebPageViewModel: NSObject, ObservableObject {
     var vmSettings: SettingsViewModel
     @Published var arrOnlineTextbooks = [MOnlineTextbook]()
-    @Published var currentOnlineTextbookIndex = 0
-    var currentOnlineTextbook: MOnlineTextbook { arrOnlineTextbooks[currentOnlineTextbookIndex] }
+    @Published var selectedOnlineTextbookIndex = 0
+    var selectedOnlineTextbook: MOnlineTextbook { arrOnlineTextbooks[selectedOnlineTextbookIndex] }
     func next(_ delta: Int) {
-        currentOnlineTextbookIndex = (currentOnlineTextbookIndex + delta + arrOnlineTextbooks.count) % arrOnlineTextbooks.count
+        selectedOnlineTextbookIndex = (selectedOnlineTextbookIndex + delta + arrOnlineTextbooks.count) % arrOnlineTextbooks.count
     }
 
-    init(settings: SettingsViewModel, arrOnlineTextbooks: [MOnlineTextbook], currentOnlineTextbookIndex: Int, complete: @escaping () -> Void) {
+    init(settings: SettingsViewModel, arrOnlineTextbooks: [MOnlineTextbook], selectedOnlineTextbookIndex: Int, complete: @escaping () -> Void) {
         vmSettings = settings
         self.arrOnlineTextbooks = arrOnlineTextbooks
-        self.currentOnlineTextbookIndex = currentOnlineTextbookIndex
+        self.selectedOnlineTextbookIndex = selectedOnlineTextbookIndex
         super.init()
     }
 }

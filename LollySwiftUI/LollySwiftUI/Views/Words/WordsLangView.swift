@@ -15,7 +15,7 @@ struct WordsLangView: View {
     @State var showDetailAdd = false
     @State var showItemMore = false
     @State var showDelete = false
-    @State var currentItem = MLangWord()
+    @State var selectedItem = MLangWord()
     var body: some View {
         VStack(spacing: 0) {
             HStack(spacing: 0) {
@@ -52,11 +52,11 @@ struct WordsLangView: View {
                     }
                     .swipeActions(allowsFullSwipe: false) {
                         Button("More") {
-                            currentItem = item
+                            selectedItem = item
                             showItemMore.toggle()
                         }
                         Button("Delete", role: .destructive) {
-                            currentItem = item
+                            selectedItem = item
                             showDelete.toggle()
                         }
                     }
@@ -71,7 +71,7 @@ struct WordsLangView: View {
                     
                 }
             }, message: {
-                Text(currentItem.WORDNOTE)
+                Text(selectedItem.WORDNOTE)
             })
             .alert(Text("Word"), isPresented: $showItemMore, actions: {
                 Button("Delete", role: .destructive) {
@@ -81,18 +81,18 @@ struct WordsLangView: View {
                     showDetailEdit.toggle()
                 }
                 Button("Copy Word") {
-                    iOSApi.copyText(currentItem.WORD)
+                    iOSApi.copyText(selectedItem.WORD)
                 }
                 Button("Google Word") {
-                    iOSApi.googleString(currentItem.WORD)
+                    iOSApi.googleString(selectedItem.WORD)
                 }
                 Button("Online Dictionary") {
                     let itemDict = vmSettings.arrDictsReference.first { $0.DICTNAME == vmSettings.selectedDictReference.DICTNAME }!
-                    let url = itemDict.urlString(word: currentItem.WORD, arrAutoCorrect: vmSettings.arrAutoCorrect)
+                    let url = itemDict.urlString(word: selectedItem.WORD, arrAutoCorrect: vmSettings.arrAutoCorrect)
                     UIApplication.shared.open(URL(string: url)!)
                 }
             }, message: {
-                Text(currentItem.WORDNOTE)
+                Text(selectedItem.WORDNOTE)
             })
             .toolbar {
                 ToolbarItemGroup {
@@ -104,10 +104,10 @@ struct WordsLangView: View {
             .navigationDestination(for: MLangWord.self) { item in
                 let index = vm.arrWordsFiltered.firstIndex(of: item)!
                 let (start, end) = getPreferredRangeFromArray(index: index, length: vm.arrWordsFiltered.count, preferredLength: 50)
-                WordsDictView(vm: WordsDictViewModel(settings: vmSettings, arrWords: vm.arrWordsFiltered[start ..< end].map(\.WORD), currentWordIndex: index) {})
+                WordsDictView(vm: WordsDictViewModel(settings: vmSettings, arrWords: vm.arrWordsFiltered[start ..< end].map(\.WORD), selectedWordIndex: index) {})
             }
             .sheet(isPresented: $showDetailEdit) {
-                WordsLangDetailView(vmEdit: WordsLangDetailViewModel(vm: vm, item: currentItem), showDetail: $showDetailEdit)
+                WordsLangDetailView(vmEdit: WordsLangDetailViewModel(vm: vm, item: selectedItem), showDetail: $showDetailEdit)
             }
             .sheet(isPresented: $showDetailAdd) {
                 WordsLangDetailView(vmEdit: WordsLangDetailViewModel(vm: vm, item: vm.newLangWord()), showDetail: $showDetailAdd)

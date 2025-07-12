@@ -33,21 +33,21 @@ class PatternsWebPageViewController: UIViewController, WKUIDelegate, WKNavigatio
         swipeGesture2.delegate = self
         wvWebPage.addGestureRecognizer(swipeGesture2)
 
-        vm.$currentPatternIndex.didSet.sink { [unowned self] _ in
+        vm.$selectedPatternIndex.didSet.sink { [unowned self] _ in
             btnPattern.menu = UIMenu(title: "", options: .displayInline, children: vm.arrPatterns.enumerated().map { index, item in
-                UIAction(title: item.PATTERN, state: index == vm.currentPatternIndex ? .on : .off) { [unowned self] _ in
-                    vm.currentPatternIndex = index
+                UIAction(title: item.PATTERN, state: index == vm.selectedPatternIndex ? .on : .off) { [unowned self] _ in
+                    vm.selectedPatternIndex = index
                 }
             })
             btnPattern.showsMenuAsPrimaryAction = true
-            currentPatternChanged()
+            selectedPatternChanged()
         } ~ subscriptions
     }
 
-    private func currentPatternChanged() {
-        AppDelegate.speak(string: vm.currentPattern.PATTERN)
-        btnPattern.setTitle(vm.currentPattern.PATTERN, for: .normal)
-        wvWebPage.load(URLRequest(url: URL(string: vm.currentPattern.URL)!))
+    private func selectedPatternChanged() {
+        AppDelegate.speak(string: vm.selectedPattern.PATTERN)
+        btnPattern.setTitle(vm.selectedPattern.PATTERN, for: .normal)
+        wvWebPage.load(URLRequest(url: URL(string: vm.selectedPattern.URL)!))
     }
 
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
@@ -56,7 +56,7 @@ class PatternsWebPageViewController: UIViewController, WKUIDelegate, WKNavigatio
 
     private func swipe(_ delta: Int) {
         vm.next(delta)
-        currentPatternChanged()
+        selectedPatternChanged()
     }
 
     @IBAction func swipeLeft(_ sender: UISwipeGestureRecognizer){

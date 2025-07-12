@@ -34,22 +34,22 @@ class LangBlogPostsContentViewController: UIViewController, WKUIDelegate, WKNavi
         swipeGesture2.delegate = self
         wvBlogPost.addGestureRecognizer(swipeGesture2)
 
-        vm.$currentLangBlogPostIndex.didSet.sink { [unowned self] _ in
+        vm.$selectedLangBlogPostIndex.didSet.sink { [unowned self] _ in
             btnLangBlogPost.menu = UIMenu(title: "", options: .displayInline, children: vm.arrLangBlogPosts.enumerated().map { index, item in
-                UIAction(title: item.TITLE, state: index == vm.currentLangBlogPostIndex ? .on : .off) { [unowned self] _ in
-                    vm.currentLangBlogPostIndex = index
+                UIAction(title: item.TITLE, state: index == vm.selectedLangBlogPostIndex ? .on : .off) { [unowned self] _ in
+                    vm.selectedLangBlogPostIndex = index
                 }
             })
             btnLangBlogPost.showsMenuAsPrimaryAction = true
             Task {
-                await currentLangBlogPostIndexChanged()
+                await selectedLangBlogPostIndexChanged()
             }
         } ~ subscriptions
     }
 
-    private func currentLangBlogPostIndexChanged() async {
-        btnLangBlogPost.setTitle(String(vm.currentLangBlogPost.TITLE), for: .normal)
-        vmGroup.selectPost(vm.currentLangBlogPost) { [unowned self] in
+    private func selectedLangBlogPostIndexChanged() async {
+        btnLangBlogPost.setTitle(String(vm.selectedLangBlogPost.TITLE), for: .normal)
+        vmGroup.selectPost(vm.selectedLangBlogPost) { [unowned self] in
             wvBlogPost.loadHTMLString(BlogPostEditViewModel.markedToHtml(text: vmGroup.postContent), baseURL: nil)
         }
     }
@@ -61,7 +61,7 @@ class LangBlogPostsContentViewController: UIViewController, WKUIDelegate, WKNavi
     private func swipe(_ delta: Int) {
         vm.next(delta)
         Task {
-            await currentLangBlogPostIndexChanged()
+            await selectedLangBlogPostIndexChanged()
         }
     }
 

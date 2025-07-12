@@ -18,7 +18,7 @@ struct WordsUnitView: View {
     @State var showItemMore = false
     @State var showListMore = false
     @State var showDelete = false
-    @State var currentItem = MUnitWord()
+    @State var selectedItem = MUnitWord()
     var body: some View {
         VStack(spacing: 0) {
             HStack(spacing: 0) {
@@ -62,7 +62,7 @@ struct WordsUnitView: View {
                     .frame(maxWidth: .infinity)
                     .onTapGesture {
                         if isEditing {
-                            currentItem = item
+                            selectedItem = item
                             showDetailEdit.toggle()
                         } else {
                             AppDelegate.speak(string: item.WORD)
@@ -70,11 +70,11 @@ struct WordsUnitView: View {
                     }
                     .swipeActions(allowsFullSwipe: false) {
                         Button("More") {
-                            currentItem = item
+                            selectedItem = item
                             showItemMore.toggle()
                         }
                         Button("Delete", role: .destructive) {
-                            currentItem = item
+                            selectedItem = item
                             showDelete.toggle()
                         }
                     }
@@ -95,7 +95,7 @@ struct WordsUnitView: View {
                     
                 }
             }, message: {
-                Text(currentItem.WORDNOTE)
+                Text(selectedItem.WORDNOTE)
             })
             .alert(Text("Word"), isPresented: $showItemMore, actions: {
                 Button("Delete", role: .destructive) {
@@ -106,30 +106,30 @@ struct WordsUnitView: View {
                 }
                 Button("Get Note") {
                     Task {
-                        await vm.getNote(item: currentItem)
+                        await vm.getNote(item: selectedItem)
                     }
                 }
                 Button("Clear Note") {
                     Task {
-                        await vm.clearNote(item: currentItem)
+                        await vm.clearNote(item: selectedItem)
                     }
                 }
                 Button("Copy Word") {
-                    iOSApi.copyText(currentItem.WORD)
+                    iOSApi.copyText(selectedItem.WORD)
                 }
                 Button("Google Word") {
-                    iOSApi.googleString(currentItem.WORD)
+                    iOSApi.googleString(selectedItem.WORD)
                 }
                 Button("Online Dictionary") {
                     let itemDict = vmSettings.arrDictsReference.first { $0.DICTNAME == vmSettings.selectedDictReference.DICTNAME }!
-                    let url = itemDict.urlString(word: currentItem.WORD, arrAutoCorrect: vmSettings.arrAutoCorrect)
+                    let url = itemDict.urlString(word: selectedItem.WORD, arrAutoCorrect: vmSettings.arrAutoCorrect)
                     UIApplication.shared.open(URL(string: url)!)
                 }
             }, message: {
-                Text(currentItem.WORDNOTE)
+                Text(selectedItem.WORDNOTE)
             })
             .navigationDestination(for: MUnitWord.self) { item in
-                WordsDictView(vm: WordsDictViewModel(settings: vmSettings, arrWords: vm.arrWordsFiltered.map(\.WORD), currentWordIndex: vm.arrWordsFiltered.firstIndex(of: item)!) {})
+                WordsDictView(vm: WordsDictViewModel(settings: vmSettings, arrWords: vm.arrWordsFiltered.map(\.WORD), selectedWordIndex: vm.arrWordsFiltered.firstIndex(of: item)!) {})
             }
             .toolbar {
                 ToolbarItemGroup {
@@ -167,7 +167,7 @@ struct WordsUnitView: View {
                 Text("More")
             })
             .sheet(isPresented: $showDetailEdit) {
-                WordsUnitDetailView(vmEdit: WordsUnitDetailViewModel(vm: vm, item: currentItem, phraseid: 0), showDetail: $showDetailEdit)
+                WordsUnitDetailView(vmEdit: WordsUnitDetailViewModel(vm: vm, item: selectedItem, phraseid: 0), showDetail: $showDetailEdit)
             }
             .sheet(isPresented: $showDetailAdd) {
                 WordsUnitDetailView(vmEdit: WordsUnitDetailViewModel(vm: vm, item: vm.newUnitWord(), phraseid: 0), showDetail: $showDetailAdd)

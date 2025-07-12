@@ -18,7 +18,7 @@ struct PhrasesUnitView: View {
     @State var showItemMore = false
     @State var showListMore = false
     @State var showDelete = false
-    @State var currentItem = MUnitPhrase()
+    @State var selectedItem = MUnitPhrase()
     var body: some View {
         VStack(spacing: 0) {
             HStack(spacing: 0) {
@@ -54,7 +54,7 @@ struct PhrasesUnitView: View {
                     .frame(maxWidth: .infinity)
                     .onTapGesture {
                         if isEditing {
-                            currentItem = item
+                            selectedItem = item
                             showDetailEdit.toggle()
                         } else {
                             AppDelegate.speak(string: item.PHRASE)
@@ -62,11 +62,11 @@ struct PhrasesUnitView: View {
                     }
                     .swipeActions(allowsFullSwipe: false) {
                         Button("More") {
-                            currentItem = item
+                            selectedItem = item
                             showItemMore.toggle()
                         }
                         Button("Delete", role: .destructive) {
-                            currentItem = item
+                            selectedItem = item
                             showDelete.toggle()
                         }
                     }
@@ -87,7 +87,7 @@ struct PhrasesUnitView: View {
                     
                 }
             }, message: {
-                Text(currentItem.PHRASE)
+                Text(selectedItem.PHRASE)
             })
             .alert(Text("Phrase"), isPresented: $showItemMore, actions: {
                 Button("Delete", role: .destructive) {
@@ -97,13 +97,13 @@ struct PhrasesUnitView: View {
                     showDetailEdit.toggle()
                 }
                 Button("Copy Phrase") {
-                    iOSApi.copyText(currentItem.PHRASE)
+                    iOSApi.copyText(selectedItem.PHRASE)
                 }
                 Button("Google Phrase") {
-                    iOSApi.googleString(currentItem.PHRASE)
+                    iOSApi.googleString(selectedItem.PHRASE)
                 }
             }, message: {
-                Text(currentItem.PHRASE)
+                Text(selectedItem.PHRASE)
             })
             .toolbar {
                 ToolbarItemGroup {
@@ -125,7 +125,7 @@ struct PhrasesUnitView: View {
                 Text("More")
             })
             .sheet(isPresented: $showDetailEdit) {
-                PhrasesUnitDetailView(vmEdit: PhrasesUnitDetailViewModel(vm: vm, item: currentItem, wordid: 0), showDetail: $showDetailEdit)
+                PhrasesUnitDetailView(vmEdit: PhrasesUnitDetailViewModel(vm: vm, item: selectedItem, wordid: 0), showDetail: $showDetailEdit)
             }
             .sheet(isPresented: $showDetailAdd) {
                 PhrasesUnitDetailView(vmEdit: PhrasesUnitDetailViewModel(vm: vm, item: vm.newUnitPhrase(), wordid: 0), showDetail: $showDetailAdd)

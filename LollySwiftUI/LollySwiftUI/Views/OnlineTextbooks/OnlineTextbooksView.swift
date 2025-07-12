@@ -13,7 +13,7 @@ struct OnlineTextbooksView: View {
     @State var showDetail = false
     @State var showItemMore = false
     // https://stackoverflow.com/questions/59235879/how-to-show-an-alert-when-the-user-taps-on-the-list-row-in-swiftui
-    @State var currentItem = MOnlineTextbook()
+    @State var selectedItem = MOnlineTextbook()
     var body: some View {
         VStack {
             Spacer()
@@ -37,8 +37,8 @@ struct OnlineTextbooksView: View {
                         Image(systemName: "info.circle")
                             .foregroundColor(.blue)
                             .onTapGesture {
-                                currentItem = item
-                                navPath.append(currentItem)
+                                selectedItem = item
+                                navPath.append(selectedItem)
                             }
                     }
                     .contentShape(Rectangle())
@@ -48,7 +48,7 @@ struct OnlineTextbooksView: View {
                     }
                     .swipeActions(allowsFullSwipe: false) {
                         Button("More") {
-                            currentItem = item
+                            selectedItem = item
                             showItemMore.toggle()
                         }
                     }
@@ -62,18 +62,18 @@ struct OnlineTextbooksView: View {
                     showDetail.toggle()
                 }
                 Button("Browse Web Page") {
-                    navPath.append(currentItem)
+                    navPath.append(selectedItem)
                 }
             }, message: {
-                Text(currentItem.TITLE)
+                Text(selectedItem.TITLE)
             })
             .navigationDestination(for: MOnlineTextbook.self) { item in
                 let index = vm.arrOnlineTextbooksFiltered.firstIndex(of: item)!
                 let (start, end) = getPreferredRangeFromArray(index: index, length: vm.arrOnlineTextbooksFiltered.count, preferredLength: 50)
-                OnlineTextbooksWebPageView(vm: OnlineTextbooksWebPageViewModel(settings: vmSettings, arrOnlineTextbooks: Array(vm.arrOnlineTextbooksFiltered[start ..< end]), currentOnlineTextbookIndex: index) {})
+                OnlineTextbooksWebPageView(vm: OnlineTextbooksWebPageViewModel(settings: vmSettings, arrOnlineTextbooks: Array(vm.arrOnlineTextbooksFiltered[start ..< end]), selectedOnlineTextbookIndex: index) {})
             }
             .sheet(isPresented: $showDetail) {
-                OnlineTextbooksDetailView(item: currentItem, showDetail: $showDetail)
+                OnlineTextbooksDetailView(item: selectedItem, showDetail: $showDetail)
             }
         }
     }

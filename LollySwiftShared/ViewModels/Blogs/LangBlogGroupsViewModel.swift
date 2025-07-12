@@ -21,7 +21,7 @@ class LangBlogGroupsViewModel: LangBlogViewModel {
     }
 
     func selectGroup(_ group: MLangBlogGroup?, complete: @escaping () -> Void) {
-        currentGroup = group
+        selectedGroup = group
         Task {
             arrPosts = await MLangBlogPost.getDataByLangGroup(langid: vmSettings.selectedLang.ID, groupid: group?.ID ?? 0)
             complete()
@@ -29,7 +29,7 @@ class LangBlogGroupsViewModel: LangBlogViewModel {
     }
 
     func selectPost(_ blog: MLangBlogPost?, complete: @escaping () -> Void) {
-        currentPost = blog
+        selectedPost = blog
         Task {
             postContent = (await MLangBlogPostContent.getDataById(blog?.ID ?? 0))?.CONTENT ?? ""
             complete()

@@ -27,7 +27,7 @@ class LangBlogPostsListViewController: UIViewController, UITableViewDelegate, UI
 
     @objc func refresh(_ sender: UIRefreshControl) {
         view.showBlurLoader()
-        vm.selectGroup(vm.currentGroup) { [unowned self] in
+        vm.selectGroup(vm.selectedGroup) { [unowned self] in
             sender.endRefreshing()
             view.removeBlurLoader()
         }
@@ -93,7 +93,7 @@ class LangBlogPostsListViewController: UIViewController, UITableViewDelegate, UI
         } else if let controller = segue.destination as? LangBlogPostsContentViewController {
             let index = arrPosts.firstIndex(of: sender as! MLangBlogPost)!
             let (start, end) = getPreferredRangeFromArray(index: index, length: arrPosts.count, preferredLength: 50)
-            controller.vm = LangBlogPostsContentViewModel(settings: vmSettings, arrLangBlogPosts: Array(arrPosts[start ..< end]), currentLangBlogPostIndex: index) {}
+            controller.vm = LangBlogPostsContentViewModel(settings: vmSettings, arrLangBlogPosts: Array(arrPosts[start ..< end]), selectedLangBlogPostIndex: index) {}
             controller.vmGroup = vm
         }
     }

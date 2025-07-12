@@ -14,7 +14,7 @@ struct PhrasesLangView: View {
     @State var showDetailAdd = false
     @State var showItemMore = false
     @State var showDelete = false
-    @State var currentItem = MLangPhrase()
+    @State var selectedItem = MLangPhrase()
     var body: some View {
         VStack(spacing: 0) {
             HStack(spacing: 0) {
@@ -46,11 +46,11 @@ struct PhrasesLangView: View {
                     }
                     .swipeActions(allowsFullSwipe: false) {
                         Button("More") {
-                            currentItem = item
+                            selectedItem = item
                             showItemMore.toggle()
                         }
                         Button("Delete", role: .destructive) {
-                            currentItem = item
+                            selectedItem = item
                             showDelete.toggle()
                         }
                     }
@@ -65,7 +65,7 @@ struct PhrasesLangView: View {
                     
                 }
             }, message: {
-                Text(currentItem.PHRASE)
+                Text(selectedItem.PHRASE)
             })
             .alert(Text("Phrase"), isPresented: $showItemMore, actions: {
                 Button("Delete", role: .destructive) {
@@ -75,13 +75,13 @@ struct PhrasesLangView: View {
                     showDetailEdit.toggle()
                 }
                 Button("Copy Phrase") {
-                    iOSApi.copyText(currentItem.PHRASE)
+                    iOSApi.copyText(selectedItem.PHRASE)
                 }
                 Button("Google Phrase") {
-                    iOSApi.googleString(currentItem.PHRASE)
+                    iOSApi.googleString(selectedItem.PHRASE)
                 }
             }, message: {
-                Text(currentItem.PHRASE)
+                Text(selectedItem.PHRASE)
             })
             .toolbar {
                 ToolbarItemGroup {
@@ -91,7 +91,7 @@ struct PhrasesLangView: View {
                 }
             }
             .sheet(isPresented: $showDetailEdit) {
-                PhrasesLangDetailView(vmEdit: PhrasesLangDetailViewModel(vm: vm, item: currentItem), showDetail: $showDetailEdit)
+                PhrasesLangDetailView(vmEdit: PhrasesLangDetailViewModel(vm: vm, item: selectedItem), showDetail: $showDetailEdit)
             }
             .sheet(isPresented: $showDetailAdd) {
                 PhrasesLangDetailView(vmEdit: PhrasesLangDetailViewModel(vm: vm, item: vm.newLangPhrase()), showDetail: $showDetailAdd)

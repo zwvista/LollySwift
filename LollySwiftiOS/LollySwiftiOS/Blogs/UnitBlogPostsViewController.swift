@@ -33,20 +33,20 @@ class UnitBlogPostsViewController: UIViewController, WKUIDelegate, WKNavigationD
         swipeGesture2.delegate = self
         wvBlogPost.addGestureRecognizer(swipeGesture2)
 
-        vm.$currentUnitIndex.didSet.sink { [unowned self] _ in
+        vm.$selectedUnitIndex.didSet.sink { [unowned self] _ in
             btnUnit.menu = UIMenu(title: "", options: .displayInline, children: vm.arrUnits.enumerated().map { index, item in
-                UIAction(title: item.label, state: index == vm.currentUnitIndex ? .on : .off) { [unowned self] _ in
-                    vm.currentUnitIndex = index
+                UIAction(title: item.label, state: index == vm.selectedUnitIndex ? .on : .off) { [unowned self] _ in
+                    vm.selectedUnitIndex = index
                 }
             })
             btnUnit.showsMenuAsPrimaryAction = true
             Task {
-                await currentUnitIndexChanged()
+                await selectedUnitIndexChanged()
             }
         } ~ subscriptions
     }
 
-    private func currentUnitIndexChanged() async {
+    private func selectedUnitIndexChanged() async {
         btnUnit.setTitle(String(vm.selectedUnit), for: .normal)
         let content = await vmSettings.getBlogContent(unit: vm.selectedUnit)
         let str = BlogPostEditViewModel.markedToHtml(text: content)
@@ -60,7 +60,7 @@ class UnitBlogPostsViewController: UIViewController, WKUIDelegate, WKNavigationD
     private func swipe(_ delta: Int) {
         vm.next(delta)
         Task {
-            await currentUnitIndexChanged()
+            await selectedUnitIndexChanged()
         }
     }
 

@@ -13,14 +13,14 @@ struct PatternsWebPageView: View {
     var body: some View {
         VStack(spacing: 0) {
             Spacer()
-            Picker("", selection: $vm.currentPatternIndex) {
+            Picker("", selection: $vm.selectedPatternIndex) {
                 ForEach(vm.arrPatterns.indices, id: \.self) {
                     Text(vm.arrPatterns[$0].PATTERN)
                 }
             }
             .modifier(PickerModifier(backgroundColor: Color.color3))
-            .onChange(of: vm.currentPatternIndex) {
-                currentPatternChanged()
+            .onChange(of: vm.selectedPatternIndex) {
+                selectedPatternChanged()
             }
             WebView(webView: webViewStore.webView) {}
             .gesture(
@@ -39,13 +39,13 @@ struct PatternsWebPageView: View {
         }
         .navigationTitle("Patterns Web Page")
         .onAppear {
-            currentPatternChanged()
+            selectedPatternChanged()
         }
     }
 
-    private func currentPatternChanged() {
-        AppDelegate.speak(string: vm.currentPattern.TITLE)
-        webViewStore.webView.load(URLRequest(url: URL(string: vm.currentPattern.URL)!))
+    private func selectedPatternChanged() {
+        AppDelegate.speak(string: vm.selectedPattern.TITLE)
+        webViewStore.webView.load(URLRequest(url: URL(string: vm.selectedPattern.URL)!))
     }
 
     private func swipe(_ delta: Int) {

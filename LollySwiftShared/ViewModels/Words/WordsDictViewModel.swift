@@ -12,16 +12,16 @@ import Foundation
 class WordsDictViewModel: NSObject, ObservableObject {
     var vmSettings: SettingsViewModel
     @Published var arrWords = [String]()
-    @Published var currentWordIndex = 0
-    var currentWord: String { arrWords[currentWordIndex] }
+    @Published var selectedWordIndex = 0
+    var selectedWord: String { arrWords[selectedWordIndex] }
     func next(_ delta: Int) {
-        currentWordIndex = (currentWordIndex + delta + arrWords.count) % arrWords.count
+        selectedWordIndex = (selectedWordIndex + delta + arrWords.count) % arrWords.count
     }
 
-    init(settings: SettingsViewModel, arrWords: [String], currentWordIndex: Int, complete: @escaping () -> Void) {
+    init(settings: SettingsViewModel, arrWords: [String], selectedWordIndex: Int, complete: @escaping () -> Void) {
         vmSettings = settings
         self.arrWords = arrWords
-        self.currentWordIndex = currentWordIndex
+        self.selectedWordIndex = selectedWordIndex
         super.init()
     }
 }

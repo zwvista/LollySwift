@@ -19,14 +19,14 @@ struct WordsDictView: View {
         VStack(spacing: 0) {
             Spacer()
             HStack(spacing: 0) {
-                Picker("", selection: $vm.currentWordIndex) {
+                Picker("", selection: $vm.selectedWordIndex) {
                     ForEach(vm.arrWords.indices, id: \.self) {
                         Text(vm.arrWords[$0])
                     }
                 }
                 .modifier(PickerModifier(backgroundColor: Color.color3))
-                .onChange(of: vm.currentWordIndex) {
-                    currentWordChanged()
+                .onChange(of: vm.selectedWordIndex) {
+                    selectedWordChanged()
                 }
                 Picker("", selection: $vmS.selectedDictReferenceIndex) {
                     ForEach(vmS.arrDictsReference.indices, id: \.self) {
@@ -58,13 +58,13 @@ struct WordsDictView: View {
         .onAppear {
             dictStore.vmSettings = vmSettings
             dictStore.wvDict = wvDict
-            currentWordChanged()
+            selectedWordChanged()
         }
     }
 
-    private func currentWordChanged() {
-        AppDelegate.speak(string: vm.currentWord)
-        dictStore.word = vm.currentWord
+    private func selectedWordChanged() {
+        AppDelegate.speak(string: vm.selectedWord)
+        dictStore.word = vm.selectedWord
         selectDictChanged()
     }
 

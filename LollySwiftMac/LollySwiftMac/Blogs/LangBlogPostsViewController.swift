@@ -75,7 +75,7 @@ class LangBlogPostsViewController: NSViewController, NSTableViewDataSource, NSTa
     }
 
     @IBAction func editGroup(_ sender: Any) {
-        guard let itemGroup = vm.currentGroup else {return}
+        guard let itemGroup = vm.selectedGroup else {return}
         let detailVC = storyboard!.instantiateController(withIdentifier: "LangBlogGroupsDetailViewController") as! LangBlogGroupsDetailViewController
         detailVC.vmEdit = LangBlogGroupsDetailViewModel(vm: vm, item: itemGroup)
         detailVC.complete = { [unowned self] in
@@ -102,7 +102,7 @@ class LangBlogPostsViewController: NSViewController, NSTableViewDataSource, NSTa
     }
 
     @IBAction func editPost(_ sender: Any) {
-        guard let itemPost = vm.currentPost else {return}
+        guard let itemPost = vm.selectedPost else {return}
         let detailVC = storyboard!.instantiateController(withIdentifier: "LangBlogPostsDetailViewController") as! LangBlogPostsDetailViewController
         detailVC.vmEdit = LangBlogPostsDetailViewModel(vm: vm, itemPost: itemPost)
         detailVC.complete = { [unowned self] in
@@ -112,7 +112,7 @@ class LangBlogPostsViewController: NSViewController, NSTableViewDataSource, NSTa
     }
 
     @IBAction func editPostContent(_ sender: Any) {
-        guard let itemPost = vm.currentPost else {return}
+        guard let itemPost = vm.selectedPost else {return}
         Task {
             let item = await MLangBlogPostContent.getDataById(itemPost.ID)
             (NSApplication.shared.delegate as! AppDelegate).editPost(settings: vm.vmSettings, item: item)

@@ -13,7 +13,7 @@ struct PhrasesTextbookView: View {
     @State var showDetailEdit = false
     @State var showItemMore = false
     @State var showDelete = false
-    @State var currentItem = MUnitPhrase()
+    @State var selectedItem = MUnitPhrase()
     var body: some View {
         VStack(spacing: 0) {
             SearchBar(text: $vm.textFilter, placeholder: "Filter") { _ in }
@@ -57,11 +57,11 @@ struct PhrasesTextbookView: View {
                     }
                     .swipeActions(allowsFullSwipe: false) {
                         Button("More") {
-                            currentItem = item
+                            selectedItem = item
                             showItemMore.toggle()
                         }
                         Button("Delete", role: .destructive) {
-                            currentItem = item
+                            selectedItem = item
                             showDelete.toggle()
                         }
                     }
@@ -76,7 +76,7 @@ struct PhrasesTextbookView: View {
                     
                 }
             }, message: {
-                Text(currentItem.PHRASE)
+                Text(selectedItem.PHRASE)
             })
             .alert(Text("Phrase"), isPresented: $showItemMore, actions: {
                 Button("Delete", role: .destructive) {
@@ -86,16 +86,16 @@ struct PhrasesTextbookView: View {
                     showDetailEdit.toggle()
                 }
                 Button("Copy Phrase") {
-                    iOSApi.copyText(currentItem.PHRASE)
+                    iOSApi.copyText(selectedItem.PHRASE)
                 }
                 Button("Google Phrase") {
-                    iOSApi.googleString(currentItem.PHRASE)
+                    iOSApi.googleString(selectedItem.PHRASE)
                 }
             }, message: {
-                Text(currentItem.PHRASE)
+                Text(selectedItem.PHRASE)
             })
             .sheet(isPresented: $showDetailEdit) {
-                PhrasesTextbookDetailView(vmEdit: PhrasesUnitDetailViewModel(vm: vm, item: currentItem, wordid: 0), showDetail: $showDetailEdit)
+                PhrasesTextbookDetailView(vmEdit: PhrasesUnitDetailViewModel(vm: vm, item: selectedItem, wordid: 0), showDetail: $showDetailEdit)
             }
         }
     }

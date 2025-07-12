@@ -13,14 +13,14 @@ struct OnlineTextbooksWebPageView: View {
     var body: some View {
         VStack(spacing: 0) {
             Spacer()
-            Picker("", selection: $vm.currentOnlineTextbookIndex) {
+            Picker("", selection: $vm.selectedOnlineTextbookIndex) {
                 ForEach(vm.arrOnlineTextbooks.indices, id: \.self) {
                     Text(vm.arrOnlineTextbooks[$0].TITLE)
                 }
             }
             .modifier(PickerModifier(backgroundColor: Color.color3))
-            .onChange(of: vm.currentOnlineTextbookIndex) {
-                currentOnlineTextbookChanged()
+            .onChange(of: vm.selectedOnlineTextbookIndex) {
+                selectedOnlineTextbookChanged()
             }
             WebView(webView: webViewStore.webView) {}
             .gesture(
@@ -39,13 +39,13 @@ struct OnlineTextbooksWebPageView: View {
         }
         .navigationTitle("Online Textbooks(Web Page)")
         .onAppear {
-            currentOnlineTextbookChanged()
+            selectedOnlineTextbookChanged()
         }
     }
 
-    private func currentOnlineTextbookChanged() {
-        AppDelegate.speak(string: vm.currentOnlineTextbook.TITLE)
-        webViewStore.webView.load(URLRequest(url: URL(string: vm.currentOnlineTextbook.URL)!))
+    private func selectedOnlineTextbookChanged() {
+        AppDelegate.speak(string: vm.selectedOnlineTextbook.TITLE)
+        webViewStore.webView.load(URLRequest(url: URL(string: vm.selectedOnlineTextbook.URL)!))
     }
 
     private func swipe(_ delta: Int) {

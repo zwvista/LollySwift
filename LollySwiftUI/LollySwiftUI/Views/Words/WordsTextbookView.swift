@@ -13,7 +13,7 @@ struct WordsTextbookView: View {
     @State var showDetailEdit = false
     @State var showItemMore = false
     @State var showDelete = false
-    @State var currentItem = MUnitWord()
+    @State var selectedItem = MUnitWord()
     var body: some View {
         VStack(spacing: 0) {
             SearchBar(text: $vm.textFilter, placeholder: "Filter") { _ in }
@@ -63,11 +63,11 @@ struct WordsTextbookView: View {
                     }
                     .swipeActions(allowsFullSwipe: false) {
                         Button("More") {
-                            currentItem = item
+                            selectedItem = item
                             showItemMore.toggle()
                         }
                         Button("Delete", role: .destructive) {
-                            currentItem = item
+                            selectedItem = item
                             showDelete.toggle()
                         }
                     }
@@ -82,7 +82,7 @@ struct WordsTextbookView: View {
                     
                 }
             }, message: {
-                Text(currentItem.WORDNOTE)
+                Text(selectedItem.WORDNOTE)
             })
             .alert(Text("Word"), isPresented: $showItemMore, actions: {
                 Button("Delete", role: .destructive) {
@@ -93,35 +93,35 @@ struct WordsTextbookView: View {
                 }
                 Button("Get Note") {
                     Task {
-                        await vm.getNote(item: currentItem)
+                        await vm.getNote(item: selectedItem)
                     }
                 }
                 Button("Clear Note") {
                     Task {
-                        await vm.clearNote(item: currentItem)
+                        await vm.clearNote(item: selectedItem)
                     }
                 }
                 Button("Copy Word") {
-                    iOSApi.copyText(currentItem.WORD)
+                    iOSApi.copyText(selectedItem.WORD)
                 }
                 Button("Google Word") {
-                    iOSApi.googleString(currentItem.WORD)
+                    iOSApi.googleString(selectedItem.WORD)
                 }
                 Button("Online Dictionary") {
                     let itemDict = vmSettings.arrDictsReference.first { $0.DICTNAME == vmSettings.selectedDictReference.DICTNAME }!
-                    let url = itemDict.urlString(word: currentItem.WORD, arrAutoCorrect: vmSettings.arrAutoCorrect)
+                    let url = itemDict.urlString(word: selectedItem.WORD, arrAutoCorrect: vmSettings.arrAutoCorrect)
                     UIApplication.shared.open(URL(string: url)!)
                 }
             }, message: {
-                Text(currentItem.WORDNOTE)
+                Text(selectedItem.WORDNOTE)
             })
             .navigationDestination(for: MUnitWord.self) { item in
                 let index = vm.arrWordsFiltered.firstIndex(of: item)!
                 let (start, end) = getPreferredRangeFromArray(index: index, length: vm.arrWordsFiltered.count, preferredLength: 50)
-                WordsDictView(vm: WordsDictViewModel(settings: vmSettings, arrWords: vm.arrWordsFiltered[start ..< end].map(\.WORD), currentWordIndex: index) {})
+                WordsDictView(vm: WordsDictViewModel(settings: vmSettings, arrWords: vm.arrWordsFiltered[start ..< end].map(\.WORD), selectedWordIndex: index) {})
             }
             .sheet(isPresented: $showDetailEdit) {
-                WordsTextbookDetailView(vmEdit: WordsUnitDetailViewModel(vm: vm, item: currentItem, phraseid: 0), showDetail: $showDetailEdit)
+                WordsTextbookDetailView(vmEdit: WordsUnitDetailViewModel(vm: vm, item: selectedItem, phraseid: 0), showDetail: $showDetailEdit)
             }
         }
     }

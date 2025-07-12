@@ -13,7 +13,7 @@ struct PatternsView: View {
     @State var showDetail = false
     @State var showItemMore = false
     // https://stackoverflow.com/questions/59235879/how-to-show-an-alert-when-the-user-taps-on-the-list-row-in-swiftui
-    @State var currentItem = MPattern()
+    @State var selectedItem = MPattern()
     var body: some View {
         VStack {
             HStack(spacing: 0) {
@@ -40,8 +40,8 @@ struct PatternsView: View {
                         Image(systemName: "info.circle")
                             .foregroundColor(.blue)
                             .onTapGesture {
-                                currentItem = item
-                                navPath.append(currentItem)
+                                selectedItem = item
+                                navPath.append(selectedItem)
                             }
                     }
                     .contentShape(Rectangle())
@@ -51,7 +51,7 @@ struct PatternsView: View {
                     }
                     .swipeActions(allowsFullSwipe: false) {
                         Button("More") {
-                            currentItem = item
+                            selectedItem = item
                             showItemMore.toggle()
                         }
                     }
@@ -65,24 +65,24 @@ struct PatternsView: View {
                     showDetail.toggle()
                 }
                 Button("Browse Web Page") {
-                    navPath.append(currentItem)
+                    navPath.append(selectedItem)
                 }
                 Button("Copy Pattern") {
-                    iOSApi.copyText(currentItem.PATTERN)
+                    iOSApi.copyText(selectedItem.PATTERN)
                 }
                 Button("Google Pattern") {
-                    iOSApi.googleString(currentItem.PATTERN)
+                    iOSApi.googleString(selectedItem.PATTERN)
                 }
             }, message: {
-                Text(currentItem.PATTERN)
+                Text(selectedItem.PATTERN)
             })
             .navigationDestination(for: MPattern.self) { item in
                 let index = vm.arrPatternsFiltered.firstIndex(of: item)!
                 let (start, end) = getPreferredRangeFromArray(index: index, length: vm.arrPatternsFiltered.count, preferredLength: 50)
-                PatternsWebPageView(vm: PatternsWebPageViewModel(settings: vmSettings, arrPatterns: Array(vm.arrPatternsFiltered[start ..< end]), currentPatternIndex: index) {})
+                PatternsWebPageView(vm: PatternsWebPageViewModel(settings: vmSettings, arrPatterns: Array(vm.arrPatternsFiltered[start ..< end]), selectedPatternIndex: index) {})
             }
             .sheet(isPresented: $showDetail) {
-                PatternsDetailView(item: currentItem, showDetail: $showDetail)
+                PatternsDetailView(item: selectedItem, showDetail: $showDetail)
             }
         }
     }

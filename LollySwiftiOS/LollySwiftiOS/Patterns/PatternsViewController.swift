@@ -118,7 +118,7 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
         } else if let controller = segue.destination as? PatternsWebPageViewController {
             let index = arrPatterns.firstIndex(of: sender as! MPattern)!
             let (start, end) = getPreferredRangeFromArray(index: index, length: arrPatterns.count, preferredLength: 50)
-            controller.vm = PatternsWebPageViewModel(settings: vmSettings, arrPatterns:  Array(arrPatterns[start ..< end]), currentPatternIndex: index) {}
+            controller.vm = PatternsWebPageViewModel(settings: vmSettings, arrPatterns:  Array(arrPatterns[start ..< end]), selectedPatternIndex: index) {}
         }
     }
 

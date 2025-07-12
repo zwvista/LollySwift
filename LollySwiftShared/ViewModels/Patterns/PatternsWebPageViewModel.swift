@@ -12,16 +12,16 @@ import Foundation
 class PatternsWebPageViewModel: NSObject, ObservableObject {
     var vmSettings: SettingsViewModel
     @Published var arrPatterns = [MPattern]()
-    @Published var currentPatternIndex = 0
-    var currentPattern: MPattern { arrPatterns[currentPatternIndex] }
+    @Published var selectedPatternIndex = 0
+    var selectedPattern: MPattern { arrPatterns[selectedPatternIndex] }
     func next(_ delta: Int) {
-        currentPatternIndex = (currentPatternIndex + delta + arrPatterns.count) % arrPatterns.count
+        selectedPatternIndex = (selectedPatternIndex + delta + arrPatterns.count) % arrPatterns.count
     }
 
-    init(settings: SettingsViewModel, arrPatterns: [MPattern], currentPatternIndex: Int, complete: @escaping () -> Void) {
+    init(settings: SettingsViewModel, arrPatterns: [MPattern], selectedPatternIndex: Int, complete: @escaping () -> Void) {
         vmSettings = settings
         self.arrPatterns = arrPatterns
-        self.currentPatternIndex = currentPatternIndex
+        self.selectedPatternIndex = selectedPatternIndex
         super.init()
     }
 }

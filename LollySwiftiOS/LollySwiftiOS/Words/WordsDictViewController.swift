@@ -36,14 +36,14 @@ class WordsDictViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
         swipeGesture2.delegate = self
         dictStore.wvDict.addGestureRecognizer(swipeGesture2)
 
-        vm.$currentWordIndex.didSet.sink { [unowned self] _ in
+        vm.$selectedWordIndex.didSet.sink { [unowned self] _ in
             btnWord.menu = UIMenu(title: "", options: .displayInline, children: vm.arrWords.enumerated().map { index, item in
-                UIAction(title: item, state: index == vm.currentWordIndex ? .on : .off) { [unowned self] _ in
-                    vm.currentWordIndex = index
+                UIAction(title: item, state: index == vm.selectedWordIndex ? .on : .off) { [unowned self] _ in
+                    vm.selectedWordIndex = index
                 }
             })
             btnWord.showsMenuAsPrimaryAction = true
-            currentWordChanged()
+            selectedWordChanged()
         } ~ subscriptions
         vmSettings.$selectedDictReferenceIndex.didSet.sink { [unowned self] _ in
             btnDict.menu = UIMenu(title: "", options: .displayInline, children: vmSettings.arrDictsReference.map(\.DICTNAME).enumerated().map { index, item in
@@ -56,10 +56,10 @@ class WordsDictViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
         } ~ subscriptions
     }
 
-    private func currentWordChanged() {
-        AppDelegate.speak(string: vm.currentWord)
-        btnWord.setTitle(vm.currentWord, for: .normal)
-        dictStore.word = vm.currentWord
+    private func selectedWordChanged() {
+        AppDelegate.speak(string: vm.selectedWord)
+        btnWord.setTitle(vm.selectedWord, for: .normal)
+        dictStore.word = vm.selectedWord
         selectDictChanged()
     }
 
@@ -75,7 +75,7 @@ class WordsDictViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
 
     private func swipe(_ delta: Int) {
         vm.next(delta)
-        currentWordChanged()
+        selectedWordChanged()
     }
 
     @IBAction func swipeLeft(_ sender: UISwipeGestureRecognizer){

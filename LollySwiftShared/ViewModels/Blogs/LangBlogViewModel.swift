@@ -14,10 +14,10 @@ import Then
 class LangBlogViewModel: NSObject, ObservableObject {
     var vmSettings: SettingsViewModel
     @Published var arrGroups = [MLangBlogGroup]()
-    var currentGroup: MLangBlogGroup? = nil
+    var selectedGroup: MLangBlogGroup? = nil
 
     @Published var arrPosts = [MLangBlogPost]()
-    var currentPost: MLangBlogPost? = nil
+    var selectedPost: MLangBlogPost? = nil
     @Published var postFilter = ""
     @Published var arrPostsFiltered = [MLangBlogPost]()
     var hasPostFilter: Bool { !postFilter.isEmpty }

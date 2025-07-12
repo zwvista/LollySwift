@@ -33,21 +33,21 @@ class OnlineTextbooksWebPageViewController: UIViewController, WKUIDelegate, WKNa
         swipeGesture2.delegate = self
         wvWebPage.addGestureRecognizer(swipeGesture2)
 
-        vm.$currentOnlineTextbookIndex.didSet.sink { [unowned self] _ in
+        vm.$selectedOnlineTextbookIndex.didSet.sink { [unowned self] _ in
             btnOnlineTextbook.menu = UIMenu(title: "", options: .displayInline, children: vm.arrOnlineTextbooks.enumerated().map { index, item in
-                UIAction(title: item.TITLE, state: index == vm.currentOnlineTextbookIndex ? .on : .off) { [unowned self] _ in
-                    vm.currentOnlineTextbookIndex = index
+                UIAction(title: item.TITLE, state: index == vm.selectedOnlineTextbookIndex ? .on : .off) { [unowned self] _ in
+                    vm.selectedOnlineTextbookIndex = index
                 }
             })
             btnOnlineTextbook.showsMenuAsPrimaryAction = true
-            currentOnlineTextbookChanged()
+            selectedOnlineTextbookChanged()
         } ~ subscriptions
     }
 
-    private func currentOnlineTextbookChanged() {
-        AppDelegate.speak(string: vm.currentOnlineTextbook.TITLE)
-        btnOnlineTextbook.setTitle(vm.currentOnlineTextbook.TITLE, for: .normal)
-        wvWebPage.load(URLRequest(url: URL(string: vm.currentOnlineTextbook.URL)!))
+    private func selectedOnlineTextbookChanged() {
+        AppDelegate.speak(string: vm.selectedOnlineTextbook.TITLE)
+        btnOnlineTextbook.setTitle(vm.selectedOnlineTextbook.TITLE, for: .normal)
+        wvWebPage.load(URLRequest(url: URL(string: vm.selectedOnlineTextbook.URL)!))
     }
 
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
@@ -56,7 +56,7 @@ class OnlineTextbooksWebPageViewController: UIViewController, WKUIDelegate, WKNa
 
     private func swipe(_ delta: Int) {
         vm.next(delta)
-        currentOnlineTextbookChanged()
+        selectedOnlineTextbookChanged()
     }
 
     @IBAction func swipeLeft(_ sender: UISwipeGestureRecognizer){

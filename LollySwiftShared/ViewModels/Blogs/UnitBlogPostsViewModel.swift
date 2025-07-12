@@ -11,16 +11,16 @@ import Foundation
 class UnitBlogPostsViewModel: NSObject, ObservableObject {
     var vmSettings: SettingsViewModel
     @Published var arrUnits = [MSelectItem]()
-    @Published var currentUnitIndex = 0
-    var selectedUnit: Int { arrUnits[currentUnitIndex].value }
+    @Published var selectedUnitIndex = 0
+    var selectedUnit: Int { arrUnits[selectedUnitIndex].value }
     func next(_ delta: Int) {
-        currentUnitIndex = (currentUnitIndex + delta + arrUnits.count) % arrUnits.count
+        selectedUnitIndex = (selectedUnitIndex + delta + arrUnits.count) % arrUnits.count
     }
 
     init(settings: SettingsViewModel, complete: @escaping () -> Void) {
         vmSettings = settings
         arrUnits = vmSettings.arrUnits
-        currentUnitIndex = vmSettings.selectedUnitToIndex
+        selectedUnitIndex = vmSettings.selectedUnitToIndex
         super.init()
     }
 }

@@ -121,7 +121,7 @@ class WordsUnitViewController: WordsBaseViewController {
             let item = segue.identifier == "add" ? vm.newUnitWord() : sender as! MUnitWord
             controller.vmEdit = WordsUnitDetailViewModel(vm: vm, item: item, phraseid: 0)
         } else if let controller = segue.destination as? WordsDictViewController {
-            controller.vm = WordsDictViewModel(settings: vmSettings, arrWords: arrWords.map(\.WORD), currentWordIndex: arrWords.firstIndex(of: sender as! MUnitWord)!) {}
+            controller.vm = WordsDictViewModel(settings: vmSettings, arrWords: arrWords.map(\.WORD), selectedWordIndex: arrWords.firstIndex(of: sender as! MUnitWord)!) {}
         } else if let controller = (segue.destination as? UINavigationController)?.topViewController as? WordsUnitBatchEditViewController {
             controller.vm = vm
         }
