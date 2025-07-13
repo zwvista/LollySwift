@@ -12,10 +12,11 @@ import Combine
 class LangBlogPostsListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var sbPostFilter: UISearchBar!
     let refreshControl = UIRefreshControl()
 
     var vm: LangBlogGroupsViewModel!
-    var arrPosts: [MLangBlogPost] { vm.arrPosts }
+    var arrPosts: [MLangBlogPost] { vm.arrPostsFiltered }
     var subscriptions = Set<AnyCancellable>()
 
     override func viewDidLoad() {
@@ -31,9 +32,10 @@ class LangBlogPostsListViewController: UIViewController, UITableViewDelegate, UI
             sender.endRefreshing()
             view.removeBlurLoader()
         }
-        vm.$arrPosts.didSet.sink { [unowned self] _ in
+        vm.$arrPostsFiltered.didSet.sink { [unowned self] _ in
             tableView.reloadData()
         } ~ subscriptions
+        vm.$postFilter <~> sbPostFilter.searchTextField.textProperty ~ subscriptions
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

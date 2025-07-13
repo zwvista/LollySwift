@@ -12,10 +12,11 @@ import Combine
 class LangBlogGroupsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var sbGroupFilter: UISearchBar!
     let refreshControl = UIRefreshControl()
 
     var vm: LangBlogGroupsViewModel!
-    var arrGroups: [MLangBlogGroup] { vm.arrGroups }
+    var arrGroups: [MLangBlogGroup] { vm.arrGroupsFiltered }
     var subscriptions = Set<AnyCancellable>()
 
     override func viewDidLoad() {
@@ -31,9 +32,10 @@ class LangBlogGroupsViewController: UIViewController, UITableViewDelegate, UITab
             sender.endRefreshing()
             view.removeBlurLoader()
         }
-        vm.$arrGroups.didSet.sink { [unowned self] _ in
+        vm.$arrGroupsFiltered.didSet.sink { [unowned self] _ in
             tableView.reloadData()
         } ~ subscriptions
+        vm.$groupFilter <~> sbGroupFilter.searchTextField.textProperty ~ subscriptions
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -3,7 +3,6 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -100,18 +99,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AAb-bC-E1G">
-                                <rect key="frame" x="0.0" y="162" width="393" height="44"/>
-                                <color key="backgroundColor" name="Color3"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="Oj7-Ye-U2O"/>
-                                </constraints>
-                                <state key="normal" title="Button">
-                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                            </button>
+                            <searchBar contentMode="redraw" placeholder="Filter" translatesAutoresizingMaskIntoConstraints="NO" id="vdJ-j1-ndr">
+                                <rect key="frame" x="0.0" y="162" width="393" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelectionDuringEditing="YES" rowHeight="88" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KsT-fK-lhG">
-                                <rect key="frame" x="0.0" y="206" width="393" height="578"/>
+                                <rect key="frame" x="0.0" y="218" width="393" height="566"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="detailButton" indentationWidth="10" reuseIdentifier="LangBlogGroupsCell" rowHeight="88" id="Gz6-9Q-PxB" customClass="LangBlogGroupsCell" customModule="LollySwiftiOS" customModuleProvider="target">
@@ -166,13 +159,13 @@
                         <viewLayoutGuide key="safeArea" id="mbt-2o-dj2"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="mbt-2o-dj2" firstAttribute="leading" secondItem="vdJ-j1-ndr" secondAttribute="leading" id="0Fh-7A-9vy"/>
                             <constraint firstItem="mbt-2o-dj2" firstAttribute="trailing" secondItem="KsT-fK-lhG" secondAttribute="trailing" id="5SU-en-u8I"/>
                             <constraint firstItem="KsT-fK-lhG" firstAttribute="bottom" secondItem="mbt-2o-dj2" secondAttribute="bottom" id="9aT-Ee-5fY"/>
-                            <constraint firstItem="AAb-bC-E1G" firstAttribute="top" secondItem="mbt-2o-dj2" secondAttribute="top" id="Oo7-7c-Q97"/>
-                            <constraint firstItem="AAb-bC-E1G" firstAttribute="leading" secondItem="mbt-2o-dj2" secondAttribute="leading" id="TzW-dP-huE"/>
+                            <constraint firstItem="vdJ-j1-ndr" firstAttribute="top" secondItem="mbt-2o-dj2" secondAttribute="top" id="G3U-hS-vio"/>
                             <constraint firstItem="KsT-fK-lhG" firstAttribute="leading" secondItem="mbt-2o-dj2" secondAttribute="leading" id="Wq2-x6-nLJ"/>
-                            <constraint firstItem="KsT-fK-lhG" firstAttribute="top" secondItem="AAb-bC-E1G" secondAttribute="bottom" id="x7B-BF-avI"/>
-                            <constraint firstItem="mbt-2o-dj2" firstAttribute="trailing" secondItem="AAb-bC-E1G" secondAttribute="trailing" id="yk8-tp-Sdq"/>
+                            <constraint firstItem="KsT-fK-lhG" firstAttribute="top" secondItem="vdJ-j1-ndr" secondAttribute="bottom" id="nNo-Hi-wDZ"/>
+                            <constraint firstItem="vdJ-j1-ndr" firstAttribute="trailing" secondItem="mbt-2o-dj2" secondAttribute="trailing" id="sCq-4Q-vig"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Language Blog Groups" id="B0J-lw-YWK">
@@ -183,6 +176,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="sbGroupFilter" destination="vdJ-j1-ndr" id="rzy-u1-pvL"/>
                         <outlet property="tableView" destination="KsT-fK-lhG" id="BFl-1J-uo7"/>
                         <segue destination="dBU-nk-MUl" kind="presentation" identifier="edit" id="IH8-bN-kxI"/>
                         <segue destination="xuc-Xy-pZh" kind="show" identifier="posts" id="AlC-hE-Qb1"/>
@@ -317,18 +311,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yui-tc-boM">
-                                <rect key="frame" x="0.0" y="162" width="393" height="44"/>
-                                <color key="backgroundColor" name="Color3"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="Alv-dG-DEd"/>
-                                </constraints>
-                                <state key="normal" title="Button">
-                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                            </button>
+                            <searchBar contentMode="redraw" placeholder="Filter" translatesAutoresizingMaskIntoConstraints="NO" id="KFf-Mc-KMI">
+                                <rect key="frame" x="0.0" y="162" width="393" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelectionDuringEditing="YES" rowHeight="88" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="W6Y-9b-D0t">
-                                <rect key="frame" x="0.0" y="206" width="393" height="578"/>
+                                <rect key="frame" x="0.0" y="218" width="393" height="566"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="detailButton" indentationWidth="10" reuseIdentifier="LangBlogPostsListCell" rowHeight="88" id="v2t-dT-SDc" customClass="LangBlogPostsListCell" customModule="LollySwiftiOS" customModuleProvider="target">
@@ -383,17 +371,18 @@
                         <viewLayoutGuide key="safeArea" id="1eG-rL-CSb"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="yui-tc-boM" firstAttribute="leading" secondItem="1eG-rL-CSb" secondAttribute="leading" id="84W-Te-PBe"/>
                             <constraint firstItem="1eG-rL-CSb" firstAttribute="trailing" secondItem="W6Y-9b-D0t" secondAttribute="trailing" id="AzO-gg-C5w"/>
-                            <constraint firstItem="W6Y-9b-D0t" firstAttribute="top" secondItem="yui-tc-boM" secondAttribute="bottom" id="Drh-2O-Zhs"/>
-                            <constraint firstItem="yui-tc-boM" firstAttribute="top" secondItem="1eG-rL-CSb" secondAttribute="top" id="fjP-MZ-goC"/>
+                            <constraint firstItem="1eG-rL-CSb" firstAttribute="trailing" secondItem="KFf-Mc-KMI" secondAttribute="trailing" id="BI6-Ls-FSu"/>
+                            <constraint firstItem="KFf-Mc-KMI" firstAttribute="top" secondItem="1eG-rL-CSb" secondAttribute="top" id="Dus-RM-sF3"/>
+                            <constraint firstItem="KFf-Mc-KMI" firstAttribute="leading" secondItem="1eG-rL-CSb" secondAttribute="leading" id="Yv8-Fw-297"/>
+                            <constraint firstItem="W6Y-9b-D0t" firstAttribute="top" secondItem="KFf-Mc-KMI" secondAttribute="bottom" id="nie-Vh-jdN"/>
                             <constraint firstItem="W6Y-9b-D0t" firstAttribute="bottom" secondItem="1eG-rL-CSb" secondAttribute="bottom" id="sAC-TR-Oqo"/>
-                            <constraint firstItem="1eG-rL-CSb" firstAttribute="trailing" secondItem="yui-tc-boM" secondAttribute="trailing" id="t0X-o2-EMZ"/>
                             <constraint firstItem="W6Y-9b-D0t" firstAttribute="leading" secondItem="1eG-rL-CSb" secondAttribute="leading" id="wwx-fx-oBD"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Language Blog Posts (List)" id="dTH-YZ-jAp"/>
                     <connections>
+                        <outlet property="sbPostFilter" destination="KFf-Mc-KMI" id="7o8-5T-xgV"/>
                         <outlet property="tableView" destination="W6Y-9b-D0t" id="YDD-3u-6aI"/>
                         <segue destination="tIh-y5-Uvi" kind="presentation" identifier="edit" id="vBl-rC-yme"/>
                         <segue destination="s4r-HQ-TBv" kind="show" identifier="content" id="eoX-tt-9Yy"/>
@@ -566,9 +555,6 @@
     <resources>
         <image name="MenuButton" width="25" height="13"/>
         <image name="xmark.circle.fill" catalog="system" width="128" height="123"/>
-        <namedColor name="Color3">
-            <color red="1" green="0.25299999117851257" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
