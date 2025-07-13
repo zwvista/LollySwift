@@ -14,10 +14,11 @@ import RxBinding
 class LangBlogGroupsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var sbGroupFilter: UISearchBar!
     let refreshControl = UIRefreshControl()
 
     var vm: LangBlogGroupsViewModel!
-    var arrGroups: [MLangBlogGroup] { vm.arrGroups }
+    var arrGroups: [MLangBlogGroup] { vm.arrGroupsFiltered }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +36,7 @@ class LangBlogGroupsViewController: UIViewController, UITableViewDelegate, UITab
         vm.arrGroups_.subscribe { [unowned self] _ in
             tableView.reloadData()
         } ~ rx.disposeBag
+        _ = vm.groupFilter_ <~> sbGroupFilter.searchTextField.rx.textInput
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
