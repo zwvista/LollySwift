@@ -13,7 +13,7 @@ struct WordsUnitDetailView: View {
     @Binding var showDetail: Bool
     var body: some View {
         // https://stackoverflow.com/questions/59702997/can-a-modal-sheet-have-a-navigation-bar-in-swiftui
-        NavigationView {
+        NavigationStack {
             Form {
                 HStack {
                     Text("ID:")

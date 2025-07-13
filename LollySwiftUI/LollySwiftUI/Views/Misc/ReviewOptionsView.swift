@@ -12,7 +12,7 @@ struct ReviewOptionsView: View {
     @Binding var showOptions: Bool
     @Binding var showOptionsDone: Bool
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Form {
                 HStack {
                     Text("Mode:")

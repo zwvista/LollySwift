@@ -11,7 +11,7 @@ struct LangBlogPostsDetailView: View {
     @State var item: MLangBlogPost
     @Binding var showDetail: Bool
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Form {
                 HStack {
                     Text("ID:")

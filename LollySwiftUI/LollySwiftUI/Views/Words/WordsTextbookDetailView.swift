@@ -11,7 +11,7 @@ struct WordsTextbookDetailView: View {
     @StateObject var vmEdit: WordsUnitDetailViewModel
     @Binding var showDetail: Bool
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Form {
                 HStack {
                     Text("ID:")

@@ -11,7 +11,7 @@ struct OnlineTextbooksDetailView: View {
     @State var item: MOnlineTextbook
     @Binding var showDetail: Bool
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Form {
                 HStack {
                     Text("ID:")
