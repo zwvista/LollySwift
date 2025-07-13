@@ -33,7 +33,7 @@ class LangBlogGroupsViewController: UIViewController, UITableViewDelegate, UITab
             sender.endRefreshing()
             view.removeBlurLoader()
         }
-        vm.arrGroups_.subscribe { [unowned self] _ in
+        vm.arrGroupsFiltered_.subscribe { [unowned self] _ in
             tableView.reloadData()
         } ~ rx.disposeBag
         _ = vm.groupFilter_ <~> sbGroupFilter.searchTextField.rx.textInput

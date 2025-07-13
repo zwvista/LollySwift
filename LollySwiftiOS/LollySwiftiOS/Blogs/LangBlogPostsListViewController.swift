@@ -33,7 +33,7 @@ class LangBlogPostsListViewController: UIViewController, UITableViewDelegate, UI
             sender.endRefreshing()
             view.removeBlurLoader()
         }
-        vm.arrPosts_.subscribe { [unowned self] _ in
+        vm.arrPostsFiltered_.subscribe { [unowned self] _ in
             tableView.reloadData()
         } ~ rx.disposeBag
         _ = vm.postFilter_ <~> sbPostFilter.searchTextField.rx.textInput
