@@ -17,6 +17,11 @@ class LangBlogViewModel: NSObject {
     let arrGroups_ = BehaviorRelay(value: [MLangBlogGroup]())
     var arrGroups: [MLangBlogGroup] { get { arrGroups_.value } set { arrGroups_.accept(newValue) } }
     var selectedGroup: MLangBlogGroup? = nil
+    let groupFilter_ = BehaviorRelay(value: "")
+    var groupFilter: String { get { groupFilter_.value } set { groupFilter_.accept(newValue) } }
+    let arrGroupsFiltered_ = BehaviorRelay(value: [MLangBlogGroup]())
+    var arrGroupsFiltered: [MLangBlogGroup] { get { arrGroupsFiltered_.value } set { arrGroupsFiltered_.accept(newValue) } }
+    var hasGroupFilter: Bool { !groupFilter.isEmpty }
 
     let arrPosts_ = BehaviorRelay(value: [MLangBlogPost]())
     var arrPosts: [MLangBlogPost] { get { arrPosts_.value } set { arrPosts_.accept(newValue) } }
@@ -32,6 +37,9 @@ class LangBlogViewModel: NSObject {
         vmSettings = settings
         super.init()
 
+        Observable.combineLatest(arrGroups_, groupFilter_).subscribe { [unowned self] _ in
+            arrGroupsFiltered = !hasGroupFilter ? arrGroups : arrGroups.filter { $0.GROUPNAME.lowercased().contains(groupFilter.lowercased()) }
+        } ~ rx.disposeBag
         Observable.combineLatest(arrPosts_, postFilter_).subscribe { [unowned self] _ in
             arrPostsFiltered = !hasPostFilter ? arrPosts : arrPosts.filter { $0.TITLE.lowercased().contains(postFilter.lowercased()) }
         } ~ rx.disposeBag
