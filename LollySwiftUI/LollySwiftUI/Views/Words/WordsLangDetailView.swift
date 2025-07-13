@@ -39,6 +39,8 @@ struct WordsLangDetailView: View {
                     Text(vmEdit.itemEdit.ACCURACY)
                 }
             }
+            .navigationTitle("Words in Language (Edit)")
+            .navigationBarTitleDisplayMode(.inline)
             .navigationBarItems(leading: Button("Cancel", role: .cancel) {
                 showDetail.toggle()
             }, trailing: Button("Done") {

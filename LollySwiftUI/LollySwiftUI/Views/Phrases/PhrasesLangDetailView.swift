@@ -29,6 +29,8 @@ struct PhrasesLangDetailView: View {
                     TextField("", text: $vmEdit.itemEdit.TRANSLATION)
                 }
             }
+            .navigationTitle("Phrases in Language (Edit)")
+            .navigationBarTitleDisplayMode(.inline)
             .navigationBarItems(leading: Button("Cancel", role: .cancel) {
                 showDetail.toggle()
             }, trailing: Button("Done") {

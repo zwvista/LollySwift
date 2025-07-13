@@ -36,6 +36,8 @@ struct WordsUnitBatchEditView: View {
 //                TextField("SEQNUM", text: $vmEdit.itemEdit.SEQNUM)
             }
         }
+        .navigationTitle("Words in Unit (Batch)")
+        .navigationBarTitleDisplayMode(.inline)
         .navigationBarItems(leading: Button("Cancel", role: .cancel) {
             showBatch.toggle()
         }, trailing: Button("Done") {

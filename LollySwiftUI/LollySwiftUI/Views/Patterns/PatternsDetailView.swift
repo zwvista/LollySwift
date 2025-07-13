@@ -39,6 +39,8 @@ struct PatternsDetailView: View {
                     TextField("NOTE", text: $item.URL)
                 }
             }
+            .navigationTitle("Patterns in Language (Edit)")
+            .navigationBarTitleDisplayMode(.inline)
             .navigationBarItems(leading: Button("Cancel", role: .cancel) {
                 showDetail.toggle()
             })

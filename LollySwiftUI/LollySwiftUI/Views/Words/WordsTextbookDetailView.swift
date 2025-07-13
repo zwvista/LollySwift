@@ -72,6 +72,8 @@ struct WordsTextbookDetailView: View {
                     Text(vmEdit.itemEdit.ACCURACY)
                 }
             }
+            .navigationTitle("Words in Textbook (Edit)")
+            .navigationBarTitleDisplayMode(.inline)
             .navigationBarItems(leading: Button("Cancel", role: .cancel) {
                 showDetail.toggle()
             }, trailing: Button("Done") {
