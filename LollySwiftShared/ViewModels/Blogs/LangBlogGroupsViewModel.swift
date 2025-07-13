@@ -15,7 +15,7 @@ class LangBlogGroupsViewModel: LangBlogViewModel {
     override init(settings: SettingsViewModel, complete: @escaping () -> Void) {
         super.init(settings: settings, complete: complete)
         Task {
-            arrGroups = await MLangBlogGroup.getDataByLang(settings.selectedLang.ID)
+            await reloadGroups()
             complete()
         }
     }
@@ -23,7 +23,7 @@ class LangBlogGroupsViewModel: LangBlogViewModel {
     func selectGroup(_ group: MLangBlogGroup?, complete: @escaping () -> Void) {
         selectedGroup = group
         Task {
-            arrPosts = await MLangBlogPost.getDataByLangGroup(langid: vmSettings.selectedLang.ID, groupid: group?.ID ?? 0)
+            await reloadPosts()
             complete()
         }
     }
@@ -34,5 +34,13 @@ class LangBlogGroupsViewModel: LangBlogViewModel {
             postContent = (await MLangBlogPostContent.getDataById(blog?.ID ?? 0))?.CONTENT ?? ""
             complete()
         }
+    }
+
+    func reloadGroups() async {
+        arrGroups = await MLangBlogGroup.getDataByLang(vmSettings.selectedLang.ID)
+    }
+
+    func reloadPosts() async {
+        arrPosts = await MLangBlogPost.getDataByLangGroup(langid: vmSettings.selectedLang.ID, groupid: selectedGroup?.ID ?? 0)
     }
 }

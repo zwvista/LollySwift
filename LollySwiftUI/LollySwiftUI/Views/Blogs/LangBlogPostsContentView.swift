@@ -1,5 +1,5 @@
 //
-//  UnitBlogPostsView.swift
+//  LangBlogPostsContentView.swift
 //  LollySwiftUI
 //
 //  Created by 趙偉 on 2024/09/06.
@@ -7,22 +7,23 @@
 
 import SwiftUI
 
-struct UnitBlogPostsView: View {
+struct LangBlogPostsContentView: View {
     @Binding var navPath: NavigationPath
-    @StateObject var vm = UnitBlogPostsViewModel(settings: vmSettings) {}
+    @ObservedObject var vm: LangBlogPostsContentViewModel
+    @ObservedObject var vmGroup: LangBlogGroupsViewModel
     @State var webViewStore = WebViewStore()
     var body: some View {
         VStack(spacing: 0) {
             Spacer()
-            Picker("Unit", selection: $vm.selectedUnitIndex) {
-                ForEach(vm.arrUnits.indices, id: \.self) {
-                    Text(vm.arrUnits[$0].label)
+            Picker("LangBlogPost", selection: $vm.selectedLangBlogPostIndex) {
+                ForEach(vm.arrLangBlogPosts.indices, id: \.self) {
+                    Text(vm.arrLangBlogPosts[$0].TITLE)
                 }
             }
             .modifier(PickerModifier(backgroundColor: Color.color3))
-            .onChange(of: vm.selectedUnitIndex) {
+            .onChange(of: vm.selectedLangBlogPostIndex) {
                 Task {
-                    await selectedUnitIndexChanged()
+                    await selectedLangBlogPostIndexChanged()
                 }
             }
             WebView(webView: webViewStore.webView) {}
@@ -40,17 +41,17 @@ struct UnitBlogPostsView: View {
                     }
             )
         }
+        .navigationTitle("Language Blog Posts (Content)")
         .onAppear {
             Task {
-                await selectedUnitIndexChanged()
+                await selectedLangBlogPostIndexChanged()
             }
         }
     }
 
-    private func selectedUnitIndexChanged() async {
-        let content = await vmSettings.getBlogContent(unit: vm.selectedUnit)
-        let str = BlogPostEditViewModel.markedToHtml(text: content)
-        webViewStore.webView.loadHTMLString(str, baseURL: nil)
+    private func selectedLangBlogPostIndexChanged() async {
+        let content = BlogPostEditViewModel.markedToHtml(text: vmGroup.postContent)
+        webViewStore.webView.loadHTMLString(content, baseURL: nil)
     }
 
     private func swipe(_ delta: Int) {

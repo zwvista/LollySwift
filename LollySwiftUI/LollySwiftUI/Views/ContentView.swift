@@ -61,6 +61,8 @@ struct ContentView: View {
             getContentView(OnlineTextbooksView(navPath: $navPath))
         } else if bindTitle == titleUnitBlogPosts {
             getContentView(UnitBlogPostsView(navPath: $navPath))
+        } else if bindTitle == titleLangBlogGroups {
+            getContentView(LangBlogGroupsView(navPath: $navPath))
         }
     }
 }

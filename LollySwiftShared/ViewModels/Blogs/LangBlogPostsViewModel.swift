@@ -15,7 +15,7 @@ class LangBlogPostsViewModel: LangBlogViewModel {
     override init(settings: SettingsViewModel, complete: @escaping () -> Void) {
         super.init(settings: settings, complete: complete)
         Task {
-            arrPosts = await MLangBlogPost.getDataByLang(settings.selectedLang.ID)
+            await reload()
             complete()
         }
     }
@@ -34,5 +34,9 @@ class LangBlogPostsViewModel: LangBlogViewModel {
         Task {
             complete()
         }
+    }
+
+    func reload() async {
+        arrPosts = await MLangBlogPost.getDataByLang(vmSettings.selectedLang.ID)
     }
 }
