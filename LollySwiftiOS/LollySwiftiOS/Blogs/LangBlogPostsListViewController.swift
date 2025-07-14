@@ -18,6 +18,7 @@ class LangBlogPostsListViewController: UIViewController, UITableViewDelegate, UI
     let refreshControl = UIRefreshControl()
 
     var vm: LangBlogGroupsViewModel!
+    var item: MLangBlogGroup!
     var arrPosts: [MLangBlogPost] { vm.arrPostsFiltered }
 
     override func viewDidLoad() {
@@ -29,7 +30,7 @@ class LangBlogPostsListViewController: UIViewController, UITableViewDelegate, UI
 
     @objc func refresh(_ sender: UIRefreshControl) {
         view.showBlurLoader()
-        vm.selectGroup(vm.selectedGroup) { [unowned self] in
+        vm.selectGroup(item) { [unowned self] in
             sender.endRefreshing()
             view.removeBlurLoader()
         }
