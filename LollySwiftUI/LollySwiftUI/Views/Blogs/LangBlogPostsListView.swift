@@ -30,9 +30,8 @@ struct LangBlogPostsListView: View {
                             .foregroundColor(.blue)
                             .onTapGesture {
                                 selectedItem = item
-                                vm.selectPost(item) {
-                                    navPath.append(selectedItem)
-                                }
+                                vm.selectedPost = item
+                                navPath.append(selectedItem)
                             }
                     }
                     .contentShape(Rectangle())

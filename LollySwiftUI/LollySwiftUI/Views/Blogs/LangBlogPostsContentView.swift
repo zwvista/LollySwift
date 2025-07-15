@@ -21,40 +21,25 @@ struct LangBlogPostsContentView: View {
                 }
             }
             .modifier(PickerModifier(backgroundColor: Color.color3))
-            .onChange(of: vm.selectedLangBlogPostIndex) {
-                Task {
-                    await selectedLangBlogPostIndexChanged()
-                }
-            }
             WebView(webView: webViewStore.webView) {}
             .gesture(
                 DragGesture(minimumDistance: 0, coordinateSpace: .local)
                     .onEnded { value in
                         if value.translation.width < 0 {
                             // left
-                            swipe(-1)
+                            vm.next(-1)
                         }
                         if value.translation.width > 0 {
                             // right
-                            swipe(1)
+                            vm.next(1)
                         }
                     }
             )
         }
         .navigationTitle("Language Blog Posts (Content)")
-        .onAppear {
-            Task {
-                await selectedLangBlogPostIndexChanged()
-            }
+        .onChange(of: vmGroup.postContent) {
+            let content = BlogPostEditViewModel.markedToHtml(text: vmGroup.postContent)
+            webViewStore.webView.loadHTMLString(content, baseURL: nil)
         }
-    }
-
-    private func selectedLangBlogPostIndexChanged() async {
-        let content = BlogPostEditViewModel.markedToHtml(text: vmGroup.postContent)
-        webViewStore.webView.loadHTMLString(content, baseURL: nil)
-    }
-
-    private func swipe(_ delta: Int) {
-        vm.next(delta)
     }
 }

@@ -30,9 +30,8 @@ struct LangBlogGroupsView: View {
                             .foregroundColor(.blue)
                             .onTapGesture {
                                 selectedItem = item
-                                vm.selectGroup(item) {
-                                    navPath.append(selectedItem)
-                                }
+                                vm.selectedGroup = item
+                                navPath.append(selectedItem)
                             }
                     }
                     .contentShape(Rectangle())
