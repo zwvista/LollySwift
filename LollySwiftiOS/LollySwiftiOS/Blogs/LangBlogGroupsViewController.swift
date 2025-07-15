@@ -94,8 +94,8 @@ class LangBlogGroupsViewController: UIViewController, UITableViewDelegate, UITab
         if let controller = (segue.destination as? UINavigationController)?.topViewController as? LangBlogGroupsDetailViewController {
             controller.item = sender as? MLangBlogGroup
         } else if let controller = segue.destination as? LangBlogPostsListViewController {
+            vm.selectedGroup = sender as? MLangBlogGroup
             controller.vm = vm
-            controller.item = sender as? MLangBlogGroup
         }
     }
 

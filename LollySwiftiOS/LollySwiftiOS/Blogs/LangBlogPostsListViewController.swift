@@ -18,11 +18,16 @@ class LangBlogPostsListViewController: UIViewController, UITableViewDelegate, UI
     let refreshControl = UIRefreshControl()
 
     var vm: LangBlogGroupsViewModel!
-    var item: MLangBlogGroup!
     var arrPosts: [MLangBlogPost] { vm.arrPostsFiltered }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        vm.arrPostsFiltered_.subscribe { [unowned self] _ in
+            tableView.reloadData()
+        } ~ rx.disposeBag
+        _ = vm.postFilter_ <~> sbPostFilter.searchTextField.rx.textInput
+
         tableView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         refresh(refreshControl)
@@ -30,14 +35,10 @@ class LangBlogPostsListViewController: UIViewController, UITableViewDelegate, UI
 
     @objc func refresh(_ sender: UIRefreshControl) {
         view.showBlurLoader()
-        vm.selectGroup(item) { [unowned self] in
+        vm.reloadPosts().subscribe { [unowned self] in
             sender.endRefreshing()
             view.removeBlurLoader()
-        }
-        vm.arrPostsFiltered_.subscribe { [unowned self] _ in
-            tableView.reloadData()
         } ~ rx.disposeBag
-        _ = vm.postFilter_ <~> sbPostFilter.searchTextField.rx.textInput
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -95,6 +96,7 @@ class LangBlogPostsListViewController: UIViewController, UITableViewDelegate, UI
         if let controller = (segue.destination as? UINavigationController)?.topViewController as? LangBlogPostsDetailViewController {
             controller.item = sender as? MLangBlogPost
         } else if let controller = segue.destination as? LangBlogPostsContentViewController {
+            vm.selectedPost = sender as? MLangBlogPost
             let index = arrPosts.firstIndex(of: sender as! MLangBlogPost)!
             let (start, end) = getPreferredRangeFromArray(index: index, length: arrPosts.count, preferredLength: 50)
             controller.vm = LangBlogPostsContentViewModel(settings: vmSettings, arrLangBlogPosts: Array(arrPosts[start ..< end]), selectedLangBlogPostIndex: index) {}

@@ -15,25 +15,23 @@ class LangBlogGroupsViewModel: LangBlogViewModel {
 
     override init(settings: SettingsViewModel, complete: @escaping () -> Void) {
         super.init(settings: settings, complete: complete)
-        MLangBlogGroup.getDataByLang(settings.selectedLang.ID).subscribe { [unowned self] in
+        reloadGroups().subscribe {
+            complete()
+        } ~ rx.disposeBag
+        selectedGroup_.flatMap { [unowned self] _ in
+            reloadPosts()
+        }.subscribe() ~ rx.disposeBag
+    }
+
+    func reloadGroups() -> Single<()> {
+        MLangBlogGroup.getDataByLang(vmSettings.selectedLang.ID).map { [unowned self] in
             arrGroups = $0
-            complete()
-        } ~ rx.disposeBag
+        }
     }
 
-    func selectGroup(_ group: MLangBlogGroup?, complete: @escaping () -> Void) {
-        selectedGroup = group
-        MLangBlogPost.getDataByLangGroup(langid: vmSettings.selectedLang.ID, groupid: group?.ID ?? 0).subscribe { [unowned self] in
+    func reloadPosts() -> Single<()> {
+        MLangBlogPost.getDataByLangGroup(langid: vmSettings.selectedLang.ID, groupid: selectedGroup?.ID ?? 0).map { [unowned self] in
             arrPosts = $0
-            complete()
-        } ~ rx.disposeBag
-    }
-
-    func selectPost(_ post: MLangBlogPost?, complete: @escaping () -> Void) {
-        selectedPost = post
-        MLangBlogPostContent.getDataById(post?.ID ?? 0).subscribe { [unowned self] in
-            postContent = $0?.CONTENT ?? ""
-            complete()
-        } ~ rx.disposeBag
+        }
     }
 }
