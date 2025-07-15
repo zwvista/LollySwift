@@ -41,36 +41,24 @@ class LangBlogPostsContentViewController: UIViewController, WKUIDelegate, WKNavi
                 }
             })
             btnLangBlogPost.showsMenuAsPrimaryAction = true
-            Task {
-                await selectedLangBlogPostIndexChanged()
-            }
+            btnLangBlogPost.setTitle(String(vm.selectedLangBlogPost.TITLE), for: .normal)
+            vmGroup.selectedPost = vm.selectedLangBlogPost
         } ~ subscriptions
-    }
-
-    private func selectedLangBlogPostIndexChanged() async {
-        btnLangBlogPost.setTitle(String(vm.selectedLangBlogPost.TITLE), for: .normal)
-        vmGroup.selectPost(vm.selectedLangBlogPost) { [unowned self] in
-            wvBlogPost.loadHTMLString(BlogPostEditViewModel.markedToHtml(text: vmGroup.postContent), baseURL: nil)
-        }
+        vmGroup.$postContent.didSet.sink { [unowned self] postContent in
+            wvBlogPost.loadHTMLString(BlogPostEditViewModel.markedToHtml(text: postContent), baseURL: nil)
+        } ~ subscriptions
     }
 
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         true
     }
 
-    private func swipe(_ delta: Int) {
-        vm.next(delta)
-        Task {
-            await selectedLangBlogPostIndexChanged()
-        }
-    }
-
     @IBAction func swipeLeft(_ sender: UISwipeGestureRecognizer){
-        swipe(-1)
+        vm.next(-1)
     }
 
     @IBAction func swipeRight(_ sender: UISwipeGestureRecognizer){
-        swipe(1)
+        vm.next(1)
     }
 
     deinit {

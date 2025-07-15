@@ -14,17 +14,18 @@ import Then
 class LangBlogViewModel: NSObject, ObservableObject {
     var vmSettings: SettingsViewModel
     @Published var arrGroups = [MLangBlogGroup]()
-    var selectedGroup: MLangBlogGroup? = nil
+    @Published var selectedGroup: MLangBlogGroup? = nil
     @Published var groupFilter = ""
     @Published var arrGroupsFiltered = [MLangBlogGroup]()
     var hasGroupFilter: Bool { !groupFilter.isEmpty }
 
     @Published var arrPosts = [MLangBlogPost]()
-    var selectedPost: MLangBlogPost? = nil
+    @Published var selectedPost: MLangBlogPost? = nil
     @Published var postFilter = ""
     @Published var arrPostsFiltered = [MLangBlogPost]()
     var hasPostFilter: Bool { !postFilter.isEmpty }
-    var postContent = ""
+
+    @Published var postContent = ""
 
     var subscriptions = Set<AnyCancellable>()
 
@@ -37,6 +38,11 @@ class LangBlogViewModel: NSObject, ObservableObject {
         } ~ subscriptions
         $arrPosts.didSet.combineLatest($postFilter.didSet).sink { [unowned self] _ in
             arrPostsFiltered = !hasPostFilter ? arrPosts : arrPosts.filter { $0.TITLE.lowercased().contains(postFilter.lowercased()) }
+        } ~ subscriptions
+        $selectedPost.didSet.sink { [unowned self] post in
+            Task {
+                postContent = (await MLangBlogPostContent.getDataById(post?.ID ?? 0))?.CONTENT ?? ""
+            }
         } ~ subscriptions
     }
 

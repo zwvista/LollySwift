@@ -18,22 +18,11 @@ class LangBlogGroupsViewModel: LangBlogViewModel {
             await reloadGroups()
             complete()
         }
-    }
-
-    func selectGroup(_ group: MLangBlogGroup?, complete: @escaping () -> Void) {
-        selectedGroup = group
-        Task {
-            await reloadPosts()
-            complete()
-        }
-    }
-
-    func selectPost(_ blog: MLangBlogPost?, complete: @escaping () -> Void) {
-        selectedPost = blog
-        Task {
-            postContent = (await MLangBlogPostContent.getDataById(blog?.ID ?? 0))?.CONTENT ?? ""
-            complete()
-        }
+        $selectedGroup.didSet.sink { [unowned self] _ in
+            Task {
+                await reloadPosts()
+            }
+        } ~ subscriptions
     }
 
     func reloadGroups() async {

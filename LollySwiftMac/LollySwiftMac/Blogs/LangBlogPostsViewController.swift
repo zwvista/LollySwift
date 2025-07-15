@@ -16,9 +16,11 @@ class LangBlogPostsViewController: NSViewController, NSTableViewDataSource, NSTa
     @IBOutlet weak var tvGroups: NSTableView!
     @IBOutlet weak var wvPost: WKWebView!
     @IBOutlet weak var sfPostFilter: NSSearchField!
+    @IBOutlet weak var sfGroupFilter: NSSearchField!
 
     var vm: LangBlogPostsViewModel!
     var arrPosts: [MLangBlogPost] { vm.arrPostsFiltered }
+    var arrGroups: [MLangBlogGroup] { vm.arrGroupsFiltered }
 
     var subscriptions = Set<AnyCancellable>()
 
@@ -35,17 +37,21 @@ class LangBlogPostsViewController: NSViewController, NSTableViewDataSource, NSTa
 
     @IBAction func refreshTableView(_ sender: Any) {
         vm = LangBlogPostsViewModel(settings: AppDelegate.theSettingsViewModel) {}
-        vm.$arrGroups.didSet.sink { [unowned self] _ in
-            tvGroups.reloadData()
-        } ~ subscriptions
         vm.$arrPostsFiltered.didSet.sink { [unowned self] _ in
             tvPosts.reloadData()
         } ~ subscriptions
+        vm.$arrGroupsFiltered.didSet.sink { [unowned self] _ in
+            tvGroups.reloadData()
+        } ~ subscriptions
         vm.$postFilter <~> sfPostFilter.textProperty ~ subscriptions
+        vm.$groupFilter <~> sfGroupFilter.textProperty ~ subscriptions
+        vm.$postContent.didSet.sink { [unowned self] _ in
+            wvPost.loadHTMLString(BlogPostEditViewModel.markedToHtml(text: vm.postContent), baseURL: nil)
+        } ~ subscriptions
     }
 
     func numberOfRows(in tableView: NSTableView) -> Int {
-        tableView === tvPosts ? arrPosts.count : vm.arrGroups.count
+        tableView === tvPosts ? arrPosts.count : arrGroups.count
     }
 
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
@@ -55,7 +61,7 @@ class LangBlogPostsViewController: NSViewController, NSTableViewDataSource, NSTa
             let item = arrPosts[row]
             cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
         } else {
-            let item = vm.arrGroups[row]
+            let item = arrGroups[row]
             cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
         }
         return cell
@@ -65,12 +71,10 @@ class LangBlogPostsViewController: NSViewController, NSTableViewDataSource, NSTa
         let tv = notification.object as! NSTableView
         if tv === tvPosts {
             let i = tvPosts.selectedRow
-            vm.selectPost(i == -1 ? nil : arrPosts[i]) { [unowned self] in
-                wvPost.loadHTMLString(BlogPostEditViewModel.markedToHtml(text: vm.postContent), baseURL: nil)
-            }
+            vm.selectedPost = i == -1 ? nil : arrPosts[i]
         } else {
             let i = tvGroups.selectedRow
-            vm.selectGroup(i == -1 ? nil : vm.arrGroups[i]) {}
+            vm.selectedGroup = i == -1 ? nil : arrGroups[i]
         }
     }
 

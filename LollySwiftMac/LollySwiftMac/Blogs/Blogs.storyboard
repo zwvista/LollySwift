@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="23727" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23504"/>
-        <plugIn identifier="com.apple.WebKit2IBPlugin" version="23504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23727"/>
+        <plugIn identifier="com.apple.WebKit2IBPlugin" version="23727"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -304,7 +304,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xk5-fS-TPc">
-                                <rect key="frame" x="0.0" y="748" width="137" height="32"/>
+                                <rect key="frame" x="0.0" y="748" width="273" height="32"/>
                                 <subviews>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mKU-U4-ufF">
                                         <rect key="frame" x="-1" y="-1" width="44" height="32"/>
@@ -313,12 +313,30 @@
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                     </button>
-                                    <searchField focusRingType="none" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SHW-Be-Pd6">
+                                    <searchField focusRingType="none" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sGZ-pB-nzs">
                                         <rect key="frame" x="41" y="4" width="96" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="96" id="81c-ON-MRU"/>
+                                        </constraints>
+                                        <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" placeholderString="Group Filter" usesSingleLineMode="YES" bezelStyle="round" sendsWholeSearchString="YES" id="xOK-eC-1eb">
+                                            <font key="font" usesAppearanceFont="YES"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </searchFieldCell>
+                                    </searchField>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5dK-Oa-Npn">
+                                        <rect key="frame" x="135" y="-1" width="44" height="32"/>
+                                        <buttonCell key="cell" type="push" title="Refresh" bezelStyle="rounded" image="NSRefreshTemplate" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="A1W-EQ-o8p">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                    </button>
+                                    <searchField focusRingType="none" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SHW-Be-Pd6">
+                                        <rect key="frame" x="177" y="4" width="96" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="96" id="vob-ll-A4m"/>
                                         </constraints>
-                                        <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" placeholderString="Filter" usesSingleLineMode="YES" bezelStyle="round" sendsWholeSearchString="YES" id="dI5-Jf-h6n">
+                                        <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" placeholderString="Post Filter" usesSingleLineMode="YES" bezelStyle="round" sendsWholeSearchString="YES" id="dI5-Jf-h6n">
                                             <font key="font" usesAppearanceFont="YES"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -332,8 +350,12 @@
                                 <visibilityPriorities>
                                     <integer value="1000"/>
                                     <integer value="1000"/>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
                                 </visibilityPriorities>
                                 <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                 </customSpacing>
@@ -341,19 +363,19 @@
                             <splitView arrangesAllSubviews="NO" dividerStyle="paneSplitter" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KAf-f3-jv9">
                                 <rect key="frame" x="0.0" y="0.0" width="1000" height="748"/>
                                 <subviews>
-                                    <customView misplaced="YES" id="gpu-WQ-leA">
+                                    <customView id="gpu-WQ-leA">
                                         <rect key="frame" x="0.0" y="0.0" width="499" height="748"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
                                             <splitView arrangesAllSubviews="NO" dividerStyle="paneSplitter" translatesAutoresizingMaskIntoConstraints="NO" id="pia-wi-Rnb">
-                                                <rect key="frame" x="0.0" y="284" width="499" height="748"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="499" height="748"/>
                                                 <subviews>
-                                                    <customView misplaced="YES" id="LTt-bR-cI0">
+                                                    <customView id="LTt-bR-cI0">
                                                         <rect key="frame" x="0.0" y="0.0" width="499" height="361"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
                                                             <scrollView autohidesScrollers="YES" horizontalLineScroll="24" horizontalPageScroll="10" verticalLineScroll="24" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cRJ-hS-PC6">
-                                                                <rect key="frame" x="0.0" y="139" width="499" height="361"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="499" height="361"/>
                                                                 <clipView key="contentView" id="Kon-qh-uVb">
                                                                     <rect key="frame" x="1" y="1" width="497" height="359"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -439,7 +461,7 @@
                                                                     </subviews>
                                                                 </clipView>
                                                                 <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="1Ik-02-QPQ">
-                                                                    <rect key="frame" x="1" y="272" width="497" height="16"/>
+                                                                    <rect key="frame" x="1" y="344" width="497" height="16"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                 </scroller>
                                                                 <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="hL4-qR-0D7">
@@ -462,12 +484,12 @@
                                                             <constraint firstAttribute="bottom" secondItem="cRJ-hS-PC6" secondAttribute="bottom" id="c4L-j1-pOs"/>
                                                         </constraints>
                                                     </customView>
-                                                    <customView misplaced="YES" id="Cfk-Jx-Gj6">
+                                                    <customView id="Cfk-Jx-Gj6">
                                                         <rect key="frame" x="0.0" y="371" width="499" height="377"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
                                                             <scrollView autohidesScrollers="YES" horizontalLineScroll="24" horizontalPageScroll="10" verticalLineScroll="24" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oNj-Cn-KAN">
-                                                                <rect key="frame" x="0.0" y="145" width="499" height="377"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="499" height="377"/>
                                                                 <clipView key="contentView" id="A7c-xo-w5i">
                                                                     <rect key="frame" x="1" y="1" width="497" height="375"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -622,12 +644,12 @@
                                             <constraint firstAttribute="trailing" secondItem="pia-wi-Rnb" secondAttribute="trailing" id="jhF-gI-Ygi"/>
                                         </constraints>
                                     </customView>
-                                    <customView misplaced="YES" id="gAC-9L-1MU">
+                                    <customView id="gAC-9L-1MU">
                                         <rect key="frame" x="509" y="0.0" width="491" height="748"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
                                             <wkWebView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9dB-m0-aIn">
-                                                <rect key="frame" x="0.0" y="284" width="491" height="748"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="491" height="748"/>
                                                 <wkWebViewConfiguration key="configuration">
                                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
                                                     <wkPreferences key="preferences"/>
@@ -658,6 +680,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="sfGroupFilter" destination="sGZ-pB-nzs" id="ceC-g9-bPe"/>
                         <outlet property="sfPostFilter" destination="SHW-Be-Pd6" id="GlO-tf-Spn"/>
                         <outlet property="tvGroups" destination="Two-Cm-jaa" id="Cc8-5A-UN8"/>
                         <outlet property="tvPosts" destination="9rv-gn-VfO" id="OBB-op-cPB"/>
@@ -988,7 +1011,7 @@ Gw
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wxm-Ud-v6G">
-                                <rect key="frame" x="0.0" y="568" width="137" height="32"/>
+                                <rect key="frame" x="0.0" y="568" width="273" height="32"/>
                                 <subviews>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="x2d-r9-hj4">
                                         <rect key="frame" x="-1" y="-1" width="44" height="32"/>
@@ -1002,7 +1025,25 @@ Gw
                                         <constraints>
                                             <constraint firstAttribute="width" constant="96" id="irD-GR-SDu"/>
                                         </constraints>
-                                        <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" placeholderString="Filter" usesSingleLineMode="YES" bezelStyle="round" sendsWholeSearchString="YES" id="7Yb-2G-Ykp">
+                                        <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" placeholderString="Post Filter" usesSingleLineMode="YES" bezelStyle="round" sendsWholeSearchString="YES" id="7Yb-2G-Ykp">
+                                            <font key="font" usesAppearanceFont="YES"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </searchFieldCell>
+                                    </searchField>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5QF-Rk-4FL">
+                                        <rect key="frame" x="135" y="-1" width="44" height="32"/>
+                                        <buttonCell key="cell" type="push" title="Refresh" bezelStyle="rounded" image="NSRefreshTemplate" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="DSi-5k-B8X">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                    </button>
+                                    <searchField focusRingType="none" verticalHuggingPriority="750" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V2p-nU-580">
+                                        <rect key="frame" x="177" y="4" width="96" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="96" id="JHa-Jg-Q4M"/>
+                                        </constraints>
+                                        <searchFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" placeholderString="Group Filter" usesSingleLineMode="YES" bezelStyle="round" sendsWholeSearchString="YES" id="AaA-Yg-qfq">
                                             <font key="font" usesAppearanceFont="YES"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1016,8 +1057,12 @@ Gw
                                 <visibilityPriorities>
                                     <integer value="1000"/>
                                     <integer value="1000"/>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
                                 </visibilityPriorities>
                                 <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                 </customSpacing>
@@ -1025,19 +1070,19 @@ Gw
                             <splitView arrangesAllSubviews="NO" dividerStyle="paneSplitter" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4fM-3D-YD9">
                                 <rect key="frame" x="0.0" y="0.0" width="1000" height="568"/>
                                 <subviews>
-                                    <customView misplaced="YES" id="SYO-8j-t9f">
+                                    <customView id="SYO-8j-t9f">
                                         <rect key="frame" x="0.0" y="0.0" width="499" height="568"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
                                             <splitView arrangesAllSubviews="NO" dividerStyle="paneSplitter" translatesAutoresizingMaskIntoConstraints="NO" id="Afq-ZQ-Ldw">
-                                                <rect key="frame" x="0.0" y="-32" width="499" height="568"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="499" height="568"/>
                                                 <subviews>
-                                                    <customView misplaced="YES" id="hpw-F4-zOO">
+                                                    <customView id="hpw-F4-zOO">
                                                         <rect key="frame" x="0.0" y="0.0" width="499" height="273"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
                                                             <scrollView autohidesScrollers="YES" horizontalLineScroll="24" horizontalPageScroll="10" verticalLineScroll="24" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6vT-DP-aJl">
-                                                                <rect key="frame" x="0.0" y="-16" width="499" height="273"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="499" height="273"/>
                                                                 <clipView key="contentView" id="RBS-16-U3f">
                                                                     <rect key="frame" x="1" y="1" width="497" height="271"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1178,12 +1223,12 @@ Gw
                                                             <constraint firstAttribute="bottom" secondItem="6vT-DP-aJl" secondAttribute="bottom" id="rCD-JC-bMx"/>
                                                         </constraints>
                                                     </customView>
-                                                    <customView misplaced="YES" id="6PF-uG-d5b">
+                                                    <customView id="6PF-uG-d5b">
                                                         <rect key="frame" x="0.0" y="283" width="499" height="285"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
                                                             <scrollView autohidesScrollers="YES" horizontalLineScroll="24" horizontalPageScroll="10" verticalLineScroll="24" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PJ5-b5-4h3">
-                                                                <rect key="frame" x="0.0" y="-16" width="499" height="285"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="499" height="285"/>
                                                                 <clipView key="contentView" id="t1n-fp-Tac">
                                                                     <rect key="frame" x="1" y="1" width="497" height="283"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1269,7 +1314,7 @@ Gw
                                                                     </subviews>
                                                                 </clipView>
                                                                 <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="6Kt-D0-BdW">
-                                                                    <rect key="frame" x="1" y="284" width="497" height="16"/>
+                                                                    <rect key="frame" x="1" y="268" width="497" height="16"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                 </scroller>
                                                                 <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="eh7-tz-kRn">
@@ -1306,12 +1351,12 @@ Gw
                                             <constraint firstAttribute="trailing" secondItem="Afq-ZQ-Ldw" secondAttribute="trailing" id="iLf-0Y-AkJ"/>
                                         </constraints>
                                     </customView>
-                                    <customView misplaced="YES" id="OnI-N9-2PO">
+                                    <customView id="OnI-N9-2PO">
                                         <rect key="frame" x="509" y="0.0" width="491" height="568"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <subviews>
                                             <wkWebView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zO0-gc-ERQ">
-                                                <rect key="frame" x="0.0" y="-32" width="491" height="568"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="491" height="568"/>
                                                 <wkWebViewConfiguration key="configuration">
                                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
                                                     <wkPreferences key="preferences"/>
@@ -1342,6 +1387,7 @@ Gw
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="sfGroupFilter" destination="V2p-nU-580" id="Uv1-Id-wNd"/>
                         <outlet property="sfPostFilter" destination="0FZ-wR-uOP" id="FMR-IW-RMr"/>
                         <outlet property="tvGroups" destination="Ouj-79-6cC" id="c7F-9m-6ca"/>
                         <outlet property="tvPosts" destination="Vhg-3W-JoQ" id="zL3-lq-QzP"/>
