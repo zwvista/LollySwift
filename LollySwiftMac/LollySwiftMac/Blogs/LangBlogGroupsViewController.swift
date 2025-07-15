@@ -45,8 +45,8 @@ class LangBlogGroupsViewController: NSViewController, NSTableViewDataSource, NST
         } ~ subscriptions
         vm.$groupFilter <~> sfGroupFilter.textProperty ~ subscriptions
         vm.$postFilter <~> sfPostFilter.textProperty ~ subscriptions
-        vm.$postContent.didSet.sink { [unowned self] _ in
-            wvPost.loadHTMLString(BlogPostEditViewModel.markedToHtml(text: vm.postContent), baseURL: nil)
+        vm.$postContent.didSet.sink { [unowned self] in
+            wvPost.loadHTMLString(BlogPostEditViewModel.markedToHtml(text: $0), baseURL: nil)
         } ~ subscriptions
     }
 
