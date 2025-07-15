@@ -37,6 +37,8 @@
 		8C6BFCEF2C9852290094F927 /* UnitBlogPostsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6BFCE62C9852290094F927 /* UnitBlogPostsViewModel.swift */; };
 		8C6BFCF32C9852470094F927 /* Blogs.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C6BFCF02C9852470094F927 /* Blogs.storyboard */; };
 		8C6BFCF42C9852470094F927 /* UnitBlogPostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6BFCF12C9852470094F927 /* UnitBlogPostsViewController.swift */; };
+		8C7AFC6C2E26A52F00C0CF4E /* MLangBlogPostContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7AFC6B2E26A52F00C0CF4E /* MLangBlogPostContent.swift */; };
+		8C7AFC6D2E26A52F00C0CF4E /* MLangBlogPostContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7AFC6B2E26A52F00C0CF4E /* MLangBlogPostContent.swift */; };
 		8CA47F202968EDC4006CF4A2 /* GlobalUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA47F1F2968EDC4006CF4A2 /* GlobalUser.swift */; };
 		8CA47F242968F001006CF4A2 /* GlobalUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA47F1F2968EDC4006CF4A2 /* GlobalUser.swift */; };
 		8CB025932096CB3E0087462E /* LeftMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB025912096CB3E0087462E /* LeftMenuViewController.swift */; };
@@ -229,6 +231,7 @@
 		8C6BFCE62C9852290094F927 /* UnitBlogPostsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitBlogPostsViewModel.swift; sourceTree = "<group>"; };
 		8C6BFCF02C9852470094F927 /* Blogs.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Blogs.storyboard; sourceTree = "<group>"; };
 		8C6BFCF12C9852470094F927 /* UnitBlogPostsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnitBlogPostsViewController.swift; sourceTree = "<group>"; };
+		8C7AFC6B2E26A52F00C0CF4E /* MLangBlogPostContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLangBlogPostContent.swift; sourceTree = "<group>"; };
 		8CA47F1F2968EDC4006CF4A2 /* GlobalUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalUser.swift; sourceTree = "<group>"; };
 		8CB025912096CB3E0087462E /* LeftMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftMenuViewController.swift; sourceTree = "<group>"; };
 		8CB025922096CB3E0087462E /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
@@ -482,10 +485,11 @@
 		8CF294BB2A8ED4CA00E8D195 /* Blogs */ = {
 			isa = PBXGroup;
 			children = (
-				8CF294BC2A8ED4CA00E8D195 /* MLangBlogGroup.swift */,
 				8CF294BD2A8ED4CA00E8D195 /* MLangBlogGP.swift */,
-				8CF294BE2A8ED4CA00E8D195 /* MUnitBlogPost.swift */,
+				8CF294BC2A8ED4CA00E8D195 /* MLangBlogGroup.swift */,
 				8CF294BF2A8ED4CA00E8D195 /* MLangBlogPost.swift */,
+				8C7AFC6B2E26A52F00C0CF4E /* MLangBlogPostContent.swift */,
+				8CF294BE2A8ED4CA00E8D195 /* MUnitBlogPost.swift */,
 			);
 			path = Blogs;
 			sourceTree = "<group>";
@@ -918,6 +922,7 @@
 				8CCFA68829B4C74F004748B8 /* OnlineTextbooksViewController.swift in Sources */,
 				95CED3B4221170C20094622F /* iOSApi.swift in Sources */,
 				8CF294C12A8ED4CA00E8D195 /* MLangBlogGP.swift in Sources */,
+				8C7AFC6C2E26A52F00C0CF4E /* MLangBlogPostContent.swift in Sources */,
 				9591924D258D004F0070DBFD /* MLanguage.swift in Sources */,
 				95837E9624DF35EB00B5D2AE /* WordsUnitDetailViewModel.swift in Sources */,
 				95F0FFE524C957AA00509DF3 /* WordsDictViewModel.swift in Sources */,
@@ -1024,6 +1029,7 @@
 				95F0000524C95B1000509DF3 /* SingleWordViewModel.swift in Sources */,
 				DE01394226C657C5009C7209 /* RxCodableAlamofire.swift in Sources */,
 				9501FB932593395900C1B13B /* MUserSetting.swift in Sources */,
+				8C7AFC6D2E26A52F00C0CF4E /* MLangBlogPostContent.swift in Sources */,
 				95FBF5342221A85100AE040C /* CommonApi.swift in Sources */,
 				9501FB8F2593395900C1B13B /* MTextbook.swift in Sources */,
 				951F7F5B25EE5CDF0051E94E /* WordsUnitBatchEditViewModel.swift in Sources */,
