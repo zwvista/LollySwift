@@ -39,6 +39,7 @@
 		8C6BFCB22C8A6F1F0094F927 /* OnlineTextbooksWebPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6BFCB12C8A6F1F0094F927 /* OnlineTextbooksWebPageViewModel.swift */; };
 		8C6BFCC42C94F9170094F927 /* UnitBlogPostsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6BFCC32C94F9170094F927 /* UnitBlogPostsViewModel.swift */; };
 		8C6BFCC82C97A1510094F927 /* BlogPostEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6BFCC72C97A1510094F927 /* BlogPostEditViewModel.swift */; };
+		8C7AFC722E26A62300C0CF4E /* MLangBlogPostContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7AFC712E26A62300C0CF4E /* MLangBlogPostContent.swift */; };
 		8C7F008E294E100F009D6A90 /* WordsLangView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7F0087294E100F009D6A90 /* WordsLangView.swift */; };
 		8C7F008F294E100F009D6A90 /* WordsUnitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7F0088294E100F009D6A90 /* WordsUnitView.swift */; };
 		8C7F0090294E100F009D6A90 /* PhrasesLangView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7F008A294E100F009D6A90 /* PhrasesLangView.swift */; };
@@ -173,6 +174,7 @@
 		8C6BFCB12C8A6F1F0094F927 /* OnlineTextbooksWebPageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnlineTextbooksWebPageViewModel.swift; sourceTree = "<group>"; };
 		8C6BFCC32C94F9170094F927 /* UnitBlogPostsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitBlogPostsViewModel.swift; sourceTree = "<group>"; };
 		8C6BFCC72C97A1510094F927 /* BlogPostEditViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlogPostEditViewModel.swift; sourceTree = "<group>"; };
+		8C7AFC712E26A62300C0CF4E /* MLangBlogPostContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLangBlogPostContent.swift; sourceTree = "<group>"; };
 		8C7F0087294E100F009D6A90 /* WordsLangView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsLangView.swift; sourceTree = "<group>"; };
 		8C7F0088294E100F009D6A90 /* WordsUnitView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordsUnitView.swift; sourceTree = "<group>"; };
 		8C7F008A294E100F009D6A90 /* PhrasesLangView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhrasesLangView.swift; sourceTree = "<group>"; };
@@ -427,10 +429,11 @@
 		8CF294AE2A8ECDBF00E8D195 /* Blogs */ = {
 			isa = PBXGroup;
 			children = (
-				8CF294AF2A8ECDBF00E8D195 /* MLangBlogGroup.swift */,
 				8CF294B02A8ECDBF00E8D195 /* MLangBlogGP.swift */,
-				8CF294B12A8ECDBF00E8D195 /* MUnitBlogPost.swift */,
+				8CF294AF2A8ECDBF00E8D195 /* MLangBlogGroup.swift */,
 				8CF294B22A8ECDBF00E8D195 /* MLangBlogPost.swift */,
+				8C7AFC712E26A62300C0CF4E /* MLangBlogPostContent.swift */,
+				8CF294B12A8ECDBF00E8D195 /* MUnitBlogPost.swift */,
 			);
 			path = Blogs;
 			sourceTree = "<group>";
@@ -903,6 +906,7 @@
 				8C60AB3C295E4CF800D5CAE7 /* WordsTextbookView.swift in Sources */,
 				8C7F008F294E100F009D6A90 /* WordsUnitView.swift in Sources */,
 				95919222258D00190070DBFD /* MUnitWord.swift in Sources */,
+				8C7AFC722E26A62300C0CF4E /* MLangBlogPostContent.swift in Sources */,
 				8C0824002E2343DE00ABBD10 /* LangBlogPostsDetailView.swift in Sources */,
 				8CCFA66B29B43B5E004748B8 /* TextbooksViewModel.swift in Sources */,
 				95F632DB2588BC93000CFD23 /* SearchBar.swift in Sources */,
