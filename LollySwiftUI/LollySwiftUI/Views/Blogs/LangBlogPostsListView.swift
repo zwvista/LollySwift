@@ -30,8 +30,7 @@ struct LangBlogPostsListView: View {
                             .foregroundColor(.blue)
                             .onTapGesture {
                                 selectedItem = item
-                                vm.selectedPost = item
-                                navPath.append(selectedItem)
+                                showContent()
                             }
                     }
                     .contentShape(Rectangle())
@@ -47,28 +46,33 @@ struct LangBlogPostsListView: View {
                     }
                 }
             }
-            .refreshable {
-                await vm.reloadPosts()
-            }
-            .alert(Text("Language Blog Post"), isPresented: $showItemMore, actions: {
-                Button("Edit") {
-                    showDetail.toggle()
-                }
-                Button("Posts") {
-                    navPath.append(selectedItem)
-                }
-            }, message: {
-                Text(selectedItem.TITLE)
-            })
-            .navigationDestination(for: MLangBlogPost.self) { item in
-                let index = vm.arrPostsFiltered.firstIndex(of: item)!
-                let (start, end) = getPreferredRangeFromArray(index: index, length: vm.arrPostsFiltered.count, preferredLength: 50)
-                LangBlogPostsContentView(navPath: $navPath, vm: LangBlogPostsContentViewModel(settings: vmSettings, arrLangBlogPosts: Array(vm.arrPostsFiltered[start ..< end]), selectedLangBlogPostIndex: index) {}, vmGroup: vm)
-            }
-            .sheet(isPresented: $showDetail) {
-                LangBlogPostsDetailView(item: selectedItem, showDetail: $showDetail)
-            }
         }
-        .navigationTitle("Language Blog Posts (Group)")
+        .refreshable {
+            await vm.reloadPosts()
+        }
+        .alert(Text("Language Blog Post"), isPresented: $showItemMore, actions: {
+            Button("Edit") {
+                showDetail.toggle()
+            }
+            Button("Show Content") {
+                showContent()
+            }
+        }, message: {
+            Text(selectedItem.TITLE)
+        })
+        .navigationDestination(for: MLangBlogPost.self) { item in
+            let index = vm.arrPostsFiltered.firstIndex(of: item)!
+            let (start, end) = getPreferredRangeFromArray(index: index, length: vm.arrPostsFiltered.count, preferredLength: 50)
+            LangBlogPostsContentView(navPath: $navPath, vm: LangBlogPostsContentViewModel(settings: vmSettings, arrLangBlogPosts: Array(vm.arrPostsFiltered[start ..< end]), selectedLangBlogPostIndex: index) {}, vmGroup: vm)
+        }
+        .sheet(isPresented: $showDetail) {
+            LangBlogPostsDetailView(item: selectedItem, showDetail: $showDetail)
+        }
+        .navigationTitle("Language Blog Posts (List)")
+    }
+
+    private func showContent() {
+        vm.selectedPost = selectedItem
+        navPath.append(selectedItem)
     }
 }

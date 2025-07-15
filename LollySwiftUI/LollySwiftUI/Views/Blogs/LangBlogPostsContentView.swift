@@ -41,5 +41,8 @@ struct LangBlogPostsContentView: View {
             let content = BlogPostEditViewModel.markedToHtml(text: vmGroup.postContent)
             webViewStore.webView.loadHTMLString(content, baseURL: nil)
         }
+        .onDisappear {
+            vmGroup.selectedPost = nil
+        }
     }
 }

@@ -30,8 +30,7 @@ struct LangBlogGroupsView: View {
                             .foregroundColor(.blue)
                             .onTapGesture {
                                 selectedItem = item
-                                vm.selectedGroup = item
-                                navPath.append(selectedItem)
+                                showPosts()
                             }
                     }
                     .contentShape(Rectangle())
@@ -47,25 +46,31 @@ struct LangBlogGroupsView: View {
                     }
                 }
             }
-            .refreshable {
-                await vm.reloadGroups()
-            }
-            .alert(Text("Language Blog Group"), isPresented: $showItemMore, actions: {
-                Button("Edit") {
-                    showDetail.toggle()
-                }
-                Button("Posts") {
-                    navPath.append(selectedItem)
-                }
-            }, message: {
-                Text(selectedItem.GROUPNAME)
-            })
-            .navigationDestination(for: MLangBlogGroup.self) { item in
-                LangBlogPostsListView(navPath: $navPath, vm: vm)
-            }
-            .sheet(isPresented: $showDetail) {
-                LangBlogGroupsDetailView(item: selectedItem, showDetail: $showDetail)
-            }
         }
+        .refreshable {
+            await vm.reloadGroups()
+        }
+        .alert(Text("Language Blog Group"), isPresented: $showItemMore, actions: {
+            Button("Edit") {
+                showDetail.toggle()
+            }
+            Button("Show Posts") {
+                showPosts()
+            }
+        }, message: {
+            Text(selectedItem.GROUPNAME)
+        })
+        .navigationTitle("Language Blog Groups")
+        .navigationDestination(for: MLangBlogGroup.self) { item in
+            LangBlogPostsListView(navPath: $navPath, vm: vm)
+        }
+        .sheet(isPresented: $showDetail) {
+            LangBlogGroupsDetailView(item: selectedItem, showDetail: $showDetail)
+        }
+    }
+
+    private func showPosts() {
+        vm.selectedGroup = selectedItem
+        navPath.append(selectedItem)
     }
 }

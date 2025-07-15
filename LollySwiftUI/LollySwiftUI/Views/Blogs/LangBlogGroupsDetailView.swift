@@ -24,6 +24,8 @@ struct LangBlogGroupsDetailView: View {
                     TextField("GROUP", text: $item.GROUPNAME)
                 }
             }
+            .navigationTitle("Language Blog Groups(Detail)")
+            .navigationBarTitleDisplayMode(.inline)
             .navigationBarItems(leading: Button("Cancel", role: .cancel) {
                 showDetail.toggle()
             })
