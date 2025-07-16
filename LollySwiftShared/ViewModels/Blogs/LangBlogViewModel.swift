@@ -34,10 +34,10 @@ class LangBlogViewModel: NSObject {
     var arrPostsFiltered: [MLangBlogPost] { get { arrPostsFiltered_.value } set { arrPostsFiltered_.accept(newValue) } }
     var hasPostFilter: Bool { !postFilter.isEmpty }
 
-    let postContent_ = BehaviorRelay(value: "")
-    var postContent: String { get { postContent_.value } set { postContent_.accept(newValue) } }
+    let postHtml_ = BehaviorRelay(value: "")
+    var postHtml: String { get { postHtml_.value } set { postHtml_.accept(newValue) } }
 
-    init(settings: SettingsViewModel, complete: @escaping () -> Void) {
+    init(settings: SettingsViewModel) {
         vmSettings = settings
         super.init()
 
@@ -50,7 +50,8 @@ class LangBlogViewModel: NSObject {
         selectedPost_.flatMap {
             MLangBlogPostContent.getDataById($0?.ID ?? 0)
         }.subscribe { [unowned self] in
-            postContent = $0?.CONTENT ?? ""
+            let str = $0?.CONTENT ?? ""
+            postHtml = BlogPostEditViewModel.markedToHtml(text: str)
         } ~ rx.disposeBag
     }
 

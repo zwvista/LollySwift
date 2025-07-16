@@ -13,11 +13,8 @@ import Then
 
 class LangBlogGroupsViewModel: LangBlogViewModel {
 
-    override init(settings: SettingsViewModel, complete: @escaping () -> Void) {
-        super.init(settings: settings, complete: complete)
-        reloadGroups().subscribe {
-            complete()
-        } ~ rx.disposeBag
+    override init(settings: SettingsViewModel) {
+        super.init(settings: settings)
         selectedGroup_.flatMap { [unowned self] _ in
             reloadPosts()
         }.subscribe() ~ rx.disposeBag

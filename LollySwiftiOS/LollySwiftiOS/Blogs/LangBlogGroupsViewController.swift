@@ -17,11 +17,16 @@ class LangBlogGroupsViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet weak var sbGroupFilter: UISearchBar!
     let refreshControl = UIRefreshControl()
 
-    var vm: LangBlogGroupsViewModel!
+    var vm = LangBlogGroupsViewModel(settings: vmSettings)
     var arrGroups: [MLangBlogGroup] { vm.arrGroupsFiltered }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        vm.arrGroupsFiltered_.subscribe { [unowned self] _ in
+            tableView.reloadData()
+        } ~ rx.disposeBag
+        _ = vm.groupFilter_ <~> sbGroupFilter.searchTextField.rx.textInput
+
         tableView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         refresh(refreshControl)
@@ -29,14 +34,10 @@ class LangBlogGroupsViewController: UIViewController, UITableViewDelegate, UITab
 
     @objc func refresh(_ sender: UIRefreshControl) {
         view.showBlurLoader()
-        vm = LangBlogGroupsViewModel(settings: vmSettings) { [unowned self] in
+        vm.reloadGroups().subscribe { [unowned self] in
             sender.endRefreshing()
             view.removeBlurLoader()
-        }
-        vm.arrGroupsFiltered_.subscribe { [unowned self] _ in
-            tableView.reloadData()
         } ~ rx.disposeBag
-        _ = vm.groupFilter_ <~> sbGroupFilter.searchTextField.rx.textInput
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

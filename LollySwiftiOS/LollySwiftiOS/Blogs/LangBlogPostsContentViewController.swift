@@ -18,7 +18,7 @@ class LangBlogPostsContentViewController: UIViewController, WKUIDelegate, WKNavi
     @IBOutlet weak var btnLangBlogPost: UIButton!
     weak var wvBlogPost: WKWebView!
 
-    var vmGroup: LangBlogGroupsViewModel!
+    var vmGroups: LangBlogGroupsViewModel!
     var vm: LangBlogPostsContentViewModel!
     
     override func viewDidLoad() {
@@ -43,10 +43,10 @@ class LangBlogPostsContentViewController: UIViewController, WKUIDelegate, WKNavi
             })
             btnLangBlogPost.showsMenuAsPrimaryAction = true
             btnLangBlogPost.setTitle(String(vm.selectedLangBlogPost.TITLE), for: .normal)
-            vmGroup.selectedPost = vm.selectedLangBlogPost
+            vmGroups.selectedPost = vm.selectedLangBlogPost
         } ~ rx.disposeBag
-        vmGroup.postContent_.subscribe { [unowned self] in
-            wvBlogPost.loadHTMLString(BlogPostEditViewModel.markedToHtml(text: $0), baseURL: nil)
+        vmGroups.postHtml_.subscribe { [unowned self] in
+            wvBlogPost.loadHTMLString($0, baseURL: nil)
         } ~ rx.disposeBag
     }
 

@@ -38,10 +38,10 @@ class BlogPostEditViewModel: NSObject {
     private static func htmlE2With(_ s: String) -> String { html2With(s) }
     private static func htmlIWith(_ s: String) -> String { "<strong>\(html2With(s))</strong>" }
     private static let htmlEmptyLine = "<div><br></div>"
-    @MainActor private static let regMarkedEntry = /(\*\*?)\s*(.*?)：(.*?)：(.*)/
-    @MainActor private static let regMarkedB = #/<B>(.+?)</B>/#
-    @MainActor private static let regMarkedI = #/<I>(.+?)</I>/#
-    @MainActor static func markedToHtml(text: String) -> String {
+    nonisolated(unsafe) private static let regMarkedEntry = /(\*\*?)\s*(.*?)：(.*?)：(.*)/
+    nonisolated(unsafe) private static let regMarkedB = #/<B>(.+?)</B>/#
+    nonisolated(unsafe) private static let regMarkedI = #/<I>(.+?)</I>/#
+    static func markedToHtml(text: String) -> String {
         var arr = text.components(separatedBy: "\n")
         var i = 0
         while i < arr.count {
