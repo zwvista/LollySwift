@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LangBlogGroupsView: View {
     @Binding var navPath: NavigationPath
-    @StateObject var vm = LangBlogGroupsViewModel(settings: vmSettings) {}
+    @StateObject var vm = LangBlogGroupsViewModel(settings: vmSettings)
     @State var showDetail = false
     @State var showItemMore = false
     // https://stackoverflow.com/questions/59235879/how-to-show-an-alert-when-the-user-taps-on-the-list-row-in-swiftui
@@ -45,6 +45,11 @@ struct LangBlogGroupsView: View {
                         }
                     }
                 }
+            }
+        }
+        .onAppear {
+            Task {
+                await vm.reloadGroups()
             }
         }
         .refreshable {

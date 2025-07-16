@@ -25,11 +25,11 @@ class LangBlogViewModel: NSObject, ObservableObject {
     @Published var arrPostsFiltered = [MLangBlogPost]()
     var hasPostFilter: Bool { !postFilter.isEmpty }
 
-    @Published var postContent = ""
+    @Published var postHtml = ""
 
     var subscriptions = Set<AnyCancellable>()
 
-    init(settings: SettingsViewModel, complete: @escaping () -> Void) {
+    init(settings: SettingsViewModel) {
         vmSettings = settings
         super.init()
 
@@ -41,7 +41,8 @@ class LangBlogViewModel: NSObject, ObservableObject {
         } ~ subscriptions
         $selectedPost.didSet.sink { [unowned self] post in
             Task {
-                postContent = (await MLangBlogPostContent.getDataById(post?.ID ?? 0))?.CONTENT ?? ""
+                let str = (await MLangBlogPostContent.getDataById(post?.ID ?? 0))?.CONTENT ?? ""
+                postHtml = BlogPostEditViewModel.markedToHtml(text: str)
             }
         } ~ subscriptions
     }

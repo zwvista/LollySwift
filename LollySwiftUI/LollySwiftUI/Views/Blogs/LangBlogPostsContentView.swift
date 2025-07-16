@@ -37,9 +37,8 @@ struct LangBlogPostsContentView: View {
             )
         }
         .navigationTitle("Language Blog Posts (Content)")
-        .onChange(of: vmGroup.postContent) {
-            let content = BlogPostEditViewModel.markedToHtml(text: vmGroup.postContent)
-            webViewStore.webView.loadHTMLString(content, baseURL: nil)
+        .onChange(of: vmGroup.postHtml) {
+            webViewStore.webView.loadHTMLString($1, baseURL: nil)
         }
         .onDisappear {
             vmGroup.selectedPost = nil

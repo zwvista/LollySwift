@@ -18,7 +18,7 @@ class LangBlogPostsViewController: NSViewController, NSTableViewDataSource, NSTa
     @IBOutlet weak var sfPostFilter: NSSearchField!
     @IBOutlet weak var sfGroupFilter: NSSearchField!
 
-    var vm: LangBlogPostsViewModel!
+    let vm = LangBlogPostsViewModel(settings: AppDelegate.theSettingsViewModel)
     var arrPosts: [MLangBlogPost] { vm.arrPostsFiltered }
     var arrGroups: [MLangBlogGroup] { vm.arrGroupsFiltered }
 
@@ -28,15 +28,6 @@ class LangBlogPostsViewController: NSViewController, NSTableViewDataSource, NSTa
         super.viewDidLoad()
         wvPost.allowsMagnification = true
         wvPost.allowsBackForwardNavigationGestures = true
-        settingsChanged()
-    }
-
-    func settingsChanged() {
-        refreshTableView(self)
-    }
-
-    @IBAction func refreshTableView(_ sender: Any) {
-        vm = LangBlogPostsViewModel(settings: AppDelegate.theSettingsViewModel) {}
         vm.$arrPostsFiltered.didSet.sink { [unowned self] _ in
             tvPosts.reloadData()
         } ~ subscriptions
@@ -45,9 +36,20 @@ class LangBlogPostsViewController: NSViewController, NSTableViewDataSource, NSTa
         } ~ subscriptions
         vm.$postFilter <~> sfPostFilter.textProperty ~ subscriptions
         vm.$groupFilter <~> sfGroupFilter.textProperty ~ subscriptions
-        vm.$postContent.didSet.sink { [unowned self] in
-            wvPost.loadHTMLString(BlogPostEditViewModel.markedToHtml(text: $0), baseURL: nil)
+        vm.$postHtml.didSet.sink { [unowned self] in
+            wvPost.loadHTMLString($0, baseURL: nil)
         } ~ subscriptions
+        settingsChanged()
+    }
+
+    func settingsChanged() {
+        refreshTableView(self)
+    }
+
+    @IBAction func refreshTableView(_ sender: Any) {
+        Task {
+            await vm.reloadPosts()
+        }
     }
 
     func numberOfRows(in tableView: NSTableView) -> Int {

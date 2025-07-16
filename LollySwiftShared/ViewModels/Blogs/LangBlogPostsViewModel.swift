@@ -12,12 +12,8 @@ import Then
 @MainActor
 class LangBlogPostsViewModel: LangBlogViewModel {
 
-    override init(settings: SettingsViewModel, complete: @escaping () -> Void) {
-        super.init(settings: settings, complete: complete)
-        Task {
-            await reloadPosts()
-            complete()
-        }
+    override init(settings: SettingsViewModel) {
+        super.init(settings: settings)
         $selectedPost.didSet.sink { [unowned self] _ in
             Task {
                 await reloadGroups()

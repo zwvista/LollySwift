@@ -16,7 +16,7 @@ class LangBlogPostsContentViewController: UIViewController, WKUIDelegate, WKNavi
     @IBOutlet weak var btnLangBlogPost: UIButton!
     weak var wvBlogPost: WKWebView!
 
-    var vmGroup: LangBlogGroupsViewModel!
+    var vmGroups: LangBlogGroupsViewModel!
     var vm: LangBlogPostsContentViewModel!
     var subscriptions = Set<AnyCancellable>()
     
@@ -42,10 +42,10 @@ class LangBlogPostsContentViewController: UIViewController, WKUIDelegate, WKNavi
             })
             btnLangBlogPost.showsMenuAsPrimaryAction = true
             btnLangBlogPost.setTitle(String(vm.selectedLangBlogPost.TITLE), for: .normal)
-            vmGroup.selectedPost = vm.selectedLangBlogPost
+            vmGroups.selectedPost = vm.selectedLangBlogPost
         } ~ subscriptions
-        vmGroup.$postContent.didSet.sink { [unowned self] in
-            wvBlogPost.loadHTMLString(BlogPostEditViewModel.markedToHtml(text: $0), baseURL: nil)
+        vmGroups.$postHtml.didSet.sink { [unowned self] in
+            wvBlogPost.loadHTMLString($0, baseURL: nil)
         } ~ subscriptions
     }
 
