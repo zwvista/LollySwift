@@ -10,7 +10,7 @@ import WebKit
 
 struct SearchView: View {
     @ObservedObject var vm = vmSettings
-    @StateObject var webViewStore = WebViewStore()
+    @EnvironmentObject var webViewStore: WebViewStore
     @StateObject var dictStore = DictStore()
     var wvDict: WKWebView { webViewStore.webView }
 

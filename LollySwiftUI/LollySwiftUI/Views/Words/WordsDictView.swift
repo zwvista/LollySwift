@@ -11,7 +11,7 @@ import WebKit
 struct WordsDictView: View {
     @StateObject var vm: WordsDictViewModel
     @ObservedObject var vmS = vmSettings
-    @StateObject var webViewStore = WebViewStore()
+    @EnvironmentObject var webViewStore: WebViewStore
     @StateObject var dictStore = DictStore()
     var wvDict: WKWebView { webViewStore.webView }
 

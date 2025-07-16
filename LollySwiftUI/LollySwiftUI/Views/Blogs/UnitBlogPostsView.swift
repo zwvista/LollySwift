@@ -10,7 +10,7 @@ import SwiftUI
 struct UnitBlogPostsView: View {
     @Binding var navPath: NavigationPath
     @StateObject var vm = UnitBlogPostsViewModel(settings: vmSettings) {}
-    @State var webViewStore = WebViewStore()
+    @EnvironmentObject var webViewStore: WebViewStore
     var body: some View {
         VStack(spacing: 0) {
             Spacer()
@@ -50,7 +50,7 @@ struct UnitBlogPostsView: View {
     private func selectedUnitIndexChanged() async {
         let content = await vmSettings.getBlogContent(unit: vm.selectedUnit)
         let str = BlogPostEditViewModel.markedToHtml(text: content)
-        webViewStore.webView.loadHTMLString(str, baseURL: nil)
+        webViewStore.webView.loadHTMLString(headString + str, baseURL: nil)
     }
 
     private func swipe(_ delta: Int) {

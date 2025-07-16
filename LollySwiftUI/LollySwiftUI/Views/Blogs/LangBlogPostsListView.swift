@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LangBlogPostsListView: View {
     @Binding var navPath: NavigationPath
-    @ObservedObject var vm: LangBlogGroupsViewModel
+    @StateObject var vm: LangBlogGroupsViewModel
     @State var showDetail = false
     @State var showItemMore = false
     // https://stackoverflow.com/questions/59235879/how-to-show-an-alert-when-the-user-taps-on-the-list-row-in-swiftui
@@ -63,7 +63,7 @@ struct LangBlogPostsListView: View {
         .navigationDestination(for: MLangBlogPost.self) { item in
             let index = vm.arrPostsFiltered.firstIndex(of: item)!
             let (start, end) = getPreferredRangeFromArray(index: index, length: vm.arrPostsFiltered.count, preferredLength: 50)
-            LangBlogPostsContentView(navPath: $navPath, vm: LangBlogPostsContentViewModel(settings: vmSettings, arrLangBlogPosts: Array(vm.arrPostsFiltered[start ..< end]), selectedLangBlogPostIndex: index) {}, vmGroup: vm)
+            LangBlogPostsContentView(navPath: $navPath, vm: LangBlogPostsContentViewModel(settings: vmSettings, arrLangBlogPosts: Array(vm.arrPostsFiltered[start ..< end]), selectedLangBlogPostIndex: index), vmGroup: vm)
         }
         .sheet(isPresented: $showDetail) {
             LangBlogPostsDetailView(item: selectedItem, showDetail: $showDetail)

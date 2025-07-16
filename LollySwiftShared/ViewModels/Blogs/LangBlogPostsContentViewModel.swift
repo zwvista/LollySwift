@@ -18,7 +18,7 @@ class LangBlogPostsContentViewModel: NSObject, ObservableObject {
         selectedLangBlogPostIndex = (selectedLangBlogPostIndex + delta + arrLangBlogPosts.count) % arrLangBlogPosts.count
     }
 
-    init(settings: SettingsViewModel, arrLangBlogPosts: [MLangBlogPost], selectedLangBlogPostIndex: Int, complete: @escaping () -> Void) {
+    init(settings: SettingsViewModel, arrLangBlogPosts: [MLangBlogPost], selectedLangBlogPostIndex: Int) {
         vmSettings = settings
         self.arrLangBlogPosts = arrLangBlogPosts
         self.selectedLangBlogPostIndex = selectedLangBlogPostIndex

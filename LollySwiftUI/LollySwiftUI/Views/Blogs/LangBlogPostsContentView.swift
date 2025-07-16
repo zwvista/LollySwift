@@ -11,7 +11,7 @@ struct LangBlogPostsContentView: View {
     @Binding var navPath: NavigationPath
     @ObservedObject var vm: LangBlogPostsContentViewModel
     @ObservedObject var vmGroup: LangBlogGroupsViewModel
-    @State var webViewStore = WebViewStore()
+    @EnvironmentObject var webViewStore: WebViewStore
     var body: some View {
         VStack(spacing: 0) {
             Spacer()
@@ -38,7 +38,7 @@ struct LangBlogPostsContentView: View {
         }
         .navigationTitle("Language Blog Posts (Content)")
         .onChange(of: vmGroup.postHtml) {
-            webViewStore.webView.loadHTMLString($1, baseURL: nil)
+            webViewStore.webView.loadHTMLString(headString + $1, baseURL: nil)
         }
         .onDisappear {
             vmGroup.selectedPost = nil

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct OnlineTextbooksWebPageView: View {
     @StateObject var vm: OnlineTextbooksWebPageViewModel
-    @State var webViewStore = WebViewStore()
+    @EnvironmentObject var webViewStore: WebViewStore
     var body: some View {
         VStack(spacing: 0) {
             Spacer()
