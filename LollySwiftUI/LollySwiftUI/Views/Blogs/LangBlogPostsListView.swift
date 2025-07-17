@@ -63,7 +63,7 @@ struct LangBlogPostsListView: View {
         .navigationDestination(for: MLangBlogPost.self) { item in
             let index = vm.arrPostsFiltered.firstIndex(of: item)!
             let (start, end) = getPreferredRangeFromArray(index: index, length: vm.arrPostsFiltered.count, preferredLength: 50)
-            LangBlogPostsContentView(navPath: $navPath, vm: LangBlogPostsContentViewModel(settings: vmSettings, arrLangBlogPosts: Array(vm.arrPostsFiltered[start ..< end]), selectedLangBlogPostIndex: index), vmGroup: vm)
+            LangBlogPostsContentView(navPath: $navPath, vm: LangBlogPostsContentViewModel(settings: vmSettings, vmGroups: vm, arrPosts: Array(vm.arrPostsFiltered[start ..< end]), selectedPostIndex: index), vmGroups: vm)
         }
         .sheet(isPresented: $showDetail) {
             LangBlogPostsDetailView(item: selectedItem, showDetail: $showDetail)

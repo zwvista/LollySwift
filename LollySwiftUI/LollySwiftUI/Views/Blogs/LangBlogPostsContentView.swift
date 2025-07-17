@@ -9,15 +9,15 @@ import SwiftUI
 
 struct LangBlogPostsContentView: View {
     @Binding var navPath: NavigationPath
-    @ObservedObject var vm: LangBlogPostsContentViewModel
-    @ObservedObject var vmGroup: LangBlogGroupsViewModel
+    @StateObject var vm: LangBlogPostsContentViewModel
+    @ObservedObject var vmGroups: LangBlogGroupsViewModel
     @EnvironmentObject var webViewStore: WebViewStore
     var body: some View {
         VStack(spacing: 0) {
             Spacer()
-            Picker("LangBlogPost", selection: $vm.selectedLangBlogPostIndex) {
-                ForEach(vm.arrLangBlogPosts.indices, id: \.self) {
-                    Text(vm.arrLangBlogPosts[$0].TITLE)
+            Picker("LangBlogPost", selection: $vm.selectedPostIndex) {
+                ForEach(vm.arrPosts.indices, id: \.self) {
+                    Text(vm.arrPosts[$0].TITLE)
                 }
             }
             .modifier(PickerModifier(backgroundColor: Color.color3))
@@ -37,11 +37,11 @@ struct LangBlogPostsContentView: View {
             )
         }
         .navigationTitle("Language Blog Posts (Content)")
-        .onChange(of: vmGroup.postHtml) {
+        .onChange(of: vmGroups.postHtml) {
             webViewStore.webView.loadHTMLString(headString + $1, baseURL: nil)
         }
         .onDisappear {
-            vmGroup.selectedPost = nil
+            vmGroups.selectedPost = nil
         }
     }
 }

@@ -7,21 +7,29 @@
 //
 
 import Foundation
+import Combine
 
 @MainActor
 class LangBlogPostsContentViewModel: NSObject, ObservableObject {
     var vmSettings: SettingsViewModel
-    @Published var arrLangBlogPosts = [MLangBlogPost]()
-    @Published var selectedLangBlogPostIndex = 0
-    var selectedLangBlogPost: MLangBlogPost { arrLangBlogPosts[selectedLangBlogPostIndex] }
+    var vmGroups: LangBlogGroupsViewModel
+    @Published var arrPosts = [MLangBlogPost]()
+    @Published var selectedPostIndex = 0
+    var selectedPost: MLangBlogPost { arrPosts[selectedPostIndex] }
     func next(_ delta: Int) {
-        selectedLangBlogPostIndex = (selectedLangBlogPostIndex + delta + arrLangBlogPosts.count) % arrLangBlogPosts.count
+        selectedPostIndex = (selectedPostIndex + delta + arrPosts.count) % arrPosts.count
     }
 
-    init(settings: SettingsViewModel, arrLangBlogPosts: [MLangBlogPost], selectedLangBlogPostIndex: Int) {
+    var subscriptions = Set<AnyCancellable>()
+
+    init(settings: SettingsViewModel, vmGroups: LangBlogGroupsViewModel, arrPosts: [MLangBlogPost], selectedPostIndex: Int) {
         vmSettings = settings
-        self.arrLangBlogPosts = arrLangBlogPosts
-        self.selectedLangBlogPostIndex = selectedLangBlogPostIndex
+        self.vmGroups = vmGroups
+        self.arrPosts = arrPosts
+        self.selectedPostIndex = selectedPostIndex
         super.init()
+        $selectedPostIndex.didSet.sink { [unowned self] _ in
+            vmGroups.selectedPost = selectedPost
+        } ~ subscriptions
     }
 }
