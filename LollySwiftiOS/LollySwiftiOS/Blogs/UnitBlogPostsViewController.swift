@@ -49,7 +49,7 @@ class UnitBlogPostsViewController: UIViewController, WKUIDelegate, WKNavigationD
         btnUnit.setTitle(String(vm.selectedUnit), for: .normal)
         vmSettings.getBlogContent(unit: vm.selectedUnit).subscribe { [unowned self] content in
             let str = BlogPostEditViewModel.markedToHtml(text: content)
-            self.wvBlogPost.loadHTMLString(str, baseURL: nil)
+            self.wvBlogPost.loadHTMLStringWithMagic(content: str, baseURL: nil)
         } ~ rx.disposeBag
     }
 

@@ -44,7 +44,7 @@ class LangBlogPostsContentViewController: UIViewController, WKUIDelegate, WKNavi
             btnLangBlogPost.setTitle(String(vm.selectedPost.TITLE), for: .normal)
         } ~ rx.disposeBag
         vm.vmGroups.postHtml_.subscribe { [unowned self] in
-            wvBlogPost.loadHTMLString($0, baseURL: nil)
+            wvBlogPost.loadHTMLStringWithMagic(content: $0, baseURL: nil)
         } ~ rx.disposeBag
     }
 

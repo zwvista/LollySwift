@@ -41,7 +41,7 @@ class DictStore: NSObject {
             RestApi.getHtml(url: url).subscribe { [unowned self] html in
                 print(html)
                 let str = dict.htmlString(html, word: word)
-                wvDict.loadHTMLString(str, baseURL: nil)
+                wvDict.loadHTMLStringWithMagic(content: str, baseURL: nil)
             } ~ rx.disposeBag
         } else {
             wvDict.load(URLRequest(url: URL(string: url)!))
@@ -71,7 +71,7 @@ class DictStore: NSObject {
                 let html = html as! String
                 print(html)
                 let str = dict.htmlString(html, word: word)
-                wvDict.loadHTMLString(str, baseURL: nil)
+                wvDict.loadHTMLStringWithMagic(content: str, baseURL: nil)
                 dictStatus = .ready
             }
         default: break
