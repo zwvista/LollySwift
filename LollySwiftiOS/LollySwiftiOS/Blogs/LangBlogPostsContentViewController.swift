@@ -18,7 +18,6 @@ class LangBlogPostsContentViewController: UIViewController, WKUIDelegate, WKNavi
     @IBOutlet weak var btnLangBlogPost: UIButton!
     weak var wvBlogPost: WKWebView!
 
-    var vmGroups: LangBlogGroupsViewModel!
     var vm: LangBlogPostsContentViewModel!
     
     override func viewDidLoad() {
@@ -35,17 +34,16 @@ class LangBlogPostsContentViewController: UIViewController, WKUIDelegate, WKNavi
         swipeGesture2.delegate = self
         wvBlogPost.addGestureRecognizer(swipeGesture2)
 
-        vm.selectedLangBlogPostIndex_.subscribe { [unowned self] _ in
-            btnLangBlogPost.menu = UIMenu(title: "", options: .displayInline, children: vm.arrLangBlogPosts.enumerated().map { index, item in
-                UIAction(title: item.TITLE, state: index == vm.selectedLangBlogPostIndex ? .on : .off) { [unowned self] _ in
-                    vm.selectedLangBlogPostIndex = index
+        vm.selectedPostIndex_.subscribe { [unowned self] _ in
+            btnLangBlogPost.menu = UIMenu(title: "", options: .displayInline, children: vm.arrPosts.enumerated().map { index, item in
+                UIAction(title: item.TITLE, state: index == vm.selectedPostIndex ? .on : .off) { [unowned self] _ in
+                    vm.selectedPostIndex = index
                 }
             })
             btnLangBlogPost.showsMenuAsPrimaryAction = true
-            btnLangBlogPost.setTitle(String(vm.selectedLangBlogPost.TITLE), for: .normal)
-            vmGroups.selectedPost = vm.selectedLangBlogPost
+            btnLangBlogPost.setTitle(String(vm.selectedPost.TITLE), for: .normal)
         } ~ rx.disposeBag
-        vmGroups.postHtml_.subscribe { [unowned self] in
+        vm.vmGroups.postHtml_.subscribe { [unowned self] in
             wvBlogPost.loadHTMLString($0, baseURL: nil)
         } ~ rx.disposeBag
     }

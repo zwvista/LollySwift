@@ -9,22 +9,29 @@
 import Foundation
 import RxSwift
 import RxRelay
+import NSObject_Rx
+import RxBinding
 
 @MainActor
 class LangBlogPostsContentViewModel: NSObject, ObservableObject {
     var vmSettings: SettingsViewModel
-    var arrLangBlogPosts = [MLangBlogPost]()
-    var selectedLangBlogPostIndex_ = BehaviorRelay(value: 0)
-    var selectedLangBlogPostIndex: Int { get { selectedLangBlogPostIndex_.value } set { selectedLangBlogPostIndex_.accept(newValue) } }
-    var selectedLangBlogPost: MLangBlogPost { arrLangBlogPosts[selectedLangBlogPostIndex] }
+    var vmGroups: LangBlogGroupsViewModel
+    var arrPosts = [MLangBlogPost]()
+    var selectedPostIndex_ = BehaviorRelay(value: 0)
+    var selectedPostIndex: Int { get { selectedPostIndex_.value } set { selectedPostIndex_.accept(newValue) } }
+    var selectedPost: MLangBlogPost { arrPosts[selectedPostIndex] }
     func next(_ delta: Int) {
-        selectedLangBlogPostIndex = (selectedLangBlogPostIndex + delta + arrLangBlogPosts.count) % arrLangBlogPosts.count
+        selectedPostIndex = (selectedPostIndex + delta + arrPosts.count) % arrPosts.count
     }
 
-    init(settings: SettingsViewModel, arrLangBlogPosts: [MLangBlogPost], selectedLangBlogPostIndex: Int, complete: @escaping () -> Void) {
+    init(settings: SettingsViewModel, vmGroups: LangBlogGroupsViewModel, arrPosts: [MLangBlogPost], selectedPostIndex: Int) {
         vmSettings = settings
-        self.arrLangBlogPosts = arrLangBlogPosts
+        self.vmGroups = vmGroups
+        self.arrPosts = arrPosts
         super.init()
-        self.selectedLangBlogPostIndex = selectedLangBlogPostIndex
+        self.selectedPostIndex = selectedPostIndex
+        selectedPostIndex_.subscribe { [unowned self] _ in
+            vmGroups.selectedPost = selectedPost
+        } ~ rx.disposeBag
     }
 }
