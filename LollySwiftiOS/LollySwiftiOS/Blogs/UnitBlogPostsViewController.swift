@@ -50,7 +50,7 @@ class UnitBlogPostsViewController: UIViewController, WKUIDelegate, WKNavigationD
         btnUnit.setTitle(String(vm.selectedUnit), for: .normal)
         let content = await vmSettings.getBlogContent(unit: vm.selectedUnit)
         let str = BlogPostEditViewModel.markedToHtml(text: content)
-        wvBlogPost.loadHTMLString(str, baseURL: nil)
+        wvBlogPost.loadHTMLStringWithMagic(content: str, baseURL: nil)
     }
 
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {

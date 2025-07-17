@@ -50,7 +50,7 @@ struct UnitBlogPostsView: View {
     private func selectedUnitIndexChanged() async {
         let content = await vmSettings.getBlogContent(unit: vm.selectedUnit)
         let str = BlogPostEditViewModel.markedToHtml(text: content)
-        webViewStore.webView.loadHTMLString(headString + str, baseURL: nil)
+        webViewStore.webView.loadHTMLStringWithMagic(content: str, baseURL: nil)
     }
 
     private func swipe(_ delta: Int) {

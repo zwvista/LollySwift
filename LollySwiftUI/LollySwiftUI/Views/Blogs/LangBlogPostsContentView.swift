@@ -10,7 +10,6 @@ import SwiftUI
 struct LangBlogPostsContentView: View {
     @Binding var navPath: NavigationPath
     @StateObject var vm: LangBlogPostsContentViewModel
-    @ObservedObject var vmGroups: LangBlogGroupsViewModel
     @EnvironmentObject var webViewStore: WebViewStore
     var body: some View {
         VStack(spacing: 0) {
@@ -37,11 +36,11 @@ struct LangBlogPostsContentView: View {
             )
         }
         .navigationTitle("Language Blog Posts (Content)")
-        .onChange(of: vmGroups.postHtml) {
-            webViewStore.webView.loadHTMLString(headString + $1, baseURL: nil)
+        .onChange(of: vm.vmGroups.postHtml) {
+            webViewStore.webView.loadHTMLStringWithMagic(content: $1, baseURL: nil)
         }
         .onDisappear {
-            vmGroups.selectedPost = nil
+            vm.vmGroups.selectedPost = nil
         }
     }
 }

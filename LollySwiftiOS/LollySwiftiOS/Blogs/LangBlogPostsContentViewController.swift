@@ -43,7 +43,7 @@ class LangBlogPostsContentViewController: UIViewController, WKUIDelegate, WKNavi
             btnLangBlogPost.setTitle(String(vm.selectedPost.TITLE), for: .normal)
         } ~ subscriptions
         vm.vmGroups.$postHtml.didSet.sink { [unowned self] in
-            wvBlogPost.loadHTMLString($0, baseURL: nil)
+            wvBlogPost.loadHTMLStringWithMagic(content: $0, baseURL: nil)
         } ~ subscriptions
     }
 

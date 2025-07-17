@@ -12,7 +12,7 @@ import Combine
 @MainActor
 class LangBlogPostsContentViewModel: NSObject, ObservableObject {
     var vmSettings: SettingsViewModel
-    var vmGroups: LangBlogGroupsViewModel
+    @Published var vmGroups: LangBlogGroupsViewModel
     @Published var arrPosts = [MLangBlogPost]()
     @Published var selectedPostIndex = 0
     var selectedPost: MLangBlogPost { arrPosts[selectedPostIndex] }

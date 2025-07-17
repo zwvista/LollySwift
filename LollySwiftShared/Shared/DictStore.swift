@@ -36,7 +36,7 @@ class DictStore: NSObject, ObservableObject {
                 let html = await RestApi.getHtml(url: url)
                 print(html)
                 let str = dict.htmlString(html, word: word)
-                wvDict.loadHTMLString(str, baseURL: nil)
+                wvDict.loadHTMLStringWithMagic(content: str, baseURL: nil)
             }
         } else {
             wvDict.load(URLRequest(url: URL(string: url)!))
@@ -66,7 +66,7 @@ class DictStore: NSObject, ObservableObject {
                 let html = html as! String
                 print(html)
                 let str = dict.htmlString(html, word: word)
-                wvDict.loadHTMLString(str, baseURL: nil)
+                wvDict.loadHTMLStringWithMagic(content: str, baseURL: nil)
                 dictStatus = .ready
             }
         default: break
