@@ -9,7 +9,7 @@ import SwiftUI
 
 struct WordsTextbookView: View {
     @Binding var navPath: NavigationPath
-    @StateObject var vm = WordsUnitViewModel(settings: vmSettings, inTextbook: false) {}
+    @StateObject var vm = WordsUnitViewModel(settings: vmSettings, inTextbook: false)
     @State var showDetailEdit = false
     @State var showItemMore = false
     @State var showDelete = false

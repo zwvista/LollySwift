@@ -9,7 +9,7 @@ import SwiftUI
 
 struct WordsLangView: View {
     @Binding var navPath: NavigationPath
-    @StateObject var vm = WordsLangViewModel(settings: vmSettings) {}
+    @StateObject var vm = WordsLangViewModel(settings: vmSettings)
     @State var showDetail = false
     @State var showDetailEdit = false
     @State var showDetailAdd = false

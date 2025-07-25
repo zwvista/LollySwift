@@ -9,7 +9,7 @@ import SwiftUI
 
 struct OnlineTextbooksView: View {
     @Binding var navPath: NavigationPath
-    @StateObject var vm = OnlineTextbooksViewModel(settings: vmSettings) {}
+    @StateObject var vm = OnlineTextbooksViewModel(settings: vmSettings)
     @State var showDetail = false
     @State var showItemMore = false
     // https://stackoverflow.com/questions/59235879/how-to-show-an-alert-when-the-user-taps-on-the-list-row-in-swiftui

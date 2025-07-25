@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PatternsView: View {
     @Binding var navPath: NavigationPath
-    @StateObject var vm = PatternsViewModel(settings: vmSettings) {}
+    @StateObject var vm = PatternsViewModel(settings: vmSettings)
     @State var showDetail = false
     @State var showItemMore = false
     // https://stackoverflow.com/questions/59235879/how-to-show-an-alert-when-the-user-taps-on-the-list-row-in-swiftui
