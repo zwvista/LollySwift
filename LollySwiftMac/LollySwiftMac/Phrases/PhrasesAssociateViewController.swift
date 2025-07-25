@@ -25,7 +25,7 @@ class PhrasesAssociateViewController: NSViewController, NSTableViewDataSource, N
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        vm = PhrasesLangViewModel(settings: AppDelegate.theSettingsViewModel) {}
+        vm = PhrasesLangViewModel(settings: AppDelegate.theSettingsViewModel)
         vm.textFilter = textFilter
         _ = vm.textFilter_ <~> sfTextFilter.rx.text.orEmpty
         _ = vm.scopeFilter_ <~> scScopeFilter.rx.selectedLabel

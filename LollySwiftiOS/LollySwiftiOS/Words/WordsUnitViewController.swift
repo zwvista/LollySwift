@@ -15,18 +15,22 @@ class WordsUnitViewController: WordsBaseViewController {
 
     @IBOutlet weak var btnEdit: UIBarButtonItem!
 
-    var vm: WordsUnitViewModel!
+    var vm = WordsUnitViewModel(settings: vmSettings, inTextbook: true)
     var arrWords: [MUnitWord] { vm.arrWords }
     override var vmBase: WordsBaseViewModel! { vm }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        vm.arrWords_.subscribe { [unowned self] _ in
+            tableView.reloadData()
+        } ~ rx.disposeBag
+    }
 
     override func refresh() {
         view.showBlurLoader()
-        vm = WordsUnitViewModel(settings: vmSettings, inTextbook: true) { [unowned self] in
-            refreshControl.endRefreshing()
+        vm.reload().subscribe { [unowned self] in
+//            sender.endRefreshing()
             view.removeBlurLoader()
-        }
-        vm.arrWords_.subscribe { [unowned self] _ in
-            tableView.reloadData()
         } ~ rx.disposeBag
     }
 

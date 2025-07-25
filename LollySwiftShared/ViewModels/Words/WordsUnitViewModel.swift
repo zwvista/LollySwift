@@ -20,7 +20,7 @@ class WordsUnitViewModel: WordsBaseViewModel {
     var arrWords: [MUnitWord] { get { arrWords_.value } set { arrWords_.accept(newValue) } }
     var hasFilter: Bool { !(textFilter.isEmpty && textbookFilter == 0) }
 
-    init(settings: SettingsViewModel, inTextbook: Bool, complete: @escaping () -> Void) {
+    init(settings: SettingsViewModel, inTextbook: Bool) {
         self.inTextbook = inTextbook
         super.init(settings: settings)
 
@@ -33,8 +33,6 @@ class WordsUnitViewModel: WordsBaseViewModel {
                 arrWords = arrWords.filter { $0.TEXTBOOKID == textbookFilter }
             }
         } ~ rx.disposeBag
-
-        reload().subscribe { _ in complete() } ~ rx.disposeBag
     }
 
     func reload() -> Single<()> {

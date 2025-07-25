@@ -20,7 +20,7 @@ class PhrasesUnitViewModel: PhrasesBaseViewModel {
     var arrPhrases: [MUnitPhrase] { get { arrPhrases_.value } set { arrPhrases_.accept(newValue) } }
     var hasFilter: Bool { !(textFilter.isEmpty && textbookFilter == 0) }
 
-    public init(settings: SettingsViewModel, inTextbook: Bool, complete: @escaping () -> Void) {
+    init(settings: SettingsViewModel, inTextbook: Bool) {
         self.inTextbook = inTextbook
         super.init(settings: settings)
 
@@ -33,8 +33,6 @@ class PhrasesUnitViewModel: PhrasesBaseViewModel {
                 arrPhrases = arrPhrases.filter { $0.TEXTBOOKID == textbookFilter }
             }
         } ~ rx.disposeBag
-
-        reload().subscribe { _ in complete() } ~ rx.disposeBag
     }
 
     func reload() -> Single<()> {

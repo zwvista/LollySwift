@@ -17,7 +17,7 @@ class OnlineTextbooksViewController: UIViewController, UITableViewDelegate, UITa
     @IBOutlet weak var btnOnlineTextbookFilter: UIButton!
     let refreshControl = UIRefreshControl()
 
-    var vm: OnlineTextbooksViewModel!
+    var vm = OnlineTextbooksViewModel(settings: vmSettings)
     var arrOnlineTextbooks: [MOnlineTextbook] { vm.arrOnlineTextbooks }
 
     override func viewDidLoad() {
@@ -25,14 +25,7 @@ class OnlineTextbooksViewController: UIViewController, UITableViewDelegate, UITa
         tableView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         refresh(refreshControl)
-    }
 
-    @objc func refresh(_ sender: UIRefreshControl) {
-        view.showBlurLoader()
-        vm = OnlineTextbooksViewModel(settings: vmSettings) { [unowned self] in
-            sender.endRefreshing()
-            view.removeBlurLoader()
-        }
         _ = vm.stringOnlineTextbookFilter_ ~> btnOnlineTextbookFilter.rx.title(for: .normal)
         vm.arrOnlineTextbooks_.subscribe { [unowned self] _ in
             tableView.reloadData()
@@ -48,6 +41,14 @@ class OnlineTextbooksViewController: UIViewController, UITableViewDelegate, UITa
             btnOnlineTextbookFilter.showsMenuAsPrimaryAction = true
         }
         configMenu()
+    }
+
+    @objc func refresh(_ sender: UIRefreshControl) {
+        view.showBlurLoader()
+        vm.reload().subscribe { [unowned self] in
+            sender.endRefreshing()
+            view.removeBlurLoader()
+        } ~ rx.disposeBag
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -108,7 +108,8 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     }
 
     func settingsChanged() {
-        vm = PatternsViewModel(settings: AppDelegate.theSettingsViewModel) {}
+        vm = PatternsViewModel(settings: AppDelegate.theSettingsViewModel)
+        refreshTableView(self)
         _ = vm.textFilter_ <~> sfTextFilter.rx.text.orEmpty
         _ = vm.scopeFilter_ <~> scScopeFilter.rx.selectedLabel
         vm.arrPatterns_.subscribe { [unowned self] _ in

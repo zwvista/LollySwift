@@ -27,7 +27,7 @@ class PhrasesBaseViewController: WordsPhrasesBaseViewController {
             vmPhrases.textFilter = vmSettings.autoCorrectInput(text: vmPhrases.textFilter)
         } ~ rx.disposeBag
         super.settingsChanged()
-        vmWordsLang = WordsLangViewModel(settings: vmSettings) {}
+        vmWordsLang = WordsLangViewModel(settings: vmSettings)
     }
 
     func doRefresh() {

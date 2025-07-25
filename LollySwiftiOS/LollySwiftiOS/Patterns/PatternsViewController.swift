@@ -18,7 +18,7 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var btnScopeFilter: UIButton!
     let refreshControl = UIRefreshControl()
 
-    var vm: PatternsViewModel!
+    var vm = PatternsViewModel(settings: vmSettings)
     var arrPatterns: [MPattern] { vm.arrPatterns }
 
     override func viewDidLoad() {
@@ -26,6 +26,12 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         refresh(refreshControl)
+
+        _ = vm.textFilter_ <~> sbTextFilter.searchTextField.rx.textInput
+        _ = vm.scopeFilter_ ~> btnScopeFilter.rx.title(for: .normal)
+        vm.arrPatterns_.subscribe { [unowned self] _ in
+            tableView.reloadData()
+        } ~ rx.disposeBag
 
         func configMenu() {
             btnScopeFilter.menu = UIMenu(title: "", options: .displayInline, children: SettingsViewModel.arrScopePatternFilters.enumerated().map { index, item in
@@ -41,14 +47,9 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
 
     @objc func refresh(_ sender: UIRefreshControl) {
         view.showBlurLoader()
-        vm = PatternsViewModel(settings: vmSettings) { [unowned self] in
+        vm.reload().subscribe { [unowned self] in
             sender.endRefreshing()
             view.removeBlurLoader()
-        }
-        _ = vm.textFilter_ <~> sbTextFilter.searchTextField.rx.textInput
-        _ = vm.scopeFilter_ ~> btnScopeFilter.rx.title(for: .normal)
-        vm.arrPatterns_.subscribe { [unowned self] _ in
-            tableView.reloadData()
         } ~ rx.disposeBag
     }
 

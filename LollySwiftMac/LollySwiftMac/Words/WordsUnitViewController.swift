@@ -43,7 +43,8 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     }
 
     override func settingsChanged() {
-        vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: true) {}
+        vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: true)
+        refreshTableView(self)
         vm.arrWords_.subscribe { [unowned self] _ in
             doRefresh()
         } ~ rx.disposeBag

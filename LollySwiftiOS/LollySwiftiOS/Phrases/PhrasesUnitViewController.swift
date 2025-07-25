@@ -15,18 +15,22 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
 
     @IBOutlet weak var btnEdit: UIBarButtonItem!
 
-    var vm: PhrasesUnitViewModel!
+    var vm = PhrasesUnitViewModel(settings: vmSettings, inTextbook: true)
     var arrPhrases: [MUnitPhrase] { vm.arrPhrases }
     override var vmBase: PhrasesBaseViewModel! { vm }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        vm.arrPhrases_.subscribe { [unowned self] _ in
+            tableView.reloadData()
+        } ~ rx.disposeBag
+    }
 
     override func refresh() {
         view.showBlurLoader()
-        vm = PhrasesUnitViewModel(settings: vmSettings, inTextbook: true) { [unowned self] in
-            refreshControl.endRefreshing()
+        vm.reload().subscribe { [unowned self] in
+//            sender.endRefreshing()
             view.removeBlurLoader()
-        }
-        vm.arrPhrases_.subscribe { [unowned self] _ in
-            tableView.reloadData()
         } ~ rx.disposeBag
     }
 

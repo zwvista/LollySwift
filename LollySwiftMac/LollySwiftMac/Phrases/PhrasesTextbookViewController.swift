@@ -26,9 +26,9 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
     }
 
     override func settingsChanged() {
-        vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: false) { [unowned self] in
-            acTextbooks.content = vmSettings.arrTextbookFilters
-        }
+        vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: false)
+        refreshTableView(self)
+        acTextbooks.content = vmSettings.arrTextbookFilters
         vm.arrPhrases_.subscribe { [unowned self] _ in
             doRefresh()
         } ~ rx.disposeBag

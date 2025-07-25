@@ -27,7 +27,7 @@ class PatternsViewModel: NSObject {
     var scopeFilter: String { get { scopeFilter_.value } set { scopeFilter_.accept(newValue) } }
     var hasFilter: Bool { !textFilter.isEmpty }
 
-    public init(settings: SettingsViewModel, complete: @escaping () -> Void) {
+    public init(settings: SettingsViewModel) {
         vmSettings = settings
         super.init()
 
@@ -37,8 +37,6 @@ class PatternsViewModel: NSObject {
                 arrPatterns = arrPatterns.filter { (scopeFilter == "Pattern" ? $0.PATTERN : $0.TAGS).lowercased().contains(textFilter.lowercased()) }
             }
         } ~ rx.disposeBag
-
-        reload().subscribe { _ in complete() } ~ rx.disposeBag
     }
 
     func reload() -> Single<()> {

@@ -35,7 +35,8 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     }
 
     override func settingsChanged() {
-        vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: true) {}
+        vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: true)
+        refreshTableView(self)
         vm.arrPhrases_.subscribe { [unowned self] _ in
             doRefresh()
         } ~ rx.disposeBag

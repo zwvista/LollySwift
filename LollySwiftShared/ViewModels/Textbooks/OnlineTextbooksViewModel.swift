@@ -26,7 +26,7 @@ class OnlineTextbooksViewModel: NSObject {
         indexOnlineTextbookFilter == -1 ? 0 : vmSettings.arrOnlineTextbookFilters[indexOnlineTextbookFilter].value
     }
 
-    init(settings: SettingsViewModel, complete: @escaping () -> Void) {
+    init(settings: SettingsViewModel) {
         vmSettings = settings
         super.init()
 
@@ -37,8 +37,6 @@ class OnlineTextbooksViewModel: NSObject {
         Observable.combineLatest(arrOnlineTextbooksAll_, indexOnlineTextbookFilter_).subscribe { [unowned self] _ in
             arrOnlineTextbooks = onlineTextbookFilter == 0 ? arrOnlineTextbooksAll : arrOnlineTextbooksAll.filter { $0.TEXTBOOKID == onlineTextbookFilter }
         } ~ rx.disposeBag
-
-        reload().subscribe { _ in complete() } ~ rx.disposeBag
     }
 
     func reload() -> Single<()> {

@@ -26,9 +26,9 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
     }
 
     override func settingsChanged() {
-        vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: false) { [unowned self] in
-            acTextbooks.content = vmSettings.arrTextbookFilters
-        }
+        vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: false)
+        refreshTableView(self)
+        acTextbooks.content = vmSettings.arrTextbookFilters
         vm.arrWords_.subscribe { [unowned self] _ in
             doRefresh()
         } ~ rx.disposeBag
