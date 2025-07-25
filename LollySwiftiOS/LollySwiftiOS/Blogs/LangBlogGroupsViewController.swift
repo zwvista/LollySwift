@@ -18,11 +18,11 @@ class LangBlogGroupsViewController: UIViewController, UITableViewDelegate, UITab
     let refreshControl = UIRefreshControl()
 
     var vm = LangBlogGroupsViewModel(settings: vmSettings)
-    var arrGroups: [MLangBlogGroup] { vm.arrGroupsFiltered }
+    var arrGroups: [MLangBlogGroup] { vm.arrGroups }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        vm.arrGroupsFiltered_.subscribe { [unowned self] _ in
+        vm.arrGroups_.subscribe { [unowned self] _ in
             tableView.reloadData()
         } ~ rx.disposeBag
         _ = vm.groupFilter_ <~> sbGroupFilter.searchTextField.rx.textInput
@@ -63,7 +63,7 @@ class LangBlogGroupsViewController: UIViewController, UITableViewDelegate, UITab
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let i = indexPath.row
-        let item = vm.arrGroups[i]
+        let item = vm.arrGroupsAll[i]
         func edit() {
             performSegue(withIdentifier: "edit", sender: item)
         }

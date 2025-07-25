@@ -22,13 +22,13 @@ class LangBlogPostsViewModel: LangBlogViewModel {
 
     func reloadPosts() -> Single<()> {
         MLangBlogPost.getDataByLang(vmSettings.selectedLang.ID).map { [unowned self] in
-             arrPosts = $0
+             arrPostsAll = $0
         }
     }
 
     func reloadGroups() -> Single<()> {
         MLangBlogGroup.getDataByLangPost(langid: vmSettings.selectedLang.ID, postid: selectedPost?.ID ?? 0).map { [unowned self] in
-            arrGroups = $0
+            arrGroupsAll = $0
         }
     }
 }

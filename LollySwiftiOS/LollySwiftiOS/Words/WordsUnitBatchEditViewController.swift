@@ -40,10 +40,10 @@ class WordsUnitBatchEditViewController: UIViewController, UITableViewDelegate, U
         let unit = vmSettings.arrUnits.first { $0.label == tfUnit.text }!.value
         let part = vmSettings.arrParts.first { $0.label == tfPart.text }!.value
         let seqnum = Int(tfSeqNum.text ?? "") ?? 0
-        for i in 0..<vm.arrWords.count {
+        for i in 0..<vm.arrWordsAll.count {
             let cell = tvWords.cellForRow(at: IndexPath(row: i, section: 0))!
             guard cell.accessoryType == .checkmark else {continue}
-            let item = vm.arrWords[i]
+            let item = vm.arrWordsAll[i]
             if swUnit.isOn || swPart.isOn || swSeqNum.isOn {
                 if swUnit.isOn { item.UNIT = unit }
                 if swPart.isOn { item.PART = part }
@@ -55,7 +55,7 @@ class WordsUnitBatchEditViewController: UIViewController, UITableViewDelegate, U
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        tableView === tvActions ? 4 : vm.arrWords.count
+        tableView === tvActions ? 4 : vm.arrWordsAll.count
     }
 
 //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -105,7 +105,7 @@ class WordsUnitBatchEditViewController: UIViewController, UITableViewDelegate, U
             default: break
             }
         } else {
-            let item = vm.arrWords[indexPath.row]
+            let item = vm.arrWordsAll[indexPath.row]
             cell.lblUnitPartSeqNum.text = item.UNITPARTSEQNUM
             cell.lblWord.text = item.WORD
             cell.lblNote.text = item.NOTE

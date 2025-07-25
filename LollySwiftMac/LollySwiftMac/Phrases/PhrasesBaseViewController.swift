@@ -42,7 +42,7 @@ class PhrasesBaseViewController: WordsPhrasesBaseViewController {
             let item = phraseItemForRow(row: row)!
             cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
         } else {
-            let item = vmWordsLang.arrWords[row]
+            let item = vmWordsLang.arrWordsAll[row]
             cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
         }
         return cell
@@ -97,7 +97,7 @@ class PhrasesBaseViewController: WordsPhrasesBaseViewController {
     }
 
     override func wordItemForRow(row: Int) -> (MWordProtocol & NSObject)? {
-        vmWordsLang.arrWords[row]
+        vmWordsLang.arrWordsAll[row]
     }
 
     func updateStatusText() {
@@ -124,7 +124,7 @@ class PhrasesBaseViewController: WordsPhrasesBaseViewController {
     @IBAction func editWord(_ sender: AnyObject) {
         let detailVC = NSStoryboard(name: "Words", bundle: nil).instantiateController(withIdentifier: "WordsLangDetailViewController") as! WordsLangDetailViewController
         let i = tvWords.selectedRow
-        detailVC.vmEdit = WordsLangDetailViewModel(vm: vmWordsLang, item: vmWordsLang.arrWords[i])
+        detailVC.vmEdit = WordsLangDetailViewModel(vm: vmWordsLang, item: vmWordsLang.arrWordsAll[i])
         detailVC.complete = { [unowned self] in
             tvWords.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<tvWords.tableColumns.count))
         }

@@ -16,7 +16,7 @@ class WordsTextbookViewController: WordsBaseViewController {
     @IBOutlet weak var btnTextbookFilter: UIButton!
 
     var vm: WordsUnitViewModel!
-    var arrWords: [MUnitWord] { vm.arrWordsFiltered }
+    var arrWords: [MUnitWord] { vm.arrWords }
     override var vmBase: WordsBaseViewModel! { vm }
 
     override func refresh() {
@@ -26,7 +26,7 @@ class WordsTextbookViewController: WordsBaseViewController {
             view.removeBlurLoader()
         }
         _ = vmBase.stringTextbookFilter_ ~> btnTextbookFilter.rx.title(for: .normal)
-        vm.arrWordsFiltered_.subscribe { [unowned self] _ in
+        vm.arrWords_.subscribe { [unowned self] _ in
             tableView.reloadData()
         } ~ rx.disposeBag
 
@@ -52,11 +52,11 @@ class WordsTextbookViewController: WordsBaseViewController {
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let i = indexPath.row
-        let item = vm.arrWords[i]
+        let item = vm.arrWordsAll[i]
         func delete() {
             yesNoAction(title: "delete", message: "Do you really want to delete the word \"\(item.WORD)\"?", yesHandler: { [unowned self] (action) in
                 WordsUnitViewModel.delete(item: item).subscribe() ~ rx.disposeBag
-                vm.arrWords.remove(at: i)
+                vm.arrWordsAll.remove(at: i)
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }, noHandler: { (action) in
                 tableView.reloadRows(at: [indexPath], with: .fade)

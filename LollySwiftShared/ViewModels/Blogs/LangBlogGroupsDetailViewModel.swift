@@ -30,7 +30,7 @@ class LangBlogGroupsDetailViewModel: NSObject {
     func onOK() -> Single<()> {
         itemEdit.save(to: item)
         if isAdd {
-            vm.arrGroups.append(item)
+            vm.arrGroupsAll.append(item)
             return LangBlogViewModel.createGroup(item: item)
         } else {
             return LangBlogViewModel.updateGroup(item: item)

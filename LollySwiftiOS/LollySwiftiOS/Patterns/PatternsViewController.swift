@@ -19,7 +19,7 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
     let refreshControl = UIRefreshControl()
 
     var vm: PatternsViewModel!
-    var arrPatterns: [MPattern] { vm.arrPatternsFiltered }
+    var arrPatterns: [MPattern] { vm.arrPatterns }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,7 +47,7 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
         }
         _ = vm.textFilter_ <~> sbTextFilter.searchTextField.rx.textInput
         _ = vm.scopeFilter_ ~> btnScopeFilter.rx.title(for: .normal)
-        vm.arrPatternsFiltered_.subscribe { [unowned self] _ in
+        vm.arrPatterns_.subscribe { [unowned self] _ in
             tableView.reloadData()
         } ~ rx.disposeBag
     }
@@ -76,7 +76,7 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let i = indexPath.row
-        let item = vm.arrPatterns[i]
+        let item = vm.arrPatternsAll[i]
         func edit() {
             performSegue(withIdentifier: "edit", sender: item)
         }

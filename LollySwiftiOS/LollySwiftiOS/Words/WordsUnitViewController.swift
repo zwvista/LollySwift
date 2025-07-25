@@ -16,7 +16,7 @@ class WordsUnitViewController: WordsBaseViewController {
     @IBOutlet weak var btnEdit: UIBarButtonItem!
 
     var vm: WordsUnitViewModel!
-    var arrWords: [MUnitWord] { vm.arrWordsFiltered }
+    var arrWords: [MUnitWord] { vm.arrWords }
     override var vmBase: WordsBaseViewModel! { vm }
 
     override func refresh() {
@@ -25,7 +25,7 @@ class WordsUnitViewController: WordsBaseViewController {
             refreshControl.endRefreshing()
             view.removeBlurLoader()
         }
-        vm.arrWordsFiltered_.subscribe { [unowned self] _ in
+        vm.arrWords_.subscribe { [unowned self] _ in
             tableView.reloadData()
         } ~ rx.disposeBag
     }
@@ -51,17 +51,17 @@ class WordsUnitViewController: WordsBaseViewController {
     }
 
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        vm.arrWords.moveElement(at: sourceIndexPath.row, to: destinationIndexPath.row)
+        vm.arrWordsAll.moveElement(at: sourceIndexPath.row, to: destinationIndexPath.row)
         reindex()
     }
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let i = indexPath.row
-        let item = vm.arrWords[i]
+        let item = vm.arrWordsAll[i]
         func delete() {
             yesNoAction(title: "delete", message: "Do you really want to delete the word \"\(item.WORD)\"?", yesHandler: { [unowned self] (action) in
                 WordsUnitViewModel.delete(item: item).subscribe() ~ rx.disposeBag
-                vm.arrWords.remove(at: i)
+                vm.arrWordsAll.remove(at: i)
                 tableView.deleteRows(at: [indexPath], with: .fade)
                 reindex()
             }, noHandler: { (action) in

@@ -18,7 +18,7 @@ class OnlineTextbooksViewController: UIViewController, UITableViewDelegate, UITa
     let refreshControl = UIRefreshControl()
 
     var vm: OnlineTextbooksViewModel!
-    var arrOnlineTextbooks: [MOnlineTextbook] { vm.arrOnlineTextbooksFiltered }
+    var arrOnlineTextbooks: [MOnlineTextbook] { vm.arrOnlineTextbooks }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +34,7 @@ class OnlineTextbooksViewController: UIViewController, UITableViewDelegate, UITa
             view.removeBlurLoader()
         }
         _ = vm.stringOnlineTextbookFilter_ ~> btnOnlineTextbookFilter.rx.title(for: .normal)
-        vm.arrOnlineTextbooksFiltered_.subscribe { [unowned self] _ in
+        vm.arrOnlineTextbooks_.subscribe { [unowned self] _ in
             tableView.reloadData()
         } ~ rx.disposeBag
 
@@ -74,7 +74,7 @@ class OnlineTextbooksViewController: UIViewController, UITableViewDelegate, UITa
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let i = indexPath.row
-        let item = vm.arrOnlineTextbooks[i]
+        let item = vm.arrOnlineTextbooksAll[i]
         func edit() {
             performSegue(withIdentifier: "edit", sender: item)
         }

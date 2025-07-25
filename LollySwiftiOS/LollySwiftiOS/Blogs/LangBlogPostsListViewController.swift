@@ -18,12 +18,12 @@ class LangBlogPostsListViewController: UIViewController, UITableViewDelegate, UI
     let refreshControl = UIRefreshControl()
 
     var vm: LangBlogGroupsViewModel!
-    var arrPosts: [MLangBlogPost] { vm.arrPostsFiltered }
+    var arrPosts: [MLangBlogPost] { vm.arrPosts }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        vm.arrPostsFiltered_.subscribe { [unowned self] _ in
+        vm.arrPosts_.subscribe { [unowned self] _ in
             tableView.reloadData()
         } ~ rx.disposeBag
         _ = vm.postFilter_ <~> sbPostFilter.searchTextField.rx.textInput
@@ -64,7 +64,7 @@ class LangBlogPostsListViewController: UIViewController, UITableViewDelegate, UI
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let i = indexPath.row
-        let item = vm.arrPosts[i]
+        let item = vm.arrPostsAll[i]
         func edit() {
             performSegue(withIdentifier: "edit", sender: item)
         }

@@ -16,7 +16,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
     @IBOutlet weak var btnEdit: UIBarButtonItem!
 
     var vm: PhrasesUnitViewModel!
-    var arrPhrases: [MUnitPhrase] { vm.arrPhrasesFiltered }
+    var arrPhrases: [MUnitPhrase] { vm.arrPhrases }
     override var vmBase: PhrasesBaseViewModel! { vm }
 
     override func refresh() {
@@ -25,7 +25,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
             refreshControl.endRefreshing()
             view.removeBlurLoader()
         }
-        vm.arrPhrasesFiltered_.subscribe { [unowned self] _ in
+        vm.arrPhrases_.subscribe { [unowned self] _ in
             tableView.reloadData()
         } ~ rx.disposeBag
     }
@@ -51,17 +51,17 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
     }
 
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        vm.arrPhrases.moveElement(at: sourceIndexPath.row, to: destinationIndexPath.row)
+        vm.arrPhrasesAll.moveElement(at: sourceIndexPath.row, to: destinationIndexPath.row)
         reindex()
     }
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let i = indexPath.row
-        let item = vm.arrPhrases[i]
+        let item = vm.arrPhrasesAll[i]
         func delete() {
             yesNoAction(title: "delete", message: "Do you really want to delete the phrase \"\(item.PHRASE)\"?", yesHandler: { [unowned self] (action) in
                 PhrasesUnitViewModel.delete(item: item).subscribe() ~ rx.disposeBag
-                vm.arrPhrases.remove(at: i)
+                vm.arrPhrasesAll.remove(at: i)
                 tableView.deleteRows(at: [indexPath], with: .fade)
                 reindex()
             }, noHandler: { (action) in

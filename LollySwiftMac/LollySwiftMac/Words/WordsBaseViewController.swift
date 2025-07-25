@@ -209,7 +209,7 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
             let item = wordItemForRow(row: row)!
             cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
         } else {
-            let item = vmPhrasesLang.arrPhrases[row]
+            let item = vmPhrasesLang.arrPhrasesAll[row]
             cell.textField?.stringValue = String(describing: item.value(forKey: columnName) ?? "")
         }
         return cell
@@ -270,7 +270,7 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
     }
 
     override func phraseItemForRow(row: Int) -> (MPhraseProtocol & NSObject)? {
-        vmPhrasesLang.arrPhrases[row]
+        vmPhrasesLang.arrPhrasesAll[row]
     }
 
     @IBAction func openOnlineDict(_ sender: AnyObject) {
@@ -303,7 +303,7 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
     @IBAction func editPhrase(_ sender: AnyObject) {
         let detailVC = NSStoryboard(name: "Phrases", bundle: nil).instantiateController(withIdentifier: "PhrasesLangDetailViewController") as! PhrasesLangDetailViewController
         let i = tvPhrases.selectedRow
-        detailVC.vmEdit = PhrasesLangDetailViewModel(vm: vmPhrasesLang, item: vmPhrasesLang.arrPhrases[i])
+        detailVC.vmEdit = PhrasesLangDetailViewModel(vm: vmPhrasesLang, item: vmPhrasesLang.arrPhrasesAll[i])
         detailVC.complete = { [unowned self] in
             tvPhrases.reloadData(forRowIndexes: [i], columnIndexes: IndexSet(0..<tvPhrases.tableColumns.count))
         }

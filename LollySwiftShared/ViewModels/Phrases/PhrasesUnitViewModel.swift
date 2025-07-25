@@ -14,23 +14,23 @@ import Then
 
 class PhrasesUnitViewModel: PhrasesBaseViewModel {
     let inTextbook: Bool
+    let arrPhrasesAll_ = BehaviorRelay(value: [MUnitPhrase]())
+    var arrPhrasesAll: [MUnitPhrase] { get { arrPhrasesAll_.value } set { arrPhrasesAll_.accept(newValue) } }
     let arrPhrases_ = BehaviorRelay(value: [MUnitPhrase]())
     var arrPhrases: [MUnitPhrase] { get { arrPhrases_.value } set { arrPhrases_.accept(newValue) } }
-    let arrPhrasesFiltered_ = BehaviorRelay(value: [MUnitPhrase]())
-    var arrPhrasesFiltered: [MUnitPhrase] { get { arrPhrasesFiltered_.value } set { arrPhrasesFiltered_.accept(newValue) } }
     var hasFilter: Bool { !(textFilter.isEmpty && textbookFilter == 0) }
 
     public init(settings: SettingsViewModel, inTextbook: Bool, complete: @escaping () -> Void) {
         self.inTextbook = inTextbook
         super.init(settings: settings)
 
-        Observable.combineLatest(arrPhrases_, indexTextbookFilter_, textFilter_, scopeFilter_).subscribe { [unowned self] _ in
-            arrPhrasesFiltered = arrPhrases
+        Observable.combineLatest(arrPhrasesAll_, indexTextbookFilter_, textFilter_, scopeFilter_).subscribe { [unowned self] _ in
+            arrPhrases = arrPhrasesAll
             if !textFilter.isEmpty {
-                arrPhrasesFiltered = arrPhrasesFiltered.filter { (scopeFilter == "Phrase" ? $0.PHRASE : $0.TRANSLATION).lowercased().contains(textFilter.lowercased()) }
+                arrPhrases = arrPhrases.filter { (scopeFilter == "Phrase" ? $0.PHRASE : $0.TRANSLATION).lowercased().contains(textFilter.lowercased()) }
             }
             if textbookFilter != 0 {
-                arrPhrasesFiltered = arrPhrasesFiltered.filter { $0.TEXTBOOKID == textbookFilter }
+                arrPhrases = arrPhrases.filter { $0.TEXTBOOKID == textbookFilter }
             }
         } ~ rx.disposeBag
 
@@ -40,7 +40,7 @@ class PhrasesUnitViewModel: PhrasesBaseViewModel {
     func reload() -> Single<()> {
         (inTextbook ? MUnitPhrase.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO) : MUnitPhrase.getDataByLang(vmSettings.selectedTextbook.LANGID, arrTextbooks: vmSettings.arrTextbooks))
         .map { [unowned self] in
-            arrPhrases = $0
+            arrPhrasesAll = $0
         }
     }
 
@@ -61,7 +61,7 @@ class PhrasesUnitViewModel: PhrasesBaseViewModel {
             MUnitPhrase.getDataById($0, arrTextbooks: vmSettings.arrTextbooks)
         }.map { [unowned self] in
             if let o = $0 {
-                arrPhrases.append(o)
+                arrPhrasesAll.append(o)
                 copyProperties(from: o, to: item)
             }
         }
@@ -72,8 +72,8 @@ class PhrasesUnitViewModel: PhrasesBaseViewModel {
     }
 
     func reindex(complete: @escaping (Int) -> Void) {
-        for i in 1...arrPhrases.count {
-            let item = arrPhrases[i - 1]
+        for i in 1...arrPhrasesAll.count {
+            let item = arrPhrasesAll[i - 1]
             guard item.SEQNUM != i else {continue}
             item.SEQNUM = i
             PhrasesUnitViewModel.update(item.ID, seqnum: item.SEQNUM).subscribe { _ in
@@ -86,7 +86,7 @@ class PhrasesUnitViewModel: PhrasesBaseViewModel {
         MUnitPhrase().then {
             $0.LANGID = vmSettings.selectedLang.ID
             $0.TEXTBOOKID = vmSettings.USTEXTBOOK
-            let maxElem = arrPhrases.max{ ($0.UNIT, $0.PART, $0.SEQNUM) < ($1.UNIT, $1.PART, $1.SEQNUM) }
+            let maxElem = arrPhrasesAll.max{ ($0.UNIT, $0.PART, $0.SEQNUM) < ($1.UNIT, $1.PART, $1.SEQNUM) }
             $0.UNIT = maxElem?.UNIT ?? vmSettings.USUNITTO
             $0.PART = maxElem?.PART ?? vmSettings.USPARTTO
             $0.SEQNUM = (maxElem?.SEQNUM ?? 0) + 1
@@ -95,8 +95,8 @@ class PhrasesUnitViewModel: PhrasesBaseViewModel {
     }
 
     func generateBlogContent() -> String {
-        arrPhrases.map { $0.UNIT }.unique.count > 1 ? "Error: Multiple Units" :
-        Array(Dictionary(grouping: arrPhrases) {
+        arrPhrasesAll.map { $0.UNIT }.unique.count > 1 ? "Error: Multiple Units" :
+        Array(Dictionary(grouping: arrPhrasesAll) {
             $0.PART
         }.values).sorted {
             $0[0].PART < $1[0].PART

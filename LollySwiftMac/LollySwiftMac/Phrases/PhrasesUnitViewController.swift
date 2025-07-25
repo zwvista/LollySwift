@@ -16,7 +16,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     var vm: PhrasesUnitViewModel!
     override var vmPhrases: PhrasesBaseViewModel { vm }
     override var vmSettings: SettingsViewModel! { vm.vmSettings }
-    var arrPhrases: [MUnitPhrase] { vm.arrPhrasesFiltered }
+    var arrPhrases: [MUnitPhrase] { vm.arrPhrases }
 
     // https://developer.apple.com/videos/play/wwdc2011/120/
     // https://stackoverflow.com/questions/2121907/drag-drop-reorder-rows-on-nstableview
@@ -36,14 +36,14 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
 
     override func settingsChanged() {
         vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: true) {}
-        vm.arrPhrasesFiltered_.subscribe { [unowned self] _ in
+        vm.arrPhrases_.subscribe { [unowned self] _ in
             doRefresh()
         } ~ rx.disposeBag
         super.settingsChanged()
     }
 
     func numberOfRows(in tableView: NSTableView) -> Int {
-        tableView === tvPhrases ? arrPhrases.count : vmWordsLang.arrWords.count
+        tableView === tvPhrases ? arrPhrases.count : vmWordsLang.arrWordsAll.count
     }
 
     override func phraseItemForRow(row: Int) -> (MPhraseProtocol & NSObject)? {
@@ -86,7 +86,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
         var newIndexOffset = 0
 
         func moveRow(at oldIndex: Int, to newIndex: Int) {
-            vm.arrPhrases.moveElement(at: oldIndex, to: newIndex)
+            vm.arrPhrasesAll.moveElement(at: oldIndex, to: newIndex)
             tableView.moveRow(at: oldIndex, to: newIndex)
         }
 

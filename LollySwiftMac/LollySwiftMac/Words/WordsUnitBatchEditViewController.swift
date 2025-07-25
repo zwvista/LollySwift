@@ -30,7 +30,7 @@ class WordsUnitBatchEditViewController: NSViewController, NSTableViewDataSource,
     var vmEdit: WordsUnitBatchEditViewModel!
     var vmSettings: SettingsViewModel { vmEdit.vm.vmSettings }
     var complete: (() -> Void)?
-    var arrWords: [MUnitWord] { vmEdit.vm.arrWords }
+    var arrWords: [MUnitWord] { vmEdit.vm.arrWordsAll }
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -13,10 +13,10 @@ import RxBinding
 
 class OnlineTextbooksViewModel: NSObject {
     var vmSettings: SettingsViewModel
+    var arrOnlineTextbooksAll_ = BehaviorRelay(value: [MOnlineTextbook]())
+    var arrOnlineTextbooksAll: [MOnlineTextbook] { get { arrOnlineTextbooksAll_.value } set { arrOnlineTextbooksAll_.accept(newValue) } }
     var arrOnlineTextbooks_ = BehaviorRelay(value: [MOnlineTextbook]())
     var arrOnlineTextbooks: [MOnlineTextbook] { get { arrOnlineTextbooks_.value } set { arrOnlineTextbooks_.accept(newValue) } }
-    var arrOnlineTextbooksFiltered_ = BehaviorRelay(value: [MOnlineTextbook]())
-    var arrOnlineTextbooksFiltered: [MOnlineTextbook] { get { arrOnlineTextbooksFiltered_.value } set { arrOnlineTextbooksFiltered_.accept(newValue) } }
     var selectedOnlineTextbookItem: MOnlineTextbook?
     let indexOnlineTextbookFilter_ = BehaviorRelay(value: 0)
     var indexOnlineTextbookFilter: Int { get { indexOnlineTextbookFilter_.value } set { indexOnlineTextbookFilter_.accept(newValue) } }
@@ -34,8 +34,8 @@ class OnlineTextbooksViewModel: NSObject {
         stringOnlineTextbookFilter_.subscribe { [unowned self] s in
             indexOnlineTextbookFilter = vmSettings.arrOnlineTextbookFilters.firstIndex { $0.label == s }!
         } ~ rx.disposeBag
-        Observable.combineLatest(arrOnlineTextbooks_, indexOnlineTextbookFilter_).subscribe { [unowned self] _ in
-            arrOnlineTextbooksFiltered = onlineTextbookFilter == 0 ? arrOnlineTextbooks : arrOnlineTextbooks.filter { $0.TEXTBOOKID == onlineTextbookFilter }
+        Observable.combineLatest(arrOnlineTextbooksAll_, indexOnlineTextbookFilter_).subscribe { [unowned self] _ in
+            arrOnlineTextbooks = onlineTextbookFilter == 0 ? arrOnlineTextbooksAll : arrOnlineTextbooksAll.filter { $0.TEXTBOOKID == onlineTextbookFilter }
         } ~ rx.disposeBag
 
         reload().subscribe { _ in complete() } ~ rx.disposeBag
@@ -43,7 +43,7 @@ class OnlineTextbooksViewModel: NSObject {
 
     func reload() -> Single<()> {
         MOnlineTextbook.getDataByLang(vmSettings.selectedLang.ID).map { [unowned self] in
-            arrOnlineTextbooks = $0
+            arrOnlineTextbooksAll = $0
         }
     }
 }

@@ -21,7 +21,7 @@ class OnlineTextbooksViewController: NSViewController, LollyProtocol, NSTableVie
     @objc var textbookFilter = 0
 
     var vm: OnlineTextbooksViewModel!
-    var arrOnlineTextbooks: [MOnlineTextbook] { vm.arrOnlineTextbooksFiltered }
+    var arrOnlineTextbooks: [MOnlineTextbook] { vm.arrOnlineTextbooks }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +34,7 @@ class OnlineTextbooksViewController: NSViewController, LollyProtocol, NSTableVie
         vm = OnlineTextbooksViewModel(settings: AppDelegate.theSettingsViewModel) { [unowned self] in
             acTextbooks.content = vm.vmSettings.arrOnlineTextbookFilters
         }
-        vm.arrOnlineTextbooksFiltered_.subscribe { [unowned self] _ in
+        vm.arrOnlineTextbooks_.subscribe { [unowned self] _ in
             doRefresh()
         } ~ rx.disposeBag
     }

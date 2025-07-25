@@ -39,10 +39,10 @@ class PhrasesUnitBatchEditViewController: UIViewController, UITableViewDelegate,
         let unit = vmSettings.arrUnits.first { $0.label == tfUnit.text }!.value
         let part = vmSettings.arrParts.first { $0.label == tfPart.text }!.value
         let seqnum = Int(tfSeqNum.text ?? "") ?? 0
-        for i in 0..<vm.arrPhrases.count {
+        for i in 0..<vm.arrPhrasesAll.count {
             let cell = tvPhrases.cellForRow(at: IndexPath(row: i, section: 0))!
             guard cell.accessoryType == .checkmark else {continue}
-            let item = vm.arrPhrases[i]
+            let item = vm.arrPhrasesAll[i]
             if swUnit.isOn || swPart.isOn || swSeqNum.isOn {
                 if swUnit.isOn { item.UNIT = unit }
                 if swPart.isOn { item.PART = part }
@@ -54,7 +54,7 @@ class PhrasesUnitBatchEditViewController: UIViewController, UITableViewDelegate,
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        tableView === tvActions ? 3 : vm.arrPhrases.count
+        tableView === tvActions ? 3 : vm.arrPhrasesAll.count
     }
 
 //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -104,7 +104,7 @@ class PhrasesUnitBatchEditViewController: UIViewController, UITableViewDelegate,
             default: break
             }
         } else {
-            let item = vm.arrPhrases[indexPath.row]
+            let item = vm.arrPhrasesAll[indexPath.row]
             cell.lblUnitPartSeqNum.text = item.UNITPARTSEQNUM
             cell.lblPhrase!.text = item.PHRASE
             cell.lblTranslation!.text = item.TRANSLATION

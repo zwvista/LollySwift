@@ -32,7 +32,7 @@ class LangBlogPostsDetailViewModel: NSObject {
     func onOK() -> Single<()> {
         itemEdit.save(to: itemPost)
         if isAdd {
-            vm.arrPosts.append(itemPost)
+            vm.arrPostsAll.append(itemPost)
             let itemGP = MLangBlogGP()
             itemGP.GROUPID = itemGroup!.ID
             return LangBlogViewModel.createPost(item: itemPost).flatMap {

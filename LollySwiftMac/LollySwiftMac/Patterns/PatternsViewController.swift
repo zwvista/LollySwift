@@ -27,7 +27,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     let synth = AVSpeechSynthesizer()
     var isSpeaking = true
     var vmSettings: SettingsViewModel! { vm.vmSettings }
-    var arrPatterns: [MPattern] { vm.arrPatternsFiltered }
+    var arrPatterns: [MPattern] { vm.arrPatterns }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -111,7 +111,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
         vm = PatternsViewModel(settings: AppDelegate.theSettingsViewModel) {}
         _ = vm.textFilter_ <~> sfTextFilter.rx.text.orEmpty
         _ = vm.scopeFilter_ <~> scScopeFilter.rx.selectedLabel
-        vm.arrPatternsFiltered_.subscribe { [unowned self] _ in
+        vm.arrPatterns_.subscribe { [unowned self] _ in
             doRefresh()
         } ~ rx.disposeBag
     }

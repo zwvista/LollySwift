@@ -33,7 +33,7 @@ class PhrasesLangDetailViewModel: NSObject {
         itemEdit.save(to: item)
         item.PHRASE = vm.vmSettings.autoCorrectInput(text: item.PHRASE)
         if isAdd {
-            vm.arrPhrases.append(item)
+            vm.arrPhrasesAll.append(item)
             return PhrasesLangViewModel.create(item: item)
         } else {
             return PhrasesLangViewModel.update(item: item)

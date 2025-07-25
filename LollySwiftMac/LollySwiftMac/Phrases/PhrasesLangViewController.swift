@@ -16,7 +16,7 @@ class PhrasesLangViewController: PhrasesBaseViewController {
     var vm: PhrasesLangViewModel!
     override var vmPhrases: PhrasesBaseViewModel { vm }
     override var vmSettings: SettingsViewModel! { vm.vmSettings }
-    var arrPhrases: [MLangPhrase] { vm.arrPhrasesFiltered }
+    var arrPhrases: [MLangPhrase] { vm.arrPhrases }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,14 +24,14 @@ class PhrasesLangViewController: PhrasesBaseViewController {
 
     override func settingsChanged() {
         vm = PhrasesLangViewModel(settings: AppDelegate.theSettingsViewModel) {}
-        vm.arrPhrasesFiltered_.subscribe { [unowned self] _ in
+        vm.arrPhrases_.subscribe { [unowned self] _ in
             doRefresh()
         } ~ rx.disposeBag
         super.settingsChanged()
     }
 
     func numberOfRows(in tableView: NSTableView) -> Int {
-        tableView === tvPhrases ? arrPhrases.count : vmWordsLang.arrWords.count
+        tableView === tvPhrases ? arrPhrases.count : vmWordsLang.arrWordsAll.count
     }
 
     override func phraseItemForRow(row: Int) -> (MPhraseProtocol & NSObject)? {

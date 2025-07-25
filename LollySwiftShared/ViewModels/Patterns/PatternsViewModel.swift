@@ -14,10 +14,10 @@ import Then
 
 class PatternsViewModel: NSObject {
     var vmSettings: SettingsViewModel
+    var arrPatternsAll_ = BehaviorRelay(value: [MPattern]())
+    var arrPatternsAll: [MPattern] { get { arrPatternsAll_.value } set { arrPatternsAll_.accept(newValue) } }
     var arrPatterns_ = BehaviorRelay(value: [MPattern]())
     var arrPatterns: [MPattern] { get { arrPatterns_.value } set { arrPatterns_.accept(newValue) } }
-    var arrPatternsFiltered_ = BehaviorRelay(value: [MPattern]())
-    var arrPatternsFiltered: [MPattern] { get { arrPatternsFiltered_.value } set { arrPatternsFiltered_.accept(newValue) } }
     var selectedPatternItem: MPattern?
     var selectedPattern: String { selectedPatternItem?.PATTERN ?? "" }
     var selectedPatternID: Int { selectedPatternItem?.ID ?? 0 }
@@ -31,10 +31,10 @@ class PatternsViewModel: NSObject {
         vmSettings = settings
         super.init()
 
-        Observable.combineLatest(arrPatterns_, textFilter_, scopeFilter_).subscribe { [unowned self] _ in
-            arrPatternsFiltered = arrPatterns
+        Observable.combineLatest(arrPatternsAll_, textFilter_, scopeFilter_).subscribe { [unowned self] _ in
+            arrPatterns = arrPatternsAll
             if !textFilter.isEmpty {
-                arrPatternsFiltered = arrPatternsFiltered.filter { (scopeFilter == "Pattern" ? $0.PATTERN : $0.TAGS).lowercased().contains(textFilter.lowercased()) }
+                arrPatterns = arrPatterns.filter { (scopeFilter == "Pattern" ? $0.PATTERN : $0.TAGS).lowercased().contains(textFilter.lowercased()) }
             }
         } ~ rx.disposeBag
 
@@ -43,7 +43,7 @@ class PatternsViewModel: NSObject {
 
     func reload() -> Single<()> {
         MPattern.getDataByLang(vmSettings.selectedLang.ID).map { [unowned self] in
-            arrPatterns = $0
+            arrPatternsAll = $0
         }
     }
 }

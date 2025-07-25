@@ -13,19 +13,19 @@ import RxBinding
 import Then
 
 class PhrasesLangViewModel: PhrasesBaseViewModel {
+    var arrPhrasesAll_ = BehaviorRelay(value: [MLangPhrase]())
+    var arrPhrasesAll: [MLangPhrase] { get { arrPhrasesAll_.value } set { arrPhrasesAll_.accept(newValue) } }
     var arrPhrases_ = BehaviorRelay(value: [MLangPhrase]())
     var arrPhrases: [MLangPhrase] { get { arrPhrases_.value } set { arrPhrases_.accept(newValue) } }
-    var arrPhrasesFiltered_ = BehaviorRelay(value: [MLangPhrase]())
-    var arrPhrasesFiltered: [MLangPhrase] { get { arrPhrasesFiltered_.value } set { arrPhrasesFiltered_.accept(newValue) } }
     var hasFilter: Bool { !textFilter.isEmpty }
 
     public init(settings: SettingsViewModel, complete: @escaping () -> Void) {
         super.init(settings: settings)
 
-        Observable.combineLatest(arrPhrases_, textFilter_, scopeFilter_).subscribe { [unowned self] _ in
-            arrPhrasesFiltered = arrPhrases
+        Observable.combineLatest(arrPhrasesAll_, textFilter_, scopeFilter_).subscribe { [unowned self] _ in
+            arrPhrases = arrPhrasesAll
             if !textFilter.isEmpty {
-                arrPhrasesFiltered = arrPhrasesFiltered.filter { (scopeFilter == "Phrase" ? $0.PHRASE : $0.TRANSLATION).lowercased().contains(textFilter.lowercased()) }
+                arrPhrases = arrPhrases.filter { (scopeFilter == "Phrase" ? $0.PHRASE : $0.TRANSLATION).lowercased().contains(textFilter.lowercased()) }
             }
         } ~ rx.disposeBag
 
@@ -34,7 +34,7 @@ class PhrasesLangViewModel: PhrasesBaseViewModel {
 
     func reload() -> Single<()> {
         MLangPhrase.getDataByLang(vmSettings.selectedTextbook.LANGID).map { [unowned self] in
-            arrPhrases = $0
+            arrPhrasesAll = $0
         }
     }
 
@@ -60,7 +60,7 @@ class PhrasesLangViewModel: PhrasesBaseViewModel {
 
     func getPhrases(wordid: Int) -> Single<()> {
         MWordPhrase.getPhrasesByWordId(wordid).map { [unowned self] in
-            arrPhrases = $0
+            arrPhrasesAll = $0
         }
     }
 }

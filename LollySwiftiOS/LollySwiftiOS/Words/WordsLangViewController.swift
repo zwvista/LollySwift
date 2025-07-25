@@ -14,7 +14,7 @@ import RxBinding
 class WordsLangViewController: WordsBaseViewController {
 
     var vm: WordsLangViewModel!
-    var arrWords: [MLangWord] { vm.arrWordsFiltered }
+    var arrWords: [MLangWord] { vm.arrWords }
     override var vmBase: WordsBaseViewModel! { vm }
 
     override func refresh() {
@@ -23,7 +23,7 @@ class WordsLangViewController: WordsBaseViewController {
             refreshControl.endRefreshing()
             view.removeBlurLoader()
         }
-        vm.arrWordsFiltered_.subscribe { [unowned self] _ in
+        vm.arrWords_.subscribe { [unowned self] _ in
             tableView.reloadData()
         } ~ rx.disposeBag
     }
@@ -38,11 +38,11 @@ class WordsLangViewController: WordsBaseViewController {
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let i = indexPath.row
-        let item = vm.arrWords[i]
+        let item = vm.arrWordsAll[i]
         func delete() {
             yesNoAction(title: "delete", message: "Do you really want to delete the word \"\(item.WORD)\"?", yesHandler: { [unowned self] (action) in
                 WordsLangViewModel.delete(item: item).subscribe() ~ rx.disposeBag
-                vm.arrWords.remove(at: i)
+                vm.arrWordsAll.remove(at: i)
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }, noHandler: { (action) in
                 tableView.reloadRows(at: [indexPath], with: .fade)

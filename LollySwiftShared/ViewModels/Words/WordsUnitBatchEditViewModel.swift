@@ -33,7 +33,7 @@ class WordsUnitBatchEditViewModel: NSObject {
         var o = Single.just(())
         for (i, isChecked) in rows.enumerated() {
             guard isChecked else {continue}
-            let item = vm.arrWords[i]
+            let item = vm.arrWordsAll[i]
             if unitChecked.value || partChecked.value || seqnumChecked.value {
                 if unitChecked.value { item.UNIT = UNIT }
                 if partChecked.value { item.PART = PART }

@@ -20,17 +20,17 @@ class LangBlogGroupsViewController: NSViewController, NSTableViewDataSource, NST
     @IBOutlet weak var sfPostFilter: NSSearchField!
 
     let vm = LangBlogGroupsViewModel(settings: AppDelegate.theSettingsViewModel)
-    var arrGroups: [MLangBlogGroup] { vm.arrGroupsFiltered }
-    var arrPosts: [MLangBlogPost] { vm.arrPostsFiltered }
+    var arrGroups: [MLangBlogGroup] { vm.arrGroups }
+    var arrPosts: [MLangBlogPost] { vm.arrPosts }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         wvPost.allowsMagnification = true
         wvPost.allowsBackForwardNavigationGestures = true
-        vm.arrGroupsFiltered_.subscribe { [unowned self] _ in
+        vm.arrGroups_.subscribe { [unowned self] _ in
             tvGroups.reloadData()
         } ~ rx.disposeBag
-        vm.arrPostsFiltered_.subscribe { [unowned self] _ in
+        vm.arrPosts_.subscribe { [unowned self] _ in
             tvPosts.reloadData()
         } ~ rx.disposeBag
         _ = vm.groupFilter_ <~> sfGroupFilter.rx.text.orEmpty
