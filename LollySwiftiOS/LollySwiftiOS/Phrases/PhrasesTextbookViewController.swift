@@ -41,7 +41,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
     override func refresh() {
         view.showBlurLoader()
         vm.reload().subscribe { [unowned self] in
-//            sender.endRefreshing()
+            refreshControl.endRefreshing()
             view.removeBlurLoader()
         } ~ rx.disposeBag
     }

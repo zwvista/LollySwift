@@ -24,6 +24,9 @@ class WordsBaseViewController: UIViewController, UITableViewDelegate, UITableVie
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         refresh(refreshControl)
 
+        _ = vmBase.textFilter_ <~> sbTextFilter.searchTextField.rx.textInput
+        _ = vmBase.scopeFilter_ ~> btnScopeFilter.rx.title(for: .normal)
+
         func configMenu() {
             btnScopeFilter.menu = UIMenu(title: "", options: .displayInline, children: SettingsViewModel.arrScopeWordFilters.enumerated().map { index, item in
                 UIAction(title: item, state: item == vmBase.scopeFilter ? .on : .off) { [unowned self] _ in
@@ -38,8 +41,6 @@ class WordsBaseViewController: UIViewController, UITableViewDelegate, UITableVie
 
     @objc func refresh(_ sender: UIRefreshControl) {
         refresh()
-        _ = vmBase.textFilter_ <~> sbTextFilter.searchTextField.rx.textInput
-        _ = vmBase.scopeFilter_ ~> btnScopeFilter.rx.title(for: .normal)
     }
 
     func refresh() {
