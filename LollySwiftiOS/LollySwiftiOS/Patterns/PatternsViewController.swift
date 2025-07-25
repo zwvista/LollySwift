@@ -16,7 +16,7 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var btnScopeFilter: UIButton!
     let refreshControl = UIRefreshControl()
 
-    var vm: PatternsViewModel!
+    var vm = PatternsViewModel(settings: vmSettings)
     var arrPatterns: [MPattern] { vm.arrPatterns }
     var subscriptions = Set<AnyCancellable>()
 
@@ -25,6 +25,12 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         refresh(refreshControl)
+
+        vm.$textFilter <~> sbTextFilter.searchTextField.textProperty ~ subscriptions
+        vm.$scopeFilter ~> (btnScopeFilter, \.titleNormal) ~ subscriptions
+        vm.$arrPatterns.didSet.sink { [unowned self] _ in
+            tableView.reloadData()
+        } ~ subscriptions
 
         func configMenu() {
             btnScopeFilter.menu = UIMenu(title: "", options: .displayInline, children: SettingsViewModel.arrScopePatternFilters.enumerated().map { index, item in
@@ -40,15 +46,11 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
 
     @objc func refresh(_ sender: UIRefreshControl) {
         view.showBlurLoader()
-        vm = PatternsViewModel(settings: vmSettings) { [unowned self] in
+        Task {
+            await vm.reload()
             sender.endRefreshing()
             view.removeBlurLoader()
         }
-        vm.$textFilter <~> sbTextFilter.searchTextField.textProperty ~ subscriptions
-        vm.$scopeFilter ~> (btnScopeFilter, \.titleNormal) ~ subscriptions
-        vm.$arrPatterns.didSet.sink { [unowned self] _ in
-            tableView.reloadData()
-        } ~ subscriptions
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

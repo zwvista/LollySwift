@@ -13,16 +13,12 @@ class WordsTextbookViewController: WordsBaseViewController {
 
     @IBOutlet weak var btnTextbookFilter: UIButton!
 
-    var vm: WordsUnitViewModel!
+    var vm = WordsUnitViewModel(settings: vmSettings, inTextbook: false)
     var arrWords: [MUnitWord] { vm.arrWords }
     override var vmBase: WordsBaseViewModel! { vm }
-
-    override func refresh() {
-        view.showBlurLoader()
-        vm = WordsUnitViewModel(settings: vmSettings, inTextbook: false) { [unowned self] in
-            refreshControl.endRefreshing()
-            view.removeBlurLoader()
-        }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         vmBase.$stringTextbookFilter ~> (btnTextbookFilter, \.titleNormal) ~ subscriptions
         vm.$arrWords.didSet.sink { [unowned self] _ in
             tableView.reloadData()
@@ -38,6 +34,15 @@ class WordsTextbookViewController: WordsBaseViewController {
             btnTextbookFilter.showsMenuAsPrimaryAction = true
         }
         configMenu()
+    }
+
+    override func refresh() {
+        view.showBlurLoader()
+        Task {
+            await vm.reload()
+            refreshControl.endRefreshing()
+            view.removeBlurLoader()
+        }
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

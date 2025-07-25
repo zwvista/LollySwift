@@ -34,7 +34,8 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     }
 
     override func settingsChanged() {
-        vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: true) {}
+        vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: true)
+        refreshTableView(self)
         vm.$arrPhrases.didSet.sink { [unowned self] _ in
             doRefresh()
         } ~ subscriptions

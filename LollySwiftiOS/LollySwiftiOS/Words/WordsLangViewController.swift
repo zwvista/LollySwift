@@ -10,19 +10,24 @@ import UIKit
 
 class WordsLangViewController: WordsBaseViewController {
 
-    var vm: WordsLangViewModel!
+    var vm = WordsLangViewModel(settings: vmSettings)
     var arrWords: [MLangWord] { vm.arrWords }
     override var vmBase: WordsBaseViewModel! { vm }
-
-    override func refresh() {
-        view.showBlurLoader()
-        vm = WordsLangViewModel(settings: vmSettings) { [unowned self] in
-            refreshControl.endRefreshing()
-            view.removeBlurLoader()
-        }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         vm.$arrWords.didSet.sink { [unowned self] _ in
             tableView.reloadData()
         } ~ subscriptions
+    }
+
+    override func refresh() {
+        view.showBlurLoader()
+        Task {
+            await vm.reload()
+            refreshControl.endRefreshing()
+            view.removeBlurLoader()
+        }
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

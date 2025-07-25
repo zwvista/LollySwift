@@ -23,7 +23,7 @@ class OnlineTextbooksViewModel: NSObject, ObservableObject {
 
     var subscriptions = Set<AnyCancellable>()
 
-    init(settings: SettingsViewModel, complete: @escaping () -> Void) {
+    init(settings: SettingsViewModel) {
         vmSettings = settings
         super.init()
 
@@ -34,11 +34,6 @@ class OnlineTextbooksViewModel: NSObject, ObservableObject {
         $arrOnlineTextbooksAll.didSet.combineLatest($indexOnlineTextbookFilter.didSet).sink { [unowned self] _ in
             arrOnlineTextbooks = onlineTextbookFilter == 0 ? arrOnlineTextbooksAll : arrOnlineTextbooksAll.filter { $0.TEXTBOOKID == onlineTextbookFilter }
         } ~ subscriptions
-
-        Task {
-            await reload()
-            complete()
-        }
     }
 
     func reload() async {

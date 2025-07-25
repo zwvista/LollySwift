@@ -16,13 +16,9 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
     var vm: PhrasesUnitViewModel!
     var arrPhrases: [MUnitPhrase] { vm.arrPhrases }
     override var vmBase: PhrasesBaseViewModel! { vm }
-
-    override func refresh() {
-        view.showBlurLoader()
-        vm = PhrasesUnitViewModel(settings: vmSettings, inTextbook: false) { [unowned self] in
-            refreshControl.endRefreshing()
-            view.removeBlurLoader()
-        }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         vmBase.$stringTextbookFilter ~> (btnTextbookFilter, \.titleNormal) ~ subscriptions
         vm.$arrPhrases.didSet.sink { [unowned self] _ in
             tableView.reloadData()
@@ -38,6 +34,15 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
             btnTextbookFilter.showsMenuAsPrimaryAction = true
         }
         configMenu()
+    }
+
+    override func refresh() {
+        view.showBlurLoader()
+        Task {
+            await vm.reload()
+            refreshControl.endRefreshing()
+            view.removeBlurLoader()
+        }
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

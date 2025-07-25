@@ -23,7 +23,7 @@ class PatternsViewModel: NSObject, ObservableObject {
     var hasFilter: Bool { !textFilter.isEmpty }
     var subscriptions = Set<AnyCancellable>()
 
-    public init(settings: SettingsViewModel, complete: @escaping () -> Void) {
+    public init(settings: SettingsViewModel) {
         vmSettings = settings
         super.init()
 
@@ -33,11 +33,6 @@ class PatternsViewModel: NSObject, ObservableObject {
                 arrPatterns = arrPatterns.filter { (scopeFilter == "Pattern" ? $0.PATTERN : $0.TAGS).lowercased().contains(textFilter.lowercased()) }
             }
         } ~ subscriptions
-
-        Task {
-            await reload()
-            complete()
-        }
     }
 
     func reload() async {

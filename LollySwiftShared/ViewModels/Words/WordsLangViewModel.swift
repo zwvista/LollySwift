@@ -15,7 +15,7 @@ class WordsLangViewModel: WordsBaseViewModel {
     @Published var arrWords = [MLangWord]()
     var hasFilter: Bool { !textFilter.isEmpty }
 
-    public init(settings: SettingsViewModel, complete: @escaping () -> Void) {
+    override init(settings: SettingsViewModel) {
         super.init(settings: settings)
 
         $arrWordsAll.didSet.combineLatest($textFilter.didSet, $scopeFilter.didSet).sink { [unowned self] _ in
@@ -24,11 +24,6 @@ class WordsLangViewModel: WordsBaseViewModel {
                 arrWords = arrWords.filter { (scopeFilter == "Word" ? $0.WORD : $0.NOTE).lowercased().contains(textFilter.lowercased()) }
             }
         } ~ subscriptions
-
-        Task {
-            await reload()
-            complete()
-        }
     }
 
     func reload() async {

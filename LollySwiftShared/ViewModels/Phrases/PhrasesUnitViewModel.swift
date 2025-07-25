@@ -16,7 +16,7 @@ class PhrasesUnitViewModel: PhrasesBaseViewModel {
     @Published var arrPhrases = [MUnitPhrase]()
     var hasFilter: Bool { !(textFilter.isEmpty && textbookFilter == 0) }
 
-    public init(settings: SettingsViewModel, inTextbook: Bool, complete: @escaping () -> Void) {
+    init(settings: SettingsViewModel, inTextbook: Bool) {
         self.inTextbook = inTextbook
         super.init(settings: settings)
 
@@ -29,11 +29,6 @@ class PhrasesUnitViewModel: PhrasesBaseViewModel {
                 arrPhrases = arrPhrases.filter { $0.TEXTBOOKID == textbookFilter }
             }
         } ~ subscriptions
-
-        Task {
-            await reload()
-            complete()
-        }
     }
 
     func reload() async {

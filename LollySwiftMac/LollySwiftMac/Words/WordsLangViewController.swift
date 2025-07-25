@@ -22,7 +22,8 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
     }
 
     override func settingsChanged() {
-        vm = WordsLangViewModel(settings: AppDelegate.theSettingsViewModel) {}
+        vm = WordsLangViewModel(settings: AppDelegate.theSettingsViewModel)
+        refreshTableView(self)
         vm.$arrWords.didSet.sink { [unowned self] _ in
             doRefresh()
         } ~ subscriptions

@@ -15,7 +15,7 @@ class PhrasesLangViewModel: PhrasesBaseViewModel {
     @Published var arrPhrases = [MLangPhrase]()
     var hasFilter: Bool { !textFilter.isEmpty }
 
-    public init(settings: SettingsViewModel, complete: @escaping () -> Void) {
+    override init(settings: SettingsViewModel) {
         super.init(settings: settings)
 
         $arrPhrasesAll.didSet.combineLatest($textFilter.didSet, $scopeFilter.didSet).sink { [unowned self] _ in
@@ -24,11 +24,6 @@ class PhrasesLangViewModel: PhrasesBaseViewModel {
                 arrPhrases = arrPhrases.filter { (scopeFilter == "Phrase" ? $0.PHRASE : $0.TRANSLATION).lowercased().contains(textFilter.lowercased()) }
             }
         } ~ subscriptions
-
-        Task {
-            await reload()
-            complete()
-        }
     }
 
     func reload() async {

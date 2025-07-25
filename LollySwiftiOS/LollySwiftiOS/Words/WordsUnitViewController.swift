@@ -12,19 +12,24 @@ class WordsUnitViewController: WordsBaseViewController {
 
     @IBOutlet weak var btnEdit: UIBarButtonItem!
 
-    var vm: WordsUnitViewModel!
+    var vm = WordsUnitViewModel(settings: vmSettings, inTextbook: true)
     var arrWords: [MUnitWord] { vm.arrWords }
     override var vmBase: WordsBaseViewModel! { vm }
-
-    override func refresh() {
-        view.showBlurLoader()
-        vm = WordsUnitViewModel(settings: vmSettings, inTextbook: true) { [unowned self] in
-            refreshControl.endRefreshing()
-            view.removeBlurLoader()
-        }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
         vm.$arrWords.didSet.sink { [unowned self] _ in
             tableView.reloadData()
         } ~ subscriptions
+    }
+
+    override func refresh() {
+        view.showBlurLoader()
+        Task {
+            await vm.reload()
+            refreshControl.endRefreshing()
+            view.removeBlurLoader()
+        }
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -16,7 +16,7 @@ class WordsUnitViewModel: WordsBaseViewModel {
     @Published var arrWords = [MUnitWord]()
     var hasFilter: Bool { !(textFilter.isEmpty && textbookFilter == 0) }
 
-    init(settings: SettingsViewModel, inTextbook: Bool, complete: @escaping () -> Void) {
+    init(settings: SettingsViewModel, inTextbook: Bool) {
         self.inTextbook = inTextbook
         super.init(settings: settings)
 
@@ -29,11 +29,6 @@ class WordsUnitViewModel: WordsBaseViewModel {
                 arrWords = arrWords.filter { $0.TEXTBOOKID == textbookFilter }
             }
         } ~ subscriptions
-
-        Task {
-            await reload()
-            complete()
-        }
     }
 
     func reload() async {
