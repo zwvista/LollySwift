@@ -28,7 +28,7 @@ class LangBlogGroupsDetailViewModel: NSObject {
     func onOK() async {
         itemEdit.save(to: item)
         if isAdd {
-            vm.arrGroups.append(item)
+            vm.arrGroupsAll.append(item)
             await LangBlogViewModel.createGroup(item: item)
         } else {
             await LangBlogViewModel.updateGroup(item: item)

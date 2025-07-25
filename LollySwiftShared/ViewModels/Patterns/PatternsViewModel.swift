@@ -13,8 +13,8 @@ import Then
 @MainActor
 class PatternsViewModel: NSObject, ObservableObject {
     var vmSettings: SettingsViewModel
+    @Published var arrPatternsAll = [MPattern]()
     @Published var arrPatterns = [MPattern]()
-    @Published var arrPatternsFiltered = [MPattern]()
     var selectedPatternItem: MPattern?
     var selectedPattern: String { selectedPatternItem?.PATTERN ?? "" }
     var selectedPatternID: Int { selectedPatternItem?.ID ?? 0 }
@@ -27,10 +27,10 @@ class PatternsViewModel: NSObject, ObservableObject {
         vmSettings = settings
         super.init()
 
-        $arrPatterns.didSet.combineLatest($textFilter.didSet, $scopeFilter.didSet).sink { [unowned self] _ in
-            arrPatternsFiltered = arrPatterns
+        $arrPatternsAll.didSet.combineLatest($textFilter.didSet, $scopeFilter.didSet).sink { [unowned self] _ in
+            arrPatterns = arrPatternsAll
             if !textFilter.isEmpty {
-                arrPatternsFiltered = arrPatternsFiltered.filter { (scopeFilter == "Pattern" ? $0.PATTERN : $0.TAGS).lowercased().contains(textFilter.lowercased()) }
+                arrPatterns = arrPatterns.filter { (scopeFilter == "Pattern" ? $0.PATTERN : $0.TAGS).lowercased().contains(textFilter.lowercased()) }
             }
         } ~ subscriptions
 
@@ -41,6 +41,6 @@ class PatternsViewModel: NSObject, ObservableObject {
     }
 
     func reload() async {
-        arrPatterns = await MPattern.getDataByLang(vmSettings.selectedLang.ID)
+        arrPatternsAll = await MPattern.getDataByLang(vmSettings.selectedLang.ID)
     }
 }

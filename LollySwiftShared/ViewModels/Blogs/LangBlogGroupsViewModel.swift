@@ -22,10 +22,10 @@ class LangBlogGroupsViewModel: LangBlogViewModel {
     }
 
     func reloadGroups() async {
-        arrGroups = await MLangBlogGroup.getDataByLang(vmSettings.selectedLang.ID)
+        arrGroupsAll = await MLangBlogGroup.getDataByLang(vmSettings.selectedLang.ID)
     }
 
     func reloadPosts() async {
-        arrPosts = await MLangBlogPost.getDataByLangGroup(langid: vmSettings.selectedLang.ID, groupid: selectedGroup?.ID ?? 0)
+        arrPostsAll = await MLangBlogPost.getDataByLangGroup(langid: vmSettings.selectedLang.ID, groupid: selectedGroup?.ID ?? 0)
     }
 }

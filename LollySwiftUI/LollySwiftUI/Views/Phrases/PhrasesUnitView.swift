@@ -32,7 +32,7 @@ struct PhrasesUnitView: View {
                 .tint(.white)
             }
             List {
-                ForEach(vm.arrPhrasesFiltered, id: \.ID) { item in
+                ForEach(vm.arrPhrases, id: \.ID) { item in
                     HStack {
                         VStack {
                             Text(item.UNITSTR)

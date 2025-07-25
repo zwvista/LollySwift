@@ -12,7 +12,7 @@ import Combine
 class PhrasesLangViewController: PhrasesBaseViewController {
 
     var vm: PhrasesLangViewModel!
-    var arrPhrases: [MLangPhrase] { vm.arrPhrasesFiltered }
+    var arrPhrases: [MLangPhrase] { vm.arrPhrases }
     override var vmBase: PhrasesBaseViewModel! { vm }
 
     override func refresh() {
@@ -21,7 +21,7 @@ class PhrasesLangViewController: PhrasesBaseViewController {
             refreshControl.endRefreshing()
             view.removeBlurLoader()
         }
-        vm.$arrPhrasesFiltered.didSet.sink { [unowned self] _ in
+        vm.$arrPhrases.didSet.sink { [unowned self] _ in
             tableView.reloadData()
         } ~ subscriptions
     }

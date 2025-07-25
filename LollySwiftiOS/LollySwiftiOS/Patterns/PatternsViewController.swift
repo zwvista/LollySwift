@@ -17,7 +17,7 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
     let refreshControl = UIRefreshControl()
 
     var vm: PatternsViewModel!
-    var arrPatterns: [MPattern] { vm.arrPatternsFiltered }
+    var arrPatterns: [MPattern] { vm.arrPatterns }
     var subscriptions = Set<AnyCancellable>()
 
     override func viewDidLoad() {
@@ -46,7 +46,7 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
         }
         vm.$textFilter <~> sbTextFilter.searchTextField.textProperty ~ subscriptions
         vm.$scopeFilter ~> (btnScopeFilter, \.titleNormal) ~ subscriptions
-        vm.$arrPatternsFiltered.didSet.sink { [unowned self] _ in
+        vm.$arrPatterns.didSet.sink { [unowned self] _ in
             tableView.reloadData()
         } ~ subscriptions
     }

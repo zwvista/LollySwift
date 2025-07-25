@@ -16,7 +16,7 @@ class OnlineTextbooksViewController: UIViewController, UITableViewDelegate, UITa
     let refreshControl = UIRefreshControl()
 
     var vm: OnlineTextbooksViewModel!
-    var arrOnlineTextbooks: [MOnlineTextbook] { vm.arrOnlineTextbooksFiltered }
+    var arrOnlineTextbooks: [MOnlineTextbook] { vm.arrOnlineTextbooks }
     var subscriptions = Set<AnyCancellable>()
 
     override func viewDidLoad() {
@@ -33,7 +33,7 @@ class OnlineTextbooksViewController: UIViewController, UITableViewDelegate, UITa
             view.removeBlurLoader()
         }
         vm.$stringOnlineTextbookFilter ~> (btnOnlineTextbookFilter, \.titleNormal) ~ subscriptions
-        vm.$arrOnlineTextbooksFiltered.didSet.sink { [unowned self] _ in
+        vm.$arrOnlineTextbooks.didSet.sink { [unowned self] _ in
             tableView.reloadData()
         } ~ subscriptions
 

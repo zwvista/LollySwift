@@ -11,17 +11,17 @@ import Then
 
 @MainActor
 class WordsLangViewModel: WordsBaseViewModel {
+    @Published var arrWordsAll = [MLangWord]()
     @Published var arrWords = [MLangWord]()
-    @Published var arrWordsFiltered = [MLangWord]()
     var hasFilter: Bool { !textFilter.isEmpty }
 
     public init(settings: SettingsViewModel, complete: @escaping () -> Void) {
         super.init(settings: settings)
 
-        $arrWords.didSet.combineLatest($textFilter.didSet, $scopeFilter.didSet).sink { [unowned self] _ in
-            arrWordsFiltered = arrWords
+        $arrWordsAll.didSet.combineLatest($textFilter.didSet, $scopeFilter.didSet).sink { [unowned self] _ in
+            arrWords = arrWordsAll
             if !textFilter.isEmpty {
-                arrWordsFiltered = arrWordsFiltered.filter { (scopeFilter == "Word" ? $0.WORD : $0.NOTE).lowercased().contains(textFilter.lowercased()) }
+                arrWords = arrWords.filter { (scopeFilter == "Word" ? $0.WORD : $0.NOTE).lowercased().contains(textFilter.lowercased()) }
             }
         } ~ subscriptions
 
@@ -32,7 +32,7 @@ class WordsLangViewModel: WordsBaseViewModel {
     }
 
     func reload() async {
-        arrWords = await MLangWord.getDataByLang(vmSettings.selectedTextbook.LANGID)
+        arrWordsAll = await MLangWord.getDataByLang(vmSettings.selectedTextbook.LANGID)
     }
 
     static func update(item: MLangWord) async {
@@ -54,19 +54,19 @@ class WordsLangViewModel: WordsBaseViewModel {
     }
 
     func getNote(index: Int) async {
-        let item = arrWords[index]
+        let item = arrWordsAll[index]
         let note = await vmSettings.getNote(word: item.WORD)
         item.NOTE = note
         await MLangWord.update(item.ID, note: note)
     }
 
     func clearNote(index: Int) async {
-        let item = arrWords[index]
+        let item = arrWordsAll[index]
         item.NOTE = SettingsViewModel.zeroNote
         await WordsUnitViewModel.update(item.ID, note: item.NOTE)
     }
 
     func getWords(phraseid: Int) async {
-        arrWords = await MWordPhrase.getWordsByPhraseId(phraseid)
+        arrWordsAll = await MWordPhrase.getWordsByPhraseId(phraseid)
     }
 }

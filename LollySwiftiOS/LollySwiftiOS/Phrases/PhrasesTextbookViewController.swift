@@ -14,7 +14,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
     @IBOutlet weak var btnTextbookFilter: UIButton!
 
     var vm: PhrasesUnitViewModel!
-    var arrPhrases: [MUnitPhrase] { vm.arrPhrasesFiltered }
+    var arrPhrases: [MUnitPhrase] { vm.arrPhrases }
     override var vmBase: PhrasesBaseViewModel! { vm }
 
     override func refresh() {
@@ -24,7 +24,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
             view.removeBlurLoader()
         }
         vmBase.$stringTextbookFilter ~> (btnTextbookFilter, \.titleNormal) ~ subscriptions
-        vm.$arrPhrasesFiltered.didSet.sink { [unowned self] _ in
+        vm.$arrPhrases.didSet.sink { [unowned self] _ in
             tableView.reloadData()
         } ~ subscriptions
 

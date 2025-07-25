@@ -20,7 +20,7 @@ class WordsAssociateViewController: NSViewController, NSTableViewDataSource, NST
     var phraseid = 0
     var textFilter = ""
     var complete: (() -> Void)?
-    var arrWords: [MLangWord] { vm.arrWordsFiltered }
+    var arrWords: [MLangWord] { vm.arrWords }
     var subscriptions = Set<AnyCancellable>()
 
     override func viewDidLoad() {
@@ -29,7 +29,7 @@ class WordsAssociateViewController: NSViewController, NSTableViewDataSource, NST
         vm.textFilter = textFilter
         vm.$textFilter <~> sfTextFilter.textProperty ~ subscriptions
         vm.$scopeFilter <~> scScopeFilter.selectedLabelProperty ~ subscriptions
-        vm.$arrWordsFiltered.didSet.sink { [unowned self] _ in
+        vm.$arrWords.didSet.sink { [unowned self] _ in
             tableView.reloadData()
         } ~ subscriptions
     }

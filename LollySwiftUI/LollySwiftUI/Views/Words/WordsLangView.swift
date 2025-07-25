@@ -29,7 +29,7 @@ struct WordsLangView: View {
                 .tint(.white)
             }
             List {
-                ForEach(vm.arrWordsFiltered, id: \.ID) { item in
+                ForEach(vm.arrWords, id: \.ID) { item in
                     HStack {
                         VStack(alignment: .leading) {
                             Text(item.WORD)
@@ -102,9 +102,9 @@ struct WordsLangView: View {
                 }
             }
             .navigationDestination(for: MLangWord.self) { item in
-                let index = vm.arrWordsFiltered.firstIndex(of: item)!
-                let (start, end) = getPreferredRangeFromArray(index: index, length: vm.arrWordsFiltered.count, preferredLength: 50)
-                WordsDictView(vm: WordsDictViewModel(settings: vmSettings, arrWords: vm.arrWordsFiltered[start ..< end].map(\.WORD), selectedWordIndex: index) {})
+                let index = vm.arrWords.firstIndex(of: item)!
+                let (start, end) = getPreferredRangeFromArray(index: index, length: vm.arrWords.count, preferredLength: 50)
+                WordsDictView(vm: WordsDictViewModel(settings: vmSettings, arrWords: vm.arrWords[start ..< end].map(\.WORD), selectedWordIndex: index) {})
             }
             .sheet(isPresented: $showDetailEdit) {
                 WordsLangDetailView(vmEdit: WordsLangDetailViewModel(vm: vm, item: selectedItem), showDetail: $showDetailEdit)

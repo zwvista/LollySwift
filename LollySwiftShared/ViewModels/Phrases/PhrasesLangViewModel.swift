@@ -11,17 +11,17 @@ import Then
 
 @MainActor
 class PhrasesLangViewModel: PhrasesBaseViewModel {
+    @Published var arrPhrasesAll = [MLangPhrase]()
     @Published var arrPhrases = [MLangPhrase]()
-    @Published var arrPhrasesFiltered = [MLangPhrase]()
     var hasFilter: Bool { !textFilter.isEmpty }
 
     public init(settings: SettingsViewModel, complete: @escaping () -> Void) {
         super.init(settings: settings)
 
-        $arrPhrases.didSet.combineLatest($textFilter.didSet, $scopeFilter.didSet).sink { [unowned self] _ in
-            arrPhrasesFiltered = arrPhrases
+        $arrPhrasesAll.didSet.combineLatest($textFilter.didSet, $scopeFilter.didSet).sink { [unowned self] _ in
+            arrPhrases = arrPhrasesAll
             if !textFilter.isEmpty {
-                arrPhrasesFiltered = arrPhrasesFiltered.filter { (scopeFilter == "Phrase" ? $0.PHRASE : $0.TRANSLATION).lowercased().contains(textFilter.lowercased()) }
+                arrPhrases = arrPhrases.filter { (scopeFilter == "Phrase" ? $0.PHRASE : $0.TRANSLATION).lowercased().contains(textFilter.lowercased()) }
             }
         } ~ subscriptions
 
@@ -32,7 +32,7 @@ class PhrasesLangViewModel: PhrasesBaseViewModel {
     }
 
     func reload() async {
-        arrPhrases = await MLangPhrase.getDataByLang(vmSettings.selectedTextbook.LANGID)
+        arrPhrasesAll = await MLangPhrase.getDataByLang(vmSettings.selectedTextbook.LANGID)
     }
 
     static func update(item: MLangPhrase) async {
@@ -54,6 +54,6 @@ class PhrasesLangViewModel: PhrasesBaseViewModel {
     }
 
     func getPhrases(wordid: Int) async {
-        arrPhrases = await MWordPhrase.getPhrasesByWordId(wordid)
+        arrPhrasesAll = await MWordPhrase.getPhrasesByWordId(wordid)
     }
 }

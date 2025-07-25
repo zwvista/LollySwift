@@ -32,7 +32,7 @@ struct WordsTextbookView: View {
                 .modifier(PickerModifier(backgroundColor: Color.color2))
             }
             List {
-                ForEach(vm.arrWordsFiltered, id: \.ID) { item in
+                ForEach(vm.arrWords, id: \.ID) { item in
                     HStack {
                         VStack {
                             Text(item.UNITSTR)
@@ -116,9 +116,9 @@ struct WordsTextbookView: View {
                 Text(selectedItem.WORDNOTE)
             })
             .navigationDestination(for: MUnitWord.self) { item in
-                let index = vm.arrWordsFiltered.firstIndex(of: item)!
-                let (start, end) = getPreferredRangeFromArray(index: index, length: vm.arrWordsFiltered.count, preferredLength: 50)
-                WordsDictView(vm: WordsDictViewModel(settings: vmSettings, arrWords: vm.arrWordsFiltered[start ..< end].map(\.WORD), selectedWordIndex: index) {})
+                let index = vm.arrWords.firstIndex(of: item)!
+                let (start, end) = getPreferredRangeFromArray(index: index, length: vm.arrWords.count, preferredLength: 50)
+                WordsDictView(vm: WordsDictViewModel(settings: vmSettings, arrWords: vm.arrWords[start ..< end].map(\.WORD), selectedWordIndex: index) {})
             }
             .sheet(isPresented: $showDetailEdit) {
                 WordsTextbookDetailView(vmEdit: WordsUnitDetailViewModel(vm: vm, item: selectedItem, phraseid: 0), showDetail: $showDetailEdit)

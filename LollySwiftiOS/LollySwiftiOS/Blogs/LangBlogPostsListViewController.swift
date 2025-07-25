@@ -16,13 +16,13 @@ class LangBlogPostsListViewController: UIViewController, UITableViewDelegate, UI
     let refreshControl = UIRefreshControl()
 
     var vm: LangBlogGroupsViewModel!
-    var arrPosts: [MLangBlogPost] { vm.arrPostsFiltered }
+    var arrPosts: [MLangBlogPost] { vm.arrPosts }
     var subscriptions = Set<AnyCancellable>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        vm.$arrPostsFiltered.didSet.sink { [unowned self] _ in
+        vm.$arrPosts.didSet.sink { [unowned self] _ in
             tableView.reloadData()
         } ~ subscriptions
         vm.$postFilter <~> sbPostFilter.searchTextField.textProperty ~ subscriptions

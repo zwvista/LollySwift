@@ -11,7 +11,7 @@ import UIKit
 class WordsLangViewController: WordsBaseViewController {
 
     var vm: WordsLangViewModel!
-    var arrWords: [MLangWord] { vm.arrWordsFiltered }
+    var arrWords: [MLangWord] { vm.arrWords }
     override var vmBase: WordsBaseViewModel! { vm }
 
     override func refresh() {
@@ -20,7 +20,7 @@ class WordsLangViewController: WordsBaseViewController {
             refreshControl.endRefreshing()
             view.removeBlurLoader()
         }
-        vm.$arrWordsFiltered.didSet.sink { [unowned self] _ in
+        vm.$arrWords.didSet.sink { [unowned self] _ in
             tableView.reloadData()
         } ~ subscriptions
     }

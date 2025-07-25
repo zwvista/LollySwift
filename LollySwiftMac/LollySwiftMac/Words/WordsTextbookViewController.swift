@@ -18,7 +18,7 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
     var vm: WordsUnitViewModel!
     override var vmWords: WordsBaseViewModel { vm }
     override var vmSettings: SettingsViewModel! { vm.vmSettings }
-    var arrWords: [MUnitWord] { vm.arrWordsFiltered }
+    var arrWords: [MUnitWord] { vm.arrWords }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,14 +28,14 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
         vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: false) { [unowned self] in
             acTextbooks.content = vmSettings.arrTextbookFilters
         }
-        vm.$arrWordsFiltered.didSet.sink { [unowned self] _ in
+        vm.$arrWords.didSet.sink { [unowned self] _ in
             doRefresh()
         } ~ subscriptions
         super.settingsChanged()
     }
 
     func numberOfRows(in tableView: NSTableView) -> Int {
-        tableView === tvWords ? arrWords.count : vmPhrasesLang.arrPhrases.count
+        tableView === tvWords ? arrWords.count : vmPhrasesLang.arrPhrasesAll.count
     }
 
     override func wordItemForRow(row: Int) -> (MWordProtocol & NSObject)? {

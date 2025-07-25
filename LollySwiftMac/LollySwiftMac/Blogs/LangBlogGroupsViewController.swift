@@ -19,8 +19,8 @@ class LangBlogGroupsViewController: NSViewController, NSTableViewDataSource, NST
     @IBOutlet weak var sfPostFilter: NSSearchField!
 
     let vm = LangBlogGroupsViewModel(settings: AppDelegate.theSettingsViewModel)
-    var arrGroups: [MLangBlogGroup] { vm.arrGroupsFiltered }
-    var arrPosts: [MLangBlogPost] { vm.arrPostsFiltered }
+    var arrGroups: [MLangBlogGroup] { vm.arrGroups }
+    var arrPosts: [MLangBlogPost] { vm.arrPosts }
 
     var subscriptions = Set<AnyCancellable>()
 
@@ -28,10 +28,10 @@ class LangBlogGroupsViewController: NSViewController, NSTableViewDataSource, NST
         super.viewDidLoad()
         wvPost.allowsMagnification = true
         wvPost.allowsBackForwardNavigationGestures = true
-        vm.$arrGroupsFiltered.didSet.sink { [unowned self] _ in
+        vm.$arrGroups.didSet.sink { [unowned self] _ in
             tvGroups.reloadData()
         } ~ subscriptions
-        vm.$arrPostsFiltered.didSet.sink { [unowned self] _ in
+        vm.$arrPosts.didSet.sink { [unowned self] _ in
             tvPosts.reloadData()
         } ~ subscriptions
         vm.$groupFilter <~> sfGroupFilter.textProperty ~ subscriptions

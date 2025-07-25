@@ -18,7 +18,7 @@ struct LangBlogPostsListView: View {
         VStack {
             SearchBar(text: $vm.postFilter, placeholder: "Filter") { _ in }
             List {
-                ForEach(vm.arrPostsFiltered, id: \.ID) { item in
+                ForEach(vm.arrPosts, id: \.ID) { item in
                     HStack {
                         VStack(alignment: .leading) {
                             Text(item.TITLE)
@@ -61,9 +61,9 @@ struct LangBlogPostsListView: View {
             Text(selectedItem.TITLE)
         })
         .navigationDestination(for: MLangBlogPost.self) { item in
-            let index = vm.arrPostsFiltered.firstIndex(of: item)!
-            let (start, end) = getPreferredRangeFromArray(index: index, length: vm.arrPostsFiltered.count, preferredLength: 50)
-            LangBlogPostsContentView(navPath: $navPath, vm: LangBlogPostsContentViewModel(settings: vmSettings, vmGroups: vm, arrPosts: Array(vm.arrPostsFiltered[start ..< end]), selectedPostIndex: index))
+            let index = vm.arrPosts.firstIndex(of: item)!
+            let (start, end) = getPreferredRangeFromArray(index: index, length: vm.arrPosts.count, preferredLength: 50)
+            LangBlogPostsContentView(navPath: $navPath, vm: LangBlogPostsContentViewModel(settings: vmSettings, vmGroups: vm, arrPosts: Array(vm.arrPosts[start ..< end]), selectedPostIndex: index))
         }
         .sheet(isPresented: $showDetail) {
             LangBlogPostsDetailView(item: selectedItem, showDetail: $showDetail)

@@ -24,7 +24,7 @@ struct OnlineTextbooksView: View {
             }
             .modifier(PickerModifier(backgroundColor: Color.color3))
             List {
-                ForEach(vm.arrOnlineTextbooksFiltered, id: \.ID) { item in
+                ForEach(vm.arrOnlineTextbooks, id: \.ID) { item in
                     HStack {
                         VStack(alignment: .leading) {
                             Text(item.TEXTBOOKNAME)
@@ -68,9 +68,9 @@ struct OnlineTextbooksView: View {
                 Text(selectedItem.TITLE)
             })
             .navigationDestination(for: MOnlineTextbook.self) { item in
-                let index = vm.arrOnlineTextbooksFiltered.firstIndex(of: item)!
-                let (start, end) = getPreferredRangeFromArray(index: index, length: vm.arrOnlineTextbooksFiltered.count, preferredLength: 50)
-                OnlineTextbooksWebPageView(vm: OnlineTextbooksWebPageViewModel(settings: vmSettings, arrOnlineTextbooks: Array(vm.arrOnlineTextbooksFiltered[start ..< end]), selectedOnlineTextbookIndex: index) {})
+                let index = vm.arrOnlineTextbooks.firstIndex(of: item)!
+                let (start, end) = getPreferredRangeFromArray(index: index, length: vm.arrOnlineTextbooks.count, preferredLength: 50)
+                OnlineTextbooksWebPageView(vm: OnlineTextbooksWebPageViewModel(settings: vmSettings, arrOnlineTextbooks: Array(vm.arrOnlineTextbooks[start ..< end]), selectedOnlineTextbookIndex: index) {})
             }
             .sheet(isPresented: $showDetail) {
                 OnlineTextbooksDetailView(item: selectedItem, showDetail: $showDetail)

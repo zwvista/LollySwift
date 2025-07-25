@@ -18,7 +18,7 @@ struct LangBlogGroupsView: View {
         VStack {
             SearchBar(text: $vm.groupFilter, placeholder: "Filter") { _ in }
             List {
-                ForEach(vm.arrGroupsFiltered, id: \.ID) { item in
+                ForEach(vm.arrGroups, id: \.ID) { item in
                     HStack {
                         VStack(alignment: .leading) {
                             Text(item.GROUPNAME)

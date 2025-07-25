@@ -27,7 +27,7 @@ struct PatternsView: View {
                 .tint(.white)
             }
             List {
-                ForEach(vm.arrPatternsFiltered, id: \.ID) { item in
+                ForEach(vm.arrPatterns, id: \.ID) { item in
                     HStack {
                         VStack(alignment: .leading) {
                             Text(item.PATTERN)
@@ -77,9 +77,9 @@ struct PatternsView: View {
                 Text(selectedItem.PATTERN)
             })
             .navigationDestination(for: MPattern.self) { item in
-                let index = vm.arrPatternsFiltered.firstIndex(of: item)!
-                let (start, end) = getPreferredRangeFromArray(index: index, length: vm.arrPatternsFiltered.count, preferredLength: 50)
-                PatternsWebPageView(vm: PatternsWebPageViewModel(settings: vmSettings, arrPatterns: Array(vm.arrPatternsFiltered[start ..< end]), selectedPatternIndex: index) {})
+                let index = vm.arrPatterns.firstIndex(of: item)!
+                let (start, end) = getPreferredRangeFromArray(index: index, length: vm.arrPatterns.count, preferredLength: 50)
+                PatternsWebPageView(vm: PatternsWebPageViewModel(settings: vmSettings, arrPatterns: Array(vm.arrPatterns[start ..< end]), selectedPatternIndex: index) {})
             }
             .sheet(isPresented: $showDetail) {
                 PatternsDetailView(item: selectedItem, showDetail: $showDetail)

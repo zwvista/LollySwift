@@ -32,7 +32,7 @@ struct PhrasesTextbookView: View {
                 .modifier(PickerModifier(backgroundColor: Color.color2))
             }
             List {
-                ForEach(vm.arrPhrasesFiltered, id: \.ID) { item in
+                ForEach(vm.arrPhrases, id: \.ID) { item in
                     HStack {
                         VStack {
                             Text(item.UNITSTR)

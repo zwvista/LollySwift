@@ -12,8 +12,8 @@ import Combine
 @MainActor
 class OnlineTextbooksViewModel: NSObject, ObservableObject {
     var vmSettings: SettingsViewModel
+    @Published var arrOnlineTextbooksAll = [MOnlineTextbook]()
     @Published var arrOnlineTextbooks = [MOnlineTextbook]()
-    @Published var arrOnlineTextbooksFiltered = [MOnlineTextbook]()
     var selectedOnlineTextbookItem: MOnlineTextbook?
     @Published var indexOnlineTextbookFilter = 0
     @Published var stringOnlineTextbookFilter = ""
@@ -31,8 +31,8 @@ class OnlineTextbooksViewModel: NSObject, ObservableObject {
         $stringOnlineTextbookFilter.sink { [unowned self] s in
             indexOnlineTextbookFilter = vmSettings.arrOnlineTextbookFilters.firstIndex { $0.label == s }!
         } ~ subscriptions
-        $arrOnlineTextbooks.didSet.combineLatest($indexOnlineTextbookFilter.didSet).sink { [unowned self] _ in
-            arrOnlineTextbooksFiltered = onlineTextbookFilter == 0 ? arrOnlineTextbooks : arrOnlineTextbooks.filter { $0.TEXTBOOKID == onlineTextbookFilter }
+        $arrOnlineTextbooksAll.didSet.combineLatest($indexOnlineTextbookFilter.didSet).sink { [unowned self] _ in
+            arrOnlineTextbooks = onlineTextbookFilter == 0 ? arrOnlineTextbooksAll : arrOnlineTextbooksAll.filter { $0.TEXTBOOKID == onlineTextbookFilter }
         } ~ subscriptions
 
         Task {
@@ -42,6 +42,6 @@ class OnlineTextbooksViewModel: NSObject, ObservableObject {
     }
 
     func reload() async {
-        arrOnlineTextbooks = await MOnlineTextbook.getDataByLang(vmSettings.selectedLang.ID)
+        arrOnlineTextbooksAll = await MOnlineTextbook.getDataByLang(vmSettings.selectedLang.ID)
     }
 }

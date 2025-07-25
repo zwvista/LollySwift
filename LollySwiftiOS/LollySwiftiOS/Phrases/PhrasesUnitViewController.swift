@@ -14,7 +14,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
     @IBOutlet weak var btnEdit: UIBarButtonItem!
 
     var vm: PhrasesUnitViewModel!
-    var arrPhrases: [MUnitPhrase] { vm.arrPhrasesFiltered }
+    var arrPhrases: [MUnitPhrase] { vm.arrPhrases }
     override var vmBase: PhrasesBaseViewModel! { vm }
 
     override func refresh() {
@@ -23,7 +23,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
             refreshControl.endRefreshing()
             view.removeBlurLoader()
         }
-        vm.$arrPhrasesFiltered.didSet.sink { [unowned self] _ in
+        vm.$arrPhrases.didSet.sink { [unowned self] _ in
             tableView.reloadData()
         } ~ subscriptions
     }

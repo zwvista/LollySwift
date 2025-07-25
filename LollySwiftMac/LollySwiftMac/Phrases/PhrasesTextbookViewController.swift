@@ -15,7 +15,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
     var vm: PhrasesUnitViewModel!
     override var vmPhrases: PhrasesBaseViewModel { vm }
     override var vmSettings: SettingsViewModel! { vm.vmSettings }
-    var arrPhrases: [MUnitPhrase] { vm.arrPhrasesFiltered }
+    var arrPhrases: [MUnitPhrase] { vm.arrPhrases }
 
     @IBOutlet weak var pubTextbookFilter: NSPopUpButton!
     @IBOutlet var acTextbooks: NSArrayController!
@@ -28,14 +28,14 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
         vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: false) { [unowned self] in
             acTextbooks.content = vmSettings.arrTextbookFilters
         }
-        vm.$arrPhrasesFiltered.didSet.sink { [unowned self] _ in
+        vm.$arrPhrases.didSet.sink { [unowned self] _ in
             doRefresh()
         } ~ subscriptions
         super.settingsChanged()
     }
 
     func numberOfRows(in tableView: NSTableView) -> Int {
-        tableView === tvPhrases ? arrPhrases.count : vmWordsLang.arrWords.count
+        tableView === tvPhrases ? arrPhrases.count : vmWordsLang.arrWordsAll.count
     }
 
     override func phraseItemForRow(row: Int) -> (MPhraseProtocol & NSObject)? {

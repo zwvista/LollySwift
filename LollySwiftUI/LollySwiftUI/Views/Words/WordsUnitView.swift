@@ -32,7 +32,7 @@ struct WordsUnitView: View {
                 .tint(.white)
             }
             List {
-                ForEach(vm.arrWordsFiltered, id: \.ID) { item in
+                ForEach(vm.arrWords, id: \.ID) { item in
                     HStack {
                         VStack {
                             Text(item.UNITSTR)
@@ -129,7 +129,7 @@ struct WordsUnitView: View {
                 Text(selectedItem.WORDNOTE)
             })
             .navigationDestination(for: MUnitWord.self) { item in
-                WordsDictView(vm: WordsDictViewModel(settings: vmSettings, arrWords: vm.arrWordsFiltered.map(\.WORD), selectedWordIndex: vm.arrWordsFiltered.firstIndex(of: item)!) {})
+                WordsDictView(vm: WordsDictViewModel(settings: vmSettings, arrWords: vm.arrWords.map(\.WORD), selectedWordIndex: vm.arrWords.firstIndex(of: item)!) {})
             }
             .toolbar {
                 ToolbarItemGroup {

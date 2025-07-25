@@ -20,7 +20,7 @@ class PhrasesAssociateViewController: NSViewController, NSTableViewDataSource, N
     var wordid = 0
     var textFilter = ""
     var complete: (() -> Void)?
-    var arrPhrases: [MLangPhrase] { vm.arrPhrasesFiltered }
+    var arrPhrases: [MLangPhrase] { vm.arrPhrases }
     var subscriptions = Set<AnyCancellable>()
 
     override func viewDidLoad() {
@@ -29,7 +29,7 @@ class PhrasesAssociateViewController: NSViewController, NSTableViewDataSource, N
         vm.textFilter = textFilter
         vm.$textFilter <~> sfTextFilter.textProperty ~ subscriptions
         vm.$scopeFilter <~> scScopeFilter.selectedLabelProperty ~ subscriptions
-        vm.$arrPhrasesFiltered.didSet.sink { [unowned self] _ in
+        vm.$arrPhrases.didSet.sink { [unowned self] _ in
             tableView.reloadData()
         } ~ subscriptions
     }

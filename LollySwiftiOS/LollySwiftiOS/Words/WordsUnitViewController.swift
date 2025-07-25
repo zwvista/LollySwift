@@ -13,7 +13,7 @@ class WordsUnitViewController: WordsBaseViewController {
     @IBOutlet weak var btnEdit: UIBarButtonItem!
 
     var vm: WordsUnitViewModel!
-    var arrWords: [MUnitWord] { vm.arrWordsFiltered }
+    var arrWords: [MUnitWord] { vm.arrWords }
     override var vmBase: WordsBaseViewModel! { vm }
 
     override func refresh() {
@@ -22,7 +22,7 @@ class WordsUnitViewController: WordsBaseViewController {
             refreshControl.endRefreshing()
             view.removeBlurLoader()
         }
-        vm.$arrWordsFiltered.didSet.sink { [unowned self] _ in
+        vm.$arrWords.didSet.sink { [unowned self] _ in
             tableView.reloadData()
         } ~ subscriptions
     }

@@ -13,16 +13,16 @@ import Then
 @MainActor
 class LangBlogViewModel: NSObject, ObservableObject {
     var vmSettings: SettingsViewModel
-    @Published var arrGroups = [MLangBlogGroup]()
+    @Published var arrGroupsAll = [MLangBlogGroup]()
     @Published var selectedGroup: MLangBlogGroup? = nil
     @Published var groupFilter = ""
-    @Published var arrGroupsFiltered = [MLangBlogGroup]()
+    @Published var arrGroups = [MLangBlogGroup]()
     var hasGroupFilter: Bool { !groupFilter.isEmpty }
 
-    @Published var arrPosts = [MLangBlogPost]()
+    @Published var arrPostsAll = [MLangBlogPost]()
     @Published var selectedPost: MLangBlogPost? = nil
     @Published var postFilter = ""
-    @Published var arrPostsFiltered = [MLangBlogPost]()
+    @Published var arrPosts = [MLangBlogPost]()
     var hasPostFilter: Bool { !postFilter.isEmpty }
 
     @Published var postHtml = ""
@@ -33,11 +33,11 @@ class LangBlogViewModel: NSObject, ObservableObject {
         vmSettings = settings
         super.init()
 
-        $arrGroups.didSet.combineLatest($groupFilter.didSet).sink { [unowned self] _ in
-            arrGroupsFiltered = !hasGroupFilter ? arrGroups : arrGroups.filter { $0.GROUPNAME.lowercased().contains(groupFilter.lowercased()) }
+        $arrGroupsAll.didSet.combineLatest($groupFilter.didSet).sink { [unowned self] _ in
+            arrGroups = !hasGroupFilter ? arrGroupsAll : arrGroupsAll.filter { $0.GROUPNAME.lowercased().contains(groupFilter.lowercased()) }
         } ~ subscriptions
-        $arrPosts.didSet.combineLatest($postFilter.didSet).sink { [unowned self] _ in
-            arrPostsFiltered = !hasPostFilter ? arrPosts : arrPosts.filter { $0.TITLE.lowercased().contains(postFilter.lowercased()) }
+        $arrPostsAll.didSet.combineLatest($postFilter.didSet).sink { [unowned self] _ in
+            arrPosts = !hasPostFilter ? arrPostsAll : arrPostsAll.filter { $0.TITLE.lowercased().contains(postFilter.lowercased()) }
         } ~ subscriptions
         $selectedPost.didSet.sink { [unowned self] post in
             Task {

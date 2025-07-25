@@ -31,7 +31,7 @@ class PhrasesUnitBatchEditViewModel: NSObject, ObservableObject {
     func onOK(rows: [Bool]) async {
         for (i, isChecked) in rows.enumerated() {
             guard isChecked else {continue}
-            let item = vm.arrPhrases[i]
+            let item = vm.arrPhrasesAll[i]
             if unitChecked || partChecked || seqnumChecked {
                 if unitChecked { item.UNIT = UNIT }
                 if partChecked { item.PART = PART }

@@ -12,21 +12,21 @@ import Then
 @MainActor
 class WordsUnitViewModel: WordsBaseViewModel {
     let inTextbook: Bool
+    @Published var arrWordsAll = [MUnitWord]()
     @Published var arrWords = [MUnitWord]()
-    @Published var arrWordsFiltered = [MUnitWord]()
     var hasFilter: Bool { !(textFilter.isEmpty && textbookFilter == 0) }
 
     init(settings: SettingsViewModel, inTextbook: Bool, complete: @escaping () -> Void) {
         self.inTextbook = inTextbook
         super.init(settings: settings)
 
-        $arrWords.didSet.combineLatest($indexTextbookFilter.didSet, $textFilter.didSet, $scopeFilter.didSet).sink { [unowned self] _ in
-            arrWordsFiltered = arrWords
+        $arrWordsAll.didSet.combineLatest($indexTextbookFilter.didSet, $textFilter.didSet, $scopeFilter.didSet).sink { [unowned self] _ in
+            arrWords = arrWordsAll
             if !textFilter.isEmpty {
-                arrWordsFiltered = arrWordsFiltered.filter { (scopeFilter == "Word" ? $0.WORD : $0.NOTE).lowercased().contains(textFilter.lowercased()) }
+                arrWords = arrWords.filter { (scopeFilter == "Word" ? $0.WORD : $0.NOTE).lowercased().contains(textFilter.lowercased()) }
             }
             if textbookFilter != 0 {
-                arrWordsFiltered = arrWordsFiltered.filter { $0.TEXTBOOKID == textbookFilter }
+                arrWords = arrWords.filter { $0.TEXTBOOKID == textbookFilter }
             }
         } ~ subscriptions
 
@@ -37,7 +37,7 @@ class WordsUnitViewModel: WordsBaseViewModel {
     }
 
     func reload() async {
-        arrWords = inTextbook ? await MUnitWord.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO) : await MUnitWord.getDataByLang(vmSettings.selectedTextbook.LANGID, arrTextbooks: vmSettings.arrTextbooks)
+        arrWordsAll = inTextbook ? await MUnitWord.getDataByTextbook(vmSettings.selectedTextbook, unitPartFrom: vmSettings.USUNITPARTFROM, unitPartTo: vmSettings.USUNITPARTTO) : await MUnitWord.getDataByLang(vmSettings.selectedTextbook.LANGID, arrTextbooks: vmSettings.arrTextbooks)
     }
 
     static func update(_ id: Int, seqnum: Int) async {
@@ -62,7 +62,7 @@ class WordsUnitViewModel: WordsBaseViewModel {
     func create(item: MUnitWord) async {
         let id = await MUnitWord.create(item: item)
         if let o = await MUnitWord.getDataById(id, arrTextbooks: vmSettings.arrTextbooks) {
-            arrWords.append(o)
+            arrWordsAll.append(o)
             copyProperties(from: o, to: item)
             if item.NOTE.isEmpty {
                 await getNote(item: item)
@@ -75,8 +75,8 @@ class WordsUnitViewModel: WordsBaseViewModel {
     }
 
     func reindex(complete: @escaping (Int) -> Void) async {
-        for i in 1...arrWords.count {
-            let item = arrWords[i - 1]
+        for i in 1...arrWordsAll.count {
+            let item = arrWordsAll[i - 1]
             guard item.SEQNUM != i else {continue}
             item.SEQNUM = i
             await WordsUnitViewModel.update(item.ID, seqnum: item.SEQNUM)
@@ -88,7 +88,7 @@ class WordsUnitViewModel: WordsBaseViewModel {
         MUnitWord().then {
             $0.LANGID = vmSettings.selectedLang.ID
             $0.TEXTBOOKID = vmSettings.USTEXTBOOK
-            let maxElem = arrWords.max { ($0.UNIT, $0.PART, $0.SEQNUM) < ($1.UNIT, $1.PART, $1.SEQNUM) }
+            let maxElem = arrWordsAll.max { ($0.UNIT, $0.PART, $0.SEQNUM) < ($1.UNIT, $1.PART, $1.SEQNUM) }
             $0.UNIT = maxElem?.UNIT ?? vmSettings.USUNITTO
             $0.PART = maxElem?.PART ?? vmSettings.USPARTTO
             $0.SEQNUM = (maxElem?.SEQNUM ?? 0) + 1
@@ -97,7 +97,7 @@ class WordsUnitViewModel: WordsBaseViewModel {
     }
 
     func getNote(index: Int) async {
-        let item = arrWords[index]
+        let item = arrWordsAll[index]
         await getNote(item: item)
     }
 
@@ -108,8 +108,8 @@ class WordsUnitViewModel: WordsBaseViewModel {
     }
 
     func getNotes(ifEmpty: Bool, oneComplete: @escaping (Int) -> Void, allComplete: @escaping () -> Void) async {
-        await vmSettings.getNotes(wordCount: arrWords.count, isNoteEmpty: { [unowned self] in
-            !ifEmpty || (arrWords[$0].NOTE).isEmpty
+        await vmSettings.getNotes(wordCount: arrWordsAll.count, isNoteEmpty: { [unowned self] in
+            !ifEmpty || (arrWordsAll[$0].NOTE).isEmpty
         }, getOne: { [unowned self] i in
             await getNote(index: i)
             oneComplete(i)
@@ -117,7 +117,7 @@ class WordsUnitViewModel: WordsBaseViewModel {
     }
 
     func clearNote(index: Int) async {
-        let item = arrWords[index]
+        let item = arrWordsAll[index]
         await clearNote(item: item)
     }
 
@@ -127,8 +127,8 @@ class WordsUnitViewModel: WordsBaseViewModel {
     }
 
     func clearNotes(ifEmpty: Bool, oneComplete: @escaping (Int) -> Void) async {
-        await vmSettings.clearNotes(wordCount: arrWords.count, isNoteEmpty: { [unowned self] in
-            !ifEmpty || arrWords[$0].NOTE.isEmpty
+        await vmSettings.clearNotes(wordCount: arrWordsAll.count, isNoteEmpty: { [unowned self] in
+            !ifEmpty || arrWordsAll[$0].NOTE.isEmpty
         }, getOne: { [unowned self] i in
             await clearNote(index: i)
             oneComplete(i)
