@@ -78,6 +78,9 @@ struct PhrasesUnitView: View {
                     
                 }
             }
+            .task {
+                await vm.reload()
+            }
             .refreshable {
                 await vm.reload()
             }

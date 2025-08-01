@@ -62,7 +62,10 @@ struct WordsLangView: View {
                     }
                 }
             }
-            .refreshable {
+            .task {
+                await vm.reload()
+            }
+           .refreshable {
                 await vm.reload()
             }
             .alert(Text("delete"), isPresented: $showDelete, actions: {
