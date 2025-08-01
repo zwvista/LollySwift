@@ -12,7 +12,7 @@ import Then
 
 @MainActor
 class PatternsViewModel: NSObject, ObservableObject {
-    var vmSettings: SettingsViewModel
+
     @Published var arrPatternsAll = [MPattern]()
     @Published var arrPatterns = [MPattern]()
     var selectedPatternItem: MPattern?
@@ -23,8 +23,7 @@ class PatternsViewModel: NSObject, ObservableObject {
     var hasFilter: Bool { !textFilter.isEmpty }
     var subscriptions = Set<AnyCancellable>()
 
-    public init(settings: SettingsViewModel) {
-        vmSettings = settings
+    override init() {
         super.init()
 
         $arrPatternsAll.didSet.combineLatest($textFilter.didSet, $scopeFilter.didSet).sink { [unowned self] _ in

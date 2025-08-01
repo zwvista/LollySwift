@@ -11,11 +11,9 @@ import Foundation
 @MainActor
 class SinglePhraseViewModel: NSObject {
 
-    var vmSettings: SettingsViewModel
     @Published var arrPhrases = [MUnitPhrase]()
 
-    init(phrase: String, settings: SettingsViewModel) {
-        vmSettings = settings
+    init(phrase: String) {
         super.init()
         Task {
             arrPhrases = await MUnitPhrase.getDataByLangPhrase(langid: vmSettings.selectedLang.ID, phrase: phrase, arrTextbooks: vmSettings.arrTextbooks)

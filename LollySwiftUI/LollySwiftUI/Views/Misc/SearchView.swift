@@ -48,7 +48,6 @@ struct SearchView: View {
             }
         }
         .onAppear {
-            dictStore.vmSettings = vmSettings
             dictStore.wvDict = wvDict
             Task {
                 await vm.getData()

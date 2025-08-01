@@ -12,7 +12,6 @@ import Foundation
 @MainActor
 class PhrasesReviewViewModel: NSObject, ObservableObject {
 
-    var vmSettings: SettingsViewModel
     var arrPhrases = [MUnitPhrase]()
     var count: Int { arrPhrases.count }
     var arrCorrectIDs = [Int]()
@@ -43,10 +42,10 @@ class PhrasesReviewViewModel: NSObject, ObservableObject {
     // https://stackoverflow.com/questions/70568987/it-is-possible-to-accessing-focusstates-value-outside-of-the-body-of-a-view
     @Published var inputFocused = false
 
-    init(settings: SettingsViewModel, doTestAction: ((PhrasesReviewViewModel) -> Void)? = nil) {
-        vmSettings = settings
+    init(doTestAction: ((PhrasesReviewViewModel) -> Void)? = nil) {
         self.doTestAction = doTestAction
         options.shuffled = true
+        super.init()
     }
 
     func newTest() async {

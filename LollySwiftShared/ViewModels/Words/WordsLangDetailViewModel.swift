@@ -22,14 +22,14 @@ class WordsLangDetailViewModel: NSObject, ObservableObject {
         self.item = item
         itemEdit = MLangWordEdit(x: item)
         isAdd = item.ID == 0
-        vmSingle = SingleWordViewModel(word: isAdd ? "" : item.WORD, settings: vm.vmSettings)
+        vmSingle = SingleWordViewModel(word: isAdd ? "" : item.WORD)
         super.init()
         itemEdit.$WORD.map { !$0.isEmpty }.eraseToAnyPublisher() ~> $isOKEnabled
     }
 
     func onOK() async {
         itemEdit.save(to: item)
-        item.WORD = vm.vmSettings.autoCorrectInput(text: item.WORD)
+        item.WORD = vmSettings.autoCorrectInput(text: item.WORD)
         if isAdd {
             vm.arrWordsAll.append(item)
             await WordsLangViewModel.create(item: item)

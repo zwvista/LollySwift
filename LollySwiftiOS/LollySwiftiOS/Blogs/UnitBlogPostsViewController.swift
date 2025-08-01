@@ -16,7 +16,7 @@ class UnitBlogPostsViewController: UIViewController, WKUIDelegate, WKNavigationD
     @IBOutlet weak var btnUnit: UIButton!
     weak var wvBlogPost: WKWebView!
 
-    var vm = UnitBlogPostsViewModel(settings: vmSettings) {}
+    var vm = UnitBlogPostsViewModel()
     var subscriptions = Set<AnyCancellable>()
     
     override func viewDidLoad() {

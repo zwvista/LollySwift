@@ -56,7 +56,6 @@ struct WordsDictView: View {
             )
         }
         .onAppear {
-            dictStore.vmSettings = vmSettings
             dictStore.wvDict = wvDict
             selectedWordChanged()
         }

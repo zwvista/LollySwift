@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PhrasesUnitView: View {
     @Binding var navPath: NavigationPath
-    @StateObject var vm = PhrasesUnitViewModel(settings: vmSettings, inTextbook: true)
+    @StateObject var vm = PhrasesUnitViewModel(inTextbook: true)
     @Environment(\.editMode) var editMode
     var isEditing: Bool { editMode?.wrappedValue.isEditing == true }
     @State var showDetailEdit = false

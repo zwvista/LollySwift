@@ -21,7 +21,6 @@ class SearchViewController: UIViewController, WKNavigationDelegate, UISearchBarD
     var subscriptions = Set<AnyCancellable>()
 
     func setup() {
-        dictStore.vmSettings = vmSettings
         dictStore.wvDict = addWKWebView(webViewHolder: wvDictHolder)
         dictStore.wvDict.navigationDelegate = self
 

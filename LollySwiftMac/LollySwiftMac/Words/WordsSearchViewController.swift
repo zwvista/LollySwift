@@ -14,14 +14,13 @@ class WordsSearchViewController: WordsBaseViewController {
 
     var vm: WordsSearchViewModel!
     override var vmWords: WordsBaseViewModel { vm }
-    override var vmSettings: SettingsViewModel! { vm.vmSettings }
 
     override func viewDidLoad() {
         super.viewDidLoad()
     }
 
     override func settingsChanged() {
-        vm = WordsSearchViewModel(settings: AppDelegate.theSettingsViewModel)
+        vm = WordsSearchViewModel()
         tvWords.reloadData()
         super.settingsChanged()
     }

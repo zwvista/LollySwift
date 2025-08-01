@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PhrasesLangView: View {
     @Binding var navPath: NavigationPath
-    @StateObject var vm = PhrasesLangViewModel(settings: vmSettings)
+    @StateObject var vm = PhrasesLangViewModel()
     @State var showDetailEdit = false
     @State var showDetailAdd = false
     @State var showItemMore = false

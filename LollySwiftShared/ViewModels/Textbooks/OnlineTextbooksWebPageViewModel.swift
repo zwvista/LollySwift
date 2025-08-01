@@ -10,7 +10,7 @@ import Foundation
 
 @MainActor
 class OnlineTextbooksWebPageViewModel: NSObject, ObservableObject {
-    var vmSettings: SettingsViewModel
+
     @Published var arrOnlineTextbooks = [MOnlineTextbook]()
     @Published var selectedOnlineTextbookIndex = 0
     var selectedOnlineTextbook: MOnlineTextbook { arrOnlineTextbooks[selectedOnlineTextbookIndex] }
@@ -18,8 +18,7 @@ class OnlineTextbooksWebPageViewModel: NSObject, ObservableObject {
         selectedOnlineTextbookIndex = (selectedOnlineTextbookIndex + delta + arrOnlineTextbooks.count) % arrOnlineTextbooks.count
     }
 
-    init(settings: SettingsViewModel, arrOnlineTextbooks: [MOnlineTextbook], selectedOnlineTextbookIndex: Int, complete: @escaping () -> Void) {
-        vmSettings = settings
+    init(arrOnlineTextbooks: [MOnlineTextbook], selectedOnlineTextbookIndex: Int) {
         self.arrOnlineTextbooks = arrOnlineTextbooks
         self.selectedOnlineTextbookIndex = selectedOnlineTextbookIndex
         super.init()

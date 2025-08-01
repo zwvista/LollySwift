@@ -27,7 +27,7 @@ class WordsUnitBatchAddViewModel: NSObject, ObservableObject {
         for s in words {
             let item2 = MUnitWord()
             copyProperties(from: item, to: item2)
-            item2.WORD = vm.vmSettings.autoCorrectInput(text: String(s))
+            item2.WORD = vmSettings.autoCorrectInput(text: String(s))
             await vm.create(item: item2)
             item.SEQNUM += 1
         }

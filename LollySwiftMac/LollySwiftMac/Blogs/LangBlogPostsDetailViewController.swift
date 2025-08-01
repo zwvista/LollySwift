@@ -26,7 +26,7 @@ class LangBlogPostsDetailViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tfID.stringValue = itemEdit.ID
-        tfLang.stringValue = vmEdit.vm.vmSettings.selectedLang.LANGNAME
+        tfLang.stringValue = vmSettings.selectedLang.LANGNAME
         tfGroup.stringValue = vmEdit.itemGroup?.GROUPNAME ?? ""
         _ = itemEdit.$TITLE <~> tfTitle.textProperty ~ subscriptions
         _ = itemEdit.$URL <~> tfUrl.textProperty ~ subscriptions

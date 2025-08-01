@@ -23,7 +23,6 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
     @IBOutlet var menuWords: NSMenu!
     @IBOutlet var menuPhrases: NSMenu!
 
-    var vmSettings: SettingsViewModel! { nil }
     var vmWords: WordsBaseViewModel! { nil }
     var vmPhrases: PhrasesBaseViewModel! { nil }
     var initSettingsInViewDidLoad: Bool { true }
@@ -194,7 +193,7 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
             } ~ subscriptions
         }
         super.settingsChanged()
-        vmPhrasesLang = PhrasesLangViewModel(settings: vmSettings)
+        vmPhrasesLang = PhrasesLangViewModel()
     }
 
     func doRefresh() {

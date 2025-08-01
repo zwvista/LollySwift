@@ -11,12 +11,10 @@ import Foundation
 @MainActor
 class BlogPostEditViewModel: NSObject {
 
-    var vmSettings: SettingsViewModel
     var itemPost: MLangBlogPostContent? = nil
     var isUnitBlog: Bool { itemPost == nil }
     let title: String
-    init(settings: SettingsViewModel, item: MLangBlogPostContent?) {
-        vmSettings = SettingsViewModel(settings)
+    init(item: MLangBlogPostContent?) {
         itemPost = item
         title = item == nil ? vmSettings.BLOGUNITINFO : itemPost!.TITLE
     }

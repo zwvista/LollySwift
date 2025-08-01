@@ -24,7 +24,7 @@ class LangBlogGroupsDetailViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tfID.stringValue = itemEdit.ID
-        tfLang.stringValue = vmEdit.vm.vmSettings.selectedLang.LANGNAME
+        tfLang.stringValue = vmSettings.selectedLang.LANGNAME
         _ = itemEdit.$GROUPNAME <~> tfGroupName.textProperty ~ subscriptions
         _ = vmEdit.$isOKEnabled ~> (btnOK, \.isEnabled) ~ subscriptions
 

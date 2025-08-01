@@ -24,14 +24,14 @@ class PhrasesUnitDetailViewModel: NSObject, ObservableObject {
         self.wordid = wordid
         itemEdit = MUnitPhraseEdit(x: item)
         isAdd = item.ID == 0
-        vmSingle = SinglePhraseViewModel(phrase: isAdd ? "" : item.PHRASE, settings: vm.vmSettings)
+        vmSingle = SinglePhraseViewModel(phrase: isAdd ? "" : item.PHRASE)
         super.init()
         itemEdit.$PHRASE.map { !$0.isEmpty }.eraseToAnyPublisher() ~> $isOKEnabled
     }
 
     func onOK() async {
         itemEdit.save(to: item)
-        item.PHRASE = vm.vmSettings.autoCorrectInput(text: item.PHRASE)
+        item.PHRASE = vmSettings.autoCorrectInput(text: item.PHRASE)
         !isAdd ? await vm.update(item: item) : await vm.create(item: item)
         if wordid != 0 {
             await MWordPhrase.associate(wordid: wordid, phraseid: item.PHRASEID)

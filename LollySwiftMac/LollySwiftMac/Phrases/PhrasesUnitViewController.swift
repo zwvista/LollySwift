@@ -14,7 +14,6 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
 
     var vm: PhrasesUnitViewModel!
     override var vmPhrases: PhrasesBaseViewModel { vm }
-    override var vmSettings: SettingsViewModel! { vm.vmSettings }
     var arrPhrases: [MUnitPhrase] { vm.arrPhrases }
 
     // https://developer.apple.com/videos/play/wwdc2011/120/
@@ -34,7 +33,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     }
 
     override func settingsChanged() {
-        vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: true)
+        vm = PhrasesUnitViewModel(inTextbook: true)
         refreshTableView(self)
         vm.$arrPhrases.didSet.sink { [unowned self] _ in
             doRefresh()

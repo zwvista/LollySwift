@@ -25,7 +25,6 @@ class WordsDictViewController: NSViewController, WKNavigationDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        dictStore.vmSettings = vcWords.vmSettings
         dictStore.wvDict = wvDict
         dictStore.dict = dict
         wvDict.allowsMagnification = true

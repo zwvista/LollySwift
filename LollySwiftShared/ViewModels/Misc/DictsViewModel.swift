@@ -10,17 +10,8 @@ import Foundation
 
 @MainActor
 class DictsViewModel: NSObject {
-    var vmSettings: SettingsViewModel
-    var arrDicts = [MDictionary]()
 
-    init(settings: SettingsViewModel, complete: @escaping () -> Void) {
-        vmSettings = settings
-        super.init()
-        Task {
-            arrDicts = await MDictionary.getDictsByLang(settings.selectedLang.ID)
-            complete()
-        }
-    }
+    var arrDicts = [MDictionary]()
 
     static func update(item: MDictionary) async {
         await MDictionary.update(item: item)
@@ -34,5 +25,9 @@ class DictsViewModel: NSObject {
         let item = MDictionary()
         item.LANGIDFROM = vmSettings.selectedLang.ID
         return item
+    }
+
+    func reload() async {
+        arrDicts = await MDictionary.getDictsByLang(vmSettings.selectedLang.ID)
     }
 }

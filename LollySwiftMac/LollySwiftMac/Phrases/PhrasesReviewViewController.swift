@@ -26,13 +26,12 @@ class PhrasesReviewViewController: NSViewController, LollyProtocol, NSTextFieldD
     @IBOutlet weak var tfStatusText: NSTextField!
 
     var vm: PhrasesReviewViewModel!
-    var vmSettings: SettingsViewModel { vm.vmSettings }
     let synth = AVSpeechSynthesizer()
     var subscriptions = Set<AnyCancellable>()
 
     func settingsChanged() {
         vm?.stopTimer()
-        vm = PhrasesReviewViewModel(settings: AppDelegate.theSettingsViewModel) { [unowned self] vm2 in
+        vm = PhrasesReviewViewModel { [unowned self] vm2 in
             tfPhraseInput.becomeFirstResponder()
             if vm2.hasCurrent && vm2.isSpeaking {
                 let dialogue = AVSpeechUtterance(string: vm2.currentPhrase)

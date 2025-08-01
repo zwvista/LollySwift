@@ -12,8 +12,8 @@ import Then
 @MainActor
 class LangBlogGroupsViewModel: LangBlogViewModel {
 
-    override init(settings: SettingsViewModel) {
-        super.init(settings: settings)
+    override init() {
+        super.init()
         $selectedGroup.didSet.sink { [unowned self] _ in
             Task {
                 await reloadPosts()

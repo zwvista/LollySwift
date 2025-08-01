@@ -49,9 +49,9 @@ class WordsReviewViewModel: WordsBaseViewModel {
     // https://stackoverflow.com/questions/70568987/it-is-possible-to-accessing-focusstates-value-outside-of-the-body-of-a-view
     @Published var inputFocused = false
 
-    init(settings: SettingsViewModel, doTestAction: ((WordsReviewViewModel) -> Void)? = nil) {
+    init(doTestAction: ((WordsReviewViewModel) -> Void)? = nil) {
         self.doTestAction = doTestAction
-        super.init(settings: settings)
+        super.init()
         options.shuffled = true
     }
 

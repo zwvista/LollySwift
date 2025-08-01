@@ -23,7 +23,6 @@ class WordsDictViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        dictStore.vmSettings = vmSettings
         dictStore.wvDict = addWKWebView(webViewHolder: wvDictHolder)
         dictStore.wvDict.navigationDelegate = self
 

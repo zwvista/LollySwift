@@ -10,7 +10,7 @@ import Foundation
 
 @MainActor
 class PatternsWebPageViewModel: NSObject, ObservableObject {
-    var vmSettings: SettingsViewModel
+
     @Published var arrPatterns = [MPattern]()
     @Published var selectedPatternIndex = 0
     var selectedPattern: MPattern { arrPatterns[selectedPatternIndex] }
@@ -18,8 +18,7 @@ class PatternsWebPageViewModel: NSObject, ObservableObject {
         selectedPatternIndex = (selectedPatternIndex + delta + arrPatterns.count) % arrPatterns.count
     }
 
-    init(settings: SettingsViewModel, arrPatterns: [MPattern], selectedPatternIndex: Int, complete: @escaping () -> Void) {
-        vmSettings = settings
+    init(arrPatterns: [MPattern], selectedPatternIndex: Int) {
         self.arrPatterns = arrPatterns
         self.selectedPatternIndex = selectedPatternIndex
         super.init()

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct OnlineTextbooksView: View {
     @Binding var navPath: NavigationPath
-    @StateObject var vm = OnlineTextbooksViewModel(settings: vmSettings)
+    @StateObject var vm = OnlineTextbooksViewModel()
     @State var showDetail = false
     @State var showItemMore = false
     // https://stackoverflow.com/questions/59235879/how-to-show-an-alert-when-the-user-taps-on-the-list-row-in-swiftui
@@ -70,7 +70,7 @@ struct OnlineTextbooksView: View {
             .navigationDestination(for: MOnlineTextbook.self) { item in
                 let index = vm.arrOnlineTextbooks.firstIndex(of: item)!
                 let (start, end) = getPreferredRangeFromArray(index: index, length: vm.arrOnlineTextbooks.count, preferredLength: 50)
-                OnlineTextbooksWebPageView(vm: OnlineTextbooksWebPageViewModel(settings: vmSettings, arrOnlineTextbooks: Array(vm.arrOnlineTextbooks[start ..< end]), selectedOnlineTextbookIndex: index) {})
+                OnlineTextbooksWebPageView(vm: OnlineTextbooksWebPageViewModel(arrOnlineTextbooks: Array(vm.arrOnlineTextbooks[start ..< end]), selectedOnlineTextbookIndex: index))
             }
             .sheet(isPresented: $showDetail) {
                 OnlineTextbooksDetailView(item: selectedItem, showDetail: $showDetail)

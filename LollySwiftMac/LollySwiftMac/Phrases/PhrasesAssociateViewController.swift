@@ -16,7 +16,6 @@ class PhrasesAssociateViewController: NSViewController, NSTableViewDataSource, N
     @IBOutlet weak var tableView: NSTableView!
 
     var vm: PhrasesLangViewModel!
-    var vmSettings: SettingsViewModel! { vm.vmSettings }
     var wordid = 0
     var textFilter = ""
     var complete: (() -> Void)?
@@ -25,7 +24,7 @@ class PhrasesAssociateViewController: NSViewController, NSTableViewDataSource, N
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        vm = PhrasesLangViewModel(settings: AppDelegate.theSettingsViewModel)
+        vm = PhrasesLangViewModel()
         vm.textFilter = textFilter
         vm.$textFilter <~> sfTextFilter.textProperty ~ subscriptions
         vm.$scopeFilter <~> scScopeFilter.selectedLabelProperty ~ subscriptions

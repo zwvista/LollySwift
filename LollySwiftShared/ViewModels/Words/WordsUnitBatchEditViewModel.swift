@@ -14,9 +14,9 @@ class WordsUnitBatchEditViewModel: NSObject, ObservableObject {
     @Published var isOKEnabled = false
 
     @Published var indexUNIT = 0
-    var UNIT: Int { vm.vmSettings.arrUnits[indexUNIT].value }
+    var UNIT: Int { vmSettings.arrUnits[indexUNIT].value }
     @Published var indexPART = 0
-    var PART: Int { vm.vmSettings.arrParts[indexPART].value }
+    var PART: Int { vmSettings.arrParts[indexPART].value }
     @Published var SEQNUM = ""
     @Published var unitChecked = false
     @Published var partChecked = false
@@ -24,8 +24,8 @@ class WordsUnitBatchEditViewModel: NSObject, ObservableObject {
 
     init(vm: WordsUnitViewModel, unit: Int, part: Int) {
         self.vm = vm
-        indexUNIT = vm.vmSettings.arrUnits.firstIndex { $0.value == unit }!
-        indexPART = vm.vmSettings.arrParts.firstIndex { $0.value == part }!
+        indexUNIT = vmSettings.arrUnits.firstIndex { $0.value == unit }!
+        indexPART = vmSettings.arrParts.firstIndex { $0.value == part }!
     }
 
     func onOK(rows: [Bool]) async {

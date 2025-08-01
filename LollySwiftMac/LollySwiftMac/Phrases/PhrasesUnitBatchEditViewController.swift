@@ -27,7 +27,6 @@ class PhrasesUnitBatchEditViewController: NSViewController, NSTableViewDataSourc
     @IBOutlet weak var btnOK: NSButton!
 
     var vmEdit: PhrasesUnitBatchEditViewModel!
-    var vmSettings: SettingsViewModel { vmEdit.vm.vmSettings }
     var complete: (() -> Void)?
     var arrPhrases: [MUnitPhrase] { vmEdit.vm.arrPhrasesAll }
     var subscriptions = Set<AnyCancellable>()

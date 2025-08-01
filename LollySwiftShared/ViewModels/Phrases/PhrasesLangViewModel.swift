@@ -15,8 +15,8 @@ class PhrasesLangViewModel: PhrasesBaseViewModel {
     @Published var arrPhrases = [MLangPhrase]()
     var hasFilter: Bool { !textFilter.isEmpty }
 
-    override init(settings: SettingsViewModel) {
-        super.init(settings: settings)
+    override init() {
+        super.init()
 
         $arrPhrasesAll.didSet.combineLatest($textFilter.didSet, $scopeFilter.didSet).sink { [unowned self] _ in
             arrPhrases = arrPhrasesAll

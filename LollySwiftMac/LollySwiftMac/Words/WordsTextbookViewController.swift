@@ -17,7 +17,6 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
 
     var vm: WordsUnitViewModel!
     override var vmWords: WordsBaseViewModel { vm }
-    override var vmSettings: SettingsViewModel! { vm.vmSettings }
     var arrWords: [MUnitWord] { vm.arrWords }
 
     override func viewDidLoad() {
@@ -25,7 +24,7 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
     }
 
     override func settingsChanged() {
-        vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: false)
+        vm = WordsUnitViewModel(inTextbook: false)
         refreshTableView(self)
         acTextbooks.content = vmSettings.arrTextbookFilters
         vm.$arrWords.didSet.sink { [unowned self] _ in

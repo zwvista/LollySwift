@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct WordsReviewView: View {
-    @StateObject var vm = WordsReviewViewModel(settings: vmSettings) { vm2 in
+    @StateObject var vm = WordsReviewViewModel { vm2 in
         vm2.inputFocused = true
         if vm2.hasCurrent && vm2.isSpeaking {
             AppDelegate.speak(string: vm2.currentWord)

@@ -14,19 +14,17 @@ import AVFAudio
 @MainActor
 class AppDelegate: NSObject, NSApplicationDelegate {
 
-    @MainActor
-    static let theSettingsViewModel = SettingsViewModel()
     let synth = AVSpeechSynthesizer()
     var subscriptions = Set<AnyCancellable>()
 
     func setup() {
         Task {
-            await AppDelegate.theSettingsViewModel.getData()
+            await vmSettings.getData()
         }
     }
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        AppDelegate.theSettingsViewModel.$initialized.didSet.removeDuplicates().filter { $0 }.sink { [unowned self] v in
+        vmSettings.$initialized.didSet.removeDuplicates().filter { $0 }.sink { [unowned self] v in
             let storyboard = NSStoryboard(name: "Main", bundle: nil)
             let wc = storyboard.instantiateController(withIdentifier: "MainWindowController") as! NSWindowController
             wc.showWindow(self)
@@ -86,7 +84,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             window.close()
         }
         globalUser.remove()
-        AppDelegate.theSettingsViewModel.initialized = false
+        vmSettings.initialized = false
         if runModal(storyBoardName: "Main", windowControllerName: "LoginWindowController") == .OK {
             setup()
         } else {
@@ -95,7 +93,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @IBAction func editUnitBlog(_ sender: AnyObject) {
-        editPost(settings: AppDelegate.theSettingsViewModel, item: nil)
+        editPost(item: nil)
     }
 
     @IBAction func readNumber(_ sender: AnyObject) {
@@ -104,7 +102,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBAction func speak(_ sender: AnyObject) {
         let dialogue = AVSpeechUtterance(string: NSPasteboard.general.string(forType: .string) ?? "")
-        dialogue.voice = AVSpeechSynthesisVoice(identifier: AppDelegate.theSettingsViewModel.macVoiceName)
+        dialogue.voice = AVSpeechSynthesisVoice(identifier: vmSettings.macVoiceName)
         synth.speak(dialogue)
     }
 
@@ -130,10 +128,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         w.makeKeyAndOrderFront(nil)
     }
 
-    func editPost(settings: SettingsViewModel, item: MLangBlogPostContent?) {
+    func editPost(item: MLangBlogPostContent?) {
         showWindow(storyBoardName: "Blogs", windowControllerName: "BlogPostEditWindowController") { @MainActor wc in
             let v = wc.contentViewController as! BlogPostEditViewController
-            v.vm = BlogPostEditViewModel(settings: settings, item: item)
+            v.vm = BlogPostEditViewModel(item: item)
         }
     }
 }
+
+@MainActor
+let vmSettings = SettingsViewModel()

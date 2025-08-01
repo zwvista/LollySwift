@@ -9,7 +9,7 @@ import Foundation
 
 @MainActor
 class UnitBlogPostsViewModel: NSObject, ObservableObject {
-    var vmSettings: SettingsViewModel
+
     @Published var arrUnits = [MSelectItem]()
     @Published var selectedUnitIndex = 0
     var selectedUnit: Int { arrUnits[selectedUnitIndex].value }
@@ -17,8 +17,7 @@ class UnitBlogPostsViewModel: NSObject, ObservableObject {
         selectedUnitIndex = (selectedUnitIndex + delta + arrUnits.count) % arrUnits.count
     }
 
-    init(settings: SettingsViewModel, complete: @escaping () -> Void) {
-        vmSettings = settings
+    override init() {
         arrUnits = vmSettings.arrUnits
         selectedUnitIndex = vmSettings.selectedUnitToIndex
         super.init()

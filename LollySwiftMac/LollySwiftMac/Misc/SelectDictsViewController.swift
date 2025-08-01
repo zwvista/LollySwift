@@ -18,7 +18,7 @@ class SelectDictsViewController: NSViewController, NSTableViewDataSource, NSTabl
     @IBOutlet weak var btnRemove: NSButton!
     @IBOutlet weak var btnRemoveAll: NSButton!
 
-    var vm: SettingsViewModel { AppDelegate.theSettingsViewModel }
+    var vm = vmSettings
     var dictsAvailable: [MDictionary]!
     var dictsSelected: [MDictionary]!
     var complete: (() -> Void)?

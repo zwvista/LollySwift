@@ -11,7 +11,7 @@ import Combine
 
 @MainActor
 class LangBlogPostsContentViewModel: NSObject, ObservableObject {
-    var vmSettings: SettingsViewModel
+
     @Published var vmGroups: LangBlogGroupsViewModel
     @Published var arrPosts = [MLangBlogPost]()
     @Published var selectedPostIndex = 0
@@ -22,8 +22,7 @@ class LangBlogPostsContentViewModel: NSObject, ObservableObject {
 
     var subscriptions = Set<AnyCancellable>()
 
-    init(settings: SettingsViewModel, vmGroups: LangBlogGroupsViewModel, arrPosts: [MLangBlogPost], selectedPostIndex: Int) {
-        vmSettings = settings
+    init(vmGroups: LangBlogGroupsViewModel, arrPosts: [MLangBlogPost], selectedPostIndex: Int) {
         self.vmGroups = vmGroups
         self.arrPosts = arrPosts
         self.selectedPostIndex = selectedPostIndex

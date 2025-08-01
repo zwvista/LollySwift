@@ -12,7 +12,7 @@ import Then
 
 @MainActor
 class LangBlogViewModel: NSObject, ObservableObject {
-    var vmSettings: SettingsViewModel
+
     @Published var arrGroupsAll = [MLangBlogGroup]()
     @Published var selectedGroup: MLangBlogGroup? = nil
     @Published var groupFilter = ""
@@ -29,8 +29,7 @@ class LangBlogViewModel: NSObject, ObservableObject {
 
     var subscriptions = Set<AnyCancellable>()
 
-    init(settings: SettingsViewModel) {
-        vmSettings = settings
+    override init() {
         super.init()
 
         $arrGroupsAll.didSet.combineLatest($groupFilter.didSet).sink { [unowned self] _ in

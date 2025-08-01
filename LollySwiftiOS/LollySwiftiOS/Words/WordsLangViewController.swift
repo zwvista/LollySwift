@@ -10,7 +10,7 @@ import UIKit
 
 class WordsLangViewController: WordsBaseViewController {
 
-    var vm = WordsLangViewModel(settings: vmSettings)
+    var vm = WordsLangViewModel()
     var arrWords: [MLangWord] { vm.arrWords }
     override var vmBase: WordsBaseViewModel! { vm }
     
@@ -100,7 +100,7 @@ class WordsLangViewController: WordsBaseViewController {
         } else if let controller = segue.destination as? WordsDictViewController {
             let index = arrWords.firstIndex(of: sender as! MLangWord)!
             let (start, end) = getPreferredRangeFromArray(index: index, length: arrWords.count, preferredLength: 50)
-            controller.vm = WordsDictViewModel(settings: vmSettings, arrWords: arrWords[start ..< end].map(\.WORD), selectedWordIndex: index) {}
+            controller.vm = WordsDictViewModel(arrWords: arrWords[start ..< end].map(\.WORD), selectedWordIndex: index)
         }
     }
 

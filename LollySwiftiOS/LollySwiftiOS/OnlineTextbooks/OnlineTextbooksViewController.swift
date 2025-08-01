@@ -15,7 +15,7 @@ class OnlineTextbooksViewController: UIViewController, UITableViewDelegate, UITa
     @IBOutlet weak var btnOnlineTextbookFilter: UIButton!
     let refreshControl = UIRefreshControl()
 
-    var vm = OnlineTextbooksViewModel(settings: vmSettings)
+    var vm = OnlineTextbooksViewModel()
     var arrOnlineTextbooks: [MOnlineTextbook] { vm.arrOnlineTextbooks }
     var subscriptions = Set<AnyCancellable>()
 
@@ -109,7 +109,7 @@ class OnlineTextbooksViewController: UIViewController, UITableViewDelegate, UITa
         } else if let controller = segue.destination as? OnlineTextbooksWebPageViewController {
             let index = arrOnlineTextbooks.firstIndex(of: sender as! MOnlineTextbook)!
             let (start, end) = getPreferredRangeFromArray(index: index, length: arrOnlineTextbooks.count, preferredLength: 50)
-            controller.vm = OnlineTextbooksWebPageViewModel(settings: vmSettings, arrOnlineTextbooks:  Array(arrOnlineTextbooks[start ..< end]), selectedOnlineTextbookIndex: index) {}
+            controller.vm = OnlineTextbooksWebPageViewModel(arrOnlineTextbooks:  Array(arrOnlineTextbooks[start ..< end]), selectedOnlineTextbookIndex: index)
         }
     }
 

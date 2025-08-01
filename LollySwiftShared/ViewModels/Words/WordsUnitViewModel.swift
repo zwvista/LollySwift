@@ -16,9 +16,9 @@ class WordsUnitViewModel: WordsBaseViewModel {
     @Published var arrWords = [MUnitWord]()
     var hasFilter: Bool { !(textFilter.isEmpty && textbookFilter == 0) }
 
-    init(settings: SettingsViewModel, inTextbook: Bool) {
+    init(inTextbook: Bool) {
         self.inTextbook = inTextbook
-        super.init(settings: settings)
+        super.init()
 
         $arrWordsAll.didSet.combineLatest($indexTextbookFilter.didSet, $textFilter.didSet, $scopeFilter.didSet).sink { [unowned self] _ in
             arrWords = arrWordsAll

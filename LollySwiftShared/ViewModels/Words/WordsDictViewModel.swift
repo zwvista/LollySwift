@@ -10,7 +10,7 @@ import Foundation
 
 @MainActor
 class WordsDictViewModel: NSObject, ObservableObject {
-    var vmSettings: SettingsViewModel
+
     @Published var arrWords = [String]()
     @Published var selectedWordIndex = 0
     var selectedWord: String { arrWords[selectedWordIndex] }
@@ -18,8 +18,7 @@ class WordsDictViewModel: NSObject, ObservableObject {
         selectedWordIndex = (selectedWordIndex + delta + arrWords.count) % arrWords.count
     }
 
-    init(settings: SettingsViewModel, arrWords: [String], selectedWordIndex: Int, complete: @escaping () -> Void) {
-        vmSettings = settings
+    init(arrWords: [String], selectedWordIndex: Int) {
         self.arrWords = arrWords
         self.selectedWordIndex = selectedWordIndex
         super.init()

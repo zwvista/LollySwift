@@ -23,11 +23,9 @@ class DictStore: NSObject, ObservableObject {
     weak var dict: MDictionary!
     var url = ""
 
-    weak var vmSettings: SettingsViewModel!
     weak var wvDict: WKWebView!
 
     func searchDict() {
-        guard vmSettings != nil else {return}
         url = dict.urlString(word: word, arrAutoCorrect: vmSettings.arrAutoCorrect)
         dictStatus = .ready
         if dict.DICTTYPENAME == "OFFLINE" {

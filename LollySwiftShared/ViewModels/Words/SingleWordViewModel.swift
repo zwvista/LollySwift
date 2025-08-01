@@ -11,11 +11,9 @@ import Foundation
 @MainActor
 class SingleWordViewModel: NSObject {
 
-    var vmSettings: SettingsViewModel
     @Published var arrWords = [MUnitWord]()
 
-    init(word: String, settings: SettingsViewModel) {
-        vmSettings = settings
+    init(word: String) {
         super.init()
         Task {
             arrWords = await MUnitWord.getDataByLangWord(langid: vmSettings.selectedLang.ID, word: word, arrTextbooks: vmSettings.arrTextbooks)

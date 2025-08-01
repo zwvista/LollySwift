@@ -30,9 +30,9 @@ class OnlineTextbooksViewController: NSViewController, LollyProtocol, NSTableVie
     }
 
     func settingsChanged() {
-        vm = OnlineTextbooksViewModel(settings: AppDelegate.theSettingsViewModel)
+        vm = OnlineTextbooksViewModel()
         refreshTableView(self)
-        acTextbooks.content = vm.vmSettings.arrOnlineTextbookFilters
+        acTextbooks.content = vmSettings.arrOnlineTextbookFilters
         vm.$arrOnlineTextbooks.didSet.sink { [unowned self] _ in
             doRefresh()
         } ~ subscriptions

@@ -12,7 +12,7 @@ class DictsViewController: NSViewController, LollyProtocol, NSTableViewDataSourc
 
     @IBOutlet weak var tableView: NSTableView!
 
-    var vm: DictsViewModel!
+    var vm = DictsViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +24,8 @@ class DictsViewController: NSViewController, LollyProtocol, NSTableViewDataSourc
     }
 
     @IBAction func refreshTableView(_ sender: Any) {
-        vm = DictsViewModel(settings: AppDelegate.theSettingsViewModel) { [unowned self] in
+        Task {
+            await vm.reload()
             tableView.reloadData()
         }
     }

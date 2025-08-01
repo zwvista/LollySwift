@@ -14,7 +14,6 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
 
     var vm: PhrasesUnitViewModel!
     override var vmPhrases: PhrasesBaseViewModel { vm }
-    override var vmSettings: SettingsViewModel! { vm.vmSettings }
     var arrPhrases: [MUnitPhrase] { vm.arrPhrases }
 
     @IBOutlet weak var pubTextbookFilter: NSPopUpButton!
@@ -25,7 +24,7 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
     }
 
     override func settingsChanged() {
-        vm = PhrasesUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: false)
+        vm = PhrasesUnitViewModel(inTextbook: false)
         refreshTableView(self)
         acTextbooks.content = vmSettings.arrTextbookFilters
         vm.$arrPhrases.didSet.sink { [unowned self] _ in

@@ -25,7 +25,6 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     var vm: PatternsViewModel!
     let synth = AVSpeechSynthesizer()
     var isSpeaking = true
-    var vmSettings: SettingsViewModel! { vm.vmSettings }
     var arrPatterns: [MPattern] { vm.arrPatterns }
     var subscriptions = Set<AnyCancellable>()
 
@@ -108,7 +107,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     }
 
     func settingsChanged() {
-        vm = PatternsViewModel(settings: AppDelegate.theSettingsViewModel)
+        vm = PatternsViewModel()
         refreshTableView(self)
         vm.$textFilter <~> sfTextFilter.textProperty ~ subscriptions
         vm.$scopeFilter <~> scScopeFilter.selectedLabelProperty ~ subscriptions

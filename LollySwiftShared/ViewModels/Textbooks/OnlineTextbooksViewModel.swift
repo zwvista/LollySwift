@@ -11,7 +11,7 @@ import Combine
 
 @MainActor
 class OnlineTextbooksViewModel: NSObject, ObservableObject {
-    var vmSettings: SettingsViewModel
+
     @Published var arrOnlineTextbooksAll = [MOnlineTextbook]()
     @Published var arrOnlineTextbooks = [MOnlineTextbook]()
     var selectedOnlineTextbookItem: MOnlineTextbook?
@@ -23,8 +23,7 @@ class OnlineTextbooksViewModel: NSObject, ObservableObject {
 
     var subscriptions = Set<AnyCancellable>()
 
-    init(settings: SettingsViewModel) {
-        vmSettings = settings
+    override init() {
         super.init()
 
         stringOnlineTextbookFilter = vmSettings.arrOnlineTextbookFilters[0].label

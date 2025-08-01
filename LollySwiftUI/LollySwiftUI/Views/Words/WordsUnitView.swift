@@ -9,7 +9,7 @@ import SwiftUI
 
 struct WordsUnitView: View {
     @Binding var navPath: NavigationPath
-    @StateObject var vm = WordsUnitViewModel(settings: vmSettings, inTextbook: true)
+    @StateObject var vm = WordsUnitViewModel(inTextbook: true)
     @Environment(\.editMode) var editMode
     var isEditing: Bool { editMode?.wrappedValue.isEditing == true }
     @State var showDetailEdit = false
@@ -98,38 +98,12 @@ struct WordsUnitView: View {
                 Text(selectedItem.WORDNOTE)
             })
             .alert(Text("Word"), isPresented: $showItemMore, actions: {
-                Button("Delete", role: .destructive) {
-                    showDelete.toggle()
-                }
-                Button("Edit") {
-                    showDetailEdit.toggle()
-                }
-                Button("Get Note") {
-                    Task {
-                        await vm.getNote(item: selectedItem)
-                    }
-                }
-                Button("Clear Note") {
-                    Task {
-                        await vm.clearNote(item: selectedItem)
-                    }
-                }
-                Button("Copy Word") {
-                    iOSApi.copyText(selectedItem.WORD)
-                }
-                Button("Google Word") {
-                    iOSApi.googleString(selectedItem.WORD)
-                }
-                Button("Online Dictionary") {
-                    let itemDict = vmSettings.arrDictsReference.first { $0.DICTNAME == vmSettings.selectedDictReference.DICTNAME }!
-                    let url = itemDict.urlString(word: selectedItem.WORD, arrAutoCorrect: vmSettings.arrAutoCorrect)
-                    UIApplication.shared.open(URL(string: url)!)
-                }
+                itemMoreActions
             }, message: {
                 Text(selectedItem.WORDNOTE)
             })
             .navigationDestination(for: MUnitWord.self) { item in
-                WordsDictView(vm: WordsDictViewModel(settings: vmSettings, arrWords: vm.arrWords.map(\.WORD), selectedWordIndex: vm.arrWords.firstIndex(of: item)!) {})
+                WordsDictView(vm: WordsDictViewModel(arrWords: vm.arrWords.map(\.WORD), selectedWordIndex: vm.arrWords.firstIndex(of: item)!))
             }
             .toolbar {
                 ToolbarItemGroup {
@@ -140,29 +114,7 @@ struct WordsUnitView: View {
                 }
             }
             .alert(Text("Words"), isPresented: $showListMore, actions: {
-                Button("Add") {
-                    showDetailAdd.toggle()
-                }
-                Button("Get All Notes") {
-                    getNotes(ifEmpty: false)
-                }
-                Button("Get Notes If Empty") {
-                    getNotes(ifEmpty: true)
-                }
-                Button("Clear All Notes") {
-                    Task {
-                        await vm.clearNotes(ifEmpty: false) { _ in }
-                    }
-                }
-                Button("Clear Notes If Empty") {
-                    Task {
-                        await vm.clearNotes(ifEmpty: true) { _ in }
-                    }
-                }
-                Button("Batch Edit") {
-                    showBatchEdit.toggle()
-                }
-                Button("Cancel", role: .cancel) {}
+                listMoreActions
             }, message: {
                 Text("More")
             })
@@ -175,6 +127,66 @@ struct WordsUnitView: View {
             .sheet(isPresented: $showBatchEdit) {
                 WordsUnitBatchEditView(vm: vm, showBatch: $showBatchEdit)
             }
+        }
+    }
+    
+    var itemMoreActions: some View {
+        Group {
+            Button("Delete", role: .destructive) {
+                showDelete.toggle()
+            }
+            Button("Edit") {
+                showDetailEdit.toggle()
+            }
+            Button("Get Note") {
+                Task {
+                    await vm.getNote(item: selectedItem)
+                }
+            }
+            Button("Clear Note") {
+                Task {
+                    await vm.clearNote(item: selectedItem)
+                }
+            }
+            Button("Copy Word") {
+                iOSApi.copyText(selectedItem.WORD)
+            }
+            Button("Google Word") {
+                iOSApi.googleString(selectedItem.WORD)
+            }
+            Button("Online Dictionary") {
+                let itemDict = vmSettings.arrDictsReference.first { $0.DICTNAME == vmSettings.selectedDictReference.DICTNAME }!
+                let url = itemDict.urlString(word: selectedItem.WORD, arrAutoCorrect: vmSettings.arrAutoCorrect)
+                UIApplication.shared.open(URL(string: url)!)
+            }
+        }
+    }
+    
+    var listMoreActions: some View {
+        Group {
+            Button("Add") {
+                showDetailAdd.toggle()
+            }
+            Button("Get All Notes") {
+                getNotes(ifEmpty: false)
+            }
+            Button("Get Notes If Empty") {
+                getNotes(ifEmpty: true)
+            }
+            Button("Clear All Notes") {
+                Task {
+                    await vm.clearNotes(ifEmpty: false) { _ in }
+                }
+            }
+            Button("Clear Notes If Empty") {
+                Task {
+                    await vm.clearNotes(ifEmpty: true) { _ in }
+                }
+            }
+            Button("Batch Edit") {
+                showBatchEdit.toggle()
+            }
+            Button("Cancel", role: .cancel) {}
         }
     }
 

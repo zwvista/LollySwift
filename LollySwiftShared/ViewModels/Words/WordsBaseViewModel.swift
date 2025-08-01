@@ -11,7 +11,7 @@ import Combine
 
 @MainActor
 class WordsPhrasesBaseViewModel: NSObject, ObservableObject {
-    var vmSettings: SettingsViewModel
+
     @Published var textFilter = ""
     @Published var indexTextbookFilter = 0
     @Published var stringTextbookFilter = ""
@@ -21,8 +21,7 @@ class WordsPhrasesBaseViewModel: NSObject, ObservableObject {
 
     var subscriptions = Set<AnyCancellable>()
 
-    init(settings: SettingsViewModel) {
-        vmSettings = settings
+    override init() {
         super.init()
         stringTextbookFilter = vmSettings.arrTextbookFilters[0].label
         $stringTextbookFilter.sink { [unowned self] s in

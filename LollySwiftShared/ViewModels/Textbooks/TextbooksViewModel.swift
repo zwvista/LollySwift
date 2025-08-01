@@ -11,17 +11,8 @@ import Then
 
 @MainActor
 class TextbooksViewModel: NSObject, ObservableObject {
-    var vmSettings: SettingsViewModel
-    var arrTextbooks = [MTextbook]()
 
-    init(settings: SettingsViewModel, complete: @escaping () -> Void) {
-        vmSettings = settings
-        super.init()
-        Task {
-            arrTextbooks = await MTextbook.getDataByLang(settings.selectedLang.ID, arrUserSettings: settings.arrUserSettings)
-            complete()
-        }
-    }
+    var arrTextbooks = [MTextbook]()
 
     static func update(item: MTextbook) async {
         await MTextbook.update(item: item)
@@ -35,5 +26,9 @@ class TextbooksViewModel: NSObject, ObservableObject {
         MTextbook().then {
             $0.LANGID = vmSettings.selectedLang.ID
         }
+    }
+
+    func reload() async {
+        arrTextbooks = await MTextbook.getDataByLang(vmSettings.selectedLang.ID, arrUserSettings: vmSettings.arrUserSettings)
     }
 }

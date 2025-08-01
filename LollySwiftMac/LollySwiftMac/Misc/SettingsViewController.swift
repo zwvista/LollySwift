@@ -36,7 +36,7 @@ class SettingsViewController: NSViewController, NSTableViewDataSource, NSTableVi
     @IBOutlet weak var btnPrevious: NSButton!
     @IBOutlet weak var btnNext: NSButton!
 
-    var vm: SettingsViewModel { AppDelegate.theSettingsViewModel }
+    var vm = vmSettings
     var subscriptions = Set<AnyCancellable>()
     var complete: (() -> Void)?
 
