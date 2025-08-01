@@ -13,7 +13,6 @@ import RxBinding
 
 class PhrasesReviewViewModel: NSObject {
 
-    var vmSettings: SettingsViewModel
     var arrPhrases = [MUnitPhrase]()
     var count: Int { arrPhrases.count }
     var arrCorrectIDs = [Int]()
@@ -42,10 +41,10 @@ class PhrasesReviewViewModel: NSObject {
     let moveForwardHidden = BehaviorRelay(value: false)
     let onRepeatHidden = BehaviorRelay(value: false)
 
-    init(settings: SettingsViewModel, doTestAction: ((PhrasesReviewViewModel) -> Void)? = nil) {
-        vmSettings = settings
+    init(doTestAction: ((PhrasesReviewViewModel) -> Void)? = nil) {
         self.doTestAction = doTestAction
         options.shuffled = true
+        super.init()
     }
 
     func newTest() {

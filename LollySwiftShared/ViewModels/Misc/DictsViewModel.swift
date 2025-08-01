@@ -12,17 +12,8 @@ import RxBinding
 import NSObject_Rx
 
 class DictsViewModel: NSObject {
-    var vmSettings: SettingsViewModel
-    var arrDicts = [MDictionary]()
 
-    init(settings: SettingsViewModel, complete: @escaping () -> Void) {
-        vmSettings = settings
-        super.init()
-        MDictionary.getDictsByLang(settings.selectedLang.ID).subscribe { [unowned self] in
-            arrDicts = $0
-            complete()
-        } ~ rx.disposeBag
-    }
+    var arrDicts = [MDictionary]()
 
     static func update(item: MDictionary) -> Single<()> {
         MDictionary.update(item: item)
@@ -36,5 +27,11 @@ class DictsViewModel: NSObject {
         let item = MDictionary()
         item.LANGIDFROM = vmSettings.selectedLang.ID
         return item
+    }
+
+    func reload() -> Single<()> {
+        MDictionary.getDictsByLang(vmSettings.selectedLang.ID).map { [unowned self] in
+            arrDicts = $0
+        }
     }
 }

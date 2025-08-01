@@ -13,12 +13,10 @@ import RxBinding
 
 class SinglePhraseViewModel: NSObject {
 
-    var vmSettings: SettingsViewModel
     var arrPhrases_ = BehaviorRelay(value: [MUnitPhrase]())
     var arrPhrases: [MUnitPhrase] { get { arrPhrases_.value } set { arrPhrases_.accept(newValue) } }
 
-    init(phrase: String, settings: SettingsViewModel) {
-        vmSettings = settings
+    init(phrase: String) {
         super.init()
         MUnitPhrase.getDataByLangPhrase(langid: vmSettings.selectedLang.ID, phrase: phrase, arrTextbooks: vmSettings.arrTextbooks).map { [unowned self] in
             arrPhrases = $0

@@ -13,7 +13,7 @@ import RxBinding
 import Then
 
 class PatternsViewModel: NSObject {
-    var vmSettings: SettingsViewModel
+
     var arrPatternsAll_ = BehaviorRelay(value: [MPattern]())
     var arrPatternsAll: [MPattern] { get { arrPatternsAll_.value } set { arrPatternsAll_.accept(newValue) } }
     var arrPatterns_ = BehaviorRelay(value: [MPattern]())
@@ -27,8 +27,7 @@ class PatternsViewModel: NSObject {
     var scopeFilter: String { get { scopeFilter_.value } set { scopeFilter_.accept(newValue) } }
     var hasFilter: Bool { !textFilter.isEmpty }
 
-    public init(settings: SettingsViewModel) {
-        vmSettings = settings
+    override init() {
         super.init()
 
         Observable.combineLatest(arrPatternsAll_, textFilter_, scopeFilter_).subscribe { [unowned self] _ in

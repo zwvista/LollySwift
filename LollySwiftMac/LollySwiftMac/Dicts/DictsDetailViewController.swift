@@ -42,10 +42,10 @@ class DictsDetailViewController: NSViewController {
         super.viewDidAppear()
         view.window?.title = item.DICTNAME
         tfID.isEnabled = isAdd
-        tfLangFrom.stringValue = vm.vmSettings.selectedLang.LANGNAME
+        tfLangFrom.stringValue = vmSettings.selectedLang.LANGNAME
         (isAdd ? tfID : tfSeqNum).becomeFirstResponder()
-        acLanguages.content = vm.vmSettings.arrLanguages
-        acDictTypes.content = vm.vmSettings.arrDictTypes
+        acLanguages.content = vmSettings.arrLanguages
+        acDictTypes.content = vmSettings.arrDictTypes
     }
 
     @IBAction func editTransform(_ sender: Any) {

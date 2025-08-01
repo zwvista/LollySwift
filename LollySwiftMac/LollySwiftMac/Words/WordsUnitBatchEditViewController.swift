@@ -28,7 +28,6 @@ class WordsUnitBatchEditViewController: NSViewController, NSTableViewDataSource,
     @IBOutlet weak var btnOK: NSButton!
 
     var vmEdit: WordsUnitBatchEditViewModel!
-    var vmSettings: SettingsViewModel { vmEdit.vm.vmSettings }
     var complete: (() -> Void)?
     var arrWords: [MUnitWord] { vmEdit.vm.arrWordsAll }
 

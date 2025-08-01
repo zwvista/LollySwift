@@ -13,12 +13,10 @@ import RxBinding
 
 class SingleWordViewModel: NSObject {
 
-    var vmSettings: SettingsViewModel
     var arrWords_ = BehaviorRelay(value: [MUnitWord]())
     var arrWords: [MUnitWord] { get { arrWords_.value } set { arrWords_.accept(newValue) } }
 
-    init(word: String, settings: SettingsViewModel) {
-        vmSettings = settings
+    init(word: String) {
         super.init()
         MUnitWord.getDataByLangWord(langid: vmSettings.selectedLang.ID, word: word, arrTextbooks: vmSettings.arrTextbooks).map { [unowned self] in
             arrWords = $0

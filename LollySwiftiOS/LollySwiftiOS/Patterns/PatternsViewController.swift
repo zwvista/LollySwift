@@ -18,7 +18,7 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var btnScopeFilter: UIButton!
     let refreshControl = UIRefreshControl()
 
-    var vm = PatternsViewModel(settings: vmSettings)
+    var vm = PatternsViewModel()
     var arrPatterns: [MPattern] { vm.arrPatterns }
 
     override func viewDidLoad() {
@@ -120,7 +120,7 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
         } else if let controller = segue.destination as? PatternsWebPageViewController {
             let index = arrPatterns.firstIndex(of: sender as! MPattern)!
             let (start, end) = getPreferredRangeFromArray(index: index, length: arrPatterns.count, preferredLength: 50)
-            controller.vm = PatternsWebPageViewModel(settings: vmSettings, arrPatterns:  Array(arrPatterns[start ..< end]), selectedPatternIndex: index) {}
+            controller.vm = PatternsWebPageViewModel(arrPatterns:  Array(arrPatterns[start ..< end]), selectedPatternIndex: index)
         }
     }
 

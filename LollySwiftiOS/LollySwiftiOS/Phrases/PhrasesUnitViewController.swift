@@ -15,7 +15,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController {
 
     @IBOutlet weak var btnEdit: UIBarButtonItem!
 
-    var vm = PhrasesUnitViewModel(settings: vmSettings, inTextbook: true)
+    var vm = PhrasesUnitViewModel(inTextbook: true)
     var arrPhrases: [MUnitPhrase] { vm.arrPhrases }
     override var vmBase: PhrasesBaseViewModel! { vm }
     

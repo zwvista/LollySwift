@@ -15,7 +15,6 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
 
     var vm: WordsUnitViewModel!
     override var vmWords: WordsBaseViewModel { vm }
-    override var vmSettings: SettingsViewModel! { vm.vmSettings }
     var arrWords: [MUnitWord] { vm.arrWords }
 
     // https://developer.apple.com/videos/play/wwdc2011/120/
@@ -43,7 +42,7 @@ class WordsUnitViewController: WordsBaseViewController, NSMenuItemValidation, NS
     }
 
     override func settingsChanged() {
-        vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: true)
+        vm = WordsUnitViewModel(inTextbook: true)
         refreshTableView(self)
         vm.arrWords_.subscribe { [unowned self] _ in
             doRefresh()

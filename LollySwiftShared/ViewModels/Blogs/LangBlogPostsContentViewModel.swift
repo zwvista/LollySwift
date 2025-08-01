@@ -14,7 +14,7 @@ import RxBinding
 
 @MainActor
 class LangBlogPostsContentViewModel: NSObject, ObservableObject {
-    var vmSettings: SettingsViewModel
+
     var vmGroups: LangBlogGroupsViewModel
     var arrPosts = [MLangBlogPost]()
     var selectedPostIndex_ = BehaviorRelay(value: 0)
@@ -24,8 +24,7 @@ class LangBlogPostsContentViewModel: NSObject, ObservableObject {
         selectedPostIndex = (selectedPostIndex + delta + arrPosts.count) % arrPosts.count
     }
 
-    init(settings: SettingsViewModel, vmGroups: LangBlogGroupsViewModel, arrPosts: [MLangBlogPost], selectedPostIndex: Int) {
-        vmSettings = settings
+    init(vmGroups: LangBlogGroupsViewModel, arrPosts: [MLangBlogPost], selectedPostIndex: Int) {
         self.vmGroups = vmGroups
         self.arrPosts = arrPosts
         super.init()

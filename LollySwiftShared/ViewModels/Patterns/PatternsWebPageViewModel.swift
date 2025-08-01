@@ -11,7 +11,7 @@ import RxSwift
 import RxRelay
 
 class PatternsWebPageViewModel: NSObject {
-    var vmSettings: SettingsViewModel
+
     var arrPatterns = [MPattern]()
     var selectedPatternIndex_ = BehaviorRelay(value: 0)
     var selectedPatternIndex: Int { get { selectedPatternIndex_.value } set { selectedPatternIndex_.accept(newValue) } }
@@ -20,8 +20,7 @@ class PatternsWebPageViewModel: NSObject {
         selectedPatternIndex = (selectedPatternIndex + delta + arrPatterns.count) % arrPatterns.count
     }
 
-    init(settings: SettingsViewModel, arrPatterns: [MPattern], selectedPatternIndex: Int, complete: @escaping () -> Void) {
-        vmSettings = settings
+    init(arrPatterns: [MPattern], selectedPatternIndex: Int) {
         self.arrPatterns = arrPatterns
         super.init()
         self.selectedPatternIndex = selectedPatternIndex

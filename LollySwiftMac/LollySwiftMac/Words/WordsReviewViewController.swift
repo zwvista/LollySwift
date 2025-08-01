@@ -29,12 +29,11 @@ class WordsReviewViewController: WordsBaseViewController, NSTextFieldDelegate {
 
     var vm: WordsReviewViewModel!
     override var vmWords: WordsBaseViewModel { vm }
-    override var vmSettings: SettingsViewModel! { vm.vmSettings }
     override var initSettingsInViewDidLoad: Bool { false }
 
     override func settingsChanged() {
         vm?.stopTimer()
-        vm = WordsReviewViewModel(settings: AppDelegate.theSettingsViewModel) { [unowned self] vm2 in
+        vm = WordsReviewViewModel { [unowned self] vm2 in
             tfWordInput.becomeFirstResponder()
             if vm2.hasCurrent && vm2.isSpeaking.value {
                 let dialogue = AVSpeechUtterance(string: vm2.currentWord)

@@ -12,7 +12,7 @@ import RxRelay
 import RxBinding
 
 class WordsPhrasesBaseViewModel: NSObject {
-    var vmSettings: SettingsViewModel
+
     let textFilter_ = BehaviorRelay(value: "")
     var textFilter: String { get { textFilter_.value } set { textFilter_.accept(newValue) } }
     let indexTextbookFilter_ = BehaviorRelay(value: 0)
@@ -23,8 +23,7 @@ class WordsPhrasesBaseViewModel: NSObject {
         indexTextbookFilter == -1 ? 0 : vmSettings.arrTextbookFilters[indexTextbookFilter].value
     }
 
-    init(settings: SettingsViewModel) {
-        vmSettings = settings
+    override init() {
         super.init()
         stringTextbookFilter = vmSettings.arrTextbookFilters[0].label
         stringTextbookFilter_.subscribe { [unowned self] s in

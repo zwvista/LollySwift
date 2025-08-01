@@ -19,8 +19,8 @@ class WordsLangViewModel: WordsBaseViewModel {
     var arrWords: [MLangWord] { get { arrWords_.value } set { arrWords_.accept(newValue) } }
     var hasFilter: Bool { !textFilter.isEmpty }
 
-    override init(settings: SettingsViewModel) {
-        super.init(settings: settings)
+    override init() {
+        super.init()
 
         Observable.combineLatest(arrWordsAll_, textFilter_, scopeFilter_).subscribe { [unowned self] _ in
             arrWords = arrWordsAll

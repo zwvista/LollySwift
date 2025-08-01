@@ -13,7 +13,7 @@ import RxBinding
 import Then
 
 class LangBlogViewModel: NSObject {
-    var vmSettings: SettingsViewModel
+
     let arrGroupsAll_ = BehaviorRelay(value: [MLangBlogGroup]())
     var arrGroupsAll: [MLangBlogGroup] { get { arrGroupsAll_.value } set { arrGroupsAll_.accept(newValue) } }
     var selectedGroup_ = BehaviorRelay<MLangBlogGroup?>(value: nil)
@@ -37,8 +37,7 @@ class LangBlogViewModel: NSObject {
     let postHtml_ = BehaviorRelay(value: "")
     var postHtml: String { get { postHtml_.value } set { postHtml_.accept(newValue) } }
 
-    init(settings: SettingsViewModel) {
-        vmSettings = settings
+    override init() {
         super.init()
 
         Observable.combineLatest(arrGroupsAll_, groupFilter_).subscribe { [unowned self] _ in

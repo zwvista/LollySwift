@@ -15,7 +15,6 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
 
     var vm: WordsLangViewModel!
     override var vmWords: WordsBaseViewModel { vm }
-    override var vmSettings: SettingsViewModel! { vm.vmSettings }
     var arrWords: [MLangWord] { vm.arrWords }
 
     override func viewDidLoad() {
@@ -23,7 +22,7 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
     }
 
     override func settingsChanged() {
-        vm = WordsLangViewModel(settings: AppDelegate.theSettingsViewModel)
+        vm = WordsLangViewModel()
         refreshTableView(self)
         vm.arrWords_.subscribe { [unowned self] _ in
             doRefresh()
@@ -51,7 +50,7 @@ class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
     override func addNewWord() {
         guard !vm.newWord.isEmpty else {return}
         let item = vm.newLangWord()
-        item.WORD = vm.vmSettings.autoCorrectInput(text: vm.newWord)
+        item.WORD = vmSettings.autoCorrectInput(text: vm.newWord)
         WordsLangViewModel.create(item: item).subscribe { [unowned self] _ in
             vm.arrWordsAll.append(item)
             tvWords.reloadData()

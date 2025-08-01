@@ -99,7 +99,7 @@ class LangBlogPostsListViewController: UIViewController, UITableViewDelegate, UI
             vm.selectedPost = sender as? MLangBlogPost
             let index = arrPosts.firstIndex(of: sender as! MLangBlogPost)!
             let (start, end) = getPreferredRangeFromArray(index: index, length: arrPosts.count, preferredLength: 50)
-            controller.vm = LangBlogPostsContentViewModel(settings: vmSettings, vmGroups: vm, arrPosts: Array(arrPosts[start ..< end]), selectedPostIndex: index)
+            controller.vm = LangBlogPostsContentViewModel(vmGroups: vm, arrPosts: Array(arrPosts[start ..< end]), selectedPostIndex: index)
         }
     }
 

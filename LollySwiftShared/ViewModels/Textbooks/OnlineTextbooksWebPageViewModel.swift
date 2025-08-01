@@ -11,7 +11,7 @@ import RxSwift
 import RxRelay
 
 class OnlineTextbooksWebPageViewModel: NSObject {
-    var vmSettings: SettingsViewModel
+
     var arrOnlineTextbooks = [MOnlineTextbook]()
     var selectedOnlineTextbookIndex_ = BehaviorRelay(value: 0)
     var selectedOnlineTextbookIndex: Int { get { selectedOnlineTextbookIndex_.value } set { selectedOnlineTextbookIndex_.accept(newValue) } }
@@ -20,8 +20,7 @@ class OnlineTextbooksWebPageViewModel: NSObject {
         selectedOnlineTextbookIndex = (selectedOnlineTextbookIndex + delta + arrOnlineTextbooks.count) % arrOnlineTextbooks.count
     }
 
-    init(settings: SettingsViewModel, arrOnlineTextbooks: [MOnlineTextbook], selectedOnlineTextbookIndex: Int, complete: @escaping () -> Void) {
-        vmSettings = settings
+    init(arrOnlineTextbooks: [MOnlineTextbook], selectedOnlineTextbookIndex: Int) {
         self.arrOnlineTextbooks = arrOnlineTextbooks
         super.init()
         self.selectedOnlineTextbookIndex = selectedOnlineTextbookIndex

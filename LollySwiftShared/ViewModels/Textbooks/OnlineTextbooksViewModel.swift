@@ -12,7 +12,7 @@ import RxRelay
 import RxBinding
 
 class OnlineTextbooksViewModel: NSObject {
-    var vmSettings: SettingsViewModel
+
     var arrOnlineTextbooksAll_ = BehaviorRelay(value: [MOnlineTextbook]())
     var arrOnlineTextbooksAll: [MOnlineTextbook] { get { arrOnlineTextbooksAll_.value } set { arrOnlineTextbooksAll_.accept(newValue) } }
     var arrOnlineTextbooks_ = BehaviorRelay(value: [MOnlineTextbook]())
@@ -26,8 +26,7 @@ class OnlineTextbooksViewModel: NSObject {
         indexOnlineTextbookFilter == -1 ? 0 : vmSettings.arrOnlineTextbookFilters[indexOnlineTextbookFilter].value
     }
 
-    init(settings: SettingsViewModel) {
-        vmSettings = settings
+    override init() {
         super.init()
 
         stringOnlineTextbookFilter = vmSettings.arrOnlineTextbookFilters[0].label

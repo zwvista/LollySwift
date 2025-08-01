@@ -53,4 +53,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
-@MainActor let vmSettings = SettingsViewModel()
+nonisolated(unsafe) let vmSettings = SettingsViewModel()

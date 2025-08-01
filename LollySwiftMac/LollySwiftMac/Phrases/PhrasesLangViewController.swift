@@ -15,7 +15,6 @@ class PhrasesLangViewController: PhrasesBaseViewController {
 
     var vm: PhrasesLangViewModel!
     override var vmPhrases: PhrasesBaseViewModel { vm }
-    override var vmSettings: SettingsViewModel! { vm.vmSettings }
     var arrPhrases: [MLangPhrase] { vm.arrPhrases }
 
     override func viewDidLoad() {
@@ -23,7 +22,7 @@ class PhrasesLangViewController: PhrasesBaseViewController {
     }
 
     override func settingsChanged() {
-        vm = PhrasesLangViewModel(settings: AppDelegate.theSettingsViewModel)
+        vm = PhrasesLangViewModel()
         refreshTableView(self)
         vm.arrPhrases_.subscribe { [unowned self] _ in
             doRefresh()

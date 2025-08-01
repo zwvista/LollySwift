@@ -19,7 +19,7 @@ class LangBlogPostsViewController: NSViewController, NSTableViewDataSource, NSTa
     @IBOutlet weak var sfPostFilter: NSSearchField!
     @IBOutlet weak var sfGroupFilter: NSSearchField!
 
-    let vm = LangBlogPostsViewModel(settings: AppDelegate.theSettingsViewModel)
+    let vm = LangBlogPostsViewModel()
     var arrPosts: [MLangBlogPost] { vm.arrPosts }
     var arrGroups: [MLangBlogGroup] { vm.arrGroups }
 
@@ -118,7 +118,7 @@ class LangBlogPostsViewController: NSViewController, NSTableViewDataSource, NSTa
         guard let itemPost = vm.selectedPost else {return}
         MLangBlogPostContent.getDataById(itemPost.ID).subscribe { [unowned self] in
             let item = $0
-            (NSApplication.shared.delegate as! AppDelegate).editPost(settings: vm.vmSettings, item: item)
+            (NSApplication.shared.delegate as! AppDelegate).editPost(item: item)
         } ~ rx.disposeBag
     }
 

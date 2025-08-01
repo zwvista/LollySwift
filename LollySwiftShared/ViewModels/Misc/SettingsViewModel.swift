@@ -373,48 +373,6 @@ class SettingsViewModel: NSObject {
         }.subscribe() ~ rx.disposeBag
     }
 
-    init(_ x: SettingsViewModel) {
-        arrUSMappings = x.arrUSMappings
-        arrUserSettings = x.arrUserSettings
-        INFO_USLANG = x.INFO_USLANG
-        INFO_USTEXTBOOK = x.INFO_USTEXTBOOK
-        INFO_USDICTREFERENCE = x.INFO_USDICTREFERENCE
-        INFO_USDICTNOTE = x.INFO_USDICTNOTE
-        INFO_USDICTSREFERENCE = x.INFO_USDICTSREFERENCE
-        INFO_USDICTTRANSLATION = x.INFO_USDICTTRANSLATION
-        INFO_USMACVOICE = x.INFO_USMACVOICE
-        INFO_USIOSVOICE = x.INFO_USIOSVOICE
-        INFO_USUNITFROM = x.INFO_USUNITFROM
-        INFO_USPARTFROM = x.INFO_USPARTFROM
-        INFO_USUNITTO = x.INFO_USUNITTO
-        INFO_USPARTTO = x.INFO_USPARTTO
-        super.init()
-        arrLanguages = x.arrLanguages
-        arrMacVoices = x.arrMacVoices
-        arriOSVoices = x.arriOSVoices
-        arrDictsReference = x.arrDictsReference
-        selectedDictsReferenceIndexes = x.selectedDictsReferenceIndexes
-        arrDictsNote = x.arrDictsNote
-        arrDictsTranslation = x.arrDictsTranslation
-        arrTextbooks = x.arrTextbooks
-        arrTextbookFilters = x.arrTextbookFilters
-        arrOnlineTextbookFilters = x.arrOnlineTextbookFilters
-        arrAutoCorrect = x.arrAutoCorrect
-        arrDictTypes = x.arrDictTypes
-        selectedLangIndex = x.selectedLangIndex
-        selectedMacVoiceIndex = x.selectedMacVoiceIndex
-        selectediOSVoiceIndex = x.selectediOSVoiceIndex
-        selectedDictReferenceIndex = x.selectedDictReferenceIndex
-        selectedDictNoteIndex = x.selectedDictNoteIndex
-        selectedDictTranslationIndex = x.selectedDictTranslationIndex
-        selectedTextbookIndex = x.selectedTextbookIndex
-        selectedUnitFromIndex = x.selectedUnitFromIndex
-        selectedPartFromIndex = x.selectedPartFromIndex
-        selectedUnitToIndex = x.selectedUnitToIndex
-        selectedPartToIndex = x.selectedPartToIndex
-        toType = x.toType
-    }
-
     private func getUSInfo(name: String) -> MUserSettingInfo {
         let o = arrUSMappings.first { $0.NAME == name }!
         let entityid = o.ENTITYID != -1 ? o.ENTITYID :

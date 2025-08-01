@@ -22,7 +22,7 @@ class SearchViewController: UIViewController, WKNavigationDelegate, UISearchBarD
     var dictStore: DictStore!
 
     func setup() {
-        dictStore = DictStore(vmSettings: vmSettings, wvDict: addWKWebView(webViewHolder: wvDictHolder))
+        dictStore = DictStore(wvDict: addWKWebView(webViewHolder: wvDictHolder))
         dictStore.wvDict.navigationDelegate = self
         vmSettings.getData().subscribe () ~ rx.disposeBag
     }

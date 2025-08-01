@@ -15,7 +15,7 @@ class TextbooksViewController: NSViewController, LollyProtocol, NSTableViewDataS
 
     @IBOutlet weak var tableView: NSTableView!
 
-    var vm: TextbooksViewModel!
+    var vm = TextbooksViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +27,8 @@ class TextbooksViewController: NSViewController, LollyProtocol, NSTableViewDataS
     }
 
     @IBAction func refreshTableView(_ sender: AnyObject) {
-        vm = TextbooksViewModel(settings: AppDelegate.theSettingsViewModel) { [unowned self] in
+        Task {
+            await vm.reload()
             tableView.reloadData()
         }
     }

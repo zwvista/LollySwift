@@ -18,7 +18,7 @@ class UnitBlogPostsViewController: UIViewController, WKUIDelegate, WKNavigationD
     @IBOutlet weak var btnUnit: UIButton!
     weak var wvBlogPost: WKWebView!
 
-    var vm = UnitBlogPostsViewModel(settings: vmSettings) {}
+    var vm = UnitBlogPostsViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()

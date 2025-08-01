@@ -10,7 +10,7 @@ import RxSwift
 import RxRelay
 
 class UnitBlogPostsViewModel: NSObject {
-    var vmSettings: SettingsViewModel
+
     var arrUnits = [MSelectItem]()
     var selectedUnitIndex_ = BehaviorRelay(value: 0)
     var selectedUnitIndex: Int { get { selectedUnitIndex_.value } set { selectedUnitIndex_.accept(newValue) } }
@@ -19,8 +19,7 @@ class UnitBlogPostsViewModel: NSObject {
         selectedUnitIndex = (selectedUnitIndex + delta + arrUnits.count) % arrUnits.count
     }
 
-    init(settings: SettingsViewModel, complete: @escaping () -> Void) {
-        vmSettings = settings
+    override init() {
         arrUnits = vmSettings.arrUnits
         super.init()
         selectedUnitIndex = vmSettings.selectedUnitToIndex

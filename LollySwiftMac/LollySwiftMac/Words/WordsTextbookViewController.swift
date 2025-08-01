@@ -15,7 +15,6 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
 
     var vm: WordsUnitViewModel!
     override var vmWords: WordsBaseViewModel { vm }
-    override var vmSettings: SettingsViewModel! { vm.vmSettings }
     var arrWords: [MUnitWord] { vm.arrWords }
 
     @IBOutlet weak var pubTextbookFilter: NSPopUpButton!
@@ -26,7 +25,7 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
     }
 
     override func settingsChanged() {
-        vm = WordsUnitViewModel(settings: AppDelegate.theSettingsViewModel, inTextbook: false)
+        vm = WordsUnitViewModel(inTextbook: false)
         refreshTableView(self)
         acTextbooks.content = vmSettings.arrTextbookFilters
         vm.arrWords_.subscribe { [unowned self] _ in

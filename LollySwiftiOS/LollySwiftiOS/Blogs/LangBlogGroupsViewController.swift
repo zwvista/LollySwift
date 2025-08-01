@@ -17,7 +17,7 @@ class LangBlogGroupsViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet weak var sbGroupFilter: UISearchBar!
     let refreshControl = UIRefreshControl()
 
-    var vm = LangBlogGroupsViewModel(settings: vmSettings)
+    var vm = LangBlogGroupsViewModel()
     var arrGroups: [MLangBlogGroup] { vm.arrGroups }
 
     override func viewDidLoad() {

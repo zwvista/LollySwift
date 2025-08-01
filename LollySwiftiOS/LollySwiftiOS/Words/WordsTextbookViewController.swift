@@ -15,7 +15,7 @@ class WordsTextbookViewController: WordsBaseViewController {
 
     @IBOutlet weak var btnTextbookFilter: UIButton!
 
-    var vm = WordsUnitViewModel(settings: vmSettings, inTextbook: false)
+    var vm = WordsUnitViewModel(inTextbook: false)
     var arrWords: [MUnitWord] { vm.arrWords }
     override var vmBase: WordsBaseViewModel! { vm }
     
@@ -112,7 +112,7 @@ class WordsTextbookViewController: WordsBaseViewController {
         } else if let controller = segue.destination as? WordsDictViewController {
             let index = arrWords.firstIndex(of: sender as! MUnitWord)!
             let (start, end) = getPreferredRangeFromArray(index: index, length: arrWords.count, preferredLength: 50)
-            controller.vm = WordsDictViewModel(settings: vmSettings, arrWords: arrWords[start ..< end].map(\.WORD), selectedWordIndex: index) {}
+            controller.vm = WordsDictViewModel(arrWords: arrWords[start ..< end].map(\.WORD), selectedWordIndex: index)
         }
     }
 

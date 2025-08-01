@@ -26,7 +26,7 @@ class TextbooksDetailViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tfID.stringValue = itemEdit.ID
-        tfLang.stringValue = vmEdit.vm.vmSettings.selectedLang.LANGNAME
+        tfLang.stringValue = vmSettings.selectedLang.LANGNAME
         _ = itemEdit.TEXTBOOKNAME <~> tfTextbookName.rx.text.orEmpty
         _ = itemEdit.UNITS <~> tvUnits.rx.string
         _ = itemEdit.PARTS <~> tfParts.rx.text.orEmpty

@@ -11,7 +11,7 @@ import RxSwift
 import RxRelay
 
 class WordsDictViewModel: NSObject {
-    var vmSettings: SettingsViewModel
+
     var arrWords = [String]()
     var selectedWordIndex_ = BehaviorRelay(value: 0)
     var selectedWordIndex: Int { get { selectedWordIndex_.value } set { selectedWordIndex_.accept(newValue) } }
@@ -20,8 +20,7 @@ class WordsDictViewModel: NSObject {
         selectedWordIndex = (selectedWordIndex + delta + arrWords.count) % arrWords.count
     }
 
-    init(settings: SettingsViewModel, arrWords: [String], selectedWordIndex: Int, complete: @escaping () -> Void) {
-        vmSettings = settings
+    init(arrWords: [String], selectedWordIndex: Int) {
         self.arrWords = arrWords
         super.init()
         self.selectedWordIndex = selectedWordIndex

@@ -26,14 +26,14 @@ class PhrasesUnitDetailViewModel: NSObject {
         self.wordid = wordid
         itemEdit = MUnitPhraseEdit(x: item)
         isAdd = item.ID == 0
-        vmSingle = SinglePhraseViewModel(phrase: isAdd ? "" : item.PHRASE, settings: vm.vmSettings)
+        vmSingle = SinglePhraseViewModel(phrase: isAdd ? "" : item.PHRASE)
         super.init()
         _ = itemEdit.PHRASE.map { !$0.isEmpty } ~> isOKEnabled
     }
 
     func onOK() -> Single<()> {
         itemEdit.save(to: item)
-        item.PHRASE = vm.vmSettings.autoCorrectInput(text: item.PHRASE)
+        item.PHRASE = vmSettings.autoCorrectInput(text: item.PHRASE)
         return !isAdd ? vm.update(item: item) : vm.create(item: item).flatMap { [unowned self] in
             wordid == 0 ? Single.just(()) : MWordPhrase.associate(wordid: wordid, phraseid: item.PHRASEID)
         }

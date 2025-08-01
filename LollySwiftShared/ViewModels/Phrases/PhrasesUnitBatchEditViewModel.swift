@@ -15,9 +15,9 @@ class PhrasesUnitBatchEditViewModel: NSObject {
     let isOKEnabled = BehaviorRelay(value: false)
 
     let indexUNIT = BehaviorRelay(value: 0)
-    var UNIT: Int { vm.vmSettings.arrUnits[indexUNIT.value].value }
+    var UNIT: Int { vmSettings.arrUnits[indexUNIT.value].value }
     let indexPART = BehaviorRelay(value: 0)
-    var PART: Int { vm.vmSettings.arrParts[indexPART.value].value }
+    var PART: Int { vmSettings.arrParts[indexPART.value].value }
     let SEQNUM = BehaviorRelay(value: "")
     let unitChecked = BehaviorRelay(value: false)
     let partChecked = BehaviorRelay(value: false)
@@ -25,8 +25,8 @@ class PhrasesUnitBatchEditViewModel: NSObject {
 
     init(vm: PhrasesUnitViewModel, unit: Int, part: Int) {
         self.vm = vm
-        indexUNIT.accept(vm.vmSettings.arrUnits.firstIndex { $0.value == unit }!)
-        indexPART.accept(vm.vmSettings.arrParts.firstIndex { $0.value == part }!)
+        indexUNIT.accept(vmSettings.arrUnits.firstIndex { $0.value == unit }!)
+        indexPART.accept(vmSettings.arrParts.firstIndex { $0.value == part }!)
     }
 
     func onOK(rows: [Bool]) -> Single<()> {

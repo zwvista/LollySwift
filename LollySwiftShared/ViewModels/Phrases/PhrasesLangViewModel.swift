@@ -19,8 +19,8 @@ class PhrasesLangViewModel: PhrasesBaseViewModel {
     var arrPhrases: [MLangPhrase] { get { arrPhrases_.value } set { arrPhrases_.accept(newValue) } }
     var hasFilter: Bool { !textFilter.isEmpty }
 
-    override init(settings: SettingsViewModel) {
-        super.init(settings: settings)
+    override init() {
+        super.init()
 
         Observable.combineLatest(arrPhrasesAll_, textFilter_, scopeFilter_).subscribe { [unowned self] _ in
             arrPhrases = arrPhrasesAll
