@@ -9,6 +9,7 @@
 import UIKit
 import WebKit
 import Combine
+import Then
 
 class PatternsWebPageViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, UIGestureRecognizerDelegate {
 
@@ -21,18 +22,23 @@ class PatternsWebPageViewController: UIViewController, WKUIDelegate, WKNavigatio
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        wvWebPage = addWKWebView(webViewHolder: wvWebPageHolder)
-        wvWebPage.navigationDelegate = self
-
-        let swipeGesture1 = UISwipeGestureRecognizer(target: self, action: #selector(swipeLeft(_:)))
-        swipeGesture1.direction = .left
-        swipeGesture1.delegate = self
-        wvWebPage.addGestureRecognizer(swipeGesture1)
-        let swipeGesture2 = UISwipeGestureRecognizer(target: self, action: #selector(swipeRight(_:)))
-        swipeGesture2.direction = .right
-        swipeGesture2.delegate = self
-        wvWebPage.addGestureRecognizer(swipeGesture2)
-
+        wvWebPage = addWKWebView(webViewHolder: wvWebPageHolder).then {
+            $0.navigationDelegate = self
+            $0.addGestureRecognizer(UISwipeGestureRecognizer().then {
+                $0.direction = .left
+                $0.delegate = self
+                $0.swipePublisher.sink { [unowned self]  _ in
+                    vm.next(-1)
+                } ~ subscriptions
+            })
+            $0.addGestureRecognizer(UISwipeGestureRecognizer().then {
+                $0.direction = .right
+                $0.delegate = self
+                $0.swipePublisher.sink { [unowned self]  _ in
+                    vm.next(-1)
+                } ~ subscriptions
+            })
+        }
         vm.$selectedPatternIndex.didSet.sink { [unowned self] _ in
             btnPattern.menu = UIMenu(title: "", options: .displayInline, children: vm.arrPatterns.enumerated().map { index, item in
                 UIAction(title: item.PATTERN, state: index == vm.selectedPatternIndex ? .on : .off) { [unowned self] _ in
@@ -40,31 +46,14 @@ class PatternsWebPageViewController: UIViewController, WKUIDelegate, WKNavigatio
                 }
             })
             btnPattern.showsMenuAsPrimaryAction = true
-            selectedPatternChanged()
+            AppDelegate.speak(string: vm.selectedPattern.PATTERN)
+            btnPattern.setTitle(vm.selectedPattern.PATTERN, for: .normal)
+            wvWebPage.load(URLRequest(url: URL(string: vm.selectedPattern.URL)!))
         } ~ subscriptions
-    }
-
-    private func selectedPatternChanged() {
-        AppDelegate.speak(string: vm.selectedPattern.PATTERN)
-        btnPattern.setTitle(vm.selectedPattern.PATTERN, for: .normal)
-        wvWebPage.load(URLRequest(url: URL(string: vm.selectedPattern.URL)!))
     }
 
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         true
-    }
-
-    private func swipe(_ delta: Int) {
-        vm.next(delta)
-        selectedPatternChanged()
-    }
-
-    @IBAction func swipeLeft(_ sender: UISwipeGestureRecognizer){
-        swipe(-1)
-    }
-
-    @IBAction func swipeRight(_ sender: UISwipeGestureRecognizer){
-        swipe(1)
     }
 
     deinit {
