@@ -8,6 +8,7 @@
 
 import UIKit
 import Combine
+import CombineCocoa
 
 class PatternsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -23,8 +24,10 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.refreshControl = refreshControl
-        refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
-        refresh(refreshControl)
+        refreshControl.isRefreshingPublisher.sink { [unowned self] _ in
+            refresh()
+        } ~ subscriptions
+        refresh()
 
         vm.$textFilter <~> sbTextFilter.searchTextField.textProperty ~ subscriptions
         vm.$scopeFilter ~> (btnScopeFilter, \.titleNormal) ~ subscriptions
@@ -44,11 +47,11 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
         configMenu()
     }
 
-    @objc func refresh(_ sender: UIRefreshControl) {
+    func refresh() {
         view.showBlurLoader()
         Task {
             await vm.reload()
-            sender.endRefreshing()
+            refreshControl.endRefreshing()
             view.removeBlurLoader()
         }
     }

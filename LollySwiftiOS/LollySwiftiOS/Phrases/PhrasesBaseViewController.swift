@@ -8,6 +8,7 @@
 
 import UIKit
 import Combine
+import CombineCocoa
 
 class PhrasesBaseViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate {
 
@@ -22,8 +23,13 @@ class PhrasesBaseViewController: UIViewController, UITableViewDelegate, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.refreshControl = refreshControl
-        refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
-        refresh(refreshControl)
+        refreshControl.isRefreshingPublisher.sink { [unowned self] _ in
+            refresh()
+        } ~ subscriptions
+        refresh()
+
+        vmBase.$textFilter <~> sbTextFilter.searchTextField.textProperty ~ subscriptions
+        vmBase.$scopeFilter ~> (btnScopeFilter, \.titleNormal) ~ subscriptions
 
         func configMenu() {
             btnScopeFilter.menu = UIMenu(title: "", options: .displayInline, children: SettingsViewModel.arrScopePhraseFilters.enumerated().map { index, item in
@@ -35,12 +41,6 @@ class PhrasesBaseViewController: UIViewController, UITableViewDelegate, UITableV
             btnScopeFilter.showsMenuAsPrimaryAction = true
         }
         configMenu()
-    }
-
-    @objc func refresh(_ sender: UIRefreshControl) {
-        refresh()
-        vmBase.$textFilter <~> sbTextFilter.searchTextField.textProperty ~ subscriptions
-        vmBase.$scopeFilter ~> (btnScopeFilter, \.titleNormal) ~ subscriptions
     }
 
     func refresh() {

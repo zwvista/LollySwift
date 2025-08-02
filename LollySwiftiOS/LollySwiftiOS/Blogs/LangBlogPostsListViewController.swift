@@ -8,6 +8,7 @@
 
 import UIKit
 import Combine
+import CombineCocoa
 
 class LangBlogPostsListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -28,15 +29,17 @@ class LangBlogPostsListViewController: UIViewController, UITableViewDelegate, UI
         vm.$postFilter <~> sbPostFilter.searchTextField.textProperty ~ subscriptions
 
         tableView.refreshControl = refreshControl
-        refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
-        refresh(refreshControl)
+        refreshControl.isRefreshingPublisher.sink { [unowned self] _ in
+            refresh()
+        } ~ subscriptions
+        refresh()
     }
 
-    @objc func refresh(_ sender: UIRefreshControl) {
+    func refresh() {
         view.showBlurLoader()
         Task {
             await vm.reloadPosts()
-            sender.endRefreshing()
+            refreshControl.endRefreshing()
             view.removeBlurLoader()
         }
     }

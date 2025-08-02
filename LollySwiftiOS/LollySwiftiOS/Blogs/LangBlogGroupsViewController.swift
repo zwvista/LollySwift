@@ -8,6 +8,7 @@
 
 import UIKit
 import Combine
+import CombineCocoa
 
 class LangBlogGroupsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -27,15 +28,17 @@ class LangBlogGroupsViewController: UIViewController, UITableViewDelegate, UITab
         vm.$groupFilter <~> sbGroupFilter.searchTextField.textProperty ~ subscriptions
 
         tableView.refreshControl = refreshControl
-        refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
-        refresh(refreshControl)
+        refreshControl.isRefreshingPublisher.sink { [unowned self] _ in
+            refresh()
+        } ~ subscriptions
+        refresh()
     }
 
-    @objc func refresh(_ sender: UIRefreshControl) {
+    func refresh() {
         view.showBlurLoader()
         Task {
             await vm.reloadGroups()
-            sender.endRefreshing()
+            refreshControl.endRefreshing()
             view.removeBlurLoader()
         }
     }
