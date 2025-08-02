@@ -26,10 +26,6 @@ class DictStore: NSObject {
 
     weak var wvDict: WKWebView!
 
-    init(wvDict: WKWebView) {
-        self.wvDict = wvDict
-    }
-
     func searchDict() {
         url = dict.urlString(word: word, arrAutoCorrect: vmSettings.arrAutoCorrect)
         dictStatus = .ready

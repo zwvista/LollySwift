@@ -19,10 +19,10 @@ class SearchViewController: UIViewController, WKNavigationDelegate, UISearchBarD
     @IBOutlet weak var btnLang: UIButton!
     @IBOutlet weak var btnDict: UIButton!
 
-    var dictStore: DictStore!
+    let dictStore = DictStore()
 
     func setup() {
-        dictStore = DictStore(wvDict: addWKWebView(webViewHolder: wvDictHolder))
+        dictStore.wvDict = addWKWebView(webViewHolder: wvDictHolder)
         dictStore.wvDict.navigationDelegate = self
         vmSettings.getData().subscribe () ~ rx.disposeBag
     }

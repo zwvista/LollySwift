@@ -21,11 +21,11 @@ class WordsDictViewController: NSViewController, WKNavigationDelegate {
     var webInitilized = false
     var url: String { dictStore.url }
     var subscription: Disposable? = nil
-    var dictStore: DictStore!
+    let dictStore = DictStore()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        dictStore = DictStore(wvDict: wvDict)
+        dictStore.wvDict = wvDict
         dictStore.dict = dict
         wvDict.allowsMagnification = true
         wvDict.allowsBackForwardNavigationGestures = true
