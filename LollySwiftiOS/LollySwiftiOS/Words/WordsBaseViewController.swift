@@ -62,7 +62,7 @@ class WordsBaseViewController: UIViewController, UITableViewDelegate, UITableVie
         return cell
     }
 
-    func tableView(”_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         true
     }
 
