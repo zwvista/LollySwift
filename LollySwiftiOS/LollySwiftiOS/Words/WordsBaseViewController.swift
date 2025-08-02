@@ -50,7 +50,7 @@ class WordsBaseViewController: UIViewController, UITableViewDelegate, UITableVie
         nil
     }
 
-    @objc(tableView:cellForRowAtIndexPath:) func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "WordCell", for: indexPath) as! WordsCommonCell
         let item = itemForRow(row: indexPath.row)!
         if cell.lblUnitPartSeqNum != nil {
@@ -62,7 +62,7 @@ class WordsBaseViewController: UIViewController, UITableViewDelegate, UITableVie
         return cell
     }
 
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+    func tableView(”_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         true
     }
 
