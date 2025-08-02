@@ -22,7 +22,7 @@ class WordsBaseViewController: UIViewController, UITableViewDelegate, UITableVie
         super.viewDidLoad()
         tableView.refreshControl = refreshControl
         // https://stackoverflow.com/questions/43114155/uirefreshcontrol-with-rxswift
-        refreshControl.rx.controlEvent(UIControl.Event.valueChanged).subscribe { [unowned self] in
+        refreshControl.rx.controlEvent(.valueChanged).subscribe { [unowned self] in
             refresh()
         } ~ rx.disposeBag
         refresh()
@@ -49,7 +49,7 @@ class WordsBaseViewController: UIViewController, UITableViewDelegate, UITableVie
         nil
     }
 
-    @objc(tableView:cellForRowAtIndexPath:) func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "WordCell", for: indexPath) as! WordsCommonCell
         let item = itemForRow(row: indexPath.row)!
         if cell.lblUnitPartSeqNum != nil {

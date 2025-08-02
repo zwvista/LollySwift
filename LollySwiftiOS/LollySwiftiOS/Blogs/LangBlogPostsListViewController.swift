@@ -29,7 +29,7 @@ class LangBlogPostsListViewController: UIViewController, UITableViewDelegate, UI
         _ = vm.postFilter_ <~> sbPostFilter.searchTextField.rx.textInput
 
         tableView.refreshControl = refreshControl
-        refreshControl.rx.controlEvent(UIControl.Event.valueChanged).subscribe { [unowned self] in
+        refreshControl.rx.controlEvent(.valueChanged).subscribe { [unowned self] in
             refresh()
         } ~ rx.disposeBag
         refresh()
