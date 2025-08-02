@@ -35,7 +35,7 @@ class OnlineTextbooksWebPageViewController: UIViewController, WKUIDelegate, WKNa
                 $0.direction = .right
                 $0.delegate = self
                 $0.swipePublisher.sink { [unowned self]  _ in
-                    vm.next(-1)
+                    vm.next(1)
                 } ~ subscriptions
             })
         }
