@@ -21,13 +21,13 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        acTextbooks.content = vmSettings.arrTextbookFilters
         vm.$arrPhrases.didSet.sink { [unowned self] _ in
             doRefresh()
         } ~ subscriptions
     }
 
     override func settingsChanged() {
+        acTextbooks.content = vmSettings.arrTextbookFilters
         refreshTableView(self)
         super.settingsChanged()
     }

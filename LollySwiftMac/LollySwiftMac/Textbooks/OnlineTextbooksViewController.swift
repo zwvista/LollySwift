@@ -18,7 +18,7 @@ class OnlineTextbooksViewController: NSViewController, LollyProtocol, NSTableVie
     @IBOutlet weak var wvWebPage: WKWebView!
     @objc var textbookFilter = 0
 
-    var vm: OnlineTextbooksViewModel!
+    var vm = OnlineTextbooksViewModel()
     var arrOnlineTextbooks: [MOnlineTextbook] { vm.arrOnlineTextbooks }
     var subscriptions = Set<AnyCancellable>()
 
@@ -27,15 +27,14 @@ class OnlineTextbooksViewController: NSViewController, LollyProtocol, NSTableVie
         settingsChanged()
         wvWebPage.allowsMagnification = true
         wvWebPage.allowsBackForwardNavigationGestures = true
-    }
-
-    func settingsChanged() {
-        vm = OnlineTextbooksViewModel()
-        refreshTableView(self)
-        acTextbooks.content = vmSettings.arrOnlineTextbookFilters
         vm.$arrOnlineTextbooks.didSet.sink { [unowned self] _ in
             doRefresh()
         } ~ subscriptions
+    }
+
+    func settingsChanged() {
+        refreshTableView(self)
+        acTextbooks.content = vmSettings.arrOnlineTextbookFilters
     }
     func doRefresh() {
         tableView.reloadData()
