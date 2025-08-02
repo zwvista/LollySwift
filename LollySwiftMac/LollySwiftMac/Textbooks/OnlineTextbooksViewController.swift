@@ -20,7 +20,7 @@ class OnlineTextbooksViewController: NSViewController, LollyProtocol, NSTableVie
 
     @objc var textbookFilter = 0
 
-    var vm: OnlineTextbooksViewModel!
+    var vm = OnlineTextbooksViewModel()
     var arrOnlineTextbooks: [MOnlineTextbook] { vm.arrOnlineTextbooks }
 
     override func viewDidLoad() {
@@ -28,15 +28,14 @@ class OnlineTextbooksViewController: NSViewController, LollyProtocol, NSTableVie
         settingsChanged()
         wvWebPage.allowsMagnification = true
         wvWebPage.allowsBackForwardNavigationGestures = true
-    }
-
-    func settingsChanged() {
-        vm = OnlineTextbooksViewModel()
-        refreshTableView(self)
-        acTextbooks.content = vmSettings.arrOnlineTextbookFilters
         vm.arrOnlineTextbooks_.subscribe { [unowned self] _ in
             doRefresh()
         } ~ rx.disposeBag
+    }
+
+    func settingsChanged() {
+        refreshTableView(self)
+        acTextbooks.content = vmSettings.arrOnlineTextbookFilters
     }
     func doRefresh() {
         tableView.reloadData()

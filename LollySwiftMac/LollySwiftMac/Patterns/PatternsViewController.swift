@@ -23,7 +23,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     @IBOutlet weak var tfStatusText: NSTextField!
     @IBOutlet var menuPatterns: NSMenu!
     
-    var vm: PatternsViewModel!
+    var vm = PatternsViewModel()
     let synth = AVSpeechSynthesizer()
     var isSpeaking = true
     var arrPatterns: [MPattern] { vm.arrPatterns }
@@ -35,6 +35,11 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
         wvWebPage.allowsBackForwardNavigationGestures = true
         sfTextFilter.rx.searchFieldDidStartSearching.subscribe { [unowned self] _ in
             vm.textFilter = vmSettings.autoCorrectInput(text: vm.textFilter)
+        } ~ rx.disposeBag
+        _ = vm.textFilter_ <~> sfTextFilter.rx.text.orEmpty
+        _ = vm.scopeFilter_ <~> scScopeFilter.rx.selectedLabel
+        vm.arrPatterns_.subscribe { [unowned self] _ in
+            doRefresh()
         } ~ rx.disposeBag
     }
 
@@ -107,13 +112,7 @@ class PatternsViewController: NSViewController, LollyProtocol, NSTableViewDataSo
     }
 
     func settingsChanged() {
-        vm = PatternsViewModel()
         refreshTableView(self)
-        _ = vm.textFilter_ <~> sfTextFilter.rx.text.orEmpty
-        _ = vm.scopeFilter_ <~> scScopeFilter.rx.selectedLabel
-        vm.arrPatterns_.subscribe { [unowned self] _ in
-            doRefresh()
-        } ~ rx.disposeBag
     }
     func doRefresh() {
         tableView.reloadData()

@@ -22,13 +22,13 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        acTextbooks.content = vmSettings.arrTextbookFilters
         vm.arrWords_.subscribe { [unowned self] _ in
             doRefresh()
         } ~ rx.disposeBag
     }
 
     override func settingsChanged() {
+        acTextbooks.content = vmSettings.arrTextbookFilters
         refreshTableView(self)
         super.settingsChanged()
     }
