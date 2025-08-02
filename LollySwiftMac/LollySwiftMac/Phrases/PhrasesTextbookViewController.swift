@@ -16,21 +16,20 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
     @IBOutlet weak var pubTextbookFilter: NSPopUpButton!
     @IBOutlet var acTextbooks: NSArrayController!
 
-    var vm: PhrasesUnitViewModel!
+    var vm = PhrasesUnitViewModel(inTextbook: false)
     override var vmPhrases: PhrasesBaseViewModel { vm }
     var arrPhrases: [MUnitPhrase] { vm.arrPhrases }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-
-    override func settingsChanged() {
-        vm = PhrasesUnitViewModel(inTextbook: false)
-        refreshTableView(self)
         acTextbooks.content = vmSettings.arrTextbookFilters
         vm.arrPhrases_.subscribe { [unowned self] _ in
             doRefresh()
         } ~ rx.disposeBag
+    }
+
+    override func settingsChanged() {
+        refreshTableView(self)
         super.settingsChanged()
     }
 

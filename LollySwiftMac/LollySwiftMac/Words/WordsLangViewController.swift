@@ -13,20 +13,19 @@ import RxBinding
 
 class WordsLangViewController: WordsBaseViewController, NSMenuItemValidation {
 
-    var vm: WordsLangViewModel!
+    var vm = WordsLangViewModel()
     override var vmWords: WordsBaseViewModel { vm }
     var arrWords: [MLangWord] { vm.arrWords }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-
-    override func settingsChanged() {
-        vm = WordsLangViewModel()
-        refreshTableView(self)
         vm.arrWords_.subscribe { [unowned self] _ in
             doRefresh()
         } ~ rx.disposeBag
+    }
+
+    override func settingsChanged() {
+        refreshTableView(self)
         super.settingsChanged()
     }
 

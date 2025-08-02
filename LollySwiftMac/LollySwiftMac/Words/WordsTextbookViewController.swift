@@ -13,24 +13,23 @@ import RxBinding
 
 class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation {
 
-    var vm: WordsUnitViewModel!
-    override var vmWords: WordsBaseViewModel { vm }
-    var arrWords: [MUnitWord] { vm.arrWords }
-
     @IBOutlet weak var pubTextbookFilter: NSPopUpButton!
     @IBOutlet var acTextbooks: NSArrayController!
 
+    var vm = WordsUnitViewModel(inTextbook: false)
+    override var vmWords: WordsBaseViewModel { vm }
+    var arrWords: [MUnitWord] { vm.arrWords }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-
-    override func settingsChanged() {
-        vm = WordsUnitViewModel(inTextbook: false)
-        refreshTableView(self)
         acTextbooks.content = vmSettings.arrTextbookFilters
         vm.arrWords_.subscribe { [unowned self] _ in
             doRefresh()
         } ~ rx.disposeBag
+    }
+
+    override func settingsChanged() {
+        refreshTableView(self)
         super.settingsChanged()
     }
 

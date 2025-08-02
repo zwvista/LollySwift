@@ -168,14 +168,11 @@ class WordsPhrasesBaseViewController: NSViewController, NSTableViewDataSource, N
 
 class WordsBaseViewController: WordsPhrasesBaseViewController {
 
-    var vmPhrasesLang: PhrasesLangViewModel!
+    var vmPhrasesLang = PhrasesLangViewModel()
     override var vmPhrases: PhrasesBaseViewModel { vmPhrasesLang }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-
-    override func settingsChanged() {
         if let tfNewWord = tfNewWord {
             _ = vmWords.newWord_ <~> tfNewWord.rx.text.orEmpty
             tfNewWord.rx.controlTextDidEndEditing.subscribe { [unowned self] _ in
@@ -192,8 +189,6 @@ class WordsBaseViewController: WordsPhrasesBaseViewController {
                 vmWords.textFilter = vmSettings.autoCorrectInput(text: vmWords.textFilter)
             } ~ rx.disposeBag
         }
-        super.settingsChanged()
-        vmPhrasesLang = PhrasesLangViewModel()
     }
 
     func doRefresh() {

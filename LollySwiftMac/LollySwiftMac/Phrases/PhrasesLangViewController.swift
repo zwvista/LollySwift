@@ -13,20 +13,19 @@ import RxBinding
 
 class PhrasesLangViewController: PhrasesBaseViewController {
 
-    var vm: PhrasesLangViewModel!
+    var vm = PhrasesLangViewModel()
     override var vmPhrases: PhrasesBaseViewModel { vm }
     var arrPhrases: [MLangPhrase] { vm.arrPhrases }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-
-    override func settingsChanged() {
-        vm = PhrasesLangViewModel()
-        refreshTableView(self)
         vm.arrPhrases_.subscribe { [unowned self] _ in
             doRefresh()
         } ~ rx.disposeBag
+    }
+
+    override func settingsChanged() {
+        refreshTableView(self)
         super.settingsChanged()
     }
 
