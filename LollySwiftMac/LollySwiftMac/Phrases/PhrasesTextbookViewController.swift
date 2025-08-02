@@ -12,12 +12,12 @@ import Combine
 
 class PhrasesTextbookViewController: PhrasesBaseViewController {
 
+    @IBOutlet weak var pubTextbookFilter: NSPopUpButton!
+    @IBOutlet var acTextbooks: NSArrayController!
+
     var vm = PhrasesUnitViewModel(inTextbook: false)
     override var vmPhrases: PhrasesBaseViewModel { vm }
     var arrPhrases: [MUnitPhrase] { vm.arrPhrases }
-
-    @IBOutlet weak var pubTextbookFilter: NSPopUpButton!
-    @IBOutlet var acTextbooks: NSArrayController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
