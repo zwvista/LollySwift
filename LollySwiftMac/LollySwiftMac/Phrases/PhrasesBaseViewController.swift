@@ -12,21 +12,16 @@ import AVFAudio
 
 class PhrasesBaseViewController: WordsPhrasesBaseViewController {
 
-    var vmWordsLang: WordsLangViewModel!
+    var vmWordsLang = WordsLangViewModel()
     override var vmWords: WordsBaseViewModel { vmWordsLang }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-
-    override func settingsChanged() {
         vmPhrases.$textFilter <~> sfTextFilter.textProperty ~ subscriptions
         vmPhrases.$scopeFilter <~> scScopeFilter.selectedLabelProperty ~ subscriptions
         sfTextFilter.searchFieldDidStartSearchingPublisher.sink { [unowned self] in
             vmPhrases.textFilter = vmSettings.autoCorrectInput(text: vmPhrases.textFilter)
         } ~ subscriptions
-        super.settingsChanged()
-        vmWordsLang = WordsLangViewModel()
     }
 
     func doRefresh() {

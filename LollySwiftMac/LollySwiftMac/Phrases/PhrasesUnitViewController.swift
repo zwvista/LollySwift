@@ -12,7 +12,7 @@ import Combine
 
 class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidation {
 
-    var vm: PhrasesUnitViewModel!
+    var vm = PhrasesUnitViewModel(inTextbook: true)
     override var vmPhrases: PhrasesBaseViewModel { vm }
     var arrPhrases: [MUnitPhrase] { vm.arrPhrases }
 
@@ -23,6 +23,9 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     override func viewDidLoad() {
         super.viewDidLoad()
         tvPhrases.registerForDraggedTypes([tableRowDragType])
+        vm.$arrPhrases.didSet.sink { [unowned self] _ in
+            doRefresh()
+        } ~ subscriptions
     }
 
     // https://stackoverflow.com/questions/8017822/how-to-enable-disable-nstoolbaritem
@@ -33,11 +36,7 @@ class PhrasesUnitViewController: PhrasesBaseViewController, NSToolbarItemValidat
     }
 
     override func settingsChanged() {
-        vm = PhrasesUnitViewModel(inTextbook: true)
         refreshTableView(self)
-        vm.$arrPhrases.didSet.sink { [unowned self] _ in
-            doRefresh()
-        } ~ subscriptions
         super.settingsChanged()
     }
 

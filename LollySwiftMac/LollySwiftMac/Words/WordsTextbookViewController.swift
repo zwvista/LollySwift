@@ -15,21 +15,20 @@ class WordsTextbookViewController: WordsBaseViewController, NSMenuItemValidation
     @IBOutlet weak var pubTextbookFilter: NSPopUpButton!
     @IBOutlet var acTextbooks: NSArrayController!
 
-    var vm: WordsUnitViewModel!
+    var vm = WordsUnitViewModel(inTextbook: false)
     override var vmWords: WordsBaseViewModel { vm }
     var arrWords: [MUnitWord] { vm.arrWords }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-
-    override func settingsChanged() {
-        vm = WordsUnitViewModel(inTextbook: false)
-        refreshTableView(self)
         acTextbooks.content = vmSettings.arrTextbookFilters
         vm.$arrWords.didSet.sink { [unowned self] _ in
             doRefresh()
         } ~ subscriptions
+    }
+
+    override func settingsChanged() {
+        refreshTableView(self)
         super.settingsChanged()
     }
 

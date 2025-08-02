@@ -12,7 +12,7 @@ import Combine
 
 class PhrasesTextbookViewController: PhrasesBaseViewController {
 
-    var vm: PhrasesUnitViewModel!
+    var vm = PhrasesUnitViewModel(inTextbook: false)
     override var vmPhrases: PhrasesBaseViewModel { vm }
     var arrPhrases: [MUnitPhrase] { vm.arrPhrases }
 
@@ -21,15 +21,14 @@ class PhrasesTextbookViewController: PhrasesBaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-
-    override func settingsChanged() {
-        vm = PhrasesUnitViewModel(inTextbook: false)
-        refreshTableView(self)
         acTextbooks.content = vmSettings.arrTextbookFilters
         vm.$arrPhrases.didSet.sink { [unowned self] _ in
             doRefresh()
         } ~ subscriptions
+    }
+
+    override func settingsChanged() {
+        refreshTableView(self)
         super.settingsChanged()
     }
 

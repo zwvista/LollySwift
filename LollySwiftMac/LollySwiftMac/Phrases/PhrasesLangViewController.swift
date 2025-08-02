@@ -12,20 +12,19 @@ import Combine
 
 class PhrasesLangViewController: PhrasesBaseViewController {
 
-    var vm: PhrasesLangViewModel!
+    var vm = PhrasesLangViewModel()
     override var vmPhrases: PhrasesBaseViewModel { vm }
     var arrPhrases: [MLangPhrase] { vm.arrPhrases }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-
-    override func settingsChanged() {
-        vm = PhrasesLangViewModel()
-        refreshTableView(self)
         vm.$arrPhrases.didSet.sink { [unowned self] _ in
             doRefresh()
         } ~ subscriptions
+    }
+
+    override func settingsChanged() {
+        refreshTableView(self)
         super.settingsChanged()
     }
 
