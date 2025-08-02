@@ -21,8 +21,13 @@ class PhrasesBaseViewController: UIViewController, UITableViewDelegate, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.refreshControl = refreshControl
-        refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
-        refresh(refreshControl)
+        refreshControl.rx.controlEvent(UIControl.Event.valueChanged).subscribe { [unowned self] in
+            refresh()
+        } ~ rx.disposeBag
+        refresh()
+
+        _ = vmBase.textFilter_ <~> sbTextFilter.searchTextField.rx.textInput
+        _ = vmBase.scopeFilter_ ~> btnScopeFilter.rx.title(for: .normal)
 
         func configMenu() {
             btnScopeFilter.menu = UIMenu(title: "", options: .displayInline, children: SettingsViewModel.arrScopePhraseFilters.enumerated().map { index, item in
@@ -34,12 +39,6 @@ class PhrasesBaseViewController: UIViewController, UITableViewDelegate, UITableV
             btnScopeFilter.showsMenuAsPrimaryAction = true
         }
         configMenu()
-    }
-
-    @objc func refresh(_ sender: UIRefreshControl) {
-        refresh()
-        _ = vmBase.textFilter_ <~> sbTextFilter.searchTextField.rx.textInput
-        _ = vmBase.scopeFilter_ ~> btnScopeFilter.rx.title(for: .normal)
     }
 
     func refresh() {

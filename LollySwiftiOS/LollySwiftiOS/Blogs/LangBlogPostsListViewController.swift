@@ -29,14 +29,16 @@ class LangBlogPostsListViewController: UIViewController, UITableViewDelegate, UI
         _ = vm.postFilter_ <~> sbPostFilter.searchTextField.rx.textInput
 
         tableView.refreshControl = refreshControl
-        refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
-        refresh(refreshControl)
+        refreshControl.rx.controlEvent(UIControl.Event.valueChanged).subscribe { [unowned self] in
+            refresh()
+        } ~ rx.disposeBag
+        refresh()
     }
 
-    @objc func refresh(_ sender: UIRefreshControl) {
+    func refresh() {
         view.showBlurLoader()
         vm.reloadPosts().subscribe { [unowned self] in
-            sender.endRefreshing()
+            refreshControl.endRefreshing()
             view.removeBlurLoader()
         } ~ rx.disposeBag
     }

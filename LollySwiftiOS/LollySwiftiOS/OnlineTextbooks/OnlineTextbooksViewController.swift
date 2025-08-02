@@ -23,8 +23,10 @@ class OnlineTextbooksViewController: UIViewController, UITableViewDelegate, UITa
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.refreshControl = refreshControl
-        refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
-        refresh(refreshControl)
+        refreshControl.rx.controlEvent(UIControl.Event.valueChanged).subscribe { [unowned self] in
+            refresh()
+        } ~ rx.disposeBag
+        refresh()
 
         _ = vm.stringOnlineTextbookFilter_ ~> btnOnlineTextbookFilter.rx.title(for: .normal)
         vm.arrOnlineTextbooks_.subscribe { [unowned self] _ in
@@ -43,10 +45,10 @@ class OnlineTextbooksViewController: UIViewController, UITableViewDelegate, UITa
         configMenu()
     }
 
-    @objc func refresh(_ sender: UIRefreshControl) {
+    func refresh() {
         view.showBlurLoader()
         vm.reload().subscribe { [unowned self] in
-            sender.endRefreshing()
+            refreshControl.endRefreshing()
             view.removeBlurLoader()
         } ~ rx.disposeBag
     }

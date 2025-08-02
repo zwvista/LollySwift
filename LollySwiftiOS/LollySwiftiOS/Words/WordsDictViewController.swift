@@ -24,6 +24,7 @@ class WordsDictViewController: UIViewController, WKUIDelegate, WKNavigationDeleg
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        // https://stackoverflow.com/questions/44630176/rxswift-how-to-add-gesture-to-uilabel
         dictStore.wvDict = addWKWebView(webViewHolder: wvDictHolder).then {
             $0.navigationDelegate = self
             $0.addGestureRecognizer(UISwipeGestureRecognizer().then {

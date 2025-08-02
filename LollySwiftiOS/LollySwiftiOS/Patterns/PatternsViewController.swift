@@ -24,8 +24,10 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.refreshControl = refreshControl
-        refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
-        refresh(refreshControl)
+        refreshControl.rx.controlEvent(UIControl.Event.valueChanged).subscribe { [unowned self] in
+            refresh()
+        } ~ rx.disposeBag
+        refresh()
 
         _ = vm.textFilter_ <~> sbTextFilter.searchTextField.rx.textInput
         _ = vm.scopeFilter_ ~> btnScopeFilter.rx.title(for: .normal)
@@ -45,10 +47,10 @@ class PatternsViewController: UIViewController, UITableViewDelegate, UITableView
         configMenu()
     }
 
-    @objc func refresh(_ sender: UIRefreshControl) {
+    func refresh() {
         view.showBlurLoader()
         vm.reload().subscribe { [unowned self] in
-            sender.endRefreshing()
+            refreshControl.endRefreshing()
             view.removeBlurLoader()
         } ~ rx.disposeBag
     }

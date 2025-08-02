@@ -21,8 +21,11 @@ class WordsBaseViewController: UIViewController, UITableViewDelegate, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.refreshControl = refreshControl
-        refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
-        refresh(refreshControl)
+        // https://stackoverflow.com/questions/43114155/uirefreshcontrol-with-rxswift
+        refreshControl.rx.controlEvent(UIControl.Event.valueChanged).subscribe { [unowned self] in
+            refresh()
+        } ~ rx.disposeBag
+        refresh()
 
         _ = vmBase.textFilter_ <~> sbTextFilter.searchTextField.rx.textInput
         _ = vmBase.scopeFilter_ ~> btnScopeFilter.rx.title(for: .normal)
@@ -37,10 +40,6 @@ class WordsBaseViewController: UIViewController, UITableViewDelegate, UITableVie
             btnScopeFilter.showsMenuAsPrimaryAction = true
         }
         configMenu()
-    }
-
-    @objc func refresh(_ sender: UIRefreshControl) {
-        refresh()
     }
 
     func refresh() {
