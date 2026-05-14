@@ -8,6 +8,7 @@
 
 import Cocoa
 
+@MainActor
 class ReadNumberViewController: NSViewController, NSTextFieldDelegate {
 
     @IBOutlet weak var tfNumber: NSTextField!
@@ -20,9 +21,7 @@ class ReadNumberViewController: NSViewController, NSTextFieldDelegate {
         super.viewDidLoad()
         vm = ReadNumberViewModel()
         _observers.append(observe(\.vm.text, options: .new){ [unowned self] _,change in
-            Task { @MainActor in
-                tfText.stringValue = change.newValue!
-            }
+            tfText.stringValue = change.newValue!
         })
     }
 
