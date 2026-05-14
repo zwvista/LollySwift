@@ -8,6 +8,7 @@
 
 import Cocoa
 
+@MainActor
 class ReadNumberViewController: NSViewController, NSTextFieldDelegate {
 
     @objc dynamic var vm: ReadNumberViewModel!
@@ -19,10 +20,8 @@ class ReadNumberViewController: NSViewController, NSTextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         vm = ReadNumberViewModel()
-        _observers.append(observe(\.vm.text, options: .new){ [unowned self] _,change in
-            Task { @MainActor in
-                tfText.stringValue = change.newValue!
-            }
+        _observers.append(observe(\.vm.text, options: .new) { [unowned self] _, change in
+            tfText.stringValue = change.newValue!
         })
     }
 
@@ -56,3 +55,4 @@ class ReadNumberWindowController: NSWindowController {
         print("DEBUG: \(className) deinit")
     }
 }
+
