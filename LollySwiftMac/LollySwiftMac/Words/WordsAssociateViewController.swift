@@ -31,6 +31,9 @@ class WordsAssociateViewController: NSViewController, NSTableViewDataSource, NST
         vm.$arrWords.didSet.sink { [unowned self] _ in
             tableView.reloadData()
         } ~ subscriptions
+        Task {
+            await vm.reload();
+        }
     }
 
     override func viewDidAppear() {

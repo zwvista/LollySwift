@@ -31,6 +31,9 @@ class PhrasesAssociateViewController: NSViewController, NSTableViewDataSource, N
         vm.$arrPhrases.didSet.sink { [unowned self] _ in
             tableView.reloadData()
         } ~ subscriptions
+        Task {
+            await vm.reload();
+        }
     }
 
     override func viewDidAppear() {
