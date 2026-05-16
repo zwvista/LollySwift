@@ -31,6 +31,7 @@ class PhrasesAssociateViewController: NSViewController, NSTableViewDataSource, N
         vm.arrPhrases_.subscribe { [unowned self] _ in
             tableView.reloadData()
         } ~ rx.disposeBag
+        vm.reload().subscribe() ~ rx.disposeBag
     }
 
     override func viewDidAppear() {

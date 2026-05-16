@@ -31,6 +31,7 @@ class WordsAssociateViewController: NSViewController, NSTableViewDataSource, NST
         vm.arrWords_.subscribe { [unowned self] _ in
             tableView.reloadData()
         } ~ rx.disposeBag
+        vm.reload().subscribe() ~ rx.disposeBag
     }
 
     override func viewDidAppear() {
