@@ -34,9 +34,9 @@ class BlogPostEditViewController: NSViewController, NSMenuItemValidation  {
     @IBAction func saveMarked(_ sender: AnyObject) {
         Task {
             await vm.saveBlog(content: tvMarked.string)
-            markedToHtml()
-            MacApi.copyText(tvHtml.string)
         }
+        markedToHtml()
+        MacApi.copyText(tvHtml.string)
     }
 
     @IBAction func htmlToMarked(_ sender: AnyObject) {
